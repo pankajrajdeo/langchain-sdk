@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure webhook notifications for rules
-
-> Configure webhook notifications to receive POST requests when automation rules match new runs in LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/webhooks)
+Configure webhook notifications to receive POST requests when automation rules match new runs in LangSmith.
 
 When you add a webhook URL on an automation action, LangSmith makes a POST request to your webhook endpoint any time the rules you defined match any new runs.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/webhook.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=da310e976aa8824071d65b8fb44b9123" alt="Webhook" width="872" height="991" data-path="langsmith/images/webhook.png" />
+> **Image:** [Webhook](https://docs.langchain.com/langsmith/webhooks)
 
 ## Webhook payload
 
@@ -19,7 +15,7 @@ The payload LangSmith sends to your webhook endpoint contains:
 * `"runs"`: this is an array of runs, where each run is a dictionary. If you need more information about each run, use the SDK in your endpoint to fetch it from the API.
 * `"feedback_stats"`: this is a dictionary with the feedback statistics for the runs. An example payload for this field is shown in the following code block.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 "feedback_stats": {
     "about_langchain": {
         "n": 1,
@@ -50,17 +46,16 @@ The payload LangSmith sends to your webhook endpoint contains:
 }
 ```
 
-<Note>
-  **fetching from S3 URLs**
-
-  Depending on how recent your runs are, the `inputs_s3_urls` and `outputs_s3_urls` fields may contain S3 URLs to the actual data instead of the data itself.
-
-  The `inputs` and `outputs` can be fetched by the `ROOT.presigned_url` provided in `inputs_s3_urls` and `outputs_s3_urls` respectively.
-</Note>
+> [!NOTE]
+> **fetching from S3 URLs**
+>
+> Depending on how recent your runs are, the `inputs_s3_urls` and `outputs_s3_urls` fields may contain S3 URLs to the actual data instead of the data itself.
+>
+> The `inputs` and `outputs` can be fetched by the `ROOT.presigned_url` provided in `inputs_s3_urls` and `outputs_s3_urls` respectively.
 
 This is an example of the entire payload LangSmith sends to your webhook endpoint:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "rule_id": "d75d7417-0c57-4655-88fe-1db3cda3a47a",
   "start_time": "2024-04-05T01:28:54.734491+00:00",
@@ -120,11 +115,10 @@ https://api.example.com/langsmith_webhook?secret=38ee77617c3a489ab6e871fbeb2ec87
 
 If you'd like to send any specific headers with your webhook, this can be configured per URL. To set this up, click on the `Headers` option next to the URL field and add your headers.
 
-<Note>
-  Headers are stored in encrypted format.
-</Note>
+> [!NOTE]
+> Headers are stored in encrypted format.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/webhook-headers.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=8d6fde711d74784b803c13aba4b38837" alt="Webhook headers" width="848" height="1004" data-path="langsmith/images/webhook-headers.png" />
+> **Image:** [Webhook headers](https://docs.langchain.com/langsmith/webhooks)
 
 ### Webhook delivery
 
@@ -148,27 +142,25 @@ For example, you have an online evaluator that produces an `answer_usefulness` s
 
 2. Edit the rule's filter to require the feedback key. In the filter builder, add a condition:
 
-   ```
+```
    has(feedback_key, "answer_usefulness")
-   ```
+```
 
 3. Save the rule.
 
 Now the webhook rule will skip any run that does not yet have an `answer_usefulness` score. When the evaluator rule runs and attaches the score, the webhook rule's next polling cycle will pick up those runs and send them to your endpoint.
 
-<Tip>
-  You can also filter on the score value itself, not just its presence. For example, to only send runs with a low usefulness score to your endpoint:
+> [!TIP]
+> You can also filter on the score value itself, not just its presence. For example, to only send runs with a low usefulness score to your endpoint:
+>
+> ```
+> has(feedback_key, "answer_usefulness") and feedback_score < 0.5
+> ```
+>
+> For the full filter syntax, refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
 
-  ```
-  has(feedback_key, "answer_usefulness") and feedback_score < 0.5
-  ```
-
-  For the full filter syntax, refer to [Filter traces](/langsmith/filter-traces-in-application).
-</Tip>
-
-<Note>
-  Within a single automation rule, actions execute in a fixed order: annotation queue → dataset → webhook → evaluation. This means that if your webhook and evaluator are configured on the **same** rule, the webhook will always fire before the evaluation completes on that rule's run. To ensure the webhook receives evaluation scores, keep the webhook and evaluator as **separate rules** and use a feedback filter on the webhook rule as described in the example.
-</Note>
+> [!NOTE]
+> Within a single automation rule, actions execute in a fixed order: annotation queue → dataset → webhook → evaluation. This means that if your webhook and evaluator are configured on the **same** rule, the webhook will always fire before the evaluation completes on that rule's run. To ensure the webhook receives evaluation scores, keep the webhook and evaluator as **separate rules** and use a feedback filter on the webhook rule as described in the example.
 
 ## Example with Modal
 
@@ -178,19 +170,17 @@ For an example of how to set this up, this guide uses [Modal](https://modal.com/
 
 First, create a Modal account. Then, locally install the Modal SDK:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install modal
-  ```
+```bash
+pip install modal
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add modal
-  ```
-</CodeGroup>
+```bash
+uv add modal
+```
 
 To finish setting up your account, run the command:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 modal setup
 ```
 
@@ -208,19 +198,18 @@ Name the secret `ls-webhook` and set an environment variable with the name `LS_W
 
 You can also set up a LangSmith secret—luckily there is already an integration template for this!
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/modal-langsmith-secret.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=0c3209b59cb36273d82fb44383efa1d5" alt="LangSmith Modal Template" width="1229" height="779" data-path="langsmith/images/modal-langsmith-secret.png" />
+> **Image:** [LangSmith Modal Template](https://docs.langchain.com/langsmith/webhooks)
 
 ### Service
 
 After that, you can create a Python file that will serve as your endpoint.
 An example is shown in the following code block, with comments explaining what is going on:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from fastapi import HTTPException, status, Request, Query
 from modal import Secret, Stub, web_endpoint, Image
 
 stub = Stub("auth-example", image=Image.debian_slim().pip_install("langsmith"))
-
 
 @stub.function(
     secrets=[Secret.from_name("ls-webhook"), Secret.from_name("my-langsmith-secret")]
@@ -291,12 +280,8 @@ Replace `{SECRET}` with the secret key you created to access the Modal service.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

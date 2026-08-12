@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Pinecone (Sparse) integration
 
 > Integrate with the Pinecone (Sparse) vector store using LangChain Python.
@@ -14,11 +10,11 @@ This notebook shows how to use functionality related to the `Pinecone` vector da
 
 To use the `PineconeSparseVectorStore` you first need to install the partner package, as well as the other packages used throughout this notebook.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU "langchain-pinecone==0.2.5"
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 WARNING: pinecone 6.0.2 does not provide the extra 'async'
 
 ```
@@ -27,7 +23,7 @@ WARNING: pinecone 6.0.2 does not provide the extra 'async'
 
 Create a new Pinecone account, or sign into your existing one, and create an API key to use in this notebook.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -42,7 +38,7 @@ os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_API_KEY") or getpass(
 pc = Pinecone()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Enter your Pinecone API key: ··········
 ```
 
@@ -50,7 +46,7 @@ Enter your Pinecone API key: ··········
 
 Before initializing our vector store, let's connect to a Pinecone index. If one named index\_name doesn't exist, it will be created.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pinecone import AwsRegion, CloudProvider, Metric, ServerlessSpec
 
 index_name = "langchain-sparse-vector-search"  # change if desired
@@ -72,13 +68,13 @@ index = pc.Index(index_name)
 print(f"Index `{index_name}` host: {index.config.host}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Index `langchain-sparse-vector-search` host: https://langchain-sparse-vector-search-yrrgefy.svc.aped-4627-b74a.pinecone.io
 ```
 
 For our sparse embedding model we use [`pinecone-sparse-english-v0`](https://docs.pinecone.io/models/pinecone-sparse-english-v0), we initialize it like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone.embeddings import PineconeSparseEmbeddings
 
 sparse_embeddings = PineconeSparseEmbeddings(model=model_name)
@@ -86,7 +82,7 @@ sparse_embeddings = PineconeSparseEmbeddings(model=model_name)
 
 Now that our Pinecone index and embedding model are both ready, we can initialize our sparse vector store in LangChain:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone import PineconeSparseVectorStore
 
 vector_store = PineconeSparseVectorStore(index=index, embedding=sparse_embeddings)
@@ -100,7 +96,7 @@ Once you have created your vector store, we can interact with it by adding and d
 
 We can add items to our vector store by using the `add_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -153,7 +149,7 @@ uuids = [str(uuid4()) for _ in range(len(documents))]
 vector_store.add_documents(documents=documents, ids=uuids)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['95b598af-c3dc-4a8a-bdb7-5d21283e5a86',
  '838614a5-5635-4efd-9ac3-5237a37a542b',
  '093fd11f-c85b-4c83-83f0-117df64ff442',
@@ -170,7 +166,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 We can delete records from our vector store using the `delete` method, providing it with a list of document IDs to delete.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[-1]])
 ```
 
@@ -180,14 +176,14 @@ Once we have loaded our documents into the vector store we're most likely ready 
 
 First, we'll see how to perform a simple vector search by querying our `vector_store` directly via the `similarity_search` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search("I'm building a new LangChain project!", k=3)
 
 for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 * Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'social'}]
@@ -195,7 +191,7 @@ for res in results:
 
 We can also add [metadata filtering](https://docs.pinecone.io/guides/data/understanding-metadata#metadata-query-language) to our query to limit our search based on various criteria. Let's try a simple filter to limit our search to include only records with `source=="social"`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "I'm building a new LangChain project!",
     k=3,
@@ -205,7 +201,7 @@ for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 * Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'social'}]
@@ -217,7 +213,7 @@ When comparing these results, we can see that our first query returned a differe
 
 We can also search while returning the similarity score in a list of `(document, score)` tuples. Where the `document` is a LangChain [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) object containing our text content and metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     "I'm building a new LangChain project!", k=3, filter={"source": "social"}
 )
@@ -225,7 +221,7 @@ for doc, score in results:
     print(f"[SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [SIM=12.959961] Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 [SIM=12.959961] Building an exciting new project with LangChain - come check it out! [{'source': 'social'}]
 [SIM=1.942383] LangGraph is the best framework for building stateful, agentic applications! [{'source': 'social'}]
@@ -235,7 +231,7 @@ for doc, score in results:
 
 In our chains and agents we'll often use the vector store as a `VectorStoreRetriever`. To create that, we use the `as_retriever` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"k": 3, "score_threshold": 0.5},
@@ -243,24 +239,24 @@ retriever = vector_store.as_retriever(
 retriever
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 VectorStoreRetriever(tags=['PineconeSparseVectorStore', 'PineconeSparseEmbeddings'], vectorstore=<langchain_pinecone.vectorstores_sparse.PineconeSparseVectorStore object at 0x7c8087b24290>, search_type='similarity_score_threshold', search_kwargs={'k': 3, 'score_threshold': 0.5})
 ```
 
 We can now query our retriever using the `invoke` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever.invoke(
     input="I'm building a new LangChain project!", filter={"source": "social"}
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 /usr/local/lib/python3.11/dist-packages/langchain_core/vectorstores/base.py:1082: UserWarning: Relevance scores must be between 0 and 1, got [(Document(id='093fd11f-c85b-4c83-83f0-117df64ff442', metadata={'source': 'social'}, page_content='Building an exciting new project with LangChain - come check it out!'), 6.97998045), (Document(id='54f8f645-9f77-4aab-b9fa-709fd91ae3b3', metadata={'source': 'social'}, page_content='Building an exciting new project with LangChain - come check it out!'), 6.97998045), (Document(id='f9f82811-187c-4b25-85b5-7a42b4da3bff', metadata={'source': 'social'}, page_content='LangGraph is the best framework for building stateful, agentic applications!'), 1.471191405)]
   self.vectorstore.similarity_search_with_relevance_scores(
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(id='093fd11f-c85b-4c83-83f0-117df64ff442', metadata={'source': 'social'}, page_content='Building an exciting new project with LangChain - come check it out!'),
  Document(id='54f8f645-9f77-4aab-b9fa-709fd91ae3b3', metadata={'source': 'social'}, page_content='Building an exciting new project with LangChain - come check it out!'),
  Document(id='f9f82811-187c-4b25-85b5-7a42b4da3bff', metadata={'source': 'social'}, page_content='LangGraph is the best framework for building stateful, agentic applications!')]
@@ -270,9 +266,9 @@ retriever.invoke(
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ***
 
@@ -285,12 +281,8 @@ For detailed documentation of all features and configurations head to the API re
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/pinecone_sparse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/pinecone_sparse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Elasticsearch integration
 
 > Integrate with the Elasticsearch embedding model using LangChain Python.
@@ -13,15 +9,15 @@ The easiest way to instantiate the `ElasticsearchEmbeddings` class it either
 * using the `from_credentials` constructor if you are using Elastic Cloud
 * or using the `from_es_connection` constructor with any Elasticsearch cluster
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip -q install langchain-elasticsearch
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchEmbeddings
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Define the model ID
 model_id = "your_model_id"
 ```
@@ -30,7 +26,7 @@ model_id = "your_model_id"
 
 This required an Elastic Cloud `cloud_id`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Instantiate ElasticsearchEmbeddings using credentials
 embeddings = ElasticsearchEmbeddings.from_credentials(
     model_id,
@@ -40,7 +36,7 @@ embeddings = ElasticsearchEmbeddings.from_credentials(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create embeddings for multiple documents
 documents = [
     "This is an example document.",
@@ -49,19 +45,19 @@ documents = [
 document_embeddings = embeddings.embed_documents(documents)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Print document embeddings
 for i, embedding in enumerate(document_embeddings):
     print(f"Embedding for document {i + 1}: {embedding}")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create an embedding for a single query
 query = "This is a single query."
 query_embedding = embeddings.embed_query(query)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Print query embedding
 print(f"Embedding for query: {query_embedding}")
 ```
@@ -70,7 +66,7 @@ print(f"Embedding for query: {query_embedding}")
 
 This can be used with any Elasticsearch deployment
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create Elasticsearch connection
 from elasticsearch import Elasticsearch
 
@@ -79,7 +75,7 @@ es_connection = Elasticsearch(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Instantiate ElasticsearchEmbeddings using es_connection
 embeddings = ElasticsearchEmbeddings.from_es_connection(
     model_id,
@@ -87,7 +83,7 @@ embeddings = ElasticsearchEmbeddings.from_es_connection(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create embeddings for multiple documents
 documents = [
     "This is an example document.",
@@ -96,31 +92,27 @@ documents = [
 document_embeddings = embeddings.embed_documents(documents)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Print document embeddings
 for i, embedding in enumerate(document_embeddings):
     print(f"Embedding for document {i + 1}: {embedding}")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create an embedding for a single query
 query = "This is a single query."
 query_embedding = embeddings.embed_query(query)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Print query embedding
 print(f"Embedding for query: {query_embedding}")
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

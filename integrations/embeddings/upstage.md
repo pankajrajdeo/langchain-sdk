@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # UpstageEmbeddings integration
 
 > Integrate with the UpstageEmbeddings embedding model using LangChain Python.
@@ -12,7 +8,7 @@ This notebook covers how to get started with Upstage embedding models.
 
 Install `langchain-upstage` package.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U langchain-upstage
 ```
 
@@ -22,7 +18,7 @@ Make sure to set the following environment variables:
 
 * `UPSTAGE_API_KEY`: Your Upstage API key from [Upstage console](https://console.upstage.ai/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
@@ -32,7 +28,7 @@ os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
 
 Initialize `UpstageEmbeddings` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_upstage import UpstageEmbeddings
 
 embeddings = UpstageEmbeddings(model="solar-embedding-1-large")
@@ -40,7 +36,7 @@ embeddings = UpstageEmbeddings(model="solar-embedding-1-large")
 
 Use `embed_documents` to embed list of texts or documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc_result = embeddings.embed_documents(
     ["Sung is a professor.", "This is another document"]
 )
@@ -49,19 +45,19 @@ print(doc_result)
 
 Use `embed_query` to embed query string.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_result = embeddings.embed_query("What does Sung do?")
 print(query_result)
 ```
 
 Use `aembed_documents` and `aembed_query` for async operations.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # async embed query
 await embeddings.aembed_query("My query to look up")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # async embed documents
 await embeddings.aembed_documents(
     ["This is a content of the document", "This is another document"]
@@ -72,11 +68,10 @@ await embeddings.aembed_documents(
 
 You can use `UpstageEmbeddings` with vector store component. The following demonstrates a simple example.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.vectorstores import DocArrayInMemorySearch
 
 vectorstore = DocArrayInMemorySearch.from_texts(
@@ -90,12 +85,8 @@ print(docs)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

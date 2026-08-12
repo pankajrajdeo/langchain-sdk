@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure run input and output preview
-
-> Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-input-output-preview)
+Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
 
 By default, LangSmith uses a heuristic to determine what to display in the **Input** and **Output** columns of your **Runs** table. However, you can customize exactly what appears in these columns by configuring custom preview paths for specific trace types.
 
@@ -20,7 +16,7 @@ This is particularly useful when:
 
 1. Navigate to a trace in your project.
 2. Select the **Runs** tab.
-3. Locate the format icon <Icon icon="adjustments-horizontal" /> at the top right of the runs table.
+3. Locate the format icon  at the top right of the runs table.
 4. In the **Configure Input and Output previews** side window, select a trace name from the dropdown.
 
 When you select a trace name, LangSmith loads a successful trace example and renders its structure as an expandable tree. Each node in the tree represents a field in your data, showing:
@@ -30,9 +26,9 @@ When you select a trace name, LangSmith loads a successful trace example and ren
 * Item counts for arrays (e.g., (3) indicating 3 items).
 * Preview values for strings and numbers displayed inline.
 
-<img className="block dark:hidden" src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=0fbc9a7b69a70c39daaf477d93b7623a" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="586" height="651" data-path="langsmith/images/configure-preview.png" />
+> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](https://docs.langchain.com/langsmith/configure-input-output-preview)
 
-<img className="hidden dark:block" src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview-dark.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=2e3c8eec7ae6ddb32c94cf3450805d9b" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="583" height="582" data-path="langsmith/images/configure-preview-dark.png" />
+> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](https://docs.langchain.com/langsmith/configure-input-output-preview)
 
 ### Set the path
 
@@ -68,7 +64,7 @@ Click the **...** button to expand and view all array items.
 
 For example, your trace input is this:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "messages": [
     {"role": "system", "content": "You are a helpful assistant"},
@@ -97,28 +93,23 @@ Or, use negative indexing for the last message:
 3. Click **content**.
 4. Result: `messages[-1].content` (always shows the last message).
 
-<Note>
-  If you see `"No paths available"` in the tree:
-
-  * Ensure you have at least one successful trace with the selected trace name in the last 7 days.
-  * The trace must have data in the input/output field you're configuring.
-  * Try sending a test trace if needed.
-</Note>
+> [!NOTE]
+> If you see `"No paths available"` in the tree:
+>
+> * Ensure you have at least one successful trace with the selected trace name in the last 7 days.
+> * The trace must have data in the input/output field you're configuring.
+> * Try sending a test trace if needed.
 
 ## Next steps
 
-* Learn more about [viewing and filtering traces](/langsmith/filter-traces-in-application).
-* Explore [custom output rendering](/langsmith/custom-output-rendering) for advanced visualization.
-* Set up [metadata and tags](/langsmith/add-metadata-tags) to organize your traces.
+* Learn more about [viewing and filtering traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+* Explore [custom output rendering](https://docs.langchain.com/langsmith/custom-output-rendering) for advanced visualization.
+* Set up [metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags) to organize your traces.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-input-output-preview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-input-output-preview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

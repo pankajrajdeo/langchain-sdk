@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenAI middleware integration
 
 > Integrate with the OpenAI middleware using LangChain Python.
 
-Middleware specifically designed for OpenAI models. Learn more about [middleware](/oss/python/langchain/middleware/overview).
+Middleware specifically designed for OpenAI models. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
 
 | Middleware                                | Description                                               |
 | ----------------------------------------- | --------------------------------------------------------- |
-| [Content moderation](#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
+| [Content moderation](https://docs.langchain.com/oss/python/integrations/middleware/openai#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
 
 ## Content moderation
 
@@ -21,13 +17,12 @@ Moderate agent traffic (user input, model output, and tool results) using OpenAI
 * Customer-facing agents that need safety guardrails
 * Meeting platform moderation requirements
 
-<Info>
-  Learn more about [OpenAI's moderation models](https://platform.openai.com/docs/guides/moderation) and categories.
-</Info>
+> [!NOTE]
+> Learn more about [OpenAI's moderation models](https://platform.openai.com/docs/guides/moderation) and categories.
 
 **API reference:** [`OpenAIModerationMiddleware`](https://reference.langchain.com/python/langchain-openai/middleware/openai_moderation/OpenAIModerationMiddleware)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from langchain_openai.middleware import OpenAIModerationMiddleware
 from langchain.agents import create_agent
@@ -46,126 +41,119 @@ agent = create_agent(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="model" type="ModerationModel" default="omni-moderation-latest">
-    OpenAI moderation model to use. Options: `'omni-moderation-latest'`, `'omni-moderation-2024-09-26'`, `'text-moderation-latest'`, `'text-moderation-stable'`
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="check_input" type="bool" default="True">
-    Whether to check user input messages before the model is called
-  </ParamField>
+#### `Field` — `ModerationModel`
+OpenAI moderation model to use. Options: `'omni-moderation-latest'`, `'omni-moderation-2024-09-26'`, `'text-moderation-latest'`, `'text-moderation-stable'`
 
-  <ParamField body="check_output" type="bool" default="True">
-    Whether to check model output messages after the model is called
-  </ParamField>
+#### `Field` — `bool`
+Whether to check user input messages before the model is called
 
-  <ParamField body="check_tool_results" type="bool" default="False">
-    Whether to check tool result messages before the model is called
-  </ParamField>
+#### `Field` — `bool`
+Whether to check model output messages after the model is called
 
-  <ParamField body="exit_behavior" type="string" default="end">
-    How to handle violations when content is flagged. Options:
+#### `Field` — `bool`
+Whether to check tool result messages before the model is called
 
-    * `'end'` - End agent execution immediately with a violation message
-    * `'error'` - Raise `OpenAIModerationError` exception
-    * `'replace'` - Replace the flagged content with the violation message and continue
-  </ParamField>
+#### `Field` — `string`
+How to handle violations when content is flagged. Options:
 
-  <ParamField body="violation_message" type="str | None">
-    Custom template for violation messages. Supports template variables:
+* `'end'` - End agent execution immediately with a violation message
+* `'error'` - Raise `OpenAIModerationError` exception
+* `'replace'` - Replace the flagged content with the violation message and continue
 
-    * `{categories}` - Comma-separated list of flagged categories
-    * `{category_scores}` - JSON string of category scores
-    * `{original_content}` - The original flagged content
+#### `Field` — `str | None`
+Custom template for violation messages. Supports template variables:
 
-    Default: `"I'm sorry, but I can't comply with that request. It was flagged for {categories}."`
-  </ParamField>
+* `{categories}` - Comma-separated list of flagged categories
+* `{category_scores}` - JSON string of category scores
+* `{original_content}` - The original flagged content
 
-  <ParamField body="client" type="OpenAI | None">
-    Optional pre-configured OpenAI client to reuse. If not provided, a new client will be created.
-  </ParamField>
+Default: `"I'm sorry, but I can't comply with that request. It was flagged for {categories}."`
 
-  <ParamField body="async_client" type="AsyncOpenAI | None">
-    Optional pre-configured AsyncOpenAI client to reuse. If not provided, a new async client will be created.
-  </ParamField>
-</Accordion>
+#### `Field` — `OpenAI | None`
+Optional pre-configured OpenAI client to reuse. If not provided, a new client will be created.
 
-<Accordion title="Full example">
-  The middleware integrates OpenAI's moderation endpoint to check content at different stages:
+#### `Field` — `AsyncOpenAI | None`
+Optional pre-configured AsyncOpenAI client to reuse. If not provided, a new async client will be created.
 
-  **Moderation stages:**
+</details>
 
-  * `check_input` - User messages before model call
-  * `check_output` - AI messages after model call
-  * `check_tool_results` - Tool outputs before model call
+<details>
+<summary>Full example</summary>
 
-  **Exit behaviors:**
+The middleware integrates OpenAI's moderation endpoint to check content at different stages:
 
-  * `'end'` (default) - Stop execution with violation message
-  * `'error'` - Raise exception for application handling
-  * `'replace'` - Replace flagged content and continue
+**Moderation stages:**
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openai import ChatOpenAI
-  from langchain_openai.middleware import OpenAIModerationMiddleware
-  from langchain.agents import create_agent
+* `check_input` - User messages before model call
+* `check_output` - AI messages after model call
+* `check_tool_results` - Tool outputs before model call
 
+**Exit behaviors:**
 
-  # Basic moderation
-  agent = create_agent(
-      model=ChatOpenAI(model="gpt-5.5"),
-      tools=[search_tool, customer_data_tool],
-      middleware=[
-          OpenAIModerationMiddleware(
-              model="omni-moderation-latest",
-              check_input=True,
-              check_output=True,
-          ),
-      ],
-  )
+* `'end'` (default) - Stop execution with violation message
+* `'error'` - Raise exception for application handling
+* `'replace'` - Replace flagged content and continue
 
-  # Strict moderation with custom message
-  agent_strict = create_agent(
-      model=ChatOpenAI(model="gpt-5.5"),
-      tools=[search_tool, customer_data_tool],
-      middleware=[
-          OpenAIModerationMiddleware(
-              model="omni-moderation-latest",
-              check_input=True,
-              check_output=True,
-              check_tool_results=True,
-              exit_behavior="error",
-              violation_message=(
-                  "Content policy violation detected: {categories}. "
-                  "Please rephrase your request."
-              ),
-          ),
-      ],
-  )
+```python
+from langchain_openai import ChatOpenAI
+from langchain_openai.middleware import OpenAIModerationMiddleware
+from langchain.agents import create_agent
 
-  # Moderation with replacement behavior
-  agent_replace = create_agent(
-      model=ChatOpenAI(model="gpt-5.5"),
-      tools=[search_tool],
-      middleware=[
-          OpenAIModerationMiddleware(
-              check_input=True,
-              exit_behavior="replace",
-              violation_message="[Content removed due to safety policies]",
-          ),
-      ],
-  )
-  ```
-</Accordion>
+# Basic moderation
+agent = create_agent(
+    model=ChatOpenAI(model="gpt-5.5"),
+    tools=[search_tool, customer_data_tool],
+    middleware=[
+        OpenAIModerationMiddleware(
+            model="omni-moderation-latest",
+            check_input=True,
+            check_output=True,
+        ),
+    ],
+)
+
+# Strict moderation with custom message
+agent_strict = create_agent(
+    model=ChatOpenAI(model="gpt-5.5"),
+    tools=[search_tool, customer_data_tool],
+    middleware=[
+        OpenAIModerationMiddleware(
+            model="omni-moderation-latest",
+            check_input=True,
+            check_output=True,
+            check_tool_results=True,
+            exit_behavior="error",
+            violation_message=(
+                "Content policy violation detected: {categories}. "
+                "Please rephrase your request."
+            ),
+        ),
+    ],
+)
+
+# Moderation with replacement behavior
+agent_replace = create_agent(
+    model=ChatOpenAI(model="gpt-5.5"),
+    tools=[search_tool],
+    middleware=[
+        OpenAIModerationMiddleware(
+            check_input=True,
+            exit_behavior="replace",
+            violation_message="[Content removed due to safety policies]",
+        ),
+    ],
+)
+```
+
+</details>
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

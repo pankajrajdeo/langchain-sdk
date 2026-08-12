@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Custom output rendering
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-output-rendering)
 Custom output rendering allows you to visualize run outputs and dataset reference outputs using your own custom HTML pages. This is particularly useful for:
 
 * **Domain-specific formatting**: Display medical records, legal documents, or other specialized data types in their native format.
@@ -11,9 +7,9 @@ Custom output rendering allows you to visualize run outputs and dataset referenc
 
 In this page you'll learn how to:
 
-* **[Configure custom rendering](#configure-custom-output-rendering)** in the LangSmith UI.
-* **[Build a custom renderer](#build-a-custom-renderer)** to display output data.
-* **[Understand where custom rendering appears](#where-custom-rendering-appears)** in LangSmith.
+* **[Configure custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering#configure-custom-output-rendering)** in the LangSmith UI.
+* **[Build a custom renderer](https://docs.langchain.com/langsmith/custom-output-rendering#build-a-custom-renderer)** to display output data.
+* **[Understand where custom rendering appears](https://docs.langchain.com/langsmith/custom-output-rendering#where-custom-rendering-appears)** in LangSmith.
 
 ## Configure custom output rendering
 
@@ -26,7 +22,7 @@ Configure custom rendering at two levels:
 
 To configure custom output rendering for a tracing project:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/oyRHf9tRXOU-EPbv/langsmith/images/tracing-project-custom-output-rendering-settings.png?fit=max&auto=format&n=oyRHf9tRXOU-EPbv&q=85&s=034f982fa3174c1649e5188bbb11ca03" alt="Tracing project settings showing custom output rendering configuration" width="1325" height="1207" data-path="langsmith/images/tracing-project-custom-output-rendering-settings.png" />
+> **Image:** [Tracing project settings showing custom output rendering configuration](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 1. Navigate to the **Tracing Projects** page.
 2. Click on an existing tracing project or create a new one.
@@ -39,7 +35,7 @@ To configure custom output rendering for a tracing project:
 
 To configure custom output rendering for a dataset:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/l7rhdSRpjWBkaCke/langsmith/images/custom-output-rendering-menu.png?fit=max&auto=format&n=l7rhdSRpjWBkaCke&q=85&s=7daf042ebae80eec20cd90a25c1d6087" alt="Dataset page with three-dot menu showing Custom Output Rendering option" width="3456" height="2156" data-path="langsmith/images/custom-output-rendering-menu.png" />
+> **Image:** [Dataset page with three-dot menu showing Custom Output Rendering option](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 1. Navigate to your dataset in the **Datasets & Experiments** page.
 2. Click **⋮** (three-dot menu) in the top right corner.
@@ -48,13 +44,13 @@ To configure custom output rendering for a dataset:
 5. Enter the webpage URL in the **URL** field.
 6. Click **Save**.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/l7rhdSRpjWBkaCke/langsmith/images/custom-output-rendering-modal.png?fit=max&auto=format&n=l7rhdSRpjWBkaCke&q=85&s=bffd3b40ca14bbebc05c998d1cb5fa7e" alt="Custom Output Rendering modal with fields filled in" width="3456" height="2156" data-path="langsmith/images/custom-output-rendering-modal.png" />
+> **Image:** [Custom Output Rendering modal with fields filled in](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 ### For annotation queues
 
 To configure custom output rendering for an annotation queue:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/optUJrLvYf4z4j5I/langsmith/images/annotation-queue-custom-output-rendering-settings.png?fit=max&auto=format&n=optUJrLvYf4z4j5I&q=85&s=579aad04fa6990b220514280eef799f4" alt="Annotation queue settings showing custom output rendering configuration" width="3456" height="1914" data-path="langsmith/images/annotation-queue-custom-output-rendering-settings.png" />
+> **Image:** [Annotation queue settings showing custom output rendering configuration](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 1. Navigate to the **Annotation Queues** page.
 2. Click on an existing annotation queue or create a new one.
@@ -63,7 +59,7 @@ To configure custom output rendering for an annotation queue:
 5. Enter the webpage URL in the **URL** field.
 6. Click **Save** or **Create**.
 
-<Info>When custom rendering settings are applied at multiple levels, the precedence is as follows: annotation queue > dataset > tracing project.</Info>
+When custom rendering settings are applied at multiple levels, the precedence is as follows: annotation queue > dataset > tracing project.
 
 ## Build a custom renderer
 
@@ -71,7 +67,7 @@ To configure custom output rendering for an annotation queue:
 
 Your HTML page will receive output data via the [postMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). LangSmith sends messages with the following structure:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 {
   type: "output" | "reference",
   data: {
@@ -91,13 +87,13 @@ Your HTML page will receive output data via the [postMessage API](https://develo
 * `data`: The output data itself.
 * `metadata.inputs`: The input data that generated this output, provided for context.
 
-<Note>**Message delivery timing**: LangSmith uses an exponential backoff retry mechanism to ensure your page receives the data even if it loads slowly. Messages are sent up to 6 times with increasing delays (100ms, 200ms, 400ms, 800ms, 1600ms, 3200ms).</Note>
+**Message delivery timing**: LangSmith uses an exponential backoff retry mechanism to ensure your page receives the data even if it loads slowly. Messages are sent up to 6 times with increasing delays (100ms, 200ms, 400ms, 800ms, 1600ms, 3200ms).
 
 ### Example implementation
 
 This example listens for incoming postMessage events and displays them on the page. Each message is numbered and formatted as JSON, making it easy to inspect the data structure LangSmith sends to your renderer.
 
-```html theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -132,24 +128,20 @@ When enabled, your custom rendering will replace the default output view in:
 
 * **Experiment comparison view**: When comparing outputs across multiple experiments:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/l7rhdSRpjWBkaCke/langsmith/images/custom-output-rendering-experiment-comparison.png?fit=max&auto=format&n=l7rhdSRpjWBkaCke&q=85&s=6f1fd9d3ca4be55aa9a0b40140771e08" alt="Experiment comparison view showing custom rendering" width="3456" height="2156" data-path="langsmith/images/custom-output-rendering-experiment-comparison.png" />
+> **Image:** [Experiment comparison view showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 * **Run detail panes**: When viewing runs that are associated with a dataset:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/l7rhdSRpjWBkaCke/langsmith/images/custom-output-rendering-run-details.png?fit=max&auto=format&n=l7rhdSRpjWBkaCke&q=85&s=abec759e27bb3dfa827354d13746cf61" alt="Run detail pane showing custom rendering" width="3456" height="2156" data-path="langsmith/images/custom-output-rendering-run-details.png" />
+> **Image:** [Run detail pane showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 * **Annotation queues**: When reviewing runs in annotation queues:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/l7rhdSRpjWBkaCke/langsmith/images/custom-output-rendering-annotation-queue.png?fit=max&auto=format&n=l7rhdSRpjWBkaCke&q=85&s=8d1b66541ea7dcd0246354fca1568719" alt="Annotation queue showing custom rendering" width="3456" height="2156" data-path="langsmith/images/custom-output-rendering-annotation-queue.png" />
+> **Image:** [Annotation queue showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-output-rendering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-output-rendering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

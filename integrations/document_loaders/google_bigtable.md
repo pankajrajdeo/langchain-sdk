@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google bigtable integration
 
 > Integrate with the Google bigtable document loader using LangChain Python.
 
 > [Bigtable](https://cloud.google.com/bigtable) is a key-value and wide-column store, ideal for fast access to structured, semi-structured, or unstructured data. Extend your database application to build AI-powered experiences leveraging Bigtable's LangChain integrations.
 
-This notebook goes over how to use [Bigtable](https://cloud.google.com/bigtable) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `BigtableLoader` and `BigtableSaver`.
+This notebook goes over how to use [Bigtable](https://cloud.google.com/bigtable) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `BigtableLoader` and `BigtableSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-bigtable-python/).
 
@@ -26,7 +22,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please specify an instance and a table for demo purpose.
 INSTANCE_ID = "my_instance"  # @param {type:"string"}
 TABLE_ID = "my_table"  # @param {type:"string"}
@@ -36,13 +32,13 @@ TABLE_ID = "my_table"  # @param {type:"string"}
 
 The integration lives in its own `langchain-google-bigtable` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-bigtable
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -60,7 +56,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -76,7 +72,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -91,7 +87,7 @@ Save langchain documents with `BigtableSaver.add_documents(<documents>)`. To ini
 1. `instance_id` - An instance of Bigtable.
 2. `table_id` - The name of the table within the Bigtable to store langchain documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_bigtable import BigtableSaver
 
@@ -129,7 +125,7 @@ Load langchain documents with `BigtableLoader.load()` or `BigtableLoader.lazy_lo
 1. `instance_id` - An instance of Bigtable.
 2. `table_id` - The name of the table within the Bigtable to store langchain documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_bigtable import BigtableLoader
 
 loader = BigtableLoader(
@@ -146,7 +142,7 @@ for doc in loader.lazy_load():
 
 Delete a list of langchain documents from Bigtable table with `BigtableSaver.delete(<documents>)`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_bigtable import BigtableSaver
 
 docs = loader.load()
@@ -166,13 +162,12 @@ There are two ways to limit the returned rows:
 1. Using a [filter](https://cloud.google.com/python/docs/reference/bigtable/latest/row-filters)
 2. Using a [row\_set](https://cloud.google.com/python/docs/reference/bigtable/latest/row-set#google.cloud.bigtable.row_set.RowSet)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import google.cloud.bigtable.row_filters as row_filters
 
 filter_loader = BigtableLoader(
     INSTANCE_ID, TABLE_ID, filter=row_filters.ColumnQualifierRegexFilter(b"os_build")
 )
-
 
 from google.cloud.bigtable.row_set import RowSet
 
@@ -192,7 +187,7 @@ row_set_loader = BigtableLoader(
 
 The client created by default is the default client, using only admin=True option. To use a non-default, a [custom client](https://cloud.google.com/python/docs/reference/bigtable/latest/client#class-googlecloudbigtableclientclientprojectnone-credentialsnone-readonlyfalse-adminfalse-clientinfonone-clientoptionsnone-adminclientoptionsnone-channelnone) can be passed to the constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import bigtable
 
 custom_client_loader = BigtableLoader(
@@ -206,7 +201,7 @@ custom_client_loader = BigtableLoader(
 
 The BigtableLoader assumes there is a column family called `langchain`, that has a column called `content`, that contains values encoded in UTF-8. These defaults can be changed like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_bigtable import Encoding
 
 custom_content_loader = BigtableLoader(
@@ -222,7 +217,7 @@ custom_content_loader = BigtableLoader(
 
 By default, the `metadata` map on the [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) object will contain a single key, `rowkey`, with the value of the row's rowkey value. To add more items to that map, use metadata\_mapping.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 from langchain_google_bigtable import MetadataMapping
@@ -253,7 +248,7 @@ metadata_mapping_loader = BigtableLoader(
 
 If there is a column in Bigtable that contains a JSON string that you would like to have added to the output document metadata, it is possible to add the following parameters to BigtableLoader. Note, the default value for `metadata_as_json_encoding` is UTF-8.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata_as_json_loader = BigtableLoader(
     INSTANCE_ID,
     TABLE_ID,
@@ -267,7 +262,7 @@ metadata_as_json_loader = BigtableLoader(
 
 The BigtableSaver is also customizable similar to BigtableLoader.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 saver = BigtableSaver(
     INSTANCE_ID,
     TABLE_ID,
@@ -299,12 +294,8 @@ saver = BigtableSaver(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_bigtable.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_bigtable.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

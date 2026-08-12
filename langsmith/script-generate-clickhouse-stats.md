@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Generate ClickHouse stats
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-generate-clickhouse-stats)
 As part of troubleshooting your self-hosted instance of LangSmith, the LangChain team may ask you to generate Clickhouse statistics that will help us understand memory and CPU consumption and connection concurrency.
 
 This command will generate a CSV that can be shared with the LangChain team.
@@ -40,13 +36,13 @@ Ensure you have the following tools/items ready.
 
 Run the following command to run the stats generation script:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh get_clickhouse_stats.sh <clickhouse_url> --output path/to/file.csv
 ```
 
 For example, if you are using the bundled version with port-forwarding, the command would look like:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh get_clickhouse_stats.sh "clickhouse://default:password@localhost:8123/default" --output clickhouse_stats.csv
 ```
 
@@ -54,12 +50,8 @@ and after running this command you should see a file, clickhouse\_stats.csv, has
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-generate-clickhouse-stats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-generate-clickhouse-stats.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Structured output
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/structured-output)
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, [Pydantic models](https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage), or dataclasses that your application can use directly.
 
-<Tip>
-  This page covers structured output with agents using `create_agent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](/oss/python/langchain/models#structured-output).
-</Tip>
+> [!TIP]
+> This page covers structured output with agents using `create_agent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](https://docs.langchain.com/oss/python/langchain/models#structured-output).
 
 LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) handles structured output automatically. The user sets their desired structured output schema, and when the model generates the structured data, it's captured, validated, and returned in the `'structured_response'` key of the agent's state.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def create_agent(
     ...
     response_format: Union[
@@ -35,26 +30,24 @@ Use `response_format` to control how the agent returns structured data:
 
 When a schema type is provided directly, LangChain automatically chooses:
 
-* `ProviderStrategy` if the model and provider chosen supports native structured output (e.g. [OpenAI](/oss/python/integrations/providers/openai), [Anthropic (Claude)](/oss/python/integrations/providers/anthropic), or [xAI (Grok)](/oss/python/integrations/providers/xai)).
+* `ProviderStrategy` if the model and provider chosen supports native structured output (e.g. [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai), [Anthropic (Claude)](https://docs.langchain.com/oss/python/integrations/providers/anthropic), or [xAI (Grok)](https://docs.langchain.com/oss/python/integrations/providers/xai)).
 * `ToolStrategy` for all other models.
 
-<Warning>
-  JSON Schema dictionaries must be wrapped in an explicit strategy (`ProviderStrategy` or `ToolStrategy`). They are not automatically detected when passed directly to `response_format`.
-</Warning>
+> [!WARNING]
+> JSON Schema dictionaries must be wrapped in an explicit strategy (`ProviderStrategy` or `ToolStrategy`). They are not automatically detected when passed directly to `response_format`.
 
-<Note>
-  Support for native structured output features is read dynamically from the model's [profile data](/oss/python/langchain/models#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  custom_profile = {
-      "structured_output": True,
-      # ...
-  }
-  model = init_chat_model("...", profile=custom_profile)
-  ```
-
-  If tools are specified, the model must support simultaneous use of tools and structured output.
-</Note>
+> [!NOTE]
+> Support for native structured output features is read dynamically from the model's [profile data](https://docs.langchain.com/oss/python/langchain/models#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
+>
+> ```python
+> custom_profile = {
+>     "structured_output": True,
+>     # ...
+> }
+> model = init_chat_model("...", profile=custom_profile)
+> ```
+>
+> If tools are specified, the model must support simultaneous use of tools and structured output.
 
 The structured response is returned in the `structured_response` key of the agent's final state.
 
@@ -64,146 +57,136 @@ Some model providers support structured output natively through their APIs (e.g.
 
 To use this strategy, configure a `ProviderStrategy`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class ProviderStrategy(Generic[SchemaT]):
     schema: type[SchemaT]
     strict: bool | None = None
 ```
 
-<Info>
-  The `strict` param requires `langchain>=1.2`.
-</Info>
+> [!NOTE]
+> The `strict` param requires `langchain>=1.2`.
 
-<ParamField path="schema" required>
-  The schema defining the structured output format. Supports:
+#### `Field`
+The schema defining the structured output format. Supports:
 
-  * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
-  * **Dataclasses**: Python dataclasses with type annotations. Returns dict.
-  * **TypedDict**: Typed dictionary classes. Returns dict.
-  * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
-</ParamField>
+* **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
+* **Dataclasses**: Python dataclasses with type annotations. Returns dict.
+* **TypedDict**: Typed dictionary classes. Returns dict.
+* **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 
-<ParamField path="strict">
-  Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](/oss/python/integrations/chat/openai) and [xAI](/oss/python/integrations/chat/xai)). Defaults to `None` (disabled).
-</ParamField>
+#### `Field`
+Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai) and [xAI](https://docs.langchain.com/oss/python/integrations/chat/xai)). Defaults to `None` (disabled).
 
 LangChain automatically uses `ProviderStrategy` when you pass a schema type directly to [`create_agent.response_format`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and the model supports native structured output:
 
-<CodeGroup>
-  ```python Pydantic Model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from pydantic import BaseModel, Field
-  from langchain.agents import create_agent
+```python
+from pydantic import BaseModel, Field
+from langchain.agents import create_agent
 
+class ContactInfo(BaseModel):
+    """Contact information for a person."""
+    name: str = Field(description="The name of the person")
+    email: str = Field(description="The email address of the person")
+    phone: str = Field(description="The phone number of the person")
 
-  class ContactInfo(BaseModel):
-      """Contact information for a person."""
-      name: str = Field(description="The name of the person")
-      email: str = Field(description="The email address of the person")
-      phone: str = Field(description="The phone number of the person")
+agent = create_agent(
+    model="gpt-5.5",
+    response_format=ContactInfo  # Auto-selects ProviderStrategy
+)
 
-  agent = create_agent(
-      model="gpt-5.5",
-      response_format=ContactInfo  # Auto-selects ProviderStrategy
-  )
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
+})
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
-  })
+print(result["structured_response"])
+# ContactInfo(name='John Doe', email='john@example.com', phone='(555) 123-4567')
+```
 
-  print(result["structured_response"])
-  # ContactInfo(name='John Doe', email='john@example.com', phone='(555) 123-4567')
-  ```
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
 
-  ```python Dataclass theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-  from langchain.agents import create_agent
+@dataclass
+class ContactInfo:
+    """Contact information for a person."""
+    name: str # The name of the person
+    email: str # The email address of the person
+    phone: str # The phone number of the person
 
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ContactInfo  # Auto-selects ProviderStrategy
+)
 
-  @dataclass
-  class ContactInfo:
-      """Contact information for a person."""
-      name: str # The name of the person
-      email: str # The email address of the person
-      phone: str # The phone number of the person
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
+})
 
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ContactInfo  # Auto-selects ProviderStrategy
-  )
+result["structured_response"]
+# {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
+```
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
-  })
+```python
+from typing_extensions import TypedDict
+from langchain.agents import create_agent
 
-  result["structured_response"]
-  # {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
-  ```
+class ContactInfo(TypedDict):
+    """Contact information for a person."""
+    name: str # The name of the person
+    email: str # The email address of the person
+    phone: str # The phone number of the person
 
-  ```python TypedDict theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from typing_extensions import TypedDict
-  from langchain.agents import create_agent
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ContactInfo  # Auto-selects ProviderStrategy
+)
 
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
+})
 
-  class ContactInfo(TypedDict):
-      """Contact information for a person."""
-      name: str # The name of the person
-      email: str # The email address of the person
-      phone: str # The phone number of the person
+result["structured_response"]
+# {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
+```
 
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ContactInfo  # Auto-selects ProviderStrategy
-  )
+```python
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ProviderStrategy
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
-  })
+contact_info_schema = {
+    "title": "ContactInfo",
+    "type": "object",
+    "description": "Contact information for a person.",
+    "properties": {
+        "name": {"type": "string", "description": "The name of the person"},
+        "email": {"type": "string", "description": "The email address of the person"},
+        "phone": {"type": "string", "description": "The phone number of the person"}
+    },
+    "required": ["name", "email", "phone"]
+}
 
-  result["structured_response"]
-  # {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
-  ```
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ProviderStrategy(contact_info_schema)
+)
 
-  ```python JSON Schema theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ProviderStrategy
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
+})
 
-
-  contact_info_schema = {
-      "title": "ContactInfo",
-      "type": "object",
-      "description": "Contact information for a person.",
-      "properties": {
-          "name": {"type": "string", "description": "The name of the person"},
-          "email": {"type": "string", "description": "The email address of the person"},
-          "phone": {"type": "string", "description": "The phone number of the person"}
-      },
-      "required": ["name", "email", "phone"]
-  }
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ProviderStrategy(contact_info_schema)
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Extract contact info from: John Doe, john@example.com, (555) 123-4567"}]
-  })
-
-  result["structured_response"]
-  # {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
-  ```
-</CodeGroup>
+result["structured_response"]
+# {'name': 'John Doe', 'email': 'john@example.com', 'phone': '(555) 123-4567'}
+```
 
 Provider-native structured output provides high reliability and strict validation because the model provider enforces the schema. Use it when available.
 
-<Note>
-  If the provider natively supports structured output for your model choice, it is functionally equivalent to write `response_format=ProductReview` instead of `response_format=ProviderStrategy(ProductReview)`.
-
-  In either case, if structured output is not supported, the agent will fall back to a tool calling strategy.
-</Note>
+> [!NOTE]
+> If the provider natively supports structured output for your model choice, it is functionally equivalent to write `response_format=ProductReview` instead of `response_format=ProviderStrategy(ProductReview)`.
+>
+> In either case, if structured output is not supported, the agent will fall back to a tool calling strategy.
 
 ## Tool calling strategy
 
@@ -211,7 +194,7 @@ For models that don't support native structured output, LangChain uses tool call
 
 To use this strategy, configure a `ToolStrategy`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class ToolStrategy(Generic[SchemaT]):
     schema: type[SchemaT]
     tool_message_content: str | None
@@ -224,198 +207,187 @@ class ToolStrategy(Generic[SchemaT]):
     ]
 ```
 
-<ParamField path="schema" required>
-  The schema defining the structured output format. Supports:
+#### `Field`
+The schema defining the structured output format. Supports:
 
-  * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
-  * **Dataclasses**: Python dataclasses with type annotations. Returns dict.
-  * **TypedDict**: Typed dictionary classes. Returns dict.
-  * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
-  * **Union types**: Multiple schema options. The model will choose the most appropriate schema based on the context.
-</ParamField>
+* **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
+* **Dataclasses**: Python dataclasses with type annotations. Returns dict.
+* **TypedDict**: Typed dictionary classes. Returns dict.
+* **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
+* **Union types**: Multiple schema options. The model will choose the most appropriate schema based on the context.
 
-<ParamField path="tool_message_content">
-  Custom content for the tool message returned when structured output is generated.
-  If not provided, defaults to a message showing the structured response data.
-</ParamField>
+#### `Field`
+Custom content for the tool message returned when structured output is generated.
+If not provided, defaults to a message showing the structured response data.
 
-<ParamField path="handle_errors">
-  Error handling strategy for structured output validation failures. Defaults to `True`.
+#### `Field`
+Error handling strategy for structured output validation failures. Defaults to `True`.
 
-  * **`True`**: Catch all errors with default error template
-  * **`str`**: Catch all errors with this custom message
-  * **`type[Exception]`**: Only catch this exception type with default message
-  * **`tuple[type[Exception], ...]`**: Only catch these exception types with default message
-  * **`Callable[[Exception], str]`**: Custom function that returns error message
-  * **`False`**: No retry, let exceptions propagate
-</ParamField>
+* **`True`**: Catch all errors with default error template
+* **`str`**: Catch all errors with this custom message
+* **`type[Exception]`**: Only catch this exception type with default message
+* **`tuple[type[Exception], ...]`**: Only catch these exception types with default message
+* **`Callable[[Exception], str]`**: Custom function that returns error message
+* **`False`**: No retry, let exceptions propagate
 
-<CodeGroup>
-  ```python Pydantic Model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from pydantic import BaseModel, Field
-  from typing import Literal
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ToolStrategy
-
-
-  class ProductReview(BaseModel):
-      """Analysis of a product review."""
-      rating: int | None = Field(description="The rating of the product", ge=1, le=5)
-      sentiment: Literal["positive", "negative"] = Field(description="The sentiment of the review")
-      key_points: list[str] = Field(description="The key points of the review. Lowercase, 1-3 words each.")
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ToolStrategy(ProductReview)
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
-  })
-  result["structured_response"]
-  # ProductReview(rating=5, sentiment='positive', key_points=['fast shipping', 'expensive'])
-  ```
-
-  ```python Dataclass theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-  from typing import Literal
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ToolStrategy
-
-
-  @dataclass
-  class ProductReview:
-      """Analysis of a product review."""
-      rating: int | None  # The rating of the product (1-5)
-      sentiment: Literal["positive", "negative"]  # The sentiment of the review
-      key_points: list[str]  # The key points of the review
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ToolStrategy(ProductReview)
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
-  })
-  result["structured_response"]
-  # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
-  ```
-
-  ```python TypedDict theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from typing import Literal
-  from typing_extensions import TypedDict
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ToolStrategy
-
-
-  class ProductReview(TypedDict):
-      """Analysis of a product review."""
-      rating: int | None  # The rating of the product (1-5)
-      sentiment: Literal["positive", "negative"]  # The sentiment of the review
-      key_points: list[str]  # The key points of the review
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ToolStrategy(ProductReview)
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
-  })
-  result["structured_response"]
-  # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
-  ```
-
-  ```python JSON Schema theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ToolStrategy
-
-
-  product_review_schema = {
-      "title": "ProductReview",
-      "type": "object",
-      "description": "Analysis of a product review.",
-      "properties": {
-          "rating": {
-              "type": ["integer", "null"],
-              "description": "The rating of the product (1-5)",
-              "minimum": 1,
-              "maximum": 5
-          },
-          "sentiment": {
-              "type": "string",
-              "enum": ["positive", "negative"],
-              "description": "The sentiment of the review"
-          },
-          "key_points": {
-              "type": "array",
-              "items": {"type": "string"},
-              "description": "The key points of the review"
-          }
-      },
-      "required": ["sentiment", "key_points"]
-  }
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ToolStrategy(product_review_schema)
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
-  })
-  result["structured_response"]
-  # {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
-  ```
-
-  ```python Union Types theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from pydantic import BaseModel, Field
-  from typing import Literal, Union
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ToolStrategy
-
-
-  class ProductReview(BaseModel):
-      """Analysis of a product review."""
-      rating: int | None = Field(description="The rating of the product", ge=1, le=5)
-      sentiment: Literal["positive", "negative"] = Field(description="The sentiment of the review")
-      key_points: list[str] = Field(description="The key points of the review. Lowercase, 1-3 words each.")
-
-  class CustomerComplaint(BaseModel):
-      """A customer complaint about a product or service."""
-      issue_type: Literal["product", "service", "shipping", "billing"] = Field(description="The type of issue")
-      severity: Literal["low", "medium", "high"] = Field(description="The severity of the complaint")
-      description: str = Field(description="Brief description of the complaint")
-
-  agent = create_agent(
-      model="gpt-5.5",
-      tools=tools,
-      response_format=ToolStrategy(Union[ProductReview, CustomerComplaint])
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
-  })
-  result["structured_response"]
-  # ProductReview(rating=5, sentiment='positive', key_points=['fast shipping', 'expensive'])
-  ```
-</CodeGroup>
-
-### Custom tool message content
-
-The `tool_message_content` parameter allows you to customize the message that appears in the conversation history when structured output is generated:
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from typing import Literal
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
 
+class ProductReview(BaseModel):
+    """Analysis of a product review."""
+    rating: int | None = Field(description="The rating of the product", ge=1, le=5)
+    sentiment: Literal["positive", "negative"] = Field(description="The sentiment of the review")
+    key_points: list[str] = Field(description="The key points of the review. Lowercase, 1-3 words each.")
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ToolStrategy(ProductReview)
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
+})
+result["structured_response"]
+# ProductReview(rating=5, sentiment='positive', key_points=['fast shipping', 'expensive'])
+```
+
+```python
+from dataclasses import dataclass
+from typing import Literal
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy
+
+@dataclass
+class ProductReview:
+    """Analysis of a product review."""
+    rating: int | None  # The rating of the product (1-5)
+    sentiment: Literal["positive", "negative"]  # The sentiment of the review
+    key_points: list[str]  # The key points of the review
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ToolStrategy(ProductReview)
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
+})
+result["structured_response"]
+# {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
+```
+
+```python
+from typing import Literal
+from typing_extensions import TypedDict
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy
+
+class ProductReview(TypedDict):
+    """Analysis of a product review."""
+    rating: int | None  # The rating of the product (1-5)
+    sentiment: Literal["positive", "negative"]  # The sentiment of the review
+    key_points: list[str]  # The key points of the review
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ToolStrategy(ProductReview)
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
+})
+result["structured_response"]
+# {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
+```
+
+```python
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy
+
+product_review_schema = {
+    "title": "ProductReview",
+    "type": "object",
+    "description": "Analysis of a product review.",
+    "properties": {
+        "rating": {
+            "type": ["integer", "null"],
+            "description": "The rating of the product (1-5)",
+            "minimum": 1,
+            "maximum": 5
+        },
+        "sentiment": {
+            "type": "string",
+            "enum": ["positive", "negative"],
+            "description": "The sentiment of the review"
+        },
+        "key_points": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "The key points of the review"
+        }
+    },
+    "required": ["sentiment", "key_points"]
+}
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ToolStrategy(product_review_schema)
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
+})
+result["structured_response"]
+# {'rating': 5, 'sentiment': 'positive', 'key_points': ['fast shipping', 'expensive']}
+```
+
+```python
+from pydantic import BaseModel, Field
+from typing import Literal, Union
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy
+
+class ProductReview(BaseModel):
+    """Analysis of a product review."""
+    rating: int | None = Field(description="The rating of the product", ge=1, le=5)
+    sentiment: Literal["positive", "negative"] = Field(description="The sentiment of the review")
+    key_points: list[str] = Field(description="The key points of the review. Lowercase, 1-3 words each.")
+
+class CustomerComplaint(BaseModel):
+    """A customer complaint about a product or service."""
+    issue_type: Literal["product", "service", "shipping", "billing"] = Field(description="The type of issue")
+    severity: Literal["low", "medium", "high"] = Field(description="The severity of the complaint")
+    description: str = Field(description="Brief description of the complaint")
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=tools,
+    response_format=ToolStrategy(Union[ProductReview, CustomerComplaint])
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Analyze this review: 'Great product: 5 out of 5 stars. Fast shipping, but expensive'"}]
+})
+result["structured_response"]
+# ProductReview(rating=5, sentiment='positive', key_points=['fast shipping', 'expensive'])
+```
+
+### Custom tool message content
+
+The `tool_message_content` parameter allows you to customize the message that appears in the conversation history when structured output is generated:
+
+```python
+from pydantic import BaseModel, Field
+from typing import Literal
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ToolStrategy
 
 class MeetingAction(BaseModel):
     """Action items extracted from a meeting transcript."""
@@ -472,12 +444,11 @@ Models can make mistakes when generating structured output via tool calling. Lan
 
 When a model incorrectly calls multiple structured output tools, the agent provides error feedback in a [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) and prompts the model to retry:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from typing import Union
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
-
 
 class ContactInfo(BaseModel):
     name: str = Field(description="Person's name")
@@ -542,11 +513,10 @@ Returning structured response: {'name': 'John Doe', 'email': 'john@email.com'}
 
 When structured output doesn't match the expected schema, the agent provides specific error feedback:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
-
 
 class ProductRating(BaseModel):
     rating: int | None = Field(description="Rating from 1-5", ge=1, le=5)
@@ -600,7 +570,7 @@ You can customize how errors are handled using the `handle_errors` parameter:
 
 **Custom error message:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ToolStrategy(
     schema=ProductRating,
     handle_errors="Please provide a valid rating between 1-5 and include a comment."
@@ -618,7 +588,7 @@ Please provide a valid rating between 1-5 and include a comment.
 
 **Handle specific exceptions only:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ToolStrategy(
     schema=ProductRating,
     handle_errors=ValueError  # Only retry on ValueError, raise others
@@ -629,7 +599,7 @@ If `handle_errors` is an exception type, the agent will only retry (using the de
 
 **Handle multiple exception types:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ToolStrategy(
     schema=ProductRating,
     handle_errors=(ValueError, TypeError)  # Retry on ValueError and TypeError
@@ -640,7 +610,7 @@ If `handle_errors` is a tuple of exceptions, the agent will only retry (using th
 
 **Custom error handler function:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 
 from langchain.agents.structured_output import StructuredOutputValidationError
 from langchain.agents.structured_output import MultipleStructuredOutputsError
@@ -652,7 +622,6 @@ def custom_error_handler(error: Exception) -> str:
         return "Multiple structured outputs were returned. Pick the most relevant one."
     else:
         return f"Error: {str(error)}"
-
 
 agent = create_agent(
     model="gpt-5.5",
@@ -706,7 +675,7 @@ Error: <error message>
 
 **No error handling:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response_format = ToolStrategy(
     schema=ProductRating,
     handle_errors=False  # All errors raised
@@ -715,12 +684,8 @@ response_format = ToolStrategy(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

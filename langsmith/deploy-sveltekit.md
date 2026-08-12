@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy with SvelteKit
-
-> Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-sveltekit)
+Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
 
 The following page details an example app that deploys a LangChain **deep agent** inside a [SvelteKit](https://svelte.dev/docs/kit/introduction) project, built for [Cloudflare Workers](https://svelte.dev/docs/kit/adapter-cloudflare) with [`@sveltejs/adapter-cloudflare`](https://www.npmjs.com/package/@sveltejs/adapter-cloudflare): streaming chat UI, subagent detail views, thread history, and the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) exposed under `/api/threads/...`. No separate backend process is required.
 
@@ -12,29 +8,24 @@ Source: [`js-sveltekit`](https://github.com/langchain-ai/deployment-cookbook/tre
 
 ## Deploy to Cloudflare
 
-<Steps>
-  <Step title="Install and build">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    cd js-sveltekit
-    cp .env.example .env   # set OPENAI_API_KEY for local dev
-    pnpm install
-    pnpm build
-    ```
-  </Step>
+### Install and build
+```bash
+cd js-sveltekit
+cp .env.example .env   # set OPENAI_API_KEY for local dev
+pnpm install
+pnpm build
+```
 
-  <Step title="Configure secrets">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    npx wrangler login
-    npx wrangler secret put OPENAI_API_KEY
-    ```
-  </Step>
+### Configure secrets
+```bash
+npx wrangler login
+npx wrangler secret put OPENAI_API_KEY
+```
 
-  <Step title="Deploy">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pnpm run deploy
-    ```
-  </Step>
-</Steps>
+### Deploy
+```bash
+pnpm run deploy
+```
 
 `svelte.config.js` uses `adapter-cloudflare()`. `wrangler.jsonc` points Wrangler at `.svelte-kit/cloudflare/_worker.js` and serves assets from `.svelte-kit/cloudflare`, matching the SvelteKit Cloudflare adapter docs. The build script appends the `ThreadSession` Durable Object export to that generated Worker entry because Durable Object classes must be exported by the Worker module.
 
@@ -87,7 +78,7 @@ For production:
 
 ## Local development
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp .env.example .env   # set OPENAI_API_KEY
 pnpm install
 pnpm dev
@@ -95,7 +86,7 @@ pnpm dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pnpm build      # production build for Cloudflare
 pnpm preview    # preview the production build locally
 pnpm typecheck  # svelte-check over the project
@@ -103,41 +94,38 @@ pnpm typecheck  # svelte-check over the project
 
 For Cloudflare-style local testing after a build, run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 npx wrangler dev .svelte-kit/cloudflare/_worker.js
 ```
 
 ## Project layout
 
-<AccordionGroup>
-  <Accordion title="Project structure">
-    * `src/lib/server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents and mock tools.
-    * `src/lib/server/durable-objects/thread-session.ts` — per-thread Durable Object event log for SSE replay.
-    * `src/lib/server/protocol/` — Agent Streaming Protocol helpers: checkpointer-backed state/history, run publishing, serialization, and registry.
-    * `src/routes/api/threads/` — SvelteKit route handlers for the protocol endpoints.
-    * `src/lib/chat/threads-client.ts` — browser thread bootstrap and sidebar helpers.
-    * `src/lib/components/` — Svelte chat UI using `@langchain/svelte`.
-    * `svelte.config.js` — SvelteKit configured with `@sveltejs/adapter-cloudflare`.
-    * `scripts/export-durable-objects.mjs` — postbuild patch that re-exports the Durable Object class from the generated Worker entry.
-    * `wrangler.jsonc` — Cloudflare Workers Static Assets and Durable Object config.
-  </Accordion>
-</AccordionGroup>
+<details>
+<summary>Project structure</summary>
+
+* `src/lib/server/agent/` — deep agent (`createDeepAgent`) with `researcher` and `math-whiz` subagents and mock tools.
+* `src/lib/server/durable-objects/thread-session.ts` — per-thread Durable Object event log for SSE replay.
+* `src/lib/server/protocol/` — Agent Streaming Protocol helpers: checkpointer-backed state/history, run publishing, serialization, and registry.
+* `src/routes/api/threads/` — SvelteKit route handlers for the protocol endpoints.
+* `src/lib/chat/threads-client.ts` — browser thread bootstrap and sidebar helpers.
+* `src/lib/components/` — Svelte chat UI using `@langchain/svelte`.
+* `svelte.config.js` — SvelteKit configured with `@sveltejs/adapter-cloudflare`.
+* `scripts/export-durable-objects.mjs` — postbuild patch that re-exports the Durable Object class from the generated Worker entry.
+* `wrangler.jsonc` — Cloudflare Workers Static Assets and Durable Object config.
+
+</details>
 
 ## See also
 
-* [Frameworks and platforms overview](/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
 * [SvelteKit Cloudflare adapter](https://svelte.dev/docs/kit/adapter-cloudflare)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [`@langchain/svelte`](https://reference.langchain.com/javascript/langchain-svelte/getting-started)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-sveltekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-sveltekit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

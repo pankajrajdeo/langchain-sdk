@@ -1,26 +1,21 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add custom tools to Managed Deep Agents
-
-> Define authored tools for Managed Deep Agents projects.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools)
+Define authored tools for Managed Deep Agents projects.
 
 Managed Deep Agents support the normal Deep Agents `tools` configuration surface.
 
 Define LangChain tools in your project, import them into `agent.ts`, and pass them to `defineDeepAgent`.
 
-To load tools from a remote MCP server instead, use an [MCP connector](/langsmith/javascript/managed-deep-agents-mcp-connectors).
+To load tools from a remote MCP server instead, use an [MCP connector](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors).
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Keep the agent entry point at the project root and authored tools under `tools/`:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   tools/
@@ -31,11 +26,11 @@ my-agent/
 
 Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project. Managed Deep Agents copies the source into the compiled build and passes the tools to Deep Agents.
 
-For more about LangChain tool definitions, see [Tools](/oss/javascript/langchain/tools).
+For more about LangChain tool definitions, see [Tools](https://docs.langchain.com/oss/javascript/langchain/tools).
 
 ## Add a tool module
 
-```ts tools/customer.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { tool } from "langchain";
 import { z } from "zod";
 
@@ -55,7 +50,7 @@ export const lookupCustomer = tool(
 
 Import the tools into the project-root agent entry and pass them in the `tools` list.
 
-```ts agent.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineDeepAgent } from "managed-deepagents";
 
 import { lookupCustomer } from "./tools/customer";
@@ -79,7 +74,7 @@ Pause the agent before sensitive tool calls so a person can approve, edit, or re
 
 Set `interruptOn` in the agent definition, and optionally set `permissions` to gate tool and filesystem access.
 
-```ts agent.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineDeepAgent } from "managed-deepagents";
 
 import { lookupCustomer } from "./tools/customer";
@@ -94,9 +89,9 @@ export const agent = defineDeepAgent({
 });
 ```
 
-The `interruptOn` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](/oss/javascript/langchain/guardrails#human-in-the-loop).
+The `interruptOn` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](https://docs.langchain.com/oss/javascript/langchain/guardrails#human-in-the-loop).
 
-For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](/oss/javascript/deepagents/human-in-the-loop) and [Permissions](/oss/javascript/deepagents/permissions) guides.
+For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](https://docs.langchain.com/oss/javascript/deepagents/human-in-the-loop) and [Permissions](https://docs.langchain.com/oss/javascript/deepagents/permissions) guides.
 
 ### Respond to an interrupt
 
@@ -104,11 +99,10 @@ When a run hits an interrupt, it pauses and waits for a human response before co
 
 * **During local development**, `mda dev` runs the agent in LangSmith Studio, which surfaces the interrupt so you can inspect the pending tool call and resume the run.
 
-* **On a deployed agent**, resume the paused run through the LangGraph server API with a resume payload. See [Human-in-the-loop using server API](/langsmith/add-human-in-the-loop).
+* **On a deployed agent**, resume the paused run through the LangGraph server API with a resume payload. See [Human-in-the-loop using server API](https://docs.langchain.com/langsmith/add-human-in-the-loop).
 
-<Note>
-  During public beta, Managed Deep Agents is CLI-first and programmatic invocation is not yet documented. To resume runs programmatically from your own application, contact your LangChain team.
-</Note>
+> [!NOTE]
+> During public beta, Managed Deep Agents is CLI-first and programmatic invocation is not yet documented. To resume runs programmatically from your own application, contact your LangChain team.
 
 Human-in-the-loop needs durable thread state to pause and resume. The managed runtime owns the checkpointer, so no extra setup is required.
 
@@ -116,16 +110,12 @@ Human-in-the-loop needs durable thread state to pause and resume. The managed ru
 
 Tools can read deployment secrets from environment variables. Put local values in `.env` for `mda dev`; `mda deploy` forwards non-reserved `.env` values as hosted deployment secrets.
 
-For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](/oss/javascript/langchain/tools#access-context).
+For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](https://docs.langchain.com/oss/javascript/langchain/tools#access-context).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

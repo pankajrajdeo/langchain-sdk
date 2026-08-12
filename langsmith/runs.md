@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Runs
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/runs)
+An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
 
-> An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
+A *run* is an invocation of an [assistant](https://docs.langchain.com/langsmith/assistants). When you execute a run, you specify which assistant to use—either by graph ID for the default assistant, or by assistant ID for a specific configuration.
 
-A *run* is an invocation of an [assistant](/langsmith/assistants). When you execute a run, you specify which assistant to use—either by graph ID for the default assistant, or by assistant ID for a specific configuration.
-
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart TB
     subgraph deploy[Deployment]
         G[Graph Code<br/>━━━━━━━━━<br/>Deployed logic]
@@ -64,40 +60,30 @@ This diagram shows how a **run** combines an assistant with a thread to execute 
 When executing a run:
 
 * Each run may have its own input, configuration overrides, and metadata.
-* Runs can be stateless (no thread) or stateful (executed on a [thread](/langsmith/use-threads) for conversation persistence).
+* Runs can be stateless (no thread) or stateful (executed on a [thread](https://docs.langchain.com/langsmith/use-threads) for conversation persistence).
 * Multiple runs can use the same assistant configuration.
 * The assistant's configuration affects how the underlying graph executes.
 
-The Agent Server API provides several endpoints for creating and managing runs. For more details, refer to the [API reference](/langsmith/server-api-ref).
+The Agent Server API provides several endpoints for creating and managing runs. For more details, refer to the [API reference](https://docs.langchain.com/langsmith/server-api-ref).
 
 ## In this section
 
-<CardGroup cols={2}>
-  <Card title="Kick off background runs" icon="player-play" href="/langsmith/background-run">
-    Run your agent asynchronously and poll for results.
-  </Card>
+#### [Kick off background runs](https://docs.langchain.com/langsmith/background-run)
+Run your agent asynchronously and poll for results.
 
-  <Card title="Run multiple agents on the same thread" icon="messages" href="/langsmith/same-thread">
-    Use multiple assistants on a shared thread to combine agent capabilities.
-  </Card>
+#### [Run multiple agents on the same thread](https://docs.langchain.com/langsmith/same-thread)
+Use multiple assistants on a shared thread to combine agent capabilities.
 
-  <Card title="Stateless runs" icon="player-skip-forward" href="/langsmith/stateless-runs">
-    Execute runs without persisting state when conversation history isn't needed.
-  </Card>
+#### [Stateless runs](https://docs.langchain.com/langsmith/stateless-runs)
+Execute runs without persisting state when conversation history isn't needed.
 
-  <Card title="Cancel a run" icon="player-stop" href="/langsmith/cancel-run">
-    Cancel a single run or multiple runs via the API.
-  </Card>
-</CardGroup>
+#### [Cancel a run](https://docs.langchain.com/langsmith/cancel-run)
+Cancel a single run or multiple runs via the API.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Docling integrations
 
 > Integrate with Docling using LangChain Python.
@@ -14,15 +10,13 @@
 
 Simply install `langchain-docling` from your package manager, e.g. pip:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-docling
-  ```
+```bash
+pip install langchain-docling
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-docling
-  ```
-</CodeGroup>
+```bash
+uv add langchain-docling
+```
 
 ## Document loader
 
@@ -34,7 +28,7 @@ LangChain, enabling you to:
 
 Basic usage looks as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_docling import DoclingLoader
 
 FILE_PATH = ["https://arxiv.org/pdf/2408.09869"]  # Docling Technical Report
@@ -45,7 +39,7 @@ docs = loader.load()
 ```
 
 For end-to-end usage check out
-[this example](/oss/python/integrations/document_loaders/docling).
+[this example](https://docs.langchain.com/oss/python/integrations/document_loaders/docling).
 
 ## Additional resources
 
@@ -56,12 +50,8 @@ For end-to-end usage check out
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/docling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/docling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

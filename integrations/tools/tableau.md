@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tableau integration
 
 > Integrate with the Tableau tool using LangChain Python.
@@ -23,19 +19,19 @@ Make sure you are running and have access to:
 
 Get started by installing and/or importing the required packages
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # pip install langchain-openai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # pip install langgraph
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # pip install langchain-tableau --upgrade
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Requirement already satisfied: regex>=2022.1.18 in /Users/joe.constantino/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from tiktoken<1,>=0.7->langchain-openai->langchain-tableau) (2024.11.6)
 Requirement already satisfied: httpcore==1.* in /Users/joe.constantino/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.42->langgraph->langchain-tableau) (1.0.7)
 Requirement already satisfied: h11<0.15,>=0.13 in /Users/joe.constantino/.pyenv/versions/3.12.2/lib/python3.12/site-packages (from httpcore==1.*->httpx>=0.25.2->langgraph-sdk<0.2.0,>=0.1.42->langgraph->langchain-tableau) (0.14.0)
@@ -49,7 +45,7 @@ You can declare your environment variables explicitly, as shown in several cases
 
 For the Data Source that you choose to query, make sure you've updated the VizqlDataApiAccess permission in Tableau to allow the VDS API to access that Data Source via REST. For more information, see [Tableau permissions and capabilities](https://help.tableau.com/current/server/en-us/permissions_capabilities.htm#data-sources).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # langchain package imports
 from langchain_openai import ChatOpenAI
 
@@ -64,7 +60,7 @@ You can declare your environment variables explicitly, as shown in several cases
 
 For the Data Source that you choose, make sure you've updated the VizqlDataApiAccess permission in Tableau to allow the VDS API to access that Data Source via REST. For more information, see [Tableau permissions and capabilities](https://help.tableau.com/current/server/en-us/permissions_capabilities.htm#data-sources).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -107,7 +103,7 @@ This initializer function:
 4. Executes a POST request to VDS.
 5. Formats and returns the results in a structured response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize simple_datasource_qa for querying Tableau Datasources through VDS
 analyze_datasource = initialize_simple_datasource_qa(
     domain=tableau_server,
@@ -130,7 +126,7 @@ tools = [analyze_datasource]
 
 First, we'll initlialize the LLM of our choice. Then, we define an agent using a langgraph agent constructor class and invoke it with a query related to the target data source.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Markdown, display
 
 model = ChatOpenAI(model="gpt-5.5", temperature=0)
@@ -154,12 +150,8 @@ messages
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tableau.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tableau.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

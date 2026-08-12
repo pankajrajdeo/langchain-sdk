@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Upstage integrations
 
 > Integrate with Upstage using LangChain Python.
@@ -16,10 +12,10 @@
 
 | API                | Description                                 | Import                                                     | Example usage                                                   |
 | ------------------ | ------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------- |
-| Chat               | Build assistants using Solar Chat           | `from langchain_upstage import ChatUpstage`                | [Go](/oss/python/integrations/chat/upstage)                     |
-| Text Embedding     | Embed strings to vectors                    | `from langchain_upstage import UpstageEmbeddings`          | [Go](/oss/python/integrations/embeddings/upstage)               |
-| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck`   | [Go](/oss/python/integrations/tools/upstage_groundedness_check) |
-| Document Parse     | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](/oss/python/integrations/document_loaders/upstage)         |
+| Chat               | Build assistants using Solar Chat           | `from langchain_upstage import ChatUpstage`                | [Go](https://docs.langchain.com/oss/python/integrations/chat/upstage)                     |
+| Text Embedding     | Embed strings to vectors                    | `from langchain_upstage import UpstageEmbeddings`          | [Go](https://docs.langchain.com/oss/python/integrations/embeddings/upstage)               |
+| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck`   | [Go](https://docs.langchain.com/oss/python/integrations/tools/upstage_groundedness_check) |
+| Document Parse     | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](https://docs.langchain.com/oss/python/integrations/document_loaders/upstage)         |
 
 See [documentations](https://console.upstage.ai/docs/getting-started/overview) for more details about the models and features.
 
@@ -27,13 +23,13 @@ See [documentations](https://console.upstage.ai/docs/getting-started/overview) f
 
 Install `langchain-upstage` package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-core langchain-upstage
 ```
 
 Get [API Keys](https://console.upstage.ai) and set environment variable `UPSTAGE_API_KEY`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
@@ -43,9 +39,9 @@ os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
 
 ### Solar LLM
 
-See [a usage example](/oss/python/integrations/chat/upstage).
+See [a usage example](https://docs.langchain.com/oss/python/integrations/chat/upstage).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_upstage import ChatUpstage
 
 chat = ChatUpstage()
@@ -55,9 +51,9 @@ print(response)
 
 ## Embedding models
 
-See [a usage example](/oss/python/integrations/embeddings/upstage).
+See [a usage example](https://docs.langchain.com/oss/python/integrations/embeddings/upstage).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_upstage import UpstageEmbeddings
 
 embeddings = UpstageEmbeddings(model="solar-embedding-1-large")
@@ -74,9 +70,9 @@ print(query_result)
 
 ### Document parse
 
-See [a usage example](/oss/python/integrations/document_loaders/upstage).
+See [a usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/upstage).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_upstage import UpstageDocumentParseLoader
 
 file_path = "/PATH/TO/YOUR/FILE.pdf"
@@ -93,9 +89,9 @@ for doc in docs[:3]:
 
 ### Groundedness check
 
-See [a usage example](/oss/python/integrations/tools/upstage_groundedness_check).
+See [a usage example](https://docs.langchain.com/oss/python/integrations/tools/upstage_groundedness_check).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_upstage import UpstageGroundednessCheck
 
 groundedness_check = UpstageGroundednessCheck()
@@ -110,12 +106,8 @@ print(response)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

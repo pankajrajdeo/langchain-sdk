@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # StripeAgentToolkit integration
 
 > Integrate with the StripeAgentToolkit tool using LangChain Python.
@@ -24,7 +20,7 @@ This externally-managed package is hosted out of the `stripe-agent-toolkit` proj
 
 You can install it, along with langgraph for the following examples, with `pip`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install --quiet -U langgraph stripe-agent-toolkit
 ```
 
@@ -32,7 +28,7 @@ pip install --quiet -U langgraph stripe-agent-toolkit
 
 In addition to installing the package, you will need to configure the integration with your Stripe account's secret key, which is available in your [Stripe Dashboard](https://dashboard.stripe.com/account/apikeys).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -42,7 +38,7 @@ if not os.environ.get("STRIPE_SECRET_KEY"):
 
 It's also helpful (but not needed) to set up [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-python-integrations-tools-stripe) for best-in-class observability:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
@@ -51,7 +47,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Here we show how to create an instance of the Stripe Toolkit
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from stripe_agent_toolkit.langchain.toolkit import StripeAgentToolkit
 
 stripe_agent_toolkit = StripeAgentToolkit(
@@ -70,10 +66,9 @@ stripe_agent_toolkit = StripeAgentToolkit(
 
 Here's how to use the toolkit to create a basic agent in langgraph:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_anthropic import ChatAnthropic
 from langchain.agents import create_agent
-
 
 model = ChatAnthropic(
     model="claude-sonnet-4-6",
@@ -96,12 +91,8 @@ print(output_state["messages"][-1].content)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/stripe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/stripe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

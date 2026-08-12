@@ -1,18 +1,14 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Log, trace, and monitor Portkey integrations
 
 > Integrate with Log, trace, and monitor Portkey using LangChain Python.
 
-When building apps or agents using LangChain, you end up making multiple API calls to fulfill a single user request. However, these requests are not chained when you want to analyse them. With [**Portkey**](/oss/python/integrations/providers/portkey/), all the embeddings, completions, and other requests from a single user request will get logged and traced to a common ID, enabling you to gain full visibility of user interactions.
+When building apps or agents using LangChain, you end up making multiple API calls to fulfill a single user request. However, these requests are not chained when you want to analyse them. With [**Portkey**](https://docs.langchain.com/oss/python/integrations/providers/portkey/), all the embeddings, completions, and other requests from a single user request will get logged and traced to a common ID, enabling you to gain full visibility of user interactions.
 
 This notebook serves as a step-by-step guide on how to log, trace, and monitor LangChain LLM calls using `Portkey` in your LangChain app.
 
 First, let's import Portkey, OpenAI, and Agent tools
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from langchain.agents import AgentExecutor, create_openai_tools_agent
@@ -22,7 +18,7 @@ from portkey_ai import PORTKEY_GATEWAY_URL, createHeaders
 
 Paste your OpenAI API key below. [(You can find it here)](https://platform.openai.com/account/api-keys)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["OPENAI_API_KEY"] = "..."
 ```
 
@@ -32,7 +28,7 @@ os.environ["OPENAI_API_KEY"] = "..."
 2. On your [dashboard](https://app.portkey.ai/), click on the profile icon on the bottom left, then click on "Copy API Key"
 3. Paste it below
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 PORTKEY_API_KEY = "..."  # Paste your Portkey API Key here
 ```
 
@@ -41,13 +37,13 @@ PORTKEY_API_KEY = "..."  # Paste your Portkey API Key here
 1. Set the trace id for your request below
 2. The Trace ID can be common for all API calls originating from a single request
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 TRACE_ID = "uuid-trace-id"  # Set trace id here
 ```
 
 ## Generate portkey headers
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 portkey_headers = createHeaders(
     api_key=PORTKEY_API_KEY, provider="openai", trace_id=TRACE_ID
 )
@@ -55,31 +51,28 @@ portkey_headers = createHeaders(
 
 Define the prompts and the tools to use
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic import hub
 from langchain.tools import tool
 
 prompt = hub.pull("hwchase17/openai-tools-agent")
-
 
 @tool
 def multiply(first_int: int, second_int: int) -> int:
     """Multiply two integers together."""
     return first_int * second_int
 
-
 @tool
 def exponentiate(base: int, exponent: int) -> int:
     "Exponentiate the base to the exponent power."
     return base**exponent
-
 
 tools = [multiply, exponentiate]
 ```
 
 Run your agent as usual. The **only** change is that we will **include the above headers** in the request now.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenAI(
     base_url=PORTKEY_GATEWAY_URL, default_headers=portkey_headers, temperature=0
 )
@@ -97,26 +90,23 @@ agent_executor.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new AgentExecutor chain...
 
 Invoking: `exponentiate` with `{'base': 3, 'exponent': 5}`
 
-
 243
 Invoking: `multiply` with `{'first_int': 243, 'second_int': 36}`
 
-
 8748
 Invoking: `exponentiate` with `{'base': 8748, 'exponent': 2}`
-
 
 76527504The result of taking 3 to the fifth power, multiplying it by 36, and then squaring the result is 76,527,504.
 
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input': 'Take 3 to the fifth power and multiply that by thirty six, then square the result',
  'output': 'The result of taking 3 to the fifth power, multiplying it by 36, and then squaring the result is 76,527,504.'}
 ```
@@ -155,12 +145,8 @@ Track and audit each user interaction in high detail with predefined tags. [Docs
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/logging_tracing_portkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/logging_tracing_portkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

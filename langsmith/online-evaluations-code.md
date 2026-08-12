@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Set up online code evaluators
-
-[Online evaluations](/langsmith/evaluation-concepts#online-evaluations) provide real-time feedback on your production [traces](/langsmith/observability-concepts#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-code)
+[Online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations) provide real-time feedback on your production [traces](https://docs.langchain.com/langsmith/observability-concepts#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
 
 Code evaluators allow you to write an evaluator in Python or JavaScript directly in LangSmith. Often used for validating structure or statistical properties of your data.
 
-<Note>When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](/langsmith/usage-and-billing#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. </Note>
+When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
 
 ## View online evaluators
 
@@ -28,15 +24,14 @@ Provide a name for your evaluator. This name will be used when referencing the e
 
 For example, you may want to apply specific evaluators based on:
 
-* Runs where a [user left feedback](/langsmith/attach-user-feedback) indicating the response was unsatisfactory.
-* Runs that invoke a specific tool call. See [filtering for tool calls](/langsmith/filter-traces-in-application#example-filtering-for-tool-calls) for more information.
-* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](/langsmith/add-metadata-tags) for more information.
+* Runs where a [user left feedback](https://docs.langchain.com/langsmith/attach-user-feedback) indicating the response was unsatisfactory.
+* Runs that invoke a specific tool call. See [filtering for tool calls](https://docs.langchain.com/langsmith/filter-traces-in-application#example-filtering-for-tool-calls) for more information.
+* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](https://docs.langchain.com/langsmith/add-metadata-tags) for more information.
 
-Filters on evaluators work the same way as when you're filtering traces in a project. For more information on filters, you can refer to [Filter traces](/langsmith/filter-traces-in-application).
+Filters on evaluators work the same way as when you're filtering traces in a project. For more information on filters, you can refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
 
-<Tip>
-  It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.
-</Tip>
+> [!TIP]
+> It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.
 
 ### 4. (Optional) Configure a sampling rate
 
@@ -46,7 +41,7 @@ Configure a sampling rate to control the percentage of filtered runs that trigge
 
 Apply rule to past runs by toggling the **Apply to past runs** and entering a "Backfill from" date. This is only possible upon rule creation. Note: the backfill is processed as a background job, so you will not see the results immediately.
 
-In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](/langsmith/rules#view-logs-for-your-automations).
+In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](https://docs.langchain.com/langsmith/rules#view-logs-for-your-automations).
 
 * Add an evaluator name
 * Optionally filter runs that you would like to apply your evaluator on or configure a sampling rate.
@@ -54,21 +49,20 @@ In order to track progress of the backfill, you can view logs for your evaluator
 
 ## Write your evaluation function
 
-<Note>
-  **Code evaluators restrictions.**
-
-  **Allowed Libraries**: You can import all standard library functions, as well as the following public packages:
-
-  ```
-  numpy (v2.2.2): "numpy"
-  pandas (v1.5.2): "pandas"
-  jsonschema (v4.21.1): "jsonschema"
-  scipy (v1.14.1): "scipy"
-  sklearn (v1.26.4): "scikit-learn"
-  ```
-
-  **Network Access**: You cannot access the internet from a code evaluator.
-</Note>
+> [!NOTE]
+> **Code evaluators restrictions.**
+>
+> **Allowed Libraries**: You can import all standard library functions, as well as the following public packages:
+>
+> ```
+> numpy (v2.2.2): "numpy"
+> pandas (v1.5.2): "pandas"
+> jsonschema (v4.21.1): "jsonschema"
+> scipy (v1.14.1): "scipy"
+> sklearn (v1.26.4): "scikit-learn"
+> ```
+>
+> **Network Access**: You cannot access the internet from a code evaluator.
 
 Code evaluators must be written inline. We recommend testing locally before setting up your code evaluator in LangSmith.
 
@@ -76,7 +70,7 @@ In the UI, you will find a panel that lets you write your code inline, with some
 
 Code evaluators take in one argument:
 
-* A `Run` ([reference](/langsmith/run-data-format)). This represents the sampled run to evaluate.
+* A `Run` ([reference](https://docs.langchain.com/langsmith/run-data-format)). This represents the sampled run to evaluate.
 
 They return a single value:
 
@@ -84,57 +78,55 @@ They return a single value:
 
 The following example shows a function that validates that each run in the experiment has a known JSON field:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import json
+```python
+import json
 
-  def perform_eval(run):
-    output_to_validate = run['outputs']
-    is_valid_json = 0
+def perform_eval(run):
+  output_to_validate = run['outputs']
+  is_valid_json = 0
 
-    # assert you can serialize/deserialize as json
-    try:
-      json.loads(json.dumps(output_to_validate))
-    except Exception as e:
-      return { "formatted": False }
+  # assert you can serialize/deserialize as json
+  try:
+    json.loads(json.dumps(output_to_validate))
+  except Exception as e:
+    return { "formatted": False }
 
-    # assert output facts exist
-    if "facts" not in output_to_validate:
-      return { "formatted": False }
+  # assert output facts exist
+  if "facts" not in output_to_validate:
+    return { "formatted": False }
 
-    # assert required fields exist
-    if "years_mentioned" not in output_to_validate["facts"]:
-      return { "formatted": False }
+  # assert required fields exist
+  if "years_mentioned" not in output_to_validate["facts"]:
+    return { "formatted": False }
 
-    return {"formatted": True}
-  ```
+  return {"formatted": True}
+```
 
-  ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  function perform_eval(run) {
-      const outputToValidate = run.outputs;
+```javascript
+function perform_eval(run) {
+    const outputToValidate = run.outputs;
 
-      // Assert you can serialize/deserialize as json
-      try {
-          JSON.stringify(outputToValidate);
-          JSON.parse(JSON.stringify(outputToValidate));
-      } catch (e) {
-          return { "formatted": false };
-      }
+    // Assert you can serialize/deserialize as json
+    try {
+        JSON.stringify(outputToValidate);
+        JSON.parse(JSON.stringify(outputToValidate));
+    } catch (e) {
+        return { "formatted": false };
+    }
 
-      // Assert output facts exist
-      if (!("facts" in outputToValidate)) {
-          return { "formatted": false };
-      }
+    // Assert output facts exist
+    if (!("facts" in outputToValidate)) {
+        return { "formatted": false };
+    }
 
-      // Assert required fields exist
-      if (!outputToValidate["facts"].hasOwnProperty("years_mentioned")) {
-          return { "formatted": false };
-      }
+    // Assert required fields exist
+    if (!outputToValidate["facts"].hasOwnProperty("years_mentioned")) {
+        return { "formatted": false };
+    }
 
-      return { "formatted": true };
-  }
-  ```
-</CodeGroup>
+    return { "formatted": true };
+}
+```
 
 ## Test and save your evaluation function
 
@@ -146,12 +138,8 @@ If you prefer a video tutorial, check out the [Online Evaluations video](https:/
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/online-evaluations-code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

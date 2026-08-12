@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MODEL_NOT_FOUND
 
-<Note>
-  Currently only used in `langchainjs` (JavaScript/TypeScript).
-</Note>
+> [!NOTE]
+> Currently only used in `langchainjs` (JavaScript/TypeScript).
 
 The model name you have specified is not acknowledged by your provider.
 
@@ -21,12 +16,8 @@ The error typically stems from either a typo in the model name string itself or 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_NOT_FOUND.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_NOT_FOUND.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

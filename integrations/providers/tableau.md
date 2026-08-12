@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tableau integrations
 
 > Integrate with Tableau using LangChain Python.
@@ -11,28 +7,22 @@ see and understand data.
 
 ## Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-tableau
-  ```
+```bash
+pip install langchain-tableau
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-tableau
-  ```
-</CodeGroup>
+```bash
+uv add langchain-tableau
+```
 
 ## Tools
 
-See [Tableau tools documentation](/oss/python/integrations/tools/tableau) for available tools.
+See [Tableau tools documentation](https://docs.langchain.com/oss/python/integrations/tools/tableau) for available tools.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tableau.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tableau.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

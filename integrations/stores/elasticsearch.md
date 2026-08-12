@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ElasticsearchEmbeddingsCache integration
 
 > Integrate with the ElasticsearchEmbeddingsCache store using LangChain Python.
 
-This will help you get started with Elasticsearch [key-value stores](/oss/python/integrations/stores). For detailed documentation of all `ElasticsearchEmbeddingsCache` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache).
+This will help you get started with Elasticsearch [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `ElasticsearchEmbeddingsCache` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache).
 
 ## Overview
 
@@ -26,7 +22,7 @@ To create a `ElasticsearchEmbeddingsCache` byte store, you'll need an Elasticsea
 
 The LangChain `ElasticsearchEmbeddingsCache` integration lives in the `langchain-elasticsearch` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-elasticsearch
 ```
 
@@ -34,7 +30,7 @@ pip install -qU langchain-elasticsearch
 
 Now we can instantiate our byte store:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchEmbeddingsCache
 
 # Example config for a locally running Elasticsearch instance
@@ -55,7 +51,7 @@ kv_store = ElasticsearchEmbeddingsCache(
 
 You can set data under keys like this using the `mset` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mset(
     [
         ["key1", b"value1"],
@@ -71,13 +67,13 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [b'value1', b'value2']
 ```
 
 And you can delete data using the `mdelete` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mdelete(
     [
         "key1",
@@ -93,21 +89,20 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [None, None]
 ```
 
 ## Use as an embeddings cache
 
-Like other `ByteStores`, you can use an `ElasticsearchEmbeddingsCache` instance for [persistent caching in document ingestion](/oss/python/integrations/embeddings#caching) for RAG.
+Like other `ByteStores`, you can use an `ElasticsearchEmbeddingsCache` instance for [persistent caching in document ingestion](https://docs.langchain.com/oss/python/integrations/embeddings#caching) for RAG.
 
 However, cached vectors won't be searchable by default. The developer can customize the building of the Elasticsearch document in order to add indexed vector field.
 
 This can be done by subclassing and overriding methods:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Any, Dict, List
-
 
 class SearchableElasticsearchStore(ElasticsearchEmbeddingsCache):
     @property
@@ -137,12 +132,8 @@ For detailed documentation of all `ElasticsearchEmbeddingsCache` features and co
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

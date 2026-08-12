@@ -1,91 +1,77 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to run multiple assistants on the same thread
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/same-thread)
 In LangSmith Deployment, a thread is not explicitly associated with a particular assistant.
 This means that you can run multiple assistants on the same thread, which allows a different assistant to continue from an initial assistant's progress.
 
 In this example, we will create two assistants and then call them both on the same thread.
-You'll see that the second assistant will respond using information from the [checkpoint](/oss/python/langgraph/checkpointers#checkpoints) generated in the thread by the first assistant as context.
+You'll see that the second assistant will respond using information from the [checkpoint](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) generated in the thread by the first assistant as context.
 
 ## Setup
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langgraph_sdk import get_client
+#### Python
+```python
+from langgraph_sdk import get_client
 
-    client = get_client(url=<DEPLOYMENT_URL>)
+client = get_client(url=<DEPLOYMENT_URL>)
 
-    openai_assistant = await client.assistants.create(
-        graph_id="agent", config={"configurable": {"model_name": "openai"}}
-    )
+openai_assistant = await client.assistants.create(
+    graph_id="agent", config={"configurable": {"model_name": "openai"}}
+)
 
-    # There should always be a default assistant with no configuration
-    assistants = await client.assistants.search()
-    default_assistant = [a for a in assistants if not a["config"]][0]
-    ```
-  </Tab>
+# There should always be a default assistant with no configuration
+assistants = await client.assistants.search()
+default_assistant = [a for a in assistants if not a["config"]][0]
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import { Client } from "@langchain/langgraph-sdk";
+#### Javascript
+```js
+import { Client } from "@langchain/langgraph-sdk";
 
-    const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
 
-    const openAIAssistant = await client.assistants.create(
-      { graphId: "agent", config: {"configurable": {"model_name": "openai"}}}
-    );
+const openAIAssistant = await client.assistants.create(
+  { graphId: "agent", config: {"configurable": {"model_name": "openai"}}}
+);
 
-    const assistants = await client.assistants.search();
-    const defaultAssistant = assistants.find(a => !a.config);
-    ```
-  </Tab>
+const assistants = await client.assistants.search();
+const defaultAssistant = assistants.find(a => !a.config);
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/assistants \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "graph_id": "agent",
-            "config": { "configurable": { "model_name": "openai" } }
-        }' && \
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/assistants/search \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "limit": 10,
-            "offset": 0
-        }' | jq -c 'map(select(.config == null or .config == {})) | .[0]'
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/assistants \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "graph_id": "agent",
+        "config": { "configurable": { "model_name": "openai" } }
+    }' && \
+curl --request POST \
+    --url <DEPLOYMENT_URL>/assistants/search \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "limit": 10,
+        "offset": 0
+    }' | jq -c 'map(select(.config == null or .config == {})) | .[0]'
+```
 
 We can see that these assistants are different:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    print(openai_assistant)
-    ```
-  </Tab>
+#### Python
+```python
+print(openai_assistant)
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    console.log(openAIAssistant);
-    ```
-  </Tab>
+#### Javascript
+```js
+console.log(openAIAssistant);
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request GET \
-        --url <DEPLOYMENT_URL>/assistants/<OPENAI_ASSISTANT_ID>
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request GET \
+    --url <DEPLOYMENT_URL>/assistants/<OPENAI_ASSISTANT_ID>
+```
 
 Output:
 
@@ -104,26 +90,21 @@ Output:
 }
 ```
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    print(default_assistant)
-    ```
-  </Tab>
+#### Python
+```python
+print(default_assistant)
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    console.log(defaultAssistant);
-    ```
-  </Tab>
+#### Javascript
+```js
+console.log(defaultAssistant);
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request GET \
-        --url <DEPLOYMENT_URL>/assistants/<DEFAULT_ASSISTANT_ID>
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request GET \
+    --url <DEPLOYMENT_URL>/assistants/<DEFAULT_ASSISTANT_ID>
+```
 
 Output:
 
@@ -146,90 +127,85 @@ Output:
 
 We can now run the OpenAI assistant on the thread first.
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    thread = await client.threads.create()
-    input = {"messages": [{"role": "user", "content": "who made you?"}]}
-    async for event in client.runs.stream(
-        thread["thread_id"],
-        openai_assistant["assistant_id"],
-        input=input,
-        stream_mode="updates",
-    ):
-        print(f"Receiving event of type: {event.event}")
-        print(event.data)
-        print("\n\n")
-    ```
-  </Tab>
+#### Python
+```python
+thread = await client.threads.create()
+input = {"messages": [{"role": "user", "content": "who made you?"}]}
+async for event in client.runs.stream(
+    thread["thread_id"],
+    openai_assistant["assistant_id"],
+    input=input,
+    stream_mode="updates",
+):
+    print(f"Receiving event of type: {event.event}")
+    print(event.data)
+    print("\n\n")
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    const thread = await client.threads.create();
-    let input =  {"messages": [{"role": "user", "content": "who made you?"}]}
+#### Javascript
+```js
+const thread = await client.threads.create();
+let input =  {"messages": [{"role": "user", "content": "who made you?"}]}
 
-    const streamResponse = client.runs.stream(
-      thread["thread_id"],
-      openAIAssistant["assistant_id"],
-      {
-        input,
-        streamMode: "updates"
-      }
-    );
-    for await (const event of streamResponse) {
-      console.log(`Receiving event of type: ${event.event}`);
-      console.log(event.data);
-      console.log("\n\n");
-    }
-    ```
-  </Tab>
+const streamResponse = client.runs.stream(
+  thread["thread_id"],
+  openAIAssistant["assistant_id"],
+  {
+    input,
+    streamMode: "updates"
+  }
+);
+for await (const event of streamResponse) {
+  console.log(`Receiving event of type: ${event.event}`);
+  console.log(event.data);
+  console.log("\n\n");
+}
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    thread_id=$(curl --request POST \
-        --url <DEPLOYMENT_URL>/threads \
-        --header 'Content-Type: application/json' \
-        --data '{}' | jq -r '.thread_id') && \
-    curl --request POST \
-        --url "<DEPLOYMENT_URL>/threads/${thread_id}/runs/stream" \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "assistant_id": <OPENAI_ASSISTANT_ID>,
-            "input": {
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": "who made you?"
-                    }
-                ]
-            },
-            "stream_mode": [
-                "updates"
+#### cURL
+```bash
+thread_id=$(curl --request POST \
+    --url <DEPLOYMENT_URL>/threads \
+    --header 'Content-Type: application/json' \
+    --data '{}' | jq -r '.thread_id') && \
+curl --request POST \
+    --url "<DEPLOYMENT_URL>/threads/${thread_id}/runs/stream" \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "assistant_id": <OPENAI_ASSISTANT_ID>,
+        "input": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "who made you?"
+                }
             ]
-        }' | \
-        sed 's/\r$//' | \
-        awk '
-        /^event:/ {
-            if (data_content != "") {
-                print data_content "\n"
-            }
-            sub(/^event: /, "Receiving event of type: ", $0)
-            printf "%s...\n", $0
-            data_content = ""
+        },
+        "stream_mode": [
+            "updates"
+        ]
+    }' | \
+    sed 's/\r$//' | \
+    awk '
+    /^event:/ {
+        if (data_content != "") {
+            print data_content "\n"
         }
-        /^data:/ {
-            sub(/^data: /, "", $0)
-            data_content = $0
+        sub(/^event: /, "Receiving event of type: ", $0)
+        printf "%s...\n", $0
+        data_content = ""
+    }
+    /^data:/ {
+        sub(/^data: /, "", $0)
+        data_content = $0
+    }
+    END {
+        if (data_content != "") {
+            print data_content "\n\n"
         }
-        END {
-            if (data_content != "") {
-                print data_content "\n\n"
-            }
-        }
-    '
-    ```
-  </Tab>
-</Tabs>
+    }
+'
+```
 
 Output:
 
@@ -245,84 +221,79 @@ Receiving event of type: updates
 
 Now, we can run it on the default assistant and see that this second assistant is aware of the initial question, and can answer the question, "and you?":
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    input = {"messages": [{"role": "user", "content": "and you?"}]}
-    async for event in client.runs.stream(
-        thread["thread_id"],
-        default_assistant["assistant_id"],
-        input=input,
-        stream_mode="updates",
-    ):
-        print(f"Receiving event of type: {event.event}")
-        print(event.data)
-        print("\n\n")
-    ```
-  </Tab>
+#### Python
+```python
+input = {"messages": [{"role": "user", "content": "and you?"}]}
+async for event in client.runs.stream(
+    thread["thread_id"],
+    default_assistant["assistant_id"],
+    input=input,
+    stream_mode="updates",
+):
+    print(f"Receiving event of type: {event.event}")
+    print(event.data)
+    print("\n\n")
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    let input =  {"messages": [{"role": "user", "content": "and you?"}]}
+#### Javascript
+```js
+let input =  {"messages": [{"role": "user", "content": "and you?"}]}
 
-    const streamResponse = client.runs.stream(
-      thread["thread_id"],
-      defaultAssistant["assistant_id"],
-      {
-        input,
-        streamMode: "updates"
-      }
-    );
-    for await (const event of streamResponse) {
-      console.log(`Receiving event of type: ${event.event}`);
-      console.log(event.data);
-      console.log("\n\n");
-    }
-    ```
-  </Tab>
+const streamResponse = client.runs.stream(
+  thread["thread_id"],
+  defaultAssistant["assistant_id"],
+  {
+    input,
+    streamMode: "updates"
+  }
+);
+for await (const event of streamResponse) {
+  console.log(`Receiving event of type: ${event.event}`);
+  console.log(event.data);
+  console.log("\n\n");
+}
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "assistant_id": <DEFAULT_ASSISTANT_ID>,
-            "input": {
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": "and you?"
-                    }
-                ]
-            },
-            "stream_mode": [
-                "updates"
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "assistant_id": <DEFAULT_ASSISTANT_ID>,
+        "input": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "and you?"
+                }
             ]
-        }' | \
-        sed 's/\r$//' | \
-        awk '
-        /^event:/ {
-            if (data_content != "") {
-                print data_content "\n"
-            }
-            sub(/^event: /, "Receiving event of type: ", $0)
-            printf "%s...\n", $0
-            data_content = ""
+        },
+        "stream_mode": [
+            "updates"
+        ]
+    }' | \
+    sed 's/\r$//' | \
+    awk '
+    /^event:/ {
+        if (data_content != "") {
+            print data_content "\n"
         }
-        /^data:/ {
-            sub(/^data: /, "", $0)
-            data_content = $0
+        sub(/^event: /, "Receiving event of type: ", $0)
+        printf "%s...\n", $0
+        data_content = ""
+    }
+    /^data:/ {
+        sub(/^data: /, "", $0)
+        data_content = $0
+    }
+    END {
+        if (data_content != "") {
+            print data_content "\n\n"
         }
-        END {
-            if (data_content != "") {
-                print data_content "\n\n"
-            }
-        }
-    '
-    ```
-  </Tab>
-</Tabs>
+    }
+'
+```
 
 Output:
 
@@ -336,12 +307,8 @@ Receiving event of type: updates
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/same-thread.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/same-thread.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

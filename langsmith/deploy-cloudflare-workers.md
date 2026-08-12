@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy with Cloudflare Workers
-
-> Deploy a LangChain deep agent on Cloudflare Workers with Vite, React, Hono, and Durable Objects for SSE replay.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-cloudflare-workers)
+Deploy a LangChain deep agent on Cloudflare Workers with Vite, React, Hono, and Durable Objects for SSE replay.
 
 The following page details an example app that deploys a LangChain **deep agent** on [Cloudflare Workers](https://developers.cloudflare.com/workers/): streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as Worker routes (HTTP + SSE). The React SPA is served from the same Worker via [Workers Assets](https://developers.cloudflare.com/workers/static-assets/). No separate backend process: one Worker serves the SPA and the protocol API.
 
@@ -12,29 +8,24 @@ Source: [`js-cloudflare`](https://github.com/langchain-ai/deployment-cookbook/tr
 
 ## Deploy to Cloudflare
 
-<Steps>
-  <Step title="Install and build">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    cd js-cloudflare
-    cp .env.example .dev.vars   # set OPENAI_API_KEY for local dev
-    pnpm install
-    pnpm build
-    ```
-  </Step>
+### Install and build
+```bash
+cd js-cloudflare
+cp .env.example .dev.vars   # set OPENAI_API_KEY for local dev
+pnpm install
+pnpm build
+```
 
-  <Step title="Configure secrets">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    npx wrangler login
-    npx wrangler secret put OPENAI_API_KEY
-    ```
-  </Step>
+### Configure secrets
+```bash
+npx wrangler login
+npx wrangler secret put OPENAI_API_KEY
+```
 
-  <Step title="Deploy">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pnpm run deploy
-    ```
-  </Step>
-</Steps>
+### Deploy
+```bash
+pnpm run deploy
+```
 
 Wrangler uploads the Vite build (SPA) and the Worker script in one deploy. `nodejs_compat` and `nodejs_compat_populate_process_env` are enabled so LangChain can read `OPENAI_API_KEY` from the environment.
 
@@ -62,7 +53,7 @@ The app exposes the Agent Streaming Protocol under `/api/threads/...`. Routes ar
 
 ### Request flow
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init: {"themeVariables": {"lineColor": "#40668D", "primaryColor": "#E5F4FF", "primaryTextColor": "#030710", "primaryBorderColor": "#006DDD"}}}%%
 flowchart TB
   subgraph browser["Browser (Vite + React)"]
@@ -132,14 +123,14 @@ Out of the box, the agent uses an in-memory `MemorySaver` checkpointer (`worker/
 
 For production:
 
-1. Swap in a [durable checkpointer](/oss/python/langgraph/checkpointers#checkpointer-libraries) (for example Postgres via Hyperdrive, or a custom DO-backed store).
+1. Swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) (for example Postgres via Hyperdrive, or a custom DO-backed store).
 2. Keep per-thread Durable Objects for SSE replay (or persist the event log to DO storage / KV for long-lived reconnects).
 
-For more information, see [checkpointer libraries](/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](/oss/python/langgraph/add-memory).
+For more information, see [checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](https://docs.langchain.com/oss/python/langgraph/add-memory).
 
 ## Local development
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp .env.example .dev.vars   # set OPENAI_API_KEY
 pnpm install
 pnpm dev
@@ -147,7 +138,7 @@ pnpm dev
 
 Open [http://localhost:5173](http://localhost:5173). The Cloudflare Vite plugin runs your Worker in the Workers runtime during dev, so `/api/*` routes behave like production.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pnpm build    # production build (client + worker)
 pnpm preview  # preview the production build locally
 pnpm typecheck
@@ -165,19 +156,15 @@ pnpm typecheck
 
 ## See also
 
-* [Frameworks and platforms overview](/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 * [Durable Objects](https://developers.cloudflare.com/durable-objects/)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-cloudflare-workers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-cloudflare-workers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

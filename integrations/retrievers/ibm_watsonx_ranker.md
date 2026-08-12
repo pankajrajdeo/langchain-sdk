@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # IBM watsonx.ai integration
 
 > Integrate with the IBM watsonx.ai retriever using LangChain Python.
@@ -29,7 +25,7 @@ The cell below defines the credentials required to work with watsonx Foundation 
 **Action:** Provide the IBM Cloud user API key. For details, see
 [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -39,7 +35,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -53,11 +49,10 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-ibm
 !pip install -qU langchain-community
 !pip install -qU langchain_text_splitters
@@ -65,7 +60,7 @@ The LangChain IBM integration lives in the `langchain-ibm` package:
 
 For experiment purpose please also install `faiss` or `faiss-cpu` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU  faiss
 
 # OR  (depending on Python version)
@@ -75,7 +70,7 @@ For experiment purpose please also install `faiss` or `faiss-cpu` package:
 
 Helper function for printing docs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def pretty_print_docs(docs):
     print(
         f"\n{'-' * 100}\n".join(
@@ -90,7 +85,7 @@ def pretty_print_docs(docs):
 
 Let's start by initializing a simple vector store retriever and storing the 2023 State of the Union speech (in chunks). We can set up the retriever to retrieve a high number (20) of docs.
 
-Initialize the `WatsonxEmbeddings`. For more details see [WatsonxEmbeddings](/oss/python/integrations/embeddings/ibm_watsonx).
+Initialize the `WatsonxEmbeddings`. For more details see [WatsonxEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx).
 
 **Note**:
 
@@ -101,7 +96,7 @@ In this example, we’ll use the `project_id` and Dallas url.
 
 You need to specify `model_id` that will be used for embedding. All available models you can find in [documentation](https://ibm.github.io/watsonx-ai-python-sdk/fm_embeddings.html#EmbeddingModels).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import WatsonxEmbeddings
 
 wx_embeddings = WatsonxEmbeddings(
@@ -111,11 +106,10 @@ wx_embeddings = WatsonxEmbeddings(
 )
 ```
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -132,7 +126,7 @@ docs = retriever.invoke(query)
 pretty_print_docs(docs[:5])  # Printing the first 5 documents
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
@@ -181,7 +175,7 @@ Tonight, I can announce that the United States has worked with 30 other countrie
 Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll add an `WatsonxRerank`, uses the watsonx rerank endpoint to rerank the returned results.
 Do note that it is mandatory to specify the model name in WatsonxRerank!
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import WatsonxRerank
 
 wx_rerank = WatsonxRerank(
@@ -191,7 +185,7 @@ wx_rerank = WatsonxRerank(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.retrievers.contextual_compression import ContextualCompressionRetriever
 
 compression_retriever = ContextualCompressionRetriever(
@@ -204,7 +198,7 @@ compressed_docs = compression_retriever.invoke(
 pretty_print_docs(compressed_docs[:5])  # Printing the first 5 compressed documents
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
@@ -250,9 +244,9 @@ In this struggle as President Zelenskyy said in his speech to the European Parli
 
 You can of course use this retriever within a QA pipeline
 
-Initialize the `ChatWatsonx`. For more details see [ChatWatsonx](/oss/python/integrations/chat/ibm_watsonx).
+Initialize the `ChatWatsonx`. For more details see [ChatWatsonx](https://docs.langchain.com/oss/python/integrations/chat/ibm_watsonx).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 wx_chat = ChatWatsonx(
@@ -262,17 +256,17 @@ wx_chat = ChatWatsonx(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import RetrievalQA
 
 chain = RetrievalQA.from_chain_type(llm=wx_chat, retriever=compression_retriever)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke(query)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'What did the president say about Ketanji Brown Jackson',
  'result': 'The President said that he had nominated Circuit Court of Appeals Judge Ketanji Brown Jackson to serve on the United States Supreme Court, and described her as "one of our nation\'s top legal minds" who will continue Justice Breyer\'s legacy of excellence.'}
 ```
@@ -285,12 +279,8 @@ For detailed documentation of all `WatsonxRerank` features and configurations he
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ibm_watsonx_ranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/ibm_watsonx_ranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

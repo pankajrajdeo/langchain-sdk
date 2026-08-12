@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Hugging Face local pipelines integration
 
 > Integrate with the Hugging Face local pipelines LLM using LangChain Python.
@@ -14,7 +10,7 @@ These can be called from LangChain either through this local pipeline wrapper or
 
 To use, you should have the `transformers` python [package installed](https://pypi.org/project/transformers/), as well as [pytorch](https://pytorch.org/get-started/locally/). You can also install `xformer` for a more memory-efficient attention implementation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU transformers
 ```
 
@@ -22,7 +18,7 @@ pip install -qU transformers
 
 Models can be loaded by specifying the model parameters using the `from_model_id` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface.llms import HuggingFacePipeline
 
 hf = HuggingFacePipeline.from_model_id(
@@ -34,7 +30,7 @@ hf = HuggingFacePipeline.from_model_id(
 
 They can also be loaded by passing in an existing `transformers` pipeline directly
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface.llms import HuggingFacePipeline
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 
@@ -50,7 +46,7 @@ hf = HuggingFacePipeline(pipeline=pipe)
 With the model loaded into memory, you can compose it with a prompt to
 form a chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 template = """Question: {question}
@@ -67,7 +63,7 @@ print(chain.invoke({"question": question}))
 
 To get response without prompt, you can bind `skip_prompt=True` with LLM.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = prompt | hf.bind(skip_prompt=True)
 
 question = "What is electroencephalography?"
@@ -77,7 +73,7 @@ print(chain.invoke({"question": question}))
 
 Streaming response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for chunk in chain.stream(question):
     print(chunk, end="", flush=True)
 ```
@@ -91,7 +87,7 @@ If you have multiple-GPUs and/or the model is too large for a single GPU, you ca
 
 *Note*: both `device` and `device_map` should not be specified together and can lead to unexpected behavior.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 gpu_llm = HuggingFacePipeline.from_model_id(
     model_id="gpt2",
     task="text-generation",
@@ -110,7 +106,7 @@ print(gpu_chain.invoke({"question": question}))
 
 If running on a device with GPU, you can also run inference on the GPU in batch mode.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 gpu_llm = HuggingFacePipeline.from_model_id(
     model_id="bigscience/bloom-1b7",
     task="text-generation",
@@ -136,11 +132,11 @@ To deploy a model with OpenVINO, you can specify the `backend="openvino"` parame
 
 If you have an Intel GPU, you can specify `model_kwargs={"device": "GPU"}` to run inference on it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U-strategy eager "optimum[openvino,nncf]" --quiet
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ov_config = {"PERFORMANCE_HINT": "LATENCY", "NUM_STREAMS": "1", "CACHE_DIR": ""}
 
 ov_llm = HuggingFacePipeline.from_model_id(
@@ -162,19 +158,19 @@ print(ov_chain.invoke({"question": question}))
 
 It is possible to [export your model](https://github.com/huggingface/optimum-intel?tab=readme-ov-file#export) to the OpenVINO IR format with the CLI, and load the model from local folder.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !optimum-cli export openvino --model gpt2 ov_model_dir
 ```
 
 It is recommended to apply 8 or 4-bit weight quantization to reduce inference latency and model footprint using `--weight-format`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !optimum-cli export openvino --model gpt2  --weight-format int8 ov_model_dir # for 8-bit quantization
 
 !optimum-cli export openvino --model gpt2  --weight-format int4 ov_model_dir # for 4-bit quantization
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ov_llm = HuggingFacePipeline.from_model_id(
     model_id="ov_model_dir",
     task="text-generation",
@@ -192,7 +188,7 @@ print(ov_chain.invoke({"question": question}))
 
 You can get additional inference speed improvement with Dynamic Quantization of activations and KV-cache quantization. These options can be enabled with `ov_config` as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ov_config = {
     "KV_CACHE_PRECISION": "u8",
     "DYNAMIC_QUANTIZATION_GROUP_SIZE": "32",
@@ -202,16 +198,12 @@ ov_config = {
 }
 ```
 
-For more information refer to [OpenVINO LLM guide](https://docs.openvino.ai/2024/learn-openvino/llm_inference_guide.html) and [OpenVINO Local Pipelines notebook](/oss/python/integrations/llms/openvino/).
+For more information refer to [OpenVINO LLM guide](https://docs.openvino.ai/2024/learn-openvino/llm_inference_guide.html) and [OpenVINO Local Pipelines notebook](https://docs.langchain.com/oss/python/integrations/llms/openvino/).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/huggingface_pipelines.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/huggingface_pipelines.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

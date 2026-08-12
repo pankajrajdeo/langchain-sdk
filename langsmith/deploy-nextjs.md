@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy with Next.js
-
-> Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-nextjs)
+Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history.
 
 The following page details an example app that deploys a LangChain **deep agent** entirely inside a [Next.js App](https://nextjs.org/) Router project: streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as Next.js Route Handlers (HTTP + SSE). No separate backend process.
 
@@ -12,23 +8,18 @@ Source: [`js-next`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 
 ## Deploy to Vercel
 
-<Steps>
-  <Step title="Import the repository">
-    Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
+### Import the repository
+Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-    <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents" target="_blank" rel="noopener noreferrer">
-      <img src="https://vercel.com/button" alt="Deploy with Vercel" />
-    </a>
-  </Step>
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents">
+> **Image:** [Deploy with Vercel](https://docs.langchain.com/langsmith/deploy-nextjs)
+</a>
 
-  <Step title="Configure the project">
-    Set **Root Directory** to `js-next` and add `OPENAI_API_KEY` in project settings.
-  </Step>
+### Configure the project
+Set **Root Directory** to `js-next` and add `OPENAI_API_KEY` in project settings.
 
-  <Step title="Deploy">
-    Deploy the project. Route handlers already set `runtime = "nodejs"` and the SSE route sets `dynamic = "force-dynamic"`, which Vercel needs for streaming.
-  </Step>
-</Steps>
+### Deploy
+Deploy the project. Route handlers already set `runtime = "nodejs"` and the SSE route sets `dynamic = "force-dynamic"`, which Vercel needs for streaming.
 
 Optionally enable LangSmith tracing by adding the variables from [`.env.example`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-next/.env.example).
 
@@ -60,7 +51,7 @@ This example also implements endpoints for the thread-history sidebar. Omit them
 
 ### Request flow
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init: {"themeVariables": {"lineColor": "#40668D", "primaryColor": "#E5F4FF", "primaryTextColor": "#030710", "primaryBorderColor": "#006DDD"}}}%%
 flowchart TB
   subgraph browser["Browser"]
@@ -108,7 +99,7 @@ flowchart TB
 
 Out of the box, the agent uses an in-memory `MemorySaver` checkpointer (`lib/agent/index.ts`) and a process-local session map (`lib/server/registry.ts`). That works for local dev and single-instance servers, but on Vercel (serverless, multiple replicas) conversation state is **not durable** across cold starts or instances.
 
-For production, swap in a [durable checkpointer](/oss/python/langgraph/checkpointers#checkpointer-libraries):
+For production, swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries):
 
 | Package                                                                                                              | Backend                    |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
@@ -124,7 +115,7 @@ A common choice for Vercel is Redis via the [Marketplace](https://vercel.com/doc
 
 Then wire `@langchain/langgraph-checkpoint-redis`:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { RedisSaver } from "@langchain/langgraph-checkpoint-redis";
 
 const checkpointer = await RedisSaver.fromUrl(process.env.REDIS_URL!);
@@ -134,11 +125,11 @@ Use the connection string your Redis provider exposes (Upstash provides both RES
 
 You will also want a shared session/replay store in `lib/server/registry.ts` so SSE reconnection works across serverless invocations. The checkpointer swap is the main step for durable thread history; the session store is a separate concern for live-run replay.
 
-For more information, see [checkpointer libraries](/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](/oss/python/langgraph/add-memory).
+For more information, see [checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](https://docs.langchain.com/oss/python/langgraph/add-memory).
 
 ## Local development
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp .env.example .env.local   # set OPENAI_API_KEY
 pnpm install
 pnpm dev
@@ -146,7 +137,7 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pnpm build   # production build
 pnpm start   # serve the production build
 pnpm lint    # eslint
@@ -162,19 +153,15 @@ pnpm lint    # eslint
 
 ## See also
 
-* [Frameworks and platforms overview](/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [`react-custom-backend`](https://github.com/langchain-ai/streaming-cookbook) — original Vite + Hono reference for a custom protocol server
 * [Next.js Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nextjs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-nextjs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

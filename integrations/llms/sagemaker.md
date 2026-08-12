@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # SageMakerEndpoint integration
 
 > Integrate with the SageMakerEndpoint LLM using LangChain Python.
@@ -10,7 +6,7 @@
 
 This notebooks goes over how to use an LLM hosted on a `SageMaker endpoint`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip3 install langchain boto3
 ```
 
@@ -28,11 +24,11 @@ You have to set up following required parameters of the `SagemakerEndpoint` call
 
 ## Example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 example_doc_1 = """
 Peter and Elizabeth took a taxi to attend the night party in the city. While in the party, Elizabeth collapsed and was rushed to the hospital.
 Since she was diagnosed with a brain injury, the doctor told Peter to stay besides her until she gets well.
@@ -50,7 +46,7 @@ docs = [
 
 ### for cross account scenarios
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 from typing import Dict
 
@@ -87,7 +83,6 @@ client = boto3.client(
     aws_session_token=response["Credentials"]["SessionToken"],
 )
 
-
 class ContentHandler(LLMContentHandler):
     content_type = "application/json"
     accepts = "application/json"
@@ -99,7 +94,6 @@ class ContentHandler(LLMContentHandler):
     def transform_output(self, output: bytes) -> str:
         response_json = json.loads(output.read().decode("utf-8"))
         return response_json[0]["generated_text"]
-
 
 content_handler = ContentHandler()
 
@@ -116,7 +110,7 @@ chain = load_qa_chain(
 chain({"input_documents": docs, "question": query}, return_only_outputs=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 from typing import Dict
 
@@ -138,7 +132,6 @@ PROMPT = PromptTemplate(
     template=prompt_template, input_variables=["context", "question"]
 )
 
-
 class ContentHandler(LLMContentHandler):
     content_type = "application/json"
     accepts = "application/json"
@@ -150,7 +143,6 @@ class ContentHandler(LLMContentHandler):
     def transform_output(self, output: bytes) -> str:
         response_json = json.loads(output.read().decode("utf-8"))
         return response_json[0]["generated_text"]
-
 
 content_handler = ContentHandler()
 
@@ -170,12 +162,8 @@ chain({"input_documents": docs, "question": query}, return_only_outputs=True)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/sagemaker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/sagemaker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

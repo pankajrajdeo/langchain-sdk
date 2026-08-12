@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google spanner integration
 
 > Integrate with the Google spanner document loader using LangChain Python.
 
 > [Spanner](https://cloud.google.com/spanner) is a highly scalable database that combines unlimited scalability with relational semantics, such as secondary indexes, strong consistency, schemas, and SQL providing 99.999% availability in one easy solution.
 
-This notebook goes over how to use [Spanner](https://cloud.google.com/spanner) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `SpannerLoader` and `SpannerDocumentSaver`.
+This notebook goes over how to use [Spanner](https://cloud.google.com/spanner) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `SpannerLoader` and `SpannerDocumentSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-spanner-python/).
 
@@ -26,7 +22,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please specify an instance id, a database, and a table for demo purpose.
 INSTANCE_ID = "test_instance"  # @param {type:"string"}
 DATABASE_ID = "test_database"  # @param {type:"string"}
@@ -37,13 +33,13 @@ TABLE_NAME = "test_table"  # @param {type:"string"}
 
 The integration lives in its own `langchain-google-spanner` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-spanner langchain
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -61,7 +57,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -77,7 +73,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -93,7 +89,7 @@ Save langchain documents with `SpannerDocumentSaver.add_documents(<documents>)`.
 2. `database_id` - An instance of Spanner database to load data from.
 3. `table_name` - The name of the table within the Spanner database to store langchain documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_spanner import SpannerDocumentSaver
 
@@ -132,7 +128,7 @@ Load langchain documents with `SpannerLoader.load()` or `SpannerLoader.lazy_load
 2. `database_id` - An instance of Spanner database to load data from.
 3. `query` - A query of the database dialect.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_spanner import SpannerLoader
 
 query = f"SELECT * from {TABLE_NAME}"
@@ -151,7 +147,7 @@ for doc in loader.lazy_load():
 
 Delete a list of langchain documents from the table with `SpannerDocumentSaver.delete(<documents>)`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 print("Documents before delete:", docs)
 
@@ -166,7 +162,7 @@ print("Documents after delete:", loader.load())
 
 The client created by default is the default client. To pass in `credentials` and `project` explicitly, a custom client can be passed to the constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import spanner
 from google.oauth2 import service_account
 
@@ -188,7 +184,7 @@ The loader will returns a list of Documents with page content from a specific da
 
 The SpannerLoader assumes there is a column called `page_content`. These defaults can be changed like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_content_loader = SpannerLoader(
     INSTANCE_ID, DATABASE_ID, query, content_columns=["custom_content"]
 )
@@ -200,7 +196,7 @@ If multiple columns are specified, the page content's string format will default
 
 The SpannerLoader assumes there is a metadata column called `langchain_metadata` that store JSON data. The metadata column will be used as the base dictionary. By default, all other column data will be added and may overwrite the original value. These defaults can be changed like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_metadata_loader = SpannerLoader(
     INSTANCE_ID, DATABASE_ID, query, metadata_columns=["column1", "column2"]
 )
@@ -210,7 +206,7 @@ custom_metadata_loader = SpannerLoader(
 
 By default, the loader uses `langchain_metadata` as the base dictionary. This can be customized to select a JSON column to use as base dictionary for the Document's metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_metadata_json_loader = SpannerLoader(
     INSTANCE_ID, DATABASE_ID, query, metadata_json_column="another-json-column"
 )
@@ -220,7 +216,7 @@ custom_metadata_json_loader = SpannerLoader(
 
 The default [staleness](https://cloud.google.com/python/docs/reference/spanner/latest/snapshot-usage#beginning-a-snapshot) is 15s. This can be customized by specifying a weaker bound (which can either be to perform all reads as of a given timestamp), or as of a given duration in the past.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import datetime
 
 timestamp = datetime.datetime.utcnow()
@@ -232,7 +228,7 @@ custom_timestamp_loader = SpannerLoader(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 duration = 20.0
 custom_duration_loader = SpannerLoader(
     INSTANCE_ID,
@@ -246,7 +242,7 @@ custom_duration_loader = SpannerLoader(
 
 By default, the loader will not use [data boost](https://cloud.google.com/spanner/docs/databoost/databoost-overview) since it has additional costs associated, and require additional IAM permissions. However, user can choose to turn it on.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_databoost_loader = SpannerLoader(
     INSTANCE_ID,
     DATABASE_ID,
@@ -259,7 +255,7 @@ custom_databoost_loader = SpannerLoader(
 
 The client created by default is the default client. To pass in `credentials` and `project` explicitly, a custom client can be passed to the constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import spanner
 
 custom_client = spanner.Client(project="my-project", credentials=creds)
@@ -281,7 +277,7 @@ metadata\_columns: These metadata will be saved into specific columns if the key
 
 metadata\_json\_column: This will be the column name for the special JSON column. Defaulted to `langchain_metadata`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_saver = SpannerDocumentSaver(
     INSTANCE_ID,
     DATABASE_ID,
@@ -296,7 +292,7 @@ custom_saver = SpannerDocumentSaver(
 
 The SpannerDocumentSaver will have a `init_document_table` method to create a new table to store docs with custom schema.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_spanner import Column
 
 new_table_name = "my_new_table"
@@ -315,12 +311,8 @@ SpannerDocumentSaver.init_document_table(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_spanner.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_spanner.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

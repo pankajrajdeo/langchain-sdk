@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Aerospike integrations
 
 > Integrate with Aerospike for LangGraph checkpointing and store persistence using LangChain Python.
@@ -22,7 +18,7 @@ To try it, start an Aerospike container, configure the saver and store in a Lang
 
 Install both packages:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U langgraph-store-aerospike langgraph-checkpoint-aerospike
 ```
 
@@ -30,7 +26,7 @@ pip install -U langgraph-store-aerospike langgraph-checkpoint-aerospike
 
 Start Aerospike using the Aerospike Docker Image:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run -d --name aerospike \
   -p 3000-3002:3000-3002 \
   container.aerospike.com/aerospike/aerospike-server
@@ -40,7 +36,7 @@ docker run -d --name aerospike \
 
 Both the store and checkpointer use the same Aerospike connection settings:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AEROSPIKE_HOST=127.0.0.1
 export AEROSPIKE_PORT=3000
 ```
@@ -49,7 +45,7 @@ export AEROSPIKE_PORT=3000
 
 The Aerospike checkpointer persists LangGraph execution state and enables resume from any checkpoint.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import aerospike
 from langgraph.checkpoint.aerospike import AerospikeSaver
 
@@ -78,7 +74,7 @@ compiled.invoke(
 
 The Aerospike store is used for long-lived agent data such as user profiles, extracted entities, and cached tool outputs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import aerospike
 from langgraph.store.aerospike import AerospikeStore
 from langgraph.store.base import PutOp, GetOp, SearchOp
@@ -133,12 +129,8 @@ store.delete(namespace=("users", "profiles"), key="user_123")
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aerospike.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aerospike.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google translate integration
 
 > Integrate with the Google translate document transformer using LangChain Python.
@@ -15,11 +11,11 @@ To use it, you should have the `google-cloud-translate` python package installed
 * [Google Neural Machine Translation](https://en.wikipedia.org/wiki/Google_Neural_Machine_Translation)
 * [A Neural Network for Machine Translation, at Production Scale](https://blog.research.google/2016/09/a-neural-network-for-machine.html)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  google-cloud-translate
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_community import GoogleTranslateTransformer
 ```
@@ -28,7 +24,7 @@ from langchain_google_community import GoogleTranslateTransformer
 
 This is the document we'll translate
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 sample_text = """[Generated with Google Bard]
 Subject: Key Business Process Updates
 
@@ -76,7 +72,7 @@ When initializing the `GoogleTranslateTransformer`, you can include the followin
 
 [endpoints]: https://cloud.google.com/translate/docs/advanced/endpoints
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents = [Document(page_content=sample_text)]
 translator = GoogleTranslateTransformer(project_id="<YOUR_PROJECT_ID>")
 ```
@@ -100,19 +96,19 @@ You can provide the following keyword parameters to the `transform_documents()` 
 
 [media-type]: https://en.wikipedia.org/wiki/Media_type
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 translated_documents = translator.transform_documents(
     documents, target_language_code="es"
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for doc in translated_documents:
     print(doc.metadata)
     print(doc.page_content)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'model': '', 'detected_language_code': 'en'}
 [Generado con Google Bard]
 Asunto: Actualizaciones clave de procesos comerciales
@@ -147,12 +143,8 @@ Director ejecutivo, banco de platillos
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/google_translate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/google_translate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

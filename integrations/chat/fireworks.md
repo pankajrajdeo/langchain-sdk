@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatFireworks integration
 
 > Integrate with the ChatFireworks chat model using LangChain Python.
 
-This doc helps you get started with Fireworks AI [chat models](/oss/python/langchain/models). For a list of all models served by Fireworks see the [Fireworks docs](https://fireworks.ai/models).
+This doc helps you get started with Fireworks AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For a list of all models served by Fireworks see the [Fireworks docs](https://fireworks.ai/models).
 
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatFireworks`](https://reference.langchain.com/python/langchain-fireworks/chat_models/ChatFireworks) API reference.
 
 ## Overview
 
@@ -24,7 +19,7 @@ This doc helps you get started with Fireworks AI [chat models](/oss/python/langc
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -36,7 +31,7 @@ To access Fireworks models you'll need to create a Fireworks account, get an API
 
 Head to [fireworks.ai](https://app.fireworks.ai/login) to sign up to Fireworks and generate an API key. Once you've done this set the FIREWORKS\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -44,9 +39,9 @@ if "FIREWORKS_API_KEY" not in os.environ:
     os.environ["FIREWORKS_API_KEY"] = getpass.getpass("Enter your Fireworks API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -55,7 +50,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Fireworks integration lives in the `langchain-fireworks` package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-fireworks
 ```
 
@@ -63,7 +58,7 @@ pip install -qU langchain-fireworks
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_fireworks import ChatFireworks
 
 llm = ChatFireworks(
@@ -78,7 +73,7 @@ llm = ChatFireworks(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -90,23 +85,23 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'token_usage': {'prompt_tokens': 31, 'total_tokens': 41, 'completion_tokens': 10}, 'system_fingerprint': '', 'finish_reason': 'stop', 'logprobs': None, 'model_provider': 'fireworks', 'model_name': 'accounts/fireworks/models/kimi-k2-instruct-0905'}, id='lc_run--a2bdeca3-6394-4c80-97ad-2fc8db9f54bb-0', usage_metadata={'input_tokens': 31, 'output_tokens': 10, 'total_tokens': 41})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
 ## Reasoning effort
 
-Some Fireworks-hosted models support the standard [`reasoning_effort`](/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. `ChatFireworks` forwards it unchanged as the `reasoning_effort` request field. Supported values vary by model. It can be set at model construction or per invocation:
+Some Fireworks-hosted models support the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. `ChatFireworks` forwards it unchanged as the `reasoning_effort` request field. Supported values vary by model. It can be set at model construction or per invocation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_fireworks import ChatFireworks
 
 model = ChatFireworks(model="accounts/fireworks/models/deepseek-v4-pro")
@@ -116,13 +111,12 @@ response = model.invoke(
 )
 ```
 
-<Note>
-  `reasoning_effort` as a standard parameter requires `langchain-fireworks>=1.5.2`.
-</Note>
+> [!NOTE]
+> `reasoning_effort` as a standard parameter requires `langchain-fireworks>=1.5.2`.
 
-Check a model's [profile](/oss/python/langchain/models#model-profiles) for the effort levels it supports:
+Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the effort levels it supports:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high']
 ```
 
@@ -132,12 +126,8 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/fireworks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

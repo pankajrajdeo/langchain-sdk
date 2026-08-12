@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LiteLLM integrations
 
 > Integrate with LiteLLM using LangChain Python.
@@ -10,41 +6,39 @@
 
 ## Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-litellm
-  ```
+```bash
+pip install langchain-litellm
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-litellm
-  ```
-</CodeGroup>
+```bash
+uv add langchain-litellm
+```
 
 ## Chat models
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import ChatLiteLLM
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import ChatLiteLLMRouter
 ```
 
-See the [LiteLLM chat guide](/oss/python/integrations/chat/litellm) for full usage details, including streaming, tool calling, structured output, and Vertex AI Grounding.
+See the [LiteLLM chat guide](https://docs.langchain.com/oss/python/integrations/chat/litellm) for full usage details, including streaming, tool calling, structured output, and Vertex AI Grounding.
 
 ## Embeddings
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import LiteLLMEmbeddings
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import LiteLLMEmbeddingsRouter
 ```
 
 `LiteLLMEmbeddings` embeds text across 100+ providers with a single consistent interface. All configuration is explicit, with no environment variables required.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import LiteLLMEmbeddings
 
 embeddings = LiteLLMEmbeddings(
@@ -58,7 +52,7 @@ query_vector = embeddings.embed_query("hello")
 
 Switch providers by changing `model`. The interface stays the same:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Cohere
 embeddings = LiteLLMEmbeddings(
     model="cohere/embed-english-v3.0",
@@ -83,7 +77,7 @@ embeddings = LiteLLMEmbeddings(
 
 For load-balancing across multiple deployments of the same model, use `LiteLLMEmbeddingsRouter`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from litellm import Router
 from langchain_litellm import LiteLLMEmbeddingsRouter
 
@@ -109,13 +103,13 @@ embeddings = LiteLLMEmbeddingsRouter(router=router)
 
 ## Document loaders
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import LiteLLMOCRLoader
 ```
 
 `LiteLLMOCRLoader` loads documents via a LiteLLM proxy's OCR endpoint (e.g. Azure Document Intelligence). The proxy handles all provider-specific authentication and configuration.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import LiteLLMOCRLoader
 
 loader = LiteLLMOCRLoader(
@@ -130,7 +124,7 @@ documents = loader.load()
 
 Async loading is also supported:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents = await loader.aload()
 ```
 
@@ -150,12 +144,8 @@ For detailed documentation of all classes and configurations, see the [langchain
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

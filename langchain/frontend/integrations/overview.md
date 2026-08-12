@@ -1,32 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Overview
-
-> Connect useStream to any React UI component library or generative UI framework
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/overview)
+Connect useStream to any React UI component library or generative UI framework
 
 [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) is UI-agnostic. It returns plain reactive state with messages, tool calls, loading flags, values, and thread metadata that you wire to any visual layer you choose. These pages show how different libraries integrate with LangChain frontends, each with a different philosophy for building AI chat and generative UI.
 
 ## Integrations
 
-<CardGroup cols={2}>
-  <Card title="CopilotKit" icon="package" href="/oss/python/langchain/frontend/integrations/copilotkit">
-    Full AI chat runtime with structured generative UI support. Add a custom CopilotKit endpoint to your LangGraph deployment, then render dynamic component trees in React.
-  </Card>
+#### [CopilotKit](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit)
+Full AI chat runtime with structured generative UI support. Add a custom CopilotKit endpoint to your LangGraph deployment, then render dynamic component trees in React.
 
-  <Card title="AI Elements" icon="package" href="/oss/python/langchain/frontend/integrations/ai-elements">
-    Composable shadcn/ui-based components for AI chat. Drop in `Conversation`, `Message`, `Tool`, and `Reasoning` and wire them directly to `stream.messages`.
-  </Card>
+#### [AI Elements](https://docs.langchain.com/oss/python/langchain/frontend/integrations/ai-elements)
+Composable shadcn/ui-based components for AI chat. Drop in `Conversation`, `Message`, `Tool`, and `Reasoning` and wire them directly to `stream.messages`.
 
-  <Card title="assistant-ui" icon="package" href="/oss/python/langchain/frontend/integrations/assistant-ui">
-    Headless React framework with a full runtime layer. Bridge `useStream` to `AssistantRuntimeProvider` via the `useExternalStoreRuntime` adapter.
-  </Card>
+#### [assistant-ui](https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui)
+Headless React framework with a full runtime layer. Bridge `useStream` to `AssistantRuntimeProvider` via the `useExternalStoreRuntime` adapter.
 
-  <Card title="OpenUI" icon="package" href="/oss/python/langchain/frontend/integrations/openui">
-    Generative UI library that lets the agent produce complete, interactive dashboards in a declarative component DSL. Purpose-built for data-rich, report-style UIs.
-  </Card>
-</CardGroup>
+#### [OpenUI](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
+Generative UI library that lets the agent produce complete, interactive dashboards in a declarative component DSL. Purpose-built for data-rich, report-style UIs.
 
 ## Choosing a library
 
@@ -41,16 +31,12 @@ Each library fits a slightly different integration model. The choice depends on 
 | **Tool calls**    | Via CopilotKit runtime and custom renderers                    | `Tool` / `ToolHeader` / `ToolOutput` | Custom via message slots              | Inline in the generated UI                          |
 | **Agent format**  | Structured assistant responses plus optional Markdown          | Any `stream.messages`                | Any `stream.messages`                 | Agent outputs openui-lang text                      |
 
-All four work well with LangChain agents, and the latter three also connect directly to [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream). CopilotKit is especially useful when you want a richer runtime layer and a dedicated endpoint that can sit alongside a [LangGraph](/oss/python/langgraph/overview) deployment.
+All four work well with LangChain agents, and the latter three also connect directly to [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream). CopilotKit is especially useful when you want a richer runtime layer and a dedicated endpoint that can sit alongside a [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) deployment.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

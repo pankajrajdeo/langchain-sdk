@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # DatabricksEmbeddings integration
 
 > Integrate with the DatabricksEmbeddings embedding model using LangChain
 
 > [Databricks](https://www.databricks.com/) Lakehouse Platform unifies data, analytics, and AI on one platform.
 
-This guide provides a quick overview for getting started with `DatabricksEmbeddings` [embedding models](/oss/python/integrations/embeddings). For detailed documentation of all `DatabricksEmbeddings` features and configurations head to the [API reference](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings).
+This guide provides a quick overview for getting started with `DatabricksEmbeddings` [embedding models](https://docs.langchain.com/oss/python/integrations/embeddings). For detailed documentation of all `DatabricksEmbeddings` features and configurations head to the [API reference](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings).
 
 ## Overview
 
@@ -41,7 +37,7 @@ If you are running LangChain app inside Databricks, you can skip this step.
 
 Otherwise, you need manually set the Databricks workspace hostname and personal access token to `DATABRICKS_HOST` and `DATABRICKS_TOKEN` environment variables, respectively. See [Authentication Documentation](https://docs.databricks.com/en/dev-tools/auth/index.html#databricks-personal-access-tokens) for how to get an access token.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -56,13 +52,13 @@ if "DATABRICKS_TOKEN" not in os.environ:
 
 The LangChain Databricks integration lives in the `databricks-langchain` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU databricks-langchain
 ```
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from databricks_langchain import DatabricksEmbeddings
 
 embeddings = DatabricksEmbeddings(
@@ -75,11 +71,11 @@ embeddings = DatabricksEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -110,7 +106,7 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
@@ -119,7 +115,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -132,14 +128,12 @@ for vector in two_vectors:
 
 You can also use `aembed_query` and `aembed_documents` for producing embeddings asynchronously:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
-
 
 async def async_example():
     single_vector = await embeddings.aembed_query(text)
     print(str(single_vector)[:100])  # Show the first 100 characters of the vector
-
 
 asyncio.run(async_example())
 ```
@@ -152,12 +146,8 @@ For detailed documentation on `DatabricksEmbeddings` features and configuration 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/databricks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

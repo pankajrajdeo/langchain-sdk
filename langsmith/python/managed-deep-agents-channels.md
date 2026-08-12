@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Connect Managed Deep Agents to channels
-
-> Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels)
+Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
 
 A channel connects a Managed Deep Agent to an external messaging service. Messages from the service can start agent runs, and the agent can respond through the same service without a separate application server.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Channel declarations live in the project-level `channels/` directory, with one channel per file:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.py
   channels/
@@ -35,7 +30,7 @@ In Managed Deep Agents, a channel connects a deployed agent to a messaging provi
 
 The managed runtime handles the channel lifecycle:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart LR
     Provider["Messaging provider"] --> Verify["Verify and normalize event"]
     Verify --> Thread["Resolve identity and thread"]
@@ -63,7 +58,7 @@ The file name becomes the configured channel name. It identifies the channel at 
 
 For example, a declaration in `channels/support.py` receives events at:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 POST /channels/support/events
 ```
 
@@ -87,35 +82,28 @@ Ordinary HTTP runs and scheduled runs do not have an originating channel, so `ru
 
 By default, the managed runner posts the agent's final response to the originating conversation. Provider guides describe how to customize that behavior and send intermediate messages.
 
-Scheduled runs can deliver results through a named channel even though they do not originate from one. See [Schedules](/langsmith/python/managed-deep-agents-schedules#deliver-results-to-slack).
+Scheduled runs can deliver results through a named channel even though they do not originate from one. See [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules#deliver-results-to-slack).
 
 ## Distinguish channels from connectors
 
-A channel receives messages that start agent runs and delivers responses. An [MCP connector](/langsmith/python/managed-deep-agents-mcp-connectors) gives the agent tools from a remote MCP server. A project can use either or both.
+A channel receives messages that start agent runs and delivers responses. An [MCP connector](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors) gives the agent tools from a remote MCP server. A project can use either or both.
 
 ## Supported channels
 
-<CardGroup cols={2}>
-  <Card title="Slack" icon="brand-slack" href="/langsmith/python/managed-deep-agents-channels-slack">
-    Start runs from Slack mentions, direct messages, and thread replies.
-  </Card>
-</CardGroup>
+#### [Slack](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack)
+Start runs from Slack mentions, direct messages, and thread replies.
 
 ## See also
 
-* [Identity](/langsmith/python/managed-deep-agents-identity): authenticate callers and scope channel runs to the resolved user.
-* [Schedules](/langsmith/python/managed-deep-agents-schedules): deliver scheduled results through a configured channel.
-* [Deploy an agent](/langsmith/python/managed-deep-agents-deploy): deploy project changes and configure secrets.
-* [CLI reference](/langsmith/python/managed-deep-agents-cli): review channel project-file conventions.
+* [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity): authenticate callers and scope channel runs to the resolved user.
+* [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules): deliver scheduled results through a configured channel.
+* [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy): deploy project changes and configure secrets.
+* [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli): review channel project-file conventions.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

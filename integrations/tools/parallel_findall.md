@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel FindAll integration
 
 > Integrate with the ParallelFindAllTool tool using LangChain Python.
@@ -16,27 +12,25 @@
 
 | Class                                                                                                          | Package                                                                            | Serializable | JS support |                                                                                                                   Package latest                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelFindAllTool`](https://reference.langchain.com/python/langchain-parallel/findall/ParallelFindAllTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ParallelFindAllTool`](https://reference.langchain.com/python/langchain-parallel/findall/ParallelFindAllTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -48,7 +42,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 `generator` is a tool-level setting. Use `"preview"` (free, capped at 10 candidates) for rapid iteration; switch to `"base"` (the default), `"core"`, or `"pro"` for higher-quality runs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelFindAllTool
 
 tool = ParallelFindAllTool(generator="preview")
@@ -60,7 +54,7 @@ tool = ParallelFindAllTool(generator="preview")
 
 The `preview` generator returns in seconds and is capped at 10 candidates. `match_limit` is required; for `preview` it must be in `[5, 10]`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import FindAllMatchCondition
 
 result = await tool.ainvoke({
@@ -83,7 +77,7 @@ for c in result["candidates"]:
     print(c["name"], "—", c["url"])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Anthropic — https://www.anthropic.com
 OpenAI — https://www.openai.com
 ...
@@ -93,7 +87,7 @@ OpenAI — https://www.openai.com
 
 Switch to `"base"`, `"core"`, or `"pro"` for `match_limit` up to 1000. These take minutes; the tool polls until the run hits a terminal status (`completed`, `cancelled`, or `failed`).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 deep = ParallelFindAllTool(generator="core")
 
 result = await deep.ainvoke({
@@ -117,7 +111,7 @@ result = await deep.ainvoke({
 
 Pass `exclude_list=[FindAllExcludeEntry(name=..., url=...)]` to drop candidates you've already processed. Both `name` and `url` are required.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import FindAllExcludeEntry
 
 result = await tool.ainvoke({
@@ -141,7 +135,7 @@ result = await tool.ainvoke({
 
 `cancel()` aborts an in-flight run by id. The id is returned to the caller that started the run; if you started it with `tool.ainvoke(...)` in a long-running task, capture `findall_id` from the run before awaiting completion.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # from another task / handler:
 tool.cancel(findall_id)        # sync
 await tool.acancel(findall_id) # async
@@ -165,9 +159,9 @@ await tool.acancel(findall_id) # async
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 
@@ -179,7 +173,7 @@ agent.invoke({"messages": [("human", "Find me a few independent EU solar install
 
 ## Response format
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {
     "candidates": [
         {
@@ -209,12 +203,8 @@ For detailed documentation, head to the [`ParallelFindAllTool`](https://referenc
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_findall.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_findall.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

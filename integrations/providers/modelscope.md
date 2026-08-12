@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Modelscope integrations
 
 > Integrate with Modelscope using LangChain Python.
@@ -13,19 +9,17 @@ It is broken into two parts: installation and setup, and then references to spec
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-modelscope-integration
-  ```
+```bash
+pip install -U langchain-modelscope-integration
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-modelscope-integration
-  ```
-</CodeGroup>
+```bash
+uv add langchain-modelscope-integration
+```
 
 Head to [ModelScope](https://modelscope.cn/) to sign up to ModelScope and generate an [SDK token](https://modelscope.cn/my/myaccesstoken). Once you've done this set the `MODELSCOPE_SDK_TOKEN` environment variable:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export MODELSCOPE_SDK_TOKEN=<your_sdk_token>
 ```
 
@@ -33,7 +27,7 @@ export MODELSCOPE_SDK_TOKEN=<your_sdk_token>
 
 `ModelScopeChatEndpoint` class exposes chat models from ModelScope. See [available models in the ModelScope API documentation](https://www.modelscope.cn/docs/model-service/API-Inference/intro).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_modelscope import ModelScopeChatEndpoint
 
 llm = ModelScopeChatEndpoint(model="Qwen/Qwen2.5-Coder-32B-Instruct")
@@ -44,7 +38,7 @@ llm.invoke("Sing a ballad of LangChain.")
 
 `ModelScopeEmbeddings` class exposes embeddings from ModelScope.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_modelscope import ModelScopeEmbeddings
 
 embeddings = ModelScopeEmbeddings(model_id="damo/nlp_corom_sentence-embedding_english-base")
@@ -55,7 +49,7 @@ embeddings.embed_query("What is the meaning of life?")
 
 `ModelScopeEndpoint` class exposes LLMs from ModelScope.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_modelscope import ModelScopeEndpoint
 
 llm = ModelScopeEndpoint(model="Qwen/Qwen2.5-Coder-32B-Instruct")
@@ -64,12 +58,8 @@ llm.invoke("The meaning of life is")
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/modelscope.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/modelscope.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

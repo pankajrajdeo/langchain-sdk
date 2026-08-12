@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Bring Your Own Cloud (BYOC)
 
 > Deploy LangSmith services and store data in your own cloud environment while LangChain operates, scales, and upgrades the infrastructure.
 
-<Warning>
-  BYOC is only available for customers on the [Enterprise plan](https://www.langchain.com/pricing).
-</Warning>
+> [!WARNING]
+> BYOC is only available for customers on the [Enterprise plan](https://www.langchain.com/pricing).
 
 Bring Your Own Cloud (BYOC) lets you deploy LangSmith services and store data in your own cloud environment, while LangChain operates, scales, and upgrades the infrastructure. BYOC suits organizations that require complete sovereignty over their data, but do not want the overhead of provisioning and managing infrastructure.
 
@@ -16,7 +11,7 @@ BYOC uses a split responsibility model: the control plane runs in LangChain's cl
 
 ## Get started
 
-To deploy LangSmith BYOC, [contact the LangChain sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the [onboarding guide](/langsmith/byoc-onboarding) to create your first data plane.
+To deploy LangSmith BYOC, [contact the LangChain sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the [onboarding guide](https://docs.langchain.com/langsmith/byoc-onboarding) to create your first data plane.
 
 ## Regions and cloud providers
 
@@ -40,23 +35,23 @@ The control plane runs in `us-east-2` regardless of where you place your data pl
 
 The following features are supported:
 
-* **[Observability](/langsmith/observability)**: Tracing, projects, dashboards, and alerts.
-* **[Evaluation](/langsmith/evaluation)**: Datasets, experiments, evaluators, and annotation queues.
-* **[Insights](/langsmith/insights)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
-* **[LangSmith Chat](/langsmith/chat)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
-* **[Prompt engineering](/langsmith/prompt-context-hub#prompts)**: Prompts and prompt commits.
-* **[LangSmith Deployment](/langsmith/deployment)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
-* **[Sandboxes](/langsmith/sandboxes)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
-* **[LLM Gateway](/langsmith/llm-gateway)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
-* **[LangSmith MCP](/langsmith/langsmith-remote-mcp)**: Connect MCP-compatible clients to LangSmith to query data.
-* **[Fleet](/langsmith/fleet/index)**: Build and run no-code agents from templates, connectors, and channels.
-* **[SmithDB](/langsmith/smithdb-sdk-migration)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
+* **[Observability](https://docs.langchain.com/langsmith/observability)**: Tracing, projects, dashboards, and alerts.
+* **[Evaluation](https://docs.langchain.com/langsmith/evaluation)**: Datasets, experiments, evaluators, and annotation queues.
+* **[Insights](https://docs.langchain.com/langsmith/insights)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
+* **[LangSmith Chat](https://docs.langchain.com/langsmith/chat)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
+* **[Prompt engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts)**: Prompts and prompt commits.
+* **[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
+* **[Sandboxes](https://docs.langchain.com/langsmith/sandboxes)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
+* **[LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
+* **[LangSmith MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp)**: Connect MCP-compatible clients to LangSmith to query data.
+* **[Fleet](https://docs.langchain.com/langsmith/fleet/index)**: Build and run no-code agents from templates, connectors, and channels.
+* **[SmithDB](https://docs.langchain.com/langsmith/smithdb-sdk-migration)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
 
 The following features are planned but not yet supported:
 
-* **[Managed Deep Agents](/langsmith/python/managed-deep-agents-overview)**: LangChain-hosted deep agents with connectors, channels, and schedules.
-* **[LLM auth proxy](/langsmith/llm-auth-proxy-self-hosted)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
-* **[Engine](/langsmith/engine-overview)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces.
+* **[Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview)**: LangChain-hosted deep agents with connectors, channels, and schedules.
+* **[LLM auth proxy](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
+* **[Engine](https://docs.langchain.com/langsmith/engine-overview)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces.
 
 ## Prerequisites
 
@@ -69,12 +64,8 @@ Before LangChain can provision a data plane, you need the following:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

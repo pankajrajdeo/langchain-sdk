@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Traces and access control
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-access)
+Understand where gateway traces land and who can see and configure what.
 
-> Understand where gateway traces land and who can see and configure what.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-Every call through the LLM Gateway is traced to LangSmith, and policy violations surface in [LangSmith Engine](/langsmith/engine) for triage.
+Every call through the LLM Gateway is traced to LangSmith, and policy violations surface in [LangSmith Engine](https://docs.langchain.com/langsmith/engine) for triage.
 
 ## Where gateway traces appear
 
-By default, all gateway-proxied calls are traced to a project named `gateway` in the [workspace](/langsmith/administration-overview#workspaces) associated with the caller's API key, as well as an API-key specific project with the scheme `gateway-<short_api_key>-<api_key_id>`.
+By default, all gateway-proxied calls are traced to a project named `gateway` in the [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) associated with the caller's API key, as well as an API-key specific project with the scheme `gateway-<short_api_key>-<api_key_id>`.
 
-Control access to these tracing projects with [RBAC](/langsmith/rbac) and [ABAC](/langsmith/abac)
+Control access to these tracing projects with [RBAC](https://docs.langchain.com/langsmith/rbac) and [ABAC](https://docs.langchain.com/langsmith/abac)
 
 ### Trace metadata
 
@@ -51,7 +46,7 @@ The gateway logs two categories of events:
 | **Administrative changes** | Policy creation, modification, and deletion. Role and permission changes related to gateway access. |
 | **Gateway invocations**    | Each proxied call, including the caller identity and matched policy IDs.                            |
 
-[Audit logs](/langsmith/audit-logs) are available to organization admins on the [Enterprise plan](/langsmith/pricing-plans).
+[Audit logs](https://docs.langchain.com/langsmith/audit-logs) are available to organization admins on the [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans).
 
 ## Permissions
 
@@ -64,7 +59,7 @@ The gateway logs two categories of events:
 | View gateway traces              | `projects:read` + `runs:read`        | `WORKSPACE_ADMIN`, `WORKSPACE_USER`, `WORKSPACE_VIEWER` |
 | View audit logs                  | `organization:manage`                | Org admins                                              |
 
-The built-in `WORKSPACE_USER` and `WORKSPACE_VIEWER` roles do **not** include `gateway:invoke` and cannot be edited. To grant gateway access without full workspace-admin privileges, create a custom workspace role with `gateway:invoke` and `workspaces:read` (requires an RBAC-enabled plan). For instructions, refer to [Admin setup](/langsmith/llm-gateway-admin-setup).
+The built-in `WORKSPACE_USER` and `WORKSPACE_VIEWER` roles do **not** include `gateway:invoke` and cannot be edited. To grant gateway access without full workspace-admin privileges, create a custom workspace role with `gateway:invoke` and `workspaces:read` (requires an RBAC-enabled plan). For instructions, refer to [Admin setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup).
 
 ### API key scoping
 
@@ -72,7 +67,7 @@ Always use workspace-scoped API keys for the gateway. Organization-scoped keys a
 
 ### Centralizing provider credentials
 
-The gateway centralizes provider API keys in LangSmith workspace secrets. Individual developers and agents authenticate with their [LangSmith API key](/langsmith/create-account-api-key) and never need direct access to provider keys.
+The gateway centralizes provider API keys in LangSmith workspace secrets. Individual developers and agents authenticate with their [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and never need direct access to provider keys.
 
 This means:
 
@@ -87,23 +82,19 @@ Gateway traces are written as runs into a workspace project and follow LangSmith
 
 If you need to limit who can see gateway traces, you have two options:
 
-* **Separate workspaces** (works on any [plan](/langsmith/pricing-plans)): create one workspace with restricted membership and another for developer coding agents with broader membership. Each workspace has its own provider secrets and trace projects.
-* **Project-level access policies** (requires an [Enterprise plan](/langsmith/pricing-plans)): write an ABAC policy restricting `projects:read` and `runs:read` on the gateway project to specific users or roles.
+* **Separate workspaces** (works on any [plan](https://docs.langchain.com/langsmith/pricing-plans)): create one workspace with restricted membership and another for developer coding agents with broader membership. Each workspace has its own provider secrets and trace projects.
+* **Project-level access policies** (requires an [Enterprise plan](https://docs.langchain.com/langsmith/pricing-plans)): write an ABAC policy restricting `projects:read` and `runs:read` on the gateway project to specific users or roles.
 
 ## Next steps
 
-* [Admin setup](/langsmith/llm-gateway-admin-setup): the step-by-step guide for configuring all of this.
-* [Spend policies](/langsmith/llm-gateway-spend-policies): attach cost limits to API keys and users.
-* [Data protection](/langsmith/llm-gateway-data-protection): configure data protection policies.
+* [Admin setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup): the step-by-step guide for configuring all of this.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): attach cost limits to API keys and users.
+* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): configure data protection policies.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-access.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

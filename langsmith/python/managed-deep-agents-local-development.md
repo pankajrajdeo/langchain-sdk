@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Develop locally with LangSmith Studio
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-local-development)
+Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
 
-> Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
+`mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](https://docs.langchain.com/langsmith/studio) so you can interact with the agent and inspect its behavior before deploying.
 
-`mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](/langsmith/studio) so you can interact with the agent and inspect its behavior before deploying.
-
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Start local Studio
 
@@ -20,7 +15,7 @@ Python projects also require [`uv`](https://docs.astral.sh/uv/).
 
 From the project root, run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda dev .
 ```
 
@@ -49,7 +44,7 @@ Local development does not create or update a hosted deployment.
 | `--no-browser`        | Start the server without opening Studio automatically. |
 | `--no-reload`         | Disable the LangGraph development server's hot reload. |
 
-For all command details, see the [`mda dev` CLI reference](/langsmith/python/managed-deep-agents-cli#develop-locally).
+For all command details, see the [`mda dev` CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#develop-locally).
 
 ## Understand local behavior
 
@@ -62,12 +57,8 @@ These defaults differ from a deployed agent. Test identity and sandbox behavior 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-local-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-local-development.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

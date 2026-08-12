@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # SAP HANA Cloud Knowledge Graph Engine
 
 [SAP HANA Cloud Knowledge Graph](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/sap-hana-cloud-sap-hana-database-knowledge-graph-engine-guide) is a fully integrated knowledge graph solution within the `SAP HANA Cloud` database.
@@ -13,13 +9,13 @@ For detailed instructions, refer to: [Enable Triple Store](https://help.sap.com/
 
 To use SAP HANA Knowledge Graph Engine with LangChain, install the `langchain-hana` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langchain_hana
 ```
 
 First, create a connection to your SAP HANA Cloud instance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -39,7 +35,7 @@ connection = dbapi.connect(
 
 Then, import the `HanaRdfGraph` Class
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaRdfGraph
 ```
 
@@ -66,7 +62,7 @@ The constructor requires:
 
 More info on the DEFAULT graph can be found at [DEFAULT Graph and Named Graphs](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/default-graph-and-named-graphs).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 
 graph = HanaRdfGraph(
     connection=connection,
@@ -88,7 +84,7 @@ graph = HanaRdfGraph(
 
 ### Creating a graph instance with a `graph_uri`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = HanaRdfGraph(
     connection=connection,
     graph_uri="http://example.org/movies",
@@ -100,7 +96,7 @@ graph = HanaRdfGraph(
 
 Load the schema directly from a hosted graph URI.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = HanaRdfGraph(
     connection=connection,
     ontology_uri="<your_ontology_graph_uri>",
@@ -111,7 +107,7 @@ graph = HanaRdfGraph(
 
 Use a custom `CONSTRUCT` query to selectively extract schema triples.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ontology_query = """
     PREFIX owl: <http://www.w3.org/2002/07/owl#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -156,7 +152,7 @@ graph = HanaRdfGraph(
 
 Supported RDF formats are `Turtle`, `RDF/XML`, `JSON-LD`, `N-Triples`, `Notation-3`, `Trig`, `Trix`, `N-Quads`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = HanaRdfGraph(
     connection=connection,
     ontology_local_file="<your_ontology_file_path>", # e.g., "ontology.ttl"
@@ -168,7 +164,7 @@ graph = HanaRdfGraph(
 
 (`auto_extract_ontology=True`): Infer schema information directly from your instance data.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = HanaRdfGraph(
     connection=connection,
     graph_uri="<your_graph_uri>",
@@ -198,7 +194,7 @@ Please use the following strings for the respective formats.
 
 Let us insert some data into the `Puppets` graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 cursor = connection.cursor()
 try:
     result = cursor.callproc(
@@ -225,7 +221,7 @@ finally:
 
 Then, we create a graph instance for the `Puppets` graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 puppets_graph = HanaRdfGraph(
     connection=connection,
     graph_uri="Puppets",
@@ -235,7 +231,7 @@ puppets_graph = HanaRdfGraph(
 
 The given query lists all tuples in the `Puppets` graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = """
 SELECT ?s ?p ?o
 WHERE {
@@ -250,7 +246,7 @@ result = puppets_graph.query(query)
 print(result)
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 s,p,o
 P1,name,Ernie
 P1,show,Sesame Street
@@ -262,12 +258,8 @@ P2,http://www.w3.org/1999/02/22-rdf-syntax-ns#type,Puppet
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/sap_hana_rdf_graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/sap_hana_rdf_graph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

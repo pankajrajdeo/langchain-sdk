@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trulens integrations
 
 > Integrate with Trulens using LangChain Python.
@@ -14,15 +10,13 @@ This page covers how to use [TruLens](https://trulens.org) to evaluate and track
 
 Install the `trulens-eval` python package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install trulens-eval
-  ```
+```bash
+pip install trulens-eval
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add trulens-eval
-  ```
-</CodeGroup>
+```bash
+uv add trulens-eval
+```
 
 ## Quickstart
 
@@ -36,7 +30,7 @@ and is also an extensible framework for LLM evaluation.
 
 Create the feedback functions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from trulens_eval.feedback import Feedback, Huggingface,
 
 # Initialize HuggingFace-based feedback function collection class:
@@ -64,7 +58,7 @@ TruChain to get detailed tracing, logging and evaluation of your LLM app.
 Note: See code for the `chain` creation is in
 the [TruLens documentation](https://www.trulens.org/trulens_eval/getting_started/quickstarts/langchain_quickstart/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from trulens_eval import TruChain
 
 # wrap your chain with TruChain
@@ -83,7 +77,7 @@ Now you can explore your LLM-based application!
 
 Doing so will help you understand how your LLM application is performing at a glance. As you iterate new versions of your LLM application, you can compare their performance across all of the different quality metrics you've set up. You'll also be able to view evaluations at a record level, and explore the chain metadata for each record.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from trulens_eval import Tru
 
 tru = Tru()
@@ -94,12 +88,8 @@ For more information on TruLens, visit [trulens.org](https://www.trulens.org/)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/trulens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/trulens.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

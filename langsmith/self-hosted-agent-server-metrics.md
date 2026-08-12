@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Agent Server metrics
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics)
+Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
 
-> Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
-
-The [Agent Server](/langsmith/agent-server) emits metrics through an OpenTelemetry (OTel) client. Metrics use the `lg_api_` name prefix by default (override with `METRIC_PREFIX`).
+The [Agent Server](https://docs.langchain.com/langsmith/agent-server) emits metrics through an OpenTelemetry (OTel) client. Metrics use the `lg_api_` name prefix by default (override with `METRIC_PREFIX`).
 
 On self-hosted deployments, use this page to choose a scrape or push backend, enable the metric sets you need, and look up Prometheus names when building dashboards or alerts.
 
@@ -48,7 +44,7 @@ To scrape Deployment UI metrics:
 
 To also expose internal metrics on the same endpoint, set:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 EXPOSE_INTERNAL_METRICS_PROMETHEUS=true
 ```
 
@@ -130,19 +126,15 @@ These metrics have `lsd_web_metric=false`. By default they are exported to Datad
 
 ## See also
 
-* [Self-hosted overview](/langsmith/deploy-to-self-hosted-overview)
-* [Configure Agent Server for scale](/langsmith/agent-server-scale)
-* [Troubleshooting for self-hosted deployments](/langsmith/diagnostics-self-hosted)
-* [Agent Server changelog](/langsmith/agent-server-changelog)
+* [Self-hosted overview](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview)
+* [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale)
+* [Troubleshooting for self-hosted deployments](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
+* [Agent Server changelog](https://docs.langchain.com/langsmith/agent-server-changelog)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-agent-server-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-agent-server-metrics.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

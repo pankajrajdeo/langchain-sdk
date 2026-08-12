@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Subagents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents)
+In the **subagents** architecture, a central main [agent](https://docs.langchain.com/oss/python/langchain/agents) (often referred to as a **supervisor**) coordinates subagents by calling them as [tools](https://docs.langchain.com/oss/python/langchain/tools). The main agent decides which subagent to invoke, what input to provide, and how to combine results. Subagents are stateless—they don't remember past interactions, with all conversation memory maintained by the main agent. This provides [context](https://docs.langchain.com/oss/python/langchain/context-engineering) isolation: each subagent invocation works in a clean context window, preventing context bloat in the main conversation.
 
-In the **subagents** architecture, a central main [agent](/oss/python/langchain/agents) (often referred to as a **supervisor**) coordinates subagents by calling them as [tools](/oss/python/langchain/tools). The main agent decides which subagent to invoke, what input to provide, and how to combine results. Subagents are stateless—they don't remember past interactions, with all conversation memory maintained by the main agent. This provides [context](/oss/python/langchain/context-engineering) isolation: each subagent invocation works in a clean context window, preventing context bloat in the main conversation.
+For built-in subagent support, see [Deep Agents](https://docs.langchain.com/oss/python/deepagents/subagents).
 
-For built-in subagent support, see [Deep Agents](/oss/python/deepagents/subagents).
-
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[User] --> B[Main Agent]
     B --> C[Subagent A]
@@ -29,27 +25,25 @@ graph LR
 ## Key characteristics
 
 * Centralized control: All routing passes through the main agent
-* No direct user interaction: Subagents return results to the main agent, not the user (though you can use [interrupts](/oss/python/langgraph/interrupts#pause-using-interrupt) within a subagent to allow user interaction)
+* No direct user interaction: Subagents return results to the main agent, not the user (though you can use [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts#pause-using-interrupt) within a subagent to allow user interaction)
 * Subagents via tools: Subagents are invoked via tools
 * Parallel execution: The main agent can invoke multiple subagents in a single turn
 
-<Note>
-  **Supervisor vs. Router**: A supervisor agent (this pattern) is different from a [router](/oss/python/langchain/multi-agent/router). The supervisor is a full agent that maintains conversation context and dynamically decides which subagents to call across multiple turns. A router is typically a single classification step that dispatches to agents without maintaining ongoing conversation state.
-</Note>
+> [!NOTE]
+> **Supervisor vs. Router**: A supervisor agent (this pattern) is different from a [router](https://docs.langchain.com/oss/python/langchain/multi-agent/router). The supervisor is a full agent that maintains conversation context and dynamically decides which subagents to call across multiple turns. A router is typically a single classification step that dispatches to agents without maintaining ongoing conversation state.
 
 ## When to use
 
-Use the subagents pattern when you have multiple distinct domains (e.g., calendar, email, CRM, database), subagents don't need to converse directly with users, or you want centralized workflow control. For simpler cases with just a few [tools](/oss/python/langchain/tools), use a [single agent](/oss/python/langchain/agents).
+Use the subagents pattern when you have multiple distinct domains (e.g., calendar, email, CRM, database), subagents don't need to converse directly with users, or you want centralized workflow control. For simpler cases with just a few [tools](https://docs.langchain.com/oss/python/langchain/tools), use a [single agent](https://docs.langchain.com/oss/python/langchain/agents).
 
-<Tip>
-  **Need user interaction within a subagent?** While subagents typically return results to the main agent rather than conversing directly with users, you can use [interrupts](/oss/python/langgraph/interrupts#pause-using-interrupt) within a subagent to pause execution and gather user input. This is useful when a subagent needs clarification or approval before proceeding. The main agent remains the orchestrator, but the subagent can collect information from the user mid-task.
-</Tip>
+> [!TIP]
+> **Need user interaction within a subagent?** While subagents typically return results to the main agent rather than conversing directly with users, you can use [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts#pause-using-interrupt) within a subagent to pause execution and gather user input. This is useful when a subagent needs clarification or approval before proceeding. The main agent remains the orchestrator, but the subagent can collect information from the user mid-task.
 
 ## Basic implementation
 
 The core mechanism wraps a subagent as a tool that the main agent can call:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 from langchain.agents import create_agent
 
@@ -66,9 +60,8 @@ def call_research_agent(query: str):
 main_agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[call_research_agent])
 ```
 
-<Card title="Tutorial: Build a personal assistant with subagents" icon="sitemap" href="/oss/python/langchain/multi-agent/subagents-personal-assistant" arrow cta="Learn more">
-  Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
-</Card>
+#### [Tutorial: Build a personal assistant with subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant)
+Learn how to build a personal assistant using the subagents pattern, where a central main agent (supervisor) coordinates specialized worker agents.
 
 ## Design decisions
 
@@ -76,11 +69,11 @@ When implementing the subagents pattern, you'll make several key design choices.
 
 | Decision                                  | Options                                                                                |
 | ----------------------------------------- | -------------------------------------------------------------------------------------- |
-| [**Sync vs. async**](#sync-vs-async)      | Sync (blocking) vs. async (background)                                                 |
-| [**Tool patterns**](#tool-patterns)       | Tool per agent vs. single dispatch tool                                                |
-| [**Subagent specs**](#subagent-specs)     | System prompt vs. enum constraint vs. tool-based discovery (single dispatch tool only) |
-| [**Subagent inputs**](#subagent-inputs)   | Query only vs. full context                                                            |
-| [**Subagent outputs**](#subagent-outputs) | Subagent result vs full conversation history                                           |
+| [**Sync vs. async**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#sync-vs-async)      | Sync (blocking) vs. async (background)                                                 |
+| [**Tool patterns**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#tool-patterns)       | Tool per agent vs. single dispatch tool                                                |
+| [**Subagent specs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-specs)     | System prompt vs. enum constraint vs. tool-based discovery (single dispatch tool only) |
+| [**Subagent inputs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-inputs)   | Query only vs. full context                                                            |
+| [**Subagent outputs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-outputs) | Subagent result vs full conversation history                                           |
 
 ## Sync vs. async
 
@@ -91,15 +84,14 @@ Subagent execution can be **synchronous** (blocking) or **asynchronous** (backgr
 | **Sync**  | Waits for subagent to complete              | Main agent needs result to continue    | Simple, but blocks the conversation |
 | **Async** | Continues while subagent runs in background | Independent tasks, user shouldn't wait | Responsive, but more complex        |
 
-<Tip>
-  Not to be confused with Python's `async`/`await`. Here, "async" means the main agent kicks off a background job (typically in a separate process or service) and continues without blocking.
-</Tip>
+> [!TIP]
+> Not to be confused with Python's `async`/`await`. Here, "async" means the main agent kicks off a background job (typically in a separate process or service) and continues without blocking.
 
 ### Synchronous (default)
 
 By default, subagent calls are **synchronous**: the main agent waits for each subagent to complete before continuing. Use sync when the main agent's next action depends on the subagent's result.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 sequenceDiagram
     participant User
     participant Main Agent
@@ -128,7 +120,7 @@ sequenceDiagram
 
 Use **asynchronous execution** when the subagent's work is independent—the main agent doesn't need the result to continue conversing with the user. The main agent kicks off a background job and remains responsive.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 sequenceDiagram
     participant User
     participant Main Agent
@@ -178,12 +170,12 @@ There are two main ways to expose subagents as tools:
 
 | Pattern                                           | Best for                                                      | Trade-off                                         |
 | ------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------- |
-| [**Tool per agent**](#tool-per-agent)             | Fine-grained control over each subagent's input/output        | More setup, but more customization                |
-| [**Single dispatch tool**](#single-dispatch-tool) | Many agents, distributed teams, convention over configuration | Simpler composition, less per-agent customization |
+| [**Tool per agent**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#tool-per-agent)             | Fine-grained control over each subagent's input/output        | More setup, but more customization                |
+| [**Single dispatch tool**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#single-dispatch-tool) | Many agents, distributed teams, convention over configuration | Simpler composition, less per-agent customization |
 
 ### Tool per agent
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[User] --> B[Main Agent]
     B --> C[Subagent A]
@@ -203,7 +195,7 @@ graph LR
 
 The key idea is wrapping subagents as tools that the main agent can call:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 from langchain.agents import create_agent
 
@@ -220,15 +212,15 @@ def call_subagent(query: str):  # [!code highlight]
 main_agent = create_agent(model="...", tools=[call_subagent])  # [!code highlight]
 ```
 
-The main agent invokes the subagent tool when it decides the task matches the subagent's description, receives the result, and continues orchestration. See [Context engineering](#context-engineering) for fine-grained control.
+The main agent invokes the subagent tool when it decides the task matches the subagent's description, receives the result, and continues orchestration. See [Context engineering](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#context-engineering) for fine-grained control.
 
 ### Single dispatch tool
 
-An alternative approach uses a single parameterized tool to invoke ephemeral sub-agents for independent tasks. Unlike the [tool per agent](#tool-per-agent) approach where each sub-agent is wrapped as a separate tool, this uses a convention-based approach with a single `task` tool: the task description is passed as a human message to the sub-agent, and the sub-agent's final message is returned as the tool result.
+An alternative approach uses a single parameterized tool to invoke ephemeral sub-agents for independent tasks. Unlike the [tool per agent](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#tool-per-agent) approach where each sub-agent is wrapped as a separate tool, this uses a convention-based approach with a single `task` tool: the task description is passed as a human message to the sub-agent, and the sub-agent's final message is returned as the tool result.
 
 Use this approach when you want to distribute agent development across multiple teams, need to isolate complex tasks into separate context windows, need a scalable way to add new agents without modifying the coordinator, or prefer convention over customization. This approach trades flexibility in context engineering for simplicity in agent composition and strong context isolation.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[User] --> B[Main Agent]
     B --> C{task<br/>agent_name, description}
@@ -255,66 +247,68 @@ graph LR
 * Single task tool: One parameterized tool that can invoke any registered sub-agent by name
 * Convention-based invocation: Agent selected by name, task passed as human message, final message returned as tool result
 * Team distribution: Different teams can develop and deploy agents independently
-* Agent discovery: Sub-agents can be discovered via system prompt (listing available agents) or through [progressive disclosure](/oss/python/langchain/multi-agent/skills-sql-assistant) (loading agent information on-demand via tools)
+* Agent discovery: Sub-agents can be discovered via system prompt (listing available agents) or through [progressive disclosure](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant) (loading agent information on-demand via tools)
 
-<Tip>
-  An interesting aspect of this approach is that sub-agents may have the exact same capabilities as the main agent. In such cases, invoking a sub-agent is **really about context isolation** as the primary reason—allowing complex, multi-step tasks to run in isolated context windows without bloating the main agent's conversation history. The sub-agent completes its work autonomously and returns only a concise summary, keeping the main thread focused and efficient.
-</Tip>
+> [!TIP]
+> An interesting aspect of this approach is that sub-agents may have the exact same capabilities as the main agent. In such cases, invoking a sub-agent is **really about context isolation** as the primary reason—allowing complex, multi-step tasks to run in isolated context windows without bloating the main agent's conversation history. The sub-agent completes its work autonomously and returns only a concise summary, keeping the main thread focused and efficient.
 
-<Accordion title="Agent registry with task dispatcher">
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.tools import tool
-  from langchain.agents import create_agent
+<details>
+<summary>Agent registry with task dispatcher</summary>
 
-  # Sub-agents developed by different teams
-  research_agent = create_agent(
-      model="gpt-5.5",
-      prompt="You are a research specialist..."
-  )
+```python
+from langchain.tools import tool
+from langchain.agents import create_agent
 
-  writer_agent = create_agent(
-      model="gpt-5.5",
-      prompt="You are a writing specialist..."
-  )
+# Sub-agents developed by different teams
+research_agent = create_agent(
+    model="gpt-5.5",
+    prompt="You are a research specialist..."
+)
 
-  # Registry of available sub-agents
-  SUBAGENTS = {
-      "research": research_agent,
-      "writer": writer_agent,
-  }
+writer_agent = create_agent(
+    model="gpt-5.5",
+    prompt="You are a writing specialist..."
+)
 
-  @tool
-  def task(
-      agent_name: str,
-      description: str
-  ) -> str:
-      """Launch an ephemeral subagent for a task.
+# Registry of available sub-agents
+SUBAGENTS = {
+    "research": research_agent,
+    "writer": writer_agent,
+}
 
-      Available agents:
-      - research: Research and fact-finding
-      - writer: Content creation and editing
-      """
-      agent = SUBAGENTS[agent_name]
-      result = agent.invoke({
-          "messages": [
-              {"role": "user", "content": description}
-          ]
-      })
-      return result["messages"][-1].content
+@tool
+def task(
+    agent_name: str,
+    description: str
+) -> str:
+    """Launch an ephemeral subagent for a task.
 
-  # Main coordinator agent
-  main_agent = create_agent(
-      model="gpt-5.5",
-      tools=[task],
-      system_prompt=(
-          "You coordinate specialized sub-agents. "
-          "Available: research (fact-finding), "
-          "writer (content creation). "
-          "Use the task tool to delegate work."
-      ),
-  )
-  ```
-</Accordion>
+    Available agents:
+    - research: Research and fact-finding
+    - writer: Content creation and editing
+    """
+    agent = SUBAGENTS[agent_name]
+    result = agent.invoke({
+        "messages": [
+            {"role": "user", "content": description}
+        ]
+    })
+    return result["messages"][-1].content
+
+# Main coordinator agent
+main_agent = create_agent(
+    model="gpt-5.5",
+    tools=[task],
+    system_prompt=(
+        "You coordinate specialized sub-agents. "
+        "Available: research (fact-finding), "
+        "writer (content creation). "
+        "Use the task tool to delegate work."
+    ),
+)
+```
+
+</details>
 
 ## Context engineering
 
@@ -322,11 +316,11 @@ Control how context flows between the main agent and its subagents:
 
 | Category                                  | Purpose                                                  | Impacts                      |
 | ----------------------------------------- | -------------------------------------------------------- | ---------------------------- |
-| [**Subagent specs**](#subagent-specs)     | Ensure subagents are invoked when they should be         | Main agent routing decisions |
-| [**Subagent inputs**](#subagent-inputs)   | Ensure subagents can execute well with optimized context | Subagent performance         |
-| [**Subagent outputs**](#subagent-outputs) | Ensure the supervisor can act on subagent results        | Main agent performance       |
+| [**Subagent specs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-specs)     | Ensure subagents are invoked when they should be         | Main agent routing decisions |
+| [**Subagent inputs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-inputs)   | Ensure subagents can execute well with optimized context | Subagent performance         |
+| [**Subagent outputs**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-outputs) | Ensure the supervisor can act on subagent results        | Main agent performance       |
 
-See also our comprehensive guide on [context engineering](/oss/python/langchain/context-engineering) for agents.
+See also our comprehensive guide on [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) for agents.
 
 ### Subagent specs
 
@@ -335,7 +329,7 @@ The **names** and **descriptions** associated with subagents are the primary way
 * **Name**: How the main agent refers to the sub-agent. Keep it clear and action-oriented (e.g., `research_agent`, `code_reviewer`).
 * **Description**: What the main agent knows about the sub-agent's capabilities. Be specific about what tasks it handles and when to use it.
 
-For the [single dispatch tool](#single-dispatch-tool) design, you must additionally provide the main agent with information about the subagents it can invoke.
+For the [single dispatch tool](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#single-dispatch-tool) design, you must additionally provide the main agent with information about the subagents it can invoke.
 You can provide this information in different ways based on the number of agents and whether your registry is static or dynamic:
 
 | Method                        | Best for                                 | Tradeoff                                                             |
@@ -356,7 +350,7 @@ List available agents directly in the main agent's system prompt. The main agent
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 main_agent = create_agent(
     model="...",
     tools=[task],
@@ -383,7 +377,7 @@ Add an enum constraint to the `agent_name` parameter in your dispatch tool. This
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from enum import Enum
 
 class AgentName(str, Enum):
@@ -413,7 +407,7 @@ Provide a separate tool (e.g., `list_agents` or `search_agents`) that the main a
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @tool
 def list_agents(query: str = "") -> str:
     """List available subagents, optionally filtered by query."""
@@ -436,7 +430,7 @@ main_agent = create_agent(
 
 Customize what context the subagent receives to execute its task. Add input that isn't practical to capture in a static prompt—full message history, prior results, or task metadata—by pulling from the agent's state.
 
-```python Subagent inputs example expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import AgentState
 from langchain.tools import tool, ToolRuntime
 
@@ -465,14 +459,13 @@ def call_subagent1(query: str, runtime: ToolRuntime[None, CustomState]):
 Customize what the main agent receives back so it can make good decisions. Two strategies:
 
 1. **Prompt the sub-agent**: Specify exactly what should be returned. A common failure mode is that the sub-agent performs tool calls or reasoning but doesn't include results in its final message—remind it that the supervisor only sees the final output.
-2. **Format in code**: Adjust or enrich the response before returning it. For example, pass specific state keys back in addition to the final text using a [`Command`](/oss/python/langgraph/graph-api#command).
+2. **Format in code**: Adjust or enrich the response before returning it. For example, pass specific state keys back in addition to the final text using a [`Command`](https://docs.langchain.com/oss/python/langgraph/graph-api#command).
 
-```python Subagent outputs example expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Annotated
 from langchain.agents import AgentState
 from langchain.tools import InjectedToolCallId
 from langgraph.types import Command
-
 
 @tool(
     "subagent1_name",
@@ -499,22 +492,17 @@ def call_subagent1(
 
 ## Checkpointing and state inspection
 
-By default, subagents use the **inherited checkpointer** mode—each invocation starts with fresh state, supports [interrupts](/oss/python/langgraph/interrupts#pause-using-interrupt), and runs safely in parallel. If you need a subagent to maintain its own persistent conversation history across invocations, compile it with `checkpointer=True` (continuations mode). See [subgraph persistence](/oss/python/langgraph/use-subgraphs#subgraph-persistence) for a full comparison of modes.
+By default, subagents use the **inherited checkpointer** mode—each invocation starts with fresh state, supports [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts#pause-using-interrupt), and runs safely in parallel. If you need a subagent to maintain its own persistent conversation history across invocations, compile it with `checkpointer=True` (continuations mode). See [subgraph persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence) for a full comparison of modes.
 
-Because subagents are called inside tool functions, LangGraph cannot [statically discover](/oss/python/langgraph/use-subgraphs#view-subgraph-state) them. This means [`get_state` with `subgraphs`](/oss/python/langgraph/use-subgraphs#view-subgraph-state) will not return subagent state. If you need to read nested graph state (e.g., during an [interrupt](/oss/python/langgraph/interrupts#pause-using-interrupt)), invoke the subagent from a [node function](/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node) in a custom graph instead. See [subgraph persistence](/oss/python/langgraph/use-subgraphs#subgraph-persistence) for details on how each mode affects state visibility.
+Because subagents are called inside tool functions, LangGraph cannot [statically discover](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#view-subgraph-state) them. This means [`get_state` with `subgraphs`](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#view-subgraph-state) will not return subagent state. If you need to read nested graph state (e.g., during an [interrupt](https://docs.langchain.com/oss/python/langgraph/interrupts#pause-using-interrupt)), invoke the subagent from a [node function](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node) in a custom graph instead. See [subgraph persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence) for details on how each mode affects state visibility.
 
-<Card title="Migrate from langgraph-supervisor" icon="arrow-right" href="/oss/python/migrate/langgraph-supervisor" arrow cta="View guide">
-  The langgraph-supervisor package is no longer actively maintained. Learn how to migrate from create\_supervisor to the subagents pattern, including interrupt and resume flows with external API callbacks.
-</Card>
+#### [Migrate from langgraph-supervisor](https://docs.langchain.com/oss/python/migrate/langgraph-supervisor)
+The langgraph-supervisor package is no longer actively maintained. Learn how to migrate from create\_supervisor to the subagents pattern, including interrupt and resume flows with external API callbacks.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

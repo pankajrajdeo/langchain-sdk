@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Bedrock (knowledge bases) integration
 
 > Integrate with the Bedrock (knowledge bases) retriever using LangChain Python.
 
-This guide will help you get started with the AWS Knowledge Bases [retriever](/oss/python/deepagents/retrieval).
+This guide will help you get started with the AWS Knowledge Bases [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval).
 
 [Knowledge Bases for Amazon Bedrock](https://aws.amazon.com/bedrock/knowledge-bases/) is an Amazon Web Services (AWS) offering which lets you quickly build RAG applications by using your private data to customize FM response.
 
@@ -14,19 +10,19 @@ Implementing `RAG` requires organizations to perform several cumbersome steps to
 
 With `Knowledge Bases for Amazon Bedrock`, simply point to the location of your data in `Amazon S3`, and `Knowledge Bases for Amazon Bedrock` takes care of the entire ingestion workflow into your vector database. If you do not have an existing vector database, Amazon Bedrock creates an Amazon OpenSearch Serverless vector store for you. For retrievals, use the LangChain - Amazon Bedrock integration via the Retrieve API to retrieve relevant results for a user query from knowledge bases.
 
-**Amazon Bedrock now also offers [Managed Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html)**, which handle embedding, storage, and retrieval automatically—no external vector store needed. See the [Managed Knowledge Base](#managed-knowledge-base) section below.
+**Amazon Bedrock now also offers [Managed Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html)**, which handle embedding, storage, and retrieval automatically—no external vector store needed. See the [Managed Knowledge Base](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock#managed-knowledge-base) section below.
 
 ### Integration details
 
-<ItemTable category="document_retrievers" item="AmazonKnowledgeBasesRetriever" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock).
 
 ## Setup
 
 Knowledge Bases can be configured through [AWS Console](https://aws.amazon.com/console/) or by using [AWS SDKs](https://aws.amazon.com/developer/tools/). We will need the `knowledge_base_id` to instantiate the retriever.
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -35,7 +31,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 This retriever lives in the `langchain-aws` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU "langchain-aws>=1.6.3"
 ```
 
@@ -47,7 +43,7 @@ pip install -qU "langchain-aws>=1.6.3"
 
 For traditional vector-based knowledge bases (with OpenSearch Serverless, Pinecone, etc.):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.retrievers import AmazonKnowledgeBasesRetriever
 
 retriever = AmazonKnowledgeBasesRetriever(
@@ -60,7 +56,7 @@ retriever = AmazonKnowledgeBasesRetriever(
 
 For [Managed Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html) (recommended—no vector store needed):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.retrievers import AmazonKnowledgeBasesRetriever
 
 retriever = AmazonKnowledgeBasesRetriever(
@@ -75,7 +71,7 @@ Managed knowledge bases handle embedding, chunking, storage, and retrieval autom
 
 For complex queries that benefit from query decomposition and managed reranking, use the standalone `agentic_retrieve` helper:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.retrievers import agentic_retrieve
 
 result = agentic_retrieve(
@@ -92,7 +88,7 @@ Agentic retrieval uses `AgenticRetrieveStream` which performs intelligent query 
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What did the president say about Ketanji Brown?"
 
 retriever.invoke(query)
@@ -100,7 +96,7 @@ retriever.invoke(query)
 
 ## Use within a chain
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrock
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -124,7 +120,7 @@ chain.invoke("What are the key features?")
 
 ## Required IAM Permissions
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "Effect": "Allow",
   "Action": [
@@ -149,12 +145,8 @@ For detailed documentation of all `AmazonKnowledgeBasesRetriever` features and c
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

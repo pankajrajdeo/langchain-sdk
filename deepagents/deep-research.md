@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Build a deep research agent
-
-> Build a multi-step web research agent with subagent delegation
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/deep-research)
+Build a multi-step web research agent with subagent delegation
 
 ## Overview
 
-This guide demonstrates how to build a multi-step web research agent from scratch using [Deep Agents](/oss/python/deepagents). The agent decomposes research questions into focused tasks, delegates them to specialized sub-agents, and synthesizes findings into a comprehensive report.
+This guide demonstrates how to build a multi-step web research agent from scratch using [Deep Agents](https://docs.langchain.com/oss/python/deepagents). The agent decomposes research questions into focused tasks, delegates them to specialized sub-agents, and synthesizes findings into a comprehensive report.
 
 The agent you build will:
 
@@ -23,9 +19,9 @@ The spawned sub-agents will conduct web searches with Tavily, fetching full webp
 
 This tutorial covers:
 
-* [Subagents](/oss/python/deepagents/subagents) for parallel, context-isolated research
-* Custom [tools](/oss/python/langchain/tools) for web search
-* Multi-step planning with the opt-in [planning tool](/oss/python/deepagents/overview#task-planning)
+* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) for parallel, context-isolated research
+* Custom [tools](https://docs.langchain.com/oss/python/langchain/tools) for web search
+* Multi-step planning with the opt-in [planning tool](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
 
 ## Prerequisites
 
@@ -37,396 +33,367 @@ API keys for:
 
 ## Setup
 
-<Steps>
-  <Step title="Create project directory">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    mkdir deep-research-agent
-    cd deep-research-agent
-    ```
-  </Step>
+### Create project directory
+```bash
+mkdir deep-research-agent
+cd deep-research-agent
+```
 
-  <Step title="Install dependencies">
-    <Tabs>
-      <Tab title="Claude">
-        <CodeGroup>
-          ```bash pip wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-          pip install deepagents tavily-python httpx markdownify langchain-anthropic langchain-core
-          ```
+### Install dependencies
+#### Claude
+```bash
+pip install deepagents tavily-python httpx markdownify langchain-anthropic langchain-core
+```
 
-          ```bash uv wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-          uv init
-          uv add deepagents tavily-python httpx markdownify langchain-anthropic langchain-core
-          uv sync
-          ```
-        </CodeGroup>
-      </Tab>
+```bash
+uv init
+uv add deepagents tavily-python httpx markdownify langchain-anthropic langchain-core
+uv sync
+```
 
-      <Tab title="Gemini">
-        <CodeGroup>
-          ```bash pip wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-          pip install deepagents tavily-python httpx markdownify langchain-google-genai langchain-core
-          ```
+#### Gemini
+```bash
+pip install deepagents tavily-python httpx markdownify langchain-google-genai langchain-core
+```
 
-          ```bash uv wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-          uv init
-          uv add deepagents tavily-python httpx markdownify langchain-google-genai langchain-core
-          uv sync
-          ```
-        </CodeGroup>
-      </Tab>
-    </Tabs>
-  </Step>
+```bash
+uv init
+uv add deepagents tavily-python httpx markdownify langchain-google-genai langchain-core
+uv sync
+```
 
-  <Step title="Set API keys">
-    <Tabs>
-      <Tab title="Claude">
-        ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        export ANTHROPIC_API_KEY="your_anthropic_api_key"
-        export TAVILY_API_KEY="your_tavily_api_key"
-        export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
-        ```
-      </Tab>
+### Set API keys
+#### Claude
+```bash
+export ANTHROPIC_API_KEY="your_anthropic_api_key"
+export TAVILY_API_KEY="your_tavily_api_key"
+export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
+```
 
-      <Tab title="Gemini">
-        ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        export GOOGLE_API_KEY="your_google_api_key"
-        export TAVILY_API_KEY="your_tavily_api_key"
-        export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
-        ```
-      </Tab>
-    </Tabs>
-  </Step>
-</Steps>
+#### Gemini
+```bash
+export GOOGLE_API_KEY="your_google_api_key"
+export TAVILY_API_KEY="your_tavily_api_key"
+export LANGSMITH_API_KEY="your_langsmith_api_key"   # Optional
+```
 
 ## Build the agent
 
 Create `agent.py` in your project directory:
 
-<Steps>
-  <Step title="Add tools">
-    Add the custom search tool. The `tavily_search` tool uses Tavily for URL discovery, then fetches full webpage content so the agent can analyze complete sources instead of summaries.
+### Add tools
+Add the custom search tool. The `tavily_search` tool uses Tavily for URL discovery, then fetches full webpage content so the agent can analyze complete sources instead of summaries.
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import os
-    from typing import Annotated, Literal
+```python
+import os
+from typing import Annotated, Literal
 
-    import httpx
-    from langchain.tools import InjectedToolArg, tool
-    from markdownify import markdownify
-    from tavily import TavilyClient
+import httpx
+from langchain.tools import InjectedToolArg, tool
+from markdownify import markdownify
+from tavily import TavilyClient
 
-    tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
 
+def fetch_webpage_content(url: str, timeout: float = 10.0) -> str:
+    """Fetch webpage and convert HTML to markdown."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+    try:
+        response = httpx.get(url, headers=headers, timeout=timeout)
+        response.raise_for_status()
+        return markdownify(response.text)
+    except Exception as e:
+        return f"Error fetching {url}: {e!s}"
 
-    def fetch_webpage_content(url: str, timeout: float = 10.0) -> str:
-        """Fetch webpage and convert HTML to markdown."""
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-        }
-        try:
-            response = httpx.get(url, headers=headers, timeout=timeout)
-            response.raise_for_status()
-            return markdownify(response.text)
-        except Exception as e:
-            return f"Error fetching {url}: {e!s}"
+@tool(parse_docstring=True)
+def tavily_search(
+    query: str,
+    max_results: Annotated[int, InjectedToolArg] = 1,
+    topic: Annotated[
+        Literal["general", "news", "finance"], InjectedToolArg
+    ] = "general",
+) -> str:
+    """Search the web for information on a given query.
 
+    Uses Tavily to discover relevant URLs, then fetches and returns full webpage content as markdown.
 
-    @tool(parse_docstring=True)
-    def tavily_search(
-        query: str,
-        max_results: Annotated[int, InjectedToolArg] = 1,
-        topic: Annotated[
-            Literal["general", "news", "finance"], InjectedToolArg
-        ] = "general",
-    ) -> str:
-        """Search the web for information on a given query.
+    Args:
+        query: Search query to execute
+        max_results: Maximum number of results to return (default: 1)
+        topic: Topic filter - 'general', 'news', or 'finance' (default: 'general')
 
-        Uses Tavily to discover relevant URLs, then fetches and returns full webpage content as markdown.
-
-        Args:
-            query: Search query to execute
-            max_results: Maximum number of results to return (default: 1)
-            topic: Topic filter - 'general', 'news', or 'finance' (default: 'general')
-
-        Returns:
-            Formatted search results with full webpage content
-        """
-        search_results = tavily_client.search(
-            query,
-            max_results=max_results,
-            topic=topic,
-        )
-        result_texts = []
-        for result in search_results.get("results", []):
-            url = result["url"]
-            title = result["title"]
-            content = fetch_webpage_content(url)
-            result_texts.append(f"## {title}\n**URL:** {url}\n\n{content}\n---")
-
-        return f"Found {len(result_texts)} result(s) for '{query}':\n\n" + "\n".join(
-            result_texts
-        )
-    ```
-  </Step>
-
-  <Step title="Add prompts">
-    Add the orchestrator workflow and sub-agent prompt templates to `agent.py`:
-
-    ```python expandable wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    RESEARCH_WORKFLOW_INSTRUCTIONS = """# Research Workflow
-
-    Follow this workflow for all research requests:
-
-    1. **Plan**: Create a todo list with write_todos to break down the research into focused tasks
-    2. **Save the request**: Use write_file() to save the user's research question to `/research_request.md`
-    3. **Research**: Delegate research tasks to sub-agents using the task() tool - ALWAYS use sub-agents for research, never conduct research yourself
-    4. **Synthesize**: Review all sub-agent findings and consolidate citations (each unique URL gets one number across all findings)
-    5. **Write Report**: Write a comprehensive final report to `/final_report.md` (see Report Writing Guidelines below)
-    6. **Verify**: Read `/research_request.md` and confirm you've addressed all aspects with proper citations and structure
-
-    ## Research Planning Guidelines
-    - Batch similar research tasks into a single TODO to minimize overhead
-    - For simple fact-finding questions, use 1 sub-agent
-    - For comparisons or multi-faceted topics, delegate to multiple parallel sub-agents
-    - Each sub-agent should research one specific aspect and return findings
-
-    ## Report Writing Guidelines
-
-    When writing the final report to `/final_report.md`, follow these structure patterns:
-
-    **For comparisons:**
-    1. Introduction
-    2. Overview of topic A
-    3. Overview of topic B
-    4. Detailed comparison
-    5. Conclusion
-
-    **For lists/rankings:**
-    Simply list items with details - no introduction needed:
-    1. Item 1 with explanation
-    2. Item 2 with explanation
-    3. Item 3 with explanation
-
-    **For summaries/overviews:**
-    1. Overview of topic
-    2. Key concept 1
-    3. Key concept 2
-    4. Key concept 3
-    5. Conclusion
-
-    **General guidelines:**
-    - Use clear section headings (## for sections, ### for subsections)
-    - Write in paragraph form by default - be text-heavy, not just bullet points
-    - Do NOT use self-referential language ("I found...", "I researched...")
-    - Write as a professional report without meta-commentary
-    - Each section should be comprehensive and detailed
-    - Use bullet points only when listing is more appropriate than prose
-
-    **Citation format:**
-    - Cite sources inline using [1], [2], [3] format
-    - Assign each unique URL a single citation number across ALL sub-agent findings
-    - End report with ### Sources section listing each numbered source
-    - Number sources sequentially without gaps (1,2,3,4...)
-    - Format: [1] Source Title: URL (each on separate line for proper list rendering)
-    - Example:
-
-     Some important finding [1]. Another key insight [2].
-
-     ### Sources
-     [1] AI Research Paper: https://example.com/paper
-     [2] Industry Analysis: https://example.com/analysis
+    Returns:
+        Formatted search results with full webpage content
     """
-    ```
+    search_results = tavily_client.search(
+        query,
+        max_results=max_results,
+        topic=topic,
+    )
+    result_texts = []
+    for result in search_results.get("results", []):
+        url = result["url"]
+        title = result["title"]
+        content = fetch_webpage_content(url)
+        result_texts.append(f"## {title}\n**URL:** {url}\n\n{content}\n---")
 
-    ```python expandable wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    RESEARCHER_INSTRUCTIONS = """You are a research assistant conducting research on the user's input topic. For context, today's date is {date}.
+    return f"Found {len(result_texts)} result(s) for '{query}':\n\n" + "\n".join(
+        result_texts
+    )
+```
 
-    Your job is to use tools to gather information about the user's input topic.
-    You can use the tavily_search tool to find resources that can help answer the research question.
-    You can call it in series or in parallel, your research is conducted in a tool-calling loop.
+### Add prompts
+Add the orchestrator workflow and sub-agent prompt templates to `agent.py`:
 
-    You have access to the tavily_search tool for conducting web searches.
+```python
+RESEARCH_WORKFLOW_INSTRUCTIONS = """# Research Workflow
 
-    Think like a human researcher with limited time. Follow these steps:
+Follow this workflow for all research requests:
 
-    1. **Read the question carefully** - What specific information does the user need?
-    2. **Start with broader searches** - Use broad, comprehensive queries first
-    3. **After each search, pause and assess** - Do I have enough to answer? What's still missing?
-    4. **Execute narrower searches as you gather information** - Fill in the gaps
-    5. **Stop when you can answer confidently** - Don't keep searching for perfection
+1. **Plan**: Create a todo list with write_todos to break down the research into focused tasks
+2. **Save the request**: Use write_file() to save the user's research question to `/research_request.md`
+3. **Research**: Delegate research tasks to sub-agents using the task() tool - ALWAYS use sub-agents for research, never conduct research yourself
+4. **Synthesize**: Review all sub-agent findings and consolidate citations (each unique URL gets one number across all findings)
+5. **Write Report**: Write a comprehensive final report to `/final_report.md` (see Report Writing Guidelines below)
+6. **Verify**: Read `/research_request.md` and confirm you've addressed all aspects with proper citations and structure
 
-    **Tool Call Budgets** (Prevent excessive searching):
-    - **Simple queries**: Use 2-3 search tool calls maximum
-    - **Complex queries**: Use up to 5 search tool calls maximum
-    - **Always stop**: After 5 search tool calls if you cannot find the right sources
+## Research Planning Guidelines
+- Batch similar research tasks into a single TODO to minimize overhead
+- For simple fact-finding questions, use 1 sub-agent
+- For comparisons or multi-faceted topics, delegate to multiple parallel sub-agents
+- Each sub-agent should research one specific aspect and return findings
 
-    **Stop Immediately When**:
-    - You can answer the user's question comprehensively
-    - You have 3+ relevant examples/sources for the question
-    - Your last 2 searches returned similar information
+## Report Writing Guidelines
 
-    After each search, assess results before continuing: What key information did I find? What's missing? Do I have enough to answer? Should I search more or provide my answer?
+When writing the final report to `/final_report.md`, follow these structure patterns:
 
-    When providing your findings back to the orchestrator:
+**For comparisons:**
+1. Introduction
+2. Overview of topic A
+3. Overview of topic B
+4. Detailed comparison
+5. Conclusion
 
-    1. **Structure your response**: Organize findings with clear headings and detailed explanations
-    2. **Cite sources inline**: Use [1], [2], [3] format when referencing information from your searches
-    3. **Include Sources section**: End with ### Sources listing each numbered source with title and URL
+**For lists/rankings:**
+Simply list items with details - no introduction needed:
+1. Item 1 with explanation
+2. Item 2 with explanation
+3. Item 3 with explanation
 
-    Example:
-    ## Key Findings
-    Context engineering is a critical technique for AI agents [1]. Studies show that proper context management can improve performance by 40% [2].
+**For summaries/overviews:**
+1. Overview of topic
+2. Key concept 1
+3. Key concept 2
+4. Key concept 3
+5. Conclusion
 
-    ### Sources
-    [1] Context Engineering Guide: https://example.com/context-guide
-    [2] AI Performance Study: https://example.com/study
+**General guidelines:**
+- Use clear section headings (## for sections, ### for subsections)
+- Write in paragraph form by default - be text-heavy, not just bullet points
+- Do NOT use self-referential language ("I found...", "I researched...")
+- Write as a professional report without meta-commentary
+- Each section should be comprehensive and detailed
+- Use bullet points only when listing is more appropriate than prose
 
-    The orchestrator will consolidate citations from all sub-agents into the final report.
-    """
-    ```
+**Citation format:**
+- Cite sources inline using [1], [2], [3] format
+- Assign each unique URL a single citation number across ALL sub-agent findings
+- End report with ### Sources section listing each numbered source
+- Number sources sequentially without gaps (1,2,3,4...)
+- Format: [1] Source Title: URL (each on separate line for proper list rendering)
+- Example:
 
-    ```python expandable wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    SUBAGENT_DELEGATION_INSTRUCTIONS = """# Sub-Agent Research Coordination
+ Some important finding [1]. Another key insight [2].
 
-    Your role is to coordinate research by delegating tasks from your TODO list to specialized research sub-agents.
+ ### Sources
+ [1] AI Research Paper: https://example.com/paper
+ [2] Industry Analysis: https://example.com/analysis
+"""
+```
 
-    ## Delegation Strategy
+```python
+RESEARCHER_INSTRUCTIONS = """You are a research assistant conducting research on the user's input topic. For context, today's date is {date}.
 
-    **DEFAULT: Start with 1 sub-agent** for most queries:
-    - "What is quantum computing?" -> 1 sub-agent (general overview)
-    - "List the top 10 coffee shops in San Francisco" -> 1 sub-agent
-    - "Summarize the history of the internet" -> 1 sub-agent
-    - "Research context engineering for AI agents" -> 1 sub-agent (covers all aspects)
+Your job is to use tools to gather information about the user's input topic.
+You can use the tavily_search tool to find resources that can help answer the research question.
+You can call it in series or in parallel, your research is conducted in a tool-calling loop.
 
-    **ONLY parallelize when the query EXPLICITLY requires comparison or has clearly independent aspects:**
+You have access to the tavily_search tool for conducting web searches.
 
-    **Explicit comparisons** -> 1 sub-agent per element:
-    - "Compare OpenAI vs Anthropic vs DeepMind AI safety approaches" -> 3 parallel sub-agents
-    - "Compare Python vs JavaScript for web development" -> 2 parallel sub-agents
+Think like a human researcher with limited time. Follow these steps:
 
-    **Clearly separated aspects** -> 1 sub-agent per aspect (use sparingly):
-    - "Research renewable energy adoption in Europe, Asia, and North America" -> 3 parallel sub-agents (geographic separation)
-    - Only use this pattern when aspects cannot be covered efficiently by a single comprehensive search
+1. **Read the question carefully** - What specific information does the user need?
+2. **Start with broader searches** - Use broad, comprehensive queries first
+3. **After each search, pause and assess** - Do I have enough to answer? What's still missing?
+4. **Execute narrower searches as you gather information** - Fill in the gaps
+5. **Stop when you can answer confidently** - Don't keep searching for perfection
 
-    ## Key Principles
-    - **Bias towards single sub-agent**: One comprehensive research task is more token-efficient than multiple narrow ones
-    - **Avoid premature decomposition**: Don't break "research X" into "research X overview", "research X techniques", "research X applications" - just use 1 sub-agent for all of X
-    - **Parallelize only for clear comparisons**: Use multiple sub-agents when comparing distinct entities or geographically separated data
+**Tool Call Budgets** (Prevent excessive searching):
+- **Simple queries**: Use 2-3 search tool calls maximum
+- **Complex queries**: Use up to 5 search tool calls maximum
+- **Always stop**: After 5 search tool calls if you cannot find the right sources
 
-    ## Parallel Execution Limits
-    - Use at most {max_concurrent_research_units} parallel sub-agents per iteration
-    - Make multiple task() calls in a single response to enable parallel execution
-    - Each sub-agent returns findings independently
+**Stop Immediately When**:
+- You can answer the user's question comprehensively
+- You have 3+ relevant examples/sources for the question
+- Your last 2 searches returned similar information
 
-    ## Research Limits
-    - Stop after {max_researcher_iterations} delegation rounds if you haven't found adequate sources
-    - Stop when you have sufficient information to answer comprehensively
-    - Bias towards focused research over exhaustive exploration"""
-    ```
-  </Step>
+After each search, assess results before continuing: What key information did I find? What's missing? Do I have enough to answer? Should I search more or provide my answer?
 
-  <Step title="Enable task planning">
-    [Task planning](/oss/python/deepagents/overview#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent.
+When providing your findings back to the orchestrator:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents.middleware import TodoListMiddleware
-    ```
+1. **Structure your response**: Organize findings with clear headings and detailed explanations
+2. **Cite sources inline**: Use [1], [2], [3] format when referencing information from your searches
+3. **Include Sources section**: End with ### Sources listing each numbered source with title and URL
 
-    You include this middleware in the next step when you create the agent.
-  </Step>
+Example:
+## Key Findings
+Context engineering is a critical technique for AI agents [1]. Studies show that proper context management can improve performance by 40% [2].
 
-  <Step title="Create the agent">
-    Add the model initialization and agent creation to `agent.py`. Choose your provider. Include [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) so the planning tool is available:
+### Sources
+[1] Context Engineering Guide: https://example.com/context-guide
+[2] AI Performance Study: https://example.com/study
 
-    <Tabs>
-      <Tab title="Claude">
-        ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        from datetime import datetime
+The orchestrator will consolidate citations from all sub-agents into the final report.
+"""
+```
 
-        from deepagents import create_deep_agent
-        from langchain.agents.middleware import TodoListMiddleware
-        from langchain.chat_models import init_chat_model
+```python
+SUBAGENT_DELEGATION_INSTRUCTIONS = """# Sub-Agent Research Coordination
 
-        max_concurrent_research_units = 3
-        max_researcher_iterations = 3
+Your role is to coordinate research by delegating tasks from your TODO list to specialized research sub-agents.
 
-        current_date = datetime.now().strftime("%Y-%m-%d")
+## Delegation Strategy
 
-        INSTRUCTIONS = (
-            RESEARCH_WORKFLOW_INSTRUCTIONS
-            + "\n\n"
-            + "=" * 80
-            + "\n\n"
-            + SUBAGENT_DELEGATION_INSTRUCTIONS.format(
-                max_concurrent_research_units=max_concurrent_research_units,
-                max_researcher_iterations=max_researcher_iterations,
-            )
-        )
+**DEFAULT: Start with 1 sub-agent** for most queries:
+- "What is quantum computing?" -> 1 sub-agent (general overview)
+- "List the top 10 coffee shops in San Francisco" -> 1 sub-agent
+- "Summarize the history of the internet" -> 1 sub-agent
+- "Research context engineering for AI agents" -> 1 sub-agent (covers all aspects)
 
-        research_sub_agent = {
-            "name": "research-agent",
-            "description": "Delegate research to the sub-agent. Give one topic at a time.",
-            "system_prompt": RESEARCHER_INSTRUCTIONS.format(date=current_date),
-            "tools": [tavily_search],
-        }
+**ONLY parallelize when the query EXPLICITLY requires comparison or has clearly independent aspects:**
 
-        model = init_chat_model(model="anthropic:claude-sonnet-4-5-20250929", temperature=0.0)
+**Explicit comparisons** -> 1 sub-agent per element:
+- "Compare OpenAI vs Anthropic vs DeepMind AI safety approaches" -> 3 parallel sub-agents
+- "Compare Python vs JavaScript for web development" -> 2 parallel sub-agents
 
-        agent = create_deep_agent(
-            model=model,
-            tools=[tavily_search],
-            system_prompt=INSTRUCTIONS,
-            subagents=[research_sub_agent],
-            middleware=[TodoListMiddleware()],
-        )
-        ```
-      </Tab>
+**Clearly separated aspects** -> 1 sub-agent per aspect (use sparingly):
+- "Research renewable energy adoption in Europe, Asia, and North America" -> 3 parallel sub-agents (geographic separation)
+- Only use this pattern when aspects cannot be covered efficiently by a single comprehensive search
 
-      <Tab title="Gemini">
-        ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        from datetime import datetime
+## Key Principles
+- **Bias towards single sub-agent**: One comprehensive research task is more token-efficient than multiple narrow ones
+- **Avoid premature decomposition**: Don't break "research X" into "research X overview", "research X techniques", "research X applications" - just use 1 sub-agent for all of X
+- **Parallelize only for clear comparisons**: Use multiple sub-agents when comparing distinct entities or geographically separated data
 
-        from deepagents import create_deep_agent
-        from langchain.agents.middleware import TodoListMiddleware
-        from langchain_google_genai import ChatGoogleGenerativeAI
+## Parallel Execution Limits
+- Use at most {max_concurrent_research_units} parallel sub-agents per iteration
+- Make multiple task() calls in a single response to enable parallel execution
+- Each sub-agent returns findings independently
 
-        max_concurrent_research_units = 3
-        max_researcher_iterations = 3
+## Research Limits
+- Stop after {max_researcher_iterations} delegation rounds if you haven't found adequate sources
+- Stop when you have sufficient information to answer comprehensively
+- Bias towards focused research over exhaustive exploration"""
+```
 
-        current_date = datetime.now().strftime("%Y-%m-%d")
+### Enable task planning
+[Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent.
 
-        INSTRUCTIONS = (
-            RESEARCH_WORKFLOW_INSTRUCTIONS
-            + "\n\n"
-            + "=" * 80
-            + "\n\n"
-            + SUBAGENT_DELEGATION_INSTRUCTIONS.format(
-                max_concurrent_research_units=max_concurrent_research_units,
-                max_researcher_iterations=max_researcher_iterations,
-            )
-        )
+```python
+from langchain.agents.middleware import TodoListMiddleware
+```
 
-        research_sub_agent = {
-            "name": "research-agent",
-            "description": "Delegate research to the sub-agent. Give one topic at a time.",
-            "system_prompt": RESEARCHER_INSTRUCTIONS.format(date=current_date),
-            "tools": [tavily_search],
-        }
+You include this middleware in the next step when you create the agent.
 
-        model = ChatGoogleGenerativeAI(model="gemini-3-pro-preview", temperature=0.0)
+### Create the agent
+Add the model initialization and agent creation to `agent.py`. Choose your provider. Include [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) so the planning tool is available:
 
-        agent = create_deep_agent(
-            model=model,
-            tools=[tavily_search],
-            system_prompt=INSTRUCTIONS,
-            subagents=[research_sub_agent],
-            middleware=[TodoListMiddleware()],
-        )
-        ```
-      </Tab>
-    </Tabs>
-  </Step>
-</Steps>
+#### Claude
+```python
+from datetime import datetime
+
+from deepagents import create_deep_agent
+from langchain.agents.middleware import TodoListMiddleware
+from langchain.chat_models import init_chat_model
+
+max_concurrent_research_units = 3
+max_researcher_iterations = 3
+
+current_date = datetime.now().strftime("%Y-%m-%d")
+
+INSTRUCTIONS = (
+    RESEARCH_WORKFLOW_INSTRUCTIONS
+    + "\n\n"
+    + "=" * 80
+    + "\n\n"
+    + SUBAGENT_DELEGATION_INSTRUCTIONS.format(
+        max_concurrent_research_units=max_concurrent_research_units,
+        max_researcher_iterations=max_researcher_iterations,
+    )
+)
+
+research_sub_agent = {
+    "name": "research-agent",
+    "description": "Delegate research to the sub-agent. Give one topic at a time.",
+    "system_prompt": RESEARCHER_INSTRUCTIONS.format(date=current_date),
+    "tools": [tavily_search],
+}
+
+model = init_chat_model(model="anthropic:claude-sonnet-4-5-20250929", temperature=0.0)
+
+agent = create_deep_agent(
+    model=model,
+    tools=[tavily_search],
+    system_prompt=INSTRUCTIONS,
+    subagents=[research_sub_agent],
+    middleware=[TodoListMiddleware()],
+)
+```
+
+#### Gemini
+```python
+from datetime import datetime
+
+from deepagents import create_deep_agent
+from langchain.agents.middleware import TodoListMiddleware
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+max_concurrent_research_units = 3
+max_researcher_iterations = 3
+
+current_date = datetime.now().strftime("%Y-%m-%d")
+
+INSTRUCTIONS = (
+    RESEARCH_WORKFLOW_INSTRUCTIONS
+    + "\n\n"
+    + "=" * 80
+    + "\n\n"
+    + SUBAGENT_DELEGATION_INSTRUCTIONS.format(
+        max_concurrent_research_units=max_concurrent_research_units,
+        max_researcher_iterations=max_researcher_iterations,
+    )
+)
+
+research_sub_agent = {
+    "name": "research-agent",
+    "description": "Delegate research to the sub-agent. Give one topic at a time.",
+    "system_prompt": RESEARCHER_INSTRUCTIONS.format(date=current_date),
+    "tools": [tavily_search],
+}
+
+model = ChatGoogleGenerativeAI(model="gemini-3-pro-preview", temperature=0.0)
+
+agent = create_deep_agent(
+    model=model,
+    tools=[tavily_search],
+    system_prompt=INSTRUCTIONS,
+    subagents=[research_sub_agent],
+    middleware=[TodoListMiddleware()],
+)
+```
 
 ## Run the agent
 
@@ -434,55 +401,51 @@ You can run the agent synchronously, meaning it will wait for the full result an
 
 Add the code from the respective tab at the bottom of `agent.py`:
 
-<Tabs>
-  <Tab title="Run synchronously" value="sync">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.messages import HumanMessage
+#### Run synchronously
+```python
+from langchain.messages import HumanMessage
 
-    if __name__ == "__main__":
-        result = agent.invoke(
-            {
-                "messages": [
-                    HumanMessage(
-                        content="What are the main differences between RAG and fine-tuning for LLM applications?"
-                    )
-                ]
-            }
-        )
+if __name__ == "__main__":
+    result = agent.invoke(
+        {
+            "messages": [
+                HumanMessage(
+                    content="What are the main differences between RAG and fine-tuning for LLM applications?"
+                )
+            ]
+        }
+    )
 
-        for msg in result.get("messages", []):
-            if hasattr(msg, "content") and msg.content:
-                print(msg.content)
-    ```
-  </Tab>
+    for msg in result.get("messages", []):
+        if hasattr(msg, "content") and msg.content:
+            print(msg.content)
+```
 
-  <Tab title="Stream updates" value="stream">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.messages import HumanMessage
+#### Stream updates
+```python
+from langchain.messages import HumanMessage
 
-    if __name__ == "__main__":
-        stream = agent.stream_events(
-            {
-                "messages": [
-                    HumanMessage(content="Compare Python vs JavaScript for web development")
-                ]
-            },
-            version="v3",
-        )
-        for message in stream.messages:
-            for token in message.text:
-                print(token, end="", flush=True)
-    ```
-  </Tab>
-</Tabs>
+if __name__ == "__main__":
+    stream = agent.stream_events(
+        {
+            "messages": [
+                HumanMessage(content="Compare Python vs JavaScript for web development")
+            ]
+        },
+        version="v3",
+    )
+    for message in stream.messages:
+        for token in message.text:
+            print(token, end="", flush=True)
+```
 
 Run the agent from the project root:
 
-```sh theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sh
 python agent.py
 ```
 
-If you set the `LANGSMITH_API_KEY` environment variable before running, you can view the agent's traces in [LangSmith](/langsmith/observability) to debug and monitor multi-step behavior.
+If you set the `LANGSMITH_API_KEY` environment variable before running, you can view the agent's traces in [LangSmith](https://docs.langchain.com/langsmith/observability) to debug and monitor multi-step behavior.
 
 ## Full code
 
@@ -495,19 +458,15 @@ You can also tune the delegation limits to allow for more parallel sub-agents or
 
 For more information on the concepts in this tutorial, check out the following resources:
 
-* [Subagents](/oss/python/deepagents/subagents): Learn how to configure subagents with different tools and prompts
-* [Customization](/oss/python/deepagents/customization): Customize models, tools, system prompts, and optional [task planning](/oss/python/deepagents/overview#task-planning)
-* [LangSmith](/langsmith/observability): Trace research runs and debug multi-step behavior
+* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents): Learn how to configure subagents with different tools and prompts
+* [Customization](https://docs.langchain.com/oss/python/deepagents/customization): Customize models, tools, system prompts, and optional [task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
+* [LangSmith](https://docs.langchain.com/langsmith/observability): Trace research runs and debug multi-step behavior
 * [Deep Research Course](https://academy.langchain.com/courses/deep-research-with-langgraph): Full course on deep research with LangGraph
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/deep-research.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

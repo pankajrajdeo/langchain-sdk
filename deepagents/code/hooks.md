@@ -1,22 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Hooks
-
-> Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/hooks)
+Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json
 
 Hooks let external programs observe and control Deep Agents Code lifecycle events.
 
-When an event fires, Deep Agents Code finds matching handlers, sends each a JSON payload on stdin, and combines their exit codes and stdout. Use that response to allow, deny, inject context, or continue a turn. The sections below cover configuration, [Events](#events), [Input payload](#input-payload), and [Handler output](#handler-output).
+When an event fires, Deep Agents Code finds matching handlers, sends each a JSON payload on stdin, and combines their exit codes and stdout. Use that response to allow, deny, inject context, or continue a turn. The sections below cover configuration, [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events), [Input payload](https://docs.langchain.com/oss/deepagents/code/hooks#input-payload), and [Handler output](https://docs.langchain.com/oss/deepagents/code/hooks#handler-output).
 
 Hooks run with your user permissions and execute arbitrary code from your configuration. Treat hook configuration as executable code and only install hooks from sources you trust.
 
 ## Setup
 
-Create `~/.deepagents/hooks.json` for hooks that apply to every project, or `{project_root}/.deepagents/hooks.json` for project-scoped hooks (after you grant [workspace trust](#trust-project-hooks)). Handlers nest in three levels: event name, matcher group, then the handlers that run for that group.
+Create `~/.deepagents/hooks.json` for hooks that apply to every project, or `{project_root}/.deepagents/hooks.json` for project-scoped hooks (after you grant [workspace trust](https://docs.langchain.com/oss/deepagents/code/hooks#trust-project-hooks)). Handlers nest in three levels: event name, matcher group, then the handlers that run for that group.
 
-```json title="~/.deepagents/hooks.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "hooks": {
     "PreToolUse": [
@@ -69,7 +65,7 @@ Project hooks come from the repository, so they load only after the workspace is
 
 ### Plugin hooks
 
-An enabled plugin contributes the same configuration shape from `hooks/hooks.json`, a manifest `hooks` path, or an inline manifest object. Installing and enabling the plugin is the consent gate: workspace trust governs project hooks only, so it neither grants nor withholds a plugin's hooks. Review a plugin before enabling it, and check the events it declares in the plugin manager. See [Plugins and marketplaces](/oss/deepagents/code/plugins#add-hooks).
+An enabled plugin contributes the same configuration shape from `hooks/hooks.json`, a manifest `hooks` path, or an inline manifest object. Installing and enabling the plugin is the consent gate: workspace trust governs project hooks only, so it neither grants nor withholds a plugin's hooks. Review a plugin before enabling it, and check the events it declares in the plugin manager. See [Plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins#add-hooks).
 
 Server-owned events are fixed when a session starts, so newly enabled plugin hooks activate at the next startup or `/reload`.
 
@@ -89,35 +85,30 @@ An invalid plugin hook document is skipped on its own and reported as a configur
 
 Each entry in a matcher group's `hooks` array is a command handler:
 
-<ResponseField name="type" type="string" required>
-  Handler type. Only `command` is supported. A command handler runs a subprocess that receives the event JSON on stdin.
-</ResponseField>
+#### `type` — `string`
+Handler type. Only `command` is supported. A command handler runs a subprocess that receives the event JSON on stdin.
 
-<ResponseField name="command" type="string" required>
-  Shell command to run. Always required. Pipes, redirects, globs, and environment-variable expansion are supported. The event payload is written to stdin as JSON, never interpolated into arguments. When `argv` is also set, this string is not executed through the shell.
-</ResponseField>
+#### `command` — `string`
+Shell command to run. Always required. Pipes, redirects, globs, and environment-variable expansion are supported. The event payload is written to stdin as JSON, never interpolated into arguments. When `argv` is also set, this string is not executed through the shell.
 
-<ResponseField name="argv" type="list[string]" post={["optional"]}>
-  Execute an argument list directly instead of interpreting `command` through a shell. Use this for explicit executable paths and arguments.
-</ResponseField>
+#### `argv` — `list[string]`
+Execute an argument list directly instead of interpreting `command` through a shell. Use this for explicit executable paths and arguments.
 
-<ResponseField name="timeout" type="number" post={["optional"]}>
-  Per-handler timeout in seconds. The default is 600 seconds, except for `UserPromptSubmit`, which defaults to 30 seconds. A timeout is a non-blocking failure.
-</ResponseField>
+#### `timeout` — `number`
+Per-handler timeout in seconds. The default is 600 seconds, except for `UserPromptSubmit`, which defaults to 30 seconds. A timeout is a non-blocking failure.
 
-<ResponseField name="statusMessage" type="string" post={["optional"]}>
-  Transient message shown in the UI while the handler runs.
-</ResponseField>
+#### `statusMessage` — `string`
+Transient message shown in the UI while the handler runs.
 
 Configuring an unsupported handler type or `"async": true` produces a visible configuration error.
 
 ### Handler environment
 
-A handler starts in the working directory reported as `cwd` in the payload and inherits the session environment with credential-looking variables removed: any name containing `KEY`, `TOKEN`, `SECRET`, `PASSWORD`, or `APIKEY` is stripped before launch. A handler that needs a credential must read it from a file or a secret manager rather than the inherited environment. Plugin handlers additionally receive their own [plugin path variables](#plugin-hooks).
+A handler starts in the working directory reported as `cwd` in the payload and inherits the session environment with credential-looking variables removed: any name containing `KEY`, `TOKEN`, `SECRET`, `PASSWORD`, or `APIKEY` is stripped before launch. A handler that needs a credential must read it from a file or a secret manager rather than the inherited environment. Plugin handlers additionally receive their own [plugin path variables](https://docs.langchain.com/oss/deepagents/code/hooks#plugin-hooks).
 
 ### Matchers
 
-A matcher filters whether a handler group runs for a given event. Each event matches against one field (see [Events](#events)):
+A matcher filters whether a handler group runs for a given event. Each event matches against one field (see [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events)):
 
 * Omitted, empty, or `*` matches all values for that event.
 * A simple name matches exactly (`Bash`).
@@ -148,7 +139,7 @@ Deep Agents Code emits the following events. Client-owned events run in the CLI 
 
 `PreToolUse` runs before the permission prompt and before tool execution, which makes it the primary place to allow or deny tools. `Stop` runs before a terminal model response is committed.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart LR
     A["Agent requests tool"] --> P["PreToolUse"]
     P -->|allow| T["Tool runs"]
@@ -204,7 +195,7 @@ Every handler receives a JSON object on stdin. All events share a common envelop
 
 Example `PreToolUse` payload:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "session_id": "abc123",
   "transcript_path": "/Users/you/.deepagents/.../transcript.jsonl",
@@ -241,7 +232,7 @@ Command handlers communicate results through their exit code, stdout, and stderr
 | Exit code     | Meaning                                                                                                                                                                  |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `0`           | Success. When stdout contains JSON, it is parsed and applied.                                                                                                            |
-| `2`           | Blocking or feedback path for that event. See the [Events](#events) table Exit code 2 effect column. Stdout JSON is ignored, and stderr is the primary feedback channel. |
+| `2`           | Blocking or feedback path for that event. See the [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events) table Exit code 2 effect column. Stdout JSON is ignored, and stderr is the primary feedback channel. |
 | Other nonzero | Non-blocking error. Deep Agents Code logs a diagnostic and continues.                                                                                                    |
 
 JSON output is only processed on exit `0` and must be the only content on stdout. Successful non-JSON stdout becomes additional context for `SessionStart` and `UserPromptSubmit`; for other events it produces a diagnostic. Stdout and stderr are each retained up to 100,000 bytes.
@@ -250,7 +241,7 @@ JSON output is only processed on exit `0` and must be the only content on stdout
 
 Any handler may return these top-level fields:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "continue": true,
   "stopReason": "optional user-facing reason when continue is false",
@@ -271,7 +262,7 @@ Event-specific control lives in `hookSpecificOutput` (for tool and permission ev
 
 Return a permission decision to allow, deny, or force a prompt before a tool runs:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "hookSpecificOutput": {
     "hookEventName": "PreToolUse",
@@ -289,7 +280,7 @@ You can also block with exit code `2` and write the reason to stderr.
 
 Return a decision to answer a permission prompt on the user's behalf:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "hookSpecificOutput": {
     "hookEventName": "PermissionRequest",
@@ -307,7 +298,7 @@ Any deny wins. If no hook denies and at least one allows, the action is allowed.
 
 Return a block decision to keep the agent working instead of ending the turn:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "decision": "block",
   "reason": "Tests are still failing; keep working"
@@ -320,7 +311,7 @@ A block continues the agent turn with your feedback. `Stop.hookSpecificOutput.ad
 
 `SessionStart`, `UserPromptSubmit`, and `SubagentStart` can add context for the model:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "hookSpecificOutput": {
     "hookEventName": "SessionStart",
@@ -333,138 +324,148 @@ A block continues the agent turn with your feedback. `Stop.hookSpecificOutput.ad
 
 ## Unsupported output fields
 
-The following compatibility fields are recognized but not applied. Deep Agents Code emits a diagnostic and continues with the fallback in the Result column. For tool and permission rows, that means the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) or [PermissionRequest](#allow-or-deny-with-permissionrequest) decision path, without mutating tool input or deferring.
+The following compatibility fields are recognized but not applied. Deep Agents Code emits a diagnostic and continues with the fallback in the Result column. For tool and permission rows, that means the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) or [PermissionRequest](https://docs.langchain.com/oss/deepagents/code/hooks#allow-or-deny-with-permissionrequest) decision path, without mutating tool input or deferring.
 
 | Field or behavior                                                               | Result                                                                                                              |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `SessionStart.initialUserMessage`, `sessionTitle`, `watchPaths`, `reloadSkills` | Parsed, not applied                                                                                                 |
 | `UserPromptSubmit.sessionTitle`                                                 | Parsed, not applied                                                                                                 |
-| `PreToolUse.updatedInput`                                                       | Mutation ignored; `allow` or `ask` uses the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) decision |
-| `PreToolUse.defer`                                                              | Uses the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) decision; never treated as allow            |
+| `PreToolUse.updatedInput`                                                       | Mutation ignored; `allow` or `ask` uses the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) decision |
+| `PreToolUse.defer`                                                              | Uses the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) decision; never treated as allow            |
 | `PostToolUse.updatedToolOutput`, `updatedMCPToolOutput`                         | Parsed, not applied                                                                                                 |
-| `PermissionRequest.updatedInput`                                                | Mutation ignored; an `allow` uses the ordinary [PermissionRequest](#allow-or-deny-with-permissionrequest) decision  |
+| `PermissionRequest.updatedInput`                                                | Mutation ignored; an `allow` uses the ordinary [PermissionRequest](https://docs.langchain.com/oss/deepagents/code/hooks#allow-or-deny-with-permissionrequest) decision  |
 | `PermissionRequest.updatedPermissions`                                          | Parsed, not applied (no permission-rule store)                                                                      |
-| `SubagentStop` block                                                            | [Context only](#inject-context); a completed subagent cannot be resumed                                             |
+| `SubagentStop` block                                                            | [Context only](https://docs.langchain.com/oss/deepagents/code/hooks#inject-context); a completed subagent cannot be resumed                                             |
 
 ## Examples
 
-<Accordion title="Block destructive Bash commands (PreToolUse)">
-  ```bash title="~/.deepagents/hooks/block-rm.sh" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  #!/usr/bin/env bash
-  command=$(jq -r '.tool_input.command // ""')
+<details>
+<summary>Block destructive Bash commands (PreToolUse)</summary>
 
-  if printf '%s' "$command" | grep -Eq 'rm[[:space:]]+.*-[a-zA-Z]*[rf]'; then
-    cat <<'JSON'
-  {
-    "hookSpecificOutput": {
-      "hookEventName": "PreToolUse",
-      "permissionDecision": "deny",
-      "permissionDecisionReason": "Recursive or forced rm is blocked by policy"
-    }
+```bash
+#!/usr/bin/env bash
+command=$(jq -r '.tool_input.command // ""')
+
+if printf '%s' "$command" | grep -Eq 'rm[[:space:]]+.*-[a-zA-Z]*[rf]'; then
+  cat <<'JSON'
+{
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "Recursive or forced rm is blocked by policy"
   }
-  JSON
-  fi
-  ```
+}
+JSON
+fi
+```
 
-  ```json title="~/.deepagents/hooks.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  {
-    "hooks": {
-      "PreToolUse": [
-        {
-          "matcher": "Bash",
-          "hooks": [
-            { "type": "command", "command": "~/.deepagents/hooks/block-rm.sh" }
-          ]
-        }
-      ]
-    }
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "~/.deepagents/hooks/block-rm.sh" }
+        ]
+      }
+    ]
   }
-  ```
-</Accordion>
+}
+```
 
-<Accordion title="Load project context on session start (SessionStart)">
-  ```bash title="~/.deepagents/hooks/load-context.sh" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  #!/usr/bin/env bash
-  context=$(git -C "$(jq -r '.cwd')" log --oneline -5 2>/dev/null)
+</details>
 
-  jq -n --arg ctx "$context" '{
-    hookSpecificOutput: {
-      hookEventName: "SessionStart",
-      additionalContext: ("Recent commits:\n" + $ctx)
-    }
-  }'
-  ```
+<details>
+<summary>Load project context on session start (SessionStart)</summary>
 
-  ```json title="~/.deepagents/hooks.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  {
-    "hooks": {
-      "SessionStart": [
-        {
-          "matcher": "startup|resume",
-          "hooks": [
-            { "type": "command", "command": "~/.deepagents/hooks/load-context.sh" }
-          ]
-        }
-      ]
-    }
+```bash
+#!/usr/bin/env bash
+context=$(git -C "$(jq -r '.cwd')" log --oneline -5 2>/dev/null)
+
+jq -n --arg ctx "$context" '{
+  hookSpecificOutput: {
+    hookEventName: "SessionStart",
+    additionalContext: ("Recent commits:\n" + $ctx)
   }
-  ```
-</Accordion>
+}'
+```
 
-<Accordion title="Desktop notification when the turn ends on macOS (Stop)">
-  ```json title="~/.deepagents/hooks.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  {
-    "hooks": {
-      "Stop": [
-        {
-          "hooks": [
-            {
-              "type": "command",
-              "command": "osascript -e 'display notification \"Agent finished\" with title \"Deep Agents Code\"'"
-            }
-          ]
-        }
-      ]
-    }
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          { "type": "command", "command": "~/.deepagents/hooks/load-context.sh" }
+        ]
+      }
+    ]
   }
-  ```
-</Accordion>
+}
+```
 
-<Accordion title="Python handler that reads the payload">
-  ```python title="~/.deepagents/hooks/handler.py" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import json
-  import sys
+</details>
 
+<details>
+<summary>Desktop notification when the turn ends on macOS (Stop)</summary>
 
-  def handle(payload: dict[str, object]) -> None:
-      event = payload["hook_event_name"]
-      if event == "PreToolUse":
-          tool_name = payload["tool_name"]
-          print(f"About to run {tool_name}", file=sys.stderr)
-
-
-  if __name__ == "__main__":
-      handle(json.load(sys.stdin))
-  ```
-
-  ```json title="~/.deepagents/hooks.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  {
-    "hooks": {
-      "PreToolUse": [
-        {
-          "matcher": "*",
-          "hooks": [
-            {
-              "type": "command",
-              "command": "python3 ~/.deepagents/hooks/handler.py"
-            }
-          ]
-        }
-      ]
-    }
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "osascript -e 'display notification \"Agent finished\" with title \"Deep Agents Code\"'"
+          }
+        ]
+      }
+    ]
   }
-  ```
-</Accordion>
+}
+```
+
+</details>
+
+<details>
+<summary>Python handler that reads the payload</summary>
+
+```python
+import json
+import sys
+
+def handle(payload: dict[str, object]) -> None:
+    event = payload["hook_event_name"]
+    if event == "PreToolUse":
+        tool_name = payload["tool_name"]
+        print(f"About to run {tool_name}", file=sys.stderr)
+
+if __name__ == "__main__":
+    handle(json.load(sys.stdin))
+```
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.deepagents/hooks/handler.py"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+</details>
 
 ## Troubleshoot hooks
 
@@ -490,25 +491,20 @@ Hooks follow the same trust model as Git hooks or shell aliases: any process tha
 * Prefer explicit shell executables you control over shell wrappers.
 * Only install hooks from sources you trust.
 
-<Warning>
-  A hook runs with your user permissions. Treat hook configuration as executable code.
-</Warning>
+> [!WARNING]
+> A hook runs with your user permissions. Treat hook configuration as executable code.
 
 ## See also
 
-* [Configuration](/oss/deepagents/code/configuration)
-* [Plugins and marketplaces](/oss/deepagents/code/plugins)
-* [Data locations](/oss/deepagents/code/configuration#data-locations)
-* [CLI reference](/oss/deepagents/code/cli-reference)
+* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
+* [Plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins)
+* [Data locations](https://docs.langchain.com/oss/deepagents/code/configuration#data-locations)
+* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/hooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/hooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

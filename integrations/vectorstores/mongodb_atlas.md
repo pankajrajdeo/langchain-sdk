@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MongoDB Atlas Integration
 
 > Integrate with the MongoDB Atlas Vector Store using LangChain Python.
@@ -24,17 +20,16 @@ In order to use Voyage AI embedding and reranking models, you will need to creat
 
 First, start by installing the following libraries to follow this notebook.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-mongodb langchain-voyageai langchain-community
 ```
 
 Replace the placeholder values in the following code cell with your Atlas Cluster connection string and your Model API Key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from pymongo import MongoClient
 from langchain_mongodb import MongoDBAtlasVectorSearch
@@ -59,7 +54,7 @@ vector_index_name = "vector_index"
 
 We load documents, generate embeddings via the Atlas-hosted Voyage AI model, and programmatically create the Vector Search index.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Load sample data
 loader = WikipediaLoader(query="MongoDB", load_max_docs=2)
 data = loader.load()
@@ -79,7 +74,7 @@ vector_store = MongoDBAtlasVectorSearch(
 
 ## Create vector index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create the vector search index with specific filters for optimized metadata searching
 vector_store.create_vector_search_index(
     dimensions=1024,
@@ -89,7 +84,7 @@ vector_store.create_vector_search_index(
 
 \[OPTIONAL] Alternative to the `vector_store.create_vector_search_index` command above, you can also create the vector search index using the Atlas UI with the following index definition:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "fields":[
     {
@@ -102,7 +97,7 @@ vector_store.create_vector_search_index(
 }
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Ingest documents
 vector_store.add_documents(docs)
 ```
@@ -113,7 +108,7 @@ vector_store.add_documents(docs)
 
 Find the most relevant documents based on semantic similarity.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What is MongoDB Atlas?"
 results = vector_store.similarity_search(query, k=3)
 
@@ -125,7 +120,7 @@ for doc in results:
 
 Retrieve documents along with their relevance scores.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results_with_score = vector_store.similarity_search_with_score(query, k=3)
 
 for doc, score in results_with_score:
@@ -136,7 +131,7 @@ for doc, score in results_with_score:
 
 First, let's update the vector search index by providing the field to filter on.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create the vector search index with specific filters for optimized metadata searching
 vector_store.create_vector_search_index(
     dimensions=1024,
@@ -148,7 +143,7 @@ vector_store.create_vector_search_index(
 
 Narrow down results using metadata filters. Note that Atlas Vector Search requires explicit operators like `$eq`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Use a source known to exist in our loaded docs
 sample_source = "https://en.wikipedia.org/wiki/MongoDB"
 
@@ -165,7 +160,7 @@ print(f"Retrieved {len(filtered_results)} documents matching source: {sample_sou
 
 Combining Vector Search with Full-Text Search (Keyword) using Reciprocal Rank Fusion (RRF).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.index import create_fulltext_search_index
 
 # Use helper method to create the search index
@@ -177,7 +172,7 @@ create_fulltext_search_index(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Requires a standard Search Index named 'default' on the collection
 retriever = MongoDBAtlasHybridSearchRetriever(
     vectorstore=vector_store,
@@ -200,7 +195,7 @@ for doc in hybrid_docs:
 
 A two-stage process: broad recall followed by high-precision reranking to ensure maximum relevance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.retrievers.contextual_compression import ContextualCompressionRetriever
 
 # 1. Define the base retriever to fetch a broad pool
@@ -225,9 +220,9 @@ for doc in final_docs:
 
 For guides on how to use the MongoDB Vector Store integration with LangChain for Retrieval-Augmented Generation (RAG), see the following tutorials:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 * [Basic RAG](https://www.mongodb.com/docs/atlas/ai-integrations/langchain/get-started/#answer-questions-on-your-data)
 * [RAG with Hybrid Search](https://www.mongodb.com/docs/atlas/ai-integrations/langchain/hybrid-search/#pass-results-to-a-rag-pipeline)
 
@@ -244,12 +239,8 @@ For detailed documentation of all `MongoDBAtlasVectorSearch` features and config
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google alloydb for postgresql integration
 
 > Integrate with the Google alloydb for postgresql document loader using LangChain Python.
@@ -28,13 +24,13 @@ To run this notebook, you will need to do the following:
 
 Install the integration library, `langchain-google-alloydb-pg`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-google-alloydb-pg
 ```
 
 **Colab only:** Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -49,7 +45,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -65,7 +61,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @title Project { display-mode: "form" }
 PROJECT_ID = "gcp_project_id"  # @param {type:"string"}
 
@@ -79,7 +75,7 @@ PROJECT_ID = "gcp_project_id"  # @param {type:"string"}
 
 Find your database values, in the [AlloyDB Instances page](https://console.cloud.google.com/alloydb/clusters).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @title Set Your Values Here { display-mode: "form" }
 REGION = "us-central1"  # @param {type: "string"}
 CLUSTER = "my-cluster"  # @param {type: "string"}
@@ -109,7 +105,7 @@ Optionally, [built-in database authentication](https://cloud.google.com/alloydb/
 
 **Note**: This tutorial demonstrates the async interface. All async methods have corresponding sync methods.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg import AlloyDBEngine
 
 engine = await AlloyDBEngine.afrom_instance(
@@ -123,7 +119,7 @@ engine = await AlloyDBEngine.afrom_instance(
 
 ### Create AlloyDBLoader
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg import AlloyDBLoader
 
 # Creating a basic AlloyDBLoader object
@@ -135,14 +131,14 @@ loader = await AlloyDBLoader.create(engine, table_name=TABLE_NAME)
 The loader returns a list of Documents from the table using the first column as page\_content and all other columns as metadata. The default table will have the first column as
 page\_content and the second column as metadata (JSON). Each row becomes a document.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = await loader.aload()
 print(docs)
 ```
 
 ### Load documents via custom table/metadata or custom page content columns
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = await AlloyDBLoader.create(
     engine,
     table_name=TABLE_NAME,
@@ -157,7 +153,7 @@ print(docs)
 
 The loader returns a list of Documents, with one document per row, with page content in specified string format, i.e. text (space separated concatenation), JSON, YAML, CSV, etc. JSON and YAML formats include headers, while text and CSV do not include field headers.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = AlloyDBLoader.create(
     engine,
     table_name="products",
@@ -170,12 +166,8 @@ print(docs)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_alloydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_alloydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,18 +1,14 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AWS Terraform quick reference
-
-> Make targets, Terraform commands, kubectl, AWS CLI, and Helm operations for LangSmith self-hosted on AWS EKS.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference)
+Make targets, Terraform commands, kubectl, AWS CLI, and Helm operations for LangSmith self-hosted on AWS EKS.
 
 Command cheat sheet for day-to-day operations against an AWS LangSmith deployment provisioned with the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). All `make` targets run from `modules/aws/`. Run `make help` for an inline summary.
 
-For the full deploy setup, refer to the [AWS deployment guide](/langsmith/self-host-terraform-aws-deploy).
+For the full deploy setup, refer to the [AWS deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy).
 
 ## First-time setup
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd terraform/modules/aws
 
 # 1. Generate terraform.tfvars (interactive wizard)
@@ -45,14 +41,14 @@ make deploy
 
 Fast path once `make quickstart` and `source infra/scripts/setup-env.sh` are complete:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make quickdeploy        # interactive (prompts before terraform apply)
 make quickdeploy-auto   # non-interactive (auto-approves terraform)
 ```
 
 ## Day-2 operations
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Check deployment state across all layers; print next-step guidance
 make status
 
@@ -80,7 +76,7 @@ make kubeconfig
 
 ## Preflight checks
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Pre-Terraform: AWS credentials + IAM permissions
 make preflight
 
@@ -95,7 +91,7 @@ make preflight-ssm
 
 Add-ons are controlled by `enable_*` flags in `infra/terraform.tfvars`. Set the flags, re-run `init-values` to copy the matching values files, then re-deploy.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 # infra/terraform.tfvars
 enable_deployments     = true   # LangGraph Platform (required for Fleet, Agent Builder, and Polly)
 enable_fleet           = true   # Fleet (formerly Agent Builder), standalone (chart v0.15+); requires external Postgres + Redis
@@ -105,7 +101,7 @@ enable_polly           = true   # Polly AI eval/monitoring
 enable_usage_telemetry = false  # Extended usage telemetry
 ```
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make init-values
 make deploy
 ```
@@ -114,7 +110,7 @@ make deploy
 
 Set `sizing_profile` in `terraform.tfvars`, then re-run `make init-values && make deploy`.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 sizing_profile = "production"        # multi-replica with HPA (recommended)
 sizing_profile = "production-large"  # high-volume (~50 users, ~1000 traces/sec)
 sizing_profile = "dev"               # single-replica, minimal resources
@@ -198,7 +194,7 @@ sizing_profile = "default"           # chart defaults (no sizing file)
 
 ## kubectl
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Pod health
 kubectl get pods -n langsmith
 kubectl get pods -n langsmith -w
@@ -234,7 +230,7 @@ kubectl get pods -n keda
 
 ## AWS CLI
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # EKS
 aws eks list-clusters --region <region>
 aws eks describe-cluster --name <cluster-name> --region <region>
@@ -270,7 +266,7 @@ aws iam get-role --role-name <irsa-role-name>
 
 ## Terraform
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd modules/aws/infra
 
 terraform init
@@ -287,7 +283,7 @@ terraform state list
 
 ## Teardown
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd terraform/modules/aws
 
 # Option A: script-driven deploy
@@ -306,12 +302,8 @@ terraform destroy
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

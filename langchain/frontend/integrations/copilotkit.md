@@ -1,204 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # CopilotKit
-
-> Use CopilotKit with LangGraph, Deep Agents, and React with custom endpoints, the Python AG-UI bridge, and structured generative UI
-
-export const ExampleEmbed = ({example, theme, minHeight = 500, maxHeight = 700}) => {
-  var PROD_BASE = "https://ui-patterns.langchain.com";
-  var iframeCache = (() => {
-    const g = globalThis;
-    if (!g.__lcExampleIframeCache) {
-      g.__lcExampleIframeCache = new Map();
-    }
-    return g.__lcExampleIframeCache;
-  })();
-  function detectPageTheme() {
-    if (typeof document === "undefined") return "light";
-    const root = document.documentElement;
-    if (root.classList.contains("dark") || root.getAttribute("data-theme") === "dark" || root.style.colorScheme === "dark") {
-      return "dark";
-    }
-    return "light";
-  }
-  var LOCAL_BASE = "http://localhost";
-  var LOCAL_PORTS = {
-    "ai-elements": 4600,
-    "assistant-ui": 4500
-  };
-  function isLocalhost() {
-    return typeof location !== "undefined" && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
-  }
-  var EMBED_CSS = `
-[data-lc-ee] .lc-border{border-color:#B8DFFF}
-[data-lc-ee].dark .lc-border{border-color:#1A2740}
-[data-lc-ee] .lc-bg-surface{background-color:white}
-[data-lc-ee].dark .lc-bg-surface{background-color:#0B1120}
-[data-lc-ee] .lc-bg-wash{background-color:#F2FAFF}
-[data-lc-ee].dark .lc-bg-wash{background-color:#030710}
-[data-lc-ee] .lc-spinner{border-color:#B8DFFF;border-top-color:#7FC8FF}
-[data-lc-ee].dark .lc-spinner{border-color:#1A2740;border-top-color:#7FC8FF}
-`;
-  const slotRef = useRef(null);
-  const [ready, setReady] = useState(() => Boolean(iframeCache.get(example)?.iframe));
-  const [iframeHeight, setIframeHeight] = useState(minHeight);
-  const [pageTheme, setPageTheme] = useState(detectPageTheme);
-  const effectiveTheme = theme ?? pageTheme;
-  const effectiveThemeRef = useRef(effectiveTheme);
-  effectiveThemeRef.current = effectiveTheme;
-  useEffect(() => {
-    if (document.getElementById("lc-ee-css")) return;
-    const style = document.createElement("style");
-    style.id = "lc-ee-css";
-    style.textContent = EMBED_CSS;
-    document.head.appendChild(style);
-  }, []);
-  useEffect(() => {
-    setPageTheme(detectPageTheme());
-    const observer = new MutationObserver(() => setPageTheme(detectPageTheme()));
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme", "style"]
-    });
-    return () => observer.disconnect();
-  }, []);
-  useEffect(() => {
-    const useLocal = isLocalhost();
-    const localPort = LOCAL_PORTS[example];
-    const src = useLocal && localPort ? `${LOCAL_BASE}:${localPort}/` : `${PROD_BASE}/${example}/`;
-    let cached = iframeCache.get(example);
-    if (cached?.hideTimer) {
-      clearTimeout(cached.hideTimer);
-      cached.hideTimer = void 0;
-    }
-    if (!cached) {
-      const iframe = document.createElement("iframe");
-      iframe.src = src;
-      iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms");
-      iframe.setAttribute("allow", "clipboard-write");
-      iframe.title = `${example} example`;
-      Object.assign(iframe.style, {
-        position: "fixed",
-        border: "none",
-        visibility: "hidden",
-        pointerEvents: "auto",
-        zIndex: "1",
-        borderRadius: "15px"
-      });
-      document.body.appendChild(iframe);
-      cached = {
-        iframe
-      };
-      iframeCache.set(example, cached);
-      window.addEventListener("message", e => {
-        if (e.data?.type === "RESIZE" && iframeCache.get(example)?.iframe === iframe) {
-          const h = Math.min(maxHeight, Math.max(minHeight, e.data.height));
-          setIframeHeight(h);
-        }
-      });
-      iframe.addEventListener("load", () => {
-        iframe.style.visibility = "visible";
-        setReady(true);
-        try {
-          iframe.contentWindow?.postMessage({
-            type: "CHAT_LC_SET_THEME",
-            theme: effectiveThemeRef.current
-          }, "*");
-        } catch {}
-      });
-    } else {
-      cached.iframe.style.visibility = "visible";
-      setReady(true);
-    }
-    function syncPosition() {
-      const slot = slotRef.current;
-      if (!slot) return;
-      const rect = slot.getBoundingClientRect();
-      const {style} = cached.iframe;
-      style.top = `${rect.top}px`;
-      style.left = `${rect.left}px`;
-      style.width = `${rect.width}px`;
-      style.setProperty("height", `${rect.height}px`, "important");
-    }
-    syncPosition();
-    const ro = new ResizeObserver(syncPosition);
-    if (slotRef.current) ro.observe(slotRef.current);
-    document.addEventListener("scroll", syncPosition, {
-      passive: true,
-      capture: true
-    });
-    window.addEventListener("resize", syncPosition, {
-      passive: true
-    });
-    let frameCount = 0;
-    let rafId = 0;
-    function initialSync() {
-      syncPosition();
-      if (++frameCount < 5) rafId = requestAnimationFrame(initialSync);
-    }
-    rafId = requestAnimationFrame(initialSync);
-    return () => {
-      cancelAnimationFrame(rafId);
-      ro.disconnect();
-      document.removeEventListener("scroll", syncPosition, {
-        capture: true
-      });
-      window.removeEventListener("resize", syncPosition);
-      cached.hideTimer = setTimeout(() => {
-        if (cached?.iframe) cached.iframe.style.visibility = "hidden";
-      }, 200);
-    };
-  }, [example, minHeight, maxHeight]);
-  useEffect(() => {
-    const cached = iframeCache.get(example);
-    if (!cached?.iframe || !ready) return;
-    try {
-      cached.iframe.contentWindow?.postMessage({
-        type: "CHAT_LC_SET_THEME",
-        theme: effectiveTheme
-      }, "*");
-    } catch {}
-  }, [effectiveTheme, ready, example]);
-  return <div data-lc-ee="" className={effectiveTheme === "dark" ? "dark" : ""} style={{
-    position: "relative",
-    fontFamily: "inherit"
-  }}>
-      <div className="lc-border lc-bg-surface" style={{
-    border: "1px solid",
-    borderRadius: "16px",
-    overflow: "hidden"
-  }}>
-        {}
-        <div ref={slotRef} className="lc-bg-wash" style={{
-    height: iframeHeight,
-    position: "relative"
-  }}>
-          {!ready && <div style={{
-    position: "absolute",
-    inset: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }}>
-              <div className="lc-spinner" style={{
-    width: 24,
-    height: 24,
-    border: "3px solid",
-    borderRadius: "50%",
-    animation: "spin 0.8s linear infinite"
-  }} />
-              <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-            </div>}
-        </div>
-      </div>
-    </div>;
-};
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit)
+Use CopilotKit with LangGraph, Deep Agents, and React with custom endpoints, the Python AG-UI bridge, and structured generative UI
 
 [CopilotKit](https://www.copilotkit.ai/) provides a full React chat runtime and pairs especially well with LangGraph when you want the agent to return **structured UI payloads** instead of only plain text. In this pattern, your LangGraph deployment serves both the graph API and a custom CopilotKit endpoint, while the frontend parses assistant messages into dynamic React components.
 
-On the server, the [copilotkit](https://pypi.org/project/copilotkit/) package provides [`CopilotKitMiddleware`](https://docs.copilotkit.ai) so a LangGraph graph, a LangChain agent, or a [Deep Agent](/oss/python/deepagents/overview) can speak the [Agent UI (AG-UI)](https://docs.ag-ui.com/) wire protocol, stream tool and message events to a chat UI, and read or write the shared **CopilotKit** slice of state, with helpers to mount a CopilotKit-compatible HTTP endpoint in front of your graph.
+On the server, the [copilotkit](https://pypi.org/project/copilotkit/) package provides [`CopilotKitMiddleware`](https://docs.copilotkit.ai) so a LangGraph graph, a LangChain agent, or a [Deep Agent](https://docs.langchain.com/oss/python/deepagents/overview) can speak the [Agent UI (AG-UI)](https://docs.ag-ui.com/) wire protocol, stream tool and message events to a chat UI, and read or write the shared **CopilotKit** slice of state, with helpers to mount a CopilotKit-compatible HTTP endpoint in front of your graph.
 
 This approach is useful when you want:
 
@@ -208,13 +14,12 @@ This approach is useful when you want:
 
 [CopilotKit for LangGraph](https://docs.copilotkit.ai/langgraph) also documents [generative UI](https://docs.copilotkit.ai/langgraph/generative-ui), [human in the loop](https://docs.copilotkit.ai/langgraph/human-in-the-loop) (HITL), and [shared state](https://docs.copilotkit.ai/langgraph/shared-state) on top of the same middleware and clients.
 
-<Info>
-  For CopilotKit-specific APIs, UI patterns, and runtime configuration, see the
-  [CopilotKit docs](https://docs.copilotkit.ai/langgraph). For a Deep Agent walkthrough, see
-  [Deep Agents and CopilotKit](https://docs.copilotkit.ai/langgraph/deep-agents) in the CopilotKit docs.
-</Info>
+> [!NOTE]
+> For CopilotKit-specific APIs, UI patterns, and runtime configuration, see the
+> [CopilotKit docs](https://docs.copilotkit.ai/langgraph). For a Deep Agent walkthrough, see
+> [Deep Agents and CopilotKit](https://docs.copilotkit.ai/langgraph/deep-agents) in the CopilotKit docs.
 
-<ExampleEmbed example="copilotkit" minHeight={700} />
+> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit).
 
 ## How it works
 
@@ -225,7 +30,7 @@ At a high level, CopilotKit sits between your React app and the LangGraph deploy
 3. **Wrap the frontend in `CopilotKit`** and point it at that custom runtime URL.
 4. **Register dynamic UI components** and parse assistant responses into those components at render time.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -255,57 +60,53 @@ The [copilotkit](https://pypi.org/project/copilotkit/) and related packages brid
 
 | Component                                                                                            | Role                                                                                                                                                                                                                                                                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CopilotKitMiddleware`                                                                               | Merges CopilotKit and AG-UI state and requests into your agent, including frontend [tool calls](/oss/python/langchain/agents#tools) and context. Add it to the `middleware` list for [create\_agent](https://reference.langchain.com/python/langchain/agents/factory/create_agent) or [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). |
-| `CopilotKitState` (subclass)                                                                         | [Custom state](/oss/python/langchain/short-term-memory): extend `CopilotKitState` so the CopilotKit key is part of graph state.                                                                                                                                                                                                                                                         |
+| `CopilotKitMiddleware`                                                                               | Merges CopilotKit and AG-UI state and requests into your agent, including frontend [tool calls](https://docs.langchain.com/oss/python/langchain/agents#tools) and context. Add it to the `middleware` list for [create\_agent](https://reference.langchain.com/python/langchain/agents/factory/create_agent) or [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). |
+| `CopilotKitState` (subclass)                                                                         | [Custom state](https://docs.langchain.com/oss/python/langchain/short-term-memory): extend `CopilotKitState` so the CopilotKit key is part of graph state.                                                                                                                                                                                                                                                         |
 | `LangGraphAGUIAgent`                                                                                 | Bundles a compiled graph with a name and description for the runtime.                                                                                                                                                                                                                                                                                                                   |
-| `add_langgraph_fastapi_endpoint` (from [ag-ui-langgraph](https://pypi.org/project/ag-ui-langgraph/)) | Wires a **FastAPI** app so CopilotKit can run your graph on the same [LangGraph](/oss/python/langgraph/overview) process. Use it when you add a [custom `http` app in `langgraph.json`](#extend-the-langgraph-deployment-with-a-custom-endpoint) instead of a separate HTTP server.                                                                                                     |
+| `add_langgraph_fastapi_endpoint` (from [ag-ui-langgraph](https://pypi.org/project/ag-ui-langgraph/)) | Wires a **FastAPI** app so CopilotKit can run your graph on the same [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) process. Use it when you add a [custom `http` app in `langgraph.json`](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit#extend-the-langgraph-deployment-with-a-custom-endpoint) instead of a separate HTTP server.                                                                                                     |
 
-`CopilotKitMiddleware` is the same middleware for [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) and for a graph from [create\_agent](https://reference.langchain.com/python/langchain/agents/factory/create_agent) when you add it to the `middleware` list. For a `create_agent` graph with `CopilotKitState` and a FastAPI bridge, follow the [Python `main.py` example](#extend-the-langgraph-deployment-with-a-custom-endpoint) below. Structured generative UI (for example `useAgentContext` and an `output_schema` from the client) needs extra middleware that maps Copilot state to a [structured output](/oss/python/langchain/agents#structured-output) strategy, as in the expandable `src/middleware.py` example in the same section.
+`CopilotKitMiddleware` is the same middleware for [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) and for a graph from [create\_agent](https://reference.langchain.com/python/langchain/agents/factory/create_agent) when you add it to the `middleware` list. For a `create_agent` graph with `CopilotKitState` and a FastAPI bridge, follow the [Python `main.py` example](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit#extend-the-langgraph-deployment-with-a-custom-endpoint) below. Structured generative UI (for example `useAgentContext` and an `output_schema` from the client) needs extra middleware that maps Copilot state to a [structured output](https://docs.langchain.com/oss/python/langchain/agents#structured-output) strategy, as in the expandable `src/middleware.py` example in the same section.
 
-Mounting `app` on the `http` key in `langgraph.json` follows the usual [LangGraph or LangSmith deployment](/oss/python/langgraph/deploy) so one process serves the graph and the same FastAPI app to the CopilotKit client.
+Mounting `app` on the `http` key in `langgraph.json` follows the usual [LangGraph or LangSmith deployment](https://docs.langchain.com/oss/python/langgraph/deploy) so one process serves the graph and the same FastAPI app to the CopilotKit client.
 
 ## Installation
 
 For the backend endpoint:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 uv add copilotkit ag-ui-langgraph fastapi uvicorn
 ```
 
-The middleware package sits alongside the Deep Agents stack. Install it with your [chat model](/oss/python/integrations/chat) package (this example uses OpenAI):
+The middleware package sits alongside the Deep Agents stack. Install it with your [chat model](https://docs.langchain.com/oss/python/integrations/chat) package (this example uses OpenAI):
 
-<CodeGroup>
-  ```python pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U deepagents copilotkit langchain-openai
-  ```
+```python
+pip install -U deepagents copilotkit langchain-openai
+```
 
-  ```python uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add deepagents copilotkit langchain-openai
-  ```
-</CodeGroup>
+```python
+uv add deepagents copilotkit langchain-openai
+```
 
 For the frontend app:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 bun add @copilotkit/react-core @copilotkit/react-ui @hashbrownai/core @hashbrownai/react
 ```
 
 ## Use CopilotKit with a Deep Agent
 
-Add `CopilotKitMiddleware` to the `middleware` list you pass to [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). The middleware lets CopilotKit route frontend tool calls and align chat state with your graph. Keep any other [middleware you configure](/oss/python/deepagents/customization#middleware) in the same list.
+Add `CopilotKitMiddleware` to the `middleware` list you pass to [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). The middleware lets CopilotKit route frontend tool calls and align chat state with your graph. Keep any other [middleware you configure](https://docs.langchain.com/oss/python/deepagents/customization#middleware) in the same list.
 
-The compiled graph is then ready to plug into a CopilotKit- or AG-UI–aware process (for example, the [FastAPI pattern below](#extend-the-langgraph-deployment-with-a-custom-endpoint)) or a guide such as [Deep Agents and CopilotKit](https://docs.copilotkit.ai/langgraph/deep-agents) in the CopilotKit documentation.
+The compiled graph is then ready to plug into a CopilotKit- or AG-UI–aware process (for example, the [FastAPI pattern below](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit#extend-the-langgraph-deployment-with-a-custom-endpoint)) or a guide such as [Deep Agents and CopilotKit](https://docs.copilotkit.ai/langgraph/deep-agents) in the CopilotKit documentation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from copilotkit import CopilotKitMiddleware
 from langgraph.checkpoint.memory import MemorySaver
 
-
 def get_weather(location: str) -> str:
     """Return a simple weather string for a location."""
     return f"The weather in {location} is sunny."
-
 
 agent = create_deep_agent(
     model="openai:gpt-5.5",
@@ -322,7 +123,7 @@ The key idea is that the LangGraph deployment does not only serve graphs. It can
 
 In `langgraph.json`, point `http.app` at your custom app entrypoint:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -336,7 +137,7 @@ In `langgraph.json`, point `http.app` at your custom app entrypoint:
 
 In Python, create a `FastAPI` app and expose the LangGraph agent through CopilotKit's AG-UI bridge:
 
-```python main.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Any, TypedDict
 
 from ag_ui_langgraph import add_langgraph_fastapi_endpoint
@@ -346,14 +147,11 @@ from langchain.agents import create_agent
 
 from src.middleware import apply_structured_output_schema, normalize_context
 
-
 class AgentState(CopilotKitState):
     pass
 
-
 class AgentContext(TypedDict, total=False):
     output_schema: dict[str, Any]
-
 
 agent = create_agent(
     model="openai:gpt-5.5",
@@ -387,13 +185,12 @@ This custom app is the important extension point: it mounts a CopilotKit-aware r
 
 In Python, the equivalent work happens in middleware: normalize the CopilotKit context and forward the `output_schema` from `useAgentContext(...)` into the model's structured output configuration.
 
-```python expandable src/middleware.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 from collections.abc import Mapping
 
 from langchain.agents.middleware import before_agent, wrap_model_call
 from langchain.agents.structured_output import ProviderStrategy
-
 
 @wrap_model_call
 async def apply_structured_output_schema(request, handler):
@@ -425,7 +222,6 @@ async def apply_structured_output_schema(request, handler):
 
     return await handler(request)
 
-
 @before_agent
 def normalize_context(state, runtime):
     copilotkit_state = state.get("copilotkit", {})
@@ -456,7 +252,7 @@ Follow the CopilotKit documentation for [LangGraphHttpAgent](https://docs.copilo
 
 On the frontend, wrap your app in `CopilotKit` and point it at the custom runtime URL:
 
-```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotChat, useAgentContext } from "@copilotkit/react-core/v2";
 import { s } from "@hashbrownai/core";
@@ -493,7 +289,7 @@ There are two important pieces here:
 
 The component registry lives in `useChatKit()`. This is where you define the set of components the agent is allowed to emit, such as cards, rows, columns, charts, code blocks, and buttons.
 
-```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import { s } from "@hashbrownai/core";
 import { exposeComponent, exposeMarkdown, useUiKit } from "@hashbrownai/react";
 
@@ -558,7 +354,7 @@ Once the assistant response arrives, the custom message renderer decides how to 
 * valid structured output is rendered as real React components
 * user messages are rendered as ordinary chat bubbles
 
-```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import type { AssistantMessage } from "@ag-ui/core";
 import type { RenderMessageProps } from "@copilotkit/react-ui";
 import { useJsonParser } from "@hashbrownai/react";
@@ -609,7 +405,7 @@ This renderer pattern is what makes the integration feel native:
 
 * [Deep Agents and CopilotKit](https://docs.copilotkit.ai/langgraph/deep-agents) in the CopilotKit documentation — end-to-end Next.js, dev server, and **Deep Agent** path
 * [CopilotKit: LangGraph features](https://docs.copilotkit.ai/langgraph) — generative UI, HITL, shared state
-* [LangGraph deployment](/oss/python/langgraph/deploy) — production and dev server
+* [LangGraph deployment](https://docs.langchain.com/oss/python/langgraph/deploy) — production and dev server
 
 ## Best practices
 
@@ -621,12 +417,8 @@ This renderer pattern is what makes the integration feel native:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/copilotkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/copilotkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

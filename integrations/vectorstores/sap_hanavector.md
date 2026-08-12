@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sap hana cloud vector engine integration
 
 > Integrate with the Sap hana cloud vector engine vector store using LangChain Python.
@@ -12,7 +8,7 @@
 
 Install the `langchain-hana` external integration package, as well as the other packages used throughout this notebook.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langchain-hana
 ```
 
@@ -20,7 +16,7 @@ pip install langchain-hana
 
 Ensure your SAP HANA instance is running. Load your credentials from environment variables and create a connection:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -44,9 +40,9 @@ To initialize a `HanaDB` vector store, you need a database connection and an emb
 
 * ### Using external embeddings
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/sap_hanavector).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -60,7 +56,7 @@ Alternatively, you can compute embeddings directly in SAP HANA using its native 
 
 > **Caution:** Ensure NLP is enabled in your SAP HANA Cloud instance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaInternalEmbeddings
 
 embeddings = HanaInternalEmbeddings(internal_embedding_model_id="SAP_NEB.20240715")
@@ -76,7 +72,7 @@ embeddings = HanaInternalEmbeddings(internal_embedding_model_id="SAP_NEB.2024071
 
 Once you have your connection and embedding instance, create the vector store by passing them to `HanaDB` along with a table name for storing vectors:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaDB
 
 db = HanaDB(
@@ -92,7 +88,7 @@ Once you have created your vector store, we can interact with it by adding and d
 
 We can add items to our vector store by using the `add_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 docs = [Document(page_content="Some text"), Document(page_content="Other docs")]
@@ -101,7 +97,7 @@ db.add_documents(docs)
 
 Add documents with metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = [
     Document(
         page_content="foo",
@@ -119,14 +115,14 @@ Add documents with map merge insertion
 
 > Note `use_map_merge` is only accepted as a keyword argument and is only allowed for `HanaInternalEmbeddings` instances.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # a use_map_merge flag can be supplied for faster insertion
 db.add_documents(docs, use_map_merge=True)
 ```
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.delete(filter={"quality": "bad"})
 ```
 
@@ -138,7 +134,7 @@ db.delete(filter={"quality": "bad"})
 
 Performing a simple similarity search with filtering on metadata can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = db.similarity_search("foobar", k=2, filter={"quality": "bad"})
 # With filtering on "quality"=="bad", only one document should be returned
 for doc in docs:
@@ -147,7 +143,7 @@ for doc in docs:
     print(doc.metadata)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 foo
 {'start': 100, 'end': 150, 'doc_name': 'foo.txt', 'quality': 'bad'}
@@ -157,7 +153,7 @@ foo
 
 Performing a Maximal Marginal Relevance (MMR) with filtering on metadata search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = db.max_marginal_relevance_search("foobar", k=2, fetch_k=5, filter={"quality": "bad"})
 for doc in docs:
     print("-" * 80)
@@ -165,7 +161,7 @@ for doc in docs:
     print(doc.metadata)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 foo
 {'start': 100, 'end': 150, 'doc_name': 'foo.txt', 'quality': 'bad'}
@@ -175,7 +171,7 @@ foo
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = db.as_retriever()
 docs = retriever.invoke("foobar", filter={"quality": "good"})
 for doc in docs:
@@ -184,7 +180,7 @@ for doc in docs:
     print(doc.metadata)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 bar
 {'start': 200, 'end': 250, 'doc_name': 'bar.txt', 'quality': 'good'}
@@ -199,7 +195,7 @@ bar
 
 You can specify the distance strategy when initializing the `HanaDB` instance by using the `distance_strategy` parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana.utils import DistanceStrategy
 db = HanaDB(
     embedding=embeddings,
@@ -216,7 +212,7 @@ A vector index can significantly speed up top-k nearest neighbor queries for vec
 
 For more information about creating an index at the database level, please refer to the [official documentation](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-vector-engine-guide/create-vector-index-statement-data-definition).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db = HanaDB(
     embedding=embeddings, connection=connection, table_name="MY_TABLE"
 )
@@ -232,7 +228,7 @@ If no other parameters are specified, the default values will be used
 
 Default values: m=64, ef\_construction=128, ef\_search=200
 
-The default index name will be: "\<TABLE\_NAME>\_idx"
+The default index name will be: "\\_idx"
 
 ## Advanced filtering
 
@@ -255,7 +251,7 @@ The table below shows the available filter operators.
 | `$and`      | Logical "and", supporting two or more operands                             | list(filters)                                                    |
 | `$or`       | Logical "or", supporting two or more operands                              | list(filters)                                                    |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Prepare some test documents
 docs = [
     Document(
@@ -282,7 +278,6 @@ db = HanaDB(
 db.delete(filter={})
 db.add_documents(docs)
 
-
 # Helper function for printing filter results
 def print_filter_result(result):
     if len(result) == 0:
@@ -293,7 +288,7 @@ def print_filter_result(result):
 
 Filtering with `$ne`, `$gt`, `$gte`, `$lt`, `$lte`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 advanced_filter = {"id": {"$ne": 1}}
 print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
@@ -315,7 +310,7 @@ print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filter: {'id': {'$ne': 1}}
 {'name': 'Jane Doe', 'is_active': True, 'id': 3, 'height': 2.4}
 {'name': 'Bob Johnson', 'is_active': False, 'id': 2, 'height': 5.7}
@@ -334,7 +329,7 @@ Filter: {'id': {'$lte': 1}}
 
 Filtering with `$between`, `$in`, `$nin`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 advanced_filter = {"id": {"$between": (1, 2)}}
 print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
@@ -348,7 +343,7 @@ print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filter: {'id': {'$between': (1, 2)}}
 {'name': 'Adam Smith', 'is_active': True, 'id': 1, 'height': 10.0}
 {'name': 'Bob Johnson', 'is_active': False, 'id': 2, 'height': 5.7}
@@ -361,7 +356,7 @@ Filter: {'name': {'$nin': ['Adam Smith', 'Bob Johnson']}}
 
 Text filtering with `$like`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 advanced_filter = {"name": {"$like": "a%"}}
 print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
@@ -371,7 +366,7 @@ print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filter: {'name': {'$like': 'a%'}}
 <empty result>
 Filter: {'name': {'$like': '%a%'}}
@@ -381,7 +376,7 @@ Filter: {'name': {'$like': '%a%'}}
 
 Text filtering with `$contains`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 advanced_filter = {"name": {"$contains": "bob"}}
 print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
@@ -399,7 +394,7 @@ print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filter: {'name': {'$contains': 'bob'}}
 {'name': 'Bob Johnson', 'is_active': False, 'id': 2, 'height': 5.7}
 Filter: {'name': {'$contains': 'bo'}}
@@ -412,7 +407,7 @@ Filter: {'name': {'$contains': 'Adam Smith'}}
 
 Combined filtering with `$and`, `$or`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 advanced_filter = {"$or": [{"id": 1}, {"name": "bob"}]}
 print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
@@ -432,7 +427,7 @@ print(f"Filter: {advanced_filter}")
 print_filter_result(db.similarity_search("just testing", k=5, filter=advanced_filter))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filter: {'$or': [{'id': 1}, {'name': 'bob'}]}
 {'name': 'Adam Smith', 'is_active': True, 'id': 1, 'height': 10.0}
 Filter: {'$and': [{'id': 1}, {'id': 2}]}
@@ -449,9 +444,9 @@ Filter: {'$and': [{'name': {'$contains': 'bob'}}, {'name': {'$contains': 'johnso
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ## Reranking results
 
@@ -469,7 +464,7 @@ The `rerank_config` dictionary supports the following fields:
 
 > **Note:** Ensure NLP is enabled in your SAP HANA Cloud instance to use reranking functionality. For more details, see [SAP HANA Database Additional Features](https://help.sap.com/docs/hana-cloud/sap-hana-cloud-administration-guide/sap-hana-database-additional-features?version=hanacloud).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Prepare sample documents with metadata
 docs = [
     Document(
@@ -501,7 +496,7 @@ db.add_documents(docs)
 
 Perform a similarity search with reranking using the `rerank_config` parameter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Basic reranking - rerank similarity search results using a cross-encoding model
 rerank_config = {
     "model_id": os.environ.get("HANA_DB_RERANK_MODEL_ID"),  # e.g., "SAP_CER.20250701"
@@ -521,7 +516,7 @@ for doc in results:
     print(f"Metadata: {doc.metadata}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Reranked results:
 --------------------------------------------------------------------------------
 Content: Machine learning uses algorithms to learn patterns
@@ -535,7 +530,7 @@ Metadata: {'category': 'programming', 'difficulty': 'beginner'}
 
 Use `rank_fields` to include metadata in the reranking process. This is useful when metadata contains relevant information that should influence the ranking:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Reranking with metadata fields included in the scoring
 rerank_config_with_fields = {
     "query": "beginner AI concepts",
@@ -557,7 +552,7 @@ for doc in results:
     print(f"Metadata: {doc.metadata}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Reranked results with metadata fields:
 --------------------------------------------------------------------------------
 Content: Neural networks are inspired by the human brain
@@ -571,7 +566,7 @@ Metadata: {'category': 'AI', 'difficulty': 'intermediate'}
 
 Use `similarity_search_with_score` to get the reranking scores along with the documents:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Get reranking scores with the results
 rerank_config = {
     "model_id": os.environ.get("HANA_DB_RERANK_MODEL_ID"),
@@ -591,7 +586,7 @@ for doc, score in results_with_scores:
     print(f"Content: {doc.page_content}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Reranked results with scores:
 --------------------------------------------------------------------------------
 Score: 0.0435
@@ -608,7 +603,7 @@ Content: Machine learning uses algorithms to learn patterns
 
 For more control over the reranking process, you can use the `HanaReranker` class directly as a document compressor. This is useful when you want to rerank documents from any source, not just from a similarity search:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaReranker
 
 # Create a standalone reranker
@@ -644,7 +639,7 @@ for idx, score, doc in results:
     print(f"  [{idx}] Score: {score:.4f} - {doc.page_content}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Compressed documents:
 --------------------------------------------------------------------------------
 Content: Deep learning applications
@@ -675,7 +670,7 @@ As default behaviour, the table for the embeddings is created with 3 columns:
 * A column `VEC_META`, which contains the metadata of the Document
 * A column `VEC_VECTOR`, which contains the embeddings-vector of the Document's text
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Access the vector DB with a new table
 db = HanaDB(
     connection=connection, embedding=embeddings, table_name="LANGCHAIN_DEMO_NEW_TABLE"
@@ -696,7 +691,7 @@ db.add_documents(docs)
 
 Show the columns in table "LANGCHAIN\_DEMO\_NEW\_TABLE"
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 cur = connection.cursor()
 cur.execute(
     "SELECT COLUMN_NAME, DATA_TYPE_NAME FROM SYS.TABLE_COLUMNS WHERE SCHEMA_NAME = CURRENT_SCHEMA AND TABLE_NAME = 'LANGCHAIN_DEMO_NEW_TABLE'"
@@ -707,7 +702,7 @@ for row in rows:
 cur.close()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ('VEC_META', 'NCLOB')
 ('VEC_TEXT', 'NCLOB')
 ('VEC_VECTOR', 'REAL_VECTOR')
@@ -717,7 +712,7 @@ Show the value of the inserted document in the three columns
 
 Since, HANA's dbapi driver outputs the vector columns in fvecs bytes objects by default, we will create a helper function to convert the function into a list of numbers.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import struct
 # Helper function to parse fvecs format for REAL_VECTOR
 def parseFvecs(fvecs):
@@ -736,7 +731,7 @@ print(len(embedding), embedding[:3] + ['...'] + embedding[-3:])  # The vector
 cur.close()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 A simple document
 {"start": 100, "end": 150, "doc_name": "simple.txt"}
 768 [-0.01989901065826416, 0.02785174734890461, 0.0020877711940556765, '...', 0.0183248370885849, 0.009469633921980858, 0.04312701150774956]
@@ -750,7 +745,7 @@ Custom tables must have at least three columns that match the semantics of a sta
 
 The table can contain additional columns. When new Documents are inserted into the table, these additional columns must allow NULL values.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a new table "MY_OWN_TABLE_ADD" with three "standard" columns and one additional column
 my_own_table_name = "MY_OWN_TABLE_ADD"
 cur = connection.cursor()
@@ -795,7 +790,7 @@ print(len(embedding), embedding[:3] + ['...'] + embedding[-3:])  # The vector
 cur.close()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 None
 Some other text
 {"start": 400, "end": 450, "doc_name": "other.txt"}
@@ -804,7 +799,7 @@ Some other text
 
 Add another document and perform a similarity search on the custom table.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = [
     Document(
         page_content="Some more text",
@@ -820,7 +815,7 @@ for doc in docs:
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 Some more text
 --------------------------------------------------------------------------------
@@ -831,7 +826,7 @@ Some other text
 
 To allow flexible metadata values, all metadata is stored as JSON in the metadata column by default. If some of the used metadata keys and value types are known, they can be stored in additional columns instead by creating the target table with the key names as column names and passing them to the HanaDB constructor via the `specific_metadata_columns` list. Metadata keys that match those values are copied into the special column during insert. Filters use the special columns instead of the metadata JSON column for keys in the `specific_metadata_columns` list.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a new table "PERFORMANT_CUSTOMTEXT_FILTER" with three "standard" columns and one additional column
 my_own_table_name = "PERFORMANT_CUSTOMTEXT_FILTER"
 cur = connection.cursor()
@@ -886,7 +881,7 @@ print(len(embedding), embedding[:3] + ['...'] + embedding[-3:])  # The vector
 cur.close()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Filters on this value are very performant
 Some other text
 {"start": 400, "end": 450, "doc_name": "other.txt", "CUSTOMTEXT": "Filters on this value are very performant"}
@@ -895,7 +890,7 @@ Some other text
 
 The special columns are completely transparent to the rest of the langchain interface. Everything works as it did before, just more performant.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = [
     Document(
         page_content="Some more text",
@@ -917,7 +912,7 @@ for doc in docs:
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 Some more text
 --------------------------------------------------------------------------------
@@ -928,11 +923,10 @@ Some other text
 
 Load the sample document "state\_of\_the\_union.txt" and create chunks from it.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
@@ -946,13 +940,13 @@ text_chunks = text_splitter.split_documents(text_documents)
 print(f"Number of document chunks: {len(text_chunks)}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Number of document chunks: 88
 ```
 
 Add the loaded document chunks to the table. For this example, we delete any previous content from the table which might exist from previous runs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Delete already existing documents from the table
 db.delete(filter={})
 
@@ -963,7 +957,7 @@ db.add_documents(text_chunks)
 Perform a query to get the two best-matching document chunks from the ones that were added in the previous step.
 By default "Cosine Similarity" is used for the search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What did the president say about Ketanji Brown Jackson"
 docs = db.similarity_search(query, k=2)
 
@@ -972,7 +966,7 @@ for doc in docs:
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
@@ -985,7 +979,7 @@ While it often appears that we never agree, that isn’t true. I signed 80 bipar
 
 Query the same content with "Euclidean Distance". The results should be the same as with "Cosine Similarity".
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana.utils import DistanceStrategy
 
 db = HanaDB(
@@ -1002,7 +996,7 @@ for doc in docs:
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
@@ -1017,14 +1011,14 @@ While it often appears that we never agree, that isn’t true. I signed 80 bipar
 
 `Maximal marginal relevance` optimizes for similarity to query AND diversity among selected documents. The first 20 (fetch\_k) items will be retrieved from the DB. The MMR algorithm will then find the best 2 (k) matches.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = db.max_marginal_relevance_search(query, k=2, fetch_k=20)
 for doc in docs:
     print("-" * 80)
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
@@ -1041,7 +1035,7 @@ Let each of us here tonight in this Chamber send an unmistakable signal to Ukrai
 
 A vector index can significantly speed up top-k nearest neighbor queries for vectors. Users can create a Hierarchical Navigable Small World (HNSW) vector index using the `create_hnsw_index` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # HanaDB instance uses cosine similarity as default:
 db_cosine = HanaDB(
     embedding=embeddings, connection=connection, table_name="STATE_OF_THE_UNION"
@@ -1051,7 +1045,6 @@ db_cosine = HanaDB(
 db_cosine.create_hnsw_index()  # If no other parameters are specified, the default values will be used
 # Default values: m=64, ef_construction=128, ef_search=200
 # The default index name will be: STATE_OF_THE_UNION_COSINE_idx
-
 
 # Creating a HanaDB instance with L2 distance as the similarity function and defined values
 db_l2 = HanaDB(
@@ -1076,7 +1069,7 @@ for doc in docs:
     print(doc.page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
 
@@ -1096,12 +1089,8 @@ Let each of us here tonight in this Chamber send an unmistakable signal to Ukrai
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/sap_hanavector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

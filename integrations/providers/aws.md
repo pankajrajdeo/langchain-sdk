@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AWS (Amazon) integrations
-
-> Integrate with AWS (Amazon) using LangChain Python.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/aws)
+Integrate with AWS (Amazon) using LangChain Python.
 
 This page covers all LangChain integrations with the [Amazon Web Services (AWS)](https://aws.amazon.com/) platform.
 
@@ -22,9 +18,9 @@ This page covers all LangChain integrations with the [Amazon Web Services (AWS)]
 > serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy
 > generative AI capabilities into your applications using the AWS services you are already familiar with.
 
-See a [usage example](/oss/python/integrations/chat/bedrock).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrock
 ```
 
@@ -35,13 +31,12 @@ that provides a unified conversational interface for Bedrock models. This API do
 yet support custom models. You can see a list of all
 [models that are supported here](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html).
 
-<Info>
-  **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [ChatBedrockConverse](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
-</Info>
+> [!NOTE]
+> **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [ChatBedrockConverse](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
 
-See a [usage example](/oss/python/integrations/chat/bedrock).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 ```
 
@@ -49,9 +44,9 @@ from langchain_aws import ChatBedrockConverse
 
 ### Bedrock
 
-See a [usage example](/oss/python/integrations/llms/bedrock).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/bedrock).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import BedrockLLM
 ```
 
@@ -62,9 +57,9 @@ from langchain_aws import BedrockLLM
 
 We use `SageMaker` to host our model and expose it as the `SageMaker Endpoint`.
 
-See a [usage example](/oss/python/integrations/llms/sagemaker).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/sagemaker).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import SagemakerEndpoint
 ```
 
@@ -72,9 +67,9 @@ from langchain_aws import SagemakerEndpoint
 
 ### Bedrock
 
-See a [usage example](/oss/python/integrations/embeddings/bedrock).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/bedrock).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import BedrockEmbeddings
 ```
 
@@ -87,7 +82,7 @@ enabling you to quickly build applications using the same flexible and friendly 
 
 InMemoryVectorStore class provides a vectorstore to connect with Amazon MemoryDB.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.vectorstores.inmemorydb import InMemoryVectorStore
 
 vds = InMemoryVectorStore.from_documents(
@@ -99,17 +94,17 @@ vds = InMemoryVectorStore.from_documents(
         )
 ```
 
-See a [usage example](/oss/python/integrations/vectorstores/memorydb).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/memorydb).
 
 ### Valkey
 
 [Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Use ValkeyVectorStore to connect with [Amazon ElastiCache for Valkey](https://aws.amazon.com/elasticache/valkey/) or [Amazon MemoryDB for Valkey](https://aws.amazon.com/memorydb/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.vectorstores import ValkeyVectorStore
 ```
 
-See a [usage example](/oss/python/integrations/vectorstores/valkey).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/valkey).
 
 ## Retrievers
 
@@ -121,19 +116,17 @@ See a [usage example](/oss/python/integrations/vectorstores/valkey).
 
 We need to install the `langchain-aws` library.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-aws
-  ```
+```bash
+pip install langchain-aws
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws
+```
 
-See a [usage example](/oss/python/integrations/retrievers/bedrock).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import AmazonKnowledgeBasesRetriever
 ```
 
@@ -144,19 +137,17 @@ from langchain_aws import AmazonKnowledgeBasesRetriever
 > [Amazon Bedrock AgentCore Browser](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/browser-tool.html)
 > enables agents to interact with web pages through a managed Chrome browser for navigation, content extraction, and web automation.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-aws bedrock-agentcore playwright beautifulsoup4
-  ```
+```bash
+pip install langchain-aws bedrock-agentcore playwright beautifulsoup4
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
+```
 
-See a [usage example](/oss/python/integrations/tools/bedrock_agentcore_browser).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 # Create toolkit
@@ -178,19 +169,17 @@ await toolkit.cleanup()
 > [Amazon Bedrock AgentCore Code Interpreter](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/code-interpreter-tool.html)
 > enables agents to execute Python, JavaScript, and TypeScript code in secure, managed sandbox environments for calculations, data analysis, and visualizations.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-aws bedrock-agentcore
-  ```
+```bash
+pip install langchain-aws bedrock-agentcore
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws bedrock-agentcore
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws bedrock-agentcore
+```
 
-See a [usage example](/oss/python/integrations/tools/bedrock_agentcore_code_interpreter).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_code_interpreter).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_code_interpreter_toolkit
 
 # Create toolkit (async)
@@ -209,11 +198,8 @@ await toolkit.cleanup()
 
 ## Sandboxes
 
-<Columns cols={2}>
-  <Card title="AgentCoreSandbox" href="/oss/python/integrations/sandboxes/aws" cta="Get started" icon="terminal" arrow>
-    Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
-  </Card>
-</Columns>
+#### [AgentCoreSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/aws)
+Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
 
 ## Graphs
 
@@ -224,21 +210,19 @@ await toolkit.cleanup()
 
 For the Cypher and SPARQL integrations below, we need to install the `langchain-aws` library.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-aws
-  ```
+```bash
+pip install langchain-aws
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws
+```
 
 ### Amazon neptune with cypher
 
-See a [usage example](/oss/python/integrations/graphs/amazon_neptune_open_cypher).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/amazon_neptune_open_cypher).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.graphs import NeptuneGraph
 from langchain_aws.graphs import NeptuneAnalyticsGraph
 from langchain_aws.chains import create_neptune_opencypher_qa_chain
@@ -246,7 +230,7 @@ from langchain_aws.chains import create_neptune_opencypher_qa_chain
 
 ### Amazon neptune with SPARQL
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.graphs import NeptuneRdfGraph
 from langchain_aws.chains import create_neptune_sparql_qa_chain
 ```
@@ -258,17 +242,15 @@ from langchain_aws.chains import create_neptune_sparql_qa_chain
 > [Amazon Bedrock AgentCore Memory](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html) provides
 > managed persistence for LangGraph agents, enabling conversation history and state management across sessions with automatic scaling and high availability.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langgraph-checkpoint-aws
-  ```
+```bash
+pip install langgraph-checkpoint-aws
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langgraph-checkpoint-aws
-  ```
-</CodeGroup>
+```bash
+uv add langgraph-checkpoint-aws
+```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_checkpoint_aws import AgentCoreMemorySaver
 
 # Create checkpointer
@@ -302,7 +284,7 @@ Key features:
 > [Amazon Bedrock AgentCore Memory Store](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/memory.html) provides
 > long-term memory with semantic search capabilities for LangGraph agents, enabling storage and retrieval of user preferences, facts, and extracted memories across sessions.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_checkpoint_aws import AgentCoreMemoryStore
 
 # Initialize store for long-term memories
@@ -331,23 +313,20 @@ def pre_model_hook(state, config, *, store):
 
 We need to install the `boto3` and `nltk` libraries.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install boto3 nltk
-  ```
+```bash
+pip install boto3 nltk
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add boto3 nltk
-  ```
-</CodeGroup>
+```bash
+uv add boto3 nltk
+```
 
 See a [usage example](https://python.langchain.com/v0.1/docs/guides/productionization/safety/amazon_comprehend_chain/).
 
-<Warning>
-  The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_experimental.comprehend_moderation import AmazonComprehendModerationChain
 ```
 
@@ -358,17 +337,15 @@ from langchain_experimental.comprehend_moderation import AmazonComprehendModerat
 > [Amazon Bedrock AgentCore Runtime](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html) provides
 > managed, serverless execution for LangGraph agents with built-in observability, automatic scaling, and seamless integration with other AgentCore services.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install bedrock-agentcore
-  ```
+```bash
+pip install bedrock-agentcore
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add bedrock-agentcore
-  ```
-</CodeGroup>
+```bash
+uv add bedrock-agentcore
+```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.runtime import BedrockAgentCoreApp
 
 app = BedrockAgentCoreApp()
@@ -383,7 +360,7 @@ app.run()
 
 Deploy using the AgentCore CLI:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Configure your agent
 agentcore configure
 
@@ -393,12 +370,8 @@ agentcore launch -e your_agent.py
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

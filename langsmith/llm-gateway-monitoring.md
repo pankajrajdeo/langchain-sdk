@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Monitor LLM Gateway spend
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-monitoring)
+View and analyze LLM Gateway costs by user, API key, and model.
 
-> View and analyze LLM Gateway costs by user, API key, and model.
+The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](https://docs.langchain.com/langsmith/create-account-api-key), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
 
-The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](/langsmith/administration-overview#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](/langsmith/create-account-api-key), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
+Viewing the dashboard requires the [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) role and a Plus or Enterprise [plan](https://docs.langchain.com/langsmith/pricing-plans). Without both, the **Usage** tab does not appear.
 
-Viewing the dashboard requires the [Organization Admin](/langsmith/rbac#organization-admin) role and a Plus or Enterprise [plan](/langsmith/pricing-plans). Without both, the **Usage** tab does not appear.
-
-<Warning>
-  The dashboard is not currently available in the EU, APAC, or AWS environments.
-</Warning>
+> [!WARNING]
+> The dashboard is not currently available in the EU, APAC, or AWS environments.
 
 ## Open the dashboard
 
@@ -73,17 +68,13 @@ The detailed view has its own entity filter, time range, and granularity control
 
 ## See also
 
-* [LLM Gateway overview](/langsmith/llm-gateway)
-* [Configure spend policies](/langsmith/llm-gateway-spend-policies)
+* [LLM Gateway overview](https://docs.langchain.com/langsmith/llm-gateway)
+* [Configure spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-monitoring.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-monitoring.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

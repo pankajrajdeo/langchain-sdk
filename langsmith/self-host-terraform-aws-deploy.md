@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy LangSmith on AWS with Terraform
-
-> End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy)
+End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
 
 Deploy LangSmith to AWS with the public [Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). Managing the deployment as code lets you version, review, and reproduce your LangSmith environment across accounts instead of clicking through the AWS Console.
 
@@ -15,7 +11,7 @@ The install runs in two stages:
 
 After the base install, enable optional add-ons by setting flags and redeploying.
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init: {'flowchart': {'nodeSpacing': 25, 'rankSpacing': 30}}}%%
 graph TB
     subgraph stage1["Set up infrastructure"]
@@ -68,14 +64,14 @@ graph TB
 
 Install on macOS:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 brew install awscli kubectl helm eksctl
 brew tap hashicorp/tap && brew install hashicorp/tap/terraform
 ```
 
 Verify each tool is on `PATH`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 aws --version
 terraform version
 kubectl version --client
@@ -97,21 +93,20 @@ The IAM user or role running Terraform needs permission to create and manage the
 | `AmazonS3FullAccess`          | Create S3 buckets and VPC endpoints        |
 | `IAMFullAccess`               | Create IRSA roles and policies             |
 
-<Tip>
-  Run `make preflight` from `modules/aws/` after authenticating. The preflight script confirms that the active credentials can perform each required action and reports the first missing permission, which is faster than discovering gaps mid-`terraform apply`.
-</Tip>
+> [!TIP]
+> Run `make preflight` from `modules/aws/` after authenticating. The preflight script confirms that the active credentials can perform each required action and reports the first missing permission, which is faster than discovering gaps mid-`terraform apply`.
 
 ### Authenticate
 
 Configure AWS credentials with the CLI:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 aws configure
 ```
 
 Or export environment variables:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="..."
 export AWS_DEFAULT_REGION="us-west-2"
@@ -119,7 +114,7 @@ export AWS_DEFAULT_REGION="us-west-2"
 
 Confirm the credentials work and the target region is enabled in the account:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 aws sts get-caller-identity
 aws ec2 describe-availability-zones --query 'AvailabilityZones[].ZoneName' --output table
 ```
@@ -138,21 +133,19 @@ Two independent settings control capacity:
 * **Infrastructure capacity** sets instance types and node counts directly through the infra variables `eks_managed_node_groups`, `postgres_instance_type`, and `redis_instance_type`. The module defaults are one `m5.4xlarge` node group (min 3, max 10), `db.t3.large` for RDS, and `cache.m6g.xlarge` for ElastiCache.
 * **`sizing_profile`** selects the Helm sizing overlay (pod resource requests and limits). `init-values.sh` and `deploy.sh` read it; Terraform does not.
 
-Size the infrastructure for your target tier before deploying. For per-tier recommendations, refer to [Scaling guidance](/langsmith/self-host-scale).
+Size the infrastructure for your target tier before deploying. For per-tier recommendations, refer to [Scaling guidance](https://docs.langchain.com/langsmith/self-host-scale).
 
-<Note>
-  For production workloads, also plan to provision external [LangChain Managed ClickHouse](/langsmith/langsmith-managed-clickhouse) or a self-managed external ClickHouse cluster. In-cluster ClickHouse is supported for dev/POC only.
-</Note>
+> [!NOTE]
+> For production workloads, also plan to provision external [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external ClickHouse cluster. In-cluster ClickHouse is supported for dev/POC only.
 
 ## Quickstart
 
-<Tip>
-  For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [AWS quick reference](/langsmith/self-host-terraform-aws-quick-reference).
-</Tip>
+> [!TIP]
+> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [AWS quick reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference).
 
 For the fastest path from zero to a running LangSmith instance, run these commands in order:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # 1. Clone the public modules
 git clone https://github.com/langchain-ai/terraform.git
 cd terraform/modules/aws
@@ -184,7 +177,7 @@ kubectl get ingress -n langsmith
 
 To chain infrastructure and application in one command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make quickdeploy          # interactive, prompts before terraform apply
 make quickdeploy-auto     # non-interactive, auto-approves terraform
 ```
@@ -211,7 +204,7 @@ Terraform provisions the following AWS resources:
 
 ### Clone and configure
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 git clone https://github.com/langchain-ai/terraform.git
 cd terraform/modules/aws
 ```
@@ -220,7 +213,7 @@ All subsequent commands run from `modules/aws/`. Run `make help` for the full ta
 
 Generate `terraform.tfvars` with the interactive wizard:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make quickstart
 ```
 
@@ -228,14 +221,14 @@ The wizard prompts for naming prefix, region, EKS sizing, TLS source, external v
 
 Prefer to edit by hand? Copy the example and fill in the required fields:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp infra/terraform.tfvars.example infra/terraform.tfvars
 vi infra/terraform.tfvars
 ```
 
 The minimum required variables:
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 name_prefix = "acme"
 environment = "prod"
 region      = "us-west-2"
@@ -258,15 +251,14 @@ acm_certificate_arn    = "arn:aws:acm:us-west-2:<account-id>:certificate/<cert-i
 langsmith_domain       = "langsmith.example.com"
 ```
 
-See the [AWS variables reference](/langsmith/self-host-terraform-aws-variables) for every input variable.
+See the [AWS variables reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-variables) for every input variable.
 
-<Tip>
-  Configure a remote state backend before applying. Edit `infra/backend.tf` to point at an S3 bucket and DynamoDB lock table you control. The Terraform repo ships a local backend by default for first-time evaluations.
-</Tip>
+> [!TIP]
+> Configure a remote state backend before applying. Edit `infra/backend.tf` to point at an S3 bucket and DynamoDB lock table you control. The Terraform repo ships a local backend by default for first-time evaluations.
 
 ### Load secrets into SSM Parameter Store
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 source infra/scripts/setup-env.sh
 ```
 
@@ -289,17 +281,16 @@ The script manages the following SSM parameters:
 
 Verify the secrets are present and the `TF_VAR_*` environment variables are exported:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make secrets
 ```
 
 ### Apply
 
-<Note>
-  Provisioning the AWS cloud foundation takes 20 to 25 minutes on a clean account. Do not interrupt the apply.
-</Note>
+> [!NOTE]
+> Provisioning the AWS cloud foundation takes 20 to 25 minutes on a clean account. Do not interrupt the apply.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make init
 make plan
 make apply
@@ -309,7 +300,7 @@ make apply
 
 ### Configure kubectl
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make kubeconfig
 kubectl get nodes
 kubectl get pods -n kube-system
@@ -325,7 +316,7 @@ Two deployment paths are supported. Pick one.
 
 Best for most deployments. Interactive prompts guide you through sizing and product choices.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd modules/aws
 
 make init-values
@@ -345,7 +336,7 @@ Expect 5 to 10 minutes for the chart to install and pods to become ready.
 
 #### Verify
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl get pods -n langsmith
 kubectl get ingress -n langsmith
 ```
@@ -358,7 +349,7 @@ If you completed the script-driven deploy, you are done. The following section i
 
 Best for teams that want the full deployment in Terraform state, or for "bring your own infrastructure" scenarios. The `app/` module manages the External Secrets Operator wiring, the `helm_release`, and feature toggles directly.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd modules/aws
 
 # Generate Helm values files from templates (required, the app module reads these)
@@ -378,7 +369,7 @@ make apply-app
 
 The `app/terraform.tfvars` file controls the application configuration:
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 admin_email          = "admin@example.com"
 sizing               = "production"   # production | production-large | dev | none
 enable_agent_deploys = true
@@ -388,9 +379,8 @@ enable_polly         = true
 clickhouse_host      = "clickhouse.example.com"
 ```
 
-<Warning>
-  `make init-values` is required before `make plan-app`. The app module reads the values files from `helm/values/` and `init-values` populates them from `helm/values/examples/` based on the sizing and add-on choices in `infra/terraform.tfvars`.
-</Warning>
+> [!WARNING]
+> `make init-values` is required before `make plan-app`. The app module reads the values files from `helm/values/` and `init-values` populates them from `helm/values/examples/` based on the sizing and add-on choices in `infra/terraform.tfvars`.
 
 For "bring your own infrastructure", skip `make init-app` and set all variables manually in `app/terraform.tfvars`.
 
@@ -398,7 +388,7 @@ For "bring your own infrastructure", skip `make init-app` and set all variables 
 
 Each add-on is gated by a flag in `infra/terraform.tfvars`. Set the flag, re-run `make init-values` to copy the matching values file, then re-run `make deploy`.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 enable_deployments     = true   # LangGraph Platform (required for Fleet, Agent Builder, and Polly)
 enable_fleet           = true   # Fleet (formerly Agent Builder), standalone service (chart v0.15+)
 enable_agent_builder   = false  # Older agent-builder path; mutually exclusive with enable_fleet
@@ -407,32 +397,29 @@ enable_polly           = true   # Polly AI eval and monitoring
 enable_usage_telemetry = false  # Extended usage telemetry
 ```
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make init-values
 make deploy
 ```
 
-For details on each add-on, see [LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform).
+For details on each add-on, see [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
 
 ### Fleet
 
-<Note>
-  Fleet is the current form of the feature formerly called Agent Builder, deployed as a standalone service (chart v0.15+).
-</Note>
+> [!NOTE]
+> Fleet is the current form of the feature formerly called Agent Builder, deployed as a standalone service (chart v0.15+).
 
 You can enable Fleet with `enable_fleet`. On AWS, it requires `enable_deployments = true`, because the Fleet chat UI resolves OAuth provider and token connections through the host-backend that ships with LangSmith Deployment. It also requires external Postgres and Redis (`postgres_source = "external"` and `redis_source = "external"`).
 
 Terraform creates a dedicated `langsmith_fleet` database on RDS and wires the `langsmith-fleet-postgres` and `langsmith-fleet-redis` secrets to the existing RDS and ElastiCache instances. Fleet reuses `langsmith_agent_builder_encryption_key`, so migrating from `enable_agent_builder` keeps the same key and data.
 
-<Note>
-  Fleet requires the LangSmith Helm chart `>=0.15.0` and the Agent Builder or Fleet entitlement in your license.
-</Note>
+> [!NOTE]
+> Fleet requires the LangSmith Helm chart `>=0.15.0` and the Agent Builder or Fleet entitlement in your license.
 
 Fleet installs the `standalone-fleet-api-server`, `standalone-fleet-tool-server`, `standalone-fleet-trigger-server`, and `standalone-fleet-queue` services.
 
-<Warning>
-  Do not enable `enable_fleet` and `enable_agent_builder` together. The Fleet values file sets `config.agentBuilder.enabled: false`, so the two add-ons are mutually exclusive.
-</Warning>
+> [!WARNING]
+> Do not enable `enable_fleet` and `enable_agent_builder` together. The Fleet values file sets `config.agentBuilder.enabled: false`, so the two add-ons are mutually exclusive.
 
 ## Optional: private EKS cluster with bastion
 
@@ -442,7 +429,7 @@ For deployments that must run a fully private EKS API endpoint, the modules ship
 2. After the initial deployment, set `enable_public_eks_cluster = false` and re-apply. The EKS API endpoint becomes private only.
 3. All subsequent Terraform work happens on the bastion. SSM into it, clone the repo, copy your `terraform.tfvars` and SSM secrets, then run the deployment from there.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 enable_public_eks_cluster = false
 create_bastion            = true
 
@@ -454,25 +441,24 @@ create_bastion            = true
 
 Connect via SSM Session Manager:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 terraform output bastion_ssm_command
 aws ssm start-session --target <instance-id> --region us-west-2
 ```
 
-<Note>
-  The bastion lives in a public subnet for SSM agent connectivity but does not need a public IP if your VPC has the SSM, SSMMessages, and EC2Messages VPC endpoints. The bastion comes preinstalled with `kubectl`, `helm`, `terraform`, `git`, and `jq`, with kubeconfig already configured for the EKS cluster. Install the [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for the AWS CLI on your workstation.
-</Note>
+> [!NOTE]
+> The bastion lives in a public subnet for SSM agent connectivity but does not need a public IP if your VPC has the SSM, SSMMessages, and EC2Messages VPC endpoints. The bastion comes preinstalled with `kubectl`, `helm`, `terraform`, `git`, and `jq`, with kubeconfig already configured for the EKS cluster. Install the [Session Manager plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for the AWS CLI on your workstation.
 
 ## Optional: Envoy Gateway ingress
 
 The default ingress is the AWS Load Balancer Controller (ALB). Set `enable_envoy_gateway = true` in `terraform.tfvars` to install [Envoy Gateway](https://gateway.envoyproxy.io/) instead. Envoy Gateway is required for multi-namespace dataplane deployments where the `langgraph-dataplane` chart runs in its own namespace.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 # infra/terraform.tfvars
 enable_envoy_gateway = true
 ```
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 source infra/scripts/setup-env.sh
 make apply
 
@@ -485,7 +471,7 @@ The deploy script annotates the Envoy Gateway NLB service with the ACM certifica
 
 When running the dataplane chart in a separate namespace, apply the RBAC manifest once per dataplane namespace:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl apply -f helm/values/examples/dataplane-rbac.yaml
 ```
 
@@ -493,19 +479,15 @@ This grants the `langsmith-host-backend` ServiceAccount read access to pods, pod
 
 ## Next steps
 
-* Reference the [AWS variables](/langsmith/self-host-terraform-aws-variables) and the [quick reference](/langsmith/self-host-terraform-aws-quick-reference).
-* Review the [AWS architecture](/langsmith/self-host-terraform-aws-architecture) for platform layers, IRSA, and module dependencies.
-* When something breaks, check the [AWS troubleshooting guide](/langsmith/self-host-terraform-aws-troubleshooting).
-* Enable agent deployment in the UI with [LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform).
+* Reference the [AWS variables](https://docs.langchain.com/langsmith/self-host-terraform-aws-variables) and the [quick reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference).
+* Review the [AWS architecture](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture) for platform layers, IRSA, and module dependencies.
+* When something breaks, check the [AWS troubleshooting guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-troubleshooting).
+* Enable agent deployment in the UI with [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

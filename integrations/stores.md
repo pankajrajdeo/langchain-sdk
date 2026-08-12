@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Store integrations
 
 > Integrate with stores using LangChain Python.
 
 ## Overview
 
-LangChain provides a key-value store interface for storing and retrieving data by key. The key-value store interface in LangChain is primarily used for caching [embeddings](/oss/python/integrations/embeddings).
+LangChain provides a key-value store interface for storing and retrieving data by key. The key-value store interface in LangChain is primarily used for caching [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings).
 
 ## Interface
 
@@ -19,17 +15,14 @@ All [`BaseStores`](https://reference.langchain.com/python/langchain-core/stores/
 * `mdelete(key: Sequence[str]) -> None`: delete multiple keys
 * `yield_keys(prefix: Optional[str] = None) -> Iterator[str]`: yield all keys in the store, optionally filtering by a prefix
 
-<Note>
-  Base stores are designed to work **multiple** key-value pairs at once for efficiency. This saves on network round-trips and may allow for more efficient batch operations in the underlying store.
-</Note>
+> [!NOTE]
+> Base stores are designed to work **multiple** key-value pairs at once for efficiency. This saves on network round-trips and may allow for more efficient batch operations in the underlying store.
 
 ## Built-in stores for local development
 
-<Columns cols={2}>
-  <Card title="InMemoryByteStore" icon="link" href="/oss/python/integrations/stores/in_memory" arrow="true" cta="View guide" />
+#### [InMemoryByteStore](https://docs.langchain.com/oss/python/integrations/stores/in_memory)
 
-  <Card title="LocalFileStore" icon="link" href="/oss/python/integrations/stores/file_system" arrow="true" cta="View guide" />
-</Columns>
+#### [LocalFileStore](https://docs.langchain.com/oss/python/integrations/stores/file_system)
 
 ## Custom stores
 
@@ -37,30 +30,24 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 
 ## All key-value stores
 
-<div class="integration-downloads-table">
-  | Integration                                                                                  | Downloads                                                                                                                                                                                                                                                        |
-  | :------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | [`ElasticsearchEmbeddingsCache`](/oss/python/integrations/stores/elasticsearch)              | <span data-sort-value="318000"><a href="https://pypi.org/project/langchain-elasticsearch/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-elasticsearch/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>    |
-  | [`AstraDBByteStore`](/oss/python/integrations/stores/astradb)                                | <span data-sort-value="233000"><a href="https://pypi.org/project/langchain-astradb/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-astradb/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>                |
-  | [`M3Store`](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md) | <span data-sort-value="35000"><a href="https://pypi.org/project/m3-memory/" target="_blank">  <img src="https://static.pepy.tech/badge/m3-memory/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>                                 |
-  | [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph)          | <span data-sort-value="2000"><a href="https://pypi.org/project/hindsight-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/hindsight-langgraph/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>              |
-  | [`LithtrixStore`](https://docs.lithtrix.ai/integrations/langgraph)                           | <span data-sort-value="2000"><a href="https://pypi.org/project/lithtrix-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/lithtrix-langgraph/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>                |
-  | [`BigtableByteStore`](/oss/python/integrations/stores/bigtable)                              | <span data-sort-value="444"><a href="https://pypi.org/project/langchain-google-bigtable/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-google-bigtable/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>   |
-  | [`InspeximusStore`](https://dancenitra.github.io/inspeximus/)                                | <span data-sort-value="405"><a href="https://pypi.org/project/langgraph-store-inspeximus/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-inspeximus/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span> |
-  | [`UpstashStore`](https://github.com/Tghez/langgraph-store-upstash)                           | <span data-sort-value="353"><a href="https://pypi.org/project/langgraph-store-upstash/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-upstash/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>       |
-  | [`TypeDBStore`](https://typedb.com/docs)                                                     | <span data-sort-value="72"><a href="https://pypi.org/project/langgraph-store-typedb/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-typedb/month" alt="Downloads per month" noZoom class="rounded not-prose" /></a></span>          |
-  | [`InMemoryByteStore`](/oss/python/integrations/stores/in_memory)                             | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
-  | [`LocalFileStore`](/oss/python/integrations/stores/file_system)                              | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
-</div>
+| Integration                                                                                  | Downloads                                                                                                                                                                                                                                                        |
+| :------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`ElasticsearchEmbeddingsCache`](https://docs.langchain.com/oss/python/integrations/stores/elasticsearch)              | <span data-sort-value="318000"><a href="https://pypi.org/project/langchain-elasticsearch/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-elasticsearch/month" alt="Downloads per month" class="rounded not-prose" /></a></span>    |
+| [`AstraDBByteStore`](https://docs.langchain.com/oss/python/integrations/stores/astradb)                                | <span data-sort-value="233000"><a href="https://pypi.org/project/langchain-astradb/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-astradb/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                |
+| [`M3Store`](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md) | <span data-sort-value="35000"><a href="https://pypi.org/project/m3-memory/" target="_blank">  <img src="https://static.pepy.tech/badge/m3-memory/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                                 |
+| [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph)          | <span data-sort-value="2000"><a href="https://pypi.org/project/hindsight-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/hindsight-langgraph/month" alt="Downloads per month" class="rounded not-prose" /></a></span>              |
+| [`LithtrixStore`](https://docs.lithtrix.ai/integrations/langgraph)                           | <span data-sort-value="2000"><a href="https://pypi.org/project/lithtrix-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/lithtrix-langgraph/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                |
+| [`BigtableByteStore`](https://docs.langchain.com/oss/python/integrations/stores/bigtable)                              | <span data-sort-value="444"><a href="https://pypi.org/project/langchain-google-bigtable/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-google-bigtable/month" alt="Downloads per month" class="rounded not-prose" /></a></span>   |
+| [`InspeximusStore`](https://dancenitra.github.io/inspeximus/)                                | <span data-sort-value="405"><a href="https://pypi.org/project/langgraph-store-inspeximus/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-inspeximus/month" alt="Downloads per month" class="rounded not-prose" /></a></span> |
+| [`UpstashStore`](https://github.com/Tghez/langgraph-store-upstash)                           | <span data-sort-value="353"><a href="https://pypi.org/project/langgraph-store-upstash/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-upstash/month" alt="Downloads per month" class="rounded not-prose" /></a></span>       |
+| [`TypeDBStore`](https://typedb.com/docs)                                                     | <span data-sort-value="72"><a href="https://pypi.org/project/langgraph-store-typedb/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-typedb/month" alt="Downloads per month" class="rounded not-prose" /></a></span>          |
+| [`InMemoryByteStore`](https://docs.langchain.com/oss/python/integrations/stores/in_memory)                             | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
+| [`LocalFileStore`](https://docs.langchain.com/oss/python/integrations/stores/file_system)                              | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

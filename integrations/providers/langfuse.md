@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Langfuse integrations
 
 > Integrate with Langfuse using LangChain Python.
@@ -16,11 +12,11 @@ You can configure the integration via (1) constructor arguments or (2) environme
 
 ### Constructor arguments
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langfuse
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfuse import Langfuse, get_client
 from langfuse.langchain import CallbackHandler
 from langchain_openai import ChatOpenAI  # Example LLM
@@ -54,7 +50,7 @@ langfuse.flush()
 
 ### Environment variables
 
-```bash filename=".env" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 LANGFUSE_SECRET_KEY="sk-lf-..."
 LANGFUSE_PUBLIC_KEY="pk-lf-..."
 # 🇪🇺 EU region
@@ -63,7 +59,7 @@ LANGFUSE_HOST="https://cloud.langfuse.com"
 # LANGFUSE_HOST="https://us.cloud.langfuse.com"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize Langfuse handler
 from langfuse.langchain import CallbackHandler
 langfuse_handler = CallbackHandler()
@@ -86,12 +82,12 @@ This part demonstrates how [Langfuse](https://langfuse.com/docs) helps to debug,
 
 Initialize the Langfuse client with your [API keys](https://langfuse.com/faq/all/where-are-langfuse-api-keys) from the project settings in the Langfuse UI and add them to your environment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langfuse
 pip install langchain langgraph langchain_openai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 # get keys for your project from https://cloud.langfuse.com
@@ -117,7 +113,7 @@ We will start with a basic chatbot and build a more advanced multi agent setup i
 
 Start by creating a `StateGraph`. A `StateGraph` object defines our chatbot's structure as a state machine. We will add nodes to represent the LLM and functions the chatbot can call, and edges to specify how the bot transitions between these functions.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Annotated
 
 from langchain_openai import ChatOpenAI
@@ -157,7 +153,7 @@ graph = graph_builder.compile()
 
 Now, we will add then [Langfuse callback handler for LangChain](https://langfuse.com/docs/integrations/langchain/tracing) to trace the steps of our application: `config={"callbacks": [langfuse_handler]}`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfuse.langchain import CallbackHandler
 
 # Initialize Langfuse CallbackHandler for LangChain (tracing)
@@ -187,12 +183,8 @@ Example trace in Langfuse: [https://cloud.langfuse.com/project/cloramnkj0002jz08
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfuse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfuse.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

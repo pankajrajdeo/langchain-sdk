@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Portkey integrations
 
 > Integrate with Portkey using LangChain Python.
@@ -29,13 +25,13 @@ To start, get your Portkey API key by [signing up here](https://app.portkey.ai/s
 
 Next, install the Portkey SDK
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U portkey_ai
 ```
 
 We can now connect to the Portkey AI Gateway by updating the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) model in LangChain
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from portkey_ai import createHeaders, PORTKEY_GATEWAY_URL
 
@@ -65,7 +61,7 @@ The `virtual_key` parameter sets the authentication and provider for the AI prov
 
 > Notice that the `api_key` can be left blank as that authentication won't be used.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from portkey_ai import createHeaders, PORTKEY_GATEWAY_URL
 
@@ -89,7 +85,7 @@ The Portkey AI Gateway brings capabilities like load-balancing, fallbacks, exper
 
 Let's take an **example** where we might want to split traffic between `gpt-4` and `claude-opus` 50:50 to test the two large models. The gateway configuration for this would look like the following:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = {
     "strategy": {
          "mode": "loadbalance"
@@ -108,7 +104,7 @@ config = {
 
 We can then use this config in our requests being made from langchain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 portkey_headers = createHeaders(
     api_key=PORTKEY_API_KEY,
     config=config
@@ -129,7 +125,7 @@ Portkey's LangChain integration gives you full visibility into the running of an
 
 We only need to modify the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) class to use the AI Gateway as above.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain_openai import ChatOpenAI
@@ -149,12 +145,10 @@ def multiply(first_int: int, second_int: int) -> int:
     """Multiply two integers together."""
     return first_int * second_int
 
-
 @tool
 def exponentiate(base: int, exponent: int) -> int:
     "Exponentiate the base to the exponent power."
     return base**exponent
-
 
 tools = [multiply, exponentiate]
 
@@ -186,12 +180,8 @@ For detailed information on each feature and how to use it, [please refer to the
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/portkey/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

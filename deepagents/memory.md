@@ -1,32 +1,26 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Memory
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/memory)
+Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
 
-> Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
+Memory lets your agent learn and improve across conversations. Deep Agents makes memory first class with filesystem-backed memory: the agent reads and writes memory as files, and you control where those files are stored using [backends](https://docs.langchain.com/oss/python/deepagents/backends).
 
-Memory lets your agent learn and improve across conversations. Deep Agents makes memory first class with filesystem-backed memory: the agent reads and writes memory as files, and you control where those files are stored using [backends](/oss/python/deepagents/backends).
+> [!TIP]
+> To generate a repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](https://docs.langchain.com/oss/openwiki/overview).
 
-<Tip>
-  To generate a repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](/oss/openwiki/overview).
-</Tip>
-
-<Note>
-  This page covers **long-term memory**: memory that persists across conversations. For short-term memory (conversation history and scratch files within a single session), see the [context engineering](/oss/python/deepagents/context-engineering) guide. Short-term memory is managed automatically as part of the agent's [state](/oss/python/langgraph/graph-api#state).
-
-  <img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/memory.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=3ec585271dcd8d62e0207d79d68c296b" alt="Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store" width="1920" height="1160" data-path="oss/images/deepagents/production/memory.png" />
-</Note>
+> [!NOTE]
+> This page covers **long-term memory**: memory that persists across conversations. For short-term memory (conversation history and scratch files within a single session), see the [context engineering](https://docs.langchain.com/oss/python/deepagents/context-engineering) guide. Short-term memory is managed automatically as part of the agent's [state](https://docs.langchain.com/oss/python/langgraph/graph-api#state).
+>
+> > **Image:** [Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store](https://docs.langchain.com/oss/python/deepagents/memory)
 
 ## How memory works
 
-1. **Point the agent at memory files.** Pass file paths to `memory=` when creating the agent. You can also pass [skills](/oss/python/deepagents/skills) via `skills=` for procedural memory (reusable instructions that tell the agent *how* to perform a task). A [backend](/oss/python/deepagents/backends) controls where files are stored and who can access them.
-2. **Agent reads memory.** The agent can load memory files into the system prompt at startup, or read them on demand during the conversation. For example, [skills](/oss/python/deepagents/skills) use on-demand loading: the agent reads only skill descriptions at startup, then reads the full skill file only when it matches a task. This keeps context lean until a capability is needed.
-3. **Agent updates memory (optional).** When the agent learns new information, it can use its built-in `edit_file` tool to update memory files. Updates can happen during the conversation (the default) or in the background between conversations via [background consolidation](#background-consolidation). Changes are persisted and available in the next conversation. Not all memory is writable: developer-defined [skills](/oss/python/deepagents/skills) and [organization policies](#organization-level-memory) are typically read-only. See [read-only vs writable memory](#read-only-vs-writable-memory) for details.
+1. **Point the agent at memory files.** Pass file paths to `memory=` when creating the agent. You can also pass [skills](https://docs.langchain.com/oss/python/deepagents/skills) via `skills=` for procedural memory (reusable instructions that tell the agent *how* to perform a task). A [backend](https://docs.langchain.com/oss/python/deepagents/backends) controls where files are stored and who can access them.
+2. **Agent reads memory.** The agent can load memory files into the system prompt at startup, or read them on demand during the conversation. For example, [skills](https://docs.langchain.com/oss/python/deepagents/skills) use on-demand loading: the agent reads only skill descriptions at startup, then reads the full skill file only when it matches a task. This keeps context lean until a capability is needed.
+3. **Agent updates memory (optional).** When the agent learns new information, it can use its built-in `edit_file` tool to update memory files. Updates can happen during the conversation (the default) or in the background between conversations via [background consolidation](https://docs.langchain.com/oss/python/deepagents/memory#background-consolidation). Changes are persisted and available in the next conversation. Not all memory is writable: developer-defined [skills](https://docs.langchain.com/oss/python/deepagents/skills) and [organization policies](https://docs.langchain.com/oss/python/deepagents/memory#organization-level-memory) are typically read-only. See [read-only vs writable memory](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) for details.
 
-The two most common patterns are [agent-scoped memory](#agent-scoped-memory) (shared across all users) and [user-scoped memory](#user-scoped-memory) (isolated per user).
+The two most common patterns are [agent-scoped memory](https://docs.langchain.com/oss/python/deepagents/memory#agent-scoped-memory) (shared across all users) and [user-scoped memory](https://docs.langchain.com/oss/python/deepagents/memory#user-scoped-memory) (isolated per user).
 
-For a generated repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](/oss/openwiki/overview).
+For a generated repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](https://docs.langchain.com/oss/openwiki/overview).
 
 ## Scoped memory
 
@@ -34,15 +28,14 @@ Agent memory can be scoped so the same memory files are accessible to everyone u
 
 ### Agent-scoped memory
 
-Give the agent its own persistent identity that evolves over time. Agent-scoped memory is shared across all users, so the agent builds up its own persona, accumulated knowledge, and learned preferences through every conversation. As it interacts with users, it develops expertise, refines its approach, and remembers what works. It can also learn and update [skills](/oss/python/deepagents/skills) when it has write access.
+Give the agent its own persistent identity that evolves over time. Agent-scoped memory is shared across all users, so the agent builds up its own persona, accumulated knowledge, and learned preferences through every conversation. As it interacts with users, it develops expertise, refines its approach, and remembers what works. It can also learn and update [skills](https://docs.langchain.com/oss/python/deepagents/skills) when it has write access.
 
 The key is the backend namespace: setting it to `(assistant_id,)` means every conversation for this agent reads and writes to the same memory file.
 
-<Note>
-  Accessing `rt.server_info` requires `deepagents>=0.5.0`. On older versions, read the assistant ID from `get_config()["metadata"]["assistant_id"]` instead.
-</Note>
+> [!NOTE]
+> Accessing `rt.server_info` requires `deepagents>=0.5.0`. On older versions, read the assistant ID from `get_config()["metadata"]["assistant_id"]` instead.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 
@@ -68,85 +61,88 @@ agent = create_deep_agent(
 )
 ```
 
-<Accordion title="Full example: seed memory and invoke">
-  Populate the store with initial memories, then invoke the agent across two threads to see it remember and update what it learns.
+<details>
+<summary>Full example: seed memory and invoke</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_core.utils.uuid import uuid7
+Populate the store with initial memories, then invoke the agent across two threads to see it remember and update what it learns.
 
-  from deepagents import create_deep_agent
-  from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-  from deepagents.backends.utils import create_file_data
-  from langgraph.store.memory import InMemoryStore
+```python
+from langchain_core.utils.uuid import uuid7
 
-  store = InMemoryStore()  # Use platform store when deploying to LangSmith
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from deepagents.backends.utils import create_file_data
+from langgraph.store.memory import InMemoryStore
 
-  # Seed the memory file
-  store.put(
-      ("my-agent",),
-      "/memories/AGENTS.md",
-      create_file_data("""## Response style
-  - Keep responses concise
-  - Use code examples where possible
-  """),
-  )
+store = InMemoryStore()  # Use platform store when deploying to LangSmith
 
-  # Seed a skill
-  store.put(
-      ("my-agent",),
-      "/skills/langgraph-docs/SKILL.md",
-      create_file_data("""---
-  name: langgraph-docs
-  description: Fetch relevant LangGraph documentation to provide accurate guidance.
-  ---
+# Seed the memory file
+store.put(
+    ("my-agent",),
+    "/memories/AGENTS.md",
+    create_file_data("""## Response style
+- Keep responses concise
+- Use code examples where possible
+"""),
+)
 
-  # langgraph-docs
+# Seed a skill
+store.put(
+    ("my-agent",),
+    "/skills/langgraph-docs/SKILL.md",
+    create_file_data("""---
+name: langgraph-docs
+description: Fetch relevant LangGraph documentation to provide accurate guidance.
+---
 
-  Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
-  """),
-  )
+# langgraph-docs
 
-  agent = create_deep_agent(
-      model="google_genai:gemini-3.6-flash",
-      memory=["/memories/AGENTS.md"],
-      skills=["/skills/"],
-      backend=lambda rt: CompositeBackend(
-          default=StateBackend(rt),
-          routes={
-              "/memories/": StoreBackend(
-                  rt, namespace=lambda rt: ("my-agent",)
-              ),
-              "/skills/": StoreBackend(
-                  rt, namespace=lambda rt: ("my-agent",)
-              ),
-          },
-      ),
-      store=store,
-  )
+Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
+"""),
+)
 
-  # Thread 1: the agent learns a new preference and saves it to memory
-  config1 = {"configurable": {"thread_id": str(uuid7())}}
-  agent.invoke(
-      {"messages": [{"role": "user", "content": "I prefer detailed explanations. Remember that."}]},
-      config=config1,
-  )
+agent = create_deep_agent(
+    model="google_genai:gemini-3.6-flash",
+    memory=["/memories/AGENTS.md"],
+    skills=["/skills/"],
+    backend=lambda rt: CompositeBackend(
+        default=StateBackend(rt),
+        routes={
+            "/memories/": StoreBackend(
+                rt, namespace=lambda rt: ("my-agent",)
+            ),
+            "/skills/": StoreBackend(
+                rt, namespace=lambda rt: ("my-agent",)
+            ),
+        },
+    ),
+    store=store,
+)
 
-  # Thread 2: the agent reads memory and applies the preference
-  config2 = {"configurable": {"thread_id": str(uuid7())}}
-  agent.invoke(
-      {"messages": [{"role": "user", "content": "Explain how transformers work."}]},
-      config=config2,
-  )
-  ```
-</Accordion>
+# Thread 1: the agent learns a new preference and saves it to memory
+config1 = {"configurable": {"thread_id": str(uuid7())}}
+agent.invoke(
+    {"messages": [{"role": "user", "content": "I prefer detailed explanations. Remember that."}]},
+    config=config1,
+)
+
+# Thread 2: the agent reads memory and applies the preference
+config2 = {"configurable": {"thread_id": str(uuid7())}}
+agent.invoke(
+    {"messages": [{"role": "user", "content": "Explain how transformers work."}]},
+    config=config2,
+)
+```
+
+</details>
 
 ### User-scoped memory
 
-Give each user their own memory file. The agent remembers preferences, context, and history per user while core agent instructions stay fixed. Users can also have per-user [skills](/oss/python/deepagents/skills) if stored in a user-scoped backend.
+Give each user their own memory file. The agent remembers preferences, context, and history per user while core agent instructions stay fixed. Users can also have per-user [skills](https://docs.langchain.com/oss/python/deepagents/skills) if stored in a user-scoped backend.
 
 The namespace uses `(user_id,)` so each user gets an isolated copy of the memory file. User A's preferences never leak into User B's conversations.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 
@@ -168,82 +164,84 @@ agent = create_deep_agent(
 )
 ```
 
-<Accordion title="Full example: isolated memory across users">
-  Seed per-user memories and invoke the agent as two different users. Each user sees only their own preferences.
+<details>
+<summary>Full example: isolated memory across users</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_core.utils.uuid import uuid7
+Seed per-user memories and invoke the agent as two different users. Each user sees only their own preferences.
 
-  from deepagents import create_deep_agent
-  from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
-  from deepagents.backends.utils import create_file_data
-  from langgraph.store.memory import InMemoryStore
+```python
+from langchain_core.utils.uuid import uuid7
 
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from deepagents.backends.utils import create_file_data
+from langgraph.store.memory import InMemoryStore
 
-  store = InMemoryStore()  # Use platform store when deploying to LangSmith
+store = InMemoryStore()  # Use platform store when deploying to LangSmith
 
-  # Seed preferences for two users
-  store.put(
-      ("user-alice",),
-      "/memories/preferences.md",
-      create_file_data("""## Preferences
-  - Likes concise bullet points
-  - Prefers Python examples
-  """),
-  )
-  store.put(
-      ("user-bob",),
-      "/memories/preferences.md",
-      create_file_data("""## Preferences
-  - Likes detailed explanations
-  - Prefers TypeScript examples
-  """),
-  )
+# Seed preferences for two users
+store.put(
+    ("user-alice",),
+    "/memories/preferences.md",
+    create_file_data("""## Preferences
+- Likes concise bullet points
+- Prefers Python examples
+"""),
+)
+store.put(
+    ("user-bob",),
+    "/memories/preferences.md",
+    create_file_data("""## Preferences
+- Likes detailed explanations
+- Prefers TypeScript examples
+"""),
+)
 
-  # Seed a skill for Alice
-  store.put(
-      ("user-alice",),
-      "/skills/langgraph-docs/SKILL.md",
-      create_file_data("""---
-  name: langgraph-docs
-  description: Fetch relevant LangGraph documentation to provide accurate guidance.
-  ---
+# Seed a skill for Alice
+store.put(
+    ("user-alice",),
+    "/skills/langgraph-docs/SKILL.md",
+    create_file_data("""---
+name: langgraph-docs
+description: Fetch relevant LangGraph documentation to provide accurate guidance.
+---
 
-  # langgraph-docs
+# langgraph-docs
 
-  Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
-  """),
-  )
+Use the fetch_url tool to read https://docs.langchain.com/llms.txt, then fetch relevant pages.
+"""),
+)
 
-  agent = create_deep_agent(
-      model="google_genai:gemini-3.6-flash",
-      memory=["/memories/preferences.md"],
-      skills=["/skills/"],
-      backend=lambda rt: CompositeBackend(
-          default=StateBackend(rt),
-          routes={
-              "/memories/": StoreBackend(
-                  rt,
-                  namespace=lambda rt: (rt.server_info.user.identity,),
-              ),
-              "/skills/": StoreBackend(
-                  rt,
-                  namespace=lambda rt: (rt.server_info.user.identity,),
-              ),
-          },
-      ),
-      store=store,
-  )
+agent = create_deep_agent(
+    model="google_genai:gemini-3.6-flash",
+    memory=["/memories/preferences.md"],
+    skills=["/skills/"],
+    backend=lambda rt: CompositeBackend(
+        default=StateBackend(rt),
+        routes={
+            "/memories/": StoreBackend(
+                rt,
+                namespace=lambda rt: (rt.server_info.user.identity,),
+            ),
+            "/skills/": StoreBackend(
+                rt,
+                namespace=lambda rt: (rt.server_info.user.identity,),
+            ),
+        },
+    ),
+    store=store,
+)
 
-  # When deployed, each authenticated request resolves
-  # `rt.server_info.user.identity` to the calling user, so Alice and Bob
-  # automatically see only their own preferences.
-  agent.invoke(
-      {"messages": [{"role": "user", "content": "How do I read a CSV file?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-  )
-  ```
-</Accordion>
+# When deployed, each authenticated request resolves
+# `rt.server_info.user.identity` to the calling user, so Alice and Bob
+# automatically see only their own preferences.
+agent.invoke(
+    {"messages": [{"role": "user", "content": "How do I read a CSV file?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+)
+```
+
+</details>
 
 ## Advanced usage
 
@@ -251,27 +249,26 @@ On top of the basic configuration options for memory paths and scope, you can al
 
 | Dimension             | Question it answers             | Options                                                                                                                                                                                    |
 | --------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Duration**          | How long does it last?          | [Short-term](/oss/python/deepagents/context-engineering) (single conversation) or [long-term](#scoped-memory) (across conversations)                                                       |
-| **Information type**  | What kind of information is it? | [Episodic](#episodic-memory) (past experiences), [procedural](/oss/python/deepagents/skills) (instructions and skills), or [semantic](/oss/python/concepts/memory#semantic-memory) (facts) |
-| **Scope**             | Who can see and modify it?      | [User](#user-scoped-memory), [agent](#agent-scoped-memory), or [organization](#organization-level-memory)                                                                                  |
-| **Update strategy**   | When are memories written?      | During conversation (default) or [between conversations](#background-consolidation)                                                                                                        |
-| **Retrieval**         | How are memories read?          | Loaded into prompt (default) or on demand (e.g., [skills](/oss/python/deepagents/skills))                                                                                                  |
-| **Agent permissions** | Can the agent write to memory?  | [Read-write](#read-only-vs-writable-memory) (default) or [read-only](#read-only-vs-writable-memory) (for shared policies)                                                                  |
+| **Duration**          | How long does it last?          | [Short-term](https://docs.langchain.com/oss/python/deepagents/context-engineering) (single conversation) or [long-term](https://docs.langchain.com/oss/python/deepagents/memory#scoped-memory) (across conversations)                                                       |
+| **Information type**  | What kind of information is it? | [Episodic](https://docs.langchain.com/oss/python/deepagents/memory#episodic-memory) (past experiences), [procedural](https://docs.langchain.com/oss/python/deepagents/skills) (instructions and skills), or [semantic](https://docs.langchain.com/oss/python/concepts/memory#semantic-memory) (facts) |
+| **Scope**             | Who can see and modify it?      | [User](https://docs.langchain.com/oss/python/deepagents/memory#user-scoped-memory), [agent](https://docs.langchain.com/oss/python/deepagents/memory#agent-scoped-memory), or [organization](https://docs.langchain.com/oss/python/deepagents/memory#organization-level-memory)                                                                                  |
+| **Update strategy**   | When are memories written?      | During conversation (default) or [between conversations](https://docs.langchain.com/oss/python/deepagents/memory#background-consolidation)                                                                                                        |
+| **Retrieval**         | How are memories read?          | Loaded into prompt (default) or on demand (e.g., [skills](https://docs.langchain.com/oss/python/deepagents/skills))                                                                                                  |
+| **Agent permissions** | Can the agent write to memory?  | [Read-write](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) (default) or [read-only](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) (for shared policies)                                                                  |
 
 ### Episodic memory
 
-Episodic memory stores records of past experiences: what happened, in what order, and what the outcome was. Unlike semantic memory (facts and preferences stored in files like `AGENTS.md`), episodic memory preserves the full conversational context so the agent can recall *how* a problem was solved, not just *what* was learned from it. To generate and maintain a repository-level wiki for coding agents, see [OpenWiki](/oss/openwiki/overview).
+Episodic memory stores records of past experiences: what happened, in what order, and what the outcome was. Unlike semantic memory (facts and preferences stored in files like `AGENTS.md`), episodic memory preserves the full conversational context so the agent can recall *how* a problem was solved, not just *what* was learned from it. To generate and maintain a repository-level wiki for coding agents, see [OpenWiki](https://docs.langchain.com/oss/openwiki/overview).
 
-Deep Agents already use [checkpointers](/oss/python/langgraph/checkpointers#checkpoints) which is the mechanism that supports episodic memory: every conversation is persisted as a checkpointed thread.
+Deep Agents already use [checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) which is the mechanism that supports episodic memory: every conversation is persisted as a checkpointed thread.
 
 To make past conversations searchable, wrap thread search in a tool. The `user_id` is pulled from the runtime context rather than passed as a parameter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import get_client
 from langchain.tools import tool, ToolRuntime
 
 client = get_client(url="<DEPLOYMENT_URL>")
-
 
 @tool
 async def search_past_conversations(query: str, runtime: ToolRuntime) -> str:
@@ -290,7 +287,7 @@ async def search_past_conversations(query: str, runtime: ToolRuntime) -> str:
 
 You can scope thread search by user or organization by adjusting the metadata filter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Search conversations for a specific user
 threads = await client.threads.search(
     metadata={"user_id": user_id},
@@ -310,9 +307,9 @@ This is useful for agents that perform complex, multi-step tasks. For example, a
 
 Organization-level memory follows the same pattern as user-scoped memory, but with an organization-wide namespace instead of a per-user one. Use it for policies or knowledge that should apply across all users and agents in an organization.
 
-Organization memory is typically **read-only** to prevent prompt injection via shared state. See [read-only vs writable memory](#read-only-vs-writable-memory) for details.
+Organization memory is typically **read-only** to prevent prompt injection via shared state. See [read-only vs writable memory](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) for details.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 
@@ -338,7 +335,7 @@ agent = create_deep_agent(
 
 Populate organization memory from your application code:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import get_client
 from deepagents.backends.utils import create_file_data
 
@@ -354,7 +351,7 @@ await client.store.put_item(
 )
 ```
 
-Use [permissions](/oss/python/deepagents/permissions) to enforce that org-level memory is read-only, or [policy hooks](/oss/python/deepagents/backends#add-policy-hooks) for custom validation logic.
+Use [permissions](https://docs.langchain.com/oss/python/deepagents/permissions) to enforce that org-level memory is read-only, or [policy hooks](https://docs.langchain.com/oss/python/deepagents/backends#add-policy-hooks) for custom validation logic.
 
 ### Background consolidation
 
@@ -367,13 +364,13 @@ By default, the agent writes memories during the conversation (hot path). An alt
 
 For most applications, the hot path is sufficient. Add background consolidation when you need to reduce latency or improve memory quality across many conversations.
 
-The recommended pattern is to deploy a **consolidation agent** alongside your main agent — a deep agent that reads recent conversation history, extracts key facts, and merges them into the memory store — and trigger it on a [cron schedule](#cron). Pick a cadence that reflects how often your users actually interact with the agent: a chat product with steady daily traffic might consolidate every few hours, while a tool used a handful of times per week only needs to run nightly or weekly. Consolidating much more often than users converse just burns tokens on no-op runs.
+The recommended pattern is to deploy a **consolidation agent** alongside your main agent — a deep agent that reads recent conversation history, extracts key facts, and merges them into the memory store — and trigger it on a [cron schedule](https://docs.langchain.com/oss/python/deepagents/memory#cron). Pick a cadence that reflects how often your users actually interact with the agent: a chat product with steady daily traffic might consolidate every few hours, while a tool used a handful of times per week only needs to run nightly or weekly. Consolidating much more often than users converse just burns tokens on no-op runs.
 
 #### Consolidation agent
 
 The consolidation agent reads recent conversation history and merges key facts into the memory store. Register it alongside your main agent in `langgraph.json`:
 
-```python consolidation_agent.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import datetime, timedelta, timezone
 
 from deepagents import create_deep_agent
@@ -381,7 +378,6 @@ from langchain.tools import tool, ToolRuntime
 from langgraph_sdk import get_client
 
 sdk_client = get_client(url="<DEPLOYMENT_URL>")
-
 
 @tool
 async def search_recent_conversations(query: str, runtime: ToolRuntime) -> str:
@@ -402,7 +398,6 @@ async def search_recent_conversations(query: str, runtime: ToolRuntime) -> str:
         conversations.append(history["values"]["messages"])
     return str(conversations)
 
-
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
     system_prompt="""Review recent conversations and update the user's memory file.
@@ -411,7 +406,7 @@ Merge new facts, remove outdated information, and keep it concise.""",
 )
 ```
 
-```json langgraph.json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -424,9 +419,9 @@ Merge new facts, remove outdated information, and keep it concise.""",
 
 #### Cron
 
-A [cron job](/langsmith/cron-jobs) runs the consolidation agent on a fixed schedule. The agent searches recent conversations and synthesizes them into memory. Match the schedule to your usage patterns so consolidation runs roughly track real activity.
+A [cron job](https://docs.langchain.com/langsmith/cron-jobs) runs the consolidation agent on a fixed schedule. The agent searches recent conversations and synthesizes them into memory. Match the schedule to your usage patterns so consolidation runs roughly track real activity.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     Store[(Memory store)] -.->|reads| Conv1[Conversation 1]
     Store -.->|reads| Conv2[Conversation 2]
@@ -446,7 +441,7 @@ graph LR
 
 Schedule the consolidation agent with a cron job:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import get_client
 
 client = get_client(url="<DEPLOYMENT_URL>")
@@ -458,15 +453,13 @@ cron_job = await client.crons.create(
 )
 ```
 
-<Note>
-  All cron schedules are interpreted in **UTC**. See [cron jobs](/langsmith/cron-jobs) for details on managing and deleting cron jobs.
-</Note>
+> [!NOTE]
+> All cron schedules are interpreted in **UTC**. See [cron jobs](https://docs.langchain.com/langsmith/cron-jobs) for details on managing and deleting cron jobs.
 
-<Warning>
-  The cron interval must match the lookback window inside the consolidation agent. The example above runs every 6 hours (`0 */6 * * *`) and the agent's `search_recent_conversations` tool looks back `timedelta(hours=6)` — keep these in sync. If the cron runs more often than the lookback, you'll reprocess the same conversations; if it runs less often, you'll drop memories that fall outside the window.
-</Warning>
+> [!WARNING]
+> The cron interval must match the lookback window inside the consolidation agent. The example above runs every 6 hours (`0 */6 * * *`) and the agent's `search_recent_conversations` tool looks back `timedelta(hours=6)` — keep these in sync. If the cron runs more often than the lookback, you'll reprocess the same conversations; if it runs less often, you'll drop memories that fall outside the window.
 
-For more on deploying agents with background processes, see [going to production](/oss/python/deepagents/going-to-production).
+For more on deploying agents with background processes, see [going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production).
 
 ### Read-only vs writable memory
 
@@ -474,20 +467,20 @@ By default, the agent can both read and write memory files. For shared state lik
 
 | Permission               | Use case                                                                                                                   | How it works                                                                                                                                                                                                                                                        |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Read-write** (default) | User preferences, agent self-improvement, learned [skills](/oss/python/deepagents/skills)                                  | Agent updates files via `edit_file` tool                                                                                                                                                                                                                            |
-| **Read-only**            | Organization policies, compliance rules, shared knowledge bases, developer-defined [skills](/oss/python/deepagents/skills) | Populate via application code or the [Store API](/langsmith/custom-store). Use [permissions](/oss/python/deepagents/permissions) to deny writes to specific paths, or [policy hooks](/oss/python/deepagents/backends#add-policy-hooks) for custom validation logic. |
+| **Read-write** (default) | User preferences, agent self-improvement, learned [skills](https://docs.langchain.com/oss/python/deepagents/skills)                                  | Agent updates files via `edit_file` tool                                                                                                                                                                                                                            |
+| **Read-only**            | Organization policies, compliance rules, shared knowledge bases, developer-defined [skills](https://docs.langchain.com/oss/python/deepagents/skills) | Populate via application code or the [Store API](https://docs.langchain.com/langsmith/custom-store). Use [permissions](https://docs.langchain.com/oss/python/deepagents/permissions) to deny writes to specific paths, or [policy hooks](https://docs.langchain.com/oss/python/deepagents/backends#add-policy-hooks) for custom validation logic. |
 
 **Security considerations:** If one user can write to memory that another user reads, a malicious user could inject instructions into shared state. To mitigate this:
 
 * **Default to user scope** `(user_id)` unless you have a specific reason to share
 * Use **read-only memory** for shared policies (populate via application code, not the agent)
-* Add **human-in-the-loop** validation before the agent writes to shared memory. Use an [interrupt](/oss/python/langgraph/interrupts) to require human approval for writes to sensitive paths.
+* Add **human-in-the-loop** validation before the agent writes to shared memory. Use an [interrupt](https://docs.langchain.com/oss/python/langgraph/interrupts) to require human approval for writes to sensitive paths.
 
-To enforce read-only memory, use [permissions](/oss/python/deepagents/permissions) to declaratively deny writes to specific paths. For custom validation logic (rate limiting, audit logging, content inspection), use [backend policy hooks](/oss/python/deepagents/backends#add-policy-hooks).
+To enforce read-only memory, use [permissions](https://docs.langchain.com/oss/python/deepagents/permissions) to declaratively deny writes to specific paths. For custom validation logic (rate limiting, audit logging, content inspection), use [backend policy hooks](https://docs.langchain.com/oss/python/deepagents/backends#add-policy-hooks).
 
 ### Concurrent writes
 
-Multiple threads can write to memory in parallel, but concurrent writes to the **same file** can cause last-write-wins conflicts. For user-scoped memory this is rare since users typically have one active conversation at a time. For agent-scoped or organization-scoped memory, consider using [background consolidation](#background-consolidation) to serialize writes, or structure memory as separate files per topic to reduce contention.
+Multiple threads can write to memory in parallel, but concurrent writes to the **same file** can cause last-write-wins conflicts. For user-scoped memory this is rare since users typically have one active conversation at a time. For agent-scoped or organization-scoped memory, consider using [background consolidation](https://docs.langchain.com/oss/python/deepagents/memory#background-consolidation) to serialize writes, or structure memory as separate files per topic to reduce contention.
 
 In practice, if a write fails due to a conflict, the LLM is usually smart enough to retry or recover gracefully, so a single lost write is not catastrophic.
 
@@ -495,7 +488,7 @@ In practice, if a write fails due to a conflict, the LLM is usually smart enough
 
 To give each agent its own memory in a shared deployment, add `assistant_id` to the namespace:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 StoreBackend(
     namespace=lambda rt: (
         rt.server_info.assistant_id,  # [!code highlight]
@@ -506,25 +499,20 @@ StoreBackend(
 
 Use `assistant_id` alone if you only need per-agent isolation without per-user scoping.
 
-<Tip>
-  Use [LangSmith tracing](/langsmith/trace-with-langgraph) to audit what your agent writes to memory. Every file write appears as a tool call in the trace.
-</Tip>
+> [!TIP]
+> Use [LangSmith tracing](https://docs.langchain.com/langsmith/trace-with-langgraph) to audit what your agent writes to memory. Every file write appears as a tool call in the trace.
 
 ## See also
 
-* [OpenWiki](/oss/openwiki/overview): Generate and maintain repository wikis that coding agents find through `AGENTS.md`
-* [Backends](/oss/python/deepagents/backends): Choose where memory files are stored
-* [Context engineering](/oss/python/deepagents/context-engineering): Short-term memory, offloading, and summarization
-* [Skills](/oss/python/deepagents/skills): On-demand procedural memory
+* [OpenWiki](https://docs.langchain.com/oss/openwiki/overview): Generate and maintain repository wikis that coding agents find through `AGENTS.md`
+* [Backends](https://docs.langchain.com/oss/python/deepagents/backends): Choose where memory files are stored
+* [Context engineering](https://docs.langchain.com/oss/python/deepagents/context-engineering): Short-term memory, offloading, and summarization
+* [Skills](https://docs.langchain.com/oss/python/deepagents/skills): On-demand procedural memory
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

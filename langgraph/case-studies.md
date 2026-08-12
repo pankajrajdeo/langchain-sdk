@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Case studies
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/case-studies)
 This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re also welcome to contribute updates based on publicly available information from other companies, such as blog posts or press releases.
 
 | Company                                                                                                                                 | Industry                             | Use case                                                      | Reference                                                                                                                                                                                                                                                                                                                                     |
@@ -52,12 +48,8 @@ This list of companies using LangGraph and their success stories is compiled fro
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/case-studies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/case-studies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

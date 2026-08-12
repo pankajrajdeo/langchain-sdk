@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Amazon neptune with cypher integration
 
 > Integrate with the Amazon neptune with cypher graph using LangChain Python.
@@ -23,7 +19,7 @@ Neptune Analytics is an analytics database engine that can quickly analyze large
 
 ## Using neptune Database
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.graphs import NeptuneGraph
 
 host = "<neptune-host>"
@@ -35,7 +31,7 @@ graph = NeptuneGraph(host=host, port=port, use_https=use_https)
 
 ### Using neptune analytics
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.graphs import NeptuneAnalyticsGraph
 
 graph = NeptuneAnalyticsGraph(graph_identifier="<neptune-analytics-graph-id>")
@@ -45,7 +41,7 @@ graph = NeptuneAnalyticsGraph(graph_identifier="<neptune-analytics-graph-id>")
 
 This QA chain queries the Neptune graph database using openCypher and returns a human-readable response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 from langchain_aws.chains import create_neptune_opencypher_qa_chain
 
@@ -61,7 +57,7 @@ result = chain.invoke("How many outgoing routes does the Austin airport have?")
 print(result["result"].content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Austin airport has 98 outgoing routes.
 ```
 
@@ -73,11 +69,10 @@ To start, we need a way to store and load the message history. For this purpose,
 
 (Also see: [python.langchain.com/docs/versions/migrating\_memory/chat\_history/#chatmessagehistory](https://python.langchain.com/docs/versions/migrating_memory/chat_history/#chatmessagehistory))
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.chat_history import InMemoryChatMessageHistory
 
 chats_by_session_id = {}
-
 
 def get_chat_history(session_id: str) -> InMemoryChatMessageHistory:
     chat_history = chats_by_session_id.get(session_id)
@@ -89,7 +84,7 @@ def get_chat_history(session_id: str) -> InMemoryChatMessageHistory:
 
 Now, the QA chain and message history storage can be used to create the new `RunnableWithMessageHistory`. Note that we must set `query` as the input key to match the format expected by the base chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
 runnable_with_history = RunnableWithMessageHistory(
@@ -101,7 +96,7 @@ runnable_with_history = RunnableWithMessageHistory(
 
 Before invoking the chain, a unique `session_id` needs to be generated for the conversation that the new `InMemoryChatMessageHistory` will remember.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 session_id = uuid.uuid4()
@@ -109,7 +104,7 @@ session_id = uuid.uuid4()
 
 Finally, invoke the message history enabled chain with the `session_id`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = runnable_with_history.invoke(
     {"query": "How many destinations can I fly to directly from Austin airport?"},
     config={"configurable": {"session_id": session_id}},
@@ -117,13 +112,13 @@ result = runnable_with_history.invoke(
 print(result["result"].content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 You can fly directly to 98 destinations from Austin airport.
 ```
 
 As the chain continues to be invoked with the same `session_id`, responses will be returned in the context of previous queries in the conversation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = runnable_with_history.invoke(
     {"query": "Out of those destinations, how many are in Europe?"},
     config={"configurable": {"session_id": session_id}},
@@ -131,11 +126,11 @@ result = runnable_with_history.invoke(
 print(result["result"].content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 You can fly directly to 4 destinations in Europe from Austin airport.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = runnable_with_history.invoke(
     {"query": "Give me the codes and names of those airports."},
     config={"configurable": {"session_id": session_id}},
@@ -143,7 +138,7 @@ result = runnable_with_history.invoke(
 print(result["result"].content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The four European destinations you can fly to directly from Austin airport are:
 - AMS (Amsterdam Airport Schiphol)
 - FRA (Frankfurt am Main)
@@ -153,12 +148,8 @@ The four European destinations you can fly to directly from Austin airport are:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/amazon_neptune_open_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/amazon_neptune_open_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

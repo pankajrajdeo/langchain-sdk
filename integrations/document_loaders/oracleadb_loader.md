@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Oracle autonomous database integration
 
 > Integrate with the Oracle autonomous database document loader using LangChain Python.
@@ -18,20 +14,20 @@ You'll need to install `langchain-oracledb` to use this integration.
 
 The `python-oracledb` driver is installed automatically as a dependency of langchain-oracledb.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # python -m pip install -U langchain-oracledb
 ```
 
 ## Instructions
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.document_loaders import OracleAutonomousDatabaseLoader
 from settings import s
 ```
 
 With mutual TLS authentication (mTLS), wallet\_location and wallet\_password parameters are required to create the connection. See python-oracledb documentation [Connecting to Oracle Cloud Autonomous Databases](https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#connecting-to-oracle-cloud-autonomous-databases).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 SQL_QUERY = "select prod_id, time_id from sh.costs fetch first 5 rows only"
 
 doc_loader_1 = OracleAutonomousDatabaseLoader(
@@ -60,7 +56,7 @@ doc_2 = doc_loader_2.load()
 
 With 1-way TLS authentication, only the database credentials and connection string are required to establish a connection. The example below also shows passing bind variable values with the argument `parameters`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 SQL_QUERY = "select channel_id, channel_desc from sh.channels where channel_desc = :1 fetch first 5 rows only"
 
 doc_loader_3 = OracleAutonomousDatabaseLoader(
@@ -87,12 +83,8 @@ doc_4 = doc_loader_4.load()
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/oracleadb_loader.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/oracleadb_loader.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

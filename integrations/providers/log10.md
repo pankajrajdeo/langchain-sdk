@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Log10 integrations
 
 > Integrate with Log10 using LangChain Python.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 This page covers how to use the [Log10](https://log10.io) within LangChain.
 
@@ -26,7 +21,7 @@ Log10 is an [open-source](https://github.com/log10-io/log10) proxiless LLM data 
 
 Integration with log10 is a simple one-line `log10_callback` integration as shown below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from langchain.messages import HumanMessage
 
@@ -49,11 +44,10 @@ llm = ChatOpenAI(model="gpt-3.5-turbo", callbacks=[log10_callback])
 
 ## How to use tags with Log10
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 from langchain_community.chat_models import ChatAnthropic
 from langchain_openai import ChatOpenAI
@@ -84,7 +78,7 @@ print(completion)
 
 You can also intermix direct OpenAI calls and LangChain LLM calls:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from log10.load import log10, log10_session
 import openai
@@ -119,12 +113,8 @@ with log10_session(tags=["foo", "bar"]):
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/log10.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/log10.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

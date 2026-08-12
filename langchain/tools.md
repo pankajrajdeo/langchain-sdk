@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tools
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/tools)
+Tools extend what [agents](https://docs.langchain.com/oss/python/langchain/agents) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
 
-Tools extend what [agents](/oss/python/langchain/agents) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
+Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](https://docs.langchain.com/oss/python/langchain/models). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
 
-Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](/oss/python/langchain/models). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
-
-<Tip>
-  For details on how models handle tool calls, see [Tool calling](/oss/python/langchain/models#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](/langsmith/trace-with-langchain) to get set up.
-
-  We recommend you also set up [LangSmith Engine](/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
-</Tip>
+> [!TIP]
+> For details on how models handle tool calls, see [Tool calling](https://docs.langchain.com/oss/python/langchain/models#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up.
+>
+> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
 
 ## Create tools
 
@@ -20,7 +15,7 @@ Under the hood, tools are callable functions with well-defined inputs and output
 
 The simplest way to create a tool is with the [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) decorator. By default, the function's docstring becomes the tool's description that helps the model understand when to use it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 
 @tool
@@ -36,13 +31,11 @@ def search_database(query: str, limit: int = 10) -> str:
 
 Type hints are **required** as they define the tool's input schema. The docstring should be informative and concise to help the model understand the tool's purpose.
 
-<Note>
-  **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](#server-side-tool-use) for details.
-</Note>
+> [!NOTE]
+> **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](https://docs.langchain.com/oss/python/langchain/tools#server-side-tool-use) for details.
 
-<Warning>
-  Prefer `snake_case` for tool names (e.g., `web_search` instead of `Web Search`). Some model providers have issues with or reject names containing spaces or special characters with errors. Sticking to alphanumeric characters, underscores, and hyphens helps to improve compatibility across providers.
-</Warning>
+> [!WARNING]
+> Prefer `snake_case` for tool names (e.g., `web_search` instead of `Web Search`). Some model providers have issues with or reject names containing spaces or special characters with errors. Sticking to alphanumeric characters, underscores, and hyphens helps to improve compatibility across providers.
 
 ### Customize tool properties
 
@@ -50,7 +43,7 @@ Type hints are **required** as they define the tool's input schema. The docstrin
 
 By default, the tool name comes from the function name. Override it when you need something more descriptive:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @tool("web_search")  # Custom name
 def search(query: str) -> str:
     """Search the web for information."""
@@ -63,7 +56,7 @@ print(search.name)  # web_search
 
 Override the auto-generated tool description for clearer model guidance:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @tool("calculator", description="Performs arithmetic calculations. Use this for any math problems.")
 def calc(expression: str) -> str:
     """Evaluate mathematical expressions."""
@@ -74,54 +67,52 @@ def calc(expression: str) -> str:
 
 Define complex inputs with Pydantic models or JSON schemas:
 
-<CodeGroup>
-  ```python Pydantic model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from pydantic import BaseModel, Field
-  from typing import Literal
+```python
+from pydantic import BaseModel, Field
+from typing import Literal
 
-  class WeatherInput(BaseModel):
-      """Input for weather queries."""
-      location: str = Field(description="City name or coordinates")
-      units: Literal["celsius", "fahrenheit"] = Field(
-          default="celsius",
-          description="Temperature unit preference"
-      )
-      include_forecast: bool = Field(
-          default=False,
-          description="Include 5-day forecast"
-      )
+class WeatherInput(BaseModel):
+    """Input for weather queries."""
+    location: str = Field(description="City name or coordinates")
+    units: Literal["celsius", "fahrenheit"] = Field(
+        default="celsius",
+        description="Temperature unit preference"
+    )
+    include_forecast: bool = Field(
+        default=False,
+        description="Include 5-day forecast"
+    )
 
-  @tool(args_schema=WeatherInput)
-  def get_weather(location: str, units: str = "celsius", include_forecast: bool = False) -> str:
-      """Get current weather and optional forecast."""
-      temp = 22 if units == "celsius" else 72
-      result = f"Current weather in {location}: {temp} degrees {units[0].upper()}"
-      if include_forecast:
-          result += "\nNext 5 days: Sunny"
-      return result
-  ```
+@tool(args_schema=WeatherInput)
+def get_weather(location: str, units: str = "celsius", include_forecast: bool = False) -> str:
+    """Get current weather and optional forecast."""
+    temp = 22 if units == "celsius" else 72
+    result = f"Current weather in {location}: {temp} degrees {units[0].upper()}"
+    if include_forecast:
+        result += "\nNext 5 days: Sunny"
+    return result
+```
 
-  ```python JSON Schema theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  weather_schema = {
-      "type": "object",
-      "properties": {
-          "location": {"type": "string"},
-          "units": {"type": "string"},
-          "include_forecast": {"type": "boolean"}
-      },
-      "required": ["location", "units", "include_forecast"]
-  }
+```python
+weather_schema = {
+    "type": "object",
+    "properties": {
+        "location": {"type": "string"},
+        "units": {"type": "string"},
+        "include_forecast": {"type": "boolean"}
+    },
+    "required": ["location", "units", "include_forecast"]
+}
 
-  @tool(args_schema=weather_schema)
-  def get_weather(location: str, units: str = "celsius", include_forecast: bool = False) -> str:
-      """Get current weather and optional forecast."""
-      temp = 22 if units == "celsius" else 72
-      result = f"Current weather in {location}: {temp} degrees {units[0].upper()}"
-      if include_forecast:
-          result += "\nNext 5 days: Sunny"
-      return result
-  ```
-</CodeGroup>
+@tool(args_schema=weather_schema)
+def get_weather(location: str, units: str = "celsius", include_forecast: bool = False) -> str:
+    """Get current weather and optional forecast."""
+    temp = 22 if units == "celsius" else 72
+    result = f"Current weather in {location}: {temp} degrees {units[0].upper()}"
+    if include_forecast:
+        result += "\nNext 5 days: Sunny"
+    return result
+```
 
 ### Reserved argument names
 
@@ -134,7 +125,7 @@ The following parameter names are reserved and cannot be used as tool arguments.
 
 To access runtime information, use the [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) parameter instead of naming your own arguments `config` or `runtime`.
 
-If you use `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`, see [Migrate from older injection patterns](#migrate-from-older-injection-patterns).
+If you use `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`, see [Migrate from older injection patterns](https://docs.langchain.com/oss/python/langchain/tools#migrate-from-older-injection-patterns).
 
 ## Access context
 
@@ -153,7 +144,7 @@ Tools can access runtime information through the [`ToolRuntime`](https://referen
 | **Config**         | [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) for the execution | Access callbacks, tags, and metadata                        |
 | **Tool Call ID**   | Unique identifier for the current tool invocation                                                                           | Correlate tool calls for logs and model invocations         |
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     %% Runtime Context
     subgraph "🔧 Tool Runtime Context"
@@ -204,17 +195,16 @@ graph LR
 
 ### Short-term memory (State)
 
-State represents short-term memory that exists for the duration of a conversation. It includes the message history and any custom fields you define in your [graph state](/oss/python/langgraph/graph-api#state).
+State represents short-term memory that exists for the duration of a conversation. It includes the message history and any custom fields you define in your [graph state](https://docs.langchain.com/oss/python/langgraph/graph-api#state).
 
-<Info>
-  Add `runtime: ToolRuntime` to your tool signature to access state. This parameter is automatically injected and hidden from the LLM - it won't appear in the tool's schema.
-</Info>
+> [!NOTE]
+> Add `runtime: ToolRuntime` to your tool signature to access state. This parameter is automatically injected and hidden from the LLM - it won't appear in the tool's schema.
 
 #### Access state
 
 Tools can access the current conversation state using `runtime.state`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 from langchain.messages import HumanMessage
 
@@ -241,25 +231,22 @@ def get_user_preference(
     return preferences.get(pref_name, "Not set")
 ```
 
-<Warning>
-  The `runtime` parameter is hidden from the model. For the example above, the model only sees `pref_name` in the tool schema.
-</Warning>
+> [!WARNING]
+> The `runtime` parameter is hidden from the model. For the example above, the model only sees `pref_name` in the tool schema.
 
 #### Update state
 
 Use [`Command`](https://reference.langchain.com/python/langgraph/types/Command) to update the agent's state. This is useful for tools that need to update custom state fields.
 Include a `ToolMessage` in the update so the model can see the result of the tool call:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import AgentState
 from langchain.messages import ToolMessage
 from langchain.tools import ToolRuntime, tool
 from langgraph.types import Command
 
-
 class CustomState(AgentState):
     user_name: str
-
 
 @tool
 def set_user_name(new_name: str, runtime: ToolRuntime[None, CustomState]) -> Command:
@@ -277,441 +264,409 @@ def set_user_name(new_name: str, runtime: ToolRuntime[None, CustomState]) -> Com
     )
 ```
 
-<Tip>
-  When tools update state variables, consider defining a [reducer](/oss/python/langgraph/graph-api#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
-</Tip>
+> [!TIP]
+> When tools update state variables, consider defining a [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
 
 ### Context
 
 Context provides immutable configuration data that is passed at invocation time. Use it for user IDs, session details, or application-specific settings that shouldn't change during a conversation.
 
-<Note>
-  While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. In production you typically pass both together: a stable `thread_id` per conversation, and a `context` object on every invoke.
-</Note>
+> [!NOTE]
+> While `thread_id` (passed via `config={"configurable": {"thread_id": ...}}`) scopes the *conversation*: message history and checkpoints, `context` carries *per-run* data your tools and middleware read at invocation time. In production you typically pass both together: a stable `thread_id` per conversation, and a `context` object on every invoke.
 
 Access context through `runtime.context`. Pass it alongside a `thread_id` so the conversation is persisted across turns:
 
-<CodeGroup>
-  ```python Google theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="google_genai:gemini-3.6-flash")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="openai:gpt-5.5")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="anthropic:claude-sonnet-4-6")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python OpenRouter theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="openrouter:z-ai/glm-5.2")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python Fireworks theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="fireworks:accounts/fireworks/models/glm-5p2")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python Baseten theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="baseten:zai-org/GLM-5.2")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-
-  ```python Ollama theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-
-  from langchain.agents import create_agent
-  from langchain.tools import tool, ToolRuntime
-  from langchain_core.utils.uuid import uuid7
-  from langchain_openai import ChatOpenAI
-
-
-  USER_DATABASE = {
-      "user123": {
-          "name": "Alice Johnson",
-          "account_type": "Premium",
-          "balance": 5000,
-          "email": "alice@example.com",
-      },
-      "user456": {
-          "name": "Bob Smith",
-          "account_type": "Standard",
-          "balance": 1200,
-          "email": "bob@example.com",
-      },
-  }
-
-
-  @dataclass
-  class UserContext:
-      user_id: str
-
-
-  @tool
-  def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
-      """Get the current user's account information."""
-      user_id = runtime.context.user_id
-
-      if user_id in USER_DATABASE:
-          user = USER_DATABASE[user_id]
-          return (
-              f"Account holder: {user['name']}\n"
-              f"Type: {user['account_type']}\n"
-              f"Balance: ${user['balance']}"
-          )
-      return "User not found"
-
-
-  model = ChatOpenAI(model="ollama:north-mini-code-1.0")
-  agent = create_agent(
-      model,
-      tools=[get_account_info],
-      context_schema=UserContext,
-      system_prompt="You are a financial assistant.",
-  )
-
-  result = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my current balance?"}]},
-      config={"configurable": {"thread_id": str(uuid7())}},
-      context=UserContext(user_id="user123"),
-  )
-  ```
-</CodeGroup>
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="google_genai:gemini-3.6-flash")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="openai:gpt-5.5")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="anthropic:claude-sonnet-4-6")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="openrouter:z-ai/glm-5.2")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="fireworks:accounts/fireworks/models/glm-5p2")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="baseten:zai-org/GLM-5.2")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
+
+```python
+from dataclasses import dataclass
+
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langchain_core.utils.uuid import uuid7
+from langchain_openai import ChatOpenAI
+
+USER_DATABASE = {
+    "user123": {
+        "name": "Alice Johnson",
+        "account_type": "Premium",
+        "balance": 5000,
+        "email": "alice@example.com",
+    },
+    "user456": {
+        "name": "Bob Smith",
+        "account_type": "Standard",
+        "balance": 1200,
+        "email": "bob@example.com",
+    },
+}
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """Get the current user's account information."""
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"Account holder: {user['name']}\n"
+            f"Type: {user['account_type']}\n"
+            f"Balance: ${user['balance']}"
+        )
+    return "User not found"
+
+model = ChatOpenAI(model="ollama:north-mini-code-1.0")
+agent = create_agent(
+    model,
+    tools=[get_account_info],
+    context_schema=UserContext,
+    system_prompt="You are a financial assistant.",
+)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my current balance?"}]},
+    config={"configurable": {"thread_id": str(uuid7())}},
+    context=UserContext(user_id="user123"),
+)
+```
 
 ### Long-term memory (Store)
 
@@ -719,11 +674,10 @@ The [`BaseStore`](https://reference.langchain.com/python/langchain-core/stores/B
 
 Access the store through `runtime.store`. The store uses a namespace/key pattern to organize data:
 
-<Tip>
-  For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](/oss/python/langgraph/add-memory) for setup details.
-</Tip>
+> [!TIP]
+> For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](https://docs.langchain.com/oss/python/langgraph/add-memory) for setup details.
 
-```python expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Any
 from langgraph.store.memory import InMemoryStore
 from langchain.agents import create_agent
@@ -776,7 +730,7 @@ Stream real-time updates from tools during execution. This is useful for providi
 
 Use `runtime.stream_writer` to emit custom updates:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 
 @tool
@@ -791,15 +745,14 @@ def get_weather(city: str, runtime: ToolRuntime) -> str:
     return f"It's always sunny in {city}!"
 ```
 
-<Note>
-  If you use `runtime.stream_writer` inside your tool, the tool must be invoked within a LangGraph execution context. See [Streaming](/oss/python/langchain/streaming) for more details.
-</Note>
+> [!NOTE]
+> If you use `runtime.stream_writer` inside your tool, the tool must be invoked within a LangGraph execution context. See [Streaming](https://docs.langchain.com/oss/python/langchain/streaming) for more details.
 
 ### Execution info
 
 Access thread ID, run ID, and retry state from within a tool via `runtime.execution_info`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 
 @tool
@@ -811,15 +764,14 @@ def log_execution_context(runtime: ToolRuntime) -> str:
     return "done"
 ```
 
-<Note>
-  Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
-</Note>
+> [!NOTE]
+> Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
 
 ### Server info
 
 When your tool runs on LangGraph Server, access the assistant ID, graph ID, and authenticated user via `runtime.server_info`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 
 @tool
@@ -835,45 +787,47 @@ def get_assistant_scoped_data(runtime: ToolRuntime) -> str:
 
 `server_info` is `None` when the tool is not running on LangGraph Server (e.g., during local development or testing).
 
-<Note>
-  Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
-</Note>
+> [!NOTE]
+> Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
 
-<Accordion title="Migrate from older injection patterns" id="migrate-from-older-injection-patterns">
-  Older examples used `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`. Use [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) instead for one explicit interface to state, context, store, and execution metadata.
+<details>
+<summary>Migrate from older injection patterns</summary>
 
-  #### Previous pattern
+Older examples used `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`. Use [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) instead for one explicit interface to state, context, store, and execution metadata.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.tools import tool, InjectedState
+#### Previous pattern
 
-  @tool
-  def summarize(state: InjectedState) -> str:
-      """Summarize the conversation."""
-      messages = state["messages"]
-      return f"Conversation length: {len(messages)} messages."
-  ```
+```python
+from langchain.tools import tool, InjectedState
 
-  #### Recommended pattern
+@tool
+def summarize(state: InjectedState) -> str:
+    """Summarize the conversation."""
+    messages = state["messages"]
+    return f"Conversation length: {len(messages)} messages."
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.tools import tool, ToolRuntime
+#### Recommended pattern
 
-  @tool
-  def summarize(runtime: ToolRuntime) -> str:
-      """Summarize the conversation."""
-      messages = runtime.state["messages"]
-      return f"Conversation length: {len(messages)} messages."
-  ```
+```python
+from langchain.tools import tool, ToolRuntime
 
-  For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](/oss/python/migrate/langchain-v1).
-</Accordion>
+@tool
+def summarize(runtime: ToolRuntime) -> str:
+    """Summarize the conversation."""
+    messages = runtime.state["messages"]
+    return f"Conversation length: {len(messages)} messages."
+```
+
+For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1).
+
+</details>
 
 ## Tool execution
 
-In LangChain, tools are used by agents (for example via [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)) and tool error handling is configured through [middleware](/oss/python/langchain/middleware).
+In LangChain, tools are used by agents (for example via [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)) and tool error handling is configured through [middleware](https://docs.langchain.com/oss/python/langchain/middleware).
 
-For LangGraph workflows, tool execution is handled by [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode). See [ToolNode](/oss/python/langgraph/workflows-agents#toolnode) for Graph API usage, including how tools can access the current graph state and run-scoped context.
+For LangGraph workflows, tool execution is handled by [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode). See [ToolNode](https://docs.langchain.com/oss/python/langgraph/workflows-agents#toolnode) for Graph API usage, including how tools can access the current graph state and run-scoped context.
 
 ### Tool return values
 
@@ -887,9 +841,8 @@ You can choose different return values for your tools:
 
 Return a string when the tool should provide plain text for the model to read and use in its next response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
-
 
 @tool
 def get_weather(city: str) -> str:
@@ -909,9 +862,8 @@ Use this when the result is naturally human-readable text.
 
 Return an object (for example, a `dict`) when your tool produces structured data that the model should inspect.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
-
 
 @tool
 def get_weather_data(city: str) -> dict:
@@ -933,11 +885,10 @@ Use this when downstream reasoning benefits from explicit fields instead of free
 
 #### Return multimodal content
 
-Tools are not limited to plain text. When the model supports multimodal tool results, the tool can return [standard content blocks](/oss/python/langchain/messages#standard-content-blocks) so the model receives text, images, and other media in one tool result.
+Tools are not limited to plain text. When the model supports multimodal tool results, the tool can return [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) so the model receives text, images, and other media in one tool result.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
-
 
 @tool
 def capture_screenshot() -> list[dict]:
@@ -952,9 +903,9 @@ Behavior:
 
 * The return value is converted to a `ToolMessage` with multimodal `content`.
 * Use `message.content_blocks` to read the normalized block list after the tool runs.
-* The model must support the modalities you return. Check your [model's capabilities](/oss/python/integrations/chat) before returning images, audio, or video.
+* The model must support the modalities you return. Check your [model's capabilities](https://docs.langchain.com/oss/python/integrations/chat) before returning images, audio, or video.
 
-For block types and provider-specific requirements, see [Multimodal messages](/oss/python/langchain/messages#multimodal). MCP tools that return images or mixed content are converted the same way; see [Multimodal tool content](/oss/python/langchain/mcp#multimodal-tool-content).
+For block types and provider-specific requirements, see [Multimodal messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal). MCP tools that return images or mixed content are converted the same way; see [Multimodal tool content](https://docs.langchain.com/oss/python/langchain/mcp#multimodal-tool-content).
 
 #### Return a Command
 
@@ -962,11 +913,10 @@ Return a [`Command`](https://reference.langchain.com/python/langgraph/types/Comm
 You can return a `Command` with or without including a `ToolMessage`.
 If the model needs to see that the tool succeeded (for example, to confirm a preference change), include a `ToolMessage` in the update, using `runtime.tool_call_id` for the `tool_call_id` parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import ToolMessage
 from langchain.tools import ToolRuntime, tool
 from langgraph.types import Command
-
 
 @tool
 def set_language(language: str, runtime: ToolRuntime) -> Command:
@@ -996,182 +946,166 @@ Use this when the tool is not just returning data, but also mutating agent state
 
 Set return direct on a tool to short-circuit the agent loop: the agent returns the tool's output to the caller immediately, without sending it back through the model for further processing.
 
-<CodeGroup>
-  ```python Google theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
+agent = create_agent(
+    ChatOpenAI(model="google_genai:gemini-3.6-flash"),
+    tools=[fetch_order_status],
+)
 
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  agent = create_agent(
-      ChatOpenAI(model="google_genai:gemini-3.6-flash"),
-      tools=[fetch_order_status],
-  )
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  ```python OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
+agent = create_agent(
+    ChatOpenAI(model="openai:gpt-5.5"),
+    tools=[fetch_order_status],
+)
 
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  agent = create_agent(
-      ChatOpenAI(model="openai:gpt-5.5"),
-      tools=[fetch_order_status],
-  )
+agent = create_agent(
+    ChatOpenAI(model="anthropic:claude-sonnet-4-6"),
+    tools=[fetch_order_status],
+)
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  ```python Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
+agent = create_agent(
+    ChatOpenAI(model="openrouter:z-ai/glm-5.2"),
+    tools=[fetch_order_status],
+)
 
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  agent = create_agent(
-      ChatOpenAI(model="anthropic:claude-sonnet-4-6"),
-      tools=[fetch_order_status],
-  )
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  ```python OpenRouter theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
+agent = create_agent(
+    ChatOpenAI(model="fireworks:accounts/fireworks/models/glm-5p2"),
+    tools=[fetch_order_status],
+)
 
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  agent = create_agent(
-      ChatOpenAI(model="openrouter:z-ai/glm-5.2"),
-      tools=[fetch_order_status],
-  )
+agent = create_agent(
+    ChatOpenAI(model="baseten:zai-org/GLM-5.2"),
+    tools=[fetch_order_status],
+)
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
-  ```python Fireworks theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
+```python
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
 
+@tool(return_direct=True)
+def fetch_order_status(order_id: str) -> str:
+    """Fetch the current status of a customer order."""
+    # In production, query your order management system here
+    return f"Order {order_id} is shipped and will arrive in 2 days."
 
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
+agent = create_agent(
+    ChatOpenAI(model="ollama:north-mini-code-1.0"),
+    tools=[fetch_order_status],
+)
 
-
-  agent = create_agent(
-      ChatOpenAI(model="fireworks:accounts/fireworks/models/glm-5p2"),
-      tools=[fetch_order_status],
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
-
-  ```python Baseten theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
-
-
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
-
-
-  agent = create_agent(
-      ChatOpenAI(model="baseten:zai-org/GLM-5.2"),
-      tools=[fetch_order_status],
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
-
-  ```python Ollama theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.tools import tool
-  from langchain_openai import ChatOpenAI
-
-
-  @tool(return_direct=True)
-  def fetch_order_status(order_id: str) -> str:
-      """Fetch the current status of a customer order."""
-      # In production, query your order management system here
-      return f"Order {order_id} is shipped and will arrive in 2 days."
-
-
-  agent = create_agent(
-      ChatOpenAI(model="ollama:north-mini-code-1.0"),
-      tools=[fetch_order_status],
-  )
-
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
-  })
-  # The agent returns the tool output directly without another LLM call:
-  # "Order 12345 is shipped and will arrive in 2 days."
-  ```
-</CodeGroup>
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What is the status of order #12345?"}]
+})
+# The agent returns the tool output directly without another LLM call:
+# "Order 12345 is shipped and will arrive in 2 days."
+```
 
 Behavior:
 
@@ -1185,238 +1119,221 @@ Use this when:
 * You want to avoid an extra model call when no additional reasoning is needed.
 * You need deterministic, unmodified output — the model cannot rephrase, summarize, or act on the tool result.
 
-<Warning>
-  Because the model does not process the tool's output, `return_direct=True` is not suitable for tools whose results require further reasoning, summarization, or chaining with other tool calls.
-</Warning>
+> [!WARNING]
+> Because the model does not process the tool's output, `return_direct=True` is not suitable for tools whose results require further reasoning, summarization, or chaining with other tool calls.
 
 ### Error handling
 
-Handle tool errors using LangChain agent [middleware](/oss/python/langchain/middleware) to retry failed tool calls or return custom error messages:
+Handle tool errors using LangChain agent [middleware](https://docs.langchain.com/oss/python/langchain/middleware) to retry failed tool calls or return custom error messages:
 
-<CodeGroup>
-  ```python Google theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
+```python
+from collections.abc import Callable
 
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
+agent = create_agent(
+    model="google_genai:gemini-3.6-flash",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
+```python
+from collections.abc import Callable
 
-  agent = create_agent(
-      model="google_genai:gemini-3.6-flash",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
-  ```python OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
+agent = create_agent(
+    model="openai:gpt-5.5",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
+```python
+from collections.abc import Callable
 
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  agent = create_agent(
-      model="openai:gpt-5.5",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
+agent = create_agent(
+    model="anthropic:claude-sonnet-4-6",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
-  ```python Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
+```python
+from collections.abc import Callable
 
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
+agent = create_agent(
+    model="openrouter:z-ai/glm-5.2",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
+```python
+from collections.abc import Callable
 
-  agent = create_agent(
-      model="anthropic:claude-sonnet-4-6",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
-  ```python OpenRouter theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
+agent = create_agent(
+    model="fireworks:accounts/fireworks/models/glm-5p2",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
+```python
+from collections.abc import Callable
 
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  agent = create_agent(
-      model="openrouter:z-ai/glm-5.2",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
+agent = create_agent(
+    model="baseten:zai-org/GLM-5.2",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
-  ```python Fireworks theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
+```python
+from collections.abc import Callable
 
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.tools.tool_node import ToolCallRequest
 
+@wrap_tool_call
+def handle_tool_errors(
+    request: ToolCallRequest,
+    handler: Callable[[ToolCallRequest], ToolMessage],
+) -> ToolMessage:
+    """Convert tool exceptions into ToolMessages the model can handle."""
+    try:
+        return handler(request)
+    except Exception as e:
+        return ToolMessage(
+            content=f"Tool error: Please check your input and try again. ({e})",
+            tool_call_id=request.tool_call["id"],
+        )
 
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
-
-
-  agent = create_agent(
-      model="fireworks:accounts/fireworks/models/glm-5p2",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
-
-  ```python Baseten theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
-
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
-
-
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
-
-
-  agent = create_agent(
-      model="baseten:zai-org/GLM-5.2",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
-
-  ```python Ollama theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from collections.abc import Callable
-
-  from langchain.agents import create_agent
-  from langchain.agents.middleware import wrap_tool_call
-  from langchain.messages import ToolMessage
-  from langchain.tools.tool_node import ToolCallRequest
-
-
-  @wrap_tool_call
-  def handle_tool_errors(
-      request: ToolCallRequest,
-      handler: Callable[[ToolCallRequest], ToolMessage],
-  ) -> ToolMessage:
-      """Convert tool exceptions into ToolMessages the model can handle."""
-      try:
-          return handler(request)
-      except Exception as e:
-          return ToolMessage(
-              content=f"Tool error: Please check your input and try again. ({e})",
-              tool_call_id=request.tool_call["id"],
-          )
-
-
-  agent = create_agent(
-      model="ollama:north-mini-code-1.0",
-      tools=[],
-      middleware=[handle_tool_errors],
-  )
-  ```
-</CodeGroup>
+agent = create_agent(
+    model="ollama:north-mini-code-1.0",
+    tools=[],
+    middleware=[handle_tool_errors],
+)
+```
 
 ### State injection
 
-Tools access graph state through [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime). See [Access context](#access-context) for state, context, store, and streaming APIs.
+Tools access graph state through [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime). See [Access context](https://docs.langchain.com/oss/python/langchain/tools#access-context) for state, context, store, and streaming APIs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 
 @tool
@@ -1426,7 +1343,7 @@ def get_message_count(runtime: ToolRuntime) -> str:
     return f"There are {len(messages)} messages."
 ```
 
-For more details on accessing state, context, and long-term memory from tools, see [Access context](#access-context).
+For more details on accessing state, context, and long-term memory from tools, see [Access context](https://docs.langchain.com/oss/python/langchain/tools#access-context).
 
 ## Dynamic tool selection
 
@@ -1434,216 +1351,206 @@ With dynamic tools, the set of tools available to the agent is modified at runti
 
 There are two approaches depending on whether tools are known ahead of time:
 
-<Tabs>
-  <Tab title="Filtering pre-registered tools">
-    When all possible tools are known at agent creation time, you can pre-register them and dynamically filter which ones are exposed to the model based on state, permissions, or context.
+#### Filtering pre-registered tools
+When all possible tools are known at agent creation time, you can pre-register them and dynamically filter which ones are exposed to the model based on state, permissions, or context.
 
-    <Tabs>
-      <Tab title="State">
-        Enable advanced tools only after certain conversation milestones:
+#### State
+Enable advanced tools only after certain conversation milestones:
 
-        ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        from langchain.agents import create_agent
-        from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-        from typing import Callable
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-        @wrap_model_call
-        def state_based_tools(
-            request: ModelRequest,
-            handler: Callable[[ModelRequest], ModelResponse]
-        ) -> ModelResponse:
-            """Filter tools based on conversation State."""
-            # Read from State: check if user has authenticated
-            state = request.state
-            is_authenticated = state.get("authenticated", False)
-            message_count = len(state["messages"])
+@wrap_model_call
+def state_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on conversation State."""
+    # Read from State: check if user has authenticated
+    state = request.state
+    is_authenticated = state.get("authenticated", False)
+    message_count = len(state["messages"])
 
-            # Only enable sensitive tools after authentication
-            if not is_authenticated:
-                tools = [t for t in request.tools if t.name.startswith("public_")]
-                request = request.override(tools=tools)
-            elif message_count < 5:
-                # Limit tools early in conversation
-                tools = [t for t in request.tools if t.name != "advanced_search"]
-                request = request.override(tools=tools)
+    # Only enable sensitive tools after authentication
+    if not is_authenticated:
+        tools = [t for t in request.tools if t.name.startswith("public_")]
+        request = request.override(tools=tools)
+    elif message_count < 5:
+        # Limit tools early in conversation
+        tools = [t for t in request.tools if t.name != "advanced_search"]
+        request = request.override(tools=tools)
 
-            return handler(request)
+    return handler(request)
 
-        agent = create_agent(
-            model="gpt-5.5",
-            tools=[public_search, private_search, advanced_search],
-            middleware=[state_based_tools]
-        )
-        ```
-      </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[public_search, private_search, advanced_search],
+    middleware=[state_based_tools]
+)
+```
 
-      <Tab title="Store">
-        Filter tools based on user preferences or feature flags in Store:
+#### Store
+Filter tools based on user preferences or feature flags in Store:
 
-        ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        from dataclasses import dataclass
-        from langchain.agents import create_agent
-        from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-        from typing import Callable
-        from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
+from langgraph.store.memory import InMemoryStore
 
-        @dataclass
-        class Context:
-            user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-        @wrap_model_call
-        def store_based_tools(
-            request: ModelRequest,
-            handler: Callable[[ModelRequest], ModelResponse]
-        ) -> ModelResponse:
-            """Filter tools based on Store preferences."""
-            user_id = request.runtime.context.user_id
+@wrap_model_call
+def store_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on Store preferences."""
+    user_id = request.runtime.context.user_id
 
-            # Read from Store: get user's enabled features
-            store = request.runtime.store
-            feature_flags = store.get(("features",), user_id)
+    # Read from Store: get user's enabled features
+    store = request.runtime.store
+    feature_flags = store.get(("features",), user_id)
 
-            if feature_flags:
-                enabled_features = feature_flags.value.get("enabled_tools", [])
-                # Only include tools that are enabled for this user
-                tools = [t for t in request.tools if t.name in enabled_features]
-                request = request.override(tools=tools)
+    if feature_flags:
+        enabled_features = feature_flags.value.get("enabled_tools", [])
+        # Only include tools that are enabled for this user
+        tools = [t for t in request.tools if t.name in enabled_features]
+        request = request.override(tools=tools)
 
-            return handler(request)
+    return handler(request)
 
-        agent = create_agent(
-            model="gpt-5.5",
-            tools=[search_tool, analysis_tool, export_tool],
-            middleware=[store_based_tools],
-            context_schema=Context,
-            store=InMemoryStore()
-        )
-        ```
-      </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[search_tool, analysis_tool, export_tool],
+    middleware=[store_based_tools],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-      <Tab title="Runtime Context">
-        Filter tools based on user permissions from Runtime Context:
+#### Runtime Context
+Filter tools based on user permissions from Runtime Context:
 
-        ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        from dataclasses import dataclass
-        from langchain.agents import create_agent
-        from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-        from typing import Callable
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-        @dataclass
-        class Context:
-            user_role: str
+@dataclass
+class Context:
+    user_role: str
 
-        @wrap_model_call
-        def context_based_tools(
-            request: ModelRequest,
-            handler: Callable[[ModelRequest], ModelResponse]
-        ) -> ModelResponse:
-            """Filter tools based on Runtime Context permissions."""
-            # Read from Runtime Context: get user role
-            if request.runtime is None or request.runtime.context is None:
-                # If no context provided, default to viewer (most restrictive)
-                user_role = "viewer"
-            else:
-                user_role = request.runtime.context.user_role
+@wrap_model_call
+def context_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on Runtime Context permissions."""
+    # Read from Runtime Context: get user role
+    if request.runtime is None or request.runtime.context is None:
+        # If no context provided, default to viewer (most restrictive)
+        user_role = "viewer"
+    else:
+        user_role = request.runtime.context.user_role
 
-            if user_role == "admin":
-                # Admins get all tools
-                pass
-            elif user_role == "editor":
-                # Editors can't delete
-                tools = [t for t in request.tools if t.name != "delete_data"]
-                request = request.override(tools=tools)
-            else:
-                # Viewers get read-only tools
-                tools = [t for t in request.tools if t.name.startswith("read_")]
-                request = request.override(tools=tools)
+    if user_role == "admin":
+        # Admins get all tools
+        pass
+    elif user_role == "editor":
+        # Editors can't delete
+        tools = [t for t in request.tools if t.name != "delete_data"]
+        request = request.override(tools=tools)
+    else:
+        # Viewers get read-only tools
+        tools = [t for t in request.tools if t.name.startswith("read_")]
+        request = request.override(tools=tools)
 
-            return handler(request)
+    return handler(request)
 
-        agent = create_agent(
-            model="gpt-5.5",
-            tools=[read_data, write_data, delete_data],
-            middleware=[context_based_tools],
-            context_schema=Context
-        )
-        ```
-      </Tab>
-    </Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[read_data, write_data, delete_data],
+    middleware=[context_based_tools],
+    context_schema=Context
+)
+```
 
-    This approach is best when:
+This approach is best when:
 
-    * All possible tools are known at compile/startup time
-    * You want to filter based on permissions, feature flags, or conversation state
-    * Tools are static but their availability is dynamic
+* All possible tools are known at compile/startup time
+* You want to filter based on permissions, feature flags, or conversation state
+* Tools are static but their availability is dynamic
 
-    See [Dynamically selecting tools](/oss/python/langchain/middleware/custom#dynamically-selecting-tools) for more examples.
-  </Tab>
+See [Dynamically selecting tools](https://docs.langchain.com/oss/python/langchain/middleware/custom#dynamically-selecting-tools) for more examples.
 
-  <Tab title="Runtime tool registration">
-    When tools are discovered or created at runtime (e.g., loaded from an MCP server, generated based on user data, or fetched from a remote registry), you need to both register the tools and handle their execution dynamically.
+#### Runtime tool registration
+When tools are discovered or created at runtime (e.g., loaded from an MCP server, generated based on user data, or fetched from a remote registry), you need to both register the tools and handle their execution dynamically.
 
-    This requires two middleware hooks:
+This requires two middleware hooks:
 
-    1. `wrap_model_call` - Add the dynamic tools to the request
-    2. `wrap_tool_call` - Handle execution of the dynamically added tools
+1. `wrap_model_call` - Add the dynamic tools to the request
+2. `wrap_tool_call` - Handle execution of the dynamically added tools
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.tools import tool
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import AgentMiddleware, ModelRequest, ToolCallRequest
+```python
+from langchain.tools import tool
+from langchain.agents import create_agent
+from langchain.agents.middleware import AgentMiddleware, ModelRequest, ToolCallRequest
 
-    # A tool that will be added dynamically at runtime
-    @tool
-    def calculate_tip(bill_amount: float, tip_percentage: float = 20.0) -> str:
-        """Calculate the tip amount for a bill."""
-        tip = bill_amount * (tip_percentage / 100)
-        return f"Tip: ${tip:.2f}, Total: ${bill_amount + tip:.2f}"
+# A tool that will be added dynamically at runtime
+@tool
+def calculate_tip(bill_amount: float, tip_percentage: float = 20.0) -> str:
+    """Calculate the tip amount for a bill."""
+    tip = bill_amount * (tip_percentage / 100)
+    return f"Tip: ${tip:.2f}, Total: ${bill_amount + tip:.2f}"
 
-    class DynamicToolMiddleware(AgentMiddleware):
-        """Middleware that registers and handles dynamic tools."""
+class DynamicToolMiddleware(AgentMiddleware):
+    """Middleware that registers and handles dynamic tools."""
 
-        def wrap_model_call(self, request: ModelRequest, handler):
-            # Add dynamic tool to the request
-            # This could be loaded from an MCP server, database, etc.
-            updated = request.override(tools=[*request.tools, calculate_tip])
-            return handler(updated)
+    def wrap_model_call(self, request: ModelRequest, handler):
+        # Add dynamic tool to the request
+        # This could be loaded from an MCP server, database, etc.
+        updated = request.override(tools=[*request.tools, calculate_tip])
+        return handler(updated)
 
-        def wrap_tool_call(self, request: ToolCallRequest, handler):
-            # Handle execution of the dynamic tool
-            if request.tool_call["name"] == "calculate_tip":
-                return handler(request.override(tool=calculate_tip))
-            return handler(request)
+    def wrap_tool_call(self, request: ToolCallRequest, handler):
+        # Handle execution of the dynamic tool
+        if request.tool_call["name"] == "calculate_tip":
+            return handler(request.override(tool=calculate_tip))
+        return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[get_weather],  # Only static tools registered here
-        middleware=[DynamicToolMiddleware()],
-    )
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[get_weather],  # Only static tools registered here
+    middleware=[DynamicToolMiddleware()],
+)
 
-    # The agent can now use both get_weather AND calculate_tip
-    result = agent.invoke({
-        "messages": [{"role": "user", "content": "Calculate a 20% tip on $85"}]
-    })
-    ```
+# The agent can now use both get_weather AND calculate_tip
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "Calculate a 20% tip on $85"}]
+})
+```
 
-    This approach is best when:
+This approach is best when:
 
-    * Tools are discovered at runtime (e.g., from an MCP server)
-    * Tools are generated dynamically based on user data or configuration
-    * You're integrating with external tool registries
+* Tools are discovered at runtime (e.g., from an MCP server)
+* Tools are generated dynamically based on user data or configuration
+* You're integrating with external tool registries
 
-    <Note>
-      The `wrap_tool_call` hook is required for runtime-registered tools because the agent needs to know how to execute tools that weren't in the original tool list. Without it, the agent won't know how to invoke the dynamically added tool.
-    </Note>
-  </Tab>
-</Tabs>
+> [!NOTE]
+> The `wrap_tool_call` hook is required for runtime-registered tools because the agent needs to know how to execute tools that weren't in the original tool list. Without it, the agent won't know how to invoke the dynamically added tool.
 
 ## Headless tools
 
 Some tools should run **where your user's app runs** (typically the browser), not inside the process. **Headless tools** are tool definitions, which include the name, description, and argument schema, that you register on the **server** with your agent. The **implementation** is registered only on the **client** and executed after a short interrupt/resume handshake.
 
-This is different from ordinary tools whose function body runs on the server, and from [server-side tool use](#server-side-tool-use) where the model provider executes built-in tools remotely.
+This is different from ordinary tools whose function body runs on the server, and from [server-side tool use](https://docs.langchain.com/oss/python/langchain/tools#server-side-tool-use) where the model provider executes built-in tools remotely.
 
 ### When to use headless tools
 
@@ -1663,38 +1570,32 @@ In both runtimes, the model sees a normal tool it can call, but the actual execu
 3. **Handle** the interrupt payload when the tool is invoked. Instead of running locally, the graph pauses with a payload shaped like `{"type": "tool", "tool_call": {"id", "name", "args"}}`.
 4. **Resume** the graph after your app, another service, or a human step performs the action. For browser-based flows, you can mirror the schema in the frontend and attach `.implement(...)` there.
 
-<Info>
-  If you call `tool(...)` in Python with only `name`, `description`, and `args_schema`, LangChain returns a `HeadlessTool`. There is no `.implement()` API on the Python side.
-</Info>
+> [!NOTE]
+> If you call `tool(...)` in Python with only `name`, `description`, and `args_schema`, LangChain returns a `HeadlessTool`. There is no `.implement()` API on the Python side.
 
 When the model issues a tool call for one of these tools, the run **interrupts** instead of executing the tool locally. Your app can inspect the payload, perform the action in the right environment (for example a browser, another service, or a human review step), then **resume** the graph with the tool result. When you use the supported JS SDK hooks, they can detect headless-tool interrupts, run the matching client implementation, and submit the resume command for you.
 
 Use the optional **`onTool`** callback to observe lifecycle events (`start`, `success`, `error`) for UI feedback such as spinners or toasts.
 
-<Card title="Headless tools frontend pattern" href="/oss/python/langchain/frontend/headless-tools" icon="device-desktop" arrow="true" horizontal>
-  See an end-to-end example of schema-only tools executed in the client with `useStream`.
-</Card>
+#### [Headless tools frontend pattern](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools)
+See an end-to-end example of schema-only tools executed in the client with `useStream`.
 
 ## Prebuilt tools
 
 LangChain provides a large collection of prebuilt tools and toolkits for common tasks like web search, code interpretation, database access, and more. These ready-to-use tools can be directly integrated into your agents without writing custom code.
 
-See the [tools and toolkits](/oss/python/integrations/tools) integration page for a complete list of available tools organized by category.
+See the [tools and toolkits](https://docs.langchain.com/oss/python/integrations/tools) integration page for a complete list of available tools organized by category.
 
 ## Server-side tool use
 
 Some chat models feature built-in tools that are executed server-side by the model provider. These include capabilities like web search and code interpreters that don't require you to define or host the tool logic.
 
-Refer to the individual [chat model integration pages](/oss/python/integrations/providers) and the [tool calling documentation](/oss/python/langchain/models#server-side-tool-use) for details on enabling and using these built-in tools.
+Refer to the individual [chat model integration pages](https://docs.langchain.com/oss/python/integrations/providers) and the [tool calling documentation](https://docs.langchain.com/oss/python/langchain/models#server-side-tool-use) for details on enabling and using these built-in tools.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

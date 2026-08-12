@@ -1,40 +1,36 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Observability
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/observability)
+Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your application](https://docs.langchain.com/langsmith/trace-with-langgraph). This enables you to do the following:
 
-Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your application](/langsmith/trace-with-langgraph). This enables you to do the following:
-
-* [Debug a locally running application](/langsmith/observability-studio#debug-langsmith-traces).
-* [Evaluate the application performance](/oss/python/langchain/test/evals).
-* [Monitor the application](/langsmith/dashboards).
+* [Debug a locally running application](https://docs.langchain.com/langsmith/observability-studio#debug-langsmith-traces).
+* [Evaluate the application performance](https://docs.langchain.com/oss/python/langchain/test/evals).
+* [Monitor the application](https://docs.langchain.com/langsmith/dashboards).
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
 * **A LangSmith account**: Sign up (for free) or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability).
-* **A LangSmith API key**: Follow the [Create an API key](/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
 
 ## Enable tracing
 
 To enable tracing for your application, set the following environment variables:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
 ```
 
-By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](#log-to-a-project).
+By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](https://docs.langchain.com/oss/python/langgraph/observability#log-to-a-project).
 
-For more information, see [Trace with LangGraph](/langsmith/trace-with-langgraph).
+For more information, see [Trace with LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph).
 
 ## Trace selectively
 
 You may opt to trace specific invocations or parts of your application using LangSmith's `tracing_context` context manager:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import langsmith as ls
 
 # This WILL be traced
@@ -47,32 +43,38 @@ agent.invoke({"messages": [{"role": "user", "content": "Send another email"}]})
 
 ## Log to a project
 
-<Accordion title="Statically">
-  You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
+<details>
+<summary>Statically</summary>
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  export LANGSMITH_PROJECT=my-agent-project
-  ```
-</Accordion>
+You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
 
-<Accordion title="Dynamically">
-  You can set the project name programmatically for specific operations:
+```bash
+export LANGSMITH_PROJECT=my-agent-project
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import langsmith as ls
+</details>
 
-  with ls.tracing_context(project_name="email-agent-test", enabled=True):
-      response = agent.invoke({
-          "messages": [{"role": "user", "content": "Send a welcome email"}]
-      })
-  ```
-</Accordion>
+<details>
+<summary>Dynamically</summary>
+
+You can set the project name programmatically for specific operations:
+
+```python
+import langsmith as ls
+
+with ls.tracing_context(project_name="email-agent-test", enabled=True):
+    response = agent.invoke({
+        "messages": [{"role": "user", "content": "Send a welcome email"}]
+    })
+```
+
+</details>
 
 ## Add metadata to traces
 
 You can annotate your traces with custom metadata and tags:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = agent.invoke(
     {"messages": [{"role": "user", "content": "Send a welcome email"}]},
     config={
@@ -88,7 +90,7 @@ response = agent.invoke(
 
 `tracing_context` also accepts tags and metadata for fine-grained control:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with ls.tracing_context(
     project_name="email-agent-test",
     enabled=True,
@@ -101,16 +103,15 @@ with ls.tracing_context(
 
 This custom metadata and tags will be attached to the trace in LangSmith.
 
-<Tip>
-  To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](/langsmith/observability).
-</Tip>
+> [!TIP]
+> To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](https://docs.langchain.com/langsmith/observability).
 
 ## Use anonymizers to prevent logging of sensitive data in traces
 
-You may want to mask sensitive data to prevent it from being logged to LangSmith. You can create [anonymizers](/langsmith/mask-inputs-outputs#rule-based-masking-of-inputs-and-outputs) and apply them to
+You may want to mask sensitive data to prevent it from being logged to LangSmith. You can create [anonymizers](https://docs.langchain.com/langsmith/mask-inputs-outputs#rule-based-masking-of-inputs-and-outputs) and apply them to
 your graph using configuration. This example will redact anything matching the Social Security Number format XXX-XX-XXXX from traces sent to LangSmith.
 
-```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.tracers.langchain import LangChainTracer
 from langgraph.graph import StateGraph, MessagesState
 from langsmith import Client
@@ -134,12 +135,8 @@ graph = (
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

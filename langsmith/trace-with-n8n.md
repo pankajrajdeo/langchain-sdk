@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace n8n workflows
-
-> Learn how to trace n8n AI workflows in LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-n8n)
+Learn how to trace n8n AI workflows in LangSmith.
 
 [n8n](https://n8n.io/) is a workflow automation platform that includes advanced AI capabilities built on LangChain. You can connect your n8n instance to LangSmith to record and monitor AI workflow runs.
 
-<Note>
-  LangSmith tracing is available for **self-hosted n8n instances** only.
-</Note>
+> [!NOTE]
+> LangSmith tracing is available for **self-hosted n8n instances** only.
 
 ## Prerequisites
 
-* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-n8n) and [API key](/langsmith/create-account-api-key)
+* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-n8n) and [API key](https://docs.langchain.com/langsmith/create-account-api-key)
 * A self-hosted n8n instance
 
 ## Set up tracing
@@ -49,12 +44,8 @@ After running an AI workflow:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-n8n.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-n8n.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

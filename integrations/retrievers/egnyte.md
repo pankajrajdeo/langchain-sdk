@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # EgnyteRetriever
 
-This will help you get started with the Egnyte [retriever](/oss/python/deepagents/retrieval). For detailed documentation of all `EgnyteRetriever` features and configurations head to the [API reference](https://github.com/egnyte/egnyte-langchain-connector).
+This will help you get started with the Egnyte [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). For detailed documentation of all `EgnyteRetriever` features and configurations head to the [API reference](https://github.com/egnyte/egnyte-langchain-connector).
 
 # Overview
 
@@ -34,7 +30,7 @@ For these examples, we will use Bearer token authentication with an Egnyte user 
 2. Generate a user token following the [Public API Authentication guide](https://developers.egnyte.com/docs/read/Public_API_Authentication)
 3. **Important**: Use the scope `Egnyte.ai` when generating the token
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -44,7 +40,7 @@ domain = input("Enter your Egnyte domain (e.g., company.egnyte.com): ")
 
 If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.smith.langchain.com/) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -53,11 +49,11 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 This retriever lives in the `egnyte-langchain-connector` package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU egnyte-langchain-connector
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 Note: you may need to restart the kernel to use updated packages.
 ```
 
@@ -65,7 +61,7 @@ Note: you may need to restart the kernel to use updated packages.
 
 Now we can instantiate our retriever:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_egnyte import EgnyteRetriever
 
 retriever = EgnyteRetriever(domain=domain, k=100)
@@ -75,7 +71,7 @@ retriever = EgnyteRetriever(domain=domain, k=100)
 
 ### Basic search
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "machine learning policies"
 
 documents = retriever.invoke(query, egnyte_user_token=egnyte_user_token)
@@ -90,7 +86,7 @@ for doc in documents:
 
 For more granular search, you can use `EgnyteSearchOptions` to filter results by folder path, date range, and more:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_egnyte import EgnyteRetriever, EgnyteSearchOptions
 
 search_options = EgnyteSearchOptions(
@@ -117,7 +113,7 @@ documents = retriever.invoke(
 
 The retriever supports asynchronous operations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 
 async def search_async():
@@ -135,7 +131,7 @@ documents = asyncio.run(search_async())
 
 You can process multiple queries in batch:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 queries = [
     "security policies",
     "employee handbook",
@@ -159,7 +155,7 @@ results = await retriever.abatch(
 
 Like other retrievers, EgnyteRetriever can be added to a LangGraph agent as a tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain.tools.retriever import create_retriever_tool
@@ -200,12 +196,8 @@ If you have questions, check out the [Egnyte developer documentation](https://de
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/egnyte.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

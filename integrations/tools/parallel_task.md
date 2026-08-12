@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel Task API integration
 
 > Integrate with the ParallelTaskRunTool tool using LangChain Python.
@@ -34,21 +30,19 @@ All four default to a `-fast` processor variant (2-5x faster than the correspond
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -60,7 +54,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 `ParallelTaskRunTool` is an agent-callable `BaseTool`. It runs one task synchronously and returns the structured `output`, per-field `basis` citations, and the `run_id`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelTaskRunTool
 
 tool = ParallelTaskRunTool()
@@ -72,7 +66,7 @@ print("run_id:", result["run"]["run_id"])
 
 `result["output"]` is always a dict; the answer text lives at `result["output"]["content"]` and per-field citations at `result["output"]["basis"]`. Pass a `task_output_schema` to have `content` arrive as a parsed pydantic-shaped dict instead of a free-text string:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class FounderFact(BaseModel):
@@ -86,7 +80,7 @@ print(res["output"]["content"])
 print(res["output"]["basis"])  # citations + reasoning + confidence per field
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'founder': 'Elon Musk', 'year': 2002}
 [{'field': 'founder', 'citations': [...], 'reasoning': '...', 'confidence': 'high'}, ...]
 ```
@@ -95,7 +89,7 @@ print(res["output"]["basis"])  # citations + reasoning + confidence per field
 
 Every consumer that cares about confidence ends up writing the same boilerplate to walk a result for citations, low-confidence fields, and the `interaction_id`. `parse_basis()` does that for you:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import parse_basis
 
 parsed = parse_basis(res)
@@ -108,7 +102,7 @@ print("interaction_id:", parsed["interaction_id"])
 
 Result dicts surface `interaction_id` at the top level. Pass it as `previous_interaction_id` on the next call to chain context across turns:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 first = tool.invoke({"input": "Who founded SpaceX?"})
 followup = tool.invoke({
     "input": "And what year was it founded?",
@@ -120,7 +114,7 @@ followup = tool.invoke({
 
 `ParallelDeepResearch` is a `Runnable`. It defaults to `pro-fast` (the `-fast` variant of "Exploratory web research"). For the most thorough multi-source reports, pass `processor="ultra"`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelDeepResearch
 
 research = ParallelDeepResearch()
@@ -128,13 +122,12 @@ result = research.invoke("Summarize the state of net-energy-gain fusion research
 print(result["output"]["content"])
 ```
 
-<Note>
-  Deep research runs are not instant. `pro-fast` typically takes a few minutes; `pro` and `ultra` can take longer. Wire up a webhook (see [Webhook signature verification](#webhook-signature-verification)) for production usage rather than blocking on `invoke`.
-</Note>
+> [!NOTE]
+> Deep research runs are not instant. `pro-fast` typically takes a few minutes; `pro` and `ultra` can take longer. Wire up a webhook (see [Webhook signature verification](https://docs.langchain.com/oss/python/integrations/tools/parallel_task#webhook-signature-verification)) for production usage rather than blocking on `invoke`.
 
 For typed deep research, pass an `output_schema`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class CityFact(BaseModel):
     capital: str
     population_millions: float
@@ -148,7 +141,7 @@ print(out["output"]["content"])
 
 `ParallelTaskGroup` creates a Task Group, fans out runs, and collects results. Use it directly when you need fine-grained control over the batch envelope; otherwise prefer `ParallelEnrichment` for typed bulk runs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelTaskGroup
 
 group = ParallelTaskGroup()
@@ -167,7 +160,7 @@ for r in results:
 
 `ParallelEnrichment` wraps `ParallelTaskGroup` with a `default_task_spec` built from your input/output pydantic schemas. It coerces pydantic instances into dicts, fans out the batch, and returns results in input order.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelEnrichment
 
 class CompanyInput(BaseModel):
@@ -196,7 +189,7 @@ for r in results:
 
 `build_task_spec` accepts pydantic classes, raw JSON-schema dicts, or text descriptions and returns a `TaskSpec` dict ready for `client.task_run.create` or `add_runs(default_task_spec=...)`. Use it when you want full control of the run envelope on a `ParallelTaskRunTool` or `ParallelTaskGroup`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import build_task_spec
 
 spec = build_task_spec(input_schema=CompanyInput, output_schema=CompanyOutput)
@@ -207,7 +200,7 @@ print(list(spec.keys()))  # ['output_schema', 'input_schema']
 
 `ParallelTaskRunTool` and `ParallelDeepResearch` accept `mcp_servers=[McpServer(...)]` to expose Streamable-HTTP MCP endpoints to the run.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import McpServer
 
 mcp = McpServer(
@@ -224,7 +217,7 @@ result = tool_with_mcp.invoke({"input": "What's our latest internal release?"})
 
 Long-running tasks can deliver results via webhook. Verify the signature with `verify_webhook` (Standard Webhooks scheme: HMAC-SHA256 over `<webhook-id>.<webhook-timestamp>.<body>`, base64-encoded, `v1,<sig>` with replay protection). See [webhook setup](https://docs.parallel.ai/resources/webhook-setup) for the delivery contract.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import verify_webhook
 
 ok = verify_webhook(
@@ -240,9 +233,9 @@ if not ok:
 
 ## Chaining
 
-Bind `ParallelTaskRunTool` to any tool-calling chat model and drive an agent with [`create_agent`](/oss/python/langchain/agents):
+Bind `ParallelTaskRunTool` to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 
@@ -258,12 +251,8 @@ For detailed documentation, head to the [`ParallelTaskRunTool`](https://referenc
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_task.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_task.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

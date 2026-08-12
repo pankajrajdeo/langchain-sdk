@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to run an evaluation locally (Python only)
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/local)
 Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or if you're validating that your target and evaluator functions are defined correctly, you may not want to record these evaluations.
 
 You can do this by using the LangSmith Python SDK and passing `upload_results=False` to `evaluate()` / `aevaluate()`.
 
 This will run you application and evaluators exactly as it always does and return the same output, but nothing will be recorded to LangSmith. This includes not just the experiment results but also the application and evaluator traces.
 
-<Note>
-  If you want to upload results to LangSmith but also need to process them in your script (for quality gates, custom aggregations, etc.), refer to [Read experiment results locally](/langsmith/read-local-experiment-results).
-</Note>
+> [!NOTE]
+> If you want to upload results to LangSmith but also need to process them in your script (for quality gates, custom aggregations, etc.), refer to [Read experiment results locally](https://docs.langchain.com/langsmith/read-local-experiment-results).
 
 ## Example
 
@@ -20,7 +15,7 @@ Let's take a look at an example:
 
 Requires `langsmith>=0.2.0`. Example also uses `pandas`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client
 
 # 1. Create and/or select your dataset
@@ -64,7 +59,7 @@ df = experiment.to_pandas()
 df[["inputs.question", "outputs.answer", "reference.answer", "feedback.is_concise"]]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'question': 'What is the largest mammal?'}
 {'answer': "What is the largest mammal? is a good question. I don't know the answer."}
 {'question': 'What do mammals and birds have in common?'}
@@ -78,12 +73,8 @@ df[["inputs.question", "outputs.answer", "reference.answer", "feedback.is_concis
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/local.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/local.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

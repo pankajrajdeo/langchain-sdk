@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Managed Deep Agents project structure
-
-> Understand the files and directories in a Managed Deep Agents project.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-project-structure)
+Understand the files and directories in a Managed Deep Agents project.
 
 A Managed Deep Agents project has a required agent entry and optional files that enable managed capabilities.
 
 It is a regular Python project.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project layout
 
-```text Project layout theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
 ├── agent.py                        # Core agent definition
 
@@ -51,7 +46,7 @@ my-agent/
 
 The only required file is `agent.py` at the project root. It must export a named `agent` created with `define_deep_agent`.
 
-Use only one agent entry in a project. See [Agent definition](/langsmith/python/managed-deep-agents-agent-definition).
+Use only one agent entry in a project. See [Agent definition](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition).
 
 ## How MDA treats project files
 
@@ -65,12 +60,8 @@ The layout above shows the common `.py` names.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-project-structure.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

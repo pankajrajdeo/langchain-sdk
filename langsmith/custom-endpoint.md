@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Connect to a custom model
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-endpoint)
 The Playground allows you to use your own custom models. You can deploy a model server that exposes your model's API via [LangServe](https://github.com/langchain-ai/langserve), an open source library for serving LangChain applications. Behind the scenes, the Playground will interact with your model server to generate responses.
 
 ## Deploy a custom model server
@@ -20,7 +16,7 @@ To make your model configurable in the Playground, you need to add configurable 
 
 You can add configurable fields by implementing the `with_configurable_fields` function in the `config.py` file. You can
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def with_configurable_fields(self) -> Runnable:
     """Expose fields you want to be configurable in the Playground. We will automatically expose these to the
     Playground. If you don't want to expose any fields, you can remove this method."""
@@ -37,20 +33,16 @@ Once you have deployed a model server, you can use it in the Playground. Enter t
 
 Enter the `URL`. The Playground will automatically detect the available endpoints and configurable fields. You can then invoke the model with the desired parameters.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/playground-custom-model.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=7a2889af5f55cc73661033837a50fad6" alt="ChatCustomModel in Playground" width="2816" height="1676" data-path="langsmith/images/playground-custom-model.png" />
+> **Image:** [ChatCustomModel in Playground](https://docs.langchain.com/langsmith/custom-endpoint)
 
 If everything is set up correctly, you should see the model's response in the Playground as well as the configurable fields specified in the `with_configurable_fields`.
 
-For more information, see [how to store your model configuration for later use](/langsmith/managing-model-configurations).
+For more information, see [how to store your model configuration for later use](https://docs.langchain.com/langsmith/managing-model-configurations).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

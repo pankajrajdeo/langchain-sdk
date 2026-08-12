@@ -1,27 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Modal integrations
 
 > Integrate with Modal using LangChain Python.
 
 [Modal](https://modal.com) provides serverless container infrastructure with GPU support. See the [Modal docs](https://modal.com/docs) for signup, authentication, and platform details.
 
-<Columns cols={2}>
-  <Card title="ModalSandbox" href="/oss/python/integrations/sandboxes/modal" cta="Get started" icon="terminal" arrow>
-    Modal sandbox backend for deepagents.
-  </Card>
-</Columns>
+#### [ModalSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/modal)
+Modal sandbox backend for deepagents.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/modal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/modal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Exa search integration
 
 > Integrate with the Exa search tool using LangChain Python.
@@ -18,7 +14,7 @@ This notebook goes over how to use Exa Search with LangChain.
 
 Install the LangChain Exa integration package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-exa
 
 # and some deps for this notebook
@@ -29,7 +25,7 @@ pip install -qU langchain langchain-openai
 
 You'll need an Exa API key to use this integration. Get \$10 free credit (plus more by completing certain actions like making your first search) by [signing up here](https://dashboard.exa.ai/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -41,7 +37,7 @@ if not os.environ.get("EXA_API_KEY"):
 
 ExaSearchResults is a tool that can be used with LangChain agents to perform Exa searches. It provides a more structured interface for search operations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchResults
 
 # Initialize the ExaSearchResults tool
@@ -62,7 +58,7 @@ print("Search Results:", search_results)
 
 You can use advanced search options like controlling search type, live crawling, and content filtering:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Perform a search query with advanced options
 search_results = search_tool._run(
     query="Latest AI research papers",
@@ -81,7 +77,7 @@ print(search_results)
 
 ExaFindSimilarResults allows you to find webpages similar to a given URL. This is useful for finding related content or competitive analysis:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaFindSimilarResults
 
 # Initialize the ExaFindSimilarResults tool
@@ -101,7 +97,7 @@ We can use the ExaSearchResults and ExaFindSimilarResults tools with a LangGraph
 
 First, let's set up the language model. You'll need to provide your OpenAI API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 
 if not os.environ.get("OPENAI_API_KEY"):
@@ -110,15 +106,14 @@ if not os.environ.get("OPENAI_API_KEY"):
 
 We will need to install langgraph:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langgraph
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.chat_models import init_chat_model
 from langchain_exa import ExaFindSimilarResults, ExaSearchResults
 from langchain.agents import create_agent
-
 
 # Initialize the language model
 model = init_chat_model(model="gpt-5.5", model_provider="openai", temperature=0)
@@ -149,15 +144,14 @@ for snapshot in stream.values:
 
 ExaSearchRetriever is a retriever that uses Exa Search to retrieve relevant documents.
 
-<Note>
-  **The `max_characters` parameter for **TextContentsOptions** used to be called `max_length` which is now deprecated. Make sure to use `max_characters` instead.**
-</Note>
+> [!NOTE]
+> **The `max_characters` parameter for **TextContentsOptions** used to be called `max_length` which is now deprecated. Make sure to use `max_characters` instead.**
 
 ### Basic usage
 
 Here's a simple example of using ExaSearchRetriever:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchRetriever
 
 # Create a new instance of the ExaSearchRetriever
@@ -174,7 +168,7 @@ print(results)
 
 You can use advanced features like controlling the number of results, search type, live crawling, summaries, and text content options:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchRetriever
 
 # Create a new instance with advanced options
@@ -206,12 +200,8 @@ For detailed documentation of all Exa API features and configurations, visit the
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

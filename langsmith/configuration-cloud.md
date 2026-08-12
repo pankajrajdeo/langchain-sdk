@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage assistants
-
-This page describes how to create, configure, and manage [assistants](/langsmith/assistants). Assistants allow you to customize your [deployed](/langsmith/deployment) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configuration-cloud)
+This page describes how to create, configure, and manage [assistants](https://docs.langchain.com/langsmith/assistants). Assistants allow you to customize your [deployed](https://docs.langchain.com/langsmith/deployment) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
 
 You can work with the [SDK](https://reference.langchain.com/python/langsmith/deployment/sdk/) or in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud).
 
@@ -14,425 +10,399 @@ Assistants store *context* values that customize graph behavior at runtime. You 
 
 Consider this example of a `call_model` node that reads the `model_name` from the context:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  class ContextSchema(TypedDict):
-      model_name: str
+```python
+class ContextSchema(TypedDict):
+    model_name: str
 
-  builder = StateGraph(AgentState, context_schema=ContextSchema)
+builder = StateGraph(AgentState, context_schema=ContextSchema)
 
-  def call_model(state, runtime: Runtime[ContextSchema]):
-      messages = state["messages"]
-      model = _get_model(runtime.context.get("model_name", "anthropic"))
-      response = model.invoke(messages)
-      return {"messages": [response]}
-  ```
+def call_model(state, runtime: Runtime[ContextSchema]):
+    messages = state["messages"]
+    model = _get_model(runtime.context.get("model_name", "anthropic"))
+    response = model.invoke(messages)
+    return {"messages": [response]}
+```
 
-  ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { Annotation } from "@langchain/langgraph";
+```javascript
+import { Annotation } from "@langchain/langgraph";
 
-  const ContextSchema = Annotation.Root({
-      model_name: Annotation<string>,
-      system_prompt: Annotation<string>,
-  });
+const ContextSchema = Annotation.Root({
+    model_name: Annotation<string>,
+    system_prompt: Annotation<string>,
+});
 
-  const builder = new StateGraph(AgentState, ContextSchema)
+const builder = new StateGraph(AgentState, ContextSchema)
 
-  function callModel(state: State, runtime: Runtime[ContextSchema]) {
-    const messages = state.messages;
-    const model = _getModel(runtime.context.model_name ?? "anthropic");
-    const response = model.invoke(messages);
-    return { messages: [response] };
-  }
-  ```
-</CodeGroup>
+function callModel(state: State, runtime: Runtime[ContextSchema]) {
+  const messages = state.messages;
+  const model = _getModel(runtime.context.model_name ?? "anthropic");
+  const response = model.invoke(messages);
+  return { messages: [response] };
+}
+```
 
 When you create an assistant, you provide specific values for these configuration fields. The assistant stores this configuration and applies it whenever the graph runs.
 
-For more information on configuration in [LangGraph](/oss/python/langgraph/overview), refer to the [runtime context documentation](/oss/python/langgraph/graph-api#runtime-context).
+For more information on configuration in [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), refer to the [runtime context documentation](https://docs.langchain.com/oss/python/langgraph/graph-api#runtime-context).
 
 **Select SDK or UI for your workflow:**
 
-<Tabs>
-  <Tab title="SDK">
-    ## Create an assistant
+#### SDK
+## Create an assistant
 
-    Use the [`assistants.create`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.create) method to create a new assistant. This method requires:
+Use the [`assistants.create`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.create) method to create a new assistant. This method requires:
 
-    * **Graph ID**: The name of the deployed graph this assistant will use (e.g., `"agent"`).
-    * **Context**: Configuration values matching your graph's context schema.
-    * **Name**: A descriptive name for the assistant.
+* **Graph ID**: The name of the deployed graph this assistant will use (e.g., `"agent"`).
+* **Context**: Configuration values matching your graph's context schema.
+* **Name**: A descriptive name for the assistant.
 
-    The following example creates an assistant with `model_name` set to `openai`:
+The following example creates an assistant with `model_name` set to `openai`:
 
-    <CodeGroup>
-      ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langgraph_sdk import get_client
+```python
+from langgraph_sdk import get_client
 
-      # Initialize the client with your deployment URL
-      client = get_client(url=<DEPLOYMENT_URL>)
+# Initialize the client with your deployment URL
+client = get_client(url=<DEPLOYMENT_URL>)
 
-      # Create an assistant for the "agent" graph
-      # The first parameter is the graph ID (also called graph name)
-      openai_assistant = await client.assistants.create(
-          "agent",  # Graph ID of the deployed graph
-          context={"model_name": "openai"},
-          name="Open AI Assistant"
-      )
+# Create an assistant for the "agent" graph
+# The first parameter is the graph ID (also called graph name)
+openai_assistant = await client.assistants.create(
+    "agent",  # Graph ID of the deployed graph
+    context={"model_name": "openai"},
+    name="Open AI Assistant"
+)
 
-      print(openai_assistant)
-      # Output includes the assistant_id (UUID) that uniquely identifies this assistant
-      ```
+print(openai_assistant)
+# Output includes the assistant_id (UUID) that uniquely identifies this assistant
+```
 
-      ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import { Client } from "@langchain/langgraph-sdk";
+```javascript
+import { Client } from "@langchain/langgraph-sdk";
 
-      // Initialize the client with your deployment URL
-      const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+// Initialize the client with your deployment URL
+const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
 
-      // Create an assistant for the "agent" graph
-      const openAIAssistant = await client.assistants.create({
-          graphId: 'agent',  // Graph ID of the deployed graph
-          name: "Open AI Assistant",
-          context: { "model_name": "openai" },
-      });
+// Create an assistant for the "agent" graph
+const openAIAssistant = await client.assistants.create({
+    graphId: 'agent',  // Graph ID of the deployed graph
+    name: "Open AI Assistant",
+    context: { "model_name": "openai" },
+});
 
-      console.log(openAIAssistant);
-      // Output includes the assistant_id (UUID) that uniquely identifies this assistant
-      ```
+console.log(openAIAssistant);
+// Output includes the assistant_id (UUID) that uniquely identifies this assistant
+```
 
-      ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      curl --request POST \
-          --url <DEPLOYMENT_URL>/assistants \
-          --header 'Content-Type: application/json' \
-          --data '{"graph_id":"agent", "context":{"model_name":"openai"}, "name": "Open AI Assistant"}'
-      ```
-    </CodeGroup>
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/assistants \
+    --header 'Content-Type: application/json' \
+    --data '{"graph_id":"agent", "context":{"model_name":"openai"}, "name": "Open AI Assistant"}'
+```
 
-    **Response:**
+**Response:**
 
-    The API returns an assistant object containing:
+The API returns an assistant object containing:
 
-    * `assistant_id`: A UUID that uniquely identifies this assistant
-    * `graph_id`: The graph this assistant is configured for
-    * `context`: The configuration values you provided
-    * `name`, `metadata`, timestamps, and other fields
+* `assistant_id`: A UUID that uniquely identifies this assistant
+* `graph_id`: The graph this assistant is configured for
+* `context`: The configuration values you provided
+* `name`, `metadata`, timestamps, and other fields
 
-    ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    {
-      "assistant_id": "62e209ca-9154-432a-b9e9-2d75c7a9219b",
-      "graph_id": "agent",
-      "name": "Open AI Assistant",
-      "context": {
-        "model_name": "openai"
-      },
-      "metadata": {},
-      "created_at": "2024-08-31T03:09:10.230718+00:00",
-      "updated_at": "2024-08-31T03:09:10.230718+00:00"
-    }
-    ```
+```json
+{
+  "assistant_id": "62e209ca-9154-432a-b9e9-2d75c7a9219b",
+  "graph_id": "agent",
+  "name": "Open AI Assistant",
+  "context": {
+    "model_name": "openai"
+  },
+  "metadata": {},
+  "created_at": "2024-08-31T03:09:10.230718+00:00",
+  "updated_at": "2024-08-31T03:09:10.230718+00:00"
+}
+```
 
-    The `assistant_id` (a UUID like `"62e209ca-9154-432a-b9e9-2d75c7a9219b"`) uniquely identifies this assistant configuration. You'll use this ID when running your graph to specify which configuration to apply.
+The `assistant_id` (a UUID like `"62e209ca-9154-432a-b9e9-2d75c7a9219b"`) uniquely identifies this assistant configuration. You'll use this ID when running your graph to specify which configuration to apply.
 
-    <Note>
-      **Graph ID vs Assistant ID**
+> [!NOTE]
+> **Graph ID vs Assistant ID**
+>
+> When creating an assistant, you specify a **graph ID** (graph name like `"agent"`). This returns an **assistant ID** (UUID like `"62e209ca..."`). You can use either when running your graph:
+>
+> * **Graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
+> * **Assistant ID** (UUID): Uses the specific assistant configuration
+>
+> See [Use an assistant](https://docs.langchain.com/langsmith/configuration-cloud#use-an-assistant) for examples.
 
-      When creating an assistant, you specify a **graph ID** (graph name like `"agent"`). This returns an **assistant ID** (UUID like `"62e209ca..."`). You can use either when running your graph:
+## Use an assistant
 
-      * **Graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
-      * **Assistant ID** (UUID): Uses the specific assistant configuration
+To use an assistant, pass its `assistant_id` when creating a run. The example below uses the assistant we created above:
 
-      See [Use an assistant](#use-an-assistant) for examples.
-    </Note>
+```python
+# Create a thread for the conversation
+thread = await client.threads.create()
 
-    ## Use an assistant
+# Prepare the input
+input = {"messages": [{"role": "user", "content": "who made you?"}]}
 
-    To use an assistant, pass its `assistant_id` when creating a run. The example below uses the assistant we created above:
+# Run the graph using the assistant's configuration
+# Pass the assistant_id (UUID) as the second parameter
+async for event in client.runs.stream(
+    thread["thread_id"],
+    openai_assistant["assistant_id"],  # Assistant ID (UUID)
+    input=input,
+    stream_mode="updates",
+):
+    print(f"Receiving event of type: {event.event}")
+    print(event.data)
+    print("\n\n")
+```
 
-    <CodeGroup>
-      ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      # Create a thread for the conversation
-      thread = await client.threads.create()
+```javascript
+// Create a thread for the conversation
+const thread = await client.threads.create();
 
-      # Prepare the input
-      input = {"messages": [{"role": "user", "content": "who made you?"}]}
+// Prepare the input
+const input = { "messages": [{ "role": "user", "content": "who made you?" }] };
 
-      # Run the graph using the assistant's configuration
-      # Pass the assistant_id (UUID) as the second parameter
-      async for event in client.runs.stream(
-          thread["thread_id"],
-          openai_assistant["assistant_id"],  # Assistant ID (UUID)
-          input=input,
-          stream_mode="updates",
-      ):
-          print(f"Receiving event of type: {event.event}")
-          print(event.data)
-          print("\n\n")
-      ```
+// Run the graph using the assistant's configuration
+// Pass the assistant_id (UUID) as the second parameter
+const streamResponse = client.runs.stream(
+  thread["thread_id"],
+  openAIAssistant["assistant_id"],  // Assistant ID (UUID)
+  {
+    input,
+    streamMode: "updates"
+  }
+);
 
-      ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      // Create a thread for the conversation
-      const thread = await client.threads.create();
+for await (const event of streamResponse) {
+  console.log(`Receiving event of type: ${event.event}`);
+  console.log(event.data);
+  console.log("\n\n");
+}
+```
 
-      // Prepare the input
-      const input = { "messages": [{ "role": "user", "content": "who made you?" }] };
+```bash
+# First, create a thread
+thread_id=$(curl --request POST \
+    --url <DEPLOYMENT_URL>/threads \
+    --header 'Content-Type: application/json' \
+    --data '{}' | jq -r '.thread_id')
 
-      // Run the graph using the assistant's configuration
-      // Pass the assistant_id (UUID) as the second parameter
-      const streamResponse = client.runs.stream(
-        thread["thread_id"],
-        openAIAssistant["assistant_id"],  // Assistant ID (UUID)
-        {
-          input,
-          streamMode: "updates"
+# Run the graph with the assistant ID (UUID)
+curl --request POST \
+    --url "<DEPLOYMENT_URL>/threads/${thread_id}/runs/stream" \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "assistant_id": "<ASSISTANT_ID>",
+        "input": {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "who made you?"
+                }
+            ]
+        },
+        "stream_mode": ["updates"]
+    }' | \
+    sed 's/\r$//' | \
+    awk '
+    /^event:/ {
+        if (data_content != "") {
+            print data_content "\n"
         }
-      );
+        sub(/^event: /, "Receiving event of type: ", $0)
+        printf "%s...\n", $0
+        data_content = ""
+    }
+    /^data:/ {
+        sub(/^data: /, "", $0)
+        data_content = $0
+    }
+    END {
+        if (data_content != "") {
+            print data_content "\n\n"
+        }
+    }
+'
+```
 
-      for await (const event of streamResponse) {
-        console.log(`Receiving event of type: ${event.event}`);
-        console.log(event.data);
-        console.log("\n\n");
-      }
-      ```
+**Response:**
 
-      ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      # First, create a thread
-      thread_id=$(curl --request POST \
-          --url <DEPLOYMENT_URL>/threads \
-          --header 'Content-Type: application/json' \
-          --data '{}' | jq -r '.thread_id')
+The stream returns events as the graph executes with your assistant's configuration:
 
-      # Run the graph with the assistant ID (UUID)
-      curl --request POST \
-          --url "<DEPLOYMENT_URL>/threads/${thread_id}/runs/stream" \
-          --header 'Content-Type: application/json' \
-          --data '{
-              "assistant_id": "<ASSISTANT_ID>",
-              "input": {
-                  "messages": [
-                      {
-                          "role": "user",
-                          "content": "who made you?"
-                      }
-                  ]
-              },
-              "stream_mode": ["updates"]
-          }' | \
-          sed 's/\r$//' | \
-          awk '
-          /^event:/ {
-              if (data_content != "") {
-                  print data_content "\n"
-              }
-              sub(/^event: /, "Receiving event of type: ", $0)
-              printf "%s...\n", $0
-              data_content = ""
-          }
-          /^data:/ {
-              sub(/^data: /, "", $0)
-              data_content = $0
-          }
-          END {
-              if (data_content != "") {
-                  print data_content "\n\n"
-              }
-          }
-      '
-      ```
-    </CodeGroup>
+```
+Receiving event of type: metadata
+{'run_id': '1ef6746e-5893-67b1-978a-0f1cd4060e16'}
 
-    **Response:**
+Receiving event of type: updates
+{'agent': {'messages': [{'content': 'I was created by OpenAI...', ...}]}}
+```
 
-    The stream returns events as the graph executes with your assistant's configuration:
+> [!NOTE]
+> **Using graph ID vs assistant ID**
+>
+> You can pass either a **graph ID** or **assistant ID** when running your graph:
+>
+> ```python
+> # Option 1: Use graph ID to get the default assistant
+> client.runs.stream(thread_id, "agent", input=input)
+>
+> # Option 2: Use assistant ID (UUID) for a specific configuration
+> client.runs.stream(thread_id, "62e209ca-9154-432a-b9e9-2d75c7a9219b", input=input)
+> ```
 
-    ```
-    Receiving event of type: metadata
-    {'run_id': '1ef6746e-5893-67b1-978a-0f1cd4060e16'}
+## Create a new version for your assistant
 
-    Receiving event of type: updates
-    {'agent': {'messages': [{'content': 'I was created by OpenAI...', ...}]}}
-    ```
+Use the [`assistants.update`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.update) method to create a new version of an assistant.
 
-    <Note>
-      **Using graph ID vs assistant ID**
+> [!WARNING]
+> **Updates require full configuration**
+>
+> You must provide the **entire** configuration when updating. The update endpoint creates new versions from scratch and does not merge with previous versions. Include all configuration fields you want to retain.
 
-      You can pass either a **graph ID** or **assistant ID** when running your graph:
+For example, to add a system prompt to the assistant:
 
-      ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      # Option 1: Use graph ID to get the default assistant
-      client.runs.stream(thread_id, "agent", input=input)
+```python
+# Update the assistant with a new configuration
+# IMPORTANT: Include ALL configuration fields, not just the ones you're changing
+openai_assistant_v2 = await client.assistants.update(
+    openai_assistant["assistant_id"],  # Assistant ID (UUID)
+    context={
+          "model_name": "openai",  # Must include existing fields
+          "system_prompt": "You are a mindful assistant!",  # New field
+    },
+)
 
-      # Option 2: Use assistant ID (UUID) for a specific configuration
-      client.runs.stream(thread_id, "62e209ca-9154-432a-b9e9-2d75c7a9219b", input=input)
-      ```
-    </Note>
+# This creates version 2 and sets it as the active version
+# Future runs using this assistant_id will use version 2
+```
 
-    ## Create a new version for your assistant
+```javascript
+// Update the assistant with a new configuration
+// IMPORTANT: Include ALL configuration fields, not just the ones you're changing
+const openaiAssistantV2 = await client.assistants.update(
+    openAIAssistant["assistant_id"],  // Assistant ID (UUID)
+    {
+        context: {
+            model_name: 'openai',  // Must include existing fields
+            system_prompt: 'You are a mindful assistant!',  // New field
+        },
+    },
+);
 
-    Use the [`assistants.update`](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.AssistantsClient.update) method to create a new version of an assistant.
+// This creates version 2 and sets it as the active version
+// Future runs using this assistant_id will use version 2
+```
 
-    <Warning>
-      **Updates require full configuration**
+```bash
+curl --request PATCH \
+--url <DEPLOYMENT_URL>/assistants/<ASSISTANT_ID> \
+--header 'Content-Type: application/json' \
+--data '{
+"context": {"model_name": "openai", "system_prompt": "You are a mindful assistant!"}
+}'
+```
 
-      You must provide the **entire** configuration when updating. The update endpoint creates new versions from scratch and does not merge with previous versions. Include all configuration fields you want to retain.
-    </Warning>
+The update creates a new version and automatically sets it as active. All future runs using this assistant ID will use the new configuration.
 
-    For example, to add a system prompt to the assistant:
+## Use a previous assistant version
 
-    <CodeGroup>
-      ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      # Update the assistant with a new configuration
-      # IMPORTANT: Include ALL configuration fields, not just the ones you're changing
-      openai_assistant_v2 = await client.assistants.update(
-          openai_assistant["assistant_id"],  # Assistant ID (UUID)
-          context={
-                "model_name": "openai",  # Must include existing fields
-                "system_prompt": "You are a mindful assistant!",  # New field
-          },
-      )
+Use the `setLatest` method to change which version is active:
 
-      # This creates version 2 and sets it as the active version
-      # Future runs using this assistant_id will use version 2
-      ```
+```python
+# Roll back to version 1 of the assistant
+await client.assistants.set_latest(
+    openai_assistant['assistant_id'],  # Assistant ID (UUID)
+    1  # Version number
+)
 
-      ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      // Update the assistant with a new configuration
-      // IMPORTANT: Include ALL configuration fields, not just the ones you're changing
-      const openaiAssistantV2 = await client.assistants.update(
-          openAIAssistant["assistant_id"],  // Assistant ID (UUID)
-          {
-              context: {
-                  model_name: 'openai',  // Must include existing fields
-                  system_prompt: 'You are a mindful assistant!',  // New field
-              },
-          },
-      );
+# All future runs using this assistant_id will now use version 1
+```
 
-      // This creates version 2 and sets it as the active version
-      // Future runs using this assistant_id will use version 2
-      ```
+```javascript
+// Roll back to version 1 of the assistant
+await client.assistants.setLatest(
+    openaiAssistant['assistant_id'],  // Assistant ID (UUID)
+    1  // Version number
+);
 
-      ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      curl --request PATCH \
-      --url <DEPLOYMENT_URL>/assistants/<ASSISTANT_ID> \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "context": {"model_name": "openai", "system_prompt": "You are a mindful assistant!"}
-      }'
-      ```
-    </CodeGroup>
+// All future runs using this assistant_id will now use version 1
+```
 
-    The update creates a new version and automatically sets it as active. All future runs using this assistant ID will use the new configuration.
+```bash
+curl --request POST \
+--url <DEPLOYMENT_URL>/assistants/<ASSISTANT_ID>/latest \
+--header 'Content-Type: application/json' \
+--data '{
+"version": 1
+}'
+```
 
-    ## Use a previous assistant version
+After changing the active version, all runs using this assistant ID will use the specified version's configuration.
 
-    Use the `setLatest` method to change which version is active:
+#### UI
+## Create an assistant
 
-    <CodeGroup>
-      ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      # Roll back to version 1 of the assistant
-      await client.assistants.set_latest(
-          openai_assistant['assistant_id'],  # Assistant ID (UUID)
-          1  # Version number
-      )
+You can create assistants from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud):
 
-      # All future runs using this assistant_id will now use version 1
-      ```
+1. Navigate to your deployment and select the **Assistants** tab.
+2. Click **+ New assistant**.
+3. In the form that opens:
+   * Select the graph this assistant is for.
+   * Provide a name and description.
+   * Configure the assistant using the configuration schema for that graph.
+4. Click **Create assistant**.
 
-      ```javascript JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      // Roll back to version 1 of the assistant
-      await client.assistants.setLatest(
-          openaiAssistant['assistant_id'],  // Assistant ID (UUID)
-          1  // Version number
-      );
+This will take you to [Studio](https://docs.langchain.com/langsmith/studio) where you can test the assistant. Return to the **Assistants** tab to see your newly created assistant in the table.
 
-      // All future runs using this assistant_id will now use version 1
-      ```
+## Use an assistant
 
-      ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      curl --request POST \
-      --url <DEPLOYMENT_URL>/assistants/<ASSISTANT_ID>/latest \
-      --header 'Content-Type: application/json' \
-      --data '{
-      "version": 1
-      }'
-      ```
-    </CodeGroup>
+To use an assistant in the LangSmith UI:
 
-    After changing the active version, all runs using this assistant ID will use the specified version's configuration.
-  </Tab>
+1. Navigate to your deployment and select the **Assistants** tab.
+2. Find the assistant you want to use.
+3. Click **Studio** for that assistant.
 
-  <Tab title="UI">
-    ## Create an assistant
+This opens [Studio](https://docs.langchain.com/langsmith/studio) with the selected assistant. When you submit an input (in **Graph** or **Chat** mode), the assistant's configuration will be applied to the run.
 
-    You can create assistants from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud):
+## Create a new version for your assistant
 
-    1. Navigate to your deployment and select the **Assistants** tab.
-    2. Click **+ New assistant**.
-    3. In the form that opens:
-       * Select the graph this assistant is for.
-       * Provide a name and description.
-       * Configure the assistant using the configuration schema for that graph.
-    4. Click **Create assistant**.
+To update an assistant and create a new version from the UI, you can use either the Assistants tab or Studio. Either method creates a new version and sets it as the active version:
 
-    This will take you to [Studio](/langsmith/studio) where you can test the assistant. Return to the **Assistants** tab to see your newly created assistant in the table.
+#### Assistants tab
+1. Navigate to your deployment and select the **Assistants** tab.
+2. Find the assistant you want to edit.
+3. Click **Edit**.
+4. Modify the assistant's name, description, or configuration.
+5. Save your changes.
 
-    ## Use an assistant
+#### Studio
+1. Open Studio for the assistant.
+2. Click **Manage Assistants**.
+3. Edit the assistant's configuration.
+4. Save your changes.
 
-    To use an assistant in the LangSmith UI:
+## Use a previous assistant version
 
-    1. Navigate to your deployment and select the **Assistants** tab.
-    2. Find the assistant you want to use.
-    3. Click **Studio** for that assistant.
+To set a previous version as active from Studio:
 
-    This opens [Studio](/langsmith/studio) with the selected assistant. When you submit an input (in **Graph** or **Chat** mode), the assistant's configuration will be applied to the run.
+1. Open Studio for the assistant.
+2. Click **Manage Assistants**.
+3. Locate the assistant and select the version you want to use.
+4. Toggle the **Active** switch for that version.
 
-    ## Create a new version for your assistant
+This updates the assistant to use the selected version for all future runs.
 
-    To update an assistant and create a new version from the UI, you can use either the Assistants tab or Studio. Either method creates a new version and sets it as the active version:
-
-    <Tabs>
-      <Tab title="Assistants tab">
-        1. Navigate to your deployment and select the **Assistants** tab.
-        2. Find the assistant you want to edit.
-        3. Click **Edit**.
-        4. Modify the assistant's name, description, or configuration.
-        5. Save your changes.
-      </Tab>
-
-      <Tab title="Studio">
-        1. Open Studio for the assistant.
-        2. Click **Manage Assistants**.
-        3. Edit the assistant's configuration.
-        4. Save your changes.
-      </Tab>
-    </Tabs>
-
-    ## Use a previous assistant version
-
-    To set a previous version as active from Studio:
-
-    1. Open Studio for the assistant.
-    2. Click **Manage Assistants**.
-    3. Locate the assistant and select the version you want to use.
-    4. Toggle the **Active** switch for that version.
-
-    This updates the assistant to use the selected version for all future runs.
-
-    <Warning>
-      Deleting an assistant will delete **all** of its versions. There is currently no way to delete a single version. To skip a version, simply set a different version as active.
-    </Warning>
-  </Tab>
-</Tabs>
+> [!WARNING]
+> Deleting an assistant will delete **all** of its versions. There is currently no way to delete a single version. To skip a version, simply set a different version as active.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configuration-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configuration-cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

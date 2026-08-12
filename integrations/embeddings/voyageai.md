@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Voyage AI integration
 
 > Integrate with the Voyage AI embedding model using LangChain Python.
@@ -10,7 +6,7 @@
 
 Let's load the Voyage AI Embedding class. (Install the LangChain partner package with `pip install langchain-voyageai`)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_voyageai import VoyageAIEmbeddings
 ```
 
@@ -34,7 +30,7 @@ Voyage AI utilizes API keys to monitor usage and manage permissions. To obtain y
 * `voyage-finance-2`
 * `voyage-multilingual-2`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = VoyageAIEmbeddings(
     voyage_api_key="[ Your Voyage API key ]", model="voyage-law-2"
 )
@@ -42,7 +38,7 @@ embeddings = VoyageAIEmbeddings(
 
 Prepare the documents and use `embed_documents` to get their embeddings.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents = [
     "Caching embeddings enables the storage or temporary caching of embeddings, eliminating the necessity to recompute them each time.",
     "An LLMChain is a chain that composes basic LLM functionality. It consists of a PromptTemplate and a language model (either an LLM or chat model). It formats the prompt template using the input key values provided (and also memory key values, if available), passes the formatted string to LLM and returns the LLM output.",
@@ -50,15 +46,15 @@ documents = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents_embds = embeddings.embed_documents(documents)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents_embds[0][:5]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [0.0562174916267395,
  0.018221192061901093,
  0.0025736060924828053,
@@ -68,19 +64,19 @@ documents_embds[0][:5]
 
 Similarly, use `embed_query` to embed the query.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What's an LLMChain?"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_embd = embeddings.embed_query(query)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_embd[:5]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.0052348352037370205,
  -0.040072452276945114,
  0.0033957737032324076,
@@ -94,11 +90,10 @@ The main feature of the embeddings is that the cosine similarity between two emb
 
 We can find a few closest embeddings in the documents embeddings based on the cosine similarity, and retrieve the corresponding document using the `KNNRetriever` class from LangChain.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.retrievers import KNNRetriever
 
 retriever = KNNRetriever.from_texts(documents, embeddings)
@@ -110,18 +105,14 @@ top1_retrieved_doc = result[0].page_content  # return the top1 retrieved result
 print(top1_retrieved_doc)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 An LLMChain is a chain that composes basic LLM functionality. It consists of a PromptTemplate and a language model (either an LLM or chat model). It formats the prompt template using the input key values provided (and also memory key values, if available), passes the formatted string to LLM and returns the LLM output.
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/voyageai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Command reference
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/cli-reference)
+OpenWiki command-line usage, flags, and connector subcommands
 
-> OpenWiki command-line usage, flags, and connector subcommands
-
-OpenWiki ships as a single `openwiki` binary for interactive chat and one-shot documentation runs. For installation and first use, see [Quickstart](/oss/openwiki/quickstart).
+OpenWiki ships as a single `openwiki` binary for interactive chat and one-shot documentation runs. For installation and first use, see [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart).
 
 ## Core commands
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Interactive chat in code mode (current repository)
 openwiki
 openwiki "Please generate documentation for this repository"
@@ -56,17 +52,17 @@ openwiki --help
 
 You can visualize the generated wiki as an interactive node graph and live Markdown reader.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki visualize
 openwiki visualize openwiki --port 4400 --no-open
 openwiki visualize ~/.openwiki/wiki
 ```
 
-For details, see [Visualize your wiki](/oss/openwiki/visualize).
+For details, see [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize).
 
 ## Auth and connectors
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # List supported auth providers and status
 openwiki auth
 
@@ -91,9 +87,9 @@ openwiki ngrok start [url] [--port <port>]
 
 ## Cron (macOS)
 
-Manage optional connector schedules for [personal mode](/oss/openwiki/personal-mode) sources. On macOS, OpenWiki can install schedules as user LaunchAgents that periodically refresh a source (for example Gmail or web search). Use these commands to list, pause, resume, or delete them:
+Manage optional connector schedules for [personal mode](https://docs.langchain.com/oss/openwiki/personal-mode) sources. On macOS, OpenWiki can install schedules as user LaunchAgents that periodically refresh a source (for example Gmail or web search). Use these commands to list, pause, resume, or delete them:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki cron list
 openwiki cron pause <source|all>
 openwiki cron resume <source|all>
@@ -114,18 +110,14 @@ In interactive chat mode, you can use the following commands:
 
 ## See also
 
-* [Personal mode](/oss/openwiki/personal-mode)
-* [Model providers](/oss/openwiki/providers)
-* [Automate updates](/oss/openwiki/automate-updates)
+* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
+* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
+* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/cli-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/cli-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

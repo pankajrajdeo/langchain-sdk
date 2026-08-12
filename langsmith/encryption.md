@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add encryption at rest
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/encryption)
 Agent Server supports encryption at rest for checkpoint data and metadata. You can choose between basic encryption with a single key or custom encryption for advanced use cases.
 
 ## Choosing an encryption method
@@ -18,14 +14,14 @@ Agent Server supports encryption at rest for checkpoint data and metadata. You c
 For simple encryption with a single static key, set the `LANGGRAPH_AES_KEY` environment variable. LangGraph will automatically encrypt checkpoint blobs using AES.
 
 1. Add `pycryptodome` to your dependencies in `langgraph.json`:
-   ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
    {
      "dependencies": [".", "pycryptodome"],
      "graphs": {
        "agent": "./agent.py:graph"
      }
    }
-   ```
+```
 
 2. Set the `LANGGRAPH_AES_KEY` environment variable to a 16, 24, or 32-byte key (for AES-128, AES-192, or AES-256 respectively).
 
@@ -33,32 +29,28 @@ For simple encryption with a single static key, set the `LANGGRAPH_AES_KEY` envi
 
 To also encrypt specific JSON fields, set `LANGGRAPH_AES_JSON_KEYS` to a comma-separated list of keys to encrypt:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGGRAPH_AES_KEY="your-16-24-or-32-byte-key"
 export LANGGRAPH_AES_JSON_KEYS="api_key,secret_token,user_credentials"
 ```
 
 These keys are encrypted wherever they appear in thread, assistant, run, cron, and store data.
 
-<Warning>
-  Encrypted fields cannot be searched or filtered.
-</Warning>
+> [!WARNING]
+> Encrypted fields cannot be searched or filtered.
 
 System fields cannot be encrypted: `langgraph_version`, `langgraph_api_version`, `langgraph_plan`, `langgraph_host`, `langgraph_api_url`, `langgraph_request_id`, `langgraph_auth_user_id`, and `langgraph_auth_permissions`.
 
 ## Custom encryption
 
-<Note>
-  Requires Agent Server version 0.6.22+ and Python SDK version `langgraph-sdk>=0.3.1`.
-</Note>
+> [!NOTE]
+> Requires Agent Server version 0.6.22+ and Python SDK version `langgraph-sdk>=0.3.1`.
 
-<Warning>
-  Agent Server versions 0.5.34–0.6.21 included a pre-release version of custom encryption. Data encrypted with these versions will be corrupted when upgrading to 0.6.22+. Do not use custom encryption on these versions.
-</Warning>
+> [!WARNING]
+> Agent Server versions 0.5.34–0.6.21 included a pre-release version of custom encryption. Data encrypted with these versions will be corrupted when upgrading to 0.6.22+. Do not use custom encryption on these versions.
 
-<Warning>
-  Only use custom encryption if basic encryption doesn't meet your needs. Custom encryption requires you to implement and maintain encryption handlers, and adds operational complexity. If you only need a single static key with optional selective field encryption, use [basic encryption](#basic-encryption) instead.
-</Warning>
+> [!WARNING]
+> Only use custom encryption if basic encryption doesn't meet your needs. Custom encryption requires you to implement and maintain encryption handlers, and adds operational complexity. If you only need a single static key with optional selective field encryption, use [basic encryption](https://docs.langchain.com/langsmith/encryption#basic-encryption) instead.
 
 Use custom encryption when you need:
 
@@ -67,18 +59,18 @@ Use custom encryption when you need:
 
 ### How it works
 
-1. [Configure](#configuration) the encryption module path in `langgraph.json`
-2. [Define your encryption module](#defining-your-encryption-module) with handlers for blob and JSON encryption
-3. [Pass encryption context](#passing-encryption-context) (like tenant ID) via the `X-Encryption-Context` header
+1. [Configure](https://docs.langchain.com/langsmith/encryption#configuration) the encryption module path in `langgraph.json`
+2. [Define your encryption module](https://docs.langchain.com/langsmith/encryption#defining-your-encryption-module) with handlers for blob and JSON encryption
+3. [Pass encryption context](https://docs.langchain.com/langsmith/encryption#passing-encryption-context) (like tenant ID) via the `X-Encryption-Context` header
 4. LangGraph calls your handlers before storing and after retrieving data
 
-For production deployments with key rotation and audit logging, see [Envelope encryption with AWS Encryption SDK](#envelope-encryption-with-aws-encryption-sdk).
+For production deployments with key rotation and audit logging, see [Envelope encryption with AWS Encryption SDK](https://docs.langchain.com/langsmith/encryption#envelope-encryption-with-aws-encryption-sdk).
 
 ### Configuration
 
 Add your encryption module to `langgraph.json`:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -90,9 +82,8 @@ Add your encryption module to `langgraph.json`:
 }
 ```
 
-<Note>
-  If you're migrating from basic encryption, keep `LANGGRAPH_AES_KEY` configured. Custom encryption handles new writes while existing AES-encrypted data remains readable.
-</Note>
+> [!NOTE]
+> If you're migrating from basic encryption, keep `LANGGRAPH_AES_KEY` configured. Custom encryption handles new writes while existing AES-encrypted data remains readable.
 
 ### Defining your encryption module
 
@@ -100,7 +91,7 @@ Add your encryption module to `langgraph.json`:
 
 Blob handlers encrypt checkpoint data—the serialized state from graph execution. Here's a simplified example using per-tenant keys with [Fernet](https://cryptography.io/en/latest/fernet/) (a symmetric encryption scheme from the `cryptography` library):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from cryptography.fernet import Fernet
 from langgraph_sdk import Encryption, EncryptionContext
@@ -113,18 +104,15 @@ TENANT_KEYS = {
     "tenant-b": Fernet(os.environ["TENANT_B_KEY"]),
 }
 
-
 def _get_fernet(ctx: EncryptionContext) -> Fernet:
     tenant_id = ctx.metadata.get("tenant_id")
     if not tenant_id or tenant_id not in TENANT_KEYS:
         raise ValueError(f"Unknown tenant: {tenant_id}")
     return TENANT_KEYS[tenant_id]
 
-
 @encryption.encrypt.blob
 async def encrypt_blob(ctx: EncryptionContext, data: bytes) -> bytes:
     return _get_fernet(ctx).encrypt(data)
-
 
 @encryption.decrypt.blob
 async def decrypt_blob(ctx: EncryptionContext, data: bytes) -> bytes:
@@ -137,7 +125,7 @@ The `ctx.metadata` dict comes from the `X-Encryption-Context` header and is stor
 
 JSON handlers encrypt structured data like thread metadata, assistant context, and run kwargs. Unlike blob encryption, you choose which fields to encrypt—keeping some unencrypted for search and filtering.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 import os
 from cryptography.fernet import Fernet
@@ -160,13 +148,11 @@ SKIP_FIELDS = {
 }
 ENCRYPTED_PREFIX = "encrypted:"
 
-
 def _get_fernet(ctx: EncryptionContext) -> Fernet:
     tenant_id = ctx.metadata.get("tenant_id")
     if not tenant_id or tenant_id not in TENANT_KEYS:
         raise ValueError(f"Unknown tenant: {tenant_id}")
     return TENANT_KEYS[tenant_id]
-
 
 @encryption.encrypt.json
 async def encrypt_json(ctx: EncryptionContext, data: dict) -> dict:
@@ -180,7 +166,6 @@ async def encrypt_json(ctx: EncryptionContext, data: dict) -> dict:
             encrypted = fernet.encrypt(value_json.encode()).decode()
             result[k] = ENCRYPTED_PREFIX + encrypted
     return result
-
 
 @encryption.decrypt.json
 async def decrypt_json(ctx: EncryptionContext, data: dict) -> dict:
@@ -198,21 +183,17 @@ async def decrypt_json(ctx: EncryptionContext, data: dict) -> dict:
 
 #### JSON encryption considerations
 
-<Warning>
-  **Encrypted fields cannot be searched or filtered.** Design your metadata schema so that fields you need to query remain unencrypted.
-</Warning>
+> [!WARNING]
+> **Encrypted fields cannot be searched or filtered.** Design your metadata schema so that fields you need to query remain unencrypted.
 
-<Warning>
-  **JSON encryptors must preserve key structure.** SQL JSONB merge operations work at the key level. Encryptors that change keys—whether by consolidating fields (e.g., moving sensitive data into `__encrypted__`) or by encrypting key names themselves—cause data loss during merges. Use per-key encryption: transform values in-place while preserving keys.
-</Warning>
+> [!WARNING]
+> **JSON encryptors must preserve key structure.** SQL JSONB merge operations work at the key level. Encryptors that change keys—whether by consolidating fields (e.g., moving sensitive data into `__encrypted__`) or by encrypting key names themselves—cause data loss during merges. Use per-key encryption: transform values in-place while preserving keys.
 
-<Note>
-  **Migration consideration:** Use a recognizable prefix or format in encrypted values so your decryptor can detect and skip unencrypted data. This allows you to encrypt additional fields in the future without re-encrypting existing records. The example above uses this pattern.
-</Note>
+> [!NOTE]
+> **Migration consideration:** Use a recognizable prefix or format in encrypted values so your decryptor can detect and skip unencrypted data. This allows you to encrypt additional fields in the future without re-encrypting existing records. The example above uses this pattern.
 
-<Note>
-  **Performance consideration:** Per-key encryption means one encryption call per field. If your encryption involves round-trips to an external service (e.g., KMS), this can significantly impact latency. Consider caching data keys locally or using envelope encryption where you encrypt a local data key with KMS and use it for multiple fields.
-</Note>
+> [!NOTE]
+> **Performance consideration:** Per-key encryption means one encryption call per field. If your encryption involves round-trips to an external service (e.g., KMS), this can significantly impact latency. Consider caching data keys locally or using envelope encryption where you encrypt a local data key with KMS and use it for multiple fields.
 
 User-defined fields for authorization (e.g., `tenant_id`, `owner`) should generally be left **unencrypted**, as should fields used for search and filtering. Additionally, **some system-managed fields will never be encrypted**:
 
@@ -233,7 +214,7 @@ User-defined fields for authorization (e.g., `tenant_id`, `owner`) should genera
 * `cron.metadata`, `cron.payload`
 * `store.value`
 
-[Some fields are excluded from encryption.](#what-gets-encrypted) Unless otherwise noted, these exclusions apply at every level of a nested JSON object, not just the root level.
+[Some fields are excluded from encryption.](https://docs.langchain.com/langsmith/encryption#what-gets-encrypted) Unless otherwise noted, these exclusions apply at every level of a nested JSON object, not just the root level.
 
 **Blob handlers** (`@encryption.encrypt.blob` / `@encryption.decrypt.blob`) are applied to checkpoint blobs (graph execution state).
 
@@ -241,7 +222,7 @@ User-defined fields for authorization (e.g., `tenant_id`, `owner`) should genera
 
 Instead of passing `X-Encryption-Context` explicitly, derive encryption context from the authenticated user:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import Encryption, EncryptionContext
 from starlette.authentication import BaseUser
 
@@ -261,7 +242,7 @@ This handler runs once per request after authentication. The returned dict becom
 
 Pass encryption context via the `X-Encryption-Context` header. The context is arbitrary data that you define—you control the schema and can include any fields your encryption logic needs (e.g., `tenant_id`, `key_version`). The context is available in your handlers as `ctx.metadata` and is stored in plaintext for use during decryption.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 import json
 from langgraph_sdk import get_client
@@ -280,9 +261,8 @@ result = await client.runs.wait(
 )
 ```
 
-<Note>
-  The encryption context is stored in plaintext. On decryption, it's automatically restored—callers don't need to pass the header when reading.
-</Note>
+> [!NOTE]
+> The encryption context is stored in plaintext. On decryption, it's automatically restored—callers don't need to pass the header when reading.
 
 ### Envelope encryption with AWS Encryption SDK
 
@@ -295,7 +275,7 @@ For production deployments on AWS, use the [AWS Encryption SDK](https://docs.aws
 
 #### Complete example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 import json
 import os
@@ -335,7 +315,6 @@ SKIP_FIELDS = {
 }
 ENCRYPTED_PREFIX = "encrypted:"
 
-
 @encryption.encrypt.blob
 async def encrypt_blob(ctx: EncryptionContext, data: bytes) -> bytes:
     ciphertext, _ = client.encrypt(
@@ -345,12 +324,10 @@ async def encrypt_blob(ctx: EncryptionContext, data: bytes) -> bytes:
     )
     return ciphertext
 
-
 @encryption.decrypt.blob
 async def decrypt_blob(ctx: EncryptionContext, data: bytes) -> bytes:
     plaintext, _ = client.decrypt(source=data, key_provider=key_provider)
     return plaintext
-
 
 @encryption.encrypt.json
 async def encrypt_json(ctx: EncryptionContext, data: dict) -> dict:
@@ -367,7 +344,6 @@ async def encrypt_json(ctx: EncryptionContext, data: dict) -> dict:
             )
             result[k] = ENCRYPTED_PREFIX + base64.b64encode(ciphertext).decode()
     return result
-
 
 @encryption.decrypt.json
 async def decrypt_json(ctx: EncryptionContext, data: dict) -> dict:
@@ -390,16 +366,12 @@ KMS handles master key rotation automatically. When you enable automatic rotatio
 
 ## Related
 
-* [Custom authentication](/langsmith/custom-auth)
+* [Custom authentication](https://docs.langchain.com/langsmith/custom-auth)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/encryption.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/encryption.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Timbr integrations
 
 > Integrate with Timbr using LangChain Python.
@@ -23,7 +19,7 @@
 
 Choose one of: openai, anthropic, google, azure\_openai, snowflake, databricks, vertex\_ai (or 'all')
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install 'langchain-timbr[<your selected providers, separated by comma without spaces>]'
 ```
 
@@ -31,20 +27,16 @@ pip install 'langchain-timbr[<your selected providers, separated by comma withou
 
 Timbr provides a wrapper around its semantic layer that generates SQL statements based on natural language input and retrieves relevant information from your knowledge graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_timbr import create_timbr_sql_agent, ExecuteTimbrQueryChain, GenerateTimbrSqlChain
 ```
 
-See a [usage example](/oss/python/integrations/graphs/timbr)
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/timbr)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/timbr.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/timbr.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

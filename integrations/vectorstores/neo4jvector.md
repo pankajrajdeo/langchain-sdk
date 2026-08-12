@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Neo4j vector index integration
 
 > Integrate with the Neo4j vector index vector store using LangChain Python.
@@ -18,7 +14,7 @@ This notebook shows how to use the Neo4j vector index (`Neo4jVector`).
 
 See the [installation instruction](https://neo4j.com/docs/operations-manual/current/installation/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Pip install necessary package
 pip install -qU  neo4j
 pip install -qU  langchain-openai langchain-neo4j
@@ -27,7 +23,7 @@ pip install -qU  tiktoken
 
 We want to use `OpenAIEmbeddings` so we have to get the OpenAI API Key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -35,15 +31,14 @@ if "OPENAI_API_KEY" not in os.environ:
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 OpenAI API Key: ········
 ```
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_core.documents import Document
 from langchain_neo4j import Neo4jVector
@@ -51,7 +46,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = TextLoader("../../how_to/state_of_the_union.txt")
 
 documents = loader.load()
@@ -61,7 +56,7 @@ docs = text_splitter.split_documents(documents)
 embeddings = OpenAIEmbeddings()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Neo4jVector requires the Neo4j database credentials
 
 url = "bolt://localhost:7687"
@@ -76,7 +71,7 @@ password = "password"
 
 ## Similarity search with cosine distance (Default)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # The Neo4jVector Module will connect to Neo4j and create a vector index if needed.
 
 db = Neo4jVector.from_documents(
@@ -84,12 +79,12 @@ db = Neo4jVector.from_documents(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What did the president say about Ketanji Brown Jackson"
 docs_with_score = db.similarity_search_with_score(query, k=2)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for doc, score in docs_with_score:
     print("-" * 80)
     print("Score: ", score)
@@ -97,7 +92,7 @@ for doc, score in docs_with_score:
     print("-" * 80)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 --------------------------------------------------------------------------------
 Score:  0.9076391458511353
 Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
@@ -129,7 +124,7 @@ We’re securing commitments and supporting partners in South and Central Americ
 Above, we created a vectorstore from scratch. However, often times we want to work with an existing vectorstore.
 In order to do that, we can initialize it directly.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 index_name = "vector"  # default index name
 
 store = Neo4jVector.from_existing_index(
@@ -143,18 +138,18 @@ store = Neo4jVector.from_existing_index(
 
 We can also initialize a vectorstore from existing graph using the `from_existing_graph` method. This method pulls relevant text information from the database, and calculates and stores the text embeddings back to the database.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # First we create sample data in graph
 store.query(
     "CREATE (p:Person {name: 'Tomaz', location:'Slovenia', hobby:'Bicycle', age: 33})"
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 []
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Now we initialize from existing graph
 existing_graph = Neo4jVector.from_existing_graph(
     embedding=OpenAIEmbeddings(),
@@ -169,17 +164,17 @@ existing_graph = Neo4jVector.from_existing_graph(
 result = existing_graph.similarity_search("Slovenia", k=1)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 Document(page_content='\nname: Tomaz\nlocation: Slovenia', metadata={'age': 33, 'hobby': 'Bicycle'})
 ```
 
 Neo4j also supports relationship vector indexes, where an embedding is stored as a relationship property and indexed. A relationship vector index cannot be populated via LangChain, but you can connect it to existing relationship vector indexes.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # First we create sample data and index in graph
 store.query(
     "MERGE (p:Person {name: 'Tomaz'}) "
@@ -203,11 +198,11 @@ OPTIONS {indexConfig: {
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 []
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 relationship_vector = Neo4jVector.from_existing_relationship_index(
     OpenAIEmbeddings(),
     url=url,
@@ -219,7 +214,7 @@ relationship_vector = Neo4jVector.from_existing_relationship_index(
 relationship_vector.similarity_search("Example")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='example text')]
 ```
 
@@ -230,14 +225,14 @@ Neo4j vector store also supports metadata filtering by combining parallel runtim
 
 Equality filtering has the following syntax.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 existing_graph.similarity_search(
     "Slovenia",
     filter={"hobby": "Bicycle", "name": "Tomaz"},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='\nname: Tomaz\nlocation: Slovenia', metadata={'age': 33, 'hobby': 'Bicycle'})]
 ```
 
@@ -255,27 +250,27 @@ Metadata filtering also support the following operators:
 * `$like: Text contains value`
 * `$ilike: lowered text contains value`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 existing_graph.similarity_search(
     "Slovenia",
     filter={"hobby": {"$eq": "Bicycle"}, "age": {"$gt": 15}},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='\nname: Tomaz\nlocation: Slovenia', metadata={'age': 33, 'hobby': 'Bicycle'})]
 ```
 
 You can also use `OR` operator between filters
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 existing_graph.similarity_search(
     "Slovenia",
     filter={"$or": [{"hobby": {"$eq": "Bicycle"}}, {"age": {"$gt": 15}}]},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='\nname: Tomaz\nlocation: Slovenia', metadata={'age': 33, 'hobby': 'Bicycle'})]
 ```
 
@@ -283,23 +278,23 @@ existing_graph.similarity_search(
 
 We can add documents to the existing vectorstore.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 store.add_documents([Document(page_content="foo")])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['acbd18db4cc2f85cedef654fccc4a4d8']
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs_with_score = store.similarity_search_with_score("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs_with_score[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 (Document(page_content='foo'), 0.9999997615814209)
 ```
 
@@ -323,7 +318,7 @@ The retrieval query must return the following three columns:
 
 Learn more in this [blog post](https://medium.com/neo4j/implementing-rag-how-to-write-a-graph-retrieval-query-in-langchain-74abf13044f2).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retrieval_query = """
 RETURN "Name:" + node.name AS text, score, {foo:"bar"} AS metadata
 """
@@ -338,13 +333,13 @@ retrieval_example = Neo4jVector.from_existing_index(
 retrieval_example.similarity_search("Foo", k=1)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='Name:Tomaz', metadata={'foo': 'bar'})]
 ```
 
 Here is an example of passing all node properties except for `embedding` as a dictionary to `text` column,
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retrieval_query = """
 RETURN node {.name, .age, .hobby} AS text, score, {foo:"bar"} AS metadata
 """
@@ -359,14 +354,14 @@ retrieval_example = Neo4jVector.from_existing_index(
 retrieval_example.similarity_search("Foo", k=1)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='name: Tomaz\nage: 33\nhobby: Bicycle\n', metadata={'foo': 'bar'})]
 ```
 
 You can also pass Cypher parameters to the retrieval query.
 Parameters can be used for additional filtering, traversals, etc...
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retrieval_query = """
 RETURN node {.*, embedding:Null, extra: $extra} AS text, score, {foo:"bar"} AS metadata
 """
@@ -381,7 +376,7 @@ retrieval_example = Neo4jVector.from_existing_index(
 retrieval_example.similarity_search("Foo", k=1, params={"extra": "ParamInfo"})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='location: Slovenia\nextra: ParamInfo\nname: Tomaz\nage: 33\nhobby: Bicycle\nembedding: None\n', metadata={'foo': 'bar'})]
 ```
 
@@ -389,7 +384,7 @@ retrieval_example.similarity_search("Foo", k=1, params={"extra": "ParamInfo"})
 
 Neo4j integrates both vector and keyword indexes, which allows you to use a hybrid search approach
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # The Neo4jVector Module will connect to Neo4j and create a vector and keyword indices if needed.
 hybrid_db = Neo4jVector.from_documents(
     docs,
@@ -403,7 +398,7 @@ hybrid_db = Neo4jVector.from_documents(
 
 To load the hybrid search from existing indexes, you have to provide both the vector and keyword indices
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 index_name = "vector"  # default index name
 keyword_index_name = "keyword"  # default keyword index name
 
@@ -422,12 +417,12 @@ store = Neo4jVector.from_existing_index(
 
 This section shows how to use `Neo4jVector` as a retriever.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = store.as_retriever()
 retriever.invoke(query)[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 Document(page_content='Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections. \n\nTonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service. \n\nOne of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court. \n\nAnd I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.', metadata={'source': '../../how_to/state_of_the_union.txt'})
 ```
 
@@ -435,40 +430,36 @@ Document(page_content='Tonight. I call on the Senate to: Pass the Freedom to Vot
 
 This section goes over how to do question-answering with sources over an Index. It does this by using the `RetrievalQAWithSourcesChain`, which does the lookup of the documents from an Index.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import RetrievalQAWithSourcesChain
 from langchain_openai import ChatOpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = RetrievalQAWithSourcesChain.from_chain_type(
     ChatOpenAI(temperature=0), chain_type="stuff", retriever=retriever
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke(
     {"question": "What did the president say about Justice Breyer"},
     return_only_outputs=True,
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'answer': 'The president honored Justice Stephen Breyer for his service to the country and mentioned his retirement from the United States Supreme Court.\n',
  'sources': '../../how_to/state_of_the_union.txt'}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/neo4jvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/neo4jvector.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

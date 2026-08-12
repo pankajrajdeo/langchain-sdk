@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Data protection
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-data-protection)
+Scan and redact PII and secrets from LLM requests before they reach providers.
 
-> Scan and redact PII and secrets from LLM requests before they reach providers.
-
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
 When a PII or secrets redaction policy is active, the gateway scans outbound requests before they reach the LLM provider. If sensitive data is detected, it is redacted from the request. The agent continues to receive a response.
 
@@ -52,9 +47,8 @@ The gateway detects and redacts API keys, tokens, and credentials across a wide 
 
 ## Enable redaction policies
 
-<Warning>
-  Creating and managing policies requires `organization:manage` permission.
-</Warning>
+> [!WARNING]
+> Creating and managing policies requires `organization:manage` permission.
 
 1. Go to **Settings → Gateway → LLM Gateway**.
 2. Click **Create policy**.
@@ -80,10 +74,10 @@ Please process the refund for John Smith, SSN 123-45-6789.
 Please process the refund for [SAFE_TO_USE:PERSON_kbqdjxyz], SSN [SAFE_TO_USE:US_SSN_abqxlmwp]
 ```
 
-Placeholders follow the format `[SAFE_TO_USE:<CATEGORY>_<suffix>]`:
+Placeholders follow the format `[SAFE_TO_USE:_<suffix>]`:
 
 * **SAFE\_TO\_USE:** fixed prefix marking the value as a redacted placeholder.
-* **\<CATEGORY>:** the detected type. Examples: `PERSON`, `LOCATION`, `US_SSN`, `US_PHONE_NUMBER`, `OPENAI_API_KEY`, `GITHUB_PAT`, `LANGSMITH_PERSONAL_TOKEN`.
+* **\:** the detected type. Examples: `PERSON`, `LOCATION`, `US_SSN`, `US_PHONE_NUMBER`, `OPENAI_API_KEY`, `GITHUB_PAT`, `LANGSMITH_PERSONAL_TOKEN`.
 * **\<suffix>:** an 8-character random tag.
 
 The trace in LangSmith shows the redacted version along with metadata indicating that redaction occurred and which categories were detected.
@@ -115,16 +109,12 @@ This distinction matters. If your security model requires that sensitive data ne
 
 ## Next steps
 
-* [Spend policies](/langsmith/llm-gateway-spend-policies): add cost controls alongside data protection.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): add cost controls alongside data protection.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-data-protection.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-data-protection.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

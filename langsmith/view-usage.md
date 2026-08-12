@@ -1,26 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # View usage
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/view-usage)
+What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
 
-> What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
-
-LangSmith provides several views into your [organization's](/langsmith/administration-overview) usage, depending on your [plan](/langsmith/pricing-plans) and [hosting type](/langsmith/platform-setup). This page explains what data is available, what each metric means, and what limitations apply to [Self-hosted](/langsmith/self-hosted).
+LangSmith provides several views into your [organization's](https://docs.langchain.com/langsmith/administration-overview) usage, depending on your [plan](https://docs.langchain.com/langsmith/pricing-plans) and [hosting type](https://docs.langchain.com/langsmith/platform-setup). This page explains what data is available, what each metric means, and what limitations apply to [Self-hosted](https://docs.langchain.com/langsmith/self-hosted).
 
 ## Usage views
 
 | View                                          | Where to find it                                                                                           | Who can see it                          | Plan availability                                                                            |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [Usage graph](#usage-graph)                   | **Enterprise**: Settings > Usage > Usage graph<br />**Self-serve**: Settings > Billing > Usage graph       | All org members                         | All plans                                                                                    |
-| [Granular usage](#granular-usage)             | **Enterprise**: Settings > Usage > Granular usage<br />**Self-serve**: Settings > Billing > Granular usage | All org members                         | All plans                                                                                    |
-| [Contract usage](#contract-usage)             | **Enterprise**: Settings > Usage > Contract usage<br />**Self-serve**: Settings > Billing > Contract usage | Org admins only (`organization:manage`) | Enterprise only                                                                              |
-| [Invoices](#invoices)                         | Settings > Billing > Invoices                                                                              | All org members                         | Self-serve Cloud only                                                                        |
-| [Evaluator spend](/langsmith/evaluator-spend) | Evaluators page, evaluator detail                                                                          | All workspace members                   | Tracked weekly, resetting at Monday 12AM UTC, separate from the monthly billing period below |
+| [Usage graph](https://docs.langchain.com/langsmith/view-usage#usage-graph)                   | **Enterprise**: Settings > Usage > Usage graph<br />**Self-serve**: Settings > Billing > Usage graph       | All org members                         | All plans                                                                                    |
+| [Granular usage](https://docs.langchain.com/langsmith/view-usage#granular-usage)             | **Enterprise**: Settings > Usage > Granular usage<br />**Self-serve**: Settings > Billing > Granular usage | All org members                         | All plans                                                                                    |
+| [Contract usage](https://docs.langchain.com/langsmith/view-usage#contract-usage)             | **Enterprise**: Settings > Usage > Contract usage<br />**Self-serve**: Settings > Billing > Contract usage | Org admins only (`organization:manage`) | Enterprise only                                                                              |
+| [Invoices](https://docs.langchain.com/langsmith/view-usage#invoices)                         | Settings > Billing > Invoices                                                                              | All org members                         | Self-serve Cloud only                                                                        |
+| [Evaluator spend](https://docs.langchain.com/langsmith/evaluator-spend) | Evaluators page, evaluator detail                                                                          | All workspace members                   | Tracked weekly, resetting at Monday 12AM UTC, separate from the monthly billing period below |
 
 ## Usage graph
 
-The usage graph shows aggregate trace consumption for your [organization](/langsmith/administration-overview#organizations), broken down by [workspace](/langsmith/administration-overview#workspaces). It covers the current billing period and does not show spend—for spend, refer to the invoice.
+The usage graph shows aggregate trace consumption for your [organization](https://docs.langchain.com/langsmith/administration-overview#organizations), broken down by [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces). It covers the current billing period and does not show spend—for spend, refer to the invoice.
 
 Navigate to **Settings** → **Billing and Usage** → **Usage Graph**.
 
@@ -29,16 +25,15 @@ Navigate to **Settings** → **Billing and Usage** → **Usage Graph**.
 | Metric                                                  | What it counts                                                                                                                                                                                                                  |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **LangSmith Traces (Base Charge)**                      | Every trace sent to LangSmith during the billing period, regardless of data retention tier.                                                                                                                                     |
-| **LangSmith Traces (Extended Data Retention Upgrades)** | Traces upgraded to extended retention (400 days by default, [customizable for Enterprise customers](/langsmith/data-purging-compliance#customize-extended-retention-policy)). These are charged in addition to the base charge. |
-| **LangSmith Deployment Runs**                           | End-to-end invocations of deployed LangGraph agents. See [LangSmith Deployment billing](/langsmith/billing#langsmith-deployment-billing) for pricing details.                                                                   |
-| **LangSmith Fleet Runs**                                | End-to-end invocations of [Fleet](/langsmith/fleet) agents. Tracked separately for Cloud-hosted and Self-hosted deployments.                                                                                                    |
+| **LangSmith Traces (Extended Data Retention Upgrades)** | Traces upgraded to extended retention (400 days by default, [customizable for Enterprise customers](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy)). These are charged in addition to the base charge. |
+| **LangSmith Deployment Runs**                           | End-to-end invocations of deployed LangGraph agents. See [LangSmith Deployment billing](https://docs.langchain.com/langsmith/billing#langsmith-deployment-billing) for pricing details.                                                                   |
+| **LangSmith Fleet Runs**                                | End-to-end invocations of [Fleet](https://docs.langchain.com/langsmith/fleet) agents. Tracked separately for Cloud-hosted and Self-hosted deployments.                                                                                                    |
 | **LangSmith Deployment Nodes Executed**                 | Individual LangGraph node executions across deployed agents. Each step in a deployed agent's graph counts as one node execution. Tracked separately for Cloud-hosted and Self-hosted deployments.                               |
 
-For more details on trace retention tiers, refer to [Data retention](/langsmith/usage-and-billing#data-retention).
+For more details on trace retention tiers, refer to [Data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention).
 
-<Note>
-  The usage graph uses the term `tenant_id` interchangeably with workspace ID.
-</Note>
+> [!NOTE]
+> The usage graph uses the term `tenant_id` interchangeably with workspace ID.
 
 ## Contract usage
 
@@ -53,13 +48,11 @@ This view shows:
 * **Monthly usage chart**: Bar chart showing usage amounts for each month within your contract period.
 * **Product rates**: Table of your entitled products and their pricing.
 
-<Note>
-  Contract usage requires the [`organization:manage` permission](/langsmith/organization-workspace-operations) and is only available to Enterprise customers with prepaid commitments.
-</Note>
+> [!NOTE]
+> Contract usage requires the [`organization:manage` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) and is only available to Enterprise customers with prepaid commitments.
 
-<Note>
-  If your contract spans multiple organizations under the same billing entity, the contract usage view shows the **combined** usage accrued across all of those organizations, not just the one you're currently viewing. [Granular usage](#granular-usage) is always scoped to a single organization, so to view granular usage for a specific org, switch to that org and view its granular usage separately.
-</Note>
+> [!NOTE]
+> If your contract spans multiple organizations under the same billing entity, the contract usage view shows the **combined** usage accrued across all of those organizations, not just the one you're currently viewing. [Granular usage](https://docs.langchain.com/langsmith/view-usage#granular-usage) is always scoped to a single organization, so to view granular usage for a specific org, switch to that org and view its granular usage separately.
 
 ## Invoices
 
@@ -71,21 +64,21 @@ Navigate to **Settings** → **Billing and Usage** → **Invoices** to see how y
 
 Granular usage gives you trace counts broken down by a dimension you choose (workspace, project, user, or API key) over a time range you select. This is useful for internal chargebacks, identifying high-usage teams, or auditing trace activity.
 
-Navigate to **Settings** → **Billing and Usage** → **Granular Usage**, or use the [granular usage API](/langsmith/granular-usage).
+Navigate to **Settings** → **Billing and Usage** → **Granular Usage**, or use the [granular usage API](https://docs.langchain.com/langsmith/granular-usage).
 
 ### What "traces" means here
 
-The granular usage view counts **traces**: root-level runs and all their child spans counted as a single unit. This is the same unit used for [billing](/langsmith/billing). It does not count individual spans, tokens, or model calls separately.
+The granular usage view counts **traces**: root-level runs and all their child spans counted as a single unit. This is the same unit used for [billing](https://docs.langchain.com/langsmith/billing). It does not count individual spans, tokens, or model calls separately.
 
 ### When usage is recorded
 
 Granular usage records traces by **insertion time** (when the trace was received and stored by LangSmith), not by when it ran in your application. In practice this difference is usually negligible, but traces sent with significant delay (e.g., buffered SDK uploads) may appear in a later time bucket than expected.
 
-For grouping options, time bucket sizes, and API reference, refer to [Granular billable usage](/langsmith/granular-usage).
+For grouping options, time bucket sizes, and API reference, refer to [Granular billable usage](https://docs.langchain.com/langsmith/granular-usage).
 
 ## Self-hosted limitations
 
-[Self-hosted](/langsmith/self-hosted) LangSmith have a different set of usage views available compared to [Cloud](/langsmith/cloud), due to differences in billing infrastructure.
+[Self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith have a different set of usage views available compared to [Cloud](https://docs.langchain.com/langsmith/cloud), due to differences in billing infrastructure.
 
 | **Feature**                        | **Self-hosted availability**                         |
 | ---------------------------------- | ---------------------------------------------------- |
@@ -96,47 +89,42 @@ For grouping options, time bucket sizes, and API reference, refer to [Granular b
 
 ### Granular usage on self-hosted
 
-Granular usage is available on [Self-hosted](/langsmith/self-hosted) but requires explicit opt-in:
+Granular usage is available on [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) but requires explicit opt-in:
 
 * On **LangSmith 0.13.12 and later**, granular usage collection is enabled by default.
 * On **earlier versions**, enable it by setting both of the following environment variables:
 
-  ```env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```env
   DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true
   GRANULAR_USAGE_TABLE_ENABLED=true
-  ```
+```
 
-<Warning>
-  Data collection begins from the moment the feature is enabled. There is no backfill of historical usage data prior to enabling it. Plan accordingly when choosing when to enable this feature.
-</Warning>
+> [!WARNING]
+> Data collection begins from the moment the feature is enabled. There is no backfill of historical usage data prior to enabling it. Plan accordingly when choosing when to enable this feature.
 
 ### Aggregate usage on Self-hosted
 
-The usage graph is available on [Self-hosted](/langsmith/self-hosted) running Helm chart 0.9.5 or later. LangSmith automatically generates and syncs organization usage charts, available under **Settings** → **Usage and billing** → **Usage graph**:
+The usage graph is available on [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) running Helm chart 0.9.5 or later. LangSmith automatically generates and syncs organization usage charts, available under **Settings** → **Usage and billing** → **Usage graph**:
 
 * **Usage by Workspace**: trace counts (root runs) per workspace
 * **Organization Usage**: total trace counts across the organization
 
 Charts refresh every 5 minutes to include new workspaces and are not editable.
 
-For programmatic access to trace counts, see [View trace counts across your organization](/langsmith/self-host-organization-charts).
+For programmatic access to trace counts, see [View trace counts across your organization](https://docs.langchain.com/langsmith/self-host-organization-charts).
 
 ## Related resources
 
-* [Granular billable usage API reference](/langsmith/granular-usage)
-* [Manage billing](/langsmith/billing)
-* [Data retention and usage limits](/langsmith/usage-and-billing#data-retention)
-* [Track and limit evaluator spend](/langsmith/evaluator-spend)
-* [Organization and workspace operations](/langsmith/organization-workspace-operations)
+* [Granular billable usage API reference](https://docs.langchain.com/langsmith/granular-usage)
+* [Manage billing](https://docs.langchain.com/langsmith/billing)
+* [Data retention and usage limits](https://docs.langchain.com/langsmith/usage-and-billing#data-retention)
+* [Track and limit evaluator spend](https://docs.langchain.com/langsmith/evaluator-spend)
+* [Organization and workspace operations](https://docs.langchain.com/langsmith/organization-workspace-operations)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/view-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

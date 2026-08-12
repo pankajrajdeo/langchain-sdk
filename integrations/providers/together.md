@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Together AI integrations
 
 > Integrate with Together AI using LangChain Python.
@@ -12,7 +8,7 @@ This example goes over how to use LangChain to interact with Together AI models.
 
 ## Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U langchain-together
 ```
 
@@ -24,7 +20,7 @@ To use Together AI, you'll need an API key which you can find here:
 
 ## Example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Querying chat models with Together AI
 
 from langchain_together import ChatTogether
@@ -44,7 +40,7 @@ for token in stream.text:
 # chat.invoke("Tell me fun things to do in NYC")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Querying code and language models with Together AI
 
 from langchain_together import Together
@@ -59,12 +55,8 @@ print(llm.invoke("def bubble_sort(): "))
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

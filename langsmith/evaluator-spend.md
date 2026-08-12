@@ -1,52 +1,41 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Track and limit evaluator spend
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluator-spend)
+Cap weekly LLM spend on evaluators with an organization-wide default or per-evaluator overrides to keep evaluator costs predictable.
 
-> Cap weekly LLM spend on evaluators with an organization-wide default or per-evaluator overrides to keep evaluator costs predictable.
-
-Cap weekly LLM spend per evaluator to prevent a single evaluator from exceeding your budget. LangSmith tracks week-to-date evaluator spend, resetting at Monday 12AM UTC. It lets [organization admins](/langsmith/rbac#organization-admin) set a weekly cap on each evaluator's [attached projects and datasets](/langsmith/evaluation-concepts#attaching-an-evaluator-to-a-tracing-project-or-dataset). The cap can be a single organization-wide default or a custom override on a specific attached project or dataset.
+Cap weekly LLM spend per evaluator to prevent a single evaluator from exceeding your budget. LangSmith tracks week-to-date evaluator spend, resetting at Monday 12AM UTC. It lets [organization admins](https://docs.langchain.com/langsmith/rbac#organization-admin) set a weekly cap on each evaluator's [attached projects and datasets](https://docs.langchain.com/langsmith/evaluation-concepts#attaching-an-evaluator-to-a-tracing-project-or-dataset). The cap can be a single organization-wide default or a custom override on a specific attached project or dataset.
 
 This guide shows you how to view and configure weekly evaluator spend caps.
 
-<Tip>
-  LangSmith also offers [per-trace and per-model cost tracking](/langsmith/cost-tracking) and [tracing usage limits](/langsmith/administration-overview#usage-limits) for cost control.
-</Tip>
+> [!TIP]
+> LangSmith also offers [per-trace and per-model cost tracking](https://docs.langchain.com/langsmith/cost-tracking) and [tracing usage limits](https://docs.langchain.com/langsmith/administration-overview#usage-limits) for cost control.
 
-<Warning>
-  Setting spend limits is available for OpenAI, Anthropic, and Gemini models. Spend limits only enforce against runs on supported models that have [pricing configured](/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry) in LangSmith. Verify model pricing before relying on a limit. Unsupported models cannot be used in evaluators once a limit is set.
-</Warning>
+> [!WARNING]
+> Setting spend limits is available for OpenAI, Anthropic, and Gemini models. Spend limits only enforce against runs on supported models that have [pricing configured](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry) in LangSmith. Verify model pricing before relying on a limit. Unsupported models cannot be used in evaluators once a limit is set.
 
-<Note>
-  The UI labels the week-to-date window as **this week**.
-</Note>
+> [!NOTE]
+> The UI labels the week-to-date window as **this week**.
 
 ## How enforcement works
 
 LangSmith records spend after each evaluator run completes, then sums spend from Monday 12AM UTC to the current moment. When the total reaches the effective limit, LangSmith pauses the evaluator on that attached project or dataset. In-flight runs may push the total slightly above the cap before they finalize, so spend can briefly overshoot by a small amount.
 
-The agent and the trace are unaffected. Only the evaluator stops producing scores until the spend limit resets or the limit is [manually increased](#override-the-default-for-an-attached-project-or-dataset).
+The agent and the trace are unaffected. Only the evaluator stops producing scores until the spend limit resets or the limit is [manually increased](https://docs.langchain.com/langsmith/evaluator-spend#override-the-default-for-an-attached-project-or-dataset).
 
 ## Spend views and controls
 
 | View                                                                               | Where to find it                                    | Who can see or change it                                     |
 | ---------------------------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------ |
-| [Evaluators page dashboard](#evaluators-page-dashboard)                            | **Evaluators** in the left sidebar                  | All workspace members                                        |
-| [Evaluators table](#evaluators-table) (Spend, Spend Status)                        | **Evaluators** in the left sidebar                  | All workspace members                                        |
-| [Projects & Datasets tab](#projects-%26-datasets-tab-on-an-evaluator)              | Open an evaluator, **Projects & Datasets**          | All workspace members                                        |
-| [Organization default spend limit](#set-an-organization-default-spend-limit)       | Organization **Settings** > **Usage Configuration** | `organization:manage` required to view and edit              |
-| [Per-evaluator override](#override-the-default-for-an-attached-project-or-dataset) | Edit evaluator > **Advanced** > **Spend limit**     | All members can view, `organization:manage` required to edit |
+| [Evaluators page dashboard](https://docs.langchain.com/langsmith/evaluator-spend#evaluators-page-dashboard)                            | **Evaluators** in the left sidebar                  | All workspace members                                        |
+| [Evaluators table](https://docs.langchain.com/langsmith/evaluator-spend#evaluators-table) (Spend, Spend Status)                        | **Evaluators** in the left sidebar                  | All workspace members                                        |
+| [Projects & Datasets tab](https://docs.langchain.com/langsmith/evaluator-spend#projects-%26-datasets-tab-on-an-evaluator)              | Open an evaluator, **Projects & Datasets**          | All workspace members                                        |
+| [Organization default spend limit](https://docs.langchain.com/langsmith/evaluator-spend#set-an-organization-default-spend-limit)       | Organization **Settings** > **Usage Configuration** | `organization:manage` required to view and edit              |
+| [Per-evaluator override](https://docs.langchain.com/langsmith/evaluator-spend#override-the-default-for-an-attached-project-or-dataset) | Edit evaluator > **Advanced** > **Spend limit**     | All members can view, `organization:manage` required to edit |
 
-<CardGroup cols={2}>
-  <Card title="Set your first limit" icon="settings" href="#set-an-organization-default-spend-limit">
-    Open organization **Settings** and define a single weekly cap that applies to all evaluator attachments to every project and dataset across all workspaces in the organization.
-  </Card>
+#### [Set your first limit](https://docs.langchain.com/langsmith/evaluator-spend#set-an-organization-default-spend-limit)
+Open organization **Settings** and define a single weekly cap that applies to all evaluator attachments to every project and dataset across all workspaces in the organization.
 
-  <Card title="Override for one project or dataset" icon="edit" href="#override-the-default-for-an-attached-project-or-dataset">
-    Customize the limit for a specific project or dataset attached to an evaluator.
-  </Card>
-</CardGroup>
+#### [Override for one project or dataset](https://docs.langchain.com/langsmith/evaluator-spend#override-the-default-for-an-attached-project-or-dataset)
+Customize the limit for a specific project or dataset attached to an evaluator.
 
 ## View evaluator spend
 
@@ -84,13 +73,13 @@ Open an evaluator and select the **Projects & Datasets** tab to see per-project 
 * **Percent of Spend Limit**: Progress bar showing spend against the limit since Monday 12AM UTC.
 * **Weekly Limit**: Effective weekly limit for that project or dataset, either the organization default or a custom override.
 
-For attachment management, refer to [Manage evaluators](/langsmith/evaluators).
+For attachment management, refer to [Manage evaluators](https://docs.langchain.com/langsmith/evaluators).
 
 ## Set an organization default spend limit
 
 Organization admins set a single weekly cap that applies to every evaluator's attached projects and datasets across every workspace in the organization. There is one default per organization, not one per workspace.
 
-<Note>Setting and editing the organization default requires the `organization:manage` [permission](/langsmith/rbac).</Note>
+Setting and editing the organization default requires the `organization:manage` [permission](https://docs.langchain.com/langsmith/rbac).
 
 1. Open organization **Settings** and navigate to **Usage Configuration**.
 2. For **Evaluator spend limit**, enter a USD amount. The unit is `/ week`. Leave blank for no limit.
@@ -125,36 +114,32 @@ When weekly spend on an attached project or dataset reaches its effective limit:
 
 * LangSmith stops running the evaluator on new runs from that project or dataset.
 * The Evaluators table **Spend Status** column shows **N limit hit**, and the Weekly evaluator spend limit monitoring widget surfaces the affected project or dataset.
-* Skipped runs are not backfilled. Evaluation resumes automatically on new runs once the spend limit resets or the limit is [manually increased](#override-the-default-for-an-attached-project-or-dataset).
+* Skipped runs are not backfilled. Evaluation resumes automatically on new runs once the spend limit resets or the limit is [manually increased](https://docs.langchain.com/langsmith/evaluator-spend#override-the-default-for-an-attached-project-or-dataset).
 
 ## Configure model pricing
 
 When a spend limit is set, evaluators can only be run on supported models (OpenAI, Anthropic, and Gemini), and the models need to have pricing configured. Models without pricing configured cannot be used in evaluators.
 
-Configure pricing for the models your evaluators use under [Model pricing](/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry).
+Configure pricing for the models your evaluators use under [Model pricing](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry).
 
 ## Troubleshooting
 
-**Trouble creating an evaluator**: When a limit is set, evaluators must use a supported model (OpenAI, Anthropic, or Gemini) with a pricing entry in [Model pricing](/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry).
+**Trouble creating an evaluator**: When a limit is set, evaluators must use a supported model (OpenAI, Anthropic, or Gemini) with a pricing entry in [Model pricing](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry).
 
-**LangSmith spend does not match my LLM provider invoice**: LangSmith computes spend from the per-model rates configured in [Model pricing](/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry), not from your provider's billing. Differences are expected if your provider applies discounts, custom contracts, or model variants you have not added to LangSmith.
+**LangSmith spend does not match my LLM provider invoice**: LangSmith computes spend from the per-model rates configured in [Model pricing](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry), not from your provider's billing. Differences are expected if your provider applies discounts, custom contracts, or model variants you have not added to LangSmith.
 
 ## Related resources
 
-* [Manage evaluators](/langsmith/evaluators)
-* [Set up LLM-as-a-judge online evaluators](/langsmith/online-evaluations-llm-as-judge)
-* [Cost tracking](/langsmith/cost-tracking)
-* [Model pricing](/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry)
-* [Billing](/langsmith/billing)
+* [Manage evaluators](https://docs.langchain.com/langsmith/evaluators)
+* [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+* [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking)
+* [Model pricing](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry)
+* [Billing](https://docs.langchain.com/langsmith/billing)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluator-spend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluator-spend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

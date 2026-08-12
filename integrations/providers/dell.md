@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Dell integrations
 
 > Integrate with Dell using LangChain Python.
@@ -19,28 +15,22 @@ that can be hosted on-prem or deployed in the cloud.
 
 ### Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install powerscale-rag-connector
-  ```
+```bash
+pip install powerscale-rag-connector
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add powerscale-rag-connector
-  ```
-</CodeGroup>
+```bash
+uv add powerscale-rag-connector
+```
 
 ### Document loaders
 
-For more information, see [available PowerScale loaders](/oss/python/integrations/document_loaders/powerscale).
+For more information, see [available PowerScale loaders](https://docs.langchain.com/oss/python/integrations/document_loaders/powerscale).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/dell.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/dell.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

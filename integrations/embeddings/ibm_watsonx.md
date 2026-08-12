@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # WatsonxEmbeddings integration
 
 > Integrate with the WatsonxEmbeddings embedding model using LangChain Python.
@@ -14,7 +10,7 @@ This example shows how to communicate with `watsonx.ai` models using `LangChain`
 
 ### Integration details
 
-<ItemTable category="embeddings" item="IBM" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx).
 
 ## Setup
 
@@ -27,7 +23,7 @@ This cell defines the WML credentials required to work with watsonx Embeddings.
 **Action:** Provide the IBM Cloud user API key. For details, see
 [documentation](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -37,7 +33,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -51,7 +47,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-ibm
 ```
 
@@ -59,7 +55,7 @@ The LangChain IBM integration lives in the `langchain-ibm` package:
 
 You might need to adjust model `parameters` for different models.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai.metanames import EmbedTextParamsMetaNames
 
 embed_params = {
@@ -79,7 +75,7 @@ In this example, we’ll use the `project_id` and Dallas url.
 
 You need to specify `model_id` that will be used for inferencing.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import WatsonxEmbeddings
 
 watsonx_embedding = WatsonxEmbeddings(
@@ -92,7 +88,7 @@ watsonx_embedding = WatsonxEmbeddings(
 
 Alternatively you can use Cloud Pak for Data credentials. For details, see [documentation](https://ibm.github.io/watsonx-ai-python-sdk/setup_cpd.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 watsonx_embedding = WatsonxEmbeddings(
     model_id="ibm/granite-embedding-107m-multilingual",
     url="PASTE YOUR URL HERE",
@@ -107,7 +103,7 @@ watsonx_embedding = WatsonxEmbeddings(
 
 For certain requirements, there is an option to pass the IBM's [`APIClient`](https://ibm.github.io/watsonx-ai-python-sdk/base.html#apiclient) object into the `WatsonxEmbeddings` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai import APIClient
 
 api_client = APIClient(...)
@@ -120,11 +116,11 @@ watsonx_embedding = WatsonxEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -145,7 +141,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -159,14 +155,14 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text = "This is a test document."
 
 query_result = watsonx_embedding.embed_query(text)
 query_result[:5]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [0.009447193, -0.024981951, -0.026013248, -0.040483937, -0.05780445]
 ```
 
@@ -174,14 +170,14 @@ query_result[:5]
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 texts = ["This is a content of the document", "This is another document"]
 
 doc_result = watsonx_embedding.embed_documents(texts)
 doc_result[0][:5]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [0.009447167, -0.024981938, -0.02601326, -0.04048393, -0.05780444]
 ```
 
@@ -193,12 +189,8 @@ For detailed documentation of all `WatsonxEmbeddings` features and configuration
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

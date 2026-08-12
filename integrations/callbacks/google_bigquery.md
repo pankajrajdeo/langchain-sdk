@@ -1,16 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Bigquery callback handler integration
 
 > Log events from LangChain and LangGraph to Google BigQuery for monitoring, auditing, and analyzing your LLM applications with real-time analytics.
 
 # BigQuery Callback Handler
 
-<div class="language-support-tag">
-  <span class="lst-supported">Community</span><span class="lst-python">Python</span><span class="lst-preview">Preview</span>
-</div>
+<span class="lst-supported">Community</span><span class="lst-python">Python</span><span class="lst-preview">Preview</span>
 
 > [Google BigQuery](https://cloud.google.com/bigquery) is a serverless and cost-effective enterprise data warehouse that works across clouds and scales with your data.
 
@@ -29,27 +23,25 @@ The `BigQueryCallbackHandler` allows you to log events from LangChain and LangGr
 * **`flush()` between requests**: drain the queue without tearing the handler down
 * **Real-time dashboard**: FastAPI monitoring webapp with live event streaming
 
-<Note>
-  **Preview release**
+> [!NOTE]
+> **Preview release**
+>
+> The BigQuery Callback Handler is in **Preview**. APIs and functionality are subject to change.
+> For more information, see the
+> [launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
 
-  The BigQuery Callback Handler is in **Preview**. APIs and functionality are subject to change.
-  For more information, see the
-  [launch stage descriptions](https://cloud.google.com/products#product-launch-stages).
-</Note>
-
-<Warning>
-  **BigQuery Storage Write API**
-
-  This feature uses the **BigQuery Storage Write API**, which is a paid service.
-  For information on costs, see the
-  [BigQuery documentation](https://cloud.google.com/bigquery/pricing?e=48754805\&hl=en#data-ingestion-pricing).
-</Warning>
+> [!WARNING]
+> **BigQuery Storage Write API**
+>
+> This feature uses the **BigQuery Storage Write API**, which is a paid service.
+> For information on costs, see the
+> [BigQuery documentation](https://cloud.google.com/bigquery/pricing?e=48754805\&hl=en#data-ingestion-pricing).
 
 ## Installation
 
 You need to install `langchain-google-community` with `bigquery` extra dependencies. For this example, you will also need `langchain-google-genai` and `langgraph`.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install "langchain-google-community[bigquery]" langchain langchain-google-genai langgraph
 ```
 
@@ -76,11 +68,10 @@ To use the `BigQueryCallbackHandler` with a LangGraph agent, instantiate it with
 
 Pass `session_id`, `user_id`, and (optionally) `agent` via the `metadata` dictionary in the `config` object when invoking the agent. If `agent` is not set, the handler auto-derives it from `metadata['langgraph_node']` so each sub-agent's events are correctly attributed.
 
-<Note>
-  LangGraph features such as `graph_name` and `graph_context()` require `langchain-google-community>=4.0.0`.
-</Note>
+> [!NOTE]
+> LangGraph features such as `graph_name` and `graph_context()` require `langchain-google-community>=4.0.0`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from datetime import datetime
 
@@ -193,93 +184,72 @@ if __name__ == "__main__":
 
 You can customize the callback handler using `BigQueryLoggerConfig`.
 
-<ParamField body="enabled" type="bool" default="True">
-  To disable the handler from logging data to the BigQuery table, set this parameter to `False`.
-</ParamField>
+#### `Field` — `bool`
+To disable the handler from logging data to the BigQuery table, set this parameter to `False`.
 
-<ParamField body="clustering_fields" type="List[str]" default="['event_type', 'agent', 'user_id']">
-  The fields used to cluster the BigQuery table when it is automatically created.
-</ParamField>
+#### `Field` — `List[str]`
+The fields used to cluster the BigQuery table when it is automatically created.
 
-<ParamField body="gcs_bucket_name" type="str" default="None">
-  The name of the GCS bucket to offload large content (images, blobs, large text) to. If not provided, large content may be truncated or replaced with placeholders.
-</ParamField>
+#### `Field` — `str`
+The name of the GCS bucket to offload large content (images, blobs, large text) to. If not provided, large content may be truncated or replaced with placeholders.
 
-<ParamField body="connection_id" type="str" default="None">
-  The BigQuery connection ID (e.g., `us.my-connection`) to use as the authorizer for ObjectRef columns. Required for using ObjectRef with BigQuery ML.
-</ParamField>
+#### `Field` — `str`
+The BigQuery connection ID (e.g., `us.my-connection`) to use as the authorizer for ObjectRef columns. Required for using ObjectRef with BigQuery ML.
 
-<ParamField body="max_content_length" type="int" default="512000">
-  (500 KB) The maximum length (in characters) of text content to store inline in BigQuery before offloading to GCS (if configured) or truncating.
-</ParamField>
+#### `Field` — `int`
+(500 KB) The maximum length (in characters) of text content to store inline in BigQuery before offloading to GCS (if configured) or truncating.
 
-<ParamField body="batch_size" type="int" default="1">
-  The number of events to batch before writing to BigQuery.
-</ParamField>
+#### `Field` — `int`
+The number of events to batch before writing to BigQuery.
 
-<ParamField body="batch_flush_interval" type="float" default="1.0">
-  The maximum time (in seconds) to wait before flushing a partial batch.
-</ParamField>
+#### `Field` — `float`
+The maximum time (in seconds) to wait before flushing a partial batch.
 
-<ParamField body="shutdown_timeout" type="float" default="10.0">
-  Seconds to wait for logs to flush during shutdown.
-</ParamField>
+#### `Field` — `float`
+Seconds to wait for logs to flush during shutdown.
 
-<ParamField body="event_allowlist" type="List[str]" default="None">
-  A list of event types to log. If `None`, all events are logged except those in `event_denylist`.
-</ParamField>
+#### `Field` — `List[str]`
+A list of event types to log. If `None`, all events are logged except those in `event_denylist`.
 
-<ParamField body="event_denylist" type="List[str]" default="None">
-  A list of event types to skip logging.
-</ParamField>
+#### `Field` — `List[str]`
+A list of event types to skip logging.
 
-<ParamField body="log_multi_modal_content" type="bool" default="True">
-  Whether to log detailed content parts (including GCS references).
-</ParamField>
+#### `Field` — `bool`
+Whether to log detailed content parts (including GCS references).
 
-<ParamField body="table_id" type="str" default="agent_events">
-  The default table ID to use if not explicitly provided to the callback handler constructor.
-</ParamField>
+#### `Field` — `str`
+The default table ID to use if not explicitly provided to the callback handler constructor.
 
-<ParamField body="retry_config" type="RetryConfig" default="RetryConfig()">
-  Configuration for retry logic (max retries, delay, multiplier) when writing to BigQuery fails.
-</ParamField>
+#### `Field` — `RetryConfig`
+Configuration for retry logic (max retries, delay, multiplier) when writing to BigQuery fails.
 
-<ParamField body="queue_max_size" type="int" default="10000">
-  The maximum number of events to hold in the internal buffer queue before dropping new events.
-</ParamField>
+#### `Field` — `int`
+The maximum number of events to hold in the internal buffer queue before dropping new events.
 
-<ParamField body="skip_internal_chain_events" type="bool" default="False">
-  When `True`, drop `CHAIN_*` events emitted by framework-internal Runnables (`ChannelWrite`, `ChannelRead`, `Branch`, `RunnableLambda`, `RunnableSequence`, `RunnableParallel`, `RunnableAssign`, `RunnablePassthrough`, `RunnableBinding`, `Pregel`, `__start__`, `__end__`). Skipped runs are still registered in the trace registry so child LLM/tool events keep the real graph root as their `trace_id` (no broken traces). Each suppression logs a `DEBUG` line so the heuristic is auditable.
-</ParamField>
+#### `Field` — `bool`
+When `True`, drop `CHAIN_*` events emitted by framework-internal Runnables (`ChannelWrite`, `ChannelRead`, `Branch`, `RunnableLambda`, `RunnableSequence`, `RunnableParallel`, `RunnableAssign`, `RunnablePassthrough`, `RunnableBinding`, `Pregel`, `__start__`, `__end__`). Skipped runs are still registered in the trace registry so child LLM/tool events keep the real graph root as their `trace_id` (no broken traces). Each suppression logs a `DEBUG` line so the heuristic is auditable.
 
-<ParamField body="custom_tags" type="dict[str, Any]" default="{}">
-  Static tags written to `attributes.custom_tags` on every event row. Useful for slicing dashboards by deployment, cohort, or experiment (e.g. `{"env": "prod", "agent_role": "sales"}`).
-</ParamField>
+#### `Field` — `dict[str, Any]`
+Static tags written to `attributes.custom_tags` on every event row. Useful for slicing dashboards by deployment, cohort, or experiment (e.g. `{"env": "prod", "agent_role": "sales"}`).
 
-<ParamField body="log_session_metadata" type="bool" default="True">
-  When `True`, dumps the user-supplied `RunnableConfig` metadata (minus keys we already promote to first-class columns like `session_id`, `user_id`, `agent`, `langgraph_node`) under `attributes.session_metadata`.
-</ParamField>
+#### `Field` — `bool`
+When `True`, dumps the user-supplied `RunnableConfig` metadata (minus keys we already promote to first-class columns like `session_id`, `user_id`, `agent`, `langgraph_node`) under `attributes.session_metadata`.
 
-<ParamField body="content_formatter" type="Callable[[Any, str], Any]" default="None">
-  Optional `(raw_content, event_type) -> formatted` hook invoked before content parsing. Useful for PII redaction or coercing custom payloads. Failures fall back to raw content with a warning — the formatter cannot break the agent.
-</ParamField>
+#### `Field` — `Callable[[Any, str], Any]`
+Optional `(raw_content, event_type) -> formatted` hook invoked before content parsing. Useful for PII redaction or coercing custom payloads. Failures fall back to raw content with a warning — the formatter cannot break the agent.
 
-<ParamField body="auto_schema_upgrade" type="bool" default="True">
-  When `True`, additively `ALTER TABLE ADD COLUMN` any new fields that future versions of this handler add to the events schema. Gated by a `langchain_bq_schema_version` table label so the diff runs at most once per schema version. Never drops, renames, or retypes columns.
-</ParamField>
+#### `Field` — `bool`
+When `True`, additively `ALTER TABLE ADD COLUMN` any new fields that future versions of this handler add to the events schema. Gated by a `langchain_bq_schema_version` table label so the diff runs at most once per schema version. Never drops, renames, or retypes columns.
 
-<ParamField body="create_views" type="bool" default="True">
-  When `True`, automatically `CREATE OR REPLACE` per-event-type analytics views beside the events table. Each view unnests the JSON columns into typed top-level columns (see [Auto-created analytics views](#auto-created-analytics-views) below).
-</ParamField>
+#### `Field` — `bool`
+When `True`, automatically `CREATE OR REPLACE` per-event-type analytics views beside the events table. Each view unnests the JSON columns into typed top-level columns (see [Auto-created analytics views](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery#auto-created-analytics-views) below).
 
-<ParamField body="view_prefix" type="str" default="v">
-  Prefix for auto-created view names (`v_llm_request`, `v_tool_completed`, …). Set per-table when several handler instances share one dataset to avoid collisions.
-</ParamField>
+#### `Field` — `str`
+Prefix for auto-created view names (`v_llm_request`, `v_tool_completed`, …). Set per-table when several handler instances share one dataset to avoid collisions.
 
 The following code sample shows how to define a configuration for the BigQuery callback handler with event filtering:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community.callbacks.bigquery_callback import (
     BigQueryCallbackHandler,
     BigQueryLoggerConfig,
@@ -308,7 +278,7 @@ The plugin automatically creates the table if it does not exist. However, for pr
 
 **Recommended DDL:**
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 CREATE TABLE `your-gcp-project-id.adk_agent_logs.agent_events`
 (
   timestamp TIMESTAMP NOT NULL OPTIONS(description="The UTC timestamp when the event occurred."),
@@ -353,7 +323,7 @@ When the handler creates the events table, it also creates one
 typed top-level columns so analytics queries don't have to spell
 `JSON_VALUE(...)` every time:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 -- With the auto-view
 SELECT agent, SUM(usage_total_tokens) AS tokens
 FROM `PROJECT.DATASET.v_llm_response`
@@ -421,21 +391,19 @@ sub-agent without any user changes.
 The `content` column contains a **JSON** object specific to the `event_type`.
 The `content_parts` column provides a structured view of the content, especially useful for images or offloaded data.
 
-<Note>
-  **Content Truncation**
+> [!NOTE]
+> **Content Truncation**
+>
+> * Variable content fields are truncated to `max_content_length` (configured in `BigQueryLoggerConfig`, default 500KB).
+> * If `gcs_bucket_name` is configured, large content is offloaded to GCS instead of being truncated, and a reference is stored in `content_parts.object_ref`.
 
-  * Variable content fields are truncated to `max_content_length` (configured in `BigQueryLoggerConfig`, default 500KB).
-  * If `gcs_bucket_name` is configured, large content is offloaded to GCS instead of being truncated, and a reference is stored in `content_parts.object_ref`.
-</Note>
-
-<Note>
-  **`content` always carries a `summary` key**
-
-  Every event row's `content` JSON object includes a `summary` string with
-  a human-readable preview of the payload (capped at `max_content_length`).
-  The `summary` is omitted from the per-event tables below to keep the
-  shapes readable, but it is always present on disk.
-</Note>
+> [!NOTE]
+> **`content` always carries a `summary` key**
+>
+> Every event row's `content` JSON object includes a `summary` string with
+> a human-readable preview of the payload (capped at `max_content_length`).
+> The `summary` is omitted from the per-event tables below to keep the
+> shapes readable, but it is always present on disk.
 
 ### LLM interactions
 
@@ -478,8 +446,8 @@ listed above instead).
 
 | Event Type    | Content (JSON) Structure                      |
 | ------------- | --------------------------------------------- |
-| `CHAIN_START` | `{"data": "<JSON-stringified inputs>"}`       |
-| `CHAIN_END`   | `{"data": "<JSON-stringified outputs>"}`      |
+| `CHAIN_START` | `{"data": ""}`       |
+| `CHAIN_END`   | `{"data": ""}`      |
 | `CHAIN_ERROR` | `{"data": null}` (see `error_message` column) |
 
 ### Retriever usage
@@ -489,7 +457,7 @@ These events track the execution of retrievers.
 | Event Type        | Content (JSON) Structure                                                         |
 | ----------------- | -------------------------------------------------------------------------------- |
 | `RETRIEVER_START` | `{"data": "<query string>"}` — e.g. `{"data": "What is the capital of France?"}` |
-| `RETRIEVER_END`   | `{"data": "<JSON-stringified list of documents>"}`                               |
+| `RETRIEVER_END`   | `{"data": ""}`                               |
 | `RETRIEVER_ERROR` | `{"data": null}` (the actual exception text lives in the `error_message` column) |
 
 ### Agent Actions
@@ -517,7 +485,7 @@ Once your agent is running and logging events, you can perform power analysis on
 
 Use the `trace_id` to group all events (Chain, LLM, Tool) belonging to a single execution flow.
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 SELECT
   timestamp,
   event_type,
@@ -543,7 +511,7 @@ ORDER BY
 
 Calculate the average latency and total token usage for your LLM calls.
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 SELECT
   JSON_VALUE(attributes, '$.model') AS model,
   COUNT(*) AS total_calls,
@@ -561,7 +529,7 @@ GROUP BY
 
 If you are offloading images to GCS, you can use BigQuery ML to analyze them directly.
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 SELECT
   logs.session_id,
   -- Get a signed URL for the image (optional, for viewing)
@@ -583,7 +551,7 @@ LIMIT 1;
 
 Visualize the execution flow and performance of your agent's operations (LLM calls, Tool usage) using span IDs.
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 SELECT
   span_id,
   parent_span_id,
@@ -604,7 +572,7 @@ ORDER BY timestamp ASC;
 
 ### 5. Querying Offloaded Content (Get Signed URLs)
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 SELECT
   timestamp,
   event_type,
@@ -624,7 +592,7 @@ LIMIT 10;
 
 These advanced patterns demonstrate how to sessionize data, analyze tool usage, and perform root cause analysis using BigQuery ML.
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 -- 1. Sessionize Conversation History (Create View)
 -- Consolidates all events into a single row per session with a formatted history.
 CREATE OR REPLACE VIEW `your-project.your-dataset.agent_sessions` AS
@@ -695,16 +663,15 @@ LIMIT 5;
 
 ## Conversational Analytics in BigQuery
 
-<Note>
-  **Conversational Analytics**
-
-  You can also use [BigQuery Conversational Analytics](https://cloud.google.com/bigquery/docs/conversational-analytics) to analyze your agent logs using natural language.
-  Just ask questions like:
-
-  * "Show me the error rate over time"
-  * "What are the most common tool calls?"
-  * "Identify sessions with high token usage"
-</Note>
+> [!NOTE]
+> **Conversational Analytics**
+>
+> You can also use [BigQuery Conversational Analytics](https://cloud.google.com/bigquery/docs/conversational-analytics) to analyze your agent logs using natural language.
+> Just ask questions like:
+>
+> * "Show me the error rate over time"
+> * "What are the most common tool calls?"
+> * "Identify sessions with high token usage"
 
 ## Looker Studio Dashboard
 
@@ -712,7 +679,7 @@ You can visualize your agent's performance using our prebuilt [Looker Studio Das
 
 To connect this dashboard to your own BigQuery table, use the following link format, replacing the placeholders with your specific project, dataset, and table IDs:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 https://lookerstudio.google.com/reporting/create?c.reportId=f1c5b513-3095-44f8-90a2-54953d41b125&ds.ds3.connector=bigQuery&ds.ds3.type=TABLE&ds.ds3.projectId=<your-project-id>&ds.ds3.datasetId=<your-dataset-id>&ds.ds3.tableId=<your-table-id>
 ```
 
@@ -737,7 +704,7 @@ In addition to standard LangChain events, the callback handler automatically det
 
 Use the `graph_context()` method to explicitly mark graph execution boundaries. This enables `INVOCATION_STARTING` and `INVOCATION_COMPLETED` events with accurate latency measurements:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.messages import HumanMessage
 from langchain_google_community.callbacks.bigquery_callback import (
@@ -777,7 +744,7 @@ with handler.graph_context("my_agent", metadata=run_metadata):
 
 The callback handler automatically tracks latency for all operations and stores measurements in the `latency_ms` JSON column:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 -- Query latency by event type
 SELECT
     event_type,
@@ -796,7 +763,7 @@ ORDER BY avg_latency_ms DESC;
 
 Use `event_allowlist` and `event_denylist` to control which events are logged:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community.callbacks.bigquery_callback import (
     BigQueryCallbackHandler,
     BigQueryLoggerConfig,
@@ -823,7 +790,7 @@ handler = BigQueryCallbackHandler(
 
 Or exclude noisy events:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Exclude chain events but log everything else
 config = BigQueryLoggerConfig(
     event_denylist=["CHAIN_START", "CHAIN_END"],
@@ -867,7 +834,7 @@ A [FastAPI-based monitoring dashboard](https://github.com/langchain-ai/langchain
 * 20+ REST API endpoints for analytics queries
 * Auto-refresh every 5 seconds
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Run the dashboard
 cd libs/community/examples/bigquery_callback/webapp
 pip install -r requirements.txt
@@ -887,12 +854,8 @@ We welcome your feedback on BigQuery Agent Analytics. If you have questions, sug
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/google_bigquery.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/google_bigquery.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

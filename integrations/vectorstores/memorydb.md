@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Amazon memorydb integration
 
 > Integrate with the Amazon memorydb vector store using LangChain Python.
@@ -27,11 +23,11 @@ Vector search for MemoryDB extends the functionality of MemoryDB. Vector search 
 
 `Redis-py` is a python  client that can be used to connect to MemoryDB
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  redis langchain-aws
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.embeddings import BedrockEmbeddings
 
 embeddings = BedrockEmbeddings()
@@ -50,7 +46,7 @@ More information about additional connection parameters can be found in the [red
 
 First we will describe some sample data so that the various attributes of the Redis vector store can be demonstrated.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata = [
     {
         "user": "john",
@@ -96,7 +92,7 @@ The InMemoryVectorStore instance can be initialized using the below methods
 * `InMemoryVectorStore.from_texts` - Initialize from a list of texts (optionally with metadata)
 * `InMemoryVectorStore.from_existing_index` - Initialize from an existing MemoryDB index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.vectorstores.inmemorydb import InMemoryVectorStore
 
 vds = InMemoryVectorStore.from_texts(
@@ -105,11 +101,11 @@ vds = InMemoryVectorStore.from_texts(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vds.index_name
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'users'
 ```
 
@@ -123,23 +119,23 @@ There are multiple ways to query the `InMemoryVectorStore`  implementation based
 * `similarity_search_with_relevance_scores`: Find the most similar vectors to a given vector and return the vector similarities
 * `max_marginal_relevance_search`: Find the most similar vectors to a given vector while also optimizing for diversity
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vds.similarity_search("foo")
 print(results[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 foo
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # with scores (distances)
 results = vds.similarity_search_with_score("foo", k=5)
 for result in results:
     print(f"Content: {result[0].page_content} --- Score: {result[1]}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Content: foo --- Score: 0.0
 Content: foo --- Score: 0.0
 Content: foo --- Score: 0.0
@@ -147,27 +143,27 @@ Content: bar --- Score: 0.1566
 Content: bar --- Score: 0.1566
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # limit the vector distance that can be returned
 results = vds.similarity_search_with_score("foo", k=5, distance_threshold=0.1)
 for result in results:
     print(f"Content: {result[0].page_content} --- Score: {result[1]}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Content: foo --- Score: 0.0
 Content: foo --- Score: 0.0
 Content: foo --- Score: 0.0
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # with scores
 results = vds.similarity_search_with_relevance_scores("foo", k=5)
 for result in results:
     print(f"Content: {result[0].page_content} --- Similarity: {result[1]}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Content: foo --- Similarity: 1.0
 Content: foo --- Similarity: 1.0
 Content: foo --- Similarity: 1.0
@@ -175,7 +171,7 @@ Content: bar --- Similarity: 0.8434
 Content: bar --- Similarity: 0.8434
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # you can also add new documents as follows
 new_document = ["baz"]
 new_metadata = [{"user": "sam", "age": 50, "job": "janitor", "credit_score": "high"}]
@@ -183,7 +179,7 @@ new_metadata = [{"user": "sam", "age": 50, "job": "janitor", "credit_score": "hi
 vds.add_texts(new_document, new_metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['doc:users:b9c71d62a0a34241a37950b448dafd38']
 ```
 
@@ -193,7 +189,7 @@ Here we go over different options for using the vector store as a retriever.
 
 There are three different search methods we can use to do retrieval. By default, it will use semantic similarity.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "foo"
 results = vds.similarity_search_with_score(query, k=3, return_metadata=True)
 
@@ -201,22 +197,22 @@ for result in results:
     print("Content:", result[0].page_content, " --- Score: ", result[1])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Content: foo  --- Score:  0.0
 Content: foo  --- Score:  0.0
 Content: foo  --- Score:  0.0
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vds.as_retriever(search_type="similarity", search_kwargs={"k": 4})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = retriever.invoke(query)
 docs
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'id': 'doc:users_modified:988ecca7574048e396756efc0e79aeca', 'user': 'john', 'job': 'engineer', 'credit_score': 'high', 'age': '18'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:009b1afeb4084cc6bdef858c7a99b48e', 'user': 'derrick', 'job': 'doctor', 'credit_score': 'low', 'age': '45'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:7087cee9be5b4eca93c30fbdd09a2731', 'user': 'nancy', 'job': 'doctor', 'credit_score': 'high', 'age': '94'}),
@@ -225,19 +221,19 @@ docs
 
 There is also the `similarity_distance_threshold` retriever which allows the user to specify the vector distance
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vds.as_retriever(
     search_type="similarity_distance_threshold",
     search_kwargs={"k": 4, "distance_threshold": 0.1},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = retriever.invoke(query)
 docs
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'id': 'doc:users_modified:988ecca7574048e396756efc0e79aeca', 'user': 'john', 'job': 'engineer', 'credit_score': 'high', 'age': '18'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:009b1afeb4084cc6bdef858c7a99b48e', 'user': 'derrick', 'job': 'doctor', 'credit_score': 'low', 'age': '45'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:7087cee9be5b4eca93c30fbdd09a2731', 'user': 'nancy', 'job': 'doctor', 'credit_score': 'high', 'age': '94'})]
@@ -245,28 +241,28 @@ docs
 
 Lastly, the `similarity_score_threshold` allows the user to define the minimum score for similar documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vds.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"score_threshold": 0.9, "k": 10},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'id': 'doc:users_modified:988ecca7574048e396756efc0e79aeca', 'user': 'john', 'job': 'engineer', 'credit_score': 'high', 'age': '18'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:009b1afeb4084cc6bdef858c7a99b48e', 'user': 'derrick', 'job': 'doctor', 'credit_score': 'low', 'age': '45'}),
  Document(page_content='foo', metadata={'id': 'doc:users_modified:7087cee9be5b4eca93c30fbdd09a2731', 'user': 'nancy', 'job': 'doctor', 'credit_score': 'high', 'age': '94'})]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'id': 'doc:users:8f6b673b390647809d510112cde01a27', 'user': 'john', 'job': 'engineer', 'credit_score': 'high', 'age': '18'}),
  Document(page_content='bar', metadata={'id': 'doc:users:93521560735d42328b48c9c6f6418d6a', 'user': 'tyler', 'job': 'engineer', 'credit_score': 'high', 'age': '100'}),
  Document(page_content='foo', metadata={'id': 'doc:users:125ecd39d07845eabf1a699d44134a5b', 'user': 'nancy', 'job': 'doctor', 'credit_score': 'high', 'age': '94'}),
@@ -277,7 +273,7 @@ retriever.invoke("foo")
 
 To delete your entries you have to address them by their keys.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # delete the indices too
 InMemoryVectorStore.drop_index(
     index_name="users", delete_documents=True, redis_url="redis://localhost:6379"
@@ -289,18 +285,14 @@ InMemoryVectorStore.drop_index(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/memorydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/memorydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

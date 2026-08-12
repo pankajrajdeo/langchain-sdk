@@ -1,17 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Splitting recursively - Text splitter integration guide
 
-This [text splitter](/oss/python/integrations/splitters/) is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is `["\n\n", "\n", " ", ""]`. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.
+This [text splitter](https://docs.langchain.com/oss/python/integrations/splitters/) is the recommended one for generic text. It is parameterized by a list of characters. It tries to split on them in order until the chunks are small enough. The default list is `["\n\n", "\n", " ", ""]`. This has the effect of trying to keep all paragraphs (and then sentences, and then words) together as long as possible, as those would generically seem to be the strongest semantically related pieces of text.
 
 1. How the text is split: by list of characters.
 2. How the chunk size is measured: by number of characters.
 
 Below we show example usage.
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU langchain-text-splitters
 ```
 
@@ -19,7 +15,7 @@ To obtain the string content directly, use `.split_text`.
 
 To create LangChain [Document](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects (e.g., for use in downstream tasks), use `.create_documents`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Load example document
@@ -38,16 +34,16 @@ print(texts[0])
 print(texts[1])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 page_content='Madam Speaker, Madam Vice President, our First Lady and Second Gentleman. Members of Congress and'
 page_content='of Congress and the Cabinet. Justices of the Supreme Court. My fellow Americans.'
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(text_splitter.split_text(state_of_the_union)[:2])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['Madam Speaker, Madam Vice President, our First Lady and Second Gentleman. Members of Congress and',
  'of Congress and the Cabinet. Justices of the Supreme Court. My fellow Americans.']
 ```
@@ -67,7 +63,7 @@ Some writing systems do not have [word boundaries](https://en.wikipedia.org/wiki
 * Add [Zero-width space](https://en.wikipedia.org/wiki/Zero-width_space) used in Thai, Myanmar, Kmer, and Japanese.
 * Add ASCII comma "`,`", Unicode fullwidth comma "`，`", and Unicode ideographic comma "`、`"
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text_splitter = RecursiveCharacterTextSplitter(
     separators=[
         "\n\n",
@@ -88,12 +84,8 @@ text_splitter = RecursiveCharacterTextSplitter(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/recursive_text_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/recursive_text_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

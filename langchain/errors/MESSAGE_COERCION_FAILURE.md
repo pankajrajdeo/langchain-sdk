@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MESSAGE_COERCION_FAILURE
 
 This error occurs when message objects don't conform to the expected format.
@@ -10,7 +6,7 @@ This error occurs when message objects don't conform to the expected format.
 
 LangChain modules accept `MessageLikeRepresentation`, which is defined as:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Union
 
 from langchain_core.prompts.chat import (
@@ -33,7 +29,7 @@ These include OpenAI style message objects (`{ role: "user", content: "Hello wor
 
 If a module receives a value outside of one of these formats, you will receive an error:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_anthropic import ChatAnthropic
 
 uncoercible_message = {"role": "HumanMessage", "random_field": "random value"}
@@ -43,7 +39,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 model.invoke([uncoercible_message])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ValueError: Message dict must contain 'role' and 'content' keys, got {'role': 'HumanMessage', 'random_field': 'random value'}
 ```
 
@@ -57,12 +53,8 @@ To resolve this error:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MESSAGE_COERCION_FAILURE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MESSAGE_COERCION_FAILURE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

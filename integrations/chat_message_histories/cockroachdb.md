@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # CockroachDB chat message history
 
 > Store chat conversation history in CockroachDB using LangChain Python.
@@ -24,13 +20,13 @@ CockroachDBChatMessageHistory provides:
 
 ### Install
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-cockroachdb
 ```
 
 ### Connection string
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # CockroachDB Cloud
 CONNECTION_STRING = "cockroachdb://user:password@host:26257/database?sslmode=verify-full"
 
@@ -42,7 +38,7 @@ CONNECTION_STRING = "cockroachdb://root@localhost:26257/defaultdb?sslmode=disabl
 
 ### Create the message history table
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 from langchain_cockroachdb import CockroachDBChatMessageHistory
 
@@ -58,15 +54,14 @@ async def setup():
 asyncio.run(setup())
 ```
 
-<Tip>
-  **Optional**: Specify a schema name by using `schema` parameter (default: "public")
-</Tip>
+> [!TIP]
+> **Optional**: Specify a schema name by using `schema` parameter (default: "public")
 
 ### Initialize for a session
 
 Create a chat history instance for a specific conversation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 session_id = str(uuid.uuid4())  # Unique ID for this conversation
@@ -82,7 +77,7 @@ chat_history = CockroachDBChatMessageHistory(
 
 ### Add messages
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage, AIMessage
 
 # Add messages to the conversation
@@ -92,7 +87,7 @@ await chat_history.aadd_message(AIMessage(content="CockroachDB is a distributed 
 
 ### Add multiple messages at once
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     HumanMessage(content="What are vector indexes?"),
     AIMessage(content="Vector indexes enable fast similarity search..."),
@@ -107,7 +102,7 @@ await chat_history.aadd_messages(messages)
 
 Get all messages for the session:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = await chat_history.aget_messages()
 
 for msg in messages:
@@ -121,7 +116,7 @@ for msg in messages:
 
 Delete all messages for the session:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await chat_history.aclear()
 ```
 
@@ -129,7 +124,7 @@ await chat_history.aclear()
 
 Use the synchronous API:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Sync usage
 chat_history_sync = CockroachDBChatMessageHistory(
     session_id=session_id,
@@ -157,12 +152,8 @@ For detailed documentation:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat_message_histories/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat_message_histories/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

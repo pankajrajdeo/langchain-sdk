@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Agent identity
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/agent-identity)
+Choose whether your Fleet agent authenticates with its own credentials or with each user's credentials.
 
-> Choose whether your Fleet agent authenticates with its own credentials or with each user's credentials.
+Agent identity controls whose [credentials](https://docs.langchain.com/langsmith/fleet/workspace-admin) the agent uses when it interacts with apps and services.
 
-Agent identity controls whose [credentials](/langsmith/fleet/workspace-admin) the agent uses when it interacts with apps and services.
-
-<Warning>
-  Once an agent identity is set, it cannot be changed.
-</Warning>
+> [!WARNING]
+> Once an agent identity is set, it cannot be changed.
 
 ## Fixed credentials ("Claws")
 
@@ -20,7 +15,7 @@ Use fixed credentials when:
 
 * The agent operates as a shared service (for example, a team Slack bot or a daily briefing agent).
 * You want a single set of authenticated accounts for all users.
-* The agent needs to run on [channels](/langsmith/fleet/channels) or [schedules](/langsmith/fleet/schedules), which require fixed credentials.
+* The agent needs to run on [channels](https://docs.langchain.com/langsmith/fleet/channels) or [schedules](https://docs.langchain.com/langsmith/fleet/schedules), which require fixed credentials.
 
 With fixed credentials, all actions the agent takes (sending emails, posting messages, reading calendars) use the account that the agent owner connected during setup.
 
@@ -41,18 +36,14 @@ With user credentials, each user authenticates individually the first time they 
 To set the identity for an agent:
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-agent-identity), navigate to the agent you want to edit.
-2. Click <Icon icon="pencil" /> **Edit** in the top right corner.
+2. Click  **Edit** in the top right corner.
 3. Click **Set identity** and select the identity you want to use.
 4. Click **Save**.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/agent-identity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/agent-identity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

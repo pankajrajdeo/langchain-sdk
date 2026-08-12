@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Async subagents
-
-> Launch background subagents that run concurrently while the supervisor continues interacting with the user
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/async-subagents)
+Launch background subagents that run concurrently while the supervisor continues interacting with the user
 
 Async subagents let a supervisor agent launch background tasks that return immediately, so the supervisor can continue interacting with the user while subagents work concurrently. The supervisor can check progress, send follow-up instructions, or cancel tasks at any point.
 
-This builds on [subagents](/oss/python/deepagents/subagents), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
+This builds on [subagents](https://docs.langchain.com/oss/python/deepagents/subagents), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
 
-<Note>
-  Async subagents are a preview feature available in `deepagents` 0.5.0. Preview features are under active development and APIs may change.
-</Note>
+> [!NOTE]
+> Async subagents are a preview feature available in `deepagents` 0.5.0. Preview features are under active development and APIs may change.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TB
     User([User]) --> Supervisor[Supervisor Agent]
 
@@ -25,9 +20,8 @@ graph TB
     Coder --> |check| Supervisor
 ```
 
-<Note>
-  Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](/langsmith/deployment), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
-</Note>
+> [!NOTE]
+> Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](https://docs.langchain.com/langsmith/deployment), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
 
 ## When to use async subagents
 
@@ -44,7 +38,7 @@ graph TB
 
 Define async subagents as a list of [`AsyncSubAgent`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgent) specs, each pointing to an Agent Protocol server:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import AsyncSubAgent, create_deep_agent
 
 async_subagents = [
@@ -78,7 +72,7 @@ agent = create_deep_agent(
 
 For LangGraph-based deployments, register all graphs in the same `langgraph.json` for co-deployed setups:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "graphs": {
     "supervisor": "./src/supervisor.py:graph",
@@ -90,7 +84,7 @@ For LangGraph-based deployments, register all graphs in the same `langgraph.json
 
 ## Use the async subagent tools
 
-The [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware) which is included in the [Deep Agents stack](/oss/python/deepagents/customization#deep-agents-stack) when async subagents are configured, gives the supervisor five tools:
+The [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware) which is included in the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack) when async subagents are configured, gives the supervisor five tools:
 
 | Tool                | Purpose                                   | Returns                       |
 | ------------------- | ----------------------------------------- | ----------------------------- |
@@ -106,7 +100,7 @@ The supervisor's LLM calls these tools like any other tool. The middleware handl
 
 A typical interaction follows this sequence:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 sequenceDiagram
     participant User
     participant Supervisor
@@ -136,7 +130,7 @@ sequenceDiagram
 
 ## Understand state management
 
-Task metadata is stored in a dedicated state channel (`async_tasks`) on the supervisor's graph, separate from the message history. This is critical because deep agents [compact their message history](/oss/python/deepagents/context-engineering#summarization) when the context window fills up. If task IDs were only in tool messages, they would be lost during compaction. The dedicated channel ensures the supervisor can always recall its tasks through `list_async_tasks`, even after multiple rounds of summarization.
+Task metadata is stored in a dedicated state channel (`async_tasks`) on the supervisor's graph, separate from the message history. This is critical because deep agents [compact their message history](https://docs.langchain.com/oss/python/deepagents/context-engineering#summarization) when the context window fills up. If task IDs were only in tool messages, they would be lost during compaction. The dedicated channel ensures the supervisor can always recall its tasks through `list_async_tasks`, even after multiple rounds of summarization.
 
 Each tracked task records the task ID, agent name, thread ID, run ID, status, and timestamps (`created_at`, `last_checked_at`, `last_updated_at`).
 
@@ -152,7 +146,7 @@ ASGI transport eliminates network latency and requires no additional auth config
 
 Add a `url` field to switch to HTTP transport, where SDK calls go over the network to a remote Agent Protocol server:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import AsyncSubAgent
 
 AsyncSubAgent(
@@ -181,7 +175,7 @@ Supervisor on one server, subagents on another via HTTP transport. Use when suba
 
 In a hybrid deployment, some subagents are co-deployed via ASGI, others remote via HTTP:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import AsyncSubAgent
 
 async_subagents = [
@@ -207,7 +201,7 @@ async_subagents = [
 
 When running locally with `langgraph dev`, increase the worker pool to accommodate concurrent subagent runs. Each active run occupies a worker slot. A supervisor with 3 concurrent subagent tasks requires 4 slots (1 supervisor + 3 subagents). Under-provisioning causes launches to queue.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph dev --n-jobs-per-worker 10
 ```
 
@@ -215,27 +209,25 @@ langgraph dev --n-jobs-per-worker 10
 
 The supervisor uses descriptions to decide which subagent to launch. Be specific and action-oriented:
 
-<CodeGroup>
-  ```python Good theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents import AsyncSubAgent
+```python
+from deepagents import AsyncSubAgent
 
-  AsyncSubAgent(
-      name="researcher",
-      description="Conducts in-depth research using web search. Use for questions requiring multiple searches and synthesis.",
-      graph_id="researcher",
-  )
-  ```
+AsyncSubAgent(
+    name="researcher",
+    description="Conducts in-depth research using web search. Use for questions requiring multiple searches and synthesis.",
+    graph_id="researcher",
+)
+```
 
-  ```python Bad theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents import AsyncSubAgent
+```python
+from deepagents import AsyncSubAgent
 
-  AsyncSubAgent(
-      name="helper",
-      description="helps with stuff",
-      graph_id="helper",
-  )
-  ```
-</CodeGroup>
+AsyncSubAgent(
+    name="helper",
+    description="helps with stuff",
+    graph_id="helper",
+)
+```
 
 ### Trace with thread IDs
 
@@ -249,7 +241,7 @@ When using LangGraph-based deployments, every async subagent run is a standard L
 
 **Solution**: The middleware injects system prompt rules to prevent this. If polling persists, reinforce the behavior in your supervisor's system prompt:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
@@ -278,7 +270,7 @@ agent = create_deep_agent(
 
 **Problem**: Launching a subagent hangs or takes a long time to start.
 
-**Solution**: The worker pool is likely exhausted. Increase the pool size with `--n-jobs-per-worker`. See [Size the worker pool](#size-the-worker-pool-for-local-development).
+**Solution**: The worker pool is likely exhausted. Increase the pool size with `--n-jobs-per-worker`. See [Size the worker pool](https://docs.langchain.com/oss/python/deepagents/async-subagents#size-the-worker-pool-for-local-development).
 
 ## Reference implementation
 
@@ -286,12 +278,8 @@ The [async-deep-agents](https://github.com/langchain-ai/async-deep-agents) repos
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/async-subagents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

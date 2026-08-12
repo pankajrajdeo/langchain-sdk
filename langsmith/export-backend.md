@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Export LangSmith telemetry to your observability backend
-
-<Warning>
-  **This section is only applicable for Kubernetes deployments.**
-</Warning>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/export-backend)
+> [!WARNING]
+> **This section is only applicable for Kubernetes deployments.**
 
 Self-Hosted LangSmith instances produce telemetry data in the form of logs, metrics and traces. This section will show you how to access and export that data to an observability collector or backend.
 
@@ -19,7 +14,7 @@ Infrastructure refers to:
 
 ## Logs
 
-For a reference setup, see the [OTel collector example](/langsmith/langsmith-collector#logs).
+For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#logs).
 
 All services that are part of the LangSmith self-hosted deployment write logs to their node's filesystem and to stdout. In order to access these logs, you need to set up your collector to read from either the filesystem or stdout. Most popular collectors support reading logs from filesystems.
 
@@ -29,7 +24,7 @@ All services that are part of the LangSmith self-hosted deployment write logs to
 
 ## Metrics
 
-For a reference setup, see the [OTel collector example](/langsmith/langsmith-collector#metrics).
+For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#metrics).
 
 ### LangSmith services
 
@@ -46,9 +41,8 @@ You can use a [Prometheus](https://prometheus.io/docs/prometheus/latest/getting_
 
 The frontend service exposes its Nginx metrics at the following endpoint: `langsmith-frontend.langsmith.svc.cluster.local:80/nginx_status`. You can either scrape them yourself, or bring up a [Prometheus Nginx exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-nginx-exporter).
 
-<Warning>
-  **The following sections apply for in-cluster databases only. If you are using external databases, you will need to configure exposing and fetching metrics.**
-</Warning>
+> [!WARNING]
+> **The following sections apply for in-cluster databases only. If you are using external databases, you will need to configure exposing and fetching metrics.**
 
 ### Postgres + Redis
 
@@ -60,11 +54,11 @@ The in-cluster Clickhouse is configured to expose metrics without the need for a
 
 ## Traces
 
-For a reference setup, see the [OTel collector example](/langsmith/langsmith-collector#traces).
+For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#traces).
 
 The LangSmith Backend, Platform Backend, Playground and LangSmith Queue deployments have been instrumented to emit [Otel](https://opentelemetry.io/docs/concepts/signals/traces/) traces. Tracing is toggled off by default, and can be enabled for all LangSmith services with the following in your `langsmith_config.yaml` (or equivalent) file:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   tracing:
     enabled: true
@@ -76,12 +70,8 @@ config:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-backend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/export-backend.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

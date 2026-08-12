@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Mcp toolbox integrations
 
 > Integrate with Mcp toolbox using LangChain Python.
@@ -18,30 +14,24 @@ This is particularly useful when you have an agent that needs to perform a varie
 
 To get started, you'll need to install the necessary package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install toolbox-langchain
-  ```
+```bash
+pip install toolbox-langchain
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add toolbox-langchain
-  ```
-</CodeGroup>
+```bash
+uv add toolbox-langchain
+```
 
 ## Tutorial
 
 For a complete, step-by-step guide on how to create, configure, and use MCP Toolbox with your agents, please refer to our detailed Jupyter notebook tutorial.
 
-**[➡️ View the full tutorial here](/oss/python/integrations/tools/mcp_toolbox)**.
+**[➡️ View the full tutorial here](https://docs.langchain.com/oss/python/integrations/tools/mcp_toolbox)**.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

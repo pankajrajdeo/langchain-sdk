@@ -1,20 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Question Answering with `HanaSparqlQAChain`
 
 ## Setup and Installation
 
 To use this feature, install the `langchain-hana` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langchain_hana
 ```
 
 And then, create a connection to your SAP HANA Cloud instance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -45,15 +41,15 @@ You need:
 * An **LLM** to generate and interpret queries
 * A **`HanaRdfGraph`** (with connection, `graph_uri`, and ontology)
 
-Follow the steps here [HanaRdfGraph](/oss/python/integrations/graphs/sap_hana_rdf_graph) to know more about creating a `HanaRdfGraph` instance.
+Follow the steps here [HanaRdfGraph](https://docs.langchain.com/oss/python/integrations/graphs/sap_hana_rdf_graph) to know more about creating a `HanaRdfGraph` instance.
 
 Import the `HanaSparqlQAChain`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaSparqlQAChain
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 qa_chain = HanaSparqlQAChain.from_llm(
     llm=llm, graph=graph, allow_dangerous_requests=True, verbose=True
 )
@@ -94,7 +90,7 @@ The default prompts can be found here: [`prompts.py`](https://github.com/SAP/lan
 
 You can override the defaults at initialization:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 qa_chain = HanaSparqlQAChain.from_llm(
     llm=llm,
     graph=graph,
@@ -125,7 +121,7 @@ This demonstrates how the LLM generates SPARQL under the hood, executes it again
 
 First, create a connection to your SAP HANA Cloud instance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -145,14 +141,14 @@ connection = dbapi.connect(
 
 Then, set up the knowledge graph instance
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from gen_ai_hub.proxy.langchain.openai import ChatOpenAI
 from langchain_hana import HanaRdfGraph, HanaSparqlQAChain
 
 # from langchain_openai import ChatOpenAI  # or your chosen LLM
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Set up the Knowledge Graph
 graph_uri = "kgdocu_movies"
 
@@ -163,13 +159,13 @@ graph = HanaRdfGraph(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # a basic graph schema is extracted from the data graph. This schema will guide the LLM to generate a proper SPARQL query.
 schema_graph = graph.get_schema
 print(schema_graph.serialize(format="turtle"))
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -230,14 +226,14 @@ rdfs:label a owl:DatatypeProperty ;
 
 After that, initialise the LLM.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize the LLM
 llm = ChatOpenAI(proxy_model_name="gpt-4o", temperature=0)
 ```
 
 Then, we create a SPARQL QA Chain
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a SPARQL QA Chain
 chain = HanaSparqlQAChain.from_llm(
     llm=llm,
@@ -247,7 +243,7 @@ chain = HanaSparqlQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # output = chain.invoke("Which movies are in the data?")
 # output = chain.invoke("In which movies did Keanu Reeves and Carrie-Anne Moss play in together")
 # output = chain.invoke("which movie genres are in the data?")
@@ -259,8 +255,7 @@ output = chain.invoke("which actors acted in Blade Runner?")
 print(output["result"])
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-
+```output
 
 > Entering new HanaSparqlQAChain chain...
 Generated SPARQL:
@@ -309,7 +304,6 @@ http://www.wikidata.org/entity/Q3143555,Hy Pyke
 http://www.wikidata.org/entity/Q211415,Edward James Olmos
 http://www.wikidata.org/entity/Q230736,Sean Young
 
-
 > Finished chain.
 The actors who acted in Blade Runner are Morgan Paull, William Sanderson, James Hong, M. Emmet Walsh, Brion James, Daryl Hannah, Joe Turkel, Joanna Cassidy, Rutger Hauer, Hy Pyke, Edward James Olmos, and Sean Young.
 ```
@@ -327,12 +321,8 @@ The actors who acted in Blade Runner are Morgan Paull, William Sanderson, James 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chains/sap_hana_sparql_qa_chain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chains/sap_hana_sparql_qa_chain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

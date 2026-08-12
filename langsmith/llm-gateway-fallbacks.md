@@ -1,34 +1,29 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Model fallbacks
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-fallbacks)
+Automatically retry a request against backup model configurations when the primary model rate-limits, errors, or returns another configured status code.
 
-> Automatically retry a request against backup model configurations when the primary model rate-limits, errors, or returns another configured status code.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-Model fallbacks retry a request against one or more backup [model configurations](/langsmith/model-configurations) when the primary model returns an error you've flagged as retryable, such as a rate limit or a provider outage. Instead of building retry logic into every agent, define the fallback order once in LangSmith and call it through a single gateway route.
+Model fallbacks retry a request against one or more backup [model configurations](https://docs.langchain.com/langsmith/model-configurations) when the primary model returns an error you've flagged as retryable, such as a rate limit or a provider outage. Instead of building retry logic into every agent, define the fallback order once in LangSmith and call it through a single gateway route.
 
 ## How it works
 
 A fallback configuration has:
 
 * **A name**: exposed at the route `https://gateway.smith.langchain.com/routes/{name}`. Clients call this URL instead of a provider-specific path.
-* **One or more fallback chains**: each an ordered list of [model configurations](/langsmith/model-configurations) to try in priority order.
+* **One or more fallback chains**: each an ordered list of [model configurations](https://docs.langchain.com/langsmith/model-configurations) to try in priority order.
 * **Triggers**: the upstream HTTP status codes that should cause the gateway to move on to the next model in the chain. For example, `429` for rate limits, or `500`, `502`, `503`, `504` for other provider errors.
 
 For each request, the gateway:
 
-1. Determines the wire format from the request path, and considers only the chains in that format (see [Wire formats](#wire-formats)).
-2. Picks one of those chains (see [Selecting a chain](#selecting-a-chain)).
+1. Determines the wire format from the request path, and considers only the chains in that format (see [Wire formats](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#wire-formats)).
+2. Picks one of those chains (see [Selecting a chain](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#selecting-a-chain)).
 3. Calls the chain's first model configuration.
 4. If the response status matches a configured trigger, discards that response and calls the next model configuration in the chain.
 5. Repeats until a candidate returns a non-trigger response, or the chain is exhausted—in which case the last candidate's response is returned to the caller.
 
-Each configuration in a chain can point to a different provider and model. On both the first attempt and any fallback, the gateway calls the candidate with its configured model name, replacing the value the client sent. The client's model field only selects which chain to use from those matching the path's [wire format](#wire-formats). If no chain matches, the gateway uses the first chain defined for that wire format as the default.
+Each configuration in a chain can point to a different provider and model. On both the first attempt and any fallback, the gateway calls the candidate with its configured model name, replacing the value the client sent. The client's model field only selects which chain to use from those matching the path's [wire format](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#wire-formats). If no chain matches, the gateway uses the first chain defined for that wire format as the default.
 
 ## Wire formats
 
@@ -39,7 +34,7 @@ Each chain is either OpenAI-compatible or Anthropic-compatible, since the gatewa
 | OpenAI-compatible    | **OpenAI Compatible Endpoint** | `POST /v1/chat/completions`, `POST /v1/responses` |
 | Anthropic-compatible | **Anthropic**                  | `POST /v1/messages`                               |
 
-Only these two provider types can go in a chain. A [model configuration](/langsmith/model-configurations) saved for another provider, such as Azure OpenAI or Bedrock, isn't eligible. To reach a host that speaks the OpenAI API, save it as an **OpenAI Compatible Endpoint** with its base URL.
+Only these two provider types can go in a chain. A [model configuration](https://docs.langchain.com/langsmith/model-configurations) saved for another provider, such as Azure OpenAI or Bedrock, isn't eligible. To reach a host that speaks the OpenAI API, save it as an **OpenAI Compatible Endpoint** with its base URL.
 
 The path you call selects the format, and the gateway only considers chains in that format. Any other path returns `501 Not Implemented`.
 
@@ -47,43 +42,40 @@ A single fallback configuration can hold chains of both wire formats, so one rou
 
 ## Create a fallback configuration
 
-<Warning>
-  Creating and managing fallback configurations requires `organization:manage` permission. For the full permissions breakdown, refer to [access control](/langsmith/llm-gateway-access).
-</Warning>
+> [!WARNING]
+> Creating and managing fallback configurations requires `organization:manage` permission. For the full permissions breakdown, refer to [access control](https://docs.langchain.com/langsmith/llm-gateway-access).
 
 1. Go to **Settings → Gateway → LLM Gateway** and select the **Model Fallbacks** tab.
 2. Click **Create configuration**.
 3. Enter a **Configuration name**. This becomes `{name}` in the gateway URL `https://gateway.smith.langchain.com/routes/{name}`.
-4. Select the **Workspace** the configuration belongs to. [Model configurations](/langsmith/model-configurations) are workspace-scoped, so only that workspace's configurations are available to add to a chain. The workspace can't be changed later—delete and recreate the configuration to move it.
+4. Select the **Workspace** the configuration belongs to. [Model configurations](https://docs.langchain.com/langsmith/model-configurations) are workspace-scoped, so only that workspace's configurations are available to add to a chain. The workspace can't be changed later—delete and recreate the configuration to move it.
 5. Under **Fallback triggers**, review the HTTP status codes that should trigger a fallback. The list comes prepopulated with the transient codes another provider has a chance of serving (such as `429`, `500`, and `503`); add or remove codes as needed.
-6. Under **Model fallback chains**, click **Add chain**, then add two to five model configurations in the order the gateway should try them. A chain's first model fixes its [wire format](#wire-formats); only configurations of that format can follow. The gateway groups chains by format, and the first chain in each group is that format's **default**, which it uses when a request's model does not select another chain.
+6. Under **Model fallback chains**, click **Add chain**, then add two to five model configurations in the order the gateway should try them. A chain's first model fixes its [wire format](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#wire-formats); only configurations of that format can follow. The gateway groups chains by format, and the first chain in each group is that format's **default**, which it uses when a request's model does not select another chain.
 7. Click **Create configuration**.
 
 ## Make a call
 
-Call the route the same way you'd call a [custom provider](/langsmith/llm-gateway-custom-providers), on the path for the [wire format](#wire-formats) you want:
+Call the route the same way you'd call a [custom provider](https://docs.langchain.com/langsmith/llm-gateway-custom-providers), on the path for the [wire format](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#wire-formats) you want:
 
-<CodeGroup>
-  ```bash OpenAI-compatible theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/routes/my-route/v1/chat/completions \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"messages":[{"role":"user","content":"ping"}]}'
-  ```
+```bash
+curl https://gateway.smith.langchain.com/routes/my-route/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"messages":[{"role":"user","content":"ping"}]}'
+```
 
-  ```bash Anthropic-compatible theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/routes/my-route/v1/messages \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
-  ```
-</CodeGroup>
+```bash
+curl https://gateway.smith.langchain.com/routes/my-route/v1/messages \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
+```
 
-The gateway tries each model configuration in the selected chain, in order, until one responds without a trigger status. Each attempt is traced and counted against [spend policies](/langsmith/llm-gateway-spend-policies) on its own, so a request that falls back records one call per candidate tried.
+The gateway tries each model configuration in the selected chain, in order, until one responds without a trigger status. Each attempt is traced and counted against [spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) on its own, so a request that falls back records one call per candidate tried.
 
 ## Selecting a chain
 
-A configuration can hold more than one fallback chain, which is useful when different model families need different fallback behavior. Among the chains matching the request's [wire format](#wire-formats), the gateway selects one by the request body's `model` field, in this order:
+A configuration can hold more than one fallback chain, which is useful when different model families need different fallback behavior. Among the chains matching the request's [wire format](https://docs.langchain.com/langsmith/llm-gateway-fallbacks#wire-formats), the gateway selects one by the request body's `model` field, in this order:
 
 1. If `model` matches a chain's **alias**, that chain is used.
 2. Otherwise, if `model` matches a chain's **primary** (first) model configuration's underlying model name, that chain is used.
@@ -108,17 +100,13 @@ For example, a configuration with three chains:
 
 ## Next steps
 
-* [Custom model providers](/langsmith/llm-gateway-custom-providers): call the same model configurations directly, one at a time, without a fallback chain.
-* [Spend policies](/langsmith/llm-gateway-spend-policies): apply cost limits alongside fallback routing.
+* [Custom model providers](https://docs.langchain.com/langsmith/llm-gateway-custom-providers): call the same model configurations directly, one at a time, without a fallback chain.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): apply cost limits alongside fallback routing.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-fallbacks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

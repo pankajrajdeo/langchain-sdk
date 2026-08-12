@@ -1,16 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Server Information
 
 > Get server version information, feature flags, and metadata.
 
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json get /info
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment

@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Bedrock integration
 
 > Integrate with the Bedrock LLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of Amazon Bedrock models as text completion models. Many popular models available on Bedrock are [chat completion models](/oss/python/langchain/models).**
-
-  You may be looking for [this page instead](/oss/python/integrations/chat/bedrock/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of Amazon Bedrock models as text completion models. Many popular models available on Bedrock are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/bedrock/).
 
 > [Amazon Bedrock](https://aws.amazon.com/bedrock/) is a fully managed service that offers a choice of
 > high-performing foundation models (FMs) from leading AI companies like `AI21 Labs`, `Anthropic`, `Cohere`,
@@ -22,11 +17,11 @@
 > serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy
 > generative AI capabilities into your applications using the AWS services you are already familiar with.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-aws
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import BedrockLLM
 
 llm = BedrockLLM(
@@ -36,7 +31,7 @@ llm = BedrockLLM(
 
 ### Custom models
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_llm = BedrockLLM(
     credentials_profile_name="bedrock-admin",
     provider="cohere",
@@ -53,11 +48,10 @@ custom_llm.invoke(input="What is the recipe of mayonnaise?")
 [Guardrails for Amazon Bedrock](https://aws.amazon.com/bedrock/guardrails/) evaluates user inputs and model responses based on use case specific policies, and provides an additional layer of safeguards regardless of the underlying model. Guardrails can be applied across models, including Anthropic Claude, Meta Llama 2, Cohere Command, AI21 Labs Jurassic, and Amazon Titan Text, as well as fine-tuned models.
 In this section, we are going to set up a Bedrock language model with specific guardrails that include tracing capabilities.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Any
 
 from langchain_core.callbacks import AsyncCallbackHandler
-
 
 class BedrockAsyncCallbackHandler(AsyncCallbackHandler):
     # Async callback handler that can be used to handle callbacks from langchain.
@@ -66,7 +60,6 @@ class BedrockAsyncCallbackHandler(AsyncCallbackHandler):
         reason = kwargs.get("reason")
         if reason == "GUARDRAIL_INTERVENED":
             print(f"Guardrails: {kwargs}")
-
 
 # Guardrails for Amazon Bedrock with trace
 llm = BedrockLLM(
@@ -80,12 +73,8 @@ llm = BedrockLLM(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Overview
-
-> Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/overview)
+Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents
 
 Build frontends that visualize deep agent workflows in real time. These patterns
 show how to render subagent progress, task planning, streaming content, and
@@ -15,15 +11,14 @@ showing a single opaque assistant bubble, the LangChain SDKs expose the
 coordinator, subagent discovery, custom state, and sandbox-backed artifacts so
 users can inspect how a long-running task is being decomposed and completed.
 
-<Note>
-  These patterns use the v1 frontend SDK packages. If you are using earlier versions, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
-</Note>
+> [!NOTE]
+> These patterns use the v1 frontend SDK packages. If you are using earlier versions, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
 
 Deep Agents use a coordinator-worker architecture. The main agent plans tasks and delegates to specialized subagents, each running in isolation. On the frontend, the v1 stream handle surfaces coordinator messages on the root stream and exposes subagent discovery snapshots for scoped subagent views.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -57,7 +52,7 @@ graph LR
   class SUB1,SUB2 purpleHighlight;
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
@@ -74,9 +69,9 @@ agent = create_deep_agent(
 )
 ```
 
-On the frontend, connect with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) the same way as with `createAgent`. Pass a [type parameter](/oss/python/langchain/frontend/overview) for type-safe stream state. Deep agent patterns use `stream.subagents`, selector helpers such as `useMessages(stream, subagent)`, and custom state values like `stream.values.todos` to render subagent-specific UIs.
+On the frontend, connect with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) the same way as with `createAgent`. Pass a [type parameter](https://docs.langchain.com/oss/python/langchain/frontend/overview) for type-safe stream state. Deep agent patterns use `stream.subagents`, selector helpers such as `useMessages(stream, subagent)`, and custom state values like `stream.values.todos` to render subagent-specific UIs.
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { useStream } from "@langchain/react";
 
 function App() {
@@ -109,39 +104,30 @@ workflow monitor than a plain chat transcript.
 
 ## Patterns
 
-<CardGroup cols={3}>
-  <Card title="Subagent streaming" icon="arrows-split" href="/oss/python/deepagents/frontend/subagent-streaming">
-    Display specialist subagents with streaming content, progress tracking, and collapsible cards.
-  </Card>
+#### [Subagent streaming](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming)
+Display specialist subagents with streaming content, progress tracking, and collapsible cards.
 
-  <Card title="Todo list" icon="list-check" href="/oss/python/deepagents/frontend/todo-list">
-    Track progress with a real-time todo list when the agent opts into task planning.
-  </Card>
+#### [Todo list](https://docs.langchain.com/oss/python/deepagents/frontend/todo-list)
+Track progress with a real-time todo list when the agent opts into task planning.
 
-  <Card title="Sandbox" icon="code" href="/oss/python/deepagents/frontend/sandbox">
-    Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
-  </Card>
-</CardGroup>
+#### [Sandbox](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox)
+Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
 
 ## Related patterns
 
-The [LangChain frontend patterns](/oss/python/langchain/frontend/overview), including
+The [LangChain frontend patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview), including
 markdown messages, tool calling, and human-in-the-loop, all work with deep
 agents too. Deep Agents are built on the same LangGraph runtime, so
 `useStream` provides the same core API.
 
 For lower-level graph visualizations, see the
-[LangGraph frontend patterns](/oss/python/langgraph/frontend/overview). They show how
+[LangGraph frontend patterns](https://docs.langchain.com/oss/python/langgraph/frontend/overview). They show how
 to map graph nodes and state keys directly to UI components.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure Terraform quick reference
-
-> Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-quick-reference)
+Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS.
 
 Command cheat sheet for day-to-day operations against an Azure LangSmith deployment provisioned with the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure). All `make` targets run from `modules/azure/`. Run `make help` for an inline summary.
 
-For the full deployment walkthrough, see the [Azure deployment guide](/langsmith/self-host-terraform-azure-deploy).
+For the full deployment walkthrough, see the [Azure deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy).
 
 ## Deployment overview
 
@@ -24,7 +20,7 @@ For the full deployment walkthrough, see the [Azure deployment guide](/langsmith
 
 ## First-time setup
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd terraform/modules/azure
 
 # 1. Generate terraform.tfvars (interactive wizard)
@@ -57,14 +53,14 @@ make status
 
 Or run the whole flow in one shot:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make deploy-all      # apply → kubeconfig → k8s-secrets → init-values → deploy
 make deploy-all-tf   # apply → init-values → init-app → apply-app (Terraform path)
 ```
 
 ## Day-2 operations
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make status         # 10-section health check
 make status-quick   # skip Key Vault + K8s secret queries (faster)
 make deploy         # re-deploy after any Helm value changes
@@ -86,7 +82,7 @@ make keyvault                                       # interactive menu
 
 Add-on stages (3 to 5) are controlled by flags in `infra/terraform.tfvars`. Set the flags, re-run `init-values && deploy`. `init-values.sh` copies the matching example file into `helm/values/` automatically.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 # infra/terraform.tfvars
 sizing_profile       = "production"   # minimum | dev | production | production-large
 enable_deployments   = true           # LangSmith Deployment add-on (listener + operator + host-backend)
@@ -95,9 +91,8 @@ enable_insights      = true           # Insights / Clio analytics add-on
 enable_polly         = true           # Polly AI eval add-on (requires enable_deployments)
 ```
 
-<Warning>
-  The LangSmith Deployment add-on requires `default_node_pool_min_count = 5` first. Operator-spawned pods need node headroom; without it, agent pods stay in `Pending` indefinitely.
-</Warning>
+> [!WARNING]
+> The LangSmith Deployment add-on requires `default_node_pool_min_count = 5` first. Operator-spawned pods need node headroom; without it, agent pods stay in `Pending` indefinitely.
 
 ## Sizing profiles
 
@@ -112,7 +107,7 @@ Set `sizing_profile` in `terraform.tfvars`, then re-run `make init-values && mak
 
 ## kubectl
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Pod health
 kubectl get pods -n langsmith
 kubectl get pods -n langsmith -w
@@ -151,7 +146,7 @@ kubectl get crd | grep langchain
 
 ## Azure CLI
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Re-auth
 az login
 az account set --subscription <subscription-id>
@@ -185,7 +180,7 @@ az network application-gateway list
 
 ## Terraform
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd modules/azure/infra
 
 terraform init
@@ -214,7 +209,7 @@ terraform state list
 
 ## Teardown
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make uninstall   # removes Helm release + LGP resources; prompts to delete namespace
 make destroy     # destroys all Azure infrastructure via terraform destroy
 make clean       # removes local secrets, config, helm values, and tfstate files
@@ -222,12 +217,8 @@ make clean       # removes local secrets, config, helm values, and tfstate files
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

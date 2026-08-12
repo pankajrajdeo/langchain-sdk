@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Valkey
 
 > [Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Valkey can run as either a standalone daemon or in a cluster, with options for replication and high availability.
@@ -12,29 +8,26 @@ This page covers how to use the Valkey vector store with [Amazon ElastiCache for
 
 Install the required dependencies:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "langchain-aws[valkey]"
-  ```
+```bash
+pip install "langchain-aws[valkey]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws --extra valkey
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws --extra valkey
+```
 
-<Note>
-  The Valkey integration requires `langchain-aws>=1.5.0`. If you're using an earlier version, install the dependency directly:
-
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-aws valkey-glide-sync
-  ```
-</Note>
+> [!NOTE]
+> The Valkey integration requires `langchain-aws>=1.5.0`. If you're using an earlier version, install the dependency directly:
+>
+> ```bash
+> pip install langchain-aws valkey-glide-sync
+> ```
 
 ## Basic Usage
 
 ### With Bedrock Embeddings
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import BedrockEmbeddings
 from langchain_aws.vectorstores import ValkeyVectorStore
 
@@ -60,7 +53,7 @@ for doc in results:
 
 ### With Ollama Embeddings
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ollama import OllamaEmbeddings
 from langchain_aws.vectorstores import ValkeyVectorStore
 
@@ -98,7 +91,7 @@ results = vectorstore.similarity_search("query", k=2)
 
 ValkeyVectorStore supports various connection URL formats:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Standalone
 valkey_url = "valkey://localhost:6379"
 
@@ -114,7 +107,7 @@ valkey_url = "valkeyss://username:password@host:6379"
 
 ## AWS ElastiCache for Valkey
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import BedrockEmbeddings
 from langchain_aws.vectorstores import ValkeyVectorStore
 
@@ -136,7 +129,7 @@ vectorstore.add_texts(
 
 ## Metadata Filtering
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.vectorstores.valkey.filters import ValkeyTag, ValkeyNum
 
 # Add documents with metadata
@@ -159,7 +152,7 @@ results = vectorstore.similarity_search(
 
 ## Custom Vector Schema
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.vectorstores import ValkeyVectorStore
 
 vectorstore = ValkeyVectorStore(
@@ -182,12 +175,8 @@ For detailed API documentation, see [`ValkeyVectorStore`](https://reference.lang
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/valkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/valkey.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

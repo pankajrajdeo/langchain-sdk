@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Component architecture
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/component-architecture)
 LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components.
 
 ## Core component ecosystem
 
 The diagram below shows how LangChain's major components connect to form complete AI applications:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TD
     %% Input processing
     subgraph "📥 Input processing"
@@ -79,19 +75,19 @@ LangChain organizes components into these main categories:
 
 | Category                                                             | Purpose                     | Key Components                      | Use Cases                                          |
 | -------------------------------------------------------------------- | --------------------------- | ----------------------------------- | -------------------------------------------------- |
-| **[Models](/oss/python/langchain/models)**                           | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
-| **[Tools](/oss/python/langchain/tools)**                             | External capabilities       | APIs, databases, etc.               | Web search, data access, computations              |
-| **[Agents](/oss/python/langchain/agents)**                           | Orchestration and reasoning | ReAct agents, tool calling agents   | Nondeterministic workflows, decision making        |
-| **[Memory](/oss/python/langchain/short-term-memory)**                | Context preservation        | Message history, custom state       | Conversations, stateful interactions               |
-| **[Retrievers](/oss/python/integrations/retrievers)**                | Information access          | Vector retrievers, web retrievers   | RAG, knowledge base search                         |
-| **[Document processing](/oss/python/integrations/document_loaders)** | Data ingestion              | Loaders, splitters, transformers    | PDF processing, web scraping                       |
-| **[Vector Stores](/oss/python/integrations/vectorstores)**           | Semantic search             | Chroma, Pinecone, FAISS             | Similarity search, embeddings storage              |
+| **[Models](https://docs.langchain.com/oss/python/langchain/models)**                           | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
+| **[Tools](https://docs.langchain.com/oss/python/langchain/tools)**                             | External capabilities       | APIs, databases, etc.               | Web search, data access, computations              |
+| **[Agents](https://docs.langchain.com/oss/python/langchain/agents)**                           | Orchestration and reasoning | ReAct agents, tool calling agents   | Nondeterministic workflows, decision making        |
+| **[Memory](https://docs.langchain.com/oss/python/langchain/short-term-memory)**                | Context preservation        | Message history, custom state       | Conversations, stateful interactions               |
+| **[Retrievers](https://docs.langchain.com/oss/python/integrations/retrievers)**                | Information access          | Vector retrievers, web retrievers   | RAG, knowledge base search                         |
+| **[Document processing](https://docs.langchain.com/oss/python/integrations/document_loaders)** | Data ingestion              | Loaders, splitters, transformers    | PDF processing, web scraping                       |
+| **[Vector Stores](https://docs.langchain.com/oss/python/integrations/vectorstores)**           | Semantic search             | Chroma, Pinecone, FAISS             | Similarity search, embeddings storage              |
 
 ## Common patterns
 
 ### RAG (Retrieval-Augmented generation)
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[User question] --> B[Retriever]
     B --> C[Relevant docs]
@@ -110,7 +106,7 @@ graph LR
 
 ### Agent with tools
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[User request] --> B[Agent]
     B --> C{Need tool?}
@@ -132,7 +128,7 @@ graph LR
 
 ### Multi-agent system
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph LR
     A[Complex Task] --> B[Supervisor agent]
     B --> C[Specialist agent 1]
@@ -153,18 +149,14 @@ graph LR
 
 ## Learn more
 
-* [Creating agents](/oss/python/langchain/agents)
-* [Working with tools](/oss/python/langchain/tools)
-* [Browse integrations](/oss/python/integrations/providers/overview)
+* [Creating agents](https://docs.langchain.com/oss/python/langchain/agents)
+* [Working with tools](https://docs.langchain.com/oss/python/langchain/tools)
+* [Browse integrations](https://docs.langchain.com/oss/python/integrations/providers/overview)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/component-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/component-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

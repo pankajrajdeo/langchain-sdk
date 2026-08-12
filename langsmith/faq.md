@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Frequently asked questions
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/faq)
 ## Observability
 
 ### *I can't create API keys or manage users in the UI, what's wrong?*
 
-* You have likely deployed LangSmith without setting up SSO. LangSmith requires SSO to manage users and API keys. You can find more information on setting up SSO in the [configuration section.](/langsmith/self-host-sso)
+* You have likely deployed LangSmith without setting up SSO. LangSmith requires SSO to manage users and API keys. You can find more information on setting up SSO in the [configuration section.](https://docs.langchain.com/langsmith/self-host-sso)
 
 ### *How does load balancing/ingress work*?
 
@@ -19,11 +15,11 @@
 
 * Currently, our self-hosted solution supports SSO with OAuth2.0 and OIDC as an authn solution. Note, we do offer a no-auth solution but highly recommend setting up oauth before moving into production.
 
-You can find more information on setting up SSO in the [configuration section.](/langsmith/self-host-sso)
+You can find more information on setting up SSO in the [configuration section.](https://docs.langchain.com/langsmith/self-host-sso)
 
 ### *Can I use external storage services?*
 
-* You can configure LangSmith to use external versions of all storage services. In a production setting, we strongly recommend using external storage services. Check out the [configuration section](/langsmith/self-hosted) for more information.
+* You can configure LangSmith to use external versions of all storage services. In a production setting, we strongly recommend using external storage services. Check out the [configuration section](https://docs.langchain.com/langsmith/self-hosted) for more information.
 
 ### *Does my application need egress to function properly?*
 
@@ -40,7 +36,7 @@ Our deployment only needs egress for a few things (most of which can reside with
 * Subscription Metrics and Operational Metadata (if not running in offline mode)
 
   * Requires egress to `https://beacon.langchain.com`
-  * See [Egress](/langsmith/self-host-egress) for more information
+  * See [Egress](https://docs.langchain.com/langsmith/self-host-egress) for more information
 
 Your VPC can set up rules to limit any other access. Note: We require the `X-Organization-Id` and `X-Tenant-Id` headers to be allowed to be passed through to the backend service. These are used to determine which organization and workspace (previously called "tenant") the request is for.
 
@@ -57,9 +53,9 @@ Your VPC can set up rules to limit any other access. Note: We require the `X-Org
 
 Some identity providers retain the original `User ID` through an email change while others do not, so we recommend that you follow these steps to avoid duplicate users in LangSmith:
 
-1. Remove the user from the organization (see [manage users](/langsmith/set-up-hierarchy#manage-users))
+1. Remove the user from the organization (see [manage users](https://docs.langchain.com/langsmith/set-up-hierarchy#manage-users))
 2. Change their email address in the IdP
-3. Have them login to LangSmith again via SAML SSO - this will trigger the usual [JIT provisioning](/langsmith/user-management#just-in-time-jit-provisioning) flow with their new email address
+3. Have them login to LangSmith again via SAML SSO - this will trigger the usual [JIT provisioning](https://docs.langchain.com/langsmith/user-management#just-in-time-jit-provisioning) flow with their new email address
 
 Changing email address via SCIM or otherwise is not currently supported for users with multiple linked login methods. This error message is shown: `email update not supported with linked login methods`. For example, if a user previously logged in via email/password or Google social login, and then is added with the same email address via SSO, changing their email address is not supported. This applies to both self-hosted and cloud.
 
@@ -84,7 +80,7 @@ JIT provisioning and SCIM can conflict with each other. We recommend disabling J
 
 #### *How do I change a user's role or workspace access?*
 
-Update the user's group membership in your IdP. The changes will be synchronized to LangSmith according to the [role precedence rules](/langsmith/user-management#role-precedence).
+Update the user's group membership in your IdP. The changes will be synchronized to LangSmith according to the [role precedence rules](https://docs.langchain.com/langsmith/user-management#role-precedence).
 
 #### *What happens when a user is removed from all groups?*
 
@@ -92,9 +88,9 @@ The user will be deprovisioned from your LangSmith organization according to you
 
 #### *Can I use custom group names?*
 
-Yes. If your identity provider supports syncing alternate fields to the `displayName` group attribute, you may use an alternate attribute (like `description`) as the `displayName` in LangSmith and retain full customizability of the identity provider group name. Otherwise, groups must follow the specific naming convention described in the [Group Naming Convention](/langsmith/user-management#group-naming-convention) section to properly map to LangSmith roles and workspaces.
+Yes. If your identity provider supports syncing alternate fields to the `displayName` group attribute, you may use an alternate attribute (like `description`) as the `displayName` in LangSmith and retain full customizability of the identity provider group name. Otherwise, groups must follow the specific naming convention described in the [Group Naming Convention](https://docs.langchain.com/langsmith/user-management#group-naming-convention) section to properly map to LangSmith roles and workspaces.
 
-You can also [configure a custom separator](/langsmith/user-management#configure-custom-separator) (e.g., `-`, `_`, `&`) instead of the default colon (`:`) to accommodate identity providers with restrictions on group name characters.
+You can also [configure a custom separator](https://docs.langchain.com/langsmith/user-management#configure-custom-separator) (e.g., `-`, `_`, `&`) instead of the default colon (`:`) to accommodate identity providers with restrictions on group name characters.
 
 #### *Why is my Okta integration not working?*
 
@@ -154,11 +150,11 @@ Yes! You can use LangGraph with any LLMs. The main reason we use LLMs that suppo
 
 ### Does LangGraph work with OSS LLMs?
 
-Yes! LangGraph is totally ambivalent to what LLMs are used under the hood. The main reason we use closed LLMs in most of the tutorials is that they seamlessly support tool calling, while OSS LLMs often don't. But tool calling is not necessary (see [Does LangGraph work with LLMs that don't support tool calling?](#does-langgraph-work-with-llms-that-dont-support-tool-calling)) so you can totally use LangGraph with OSS LLMs.
+Yes! LangGraph is totally ambivalent to what LLMs are used under the hood. The main reason we use closed LLMs in most of the tutorials is that they seamlessly support tool calling, while OSS LLMs often don't. But tool calling is not necessary (see [Does LangGraph work with LLMs that don't support tool calling?](https://docs.langchain.com/langsmith/faq#does-langgraph-work-with-llms-that-dont-support-tool-calling)) so you can totally use LangGraph with OSS LLMs.
 
 ### Can I use Studio without logging in to LangSmith?
 
-Yes! You can use the [development version of Agent Server](/langsmith/local-dev-testing) to run the backend locally.
+Yes! You can use the [development version of Agent Server](https://docs.langchain.com/langsmith/local-dev-testing) to run the backend locally.
 This will connect to the Studio frontend hosted as part of LangSmith.
 If you set an environment variable of `LANGSMITH_TRACING=false`, then no traces will be sent to LangSmith.
 
@@ -168,12 +164,8 @@ A Deployment Run is one end-to-end invocation of a LangGraph agent deployed via 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/faq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

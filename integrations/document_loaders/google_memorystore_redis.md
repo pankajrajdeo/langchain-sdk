@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google memorystore for Redis integration
 
 > Integrate with the Google memorystore for Redis document loader using LangChain Python.
 
 > [Google Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) is a fully-managed service that is powered by the Redis in-memory data store to build application caches that provide sub-millisecond data access. Extend your database application to build AI-powered experiences leveraging Memorystore for Redis's LangChain integrations.
 
-This notebook goes over how to use [Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `MemorystoreDocumentLoader` and `MemorystoreDocumentSaver`.
+This notebook goes over how to use [Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `MemorystoreDocumentLoader` and `MemorystoreDocumentSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-memorystore-redis-python/).
 
@@ -24,7 +20,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please specify an endpoint associated with the instance and a key prefix for demo purpose.
 ENDPOINT = "redis://127.0.0.1:6379"  # @param {type:"string"}
 KEY_PREFIX = "doc:"  # @param {type:"string"}
@@ -34,13 +30,13 @@ KEY_PREFIX = "doc:"  # @param {type:"string"}
 
 The integration lives in its own `langchain-google-memorystore-redis` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-memorystore-redis
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -58,7 +54,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -74,7 +70,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -91,7 +87,7 @@ Save langchain documents with `MemorystoreDocumentSaver.add_documents(<documents
 
 The Documents will be stored into randomly generated keys with the specified prefix of `key_prefix`. Alternatively, you can designate the suffixes of the keys by specifying `ids` in the `add_documents` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import redis
 from langchain_core.documents import Document
 from langchain_google_memorystore_redis import MemorystoreDocumentSaver
@@ -130,7 +126,7 @@ Load langchain documents with `MemorystoreDocumentLoader.load()` or `Memorystore
 1. `client` - A `redis.Redis` client object.
 2. `key_prefix` - A prefix for the keys to store Documents in Redis.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import redis
 from langchain_google_memorystore_redis import MemorystoreDocumentLoader
 
@@ -148,7 +144,7 @@ for doc in loader.lazy_load():
 
 Delete all of keys with the specified prefix in the Memorystore for Redis instance with `MemorystoreDocumentSaver.delete()`. You can also specify the suffixes of the keys if you know.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 print("Documents before delete:", docs)
 
@@ -167,7 +163,7 @@ When initializing a loader with more than 1 content field, the `page_content` of
 
 If the `metadata_fields` are specified, the `metadata` field of the loaded Documents will only have the top level fields equal to the specified `metadata_fields`. If any of the values of the metadata fields is stored as a JSON-encoded string, it will be decoded prior to being loaded to the metadata fields.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = MemorystoreDocumentLoader(
     client=redis_client,
     key_prefix=KEY_PREFIX,
@@ -178,12 +174,8 @@ loader = MemorystoreDocumentLoader(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

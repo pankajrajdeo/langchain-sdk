@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to return categorical vs numerical metrics
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/metric-type)
 LangSmith supports both categorical and numerical metrics, and you can return either when writing a custom evaluator.
 
 For an evaluator result to be logged as a numerical metric, it must returned as:
@@ -21,52 +17,46 @@ Here are some examples:
 * Python: Requires `langsmith>=0.2.0`
 * TypeScript: Support for multiple scores is available in `langsmith@0.1.32` and higher
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  def numerical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> float:
-      # Evaluation logic...
-      return 0.8
-      # Equivalently
-      # return {"score": 0.8}
-      # Or
-      # return {"key": "numerical_metric", "score": 0.8}
+```python
+def numerical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> float:
+    # Evaluation logic...
+    return 0.8
+    # Equivalently
+    # return {"score": 0.8}
+    # Or
+    # return {"key": "numerical_metric", "score": 0.8}
 
-  def categorical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> str:
-      # Evaluation logic...
-      return "english"
-      # Equivalently
-      # return {"key": "categorical_metric", "score": "english"}
-      # Or
-      # return {"score": "english"}
-  ```
+def categorical_metric(inputs: dict, outputs: dict, reference_outputs: dict) -> str:
+    # Evaluation logic...
+    return "english"
+    # Equivalently
+    # return {"key": "categorical_metric", "score": "english"}
+    # Or
+    # return {"score": "english"}
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import type { Run, Example } from "langsmith/schemas";
+```typescript
+import type { Run, Example } from "langsmith/schemas";
 
-  function numericalMetric(run: Run, example: Example) {
-    // Your evaluation logic here
-    return { key: "numerical_metric", score: 0.8};
-  }
+function numericalMetric(run: Run, example: Example) {
+  // Your evaluation logic here
+  return { key: "numerical_metric", score: 0.8};
+}
 
-  function categoricalMetric(run: Run, example: Example) {
-    // Your evaluation logic here
-    return { key: "categorical_metric", value: "english"};
-  }
-  ```
-</CodeGroup>
+function categoricalMetric(run: Run, example: Example) {
+  // Your evaluation logic here
+  return { key: "categorical_metric", value: "english"};
+}
+```
 
 ## Related
 
-* [Return multiple metrics in one evaluator](/langsmith/multiple-scores)
+* [Return multiple metrics in one evaluator](https://docs.langchain.com/langsmith/multiple-scores)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/metric-type.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/metric-type.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

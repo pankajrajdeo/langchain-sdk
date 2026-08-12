@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Cohere integration
 
 > Integrate with the Cohere LLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of Cohere models as text completion models. Many popular Cohere models are [chat completion models](/oss/python/langchain/models).**
-
-  You may be looking for [this page instead](/oss/python/integrations/chat/cohere/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of Cohere models as text completion models. Many popular Cohere models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/cohere/).
 
 > [Cohere](https://cohere.ai/about) is a Canadian startup that provides natural language processing models that help companies improve human-machine interactions.
 
@@ -20,15 +15,14 @@ Head to the [API reference](https://reference.langchain.com/python/langchain-com
 
 The integration lives in the `langchain-community` package. We also need to install the `cohere` package itself. We can install these with:
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
 ### Credentials
 
 We'll need to get a [Cohere API key](https://cohere.com/) and set the `COHERE_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -38,62 +32,62 @@ if "COHERE_API_KEY" not in os.environ:
 
 ### Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U langchain-community langchain-cohere
 ```
 
 It's also helpful (but not needed) to set up [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-python-integrations-llms-cohere) for best-in-class observability
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
 
 ## Invocation
 
-Cohere supports all [LLM](/oss/python/langchain/models) functionality:
+Cohere supports all [LLM](https://docs.langchain.com/oss/python/langchain/models) functionality:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import Cohere
 from langchain.messages import HumanMessage
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = Cohere(max_tokens=256, temperature=0.75)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 message = "Knock knock"
 model.invoke(message)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 " Who's there?"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await model.ainvoke(message)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 " Who's there?"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = model.stream_events(message, version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
  Who's there?
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model.batch([message])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [" Who's there?"]
 ```
 
@@ -105,12 +99,8 @@ For detailed documentation of all `Cohere` llm features and configurations head 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

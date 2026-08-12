@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MistralAIEmbeddings integration
 
 > Integrate with the MistralAIEmbeddings embedding model using LangChain
@@ -12,7 +8,7 @@ This will help you get started with MistralAI embedding models using LangChain. 
 
 ### Integration details
 
-<ItemTable category="embeddings" item="MistralAI" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai).
 
 ## Setup
 
@@ -22,7 +18,7 @@ To access MistralAI embedding models you'll need to create a MistralAI account, 
 
 Head to [https://console.mistral.ai/](https://console.mistral.ai/) to sign up to MistralAI and generate an API key. Once you've done this set the MISTRAL\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -30,9 +26,9 @@ if not os.getenv("MISTRAL_API_KEY"):
     os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter your MistralAI API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -41,7 +37,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain MistralAI integration lives in the `langchain-mistralai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-mistralai
 ```
 
@@ -49,7 +45,7 @@ pip install -qU langchain-mistralai
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mistralai import MistralAIEmbeddings
 
 embeddings = MistralAIEmbeddings(
@@ -59,11 +55,11 @@ embeddings = MistralAIEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -84,7 +80,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -98,12 +94,12 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.04443359375, 0.01885986328125, 0.018035888671875, -0.00864410400390625, 0.049652099609375, -0.00
 ```
 
@@ -111,7 +107,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -120,7 +116,7 @@ for vector in two_vectors:
     print(str(vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.04443359375, 0.01885986328125, 0.0180511474609375, -0.0086517333984375, 0.049652099609375, -0.00
 [-0.02032470703125, 0.02606201171875, 0.051605224609375, -0.0281982421875, 0.055755615234375, 0.0019
 ```
@@ -133,12 +129,8 @@ For detailed documentation on `MistralAIEmbeddings` features and configuration o
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

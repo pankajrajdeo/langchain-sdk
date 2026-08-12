@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Astra DB integration
 
 > Integrate with the Astra DB vector store using LangChain Python.
@@ -18,7 +14,7 @@ This page provides a quickstart for using Astra DB as a Vector Store.
 
 Use of the integration requires the `langchain-astradb` partner package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install \
     "langchain>=0.3.23,<0.4" \
     "langchain-core>=0.3.52,<0.4" \
@@ -36,7 +32,7 @@ Once the database has been initialized, retrieve your [connection secrets](https
 
 You may optionally provide a **`keyspace`** (called "namespace" in the LangChain components), which you can manage from the `Data Explorer` tab of your database dashboard. If you wish, you can leave it empty in the prompt below and fall back to a default keyspace.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 
 ASTRA_DB_API_ENDPOINT = input("ASTRA_DB_API_ENDPOINT = ").strip()
@@ -49,15 +45,15 @@ else:
     ASTRA_DB_KEYSPACE = None
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ASTRA_DB_API_ENDPOINT =  https://01234567-89ab-cdef-0123-456789abcdef-us-east1.apps.astra.datastax.com
 ASTRA_DB_APPLICATION_TOKEN =  ········
 (optional) ASTRA_DB_KEYSPACE =
 ```
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -90,9 +86,9 @@ The `AstraDBVectorStore` can be configured in many ways; see the [API reference]
 
 Instantiate our vector store using an explicit embedding class:
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/astradb).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -100,7 +96,7 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBVectorStore
 
 vector_store_explicit_embeddings = AstraDBVectorStore(
@@ -121,7 +117,7 @@ In this example code, it is assumed that you have
 
 For more details, including instructions to switch provider/model, please consult the [documentation](https://docs.datastax.com/en/astra-db-serverless/databases/embedding-generation.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from astrapy.info import VectorServiceOptions
 
 openai_vectorize_options = VectorServiceOptions(
@@ -151,7 +147,7 @@ Auto-detect mode cannot coexist with *collection* settings (such as the similari
 
 In the following example code, we will "auto-detect" the very same collection that was created by method 2 above ("vectorize"). Hence, no [`Embeddings`](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) object needs to be supplied.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store_autodetected = AstraDBVectorStore(
     collection_name="astra_vectorize_langchain",
     api_endpoint=ASTRA_DB_API_ENDPOINT,
@@ -167,7 +163,7 @@ Once you have created your vector store, interact with it by adding and deleting
 
 All interactions with the vector store proceed regardless of the initialization method: please **adapt the following cell**, if you desire, to select a vector store you have created and want to put to test.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # If desired, uncomment a different line here:
 
 # vector_store = vector_store_explicit_embeddings
@@ -181,7 +177,7 @@ Add documents to the vector store by using the `add_documents` method.
 
 *The "id" field can be supplied separately, in a matching `ids=[...]` parameter to `add_documents`, or even left out entirely to let the store generate IDs.*
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 documents_to_insert = [
@@ -248,11 +244,10 @@ documents_to_insert = [
     ),
 ]
 
-
 vector_store.add_documents(documents=documents_to_insert)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['entry_00',
  'entry_01',
  'entry_02',
@@ -270,11 +265,11 @@ vector_store.add_documents(documents=documents_to_insert)
 
 Delete items by ID by using the `delete` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=["entry_10", "entry_02"])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -288,7 +283,7 @@ Once the vector store is created and populated, you can query it (e.g. as part o
 
 Search for documents similar to a provided text, with additional metadata filters if desired:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=3,
@@ -298,7 +293,7 @@ for res in results:
     print(f'* "{res.page_content}", metadata={res.metadata}')
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * "Building an exciting new project with LangChain - come check it out!", metadata={'source': 'tweet'}
 * "LangGraph is the best framework for building stateful, agentic applications!", metadata={'source': 'tweet'}
 * "Thanks to her sophisticated language skills, the agent managed to extract strategic information all right.", metadata={'source': 'tweet'}
@@ -308,7 +303,7 @@ for res in results:
 
 You can return the similarity score as well:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     "LangChain provides abstractions to make working with LLMs easy",
     k=3,
@@ -318,7 +313,7 @@ for res, score in results:
     print(f'* [SIM={score:.2f}] "{res.page_content}", metadata={res.metadata}')
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=0.71] "Building an exciting new project with LangChain - come check it out!", metadata={'source': 'tweet'}
 * [SIM=0.70] "LangGraph is the best framework for building stateful, agentic applications!", metadata={'source': 'tweet'}
 * [SIM=0.61] "Thanks to her sophisticated language skills, the agent managed to extract strategic information all right.", metadata={'source': 'tweet'}
@@ -332,7 +327,7 @@ If the vector store is using a hybrid-enabled collection and has detected this f
 
 In that case, the same query text is used for both the vector-similarity and the lexical-based retrieval steps in the find-and-rerank process, *unless you explicitly provide a different query for the latter*:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store_autodetected.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=3,
@@ -343,7 +338,7 @@ for res in results:
     print(f'* "{res.page_content}", metadata={res.metadata}')
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * "Building an exciting new project with LangChain - come check it out!", metadata={'source': 'tweet'}
 * "LangGraph is the best framework for building stateful, agentic applications!", metadata={'source': 'tweet'}
 * "ZYX, just another tool in the world, is actually my agent-based superhero", metadata={'source': 'tweet'}
@@ -363,7 +358,7 @@ You can also make the vector store into a retriever, for easier usage in your ch
 
 Transform the vector store into a retriever and invoke it with a simple query + metadata filter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"k": 1, "score_threshold": 0.5},
@@ -371,7 +366,7 @@ retriever = vector_store.as_retriever(
 retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(id='entry_04', metadata={'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 ```
 
@@ -379,9 +374,9 @@ retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 For more, check out the [complete RAG template using Astra DB](https://github.com/langchain-ai/langchain/tree/master/templates/rag-astradb).
 
@@ -391,7 +386,7 @@ If you want to completely delete the collection from your Astra DB instance, run
 
 *(You will lose the data you stored in it.)*
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete_collection()
 ```
 
@@ -403,12 +398,8 @@ For detailed documentation of all `AstraDBVectorStore` features and configuratio
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

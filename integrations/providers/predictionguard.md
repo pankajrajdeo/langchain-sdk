@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Prediction guard integrations
 
 > Integrate with Prediction guard using LangChain Python.
@@ -16,15 +12,13 @@ package.
 
 * Install the PredictionGuard LangChain partner package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-predictionguard
-  ```
+```bash
+pip install langchain-predictionguard
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-predictionguard
-  ```
-</CodeGroup>
+```bash
+uv add langchain-predictionguard
+```
 
 * Get a Prediction Guard API key (as described in the [Prediction Guard documentation](https://docs.predictionguard.com/)) and set it as an environment variable (`PREDICTIONGUARD_API_KEY`)
 
@@ -33,7 +27,7 @@ package.
 | API            | Description             | Endpoint Docs                                                                           | Import                                                            | Example Usage                                                                                         |
 | -------------- | ----------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | Chat           | Build Chat Bots         | [Chat](https://docs.predictionguard.com/api-reference/api-reference/chat-completions)   | `from langchain_predictionguard import ChatPredictionGuard`       | [`langchain-predictionguard`](https://github.com/predictionguard/langchain-predictionguard)           |
-| Completions    | Generate Text           | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard`           | [PredictionGuard.ipynb](/oss/python/integrations/llms/predictionguard)                                |
+| Completions    | Generate Text           | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard`           | [PredictionGuard.ipynb](https://docs.langchain.com/oss/python/integrations/llms/predictionguard)                                |
 | Text Embedding | Embed String to Vectors | [Embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings)   | `from langchain_predictionguard import PredictionGuardEmbeddings` | [PredictionGuard embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings) |
 
 ## Getting started
@@ -44,13 +38,13 @@ package.
 
 See a [usage example](https://github.com/predictionguard/langchain-predictionguard)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_predictionguard import ChatPredictionGuard
 ```
 
 #### Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # If predictionguard_api_key is not passed, default behavior is to use the `PREDICTIONGUARD_API_KEY` environment variable.
 chat = ChatPredictionGuard(model="Hermes-3-Llama-3.1-8B")
 
@@ -63,13 +57,13 @@ chat.invoke("Tell me a joke")
 
 See a [usage example](https://docs.predictionguard.com/api-reference/api-reference/embeddings)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_predictionguard import PredictionGuardEmbeddings
 ```
 
 #### Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # If predictionguard_api_key is not passed, default behavior is to use the `PREDICTIONGUARD_API_KEY` environment variable.
 embeddings = PredictionGuardEmbeddings(model="bridgetower-large-itm-mlm-itc")
 
@@ -81,15 +75,15 @@ output = embeddings.embed_query(text)
 
 ### Prediction guard LLM
 
-See a [usage example](/oss/python/integrations/llms/predictionguard)
+See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/predictionguard)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_predictionguard import PredictionGuard
 ```
 
 #### Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # If predictionguard_api_key is not passed, default behavior is to use the `PREDICTIONGUARD_API_KEY` environment variable.
 llm = PredictionGuard(model="Hermes-2-Pro-Llama-3-8B")
 
@@ -98,12 +92,8 @@ llm.invoke("Tell me a joke about bears")
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

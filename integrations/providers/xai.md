@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # xAI integrations
 
 > Integrate with xAI using LangChain Python.
 
-<Warning>
-  This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](/oss/python/integrations/providers/groq).
-</Warning>
+> [!WARNING]
+> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](https://docs.langchain.com/oss/python/integrations/providers/groq).
 
 [xAI](https://console.x.ai) offers an API to interact with Grok models. This example goes over how to use LangChain to interact with xAI models.
 
 ## Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U langchain-xai
 ```
 
@@ -24,9 +19,9 @@ To use xAI, you'll need to [create an API key](https://console.x.ai/). The API k
 
 ## Example
 
-See [ChatXAI docs](/oss/python/integrations/chat/xai) for detail and supported features.
+See [ChatXAI docs](https://docs.langchain.com/oss/python/integrations/chat/xai) for detail and supported features.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Querying chat models with xAI
 
 from langchain_xai import ChatXAI
@@ -47,12 +42,8 @@ for token in stream.text:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

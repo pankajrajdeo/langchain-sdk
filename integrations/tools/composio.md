@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Composio integration
 
 > Give agents secure access to 1,000+ toolkits and 20,000+ tools through Composio's unified API platform, with OAuth handling, event-driven workflows, and multi-user support.
@@ -33,21 +29,19 @@ See the [Composio JS integration docs](https://js.langchain.com/docs/integration
 
 The integration lives in the `composio-langchain` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U composio-langchain langchain langchain-openai
-  ```
+```bash
+pip install -U composio-langchain langchain langchain-openai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add composio-langchain langchain langchain-openai
-  ```
-</CodeGroup>
+```bash
+uv add composio-langchain langchain langchain-openai
+```
 
 ### Credentials
 
 You will need a Composio API key. Sign up at [composio.dev](https://composio.dev) to get your API key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -55,9 +49,9 @@ if not os.environ.get("COMPOSIO_API_KEY"):
     os.environ["COMPOSIO_API_KEY"] = getpass.getpass("Composio API key:\n")
 ```
 
-It's also helpful to set up [LangSmith](/langsmith/home) for tracing:
+It's also helpful to set up [LangSmith](https://docs.langchain.com/langsmith/home) for tracing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass("LangSmith API key:\n")
 # os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -66,7 +60,7 @@ It's also helpful to set up [LangSmith](/langsmith/home) for tracing:
 
 Initialize Composio with the LangChain provider. Create a session for the user and toolkit set you want the agent to access:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from composio import Composio
 from composio_langchain import LangchainProvider
 
@@ -96,7 +90,7 @@ See the [Composio toolkits catalog](https://docs.composio.dev/toolkits/introduct
 
 Use `session.search(...)` to inspect matching concrete toolkit tools and connection status before asking an agent to execute anything:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 search = session.search(query="get authenticated github user")
 
 for result in search.results:
@@ -106,13 +100,13 @@ for status in search.toolkit_connection_statuses:
     print(status.toolkit, status.has_active_connection, status.status_message)
 ```
 
-If the toolkit is not connected, Composio will guide the agent to use `COMPOSIO_MANAGE_CONNECTIONS`, or you can create an authorization link yourself as shown in [Authentication setup](#authentication-setup).
+If the toolkit is not connected, Composio will guide the agent to use `COMPOSIO_MANAGE_CONNECTIONS`, or you can create an authorization link yourself as shown in [Authentication setup](https://docs.langchain.com/oss/python/integrations/tools/composio#authentication-setup).
 
 ### Low-level tool loading
 
 For most agent workflows, prefer `composio.create(...)` and `session.tools()`. The lower-level `composio.tools.get(...)` API is also available when you want to load direct tool lists yourself:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 github_tools = composio.tools.get(
     user_id="user_123",
     toolkits=["GITHUB"],
@@ -136,7 +130,7 @@ specific_tool = composio.tools.get(
 
 Here's a complete, read-only example using Composio tools with a LangChain agent. It asks the model to inspect available GitHub profile-reading tools without mutating external state.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -144,7 +138,7 @@ if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API key:\n")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from composio import Composio
 from composio_langchain import LangchainProvider
 from langchain.agents import create_agent
@@ -179,7 +173,7 @@ Tools that access a user's external account require that user to connect the cor
 
 For manual authentication, create a connection request from the session:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 connection_request = session.authorize("github")
 print(connection_request.redirect_url)
 ```
@@ -192,7 +186,7 @@ For in-chat authentication, allow the agent to call `COMPOSIO_MANAGE_CONNECTIONS
 
 Use a stable `user_id` for each application user. Each user connects their own accounts, and Composio executes toolkit actions using the credentials associated with that `user_id`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 session_alice = composio.create(user_id="alice", toolkits=["GITHUB"])
 session_bob = composio.create(user_id="bob", toolkits=["GITHUB"])
 
@@ -208,7 +202,7 @@ Composio supports triggering agents based on external events. When events occur 
 
 Before creating a trigger, inspect the required configuration:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from composio import Composio
 
 composio = Composio()
@@ -221,7 +215,7 @@ print(trigger_type.config)
 
 Create triggers after the relevant account is connected and you have the required configuration:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 trigger = composio.triggers.create(
     slug="GITHUB_COMMIT_EVENT",
     user_id="user_123",
@@ -238,11 +232,10 @@ print(trigger.trigger_id)
 
 For production, configure webhooks in the [Composio dashboard](https://platform.composio.dev/settings/events):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from fastapi import FastAPI, Request
 
 app = FastAPI()
-
 
 @app.post("/webhook")
 async def webhook_handler(request: Request):
@@ -261,20 +254,17 @@ For more details, see the [Composio triggers documentation](https://docs.composi
 
 Composio allows you to create custom tools that can be used alongside built-in tools.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class AddTwoNumbersInput(BaseModel):
     a: int = Field(description="The first number to add")
     b: int = Field(description="The second number to add")
 
-
 @composio.tools.custom_tool
 def add_two_numbers(request: AddTwoNumbersInput) -> int:
     """Add two numbers."""
     return request.a + request.b
-
 
 tools = session.tools()
 tools.append(add_two_numbers)
@@ -290,12 +280,8 @@ For detailed documentation of Composio features and configuration options, see:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/composio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/composio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Perplexity search integration
 
 > Integrate with the Perplexity search tool using LangChain Python.
@@ -16,7 +12,7 @@ This page goes over how to use the Perplexity Search API as a LangChain tool.
 
 Install the LangChain Perplexity integration package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-perplexity
 
 # and some deps for this notebook
@@ -27,7 +23,7 @@ pip install -qU langchain langchain-openai
 
 You'll need a Perplexity API key to use this integration. Create one in the [Perplexity API key dashboard](https://www.perplexity.ai/account/api/keys).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -41,7 +37,7 @@ The integration also accepts `PERPLEXITY_API_KEY` if you prefer that name.
 
 `PerplexitySearchResults` is a tool that can be used with LangChain agents to perform Perplexity searches. Calling it returns a JSON array of search results, each containing a `title`, `url`, `snippet`, `date`, and `last_updated` field.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchResults
 
 # Initialize the PerplexitySearchResults tool
@@ -63,7 +59,7 @@ The tool accepts the following constructor and call-time arguments:
 * `search_recency_filter` — one of `"day"`, `"week"`, `"month"`, `"year"`. See the [date and time filter docs](https://docs.perplexity.ai/docs/search/filters/date-time-filters).
 * `search_after_date` / `search_before_date` — date strings in `MM/DD/YYYY` format.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchResults
 
 # Restrict results to a recent timeframe and a specific set of domains
@@ -78,7 +74,7 @@ results = search_tool.invoke("Latest AI research papers")
 print(results)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchResults
 
 # Restrict results to a specific date range
@@ -98,18 +94,17 @@ We can use the `PerplexitySearchResults` tool with a LangGraph agent. This gives
 
 First, set up the language model. You'll need to provide your OpenAI API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API key:\n")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain_perplexity import PerplexitySearchResults
-
 
 # Initialize the language model
 model = init_chat_model(model="gpt-5.5", temperature=0)
@@ -142,12 +137,8 @@ For detailed documentation of the Perplexity Search API and all of its options, 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/perplexity_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/perplexity_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

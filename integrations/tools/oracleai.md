@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Oracle AI vector search generate summary integration
 
 > Integrate with the Oracle AI vector search generate summary tool using LangChain Python.
@@ -19,21 +15,19 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oracledb
-  ```
+```bash
+pip install -qU langchain-oracledb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oracledb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oracledb
+```
 
 ### Connect to Oracle Database
 
 The following sample code will show how to connect to Oracle Database. By default, python-oracledb runs in a ‘Thin’ mode which connects directly to Oracle Database. This mode does not need Oracle Client libraries. However, some additional functionality is available when python-oracledb uses them. Python-oracledb is said to be in ‘Thick’ mode when Oracle Client libraries are used. Both modes have comprehensive functionality supporting the Python Database API v2.0 Specification. See the following [guide](https://python-oracledb.readthedocs.io/en/latest/user_guide/appendix_a.html#featuresummary) that talks about features supported in each mode. You might want to switch to thick-mode if you are unable to use thin-mode.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import oracledb
 
 # Please update with your username, password, hostname, port and service_name
@@ -51,14 +45,14 @@ The Oracle AI Vector Search LangChain library offers a suite of APIs designed fo
 
 ***Note:*** The users may need to set proxy if they want to use some 3rd party summary generation providers other than Oracle's in-house and default provider: 'database'. If you don't have proxy, please remove the proxy parameter when you instantiate the OracleSummary.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # proxy to be used when we instantiate summary and embedder object
 proxy = "<proxy>"
 ```
 
 The following sample code will show how to generate summary:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.utilities.oracleai import OracleSummary
 from langchain_core.documents import Document
 
@@ -109,12 +103,8 @@ Please refer to our complete demo guide [Oracle AI Vector Search End-to-End Demo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # CohereEmbeddings integration
 
 > Integrate with the CohereEmbeddings embedding model using LangChain Python.
@@ -12,7 +8,7 @@ This will help you get started with Cohere embedding models using LangChain. For
 
 ### Integration details
 
-<ItemTable category="embeddings" item="Cohere" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/cohere).
 
 ## Setup
 
@@ -22,7 +18,7 @@ To access Cohere embedding models you'll need to create a Cohere account, get an
 
 Head to [cohere.com](https://cohere.com) to sign up to Cohere and generate an API key. Once you’ve done this set the COHERE\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -30,9 +26,9 @@ if not os.getenv("COHERE_API_KEY"):
     os.environ["COHERE_API_KEY"] = getpass.getpass("Enter your Cohere API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -41,7 +37,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain Cohere integration lives in the `langchain-cohere` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-cohere
 ```
 
@@ -49,7 +45,7 @@ pip install -qU langchain-cohere
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import CohereEmbeddings
 
 embeddings = CohereEmbeddings(
@@ -59,11 +55,11 @@ embeddings = CohereEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -84,7 +80,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -98,12 +94,12 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.022979736, -0.030212402, -0.08886719, -0.08569336, 0.007030487, -0.0010671616, -0.033813477, 0.0
 ```
 
@@ -111,7 +107,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -120,7 +116,7 @@ for vector in two_vectors:
     print(str(vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.028869629, -0.030410767, -0.099121094, -0.07116699, -0.012748718, -0.0059432983, -0.04360962, 0.
 [-0.047332764, -0.049957275, -0.07458496, -0.034332275, -0.057922363, -0.0112838745, -0.06994629, 0.
 ```
@@ -133,12 +129,8 @@ For detailed documentation on `CohereEmbeddings` features and configuration opti
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

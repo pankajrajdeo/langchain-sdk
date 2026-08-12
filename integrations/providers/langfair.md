@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Langfair integrations
 
 > Integrate with Langfair using LangChain Python.
@@ -20,15 +16,13 @@ We recommend creating a new virtual environment using `venv` before installing L
 
 The latest version can be installed from PyPI:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langfair
-  ```
+```bash
+pip install langfair
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langfair
-  ```
-</CodeGroup>
+```bash
+uv add langfair
+```
 
 ### Usage examples
 
@@ -38,7 +32,7 @@ Below are code samples illustrating how to use LangFair to assess bias and fairn
 
 To generate responses, we can use LangFair's `ResponseGenerator` class. First, we must create a `langchain` LLM object. Below we use `ChatVertexAI`, but **any of [LangChain’s LLM classes](https://js.langchain.com/docs/integrations/chat/) may be used instead**. Note that `InMemoryRateLimiter` is to used to avoid rate limit errors.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import ChatVertexAI
 from langchain.rate_limiters import InMemoryRateLimiter
 rate_limiter = InMemoryRateLimiter(
@@ -51,7 +45,7 @@ llm = ChatVertexAI(
 
 We can use `ResponseGenerator.generate_responses` to generate 25 responses for each prompt, as is convention for toxicity evaluation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfair.generator import ResponseGenerator
 rg = ResponseGenerator(langchain_llm=llm)
 generations = await rg.generate_responses(prompts=prompts, count=25)
@@ -63,7 +57,7 @@ duplicated_prompts = generations["data"]["prompt"] # so prompts correspond to re
 
 Toxicity metrics can be computed with `ToxicityMetrics`. Note that use of `torch.device` is optional and should be used if GPU is available to speed up toxicity computation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # import torch # uncomment if GPU is available
 # device = torch.device("cuda") # uncomment if GPU is available
 from langfair.metrics.toxicity import ToxicityMetrics
@@ -86,7 +80,7 @@ tox_result['metrics']
 
 Stereotype metrics can be computed with `StereotypeMetrics`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfair.metrics.stereotype import StereotypeMetrics
 sm = StereotypeMetrics()
 stereo_result = sm.evaluate(responses=responses, categories=["gender"])
@@ -101,7 +95,7 @@ stereo_result['metrics']
 
 We can generate counterfactual responses with `CounterfactualGenerator`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfair.generator.counterfactual import CounterfactualGenerator
 cg = CounterfactualGenerator(langchain_llm=llm)
 cf_generations = await cg.generate_responses(
@@ -113,7 +107,7 @@ female_responses = cf_generations['data']['female_response']
 
 Counterfactual metrics can be easily computed with `CounterfactualMetrics`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfair.metrics.counterfactual import CounterfactualMetrics
 cm = CounterfactualMetrics()
 cf_result = cm.evaluate(
@@ -133,7 +127,7 @@ cf_result['metrics']
 
 To streamline assessments for text generation and summarization use cases, the `AutoEval` class conducts a multi-step process that completes all of the aforementioned steps with two lines of code.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langfair.auto import AutoEval
 auto_object = AutoEval(
     prompts=prompts,
@@ -159,12 +153,8 @@ results['metrics']
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfair.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langfair.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

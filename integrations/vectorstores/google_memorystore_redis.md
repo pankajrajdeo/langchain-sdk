@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google memorystore for Redis integration
 
 > Integrate with the Google memorystore for Redis vector store using LangChain Python.
@@ -28,13 +24,13 @@ To run this notebook, you will need to do the following:
 
 The integration lives in its own `langchain-google-memorystore-redis` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-memorystore-redis langchain
 ```
 
 **Colab only:** Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -52,7 +48,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -68,7 +64,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -78,7 +74,7 @@ auth.authenticate_user()
 
 ### Initialize a vector index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import redis
 from langchain_google_memorystore_redis import (
     DistanceStrategy,
@@ -105,11 +101,10 @@ Text needs processing and numerical representation before interacting with a vec
 * Loading Text: The TextLoader obtains text data from a file (e.g., "state\_of\_the\_union.txt").
 * Text Splitting: The CharacterTextSplitter breaks the text into smaller chunks for embedding models.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 
@@ -127,11 +122,10 @@ After text preparation and embedding generation, the following methods insert th
 
 This approach combines embedding creation and insertion into a single step using the from\_documents classmethod:
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.embeddings.fake import FakeEmbeddings
 
 embeddings = FakeEmbeddings(size=128)
@@ -148,7 +142,7 @@ This approach offers flexibility when working with a new or existing RedisVector
 * \[Optional] Create a RedisVectorStore Instance: Instantiate a RedisVectorStore object for customization. If you already have an instance, proceed to the next step.
 * Add Text with Metadata: Provide raw text and metadata to the instance. Embedding generation and insertion into the vector store are handled automatically.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 rvs = RedisVectorStore(
     client=redis_client, index_name="my_vector_index", embeddings=embeddings
 )
@@ -164,7 +158,7 @@ With the vector store populated, it's possible to search for text semantically s
 * Formulate the Query: A natural language question expresses the search intent (e.g., "What did the president say about Ketanji Brown Jackson").
 * Retrieve Similar Results: The `similarity_search` method finds items in the vector store closest to the query in meaning.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import pprint
 
 query = "What did the president say about Ketanji Brown Jackson"
@@ -180,7 +174,7 @@ Range queries provide more control by specifying a desired similarity threshold 
 * Set Similarity Threshold: The distance\_threshold parameter determines how close a match must be considered relevant.
 * Retrieve Results: The `similarity_search_with_score` method finds items from the vector store that fall within the specified similarity threshold.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 rq_results = rvs.similarity_search_with_score(query=query, distance_threshold=0.8)
 pprint.pprint(rq_results)
 ```
@@ -193,7 +187,7 @@ MMR queries aim to find results that are both relevant to the query and diverse 
 * Balance Relevance and Diversity: The lambda\_mult parameter controls the trade-off between strict relevance and promoting variety in the results.
 * Retrieve MMR Results: The `max_marginal_relevance_search` method returns items that optimize the combination of relevance and diversity based on the lambda setting.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 mmr_results = rvs.max_marginal_relevance_search(query=query, lambda_mult=0.90)
 pprint.pprint(mmr_results)
 ```
@@ -205,7 +199,7 @@ For seamless integration with other LangChain components, a vector store can be 
 * LangChain Compatibility: Many LangChain tools and methods are designed to directly interact with retrievers.
 * Ease of Use: The `as_retriever()` method converts the vector store into a format that simplifies querying.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = rvs.as_retriever()
 results = retriever.invoke(query)
 pprint.pprint(results)
@@ -217,7 +211,7 @@ pprint.pprint(results)
 
 Occasionally, it's necessary to remove documents (and their associated vectors) from the vector store.  The `delete` method provides this functionality.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 rvs.delete(ids)
 ```
 
@@ -230,19 +224,15 @@ There might be circumstances where the deletion of an existing vector index is n
 
 Caution: Vector index deletion is an irreversible operation. Be certain that the stored vectors and search functionality are no longer required before proceeding.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Delete the vector index
 RedisVectorStore.drop_index(client=redis_client, index_name="my_vector_index")
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_memorystore_redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

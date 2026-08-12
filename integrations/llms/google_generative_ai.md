@@ -1,38 +1,33 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GoogleGenerativeAI integration
 
 > Get started using legacy Gemini LLMs in LangChain.
 
-<Warning>
-  **You are currently on a page documenting the use of Google models as text completion models. Many popular Google models are [chat completion models](/oss/python/langchain/models).**
+> [!WARNING]
+> **You are currently on a page documenting the use of Google models as text completion models. Many popular Google models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/).
 
-  You may be looking for [this page instead](/oss/python/integrations/chat/google_generative_ai/).
-</Warning>
-
-A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Google Cloud Vertex AI [integration](/oss/python/integrations/llms/google_vertex_ai).
+A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Google Cloud Vertex AI [integration](https://docs.langchain.com/oss/python/integrations/llms/google_vertex_ai).
 
 ## Setting up
 
 To use Google Generative AI you must install the `langchain-google-genai` Python package and generate an API key. [Read more details](https://developers.generativeai.google/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-google-genai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import GoogleGenerativeAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from getpass import getpass
 
 api_key = getpass()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = GoogleGenerativeAI(model="models/text-bison-001", google_api_key=api_key)
 print(
     llm.invoke(
@@ -41,7 +36,7 @@ print(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 **Pros of Python:**
 
 * **Easy to learn:** Python is a very easy-to-learn programming language, even for beginners. Its syntax is simple and straightforward, and there are a lot of resources available to help you get started.
@@ -60,7 +55,7 @@ print(
 Overall, Python is a very good programming language for beginners. It's easy to learn, versatile, and has a large community of developers. However, it's important to be aware of its limitations, such as its slow performance and lack of performance.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = GoogleGenerativeAI(model="gemini-pro", google_api_key=api_key)
 print(
     llm.invoke(
@@ -69,7 +64,7 @@ print(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 **Pros:**
 
 * **Simplicity and Readability:** Python is known for its simple and easy-to-read syntax, which makes it accessible to beginners and reduces the chance of errors. It uses indentation to define blocks of code, making the code structure clear and visually appealing.
@@ -97,11 +92,11 @@ print(
 
 ## Using in a chain
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 template = """Question: {question}
 
 Answer: Let's think step by step."""
@@ -113,13 +108,13 @@ question = "How much is 2+2?"
 print(chain.invoke({"question": question}))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 4
 ```
 
 ## Streaming calls
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sys
 
 stream = llm.stream_events("Tell me a short poem about snow", version="v3")
@@ -128,7 +123,7 @@ for token in stream.text:
     sys.stdout.flush()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 In winter's embrace, a silent ballet,
 Snowflakes descend, a celestial display.
 Whispering secrets, they softly fall,
@@ -159,7 +154,7 @@ A frozen world, with magic all around.
 
 Gemini models have default safety settings that can be overridden. If you are receiving lots of "Safety Warnings" from your models, you can try tweaking the `safety_settings` attribute of the model. For example, to turn off safety blocking for dangerous content, you can construct your LLM as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import GoogleGenerativeAI, HarmBlockThreshold, HarmCategory
 
 llm = GoogleGenerativeAI(
@@ -175,12 +170,8 @@ For an enumeration of the categories and thresholds available, see Google's [saf
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

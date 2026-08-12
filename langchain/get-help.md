@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Get help
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/get-help)
 Connect with the LangChain community, access learning resources, and get the support you need to build with confidence.
 
 ## Learning resources
@@ -31,7 +27,7 @@ For enterprise needs and critical applications, access dedicated support channel
 
 Help us improve LangChain for everyone. Whether you're fixing bugs, adding features, or improving documentation, we welcome your contributions.
 
-* **[Contributing Guide](/oss/python/contributing/overview)**: Everything you need to know about contributing to LangChain
+* **[Contributing Guide](https://docs.langchain.com/oss/python/contributing/overview)**: Everything you need to know about contributing to LangChain
 
 ## Stay connected
 
@@ -42,12 +38,8 @@ Follow us for the latest updates, announcements, and community highlights.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/get-help.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/get-help.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

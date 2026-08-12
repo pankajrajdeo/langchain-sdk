@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Unstructured integration
 
 > Integrate with the Unstructured document loader using LangChain Python.
 
-This notebook covers how to use the Unstructured [document loader](/oss/python/integrations/document_loaders) to load files of many types. `Unstructured` currently supports loading of text files, powerpoints, html, pdfs, images, and more.
+This notebook covers how to use the Unstructured [document loader](https://docs.langchain.com/oss/python/integrations/document_loaders) to load files of many types. `Unstructured` currently supports loading of text files, powerpoints, html, pdfs, images, and more.
 
-Please see [Unstructured](/oss/python/integrations/providers/unstructured) for more instructions on setting up Unstructured locally, including setting up required system dependencies.
+Please see [Unstructured](https://docs.langchain.com/oss/python/integrations/providers/unstructured) for more instructions on setting up Unstructured locally, including setting up required system dependencies.
 
 ## Overview
 
@@ -30,7 +26,7 @@ Please see [Unstructured](/oss/python/integrations/providers/unstructured) for m
 
 By default, `langchain-unstructured` installs a smaller footprint that requires offloading of the partitioning logic to the Unstructured API, which requires an API key. If you use the local installation, you do not need an API key. To get your API key, head over to [this site](https://unstructured.io) and get an API key, and then set it in the cell below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,7 +42,7 @@ if "UNSTRUCTURED_API_KEY" not in os.environ:
 
 The following packages are required to run the rest of this notebook.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Install package, compatible with API partitioning
 pip install -qU langchain-unstructured unstructured-client unstructured "unstructured[pdf]" python-magic
 ```
@@ -57,7 +53,7 @@ If you would like to run the partitioning logic locally, you will need to instal
 
 For example, on Macs you can install the required dependencies with:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # base dependencies
 brew install libmagic poppler tesseract
 
@@ -67,7 +63,7 @@ brew install libxml2 libxslt
 
 You can install the required `pip` dependencies needed for local with:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install "langchain-unstructured[local]"
 ```
 
@@ -75,7 +71,7 @@ pip install "langchain-unstructured[local]"
 
 The `UnstructuredLoader` allows loading from a variety of different file types. To read all about the `unstructured` package please refer to their [documentation](https://docs.unstructured.io/open-source/introduction/overview)/. In this example, we show loading from both a text file and a PDF file.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_unstructured import UnstructuredLoader
 
 file_paths = [
@@ -83,37 +79,36 @@ file_paths = [
     "./example_data/state_of_the_union.txt",
 ]
 
-
 loader = UnstructuredLoader(file_paths)
 ```
 
 ## Load
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 
 docs[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 INFO: pikepdf C++ to Python logger bridge initialized
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((16.34, 213.36), (16.34, 253.36), (36.34, 253.36), (36.34, 213.36)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'filetype': 'application/pdf', 'category': 'UncategorizedText', 'element_id': 'd3ce55f220dfb75891b4394a18bcb973'}, page_content='1 2 0 2')
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(docs[0].metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((16.34, 213.36), (16.34, 253.36), (36.34, 253.36), (36.34, 213.36)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'filetype': 'application/pdf', 'category': 'UncategorizedText', 'element_id': 'd3ce55f220dfb75891b4394a18bcb973'}
 ```
 
 ## Lazy load
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pages = []
 for doc in loader.lazy_load():
     pages.append(doc)
@@ -121,7 +116,7 @@ for doc in loader.lazy_load():
 pages[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((16.34, 213.36), (16.34, 253.36), (36.34, 253.36), (36.34, 213.36)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'filetype': 'application/pdf', 'category': 'UncategorizedText', 'element_id': 'd3ce55f220dfb75891b4394a18bcb973'}, page_content='1 2 0 2')
 ```
 
@@ -130,7 +125,7 @@ Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordina
 If you need to post process the `unstructured` elements after extraction, you can pass in a list of
 `str` -> `str` functions to the `post_processors` kwarg when you instantiate the `UnstructuredLoader`. This applies to other Unstructured loaders as well. Below is an example.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_unstructured import UnstructuredLoader
 from unstructured.cleaners.core import clean_extra_whitespace
 
@@ -144,7 +139,7 @@ docs = loader.load()
 docs[5:10]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((16.34, 393.9), (16.34, 560.0), (36.34, 560.0), (36.34, 393.9)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'parent_id': '89565df026a24279aaea20dc08cedbec', 'filetype': 'application/pdf', 'category': 'UncategorizedText', 'element_id': 'e9fa370aef7ee5c05744eb7bb7d9981b'}, page_content='2 v 8 4 3 5 1 . 3 0 1 2 : v i X r a'),
  Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((157.62199999999999, 114.23496279999995), (157.62199999999999, 146.5141628), (457.7358962799999, 146.5141628), (457.7358962799999, 114.23496279999995)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'filetype': 'application/pdf', 'category': 'Title', 'element_id': 'bde0b230a1aa488e3ce837d33015181b'}, page_content='LayoutParser: A Uniﬁed Toolkit for Deep Learning Based Document Image Analysis'),
  Document(metadata={'source': './example_data/layout-parser-paper.pdf', 'coordinates': {'points': ((134.809, 168.64029940800003), (134.809, 192.2517444), (480.5464199080001, 192.2517444), (480.5464199080001, 168.64029940800003)), 'system': 'PixelSpace', 'layout_width': 612, 'layout_height': 792}, 'file_directory': './example_data', 'filename': 'layout-parser-paper.pdf', 'languages': ['eng'], 'last_modified': '2024-02-27T15:49:27', 'page_number': 1, 'parent_id': 'bde0b230a1aa488e3ce837d33015181b', 'filetype': 'application/pdf', 'category': 'UncategorizedText', 'element_id': '54700f902899f0c8c90488fa8d825bce'}, page_content='Zejiang Shen1 ((cid:0)), Ruochen Zhang2, Melissa Dell3, Benjamin Charles Germain Lee4, Jacob Carlson3, and Weining Li5'),
@@ -165,7 +160,7 @@ your `api_key` and set `partition_via_api=True`. You can [generate a free Unstru
 Check out the [Docker image instructions for self-hosting the Unstructured API](https://github.com/Unstructured-IO/unstructured-api#dizzy-instructions-for-using-the-docker-image)
 if you’d like to self-host the Unstructured API or run it locally.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_unstructured import UnstructuredLoader
 
 loader = UnstructuredLoader(
@@ -178,20 +173,20 @@ docs = loader.load()
 docs[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 INFO: Preparing to split document for partition.
 INFO: Given file doesn't have '.pdf' extension, so splitting is not enabled.
 INFO: Partitioning without split.
 INFO: Successfully partitioned the document.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document(metadata={'source': 'example_data/fake.docx', 'category_depth': 0, 'filename': 'fake.docx', 'languages': ['por', 'cat'], 'filetype': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'category': 'Title', 'element_id': '56d531394823d81787d77a04462ed096'}, page_content='Lorem ipsum dolor sit amet.')
 ```
 
 You can also batch multiple files through the Unstructured API in a single API using `UnstructuredLoader`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = UnstructuredLoader(
     file_path=["example_data/fake.docx", "example_data/fake-email.eml"],
     api_key=os.getenv("UNSTRUCTURED_API_KEY"),
@@ -204,7 +199,7 @@ print(docs[0].metadata["filename"], ": ", docs[0].page_content[:100])
 print(docs[-1].metadata["filename"], ": ", docs[-1].page_content[:100])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 INFO: Preparing to split document for partition.
 INFO: Given file doesn't have '.pdf' extension, so splitting is not enabled.
 INFO: Partitioning without split.
@@ -215,7 +210,7 @@ INFO: Partitioning without split.
 INFO: Successfully partitioned the document.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 fake.docx :  Lorem ipsum dolor sit amet.
 fake-email.eml :  Violets are blue
 ```
@@ -229,7 +224,7 @@ If you want to customize the client, you will have to pass an `UnstructuredClien
 
 <div class="alert alert-block alert-warning"><b>Warning:</b> The example below may not use the latest version of the UnstructuredClient and there could be breaking changes in future releases. For the latest examples, refer to the <a href="https://docs.unstructured.io/api-reference/api-services/sdk-python">Unstructured Python SDK</a> docs.</div>
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import requests
 from langchain_unstructured import UnstructuredLoader
 from unstructured_client import UnstructuredClient
@@ -266,7 +261,7 @@ docs = loader.load()
 print(docs[0].metadata["filename"], ": ", docs[0].page_content[:100])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 INFO: Preparing to split document for partition.
 INFO: Concurrency level set to 5
 INFO: Splitting pages 1 to 10 (10 total)
@@ -289,7 +284,7 @@ INFO: Successfully partitioned set #5, elements added to the final result.
 INFO: Successfully partitioned the document.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 layout-parser-paper.pdf :  LayoutParser: A Uniﬁed Toolkit for Deep Learning Based Document Image Analysis
 ```
 
@@ -310,7 +305,7 @@ See this [page](https://docs.unstructured.io/open-source/core-functionality/chun
 details about chunking options, but to reproduce the same behavior as `mode="single"`, you can set
 `chunking_strategy="basic"`, `max_characters=<some-really-big-number>`, and `include_orig_elements=False`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_unstructured import UnstructuredLoader
 
 loader = UnstructuredLoader(
@@ -326,7 +321,7 @@ print("Number of LangChain documents:", len(docs))
 print("Length of text in the document:", len(docs[0].page_content))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Number of LangChain documents: 1
 Length of text in the document: 42772
 ```
@@ -337,7 +332,7 @@ Length of text in the document: 42772
 
 Example usage:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_unstructured import UnstructuredLoader
 
 loader = UnstructuredLoader(web_url="https://www.example.com")
@@ -347,7 +342,7 @@ for doc in docs:
     print(f"{doc}\n")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 page_content='Example Domain' metadata={'category_depth': 0, 'languages': ['eng'], 'filetype': 'text/html', 'url': 'https://www.example.com', 'category': 'Title', 'element_id': 'fdaa78d856f9d143aeeed85bf23f58f8'}
 
 page_content='This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.' metadata={'languages': ['eng'], 'parent_id': 'fdaa78d856f9d143aeeed85bf23f58f8', 'filetype': 'text/html', 'url': 'https://www.example.com', 'category': 'NarrativeText', 'element_id': '3652b8458b0688639f973fe36253c992'}
@@ -363,12 +358,8 @@ For detailed documentation of all `UnstructuredLoader` features and configuratio
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/unstructured_file.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/unstructured_file.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy with Deno Deploy
-
-> Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-deno)
+Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint.
 
 The following page details an example app that deploys a LangChain **deep agent** on [Deno Deploy](https://deno.com/deploy): streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as HTTP + SSE route handlers on a Hono server. The React frontend is a Vite SPA (ported from the Next.js example); Deno serves the built static assets and the API from a single `main.ts` entrypoint.
 
@@ -14,26 +10,21 @@ Source: [`js-deno`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 
 ## Deploy to Deno Deploy
 
-<Steps>
-  <Step title="Create a Deno Deploy project">
-    Fork or clone [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook). In the [Deno Deploy dashboard](https://dash.deno.com/), create a new project linked to this repo.
-  </Step>
+### Create a Deno Deploy project
+Fork or clone [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook). In the [Deno Deploy dashboard](https://dash.deno.com/), create a new project linked to this repo.
 
-  <Step title="Configure build settings">
-    * Set **Root Directory** to `js-deno`.
-    * Set the **build command** to `deno task build:client` (builds the Vite SPA into `dist/`).
-    * Set the **entrypoint** to `main.ts`.
-    * Add `OPENAI_API_KEY` in project environment variables.
-  </Step>
+### Configure build settings
+* Set **Root Directory** to `js-deno`.
+* Set the **build command** to `deno task build:client` (builds the Vite SPA into `dist/`).
+* Set the **entrypoint** to `main.ts`.
+* Add `OPENAI_API_KEY` in project environment variables.
 
-  <Step title="Deploy">
-    Deploy from the dashboard. Deno's build environment runs the build command, so `dist/` is generated in the cloud and never needs to be committed.
-  </Step>
-</Steps>
+### Deploy
+Deploy from the dashboard. Deno's build environment runs the build command, so `dist/` is generated in the cloud and never needs to be committed.
 
 Alternatively, use the built-in `deno deploy` CLI (Deno 2.x). The `deploy` block in [`deno.json`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-deno/deno.json) sets `org`/`app`. Change those to your own (or pass `--org`/`--app` flags, which override them).
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd js-deno
 
 # First time only: create the app
@@ -48,12 +39,11 @@ deno task deploy
 
 `deno task deploy` runs `deno task build:client && deno deploy --prod`, then `rm -rf dist`. Building locally is required because `deno deploy --source local` uploads your working tree (minus `.gitignore`) and does **not** run build commands. Those only run for GitHub-connected apps.
 
-<Warning>
-  Two gotchas specific to the CLI `--source local` flow:
-
-  * **`dist/` must not be gitignored.** The uploader respects `.gitignore`, so the freshly built `dist/` must be visible during the upload window or every non-`/api` route returns **404**. The repo-root `.gitignore` ignores all `dist`, so `js-deno/.gitignore` re-includes it with `!dist/` and `!dist/**`. The `deno task deploy` flow deletes `dist/` after uploading, so it does not linger in `git status` despite not being ignored.
-  * **Do not use a `deploy.include` list.** There is a Deno Deploy bug where adding `include` makes the build resolve the entrypoint to `src/main.ts` and fail. Rely on the default `.gitignore`-based upload instead.
-</Warning>
+> [!WARNING]
+> Two gotchas specific to the CLI `--source local` flow:
+>
+> * **`dist/` must not be gitignored.** The uploader respects `.gitignore`, so the freshly built `dist/` must be visible during the upload window or every non-`/api` route returns **404**. The repo-root `.gitignore` ignores all `dist`, so `js-deno/.gitignore` re-includes it with `!dist/` and `!dist/**`. The `deno task deploy` flow deletes `dist/` after uploading, so it does not linger in `git status` despite not being ignored.
+> * **Do not use a `deploy.include` list.** There is a Deno Deploy bug where adding `include` makes the build resolve the entrypoint to `src/main.ts` and fail. Rely on the default `.gitignore`-based upload instead.
 
 Optionally enable LangSmith tracing by adding the variables from [`.env.example`](https://github.com/langchain-ai/deployment-cookbook/blob/main/js-deno/.env.example).
 
@@ -79,7 +69,7 @@ The app exposes the Agent Streaming Protocol under `/api/threads/...`. Route han
 
 ### Request flow
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init: {"themeVariables": {"lineColor": "#40668D", "primaryColor": "#E5F4FF", "primaryTextColor": "#030710", "primaryBorderColor": "#006DDD"}}}%%
 flowchart TB
   subgraph browser["Browser (Vite React SPA)"]
@@ -129,7 +119,7 @@ This example runs as a **single Deno process**:
 * **`server/registry.ts`**: process-local singleton owning the agent and one session per thread id.
 * **`server/agent/`**: same `createDeepAgent` orchestrator as the Next.js example (researcher + math-whiz subagents, mock tools).
 
-Deno Deploy runs each isolate with its own in-memory `MemorySaver` checkpointer. For production persistence across isolates, swap in a [durable checkpointer](/oss/python/langgraph/checkpointers#checkpointer-libraries) (Postgres, Redis, …). The route handlers and `server/threads.ts` helpers stay the same.
+Deno Deploy runs each isolate with its own in-memory `MemorySaver` checkpointer. For production persistence across isolates, swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) (Postgres, Redis, …). The route handlers and `server/threads.ts` helpers stay the same.
 
 ## Production persistence
 
@@ -141,7 +131,7 @@ Replace `MemorySaver` in `server/agent/index.ts` with a durable checkpointer suc
 
 You need [Deno](https://deno.com/) 2.x and [pnpm](https://pnpm.io/) for the client.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp .env.example .env   # set OPENAI_API_KEY
 export $(grep -v '^#' .env | xargs)   # load env for Deno
 
@@ -157,7 +147,7 @@ Open [http://localhost:5173](http://localhost:5173) for development with hot rel
 
 For a production-like local run (single server, no HMR):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 deno task build:client
 deno task start
 ```
@@ -174,18 +164,14 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ## See also
 
-* [Frameworks and platforms overview](/langsmith/deploy-frameworks-and-platforms)
-* [Deploy with Next.js](/langsmith/deploy-nextjs)
+* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+* [Deploy with Next.js](https://docs.langchain.com/langsmith/deploy-nextjs)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-deno.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-deno.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

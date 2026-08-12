@@ -1,21 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Fleet webhooks
-
-> Integrate agent publishing with external systems, CI/CD pipelines, or custom deployment workflows.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/webhooks)
+Integrate agent publishing with external systems, CI/CD pipelines, or custom deployment workflows.
 
 When triggered, a webhook sends a complete package of your agent's configuration and files to the specified endpoint.
 
-<Callout icon="lock" color="#4F46E5" iconType="regular">
-  **Security notes:**
-
-  * Webhook URLs must use HTTPS.
-  * Custom headers (e.g., API keys) are stored encrypted.
-  * Publisher identity is included for audit trails.
-  * Webhooks are only visible to agent owners.
-</Callout>
+> [!NOTE]
+> **Security notes:**
+>
+> * Webhook URLs must use HTTPS.
+> * Custom headers (e.g., API keys) are stored encrypted.
+> * Publisher identity is included for audit trails.
+> * Webhooks are only visible to agent owners.
 
 ## Add a webhook
 
@@ -58,13 +53,13 @@ The webhook payload is a JSON object with the following fields:
 | `input`                                             | Values from custom form fields (empty object if no custom fields). |
 | `publisher`                                         | User ID and email of the person triggering the webhook.            |
 | `agent`                                             | Agent name and description.                                        |
-| [`tool_auth_requirements`](#tool-auth-requirements) | Authentication requirements for each tool the agent uses.          |
-| [`files`](#zip-file-structure)                      | Base64-encoded ZIP containing all agent files.                     |
-| [`fields`](#custom-input-fields)                    | Custom input fields.                                               |
+| [`tool_auth_requirements`](https://docs.langchain.com/langsmith/fleet/webhooks#tool-auth-requirements) | Authentication requirements for each tool the agent uses.          |
+| [`files`](https://docs.langchain.com/langsmith/fleet/webhooks#zip-file-structure)                      | Base64-encoded ZIP containing all agent files.                     |
+| [`fields`](https://docs.langchain.com/langsmith/fleet/webhooks#custom-input-fields)                    | Custom input fields.                                               |
 
 For example:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "action": "Webhook Name",
   "input": {
@@ -140,36 +135,32 @@ The `files.content_base64` field contains a ZIP archive with the following struc
 
 The `config.json` file and `tools.json` files are structured as follows:
 
-<Tabs>
-  <Tab title="`config.json`">
-    ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    {
-      "name": "My Agent",
-      "description": "Agent description",
-      "visibility_scope": "tenant",
-      "triggers_paused": false
-    }
-    ```
-  </Tab>
+#### `config.json`
+```json
+{
+  "name": "My Agent",
+  "description": "Agent description",
+  "visibility_scope": "tenant",
+  "triggers_paused": false
+}
+```
 
-  <Tab title="`tools.json`">
-    ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+#### `tools.json`
+```json
+{
+  "tools": [
     {
-      "tools": [
-        {
-          "name": "tavily_web_search",
-          "mcp_server_url": "http://localhost:8084",
-          "mcp_server_name": "Fleet",
-          "display_name": "tavily_web_search"
-        }
-      ],
-      "interrupt_config": {
-        "http://localhost:8084::tavily_web_search::Fleet": false
-      }
+      "name": "tavily_web_search",
+      "mcp_server_url": "http://localhost:8084",
+      "mcp_server_name": "Fleet",
+      "display_name": "tavily_web_search"
     }
-    ```
-  </Tab>
-</Tabs>
+  ],
+  "interrupt_config": {
+    "http://localhost:8084::tavily_web_search::Fleet": false
+  }
+}
+```
 
 ### Custom input fields
 
@@ -186,7 +177,7 @@ You can define custom input fields to collect information when the webhook is tr
 
 For example:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "fields": [
     {
@@ -218,7 +209,7 @@ For example:
 
 The following is an example webhook server in Python:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 import base64
@@ -258,12 +249,8 @@ HTTPServer(("", 8000), WebhookHandler).serve_forever()
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

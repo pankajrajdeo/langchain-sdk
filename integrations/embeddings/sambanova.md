@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # SambanovaEmbeddings integration
 
 > Integrate with the SambanovaEmbeddings embedding model using LangChain Python.
@@ -16,13 +12,13 @@ This will help you get started with SambaNova embedding models using LangChain. 
 
 |                          Provider                          |                                 Package                                |
 | :--------------------------------------------------------: | :--------------------------------------------------------------------: |
-| [SambaNova](/oss/python/integrations/providers/sambanova/) | [`langchain-sambanova`](/oss/python/integrations/providers/sambanova/) |
+| [SambaNova](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) | [`langchain-sambanova`](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) |
 
 ## Setup
 
 To access `SambaNovaEmbeddings` models you will need to create a [SambaCloud](http://cloud.sambanova.ai?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup) account, get an API key, install the `langchain_sambanova` integration package.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-sambanova
 ```
 
@@ -30,7 +26,7 @@ pip install langchain-sambanova
 
 Get an API Key from [cloud.sambanova.ai](http://cloud.sambanova.ai/apis?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup).Once you've done this set the SAMBANOVA\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -38,9 +34,9 @@ if not os.getenv("SAMBANOVA_API_KEY"):
     os.environ["SAMBANOVA_API_KEY"] = getpass.getpass("Enter your SambaNova API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -49,7 +45,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain SambaNova integration lives in the `langchain-sambanova` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-sambanova
 ```
 
@@ -57,7 +53,7 @@ pip install -qU langchain-sambanova
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_sambanova import SambaNovaEmbeddings
 
 embeddings = SambaNovaEmbeddings(
@@ -67,11 +63,11 @@ embeddings = SambaNovaEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -102,7 +98,7 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
@@ -111,7 +107,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -128,12 +124,8 @@ For detailed documentation on `SambaNovaEmbeddings` features and configuration o
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

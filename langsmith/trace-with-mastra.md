@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Mastra applications
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-mastra)
 [Mastra](https://mastra.ai/docs) is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s [LangSmith exporter](https://mastra.ai/docs/observability/ai-tracing/exporters/langsmith), you can send traces from your Mastra agents and workflows to LangSmith for debugging, evaluation, and observability.
 
 This guide shows you how to integrate Mastra with LangSmith using Mastra’s AI tracing system.
@@ -12,7 +8,7 @@ This guide shows you how to integrate Mastra with LangSmith using Mastra’s AI 
 
 Install Mastra and the LangSmith exporter:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 npm install @mastra/core @mastra/langsmith @mastra/observability @mastra/libsql
 ```
 
@@ -20,35 +16,34 @@ npm install @mastra/core @mastra/langsmith @mastra/observability @mastra/libsql
 
 1. Set your LangSmith API key and (optionally) a LangSmith project name:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    export LANGSMITH_API_KEY=<your_langsmith_api_key>
    export LANGCHAIN_PROJECT=<your_project_name> # optional
-   ```
+```
 
-   <Tip>
-     If [`LANGCHAIN_PROJECT`](/langsmith/log-traces-to-project) is not set, traces will be sent to the default project.
-   </Tip>
+> [!TIP]
+>    If [`LANGCHAIN_PROJECT`](https://docs.langchain.com/langsmith/log-traces-to-project) is not set, traces will be sent to the default project.
 
 2. If you plan to use OpenAI models, also ensure you have an OpenAI API key available at runtime:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    export OPENAI_API_KEY=<your_openai_api_key>
-   ```
+```
 
 3. In your project directory, create the following project structure and files:
 
-   ```
+```
    src/
        mastra.ts
        agent.ts
        index.ts
-   ```
+```
 
 ## Configure Mastra with the LangSmith exporter
 
 Mastra tracing is configured directly on the `Mastra` constructor. Add the following to a `mastra.ts` file:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { Mastra } from "@mastra/core";
 import { LibSQLStore } from "@mastra/libsql";
 import { LangSmithExporter } from "@mastra/langsmith";
@@ -92,7 +87,7 @@ export const mastra = new Mastra({
 
 For compatibility, use [string-based model identifiers](https://mastra.ai/models#basic-usage). Add the following code to an `agent.ts` file:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { Agent } from "@mastra/core/agent";
 
 export const echoAgent = new Agent({
@@ -108,7 +103,7 @@ Mastra will automatically route the model call using your configured API keys an
 
 1. Add the following to an `index.ts` file:
 
-   ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
    import { mastra } from "./mastra";
 
    async function main() {
@@ -118,13 +113,13 @@ Mastra will automatically route the model call using your configured API keys an
    }
 
    main();
-   ```
+```
 
 2. Run your application:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    npx ts-node src/index.ts
-   ```
+```
 
 ## View traces in LangSmith
 
@@ -142,12 +137,8 @@ You’ll be able to inspect:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mastra.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mastra.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

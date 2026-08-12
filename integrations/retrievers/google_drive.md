@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google drive integration
 
 > Integrate with the Google drive retriever using LangChain Python.
@@ -31,7 +27,7 @@ You can obtain your folder and document id from the URL:
 
 The special value `root` is for your personal home.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_googledrive.retrievers import GoogleDriveRetriever
 
 folder_id = "root"
@@ -65,11 +61,11 @@ It's possible to update or customize this. See the documentation of `GoogleDrive
 
 The corresponding packages must be installed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  unstructured
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever.invoke("machine learning")
 ```
 
@@ -86,7 +82,7 @@ You can customize the criteria to select the files. A set of predefined filter a
 | `gdrive-query-with-mime-type`            | Search `query` with a specific `mime_type`                           |
 | `gdrive-query-with-mime-type-and-folder` | Search `query` with a specific `mime_type` and in `folder_id`        |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = GoogleDriveRetriever(
     template="gdrive-query",  # Search everywhere
     num_results=2,  # But take only 2 documents
@@ -98,7 +94,7 @@ for doc in retriever.invoke("machine learning"):
 
 Else, you can customize the prompt with a specialized `PromptTemplate`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 retriever = GoogleDriveRetriever(
@@ -126,7 +122,7 @@ for doc in retriever.invoke("machine learning"):
 Each Google Drive has a `description` field in metadata (see the *details of a file*).
 Use the `snippets` mode to return the description of selected files.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = GoogleDriveRetriever(
     template="gdrive-mime-type-in-folder",
     folder_id=folder_id,
@@ -141,12 +137,8 @@ retriever.invoke("machine learning")
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

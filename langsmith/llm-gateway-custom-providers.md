@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Custom model providers
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-custom-providers)
+Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
 
-> Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-In addition to the [built-in providers](/langsmith/llm-gateway-direct-model-access#choose-a-provider-path), the LLM Gateway can proxy requests to **any OpenAI-compatible or Anthropic-compatible endpoint** you configure yourself, such as a self-hosted open-source model served through an inference server (vLLM, Ollama, and similar).
+In addition to the [built-in providers](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access#choose-a-provider-path), the LLM Gateway can proxy requests to **any OpenAI-compatible or Anthropic-compatible endpoint** you configure yourself, such as a self-hosted open-source model served through an inference server (vLLM, Ollama, and similar).
 
 ## How it works
 
-A custom provider is defined by a [model configuration](/langsmith/model-configurations) that you save under **Settings → Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
+A custom provider is defined by a [model configuration](https://docs.langchain.com/langsmith/model-configurations) that you save under **Settings → Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
 
 | Configuration provider         | Wire format        | Example endpoints                                     |
 | ------------------------------ | ------------------ | ----------------------------------------------------- |
@@ -25,7 +20,7 @@ The gateway uses the following options from the configuration:
 
 * A **base URL**: the upstream endpoint the gateway forwards requests to.
 * A **model name**: the model identifier your upstream expects.
-* An **API key**: stored as a [workspace secret](/langsmith/llm-gateway-admin-setup#1-add-provider-secrets), never sent by the client.
+* An **API key**: stored as a [workspace secret](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#1-add-provider-secrets), never sent by the client.
 
 You address the saved configuration by name through one of two routes, depending on whether you want callers to choose the model or want to enforce the configured one:
 
@@ -36,9 +31,8 @@ You address the saved configuration by name through one of two routes, depending
 
 Both routes look up the same configuration, resolve the same secret, and proxy to the same upstream URL; they only differ in whether the model name is enforced.
 
-<Note>
-  `{configName}` is the configuration name from your workspace [model configuration](/langsmith/model-configurations). If the name contains characters that aren't URL-safe (such as `/` or spaces), URL-encode them in the path. For example, a configuration named `meta-llama/Llama-3.1-8B-Instruct` becomes `https://gateway.smith.langchain.com/providers/meta-llama%2FLlama-3.1-8B-Instruct/v1/chat/completions`.
-</Note>
+> [!NOTE]
+> `{configName}` is the configuration name from your workspace [model configuration](https://docs.langchain.com/langsmith/model-configurations). If the name contains characters that aren't URL-safe (such as `/` or spaces), URL-encode them in the path. For example, a configuration named `meta-llama/Llama-3.1-8B-Instruct` becomes `https://gateway.smith.langchain.com/providers/meta-llama%2FLlama-3.1-8B-Instruct/v1/chat/completions`.
 
 ## 1. Create a custom provider configuration
 
@@ -48,9 +42,8 @@ Both routes look up the same configuration, resolve the same secret, and proxy t
 4. Set the **API Key Name** to the secret you created.
 5. Save the configuration with a **name**. This name is what you'll use in the gateway route.
 
-<Note>
-  The **Model Name** you save only matters if you call the configuration through `/models/{configName}`. Through `/providers/{configName}`, the client's `model` field is sent through unchanged, so a single configuration can serve any model your upstream supports (for example, any model pulled into a shared Ollama instance).
-</Note>
+> [!NOTE]
+> The **Model Name** you save only matters if you call the configuration through `/models/{configName}`. Through `/providers/{configName}`, the client's `model` field is sent through unchanged, so a single configuration can serve any model your upstream supports (for example, any model pulled into a shared Ollama instance).
 
 ## 2. Make a call
 
@@ -60,21 +53,19 @@ Call the saved configuration by name (`my-custom-openai-endpoint` and `my-anthro
 
 Use this route when the upstream serves multiple models and you want callers to pick which one:
 
-<CodeGroup>
-  ```bash OpenAI-compatible theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/providers/my-custom-openai-endpoint/v1/chat/completions \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"model":"llama3.1:8b","messages":[{"role":"user","content":"ping"}]}'
-  ```
+```bash
+curl https://gateway.smith.langchain.com/providers/my-custom-openai-endpoint/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"llama3.1:8b","messages":[{"role":"user","content":"ping"}]}'
+```
 
-  ```bash Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/providers/my-anthropic-endpoint/v1/messages \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"model":"claude-sonnet-4-6","max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
-  ```
-</CodeGroup>
+```bash
+curl https://gateway.smith.langchain.com/providers/my-anthropic-endpoint/v1/messages \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"claude-sonnet-4-6","max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
+```
 
 The gateway forwards the request body's `model` field to the upstream as-is.
 
@@ -82,38 +73,32 @@ The gateway forwards the request body's `model` field to the upstream as-is.
 
 Use this route to pin every call through this configuration to a single model, regardless of what the client requests—useful for enforcing model behavior for a team or application:
 
-<CodeGroup>
-  ```bash OpenAI-compatible theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/models/my-custom-openai-endpoint/v1/chat/completions \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"messages":[{"role":"user","content":"ping"}]}'
-  ```
+```bash
+curl https://gateway.smith.langchain.com/models/my-custom-openai-endpoint/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"messages":[{"role":"user","content":"ping"}]}'
+```
 
-  ```bash Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/models/my-anthropic-endpoint/v1/messages \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
-  ```
-</CodeGroup>
+```bash
+curl https://gateway.smith.langchain.com/models/my-anthropic-endpoint/v1/messages \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
+```
 
 The gateway overrides the request body's `model` field with the model name from the saved configuration, so any value the client passes (or omitting it, as per the example) is ignored. To serve multiple pinned models from the same upstream, create one configuration per model (each with its own name and `/models/{configName}` route).
 
 ## Next steps
 
-* [Model fallbacks](/langsmith/llm-gateway-fallbacks): chain these configurations so a backup takes over when one rate-limits or errors.
-* [Spend policies](/langsmith/llm-gateway-spend-policies): apply cost limits to custom providers.
-* [Data protection](/langsmith/llm-gateway-data-protection): redact sensitive data before it reaches your endpoint.
+* [Model fallbacks](https://docs.langchain.com/langsmith/llm-gateway-fallbacks): chain these configurations so a backup takes over when one rate-limits or errors.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): apply cost limits to custom providers.
+* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): redact sensitive data before it reaches your endpoint.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-custom-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-custom-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

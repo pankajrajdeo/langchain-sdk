@@ -1,47 +1,40 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Use the graph API
-
-This guide demonstrates the basics of LangGraph's Graph API. It walks through [state](#define-and-update-state), as well as composing common graph structures such as [sequences](#create-a-sequence-of-steps), [branches](#create-branches), and [loops](#create-and-control-loops). It also covers LangGraph's control features, including the [Send API](#map-reduce-and-the-send-api) for map-reduce workflows and the [Command API](#combine-control-flow-and-state-updates-with-command) for combining state updates with "hops" across nodes.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
+This guide demonstrates the basics of LangGraph's Graph API. It walks through [state](https://docs.langchain.com/oss/python/langgraph/use-graph-api#define-and-update-state), as well as composing common graph structures such as [sequences](https://docs.langchain.com/oss/python/langgraph/use-graph-api#create-a-sequence-of-steps), [branches](https://docs.langchain.com/oss/python/langgraph/use-graph-api#create-branches), and [loops](https://docs.langchain.com/oss/python/langgraph/use-graph-api#create-and-control-loops). It also covers LangGraph's control features, including the [Send API](https://docs.langchain.com/oss/python/langgraph/use-graph-api#map-reduce-and-the-send-api) for map-reduce workflows and the [Command API](https://docs.langchain.com/oss/python/langgraph/use-graph-api#combine-control-flow-and-state-updates-with-command) for combining state updates with "hops" across nodes.
 
 ## Setup
 
 Install `langgraph`:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langgraph
-  ```
+```bash
+pip install -U langgraph
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langgraph
-  ```
-</CodeGroup>
+```bash
+uv add langgraph
+```
 
-<Tip>
-  **Set up LangSmith for better debugging**
-
-  Sign up for [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-use-graph-api) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph—read more about how to get started in the [docs](/langsmith/observability).
-</Tip>
+> [!TIP]
+> **Set up LangSmith for better debugging**
+>
+> Sign up for [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-use-graph-api) to quickly spot issues and improve the performance of your LangGraph projects. LangSmith lets you use trace data to debug, test, and monitor your LLM apps built with LangGraph—read more about how to get started in the [docs](https://docs.langchain.com/langsmith/observability).
 
 ## Define and update state
 
-Here we show how to define and update [state](/oss/python/langgraph/graph-api#state) in LangGraph. We will demonstrate:
+Here we show how to define and update [state](https://docs.langchain.com/oss/python/langgraph/graph-api#state) in LangGraph. We will demonstrate:
 
-1. How to use state to define a graph's [schema](/oss/python/langgraph/graph-api#schema)
-2. How to use [reducers](/oss/python/langgraph/graph-api#reducers) to control how state updates are processed.
+1. How to use state to define a graph's [schema](https://docs.langchain.com/oss/python/langgraph/graph-api#schema)
+2. How to use [reducers](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) to control how state updates are processed.
 
 ### Define state
 
-[State](/oss/python/langgraph/graph-api#state) in LangGraph can be a `TypedDict`, `Pydantic` model, or dataclass. Below we will use `TypedDict`. See [Use Pydantic models for graph state](#use-pydantic-models-for-graph-state) for detail on using Pydantic.
+[State](https://docs.langchain.com/oss/python/langgraph/graph-api#state) in LangGraph can be a `TypedDict`, `Pydantic` model, or dataclass. Below we will use `TypedDict`. See [Use Pydantic models for graph state](https://docs.langchain.com/oss/python/langgraph/use-graph-api#use-pydantic-models-for-graph-state) for detail on using Pydantic.
 
-By default, graphs will have the same input and output schema, and the state determines that schema. See [Define input and output schemas](#define-input-and-output-schemas) for how to define distinct input and output schemas.
+By default, graphs will have the same input and output schema, and the state determines that schema. See [Define input and output schemas](https://docs.langchain.com/oss/python/langgraph/use-graph-api#define-input-and-output-schemas) for how to define distinct input and output schemas.
 
-Let's consider a simple example using [messages](/oss/python/langgraph/graph-api#messagesstate). This represents a versatile formulation of state for many LLM applications. See our [concepts page](/oss/python/langgraph/graph-api#working-with-messages-in-graph-state) for more detail.
+Let's consider a simple example using [messages](https://docs.langchain.com/oss/python/langgraph/graph-api#messagesstate). This represents a versatile formulation of state for many LLM applications. See our [concepts page](https://docs.langchain.com/oss/python/langgraph/graph-api#working-with-messages-in-graph-state) for more detail.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import AnyMessage
 from typing_extensions import TypedDict
 
@@ -54,9 +47,9 @@ This state tracks a list of [message](https://python.langchain.com/docs/concepts
 
 ### Update state
 
-Let's build an example graph with a single node. Our [node](/oss/python/langgraph/graph-api#nodes) is just a Python function that reads our graph's state and makes updates to it. The first argument to this function will always be the state:
+Let's build an example graph with a single node. Our [node](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes) is just a Python function that reads our graph's state and makes updates to it. The first argument to this function will always be the state:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import AIMessage
 
 def node(state: State):
@@ -67,13 +60,12 @@ def node(state: State):
 
 This node simply appends a message to our message list, and populates an extra field.
 
-<Warning>
-  Nodes should return updates to the state directly, instead of mutating the state.
-</Warning>
+> [!WARNING]
+> Nodes should return updates to the state directly, instead of mutating the state.
 
-Let's next define a simple graph containing this node. We use [`StateGraph`](/oss/python/langgraph/graph-api#stategraph) to define a graph that operates on this state. We then use [`add_node`](/oss/python/langgraph/graph-api#nodes) populate our graph.
+Let's next define a simple graph containing this node. We use [`StateGraph`](https://docs.langchain.com/oss/python/langgraph/graph-api#stategraph) to define a graph that operates on this state. We then use [`add_node`](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes) populate our graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph
 
 builder = StateGraph(State)
@@ -82,19 +74,19 @@ builder.set_entry_point("node")
 graph = builder.compile()
 ```
 
-LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
+LangGraph provides built-in utilities for visualizing your graph. Let's inspect our graph. See [Visualize your graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api#visualize-your-graph) for detail on visualization.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_1.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=cf3d978b707847e166d5ed15bc7cbbe4" alt="Simple graph with single node" width="107" height="134" data-path="oss/images/graph_api_image_1.png" />
+> **Image:** [Simple graph with single node](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
 In this case, our graph just executes a single node. Let's proceed with a simple invocation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage
 
 result = graph.invoke({"messages": [HumanMessage("Hi")]})
@@ -112,7 +104,7 @@ Note that:
 
 For convenience, we frequently inspect the content of [message objects](https://python.langchain.com/docs/concepts/messages/) via pretty-print:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for message in result["messages"]:
     message.pretty_print()
 ```
@@ -128,13 +120,13 @@ Hello!
 
 ### Process state updates with reducers
 
-Each key in the state can have its own independent [reducer](/oss/python/langgraph/graph-api#reducers) function, which controls how updates from nodes are applied. If no reducer function is explicitly specified then it is assumed that all updates to the key should override it.
+Each key in the state can have its own independent [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) function, which controls how updates from nodes are applied. If no reducer function is explicitly specified then it is assumed that all updates to the key should override it.
 
 For `TypedDict` state schemas, we can define reducers by annotating the corresponding field of the state with a reducer function.
 
 In the earlier example, our node updated the `"messages"` key in the state by appending a message to it. Below, we add a reducer to this key, such that updates are automatically appended:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing_extensions import Annotated
 
 def add(left, right):
@@ -148,13 +140,13 @@ class State(TypedDict):
 
 Now our node can be simplified:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def node(state: State):
     new_message = AIMessage("Hello!")
     return {"messages": [new_message], "extra_field": 10}  # [!code highlight]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import START
 
 graph = StateGraph(State).add_node(node).add_edge(START, "node").compile()
@@ -179,11 +171,11 @@ Hello!
 In practice, there are additional considerations for updating lists of messages:
 
 * We may wish to update an existing message in the state.
-* We may want to accept short-hands for [message formats](/oss/python/langgraph/graph-api#using-messages-in-your-graph), such as [OpenAI format](https://python.langchain.com/docs/concepts/messages/#openai-format).
+* We may want to accept short-hands for [message formats](https://docs.langchain.com/oss/python/langgraph/graph-api#using-messages-in-your-graph), such as [OpenAI format](https://python.langchain.com/docs/concepts/messages/#openai-format).
 
 LangGraph includes a built-in reducer [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) that handles these considerations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph.message import add_messages
 
 class State(TypedDict):
@@ -197,7 +189,7 @@ def node(state: State):
 graph = StateGraph(State).add_node(node).set_entry_point("node").compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 input_message = {"role": "user", "content": "Hi"}  # [!code highlight]
 
 result = graph.invoke({"messages": [input_message]})
@@ -217,7 +209,7 @@ Hello!
 
 This is a versatile representation of state for applications involving [chat models](https://python.langchain.com/docs/concepts/chat_models/). LangGraph includes a prebuilt `MessagesState` for convenience, so that we can have:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import MessagesState
 
 class State(MessagesState):
@@ -230,7 +222,7 @@ In some cases, you may want to bypass a reducer and directly overwrite a state v
 
 This is useful when you want to reset or replace accumulated state rather than merge it with existing values.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Overwrite
 from typing_extensions import Annotated, TypedDict
@@ -265,14 +257,13 @@ print(result["messages"])
 
 You can also use JSON format with the special key `"__overwrite__"`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def replace_messages(state: State):
     return {"messages": {"__overwrite__": ["replacement message"]}}
 ```
 
-<Warning>
-  When nodes execute in parallel, only one node can use `Overwrite` on the same state key in a given super-step. If multiple nodes attempt to overwrite the same key in the same super-step, an `InvalidUpdateError` will be raised.
-</Warning>
+> [!WARNING]
+> When nodes execute in parallel, only one node can use `Overwrite` on the same state key in a given super-step. If multiple nodes attempt to overwrite the same key in the same super-step, an `InvalidUpdateError` will be raised.
 
 ### Define input and output schemas
 
@@ -282,7 +273,7 @@ When distinct schemas are specified, an internal schema will still be used for c
 
 Below, we'll see how to define distinct input and output schema.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from typing_extensions import TypedDict
 
@@ -326,7 +317,7 @@ In some cases, you may want nodes to exchange information that is crucial for in
 
 Below, we'll create an example sequential graph consisting of three nodes (node\_1, node\_2 and node\_3), where private data is passed between the first two steps (node\_1 and node\_2), while the third step (node\_3) only has access to the public overall state.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from typing_extensions import TypedDict
 
@@ -399,16 +390,15 @@ In our examples, we typically use a python-native `TypedDict` or [`dataclass`](h
 
 Here, we'll see how a [Pydantic BaseModel](https://docs.pydantic.dev/latest/api/base_model/) can be used for [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) to add run-time validation on **inputs**.
 
-<Note>
-  **Known Limitations**
+> [!NOTE]
+> **Known Limitations**
+>
+> * Currently, the output of the graph will **NOT** be an instance of a pydantic model.
+> * Run-time validation only occurs on inputs to the first node in the graph, not on subsequent nodes or outputs.
+> * The validation error trace from pydantic does not show which node the error arises in.
+> * Pydantic's recursive validation can be slow. For performance-sensitive applications, you may want to consider using a `dataclass` instead.
 
-  * Currently, the output of the graph will **NOT** be an instance of a pydantic model.
-  * Run-time validation only occurs on inputs to the first node in the graph, not on subsequent nodes or outputs.
-  * The validation error trace from pydantic does not show which node the error arises in.
-  * Pydantic's recursive validation can be slow. For performance-sensitive applications, you may want to consider using a `dataclass` instead.
-</Note>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from typing_extensions import TypedDict
 from pydantic import BaseModel
@@ -433,7 +423,7 @@ graph.invoke({"a": "hello"})
 
 Invoke the graph with an **invalid** input
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 try:
     graph.invoke({"a": 123})  # Should be a string
 except Exception as e:
@@ -451,127 +441,136 @@ a
 
 See below for additional features of Pydantic model state:
 
-<Accordion title="Serialization Behavior">
-  When using Pydantic models as state schemas, it's important to understand how serialization works, especially when:
+<details>
+<summary>Serialization Behavior</summary>
 
-  * Passing Pydantic objects as inputs
-  * Receiving outputs from the graph
-  * Working with nested Pydantic models
+When using Pydantic models as state schemas, it's important to understand how serialization works, especially when:
 
-  Let's see these behaviors in action.
+* Passing Pydantic objects as inputs
+* Receiving outputs from the graph
+* Working with nested Pydantic models
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.graph import StateGraph, START, END
-  from pydantic import BaseModel
+Let's see these behaviors in action.
 
-  class NestedModel(BaseModel):
-      value: str
+```python
+from langgraph.graph import StateGraph, START, END
+from pydantic import BaseModel
 
-  class ComplexState(BaseModel):
-      text: str
-      count: int
-      nested: NestedModel
+class NestedModel(BaseModel):
+    value: str
 
-  def process_node(state: ComplexState):
-      # Node receives a validated Pydantic object
-      print(f"Input state type: {type(state)}")
-      print(f"Nested type: {type(state.nested)}")
-      # Return a dictionary update
-      return {"text": state.text + " processed", "count": state.count + 1}
+class ComplexState(BaseModel):
+    text: str
+    count: int
+    nested: NestedModel
 
-  # Build the graph
-  builder = StateGraph(ComplexState)
-  builder.add_node("process", process_node)
-  builder.add_edge(START, "process")
-  builder.add_edge("process", END)
-  graph = builder.compile()
+def process_node(state: ComplexState):
+    # Node receives a validated Pydantic object
+    print(f"Input state type: {type(state)}")
+    print(f"Nested type: {type(state.nested)}")
+    # Return a dictionary update
+    return {"text": state.text + " processed", "count": state.count + 1}
 
-  # Create a Pydantic instance for input
-  input_state = ComplexState(text="hello", count=0, nested=NestedModel(value="test"))
-  print(f"Input object type: {type(input_state)}")
+# Build the graph
+builder = StateGraph(ComplexState)
+builder.add_node("process", process_node)
+builder.add_edge(START, "process")
+builder.add_edge("process", END)
+graph = builder.compile()
 
-  # Invoke graph with a Pydantic instance
-  result = graph.invoke(input_state)
-  print(f"Output type: {type(result)}")
-  print(f"Output content: {result}")
+# Create a Pydantic instance for input
+input_state = ComplexState(text="hello", count=0, nested=NestedModel(value="test"))
+print(f"Input object type: {type(input_state)}")
 
-  # Convert back to Pydantic model if needed
-  output_model = ComplexState(**result)
-  print(f"Converted back to Pydantic: {type(output_model)}")
-  ```
-</Accordion>
+# Invoke graph with a Pydantic instance
+result = graph.invoke(input_state)
+print(f"Output type: {type(result)}")
+print(f"Output content: {result}")
 
-<Accordion title="Runtime Type Coercion">
-  Pydantic performs runtime type coercion for certain data types. This can be helpful but also lead to unexpected behavior if you're not aware of it.
+# Convert back to Pydantic model if needed
+output_model = ComplexState(**result)
+print(f"Converted back to Pydantic: {type(output_model)}")
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.graph import StateGraph, START, END
-  from pydantic import BaseModel
+</details>
 
-  class CoercionExample(BaseModel):
-      # Pydantic will coerce string numbers to integers
-      number: int
-      # Pydantic will parse string booleans to bool
-      flag: bool
+<details>
+<summary>Runtime Type Coercion</summary>
 
-  def inspect_node(state: CoercionExample):
-      print(f"number: {state.number} (type: {type(state.number)})")
-      print(f"flag: {state.flag} (type: {type(state.flag)})")
-      return {}
+Pydantic performs runtime type coercion for certain data types. This can be helpful but also lead to unexpected behavior if you're not aware of it.
 
-  builder = StateGraph(CoercionExample)
-  builder.add_node("inspect", inspect_node)
-  builder.add_edge(START, "inspect")
-  builder.add_edge("inspect", END)
-  graph = builder.compile()
+```python
+from langgraph.graph import StateGraph, START, END
+from pydantic import BaseModel
 
-  # Demonstrate coercion with string inputs that will be converted
-  result = graph.invoke({"number": "42", "flag": "true"})
+class CoercionExample(BaseModel):
+    # Pydantic will coerce string numbers to integers
+    number: int
+    # Pydantic will parse string booleans to bool
+    flag: bool
 
-  # This would fail with a validation error
-  try:
-      graph.invoke({"number": "not-a-number", "flag": "true"})
-  except Exception as e:
-      print(f"\nExpected validation error: {e}")
-  ```
-</Accordion>
+def inspect_node(state: CoercionExample):
+    print(f"number: {state.number} (type: {type(state.number)})")
+    print(f"flag: {state.flag} (type: {type(state.flag)})")
+    return {}
 
-<Accordion title="Working with Message Models">
-  When working with LangChain message types in your state schema, there are important considerations for serialization. You should use `AnyMessage` (rather than `BaseMessage`) for proper serialization/deserialization when using message objects over the wire.
+builder = StateGraph(CoercionExample)
+builder.add_node("inspect", inspect_node)
+builder.add_edge(START, "inspect")
+builder.add_edge("inspect", END)
+graph = builder.compile()
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.graph import StateGraph, START, END
-  from pydantic import BaseModel
-  from langchain.messages import HumanMessage, AIMessage, AnyMessage
-  from typing import List
+# Demonstrate coercion with string inputs that will be converted
+result = graph.invoke({"number": "42", "flag": "true"})
 
-  class ChatState(BaseModel):
-      messages: List[AnyMessage]
-      context: str
+# This would fail with a validation error
+try:
+    graph.invoke({"number": "not-a-number", "flag": "true"})
+except Exception as e:
+    print(f"\nExpected validation error: {e}")
+```
 
-  def add_message(state: ChatState):
-      return {"messages": state.messages + [AIMessage(content="Hello there!")]}
+</details>
 
-  builder = StateGraph(ChatState)
-  builder.add_node("add_message", add_message)
-  builder.add_edge(START, "add_message")
-  builder.add_edge("add_message", END)
-  graph = builder.compile()
+<details>
+<summary>Working with Message Models</summary>
 
-  # Create input with a message
-  initial_state = ChatState(
-      messages=[HumanMessage(content="Hi")], context="Customer support chat"
-  )
+When working with LangChain message types in your state schema, there are important considerations for serialization. You should use `AnyMessage` (rather than `BaseMessage`) for proper serialization/deserialization when using message objects over the wire.
 
-  result = graph.invoke(initial_state)
-  print(f"Output: {result}")
+```python
+from langgraph.graph import StateGraph, START, END
+from pydantic import BaseModel
+from langchain.messages import HumanMessage, AIMessage, AnyMessage
+from typing import List
 
-  # Convert back to Pydantic model to see message types
-  output_model = ChatState(**result)
-  for i, msg in enumerate(output_model.messages):
-      print(f"Message {i}: {type(msg).__name__} - {msg.content}")
-  ```
-</Accordion>
+class ChatState(BaseModel):
+    messages: List[AnyMessage]
+    context: str
+
+def add_message(state: ChatState):
+    return {"messages": state.messages + [AIMessage(content="Hello there!")]}
+
+builder = StateGraph(ChatState)
+builder.add_node("add_message", add_message)
+builder.add_edge(START, "add_message")
+builder.add_edge("add_message", END)
+graph = builder.compile()
+
+# Create input with a message
+initial_state = ChatState(
+    messages=[HumanMessage(content="Hi")], context="Customer support chat"
+)
+
+result = graph.invoke(initial_state)
+print(f"Output: {result}")
+
+# Convert back to Pydantic model to see message types
+output_model = ChatState(**result)
+for i, msg in enumerate(output_model.messages):
+    print(f"Message {i}: {type(msg).__name__} - {msg.content}")
+```
+
+</details>
 
 ## Add runtime configuration
 
@@ -585,7 +584,7 @@ To add runtime configuration:
 
 See below for a simple example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import END, StateGraph, START
 from langgraph.runtime import Runtime
 from typing_extensions import TypedDict
@@ -623,107 +622,113 @@ print(graph.invoke({}, context={"my_runtime_value": "b"}))  # [!code highlight]
 {'my_state_value': 2}
 ```
 
-<Accordion title="Extended example: specifying LLM at runtime">
-  Below we demonstrate a practical example in which we configure what LLM to use at runtime. We will use both OpenAI and Anthropic models.
+<details>
+<summary>Extended example: specifying LLM at runtime</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
+Below we demonstrate a practical example in which we configure what LLM to use at runtime. We will use both OpenAI and Anthropic models.
 
-  from langchain.chat_models import init_chat_model
-  from langgraph.graph import MessagesState, END, StateGraph, START
-  from langgraph.runtime import Runtime
-  from typing_extensions import TypedDict
+```python
+from dataclasses import dataclass
 
-  @dataclass
-  class ContextSchema:
-      model_provider: str = "anthropic"
+from langchain.chat_models import init_chat_model
+from langgraph.graph import MessagesState, END, StateGraph, START
+from langgraph.runtime import Runtime
+from typing_extensions import TypedDict
 
-  MODELS = {
-      "anthropic": init_chat_model("claude-haiku-4-5-20251001"),
-      "openai": init_chat_model("gpt-5.4-mini"),
-  }
+@dataclass
+class ContextSchema:
+    model_provider: str = "anthropic"
 
-  def call_model(state: MessagesState, runtime: Runtime[ContextSchema]):
-      model = MODELS[runtime.context.model_provider]
-      response = model.invoke(state["messages"])
-      return {"messages": [response]}
+MODELS = {
+    "anthropic": init_chat_model("claude-haiku-4-5-20251001"),
+    "openai": init_chat_model("gpt-5.4-mini"),
+}
 
-  builder = StateGraph(MessagesState, context_schema=ContextSchema)
-  builder.add_node("model", call_model)
-  builder.add_edge(START, "model")
-  builder.add_edge("model", END)
+def call_model(state: MessagesState, runtime: Runtime[ContextSchema]):
+    model = MODELS[runtime.context.model_provider]
+    response = model.invoke(state["messages"])
+    return {"messages": [response]}
 
-  graph = builder.compile()
+builder = StateGraph(MessagesState, context_schema=ContextSchema)
+builder.add_node("model", call_model)
+builder.add_edge(START, "model")
+builder.add_edge("model", END)
 
-  # Usage
-  input_message = {"role": "user", "content": "hi"}
-  # With no configuration, uses default (Anthropic)
-  response_1 = graph.invoke({"messages": [input_message]}, context=ContextSchema())["messages"][-1]
-  # Or, can set OpenAI
-  response_2 = graph.invoke({"messages": [input_message]}, context={"model_provider": "openai"})["messages"][-1]
+graph = builder.compile()
 
-  print(response_1.response_metadata["model_name"])
-  print(response_2.response_metadata["model_name"])
-  ```
+# Usage
+input_message = {"role": "user", "content": "hi"}
+# With no configuration, uses default (Anthropic)
+response_1 = graph.invoke({"messages": [input_message]}, context=ContextSchema())["messages"][-1]
+# Or, can set OpenAI
+response_2 = graph.invoke({"messages": [input_message]}, context={"model_provider": "openai"})["messages"][-1]
 
-  ```
-  claude-haiku-4-5-20251001
-  gpt-5.4-mini
-  ```
-</Accordion>
+print(response_1.response_metadata["model_name"])
+print(response_2.response_metadata["model_name"])
+```
 
-<Accordion title="Extended example: specifying model and system message at runtime">
-  Below we demonstrate a practical example in which we configure two parameters: the LLM and system message to use at runtime.
+```
+claude-haiku-4-5-20251001
+gpt-5.4-mini
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from dataclasses import dataclass
-  from langchain.chat_models import init_chat_model
-  from langchain.messages import SystemMessage
-  from langgraph.graph import END, MessagesState, StateGraph, START
-  from langgraph.runtime import Runtime
-  from typing_extensions import TypedDict
+</details>
 
-  @dataclass
-  class ContextSchema:
-      model_provider: str = "anthropic"
-      system_message: str | None = None
+<details>
+<summary>Extended example: specifying model and system message at runtime</summary>
 
-  MODELS = {
-      "anthropic": init_chat_model("claude-haiku-4-5-20251001"),
-      "openai": init_chat_model("gpt-5.4-mini"),
-  }
+Below we demonstrate a practical example in which we configure two parameters: the LLM and system message to use at runtime.
 
-  def call_model(state: MessagesState, runtime: Runtime[ContextSchema]):
-      model = MODELS[runtime.context.model_provider]
-      messages = state["messages"]
-      if (system_message := runtime.context.system_message):
-          messages = [SystemMessage(system_message)] + messages
-      response = model.invoke(messages)
-      return {"messages": [response]}
+```python
+from dataclasses import dataclass
+from langchain.chat_models import init_chat_model
+from langchain.messages import SystemMessage
+from langgraph.graph import END, MessagesState, StateGraph, START
+from langgraph.runtime import Runtime
+from typing_extensions import TypedDict
 
-  builder = StateGraph(MessagesState, context_schema=ContextSchema)
-  builder.add_node("model", call_model)
-  builder.add_edge(START, "model")
-  builder.add_edge("model", END)
+@dataclass
+class ContextSchema:
+    model_provider: str = "anthropic"
+    system_message: str | None = None
 
-  graph = builder.compile()
+MODELS = {
+    "anthropic": init_chat_model("claude-haiku-4-5-20251001"),
+    "openai": init_chat_model("gpt-5.4-mini"),
+}
 
-  # Usage
-  input_message = {"role": "user", "content": "hi"}
-  response = graph.invoke({"messages": [input_message]}, context={"model_provider": "openai", "system_message": "Respond in Italian."})
-  for message in response["messages"]:
-      message.pretty_print()
-  ```
+def call_model(state: MessagesState, runtime: Runtime[ContextSchema]):
+    model = MODELS[runtime.context.model_provider]
+    messages = state["messages"]
+    if (system_message := runtime.context.system_message):
+        messages = [SystemMessage(system_message)] + messages
+    response = model.invoke(messages)
+    return {"messages": [response]}
 
-  ```
-  ================================ Human Message ================================
+builder = StateGraph(MessagesState, context_schema=ContextSchema)
+builder.add_node("model", call_model)
+builder.add_edge(START, "model")
+builder.add_edge("model", END)
 
-  hi
-  ================================== Ai Message ==================================
+graph = builder.compile()
 
-  Ciao! Come posso aiutarti oggi?
-  ```
-</Accordion>
+# Usage
+input_message = {"role": "user", "content": "hi"}
+response = graph.invoke({"messages": [input_message]}, context={"model_provider": "openai", "system_message": "Respond in Italian."})
+for message in response["messages"]:
+    message.pretty_print()
+```
+
+```
+================================ Human Message ================================
+
+hi
+================================== Ai Message ==================================
+
+Ciao! Come posso aiutarti oggi?
+```
+
+</details>
 
 ## Add retry policies
 
@@ -731,7 +736,7 @@ There are many use cases where you may wish for your node to have a custom retry
 
 To configure a retry policy, pass the `retry_policy` parameter to the [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node). The `retry_policy` parameter takes in a `RetryPolicy` named tuple object. Below we instantiate a `RetryPolicy` object with the default parameters and associate it with a node:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import RetryPolicy
 
 builder.add_node(
@@ -758,65 +763,65 @@ By default, the `retry_on` parameter uses the `default_retry_on` function, which
 
 In addition, for exceptions from popular http request libraries such as `requests` and `httpx` it only retries on 5xx status codes.
 
-<Accordion title="Extended example: customizing retry policies">
-  Consider an example in which we are reading from a SQL database. Below we pass two different retry policies to nodes:
+<details>
+<summary>Extended example: customizing retry policies</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import sqlite3
-  from typing_extensions import TypedDict
-  from langchain.chat_models import init_chat_model
-  from langgraph.graph import END, MessagesState, StateGraph, START
-  from langgraph.types import RetryPolicy
-  from langchain.messages import AIMessage
+Consider an example in which we are reading from a SQL database. Below we pass two different retry policies to nodes:
 
-  con = sqlite3.connect(":memory:")
-  model = init_chat_model("claude-haiku-4-5-20251001")
+```python
+import sqlite3
+from typing_extensions import TypedDict
+from langchain.chat_models import init_chat_model
+from langgraph.graph import END, MessagesState, StateGraph, START
+from langgraph.types import RetryPolicy
+from langchain.messages import AIMessage
 
-  def query_database(state: MessagesState):
-      cursor = con.cursor()
-      cursor.execute("SELECT * FROM Artist LIMIT 10;")
-      query_result = str(cursor.fetchall())
-      return {"messages": [AIMessage(content=query_result)]}
+con = sqlite3.connect(":memory:")
+model = init_chat_model("claude-haiku-4-5-20251001")
 
-  def call_model(state: MessagesState):
-      response = model.invoke(state["messages"])
-      return {"messages": [response]}
+def query_database(state: MessagesState):
+    cursor = con.cursor()
+    cursor.execute("SELECT * FROM Artist LIMIT 10;")
+    query_result = str(cursor.fetchall())
+    return {"messages": [AIMessage(content=query_result)]}
 
-  # Define a new graph
-  builder = StateGraph(MessagesState)
-  builder.add_node(
-      "query_database",
-      query_database,
-      retry_policy=RetryPolicy(retry_on=sqlite3.OperationalError),
-  )
-  builder.add_node("model", call_model, retry_policy=RetryPolicy(max_attempts=5))
-  builder.add_edge(START, "model")
-  builder.add_edge("model", "query_database")
-  builder.add_edge("query_database", END)
-  graph = builder.compile()
-  ```
-</Accordion>
+def call_model(state: MessagesState):
+    response = model.invoke(state["messages"])
+    return {"messages": [response]}
+
+# Define a new graph
+builder = StateGraph(MessagesState)
+builder.add_node(
+    "query_database",
+    query_database,
+    retry_policy=RetryPolicy(retry_on=sqlite3.OperationalError),
+)
+builder.add_node("model", call_model, retry_policy=RetryPolicy(max_attempts=5))
+builder.add_edge(START, "model")
+builder.add_edge("model", "query_database")
+builder.add_edge("query_database", END)
+graph = builder.compile()
+```
+
+</details>
 
 ## Set node timeouts
 
 Use the `timeout` parameter with [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) to limit how long a single async node invocation can run. Provide the timeout in seconds or as a `datetime.timedelta`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 from typing_extensions import TypedDict
 
 from langgraph.errors import NodeTimeoutError
 from langgraph.graph import END, START, StateGraph
 
-
 class State(TypedDict):
     value: str
-
 
 async def call_model(state: State) -> State:
     await asyncio.sleep(2)
     return {"value": "done"}
-
 
 builder = StateGraph(State)
 builder.add_node("model", call_model, timeout=1.0)
@@ -840,11 +845,10 @@ Timed-out attempts do not commit their buffered writes. This prevents state upda
 
 The `timeout=` parameter on [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) caps how long a single async node attempt may run. Pass a number (seconds), a `timedelta`, or a [`TimeoutPolicy`](https://reference.langchain.com/python/langgraph/types/TimeoutPolicy) for finer control over run and idle timeouts. When the limit is exceeded, LangGraph raises [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError) and lets the retry policy decide whether to retry.
 
-<Note>
-  Per-node timeouts require `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Per-node timeouts require `langgraph>=1.2`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import TimeoutPolicy
 
 builder.add_node(
@@ -854,17 +858,16 @@ builder.add_node(
 )
 ```
 
-See [Fault tolerance](/oss/python/langgraph/fault-tolerance#timeouts) for the full timeout lifecycle, idle-timeout refresh sources, and `runtime.heartbeat()`.
+See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts) for the full timeout lifecycle, idle-timeout refresh sources, and `runtime.heartbeat()`.
 
 ## Handle node errors
 
 The `error_handler=` parameter on [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) registers a function that runs after a node fails and all retries are exhausted. The handler receives the current state and a typed [`NodeError`](https://reference.langchain.com/python/langgraph/errors/NodeError) with failure context, and can route to a recovery branch via [`Command`](https://reference.langchain.com/python/langgraph/types/Command):
 
-<Note>
-  Node-level error handlers require `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Node-level error handlers require `langgraph>=1.2`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 from langgraph.types import Command, RetryPolicy
 
@@ -882,17 +885,16 @@ builder.add_node(
 )
 ```
 
-See [Fault tolerance](/oss/python/langgraph/fault-tolerance#error-handling) for compensation patterns and `Command` routing.
+See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling) for compensation patterns and `Command` routing.
 
 ## Set graph-wide node defaults
 
-<Note>
-  Requires `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`.
 
 Use [`set_node_defaults`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/set_node_defaults) to set `retry_policy`, `timeout`, `cache_policy`, or `error_handler` once for every node in a graph, instead of repeating them on each [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) call. Per-node values always win, and defaults are applied at [`StateGraph.compile`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/compile) time:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import RetryPolicy, TimeoutPolicy
 
 graph = (
@@ -911,7 +913,7 @@ graph = (
 
 `retry_policy` and `timeout` defaults apply to every node, including error-handler nodes. `cache_policy` and `error_handler` defaults apply only to regular nodes—handlers never catch themselves, and caching a handler result is unsafe. Defaults are not inherited by subgraphs.
 
-See [Fault tolerance](/oss/python/langgraph/fault-tolerance#graph-defaults) for the full precedence rules and applicability table.
+See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graph-defaults) for the full precedence rules and applicability table.
 
 ### Access execution info inside a node
 
@@ -931,7 +933,7 @@ You can access execution identity and retry information via `runtime.execution_i
 
 Use `execution_info` to access the thread ID, run ID, and other identity fields inside a node:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.runtime import Runtime
 from typing_extensions import TypedDict
@@ -955,7 +957,7 @@ graph = builder.compile()
 
 When a node has a retry policy, use `execution_info` to inspect the current attempt number and switch to a fallback after the first attempt fails:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.runtime import Runtime
 from langgraph.types import RetryPolicy
@@ -988,9 +990,9 @@ When your graph runs on LangGraph Server, you can access server-specific metadat
 | -------------- | ------------------ | ------------------------------------------------------------------------------- |
 | `assistant_id` | `str`              | The assistant ID for the current deployment.                                    |
 | `graph_id`     | `str`              | The graph ID for the current deployment.                                        |
-| `user`         | `BaseUser \| None` | The authenticated user, if [custom auth](/langsmith/custom-auth) is configured. |
+| `user`         | `BaseUser \| None` | The authenticated user, if [custom auth](https://docs.langchain.com/langsmith/custom-auth) is configured. |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.runtime import Runtime
 from typing_extensions import TypedDict
@@ -1015,15 +1017,14 @@ graph = builder.compile()
 
 `server_info` is `None` when the graph is not running on LangGraph Server (e.g., during local development or testing).
 
-<Note>
-  Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`) for `runtime.execution_info` and `runtime.server_info`.
-</Note>
+> [!NOTE]
+> Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`) for `runtime.execution_info` and `runtime.server_info`.
 
 ### Access drain state inside a node
 
-When a [graceful shutdown](/oss/python/langgraph/fault-tolerance#graceful-shutdown) has been requested, `runtime.drain_requested` is `True`. Read this inside a node to skip expensive work before the next superstep boundary:
+When a [graceful shutdown](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graceful-shutdown) has been requested, `runtime.drain_requested` is `True`. Read this inside a node to skip expensive work before the next superstep boundary:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.runtime import Runtime
 
 def my_node(state: State, runtime: Runtime) -> State:
@@ -1037,9 +1038,8 @@ def my_node(state: State, runtime: Runtime) -> State:
 | `drain_requested` | `bool`        | `True` if `RunControl.request_drain()` has been called for this run.                 |
 | `drain_reason`    | `str \| None` | The reason string passed to `request_drain()`, or `None` if drain was not requested. |
 
-<Note>
-  Requires `langgraph>=1.2`. See [Graceful shutdown](/oss/python/langgraph/fault-tolerance#graceful-shutdown) for the full `RunControl` API.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`. See [Graceful shutdown](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graceful-shutdown) for the full `RunControl` API.
 
 ## Add node caching
 
@@ -1047,7 +1047,7 @@ Node caching is useful in cases where you want to avoid repeating operations, li
 
 To configure a cache policy, pass the `cache_policy` parameter to the [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) function. In the following example, a [`CachePolicy`](https://reference.langchain.com/python/langgraph/types/CachePolicy) object is instantiated with a time to live of 120 seconds and the default `key_func` generator. Then it is associated with a node:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import CachePolicy
 
 builder.add_node(
@@ -1059,7 +1059,7 @@ builder.add_node(
 
 Then, to enable node-level caching for a graph, set the `cache` argument when compiling the graph. The example below uses `InMemoryCache` to set up a graph with in-memory cache, but `SqliteCache` is also available.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.cache.memory import InMemoryCache
 
 graph = builder.compile(cache=InMemoryCache())
@@ -1067,19 +1067,18 @@ graph = builder.compile(cache=InMemoryCache())
 
 ## Create a sequence of steps
 
-<Info>
-  **Prerequisites**
-  This guide assumes familiarity with the above section on [state](#define-and-update-state).
-</Info>
+> [!NOTE]
+> **Prerequisites**
+> This guide assumes familiarity with the above section on [state](https://docs.langchain.com/oss/python/langgraph/use-graph-api#define-and-update-state).
 
 Here we demonstrate how to construct a simple sequence of steps. We will show:
 
 1. How to build a sequential graph
 2. Built-in short-hand for constructing similar graphs.
 
-To add a sequence of nodes, we use the [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) and [`add_edge`](https://reference.langchain.com/python/langgraph/pregel/_draw/add_edge) methods of our [graph](/oss/python/langgraph/graph-api#stategraph):
+To add a sequence of nodes, we use the [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) and [`add_edge`](https://reference.langchain.com/python/langgraph/pregel/_draw/add_edge) methods of our [graph](https://docs.langchain.com/oss/python/langgraph/graph-api#stategraph):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import START, StateGraph
 
 builder = StateGraph(State)
@@ -1097,141 +1096,141 @@ builder.add_edge("step_2", "step_3")
 
 We can also use the built-in shorthand `.add_sequence`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 builder = StateGraph(State).add_sequence([step_1, step_2, step_3])
 builder.add_edge(START, "step_1")
 ```
 
-<Accordion title="Why split application steps into a sequence with LangGraph?">
-  LangGraph makes it easy to add an underlying persistence layer to your application.
-  This allows state to be checkpointed in between the execution of nodes, so your LangGraph nodes govern:
+<details>
+<summary>Why split application steps into a sequence with LangGraph?</summary>
 
-  * How state updates are [checkpointed](/oss/python/langgraph/persistence)
-  * How interruptions are resumed in [human-in-the-loop](/oss/python/langgraph/interrupts) workflows
-  * How we can "rewind" and branch-off executions using LangGraph's [time travel](/oss/python/langgraph/use-time-travel) features
+LangGraph makes it easy to add an underlying persistence layer to your application.
+This allows state to be checkpointed in between the execution of nodes, so your LangGraph nodes govern:
 
-  They also determine how execution steps are [streamed](/oss/python/langgraph/streaming), and how your application is visualized and debugged using [Studio](/langsmith/studio).
+* How state updates are [checkpointed](https://docs.langchain.com/oss/python/langgraph/persistence)
+* How interruptions are resumed in [human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts) workflows
+* How we can "rewind" and branch-off executions using LangGraph's [time travel](https://docs.langchain.com/oss/python/langgraph/use-time-travel) features
 
-  Let's demonstrate an end-to-end example. We will create a sequence of three steps:
+They also determine how execution steps are [streamed](https://docs.langchain.com/oss/python/langgraph/streaming), and how your application is visualized and debugged using [Studio](https://docs.langchain.com/langsmith/studio).
 
-  1. Populate a value in a key of the state
-  2. Update the same value
-  3. Populate a different value
+Let's demonstrate an end-to-end example. We will create a sequence of three steps:
 
-  Let's first define our [state](/oss/python/langgraph/graph-api#state). This governs the [schema of the graph](/oss/python/langgraph/graph-api#schema), and can also specify how to apply updates. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
+1. Populate a value in a key of the state
+2. Update the same value
+3. Populate a different value
 
-  In our case, we will just keep track of two values:
+Let's first define our [state](https://docs.langchain.com/oss/python/langgraph/graph-api#state). This governs the [schema of the graph](https://docs.langchain.com/oss/python/langgraph/graph-api#schema), and can also specify how to apply updates. See [Process state updates with reducers](https://docs.langchain.com/oss/python/langgraph/use-graph-api#process-state-updates-with-reducers) for more detail.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from typing_extensions import TypedDict
+In our case, we will just keep track of two values:
 
-  class State(TypedDict):
-      value_1: str
-      value_2: int
-  ```
+```python
+from typing_extensions import TypedDict
 
-  Our [nodes](/oss/python/langgraph/graph-api#nodes) are just Python functions that read our graph's state and make updates to it. The first argument to this function will always be the state:
+class State(TypedDict):
+    value_1: str
+    value_2: int
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  def step_1(state: State):
-      return {"value_1": "a"}
+Our [nodes](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes) are just Python functions that read our graph's state and make updates to it. The first argument to this function will always be the state:
 
-  def step_2(state: State):
-      current_value_1 = state["value_1"]
-      return {"value_1": f"{current_value_1} b"}
+```python
+def step_1(state: State):
+    return {"value_1": "a"}
 
-  def step_3(state: State):
-      return {"value_2": 10}
-  ```
+def step_2(state: State):
+    current_value_1 = state["value_1"]
+    return {"value_1": f"{current_value_1} b"}
 
-  <Note>
-    Note that when issuing updates to the state, each node can just specify the value of the key it wishes to update.
+def step_3(state: State):
+    return {"value_2": 10}
+```
 
-    By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](/oss/python/langgraph/graph-api#reducers) to control how updates are processed—for example, you can append successive updates to a key instead. See [Process state updates with reducers](#process-state-updates-with-reducers) for more detail.
-  </Note>
+> [!NOTE]
+> Note that when issuing updates to the state, each node can just specify the value of the key it wishes to update.
+>
+> By default, this will **overwrite** the value of the corresponding key. You can also use [reducers](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) to control how updates are processed—for example, you can append successive updates to a key instead. See [Process state updates with reducers](https://docs.langchain.com/oss/python/langgraph/use-graph-api#process-state-updates-with-reducers) for more detail.
 
-  Finally, we define the graph. We use [StateGraph](/oss/python/langgraph/graph-api#stategraph) to define a graph that operates on this state.
+Finally, we define the graph. We use [StateGraph](https://docs.langchain.com/oss/python/langgraph/graph-api#stategraph) to define a graph that operates on this state.
 
-  We will then use [`add_node`](/oss/python/langgraph/graph-api#messagesstate) and [`add_edge`](/oss/python/langgraph/graph-api#edges) to populate our graph and define its control flow.
+We will then use [`add_node`](https://docs.langchain.com/oss/python/langgraph/graph-api#messagesstate) and [`add_edge`](https://docs.langchain.com/oss/python/langgraph/graph-api#edges) to populate our graph and define its control flow.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.graph import START, StateGraph
+```python
+from langgraph.graph import START, StateGraph
 
-  builder = StateGraph(State)
+builder = StateGraph(State)
 
-  # Add nodes
-  builder.add_node(step_1)
-  builder.add_node(step_2)
-  builder.add_node(step_3)
+# Add nodes
+builder.add_node(step_1)
+builder.add_node(step_2)
+builder.add_node(step_3)
 
-  # Add edges
-  builder.add_edge(START, "step_1")
-  builder.add_edge("step_1", "step_2")
-  builder.add_edge("step_2", "step_3")
-  ```
+# Add edges
+builder.add_edge(START, "step_1")
+builder.add_edge("step_1", "step_2")
+builder.add_edge("step_2", "step_3")
+```
 
-  <Tip>
-    **Specifying custom names**
-    You can specify custom names for nodes using [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node):
+> [!TIP]
+> **Specifying custom names**
+> You can specify custom names for nodes using [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node):
+>
+> ```python
+> builder.add_node("my_node", step_1)
+> ```
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    builder.add_node("my_node", step_1)
-    ```
-  </Tip>
+Note that:
 
-  Note that:
+* [`add_edge`](https://reference.langchain.com/python/langgraph/pregel/_draw/add_edge) takes the names of nodes, which for functions defaults to `node.__name__`.
+* We must specify the entry point of the graph. For this we add an edge with the [START node](https://docs.langchain.com/oss/python/langgraph/graph-api#start-node).
+* The graph halts when there are no more nodes to execute.
 
-  * [`add_edge`](https://reference.langchain.com/python/langgraph/pregel/_draw/add_edge) takes the names of nodes, which for functions defaults to `node.__name__`.
-  * We must specify the entry point of the graph. For this we add an edge with the [START node](/oss/python/langgraph/graph-api#start-node).
-  * The graph halts when there are no more nodes to execute.
+We next [compile](https://docs.langchain.com/oss/python/langgraph/graph-api#compiling-your-graph) our graph. This provides a few basic checks on the structure of the graph (e.g., identifying orphaned nodes). If we were adding persistence to our application via a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence), it would also be passed in here.
 
-  We next [compile](/oss/python/langgraph/graph-api#compiling-your-graph) our graph. This provides a few basic checks on the structure of the graph (e.g., identifying orphaned nodes). If we were adding persistence to our application via a [checkpointer](/oss/python/langgraph/persistence), it would also be passed in here.
+```python
+graph = builder.compile()
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  graph = builder.compile()
-  ```
+LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [Visualize your graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api#visualize-your-graph) for detail on visualization.
 
-  LangGraph provides built-in utilities for visualizing your graph. Let's inspect our sequence. See [Visualize your graph](#visualize-your-graph) for detail on visualization.
+```python
+from IPython.display import Image, display
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from IPython.display import Image, display
+display(Image(graph.get_graph().draw_mermaid_png()))
+```
 
-  display(Image(graph.get_graph().draw_mermaid_png()))
-  ```
+> **Image:** [Sequence of steps graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_2.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=fa0376786cc89d704a5435abba178804" alt="Sequence of steps graph" width="107" height="333" data-path="oss/images/graph_api_image_2.png" />
+Let's proceed with a simple invocation:
 
-  Let's proceed with a simple invocation:
+```python
+graph.invoke({"value_1": "c"})
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  graph.invoke({"value_1": "c"})
-  ```
+```
+{'value_1': 'a b', 'value_2': 10}
+```
 
-  ```
-  {'value_1': 'a b', 'value_2': 10}
-  ```
+Note that:
 
-  Note that:
+* We kicked off invocation by providing a value for a single state key. We must always provide a value for at least one key.
+* The value we passed in was overwritten by the first node.
+* The second node updated the value.
+* The third node populated a different value.
 
-  * We kicked off invocation by providing a value for a single state key. We must always provide a value for at least one key.
-  * The value we passed in was overwritten by the first node.
-  * The second node updated the value.
-  * The third node populated a different value.
+> [!TIP]
+> **Built-in shorthand**
+> `langgraph>=0.2.46` includes a built-in short-hand `add_sequence` for adding node sequences. You can compile the same graph as follows:
+>
+> ```python
+> builder = StateGraph(State).add_sequence([step_1, step_2, step_3])  # [!code highlight]
+> builder.add_edge(START, "step_1")
+>
+> graph = builder.compile()
+>
+> graph.invoke({"value_1": "c"})
+> ```
 
-  <Tip>
-    **Built-in shorthand**
-    `langgraph>=0.2.46` includes a built-in short-hand `add_sequence` for adding node sequences. You can compile the same graph as follows:
-
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    builder = StateGraph(State).add_sequence([step_1, step_2, step_3])  # [!code highlight]
-    builder.add_edge(START, "step_1")
-
-    graph = builder.compile()
-
-    graph.invoke({"value_1": "c"})
-    ```
-  </Tip>
-</Accordion>
+</details>
 
 ## Create branches
 
@@ -1239,9 +1238,9 @@ Parallel execution of nodes is essential to speed up overall graph operation. La
 
 ### Run graph nodes in parallel
 
-In this example, we fan out from `Node A` to `B and C` and then fan in to `D`. With our state, [we specify the reducer add operation](/oss/python/langgraph/graph-api#reducers). This will combine or accumulate values for the specific key in the State, rather than simply overwriting the existing value. For lists, this means concatenating the new list with the existing list. See the above section on [state reducers](#process-state-updates-with-reducers) for more detail on updating state with reducers.
+In this example, we fan out from `Node A` to `B and C` and then fan in to `D`. With our state, [we specify the reducer add operation](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers). This will combine or accumulate values for the specific key in the State, rather than simply overwriting the existing value. For lists, this means concatenating the new list with the existing list. See the above section on [state reducers](https://docs.langchain.com/oss/python/langgraph/use-graph-api#process-state-updates-with-reducers) for more detail on updating state with reducers.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import operator
 from typing import Annotated, Any
 from typing_extensions import TypedDict
@@ -1281,17 +1280,17 @@ builder.add_edge("d", END)
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_3.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=8359f2e8d9dde03d7cc25f9d755a428d" alt="Parallel execution graph" width="143" height="432" data-path="oss/images/graph_api_image_3.png" />
+> **Image:** [Parallel execution graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
 With the reducer, you can see that the values added in each node are accumulated.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({"aggregate": []}, {"configurable": {"thread_id": "foo"}})
 ```
 
@@ -1302,33 +1301,34 @@ Adding "C" to ['A']
 Adding "D" to ['A', 'B', 'C']
 ```
 
-<Note>
-  In the above example, nodes `"b"` and `"c"` are executed concurrently in the same [superstep](/oss/python/langgraph/graph-api#graphs). Because they are in the same step, node `"d"` executes after both `"b"` and `"c"` are finished.
+> [!NOTE]
+> In the above example, nodes `"b"` and `"c"` are executed concurrently in the same [superstep](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs). Because they are in the same step, node `"d"` executes after both `"b"` and `"c"` are finished.
+>
+> Importantly, updates from a parallel superstep may not be ordered consistently. If you need a consistent, predetermined ordering of updates from a parallel superstep, you should write the outputs to a separate field in the state together with a value with which to order them.
 
-  Importantly, updates from a parallel superstep may not be ordered consistently. If you need a consistent, predetermined ordering of updates from a parallel superstep, you should write the outputs to a separate field in the state together with a value with which to order them.
-</Note>
+<details>
+<summary>Exception handling?</summary>
 
-<Accordion title="Exception handling?">
-  LangGraph executes nodes within [supersteps](/oss/python/langgraph/graph-api#graphs), meaning that while parallel branches are executed in parallel, the entire superstep is **transactional**. If any of these branches raises an exception, **none** of the updates are applied to the state (the entire superstep errors).
+LangGraph executes nodes within [supersteps](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs), meaning that while parallel branches are executed in parallel, the entire superstep is **transactional**. If any of these branches raises an exception, **none** of the updates are applied to the state (the entire superstep errors).
 
-  Importantly, when using a [checkpointer](/oss/python/langgraph/persistence), results from successful nodes within a superstep are saved, and don't repeat when resumed.
+Importantly, when using a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence), results from successful nodes within a superstep are saved, and don't repeat when resumed.
 
-  If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
+If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
 
-  1. You can write regular python code within your node to catch and handle exceptions.
-  2. You can set a **[retry\_policy](https://langchain-ai.github.io/langgraph/reference/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+1. You can write regular python code within your node to catch and handle exceptions.
+2. You can set a **[retry\_policy](https://langchain-ai.github.io/langgraph/reference/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
 
-  Together, these let you perform parallel execution and fully control exception handling.
-</Accordion>
+Together, these let you perform parallel execution and fully control exception handling.
 
-<Tip>
-  **Set max concurrency**
-  You can control the maximum number of concurrent tasks by setting `max_concurrency` in the [configuration](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) when invoking the graph.
+</details>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  graph.invoke({"value_1": "c"}, {"configurable": {"max_concurrency": 10}})
-  ```
-</Tip>
+> [!TIP]
+> **Set max concurrency**
+> You can control the maximum number of concurrent tasks by setting `max_concurrency` in the [configuration](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) when invoking the graph.
+>
+> ```python
+> graph.invoke({"value_1": "c"}, {"configurable": {"max_concurrency": 10}})
+> ```
 
 ### Defer node execution
 
@@ -1336,7 +1336,7 @@ Deferring node execution is useful when you want to delay the execution of a nod
 
 The above example showed how to fan-out and fan-in when each path was only one step. But what if one branch had more than one step? Let's add a node `"b_2"` in the `"b"` branch:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import operator
 from typing import Annotated, Any
 from typing_extensions import TypedDict
@@ -1382,15 +1382,15 @@ builder.add_edge("d", END)
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_4.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=44cd97f020dfefeaffbe2b012514f343" alt="Deferred execution graph" width="161" height="531" data-path="oss/images/graph_api_image_4.png" />
+> **Image:** [Deferred execution graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({"aggregate": []})
 ```
 
@@ -1408,7 +1408,7 @@ In the above example, nodes `"b"` and `"c"` are executed concurrently in the sam
 
 If your fan-out should vary at runtime based on the state, you can use [`add_conditional_edges`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_conditional_edges) to select one or more paths using the graph state. See example below, where node `a` generates a state update that determines the following node.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import operator
 from typing import Annotated, Literal, Sequence
 from typing_extensions import TypedDict
@@ -1450,15 +1450,15 @@ builder.add_conditional_edges("a", conditional_edge)  # [!code highlight]
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_5.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=3373a383d5acc3e4d6a4d1575e849146" alt="Conditional branching graph" width="143" height="333" data-path="oss/images/graph_api_image_5.png" />
+> **Image:** [Conditional branching graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = graph.invoke({"aggregate": []})
 print(result)
 ```
@@ -1469,22 +1469,21 @@ Adding "C" to ['A']
 {'aggregate': ['A', 'C'], 'which': 'c'}
 ```
 
-<Tip>
-  Your conditional edges can route to multiple destination nodes. For example:
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  def route_bc_or_cd(state: State) -> Sequence[str]:
-      if state["which"] == "cd":
-          return ["c", "d"]
-      return ["b", "c"]
-  ```
-</Tip>
+> [!TIP]
+> Your conditional edges can route to multiple destination nodes. For example:
+>
+> ```python
+> def route_bc_or_cd(state: State) -> Sequence[str]:
+>     if state["which"] == "cd":
+>         return ["c", "d"]
+>     return ["b", "c"]
+> ```
 
 ## Map-Reduce and the send API
 
 LangGraph supports map-reduce and other advanced branching patterns using the Send API. Here is an example of how to use it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Send
 from typing_extensions import TypedDict, Annotated
@@ -1524,15 +1523,15 @@ builder.add_edge("best_joke", END)
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_6.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=48249d2085e8bfc63a142ccfba5082f5" alt="Map-reduce graph with fanout" width="160" height="432" data-path="oss/images/graph_api_image_6.png" />
+> **Image:** [Map-reduce graph with fanout](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Call the graph: here we call it to generate a list of jokes
 stream = graph.stream_events({"topic": "animals"}, version="v3")
 for message in stream.messages:
@@ -1550,19 +1549,18 @@ for message in stream.messages:
 
 ## Create and control loops
 
-When creating a graph with a loop, we require a mechanism for terminating execution. This is most commonly done by adding a [conditional edge](/oss/python/langgraph/graph-api#conditional-edges) that routes to the [END](/oss/python/langgraph/graph-api#end-node) node once we reach some termination condition.
+When creating a graph with a loop, we require a mechanism for terminating execution. This is most commonly done by adding a [conditional edge](https://docs.langchain.com/oss/python/langgraph/graph-api#conditional-edges) that routes to the [END](https://docs.langchain.com/oss/python/langgraph/graph-api#end-node) node once we reach some termination condition.
 
-You can also set the graph recursion limit when invoking or streaming the graph. The recursion limit sets the number of [super-steps](/oss/python/langgraph/graph-api#graphs) that the graph is allowed to execute before it raises an error. Read more about the [recursion limit concept](/oss/python/langgraph/graph-api#recursion-limit).
+You can also set the graph recursion limit when invoking or streaming the graph. The recursion limit sets the number of [super-steps](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs) that the graph is allowed to execute before it raises an error. Read more about the [recursion limit concept](https://docs.langchain.com/oss/python/langgraph/graph-api#recursion-limit).
 
 Let's consider a simple graph with a loop to better understand how these mechanisms work.
 
-<Tip>
-  To return the last value of your state instead of receiving a recursion limit error, see the [next section](#impose-a-recursion-limit).
-</Tip>
+> [!TIP]
+> To return the last value of your state instead of receiving a recursion limit error, see the [next section](https://docs.langchain.com/oss/python/langgraph/use-graph-api#impose-a-recursion-limit).
 
 When creating a loop, you can include a conditional edge that specifies a termination condition:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 builder = StateGraph(State)
 builder.add_node(a)
 builder.add_node(b)
@@ -1581,7 +1579,7 @@ graph = builder.compile()
 
 To control the recursion limit, specify `"recursion_limit"` in the config. This will raise a `GraphRecursionError`, which you can catch and handle:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import GraphRecursionError
 
 try:
@@ -1592,7 +1590,7 @@ except GraphRecursionError:
 
 Let's define a graph with a simple loop. Note that we use a conditional edge to implement a termination condition.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import operator
 from typing import Annotated, Literal
 from typing_extensions import TypedDict
@@ -1628,21 +1626,21 @@ builder.add_edge("b", "a")
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/graph_api_image_7.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=e1b99e7efe45b1fdc5836d590d5fbbc3" alt="Simple loop graph" width="188" height="249" data-path="oss/images/graph_api_image_7.png" />
+> **Image:** [Simple loop graph](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-This architecture is similar to a [ReAct agent](/oss/python/langgraph/workflows-agents) in which node `"a"` is a tool-calling model, and node `"b"` represents the tools.
+This architecture is similar to a [ReAct agent](https://docs.langchain.com/oss/python/langgraph/workflows-agents) in which node `"a"` is a tool-calling model, and node `"b"` represents the tools.
 
 In our `route` conditional edge, we specify that we should end after the `"aggregate"` list in the state passes a threshold length.
 
 Invoking the graph, we see that we alternate between nodes `"a"` and `"b"` before terminating once we reach the termination condition.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({"aggregate": []})
 ```
 
@@ -1658,9 +1656,9 @@ Node A sees ['A', 'B', 'A', 'B', 'A', 'B']
 
 ### Impose a recursion limit
 
-In some applications, we may not have a guarantee that we will reach a given termination condition. In these cases, we can set the graph's [recursion limit](/oss/python/langgraph/graph-api#recursion-limit). This will raise a `GraphRecursionError` after a given number of [supersteps](/oss/python/langgraph/graph-api#graphs). We can then catch and handle this exception:
+In some applications, we may not have a guarantee that we will reach a given termination condition. In these cases, we can set the graph's [recursion limit](https://docs.langchain.com/oss/python/langgraph/graph-api#recursion-limit). This will raise a `GraphRecursionError` after a given number of [supersteps](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs). We can then catch and handle this exception:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import GraphRecursionError
 
 try:
@@ -1678,166 +1676,172 @@ Node A sees ['A', 'B', 'C', 'D']
 Recursion Error
 ```
 
-<Accordion title="Extended example: return state on hitting recursion limit">
-  Instead of raising `GraphRecursionError`, we can introduce a new key to the state that keeps track of the number of steps remaining until reaching the recursion limit. We can then use this key to determine if we should end the run.
+<details>
+<summary>Extended example: return state on hitting recursion limit</summary>
 
-  LangGraph implements a special `RemainingSteps` annotation. Under the hood, it creates a `ManagedValue` channel -- a state channel that will exist for the duration of our graph run and no longer.
+Instead of raising `GraphRecursionError`, we can introduce a new key to the state that keeps track of the number of steps remaining until reaching the recursion limit. We can then use this key to determine if we should end the run.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import operator
-  from typing import Annotated, Literal
-  from typing_extensions import TypedDict
-  from langgraph.graph import StateGraph, START, END
-  from langgraph.managed.is_last_step import RemainingSteps
+LangGraph implements a special `RemainingSteps` annotation. Under the hood, it creates a `ManagedValue` channel -- a state channel that will exist for the duration of our graph run and no longer.
 
-  class State(TypedDict):
-      aggregate: Annotated[list, operator.add]
-      remaining_steps: RemainingSteps
+```python
+import operator
+from typing import Annotated, Literal
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.managed.is_last_step import RemainingSteps
 
-  def a(state: State):
-      print(f'Node A sees {state["aggregate"]}')
-      return {"aggregate": ["A"]}
+class State(TypedDict):
+    aggregate: Annotated[list, operator.add]
+    remaining_steps: RemainingSteps
 
-  def b(state: State):
-      print(f'Node B sees {state["aggregate"]}')
-      return {"aggregate": ["B"]}
+def a(state: State):
+    print(f'Node A sees {state["aggregate"]}')
+    return {"aggregate": ["A"]}
 
-  # Define nodes
-  builder = StateGraph(State)
-  builder.add_node(a)
-  builder.add_node(b)
+def b(state: State):
+    print(f'Node B sees {state["aggregate"]}')
+    return {"aggregate": ["B"]}
 
-  # Define edges
-  def route(state: State) -> Literal["b", END]:
-      if state["remaining_steps"] <= 2:
-          return END
-      else:
-          return "b"
+# Define nodes
+builder = StateGraph(State)
+builder.add_node(a)
+builder.add_node(b)
 
-  builder.add_edge(START, "a")
-  builder.add_conditional_edges("a", route)
-  builder.add_edge("b", "a")
-  graph = builder.compile()
+# Define edges
+def route(state: State) -> Literal["b", END]:
+    if state["remaining_steps"] <= 2:
+        return END
+    else:
+        return "b"
 
-  # Test it out
-  result = graph.invoke({"aggregate": []}, {"recursion_limit": 4})
-  print(result)
-  ```
+builder.add_edge(START, "a")
+builder.add_conditional_edges("a", route)
+builder.add_edge("b", "a")
+graph = builder.compile()
 
-  ```
-  Node A sees []
-  Node B sees ['A']
-  Node A sees ['A', 'B']
-  {'aggregate': ['A', 'B', 'A']}
-  ```
-</Accordion>
+# Test it out
+result = graph.invoke({"aggregate": []}, {"recursion_limit": 4})
+print(result)
+```
 
-<Accordion title="Extended example: loops with branches">
-  To better understand how the recursion limit works, let's consider a more complex example. Below we implement a loop, but one step fans out into two nodes:
+```
+Node A sees []
+Node B sees ['A']
+Node A sees ['A', 'B']
+{'aggregate': ['A', 'B', 'A']}
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import operator
-  from typing import Annotated, Literal
-  from typing_extensions import TypedDict
-  from langgraph.graph import StateGraph, START, END
+</details>
 
-  class State(TypedDict):
-      aggregate: Annotated[list, operator.add]
+<details>
+<summary>Extended example: loops with branches</summary>
 
-  def a(state: State):
-      print(f'Node A sees {state["aggregate"]}')
-      return {"aggregate": ["A"]}
+To better understand how the recursion limit works, let's consider a more complex example. Below we implement a loop, but one step fans out into two nodes:
 
-  def b(state: State):
-      print(f'Node B sees {state["aggregate"]}')
-      return {"aggregate": ["B"]}
+```python
+import operator
+from typing import Annotated, Literal
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
 
-  def c(state: State):
-      print(f'Node C sees {state["aggregate"]}')
-      return {"aggregate": ["C"]}
+class State(TypedDict):
+    aggregate: Annotated[list, operator.add]
 
-  def d(state: State):
-      print(f'Node D sees {state["aggregate"]}')
-      return {"aggregate": ["D"]}
+def a(state: State):
+    print(f'Node A sees {state["aggregate"]}')
+    return {"aggregate": ["A"]}
 
-  # Define nodes
-  builder = StateGraph(State)
-  builder.add_node(a)
-  builder.add_node(b)
-  builder.add_node(c)
-  builder.add_node(d)
+def b(state: State):
+    print(f'Node B sees {state["aggregate"]}')
+    return {"aggregate": ["B"]}
 
-  # Define edges
-  def route(state: State) -> Literal["b", END]:
-      if len(state["aggregate"]) < 7:
-          return "b"
-      else:
-          return END
+def c(state: State):
+    print(f'Node C sees {state["aggregate"]}')
+    return {"aggregate": ["C"]}
 
-  builder.add_edge(START, "a")
-  builder.add_conditional_edges("a", route)
-  builder.add_edge("b", "c")
-  builder.add_edge("b", "d")
-  builder.add_edge(["c", "d"], "a")
-  graph = builder.compile()
-  ```
+def d(state: State):
+    print(f'Node D sees {state["aggregate"]}')
+    return {"aggregate": ["D"]}
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from IPython.display import Image, display
+# Define nodes
+builder = StateGraph(State)
+builder.add_node(a)
+builder.add_node(b)
+builder.add_node(c)
+builder.add_node(d)
 
-  display(Image(graph.get_graph().draw_mermaid_png()))
-  ```
+# Define edges
+def route(state: State) -> Literal["b", END]:
+    if len(state["aggregate"]) < 7:
+        return "b"
+    else:
+        return END
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/graph_api_image_8.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=20e2a9e8c15760eb9ecb07fc411aa70e" alt="Complex loop graph with branches" width="297" height="348" data-path="oss/images/graph_api_image_8.png" />
+builder.add_edge(START, "a")
+builder.add_conditional_edges("a", route)
+builder.add_edge("b", "c")
+builder.add_edge("b", "d")
+builder.add_edge(["c", "d"], "a")
+graph = builder.compile()
+```
 
-  This graph looks complex, but can be conceptualized as loop of [supersteps](/oss/python/langgraph/graph-api#graphs):
+```python
+from IPython.display import Image, display
 
-  1. Node A
-  2. Node B
-  3. Nodes C and D
-  4. Node A
-  5. ...
+display(Image(graph.get_graph().draw_mermaid_png()))
+```
 
-  We have a loop of four supersteps, where nodes C and D are executed concurrently.
+> **Image:** [Complex loop graph with branches](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
-  Invoking the graph as before, we see that we complete two full "laps" before hitting the termination condition:
+This graph looks complex, but can be conceptualized as loop of [supersteps](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs):
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  result = graph.invoke({"aggregate": []})
-  ```
+1. Node A
+2. Node B
+3. Nodes C and D
+4. Node A
+5. ...
 
-  ```
-  Node A sees []
-  Node B sees ['A']
-  Node D sees ['A', 'B']
-  Node C sees ['A', 'B']
-  Node A sees ['A', 'B', 'C', 'D']
-  Node B sees ['A', 'B', 'C', 'D', 'A']
-  Node D sees ['A', 'B', 'C', 'D', 'A', 'B']
-  Node C sees ['A', 'B', 'C', 'D', 'A', 'B']
-  Node A sees ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
-  ```
+We have a loop of four supersteps, where nodes C and D are executed concurrently.
 
-  However, if we set the recursion limit to four, we only complete one lap because each lap is four supersteps:
+Invoking the graph as before, we see that we complete two full "laps" before hitting the termination condition:
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.errors import GraphRecursionError
+```python
+result = graph.invoke({"aggregate": []})
+```
 
-  try:
-      result = graph.invoke({"aggregate": []}, {"recursion_limit": 4})
-  except GraphRecursionError:
-      print("Recursion Error")
-  ```
+```
+Node A sees []
+Node B sees ['A']
+Node D sees ['A', 'B']
+Node C sees ['A', 'B']
+Node A sees ['A', 'B', 'C', 'D']
+Node B sees ['A', 'B', 'C', 'D', 'A']
+Node D sees ['A', 'B', 'C', 'D', 'A', 'B']
+Node C sees ['A', 'B', 'C', 'D', 'A', 'B']
+Node A sees ['A', 'B', 'C', 'D', 'A', 'B', 'C', 'D']
+```
 
-  ```
-  Node A sees []
-  Node B sees ['A']
-  Node C sees ['A', 'B']
-  Node D sees ['A', 'B']
-  Node A sees ['A', 'B', 'C', 'D']
-  Recursion Error
-  ```
-</Accordion>
+However, if we set the recursion limit to four, we only complete one lap because each lap is four supersteps:
+
+```python
+from langgraph.errors import GraphRecursionError
+
+try:
+    result = graph.invoke({"aggregate": []}, {"recursion_limit": 4})
+except GraphRecursionError:
+    print("Recursion Error")
+```
+
+```
+Node A sees []
+Node B sees ['A']
+Node C sees ['A', 'B']
+Node D sees ['A', 'B']
+Node A sees ['A', 'B', 'C', 'D']
+Recursion Error
+```
+
+</details>
 
 ## Async
 
@@ -1853,270 +1857,233 @@ Because many LangChain objects implement the [Runnable Protocol](https://python.
 
 See example below. To demonstrate async invocations of underlying LLMs, we will include a chat model:
 
-<Tabs>
-  <Tab title="OpenAI">
-    👉 Read the [OpenAI chat model integration docs](/oss/python/integrations/chat/openai/)
+#### OpenAI
+👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[openai]"
-      ```
+```bash
+pip install -U "langchain[openai]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[openai]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[openai]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["OPENAI_API_KEY"] = "sk-..."
+os.environ["OPENAI_API_KEY"] = "sk-..."
 
-      model = init_chat_model("gpt-5.5")
-      ```
+model = init_chat_model("gpt-5.5")
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_openai import ChatOpenAI
+```python
+import os
+from langchain_openai import ChatOpenAI
 
-      os.environ["OPENAI_API_KEY"] = "sk-..."
+os.environ["OPENAI_API_KEY"] = "sk-..."
 
-      model = ChatOpenAI(model="gpt-5.5")
-      ```
-    </CodeGroup>
-  </Tab>
+model = ChatOpenAI(model="gpt-5.5")
+```
 
-  <Tab title="Anthropic">
-    👉 Read the [Anthropic chat model integration docs](/oss/python/integrations/chat/anthropic/)
+#### Anthropic
+👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[anthropic]"
-      ```
+```bash
+pip install -U "langchain[anthropic]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[anthropic]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[anthropic]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["ANTHROPIC_API_KEY"] = "sk-..."
+os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 
-      model = init_chat_model("claude-sonnet-4-6")
-      ```
+model = init_chat_model("claude-sonnet-4-6")
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_anthropic import ChatAnthropic
+```python
+import os
+from langchain_anthropic import ChatAnthropic
 
-      os.environ["ANTHROPIC_API_KEY"] = "sk-..."
+os.environ["ANTHROPIC_API_KEY"] = "sk-..."
 
-      model = ChatAnthropic(model="claude-sonnet-4-6")
-      ```
-    </CodeGroup>
-  </Tab>
+model = ChatAnthropic(model="claude-sonnet-4-6")
+```
 
-  <Tab title="Azure">
-    👉 Read the [Azure chat model integration docs](/oss/python/integrations/chat/azure_chat_openai/)
+#### Azure
+👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[openai]"
-      ```
+```bash
+pip install -U "langchain[openai]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[openai]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[openai]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["AZURE_OPENAI_API_KEY"] = "..."
-      os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
-      os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
+os.environ["AZURE_OPENAI_API_KEY"] = "..."
+os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
+os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
 
-      model = init_chat_model(
-          "azure_openai:gpt-5.5",
-          azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
-      )
-      ```
+model = init_chat_model(
+    "azure_openai:gpt-5.5",
+    azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"],
+)
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_openai import AzureChatOpenAI
+```python
+import os
+from langchain_openai import AzureChatOpenAI
 
-      os.environ["AZURE_OPENAI_API_KEY"] = "..."
-      os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
-      os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
+os.environ["AZURE_OPENAI_API_KEY"] = "..."
+os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
+os.environ["OPENAI_API_VERSION"] = "2025-03-01-preview"
 
-      model = AzureChatOpenAI(
-          model="gpt-5.5",
-          azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"]
-      )
-      ```
-    </CodeGroup>
-  </Tab>
+model = AzureChatOpenAI(
+    model="gpt-5.5",
+    azure_deployment=os.environ["AZURE_OPENAI_DEPLOYMENT_NAME"]
+)
+```
 
-  <Tab title="Google Gemini">
-    👉 Read the [Google GenAI chat model integration docs](/oss/python/integrations/chat/google_generative_ai/)
+#### Google Gemini
+👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[google-genai]"
-      ```
+```bash
+pip install -U "langchain[google-genai]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[google-genai]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[google-genai]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["GOOGLE_API_KEY"] = "..."
+os.environ["GOOGLE_API_KEY"] = "..."
 
-      model = init_chat_model("google_genai:gemini-2.5-flash-lite")
-      ```
+model = init_chat_model("google_genai:gemini-2.5-flash-lite")
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import os
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-      os.environ["GOOGLE_API_KEY"] = "..."
+os.environ["GOOGLE_API_KEY"] = "..."
 
-      model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
-      ```
-    </CodeGroup>
-  </Tab>
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
+```
 
-  <Tab title="AWS Bedrock">
-    👉 Read the [AWS Bedrock chat model integration docs](/oss/python/integrations/chat/bedrock/)
+#### AWS Bedrock
+👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[aws]"
-      ```
+```bash
+pip install -U "langchain[aws]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[aws]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[aws]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langchain.chat_models import init_chat_model
+```python
+from langchain.chat_models import init_chat_model
 
-      # Follow the steps here to configure your credentials:
-      # https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
+# Follow the steps here to configure your credentials:
+# https://docs.aws.amazon.com/bedrock/latest/userguide/getting-started.html
 
-      model = init_chat_model(
-          "us.anthropic.claude-sonnet-4-6",
-          model_provider="bedrock_converse",
-      )
-      ```
+model = init_chat_model(
+    "us.anthropic.claude-sonnet-4-6",
+    model_provider="bedrock_converse",
+)
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langchain_aws import ChatBedrock
+```python
+from langchain_aws import ChatBedrock
 
-      model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
-      ```
-    </CodeGroup>
-  </Tab>
+model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
+```
 
-  <Tab title="HuggingFace">
-    👉 Read the [HuggingFace chat model integration docs](/oss/python/integrations/chat/huggingface/)
+#### HuggingFace
+👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain[huggingface]"
-      ```
+```bash
+pip install -U "langchain[huggingface]"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain[huggingface]"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain[huggingface]"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
 
-      model = init_chat_model(
-          "microsoft/Phi-3-mini-4k-instruct",
-          model_provider="huggingface",
-          temperature=0.7,
-          max_tokens=1024,
-      )
-      ```
+model = init_chat_model(
+    "microsoft/Phi-3-mini-4k-instruct",
+    model_provider="huggingface",
+    temperature=0.7,
+    max_tokens=1024,
+)
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+```python
+import os
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
-      os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
 
-      llm = HuggingFaceEndpoint(
-          repo_id="microsoft/Phi-3-mini-4k-instruct",
-          temperature=0.7,
-          max_length=1024,
-      )
-      model = ChatHuggingFace(llm=llm)
-      ```
-    </CodeGroup>
-  </Tab>
+llm = HuggingFaceEndpoint(
+    repo_id="microsoft/Phi-3-mini-4k-instruct",
+    temperature=0.7,
+    max_length=1024,
+)
+model = ChatHuggingFace(llm=llm)
+```
 
-  <Tab title="OpenRouter">
-    👉 Read the [OpenRouter chat model integration docs](/oss/python/integrations/chat/openrouter/)
+#### OpenRouter
+👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
 
-    <CodeGroup>
-      ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install -U "langchain-openrouter"
-      ```
+```bash
+pip install -U "langchain-openrouter"
+```
 
-      ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      uv add "langchain-openrouter"
-      ```
-    </CodeGroup>
+```bash
+uv add "langchain-openrouter"
+```
 
-    <CodeGroup>
-      ```python init_chat_model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain.chat_models import init_chat_model
+```python
+import os
+from langchain.chat_models import init_chat_model
 
-      os.environ["OPENROUTER_API_KEY"] = "sk-..."
+os.environ["OPENROUTER_API_KEY"] = "sk-..."
 
-      model = init_chat_model(
-          "auto",
-          model_provider="openrouter",
-      )
-      ```
+model = init_chat_model(
+    "auto",
+    model_provider="openrouter",
+)
+```
 
-      ```python Model Class theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langchain_openrouter import ChatOpenRouter
+```python
+import os
+from langchain_openrouter import ChatOpenRouter
 
-      os.environ["OPENROUTER_API_KEY"] = "sk-..."
+os.environ["OPENROUTER_API_KEY"] = "sk-..."
 
-      model = ChatOpenRouter(model="auto")
-      ```
-    </CodeGroup>
-  </Tab>
-</Tabs>
+model = ChatOpenRouter(model="auto")
+```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.chat_models import init_chat_model
 from langgraph.graph import MessagesState, StateGraph
 
@@ -2131,16 +2098,15 @@ input_message = {"role": "user", "content": "Hello"}
 result = await graph.ainvoke({"messages": [input_message]})  # [!code highlight]
 ```
 
-<Tip>
-  **Async streaming**
-  See the [streaming guide](/oss/python/langgraph/streaming) for examples of streaming with async.
-</Tip>
+> [!TIP]
+> **Async streaming**
+> See the [streaming guide](https://docs.langchain.com/oss/python/langgraph/streaming) for examples of streaming with async.
 
 ## Combine control flow and state updates with `Command`
 
 It can be useful to combine control flow (edges) and state updates (nodes). For example, you might want to BOTH perform state updates AND decide which node to go to next in the SAME node. LangGraph provides a way to do so by returning a [Command](https://reference.langchain.com/python/langgraph/types/Command) object from node functions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def my_node(state: State) -> Command[Literal["my_other_node"]]:
     return Command(
         # state update
@@ -2152,7 +2118,7 @@ def my_node(state: State) -> Command[Literal["my_other_node"]]:
 
 We show an end-to-end example below. Let's create a simple graph with 3 nodes: A, B and C. We will first execute node A, and then decide whether to go to Node B or Node C next based on the output of node A.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import random
 from typing_extensions import TypedDict, Literal
 from langgraph.graph import StateGraph, START
@@ -2190,9 +2156,9 @@ def node_c(state: State):
     return {"foo": state["foo"] + "c"}
 ```
 
-We can now create the [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) with the above nodes. Notice that the graph doesn't have [conditional edges](/oss/python/langgraph/graph-api#conditional-edges) for routing! This is because control flow is defined with [`Command`](https://reference.langchain.com/python/langgraph/types/Command) inside `node_a`.
+We can now create the [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) with the above nodes. Notice that the graph doesn't have [conditional edges](https://docs.langchain.com/oss/python/langgraph/graph-api#conditional-edges) for routing! This is because control flow is defined with [`Command`](https://reference.langchain.com/python/langgraph/types/Command) inside `node_a`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 builder = StateGraph(State)
 builder.add_edge(START, "node_a")
 builder.add_node(node_a)
@@ -2203,21 +2169,20 @@ builder.add_node(node_c)
 graph = builder.compile()
 ```
 
-<Warning>
-  You might have noticed that we used [`Command`](https://reference.langchain.com/python/langgraph/types/Command) as a return type annotation, e.g. `Command[Literal["node_b", "node_c"]]`. This is necessary for the graph rendering and tells LangGraph that `node_a` can navigate to `node_b` and `node_c`.
-</Warning>
+> [!WARNING]
+> You might have noticed that we used [`Command`](https://reference.langchain.com/python/langgraph/types/Command) as a return type annotation, e.g. `Command[Literal["node_b", "node_c"]]`. This is necessary for the graph rendering and tells LangGraph that `node_a` can navigate to `node_b` and `node_c`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import display, Image
 
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_11.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=f11e5cddedbf2760d40533f294c44aea" alt="Command-based graph navigation" width="232" height="333" data-path="oss/images/graph_api_image_11.png" />
+> **Image:** [Command-based graph navigation](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
 If we run the graph multiple times, we'd see it take different paths (A -> B or A -> C) based on the random choice in node A.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({"foo": ""})
 ```
 
@@ -2228,9 +2193,9 @@ Called C
 
 ### Navigate to a node in a parent graph
 
-If you are using [subgraphs](/oss/python/langgraph/use-subgraphs), you might want to navigate from a node within a subgraph to a different subgraph (i.e. a different node in the parent graph). To do so, you can specify `graph=Command.PARENT` in `Command`:
+If you are using [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs), you might want to navigate from a node within a subgraph to a different subgraph (i.e. a different node in the parent graph). To do so, you can specify `graph=Command.PARENT` in `Command`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def my_node(state: State) -> Command[Literal["other_subgraph"]]:
     return Command(
         update={"foo": "bar"},
@@ -2241,12 +2206,11 @@ def my_node(state: State) -> Command[Literal["other_subgraph"]]:
 
 Let's demonstrate this using the above example. We'll do so by changing `nodeA` in the above example into a single-node graph that we'll add as a subgraph to our parent graph.
 
-<Warning>
-  **State updates with `Command.PARENT`**
-  When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](/oss/python/langgraph/graph-api#schema), you **must** define a [reducer](/oss/python/langgraph/graph-api#reducers) for the key you're updating in the parent graph state. See the example below.
-</Warning>
+> [!WARNING]
+> **State updates with `Command.PARENT`**
+> When you send updates from a subgraph node to a parent graph node for a key that's shared by both parent and subgraph [state schemas](https://docs.langchain.com/oss/python/langgraph/graph-api#schema), you **must** define a [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) for the key you're updating in the parent graph state. See the example below.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import operator
 from typing_extensions import Annotated
 
@@ -2294,7 +2258,7 @@ builder.add_node(node_c)
 graph = builder.compile()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({"foo": ""})
 ```
 
@@ -2307,7 +2271,7 @@ Called C
 
 A common use case is updating graph state from inside a tool. For example, in a customer support application you might want to look up customer information based on their account number or ID in the beginning of the conversation. To update the graph state from the tool, you can return `Command(update={"my_custom_key": "foo", "messages": [...]})` from the tool:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import ToolRuntime
 
 @tool
@@ -2324,9 +2288,8 @@ def lookup_user_info(runtime: ToolRuntime):
     )
 ```
 
-<Warning>
-  You MUST include `messages` (or any state key used for the message history) in `Command.update` when returning [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from a tool and the list of messages in `messages` MUST contain a `ToolMessage`. This is necessary for the resulting message history to be valid (LLM providers require AI messages with tool calls to be followed by the tool result messages).
-</Warning>
+> [!WARNING]
+> You MUST include `messages` (or any state key used for the message history) in `Command.update` when returning [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from a tool and the list of messages in `messages` MUST contain a `ToolMessage`. This is necessary for the resulting message history to be valid (LLM providers require AI messages with tool calls to be followed by the tool result messages).
 
 If you are using tools that update state via [`Command`](https://reference.langchain.com/python/langgraph/types/Command), we recommend using prebuilt [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode) which automatically handles tools returning [`Command`](https://reference.langchain.com/python/langgraph/types/Command) objects and propagates them to the graph state. If you're writing a custom node that calls tools, you would need to manually propagate [`Command`](https://reference.langchain.com/python/langgraph/types/Command) objects returned by the tools as the update from the node.
 
@@ -2338,7 +2301,7 @@ You can visualize any arbitrary [Graph](https://langchain-ai.github.io/langgraph
 
 Let's have some fun by drawing fractals :).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import random
 from typing import Annotated, Literal
 from typing_extensions import TypedDict
@@ -2396,7 +2359,7 @@ app = build_fractal_graph(3)
 
 We can also convert a graph class into Mermaid syntax.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(app.get_graph().draw_mermaid())
 ```
 
@@ -2443,18 +2406,18 @@ If preferred, we could render the Graph into a `.png`. Here we could use three o
 
 By default, `draw_mermaid_png()` uses Mermaid.Ink's API to generate the diagram.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from IPython.display import Image, display
 from langchain_core.runnables.graph import CurveStyle, MermaidDrawMethod, NodeStyles
 
 display(Image(app.get_graph().draw_mermaid_png()))
 ```
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_10.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=6cb916b7c627e81c2816cc74ebf3f913" alt="Fractal graph visualization" width="2382" height="1131" data-path="oss/images/graph_api_image_10.png" />
+> **Image:** [Fractal graph visualization](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
 
 **Using Mermaid + Pyppeteer**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import nest_asyncio
 
 nest_asyncio.apply()  # Required for Jupyter Notebook to run async functions
@@ -2476,7 +2439,7 @@ display(
 
 **Using Graphviz**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 try:
     display(Image(app.get_graph().draw_png()))
 except ImportError:
@@ -2487,12 +2450,8 @@ except ImportError:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

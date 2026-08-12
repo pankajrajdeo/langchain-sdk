@@ -1,17 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AWS middleware integration
 
 > Integrate with AWS middleware using LangChain Python.
 
-Middleware integrations for AWS services. Prompt caching is designed for models hosted on Amazon Bedrock, while AgentCore Payments works with LangGraph agents regardless of model provider. Learn more about [middleware](/oss/python/langchain/middleware/overview).
+Middleware integrations for AWS services. Prompt caching is designed for models hosted on Amazon Bedrock, while AgentCore Payments works with LangGraph agents regardless of model provider. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
 
 | Middleware                                | Description                                         |
 | ----------------------------------------- | --------------------------------------------------- |
-| [Prompt caching](#prompt-caching)         | Reduce costs by caching repetitive prompt prefixes  |
-| [AgentCore Payments](#agentcore-payments) | Autonomous x402 micropayment handling for paid APIs |
+| [Prompt caching](https://docs.langchain.com/oss/python/integrations/middleware/aws#prompt-caching)         | Reduce costs by caching repetitive prompt prefixes  |
+| [AgentCore Payments](https://docs.langchain.com/oss/python/integrations/middleware/aws#agentcore-payments) | Autonomous x402 micropayment handling for paid APIs |
 
 ## Prompt caching
 
@@ -29,13 +25,12 @@ Supported models:
 * **Anthropic Claude**
 * **Amazon Nova**
 
-<Info>
-  Learn more about [AWS Bedrock prompt caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) strategies and limitations. Cached content must exceed 1,024 tokens for a cache checkpoint to take effect, sometimes more depending on model. See [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).
-</Info>
+> [!NOTE]
+> Learn more about [AWS Bedrock prompt caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) strategies and limitations. Cached content must exceed 1,024 tokens for a cache checkpoint to take effect, sometimes more depending on model. See [supported models, regions, and limits](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).
 
 **API reference:** [`BedrockPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-aws/middleware/prompt_caching/BedrockPromptCachingMiddleware)
 
-```python ChatBedrockConverse theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
 from langchain.agents import create_agent
@@ -47,7 +42,7 @@ agent = create_agent(
 )
 ```
 
-```python ChatBedrock theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrock
 from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
 from langchain.agents import create_agent
@@ -59,95 +54,94 @@ agent = create_agent(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="type" type="string" default="ephemeral">
-    Cache type. For `ChatBedrock`, only `'ephemeral'` is currently supported. For `ChatBedrockConverse`, this value is ignored as the Converse API always uses `"default"` cache type.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="ttl" type="string" default="5m">
-    Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
-  </ParamField>
+#### `Field` — `string`
+Cache type. For `ChatBedrock`, only `'ephemeral'` is currently supported. For `ChatBedrockConverse`, this value is ignored as the Converse API always uses `"default"` cache type.
 
-  <ParamField body="min_messages_to_cache" type="number" default="0">
-    Minimum number of messages before caching starts.
-  </ParamField>
+#### `Field` — `string`
+Time to live for cached content. Valid values: `'5m'` or `'1h'`. Note that Amazon Nova models only support `'5m'`.
 
-  <ParamField body="unsupported_model_behavior" type="string" default="warn">
-    Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
-  </ParamField>
-</Accordion>
+#### `Field` — `number`
+Minimum number of messages before caching starts.
 
-<Accordion title="Full example">
-  The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
+#### `Field` — `string`
+Behavior when using unsupported models. Options: `'ignore'`, `'warn'`, or `'raise'`.
 
-  **How it works:**
+</details>
 
-  1. First request: System prompt, tools, and the user message are sent to the API and cached
-  2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
-  3. This pattern continues for each turn, with each request reusing the cached conversation history
+<details>
+<summary>Full example</summary>
 
-  <Note>
-    Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpointer-libraries) like `MemorySaver`.
-  </Note>
+The middleware caches content up to and including the latest message in each request. On subsequent requests within the TTL window (5 minutes or 1 hour), previously seen content is retrieved from cache rather than reprocessed, reducing costs and latency.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_aws import ChatBedrockConverse
-  from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
-  from langchain.agents import create_agent
-  from langchain_core.runnables import RunnableConfig
-  from langchain.messages import HumanMessage
-  from langchain.tools import tool
-  from langgraph.checkpoint.memory import MemorySaver
+**How it works:**
 
+1. First request: System prompt, tools, and the user message are sent to the API and cached
+2. Second request: The cached content is retrieved from cache. Only the new message needs to be processed
+3. This pattern continues for each turn, with each request reusing the cached conversation history
 
-  @tool
-  def get_weather(city: str) -> str:
-      """Get the current weather for a city."""
-      return f"The weather in {city} is sunny and 72F."
+> [!NOTE]
+> Prompt caching reduces API costs by caching tokens, but does **not** provide conversation memory. To persist conversation history across invocations, use a [checkpointer](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpointer-libraries) like `MemorySaver`.
 
+```python
+from langchain_aws import ChatBedrockConverse
+from langchain_aws.middleware.prompt_caching import BedrockPromptCachingMiddleware
+from langchain.agents import create_agent
+from langchain_core.runnables import RunnableConfig
+from langchain.messages import HumanMessage
+from langchain.tools import tool
+from langgraph.checkpoint.memory import MemorySaver
 
-  # System prompt must exceed 1,024 tokens for caching to take effect
-  LONG_PROMPT = (
-      "You are a helpful weather assistant with deep expertise in meteorology, "
-      "climate science, and atmospheric phenomena. When answering questions about "
-      "weather, provide accurate and up-to-date information. "
-      + "You should always strive to give the most helpful response possible. " * 85
-  )
+@tool
+def get_weather(city: str) -> str:
+    """Get the current weather for a city."""
+    return f"The weather in {city} is sunny and 72F."
 
-  agent = create_agent(
-      model=ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
-      system_prompt=LONG_PROMPT,
-      tools=[get_weather],
-      middleware=[BedrockPromptCachingMiddleware(ttl="5m")], # [!code highlight]
-      checkpointer=MemorySaver(),  # Persists conversation history
-  )
+# System prompt must exceed 1,024 tokens for caching to take effect
+LONG_PROMPT = (
+    "You are a helpful weather assistant with deep expertise in meteorology, "
+    "climate science, and atmospheric phenomena. When answering questions about "
+    "weather, provide accurate and up-to-date information. "
+    + "You should always strive to give the most helpful response possible. " * 85
+)
 
-  # Use a thread_id to maintain conversation state
-  config: RunnableConfig = {"configurable": {"thread_id": "user-123"}}
+agent = create_agent(
+    model=ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-5-20250929-v1:0"),
+    system_prompt=LONG_PROMPT,
+    tools=[get_weather],
+    middleware=[BedrockPromptCachingMiddleware(ttl="5m")], # [!code highlight]
+    checkpointer=MemorySaver(),  # Persists conversation history
+)
 
-  # First invocation: Creates cache with system prompt, tools, and user message
-  response = agent.invoke(
-      {"messages": [HumanMessage("What is the weather in Miami?")]}, config=config
-  )
+# Use a thread_id to maintain conversation state
+config: RunnableConfig = {"configurable": {"thread_id": "user-123"}}
 
-  last_msg = response["messages"][-1]
-  print(last_msg.content)
+# First invocation: Creates cache with system prompt, tools, and user message
+response = agent.invoke(
+    {"messages": [HumanMessage("What is the weather in Miami?")]}, config=config
+)
 
-  # Check cache token usage
-  um = last_msg.usage_metadata
-  if um:
-      details = um.get("input_token_details", {})
-      cache_read = details.get("cache_read", 0) or 0
-      cache_write = details.get("cache_creation", 0) or 0
-      print(f"Cache read: {cache_read}, Cache write: {cache_write}")
+last_msg = response["messages"][-1]
+print(last_msg.content)
 
-  # Second invocation: Reuses cached system prompt, tools, and previous messages
-  response = agent.invoke(
-      {"messages": [HumanMessage("How about Seattle?")]}, config=config
-  )
-  print(response["messages"][-1].content)
-  ```
-</Accordion>
+# Check cache token usage
+um = last_msg.usage_metadata
+if um:
+    details = um.get("input_token_details", {})
+    cache_read = details.get("cache_read", 0) or 0
+    cache_write = details.get("cache_creation", 0) or 0
+    print(f"Cache read: {cache_read}, Cache write: {cache_write}")
+
+# Second invocation: Reuses cached system prompt, tools, and previous messages
+response = agent.invoke(
+    {"messages": [HumanMessage("How about Seattle?")]}, config=config
+)
+print(response["messages"][-1].content)
+```
+
+</details>
 
 ### Model-specific behavior
 
@@ -162,9 +156,8 @@ The middleware handles differences between APIs and model families automatically
 
 ## AgentCore Payments
 
-<Note>
-  AgentCore Payments is currently in preview and requires `bedrock-agentcore>=1.18.0`.
-</Note>
+> [!NOTE]
+> AgentCore Payments is currently in preview and requires `bedrock-agentcore>=1.18.0`.
 
 Autonomously handle [x402 Payment Required](https://www.x402.org/) responses in LangGraph agents. When a tool hits a paid API that returns HTTP 402, `AgentCorePaymentsMiddleware` detects the payment requirement, signs the payment via [Amazon Bedrock AgentCore Payments](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/payments.html), enforces session budget limits, and retries the request with payment credentials. This process is transparent to the agent.
 
@@ -189,13 +182,13 @@ For a guided setup of PaymentManager and instruments, see the [AgentCore Payment
 
 **Installation:**
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U "bedrock-agentcore[langgraph]>=1.18.0" langchain-aws
 ```
 
 **API reference:** [`AgentCorePaymentsMiddleware`](https://pypi.org/project/bedrock-agentcore/)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.payments.integrations.langgraph import (
     AgentCorePaymentsConfig,
     AgentCorePaymentsMiddleware,
@@ -229,7 +222,7 @@ With this setup, the built-in `http_request` tool can automatically retry reques
 
 ### How it works
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init: {"theme": "base", "themeVariables": {"lineColor": "#40668D", "primaryColor": "#E5F4FF", "primaryTextColor": "#030710", "primaryBorderColor": "#006DDD"}}}%%
 sequenceDiagram
     participant Agent
@@ -284,7 +277,7 @@ For your own tools to work with auto-payment, they need two things:
 
 **1. Signal 402 (output)**: The tool must indicate a 402 response in its return value. Three formats are supported:
 
-```python PAYMENT_REQUIRED marker (recommended) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 import httpx
@@ -300,7 +293,7 @@ def my_api(query: str, headers: dict = None) -> str:
     return resp.text
 ```
 
-```python Raw JSON (fallback detection) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 import httpx
@@ -317,7 +310,7 @@ def my_api(query: str, headers: dict = None) -> str:
     })
 ```
 
-```python Custom handler theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     ...,
     custom_handlers={"my_tool": MyCustomHandler()}, # [!code highlight]
@@ -326,7 +319,7 @@ config = AgentCorePaymentsConfig(
 
 **2. Accept and forward `headers` (input)**: The tool **must** have a `headers` parameter and forward it in its HTTP request. The middleware injects the payment header into `tool_args["headers"]` before retry:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @tool
 def my_api(query: str, headers: dict = None) -> str:
     resp = httpx.get(URL, headers=headers or {})  # ← forwards payment header on retry
@@ -350,7 +343,7 @@ MCP tools connected via `langchain-mcp-adapters` can work with the middleware wh
 1. The tool returns payment-related JSON (including `statusCode: 402`) as **text content** in `ToolMessage.content` (not in `ToolMessage.artifact` or `structuredContent`)
 2. The tool accepts a `headers` argument and forwards it in its outbound HTTP requests
 
-When these conditions are satisfied, the lenient fallback detection handles 402 responses automatically. For non-standard formats that are still exposed through `ToolMessage.content`, register a [custom handler](#custom-handlers). MCP `structuredContent` stored in `ToolMessage.artifact` and MCP transport-level headers require adapter or transport integration outside this middleware.
+When these conditions are satisfied, the lenient fallback detection handles 402 responses automatically. For non-standard formats that are still exposed through `ToolMessage.content`, register a [custom handler](https://docs.langchain.com/oss/python/integrations/middleware/aws#custom-handlers). MCP `structuredContent` stored in `ToolMessage.artifact` and MCP transport-level headers require adapter or transport integration outside this middleware.
 
 ### Error handling
 
@@ -360,7 +353,7 @@ The middleware provides two layers of error control:
 
 The error handler callback is recommended because it keeps payment lifecycle complexity out of the agent's reasoning. Without it, the agent receives error messages about expired sessions or missing instruments and must attempt to debug payment configuration, which wastes tokens and often fails. With the callback, your application code can resolve issues programmatically by creating sessions, refreshing instruments, or increasing budgets. When the callback returns `ErrorResolution.RETRY`, the middleware retries payment with the updated configuration. If the callback propagates the error, returns a custom message, raises, or exhausts its retries, the agent receives the configured or default payment error.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.payments.integrations.langgraph import (
     AgentCorePaymentsConfig,
     AgentCorePaymentsMiddleware,
@@ -419,7 +412,7 @@ The callback can return:
 
 **Callback flow:**
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Payment exception occurs
     │
     ├── on_payment_error is None? → deterministic error ToolMessage
@@ -478,7 +471,7 @@ All messages include `"Do not retry this call"` and actionable guidance for the 
 
 Skip manual session creation. The middleware creates one lazily on the first 402:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     payment_manager_arn="arn:aws:bedrock-agentcore:us-east-1:123456789012:payment-manager/pm-abc123",
     user_id="user-1",
@@ -496,7 +489,7 @@ The session is created once and reused for all subsequent payments in that middl
 
 Restrict which tools get payment processing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     ...,
     payment_tool_allowlist=["http_request", "my_paid_api"], # [!code highlight]
@@ -515,7 +508,7 @@ Tools not in the list pass through untouched. When `None` (default), all tools a
 
 For payment managers using `CUSTOM_JWT` authorizer:
 
-```python Static token theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     payment_manager_arn="arn:aws:bedrock-agentcore:us-east-1:123456789012:payment-manager/pm-abc123",
     bearer_token="eyJhbGciOiJSUzI1NiJ9...", # [!code highlight]
@@ -524,7 +517,7 @@ config = AgentCorePaymentsConfig(
 )
 ```
 
-```python Dynamic token provider (recommended) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     payment_manager_arn="arn:aws:bedrock-agentcore:us-east-1:123456789012:payment-manager/pm-abc123",
     token_provider=lambda: fetch_fresh_jwt(), # [!code highlight]
@@ -539,7 +532,7 @@ With bearer auth, `user_id` is optional (derived from JWT `sub` claim).
 
 Use the middleware only for its built-in query tools without 402 interception:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     ...,
     auto_payment=False, # [!code highlight]
@@ -557,7 +550,7 @@ Common reasons to disable auto-payment:
 
 Register custom `PaymentResponseHandler` implementations for tools with non-standard output formats:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.payments.integrations.handlers import PaymentResponseHandler
 
 class MyMCPHandler(PaymentResponseHandler):
@@ -598,11 +591,11 @@ The middleware provides both sync and async paths. LangGraph calls the right one
 
 Install FastAPI to run the asynchronous web server example:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U fastapi
 ```
 
-```python Async in FastAPI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.payments.integrations.langgraph import (
     AgentCorePaymentsConfig,
     AgentCorePaymentsMiddleware,
@@ -634,7 +627,7 @@ async def chat(message: str):
     return result
 ```
 
-```python Sync in a script theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.payments.integrations.langgraph import (
     AgentCorePaymentsConfig,
     AgentCorePaymentsMiddleware,
@@ -679,7 +672,7 @@ The async path uses:
 
 **With middleware:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = AgentCorePaymentsConfig(
     payment_manager_arn="arn:...",
     user_id="...",
@@ -693,7 +686,7 @@ agent = create_agent(
 )
 ```
 
-Compatible tools that meet the [custom tool integration contract](#custom-tool-integration-contract) are handled automatically.
+Compatible tools that meet the [custom tool integration contract](https://docs.langchain.com/oss/python/integrations/middleware/aws#custom-tool-integration-contract) are handled automatically.
 
 ### Configuration reference
 
@@ -729,12 +722,8 @@ Compatible tools that meet the [custom tool integration contract](#custom-tool-i
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,22 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatXAI integration
 
 > Integrate with the ChatXAI chat model using LangChain Python.
 
-<Warning>
-  This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](/oss/python/integrations/providers/groq).
-</Warning>
+> [!WARNING]
+> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](https://docs.langchain.com/oss/python/integrations/providers/groq).
 
 [xAI](https://console.x.ai/) offers an API to interact with Grok models.
 
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatXAI`](https://reference.langchain.com/python/langchain-xai/chat_models/ChatXAI) API reference.
 
 ## Overview
 
@@ -28,7 +22,7 @@
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
 
@@ -40,7 +34,7 @@ To access xAI models, you'll need to create an xAI account, get an API key, and 
 
 Head to [this page](https://console.x.ai/) to sign up for xAI and generate an API key. Once you've done this, set the `XAI_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -48,9 +42,9 @@ if "XAI_API_KEY" not in os.environ:
     os.environ["XAI_API_KEY"] = getpass.getpass("Enter your xAI API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -59,7 +53,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain xAI integration lives in the `langchain-xai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-xai
 ```
 
@@ -67,7 +61,7 @@ pip install -qU langchain-xai
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_xai import ChatXAI
 
 llm = ChatXAI(
@@ -82,7 +76,7 @@ llm = ChatXAI(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -94,15 +88,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore programmer.", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 6, 'prompt_tokens': 30, 'total_tokens': 36, 'completion_tokens_details': None, 'prompt_tokens_details': None}, 'model_name': 'grok-beta', 'system_fingerprint': 'fp_14b89b2dfc', 'finish_reason': 'stop', 'logprobs': None}, id='run-adffb7a3-e48a-4f52-b694-340d85abe5c3-0', usage_metadata={'input_tokens': 30, 'output_tokens': 6, 'total_tokens': 36, 'input_token_details': {}, 'output_token_details': {}})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore programmer.
 ```
 
@@ -124,27 +118,25 @@ With `ChatXAI.bind_tools`, we can easily pass in Pydantic classes, dict schemas,
 
 and passed in every model invocation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class GetWeather(BaseModel):
     """Get the current weather in a given location"""
 
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
-
 llm_with_tools = llm.bind_tools([GetWeather])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = llm_with_tools.invoke(
     "what is the weather like in San Francisco",
 )
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='I am retrieving the current weather for San Francisco.', additional_kwargs={'tool_calls': [{'id': '0', 'function': {'arguments': '{"location":"San Francisco, CA"}', 'name': 'GetWeather'}, 'type': 'function'}], 'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 11, 'prompt_tokens': 151, 'total_tokens': 162, 'completion_tokens_details': None, 'prompt_tokens_details': None}, 'model_name': 'grok-beta', 'system_fingerprint': 'fp_14b89b2dfc', 'finish_reason': 'tool_calls', 'logprobs': None}, id='run-73707da7-afec-4a52-bee1-a176b0ab8585-0', tool_calls=[{'name': 'GetWeather', 'args': {'location': 'San Francisco, CA'}, 'id': '0', 'type': 'tool_call'}], usage_metadata={'input_tokens': 151, 'output_tokens': 11, 'total_tokens': 162, 'input_token_details': {}, 'output_token_details': {}})
 ```
 
@@ -154,7 +146,7 @@ xAI's previous Live Search configuration used the `search_parameters` constructo
 argument, which is now deprecated. To ground Grok responses with current web
 results, bind xAI's built-in `web_search` tool instead:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_xai import ChatXAI
 
 llm = ChatXAI(model="grok-4", temperature=0).bind_tools([{"type": "web_search"}])
@@ -168,9 +160,9 @@ the current set of built-in tools, including Web Search and X Search.
 
 ## Reasoning effort
 
-[Certain xAI models](https://docs.x.ai/docs/models#model-pricing) support the standard [`reasoning_effort`](/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. It can be set at model construction or per invocation:
+[Certain xAI models](https://docs.x.ai/docs/models#model-pricing) support the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. It can be set at model construction or per invocation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_xai import ChatXAI
 
 model = ChatXAI(model="grok-4.3")
@@ -180,13 +172,12 @@ response = model.invoke(
 )
 ```
 
-<Note>
-  `reasoning_effort` as a standard parameter requires `langchain-xai>=1.3.0`. `ChatXAI` sends it nested under `extra_body.reasoning_effort`.
-</Note>
+> [!NOTE]
+> `reasoning_effort` as a standard parameter requires `langchain-xai>=1.3.0`. `ChatXAI` sends it nested under `extra_body.reasoning_effort`.
 
-Check a model's [profile](/oss/python/langchain/models#model-profiles) for the effort levels it supports:
+Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the effort levels it supports:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high']
 ```
 
@@ -198,12 +189,8 @@ For detailed documentation of all `ChatXAI` features and configurations, head to
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,23 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Control plane API reference for LangSmith Deployment
-
-export const protocol_0 = undefined
-
-export const prefix_0 = "api.host"
-
-export const suffix_0 = undefined
-
-The control plane API is part of [LangSmith Deployment](/langsmith/deployment). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](/langsmith/agent-server) deployments—for example, as part of a custom CI/CD workflow.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/api-ref-control-plane)
+The control plane API is part of [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](https://docs.langchain.com/langsmith/agent-server) deployments—for example, as part of a custom CI/CD workflow.
 
 Browse the full API reference in the **Control Plane API** section in the sidebar, or refer to the endpoint groups:
 
-* [Integrations (v1)](/api-reference/integrations-v1/list-github-integrations): GitHub integrations and repository listings
-* [Deployments (v2)](/api-reference/deployments-v2): Create, manage, and update Agent Server deployments
-* [Listeners (v2)](/api-reference/listeners-v2): Listener resources for self-hosted enterprise organizations
-* [Auth Service (v2)](/api-reference/auth-service-v2): OAuth provider configuration and authentication flows
+* [Integrations (v1)](https://docs.langchain.com/api-reference/integrations-v1/list-github-integrations): GitHub integrations and repository listings
+* [Deployments (v2)](https://docs.langchain.com/api-reference/deployments-v2): Create, manage, and update Agent Server deployments
+* [Listeners (v2)](https://docs.langchain.com/api-reference/listeners-v2): Listener resources for self-hosted enterprise organizations
+* [Auth Service (v2)](https://docs.langchain.com/api-reference/auth-service-v2): OAuth provider configuration and authentication flows
 
 ## Host
 
@@ -27,57 +17,29 @@ The control plane hosts for Cloud data regions:
   <thead>
     <tr>
       <th>Region</th>
-
-      <th>
-        {protocol_0 === false ? "Host" : "URL"}
-      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
-
-      <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
-      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
-
-      <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
-      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
-
-      <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
-      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
-
-      <td>
-        <code>
-          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-        </code>
-      </td>
     </tr>
   </tbody>
 </table>
 
-**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [the self-host usage guide](/langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) for more details.
+**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [the self-host usage guide](https://docs.langchain.com/langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) for more details.
 
 ## Authentication
 
@@ -85,7 +47,7 @@ To authenticate with the control plane API, set the `X-Api-Key` header to a vali
 
 Example `curl` command:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 curl --request GET \
   --url http://localhost:8124/v2/deployments \
   --header 'X-Api-Key: LANGSMITH_API_KEY'
@@ -107,13 +69,12 @@ Each endpoint path is prefixed with a version (e.g. `v1`, `v2`).
 
 Below is example Python code that demonstrates how to orchestrate the control plane APIs to create a deployment, update the deployment, and delete the deployment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import time
 
 import requests
 from dotenv import load_dotenv
-
 
 load_dotenv()
 
@@ -124,14 +85,12 @@ WORKSPACE_ID = os.getenv("WORKSPACE_ID")
 INTEGRATION_ID = os.getenv("INTEGRATION_ID")
 MAX_WAIT_TIME = 1800  # 30 mins
 
-
 def get_headers() -> dict:
     """Return common headers for requests to the control plane API."""
     return {
         "X-Api-Key": LANGSMITH_API_KEY,
         "X-Tenant-Id": WORKSPACE_ID,
     }
-
 
 def create_deployment() -> str:
     """Create deployment. Return deployment ID."""
@@ -185,7 +144,6 @@ def create_deployment() -> str:
     print(f"Created deployment {deployment_name} ({deployment_id})")
     return deployment_id
 
-
 def get_deployment(deployment_id: str) -> dict:
     """Get deployment."""
     response = requests.get(
@@ -197,7 +155,6 @@ def get_deployment(deployment_id: str) -> dict:
         raise Exception(f"Failed to get deployment ID {deployment_id}: {response.text}")
 
     return response.json()
-
 
 def list_revisions(deployment_id: str) -> list[dict]:
     """List revisions.
@@ -216,7 +173,6 @@ def list_revisions(deployment_id: str) -> list[dict]:
 
     return response.json()
 
-
 def get_revision(
     deployment_id: str,
     revision_id: str,
@@ -231,7 +187,6 @@ def get_revision(
         raise Exception(f"Failed to get revision ID {revision_id}: {response.text}")
 
     return response.json()
-
 
 def patch_deployment(deployment_id: str) -> None:
     """Patch deployment."""
@@ -258,7 +213,6 @@ def patch_deployment(deployment_id: str) -> None:
 
     print(f"Patched deployment ID {deployment_id}")
 
-
 def wait_for_deployment(deployment_id: str, revision_id: str) -> None:
     """Wait for revision status to be DEPLOYED."""
     start_time = time.time()
@@ -279,7 +233,6 @@ def wait_for_deployment(deployment_id: str, revision_id: str) -> None:
             f"Timeout waiting for revision ID {revision_id} to be DEPLOYED: {revision}"
         )
 
-
 def delete_deployment(deployment_id: str) -> None:
     """Delete deployment."""
     response = requests.delete(
@@ -293,7 +246,6 @@ def delete_deployment(deployment_id: str) -> None:
         )
 
     print(f"Deployment ID {deployment_id} deleted")
-
 
 if __name__ == "__main__":
     # create deployment and get the latest revision
@@ -320,12 +272,8 @@ if __name__ == "__main__":
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/api-ref-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

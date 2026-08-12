@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Predictionguard integration
 
 > Integrate with the Predictionguard LLM using LangChain Python.
@@ -22,7 +18,7 @@ To access Prediction Guard models, [contact Prediction Guard](https://prediction
 
 Once you have a key, you can set it with
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 if "PREDICTIONGUARD_API_KEY" not in os.environ:
@@ -31,28 +27,28 @@ if "PREDICTIONGUARD_API_KEY" not in os.environ:
 
 ### Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-predictionguard
 ```
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_predictionguard import PredictionGuard
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # If predictionguard_api_key is not passed, default behavior is to use the `PREDICTIONGUARD_API_KEY` environment variable.
 llm = PredictionGuard(model="Hermes-3-Llama-3.1-8B")
 ```
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.invoke("Tell me a short funny joke.")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ' I need a laugh.\nA man walks into a library and asks the librarian, "Do you have any books on paranoia?"\nThe librarian whispers, "They\'re right behind you."'
 ```
 
@@ -62,7 +58,7 @@ With Prediction Guard, you can guard your model inputs for PII or prompt injecti
 
 ### PII
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = PredictionGuard(
     model="Hermes-2-Pro-Llama-3-8B", predictionguard_input={"pii": "block"}
 )
@@ -73,13 +69,13 @@ except ValueError as e:
     print(e)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Could not make prediction. pii detected
 ```
 
 ### Prompt injection
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = PredictionGuard(
     model="Hermes-2-Pro-Llama-3-8B",
     predictionguard_input={"block_prompt_injection": True},
@@ -93,7 +89,7 @@ except ValueError as e:
     print(e)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Could not make prediction. prompt injection detected
 ```
 
@@ -103,7 +99,7 @@ With Prediction Guard, you can check validate the model outputs using factuality
 
 ### Toxicity
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = PredictionGuard(
     model="Hermes-2-Pro-Llama-3-8B", predictionguard_output={"toxicity": True}
 )
@@ -113,13 +109,13 @@ except ValueError as e:
     print(e)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Could not make prediction. failed toxicity check
 ```
 
 ### Factuality
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = PredictionGuard(
     model="Hermes-2-Pro-Llama-3-8B", predictionguard_output={"factuality": True}
 )
@@ -130,13 +126,13 @@ except ValueError as e:
     print(e)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Could not make prediction. failed factuality check
 ```
 
 ## Chaining
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 template = """Question: {question}
@@ -152,7 +148,7 @@ question = "What NFL team won the Super Bowl in the year Justin Beiber was born?
 llm_chain.invoke({"question": question})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 " Justin Bieber was born on March 1, 1994. Super Bowl XXVIII was held on January 30, 1994. Since the Super Bowl happened before the year of Justin Bieber's birth, it means that no NFL team won the Super Bowl in the year Justin Bieber was born. The question is invalid. However, Super Bowl XXVIII was won by the Dallas Cowboys. So, if the question was asking for the winner of Super Bowl XXVIII, the answer would be the Dallas Cowboys. \n\nExplanation: The question seems to be asking for the winner of the Super"
 ```
 
@@ -164,12 +160,8 @@ llm_chain.invoke({"question": question})
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/predictionguard.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

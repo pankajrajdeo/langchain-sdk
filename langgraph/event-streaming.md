@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Event streaming
-
-> Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/event-streaming)
+Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
 
 Event streaming is the recommended in-process streaming model for most LangGraph application code. It returns a run stream object that can be consumed in multiple ways at the same time.
 
 ## Quickstart
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events({
     "messages": [{"role": "user", "content": "What is 42 * 17?"}],
 }, version="v3")
@@ -22,7 +18,7 @@ for message in stream.messages:
 final_state = stream.output
 ```
 
-To stream against a graph deployed behind an Agent Server, see the [LangSmith Streaming API](/langsmith/streaming).
+To stream against a graph deployed behind an Agent Server, see the [LangSmith Streaming API](https://docs.langchain.com/langsmith/streaming).
 
 ## How the pieces fit together
 
@@ -31,48 +27,32 @@ The streaming stack has two main layers:
 1. **Streaming** emits raw graph execution events from the Pregel engine.
 2. **Event streaming** normalizes those events, runs them through stream transformers, and exposes typed projections.
 
-<div className="my-6 rounded-xl border bg-gray-50 p-4 dark:bg-gray-900">
-  <div className="mx-auto max-w-2xl space-y-2 text-sm">
-    <div className="rounded-lg border border-slate-300 bg-white p-3 text-center dark:border-slate-700 dark:bg-slate-950">
-      <div className="font-semibold text-slate-900 dark:text-slate-100">Pregel engine</div>
-      <div className="mt-1 text-xs text-slate-600 dark:text-slate-300">Runs graph steps</div>
-    </div>
+<div>Pregel engine</div>
+<div>Runs graph steps</div>
 
-    <div className="text-center text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">emits</div>
+<div>emits</div>
 
-    <div className="rounded-lg border border-orange-300 bg-orange-50 p-3 text-center dark:border-orange-800 dark:bg-orange-950">
-      <div className="font-semibold text-orange-900 dark:text-orange-100">Raw Pregel events</div>
-      <div className="mt-1 text-xs text-orange-700 dark:text-orange-300"><code>updates</code>, <code>values</code>, <code>messages</code>, <code>custom</code>, <code>checkpoints</code>, <code>tasks</code>, <code>debug</code></div>
-    </div>
+<div>Raw Pregel events</div>
+<div><code>updates</code>, <code>values</code>, <code>messages</code>, <code>custom</code>, <code>checkpoints</code>, <code>tasks</code>, <code>debug</code></div>
 
-    <div className="text-center text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">sent to</div>
+<div>sent to</div>
 
-    <div className="rounded-lg border border-blue-300 bg-blue-50 p-3 text-center dark:border-blue-800 dark:bg-blue-950">
-      <div className="font-semibold text-blue-900 dark:text-blue-100">Event router</div>
-      <div className="mt-1 text-xs text-blue-700 dark:text-blue-300">Routes each event through the transformer pipeline</div>
-    </div>
+<div>Event router</div>
+<div>Routes each event through the transformer pipeline</div>
 
-    <div className="text-center text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">cascades through</div>
+<div>cascades through</div>
 
-    <div className="rounded-lg border border-green-300 bg-green-50 p-3 dark:border-green-800 dark:bg-green-950">
-      <div className="font-semibold text-green-900 dark:text-green-100">Stream transformers</div>
+<div>Stream transformers</div>
 
-      <div className="mt-2 grid gap-2 text-xs text-green-800 dark:text-green-200 sm:grid-cols-4">
-        <div className="rounded border border-green-200 bg-white px-2 py-1 dark:border-green-800 dark:bg-green-950">ValuesTransformer</div>
-        <div className="rounded border border-green-200 bg-white px-2 py-1 dark:border-green-800 dark:bg-green-950">MessagesTransformer</div>
-        <div className="px-2 py-1 text-center text-green-600 dark:text-green-300">...</div>
-        <div className="rounded border border-green-200 bg-white px-2 py-1 dark:border-green-800 dark:bg-green-950">Custom transformers</div>
-      </div>
-    </div>
+<div>ValuesTransformer</div>
+<div>MessagesTransformer</div>
+<div>...</div>
+<div>Custom transformers</div>
 
-    <div className="text-center text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">produces</div>
+<div>produces</div>
 
-    <div className="rounded-lg border border-purple-300 bg-purple-50 p-3 text-center dark:border-purple-800 dark:bg-purple-950">
-      <div className="font-semibold text-purple-900 dark:text-purple-100">Event Stream</div>
-      <div className="mt-1 text-xs text-purple-700 dark:text-purple-300">Projected events for application code</div>
-    </div>
-  </div>
-</div>
+<div>Event Stream</div>
+<div>Projected events for application code</div>
 
 The event router is the bridge between the two layers. It receives normalized Pregel events and passes each event through the registered stream transformers. Built-in transformers create standard projections such as `stream.messages`, `stream.values`, `stream.subgraphs`, and `stream.output`. Custom transformers can add application-specific projections under `stream.extensions`.
 
@@ -93,13 +73,13 @@ The run stream exposes typed projections over one underlying event flow:
 
 Multiple consumers can read these projections concurrently. Reading `stream.messages` does not consume events needed by `stream.values`, `stream.subgraphs`, or `stream.output`.
 
-Event streaming sits one level above [streaming](/oss/python/langgraph/streaming), which exposes raw graph execution events through `stream_mode` modes such as `updates`, `values`, `messages`, `custom`, `checkpoints`, `tasks`, and `debug`. Use streaming when you need low-level access to those modes; use event streaming when application code benefits from typed projections.
+Event streaming sits one level above [streaming](https://docs.langchain.com/oss/python/langgraph/streaming), which exposes raw graph execution events through `stream_mode` modes such as `updates`, `values`, `messages`, `custom`, `checkpoints`, `tasks`, and `debug`. Use streaming when you need low-level access to those modes; use event streaming when application code benefits from typed projections.
 
 ## Stream messages
 
 Use `stream.messages` for chat model output:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events(input, version="v3")
 
 for message in stream.messages:
@@ -118,7 +98,7 @@ for message in stream.messages:
 
 Use `stream.subgraphs` to observe nested graph work without parsing namespace strings:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events(input, version="v3")
 
 for subgraph in stream.subgraphs:
@@ -128,15 +108,15 @@ for subgraph in stream.subgraphs:
         print(message.text)
 ```
 
-`subgraph.graph_name` is the `name` of the compiled graph or agent. A named agent dispatched from a tool (for example, a `create_agent(name=...)` invoked through the Deep Agents `task` tool) surfaces here under that name, and the `lifecycle` event that opens the scope carries a `cause` linking back to the dispatching tool call. See [Lifecycle](#lifecycle) for more information.
+`subgraph.graph_name` is the `name` of the compiled graph or agent. A named agent dispatched from a tool (for example, a `create_agent(name=...)` invoked through the Deep Agents `task` tool) surfaces here under that name, and the `lifecycle` event that opens the scope carries a `cause` linking back to the dispatching tool call. See [Lifecycle](https://docs.langchain.com/oss/python/langgraph/event-streaming#lifecycle) for more information.
 
-For product-specific streams, see [Deep Agents streaming](/oss/python/deepagents/event-streaming) for subagent streams and [LangChain agent streaming](/oss/python/langchain/streaming) for tool calls and middleware events.
+For product-specific streams, see [Deep Agents streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming) for subagent streams and [LangChain agent streaming](https://docs.langchain.com/oss/python/langchain/streaming) for tool calls and middleware events.
 
 ## Stream state
 
 Use `stream.values` to stream full state snapshots after each step:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events(input, version="v3")
 
 for snapshot in stream.values:
@@ -149,7 +129,7 @@ final_state = stream.output
 
 For concurrent consumption in async code, use `astream_events` with `asyncio.gather`:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 import asyncio
 
 stream = await graph.astream_events(input, version="v3")
@@ -167,7 +147,7 @@ await asyncio.gather(consume_messages(), consume_subgraphs())
 
 For synchronous code, use `stream.interleave(...)` to consume multiple projections in strict arrival order:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events(input, version="v3")
 
 for name, item in stream.interleave("values", "messages", "subgraphs"):
@@ -183,9 +163,9 @@ for name, item in stream.interleave("values", "messages", "subgraphs"):
 
 When a graph pauses for human input, inspect `stream.interrupted` and `stream.interrupts`, then resume by calling `stream_events(..., version="v3")` again with `Command`.
 
-Resume requires a graph compiled with a checkpointer and a config carrying a thread ID — see [persistence](/oss/python/langgraph/persistence).
+Resume requires a graph compiled with a checkpointer and a config carrying a thread ID — see [persistence](https://docs.langchain.com/oss/python/langgraph/persistence).
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from langgraph.types import Command
 
 stream = graph.stream_events(input, version="v3")
@@ -207,7 +187,7 @@ final_state = stream.output
 
 Use the run object itself when you want the raw protocol event stream:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events({
     "messages": [{"role": "user", "content": "What is 42 * 17?"}],
 }, version="v3")
@@ -219,12 +199,11 @@ for event in stream:
 
 Each event is a `ProtocolEvent` envelope wrapping a channel-specific payload. The same shape is what a transformer's `process(event)` receives.
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 class ProtocolEvent(TypedDict):
     seq: int                    # strictly increasing within a run; use for ordering
     method: str                 # channel name: "messages", "values", "updates", "custom", "tools", "lifecycle", ...
     params: ProtocolEventParams
-
 
 class ProtocolEventParams(TypedDict):
     namespace: list[str]        # path of "<name>:<runtime_id>" segments from the root graph; [] is the root
@@ -267,7 +246,7 @@ Content blocks have explicit boundaries: a block starts, emits zero or more delt
 
 To consume raw content-block events directly instead of using the `stream.messages` projection:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 for event in stream:
     if event["method"] != "messages":
         continue
@@ -320,7 +299,7 @@ Write one when the existing projections don't match the shape an application nee
 
 Event streaming starts with streaming output from the LangGraph Pregel engine. The runtime normalizes those chunks into protocol events, then a stream handler routes each event through a stack of stream transformers.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart TD
     A[Pregel modes] --> B[Events]
     B --> C[Built-in projections]
@@ -341,9 +320,8 @@ Transformers are observational. They do not call back into the graph runtime. In
 
 A transformer implements the `StreamTransformer` interface:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from langgraph.stream import ProtocolEvent, StreamTransformer
-
 
 class MyTransformer(StreamTransformer):
     def init(self) -> dict:
@@ -360,7 +338,7 @@ class MyTransformer(StreamTransformer):
 ```
 
 * `init()` creates the projection object. User transformer projections appear under `stream.extensions`.
-* `process()` observes each protocol event. See [Stream all protocol events](#stream-all-protocol-events) for the `ProtocolEvent` shape. Return `false` only when you intentionally want to suppress the original event.
+* `process()` observes each protocol event. See [Stream all protocol events](https://docs.langchain.com/oss/python/langgraph/event-streaming#stream-all-protocol-events) for the `ProtocolEvent` shape. Return `false` only when you intentionally want to suppress the original event.
 * `finalize()` closes or resolves non-channel projections after a successful stream.
 * `fail()` propagates errors to non-channel projections.
 
@@ -368,7 +346,7 @@ class MyTransformer(StreamTransformer):
 
 `required_stream_modes` controls which Pregel stream modes the underlying graph emits during the stream. The runtime takes the union of every registered transformer's `required_stream_modes` and passes that union as the `stream_mode` argument to the graph's `.stream()` call. **Modes that no transformer requests are never emitted** — declaring `("custom",)` is what causes `custom` events to flow through the run at all.
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 class CustomTransformer(StreamTransformer):
     required_stream_modes = ("custom",)  # [!code highlight]
 
@@ -397,23 +375,21 @@ The stream handler owns channel lifecycle. Once `init()` returns a channel, the 
 
 Pass a string name to `StreamChannel` to expose a streaming projection through `stream.extensions` *and* forward each pushed value into the run's main event stream as a `custom:<name>` protocol event:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from typing import TypedDict
 
 from langgraph.stream import ProtocolEvent, StreamChannel, StreamTransformer
 
-
 class ToolActivity(TypedDict):
     name: str
     status: str
-
 
 class ToolActivityTransformer(StreamTransformer):
     required_stream_modes = ("tools",)
 
     def __init__(self, scope: tuple[str, ...] = ()) -> None:
         super().__init__(scope)
-        self.activity = StreamChannel[ToolActivity]("tool_activity")
+        self.activity = StreamChannel[ToolActivity](https://docs.langchain.com/oss/python/langgraph/"tool_activity")
 
     def init(self) -> dict:
         return {"tool_activity": self.activity}
@@ -435,16 +411,14 @@ Without a name, the channel is a side-channel projection only — accessible on 
 
 The example below pairs an unnamed channel with `get_stream_writer`, which lets graph nodes emit `custom`-channel events that the transformer then drains into the projection:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from langgraph.config import get_stream_writer
 from langgraph.stream import ProtocolEvent, StreamChannel, StreamTransformer
-
 
 def node(state):
     writer = get_stream_writer()
     writer({"kind": "progress", "message": "retrieving context"})
     return state
-
 
 class CustomTransformer(StreamTransformer):
     required_stream_modes = ("custom",)
@@ -461,7 +435,6 @@ class CustomTransformer(StreamTransformer):
             self.log.push(event["params"]["data"])
         return True
 
-
 stream = graph.stream_events(input, version="v3", transformers=[CustomTransformer])
 
 for item in stream.extensions["custom"]:
@@ -472,9 +445,8 @@ for item in stream.extensions["custom"]:
 
 Use unnamed streams, promises, or other in-process objects when the projection should not flow into the main event stream:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from langgraph.stream import ProtocolEvent, StreamChannel, StreamTransformer
-
 
 class StatsTransformer(StreamTransformer):
     required_stream_modes = ("messages",)
@@ -503,7 +475,7 @@ class StatsTransformer(StreamTransformer):
 
 Pass transformers at call time for local experimentation:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 stream = graph.stream_events(
     input,
     version="v3",
@@ -513,7 +485,7 @@ stream = graph.stream_events(
 
 Compile transformers into the graph when every run of that graph should produce the projection:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 graph = builder.compile(
     transformers=[StatsTransformer, ToolActivityTransformer],
 )
@@ -523,7 +495,7 @@ graph = builder.compile(
 
 LangGraph ships `ToolCallTransformer` as a built-in. Register it to expose `stream.tool_calls` on a plain `StateGraph`:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 from langgraph.prebuilt import ToolCallTransformer
 
 stream = graph.stream_events(input, version="v3", transformers=[ToolCallTransformer])
@@ -536,21 +508,17 @@ for tool_call in stream.tool_calls:
 
 LangGraph defines the streaming primitives. For using streaming with LangChain or Deep Agents, review the relevant product docs:
 
-* [LangChain agent streaming](/oss/python/langchain/event-streaming) covers ReAct-style agent messages, tool calls, and middleware updates.
-* [Deep Agents streaming](/oss/python/deepagents/event-streaming) covers subagents, nested messages, and subagent tool calls.
-* [LangChain frontend patterns](/oss/python/langchain/frontend/overview) and [LangGraph frontend patterns](/oss/python/langgraph/frontend/overview) show UI use cases built on top of streamed state.
-* [LangSmith Streaming API](/langsmith/streaming) covers streaming against a graph deployed behind an Agent Server.
+* [LangChain agent streaming](https://docs.langchain.com/oss/python/langchain/event-streaming) covers ReAct-style agent messages, tool calls, and middleware updates.
+* [Deep Agents streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming) covers subagents, nested messages, and subagent tool calls.
+* [LangChain frontend patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview) and [LangGraph frontend patterns](https://docs.langchain.com/oss/python/langgraph/frontend/overview) show UI use cases built on top of streamed state.
+* [LangSmith Streaming API](https://docs.langchain.com/langsmith/streaming) covers streaming against a graph deployed behind an Agent Server.
 
 The wire-level event and command formats are defined in the [Agent Protocol](https://github.com/langchain-ai/agent-protocol) repository and consumable as [`langchain-protocol`](https://pypi.org/project/langchain-protocol/) on PyPI and [`@langchain/protocol`](https://www.npmjs.com/package/@langchain/protocol) on npm.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

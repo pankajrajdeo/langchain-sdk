@@ -1,22 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangGraph v1 migration guide
-
-This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](/oss/python/releases/langgraph-v1) page.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langgraph-v1)
+This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](https://docs.langchain.com/oss/python/releases/langgraph-v1) page.
 
 To upgrade:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langgraph langchain-core
-  ```
+```bash
+pip install -U langgraph langchain-core
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langgraph langchain-core
-  ```
-</CodeGroup>
+```bash
+uv add langgraph langchain-core
+```
 
 ## Summary of changes
 
@@ -45,30 +39,28 @@ LangGraph v1 deprecates the [`create_react_agent`](https://reference.langchain.c
 
 See the LangChain v1 docs for details:
 
-* [Release notes](/oss/python/releases/langchain-v1#create_agent)
-* [Migration guide](/oss/python/migrate/langchain-v1#migrate-to-create_agent)
+* [Release notes](https://docs.langchain.com/oss/python/releases/langchain-v1#create_agent)
+* [Migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1#migrate-to-create_agent)
 
-<CodeGroup>
-  ```python v1 (new) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
+```python
+from langchain.agents import create_agent
 
-  agent = create_agent(  # [!code highlight]
-      model,
-      tools,
-      system_prompt="You are a helpful assistant.",
-  )
-  ```
+agent = create_agent(  # [!code highlight]
+    model,
+    tools,
+    system_prompt="You are a helpful assistant.",
+)
+```
 
-  ```python v0 (old) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langgraph.prebuilt import create_react_agent
+```python
+from langgraph.prebuilt import create_react_agent
 
-  agent = create_react_agent(  # [!code highlight]
-      model,
-      tools,
-      prompt="You are a helpful assistant.",  # [!code highlight]
-  )
-  ```
-</CodeGroup>
+agent = create_react_agent(  # [!code highlight]
+    model,
+    tools,
+    prompt="You are a helpful assistant.",  # [!code highlight]
+)
+```
 
 ## Breaking changes
 
@@ -78,12 +70,8 @@ All LangChain packages now require **Python 3.10 or higher**. Python 3.9 reached
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/migrate/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

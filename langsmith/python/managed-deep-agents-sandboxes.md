@@ -1,23 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add a sandbox to Managed Deep Agents
-
-> Configure an isolated filesystem and shell for Managed Deep Agents.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes)
+Configure an isolated filesystem and shell for Managed Deep Agents.
 
 Agents often want to write or execute code when doing their job.
 A sandbox gives a Managed Deep Agent an isolated filesystem and shell for working with files, running code, and executing commands.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Keep the agent entry point at the project root and the sandbox declaration under `sandbox/`:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.py
   sandbox/
@@ -28,9 +23,9 @@ my-agent/
 
 `mda init` scaffolds a sandbox declaration. Managed Deep Agents enables the sandbox only while the `sandbox/` directory is present. Delete the directory to opt out, such as for an agent that only needs its prompt, memory, and tools.
 
-Declare the sandbox with `define_sandbox` (Python) or `defineSandbox` (TypeScript). Managed Deep Agents uses [LangSmith Sandboxes](/langsmith/sandboxes) for this backend:
+Declare the sandbox with `define_sandbox` (Python) or `defineSandbox` (TypeScript). Managed Deep Agents uses [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes) for this backend:
 
-```python sandbox/__init__.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from managed_deepagents import define_sandbox
 
 sandbox = define_sandbox(
@@ -51,9 +46,8 @@ Use `template_name` or `snapshot_id` to set the creation source.
 | `thread` (default) | Creates one sandbox for each durable thread and reuses it across runs on that thread. |
 | `agent`            | Shares one sandbox across threads handled by the agent process.                       |
 
-<Warning>
-  An agent-scoped sandbox lets threads read and modify the same files. Use it only for intentionally shared state.
-</Warning>
+> [!WARNING]
+> An agent-scoped sandbox lets threads read and modify the same files. Use it only for intentionally shared state.
 
 Use `idle_ttl_seconds` to control when an idle sandbox can be reclaimed. Use `default_timeout` to bound each command.
 
@@ -63,16 +57,12 @@ The agent uses filesystem tools such as `ls`, `read_file`, `write_file`, `edit_f
 
 ## Sandbox lifecycle
 
-Managed Deep Agents owns sandbox naming, reuse, recovery, and cleanup. Deleting the deployment with `mda delete` also deletes the managed sandboxes associated with it. For platform-level lifecycle details, see [Sandboxes](/langsmith/sandboxes).
+Managed Deep Agents owns sandbox naming, reuse, recovery, and cleanup. Deleting the deployment with `mda delete` also deletes the managed sandboxes associated with it. For platform-level lifecycle details, see [Sandboxes](https://docs.langchain.com/langsmith/sandboxes).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

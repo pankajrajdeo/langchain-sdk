@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy a Managed Deep Agent
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy)
+Test and deploy a Managed Deep Agent with the mda CLI.
 
-> Test and deploy a Managed Deep Agent with the mda CLI.
+Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub), uploads the compiled source, and triggers a LangSmith hosted deployment build.
 
-Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](/langsmith/use-the-context-hub), uploads the compiled source, and triggers a LangSmith hosted deployment build.
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
-
-This page covers secrets routing and deploy options. To test the agent before deploying, see [Develop locally with LangSmith Studio](/langsmith/python/managed-deep-agents-local-development). For command flags, the deploy step list, and troubleshooting, see the [CLI reference](/langsmith/python/managed-deep-agents-cli).
+This page covers secrets routing and deploy options. To test the agent before deploying, see [Develop locally with LangSmith Studio](https://docs.langchain.com/langsmith/python/managed-deep-agents-local-development). For command flags, the deploy step list, and troubleshooting, see the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli).
 
 ## Prerequisites
 
@@ -20,7 +15,7 @@ Before you deploy, make sure you have:
 
 * A workspace with Managed Deep Agents public beta access.
 
-* A [LangSmith API key](/langsmith/create-account-api-key) for that workspace, either in `.env` or your shell environment.
+* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) for that workspace, either in `.env` or your shell environment.
 
 * The `mda` CLI installed from `managed-deepagents`.
 
@@ -34,48 +29,47 @@ The CLI targets US LangSmith Cloud by default.
 
 Deploy the local project:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda deploy .
 ```
 
-<Tip>
-  `mda deploy` routes local project inputs to different managed surfaces:
-
-  ```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  instructions.md + skills/**  -> Context Hub deploy-owned context
-  .env                         -> deploy auth + non-reserved hosted secrets, not archived
-  project source files         -> .mda/build source archive -> hosted deployment
-  schedules/**                 -> LangSmith cron jobs after the deployment is live
-  ```
-</Tip>
+> [!TIP]
+> `mda deploy` routes local project inputs to different managed surfaces:
+>
+> ```text
+> instructions.md + skills/**  -> Context Hub deploy-owned context
+> .env                         -> deploy auth + non-reserved hosted secrets, not archived
+> project source files         -> .mda/build source archive -> hosted deployment
+> schedules/**                 -> LangSmith cron jobs after the deployment is live
+> ```
 
 Set the deployment name explicitly when the directory name is not the name you want:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda deploy . --name research-assistant
 ```
 
 Use `--deployment-type prod` when creating a production deployment:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda deploy . --deployment-type prod
 ```
 
 Use `--no-wait` to trigger the build without polling for completion:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda deploy . --no-wait
 ```
 
 When `--no-wait` is set, schedule reconciliation is skipped for that deploy invocation because the CLI exits before the deployment reaches `DEPLOYED`.
 
-On success, the CLI prints the LangSmith deployment dashboard URL. For the full deploy step list, see the [CLI reference](/langsmith/python/managed-deep-agents-cli#deploy-projects).
+On success, the CLI prints the LangSmith deployment dashboard URL. For the full deploy step list, see the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#deploy-projects).
 
 ## Secrets and environment files
 
 `mda deploy` reads project `.env` values before shell environment variables. Use `.env` for the LangSmith API key that authenticates the deploy and for runtime secrets the hosted deployment needs:
 
-```text .env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
 GITHUB_MCP_TOKEN=<GITHUB_MCP_TOKEN>
@@ -88,42 +82,32 @@ Non-reserved `.env` entries, such as model provider keys, MCP tokens, and custom
 
 Reserved platform variables, empty values, `.env`, and `.env.*` files are not copied into the compiled build archive.
 
-For authentication key order and reserved variables, see the [CLI reference](/langsmith/python/managed-deep-agents-cli#authentication).
+For authentication key order and reserved variables, see the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#authentication).
 
 ## Troubleshoot a deploy
 
-For deploy troubleshooting, see the [CLI reference](/langsmith/python/managed-deep-agents-cli#troubleshooting).
+For deploy troubleshooting, see the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#troubleshooting).
 
 If a deployment reaches `BUILD_FAILED` or `DEPLOY_FAILED`, open the printed deployment URL in LangSmith and inspect the revision logs.
 
 ## Next steps
 
-<CardGroup cols={2}>
-  <Card title="Identity" icon="fingerprint" href="/langsmith/python/managed-deep-agents-identity">
-    Authenticate callers and provide private threads.
-  </Card>
+#### [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity)
+Authenticate callers and provide private threads.
 
-  <Card title="Schedules" icon="calendar" href="/langsmith/python/managed-deep-agents-schedules">
-    Run agents on managed cron schedules.
-  </Card>
+#### [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules)
+Run agents on managed cron schedules.
 
-  <Card title="Custom tools" icon="tool" href="/langsmith/python/managed-deep-agents-tools">
-    Add authored LangChain tools to the agent definition.
-  </Card>
+#### [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools)
+Add authored LangChain tools to the agent definition.
 
-  <Card title="CLI reference" icon="terminal" href="/langsmith/python/managed-deep-agents-cli">
-    Look up every `mda` command and flag.
-  </Card>
-</CardGroup>
+#### [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli)
+Look up every `mda` command and flag.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-deploy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

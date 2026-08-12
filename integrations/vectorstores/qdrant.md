@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Qdrant integration
 
 > Integrate with the Qdrant vector store using LangChain Python.
@@ -20,7 +16,7 @@ There are various modes of how to run `Qdrant`, and depending on the chosen one,
 
 Please see the [Qdrant installation instructions](https://qdrant.tech/documentation/install/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-qdrant
 ```
 
@@ -28,9 +24,9 @@ pip install -qU langchain-qdrant
 
 There are no credentials needed to run the code in this notebook.
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -45,9 +41,9 @@ The Python client provides the option to run the code in local mode without runn
 
 For some testing scenarios and quick experiments, you may prefer to keep all the data in-memory only, so it gets removed when the client is destroyed - usually at the end of your script/notebook.
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/qdrant).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -55,7 +51,7 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams
@@ -78,7 +74,7 @@ vector_store = QdrantVectorStore(
 
 Local mode, without using the Qdrant server, may also store your vectors on-disk so they persist between runs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 client = QdrantClient(path="/tmp/langchain_qdrant")
 
 client.create_collection(
@@ -97,7 +93,7 @@ vector_store = QdrantVectorStore(
 
 No matter if you choose to launch Qdrant locally with [a Docker container](https://qdrant.tech/documentation/install/) or select a Kubernetes deployment with [the official Helm chart](https://github.com/qdrant/qdrant-helm), the way you're going to connect to such an instance will be identical. You'll need to provide a URL pointing to the service.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 url = "<---qdrant url here --->"
 docs = []  # put docs here
 qdrant = QdrantVectorStore.from_documents(
@@ -113,7 +109,7 @@ qdrant = QdrantVectorStore.from_documents(
 
 If you prefer not to keep yourself busy with managing the infrastructure, you can choose to set up a fully-managed Qdrant cluster on [Qdrant Cloud](https://cloud.qdrant.io/). There is a free forever 1GB cluster included for trying out. The main difference with using a managed version of Qdrant is that you'll need to provide an API key to secure your deployment from being accessed publicly. The value can also be set in a `QDRANT_API_KEY` environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 url = "<---qdrant cloud cluster url here --->"
 api_key = "<---api key here--->"
 qdrant = QdrantVectorStore.from_documents(
@@ -130,7 +126,7 @@ qdrant = QdrantVectorStore.from_documents(
 
 To get an instance of `langchain_qdrant.Qdrant` without loading any new documents or texts, you can use the `Qdrant.from_existing_collection()` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 qdrant = QdrantVectorStore.from_existing_collection(
     embedding=embeddings,
     collection_name="my_documents",
@@ -146,7 +142,7 @@ Once you have created your vector store, we can interact with it by adding and d
 
 We can add items to our vector store by using the `add_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -216,17 +212,17 @@ documents = [
 uuids = [str(uuid4()) for _ in range(len(documents))]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.add_documents(documents=documents, ids=uuids)
 ```
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[-1]])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -238,7 +234,7 @@ Once your vector store has been created and the relevant documents have been add
 
 The simplest scenario for using the Qdrant vector store is to perform a similarity search. Under the hood, our query will be encoded into vector embeddings and used to find similar documents in a Qdrant collection.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy", k=2
 )
@@ -246,7 +242,7 @@ for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * Building an exciting new project with LangChain - come check it out! [{'source': 'tweet', '_id': 'd3202666-6f2b-4186-ac43-e35389de8166', '_collection_name': 'demo_collection'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'tweet', '_id': '91ed6c56-fe53-49e2-8199-c3bb3c33c3eb', '_collection_name': 'demo_collection'}]
 ```
@@ -264,7 +260,7 @@ Dense vector search involves calculating similarity via vector-based embeddings.
 * The `retrieval_mode` parameter should be set to `RetrievalMode.DENSE`. This is the default behavior.
 * A [dense embeddings](https://python.langchain.com/docs/integrations/embeddings/) value should be provided to the `embedding` parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qdrant import QdrantVectorStore, RetrievalMode
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams
@@ -303,11 +299,11 @@ The `langchain-qdrant` package provides a [FastEmbed](https://github.com/qdrant/
 
 To use it, install the FastEmbed package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU fastembed
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from qdrant_client import QdrantClient, models
 from qdrant_client.http.models import Distance, SparseVectorParams, VectorParams
@@ -351,7 +347,7 @@ To perform a hybrid search using dense and sparse vectors with score fusion,
 
 Note that if you've added documents with the `HYBRID` mode, you can switch to any retrieval mode when searching, since both the dense and sparse vectors are available in the collection.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qdrant import FastEmbedSparse, QdrantVectorStore, RetrievalMode
 from qdrant_client import QdrantClient, models
 from qdrant_client.http.models import Distance, SparseVectorParams, VectorParams
@@ -389,7 +385,7 @@ found_docs
 
 If you want to execute a similarity search and receive the corresponding scores you can run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     query="Will it be hot tomorrow", k=1
 )
@@ -397,7 +393,7 @@ for doc, score in results:
     print(f"* [SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=0.531834] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news', '_id': '9e6ba50c-794f-4b88-94e5-411f15052a02', '_collection_name': 'demo_collection'}]
 ```
 
@@ -407,7 +403,7 @@ For a full list of all the search functions available for a `QdrantVectorStore`,
 
 Qdrant has an [extensive filtering system](https://qdrant.tech/documentation/concepts/filtering/) with rich type support. It is also possible to use the filters in LangChain, by passing an additional param to both the `similarity_search_with_score` and `similarity_search` methods.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from qdrant_client import models
 
 results = vector_store.similarity_search(
@@ -428,7 +424,7 @@ for doc in results:
     print(f"* {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * The top 10 soccer players in the world right now. [{'source': 'website', '_id': 'b0964ab5-5a14-47b4-a983-37fa5c5bd154', '_collection_name': 'demo_collection'}]
 ```
 
@@ -436,12 +432,12 @@ for doc in results:
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1})
 retriever.invoke("Stealing from the bank is a crime")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'news', '_id': '50d8d6ee-69bf-4173-a6a2-b254e9928965', '_collection_name': 'demo_collection'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 ```
 
@@ -449,9 +445,9 @@ retriever.invoke("Stealing from the bank is a crime")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ## Customizing qdrant
 
@@ -461,7 +457,7 @@ There are options to use an existing Qdrant collection within your LangChain app
 
 Qdrant supports [multiple vectors per point](https://qdrant.tech/documentation/concepts/collections/#collection-with-multiple-vectors) by named vectors. If you work with a collection created externally or want to have the differently named vector used, you can configure it by providing its name.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qdrant import RetrievalMode
 
 QdrantVectorStore.from_documents(
@@ -482,7 +478,7 @@ Qdrant stores your vector embeddings along with the optional JSON-like payload. 
 
 By default, your document is going to be stored in the following payload structure:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "page_content": "Lorem ipsum dolor sit amet",
     "metadata": {
@@ -493,7 +489,7 @@ By default, your document is going to be stored in the following payload structu
 
 You can, however, decide to use different keys for the page content and metadata. That's useful if you already have a collection that you'd like to reuse.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 QdrantVectorStore.from_documents(
     docs,
     embeddings,
@@ -512,12 +508,8 @@ For detailed documentation of all `QdrantVectorStore` features and configuration
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/qdrant.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

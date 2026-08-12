@@ -1,27 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # NVIDIA middleware integration
 
 > Integrate with the NVIDIA middleware using LangChain Python.
 
-Middleware integrations and model-specific harness profiles for NVIDIA services and models. Use them to route calls across LangChain chat models or optimize Deep Agents behavior for NVIDIA Nemotron 3 Ultra. Learn more about [middleware](/oss/python/langchain/middleware/overview).
+Middleware integrations and model-specific harness profiles for NVIDIA services and models. Use them to route calls across LangChain chat models or optimize Deep Agents behavior for NVIDIA Nemotron 3 Ultra. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
 
 ## Overview
 
 | Integration                                                                            | Description                                                                       |
 | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [Deep Agents profile for Nemotron 3 Ultra](#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior    |
-| [Model routing with NeMo Switchyard](#model-routing-with-nemo-switchyard)              | Route each model call to the target selected by a configured Switchyard algorithm |
+| [Deep Agents profile for Nemotron 3 Ultra](https://docs.langchain.com/oss/python/integrations/middleware/nvidia#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior    |
+| [Model routing with NeMo Switchyard](https://docs.langchain.com/oss/python/integrations/middleware/nvidia#model-routing-with-nemo-switchyard)              | Route each model call to the target selected by a configured Switchyard algorithm |
 
 ## Optimize Deep Agents for Nemotron 3 Ultra
 
 Deep Agents includes a built-in harness profile for [NVIDIA Nemotron 3 Ultra](https://build.nvidia.com/nvidia/nemotron-3-ultra-550b-a55b). The profile adds model-specific prompt guidance, tool descriptions, and middleware for tool calling, filesystem operations, retries, context management, and final answers. It was developed through [evaluation-driven harness tuning](https://developer.nvidia.com/blog/create-a-langchain-deep-agents-harness-profile-for-nvidia-nemotron-3-ultra-to-improve-performance/).
 
-<Note>
-  The built-in Nemotron 3 Ultra harness profile requires `deepagents>=0.7.0`.
-</Note>
+> [!NOTE]
+> The built-in Nemotron 3 Ultra harness profile requires `deepagents>=0.7.0`.
 
 ### What the profile changes
 
@@ -35,17 +30,17 @@ Deep Agents includes a built-in harness profile for [NVIDIA Nemotron 3 Ultra](ht
 
 Install Deep Agents and the NVIDIA chat model integration:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U "deepagents>=0.7.0" langchain-nvidia-ai-endpoints
 ```
 
-Configure `NVIDIA_API_KEY` as described in the [ChatNVIDIA setup guide](/oss/python/integrations/chat/nvidia_ai_endpoints#access-the-nvidia-api-catalog).
+Configure `NVIDIA_API_KEY` as described in the [ChatNVIDIA setup guide](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints#access-the-nvidia-api-catalog).
 
 ### Use the built-in profile
 
 Create a deep agent with the Nemotron 3 Ultra model. Deep Agents recognizes the model and applies the profile automatically, so you do not need to instantiate or pass its middleware:
 
-```python Create a profiled deep agent icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
@@ -74,9 +69,8 @@ The profile is registered for Nemotron 3 Ultra model identifiers served through 
 
 The experimental `SwitchyardRoutingMiddleware` routes each deep agent model call through a configured [NeMo Switchyard](https://github.com/NVIDIA-NeMo/Switchyard) `libsy` algorithm. Use it to combine LangChain chat models with different cost and performance profiles while Deep Agents continues to manage the agent loop, tools, state, and middleware composition.
 
-<Warning>
-  This integration is experimental. Its APIs and behavior are subject to breaking changes without notice. Review the [current limitations](https://github.com/langchain-ai/langchain-nvidia/tree/main/libs/switchyard#limitations) before using it in an application.
-</Warning>
+> [!WARNING]
+> This integration is experimental. Its APIs and behavior are subject to breaking changes without notice. Review the [current limitations](https://github.com/langchain-ai/langchain-nvidia/tree/main/libs/switchyard#limitations) before using it in an application.
 
 ### Features
 
@@ -94,7 +88,7 @@ The integration requires Python 3.12 or newer, a source checkout of NeMo Switchy
 
 Build Switchyard's `libsy` Python bindings from source, then install the integration with its Deep Agents and OpenRouter dependencies:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 git clone https://github.com/NVIDIA-NeMo/Switchyard.git
 python -m pip install -e ./Switchyard
 
@@ -104,15 +98,14 @@ python -m pip install -e "./langchain-nvidia/libs/switchyard[openrouter]"
 
 The OpenRouter example requires `OPENROUTER_API_KEY`. Confirm that your account can access both configured models before running it.
 
-<Note>
-  `SwitchyardRoutingMiddleware` requires `deepagents>=0.7.4`.
-</Note>
+> [!NOTE]
+> `SwitchyardRoutingMiddleware` requires `deepagents>=0.7.4`.
 
 ### Instantiation
 
 Create two LangChain chat models, adapt them as Switchyard targets, and construct the routing middleware. The order of the targets passed to `stage_router` matters: pass the capable target first and the efficient target second.
 
-```python Initialize middleware icon="arrows-shuffle" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openrouter import ChatOpenRouter
 
 from switchyard.libsy import LlmTarget, algorithms
@@ -138,7 +131,7 @@ Stage routing is signal-driven. It can route ordinary turns to the efficient tar
 
 Pass the middleware to [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Deep Agents requires a base model, but the middleware replaces it for each routed call. Reuse one configured target to avoid constructing an unused model.
 
-```python Agent with middleware icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 
 agent = create_deep_agent(
@@ -171,7 +164,7 @@ The asynchronous `ainvoke` path is canonical. Use `agent.invoke(...)` in ordinar
 
 Every routed `AIMessage` contains the complete ordered decision trace in `response_metadata["switchyard"]`:
 
-```python Inspect routing icon="route" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import AIMessage
 
 message = next(
@@ -194,19 +187,15 @@ Some algorithms make more than one decision. Use `decisions` for the full trace;
 
 ## See also
 
-* [NVIDIA integrations](/oss/python/integrations/providers/nvidia)
+* [NVIDIA integrations](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
 * [`langchain-nvidia-switchyard` package README](https://github.com/langchain-ai/langchain-nvidia/tree/main/libs/switchyard#readme)
 * [Create a Deep Agents harness profile for NVIDIA Nemotron 3 Ultra](https://developer.nvidia.com/blog/create-a-langchain-deep-agents-harness-profile-for-nvidia-nemotron-3-ultra-to-improve-performance/)
-* [Deep Agents models and dynamic selection](/oss/python/deepagents/models)
+* [Deep Agents models and dynamic selection](https://docs.langchain.com/oss/python/deepagents/models)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

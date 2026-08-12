@@ -1,165 +1,151 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Quickstart
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/quickstart)
+Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
 
-> Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
-
-Deep Agents Code (`dcode`) is a terminal coding agent built on the [Deep Agents SDK](/oss/python/deepagents/quickstart). This guide covers installation, your first task, daily interactive use, automation with piping, and LangSmith tracing. For a feature overview, see [Deep Agents Code overview](/oss/deepagents/code/overview). For `config.toml` and provider settings, see [Configuration](/oss/deepagents/code/configuration).
+Deep Agents Code (`dcode`) is a terminal coding agent built on the [Deep Agents SDK](https://docs.langchain.com/oss/python/deepagents/quickstart). This guide covers installation, your first task, daily interactive use, automation with piping, and LangSmith tracing. For a feature overview, see [Deep Agents Code overview](https://docs.langchain.com/oss/deepagents/code/overview). For `config.toml` and provider settings, see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration).
 
 ## Install and run your first task
 
-<Steps>
-  <Step title="Install and launch" icon="terminal">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl -LsSf https://langch.in/dcode | bash
-    ```
-  </Step>
+### Install and launch
+```bash
+curl -LsSf https://langch.in/dcode | bash
+```
 
-  <Step title="Add provider credentials" icon="key">
-    Deep Agents Code works with any tool-calling LLM. OpenAI, Anthropic, and Google are available out of the box.
+### Add provider credentials
+Deep Agents Code works with any tool-calling LLM. OpenAI, Anthropic, and Google are available out of the box.
 
-    Use the `/auth` command to connect with a provider. See [Providers](/oss/deepagents/code/providers) for the full list and credential details.
+Use the `/auth` command to connect with a provider. See [Providers](https://docs.langchain.com/oss/deepagents/code/providers) for the full list and credential details.
 
-    <Note>
-      Web search uses [Tavily](https://tavily.com). Add a key with `/auth`. See [Enable web search](/oss/deepagents/code/credentials#enable-web-search-with-tavily).
-    </Note>
-  </Step>
+> [!NOTE]
+> Web search uses [Tavily](https://tavily.com). Add a key with `/auth`. See [Enable web search](https://docs.langchain.com/oss/deepagents/code/credentials#enable-web-search-with-tavily).
 
-  <Step title="Give the agent a task" icon="message">
-    ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    Create a Python script that prints "Hello, World!"
-    ```
+### Give the agent a task
+```txt
+Create a Python script that prints "Hello, World!"
+```
 
-    The agent interprets the query and proposes changes with diffs for your approval before modifying files. If needed, it can run shell commands to test the code, check documentation, or search the web for up-to-date information.
-  </Step>
+The agent interprets the query and proposes changes with diffs for your approval before modifying files. If needed, it can run shell commands to test the code, check documentation, or search the web for up-to-date information.
 
-  <Step title="Enable tracing (optional)" icon="chart-dots">
-    To log agent operations, tool calls, and decisions in LangSmith, run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch.
+### Enable tracing (optional)
+To log agent operations, tool calls, and decisions in LangSmith, run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch.
 
-    For project naming, advanced options, and CI or headless setup, see [Trace with LangSmith](#trace-with-langsmith).
-  </Step>
-</Steps>
+For project naming, advanced options, and CI or headless setup, see [Trace with LangSmith](https://docs.langchain.com/oss/deepagents/code/quickstart#trace-with-langsmith).
 
-<Note>
-  Deep Agents Code is not officially supported on Windows. Windows users can try running it under [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install).
-</Note>
+> [!NOTE]
+> Deep Agents Code is not officially supported on Windows. Windows users can try running it under [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ## Interactive mode
 
 Type naturally as you would in a chat interface.
 The agent uses its built-in tools, skills, and memory to help you with tasks.
 
-<AccordionGroup>
-  <Accordion title="Slash commands" icon="slash">
-    Use these commands within a Deep Agents Code session:
+<details>
+<summary>Slash commands</summary>
 
-    * `/model`: Switch models or open the interactive model selector.
-    * `/effort`: Set reasoning effort for the current model.
-    * `/agents`: Hot-swap between pre-configured agents without relaunching. See [Command reference](/oss/deepagents/code/cli-reference#command-line-options) for related flags.
-    * `/auth`: Manage stored API keys for model providers and services (such as Tavily web search). See [Provider credentials](/oss/deepagents/code/credentials) for details.
-    * `/goal <objective>`: Draft acceptance criteria from a measurable objective. See [Goals and rubrics](/oss/deepagents/code/goals-and-rubrics).
-    * `/rubric`: Set explicit acceptance criteria for grading. See [Goals and rubrics](/oss/deepagents/code/goals-and-rubrics).
-    * `/remember [context]`: Review conversation and update memory and skills. Optionally pass additional context.
-    * `/skill:<name> [args]`: Directly invoke a skill by name. The skill's `SKILL.md` instructions are injected into the prompt along with any arguments you provide.
-    * `/skill-creator [task]`: Guide for creating effective agent skills.
-    * `/offload` (alias `/compact`) - Free up context window space by offloading messages to storage with a summary placeholder. The agent can retrieve the full history from the offloaded file if needed.
-    * `/context`: Open a color-coded context-window usage report with model capacity, usage categories, and remaining space.
-    * `/tokens`: Display current context window token usage breakdown.
-    * `/clear`: Clear conversation history and start a new thread.
-    * `/force-clear`: Stop active work, clear the chat, and start a new thread.
-    * `/copy`: Copy the latest assistant message to the clipboard.
-    * `/threads`: Browse and resume previous conversation threads.
-    * `/mcp [login <server> | reconnect]`: Show active MCP servers and tools. `login <server>` runs the OAuth flow for a server; `reconnect` loads deferred logins.
-    * `/plugins`: Manage [plugins and marketplaces](/oss/deepagents/code/plugins).
-    * `/notifications`: Configure startup warning preferences.
-    * `/reload`: Re-read `.env` files, refresh configuration, and re-discover skills without restarting. This also reloads plugin skills and MCP configuration. Conversation state is preserved. See [`DEEPAGENTS_CODE_` prefix](/oss/deepagents/code/configuration#deepagents_code_-prefix) for override behavior.
-    * `/theme`: Open the interactive theme selector to switch color themes. Built-in themes are available plus any [user-defined themes](/oss/deepagents/code/configuration#themes).
-    * `/scrollbar`: Show or hide the chat scrollbar.
-    * `/line-numbers`: Show or hide file-relative line numbers in new diffs. See [Diff line numbers](/oss/deepagents/code/config-file#diff-line-numbers).
-    * `/update`: Check for and install Deep Agents Code updates inline. Detects your install method (uv, Homebrew, pip) and runs the appropriate upgrade command.
-    * `/auto-update`: Toggle automatic updates on or off.
-    * `/install`: Install an optional integration.
-    * `/trace`: Open the current thread in LangSmith.
-    * `/editor`: Open the current prompt in your external editor (`$VISUAL` / `$EDITOR`). See [External editor](#external-editor).
-    * `/restart`: Restart the agent server.
-    * `/timestamps`: Toggle message timestamp footers.
-    * `/changelog`: Open Deep Agents Code changelog in your browser.
-    * `/docs`: Open the documentation in your browser.
-    * `/feedback`: Send feedback or report an issue.
-    * `/version` (alias `/about`) - Show installed `deepagents-code` and SDK versions.
-    * `/help`: Show help and available commands.
-    * `/quit`: Exit application.
-  </Accordion>
+Use these commands within a Deep Agents Code session:
 
-  <Accordion title="Shell commands" icon="prompt">
-    Type `!` to enter shell mode, then type your command.
+* `/model`: Switch models or open the interactive model selector.
+* `/effort`: Set reasoning effort for the current model.
+* `/agents`: Hot-swap between pre-configured agents without relaunching. See [Command reference](https://docs.langchain.com/oss/deepagents/code/cli-reference#command-line-options) for related flags.
+* `/auth`: Manage stored API keys for model providers and services (such as Tavily web search). See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials) for details.
+* `/goal <objective>`: Draft acceptance criteria from a measurable objective. See [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics).
+* `/rubric`: Set explicit acceptance criteria for grading. See [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics).
+* `/remember [context]`: Review conversation and update memory and skills. Optionally pass additional context.
+* `/skill:<name> [args]`: Directly invoke a skill by name. The skill's `SKILL.md` instructions are injected into the prompt along with any arguments you provide.
+* `/skill-creator [task]`: Guide for creating effective agent skills.
+* `/offload` (alias `/compact`) - Free up context window space by offloading messages to storage with a summary placeholder. The agent can retrieve the full history from the offloaded file if needed.
+* `/tokens`: Display current context window token usage breakdown.
+* `/clear`: Clear conversation history and start a new thread.
+* `/force-clear`: Stop active work, clear the chat, and start a new thread.
+* `/copy`: Copy the latest assistant message to the clipboard.
+* `/threads`: Browse and resume previous conversation threads.
+* `/mcp [login <server> | reconnect]`: Show active MCP servers and tools. `login <server>` runs the OAuth flow for a server; `reconnect` loads deferred logins.
+* `/plugins`: Manage [plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins).
+* `/notifications`: Configure startup warning preferences.
+* `/reload`: Re-read `.env` files, refresh configuration, and re-discover skills without restarting. This also reloads plugin skills and MCP configuration. Conversation state is preserved. See [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) for override behavior.
+* `/theme`: Open the interactive theme selector to switch color themes. Built-in themes are available plus any [user-defined themes](https://docs.langchain.com/oss/deepagents/code/configuration#themes).
+* `/scrollbar`: Show or hide the chat scrollbar.
+* `/update`: Check for and install Deep Agents Code updates inline. Detects your install method (uv, Homebrew, pip) and runs the appropriate upgrade command.
+* `/auto-update`: Toggle automatic updates on or off.
+* `/install`: Install an optional integration.
+* `/trace`: Open the current thread in LangSmith.
+* `/editor`: Open the current prompt in your external editor (`$VISUAL` / `$EDITOR`). See [External editor](https://docs.langchain.com/oss/deepagents/code/quickstart#external-editor).
+* `/restart`: Restart the agent server.
+* `/timestamps`: Toggle message timestamp footers.
+* `/changelog`: Open Deep Agents Code changelog in your browser.
+* `/docs`: Open the documentation in your browser.
+* `/feedback`: Send feedback or report an issue.
+* `/version` (alias `/about`) - Show installed `deepagents-code` and SDK versions.
+* `/help`: Show help and available commands.
+* `/quit`: Exit application.
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    git status
-    npm test
-    ls -la
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="Keyboard shortcuts" icon="keyboard">
-    **General**
+<details>
+<summary>Shell commands</summary>
 
-    | Shortcut                                              | Action                                                                              |
-    | ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
-    | `Enter`                                               | Submit prompt                                                                       |
-    | `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                                                      |
-    | `@filename`                                           | Auto-complete files and inject content                                              |
-    | `Shift+Tab` or `Ctrl+T`                               | Toggle between Manual and Auto [approval mode](/oss/deepagents/code/approval-modes) |
-    | `Ctrl+X`                                              | Open prompt in external editor                                                      |
-    | `Ctrl+N`                                              | Review pending notifications                                                        |
-    | `Ctrl+O`                                              | Expand/collapse the most recent tool output                                         |
-    | `Escape`                                              | Interrupt current operation                                                         |
-    | `Ctrl+C`                                              | Interrupt or quit                                                                   |
-    | `Ctrl+D`                                              | Exit                                                                                |
+Type `!` to enter shell mode, then type your command.
 
-    **Text editing in the prompt**
+```bash
+git status
+npm test
+ls -la
+```
 
-    The chat input uses standard readline-style bindings:
+</details>
 
-    | Shortcut                     | Action                              |
-    | ---------------------------- | ----------------------------------- |
-    | `Ctrl+A` or `Home`           | Move cursor to start of line        |
-    | `Ctrl+E` or `End`            | Move cursor to end of line          |
-    | `Ctrl+U`                     | Delete from cursor to start of line |
-    | `Ctrl+K`                     | Delete from cursor to end of line   |
-    | `Ctrl+W` or `Ctrl+Backspace` | Delete word to the left             |
-    | `Ctrl+Left` / `Ctrl+Right`   | Move cursor one word left/right     |
+<details>
+<summary>Keyboard shortcuts</summary>
 
-    <Note>
-      **macOS `Cmd+Left` / `Cmd+Right` / `Cmd+Delete`**
+**General**
 
-      Terminal emulators intercept `Cmd`-modified keys before they reach the running application, so Deep Agents Code never receives them directly. Instead, the terminal translates them into the readline shortcuts above.
+| Shortcut                                              | Action                                                                              |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `Enter`                                               | Submit prompt                                                                       |
+| `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                                                      |
+| `@filename`                                           | Auto-complete files and inject content                                              |
+| `Shift+Tab` or `Ctrl+T`                               | Toggle between Manual and Auto [approval mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) |
+| `Ctrl+X`                                              | Open prompt in external editor                                                      |
+| `Ctrl+N`                                              | Review pending notifications                                                        |
+| `Ctrl+O`                                              | Expand/collapse the most recent tool output                                         |
+| `Escape`                                              | Interrupt current operation                                                         |
+| `Ctrl+C`                                              | Interrupt or quit                                                                   |
+| `Ctrl+D`                                              | Exit                                                                                |
 
-      * **Ghostty:** Works out of the box. `Cmd+Left`, `Cmd+Right`, and `Cmd+Delete` are translated to `Ctrl+A`, `Ctrl+E`, and `Ctrl+U` by default.
-      * **iTerm2:** Not bound by default. Add the following under **Settings → Profiles → Keys → Key Mappings** as `Send Text with vim special chars`:
-        * `Cmd+Left` → `\x01` (Ctrl+A)
-        * `Cmd+Right` → `\x05` (Ctrl+E)
-        * `Cmd+Delete` → `\x15` (Ctrl+U)
-      * **Terminal.app:** No native UI for this remap. Use the `Ctrl`-based shortcuts directly.
+**Text editing in the prompt**
 
-      Word-wise motion (`Option+Left` / `Option+Right`) is handled the same way: terminals send `Esc+b` / `Esc+f`, which Deep Agents Code interprets as word-left/right.
-    </Note>
-  </Accordion>
-</AccordionGroup>
+The chat input uses standard readline-style bindings:
 
-### Inspect context-window usage
+| Shortcut                     | Action                              |
+| ---------------------------- | ----------------------------------- |
+| `Ctrl+A` or `Home`           | Move cursor to start of line        |
+| `Ctrl+E` or `End`            | Move cursor to end of line          |
+| `Ctrl+U`                     | Delete from cursor to start of line |
+| `Ctrl+K`                     | Delete from cursor to end of line   |
+| `Ctrl+W` or `Ctrl+Backspace` | Delete word to the left             |
+| `Ctrl+Left` / `Ctrl+Right`   | Move cursor one word left/right     |
 
-Run `/context` to open a color-coded report of the current model's context-window usage. The report shows the model's context limit, used tokens, remaining capacity, and a breakdown between the conversation and system prompt plus tools when those values are available.
+> [!NOTE]
+> **macOS `Cmd+Left` / `Cmd+Right` / `Cmd+Delete`**
+>
+> Terminal emulators intercept `Cmd`-modified keys before they reach the running application, so Deep Agents Code never receives them directly. Instead, the terminal translates them into the readline shortcuts above.
+>
+> * **Ghostty:** Works out of the box. `Cmd+Left`, `Cmd+Right`, and `Cmd+Delete` are translated to `Ctrl+A`, `Ctrl+E`, and `Ctrl+U` by default.
+> * **iTerm2:** Not bound by default. Add the following under **Settings → Profiles → Keys → Key Mappings** as `Send Text with vim special chars`:
+>   * `Cmd+Left` → `\x01` (Ctrl+A)
+>   * `Cmd+Right` → `\x05` (Ctrl+E)
+>   * `Cmd+Delete` → `\x15` (Ctrl+U)
+> * **Terminal.app:** No native UI for this remap. Use the `Ctrl`-based shortcuts directly.
+>
+> Word-wise motion (`Option+Left` / `Option+Right`) is handled the same way: terminals send `Esc+b` / `Esc+f`, which Deep Agents Code interprets as word-left/right.
 
-Provider-reported totals remain distinct from local conversation estimates. When a provider total is unavailable, the report labels the conversation count as an estimate and marks the total usage as unavailable. Use `/tokens` when you want a text summary in the conversation transcript instead.
+</details>
 
 ### External editor
 
 Press `Ctrl+X` or type `/editor` to compose prompts in an external editor. Deep Agents Code checks `$VISUAL`, then `$EDITOR`, then falls back to `vi` (macOS/Linux) or `notepad` (Windows). GUI editors (VS Code, Cursor, Zed, etc.) automatically receive a `--wait` flag so Deep Agents Code blocks until you close the file.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Set in your shell profile (~/.zshrc, ~/.bashrc, etc.)
 export VISUAL="code"    # GUI editor (--wait auto-injected)
 export EDITOR="nvim"    # Terminal fallback
@@ -169,7 +155,7 @@ export EDITOR="nvim"    # Terminal fallback
 
 Use `-n` to run a single task without launching the interactive UI:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 dcode -n "Write a Python script that prints hello world"
 ```
 
@@ -177,7 +163,7 @@ Each non-interactive run starts a fresh thread—conversation history does not c
 
 You can also pipe input via stdin. When input is piped, Deep Agents Code automatically runs non-interactively:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 echo "Explain this code" | dcode
 cat error.log | dcode -n "What's causing this error?"
 git diff | dcode -n "Review these changes"
@@ -186,79 +172,87 @@ git diff | dcode --skill code-review -n 'summarize changes'
 
 When you combine piped input with `-n` or `-m`, the piped content appears first, followed by the text you pass to the flag.
 
-<Note>
-  The maximum piped input size is 10 MiB.
-</Note>
+> [!NOTE]
+> The maximum piped input size is 10 MiB.
 
 Shell execution is disabled by default in non-interactive mode. Use `-S`/`--shell-allow-list` to enable specific commands (e.g., `-S "pytest,git,make"`), `recommended` for safe defaults, or `all` to permit any command.
 
-<AccordionGroup>
-  <Accordion title="Cap turn count" icon="gauge">
-    Long-running or misbehaving agents in CI/CD pipelines can loop indefinitely. `--max-turns N` gives operators a hard upper bound without having to touch SDK internals:
+<details>
+<summary>Cap turn count</summary>
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode -n "fix the failing tests" --max-turns 10
-    ```
+Long-running or misbehaving agents in CI/CD pipelines can loop indefinitely. `--max-turns N` gives operators a hard upper bound without having to touch SDK internals:
 
-    `N` must be a positive integer, and overrides the internal safety default that otherwise caps runaway loops. Exits with code 124 (matching GNU `timeout`) when the budget is exceeded, so CI can distinguish a budget hit from a generic failure. Requires `-n` or piped stdin; otherwise exits with code 2.
+```bash
+dcode -n "fix the failing tests" --max-turns 10
+```
 
-    For a time-based limit instead of (or in addition to) a turn-count limit, see [Cap wall-clock time with `--timeout`](#non-interactive-mode-and-piping).
-  </Accordion>
+`N` must be a positive integer, and overrides the internal safety default that otherwise caps runaway loops. Exits with code 124 (matching GNU `timeout`) when the budget is exceeded, so CI can distinguish a budget hit from a generic failure. Requires `-n` or piped stdin; otherwise exits with code 2.
 
-  <Accordion title="Cap wall-clock time" icon="clock">
-    `--timeout SECONDS` enforces a hard wall-clock limit on a non-interactive run. It complements `--max-turns` (turn count) with a time-based budget—whichever limit is hit first cancels the agent.
+For a time-based limit instead of (or in addition to) a turn-count limit, see [Cap wall-clock time with `--timeout`](https://docs.langchain.com/oss/deepagents/code/quickstart#non-interactive-mode-and-piping).
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    # Fail fast in CI if the task takes more than 2 minutes
-    dcode -n "run the test suite and summarise failures" --timeout 120
+</details>
 
-    # Combine with --max-turns—whichever limit is hit first stops the agent
-    dcode -n "refactor auth module" --timeout 300 --max-turns 20
-    ```
+<details>
+<summary>Cap wall-clock time</summary>
 
-    On expiry the agent is cancelled and the process exits with code 124, the same code used by `--max-turns`, so CI can treat both budget hits uniformly. Requires `-n` or piped stdin; otherwise exits with code 2.
-  </Accordion>
+`--timeout SECONDS` enforces a hard wall-clock limit on a non-interactive run. It complements `--max-turns` (turn count) with a time-based budget—whichever limit is hit first cancels the agent.
 
-  <Accordion title="Clean output and buffering" icon="buffer">
-    Use `-q` for clean output suitable for piping into other commands, and `--no-stream` to buffer the full response (instead of streaming) before writing to stdout:
+```bash
+# Fail fast in CI if the task takes more than 2 minutes
+dcode -n "run the test suite and summarise failures" --timeout 120
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode -n "Generate a .gitignore for Python" -q > .gitignore
-    dcode -n "List dependencies" -q --no-stream | sort
-    ```
+# Combine with --max-turns—whichever limit is hit first stops the agent
+dcode -n "refactor auth module" --timeout 300 --max-turns 20
+```
 
-    In non-interactive mode, the agent is instructed to make reasonable assumptions and proceed autonomously rather than ask clarifying questions. It also favors non-interactive command variants (e.g., `npm init -y`, `apt-get install -y`).
-  </Accordion>
+On expiry the agent is cancelled and the process exits with code 124, the same code used by `--max-turns`, so CI can treat both budget hits uniformly. Requires `-n` or piped stdin; otherwise exits with code 2.
 
-  <Accordion title="Shell execution examples" icon="shield-check">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    # Allow specific commands (validated against the list)
-    dcode -n "Run the tests and fix failures" -S "pytest,git,make"
+</details>
 
-    # Use the curated safe-command list
-    dcode -n "Build the project" -S recommended
+<details>
+<summary>Clean output and buffering</summary>
 
-    # Allow any shell command
-    dcode -n "Fix the build" -S all
-    ```
-  </Accordion>
-</AccordionGroup>
+Use `-q` for clean output suitable for piping into other commands, and `--no-stream` to buffer the full response (instead of streaming) before writing to stdout:
 
-<Warning>
-  **Use with caution.**
+```bash
+dcode -n "Generate a .gitignore for Python" -q > .gitignore
+dcode -n "List dependencies" -q --no-stream | sort
+```
 
-  `-S all` (or `--shell-allow-list all`) lets the agent execute arbitrary shell commands with no human confirmation.
-</Warning>
+In non-interactive mode, the agent is instructed to make reasonable assumptions and proceed autonomously rather than ask clarifying questions. It also favors non-interactive command variants (e.g., `npm init -y`, `apt-get install -y`).
+
+</details>
+
+<details>
+<summary>Shell execution examples</summary>
+
+```bash
+# Allow specific commands (validated against the list)
+dcode -n "Run the tests and fix failures" -S "pytest,git,make"
+
+# Use the curated safe-command list
+dcode -n "Build the project" -S recommended
+
+# Allow any shell command
+dcode -n "Fix the build" -S all
+```
+
+</details>
+
+> [!WARNING]
+> **Use with caution.**
+>
+> `-S all` (or `--shell-allow-list all`) lets the agent execute arbitrary shell commands with no human confirmation.
 
 ## Trace with LangSmith
 
 Enable [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-code-quickstart) tracing to see agent operations, tool calls, and decisions in a LangSmith project.
 
-Run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch and persists across sessions. See [Provider credentials](/oss/deepagents/code/credentials#use-%2Fauth-recommended) for details on the credential manager.
+Run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch and persists across sessions. See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials#use-%2Fauth-recommended) for details on the credential manager.
 
 To customize the project name or configure tracing without the TUI, add keys to `~/.deepagents/.env` so tracing is enabled in every session without per-shell exports:
 
-```bash title="~/.deepagents/.env" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 LANGSMITH_TRACING=true
 LANGSMITH_API_KEY=lsv2_...
 DEEPAGENTS_CODE_LANGSMITH_PROJECT=deepagents-code  # Project for Deep Agents Code's own traces; defaults to "deepagents-code"
@@ -266,81 +260,82 @@ DEEPAGENTS_CODE_LANGSMITH_PROJECT=deepagents-code  # Project for Deep Agents Cod
 
 Use `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to name the project that receives Deep Agents Code's own traces. It is scoped to Deep Agents Code, so it is not affected by a `LANGSMITH_PROJECT` set in a project's `.env` (which routes that project's application traces; see **Separate agent traces from app traces** below).
 
-To override the project for a specific working directory, add `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to a `.env` in that directory. See [environment variables](/oss/deepagents/code/configuration#environment-variables) for the full loading order.
+To override the project for a specific working directory, add `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to a `.env` in that directory. See [environment variables](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables) for the full loading order.
 
 For CI, headless runs, or temporary overrides, set shell environment variables instead. Shell exports always take precedence over `.env` values:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_TRACING=false
 ```
 
-<Accordion title="Separate agent traces from app traces">
-  Deep Agents Code can produce two kinds of LangSmith traces:
+<details>
+<summary>Separate agent traces from app traces</summary>
 
-  * `Agent traces` are Deep Agents Code's own model calls, tool calls, orchestration, and middleware.
-  * `Shell-command traces` are traces emitted by code that Deep Agents Code runs for you in a shell, such as tests, scripts, or a local LangGraph app.
+Deep Agents Code can produce two kinds of LangSmith traces:
 
-  To send Deep Agents Code's own traces to a dedicated project, set `DEEPAGENTS_CODE_LANGSMITH_PROJECT`:
+* `Agent traces` are Deep Agents Code's own model calls, tool calls, orchestration, and middleware.
+* `Shell-command traces` are traces emitted by code that Deep Agents Code runs for you in a shell, such as tests, scripts, or a local LangGraph app.
 
-  ```bash title="~/.deepagents/.env" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Example value; use any LangSmith project name you want.
-  DEEPAGENTS_CODE_LANGSMITH_PROJECT=deepagents-code
-  ```
+To send Deep Agents Code's own traces to a dedicated project, set `DEEPAGENTS_CODE_LANGSMITH_PROJECT`:
 
-  Then configure `LANGSMITH_PROJECT` for your application traces:
+```bash
+# Example value; use any LangSmith project name you want.
+DEEPAGENTS_CODE_LANGSMITH_PROJECT=deepagents-code
+```
 
-  ```bash title=".env" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  LANGSMITH_PROJECT=customer-support-agent
-  ```
+Then configure `LANGSMITH_PROJECT` for your application traces:
 
-  For example, suppose you ask Deep Agents Code to debug a failing LangGraph test:
+```bash
+LANGSMITH_PROJECT=customer-support-agent
+```
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv run pytest tests/test_escalation_flow.py
-  ```
+For example, suppose you ask Deep Agents Code to debug a failing LangGraph test:
 
-  If that test runs your app with LangSmith tracing enabled, those app traces are created by the shell process and go to `customer-support-agent`. Deep Agents Code's own reasoning and tool-use traces go to `deepagents-code`.
+```bash
+uv run pytest tests/test_escalation_flow.py
+```
 
-  You can also scope LangSmith credentials to Deep Agents Code using the [`DEEPAGENTS_CODE_` prefix](/oss/deepagents/code/configuration#deepagents_code_-prefix) (e.g., `DEEPAGENTS_CODE_LANGSMITH_API_KEY`).
-</Accordion>
+If that test runs your app with LangSmith tracing enabled, those app traces are created by the shell process and go to `customer-support-agent`. Deep Agents Code's own reasoning and tool-use traces go to `deepagents-code`.
 
-<Accordion title="Dual-write traces to a second project">
-  To mirror agent traces to a second LangSmith project, set `DEEPAGENTS_CODE_LANGSMITH_REPLICA_PROJECTS`. This is useful for sending the same traces to both a personal project and a shared team project.
+You can also scope LangSmith credentials to Deep Agents Code using the [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) (e.g., `DEEPAGENTS_CODE_LANGSMITH_API_KEY`).
 
-  ```bash title="~/.deepagents/.env" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  DEEPAGENTS_CODE_LANGSMITH_REPLICA_PROJECTS=team-shared
-  ```
+</details>
 
-  When set and tracing is active, each agent run is written to both the primary project (`DEEPAGENTS_CODE_LANGSMITH_PROJECT`, or `deepagents-code` by default) and the project you name here. Leave the variable unset to write to a single project as usual.
-</Accordion>
+<details>
+<summary>Dual-write traces to a second project</summary>
+
+To mirror agent traces to a second LangSmith project, set `DEEPAGENTS_CODE_LANGSMITH_REPLICA_PROJECTS`. This is useful for sending the same traces to both a personal project and a shared team project.
+
+```bash
+DEEPAGENTS_CODE_LANGSMITH_REPLICA_PROJECTS=team-shared
+```
+
+When set and tracing is active, each agent run is written to both the primary project (`DEEPAGENTS_CODE_LANGSMITH_PROJECT`, or `deepagents-code` by default) and the project you name here. Leave the variable unset to write to a single project as usual.
+
+</details>
 
 When configured, Deep Agents Code displays a status line with a link to the LangSmith project. In supported terminals, click the link to open it directly. You can also use `/trace` to print the URL and open it in your browser.
 
-```sh theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sh
 ✓ LangSmith tracing: 'my-project'
 ```
 
-<Tip>
-  We recommend you also set up [LangSmith Engine](/langsmith/engine), which monitors your traces, detects issues, and proposes fixes.
-</Tip>
+> [!TIP]
+> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine), which monitors your traces, detects issues, and proposes fixes.
 
 ## See also
 
-* [Deep Agents Code overview](/oss/deepagents/code/overview)
-* [Configuration](/oss/deepagents/code/configuration)
-* [Provider credentials](/oss/deepagents/code/credentials)
-* [CLI reference](/oss/deepagents/code/cli-reference)
-* [Providers](/oss/deepagents/code/providers)
-* [Memory and skills](/oss/deepagents/code/memory-and-skills)
+* [Deep Agents Code overview](https://docs.langchain.com/oss/deepagents/code/overview)
+* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
+* [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials)
+* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
+* [Providers](https://docs.langchain.com/oss/deepagents/code/providers)
+* [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

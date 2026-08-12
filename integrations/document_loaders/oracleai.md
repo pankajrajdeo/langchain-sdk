@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Oracle AI vector search document processing integration
 
 > Integrate with the Oracle AI vector search document processing document loader using LangChain Python.
@@ -23,21 +19,19 @@ If you are just starting with Oracle Database, consider exploring the [free Orac
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oracledb
-  ```
+```bash
+pip install -qU langchain-oracledb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oracledb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oracledb
+```
 
 ### Connect to Oracle Database
 
 The following sample code will show how to connect to Oracle Database. By default, python-oracledb runs in a ‘Thin’ mode which connects directly to Oracle Database. This mode does not need Oracle Client libraries. However, some additional functionality is available when python-oracledb uses them. Python-oracledb is said to be in ‘Thick’ mode when Oracle Client libraries are used. Both modes have comprehensive functionality supporting the Python Database API v2.0 Specification. See the following [guide](https://python-oracledb.readthedocs.io/en/latest/user_guide/appendix_a.html#featuresummary) that talks about features supported in each mode. You might want to switch to thick-mode if you are unable to use thin-mode.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sys
 
 import oracledb
@@ -53,7 +47,7 @@ print("Connection successful!")
 
 Now let's create a table and insert some sample docs to test.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 try:
     cursor = conn.cursor()
 
@@ -99,7 +93,7 @@ A significant advantage of utilizing OracleDocLoader is its capability to proces
 
 Below is a sample code snippet that demonstrates how to use `OracleDocLoader`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.document_loaders.oracleai import OracleDocLoader
 from langchain_core.documents import Document
 
@@ -135,7 +129,7 @@ The documents may vary in size, ranging from small to very large. Users often pr
 
 Below is a sample code illustrating how to implement this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.document_loaders.oracleai import OracleTextSplitter
 from langchain_core.documents import Document
 
@@ -173,12 +167,8 @@ Please refer to our complete demo guide [Oracle AI Vector Search End-to-End Demo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

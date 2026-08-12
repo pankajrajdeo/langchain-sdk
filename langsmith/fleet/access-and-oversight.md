@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Access & oversight
-
-> Control who can access agents, how they authenticate, and audit everything they do.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/access-and-oversight)
+Control who can access agents, how they authenticate, and audit everything they do.
 
 Fleet gives you the control layer for scaling agents across your organization: tiered permissions, credential management, human-in-the-loop oversight, and an audit trail for agent actions.
 
@@ -20,7 +16,7 @@ Fleet provides granular control over every agent in two dimensions: **who gets a
 
 You can layer these permissions. Give a core team edit access, share run-only with the broader organization, and revoke at any time.
 
-For setup instructions, see [Change access to the agent](/langsmith/fleet/manage-agent-settings#change-access-to-the-agent).
+For setup instructions, see [Change access to the agent](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#change-access-to-the-agent).
 
 ## Agent identity and credentials
 
@@ -31,19 +27,18 @@ Fleet offers two credential models that control how agents authenticate with ext
 
 This is configurable per agent, so you can choose the right model for each use case.
 
-For setup instructions, see [Agent identity](/langsmith/fleet/agent-identity).
+For setup instructions, see [Agent identity](https://docs.langchain.com/langsmith/fleet/agent-identity).
 
 ## Tool access control
 
 Fleet provides layered access control for tools, covering both **custom MCP servers** (user-added, workspace-scoped) and **built-in integrations** (platform-provided, such as Gmail, Slack, and GitHub):
 
-* **[Role-based access control (RBAC)](#role-based-permissions)**: Controls access at the role level.
-* **[Attribute-based access control (ABAC)](#attribute-based-access-control)**: Adds per-resource granularity on top of RBAC.
-* **[Workspace integration policy](#workspace-integration-policy)**: Provides an admin-controlled enable/disable gate for built-in integrations.
+* **[Role-based access control (RBAC)](https://docs.langchain.com/langsmith/fleet/access-and-oversight#role-based-permissions)**: Controls access at the role level.
+* **[Attribute-based access control (ABAC)](https://docs.langchain.com/langsmith/fleet/access-and-oversight#attribute-based-access-control)**: Adds per-resource granularity on top of RBAC.
+* **[Workspace integration policy](https://docs.langchain.com/langsmith/fleet/access-and-oversight#workspace-integration-policy)**: Provides an admin-controlled enable/disable gate for built-in integrations.
 
-<Note>
-  Tool access control is an Enterprise feature. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales).
-</Note>
+> [!NOTE]
+> Tool access control is an Enterprise feature. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales).
 
 ### Role-based permissions
 
@@ -59,27 +54,21 @@ The following permissions are available for MCP servers and integrations:
 | `mcp-servers:update` | Modify MCP server configurations                                                    |
 | `mcp-servers:delete` | Remove MCP server configurations                                                    |
 
-<Note>
-  A role with `mcp-servers:read` and `mcp-servers:invoke` can see and use all MCP servers and integrations in the workspace.
-</Note>
+> [!NOTE]
+> A role with `mcp-servers:read` and `mcp-servers:invoke` can see and use all MCP servers and integrations in the workspace.
 
-For more on RBAC, see [Role-based access control](/langsmith/rbac).
+For more on RBAC, see [Role-based access control](https://docs.langchain.com/langsmith/rbac).
 
 #### Create a role with tool permissions
 
-<Steps>
-  <Step title="Open role settings">
-    Navigate to **Settings > Roles** and click **Create role**.
-  </Step>
+### Open role settings
+Navigate to **Settings > Roles** and click **Create role**.
 
-  <Step title="Configure MCP Servers permissions">
-    Expand the **MCP Servers** section and select the permissions to include. For example, grant `Read` and `Invoke` for users who need to use tools but not manage server configurations.
-  </Step>
+### Configure MCP Servers permissions
+Expand the **MCP Servers** section and select the permissions to include. For example, grant `Read` and `Invoke` for users who need to use tools but not manage server configurations.
 
-  <Step title="Assign the role">
-    Assign the role to users in the workspace in **Settings > Members**.
-  </Step>
-</Steps>
+### Assign the role
+Assign the role to users in the workspace in **Settings > Members**.
 
 ### Attribute-based access control
 
@@ -92,11 +81,10 @@ ABAC operates on two resource types for tools:
 | `mcp_server`        | Custom MCP servers added to the workspace          |
 | `fleet_integration` | Built-in integrations (Gmail, Slack, GitHub, etc.) |
 
-<Note>
-  A role with no `mcp-servers:*` RBAC permissions can still be granted access to specific tagged resources (e.g. only Notion and Gmail) via an ABAC allow policy. Conversely, a role with broad RBAC access can be restricted from specific resources via an ABAC deny policy.
-</Note>
+> [!NOTE]
+> A role with no `mcp-servers:*` RBAC permissions can still be granted access to specific tagged resources (e.g. only Notion and Gmail) via an ABAC allow policy. Conversely, a role with broad RBAC access can be restricted from specific resources via an ABAC deny policy.
 
-For details on policy structure, operators, and managing policies via the API, see [Attribute-based access control](/langsmith/abac).
+For details on policy structure, operators, and managing policies via the API, see [Attribute-based access control](https://docs.langchain.com/langsmith/abac).
 
 ### Workspace integration policy
 
@@ -104,9 +92,8 @@ Built-in integrations have an additional control layer: a workspace-level enable
 
 If an integration is disabled at the workspace level, no user can access it regardless of their role or ABAC policies.
 
-<Note>
-  The Access control page is only visible to admin users (requires `workspaces:manage` permission).
-</Note>
+> [!NOTE]
+> The Access control page is only visible to admin users (requires `workspaces:manage` permission).
 
 ### Policy evaluation order
 
@@ -133,7 +120,7 @@ At each step:
 
 ## Observability and audit trail
 
-Agent actions in Fleet are captured in a structured [LangSmith trace](/langsmith/observability), including tool calls, decisions, and outputs. You can inspect, search, and export traces.
+Agent actions in Fleet are captured in a structured [LangSmith trace](https://docs.langchain.com/langsmith/observability), including tool calls, decisions, and outputs. You can inspect, search, and export traces.
 
 Combined with agent identity and permissions, tracing tells you which agent acted, on whose behalf, with what credentials, and what it did at each step.
 
@@ -141,16 +128,12 @@ Combined with agent identity and permissions, tracing tells you which agent acte
 
 Fleet provides a [central inbox](https://smith.langchain.com/agents/inbox) for reviewing agent actions across all your agents. You can configure agents to pause and request approval before taking specific actions, then review, approve, edit, or reject from one place.
 
-For setup instructions, see [Human-in-the-loop](/langsmith/fleet/essentials#human-in-the-loop).
+For setup instructions, see [Human-in-the-loop](https://docs.langchain.com/langsmith/fleet/essentials#human-in-the-loop).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/access-and-oversight.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/access-and-oversight.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

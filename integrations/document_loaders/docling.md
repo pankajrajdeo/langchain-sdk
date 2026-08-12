@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Docling integration
 
 > Integrate with the Docling document loader using LangChain Python.
@@ -41,7 +37,7 @@ value set, the example pipeline is then set up accordingly.
 
 ## Setup
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-docling
 ```
 
@@ -51,7 +47,7 @@ pip install -qU langchain-docling
 
 Basic initialization looks as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_docling.loader import DoclingLoader
 
 FILE_PATH = "https://arxiv.org/pdf/2408.09869"
@@ -73,11 +69,11 @@ For advanced usage, `DoclingLoader` has the following parameters:
 
 ## Load
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Token indices sequence length is longer than the specified maximum sequence length for this model (1041 > 512). Running this sequence through the model will result in indexing errors
 ```
 
@@ -86,12 +82,12 @@ Token indices sequence length is longer than the specified maximum sequence leng
 
 Inspecting some sample docs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for d in docs[:3]:
     print(f"- {d.page_content=}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 - d.page_content='arXiv:2408.09869v5  [cs.CL]  9 Dec 2024'
 - d.page_content='Docling Technical Report\nVersion 1.0\nChristoph Auer Maksym Lysak Ahmed Nassar Michele Dolfi Nikolaos Livathinos Panos Vagenas Cesar Berrospi Ramis Matteo Omenetti Fabian Lindlbauer Kasper Dinkla Lokesh Mishra Yusik Kim Shubham Gupta Rafael Teixeira de Lima Valery Weber Lucas Morin Ingmar Meijer Viktor Kuropiatnyk Peter W. J. Staar\nAI4K Group, IBM Research R¨uschlikon, Switzerland'
 - d.page_content='Abstract\nThis technical report introduces Docling , an easy to use, self-contained, MITlicensed open-source package for PDF document conversion. It is powered by state-of-the-art specialized AI models for layout analysis (DocLayNet) and table structure recognition (TableFormer), and runs efficiently on commodity hardware in a small resource budget. The code interface allows for easy extensibility and addition of new features and models.'
@@ -101,7 +97,7 @@ for d in docs[:3]:
 
 Documents can also be loaded in a lazy fashion:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc_iter = loader.lazy_load()
 for doc in doc_iter:
     pass  # you can operate on `doc` here
@@ -109,7 +105,7 @@ for doc in doc_iter:
 
 ## End-to-end example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 # https://github.com/huggingface/transformers/issues/5486:
@@ -119,20 +115,19 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 > * The following example pipeline uses HuggingFace's Inference API; for increased LLM quota, token can be provided via env var `HF_TOKEN`.
 > * Dependencies for this pipeline can be installed as shown below (`--no-warn-conflicts` meant for Colab's pre-populated Python env; feel free to remove for stricter usage):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -q --progress-bar off --no-warn-conflicts langchain-core langchain-huggingface langchain-milvus langchain python-dotenv
 ```
 
 Defining the pipeline parameters:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pathlib import Path
 from tempfile import mkdtemp
 
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_docling.loader import ExportType
-
 
 def _get_env_from_colab_or_os(key):
     try:
@@ -145,7 +140,6 @@ def _get_env_from_colab_or_os(key):
     except ImportError:
         pass
     return os.getenv(key)
-
 
 load_dotenv()
 
@@ -164,7 +158,7 @@ MILVUS_URI = str(Path(mkdtemp()) / "docling.db")
 
 Now we can instantiate our loader and load documents:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from docling.chunking import HybridChunker
 from langchain_docling import DoclingLoader
 
@@ -177,13 +171,13 @@ loader = DoclingLoader(
 docs = loader.load()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Token indices sequence length is longer than the specified maximum sequence length for this model (1041 > 512). Running this sequence through the model will result in indexing errors
 ```
 
 Determining the splits:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 if EXPORT_TYPE == ExportType.DOC_CHUNKS:
     splits = docs
 elif EXPORT_TYPE == ExportType.MARKDOWN:
@@ -203,13 +197,13 @@ else:
 
 Inspecting some sample splits:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for d in splits[:3]:
     print(f"- {d.page_content=}")
 print("...")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 - d.page_content='arXiv:2408.09869v5  [cs.CL]  9 Dec 2024'
 - d.page_content='Docling Technical Report\nVersion 1.0\nChristoph Auer Maksym Lysak Ahmed Nassar Michele Dolfi Nikolaos Livathinos Panos Vagenas Cesar Berrospi Ramis Matteo Omenetti Fabian Lindlbauer Kasper Dinkla Lokesh Mishra Yusik Kim Shubham Gupta Rafael Teixeira de Lima Valery Weber Lucas Morin Ingmar Meijer Viktor Kuropiatnyk Peter W. J. Staar\nAI4K Group, IBM Research R¨uschlikon, Switzerland'
 - d.page_content='Abstract\nThis technical report introduces Docling , an easy to use, self-contained, MITlicensed open-source package for PDF document conversion. It is powered by state-of-the-art specialized AI models for layout analysis (DocLayNet) and table structure recognition (TableFormer), and runs efficiently on commodity hardware in a small resource budget. The code interface allows for easy extensibility and addition of new features and models.'
@@ -218,7 +212,7 @@ print("...")
 
 ### Ingestion
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 from pathlib import Path
 from tempfile import mkdtemp
@@ -241,7 +235,7 @@ vectorstore = Milvus.from_documents(
 
 ### RAG
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_huggingface import HuggingFaceEndpoint
@@ -254,12 +248,12 @@ llm = HuggingFaceEndpoint(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def clip_text(text, threshold=100):
     return f"{text[:threshold]}..." if len(text) > threshold else text
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 question_answer_chain = create_stuff_documents_chain(llm, PROMPT)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 resp_dict = rag_chain.invoke({"input": QUESTION})
@@ -277,7 +271,7 @@ for i, doc in enumerate(resp_dict["context"]):
             print(f"  {key}: {clipped_val}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Question:
 Which are the main AI models in Docling?
 
@@ -313,12 +307,8 @@ headings (i.e. section), page, and precise bounding box.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/docling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/docling.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

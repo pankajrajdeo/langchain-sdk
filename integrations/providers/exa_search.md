@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Exa integrations
 
 > Integrate with Exa using LangChain Python.
@@ -12,7 +8,7 @@
 
 `Exa` integration exists in its own [partner package](https://pypi.org/project/langchain-exa/). You can install it with:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-exa
 ```
 
@@ -20,25 +16,25 @@ In order to use the package, you will also need to set the `EXA_API_KEY` environ
 
 ## Retriever
 
-You can use the [`ExaSearchRetriever`](/oss/python/integrations/tools/exa_search#using-exasearchretriever) in a standard retrieval pipeline. You can import it as follows.
+You can use the [`ExaSearchRetriever`](https://docs.langchain.com/oss/python/integrations/tools/exa_search#using-exasearchretriever) in a standard retrieval pipeline. You can import it as follows.
 
-See a [usage example](/oss/python/integrations/tools/exa_search).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/exa_search).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchRetriever
 ```
 
 ## Tools
 
-You can use Exa as an agent tool as described in the [Exa tool calling docs](/oss/python/integrations/tools/exa_search#use-within-an-agent).
+You can use Exa as an agent tool as described in the [Exa tool calling docs](https://docs.langchain.com/oss/python/integrations/tools/exa_search#use-within-an-agent).
 
-See a [usage example](/oss/python/integrations/tools/exa_search).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/exa_search).
 
 ### ExaFindSimilarResults
 
 A tool that queries the Metaphor Search API and gets back JSON.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa.tools import ExaFindSimilarResults
 ```
 
@@ -46,7 +42,7 @@ from langchain_exa.tools import ExaFindSimilarResults
 
 Exa Search tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa.tools import ExaSearchResults
 ```
 
@@ -54,7 +50,7 @@ from langchain_exa.tools import ExaSearchResults
 
 You can retrieve search results as follows
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchRetriever
 
 exa_api_key = "YOUR API KEY"
@@ -73,7 +69,7 @@ print(results)
 
 You can use advanced features like text limits, summaries, and live crawling:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchRetriever, TextContentsOptions
 
 # Create a new instance with advanced options
@@ -97,7 +93,7 @@ exa_with_custom_summary = ExaSearchRetriever(
 
 You can run the ExaSearchResults module as follows
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaSearchResults
 
 # Initialize the ExaSearchResults tool
@@ -118,7 +114,7 @@ print("Search Results:", search_results)
 
 You can run the ExaFindSimilarResults module as follows
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_exa import ExaFindSimilarResults
 
 # Initialize the ExaFindSimilarResults tool
@@ -148,12 +144,8 @@ All Exa tools support the following common parameters:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/exa_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

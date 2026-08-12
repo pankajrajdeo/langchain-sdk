@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure database for postgresql - flexible server integration
 
 > Integrate with the Azure database for postgresql - flexible server vector store using LangChain Python.
@@ -34,7 +30,7 @@ Azure Database for PostgreSQL is based on open-source Postgres. This integration
 
 First download the partner packages:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-azure-postgresql langchain-openai azure-identity
 ```
 
@@ -48,7 +44,7 @@ You will need your Azure Database for PostgreSQL [connection details](https://le
 
 Set the `USE_ENTRA_AUTH` flag to `True` if you want to use Microsoft Entra authentication. If using Entra authentication, you will only need to supply the host and database name. If using password authentication, you'll also need to set the username and password.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -67,12 +63,12 @@ if not USE_ENTRA_AUTH:
 
 ### Setup `AzureOpenAIEmbeddings`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["AZURE_OPENAI_ENDPOINT"] = "REPLACE_WITH_AZURE_OPENAI_ENDPOINT"
 os.environ["AZURE_OPENAI_API_KEY"] = getpass.getpass("Azure OpenAI API Key:")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 AZURE_OPENAI_ENDPOINT = os.environ["AZURE_OPENAI_ENDPOINT"]
 AZURE_OPENAI_API_KEY = os.environ["AZURE_OPENAI_API_KEY"]
 
@@ -98,13 +94,13 @@ The connection can be passed into the `connection` parameter of the `AzurePGVect
 
 To log into Azure, ensure you have the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed. You will need to run the following command in your terminal:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 az login
 ```
 
 Once you have logged in, the below code will be able to fetch the token.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_postgresql.common import (
     BasicAuth,
     AzurePGConnectionPool,
@@ -123,7 +119,7 @@ entra_connection_pool = AzurePGConnectionPool(
 
 If you're not using Microsoft Entra authentication, the `BasicAuth` class allows the use of username and password:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 basic_auth_connection_pool = AzurePGConnectionPool(
     azure_conn_info=ConnectionInfo(
         host=os.environ["DBHOST"],
@@ -138,7 +134,7 @@ basic_auth_connection_pool = AzurePGConnectionPool(
 
 ### Creating the vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_azure_postgresql.langchain import AzurePGVectorStore
 
@@ -154,7 +150,7 @@ vector_store = AzurePGVectorStore(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Metadata columns are specified as a string, defaulting to 'jsonb' type.
 Embedding type is not specified, defaulting to 'vector'.
 Embedding dimension is not specified, defaulting to 1536.
@@ -175,7 +171,7 @@ You can override the default parameters for metadata type, embedding dimension, 
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = AzurePGVectorStore(
     embedding=embeddings,
     table_name=table_name,
@@ -192,11 +188,11 @@ vector_store = AzurePGVectorStore(
 
 [DiskANN](https://aka.ms/pg-diskann-blog) is a scalable approximate nearest neighbor search algorithm for efficient vector search at any scale. It offers high recall, high queries per second, and low query latency, even for billion-point datasets. Those characteristics make it a powerful tool for handling large volumes of data.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.create_index()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -206,7 +202,7 @@ True
 
 Note that adding documents by ID will over-write any existing documents that match that ID.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = [
     Document(
         page_content="there are cats in the pond",
@@ -254,7 +250,7 @@ uuids = vector_store.add_documents(docs)
 uuids
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['00e2cfe6-6e58-4733-9ebf-a708fd16488a',
  '224a22a8-567f-4e12-ac0f-5cfe4f0a4480',
  '62058e25-8f5e-4388-81c2-a5b7348ffef0',
@@ -269,7 +265,7 @@ uuids
 
 ### Update items
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 updated_docs = [
     Document(
         page_content="Updated - cooking class for beginners is offered at the community center",
@@ -280,27 +276,27 @@ updated_docs = [
 vector_store.add_documents(updated_docs, ids=[uuids[-1]], on_conflict_update=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['7d7f04fd-6fb8-4a29-8708-b9f835ef270a']
 ```
 
 ### Retrieve items
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.get_by_ids([str(uuids[3])])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(id='1d37d282-504d-4d28-855a-8d39694b0265', metadata={'topic': 'food', 'doc_id': 4, 'location': 'market'}, page_content='the market also sells fresh oranges')]
 ```
 
 ### Delete items
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[3]])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -335,7 +331,7 @@ The vector store supports a set of filters that can be applied against the metad
 
 Performing a simple similarity search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_postgresql import FilterCondition, AndFilter
 
 results = vector_store.similarity_search(
@@ -352,7 +348,7 @@ for doc in results:
     print("* " + doc.page_content + " [" + str(doc.metadata) + "]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * there are cats in the pond [{'topic': 'animals', 'doc_id': 1, 'location': 'pond'}]
 * ducks are also found in the pond [{'topic': 'animals', 'doc_id': 2, 'location': 'pond'}]
 * the new art exhibit is fascinating [{'topic': 'art', 'doc_id': 5, 'location': 'museum'}]
@@ -361,7 +357,7 @@ for doc in results:
 
 If you want to use logical `AND` filters, here is an example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "ducks",
     k=10,
@@ -385,20 +381,20 @@ for doc in results:
     print("* " + doc.page_content + " [" + str(doc.metadata) + "]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * ducks are also found in the pond [{'topic': 'animals', 'doc_id': 2, 'location': 'pond'}]
 * there are cats in the pond [{'topic': 'animals', 'doc_id': 1, 'location': 'pond'}]
 ```
 
 If you want to execute a similarity search and receive the corresponding scores you can run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(query="cats", k=1)
 for doc, score in results:
     print(f"* [SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=0.528167] there are cats in the pond [{'topic': 'animals', 'doc_id': 1, 'location': 'pond'}]
 ```
 
@@ -406,18 +402,18 @@ for doc, score in results:
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(search_kwargs={"k": 1})
 retriever.invoke("kitty")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(id='00e2cfe6-6e58-4733-9ebf-a708fd16488a', metadata={'topic': 'animals', 'doc_id': 1, 'location': 'pond'}, page_content='there are cats in the pond')]
 ```
 
 If you want to use max marginal relevance search on your vector store:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.max_marginal_relevance_search(
     "query about cats",
     k=10,
@@ -433,7 +429,7 @@ for doc in results:
     print("* " + doc.page_content + " [" + str(doc.metadata) + "]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * there are cats in the pond [{'topic': 'animals', 'doc_id': 1, 'location': 'pond'}]
 * the new art exhibit is fascinating [{'topic': 'art', 'doc_id': 5, 'location': 'museum'}]
 * the library hosts a weekly story time for kids [{'topic': 'reading', 'doc_id': 9, 'location': 'library'}]
@@ -446,9 +442,9 @@ For a full list of the different searches you can execute on a `AzurePGVectorSto
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ## API reference
 
@@ -456,12 +452,8 @@ For detailed documentation of all `AzurePGVectorStore` features and configuratio
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_db_for_postgresql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_db_for_postgresql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,20 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sandbox service URLs
-
-> Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-service-urls)
+Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically.
 
 Service URLs let you access an HTTP service running inside a sandbox (a REST API, a Streamlit app, a Jupyter notebook, API documentation) without tunnels, port forwarding, or CLI tools. Each sandbox + port combination gets its own URL that you can open in a browser, call from code, or share with a teammate.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/JxIMPFSEbdqv0n3F/images/langsmith/sandboxes/sb-service-feature.png?fit=max&auto=format&n=JxIMPFSEbdqv0n3F&q=85&s=17f16908ceed5efff1dcf8620e7aea4a" alt="Service URLs view" width="2220" height="1224" data-path="images/langsmith/sandboxes/sb-service-feature.png" />
+> **Image:** [Service URLs view](https://docs.langchain.com/langsmith/sandbox-service-urls)
 
 ## Quick start
 
 Start an HTTP server inside a sandbox, then get a URL to access it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
@@ -38,7 +34,7 @@ with client.sandbox() as sb:
 
 | Scenario                                     | How                                                               |
 | -------------------------------------------- | ----------------------------------------------------------------- |
-| Preview a web app (Streamlit, Jupyter, etc.) | `sb.service(port=<PORT>)` then open `browser_url`                 |
+| Preview a web app (Streamlit, Jupyter, etc.) | `sb.service(port=)` then open `browser_url`                 |
 | Call an API from code or CI                  | `svc.get(...)` / `svc.post(...)` or `curl` with the service token |
 | Share a live demo with a teammate            | Click **Share Link** in the UI and send the URL                   |
 
@@ -57,7 +53,7 @@ Anyone with the link can access the service, even without a LangSmith account. A
 
 Call `service()` on a sandbox instance or on the client directly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 svc = sb.service(port=3000)
 
 # Or from the client, by sandbox name
@@ -67,15 +63,14 @@ svc = client.service("my-sandbox", port=3000)
 svc = sb.service(port=3000, expires_in_seconds=3600)
 ```
 
-<Note>
-  The service must be running and listening on the specified port before you request a service URL. The URL only routes traffic and does not start a service for you.
-</Note>
+> [!NOTE]
+> The service must be running and listening on the specified port before you request a service URL. The URL only routes traffic and does not start a service for you.
 
 ### Make requests
 
 The returned `ServiceURL` object has built-in HTTP helpers that handle authentication automatically. Tokens refresh transparently before they expire, so no manual management is needed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 svc = sb.service(port=8000)
 
 resp = svc.get("/api/items")
@@ -89,7 +84,7 @@ resp = svc.delete("/api/items/1")
 
 If you prefer a different HTTP client, use the raw URL and token:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import httpx
 
 svc = sb.service(port=8000)
@@ -104,7 +99,7 @@ resp = httpx.get(
 
 Use `browser_url` to open the service in a browser. It sets an authentication cookie automatically, so all subsequent page loads, images, and API calls are authenticated without tokens in the URL.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 svc = sb.service(port=8000)
 print(svc.browser_url)
 ```
@@ -113,7 +108,7 @@ You can share this URL with teammates. No LangSmith login is required to access 
 
 ### Generate a URL via the REST API
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -X POST \
   "$LANGSMITH_ENDPOINT/api/v2/sandboxes/boxes/{sandbox_name}/service-url" \
   -H "x-api-key: $LANGSMITH_API_KEY" \
@@ -123,7 +118,7 @@ curl -X POST \
 
 Response:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "browser_url": "https://{sandbox-id}--3000.smithbox.dev/_svc/auth?token=ey...",
   "service_url": "https://{sandbox-id}--3000.smithbox.dev/",
@@ -134,7 +129,7 @@ Response:
 
 ## Example: serve a FastAPI app
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith.sandbox import SandboxClient
 
 client = SandboxClient()
@@ -193,7 +188,7 @@ def create_item(item: dict):
 | **Multi-page web apps** | Full support (subdomain routing) | Full support (local port)             |
 | **Non-HTTP services**   | Not supported                    | Full support                          |
 
-Use **service URLs** for HTTP services you want to access from a browser or share with others. Use **[TCP tunnels](/langsmith/sandbox-sdk#tcp-tunnels-python)** for non-HTTP protocols (like `psql` or `redis-cli`) or when you need local-only access.
+Use **service URLs** for HTTP services you want to access from a browser or share with others. Use **[TCP tunnels](https://docs.langchain.com/langsmith/sandbox-sdk#tcp-tunnels-python)** for non-HTTP protocols (like `psql` or `redis-cli`) or when you need local-only access.
 
 ## Troubleshoot
 
@@ -205,12 +200,8 @@ Use **service URLs** for HTTP services you want to access from a browser or shar
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-service-urls.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-service-urls.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

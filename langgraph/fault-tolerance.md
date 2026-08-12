@@ -1,28 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Fault tolerance
-
-> Configure per-node timeouts, retries, and error handlers in LangGraph.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/fault-tolerance)
+Configure per-node timeouts, retries, and error handlers in LangGraph.
 
 When a node fails—from a slow external API, a transient network error, or an unhandled exception—LangGraph gives you three composable mechanisms to respond:
 
-* [**Retries**](#retries) — automatically re-run failed attempts based on exception type and backoff settings
-* [**Timeouts**](#timeouts) — cap how long a single attempt may run
-* [**Error handling**](#error-handling) — run a recovery function after all retries are exhausted
+* [**Retries**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#retries) — automatically re-run failed attempts based on exception type and backoff settings
+* [**Timeouts**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts) — cap how long a single attempt may run
+* [**Error handling**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling) — run a recovery function after all retries are exhausted
 
-Use [**`set_node_defaults`**](#graph-defaults) to configure these mechanisms once for all nodes instead of repeating them on every `add_node` call.
+Use [**`set_node_defaults`**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graph-defaults) to configure these mechanisms once for all nodes instead of repeating them on every `add_node` call.
 
 These compose in a fixed order: when a node attempt raises any exception (including [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError) from a timeout), the retry policy decides whether to retry. Only after retries are exhausted does the error handler run.
 
-For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](#graceful-shutdown).
+For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graceful-shutdown).
 
-<Note>
-  Per-node timeouts and node-level error handlers require `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Per-node timeouts and node-level error handlers require `langgraph>=1.2`.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{init:{'theme':'base','themeVariables':{'lineColor':'#40668D','primaryColor':'#E5F4FF','primaryTextColor':'#030710','primaryBorderColor':'#006DDD'}}}%%
 flowchart LR
     start([Attempt starts]) --> exec[Run node]
@@ -51,7 +46,7 @@ A retry policy automatically re-runs a failed node attempt based on exception ty
 
 Pass `retry_policy=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import RetryPolicy
 
 builder.add_node(
@@ -95,7 +90,7 @@ For exceptions from popular HTTP libraries such as `requests` and `httpx`, it on
 
 Pass a callable or exception type to `retry_on`. Import `default_retry_on` to extend the default behavior:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import RetryPolicy, default_retry_on
 
 def custom_retry_on(exc: BaseException) -> bool:
@@ -114,7 +109,7 @@ builder.add_node(
 
 Use execution info inside a node to inspect the current attempt number. This is useful for switching to a fallback when the primary call keeps failing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.runtime import Runtime
 from langgraph.types import RetryPolicy
@@ -149,13 +144,12 @@ builder.add_edge("my_node", END)
 
 ## Timeouts
 
-<Note>
-  Requires `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`.
 
 The `timeout=` parameter on [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) caps how long a single node attempt may run. Pass a number (seconds), a `timedelta`, or a [`TimeoutPolicy`](https://reference.langchain.com/python/langgraph/types/TimeoutPolicy) for separate run and idle limits:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import timedelta
 from langgraph.types import TimeoutPolicy
 
@@ -171,15 +165,14 @@ builder.add_node(
 )
 ```
 
-<Warning>
-  Node timeouts only apply to **async** nodes. Sync nodes with a `timeout` are rejected at compile time. To wrap blocking I/O, use `asyncio.to_thread` inside an async node.
-</Warning>
+> [!WARNING]
+> Node timeouts only apply to **async** nodes. Sync nodes with a `timeout` are rejected at compile time. To wrap blocking I/O, use `asyncio.to_thread` inside an async node.
 
 ### Run timeout
 
 `run_timeout` is a hard wall-clock cap on a single attempt. It is never refreshed, regardless of node activity:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import TimeoutPolicy
 
 builder.add_node(
@@ -195,7 +188,7 @@ When the limit is exceeded, LangGraph raises [`NodeTimeoutError`](https://refere
 
 `idle_timeout` is a progress-resetting cap. It fires only when the node stops making observable progress for the specified duration—unlike `run_timeout`, the clock resets whenever the node produces a progress signal:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 builder.add_node(
     "call_model",
     call_model,
@@ -219,7 +212,7 @@ Under the default `refresh_on="auto"`, the idle clock resets on any of the follo
 
 Set `refresh_on="heartbeat"` to narrow the refresh source to explicit `runtime.heartbeat()` calls only. This is useful when you want a strict idle definition that isn't reset by chatty subordinates:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 builder.add_node(
     "call_model",
     call_model,
@@ -231,7 +224,7 @@ builder.add_node(
 
 For long-running work that doesn't naturally emit progress signals, call `runtime.heartbeat()` to manually reset the idle clock:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, START, END
 from langgraph.runtime import Runtime
 from langgraph.types import TimeoutPolicy
@@ -272,7 +265,7 @@ When a timeout fires, LangGraph raises [`NodeTimeoutError`](https://reference.la
 
 `NodeTimeoutError` is retryable by default. Combining `timeout` with a retry policy works out of the box—the timeout clock resets on each new attempt, and writes from a timed-out attempt are cleared before the next retry:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import RetryPolicy, TimeoutPolicy
 
 builder.add_node(
@@ -287,7 +280,7 @@ builder.add_node(
 
 When using [`Send`](https://reference.langchain.com/python/langgraph/types/Send) to dispatch nodes dynamically (for example, in map-reduce patterns), you can pass a timeout directly on the `Send` to override the target node's static timeout for that specific push:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import Send, TimeoutPolicy
 
 def fan_out(state: OverallState):
@@ -301,15 +294,14 @@ If the timeout is omitted on the `Send`, the target node's timeout (set at [`add
 
 ## Error handling
 
-<Note>
-  Requires `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`.
 
 An error handler runs after a node fails and all retries are exhausted. It receives the current state and can update it or route to a different node using [`Command`](https://reference.langchain.com/python/langgraph/types/Command). This is useful for compensation flows (Saga patterns) where you want to recover gracefully rather than abort the entire graph.
 
 Pass `error_handler=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 from langgraph.types import Command, RetryPolicy
 from langgraph.graph import StateGraph, START
@@ -350,7 +342,7 @@ The handler fires only after the retry policy is exhausted, or immediately if no
 
 Error handlers receive failure context through a typed `error: NodeError` parameter, injected by type annotation (the same pattern as `runtime: Runtime`):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 
 def my_handler(state: State, error: NodeError) -> Command:
@@ -371,7 +363,7 @@ The `error: NodeError` parameter is opt-in. Handlers that don't need failure con
 
 Error handlers can return a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) to update state and route to a specific node, enabling Saga / compensation patterns:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 from langgraph.types import Command, RetryPolicy
 from langgraph.graph import StateGraph, START
@@ -415,15 +407,13 @@ graph = (
 
 ### Resume-safe failures
 
-<Note>
-  Failure provenance is checkpointed. If the graph is interrupted or the process crashes after a node fails but before the handler completes, the handler sees the same `NodeError` context when the graph resumes from its checkpoint.
-</Note>
+> [!NOTE]
+> Failure provenance is checkpointed. If the graph is interrupted or the process crashes after a node fails but before the handler completes, the handler sees the same `NodeError` context when the graph resumes from its checkpoint.
 
 ### Behavior with `interrupt()`
 
-<Warning>
-  `interrupt()` raised inside a node is **not** routed to the error handler. Interrupts use the `GraphBubbleUp` mechanism to pause graph execution for human-in-the-loop workflows, bypassing both retry policies and error handlers. The graph pauses as usual.
-</Warning>
+> [!WARNING]
+> `interrupt()` raised inside a node is **not** routed to the error handler. Interrupts use the `GraphBubbleUp` mechanism to pause graph execution for human-in-the-loop workflows, bypassing both retry policies and error handlers. The graph pauses as usual.
 
 ### Subgraph failures
 
@@ -431,13 +421,12 @@ If a node wraps a subgraph and the subgraph raises an unhandled exception, that 
 
 ## Graph defaults
 
-<Note>
-  Requires `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`.
 
 Instead of repeating the same `retry_policy=`, `error_handler=`, `timeout=`, or `cache_policy=` on every `add_node` call, use [`set_node_defaults`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/set_node_defaults) to configure graph-wide defaults in one place:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 from langgraph.types import RetryPolicy, TimeoutPolicy
 from langgraph.graph import StateGraph, START
@@ -469,7 +458,7 @@ Both `step_a` and `step_b` now share the same retry policy, error handler, and t
 
 Per-node values passed directly to `add_node()` always override the defaults set by `set_node_defaults()`. Defaults are resolved at `compile()` time, so you can call `set_node_defaults()` before or after `add_node()` in any order:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = (
     StateGraph(State)
     .set_node_defaults(error_handler=default_error_handler)
@@ -484,7 +473,7 @@ graph = (
 
 The `error_handler` default is particularly valuable when every graph run maps to an external process (for example a background job row) and any unhandled node failure should mark that process as failed, without repeating `error_handler=` on every `add_node`. Per-node handlers still take precedence when a step needs its own logic:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.errors import NodeError
 from langgraph.graph import StateGraph, START
 from langgraph.types import Command, RetryPolicy
@@ -534,9 +523,9 @@ graph = (
 
 If `fetch_data` fails after retries, `mark_process_failed` runs. If `charge_payment` fails after retries, `refund_payment` runs instead because the per-node handler overrides the default.
 
-The handler accepts the same `(state, error: NodeError)` signature described in [Error handling](#error-handling). It also accepts `RunnableConfig` as an optional third argument if you need access to config values such as `thread_id`:
+The handler accepts the same `(state, error: NodeError)` signature described in [Error handling](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling). It also accepts `RunnableConfig` as an optional third argument if you need access to config values such as `thread_id`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.runnables import RunnableConfig
 
 def mark_process_failed(
@@ -565,7 +554,7 @@ Defaults set on a parent graph are **not** inherited by subgraphs. Each graph ma
 
 The same `timeout=` and `retry_policy=` parameters are available on `@task` and `@entrypoint` in the functional API:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.func import entrypoint, task
 from langgraph.types import RetryPolicy, TimeoutPolicy
 
@@ -589,13 +578,12 @@ The behavior is identical to `add_node`: `NodeTimeoutError` is raised on timeout
 
 Cooperative shutdown lets you stop an in-flight graph run after the current superstep completes and save a resumable checkpoint. This is useful for handling SIGTERM signals or any external supervisor that needs to reclaim resources without losing work.
 
-<Note>
-  Requires `langgraph>=1.2`.
-</Note>
+> [!NOTE]
+> Requires `langgraph>=1.2`.
 
 Create a [`RunControl`](https://reference.langchain.com/python/langgraph/runtime/RunControl) and pass it as `control=` to `invoke` or `stream`. Call `request_drain()` from any thread to signal that the run should stop:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.runtime import RunControl
 from langgraph.errors import GraphDrained
 
@@ -628,7 +616,7 @@ Drain is cooperative and operates between supersteps, never preempting work that
 
 Resume a drained run with `invoke(None, config)` using the same `thread_id`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = graph.invoke(None, config)
 ```
 
@@ -636,7 +624,7 @@ result = graph.invoke(None, config)
 
 Access drain state through the `runtime` parameter to adjust node behavior before the superstep boundary is reached:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.runtime import Runtime
 
 async def my_node(state: State, runtime: Runtime) -> State:
@@ -650,7 +638,7 @@ async def my_node(state: State, runtime: Runtime) -> State:
 
 The recommended pattern for handling process shutdown:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import signal
 from langgraph.runtime import RunControl
 from langgraph.errors import GraphDrained
@@ -665,9 +653,8 @@ except GraphDrained as e:
     # Resume on next startup with the same config
 ```
 
-<Note>
-  `request_drain()` does not cancel running asyncio tasks or kill threads. For a hard upper bound, pair drain with a graceful timeout and task cancellation.
-</Note>
+> [!NOTE]
+> `request_drain()` does not cancel running asyncio tasks or kill threads. For a hard upper bound, pair drain with a graceful timeout and task cancellation.
 
 ## Limitations
 
@@ -678,12 +665,8 @@ except GraphDrained as e:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/fault-tolerance.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

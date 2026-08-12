@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Approval modes
-
-> Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/approval-modes)
+Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
 
 By default, Deep Agents Code asks for your approval before running potentially consequential actions. These are called **gated actions** and include things like:
 
@@ -25,38 +21,33 @@ Read-only tools such as `ls`, `read_file`, `glob`, and `grep` always run without
 
 Toggle between Manual and Auto at any time during a session with `Shift+Tab` or `Ctrl+T`. YOLO cannot be entered through the keyboard toggle.
 
-<Warning>
-  Auto is an authorization heuristic for a local coding agent. It is **not** sandbox containment, an operating-system boundary, or a guarantee that model-generated actions are safe.
-</Warning>
+> [!WARNING]
+> Auto is an authorization heuristic for a local coding agent. It is **not** sandbox containment, an operating-system boundary, or a guarantee that model-generated actions are safe.
 
 ## Enable Auto
 
 Auto is an experimental beta. To use it, set the opt-in flag and then choose Auto for your session.
 
-<Steps>
-  <Step title="Set the experimental opt-in" icon="key">
-    Add the environment variable to your shell or `~/.deepagents/.env`:
+### Set the experimental opt-in
+Add the environment variable to your shell or `~/.deepagents/.env`:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export DEEPAGENTS_CODE_EXPERIMENTAL=1
-    ```
-  </Step>
+```bash
+export DEEPAGENTS_CODE_EXPERIMENTAL=1
+```
 
-  <Step title="Launch with Auto" icon="terminal">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode -y
-    ```
+### Launch with Auto
+```bash
+dcode -y
+```
 
-    Or set it as your default in `~/.deepagents/config.toml`:
+Or set it as your default in `~/.deepagents/config.toml`:
 
-    ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    [startup]
-    mode = "auto"
-    ```
+```toml
+[startup]
+mode = "auto"
+```
 
-    You can also toggle Auto on and off mid-session with `Shift+Tab` or `Ctrl+T`.
-  </Step>
-</Steps>
+You can also toggle Auto on and off mid-session with `Shift+Tab` or `Ctrl+T`.
 
 If Auto is requested without the experimental opt-in, or in a sandboxed session, it falls back to Manual with a warning.
 
@@ -64,22 +55,19 @@ If Auto is requested without the experimental opt-in, or in a sandboxed session,
 
 YOLO runs gated actions without any review. Use it only when you accept that the agent can take any action without asking.
 
-<Steps>
-  <Step title="Launch with YOLO" icon="terminal">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode --yolo
-    ```
+### Launch with YOLO
+```bash
+dcode --yolo
+```
 
-    Accept the one-time risk acknowledgement when prompted. The acknowledgement is stored locally so you do not see it again on later launches.
+Accept the one-time risk acknowledgement when prompted. The acknowledgement is stored locally so you do not see it again on later launches.
 
-    Or set it as your default in `~/.deepagents/config.toml`:
+Or set it as your default in `~/.deepagents/config.toml`:
 
-    ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    [startup]
-    mode = "yolo"
-    ```
-  </Step>
-</Steps>
+```toml
+[startup]
+mode = "yolo"
+```
 
 A session launched in YOLO moves to Manual when you press `Shift+Tab` or `Ctrl+T`. You cannot switch back to YOLO with the keyboard toggle.
 
@@ -92,48 +80,51 @@ Auto keeps the same gated-action rules as Manual but changes how those actions a
 
 After repeated denials or classifier failures, Auto stops and shows you the normal approval prompt for the next batch, then continues in Auto mode.
 
-<Accordion title="Auto decision flow" icon="flow">
-  ```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  flowchart TD
-      A[Model proposes tool calls] --> B{Covered by the approval policy?}
-      B -->|No| X[Existing tool behavior is unchanged]
-      B -->|Yes| S{Still in Auto, with readable history?}
-      S -->|No| J[Open the approval UI]
-      S -->|Yes| C{Narrow deterministic allow?}
-      C -->|Yes| R[Execute without a classifier call]
-      C -->|No| D[Build one structured decision batch]
-      D --> H{Already reviewed, or earlier denials or failures require human review?}
-      H -->|Yes| J
-      H -->|No| E[Active model reviews effects against the user request]
-      E -->|Allow| R
-      E -->|Deny| Q{Total-denial threshold reached?}
-      Q -->|No| F[Return a sanitized error result]
-      Q -->|Yes| J
-      E -->|Unavailable or invalid| G[Return a compact unavailable result]
-      F --> I[Agent can revise its plan]
-      G --> I
-      J -->|Approve| R
-      J -->|Reject| K[Return a rejection result]
-      J -->|Switch to Manual| L[Persist Manual, then review the full gated batch]
-      R --> M[Reconcile the result and continue]
-      K --> M
-      I --> M
-      L --> M
+<details>
+<summary>Auto decision flow</summary>
 
-      classDef trigger fill:#F6FFDB,stroke:#6E8900,stroke-width:2px,color:#2E3900
-      classDef process fill:#E5F4FF,stroke:#006DDD,stroke-width:2px,color:#030710
-      classDef decision fill:#FDF3FF,stroke:#7E65AE,stroke-width:2px,color:#504B5F
-      classDef output fill:#EBD0F0,stroke:#885270,stroke-width:2px,color:#441E33
-      classDef alert fill:#F8E8E6,stroke:#B27D75,stroke-width:2px,color:#634643
+```mermaid
+flowchart TD
+    A[Model proposes tool calls] --> B{Covered by the approval policy?}
+    B -->|No| X[Existing tool behavior is unchanged]
+    B -->|Yes| S{Still in Auto, with readable history?}
+    S -->|No| J[Open the approval UI]
+    S -->|Yes| C{Narrow deterministic allow?}
+    C -->|Yes| R[Execute without a classifier call]
+    C -->|No| D[Build one structured decision batch]
+    D --> H{Already reviewed, or earlier denials or failures require human review?}
+    H -->|Yes| J
+    H -->|No| E[Active model reviews effects against the user request]
+    E -->|Allow| R
+    E -->|Deny| Q{Total-denial threshold reached?}
+    Q -->|No| F[Return a sanitized error result]
+    Q -->|Yes| J
+    E -->|Unavailable or invalid| G[Return a compact unavailable result]
+    F --> I[Agent can revise its plan]
+    G --> I
+    J -->|Approve| R
+    J -->|Reject| K[Return a rejection result]
+    J -->|Switch to Manual| L[Persist Manual, then review the full gated batch]
+    R --> M[Reconcile the result and continue]
+    K --> M
+    I --> M
+    L --> M
 
-      class A trigger
-      class B,S,C,H,Q decision
-      class J output
-      class X,R,M process
-      class D,E,I,L process
-      class F,G,K alert
-  ```
-</Accordion>
+    classDef trigger fill:#F6FFDB,stroke:#6E8900,stroke-width:2px,color:#2E3900
+    classDef process fill:#E5F4FF,stroke:#006DDD,stroke-width:2px,color:#030710
+    classDef decision fill:#FDF3FF,stroke:#7E65AE,stroke-width:2px,color:#504B5F
+    classDef output fill:#EBD0F0,stroke:#885270,stroke-width:2px,color:#441E33
+    classDef alert fill:#F8E8E6,stroke:#B27D75,stroke-width:2px,color:#634643
+
+    class A trigger
+    class B,S,C,H,Q decision
+    class J output
+    class X,R,M process
+    class D,E,I,L process
+    class F,G,K alert
+```
+
+</details>
 
 ### Select a classifier model
 
@@ -141,55 +132,51 @@ By default, the Auto classifier uses the same model as the main agent. You can p
 
 Set the classifier model through any of these source:
 
-<Tabs>
-  <Tab title="TUI command">
-    Run `/auto model` to open the interactive model picker and select a classifier model for the current session. To specify a model directly, pass it as an argument:
+#### TUI command
+Run `/auto model` to open the interactive model picker and select a classifier model for the current session. To specify a model directly, pass it as an argument:
 
-    ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    /auto model openai:gpt-5.6-luna
-    /auto model clear
-    ```
+```txt
+/auto model openai:gpt-5.6-luna
+/auto model clear
+```
 
-    Use `/auto model clear` to go back to inheriting the main model.
-  </Tab>
+Use `/auto model clear` to go back to inheriting the main model.
 
-  <Tab title="CLI flag">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode -y --auto-classifier-model openai:gpt-5.6-luna
-    ```
+#### CLI flag
+```bash
+dcode -y --auto-classifier-model openai:gpt-5.6-luna
+```
 
-    `--auto-classifier-model` is only accepted in interactive TUI sessions.
-  </Tab>
+`--auto-classifier-model` is only accepted in interactive TUI sessions.
 
-  <Tab title="Environment variable">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL="openai:gpt-5.6-luna"
-    ```
+#### Environment variable
+```bash
+export DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL="openai:gpt-5.6-luna"
+```
 
-    <Warning>
-      A **project `.env`** cannot set `DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL`. Only shell exports, `~/.deepagents/.env`, the CLI flag, and `/auto model` work.
-    </Warning>
-  </Tab>
+> [!WARNING]
+> A **project `.env`** cannot set `DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL`. Only shell exports, `~/.deepagents/.env`, the CLI flag, and `/auto model` work.
 
-  <Tab title="config.toml">
-    ```toml title="~/.deepagents/config.toml" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    [models]
-    auto_classifier = "openai:gpt-5.6-luna"
-    ```
-  </Tab>
-</Tabs>
+#### config.toml
+```toml
+[models]
+auto_classifier = "openai:gpt-5.6-luna"
+```
 
 <br />
 
-<Accordion title="Precedence order">
-  1. **`/auto model` TUI command**: takes effect immediately for the current session.
-  2. **`--auto-classifier-model` flag**: sets the classifier on launch (interactive TUI sessions only).
-  3. **`DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` environment variable**: applies at startup.
-  4. **`[models].auto_classifier` in `config.toml`**: your persistent default.
-  5. **Inherit**: uses the main agent model (the default when nothing is configured).
+<details>
+<summary>Precedence order</summary>
 
-  A blank value at any level means "inherit from the next source". For example, an unset env var falls through to `config.toml`.
-</Accordion>
+1. **`/auto model` TUI command**: takes effect immediately for the current session.
+2. **`--auto-classifier-model` flag**: sets the classifier on launch (interactive TUI sessions only).
+3. **`DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` environment variable**: applies at startup.
+4. **`[models].auto_classifier` in `config.toml`**: your persistent default.
+5. **Inherit**: uses the main agent model (the default when nothing is configured).
+
+A blank value at any level means "inherit from the next source". For example, an unset env var falls through to `config.toml`.
+
+</details>
 
 The TUI displays which model is reviewing when Auto turns on and inside `/auto model` output.
 
@@ -200,7 +187,7 @@ The decision plan is bound to the thread, mode, batch, and exact gated calls. Mi
 ### Understand scope and limitations
 
 * The Manual approval menu can enable Auto for the current thread. Threshold fallback can switch permanently to Manual or perform a one-off review while leaving Auto enabled.
-* The active model is not an independent security authority. [MCP read-only annotations](/oss/deepagents/code/mcp-tools#read-only-tool-annotations-in-auto-mode) are trusted as a deliberate beta tradeoff.
+* The active model is not an independent security authority. [MCP read-only annotations](https://docs.langchain.com/oss/deepagents/code/mcp-tools#read-only-tool-annotations-in-auto-mode) are trusted as a deliberate beta tradeoff.
 * Parent-level Auto review does not cover actions performed inside delegated subagents or broader explicitly configured `js_eval` fan-out. Model providers and tracing backends may still observe classifier inputs and outputs even though the TUI hides them.
 
 ## Where Auto and YOLO are available
@@ -229,18 +216,14 @@ Auto also falls back to Manual when:
 
 ## See also
 
-* [CLI reference](/oss/deepagents/code/cli-reference)
-* [Configuration](/oss/deepagents/code/configuration)
-* [Remote sandboxes](/oss/deepagents/code/remote-sandboxes)
+* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
+* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
+* [Remote sandboxes](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/approval-modes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/approval-modes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

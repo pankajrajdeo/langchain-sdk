@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Skills
-
-> Use skills to give your agents access to specific capabilities.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/skills)
+Use skills to give your agents access to specific capabilities.
 
 Skills are reusable capabilities that provide specialized workflows and domain knowledge to your agent. Each skill is stored in the agent's long-term memory at `memories/skills/<skill-name>`. The skill's name and description is loaded when the agent starts. Based on this info the agent can decide to use the skill. The full skill file is only loaded when the agent determines it is relevant to the current task. Any referenced additional resources may be loaded by the agent if they become relevant.
 
@@ -13,9 +9,8 @@ Using skills can help:
 * Save on token usage by only providing context relevant to the current task.
 * Prevent the agent from having too much context in the system prompt, which can lead to hallucinations and incorrect responses.
 
-<Info>
-  Fleet skills are built on [Deep Agents](/oss/python/deepagents/skills) and follow the [Agent Skills specification](https://agentskills.io/specification). For details on skill structure, the `SKILL.md` format, and authoring best practices, see the [Deep Agents skills documentation](/oss/python/deepagents/skills).
-</Info>
+> [!NOTE]
+> Fleet skills are built on [Deep Agents](https://docs.langchain.com/oss/python/deepagents/skills) and follow the [Agent Skills specification](https://agentskills.io/specification). For details on skill structure, the `SKILL.md` format, and authoring best practices, see the [Deep Agents skills documentation](https://docs.langchain.com/oss/python/deepagents/skills).
 
 ## Private vs. shared skills
 
@@ -43,41 +38,32 @@ You can create a skill two ways:
 * **With AI**: Use natural language to describe the skill and the agent will create it for you. You can also add additional resources. Any additional files must be referenced in `SKILL.md` for the agent to be aware of them.
 * **Manually**: Create a skill with a `SKILL.md` file.
 
-<Note>
-  By default, skills are **private** to the agent they belong to and are stored in the agent's long-term memory. You can [share a skill with the workspace](#share-a-skill).
-</Note>
+> [!NOTE]
+> By default, skills are **private** to the agent they belong to and are stored in the agent's long-term memory. You can [share a skill with the workspace](https://docs.langchain.com/langsmith/fleet/skills#share-a-skill).
 
-<Tabs>
-  <Tab title="With AI">
-    In [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills), select an agent and prompt it to create a skill:
+#### With AI
+In [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills), select an agent and prompt it to create a skill:
 
-    <Prompt description="Create a skill that helps the agent use the web to research a topic.">
-      Create a skill that helps the agent use the web to research a topic. Use when asked to research a topic, person, company, technology, event, or any question that requires gathering and synthesizing information from the web. Covers news lookups, competitive analysis, background research, and fact-finding tasks. Prefer `tavily_web_search` for most queries.
-    </Prompt>
+> **Prompt:** Create a skill that helps the agent use the web to research a topic.
+Create a skill that helps the agent use the web to research a topic. Use when asked to research a topic, person, company, technology, event, or any question that requires gathering and synthesizing information from the web. Covers news lookups, competitive analysis, background research, and fact-finding tasks. Prefer `tavily_web_search` for most queries.
 
-    You can also turn a previous conversation into a reusable skill at any time. After completing a task, ask the agent to capture the workflow:
+You can also turn a previous conversation into a reusable skill at any time. After completing a task, ask the agent to capture the workflow:
 
-    <Prompt description="Turn this conversation into a reusable skill.">
-      Turn what we just did into a skill so you can repeat it in the future.
-    </Prompt>
-  </Tab>
+> **Prompt:** Turn this conversation into a reusable skill.
+Turn what we just did into a skill so you can repeat it in the future.
 
-  <Tab title="From a template">
-    1. Navigate to [**Fleet > Skills**](https://smith.langchain.com/agents/skills).
-    2. Browse available templates and select one to add to your agent.
-  </Tab>
+#### From a template
+1. Navigate to [**Fleet > Skills**](https://smith.langchain.com/agents/skills).
+2. Browse available templates and select one to add to your agent.
 
-  <Tab title="Manually">
-    1. Select an agent in [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills).
-    2. In the sidebar, expand the **Knowledge** drawer.
-    3. In the **Skills** section, click **+ Add skill**.
-    4. Enter the skill name, description, and instructions.
-  </Tab>
-</Tabs>
+#### Manually
+1. Select an agent in [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills).
+2. In the sidebar, expand the **Knowledge** drawer.
+3. In the **Skills** section, click **+ Add skill**.
+4. Enter the skill name, description, and instructions.
 
-<Tip>
-  When you create a new agent, Fleet automatically generates relevant skills if the agent would benefit from them. These skills are private by default. You can [share them to your workspace](#share-a-skill) from the agent sidebar.
-</Tip>
+> [!TIP]
+> When you create a new agent, Fleet automatically generates relevant skills if the agent would benefit from them. These skills are private by default. You can [share them to your workspace](https://docs.langchain.com/langsmith/fleet/skills#share-a-skill) from the agent sidebar.
 
 ## Fix recurring mistakes
 
@@ -85,9 +71,8 @@ The default response to an agent mistake is to correct it in the moment. A skill
 
 When an agent handles a task incorrectly, correct it, then ask it to capture the fix:
 
-<Prompt description="Capture this fix as a skill.">
-  Turn this correction into a skill so you always handle it this way.
-</Prompt>
+> **Prompt:** Capture this fix as a skill.
+Turn this correction into a skill so you always handle it this way.
 
 The agent creates a `SKILL.md` encoding the correct behavior. On future sessions, it reads the skill before handling that task rather than reasoning from scratch.
 
@@ -100,9 +85,8 @@ The agent creates a `SKILL.md` encoding the correct behavior. On future sessions
 
 ## Edit a shared skill
 
-<Note>
-  Only the user who created the shared skill can edit it.
-</Note>
+> [!NOTE]
+> Only the user who created the shared skill can edit it.
 
 1. Navigate to [**Fleet > Skills**](https://smith.langchain.com/agents/skills).
 2. Select the skill to edit.
@@ -114,13 +98,12 @@ The agent creates a `SKILL.md` encoding the correct behavior. On future sessions
 1. Select an agent in [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills).
 2. In the sidebar, expand the **Knowledge** drawer.
 3. In the **Skills** section, select the skill to share.
-4. Click <Icon icon="share" /> **Share**.
+4. Click  **Share**.
 
 Once shared, the skill appears on the [**Skills**](https://smith.langchain.com/agents/skills) page. You can add shared skills to any agent in the workspace from the agent sidebar, and the general-purpose chat picks them up automatically.
 
-<Note>
-  Only the creator of a shared skill can edit or delete it.
-</Note>
+> [!NOTE]
+> Only the creator of a shared skill can edit or delete it.
 
 ## Delete a private skill
 
@@ -128,19 +111,18 @@ Deleting a private skill removes it permanently, since it is stored in that agen
 
 1. Select the agent in [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills).
 2. In the sidebar, expand the **Knowledge** drawer.
-3. In the **Skills** section, click the <Icon icon="trash" /> icon for the skill to delete.
+3. In the **Skills** section, click the  icon for the skill to delete.
 
 ## Delete a shared skill
 
 Only the user who created the shared skill can delete it.
 
-<Warning>
-  Deleting a skill removes it from the workspace and from all agents that use it. This action cannot be undone.
-</Warning>
+> [!WARNING]
+> Deleting a skill removes it from the workspace and from all agents that use it. This action cannot be undone.
 
 1. Navigate to [**Fleet > Skills**](https://smith.langchain.com/agents/skills).
 2. Select the skill to delete.
-3. Click the <Icon icon="trash" /> **Delete skill** icon.
+3. Click the  **Delete skill** icon.
 
 ## Use Fleet skills in local development
 
@@ -148,7 +130,7 @@ Download skills from your Fleet workspace with the LangSmith CLI and install the
 
 By default, files are saved to `~/.agents/skills/[skill-name]/` and symlinked into `~/.claude/skills/[skill-name]/`.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith fleet skills pull [skill-name] [flags]
 ```
 
@@ -161,7 +143,7 @@ langsmith fleet skills pull [skill-name] [flags]
 
 For example:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 $ langsmith fleet skills pull web-research --format pretty
 Installed skill "web-research" to ~/.agents/skills/web-research
   Linked: ~/.claude/skills/web-research
@@ -174,12 +156,8 @@ web-research/
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

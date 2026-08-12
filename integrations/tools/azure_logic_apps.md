@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure Logic Apps integration
 
 > Integrate with Azure Logic Apps using LangChain Python.
@@ -32,15 +28,13 @@ Install the integration package and configure your Azure credentials.
 
 Install the package with the `tools` extra:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U "langchain-azure-ai[tools]"
-  ```
+```bash
+pip install -U "langchain-azure-ai[tools]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langchain-azure-ai[tools]"
-  ```
-</CodeGroup>
+```bash
+uv add "langchain-azure-ai[tools]"
+```
 
 This extra installs the required `azure-mgmt-logic` dependency.
 
@@ -56,7 +50,7 @@ Before using this tool, you need:
 
 The tool uses `DefaultAzureCredential()` by default, which supports various authentication methods including environment variables, managed identity, and interactive login.
 
-```python Initialize credential icon="shield-lock" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 
 credential = DefaultAzureCredential()
@@ -64,7 +58,7 @@ credential = DefaultAzureCredential()
 
 You can also pass a specific credential explicitly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import ManagedIdentityCredential
 
 credential = ManagedIdentityCredential()
@@ -74,7 +68,7 @@ credential = ManagedIdentityCredential()
 
 ### Instantiate the tool
 
-```python Initialize tool icon="arrows-shuffle" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools import AzureLogicAppTool
 
 tool = AzureLogicAppTool(
@@ -87,7 +81,7 @@ tool = AzureLogicAppTool(
 
 ### Invoke the tool
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 # Simple text input
@@ -108,7 +102,7 @@ print(result)
 
 Pass the tool to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent).
 
-```python Agent with Logic Apps icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
@@ -138,35 +132,31 @@ agent = create_agent(
 
 ### Parameters
 
-<Accordion title="Configuration options">
-  <ParamField body="subscription_id" type="str" required>
-    Your Azure subscription ID where the Logic Apps are hosted.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="resource_group" type="str" required>
-    The Azure Resource Group name where the Logic App is deployed.
-  </ParamField>
+#### `Field` — `str`
+Your Azure subscription ID where the Logic Apps are hosted.
 
-  <ParamField body="logic_app_name" type="str" required>
-    The name of the Logic App workflow to invoke.
-  </ParamField>
+#### `Field` — `str`
+The Azure Resource Group name where the Logic App is deployed.
 
-  <ParamField body="trigger_name" type="str" required>
-    The name of the trigger in the Logic App to invoke. Typically this is `manual_trigger` or `http_request` for HTTP request-based triggers.
-  </ParamField>
+#### `Field` — `str`
+The name of the Logic App workflow to invoke.
 
-  <ParamField body="credential" type="TokenCredential | None" default="None">
-    Optional Azure credential for authentication. If `None`, `DefaultAzureCredential()` is used. Can be any Azure SDK credential such as `ManagedIdentityCredential`, `ClientSecretCredential`, etc.
-  </ParamField>
+#### `Field` — `str`
+The name of the trigger in the Logic App to invoke. Typically this is `manual_trigger` or `http_request` for HTTP request-based triggers.
 
-  <ParamField body="name" type="str" default="azure_logic_app_tool">
-    The name of the tool. Customize this for different Logic Apps or use cases.
-  </ParamField>
+#### `Field` — `TokenCredential | None`
+Optional Azure credential for authentication. If `None`, `DefaultAzureCredential()` is used. Can be any Azure SDK credential such as `ManagedIdentityCredential`, `ClientSecretCredential`, etc.
 
-  <ParamField body="description" type="str">
-    A description of the tool's purpose. Customize this to help the agent understand when to use this specific Logic App.
-  </ParamField>
-</Accordion>
+#### `Field` — `str`
+The name of the tool. Customize this for different Logic Apps or use cases.
+
+#### `Field` — `str`
+A description of the tool's purpose. Customize this to help the agent understand when to use this specific Logic App.
+
+</details>
 
 ## Input format
 
@@ -177,7 +167,7 @@ The tool accepts input as either:
 
 ### Examples
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Plain text input
 tool.invoke("Process this order")
 # Sent as: {"input": "Process this order"}
@@ -196,7 +186,7 @@ tool.invoke(json.dumps(payload))
 
 The tool returns a JSON response indicating success or failure:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "result": "Successfully invoked <logic-app-name>."
 }
@@ -204,7 +194,7 @@ The tool returns a JSON response indicating success or failure:
 
 Or on error:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "error": "Error invoking <logic-app-name> (HTTP_STATUS): ERROR_DETAILS"
 }
@@ -212,18 +202,14 @@ Or on error:
 
 ## API reference
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools import AzureLogicAppTool
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_logic_apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_logic_apps.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

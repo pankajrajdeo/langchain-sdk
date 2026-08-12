@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Troubleshoot variable caching
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/troubleshooting-variable-caching)
 If you're not seeing traces in your tracing project or notice traces logged to the wrong project/workspace, the issue might be due to LangSmith's default environment variable caching. This is especially common when running LangSmith within a Jupyter notebook. Follow these steps to diagnose and resolve the issue:
 
 ## 1. Verify your environment variables
 
 First, check that the environment variables are set correctly by running:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 print(os.getenv("LANGSMITH_PROJECT"))
 print(os.getenv("LANGSMITH_TRACING"))
@@ -24,7 +20,7 @@ If the output does not match what's defined in your .env file, it's likely due t
 
 Clear the cached environment variables with the following command:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 utils.get_env_var.cache_clear()
 ```
 
@@ -32,7 +28,7 @@ utils.get_env_var.cache_clear()
 
 Reload your environment variables from the .env file by executing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dotenv import load_dotenv
 import os
 load_dotenv(<path to .env file>, override=True)
@@ -44,12 +40,8 @@ If you continue to experience issues, please reach out to us via a shared Slack 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-variable-caching.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-variable-caching.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

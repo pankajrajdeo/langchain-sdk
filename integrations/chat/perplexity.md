@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatPerplexity integration
 
 > Integrate with the ChatPerplexity chat model using LangChain Python.
 
-This page will help you get started with Perplexity [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatPerplexity` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity).
+This page will help you get started with Perplexity [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatPerplexity` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity).
 
 ## Overview
 
@@ -14,11 +10,11 @@ This page will help you get started with Perplexity [chat models](/oss/python/la
 
 | Class                                                                                                      | Package                                                                               | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) |                                               Downloads                                               |                                               Version                                              |
 | :--------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :----------: | :---------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`ChatPerplexity`](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity) | [`langchain-perplexity`](https://reference.langchain.com/python/langchain-perplexity) |     beta     |           [✅](/oss/python/integrations/chat/perplexity)           | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
+| [`ChatPerplexity`](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity) | [`langchain-perplexity`](https://reference.langchain.com/python/langchain-perplexity) |     beta     |           [✅](https://docs.langchain.com/oss/python/integrations/chat/perplexity)           | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ❌                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ❌      |                            ✅                            |                              ❌                             |
 
@@ -30,7 +26,7 @@ To access Perplexity models you'll need to create a Perplexity account, get an A
 
 Head to [this page](https://www.perplexity.ai/) to sign up for Perplexity and generate an API key. Once you've done this set the `PPLX_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -38,31 +34,31 @@ if "PPLX_API_KEY" not in os.environ:
     os.environ["PPLX_API_KEY"] = getpass.getpass("Enter your Perplexity API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_perplexity import ChatPerplexity
 ```
 
 The code provided assumes that your PPLX\_API\_KEY is set in your environment variables. If you would like to manually specify your API key and also choose a different model, you can use the following code:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0, pplx_api_key="YOUR_API_KEY", model="sonar")
 ```
 
 You can check the [list of available Perplexity models](https://docs.perplexity.ai/docs/model-cards). For reproducibility, we can set the API key dynamically by taking it as an input in this notebook.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0, model="sonar")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 system = "You are a helpful assistant."
 human = "{input}"
 prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
@@ -72,13 +68,13 @@ response = chain.invoke({"input": "Why is the Higgs Boson important?"})
 response.content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'The Higgs Boson is an elementary subatomic particle that plays a crucial role in the Standard Model of particle physics, which accounts for three of the four fundamental forces governing the behavior of our universe: the strong and weak nuclear forces, electromagnetism, and gravity. The Higgs Boson is important for several reasons:\n\n1. **Final Elementary Particle**: The Higgs Boson is the last elementary particle waiting to be discovered under the Standard Model. Its detection helps complete the Standard Model and further our understanding of the fundamental forces in the universe.\n\n2. **Mass Generation**: The Higgs Boson is responsible for giving mass to other particles, a process that occurs through its interaction with the Higgs field. This mass generation is essential for the formation of atoms, molecules, and the visible matter we observe in the universe.\n\n3. **Implications for New Physics**: While the detection of the Higgs Boson has confirmed many aspects of the Standard Model, it also opens up new possibilities for discoveries beyond the Standard Model. Further research on the Higgs Boson could reveal insights into the nature of dark matter, supersymmetry, and other exotic phenomena.\n\n4. **Advancements in Technology**: The search for the Higgs Boson has led to significant advancements in technology, such as the development of artificial intelligence and machine learning algorithms used in particle accelerators like the Large Hadron Collider (LHC). These advancements have not only contributed to the discovery of the Higgs Boson but also have potential applications in various other fields.\n\nIn summary, the Higgs Boson is important because it completes the Standard Model, plays a crucial role in mass generation, hints at new physics phenomena beyond the Standard Model, and drives advancements in technology.\n'
 ```
 
 You can format and structure the prompts like you would typically. In the following example, we ask the model to tell us a joke about cats.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0, model="sonar")
 prompt = ChatPromptTemplate.from_messages([("human", "Tell me a joke about {topic}")])
 chain = prompt | chat
@@ -86,7 +82,7 @@ response = chain.invoke({"topic": "cats"})
 response.content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'Here\'s a joke about cats:\n\nWhy did the cat want math lessons from a mermaid?\n\nBecause it couldn\'t find its "core purpose" in life!\n\nRemember, cats are unique and fascinating creatures, and each one has its own special traits and abilities. While some may see them as mysterious or even a bit aloof, they are still beloved pets that bring joy and companionship to their owners. So, if your cat ever seeks guidance from a mermaid, just remember that they are on their own journey to self-discovery!\n'
 ```
 
@@ -102,7 +98,7 @@ response.content
 
 The Agent API gives `ChatPerplexity` access to Perplexity's built-in tools (live web search, URL fetching, finance and people search) and stateful agent fields (`previous_response_id`, `instructions`, `include`) which are not available on Chat Completions. Existing `ChatPerplexity(model="sonar")` callers see no behavior change — the Chat Completions path stays the default for plain text requests.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import ChatPerplexity
 
 chat = ChatPerplexity(
@@ -115,7 +111,7 @@ response.content
 
 You can also pass a built-in tool and let auto-detection route the request — no flag needed:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(model="openai/gpt-5.5")
 
 response = chat.invoke(
@@ -132,11 +128,10 @@ When routed through the Agent API, response objects carry richer metadata:
 * `additional_kwargs` surfaces Perplexity-specific outputs when present: `citations`, `images`, `related_questions`, `search_results`, `videos`, and `reasoning_steps`.
 * Tool calls returned by the model appear in `response.tool_calls` exactly as they do for `ChatOpenAI`.
 
-<Warning>
-  The Agent API does not accept Chat-Completions-only sampling and control knobs. When `ChatPerplexity` routes through the Agent API (whether explicitly or by auto-detection), the following fields are dropped from the outgoing payload with a `WARNING` log: `temperature`, `top_p`, `top_k`, `stop`, and `metadata`. The class-default `temperature` is suppressed silently because `_default_params` injects it on every call, but a user-supplied `temperature` still warns.
-
-  `tool_choice` is not silently dropped — it raises `ValueError` when routed through the Agent API, since downstream agent loops cannot recover from a missing forced-tool selection.
-</Warning>
+> [!WARNING]
+> The Agent API does not accept Chat-Completions-only sampling and control knobs. When `ChatPerplexity` routes through the Agent API (whether explicitly or by auto-detection), the following fields are dropped from the outgoing payload with a `WARNING` log: `temperature`, `top_p`, `top_k`, `stop`, and `metadata`. The class-default `temperature` is suppressed silently because `_default_params` injects it on every call, but a user-supplied `temperature` still warns.
+>
+> `tool_choice` is not silently dropped — it raises `ValueError` when routed through the Agent API, since downstream agent loops cannot recover from a missing forced-tool selection.
 
 See the [Perplexity Agent API model list](https://docs.perplexity.ai/docs/agent-api/models) for the full set of models available through this endpoint (e.g. `openai/gpt-5.5`, `anthropic/claude-sonnet-4-6`, `google/gemini-3-1-pro`).
 
@@ -144,7 +139,7 @@ See the [Perplexity Agent API model list](https://docs.perplexity.ai/docs/agent-
 
 You can also use Perplexity-specific parameters through the ChatPerplexity class. For example, parameters like search\_domain\_filter, return\_images, return\_related\_questions or search\_recency\_filter using the extra\_body parameter as shown below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0.7, model="sonar")
 response = chat.invoke(
     "Tell me a joke about cats", extra_body={"search_recency_filter": "week"}
@@ -152,7 +147,7 @@ response = chat.invoke(
 response.content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 "Sure, here's a cat joke for you:\n\nWhy are cats bad storytellers?\n\nBecause they only have one tale. (Pun alert!)\n\nSource: OneLineFun.com [4]"
 ```
 
@@ -162,7 +157,7 @@ Perplexity often provides a list of the web pages it consulted (“search\_resul
 You don't need to pass any special parameter—the list is placed in
 `response.additional_kwargs["search_results"]`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0, model="sonar")
 
 response = chat.invoke(
@@ -176,7 +171,7 @@ print(response.content)
 response.additional_kwargs["search_results"][:2]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The tallest mountain in South America is Aconcagua. It has a summit elevation of approximately 6,961 meters (22,838 feet), making it not only the highest peak in South America but also the highest mountain in the Americas, the Western Hemisphere, and the Southern Hemisphere[1]\[2]\[4].
 
 Aconcagua is located in the Principal Cordillera of the Andes mountain range, in Mendoza Province, Argentina, near the border with Chile[1]\[2]\[4]. It is of volcanic origin but is not an active volcano[4]. The mountain is part of Aconcagua Provincial Park and features several glaciers, including the large Ventisquero Horcones Inferior glacier[1].
@@ -184,7 +179,7 @@ Aconcagua is located in the Principal Cordillera of the Andes mountain range, in
 In summary, Aconcagua stands as the tallest mountain in South America at about 6,961 meters (22,838 feet) in height.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'title': 'Aconcagua - Wikipedia',
   'url': 'https://en.wikipedia.org/wiki/Aconcagua',
   'date': None},
@@ -195,7 +190,7 @@ In summary, Aconcagua stands as the tallest mountain in South America at about 6
 
 ## `ChatPerplexity` also supports streaming functionality
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatPerplexity(temperature=0.7, model="sonar")
 
 stream = chat.stream_events("Give me a list of famous tourist attractions in Pakistan", version="v3")
@@ -203,7 +198,7 @@ for token in stream.text:
     print(token, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Here is a list of some famous tourist attractions in Pakistan:
 
 1. **Minar-e-Pakistan**: A 62-meter high minaret in Lahore that represents the history of Pakistan.
@@ -222,16 +217,14 @@ These attractions showcase the rich history, diverse culture, and natural beauty
 
 ## `ChatPerplexity` supports structured outputs for tier 3+ users
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel
-
 
 class AnswerFormat(BaseModel):
     first_name: str
     last_name: str
     year_of_birth: int
     num_seasons_in_nba: int
-
 
 chat = ChatPerplexity(temperature=0.7, model="sonar-pro")
 structured_chat = chat.with_structured_output(AnswerFormat)
@@ -243,18 +236,14 @@ response = structured_chat.invoke(
 response
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AnswerFormat(first_name='Michael', last_name='Jordan', year_of_birth=1963, num_seasons_in_nba=15)
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

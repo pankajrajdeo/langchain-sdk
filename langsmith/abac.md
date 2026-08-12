@@ -1,62 +1,55 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Attribute-based access control
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/abac)
+This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](https://docs.langchain.com/langsmith/rbac). For automated user provisioning into roles, see [SCIM](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization).
 
-This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](/langsmith/rbac). For automated user provisioning into roles, see [SCIM](/langsmith/user-management#set-up-scim-for-your-organization).
+> [!NOTE]
+> ABAC (Attribute-Based Access Control) is an Enterprise feature for managing fine-grained access control. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
 
-<Note>
-  ABAC (Attribute-Based Access Control) is an Enterprise feature for managing fine-grained access control. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
-</Note>
+ABAC complements [Role-Based Access Control (RBAC)](https://docs.langchain.com/langsmith/rbac) by adding tag-based conditions to access decisions. While RBAC grants blanket permissions based on a user's role (e.g., "can read all projects"), ABAC lets you restrict or grant access based on resource tags (e.g., "can only read projects tagged with Environment=Development").
 
-ABAC complements [Role-Based Access Control (RBAC)](/langsmith/rbac) by adding tag-based conditions to access decisions. While RBAC grants blanket permissions based on a user's role (e.g., "can read all projects"), ABAC lets you restrict or grant access based on resource tags (e.g., "can only read projects tagged with Environment=Development").
-
-<Note>
-  Roles and resource tags can be managed via the UI or API. ABAC policies are configurable via the [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
-</Note>
+> [!NOTE]
+> Roles and resource tags can be managed via the UI or API. ABAC policies are configurable via the [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
 
 ## Before you begin
 
-* [Set up resource tags](/langsmith/set-up-resource-tags) in your workspace.
+* [Set up resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) in your workspace.
 * ABAC currently only supports `resource_tag_key` as an `attribute_name` in policies, for evaluating against resource tags. No other attributes are supported yet.
 
 ## Enable ABAC for self-hosted deployments
 
-1. ABAC requires a [self-hosted](/langsmith/self-hosted) LangSmith deployment running Helm chart 0.11.28 or later (application version 0.12.1). Once you've upgraded, use one of the following options to enable ABAC:
+1. ABAC requires a [self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith deployment running Helm chart 0.11.28 or later (application version 0.12.1). Once you've upgraded, use one of the following options to enable ABAC:
 
    * **Enable for a specific organization:** Run the following against your LangSmith PostgreSQL database, replacing `<organization_id>` with the ID copied from the organization settings page in the UI:
 
-     ```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
      UPDATE organizations SET config = config || '{"can_use_abac": true}' WHERE id = '<organization_id>' AND NOT is_personal;
-     ```
+```
 
    * **Enable for all organizations:** Add the following environment variable to `commonEnv` in your `values.yaml`:
 
-     ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
      DEFAULT_ORG_FEATURE_CAN_USE_ABAC: "true"
-     ```
+```
 
-     <Note>
-       This environment variable has no effect on personal organizations, because [RBAC](/langsmith/rbac) is not enabled for personal organizations.
-     </Note>
+> [!NOTE]
+>      This environment variable has no effect on personal organizations, because [RBAC](https://docs.langchain.com/langsmith/rbac) is not enabled for personal organizations.
 
-2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from an [Organization Admin](/langsmith/rbac#organization-admin) user, or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
+2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from an [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) user, or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    export LANGSMITH_API_KEY="your_admin_api_key"
    # Required for self-hosted or regional SaaS deployments:
    # export LANGCHAIN_ENDPOINT="https://eu.api.smith.langchain.com"
    # export LANGCHAIN_ENDPOINT="https://aws.api.smith.langchain.com"
    # export LANGCHAIN_ENDPOINT="https://apac.api.smith.langchain.com"
    # export LANGCHAIN_ENDPOINT="https://langsmith.yourdomain.com/api"
-   ```
+```
 
 ## Access policy structure
 
 An access policy defines conditions under which access is granted or denied. Here's the structure:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Policy Name",
   "description": "Optional description",
@@ -86,9 +79,8 @@ The `effect` determines what happens when conditions match:
 * **`allow`** - Grant access when conditions match
 * **`deny`** - Block access when conditions match
 
-<Note>
-  Deny policies always take precedence. If both an allow and deny policy match, access is denied.
-</Note>
+> [!NOTE]
+> Deny policies always take precedence. If both an allow and deny policy match, access is denied.
 
 ### Condition groups
 
@@ -109,12 +101,11 @@ Each condition group specifies:
 | `dataset`           | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`                                                                                      |
 | `deployment`        | `deployments:read`, `deployments:update`, `deployments:delete`                                                                                                                    |
 | `queues`            | `annotation-queues:create`, `annotation-queues:delete`, `annotation-queues:read`, `annotation-queues:update`                                                                      |
-| `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](/langsmith/fleet/access-and-oversight#tool-access-control). |
-| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](/langsmith/fleet/access-and-oversight#tool-access-control).                                             |
+| `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](https://docs.langchain.com/langsmith/fleet/access-and-oversight#tool-access-control). |
+| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](https://docs.langchain.com/langsmith/fleet/access-and-oversight#tool-access-control).                                             |
 
-<Note>
-  Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
-</Note>
+> [!NOTE]
+> Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
 
 #### Conditions
 
@@ -149,9 +140,8 @@ Each operator has an `_if_exists` variant that matches by default when the tag k
 | `matches_if_exists`                | Glob pattern match, or if tag key absent                          |
 | `not_matches_if_exists`            | Match when value doesn't match glob pattern, or if tag key absent |
 
-<Tip>
-  In an **allow** policy, `_if_exists` variants grant access to resources that either match the condition or don't have the specified tag key. In a **deny** policy, they block resources that either match the condition or don't have the tag key.
-</Tip>
+> [!TIP]
+> In an **allow** policy, `_if_exists` variants grant access to resources that either match the condition or don't have the specified tag key. In a **deny** policy, they block resources that either match the condition or don't have the tag key.
 
 ### Roles
 
@@ -161,11 +151,11 @@ Policies can be attached to roles when creating the policy, or attached later vi
 
 ## Managing access policies
 
-Access policies are managed via the LangSmith API by [Organization Admins](/langsmith/rbac#organization-admin). Before creating policies, [set up resource tags](/langsmith/set-up-resource-tags) in your workspace.
+Access policies are managed via the LangSmith API by [Organization Admins](https://docs.langchain.com/langsmith/rbac#organization-admin). Before creating policies, [set up resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) in your workspace.
 
 ## How ABAC works with RBAC
 
-[RBAC](/langsmith/rbac) permissions and ABAC policies are both considered when determining access to resources:
+[RBAC](https://docs.langchain.com/langsmith/rbac) permissions and ABAC policies are both considered when determining access to resources:
 
 * ABAC **deny** policies override RBAC permissions
 * ABAC **allow** policies can grant access even without RBAC permissions
@@ -199,7 +189,7 @@ Access policies are managed via the LangSmith API by [Organization Admins](/lang
 
 Allow annotators to only access datasets tagged for their team:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Annotator Team A Access",
   "effect": "allow",
@@ -220,7 +210,7 @@ Allow annotators to only access datasets tagged for their team:
 
 Deny access to datasets containing PII. Since deny policies override allow policies, this blocks access even for users with RBAC permissions:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Block PII Datasets",
   "effect": "deny",
@@ -241,7 +231,7 @@ Deny access to datasets containing PII. Since deny policies override allow polic
 
 Allow engineers to access projects for any application in the "chatbot" family using glob patterns:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Chatbot Apps Access",
   "effect": "allow",
@@ -262,7 +252,7 @@ Allow engineers to access projects for any application in the "chatbot" family u
 
 Grant access only if both conditions are met - dataset is for training AND belongs to a specific client:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Client Training Data Access",
   "effect": "allow",
@@ -291,7 +281,7 @@ Grant access only if both conditions are met - dataset is for training AND belon
 
 Consultants don't have RBAC `datasets:read` permission, but this policy grants them access to datasets tagged `Client=Acme-Corp`, as well as datasets that don't have a `Client` tag at all. Datasets tagged with a different client (e.g., `Client=Other-Corp`) remain blocked:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "Acme Consultant Access",
   "effect": "allow",
@@ -314,11 +304,10 @@ When ABAC policies are active, resources are access-controlled based on their ta
 
 This is supported on project, dataset, and prompt creation endpoints (including fork and clone operations). Tags are applied atomically in the same database transaction as resource creation.
 
-For full details and examples, see [Tag a resource at creation time](/langsmith/set-up-resource-tags#tag-a-resource-at-creation-time) in the resource tags guide.
+For full details and examples, see [Tag a resource at creation time](https://docs.langchain.com/langsmith/set-up-resource-tags#tag-a-resource-at-creation-time) in the resource tags guide.
 
-<Note>
-  If you rely on the LangSmith SDK to auto-create tracing projects during trace ingestion, the `tag_value_ids` parameter is not available on that auto-create path. To ensure ABAC policies apply from the start, pre-create the project via `POST /api/v1/sessions` with the desired `tag_value_ids` before starting your trace session.
-</Note>
+> [!NOTE]
+> If you rely on the LangSmith SDK to auto-create tracing projects during trace ingestion, the `tag_value_ids` parameter is not available on that auto-create path. To ensure ABAC policies apply from the start, pre-create the project via `POST /api/v1/sessions` with the desired `tag_value_ids` before starting your trace session.
 
 ## Troubleshooting
 
@@ -345,12 +334,8 @@ For full details and examples, see [Tag a resource at creation time](/langsmith/
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/abac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/abac.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

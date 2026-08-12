@@ -1,56 +1,51 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Chat
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/chat)
+Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
 
-> Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
-
-**LangSmith Chat** (formerly Polly) is built directly into your LangSmith [workspace](/langsmith/administration-overview#workspaces) to help you analyze and understand your application data.
+**LangSmith Chat** (formerly Polly) is built directly into your LangSmith [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) to help you analyze and understand your application data.
 
 Chat helps you gain insight from your traces, conversation threads, and prompts without having to dig through data manually. By asking natural language questions, you can quickly understand agent performance, debug issues, and analyze user sentiment.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/NVEcSyCXgAhfub1c/images/brand/polly-icon.png?fit=max&auto=format&n=NVEcSyCXgAhfub1c&q=85&s=d58c4caab502fcaa02864b5a8f833604" alt="LangSmith Chat icon" style={{float: 'left', marginRight: '20px', marginTop: '-1px', marginBottom: '20px', maxWidth: '100px'}} width="650" height="650" data-path="images/brand/polly-icon.png" /> Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
+<img alt="LangSmith Chat icon" /> Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
 
 <br /><br />**Observability & Debugging:**
 
-* [Projects](#projects): Browse and filter runs across a project.
-* [Trace pages](#trace-pages): Analyze individual runs and execution traces.
-* [Thread views](#thread-views): Understand conversation threads and user interactions.
+* [Projects](https://docs.langchain.com/langsmith/chat#projects): Browse and filter runs across a project.
+* [Trace pages](https://docs.langchain.com/langsmith/chat#trace-pages): Analyze individual runs and execution traces.
+* [Thread views](https://docs.langchain.com/langsmith/chat#thread-views): Understand conversation threads and user interactions.
 
 **Prompt Engineering:**
 
-* [Playground](#playground): Edit and optimize prompts.
-* [Prompt Hub pages](#prompt-hub-pages): Explore and understand shared prompts.
+* [Playground](https://docs.langchain.com/langsmith/chat#playground): Edit and optimize prompts.
+* [Prompt Hub pages](https://docs.langchain.com/langsmith/chat#prompt-hub-pages): Explore and understand shared prompts.
 
 **Evaluation & Testing:**
 
-* [Dataset Experiments](#dataset-experiments): Analyze experiment results and compare runs.
-* [Dataset Examples](#dataset-examples): Browse and understand dataset structure.
-* [Annotation Queues](#annotation-queues): Review runs and make informed annotation decisions.
-* [Evaluators](#evaluators): Build and refine evaluators with AI assistance.
+* [Dataset Experiments](https://docs.langchain.com/langsmith/chat#dataset-experiments): Analyze experiment results and compare runs.
+* [Dataset Examples](https://docs.langchain.com/langsmith/chat#dataset-examples): Browse and understand dataset structure.
+* [Annotation Queues](https://docs.langchain.com/langsmith/chat#annotation-queues): Review runs and make informed annotation decisions.
+* [Evaluators](https://docs.langchain.com/langsmith/chat#evaluators): Build and refine evaluators with AI assistance.
 
-<img className="block dark:hidden" src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-light.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=771a678928374d181e5d9d5e33d16cb0" alt="Chat in the sidebar on a dataset view." width="1437" height="747" data-path="langsmith/images/polly-datasets-light.png" />
+> **Image:** [Chat in the sidebar on a dataset view.](https://docs.langchain.com/langsmith/chat)
 
-<img className="hidden dark:block" src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-dark.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=e58462239dc037d880ec2c309e86f463" alt="Chat in the sidebar on a dataset view." width="1436" height="751" data-path="langsmith/images/polly-datasets-dark.png" />
+> **Image:** [Chat in the sidebar on a dataset view.](https://docs.langchain.com/langsmith/chat)
 
 ## Get started
 
 Before you start using Chat, you need to add an API key for the model you're using:
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](/langsmith/set-up-hierarchy#configure-workspace-settings).
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](https://docs.langchain.com/langsmith/set-up-hierarchy#configure-workspace-settings).
 
-1. Navigate to <Icon icon="settings" /> **Settings** and then move to the **Secrets** tab.
+1. Navigate to  **Settings** and then move to the **Secrets** tab.
 2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
 3. Select **Save secret**.
 
-<Note> When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.</Note>
+ When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.
 
-<Note>If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](/langsmith/model-configurations#oauth-client-credentials).</Note>
+If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
 
-<Note>
-  Chat calls model providers from LangSmith's egress IP addresses. If your model provider (or a proxy in front of it) restricts traffic by IP, allowlist the LangSmith egress IPs listed in [Allowlist IP addresses](/langsmith/deploy-to-cloud#allowlist-ip-addresses).
-</Note>
+> [!NOTE]
+> Chat calls model providers from LangSmith's egress IP addresses. If your model provider (or a proxy in front of it) restricts traffic by IP, allowlist the LangSmith egress IPs listed in [Allowlist IP addresses](https://docs.langchain.com/langsmith/deploy-to-cloud#allowlist-ip-addresses).
 
 ### Supported models
 
@@ -66,7 +61,7 @@ Chat supports the following model providers out of the box:
 * DeepSeek
 * Fireworks AI
 
-You can also use any custom model you've configured in [Playground Settings](/langsmith/prompt-engineering-concepts#playground) by enabling the **Available in Chat** toggle on that configuration. Workspace admins manage which custom models are available.
+You can also use any custom model you've configured in [Playground Settings](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) by enabling the **Available in Chat** toggle on that configuration. Workspace admins manage which custom models are available.
 
 ### Keyboard shortcuts
 
@@ -90,7 +85,7 @@ On a project's run list, Chat can browse and filter runs across the entire proje
 
 ### Trace pages
 
-On an individual [trace](/langsmith/observability-concepts#traces), Chat analyzes the [run](/langsmith/observability-concepts#runs) data and execution trajectory. Chat examines the full trace context, including [run metadata](/langsmith/observability-concepts#metadata), inputs, outputs, intermediate steps, and configuration to help you understand what happened and identify areas for improvement.
+On an individual [trace](https://docs.langchain.com/langsmith/observability-concepts#traces), Chat analyzes the [run](https://docs.langchain.com/langsmith/observability-concepts#runs) data and execution trajectory. Chat examines the full trace context, including [run metadata](https://docs.langchain.com/langsmith/observability-concepts#metadata), inputs, outputs, intermediate steps, and configuration to help you understand what happened and identify areas for improvement.
 
 **Example questions:**
 
@@ -101,7 +96,7 @@ On an individual [trace](/langsmith/observability-concepts#traces), Chat analyze
 
 ### Thread views
 
-Under the **Threads** tab, Chat analyzes conversation [threads](/langsmith/observability-concepts#threads) to help you understand user sentiment, conversation outcomes, and interaction patterns. Use Chat to identify user pain points and understand whether issues were resolved.
+Under the **Threads** tab, Chat analyzes conversation [threads](https://docs.langchain.com/langsmith/observability-concepts#threads) to help you understand user sentiment, conversation outcomes, and interaction patterns. Use Chat to identify user pain points and understand whether issues were resolved.
 
 **Example questions:**
 
@@ -114,7 +109,7 @@ Under the **Threads** tab, Chat analyzes conversation [threads](/langsmith/obser
 
 ### Playground
 
-In the [Playground](/langsmith/prompt-engineering-concepts#playground), Chat helps you edit and optimize your [prompts](/langsmith/prompt-engineering-concepts#prompts-in-langsmith). Use automated options like **Optimize prompt**, **Generate a tool**, or **Generate an output schema**, or give Chat custom instructions for editing your prompt. Chat can directly modify the playground state—updating messages, tools, output schemas, and examples—so you can iterate on prompts conversationally.
+In the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground), Chat helps you edit and optimize your [prompts](https://docs.langchain.com/langsmith/prompt-engineering-concepts#prompts-in-langsmith). Use automated options like **Optimize prompt**, **Generate a tool**, or **Generate an output schema**, or give Chat custom instructions for editing your prompt. Chat can directly modify the playground state—updating messages, tools, output schemas, and examples—so you can iterate on prompts conversationally.
 
 **Example questions:**
 
@@ -125,7 +120,7 @@ In the [Playground](/langsmith/prompt-engineering-concepts#playground), Chat hel
 
 ### Prompt Hub pages
 
-When viewing a prompt in the [LangSmith Hub](/langsmith/prompt-engineering-concepts#prompts-in-langsmith), Chat helps you understand the prompt's structure, messages, tools, and configuration. This is useful for exploring and learning from shared prompts.
+When viewing a prompt in the [LangSmith Hub](https://docs.langchain.com/langsmith/prompt-engineering-concepts#prompts-in-langsmith), Chat helps you understand the prompt's structure, messages, tools, and configuration. This is useful for exploring and learning from shared prompts.
 
 **Example questions:**
 
@@ -184,32 +179,22 @@ In the **Evaluators** builder, Chat helps you write and refine evaluator logic. 
 
 Learn more about the features that Chat helps you explore:
 
-<CardGroup cols={2}>
-  <Card title="Observability" icon="search" href="/langsmith/observability">
-    Learn more about tracing and monitoring your LLM applications
-  </Card>
+#### [Observability](https://docs.langchain.com/langsmith/observability)
+Learn more about tracing and monitoring your LLM applications
 
-  <Card title="Threads" icon="messages" href="/langsmith/threads">
-    Understand how threads work in LangSmith
-  </Card>
+#### [Threads](https://docs.langchain.com/langsmith/threads)
+Understand how threads work in LangSmith
 
-  <Card title="Prompt Engineering" icon="wand" href="/langsmith/prompt-context-hub#prompts">
-    Create and iterate on prompts in the Playground
-  </Card>
+#### [Prompt Engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts)
+Create and iterate on prompts in the Playground
 
-  <Card title="Evaluation" icon="clipboard-check" href="/langsmith/evaluation">
-    Evaluate and test your applications systematically
-  </Card>
-</CardGroup>
+#### [Evaluation](https://docs.langchain.com/langsmith/evaluation)
+Evaluate and test your applications systematically
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/chat.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

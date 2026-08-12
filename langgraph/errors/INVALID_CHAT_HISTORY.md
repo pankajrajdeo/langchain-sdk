@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # INVALID_CHAT_HISTORY
 
 This error is raised in the prebuilt [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) when the `call_model` graph node receives a malformed list of messages. Specifically, it is malformed when there are `AIMessages` with `tool_calls` (LLM requesting to call a tool) that do not have a corresponding [`ToolMessage`](https://reference.langchain.com/python/langchain-core/messages/tool/ToolMessage) (result of a tool invocation to return to the LLM).
@@ -33,12 +29,8 @@ or add [`ToolMessage`](https://reference.langchain.com/python/langchain-core/mes
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_CHAT_HISTORY.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_CHAT_HISTORY.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

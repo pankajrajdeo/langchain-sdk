@@ -1,25 +1,20 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Use server-side caching
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/caching)
+Cache values server-side in your agent deployment using stale-while-revalidate and key-value cache APIs.
 
-> Cache values server-side in your agent deployment using stale-while-revalidate and key-value cache APIs.
-
-[Agent Server](/langsmith/agent-server) includes a built-in cache you can use inside your deployed graphs. Call `swr` with a key and a loader function, and the server caches the result, revalidates stale entries in the background, and returns fresh data on every read.
+[Agent Server](https://docs.langchain.com/langsmith/agent-server) includes a built-in cache you can use inside your deployed graphs. Call `swr` with a key and a loader function, and the server caches the result, revalidates stale entries in the background, and returns fresh data on every read.
 
 All cache APIs are **server-side only** and require the LangGraph Agent Server runtime. Values must be JSON-serializable.
 
-<Note>
-  `swr` requires Agent Server runtime **v0.7.79** or later and is currently in **[beta](/langsmith/release-stages)**.
-  `cache_get` and `cache_set` require **v0.7.29** or later.
-</Note>
+> [!NOTE]
+> `swr` requires Agent Server runtime **v0.7.79** or later and is currently in **[beta](https://docs.langchain.com/langsmith/release-stages)**.
+> `cache_get` and `cache_set` require **v0.7.29** or later.
 
 ## Quick start
 
 Pass a key and an async loader function. `swr` returns the cached value if available, or calls your loader to fetch it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk.cache import swr
 
 result = await swr("config:global", load_config)
@@ -32,7 +27,7 @@ On the first call, `swr` awaits `load_config()` and caches the result. On subseq
 
 Control how long cached values are considered fresh and when they expire:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import timedelta
 from langgraph_sdk.cache import swr
 
@@ -62,7 +57,7 @@ result = await swr(
 
 Pass a `model` parameter to automatically serialize and deserialize Pydantic models:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel
 from langgraph_sdk.cache import swr
 
@@ -83,9 +78,9 @@ profile: UserProfile = result.value  # deserialized automatically
 
 ## Cache auth credentials
 
-You can cache credential validation in a [custom auth handler](/langsmith/custom-auth) to avoid hitting your identity provider on every request:
+You can cache credential validation in a [custom auth handler](https://docs.langchain.com/langsmith/custom-auth) to avoid hitting your identity provider on every request:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import timedelta
 from langgraph_sdk import Auth
 from langgraph_sdk.cache import swr
@@ -113,7 +108,7 @@ With this setup, the server returns the cached user for 5 minutes without revali
 
 `swr` returns an `SWRResult` object with the value and cache status:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = await swr("my-key", my_loader)
 
 result.value   # the cached or freshly loaded value
@@ -122,7 +117,7 @@ result.status  # "miss" | "fresh" | "stale" | "expired"
 
 Call `.mutate()` to update the cached value or force a revalidation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await result.mutate(new_value)  # update the cache with a new value
 await result.mutate()           # force revalidation by calling the loader
 ```
@@ -131,7 +126,7 @@ await result.mutate()           # force revalidation by calling the loader
 
 For simple get/set caching without revalidation, use `cache_get` and `cache_set` directly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import timedelta
 from langgraph_sdk.cache import cache_get, cache_set
 
@@ -144,7 +139,7 @@ if value is None:
 
 ### `cache_get`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def cache_get(key: str) -> Any | None
 ```
 
@@ -152,7 +147,7 @@ Return the deserialized value, or `None` if the key does not exist or has expire
 
 ### `cache_set`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def cache_set(key: str, value: Any, *, ttl: timedelta | None = None) -> None
 ```
 
@@ -164,18 +159,14 @@ async def cache_set(key: str, value: Any, *, ttl: timedelta | None = None) -> No
 
 ## Next steps
 
-* [Add custom authentication](/langsmith/custom-auth) to your deployment.
-* [Add custom lifespan events](/langsmith/custom-lifespan) to initialize resources at server startup.
-* Learn about the [agent server architecture](/langsmith/agent-server).
+* [Add custom authentication](https://docs.langchain.com/langsmith/custom-auth) to your deployment.
+* [Add custom lifespan events](https://docs.langchain.com/langsmith/custom-lifespan) to initialize resources at server startup.
+* Learn about the [agent server architecture](https://docs.langchain.com/langsmith/agent-server).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/caching.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/caching.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

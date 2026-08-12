@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Engine issue categories
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-issue-categories)
+Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples.
 
-> Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples.
+When [LangSmith Engine](https://docs.langchain.com/langsmith/engine) detects a recurring issue in your traces, it tags the issue with a category. This page lists every category Engine assigns, with a description and concrete example for each. Engine automatically scans your traces and assigns the best-fitting category to each detected issue.
 
-When [LangSmith Engine](/langsmith/engine) detects a recurring issue in your traces, it tags the issue with a category. This page lists every category Engine assigns, with a description and concrete example for each. Engine automatically scans your traces and assigns the best-fitting category to each detected issue.
+The 16 categories on this page cover the most common agent failure patterns Engine has observed. If Engine assigns a category that does not match the actual problem, you can mark the issue as ignored with a reason. Engine uses this feedback to improve its future analysis. For more information, see [Close or reopen an issue](https://docs.langchain.com/langsmith/engine#close-or-reopen-an-issue).
 
-The 16 categories on this page cover the most common agent failure patterns Engine has observed. If Engine assigns a category that does not match the actual problem, you can mark the issue as ignored with a reason. Engine uses this feedback to improve its future analysis. For more information, see [Close or reopen an issue](/langsmith/engine#close-or-reopen-an-issue).
-
-<Note>
-  LangSmith does not send notifications when the issue taxonomy changes. To stay informed of feature updates, watch the [LangSmith Cloud changelog](/langsmith/changelog) or contact LangSmith support.
-</Note>
+> [!NOTE]
+> LangSmith does not send notifications when the issue taxonomy changes. To stay informed of feature updates, watch the [LangSmith Cloud changelog](https://docs.langchain.com/langsmith/changelog) or contact LangSmith support.
 
 ## Agent looping
 
@@ -112,19 +107,15 @@ A better-fit tool existed but the agent chose the wrong one for the user's reque
 
 ## See also
 
-* [Find and fix your agent's issues](/langsmith/engine): Set up Engine, work through the issue lifecycle, and control costs.
-* [Engine](/langsmith/engine-overview): Product overview and where Engine fits in the development lifecycle.
-* [Engine webhook events](/langsmith/engine-webhooks): Forward detected issues to your incident-management, paging, or chat tools.
-* [Evaluators](/langsmith/evaluators): Deploy the suggested evaluator Engine generates for each issue.
+* [Find and fix your agent's issues](https://docs.langchain.com/langsmith/engine): Set up Engine, work through the issue lifecycle, and control costs.
+* [Engine](https://docs.langchain.com/langsmith/engine-overview): Product overview and where Engine fits in the development lifecycle.
+* [Engine webhook events](https://docs.langchain.com/langsmith/engine-webhooks): Forward detected issues to your incident-management, paging, or chat tools.
+* [Evaluators](https://docs.langchain.com/langsmith/evaluators): Deploy the suggested evaluator Engine generates for each issue.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-issue-categories.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-issue-categories.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

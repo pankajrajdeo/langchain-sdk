@@ -1,30 +1,24 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Gateway Credits
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-credits)
+Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 
-> Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages). APIs and features may change as we iterate.
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages). APIs and features may change as we iterate.
-</Note>
-
-**Gateway Credits** let you call LangChain-hosted models through the standard LLM Gateway API without setting up a provider account or key. Authenticate with only your [LangSmith API key](/langsmith/create-account-api-key). No [provider secret](/langsmith/llm-gateway-admin-setup#1-add-provider-secrets) is required.
+**Gateway Credits** let you call LangChain-hosted models through the standard LLM Gateway API without setting up a provider account or key. Authenticate with only your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key). No [provider secret](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#1-add-provider-secrets) is required.
 
 The gateway routes each request based on its model ID. A hosted model slug such as `moonshotai/kimi-k3` uses Gateway Credits. A model ID that starts with a configured bring-your-own-key provider, such as `anthropic/claude-opus-5`, uses that provider's secret instead.
 
-<Card title="Base URL" icon="link">
-  Point any supported client at the standard gateway API:
+#### Base URL
+Point any supported client at the standard gateway API:
 
-  ```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  https://gateway.smith.langchain.com/v1
-  ```
+```text
+https://gateway.smith.langchain.com/v1
+```
 
-  Authenticate with your LangSmith API key as a bearer token.
+Authenticate with your LangSmith API key as a bearer token.
 
-  For regional base URLs, see [Regional gateways](/langsmith/llm-gateway-api-formats#use-a-regional-gateway).
-</Card>
+For regional base URLs, see [Regional gateways](https://docs.langchain.com/langsmith/llm-gateway-api-formats#use-a-regional-gateway).
 
 ## Available models
 
@@ -37,7 +31,7 @@ Select a hosted model by ID in the request body. Model IDs are case-insensitive.
 
 List every model available to your workspace, including configured bring-your-own-key providers and hosted models, with the standard model-list endpoint:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl https://gateway.smith.langchain.com/v1/models \
     -H "Authorization: Bearer $LANGSMITH_API_KEY"
 ```
@@ -48,51 +42,49 @@ Use a returned model ID exactly as shown in the `model` field of a prompt reques
 
 Before using Gateway Credits:
 
-* Your organization is on a paid plan ([Developer, Plus, Startup, or Premier](/langsmith/pricing-plans)).
-* You have a workspace-scoped [LangSmith API key](/langsmith/create-account-api-key) attached to a role with `gateway:invoke` and `workspaces:read` [permissions](/langsmith/organization-workspace-operations). See [Admin setup](/langsmith/llm-gateway-admin-setup) if you are unsure.
+* Your organization is on a paid plan ([Developer, Plus, Startup, or Premier](https://docs.langchain.com/langsmith/pricing-plans)).
+* You have a workspace-scoped [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) attached to a role with `gateway:invoke` and `workspaces:read` [permissions](https://docs.langchain.com/langsmith/organization-workspace-operations). See [Admin setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup) if you are unsure.
 
 ## Make a call
 
 Point an OpenAI-compatible client at `https://gateway.smith.langchain.com/v1`, authenticate with your LangSmith API key, and set `model` to a hosted model ID.
 
-<CodeGroup>
-  ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl https://gateway.smith.langchain.com/v1/chat/completions \
-      -H "Authorization: Bearer $LANGSMITH_API_KEY" \
-      -H "Content-Type: application/json" \
-      -d '{"model":"moonshotai/kimi-k3","messages":[{"role":"user","content":"ping"}]}'
-  ```
+```bash
+curl https://gateway.smith.langchain.com/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"moonshotai/kimi-k3","messages":[{"role":"user","content":"ping"}]}'
+```
 
-  ```python OpenAI SDK theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import os
+```python
+import os
 
-  from openai import OpenAI
+from openai import OpenAI
 
-  client = OpenAI(
-      base_url="https://gateway.smith.langchain.com/v1",
-      api_key=os.environ["LANGSMITH_API_KEY"],
-  )
-  response = client.chat.completions.create(
-      model="moonshotai/kimi-k3",
-      messages=[{"role": "user", "content": "ping"}],
-  )
-  print(response.choices[0].message.content)
-  ```
+client = OpenAI(
+    base_url="https://gateway.smith.langchain.com/v1",
+    api_key=os.environ["LANGSMITH_API_KEY"],
+)
+response = client.chat.completions.create(
+    model="moonshotai/kimi-k3",
+    messages=[{"role": "user", "content": "ping"}],
+)
+print(response.choices[0].message.content)
+```
 
-  ```python LangChain theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import os
+```python
+import os
 
-  from langchain.chat_models import init_chat_model
+from langchain.chat_models import init_chat_model
 
-  model = init_chat_model(
-      model="moonshotai/kimi-k3",
-      model_provider="openai",
-      base_url="https://gateway.smith.langchain.com/v1",
-      api_key=os.environ["LANGSMITH_API_KEY"],
-  )
-  print(model.invoke("ping").content)
-  ```
-</CodeGroup>
+model = init_chat_model(
+    model="moonshotai/kimi-k3",
+    model_provider="openai",
+    base_url="https://gateway.smith.langchain.com/v1",
+    api_key=os.environ["LANGSMITH_API_KEY"],
+)
+print(model.invoke("ping").content)
+```
 
 ## Supported endpoints
 
@@ -105,33 +97,29 @@ Hosted models use the same standard API formats as bring-your-own-key models:
 | `POST /v1/responses`        | OpenAI Responses.                             |
 | `GET /v1/models`            | Lists models available to the workspace.      |
 
-For request examples and translation behavior, see [API formats](/langsmith/llm-gateway-api-formats).
+For request examples and translation behavior, see [API formats](https://docs.langchain.com/langsmith/llm-gateway-api-formats).
 
 ## Pricing
 
 Gateway Credits are available on all paid plans besides Enterprise. See [the pricing page](https://www.langchain.com/pricing) for plan details and current rates. Gateway Credits are denominated in **LangChain Credit Units (LCUs)** at **\$1.50 per LCU**; each call consumes LCUs based on token usage.
 
-Standard gateway [spend policies](/langsmith/llm-gateway-spend-policies) apply to hosted-model traffic, so any organization, workspace, API key, or user cap you have configured also governs Gateway Credit usage. You can control Gateway Credit consumption with the same tools you use for bring-your-own-key providers. For example, cap a specific API key at \$200/month across every provider, or set a workspace-wide daily limit that includes hosted-model calls.
+Standard gateway [spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) apply to hosted-model traffic, so any organization, workspace, API key, or user cap you have configured also governs Gateway Credit usage. You can control Gateway Credit consumption with the same tools you use for bring-your-own-key providers. For example, cap a specific API key at \$200/month across every provider, or set a workspace-wide daily limit that includes hosted-model calls.
 
 ## Tracing
 
-Like all gateway traffic, hosted-model calls are traced to LangSmith. For where traces land and how to control access to them, see [Traces, Engine, and access control](/langsmith/llm-gateway-access).
+Like all gateway traffic, hosted-model calls are traced to LangSmith. For where traces land and how to control access to them, see [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access).
 
 ## Next steps
 
-* [Quickstart](/langsmith/llm-gateway-quickstart): make your first gateway-proxied call.
-* [API formats](/langsmith/llm-gateway-api-formats): call models through Chat Completions, Messages, or Responses.
-* [Spend policies](/langsmith/llm-gateway-spend-policies): add cost limits to Gateway Credit usage.
-* [Direct model access](/langsmith/llm-gateway-direct-model-access): use provider-native APIs and model IDs.
+* [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart): make your first gateway-proxied call.
+* [API formats](https://docs.langchain.com/langsmith/llm-gateway-api-formats): call models through Chat Completions, Messages, or Responses.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): add cost limits to Gateway Credit usage.
+* [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access): use provider-native APIs and model IDs.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-credits.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-credits.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

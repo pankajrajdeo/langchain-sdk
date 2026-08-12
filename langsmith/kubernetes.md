@@ -1,34 +1,28 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Self-host LangSmith on Kubernetes
-
-<Info>
-  Self-hosting LangSmith is an add-on to the Enterprise Plan designed for our largest, most security-conscious customers. See our [pricing page](https://www.langchain.com/pricing) for more detail, and [contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
-</Info>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/kubernetes)
+> [!NOTE]
+> Self-hosting LangSmith is an add-on to the Enterprise Plan designed for our largest, most security-conscious customers. See our [pricing page](https://www.langchain.com/pricing) for more detail, and [contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
 This page describes how to set up **LangSmith** (observability, tracing, and evaluation) in a Kubernetes cluster. You'll use Helm to install LangSmith and its dependencies.
 
 After completing this page, you'll have:
 
-* **LangSmith UI and APIs**: for [observability](/langsmith/observability), tracing, and [evaluation](/langsmith/evaluation).
+* **LangSmith UI and APIs**: for [observability](https://docs.langchain.com/langsmith/observability), tracing, and [evaluation](https://docs.langchain.com/langsmith/evaluation).
 * **Backend services**: (queue, playground, ACE).
 * **Datastores**: (PostgreSQL, Redis, ClickHouse, optional blob storage).
 
-For [agent deployment](/langsmith/deployment): To add deployment capabilities, complete this guide first, then follow [Enable LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
+For [agent deployment](https://docs.langchain.com/langsmith/deployment): To add deployment capabilities, complete this guide first, then follow [Enable LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
 
 LangChain has successfully tested LangSmith on the following Kubernetes distributions:
 
 * Google Kubernetes Engine (GKE)
-* Amazon Elastic Kubernetes Service (EKS): For architecture patterns and best practices, refer to [self-hosting on AWS](/langsmith/aws-self-hosted).
-* Azure Kubernetes Service (AKS): For architecture patterns and best practices, refer to [self-hosting on AKS](/langsmith/azure-self-hosted).
+* Amazon Elastic Kubernetes Service (EKS): For architecture patterns and best practices, refer to [self-hosting on AWS](https://docs.langchain.com/langsmith/aws-self-hosted).
+* Azure Kubernetes Service (AKS): For architecture patterns and best practices, refer to [self-hosting on AKS](https://docs.langchain.com/langsmith/azure-self-hosted).
 * OpenShift (4.14+)
 * Minikube and Kind (for development purposes)
 
-<Tip>
-  **Prefer infrastructure as code?** [Deploy with Terraform](/langsmith/self-host-terraform) bundles cluster provisioning, secrets wiring, and the Helm release for AWS, Azure, and GCP into one workflow. The page below covers the Helm-only path against any conformant cluster you already manage.
-</Tip>
+> [!TIP]
+> **Prefer infrastructure as code?** [Deploy with Terraform](https://docs.langchain.com/langsmith/self-host-terraform) bundles cluster provisioning, secrets wiring, and the Helm release for AWS, Azure, and GCP into one workflow. The page below covers the Helm-only path against any conformant cluster you already manage.
 
 ## Prerequisites
 
@@ -43,18 +37,18 @@ Ensure you have the following tools/items ready. Some items are marked optional:
    1. This is a secret key that you can generate. It should be a random string of characters.
    2. You can generate this using the following command:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    openssl rand -base64 32
-   ```
+```
 
 3. JWT Secret (Optional but used for basic auth)
 
    1. This is a secret key that you can generate. It should be a random string of characters.
    2. You can generate this using the following command:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    openssl rand -base64 32
-   ```
+```
 
 ### Databases
 
@@ -62,11 +56,11 @@ LangSmith uses a PostgreSQL database, a Redis cache, and a ClickHouse database t
 
 For more information, refer to the following setup guides for external services:
 
-* [PostgreSQL](/langsmith/self-host-external-postgres)
-* [Redis](/langsmith/self-host-external-redis)
-* [ClickHouse](/langsmith/self-host-external-clickhouse)
+* [PostgreSQL](https://docs.langchain.com/langsmith/self-host-external-postgres)
+* [Redis](https://docs.langchain.com/langsmith/self-host-external-redis)
+* [ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse)
 
-For the minimum supported version of each datastore, refer to [Minimum versions for self-hosting dependencies](/langsmith/self-host-dependency-versions).
+For the minimum supported version of each datastore, refer to [Minimum versions for self-hosting dependencies](https://docs.langchain.com/langsmith/self-host-dependency-versions).
 
 ### Kubernetes cluster requirements
 
@@ -74,7 +68,7 @@ For the minimum supported version of each datastore, refer to [Minimum versions 
 
    1. Recommended: At least 16 vCPUs, 64GB Memory available
 
-      * You may need to tune resource requests/limits for all of our different services based off of organization size/usage. You can find our recommendations in the [self-host scale guide](/langsmith/self-host-scale).
+      * You may need to tune resource requests/limits for all of our different services based off of organization size/usage. You can find our recommendations in the [self-host scale guide](https://docs.langchain.com/langsmith/self-host-scale).
       * We recommend using a cluster autoscaler to handle scaling up/down of nodes based on resource usage.
       * We recommend setting up the metrics server so that autoscaling can be turned on.
       * If you are running Clickhouse in-cluster, you must have a node with at least 4 vCPUs and 16GB of memory **allocatable** as ClickHouse will request this amount of resources by default.
@@ -88,20 +82,19 @@ For the minimum supported version of each datastore, refer to [Minimum versions 
 
       You can verify this by running:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
       kubectl get storageclass
-      ```
+```
 
       The output should show at least one storage class with a provisioner that supports dynamic provisioning. For example:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
       NAME            PROVISIONER                 RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
       gp2 (default)   ebs.csi.eks.amazonaws.com   Delete          WaitForFirstConsumer   true                   161d
-      ```
+```
 
-      <Note>
-        We highly recommend using a storage class that supports volume expansion. This is because traces can potentially require a lot of disk space and your volumes may need to be resized over time.
-      </Note>
+> [!NOTE]
+>       We highly recommend using a storage class that supports volume expansion. This is because traces can potentially require a lot of disk space and your volumes may need to be resized over time.
 
       Refer to the [Kubernetes documentation](https://kubernetes.io/do/langsmith/observability-concepts/storage/storage-classes/) for more information on storage classes.
 
@@ -111,31 +104,28 @@ For the minimum supported version of each datastore, refer to [Minimum versions 
 
 3. Egress to `https://beacon.langchain.com` (if not running in offline mode)
 
-   1. LangSmith requires egress to `https://beacon.langchain.com` for license verification and usage reporting. This is required for LangSmith to function properly. You can find more information on egress requirements in the [Egress](/langsmith/self-host-egress) section.
+   1. LangSmith requires egress to `https://beacon.langchain.com` for license verification and usage reporting. This is required for LangSmith to function properly. You can find more information on egress requirements in the [Egress](https://docs.langchain.com/langsmith/self-host-egress) section.
 
 ## Configure your Helm charts:
 
 1. Create a new file called `langsmith_config.yaml` with the configuration options from the previous step.
-   1. There are several configuration options that you can set in the `langsmith_config.yaml` file. You can find more information on specific configuration options in the [Configuration](/langsmith/self-hosted) section.
+   1. There are several configuration options that you can set in the `langsmith_config.yaml` file. You can find more information on specific configuration options in the [Configuration](https://docs.langchain.com/langsmith/self-hosted) section.
    2. If you are new to Kubernetes or Helm, we’d recommend starting with one of the example configurations in the examples directory of the Helm Chart repository here: [LangSmith helm chart examples](https://github.com/langchain-ai/helm/tree/main/charts/langsmith/examples).
    3. You can see a full list of configuration options in the `values.yaml` file in the Helm Chart repository here: [LangSmith Helm Chart](https://github.com/langchain-ai/helm/tree/main/charts/langsmith/values.yaml)
 
-<Warning>
-  Only override the settings you need in `langsmith_config.yaml`; don’t copy the entire `values.yaml`.
-  Keeping your config minimal ensures you continue to inherit new defaults and upgrades from the Helm chart.
-</Warning>
+> [!WARNING]
+> Only override the settings you need in `langsmith_config.yaml`; don’t copy the entire `values.yaml`.
+> Keeping your config minimal ensures you continue to inherit new defaults and upgrades from the Helm chart.
 
-<Tip>
-  If your cluster enforces non-root or read-only container policies, start from the [read-only Helm configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/read_only_config.yaml). LangSmith containers do not require root privileges. The example shows how to set `runAsNonRoot`, service UIDs and GIDs, `fsGroup`, `RuntimeDefault` seccomp profiles, dropped capabilities, disabled privilege escalation, and writable `emptyDir` mounts for services that need temporary storage.
-</Tip>
+> [!TIP]
+> If your cluster enforces non-root or read-only container policies, start from the [read-only Helm configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/read_only_config.yaml). LangSmith containers do not require root privileges. The example shows how to set `runAsNonRoot`, service UIDs and GIDs, `fsGroup`, `RuntimeDefault` seccomp profiles, dropped capabilities, disabled privilege escalation, and writable `emptyDir` mounts for services that need temporary storage.
 
 2. At a minimum, you will need to set the following configuration options (using basic auth):
 
-   <Warning>
-     Set `apiKeySalt` once and do not change it. This value is used to hash all API keys at rest. Rotating it will permanently invalidate every existing API key in your organization, requiring all users to regenerate their keys.
-   </Warning>
+> [!WARNING]
+>    Set `apiKeySalt` once and do not change it. This value is used to hash all API keys at rest. Rotating it will permanently invalidate every existing API key in your organization, requiring all users to regenerate their keys.
 
-   ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
    config:
      langsmithLicenseKey: "<your license key>"
      apiKeySalt: "<your api key salt>"
@@ -153,7 +143,7 @@ For the minimum supported version of each datastore, refer to [Minimum versions 
    polly:
      enabled: true
      encryptionKey: "<chat-encryption-key>"
-   ```
+```
 
    Insights (AI-powered trace analysis) and Polly (in-workspace chat) are enabled by default in recent chart versions and require encryption keys at installation time. Generate each key with a command such as `openssl rand -hex 32`.
 
@@ -167,32 +157,31 @@ You will also need to specify connection details for any external databases you 
 
       Output should look something like:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
         langsmith-eks-2vauP7wf 21:07:46 No resources found in default namespace.
-      ```
+```
 
-   <Note>
-     If you are using a namespace other than the default namespace, you will need to specify the namespace in the `helm` and `kubectl` commands by using the `-n <namespace>` flag.
-   </Note>
+> [!NOTE]
+>    If you are using a namespace other than the default namespace, you will need to specify the namespace in the `helm` and `kubectl` commands by using the `-n <namespace>` flag.
 
 2. Ensure you have the LangChain Helm repo added (skip this step if you are using local charts).
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    helm repo add langchain https://langchain-ai.github.io/helm
-   ```
+```
 
 3. Find the latest version of the chart. You can find the available versions in the [Helm Chart repository](https://github.com/langchain-ai/helm/releases).
 
    * We generally recommend using the latest version.
    * You can also run `helm search repo langchain/langsmith --versions` to see the available versions. The output will look something like this:
 
-   ```
+```
     langchain/langsmith              	0.13.0      	0.13.1    	Helm chart to deploy the langsmith application ...
     langchain/langsmith              	0.12.34      	0.12.73    	Helm chart to deploy the langsmith application ...
     langchain/langsmith              	0.12.33      	0.12.72    	Helm chart to deploy the langsmith application ...
     langchain/langsmith              	0.12.32      	0.12.70    	Helm chart to deploy the langsmith application ...
     langchain/langsmith              	0.12.31      	0.12.69    	Helm chart to deploy the langsmith application ...
-   ```
+```
 
 4. Run `helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --version <version> -n <namespace> --wait --debug`
 
@@ -201,20 +190,20 @@ You will also need to specify connection details for any external databases you 
 
    Once the `helm install` command runs and finishes successfully, you should see output similar to this:
 
-   ```
+```
    NAME: langsmith
    LAST DEPLOYED: Fri Sep 17 21:08:47 2021
    NAMESPACE: langsmith
    STATUS: deployed
    REVISION: 1
    TEST SUITE: None
-   ```
+```
 
    This may take a few minutes to complete as it will create several Kubernetes resources and run several jobs to initialize the database and other services.
 
 5. Run `kubectl get pods` Output should now look something like this (note the exact pod names may vary based on the version and configuration you used):
 
-   ```
+```
     langsmith-ace-backend-98fbd468c-x9gjl         1/1     Running   0
     langsmith-backend-84999bbcb7-dfhml            1/1     Running   0
     langsmith-clickhouse-0                        1/1     Running   0
@@ -225,7 +214,7 @@ You will also need to specify connection details for any external databases you 
     langsmith-postgres-0                          1/1     Running   0
     langsmith-queue-7bd6cb8b9b-bmvxm              1/1     Running   0
     langsmith-redis-0                             1/1     Running   0
-   ```
+```
 
 ## Validate your deployment:
 
@@ -233,7 +222,7 @@ You will also need to specify connection details for any external databases you 
 
    Output should look something like:
 
-   ```
+```
     NAME                         TYPE           CLUSTER-IP       EXTERNAL-IP                                                                   PORT(S)                      AGE
     langsmith-ace-backend        ClusterIP      172.20.92.210    <none>                                                                        1987/TCP                     1m
     langsmith-backend            ClusterIP      172.20.156.146   <none>                                                                        1984/TCP                     1m
@@ -243,29 +232,29 @@ You will also need to specify connection details for any external databases you 
     langsmith-playground         ClusterIP      172.20.142.121   <none>                                                                        1988/TCP                     1m
     langsmith-postgres           ClusterIP      172.20.226.128   <none>                                                                        5432/TCP                     1m
     langsmith-redis              ClusterIP      172.20.57.248    <none>                                                                        6379/TCP                     1m
-   ```
+```
 
 2. Curl the external ip of the `langsmith-frontend` service:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    curl <external ip>/api/tenants
-   ```
+```
 
    Expected output:
 
-   ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
    [{"id":"00000000-0000-0000-0000-000000000000","has_waitlist_access":true,"created_at":"2023-09-13T18:25:10.488407","display_name":"Personal","config":{"is_personal":true,"max_identities":1},"tenant_handle":"default"}]
-   ```
+```
 
 3. Visit the external ip for the `langsmith-frontend` service on your browser
 
    The LangSmith UI should be visible/operational
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-ui.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=5310f686e7b9eebaaee4fe2a152a8675" alt="Langsmith ui" width="2886" height="1698" data-path="langsmith/images/langsmith-ui.png" />
+> **Image:** [Langsmith ui](https://docs.langchain.com/langsmith/kubernetes)
 
 ## Using LangSmith
 
-Now that LangSmith is running, you can start using it to trace your code. You can find more information on how to use self-hosted LangSmith in the [self-hosted usage guide](/langsmith/self-hosted).
+Now that LangSmith is running, you can start using it to trace your code. You can find more information on how to use self-hosted LangSmith in the [self-hosted usage guide](https://docs.langchain.com/langsmith/self-hosted).
 
 Your LangSmith instance is now running but may not be fully setup yet.
 
@@ -275,32 +264,28 @@ As a next step, it is strongly recommended you work with your infrastructure adm
 
 * Setup DNS for your LangSmith instance to enable easier access
 * Configure SSL to ensure in-transit encryption of traces submitted to LangSmith
-* Configure LangSmith with [Single Sign-On](/langsmith/self-host-sso) to secure your LangSmith instance
+* Configure LangSmith with [Single Sign-On](https://docs.langchain.com/langsmith/self-host-sso) to secure your LangSmith instance
 * Connect LangSmith to external Postgres and Redis instances
-* Set up [Blob Storage](/langsmith/self-host-blob-storage) for storing large files
+* Set up [Blob Storage](https://docs.langchain.com/langsmith/self-host-blob-storage) for storing large files
 
-Review our [configuration section](/langsmith/self-hosted) for more information on how to configure these options.
+Review our [configuration section](https://docs.langchain.com/langsmith/self-hosted) for more information on how to configure these options.
 
 ## Enable LangSmith Deployment, Fleet, Insights, Chat, and Sandboxes
 
 To go beyond observability, tracing, and evaluation, you can enable the following features on your self-hosted instance:
 
-* **[LangSmith Deployment](/langsmith/deployment)**: deploy, scale, and manage agents through the LangSmith UI.
-* **[Fleet](/langsmith/fleet/index)**: create and manage AI agents without writing code.
-* **[Insights](/langsmith/insights)**: get AI-powered analysis of your traces and application data.
-* **[Chat](/langsmith/chat)**: an in-workspace chat experience across LangSmith to help you analyze traces, threads, prompts, and experiment results.
-* **[Sandboxes](/langsmith/sandboxes)**: run code, expose temporary services, and create memory snapshots from LangSmith.
+* **[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)**: deploy, scale, and manage agents through the LangSmith UI.
+* **[Fleet](https://docs.langchain.com/langsmith/fleet/index)**: create and manage AI agents without writing code.
+* **[Insights](https://docs.langchain.com/langsmith/insights)**: get AI-powered analysis of your traces and application data.
+* **[Chat](https://docs.langchain.com/langsmith/chat)**: an in-workspace chat experience across LangSmith to help you analyze traces, threads, prompts, and experiment results.
+* **[Sandboxes](https://docs.langchain.com/langsmith/sandboxes)**: run code, expose temporary services, and create memory snapshots from LangSmith.
 
-Follow the [Enable additional features](/langsmith/deploy-self-hosted-full-platform) guide to set up these components.
+Follow the [Enable additional features](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform) guide to set up these components.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/kubernetes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/kubernetes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

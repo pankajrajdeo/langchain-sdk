@@ -1,31 +1,26 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to add custom lifespan events
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-lifespan)
 When deploying agents to LangSmith, you often need to initialize resources like database connections when your server starts up, and ensure they're properly closed when it shuts down. Lifespan events let you hook into your server's startup and shutdown sequence to handle these critical setup and teardown tasks.
 
-This works the same way as [adding custom routes](/langsmith/custom-routes). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
+This works the same way as [adding custom routes](https://docs.langchain.com/langsmith/custom-routes). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
 
 Below is an example using FastAPI.
 
-<Note>
-  "Python only"
-  We currently only support custom lifespan events in Python deployments with `langgraph-api>=0.0.26`.
-</Note>
+> [!NOTE]
+> "Python only"
+> We currently only support custom lifespan events in Python deployments with `langgraph-api>=0.0.26`.
 
 ## Create app
 
 Starting from an **existing** LangSmith application, add the following lifespan code to your `webapp.py` file. If you are starting from scratch, you can create a new app from a template using the CLI.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph new --template=new-langgraph-project-python my_new_project
 ```
 
 Once you have a LangGraph project, add the following app code:
 
-```python {highlight={19}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # ./src/agent/webapp.py
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
@@ -53,7 +48,7 @@ app = FastAPI(lifespan=lifespan)
 
 Add the following to your `langgraph.json` configuration file. Make sure the path points to the `webapp.py` file you created above.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -71,7 +66,7 @@ Add the following to your `langgraph.json` configuration file. Make sure the pat
 
 Test the server out locally:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph dev --no-browser
 ```
 
@@ -83,16 +78,12 @@ You can deploy your app as-is to cloud or to your self-hosted platform.
 
 ## Next steps
 
-Now that you've added lifespan events to your deployment, you can use similar techniques to add [custom routes](/langsmith/custom-routes) or [custom middleware](/langsmith/custom-middleware) to further customize your server's behavior.
+Now that you've added lifespan events to your deployment, you can use similar techniques to add [custom routes](https://docs.langchain.com/langsmith/custom-routes) or [custom middleware](https://docs.langchain.com/langsmith/custom-middleware) to further customize your server's behavior.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-lifespan.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/custom-lifespan.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

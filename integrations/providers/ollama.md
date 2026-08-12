@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Ollama integrations
-
-> Integrate with Ollama using LangChain Python.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/ollama)
+Integrate with Ollama using LangChain Python.
 
 This page covers all LangChain integrations with [Ollama](https://ollama.com/).
 
@@ -14,32 +10,21 @@ For a complete list of supported models and variants, see the [Ollama model libr
 
 ## Model interfaces
 
-<Columns cols={2}>
-  <Card title="ChatOllama" href="/oss/python/integrations/chat/ollama" cta="Get started" icon="message" arrow>
-    Ollama chat models.
-  </Card>
+#### [ChatOllama](https://docs.langchain.com/oss/python/integrations/chat/ollama)
+Ollama chat models.
 
-  <Card title="OllamaEmbeddings" href="/oss/python/integrations/embeddings/ollama" cta="Get started" icon="message" arrow>
-    Ollama embedding models.
-  </Card>
-</Columns>
+#### [OllamaEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ollama)
+Ollama embedding models.
 
 ## Other
 
-<Columns cols={2}>
-  <Card title="OllamaLLM" href="/oss/python/integrations/llms/ollama" cta="Get started" icon="cursor-text" arrow>
-    (Legacy) Ollama text completion models.
-  </Card>
-</Columns>
+#### [OllamaLLM](https://docs.langchain.com/oss/python/integrations/llms/ollama)
+(Legacy) Ollama text completion models.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ollama.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

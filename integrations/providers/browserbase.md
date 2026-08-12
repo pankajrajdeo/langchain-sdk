@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Browserbase integrations
 
 > Integrate with Browserbase using LangChain Python.
@@ -20,17 +16,17 @@ Power your AI data retrievals with:
 * Get an API key and Project ID from [browserbase.com](https://browserbase.com) and set it in environment variables (`BROWSERBASE_API_KEY`, `BROWSERBASE_PROJECT_ID`).
 * Install the [Browserbase SDK](https://github.com/browserbase/python-sdk):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install browserbase
 ```
 
 ## Deep Agents integration
 
-[Deep Agents](/oss/python/deepagents/overview) work well with Browserbase by exposing browser capabilities as Python tools rather than routing through the CLI. The integration pattern gives the main planner cheap, stateless tools for search and page retrieval, while delegating expensive rendered and interactive browser work to a dedicated `browser-specialist` subagent.
+[Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) work well with Browserbase by exposing browser capabilities as Python tools rather than routing through the CLI. The integration pattern gives the main planner cheap, stateless tools for search and page retrieval, while delegating expensive rendered and interactive browser work to a dedicated `browser-specialist` subagent.
 
 ### Install
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install deepagents browserbase stagehand langchain-openai python-dotenv
 ```
 
@@ -49,7 +45,7 @@ The cheap tools (`search`, `fetch`) live on the main planner. The expensive brow
 
 ### Environment variables
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export BROWSERBASE_API_KEY="bb_..."
 
 # Optional: model overrides
@@ -61,7 +57,7 @@ export STAGEHAND_AGENT_MODEL="anthropic/claude-sonnet-4-6"
 
 ### Define the tools
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 import os
 from browserbase import Browserbase
@@ -80,7 +76,6 @@ def browserbase_search(query: str, num_results: int = 5) -> str:
     ]
     return str({"query": query, "results": results})
 
-
 @tool
 def browserbase_fetch(url: str, use_proxy: bool = False, max_chars: int = 12000) -> str:
     """Fetch page content without a browser session. Best for static pages and quick reads."""
@@ -93,18 +88,15 @@ def browserbase_fetch(url: str, use_proxy: bool = False, max_chars: int = 12000)
     text = (soup.body or soup).get_text("\n", strip=True)[:max_chars]
     return str({"url": url, "status_code": response.status_code, "text": text})
 
-
 @tool
 def browserbase_rendered_extract(start_url: str, instruction: str) -> str:
     """Open a full Browserbase browser session and extract rendered content with Stagehand."""
     return asyncio.run(_rendered_extract(start_url, instruction))
 
-
 @tool
 def browserbase_interactive_task(start_url: str, task: str) -> str:
     """Open a Browserbase-hosted Stagehand session and execute a multi-step browser task."""
     return asyncio.run(_interactive_task(start_url, task))
-
 
 async def _rendered_extract(start_url: str, instruction: str) -> str:
     client = AsyncStagehand(browserbase_api_key=os.environ["BROWSERBASE_API_KEY"])
@@ -116,7 +108,6 @@ async def _rendered_extract(start_url: str, instruction: str) -> str:
         return str({"session_id": session_id, "result": getattr(getattr(result, "data", None), "result", None)})
     finally:
         await client.sessions.end(id=session_id)
-
 
 async def _interactive_task(start_url: str, task: str) -> str:
     model = os.getenv("STAGEHAND_AGENT_MODEL", "anthropic/claude-sonnet-4-6")
@@ -138,7 +129,7 @@ async def _interactive_task(start_url: str, task: str) -> str:
 
 ### Build the agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 from deepagents import create_deep_agent
 from langgraph.checkpoint.memory import MemorySaver
@@ -180,7 +171,7 @@ agent = create_deep_agent(
 
 `interrupt_on` pauses execution before any `browserbase_interactive_task` call so you can review the proposed action before the agent commits it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import Command
 
 config = {"configurable": {"thread_id": str(uuid.uuid4())}}
@@ -224,12 +215,8 @@ See the complete runnable example in the [deepagents repository](https://github.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/browserbase.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/browserbase.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sambanova integrations
 
 > Integrate with Sambanova using LangChain Python.
@@ -16,15 +12,13 @@ On top of our architecture We have developed some platforms that allow companies
 
 Install the integration package:
 
-<CodeGroup>
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-sambanova
-  ```
+```bash
+pip install langchain-sambanova
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-sambanova
-  ```
-</CodeGroup>
+```bash
+uv add langchain-sambanova
+```
 
 ## API Key
 
@@ -32,30 +26,30 @@ Set your API key it as an environment variable:
 
 If you are a SambaCloud user request an [API key](http://cloud.sambanova.ai/apis?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup) and set it as an environment variable:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export SAMBANOVA_API_KEY="your-sambacloud-api-key-here"
 ```
 
 Or if you are SambaStack user set your base URL and API key as environment variables:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export SAMBANOVA_API_BASE="your-sambastack-envirronment-base-url-here"
 export SAMBANOVA_API_KEY="your-sambastack-api-key-here"
 ```
 
 ## Chat models
 
-For a detailed walkthrough of the `ChatSambaNova` component, see the [usage example](/oss/python/integrations/chat/sambanova)
+For a detailed walkthrough of the `ChatSambaNova` component, see the [usage example](https://docs.langchain.com/oss/python/integrations/chat/sambanova)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_sambanova import ChatSambaNova
 ```
 
 ## Embedding models
 
-For a detailed walkthrough of the `SambaNovaEmbeddings` component, see the [usage example](/oss/python/integrations/embeddings/sambanova)
+For a detailed walkthrough of the `SambaNovaEmbeddings` component, see the [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/sambanova)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_sambanova import SambaNovaEmbeddings
 ```
 
@@ -63,12 +57,8 @@ from langchain_sambanova import SambaNovaEmbeddings
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

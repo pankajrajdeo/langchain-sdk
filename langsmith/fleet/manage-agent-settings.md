@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage agent settings
-
-> Manage your agents in Fleet.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/manage-agent-settings)
+Manage your agents in Fleet.
 
 This page explains how to manage the settings for your agents in LangSmith Fleet.
 
@@ -17,7 +13,7 @@ To change the model for your agent:
 3. In the **Model** section, select the model you want to use.
 4. If the model requires an API key, add it in the **API keys** section.
 
-Custom models are available for enterprise deployments. For more information, see [Custom models](/langsmith/fleet/essentials#custom-models).
+Custom models are available for enterprise deployments. For more information, see [Custom models](https://docs.langchain.com/langsmith/fleet/essentials#custom-models).
 
 ## Reconnect tool integrations
 
@@ -35,7 +31,7 @@ To download the files for your agent, open the agent, expand the **Advanced sett
 
 Agents can be private to the creator, shared with specific people, or shared with your entire LangSmith workspace.
 
-| Feature                  | Private agents                          | [Workspace agents](#workspace-scoped-agent-details)                                                                    |
+| Feature                  | Private agents                          | [Workspace agents](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#workspace-scoped-agent-details)                                                                    |
 | ------------------------ | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Ownership and access** | Only visible to creator                 | Visible to anyone within the same LangSmith workspace                                                                  |
 | **OAuth authentication** | OAuth credentials are scoped to creator | OAuth credentials are scoped to each user; new users cloning workspace agents must re-authenticate with selected tools |
@@ -57,9 +53,8 @@ Your agent can remember information from previous conversations and use it to ma
 
 By default, your agent requires approval before saving to the memories folder. When this setting is enabled, the agent pauses and waits for you to accept, edit, or reject each memory update in the Fleet UI before continuing.
 
-<Tip>
-  If your agent runs on a [schedule](/langsmith/fleet/schedules#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
-</Tip>
+> [!TIP]
+> If your agent runs on a [schedule](https://docs.langchain.com/langsmith/fleet/schedules#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
 
 ### Disable required approval for memory updates
 
@@ -71,14 +66,14 @@ To disable the memory approval requirement:
 
 ## Use the agent programmatically
 
-You can use the [LangGraph SDK](/langsmith/reference) to connect to your agent through code. To view the code snippets needed to call your agent programmatically:
+You can use the [LangGraph SDK](https://docs.langchain.com/langsmith/reference) to connect to your agent through code. To view the code snippets needed to call your agent programmatically:
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-manage-agent-settings), open your agent.
 2. In the sidebar, expand the **Advanced settings** drawer.
 3. Under **Developer**, click **View code snippets**.
 4. Copy the pre-populated code snippets for your agent.
 
-For more information, see [Call agents from code](/langsmith/fleet/code).
+For more information, see [Call agents from code](https://docs.langchain.com/langsmith/fleet/code).
 
 ## Pause agent
 
@@ -88,9 +83,8 @@ To pause an agent, pause its channels:
 2. In the sidebar, expand the **Channels** drawer.
 3. Click the **Pause channels** button.
 
-<Tip>
-  To resume, click the **Resume channels** button.
-</Tip>
+> [!TIP]
+> To resume, click the **Resume channels** button.
 
 ## Delete agent
 
@@ -101,18 +95,13 @@ To permanently delete an agent:
 3. In the **Danger zone** section, click **Delete agent**.
 4. To confirm the deletion, click the **Delete** button.
 
-<Warning>
-  This action cannot be undone. It will permanently delete the agent, all threads linked to the agent, and unlink any attached channels.
-</Warning>
+> [!WARNING]
+> This action cannot be undone. It will permanently delete the agent, all threads linked to the agent, and unlink any attached channels.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/manage-agent-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

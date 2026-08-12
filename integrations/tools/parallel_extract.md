@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel extract integration
 
 > Integrate with the ParallelExtractTool tool using LangChain Python.
 
 > [Parallel](https://platform.parallel.ai/) is a real-time web search and content extraction platform built for LLMs and AI applications.
 
-`ParallelExtractTool` calls Parallel's [Extract API](https://docs.parallel.ai/extract/extract-quickstart), which returns clean, markdown-formatted content from web pages, with optional focused excerpts driven by a `search_objective`. Pair it with [ParallelSearchTool](/oss/python/integrations/tools/parallel_search) to build a search → extract pipeline.
+`ParallelExtractTool` calls Parallel's [Extract API](https://docs.parallel.ai/extract/extract-quickstart), which returns clean, markdown-formatted content from web pages, with optional focused excerpts driven by a `search_objective`. Pair it with [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search) to build a search → extract pipeline.
 
 ## Overview
 
@@ -16,27 +12,25 @@
 
 | Class                                                                                                               | Package                                                                            | Serializable | JS support |                                                                                                                   Package latest                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelExtractTool`](https://reference.langchain.com/python/langchain-parallel/extract_tool/ParallelExtractTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ParallelExtractTool`](https://reference.langchain.com/python/langchain-parallel/extract_tool/ParallelExtractTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,7 +40,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelExtractTool
 
 tool = ParallelExtractTool()
@@ -63,7 +57,7 @@ tool = ParallelExtractTool()
 
 ### Invoke directly with args
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {"urls": ["https://en.wikipedia.org/wiki/Artificial_intelligence"]}
 )
@@ -75,7 +69,7 @@ print(result[0]["content"][:200], "...")
 
 Multiple URLs in a single call:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {
         "urls": [
@@ -94,7 +88,7 @@ for item in result:
 
 Invoking with a model-generated `ToolCall` returns a `ToolMessage`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model_generated_tool_call = {
     "args": {
         "urls": [
@@ -112,7 +106,7 @@ result = tool.invoke(model_generated_tool_call)
 
 ### Async usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def extract_async():
     return await tool.ainvoke(
         {
@@ -130,7 +124,7 @@ result = await extract_async()
 
 Drive excerpt selection with a `search_objective` (or `search_queries`). Setting `full_content=False` skips the full markdown body and returns only matched excerpts:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {
         "urls": ["https://en.wikipedia.org/wiki/Artificial_intelligence"],
@@ -145,7 +139,7 @@ result = tool.invoke(
 
 Control caching, timeouts, and the per-URL `full_content` cap independently:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {
         "urls": ["https://en.wikipedia.org/wiki/Quantum_computing"],
@@ -159,15 +153,14 @@ result = tool.invoke(
 )
 ```
 
-<Note>
-  **`full_content` precedence.** An explicit `FullContentSettings` (or dict) on the call always wins over the tool-level `max_chars_per_extract`. The latter only applies when you pass `full_content=True` as a plain bool.
-</Note>
+> [!NOTE]
+> **`full_content` precedence.** An explicit `FullContentSettings` (or dict) on the call always wins over the tool-level `max_chars_per_extract`. The latter only applies when you pass `full_content=True` as a plain bool.
 
 ### Per-URL error handling
 
 Failed URLs are returned as items with `error_type` set, so partial-success is the default:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {
         "urls": [
@@ -202,9 +195,9 @@ for item in result:
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 
@@ -218,7 +211,7 @@ agent.invoke({"messages": [("human", "Summarize https://en.wikipedia.org/wiki/Qu
 
 Hand `ParallelSearchTool` and `ParallelExtractTool` to the same agent. The model uses search to find URLs and extract to drill into the ones it picks.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelSearchTool
 
 search = ParallelSearchTool()
@@ -234,7 +227,7 @@ agent.invoke({
 
 ## Response format
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [
     {
         "url": "https://example.com/article",
@@ -259,12 +252,8 @@ For detailed documentation, head to the [`ParallelExtractTool`](https://referenc
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_extract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

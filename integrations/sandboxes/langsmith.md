@@ -1,28 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith sandbox integration
 
 > Integrate with the LangSmithSandbox type using LangChain Python.
 
-LangSmith sandboxes are sandbox environments that LangChain manages for you, so there is no separate provider account, billing, or infrastructure to set up. They are the zero-setup default for running agent code, while third-party providers such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel remain available when you want to bring your own. Because they are part of the LangChain platform, you manage them alongside your other LangSmith resources. For setup, snapshots, service URLs, and the auth proxy, see the [LangSmith Sandboxes docs](/langsmith/sandboxes).
+LangSmith sandboxes are sandbox environments that LangChain manages for you, so there is no separate provider account, billing, or infrastructure to set up. They are the zero-setup default for running agent code, while third-party providers such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel remain available when you want to bring your own. Because they are part of the LangChain platform, you manage them alongside your other LangSmith resources. For setup, snapshots, service URLs, and the auth proxy, see the [LangSmith Sandboxes docs](https://docs.langchain.com/langsmith/sandboxes).
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "langsmith[sandbox]" deepagents
-  ```
+```bash
+pip install "langsmith[sandbox]" deepagents
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langsmith[sandbox]" deepagents
-  ```
-</CodeGroup>
+```bash
+uv add "langsmith[sandbox]" deepagents
+```
 
 ## Set your API key
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_API_KEY="<your-api-key>"
 ```
 
@@ -30,9 +24,9 @@ export LANGSMITH_API_KEY="<your-api-key>"
 
 ## Create a sandbox backend
 
-Create a LangSmith sandbox with `SandboxClient`, then wrap it in [LangSmithSandbox](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) to run it as a [Deep Agents backend](/oss/python/deepagents/backends).
+Create a LangSmith sandbox with `SandboxClient`, then wrap it in [LangSmithSandbox](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) to run it as a [Deep Agents backend](https://docs.langchain.com/oss/python/deepagents/backends).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents.backends.langsmith import LangSmithSandbox
 from langsmith.sandbox import SandboxClient
 
@@ -51,7 +45,7 @@ client.delete_sandbox(ls_sandbox.name)
 
 Pass the backend to [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) along with a chat model such as [ChatAnthropic](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic), then invoke the agent. The `try`/`finally` block deletes the sandbox when the try block finishes or an error occurs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 from deepagents.backends.langsmith import LangSmithSandbox
 from langchain_anthropic import ChatAnthropic
@@ -84,7 +78,7 @@ finally:
 
 Delete sandboxes when you are done, since they consume resources until deleted.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 client.delete_sandbox(ls_sandbox.name)
 ```
 
@@ -92,17 +86,13 @@ You can also manage sandbox resources from the [LangSmith UI](https://smith.lang
 
 For more detail, see:
 
-* [Sandboxes in Deep Agents](/oss/python/deepagents/sandboxes): lifecycle, scoping, and a comparison of sandbox providers.
-* [LangSmith Sandboxes](/langsmith/sandboxes): snapshots, service URLs, the auth proxy, and the SDK reference.
+* [Sandboxes in Deep Agents](https://docs.langchain.com/oss/python/deepagents/sandboxes): lifecycle, scoping, and a comparison of sandbox providers.
+* [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes): snapshots, service URLs, the auth proxy, and the SDK reference.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

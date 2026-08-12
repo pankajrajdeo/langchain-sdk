@@ -1,31 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Groq integrations
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/groq)
+Integrate with Groq using LangChain Python.
 
-> Integrate with Groq using LangChain Python.
-
-<Warning>
-  This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](/oss/python/integrations/providers/xai).
-</Warning>
+> [!WARNING]
+> This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](https://docs.langchain.com/oss/python/integrations/providers/xai).
 
 ## Model interfaces
 
-<Columns cols={2}>
-  <Card title="ChatGroq" href="/oss/python/integrations/chat/groq" cta="Get started" icon="message" arrow>
-    Interface to chat models hosted on the Groq platform.
-  </Card>
-</Columns>
+#### [ChatGroq](https://docs.langchain.com/oss/python/integrations/chat/groq)
+Interface to chat models hosted on the Groq platform.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

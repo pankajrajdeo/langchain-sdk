@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Export trace data to BigQuery
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/big-query-bulk-export)
+Load LangSmith trace data into BigQuery using bulk export to GCS.
 
-> Load LangSmith trace data into BigQuery using bulk export to GCS.
-
-<Info>
-  **Plan restrictions apply**
-
-  For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
-</Info>
+> [!NOTE]
+> **Plan restrictions apply**
+>
+> For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
 
 LangSmith can export trace data to a Google Cloud Storage (GCS) bucket in Parquet format. From there, you can load it into BigQuery as an external table (queried in place from GCS) or as a native table (copied into BigQuery storage).
 
@@ -20,7 +15,7 @@ This guide covers:
 * Creating a bulk export destination and export job.
 * Loading the exported data into BigQuery.
 
-For full details on bulk export configuration options, refer to [Bulk export trace data](/langsmith/data-export) and [Manage bulk export destinations](/langsmith/data-export-destinations).
+For full details on bulk export configuration options, refer to [Bulk export trace data](https://docs.langchain.com/langsmith/data-export) and [Manage bulk export destinations](https://docs.langchain.com/langsmith/data-export-destinations).
 
 ## Prerequisites
 
@@ -31,7 +26,7 @@ For full details on bulk export configuration options, refer to [Bulk export tra
 
 Create a dedicated GCS bucket for LangSmith exports. Using a dedicated bucket makes it easier to grant scoped permissions without affecting other data:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 gcloud storage buckets create gs://YOUR_BUCKET_NAME \
   --location=US \
   --uniform-bucket-level-access
@@ -43,7 +38,7 @@ Choose a region close to your BigQuery dataset to minimize latency and avoid cro
 
 Create a GCP service account that LangSmith will use to write data to GCS:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 gcloud iam service-accounts create langsmith-bulk-export \
   --display-name="LangSmith Bulk Export"
 ```
@@ -52,7 +47,7 @@ Grant the service account write access to your bucket. The minimum required perm
 
 The "Storage Object Admin" predefined role covers all required and recommended permissions:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 gcloud storage buckets add-iam-policy-binding gs://YOUR_BUCKET_NAME \
   --member="serviceAccount:langsmith-bulk-export@YOUR_PROJECT.iam.gserviceaccount.com" \
   --role="roles/storage.objectAdmin"
@@ -71,7 +66,7 @@ LangSmith connects to GCS using the S3-compatible XML API, which requires HMAC k
 
 Generate HMAC keys for your service account:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 gcloud storage hmac create \
   langsmith-bulk-export@YOUR_PROJECT.iam.gserviceaccount.com
 ```
@@ -82,9 +77,9 @@ Save the `accessId` and `secret` from the output. You can also generate HMAC key
 
 Create a destination in LangSmith pointing to your GCS bucket. Set `endpoint_url` to `https://storage.googleapis.com` to use the GCS S3-compatible API.
 
-You will need your [LangSmith API key](/langsmith/create-account-api-key) and [workspace ID](/langsmith/set-up-hierarchy#set-up-a-workspace).
+You will need your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and [workspace ID](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-a-workspace).
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -107,13 +102,13 @@ curl --request POST \
 
 `prefix` is a path within the bucket where LangSmith will write exported files. For example, `langsmith-exports` or `data/traces`. Choose any value that works for your bucket layout.
 
-LangSmith validates the credentials by performing a test write before saving the destination. If the request returns a `400` error, refer to [Debug destination errors](/langsmith/data-export-destinations#debug-destination-errors).
+LangSmith validates the credentials by performing a test write before saving the destination. If the request returns a `400` error, refer to [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
 
 Save the `id` from the response; you will need it in the next step.
 
 ### Temporary validation file
 
-During destination creation (and [credential rotation](#credential-rotation)), LangSmith writes a temporary `.txt` file to `YOUR_PREFIX/tmp/` to verify write access, then attempts to delete it. The deletion is best-effort: if the service account lacks `storage.objects.delete`, the file is not deleted and the `tmp/` folder remains in your bucket.
+During destination creation (and [credential rotation](https://docs.langchain.com/langsmith/big-query-bulk-export#credential-rotation)), LangSmith writes a temporary `.txt` file to `YOUR_PREFIX/tmp/` to verify write access, then attempts to delete it. The deletion is best-effort: if the service account lacks `storage.objects.delete`, the file is not deleted and the `tmp/` folder remains in your bucket.
 
 The `tmp/` folder does not affect exports, but it will be included in broad GCS URI globs (e.g., `gs://YOUR_BUCKET_NAME/YOUR_PREFIX/*`).
 
@@ -125,7 +120,7 @@ You will need the project ID (`session_id`), which you can copy from the project
 
 **One-time export:**
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports' \
   --header 'Content-Type: application/json' \
@@ -143,7 +138,7 @@ curl --request POST \
 
 **Scheduled (recurring) export:**
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports' \
   --header 'Content-Type: application/json' \
@@ -159,11 +154,10 @@ curl --request POST \
   }'
 ```
 
-Bulk exports default to `zstandard` compression. This example sets `snappy` because Snappy is fast and widely supported by BigQuery. For all available options, refer to [Bulk export trace data](/langsmith/data-export#2-create-an-export-job), including field filtering and filter expressions.
+Bulk exports default to `zstandard` compression. This example sets `snappy` because Snappy is fast and widely supported by BigQuery. For all available options, refer to [Bulk export trace data](https://docs.langchain.com/langsmith/data-export#2-create-an-export-job), including field filtering and filter expressions.
 
-<Note>
-  On [Self-hosted LangSmith](/langsmith/self-hosted), the default is `gzip`. Set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable to change the default.
-</Note>
+> [!NOTE]
+> On [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted), the default is `gzip`. Set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable to change the default.
 
 ### Output file structure
 
@@ -184,65 +178,61 @@ BigQuery offers two ways to access your exported data. Both require granting the
 
 ### Create the table
 
-<Tabs>
-  <Tab title="External table">
-    An external table queries data directly from GCS without copying it into BigQuery.
+#### External table
+An external table queries data directly from GCS without copying it into BigQuery.
 
-    1. In the BigQuery console, expand your project and dataset in the **Explorer** pane.
-    2. Click the dataset's **Actions** menu (three dots) and select **Create table**.
-    3. Under **Source**:
-       * Set **Create table from** to **Google Cloud Storage**.
-       * Set the file path to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX/export_id=*`. Using `export_id=*` scopes BigQuery to Hive-partitioned export directories and excludes the `tmp/` folder that LangSmith writes during destination validation (see [Temporary validation file](#temporary-validation-file)).
-       * Set **File format** to **Parquet**.
-    4. Check **Source data partitioning**, then:
-       * Set **Source URI prefix** to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX`.
-       * Set **Partition inference mode** to **Automatically infer types**.
-    5. Under **Destination**:
-       * Select your project and dataset.
-       * Enter a table name, for example `langsmith_runs`.
-       * Set **Table type** to **External table**.
-    6. Under **Schema**, enable **Auto-detect**.
-    7. Click **Create table**.
+1. In the BigQuery console, expand your project and dataset in the **Explorer** pane.
+2. Click the dataset's **Actions** menu (three dots) and select **Create table**.
+3. Under **Source**:
+   * Set **Create table from** to **Google Cloud Storage**.
+   * Set the file path to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX/export_id=*`. Using `export_id=*` scopes BigQuery to Hive-partitioned export directories and excludes the `tmp/` folder that LangSmith writes during destination validation (see [Temporary validation file](https://docs.langchain.com/langsmith/big-query-bulk-export#temporary-validation-file)).
+   * Set **File format** to **Parquet**.
+4. Check **Source data partitioning**, then:
+   * Set **Source URI prefix** to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX`.
+   * Set **Partition inference mode** to **Automatically infer types**.
+5. Under **Destination**:
+   * Select your project and dataset.
+   * Enter a table name, for example `langsmith_runs`.
+   * Set **Table type** to **External table**.
+6. Under **Schema**, enable **Auto-detect**.
+7. Click **Create table**.
 
-    The partition path columns (`export_id`, `tenant_id`, `session_id`, `resource`, `year`, `month`, `day`) are available as queryable columns. Filter on `year`, `month`, or `day` in your queries to enable partition pruning.
-  </Tab>
+The partition path columns (`export_id`, `tenant_id`, `session_id`, `resource`, `year`, `month`, `day`) are available as queryable columns. Filter on `year`, `month`, or `day` in your queries to enable partition pruning.
 
-  <Tab title="Native table">
-    A native table transfers the Parquet data into BigQuery storage for full query performance.
+#### Native table
+A native table transfers the Parquet data into BigQuery storage for full query performance.
 
-    1. Go to the [Data Transfer page](https://console.cloud.google.com/bigquery/transfers) in the Google Cloud console and select **+ Create transfer**.
+1. Go to the [Data Transfer page](https://console.cloud.google.com/bigquery/transfers) in the Google Cloud console and select **+ Create transfer**.
 
-    2. For **Source type**, select **Google Cloud Storage**.
+2. For **Source type**, select **Google Cloud Storage**.
 
-    3. Enter a **Transfer name**. You'll have access to edit the transfer at a point if necessary.
+3. Enter a **Transfer name**. You'll have access to edit the transfer at a point if necessary.
 
-    4. Select a **Schedule option**. If you do not want to repeat the export, you can select **On demand** and trigger the export manually.
+4. Select a **Schedule option**. If you do not want to repeat the export, you can select **On demand** and trigger the export manually.
 
-    5. In the BigQuery console, expand your project and dataset in the **Explorer** pane.
+5. In the BigQuery console, expand your project and dataset in the **Explorer** pane.
 
-    6. Click the dataset's **Actions** menu (three dots) and select **Create table**.
+6. Click the dataset's **Actions** menu (three dots) and select **Create table**.
 
-    7. Under **Source**:
-       * Set **Create table from** to **Google Cloud Storage**.
-       * Set the file path to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX/export_id=*`. Using `export_id=*` excludes the `tmp/` folder that LangSmith writes during destination validation (see [Temporary validation file](#temporary-validation-file)).
-       * Set **File format** to **Parquet**.
+7. Under **Source**:
+   * Set **Create table from** to **Google Cloud Storage**.
+   * Set the file path to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX/export_id=*`. Using `export_id=*` excludes the `tmp/` folder that LangSmith writes during destination validation (see [Temporary validation file](https://docs.langchain.com/langsmith/big-query-bulk-export#temporary-validation-file)).
+   * Set **File format** to **Parquet**.
 
-    8. Check **Source data partitioning**, then:
-       * Set **Source URI prefix** to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX`.
-       * Set **Partition inference mode** to **Automatically infer types**.
+8. Check **Source data partitioning**, then:
+   * Set **Source URI prefix** to `gs://YOUR_BUCKET_NAME/YOUR_PREFIX`.
+   * Set **Partition inference mode** to **Automatically infer types**.
 
-    9. Under **Destination**:
-       * Select your project and dataset.
-       * Enter a table name, for example `langsmith_runs`.
-       * Set **Table type** to **Native table**.
+9. Under **Destination**:
+   * Select your project and dataset.
+   * Enter a table name, for example `langsmith_runs`.
+   * Set **Table type** to **Native table**.
 
-    10. Under **Advanced options**, set **Write preference** to **Write if empty** for a new table.
+10. Under **Advanced options**, set **Write preference** to **Write if empty** for a new table.
 
-    11. Click **Create table**.
+11. Click **Create table**.
 
-    BigQuery runs a load job to copy the data. The Hive partition columns appear as regular columns in the table. For the full list of available data columns, see [Exportable fields](/langsmith/data-export#exportable-fields).
-  </Tab>
-</Tabs>
+BigQuery runs a load job to copy the data. The Hive partition columns appear as regular columns in the table. For the full list of available data columns, see [Exportable fields](https://docs.langchain.com/langsmith/data-export#exportable-fields).
 
 ## Credential rotation
 
@@ -252,7 +242,7 @@ To rotate your HMAC keys without interrupting active exports:
 
 2. **Call the PATCH endpoint** with the new credentials:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    curl --request PATCH \
      --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations/YOUR_DESTINATION_ID' \
      --header 'Content-Type: application/json' \
@@ -264,15 +254,15 @@ To rotate your HMAC keys without interrupting active exports:
          "secret_access_key": "NEW_HMAC_SECRET"
        }
      }'
-   ```
+```
 
-   LangSmith validates the new credentials with a test write before saving. A new `tmp/` file may appear in your bucket during this validation (see [Temporary validation file](#temporary-validation-file)).
+   LangSmith validates the new credentials with a test write before saving. A new `tmp/` file may appear in your bucket during this validation (see [Temporary validation file](https://docs.langchain.com/langsmith/big-query-bulk-export#temporary-validation-file)).
 
 3. **Keep old HMAC keys active** until all in-flight export runs complete. Both credential sets are valid simultaneously during the transition window.
 
 4. **Delete the old HMAC keys** in GCP once you have confirmed no in-flight runs are using them.
 
-For full details, see [Rotate destination credentials](/langsmith/data-export-destinations#rotate-destination-credentials).
+For full details, see [Rotate destination credentials](https://docs.langchain.com/langsmith/data-export-destinations#rotate-destination-credentials).
 
 ## Troubleshooting
 
@@ -285,16 +275,12 @@ For full details, see [Rotate destination credentials](/langsmith/data-export-de
 | BigQuery partition pruning not working      | Incorrect source URI prefix            | Ensure the source URI prefix ends before the first partition key, e.g. `gs://BUCKET/PREFIX` |
 | BigQuery picks up `tmp/` files              | Broad file path glob                   | Use `export_id=*` in your file path instead of `*`                                          |
 
-For additional error codes and export status details, see [Monitor and troubleshoot bulk exports](/langsmith/data-export-monitor).
+For additional error codes and export status details, see [Monitor and troubleshoot bulk exports](https://docs.langchain.com/langsmith/data-export-monitor).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/big-query-bulk-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/big-query-bulk-export.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

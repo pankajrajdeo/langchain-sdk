@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google alloydb for postgresql integration
 
 > Integrate with the Google alloydb for postgresql vector store using LangChain Python.
@@ -37,13 +33,13 @@ To run this notebook, you will need to do the following:
 
 Install the integration library, `langchain-google-alloydb-pg`, and the library for the embedding service, `langchain-google-vertexai`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-google-alloydb-pg langchain-google-vertexai
 ```
 
 **Colab only:** Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -58,7 +54,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -74,7 +70,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -89,7 +85,7 @@ PROJECT_ID = "my-project-id"  # @param {type:"string"}
 
 Find your database values, in the [AlloyDB Instances page](https://console.cloud.google.com/alloydb/clusters).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @title Set Your Values Here { display-mode: "form" }
 REGION = "us-central1"  # @param {type: "string"}
 CLUSTER = "my-cluster"  # @param {type: "string"}
@@ -119,7 +115,7 @@ Optionally, [built-in database authentication](https://cloud.google.com/alloydb/
 
 **Note:** This tutorial demonstrates the async interface. All async methods have corresponding sync methods.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg import AlloyDBEngine
 
 engine = await AlloyDBEngine.afrom_instance(
@@ -135,7 +131,7 @@ engine = await AlloyDBEngine.afrom_instance(
 
 The `AlloyDBVectorStore` class requires a database table. The `AlloyDBEngine` engine has a helper method `init_vectorstore_table()` that can be used to create a table with the proper schema for you.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await engine.ainit_vectorstore_table(
     table_name=TABLE_NAME,
     vector_size=768,  # Vector size for VertexAI model(textembedding-gecko@latest)
@@ -144,15 +140,15 @@ await engine.ainit_vectorstore_table(
 
 ### Create an embedding class instance
 
-You can use any [LangChain embeddings model](/oss/python/integrations/embeddings/).
+You can use any [LangChain embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/).
 You may need to enable Vertex AI API to use `VertexAIEmbeddings`. We recommend setting the embedding model's version for production, learn more about the [Text embeddings models](https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/text-embeddings).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # enable Vertex AI API
 !gcloud services enable aiplatform.googleapis.com
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIEmbeddings
 
 embedding = VertexAIEmbeddings(
@@ -162,7 +158,7 @@ embedding = VertexAIEmbeddings(
 
 ### Initialize a default AlloyDBVectorStore
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg import AlloyDBVectorStore
 
 store = await AlloyDBVectorStore.create(
@@ -174,7 +170,7 @@ store = await AlloyDBVectorStore.create(
 
 ### Add texts
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 all_texts = ["Apples and oranges", "Cars and airplanes", "Pineapple", "Train", "Banana"]
@@ -186,13 +182,13 @@ await store.aadd_texts(all_texts, metadatas=metadatas, ids=ids)
 
 ### Delete texts
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await store.adelete([ids[1]])
 ```
 
 ### Search for documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "I'd like a fruit."
 docs = await store.asimilarity_search(query)
 print(docs)
@@ -200,7 +196,7 @@ print(docs)
 
 ### Search for documents by vector
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_vector = embedding.embed_query(query)
 docs = await store.asimilarity_search_by_vector(query_vector, k=2)
 print(docs)
@@ -210,7 +206,7 @@ print(docs)
 
 Speed up vector search queries by applying a vector index. Learn more about [vector indexes](https://cloud.google.com/blog/products/databases/faster-similarity-search-performance-with-pgvector-indexes).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg.indexes import IVFFlatIndex
 
 index = IVFFlatIndex()
@@ -219,13 +215,13 @@ await store.aapply_vector_index(index)
 
 ### Re-index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await store.areindex()  # Re-index using default index name
 ```
 
 ### Remove an index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await store.adrop_vector_index()  # Delete index using default name
 ```
 
@@ -235,7 +231,7 @@ A Vector Store can take advantage of relational data to filter similarity search
 
 Create a table with custom metadata columns.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_alloydb_pg import Column
 
 # Set table name
@@ -246,7 +242,6 @@ await engine.ainit_vectorstore_table(
     vector_size=768,  # VertexAI model: textembedding-gecko@latest
     metadata_columns=[Column("len", "INTEGER")],
 )
-
 
 # Initialize AlloyDBVectorStore
 custom_store = await AlloyDBVectorStore.create(
@@ -263,7 +258,7 @@ custom_store = await AlloyDBVectorStore.create(
 
 ### Search for documents with metadata filter
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 # Add texts to the Vector Store
@@ -280,12 +275,8 @@ print(docs)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_alloydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_alloydb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

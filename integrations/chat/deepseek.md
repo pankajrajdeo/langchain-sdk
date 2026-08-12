@@ -1,22 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatDeepSeek integration
 
 > Integrate with the ChatDeepSeek chat model using LangChain Python.
 
-This will help you get started with DeepSeek's hosted [chat models](/oss/python/langchain/models).
+This will help you get started with DeepSeek's hosted [chat models](https://docs.langchain.com/oss/python/langchain/models).
 
-<Tip>
-  **API Reference**
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) API reference.
 
-  For detailed documentation of all features and configuration options, head to the [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) API reference.
-</Tip>
-
-<Tip>
-  **DeepSeek's models are open source and can be run locally (e.g. in [Ollama](/oss/python/integrations/chat/ollama)) or on other inference providers (e.g. , [Together](/oss/python/integrations/chat/together)) as well.**
-</Tip>
+> [!TIP]
+> **DeepSeek's models are open source and can be run locally (e.g. in [Ollama](https://docs.langchain.com/oss/python/integrations/chat/ollama)) or on other inference providers (e.g. , [Together](https://docs.langchain.com/oss/python/integrations/chat/together)) as well.**
 
 ## Overview
 
@@ -28,13 +22,12 @@ This will help you get started with DeepSeek's hosted [chat models](/oss/python/
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
-<Note>
-  **DeepSeek-R1, specified via `model="deepseek-reasoner"`, does not support tool calling or structured output. Those features [are supported](https://api-docs.deepseek.com/guides/function_calling) by DeepSeek-V3 (specified via `model="deepseek-chat"`).**
-</Note>
+> [!NOTE]
+> **DeepSeek-R1, specified via `model="deepseek-reasoner"`, does not support tool calling or structured output. Those features [are supported](https://api-docs.deepseek.com/guides/function_calling) by DeepSeek-V3 (specified via `model="deepseek-chat"`).**
 
 ## Setup
 
@@ -44,7 +37,7 @@ To access DeepSeek models you'll need to create a DeepSeek account, get an API k
 
 Head to [DeepSeek's API Key page](https://platform.deepseek.com/api_keys) to sign up to DeepSeek and generate an API key. Once you've done this set the `DEEPSEEK_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -52,9 +45,9 @@ if not os.getenv("DEEPSEEK_API_KEY"):
     os.environ["DEEPSEEK_API_KEY"] = getpass.getpass("Enter your DeepSeek API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -63,7 +56,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain DeepSeek integration lives in the `langchain-deepseek` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-deepseek
 ```
 
@@ -71,7 +64,7 @@ pip install -qU langchain-deepseek
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_deepseek import ChatDeepSeek
 
 llm = ChatDeepSeek(
@@ -86,7 +79,7 @@ llm = ChatDeepSeek(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -106,12 +99,8 @@ For detailed documentation of all `ChatDeepSeek` features and configurations hea
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/deepseek.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/deepseek.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

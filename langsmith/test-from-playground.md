@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Test from the Playground
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/test-from-playground)
+Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
 
-> Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
-
-The [Playground](/langsmith/prompt-engineering-concepts#playground) provides an interface for iterating on and testing prompts and model configurations. Test a prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without writing any code.
+The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) provides an interface for iterating on and testing prompts and model configurations. Test a prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without writing any code.
 
 In the Playground you can:
 
@@ -17,28 +13,23 @@ In the Playground you can:
 * Enter the input variables to run through the prompt template.
 * Run the prompt through the model and observe the outputs.
 
-To test a prompt or model configuration over a dataset and score the results, [run an evaluation from the Playground](/langsmith/run-evaluation-from-playground).
+To test a prompt or model configuration over a dataset and score the results, [run an evaluation from the Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground).
 
-<Callout type="info" icon="feather">
-  Use the [Chat](/langsmith/chat) in the Playground to optimize prompts, generate tools, and create output schemas with AI assistance.
-</Callout>
+> [!NOTE]
+> Use the [Chat](https://docs.langchain.com/langsmith/chat) in the Playground to optimize prompts, generate tools, and create output schemas with AI assistance.
 
 ## See also
 
-* [Prompt engineering concepts: Playground](/langsmith/prompt-engineering-concepts#playground)
-* [Manage datasets in the application: From the Playground](/langsmith/manage-datasets-in-application#from-the-playground)
-* [Run an evaluation from the Playground: Create an experiment in the Playground](/langsmith/run-evaluation-from-playground#create-an-experiment-in-the-playground)
-* [Chat: Playground](/langsmith/chat#playground)
-* [Studio: Playground](/langsmith/observability-studio#playground)
+* [Prompt engineering concepts: Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground)
+* [Manage datasets in the application: From the Playground](https://docs.langchain.com/langsmith/manage-datasets-in-application#from-the-playground)
+* [Run an evaluation from the Playground: Create an experiment in the Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground#create-an-experiment-in-the-playground)
+* [Chat: Playground](https://docs.langchain.com/langsmith/chat#playground)
+* [Studio: Playground](https://docs.langchain.com/langsmith/observability-studio#playground)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/test-from-playground.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/test-from-playground.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sentence Transformers on Hugging Face integration
 
 > Integrate with Sentence Transformers embedding models using LangChain
@@ -10,7 +6,7 @@
 
 ## Setup
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU langchain-huggingface
 ```
 
@@ -18,7 +14,7 @@ pip install -qU langchain-huggingface
 
 ## Basic usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
@@ -45,13 +41,13 @@ Start from the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard
 | `lightonai/DenseOn`                       | 149M | modern architecture, strong performance for its size                          |
 | `Qwen/Qwen3-Embedding-0.6B`               | 595M | Multilingual, instruction-aware, top MTEB performance                         |
 
-See also [Factors to weigh](/oss/python/integrations/embeddings#factors-to-weigh) for a deeper walkthrough of the tradeoffs.
+See also [Factors to weigh](https://docs.langchain.com/oss/python/integrations/embeddings#factors-to-weigh) for a deeper walkthrough of the tradeoffs.
 
 ## Normalize embeddings
 
 Models trained with cosine similarity benefit from normalized output vectors. If your vector store uses cosine similarity, normalize at the source:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = HuggingFaceEmbeddings(
     model_name="BAAI/bge-m3",
     encode_kwargs={"normalize_embeddings": True},
@@ -62,7 +58,7 @@ embeddings = HuggingFaceEmbeddings(
 
 Sentence Transformers auto-selects the best available device (CUDA > MPS > CPU), so you don't need to set `device=` explicitly in most cases. On a GPU, raise `batch_size` to keep it fed:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = HuggingFaceEmbeddings(
     model_name="BAAI/bge-m3",
     encode_kwargs={"batch_size": 64, "normalize_embeddings": True},
@@ -75,7 +71,7 @@ To pin to a specific device, pass `model_kwargs={"device": "cpu"}` (or `"cuda:1"
 
 Some models (`intfloat/e5-*`, `Qwen/Qwen3-Embedding-*`, many `BAAI/bge-*`) are trained with distinct prompts for queries and documents. Pass these via `encode_kwargs` and `query_encode_kwargs`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = HuggingFaceEmbeddings(
     model_name="intfloat/e5-large-v2",
     encode_kwargs={"prompt": "passage: "},
@@ -87,28 +83,24 @@ Using the right prompts at indexing and query time typically gives a meaningful 
 
 ## Deploy for production
 
-For serving Sentence Transformers models at scale, use [Text Embeddings Inference (TEI)](/oss/python/integrations/embeddings/text_embeddings_inference), a dedicated inference server from Hugging Face with batching, GPU support, and OpenAI-compatible APIs. Point LangChain at a TEI deployment via `OpenAIEmbeddings`: see the [TEI integration guide](/oss/python/integrations/embeddings/text_embeddings_inference).
+For serving Sentence Transformers models at scale, use [Text Embeddings Inference (TEI)](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference), a dedicated inference server from Hugging Face with batching, GPU support, and OpenAI-compatible APIs. Point LangChain at a TEI deployment via `OpenAIEmbeddings`: see the [TEI integration guide](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference).
 
 ## Reranking
 
-The same ecosystem hosts [cross-encoder reranker models](https://huggingface.co/models?pipeline_tag=text-ranking). For a local reranker on top of a vector store, see the [Cross Encoder Reranker guide](/oss/python/integrations/document_transformers/cross_encoder_reranker).
+The same ecosystem hosts [cross-encoder reranker models](https://huggingface.co/models?pipeline_tag=text-ranking). For a local reranker on top of a vector store, see the [Cross Encoder Reranker guide](https://docs.langchain.com/oss/python/integrations/document_transformers/cross_encoder_reranker).
 
 ## Troubleshooting
 
 If the `accelerate` package is missing or fails to import:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU accelerate
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/sentence_transformers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/sentence_transformers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

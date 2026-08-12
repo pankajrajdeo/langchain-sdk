@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google firestore in datastore mode integration
 
 > Integrate with the Google firestore in datastore mode document loader using LangChain Python.
 
 > [Firestore in Datastore Mode](https://cloud.google.com/datastore) is a NoSQL document database built for automatic scaling, high performance and ease of application development. Extend your database application to build AI-powered experiences leveraging Datastore's LangChain integrations.
 
-This notebook goes over how to use [Firestore in Datastore Mode](https://cloud.google.com/datastore) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `DatastoreLoader` and `DatastoreSaver`.
+This notebook goes over how to use [Firestore in Datastore Mode](https://cloud.google.com/datastore) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `DatastoreLoader` and `DatastoreSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-datastore-python/).
 
@@ -28,13 +24,13 @@ After confirmed access to database in the runtime environment of this notebook, 
 
 The integration lives in its own `langchain-google-datastore` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-datastore
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -52,7 +48,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -68,7 +64,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -80,7 +76,7 @@ auth.authenticate_user()
 
 Save langchain documents with `DatastoreSaver.upsert_documents(<documents>)`. By default it will try to extract the entity key from the `key` in the Document metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_datastore import DatastoreSaver
 
@@ -94,7 +90,7 @@ saver.upsert_documents(data)
 
 If a `kind` is specified the documents will be stored with an auto generated id.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 saver = DatastoreSaver("MyKind")
 
 saver.upsert_documents(data)
@@ -106,7 +102,7 @@ Load langchain documents with `DatastoreLoader.load()` or `DatastoreLoader.lazy_
 
 1. `source` - The source to load the documents. It can be an instance of Query or the name of the Datastore kind to read from.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_datastore import DatastoreLoader
 
 loader = DatastoreLoader("MyKind")
@@ -117,7 +113,7 @@ data = loader.load()
 
 Other than loading documents from kind, we can also choose to load documents from query. For example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import datastore
 
 client = datastore.Client(database="non-default-db", namespace="custom_namespace")
@@ -133,7 +129,7 @@ data = loader_document.load()
 
 Delete a list of langchain documents from Datastore with `DatastoreSaver.delete_documents(<documents>)`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 saver = DatastoreSaver()
 
 saver.delete_documents(data)
@@ -153,7 +149,7 @@ saver.delete_documents(data, keys_to_delete)
 
 The arguments of `page_content_properties` and `metadata_properties` will specify the Entity properties to be written into LangChain Document `page_content` and `metadata`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = DatastoreLoader(
     source="MyKind",
     page_content_fields=["data_field"],
@@ -169,7 +165,7 @@ When the `page_content` contains only one field the information will be the fiel
 
 ### Customize connection & authentication
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.auth import compute_engine
 from google.cloud.firestore import Client
 
@@ -182,12 +178,8 @@ loader = DatastoreLoader(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_datastore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_datastore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

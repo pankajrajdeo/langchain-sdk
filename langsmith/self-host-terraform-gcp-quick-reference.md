@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GCP Terraform quick reference
-
-> Make targets, Terraform, kubectl, gcloud, and Helm commands for LangSmith self-hosted on GKE.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-quick-reference)
+Make targets, Terraform, kubectl, gcloud, and Helm commands for LangSmith self-hosted on GKE.
 
 Command cheat sheet for day-to-day operations against a GCP LangSmith deployment provisioned with the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp). All `make` targets run from `modules/gcp/`. Run `make help` for an inline summary.
 
@@ -24,7 +20,7 @@ Each stage builds on the previous. Verify pods are healthy before enabling the n
 
 ## First-time setup
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd terraform/modules/gcp
 
 # Interactive wizard — generates terraform.tfvars
@@ -53,7 +49,7 @@ make deploy
 
 To keep the Helm release under Terraform instead of the deploy script, use the `app` layer:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 make init-values  # generate the layered values files
 make init-app     # pull infra outputs into app/infra.auto.tfvars.json
 make apply-app    # terraform apply the Helm release (make destroy-app to remove)
@@ -63,7 +59,7 @@ The `app` layer uses its own variable names: `sizing` (not `sizing_profile`) and
 
 ## Day-2 operations
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Check deployment state and next-step guidance
 make status              # full check
 make status-quick        # skip Secret Manager and K8s queries
@@ -85,7 +81,7 @@ make kubeconfig
 
 Set flags in `terraform.tfvars`, then `make init-values && make deploy`. `init-values.sh` copies the matching example file into `helm/values/` automatically.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 # terraform.tfvars
 enable_deployments   = true
 enable_fleet         = true   # Fleet (formerly Agent Builder), standalone (chart v0.15+); no enable_deployments required
@@ -97,7 +93,7 @@ enable_usage_telemetry = true # extended usage telemetry
 
 To add an add-on after initial install without re-running `init-values.sh`, copy manually:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cp helm/values/examples/langsmith-values-agent-deploys.yaml helm/values/
 cp helm/values/examples/langsmith-values-fleet.yaml         helm/values/
 cp helm/values/examples/langsmith-values-insights.yaml      helm/values/
@@ -110,7 +106,7 @@ make deploy
 
 Set `sizing_profile` in `terraform.tfvars`, then re-run `make init-values && make deploy`.
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 sizing_profile = "production"   # default | minimum | dev | production | production-large
 ```
 
@@ -124,7 +120,7 @@ sizing_profile = "production"   # default | minimum | dev | production | product
 
 ## kubectl
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Pod health
 kubectl get pods -n langsmith
 kubectl get pods -n langsmith -w
@@ -161,7 +157,7 @@ kubectl get crd | grep langchain
 
 ## gcloud
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Re-auth if you hit oauth2 invalid_grant / invalid_rapt errors
 gcloud auth login
 gcloud auth application-default login
@@ -203,7 +199,7 @@ gcloud secrets versions access latest --secret=<secret-id> --project <project-id
 
 ## Terraform
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd modules/gcp/infra
 
 terraform init
@@ -236,7 +232,7 @@ terraform refresh -var-file=terraform.tfvars
 
 ## Teardown
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # 1. Remove LangSmith Deployment resources (if the add-on was enabled)
 kubectl delete lgp --all -n langsmith 2>/dev/null || true
 
@@ -247,7 +243,7 @@ make uninstall
 make destroy
 ```
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 # terraform.tfvars
 gke_deletion_protection      = false
 postgres_deletion_protection = false
@@ -255,12 +251,8 @@ postgres_deletion_protection = false
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-quick-reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure Terraform architecture
-
-> Platform layers, services, Workload Identity, networking, ingress options, and module dependencies for LangSmith self-hosted on AKS.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture)
+Platform layers, services, Workload Identity, networking, ingress options, and module dependencies for LangSmith self-hosted on AKS.
 
 Understand what the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure) provision and how the pieces fit together, so you can size, secure, and customize your LangSmith deployment before running `make apply`.
 
@@ -16,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * Add-ons: LangSmith Deployment, Agent Builder, Insights, and Polly.
 * Ingress controllers, resource sizing, and optional modules.
 
-If you are ready to install, start with the [deployment walkthrough](/langsmith/self-host-terraform-azure-deploy).
+If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy).
 
 ## Platform layers
 
 LangSmith on Azure deploys in stages. Each stage adds a capability layer on top of the previous. All layers share the same AKS cluster and `langsmith` namespace.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/azure-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=5ee76baf8bca85d865a4e75e2ab7d4b6" alt="LangSmith on Azure service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/azure-architecture.png" />
+> **Image:** [LangSmith on Azure service layout](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture)
 
 | Stage                       | Layer                | What it adds                                                                                  |
 | --------------------------- | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -45,7 +41,7 @@ The Terraform path uses the `app/` module. `make init-app` calls `app/scripts/pu
 
 ### Light deploy (all in-cluster)
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 AKS Cluster
 ├── langsmith namespace
 │   ├── frontend, backend, platform-backend, playground, queue, ace-backend
@@ -62,7 +58,7 @@ Azure
 
 Set in `terraform.tfvars`:
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 postgres_source   = "in-cluster"
 redis_source      = "in-cluster"
 clickhouse_source = "in-cluster"
@@ -72,7 +68,7 @@ For the full all-in-cluster walkthrough (NGINX with Let's Encrypt HTTP-01 TLS, a
 
 ### Production (external managed services)
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 AKS Cluster
 ├── langsmith namespace
 │   ├── frontend, backend, platform-backend, playground, queue, ingest-queue, ace-backend
@@ -90,7 +86,7 @@ Azure Managed Services
 
 ### Light deploy
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 langsmith-vnet<identifier>
 └── subnet-0    (AKS nodes only)
     No Postgres/Redis subnets; chart-managed pods handle both
@@ -98,7 +94,7 @@ langsmith-vnet<identifier>
 
 ### Production
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 langsmith-vnet<identifier>
 ├── subnet-0              (AKS nodes)
 ├── subnet-postgres       (Azure DB for PostgreSQL Flexible Server)
@@ -120,13 +116,11 @@ All subnets are private. Postgres and Redis have no public endpoints; both are a
 | `langsmith-ace-backend`      | Async compute (dataset runs, evaluations, background jobs) | —    | 1 to 5                                 | No                |
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica, 500Gi PVC | No                |
 
-<Warning>
-  In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
-</Warning>
+> [!WARNING]
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
 
-<Note>
-  [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
-</Note>
+> [!NOTE]
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 
@@ -195,7 +189,7 @@ When `postgres_source = "external"` and `redis_source = "external"` (the recomme
 
 Azure AD token exchange happens via the AKS OIDC issuer. Pods access Blob Storage without static keys.
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 AKS OIDC issuer
   → Federated credential on Azure Managed Identity (one per Kubernetes ServiceAccount)
   → Kubernetes ServiceAccount annotated with azure.workload.identity/client-id
@@ -233,7 +227,7 @@ All federated credentials are registered in `modules/k8s-cluster/main.tf` under 
 
 If a pod's ServiceAccount has no registered federated credential, Azure AD rejects the token exchange and the pod panics on startup:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 panic: blob-storage health-check failed: get container properties failed:
 DefaultAzureCredential: failed to acquire a token.
 WorkloadIdentityCredential authentication failed.
@@ -242,7 +236,7 @@ WorkloadIdentityCredential authentication failed.
 
 ## Secret flow
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 Infrastructure stage
 
   ./setup-env.sh   (read-only against Key Vault; never writes to KV directly)
@@ -312,9 +306,8 @@ Four sizing profiles are available.
 | default | `Standard_D8s_v3`  | 8    | 32 GB | 1   | 10  | Core LangSmith, system pods (set min 3 for production) |
 | large   | `Standard_D16s_v3` | 16   | 64 GB | 0   | 2   | ClickHouse (in-cluster), LGP agent pods                |
 
-<Note>
-  ClickHouse (when in-cluster) requests 1 to 4 CPU and 2 to 16 GB RAM depending on profile. With [LangChain Managed ClickHouse](/langsmith/langsmith-managed-clickhouse), the `large` pool is only needed for LGP operator-spawned agent pods.
-</Note>
+> [!NOTE]
+> ClickHouse (when in-cluster) requests 1 to 4 CPU and 2 to 16 GB RAM depending on profile. With [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse), the `large` pool is only needed for LGP operator-spawned agent pods.
 
 ## Optional modules
 
@@ -329,12 +322,8 @@ Each module is count-controlled (`0` disabled, `1` enabled). Enable any combinat
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-azure-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

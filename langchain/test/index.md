@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Test
-
-> Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/index)
+Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations.
 
 Agentic applications let an LLM decide its own next steps to solve a problem. That flexibility is powerful, but the model's black-box nature makes it hard to predict how a tweak in one part of your agent will affect the whole. To build production-ready agents, thorough testing is essential.
 
@@ -16,32 +12,22 @@ There are a few approaches to testing your agents:
 
 Agentic applications tend to lean more on integration because they chain multiple components together and must deal with flakiness due to the nondeterministic nature of LLMs.
 
-<Tip>
-  Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](/langsmith/evaluate-llm-application) to get started.
-</Tip>
+> [!TIP]
+> Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](https://docs.langchain.com/langsmith/evaluate-llm-application) to get started.
 
-<CardGroup cols={1}>
-  <Card title="Unit testing" icon="flask" href="/oss/python/langchain/test/unit-testing" arrow>
-    Mock chat models and use in-memory persistence to test agent logic without API calls.
-  </Card>
+#### [Unit testing](https://docs.langchain.com/oss/python/langchain/test/unit-testing)
+Mock chat models and use in-memory persistence to test agent logic without API calls.
 
-  <Card title="Integration testing" icon="plug" href="/oss/python/langchain/test/integration-testing" arrow>
-    Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
-  </Card>
+#### [Integration testing](https://docs.langchain.com/oss/python/langchain/test/integration-testing)
+Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
 
-  <Card title="Evals" icon="scale" href="/oss/python/langchain/test/evals" arrow>
-    Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
-  </Card>
-</CardGroup>
+#### [Evals](https://docs.langchain.com/oss/python/langchain/test/evals)
+Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

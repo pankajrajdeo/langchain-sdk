@@ -1,55 +1,50 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy with control plane
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-with-control-plane)
+Build Docker images and deploy applications to a self-hosted LangSmith instance using the control plane UI.
 
-> Build Docker images and deploy applications to a self-hosted LangSmith instance using the control plane UI.
+> [!NOTE]
+> **This guide is for self-hosted LangSmith customers** who have [enabled LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment) on their instance. For Cloud customers, see [Deploy on Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud). For standalone Agent Servers without a control plane, see [Self-host standalone servers](https://docs.langchain.com/langsmith/deploy-standalone-server).
 
-<Info>
-  **This guide is for self-hosted LangSmith customers** who have [enabled LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment) on their instance. For Cloud customers, see [Deploy on Cloud](/langsmith/deploy-to-cloud). For standalone Agent Servers without a control plane, see [Self-host standalone servers](/langsmith/deploy-standalone-server).
-</Info>
-
-This guide shows you how to deploy your applications to a [self-hosted](/langsmith/self-hosted) LangSmith instance using a [control plane](/langsmith/control-plane). With a control plane, you build Docker images locally, push them to a registry that your Kubernetes cluster has access to, and deploy them with the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-with-control-plane).
+This guide shows you how to deploy your applications to a [self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith instance using a [control plane](https://docs.langchain.com/langsmith/control-plane). With a control plane, you build Docker images locally, push them to a registry that your Kubernetes cluster has access to, and deploy them with the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-with-control-plane).
 
 ## Topology
 
 Enabling LangSmith Deployment on an existing self-hosted LangSmith instance adds a control plane, a data plane listener, and an operator that provisions Agent Servers in your cluster. The base LangSmith platform continues to handle observability, evaluation, and prompts; deployed Agent Servers send traces back to it.
 
-For details on the components added by enabling LangSmith Deployment, see [Enable LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
+For details on the components added by enabling LangSmith Deployment, see [Enable LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
 
 ## Overview
 
 Applications deployed to a self-hosted LangSmith instance with a control plane use Docker images. In this guide, the application deployment workflow is:
 
-1. Test your application locally using `langgraph dev` or [Studio](/langsmith/studio).
+1. Test your application locally using `langgraph dev` or [Studio](https://docs.langchain.com/langsmith/studio).
 2. Build a Docker image using the `langgraph build` command.
 3. Push the image to a container registry accessible by your infrastructure.
-4. Deploy from the [control plane UI](/langsmith/control-plane#control-plane-ui) by specifying the image URL.
+4. Deploy from the [control plane UI](https://docs.langchain.com/langsmith/control-plane#control-plane-ui) by specifying the image URL.
 
 ## Prerequisites
 
 Before completing this guide, you'll need the following:
 
-* [LangSmith Deployment enabled](/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment) on your self-hosted LangSmith instance.
+* [LangSmith Deployment enabled](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment) on your self-hosted LangSmith instance.
 * Access to the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-with-control-plane) with LangSmith Deployment enabled.
-* A container registry accessible by your Kubernetes cluster. If using a private registry that requires authentication, you must configure image pull secrets as part of your infrastructure setup. Refer to [Private registry authentication](#private-registry-authentication).
+* A container registry accessible by your Kubernetes cluster. If using a private registry that requires authentication, you must configure image pull secrets as part of your infrastructure setup. Refer to [Private registry authentication](https://docs.langchain.com/langsmith/deploy-with-control-plane#private-registry-authentication).
 
 ## Step 1. Test locally
 
-Before deploying, test your application locally. You can use the [LangGraph CLI](/langsmith/cli#dev) to run an Agent server in development mode:
+Before deploying, test your application locally. You can use the [LangGraph CLI](https://docs.langchain.com/langsmith/cli#dev) to run an Agent server in development mode:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph dev
 ```
 
-For a full guide local testing, refer to the [Local server quickstart](/langsmith/local-dev-testing).
+For a full guide local testing, refer to the [Local server quickstart](https://docs.langchain.com/langsmith/local-dev-testing).
 
 ## Step 2. Build Docker image
 
-Build a Docker image of your application using the [`langgraph build`](/langsmith/cli#build) command:
+Build a Docker image of your application using the [`langgraph build`](https://docs.langchain.com/langsmith/cli#build) command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph build -t my-image
 ```
 
@@ -64,47 +59,45 @@ Build command options include:
 
 Example with platform specification:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langgraph build --platform linux/amd64 -t my-image:v1.0.0
 ```
 
-For full details, see the [CLI reference](/langsmith/cli#build).
+For full details, see the [CLI reference](https://docs.langchain.com/langsmith/cli#build).
 
 ## Step 3. Push to container registry
 
 Push your image to a container registry accessible by your Kubernetes cluster. The specific commands depend on your registry provider.
 
-<Tip>
-  Tag your images with version information (e.g., `my-registry.com/my-app:v1.0.0`) to make rollbacks easier.
-</Tip>
+> [!TIP]
+> Tag your images with version information (e.g., `my-registry.com/my-app:v1.0.0`) to make rollbacks easier.
 
 ## Step 4. Deploy with the control plane UI
 
-The [control plane UI](/langsmith/control-plane#control-plane-ui) allows you to create and manage deployments, view logs and metrics, and update configurations. To create a new deployment in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-with-control-plane):
+The [control plane UI](https://docs.langchain.com/langsmith/control-plane#control-plane-ui) allows you to create and manage deployments, view logs and metrics, and update configurations. To create a new deployment in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-with-control-plane):
 
 1. In the left-hand navigation panel, select **Deployments**.
 2. In the top-right corner, select **+ New Deployment**.
 3. In the deployment configuration panel, provide:
-   * **Image URL**: The full image URL you pushed in [Step 3](#step-3-push-to-container-registry).
+   * **Image URL**: The full image URL you pushed in [Step 3](https://docs.langchain.com/langsmith/deploy-with-control-plane#step-3-push-to-container-registry).
    * **Listener/Compute ID**: Select the listener configured for your infrastructure.
    * **Namespace**: The Kubernetes namespace to deploy to.
    * **Environment variables**: Any required configuration (API keys, etc.).
    * Other deployment settings as needed.
 4. Select **Submit**.
 
-The control plane will coordinate with your [data plane](/langsmith/data-plane) listener to deploy your application.
+The control plane will coordinate with your [data plane](https://docs.langchain.com/langsmith/data-plane) listener to deploy your application.
 
-After creating a deployment, the infrastructure is [provisioned asynchronously](/langsmith/control-plane#asynchronous-deployment). Deployment can take up to several minutes, with initial deployments taking longer due to database creation.
+After creating a deployment, the infrastructure is [provisioned asynchronously](https://docs.langchain.com/langsmith/control-plane#asynchronous-deployment). Deployment can take up to several minutes, with initial deployments taking longer due to database creation.
 
-From the control plane UI, you can view build logs, server logs, and deployment metrics including CPU/memory usage, replicas, and API performance. For more details, refer to the [control plane monitoring documentation](/langsmith/control-plane#monitoring).
+From the control plane UI, you can view build logs, server logs, and deployment metrics including CPU/memory usage, replicas, and API performance. For more details, refer to the [control plane monitoring documentation](https://docs.langchain.com/langsmith/control-plane#monitoring).
 
-<Note>
-  A [LangSmith Observability tracing project](/langsmith/observability) is automatically created for each deployment with the same name as the deployment. Tracing environment variables are set automatically by the control plane.
-</Note>
+> [!NOTE]
+> A [LangSmith Observability tracing project](https://docs.langchain.com/langsmith/observability) is automatically created for each deployment with the same name as the deployment. Tracing environment variables are set automatically by the control plane.
 
 ## Update deployment
 
-To deploy a new version of your application, create a [new revision](/langsmith/control-plane#revisions):
+To deploy a new version of your application, create a [new revision](https://docs.langchain.com/langsmith/control-plane#revisions):
 
 Starting from the LangSmith UI:
 
@@ -121,30 +114,25 @@ Starting from the LangSmith UI:
 
 If your container registry requires authentication (e.g., AWS ECR, Azure ACR, GCP Artifact Registry, private Docker registry), you must configure Kubernetes image pull secrets before deploying applications. This is a one-time infrastructure configuration.
 
-<Note>
-  **This configuration is done at the infrastructure level, not per-deployment.** Once configured, all deployments automatically inherit the registry credentials.
-</Note>
+> [!NOTE]
+> **This configuration is done at the infrastructure level, not per-deployment.** Once configured, all deployments automatically inherit the registry credentials.
 
-Configure `imagePullSecrets` in your LangSmith Helm chart's `values.yaml` file. See the detailed steps in the [Enable LangSmith Deployment guide](/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
+Configure `imagePullSecrets` in your LangSmith Helm chart's `values.yaml` file. See the detailed steps in the [Enable LangSmith Deployment guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-langsmith-deployment).
 
 For detailed steps on creating image pull secrets for different registry providers, refer to the [Kubernetes documentation on pulling images from private registries](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).
 
 ## Next steps
 
-* **[Control plane](/langsmith/control-plane)**: Learn more about control plane features.
-* **[Data plane](/langsmith/data-plane)**: Understand data plane architecture.
-* **[Observability](/langsmith/observability)**: Monitor your deployments with automatic tracing.
-* **[Studio](/langsmith/studio)**: Test and debug deployed applications.
-* **[LangGraph CLI](/langsmith/cli)**: Full CLI reference documentation.
+* **[Control plane](https://docs.langchain.com/langsmith/control-plane)**: Learn more about control plane features.
+* **[Data plane](https://docs.langchain.com/langsmith/data-plane)**: Understand data plane architecture.
+* **[Observability](https://docs.langchain.com/langsmith/observability)**: Monitor your deployments with automatic tracing.
+* **[Studio](https://docs.langchain.com/langsmith/studio)**: Test and debug deployed applications.
+* **[LangGraph CLI](https://docs.langchain.com/langsmith/cli)**: Full CLI reference documentation.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-with-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-with-control-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

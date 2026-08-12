@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Unit testing
-
-> Test agent logic without API calls using fake chat models and in-memory persistence.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/unit-testing)
+Test agent logic without API calls using fake chat models and in-memory persistence.
 
 Unit tests exercise small, deterministic pieces of your agent in isolation. By replacing the real LLM with an in-memory fake (AKA fixture), you can script exact responses (text, tool calls, and errors) so tests are fast, free, and repeatable without API keys.
 
@@ -12,7 +8,7 @@ Unit tests exercise small, deterministic pieces of your agent in isolation. By r
 
 LangChain provides [`GenericFakeChatModel`](https://reference.langchain.com/python/langchain-core/language_models/fake_chat_models/GenericFakeChatModel) for mocking text responses. It accepts an iterator of responses ([`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) objects or strings) and returns one per invocation. It supports both regular and streaming usage.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.language_models.fake_chat_models import GenericFakeChatModel
 
 model = GenericFakeChatModel(messages=iter([
@@ -26,7 +22,7 @@ model.invoke("hello")
 
 If we invoke the model again, it will return the next item in the iterator:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model.invoke("hello, again!")
 # AIMessage(content='bar', ...)
 ```
@@ -35,7 +31,7 @@ model.invoke("hello, again!")
 
 To enable persistence during testing, you can use the [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver) checkpointer. This allows you to simulate multiple turns to test state-dependent behavior:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.checkpoint.memory import InMemorySaver
 
 agent = create_agent(
@@ -59,16 +55,12 @@ agent.invoke(
 
 ## Next steps
 
-Learn how to test your agent with real model provider APIs in [Integration testing](/oss/python/langchain/test/integration-testing).
+Learn how to test your agent with real model provider APIs in [Integration testing](https://docs.langchain.com/oss/python/langchain/test/integration-testing).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

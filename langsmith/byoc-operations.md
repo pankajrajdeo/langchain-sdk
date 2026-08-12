@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # BYOC operations
 
 > How LangChain upgrades, patches, and maintains a LangSmith BYOC data plane, and when maintenance requires a scheduled window.
@@ -19,9 +15,8 @@ LangChain scales your data plane as load changes, so you do not need to size or 
 
 Data planes are provisioned for high availability by default. The VPC spans the availability zones in your region, and RDS and ElastiCache run Multi-AZ with automatic failover.
 
-<Note>
-  To run a data plane without high availability, contact the LangChain team.
-</Note>
+> [!NOTE]
+> To run a data plane without high availability, contact the LangChain team.
 
 ## Instance sizes
 
@@ -36,9 +31,8 @@ Two mechanisms keep upgrades free of downtime:
 * **Horizontal pod autoscaling**: LangSmith services run multiple replicas, sized by a horizontal pod autoscaler, so pods are replaced a few at a time while the remaining replicas continue serving traffic.
 * **Pod disruption budgets**: A pod disruption budget caps how many replicas of a service can be unavailable at once, so neither a rolling update nor a node drain takes a service below the capacity it needs to stay available.
 
-<Note>
-  Support for release channels is coming soon.
-</Note>
+> [!NOTE]
+> Support for release channels is coming soon.
 
 ## Supporting service upgrades
 
@@ -61,7 +55,7 @@ Any maintenance or upgrade that could cause downtime, such as a restart of RDS o
 
 You can deploy observability tooling into the cluster, such as a Datadog agent or an OpenTelemetry collector, and your own security monitoring agents, as long as they do not interfere with LangSmith workloads.
 
-LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](/langsmith/export-backend).
+LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](https://docs.langchain.com/langsmith/export-backend).
 
 ## Troubleshooting
 
@@ -70,13 +64,12 @@ The LangChain team has no standing access to your data, and can only manage the 
 * **You run the query**: You run the query yourself, and validate and sanitize the output before sharing it with LangChain.
 * **Break-glass access**: You allowlist a specific engineer to perform the operation. You can revoke that access at any time.
 
-<Note>
-  If break-glass access is needed, the LangChain team reaches out with instructions.
-</Note>
+> [!NOTE]
+> If break-glass access is needed, the LangChain team reaches out with instructions.
 
 ## Auditing
 
-* **LangSmith audit logs**: Operations on data plane resources are recorded in the data plane and accessible at your data plane endpoint. Control plane actions, such as creating a user, are audited in the control plane. For how to access both, see [Audit logs](/langsmith/audit-logs).
+* **LangSmith audit logs**: Operations on data plane resources are recorded in the data plane and accessible at your data plane endpoint. Control plane actions, such as creating a user, are audited in the control plane. For how to access both, see [Audit logs](https://docs.langchain.com/langsmith/audit-logs).
 * **EKS audit logs**: Sent to CloudWatch in your account, so you can monitor the commands that were run.
 * **VPC flow logs**: Recorded in an S3 bucket in your account.
 
@@ -84,17 +77,13 @@ Setting up alerts on those logs is your responsibility.
 
 ## See also
 
-* [BYOC architecture](/langsmith/byoc-architecture)
-* [Using BYOC](/langsmith/byoc-usage)
+* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
+* [Using BYOC](https://docs.langchain.com/langsmith/byoc-usage)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-operations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

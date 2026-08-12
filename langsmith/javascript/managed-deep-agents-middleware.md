@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add custom middleware to Managed Deep Agents
-
-> Add built-in or custom middleware to Managed Deep Agents projects.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-middleware)
+Add built-in or custom middleware to Managed Deep Agents projects.
 
 Managed Deep Agents support the normal Deep Agents `middleware` configuration surface.
 
 Add LangChain middleware to `defineDeepAgent` to monitor tool calls, add guardrails, redact data, retry transient failures, or customize model calls.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Keep the agent entry point at the project root and custom middleware under `middleware/`:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   middleware/
@@ -27,13 +22,13 @@ my-agent/
 
 The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `skills`, and the system prompt. Middleware should focus on agent behavior around model calls, tool calls, and lifecycle hooks.
 
-For deeper hook, state, and context details, see [custom middleware](/oss/javascript/langchain/middleware/custom).
+For deeper hook, state, and context details, see [custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
 
 ## Use prebuilt middleware
 
 You can use LangChain prebuilt middleware directly in the agent definition.
 
-```ts agent.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineDeepAgent } from "managed-deepagents";
 import { modelCallLimitMiddleware, piiMiddleware } from "langchain";
 
@@ -51,9 +46,9 @@ Middleware is the right place for cross-cutting behavior such as PII handling, r
 
 ## Add a custom middleware module
 
-For a more advanced option, you can also define [custom middleware](/oss/javascript/langchain/middleware/custom).
+For a more advanced option, you can also define [custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
 
-```ts middleware/audit.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { createMiddleware } from "langchain";
 
 export const logToolCalls = createMiddleware({
@@ -69,7 +64,7 @@ export const logToolCalls = createMiddleware({
 
 Import the middleware into the project-root agent entry and pass it in the `middleware` list.
 
-```ts agent.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineDeepAgent } from "managed-deepagents";
 
 import { logToolCalls } from "./middleware/audit";
@@ -89,16 +84,12 @@ Your middleware imports should work the same way they do in a normal local TypeS
 
 Middleware can read per-run context through the normal LangChain runtime APIs. Use context for user IDs, organization IDs, feature flags, request metadata, or credentials that should not be part of the model prompt by default.
 
-For examples, see [Custom middleware](/oss/javascript/langchain/middleware/custom).
+For examples, see [Custom middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/custom).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-middleware.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

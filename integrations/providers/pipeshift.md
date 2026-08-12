@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Pipeshift integrations
 
 > Integrate with Pipeshift using LangChain Python.
@@ -14,9 +10,9 @@
 
 * Install the Pipeshift integration package.
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
   pip install langchain-pipeshift
-  ```
+```
 
 * Get your Pipeshift API key by signing up at [Pipeshift](https://pipeshift.com).
 
@@ -26,44 +22,40 @@ You can perform authentication using your Pipeshift API key in any of the follow
 
 1. Adding API key to the environment variable as `PIPESHIFT_API_KEY`.
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    os.environ["PIPESHIFT_API_KEY"] = "<your_api_key>"
-   ```
+```
 
 2. By passing `api_key` to the pipeshift LLM module or chat module
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    llm = Pipeshift(api_key="<your_api_key>", model="meta-llama/Meta-Llama-3.1-8B-Instruct", max_tokens=512)
 
                        OR
 
    chat = ChatPipeshift(api_key="<your_api_key>", model="meta-llama/Meta-Llama-3.1-8B-Instruct", max_tokens=512)
-   ```
+```
 
 ## Chat models
 
 See an [example](https://github.com/pipeshift-org/langchain-pipeshift).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pipeshift import ChatPipeshift
 ```
 
 ## LLMs
 
-See an [example](/oss/python/integrations/llms/pipeshift).
+See an [example](https://docs.langchain.com/oss/python/integrations/llms/pipeshift).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pipeshift import Pipeshift
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/pipeshift.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/pipeshift.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

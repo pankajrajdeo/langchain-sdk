@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Context engineering concepts
-
-> Core concepts for context engineering in LangSmith, including skills, agents, versioning, and sharing.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/context-engineering-concepts)
+Core concepts for context engineering in LangSmith, including skills, agents, versioning, and sharing.
 
 Agents behave inconsistently in production when their context is poorly managed. *Context* is the information an agent relies on to act, such as system instructions, tool definitions, and reference material. *Context engineering* is the practice of building and optimizing that context to improve agent performance and capabilities.
 
-This page covers the core concepts of context engineering in LangSmith: [skills](#skills), [agents](#agents), [the Context Hub](#context-hub-vs-store-backend), [versioning](#versioning), and [sharing](#sharing-and-permissions).
+This page covers the core concepts of context engineering in LangSmith: [skills](https://docs.langchain.com/langsmith/context-engineering-concepts#skills), [agents](https://docs.langchain.com/langsmith/context-engineering-concepts#agents), [the Context Hub](https://docs.langchain.com/langsmith/context-engineering-concepts#context-hub-vs-store-backend), [versioning](https://docs.langchain.com/langsmith/context-engineering-concepts#versioning), and [sharing](https://docs.langchain.com/langsmith/context-engineering-concepts#sharing-and-permissions).
 
 ## Skills
 
@@ -53,16 +49,15 @@ Context Hub commits support three entry types in `files`:
 
 When a linked agent or skill repo gets a new commit, LangSmith propagates that update to parent repos that reference it.
 
-<Tip>
-  If you find yourself copying the same block of context into several agents, pull it out into a skill repo and reference it from each agent.
-</Tip>
+> [!TIP]
+> If you find yourself copying the same block of context into several agents, pull it out into a skill repo and reference it from each agent.
 
 ## Context Hub vs. store backend
 
 Context in LangSmith can be managed by two different backends: the
 **Context Hub** and a **store backend**. They serve different purposes, and most agents use both.
 
-The [Context Hub](/langsmith/use-the-context-hub) is your agents' long-term context store. It tracks every change as a commit and supports versioning, sharing, and continuous improvement.
+The [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) is your agents' long-term context store. It tracks every change as a commit and supports versioning, sharing, and continuous improvement.
 
 A *store backend* is built for runtime state. It holds the information an agent accumulates while running: memories, conversation history, user preferences, learned facts, and other data that evolves per session or per user.
 
@@ -82,7 +77,7 @@ If this workflow looks familiar, that is intentional: Context Hub brings the sam
 
 ## Sharing and permissions
 
-The **Context Hub** is designed for teams. Every repo lives in a [workspace](/langsmith/administration-overview#workspaces), and access depends on workspace permissions plus repo visibility:
+The **Context Hub** is designed for teams. Every repo lives in a [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces), and access depends on workspace permissions plus repo visibility:
 
 * **Private** repos are visible only inside the workspace.
 * **Public** repos can be discovered and pulled by anyone.
@@ -92,16 +87,12 @@ Workspace-level sharing and visibility controls make the Hub a natural place to 
 
 ## Next steps
 
-* [Use the Context Hub](/langsmith/use-the-context-hub) to create your first skill or agent.
+* [Use the Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) to create your first skill or agent.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/context-engineering-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/context-engineering-concepts.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

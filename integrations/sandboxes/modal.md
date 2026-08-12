@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ModalSandbox integration
 
 > Integrate with the ModalSandbox sandbox backend using LangChain Python.
@@ -10,21 +6,19 @@
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-modal
-  ```
+```bash
+pip install langchain-modal
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-modal
-  ```
-</CodeGroup>
+```bash
+uv add langchain-modal
+```
 
 ## Create a sandbox backend
 
-In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](/oss/python/deepagents/backends).
+In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](https://docs.langchain.com/oss/python/deepagents/backends).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import modal
 
 from langchain_modal import ModalSandbox
@@ -39,7 +33,7 @@ print(result.output)
 
 ## Use with Deep Agents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import modal
 from langchain_anthropic import ChatAnthropic
 
@@ -66,16 +60,12 @@ result = agent.invoke(
 You are responsible for managing the sandbox lifecycle via Modal.
 When you are done, terminate the sandbox.
 
-See also: [Sandboxes](/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/modal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/modal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

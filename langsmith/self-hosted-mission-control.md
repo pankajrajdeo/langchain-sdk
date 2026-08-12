@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Install Mission Control
-
-> Install Mission Control, an in-cluster console for monitoring, configuring, and operating self-hosted LangSmith on Kubernetes.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-mission-control)
+Install Mission Control, an in-cluster console for monitoring, configuring, and operating self-hosted LangSmith on Kubernetes.
 
 Mission Control is an in-cluster console for monitoring, configuring, and operating LangSmith on Kubernetes. It runs inside your cluster and is accessed with `kubectl port-forward` by default, so no ingress is required.
 
@@ -12,8 +8,8 @@ There are two install paths:
 
 | Path                              | Best for                                                                                    |
 | --------------------------------- | ------------------------------------------------------------------------------------------- |
-| [Quick install](#quick-install)   | Customers who can run a reviewed shell installer and want the shortest setup.               |
-| [Manual install](#manual-install) | Organizations that do not allow installer scripts or need each Kubernetes command reviewed. |
+| [Quick install](https://docs.langchain.com/langsmith/self-hosted-mission-control#quick-install)   | Customers who can run a reviewed shell installer and want the shortest setup.               |
+| [Manual install](https://docs.langchain.com/langsmith/self-hosted-mission-control#manual-install) | Organizations that do not allow installer scripts or need each Kubernetes command reviewed. |
 
 The public install assets are:
 
@@ -22,7 +18,7 @@ The public install assets are:
 
 Mission Control images are published to two Docker Hub repositories: `langchain/mission-control-backend` and `langchain/mission-control-frontend`. The latest images can be checked with:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker pull langchain/mission-control-backend:latest
 docker pull langchain/mission-control-frontend:latest
 ```
@@ -34,7 +30,7 @@ Browser review links:
 
 The commands below use raw GitHub URLs so `curl` can download the files directly. If you publish these files from a different repo or branch, replace the raw base URL below.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 MC_RAW_BASE=https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control
 ```
 
@@ -48,13 +44,13 @@ MC_RAW_BASE=https://raw.githubusercontent.com/langchain-ai/helm/main/charts/miss
 
 You must run the installer against the Kubernetes cluster where LangSmith is installed or will be installed. Confirm the active context before continuing:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl config current-context
 ```
 
 The installer identity needs permission to create the Mission Control namespace resources and cluster-scoped RBAC:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl auth can-i create clusterrole
 kubectl auth can-i create clusterrolebinding
 kubectl auth can-i create serviceaccount -n langsmith
@@ -62,13 +58,13 @@ kubectl auth can-i create deployment -n langsmith
 kubectl auth can-i create secret -n langsmith
 ```
 
-All five commands should return `yes`. See [Permissions reference](#permissions-reference) for the runtime permissions granted to Mission Control.
+All five commands should return `yes`. See [Permissions reference](https://docs.langchain.com/langsmith/self-hosted-mission-control#permissions-reference) for the runtime permissions granted to Mission Control.
 
 ## Quick install
 
 Run these three commands:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -fsSLO https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/install-script.sh && chmod +x install-script.sh
 curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/values.yaml -o values.yaml
 ./install-script.sh all -f values.yaml
@@ -86,7 +82,7 @@ The `all` step:
 
 The RBAC check runs:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl auth can-i create clusterrole
 kubectl auth can-i create clusterrolebinding
 kubectl auth can-i create serviceaccount -n langsmith
@@ -96,7 +92,7 @@ kubectl auth can-i create secret -n langsmith
 
 If your organization intentionally blocks `kubectl auth can-i` but Helm installs are approved through another control path, run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 ./install-script.sh all -f values.yaml --skip-rbac-check
 ```
 
@@ -104,7 +100,7 @@ If your organization intentionally blocks `kubectl auth can-i` but Helm installs
 
 After the install finishes, start a local port-forward:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 ./install-script.sh forward
 ```
 
@@ -131,7 +127,7 @@ Common edits:
 
 Example with a custom namespace:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -fsSLO https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/install-script.sh && chmod +x install-script.sh
 curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/values.yaml -o values.yaml
 ./install-script.sh all -n mission-control -f values.yaml
@@ -139,7 +135,7 @@ curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/missi
 
 ### Script command reference
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 ./install-script.sh prereqs
 ./install-script.sh namespace
 ./install-script.sh secret
@@ -151,7 +147,7 @@ curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/missi
 
 Useful flags:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 ./install-script.sh all -n langsmith -f values.yaml
 ./install-script.sh all -u admin
 printf '%s\n' 'your-password' | ./install-script.sh secret -u admin --password-stdin
@@ -165,131 +161,124 @@ printf '%s\n' 'your-password' | ./install-script.sh secret -u admin --password-s
 
 Use this path when installer scripts are not allowed. These steps use normal `kubectl`, `helm`, and `curl` commands only.
 
-<Steps>
-  <Step title="Add the Helm repo and get the values file">
-    Add the LangChain Helm repo:
+### Add the Helm repo and get the values file
+Add the LangChain Helm repo:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    helm repo add langchain https://langchain-ai.github.io/helm
-    helm repo update langchain
-    ```
+```bash
+helm repo add langchain https://langchain-ai.github.io/helm
+helm repo update langchain
+```
 
-    Download the customer values file:
+Download the customer values file:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/values.yaml -o values.yaml
-    ```
+```bash
+curl -fsSL https://raw.githubusercontent.com/langchain-ai/helm/main/charts/mission-control/values.yaml -o values.yaml
+```
 
-    Review `values.yaml` before installing. Keep `config.auth.enabled: true` for production.
+Review `values.yaml` before installing. Keep `config.auth.enabled: true` for production.
 
-    If your platform requires non-root containers, Mission Control can run as UID `1001`. Add this to `values.yaml` before installing:
+If your platform requires non-root containers, Mission Control can run as UID `1001`. Add this to `values.yaml` before installing:
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    backend:
-      podSecurityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 1001
-        fsGroup: 1001
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-      extraEnv:
-        - name: HOME
-          value: /tmp
-        - name: HELM_CACHE_HOME
-          value: /tmp/.cache/helm
-        - name: HELM_CONFIG_HOME
-          value: /tmp/.config/helm
-        - name: HELM_DATA_HOME
-          value: /tmp/.local/share/helm
+```yaml
+backend:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
+    fsGroup: 1001
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+  extraEnv:
+    - name: HOME
+      value: /tmp
+    - name: HELM_CACHE_HOME
+      value: /tmp/.cache/helm
+    - name: HELM_CONFIG_HOME
+      value: /tmp/.config/helm
+    - name: HELM_DATA_HOME
+      value: /tmp/.local/share/helm
 
-    frontend:
-      podSecurityContext:
-        runAsNonRoot: true
-        runAsUser: 1001
-        runAsGroup: 1001
-      securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-    ```
-  </Step>
+frontend:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+```
 
-  <Step title="Create the namespace">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    kubectl create namespace langsmith --dry-run=client -o yaml | kubectl apply -f -
-    ```
-  </Step>
+### Create the namespace
+```bash
+kubectl create namespace langsmith --dry-run=client -o yaml | kubectl apply -f -
+```
 
-  <Step title="Create the auth credentials Secret">
-    Credentials are stored in a Kubernetes Secret. They are not written to `values.yaml`.
+### Create the auth credentials Secret
+Credentials are stored in a Kubernetes Secret. They are not written to `values.yaml`.
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    read -r -p "Username: " MC_USER
-    read -r -s -p "Password: " MC_PASS; echo
+```bash
+read -r -p "Username: " MC_USER
+read -r -s -p "Password: " MC_PASS; echo
 
-    kubectl create secret generic mission-control-auth \
-      --namespace=langsmith \
-      --from-literal=username="$MC_USER" \
-      --from-literal=password="$MC_PASS" \
-      --dry-run=client -o yaml | kubectl apply -f -
-    ```
+kubectl create secret generic mission-control-auth \
+  --namespace=langsmith \
+  --from-literal=username="$MC_USER" \
+  --from-literal=password="$MC_PASS" \
+  --dry-run=client -o yaml | kubectl apply -f -
+```
 
-    For multi-replica backend deployments, include a shared JWT signing key in the same Secret and set `config.auth.jwtSecretKey: jwtSecret` in `values.yaml`:
+For multi-replica backend deployments, include a shared JWT signing key in the same Secret and set `config.auth.jwtSecretKey: jwtSecret` in `values.yaml`:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    JWT_SECRET="$(openssl rand -base64 32)"
+```bash
+JWT_SECRET="$(openssl rand -base64 32)"
 
-    kubectl create secret generic mission-control-auth \
-      --namespace=langsmith \
-      --from-literal=username="$MC_USER" \
-      --from-literal=password="$MC_PASS" \
-      --from-literal=jwtSecret="$JWT_SECRET" \
-      --dry-run=client -o yaml | kubectl apply -f -
-    ```
-  </Step>
+kubectl create secret generic mission-control-auth \
+  --namespace=langsmith \
+  --from-literal=username="$MC_USER" \
+  --from-literal=password="$MC_PASS" \
+  --from-literal=jwtSecret="$JWT_SECRET" \
+  --dry-run=client -o yaml | kubectl apply -f -
+```
 
-  <Step title="Install with Helm">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    helm upgrade --install mission-control langchain/mission-control \
-      --namespace langsmith \
-      --create-namespace \
-      --values values.yaml \
-      --rollback-on-failure
-    ```
+### Install with Helm
+```bash
+helm upgrade --install mission-control langchain/mission-control \
+  --namespace langsmith \
+  --create-namespace \
+  --values values.yaml \
+  --rollback-on-failure
+```
 
-    Wait for both workloads to become ready (the backend runs as a StatefulSet, the frontend as a Deployment):
+Wait for both workloads to become ready (the backend runs as a StatefulSet, the frontend as a Deployment):
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    kubectl rollout status statefulset/mission-control-backend -n langsmith
-    kubectl rollout status deployment/mission-control-frontend -n langsmith
-    ```
+```bash
+kubectl rollout status statefulset/mission-control-backend -n langsmith
+kubectl rollout status deployment/mission-control-frontend -n langsmith
+```
 
-    You can also inspect the pods directly:
+You can also inspect the pods directly:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    kubectl get pods -n langsmith
-    ```
-  </Step>
+```bash
+kubectl get pods -n langsmith
+```
 
-  <Step title="Access the UI">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    kubectl port-forward svc/mission-control-frontend 3000:3000 -n langsmith
-    ```
+### Access the UI
+```bash
+kubectl port-forward svc/mission-control-frontend 3000:3000 -n langsmith
+```
 
-    Open [http://localhost:3000](http://localhost:3000/) and log in with the credentials from step 3.
-  </Step>
-</Steps>
+Open [http://localhost:3000](http://localhost:3000/) and log in with the credentials from step 3.
 
 ## Upgrade
 
 Download the latest public values file, merge in any local changes you need, then run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 helm repo update langchain
 
 helm upgrade --install mission-control langchain/mission-control \
@@ -300,7 +289,7 @@ helm upgrade --install mission-control langchain/mission-control \
 
 If you are working from a local chart checkout instead:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 helm upgrade --install mission-control . \
   --namespace langsmith \
   --values values.yaml \
@@ -309,13 +298,13 @@ helm upgrade --install mission-control . \
 
 If you installed with the quick script and kept it locally:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 ./install-script.sh install -f values.yaml
 ```
 
 ## Uninstall
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 helm uninstall mission-control -n langsmith
 ```
 
@@ -323,7 +312,7 @@ This removes the Mission Control release. It does not delete your namespace or u
 
 Optional cleanup of Mission Control-owned Secrets:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl delete secret -n langsmith \
   mission-control-auth \
   mission-control-draft \
@@ -384,12 +373,8 @@ Set feature flags to `false` in `values.yaml` to remove the corresponding write 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-mission-control.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-mission-control.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

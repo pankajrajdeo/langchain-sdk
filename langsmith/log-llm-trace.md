@@ -1,377 +1,323 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Log LLM calls
-
-When you call an LLM directly, outside of [LangChain](/oss/python/langchain/overview) or a LangSmith [supported integration](/langsmith/integrations), you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let you open the [run](/langsmith/observability-concepts#runs) in the [Playground](/langsmith/prompt-engineering-concepts#playground) with the correct provider and model.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-llm-trace)
+When you call an LLM directly, outside of [LangChain](https://docs.langchain.com/oss/python/langchain/overview) or a LangSmith [supported integration](https://docs.langchain.com/langsmith/integrations), you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let you open the [run](https://docs.langchain.com/langsmith/observability-concepts#runs) in the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) with the correct provider and model.
 
 There are four requirements for a fully functional LLM trace:
 
 | Requirement                                                     | What to do                                         | Enables                                          |
 | --------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
-| 1. Set [`run_type="llm"`](/langsmith/run-data-format#run-types) | Pass `run_type="llm"` to `@traceable`              | LLM-specific rendering, token/cost display       |
+| 1. Set [`run_type="llm"`](https://docs.langchain.com/langsmith/run-data-format#run-types) | Pass `run_type="llm"` to `@traceable`              | LLM-specific rendering, token/cost display       |
 | 2. Format inputs/outputs                                        | Use OpenAI, Anthropic, or LangChain message format | Structured message rendering, Playground support |
 | 3. Set `ls_provider` and `ls_model_name`                        | Pass both in `metadata`                            | Cost tracking, Playground model selection        |
 | 4. Provide token counts                                         | Set `usage_metadata` on the run                    | Token counts and cost calculation                |
 
-<Note>
-  If you are using LangChain OSS, the [OpenAI wrapper](/langsmith/trace-openai), or the [Anthropic wrapper](/langsmith/trace-anthropic), these details are handled automatically.
-
-  The examples on this page use the `traceable` decorator/wrapper (the recommended approach for Python and JS/TS). The same requirements apply if you use the [RunTree](/langsmith/annotate-code#use-the-runtree-api) or [API](/langsmith/smith-api-ref) directly.
-</Note>
+> [!NOTE]
+> If you are using LangChain OSS, the [OpenAI wrapper](https://docs.langchain.com/langsmith/trace-openai), or the [Anthropic wrapper](https://docs.langchain.com/langsmith/trace-anthropic), these details are handled automatically.
+>
+> The examples on this page use the `traceable` decorator/wrapper (the recommended approach for Python and JS/TS). The same requirements apply if you use the [RunTree](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api) or [API](https://docs.langchain.com/langsmith/smith-api-ref) directly.
 
 ## Messages format
 
 When tracing a custom model or a custom input/output format, it must either follow the LangChain format, OpenAI completions format or Anthropic messages format. For more details,  refer to the [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create) or [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) documentation. The LangChain format is:
 
-<Expandable title="LangChain format">
-  <ParamField path="messages" type="array" required>
-    A list of messages containing the content of the conversation.
+**LangChain format**
+#### `Field` — `array`
+A list of messages containing the content of the conversation.
 
-    <ParamField path="role" type="string" required>
-      Identifies the message type. One of: <code>system</code> | <code>reasoning</code> | <code>user</code> | <code>assistant</code> | <code>tool</code>
-    </ParamField>
+#### `Field` — `string`
+Identifies the message type. One of: <code>system</code> | <code>reasoning</code> | <code>user</code> | <code>assistant</code> | <code>tool</code>
 
-    <ParamField path="content" type="array" required>
-      Content of the message. List of typed dictionaries.
+#### `Field` — `array`
+Content of the message. List of typed dictionaries.
 
-      <Expandable title="Content options">
-        <ParamField path="type" type="string" required>
-          One of: <code>text</code> | <code>image</code> | <code>file</code> | <code>audio</code> | <code>video</code> | <code>tool\_call</code> | <code>server\_tool\_call</code> | <code>server\_tool\_result</code>.
-        </ParamField>
+**Content options**
+#### `Field` — `string`
+One of: <code>text</code> | <code>image</code> | <code>file</code> | <code>audio</code> | <code>video</code> | <code>tool\_call</code> | <code>server\_tool\_call</code> | <code>server\_tool\_result</code>.
 
-        <Expandable title="text">
-          <ParamField path="type" type="literal('text')" required />
+**text**
+#### `Field` — `literal(`
 
-          <ParamField path="text" type="string" required>
-            Text content.
-          </ParamField>
+#### `Field` — `string`
+Text content.
 
-          <ParamField path="annotations" type="object[]">
-            List of annotations for the text
-          </ParamField>
+#### `Field` — `object[]`
+List of annotations for the text
 
-          <ParamField path="extras" type="object">
-            Additional provider-specific data.
-          </ParamField>
-        </Expandable>
+#### `Field` — `object`
+Additional provider-specific data.
 
-        <Expandable title="reasoning">
-          <ParamField path="type" type="literal('reasoning')" required />
+**reasoning**
+#### `Field` — `literal(`
 
-          <ParamField path="text" type="string" required>
-            Text content.
-          </ParamField>
+#### `Field` — `string`
+Text content.
 
-          <ParamField path="extras" type="object">
-            Additional provider-specific data.
-          </ParamField>
-        </Expandable>
+#### `Field` — `object`
+Additional provider-specific data.
 
-        <Expandable title="image">
-          <ParamField path="type" type="literal('image')" required />
+**image**
+#### `Field` — `literal(`
 
-          <ParamField path="url" type="string">
-            URL pointing to the image location.
-          </ParamField>
+#### `Field` — `string`
+URL pointing to the image location.
 
-          <ParamField path="base64" type="string" required>
-            Base64-encoded image data.
-          </ParamField>
+#### `Field` — `string`
+Base64-encoded image data.
 
-          <ParamField path="id" type="string">
-            Reference ID to an externally stored image (e.g., in a provider’s file system or in a bucket).
-          </ParamField>
+#### `Field` — `string`
+Reference ID to an externally stored image (e.g., in a provider’s file system or in a bucket).
 
-          <ParamField path="mime_type" type="string">
-            Image [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `image/jpeg`, `image/png`).
-          </ParamField>
-        </Expandable>
+#### `Field` — `string`
+Image [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `image/jpeg`, `image/png`).
 
-        <Expandable title="file (e.g., PDFs)">
-          <ParamField path="type" type="literal('file')" required />
+**file (e.g., PDFs)**
+#### `Field` — `literal(`
 
-          <ParamField path="url" type="string">
-            URL pointing to the file.
-          </ParamField>
+#### `Field` — `string`
+URL pointing to the file.
 
-          <ParamField path="base64" type="string" required>
-            Base64-encoded file data.
-          </ParamField>
+#### `Field` — `string`
+Base64-encoded file data.
 
-          <ParamField path="id" type="string">
-            Reference ID to an externally stored file (e.g., in a provider’s file system or in a bucket).
-          </ParamField>
+#### `Field` — `string`
+Reference ID to an externally stored file (e.g., in a provider’s file system or in a bucket).
 
-          <ParamField path="mime_type" type="string">
-            File [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `application/pdf`).
-          </ParamField>
-        </Expandable>
+#### `Field` — `string`
+File [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `application/pdf`).
 
-        <Expandable title="audio">
-          <ParamField path="type" type="literal('audio')" required />
+**audio**
+#### `Field` — `literal(`
 
-          <ParamField path="url" type="string">
-            URL pointing to the audio file.
-          </ParamField>
+#### `Field` — `string`
+URL pointing to the audio file.
 
-          <ParamField path="base64" type="string" required>
-            Base64-encoded audio data.
-          </ParamField>
+#### `Field` — `string`
+Base64-encoded audio data.
 
-          <ParamField path="id" type="string">
-            Reference ID to an externally stored audio file (e.g., in a provider’s file system or in a bucket).
-          </ParamField>
+#### `Field` — `string`
+Reference ID to an externally stored audio file (e.g., in a provider’s file system or in a bucket).
 
-          <ParamField path="mime_type" type="string">
-            Audio [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `audio/mpeg`, `audio/wav`).
-          </ParamField>
-        </Expandable>
+#### `Field` — `string`
+Audio [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `audio/mpeg`, `audio/wav`).
 
-        <Expandable title="video">
-          <ParamField path="type" type="literal('video')" required />
+**video**
+#### `Field` — `literal(`
 
-          <ParamField path="url" type="string">
-            URL pointing to the video file.
-          </ParamField>
+#### `Field` — `string`
+URL pointing to the video file.
 
-          <ParamField path="base64" type="string" required>
-            Base64-encoded video data.
-          </ParamField>
+#### `Field` — `string`
+Base64-encoded video data.
 
-          <ParamField path="id" type="string">
-            Reference ID to an externally stored video file (e.g., in a provider’s file system or in a bucket).
-          </ParamField>
+#### `Field` — `string`
+Reference ID to an externally stored video file (e.g., in a provider’s file system or in a bucket).
 
-          <ParamField path="mime_type" type="string">
-            Video [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `video/mp4`, `video/webm`).
-          </ParamField>
-        </Expandable>
+#### `Field` — `string`
+Video [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `video/mp4`, `video/webm`).
 
-        <Expandable title="tool_call">
-          <ParamField path="type" type="literal('tool_call')" required />
+**tool_call**
+#### `Field` — `literal(`
 
-          <ParamField path="name" type="string" />
+#### `Field` — `string`
 
-          <ParamField path="args" type="object" required>
-            Arguments to pass to the tool.
-          </ParamField>
+#### `Field` — `object`
+Arguments to pass to the tool.
 
-          <ParamField path="id" type="string">
-            Unique identifier for this tool call.
-          </ParamField>
-        </Expandable>
+#### `Field` — `string`
+Unique identifier for this tool call.
 
-        <Expandable title="server_tool_call">
-          <ParamField path="type" type="literal('server_tool_call')" required />
+**server_tool_call**
+#### `Field` — `literal(`
 
-          <ParamField path="id" type="string" required>
-            Unique identifier for this tool call.
-          </ParamField>
+#### `Field` — `string`
+Unique identifier for this tool call.
 
-          <ParamField path="name" type="string" required>
-            The name of the tool to be called.
-          </ParamField>
+#### `Field` — `string`
+The name of the tool to be called.
 
-          <ParamField path="args" type="object" required>
-            Arguments to pass to the tool.
-          </ParamField>
-        </Expandable>
+#### `Field` — `object`
+Arguments to pass to the tool.
 
-        <Expandable title="server_tool_result">
-          <ParamField path="type" type="literal('server_tool_result')" required />
+**server_tool_result**
+#### `Field` — `literal(`
 
-          <ParamField path="tool_call_id" type="string" required>
-            Identifier of the corresponding server tool call.
-          </ParamField>
+#### `Field` — `string`
+Identifier of the corresponding server tool call.
 
-          <ParamField path="id" type="string">
-            Unique identifier for this tool call.
-          </ParamField>
+#### `Field` — `string`
+Unique identifier for this tool call.
 
-          <ParamField path="status" type="string" required>
-            Execution status of the server-side tool. One of: <code>success</code> | <code>error</code>.
-          </ParamField>
+#### `Field` — `string`
+Execution status of the server-side tool. One of: <code>success</code> | <code>error</code>.
 
-          <ParamField path="output">
-            Output of the executed tool.
-          </ParamField>
-        </Expandable>
-      </Expandable>
-    </ParamField>
+#### `Field`
+Output of the executed tool.
 
-    <ParamField path="tool_call_id" type="string">
-      Must match the <code>id</code> of a prior <code>assistant</code> message’s <code>tool\_calls\[i]</code> entry. Only valid when <code>role</code> is <code>tool</code>.
-    </ParamField>
+#### `Field` — `string`
+Must match the <code>id</code> of a prior <code>assistant</code> message’s <code>tool\_calls\[i]</code> entry. Only valid when <code>role</code> is <code>tool</code>.
 
-    <ParamField path="usage_metadata" type="object">
-      Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](/langsmith/log-llm-trace#provide-token-and-cost-information) for more details.
-    </ParamField>
-  </ParamField>
-</Expandable>
+#### `Field` — `object`
+Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](https://docs.langchain.com/langsmith/log-llm-trace#provide-token-and-cost-information) for more details.
 
-<CodeGroup>
-  ```python Text and reasoning theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-   inputs = {
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "Hi, can you tell me the capital of France?"
-          }
-        ]
-      }
-    ]
-  }
+```python
+ inputs = {
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Hi, can you tell me the capital of France?"
+        }
+      ]
+    }
+  ]
+}
 
-  outputs = {
-    "messages": [
-      {
-        "role": "assistant",
-        "content": [
-          {
-            "type": "text",
-            "text": "The capital of France is Paris."
+outputs = {
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The capital of France is Paris."
+        },
+        {
+          "type": "reasoning",
+          "text": "The user is asking about..."
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+```python
+input = {
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What's the weather in San Francisco?"
+        }
+      ]
+    }
+  ]
+}
+
+outputs = {
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [{"type": "tool_call", "name": "get_weather", "args": {"city": "San Francisco"}, "id": "call_1"}],
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_1",
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"temperature\": \"18°C\", \"condition\": \"Sunny\"}"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "The weather in San Francisco is 18°C and sunny."
+        }
+      ]
+    }
+  ]
+}
+```
+
+```python
+inputs = {
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What breed is this dog?"
+        },
+        {
+          "type": "image",
+          "url": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
+          # alternative to a url, you can provide a base64 encoded image
+          # "base64": "<base64 encoded image>",
+          "mime_type": "image/jpeg",
+        }
+      ]
+    }
+  ]
+}
+
+outputs = {
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "This looks like a Black Labrador."
+        }
+      ]
+    }
+  ]
+}
+```
+
+```python
+input = {
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is the price of AAPL?"
+        }
+      ]
+    }
+  ]
+}
+
+output = {
+  "messages": [
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "server_tool_call",
+          "name": "web_search",
+          "args": {
+            "query": "price of AAPL",
+            "type": "search"
           },
-          {
-            "type": "reasoning",
-            "text": "The user is asking about..."
-          }
-        ]
-      }
-    ]
-  }
-
-  ```
-
-  ```python Tool calls theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  input = {
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "What's the weather in San Francisco?"
-          }
-        ]
-      }
-    ]
-  }
-
-  outputs = {
-    "messages": [
-      {
-        "role": "assistant",
-        "content": [{"type": "tool_call", "name": "get_weather", "args": {"city": "San Francisco"}, "id": "call_1"}],
-      },
-      {
-        "role": "tool",
-        "tool_call_id": "call_1",
-        "content": [
-          {
-            "type": "text",
-            "text": "{\"temperature\": \"18°C\", \"condition\": \"Sunny\"}"
-          }
-        ]
-      },
-      {
-        "role": "assistant",
-        "content": [
-          {
-            "type": "text",
-            "text": "The weather in San Francisco is 18°C and sunny."
-          }
-        ]
-      }
-    ]
-  }
-  ```
-
-  ```python Multimodal theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  inputs = {
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "What breed is this dog?"
-          },
-          {
-            "type": "image",
-            "url": "https://fastly.picsum.photos/id/237/200/300.jpg?hmac=TmmQSbShHz9CdQm0NkEjx1Dyh_Y984R9LpNrpvH2D_U",
-            # alternative to a url, you can provide a base64 encoded image
-            # "base64": "<base64 encoded image>",
-            "mime_type": "image/jpeg",
-          }
-        ]
-      }
-    ]
-  }
-
-  outputs = {
-    "messages": [
-      {
-        "role": "assistant",
-        "content": [
-          {
-            "type": "text",
-            "text": "This looks like a Black Labrador."
-          }
-        ]
-      }
-    ]
-  }
-  ```
-
-  ```python Server-side tool calls theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  input = {
-    "messages": [
-      {
-        "role": "user",
-        "content": [
-          {
-            "type": "text",
-            "text": "What is the price of AAPL?"
-          }
-        ]
-      }
-    ]
-  }
-
-  output = {
-    "messages": [
-      {
-        "role": "assistant",
-        "content": [
-          {
-            "type": "server_tool_call",
-            "name": "web_search",
-            "args": {
-              "query": "price of AAPL",
-              "type": "search"
-            },
-            "id": "call_1"
-          },
-          {
-            "type": "server_tool_result",
-            "tool_call_id": "call_1",
-            "status": "success"
-          },
-          {
-            "type": "text",
-            "text": "The price of AAPL is $150.00"
-          }
-        ]
-      }
-    ]
-  }
-  ```
-</CodeGroup>
+          "id": "call_1"
+        },
+        {
+          "type": "server_tool_result",
+          "tool_call_id": "call_1",
+          "status": "success"
+        },
+        {
+          "type": "text",
+          "text": "The price of AAPL is $150.00"
+        }
+      ]
+    }
+  ]
+}
+```
 
 ## Convert custom I/O formats into LangSmith compatible formats
 
@@ -381,7 +327,7 @@ If you're using a custom input or output format, you can convert it to a LangSmi
 
 Here's a boilerplate example of how to use `process_inputs` and `process_outputs` to convert a custom I/O format into a LangSmith compatible format:
 
-```python expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class OriginalInputs(BaseModel):
     """Your app's custom request shape"""
 
@@ -400,7 +346,6 @@ def process_inputs(inputs: dict) -> dict:
 def process_outputs(output: Any) -> dict:
     """OriginalOutputs -> LangSmithOutputs -> dict"""
 
-
 @traceable(run_type="llm", process_inputs=process_inputs, process_outputs=process_outputs)
 def chat_model(inputs: dict) -> dict:
     """
@@ -412,99 +357,97 @@ def chat_model(inputs: dict) -> dict:
 
 ## Identify a custom model in traces
 
-When using a custom model, it is recommended to also provide the following `metadata` fields to identify the model when viewing traces and when [filtering](/langsmith/filter-traces-in-application).
+When using a custom model, it is recommended to also provide the following `metadata` fields to identify the model when viewing traces and when [filtering](https://docs.langchain.com/langsmith/filter-traces-in-application).
 
 * `ls_provider`: The provider of the model, e.g., `"openai"`, `"anthropic"`.
 * `ls_model_name`: The name of the model, e.g., `"gpt-5.4-mini"`, `"claude-opus-4-8"`.
 
-<CodeGroup>
-  ```python Python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith import traceable
+```python
+from langsmith import traceable
 
-  inputs = [
-      {"role": "system", "content": "You are a helpful assistant."},
-      {"role": "user", "content": "I'd like to book a table for two."},
-  ]
-  output = {
-      "choices": [
-          {
-              "message": {
-                  "role": "assistant",
-                  "content": "Sure, what time would you like to book the table for?"
-              }
-          }
-      ]
-  }
+inputs = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "I'd like to book a table for two."},
+]
+output = {
+    "choices": [
+        {
+            "message": {
+                "role": "assistant",
+                "content": "Sure, what time would you like to book the table for?"
+            }
+        }
+    ]
+}
 
-  @traceable(
-      run_type="llm",
-      metadata={"ls_provider": "my_provider", "ls_model_name": "my_model"}
-  )
-  def chat_model(messages: list):
-      return output
+@traceable(
+    run_type="llm",
+    metadata={"ls_provider": "my_provider", "ls_model_name": "my_model"}
+)
+def chat_model(messages: list):
+    return output
 
-  chat_model(inputs)
-  ```
+chat_model(inputs)
+```
 
-  ```typescript TypeScript wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { traceable } from "langsmith/traceable";
+```typescript
+import { traceable } from "langsmith/traceable";
 
-  const messages = [
-      { role: "system", content: "You are a helpful assistant." },
-      { role: "user", content: "I'd like to book a table for two." }
-  ];
-  const output = {
-      choices: [
-          {
-              message: {
-                  role: "assistant",
-                  content: "Sure, what time would you like to book the table for?",
-              },
-          },
-      ],
-      usage_metadata: {
-          input_tokens: 27,
-          output_tokens: 13,
-          total_tokens: 40,
-      },
-  };
+const messages = [
+    { role: "system", content: "You are a helpful assistant." },
+    { role: "user", content: "I'd like to book a table for two." }
+];
+const output = {
+    choices: [
+        {
+            message: {
+                role: "assistant",
+                content: "Sure, what time would you like to book the table for?",
+            },
+        },
+    ],
+    usage_metadata: {
+        input_tokens: 27,
+        output_tokens: 13,
+        total_tokens: 40,
+    },
+};
 
-  // Can also use one of:
-  // const output = {
-  //     message: {
-  //         role: "assistant",
-  //         content: "Sure, what time would you like to book the table for?"
-  //     }
-  // };
-  //
-  // const output = {
-  //     role: "assistant",
-  //     content: "Sure, what time would you like to book the table for?"
-  // };
-  //
-  // const output = ["assistant", "Sure, what time would you like to book the table for?"];
+// Can also use one of:
+// const output = {
+//     message: {
+//         role: "assistant",
+//         content: "Sure, what time would you like to book the table for?"
+//     }
+// };
+//
+// const output = {
+//     role: "assistant",
+//     content: "Sure, what time would you like to book the table for?"
+// };
+//
+// const output = ["assistant", "Sure, what time would you like to book the table for?"];
 
-  const chatModel = traceable(
-      async ({ messages }: { messages: { role: string; content: string }[] }) => {
-          return output;
-      },
-      {
-          run_type: "llm",
-          name: "chat_model",
-          metadata: {
-              ls_provider: "my_provider",
-              ls_model_name: "my_model"
-          }
-      }
-  );
+const chatModel = traceable(
+    async ({ messages }: { messages: { role: string; content: string }[] }) => {
+        return output;
+    },
+    {
+        run_type: "llm",
+        name: "chat_model",
+        metadata: {
+            ls_provider: "my_provider",
+            ls_model_name: "my_model"
+        }
+    }
+);
 
-  await chatModel({ messages });
-  ```
-</CodeGroup>
+await chatModel({ messages });
+```
 
 If you implement a custom streaming `chat_model`, you can "reduce" the outputs into the same format as the non-streaming version. This is only supported in Python:
 
-```python expandable wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def _reduce_chunks(chunks: list):
     all_text = "".join([chunk["choices"][0]["message"]["content"] for chunk in chunks])
     return {"choices": [{"message": {"content": all_text, "role": "assistant"}}]}
@@ -537,17 +480,16 @@ list(
 )
 ```
 
-<Check>
-  Setting `ls_model_name` in your `metadata` is required for LangSmith to identify the model and calculate costs for custom LLM traces. Without it, token counts may still be recorded but costs won't be estimated.
-</Check>
+> [!TIP]
+> Setting `ls_model_name` in your `metadata` is required for LangSmith to identify the model and calculate costs for custom LLM traces. Without it, token counts may still be recorded but costs won't be estimated.
 
-To learn more about how to use the `metadata` fields, refer to the [Add metadata and tags](/langsmith/add-metadata-tags) guide. To customize how custom agent runs appear in the Messages view, see [Customize the Messages view](/langsmith/view-traces#customize-the-messages-view).
+To learn more about how to use the `metadata` fields, refer to the [Add metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags) guide. To customize how custom agent runs appear in the Messages view, see [Customize the Messages view](https://docs.langchain.com/langsmith/view-traces#customize-the-messages-view).
 
 ## Provide token and cost information
 
 Token counts enable cost calculation, which LangSmith displays in the [Tracing Projects UI](https://smith.langchain.com/projects). There are two ways to provide them:
 
-* **Set `usage_metadata` on the run tree**: call [`get_current_run_tree()` / `getCurrentRunTree()`](/langsmith/access-current-span) inside your [`@traceable`](/langsmith/annotate-code#use-%40traceable-%2F-traceable) function and set the `usage_metadata` field. This does not change your function's return value.
+* **Set `usage_metadata` on the run tree**: call [`get_current_run_tree()` / `getCurrentRunTree()`](https://docs.langchain.com/langsmith/access-current-span) inside your [`@traceable`](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable) function and set the `usage_metadata` field. This does not change your function's return value.
 * **Return `usage_metadata` in the output**: include `usage_metadata` as a top-level key in the dictionary your function returns.
 
 ### Supported `usage_metadata` fields
@@ -560,74 +502,68 @@ Token counts enable cost calculation, which LangSmith displays in the [Tracing P
 | `input_token_details`  | `object` | Breakdown: `cache_read`, `cache_creation`, `cache_read_over_200k`, `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens`, `audio`, `text`, `image` |
 | `output_token_details` | `object` | Breakdown: `reasoning`, `audio`, `text`, `image`                                                                                                      |
 
-To send costs directly (for non-linear pricing), you can also include `input_cost`, `output_cost`, and `total_cost` fields. For details on configuring model pricing and viewing costs in the UI, refer to the [Cost tracking](/langsmith/cost-tracking) page.
+To send costs directly (for non-linear pricing), you can also include `input_cost`, `output_cost`, and `total_cost` fields. For details on configuring model pricing and viewing costs in the UI, refer to the [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking) page.
 
 ## Time-to-first-token
 
-If you are using `traceable` or one of the SDK wrappers, LangSmith will automatically populate time-to-first-token for streaming LLM runs. However, if you are using the [`RunTree` API](/langsmith/annotate-code#use-the-runtree-api) directly, you will need to add a `new_token` event to the run tree in order to properly populate time-to-first-token.
+If you are using `traceable` or one of the SDK wrappers, LangSmith will automatically populate time-to-first-token for streaming LLM runs. However, if you are using the [`RunTree` API](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api) directly, you will need to add a `new_token` event to the run tree in order to properly populate time-to-first-token.
 
 Here's an example:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith.run_trees import RunTree
-  run_tree = RunTree(
-      name="CustomChatModel",
-      run_type="llm",
-      inputs={ ... }
-  )
-  run_tree.post()
-  llm_stream = ...
-  first_token = None
-  for token in llm_stream:
-      if first_token is None:
-        first_token = token
-        run_tree.add_event({
-          "name": "new_token"
-        })
-  run_tree.end(outputs={ ... })
-  run_tree.patch()
-  ```
+```python
+from langsmith.run_trees import RunTree
+run_tree = RunTree(
+    name="CustomChatModel",
+    run_type="llm",
+    inputs={ ... }
+)
+run_tree.post()
+llm_stream = ...
+first_token = None
+for token in llm_stream:
+    if first_token is None:
+      first_token = token
+      run_tree.add_event({
+        "name": "new_token"
+      })
+run_tree.end(outputs={ ... })
+run_tree.patch()
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { RunTree } from "langsmith";
-  const runTree = new RunTree({
-      name: "CustomChatModel",
-      run_type: "llm",
-      inputs: { ... },
-  });
-  await runTree.postRun();
-  const llmStream = ...;
-  let firstToken;
-  for (const token of llmStream) {
-      if (firstToken == null) {
-          firstToken = token;
-          runTree.addEvent({ name: "new_token" });
-      }
-  }
-  await runTree.end({
-      outputs: { ... },
-  });
-  await runTree.patchRun();
-  ```
-</CodeGroup>
+```typescript
+import { RunTree } from "langsmith";
+const runTree = new RunTree({
+    name: "CustomChatModel",
+    run_type: "llm",
+    inputs: { ... },
+});
+await runTree.postRun();
+const llmStream = ...;
+let firstToken;
+for (const token of llmStream) {
+    if (firstToken == null) {
+        firstToken = token;
+        runTree.addEvent({ name: "new_token" });
+    }
+}
+await runTree.end({
+    outputs: { ... },
+});
+await runTree.patchRun();
+```
 
 ## Related
 
-* [Custom instrumentation](/langsmith/annotate-code): core `@traceable` and `RunTree` patterns.
-* [Access the current run (span) within a traced function](/langsmith/access-current-span): using `get_current_run_tree()` to set `usage_metadata` and other fields at runtime.
-* [Trace OpenAI applications](/langsmith/trace-openai): automatic token and cost tracking when using the OpenAI wrapper.
-* [Trace Anthropic applications](/langsmith/trace-anthropic): automatic token and cost tracking when using the Anthropic wrapper.
-* [Integrations overview](/langsmith/integrations): full list of providers and frameworks with built-in LangSmith support.
+* [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code): core `@traceable` and `RunTree` patterns.
+* [Access the current run (span) within a traced function](https://docs.langchain.com/langsmith/access-current-span): using `get_current_run_tree()` to set `usage_metadata` and other fields at runtime.
+* [Trace OpenAI applications](https://docs.langchain.com/langsmith/trace-openai): automatic token and cost tracking when using the OpenAI wrapper.
+* [Trace Anthropic applications](https://docs.langchain.com/langsmith/trace-anthropic): automatic token and cost tracking when using the Anthropic wrapper.
+* [Integrations overview](https://docs.langchain.com/langsmith/integrations): full list of providers and frameworks with built-in LangSmith support.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-llm-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

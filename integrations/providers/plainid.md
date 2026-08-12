@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # PlainID integrations
 
 > Integrate with PlainID using LangChain Python.
@@ -18,11 +14,9 @@ With `langchain-plainid`, you can:
 
 First, install the partner package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain_plainid
-  ```
-</CodeGroup>
+```bash
+pip install langchain_plainid
+```
 
 ## Setup
 
@@ -30,13 +24,11 @@ Next, you need to configure the provider with credentials from your PlainID tena
 
 You can set these as environment variables:
 
-<CodeGroup>
-  ```bash Environment Variables theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  export PLAINID_CLIENT_ID="your-client-id"
-  export PLAINID_CLIENT_SECRET="your-client-secret"
-  export PLAINID_BASE_URL="[https://platform-product.us1.plainid.io](https://platform-product.us1.plainid.io)"
-  ```
-</CodeGroup>
+```bash
+export PLAINID_CLIENT_ID="your-client-id"
+export PLAINID_CLIENT_SECRET="your-client-secret"
+export PLAINID_BASE_URL="[https://platform-product.us1.plainid.io](https://platform-product.us1.plainid.io)"
+```
 
 All components will automatically use these environment variables if no explicit credentials are provided during instantiation.
 
@@ -62,12 +54,8 @@ For more detailed information and full examples, refer to the [langchain\_plaini
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/plainid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/plainid.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

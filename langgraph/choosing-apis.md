@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Choosing between Graph and Functional APIs
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/choosing-apis)
 LangGraph provides two different APIs to build agent workflows: the **Graph API** and the **Functional API**. Both APIs share the same underlying runtime and can be used together in the same application, but they are designed for different use cases and development preferences.
 
 This guide will help you understand when to use each API based on your specific requirements.
@@ -30,13 +26,13 @@ Use the **Functional API** when you want:
 
 ### When to use the Graph API
 
-The [Graph API](/oss/python/langgraph/graph-api) uses a declarative approach where you define nodes, edges, and shared state to create a visual graph structure.
+The [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) uses a declarative approach where you define nodes, edges, and shared state to create a visual graph structure.
 
 **1. Complex decision trees and branching logic**
 
 When your workflow has multiple decision points that depend on various conditions, the Graph API makes these branches explicit and easy to visualize.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Graph API: Clear visualization of decision paths
 from langgraph.graph import StateGraph
 from typing import TypedDict
@@ -64,7 +60,7 @@ workflow.add_conditional_edges("call_llm", should_continue)
 
 When you need to share and coordinate state between different parts of your workflow, the Graph API's explicit state management is beneficial.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Multiple nodes can access and modify shared state
 class WorkflowState(TypedDict):
     user_input: str
@@ -87,7 +83,7 @@ def validation_node(state):
 
 When you need to run multiple operations in parallel and then combine their results, the Graph API handles this naturally.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Parallel processing of multiple data sources
 workflow.add_node("fetch_news", fetch_news)
 workflow.add_node("fetch_weather", fetch_weather)
@@ -109,7 +105,7 @@ workflow.add_edge("fetch_stocks", "combine_data")
 
 The visual nature of the Graph API makes it easier for teams to understand, document, and maintain complex workflows.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Clear separation of concerns - each team member can work on different nodes
 workflow.add_node("data_ingestion", data_team_function)
 workflow.add_node("ml_processing", ml_team_function)
@@ -119,13 +115,13 @@ workflow.add_node("output_formatting", frontend_team_function)
 
 ### When to use the Functional API
 
-The [Functional API](/oss/python/langgraph/functional-api) uses an imperative approach that integrates LangGraph features into standard procedural code.
+The [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api) uses an imperative approach that integrates LangGraph features into standard procedural code.
 
 **1. Existing procedural code**
 
 When you have existing code that uses standard control flow and want to add LangGraph features with minimal refactoring.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Functional API: Minimal changes to existing code
 from langgraph.func import entrypoint, task
 
@@ -151,7 +147,7 @@ def workflow(user_input: str) -> str:
 
 When your workflow is primarily sequential with straightforward conditional logic.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @entrypoint(checkpointer=checkpointer)
 def essay_workflow(topic: str) -> dict:
     # Linear flow with simple branching
@@ -177,7 +173,7 @@ def essay_workflow(topic: str) -> dict:
 
 When you want to quickly test ideas without the overhead of defining state schemas and graph structures.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @entrypoint(checkpointer=checkpointer)
 def quick_prototype(data: dict) -> dict:
     # Fast iteration - no state schema needed
@@ -191,7 +187,7 @@ def quick_prototype(data: dict) -> dict:
 
 When your state is naturally scoped to individual functions and doesn't need to be shared broadly.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @task
 def analyze_document(document: str) -> dict:
     # Local state management within function
@@ -216,7 +212,7 @@ def document_processor(document: str) -> dict:
 
 You can use both APIs together in the same application. This is useful when different parts of your system have different requirements.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph
 from langgraph.func import entrypoint
 
@@ -245,7 +241,7 @@ def orchestrator_node(state):
 
 When your functional workflow grows complex, you can migrate to the Graph API:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Before: Functional API
 @entrypoint(checkpointer=checkpointer)
 def complex_workflow(input_data: dict) -> dict:
@@ -287,7 +283,7 @@ workflow.add_conditional_edges("analyze", confidence_check)
 
 When your graph becomes overly complex for simple linear processes:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Before: Over-engineered Graph API
 class SimpleState(TypedDict):
     input: str
@@ -313,12 +309,8 @@ Both APIs provide the same core LangGraph features (persistence, streaming, huma
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/choosing-apis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/choosing-apis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

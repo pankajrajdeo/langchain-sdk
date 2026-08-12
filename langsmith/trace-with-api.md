@@ -1,40 +1,33 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace with API
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-api)
+Learn how to trace LLM applications using the LangSmith REST API directly.
 
-> Learn how to trace LLM applications using the LangSmith REST API directly.
+This guide covers two approaches to tracing with the [REST API](https://docs.langchain.com/langsmith/smith-api-ref): basic tracing using the `POST /runs` and `PATCH /runs` endpoints, and batch ingestion using `POST /runs/multipart` for higher throughput.
 
-This guide covers two approaches to tracing with the [REST API](/langsmith/smith-api-ref): basic tracing using the `POST /runs` and `PATCH /runs` endpoints, and batch ingestion using `POST /runs/multipart` for higher throughput.
+For a full list of endpoints and request/response schemas, refer to the [API reference](https://docs.langchain.com/langsmith/smith-api-ref).
 
-For a full list of endpoints and request/response schemas, refer to the [API reference](/langsmith/smith-api-ref).
+> [!WARNING]
+> We strongly recommend using the [Python](https://docs.langchain.com/langsmith/smith-python-sdk) or [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
+>
+> If you cannot use an SDK, note that sending traces synchronously may impact application performance.
 
-<Warning>
-  We strongly recommend using the [Python](/langsmith/smith-python-sdk) or [TypeScript](/langsmith/smith-js-ts-sdk) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
-
-  If you cannot use an SDK, note that sending traces synchronously may impact application performance.
-</Warning>
-
-<Note>
-  We recommend using **UUID v7** for run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. Use `uuid7()` from the LangSmith SDK to generate them, or see [Specify a custom run ID](/langsmith/annotate-code#specify-a-custom-run-id) for more details.
-</Note>
+> [!NOTE]
+> We recommend using **UUID v7** for run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. Use `uuid7()` from the LangSmith SDK to generate them, or see [Specify a custom run ID](https://docs.langchain.com/langsmith/annotate-code#specify-a-custom-run-id) for more details.
 
 ## Basic tracing
 
 The simplest way to log runs is via the `POST /runs` and `PATCH /runs` endpoints. This approach requires minimal information to establish the trace hierarchy.
 
-<Note>
-  When using the LangSmith REST API, provide your [API key](/langsmith/create-account-api-key) in the request headers as `"x-api-key"`.
+> [!NOTE]
+> When using the LangSmith REST API, provide your [API key](https://docs.langchain.com/langsmith/create-account-api-key) in the request headers as `"x-api-key"`.
+>
+> If your API key is linked to multiple workspaces, specify the workspace in the header with `"x-tenant-id"`.
+>
+> In this approach, you do not need to set the `dotted_order` or `trace_id` fields—the system generates them automatically. Though simpler, it is slower and subject to lower rate limits than batch ingestion.
 
-  If your API key is linked to multiple workspaces, specify the workspace in the header with `"x-tenant-id"`.
+The following example traces a chat completion with a parent chain run and a child LLM run. Set [`parent_run_id`](https://docs.langchain.com/langsmith/run-data-format) on a child run to attach it to its parent:
 
-  In this approach, you do not need to set the `dotted_order` or `trace_id` fields—the system generates them automatically. Though simpler, it is slower and subject to lower rate limits than batch ingestion.
-</Note>
-
-The following example traces a chat completion with a parent chain run and a child LLM run. Set [`parent_run_id`](/langsmith/run-data-format) on a child run to attach it to its parent:
-
-```python expandable wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import openai
 import os
 import requests
@@ -109,17 +102,17 @@ patch_run(child_run_id, chat_completion.dict())
 patch_run(parent_run_id, {"answer": chat_completion.choices[0].message.content})
 ```
 
-For more information, refer to [Run (span) data format](/langsmith/run-data-format).
+For more information, refer to [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format).
 
 ## Batch ingestion
 
-For faster ingestion and higher rate limits, use the [`POST /runs/multipart`](/langsmith/smith-api/runs/ingest-runs-multipart) endpoint. This requires the [`requests-toolbelt`](https://pypi.org/project/requests-toolbelt/) and [`uuid-utils`](https://pypi.org/project/uuid-utils/) packages.
+For faster ingestion and higher rate limits, use the [`POST /runs/multipart`](https://docs.langchain.com/langsmith/smith-api/runs/ingest-runs-multipart) endpoint. This requires the [`requests-toolbelt`](https://pypi.org/project/requests-toolbelt/) and [`uuid-utils`](https://pypi.org/project/uuid-utils/) packages.
 
-Unlike basic tracing, this endpoint requires you to compute and set [`dotted_order`](/langsmith/run-data-format#what-is-dotted_order) and [`trace_id`](/langsmith/run-data-format) yourself. `dotted_order` encodes each run's timestamp and UUID with parent and child entries joined by dots (e.g., `20240101T000000Z<parent-uuid>.20240101T000001Z<child-uuid>`), telling LangSmith how runs relate and in what order they occurred. `trace_id` is the UUID of the root run.
+Unlike basic tracing, this endpoint requires you to compute and set [`dotted_order`](https://docs.langchain.com/langsmith/run-data-format#what-is-dotted_order) and [`trace_id`](https://docs.langchain.com/langsmith/run-data-format) yourself. `dotted_order` encodes each run's timestamp and UUID with parent and child entries joined by dots (e.g., `20240101T000000Z<parent-uuid>.20240101T000001Z<child-uuid>`), telling LangSmith how runs relate and in what order they occurred. `trace_id` is the UUID of the root run.
 
 The following example creates a parent run and a child run, sends them in a single batch request, then patches both with their outputs:
 
-```python expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 import os
 import uuid
@@ -314,18 +307,14 @@ batch_ingest_runs(api_url, api_key, patches=patches)
 
 ## Related
 
-* [Run (span) data format](/langsmith/run-data-format)
-* [Specify a custom run ID](/langsmith/annotate-code#specify-a-custom-run-id)
-* [Custom instrumentation](/langsmith/annotate-code)
+* [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format)
+* [Specify a custom run ID](https://docs.langchain.com/langsmith/annotate-code#specify-a-custom-run-id)
+* [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

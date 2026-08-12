@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google firestore (native mode) integration
 
 > Integrate with the Google firestore (native mode) document loader using LangChain Python.
 
 > [Firestore](https://cloud.google.com/firestore) is a serverless document-oriented database that scales to meet any demand. Extend your database application to build AI-powered experiences leveraging Firestore's LangChain integrations.
 
-This notebook goes over how to use [Firestore](https://cloud.google.com/firestore) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `FirestoreLoader` and `FirestoreSaver`.
+This notebook goes over how to use [Firestore](https://cloud.google.com/firestore) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `FirestoreLoader` and `FirestoreSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-firestore-python/).
 
@@ -24,7 +20,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please specify a source for demo purpose.
 SOURCE = "test"  # @param {type:"Query"|"CollectionGroup"|"DocumentReference"|"string"}
 ```
@@ -33,13 +29,13 @@ SOURCE = "test"  # @param {type:"Query"|"CollectionGroup"|"DocumentReference"|"s
 
 The integration lives in its own `langchain-google-firestore` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-firestore
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -57,7 +53,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -73,7 +69,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -87,7 +83,7 @@ auth.authenticate_user()
 
 Save langchain documents with `FirestoreSaver.upsert_documents(<documents>)`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_firestore import FirestoreSaver
 
@@ -102,7 +98,7 @@ saver.upsert_documents(data)
 
 If a collection is specified the documents will be stored with an auto generated id.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 saver = FirestoreSaver("Collection")
 
 saver.upsert_documents(data)
@@ -110,7 +106,7 @@ saver.upsert_documents(data)
 
 #### Save documents with other references
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc_ids = ["AnotherCollection/doc_id", "foo/bar"]
 saver = FirestoreSaver()
 
@@ -123,12 +119,11 @@ Load langchain documents with `FirestoreLoader.load()` or `Firestore.lazy_load()
 
 1. `source` - An instance of a Query, CollectionGroup, DocumentReference or the single `\`-delimited path to a Firestore collection.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_firestore import FirestoreLoader
 
 loader_collection = FirestoreLoader("Collection")
 loader_subcollection = FirestoreLoader("Collection/doc/SubCollection")
-
 
 data_collection = loader_collection.load()
 data_subcollection = loader_subcollection.load()
@@ -136,7 +131,7 @@ data_subcollection = loader_subcollection.load()
 
 ### Load a single document
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import firestore
 
 client = firestore.Client()
@@ -149,7 +144,7 @@ data = loader_document.load()
 
 ### Load from CollectionGroup or query
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud.firestore import CollectionGroup, FieldFilter, Query
 
 col_ref = client.collection("col_group")
@@ -169,7 +164,7 @@ Delete a list of langchain documents from Firestore collection with `FirestoreSa
 
 If document ids is provided, the Documents will be ignored.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 saver = FirestoreSaver()
 
 saver.delete_documents(data)
@@ -184,7 +179,7 @@ saver.delete_documents(data, doc_ids)
 
 The arguments of `page_content_fields` and `metadata_fields` will specify the Firestore Document fields to be written into LangChain Document `page_content` and `metadata`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = FirestoreLoader(
     source="foo/bar/subcol",
     page_content_fields=["data_field"],
@@ -200,7 +195,7 @@ When the `page_content` contains only one field the information will be the fiel
 
 ### Customize connection & authentication
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.auth import compute_engine
 from google.cloud.firestore import Client
 
@@ -213,12 +208,8 @@ loader = FirestoreLoader(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_firestore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_firestore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

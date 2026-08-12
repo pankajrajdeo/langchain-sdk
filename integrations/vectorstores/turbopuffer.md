@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # turbopuffer integration
 
 > Integrate with the turbopuffer vector store using LangChain Python.
@@ -14,7 +10,7 @@ This guide shows how to use the `TurbopufferVectorStore` with LangChain.
 
 To use the turbopuffer vector store, you need to install the `langchain-turbopuffer` integration package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-turbopuffer
 ```
 
@@ -22,7 +18,7 @@ pip install -qU langchain-turbopuffer
 
 Create a turbopuffer account at [turbopuffer.com](https://turbopuffer.com) and get an API key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -32,7 +28,7 @@ if not os.getenv("TURBOPUFFER_API_KEY"):
 
 If you want to get automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -41,7 +37,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Create a turbopuffer client and namespace, then initialize the vector store:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAIEmbeddings
 from turbopuffer import Turbopuffer
 
@@ -51,7 +47,7 @@ ns = tpuf.namespace("langchain-test")
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_turbopuffer import TurbopufferVectorStore
 
 vector_store = TurbopufferVectorStore(embedding=embeddings, namespace=ns)
@@ -63,7 +59,7 @@ Once you have created your vector store, you can interact with it by adding and 
 
 ### Add items to vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -136,7 +132,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[-1]])
 ```
 
@@ -148,7 +144,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=2,
@@ -162,7 +158,7 @@ for res in results:
 
 You can also search with score. Lower distance means more similar:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     "Will it be hot tomorrow?", k=1, filters=("source", "Eq", "news")
 )
@@ -174,7 +170,7 @@ for res, score in results:
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={"k": 1, "score_threshold": 0.4},
@@ -186,7 +182,7 @@ retriever.invoke("Stealing from the bank is a crime")
 
 turbopuffer supports metadata filtering using tuple expressions. Pass filters to any search method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "interesting articles",
     k=2,
@@ -198,17 +194,13 @@ See the [turbopuffer filter documentation](https://turbopuffer.com/docs/referenc
 
 ## Related
 
-* Vector store [conceptual guide](/oss/python/integrations/vectorstores)
-* Vector store [how-to guides](/oss/python/integrations/vectorstores)
+* Vector store [conceptual guide](https://docs.langchain.com/oss/python/integrations/vectorstores)
+* Vector store [how-to guides](https://docs.langchain.com/oss/python/integrations/vectorstores)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/turbopuffer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/turbopuffer.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

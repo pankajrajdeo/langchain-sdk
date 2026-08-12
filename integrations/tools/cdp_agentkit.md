@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Cdp agentkit toolkit integration
 
 > Integrate with the Cdp agentkit toolkit using LangChain Python.
@@ -23,9 +19,9 @@ The Coinbase AgentKit LangChain extension gives an LLM agent tools to interact w
 3. Create an `AgentKit` instance and convert it to LangChain tools with `get_langchain_tools`.
 4. Pass the tools to your agent.
 
-To enable automated tracing of individual tools, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -35,7 +31,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ### Installation
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU coinbase-agentkit coinbase-agentkit-langchain
 ```
 
@@ -43,7 +39,7 @@ pip install -qU coinbase-agentkit coinbase-agentkit-langchain
 
 Create API credentials in the [CDP Portal](https://portal.cdp.coinbase.com/access/api), then set:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -58,7 +54,7 @@ for env_var in [
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from coinbase_agentkit import AgentKit
 from coinbase_agentkit_langchain import get_langchain_tools
 
@@ -70,7 +66,7 @@ For wallet providers, action providers, and advanced configuration, see the [Coi
 
 ## Tools
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for tool in tools:
     print(tool.name)
 ```
@@ -79,7 +75,7 @@ Available actions depend on the action providers configured on `AgentKit`. Commo
 
 ## Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 
@@ -100,12 +96,8 @@ For detailed documentation of configuration options and APIs:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/cdp_agentkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/cdp_agentkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

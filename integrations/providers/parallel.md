@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel integrations
 
 > Integrate with Parallel using LangChain Python.
@@ -12,66 +8,47 @@ This page covers all LangChain integrations with [Parallel](https://platform.par
 
 The `Parallel` integration lives in its own [partner package](https://pypi.org/project/langchain-parallel/):
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 Set the `PARALLEL_API_KEY` environment variable to your Parallel API key. Sign up at [platform.parallel.ai](https://platform.parallel.ai) to obtain one.
 
 ## Chat models
 
-<Columns cols={2}>
-  <Card title="ChatParallel" href="/oss/python/integrations/chat/parallel" cta="Get started" icon="message" arrow>
-    OpenAI-compatible chat model with optional web research and per-field citations on the research tiers.
-  </Card>
-</Columns>
+#### [ChatParallel](https://docs.langchain.com/oss/python/integrations/chat/parallel)
+OpenAI-compatible chat model with optional web research and per-field citations on the research tiers.
 
 ## Tools
 
-<Columns cols={2}>
-  <Card title="ParallelSearchTool" href="/oss/python/integrations/tools/parallel_search" cta="Get started" icon="search" arrow>
-    Search the web and get structured, LLM-optimized excerpts back.
-  </Card>
+#### [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search)
+Search the web and get structured, LLM-optimized excerpts back.
 
-  <Card title="ParallelExtractTool" href="/oss/python/integrations/tools/parallel_extract" cta="Get started" icon="file-text" arrow>
-    Extract clean markdown content from a list of URLs.
-  </Card>
+#### [ParallelExtractTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_extract)
+Extract clean markdown content from a list of URLs.
 
-  <Card title="ParallelFindAllTool" href="/oss/python/integrations/tools/parallel_findall" cta="Get started" icon="layers-subtract" arrow>
-    Discover entities that satisfy a set of boolean match conditions.
-  </Card>
+#### [ParallelFindAllTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_findall)
+Discover entities that satisfy a set of boolean match conditions.
 
-  <Card title="Task API" href="/oss/python/integrations/tools/parallel_task" cta="Get started" icon="list-check" arrow>
-    Run research-grade tasks: single ad-hoc, deep research, batch enrichment. `ParallelTaskRunTool`, `ParallelDeepResearch`, `ParallelTaskGroup`, `ParallelEnrichment`.
-  </Card>
+#### [Task API](https://docs.langchain.com/oss/python/integrations/tools/parallel_task)
+Run research-grade tasks: single ad-hoc, deep research, batch enrichment. `ParallelTaskRunTool`, `ParallelDeepResearch`, `ParallelTaskGroup`, `ParallelEnrichment`.
 
-  <Card title="ParallelMonitor" href="/oss/python/integrations/tools/parallel_monitor" cta="Get started" icon="radar" arrow>
-    Schedule a query on a recurring cadence and receive events when relevant new content shows up.
-  </Card>
-</Columns>
+#### [ParallelMonitor](https://docs.langchain.com/oss/python/integrations/tools/parallel_monitor)
+Schedule a query on a recurring cadence and receive events when relevant new content shows up.
 
 ## Retrievers
 
-<Columns cols={2}>
-  <Card title="ParallelSearchRetriever" href="/oss/python/integrations/retrievers/parallel" cta="Get started" icon="square-poll-vertical" arrow>
-    `BaseRetriever` over Parallel Search. Returns `list[Document]` for drop-in use in any RAG pipeline.
-  </Card>
-</Columns>
+#### [ParallelSearchRetriever](https://docs.langchain.com/oss/python/integrations/retrievers/parallel)
+`BaseRetriever` over Parallel Search. Returns `list[Document]` for drop-in use in any RAG pipeline.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

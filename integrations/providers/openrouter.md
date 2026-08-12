@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenRouter integrations
 
 > Access models from multiple providers through OpenRouter's unified API using LangChain Python.
@@ -10,20 +6,13 @@
 
 ## Chat models
 
-<Columns cols={2}>
-  <Card title="ChatOpenRouter" href="/oss/python/integrations/chat/openrouter" cta="Get started" icon="message" arrow>
-    Access chat models from multiple providers through the OpenRouter unified API.
-  </Card>
-</Columns>
+#### [ChatOpenRouter](https://docs.langchain.com/oss/python/integrations/chat/openrouter)
+Access chat models from multiple providers through the OpenRouter unified API.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

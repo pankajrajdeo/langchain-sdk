@@ -1,36 +1,30 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Minimum versions for self-hosting dependencies
-
-> Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-dependency-versions)
+Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith.
 
 This page lists the minimum supported versions for the databases, tools, and infrastructure used by self-hosted LangSmith. Install a version that meets or exceeds the minimum before deploying or upgrading. Using a version below the minimum is not supported and may cause installation or runtime failures.
 
-<Tip>
-  If you are using a managed service (such as Amazon RDS, Google Cloud SQL, or Azure Database), pick a version at or above the minimum listed here. Refer to the linked "External services" pages for connection and authentication details.
-</Tip>
+> [!TIP]
+> If you are using a managed service (such as Amazon RDS, Google Cloud SQL, or Azure Database), pick a version at or above the minimum listed here. Refer to the linked "External services" pages for connection and authentication details.
 
 ## Datastores
 
 | Dependency                                             | Minimum version                                                                                           | Notes                                                                                                                                                                                                                       |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [PostgreSQL](/langsmith/self-host-external-postgres)   | 14                                                                                                        | Primary relational store for operational data. Required for both LangSmith and standalone Agent Server deployments. Used to install the `btree_gin`, `btree_gist`, `pgcrypto`, `citext`, `ltree`, and `pg_trgm` extensions. |
-| [Redis](/langsmith/self-host-external-redis)           | 5                                                                                                         | Used for queueing and caching. Standalone and Redis Cluster modes are both supported.                                                                                                                                       |
-| [Valkey](/langsmith/self-host-external-redis)          | 8                                                                                                         | Officially supported as a drop-in replacement for Redis. Standalone and Cluster modes are both supported.                                                                                                                   |
-| [ClickHouse](/langsmith/self-host-external-clickhouse) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse versions >= 24.2 require LangSmith v0.6 or later. Downgrades are not supported.                                                                                                      |
+| [PostgreSQL](https://docs.langchain.com/langsmith/self-host-external-postgres)   | 14                                                                                                        | Primary relational store for operational data. Required for both LangSmith and standalone Agent Server deployments. Used to install the `btree_gin`, `btree_gist`, `pgcrypto`, `citext`, `ltree`, and `pg_trgm` extensions. |
+| [Redis](https://docs.langchain.com/langsmith/self-host-external-redis)           | 5                                                                                                         | Used for queueing and caching. Standalone and Redis Cluster modes are both supported.                                                                                                                                       |
+| [Valkey](https://docs.langchain.com/langsmith/self-host-external-redis)          | 8                                                                                                         | Officially supported as a drop-in replacement for Redis. Standalone and Cluster modes are both supported.                                                                                                                   |
+| [ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse versions >= 24.2 require LangSmith v0.6 or later. Downgrades are not supported.                                                                                                      |
 
-<Warning>
-  **Redis \< 5 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
-</Warning>
+> [!WARNING]
+> **Redis \< 5 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
 
 ## Compute and orchestration
 
 | Dependency                                  | Minimum version                                                                                   | Notes                                                               |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| [Kubernetes](/langsmith/kubernetes)         | Any version supported by the [upstream Kubernetes release cycle](https://kubernetes.io/releases/) | LangSmith is regularly tested on GKE, EKS, AKS, Minikube, and Kind. |
-| [OpenShift](/langsmith/kubernetes)          | 4.14                                                                                              | Supported as a Kubernetes distribution for LangSmith.               |
+| [Kubernetes](https://docs.langchain.com/langsmith/kubernetes)         | Any version supported by the [upstream Kubernetes release cycle](https://kubernetes.io/releases/) | LangSmith is regularly tested on GKE, EKS, AKS, Minikube, and Kind. |
+| [OpenShift](https://docs.langchain.com/langsmith/kubernetes)          | 4.14                                                                                              | Supported as a Kubernetes distribution for LangSmith.               |
 | [Helm](https://helm.sh/docs/intro/install/) | 3                                                                                                 | Used to install and upgrade the LangSmith Helm chart.               |
 | Docker                                      | A version compatible with [Docker Compose v2](https://docs.docker.com/compose/)                   | Required for Docker-based standalone Agent Server deployments.      |
 
@@ -38,26 +32,22 @@ This page lists the minimum supported versions for the databases, tools, and inf
 
 | Dependency                                                            | Minimum version          | Notes                                                                                                                                                          |
 | --------------------------------------------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) | Latest stable release    | We recommend pinning to the latest stable chart release. Refer to the [self-hosted changelog](/langsmith/self-hosted-changelog) for per-release upgrade notes. |
-| Egress to `https://beacon.langchain.com`                              | LangSmith 0.9.0 or later | Required for license verification and usage reporting unless running in [offline mode](/langsmith/self-host-egress).                                           |
+| [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) | Latest stable release    | We recommend pinning to the latest stable chart release. Refer to the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) for per-release upgrade notes. |
+| Egress to `https://beacon.langchain.com`                              | LangSmith 0.9.0 or later | Required for license verification and usage reporting unless running in [offline mode](https://docs.langchain.com/langsmith/self-host-egress).                                           |
 
 ## Where these versions are enforced
 
-* PostgreSQL `>= 14`: refer to [Connect to an external PostgreSQL database](/langsmith/self-host-external-postgres#requirements).
-* Redis `>= 5` and Valkey `8`: refer to [Connect to an external Redis or Valkey database](/langsmith/self-host-external-redis#requirements).
-* ClickHouse: use the version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater: refer to [Connect to an external ClickHouse database](/langsmith/self-host-external-clickhouse#requirements).
-* Kubernetes cluster prerequisites: refer to [Self-host LangSmith on Kubernetes](/langsmith/kubernetes#prerequisites).
+* PostgreSQL `>= 14`: refer to [Connect to an external PostgreSQL database](https://docs.langchain.com/langsmith/self-host-external-postgres#requirements).
+* Redis `>= 5` and Valkey `8`: refer to [Connect to an external Redis or Valkey database](https://docs.langchain.com/langsmith/self-host-external-redis#requirements).
+* ClickHouse: use the version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater: refer to [Connect to an external ClickHouse database](https://docs.langchain.com/langsmith/self-host-external-clickhouse#requirements).
+* Kubernetes cluster prerequisites: refer to [Self-host LangSmith on Kubernetes](https://docs.langchain.com/langsmith/kubernetes#prerequisites).
 
 If you are unsure which version is currently running, contact your database administrator or refer to your cloud provider's console. If you need to upgrade a dependency before upgrading LangSmith, refer to your vendor's documentation.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-dependency-versions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-dependency-versions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

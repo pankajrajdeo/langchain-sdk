@@ -1,45 +1,44 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google integrations
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/google)
+Integrate with Google using LangChain Python.
 
-> Integrate with Google using LangChain Python.
+This page covers all LangChain integrations with [Google Gemini](https://ai.google.dev/gemini-api/docs), [Google Cloud](https://cloud.google.com/), and other Google products (such as Google Maps, YouTube, and [more](https://docs.langchain.com/oss/python/integrations/providers/google#other-google-products)).
 
-This page covers all LangChain integrations with [Google Gemini](https://ai.google.dev/gemini-api/docs), [Google Cloud](https://cloud.google.com/), and other Google products (such as Google Maps, YouTube, and [more](#other-google-products)).
-
-<Note>
-  **Unified SDK & package consolidation**
-
-  As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK and now supports **both the Gemini Developer API and Vertex AI** backends.
-
-  The `langchain-google-vertexai` package remains supported for Vertex AI platform-specific features (Model Garden, Vector Search, evaluation services, etc.).
-
-  Read the [full announcement and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
-</Note>
+> [!NOTE]
+> **Unified SDK & package consolidation**
+>
+> As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK and now supports **both the Gemini Developer API and Vertex AI** backends.
+>
+> The `langchain-google-vertexai` package remains supported for Vertex AI platform-specific features (Model Garden, Vector Search, evaluation services, etc.).
+>
+> Read the [full announcement and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 Not sure which package to use?
 
-<AccordionGroup>
-  <Accordion title="Google Generative AI (Gemini API & Vertex AI)">
-    Access Google Gemini models via the **[Gemini Developer API](https://ai.google.dev/)** or **[Vertex AI](https://cloud.google.com/vertex-ai)**. The backend is selected automatically based on your configuration.
+<details>
+<summary>Google Generative AI (Gemini API & Vertex AI)</summary>
 
-    * **Gemini Developer API**: Quick setup with API key, ideal for individual developers and rapid prototyping
-    * **Vertex AI**: Enterprise features with Google Cloud integration (requires GCP project)
+Access Google Gemini models via the **[Gemini Developer API](https://ai.google.dev/)** or **[Vertex AI](https://cloud.google.com/vertex-ai)**. The backend is selected automatically based on your configuration.
 
-    Use the `langchain-google-genai` package for chat models, LLMs, and embeddings.
+* **Gemini Developer API**: Quick setup with API key, ideal for individual developers and rapid prototyping
+* **Vertex AI**: Enterprise features with Google Cloud integration (requires GCP project)
 
-    [See integrations.](#google-generative-ai)
-  </Accordion>
+Use the `langchain-google-genai` package for chat models, LLMs, and embeddings.
 
-  <Accordion title="Google Cloud (Vertex AI Platform Services)">
-    Access Vertex AI platform-specific services beyond Gemini models: Model Garden (Llama, Mistral, Anthropic), evaluation services, and specialized vision models.
+[See integrations.](https://docs.langchain.com/oss/python/integrations/providers/google#google-generative-ai)
 
-    Use the `langchain-google-vertexai` package for platform services and specific packages (e.g., `langchain-google-community`, `langchain-google-cloud-sql-pg`) for other cloud services like databases and storage.
+</details>
 
-    [See integrations.](#google-cloud)
-  </Accordion>
-</AccordionGroup>
+<details>
+<summary>Google Cloud (Vertex AI Platform Services)</summary>
+
+Access Vertex AI platform-specific services beyond Gemini models: Model Garden (Llama, Mistral, Anthropic), evaluation services, and specialized vision models.
+
+Use the `langchain-google-vertexai` package for platform services and specific packages (e.g., `langchain-google-community`, `langchain-google-cloud-sql-pg`) for other cloud services like databases and storage.
+
+[See integrations.](https://docs.langchain.com/oss/python/integrations/providers/google#google-cloud)
+
+</details>
 
 See Google's guide on [migrating from the Gemini API to Vertex AI](https://ai.google.dev/gemini-api/docs/migrate-to-cloud) for more details on the differences.
 
@@ -51,27 +50,18 @@ Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev
 
 ### Chat models
 
-<Columns cols={1}>
-  <Card title="ChatGoogleGenerativeAI" href="/oss/python/integrations/chat/google_generative_ai" cta="Get started" icon="message" arrow>
-    Google Gemini chat models via **Gemini Developer API** or **Vertex AI**.
-  </Card>
-</Columns>
+#### [ChatGoogleGenerativeAI](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai)
+Google Gemini chat models via **Gemini Developer API** or **Vertex AI**.
 
 ### LLMs
 
-<Columns cols={1}>
-  <Card title="GoogleGenerativeAI" href="/oss/python/integrations/llms/google_generative_ai" cta="Get started" icon="cursor-text" arrow>
-    Gemini models using the (legacy) LLM text completion interface.
-  </Card>
-</Columns>
+#### [GoogleGenerativeAI](https://docs.langchain.com/oss/python/integrations/llms/google_generative_ai)
+Gemini models using the (legacy) LLM text completion interface.
 
 ### Embedding models
 
-<Columns cols={1}>
-  <Card title="GoogleGenerativeAIEmbeddings" href="/oss/python/integrations/embeddings/google_generative_ai" cta="Get started" icon="stack-2" arrow>
-    Gemini embedding models via **Gemini Developer API** or **Vertex AI**.
-  </Card>
-</Columns>
+#### [GoogleGenerativeAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai)
+Gemini embedding models via **Gemini Developer API** or **Vertex AI**.
 
 ***
 
@@ -79,301 +69,303 @@ Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev
 
 Access Vertex AI platform-specific services including Model Garden (Llama, Mistral, Anthropic), Vector Search, evaluation services, and specialized vision models.
 
-<Note>
-  **For Gemini models**, use [`ChatGoogleGenerativeAI`](/oss/python/integrations/chat/google_generative_ai) from `langchain-google-genai`. The classes below focus on **Vertex AI platform services** not available in the consolidated SDK.
-</Note>
+> [!NOTE]
+> **For Gemini models**, use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) from `langchain-google-genai`. The classes below focus on **Vertex AI platform services** not available in the consolidated SDK.
 
 ### Chat models
 
-<Columns cols={2}>
-  <Card title="ChatAnthropicVertex" icon="messages" href="/oss/python/integrations/chat/google_anthropic_vertex" cta="Get started" arrow>
-    Anthropic on Vertex AI Model Garden
-  </Card>
-</Columns>
+#### [ChatAnthropicVertex](https://docs.langchain.com/oss/python/integrations/chat/google_anthropic_vertex)
+Anthropic on Vertex AI Model Garden
 
-<AccordionGroup>
-  <Accordion title="ChatVertexAI (deprecated)">
-    **Deprecated**—Use [`ChatGoogleGenerativeAI`](/oss/python/integrations/chat/google_generative_ai) for Gemini models instead.
+<details>
+<summary>ChatVertexAI (deprecated)</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai import ChatVertexAI
-    ```
-  </Accordion>
+**Deprecated**—Use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) for Gemini models instead.
 
-  <Accordion title="VertexModelGardenLlama">
-    Llama on Vertex AI Model Garden
+```python
+from langchain_google_vertexai import ChatVertexAI
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.model_garden_maas.llama import VertexModelGardenLlama
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="VertexModelGardenMistral">
-    Mistral on Vertex AI Model Garden
+<details>
+<summary>VertexModelGardenLlama</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.model_garden_maas.mistral import VertexModelGardenMistral
-    ```
-  </Accordion>
+Llama on Vertex AI Model Garden
 
-  <Accordion title="GemmaChatLocalHF">
-    Local Gemma model loaded from HuggingFace.
+```python
+from langchain_google_vertexai.model_garden_maas.llama import VertexModelGardenLlama
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaChatLocalHF
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="GemmaChatLocalKaggle">
-    Local Gemma model loaded from Kaggle.
+<details>
+<summary>VertexModelGardenMistral</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaChatLocalKaggle
-    ```
-  </Accordion>
+Mistral on Vertex AI Model Garden
 
-  <Accordion title="GemmaChatVertexAIModelGarden">
-    Gemma on Vertex AI Model Garden
+```python
+from langchain_google_vertexai.model_garden_maas.mistral import VertexModelGardenMistral
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaChatVertexAIModelGarden
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="VertexAIImageCaptioningChat">
-    Image captioning model as a chat interface.
+<details>
+<summary>GemmaChatLocalHF</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.vision_models import VertexAIImageCaptioningChat
-    ```
-  </Accordion>
+Local Gemma model loaded from HuggingFace.
 
-  <Accordion title="VertexAIImageEditorChat">
-    Edit images given a prompt. Currently supports mask-free editing only.
+```python
+from langchain_google_vertexai.gemma import GemmaChatLocalHF
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.vision_models import VertexAIImageEditorChat
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="VertexAIImageGeneratorChat">
-    Generate images from a prompt.
+<details>
+<summary>GemmaChatLocalKaggle</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
-    ```
-  </Accordion>
+Local Gemma model loaded from Kaggle.
 
-  <Accordion title="VertexAIVisualQnAChat">
-    Visual question answering model as a chat interface.
+```python
+from langchain_google_vertexai.gemma import GemmaChatLocalKaggle
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.vision_models import VertexAIVisualQnAChat
-    ```
-  </Accordion>
-</AccordionGroup>
+</details>
+
+<details>
+<summary>GemmaChatVertexAIModelGarden</summary>
+
+Gemma on Vertex AI Model Garden
+
+```python
+from langchain_google_vertexai.gemma import GemmaChatVertexAIModelGarden
+```
+
+</details>
+
+<details>
+<summary>VertexAIImageCaptioningChat</summary>
+
+Image captioning model as a chat interface.
+
+```python
+from langchain_google_vertexai.vision_models import VertexAIImageCaptioningChat
+```
+
+</details>
+
+<details>
+<summary>VertexAIImageEditorChat</summary>
+
+Edit images given a prompt. Currently supports mask-free editing only.
+
+```python
+from langchain_google_vertexai.vision_models import VertexAIImageEditorChat
+```
+
+</details>
+
+<details>
+<summary>VertexAIImageGeneratorChat</summary>
+
+Generate images from a prompt.
+
+```python
+from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
+```
+
+</details>
+
+<details>
+<summary>VertexAIVisualQnAChat</summary>
+
+Visual question answering model as a chat interface.
+
+```python
+from langchain_google_vertexai.vision_models import VertexAIVisualQnAChat
+```
+
+</details>
 
 ### LLMs
 
 (Legacy) string-in, string-out LLM interface.
 
-<Columns cols={1}>
-  <Card title="VertexAIModelGarden" icon="cursor-text" href="/oss/python/integrations/llms/google_vertex_ai#vertex-model-garden" cta="Get started" arrow>
-    Hundreds of OSS models via Vertex AI Model Garden.
-  </Card>
-</Columns>
+#### [VertexAIModelGarden](https://docs.langchain.com/oss/python/integrations/llms/google_vertex_ai#vertex-model-garden)
+Hundreds of OSS models via Vertex AI Model Garden.
 
-<AccordionGroup>
-  <Accordion title="VertexAI (deprecated)">
-    **Deprecated**—Use [`GoogleGenerativeAI`](/oss/python/integrations/llms/google_generative_ai) for Gemini models instead.
+<details>
+<summary>VertexAI (deprecated)</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai import VertexAI
-    ```
-  </Accordion>
+**Deprecated**—Use [`GoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/llms/google_generative_ai) for Gemini models instead.
 
-  <Accordion title="Gemma local from Hugging Face">
-    Local Gemma model loaded from HuggingFace.
+```python
+from langchain_google_vertexai import VertexAI
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaLocalHF
-    ```
-  </Accordion>
+</details>
 
-  <Accordion title="Gemma local from Kaggle">
-    Local Gemma model loaded from Kaggle.
+<details>
+<summary>Gemma local from Hugging Face</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaLocalKaggle
-    ```
-  </Accordion>
+Local Gemma model loaded from HuggingFace.
 
-  <Accordion title="Gemma on Vertex AI Model Garden">
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.gemma import GemmaVertexAIModelGarden
-    ```
-  </Accordion>
+```python
+from langchain_google_vertexai.gemma import GemmaLocalHF
+```
 
-  <Accordion title="Vertex AI image captioning">
-    Image captioning model as an LLM interface.
+</details>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.vision_models import VertexAIImageCaptioning
-    ```
-  </Accordion>
-</AccordionGroup>
+<details>
+<summary>Gemma local from Kaggle</summary>
+
+Local Gemma model loaded from Kaggle.
+
+```python
+from langchain_google_vertexai.gemma import GemmaLocalKaggle
+```
+
+</details>
+
+<details>
+<summary>Gemma on Vertex AI Model Garden</summary>
+
+```python
+from langchain_google_vertexai.gemma import GemmaVertexAIModelGarden
+```
+
+</details>
+
+<details>
+<summary>Vertex AI image captioning</summary>
+
+Image captioning model as an LLM interface.
+
+```python
+from langchain_google_vertexai.vision_models import VertexAIImageCaptioning
+```
+
+</details>
 
 ### Embedding models
 
-<AccordionGroup>
-  <Accordion title="VertexAIEmbeddings (deprecated)">
-    **Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/embeddings/google_generative_ai) instead.
+<details>
+<summary>VertexAIEmbeddings (deprecated)</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai import VertexAIEmbeddings
-    ```
-  </Accordion>
-</AccordionGroup>
+**Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai) instead.
+
+```python
+from langchain_google_vertexai import VertexAIEmbeddings
+```
+
+</details>
 
 ### Document loaders
 
-<Columns cols={2}>
-  <Card title="AlloyDB for PostgreSQL" href="/oss/python/integrations/document_loaders/google_alloydb" cta="Get started" arrow>
-    PostgreSQL-compatible database on Google Cloud.
-  </Card>
+#### [AlloyDB for PostgreSQL](https://docs.langchain.com/oss/python/integrations/document_loaders/google_alloydb)
+PostgreSQL-compatible database on Google Cloud.
 
-  <Card title="BigQuery" href="/oss/python/integrations/document_loaders/google_bigquery" cta="Get started" arrow>
-    Serverless data warehouse.
-  </Card>
+#### [BigQuery](https://docs.langchain.com/oss/python/integrations/document_loaders/google_bigquery)
+Serverless data warehouse.
 
-  <Card title="Bigtable" href="/oss/python/integrations/document_loaders/google_bigtable" cta="Get started" arrow>
-    Key-value and wide-column store for structured and semi-structured data.
-  </Card>
+#### [Bigtable](https://docs.langchain.com/oss/python/integrations/document_loaders/google_bigtable)
+Key-value and wide-column store for structured and semi-structured data.
 
-  <Card title="Cloud SQL for MySQL" href="/oss/python/integrations/document_loaders/google_cloud_sql_mysql" cta="Get started" arrow>
-    Managed MySQL database.
-  </Card>
+#### [Cloud SQL for MySQL](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mysql)
+Managed MySQL database.
 
-  <Card title="Cloud SQL for SQL Server" href="/oss/python/integrations/document_loaders/google_cloud_sql_mssql" cta="Get started" arrow>
-    Managed SQL Server database.
-  </Card>
+#### [Cloud SQL for SQL Server](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mssql)
+Managed SQL Server database.
 
-  <Card title="Cloud SQL for PostgreSQL" href="https://cloud.google.com/sql/docs/postgres" cta="Get started" arrow>
-    Managed PostgreSQL database.
-  </Card>
+#### [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
+Managed PostgreSQL database.
 
-  <Card title="Cloud Storage (directory)" href="/oss/python/integrations/document_loaders/google_cloud_storage_directory" cta="Get started" arrow>
-    Load documents from a GCS bucket directory.
-  </Card>
+#### [Cloud Storage (directory)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_storage_directory)
+Load documents from a GCS bucket directory.
 
-  <Card title="Cloud Storage (file)" href="/oss/python/integrations/document_loaders/google_cloud_storage_file" cta="Get started" arrow>
-    Load a single document from GCS.
-  </Card>
+#### [Cloud Storage (file)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_storage_file)
+Load a single document from GCS.
 
-  <Card title="El Carro for Oracle Workloads" href="https://github.com/googleapis/langchain-google-el-carro-python/" cta="Get started" arrow>
-    Oracle databases on Kubernetes via El Carro.
-  </Card>
+#### [El Carro for Oracle Workloads](https://github.com/googleapis/langchain-google-el-carro-python/)
+Oracle databases on Kubernetes via El Carro.
 
-  <Card title="Firestore (Native Mode)" href="/oss/python/integrations/document_loaders/google_firestore" cta="Get started" arrow>
-    NoSQL document database.
-  </Card>
+#### [Firestore (Native Mode)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_firestore)
+NoSQL document database.
 
-  <Card title="Firestore (Datastore Mode)" href="/oss/python/integrations/document_loaders/google_datastore" cta="Get started" arrow>
-    Firestore in Datastore mode.
-  </Card>
+#### [Firestore (Datastore Mode)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_datastore)
+Firestore in Datastore mode.
 
-  <Card title="Memorystore for Redis" href="/oss/python/integrations/document_loaders/google_memorystore_redis" cta="Get started" arrow>
-    Managed Redis service.
-  </Card>
+#### [Memorystore for Redis](https://docs.langchain.com/oss/python/integrations/document_loaders/google_memorystore_redis)
+Managed Redis service.
 
-  <Card title="Spanner" href="/oss/python/integrations/document_loaders/google_spanner" cta="Get started" arrow>
-    Globally distributed relational database.
-  </Card>
+#### [Spanner](https://docs.langchain.com/oss/python/integrations/document_loaders/google_spanner)
+Globally distributed relational database.
 
-  <Card title="Speech-to-Text" href="/oss/python/integrations/document_loaders/google_speech_to_text" cta="Get started" arrow>
-    Transcribe audio files.
-  </Card>
-</Columns>
+#### [Speech-to-Text](https://docs.langchain.com/oss/python/integrations/document_loaders/google_speech_to_text)
+Transcribe audio files.
 
-<Accordion title="Cloud Vision loader">
-  Load data using Google Cloud Vision API.
+<details>
+<summary>Cloud Vision loader</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_community.vision import CloudVisionLoader
-  ```
-</Accordion>
+Load data using Google Cloud Vision API.
+
+```python
+from langchain_google_community.vision import CloudVisionLoader
+```
+
+</details>
 
 ### Document transformers
 
-<Columns cols={2}>
-  <Card title="Document AI" href="/oss/python/integrations/document_transformers/google_docai" cta="Get started" arrow>
-    Extract structured data from unstructured documents.
-  </Card>
+#### [Document AI](https://docs.langchain.com/oss/python/integrations/document_transformers/google_docai)
+Extract structured data from unstructured documents.
 
-  <Card title="Google Translate" href="/oss/python/integrations/document_transformers/google_translate" cta="Get started" arrow>
-    Translate text and HTML via Cloud Translation API.
-  </Card>
-</Columns>
+#### [Google Translate](https://docs.langchain.com/oss/python/integrations/document_transformers/google_translate)
+Translate text and HTML via Cloud Translation API.
 
 ### Vector stores
 
 Store and search vectors using Google Cloud databases and Vertex AI Vector Search.
 
-<Columns cols={2}>
-  <Card title="AlloyDB for PostgreSQL" href="/oss/python/integrations/vectorstores/google_alloydb" cta="Get started" arrow>
-    PostgreSQL-compatible vector store on AlloyDB.
-  </Card>
+#### [AlloyDB for PostgreSQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_alloydb)
+PostgreSQL-compatible vector store on AlloyDB.
 
-  <Card title="BigQuery Vector Search" href="/oss/python/integrations/vectorstores/google_bigquery_vector_search" cta="Get started" arrow>
-    Semantic search using GoogleSQL with vector indexes.
-  </Card>
+#### [BigQuery Vector Search](https://docs.langchain.com/oss/python/integrations/vectorstores/google_bigquery_vector_search)
+Semantic search using GoogleSQL with vector indexes.
 
-  <Card title="Memorystore for Redis" href="/oss/python/integrations/vectorstores/google_memorystore_redis" cta="Get started" arrow>
-    Vector store on Memorystore for Redis.
-  </Card>
+#### [Memorystore for Redis](https://docs.langchain.com/oss/python/integrations/vectorstores/google_memorystore_redis)
+Vector store on Memorystore for Redis.
 
-  <Card title="Spanner" href="/oss/python/integrations/vectorstores/google_spanner" cta="Get started" arrow>
-    Vector store on Cloud Spanner.
-  </Card>
+#### [Spanner](https://docs.langchain.com/oss/python/integrations/vectorstores/google_spanner)
+Vector store on Cloud Spanner.
 
-  <Card title="Bigtable" href="https://cloud.google.com/bigtable" cta="Get started" arrow>
-    Vector store on Cloud Bigtable.
-  </Card>
+#### [Bigtable](https://cloud.google.com/bigtable)
+Vector store on Cloud Bigtable.
 
-  <Card title="Firestore (Native Mode)" href="/oss/python/integrations/vectorstores/google_firestore" cta="Get started" arrow>
-    Vector store on Firestore.
-  </Card>
+#### [Firestore (Native Mode)](https://docs.langchain.com/oss/python/integrations/vectorstores/google_firestore)
+Vector store on Firestore.
 
-  <Card title="Cloud SQL for MySQL" href="/oss/python/integrations/vectorstores/google_cloud_sql_mysql" cta="Get started" arrow>
-    Vector store on Cloud SQL for MySQL.
-  </Card>
+#### [Cloud SQL for MySQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_cloud_sql_mysql)
+Vector store on Cloud SQL for MySQL.
 
-  <Card title="Cloud SQL for PostgreSQL" href="/oss/python/integrations/vectorstores/google_cloud_sql_pg" cta="Get started" arrow>
-    Vector store on Cloud SQL for PostgreSQL.
-  </Card>
+#### [Cloud SQL for PostgreSQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_cloud_sql_pg)
+Vector store on Cloud SQL for PostgreSQL.
 
-  <Card title="Vertex AI Vector Search" href="/oss/python/integrations/vectorstores/google_vertex_ai_vector_search" cta="Get started" arrow>
-    Formerly known as Vertex AI Matching Engine, provides a low latency vector database. These vector databases are commonly referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
-  </Card>
+#### [Vertex AI Vector Search](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search)
+Formerly known as Vertex AI Matching Engine, provides a low latency vector database. These vector databases are commonly referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
 
-  <Card title="Vertex AI Vector Search + Datastore" href="/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore" cta="Get started" arrow>
-    Vector search with Datastore for document storage.
-  </Card>
-</Columns>
+#### [Vertex AI Vector Search + Datastore](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
+Vector search with Datastore for document storage.
 
 ### Retrievers
 
-<Columns cols={2}>
-  <Card title="Vertex AI Search" icon="search" href="/oss/python/integrations/retrievers/google_vertex_ai_search" cta="Get started" arrow>
-    Generative AI powered search via Vertex AI Search.
-  </Card>
+#### [Vertex AI Search](https://docs.langchain.com/oss/python/integrations/retrievers/google_vertex_ai_search)
+Generative AI powered search via Vertex AI Search.
 
-  <Card title="Document AI Warehouse" icon="building-warehouse" href="https://cloud.google.com/document-ai-warehouse" cta="Get started" arrow>
-    Search, store, and manage documents using Document AI Warehouse.
-  </Card>
-</Columns>
+#### [Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
+Search, store, and manage documents using Document AI Warehouse.
 
-```python Other retrievers theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import VertexAIMultiTurnSearchRetriever
 from langchain_google_community import VertexAISearchRetriever
 from langchain_google_community import VertexAISearchSummaryTool
@@ -383,55 +375,60 @@ from langchain_google_community import VertexAISearchSummaryTool
 
 Integrate agents with various Google Cloud services.
 
-<Columns cols={2}>
-  <Card title="Text-to-Speech" icon="volume" href="/oss/python/integrations/tools/google_cloud_texttospeech" cta="Get started" arrow>
-    Synthesize natural-sounding speech with 100+ voices.
-  </Card>
-</Columns>
+#### [Text-to-Speech](https://docs.langchain.com/oss/python/integrations/tools/google_cloud_texttospeech)
+Synthesize natural-sounding speech with 100+ voices.
 
 ### Callbacks
 
 Track LLM/Chat model usage.
 
-<AccordionGroup>
-  <Accordion title="Vertex AI callback handler">
-    Track `VertexAI` usage info.
+<details>
+<summary>Vertex AI callback handler</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.callbacks import VertexAICallbackHandler
-    ```
-  </Accordion>
+Track `VertexAI` usage info.
 
-  <Accordion title="Google BigQuery">
-    See the [documentation](/oss/python/integrations/callbacks/google_bigquery) for more details.
+```python
+from langchain_google_vertexai.callbacks import VertexAICallbackHandler
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_community.callbacks.bigquery_callback import BigQueryCallbackHandler
-    ```
-  </Accordion>
-</AccordionGroup>
+</details>
+
+<details>
+<summary>Google BigQuery</summary>
+
+See the [documentation](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) for more details.
+
+```python
+from langchain_google_community.callbacks.bigquery_callback import BigQueryCallbackHandler
+```
+
+</details>
 
 ### Evaluators
 
 Evaluate model outputs using Vertex AI.
 
-<AccordionGroup>
-  <Accordion title="VertexPairWiseStringEvaluator">
-    Pair-wise evaluation using Vertex AI models.
+<details>
+<summary>VertexPairWiseStringEvaluator</summary>
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.evaluators.evaluation import VertexPairWiseStringEvaluator
-    ```
-  </Accordion>
+Pair-wise evaluation using Vertex AI models.
 
-  <Accordion title="VertexStringEvaluator">
-    Single prediction evaluation using Vertex AI models.
+```python
+from langchain_google_vertexai.evaluators.evaluation import VertexPairWiseStringEvaluator
+```
 
-    ```python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_vertexai.evaluators.evaluation import VertexStringEvaluator
-    ```
-  </Accordion>
-</AccordionGroup>
+</details>
+
+<details>
+<summary>VertexStringEvaluator</summary>
+
+Single prediction evaluation using Vertex AI models.
+
+```python
+from langchain_google_vertexai.evaluators.evaluation import VertexStringEvaluator
+```
+
+</details>
 
 ***
 
@@ -441,47 +438,31 @@ Integrations with various Google services beyond the core Cloud Platform.
 
 ### Document loaders
 
-<Columns cols={1}>
-  <Card title="Google Drive" href="/oss/python/integrations/document_loaders/google_drive" cta="Get started" arrow>
-    Load files from Google Drive. Currently supports Google Docs.
-  </Card>
-</Columns>
+#### [Google Drive](https://docs.langchain.com/oss/python/integrations/document_loaders/google_drive)
+Load files from Google Drive. Currently supports Google Docs.
 
 ### Retrievers
 
-<Columns cols={1}>
-  <Card title="Google Drive" href="/oss/python/integrations/retrievers/google_drive" cta="Get started" arrow>
-    Retrieve documents from Google Drive.
-  </Card>
-</Columns>
+#### [Google Drive](https://docs.langchain.com/oss/python/integrations/retrievers/google_drive)
+Retrieve documents from Google Drive.
 
 ### Tools
 
-<Columns cols={2}>
-  <Card title="Google Search" href="/oss/python/integrations/tools/google_search" cta="Get started" arrow>
-    Web search via Google Custom Search Engine (CSE).
-  </Card>
+#### [Google Search](https://docs.langchain.com/oss/python/integrations/tools/google_search)
+Web search via Google Custom Search Engine (CSE).
 
-  <Card title="Google Drive" href="/oss/python/integrations/tools/google_drive" cta="Get started" arrow>
-    Interact with Google Drive.
-  </Card>
-</Columns>
+#### [Google Drive](https://docs.langchain.com/oss/python/integrations/tools/google_drive)
+Interact with Google Drive.
 
 ### MCP
 
-<Columns cols={1}>
-  <Card title="MCP Toolbox" href="/oss/python/integrations/tools/mcp_toolbox" cta="Get started" arrow>
-    Connect to databases including Cloud SQL and AlloyDB.
-  </Card>
-</Columns>
+#### [MCP Toolbox](https://docs.langchain.com/oss/python/integrations/tools/mcp_toolbox)
+Connect to databases including Cloud SQL and AlloyDB.
 
 ### Toolkits
 
-<Columns cols={2}>
-  <Card title="Gmail" icon="mail" href="/oss/python/integrations/tools/google_gmail" cta="Get started" arrow>
-    Create, search, and send emails via the Gmail API.
-  </Card>
-</Columns>
+#### [Gmail](https://docs.langchain.com/oss/python/integrations/tools/google_gmail)
+Create, search, and send emails via the Gmail API.
 
 ***
 
@@ -491,20 +472,13 @@ Access Google services via unofficial third-party APIs.
 
 ### Search
 
-<Columns cols={2}>
-  <Card title="cloro" icon="search" href="https://docs.cloro.dev" cta="Get started" arrow>
-    Google Search results with AI Overview support.
-  </Card>
-</Columns>
+#### [cloro](https://docs.cloro.dev)
+Google Search results with AI Overview support.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/google.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

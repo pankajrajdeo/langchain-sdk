@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Elasticsearch integration
 
 > Integrate with the Elasticsearch vector store using LangChain Python.
@@ -14,7 +10,7 @@ This notebook shows how to use functionality related to the `Elasticsearch` vect
 
 In order to use the `Elasticsearch` vector search you must install the `langchain-elasticsearch` package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-elasticsearch
 ```
 
@@ -34,13 +30,13 @@ embedding object to the constructor.
 
 The easiest way to run Elasticsearch locally for development and testing is using the [start-local](https://github.com/elastic/start-local) script. This script sets up Elasticsearch (and optionally Kibana) using Docker with a simple one-line command.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -fsSL https://elastic.co/start-local | sh
 ```
 
 This creates an `elastic-start-local` folder containing configuration files and startup scripts. To start Elasticsearch:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cd elastic-start-local
 ./start.sh
 ```
@@ -49,21 +45,20 @@ Elasticsearch will be available at `http://localhost:9200`. The password for the
 
 If you only need Elasticsearch without Kibana, you can use the `--esonly` option:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -fsSL https://elastic.co/start-local | sh -s -- --esonly
 ```
 
-<Note>
-  The start-local setup is for local testing only and should not be used in production. For production installations, refer to the official [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html).
-</Note>
+> [!NOTE]
+> The start-local setup is for local testing only and should not be used in production. For production installations, refer to the official [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html).
 
 ### Running with authentication
 
 For production, we recommend you run with security enabled. To connect with login credentials, you can use the parameters `es_api_key` or `es_user` and `es_password`.
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -71,7 +66,7 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchStore
 
 elastic_vector_search = ElasticsearchStore(
@@ -107,7 +102,7 @@ To obtain an API key:
 
 To connect to an Elasticsearch instance on Elastic Cloud, you can use either the `es_cloud_id` parameter or `es_url`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 elastic_vector_search = ElasticsearchStore(
     es_cloud_id="<cloud_id>",
     index_name="test_index",
@@ -117,18 +112,18 @@ elastic_vector_search = ElasticsearchStore(
 )
 ```
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
 
 ## Initialization
 
-Elasticsearch is running locally on localhost:9200 with [docker](#running-elasticsearch-locally). For more details on how to connect to Elasticsearch from Elastic Cloud, see [connecting with authentication](#running-with-authentication) above.
+Elasticsearch is running locally on localhost:9200 with [docker](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch#running-elasticsearch-locally). For more details on how to connect to Elasticsearch from Elastic Cloud, see [connecting with authentication](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch#running-with-authentication) above.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchStore
 
 vector_store = ElasticsearchStore(
@@ -140,7 +135,7 @@ vector_store = ElasticsearchStore(
 
 ### Add items to vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -212,7 +207,7 @@ uuids = [str(uuid4()) for _ in range(len(documents))]
 vector_store.add_documents(documents=documents, ids=uuids)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['21cca03c-9089-42d2-b41c-3d156be2b519',
  'a6ceb967-b552-4802-bb06-c0e95fce386e',
  '3a35fac4-e5f0-493b-bee0-9143b41aedae',
@@ -227,11 +222,11 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[-1]])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -245,7 +240,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search with filtering on metadata can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     query="LangChain provides abstractions to make working with LLMs easy",
     k=2,
@@ -255,7 +250,7 @@ for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * Building an exciting new project with LangChain - come check it out! [{'source': 'tweet'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'source': 'tweet'}]
 ```
@@ -264,7 +259,7 @@ for res in results:
 
 If you want to execute a similarity search and receive the corresponding scores you can run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     query="Will it be hot tomorrow",
     k=1,
@@ -274,7 +269,7 @@ for doc, score in results:
     print(f"* [SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=0.765887] The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees. [{'source': 'news'}]
 ```
 
@@ -282,14 +277,14 @@ for doc, score in results:
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.2}
 )
 retriever.invoke("Stealing from the bank is a crime")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.'),
  Document(metadata={'source': 'news'}, page_content='The stock market is down 500 points today due to fears of a recession.'),
  Document(metadata={'source': 'website'}, page_content='Is the new iPhone worth the price? Read this review to find out.'),
@@ -310,7 +305,7 @@ You can specify the similarity Algorithm needed via the similarity parameter.
 
 **NOTE**: Depending on the retrieval strategy, the similarity algorithm cannot be changed at query time. It is needed to be set when creating the index mapping for field. If you need to change the similarity algorithm, you need to delete the index and recreate it with the correct distance\_strategy.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db = ElasticsearchStore.from_documents(
     docs,
     embeddings,
@@ -332,7 +327,7 @@ By default, `ElasticsearchStore` uses the `DenseVectorStrategy` (was called `App
 
 This will return the top k most similar vectors to the query vector. The `k` parameter is set when the `ElasticsearchStore` is initialized. The default value is 10.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import DenseVectorStrategy
 
 db = ElasticsearchStore.from_documents(
@@ -356,7 +351,7 @@ We use RRF to balance the two scores from different retrieval methods.
 
 To enable hybrid retrieval, we need to set `hybrid=True` in the `DenseVectorStrategy` constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db = ElasticsearchStore.from_documents(
     docs,
     embeddings,
@@ -372,7 +367,7 @@ It will use rrf (Reciprocal Rank Fusion) to balance the two scores from differen
 
 **Note**: RRF requires Elasticsearch 8.9.0 or above.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {
     "retriever": {
         "rrf": {
@@ -410,7 +405,7 @@ To use this, specify the model\_id in `DenseVectorStrategy` constructor via the 
 
 **NOTE**: This requires the model to be deployed and running in Elasticsearch ML node. See [notebook example](https://github.com/elastic/elasticsearch-labs/blob/main/notebooks/integrations/hugging-face/loading-model-from-hugging-face.ipynb) on how to deploy the model with `eland`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 DENSE_SELF_DEPLOYED_INDEX_NAME = "test-dense-self-deployed"
 
 # Note: This does not have an embedding function specified
@@ -485,7 +480,7 @@ This strategy uses Elasticsearch's sparse vector retrieval to retrieve the top-k
 
 To use this, specify `SparseVectorStrategy` (was called `SparseVectorRetrievalStrategy` prior to version 0.2.0) in the `ElasticsearchStore` constructor. You will need to provide a model ID.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import SparseVectorStrategy
 
 # Note that this example doesn't have an embedding function. This is because we infer the tokens at index time and at query time within Elasticsearch.
@@ -513,7 +508,7 @@ This strategy uses Elasticsearch's script score query to perform exact vector re
 
 To use this, specify `DenseVectorScriptScoreStrategy` in `ElasticsearchStore` constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import SparseVectorStrategy
 
 db = ElasticsearchStore.from_documents(
@@ -531,7 +526,7 @@ Finally, you can use full-text keyword search.
 
 To use this, specify `BM25Strategy` in `ElasticsearchStore` constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import BM25Strategy
 
 db = ElasticsearchStore.from_documents(
@@ -550,7 +545,7 @@ To use this, specify `BM25RetrievalStrategy` in `ElasticsearchStore` constructor
 
 Note that in the example below, the embedding option is not specified, indicating that the search is conducted without using embeddings.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchStore
 
 db = ElasticsearchStore(
@@ -571,7 +566,7 @@ print(results)
 
 With `custom_query` parameter at search, you are able to adjust the query that is used to retrieve documents from Elasticsearch. This is useful if you want to use a more complex query, to support linear boosting of fields.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Example of a custom query that's just doing a BM25 search on the text field.
 def custom_query(query_body: dict, query: str):
     """Custom query to be used in Elasticsearch.
@@ -593,7 +588,6 @@ def custom_query(query_body: dict, query: str):
 
     return new_query_body
 
-
 results = db.similarity_search(
     "What did the president say about Ketanji Brown Jackson",
     k=4,
@@ -607,11 +601,10 @@ print(results[0])
 
 With `doc_builder` parameter at search, you are able to adjust how a Document is being built using data retrieved from Elasticsearch. This is especially useful if you have indices which were not created using LangChain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Dict
 
 from langchain_core.documents import Document
-
 
 def custom_document_builder(hit: Dict) -> Document:
     src = hit.get("_source", {})
@@ -622,7 +615,6 @@ def custom_document_builder(hit: Dict) -> Document:
             "original_filename": src.get("original_filename", "Missing filename!"),
         },
     )
-
 
 results = db.similarity_search(
     "What did the president say about Ketanji Brown Jackson",
@@ -637,9 +629,9 @@ print(results[0])
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 # FAQ
 
@@ -656,7 +648,7 @@ The defaults are:
 
 To adjust these, you can pass in the `chunk_size` and `max_chunk_bytes` parameters to the ElasticsearchStore `add_texts` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
     vector_store.add_texts(
         texts,
         bulk_kwargs={
@@ -676,7 +668,7 @@ The new implementation is now one class called `ElasticsearchStore` which can be
 
 ## I am using ElasticKNNSearch
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchStore, DenseVectorStrategy
 
 db = ElasticsearchStore(
@@ -693,7 +685,7 @@ db = ElasticsearchStore(
 
 ## I am using ElasticVectorSearch
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_elasticsearch import ElasticsearchStore, DenseVectorScriptScoreStrategy
 
 db = ElasticsearchStore(
@@ -705,7 +697,7 @@ db = ElasticsearchStore(
 
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.client.indices.delete(
     index="test-metadata, test-elser, test-basic",
     ignore_unavailable=True,
@@ -721,12 +713,8 @@ For detailed documentation of all `ElasticSearchStore` features and configuratio
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/elasticsearch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Cohere reranker integration
 
 > Integrate with the Cohere reranker retriever using LangChain Python.
@@ -10,11 +6,11 @@
 
 This notebook shows how to use [Cohere's rerank endpoint](https://docs.cohere.com/docs/reranking) in a retriever.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  cohere
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  faiss
 
 # OR  (depending on Python version)
@@ -22,7 +18,7 @@ pip install -qU  faiss
 pip install -qU  faiss-cpu
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # get a new token: https://dashboard.cohere.ai/
 
 import getpass
@@ -35,9 +31,8 @@ if "LANGSMITH_API_KEY" not in os.environ:
     os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Langsmith API Key:")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Helper function for printing docs
-
 
 def pretty_print_docs(docs):
     print(
@@ -51,11 +46,10 @@ def pretty_print_docs(docs):
 
 Let's start by initializing a simple vector store retriever and storing the 2023 State of the Union speech (in chunks). We can set up the retriever to retrieve a high number (20) of docs.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_cohere import CohereEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -73,7 +67,7 @@ docs = retriever.invoke(query)
 pretty_print_docs(docs)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
@@ -282,7 +276,7 @@ And with an unwavering resolve that freedom will always triumph over tyranny.
 Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll add an `CohereRerank`, uses the Cohere rerank endpoint to rerank the returned results.
 Do note that it is mandatory to specify the model name in CohereRerank!
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client
 from langchain_classic.retrievers.contextual_compression import (
     ContextualCompressionRetriever,
@@ -303,10 +297,9 @@ pretty_print_docs(compressed_docs)
 
 You can of course use this retriever within a QA pipeline
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 client = Client()
 prompt = client.pull_prompt("rlm/rag-prompt", include_model=True)
-
 
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
@@ -322,22 +315,18 @@ qa_chain = (
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 qa_chain.invoke("What did the president say about Ketanji Jackson Brown?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
  " The president speaks highly of Ketanji Brown Jackson, stating that she is one of the nation's top legal minds, and will continue the legacy of excellence of Justice Breyer. The president also mentions that he worked with her family and that she comes from a family of public school educators and police officers. Since her nomination, she has received support from various groups, including the Fraternal Order of Police and judges from both major political parties. \n\nWould you like me to extract another sentence from the provided text? "
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/cohere-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/cohere-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,19 +1,14 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Tool Server
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/mcp-framework)
 The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:
 
-* [Create custom tools](#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](/langsmith/agent-auth) for OAuth authentication
-* [Build an MCP gateway](#use-as-an-mcp-gateway) for agents you're building yourself (outside of Fleet)
+* [Create custom tools](https://docs.langchain.com/langsmith/fleet/mcp-framework#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](https://docs.langchain.com/langsmith/agent-auth) for OAuth authentication
+* [Build an MCP gateway](https://docs.langchain.com/langsmith/fleet/mcp-framework#use-as-an-mcp-gateway) for agents you're building yourself (outside of Fleet)
 
-<Note>
-  If you're using [Fleet](/langsmith/fleet/index), you don't need to interact with the Tool Server directly. Fleet provides [built-in tools](/langsmith/fleet/tools) and supports [remote MCP servers](/langsmith/fleet/remote-mcp-servers) without requiring Tool Server setup.
-
-  However, you can configure the associated tool server instance as an MCP server, which will allow you to use your custom MCP servers in your agent.
-</Note>
+> [!NOTE]
+> If you're using [Fleet](https://docs.langchain.com/langsmith/fleet/index), you don't need to interact with the Tool Server directly. Fleet provides [built-in tools](https://docs.langchain.com/langsmith/fleet/tools) and supports [remote MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) without requiring Tool Server setup.
+>
+> However, you can configure the associated tool server instance as an MCP server, which will allow you to use your custom MCP servers in your agent.
 
 Download the [PyPI package](https://pypi.org/project/langsmith-tool-server/) to get started.
 
@@ -21,14 +16,14 @@ Download the [PyPI package](https://pypi.org/project/langsmith-tool-server/) to 
 
 Install the LangSmith Tool Server and LangChain CLI:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langsmith-tool-server
 pip install langchain-cli-v2
 ```
 
 Create a new toolkit:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langchain tools new my-toolkit
 cd my-toolkit
 ```
@@ -47,9 +42,9 @@ my-toolkit/
         └── ...
 ```
 
-Define your tools using the `@tool` decorator. For more on tool schemas, return values, error handling, and `ToolRuntime`, see the [Tools guide](/oss/python/langchain/tools).
+Define your tools using the `@tool` decorator. For more on tool schemas, return values, error handling, and `ToolRuntime`, see the [Tools guide](https://docs.langchain.com/oss/python/langchain/tools).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith_tool_server import tool
 
 @tool
@@ -67,7 +62,7 @@ TOOLS = [hello, add]
 
 Run the server:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langchain tools serve
 ```
 
@@ -77,7 +72,7 @@ Your tool server will start on `http://localhost:8000`.
 
 Below is an example that lists available tools and calls the `add` tool:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 import aiohttp
 
@@ -103,7 +98,7 @@ asyncio.run(main())
 
 The LangSmith Tool Server can act as an MCP gateway, aggregating tools from multiple MCP servers into a single endpoint. Configure MCP servers in your `toolkit.toml`:
 
-```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```toml
 [toolkit]
 name = "my-toolkit"
 tools = "./my_toolkit/__init__.py:TOOLS"
@@ -126,13 +121,13 @@ All tools from connected MCP servers are exposed through your server's `/mcp` en
 
 ### OAuth for third-party APIs
 
-For tools that need to access third-party APIs (like Google, GitHub, Slack, etc.), you can use OAuth authentication with [Agent Auth](/langsmith/agent-auth).
+For tools that need to access third-party APIs (like Google, GitHub, Slack, etc.), you can use OAuth authentication with [Agent Auth](https://docs.langchain.com/langsmith/agent-auth).
 
-Before using OAuth in your tools, you'll need to configure an OAuth provider in your LangSmith workspace settings. See the [Agent Auth documentation](/langsmith/agent-auth) for setup instructions.
+Before using OAuth in your tools, you'll need to configure an OAuth provider in your LangSmith workspace settings. See the [Agent Auth documentation](https://docs.langchain.com/langsmith/agent-auth) for setup instructions.
 
 Once configured, specify the `auth_provider` in your tool decorator:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith_tool_server import tool, Context
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -160,7 +155,7 @@ Tools with `auth_provider` must:
 
 Custom authentication allows you to validate requests and integrate with your identity provider. Define an authentication handler in your `auth.py` file:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith_tool_server import Auth
 
 auth = Auth()
@@ -185,12 +180,8 @@ The handler runs on every request and must return a dict with `identity` (and op
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/mcp-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/mcp-framework.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google Vertex AI integration
 
 > Integrate with the Google Vertex AI embedding model using LangChain Python.
 
-<Danger>
-  **Deprecated**
-
-  This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAIEmbeddings`](/oss/python/integrations/embeddings/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
-</Danger>
+> [!CAUTION]
+> **Deprecated**
+>
+> This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 This will help you get started with Google Vertex AI Embeddings models using LangChain. For detailed documentation on `Google Vertex AI Embeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/python/langchain-google-vertexai/embeddings/VertexAIEmbeddings).
 
@@ -42,7 +37,7 @@ For more information, see:
 
 If you're running this notebook on Google Colab, run the cell below to authenticate your environment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sys
 
 if "google.colab" in sys.modules:
@@ -57,7 +52,7 @@ To get started using Vertex AI, you must have an existing Google Cloud project a
 
 Learn more about [setting up a project and a development environment](https://cloud.google.com/vertex-ai/docs/start/cloud-environment).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 PROJECT_ID = "[your-project-id]"  # @param {type:"string"}
 LOCATION = "us-central1"  # @param {type:"string"}
 
@@ -66,9 +61,9 @@ import vertexai
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -77,7 +72,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain Google Vertex AI Embeddings integration lives in the `langchain-google-vertexai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-vertexai
 ```
 
@@ -87,7 +82,7 @@ Now we can instantiate our model object and generate embeddings:
 
 > Check the list of [Supported Models](https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIEmbeddings
 
 # Initialize the a specific Embeddings Model version
@@ -96,11 +91,11 @@ embeddings = VertexAIEmbeddings(model_name="gemini-embedding-001")
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -121,7 +116,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -135,12 +130,12 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.02831101417541504, 0.022063178941607475, -0.07454229146242142, 0.006448323838412762, 0.001955120
 ```
 
@@ -148,7 +143,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -157,7 +152,7 @@ for vector in two_vectors:
     print(str(vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.01092718355357647, 0.01213780976831913, -0.05650627985596657, 0.006737854331731796, 0.0085973171
 [0.010135706514120102, 0.01234869472682476, -0.07284046709537506, 0.00027134662377648056, 0.01546290
 ```
@@ -171,12 +166,8 @@ For detailed documentation on `Google Vertex AI Embeddings
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

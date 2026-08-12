@@ -1,31 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Daytona integrations
 
 > Integrate with Daytona using LangChain Python.
 
 [Daytona](https://daytona.io) provides fast-starting sandbox environments with multi-language support. See the [Daytona docs](https://www.daytona.io/docs) for signup, authentication, and platform details.
 
-<Columns cols={2}>
-  <Card title="DaytonaSandbox" href="/oss/python/integrations/sandboxes/daytona" cta="Get started" icon="terminal" arrow>
-    Daytona sandbox backend for deepagents.
-  </Card>
+#### [DaytonaSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/daytona)
+Daytona sandbox backend for deepagents.
 
-  <Card title="DaytonaDataAnalysisTool" href="https://github.com/daytonaio/daytona" cta="Get started" icon="tool" arrow>
-    Data analysis tool powered by Daytona sandboxes.
-  </Card>
-</Columns>
+#### [DaytonaDataAnalysisTool](https://github.com/daytonaio/daytona)
+Data analysis tool powered by Daytona sandboxes.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

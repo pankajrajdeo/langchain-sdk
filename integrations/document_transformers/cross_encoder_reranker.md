@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Cross encoder reranker integration
 
 > Rerank retrieved documents with open-source cross-encoder models using LangChain Python.
@@ -12,7 +8,7 @@ This guide shows how to combine `HuggingFaceCrossEncoder` with LangChain's `Cros
 
 ## Setup
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU langchain-huggingface langchain-community langchain-classic faiss-cpu
 ```
 
@@ -20,11 +16,10 @@ pip install -qU langchain-huggingface langchain-community langchain-classic fais
 
 Start with a standard vector store retriever. Retrieve a relatively large `k`; the reranker will narrow it down.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -47,7 +42,7 @@ retriever = FAISS.from_documents(texts, embeddings).as_retriever(
 
 `CrossEncoderReranker` wraps any cross-encoder and plugs into `ContextualCompressionRetriever`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.retrievers.contextual_compression import ContextualCompressionRetriever
 from langchain_classic.retrievers.document_compressors import CrossEncoderReranker
 from langchain_community.cross_encoders import HuggingFaceCrossEncoder
@@ -81,7 +76,7 @@ for i, doc in enumerate(compressed_docs, 1):
 
 You can also host a cross-encoder on a SageMaker endpoint and use `SagemakerEndpointCrossEncoder`. Here is a sample `inference.py` that loads the model on the fly (no `model.tar.gz` artifacts required). See [this walkthrough](https://huggingface.co/blog/kchoe/deploy-any-huggingface-model-to-sagemaker) for step-by-step guidance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 import logging
 from typing import List
@@ -92,7 +87,6 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 PAIRS = "pairs"
 SCORES = "scores"
-
 
 class CrossEncoder:
     def __init__(self) -> None:
@@ -125,14 +119,12 @@ class CrossEncoder:
 
         return scores.detach().cpu().tolist()
 
-
 def model_fn(model_dir: str) -> CrossEncoder:
     try:
         return CrossEncoder()
     except Exception:
         logging.exception(f"Failed to load model from: {model_dir}")
         raise
-
 
 def transform_fn(
     cross_encoder: CrossEncoder, input_data: bytes, content_type: str, accept: str
@@ -145,12 +137,8 @@ def transform_fn(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/cross_encoder_reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/cross_encoder_reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

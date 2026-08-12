@@ -1,45 +1,34 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # What's new in LangGraph v1
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/langgraph-v1)
 **LangGraph v1 is a stability-focused release for the agent runtime.** It keeps the core graph APIs and execution model unchanged, while refining type safety, docs, and developer ergonomics.
 
-It's designed to work hand-in-hand with [LangChain v1](/oss/python/releases/langchain-v1) (whose `create_agent` is built on LangGraph) so you can start high-level and drop down to granular control when needed.
+It's designed to work hand-in-hand with [LangChain v1](https://docs.langchain.com/oss/python/releases/langchain-v1) (whose `create_agent` is built on LangGraph) so you can start high-level and drop down to granular control when needed.
 
-<CardGroup cols={1}>
-  <Card title="Stable core APIs" icon="sitemap">
-    Graph primitives (state, nodes, edges) and the execution/runtime model are unchanged, making upgrades straightforward.
-  </Card>
+#### Stable core APIs
+Graph primitives (state, nodes, edges) and the execution/runtime model are unchanged, making upgrades straightforward.
 
-  <Card title="Reliability, by default" icon="database">
-    Durable execution with checkpointing, persistence, streaming, and human-in-the-loop continues to be first-class.
-  </Card>
+#### Reliability, by default
+Durable execution with checkpointing, persistence, streaming, and human-in-the-loop continues to be first-class.
 
-  <Card title="Seamless with LangChain v1" icon="link">
-    LangChain's `create_agent` runs on LangGraph. Use LangChain for a fast start; drop to LangGraph for custom orchestration.
-  </Card>
-</CardGroup>
+#### Seamless with LangChain v1
+LangChain's `create_agent` runs on LangGraph. Use LangChain for a fast start; drop to LangGraph for custom orchestration.
 
 To upgrade,
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langgraph
-  ```
+```bash
+pip install -U langgraph
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langgraph
-  ```
-</CodeGroup>
+```bash
+uv add langgraph
+```
 
 ## Deprecation of `create_react_agent`
 
 The LangGraph [`create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) prebuilt has been deprecated in favor of LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent). It provides a simpler interface, and offers greater customization potential through the introduction of middleware.
 
-* For information on the new [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) API, see the [LangChain v1 release notes](/oss/python/releases/langchain-v1#create_agent).
-* For information on migrating from [`create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), see the [LangChain v1 migration guide](/oss/python/migrate/langchain-v1#migrate-to-create_agent).
+* For information on the new [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) API, see the [LangChain v1 release notes](https://docs.langchain.com/oss/python/releases/langchain-v1#create_agent).
+* For information on migrating from [`create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), see the [LangChain v1 migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1#migrate-to-create_agent).
 
 ## Reporting issues
 
@@ -47,45 +36,33 @@ Please report any issues discovered with 1.0 on [GitHub](https://github.com/lang
 
 ## Additional resources
 
-<CardGroup cols={3}>
-  <Card title="LangGraph 1.0" icon="rocket" href="https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/">
-    Read the announcement
-  </Card>
+#### [LangGraph 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)
+Read the announcement
 
-  <Card title="Overview" icon="book" href="/oss/python/langgraph/overview" arrow>
-    What LangGraph is and when to use it
-  </Card>
+#### [Overview](https://docs.langchain.com/oss/python/langgraph/overview)
+What LangGraph is and when to use it
 
-  <Card title="Graph API" icon="sitemap" href="/oss/python/langgraph/graph-api" arrow>
-    Build graphs with state, nodes, and edges
-  </Card>
+#### [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
+Build graphs with state, nodes, and edges
 
-  <Card title="LangChain Agents" icon="robot" href="/oss/python/langchain/agents" arrow>
-    High-level agents built on LangGraph
-  </Card>
+#### [LangChain Agents](https://docs.langchain.com/oss/python/langchain/agents)
+High-level agents built on LangGraph
 
-  <Card title="Migration guide" icon="arrows-exchange" href="/oss/python/migrate/langgraph-v1" arrow>
-    How to migrate to LangGraph v1
-  </Card>
+#### [Migration guide](https://docs.langchain.com/oss/python/migrate/langgraph-v1)
+How to migrate to LangGraph v1
 
-  <Card title="GitHub" icon="brand-github" href="https://github.com/langchain-ai/langgraph">
-    Report issues or contribute
-  </Card>
-</CardGroup>
+#### [GitHub](https://github.com/langchain-ai/langgraph)
+Report issues or contribute
 
 ## See also
 
-* [Versioning](/oss/python/versioning) – Understanding version numbers
-* [Release policy](/oss/python/release-policy) – Detailed release policies
+* [Versioning](https://docs.langchain.com/oss/python/versioning) – Understanding version numbers
+* [Release policy](https://docs.langchain.com/oss/python/release-policy) – Detailed release policies
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langgraph-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

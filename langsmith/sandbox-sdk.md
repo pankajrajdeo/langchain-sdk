@@ -1,119 +1,100 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sandbox SDK usage
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-sdk)
+Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
-> Create and manage sandboxes programmatically with the Python or TypeScript SDK.
-
-The [LangSmith SDK](/langsmith/reference) provides a programmatic interface to create and interact with sandboxes.
+The [LangSmith SDK](https://docs.langchain.com/langsmith/reference) provides a programmatic interface to create and interact with sandboxes.
 
 ## Install
 
-<CodeGroup>
-  ```bash Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # uv
-  uv add "langsmith[sandbox]"
+```bash
+# uv
+uv add "langsmith[sandbox]"
 
-  # pip
-  pip install "langsmith[sandbox]"
-  ```
+# pip
+pip install "langsmith[sandbox]"
+```
 
-  ```bash TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npm install langsmith
-  # or
-  yarn add langsmith
-  ```
-</CodeGroup>
+```bash
+npm install langsmith
+# or
+yarn add langsmith
+```
 
 The `[sandbox]` extra for Python installs `websockets`, which enables real-time streaming and `timeout=0`. Without it, `run()` falls back to HTTP automatically. For TypeScript, install the optional `ws` package for WebSocket streaming:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 npm install ws
 ```
 
 ## Create and run a sandbox
 
-The client reads `LANGSMITH_API_KEY` and `LANGSMITH_ENDPOINT` from the environment, so export both before you create a sandbox:
+Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots) for that flow.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
-export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
+```python
+from langsmith.sandbox import SandboxClient
+
+# Client uses LANGSMITH_ENDPOINT and LANGSMITH_API_KEY from environment
+client = SandboxClient()
+
+# Create a sandbox with the default runtime and run code
+with client.sandbox() as sb:
+    result = sb.run("python -c 'print(2 + 2)'")
+    print(result.stdout)  # "4\n"
+    print(result.success)  # True
 ```
 
-`LANGSMITH_ENDPOINT` defaults to `https://api.smith.langchain.com` (GCP US). Set it to your data plane URL on [BYOC](/langsmith/byoc), your instance URL on [self-hosted](/langsmith/self-hosted), or the [API URL for your region](/langsmith/create-account-api-key#configure-the-sdk) on other Cloud regions.
+```ts
+import { SandboxClient } from "langsmith/sandbox";
 
-Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](/langsmith/sandbox-snapshots) for that flow.
+// Client uses LANGSMITH_ENDPOINT and LANGSMITH_API_KEY from environment
+const client = new SandboxClient();
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith.sandbox import SandboxClient
+// Create a sandbox with the default runtime and run code
+const sandbox = await client.createSandbox();
+const result = await sandbox.run("node -e 'console.log(2 + 2)'");
+console.log(result.stdout); // "4\n"
 
-  # Client uses LANGSMITH_ENDPOINT and LANGSMITH_API_KEY from environment
-  client = SandboxClient()
-
-  # Create a sandbox with the default runtime and run code
-  with client.sandbox() as sb:
-      result = sb.run("python -c 'print(2 + 2)'")
-      print(result.stdout)  # "4\n"
-      print(result.success)  # True
-  ```
-
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { SandboxClient } from "langsmith/sandbox";
-
-  // Client uses LANGSMITH_ENDPOINT and LANGSMITH_API_KEY from environment
-  const client = new SandboxClient();
-
-  // Create a sandbox with the default runtime and run code
-  const sandbox = await client.createSandbox();
-  const result = await sandbox.run("node -e 'console.log(2 + 2)'");
-  console.log(result.stdout); // "4\n"
-
-  // Don't forget to clean up
-  await sandbox.delete();
-  ```
-</CodeGroup>
+// Don't forget to clean up
+await sandbox.delete();
+```
 
 ## Run commands
 
 Every `run()` call returns an `ExecutionResult` with `stdout`, `stderr`, `exit_code`, and `success`.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      result = sb.run("echo 'Hello, World!'")
+```python
+with client.sandbox() as sb:
+    result = sb.run("echo 'Hello, World!'")
 
-      print(result.stdout)     # "Hello, World!\n"
-      print(result.stderr)     # ""
-      print(result.exit_code)  # 0
-      print(result.success)    # True
+    print(result.stdout)     # "Hello, World!\n"
+    print(result.stderr)     # ""
+    print(result.exit_code)  # 0
+    print(result.success)    # True
 
-      # Commands that fail return non-zero exit codes
-      result = sb.run("exit 1")
-      print(result.success)    # False
-      print(result.exit_code)  # 1
-  ```
+    # Commands that fail return non-zero exit codes
+    result = sb.run("exit 1")
+    print(result.success)    # False
+    print(result.exit_code)  # 1
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const sandbox = await client.createSandbox();
-  try {
-    const result = await sandbox.run("echo 'Hello, World!'");
+```ts
+const sandbox = await client.createSandbox();
+try {
+  const result = await sandbox.run("echo 'Hello, World!'");
 
-    console.log(result.stdout);     // "Hello, World!\n"
-    console.log(result.stderr);     // ""
-    console.log(result.exit_code);  // 0
+  console.log(result.stdout);     // "Hello, World!\n"
+  console.log(result.stderr);     // ""
+  console.log(result.exit_code);  // 0
 
-    // Pass environment variables and working directory
-    const envResult = await sandbox.run("echo $MY_VAR", {
-      env: { MY_VAR: "test-value" },
-      cwd: "/tmp",
-    });
-  } finally {
-    await sandbox.delete();
-  }
-  ```
-</CodeGroup>
+  // Pass environment variables and working directory
+  const envResult = await sandbox.run("echo $MY_VAR", {
+    env: { MY_VAR: "test-value" },
+    cwd: "/tmp",
+  });
+} finally {
+  await sandbox.delete();
+}
+```
 
 ## Stream output
 
@@ -121,199 +102,187 @@ For long-running commands, stream output in real time using callbacks or a `Comm
 
 ### Stream with callbacks
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import sys
+```python
+import sys
 
-  with client.sandbox() as sb:
-      result = sb.run(
-          "make build",
-          timeout=600,
-          on_stdout=lambda s: print(s, end=""),
-          on_stderr=lambda s: print(s, end="", file=sys.stderr),
-      )
-      print(f"\nBuild {'succeeded' if result.success else 'failed'}")
-  ```
+with client.sandbox() as sb:
+    result = sb.run(
+        "make build",
+        timeout=600,
+        on_stdout=lambda s: print(s, end=""),
+        on_stderr=lambda s: print(s, end="", file=sys.stderr),
+    )
+    print(f"\nBuild {'succeeded' if result.success else 'failed'}")
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const result = await sandbox.run("make build", {
-    timeout: 600,
-    onStdout: (data) => process.stdout.write(data),
-    onStderr: (data) => process.stderr.write(data),
-  });
-  console.log(`Exit code: ${result.exit_code}`);
-  ```
-</CodeGroup>
+```ts
+const result = await sandbox.run("make build", {
+  timeout: 600,
+  onStdout: (data) => process.stdout.write(data),
+  onStderr: (data) => process.stderr.write(data),
+});
+console.log(`Exit code: ${result.exit_code}`);
+```
 
 ### Stream with CommandHandle
 
 Set `wait=False` to get a `CommandHandle` for full control over the output stream.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      handle = sb.run("make build", timeout=600, wait=False)
+```python
+with client.sandbox() as sb:
+    handle = sb.run("make build", timeout=600, wait=False)
 
-      print(f"Command ID: {handle.command_id}")
+    print(f"Command ID: {handle.command_id}")
 
-      for chunk in handle:
-          prefix = "OUT" if chunk.stream == "stdout" else "ERR"
-          print(f"[{prefix}] {chunk.data}", end="")
+    for chunk in handle:
+        prefix = "OUT" if chunk.stream == "stdout" else "ERR"
+        print(f"[{prefix}] {chunk.data}", end="")
 
-      result = handle.result
-      print(f"\nExit code: {result.exit_code}")
-  ```
+    result = handle.result
+    print(f"\nExit code: {result.exit_code}")
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const handle = await sandbox.run("python train.py", {
-    wait: false,
-    timeout: 600,
-  });
+```ts
+const handle = await sandbox.run("python train.py", {
+  wait: false,
+  timeout: 600,
+});
 
-  console.log(`Command ID: ${handle.commandId}`);
-  console.log(`PID: ${handle.pid}`);
+console.log(`Command ID: ${handle.commandId}`);
+console.log(`PID: ${handle.pid}`);
 
-  for await (const chunk of handle) {
-    if (chunk.stream === "stdout") {
-      process.stdout.write(chunk.data);
-    } else {
-      process.stderr.write(chunk.data);
-    }
+for await (const chunk of handle) {
+  if (chunk.stream === "stdout") {
+    process.stdout.write(chunk.data);
+  } else {
+    process.stderr.write(chunk.data);
   }
+}
 
-  const result = await handle.result;
-  console.log(`Exit code: ${result.exit_code}`);
-  ```
-</CodeGroup>
+const result = await handle.result;
+console.log(`Exit code: ${result.exit_code}`);
+```
 
 ### Send stdin and kill commands
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      handle = sb.run(
-          "python -c 'name = input(\"Name: \"); print(f\"Hello {name}\")'",
-          timeout=30,
-          wait=False,
-      )
+```python
+with client.sandbox() as sb:
+    handle = sb.run(
+        "python -c 'name = input(\"Name: \"); print(f\"Hello {name}\")'",
+        timeout=30,
+        wait=False,
+    )
 
-      for chunk in handle:
-          if "Name:" in chunk.data:
-              handle.send_input("World\n")
-          print(chunk.data, end="")
+    for chunk in handle:
+        if "Name:" in chunk.data:
+            handle.send_input("World\n")
+        print(chunk.data, end="")
 
-      result = handle.result
-  ```
+    result = handle.result
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const handle = await sandbox.run("python -i", { wait: false });
+```ts
+const handle = await sandbox.run("python -i", { wait: false });
 
-  // Send input to stdin
-  handle.sendInput("print(2 + 2)\n");
-  handle.sendInput("exit()\n");
+// Send input to stdin
+handle.sendInput("print(2 + 2)\n");
+handle.sendInput("exit()\n");
 
-  for await (const chunk of handle) {
-    process.stdout.write(chunk.data);
-  }
-  ```
-</CodeGroup>
+for await (const chunk of handle) {
+  process.stdout.write(chunk.data);
+}
+```
 
 Kill a running command:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      handle = sb.run("python server.py", timeout=0, wait=False)
+```python
+with client.sandbox() as sb:
+    handle = sb.run("python server.py", timeout=0, wait=False)
 
-      for chunk in handle:
-          print(chunk.data, end="")
-          if "Ready" in chunk.data:
-              break
+    for chunk in handle:
+        print(chunk.data, end="")
+        if "Ready" in chunk.data:
+            break
 
-      handle.kill()
-  ```
+    handle.kill()
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const handle = await sandbox.run("sleep 300", { wait: false });
-  handle.kill();
+```ts
+const handle = await sandbox.run("sleep 300", { wait: false });
+handle.kill();
 
-  const result = await handle.result;
-  console.log(result.exit_code); // non-zero
-  ```
-</CodeGroup>
+const result = await handle.result;
+console.log(result.exit_code); // non-zero
+```
 
 ### Reconnect to a running command
 
 If a client disconnects, reconnect using the command ID:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      handle = sb.run("make build", timeout=600, wait=False)
-      command_id = handle.command_id
+```python
+with client.sandbox() as sb:
+    handle = sb.run("make build", timeout=600, wait=False)
+    command_id = handle.command_id
 
-      # Later, possibly in a different process
-      handle = sb.reconnect(command_id)
-      for chunk in handle:
-          print(chunk.data, end="")
-      result = handle.result
-  ```
+    # Later, possibly in a different process
+    handle = sb.reconnect(command_id)
+    for chunk in handle:
+        print(chunk.data, end="")
+    result = handle.result
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const handle = await sandbox.run("long-task", { wait: false });
-  const commandId = handle.commandId;
+```ts
+const handle = await sandbox.run("long-task", { wait: false });
+const commandId = handle.commandId;
 
-  // Later, or from a different client
-  const newHandle = await sandbox.reconnect(commandId);
-  for await (const chunk of newHandle) {
-    process.stdout.write(chunk.data);
-  }
-  ```
-</CodeGroup>
+// Later, or from a different client
+const newHandle = await sandbox.reconnect(commandId);
+for await (const chunk of newHandle) {
+  process.stdout.write(chunk.data);
+}
+```
 
 ## File operations
 
 Read and write files in the sandbox:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      # Write a file
-      sb.write("/app/script.py", "print('Hello from file!')")
+```python
+with client.sandbox() as sb:
+    # Write a file
+    sb.write("/app/script.py", "print('Hello from file!')")
 
-      # Run the script
-      result = sb.run("python /app/script.py")
-      print(result.stdout)  # "Hello from file!\n"
+    # Run the script
+    result = sb.run("python /app/script.py")
+    print(result.stdout)  # "Hello from file!\n"
 
-      # Read a file (returns bytes)
-      content = sb.read("/app/script.py")
-      print(content.decode())  # "print('Hello from file!')"
+    # Read a file (returns bytes)
+    content = sb.read("/app/script.py")
+    print(content.decode())  # "print('Hello from file!')"
 
-      # Write binary files
-      sb.write("/app/data.bin", b"\x00\x01\x02\x03")
-  ```
+    # Write binary files
+    sb.write("/app/data.bin", b"\x00\x01\x02\x03")
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const sandbox = await client.createSandbox();
-  try {
-    // Write a file (string content)
-    await sandbox.write("/app/script.py", "print('Hello from file!')");
+```ts
+const sandbox = await client.createSandbox();
+try {
+  // Write a file (string content)
+  await sandbox.write("/app/script.py", "print('Hello from file!')");
 
-    // Run the script
-    const result = await sandbox.run("python /app/script.py");
-    console.log(result.stdout);  // "Hello from file!\n"
+  // Run the script
+  const result = await sandbox.run("python /app/script.py");
+  console.log(result.stdout);  // "Hello from file!\n"
 
-    // Read a file (returns Uint8Array)
-    const content = await sandbox.read("/app/script.py");
-    console.log(new TextDecoder().decode(content));
+  // Read a file (returns Uint8Array)
+  const content = await sandbox.read("/app/script.py");
+  console.log(new TextDecoder().decode(content));
 
-    // Write binary files
-    await sandbox.write("/app/data.bin", new Uint8Array([0x00, 0x01, 0x02, 0x03]));
-  } finally {
-    await sandbox.delete();
-  }
-  ```
-</CodeGroup>
+  // Write binary files
+  await sandbox.write("/app/data.bin", new Uint8Array([0x00, 0x01, 0x02, 0x03]));
+} finally {
+  await sandbox.delete();
+}
+```
 
 ## Sandbox lifetime and retention
 
@@ -334,55 +303,53 @@ running ──(idle for idle_ttl_seconds)──▶ stopped ──(delete_after_s
 You can also call `stop_sandbox` / `stopSandbox` explicitly — that also
 populates `stopped_at` and starts the deletion timer.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Default retention (server defaults: 10-min idle stop, 14-day delete)
-  with client.sandbox() as sb:
-      sb.run("echo hello")
+```python
+# Default retention (server defaults: 10-min idle stop, 14-day delete)
+with client.sandbox() as sb:
+    sb.run("echo hello")
 
-  # Aggressive: stop after 5 min idle, delete 1 hour after stop
-  sb = client.create_sandbox(
-      idle_ttl_seconds=300,
-      delete_after_stop_seconds=3600,
-  )
+# Aggressive: stop after 5 min idle, delete 1 hour after stop
+sb = client.create_sandbox(
+    idle_ttl_seconds=300,
+    delete_after_stop_seconds=3600,
+)
 
-  # Long-running: never auto-stop, delete 7 days after manual stop
-  sb = client.create_sandbox(
-      idle_ttl_seconds=0,
-      delete_after_stop_seconds=604800,
-  )
+# Long-running: never auto-stop, delete 7 days after manual stop
+sb = client.create_sandbox(
+    idle_ttl_seconds=0,
+    delete_after_stop_seconds=604800,
+)
 
-  # Update retention on an existing sandbox
-  sb = client.update_sandbox(
-      sb.name,
-      idle_ttl_seconds=1800,
-      delete_after_stop_seconds=2592000,  # 30 days
-  )
-  ```
+# Update retention on an existing sandbox
+sb = client.update_sandbox(
+    sb.name,
+    idle_ttl_seconds=1800,
+    delete_after_stop_seconds=2592000,  # 30 days
+)
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  // Default retention (server defaults applied)
-  const sandbox = await client.createSandbox();
+```ts
+// Default retention (server defaults applied)
+const sandbox = await client.createSandbox();
 
-  // Aggressive: stop after 5 min idle, delete 1 hour after stop
-  const sb = await client.createSandbox({
-    idleTtlSeconds: 300,
-    deleteAfterStopSeconds: 3600,
-  });
+// Aggressive: stop after 5 min idle, delete 1 hour after stop
+const sb = await client.createSandbox({
+  idleTtlSeconds: 300,
+  deleteAfterStopSeconds: 3600,
+});
 
-  // Long-running: never auto-stop, delete 7 days after manual stop
-  const longRunning = await client.createSandbox({
-    idleTtlSeconds: 0,
-    deleteAfterStopSeconds: 604800,
-  });
+// Long-running: never auto-stop, delete 7 days after manual stop
+const longRunning = await client.createSandbox({
+  idleTtlSeconds: 0,
+  deleteAfterStopSeconds: 604800,
+});
 
-  // Update retention on an existing sandbox
-  await client.updateSandbox(sb.name, {
-    idleTtlSeconds: 1800,
-    deleteAfterStopSeconds: 2592000, // 30 days
-  });
-  ```
-</CodeGroup>
+// Update retention on an existing sandbox
+await client.updateSandbox(sb.name, {
+  idleTtlSeconds: 1800,
+  deleteAfterStopSeconds: 2592000, // 30 days
+});
+```
 
 ## Command lifecycle and TTL
 
@@ -393,51 +360,49 @@ The sandbox daemon manages command session lifecycles with two timeout mechanism
 
 ### Combine lifecycle options
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  with client.sandbox() as sb:
-      # Long-running task: 30-min idle timeout, 1-hour session TTL
-      handle = sb.run(
-          "python train.py",
-          timeout=0,              # No command timeout
-          idle_timeout=1800,      # Kill after 30min with no clients
-          ttl_seconds=3600,       # Keep session for 1 hour after exit
-          wait=False,
-      )
+```python
+with client.sandbox() as sb:
+    # Long-running task: 30-min idle timeout, 1-hour session TTL
+    handle = sb.run(
+        "python train.py",
+        timeout=0,              # No command timeout
+        idle_timeout=1800,      # Kill after 30min with no clients
+        ttl_seconds=3600,       # Keep session for 1 hour after exit
+        wait=False,
+    )
 
-      # Fire-and-forget: no idle timeout, infinite TTL
-      handle = sb.run(
-          "python background_job.py",
-          timeout=0,
-          idle_timeout=-1,        # Never kill due to idle
-          ttl_seconds=-1,         # Keep session forever
-          wait=False,
-      )
-  ```
+    # Fire-and-forget: no idle timeout, infinite TTL
+    handle = sb.run(
+        "python background_job.py",
+        timeout=0,
+        idle_timeout=-1,        # Never kill due to idle
+        ttl_seconds=-1,         # Keep session forever
+        wait=False,
+    )
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const sandbox = await client.createSandbox();
-  try {
-    // Long-running task: 30-min idle timeout, 1-hour session TTL
-    const handle = await sandbox.run("python train.py", {
-      timeout: 0,              // No command timeout
-      idleTimeout: 1800,       // Kill after 30min with no clients
-      ttlSeconds: 3600,        // Keep session for 1 hour after exit
-      wait: false,
-    });
+```ts
+const sandbox = await client.createSandbox();
+try {
+  // Long-running task: 30-min idle timeout, 1-hour session TTL
+  const handle = await sandbox.run("python train.py", {
+    timeout: 0,              // No command timeout
+    idleTimeout: 1800,       // Kill after 30min with no clients
+    ttlSeconds: 3600,        // Keep session for 1 hour after exit
+    wait: false,
+  });
 
-    // Fire-and-forget: no idle timeout, infinite TTL
-    const bg = await sandbox.run("python background_job.py", {
-      timeout: 0,
-      idleTimeout: -1,         // Never kill due to idle
-      ttlSeconds: -1,          // Keep session forever
-      wait: false,
-    });
-  } finally {
-    await sandbox.delete();
-  }
-  ```
-</CodeGroup>
+  // Fire-and-forget: no idle timeout, infinite TTL
+  const bg = await sandbox.run("python background_job.py", {
+    timeout: 0,
+    idleTimeout: -1,         // Never kill due to idle
+    ttlSeconds: -1,          // Keep session forever
+    wait: false,
+  });
+} finally {
+  await sandbox.delete();
+}
+```
 
 Set `kill_on_disconnect=True` (Python) or `killOnDisconnect: true` (TypeScript) to kill the command immediately when the last client disconnects, instead of waiting for the idle timeout.
 
@@ -445,7 +410,7 @@ Set `kill_on_disconnect=True` (Python) or `killOnDisconnect: true` (TypeScript) 
 
 Access an HTTP service running inside a sandbox via an authenticated URL. You can open it in a browser, call it from code, or share it with a teammate.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with client.sandbox() as sb:
     sb.run("python -m http.server 8000", timeout=0, wait=False)
 
@@ -459,13 +424,13 @@ with client.sandbox() as sb:
     resp = svc.post("/api/data", json={"key": "value"})
 ```
 
-For more details, including use cases, REST API access, and a full FastAPI example, see [Service URLs](/langsmith/sandbox-service-urls).
+For more details, including use cases, REST API access, and a full FastAPI example, see [Service URLs](https://docs.langchain.com/langsmith/sandbox-service-urls).
 
 ## TCP tunnels (Python)
 
 Access any TCP service running inside a sandbox as if it were local. The tunnel opens a local TCP port and forwards connections through a WebSocket to the target port inside the sandbox.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import psycopg2
 
 # Snapshot built from the official postgres:16 image
@@ -495,7 +460,7 @@ finally:
 
 Tunnels work with any TCP service (Redis, HTTP servers, etc.) and you can open multiple tunnels simultaneously:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with sb.tunnel(remote_port=5432, local_port=25432) as t1, \
      sb.tunnel(remote_port=6379, local_port=26379) as t2:
     # Use both Postgres and Redis simultaneously
@@ -506,7 +471,7 @@ with sb.tunnel(remote_port=5432, local_port=25432) as t1, \
 
 The Python SDK provides a full async client:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith.sandbox import AsyncSandboxClient
 
 async def main():
@@ -536,119 +501,109 @@ async def main():
 
 Pass LangSmith tracing environment variables through the `env` parameter on `run()` to send traces from code running inside a sandbox. Call `flush()` before the process exits to ensure all traces are delivered.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith.sandbox import SandboxClient
+```python
+from langsmith.sandbox import SandboxClient
 
-  client = SandboxClient()
+client = SandboxClient()
 
-  tracing_env = {
-      "LANGSMITH_API_KEY": "lsv2_pt_...",
-      "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
-      "LANGSMITH_TRACING": "true",
-      "LANGSMITH_PROJECT": "my-sandbox-traces",
-  }
+tracing_env = {
+    "LANGSMITH_API_KEY": "lsv2_pt_...",
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_TRACING": "true",
+    "LANGSMITH_PROJECT": "my-sandbox-traces",
+}
 
-  with client.sandbox() as sandbox:
-      sandbox.run("pip install langsmith", timeout=120, env=tracing_env)
-      result = sandbox.run("python3 my_agent.py", env=tracing_env)
-      print(result.stdout)
-  ```
+with client.sandbox() as sandbox:
+    sandbox.run("pip install langsmith", timeout=120, env=tracing_env)
+    result = sandbox.run("python3 my_agent.py", env=tracing_env)
+    print(result.stdout)
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { SandboxClient } from "langsmith/sandbox";
+```ts
+import { SandboxClient } from "langsmith/sandbox";
 
-  const client = new SandboxClient();
+const client = new SandboxClient();
 
-  const tracingEnv = {
-    LANGSMITH_API_KEY: "lsv2_pt_...",
-    LANGSMITH_ENDPOINT: "https://api.smith.langchain.com",
-    LANGSMITH_TRACING: "true",
-    LANGSMITH_PROJECT: "my-sandbox-traces",
-  };
+const tracingEnv = {
+  LANGSMITH_API_KEY: "lsv2_pt_...",
+  LANGSMITH_ENDPOINT: "https://api.smith.langchain.com",
+  LANGSMITH_TRACING: "true",
+  LANGSMITH_PROJECT: "my-sandbox-traces",
+};
 
-  const sandbox = await client.createSandbox();
-  try {
-    await sandbox.run("pip install langsmith", { timeout: 120, env: tracingEnv });
-    const result = await sandbox.run("python3 my_agent.py", { env: tracingEnv });
-    console.log(result.stdout);
-  } finally {
-    await sandbox.delete();
-  }
-  ```
-</CodeGroup>
+const sandbox = await client.createSandbox();
+try {
+  await sandbox.run("pip install langsmith", { timeout: 120, env: tracingEnv });
+  const result = await sandbox.run("python3 my_agent.py", { env: tracingEnv });
+  console.log(result.stdout);
+} finally {
+  await sandbox.delete();
+}
+```
 
 Inside the sandbox, any LangSmith-instrumented code (`@traceable`, LangChain, LangGraph) automatically picks up the tracing configuration from the injected environment variables.
 
-<Warning>
-  Always call `flush()` before the sandbox process exits — `langsmith.Client().flush()` in Python or `await new Client().flush()` in TypeScript. Without it, traces may be lost because the container is destroyed when the command finishes.
-</Warning>
+> [!WARNING]
+> Always call `flush()` before the sandbox process exits — `langsmith.Client().flush()` in Python or `await new Client().flush()` in TypeScript. Without it, traces may be lost because the container is destroyed when the command finishes.
 
 ## Error handling
 
 Both SDKs provide typed exceptions for specific error handling:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith.sandbox import (
-      SandboxClientError,       # Base exception
-      ResourceCreationError,    # Provisioning failed
-      ResourceNotFoundError,    # Resource doesn't exist
-      ResourceTimeoutError,     # Operation timed out
-      SandboxNotReadyError,     # Sandbox not ready yet
-      SandboxConnectionError,   # Network/WebSocket error
-      CommandTimeoutError,      # Command exceeded timeout
-      QuotaExceededError,       # Quota limit reached
-  )
+```python
+from langsmith.sandbox import (
+    SandboxClientError,       # Base exception
+    ResourceCreationError,    # Provisioning failed
+    ResourceNotFoundError,    # Resource doesn't exist
+    ResourceTimeoutError,     # Operation timed out
+    SandboxNotReadyError,     # Sandbox not ready yet
+    SandboxConnectionError,   # Network/WebSocket error
+    CommandTimeoutError,      # Command exceeded timeout
+    QuotaExceededError,       # Quota limit reached
+)
 
-  try:
-      with client.sandbox() as sb:
-          result = sb.run("sleep 999", timeout=10)
-  except CommandTimeoutError as e:
-      print(f"Command timed out: {e}")
-  except ResourceNotFoundError as e:
-      print(f"{e.resource_type} not found: {e}")
-  except SandboxClientError as e:
-      print(f"Error: {e}")
-  ```
+try:
+    with client.sandbox() as sb:
+        result = sb.run("sleep 999", timeout=10)
+except CommandTimeoutError as e:
+    print(f"Command timed out: {e}")
+except ResourceNotFoundError as e:
+    print(f"{e.resource_type} not found: {e}")
+except SandboxClientError as e:
+    print(f"Error: {e}")
+```
 
-  ```ts TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import {
-    LangSmithSandboxError,
-    LangSmithResourceNotFoundError,
-    LangSmithResourceTimeoutError,
-    LangSmithSandboxConnectionError,
-    LangSmithCommandTimeoutError,
-    LangSmithQuotaExceededError,
-  } from "langsmith/sandbox";
+```ts
+import {
+  LangSmithSandboxError,
+  LangSmithResourceNotFoundError,
+  LangSmithResourceTimeoutError,
+  LangSmithSandboxConnectionError,
+  LangSmithCommandTimeoutError,
+  LangSmithQuotaExceededError,
+} from "langsmith/sandbox";
 
-  try {
-    const sandbox = await client.createSandbox("not-a-real-snapshot");
-    await sandbox.delete();
-  } catch (e) {
-    if (e instanceof LangSmithResourceNotFoundError) {
-      console.log(`${e.resourceType} not found: ${e.message}`);
-    } else if (e instanceof LangSmithResourceTimeoutError) {
-      console.log(`Timeout waiting for ${e.resourceType}: ${e.message}`);
-    } else if (e instanceof LangSmithSandboxError) {
-      console.log(`Error: ${e.message}`);
-    }
+try {
+  const sandbox = await client.createSandbox("not-a-real-snapshot");
+  await sandbox.delete();
+} catch (e) {
+  if (e instanceof LangSmithResourceNotFoundError) {
+    console.log(`${e.resourceType} not found: ${e.message}`);
+  } else if (e instanceof LangSmithResourceTimeoutError) {
+    console.log(`Timeout waiting for ${e.resourceType}: ${e.message}`);
+  } else if (e instanceof LangSmithSandboxError) {
+    console.log(`Error: ${e.message}`);
   }
-  ```
-</CodeGroup>
+}
+```
 
-<Note>
-  For more details, see the sandbox SDK reference on GitHub for [Python](https://github.com/langchain-ai/langsmith-sdk/tree/main/python/langsmith/sandbox) or [TypeScript](https://github.com/langchain-ai/langsmith-sdk/tree/main/js/src/sandbox).
-</Note>
+> [!NOTE]
+> For more details, see the sandbox SDK reference on GitHub for [Python](https://github.com/langchain-ai/langsmith-sdk/tree/main/python/langsmith/sandbox) or [TypeScript](https://github.com/langchain-ai/langsmith-sdk/tree/main/js/src/sandbox).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandbox-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

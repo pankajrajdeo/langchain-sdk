@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Customize OpenWiki
-
-> Ignore paths, wiki instructions, agent pointers, and telemetry for OpenWiki
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/customize)
+Ignore paths, wiki instructions, agent pointers, and telemetry for OpenWiki
 
 Customize OpenWiki with ignore rules, wiki briefs, agent instruction pointers, and telemetry.
 
 ## Ignore paths
 
-Create `.openwikiignore` at the repository root to exclude private, generated, or irrelevant paths from documentation runs. See [Code mode](/oss/openwiki/code-mode#ignore-paths) for syntax and behavior.
+Create `.openwikiignore` at the repository root to exclude private, generated, or irrelevant paths from documentation runs. See [Code mode](https://docs.langchain.com/oss/openwiki/code-mode#ignore-paths) for syntax and behavior.
 
 ## Wiki instructions
 
@@ -47,7 +43,7 @@ Both code and personal mode store machine-local state under `~/.openwiki/`:
 | `~/.openwiki/onboarding.json` | Personal        | Personal onboarding preferences and connector schedules                                                                   |
 | `~/.openwiki/connectors/`     | Mostly personal | Connector raw data and config. Personal sources use this path; code-mode LangSmith ingestion can also cache raw data here |
 
-Code-mode repository artifacts such as the generated wiki, `openwiki/INSTRUCTIONS.md`, and `openwiki/.last-update.json` live in the project, not under `~/.openwiki/`. For more detail, see [Code mode](/oss/openwiki/code-mode) and [Personal mode](/oss/openwiki/personal-mode).
+Code-mode repository artifacts such as the generated wiki, `openwiki/INSTRUCTIONS.md`, and `openwiki/.last-update.json` live in the project, not under `~/.openwiki/`. For more detail, see [Code mode](https://docs.langchain.com/oss/openwiki/code-mode) and [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode).
 
 ## Telemetry
 
@@ -64,7 +60,7 @@ Scheduled and CI runs are tagged separately under a shared CI identifier and are
 
 ### Opt out
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export OPENWIKI_TELEMETRY_DISABLED=1
 # or
 export DO_NOT_TRACK=1
@@ -76,19 +72,15 @@ To inspect exactly what a run would send, add `--telemetry-file=<path>` to any r
 
 ## See also
 
-* [Code mode](/oss/openwiki/code-mode)
-* [Personal mode](/oss/openwiki/personal-mode)
-* [Automate updates](/oss/openwiki/automate-updates)
-* [Model providers](/oss/openwiki/providers)
+* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
+* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
+* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
+* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/customize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/customize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

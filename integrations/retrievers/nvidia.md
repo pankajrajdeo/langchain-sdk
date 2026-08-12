@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # NVIDIARAGRetriever integration
 
 > Integrate with the NVIDIARAGRetriever using LangChain Python.
@@ -24,13 +20,13 @@ No API key is required for the retriever; authentication is handled by the RAG s
 
 ### Installation
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-nvidia-ai-endpoints
 ```
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import NVIDIARAGRetriever
 
 retriever = NVIDIARAGRetriever(
@@ -55,7 +51,7 @@ Key parameters:
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = retriever.invoke("What is NVIDIA NIM?")
 for doc in docs:
     print(doc.page_content)
@@ -63,13 +59,13 @@ for doc in docs:
 
 Async retrieval is also supported:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = await retriever.ainvoke("What is NVIDIA NIM?")
 ```
 
 ## Use within a chain
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -82,10 +78,8 @@ prompt = ChatPromptTemplate.from_template(
     "Answer the question based only on the following context:\n{context}\n\nQuestion: {question}"
 )
 
-
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
-
 
 chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()}
@@ -103,19 +97,15 @@ For detailed documentation of all `NVIDIARAGRetriever` features and configuratio
 
 ## Related topics
 
-* [NVIDIA Provider Page](/oss/python/integrations/providers/nvidia)
-* [`ChatNVIDIA` integration](/oss/python/integrations/chat/nvidia_ai_endpoints)
-* [`NVIDIAEmbeddings` integration](/oss/python/integrations/embeddings/nvidia_ai_endpoints)
+* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
+* [`ChatNVIDIA` integration](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)
+* [`NVIDIAEmbeddings` integration](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)
 * [NVIDIA RAG Blueprint documentation](https://docs.nvidia.com/rag/latest/index.html)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/nvidia.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

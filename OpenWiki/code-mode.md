@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Code mode
-
-> Generate and maintain repository documentation for coding agents with OpenWiki
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/code-mode)
+Generate and maintain repository documentation for coding agents with OpenWiki
 
 Code mode builds a repository wiki in `openwiki/` with durable details such as architecture, integrations, and workflows. Coding agents use that wiki as context so they can work in the package more efficiently, with less rediscovery and fewer tokens. Humans can read the same Markdown, but agents are the primary audience. Agents discover the wiki through pointers OpenWiki adds to `AGENTS.md` and `CLAUDE.md`.
 
 `openwiki`, `openwiki --init`, and `openwiki --update` run in code mode. You can also pass the mode explicitly:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki code --init
 openwiki code --update
 openwiki code --update --print
@@ -27,7 +23,7 @@ After a successful init or update, the repository typically includes:
 
 ## Markdown output
 
-OpenWiki's durable output is Markdown (OKF), not a static HTML site. To explore the wiki in a browser, run [`openwiki visualize`](/oss/openwiki/visualize). The command serves a viewer only on your local machine (`127.0.0.1`). To host a human-readable site, render the Markdown with another tool (for example GitHub Pages, MkDocs, or an OKF-compatible viewer).
+OpenWiki's durable output is Markdown (OKF), not a static HTML site. To explore the wiki in a browser, run [`openwiki visualize`](https://docs.langchain.com/oss/openwiki/visualize). The command serves a viewer only on your local machine (`127.0.0.1`). To host a human-readable site, render the Markdown with another tool (for example GitHub Pages, MkDocs, or an OKF-compatible viewer).
 
 ## Open Knowledge Format
 
@@ -42,7 +38,7 @@ OpenWiki emits [Google Open Knowledge Format (OKF)](https://cloud.google.com/blo
 
 Create a `.openwikiignore` file in the repository root to keep generated docs from reading or describing private, generated, or irrelevant paths. The syntax supports comments, blank lines, `*` and `**` globs, directory rules, and `!` negation:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 secrets/
 *.log
 !logs/keep.log
@@ -50,9 +46,8 @@ secrets/
 
 When `.openwikiignore` has active rules, OpenWiki filters filesystem discovery and restricts shell execute so ignored paths stay out of the run.
 
-<Note>
-  This is a read boundary: ignored paths are never read, scanned, or reproduced in the generated docs. It does not guarantee a topic will never be mentioned, because the agent may still infer an ignored area from other allowed evidence such as tests, the README, commit messages, or the existing wiki.
-</Note>
+> [!NOTE]
+> This is a read boundary: ignored paths are never read, scanned, or reproduced in the generated docs. It does not guarantee a topic will never be mentioned, because the agent may still infer an ignored area from other allowed evidence such as tests, the README, commit messages, or the existing wiki.
 
 ## Diagrams
 
@@ -60,7 +55,7 @@ OpenWiki embeds Mermaid diagrams where they clarify a concept better than prose.
 
 For validation that matches GitHub rendering more closely, install the Mermaid parser wherever you run OpenWiki:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 npm install mermaid jsdom
 ```
 
@@ -70,7 +65,7 @@ When the parser is present, OpenWiki uses it. When it is absent, OpenWiki falls 
 
 Edit `openwiki/INSTRUCTIONS.md` to steer scope, priorities, and preferred writing conventions for repository documentation (for example tone, terminology, and what to emphasize or skip). OpenWiki reads this file on init and update runs. You can also ask OpenWiki in chat to revise the brief:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki "Update openwiki/INSTRUCTIONS.md to prioritize the public API and skip internal tooling"
 ```
 
@@ -78,19 +73,15 @@ Normal `--init` and `--update` runs do not rewrite this file.
 
 ## See also
 
-* [Visualize your wiki](/oss/openwiki/visualize)
-* [Automate updates](/oss/openwiki/automate-updates)
-* [Customize OpenWiki](/oss/openwiki/customize)
-* [Personal mode](/oss/openwiki/personal-mode)
+* [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize)
+* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
+* [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize)
+* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/code-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/code-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

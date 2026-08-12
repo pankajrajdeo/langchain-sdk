@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google firestore integration
 
 > Integrate with the Google firestore vector store using LangChain Python.
@@ -22,7 +18,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please specify a source for demo purpose.
 COLLECTION_NAME = "test"  # @param {type:"CollectionReference"|"string"}
 ```
@@ -31,13 +27,13 @@ COLLECTION_NAME = "test"  # @param {type:"CollectionReference"|"string"}
 
 The integration lives in its own `langchain-google-firestore` package, so we need to install it. For this notebook, we will also install `langchain-google-genai` to use Google Generative AI embeddings.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-firestore langchain-google-vertexai
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -55,7 +51,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "extensions-testing"  # @param {type:"string"}
@@ -71,7 +67,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -83,7 +79,7 @@ auth.authenticate_user()
 
 `FirestoreVectorStore` allows you to store new vectors in a Firestore database. You can use it to store embeddings from any model, including those from Google Generative AI.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_firestore import FirestoreVectorStore
 from langchain_google_vertexai import VertexAIEmbeddings
 
@@ -108,7 +104,7 @@ vector_store.add_texts(fruits_texts, ids=ids)
 
 As a shorthand, you can initialize and add vectors in a single step using the `from_texts` and `from_documents` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = FirestoreVectorStore.from_texts(
     collection="fruits",
     texts=fruits_texts,
@@ -116,7 +112,7 @@ vector_store = FirestoreVectorStore.from_texts(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 fruits_docs = [Document(page_content=fruit) for fruit in fruits_texts]
@@ -132,7 +128,7 @@ vector_store = FirestoreVectorStore.from_documents(
 
 You can delete documents with vectors from the database using the `delete` method. You'll need to provide the document ID of the vector you want to delete. This will remove the whole document from the database, including any other fields it may have.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids)
 ```
 
@@ -140,7 +136,7 @@ vector_store.delete(ids)
 
 Updating vectors is similar to adding them. You can use the `add` method to update the vector of a document by providing the document ID and the new vector.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 fruit_to_update = ['{"name": "apple","price": 12}']
 apple_id = "apple"
 
@@ -151,17 +147,17 @@ vector_store.add_texts(fruit_to_update, ids=[apple_id])
 
 You can use the `FirestoreVectorStore` to perform similarity searches on the vectors you have stored. This is useful for finding similar documents or text.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.similarity_search("I like fuji apples", k=3)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.max_marginal_relevance_search("fuji", 5)
 ```
 
 You can add a pre-filter to the search by using the `filters` parameter. This is useful for filtering by a specific field or value.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud.firestore_v1.base_query import FieldFilter
 
 vector_store.max_marginal_relevance_search(
@@ -171,7 +167,7 @@ vector_store.max_marginal_relevance_search(
 
 ### Customize connection & authentication
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.api_core.client_options import ClientOptions
 from google.cloud import firestore
 from langchain_google_firestore import FirestoreVectorStore
@@ -189,12 +185,8 @@ vector_store = FirestoreVectorStore(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_firestore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_firestore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

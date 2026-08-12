@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Overview
-
-> Render LangGraph agents to the frontend
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/overview)
+Render LangGraph agents to the frontend
 
 Build frontends that visualize LangGraph pipelines in real time. These patterns
 show how to render multi-step graph execution with per-node status and streaming
@@ -16,15 +12,14 @@ messages are all visible runtime concepts, so you can build interfaces that
 explain what the system is doing instead of hiding execution behind one
 assistant message.
 
-<Note>
-  These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
-</Note>
+> [!NOTE]
+> These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
 
 LangGraph graphs are composed of named nodes connected by edges. Each node executes a step (classify, research, analyze, synthesize) and writes output to a specific state key. On the frontend, the SDK stream handle provides reactive access to node outputs, streaming tokens, and discovered subgraphs so you can map each node to a UI card.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -54,7 +49,7 @@ graph LR
   class N1,N2,N3 orangeHighlight;
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph import StateGraph, MessagesState, START, END
 
 class State(MessagesState):
@@ -83,7 +78,7 @@ streaming content. `stream.values` still holds the full graph state when you
 need fields such as the final `synthesis`. Angular uses the same stream API
 shape through [`injectStream`](https://reference.langchain.com/javascript/langchain-angular/injectStream).
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { useStream } from "@langchain/react";
 
 function Pipeline() {
@@ -119,28 +114,20 @@ chat panel to a full workflow debugger without changing the backend protocol.
 
 ## Patterns
 
-<CardGroup cols={2}>
-  <Card title="Graph execution" icon="chart-dots" href="/oss/python/langgraph/frontend/graph-execution">
-    Visualize multi-step graph pipelines with per-node status and streaming content.
-  </Card>
+#### [Graph execution](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution)
+Visualize multi-step graph pipelines with per-node status and streaming content.
 
-  <Card title="Custom stream channels" icon="broadcast" href="/oss/python/langgraph/frontend/custom-stream-channels">
-    Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
-  </Card>
-</CardGroup>
+#### [Custom stream channels](https://docs.langchain.com/oss/python/langgraph/frontend/custom-stream-channels)
+Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
 
 ## Related patterns
 
-The [LangChain frontend patterns](/oss/python/langchain/frontend/overview)—markdown messages, tool calling, human-in-the-loop, resumable streams, and time travel—work with any LangGraph graph. The stream API provides the same core data model whether you use `createAgent`, `createDeepAgent`, or a custom `StateGraph`.
+The [LangChain frontend patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview)—markdown messages, tool calling, human-in-the-loop, resumable streams, and time travel—work with any LangGraph graph. The stream API provides the same core data model whether you use `createAgent`, `createDeepAgent`, or a custom `StateGraph`.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/frontend/overview.md) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

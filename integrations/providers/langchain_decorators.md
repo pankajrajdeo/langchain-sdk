@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangChain decorators integrations
 
 > Integrate with LangChain decorators using LangChain Python.
@@ -26,7 +22,7 @@ Main principles and benefits:
 
 Here is a simple example of a code written with **LangChain Decorators ✨**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @llm_prompt
 def write_me_short_post(topic:str, platform:str="twitter", audience:str = "developers")->str:
     """
@@ -46,15 +42,13 @@ write_me_short_post(topic="starwars", platform="redit")
 
 ## Installation
 
-<CodeGroup>
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain_decorators
-  ```
+```bash
+pip install langchain_decorators
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain_decorators
-  ```
-</CodeGroup>
+```bash
+uv add langchain_decorators
+```
 
 ## Examples
 
@@ -72,7 +66,7 @@ Here is how it works:
 
 1. Using **Global settings**:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # define global settings for all prompty (if not set - chatGPT is the current default)
 from langchain_decorators import GlobalSettings
 
@@ -84,7 +78,7 @@ GlobalSettings.define_settings(
 
 2. Using predefined **prompt types**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 #You can change the default prompt types
 from langchain_decorators import PromptTypes, PromptTypeSettings
 
@@ -102,7 +96,7 @@ def write_a_complicated_code(app_idea:str)->str:
 
 3. Define the settings **directly in the decorator**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 
 @llm_prompt(
@@ -118,7 +112,7 @@ def creative_writer(book_title:str)->str:
 
 To pass any of these, just declare them in the function (or use kwargs to pass anything)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 
 @llm_prompt()
 async def write_me_short_post(topic:str, platform:str="twitter", memory:SimpleMemory = None):
@@ -146,7 +140,7 @@ This way we just mark which prompt should be streamed, not needing to tinker wit
 
 The streaming will happen only if we call it in streaming context ... there we can define a simple function to handle the stream
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # this code example is complete and should run as it is
 
 from langchain_decorators import StreamingContext, llm_prompt
@@ -162,7 +156,6 @@ async def write_me_short_post(topic:str, platform:str="twitter", audience:str = 
     """
     pass
 
-
 # just an arbitrary  function to demonstrate the streaming... will be some websockets code in the real world
 tokens=[]
 def capture_stream_func(new_token:str):
@@ -174,7 +167,6 @@ def capture_stream_func(new_token:str):
 with StreamingContext(stream_to_stdout=True, callback=capture_stream_func):
     result = await run_prompt()
     print("Stream finished ... we can distinguish tokens thanks to alternating colors")
-
 
 print("\nWe've captured",len(tokens),"tokens🎉\n")
 print("Here is the result:")
@@ -189,14 +181,14 @@ By default the prompt is the whole function docs, unless you mark your prompt
 
 We can specify what part of our docs is the prompt definition, by specifying a code block with `<prompt>` language tag
 
-````python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+````python
 @llm_prompt
 def write_me_short_post(topic:str, platform:str="twitter", audience:str = "developers"):
     """
     Here is a good way to write a prompt as part of a function docstring, with additional documentation for devs.
 
     It needs to be a code block, marked as a `<prompt>` language
-    ```<prompt>
+```
     Write me a short header for my post about {topic} for {platform} platform.
     It should be for {audience} audience.
     (Max 15 words)
@@ -213,15 +205,14 @@ return
 
 For chat models is very useful to define prompt as a set of message templates... here is how to do it:
 
-``` python
+```
 @llm_prompt
 def simulate_conversation(human_input:str, agent_role:str="a pirate"):
     """
     ## System message
      - note the `:system` suffix inside the <prompt:_role_> tag
 
-
-    ```<prompt:system>
+```
     You are a {agent_role} hacker. You mus act like one.
     You reply always in code, using python or javascript code block...
     for example:
@@ -233,13 +224,13 @@ def simulate_conversation(human_input:str, agent_role:str="a pirate"):
 
 (we are using the real role that are enforced by the LLM - GPT supports system, assistant, user)
 
-```<prompt:user> theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```
 Helo, who are you
 ```
 
 a reply:
 
-````<prompt:assistant> theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+````
 \``` python <<- escaping inner code block with \ that should be part of the prompt
 def hello():
     print("Argh... hello you pesky pirate")
@@ -248,11 +239,11 @@ def hello():
 
 we can also add some history using placeholder
 
-```<prompt:placeholder> theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```
 {history}
 ```
 
-```<prompt:user> theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```
 {human_input}
 ```
 
@@ -265,14 +256,13 @@ pass
 
 the roles here are model native roles (assistant, user, system for chatGPT)
 
-
 # Optional sections
 - you can define a whole sections of your prompt that should be optional
 - if any input in the section is missing, the whole section won't be rendered
 
 the syntax for this is as follows:
 
-``` python
+```
 @llm_prompt
 def prompt_with_optional_partials():
     """
@@ -292,7 +282,7 @@ def prompt_with_optional_partials():
 * llm\_prompt decorator natively tries to detect the best output parser based on the output type. (if not set, it returns the raw string)
 * list, dict and pydantic outputs are also supported natively (automatically)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # this code example is complete and should run as it is
 
 from langchain_decorators import llm_prompt
@@ -311,10 +301,9 @@ write_name_suggestions(company_business="sells cookies", count=5)
 for dict / pydantic you need to specify the formatting instructions...
 this can be tedious, that's why you can let the output parser generate you the instructions based on the model (pydantic)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_decorators import llm_prompt
 from pydantic import BaseModel, Field
-
 
 class TheOutputStructureWeExpect(BaseModel):
     name:str = Field (description="The name of the company")
@@ -339,7 +328,7 @@ print("company employees: ",company.employees)
 
 # Binding the prompt to an object
 
-````python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+````python
 from pydantic import BaseModel
 from langchain_decorators import llm_prompt
 
@@ -357,16 +346,15 @@ class AssistantPersonality(BaseModel):
         We can reference any {field} or {a_property} inside our prompt... and combine it with {function_kwarg} in the method
         """
 
-
     @llm_prompt
     def introduce_your_self(self)->str:
         """
-        ``` <prompt:system>
+```
         You are an assistant named {assistant_name}.
         Your role is to act as {assistant_role}
 ````
 
-```<prompt:user> theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```
 Introduce your self (in less than 20 words)
 ```
 
@@ -378,7 +366,6 @@ print(personality.introduce\_your\_self(personality))
 
 ```
 
-
 # More examples:
 
 - these and few more examples are also available in the [colab notebook here](https://colab.research.google.com/drive/1no-8WfeP6JaLD9yUtkPgym6x0G9ZYZOG#scrollTo=N4cf__D0E2Yk)
@@ -388,10 +375,10 @@ print(personality.introduce\_your\_self(personality))
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+[Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langchain_decorators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+[Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/langchain_decorators.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
 </Callout>
 </div>
 ```

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Truefoundry integrations
 
 > Integrate with Truefoundry using LangChain Python.
@@ -31,21 +27,19 @@ You can connect to TrueFoundry's unified LLM gateway through the [`ChatOpenAI`](
 
 ### Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-openai
-  ```
+```bash
+pip install langchain-openai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-openai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-openai
+```
 
 ### Basic setup
 
 Connect to TrueFoundry by updating the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) model in LangChain:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -61,7 +55,7 @@ The request is routed through your TrueFoundry gateway to the specified model pr
 
 ### LangGraph integration
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, MessagesState
 from langchain.messages import HumanMessage
@@ -107,12 +101,8 @@ For questions, issues, or support:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/truefoundry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/truefoundry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

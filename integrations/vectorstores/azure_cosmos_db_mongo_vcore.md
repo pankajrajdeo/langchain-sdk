@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure Cosmos DB mongo vcore integration
 
 > Integrate with the Azure Cosmos DB mongo vcore vector store using LangChain Python.
@@ -14,11 +10,11 @@ Azure Cosmos DB is the database that powers OpenAI's ChatGPT service. It offers 
 
 [Sign Up](https://azure.microsoft.com/en-us/free/) for lifetime free access to get started today.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU pymongo langchain-openai langchain-azure-ai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 CONNECTION_STRING = "YOUR_CONNECTION_STRING"
@@ -29,7 +25,7 @@ DB_NAME, COLLECTION_NAME = NAMESPACE.split(".")
 
 We want to use `AzureOpenAIEmbeddings` so we need to set up our Azure OpenAI API Key alongside other environment variables.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Set up the OpenAI environment variables
 
 os.environ["AZURE_OPENAI_API_KEY"] = "YOUR_AZURE_OPENAI_API_KEY"
@@ -43,11 +39,10 @@ Now, we need to load the documents into the collection, create the index and the
 
 Please refer to the [documentation](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/vector-search) if you have questions about certain parameters
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_azure_ai.vectorstores.azure_cosmos_db_mongo_vcore import (
     AzureCosmosDBMongoVCoreVectorSearch,
@@ -70,21 +65,20 @@ model_deployment = os.getenv(
 )
 model_name = os.getenv("OPENAI_EMBEDDINGS_MODEL_NAME", "text-embedding-ada-002")
 
-
 openai_embeddings: AzureOpenAIEmbeddings = AzureOpenAIEmbeddings(
     model=model_name, chunk_size=1
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document(metadata={'source': '../../how_to/state_of_the_union.txt'}, page_content='Madam Speaker, Madam Vice President, our First Lady and Second Gentleman. Members of Congress and the Cabinet. Justices of the Supreme Court. My fellow Americans.  \n\nLast year COVID-19 kept us apart. This year we are finally together again. \n\nTonight, we meet as Democrats Republicans and Independents. But most importantly as Americans. \n\nWith a duty to one another to the American people to the Constitution. \n\nAnd with an unwavering resolve that freedom will always triumph over tyranny. \n\nSix days ago, Russia’s Vladimir Putin sought to shake the foundations of the free world thinking he could make it bend to his menacing ways. But he badly miscalculated. \n\nHe thought he could roll into Ukraine and the world would roll over. Instead he met a wall of strength he never imagined. \n\nHe met the Ukrainian people. \n\nFrom President Zelenskyy to every Ukrainian, their fearlessness, their courage, their determination, inspires the world.')
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pymongo import MongoClient
 
 # INDEX_NAME = "izzy-test-index-2"
@@ -155,21 +149,21 @@ vectorstore.create_index(
 """
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '\n# DiskANN vectorstore\nmaxDegree = 40\ndimensions = 1536\nsimilarity_algorithm = CosmosDBSimilarityType.COS\nkind = CosmosDBVectorSearchType.VECTOR_DISKANN\nlBuild = 20\n\nvectorstore.create_index(\n            dimensions=dimensions,\n            similarity=similarity_algorithm,\n            kind=kind ,\n            max_degree=maxDegree,\n            l_build=lBuild,\n        )\n\n# -----------------------------------------------------------\n\n# HNSW vectorstore\ndimensions = 1536\nsimilarity_algorithm = CosmosDBSimilarityType.COS\nkind = CosmosDBVectorSearchType.VECTOR_HNSW\nm = 16\nef_construction = 64\n\nvectorstore.create_index(\n            dimensions=dimensions,\n            similarity=similarity_algorithm,\n            kind=kind ,\n            m=m,\n            ef_construction=ef_construction,\n        )\n'
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # perform a similarity search between the embedding of the query and the embeddings of the documents
 query = "What did the president say about Ketanji Brown Jackson"
 docs = vectorstore.similarity_search(query)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(docs[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
 Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
@@ -181,7 +175,7 @@ And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketan
 
 Once the documents have been loaded and the index has been created, you can now instantiate the vector store directly and run queries against the index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vectorstore = AzureCosmosDBMongoVCoreVectorSearch.from_connection_string(
     CONNECTION_STRING, NAMESPACE, openai_embeddings, index_name=INDEX_NAME
 )
@@ -193,7 +187,7 @@ docs = vectorstore.similarity_search(query)
 print(docs[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
 Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
@@ -203,7 +197,7 @@ One of the most serious constitutional responsibilities a President has is nomin
 And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketanji Brown Jackson. One of our nation’s top legal minds, who will continue Justice Breyer’s legacy of excellence.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vectorstore = AzureCosmosDBMongoVCoreVectorSearch(
     collection, openai_embeddings, index_name=INDEX_NAME
 )
@@ -215,7 +209,7 @@ docs = vectorstore.similarity_search(query)
 print(docs[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Tonight. I call on the Senate to: Pass the Freedom to Vote Act. Pass the John Lewis Voting Rights Act. And while you’re at it, pass the Disclose Act so Americans can know who is funding our elections.
 
 Tonight, I’d like to honor someone who has dedicated his life to serve this country: Justice Stephen Breyer—an Army veteran, Constitutional scholar, and retiring Justice of the United States Supreme Court. Justice Breyer, thank you for your service.
@@ -229,14 +223,14 @@ And I did that 4 days ago, when I nominated Circuit Court of Appeals Judge Ketan
 
 Azure Cosmos DB for MongoDB supports pre-filtering with `$lt`, `$lte`, `$eq`, `$neq`, `$gte`, `$gt`, `$in`, `$nin`, and `$regex`. To use this feature, enable `"filtering vector search"` in the "Preview Features" tab of your Azure Subscription. Learn more about [filtered vector search preview features](https://learn.microsoft.com/azure/cosmos-db/mongodb/vcore/vector-search#filtered-vector-search-preview).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a filter index
 vectorstore.create_filter_index(
     property_to_filter="metadata.source", index_name="filter_index"
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'raw': {'defaultShard': {'numIndexesBefore': 3,
    'numIndexesAfter': 4,
    'createdCollectionAutomatically': False,
@@ -244,44 +238,40 @@ vectorstore.create_filter_index(
  'ok': 1}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What did the president say about Ketanji Brown Jackson"
 docs = vectorstore.similarity_search(
     query, pre_filter={"metadata.source": {"$ne": "filter content"}}
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 len(docs)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 4
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = vectorstore.similarity_search(
     query,
     pre_filter={"metadata.source": {"$ne": "../../how_to/state_of_the_union.txt"}},
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 len(docs)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 0
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

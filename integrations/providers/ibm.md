@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # IBM integrations
 
 > Integrate with IBM using LangChain Python.
@@ -24,39 +20,27 @@ Watsonx.ai offers:
 
 ### Model interfaces
 
-<Columns cols={2}>
-  <Card title="ChatWatsonx" href="/oss/python/integrations/chat/ibm_watsonx" cta="Get started" icon="message" arrow>
-    IBM watsonx.ai chat models.
-  </Card>
+#### [ChatWatsonx](https://docs.langchain.com/oss/python/integrations/chat/ibm_watsonx)
+IBM watsonx.ai chat models.
 
-  <Card title="WatsonxLLM" href="/oss/python/integrations/llms/ibm_watsonx" cta="Get started" icon="cursor-text" arrow>
-    (Legacy) IBM watsonx.ai text completion models.
-  </Card>
+#### [WatsonxLLM](https://docs.langchain.com/oss/python/integrations/llms/ibm_watsonx)
+(Legacy) IBM watsonx.ai text completion models.
 
-  <Card title="WatsonxEmbeddings" href="/oss/python/integrations/embeddings/ibm_watsonx" cta="Get started" icon="stack-2" arrow>
-    IBM watsonx.ai embedding models.
-  </Card>
-</Columns>
+#### [WatsonxEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx)
+IBM watsonx.ai embedding models.
 
 ### Tools and toolkits
 
-<Columns cols={2}>
-  <Card title="WatsonxToolkit" href="/oss/python/integrations/tools/ibm_watsonx" cta="Get started" icon="tools" arrow>
-    IBM watsonx.ai toolkit.
-  </Card>
+#### [WatsonxToolkit](https://docs.langchain.com/oss/python/integrations/tools/ibm_watsonx)
+IBM watsonx.ai toolkit.
 
-  <Card title="WatsonxSQLDatabaseToolkit" href="/oss/python/integrations/tools/ibm_watsonx_sql" cta="Get started" icon="tools" arrow>
-    IBM watsonx.ai SQL Database toolkit.
-  </Card>
-</Columns>
+#### [WatsonxSQLDatabaseToolkit](https://docs.langchain.com/oss/python/integrations/tools/ibm_watsonx_sql)
+IBM watsonx.ai SQL Database toolkit.
 
 ### Retrievers
 
-<Columns cols={2}>
-  <Card title="WatsonxRerank" href="/oss/python/integrations/retrievers/ibm_watsonx_ranker" cta="Get started" icon="download" arrow>
-    IBM watsonx.ai document retriever.
-  </Card>
-</Columns>
+#### [WatsonxRerank](https://docs.langchain.com/oss/python/integrations/retrievers/ibm_watsonx_ranker)
+IBM watsonx.ai document retriever.
 
 ## DB2
 
@@ -64,26 +48,18 @@ The IBM DB2 relational database v12.1.2 and above offers the abilities of vector
 and vector search. Installation of `langchain-db2` package will give LangChain users
 the support of DB2 vector store and vector search.
 
-<Note>
-  `langchain-db2` is a separate package for Vector Store feature only, and can be run without the `langchain-ibm` package.
-</Note>
+> [!NOTE]
+> `langchain-db2` is a separate package for Vector Store feature only, and can be run without the `langchain-ibm` package.
 
 ### Vector stores
 
-<Columns cols={2}>
-  <Card title="DB2VS" href="https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2" cta="Get started" icon="database" arrow>
-    IBM DB2 Vector Store and Vector Search
-  </Card>
-</Columns>
+#### [DB2VS](https://github.com/langchain-ai/langchain-ibm/tree/main/libs/langchain-db2)
+IBM DB2 Vector Store and Vector Search
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ibm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

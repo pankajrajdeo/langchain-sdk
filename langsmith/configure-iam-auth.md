@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure IAM authentication for data stores
 
 > Configure Agent Server to use cloud workload identities for PostgreSQL and Redis authentication.
 
 Agent Server can use a cloud workload identity to generate short-lived PostgreSQL and Redis credentials at runtime. This removes static database and cache passwords from your deployment configuration. Connection and pooling behavior stay the same.
 
-<Note>
-  Data store IAM authentication requires `langgraph-api>=0.12.0`.
-</Note>
+> [!NOTE]
+> Data store IAM authentication requires `langgraph-api>=0.12.0`.
 
 ## Supported services
 
@@ -20,9 +15,8 @@ Agent Server can use a cloud workload identity to generate short-lived PostgreSQ
 | `azure`        | Azure Database for PostgreSQL Flexible Server | Azure Managed Redis or Azure Cache for Redis                        | Microsoft Entra `DefaultAzureCredential`     |
 | `gcp`          | Cloud SQL for PostgreSQL                      | Memorystore for Redis Cluster                                       | Google Application Default Credentials (ADC) |
 
-<Warning>
-  The GCP PostgreSQL provider supports Cloud SQL. It does not support AlloyDB, which requires a different token scope.
-</Warning>
+> [!WARNING]
+> The GCP PostgreSQL provider supports Cloud SQL. It does not support AlloyDB, which requires a different token scope.
 
 The provider setting controls authentication only. Configure network access, TLS, database users, cache users, and provider permissions before starting Agent Server.
 
@@ -36,10 +30,10 @@ To enable IAM authentication:
 4. Set a connection URI that contains the principal name but no static password.
 5. Set the corresponding provider selector to `aws`, `azure`, or `gcp`:
 
-   ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
    AGENT_POSTGRES_IAM_AUTH_PROVIDER=<provider>
    AGENT_REDIS_IAM_AUTH_PROVIDER=<provider>
-   ```
+```
 
 You can enable IAM authentication for PostgreSQL, Redis, or both. When a selector is unset, Agent Server continues to use the password from that data store's connection URI.
 
@@ -69,7 +63,7 @@ Before configuring Agent Server:
 
 Set the database usernames in the connection URIs:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 AWS_REGION=<region>
 AGENT_POSTGRES_IAM_AUTH_PROVIDER=aws
 AGENT_REDIS_IAM_AUTH_PROVIDER=aws
@@ -91,7 +85,7 @@ Before configuring Agent Server:
 
 Set the Microsoft Entra principal identifiers in the connection URIs:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 AGENT_POSTGRES_IAM_AUTH_PROVIDER=azure
 AGENT_REDIS_IAM_AUTH_PROVIDER=azure
 DATABASE_URI="postgresql://<entra-principal-name>@<postgres-host>:5432/<database>?sslmode=require"
@@ -112,7 +106,7 @@ Before configuring Agent Server:
 
 Set the Cloud SQL IAM database user in the PostgreSQL URI. Memorystore supports only the `default` Redis username:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 AGENT_POSTGRES_IAM_AUTH_PROVIDER=gcp
 AGENT_REDIS_IAM_AUTH_PROVIDER=gcp
 DATABASE_URI="postgresql://<cloud-sql-iam-user>@<cloud-sql-host>:5432/<database>?sslmode=require"
@@ -124,11 +118,11 @@ For a service account, the Cloud SQL database username is its email address with
 
 ## Configure the standalone Helm chart
 
-For a [standalone Agent Server deployment](/langsmith/deploy-standalone-server) on Kubernetes, set the provider selectors on every Agent Server workload. If the separate queue deployment is enabled, configure the API and queue deployments with the same identity and environment variables.
+For a [standalone Agent Server deployment](https://docs.langchain.com/langsmith/deploy-standalone-server) on Kubernetes, set the provider selectors on every Agent Server workload. If the separate queue deployment is enabled, configure the API and queue deployments with the same identity and environment variables.
 
 The following example uses AWS for both data stores. Set each provider value to `azure` or `gcp` when using another cloud provider:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 postgres:
   external:
     enabled: true
@@ -160,19 +154,15 @@ Configure `apiServer.serviceAccount` and `queue.serviceAccount` with the cloud p
 
 ## See also
 
-* [Self-host standalone servers](/langsmith/deploy-standalone-server)
-* [Self-hosted Agent Server environment variables](/langsmith/env-var-self-hosted)
-* [Self-hosted platform features](/langsmith/self-hosted-platform-features)
-* [Configure Agent Server for scale](/langsmith/agent-server-scale)
+* [Self-host standalone servers](https://docs.langchain.com/langsmith/deploy-standalone-server)
+* [Self-hosted Agent Server environment variables](https://docs.langchain.com/langsmith/env-var-self-hosted)
+* [Self-hosted platform features](https://docs.langchain.com/langsmith/self-hosted-platform-features)
+* [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-iam-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-iam-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

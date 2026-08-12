@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenAI integration
 
 > Integrate with the OpenAI LLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](/oss/python/langchain/models).**
-
-  Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](/oss/python/integrations/chat/openai/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/openai/).
 
 [OpenAI](https://platform.openai.com/docs/introduction) offers a spectrum of models with different levels of power suitable for different tasks.
 
@@ -32,7 +27,7 @@ To access OpenAI models you'll need to create an OpenAI account, get an API key,
 
 Head to [platform.openai.com](https://platform.openai.com) to sign up to OpenAI and generate an API key. Once you've done this set the OPENAI\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,9 +41,9 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -57,7 +52,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain OpenAI integration lives in the `langchain-openai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-openai
 ```
 
@@ -65,7 +60,7 @@ Should you need to specify your organization ID, you can use the following cell.
 
 To specify your organization, you can use this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 OPENAI_ORGANIZATION = getpass()
 
 os.environ["OPENAI_ORGANIZATION"] = OPENAI_ORGANIZATION
@@ -75,7 +70,7 @@ os.environ["OPENAI_ORGANIZATION"] = OPENAI_ORGANIZATION
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 
 llm = OpenAI()
@@ -83,17 +78,17 @@ llm = OpenAI()
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.invoke("Hello how are you?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '\n\nI am an AI and do not have emotions like humans do, so I am always functioning at my optimal level. Thank you for asking! How can I assist you today?'
 ```
 
 ## Chaining
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 prompt = PromptTemplate.from_template("How to say {input} in {output_language}:\n")
@@ -107,7 +102,7 @@ chain.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '\nIch liebe Programmieren.'
 ```
 
@@ -115,7 +110,7 @@ chain.invoke(
 
 If you are behind an explicit proxy, you can specify the http\_client to pass through
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install httpx
 
 import httpx
@@ -134,12 +129,8 @@ For detailed documentation of all [`OpenAI`](https://reference.langchain.com/pyt
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel Monitor integration
 
 > Integrate with the ParallelMonitor type using LangChain Python.
@@ -16,27 +12,25 @@
 
 | Class                                                                                                   | Package                                                                            | Serializable | JS support |                                                                                                                   Package latest                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelMonitor`](https://reference.langchain.com/python/langchain-parallel/monitors/ParallelMonitor) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ParallelMonitor`](https://reference.langchain.com/python/langchain-parallel/monitors/ParallelMonitor) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,7 +40,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelMonitor
 
 client = ParallelMonitor()
@@ -56,7 +50,7 @@ client = ParallelMonitor()
 
 `frequency` is `<n><unit>` where unit is `h`, `d`, or `w`, and the resulting duration sits in `[1h, 30d]` (e.g. `"1h"`, `"6h"`, `"3d"`, `"1w"`, `"2w"`).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import MonitorWebhook
 
 monitor = client.create(
@@ -77,7 +71,7 @@ The valid `event_types` are `monitor.event.detected`, `monitor.execution.complet
 
 ## Retrieve, list, delete
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 got = client.retrieve(monitor["monitor_id"])
 
 monitors = client.list(limit=20)
@@ -89,7 +83,7 @@ deleted = client.delete(monitor["monitor_id"])
 
 `list_events()` returns a flat `{"events": [...]}` list. Newly-created monitors typically have none until the first scheduled execution; the call shape works either way.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 events = client.list_events(monitor["monitor_id"], lookback_period="7d")
 for ev in events.get("events", []):
     print(ev["type"], ev.get("event_date"))
@@ -97,7 +91,7 @@ for ev in events.get("events", []):
 
 To inspect a single event group:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 group = client.get_event_group(monitor["monitor_id"], event_group_id="...")
 ```
 
@@ -105,11 +99,10 @@ group = client.get_event_group(monitor["monitor_id"], event_group_id="...")
 
 Useful when wiring up a webhook handler. `simulate_event()` posts a synthetic event of the requested type (default: `monitor.event.detected`) to the monitor's webhook.
 
-<Note>
-  `simulate_event()` requires a webhook configured on the monitor. Pass `webhook=MonitorWebhook(...)` when calling `create()` first; otherwise the API returns `400 — Webhook not configured for this monitor`.
-</Note>
+> [!NOTE]
+> `simulate_event()` requires a webhook configured on the monitor. Pass `webhook=MonitorWebhook(...)` when calling `create()` first; otherwise the API returns `400 — Webhook not configured for this monitor`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 client.simulate_event(monitor["monitor_id"], event_type="monitor.event.detected")
 ```
 
@@ -117,7 +110,7 @@ client.simulate_event(monitor["monitor_id"], event_type="monitor.event.detected"
 
 Every CRUD and event method has an async counterpart prefixed with `a`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 monitor = await client.acreate(query="...", frequency="6h")
 events = await client.alist_events(monitor["monitor_id"], lookback_period="7d")
 await client.adelete(monitor["monitor_id"])
@@ -127,7 +120,7 @@ await client.adelete(monitor["monitor_id"])
 
 Webhook deliveries are signed using the Standard Webhooks scheme (HMAC-SHA256 over `<webhook-id>.<webhook-timestamp>.<body>`, base64-encoded, `v1,<sig>` format with replay protection). Verify with `verify_webhook`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import verify_webhook
 
 ok = verify_webhook(
@@ -145,7 +138,7 @@ The signing secret is configured at the org webhook-endpoint level in the Parall
 
 `create()` and `retrieve()` return a monitor dict. `list_events()` returns a flat events envelope.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # create() / retrieve()
 {
     "monitor_id": "mon_abc",
@@ -177,12 +170,8 @@ For detailed documentation, head to the [`ParallelMonitor`](https://reference.la
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

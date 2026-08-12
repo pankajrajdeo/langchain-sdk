@@ -1,16 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Create Thread
 
 > Create a thread.
 
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json post /threads
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment

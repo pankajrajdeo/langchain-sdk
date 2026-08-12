@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AIMLAPI integration
 
 > Integrate with the AIMLAPI LLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of AI/ML API models as text completion models. Many of the latest and most popular AI/ML API models are [chat completion models](/oss/python/langchain/models).**
-
-  You may be looking for the [AI/ML API chat docs](https://docs.aimlapi.com/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of AI/ML API models as text completion models. Many of the latest and most popular AI/ML API models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> You may be looking for the [AI/ML API chat docs](https://docs.aimlapi.com/).
 
 This page helps you get started with AI/ML API text completion models.
 
@@ -24,7 +19,7 @@ This page helps you get started with AI/ML API text completion models.
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -36,7 +31,7 @@ To access AI/ML API models you'll need to create an account, get an API key, and
 
 Head to [aimlapi.com](https://aimlapi.com/app/?utm_source=langchain\&utm_medium=github\&utm_campaign=integration) to sign up and generate an API key. Once you've done this set the `AIMLAPI_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -44,9 +39,9 @@ if not os.getenv("AIMLAPI_API_KEY"):
     os.environ["AIMLAPI_API_KEY"] = getpass.getpass("Enter your AI/ML API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -55,7 +50,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain AI/ML API integration lives in the `langchain-aimlapi` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-aimlapi
 ```
 
@@ -63,7 +58,7 @@ pip install -qU langchain-aimlapi
 
 Now we can instantiate our model object and generate text completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aimlapi import AIMLAPILLM
 
 llm = AIMLAPILLM(
@@ -75,12 +70,12 @@ llm = AIMLAPILLM(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = llm.invoke("Explain the bubble sort algorithm in Python.")
 print(response)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Bubble sort is a simple sorting algorithm that repeatedly steps through a list, compares adjacent items, and swaps them when they are out of order. The process repeats until the entire list is sorted. While easy to understand and implement, bubble sort is inefficient on large datasets because it has quadratic time complexity.
 ```
 
@@ -88,7 +83,7 @@ Bubble sort is a simple sorting algorithm that repeatedly steps through a list, 
 
 You can also stream responses token-by-token:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = AIMLAPILLM(
     model="gpt-3.5-turbo-instruct",
 )
@@ -102,12 +97,8 @@ for token in stream.text:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/aimlapi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

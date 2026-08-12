@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # vLLM integration
 
 > Integrate with the vLLM chat model using LangChain Python.
@@ -10,7 +6,7 @@ vLLM can be deployed as a server that mimics the OpenAI API protocol. This allow
 
 ## Overview
 
-This will help you get started with vLLM [chat models](/oss/python/langchain/models), which leverages the `langchain-openai` package. For detailed documentation of all [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
+This will help you get started with vLLM [chat models](https://docs.langchain.com/oss/python/langchain/models), which leverages the `langchain-openai` package. For detailed documentation of all [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
 
 ### Integration details
 
@@ -32,9 +28,9 @@ To access vLLM models through LangChain, you'll need to install the `langchain-o
 
 Authentication will depend on specifics of the inference server.
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -43,7 +39,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain vLLM integration can be accessed via the `langchain-openai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-openai
 ```
 
@@ -51,12 +47,12 @@ pip install -qU langchain-openai
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 inference_server_url = "http://localhost:8000/v1"
 
 llm = ChatOpenAI(
@@ -70,7 +66,7 @@ llm = ChatOpenAI(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     SystemMessage(
         content="You are a helpful assistant that translates English to Italian."
@@ -82,7 +78,7 @@ messages = [
 llm.invoke(messages)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content=' Io amo programmare', additional_kwargs={}, example=False)
 ```
 
@@ -96,12 +92,8 @@ Refer to the vLLM [documentation](https://docs.vllm.ai/en/latest/) as well.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/vllm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/vllm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

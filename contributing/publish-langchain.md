@@ -1,26 +1,20 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Publish an integration
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/publish-langchain)
 **Make your integration available to the community.**
 
-<Warning>
-  **Do not submit integration PRs to the LangChain or Deep Agents repositories.**
-
-  New integrations should be published as **standalone PyPI packages** under your own GitHub organization or account (e.g., `langchain-yourservice`), not as PRs to the [`langchain-ai/langchain`](https://github.com/langchain-ai/langchain) repository.
-
-  The main repository only contains a small subset of first-party integrations (like OpenAI, Anthropic, and Ollama) maintained by the LangChain team.
-</Warning>
+> [!WARNING]
+> **Do not submit integration PRs to the LangChain or Deep Agents repositories.**
+>
+> New integrations should be published as **standalone PyPI packages** under your own GitHub organization or account (e.g., `langchain-yourservice`), not as PRs to the [`langchain-ai/langchain`](https://github.com/langchain-ai/langchain) repository.
+>
+> The main repository only contains a small subset of first-party integrations (like OpenAI, Anthropic, and Ollama) maintained by the LangChain team.
 
 Now that your package is implemented and tested, you can publish it and list it so the community can discover it.
 
 ## Publishing your package
 
-<Info>
-  This guide assumes you have already implemented your package and written tests for it. If you haven't, please refer to the [implementation guide](/oss/python/contributing/implement-langchain) and [testing guide](/oss/python/contributing/standard-tests-langchain).
-</Info>
+> [!NOTE]
+> This guide assumes you have already implemented your package and written tests for it. If you haven't, please refer to the [implementation guide](https://docs.langchain.com/oss/python/contributing/implement-langchain) and [testing guide](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain).
 
 For the purposes of this guide, we'll be using PyPI as the package registry. You may choose to publish to other registries if you prefer; instructions will vary.
 
@@ -28,37 +22,31 @@ For the purposes of this guide, we'll be using PyPI as the package registry. You
 
 First, make sure you have a PyPI account:
 
-<AccordionGroup>
-  <Accordion title="How to create a PyPI Token" icon="key">
-    <Steps>
-      <Step title="Create account">
-        Go to the [PyPI website](https://pypi.org/) and create an account
-      </Step>
+<details>
+<summary>How to create a PyPI Token</summary>
 
-      <Step title="Verify email">
-        Verify your email address by clicking the link that PyPI emails to you
-      </Step>
+### Create account
+Go to the [PyPI website](https://pypi.org/) and create an account
 
-      <Step title="Enable 2FA">
-        Go to your account settings and click "Generate Recovery Codes" to enable 2FA. To generate an API token, you **must** have 2FA enabled
-      </Step>
+### Verify email
+Verify your email address by clicking the link that PyPI emails to you
 
-      <Step title="Generate token">
-        Go to your account settings and [generate a new API token](https://pypi.org/manage/account/token/)
-      </Step>
-    </Steps>
-  </Accordion>
-</AccordionGroup>
+### Enable 2FA
+Go to your account settings and click "Generate Recovery Codes" to enable 2FA. To generate an API token, you **must** have 2FA enabled
+
+### Generate token
+Go to your account settings and [generate a new API token](https://pypi.org/manage/account/token/)
+
+</details>
 
 ### Build and publish
 
-<Card title="How to publish a package" icon="upload" href="https://docs.astral.sh/uv/guides/package/" arrow>
-  Helpful guide from `uv` on how to build and publish a package to PyPI.
-</Card>
+#### [How to publish a package](https://docs.astral.sh/uv/guides/package/)
+Helpful guide from `uv` on how to build and publish a package to PyPI.
 
 ## Make your integration discoverable
 
-After publishing, open a PR in the [LangChain docs repository](https://github.com/langchain-ai/docs) so your package appears under the [integrations tab](/oss/python/integrations/providers/overview). Which PR you open depends on eligibility for a hosted guide.
+After publishing, open a PR in the [LangChain docs repository](https://github.com/langchain-ai/docs) so your package appears under the [integrations tab](https://docs.langchain.com/oss/python/integrations/providers/overview). Which PR you open depends on eligibility for a hosted guide.
 
 ### Eligibility for hosted guides
 
@@ -83,77 +71,65 @@ Optionally include component-specific fields (for example, chat capability flags
 
 After merge, the refresh job regenerates the component table snippets so your row appears alongside hosted integrations.
 
-<Info>
-  This PR is for **listing metadata only**. Host your usage docs on your site or GitHub README. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
-</Info>
+> [!NOTE]
+> This PR is for **listing metadata only**. Host your usage docs on your site or GitHub README. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
 
 ### Hosted guide (50K+ or featured)
 
-If your package meets the [eligibility criteria](#eligibility-for-hosted-guides), create a documentation page from one of the following templates and open a PR in the docs repo.
+If your package meets the [eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides), create a documentation page from one of the following templates and open a PR in the docs repo.
 
 Depending on the type of integration you have built, you will need to create different types of documentation pages. LangChain provides templates for different types of integrations to help you get started.
 
-<CardGroup>
-  <Card title="Chat models" icon="message" href="https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx" arrow />
+#### [Chat models](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx)
 
-  <Card title="Tools/toolkits" icon="tool" href="https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx" arrow />
+#### [Tools/toolkits](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx)
 
-  <Card title="Middleware" icon="plug" href="https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx" arrow />
+#### [Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)
 
-  <Card title="Vector stores" icon="database" href="https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx" arrow />
-</CardGroup>
+#### [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
 
-<Tip>
-  To reference existing documentation, you can look at the [list of integrations](/oss/python/integrations/providers/overview) and find similar ones to yours.
+> [!TIP]
+> To reference existing documentation, you can look at the [list of integrations](https://docs.langchain.com/oss/python/integrations/providers/overview) and find similar ones to yours.
+>
+> To view a given documentation page in raw markdown, use the dropdown button next to "Copy page" on the top right of the page and select "View as Markdown".
 
-  To view a given documentation page in raw markdown, use the dropdown button next to "Copy page" on the top right of the page and select "View as Markdown".
-</Tip>
-
-Make a fork of the [LangChain docs repository](https://github.com/langchain-ai/docs) (not the main `langchain` repo) under a personal GitHub account, and clone it locally. Create a new branch for your integration. Copy the template and modify it using your favorite markdown text editor. Make sure to refer to and follow the [documentation guide](/oss/python/contributing/documentation) when writing your documentation.
+Make a fork of the [LangChain docs repository](https://github.com/langchain-ai/docs) (not the main `langchain` repo) under a personal GitHub account, and clone it locally. Create a new branch for your integration. Copy the template and modify it using your favorite markdown text editor. Make sure to refer to and follow the [documentation guide](https://docs.langchain.com/oss/python/contributing/documentation) when writing your documentation.
 
 If your package was previously listed in [`integration_external_docs.yaml`](https://github.com/langchain-ai/docs/blob/main/scripts/data/integration_external_docs.yaml), remove that YAML entry in the same PR so the table does not show a duplicate row.
 
 Do not set `featured: true` in frontmatter unless a maintainer asks you to. Featured status is a maintainer decision.
 
-<Info>
-  This PR is for **documentation only**. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
-</Info>
+> [!NOTE]
+> This PR is for **documentation only**. Your integration package itself should live in its own repository under your GitHub organization or account, published as a standalone package.
 
-<Warning>
-  We may reject PRs or ask for modification if:
-
-  * The package does not meet the [hosted-guide eligibility criteria](#eligibility-for-hosted-guides)
-  * CI checks fail
-  * Severe grammatical errors or typos are present
-  * [Mintlify components](/oss/python/contributing/documentation#mintlify-components) are used incorrectly
-  * Pages are missing a [frontmatter](/oss/python/contributing/documentation#page-structure)
-  * [Localization](/oss/python/contributing/documentation#localization) is missing (where applicable)
-  * [Code examples](/oss/python/contributing/documentation#in-code-documentation) do not run or have errors
-  * [Quality standards](/oss/python/contributing/documentation#quality-standards) are not met
-</Warning>
+> [!WARNING]
+> We may reject PRs or ask for modification if:
+>
+> * The package does not meet the [hosted-guide eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides)
+> * CI checks fail
+> * Severe grammatical errors or typos are present
+> * [Mintlify components](https://docs.langchain.com/oss/python/contributing/documentation#mintlify-components) are used incorrectly
+> * Pages are missing a [frontmatter](https://docs.langchain.com/oss/python/contributing/documentation#page-structure)
+> * [Localization](https://docs.langchain.com/oss/python/contributing/documentation#localization) is missing (where applicable)
+> * [Code examples](https://docs.langchain.com/oss/python/contributing/documentation#in-code-documentation) do not run or have errors
+> * [Quality standards](https://docs.langchain.com/oss/python/contributing/documentation#quality-standards) are not met
 
 Please be patient as we handle a large volume of PRs. We will review your PR as soon as possible and provide feedback or merge it. **Do not repeatedly tag maintainers about your PR.**
 
-<Note>
-  If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](/oss/python/contributing/overview#acceptable-uses-of-llms) policy.
-</Note>
+> [!NOTE]
+> If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](https://docs.langchain.com/oss/python/contributing/overview#acceptable-uses-of-llms) policy.
 
 ## Next steps
 
 **Congratulations!** Your integration is published and listed for the LangChain community.
 
-<Card title="Co-marketing" icon="speakerphone" href="/oss/python/contributing/comarketing" arrow>
-  Get in touch with the LangChain marketing team to explore co-marketing opportunities.
-</Card>
+#### [Co-marketing](https://docs.langchain.com/oss/python/contributing/comarketing)
+Get in touch with the LangChain marketing team to explore co-marketing opportunities.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/publish-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/publish-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

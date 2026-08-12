@@ -1,26 +1,20 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage feedback & annotation queues programmatically
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues-sdk)
+Use the LangSmith SDK to manage feedback configurations and [annotation queue](https://docs.langchain.com/langsmith/evaluation-concepts#human) rubrics programmatically. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
 
-Use the LangSmith SDK to manage feedback configurations and [annotation queue](/langsmith/evaluation-concepts#human) rubrics programmatically. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
+> [!NOTE]
+> This guide uses the Python and TypeScript SDKs. For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
 
-<Callout icon="code">
-  This guide uses the Python and TypeScript SDKs. For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
-</Callout>
-
-<Note>
-  To write free-form acceptance criteria on individual runs while reviewing in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotation-queues-sdk), refer to [Use assertions](/langsmith/assertions).
-</Note>
+> [!NOTE]
+> To write free-form acceptance criteria on individual runs while reviewing in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotation-queues-sdk), refer to [Use assertions](https://docs.langchain.com/langsmith/assertions).
 
 ## Feedback layers
 
 LangSmith uses a three-layer architecture for structured human feedback:
 
 1. **Feedback configs**: Organization-wide definitions of feedback keys that establish the schema for evaluation metrics. For example, you might define "accuracy" as a continuous 0–1 score or "correctness" as a pass/fail categorical choice. These configs are reusable across all annotation queues in your organization.
-2. **Annotation queue rubric items**: Queue-specific assignments that determine which feedback configs annotators must fill out when reviewing [runs](/langsmith/observability-concepts#runs) in a particular queue. Each rubric item can include custom descriptions, guidance for specific score values, and whether the feedback is required or optional.
-3. **Feedback**: Individual scores and values that annotators submit on specific [runs](/langsmith/observability-concepts#runs). This is the actual evaluation data collected using the schemas you've defined. Learn more about [feedback in LangSmith](/langsmith/observability-concepts#feedback).
+2. **Annotation queue rubric items**: Queue-specific assignments that determine which feedback configs annotators must fill out when reviewing [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) in a particular queue. Each rubric item can include custom descriptions, guidance for specific score values, and whether the feedback is required or optional.
+3. **Feedback**: Individual scores and values that annotators submit on specific [runs](https://docs.langchain.com/langsmith/observability-concepts#runs). This is the actual evaluation data collected using the schemas you've defined. Learn more about [feedback in LangSmith](https://docs.langchain.com/langsmith/observability-concepts#feedback).
 
 ## Feedback configs
 
@@ -28,77 +22,74 @@ LangSmith uses a three-layer architecture for structured human feedback:
 
 Feedback configs define the schema for a feedback key—whether it's a continuous score, a categorical choice, or freeform text. A unique key identifies each config within your organization and specifies how annotators can submit feedback for that metric.
 
-<Note>
-  Calling [`create_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback_config) with an identical config that already exists returns the existing config. If a different config already exists for the same key, the system raises a 400 error.
-</Note>
+> [!NOTE]
+> Calling [`create_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback_config) with an identical config that already exists returns the existing config. If a different config already exists for the same key, the system raises a 400 error.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith import Client
+```python
+from langsmith import Client
 
-  client = Client()
+client = Client()
 
-  # Continuous score
-  client.create_feedback_config(
-      "accuracy",
-      feedback_config={
-          "type": "continuous",
-          "min": 0,
-          "max": 1,
-      },
-      is_lower_score_better=False,
-  )
-
-  # Categorical
-  client.create_feedback_config(
-      "correctness",
-      feedback_config={
-          "type": "categorical",
-          "categories": [
-              {"value": 1, "label": "Pass"},
-              {"value": 0, "label": "Fail"},
-          ],
-      },
-  )
-
-  # Freeform text
-  client.create_feedback_config(
-      "notes",
-      feedback_config={"type": "freeform"},
-  )
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { Client } from "langsmith";
-
-  const client = new Client();
-
-  // Continuous score
-  await client.createFeedbackConfig({
-    feedbackKey: "accuracy",
-    feedbackConfig: { type: "continuous", min: 0, max: 1 },
-    isLowerScoreBetter: false,
-  });
-
-  // Categorical
-  await client.createFeedbackConfig({
-    feedbackKey: "correctness",
-    feedbackConfig: {
-      type: "categorical",
-      categories: [
-        { value: 1, label: "Pass" },
-        { value: 0, label: "Fail" },
-      ],
+# Continuous score
+client.create_feedback_config(
+    "accuracy",
+    feedback_config={
+        "type": "continuous",
+        "min": 0,
+        "max": 1,
     },
-  });
+    is_lower_score_better=False,
+)
 
-  // Freeform text
-  await client.createFeedbackConfig({
-    feedbackKey: "notes",
-    feedbackConfig: { type: "freeform" },
-  });
-  ```
-</CodeGroup>
+# Categorical
+client.create_feedback_config(
+    "correctness",
+    feedback_config={
+        "type": "categorical",
+        "categories": [
+            {"value": 1, "label": "Pass"},
+            {"value": 0, "label": "Fail"},
+        ],
+    },
+)
+
+# Freeform text
+client.create_feedback_config(
+    "notes",
+    feedback_config={"type": "freeform"},
+)
+```
+
+```typescript
+import { Client } from "langsmith";
+
+const client = new Client();
+
+// Continuous score
+await client.createFeedbackConfig({
+  feedbackKey: "accuracy",
+  feedbackConfig: { type: "continuous", min: 0, max: 1 },
+  isLowerScoreBetter: false,
+});
+
+// Categorical
+await client.createFeedbackConfig({
+  feedbackKey: "correctness",
+  feedbackConfig: {
+    type: "categorical",
+    categories: [
+      { value: 1, label: "Pass" },
+      { value: 0, label: "Fail" },
+    ],
+  },
+});
+
+// Freeform text
+await client.createFeedbackConfig({
+  feedbackKey: "notes",
+  feedbackConfig: { type: "freeform" },
+});
+```
 
 * **Continuous** (`"accuracy"`): Defines a numeric scale from 0 to 1. The `is_lower_score_better` parameter indicates whether lower values represent better performance. Use continuous configs for rating scales or percentage-based metrics.
 * **Categorical** (`"correctness"`): Provides predefined options with associated values. Each category requires a `value` (used for scoring and analytics) and a `label` (shown to annotators). Use categorical configs for binary choices or multi-class classifications.
@@ -108,70 +99,64 @@ Feedback configs define the schema for a feedback key—whether it's a continuou
 
 Retrieve feedback configs to see what evaluation criteria are available in your organization with [`list_feedback_configs`](https://reference.langchain.com/python/langsmith/client/Client/list_feedback_configs). You can list all configs or filter by specific keys. Each returned config object includes the key, type, configuration details (like `min`/`max` or `categories`), and metadata like `is_lower_score_better`:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # List all configs
-  for config in client.list_feedback_configs():
-      print(f"{config.feedback_key}: {config.feedback_config}")
+```python
+# List all configs
+for config in client.list_feedback_configs():
+    print(f"{config.feedback_key}: {config.feedback_config}")
 
-  # Filter by specific keys
-  for config in client.list_feedback_configs(
-      feedback_key=["accuracy", "correctness"]
-  ):
-      print(config.feedback_key)
-  ```
+# Filter by specific keys
+for config in client.list_feedback_configs(
+    feedback_key=["accuracy", "correctness"]
+):
+    print(config.feedback_key)
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  // List all configs
-  for await (const config of client.listFeedbackConfigs()) {
-    console.log(`${config.feedback_key}: ${JSON.stringify(config.feedback_config)}`);
-  }
+```typescript
+// List all configs
+for await (const config of client.listFeedbackConfigs()) {
+  console.log(`${config.feedback_key}: ${JSON.stringify(config.feedback_config)}`);
+}
 
-  // Filter by specific keys
-  for await (const config of client.listFeedbackConfigs({
-    feedbackKeys: ["accuracy", "correctness"],
-  })) {
-    console.log(config.feedback_key);
-  }
-  ```
-</CodeGroup>
+// Filter by specific keys
+for await (const config of client.listFeedbackConfigs({
+  feedbackKeys: ["accuracy", "correctness"],
+})) {
+  console.log(config.feedback_key);
+}
+```
 
 ### Update a feedback config
 
 Modify an existing feedback config with [`update_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/update_feedback_config) by updating specific fields. The method only changes the fields you provide—the rest remain unchanged. This is a partial update that preserves other configuration settings:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  client.update_feedback_config(
-      "accuracy",
-      is_lower_score_better=True,
-  )
-  ```
+```python
+client.update_feedback_config(
+    "accuracy",
+    is_lower_score_better=True,
+)
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.updateFeedbackConfig("accuracy", {
-    isLowerScoreBetter: true,
-  });
-  ```
-</CodeGroup>
+```typescript
+await client.updateFeedbackConfig("accuracy", {
+  isLowerScoreBetter: true,
+});
+```
 
 ### Delete a feedback config
 
 Remove a feedback config from your organization with [`delete_feedback_config`](https://reference.langchain.com/python/langsmith/client/Client/delete_feedback_config). This performs a soft delete, which marks the config as deleted but doesn't permanently remove it from the system. You can recreate a config with the same key later if needed:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  client.delete_feedback_config("accuracy")
-  ```
+```python
+client.delete_feedback_config("accuracy")
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.deleteFeedbackConfig("accuracy");
-  ```
-</CodeGroup>
+```typescript
+await client.deleteFeedbackConfig("accuracy");
+```
 
 ## Annotation queue rubric items
 
-Rubric items assign feedback configs to a specific annotation queue. They control which feedback forms annotators see when reviewing [runs](/langsmith/observability-concepts#runs) in that queue, and whether each form is required or optional.
+Rubric items assign feedback configs to a specific annotation queue. They control which feedback forms annotators see when reviewing [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) in that queue, and whether each form is required or optional.
 
 ### Create a queue with rubric items
 
@@ -179,67 +164,65 @@ Create an annotation queue with [`create_annotation_queue`](https://reference.la
 
 The example creates a queue with three rubric items. The queue-level `rubric_instructions` provides general guidance shown at the top of the annotation interface:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  queue = client.create_annotation_queue(
-      name="QA Review Queue",
-      description="Review LLM outputs for accuracy and correctness",
-      rubric_instructions="Score each response. Add notes for anything unusual.",
-      rubric_items=[
-          {
-              "feedback_key": "accuracy",
-              "description": "How accurate is the response?",
-              "score_descriptions": {
-                  "0": "Completely wrong",
-                  "1": "Perfectly accurate",
-              },
-              "is_required": True,
-          },
-          {
-              "feedback_key": "correctness",
-              "description": "Did the response pass or fail?",
-              "value_descriptions": {
-                  "Pass": "Factually correct",
-                  "Fail": "Contains errors",
-              },
-              "is_required": True,
-          },
-          {
-              "feedback_key": "notes",
-              "description": "Any additional observations",
-              "is_required": False,
-          },
-      ],
-  )
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const queue = await client.createAnnotationQueue({
-    name: "QA Review Queue",
-    description: "Review LLM outputs for accuracy and correctness",
-    rubricInstructions: "Score each response. Add notes for anything unusual.",
-    rubricItems: [
-      {
-        feedback_key: "accuracy",
-        description: "How accurate is the response?",
-        score_descriptions: { "0": "Completely wrong", "1": "Perfectly accurate" },
-        is_required: true,
-      },
-      {
-        feedback_key: "correctness",
-        description: "Did the response pass or fail?",
-        value_descriptions: { Pass: "Factually correct", Fail: "Contains errors" },
-        is_required: true,
-      },
-      {
-        feedback_key: "notes",
-        description: "Any additional observations",
-        is_required: false,
-      },
+```python
+queue = client.create_annotation_queue(
+    name="QA Review Queue",
+    description="Review LLM outputs for accuracy and correctness",
+    rubric_instructions="Score each response. Add notes for anything unusual.",
+    rubric_items=[
+        {
+            "feedback_key": "accuracy",
+            "description": "How accurate is the response?",
+            "score_descriptions": {
+                "0": "Completely wrong",
+                "1": "Perfectly accurate",
+            },
+            "is_required": True,
+        },
+        {
+            "feedback_key": "correctness",
+            "description": "Did the response pass or fail?",
+            "value_descriptions": {
+                "Pass": "Factually correct",
+                "Fail": "Contains errors",
+            },
+            "is_required": True,
+        },
+        {
+            "feedback_key": "notes",
+            "description": "Any additional observations",
+            "is_required": False,
+        },
     ],
-  });
-  ```
-</CodeGroup>
+)
+```
+
+```typescript
+const queue = await client.createAnnotationQueue({
+  name: "QA Review Queue",
+  description: "Review LLM outputs for accuracy and correctness",
+  rubricInstructions: "Score each response. Add notes for anything unusual.",
+  rubricItems: [
+    {
+      feedback_key: "accuracy",
+      description: "How accurate is the response?",
+      score_descriptions: { "0": "Completely wrong", "1": "Perfectly accurate" },
+      is_required: true,
+    },
+    {
+      feedback_key: "correctness",
+      description: "Did the response pass or fail?",
+      value_descriptions: { Pass: "Factually correct", Fail: "Contains errors" },
+      is_required: true,
+    },
+    {
+      feedback_key: "notes",
+      description: "Any additional observations",
+      is_required: false,
+    },
+  ],
+});
+```
 
 * `feedback_key`: The key of an existing feedback config (create this first).
 * `description`: Queue-specific guidance for annotators about this metric.
@@ -252,36 +235,33 @@ Modify the rubric items assigned to an annotation queue with [`update_annotation
 
 You'll need the queue ID, which you get when you create the queue or by listing queues:
 
-<Note>
-  Updating rubric items replaces the full list. Include all items you want to keep.
-</Note>
+> [!NOTE]
+> Updating rubric items replaces the full list. Include all items you want to keep.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  client.update_annotation_queue(
-      queue.id,
-      rubric_items=[
-          {"feedback_key": "accuracy", "is_required": True},
-          {"feedback_key": "correctness", "is_required": True},
-          {
-              "feedback_key": "tone",
-              "description": "Is the tone appropriate?",
-              "is_required": False,
-          },
-      ],
-  )
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.updateAnnotationQueue(queue.id, {
-    rubricItems: [
-      { feedback_key: "accuracy", is_required: true },
-      { feedback_key: "correctness", is_required: true },
-      { feedback_key: "tone", description: "Is the tone appropriate?", is_required: false },
+```python
+client.update_annotation_queue(
+    queue.id,
+    rubric_items=[
+        {"feedback_key": "accuracy", "is_required": True},
+        {"feedback_key": "correctness", "is_required": True},
+        {
+            "feedback_key": "tone",
+            "description": "Is the tone appropriate?",
+            "is_required": False,
+        },
     ],
-  });
-  ```
-</CodeGroup>
+)
+```
+
+```typescript
+await client.updateAnnotationQueue(queue.id, {
+  rubricItems: [
+    { feedback_key: "accuracy", is_required: true },
+    { feedback_key: "correctness", is_required: true },
+    { feedback_key: "tone", description: "Is the tone appropriate?", is_required: false },
+  ],
+});
+```
 
 ## Feedback config types (detailed)
 
@@ -289,55 +269,53 @@ You'll need the queue ID, which you get when you create the queue or by listing 
 
 Continuous configs define numeric rating scales with minimum and maximum values. Annotators can select any value within the range, making this ideal for scoring dimensions like accuracy, quality, or relevance on a numeric scale:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Simple continuous score
-  client.create_feedback_config(
-      "accuracy",
-      feedback_config={
-          "type": "continuous",
-          "min": 0,
-          "max": 1,
-      },
-  )
-
-  # Continuous with labeled points on the scale
-  client.create_feedback_config(
-      "quality",
-      feedback_config={
-          "type": "continuous",
-          "min": 1,
-          "max": 5,
-          "categories": [
-              {"value": 1, "label": "Poor"},
-              {"value": 3, "label": "Average"},
-              {"value": 5, "label": "Excellent"},
-          ],
-      },
-  )
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.createFeedbackConfig({
-    feedbackKey: "accuracy",
-    feedbackConfig: { type: "continuous", min: 0, max: 1 },
-  });
-
-  await client.createFeedbackConfig({
-    feedbackKey: "quality",
-    feedbackConfig: {
-      type: "continuous",
-      min: 1,
-      max: 5,
-      categories: [
-        { value: 1, label: "Poor" },
-        { value: 3, label: "Average" },
-        { value: 5, label: "Excellent" },
-      ],
+```python
+# Simple continuous score
+client.create_feedback_config(
+    "accuracy",
+    feedback_config={
+        "type": "continuous",
+        "min": 0,
+        "max": 1,
     },
-  });
-  ```
-</CodeGroup>
+)
+
+# Continuous with labeled points on the scale
+client.create_feedback_config(
+    "quality",
+    feedback_config={
+        "type": "continuous",
+        "min": 1,
+        "max": 5,
+        "categories": [
+            {"value": 1, "label": "Poor"},
+            {"value": 3, "label": "Average"},
+            {"value": 5, "label": "Excellent"},
+        ],
+    },
+)
+```
+
+```typescript
+await client.createFeedbackConfig({
+  feedbackKey: "accuracy",
+  feedbackConfig: { type: "continuous", min: 0, max: 1 },
+});
+
+await client.createFeedbackConfig({
+  feedbackKey: "quality",
+  feedbackConfig: {
+    type: "continuous",
+    min: 1,
+    max: 5,
+    categories: [
+      { value: 1, label: "Poor" },
+      { value: 3, label: "Average" },
+      { value: 5, label: "Excellent" },
+    ],
+  },
+});
+```
 
 The first example shows a 0–1 scale without labels. The second example demonstrates adding `categories` with labeled anchor points on the scale (like "Poor", "Average", "Excellent") to help annotators understand what different values represent. These labels are optional but can improve consistency in how annotators interpret the scale.
 
@@ -347,59 +325,57 @@ Categorical configs provide a discrete set of predefined options for annotators 
 
 Use categorical configs for binary decisions (pass/fail, correct/incorrect), multi-class classifications (sentiment, topic categories), or any evaluation with a fixed set of discrete options. Do not set `min` or `max` for categorical configs:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Binary pass/fail
-  client.create_feedback_config(
-      "correctness",
-      feedback_config={
-          "type": "categorical",
-          "categories": [
-              {"value": 1, "label": "Pass"},
-              {"value": 0, "label": "Fail"},
-          ],
-      },
-  )
-
-  # Multi-class
-  client.create_feedback_config(
-      "sentiment",
-      feedback_config={
-          "type": "categorical",
-          "categories": [
-              {"value": 0, "label": "Negative"},
-              {"value": 1, "label": "Neutral"},
-              {"value": 2, "label": "Positive"},
-          ],
-      },
-  )
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.createFeedbackConfig({
-    feedbackKey: "correctness",
-    feedbackConfig: {
-      type: "categorical",
-      categories: [
-        { value: 1, label: "Pass" },
-        { value: 0, label: "Fail" },
-      ],
+```python
+# Binary pass/fail
+client.create_feedback_config(
+    "correctness",
+    feedback_config={
+        "type": "categorical",
+        "categories": [
+            {"value": 1, "label": "Pass"},
+            {"value": 0, "label": "Fail"},
+        ],
     },
-  });
+)
 
-  await client.createFeedbackConfig({
-    feedbackKey: "sentiment",
-    feedbackConfig: {
-      type: "categorical",
-      categories: [
-        { value: 0, label: "Negative" },
-        { value: 1, label: "Neutral" },
-        { value: 2, label: "Positive" },
-      ],
+# Multi-class
+client.create_feedback_config(
+    "sentiment",
+    feedback_config={
+        "type": "categorical",
+        "categories": [
+            {"value": 0, "label": "Negative"},
+            {"value": 1, "label": "Neutral"},
+            {"value": 2, "label": "Positive"},
+        ],
     },
-  });
-  ```
-</CodeGroup>
+)
+```
+
+```typescript
+await client.createFeedbackConfig({
+  feedbackKey: "correctness",
+  feedbackConfig: {
+    type: "categorical",
+    categories: [
+      { value: 1, label: "Pass" },
+      { value: 0, label: "Fail" },
+    ],
+  },
+});
+
+await client.createFeedbackConfig({
+  feedbackKey: "sentiment",
+  feedbackConfig: {
+    type: "categorical",
+    categories: [
+      { value: 0, label: "Negative" },
+      { value: 1, label: "Neutral" },
+      { value: 2, label: "Positive" },
+    ],
+  },
+});
+```
 
 The first example shows a binary pass/fail config. The second example demonstrates a multi-class config for sentiment with three options. The numeric values allow you to compute aggregate scores even for categorical feedback.
 
@@ -409,21 +385,19 @@ Freeform configs allow annotators to provide open-ended text feedback without an
 
 Freeform feedback is valuable for capturing nuanced insights but is harder to aggregate and analyze compared to structured feedback types:
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  client.create_feedback_config(
-      "notes",
-      feedback_config={"type": "freeform"},
-  )
-  ```
+```python
+client.create_feedback_config(
+    "notes",
+    feedback_config={"type": "freeform"},
+)
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  await client.createFeedbackConfig({
-    feedbackKey: "notes",
-    feedbackConfig: { type: "freeform" },
-  });
-  ```
-</CodeGroup>
+```typescript
+await client.createFeedbackConfig({
+  feedbackKey: "notes",
+  feedbackConfig: { type: "freeform" },
+});
+```
 
 ## Validation rules
 
@@ -455,12 +429,8 @@ Freeform feedback is valuable for capturing nuanced insights but is harder to ag
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/annotation-queues-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

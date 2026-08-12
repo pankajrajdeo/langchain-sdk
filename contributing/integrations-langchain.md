@@ -1,30 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Contributing integrations
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/integrations-langchain)
 **Integrations are a core component of LangChain.**
 
 LangChain provides standard interfaces for several different components (language models, vector stores, etc) that are crucial when building LLM applications. Implementing a new integration helps expand LangChain's ecosystem and makes your service discoverable to millions of developers.
 
-<Warning>
-  New integrations are **not accepted as PRs** to any `langchain-ai` repository. All new integrations must be published as independent packages to PyPI (e.g., `langchain-yourprovider`). The only PR you should open to a `langchain-ai` repo is to list your published package in the docs: either a YAML row for the download table, or a hosted guide if you meet the [eligibility criteria](/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides).
-</Warning>
+> [!WARNING]
+> New integrations are **not accepted as PRs** to any `langchain-ai` repository. All new integrations must be published as independent packages to PyPI (e.g., `langchain-yourprovider`). The only PR you should open to a `langchain-ai` repo is to list your published package in the docs: either a YAML row for the download table, or a hosted guide if you meet the [eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides).
 
 ## Why implement a LangChain integration?
 
-<Card title="Discoverability" icon="search">
-  LangChain is the most used framework for building LLM applications, with over 200 million monthly downloads.
-</Card>
+#### Discoverability
+LangChain is the most used framework for building LLM applications, with over 200 million monthly downloads.
 
-<Card title="Interoperability" icon="refresh">
-  LangChain components expose a standard interface, allowing developers to easily swap them for each other. If you implement a LangChain integration, any developer using a different component will easily be able to swap yours in.
-</Card>
+#### Interoperability
+LangChain components expose a standard interface, allowing developers to easily swap them for each other. If you implement a LangChain integration, any developer using a different component will easily be able to swap yours in.
 
-<Card title="Best Practices" icon="star">
-  Through their standard interface, LangChain components encourage and facilitate best practices (streaming, async, etc.) that improve developer experience and application performance.
-</Card>
+#### Best Practices
+Through their standard interface, LangChain components encourage and facilitate best practices (streaming, async, etc.) that improve developer experience and application performance.
 
 ## Components to integrate
 
@@ -32,19 +24,19 @@ While any component can be integrated into LangChain, there are specific types o
 
 **Integrate these ✅**:
 
-* [**Chat Models**](/oss/python/integrations/chat): Most actively used component type
-* [**Tools/Toolkits**](/oss/python/integrations/tools): Enable agent capabilities
-* [**Retrievers**](/oss/python/integrations/retrievers): Core to RAG applications
-* [**Embedding Models**](/oss/python/integrations/embeddings): Foundation for vector operations
-* [**Vector Stores**](/oss/python/integrations/vectorstores): Essential for semantic search
-* [**Middleware**](/oss/python/integrations/middleware): Extend agent behavior with hooks
-* [**Sandboxes**](/oss/python/deepagents/sandboxes): Run code safely with Deep Agents
+* [**Chat Models**](https://docs.langchain.com/oss/python/integrations/chat): Most actively used component type
+* [**Tools/Toolkits**](https://docs.langchain.com/oss/python/integrations/tools): Enable agent capabilities
+* [**Retrievers**](https://docs.langchain.com/oss/python/integrations/retrievers): Core to RAG applications
+* [**Embedding Models**](https://docs.langchain.com/oss/python/integrations/embeddings): Foundation for vector operations
+* [**Vector Stores**](https://docs.langchain.com/oss/python/integrations/vectorstores): Essential for semantic search
+* [**Middleware**](https://docs.langchain.com/oss/python/integrations/middleware): Extend agent behavior with hooks
+* [**Sandboxes**](https://docs.langchain.com/oss/python/deepagents/sandboxes): Run code safely with Deep Agents
 
 **Not these ❌**:
 
-* **LLMs (Text-Completion Models)**: Deprecated in favor of [Chat Models](/oss/python/integrations/chat)
-* [**Document Loaders**](/oss/python/integrations/document_loaders): High maintenance burden
-* [**Key-Value Stores**](/oss/python/integrations/stores): Limited usage
+* **LLMs (Text-Completion Models)**: Deprecated in favor of [Chat Models](https://docs.langchain.com/oss/python/integrations/chat)
+* [**Document Loaders**](https://docs.langchain.com/oss/python/integrations/document_loaders): High maintenance burden
+* [**Key-Value Stores**](https://docs.langchain.com/oss/python/integrations/stores): Limited usage
 * **Document Transformers**: Niche use cases
 * **Model Caches**: Infrastructure concerns
 * **Graphs**: Complex abstractions
@@ -55,49 +47,41 @@ While any component can be integrated into LangChain, there are specific types o
 
 ## How to contribute an integration
 
-<Steps>
-  <Step title="Implement your package">
-    <Card title="How to implement a LangChain integration" icon="link" href="/oss/python/contributing/implement-langchain" arrow />
-  </Step>
+### Implement your package
+#### [How to implement a LangChain integration](https://docs.langchain.com/oss/python/contributing/implement-langchain)
 
-  <Step title="Pass standard tests">
-    If applicable, implement support for LangChain's [standard test](/oss/python/contributing/standard-tests-langchain) suite for your integration and successfully run them.
-  </Step>
+### Pass standard tests
+If applicable, implement support for LangChain's [standard test](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain) suite for your integration and successfully run them.
 
-  <Step title="Publish integration">
-    <Card title="How to publish an integration" icon="upload" href="/oss/python/contributing/publish-langchain" arrow />
-  </Step>
+### Publish integration
+#### [How to publish an integration](https://docs.langchain.com/oss/python/contributing/publish-langchain)
 
-  <Step title="List your integration">
-    Open a PR in the LangChain [docs repo](https://github.com/langchain-ai/docs) so users can find your package. Hosted guides are limited; most integrations are listed via YAML.
+### List your integration
+Open a PR in the LangChain [docs repo](https://github.com/langchain-ai/docs) so users can find your package. Hosted guides are limited; most integrations are listed via YAML.
 
-    <Accordion title="How listing works" icon="book">
-      **Default (under 50,000 monthly downloads, not featured):** Add a row to [`scripts/data/integration_external_docs.yaml`](https://github.com/langchain-ai/docs/blob/main/scripts/data/integration_external_docs.yaml). The name column links to your `docs_url` (partner docs preferred, then GitHub, then PyPI or npm). Do not add a new MDX page.
+<details>
+<summary>How listing works</summary>
 
-      **Hosted guide (50,000+ monthly downloads, or featured by maintainers):** Create a page under `src/oss/python/integrations/<component_type>/` from a template:
+**Default (under 50,000 monthly downloads, not featured):** Add a row to [`scripts/data/integration_external_docs.yaml`](https://github.com/langchain-ai/docs/blob/main/scripts/data/integration_external_docs.yaml). The name column links to your `docs_url` (partner docs preferred, then GitHub, then PyPI or npm). Do not add a new MDX page.
 
-      * [Chat models](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx)
-      * [Tools and toolkits](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx)
-      * [Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)
-      * [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
+**Hosted guide (50,000+ monthly downloads, or featured by maintainers):** Create a page under `src/oss/python/integrations/<component_type>/` from a template:
 
-      For full steps, eligibility details, and rejection criteria, see [Publish an integration](/oss/python/contributing/publish-langchain#make-your-integration-discoverable).
-    </Accordion>
-  </Step>
+* [Chat models](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/chat/TEMPLATE.mdx)
+* [Tools and toolkits](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/tools/TEMPLATE.mdx)
+* [Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)
+* [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
 
-  <Step title="Co-marketing" icon="speakerphone">
-    (Optional) Engage with the LangChain team for joint [co-marketing](/oss/python/contributing/comarketing).
-  </Step>
-</Steps>
+For full steps, eligibility details, and rejection criteria, see [Publish an integration](https://docs.langchain.com/oss/python/contributing/publish-langchain#make-your-integration-discoverable).
+
+</details>
+
+### Co-marketing
+(Optional) Engage with the LangChain team for joint [co-marketing](https://docs.langchain.com/oss/python/contributing/comarketing).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/integrations-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/integrations-langchain.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

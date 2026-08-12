@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GCP Terraform architecture
-
-> Platform layers, services, Workload Identity, networking, and module dependencies for LangSmith self-hosted on GKE.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture)
+Platform layers, services, Workload Identity, networking, and module dependencies for LangSmith self-hosted on GKE.
 
 Understand what the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp) provision and how the pieces fit together, so you can size, secure, and customize your LangSmith deployment before running `make apply`.
 
@@ -16,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * Add-ons: LangSmith Deployment, Fleet, Insights, and Polly.
 * GCP managed services and Secret Manager integration.
 
-If you are ready to install, start with the [deployment walkthrough](/langsmith/self-host-terraform-gcp-deploy).
+If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy).
 
 ## Platform layers
 
 LangSmith on GCP deploys in up to five stages. Each stage adds a capability layer on top of the previous. All layers share the same GKE cluster and `langsmith` namespace.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/gcp-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=195d16f6a26452c58eb3d749e36774da" alt="LangSmith on GCP deployment stages and service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/gcp-architecture.png" />
+> **Image:** [LangSmith on GCP deployment stages and service layout](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture)
 
 | Stage | Layer                | What it adds                                                                                                       |
 | ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -32,9 +28,8 @@ LangSmith on GCP deploys in up to five stages. Each stage adds a capability laye
 | 4     | Fleet                | standalone-fleet-api-server, standalone-fleet-tool-server, standalone-fleet-trigger-server, standalone-fleet-queue |
 | 5     | Insights + Polly     | Clio analytics (ClickHouse-backed), Polly eval agent                                                               |
 
-<Note>
-  Fleet (chart v0.15+) is the current form of the feature formerly called Agent Builder. Enable it with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require the LangSmith Deployment layer. The two flags are mutually exclusive and share the same encryption key. See [Enable add-ons](/langsmith/self-host-terraform-gcp-deploy#enable-add-ons) in the deployment guide.
-</Note>
+> [!NOTE]
+> Fleet (chart v0.15+) is the current form of the feature formerly called Agent Builder. Enable it with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require the LangSmith Deployment layer. The two flags are mutually exclusive and share the same encryption key. See [Enable add-ons](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#enable-add-ons) in the deployment guide.
 
 ## Module descriptions
 
@@ -55,7 +50,7 @@ LangSmith on GCP deploys in up to five stages. Each stage adds a capability laye
 
 ### Light deploy (all in-cluster)
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 VPC
 └── subnet (10.0.0.0/20, GKE nodes only)
     No Cloud SQL or Memorystore; chart pods handle both
@@ -75,7 +70,7 @@ GCS Bucket (trace payloads, always external)
 
 Set in `terraform.tfvars`:
 
-```hcl theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```hcl
 postgres_source   = "in-cluster"
 redis_source      = "in-cluster"
 clickhouse_source = "in-cluster"
@@ -83,7 +78,7 @@ clickhouse_source = "in-cluster"
 
 ### Production (external managed services)
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 VPC
 ├── subnet (10.0.0.0/20, GKE nodes, pods, services)
 │   └── Secondary ranges: pods 10.4.0.0/14, services 10.8.0.0/20
@@ -115,13 +110,11 @@ GCS Bucket (Workload Identity, no static keys)
 | `langsmith-ace-backend`      | Async compute (dataset runs, evaluations, background jobs) | —    | 1 to 5                      | No                | Postgres, Redis                  |
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica | No                | 500Gi `premium-rwo` PVC          |
 
-<Warning>
-  In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production, use [LangChain Managed ClickHouse](/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
-</Warning>
+> [!WARNING]
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production, use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
 
-<Note>
-  [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
-</Note>
+> [!NOTE]
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 
@@ -180,15 +173,14 @@ When `postgres_source = "external"` and `redis_source = "external"` (the recomme
 | KEDA          | `keda`                 | `k8s-bootstrap` module when `enable_langsmith_deployment = true`                                      | LangSmith Deployment add-on and later |
 | cert-manager  | `cert-manager`         | `k8s-bootstrap` module when `tls_certificate_source = "letsencrypt"` or `install_cert_manager = true` | Let's Encrypt TLS                     |
 
-<Note>
-  The `Gateway` resource is managed by Terraform; the `HTTPRoute` is managed by Helm. Do not delete the Gateway resource manually. GCP releases the external IP when the Gateway is deleted, then issues a new IP on recreate.
-</Note>
+> [!NOTE]
+> The `Gateway` resource is managed by Terraform; the `HTTPRoute` is managed by Helm. Do not delete the Gateway resource manually. GCP releases the external IP when the Gateway is deleted, then issues a new IP on recreate.
 
 ## Workload Identity
 
 GKE pods access GCS through Workload Identity. The Kubernetes ServiceAccount is bound to a GCP service account via an IAM binding; pods receive temporary credentials with no static keys in Secrets or environment variables.
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 GKE pod
   └── Kubernetes ServiceAccount (annotated with iam.gke.io/gcp-service-account)
         └── IAM binding: roles/iam.workloadIdentityUser
@@ -223,7 +215,7 @@ Cloud SQL and Memorystore are accessed exclusively via private IP. The networkin
 
 ## Traffic flow
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 Internet (HTTPS :443)
   ↓
 Envoy Gateway  (envoy-gateway-system, external LoadBalancer IP)
@@ -256,13 +248,13 @@ Internal traffic (private IPs, never leaving VPC):
 
 Without Secret Manager:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 terraform.tfvars → terraform apply → kubernetes_secret (postgres, redis)
 ```
 
 With Secret Manager:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 terraform.tfvars → terraform apply ─┬─→ kubernetes_secret (postgres, redis)
                                     └─→ Secret Manager (durable copy, survives cluster recreation)
 ```
@@ -271,7 +263,7 @@ Terraform writes the Kubernetes Secrets directly in both cases. Enabling Secret 
 
 ## Terraform module graph
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 google_project_service (APIs enabled)
   └── module.networking
         ├── module.gke_cluster
@@ -294,7 +286,7 @@ The `infra` layer does not install the LangSmith chart. The application stage in
 
 ## Verification commands
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Cluster connectivity
 gcloud container clusters get-credentials <cluster-name> --region <region> --project <project-id>
 kubectl cluster-info
@@ -329,12 +321,8 @@ kubectl run gcs-test --rm -it --image=google/cloud-sdk -n langsmith -- \
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

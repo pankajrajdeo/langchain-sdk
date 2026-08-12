@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AgentSystems
 
 > Governance infrastructure for AI systems.
@@ -10,16 +6,12 @@
 
 ## Integrations
 
-* [AgentSystems Notary](/oss/python/integrations/callbacks/agentsystems_notary) - Tamper-evident audit logging for AI systems.
+* [AgentSystems Notary](https://docs.langchain.com/oss/python/integrations/callbacks/agentsystems_notary) - Tamper-evident audit logging for AI systems.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/agentsystems.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/agentsystems.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

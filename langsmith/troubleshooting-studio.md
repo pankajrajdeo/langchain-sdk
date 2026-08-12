@@ -1,30 +1,22 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Studio troubleshooting
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/troubleshooting-studio)
 ## Safari connection issues
 
 Safari blocks plain-HTTP traffic on localhost. When running Studio with `langgraph dev`, you may see "Failed to load assistants" errors.
 
 ### Solution 1: Use Cloudflare Tunnel
 
-<Tabs>
-  <Tab title="Python">
-    ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pip install -U langgraph-cli>=0.2.6
-    langgraph dev --tunnel
-    ```
-  </Tab>
+#### Python
+```shell
+pip install -U langgraph-cli>=0.2.6
+langgraph dev --tunnel
+```
 
-  <Tab title="JS">
-    ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    # Requires @langchain/langgraph-cli>=0.0.26
-    npx @langchain/langgraph-cli dev --tunnel
-    ```
-  </Tab>
-</Tabs>
+#### JS
+```shell
+# Requires @langchain/langgraph-cli>=0.0.26
+npx @langchain/langgraph-cli dev --tunnel
+```
 
 The command outputs a tunnel URL. To connect Studio:
 
@@ -36,9 +28,8 @@ The command outputs a tunnel URL. To connect Studio:
 
 This manual step is required for security - Studio requires explicit user confirmation before connecting to external URLs.
 
-<Note>
-  Cloudflare tunnels can be unreliable and may intermittently disconnect.
-</Note>
+> [!NOTE]
+> Cloudflare tunnels can be unreliable and may intermittently disconnect.
 
 ### Solution 2: Use Chromium browser
 
@@ -46,7 +37,7 @@ Chrome and other Chromium browsers allow HTTP on localhost. Use `langgraph dev` 
 
 ## Chrome connection issues
 
-Starting with Chrome version 142, you may experience "Failed to initialize Studio" errors with "TypeError: Failed to fetch" when trying to connect [LangSmith Studio](/langsmith/studio) to your local development server via [`langgraph dev`](/langsmith/cli). This occurs even when the API server at `http://127.0.0.1:2024/docs` loads successfully.
+Starting with Chrome version 142, you may experience "Failed to initialize Studio" errors with "TypeError: Failed to fetch" when trying to connect [LangSmith Studio](https://docs.langchain.com/langsmith/studio) to your local development server via [`langgraph dev`](https://docs.langchain.com/langsmith/cli). This occurs even when the API server at `http://127.0.0.1:2024/docs` loads successfully.
 
 **Root Cause:** Chrome 142 fully enforces the Private Network Access (PNA) specification with no fallback, which blocks HTTPS sites (like `https://smith.langchain.com`) from accessing HTTP localhost servers by default.
 
@@ -80,7 +71,7 @@ Browser extensions (especially Ollama Chrome extension or AI model extensions) c
 
 **Verify dependencies are up to date**
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -U "langgraph-cli[inmem]"
 ```
 
@@ -101,21 +92,17 @@ Disable Brave Shields for LangSmith using the Brave icon in the URL bar.
 
 ### Solution 2: Use Cloudflare Tunnel
 
-<Tabs>
-  <Tab title="Python">
-    ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pip install -U langgraph-cli>=0.2.6
-    langgraph dev --tunnel
-    ```
-  </Tab>
+#### Python
+```shell
+pip install -U langgraph-cli>=0.2.6
+langgraph dev --tunnel
+```
 
-  <Tab title="JS">
-    ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    # Requires @langchain/langgraph-cli>=0.0.26
-    npx @langchain/langgraph-cli dev --tunnel
-    ```
-  </Tab>
-</Tabs>
+#### JS
+```shell
+# Requires @langchain/langgraph-cli>=0.0.26
+npx @langchain/langgraph-cli dev --tunnel
+```
 
 The command outputs a tunnel URL. To connect Studio:
 
@@ -136,27 +123,21 @@ because without proper definition, Studio assumes the conditional edge could acc
 
 Define a mapping between router outputs and target nodes:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: "node_c"})
-    ```
-  </Tab>
+#### Python
+```python
+graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: "node_c"})
+```
 
-  <Tab title="Javascript">
-    ```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
-    ```
-  </Tab>
-</Tabs>
-
-<a id="python" />
+#### Javascript
+```ts
+graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
+```
 
 ### Solution 2: Router type definition
 
 Specify possible routing destinations using Python's `Literal` type:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def routing_function(state: GraphState) -> Literal["node_b","node_c"]:
     if state['some_condition'] == True:
         return "node_b"
@@ -179,12 +160,8 @@ When you run an experiment, any attached evaluators are scheduled for execution 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/troubleshooting-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

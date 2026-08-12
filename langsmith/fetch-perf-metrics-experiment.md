@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to fetch performance metrics for an experiment
-
-<Check>
-  Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
-
-  You might see these terms interchangeably in our documentation, but they all refer to the same underlying data structure.
-
-  We are working on unifying the terminology across our documentation and APIs.
-</Check>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fetch-perf-metrics-experiment)
+> [!TIP]
+> Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
+>
+> You might see these terms interchangeably in our documentation, but they all refer to the same underlying data structure.
+>
+> We are working on unifying the terminology across our documentation and APIs.
 
 When you run an experiment using `evaluate` with the Python or TypeScript SDK, you can fetch the performance metrics for the experiment using the `read_project`/`readProject` methods.
 
 The payload for experiment details includes the following values:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "start_time": "2024-06-06T01:02:51.299960",
   "end_time": "2024-06-06T01:03:04.557530+00:00",
@@ -93,9 +88,9 @@ From here, you can extract performance metrics such as:
 
 Here is an example of how you can fetch the performance metrics for an experiment using the Python and TypeScript SDKs.
 
-First, as a prerequisite, we will create a trivial dataset. Here, we only demonstrate this in Python, but you can do the same in TypeScript. Please view the [how-to guide](/langsmith/evaluate-llm-application) on evaluation for more details.
+First, as a prerequisite, we will create a trivial dataset. Here, we only demonstrate this in Python, but you can do the same in TypeScript. Please view the [how-to guide](https://docs.langchain.com/langsmith/evaluate-llm-application) on evaluation for more details.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client
 
 client = Client()
@@ -120,67 +115,61 @@ client.create_examples(dataset_id=dataset.id, examples=examples)
 
 Next, we will create an experiment, retrieve the experiment name from the result of `evaluate`, then fetch the performance metrics for the experiment.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith.schemas import Example, Run
-  dataset_name = "HelloDataset"
+```python
+from langsmith.schemas import Example, Run
+dataset_name = "HelloDataset"
 
-  def foo_label(root_run: Run, example: Example) -> dict:
-      return {"score": 1, "key": "foo"}
+def foo_label(root_run: Run, example: Example) -> dict:
+    return {"score": 1, "key": "foo"}
 
-  from langsmith import evaluate
+from langsmith import evaluate
 
-  results = evaluate(
-      lambda inputs: "Hello " + inputs["input"],
-      data=dataset_name,
-      evaluators=[foo_label],
-      experiment_prefix="Hello",
-  )
+results = evaluate(
+    lambda inputs: "Hello " + inputs["input"],
+    data=dataset_name,
+    evaluators=[foo_label],
+    experiment_prefix="Hello",
+)
 
-  resp = client.read_project(project_name=results.experiment_name, include_stats=True)
-  print(resp.model_dump_json(indent=2))
-  ```
+resp = client.read_project(project_name=results.experiment_name, include_stats=True)
+print(resp.model_dump_json(indent=2))
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { Client } from "langsmith";
-  import { evaluate } from "langsmith/evaluation";
-  import type { EvaluationResult } from "langsmith/evaluation";
-  import type { Run, Example } from "langsmith/schemas";
+```typescript
+import { Client } from "langsmith";
+import { evaluate } from "langsmith/evaluation";
+import type { EvaluationResult } from "langsmith/evaluation";
+import type { Run, Example } from "langsmith/schemas";
 
-  // Row-level evaluator
-  function fooLabel(rootRun: Run, example: Example): EvaluationResult {
-      return {score: 1, key: "foo"};
-  }
+// Row-level evaluator
+function fooLabel(rootRun: Run, example: Example): EvaluationResult {
+    return {score: 1, key: "foo"};
+}
 
-  const client = new Client();
+const client = new Client();
 
-  const results = await evaluate(
-      (inputs) => {
-          return { output: "Hello " + inputs.input };
-      },
-      {
-          data: "HelloDataset",
-          experimentPrefix: "Hello",
-          evaluators: [fooLabel],
-      }
-  );
+const results = await evaluate(
+    (inputs) => {
+        return { output: "Hello " + inputs.input };
+    },
+    {
+        data: "HelloDataset",
+        experimentPrefix: "Hello",
+        evaluators: [fooLabel],
+    }
+);
 
-  const resp = await client.readProject({
-      projectName: results.experimentName,
-      includeStats: true
-  })
-  console.log(JSON.stringify(resp, null, 2))
-  ```
-</CodeGroup>
+const resp = await client.readProject({
+    projectName: results.experimentName,
+    includeStats: true
+})
+console.log(JSON.stringify(resp, null, 2))
+```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fetch-perf-metrics-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fetch-perf-metrics-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

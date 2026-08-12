@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace OpenCode sessions
-
-> Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-opencode)
+Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith.
 
 The `@langchain/langsmith-opencode` plugin sends [OpenCode](https://opencode.ai/) session traces to LangSmith. Use it to inspect agent turns, model metadata, token usage, tool calls, tool errors, attachments, and subagent activity from your OpenCode workflows.
 
@@ -13,14 +9,14 @@ The `@langchain/langsmith-opencode` plugin sends [OpenCode](https://opencode.ai/
 Before setting up tracing, ensure you have:
 
 * [OpenCode](https://opencode.ai/) installed and configured.
-* A [LangSmith API key](/langsmith/create-account-api-key).
+* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
 * Access to configure the OpenCode `plugin` key in `opencode.json` or `~/.config/opencode/opencode.json`.
 
 ## Install and enable the plugin
 
 Add the plugin to your OpenCode configuration file. You can configure it locally in `opencode.json` or globally in `~/.config/opencode/opencode.json`:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": ["@langchain/langsmith-opencode"]
@@ -29,7 +25,7 @@ Add the plugin to your OpenCode configuration file. You can configure it locally
 
 Enable tracing and provide your LangSmith API key before starting OpenCode:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export TRACE_TO_LANGSMITH="true"
 export LANGSMITH_API_KEY="<your-langsmith-api-key>"
 export LANGSMITH_PROJECT="opencode"
@@ -56,7 +52,7 @@ The plugin reads OpenCode-specific variables first, then falls back to the gener
 
 For example:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export TRACE_TO_LANGSMITH="true"
 export LANGSMITH_API_KEY="<your-langsmith-api-key>"
 export LANGSMITH_PROJECT="opencode"
@@ -67,7 +63,7 @@ export LANGSMITH_OPENCODE_METADATA='{"team":"agents","environment":"dev"}'
 
 Use `.opencode/langsmith.json` for project-level settings or `~/.config/opencode/langsmith.json` for global defaults.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<your-langsmith-api-key>",
@@ -95,7 +91,7 @@ Keep config files that include API keys out of version control.
 
 Set `replicas` in `langsmith.json` or `LANGSMITH_OPENCODE_RUNS_ENDPOINTS` to send the same trace data to additional LangSmith workspaces or projects.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<your-langsmith-api-key>",
@@ -154,12 +150,8 @@ If traces do not appear in LangSmith:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-opencode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-opencode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

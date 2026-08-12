@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google spanner integration
 
 > Integrate with the Google spanner vector store using LangChain Python.
@@ -27,13 +23,13 @@ To run this notebook, you will need to do the following:
 
 The integration lives in its own `langchain-google-spanner` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-spanner langchain-google-vertexai
 ```
 
 **Colab only:** Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -48,7 +44,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -64,7 +60,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -78,7 +74,7 @@ PROJECT_ID = "my-project-id"  # @param {type:"string"}
 
 The `langchain-google-spanner` package requires that you [enable the Spanner API](https://console.cloud.google.com/flows/enableapi?apiid=spanner.googleapis.com) in your Google Cloud Project.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # enable Spanner API
 !gcloud services enable spanner.googleapis.com
 ```
@@ -89,7 +85,7 @@ The `langchain-google-spanner` package requires that you [enable the Spanner API
 
 Find your database values, in the [Spanner Instances page](https://console.cloud.google.com/spanner?_ga=2.223735448.2062268965.1707700487-2088871159.1707257687).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @title Set Your Values Here { display-mode: "form" }
 INSTANCE = "my-instance"  # @param {type: "string"}
 DATABASE = "my-database"  # @param {type: "string"}
@@ -102,7 +98,7 @@ The `SpannerVectorStore` class instance requires a database table with id, conte
 
 The helper method `init_vector_store_table()` that can be used to create a table with the proper schema for you.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_spanner import SecondaryIndex, SpannerVectorStore, TableColumn
 
 SpannerVectorStore.init_vector_store_table(
@@ -124,15 +120,15 @@ SpannerVectorStore.init_vector_store_table(
 
 ### Create an embedding class instance
 
-You can use any [LangChain embeddings model](/oss/python/integrations/embeddings/).
+You can use any [LangChain embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/).
 You may need to enable Vertex AI API to use `VertexAIEmbeddings`. We recommend setting the embedding model's version for production, learn more about the [Text embeddings models](https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/text-embeddings).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # enable Vertex AI API
 !gcloud services enable aiplatform.googleapis.com
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIEmbeddings
 
 embeddings = VertexAIEmbeddings(
@@ -149,7 +145,7 @@ To initialize the `SpannerVectorStore` class you need to provide 4 required argu
 3. `table_name` - The name of the table within the database to store the documents & their embeddings.
 4. `embedding_service` - The Embeddings implementation which is used to generate the embeddings.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db = SpannerVectorStore(
     instance_id=INSTANCE,
     database_id=DATABASE,
@@ -166,11 +162,10 @@ db = SpannerVectorStore(
 
 To add documents in the vector store.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 from langchain_community.document_loaders import HNLoader
@@ -186,7 +181,7 @@ db.add_documents(documents, ids)
 
 To search documents in the vector store with similarity search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.similarity_search(query="Explain me vector store?", k=3)
 ```
 
@@ -194,7 +189,7 @@ db.similarity_search(query="Explain me vector store?", k=3)
 
 To search documents in the vector store with max marginal relevance search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.max_marginal_relevance_search("Testing the langchain integration with spanner", k=3)
 ```
 
@@ -202,7 +197,7 @@ db.max_marginal_relevance_search("Testing the langchain integration with spanner
 
 To remove documents from the vector store, use the IDs that correspond to the values in the \`row\_id\`\` column when initializing the VectorStore.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.delete(ids=["id1", "id2"])
 ```
 
@@ -210,18 +205,14 @@ db.delete(ids=["id1", "id2"])
 
 To remove documents from the vector store, you can utilize the documents themselves. The content column and metadata columns provided during VectorStore initialization will be used to find out the rows corresponding to the documents. Any matching rows will then be deleted.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 db.delete(documents=[documents[0], documents[1]])
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_spanner.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_spanner.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

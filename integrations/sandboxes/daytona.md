@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # DaytonaSandbox integration
 
 > Integrate with the DaytonaSandbox sandbox backend using LangChain Python.
@@ -10,21 +6,19 @@
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-daytona
-  ```
+```bash
+pip install langchain-daytona
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-daytona
-  ```
-</CodeGroup>
+```bash
+uv add langchain-daytona
+```
 
 ## Create a sandbox backend
 
-In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](/oss/python/deepagents/backends).
+In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](https://docs.langchain.com/oss/python/deepagents/backends).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from daytona import Daytona
 
 from langchain_daytona import DaytonaSandbox
@@ -38,7 +32,7 @@ print(result.output)
 
 ## Use with Deep Agents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from daytona import Daytona
 from langchain_anthropic import ChatAnthropic
 
@@ -68,16 +62,12 @@ result = agent.invoke(
 You are responsible for managing the sandbox lifecycle via the Daytona SDK.
 When you are done, stop or destroy the sandbox.
 
-See also: [Sandboxes](/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/daytona.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

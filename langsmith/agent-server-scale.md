@@ -1,37 +1,32 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure Agent Server for scale
-
-> Tune the Agent Server for self-hosted deployments—write load, read load, and example Helm configurations for different load patterns.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-scale)
+Tune the Agent Server for self-hosted deployments—write load, read load, and example Helm configurations for different load patterns.
 
 The default configuration for the LangSmith Agent Server is designed to handle substantial read and write load across a variety of different workloads. By following the best practices outlined below, you can tune your Agent Server to perform optimally for your specific workload. This page describes scaling considerations for the Agent Server on self-hosted deployments and provides example configurations.
 
-<Tip>
-  If you're not yet familiar with how API servers and queue workers operate at the container level, read the [runtime architecture](/langsmith/agent-server#runtime-architecture) overview first.
-</Tip>
+> [!TIP]
+> If you're not yet familiar with how API servers and queue workers operate at the container level, read the [runtime architecture](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) overview first.
 
-For [Cloud](/langsmith/cloud-platform-features#scaling), the platform autoscales automatically and the Helm configurations below do not apply.
+For [Cloud](https://docs.langchain.com/langsmith/cloud-platform-features#scaling), the platform autoscales automatically and the Helm configurations below do not apply.
 
 ## Request vs. run concurrency
 
 Two independent kinds of concurrency determine how the Agent Server scales, and they are controlled separately:
 
 * **Request concurrency** is how many API requests (creating runs, reading thread state, streaming results) the deployment serves at once. API servers handle requests asynchronously, and request concurrency scales horizontally with the number of API server replicas.
-* **Run concurrency** is how many runs execute at once. A single queue worker executes up to [`N_JOBS_PER_WORKER`](/langsmith/env-var-self-hosted) runs concurrently (default 10). Run concurrency is capped at the number of queue workers multiplied by `N_JOBS_PER_WORKER`.
+* **Run concurrency** is how many runs execute at once. A single queue worker executes up to [`N_JOBS_PER_WORKER`](https://docs.langchain.com/langsmith/env-var-self-hosted) runs concurrently (default 10). Run concurrency is capped at the number of queue workers multiplied by `N_JOBS_PER_WORKER`.
 
-Creating a run is a fast write request: the API server persists a pending run and returns immediately, without waiting for the run to execute. If every run slot is busy, additional runs wait in the [queue](/langsmith/agent-server#run-execution-lifecycle) until a slot frees. Raising `N_JOBS_PER_WORKER` or adding queue workers increases run throughput; it does not change how many requests the deployment can serve concurrently.
+Creating a run is a fast write request: the API server persists a pending run and returns immediately, without waiting for the run to execute. If every run slot is busy, additional runs wait in the [queue](https://docs.langchain.com/langsmith/agent-server#run-execution-lifecycle) until a slot frees. Raising `N_JOBS_PER_WORKER` or adding queue workers increases run throughput; it does not change how many requests the deployment can serve concurrently.
 
 ## Write load
 
 Write load is primarily driven by the following factors:
 
-* Creation of new [runs](/langsmith/background-run)
+* Creation of new [runs](https://docs.langchain.com/langsmith/background-run)
 * Creation of new checkpoints during run execution
 * Writing to long term memory
-* Creation of new [threads](/langsmith/use-threads)
-* Creation of new [assistants](/langsmith/assistants)
+* Creation of new [threads](https://docs.langchain.com/langsmith/use-threads)
+* Creation of new [assistants](https://docs.langchain.com/langsmith/assistants)
 * Deletion of runs, checkpoints, threads, assistants and cron jobs
 
 The following components are primarily responsible for handling write load:
@@ -43,7 +38,7 @@ The following components are primarily responsible for handling write load:
 
 ### Tune `N_JOBS_PER_WORKER` based on assistant characteristics
 
-The default value of [`N_JOBS_PER_WORKER`](/langsmith/env-var-self-hosted) is 10. You can change this value to scale the maximum number of runs that can be executed at a time by a single queue worker based on the characteristics of your assistant.
+The default value of [`N_JOBS_PER_WORKER`](https://docs.langchain.com/langsmith/env-var-self-hosted) is 10. You can change this value to scale the maximum number of runs that can be executed at a time by a single queue worker based on the characteristics of your assistant.
 
 Some general guidelines for changing `N_JOBS_PER_WORKER`:
 
@@ -59,7 +54,7 @@ Avoid synchronous blocking operations in your code and prefer asynchronous opera
 
 For example, consider an application that needs to sleep for 1 second. Instead of using synchronous code like this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import time
 
 def my_function():
@@ -68,7 +63,7 @@ def my_function():
 
 Prefer asynchronous code like this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 
 async def my_function():
@@ -79,11 +74,11 @@ If an assistant requires synchronous blocking operations, run those in `asyncio.
 
 ### Minimize redundant checkpointing
 
-Minimize redundant checkpointing by setting [`durability`](/oss/python/langgraph/checkpointers#durability-modes) to the minimum value necessary to ensure your data is durable.
+Minimize redundant checkpointing by setting [`durability`](https://docs.langchain.com/oss/python/langgraph/checkpointers#durability-modes) to the minimum value necessary to ensure your data is durable.
 
 The default durability mode is `"async"`, meaning checkpoints are written after each step asynchronously. If an assistant needs to persist only the final state of the run, `durability` can be set to `"exit"`, storing only the final state of the run. This can be set when creating the run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import get_client
 
 client = get_client(url=<DEPLOYMENT_URL>)
@@ -99,7 +94,7 @@ run = await client.runs.create(
 
 By default, the API server manages the queue and does not use queue workers. Enable queue workers by setting `queue.enabled` to `true`:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   enabled: true
 ```
@@ -108,7 +103,7 @@ This offloads queue management from the API server to dedicated queue workers, r
 
 ### Size jobs for expected throughput
 
-This section sizes run-execution capacity (queue workers), which is separate from request-serving capacity (API server replicas). For more information, see [Request vs. run concurrency](#request-vs-run-concurrency).
+This section sizes run-execution capacity (queue workers), which is separate from request-serving capacity (API server replicas). For more information, see [Request vs. run concurrency](https://docs.langchain.com/langsmith/agent-server-scale#request-vs-run-concurrency).
 
 The more runs you execute in parallel, the more jobs you will need to handle the load. There are two main parameters to scale the available jobs:
 
@@ -141,9 +136,9 @@ Autoscaling is disabled by default, but should be configured for bursty workload
 
 Read load is primarily driven by the following factors:
 
-* Getting the results of a [run](/langsmith/background-run)
-* Getting the state of a [thread](/langsmith/use-threads)
-* Searching for [runs](/langsmith/background-run), [threads](/langsmith/use-threads), [cron jobs](/langsmith/cron-jobs) and [assistants](/langsmith/assistants)
+* Getting the results of a [run](https://docs.langchain.com/langsmith/background-run)
+* Getting the state of a [thread](https://docs.langchain.com/langsmith/use-threads)
+* Searching for [runs](https://docs.langchain.com/langsmith/background-run), [threads](https://docs.langchain.com/langsmith/use-threads), [cron jobs](https://docs.langchain.com/langsmith/cron-jobs) and [assistants](https://docs.langchain.com/langsmith/assistants)
 * Retrieving checkpoints and long term memory
 
 The following components are primarily responsible for handling read load:
@@ -154,11 +149,11 @@ The following components are primarily responsible for handling read load:
 
 ### Use filtering to reduce results per request
 
-[Agent Server](/langsmith/agent-server) provides a search API for each resource type. These APIs implement pagination by default and offer many filtering options. Use filtering to reduce the number of resources returned per request and improve performance.
+[Agent Server](https://docs.langchain.com/langsmith/agent-server) provides a search API for each resource type. These APIs implement pagination by default and offer many filtering options. Use filtering to reduce the number of resources returned per request and improve performance.
 
 ### Set TTLs to automatically delete old data
 
-Set a [TTL on threads](/langsmith/configure-ttl) to automatically clean up old data. Runs and checkpoints are automatically deleted when the associated thread is deleted.
+Set a [TTL on threads](https://docs.langchain.com/langsmith/configure-ttl) to automatically clean up old data. Runs and checkpoints are automatically deleted when the associated thread is deleted.
 
 ### Avoid polling; use `/join` to monitor a run
 
@@ -172,21 +167,20 @@ Autoscaling is disabled by default, but should be configured for bursty workload
 
 ## Example configurations
 
-<Note>
-  The exact optimal configuration depends on your application complexity, request patterns, and data requirements. Use the following examples in combination with the information in the previous sections and your specific usage to update your deployment configuration as needed. If you have any questions, contact support via [support.langchain.com](https://support.langchain.com).
-</Note>
+> [!NOTE]
+> The exact optimal configuration depends on your application complexity, request patterns, and data requirements. Use the following examples in combination with the information in the previous sections and your specific usage to update your deployment configuration as needed. If you have any questions, contact support via [support.langchain.com](https://support.langchain.com).
 
 The following table provides an overview comparing different Agent Server configurations for various load patterns (read requests per second / write requests per second) and standard assistant characteristics (average run execution time of 1 second, moderate CPU and memory usage). The request rates drive the required steady-state run throughput, which is sized through queue workers and `N_JOBS_PER_WORKER`, while API server replicas are sized to serve the request volume itself:
 
-|                                                                                                                          | **[Low / low](#low-reads-low-writes)** | **[Low / high](#low-reads-high-writes)** | **[High / low](#high-reads-low-writes)** | [Medium / medium](#medium-reads-medium-writes) | [High / high](#high-reads-high-writes) |
-| :----------------------------------------------------------------------------------------------------------------------- | :------------------------------------- | :--------------------------------------- | :--------------------------------------- | :--------------------------------------------- | :------------------------------------- |
-| <Tooltip tip="Number of write requests being processed by the deployment per second">Write requests per second</Tooltip> | 5                                      | 5                                        | 500                                      | 50                                             | 500                                    |
-| <Tooltip tip="Number of read requests being processed by the deployment per second">Read requests per second</Tooltip>   | 5                                      | 500                                      | 5                                        | 50                                             | 500                                    |
-| **API servers**<br />(1 CPU, 2Gi per server)                                                                             | 1 (default)                            | 6                                        | 10                                       | 3                                              | 15                                     |
-| **Queue workers**<br />(1 CPU, 2Gi per worker)                                                                           | 1 (default)                            | 10                                       | 1 (default)                              | 5                                              | 10                                     |
-| **`N_JOBS_PER_WORKER`**                                                                                                  | 10 (default)                           | 50                                       | 10                                       | 10                                             | 50                                     |
-| **Redis resources**                                                                                                      | 2 Gi (default)                         | 2 Gi (default)                           | 2 Gi (default)                           | 2 Gi (default)                                 | 2 Gi (default)                         |
-| **Postgres resources**                                                                                                   | 2 CPU<br />8 Gi (default)              | 4 CPU<br />16 Gi memory                  | 4 CPU<br />16 Gi                         | 4 CPU<br />16 Gi memory                        | 8 CPU<br />32 Gi memory                |
+|                                                | **[Low / low](https://docs.langchain.com/langsmith/agent-server-scale#low-reads-low-writes)** | **[Low / high](https://docs.langchain.com/langsmith/agent-server-scale#low-reads-high-writes)** | **[High / low](https://docs.langchain.com/langsmith/agent-server-scale#high-reads-low-writes)** | [Medium / medium](https://docs.langchain.com/langsmith/agent-server-scale#medium-reads-medium-writes) | [High / high](https://docs.langchain.com/langsmith/agent-server-scale#high-reads-high-writes) |
+| :--------------------------------------------- | :------------------------------------- | :--------------------------------------- | :--------------------------------------- | :--------------------------------------------- | :------------------------------------- |
+| Write requests per second   | 5                                      | 5                                        | 500                                      | 50                                             | 500                                    |
+| Read requests per second    | 5                                      | 500                                      | 5                                        | 50                                             | 500                                    |
+| **API servers**<br />(1 CPU, 2Gi per server)   | 1 (default)                            | 6                                        | 10                                       | 3                                              | 15                                     |
+| **Queue workers**<br />(1 CPU, 2Gi per worker) | 1 (default)                            | 10                                       | 1 (default)                              | 5                                              | 10                                     |
+| **`N_JOBS_PER_WORKER`**                        | 10 (default)                           | 50                                       | 10                                       | 10                                             | 50                                     |
+| **Redis resources**                            | 2 Gi (default)                         | 2 Gi (default)                           | 2 Gi (default)                           | 2 Gi (default)                                 | 2 Gi (default)                         |
+| **Postgres resources**                         | 2 CPU<br />8 Gi (default)              | 4 CPU<br />16 Gi memory                  | 4 CPU<br />16 Gi                         | 4 CPU<br />16 Gi memory                        | 8 CPU<br />32 Gi memory                |
 
 Load levels in the examples are defined as:
 
@@ -196,7 +190,7 @@ Load levels in the examples are defined as:
 
 ### Low reads, low writes
 
-The default [LangSmith Deployment](/langsmith/deployment) configuration will handle this load. No custom resource configuration is needed here.
+The default [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) configuration will handle this load. No custom resource configuration is needed here.
 
 ### Low reads, high writes
 
@@ -204,7 +198,7 @@ You have a high volume of write requests (500 per second) being processed by you
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 # Example configuration for low reads, high writes (5 read/500 write requests per second)
 api:
   replicas: 6
@@ -252,7 +246,7 @@ You have a high volume of read requests (500 per second) but relatively few writ
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 # Example configuration for high reads, low writes (500 read/5 write requests per second)
 api:
   replicas: 10
@@ -299,7 +293,7 @@ This is a balanced configuration that should handle moderate read and write load
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 # Example configuration for medium reads, medium writes (50 read/50 write requests per second)
 api:
   replicas: 3
@@ -344,7 +338,7 @@ You have high volumes of both read and write requests (500 read/500 write reques
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 # Example configuration for high reads, high writes (500 read/500 write requests per second)
 api:
   replicas: 15
@@ -392,7 +386,7 @@ If your deployment experiences bursty traffic, you can enable autoscaling to sca
 
 Here is a sample configuration for autoscaling for high reads and high writes:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 api:
   autoscaling:
     enabled: true
@@ -406,18 +400,13 @@ queue:
     maxReplicas: 20
 ```
 
-<Note>
-  Ensure that your deployment environment has sufficient resources to scale to the recommended size. Monitor your applications and infrastructure to ensure optimal performance. Consider implementing monitoring and alerting to track resource usage and application performance.
-</Note>
+> [!NOTE]
+> Ensure that your deployment environment has sufficient resources to scale to the recommended size. Monitor your applications and infrastructure to ensure optimal performance. Consider implementing monitoring and alerting to track resource usage and application performance.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/agent-server-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

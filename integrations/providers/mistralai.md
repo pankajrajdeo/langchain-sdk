@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MistralAI integrations
 
 > Integrate with MistralAI using LangChain Python.
@@ -14,23 +10,21 @@ A valid [API key](https://console.mistral.ai/users/api-keys/) is needed to commu
 
 You will also need the `langchain-mistralai` package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-mistralai
-  ```
+```bash
+pip install langchain-mistralai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-mistralai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-mistralai
+```
 
 ## Chat models
 
 ### ChatMistralAI
 
-See a [usage example](/oss/python/integrations/chat/mistralai).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/mistralai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mistralai.chat_models import ChatMistralAI
 ```
 
@@ -38,20 +32,16 @@ from langchain_mistralai.chat_models import ChatMistralAI
 
 ### MistralAIEmbeddings
 
-See a [usage example](/oss/python/integrations/embeddings/mistralai).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mistralai import MistralAIEmbeddings
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mistralai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

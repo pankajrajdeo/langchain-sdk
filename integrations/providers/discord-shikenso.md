@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Discord integrations
 
 > Integrate with Discord using LangChain Python.
@@ -12,19 +8,17 @@
 
 Install the `langchain-discord-shikenso` package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-discord-shikenso
-  ```
+```bash
+pip install langchain-discord-shikenso
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-discord-shikenso
-  ```
-</CodeGroup>
+```bash
+uv add langchain-discord-shikenso
+```
 
 You must provide a bot token via environment variable so the tools can authenticate with the Discord API:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export DISCORD_BOT_TOKEN="your-discord-bot-token"
 ```
 
@@ -34,9 +28,9 @@ If `DISCORD_BOT_TOKEN` is not set, the tools will raise a `ValueError` when inst
 
 ## Tools
 
-Below is a snippet showing how you can read and send messages in Discord. For more details, see the [documentation for Discord tools](/oss/python/integrations/tools/discord).
+Below is a snippet showing how you can read and send messages in Discord. For more details, see the [documentation for Discord tools](https://docs.langchain.com/oss/python/integrations/tools/discord).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_discord.tools.discord_read_messages import DiscordReadMessages
 from langchain_discord.tools.discord_send_messages import DiscordSendMessage
 
@@ -57,9 +51,9 @@ print(send_result)
 
 ## Toolkit
 
-`DiscordToolkit` groups multiple Discord-related tools into a single interface. For a usage example, see [the Discord toolkit docs](/oss/python/integrations/tools/discord).
+`DiscordToolkit` groups multiple Discord-related tools into a single interface. For a usage example, see [the Discord toolkit docs](https://docs.langchain.com/oss/python/integrations/tools/discord).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_discord.toolkits import DiscordToolkit
 
 toolkit = DiscordToolkit()
@@ -78,12 +72,8 @@ Check the [Discord Developer Docs](https://discord.com/developers/docs/intro) fo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/discord-shikenso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/discord-shikenso.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

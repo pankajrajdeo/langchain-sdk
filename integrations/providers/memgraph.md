@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Memgraph integrations
 
 > Integrate with Memgraph using LangChain Python.
@@ -18,45 +14,40 @@
 There exists a wrapper around Memgraph database that allows you to generate Cypher statements based on the user input
 and use them to retrieve relevant information from the database.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_memgraph.chains.graph_qa import MemgraphQAChain
 from langchain_memgraph.graphs.memgraph import MemgraphLangChain
 ```
 
-See a [usage example](/oss/python/integrations/graphs/memgraph)
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/memgraph)
 
 ## Constructing a knowledge graph from unstructured data
 
 You can use the integration to construct a knowledge graph from unstructured data.
 
-<Warning>
-  The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_memgraph.graphs.memgraph import MemgraphLangChain
 from langchain_neo4j import LLMGraphTransformer
 ```
 
-See a [usage example](/oss/python/integrations/graphs/memgraph)
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/memgraph)
 
 ## Memgraph tools and toolkit
 
 Memgraph also provides a toolkit that allows you to interact with the Memgraph database.
 See a [usage example](https://github.com/memgraph/langchain-memgraph).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_memgraph import MemgraphToolkit
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/memgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/memgraph.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

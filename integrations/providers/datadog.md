@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Datadog tracing integrations
 
 > Integrate with Datadog tracing using LangChain Python.
@@ -38,15 +34,13 @@ docker run -d --cgroupns host \
 
 2. Install the Datadog APM Python library.
 
-<CodeGroup>
-  ```shell pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "ddtrace>=1.17"
-  ```
+```shell
+pip install "ddtrace>=1.17"
+```
 
-  ```shell uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "ddtrace>=1.17"
-  ```
-</CodeGroup>
+```shell
+uv add "ddtrace>=1.17"
+```
 
 3. The LangChain integration can be enabled automatically when you prefix your LangChain Python application command with `ddtrace-run`:
 
@@ -60,7 +54,7 @@ Additionally, the LangChain integration can be enabled programmatically by addin
 
 Note that using `ddtrace-run` or `patch_all()` will also enable the `requests` and `aiohttp` integrations which trace HTTP requests to LLM providers, as well as the `openai` integration which traces requests to the OpenAI library.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ddtrace import config, patch
 
 # Note: be sure to configure the integration before calling `patch()`!
@@ -99,12 +93,8 @@ Need help? Create an issue on [ddtrace](https://github.com/DataDog/dd-trace-py) 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/datadog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/datadog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

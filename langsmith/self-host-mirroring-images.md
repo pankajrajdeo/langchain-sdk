@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Mirror images for your LangSmith installation
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-mirroring-images)
 By default, LangSmith will pull images from our public Docker registry. However, if you are running LangSmith in an environment that does not have internet access, or if you would like to use a private Docker registry, you can mirror the images to your own registry and then configure your LangSmith installation to use those images.
 
 ## Requirements
@@ -14,17 +10,16 @@ By default, LangSmith will pull images from our public Docker registry. However,
 
 ## Mirroring the images
 
-<Note>
-  **Fewer images from LangSmith 0.16.21 (chart `0.16.0-rc.17`) onward.** The platform backend, playground, host backend, and the Fleet tool and trigger servers now all run from the single `langsmith-backend` image, so you no longer need to mirror `langsmith-go-backend`, `langsmith-playground`, `hosted-langserve-backend`, `agent-builder-tool-server`, or `agent-builder-trigger-server` (or their `-fips` variants). The corresponding `values.yaml` keys: `platformBackendImage`, `playgroundImage`, `hostBackendImage`, `fleetToolServerImage`, and `fleetTriggerServerImage`, have been removed from the chart; any values you still set for them are ignored.
-
-  If you are installing an **earlier** version, keep mirroring those images and setting those keys as before.
-</Note>
+> [!NOTE]
+> **Fewer images from LangSmith 0.16.21 (chart `0.16.0-rc.17`) onward.** The platform backend, playground, host backend, and the Fleet tool and trigger servers now all run from the single `langsmith-backend` image, so you no longer need to mirror `langsmith-go-backend`, `langsmith-playground`, `hosted-langserve-backend`, `agent-builder-tool-server`, or `agent-builder-trigger-server` (or their `-fips` variants). The corresponding `values.yaml` keys: `platformBackendImage`, `playgroundImage`, `hostBackendImage`, `fleetToolServerImage`, and `fleetTriggerServerImage`, have been removed from the chart; any values you still set for them are ignored.
+>
+> If you are installing an **earlier** version, keep mirroring those images and setting those keys as before.
 
 For your convenience, we have provided a script that will mirror the images for you. You can find the script in the [LangSmith Helm Chart repository](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/mirror_langsmith_images.sh)
 
 To use the script, you will need to run the script with the following command specifying your registry and platform:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 bash mirror_langsmith_images.sh <your-registry> [<platform>]
 ```
 
@@ -32,7 +27,7 @@ Where `<your-registry>` is the URL of your Docker registry (e.g. `myregistry.com
 
 For example, if your registry is `myregistry.com`, your platform is `linux/arm64`, and you want to use the latest version of the images, you would run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 bash mirror_langsmith_images.sh --registry myregistry --platform linux/arm64 --version 0.10.66
 ```
 
@@ -42,7 +37,7 @@ Alternatively, you can pull, mirror, and push the images manually. The images th
 
 Here is an example of how to mirror the images using Docker:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Pull the images from the public registry
 docker pull langchain/langsmith-backend:latest
 docker tag langchain/langsmith-backend:latest <your-registry>/langsmith-backend:latest
@@ -53,9 +48,9 @@ You will need to repeat this for each image that you want to mirror.
 
 ## Configuration
 
-Once the images are mirrored, you will need to configure your LangSmith installation to use the mirrored images. You can do this by modifying the `values.yaml` file for your LangSmith Helm Chart installation. Replace tag with the [LangSmith version](/langsmith/self-hosted-changelog) you want to deploy. The following example uses `0.16.21`.
+Once the images are mirrored, you will need to configure your LangSmith installation to use the mirrored images. You can do this by modifying the `values.yaml` file for your LangSmith Helm Chart installation. Replace tag with the [LangSmith version](https://docs.langchain.com/langsmith/self-hosted-changelog) you want to deploy. The following example uses `0.16.21`.
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 images:
   imagePullSecrets: [] # Add your image pull secrets here if needed
   registry: "" # Set this to your registry URL if you mirrored all images to the same registry using our script. Then you can remove the repository prefix from the images below.
@@ -91,15 +86,15 @@ images:
 
 ## Additional images for Sandboxes
 
-If you enable [Sandboxes](/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), also mirror the sandbox runtime image. The sandbox runtime image is published for `linux/amd64`.
+If you enable [Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), also mirror the sandbox runtime image. The sandbox runtime image is published for `linux/amd64`.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 bash mirror_langsmith_images.sh --registry myregistry --platform linux/amd64 --version 0.16.0 --include-sandboxes
 ```
 
 Then, configure the sandbox runtime image in your `values.yaml`:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 images:
   sandboxHostImage:
     repository: "(your-registry)/langchain/sandbox-host"
@@ -117,7 +112,7 @@ The `--include-sandboxes` flag mirrors the LangSmith-owned sandbox runtime image
 
 Then, configure the corresponding image overrides:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 images:
   juicefsCSIImage:
     repository: "(your-registry)/juicedata/juicefs-csi-driver"
@@ -134,11 +129,11 @@ The chart does not set `images.juicefsMountImage` by default. When it is unset, 
 
 ## Additional images for Engine
 
-[Engine](/langsmith/deploy-self-hosted-full-platform#enable-engine) runs on `langsmith-insights-engine`, which the mirroring script includes by default, and requires Sandboxes, so mirror with `--include-sandboxes` and configure the sandbox runtime image as described in [Additional images for Sandboxes](#additional-images-for-sandboxes).
+[Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine) runs on `langsmith-insights-engine`, which the mirroring script includes by default, and requires Sandboxes, so mirror with `--include-sandboxes` and configure the sandbox runtime image as described in [Additional images for Sandboxes](https://docs.langchain.com/langsmith/self-host-mirroring-images#additional-images-for-sandboxes).
 
 Then, point the Engine and Insights image at your mirror:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 images:
   engineInsightsAgentImage:
     repository: "(your-registry)/langchain/langsmith-insights-engine"
@@ -146,11 +141,10 @@ images:
     tag: "0.16.0"
 ```
 
-<Note>
-  The repository name must still end in `langsmith-insights-engine`; the chart validates it to catch installs left pointing at the retired `langsmith-clio` image, which serves only Insights.
-</Note>
+> [!NOTE]
+> The repository name must still end in `langsmith-insights-engine`; the chart validates it to catch installs left pointing at the retired `langsmith-clio` image, which serves only Insights.
 
-Engine also depends on LangSmith Intelligence, which is a network dependency rather than an image, so mirroring does not remove it. See [LangSmith Intelligence for Engine](/langsmith/self-host-egress#langsmith-intelligence-for-engine).
+Engine also depends on LangSmith Intelligence, which is a network dependency rather than an image, so mirroring does not remove it. See [LangSmith Intelligence for Engine](https://docs.langchain.com/langsmith/self-host-egress#langsmith-intelligence-for-engine).
 
 ## Additional images for Fleet and Insights
 
@@ -163,7 +157,7 @@ You must mirror these additional images:
 
 Then override the operator templates in your `values.yaml` to use your mirrored images:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 operator:
   templates:
     redis: |
@@ -248,19 +242,18 @@ operator:
 
 Replace `(your-registry)` with your registry URL. The template variables (`${service_name}`, `${namespace}`, `${max_connections}`, `${storage_gi}`) are replaced by the operator at runtime and must be kept as-is.
 
-Once configured, you will need to update your LangSmith installation. You can follow our upgrade guide here: [Upgrading LangSmith](/langsmith/self-host-upgrades). If your upgrade is successful, your LangSmith instance should now be using the mirrored images from your Docker registry.
+Once configured, you will need to update your LangSmith installation. You can follow our upgrade guide here: [Upgrading LangSmith](https://docs.langchain.com/langsmith/self-host-upgrades). If your upgrade is successful, your LangSmith instance should now be using the mirrored images from your Docker registry.
 
 ## Verifying image signatures
 
-<Note>
-  Image signatures are available **starting with v15** (LangSmith app version `0.15.x` and later). Earlier releases on the `v14-stable` and older channels are not signed and cannot be verified with the steps below.
-</Note>
+> [!NOTE]
+> Image signatures are available **starting with v15** (LangSmith app version `0.15.x` and later). Earlier releases on the `v14-stable` and older channels are not signed and cannot be verified with the steps below.
 
 Stable-channel LangSmith images on `docker.io/langchain/*` are signed at release time using keyless [Sigstore/Cosign](https://docs.sigstore.dev/cosign/overview/) from the release workflow. The signing identity is bound to a specific GitHub Actions workflow, run, and commit, so the signature attests not just that the image is authentic but that it was produced by the stable-branch release pipeline running in `langchain-ai/langchainplus`. You can verify a signature before pulling or mirroring an image, and again after mirroring to confirm the digest you mirrored matches what we signed.
 
 Install `cosign` ([installation guide](https://docs.sigstore.dev/cosign/system_config/installation/)), then verify any tag:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cosign verify \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity-regexp 'https://github\.com/langchain-ai/langchainplus/\.github/workflows/release_self_hosted_on_version_bump\.yaml@refs/heads/v[0-9]+-stable' \
@@ -279,7 +272,7 @@ The same command works against any of the released images by substituting the re
 
 For stricter verification — for example, pinning to a single stable branch or a specific commit — drop the regex and supply the exact certificate identity. Each signature's certificate also carries the workflow run ID and commit SHA as Subject Alternative Name extensions, so you can constrain to a specific release:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cosign verify \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
   --certificate-identity 'https://github.com/langchain-ai/langchainplus/.github/workflows/release_self_hosted_on_version_bump.yaml@refs/heads/v15-stable' \
@@ -288,7 +281,7 @@ cosign verify \
 
 To inspect the certificate's claims (workflow run, commit, runner), download the attestation and decode the embedded certificate:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cosign download attestation docker.io/langchain/langsmith-backend:<tag>
 ```
 
@@ -298,7 +291,7 @@ Released images also carry signed CycloneDX software bill of materials (SBOM) at
 
 The per-architecture SBOMs are also attached to the multi-architecture index digest, so you can verify against a bare tag directly:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cosign verify-attestation \
   --type cyclonedx \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
@@ -314,14 +307,14 @@ To feed an SBOM into a vulnerability scanner or SBOM management tool, extract th
 
 List the per-architecture digests for a tag:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker buildx imagetools inspect --raw docker.io/langchain/langsmith-backend:<tag> \
   | jq -r '.manifests[] | select(.platform.os == "linux") | .digest + "  " + .platform.architecture'
 ```
 
 Then verify that digest and save the decoded predicate — a standard CycloneDX document listing every package in the image — to a file:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 cosign verify-attestation \
   --type cyclonedx \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
@@ -332,18 +325,13 @@ cosign verify-attestation \
 
 You can pass the resulting `langsmith-backend.cdx.json` directly to scanners such as [Grype](https://github.com/anchore/grype) (`grype sbom:langsmith-backend.cdx.json`) or [Trivy](https://trivy.dev/) (`trivy sbom langsmith-backend.cdx.json`).
 
-<Note>
-  Extracting the SBOM through `cosign verify-attestation`, rather than `cosign download attestation`, ensures you only ever consume an SBOM whose signature and signing identity have been verified.
-</Note>
+> [!NOTE]
+> Extracting the SBOM through `cosign verify-attestation`, rather than `cosign download attestation`, ensures you only ever consume an SBOM whose signature and signing identity have been verified.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-mirroring-images.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-mirroring-images.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

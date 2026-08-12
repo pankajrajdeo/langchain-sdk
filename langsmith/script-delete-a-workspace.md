@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Delete workspaces
-
-<Note>
-  Deleting a workspace is supported **nativley in LangSmith Self-Hosted v0.10**. View [instructions for deleting a workspace](/langsmith/set-up-hierarchy#delete-a-workspace).
-
-  Follow the guide below for Self-Hosted versions before v0.10.
-</Note>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-delete-a-workspace)
+> [!NOTE]
+> Deleting a workspace is supported **nativley in LangSmith Self-Hosted v0.10**. View [instructions for deleting a workspace](https://docs.langchain.com/langsmith/set-up-hierarchy#delete-a-workspace).
+>
+> Follow the guide below for Self-Hosted versions before v0.10.
 
 The LangSmith UI does not currently support the deletion of an individual workspace from an organization. This, however, can be accomplished by directly removing all traces from all materialized views in ClickHouse (except the runs\_history views) and the runs and feedbacks tables and then removing the Workspace from the Postgres tenants table.
 
@@ -67,13 +62,13 @@ Ensure you have the following tools/items ready.
 
 Run the following command to run the workspace removal script:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_workspace.sh <postgres_url> <clickhouse_url> --workspace_id <workspace_id>
 ```
 
 For example, if you are using the bundled version with port-forwarding, the command would look like:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_workspace.sh "postgres://postgres:postgres@localhost:5432/postgres" "clickhouse://default:password@localhost:8123/default" --workspace_id 4ec70ec7-0808-416a-b836-7100aeec934b
 ```
 
@@ -81,12 +76,8 @@ If you visit the LangSmith UI, you should now see workspace is deleted.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-a-workspace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-a-workspace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

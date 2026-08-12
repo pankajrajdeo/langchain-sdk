@@ -1,110 +1,37 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Model providers
-
-The [Playground](/langsmith/prompt-engineering-concepts#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/playground-model-providers)
+The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
 
 Use this page for a list of the available providers and their configuration options:
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-  <a href="#amazon-bedrock" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/bedrock.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=d6fc326f6c429075add5a742c87d12b1" alt="" noZoom width="65" height="65" data-path="images/providers/light/bedrock.svg" />
+- [Amazon Bedrock](https://docs.langchain.com/langsmith/playground-model-providers#amazon-bedrock)
 
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/bedrock.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=dc593829dc9ff5ad061f991e08bbebc8" alt="" noZoom width="65" height="65" data-path="images/providers/dark/bedrock.svg" />
+- [Anthropic](https://docs.langchain.com/langsmith/playground-model-providers#anthropic)
 
-    <span className="font-semibold">Amazon Bedrock</span>
-  </a>
+- [Azure OpenAI](https://docs.langchain.com/langsmith/playground-model-providers#azure-openai)
 
-  <a href="#anthropic" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/anthropic.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=f681e2a9025c2e1104d4260c6b27d638" alt="" noZoom width="65" height="65" data-path="images/providers/light/anthropic.svg" />
+- [DeepSeek](https://docs.langchain.com/langsmith/playground-model-providers#deepseek)
 
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/anthropic.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=02fc4a5cd4c124dbec46869777a15f34" alt="" noZoom width="65" height="65" data-path="images/providers/dark/anthropic.svg" />
+- [Fireworks](https://docs.langchain.com/langsmith/playground-model-providers#fireworks)
 
-    <span className="font-semibold">Anthropic</span>
-  </a>
+- [Google Gemini](https://docs.langchain.com/langsmith/playground-model-providers#google-gemini)
 
-  <a href="#azure-openai" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/microsoft.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=9189910834f230f7f94115d88e7ec4bf" alt="" noZoom width="65" height="65" data-path="images/providers/light/microsoft.svg" />
+- [Google Vertex AI](https://docs.langchain.com/langsmith/playground-model-providers#google-vertex-ai)
 
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/microsoft.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=36998a752a161152e010bc2c9b421567" alt="" noZoom width="65" height="65" data-path="images/providers/dark/microsoft.svg" />
+- [Groq](https://docs.langchain.com/langsmith/playground-model-providers#groq)
 
-    <span className="font-semibold">Azure OpenAI</span>
-  </a>
+- [Mistral AI](https://docs.langchain.com/langsmith/playground-model-providers#mistral-ai)
 
-  <a href="#deepseek" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/deepseek.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=5a11e956e2ba24fd746aebd929ee1a5e" alt="" noZoom width="65" height="65" data-path="images/providers/light/deepseek.svg" />
+- [OpenAI](https://docs.langchain.com/langsmith/playground-model-providers#openai)
 
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/deepseek.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=0cb62f13b3b37e89c35060913ca67515" alt="" noZoom width="65" height="65" data-path="images/providers/dark/deepseek.svg" />
+<a href="https://docs.langchain.com/langsmith/playground-model-providers#openai-compatible-endpoint">
 
-    <span className="font-semibold">DeepSeek</span>
-  </a>
+  <span>OpenAI compatible endpoint</span>
+</a>
 
-  <a href="#fireworks" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/fireworks.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=a0b3bbc0a57a2753099203eb71ed191b" alt="" noZoom width="65" height="65" data-path="images/providers/light/fireworks.svg" />
+- [XAI](https://docs.langchain.com/langsmith/playground-model-providers#xai)
 
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/fireworks.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=b8d8b361e57f9f8547170901dd7df346" alt="" noZoom width="65" height="65" data-path="images/providers/dark/fireworks.svg" />
-
-    <span className="font-semibold">Fireworks</span>
-  </a>
-
-  <a href="#google-gemini" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/gemini.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=486f57c43a26c9661700c37d0f575c05" alt="" noZoom width="65" height="65" data-path="images/providers/light/gemini.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/gemini.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=6436cb2ebecd9119e486f81fb2fdd360" alt="" noZoom width="65" height="65" data-path="images/providers/dark/gemini.svg" />
-
-    <span className="font-semibold">Google Gemini</span>
-  </a>
-
-  <a href="#google-vertex-ai" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/gemini.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=486f57c43a26c9661700c37d0f575c05" alt="" noZoom width="65" height="65" data-path="images/providers/light/gemini.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/gemini.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=6436cb2ebecd9119e486f81fb2fdd360" alt="" noZoom width="65" height="65" data-path="images/providers/dark/gemini.svg" />
-
-    <span className="font-semibold">Google Vertex AI</span>
-  </a>
-
-  <a href="#groq" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/groq.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=3f3d47f8a0619a4b2a81ecf11743caf1" alt="" noZoom width="65" height="65" data-path="images/providers/light/groq.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/groq.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=14b1b2fbe2756bf8b407684f33ffa722" alt="" noZoom width="65" height="65" data-path="images/providers/dark/groq.svg" />
-
-    <span className="font-semibold">Groq</span>
-  </a>
-
-  <a href="#mistral-ai" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/mistral.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=2b060bfbf269ab1b7f41f3a835f7a0b6" alt="" noZoom width="65" height="65" data-path="images/providers/light/mistral.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/mistral.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=59bde8ab2250b2ba2deaa84b74a66e1b" alt="" noZoom width="65" height="65" data-path="images/providers/dark/mistral.svg" />
-
-    <span className="font-semibold">Mistral AI</span>
-  </a>
-
-  <a href="#openai" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/openai.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=fb29ba01edf0644930f3eda68ab6c0c2" alt="" noZoom width="65" height="67" data-path="images/providers/light/openai.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/openai.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=ad31e0e26cb456a8fa3cddea3bac876e" alt="" noZoom width="65" height="67" data-path="images/providers/dark/openai.svg" />
-
-    <span className="font-semibold">OpenAI</span>
-  </a>
-
-  <a href="#openai-compatible-endpoint" className="flex items-center justify-center gap-2 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <Icon icon="link" iconType="solid" className="w-5 h-5 flex-shrink-0 mx-1" />
-
-    <span className="font-semibold">OpenAI compatible endpoint</span>
-  </a>
-
-  <a href="#xai" className="flex items-center justify-center gap-1.5 p-2 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 no-underline">
-    <img className="block dark:hidden w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/z7oQGiHwXv52HwOy/images/providers/light/xai.svg?fit=max&auto=format&n=z7oQGiHwXv52HwOy&q=85&s=9e2e1244434658c80b07b419d4af6db9" alt="" noZoom width="65" height="65" data-path="images/providers/light/xai.svg" />
-
-    <img className="hidden dark:block w-5 h-5" src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/dark/xai.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=4d6a343007a7831ce03cfef3e78eebc6" alt="" noZoom width="65" height="65" data-path="images/providers/dark/xai.svg" />
-
-    <span className="font-semibold">XAI</span>
-  </a>
-</div>
-
-For details on creating and managing model configurations, refer to the [Configure prompt settings](/langsmith/managing-model-configurations) page.
+For details on creating and managing model configurations, refer to the [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations) page.
 
 ## Amazon Bedrock
 
@@ -116,9 +43,8 @@ Amazon Bedrock supports two authentication methods. **IAM trusted entity is the 
 
 #### IAM trusted entity (recommended)
 
-<Note>
-  **Not applicable for [self-hosted LangSmith](/langsmith/self-hosted).** Use Access Keys (or the Bedrock API Key) instead.
-</Note>
+> [!NOTE]
+> **Not applicable for [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted).** Use Access Keys (or the Bedrock API Key) instead.
 
 With IAM trusted entity authentication, you create an IAM role in your AWS account and allow LangSmith to assume it. No access keys are stored in LangSmith. Instead, LangSmith uses [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) to assume the role on each request.
 
@@ -127,7 +53,7 @@ To set this up:
 1. Create an IAM role in your AWS account with permissions to invoke Bedrock models (e.g., `bedrock:InvokeModel`).
 2. Add a trust policy that allows LangSmith's AWS account (`808407022534`) to assume the role, using your LangSmith workspace ID as the external ID:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -147,13 +73,12 @@ To set this up:
 }
 ```
 
-<Tip>
-  You can find your workspace ID in your [LangSmith workspace settings](https://smith.langchain.com/settings).
-</Tip>
+> [!TIP]
+> You can find your workspace ID in your [LangSmith workspace settings](https://smith.langchain.com/settings).
 
 3. In the LangSmith Playground, open the Bedrock provider's secrets configuration by clicking the **Key** icon (the IAM Trusted Entity option is not available in the model configuration dropdown itself). Then expand the **IAM Trusted Entity** section and enter the ARN of the role you created.
 
-   <img src="https://mintcdn.com/langchain-5e9cc07a/5xyMbImu-yvQUeiG/images/langsmith/bedrock-secrets-config.png?fit=max&auto=format&n=5xyMbImu-yvQUeiG&q=85&s=5ba03ea30f7bba78bc51d0fa8e273878" alt="Bedrock secrets and API keys configuration with the IAM Trusted Entity section" width="2850" height="1918" data-path="images/langsmith/bedrock-secrets-config.png" />
+> **Image:** [Bedrock secrets and API keys configuration with the IAM Trusted Entity section](https://docs.langchain.com/langsmith/playground-model-providers)
 
 For more details on trust policies, see the [AWS documentation](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/).
 
@@ -179,7 +104,7 @@ Parameters depend on the underlying model provider:
 
 #### For Anthropic models
 
-Uses Anthropic configuration (see [Anthropic](#anthropic) section below).
+Uses Anthropic configuration (see [Anthropic](https://docs.langchain.com/langsmith/playground-model-providers#anthropic) section below).
 
 #### For Amazon Titan
 
@@ -225,9 +150,8 @@ For the current list of available models, refer to the [Anthropic documentation]
 | **Top P**             | 0.0 - 1.0 | Optional | Nucleus sampling (uncheck for model default)       |
 | **Top K**             | 1+        | Optional | Limits to top K tokens (uncheck for model default) |
 
-<Note>
-  Temperature, Top P, and Top K are optional. When unchecked, Claude uses its internal defaults.
-</Note>
+> [!NOTE]
+> Temperature, Top P, and Top K are optional. When unchecked, Claude uses its internal defaults.
 
 #### Extended Thinking
 
@@ -403,7 +327,7 @@ Google Vertex AI uses a **service account JSON key** for authentication in the L
 
 The downloaded file looks like this:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "type": "service_account",
   "project_id": "your-project-id",
@@ -420,9 +344,8 @@ The downloaded file looks like this:
 
 In the LangSmith Playground, open the Google Vertex AI provider configuration and paste the **entire contents** of the downloaded JSON key file into the **Service Account JSON** field.
 
-<Warning>
-  Treat your service account JSON key like a password. Do not share it or commit it to source control. If a key is compromised, revoke it immediately from the [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new one.
-</Warning>
+> [!WARNING]
+> Treat your service account JSON key like a password. Do not share it or commit it to source control. If a key is compromised, revoke it immediately from the [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new one.
 
 ### Available models
 
@@ -536,9 +459,8 @@ Controls reasoning depth before responding. Higher effort = better quality for c
 | `high`    | Deep reasoning                               |
 | `xhigh`   | Extra deep reasoning (if supported by model) |
 
-<Note>
-  When reasoning\_effort is active (not `none`), temperature, top\_p, and penalties are automatically disabled.
-</Note>
+> [!NOTE]
+> When reasoning\_effort is active (not `none`), temperature, top\_p, and penalties are automatically disabled.
 
 **Service Tier**: Available on newer models.
 
@@ -566,9 +488,9 @@ Controls request priority and processing allocation.
 
 Authentication varies by endpoint. Common options:
 
-* **API key**: stored as a [workspace secret](/langsmith/administration-overview#workspaces) and forwarded as `Authorization: Bearer <key>`.
+* **API key**: stored as a [workspace secret](https://docs.langchain.com/langsmith/administration-overview#workspaces) and forwarded as `Authorization: Bearer <key>`.
 * **None**: for unauthenticated local endpoints (for example, Ollama on `localhost`).
-* **OAuth2 `client_credentials`**: stored on the model configuration. LangSmith mints a short-lived bearer at request time and refreshes it before expiry. See [OAuth client credentials](/langsmith/model-configurations#oauth-client-credentials).
+* **OAuth2 `client_credentials`**: stored on the model configuration. LangSmith mints a short-lived bearer at request time and refreshes it before expiry. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
 
 ### Configuration
 
@@ -662,7 +584,7 @@ Standard OpenAI-compatible parameters:
 
 All providers support a **JSON editor for extra parameters** not exposed in the UI:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "logprobs": true,
   "top_logprobs": 5,
@@ -690,24 +612,16 @@ Set this when running experiments or evaluations to avoid hitting rate limits.
 
 ## Next steps
 
-<CardGroup cols={2}>
-  <Card title="Configure prompt settings" icon="settings" href="/langsmith/managing-model-configurations">
-    Learn how to create and manage model configurations in the Playground.
-  </Card>
+#### [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations)
+Learn how to create and manage model configurations in the Playground.
 
-  <Card title="Create a prompt" icon="edit" href="/langsmith/create-a-prompt">
-    Get started building prompts with your chosen model provider.
-  </Card>
-</CardGroup>
+#### [Create a prompt](https://docs.langchain.com/langsmith/create-a-prompt)
+Get started building prompts with your chosen model provider.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/playground-model-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/playground-model-providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

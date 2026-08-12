@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Experiment configuration
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/experiment-configuration)
 LangSmith supports several configuration options for experiments:
 
-* [Repetitions](#repetitions)
-* [Concurrency](#concurrency)
-* [Caching](#caching)
+* [Repetitions](https://docs.langchain.com/langsmith/experiment-configuration#repetitions)
+* [Concurrency](https://docs.langchain.com/langsmith/experiment-configuration#concurrency)
+* [Caching](https://docs.langchain.com/langsmith/experiment-configuration#caching)
 
 ### Repetitions
 
@@ -16,7 +12,7 @@ LangSmith supports several configuration options for experiments:
 
 Configure repetitions by passing the `num_repetitions` argument to `evaluate` / `aevaluate` ([Python](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate), [TypeScript](https://reference.langchain.com/javascript/langsmith/evaluation/EvaluateOptions#member-numRepetitions-9)). Each repetition re-runs both the target function and all evaluators.
 
-Learn more in the [repetitions how-to guide](/langsmith/repetition).
+Learn more in the [repetitions how-to guide](https://docs.langchain.com/langsmith/repetition).
 
 ### Concurrency
 
@@ -36,12 +32,8 @@ The `max_concurrency` argument uses a semaphore to limit concurrent tasks. `aeva
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/experiment-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/experiment-configuration.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

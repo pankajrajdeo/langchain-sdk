@@ -1,22 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # API and SDK deprecation policy
-
-> How LangSmith deprecates and removes API endpoints and SDK methods in cloud and self-hosted deployments.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/endpoint-deprecation)
+How LangSmith deprecates and removes API endpoints and SDK methods in cloud and self-hosted deployments.
 
 LangSmith deprecates API endpoints and SDK methods before removing them, so you have time to migrate to a replacement. This page describes how deprecations are announced and how long they stay supported.
 
-<Note>This policy applies only to public endpoints documented in the [LangSmith API reference](/langsmith/smith-api-ref) and the [Agent Server API reference](/langsmith/server-api-ref). Internal, undocumented endpoints are not covered and can change, including with breaking changes, at any time.</Note>
+This policy applies only to public endpoints documented in the [LangSmith API reference](https://docs.langchain.com/langsmith/smith-api-ref) and the [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref). Internal, undocumented endpoints are not covered and can change, including with breaking changes, at any time.
 
 ## Deprecation lifecycle
 
 Every deprecation follows the same stages:
 
-1. **Announced**: the deprecation is published in the [changelog](/langsmith/changelog) with the removal date, once known, and, where call-site changes are needed, in a migration guide that documents the replacement.
+1. **Announced**: the deprecation is published in the [changelog](https://docs.langchain.com/langsmith/changelog) with the removal date, once known, and, where call-site changes are needed, in a migration guide that documents the replacement.
 2. **Marked**: the deprecated API endpoint returns `Deprecation: true` and `Sunset: <date>` response headers. Deprecated SDK methods are marked in the documentation and, where supported, raise a deprecation warning at call time.
-3. **Supported**: the deprecated endpoint continues to function for a minimum window that depends on your deployment. See [Deprecation window by deployment](#deprecation-window-by-deployment).
+3. **Supported**: the deprecated endpoint continues to function for a minimum window that depends on your deployment. See [Deprecation window by deployment](https://docs.langchain.com/langsmith/endpoint-deprecation#deprecation-window-by-deployment).
 4. **Removed**: after the support window ends, the endpoint is removed.
 
 In Cloud, if active consumers remain close to the removal date, LangSmith may apply rate limits and increased latency to the deprecated endpoint, and return an explicit error message on a portion of requests, as a last resort to catch the attention of remaining usage before removal. Affected customers are contacted directly beforehand.
@@ -28,7 +24,7 @@ In Cloud, if active consumers remain close to the removal date, LangSmith may ap
 | Cloud       | 6 months from announcement to removal |
 | Self-hosted | At least one major release            |
 
-Self-hosted major releases ship on a roughly six-week cadence. For details, see [Release policy](/langsmith/release-versions).
+Self-hosted major releases ship on a roughly six-week cadence. For details, see [Release policy](https://docs.langchain.com/langsmith/release-versions).
 
 ## SDK method deprecation
 
@@ -45,18 +41,14 @@ A deprecated field is removed at a version boundary, not on a date:
 
 ## See also
 
-* [Changelog](/langsmith/changelog) for recent LangSmith updates
-* [Release stages](/langsmith/release-stages) for how features move from alpha to GA
-* [Release policy](/langsmith/release-versions) for self-hosted release channels, cadence, and version support
+* [Changelog](https://docs.langchain.com/langsmith/changelog) for recent LangSmith updates
+* [Release stages](https://docs.langchain.com/langsmith/release-stages) for how features move from alpha to GA
+* [Release policy](https://docs.langchain.com/langsmith/release-versions) for self-hosted release channels, cadence, and version support
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/endpoint-deprecation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/endpoint-deprecation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

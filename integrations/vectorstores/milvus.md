@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Milvus integration
 
 > Integrate with the Milvus vector store using LangChain Python.
@@ -14,7 +10,7 @@ This notebook shows how to use functionality related to the Milvus vector databa
 
 You'll need to install `langchain-milvus` with `pip install -qU langchain-milvus` to use this integration.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-milvus
 ```
 
@@ -24,9 +20,9 @@ No credentials are needed to use the `Milvus` vector store.
 
 ## Initialization
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/milvus).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -38,7 +34,7 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 
 The easiest way to prototype is to use Milvus Lite, where everything is stored in a local vector database file. Only the Flat index can be used.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_milvus import Milvus
 
 URI = "./milvus_example.db"
@@ -58,19 +54,19 @@ The Milvus server offers support for a variety of [indexes](https://milvus.io/do
 
 As an illustration, consider the case of Milvus Standalone. To initiate the Docker container, you can run the following command:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/standalone_embed.sh -o standalone_embed.sh
 
 !bash standalone_embed.sh start
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Password:
 ```
 
 Here we create a Milvus database:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pymilvus import Collection, MilvusException, connections, db, utility
 
 conn = connections.connect(host="127.0.0.1", port=19530)
@@ -102,7 +98,7 @@ except MilvusException as e:
     print(f"An error occurred: {e}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Database 'milvus_demo' does not exist.
 Database 'milvus_demo' created successfully.
 ```
@@ -111,7 +107,7 @@ Note the change in the URI below. Once the instance is initialized, navigate to 
 
 Here is an example of how you create your vector store instance with the Milvus database service:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_milvus import BM25BuiltInFunction, Milvus
 
 URI = "http://localhost:19530"
@@ -133,7 +129,7 @@ You can store unrelated documents in different collections within the same Milvu
 
 Here's how you can create a new collection:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 vector_store_saved = Milvus.from_documents(
@@ -146,7 +142,7 @@ vector_store_saved = Milvus.from_documents(
 
 And here is how you retrieve that stored collection:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store_loaded = Milvus(
     embeddings,
     connection_args={"uri": URI},
@@ -162,7 +158,7 @@ Once you have created your vector store, we can interact with it by adding and d
 
 We can add items to our vector store by using the `add_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -236,11 +232,11 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=[uuids[-1]])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 (insert count: 0, delete count: 1, upsert count: 0, timestamp: 0, success count: 0, err count: 0, cost: 0)
 ```
 
@@ -254,7 +250,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search with filtering on metadata can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=2,
@@ -264,7 +260,7 @@ for res in results:
     print(f"* {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * Building an exciting new project with LangChain - come check it out! [{'pk': '9905001c-a4a3-455e-ab94-72d0ed11b476', 'source': 'tweet'}]
 * LangGraph is the best framework for building stateful, agentic applications! [{'pk': '1206d237-ee3a-484f-baf2-b5ac38eeb314', 'source': 'tweet'}]
 ```
@@ -273,7 +269,7 @@ for res in results:
 
 You can also search with score:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     "Will it be hot tomorrow?", k=1, expr='source == "news"'
 )
@@ -281,7 +277,7 @@ for res, score in results:
     print(f"* [SIM={score:3f}] {res.page_content} [{res.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=21192.628906] bar [{'pk': '2', 'source': 'https://example.com'}]
 ```
 
@@ -291,12 +287,12 @@ For a full list of all the search options available when using the `Milvus` vect
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1})
 retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'pk': 'eacc7256-d7fa-4036-b1f7-83d7a4bee0c5', 'source': 'news'}, page_content='Robbers broke into the city bank and stole $1 million in cash.')]
 ```
 
@@ -312,7 +308,7 @@ For full-text search Milvus VectorStore accepts a `builtin_function` parameter. 
 
 Here is a simple example of hybrid search in Milvus with OpenAI dense embedding for semantic search and BM25 for full-text search:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_milvus import BM25BuiltInFunction, Milvus
 from langchain_openai import OpenAIEmbeddings
 
@@ -342,7 +338,7 @@ After the first stage of retrieval, we need to rerank the candidates to get a be
 
 Here is an example for weighted reranking:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What are the novels Lila has written and what are their contents?"
 
 vectorstore.similarity_search(
@@ -354,9 +350,9 @@ vectorstore.similarity_search(
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ### Per-User retrieval
 
@@ -366,7 +362,7 @@ Milvus recommends using [partition\_key](https://milvus.io/docs/multi_tenancy.md
 
 > The Partition key feature is not available in Milvus Lite, if you want to use it, you need to start Milvus server, as mentioned above.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 docs = [
@@ -392,25 +388,25 @@ Do replace `<partition_key>` with the name of the field that is designated as th
 
 Milvus changes to a partition based on the specified partition key, filters entities according to the partition key, and searches among the filtered entities.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # This will only get documents for Ankush
 vectorstore.as_retriever(search_kwargs={"expr": 'namespace == "ankush"'}).invoke(
     "where did i work?"
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='i worked at facebook', metadata={'namespace': 'ankush'})]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # This will only get documents for Harrison
 vectorstore.as_retriever(search_kwargs={"expr": 'namespace == "harrison"'}).invoke(
     "where did i work?"
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='i worked at kensho', metadata={'namespace': 'harrison'})]
 ```
 
@@ -422,12 +418,8 @@ For detailed documentation of all `Milvus` VectorStore features and configuratio
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/milvus.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/milvus.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

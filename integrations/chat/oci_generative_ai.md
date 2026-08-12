@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OCI Generative AI Integration for LangChain
 
 > Integrate with OCI Generative AI chat models using LangChain Python.
 
-This doc will help you get started with Oracle Cloud Infrastructure (OCI) Generative AI [chat models](/oss/python/langchain/models). OCI Generative AI is a fully managed service providing state-of-the-art, customizable large language models covering a wide range of use cases through a single API. Access ready-to-use pretrained models or create and host fine-tuned custom models on dedicated AI clusters.
+This doc will help you get started with Oracle Cloud Infrastructure (OCI) Generative AI [chat models](https://docs.langchain.com/oss/python/langchain/models). OCI Generative AI is a fully managed service providing state-of-the-art, customizable large language models covering a wide range of use cases through a single API. Access ready-to-use pretrained models or create and host fine-tuned custom models on dedicated AI clusters.
 
 For detailed documentation, see the [OCI Generative AI documentation](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm) and [API reference](https://docs.oracle.com/en-us/iaas/api/#/en/generative-ai/20231130/).
 
@@ -20,7 +16,7 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools/) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |                             ✅                            |  ✅ (Gemini) |  ✅ (Gemini) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -28,21 +24,19 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oci oci
-  ```
+```bash
+pip install -qU langchain-oci oci
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oci oci
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oci oci
+```
 
 ### Credentials
 
 Set up authentication with the OCI CLI (creates `~/.oci/config`):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 oci setup config
 ```
 
@@ -50,7 +44,7 @@ For other auth methods (session tokens, instance principals), see [OCI SDK authe
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIGenAI
 
 llm = ChatOCIGenAI(
@@ -63,14 +57,14 @@ llm = ChatOCIGenAI(
 
 **Key parameters:**
 
-* `model_id` - The model to use (see [available models](#available-models))
+* `model_id` - The model to use (see [available models](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai#available-models))
 * `service_endpoint` - Regional endpoint (`us-chicago-1`, `eu-frankfurt-1`, etc.)
 * `compartment_id` - Your OCI compartment OCID
 * `model_kwargs` - Model settings like temperature, max\_tokens
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     ("system", "You are a code review assistant."),
     ("human", """Review this Python function for security issues:
@@ -84,7 +78,7 @@ response = llm.invoke(messages)
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 This function has a critical SQL injection vulnerability. The username and password
 are directly interpolated into the SQL query string, allowing attackers to bypass
 authentication or extract data. Use parameterized queries instead:
@@ -94,7 +88,7 @@ authentication or extract data. Use parameterized queries instead:
 
 **Multi-turn conversations** maintain context across messages:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     ("user", "Analyze error rate spike at 14:30 UTC"),
     ("assistant", "The spike correlates with deploy-v2.1.3. Checking logs..."),
@@ -108,7 +102,7 @@ response = llm.invoke(messages)
 
 Get responses as they're generated:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events("Explain Python generators in 3 sentences", version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
@@ -118,7 +112,7 @@ for token in stream.text:
 
 Process multiple requests concurrently for better throughput:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 
 # Analyze multiple code files concurrently
@@ -139,7 +133,7 @@ asyncio.run(stream_response())
 
 Give models access to APIs, databases, and custom functions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 
 @tool
@@ -177,7 +171,7 @@ if response.tool_calls:
 
 **Complete tool execution loop** - execute the tool and return results:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage, AIMessage, ToolMessage
 
 messages = [HumanMessage(content="What's the status of order ORD-12345?")]
@@ -204,7 +198,7 @@ if response.tool_calls:
 
 **Parallel tool execution** (Llama 4+) for concurrent API calls:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOCIGenAI(
     model_id="meta.llama-4-scout-17b-16e-instruct",
     service_endpoint="https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
@@ -218,7 +212,7 @@ llm_with_tools = llm.bind_tools(tools, parallel_tool_calls=True)
 
 Parse unstructured text into typed data structures for processing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from typing import List, Literal
 
@@ -243,7 +237,7 @@ our payment processing and user authentication services."""
 ticket = structured_llm.invoke(email_text)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ticket.severity)           # "critical"
 print(ticket.category)           # "technical"
 print(ticket.affected_services)  # ["payment processing", "user authentication"]
@@ -255,7 +249,7 @@ Use for log parsing, invoice extraction, or data classification pipelines.
 
 Process images for data extraction, analysis, and automation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage
 from langchain_oci import ChatOCIGenAI, load_image
 
@@ -274,7 +268,7 @@ response = llm.invoke([message])
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The diagram shows 4 services:
 1. API Gateway - receives external traffic, routes to internal services
 2. Auth Service - handles authentication, connects to User DB
@@ -290,7 +284,7 @@ The diagram shows 4 services:
 
 Process documents, videos, and audio with Gemini models:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 from langchain.messages import HumanMessage
 from langchain_oci import ChatOCIGenAI
@@ -313,7 +307,7 @@ response = llm.invoke([message])
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {
   "parties": ["Acme Corp", "TechStart Inc"],
   "effective_date": "2024-01-15",
@@ -323,7 +317,7 @@ print(response.content)
 
 **Video/Audio analysis:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with open("meeting.mp4", "rb") as f:
     video_data = base64.b64encode(f.read()).decode()
 
@@ -340,7 +334,7 @@ response = llm.invoke([message])
 
 Control model behavior with `model_kwargs`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOCIGenAI(
     model_id="meta.llama-3.3-70b-instruct",
     service_endpoint="https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
@@ -370,20 +364,16 @@ For detailed documentation of all `ChatOCIGenAI` features and configurations, he
 
 ## Related
 
-* [OCI Provider Overview](/oss/python/integrations/providers/oci)
-* [OCI Embeddings](/oss/python/integrations/embeddings/oci_generative_ai)
-* [Tool Calling Guide](/oss/python/langchain/tools/)
-* [Structured Output Guide](/oss/python/langchain/structured-output)
-* [Multimodal Messages](/oss/python/langchain/messages#multimodal)
+* [OCI Provider Overview](https://docs.langchain.com/oss/python/integrations/providers/oci)
+* [OCI Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings/oci_generative_ai)
+* [Tool Calling Guide](https://docs.langchain.com/oss/python/langchain/tools/)
+* [Structured Output Guide](https://docs.langchain.com/oss/python/langchain/structured-output)
+* [Multimodal Messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatAnthropicVertex integration
 
 > Integrate with the ChatAnthropicVertex chat model using LangChain Python.
 
-<Warning>
-  **Claude 3 Haiku deprecation:** Starting August 23, 2026, Anthropic will terminate support for Claude 3 Haiku. Migrate to Claude Haiku 4.5 (`claude-haiku-4-5@20251001`), which is Generally Available on Vertex AI. See [Anthropic's model deprecation policy](https://docs.anthropic.com/en/docs/resources/model-deprecations) for details.
-</Warning>
+> [!WARNING]
+> **Claude 3 Haiku deprecation:** Starting August 23, 2026, Anthropic will terminate support for Claude 3 Haiku. Migrate to Claude Haiku 4.5 (`claude-haiku-4-5@20251001`), which is Generally Available on Vertex AI. See [Anthropic's model deprecation policy](https://docs.anthropic.com/en/docs/resources/model-deprecations) for details.
 
 > [Anthropic Claude](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) models on Vertex AI offer fully managed and serverless models as APIs. To use a Claude model on Vertex AI, send a request directly to the Vertex AI API endpoint. Because Anthropic Claude models use a managed API, there's no need to provision or manage infrastructure.
 
 NOTE : Anthropic Models on Vertex are implemented as Chat Model through class `ChatAnthropicVertex`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -U langchain-google-vertexai anthropic[vertex]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import (
     AIMessage,
     AIMessageChunk,
@@ -29,11 +24,10 @@ from langchain_core.outputs import LLMResult
 from langchain_google_vertexai.model_garden import ChatAnthropicVertex
 ```
 
-<Note>
-  Specify the correct [Claude model versions](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude#claude-opus). Use model identifiers that include a date suffi when possible (e.g., `claude-haiku-4-5@20251001`).
-</Note>
+> [!NOTE]
+> Specify the correct [Claude model versions](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude#claude-opus). Use model identifiers that include a date suffi when possible (e.g., `claude-haiku-4-5@20251001`).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # TODO : Replace below with your project id and region
 project = "<project_id>"
 location = "<region>"
@@ -46,7 +40,7 @@ model = ChatAnthropicVertex(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # prepare input data for the model
 raw_context = (
     "My name is Peter. You are my personal assistant. My favorite movies "
@@ -59,13 +53,13 @@ context = SystemMessage(content=raw_context)
 message = HumanMessage(content=question)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Invoke the model
 response = model.invoke([context, message])
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Since your favorite movies are the Lord of the Rings and Hobbit trilogies, I would recommend checking out some other epic fantasy films that have a similar feel:
 
 1. The Chronicles of Narnia series - These films are based on the beloved fantasy novels by C.S. Lewis and have a great blend of adventure, magic, and memorable characters.
@@ -81,13 +75,13 @@ Since your favorite movies are the Lord of the Rings and Hobbit trilogies, I wou
 Let me know if any of those appeal to you or if you'd like me to suggest something else! I'm happy to provide more personalized recommendations.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # You can choose to initialize/ override the model name on Invoke method as well
 response = model.invoke([context, message], model_name="claude-sonnet-4-6")
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Sure, I'd be happy to recommend a movie for you! Since you mentioned that The Lord of the Rings and The Hobbit are among your favorite movies, I'll suggest some other epic fantasy/adventure films you might enjoy:
 
 1. The Princess Bride (1987) - A classic fairy tale with adventure, romance, and a lot of wit and humor. It has an all-star cast and very quotable lines.
@@ -103,7 +97,7 @@ Sure, I'd be happy to recommend a movie for you! Since you mentioned that The Lo
 Let me know if you'd like any other suggestions or have a particular style of movie in mind! I aimed for entertaining fantasy/adventure flicks similar to Lord of the Rings.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Use streaming responses
 stream = model.stream_events([context, message], version="v3", model_name="claude-haiku-4-5@20251001")
 for token in stream.text:
@@ -112,12 +106,8 @@ for token in stream.text:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_anthropic_vertex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_anthropic_vertex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

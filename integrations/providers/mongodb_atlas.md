@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MongoDB atlas integrations
 
 > Integrate with MongoDB atlas using LangChain Python.
@@ -12,25 +8,23 @@
 
 ## Installation and setup
 
-See [detail configuration instructions](/oss/python/integrations/vectorstores/mongodb_atlas).
+See [detail configuration instructions](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas).
 
 We need to install `langchain-mongodb` python package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-mongodb
-  ```
+```bash
+pip install langchain-mongodb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-mongodb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-mongodb
+```
 
 ## Vector store
 
-See a [usage example](/oss/python/integrations/vectorstores/mongodb_atlas).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb import MongoDBAtlasVectorSearch
 ```
 
@@ -41,7 +35,7 @@ from langchain_mongodb import MongoDBAtlasVectorSearch
 > `Hybrid Search Retriever` performs full-text searches using
 > Lucene’s standard (`BM25`) analyzer.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.retrievers import MongoDBAtlasFullTextSearchRetriever
 ```
 
@@ -50,7 +44,7 @@ from langchain_mongodb.retrievers import MongoDBAtlasFullTextSearchRetriever
 > `Hybrid Search Retriever` combines vector and full-text searches weighting
 > them the via `Reciprocal Rank Fusion` (`RRF`) algorithm.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.retrievers import MongoDBAtlasHybridSearchRetriever
 ```
 
@@ -62,13 +56,13 @@ An abstraction to store a simple cache in MongoDB. This does not use Semantic Ca
 
 To import this cache:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.cache import MongoDBCache
 ```
 
 To use this cache with your LLMs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 
 # use any embedding provider...
@@ -88,17 +82,17 @@ set_llm_cache(MongoDBCache(
 ### MongoDBAtlasSemanticCache
 
 Semantic caching allows users to retrieve cached prompts based on semantic similarity between the user input and previously cached results. Under the hood it blends MongoDBAtlas as both a cache and a vectorstore.
-The MongoDBAtlasSemanticCache inherits from `MongoDBAtlasVectorSearch` and needs an Atlas Vector Search Index defined to work. Please look at the [usage example](/oss/python/integrations/vectorstores/mongodb_atlas) on how to set up the index.
+The MongoDBAtlasSemanticCache inherits from `MongoDBAtlasVectorSearch` and needs an Atlas Vector Search Index defined to work. Please look at the [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas) on how to set up the index.
 
 To import this cache:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.cache import MongoDBAtlasSemanticCache
 ```
 
 To use this cache with your LLMs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 
 # use any embedding provider...
@@ -118,12 +112,8 @@ set_llm_cache(MongoDBAtlasSemanticCache(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb_atlas.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

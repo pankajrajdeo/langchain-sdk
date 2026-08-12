@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GoogleGenerativeAIEmbeddings integration
 
 > Integrate with Google Gemini API embedding models using LangChain Python.
@@ -10,9 +6,8 @@ This will help you get started with Google Generative AI embedding models using 
 
 ## Overview
 
-<Note>
-  `gemini-embedding-2-preview` natively supports text, image, video, audio, and PDF inputs via the Google GenAI SDK's `embed_content()` API. However, the LangChain `Embeddings` interface (`embed_query` / `embed_documents`) currently only accepts text inputs. Multimodal embedding support in LangChain is planned for a future release. For multimodal use cases today, use the [Google GenAI SDK](https://ai.google.dev/gemini-api/docs) directly.
-</Note>
+> [!NOTE]
+> `gemini-embedding-2-preview` natively supports text, image, video, audio, and PDF inputs via the Google GenAI SDK's `embed_content()` API. However, the LangChain `Embeddings` interface (`embed_query` / `embed_documents`) currently only accepts text inputs. Multimodal embedding support in LangChain is planned for a future release. For multimodal use cases today, use the [Google GenAI SDK](https://ai.google.dev/gemini-api/docs) directly.
 
 ### Integration details
 
@@ -24,7 +19,7 @@ To access Google Gemini embedding models you'll need to create a Google Cloud pr
 
 Head to [Google AI Studio](https://aistudio.google.com/apikey) to sign up and generate an API key. See the [Gemini API keys documentation](https://ai.google.dev/gemini-api/docs/api-key) for more details. Once you've done this set the `GOOGLE_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -32,9 +27,9 @@ if not os.getenv("GOOGLE_API_KEY"):
     os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -43,7 +38,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain Google Generative AI integration lives in the `langchain-google-genai` package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-google-genai
 ```
 
@@ -51,7 +46,7 @@ pip install -qU langchain-google-genai
 
 Now we can instantiate our model object and generate embeddings:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-2-preview")
@@ -59,7 +54,7 @@ vector = embeddings.embed_query("hello, world!")
 vector[:5]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.024917153641581535,
  0.012005362659692764,
  -0.003886754624545574,
@@ -71,7 +66,7 @@ vector[:5]
 
 `gemini-embedding-2-preview` supports flexible output dimensions via Matryoshka Representation Learning (MRL). You can reduce dimensionality to optimize storage and latency:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = GoogleGenerativeAIEmbeddings(
     model="gemini-embedding-2-preview",
     output_dimensionality=768,  # Suggested: 768, 1536, or 3072 (default)
@@ -80,7 +75,7 @@ vector = embeddings.embed_query("hello, world!")
 len(vector)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 768
 ```
 
@@ -88,7 +83,7 @@ len(vector)
 
 You can also embed multiple strings at once for a processing speedup:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vectors = embeddings.embed_documents(
     [
         "Today is Monday",
@@ -99,17 +94,17 @@ vectors = embeddings.embed_documents(
 len(vectors), len(vectors[0])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 (3, 768)
 ```
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -130,7 +125,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -146,11 +141,11 @@ retrieved_documents[0].page_content
 
 By default, we use `RETRIEVAL_DOCUMENT` in the `embed_documents` method and `RETRIEVAL_QUERY` in the `embed_query` method. If you provide a task type, we will use that for all methods.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU matplotlib scikit-learn
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -172,7 +167,7 @@ for i, d in enumerate(d_embed):
     print("---")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 Cosine similarity with query: 0.7892893360164779
 ---
@@ -199,12 +194,8 @@ For detailed documentation on `GoogleGenerativeAIEmbeddings` features and config
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

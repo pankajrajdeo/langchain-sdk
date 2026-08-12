@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenAIEmbeddings integration
 
 > Integrate with the OpenAIEmbeddings embedding model using LangChain Python.
@@ -12,7 +8,7 @@ This will help you get started with OpenAI embedding models using LangChain. For
 
 ### Integration details
 
-<ItemTable category="embeddings" item="OpenAI" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/openai).
 
 ## Setup
 
@@ -22,7 +18,7 @@ To access OpenAI embedding models you'll need to create an OpenAI account, get a
 
 Head to [platform.openai.com](https://platform.openai.com) to sign up to OpenAI and generate an API key. Once you’ve done this set the OPENAI\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -36,9 +32,9 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -47,7 +43,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain OpenAI integration lives in the `langchain-openai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-openai
 ```
 
@@ -55,7 +51,7 @@ pip install -qU langchain-openai
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings(
@@ -67,19 +63,18 @@ embeddings = OpenAIEmbeddings(
 )
 ```
 
-<Info>
-  **Azure OpenAI v1 API support**
-
-  As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1), including support for Microsoft Entra ID authentication. See the [Using with Azure OpenAI](#using-with-azure-openai) section below for details.
-</Info>
+> [!NOTE]
+> **Azure OpenAI v1 API support**
+>
+> As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1), including support for Microsoft Entra ID authentication. See the [Using with Azure OpenAI](https://docs.langchain.com/oss/python/integrations/embeddings/openai#using-with-azure-openai) section below for details.
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -100,7 +95,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -114,12 +109,12 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.019276829436421394, 0.0037708976306021214, -0.03294256329536438, 0.0037671267054975033, 0.008175
 ```
 
@@ -127,7 +122,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -136,26 +131,25 @@ for vector in two_vectors:
     print(str(vector)[:100])  # Show the first 100 characters of the vector
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.019260549917817116, 0.0037612367887049913, -0.03291035071015358, 0.003757466096431017, 0.0082049
 [-0.010181212797760963, 0.023419594392180443, -0.04215526953339577, -0.001532090245746076, -0.023573
 ```
 
 ## Using with Azure OpenAI
 
-<Info>
-  **Azure OpenAI v1 API support**
-
-  As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI embeddings whether hosted on OpenAI or Azure.
-
-  For the traditional Azure-specific implementation, continue to use [`AzureOpenAIEmbeddings`](/oss/python/integrations/embeddings/azure_openai).
-</Info>
+> [!NOTE]
+> **Azure OpenAI v1 API support**
+>
+> As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI embeddings whether hosted on OpenAI or Azure.
+>
+> For the traditional Azure-specific implementation, continue to use [`AzureOpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai).
 
 ### Using Azure OpenAI v1 API with API Key
 
 To use `OpenAIEmbeddings` with Azure OpenAI, set the `base_url` to your Azure endpoint with `/openai/v1/` appended:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings(
@@ -172,7 +166,7 @@ vector = embeddings.embed_query("Hello world")
 
 The v1 API adds native support for [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity) authentication with automatic token refresh. Pass a token provider callable to the `api_key` parameter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from langchain_openai import OpenAIEmbeddings
 
@@ -192,20 +186,19 @@ embeddings = OpenAIEmbeddings(
 vectors = embeddings.embed_documents(["Hello", "World"])
 ```
 
-<Tip>
-  **Installation requirements**
-
-  To use Microsoft Entra ID authentication, install the Azure Identity library:
-
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install azure-identity
-  ```
-</Tip>
+> [!TIP]
+> **Installation requirements**
+>
+> To use Microsoft Entra ID authentication, install the Azure Identity library:
+>
+> ```bash
+> pip install azure-identity
+> ```
 
 You can also pass a token provider callable to the `api_key` parameter when using
 asynchronous functions. You must import DefaultAzureCredential from `azure.identity.aio`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity.aio import DefaultAzureCredential
 from langchain_openai import OpenAIEmbeddings
 
@@ -221,9 +214,8 @@ vectors = await embeddings_async.aembed_documents(["Hello", "World"])
 
 ```
 
-<Note>
-  When using an async callable for the API key, you must use async methods (`aembed_query`, `aembed_documents`). Sync methods will raise an error.
-</Note>
+> [!NOTE]
+> When using an async callable for the API key, you must use async methods (`aembed_query`, `aembed_documents`). Sync methods will raise an error.
 
 ***
 
@@ -233,12 +225,8 @@ For detailed documentation on `OpenAIEmbeddings` features and configuration opti
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

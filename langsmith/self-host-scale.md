@@ -1,34 +1,29 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure LangSmith for scale
-
-<Warning>
-  The scaling guidance and example configurations on this page apply to **LangSmith version v0.13.0 or higher**.
-</Warning>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-scale)
+> [!WARNING]
+> The scaling guidance and example configurations on this page apply to **LangSmith version v0.13.0 or higher**.
 
 A self-hosted LangSmith instance can handle a large number of traces and users. The default configuration for the self-hosted deployment can handle substantial load, and you can configure your deployment to be able to achieve higher scale. This page describes scaling considerations and provides some examples to help configure your self-hosted instance.
 
-For example configurations, refer to [Example LangSmith configurations for scale](#example-langsmith-configurations-for-scale).
+For example configurations, refer to [Example LangSmith configurations for scale](https://docs.langchain.com/langsmith/self-host-scale#example-langsmith-configurations-for-scale).
 
 ## Summary
 
 The table below provides an overview comparing different LangSmith configurations for various load patterns (reads / writes):
 
-|                                                                                                                                                                  | **[Low / low](#low-reads-low-writes)**               | **[Low / high](#low-reads-high-writes)**             | **[High / low](#high-reads-low-writes)**                                                                                                                                                                                                 | [Medium / medium](#medium-reads-medium-writes)       | [High / high](#high-reads-high-writes)                                                                                                                                                                                                   |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <Tooltip tip="Number of users actively viewing traces on the frontend">Concurrent frontend users</Tooltip>                                                       | 5                                                    | 5                                                    | 50                                                                                                                                                                                                                                       | 20                                                   | 50                                                                                                                                                                                                                                       |
-| <Tooltip tip="Number of traces being ingested via SDKs or API endpoints">Traces submitted per second</Tooltip>                                                   | 10                                                   | 1000                                                 | 10                                                                                                                                                                                                                                       | 100                                                  | 1000                                                                                                                                                                                                                                     |
-| **Frontend replicas**<br />(500m CPU, 1Gi per replica)                                                                                                           | 1 (default)                                          | 4                                                    | 2                                                                                                                                                                                                                                        | 2                                                    | 4                                                                                                                                                                                                                                        |
-| **Platform backend replicas**<br />(1 CPU, 2Gi per replica)                                                                                                      | 3 (default)                                          | 20                                                   | 3 (default)                                                                                                                                                                                                                              | 3 (default)                                          | 20                                                                                                                                                                                                                                       |
-| **Ingest queue replicas**<br />(1 CPU, 2Gi per replica)                                                                                                          | 3 (default)                                          | 24                                                   | 3 (default)                                                                                                                                                                                                                              | 6                                                    | 24                                                                                                                                                                                                                                       |
-| **Backend replicas**<br />(1 CPU, 2Gi per replica)                                                                                                               | 2 (default)                                          | 5                                                    | 40                                                                                                                                                                                                                                       | 16                                                   | 50                                                                                                                                                                                                                                       |
-| **Redis resources**                                                                                                                                              | 8 Gi (default)                                       | 26 Gi external                                       | 8 Gi (default)                                                                                                                                                                                                                           | 13Gi external                                        | 26 Gi external                                                                                                                                                                                                                           |
-| **ClickHouse resources**                                                                                                                                         | 4 CPU<br />16 Gi (default)                           | 10 CPU<br />32Gi memory                              | 8 CPU<br />16 Gi per replica                                                                                                                                                                                                             | 16 CPU<br />24Gi memory                              | 14 CPU<br />24 Gi per replica                                                                                                                                                                                                            |
-| **ClickHouse setup**                                                                                                                                             | Single instance                                      | Single instance                                      | 3-node <Tooltip tip="Recommended for high read loads to prevent degraded performance. Another option would be [managed clickhouse](/langsmith/self-host-external-clickhouse#langsmith-managed-clickhouse).">replicated cluster</Tooltip> | Single instance                                      | 3-node <Tooltip tip="Recommended for high read loads to prevent degraded performance. Another option would be [managed clickhouse](/langsmith/self-host-external-clickhouse#langsmith-managed-clickhouse).">replicated cluster</Tooltip> |
-| <Tooltip tip="We recommend using an external instance and enabling autoexpansion for the disk to handle growing data requirements.">Postgres resources</Tooltip> | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external)                                                                                                                                                                                     | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external)                                                                                                                                                                                     |
-| **Blob storage**                                                                                                                                                 | Disabled                                             | Enabled                                              | Enabled                                                                                                                                                                                                                                  | Enabled                                              | Enabled                                                                                                                                                                                                                                  |
+|                                                             | **[Low / low](https://docs.langchain.com/langsmith/self-host-scale#low-reads-low-writes)**               | **[Low / high](https://docs.langchain.com/langsmith/self-host-scale#low-reads-high-writes)**             | **[High / low](https://docs.langchain.com/langsmith/self-host-scale#high-reads-low-writes)**             | [Medium / medium](https://docs.langchain.com/langsmith/self-host-scale#medium-reads-medium-writes)       | [High / high](https://docs.langchain.com/langsmith/self-host-scale#high-reads-high-writes)               |
+| :---------------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- |
+| Concurrent frontend users                | 5                                                    | 5                                                    | 50                                                   | 20                                                   | 50                                                   |
+| Traces submitted per second              | 10                                                   | 1000                                                 | 10                                                   | 100                                                  | 1000                                                 |
+| **Frontend replicas**<br />(500m CPU, 1Gi per replica)      | 1 (default)                                          | 4                                                    | 2                                                    | 2                                                    | 4                                                    |
+| **Platform backend replicas**<br />(1 CPU, 2Gi per replica) | 3 (default)                                          | 20                                                   | 3 (default)                                          | 3 (default)                                          | 20                                                   |
+| **Ingest queue replicas**<br />(1 CPU, 2Gi per replica)     | 3 (default)                                          | 24                                                   | 3 (default)                                          | 6                                                    | 24                                                   |
+| **Backend replicas**<br />(1 CPU, 2Gi per replica)          | 2 (default)                                          | 5                                                    | 40                                                   | 16                                                   | 50                                                   |
+| **Redis resources**                                         | 8 Gi (default)                                       | 26 Gi external                                       | 8 Gi (default)                                       | 13Gi external                                        | 26 Gi external                                       |
+| **ClickHouse resources**                                    | 4 CPU<br />16 Gi (default)                           | 10 CPU<br />32Gi memory                              | 8 CPU<br />16 Gi per replica                         | 16 CPU<br />24Gi memory                              | 14 CPU<br />24 Gi per replica                        |
+| **ClickHouse setup**                                        | Single instance                                      | Single instance                                      | 3-node replicated cluster         | Single instance                                      | 3-node replicated cluster         |
+| Postgres resources                       | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external) | 2 CPU<br />8 GB memory<br />10 GB storage (external) |
+| **Blob storage**                                            | Disabled                                             | Enabled                                              | Enabled                                              | Enabled                                              | Enabled                                              |
 
 Below we go into more details about the read and write paths as well as provide a `values.yaml` snippet for you to start with for your self-hosted LangSmith instance.
 
@@ -71,21 +66,20 @@ When scaling up the read path (trace querying), it is helpful to monitor the two
 
 * Increase the number of backend service pods. This would be most impactful if backend service pods are reaching 1 core CPU usage.
 * Give ClickHouse more resources (CPU or Memory). ClickHouse can be very resource intensive, but it should lead to better performance.
-* Move to a [replicated ClickHouse cluster](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster). Adding replicas of ClickHouse helps with read performance, but we recommend staying below 5 replicas (start with 3).
+* Move to a [replicated ClickHouse cluster](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster). Adding replicas of ClickHouse helps with read performance, but we recommend staying below 5 replicas (start with 3).
 
-For more precise guidance on how this translates to helm chart values, refer to the examples the following [section](#example-langsmith-configurations-for-scale). If you are unsure why your LangSmith instance cannot handle a certain load pattern, contact the LangChain team.
+For more precise guidance on how this translates to helm chart values, refer to the examples the following [section](https://docs.langchain.com/langsmith/self-host-scale#example-langsmith-configurations-for-scale). If you are unsure why your LangSmith instance cannot handle a certain load pattern, contact the LangChain team.
 
 ## KEDA autoscaling for LangSmith queues
 
-<Note>
-  Available in LangSmith v0.13.0 and later.
-</Note>
+> [!NOTE]
+> Available in LangSmith v0.13.0 and later.
 
 We highly recommend installing [KEDA](https://keda.sh/) (Kubernetes Event-driven Autoscaling) on your cluster. KEDA enables the `queue` and `ingest-queue` services to scale automatically based on their queue backlog size, as well as CPU and memory. This results in more efficient resource utilization and better handling of traffic spikes.
 
 ### Install KEDA
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 helm repo add kedacore https://kedacore.github.io/charts
 helm install keda kedacore/keda --namespace keda --create-namespace
 ```
@@ -94,7 +88,7 @@ helm install keda kedacore/keda --namespace keda --create-namespace
 
 Once KEDA is installed, you can enable KEDA-based autoscaling for the `queue` and `ingest-queue` services in your `values.yaml`:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   autoscaling:
     keda:
@@ -108,9 +102,8 @@ ingestQueue:
 
 With KEDA enabled, the queue services will automatically scale up when their backlog grows and scale down when their backlog is processed. This is especially useful for handling variable trace ingestion loads without over-provisioning resources.
 
-<Note>
-  You can also enable KEDA for other services (`backend`, `platformBackend`, etc) but they will still only scale with CPU and memory.
-</Note>
+> [!NOTE]
+> You can also enable KEDA for other services (`backend`, `platformBackend`, etc) but they will still only scale with CPU and memory.
 
 ## Example LangSmith configurations for scale
 
@@ -128,9 +121,8 @@ For write load (trace ingestion):
 * Medium means up to 100 traces submitted per second
 * High means up to 1000 traces submitted per second
 
-<Note>
-  The exact optimal configuration depends on your usage and trace payloads. Use the examples below in combination with the information above and your specific usage to update your LangSmith configuration as you see fit. If you have any questions, please reach out to the LangChain team.
-</Note>
+> [!NOTE]
+> The exact optimal configuration depends on your usage and trace payloads. Use the examples below in combination with the information above and your specific usage to update your LangSmith configuration as you see fit. If you have any questions, please reach out to the LangChain team.
 
 ### Low reads, low writes <a name="low-reads-low-writes" />
 
@@ -142,7 +134,7 @@ You have a very high scale of trace ingestions, but single digit number of users
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   blobStorage:
     # Please also set the other keys to connect to your blob storage. See configuration section.
@@ -220,11 +212,11 @@ commonEnv:
 
 You have a relatively low scale of trace ingestions, but many frontend users querying traces and/or have scripts that hit the `/runs/query` or `/runs/<run-id>` endpoints frequently.
 
-**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
+**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   blobStorage:
     # Please also set the other keys to connect to your blob storage. See configuration section.
@@ -273,7 +265,7 @@ This is a good all around configuration that should be able to handle most usage
 
 For this, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   blobStorage:
     # Please also set the other keys to connect to your blob storage. See configuration section.
@@ -335,19 +327,18 @@ commonEnv:
     value: "0"
 ```
 
-<Warning>
-  If you still notice slow reads with the above configuration, we recommend moving to a [replicated Clickhouse cluster setup](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster)
-</Warning>
+> [!WARNING]
+> If you still notice slow reads with the above configuration, we recommend moving to a [replicated Clickhouse cluster setup](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster)
 
 ### High reads, high writes <a name="high-reads-high-writes" />
 
 You have a very high rate of trace ingestion (approaching 1000 traces submitted per second) and also have many users querying traces on the frontend (over 50 users) and/or scripts that are consistently making requests to `/runs/query` or `/runs/<run-id>` endpoints.
 
-**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
+**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
 
 Overall, we recommend a configuration like this:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   blobStorage:
     # Please also set the other keys to connect to your blob storage. See configuration section.
@@ -421,20 +412,15 @@ commonEnv:
     value: "0"
 ```
 
-<Note>
-  Ensure that the Kubernetes cluster is configured with sufficient resources to scale to the recommended size. After deployment, all of the pods in the Kubernetes cluster should be in a `Running` state. Pods stuck in `Pending` may indicate that you are reaching node pool limits or need larger nodes.
-
-  Also, ensure that any ingress controller deployed on the cluster is able to handle the desired load to prevent bottlenecks.
-</Note>
+> [!NOTE]
+> Ensure that the Kubernetes cluster is configured with sufficient resources to scale to the recommended size. After deployment, all of the pods in the Kubernetes cluster should be in a `Running` state. Pods stuck in `Pending` may indicate that you are reaching node pool limits or need larger nodes.
+>
+> Also, ensure that any ingress controller deployed on the cluster is able to handle the desired load to prevent bottlenecks.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-scale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

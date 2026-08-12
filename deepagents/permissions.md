@@ -1,30 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Permissions
-
-> Control filesystem access with declarative permission rules for Deep Agents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/permissions)
+Control filesystem access with declarative permission rules for Deep Agents
 
 Control which files and directories an agent can read or write to using declarative permission rules. Pass a list of rules to `permissions=` and the agent's built-in filesystem tools respect them.
 
-<Note>
-  Permissions require `deepagents>=0.5.2`.
-</Note>
+> [!NOTE]
+> Permissions require `deepagents>=0.5.2`.
 
-Permissions only apply to the built-in filesystem tools (`ls`, `read_file`, `glob`, `grep`, `write_file`, `edit_file`, `delete`). Custom tools and MCP tools that access the filesystem are not covered. Permissions also do not apply to [sandbox backends](/oss/python/deepagents/sandboxes), which support arbitrary command execution via the `execute` tool.
+Permissions only apply to the built-in filesystem tools (`ls`, `read_file`, `glob`, `grep`, `write_file`, `edit_file`, `delete`). Custom tools and MCP tools that access the filesystem are not covered. Permissions also do not apply to [sandbox backends](https://docs.langchain.com/oss/python/deepagents/sandboxes), which support arbitrary command execution via the `execute` tool.
 
-<Tip>
-  Use `permissions` when you need **path-based allow/deny rules** on the built-in filesystem tools. Use [backend policy hooks](/oss/python/deepagents/backends#add-policy-hooks) when you need custom validation logic (rate limiting, audit logging, content inspection) or need to control custom tools.
-</Tip>
+> [!TIP]
+> Use `permissions` when you need **path-based allow/deny rules** on the built-in filesystem tools. Use [backend policy hooks](https://docs.langchain.com/oss/python/deepagents/backends#add-policy-hooks) when you need custom validation logic (rate limiting, audit logging, content inspection) or need to control custom tools.
 
 ## Basic usage
 
 Pass a list of [`FilesystemPermission`](https://reference.langchain.com/python/deepagents/middleware/permissions/FilesystemPermission) rules to [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Rules are evaluated in declaration order. The first matching rule wins. If no rule matches, the operation is allowed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import FilesystemPermission, create_deep_agent
-
 
 # Read-only agent: deny all writes
 agent = create_deep_agent(
@@ -48,19 +41,18 @@ Each `FilesystemPermission` has three fields:
 | ------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `operations` | `list["read" \| "write"]`          | Operations this rule applies to. `"read"` covers `ls`, `read_file`, `glob`, `grep`. `"write"` covers `write_file`, `edit_file`, `delete`.                     |
 | `paths`      | `list[str]`                        | Glob patterns for matching file paths (e.g., `["/workspace/**"]`). Supports `**` for recursive matching and `{a,b}` for alternation.                          |
-| `mode`       | `"allow" \| "deny" \| "interrupt"` | Whether to allow, deny, or pause for human approval on matching operations. Defaults to `"allow"`. See [Pause for human approval](#pause-for-human-approval). |
+| `mode`       | `"allow" \| "deny" \| "interrupt"` | Whether to allow, deny, or pause for human approval on matching operations. Defaults to `"allow"`. See [Pause for human approval](https://docs.langchain.com/oss/python/deepagents/permissions#pause-for-human-approval). |
 
 Rules use first-match-wins evaluation: the first rule whose `operations` and `paths` match the current call determines the outcome. If no rule matches, the call is **allowed** (permissive default).
 
 ## Pause for human approval
 
-<Note>
-  The `"interrupt"` mode requires `deepagents>=0.6.8`.
-</Note>
+> [!NOTE]
+> The `"interrupt"` mode requires `deepagents>=0.6.8`.
 
 Set `mode="interrupt"` to pause for human approval instead of allowing or denying a matching operation outright. When the agent calls a built-in write tool (`write_file`, `edit_file`, `delete`) on a path that matches an interrupt-mode rule, `create_deep_agent` raises a human-in-the-loop interrupt rather than running the tool, and a reviewer can approve, edit, or reject the call.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import FilesystemPermission, create_deep_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -79,17 +71,15 @@ agent = create_deep_agent(
 )
 ```
 
-Interrupt-mode rules are wired into the agent's human-in-the-loop middleware automatically and merge with any `interrupt_on` you pass, so you handle and resume them the same way as tool-call interrupts. See [Human-in-the-loop](/oss/python/deepagents/human-in-the-loop) for the resume flow.
+Interrupt-mode rules are wired into the agent's human-in-the-loop middleware automatically and merge with any `interrupt_on` you pass, so you handle and resume them the same way as tool-call interrupts. See [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop) for the resume flow.
 
-<Note>
-  Deleting a directory is all-or-nothing: `delete` checks the `write` permission on the target and every descendant path, and refuses the entire operation if any of them is denied, rather than removing part of the tree. `delete` applies this same conservative check to an existing empty directory, since it is still a directory rather than a confirmed leaf target.
+> [!NOTE]
+> Deleting a directory is all-or-nothing: `delete` checks the `write` permission on the target and every descendant path, and refuses the entire operation if any of them is denied, rather than removing part of the tree. `delete` applies this same conservative check to an existing empty directory, since it is still a directory rather than a confirmed leaf target.
+>
+> Deleting a plain file is an exact-match case instead: `delete` resolves the target the same way `write_file` and `edit_file` do, using first-match-wins evaluation, so an earlier, narrower `allow` rule wins over a later catch-all `deny`. `deepagents>=0.7.3` is required for this exact-match behavior.
 
-  Deleting a plain file is an exact-match case instead: `delete` resolves the target the same way `write_file` and `edit_file` do, using first-match-wins evaluation, so an earlier, narrower `allow` rule wins over a later catch-all `deny`. `deepagents>=0.7.3` is required for this exact-match behavior.
-</Note>
-
-<Tip>
-  Anchor interrupt patterns with a literal leading segment (for example, `/secrets/**` or `/projects/*/secrets/**`). Bulk tools (`ls`, `glob`, `grep`, and `delete` on a directory) fire the interrupt when their search subtree could overlap the rule's anchored prefix, so a fully unanchored pattern like `/**/secrets` conservatively over-fires.
-</Tip>
+> [!TIP]
+> Anchor interrupt patterns with a literal leading segment (for example, `/secrets/**` or `/projects/*/secrets/**`). Bulk tools (`ls`, `glob`, `grep`, and `delete` on a directory) fire the interrupt when their search subtree could overlap the rule's anchored prefix, so a fully unanchored pattern like `/**/secrets` conservatively over-fires.
 
 ## Examples
 
@@ -97,7 +87,7 @@ Interrupt-mode rules are wired into the agent's human-in-the-loop middleware aut
 
 Allow reads and writes only under `/workspace/` and deny everything else:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = create_deep_agent(
     model=model,
     backend=backend,
@@ -118,7 +108,7 @@ agent = create_deep_agent(
 
 ### Protect specific files
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = create_deep_agent(
     model=model,
     backend=backend,
@@ -144,9 +134,9 @@ agent = create_deep_agent(
 
 ### Read-only memory
 
-Allow the agent to read memory files but prevent it from modifying them. This is useful for organization-wide policies or shared knowledge bases that should only be updated by application code. See [read-only vs writable memory](/oss/python/deepagents/memory#read-only-vs-writable-memory) for more context.
+Allow the agent to read memory files but prevent it from modifying them. This is useful for organization-wide policies or shared knowledge bases that should only be updated by application code. See [read-only vs writable memory](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) for more context.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
 
 agent = create_deep_agent(
@@ -176,7 +166,7 @@ agent = create_deep_agent(
 
 Block all reads and writes. This is a restrictive baseline you can layer more specific allow rules on top of:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = create_deep_agent(
     model=model,
     backend=backend,
@@ -194,7 +184,7 @@ agent = create_deep_agent(
 
 Because of first-match-wins, rule order matters. Place more specific rules before broader ones:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Correct: deny .env, allow workspace, deny everything else
 correct_permissions = [
     FilesystemPermission(
@@ -236,9 +226,9 @@ incorrect_permissions = [
 
 ## Subagent permissions
 
-[Subagents](/oss/python/deepagents/subagents) inherit the parent agent's permissions by default. To give a subagent different permissions, set the `permissions` field in its spec. This **replaces** the parent's rules entirely.
+[Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) inherit the parent agent's permissions by default. To give a subagent different permissions, set the `permissions` field in its spec. This **replaces** the parent's rules entirely.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = create_deep_agent(
     model=model,
     backend=backend,
@@ -283,11 +273,10 @@ agent = create_deep_agent(
 
 ## Composite backends
 
-When using a [`CompositeBackend`](https://reference.langchain.com/python/deepagents/backends/composite/CompositeBackend) with a sandbox default, every permission path must be scoped under a known route prefix. Sandboxes support arbitrary command execution, so path-based restrictions alone cannot prevent filesystem access through shell commands. Scoping permissions to route-specific [backends](/oss/python/deepagents/backends) avoids this conflict.
+When using a [`CompositeBackend`](https://reference.langchain.com/python/deepagents/backends/composite/CompositeBackend) with a sandbox default, every permission path must be scoped under a known route prefix. Sandboxes support arbitrary command execution, so path-based restrictions alone cannot prevent filesystem access through shell commands. Scoping permissions to route-specific [backends](https://docs.langchain.com/oss/python/deepagents/backends) avoids this conflict.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents.backends import CompositeBackend
-
 
 composite = CompositeBackend(
     default=sandbox,
@@ -310,7 +299,7 @@ agent = create_deep_agent(
 
 Permissions that include paths outside any route raise `NotImplementedError`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Raises NotImplementedError: /workspace/** hits the sandbox default
 try:
     create_deep_agent(
@@ -346,12 +335,8 @@ except NotImplementedError:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/permissions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/permissions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

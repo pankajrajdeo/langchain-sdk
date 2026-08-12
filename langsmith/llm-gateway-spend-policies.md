@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Spend policies
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-spend-policies)
+Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 
-> Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-A spend policy defines a cost cap for a specific scope (organization, workspace, API key, or user) over a time window (monthly, weekly, daily, or hourly). The [LLM Gateway](/langsmith/llm-gateway) tracks spend in real time and blocks any request that would push spend past the cap, returning a `402` response:
+A spend policy defines a cost cap for a specific scope (organization, workspace, API key, or user) over a time window (monthly, weekly, daily, or hourly). The [LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway) tracks spend in real time and blocks any request that would push spend past the cap, returning a `402` response:
 
 ```
 API Error: 402 request blocked by gateway policies: R&D Spend Cap
@@ -53,9 +48,8 @@ You can apply multiple time windows to the same scope. For example, a workspace 
 
 ## Create a spend policy
 
-<Warning>
-  Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](/langsmith/llm-gateway-access).
-</Warning>
+> [!WARNING]
+> Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access).
 
 1. Go to **Settings → Gateway → LLM Gateway**.
 2. Click **Create policy**.
@@ -66,7 +60,7 @@ You can apply multiple time windows to the same scope. For example, a workspace 
 
 Policies take effect immediately. The gateway evaluates them on every incoming request with sub-second enforcement latency.
 
-A spend policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate caps by header value. Use this to cap each of your own end customers under one API key. For more information, see [Per-customer policies](/langsmith/llm-gateway-header-policies).
+A spend policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate caps by header value. Use this to cap each of your own end customers under one API key. For more information, see [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies).
 
 ## View spend
 
@@ -76,23 +70,19 @@ From the gateway settings page, you can view how much each policy has spent agai
 
 ## Integration with LangSmith Engine
 
-When a spend policy blocks a request, the violation is recorded as metadata on the trace. These violations surface as issues in [LangSmith Engine](/langsmith/engine), where you can click through from the issue to the trace to understand what the agent was doing when it hit the limit.
+When a spend policy blocks a request, the violation is recorded as metadata on the trace. These violations surface as issues in [LangSmith Engine](https://docs.langchain.com/langsmith/engine), where you can click through from the issue to the trace to understand what the agent was doing when it hit the limit.
 
 This is useful for diagnosing whether a blocked request represents a genuine cost problem (a coding agent in a retry loop) or a policy that needs adjustment (a legitimate workload that grew beyond its cap).
 
 ## Next steps
 
-* [Per-customer policies](/langsmith/llm-gateway-header-policies): split a cap by a custom request header so each end customer gets its own limit.
-* [Data protection](/langsmith/llm-gateway-data-protection): add data protection policies alongside cost controls.
+* [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies): split a cap by a custom request header so each end customer gets its own limit.
+* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): add data protection policies alongside cost controls.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-spend-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-spend-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

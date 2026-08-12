@@ -1,26 +1,20 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Set a sampling rate for traces
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sample-traces)
 When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance observability needs with cost considerations.
 
 This guide shows you how to set a global sampling rate with the `LANGSMITH_TRACING_SAMPLING_RATE` environment variable, and how to apply different sampling rates per `Client` instance for finer-grained control over which operations are traced.
 
-<Tip>
-  To enable or disable tracing for specific requests based on runtime conditions (such as data sensitivity, tenant, or feature flag), refer to [Conditional tracing](/langsmith/conditional-tracing).
-</Tip>
+> [!TIP]
+> To enable or disable tracing for specific requests based on runtime conditions (such as data sensitivity, tenant, or feature flag), refer to [Conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing).
 
 ## Set a global sampling rate
 
-<Note>
-  This section is relevant for those using the [LangSmith SDK](/langsmith/reference) or [LangChain](/oss/python/langchain/overview), not for those logging directly with the LangSmith API.
-</Note>
+> [!NOTE]
+> This section is relevant for those using the [LangSmith SDK](https://docs.langchain.com/langsmith/reference) or [LangChain](https://docs.langchain.com/oss/python/langchain/overview), not for those logging directly with the LangSmith API.
 
 By default, all traces are logged to LangSmith. To down-sample the number of traces logged to LangSmith, set the `LANGSMITH_TRACING_SAMPLING_RATE` environment variable to any float between `0` (no traces) and `1` (all traces). For instance, setting the following environment variable will log 75% of the traces.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_TRACING_SAMPLING_RATE=0.75
 ```
 
@@ -28,9 +22,9 @@ This works for the `traceable` decorator and `RunTree` objects.
 
 ## Set different sampling rates per client
 
-You can also set sampling rates on specific `Client` instances and use the [`tracing_context`](/langsmith/annotate-code#use-the-trace-context-manager-python-only) context manager:
+You can also set sampling rates on specific `Client` instances and use the [`tracing_context`](https://docs.langchain.com/langsmith/annotate-code#use-the-trace-context-manager-python-only) context manager:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client, tracing_context
 
 # Create clients with different sampling rates
@@ -56,11 +50,11 @@ This allows you to control sampling rates at the operation level.
 
 ## Sampling or conditional tracing
 
-Sampling provides **probabilistic** control over trace volume, while [conditional tracing](/langsmith/conditional-tracing) provides **deterministic** control based on business logic.
+Sampling provides **probabilistic** control over trace volume, while [conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing) provides **deterministic** control based on business logic.
 
 Use **sampling** when you want to reduce overall trace volume while maintaining statistical representation of your application's behavior.
 
-Use [conditional tracing](/langsmith/conditional-tracing) when you need guaranteed tracing behavior for specific requests, such as:
+Use [conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing) when you need guaranteed tracing behavior for specific requests, such as:
 
 * Disabling tracing for clients with zero-retention policies.
 * Routing traces to different projects based on tenant.
@@ -70,12 +64,8 @@ You can combine both approaches for fine-grained control over your observability
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sample-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sample-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

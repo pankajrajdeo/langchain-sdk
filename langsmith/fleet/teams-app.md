@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Integrate Teams with an agent
-
-> Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/teams-app)
+Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
 
 With LangSmith Fleet, you can connect your agents to Microsoft Teams by registering a custom Azure Bot. Once connected, your agents can:
 
@@ -12,13 +8,12 @@ With LangSmith Fleet, you can connect your agents to Microsoft Teams by register
 * Respond directly in Teams conversations using the Bot Framework.
 * Access Teams channels and messages through Microsoft Graph API tools.
 
-<Note>
-  In channel conversations, the bot only responds when explicitly mentioned. In direct messages and group chats, the bot responds to all messages.
-</Note>
+> [!NOTE]
+> In channel conversations, the bot only responds when explicitly mentioned. In direct messages and group chats, the bot responds to all messages.
 
 ## Prerequisites
 
-* An existing agent in Fleet (see [Quickstart](/langsmith/fleet/quickstart) to create one)
+* An existing agent in Fleet (see [Quickstart](https://docs.langchain.com/langsmith/fleet/quickstart) to create one)
 * An [Azure account](https://portal.azure.com) with permission to create resources
 * Admin access to a Microsoft Teams workspace, or permission to install apps
 
@@ -26,87 +21,71 @@ With LangSmith Fleet, you can connect your agents to Microsoft Teams by register
 
 Before registering in Fleet, you need to create an Azure Bot resource and obtain its credentials.
 
-<Steps>
-  <Step title="Create an Azure Bot resource">
-    1. Go to the [Azure Portal](https://portal.azure.com).
-    2. Search for **Azure Bot** and click **Create**.
-    3. Fill in the required fields:
-       * **Bot handle**: A unique identifier for your bot.
-       * **Subscription**: Select your Azure subscription.
-       * **Resource group**: Create a new one or select an existing one.
-       * **Type of App**: Select **Multi Tenant**.
-       * **Creation type**: Select **Create new Microsoft App ID**.
-    4. Click **Review + create**, then **Create**.
-  </Step>
+### Create an Azure Bot resource
+1. Go to the [Azure Portal](https://portal.azure.com).
+2. Search for **Azure Bot** and click **Create**.
+3. Fill in the required fields:
+   * **Bot handle**: A unique identifier for your bot.
+   * **Subscription**: Select your Azure subscription.
+   * **Resource group**: Create a new one or select an existing one.
+   * **Type of App**: Select **Multi Tenant**.
+   * **Creation type**: Select **Create new Microsoft App ID**.
+4. Click **Review + create**, then **Create**.
 
-  <Step title="Get your app credentials">
-    After the resource is created:
+### Get your app credentials
+After the resource is created:
 
-    1. Navigate to your bot resource and click **Configuration** in the left sidebar.
-    2. Copy the **Microsoft App ID**. You will need this later.
-    3. Click **Manage Password** next to the App ID.
-    4. Click **New client secret**, add a description, and click **Add**.
-    5. Copy the **Value** of the new secret immediately — it is only shown once.
+1. Navigate to your bot resource and click **Configuration** in the left sidebar.
+2. Copy the **Microsoft App ID**. You will need this later.
+3. Click **Manage Password** next to the App ID.
+4. Click **New client secret**, add a description, and click **Add**.
+5. Copy the **Value** of the new secret immediately — it is only shown once.
 
-    <Warning>
-      Copy the client secret value immediately after creation. You cannot retrieve it later. If you lose it, you must create a new one.
-    </Warning>
-  </Step>
+> [!WARNING]
+> Copy the client secret value immediately after creation. You cannot retrieve it later. If you lose it, you must create a new one.
 
-  <Step title="Configure the messaging endpoint">
-    You will set the messaging endpoint after registering the bot in Fleet. Skip this field for now—you will return to this step later.
-  </Step>
-</Steps>
+### Configure the messaging endpoint
+You will set the messaging endpoint after registering the bot in Fleet. Skip this field for now—you will return to this step later.
 
 ## Register the bot in Fleet
 
-<Steps>
-  <Step title="Open the integrations page">
-    1. Navigate to **Fleet** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-teams-app).
-    2. Go to the **Integrations** page.
-    3. Click **Add Teams App**.
-  </Step>
+### Open the integrations page
+1. Navigate to **Fleet** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-teams-app).
+2. Go to the **Integrations** page.
+3. Click **Add Teams App**.
 
-  <Step title="Enter your credentials">
-    Fill in the following fields:
+### Enter your credentials
+Fill in the following fields:
 
-    * **App Name**: A display name for the bot in Fleet.
-    * **Azure App ID**: The Microsoft App ID from the Azure Bot resource.
-    * **Azure App Password**: The client secret value you copied earlier.
-    * **Azure Tenant ID** (optional): Your Azure AD tenant ID. Leave as default for multi-tenant bots.
+* **App Name**: A display name for the bot in Fleet.
+* **Azure App ID**: The Microsoft App ID from the Azure Bot resource.
+* **Azure App Password**: The client secret value you copied earlier.
+* **Azure Tenant ID** (optional): Your Azure AD tenant ID. Leave as default for multi-tenant bots.
 
-    Click **Create** to register the bot.
-  </Step>
+Click **Create** to register the bot.
 
-  <Step title="Copy the webhook URL">
-    After registration, Fleet displays a **webhook URL**. Copy this URL—you need it to complete the Azure Bot configuration.
-  </Step>
+### Copy the webhook URL
+After registration, Fleet displays a **webhook URL**. Copy this URL—you need it to complete the Azure Bot configuration.
 
-  <Step title="Set the messaging endpoint in Azure">
-    1. Return to your Azure Bot resource in the [Azure Portal](https://portal.azure.com).
-    2. Go to **Configuration**.
-    3. Paste the webhook URL from Fleet into the **Messaging endpoint** field.
-    4. Click **Apply**.
-  </Step>
-</Steps>
+### Set the messaging endpoint in Azure
+1. Return to your Azure Bot resource in the [Azure Portal](https://portal.azure.com).
+2. Go to **Configuration**.
+3. Paste the webhook URL from Fleet into the **Messaging endpoint** field.
+4. Click **Apply**.
 
 ## Add the bot to Teams
 
-<Steps>
-  <Step title="Open the Teams channel">
-    1. In the Azure Portal, go to your bot resource.
-    2. Click **Channels** in the left sidebar.
-    3. Select **Microsoft Teams** and click **Apply**.
-    4. Agree to the terms of service.
-  </Step>
+### Open the Teams channel
+1. In the Azure Portal, go to your bot resource.
+2. Click **Channels** in the left sidebar.
+3. Select **Microsoft Teams** and click **Apply**.
+4. Agree to the terms of service.
 
-  <Step title="Install the bot in Teams">
-    1. In Teams, click **Apps** in the left sidebar.
-    2. Click **Manage your apps** then **Upload an app**.
-    3. Upload a [Teams app manifest](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) that references your Azure App ID, or use the **Open in Teams** link from the Azure Bot Channels page.
-    4. Add the bot to the desired team or chat.
-  </Step>
-</Steps>
+### Install the bot in Teams
+1. In Teams, click **Apps** in the left sidebar.
+2. Click **Manage your apps** then **Upload an app**.
+3. Upload a [Teams app manifest](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) that references your Azure App ID, or use the **Open in Teams** link from the Azure Bot Channels page.
+4. Add the bot to the desired team or chat.
 
 ## Link the bot to an agent
 
@@ -129,9 +108,8 @@ You can link a Teams bot to an agent from the integrations page or from the agen
 
 Tools let your agent take actions in Teams. To respond to messages and interact with Teams, add the relevant tools.
 
-<Tip>
-  You can also ask your agent to add these tools itself. In the agent chat, try: "Add the Teams tools so you can respond to messages."
-</Tip>
+> [!TIP]
+> You can also ask your agent to add these tools itself. In the agent chat, try: "Add the Teams tools so you can respond to messages."
 
 1. In the sidebar, expand the **Connections** drawer and click **Add connection**.
 2. Search for "Teams" and add the tools you need:
@@ -142,9 +120,8 @@ Tools let your agent take actions in Teams. To respond to messages and interact 
    * **microsoft\_teams\_read\_channel\_messages** — Read recent messages from a channel
 3. If prompted, click **Connect** to authorize the Microsoft Graph tools.
 
-<Note>
-  The `teams_bot_send_proactive_message` tool uses Bot Framework credentials and does not require separate OAuth authorization. The other Teams tools use Microsoft Graph API and may require OAuth consent.
-</Note>
+> [!NOTE]
+> The `teams_bot_send_proactive_message` tool uses Bot Framework credentials and does not require separate OAuth authorization. The other Teams tools use Microsoft Graph API and may require OAuth consent.
 
 ## Configure agent behavior (optional)
 
@@ -180,28 +157,19 @@ Adjust the instructions based on your use case—for example, you might want the
 
 ## Next steps
 
-<CardGroup cols={3}>
-  <Card title="Add more tools" icon="puzzle" href="/langsmith/fleet/tools">
-    Connect additional services to your agent
-  </Card>
+#### [Add more tools](https://docs.langchain.com/langsmith/fleet/tools)
+Connect additional services to your agent
 
-  <Card title="Add more channels" icon="bolt" href="/langsmith/fleet/channels">
-    Set up email, schedule, or webhook channels
-  </Card>
+#### [Add more channels](https://docs.langchain.com/langsmith/fleet/channels)
+Set up email, schedule, or webhook channels
 
-  <Card title="Use templates" icon="layout-grid" href="/langsmith/fleet/templates">
-    Start from a prebuilt agent template
-  </Card>
-</CardGroup>
+#### [Use templates](https://docs.langchain.com/langsmith/fleet/templates)
+Start from a prebuilt agent template
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/teams-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/teams-app.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

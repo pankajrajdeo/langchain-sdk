@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Text embeddings inference integration
 
 > Integrate with the Text embeddings inference embedding model using LangChain Python.
@@ -12,15 +8,14 @@
 
 TEI serves an OpenAI-compatible `/v1/embeddings` endpoint, so you can consume a TEI deployment from LangChain with `OpenAIEmbeddings` from the `langchain-openai` package.
 
-<Note>
-  Earlier versions of this guide used `HuggingFaceEndpointEmbeddings(model="http://localhost:8080")`. `langchain-huggingface` no longer accepts a URL for `model` and raises `` `model` must be a HuggingFace repo ID, not a URL. ``. Point `OpenAIEmbeddings` at the TEI server instead, as shown below.
-</Note>
+> [!NOTE]
+> Earlier versions of this guide used `HuggingFaceEndpointEmbeddings(model="http://localhost:8080")`. `langchain-huggingface` no longer accepts a URL for `model` and raises `` `model` must be a HuggingFace repo ID, not a URL. ``. Point `OpenAIEmbeddings` at the TEI server instead, as shown below.
 
 ## Setup
 
 Install `langchain-openai`:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU langchain-openai
 ```
 
@@ -28,7 +23,7 @@ pip install -qU langchain-openai
 
 Expose an embedding model using TEI. For instance, using Docker, you can serve `sentence-transformers/all-MiniLM-L6-v2` as follows:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 model=sentence-transformers/all-MiniLM-L6-v2
 volume=$PWD/data  # share a volume with the Docker container to avoid downloading weights every run
 
@@ -41,7 +36,7 @@ To serve on CPU-only hardware, use the `cpu-1.9` image and drop the `--gpus all`
 
 Instantiate `OpenAIEmbeddings` against the TEI server:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings(
@@ -52,40 +47,35 @@ embeddings = OpenAIEmbeddings(
 )
 ```
 
-<Note>
-  Set `check_embedding_ctx_length=False`. Without it, `OpenAIEmbeddings` tokenizes input with `tiktoken` and sends token IDs, which TEI does not accept. The flag sends raw text instead. If you start TEI with an API key, pass the same value as `api_key`.
-</Note>
+> [!NOTE]
+> Set `check_embedding_ctx_length=False`. Without it, `OpenAIEmbeddings` tokenizes input with `tiktoken` and sends token IDs, which TEI does not accept. The flag sends raw text instead. If you start TEI with an API key, pass the same value as `api_key`.
 
 Then embed your texts:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text = "What is deep learning?"
 
 query_result = embeddings.embed_query(text)
 query_result[:3]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.077851, -0.033281, 0.019743]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc_result = embeddings.embed_documents([text])
 doc_result[0][:3]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [-0.077851, -0.033281, 0.019743]
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/text_embeddings_inference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/text_embeddings_inference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

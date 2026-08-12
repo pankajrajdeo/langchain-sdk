@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tavily integrations
 
 > Integrate with Tavily using LangChain Python.
@@ -14,19 +10,17 @@ The `langchain-tavily` package exposes Tavily's Search, Extract, Crawl, and Map 
 
 Install the Tavily integration package for LangChain Python:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-tavily
-  ```
+```bash
+pip install langchain-tavily
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-tavily
-  ```
-</CodeGroup>
+```bash
+uv add langchain-tavily
+```
 
 [Set up a Tavily API key](https://app.tavily.com) and set it as an environment variable named `TAVILY_API_KEY`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export TAVILY_API_KEY="your-api-key"
 ```
 
@@ -36,9 +30,9 @@ export TAVILY_API_KEY="your-api-key"
 
 A search tool that returns real-time, LLM-ready results from Tavily's Search API.
 
-See a [usage example](/oss/python/integrations/tools/tavily_search).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_search).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilySearch
 ```
 
@@ -46,9 +40,9 @@ from langchain_tavily import TavilySearch
 
 A tool that returns the cleaned, parsed content of one or more URLs.
 
-See a [usage example](/oss/python/integrations/tools/tavily_extract).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_extract).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilyExtract
 ```
 
@@ -56,9 +50,9 @@ from langchain_tavily import TavilyExtract
 
 A tool that performs a structured web traversal from a base URL, with optional natural-language instructions and path/domain filters.
 
-See a [usage example](/oss/python/integrations/tools/tavily_crawl).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_crawl).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilyCrawl
 ```
 
@@ -66,9 +60,9 @@ from langchain_tavily import TavilyCrawl
 
 A tool that discovers the URL structure of a site without extracting page content.
 
-See a [usage example](/oss/python/integrations/tools/tavily_map).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_map).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilyMap
 ```
 
@@ -83,12 +77,8 @@ from langchain_tavily import TavilyMap
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tavily.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tavily.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

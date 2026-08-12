@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Weaviate integrations
 
 > Integrate with Weaviate using LangChain Python.
@@ -26,15 +22,13 @@ What is `Weaviate`?
 
 Install the Python SDK:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-weaviate
-  ```
+```bash
+pip install langchain-weaviate
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-weaviate
-  ```
-</CodeGroup>
+```bash
+uv add langchain-weaviate
+```
 
 ## Vector store
 
@@ -43,20 +37,16 @@ whether for semantic search or example selection.
 
 To import this vectorstore:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_weaviate import WeaviateVectorStore
 ```
 
-For a more detailed walkthrough of the Weaviate wrapper, see [this notebook](/oss/python/integrations/vectorstores/weaviate)
+For a more detailed walkthrough of the Weaviate wrapper, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/weaviate)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/weaviate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/weaviate.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

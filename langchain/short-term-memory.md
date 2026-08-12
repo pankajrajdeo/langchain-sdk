@@ -1,288 +1,262 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Short-term memory
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/short-term-memory)
 ## Overview
 
 Memory is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user preferences. As agents tackle more complex tasks with numerous user interactions, this capability becomes essential for both efficiency and user satisfaction.
 
 Short term memory lets your application remember previous interactions within a single thread or conversation.
 
-<Note>
-  A thread organizes multiple interactions in a session, similar to the way email groups messages in a single conversation.
-</Note>
+> [!NOTE]
+> A thread organizes multiple interactions in a session, similar to the way email groups messages in a single conversation.
 
 Conversation history is the most common form of short-term memory. Long conversations pose a challenge to today's LLMs; a full history may not fit inside an LLM's context window, resulting in a context loss or errors.
 
 Even if your model supports the full context length, most LLMs still perform poorly over long contexts. They get "distracted" by stale or off-topic content, all while suffering from slower response times and higher costs.
 
-Chat models accept context using [messages](/oss/python/langchain/messages), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
+Chat models accept context using [messages](https://docs.langchain.com/oss/python/langchain/messages), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
 
-<Tip>
-  Need to remember information **across** conversations? Use [long-term memory](/oss/python/langchain/long-term-memory) to store and recall user-specific or application-level data across different threads and sessions.
-</Tip>
+> [!TIP]
+> Need to remember information **across** conversations? Use [long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory) to store and recall user-specific or application-level data across different threads and sessions.
 
 ## Usage
 
 To add short-term memory (thread-level persistence) to an agent, you need to specify a `checkpointer` when creating an agent.
 
-<Info>
-  LangChain's agent manages short-term memory as a part of your agent's state.
-
-  By storing these in the graph's state, the agent can access the full context for a given conversation while maintaining separation between different threads.
-
-  State is persisted to a database (or memory) using a checkpointer so the thread can be resumed at any time.
-
-  Short-term memory updates when the agent is invoked or a step (like a tool call) is completed, and the state is read at the start of each step.
-</Info>
-
-<CodeGroup>
-  ```python Google theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="google_genai:gemini-3.6-flash",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="openai:gpt-5.5",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="anthropic:claude-sonnet-4-6",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python OpenRouter theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="openrouter:z-ai/glm-5.2",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python Fireworks theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="fireworks:accounts/fireworks/models/glm-5p2",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python Baseten theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="baseten:zai-org/GLM-5.2",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-
-  ```python Ollama theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
-
-
-  def get_user_info() -> str:
-      """Look up information about the current user."""
-      return "No user profile on file."
-
-
-  agent = create_agent(
-      model="ollama:north-mini-code-1.0",
-      tools=[get_user_info],
-      checkpointer=InMemorySaver(),  # [!code highlight]
-  )
-
-  thread_config = {"configurable": {"thread_id": "1"}}
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
-
-  response = agent.invoke(
-      {"messages": [{"role": "user", "content": "What's my name?"}]},
-      thread_config,  # [!code highlight]
-  )["messages"][-1].content
-
-  print(response)  # "You are Bob!"
-  ```
-</CodeGroup>
+> [!NOTE]
+> LangChain's agent manages short-term memory as a part of your agent's state.
+>
+> By storing these in the graph's state, the agent can access the full context for a given conversation while maintaining separation between different threads.
+>
+> State is persisted to a database (or memory) using a checkpointer so the thread can be resumed at any time.
+>
+> Short-term memory updates when the agent is invoked or a step (like a tool call) is completed, and the state is read at the start of each step.
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="google_genai:gemini-3.6-flash",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="openai:gpt-5.5",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="anthropic:claude-sonnet-4-6",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="openrouter:z-ai/glm-5.2",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="fireworks:accounts/fireworks/models/glm-5p2",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="baseten:zai-org/GLM-5.2",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
+
+```python
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
+
+def get_user_info() -> str:
+    """Look up information about the current user."""
+    return "No user profile on file."
+
+agent = create_agent(
+    model="ollama:north-mini-code-1.0",
+    tools=[get_user_info],
+    checkpointer=InMemorySaver(),  # [!code highlight]
+)
+
+thread_config = {"configurable": {"thread_id": "1"}}
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "Hi! My name is Bob."}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "Hi Bob! Nice to see you here. How are you doing?"
+
+response = agent.invoke(
+    {"messages": [{"role": "user", "content": "What's my name?"}]},
+    thread_config,  # [!code highlight]
+)["messages"][-1].content
+
+print(response)  # "You are Bob!"
+```
 
 ### In production
 
 In production, use a checkpointer backed by a database:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langgraph-checkpoint-postgres "psycopg[binary]"
-  ```
+```bash
+pip install -U langgraph-checkpoint-postgres "psycopg[binary]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langgraph-checkpoint-postgres "psycopg[binary]"
-  ```
-</CodeGroup>
+```bash
+uv add langgraph-checkpoint-postgres "psycopg[binary]"
+```
 
-<Note>
-  By default, `langgraph-checkpoint-postgres` installs `psycopg` (Psycopg 3) without extras. The install above adds `psycopg[binary]`, which is recommended for most users. For other options, see the [Psycopg installation docs](https://www.psycopg.org/psycopg3/docs/basic/install.html).
-</Note>
+> [!NOTE]
+> By default, `langgraph-checkpoint-postgres` installs `psycopg` (Psycopg 3) without extras. The install above adds `psycopg[binary]`, which is recommended for most users. For other options, see the [Psycopg installation docs](https://www.psycopg.org/psycopg3/docs/basic/install.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langgraph.checkpoint.postgres import PostgresSaver  # [!code highlight]
 
@@ -300,9 +274,8 @@ with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
     )
 ```
 
-<Note>
-  For more checkpointer options including SQLite, Postgres, and Azure Cosmos DB, see the [list of checkpointer libraries](/oss/python/langgraph/checkpointers#checkpointer-libraries) in the Persistence documentation.
-</Note>
+> [!NOTE]
+> For more checkpointer options including SQLite, Postgres, and Azure Cosmos DB, see the [list of checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) in the Persistence documentation.
 
 ## Customizing agent memory
 
@@ -310,10 +283,9 @@ By default, agents use [`AgentState`](https://reference.langchain.com/python/lan
 
 You can extend [`AgentState`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentState) to add additional fields. Custom state schemas are passed to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) using the [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent, AgentState
 from langgraph.checkpoint.memory import InMemorySaver
-
 
 class CustomAgentState(AgentState):  # [!code highlight]
     user_id: str  # [!code highlight]
@@ -338,25 +310,19 @@ result = agent.invoke(
 
 ## Common patterns
 
-With [short-term memory](#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
+With [short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
-<CardGroup cols={2}>
-  <Card title="Trim messages" icon="scissors" href="#trim-messages" arrow>
-    Remove first or last N messages (before calling LLM)
-  </Card>
+#### [Trim messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#trim-messages)
+Remove first or last N messages (before calling LLM)
 
-  <Card title="Delete messages" icon="trash" href="#delete-messages" arrow>
-    Delete messages from LangGraph state permanently
-  </Card>
+#### [Delete messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#delete-messages)
+Delete messages from LangGraph state permanently
 
-  <Card title="Summarize messages" icon="stack-2" href="#summarize-messages" arrow>
-    Summarize earlier messages in the history and replace them with a summary
-  </Card>
+#### [Summarize messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#summarize-messages)
+Summarize earlier messages in the history and replace them with a summary
 
-  <Card title="Custom strategies" icon="adjustments">
-    Custom strategies (e.g., message filtering, etc.)
-  </Card>
-</CardGroup>
+#### Custom strategies
+Custom strategies (e.g., message filtering, etc.)
 
 This allows the agent to keep track of the conversation without exceeding the LLM's context window.
 
@@ -368,7 +334,7 @@ One way to decide when to truncate messages is to count the tokens in the messag
 
 To trim message history in an agent, use the [`@before_model`](https://reference.langchain.com/python/langchain/agents/middleware/types/before_model) middleware decorator:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import RemoveMessage
 from langgraph.graph.message import REMOVE_ALL_MESSAGES
 from langgraph.checkpoint.memory import InMemorySaver
@@ -377,7 +343,6 @@ from langchain.agents.middleware import before_model
 from langgraph.runtime import Runtime
 from langchain_core.runnables import RunnableConfig
 from typing import Any
-
 
 @before_model
 def trim_messages(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
@@ -429,13 +394,13 @@ This is useful when you want to remove specific messages or clear the entire mes
 
 To delete messages from the graph state, you can use the `RemoveMessage`.
 
-For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](/oss/python/langgraph/graph-api#reducers).
+For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers).
 
 The default [`AgentState`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentState) provides this.
 
 To remove specific messages:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import RemoveMessage  # [!code highlight]
 
 def delete_messages(state):
@@ -447,28 +412,26 @@ def delete_messages(state):
 
 To remove **all** messages:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.graph.message import REMOVE_ALL_MESSAGES  # [!code highlight]
 
 def delete_messages(state):
     return {"messages": [RemoveMessage(id=REMOVE_ALL_MESSAGES)]}  # [!code highlight]
 ```
 
-<Warning>
-  When deleting messages, **make sure** that the resulting message history is valid. Check the limitations of the LLM provider you're using. For example:
+> [!WARNING]
+> When deleting messages, **make sure** that the resulting message history is valid. Check the limitations of the LLM provider you're using. For example:
+>
+> * Some providers expect message history to start with a `user` message
+> * Most providers require `assistant` messages with tool calls to be followed by corresponding `tool` result messages.
 
-  * Some providers expect message history to start with a `user` message
-  * Most providers require `assistant` messages with tool calls to be followed by corresponding `tool` result messages.
-</Warning>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import RemoveMessage
 from langchain.agents import create_agent, AgentState
 from langchain.agents.middleware import after_model
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.runtime import Runtime
 from langchain_core.runnables import RunnableConfig
-
 
 @after_model
 def delete_old_messages(state: AgentState, runtime: Runtime) -> dict | None:
@@ -478,7 +441,6 @@ def delete_old_messages(state: AgentState, runtime: Runtime) -> dict | None:
         # remove the earliest two messages
         return {"messages": [RemoveMessage(id=m.id) for m in messages[:2]]}
     return None
-
 
 agent = create_agent(
     "gpt-5-nano",
@@ -531,16 +493,15 @@ for snapshot in stream.values:
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue.
 Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c8ed3facdccd4ef5c7e52902c72ba938" alt="Summary" width="609" height="242" data-path="oss/images/summary.png" />
+> **Image:** [Summary](https://docs.langchain.com/oss/python/langchain/short-term-memory)
 
-To summarize message history in an agent, use the built-in [`SummarizationMiddleware`](/oss/python/langchain/middleware#summarization):
+To summarize message history in an agent, use the built-in [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import SummarizationMiddleware
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_core.runnables import RunnableConfig
-
 
 checkpointer = InMemorySaver()
 
@@ -571,7 +532,7 @@ Your name is Bob!
 """
 ```
 
-See [`SummarizationMiddleware`](/oss/python/langchain/middleware#summarization) for more configuration options.
+See [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization) for more configuration options.
 
 ## Access memory
 
@@ -585,10 +546,9 @@ Access short term memory (state) in a tool using the `runtime` parameter (typed 
 
 The `runtime` parameter is hidden from the tool signature (so the model doesn't see it), but the tool can access the state through it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent, AgentState
 from langchain.tools import tool, ToolRuntime
-
 
 class CustomState(AgentState):
     user_id: str
@@ -621,14 +581,13 @@ To modify the agent's short-term memory (state) during execution, you can return
 
 This is useful for persisting intermediate results or making information accessible to subsequent tools or prompts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 from langchain_core.runnables import RunnableConfig
 from langchain.messages import ToolMessage
 from langchain.agents import create_agent, AgentState
 from langgraph.types import Command
 from pydantic import BaseModel
-
 
 class CustomState(AgentState):  # [!code highlight]
     user_name: str
@@ -688,27 +647,23 @@ agent.invoke(
 
 Access short term memory (state) in middleware to create dynamic prompts based on conversation history or custom state fields.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from typing import TypedDict
 from langchain.agents.middleware import dynamic_prompt, ModelRequest
 
-
 class CustomContext(TypedDict):
     user_name: str
-
 
 def get_weather(city: str) -> str:
     """Get the weather in a city."""
     return f"The weather in {city} is always sunny!"
-
 
 @dynamic_prompt
 def dynamic_system_prompt(request: ModelRequest) -> str:
     user_name = request.runtime.context["user_name"]
     system_prompt = f"You are a helpful assistant. Address the user as {user_name}."
     return system_prompt
-
 
 agent = create_agent(
     model="gpt-5-nano",
@@ -726,7 +681,7 @@ for msg in result["messages"]:
 
 ```
 
-```shell title="Output" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 ================================ Human Message =================================
 
 What is the weather in SF?
@@ -749,7 +704,7 @@ Hi John Smith, the weather in San Francisco is always sunny!
 
 Access short term memory (state) in [`@before_model`](https://reference.langchain.com/python/langchain/agents/middleware/types/before_model) middleware to process messages before model calls.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
     init: {
         "fontFamily": "monospace",
@@ -776,7 +731,7 @@ graph TD
     class PRE,MODEL,TOOLS neutral;
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import RemoveMessage
 from langgraph.graph.message import REMOVE_ALL_MESSAGES
 from langgraph.checkpoint.memory import InMemorySaver
@@ -785,7 +740,6 @@ from langchain.agents.middleware import before_model
 from langchain_core.runnables import RunnableConfig
 from langgraph.runtime import Runtime
 from typing import Any
-
 
 @before_model
 def trim_messages(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
@@ -805,7 +759,6 @@ def trim_messages(state: AgentState, runtime: Runtime) -> dict[str, Any] | None:
             *new_messages
         ]
     }
-
 
 agent = create_agent(
     "gpt-5-nano",
@@ -834,7 +787,7 @@ If you'd like me to call you a nickname or use a different name, just say the wo
 
 Access short term memory (state) in [`@after_model`](https://reference.langchain.com/python/langchain/agents/middleware/types/after_model) middleware to process messages after model calls.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
     init: {
         "fontFamily": "monospace",
@@ -863,13 +816,12 @@ graph TD
     class MODEL,TOOLS neutral;
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import RemoveMessage
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain.agents import create_agent, AgentState
 from langchain.agents.middleware import after_model
 from langgraph.runtime import Runtime
-
 
 @after_model
 def validate_response(state: AgentState, runtime: Runtime) -> dict | None:
@@ -890,12 +842,8 @@ agent = create_agent(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/short-term-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

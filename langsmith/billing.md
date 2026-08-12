@@ -1,28 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage billing in your account
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/billing)
 This page describes how to manage billing for your LangSmith organization:
 
-* [Set up billing for your account](#set-up-billing-for-your-account): Complete the billing setup process for Developer and Plus plans, including special instructions for legacy accounts.
-* [Track contract usage (Enterprise)](#track-contract-usage-enterprise): View prepaid contract consumption.
-* [Update your information](#update-your-information-paid-plans-only): Modify invoice email addresses, business information, and tax IDs for your organization.
-* [Enforce spend limits](#enforce-spend-limits): Learn how to manage your spend through usage limits and data retention.
+* [Set up billing for your account](https://docs.langchain.com/langsmith/billing#set-up-billing-for-your-account): Complete the billing setup process for Developer and Plus plans, including special instructions for legacy accounts.
+* [Track contract usage (Enterprise)](https://docs.langchain.com/langsmith/billing#track-contract-usage-enterprise): View prepaid contract consumption.
+* [Update your information](https://docs.langchain.com/langsmith/billing#update-your-information-paid-plans-only): Modify invoice email addresses, business information, and tax IDs for your organization.
+* [Enforce spend limits](https://docs.langchain.com/langsmith/billing#enforce-spend-limits): Learn how to manage your spend through usage limits and data retention.
 
 ## Set up billing for your account
 
-<Note>
-  Before using this guide, note the following:
-
-  * If you are interested in the [Enterprise](https://www.langchain.com/pricing) plan, please [contact sales](https://www.langchain.com/contact-sales). This guide is only for our self-serve billing plans.
-</Note>
+> [!NOTE]
+> Before using this guide, note the following:
+>
+> * If you are interested in the [Enterprise](https://www.langchain.com/pricing) plan, please [contact sales](https://www.langchain.com/contact-sales). This guide is only for our self-serve billing plans.
 
 To set up billing for your LangSmith organization, navigate to the [Billing and Usage](https://smith.langchain.com/settings/payments) page under **Settings**. Depending on your organization's settings, there are different setup guides:
 
-* [Developer plan](#developer-plan%3A-set-up-billing-on-your-personal-organization)
-* [Plus plan](#plus-plan%3A-set-up-billing-on-a-shared-organization)
+* [Developer plan](https://docs.langchain.com/langsmith/billing#developer-plan%3A-set-up-billing-on-your-personal-organization)
+* [Plus plan](https://docs.langchain.com/langsmith/billing#plus-plan%3A-set-up-billing-on-a-shared-organization)
 
 ### Developer plan: set up billing on your personal organization
 
@@ -36,23 +31,21 @@ Personal organizations are limited to 5,000 traces per month until a credit card
 
 Team organizations are given an initial 10,000 traces per month. Any excess traces will be charged at rates specified on the [pricing](https://www.langchain.com/pricing-langsmith) page.
 
-<Note>
-  New organizations that you manually create are required to be on the Plus Plan. If you see a message about needing to upgrade to Plus to use this organization, follow these steps.
-</Note>
+> [!NOTE]
+> New organizations that you manually create are required to be on the Plus Plan. If you see a message about needing to upgrade to Plus to use this organization, follow these steps.
 
 1. Click **Upgrade to Plus**.
 2. Invite members to your organization, as desired.
-3. Enter your credit card information. Then, enter business information, invoice email, and tax ID. If this organization belongs to a business, check the **This is a business** checkbox and enter the information accordingly. For more information, refer to the [Update your information section](#update-your-information-paid-plans-only).
+3. Enter your credit card information. Then, enter business information, invoice email, and tax ID. If this organization belongs to a business, check the **This is a business** checkbox and enter the information accordingly. For more information, refer to the [Update your information section](https://docs.langchain.com/langsmith/billing#update-your-information-paid-plans-only).
 
 ## Track contract usage (Enterprise)
 
-Contract usage tracking is available for [**Enterprise plan**](/langsmith/pricing-plans) customers with prepaid commitments. You must have the [`organization:manage` permission](/langsmith/organization-workspace-operations) to access this feature.
+Contract usage tracking is available for [**Enterprise plan**](https://docs.langchain.com/langsmith/pricing-plans) customers with prepaid commitments. You must have the [`organization:manage` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) to access this feature.
 
-For details on viewing your prepaid contract consumption, refer to [Contract usage](/langsmith/view-usage#contract-usage).
+For details on viewing your prepaid contract consumption, refer to [Contract usage](https://docs.langchain.com/langsmith/view-usage#contract-usage).
 
-<Note>
-  For more details on the Enterprise plan, [contact the sales team](https://www.langchain.com/contact-sales).
-</Note>
+> [!NOTE]
+> For more details on the Enterprise plan, [contact the sales team](https://www.langchain.com/contact-sales).
 
 ## Update your information (Paid plans only)
 
@@ -71,9 +64,8 @@ You will receive all future invoices to the updated email address.
 
 ### Business information and tax ID
 
-<Note>
-  In certain jurisdictions, LangSmith is required to collect sales tax. If you are a business, providing your tax ID may qualify you for a sales tax exemption.
-</Note>
+> [!NOTE]
+> In certain jurisdictions, LangSmith is required to collect sales tax. If you are a business, providing your tax ID may qualify you for a sales tax exemption.
 
 To update your organization's business information, follow these steps:
 
@@ -91,65 +83,61 @@ This ensures that your business information is up-to-date and accurate for billi
 
 ## Enforce spend limits
 
-<Check>
-  You may find it helpful to read the following pages, before continuing with this section on optimizing your tracing spend:
+> [!TIP]
+> You may find it helpful to read the following pages, before continuing with this section on optimizing your tracing spend:
+>
+> * [Data Retention Conceptual Docs](https://docs.langchain.com/langsmith/usage-and-billing#data-retention)
+> * [Usage Limiting Conceptual Docs](https://docs.langchain.com/langsmith/usage-and-billing#usage-limits)
 
-  * [Data Retention Conceptual Docs](/langsmith/usage-and-billing#data-retention)
-  * [Usage Limiting Conceptual Docs](/langsmith/usage-and-billing#usage-limits)
-</Check>
-
-<Note>
-  Some of the features mentioned in this guide are not currently available on Enterprise plan due to its custom nature of billing. If you are on the Enterprise plan and have questions about cost optimization, contact your sales rep or support via [support.langchain.com](https://support.langchain.com).
-</Note>
+> [!NOTE]
+> Some of the features mentioned in this guide are not currently available on Enterprise plan due to its custom nature of billing. If you are on the Enterprise plan and have questions about cost optimization, contact your sales rep or support via [support.langchain.com](https://support.langchain.com).
 
 ### Understand your current usage
 
-The first step of any optimization process is to understand current usage. For details on the usage graph, granular usage, invoices, and contract usage, refer to [View usage](/langsmith/view-usage).
+The first step of any optimization process is to understand current usage. For details on the usage graph, granular usage, invoices, and contract usage, refer to [View usage](https://docs.langchain.com/langsmith/view-usage).
 
 LangSmith measures usage per workspace, because workspaces often represent development environments or teams within an organization.
 
 ### Set limits on usage
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/-XAfdD9knKGGfZBx/langsmith/images/p2usagelimitsempty-v2.png?fit=max&auto=format&n=-XAfdD9knKGGfZBx&q=85&s=27addecc92b87dd4131683fb8500f96c" alt="P2usagelimitsempty v2" width="2598" height="1582" data-path="langsmith/images/p2usagelimitsempty-v2.png" />
+> **Image:** [P2usagelimitsempty v2](https://docs.langchain.com/langsmith/billing)
 
 #### Set spend limit for workspace
 
 1. To set limits, navigate to **Settings** -> **Billing and Usage** -> **Usage limits**.
 2. Input a spend limit for your selected workspace. LangSmith will determine an appropriate number of base and extended trace limits to match that spend. The trace limits include the free trace allocation that comes with your plan (see details on [pricing page](https://smith.langchain.com/settings/payments)).
 
-<Note>
-  For organizations with **multiple workspaces only**: For simplicity, LangSmith incorporates the free traces into the cost calculation of the **first workspace only**. In actuality, the free traces can be "consumed" by any workspace. Therefore, although workspace-level spend limits are approximate for multi-workspace organizations, the organization-level spend limit is absolute.
-</Note>
+> [!NOTE]
+> For organizations with **multiple workspaces only**: For simplicity, LangSmith incorporates the free traces into the cost calculation of the **first workspace only**. In actuality, the free traces can be "consumed" by any workspace. Therefore, although workspace-level spend limits are approximate for multi-workspace organizations, the organization-level spend limit is absolute.
 
 #### Configure trace tier distribution
 
-LangSmith has two trace tiers: base traces and extended traces. Base traces have the base retention and are short-lived (14 days), while extended traces have extended retention and are long-lived (400 days by default, [customizable for Enterprise customers](/langsmith/data-purging-compliance#customize-extended-retention-policy)). For more information, refer to the [data retention conceptual docs](/langsmith/usage-and-billing#data-retention).
+LangSmith has two trace tiers: base traces and extended traces. Base traces have the base retention and are short-lived (14 days), while extended traces have extended retention and are long-lived (400 days by default, [customizable for Enterprise customers](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy)). For more information, refer to the [data retention conceptual docs](https://docs.langchain.com/langsmith/usage-and-billing#data-retention).
 
 Set the desired default trace tier by selecting an option below the **Default data retention** label. All traces will have this tier by default when they are registered. Note that because extended traces cost more than base traces, selecting **Extended** as your default data retention option will result in less overall traces allowed in the billing period. By default, updating this setting will only apply to future incoming traces. To apply to all existing traces in the workspace, select the checkbox.
 
 If the default data retention is set to **Base** you can optionally use the slider to distribute trace limits across base and extended tracess. LangSmith automatically provides a suggestion for this distribution but you can tailor this to your needs. For example, if you are running lots of automations or other features that may upgrade a trace to extended, you may want to increase your extended trace limits. To see the complete list of features that may upgrade a trace, [see here](https://docs.langchain.com/langsmith/usage-and-billing#how-it-works:~:text=Data%20retention%20auto%2Dupgrades).
 
-<Note>
-  The extended data retention limit can cause features other than tracing to stop working once reached. If you plan to use this feature, read more about its [functionality and side effects](/langsmith/usage-and-billing#side-effects-of-extended-data-retention-traces-limit).
-</Note>
+> [!NOTE]
+> The extended data retention limit can cause features other than tracing to stop working once reached. If you plan to use this feature, read more about its [functionality and side effects](https://docs.langchain.com/langsmith/usage-and-billing#side-effects-of-extended-data-retention-traces-limit).
 
 ### Other methods of managing traces
 
-#### Customize extended retention period ([Enterprise](/langsmith/pricing-plans) only)
+#### Customize extended retention period ([Enterprise](https://docs.langchain.com/langsmith/pricing-plans) only)
 
-[Enterprise](/langsmith/pricing-plans) customers can customize the extended data retention period at the workspace level to meet compliance requirements. The default is 400 days, but this can be adjusted based on your organization's needs. For more information, refer to [Customize extended retention policy](/langsmith/data-purging-compliance#customize-extended-retention-policy).
+[Enterprise](https://docs.langchain.com/langsmith/pricing-plans) customers can customize the extended data retention period at the workspace level to meet compliance requirements. The default is 400 days, but this can be adjusted based on your organization's needs. For more information, refer to [Customize extended retention policy](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy).
 
 #### Change project-level default retention
 
-Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (400 days). To customize the extended duration beyond 400 days, use [workspace-level configuration](/langsmith/data-purging-compliance#customize-extended-retention-policy) (Enterprise only).
+Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (400 days). To customize the extended duration beyond 400 days, use [workspace-level configuration](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy) (Enterprise only).
 
 Navigate to **Projects** > ***Your project name*** > Select **Retention** and select the desired default retention. This will only affect retention (and pricing) for **traces going forward**.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/p1projectretention.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=394b513df5ef31d0309f5f3c78bd315a" alt="P1projectretention" width="1358" height="452" data-path="langsmith/images/p1projectretention.png" />
+> **Image:** [P1projectretention](https://docs.langchain.com/langsmith/billing)
 
 #### Apply extended data retention to a percentage of traces
 
-You may not want all traces to expire after 14 days. You can automatically extend the retention of traces that match some criteria by creating an [automation rule](/langsmith/rules). You might want to apply extended data retention to specific types of traces, such as:
+You may not want all traces to expire after 14 days. You can automatically extend the retention of traces that match some criteria by creating an [automation rule](https://docs.langchain.com/langsmith/rules). You might want to apply extended data retention to specific types of traces, such as:
 
 * 10% of all traces: For general analysis or analyzing trends long term.
 * Errored traces: To investigate and debug issues thoroughly.
@@ -158,15 +146,14 @@ You may not want all traces to expire after 14 days. You can automatically exten
 To configure this:
 
 1. Navigate to **Projects** > ***Your project name*** > Select **+ New** > Select **New Automation**.
-2. Name your rule and optionally apply filters or a sample rate. For more information on configuring filters, refer to [filtering techniques](/langsmith/filter-traces-in-application#filter-operators).
+2. Name your rule and optionally apply filters or a sample rate. For more information on configuring filters, refer to [filtering techniques](https://docs.langchain.com/langsmith/filter-traces-in-application#filter-operators).
 
-<Note>
-  When an automation rule matches any [run](/langsmith/observability-concepts#runs) within a [trace](/langsmith/observability-concepts#traces), then all runs within the trace are upgraded to extended data retention (400 days by default, [customizable for Enterprise customers](/langsmith/data-purging-compliance#customize-extended-retention-policy)).
-</Note>
+> [!NOTE]
+> When an automation rule matches any [run](https://docs.langchain.com/langsmith/observability-concepts#runs) within a [trace](https://docs.langchain.com/langsmith/observability-concepts#traces), then all runs within the trace are upgraded to extended data retention (400 days by default, [customizable for Enterprise customers](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy)).
 
 For example, this is the expected configuration to keep 10% of all traces for extended data retention:
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/langsmith/images/P2SampleTraces.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=09bbdf5ef7cf3a5a99d6bf0a704e2143" alt="P2sampletraces" width="640" height="610" data-path="langsmith/images/P2SampleTraces.png" />
+> **Image:** [P2sampletraces](https://docs.langchain.com/langsmith/billing)
 
 If you want to keep a subset of traces for **longer than 400 days** for data collection purposes, you can create another run rule that sends some runs to a dataset of your choosing. A dataset allows you to store the trace inputs and outputs (e.g., as a key-value dataset), and will persist indefinitely, even after the trace gets deleted.
 
@@ -174,14 +161,13 @@ If you want to keep a subset of traces for **longer than 400 days** for data col
 
 In addition to traces, LangSmith charges for deployed agents via LangSmith Deployment. Deployments are billed on the resources they consume:
 
-* **Compute**: The vCPU and memory a deployment uses while resources are provisioned, measured in LangChain Compute Units (LCU). A [Serverless](/langsmith/cloud-platform-features#serverless) deployment can [scale to zero (beta)](/langsmith/cloud-platform-features#serverless) after a period of inactivity, so compute charges stop only once it has scaled down. A [Dedicated](/langsmith/cloud-platform-features#dedicated) deployment is always-on and consumes compute continuously.
+* **Compute**: The vCPU and memory a deployment uses while resources are provisioned, measured in LangChain Compute Units (LCU). A [Serverless](https://docs.langchain.com/langsmith/cloud-platform-features#serverless) deployment can [scale to zero (beta)](https://docs.langchain.com/langsmith/cloud-platform-features#serverless) after a period of inactivity, so compute charges stop only once it has scaled down. A [Dedicated](https://docs.langchain.com/langsmith/cloud-platform-features#dedicated) deployment is always-on and consumes compute continuously.
 * **Storage**: The database storage a deployment uses to persist state, measured in LangChain Storage Units (LSU).
 
 For current LCU and LSU rates, and to estimate the cost of a deployment, see the [pricing page](https://www.langchain.com/pricing), which includes a deployment cost calculator.
 
-<Note>
-  This usage-based model replaces the previous per-run and uptime pricing. Existing customers remain on their current pricing until October 1, 2026, then move to the new model. Scale to zero is available only for deployments on the new pricing. The inactivity window before a Serverless deployment scales to zero may change as the feature rolls out. For questions about the transition, contact support via [support.langchain.com](https://support.langchain.com).
-</Note>
+> [!NOTE]
+> This usage-based model replaces the previous per-run and uptime pricing. Existing customers remain on their current pricing until October 1, 2026, then move to the new model. Scale to zero is available only for deployments on the new pricing. The inactivity window before a Serverless deployment scales to zero may change as the feature rolls out. For questions about the transition, contact support via [support.langchain.com](https://support.langchain.com).
 
 For high-volume deployment usage, [contact the sales team](https://www.langchain.com/contact-sales) to discuss custom pricing options.
 
@@ -191,12 +177,8 @@ If you have questions about further managing your spend, please contact support 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

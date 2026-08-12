@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Gmail toolkit integration
 
 > Integrate with the Gmail toolkit using LangChain Python.
 
-This will help you get started with the Gmail [toolkit](/oss/python/integrations/tools/google_gmail). This toolkit interacts with the Gmail API to read messages, draft and send messages, and more. For detailed documentation of all `GmailToolkit` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-google-community/gmail/toolkit/GmailToolkit).
+This will help you get started with the Gmail [toolkit](https://docs.langchain.com/oss/python/integrations/tools/google_gmail). This toolkit interacts with the Gmail API to read messages, draft and send messages, and more. For detailed documentation of all `GmailToolkit` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-google-community/gmail/toolkit/GmailToolkit).
 
 ## Setup
 
@@ -16,13 +12,13 @@ To use this toolkit, you will need to set up your credentials explained in the [
 
 This toolkit lives in the `langchain-google-community` package. We'll need the `gmail` extra:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-community\[gmail\]
 ```
 
-To enable automated tracing of individual tools, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -31,7 +27,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 By default the toolkit reads the local `credentials.json` file. You can also manually provide a `Credentials` object.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import GmailToolkit
 
 toolkit = GmailToolkit()
@@ -42,7 +38,7 @@ toolkit = GmailToolkit()
 Behind the scenes, a `googleapi` resource is created using the following methods.
 you can manually build a `googleapi` resource for more auth control.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community.gmail.utils import (
     build_resource_service,
     get_gmail_credentials,
@@ -63,12 +59,12 @@ toolkit = GmailToolkit(api_resource=api_resource)
 
 View available tools:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools = toolkit.get_tools()
 tools
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [GmailCreateDraft(api_resource=<googleapiclient.discovery.Resource object at 0x1094509d0>),
  GmailSendMessage(api_resource=<googleapiclient.discovery.Resource object at 0x1094509d0>),
  GmailSearch(api_resource=<googleapiclient.discovery.Resource object at 0x1094509d0>),
@@ -84,13 +80,13 @@ tools
 
 ## Use within an agent
 
-Below we show how to incorporate the toolkit into an [agent](/oss/python/langchain/agents).
+Below we show how to incorporate the toolkit into an [agent](https://docs.langchain.com/oss/python/langchain/agents).
 
 We will need an LLM or chat model:
 
-<ChatModelTabs customVarName="llm" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/google_gmail).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 
@@ -99,14 +95,13 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(model="gpt-5.4-mini", temperature=0)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
-
 
 agent_executor = create_agent(llm, tools)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 example_query = "Draft an email to fake@fake.com thanking them for coffee."
 
 stream = agent_executor.stream_events(
@@ -117,7 +112,7 @@ for snapshot in stream.values:
     snapshot["messages"][-1].pretty_print()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ================================ Human Message =================================
 
 Draft an email to fake@fake.com thanking them for coffee.
@@ -151,12 +146,8 @@ For detailed documentation of all `GmailToolkit` features and configurations hea
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_gmail.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_gmail.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

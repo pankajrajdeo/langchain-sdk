@@ -1,28 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Assistants
-
-*Assistants* are an [Agent Server](/langsmith/agent-server) concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple, specialized versions of the same graph architecture with different behavior at runtime. Through configuration variations (rather than structural graph changes), each assistant is optimized for a different [use case](#use-cases).
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/assistants)
+*Assistants* are an [Agent Server](https://docs.langchain.com/langsmith/agent-server) concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple, specialized versions of the same graph architecture with different behavior at runtime. Through configuration variations (rather than structural graph changes), each assistant is optimized for a different [use case](https://docs.langchain.com/langsmith/assistants#use-cases).
 
 For example, imagine a general-purpose writing agent built on a common graph architecture. While the structure remains the same, different writing styles—such as blog posts and tweets—require tailored configurations to optimize performance. To support these variations, you can create multiple assistants (e.g., one for blogs and another for tweets) that share the underlying graph but differ in model selection and system prompt.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/assistants.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=05402316c8fe86fead077ec774e873f0" alt="assistant versions" width="1824" height="692" data-path="langsmith/images/assistants.png" />
+> **Image:** [assistant versions](https://docs.langchain.com/langsmith/assistants)
 
-The Agent Server API provides several endpoints for creating and managing assistants and their versions. See the [API reference](/langsmith/server-api-ref) for more details.
+The Agent Server API provides several endpoints for creating and managing assistants and their versions. See the [API reference](https://docs.langchain.com/langsmith/server-api-ref) for more details.
 
-<Info>
-  Assistants are a [LangSmith Deployment](/langsmith/deployment) concept. They are not available in the open source LangGraph library.
-</Info>
+> [!NOTE]
+> Assistants are a [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) concept. They are not available in the open source LangGraph library.
 
 ## How assistants work with deployments
 
-When you deploy a graph with LangSmith Deployment, [Agent Server](/langsmith/agent-server) automatically creates a **default assistant** tied to that graph's default configuration. You can then create additional assistants for the same graph, each with its own configuration.
+When you deploy a graph with LangSmith Deployment, [Agent Server](https://docs.langchain.com/langsmith/agent-server) automatically creates a **default assistant** tied to that graph's default configuration. You can then create additional assistants for the same graph, each with its own configuration.
 
-If your deployment defines multiple graphs in [`langgraph.json`](/langsmith/application-structure#configuration-file), each graph gets its own default assistant:
+If your deployment defines multiple graphs in [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file), each graph gets its own default assistant:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "graphs": {
         "graph_id_1": "path_to_graph_id_1",  // default assistant created for graph_id_1
@@ -35,27 +30,26 @@ That is, there can be multiple default assistants—one for each graph defined i
 
 Assistants have several key features:
 
-* **[Managed via API and UI](/langsmith/configuration-cloud)**: Create, list, update, version, and get assistants using the Agent Server/LangGraph SDKs or the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-assistants).
+* **[Managed via API and UI](https://docs.langchain.com/langsmith/configuration-cloud)**: Create, list, update, version, and get assistants using the Agent Server/LangGraph SDKs or the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-assistants).
 * **One graph, multiple assistants**: A single deployed graph can support multiple assistants, each with different configurations (e.g., prompts, models, tools).
-* **[Versioned](#versioning) configurations**: Each assistant maintains its own configuration history through versioning. Editing an assistant creates a new version, and you can promote or roll back to any version.
-* **[Configuration](#configuration) updates without graph changes**: Update prompts, model selection, and other settings through assistant configurations, enabling rapid iteration without modifying or redeploying your graph code.
+* **[Versioned](https://docs.langchain.com/langsmith/assistants#versioning) configurations**: Each assistant maintains its own configuration history through versioning. Editing an assistant creates a new version, and you can promote or roll back to any version.
+* **[Configuration](https://docs.langchain.com/langsmith/assistants#configuration) updates without graph changes**: Update prompts, model selection, and other settings through assistant configurations, enabling rapid iteration without modifying or redeploying your graph code.
 
-<Note>
-  When invoking an assistant, you can specify either in [`langgraph.json`](/langsmith/application-structure#configuration-file):
-
-  * A **graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
-  * An **assistant ID** (UUID): Uses a specific assistant configuration
-
-  This flexibility allows you to quickly test with default settings or precisely control which configuration is used.
-</Note>
+> [!NOTE]
+> When invoking an assistant, you can specify either in [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file):
+>
+> * A **graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
+> * An **assistant ID** (UUID): Uses a specific assistant configuration
+>
+> This flexibility allows you to quickly test with default settings or precisely control which configuration is used.
 
 ### Configuration
 
-Assistants build on the LangGraph open source concept of [configuration](/oss/python/langgraph/graph-api#runtime-context).
+Assistants build on the LangGraph open source concept of [configuration](https://docs.langchain.com/oss/python/langgraph/graph-api#runtime-context).
 
-While configuration is available in the open source LangGraph library, assistants are only present in [LangSmith Deployment](/langsmith/deployment) because they are tightly coupled to your deployed graph. Upon deployment, [Agent Server](/langsmith/agent-server) will automatically create a default assistant for each graph using the graph's default configuration settings.
+While configuration is available in the open source LangGraph library, assistants are only present in [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) because they are tightly coupled to your deployed graph. Upon deployment, [Agent Server](https://docs.langchain.com/langsmith/agent-server) will automatically create a default assistant for each graph using the graph's default configuration settings.
 
-In practice, an assistant is just an *instance* of a graph with a specific configuration. Therefore, multiple assistants can reference the same graph but can contain different configurations (e.g. prompts, models, tools). The LangSmith Deployment API provides several endpoints for creating and managing assistants. See the [API reference](/langsmith/server-api-ref) and [this how-to](/langsmith/configuration-cloud) for more details on how to create assistants.
+In practice, an assistant is just an *instance* of a graph with a specific configuration. Therefore, multiple assistants can reference the same graph but can contain different configurations (e.g. prompts, models, tools). The LangSmith Deployment API provides several endpoints for creating and managing assistants. See the [API reference](https://docs.langchain.com/langsmith/server-api-ref) and [this how-to](https://docs.langchain.com/langsmith/configuration-cloud) for more details on how to create assistants.
 
 ### Use cases
 
@@ -71,7 +65,7 @@ Assistants are ideal when you need to deploy the same graph architecture with di
   * Customize behavior for each client without deploying separate infrastructure.
   * Isolate configuration changes to specific customers.
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TD
     A["Graph: agent<br/>(deployed)"]
     A --> B["Customer A Assistant<br/>━━━━━━━━━━━━━<br/>Model: GPT-4<br/>Tone: Legal<br/>Tools: Custom"]
@@ -99,7 +93,7 @@ graph TD
   * Optimize configurations for different languages, regions, or industries.
   * Maintain consistent graph logic while varying the execution details.
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TD
     A["Graph: writing-agent<br/>(deployed)"]
     A --> B["Blog Assistant<br/>━━━━━━━━━━━━━<br/>Model: GPT-4<br/>Tone: Formal<br/>Style: Long-form<br/>Tools: SEO optimization"]
@@ -121,20 +115,15 @@ Assistants support versioning to track changes over time. Once you've created an
 * Rolling back to a previous version is as simple as setting it as active.
 * All versions remain available for reference and rollback.
 
-<Warning>
-  When updating an assistant, you must provide the entire configuration payload. The update endpoint creates new versions from scratch and does not merge with previous versions. Make sure to include all configuration fields you want to retain.
-</Warning>
+> [!WARNING]
+> When updating an assistant, you must provide the entire configuration payload. The update endpoint creates new versions from scratch and does not merge with previous versions. Make sure to include all configuration fields you want to retain.
 
-For more details on how to manage assistant versions, refer to the [Manage assistants guide](/langsmith/configuration-cloud#create-a-new-version-for-your-assistant).
+For more details on how to manage assistant versions, refer to the [Manage assistants guide](https://docs.langchain.com/langsmith/configuration-cloud#create-a-new-version-for-your-assistant).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assistants.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/assistants.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

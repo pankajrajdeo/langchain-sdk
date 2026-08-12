@@ -1,41 +1,34 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Essentials
-
-> Fleet's core features
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/essentials)
+Fleet's core features
 
 LangSmith Fleet essentials are the core features that make up the foundation of your agents. They include tools, channels, memory, sub-agents, and approvals.
 
 ## Agent identity
 
-Agent identity controls whose [credentials](/langsmith/fleet/workspace-admin) the agent uses when it interacts with apps and services.
+Agent identity controls whose [credentials](https://docs.langchain.com/langsmith/fleet/workspace-admin) the agent uses when it interacts with apps and services.
 
-See [Agent identity](/langsmith/fleet/agent-identity) for more information.
+See [Agent identity](https://docs.langchain.com/langsmith/fleet/agent-identity) for more information.
 
 ## Agent sidebar
 
 Configure your agent from the sidebar built into the agent chat page. The sidebar organizes agent configuration into drawers:
 
-* **Channels**: Connect the places your agent runs in, such as Slack, Gmail, and Microsoft Teams. See [Channels](/langsmith/fleet/channels).
-* **Sharing**: Control who can use the agent, with options for private, workspace, or specific people. See [Change access to the agent](/langsmith/fleet/manage-agent-settings#change-access-to-the-agent).
-* **Connections**: Manage the integrations and tools your agent can use, set the connection format, and set each tool to run automatically or ask for approval. See [Tools](#tools), [Agent identity](#agent-identity), and [Human-in-the-loop](#human-in-the-loop).
-* **Knowledge**: Manage the agent's instructions, skills, and memory. See [Instructions](#instructions), [Skills](#skills), and [Memory](#memory).
-* **Schedule**: Run your agent on a recurring basis. See [Schedules](/langsmith/fleet/schedules).
+* **Channels**: Connect the places your agent runs in, such as Slack, Gmail, and Microsoft Teams. See [Channels](https://docs.langchain.com/langsmith/fleet/channels).
+* **Sharing**: Control who can use the agent, with options for private, workspace, or specific people. See [Change access to the agent](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#change-access-to-the-agent).
+* **Connections**: Manage the integrations and tools your agent can use, set the connection format, and set each tool to run automatically or ask for approval. See [Tools](https://docs.langchain.com/langsmith/fleet/essentials#tools), [Agent identity](https://docs.langchain.com/langsmith/fleet/essentials#agent-identity), and [Human-in-the-loop](https://docs.langchain.com/langsmith/fleet/essentials#human-in-the-loop).
+* **Knowledge**: Manage the agent's instructions, skills, and memory. See [Instructions](https://docs.langchain.com/langsmith/fleet/essentials#instructions), [Skills](https://docs.langchain.com/langsmith/fleet/essentials#skills), and [Memory](https://docs.langchain.com/langsmith/fleet/essentials#memory).
+* **Schedule**: Run your agent on a recurring basis. See [Schedules](https://docs.langchain.com/langsmith/fleet/schedules).
 * **Advanced settings**: Configure the model, API keys, sub-agents, diagnostics, and developer options for your agent.
 
-<Tip>
-  You can also configure your agent by chatting with it. In the agent chat, tell the agent how to improve itself, for example: "Add the Slack tools so you can respond to messages."
-</Tip>
+> [!TIP]
+> You can also configure your agent by chatting with it. In the agent chat, tell the agent how to improve itself, for example: "Add the Slack tools so you can respond to messages."
 
 ## Channels
 
-<Anchor id="triggers" />
-
 Channels define when your agent should start running. You can connect your agent to external tools or time-based schedules, letting it respond automatically to messages, emails, or recurring events.
 
-See [Channels](/langsmith/fleet/channels) for setup instructions and supported channel types.
+See [Channels](https://docs.langchain.com/langsmith/fleet/channels) for setup instructions and supported channel types.
 
 ## Human-in-the-loop
 
@@ -43,7 +36,7 @@ Stay in control of important decisions. You can set up your agent to pause and a
 
 ### Set an approval mode
 
-Each tool has an approval mode you can set in the **Connections** drawer of the [agent sidebar](#agent-sidebar):
+Each tool has an approval mode you can set in the **Connections** drawer of the [agent sidebar](https://docs.langchain.com/langsmith/fleet/essentials#agent-sidebar):
 
 * **Auto**: The tool runs automatically without approval.
 * **Ask**: The agent pauses and waits for your approval before the tool runs.
@@ -54,19 +47,14 @@ To require approval for a tool, set it to **Ask**. When the agent reaches that t
 
 When your agent stops to ask for approval, you have two options:
 
-<CardGroup cols={2}>
-  <Card title="Accept" icon="check">
-    Give the green light and let your agent proceed with its plan.
-  </Card>
+#### Accept
+Give the green light and let your agent proceed with its plan.
 
-  <Card title="Reject" icon="x">
-    Decline the action and tell the agent what to change.
-  </Card>
-</CardGroup>
+#### Reject
+Decline the action and tell the agent what to change.
 
-<Note>
-  When an agent is triggered from Slack, it raises the approval request directly in the Slack thread with **Approve** and **Deny** buttons, so you can respond without leaving Slack. See [Approve or deny actions in Slack](/langsmith/fleet/slack-app#approve-or-deny-actions-in-slack).
-</Note>
+> [!NOTE]
+> When an agent is triggered from Slack, it raises the approval request directly in the Slack thread with **Approve** and **Deny** buttons, so you can respond without leaving Slack. See [Approve or deny actions in Slack](https://docs.langchain.com/langsmith/fleet/slack-app#approve-or-deny-actions-in-slack).
 
 ## Instructions
 
@@ -78,17 +66,15 @@ To edit instructions:
 2. In the sidebar, expand the **Knowledge** drawer.
 3. In the **Instructions** section, edit the agent instructions.
 
-<Tip>
-  You can also update instructions by prompting the agent directly in the chat. For example: "Update your instructions to always respond in bullet points."
-</Tip>
+> [!TIP]
+> You can also update instructions by prompting the agent directly in the chat. For example: "Update your instructions to always respond in bullet points."
 
 ## LangChain Compute Units (LCUs)
 
-Fleet usage is measured in LangChain Compute Units (LCUs). LCU usage is based on the [model](#models) work your agent performs, including the selected tier and the amount of content it processes and generates.
+Fleet usage is measured in LangChain Compute Units (LCUs). LCU usage is based on the [model](https://docs.langchain.com/langsmith/fleet/essentials#models) work your agent performs, including the selected tier and the amount of content it processes and generates.
 
-<Note>
-  The new [model tiers](#models) and LCU pricing apply to new Fleet usage starting **July 15, 2026**. Organizations already using Fleet before that date keep their current setup and transition to the new model on **October 1, 2026**. If you use a custom model, contact your LangChain account team about your transition.
-</Note>
+> [!NOTE]
+> The new [model tiers](https://docs.langchain.com/langsmith/fleet/essentials#models) and LCU pricing apply to new Fleet usage starting **July 15, 2026**. Organizations already using Fleet before that date keep their current setup and transition to the new model on **October 1, 2026**. If you use a custom model, contact your LangChain account team about your transition.
 
 Allowances are shared across your organization and reset monthly:
 
@@ -108,29 +94,27 @@ Agents remember important information from previous conversations and can update
 
 Agents persist relevant details from past interactions by writing files to a **memories folder** (using `write_file` and `edit_file` tool calls). This helps them make better decisions in future conversations.
 
-<Note>
-  By default, agents require approval before saving to the memories folder. You can change this in the **Knowledge** drawer under **Memory**.
-
-  For agents that run on automated [schedules](/langsmith/fleet/schedules#add-a-schedule), we recommend [disabling the approval requirement](/langsmith/fleet/manage-agent-settings#disable-required-approval-for-memory-updates) so the agent can persist information without manual intervention.
-</Note>
+> [!NOTE]
+> By default, agents require approval before saving to the memories folder. You can change this in the **Knowledge** drawer under **Memory**.
+>
+> For agents that run on automated [schedules](https://docs.langchain.com/langsmith/fleet/schedules#add-a-schedule), we recommend [disabling the approval requirement](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#disable-required-approval-for-memory-updates) so the agent can persist information without manual intervention.
 
 For more information, see [How we built the memory system for Fleet (formerly known as Agent Builder)](https://www.langchain.com/conceptual-guides/how-we-built-agent-builders-memory).
 
 ## Models
 
-Fleet manages models for you. It selects and maintains a strong model for each task, so you get good results without having to choose a provider, configure a model, or supply an API key. Usage is billed in [LangChain Compute Units (LCUs)](#langchain-compute-units-lcus).
+Fleet manages models for you. It selects and maintains a strong model for each task, so you get good results without having to choose a provider, configure a model, or supply an API key. Usage is billed in [LangChain Compute Units (LCUs)](https://docs.langchain.com/langsmith/fleet/essentials#langchain-compute-units-lcus).
 
-<Note>
-  The new model tiers and [LCU](#langchain-compute-units-lcus) pricing apply to new Fleet usage starting **July 15, 2026**. Organizations already using Fleet before that date keep their current setup and transition to the new model on **October 1, 2026**. If you use a custom model, contact your LangChain account team about your transition.
-</Note>
+> [!NOTE]
+> The new model tiers and [LCU](https://docs.langchain.com/langsmith/fleet/essentials#langchain-compute-units-lcus) pricing apply to new Fleet usage starting **July 15, 2026**. Organizations already using Fleet before that date keep their current setup and transition to the new model on **October 1, 2026**. If you use a custom model, contact your LangChain account team about your transition.
 
 Fleet provides three managed tiers. The model behind each tier may change over time as new models become available, so you can choose based on the work you need done instead of a specific provider or model.
 
-| Tier     | Best for                                                        | <Tooltip tip="Higher tiers typically cost more and take longer.">Relative cost</Tooltip> |
-| -------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| **Fast** | Everyday tasks such as research, summaries, and drafting        | Low                                                                                      |
-| **Pro**  | More complex tasks that benefit from stronger reasoning         | Medium                                                                                   |
-| **Max**  | The most demanding tasks, where maximum capability matters most | High                                                                                     |
+| Tier     | Best for                                                        | Relative cost |
+| -------- | --------------------------------------------------------------- | -------------------------------- |
+| **Fast** | Everyday tasks such as research, summaries, and drafting        | Low                              |
+| **Pro**  | More complex tasks that benefit from stronger reasoning         | Medium                           |
+| **Max**  | The most demanding tasks, where maximum capability matters most | High                             |
 
 ### Custom models
 
@@ -151,7 +135,7 @@ Using skills can help:
 
 To add a skill, expand the **Knowledge** drawer in the agent sidebar and click **+ Add skill**.
 
-For more information, see [Skills](/langsmith/fleet/skills).
+For more information, see [Skills](https://docs.langchain.com/langsmith/fleet/skills).
 
 ## Sub-agents
 
@@ -186,13 +170,13 @@ You can manually mark any thread as read or unread at any time.
 
 Tools let your agents interact with your apps and services. Your agents can send emails, create calendar events, post messages, search the web, and more. Choose from built-in tools for Gmail, Slack, Google Calendar, GitHub, and many others.
 
-Tools work regardless of how the agent was triggered. For example, you can start a task in the Fleet chat UI and have the agent send you a [Slack message](/langsmith/fleet/slack-app#add-slack-tools) when it's done.
+Tools work regardless of how the agent was triggered. For example, you can start a task in the Fleet chat UI and have the agent send you a [Slack message](https://docs.langchain.com/langsmith/fleet/slack-app#add-slack-tools) when it's done.
 
-See [Tool integrations](/langsmith/fleet/tools) for more information.
+See [Tool integrations](https://docs.langchain.com/langsmith/fleet/tools) for more information.
 
 ## Traces
 
-Traces are a series of steps that your agent takes to go from input to output. You can use [LangSmith](/langsmith/observability) to visualize these execution steps.
+Traces are a series of steps that your agent takes to go from input to output. You can use [LangSmith](https://docs.langchain.com/langsmith/observability) to visualize these execution steps.
 
 To view all traces for your agent:
 
@@ -205,28 +189,23 @@ To view a trace for a specific thread:
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-essentials), navigate to your agent's inbox.
 2. Right-click on the thread you want to trace and select **View trace**.
 
-For more information, see [LangSmith Observability](/langsmith/observability).
+For more information, see [LangSmith Observability](https://docs.langchain.com/langsmith/observability).
 
-<Note>
-  Fleet traces all agent runs and stores them in LangSmith. LLM providers do not retain your data. On LangSmith Cloud, trace data is stored with a 14-day retention period by default.
-</Note>
+> [!NOTE]
+> Fleet traces all agent runs and stores them in LangSmith. LLM providers do not retain your data. On LangSmith Cloud, trace data is stored with a 14-day retention period by default.
 
 ## Next steps
 
-* [Set up your workspace](/langsmith/fleet/workspace-admin)
-* [Connect apps and services](/langsmith/fleet/tools)
-* [Use remote servers for tools](/langsmith/fleet/remote-mcp-servers)
-* [Choose between workspace and private agents](/langsmith/fleet/manage-agent-settings)
-* [Call agents from your app](/langsmith/fleet/code)
+* [Set up your workspace](https://docs.langchain.com/langsmith/fleet/workspace-admin)
+* [Connect apps and services](https://docs.langchain.com/langsmith/fleet/tools)
+* [Use remote servers for tools](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers)
+* [Choose between workspace and private agents](https://docs.langchain.com/langsmith/fleet/manage-agent-settings)
+* [Call agents from your app](https://docs.langchain.com/langsmith/fleet/code)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/essentials.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/essentials.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

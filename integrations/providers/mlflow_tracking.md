@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MLflow integrations
 
 > Integrate with MLflow using LangChain Python.
@@ -23,13 +19,13 @@ This short guide focuses on MLflow's tracing capability for LangChain and LangGr
 
 To get started with MLflow tracing for LangChain, install the MLflow Python package. We will also use the `langchain-openai` package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install mlflow langchain-openai langgraph -qU
 ```
 
 Next, set the MLflow tracking URI and OpenAI API key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 # Set MLflow tracking URI if you have MLflow Tracking Server running
@@ -41,7 +37,7 @@ os.environ["OPENAI_API_KEY"] = ""
 
 MLflow's tracing capability helps you visualize the execution flow of your LangChain applications. Here's how to enable it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import mlflow
 
 # Optional: Set an experiment to organize your traces
@@ -55,7 +51,7 @@ mlflow.langchain.autolog()
 
 Here's a complete example showing MLflow tracing with LangChain:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import mlflow
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -95,15 +91,13 @@ To view the trace, run `mlflow ui` in your terminal and navigate to the Traces t
 
 MLflow also supports tracing LangGraph applications:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import mlflow
 from langchain.tools import tool
 from langchain.agents import create_agent
 
-
 # Enable MLflow tracing
 mlflow.langchain.autolog()
-
 
 # Define a tool
 @tool
@@ -111,7 +105,6 @@ def count_words(text: str) -> str:
     """Counts the number of words in a text."""
     word_count = len(text.split())
     return f"This text contains {word_count} words."
-
 
 # Create a LangGraph agent
 llm = ChatOpenAI(model="gpt-5.5")
@@ -137,12 +130,8 @@ For more information on using MLflow with LangChain, please visit:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mlflow_tracking.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mlflow_tracking.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

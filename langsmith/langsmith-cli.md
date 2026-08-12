@@ -1,53 +1,46 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith CLI
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-cli)
+Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
 
-> Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
-
-The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs JSON by default for scripting, with a `--format pretty` option for human-readable tables. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](/langsmith/observability-concepts).
+The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs JSON by default for scripting, with a `--format pretty` option for human-readable tables. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](https://docs.langchain.com/langsmith/observability-concepts).
 
 ## Install
 
-<CodeGroup>
-  ```bash macOS / Linux (recommended) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl -fsSL https://cli.langsmith.com/install.sh | sh
-  ```
+```bash
+curl -fsSL https://cli.langsmith.com/install.sh | sh
+```
 
-  ```powershell Windows theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  irm https://cli.langsmith.com/install.ps1 | iex
-  ```
+```powershell
+irm https://cli.langsmith.com/install.ps1 | iex
+```
 
-  ```bash Homebrew theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  brew install langchain-ai/tap/langsmith-cli
-  ```
+```bash
+brew install langchain-ai/tap/langsmith-cli
+```
 
-  ```powershell Scoop theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  scoop install langsmith-cli
-  ```
+```powershell
+scoop install langsmith-cli
+```
 
-  ```bash GitHub Releases theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Download the latest binary for your platform:
-  # https://github.com/langchain-ai/langsmith-cli/releases
-  ```
+```bash
+# Download the latest binary for your platform:
+# https://github.com/langchain-ai/langsmith-cli/releases
+```
 
-  ```bash Go install theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  go install github.com/langchain-ai/langsmith-cli/cmd/langsmith@latest
-  ```
-</CodeGroup>
+```bash
+go install github.com/langchain-ai/langsmith-cli/cmd/langsmith@latest
+```
 
 To upgrade at any time:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith self-update
 ```
 
 Use the `--dry-run` flag to preview the update without installing.
 
-<Note>
-  Querying a [SmithDB](/langsmith/smithdb-sdk-migration)-backed deployment requires LangSmith CLI `v0.2.44` or later.
-</Note>
+> [!NOTE]
+> Querying a [SmithDB](https://docs.langchain.com/langsmith/smithdb-sdk-migration)-backed deployment requires LangSmith CLI `v0.2.44` or later.
 
 ## Authenticate
 
@@ -55,61 +48,60 @@ Use the `--dry-run` flag to preview the update without installing.
 
 The recommended local setup is to authenticate with OAuth:
 
-<Note>
-  `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and newer, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled (requires a signing JWKS to be configured). See [Self-hosted instances](#self-hosted-instances). On earlier deployments, or without a signing JWKS, authenticate with an API key or create an API-key profile.
-</Note>
+> [!NOTE]
+> `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and newer, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled (requires a signing JWKS to be configured). See [Self-hosted instances](https://docs.langchain.com/langsmith/langsmith-cli#self-hosted-instances). On earlier deployments, or without a signing JWKS, authenticate with an API key or create an API-key profile.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith auth login
 ```
 
-This opens a browser-based authorization flow and stores OAuth tokens in `~/.langsmith/config.json` under the selected [profile](/langsmith/profile-configuration). Select a profile with `--profile` or `LANGSMITH_PROFILE`:
+This opens a browser-based authorization flow and stores OAuth tokens in `~/.langsmith/config.json` under the selected [profile](https://docs.langchain.com/langsmith/profile-configuration). Select a profile with `--profile` or `LANGSMITH_PROFILE`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith auth login --profile dev
 langsmith --profile dev project list
 ```
 
 In headless environments, pass `--no-browser` and open the printed URL manually:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith auth login --no-browser --workspace-id <workspace-id>
 ```
 
 To manage saved profiles:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith profile list
 langsmith profile create dev --workspace-id <workspace-id> --set-current
 langsmith profile use dev
 langsmith profile set-workspace <workspace-id>
 ```
 
-For the full profile configuration reference, see [Profile configuration](/langsmith/profile-configuration).
+For the full profile configuration reference, see [Profile configuration](https://docs.langchain.com/langsmith/profile-configuration).
 
 You can also authenticate with an API key directly.
 
-Set your [API key](/langsmith/create-account-api-key) as an environment variable:
+Set your [API key](https://docs.langchain.com/langsmith/create-account-api-key) as an environment variable:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_API_KEY="lsv2_..."
 ```
 
 Optionally, set a default project for queries:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_PROJECT="my-default-project"
 ```
 
-If you're using LangSmith [self-hosted](/langsmith/self-hosted), also set the endpoint:
+If you're using LangSmith [self-hosted](https://docs.langchain.com/langsmith/self-hosted), also set the endpoint:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_ENDPOINT="https://your-langsmith-instance.com"
 ```
 
 Or, pass them as flags per command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith --api-key lsv2_... trace list --project my-app
 ```
 
@@ -117,53 +109,48 @@ langsmith --api-key lsv2_... trace list --project my-app
 
 Point the CLI at your instance with `--api-url`, or with `LANGSMITH_ENDPOINT`. Both the browser-based login and API keys are supported.
 
-<Tabs>
-  <Tab title="OAuth">
-    Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you configure a signing JWKS. For setup steps, see [Enabling Remote MCP](/langsmith/langsmith-remote-mcp#enabling-remote-mcp).
+#### OAuth
+Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you configure a signing JWKS. For setup steps, see [Enabling Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp#enabling-remote-mcp).
 
-    The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
+The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
-    ```
+```bash
+langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
+```
 
-    Pass your instance's base URL. The CLI reads the deployment's authorization server metadata to find the OAuth endpoints, so `https://langsmith.example.com` and `https://langsmith.example.com/api` both work.
+Pass your instance's base URL. The CLI reads the deployment's authorization server metadata to find the OAuth endpoints, so `https://langsmith.example.com` and `https://langsmith.example.com/api` both work.
 
-    Tokens are stored under the named profile, so later commands only need `--profile`:
+Tokens are stored under the named profile, so later commands only need `--profile`:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    langsmith --profile self-hosted project list
-    ```
-  </Tab>
+```bash
+langsmith --profile self-hosted project list
+```
 
-  <Tab title="API key">
-    Works on every LangSmith version.
+#### API key
+Works on every LangSmith version.
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export LANGSMITH_ENDPOINT="https://langsmith.example.com"
-    export LANGSMITH_API_KEY="lsv2_..."
+```bash
+export LANGSMITH_ENDPOINT="https://langsmith.example.com"
+export LANGSMITH_API_KEY="lsv2_..."
 
-    langsmith project list
-    ```
+langsmith project list
+```
 
-    To save the endpoint and key as a reusable profile instead:
+To save the endpoint and key as a reusable profile instead:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    LANGSMITH_API_KEY="lsv2_..." langsmith profile create self-hosted \
-      --api-url https://langsmith.example.com --set-current
-    ```
-  </Tab>
-</Tabs>
+```bash
+LANGSMITH_API_KEY="lsv2_..." langsmith profile create self-hosted \
+  --api-url https://langsmith.example.com --set-current
+```
 
-<Warning>
-  `LANGSMITH_ENDPOINT` takes precedence over a profile's `api_url`. If it is set in your shell, every profile you select resolves to that endpoint — a common cause of commands unexpectedly reaching LangSmith Cloud while a self-hosted profile is active. Unset it when working with profiles, or pass `--api-url` explicitly.
-</Warning>
+> [!WARNING]
+> `LANGSMITH_ENDPOINT` takes precedence over a profile's `api_url`. If it is set in your shell, every profile you select resolves to that endpoint — a common cause of commands unexpectedly reaching LangSmith Cloud while a self-hosted profile is active. Unset it when working with profiles, or pass `--api-url` explicitly.
 
 ## Quickstart
 
 The following commands cover the core resource types:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # List tracing projects
 langsmith project list
 
@@ -194,7 +181,7 @@ langsmith sandbox tunnel my-vm --remote-port 5432
 
 JSON to stdout — easy to pipe, script, or feed to an agent:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith trace list --project my-app
 ```
 
@@ -202,7 +189,7 @@ langsmith trace list --project my-app
 
 `--format pretty` for human-readable output:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith --format pretty trace list --project my-app
 ```
 
@@ -210,19 +197,19 @@ langsmith --format pretty trace list --project my-app
 
 `-o <path>`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith trace list --project my-app -o traces.json
 ```
 
 ## Commands
 
-Each command group targets a specific LangSmith resource. Most commands support `--limit`, `--offset`, and a shared set of [filter flags](#filter-flags).
+Each command group targets a specific LangSmith resource. Most commands support `--limit`, `--offset`, and a shared set of [filter flags](https://docs.langchain.com/langsmith/langsmith-cli#filter-flags).
 
 ### List projects
 
-Returns up to 20 projects by default, sorted by most recent activity. Lists tracing projects only. (Use [`experiment list`](#view-experiments) to list evaluation experiments.)
+Returns up to 20 projects by default, sorted by most recent activity. Lists tracing projects only. (Use [`experiment list`](https://docs.langchain.com/langsmith/langsmith-cli#view-experiments) to list evaluation experiments.)
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith project list
 langsmith project list --limit 50 --name-contains chatbot
 langsmith --format pretty project list
@@ -232,7 +219,7 @@ langsmith --format pretty project list
 
 Defaults to the last 7 days, newest first. Use `--since` or `--last-n-minutes` to change the time window.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith trace list --project my-app --limit 50 --last-n-minutes 60
 langsmith trace list --project my-app --error                     # errors only
 langsmith trace list --project my-app --min-latency 5             # slow traces (>5s)
@@ -247,7 +234,7 @@ langsmith trace export ./traces --project my-app --limit 20 --full
 
 Defaults to 50 results (most other commands default to 20). The same 7-day time window applies. Use `--since` or `--last-n-minutes` to override.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith run list --project my-app --run-type llm
 langsmith run list --project my-app --run-type tool --name search
 langsmith run list --project my-app --min-tokens 1000 --include-metadata
@@ -259,7 +246,7 @@ langsmith run export llm_calls.jsonl --project my-app --run-type llm --full
 
 `--project` is required for all thread commands.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith thread list --project my-chatbot --last-n-minutes 120
 langsmith thread get <thread-id> --project my-chatbot --full
 ```
@@ -268,7 +255,7 @@ langsmith thread get <thread-id> --project my-chatbot --full
 
 `dataset export` exports the examples (rows) within a dataset, not the dataset metadata itself.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith dataset list
 langsmith dataset list --name-contains eval
 langsmith dataset get my-dataset
@@ -282,7 +269,7 @@ langsmith dataset upload data.json --name new-dataset
 
 Use `--split` to assign examples to named splits (such as `test` or `train`) when creating or listing.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith example list --dataset my-dataset --limit 50
 langsmith example list --dataset my-dataset --split test
 langsmith example create --dataset my-dataset \
@@ -296,7 +283,7 @@ langsmith example delete <example-id> --yes
 
 Evaluators can be offline (run against a dataset during experiments) or online (run against a live project). Use `--sampling-rate` to evaluate only a fraction of production runs, and `--replace` to overwrite an existing evaluator by name.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith evaluator list
 langsmith evaluator upload evals.py --name accuracy \
   --function check_accuracy --dataset my-eval-set
@@ -309,9 +296,9 @@ langsmith evaluator delete accuracy --yes
 
 ### View experiments
 
-`experiment list` shows evaluation experiments, not tracing projects. (Use [`project list`](#list-projects) to list tracing projects.)
+`experiment list` shows evaluation experiments, not tracing projects. (Use [`project list`](https://docs.langchain.com/langsmith/langsmith-cli#list-projects) to list tracing projects.)
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 langsmith experiment list
 langsmith experiment list --dataset my-eval-set
 langsmith experiment get my-experiment-2024-01-15
@@ -321,13 +308,13 @@ langsmith experiment get my-experiment-2024-01-15
 
 Sandbox commands let you build snapshots, create sandboxes, execute commands, open interactive consoles, and tunnel TCP ports to services running inside sandboxes.
 
-See [Sandbox CLI](/langsmith/sandbox-cli) for the full sandbox command reference.
+See [Sandbox CLI](https://docs.langchain.com/langsmith/sandbox-cli) for the full sandbox command reference.
 
 ### Call the LangSmith API directly
 
 The `api` command is an authenticated, scriptable wrapper around the raw LangSmith REST API — useful for endpoints the typed commands above don't cover, or for piping JSON into and out of shell scripts. It's modeled after `gh api` and `curl`: pass the path as the only positional argument, and use `-X` to set the HTTP method (defaults to `GET`). Auth headers (`x-api-key`, `x-tenant-id`) are injected automatically.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # GET (default method) — query string supported in the path
 langsmith api sessions?limit=5
 
@@ -405,12 +392,8 @@ Most `trace` and `run` commands share these filters:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

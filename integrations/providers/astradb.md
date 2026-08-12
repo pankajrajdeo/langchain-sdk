@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Astra DB integrations
 
 > Integrate with Astra DB using LangChain Python.
@@ -14,20 +10,18 @@ See a [tutorial provided by DataStax](https://docs.datastax.com/en/astra/astra-d
 
 Install the following Python package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "langchain-astradb>=0.6,<0.7"
-  ```
+```bash
+pip install "langchain-astradb>=0.6,<0.7"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-astradb>=0.6,<0.7
-  ```
-</CodeGroup>
+```bash
+uv add langchain-astradb>=0.6,<0.7
+```
 
 Create a database (if needed) and get the [connection secrets](https://docs.datastax.com/en/astra-db-serverless/get-started/quickstart.html#create-a-database-and-store-your-credentials).
 Set the following variables:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ASTRA_DB_API_ENDPOINT="API_ENDPOINT"
 ASTRA_DB_APPLICATION_TOKEN="TOKEN"
 ```
@@ -36,7 +30,7 @@ ASTRA_DB_APPLICATION_TOKEN="TOKEN"
 
 A few typical initialization patterns are shown here:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBVectorStore
 
 vector_store = AstraDBVectorStore(
@@ -45,7 +39,6 @@ vector_store = AstraDBVectorStore(
     api_endpoint=ASTRA_DB_API_ENDPOINT,
     token=ASTRA_DB_APPLICATION_TOKEN,
 )
-
 
 from astrapy.info import VectorServiceOptions
 
@@ -58,7 +51,6 @@ vector_store_vectorize = AstraDBVectorStore(
         model_name="NV-Embed-QA",
     ),
 )
-
 
 from astrapy.info import (
     CollectionLexicalOptions,
@@ -95,13 +87,13 @@ Notable features of class `AstraDBVectorStore`:
 * [hybrid search](https://docs.datastax.com/en/astra-db-serverless/databases/hybrid-search.html#the-hybrid-search-process) (vector + BM25 and then a rerank step);
 * support for non-Astra Data API (e.g. self-hosted [HCD](https://docs.datastax.com/en/hyper-converged-database/1.1/get-started/get-started-hcd.html) deployments);
 
-Learn more in the [example notebook](/oss/python/integrations/vectorstores/astradb).
+Learn more in the [example notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/astradb).
 
 See the [example provided by DataStax](https://docs.datastax.com/en/astra/astra-db-vector/integrations/langchain.html).
 
 ## LLM cache
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 from langchain_astradb import AstraDBCache
 
@@ -113,7 +105,7 @@ set_llm_cache(AstraDBCache(
 
 ## Semantic LLM cache
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 from langchain_astradb import AstraDBSemanticCache
 
@@ -126,7 +118,7 @@ set_llm_cache(AstraDBSemanticCache(
 
 ## Document loader
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBLoader
 
 loader = AstraDBLoader(
@@ -136,11 +128,11 @@ loader = AstraDBLoader(
 )
 ```
 
-Learn more in the [example notebook](/oss/python/integrations/document_loaders/astradb).
+Learn more in the [example notebook](https://docs.langchain.com/oss/python/integrations/document_loaders/astradb).
 
 ## Self-querying retriever
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBVectorStore
 from langchain_classic.retrievers.self_query.base import SelfQueryRetriever
 
@@ -161,7 +153,7 @@ retriever = SelfQueryRetriever.from_llm(
 
 ## Store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBStore
 
 store = AstraDBStore(
@@ -175,7 +167,7 @@ See the API Reference for the [AstraDBStore](https://reference.langchain.com/pyt
 
 ## Byte store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBByteStore
 
 store = AstraDBByteStore(
@@ -189,12 +181,8 @@ See the API reference for the [AstraDBByteStore](https://reference.langchain.com
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

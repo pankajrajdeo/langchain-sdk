@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Amazon Bedrock agentcore code interpreter integration
 
 > Integrate with the Amazon Bedrock agentcore code interpreter tool using LangChain Python.
@@ -18,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](/oss/python/langchain/tools) | Native async |     Return data     |      Pricing      |
+| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async |     Return data     |      Pricing      |
 | :---------------------------------------------: | :----------: | :-----------------: | :---------------: |
 |                        ✅                        |       ✅      | Text, Files, Images | Pay-per-use (AWS) |
 
@@ -44,15 +40,13 @@ The toolkit provides multiple tools for code execution and file management:
 
 The integration lives in the `langchain-aws` package, which wraps the `bedrock-agentcore` SDK.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-aws bedrock-agentcore
-  ```
+```bash
+pip install -U langchain-aws bedrock-agentcore
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws bedrock-agentcore
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws bedrock-agentcore
+```
 
 ### Credentials
 
@@ -60,7 +54,7 @@ You need AWS credentials configured with permissions for Bedrock AgentCore Code 
 
 It's also helpful (but not needed) to set up LangSmith for best-in-class observability:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["LANGSMITH_API_KEY"] = "your-api-key"
@@ -71,7 +65,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The toolkit is created using an **async** factory function:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_code_interpreter_toolkit
 
 # Create toolkit and get tools (async)
@@ -84,7 +78,7 @@ toolkit, code_tools = await create_code_interpreter_toolkit(region="us-west-2")
 
 Get specific tools and invoke them:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Get tools by name
 tools_by_name = toolkit.get_tools_by_name()
 
@@ -103,7 +97,7 @@ print(result)
 
 ### Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 from langchain.agents import create_react_agent
 from langchain.chat_models import init_chat_model
@@ -145,7 +139,7 @@ asyncio.run(main())
 
 The toolkit supports multiple concurrent sessions via `thread_id`. Each thread maintains its own code interpreter session with isolated state:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Different threads have isolated sessions
 config_user1 = {"configurable": {"thread_id": "user-1"}}
 config_user2 = {"configurable": {"thread_id": "user-2"}}
@@ -166,7 +160,7 @@ await agent.ainvoke(
 
 ### Write and read files
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools_by_name = toolkit.get_tools_by_name()
 
 # Write a file
@@ -185,7 +179,7 @@ print(files)
 
 ### Upload files with descriptions
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools_by_name["upload_file"].invoke({
     "path": "sales.csv",
     "content": "date,revenue,product\n2024-01-01,1000,Widget\n2024-01-02,1500,Gadget",
@@ -195,7 +189,7 @@ tools_by_name["upload_file"].invoke({
 
 ## Installing packages
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools_by_name["install_packages"].invoke({
     "packages": ["pandas>=2.0", "matplotlib", "scikit-learn"],
     "upgrade": False
@@ -206,7 +200,7 @@ tools_by_name["install_packages"].invoke({
 
 For long-running commands, you can start them asynchronously and check their status:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools_by_name = toolkit.get_tools_by_name()
 config = {"configurable": {"thread_id": "session-123"}}
 
@@ -235,7 +229,7 @@ tools_by_name["stop_task"].invoke(
 
 Always clean up sessions when done to release resources:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Clean up all sessions
 await toolkit.cleanup()
 
@@ -254,12 +248,8 @@ For detailed documentation of all features and configurations, see:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_code_interpreter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_code_interpreter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

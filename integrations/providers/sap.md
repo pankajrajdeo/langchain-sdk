@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Sap integrations
 
 > Integrate with Sap using LangChain Python.
@@ -15,24 +11,22 @@
 
 We need to install the `langchain-hana` python package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-hana
-  ```
+```bash
+pip install langchain-hana
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-hana
-  ```
-</CodeGroup>
+```bash
+uv add langchain-hana
+```
 
 ## Vectorstore
 
 > [SAP HANA Cloud Vector Engine](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-vector-engine-guide/sap-hana-cloud-sap-hana-database-vector-engine-guide) is
 > a vector store fully integrated into the `SAP HANA Cloud` database.
 
-See a [usage example](/oss/python/integrations/vectorstores/sap_hanavector).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/sap_hanavector).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaDB
 ```
 
@@ -43,7 +37,7 @@ from langchain_hana import HanaDB
 
 See a [usage example](https://pypi.org/project/langchain-hana/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaTranslator
 ```
 
@@ -52,9 +46,9 @@ from langchain_hana import HanaTranslator
 > [SAP HANA Cloud Knowledge Graph Engine](https://help.sap.com/docs/hana-cloud-database/sap-hana-cloud-sap-hana-database-knowledge-graph-guide/sap-hana-cloud-sap-hana-database-knowledge-graph-engine-guide)
 > provides support to utilise knowledge graphs through the `HanaRdfGraph` Class.
 
-See a [usage example](/oss/python/integrations/graphs/sap_hana_rdf_graph).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/sap_hana_rdf_graph).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaRdfGraph
 ```
 
@@ -62,9 +56,9 @@ from langchain_hana import HanaRdfGraph
 
 A `SparqlQAChain` is also provided which can be used with `HanaRdfGraph` for SPARQL-QA tasks.
 
-See a [usage example](/oss/python/integrations/chains/sap_hana_sparql_qa_chain).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/chains/sap_hana_sparql_qa_chain).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaSparqlQAChain
 ```
 
@@ -72,20 +66,16 @@ from langchain_hana import HanaSparqlQAChain
 
 A `HanaSparqlQAAgent` can generate and execute SPARQL queries iteratively over `HanaRdfGraph`, including ontology retrieval and self-correction.
 
-See a [usage example](/oss/python/integrations/agents/sap_hana_sparql_qa_agent).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/agents/sap_hana_sparql_qa_agent).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaSparqlQAAgent
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/sap.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/sap.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

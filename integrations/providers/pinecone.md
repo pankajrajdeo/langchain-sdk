@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Pinecone integrations
 
 > Integrate with Pinecone using LangChain Python.
@@ -12,32 +8,30 @@
 
 Install the Python SDK:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-pinecone
-  ```
+```bash
+pip install langchain-pinecone
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-pinecone
-  ```
-</CodeGroup>
+```bash
+uv add langchain-pinecone
+```
 
 ## Vector store
 
 There exists a wrapper around Pinecone indexes, allowing you to use it as a vectorstore,
 whether for semantic search or example selection.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone import PineconeVectorStore
 ```
 
-For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](/oss/python/integrations/vectorstores/pinecone)
+For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone)
 
 ### Sparse vector store
 
 LangChain's `PineconeSparseVectorStore` enables sparse retrieval using Pinecone's sparse English model. It maps text to sparse vectors and supports adding documents and similarity search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone import PineconeSparseVectorStore
 
 # Initialize sparse vector store
@@ -51,13 +45,13 @@ vector_store.add_documents(documents)
 results = vector_store.similarity_search("your query", k=3)
 ```
 
-For a more detailed walkthrough, see the [Pinecone Sparse Vector Store notebook](/oss/python/integrations/vectorstores/pinecone_sparse).
+For a more detailed walkthrough, see the [Pinecone Sparse Vector Store notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone_sparse).
 
 ### Sparse embedding
 
 LangChain's `PineconeSparseEmbeddings` provides sparse embedding generation using Pinecone's `pinecone-sparse-english-v0` model.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone.embeddings import PineconeSparseEmbeddings
 
 # Initialize sparse embeddings
@@ -72,7 +66,7 @@ docs = ["Document 1 content", "Document 2 content"]
 doc_embeddings = sparse_embeddings.embed_documents(docs)
 ```
 
-For more detailed usage, see the [Pinecone Sparse Embeddings notebook](/oss/python/integrations/vectorstores/pinecone_sparse).
+For more detailed usage, see the [Pinecone Sparse Embeddings notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone_sparse).
 
 ## Retrievers
 
@@ -82,12 +76,8 @@ Pinecone vector store can be used as a retriever for self-querying.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

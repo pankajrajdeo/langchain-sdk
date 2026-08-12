@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to create a composite evaluator
-
-*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](/langsmith/evaluation-concepts#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/composite-evaluators-sdk)
+*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](https://docs.langchain.com/langsmith/evaluation-concepts#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
 
 This guide describes setting up an evaluation that uses multiple evaluators and combines their scores with a custom aggregation function using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
-<Note> Requires langsmith>=0.4.29 </Note>
+ Requires langsmith>=0.4.29 
 
-<Tip>
-  To create composite evaluators in the LangSmith UI, refer to [How to create a composite evaluator (UI)](/langsmith/composite-evaluators-ui).
-</Tip>
+> [!TIP]
+> To create composite evaluators in the LangSmith UI, refer to [How to create a composite evaluator (UI)](https://docs.langchain.com/langsmith/composite-evaluators-ui).
 
 ## 1. Configure evaluators on a dataset
 
@@ -20,7 +15,7 @@ Start by configuring your evaluators. In this example, the application generates
 
 If you already have your own dataset with evaluators configured, you can skip this step.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -35,7 +30,6 @@ load_dotenv()
 openai_api_key = os.getenv('OPENAI_API_KEY')
 langsmith_api_key = os.getenv('LANGSMITH_API_KEY')
 langsmith_project = os.getenv('LANGSMITH_PROJECT', 'default')
-
 
 # Create a dataset. Only need to do this once.
 client = Client()
@@ -138,7 +132,7 @@ experiment_name = results.experiment_name
 
 Create composite feedback that aggregates the individual evaluator scores using your custom function. This example uses a weighted average of the individual evaluator scores.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Dict
 import math
 from langsmith import Client
@@ -203,12 +197,8 @@ for example_with_runs in results["examples_with_runs"]:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/composite-evaluators-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

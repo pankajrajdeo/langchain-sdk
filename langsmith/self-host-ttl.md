@@ -1,23 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Enable TTL and data retention
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ttl)
 LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient space usage and auto cleanup of your traces. Traces will also have their data retention period automatically extended based on certain actions or run rule applications.
 
-<Note>
-  **Self-hosted [Enterprise](/langsmith/pricing-plans) customers:** You can now configure extended data retention at the workspace level through the UI, which provides more granular control without requiring environment variable changes. For more information, refer to [Customize extended retention policy](/langsmith/data-purging-compliance#customize-extended-retention-policy). The system-wide TTL configuration documented on this page is still supported.
-</Note>
+> [!NOTE]
+> **Self-hosted [Enterprise](https://docs.langchain.com/langsmith/pricing-plans) customers:** You can now configure extended data retention at the workspace level through the UI, which provides more granular control without requiring environment variable changes. For more information, refer to [Customize extended retention policy](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy). The system-wide TTL configuration documented on this page is still supported.
 
 ## Requirements
 
 You can configure retention through helm or environment variable settings. There are a few options that are configurable:
 
-* *Enabled:* Whether data retention is enabled or disabled. If enabled, via the UI you can your default organization and project TTL tiers to apply to traces (see [data retention guide](/langsmith/usage-and-billing#data-retention) for details).
+* *Enabled:* Whether data retention is enabled or disabled. If enabled, via the UI you can your default organization and project TTL tiers to apply to traces (see [data retention guide](https://docs.langchain.com/langsmith/usage-and-billing#data-retention) for details).
 * *Retention Periods:* You can configure system-wide retention periods for shortlived and longlived traces. Once configured, you can manage the retention level at each project as well as set an organization-wide default for new projects.
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   ttl:
     enabled: true
@@ -31,9 +26,8 @@ config:
 
 As of version **0.11**, a cron job runs on weekends to assist in deleting expired data that may not have been cleaned up by ClickHouse's built-in TTL mechanism.
 
-<Warning>
-  This job uses potentially long running **mutations** (`ALTER TABLE DELETE`), which are expensive operations that can impact ClickHouse's performance. We recommend running these operations only during off-peak hours (nights and weekends). During testing with **1 concurrent active** mutation (default), we did not observe significant CPU, memory, or latency increases.
-</Warning>
+> [!WARNING]
+> This job uses potentially long running **mutations** (`ALTER TABLE DELETE`), which are expensive operations that can impact ClickHouse's performance. We recommend running these operations only during off-peak hours (nights and weekends). During testing with **1 concurrent active** mutation (default), we did not observe significant CPU, memory, or latency increases.
 
 ### Default schedule
 
@@ -46,7 +40,7 @@ By default, the cleanup job runs:
 
 To disable the cleanup job entirely:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   deployment:
     extraEnv:
@@ -58,7 +52,7 @@ queue:
 
 You can customize when the cleanup job runs by modifying the cron expressions:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   deployment:
     extraEnv:
@@ -70,9 +64,8 @@ queue:
         value: "0 20,22 * * 6"
 ```
 
-<Tip>
-  To run the job on a single cron schedule, set both `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_EVENING` and `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_MORNING` to the same value. Job locking prevents overlapping executions.
-</Tip>
+> [!TIP]
+> To run the job on a single cron schedule, set both `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_EVENING` and `CLICKHOUSE_TTL_CLEANUP_CRON_WEEKEND_MORNING` to the same value. Job locking prevents overlapping executions.
 
 ### Configuring minimum expired rows per part
 
@@ -81,7 +74,7 @@ The job goes table by table, scanning parts and deleting data from parts contain
 * **Too low**: Job scans entire parts to clear minimal data (inefficient)
 * **Too high**: Job misses parts with significant expired data
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   deployment:
     extraEnv:
@@ -93,7 +86,7 @@ queue:
 
 Use this query to analyze expired rows in your tables, and tweak your minimum value accordingly:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 -- Query for Runs table. For other tables, replace 'ttl_seconds' with 'trace_ttl_seconds'
 SELECT
     _part,
@@ -110,7 +103,7 @@ ORDER BY expired_rows DESC
 
 Delete operations can be time-consuming (\~50 minutes for a 100GB part). You can increase concurrent mutations to speed up the process:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 queue:
   deployment:
     extraEnv:
@@ -118,9 +111,8 @@ queue:
         value: "1"
 ```
 
-<Warning>
-  Increasing concurrent DELETE operations can severely impact system performance. Monitor your system carefully and only increase this value if you can tolerate potentially slower insert and read latencies.
-</Warning>
+> [!WARNING]
+> Increasing concurrent DELETE operations can severely impact system performance. Monitor your system carefully and only increase this value if you can tolerate potentially slower insert and read latencies.
 
 ### Emergency: Stopping running mutations
 
@@ -128,16 +120,16 @@ If you experience latency spikes and need to terminate a running mutation:
 
 1. **Find active mutations**:
 
-   ```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
    SELECT * FROM system.mutations WHERE is_done = 0;
-   ```
+```
 
    Look for the `mutation_id` where the `command` column contains a `DELETE` statement.
 
 2. **Kill the mutation**:
-   ```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
    KILL MUTATION WHERE mutation_id = '<mutation_id>';
-   ```
+```
 
 ### Backups and data retention
 
@@ -152,12 +144,8 @@ If backups are present, copy them to an external filesystem or blob storage (e.g
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

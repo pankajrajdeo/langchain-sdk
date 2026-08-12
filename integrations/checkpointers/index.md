@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Checkpointer integrations
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/checkpointers/index)
+Integrate with checkpointer backends for LangGraph persistence.
 
-> Integrate with checkpointer backends for LangGraph persistence.
+Checkpointers enable [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) in LangGraph, allowing agents to save and resume state across interactions.
 
-Checkpointers enable [persistence](/oss/python/langgraph/persistence) in LangGraph, allowing agents to save and resume state across interactions.
-
-To implement your own checkpointer for a custom storage backend, see [Build a custom checkpointer](/oss/python/langgraph/checkpointers#build-a-custom-checkpointer).
+To implement your own checkpointer for a custom storage backend, see [Build a custom checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#build-a-custom-checkpointer).
 
 | Backend                                                                                          | Package                                                                                        | Source                                                                                                                          |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,8 +15,8 @@ To implement your own checkpointer for a custom storage backend, see [Build a cu
 | MongoDB                                                                                          | [`langgraph-checkpoint-mongodb`](https://pypi.org/project/langgraph-checkpoint-mongodb/)       | [langchain-ai/langchain-mongodb](https://github.com/langchain-ai/langchain-mongodb/tree/main/libs/langgraph-checkpoint-mongodb) |
 | Azure Cosmos DB NoSQL                                                                            | [`langchain-azure-cosmosdb`](https://pypi.org/project/langchain-azure-cosmosdb/)               | [langchain-ai/langchain-azure](https://github.com/langchain-ai/langchain-azure/tree/main/libs/azure-cosmosdb)                   |
 | Redis                                                                                            | [`langgraph-checkpoint-redis`](https://pypi.org/project/langgraph-checkpoint-redis/)           | [redis-developer/langgraph-redis](https://github.com/redis-developer/langgraph-redis)                                           |
-| [Cockroach DB](/oss/python/integrations/providers/cockroachdb#langgraph-checkpointer)            | [`langchain-cockroachdb`](https://pypi.org/project/langchain-cockroachdb/)                     | [cockroachdb/langchain-cockroachdb](https://github.com/cockroachdb/langchain-cockroachdb)                                       |
-| [Aerospike](/oss/python/integrations/providers/aerospike#langgraph-checkpointer)                 | [`langgraph-checkpoint-aerospike`](https://pypi.org/project/langgraph-checkpoint-aerospike/)   | [aerospike-community/aerospike-langgraph](https://github.com/aerospike-community/aerospike-langgraph)                           |
+| [Cockroach DB](https://docs.langchain.com/oss/python/integrations/providers/cockroachdb#langgraph-checkpointer)            | [`langchain-cockroachdb`](https://pypi.org/project/langchain-cockroachdb/)                     | [cockroachdb/langchain-cockroachdb](https://github.com/cockroachdb/langchain-cockroachdb)                                       |
+| [Aerospike](https://docs.langchain.com/oss/python/integrations/providers/aerospike#langgraph-checkpointer)                 | [`langgraph-checkpoint-aerospike`](https://pypi.org/project/langgraph-checkpoint-aerospike/)   | [aerospike-community/aerospike-langgraph](https://github.com/aerospike-community/aerospike-langgraph)                           |
 | [ScyllaDB](https://docs.scylladb.com)                                                            | [`langgraph-checkpoint-scylladb`](https://pypi.org/project/langgraph-checkpoint-scylladb/)     | [scylladb/langchain-scylladb](https://github.com/scylladb/langchain-scylladb/tree/main/libs/langgraph-checkpoint-scylladb)      |
 | [Tigris](https://www.tigrisdata.com/docs/)                                                       | [`langgraph-checkpoint-tigris`](https://pypi.org/project/langgraph-checkpoint-tigris/)         | [tigrisdata/tigris-langgraph](https://github.com/tigrisdata/tigris-langgraph/tree/main/libs/checkpoint-tigris)                  |
 | [TypeDB](https://typedb.com/docs)                                                                | [`langgraph-checkpoint-typedb`](https://pypi.org/project/langgraph-checkpoint-typedb/)         | [typedb/langgraph-checkpoint-typedb](https://github.com/typedb/langgraph-checkpoint-typedb)                                     |
@@ -29,12 +25,8 @@ To implement your own checkpointer for a custom storage backend, see [Build a cu
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/checkpointers/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

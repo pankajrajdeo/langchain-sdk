@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Create an Ingress for installations (Kubernetes)
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ingress)
 By default, LangSmith will provision a LoadBalancer service for the `langsmith-frontend`. Depending on your cloud provider, this may result in a public IP address being assigned to the service. If you would like to use a custom domain or have more control over the routing of traffic to your LangSmith installation, you can configure an Ingress, Gateway API, or Istio Gateway.
 
 ## Requirements
@@ -28,10 +24,10 @@ You may need to provide certain parameters to your LangSmith installation to con
 
   For example, you can add the following annotations using the AWS ALB Ingress Controller to attach an ACM certificate to the Ingress:
 
-  ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
   annotations:
     alb.ingress.kubernetes.io/certificate-arn: "<your-certificate-arn>"
-  ```
+```
 
 * *Labels (optional)*: Additional labels to add to the Ingress.
 
@@ -54,7 +50,7 @@ You can configure your LangSmith instance to use one of three routing options: s
 
 With these parameters in hand, you can configure your LangSmith instance to use an Ingress. You can do this by modifying the `config.yaml` file for your LangSmith Helm Chart installation.
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   hostname: "" # Main domain for LangSmith
   basePath: "" # If you want to serve langsmith under a URL base path (e.g., /langsmith)
@@ -73,7 +69,7 @@ frontend:
 
 Once configured, you will need to update your LangSmith installation. If everything is configured correctly, your LangSmith instance should now be accessible via the Ingress. You can run the following to check the status of your Ingress:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl get ingress
 ```
 
@@ -84,17 +80,15 @@ NAME                         CLASS   HOSTS    ADDRESS          PORTS     AGE
 langsmith-ingress            nginx   <host>   35.227.243.203   80, 443   95d
 ```
 
-<Warning>
-  If you do not have automated DNS setup, you will need to add the IP address to your DNS provider manually.
-</Warning>
+> [!WARNING]
+> If you do not have automated DNS setup, you will need to add the IP address to your DNS provider manually.
 
 ### Option 2: Gateway API
 
-<Note>
-  Gateway API support is available as of LangSmith v0.12.0
-</Note>
+> [!NOTE]
+> Gateway API support is available as of LangSmith v0.12.0
 
-If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/), you can configure LangSmith to provision HTTPRoute resources. This will create an HTTPRoute for LangSmith and an HTTPRoute for each [agent deployment](/langsmith/deployment).
+If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/), you can configure LangSmith to provision HTTPRoute resources. This will create an HTTPRoute for LangSmith and an HTTPRoute for each [agent deployment](https://docs.langchain.com/langsmith/deployment).
 
 #### Parameters
 
@@ -108,7 +102,7 @@ If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.i
 
 #### Configuration
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   hostname: "" # Main domain for LangSmith
   basePath: "" # If you want to serve langsmith under a base path. E.g "example.com/langsmith"
@@ -126,17 +120,16 @@ frontend:
 
 Once configured, you can check the status of your HTTPRoutes:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl get httproute
 ```
 
 ### Option 3: Istio Gateway
 
-<Note>
-  Istio Gateway support is available as of LangSmith v0.12.0
-</Note>
+> [!NOTE]
+> Istio Gateway support is available as of LangSmith v0.12.0
 
-If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to provision VirtualService resources. This will create a VirtualService for LangSmith and a VirtualService for each [agent deployment](/langsmith/deployment).
+If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to provision VirtualService resources. This will create a VirtualService for LangSmith and a VirtualService for each [agent deployment](https://docs.langchain.com/langsmith/deployment).
 
 #### Parameters
 
@@ -149,7 +142,7 @@ If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to 
 
 #### Configuration
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   hostname: "" # Main domain for LangSmith
   basePath: "" # If you want to serve langsmith on a separate basePath. E.g "example.com/langsmith"
@@ -166,18 +159,14 @@ frontend:
 
 Once configured, you can check the status of your VirtualServices:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl get virtualservice
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ingress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ingress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

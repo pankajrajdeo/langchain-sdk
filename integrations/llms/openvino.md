@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Openvino integration
 
 > Integrate with the Openvino LLM using LangChain Python.
@@ -12,7 +8,7 @@ OpenVINO models can be run locally through the `HuggingFacePipeline` [class](htt
 
 To use, you should have the `optimum-intel` with OpenVINO Accelerator python [package installed](https://github.com/huggingface/optimum-intel?tab=readme-ov-file#installation).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U-strategy eager "optimum[openvino,nncf]" langchain-huggingface --quiet
 ```
 
@@ -22,7 +18,7 @@ Models can be loaded by specifying the model parameters using the `from_model_id
 
 If you have an Intel GPU, you can specify `model_kwargs={"device": "GPU"}` to run inference on it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFacePipeline
 
 ov_config = {"PERFORMANCE_HINT": "LATENCY", "NUM_STREAMS": "1", "CACHE_DIR": ""}
@@ -38,7 +34,7 @@ ov_llm = HuggingFacePipeline.from_model_id(
 
 They can also be loaded by passing in an existing [`optimum-intel`](https://huggingface.co/docs/optimum/main/en/intel/inference) pipeline directly
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from optimum.intel.openvino import OVModelForCausalLM
 from transformers import AutoTokenizer, pipeline
 
@@ -59,7 +55,7 @@ ov_llm = HuggingFacePipeline(pipeline=ov_pipe)
 With the model loaded into memory, you can compose it with a prompt to
 form a chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 template = """Question: {question}
@@ -76,7 +72,7 @@ print(chain.invoke({"question": question}))
 
 To get response without prompt, you can bind `skip_prompt=True` with LLM.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = prompt | ov_llm.bind(skip_prompt=True)
 
 question = "What is electroencephalography?"
@@ -88,19 +84,19 @@ print(chain.invoke({"question": question}))
 
 It is possible to [export your model](https://github.com/huggingface/optimum-intel?tab=readme-ov-file#export) to the OpenVINO IR format with the CLI, and load the model from local folder.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !optimum-cli export openvino --model gpt2 ov_model_dir
 ```
 
 It is recommended to apply 8 or 4-bit weight quantization to reduce inference latency and model footprint using `--weight-format`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !optimum-cli export openvino --model gpt2  --weight-format int8 ov_model_dir # for 8-bit quantization
 
 !optimum-cli export openvino --model gpt2  --weight-format int4 ov_model_dir # for 4-bit quantization
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ov_llm = HuggingFacePipeline.from_model_id(
     model_id="ov_model_dir",
     task="text-generation",
@@ -118,7 +114,7 @@ print(chain.invoke({"question": question}))
 
 You can get additional inference speed improvement with Dynamic Quantization of activations and KV-cache quantization. These options can be enabled with `ov_config` as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ov_config = {
     "KV_CACHE_PRECISION": "u8",
     "DYNAMIC_QUANTIZATION_GROUP_SIZE": "32",
@@ -132,7 +128,7 @@ ov_config = {
 
 You can use `stream` method to get a streaming of LLM output,
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 generation_config = {"skip_prompt": True, "pipeline_kwargs": {"max_new_tokens": 100}}
 chain = prompt | ov_llm.bind(**generation_config)
 
@@ -152,12 +148,8 @@ For more information refer to:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openvino.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/openvino.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

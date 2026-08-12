@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AnthropicLLM integration
 
 > Integrate with the AnthropicLLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of Anthropic legacy Claude 2 models as text completion models. The latest and most popular Anthropic models are [chat completion models](/oss/python/langchain/models), and the text completion models have been deprecated.**
-
-  You are probably looking for [this page instead](/oss/python/integrations/chat/anthropic/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of Anthropic legacy Claude 2 models as text completion models. The latest and most popular Anthropic models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models), and the text completion models have been deprecated.**
+>
+> You are probably looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/anthropic/).
 
 This example goes over how to use LangChain to interact with `Anthropic` models.
 
 ## Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-anthropic
 ```
 
@@ -24,7 +19,7 @@ pip install -qU langchain-anthropic
 
 We'll need to get an [Anthropic](https://console.anthropic.com/settings/keys) API key and set the `ANTHROPIC_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -34,7 +29,7 @@ if "ANTHROPIC_API_KEY" not in os.environ:
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_anthropic import AnthropicLLM
 from langchain_core.prompts import PromptTemplate
 
@@ -51,18 +46,14 @@ chain = prompt | model
 chain.invoke({"question": "What is LangChain?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '\nLangChain is a decentralized blockchain network that leverages AI and machine learning to provide language translation services.'
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

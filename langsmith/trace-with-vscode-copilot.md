@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Visual Studio Code Copilot Chat sessions
-
-> Capture VS Code Copilot Chat agent interactions, LLM calls, tool executions, and token usage in LangSmith via OpenTelemetry.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-vscode-copilot)
+Capture VS Code Copilot Chat agent interactions, LLM calls, tool executions, and token usage in LangSmith via OpenTelemetry.
 
 [Visual Studio Code Copilot Chat](https://code.visualstudio.com/docs/copilot/overview) can export traces over [OpenTelemetry](https://opentelemetry.io/) (OTel). LangSmith ingests OTLP directly, so you can point Copilot Chat at LangSmith and inspect agent turns, model metadata, tool calls, and token usage alongside the rest of your LLM traces.
 
@@ -15,13 +11,13 @@ This guide is based on Copilot's [Monitor agent usage with OpenTelemetry](https:
 Before setting up tracing, ensure you have:
 
 * A recent version of [Visual Studio Code](https://code.visualstudio.com/) with GitHub Copilot Chat installed and signed in.
-* A [LangSmith API key](/langsmith/create-account-api-key).
+* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
 
 ## Configure tracing
 
 Copilot Chat enables OTel emission when any of `COPILOT_OTEL_ENABLED`, `OTEL_EXPORTER_OTLP_ENDPOINT`, or the `github.copilot.chat.otel.enabled` setting is set. The simplest way to send Copilot Chat traces to LangSmith is to export the following environment variables before launching VS Code:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export COPILOT_OTEL_ENABLED=true
 export COPILOT_OTEL_PROTOCOL=http
 export COPILOT_OTEL_ENDPOINT=https://api.smith.langchain.com/otel
@@ -35,23 +31,21 @@ export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-
 | `COPILOT_OTEL_PROTOCOL`        | OTLP protocol. Use `http` to target LangSmith's HTTP OTLP ingestion endpoint.                                                                                                                                            |
 | `COPILOT_OTEL_ENDPOINT`        | LangSmith OTLP endpoint. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.                                                                                                                                            |
 | `COPILOT_OTEL_CAPTURE_CONTENT` | Capture full prompts, responses, tool arguments, and tool results on spans. Off by default.                                                                                                                              |
-| `OTEL_EXPORTER_OTLP_HEADERS`   | Authentication headers for the OTLP exporter. Use `x-api-key=<your_langsmith_api_key>` and optionally `Langsmith-Project=<project>` to route traces to a specific [LangSmith project](/langsmith/log-traces-to-project). |
+| `OTEL_EXPORTER_OTLP_HEADERS`   | Authentication headers for the OTLP exporter. Use `x-api-key=<your_langsmith_api_key>` and optionally `Langsmith-Project=<project>` to route traces to a specific [LangSmith project](https://docs.langchain.com/langsmith/log-traces-to-project). |
 
 VS Code must inherit these environment variables, so export them in the shell session that launches VS Code (for example, by adding them to `~/.zshrc`, `~/.bashrc`, or a shell profile) before starting the editor.
 
-<Note>
-  Update the LangSmith endpoint for self-hosted installations or regional SaaS: GCP EU uses `eu.api.smith.langchain.com`; GCP APAC uses `apac.api.smith.langchain.com`; AWS US uses `aws.api.smith.langchain.com`. For self-hosted LangSmith, append `/api/v1/otel` to your LangSmith API URL—for example, `https://ai-company.com/api/v1/otel`.
-</Note>
+> [!NOTE]
+> Update the LangSmith endpoint for self-hosted installations or regional SaaS: GCP EU uses `eu.api.smith.langchain.com`; GCP APAC uses `apac.api.smith.langchain.com`; AWS US uses `aws.api.smith.langchain.com`. For self-hosted LangSmith, append `/api/v1/otel` to your LangSmith API URL—for example, `https://ai-company.com/api/v1/otel`.
 
-<Warning>
-  `COPILOT_OTEL_CAPTURE_CONTENT=true` records full prompt and response content, system prompts, tool schemas, tool arguments, and tool results. Only enable it in trusted environments where capturing source code, file contents, and user prompts is acceptable.
-</Warning>
+> [!WARNING]
+> `COPILOT_OTEL_CAPTURE_CONTENT=true` records full prompt and response content, system prompts, tool schemas, tool arguments, and tool results. Only enable it in trusted environments where capturing source code, file contents, and user prompts is acceptable.
 
 ### Alternative: VS Code settings
 
 If you prefer not to set environment variables, you can enable OTel from VS Code settings instead. Open **Settings** (`⌘,` / `Ctrl+,`), search for `copilot otel`, and configure:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "github.copilot.chat.otel.enabled": true,
   "github.copilot.chat.otel.exporterType": "otlp-http",
@@ -81,17 +75,13 @@ When an agent invokes a subagent, Copilot Chat propagates trace context automati
 ## Related resources
 
 * [VS Code Copilot: Monitor agent usage with OpenTelemetry](https://code.visualstudio.com/docs/copilot/guides/monitoring-agents)
-* [Trace with OpenTelemetry](/langsmith/trace-with-opentelemetry)
-* [Log traces to a project](/langsmith/log-traces-to-project)
+* [Trace with OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+* [Log traces to a project](https://docs.langchain.com/langsmith/log-traces-to-project)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vscode-copilot.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-vscode-copilot.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

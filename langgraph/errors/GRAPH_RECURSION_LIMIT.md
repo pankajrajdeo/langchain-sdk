@@ -1,13 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GRAPH_RECURSION_LIMIT
 
 Your LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) reached the maximum number of steps before hitting a stop condition.
 This is often due to an infinite loop caused by code like the example below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class State(TypedDict):
     some_key: str
 
@@ -29,18 +25,14 @@ However, complex graphs may hit the default limit naturally.
 
 * If you have a complex graph, you can pass in a higher `recursion_limit` value into your `config` object when invoking your graph like this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({...}, {"recursion_limit": 1000})
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/GRAPH_RECURSION_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/GRAPH_RECURSION_LIMIT.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,86 +1,79 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Anthropic applications
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-anthropic)
 The Anthropic wrapper methods in Python ([`wrap_anthropic`](https://reference.langchain.com/python/langsmith/wrappers/_anthropic/wrap_anthropic)) and Typescript ([`wrapAnthropic`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_anthropic.wrapAnthropic.html)) allow you to wrap your Anthropic client in order to log traces automatically. Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. The wrapper works seamlessly alongside the `@traceable` decorator (Python) or `traceable` function (TypeScript), so you can trace your Anthropic calls with the wrapper and trace other parts of your application with the decorator or function.
 
-The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Refer to [Trace Claude managed agents](#trace-claude-managed-agents).
+The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Refer to [Trace Claude managed agents](https://docs.langchain.com/langsmith/trace-anthropic#trace-claude-managed-agents).
 
-<Note>
-  The `LANGSMITH_TRACING` environment variable must be set to `'true'` in order for traces to be logged to LangSmith, even when using `wrap_anthropic` or `wrapAnthropic`. This allows you to toggle tracing on and off without changing your code.
+> [!NOTE]
+> The `LANGSMITH_TRACING` environment variable must be set to `'true'` in order for traces to be logged to LangSmith, even when using `wrap_anthropic` or `wrapAnthropic`. This allows you to toggle tracing on and off without changing your code.
+>
+> Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](https://docs.langchain.com/) for more information).
+>
+> If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
+>
+> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project).
 
-  Additionally, you will need to set the `LANGSMITH_API_KEY` environment variable to your API key (see [Setup](/) for more information).
+```python
+import anthropic
+from langsmith import traceable
+from langsmith.wrappers import wrap_anthropic
 
-  If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
+client = wrap_anthropic(anthropic.Anthropic())
 
-  By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](/langsmith/log-traces-to-project).
-</Note>
+@traceable(run_type="tool", name="Retrieve Context")
+def my_tool(question: str) -> str:
+  return "During this morning's meeting, we solved all world conflict."
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import anthropic
-  from langsmith import traceable
-  from langsmith.wrappers import wrap_anthropic
+@traceable(name="Chat Pipeline")
+def chat_pipeline(question: str):
+  context = my_tool(question)
+  messages = [
+      { "role": "user", "content": f"Question: {question}\nContext: {context}"}
+  ]
+  message = client.messages.create(
+      model="claude-sonnet-4-6",
+      messages=messages,
+      max_tokens=1024,
+      system="You are a helpful assistant. Please respond to the user's request only based on the given context."
+  )
+  return message
 
-  client = wrap_anthropic(anthropic.Anthropic())
+chat_pipeline("Can you summarize this morning's meetings?")
+```
 
-  @traceable(run_type="tool", name="Retrieve Context")
-  def my_tool(question: str) -> str:
-    return "During this morning's meeting, we solved all world conflict."
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+import { traceable } from "langsmith/traceable";
+import { wrapAnthropic } from "langsmith/wrappers/anthropic";
 
-  @traceable(name="Chat Pipeline")
-  def chat_pipeline(question: str):
-    context = my_tool(question)
-    messages = [
-        { "role": "user", "content": f"Question: {question}\nContext: {context}"}
-    ]
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        messages=messages,
-        max_tokens=1024,
-        system="You are a helpful assistant. Please respond to the user's request only based on the given context."
-    )
-    return message
+const client = wrapAnthropic(new Anthropic());
 
-  chat_pipeline("Can you summarize this morning's meetings?")
-  ```
+const myTool = traceable(async (question: string) => {
+  return "During this morning's meeting, we solved all world conflict.";
+}, { name: "Retrieve Context", run_type: "tool" });
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import Anthropic from "@anthropic-ai/sdk";
-  import { traceable } from "langsmith/traceable";
-  import { wrapAnthropic } from "langsmith/wrappers/anthropic";
+const chatPipeline = traceable(async (question: string) => {
+  const context = await myTool(question);
+  const messages = [
+      { role: "user", content: `Question: ${question}\nContext: ${context}` }
+  ];
+  const message = await client.messages.create({
+      model: "claude-sonnet-4-6",
+      messages: messages,
+      max_tokens: 1024,
+      system: "You are a helpful assistant. Please respond to the user's request only based on the given context."
+  });
+  return message;
+}, { name: "Chat Pipeline" });
 
-  const client = wrapAnthropic(new Anthropic());
-
-  const myTool = traceable(async (question: string) => {
-    return "During this morning's meeting, we solved all world conflict.";
-  }, { name: "Retrieve Context", run_type: "tool" });
-
-  const chatPipeline = traceable(async (question: string) => {
-    const context = await myTool(question);
-    const messages = [
-        { role: "user", content: `Question: ${question}\nContext: ${context}` }
-    ];
-    const message = await client.messages.create({
-        model: "claude-sonnet-4-6",
-        messages: messages,
-        max_tokens: 1024,
-        system: "You are a helpful assistant. Please respond to the user's request only based on the given context."
-    });
-    return message;
-  }, { name: "Chat Pipeline" });
-
-  await chatPipeline("Can you summarize this morning's meetings?");
-  ```
-</CodeGroup>
+await chatPipeline("Can you summarize this morning's meetings?");
+```
 
 ## Trace Claude managed agents
 
 The `wrapAnthropic` wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Wrap the Anthropic client with `wrapAnthropic`. The wrapper will automatically trace agent creation, session creation, and all events that flow through the session.
 
-```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import Anthropic from "@anthropic-ai/sdk";
 import { wrapAnthropic } from "langsmith/wrappers/anthropic";
 
@@ -138,20 +131,15 @@ for await (const event of stream) {
 }
 ```
 
-<Note>
-  Full tracing of subagents in Anthropic's multi-agent architecture requires
-  tapping into a separate event stream and is not yet supported. Only top-level
-  session events are traced.
-</Note>
+> [!NOTE]
+> Full tracing of subagents in Anthropic's multi-agent architecture requires
+> tapping into a separate event stream and is not yet supported. Only top-level
+> session events are traced.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-anthropic.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Build a voice agent with LangChain
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/voice-agent)
 ## Overview
 
 Chat interfaces have dominated how we interact with AI, but recent breakthroughs in multimodal AI are opening up exciting new possibilities. High-quality generative models and expressive text-to-speech (TTS) systems now make it possible to build agents that feel less like tools and more like conversational partners.
@@ -12,7 +8,7 @@ Voice agents are one example of this. Instead of relying on a keyboard and mouse
 
 ### What are voice agents?
 
-Voice agents are [agents](/oss/python/langchain/agents) that can engage in natural spoken conversations with users. These agents combine speech recognition, natural language processing, generative AI, and text-to-speech technologies to create seamless, natural conversations.
+Voice agents are [agents](https://docs.langchain.com/oss/python/langchain/agents) that can engage in natural spoken conversations with users. These agents combine speech recognition, natural language processing, generative AI, and text-to-speech technologies to create seamless, natural conversations.
 
 They're suited for a variety of use cases, including:
 
@@ -35,7 +31,7 @@ The difference lies in how these steps are sequenced and coupled. In practice, p
 
 The Sandwich architecture composes three distinct components: speech-to-text (STT), a text-based LangChain agent, and text-to-speech (TTS).
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart LR
     A[User Audio] --> B[Speech-to-Text]
     B --> C[LangChain Agent]
@@ -65,7 +61,7 @@ flowchart LR
 
 Speech-to-speech uses a multimodal model that processes audio input and generates audio output natively.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart LR
     A[User Audio] --> B[Multimodal Model]
     B --> C[Audio Output]
@@ -116,9 +112,9 @@ The demo implements a streaming pipeline where each stage processes data asynchr
 * Accepts WebSocket connections from clients
 
 * Orchestrates the three-step pipeline:
-  * [Speech-to-text (STT)](#1-speech-to-text): Forwards audio to the STT provider (e.g., AssemblyAI), receives transcript events
-  * [Agent](#2-langchain-agent): Processes transcripts with LangChain agent, streams response tokens
-  * [Text-to-speech (TTS)](#3-text-to-speech): Sends agent responses to the TTS provider (e.g., Cartesia), receives audio chunks
+  * [Speech-to-text (STT)](https://docs.langchain.com/oss/python/langchain/voice-agent#1-speech-to-text): Forwards audio to the STT provider (e.g., AssemblyAI), receives transcript events
+  * [Agent](https://docs.langchain.com/oss/python/langchain/voice-agent#2-langchain-agent): Processes transcripts with LangChain agent, streams response tokens
+  * [Text-to-speech (TTS)](https://docs.langchain.com/oss/python/langchain/voice-agent#3-text-to-speech): Sends agent responses to the TTS provider (e.g., Cartesia), receives audio chunks
 
 * Returns synthesized audio to the client for playback
 
@@ -145,7 +141,7 @@ The STT stage transforms an incoming audio stream into text transcripts. The imp
 
 ### Implementation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import AsyncIterator
 import asyncio
 from assemblyai_stt import AssemblyAISTT
@@ -189,57 +185,60 @@ async def stt_stream(
 
 The application implements an AssemblyAI client to manage the WebSocket connection and message parsing. See below for implementations; similar adapters can be constructed for other STT providers.
 
-<Accordion title="AssemblyAI Client">
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  class AssemblyAISTT:
-      def __init__(self, api_key: str | None = None, sample_rate: int = 16000):
-          self.api_key = api_key or os.getenv("ASSEMBLYAI_API_KEY")
-          self.sample_rate = sample_rate
-          self._ws: WebSocketClientProtocol | None = None
+<details>
+<summary>AssemblyAI Client</summary>
 
-      async def send_audio(self, audio_chunk: bytes) -> None:
-          """Send PCM audio bytes to AssemblyAI."""
-          ws = await self._ensure_connection()
-          await ws.send(audio_chunk)
+```python
+class AssemblyAISTT:
+    def __init__(self, api_key: str | None = None, sample_rate: int = 16000):
+        self.api_key = api_key or os.getenv("ASSEMBLYAI_API_KEY")
+        self.sample_rate = sample_rate
+        self._ws: WebSocketClientProtocol | None = None
 
-      async def receive_events(self) -> AsyncIterator[STTEvent]:
-          """Yield STT events as they arrive from AssemblyAI."""
-          async for raw_message in self._ws:
-              message = json.loads(raw_message)
+    async def send_audio(self, audio_chunk: bytes) -> None:
+        """Send PCM audio bytes to AssemblyAI."""
+        ws = await self._ensure_connection()
+        await ws.send(audio_chunk)
 
-              if message["type"] == "Turn":
-                  # Final formatted transcript
-                  if message.get("turn_is_formatted"):
-                      yield STTOutputEvent.create(message["transcript"])
-                  # Partial transcript
-                  else:
-                      yield STTChunkEvent.create(message["transcript"])
+    async def receive_events(self) -> AsyncIterator[STTEvent]:
+        """Yield STT events as they arrive from AssemblyAI."""
+        async for raw_message in self._ws:
+            message = json.loads(raw_message)
 
-      async def _ensure_connection(self) -> WebSocketClientProtocol:
-          """Establish WebSocket connection if not already connected."""
-          if self._ws is None:
-              url = f"wss://streaming.assemblyai.com/v3/ws?sample_rate={self.sample_rate}&format_turns=true"
-              self._ws = await websockets.connect(
-                  url,
-                  additional_headers={"Authorization": self.api_key}
-              )
-          return self._ws
-  ```
-</Accordion>
+            if message["type"] == "Turn":
+                # Final formatted transcript
+                if message.get("turn_is_formatted"):
+                    yield STTOutputEvent.create(message["transcript"])
+                # Partial transcript
+                else:
+                    yield STTChunkEvent.create(message["transcript"])
+
+    async def _ensure_connection(self) -> WebSocketClientProtocol:
+        """Establish WebSocket connection if not already connected."""
+        if self._ws is None:
+            url = f"wss://streaming.assemblyai.com/v3/ws?sample_rate={self.sample_rate}&format_turns=true"
+            self._ws = await websockets.connect(
+                url,
+                additional_headers={"Authorization": self.api_key}
+            )
+        return self._ws
+```
+
+</details>
 
 ## 2. LangChain agent
 
-The agent stage processes text transcripts through a LangChain [agent](/oss/python/langchain/agents) and streams the response tokens. In this case, we stream all [text content blocks](/oss/python/langchain/messages#content-block-reference) generated by the agent.
+The agent stage processes text transcripts through a LangChain [agent](https://docs.langchain.com/oss/python/langchain/agents) and streams the response tokens. In this case, we stream all [text content blocks](https://docs.langchain.com/oss/python/langchain/messages#content-block-reference) generated by the agent.
 
 ### Key concepts
 
-**Streaming Responses**: The agent uses [`stream_events(version="v3")`](/oss/python/langchain/streaming) with `stream.messages` to emit response tokens as they are generated, rather than waiting for the complete response. This enables the TTS stage to begin synthesis immediately.
+**Streaming Responses**: The agent uses [`stream_events(version="v3")`](https://docs.langchain.com/oss/python/langchain/streaming) with `stream.messages` to emit response tokens as they are generated, rather than waiting for the complete response. This enables the TTS stage to begin synthesis immediately.
 
-**Conversation Memory**: A [checkpointer](/oss/python/langchain/short-term-memory) maintains conversation state across turns using a unique thread ID. This allows the agent to reference previous exchanges in the conversation.
+**Conversation Memory**: A [checkpointer](https://docs.langchain.com/oss/python/langchain/short-term-memory) maintains conversation state across turns using a unique thread ID. This allows the agent to reference previous exchanges in the conversation.
 
 ### Implementation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.utils.uuid import uuid7
 from langchain.agents import create_agent
 from langchain.messages import HumanMessage
@@ -313,7 +312,7 @@ The TTS stage synthesizes agent response text into audio and streams it back to 
 
 ### Implementation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from cartesia_tts import CartesiaTTS
 from utils import merge_async_iters
 
@@ -352,81 +351,84 @@ async def tts_stream(
 
 The application implements a Cartesia client to manage the WebSocket connection and audio streaming. See below for implementations; similar adapters can be constructed for other TTS providers.
 
-<Accordion title="Cartesia Client">
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  import json
-  import websockets
+<details>
+<summary>Cartesia Client</summary>
 
-  class CartesiaTTS:
-      def __init__(
-          self,
-          api_key: Optional[str] = None,
-          voice_id: str = "f6ff7c0c-e396-40a9-a70b-f7607edb6937",
-          model_id: str = "sonic-3",
-          sample_rate: int = 24000,
-          encoding: str = "pcm_s16le",
-      ):
-          self.api_key = api_key or os.getenv("CARTESIA_API_KEY")
-          self.voice_id = voice_id
-          self.model_id = model_id
-          self.sample_rate = sample_rate
-          self.encoding = encoding
-          self._ws: WebSocketClientProtocol | None = None
+```python
+import base64
+import json
+import websockets
 
-      def _generate_context_id(self) -> str:
-          """Generate a valid context_id for Cartesia."""
-          timestamp = int(time.time() * 1000)
-          counter = self._context_counter
-          self._context_counter += 1
-          return f"ctx_{timestamp}_{counter}"
+class CartesiaTTS:
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        voice_id: str = "f6ff7c0c-e396-40a9-a70b-f7607edb6937",
+        model_id: str = "sonic-3",
+        sample_rate: int = 24000,
+        encoding: str = "pcm_s16le",
+    ):
+        self.api_key = api_key or os.getenv("CARTESIA_API_KEY")
+        self.voice_id = voice_id
+        self.model_id = model_id
+        self.sample_rate = sample_rate
+        self.encoding = encoding
+        self._ws: WebSocketClientProtocol | None = None
 
-      async def send_text(self, text: str | None) -> None:
-          """Send text to Cartesia for synthesis."""
-          if not text or not text.strip():
-              return
+    def _generate_context_id(self) -> str:
+        """Generate a valid context_id for Cartesia."""
+        timestamp = int(time.time() * 1000)
+        counter = self._context_counter
+        self._context_counter += 1
+        return f"ctx_{timestamp}_{counter}"
 
-          ws = await self._ensure_connection()
-          payload = {
-              "model_id": self.model_id,
-              "transcript": text,
-              "voice": {
-                  "mode": "id",
-                  "id": self.voice_id,
-              },
-              "output_format": {
-                  "container": "raw",
-                  "encoding": self.encoding,
-                  "sample_rate": self.sample_rate,
-              },
-              "language": self.language,
-              "context_id": self._generate_context_id(),
-          }
-          await ws.send(json.dumps(payload))
+    async def send_text(self, text: str | None) -> None:
+        """Send text to Cartesia for synthesis."""
+        if not text or not text.strip():
+            return
 
-      async def receive_events(self) -> AsyncIterator[TTSChunkEvent]:
-          """Yield audio chunks as they arrive from Cartesia."""
-          async for raw_message in self._ws:
-              message = json.loads(raw_message)
+        ws = await self._ensure_connection()
+        payload = {
+            "model_id": self.model_id,
+            "transcript": text,
+            "voice": {
+                "mode": "id",
+                "id": self.voice_id,
+            },
+            "output_format": {
+                "container": "raw",
+                "encoding": self.encoding,
+                "sample_rate": self.sample_rate,
+            },
+            "language": self.language,
+            "context_id": self._generate_context_id(),
+        }
+        await ws.send(json.dumps(payload))
 
-              # Decode and yield audio chunks
-              if "data" in message and message["data"]:
-                  audio_chunk = base64.b64decode(message["data"])
-                  if audio_chunk:
-                      yield TTSChunkEvent.create(audio_chunk)
+    async def receive_events(self) -> AsyncIterator[TTSChunkEvent]:
+        """Yield audio chunks as they arrive from Cartesia."""
+        async for raw_message in self._ws:
+            message = json.loads(raw_message)
 
-      async def _ensure_connection(self) -> WebSocketClientProtocol:
-          """Establish WebSocket connection if not already connected."""
-          if self._ws is None:
-              url = (
-                  f"wss://api.cartesia.ai/tts/websocket"
-                  f"?api_key={self.api_key}&cartesia_version={self.cartesia_version}"
-              )
-              self._ws = await websockets.connect(url)
+            # Decode and yield audio chunks
+            if "data" in message and message["data"]:
+                audio_chunk = base64.b64decode(message["data"])
+                if audio_chunk:
+                    yield TTSChunkEvent.create(audio_chunk)
 
-          return self._ws
-  ```
-</Accordion>
+    async def _ensure_connection(self) -> WebSocketClientProtocol:
+        """Establish WebSocket connection if not already connected."""
+        if self._ws is None:
+            url = (
+                f"wss://api.cartesia.ai/tts/websocket"
+                f"?api_key={self.api_key}&cartesia_version={self.cartesia_version}"
+            )
+            self._ws = await websockets.connect(url)
+
+        return self._ws
+```
+
+</details>
 
 ### LangSmith
 
@@ -434,14 +436,14 @@ Many of the applications you build with LangChain will contain multiple steps wi
 
 After you sign up at the link above, make sure to set your environment variables to start logging traces:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 export LANGSMITH_TRACING="true"
 export LANGSMITH_API_KEY="..."
 ```
 
 Or, set them in Python:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -453,7 +455,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 The complete pipeline chains the three stages together:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.runnables import RunnableGenerator
 
 pipeline = (
@@ -486,16 +488,12 @@ We use [RunnableGenerators](https://reference.langchain.com/python/langchain_cor
 
 Each stage processes events independently and concurrently: audio transcription begins as soon as audio arrives, the agent starts reasoning as soon as a transcript is available, and speech synthesis begins as soon as agent text is generated. This architecture can achieve sub-700ms latency to support natural conversation.
 
-For more on building agents with LangChain, see the [Agents guide](/oss/python/langchain/agents).
+For more on building agents with LangChain, see the [Agents guide](https://docs.langchain.com/oss/python/langchain/agents).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/voice-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/voice-agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

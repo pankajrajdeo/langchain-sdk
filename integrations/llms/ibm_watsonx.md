@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # IBM watsonx.ai integration
 
 > Integrate with the IBM watsonx.ai LLM using LangChain Python.
@@ -29,7 +25,7 @@ The cell below defines the credentials required to work with watsonx Foundation 
 **Action:** Provide the IBM Cloud user API key. For details, see
 [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -39,7 +35,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -53,7 +49,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-ibm
 ```
 
@@ -61,7 +57,7 @@ The LangChain IBM integration lives in the `langchain-ibm` package:
 
 You might need to adjust model `parameters` for different models or tasks. For details, refer to [documentation](https://ibm.github.io/watsonx-ai-python-sdk/fm_model.html#metanames.GenTextParamsMetaNames).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 parameters = {
     "decoding_method": "sample",
     "max_new_tokens": 100,
@@ -83,7 +79,7 @@ In this example, we’ll use the `project_id` and Dallas URL.
 
 You need to specify `model_id` that will be used for inferencing. All available models you can find in [documentation](https://ibm.github.io/watsonx-ai-python-sdk/fm_model.html#TextModels).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import WatsonxLLM
 
 watsonx_llm = WatsonxLLM(
@@ -96,7 +92,7 @@ watsonx_llm = WatsonxLLM(
 
 Alternatively you can use Cloud Pak for Data credentials. For details, see [documentation](https://ibm.github.io/watsonx-ai-python-sdk/setup_cpd.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 watsonx_llm = WatsonxLLM(
     model_id="ibm/granite-13b-instruct-v2",
     url="PASTE YOUR URL HERE",
@@ -111,7 +107,7 @@ watsonx_llm = WatsonxLLM(
 
 Instead of `model_id`, you can also pass the `deployment_id` of the previously tuned model. The entire model tuning workflow is described in [Working with TuneExperiment and PromptTuner](https://ibm.github.io/watsonx-ai-python-sdk/pt_tune_experiment_run.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 watsonx_llm = WatsonxLLM(
     deployment_id="PASTE YOUR DEPLOYMENT_ID HERE",
     url="https://us-south.ml.cloud.ibm.com",
@@ -122,7 +118,7 @@ watsonx_llm = WatsonxLLM(
 
 For certain requirements, there is an option to pass the IBM's [`APIClient`](https://ibm.github.io/watsonx-ai-python-sdk/base.html#apiclient) object into the `WatsonxLLM` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai import APIClient
 
 api_client = APIClient(...)
@@ -135,7 +131,7 @@ watsonx_llm = WatsonxLLM(
 
 You can also pass the IBM's [`ModelInference`](https://ibm.github.io/watsonx-ai-python-sdk/fm_model_inference.html) object into the `WatsonxLLM` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai.foundation_models import ModelInference
 
 model = ModelInference(...)
@@ -147,17 +143,17 @@ watsonx_llm = WatsonxLLM(watsonx_model=model)
 
 To obtain completions, you can call the model directly using a string prompt.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Calling a single prompt
 
 watsonx_llm.invoke("Who is man's best friend?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 "Man's best friend is his dog. Dogs are man's best friend because they are always there for you, they never judge you, and they love you unconditionally. Dogs are also great companions and can help reduce stress levels. "
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Calling multiple prompts
 
 watsonx_llm.generate(
@@ -168,7 +164,7 @@ watsonx_llm.generate(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 LLMResult(generations=[[Generation(text='The fastest dog in the world is the greyhound. Greyhounds can run up to 45 mph, which is about the same speed as a Usain Bolt.', generation_info={'finish_reason': 'eos_token'})], [Generation(text='The Labrador Retriever is a breed of retriever that was bred for hunting. They are a very smart breed and are very easy to train. They are also very loyal and will make great companions. ', generation_info={'finish_reason': 'eos_token'})]], llm_output={'token_usage': {'generated_token_count': 82, 'input_token_count': 13}, 'model_id': 'ibm/granite-13b-instruct-v2', 'deployment_id': None}, run=[RunInfo(run_id=UUID('750b8a0f-8846-456d-93d0-e039e95b1276')), RunInfo(run_id=UUID('aa4c2a1c-5b08-4fcf-87aa-50228de46db5'))], type='LLMResult')
 ```
 
@@ -176,7 +172,7 @@ LLMResult(generations=[[Generation(text='The fastest dog in the world is the gre
 
 You can stream the model output.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = watsonx_llm.stream_events(
     "Describe your favorite breed of dog and why it is your favorite.",
     version="v3",
@@ -185,7 +181,7 @@ for token in stream.text:
     print(token, end="")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 My favorite breed of dog is a Labrador Retriever. They are my favorite breed because they are my favorite color, yellow. They are also very smart and easy to train.
 ```
 
@@ -193,7 +189,7 @@ My favorite breed of dog is a Labrador Retriever. They are my favorite breed bec
 
 Create `PromptTemplate` objects which will be responsible for creating a random question.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import PromptTemplate
 
 template = "Generate a random question about {topic}: Question: "
@@ -203,7 +199,7 @@ prompt = PromptTemplate.from_template(template)
 
 Provide a topic and run the chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm_chain = prompt | watsonx_llm
 
 topic = "dog"
@@ -211,7 +207,7 @@ topic = "dog"
 llm_chain.invoke(topic)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'What is the origin of the name "Pomeranian"?'
 ```
 
@@ -223,12 +219,8 @@ For detailed documentation of all `WatsonxLLM` features and configurations head 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

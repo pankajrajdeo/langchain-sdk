@@ -1,43 +1,38 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Granular billable usage
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/granular-usage)
+Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
 
-> Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
-
-<Note>
-  **Trace usage:** For LangSmith [Cloud](/langsmith/cloud), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.
-
-  For [Self-hosted](/langsmith/self-hosted) instances, trace data collection begins when the feature is enabled via the following environment variables, or after [upgrading to a version with it enabled by default](/langsmith/self-hosted-changelog#langsmith-0-13-12).
-
-  ```env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true
-  GRANULAR_USAGE_TABLE_ENABLED=true
-  ```
-
-  Starting with self-hosted version 0.16.0, long-lived trace usage is no longer tracked for [Self-hosted](/langsmith/self-hosted) deployments. The **Long-lived only** retention filter always shows zero results for these deployments.
-
-  **LangSmith Deployment usage** uses a separate data source. For more details, refer to the [LangSmith Deployment section](/langsmith/granular-usage#langsmith-deployment-usage-kind%3Dlangsmith_deployments).
-</Note>
+> [!NOTE]
+> **Trace usage:** For LangSmith [Cloud](https://docs.langchain.com/langsmith/cloud), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.
+>
+> For [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) instances, trace data collection begins when the feature is enabled via the following environment variables, or after [upgrading to a version with it enabled by default](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-12).
+>
+> ```env
+> DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true
+> GRANULAR_USAGE_TABLE_ENABLED=true
+> ```
+>
+> Starting with self-hosted version 0.16.0, long-lived trace usage is no longer tracked for [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments. The **Long-lived only** retention filter always shows zero results for these deployments.
+>
+> **LangSmith Deployment usage** uses a separate data source. For more details, refer to the [LangSmith Deployment section](https://docs.langchain.com/langsmith/granular-usage#langsmith-deployment-usage-kind%3Dlangsmith_deployments).
 
 LangSmith provides granular billable usage APIs that let you retrieve detailed usage data broken down by workspace, project, user, or API key. Two billable domains are supported by the same endpoint, selected via a `kind` query parameter:
 
 * **Trace usage** (`kind=traces`, default): number of traces ingested.
-* **LangSmith Deployment usage** (`kind=langsmith_deployments`): nodes executed, agent runs, and agent uptime for [LangSmith Deployment](/langsmith/billing).
+* **LangSmith Deployment usage** (`kind=langsmith_deployments`): nodes executed, agent runs, and agent uptime for [LangSmith Deployment](https://docs.langchain.com/langsmith/billing).
 
 Both kinds share the same query parameters (time range, workspace filter, grouping dimension) and return the same time-bucketed shape. The data sources are separate, so a record returned by one kind will not appear in the other.
 
 These APIs enable you to:
 
-* Track usage across different teams or [workspaces](/langsmith/administration-overview).
-* Identify which users or [API keys](/langsmith/create-account-api-key#api-keys) are consuming the most traces or running the most agents.
+* Track usage across different teams or [workspaces](https://docs.langchain.com/langsmith/administration-overview).
+* Identify which users or [API keys](https://docs.langchain.com/langsmith/create-account-api-key#api-keys) are consuming the most traces or running the most agents.
 * Analyze usage patterns over time.
 * Export usage data for internal reporting.
 
 ## Prerequisites
 
-* You must have the [`organization:read` permission](/langsmith/organization-workspace-operations) to access granular usage data.
+* You must have the [`organization:read` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) to access granular usage data.
 * You can only view usage for workspaces you have read access to.
 
 ## View in the UI
@@ -106,7 +101,7 @@ Existing callers that omit `kind` continue to get trace usage with the same resp
 
 #### Response
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "stride": {
     "days": 1,
@@ -127,107 +122,102 @@ Existing callers that omit `kind` continue to get trace usage with the same resp
 
 #### Example: Get trace usage by workspace
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import httpx
-  from datetime import datetime, timedelta, timezone
+```python
+import httpx
+from datetime import datetime, timedelta, timezone
 
-  client = httpx.Client(
-      base_url="https://api.smith.langchain.com",
-      headers={"x-api-key": "<your-api-key>"}
-  )
+client = httpx.Client(
+    base_url="https://api.smith.langchain.com",
+    headers={"x-api-key": "<your-api-key>"}
+)
 
-  end_time = datetime.now(timezone.utc)
-  start_time = end_time - timedelta(days=30)
+end_time = datetime.now(timezone.utc)
+start_time = end_time - timedelta(days=30)
 
-  response = client.get(
-      "/api/v1/orgs/current/billing/granular-usage",
-      params={
-          "start_time": start_time.isoformat(),
-          "end_time": end_time.isoformat(),
-          "workspace_ids": ["<workspace-id>"],
-          "group_by": "workspace",
-      },
-  )
+response = client.get(
+    "/api/v1/orgs/current/billing/granular-usage",
+    params={
+        "start_time": start_time.isoformat(),
+        "end_time": end_time.isoformat(),
+        "workspace_ids": ["<workspace-id>"],
+        "group_by": "workspace",
+    },
+)
 
-  data = response.json()
-  for record in data["usage"]:
-      print(f"{record['time_bucket']}: {record['traces']} traces")
-  ```
+data = response.json()
+for record in data["usage"]:
+    print(f"{record['time_bucket']}: {record['traces']} traces")
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const response = await fetch(
-    `https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?` +
-    new URLSearchParams({
-      start_time: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-      end_time: new Date().toISOString(),
-      workspace_ids: "<workspace-id>",
-      group_by: "workspace",
-    }),
-    {
-      headers: {
-        "x-api-key": "<your-api-key>",
-      },
-    }
-  );
-
-  const data = await response.json();
-  for (const record of data.usage) {
-    console.log(`${record.time_bucket}: ${record.traces} traces`);
+```typescript
+const response = await fetch(
+  `https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?` +
+  new URLSearchParams({
+    start_time: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date().toISOString(),
+    workspace_ids: "<workspace-id>",
+    group_by: "workspace",
+  }),
+  {
+    headers: {
+      "x-api-key": "<your-api-key>",
+    },
   }
-  ```
+);
 
-  ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
-  start_time=2026-01-01T00:00:00Z&\
-  end_time=2026-01-15T00:00:00Z&\
-  workspace_ids=<workspace-id>&\
-  group_by=workspace" \
-    -H "x-api-key: <your-api-key>"
-  ```
-</CodeGroup>
+const data = await response.json();
+for (const record of data.usage) {
+  console.log(`${record.time_bucket}: ${record.traces} traces`);
+}
+```
+
+```bash
+curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
+start_time=2026-01-01T00:00:00Z&\
+end_time=2026-01-15T00:00:00Z&\
+workspace_ids=<workspace-id>&\
+group_by=workspace" \
+  -H "x-api-key: <your-api-key>"
+```
 
 #### Example: Get trace usage by user, filtered to long-lived retention only
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  response = client.get(
-      "/api/v1/orgs/current/billing/granular-usage",
-      params={
-          "start_time": start_time.isoformat(),
-          "end_time": end_time.isoformat(),
-          "workspace_ids": ["<workspace-id>"],
-          "group_by": "user",
-          "trace_tier": "longlived",
-      },
-  )
+```python
+response = client.get(
+    "/api/v1/orgs/current/billing/granular-usage",
+    params={
+        "start_time": start_time.isoformat(),
+        "end_time": end_time.isoformat(),
+        "workspace_ids": ["<workspace-id>"],
+        "group_by": "user",
+        "trace_tier": "longlived",
+    },
+)
 
-  data = response.json()
-  for record in data["usage"]:
-      user_email = record["dimensions"].get("user_email", "Unknown")
-      print(f"{user_email}: {record['traces']} long-lived traces")
-  ```
-</CodeGroup>
+data = response.json()
+for record in data["usage"]:
+    user_email = record["dimensions"].get("user_email", "Unknown")
+    print(f"{user_email}: {record['traces']} long-lived traces")
+```
 
 ### LangSmith Deployment usage (`kind=langsmith_deployments`)
 
 Each record carries three metrics together so a single fetch powers the whole Deployment view.
 
-<Note>
-  **LangSmith Deployment usage** is sourced separately from trace usage and is available for the full retention window of your deployment usage.
-
-  For self-hosted instances, the Deployment usage endpoint is opt-in. Enable it via:
-
-  ```env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  REMOTE_METRICS_ROLLUP_ENABLED=true
-  ```
-
-  Or upgrade to a LangSmith version that enables it by default (see [self-hosted changelog](/langsmith/self-hosted-changelog)).
-</Note>
+> [!NOTE]
+> **LangSmith Deployment usage** is sourced separately from trace usage and is available for the full retention window of your deployment usage.
+>
+> For self-hosted instances, the Deployment usage endpoint is opt-in. Enable it via:
+>
+> ```env
+> REMOTE_METRICS_ROLLUP_ENABLED=true
+> ```
+>
+> Or upgrade to a LangSmith version that enables it by default (see [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog)).
 
 #### Response
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "stride": {
     "days": 1,
@@ -256,65 +246,63 @@ Each record carries three metrics together so a single fetch powers the whole De
 
 #### Example: Get Deployment usage by workspace
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  response = client.get(
-      "/api/v1/orgs/current/billing/granular-usage",
-      params={
-          "kind": "langsmith_deployments",
-          "start_time": start_time.isoformat(),
-          "end_time": end_time.isoformat(),
-          "workspace_ids": ["<workspace-id>"],
-          "group_by": "workspace",
-      },
-  )
+```python
+response = client.get(
+    "/api/v1/orgs/current/billing/granular-usage",
+    params={
+        "kind": "langsmith_deployments",
+        "start_time": start_time.isoformat(),
+        "end_time": end_time.isoformat(),
+        "workspace_ids": ["<workspace-id>"],
+        "group_by": "workspace",
+    },
+)
 
-  data = response.json()
-  for record in data["usage"]:
-      print(
-          f"{record['time_bucket']}: "
-          f"{record['nodes_executed']} nodes, "
-          f"{record['agent_runs']} runs, "
-          f"{record['agent_uptime_seconds']}s uptime"
-      )
-  ```
+data = response.json()
+for record in data["usage"]:
+    print(
+        f"{record['time_bucket']}: "
+        f"{record['nodes_executed']} nodes, "
+        f"{record['agent_runs']} runs, "
+        f"{record['agent_uptime_seconds']}s uptime"
+    )
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const response = await fetch(
-    `https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?` +
-    new URLSearchParams({
-      kind: "langsmith_deployments",
-      start_time: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
-      end_time: new Date().toISOString(),
-      workspace_ids: "<workspace-id>",
-      group_by: "workspace",
-    }),
-    {
-      headers: {
-        "x-api-key": "<your-api-key>",
-      },
-    }
-  );
-
-  const data = await response.json();
-  for (const record of data.usage) {
-    console.log(
-      `${record.time_bucket}: ${record.nodes_executed} nodes, ` +
-      `${record.agent_runs} runs, ${record.agent_uptime_seconds}s uptime`
-    );
+```typescript
+const response = await fetch(
+  `https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?` +
+  new URLSearchParams({
+    kind: "langsmith_deployments",
+    start_time: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+    end_time: new Date().toISOString(),
+    workspace_ids: "<workspace-id>",
+    group_by: "workspace",
+  }),
+  {
+    headers: {
+      "x-api-key": "<your-api-key>",
+    },
   }
-  ```
+);
 
-  ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
-  kind=langsmith_deployments&\
-  start_time=2026-01-01T00:00:00Z&\
-  end_time=2026-01-15T00:00:00Z&\
-  workspace_ids=<workspace-id>&\
-  group_by=workspace" \
-    -H "x-api-key: <your-api-key>"
-  ```
-</CodeGroup>
+const data = await response.json();
+for (const record of data.usage) {
+  console.log(
+    `${record.time_bucket}: ${record.nodes_executed} nodes, ` +
+    `${record.agent_runs} runs, ${record.agent_uptime_seconds}s uptime`
+  );
+}
+```
+
+```bash
+curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage?\
+kind=langsmith_deployments&\
+start_time=2026-01-01T00:00:00Z&\
+end_time=2026-01-15T00:00:00Z&\
+workspace_ids=<workspace-id>&\
+group_by=workspace" \
+  -H "x-api-key: <your-api-key>"
+```
 
 ## CSV export
 
@@ -339,34 +327,32 @@ For `kind=traces`, the value column is `Traces`. For `kind=langsmith_deployments
 
 Cells whose value would start with `=`, `+`, `-`, `@`, tab, or carriage-return are tab-prefixed to neutralize spreadsheet formula evaluation in Excel / Google Sheets / LibreOffice.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  response = client.get(
-      "/api/v1/orgs/current/billing/granular-usage/export",
-      params={
-          "kind": "langsmith_deployments",
-          "start_time": start_time.isoformat(),
-          "end_time": end_time.isoformat(),
-          "workspace_ids": ["<workspace-id>"],
-          "group_by": "workspace",
-      },
-  )
+```python
+response = client.get(
+    "/api/v1/orgs/current/billing/granular-usage/export",
+    params={
+        "kind": "langsmith_deployments",
+        "start_time": start_time.isoformat(),
+        "end_time": end_time.isoformat(),
+        "workspace_ids": ["<workspace-id>"],
+        "group_by": "workspace",
+    },
+)
 
-  with open("deployment_usage_report.csv", "wb") as f:
-      f.write(response.content)
-  ```
+with open("deployment_usage_report.csv", "wb") as f:
+    f.write(response.content)
+```
 
-  ```bash cURL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage/export?\
-  kind=langsmith_deployments&\
-  start_time=2026-01-01T00:00:00Z&\
-  end_time=2026-01-15T00:00:00Z&\
-  workspace_ids=<workspace-id>&\
-  group_by=workspace" \
-    -H "x-api-key: <your-api-key>" \
-    -o deployment_usage_report.csv
-  ```
-</CodeGroup>
+```bash
+curl -X GET "https://api.smith.langchain.com/api/v1/orgs/current/billing/granular-usage/export?\
+kind=langsmith_deployments&\
+start_time=2026-01-01T00:00:00Z&\
+end_time=2026-01-15T00:00:00Z&\
+workspace_ids=<workspace-id>&\
+group_by=workspace" \
+  -H "x-api-key: <your-api-key>" \
+  -o deployment_usage_report.csv
+```
 
 ## Grouping options
 
@@ -379,21 +365,17 @@ The `group_by` parameter determines how usage data is aggregated:
 | `user`      | Group by user      | `user_id`, `user_email`          | Both kinds    |
 | `api_key`   | Group by API key   | `api_key_short_key`              | Both kinds    |
 
-For trace usage, "project" refers to the [LangSmith tracer session](/langsmith/observability-concepts). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
+For trace usage, "project" refers to the [LangSmith tracer session](https://docs.langchain.com/langsmith/observability-concepts). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
 
 ## Related resources
 
-* [Manage billing in your account](/langsmith/billing)
-* [Organization and workspace operations](/langsmith/organization-workspace-operations)
+* [Manage billing in your account](https://docs.langchain.com/langsmith/billing)
+* [Organization and workspace operations](https://docs.langchain.com/langsmith/organization-workspace-operations)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/granular-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/granular-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

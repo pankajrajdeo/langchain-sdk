@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatLiteLLM and ChatLiteLLMRouter integration
 
 > Integrate with the ChatLiteLLM and ChatLiteLLMRouter chat model using LangChain Python.
@@ -15,7 +11,7 @@ This integration provides two chat model classes:
 * [ChatLiteLLM](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm/ChatLiteLLM): The main LangChain chat wrapper for LiteLLM.
 * [ChatLiteLLMRouter](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm_router/ChatLiteLLMRouter): A `ChatLiteLLM` wrapper that leverages LiteLLM's Router for load balancing and fallbacks.
 
-The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings), [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter), and [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader). See the [providers page](/oss/python/integrations/providers/litellm) for details.
+The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings), [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter), and [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader). See the [providers page](https://docs.langchain.com/oss/python/integrations/providers/litellm) for details.
 
 ## Overview
 
@@ -28,7 +24,7 @@ The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/pytho
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Native async](/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Native async](https://docs.langchain.com/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |      ✅      |      ✅      |      ❌      |                                                 ✅                                                |                                            ✅                                            |                            ✅                            |                              ✅                             |
 
@@ -48,7 +44,7 @@ Head to the [Claude console](https://console.anthropic.com) to sign up and gener
 
 Head to [platform.openai.com/api-keys](https://platform.openai.com/api-keys) to sign up for OpenAI and generate an API key. Once you've done this, set the OPENAI\_API\_KEY environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ## Set ENV variables
 import os
 
@@ -60,7 +56,7 @@ os.environ["ANTHROPIC_API_KEY"] = "your-anthropic-key"
 
 The LangChain LiteLLM integration is available in the `langchain-litellm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-litellm
 ```
 
@@ -70,7 +66,7 @@ pip install -qU langchain-litellm
 
 You can instantiate a `ChatLiteLLM` model by providing a `model` name [supported by LiteLLM](https://docs.litellm.ai/docs/providers).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import ChatLiteLLM
 
 llm = ChatLiteLLM(model="gpt-5.4-nano", temperature=0.1)
@@ -80,7 +76,7 @@ llm = ChatLiteLLM(model="gpt-5.4-nano", temperature=0.1)
 
 You can also leverage LiteLLM's routing capabilities by defining your model list as specified in the [LiteLLM routing documentation](https://docs.litellm.ai/docs/routing).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_litellm import ChatLiteLLMRouter
 from litellm import Router
 
@@ -112,14 +108,14 @@ llm = ChatLiteLLMRouter(router=litellm_router, model_name="gpt-5.5", temperature
 
 Whether you've instantiated a `ChatLiteLLM` or a `ChatLiteLLMRouter`, you can now use the ChatModel through LangChain's API.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = await llm.ainvoke(
     "Classify the text into neutral, negative or positive. Text: I think the food was okay. Sentiment:"
 )
 print(response)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 content='Neutral' additional_kwargs={} response_metadata={'token_usage': Usage(completion_tokens=2, prompt_tokens=30, total_tokens=32, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), 'model': 'gpt-3.5-turbo', 'finish_reason': 'stop', 'model_name': 'gpt-3.5-turbo'} id='run-ab6a3b21-eae8-4c27-acb2-add65a38221a-0' usage_metadata={'input_tokens': 30, 'output_tokens': 2, 'total_tokens': 32}
 ```
 
@@ -127,13 +123,13 @@ content='Neutral' additional_kwargs={} response_metadata={'token_usage': Usage(c
 
 `ChatLiteLLM` and `ChatLiteLLMRouter` also support async and streaming functionality:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = await llm.astream_events("Hello, please explain how antibiotics work", version="v3")
 async for token in stream.text:
     print(token, end="")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Antibiotics are medications that fight bacterial infections in the body. They work by targeting specific bacteria and either killing them or preventing their growth and reproduction.
 
 There are several different mechanisms by which antibiotics work. Some antibiotics work by disrupting the cell walls of bacteria, causing them to burst and die. Others interfere with the protein synthesis of bacteria, preventing them from growing and reproducing. Some antibiotics target the DNA or RNA of bacteria, disrupting their ability to replicate.
@@ -149,7 +145,7 @@ Use Google Search grounding with Vertex AI models (e.g., `gemini-3.6-flash`). Ci
 
 **Setup**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from langchain_litellm import ChatLiteLLM
 
@@ -161,7 +157,7 @@ llm = ChatLiteLLM(model="vertex_ai/gemini-2.5-flash", temperature=0)
 
 **Batch usage**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Invoke with Google Search tool enabled
 response = llm.invoke(
     "What is the current stock price of Google?",
@@ -177,7 +173,7 @@ if provider_fields:
 
 **Streaming usage**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events(
     "What is the current stock price of Google?",
     version="v3",
@@ -199,12 +195,8 @@ For detailed documentation of all `ChatLiteLLM` and `ChatLiteLLMRouter` features
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/litellm.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

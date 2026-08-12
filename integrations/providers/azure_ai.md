@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure AI integrations
 
 > Integrate with Azure AI using LangChain Python.
@@ -19,23 +15,21 @@ We recommend developers start with the (`langchain-azure-ai`) to access all the 
 
 Access models like Azure OpenAI, DeepSeek R1, Cohere, Phi and Mistral using the `AzureAIOpenAIApiChatModel` class.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-azure-ai
-  ```
+```bash
+pip install -U langchain-azure-ai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-azure-ai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-azure-ai
+```
 
 Configure your endpoint. You can use a project endpoint with `DefaultAzureCredential`, or set an API key directly.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AZURE_AI_PROJECT_ENDPOINT=your-project-endpoint
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.chat_models import AzureAIOpenAIApiChatModel
 from azure.identity import DefaultAzureCredential
 
@@ -51,23 +45,21 @@ llm.invoke('Tell me a joke and include some emojis')
 
 ### Azure AI model inference for embeddings
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-azure-ai
-  ```
+```bash
+pip install -U langchain-azure-ai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-azure-ai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-azure-ai
+```
 
 Configure your endpoint. You can use a project endpoint with `DefaultAzureCredential`, or set an API key directly.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AZURE_AI_PROJECT_ENDPOINT=your-project-endpoint
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.embeddings import AzureAIOpenAIApiEmbeddingsModel
 from azure.identity import DefaultAzureCredential
 
@@ -92,17 +84,15 @@ embed_model = AzureAIOpenAIApiEmbeddingsModel(
 
 We need to install the `langchain-azure-cosmosdb` and `azure-cosmos` packages to use this vector store.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-azure-cosmosdb azure-cosmos
-  ```
+```bash
+pip install -qU langchain-azure-cosmosdb azure-cosmos
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-azure-cosmosdb azure-cosmos
-  ```
-</CodeGroup>
+```bash
+uv add langchain-azure-cosmosdb azure-cosmos
+```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_cosmosdb import AzureCosmosDBNoSqlVectorSearch
 
 vector_search = AzureCosmosDBNoSqlVectorSearch.from_documents(
@@ -120,7 +110,7 @@ vector_search = AzureCosmosDBNoSqlVectorSearch.from_documents(
 )
 ```
 
-See a [usage example](/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql).
 
 ### Azure CosmosDB mongo vCore vector search
 
@@ -131,17 +121,15 @@ See a [usage example](/oss/python/integrations/vectorstores/azure_cosmos_db_no_s
 
 We need to install the `pymongo` package to use this vector store.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU pymongo
-  ```
+```bash
+pip install -qU pymongo
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add pymongo
-  ```
-</CodeGroup>
+```bash
+uv add pymongo
+```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.vectorstores.azure_cosmos_db_mongo_vcore import (
     AzureCosmosDBMongoVCoreVectorSearch,
 )
@@ -154,16 +142,12 @@ vectorstore = AzureCosmosDBMongoVCoreVectorSearch.from_documents(
 )
 ```
 
-See a [usage example](/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

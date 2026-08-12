@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatUpstage integration
 
 > Integrate with the ChatUpstage chat model using LangChain Python.
@@ -12,7 +8,7 @@ This notebook covers how to get started with Upstage chat models.
 
 Install `langchain-upstage` package.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U langchain-upstage
 ```
 
@@ -24,25 +20,25 @@ Make sure to set the following environment variables:
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_upstage import ChatUpstage
 
 chat = ChatUpstage()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # using chat invoke
 chat.invoke("Hello, how are you?")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # using chat stream
 stream = chat.stream_events("Hello, how are you?", version="v3")
 for token in stream.text:
@@ -51,7 +47,7 @@ for token in stream.text:
 
 ## Chaining
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # using chain
 prompt = ChatPromptTemplate.from_messages(
     [
@@ -66,12 +62,8 @@ chain.invoke({"english_text": "Hello, how are you?"})
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/upstage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith shared responsibility model
-
-> Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/shared-responsibility-model)
+Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
 
 LangSmith operates as a multi-tenant SaaS solution. Our security model is designed to be simple: LangChain secures the platform infrastructure and application, while you secure your specific usage, data inputs, and the AI agents you build.
 
@@ -44,12 +40,8 @@ To align with the security assumptions in our SOC 2 Type II framework, we recomm
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/shared-responsibility-model.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/shared-responsibility-model.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

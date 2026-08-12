@@ -1,28 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Backward compatibility
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/backward-compatibility)
+Update LangGraph graph code in production without breaking in-flight runs.
 
-> Update LangGraph graph code in production without breaking in-flight runs.
-
-Software needs to change in production. New requirements, bug fixes, and refactors all eventually land in your graph code. Because LangGraph runs the latest deployed graph against state that has been [persisted](/oss/python/langgraph/persistence) for existing threads, every change you ship is effectively a backward-compatible API change with respect to your existing checkpoints.
+Software needs to change in production. New requirements, bug fixes, and refactors all eventually land in your graph code. Because LangGraph runs the latest deployed graph against state that has been [persisted](https://docs.langchain.com/oss/python/langgraph/persistence) for existing threads, every change you ship is effectively a backward-compatible API change with respect to your existing checkpoints.
 
 Unlike workflow engines that pin a run to the version of code it started with, LangGraph applies the latest graph immediately to *every* thread, both new threads and threads that resume from a checkpoint. This is convenient: bug fixes propagate to in-flight conversations and agents without ceremony. It also means you must reason about how each change interacts with runs that started under the previous version of the code.
 
 There are three categories of compatibility issues to watch for, in roughly the order you will encounter them:
 
-1. [Technical compatibility](#technical-compatibility): The most common; the new code must still load and execute against existing State.
-2. [Business compatibility](#business-compatibility): Less common; existing runs should keep following the old business logic even though the code has changed.
-3. [Non-determinism](#non-determinism): Only applies to the [Functional API](/oss/python/langgraph/functional-api).
+1. [Technical compatibility](https://docs.langchain.com/oss/python/langgraph/backward-compatibility#technical-compatibility): The most common; the new code must still load and execute against existing State.
+2. [Business compatibility](https://docs.langchain.com/oss/python/langgraph/backward-compatibility#business-compatibility): Less common; existing runs should keep following the old business logic even though the code has changed.
+3. [Non-determinism](https://docs.langchain.com/oss/python/langgraph/backward-compatibility#non-determinism): Only applies to the [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api).
 
-<Tip>
-  For a short summary of which graph topology and state changes the runtime supports by default, see [Graph migrations](/oss/python/langgraph/graph-api#graph-migrations). The rest of this page covers the patterns you can apply when a change falls outside that supported set.
-</Tip>
+> [!TIP]
+> For a short summary of which graph topology and state changes the runtime supports by default, see [Graph migrations](https://docs.langchain.com/oss/python/langgraph/graph-api#graph-migrations). The rest of this page covers the patterns you can apply when a change falls outside that supported set.
 
 ## Technical compatibility
 
-Technical compatibility is the equivalent of an API breaking change in a microservice. The "API" here is the contract between your graph code and the data already persisted by the [checkpointer](/oss/python/langgraph/checkpointers#checkpointer-libraries) for existing threads. When a thread resumes, LangGraph deserializes the saved state, dispatches it to a node by name, and expects the node to return values that fit the state schema.
+Technical compatibility is the equivalent of an API breaking change in a microservice. The "API" here is the contract between your graph code and the data already persisted by the [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) for existing threads. When a thread resumes, LangGraph deserializes the saved state, dispatches it to a node by name, and expects the node to return values that fit the state schema.
 
 Common technical breakages:
 
@@ -30,20 +25,20 @@ Common technical breakages:
 * **Renaming or removing a State key** that older checkpoints still contain or that downstream nodes still read.
 * **Tightening a State field**, such as making an `Optional` field required, narrowing a type, or adding a new required field with no default. Existing checkpoints will not satisfy the new schema.
 
-Edge topology itself is *not* persisted in the checkpoint. Adding, removing, or rerouting edges between nodes that still exist is safe for in-flight threads. Per the [Graph migrations](/oss/python/langgraph/graph-api#graph-migrations) summary, the only topology change that can break an interrupted thread is renaming or removing a node.
+Edge topology itself is *not* persisted in the checkpoint. Adding, removing, or rerouting edges between nodes that still exist is safe for in-flight threads. Per the [Graph migrations](https://docs.langchain.com/oss/python/langgraph/graph-api#graph-migrations) summary, the only topology change that can break an interrupted thread is renaming or removing a node.
 
 ### Recommended patterns
 
 * Add new state fields as `NotRequired` (or `Optional[...] = None`) so old checkpoints still validate:
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
   from typing import NotRequired
   from typing_extensions import TypedDict
 
   class State(TypedDict):
       messages: list
       summary: NotRequired[str]  # [!code ++]
-  ```
+```
 
 * Treat removals as deprecations. Keep the field defined on the state for at least one drain cycle, even if no node reads it, so existing checkpoints continue to load.
 
@@ -51,15 +46,15 @@ Edge topology itself is *not* persisted in the checkpoint. Adding, removing, or 
 
 * Keep node functions tolerant of unknown keys. `TypedDict` ignores extra keys at runtime, so leftover state from an older code version will not raise unless a node explicitly reads a missing key.
 
-* Use [time travel](/oss/python/langgraph/use-time-travel) and [`graph.get_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state) to spot-check existing threads against the new code in a staging deployment before rolling out.
+* Use [time travel](https://docs.langchain.com/oss/python/langgraph/use-time-travel) and [`graph.get_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state) to spot-check existing threads against the new code in a staging deployment before rolling out.
 
 ### Detecting in-flight threads
 
 Before you remove a node, rename a State key, or otherwise make a change that older threads cannot tolerate, you want to know whether any threads are currently parked on the version of the code you are about to drop. LangGraph itself does not maintain a search index over thread state, so the answer depends on where your graph runs.
 
-**If you deploy to [LangSmith](/langsmith/deployment).** Use the Agent Server's thread search to filter by status. The `status` field accepts `idle`, `busy`, `interrupted`, and `error`, so you can bulk-query for `interrupted` or `busy` threads, optionally narrowed with metadata filters. See [Filter by thread status](/langsmith/use-threads#filter-by-thread-status) and [List threads](/langsmith/use-threads#list-threads).
+**If you deploy to [LangSmith](https://docs.langchain.com/langsmith/deployment).** Use the Agent Server's thread search to filter by status. The `status` field accepts `idle`, `busy`, `interrupted`, and `error`, so you can bulk-query for `interrupted` or `busy` threads, optionally narrowed with metadata filters. See [Filter by thread status](https://docs.langchain.com/langsmith/use-threads#filter-by-thread-status) and [List threads](https://docs.langchain.com/langsmith/use-threads#list-threads).
 
-**Anywhere LangGraph runs.** Use [LangSmith tracing](/oss/python/langgraph/observability) to monitor which nodes are being entered and exited in production. This is the most reliable signal that a node or state field is no longer reachable in any active code path.
+**Anywhere LangGraph runs.** Use [LangSmith tracing](https://docs.langchain.com/oss/python/langgraph/observability) to monitor which nodes are being entered and exited in production. This is the most reliable signal that a node or state field is no longer reachable in any active code path.
 
 **When you already have a `thread_id`.** Inspect that single thread directly:
 
@@ -77,37 +72,32 @@ For example, suppose your graph runs `intake → triage → respond`, and you de
 * Threads that have already passed `triage` should continue straight to `respond` (the old flow).
 * New threads should run the full new flow.
 
-The recommended pattern is to record the relevant *behavioral version* on the state at thread start, then branch on it with a [conditional edge](/oss/python/langgraph/graph-api#conditional-edges):
+The recommended pattern is to record the relevant *behavioral version* on the state at thread start, then branch on it with a [conditional edge](https://docs.langchain.com/oss/python/langgraph/graph-api#conditional-edges):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import NotRequired
 from typing_extensions import TypedDict
 
 from langgraph.graph import END, START, StateGraph
-
 
 class State(TypedDict):
     request: str
     flow_version: NotRequired[int]
     response: NotRequired[str]
 
-
 def intake(state: State) -> dict:
     # Stamp new threads with the current flow version. Existing threads
     # that resume past `intake` keep whatever value was already saved.
     return {"flow_version": state.get("flow_version", 2)}
 
-
 def triage(state: State) -> dict: ...
 def policy_check(state: State) -> dict: ...
 def respond(state: State) -> dict: ...
-
 
 def after_triage(state: State) -> str:
     if state.get("flow_version", 1) >= 2:
         return "policy_check"
     return "respond"
-
 
 builder = StateGraph(State)
 builder.add_node("intake", intake)
@@ -129,14 +119,14 @@ This pattern only works if you set the version *at thread start*, before any bra
 
 ## Non-determinism
 
-This category only applies to the [Functional API](/oss/python/langgraph/functional-api) and to [**tasks**](/oss/python/langgraph/functional-api#task) or [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls inside a [Graph API](/oss/python/langgraph/graph-api) **node**. Plain Graph API **nodes** [re-run from the start of the node function](/oss/python/langgraph/graph-api#re-execution-and-idempotency) on resume; design side effects to be idempotent, but you do not need to preserve task call order unless you use **tasks** or [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) in that **node**.
+This category only applies to the [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api) and to [**tasks**](https://docs.langchain.com/oss/python/langgraph/functional-api#task) or [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls inside a [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) **node**. Plain Graph API **nodes** [re-run from the start of the node function](https://docs.langchain.com/oss/python/langgraph/graph-api#re-execution-and-idempotency) on resume; design side effects to be idempotent, but you do not need to preserve task call order unless you use **tasks** or [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) in that **node**.
 
 A Functional API **entrypoint** compiles to a single **node** that replays the entrypoint body from the beginning when a run resumes, using cached [`@task`](https://reference.langchain.com/python/langgraph/func/task) results to skip work that has already been done. Two kinds of changes break this model:
 
 * **Adding, removing, or reordering `@task` calls or [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls** that come *before* the resume point. LangGraph matches cached results and resume values to calls by their position in the replay, so shifting that position can cause the wrong cached value to be replayed against a different call.
 * **Introducing non-deterministic operations outside of a `@task`**, such as `time.time()`, `random.random()`, or a network call inlined in the entrypoint body. On replay these produce different values than they did on the first run, which can change the control flow.
 
-For a deeper treatment with examples, see [Determinism](/oss/python/langgraph/functional-api#determinism) and [Common pitfalls](/oss/python/langgraph/functional-api#common-pitfalls) in the Functional API guide.
+For a deeper treatment with examples, see [Determinism](https://docs.langchain.com/oss/python/langgraph/functional-api#determinism) and [Common pitfalls](https://docs.langchain.com/oss/python/langgraph/functional-api#common-pitfalls) in the Functional API guide.
 
 If you need to make non-trivial code changes to an `@entrypoint` that has in-flight runs, the safest options are:
 
@@ -146,12 +136,8 @@ If you need to make non-trivial code changes to an `@entrypoint` that has in-fli
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/backward-compatibility.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/backward-compatibility.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

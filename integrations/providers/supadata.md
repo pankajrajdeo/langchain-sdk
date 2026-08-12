@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Supadata
 
 # Supadata
@@ -12,7 +8,7 @@ This page covers how to use the [Supadata](https://supadata.ai) ecosystem within
 
 To use Supadata, you need to install the standalone integration package.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install supadata-langchain
 ```
 
@@ -20,7 +16,7 @@ pip install supadata-langchain
 
 The Supadata integration allows you to load content from various video platforms as LangChain documents. It supports fetching transcripts and metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from supadata_langchain import SupadataLoader
 
@@ -47,7 +43,7 @@ print(docs[0].metadata)
 
 You can also fetch video structured metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Fetch Metadata
 docs = loader.load(
     {
@@ -68,12 +64,8 @@ For detailed usage examples and API documentation, please refer to the [official
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/supadata.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/supadata.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

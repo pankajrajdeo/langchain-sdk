@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Use environment variables for model providers
-
-<Note>
-  This feature is only available on Helm chart versions 0.10.27 (application version 0.10.74) and later.
-</Note>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-playground-environment-settings)
+> [!NOTE]
+> This feature is only available on Helm chart versions 0.10.27 (application version 0.10.74) and later.
 
 Many model providers support setting credentials and other configuration options through environment variables. This is useful for self-hosted deployments where you want to avoid hardcoding sensitive information in your code or configuration files. In LangSmith, most model interactions are done through the `playground` service, which allows you to configure many of those environment variables directly on the pod itself. This can be useful to avoid having to set credentials in the UI.
 
@@ -21,7 +16,7 @@ Many model providers support setting credentials and other configuration options
 
 With the parameters from above, you can configure your LangSmith instance to use environment variables for model providers. You can do this by modifying the `langsmith_config.yaml` file for your LangSmith Helm Chart installation.
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 playground:
   deployment:
     extraEnv:
@@ -45,7 +40,7 @@ You can configure VertexAI credentials for the playground service using either e
 
 Configure VertexAI credentials using Kubernetes secrets:
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 playground:
   deployment:
     extraEnv:
@@ -84,66 +79,56 @@ You can configure the playground service account to use workload identity to ass
 
 For GKE clusters, use GCP Workload Identity:
 
-<CodeGroup>
-  ```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  playground:
-    deployment:
-      extraEnv:
-        # Optional: Set project/location if not in model config
-        - name: GOOGLE_CLOUD_PROJECT
-          value: "your-gcp-project-id"
-        - name: VERTEXAI_PROJECT_ID
-          value: "your-gcp-project-id"
-        - name: VERTEXAI_LOCATION
-          value: "us-central1"
-      # No credentials needed - pod assumes GCP SA role via annotation
-    serviceAccount:
-      create: true  # Enable if not exists
-      annotations:
-        iam.gke.io/gcp-service-account: "vertexai-sa@your-gcp-project.iam.gserviceaccount.com"
-  ```
-</CodeGroup>
+```yaml
+playground:
+  deployment:
+    extraEnv:
+      # Optional: Set project/location if not in model config
+      - name: GOOGLE_CLOUD_PROJECT
+        value: "your-gcp-project-id"
+      - name: VERTEXAI_PROJECT_ID
+        value: "your-gcp-project-id"
+      - name: VERTEXAI_LOCATION
+        value: "us-central1"
+    # No credentials needed - pod assumes GCP SA role via annotation
+  serviceAccount:
+    create: true  # Enable if not exists
+    annotations:
+      iam.gke.io/gcp-service-account: "vertexai-sa@your-gcp-project.iam.gserviceaccount.com"
+```
 
-<Note>
-  When using GCP Workload Identity, ensure the GCP service account has the required VertexAI permissions (e.g., `roles/aiplatform.user`).
-</Note>
+> [!NOTE]
+> When using GCP Workload Identity, ensure the GCP service account has the required VertexAI permissions (e.g., `roles/aiplatform.user`).
 
 #### AWS IRSA (EKS)
 
 For EKS clusters, you can use AWS IRSA to assume a GCP service account role:
 
-<CodeGroup>
-  ```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  playground:
-    deployment:
-      extraEnv:
-        # Optional: Set project/location if not in model config
-        - name: GOOGLE_CLOUD_PROJECT
-          value: "your-gcp-project-id"
-        - name: VERTEXAI_PROJECT_ID
-          value: "your-gcp-project-id"
-        - name: VERTEXAI_LOCATION
-          value: "us-central1"
-      # No credentials needed - pod assumes GCP SA role via AWS IAM role
-    serviceAccount:
-      create: true  # Enable if not exists
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::<account>:role/LangSmith-VertexAI-Role
-  ```
-</CodeGroup>
+```yaml
+playground:
+  deployment:
+    extraEnv:
+      # Optional: Set project/location if not in model config
+      - name: GOOGLE_CLOUD_PROJECT
+        value: "your-gcp-project-id"
+      - name: VERTEXAI_PROJECT_ID
+        value: "your-gcp-project-id"
+      - name: VERTEXAI_LOCATION
+        value: "us-central1"
+    # No credentials needed - pod assumes GCP SA role via AWS IAM role
+  serviceAccount:
+    create: true  # Enable if not exists
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<account>:role/LangSmith-VertexAI-Role
+```
 
-<Note>
-  When using AWS IRSA, ensure your AWS IAM role has the necessary permissions to assume the GCP service account role, and that the GCP service account has the required VertexAI permissions.
-</Note>
+> [!NOTE]
+> When using AWS IRSA, ensure your AWS IAM role has the necessary permissions to assume the GCP service account role, and that the GCP service account has the required VertexAI permissions.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-playground-environment-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-playground-environment-settings.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

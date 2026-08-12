@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Customize the error support message
-
-> Customize support contact information in the LangSmith frontend for self-hosted deployments.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ui-customization)
+Customize support contact information in the LangSmith frontend for self-hosted deployments.
 
 ## Custom error support message
 
@@ -12,11 +8,10 @@ By default, error messages in LangSmith direct users to the [Support Portal](htt
 
 When set, all error and support messages throughout the UI will display your custom text instead of the default LangChain support email.
 
-<Note>
-  The custom message is rendered as **plain text** only. HTML tags will not be interpreted and will display as literal text.
-</Note>
+> [!NOTE]
+> The custom message is rendered as **plain text** only. HTML tags will not be interpreted and will display as literal text.
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   customErrorSupportMessage: "For help, contact your internal IT team at helpdesk@example.com"
 ```
@@ -25,12 +20,8 @@ To revert to the default behavior, remove the setting or set it to an empty stri
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ui-customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-ui-customization.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

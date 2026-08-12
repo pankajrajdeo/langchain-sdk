@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Integration testing
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/integration-testing)
+Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
 
-> Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
+Integration tests verify that your agent works correctly with model APIs and external services. Unlike [unit tests](https://docs.langchain.com/oss/python/langchain/test/unit-testing) that use fakes and mocks, integration tests make actual network calls to confirm that components work together, credentials are valid, and latency is acceptable.
 
-Integration tests verify that your agent works correctly with model APIs and external services. Unlike [unit tests](/oss/python/langchain/test/unit-testing) that use fakes and mocks, integration tests make actual network calls to confirm that components work together, credentials are valid, and latency is acceptable.
-
-Because LLM responses are nondeterministic, integration tests require different strategies than traditional software tests. This guide covers how to organize, write, and run integration tests for your agents. For general test infrastructure when contributing to LangChain itself, see [Contributing to code](/oss/python/contributing/code#running-tests).
+Because LLM responses are nondeterministic, integration tests require different strategies than traditional software tests. This guide covers how to organize, write, and run integration tests for your agents. For general test infrastructure when contributing to LangChain itself, see [Contributing to code](https://docs.langchain.com/oss/python/contributing/code#running-tests).
 
 ## Separate unit and integration tests
 
@@ -16,7 +12,7 @@ Integration tests are slower and require API credentials, so keep them separate 
 
 Use pytest markers to tag integration tests:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import pytest
 
 @pytest.mark.integration
@@ -30,26 +26,24 @@ def test_agent_with_real_model():
 
 Configure pytest to recognize the marker and exclude integration tests from default runs:
 
-<CodeGroup>
-  ```ini pytest.ini theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  [pytest]
-  markers =
-      integration: tests that call real LLM APIs
-  addopts = -m "not integration"
-  ```
+```ini
+[pytest]
+markers =
+    integration: tests that call real LLM APIs
+addopts = -m "not integration"
+```
 
-  ```toml pyproject.toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  [tool.pytest.ini_options]
-  markers = [
-    "integration: tests that call real LLM APIs"
-  ]
-  addopts = "-m 'not integration'"
-  ```
-</CodeGroup>
+```toml
+[tool.pytest.ini_options]
+markers = [
+  "integration: tests that call real LLM APIs"
+]
+addopts = "-m 'not integration'"
+```
 
 Run integration tests explicitly:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pytest -m integration
 ```
 
@@ -59,7 +53,7 @@ Integration tests require real API credentials. Load them from environment varia
 
 Use a `conftest.py` fixture to validate that required keys are available:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import pytest
 
@@ -71,25 +65,24 @@ def check_api_keys():
 
 For local development, store keys in a `.env` file and load them with [`python-dotenv`](https://pypi.org/project/python-dotenv/):
 
-```bash .env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 OPENAI_API_KEY=sk-...
 ```
 
-```python conftest.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dotenv import load_dotenv
 
 load_dotenv()
 ```
 
-<Warning>
-  Add `.env` to your `.gitignore` to avoid committing credentials. In CI, inject secrets through your provider's secrets management (e.g., GitHub Actions secrets).
-</Warning>
+> [!WARNING]
+> Add `.env` to your `.gitignore` to avoid committing credentials. In CI, inject secrets through your provider's secrets management (e.g., GitHub Actions secrets).
 
 ## Assert on structure, not content
 
 LLM responses vary between runs. Instead of asserting on exact output strings, verify the structural properties of the response: message types, tool call names, argument shapes, and message count.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def test_agent_calls_weather_tool():
     agent = create_agent("claude-sonnet-4-6", tools=[get_weather])
     result = agent.invoke({
@@ -109,9 +102,8 @@ def test_agent_calls_weather_tool():
     assert len(messages[-1].content) > 0
 ```
 
-<Tip>
-  For more rigorous trajectory assertions, use the [AgentEvals](/oss/python/langchain/test/evals) evaluators which support fuzzy matching modes like `unordered` and `superset`.
-</Tip>
+> [!TIP]
+> For more rigorous trajectory assertions, use the [AgentEvals](https://docs.langchain.com/oss/python/langchain/test/evals) evaluators which support fuzzy matching modes like `unordered` and `superset`.
 
 ## Reduce cost and latency
 
@@ -120,9 +112,9 @@ Integration tests that call LLM APIs incur real costs. A few practices help keep
 * **Use smaller models**: `gemini-3.1-flash-lite` or equivalent for tests that only need to verify tool calling and response structure.
 * **Set `maxTokens`**: Cap response length to avoid long, expensive completions.
 * **Limit test scope**: Test one behavior per test. Avoid end-to-end scenarios that chain many LLM calls when a single-turn test suffices.
-* **Run selectively**: Use the test separation from [above](#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
+* **Run selectively**: Use the test separation from [above](https://docs.langchain.com/oss/python/langchain/test/integration-testing#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = create_agent(
     "gemini-3.1-flash-lite",
     tools=[get_weather],
@@ -138,7 +130,7 @@ For tests that run frequently in CI, you can record HTTP interactions on the fir
 
 Set up your `conftest.py` to filter sensitive information from cassettes:
 
-```py conftest.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 import pytest
 
 @pytest.fixture(scope="session")
@@ -157,30 +149,27 @@ def vcr_config():
 
 Configure your project to recognize the `vcr` marker:
 
-<CodeGroup>
-  ```ini pytest.ini theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  [pytest]
-  markers =
-      vcr: record/replay HTTP via VCR
-  addopts = --record-mode=once
-  ```
+```ini
+[pytest]
+markers =
+    vcr: record/replay HTTP via VCR
+addopts = --record-mode=once
+```
 
-  ```toml pyproject.toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  [tool.pytest.ini_options]
-  markers = [
-    "vcr: record/replay HTTP via VCR"
-  ]
-  addopts = "--record-mode=once"
-  ```
-</CodeGroup>
+```toml
+[tool.pytest.ini_options]
+markers = [
+  "vcr: record/replay HTTP via VCR"
+]
+addopts = "--record-mode=once"
+```
 
-<Info>
-  The `--record-mode=once` option records HTTP interactions on the first run and replays them on subsequent runs.
-</Info>
+> [!NOTE]
+> The `--record-mode=once` option records HTTP interactions on the first run and replays them on subsequent runs.
 
 Decorate your tests with the `vcr` marker:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @pytest.mark.vcr()
 def test_agent_trajectory():
     agent = create_agent("claude-sonnet-4-6", tools=[get_weather])
@@ -197,22 +186,17 @@ def test_agent_trajectory():
 
 The first run makes real network calls and generates a cassette file in `tests/cassettes/`. Subsequent runs replay the recorded responses.
 
-<Warning>
-  When you modify prompts, add new tools, or change expected trajectories, your saved cassettes will become outdated and your existing tests **will fail**. Delete the corresponding cassette files and rerun the tests to record fresh interactions.
-</Warning>
+> [!WARNING]
+> When you modify prompts, add new tools, or change expected trajectories, your saved cassettes will become outdated and your existing tests **will fail**. Delete the corresponding cassette files and rerun the tests to record fresh interactions.
 
 ## Next steps
 
-Learn how to evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators in [Evals](/oss/python/langchain/test/evals).
+Learn how to evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators in [Evals](https://docs.langchain.com/oss/python/langchain/test/evals).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/integration-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/integration-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

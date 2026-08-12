@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace JS functions in serverless environments
-
-<Note>
-  This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see [this guide](https://js.langchain.com/docs/how_to/callbacks_serverless).
-</Note>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/serverless-environments)
+> [!NOTE]
+> This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see [this guide](https://js.langchain.com/docs/how_to/callbacks_serverless).
 
 When tracing JavaScript functions, LangSmith will trace runs in the background by default to avoid adding latency. In serverless environments where the execution context may be terminated abruptly, it's important to ensure that all tracing data is properly flushed before the function completes.
 
@@ -16,9 +11,9 @@ To make sure this occurs, you can either:
   * Note that this is named differently from the [environment variable](https://js.langchain.com/docs/how_to/callbacks_serverless) in LangChain.js because LangSmith can be used without LangChain.
 * Pass a custom client into your traced runs and `await` the `client.awaitPendingTraceBatches();` method.
 
-Here's an example of using `awaitPendingTraceBatches` alongside the [`traceable`](/langsmith/annotate-code) method:
+Here's an example of using `awaitPendingTraceBatches` alongside the [`traceable`](https://docs.langchain.com/langsmith/annotate-code) method:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { Client } from "langsmith";
 import { traceable } from "langsmith/traceable";
 const langsmithClient = new Client({});
@@ -34,7 +29,7 @@ const res = await tracedFn();
 await langsmithClient.awaitPendingTraceBatches();
 ```
 
-## Rate limits at high concurrency[ ](#rate-limits-at-high-concurrency "Direct link to rate limits at high concurrency")
+## Rate limits at high concurrency[ ](https://docs.langchain.com/langsmith/serverless-environments#rate-limits-at-high-concurrency "Direct link to rate limits at high concurrency")
 
 By default, the LangSmith client will batch operations as your traced run executions, sending a new batch every few milliseconds.
 
@@ -42,7 +37,7 @@ This works well in most situations, but if your traced function is long-running 
 
 If you are seeing rate limit errors related to this, you can try setting `manualFlushMode: true` in your client like this:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { Client } from "langsmith";
 const langsmithClient = new Client({  manualFlushMode: true,});
 const myTracedFunc = traceable(
@@ -55,7 +50,7 @@ const myTracedFunc = traceable(
 
 And then manually calling `client.flush()` like this before your serverless function closes:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 try {
   await myTracedFunc();
 } finally {
@@ -67,12 +62,8 @@ Note that this will prevent runs from appearing in the LangSmith UI until you ca
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/serverless-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/serverless-environments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

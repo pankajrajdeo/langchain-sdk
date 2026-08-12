@@ -1,21 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Get started with Studio
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/quick-start-studio)
+[Studio](https://docs.langchain.com/langsmith/studio) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
 
-[Studio](/langsmith/studio) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
-
-* Graphs deployed on [cloud or self-hosted](#deployed-graphs).
-* Graphs running locally with [Agent Server](#local-development-server).
+* Graphs deployed on [cloud or self-hosted](https://docs.langchain.com/langsmith/quick-start-studio#deployed-graphs).
+* Graphs running locally with [Agent Server](https://docs.langchain.com/langsmith/quick-start-studio#local-development-server).
 
 ## Deployed graphs
 
 Studio is accessed in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) from the **Deployments** navigation.
 
-For applications that are [deployed](/langsmith/deployment-quickstart), you can access Studio as part of that deployment. To do so, navigate to the deployment in the UI and select **Studio**.
+For applications that are [deployed](https://docs.langchain.com/langsmith/deployment-quickstart), you can access Studio as part of that deployment. To do so, navigate to the deployment in the UI and select **Studio**.
 
-This will load Studio connected to your live deployment, allowing you to create, read, and update the [threads](/oss/python/langgraph/checkpointers#threads), [assistants](/langsmith/assistants), and [memory](/oss/python/concepts/memory) in that deployment.
+This will load Studio connected to your live deployment, allowing you to create, read, and update the [threads](https://docs.langchain.com/oss/python/langgraph/checkpointers#threads), [assistants](https://docs.langchain.com/langsmith/assistants), and [memory](https://docs.langchain.com/oss/python/concepts/memory) in that deployment.
 
 ## Local development server
 
@@ -23,39 +19,36 @@ This will load Studio connected to your live deployment, allowing you to create,
 
 To test your application locally using Studio:
 
-* Follow the [local application quickstart](/langsmith/local-dev-testing) first.
-* If you don't want data [traced](/langsmith/observability-concepts#traces) to LangSmith, set `LANGSMITH_TRACING=false` in your application's `.env` file. With tracing disabled, no data leaves your local server.
+* Follow the [local application quickstart](https://docs.langchain.com/langsmith/local-dev-testing) first.
+* If you don't want data [traced](https://docs.langchain.com/langsmith/observability-concepts#traces) to LangSmith, set `LANGSMITH_TRACING=false` in your application's `.env` file. With tracing disabled, no data leaves your local server.
 
 ### Setup
 
-1. Install the [LangGraph CLI](/langsmith/cli):
+1. Install the [LangGraph CLI](https://docs.langchain.com/langsmith/cli):
 
-   <CodeGroup>
-     ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     pip install -U "langgraph-cli[inmem]"
-     langgraph dev
-     ```
+```bash
+   pip install -U "langgraph-cli[inmem]"
+   langgraph dev
+```
 
-     ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     uv add "langgraph-cli[inmem]"
-     langgraph dev
-     ```
+```bash
+   uv add "langgraph-cli[inmem]"
+   langgraph dev
+```
 
-     ```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     npx @langchain/langgraph-cli dev
-     ```
-   </CodeGroup>
+```bash
+   npx @langchain/langgraph-cli dev
+```
 
-   <Warning>
-     **Browser Compatibility**
-     Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](/langsmith/troubleshooting-studio#safari-connection-issues) for steps.
-   </Warning>
+> [!WARNING]
+>    **Browser Compatibility**
+>    Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](https://docs.langchain.com/langsmith/troubleshooting-studio#safari-connection-issues) for steps.
 
-   This will start the Agent Server locally, running in-memory. The server will run in watch mode, listening for and automatically restarting on code changes. Read this [reference](/langsmith/cli#dev) to learn about all the options for starting the API server.
+   This will start the Agent Server locally, running in-memory. The server will run in watch mode, listening for and automatically restarting on code changes. Read this [reference](https://docs.langchain.com/langsmith/cli#dev) to learn about all the options for starting the API server.
 
    You will see the following logs:
 
-   ```
+```
    > Ready!
    >
    > - API: [http://localhost:2024](http://localhost:2024/)
@@ -63,7 +56,7 @@ To test your application locally using Studio:
    > - Docs: http://localhost:2024/docs
    >
    > - LangSmith Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
-   ```
+```
 
    Once running, you will automatically be directed to Studio.
 
@@ -78,73 +71,62 @@ To test your application locally using Studio:
 
 For step-by-step debugging with breakpoints and variable inspection, run the following:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Install debugpy package
-  pip install debugpy
-  # Start server with debugging enabled
-  langgraph dev --debug-port 5678
-  ```
+```bash
+# Install debugpy package
+pip install debugpy
+# Start server with debugging enabled
+langgraph dev --debug-port 5678
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Install debugpy package
-  uv add debugpy
-  # Start server with debugging enabled
-  langgraph dev --debug-port 5678
-  ```
-</CodeGroup>
+```bash
+# Install debugpy package
+uv add debugpy
+# Start server with debugging enabled
+langgraph dev --debug-port 5678
+```
 
 Then attach your preferred debugger:
 
-<Tabs>
-  <Tab title="VS Code">
-    Add this configuration to `launch.json`:
+#### VS Code
+Add this configuration to `launch.json`:
 
-    ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    {
-        "name": "Attach to LangGraph",
-        "type": "debugpy",
-        "request": "attach",
-        "connect": {
-          "host": "0.0.0.0",
-          "port": 5678
-        }
+```json
+{
+    "name": "Attach to LangGraph",
+    "type": "debugpy",
+    "request": "attach",
+    "connect": {
+      "host": "0.0.0.0",
+      "port": 5678
     }
-    ```
-  </Tab>
+}
+```
 
-  <Tab title="PyCharm">
-    1. Go to Run → Edit Configurations
-    2. Click + and select "Python Debug Server"
-    3. Set IDE host name: `localhost`
-    4. Set port: `5678` (or the port number you chose in the previous step)
-    5. Click "OK" and start debugging
-  </Tab>
-</Tabs>
+#### PyCharm
+1. Go to Run → Edit Configurations
+2. Click + and select "Python Debug Server"
+3. Set IDE host name: `localhost`
+4. Set port: `5678` (or the port number you chose in the previous step)
+5. Click "OK" and start debugging
 
-<Tip>
-  For issues getting started, refer to the [troubleshooting guide](/langsmith/troubleshooting-studio).
-</Tip>
+> [!TIP]
+> For issues getting started, refer to the [troubleshooting guide](https://docs.langchain.com/langsmith/troubleshooting-studio).
 
 ## Next steps
 
 For more information on how to run Studio, refer to the following guides:
 
-* [Run application](/langsmith/use-studio#run-application)
-* [Manage assistants](/langsmith/use-studio#manage-assistants)
-* [Manage threads](/langsmith/use-studio#manage-threads)
-* [Iterate on prompts](/langsmith/observability-studio)
-* [Debug LangSmith traces](/langsmith/observability-studio#debug-langsmith-traces)
-* [Add node to dataset](/langsmith/observability-studio#add-node-to-dataset)
+* [Run application](https://docs.langchain.com/langsmith/use-studio#run-application)
+* [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants)
+* [Manage threads](https://docs.langchain.com/langsmith/use-studio#manage-threads)
+* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio)
+* [Debug LangSmith traces](https://docs.langchain.com/langsmith/observability-studio#debug-langsmith-traces)
+* [Add node to dataset](https://docs.langchain.com/langsmith/observability-studio#add-node-to-dataset)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/quick-start-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/quick-start-studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

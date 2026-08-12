@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Automate updates
-
-> Schedule OpenWiki documentation updates with GitHub Actions, GitLab CI, or Bitbucket Pipelines
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/automate-updates)
+Schedule OpenWiki documentation updates with GitHub Actions, GitLab CI, or Bitbucket Pipelines
 
 OpenWiki can refresh repository documentation on a schedule and open a pull request or merge request when the wiki changes. Example workflows ship in the [OpenWiki repository](https://github.com/langchain-ai/openwiki/tree/main/examples).
 
@@ -22,7 +18,7 @@ Copy the example for your Git provider:
 
 For repository documentation in CI, use:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki code --update --print
 ```
 
@@ -45,26 +41,22 @@ OpenWiki automatically tracks wiki content in `openwiki/.last-update.json` and o
 
 Scheduled and CI runs send anonymous reliability telemetry under a shared CI identifier. To disable telemetry in CI, set:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 OPENWIKI_TELEMETRY_DISABLED=1
 ```
 
-You can uncomment the corresponding line in the example workflow. To understand what is collected and how to opt out locally, see [Customize OpenWiki](/oss/openwiki/customize#telemetry).
+You can uncomment the corresponding line in the example workflow. To understand what is collected and how to opt out locally, see [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize#telemetry).
 
 ## See also
 
-* [Code mode](/oss/openwiki/code-mode)
-* [Model providers](/oss/openwiki/providers)
-* [CLI reference](/oss/openwiki/cli-reference)
+* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
+* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
+* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/automate-updates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/automate-updates.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

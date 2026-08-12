@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure container apps dynamic sessions integration
 
 > Integrate with the Azure container apps dynamic sessions tool using LangChain Python.
@@ -14,19 +10,19 @@ By default, the `SessionsPythonREPLTool` tool uses `DefaultAzureCredential` to a
 
 To use the code interpreter you'll also need to create a session pool, which you can do by following the [session pool creation instructions](https://learn.microsoft.com/en-us/azure/container-apps/sessions-code-interpreter?tabs=azure-cli#create-a-session-pool-with-azure-cli). Once that's done you should have a pool management session endpoint, which you'll need to set below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 
 POOL_MANAGEMENT_ENDPOINT = getpass.getpass()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
  ········
 ```
 
 You'll also need to install the `langchain-azure-dynamic-sessions` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-azure-dynamic-sessions langchain-openai langchainhub langchain
 ```
 
@@ -34,24 +30,24 @@ pip install -qU langchain-azure-dynamic-sessions langchain-openai langchainhub l
 
 Instantiate and use tool:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_dynamic_sessions import SessionsPythonREPLTool
 
 tool = SessionsPythonREPLTool(pool_management_endpoint=POOL_MANAGEMENT_ENDPOINT)
 tool.invoke("6 * 7")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '{\n  "result": 42,\n  "stdout": "",\n  "stderr": ""\n}'
 ```
 
 Invoking the tool will return a json string with the result of the code, along with any stdout and stderr outputs. To get the raw dictionary results, use the `execute()` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool.execute("6 * 7")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'$id': '2',
  'status': 'Success',
  'stdout': '',
@@ -64,7 +60,7 @@ tool.execute("6 * 7")
 
 If we want to perform computation over specific data, we can use the `upload_file()` functionality to upload data to our session. You can upload data either via the `data: BinaryIO` arg or via the `local_file_path: str` arg (which points to a local file on your system). The data is automatically uploaded to the "/mnt/data/" directory in the sessions container. You can get the full file path via the upload metadata returned by `upload_file()`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import io
 import json
 
@@ -86,7 +82,7 @@ sum(data['important_data'])
 tool.execute(code)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'$id': '2',
  'status': 'Success',
  'stdout': '',
@@ -99,7 +95,7 @@ tool.execute(code)
 
 Dynamic sessions results can include image outputs as base64 encoded strings. In these cases the value of 'result' will be a dictionary with keys "type" (which will be "image"), "format (the format of the image), and "base64\_data".
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 code = """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -127,21 +123,21 @@ result = tool.execute(code)
 result["result"].keys()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 dict_keys(['type', 'format', 'base64_data'])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result["result"]["type"], result["result"]["format"]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ('image', 'png')
 ```
 
 We can decode the image data and display it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 import io
 
@@ -159,7 +155,7 @@ display(img)
 
 ## Simple agent example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic import hub
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_azure_dynamic_sessions import SessionsPythonREPLTool
@@ -180,7 +176,7 @@ response = agent_executor.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new AgentExecutor chain...
 
 Invoking: `Python_REPL` with `import math
@@ -197,7 +193,6 @@ else:
 
 {'sin_pi': sin_pi, 'random_number': random_number}`
 
-
 {
   "result": "{'sin_pi': 1.2246467991473532e-16, 'random_number': 9.68032501928628}",
   "stdout": "",
@@ -211,17 +206,13 @@ else:
 
 For a more complex agent example check out the [LangGraph data analyst example](https://github.com/langchain-ai/langchain/blob/v0.3/cookbook/azure_container_apps_dynamic_sessions_data_analyst.ipynb)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_dynamic_sessions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

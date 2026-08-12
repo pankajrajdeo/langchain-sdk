@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # A2A JSON-RPC
 
 > Communicate with an assistant using the Agent-to-Agent (A2A) Protocol over JSON-RPC 2.0.
@@ -21,12 +17,9 @@ This endpoint accepts a JSON-RPC envelope and dispatches based on `method`.
 - If `message.contextId` is omitted, a new context is created.
 - Text parts require the assistant input schema to include a `messages` field.
 
-
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json post /a2a/{assistant_id}
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment
@@ -83,7 +76,6 @@ paths:
         This endpoint accepts a JSON-RPC envelope and dispatches based on
         `method`.
 
-
         **Supported Methods:**
 
         - `message/send`: Send a message and wait for the final Task result.
@@ -96,11 +88,9 @@ paths:
         - `tasks/cancel`: Request cancellation (currently not supported; returns
         an error).
 
-
         **LangGraph Mapping:**
 
         - `message.contextId` maps to LangGraph `thread_id`.
-
 
         **Notes:**
 

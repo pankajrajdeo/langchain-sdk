@@ -1,44 +1,33 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # What's new in LangChain v1
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/langchain-v1)
 **LangChain v1 is a focused, production-ready foundation for building agents.** We've streamlined the framework around three core improvements:
 
-<CardGroup cols={1}>
-  <Card title="create_agent" icon="robot" href="#create_agent" arrow>
-    The new standard for building agents in LangChain, replacing `langgraph.prebuilt.create_react_agent`.
-  </Card>
+#### [create_agent](https://docs.langchain.com/oss/python/releases/langchain-v1#create_agent)
+The new standard for building agents in LangChain, replacing `langgraph.prebuilt.create_react_agent`.
 
-  <Card title="Standard content blocks" icon="cube" href="#standard-content-blocks" arrow>
-    A new `content_blocks` property that provides unified access to modern LLM features across providers.
-  </Card>
+#### [Standard content blocks](https://docs.langchain.com/oss/python/releases/langchain-v1#standard-content-blocks)
+A new `content_blocks` property that provides unified access to modern LLM features across providers.
 
-  <Card title="Simplified namespace" icon="sitemap" href="#simplified-package" arrow>
-    The `langchain` namespace has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to `langchain-classic`.
-  </Card>
-</CardGroup>
+#### [Simplified namespace](https://docs.langchain.com/oss/python/releases/langchain-v1#simplified-package)
+The `langchain` namespace has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to `langchain-classic`.
 
 To upgrade,
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain
-  ```
+```bash
+pip install -U langchain
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain
-  ```
-</CodeGroup>
+```bash
+uv add langchain
+```
 
-For a complete list of changes, see the [migration guide](/oss/python/migrate/langchain-v1).
+For a complete list of changes, see the [migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1).
 
 ## `create_agent`
 
-[`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is the standard way to build agents in LangChain 1.0. It provides a simpler interface than [`langgraph.prebuilt.create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) while offering greater customization potential by using [middleware](#middleware).
+[`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is the standard way to build agents in LangChain 1.0. It provides a simpler interface than [`langgraph.prebuilt.create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) while offering greater customization potential by using [middleware](https://docs.langchain.com/oss/python/releases/langchain-v1#middleware).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 
 agent = create_agent(
@@ -56,34 +45,31 @@ result = agent.invoke({
 
 Under the hood, [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on the basic agent loop -- calling a model, letting it choose tools to execute, and then finishing when it calls no more tools:
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" className="rounded-lg" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
-</div>
+> **Image:** [Core agent loop diagram](https://docs.langchain.com/oss/python/releases/langchain-v1)
 
-For more information, see [Agents](/oss/python/langchain/agents).
+For more information, see [Agents](https://docs.langchain.com/oss/python/langchain/agents).
 
 ### Middleware
 
 Middleware is the defining feature of [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent). It offers a highly customizable entry-point, raising the ceiling for what you can build.
 
-Great agents require [context engineering](/oss/python/langchain/context-engineering): getting the right information to the model at the right time. Middleware helps you control dynamic prompts, conversation summarization, selective tool access, state management, and guardrails through a composable abstraction.
+Great agents require [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering): getting the right information to the model at the right time. Middleware helps you control dynamic prompts, conversation summarization, selective tool access, state management, and guardrails through a composable abstraction.
 
 #### Prebuilt middleware
 
-LangChain provides a few [prebuilt middlewares](/oss/python/langchain/middleware#built-in-middleware) for common patterns, including:
+LangChain provides a few [prebuilt middlewares](https://docs.langchain.com/oss/python/langchain/middleware#built-in-middleware) for common patterns, including:
 
 * [`PIIMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/pii/PIIMiddleware): Redact sensitive information before sending to the model
 * [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware): Condense conversation history when it gets too long
 * [`HumanInTheLoopMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/human_in_the_loop/HumanInTheLoopMiddleware): Require approval for sensitive tool calls
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import (
     PIIMiddleware,
     SummarizationMiddleware,
     HumanInTheLoopMiddleware
 )
-
 
 agent = create_agent(
     model="claude-sonnet-4-6",
@@ -118,9 +104,7 @@ agent = create_agent(
 
 You can also build custom middleware to fit your needs. Middleware exposes hooks at each step in an agent's execution:
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" className="rounded-lg" width="500" height="560" data-path="oss/images/middleware_final.png" />
-</div>
+> **Image:** [Middleware flow diagram](https://docs.langchain.com/oss/python/releases/langchain-v1)
 
 Build custom middleware by implementing any of these hooks on a subclass of the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) class:
 
@@ -135,7 +119,7 @@ Build custom middleware by implementing any of these hooks on a subclass of the 
 
 Example custom middleware:
 
-```python expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dataclasses import dataclass
 from typing import Callable
 
@@ -183,29 +167,23 @@ agent = create_agent(
 )
 ```
 
-For more information, see [the complete middleware guide](/oss/python/langchain/middleware).
+For more information, see [the complete middleware guide](https://docs.langchain.com/oss/python/langchain/middleware).
 
 ### Built on LangGraph
 
-Because [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on [LangGraph](/oss/python/langgraph), you automatically get built in support for long running and reliable agents via:
+Because [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on [LangGraph](https://docs.langchain.com/oss/python/langgraph), you automatically get built in support for long running and reliable agents via:
 
-<CardGroup cols={2}>
-  <Card title="Persistence" icon="database">
-    Conversations automatically persist across sessions with built-in checkpointing
-  </Card>
+#### Persistence
+Conversations automatically persist across sessions with built-in checkpointing
 
-  <Card title="Streaming" icon="droplet">
-    Stream tokens, tool calls, and reasoning traces in real-time
-  </Card>
+#### Streaming
+Stream tokens, tool calls, and reasoning traces in real-time
 
-  <Card title="Human-in-the-loop" icon="hand-stop">
-    Pause agent execution for human approval before sensitive actions
-  </Card>
+#### Human-in-the-loop
+Pause agent execution for human approval before sensitive actions
 
-  <Card title="Time travel" icon="history">
-    Rewind conversations to any point and explore alternate paths and prompts
-  </Card>
-</CardGroup>
+#### Time travel
+Rewind conversations to any point and explore alternate paths and prompts
 
 You don't need to learn LangGraph to use these features—they work out of the box.
 
@@ -217,11 +195,10 @@ You don't need to learn LangGraph to use these features—they work out of the b
 * **Structured output strategy**: Models can choose between calling tools or using provider-side structured output generation
 * **Cost reduction**: Eliminates extra expense from additional LLM calls
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.structured_output import ToolStrategy
 from pydantic import BaseModel
-
 
 class Weather(BaseModel):
     temperature: float
@@ -254,21 +231,20 @@ print(repr(result["structured_response"]))
 
 ## Standard content blocks
 
-<Note>
-  Content block support is currently only available for the following integrations:
-
-  * [`langchain-anthropic`](https://pypi.org/project/langchain-anthropic/)
-  * [`langchain-aws`](https://pypi.org/project/langchain-aws/)
-  * [`langchain-openai`](https://pypi.org/project/langchain-openai/)
-  * [`langchain-google-genai`](https://pypi.org/project/langchain-google-genai/)
-  * [`langchain-ollama`](https://pypi.org/project/langchain-ollama/)
-
-  Broader support for content blocks will be rolled out gradually across more providers.
-</Note>
+> [!NOTE]
+> Content block support is currently only available for the following integrations:
+>
+> * [`langchain-anthropic`](https://pypi.org/project/langchain-anthropic/)
+> * [`langchain-aws`](https://pypi.org/project/langchain-aws/)
+> * [`langchain-openai`](https://pypi.org/project/langchain-openai/)
+> * [`langchain-google-genai`](https://pypi.org/project/langchain-google-genai/)
+> * [`langchain-ollama`](https://pypi.org/project/langchain-ollama/)
+>
+> Broader support for content blocks will be rolled out gradually across more providers.
 
 The new [`content_blocks`](https://reference.langchain.com/python/langchain-core/messages/base/BaseMessage) property introduces a standard representation for message content that works across providers:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_anthropic import ChatAnthropic
 
 model = ChatAnthropic(model="claude-sonnet-4-6")
@@ -288,9 +264,9 @@ for block in response.content_blocks:
 
 * **Provider agnostic**: Access reasoning traces, citations, built-in tools (web search, code interpreters, etc.), and other features using the same API regardless of provider
 * **Type safe**: Full type hints for all content block types
-* **Backward compatible**: Standard content can be [loaded lazily](/oss/python/langchain/messages#standard-content-blocks), so there are no associated breaking changes
+* **Backward compatible**: Standard content can be [loaded lazily](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks), so there are no associated breaking changes
 
-For more information, see our guide on [content blocks](/oss/python/langchain/messages#standard-content-blocks).
+For more information, see our guide on [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
 
 ***
 
@@ -310,7 +286,7 @@ LangChain v1 streamlines the [`langchain`](https://pypi.org/project/langchain/) 
 
 Most of these are re-exported from `langchain-core` for convenience, which gives you a focused API surface for building agents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Agent building
 from langchain.agents import create_agent
 
@@ -340,19 +316,17 @@ Legacy functionality has moved to [`langchain-classic`](https://pypi.org/project
 
 If you use any of this functionality, install [`langchain-classic`](https://pypi.org/project/langchain-classic):
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-classic
-  ```
+```bash
+pip install langchain-classic
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-classic
-  ```
-</CodeGroup>
+```bash
+uv add langchain-classic
+```
 
 Then update your imports:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain import ...  # [!code --]
 from langchain_classic import ...  # [!code ++]
 
@@ -368,7 +342,7 @@ from langchain_classic import hub  # [!code ++]
 
 ## Migration guide
 
-See our [migration guide](/oss/python/migrate/langchain-v1) for help updating your code to LangChain v1.
+See our [migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1) for help updating your code to LangChain v1.
 
 ## Reporting issues
 
@@ -376,45 +350,33 @@ Please report any issues discovered with 1.0 on [GitHub](https://github.com/lang
 
 ## Additional resources
 
-<CardGroup cols={3}>
-  <Card title="LangChain 1.0" icon="rocket" href="https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/">
-    Read the announcement
-  </Card>
+#### [LangChain 1.0](https://blog.langchain.com/langchain-langchain-1-0-alpha-releases/)
+Read the announcement
 
-  <Card title="Middleware guide" icon="puzzle" href="https://blog.langchain.com/agent-middleware/">
-    Deep dive into middleware
-  </Card>
+#### [Middleware guide](https://blog.langchain.com/agent-middleware/)
+Deep dive into middleware
 
-  <Card title="Agents Documentation" icon="book" href="/oss/python/langchain/agents" arrow>
-    Full agent documentation
-  </Card>
+#### [Agents Documentation](https://docs.langchain.com/oss/python/langchain/agents)
+Full agent documentation
 
-  <Card title="Message Content" icon="message" href="/oss/python/langchain/messages#message-content" arrow>
-    New content blocks API
-  </Card>
+#### [Message Content](https://docs.langchain.com/oss/python/langchain/messages#message-content)
+New content blocks API
 
-  <Card title="Migration guide" icon="arrows-exchange" href="/oss/python/migrate/langchain-v1" arrow>
-    How to migrate to LangChain v1
-  </Card>
+#### [Migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1)
+How to migrate to LangChain v1
 
-  <Card title="GitHub" icon="brand-github" href="https://github.com/langchain-ai/langchain">
-    Report issues or contribute
-  </Card>
-</CardGroup>
+#### [GitHub](https://github.com/langchain-ai/langchain)
+Report issues or contribute
 
 ## See also
 
-* [Versioning](/oss/python/versioning) – Understanding version numbers
-* [Release policy](/oss/python/release-policy) – Detailed release policies
+* [Versioning](https://docs.langchain.com/oss/python/versioning) – Understanding version numbers
+* [Release policy](https://docs.langchain.com/oss/python/release-policy) – Detailed release policies
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/releases/langchain-v1.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

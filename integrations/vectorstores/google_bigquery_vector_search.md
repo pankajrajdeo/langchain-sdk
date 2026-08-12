@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google bigquery vector search integration
 
 > Integrate with the Google bigquery vector search vector store using LangChain Python.
@@ -19,13 +15,13 @@ This tutorial illustrates how to work with an end-to-end data and embedding mana
 
 ### Install the library
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain langchain-google-vertexai "langchain-google-community[featurestore]"
 ```
 
 To use the newly installed packages in this Jupyter runtime, you must restart the runtime. You can do this by running the cell below, which restarts the current kernel.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import IPython
 
 app = IPython.Application.instance()
@@ -42,7 +38,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 PROJECT_ID = ""  # @param {type:"string"}
 
 # Set the project id
@@ -53,7 +49,7 @@ PROJECT_ID = ""  # @param {type:"string"}
 
 You can also change the `REGION` variable used by BigQuery. Learn more about [BigQuery regions](https://cloud.google.com/bigquery/docs/locations#supported_locations).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 REGION = "us-central1"  # @param {type: "string"}
 ```
 
@@ -61,7 +57,7 @@ REGION = "us-central1"  # @param {type: "string"}
 
 They will be your BigQuery Vector Store.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 DATASET = "my_langchain_dataset"  # @param {type: "string"}
 TABLE = "doc_and_vectors"  # @param {type: "string"}
 ```
@@ -71,7 +67,7 @@ TABLE = "doc_and_vectors"  # @param {type: "string"}
 * If you are using **Colab** to run this notebook, uncomment the cell below and continue.
 * If you are using **Vertex AI Workbench**, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # from google.colab import auth as google_auth
 
 # google_auth.authenticate_user()
@@ -85,9 +81,9 @@ You may need to enable Vertex AI API in your project by running
 `gcloud services enable aiplatform.googleapis.com --project {PROJECT_ID}`
 (replace `{PROJECT_ID}` with the name of your project).
 
-You can use any [LangChain embeddings model](/oss/python/integrations/embeddings/).
+You can use any [LangChain embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIEmbeddings
 
 embedding = VertexAIEmbeddings(
@@ -99,7 +95,7 @@ embedding = VertexAIEmbeddings(
 
 BigQuery Dataset and Table will be automatically created if they do not exist. See the [class definition](https://github.com/langchain-ai/langchain-google/blob/main/libs/community/langchain_google_community/bq_storage_vectorstores/bigquery.py#L26) for all optional paremeters.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import BigQueryVectorStore
 
 store = BigQueryVectorStore(
@@ -113,7 +109,7 @@ store = BigQueryVectorStore(
 
 ### Add texts
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 all_texts = ["Apples and oranges", "Cars and airplanes", "Pineapple", "Train", "Banana"]
 metadatas = [{"len": len(t)} for t in all_texts]
 
@@ -122,7 +118,7 @@ store.add_texts(all_texts, metadatas=metadatas)
 
 ### Search for documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "I'd like a fruit."
 docs = store.similarity_search(query)
 print(docs)
@@ -130,7 +126,7 @@ print(docs)
 
 ### Search for documents by vector
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_vector = embedding.embed_query(query)
 docs = store.similarity_search_by_vector(query_vector, k=2)
 print(docs)
@@ -145,14 +141,14 @@ The vectorstore supports two methods for applying filters to metadata fields whe
 * SQL-based Filters
   * Alternatively, you can provide a string representing an SQL WHERE clause to define more complex filtering conditions. This allows for greater flexibility, supporting SQL expressions such as comparison operators and logical operators. Learn more about [BigQuery operators](https://cloud.google.com/bigquery/docs/reference/standard-sql/operators).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Dictionary-based Filters
 # This should only return "Banana" document.
 docs = store.similarity_search_by_vector(query_vector, filter={"len": 6})
 print(docs)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # SQL-based Filters
 # This should return "Banana", "Apples and oranges" and "Cars and airplanes" documents.
 docs = store.similarity_search_by_vector(query_vector, filter="len = 6 AND len > 17")
@@ -163,7 +159,7 @@ print(docs)
 
 BigQueryVectorStore offers a `batch_search` method for scalable Vector similarity search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = store.batch_search(
     embeddings=None,  # can pass embeddings or
     queries=["search_query", "search_query"],  # can pass queries
@@ -175,7 +171,7 @@ results = store.batch_search(
 You can also bring your own embeddings with the `add_texts_with_embeddings` method.
 This is particularly useful for multimodal data which might require custom preprocessing before the embedding generation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 items = ["some text"]
 embs = embedding.embed(items)
 
@@ -190,18 +186,14 @@ You can simply use the method `.to_vertex_fs_vector_store()` to get a VertexFSVe
 
 Moving back to BigQueryVectorStore is equivalently easy with the `.to_bq_vector_store()` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 store.to_vertex_fs_vector_store()  # pass optional VertexFSVectorStore parameters as arguments
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_bigquery_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_bigquery_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

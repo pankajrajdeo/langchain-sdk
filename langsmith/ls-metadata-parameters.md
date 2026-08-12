@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Metadata parameters reference
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/ls-metadata-parameters)
+When you trace LLM calls with LangSmith, you often want to [track costs](https://docs.langchain.com/langsmith/cost-tracking), compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like [LangChain](https://docs.langchain.com/langsmith/trace-with-langchain) or the [OpenAI](https://docs.langchain.com/langsmith/trace-openai)/[Anthropic](https://docs.langchain.com/langsmith/trace-anthropic) wrappers) handle this automatically, but custom model wrappers and self-hosted models require a standardized way to provide this information. LangSmith uses `ls_` metadata parameters for this purpose.
 
-When you trace LLM calls with LangSmith, you often want to [track costs](/langsmith/cost-tracking), compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like [LangChain](/langsmith/trace-with-langchain) or the [OpenAI](/langsmith/trace-openai)/[Anthropic](/langsmith/trace-anthropic) wrappers) handle this automatically, but custom model wrappers and self-hosted models require a standardized way to provide this information. LangSmith uses `ls_` metadata parameters for this purpose.
-
-These metadata parameters (all prefixed with `ls_`) let you pass model configuration and identification information through the standard `metadata` field. Once set, LangSmith can automatically calculate costs, display model information in the UI, and enable [filtering](/langsmith/filter-traces-in-application) and analytics across your traces.
+These metadata parameters (all prefixed with `ls_`) let you pass model configuration and identification information through the standard `metadata` field. Once set, LangSmith can automatically calculate costs, display model information in the UI, and enable [filtering](https://docs.langchain.com/langsmith/filter-traces-in-application) and analytics across your traces.
 
 Use `ls_` metadata parameters to:
 
@@ -21,181 +17,177 @@ Use `ls_` metadata parameters to:
 
 The most common use case is enabling cost tracking for custom model wrappers. To do this, you need to provide two key pieces of information: the provider name (`ls_provider`) and the model name (`ls_model_name`). These work together to match against LangSmith's pricing database.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith import traceable
+```python
+from langsmith import traceable
 
-  @traceable(
-      run_type="llm",
-      metadata={
-          "ls_provider": "my_provider",
-          "ls_model_name": "my_custom_model"
-      }
-  )
-  def my_custom_llm(prompt: str):
-      return call_custom_api(prompt)
-  ```
-
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { traceable } from "langsmith/traceable";
-
-  const myCustomLlm = traceable(
-    async (prompt: string) => {
-      return callCustomApi(prompt);
-    },
-    {
-      run_type: "llm",
-      metadata: {
-        ls_provider: "my_provider",
-        ls_model_name: "my_custom_model"
-      }
+@traceable(
+    run_type="llm",
+    metadata={
+        "ls_provider": "my_provider",
+        "ls_model_name": "my_custom_model"
     }
-  );
-  ```
+)
+def my_custom_llm(prompt: str):
+    return call_custom_api(prompt)
+```
 
-  ```java Java theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import com.langchain.smith.tracing.RunType;
-  import com.langchain.smith.tracing.TraceConfig;
-  import com.langchain.smith.tracing.Tracing;
-  import java.util.HashMap;
-  import java.util.Map;
-  import java.util.function.Function;
+```typescript
+import { traceable } from "langsmith/traceable";
 
-  Map<String, Object> metadata = new HashMap<>();
-  metadata.put("ls_provider", "my_provider");
-  metadata.put("ls_model_name", "my_custom_model");
+const myCustomLlm = traceable(
+  async (prompt: string) => {
+    return callCustomApi(prompt);
+  },
+  {
+    run_type: "llm",
+    metadata: {
+      ls_provider: "my_provider",
+      ls_model_name: "my_custom_model"
+    }
+  }
+);
+```
 
-  Function<String, String> myCustomLlm =
-      Tracing.traceFunction(
-          prompt -> callCustomApi(prompt),
-          TraceConfig.builder()
-              .runType(RunType.LLM)
-              .metadata(metadata)
-              .build());
-  ```
+```java
+import com.langchain.smith.tracing.RunType;
+import com.langchain.smith.tracing.TraceConfig;
+import com.langchain.smith.tracing.Tracing;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
-  ```kotlin Kotlin theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import com.langchain.smith.tracing.RunType
-  import com.langchain.smith.tracing.TraceConfig
-  import com.langchain.smith.tracing.traceable
+Map<String, Object> metadata = new HashMap<>();
+metadata.put("ls_provider", "my_provider");
+metadata.put("ls_model_name", "my_custom_model");
 
-  val myCustomLlm =
-      traceable(
-          { prompt: String -> callCustomApi(prompt) },
-          TraceConfig.builder()
-              .runType(RunType.LLM)
-              .metadata(
-                  mapOf(
-                      "ls_provider" to "my_provider",
-                      "ls_model_name" to "my_custom_model",
-                  ),
-              )
-              .build(),
-      )
-  ```
-</CodeGroup>
+Function<String, String> myCustomLlm =
+    Tracing.traceFunction(
+        prompt -> callCustomApi(prompt),
+        TraceConfig.builder()
+            .runType(RunType.LLM)
+            .metadata(metadata)
+            .build());
+```
 
-This minimal setup tells LangSmith what model you're using, enabling automatic cost calculation if the model exists in the pricing database or if you've [configured custom pricing](/langsmith/cost-tracking#llm-calls-automatically-track-costs-based-on-token-counts).
+```kotlin
+import com.langchain.smith.tracing.RunType
+import com.langchain.smith.tracing.TraceConfig
+import com.langchain.smith.tracing.traceable
 
-For more comprehensive tracking, you can include additional configuration parameters. This is especially useful when [running experiments](/langsmith/evaluation-quickstart) or comparing different model settings:
+val myCustomLlm =
+    traceable(
+        { prompt: String -> callCustomApi(prompt) },
+        TraceConfig.builder()
+            .runType(RunType.LLM)
+            .metadata(
+                mapOf(
+                    "ls_provider" to "my_provider",
+                    "ls_model_name" to "my_custom_model",
+                ),
+            )
+            .build(),
+    )
+```
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  @traceable(
-      run_type="llm",
-      metadata={
-          "ls_provider": "openai",
-          "ls_model_name": "gpt-5.5",
-          "ls_temperature": 0.7,
-          "ls_max_tokens": 4096,
-          "ls_stop": ["END"],
-          "ls_invocation_params": {
-              "top_p": 0.9,
-              "frequency_penalty": 0.5
-          }
-      }
-  )
-  def my_configured_llm(messages: list):
-      return call_llm(messages)
-  ```
+This minimal setup tells LangSmith what model you're using, enabling automatic cost calculation if the model exists in the pricing database or if you've [configured custom pricing](https://docs.langchain.com/langsmith/cost-tracking#llm-calls-automatically-track-costs-based-on-token-counts).
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  const myConfiguredLlm = traceable(
-    async (messages: Array<any>) => {
-      return callLlm(messages);
-    },
-    {
-      run_type: "llm",
-      metadata: {
-        ls_provider: "openai",
-        ls_model_name: "gpt-5.5",
-        ls_temperature: 0.7,
-        ls_max_tokens: 4096,
-        ls_stop: ["END"],
-        ls_invocation_params: {
-          top_p: 0.9,
-          frequency_penalty: 0.5
+For more comprehensive tracking, you can include additional configuration parameters. This is especially useful when [running experiments](https://docs.langchain.com/langsmith/evaluation-quickstart) or comparing different model settings:
+
+```python
+@traceable(
+    run_type="llm",
+    metadata={
+        "ls_provider": "openai",
+        "ls_model_name": "gpt-5.5",
+        "ls_temperature": 0.7,
+        "ls_max_tokens": 4096,
+        "ls_stop": ["END"],
+        "ls_invocation_params": {
+            "top_p": 0.9,
+            "frequency_penalty": 0.5
         }
+    }
+)
+def my_configured_llm(messages: list):
+    return call_llm(messages)
+```
+
+```typescript
+const myConfiguredLlm = traceable(
+  async (messages: Array<any>) => {
+    return callLlm(messages);
+  },
+  {
+    run_type: "llm",
+    metadata: {
+      ls_provider: "openai",
+      ls_model_name: "gpt-5.5",
+      ls_temperature: 0.7,
+      ls_max_tokens: 4096,
+      ls_stop: ["END"],
+      ls_invocation_params: {
+        top_p: 0.9,
+        frequency_penalty: 0.5
       }
     }
-  );
-  ```
+  }
+);
+```
 
-  ```java Java theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import com.langchain.smith.tracing.RunType;
-  import com.langchain.smith.tracing.TraceConfig;
-  import com.langchain.smith.tracing.Tracing;
-  import java.util.Collections;
-  import java.util.HashMap;
-  import java.util.List;
-  import java.util.Map;
-  import java.util.function.Function;
+```java
+import com.langchain.smith.tracing.RunType;
+import com.langchain.smith.tracing.TraceConfig;
+import com.langchain.smith.tracing.Tracing;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
-  Map<String, Object> metadata = new HashMap<>();
-  metadata.put("ls_provider", "openai");
-  metadata.put("ls_model_name", "gpt-5.5");
-  metadata.put("ls_temperature", 0.7);
-  metadata.put("ls_max_tokens", 4096);
-  metadata.put("ls_stop", Collections.singletonList("END"));
+Map<String, Object> metadata = new HashMap<>();
+metadata.put("ls_provider", "openai");
+metadata.put("ls_model_name", "gpt-5.5");
+metadata.put("ls_temperature", 0.7);
+metadata.put("ls_max_tokens", 4096);
+metadata.put("ls_stop", Collections.singletonList("END"));
 
-  Map<String, Object> invocationParams = new HashMap<>();
-  invocationParams.put("top_p", 0.9);
-  invocationParams.put("frequency_penalty", 0.5);
-  metadata.put("ls_invocation_params", invocationParams);
+Map<String, Object> invocationParams = new HashMap<>();
+invocationParams.put("top_p", 0.9);
+invocationParams.put("frequency_penalty", 0.5);
+metadata.put("ls_invocation_params", invocationParams);
 
-  Function<List<Map<String, String>>, String> myConfiguredLlm =
-      Tracing.traceFunction(
-          messages -> callLlm(messages),
-          TraceConfig.builder()
-              .runType(RunType.LLM)
-              .metadata(metadata)
-              .build());
-  ```
+Function<List<Map<String, String>>, String> myConfiguredLlm =
+    Tracing.traceFunction(
+        messages -> callLlm(messages),
+        TraceConfig.builder()
+            .runType(RunType.LLM)
+            .metadata(metadata)
+            .build());
+```
 
-  ```kotlin Kotlin theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  val myConfiguredLlm =
-      traceable(
-          { messages: List<Map<String, String>> -> callLlm(messages) },
-          TraceConfig.builder()
-              .runType(RunType.LLM)
-              .metadata(
-                  mapOf(
-                      "ls_provider" to "openai",
-                      "ls_model_name" to "gpt-5.5",
-                      "ls_temperature" to 0.7,
-                      "ls_max_tokens" to 4096,
-                      "ls_stop" to listOf("END"),
-                      "ls_invocation_params" to
-                          mapOf(
-                              "top_p" to 0.9,
-                              "frequency_penalty" to 0.5,
-                          ),
-                  ),
-              )
-              .build(),
-      )
-  ```
-</CodeGroup>
+```kotlin
+val myConfiguredLlm =
+    traceable(
+        { messages: List<Map<String, String>> -> callLlm(messages) },
+        TraceConfig.builder()
+            .runType(RunType.LLM)
+            .metadata(
+                mapOf(
+                    "ls_provider" to "openai",
+                    "ls_model_name" to "gpt-5.5",
+                    "ls_temperature" to 0.7,
+                    "ls_max_tokens" to 4096,
+                    "ls_stop" to listOf("END"),
+                    "ls_invocation_params" to
+                        mapOf(
+                            "top_p" to 0.9,
+                            "frequency_penalty" to 0.5,
+                        ),
+                ),
+            )
+            .build(),
+    )
+```
 
 With this setup, you can later filter traces by temperature, compare runs with different max token settings, or analyze which configuration parameters produce the best results. All these parameters are optional except for the `ls_provider` and `ls_model_name` pair needed for cost tracking.
 
@@ -205,15 +197,15 @@ With this setup, you can later filter traces by temperature, compare runs with d
 
 | Parameter                                             | Type       | Required | Description                                                                                    |
 | ----------------------------------------------------- | ---------- | -------- | ---------------------------------------------------------------------------------------------- |
-| [`ls_provider`](#ls_provider)                         | `string`   | Yes\*    | LLM provider name for cost tracking                                                            |
-| [`ls_model_name`](#ls_model_name)                     | `string`   | Yes\*    | Model identifier for cost tracking                                                             |
-| [`ls_temperature`](#ls_temperature)                   | `number`   | No       | Temperature parameter used                                                                     |
-| [`ls_max_tokens`](#ls_max_tokens)                     | `number`   | No       | Maximum tokens parameter used                                                                  |
-| [`ls_stop`](#ls_stop)                                 | `string[]` | No       | Stop sequences used                                                                            |
-| [`ls_invocation_params`](#ls_invocation_params)       | `object`   | No       | Additional invocation parameters                                                               |
-| [`ls_agent_type`](#ls_agent_type)                     | `string`   | No       | Controls how agent runs appear in the Messages view: `"root"`, `"subagent"`, or `"middleware"` |
-| [`ls_message_view_exclude`](#ls_message_view_exclude) | `boolean`  | No       | Hides the run from the Messages view                                                           |
-| [`ls_is_error_interrupt`](#ls_is_error_interrupt)     | `boolean`  | No       | Marks an errored run as interrupted when set to `true`                                         |
+| [`ls_provider`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_provider)                         | `string`   | Yes\*    | LLM provider name for cost tracking                                                            |
+| [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name)                     | `string`   | Yes\*    | Model identifier for cost tracking                                                             |
+| [`ls_temperature`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_temperature)                   | `number`   | No       | Temperature parameter used                                                                     |
+| [`ls_max_tokens`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_max_tokens)                     | `number`   | No       | Maximum tokens parameter used                                                                  |
+| [`ls_stop`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_stop)                                 | `string[]` | No       | Stop sequences used                                                                            |
+| [`ls_invocation_params`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_invocation_params)       | `object`   | No       | Additional invocation parameters                                                               |
+| [`ls_agent_type`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_agent_type)                     | `string`   | No       | Controls how agent runs appear in the Messages view: `"root"`, `"subagent"`, or `"middleware"` |
+| [`ls_message_view_exclude`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_message_view_exclude) | `boolean`  | No       | Hides the run from the Messages view                                                           |
+| [`ls_is_error_interrupt`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_is_error_interrupt)     | `boolean`  | No       | Marks an errored run as interrupted when set to `true`                                         |
 
 \* `ls_provider` and `ls_model_name` must be provided together for cost tracking
 
@@ -221,22 +213,22 @@ With this setup, you can later filter traces by temperature, compare runs with d
 
 | Parameter                       | Type      | Description                                                            |
 | ------------------------------- | --------- | ---------------------------------------------------------------------- |
-| [`ls_run_depth`](#ls_run_depth) | `integer` | Depth in trace tree (0=root, 1=child, etc.) - automatically calculated |
-| [`ls_method`](#ls_method)       | `string`  | Tracing method used (e.g., "traceable") - set by SDK                   |
+| [`ls_run_depth`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_run_depth) | `integer` | Depth in trace tree (0=root, 1=child, etc.) - automatically calculated |
+| [`ls_method`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_method)       | `string`  | Tracing method used (e.g., "traceable") - set by SDK                   |
 
 ### Experiment parameters
 
 | Parameter                               | Type            | Description                                                             |
 | --------------------------------------- | --------------- | ----------------------------------------------------------------------- |
-| [`ls_example_*`](#ls_example_)          | `any`           | Example metadata prefixed with `ls_example_` - added during experiments |
-| [`ls_experiment_id`](#ls_experiment_id) | `string` (UUID) | Unique experiment identifier - added during experiments                 |
+| [`ls_example_*`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_example_)          | `any`           | Example metadata prefixed with `ls_example_` - added during experiments |
+| [`ls_experiment_id`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_experiment_id) | `string` (UUID) | Unique experiment identifier - added during experiments                 |
 
 ## Parameter details
 
 ### `ls_provider`
 
 * **Type:** `string`
-* **Required:** Yes (with [`ls_model_name`](#ls_model_name))
+* **Required:** Yes (with [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name))
 
 **What it does:**
 Identifies the LLM provider. Combined with `ls_model_name`, enables automatic cost calculation by matching against [LangSmith's model pricing database](https://smith.langchain.com/settings/workspaces/models).
@@ -255,11 +247,11 @@ Identifies the LLM provider. Combined with `ls_model_name`, enables automatic co
 * Or, any custom string
 
 **When to use:**
-When you want [automatic cost tracking](/langsmith/cost-tracking) for custom model wrappers or self-hosted models.
+When you want [automatic cost tracking](https://docs.langchain.com/langsmith/cost-tracking) for custom model wrappers or self-hosted models.
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @traceable(
     run_type="llm",
     metadata={
@@ -273,7 +265,7 @@ def my_llm_call(prompt: str):
 
 **Relationships:**
 
-* **Requires** [`ls_model_name`](#ls_model_name) for cost tracking to work.
+* **Requires** [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) for cost tracking to work.
 * Works with token usage data to calculate costs.
 
 ### `ls_model_name`
@@ -291,11 +283,11 @@ Identifies the specific model. Combined with `ls_provider`, matches against pric
 * Custom: Any model identifier
 
 **When to use:**
-When you want automatic [cost tracking](/langsmith/cost-tracking) and model identification in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters).
+When you want automatic [cost tracking](https://docs.langchain.com/langsmith/cost-tracking) and model identification in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters).
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @traceable(
     run_type="llm",
     metadata={
@@ -309,7 +301,7 @@ def my_claude_call(messages: list):
 
 **Relationships:**
 
-* **Requires** [`ls_provider`](#ls_provider) for cost tracking to work.
+* **Requires** [`ls_provider`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_provider) for cost tracking to work.
 * Works with token usage data to calculate costs.
 
 ### `ls_temperature`
@@ -325,7 +317,7 @@ When you want to track model configuration for experiments or debugging.
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata={
     "ls_provider": "openai",
     "ls_model_name": "gpt-5.5",
@@ -351,7 +343,7 @@ When you want to track model configuration for experiments or debugging.
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata={
     "ls_provider": "openai",
     "ls_model_name": "gpt-5.5",
@@ -377,7 +369,7 @@ When you want to track model configuration for experiments or debugging.
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata={
     "ls_provider": "openai",
     "ls_model_name": "gpt-5.5",
@@ -405,7 +397,7 @@ When you need to track additional configuration beyond the standard parameters.
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata={
     "ls_provider": "openai",
     "ls_model_name": "gpt-5.5",
@@ -428,7 +420,7 @@ metadata={
 * **Required:** No
 
 **What it does:**
-Controls how messages from custom agent-like runs appear in the [Messages view](/langsmith/view-traces#messages-view).
+Controls how messages from custom agent-like runs appear in the [Messages view](https://docs.langchain.com/langsmith/view-traces#messages-view).
 
 Tracing wrapper integrations from the latest versions of the LangSmith SDK set this metadata automatically when needed. For custom instrumentation, set this key on the run that represents the agent or middleware step.
 
@@ -441,7 +433,7 @@ Tracing wrapper integrations from the latest versions of the LangSmith SDK set t
 **When to use:**
 When you are building custom agent instrumentation and want the Messages view to distinguish root agents, subagents, and middleware.
 
-For more details, see [Customize the Messages view](/langsmith/view-traces#customize-the-messages-view).
+For more details, see [Customize the Messages view](https://docs.langchain.com/langsmith/view-traces#customize-the-messages-view).
 
 **Relationships:**
 
@@ -454,7 +446,7 @@ For more details, see [Customize the Messages view](/langsmith/view-traces#custo
 * **Required:** No
 
 **What it does:**
-Hides the run from the [Messages view](/langsmith/view-traces#messages-view). Excluded runs still appear in the regular trace view, runs explorer, and metrics.
+Hides the run from the [Messages view](https://docs.langchain.com/langsmith/view-traces#messages-view). Excluded runs still appear in the regular trace view, runs explorer, and metrics.
 
 The filter checks for the **presence of the key**, not truthiness. `{LS_MESSAGE_VIEW_EXCLUDE: False}` still excludes the run. Omit the key entirely to include the run.
 
@@ -466,7 +458,7 @@ For LLM subspans that are not conversational turns, such as classification calls
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import LS_MESSAGE_VIEW_EXCLUDE, traceable
 
 @traceable(run_type="llm", metadata={LS_MESSAGE_VIEW_EXCLUDE: True})
@@ -474,12 +466,12 @@ def classify_intent(query: str) -> str:
     return llm.predict(f"Classify: {query}")
 ```
 
-For additional code examples across Python and JS contexts (`@traceable`, `trace`, `wrap_openai`, `RunnableConfig`, `wrapAISDK`, `RunTree.createChild`), see [Exclude runs from the Messages view](/langsmith/messages-view-integrations#exclude-runs-from-the-messages-view).
+For additional code examples across Python and JS contexts (`@traceable`, `trace`, `wrap_openai`, `RunnableConfig`, `wrapAISDK`, `RunTree.createChild`), see [Exclude runs from the Messages view](https://docs.langchain.com/langsmith/messages-view-integrations#exclude-runs-from-the-messages-view).
 
 **Relationships:**
 
 * Independent of model identification and cost tracking metadata.
-* Complements [`ls_agent_type`](#ls_agent_type), which routes messages by role rather than hiding the run entirely.
+* Complements [`ls_agent_type`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_agent_type), which routes messages by role rather than hiding the run entirely.
 
 ### `ls_is_error_interrupt`
 
@@ -494,7 +486,7 @@ When your instrumentation can identify that an error represents an interrupted r
 
 **Example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 metadata={
     "ls_is_error_interrupt": True
 }
@@ -556,7 +548,7 @@ Automatically set by the tracing SDK. Used for debugging and analytics.
 * **Set by:** LangSmith experiments system (automatic)
 
 **What it does:**
-When running [experiments on datasets](/langsmith/evaluation-quickstart), metadata from the example is automatically prefixed with `ls_example_` and added to the trace.
+When running [experiments on datasets](https://docs.langchain.com/langsmith/evaluation-quickstart), metadata from the example is automatically prefixed with `ls_example_` and added to the trace.
 
 **Special parameter:**
 
@@ -568,7 +560,7 @@ During dataset experiments. Allows filtering/grouping by example characteristics
 **Example:**
 If example has metadata `{"category": "technical", "difficulty": "hard"}`, trace gets:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "metadata": {
     "ls_example_category": "technical",
@@ -592,7 +584,7 @@ If example has metadata `{"category": "technical", "difficulty": "hard"}`, trace
 Unique identifier for an experiment run.
 
 **When it's used:**
-Automatically added when running [experiments/evaluations on datasets](/langsmith/evaluation-quickstart). Used to group all runs from the same experiment.
+Automatically added when running [experiments/evaluations on datasets](https://docs.langchain.com/langsmith/evaluation-quickstart). Used to group all runs from the same experiment.
 
 **Relationships:**
 
@@ -605,26 +597,26 @@ Automatically added when running [experiments/evaluations on datasets](/langsmit
 
 For LangSmith to automatically calculate costs, several parameters must work together. Here's what's required:
 
-**Primary requirement:** [`ls_provider`](#ls_provider) + [`ls_model_name`](#ls_model_name)
+**Primary requirement:** [`ls_provider`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_provider) + [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name)
 
 * Both should be present for automatic cost calculation.
-* If [`ls_model_name`](#ls_model_name) is missing, system will fall back to checking [`ls_invocation_params`](#ls_invocation_params) for model name.
-* [`ls_provider`](#ls_provider) must match a provider in the [pricing database](https://smith.langchain.com/settings/workspaces/models) (or use custom pricing).
+* If [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) is missing, system will fall back to checking [`ls_invocation_params`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_invocation_params) for model name.
+* [`ls_provider`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_provider) must match a provider in the [pricing database](https://smith.langchain.com/settings/workspaces/models) (or use custom pricing).
 
 **Additional requirements:**
 
-* Run must have `run_type="llm"` (or [arbitrary cost tracking](/langsmith/cost-tracking#other-runs-send-costs) must be enabled).
-* [Token usage data](/langsmith/log-llm-trace#provide-token-and-cost-information) must be present in the trace (prompt\_tokens, completion\_tokens).
-* Model must exist in pricing database or have [custom pricing configured](/langsmith/cost-tracking#llm-calls-automatically-track-costs-based-on-token-counts).
+* Run must have `run_type="llm"` (or [arbitrary cost tracking](https://docs.langchain.com/langsmith/cost-tracking#other-runs-send-costs) must be enabled).
+* [Token usage data](https://docs.langchain.com/langsmith/log-llm-trace#provide-token-and-cost-information) must be present in the trace (prompt\_tokens, completion\_tokens).
+* Model must exist in pricing database or have [custom pricing configured](https://docs.langchain.com/langsmith/cost-tracking#llm-calls-automatically-track-costs-based-on-token-counts).
 
 **Fallback behavior:**
-If [`ls_model_name`](#ls_model_name) is not in metadata, the system checks [`ls_invocation_params`](#ls_invocation_params) for model identifiers like `"model"` before giving up on cost tracking.
+If [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) is not in metadata, the system checks [`ls_invocation_params`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_invocation_params) for model identifiers like `"model"` before giving up on cost tracking.
 
 ### Configuration tracking group
 
 These parameters help you track model settings but don't affect LangSmith's core functionality:
 
-**Optional, work independently:** [`ls_temperature`](#ls_temperature), [`ls_max_tokens`](#ls_max_tokens), [`ls_stop`](#ls_stop)
+**Optional, work independently:** [`ls_temperature`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_temperature), [`ls_max_tokens`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_max_tokens), [`ls_stop`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_stop)
 
 * These are for tracking/display.
 * Do not affect LangSmith behavior or cost calculation.
@@ -632,108 +624,106 @@ These parameters help you track model settings but don't affect LangSmith's core
 
 ### Interrupt rendering
 
-Set [`ls_is_error_interrupt`](#ls_is_error_interrupt) to `true` when a run error should be rendered as interrupted instead of error. This parameter only affects runs that include an error.
+Set [`ls_is_error_interrupt`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_is_error_interrupt) to `true` when a run error should be rendered as interrupted instead of error. This parameter only affects runs that include an error.
 
 ### Invocation params special case
 
 The `ls_invocation_params` parameter has a dual role as both a tracking field and a fallback mechanism:
 
-**[`ls_invocation_params`](#ls_invocation_params)**; partially independent with fallback role:
+**[`ls_invocation_params`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_invocation_params)**; partially independent with fallback role:
 
 * Primarily stores arbitrary configuration for tracking.
-* **Can serve as fallback** for cost tracking if [`ls_model_name`](#ls_model_name) is missing.
-* Does not directly affect cost calculation when [`ls_model_name`](#ls_model_name) is present.
+* **Can serve as fallback** for cost tracking if [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) is missing.
+* Does not directly affect cost calculation when [`ls_model_name`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) is present.
 
 ### System parameters
 
 These parameters are automatically generated by LangSmith and cannot be manually set:
 
-**Cannot be user-set:** [`ls_run_depth`](#ls_run_depth), [`ls_method`](#ls_method), [`ls_example_*`](#ls_example_), [`ls_experiment_id`](#ls_experiment_id)
+**Cannot be user-set:** [`ls_run_depth`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_run_depth), [`ls_method`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_method), [`ls_example_*`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_example_), [`ls_experiment_id`](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_experiment_id)
 
 * Automatically set by system.
 * Used for filtering, analytics, and system tracking.
 
 ## Filter traces by metadata parameters
 
-Once you've added `ls_` metadata parameters to your traces, you can use them to filter and search traces programmatically via the [API](/langsmith/smith-api/run/query-runs) or interactively in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters). This lets you narrow down traces by model, provider, configuration settings, or trace depth.
+Once you've added `ls_` metadata parameters to your traces, you can use them to filter and search traces programmatically via the [API](https://docs.langchain.com/langsmith/smith-api/run/query-runs) or interactively in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters). This lets you narrow down traces by model, provider, configuration settings, or trace depth.
 
 ### Use the API
 
-Use the [`Client`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client) class with the [`list_runs()`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs) method (Python) or [`listRuns()`](https://docs.smith.langchain.com/reference/js/classes/client.Client#listruns) method (TypeScript) to query traces based on metadata values. The [filter syntax](/langsmith/trace-query-syntax) supports equality checks, comparisons, and logical operators.
+Use the [`Client`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client) class with the [`list_runs()`](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs) method (Python) or [`listRuns()`](https://docs.smith.langchain.com/reference/js/classes/client.Client#listruns) method (TypeScript) to query traces based on metadata values. The [filter syntax](https://docs.langchain.com/langsmith/trace-query-syntax) supports equality checks, comparisons, and logical operators.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith import Client
+```python
+from langsmith import Client
 
-  client = Client()
+client = Client()
 
-  # Filter runs by provider
-  runs = client.list_runs(
-      project_name="my-app",
-      filter='metadata_key = "ls_provider" AND metadata_value = "openai"'
-  )
+# Filter runs by provider
+runs = client.list_runs(
+    project_name="my-app",
+    filter='metadata_key = "ls_provider" AND metadata_value = "openai"'
+)
 
-  # Filter by specific model
-  runs = client.list_runs(
-      project_name="my-app",
-      filter='metadata_key = "ls_model_name" AND metadata_value = "gpt-5.5"'
-  )
+# Filter by specific model
+runs = client.list_runs(
+    project_name="my-app",
+    filter='metadata_key = "ls_model_name" AND metadata_value = "gpt-5.5"'
+)
 
-  # Filter root runs only (top-level traces)
-  runs = client.list_runs(
-      project_name="my-app",
-      filter='metadata_key = "ls_run_depth" AND metadata_value = 0'
-  )
+# Filter root runs only (top-level traces)
+runs = client.list_runs(
+    project_name="my-app",
+    filter='metadata_key = "ls_run_depth" AND metadata_value = 0'
+)
 
-  # Filter by temperature threshold
-  runs = client.list_runs(
-      project_name="my-app",
-      filter='metadata_key = "ls_temperature" AND metadata_value > 0.5'
-  )
-  ```
+# Filter by temperature threshold
+runs = client.list_runs(
+    project_name="my-app",
+    filter='metadata_key = "ls_temperature" AND metadata_value > 0.5'
+)
+```
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { Client } from "langsmith";
+```typescript
+import { Client } from "langsmith";
 
-  const client = new Client();
+const client = new Client();
 
-  // Filter runs by provider
-  const runsByProvider: any[] = [];
-  for await (const run of client.listRuns({
-    projectName: "my-app",
-    filter: 'metadata_key = "ls_provider" AND metadata_value = "openai"'
-  })) {
-    runsByProvider.push(run);
-  }
+// Filter runs by provider
+const runsByProvider: any[] = [];
+for await (const run of client.listRuns({
+  projectName: "my-app",
+  filter: 'metadata_key = "ls_provider" AND metadata_value = "openai"'
+})) {
+  runsByProvider.push(run);
+}
 
-  // Filter by specific model
-  const runsByModel: any[] = [];
-  for await (const run of client.listRuns({
-    projectName: "my-app",
-    filter: 'metadata_key = "ls_model_name" AND metadata_value = "gpt-5.5"'
-  })) {
-    runsByModel.push(run);
-  }
+// Filter by specific model
+const runsByModel: any[] = [];
+for await (const run of client.listRuns({
+  projectName: "my-app",
+  filter: 'metadata_key = "ls_model_name" AND metadata_value = "gpt-5.5"'
+})) {
+  runsByModel.push(run);
+}
 
-  // Filter root runs only (top-level traces)
-  const rootRuns: any[] = [];
-  for await (const run of client.listRuns({
-    projectName: "my-app",
-    filter: 'metadata_key = "ls_run_depth" AND metadata_value = 0'
-  })) {
-    rootRuns.push(run);
-  }
+// Filter root runs only (top-level traces)
+const rootRuns: any[] = [];
+for await (const run of client.listRuns({
+  projectName: "my-app",
+  filter: 'metadata_key = "ls_run_depth" AND metadata_value = 0'
+})) {
+  rootRuns.push(run);
+}
 
-  // Filter by temperature threshold
-  const highTempRuns: any[] = [];
-  for await (const run of client.listRuns({
-    projectName: "my-app",
-    filter: 'metadata_key = "ls_temperature" AND metadata_value > 0.5'
-  })) {
-    highTempRuns.push(run);
-  }
-  ```
-</CodeGroup>
+// Filter by temperature threshold
+const highTempRuns: any[] = [];
+for await (const run of client.listRuns({
+  projectName: "my-app",
+  filter: 'metadata_key = "ls_temperature" AND metadata_value > 0.5'
+})) {
+  highTempRuns.push(run);
+}
+```
 
 These examples show common filtering patterns:
 
@@ -743,7 +733,7 @@ These examples show common filtering patterns:
 
 ### Use the UI
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters), use the filter/search bar with the [filter syntax](/langsmith/trace-query-syntax):
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-ls-metadata-parameters), use the filter/search bar with the [filter syntax](https://docs.langchain.com/langsmith/trace-query-syntax):
 
 ```
 metadata_key = 'ls_provider' AND metadata_value = 'openai'
@@ -753,21 +743,17 @@ metadata_key = 'ls_run_depth' AND metadata_value = 0
 
 ## Related
 
-* [Cost tracking guide](/langsmith/cost-tracking): Learn how to track and analyze LLM costs in LangSmith.
-* [Log LLM traces](/langsmith/log-llm-trace): Format requirements for logging LLM calls with proper token tracking.
-* [Trace query syntax](/langsmith/trace-query-syntax): Complete reference for filtering and searching traces.
-* [Evaluation quickstart](/langsmith/evaluation-quickstart): Run experiments on datasets to compare model configurations.
-* [Add metadata and tags](/langsmith/add-metadata-tags): General guide to adding metadata to traces.
-* [Filter traces in application](/langsmith/filter-traces-in-application): Programmatically filter traces in your code.
+* [Cost tracking guide](https://docs.langchain.com/langsmith/cost-tracking): Learn how to track and analyze LLM costs in LangSmith.
+* [Log LLM traces](https://docs.langchain.com/langsmith/log-llm-trace): Format requirements for logging LLM calls with proper token tracking.
+* [Trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax): Complete reference for filtering and searching traces.
+* [Evaluation quickstart](https://docs.langchain.com/langsmith/evaluation-quickstart): Run experiments on datasets to compare model configurations.
+* [Add metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags): General guide to adding metadata to traces.
+* [Filter traces in application](https://docs.langchain.com/langsmith/filter-traces-in-application): Programmatically filter traces in your code.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/ls-metadata-parameters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/ls-metadata-parameters.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

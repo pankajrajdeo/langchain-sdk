@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Ray serve integrations
 
 > Integrate with Ray serve using LangChain Python.
@@ -20,11 +16,10 @@ Install ray with `pip install ray[serve]`.
 
 The general skeleton for deploying a service is the following:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # 0: Import ray serve and request from starlette
 from ray import serve
 from starlette.requests import Request
-
 
 # 1: Define a Ray Serve deployment.
 @serve.deployment
@@ -38,7 +33,6 @@ class LLMServe:
         # and return a response
         return "Hello World"
 
-
 # 2: Bind the model to deployment
 deployment = LLMServe.bind()
 
@@ -46,7 +40,7 @@ deployment = LLMServe.bind()
 serve.api.run(deployment)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Shutdown the deployment
 serve.api.shutdown()
 ```
@@ -55,19 +49,19 @@ serve.api.shutdown()
 
 Get an OpenAI API key from the [OpenAI API keys page](https://platform.openai.com/account/api-keys). By running the following code, you will be asked to provide your API key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import LLMChain
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import OpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from getpass import getpass
 
 OPENAI_API_KEY = getpass()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @serve.deployment
 class DeployLLM:
     def __init__(self):
@@ -91,14 +85,14 @@ class DeployLLM:
 
 Now we can bind the deployment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Bind the model to deployment
 deployment = DeployLLM.bind()
 ```
 
 We can assign the port number and host when we want to run the deployment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Example port number
 PORT_NUMBER = 8282
 # Run the deployment
@@ -107,7 +101,7 @@ serve.api.run(deployment, port=PORT_NUMBER)
 
 Now that service is deployed on port `localhost:8282` we can send a post request to get the results back.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import requests
 
 text = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
@@ -117,12 +111,8 @@ print(response.content.decode())
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ray_serve.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/ray_serve.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

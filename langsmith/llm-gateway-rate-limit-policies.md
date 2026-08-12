@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Rate limit policies
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies)
+Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
 
-> Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-A rate limit policy restricts how many **requests** or **tokens** a subject can consume through the [LLM Gateway](/langsmith/llm-gateway) in a short rolling time window. The gateway enforces the limit in real time and blocks any request that would push the subject past it, returning a `429` response with a `Retry-After` header:
+A rate limit policy restricts how many **requests** or **tokens** a subject can consume through the [LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway) in a short rolling time window. The gateway enforces the limit in real time and blocks any request that would push the subject past it, returning a `429` response with a `Retry-After` header:
 
 ```
 API Error: 429 request blocked by gateway policies: Dev Team Rate Limit
@@ -19,11 +14,11 @@ Retry-After: 42
 
 The `Retry-After` value is the number of seconds until the current window resets. Clients should honor this header and back off before retrying.
 
-Rate limit policies and [spend cap policies](/langsmith/llm-gateway-spend-policies) are complementary and can be applied together—spend caps for cost control, rate limits for throughput and traffic control.
+Rate limit policies and [spend cap policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) are complementary and can be applied together—spend caps for cost control, rate limits for throughput and traffic control.
 
 ## Policy dimensions
 
-Rate limit policies are evaluated for every incoming request. You can set a policy as a default (applying a blanket rate limit to all users, [workspaces](/langsmith/administration-overview#workspaces), or [API keys](/langsmith/create-account-api-key) or as a granular policy (an individual limit or a limit on a group of subjects).
+Rate limit policies are evaluated for every incoming request. You can set a policy as a default (applying a blanket rate limit to all users, [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces), or [API keys](https://docs.langchain.com/langsmith/create-account-api-key) or as a granular policy (an individual limit or a limit on a group of subjects).
 
 | Subject       | What it limits                                                                                 | Example                                                                    |
 | ------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -61,9 +56,8 @@ Rules:
 
 ## Create a rate limit policy
 
-<Warning>
-  Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](/langsmith/llm-gateway-access).
-</Warning>
+> [!WARNING]
+> Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access).
 
 1. Go to **Settings → Gateway → LLM Gateway**.
 2. Click **Create policy**.
@@ -74,22 +68,18 @@ Rules:
 
 Policies take effect immediately.
 
-A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each of your own end customers its own throughput allowance under one API key. For more information, see [Per-customer policies](/langsmith/llm-gateway-header-policies).
+A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each of your own end customers its own throughput allowance under one API key. For more information, see [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies).
 
 ## Next steps
 
-* [Spend policies](/langsmith/llm-gateway-spend-policies): set cost caps alongside rate limits.
-* [Per-customer policies](/langsmith/llm-gateway-header-policies): split a limit by a custom request header so each end customer gets its own allowance.
-* [Data protection](/langsmith/llm-gateway-data-protection): add data protection policies.
+* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): set cost caps alongside rate limits.
+* [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies): split a limit by a custom request header so each end customer gets its own allowance.
+* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): add data protection policies.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-rate-limit-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-rate-limit-policies.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Oracle AI vector search - integration
 
 > Integrate with the Oracle AI vector search - vector store using LangChain Python.
@@ -21,21 +17,19 @@ This guide demonstrates how to use `OracleVS` (the LangChain vector store integr
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oracledb
-  ```
+```bash
+pip install -qU langchain-oracledb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oracledb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oracledb
+```
 
 ### Connect to Oracle Database
 
 The following sample code will show how to connect to Oracle Database. By default, python-oracledb runs in a ‘Thin’ mode which connects directly to Oracle Database. This mode does not need Oracle Client libraries. However, some additional functionality is available when python-oracledb uses them. Python-oracledb is said to be in ‘Thick’ mode when Oracle Client libraries are used. Both modes have comprehensive functionality supporting the Python Database API v2.0 Specification. See the following [guide](https://python-oracledb.readthedocs.io/en/latest/user_guide/appendix_a.html#featuresummary) that talks about features supported in each mode. You might want to switch to thick-mode if you are unable to use thin-mode.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import oracledb
 
 # Please update with your username, password, hostname, port and service_name
@@ -49,11 +43,10 @@ print("Connection successful!")
 
 ### Import the required dependencies
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.vectorstores import oraclevs
 from langchain_oracledb.vectorstores.oraclevs import OracleVS
 from langchain_community.vectorstores.utils import DistanceStrategy
@@ -63,7 +56,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 ### Load documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Define a list of documents (The examples below are 5 random documents from Oracle Concepts Manual )
 
 documents_json_list = [
@@ -90,7 +83,7 @@ documents_json_list = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create LangChain Documents
 
 documents_langchain = []
@@ -111,7 +104,7 @@ You can manually connect to the Oracle Database and will see three tables :
 We will then create three additional tables `Documents_DOT_IVF`, `Documents_COSINE_IVF` and `Documents_EUCLIDEAN_IVF` which will be used
 to create IVF indices on the tables instead of HNSW indices.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Ingest documents into Oracle Vector Store using different distance strategies
 
 # When using our API calls, start by initializing your vector store with a subset of your documents
@@ -168,7 +161,7 @@ vector_store_euclidean_ivf = OracleVS.from_documents(
 
 ### Add and delete operations for texts, along with basic similarity search
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def manage_texts(vector_stores):
     """
     Adds texts to each vector store, demonstrates error handling for duplicate additions,
@@ -199,7 +192,6 @@ def manage_texts(vector_stores):
         results = vs.similarity_search("How are LOBS stored in Oracle Database", 2)
         print(f"\n\n\nSimilarity search results for vector store {i}: {results}\n\n\n")
 
-
 vector_store_list = [
     vector_store_dot,
     vector_store_max,
@@ -213,7 +205,7 @@ manage_texts(vector_store_list)
 
 ### Index creation with specific parameters
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def create_search_indices(connection):
     """
     Creates search indices for the vector stores, each with specific parameters tailored to their distance strategy.
@@ -288,7 +280,6 @@ def create_search_indices(connection):
 
     print("Index creation complete.")
 
-
 create_search_indices(connection)
 ```
 
@@ -348,7 +339,7 @@ Key Points about Filtering in Oracle 23ai:
 
 **Example Filter:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "age": 65,
   "name": {"$regex": "*rk"},
@@ -373,14 +364,14 @@ Key Points about Filtering in Oracle 23ai:
 
 * You can omit `$and` when all filters in an object must be satisfied. These two are equivalent:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 { "$and": [
     { "name": { "$startsWith": "Fred" } },
     { "salary": { "$gt": 10000, "$lte": 20000 } }
 ]}
 ```
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": { "$startsWith": "Fred" },
   "salary": { "$gt": 10000, "$lte": 20000 }
@@ -389,19 +380,19 @@ Key Points about Filtering in Oracle 23ai:
 
 * The `$not` clause can negate a comparison operator:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 { "address.zip": { "$not": { "$eq": "90001" } } }
 ```
 
 * Using `field: scalar` is equivalent to `field: { "$eq": scalar }`:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 { "animal": "cat" }
 ```
 
 For more filter examples, refer to the [test specification](https://github.com/oracle/langchain-oracle/blob/main/libs/oracledb/tests/integration_tests/vectorstores/test_oraclevs.py).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Conduct advanced searches after creating the indices
 def conduct_advanced_searches(vector_stores):
     query = "How are LOBS stored in Oracle Database"
@@ -455,7 +446,6 @@ def conduct_advanced_searches(vector_stores):
             )
         )
 
-
 conduct_advanced_searches(vector_store_list)
 ```
 
@@ -471,7 +461,7 @@ Oracle Database 26ai supports hybrid search, combining keyword (full-text) and s
 
 When using hybrid search, configure your `OracleVS` with `OracleEmbeddings` so the vectorizer preference exactly matches the embedding configuration. You can further tune the hybrid vector index by supplying additional parameters via `OracleVectorizerPreference`. For details, see the [documentation](https://docs.oracle.com/en/database/oracle/oracle-database/26/vecse/create_preference.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_oracledb.embeddings import OracleEmbeddings
 from langchain_oracledb.vectorstores.oraclevs import OracleVS
@@ -520,7 +510,7 @@ for d in docs:
 
 * If you don't want to manage a named preference, pass the `vector_store` instead. The function will create a temporary preference, build the index, then drop the preference automatically.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 create_hybrid_index(
     connection,
     idx_name="IDX_DOCS_HYB2",
@@ -558,7 +548,7 @@ Indexing options:
 * If you have an `OracleVS` vector store, you can index its built-in "text" column.
 * You can also index any other table/column by providing `table_name` + `column_name` directly.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.retrievers.text_search import create_text_index, OracleTextSearchRetriever
 
 # Using an OracleVS table (indexes the 'text' column)
@@ -598,7 +588,7 @@ Returned columns:
 * When targeting a raw table, include extra columns in results via `returned_columns`; they are attached to `Document.metadata`.
 * With `OracleVS`, `returned_columns` defaults to \["metadata"].
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Operator mode example
 retriever_text_ops = OracleTextSearchRetriever(
     vector_store=vs,
@@ -624,12 +614,8 @@ Please refer to our complete demo guide [Oracle AI Vector Search End-to-End Demo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/oracle.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/oracle.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

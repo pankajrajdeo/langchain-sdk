@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add memory to Managed Deep Agents
-
-> Opt in to deployment-shared durable memory for Managed Deep Agents.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory)
+Opt in to deployment-shared durable memory for Managed Deep Agents.
 
 Normally, a Managed Deep Agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain **across** threads and sessions.
 
-When enabled, durable memory is backed by [Context Hub](/langsmith/use-the-context-hub). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller. Managed Deep Agents do **not** have durable memory by default.
+When enabled, durable memory is backed by [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller. Managed Deep Agents do **not** have durable memory by default.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 The optional memory declaration lives at the project root:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   memory.ts
@@ -32,13 +27,13 @@ my-agent/
 | **Thread state**            | Conversation continuity                       | One thread                                          |
 | **Durable memory**          | Knowledge learned and retained in Context Hub | Shared by the deployment across threads             |
 
-Memory is not your system prompt. Define always-on behavior in [instructions](/langsmith/javascript/managed-deep-agents-instructions) and task-specific procedures in [skills](/langsmith/javascript/managed-deep-agents-skills); use memory for durable knowledge the agent learns while it runs.
+Memory is not your system prompt. Define always-on behavior in [instructions](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-instructions) and task-specific procedures in [skills](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-skills); use memory for durable knowledge the agent learns while it runs.
 
 ## Enable memory
 
 Export a named `memory` declaration with the `"agent"` scope:
 
-```ts memory.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineMemory } from "managed-deepagents";
 
 export const memory = defineMemory({ scope: "agent" });
@@ -61,17 +56,16 @@ Keep hot memory compact because it consumes context on every run. Put detailed m
 
 The agent reads and updates memory with `read_file`, `edit_file`, and `write_file`. Writes elsewhere, including elsewhere under `/memories/`, are not durable.
 
-<Warning>
-  Memory is shared by every caller of the deployment, and every caller can influence it. Store only knowledge that every caller may read and modify. Never store personal or customer-private data, credentials, API keys, tokens, or other secrets.
-
-  Treat memory as untrusted input: content saved by one caller is loaded for later callers and must not grant authority, change tool permissions, or bypass approvals. Keep those controls in the agent definition. Do not enable shared memory when callers should not influence one another.
-</Warning>
+> [!WARNING]
+> Memory is shared by every caller of the deployment, and every caller can influence it. Store only knowledge that every caller may read and modify. Never store personal or customer-private data, credentials, API keys, tokens, or other secrets.
+>
+> Treat memory as untrusted input: content saved by one caller is loaded for later callers and must not grant authority, change tool permissions, or bypass approvals. Keep those controls in the agent definition. Do not enable shared memory when callers should not influence one another.
 
 ## How the agent decides what to remember
 
 The agent decides what to remember based on prompting. To make the policy explicit, add guidance like the following to `instructions.md` and adapt it to your application:
 
-```md theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```md
 ## Memory
 
 You have deployment-shared durable memory under `/memories/agent/`.
@@ -96,12 +90,8 @@ write fails, do not claim that you remembered it.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

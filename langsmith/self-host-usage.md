@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Interact with your self-hosted instance of LangSmith
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-usage)
 This guide will walk you through the process of using your self-hosted instance of LangSmith.
 
-<Info>
-  This guide assumes you have already deployed a self-hosted LangSmith instance. If you have not, please refer to the [kubernetes deployment guide](/langsmith/kubernetes).
-</Info>
+> [!NOTE]
+> This guide assumes you have already deployed a self-hosted LangSmith instance. If you have not, please refer to the [kubernetes deployment guide](https://docs.langchain.com/langsmith/kubernetes).
 
 ### Configuring the application you want to use with LangSmith
 
@@ -20,14 +15,14 @@ LangSmith has a single API for interacting with both the hub and the LangSmith b
 
 To use the API of your instance, you will need to set the following environment variables in your application:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 LANGSMITH_ENDPOINT=http://<host>/api/v1
 LANGSMITH_API_KEY=foo # Set to a legitimate API key if using OAuth
 ```
 
 You can also configure these variables directly in the LangSmith SDK client:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import langsmith
 langsmith_client = langsmith.Client(
     api_key='<api_key>',
@@ -47,7 +42,7 @@ You can do this like so:
 
 Then use the following code to load the system certificates:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import truststore
 truststore.inject_into_ssl()
 # The rest of your code
@@ -66,12 +61,8 @@ To access the API reference, navigate to `http://<host>/api/docs` in your browse
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-usage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

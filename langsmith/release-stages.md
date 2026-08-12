@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Release stages
-
-> How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/release-stages)
+How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
 
 LangSmith ships features through three release stages: alpha, beta, and generally available (GA). Each stage sets a consistent expectation for how stable a feature is, where it runs, and how it is supported, so you can decide when to adopt it.
 
@@ -12,9 +8,9 @@ A feature advances through the stages as it matures, though smaller features may
 
 | Stage                         | Availability              | Changes                                                                       | Self-hosted / BYOC          | Support                                    |
 | ----------------------------- | ------------------------- | ----------------------------------------------------------------------------- | --------------------------- | ------------------------------------------ |
-| [Alpha](#alpha)               | Design partners only      | Breaking changes expected; the feature may change significantly or never ship | Not guaranteed              | No formal SLA                              |
-| [Beta](#beta)                 | Public or a private group | Interface or behavior may still change; GA expected within a few months       | Typically added during beta | Actively maintained; SLA varies by feature |
-| [GA](#generally-available-ga) | Public                    | Stable; breaking changes require a deprecation period                         | Supported                   | Fully supported                            |
+| [Alpha](https://docs.langchain.com/langsmith/release-stages#alpha)               | Design partners only      | Breaking changes expected; the feature may change significantly or never ship | Not guaranteed              | No formal SLA                              |
+| [Beta](https://docs.langchain.com/langsmith/release-stages#beta)                 | Public or a private group | Interface or behavior may still change; GA expected within a few months       | Typically added during beta | Actively maintained; SLA varies by feature |
+| [GA](https://docs.langchain.com/langsmith/release-stages#generally-available-ga) | Public                    | Stable; breaking changes require a deprecation period                         | Supported                   | Fully supported                            |
 
 ## Alpha
 
@@ -57,18 +53,14 @@ Any feature that is not marked alpha or beta is GA, and is supported immediately
 
 ## See also
 
-* [Release policy](/langsmith/release-versions) for self-hosted release channels, cadence, and version support
-* [API and SDK deprecation policy](/langsmith/endpoint-deprecation) for how deprecated endpoints and methods are removed
-* [Changelog](/langsmith/changelog) for recent LangSmith updates
+* [Release policy](https://docs.langchain.com/langsmith/release-versions) for self-hosted release channels, cadence, and version support
+* [API and SDK deprecation policy](https://docs.langchain.com/langsmith/endpoint-deprecation) for how deprecated endpoints and methods are removed
+* [Changelog](https://docs.langchain.com/langsmith/changelog) for recent LangSmith updates
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/release-stages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/release-stages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

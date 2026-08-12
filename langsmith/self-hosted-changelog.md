@@ -1,2912 +1,2768 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Self-hosted LangSmith changelog
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-changelog)
+> [!NOTE]
+> **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/self-hosted-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
+
+[Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
+
+## 2026-08-05
+## langsmith-0.16.0
+
+LangSmith Self-Hosted v0.16 is our recommended release for all self-hosted deployments. It brings four major capabilities to Self-hosted: **SmithDB**, **Engine**, the **LLM Gateway**, and **Sandboxes**, alongside broad improvements across the rest of our platform.
+
+Follow the upgrade instructions to get access to everything: [https://docs.langchain.com/langsmith/self-host-upgrades](https://docs.langchain.com/langsmith/self-host-upgrades).
 
-<Callout icon="rss" color="#4F46E5" iconType="regular">
-  **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/self-hosted-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
-</Callout>
-
-[Self-hosted LangSmith](/langsmith/self-hosted) is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
-
-<Update label="2026-08-05" tags={["self-hosted"]} rss={{ title: "2026-08-05 - self-hosted" }}>
-  ## langsmith-0.16.0
-
-  LangSmith Self-Hosted v0.16 is our recommended release for all self-hosted deployments. It brings three major capabilities to Self-hosted: **SmithDB**, **Engine**, and **Sandboxes**, alongside broad improvements across the rest of our platform.
+If you want to book time for your upgrade, feel free to contact LangChain support at `support@langchain.dev`.
 
-  Follow the upgrade instructions to get access to everything: [https://docs.langchain.com/langsmith/self-host-upgrades](https://docs.langchain.com/langsmith/self-host-upgrades).
+### Breaking changes
 
-  If you want to book time for your upgrade, feel free to contact LangChain support at `support@langchain.dev`.
+* Bulk exports now default to `zstandard` compression when the `compression` parameter is omitted at creation time. For instructions on overriding this default in the Helm chart, see [Compression](https://docs.langchain.com/langsmith/data-export#compression). Setting `compression` explicitly per bulk export works as before.
+* The `agent-bootstrap` script is fully deprecated and deleted. If you used `agent-bootstrap` to deploy Fleet (formerly Agent Builder), migrate to a standalone deployment. For more information, see [Migrating LangSmith Deployments control plane Fleet to standalone Fleet](https://support.langchain.com/articles/8306585004-migrating-langsmith-deployments-control-plane-fleet-to-standalone-fleet).
+* A new `backfillCheck` job prevents upgrading versions before required checks complete. If you rely on features such as IAM-based auth in other services, you may need to add matching annotations and labels.
 
-  ### Breaking changes
+### Infrastructure changes
 
-  * Bulk exports now default to `zstandard` compression when the `compression` parameter is omitted at creation time. For instructions on overriding this default in the Helm chart, see [Compression](/langsmith/data-export#compression). Setting `compression` explicitly per bulk export works as before.
-  * The `agent-bootstrap` script is fully deprecated and deleted. If you used `agent-bootstrap` to deploy Fleet (formerly Agent Builder), migrate to a standalone deployment. For more information, see [Migrating LangSmith Deployments control plane Fleet to standalone Fleet](https://support.langchain.com/articles/8306585004-migrating-langsmith-deployments-control-plane-fleet-to-standalone-fleet).
-  * A new `backfillCheck` job prevents upgrading versions before required checks complete. If you rely on features such as IAM-based auth in other services, you may need to add matching annotations and labels.
+* Several images are consolidated into the `smith-backend` image. You no longer need to mirror images such as `go-backend`, `playground`, and `host-backend`. If you previously overrode these, remove them from your `values.yaml`.
+* Agent images such as `polly`, `fleet`, and `insightsEngine` are now at par with core observability images. They support IAM auth for dependencies as well as FIPS compatibility.
+* Self-hosted images ship with Cosign signatures and signed SBOM attestations, so you can verify provenance and satisfy supply-chain requirements out of the box.
 
-  ### Infrastructure changes
+### New features
 
-  * Several images are consolidated into the `smith-backend` image. You no longer need to mirror images such as `go-backend`, `playground`, and `host-backend`. If you previously overrode these, remove them from your `values.yaml`.
-  * Agent images such as `polly`, `fleet`, and `insightsEngine` are now at par with core observability images. They support IAM auth for dependencies as well as FIPS compatibility.
-  * Self-hosted images ship with Cosign signatures and signed SBOM attestations, so you can verify provenance and satisfy supply-chain requirements out of the box.
+* **SmithDB** is available in public beta. LangChain does not support or recommend setting this up on your own. Express interest through the [SmithDB early access waitlist](https://www.langchain.com/smithdb-early-access-waitlist) and the team will reach out to set you up for success with SmithDB.
+  * A columnar database purpose-built for LangSmith run and trace data, replacing ClickHouse as the query engine for runs.
+  * Faster trace and run queries on large projects, and the backing store for the expanded custom dashboard metrics in this release.
+  * Can run as the sole query path with ClickHouse disabled, or alongside ClickHouse during migration. Runs, threads, and stats are served from `/v2/*` endpoints.
+* **Self-hosted Engine** is available in AWS/GCP US. For installation instructions, see [LangSmith Engine on self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted). You may need to contact your account representative to enable this feature on your license.
+  * The agent for agent engineering: Engine works from your production traces to surface recurring issues, diagnose their root cause, and drive the fix.
+  * Continuously scans enabled tracing projects, identifying failures and potential improvements and turning them into actionable issues ranked by severity.
+  * Proposes fixes, opens PRs if source code is connected, creates evaluators and ground truth examples to catch regressions, and monitors issues automatically for recurrence.
+  * Usage is charged in [LangChain Compute Units (LCUs)](https://docs.langchain.com/langsmith/pricing-plans) with an optional monthly spend limit at the organization and project level. On self-hosted, Engine emits no LangSmith traces.
+  * Sends trace content to LangSmith Intelligence, a LangChain-managed zero-data-retention service. Requires egress to `beacon.langchain.com` on GCP or `beacon.aws.langchain.com` on AWS. Air-gapped installs cannot run Engine.
+* **LangSmith LLM Gateway** is available in public beta. If you are interested in LLM Gateway for self-hosted deployments, submit the [LLM Gateway self-hosted access request](https://www.langchain.com/langsmith-llm-gateway-self-hosted-access-request).
+  * **Spend and rate limits**: Rate-limit policies alongside spend caps, weekly cap periods, and scoping of both by custom header for any subject.
+  * **Data protection**: Configurable guard timeout action (allow or block), granular PII rule selection, expanded secret-token detection, and redacted-placeholder explanations passed to the model.
+  * **Provider coverage**: Full OpenAI API route pass-through, OpenAI embeddings with cost and trace tracking, and Anthropic Files and Managed Agents.
+  * **Fallback routing**: Route configs can fall back to alternate models, support multiple fallback chains, use custom providers as fallback targets, and route chains by a custom model alias.
+* **Self-hosted Sandboxes** are available in AWS and GCP. For installation instructions, see [Enable sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes) and [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes). You may need to contact your account representative to enable this feature on your license.
+  * Isolated environments where agents can safely execute arbitrary code and interact with a filesystem without touching your main infrastructure.
+  * Boot from snapshots built off a Docker image, a local `Dockerfile`, or a captured running sandbox, and mount S3, GCS, and Git repositories without exposing credentials to the agent.
+  * Auth proxy to keep credentials out of the runtime.
+* **Platform and tooling**
+  * **LangSmith MCP**: Point any MCP-capable client at your instance to read traces, projects, datasets, and prompts. For more information, see [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp). Remote MCP OAuth authorize now works on Self-hosted with SSO.
+  * **LangSmith OAuth tokens**: Browser-based login via `langsmith auth login`, issuing short-lived access tokens and a refresh token, plus profiles for sharing endpoint, workspace, and auth config across the CLI and SDKs. For more information, see [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli).
+    * **Terraform provider**: Manage workspaces, custom roles, organization and workspace members, evaluators, run rules, and alert rules as code. For more information, see [Manage LangSmith with Terraform](https://docs.langchain.com/langsmith/manage-with-terraform).
+  * **Deployment**: Rename a deployment from Settings, create multiple cron schedules with the same expression on one agent, and see cron schedules in your local timezone.
+* **Observability and evaluation**
+  * **Run details panel**: Redesigned, with feedback submission directly in the panel.
+  * **Threads view**: Shows the actual last output plus a new Last Error column.
+  * **Scoped trace limits**: Manage per-project and per-user monthly trace limits, with banners and visibility on the Usage limits page.
+  * **Monitoring hooks**: Run-rule webhook payloads include a `trace_url` deep link, and queue workers emit Prometheus metrics.
+  * **OpenTelemetry**: Custom trace metadata from OTel resource attributes, and child spans arriving before their parent are now buffered and nested correctly instead of dropped.
+  * **Reusable evaluators**: LLM-as-judge evaluators can include extended stats.
+  * **Annotation queue permissions**: ABAC support.
+  * **Experiment progress tracking**: Progress bar shows run and evaluator execution progress.
+  * **Dataset splits**: Shown as chips and editable from the experiment and comparison tables.
+  * **Bulk experiment exports**: A new `all_experiments` parameter exports every experiment in a workspace (250 per export, raisable on request).
+  * **Context Hub webhooks**: Configure workspace-wide HTTPS webhooks that fire on every agent or skill commit, with HMAC-SHA256 signed payloads, custom request headers, and in-place secret rotation. For more information, see [Configure Context Hub commit webhooks](https://docs.langchain.com/langsmith/context-hub-webhooks).
+* **Model support**: Claude Sonnet 5, Claude Fable 5, Claude Opus 4.8, Gemini 3.6 Flash, Gemini 3.5 Flash Lite, and Databricks models. New Anthropic playground sessions default to Claude Sonnet 5. OAuth client credentials are supported for model configurations.
+* Numerous bug fixes and smaller improvements.
 
-  ### New features
+### Admin changes
 
-  * **SmithDB** is available in public beta. LangChain does not support or recommend setting this up on your own. Express interest through the [SmithDB early access waitlist](https://www.langchain.com/smithdb-early-access-waitlist) and the team will reach out to set you up for success with SmithDB.
-    * A columnar database purpose-built for LangSmith run and trace data, replacing ClickHouse as the query engine for runs.
-    * Faster trace and run queries on large projects, and the backing store for the expanded custom dashboard metrics in this release.
-    * Can run as the sole query path with ClickHouse disabled, or alongside ClickHouse during migration. Runs, threads, and stats are served from `/v2/*` endpoints.
-  * **Self-hosted Engine** is available in AWS/GCP US. For installation instructions, see [LangSmith Engine on self-hosted](/langsmith/engine-self-hosted). You may need to contact your account representative to enable this feature on your license.
-    * The agent for agent engineering: Engine works from your production traces to surface recurring issues, diagnose their root cause, and drive the fix.
-    * Continuously scans enabled tracing projects, identifying failures and potential improvements and turning them into actionable issues ranked by severity.
-    * Proposes fixes, opens PRs if source code is connected, creates evaluators and ground truth examples to catch regressions, and monitors issues automatically for recurrence.
-    * Usage is charged in [LangChain Compute Units (LCUs)](/langsmith/pricing-plans) with an optional monthly spend limit at the organization and project level. On self-hosted, Engine emits no LangSmith traces.
-    * Sends trace content to LangSmith Intelligence, a LangChain-managed zero-data-retention service. Requires egress to `beacon.langchain.com` on GCP or `beacon.aws.langchain.com` on AWS. Air-gapped installs cannot run Engine.
-  * **Self-hosted Sandboxes** are available in AWS and GCP. For installation instructions, see [Enable sandboxes](/langsmith/deploy-self-hosted-full-platform#enable-sandboxes) and [LangSmith Sandboxes](/langsmith/sandboxes). You may need to contact your account representative to enable this feature on your license.
-    * Isolated environments where agents can safely execute arbitrary code and interact with a filesystem without touching your main infrastructure.
-    * Boot from snapshots built off a Docker image, a local `Dockerfile`, or a captured running sandbox, and mount S3, GCS, and Git repositories without exposing credentials to the agent.
-    * Auth proxy to keep credentials out of the runtime.
-  * **Platform and tooling**
-    * **LangSmith MCP**: Point any MCP-capable client at your instance to read traces, projects, datasets, and prompts. For more information, see [LangSmith Remote MCP](/langsmith/langsmith-remote-mcp). Remote MCP OAuth authorize now works on Self-hosted with SSO.
-    * **LangSmith OAuth tokens**: Browser-based login via `langsmith auth login`, issuing short-lived access tokens and a refresh token, plus profiles for sharing endpoint, workspace, and auth config across the CLI and SDKs. For more information, see [LangSmith CLI](/langsmith/langsmith-cli).
-      * **Terraform provider**: Manage workspaces, custom roles, organization and workspace members, evaluators, run rules, and alert rules as code. For more information, see [Manage LangSmith with Terraform](/langsmith/manage-with-terraform).
-    * **Deployment**: Rename a deployment from Settings, create multiple cron schedules with the same expression on one agent, and see cron schedules in your local timezone.
-  * **Observability and evaluation**
-    * **Run details panel**: Redesigned, with feedback submission directly in the panel.
-    * **Threads view**: Shows the actual last output plus a new Last Error column.
-    * **Scoped trace limits**: Manage per-project and per-user monthly trace limits, with banners and visibility on the Usage limits page.
-    * **Monitoring hooks**: Run-rule webhook payloads include a `trace_url` deep link, and queue workers emit Prometheus metrics.
-    * **OpenTelemetry**: Custom trace metadata from OTel resource attributes, and child spans arriving before their parent are now buffered and nested correctly instead of dropped.
-    * **Reusable evaluators**: LLM-as-judge evaluators can include extended stats.
-    * **Annotation queue permissions**: ABAC support.
-    * **Experiment progress tracking**: Progress bar shows run and evaluator execution progress.
-    * **Dataset splits**: Shown as chips and editable from the experiment and comparison tables.
-    * **Bulk experiment exports**: A new `all_experiments` parameter exports every experiment in a workspace (250 per export, raisable on request).
-    * **Context Hub webhooks**: Configure workspace-wide HTTPS webhooks that fire on every agent or skill commit, with HMAC-SHA256 signed payloads, custom request headers, and in-place secret rotation. For more information, see [Configure Context Hub commit webhooks](/langsmith/context-hub-webhooks).
-  * **Model support**: Claude Sonnet 5, Claude Fable 5, Claude Opus 4.8, Gemini 3.6 Flash, Gemini 3.5 Flash Lite, and Databricks models. New Anthropic playground sessions default to Claude Sonnet 5. OAuth client credentials are supported for model configurations.
-  * Numerous bug fixes and smaller improvements.
+* Organization admins can update an existing [service key's](https://docs.langchain.com/langsmith/administration-overview#service-keys) role without rotating it.
+* Rename your [organization](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-an-organization), and manage [SCIM tokens](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization), from organization settings.
+* [Disable model providers](https://docs.langchain.com/langsmith/model-configurations#disable-a-provider-for-the-organization) for an entire organization.
+* [Edit pending member invite roles](https://docs.langchain.com/langsmith/user-management#assign-a-role-to-a-user) from the UI.
+* [Restrict roles](https://docs.langchain.com/langsmith/rbac#restrict-roles) from the Organizations tab.
+* Workspace batch invite handles existing organization members instead of returning 409, and respects [disabled organization invites](https://docs.langchain.com/langsmith/jit-invite-sso).
+* Organization and workspace IDs are shown on the home page, and [workspace switching](https://docs.langchain.com/langsmith/set-up-hierarchy#manage-and-navigate-workspaces) preserves your current page.
+* The monthly [usage graph](https://docs.langchain.com/langsmith/view-usage#aggregate-usage-on-self-hosted) shows automatically on online Self-hosted deployments.
 
-  ### Admin changes
+**Download the Helm chart:** [`langsmith-0.16.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0/langsmith-0.16.0.tgz)
 
-  * Organization admins can update an existing [service key's](/langsmith/administration-overview#service-keys) role without rotating it.
-  * Rename your [organization](/langsmith/set-up-hierarchy#set-up-an-organization), and manage [SCIM tokens](/langsmith/user-management#set-up-scim-for-your-organization), from organization settings.
-  * [Disable model providers](/langsmith/model-configurations#disable-a-provider-for-the-organization) for an entire organization.
-  * [Edit pending member invite roles](/langsmith/user-management#assign-a-role-to-a-user) from the UI.
-  * [Restrict roles](/langsmith/rbac#restrict-roles) from the Organizations tab.
-  * Workspace batch invite handles existing organization members instead of returning 409, and respects [disabled organization invites](/langsmith/jit-invite-sso).
-  * Organization and workspace IDs are shown on the home page, and [workspace switching](/langsmith/set-up-hierarchy#manage-and-navigate-workspaces) preserves your current page.
-  * The monthly [usage graph](/langsmith/view-usage#aggregate-usage-on-self-hosted) shows automatically on online Self-hosted deployments.
+## 2026-08-04
+## langsmith-0.16.0-rc.29
 
-  **Download the Helm chart:** [`langsmith-0.16.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0/langsmith-0.16.0.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-08-04" tags={["self-hosted"]} rss={{ title: "2026-08-04 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.29
+**Download the Helm chart:** [`langsmith-0.16.0-rc.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.29/langsmith-0.16.0-rc.29.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-08-04
+## langsmith-0.16.0-rc.28
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.29/langsmith-0.16.0-rc.29.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-08-04" tags={["self-hosted"]} rss={{ title: "2026-08-04 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.28
+**Download the Helm chart:** [`langsmith-0.16.0-rc.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.28/langsmith-0.16.0-rc.28.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-08-01
+## langsmith-0.16.0-rc.27
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.28/langsmith-0.16.0-rc.28.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-08-01" tags={["self-hosted"]} rss={{ title: "2026-08-01 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.27
+**Download the Helm chart:** [`langsmith-0.16.0-rc.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.27/langsmith-0.16.0-rc.27.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-31
+## langsmith-0.16.0-rc.26
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.27/langsmith-0.16.0-rc.27.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.25. Refer to the [langsmith-0.16.0-rc.25](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-25) release notes below.
 
-<Update label="2026-07-31" tags={["self-hosted"]} rss={{ title: "2026-07-31 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.26
+**Download the Helm chart:** [`langsmith-0.16.0-rc.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.26/langsmith-0.16.0-rc.26.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.25. Refer to the [langsmith-0.16.0-rc.25](#langsmith-0-16-0-rc-25) release notes below.
+## 2026-07-31
+## langsmith-0.16.0-rc.25
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.26/langsmith-0.16.0-rc.26.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-31" tags={["self-hosted"]} rss={{ title: "2026-07-31 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.25
+**Download the Helm chart:** [`langsmith-0.16.0-rc.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.25/langsmith-0.16.0-rc.25.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-31
+## langsmith-0.16.0-rc.24
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.25/langsmith-0.16.0-rc.25.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-31" tags={["self-hosted"]} rss={{ title: "2026-07-31 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.24
+**Download the Helm chart:** [`langsmith-0.16.0-rc.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.24/langsmith-0.16.0-rc.24.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-31
+## langsmith-0.16.0-rc.23
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.24/langsmith-0.16.0-rc.24.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-31" tags={["self-hosted"]} rss={{ title: "2026-07-31 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.23
+**Download the Helm chart:** [`langsmith-0.16.0-rc.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.23/langsmith-0.16.0-rc.23.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-29
+## langsmith-0.16.0-rc.22
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.23/langsmith-0.16.0-rc.23.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-29" tags={["self-hosted"]} rss={{ title: "2026-07-29 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.22
+**Download the Helm chart:** [`langsmith-0.16.0-rc.22.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.22/langsmith-0.16.0-rc.22.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-28
+## langsmith-0.17.0-rc.3
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.22.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.22/langsmith-0.16.0-rc.22.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-17-0-rc-1) release notes below.
 
-<Update label="2026-07-28" tags={["self-hosted"]} rss={{ title: "2026-07-28 - self-hosted" }}>
-  ## langsmith-0.17.0-rc.3
+**Download the Helm chart:** [`langsmith-0.17.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.3/langsmith-0.17.0-rc.3.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](#langsmith-0-17-0-rc-1) release notes below.
+## 2026-07-28
+## langsmith-0.16.0-rc.21
 
-  **Download the Helm chart:** [`langsmith-0.17.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.3/langsmith-0.17.0-rc.3.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.20. Refer to the [langsmith-0.16.0-rc.20](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-20) release notes below.
 
-<Update label="2026-07-28" tags={["self-hosted"]} rss={{ title: "2026-07-28 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.21
+**Download the Helm chart:** [`langsmith-0.16.0-rc.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.21/langsmith-0.16.0-rc.21.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.20. Refer to the [langsmith-0.16.0-rc.20](#langsmith-0-16-0-rc-20) release notes below.
+## 2026-07-28
+## langsmith-0.16.0-rc.20
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.21/langsmith-0.16.0-rc.21.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-28" tags={["self-hosted"]} rss={{ title: "2026-07-28 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.20
+**Download the Helm chart:** [`langsmith-0.16.0-rc.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.20/langsmith-0.16.0-rc.20.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-27
+## langsmith-0.17.0-rc.2
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.20/langsmith-0.16.0-rc.20.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-17-0-rc-1) release notes below.
 
-<Update label="2026-07-27" tags={["self-hosted"]} rss={{ title: "2026-07-27 - self-hosted" }}>
-  ## langsmith-0.17.0-rc.2
+**Download the Helm chart:** [`langsmith-0.17.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.2/langsmith-0.17.0-rc.2.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](#langsmith-0-17-0-rc-1) release notes below.
+## 2026-07-27
+## langsmith-0.17.0-rc.1
 
-  **Download the Helm chart:** [`langsmith-0.17.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.2/langsmith-0.17.0-rc.2.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-27" tags={["self-hosted"]} rss={{ title: "2026-07-27 - self-hosted" }}>
-  ## langsmith-0.17.0-rc.1
+**Download the Helm chart:** [`langsmith-0.17.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.1/langsmith-0.17.0-rc.1.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-27
+## langsmith-0.16.0-rc.19
 
-  **Download the Helm chart:** [`langsmith-0.17.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.1/langsmith-0.17.0-rc.1.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.18. Refer to the [langsmith-0.16.0-rc.18](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-18) release notes below.
 
-<Update label="2026-07-27" tags={["self-hosted"]} rss={{ title: "2026-07-27 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.19
+**Download the Helm chart:** [`langsmith-0.16.0-rc.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.19/langsmith-0.16.0-rc.19.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.18. Refer to the [langsmith-0.16.0-rc.18](#langsmith-0-16-0-rc-18) release notes below.
+## 2026-07-27
+## langsmith-0.16.0-rc.18
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.19/langsmith-0.16.0-rc.19.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-27" tags={["self-hosted"]} rss={{ title: "2026-07-27 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.18
+**Download the Helm chart:** [`langsmith-0.16.0-rc.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.18/langsmith-0.16.0-rc.18.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-27
+## langsmith-0.15.17
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.18/langsmith-0.16.0-rc.18.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-27" tags={["self-hosted"]} rss={{ title: "2026-07-27 - self-hosted" }}>
-  ## langsmith-0.15.17
+**Download the Helm chart:** [`langsmith-0.15.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.17/langsmith-0.15.17.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-26
+## langsmith-0.16.0-rc.17
 
-  **Download the Helm chart:** [`langsmith-0.15.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.17/langsmith-0.15.17.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.16. Refer to the [langsmith-0.16.0-rc.16](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-16) release notes below.
 
-<Update label="2026-07-26" tags={["self-hosted"]} rss={{ title: "2026-07-26 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.17
+**Download the Helm chart:** [`langsmith-0.16.0-rc.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.17/langsmith-0.16.0-rc.17.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.16. Refer to the [langsmith-0.16.0-rc.16](#langsmith-0-16-0-rc-16) release notes below.
+## 2026-07-25
+## langsmith-0.16.0-rc.16
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.17/langsmith-0.16.0-rc.17.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-25" tags={["self-hosted"]} rss={{ title: "2026-07-25 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.16
+**Download the Helm chart:** [`langsmith-0.16.0-rc.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.16/langsmith-0.16.0-rc.16.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-24
+## langsmith-0.15.16
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.16/langsmith-0.16.0-rc.16.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-07-24" tags={["self-hosted"]} rss={{ title: "2026-07-24 - self-hosted" }}>
-  ## langsmith-0.15.16
+**Download the Helm chart:** [`langsmith-0.15.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.16/langsmith-0.15.16.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-07-24
+## langsmith-0.16.0-rc.15
 
-  **Download the Helm chart:** [`langsmith-0.15.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.16/langsmith-0.15.16.tgz)
-</Update>
+* None (internal engine triage behavior, behind the `ISSUES_AGENT_MAIN_AGENT_SEMANTIC` flag).
 
-<Update label="2026-07-24" tags={["self-hosted"]} rss={{ title: "2026-07-24 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.15
+**Download the Helm chart:** [`langsmith-0.16.0-rc.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.15/langsmith-0.16.0-rc.15.tgz)
 
-  * None (internal engine triage behavior, behind the `ISSUES_AGENT_MAIN_AGENT_SEMANTIC` flag).
+## 2026-07-21
+## langsmith-0.16.0-rc.14
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.15/langsmith-0.16.0-rc.15.tgz)
-</Update>
+* Fixed incorrect dashboard tooltip time ranges when the first aggregation bucket was partial.
+* Fixed engine issue-detection evaluators that failed on large agent traces by trimming the run payload sent to the evaluator sandbox to only what the evaluators actually read.
 
-<Update label="2026-07-21" tags={["self-hosted"]} rss={{ title: "2026-07-21 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.14
+**Download the Helm chart:** [`langsmith-0.16.0-rc.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.14/langsmith-0.16.0-rc.14.tgz)
 
-  * Fixed incorrect dashboard tooltip time ranges when the first aggregation bucket was partial.
-  * Fixed engine issue-detection evaluators that failed on large agent traces by trimming the run payload sent to the evaluator sandbox to only what the evaluators actually read.
+## 2026-07-16
+## langsmith-0.16.0-rc.13
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.14/langsmith-0.16.0-rc.14.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.12. Refer to the [langsmith-0.16.0-rc.12](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-12) release notes below.
 
-<Update label="2026-07-16" tags={["self-hosted"]} rss={{ title: "2026-07-16 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.13
+**Download the Helm chart:** [`langsmith-0.16.0-rc.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.13/langsmith-0.16.0-rc.13.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.12. Refer to the [langsmith-0.16.0-rc.12](#langsmith-0-16-0-rc-12) release notes below.
+## 2026-07-09
+## langsmith-0.16.0-rc.12
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.13/langsmith-0.16.0-rc.13.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete".
 
-<Update label="2026-07-09" tags={["self-hosted"]} rss={{ title: "2026-07-09 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.12
+* Include extended stats was made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete".
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Include extended stats was made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into including extended stats and mapping prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images included Docker Compose and automatically started the Docker daemon.
 
-  * LLM-as-judge evaluators could now opt into including extended stats and mapping prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images included Docker Compose and automatically started the Docker daemon.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread ids caused the UI to be unable to query these threads.
 
-  * Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread ids caused the UI to be unable to query these threads.
+* Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
 
-  * Context repos supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and backend gates.
 
-  * Waterfall turn view now took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
 
-  * Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* No user-facing changes—internal OpenAPI spec update only.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
+* Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * No user-facing changes—internal OpenAPI spec update only.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use had an in-chat callout for eligible general chat users.
+* This enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * This enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Organization admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Organization admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default appeared first in the model picker for eligible plans.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
+* Restored cron execution for enterprise Fleet agents that had silently failed to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had silently failed to fire since early March 2026.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.12/langsmith-0.16.0-rc.12.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-07-09
+## langsmith-0.16.0-rc.11
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.12/langsmith-0.16.0-rc.12.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-07-09" tags={["self-hosted"]} rss={{ title: "2026-07-09 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.11
+* Included extended stats became available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions, `bulk-exports:read` and `bulk-exports:manage`, for fetching and creating/updating bulk exports.
 
-  * Included extended stats became available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions, `bulk-exports:read` and `bulk-exports:manage`, for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* The Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * The Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing UI to fail to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing UI to fail to query these threads.
+* Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view now took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports, limited to 250 experiments per export, which could be increased upon request.
 
-  * Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports, limited to 250 experiments per export, which could be increased upon request.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use now had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use now had an in-chat callout for eligible general chat users.
+* Enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * Enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name` + `family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for the `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name` + `family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for the `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixes the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire.
 
-  * Fixes the project stats sidebar trace count label and header layout.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.11/langsmith-0.16.0-rc.11.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-07-09
+## langsmith-0.15.13
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.11/langsmith-0.16.0-rc.11.tgz)
-</Update>
+* Added support for new model integrations to enhance AI deployments in self-hosted environments.
+* Improved the UI experience with streamlined features for the tracing tool, offering better insight into model performance.
+* Fixed several bugs affecting user experience and UI responsiveness, leading to smoother operation.
+* Enhanced performance with optimizations for faster loading speeds across various interfaces.
+* Implemented new API capabilities to support extended functionality and integration options for developers.
+* Incorporated security improvements with updated authentication and authorization features to better protect self-hosted instances.
 
-<Update label="2026-07-09" tags={["self-hosted"]} rss={{ title: "2026-07-09 - self-hosted" }}>
-  ## langsmith-0.15.13
+**Download the Helm chart:** [`langsmith-0.15.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.13/langsmith-0.15.13.tgz)
 
-  * Added support for new model integrations to enhance AI deployments in self-hosted environments.
-  * Improved the UI experience with streamlined features for the tracing tool, offering better insight into model performance.
-  * Fixed several bugs affecting user experience and UI responsiveness, leading to smoother operation.
-  * Enhanced performance with optimizations for faster loading speeds across various interfaces.
-  * Implemented new API capabilities to support extended functionality and integration options for developers.
-  * Incorporated security improvements with updated authentication and authorization features to better protect self-hosted instances.
+## 2026-07-08
+## langsmith-0.16.0-rc.10
 
-  **Download the Helm chart:** [`langsmith-0.15.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.13/langsmith-0.15.13.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-07-08" tags={["self-hosted"]} rss={{ title: "2026-07-08 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.10
+* Included extended stats were made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Included extended stats were made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could opt into Include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could opt into Include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoding, causing the UI to be unable to query these threads.
 
-  * Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoding, causing the UI to be unable to query these threads.
+* Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Typed responses and standard error envelope were added for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
 
-  * Context repos supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots now could export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope were added for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots now could export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view took full height if available.
+* Workspace admins could override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
 
-  * Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use had an in-chat callout for eligible general chat users.
+* Enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * Enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default appeared first in the model picker for eligible plans.
+* Run rules webhook payloads included a `trace_url` deep link for each run.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads included a `trace_url` deep link for each run.
+* Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.10/langsmith-0.16.0-rc.10.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-07-07
+## langsmith-0.16.0-rc.9
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.10/langsmith-0.16.0-rc.10.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.8. Refer to the [langsmith-0.16.0-rc.8](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-8) release notes below.
 
-<Update label="2026-07-07" tags={["self-hosted"]} rss={{ title: "2026-07-07 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.9
+**Download the Helm chart:** [`langsmith-0.16.0-rc.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.9/langsmith-0.16.0-rc.9.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.8. Refer to the [langsmith-0.16.0-rc.8](#langsmith-0-16-0-rc-8) release notes below.
+## 2026-07-02
+## langsmith-0.16.0-rc.8
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.9/langsmith-0.16.0-rc.9.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-07-02" tags={["self-hosted"]} rss={{ title: "2026-07-02 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.8
+* Included extended stats became available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Included extended stats became available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
+* Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view now took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, can be increased at request.
 
-  * Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* No user-facing changes—internal OpenAPI spec update only.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, can be increased at request.
+* Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * No user-facing changes—internal OpenAPI spec update only.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use now had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use now had an in-chat callout for eligible general chat users.
+* This enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * This enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.8/langsmith-0.16.0-rc.8.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-07-01
+## langsmith-0.16.0-rc.7
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.8/langsmith-0.16.0-rc.8.tgz)
-</Update>
+* Patched dependencies.
 
-<Update label="2026-07-01" tags={["self-hosted"]} rss={{ title: "2026-07-01 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.7
+* Confirmed CI green :pray:.
 
-  * Patched dependencies.
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-  * Confirmed CI green :pray:.
+* Included extended stats were made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Included extended stats were made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in the `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in the `smith-frontend`.
+* Threads table showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters were not encoded in thread IDs, causing the UI to be unable to query these threads.
 
-  * Self-hosted DockerHub images included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters were not encoded in thread IDs, causing the UI to be unable to query these threads.
+* Self-hosted OIDC: fixed SSO Groups Sync that silently no-op'ed during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC: fixed SSO Groups Sync that silently no-op'ed during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters are applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters are applied.
+* Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List/Create/Delete).
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List/Create/Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enables it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enables it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports; limited to 250 experiments per export, can be increased at request.
 
-  * Fleet agent APIs required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Fleet used `langchain-fireworks 1.4.2` for Fireworks model calls.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports; limited to 250 experiments per export, can be increased at request.
+* Enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used `langchain-fireworks 1.4.2` for Fireworks model calls.
+* Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
 
-  * Enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use had an in-chat callout for eligible general chat users.
+* Enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * Enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Organization admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Organization admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 and other providers requiring camelCase API fields preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users received a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 and other providers requiring camelCase API fields preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service to respect `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users received a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service to respect `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default appeared first in the model picker for eligible plans.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Run rules webhook payloads included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
+* Experiment loading progress bars showed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads included a `trace_url` deep link for each run.
+* Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars showed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.7/langsmith-0.16.0-rc.7.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-06-26
+## langsmith-0.16.0-rc.6
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.7/langsmith-0.16.0-rc.7.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-06-26" tags={["self-hosted"]} rss={{ title: "2026-06-26 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.6
+* "Include extended stats" was made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions, `bulk-exports:read` and `bulk-exports:manage`, for fetching and creating/updating bulk exports.
 
-  * "Include extended stats" was made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions, `bulk-exports:read` and `bulk-exports:manage`, for fetching and creating/updating bulk exports.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in the new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in the new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder's "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder's "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into "Include extended stats" and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into "Include extended stats" and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing the UI to fail to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing the UI to fail to query these threads.
+* Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Typed responses and standard error envelope were added for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope were added for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view now took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports (limited to 250 experiments per export, with an option to increase upon request).
 
-  * Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Redesigned the run details panel with improved readability and more robust message parsing.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports (limited to 250 experiments per export, with an option to increase upon request).
+* Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
 
-  * Redesigned the run details panel with improved readability and more robust message parsing.
+* Computer use now had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use now had an in-chat callout for eligible general chat users.
+* Added a way to leave feedback on a run directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * Added a way to leave feedback on a run directly within the run details panel.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name` + `family_name` id\_token claims.
 
-  * Extra parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name` + `family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.6/langsmith-0.16.0-rc.6.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-06-24
+## langsmith-0.15.12
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.6/langsmith-0.16.0-rc.6.tgz)
-</Update>
+* Patched dependencies.
 
-<Update label="2026-06-24" tags={["self-hosted"]} rss={{ title: "2026-06-24 - self-hosted" }}>
-  ## langsmith-0.15.12
+**Download the Helm chart:** [`langsmith-0.15.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.12/langsmith-0.15.12.tgz)
 
-  * Patched dependencies.
+## 2026-06-24
+## langsmith-0.16.0-rc.5
 
-  **Download the Helm chart:** [`langsmith-0.15.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.12/langsmith-0.15.12.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.16.0-rc.4. Refer to the [langsmith-0.16.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-4) release notes below.
 
-<Update label="2026-06-24" tags={["self-hosted"]} rss={{ title: "2026-06-24 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.5
+**Download the Helm chart:** [`langsmith-0.16.0-rc.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.5/langsmith-0.16.0-rc.5.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.16.0-rc.4. Refer to the [langsmith-0.16.0-rc.4](#langsmith-0-16-0-rc-4) release notes below.
+## 2026-06-18
+## langsmith-0.16.0-rc.4
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.5/langsmith-0.16.0-rc.5.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete".
 
-<Update label="2026-06-18" tags={["self-hosted"]} rss={{ title: "2026-06-18 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.4
+* "Include extended stats" was made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete".
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * "Include extended stats" was made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users could now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder's "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Users could now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder's "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into "Include extended stats" and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into "Include extended stats" and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rules, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing the UI to be unable to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing the UI to be unable to query these threads.
+* Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supported MCP server registration with header-based auth.
+* Clarified the stats unavailable message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters were applied.
+* Added token pricing support for Claude Opus 4.8.
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.4/langsmith-0.16.0-rc.4.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-06-18
+## langsmith-0.15.11
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.4/langsmith-0.16.0-rc.4.tgz)
-</Update>
+* Improved the UI for tracing to enhance the user experience.
+* Fixed a bug that affected playground performance.
+* Added support for mTLS in self-hosted infrastructure.
+* Added Redis Cluster compatibility for better scalability.
+* Implemented PostgreSQL IAM support to enhance database security.
+* Enhanced streaming performance to reduce load times.
+* Added new API endpoints to expand developer capabilities.
+* Improved the Agent Builder interface for more intuitive usage.
+* Updated authentication features to increase security in self-hosted deployments.
 
-<Update label="2026-06-18" tags={["self-hosted"]} rss={{ title: "2026-06-18 - self-hosted" }}>
-  ## langsmith-0.15.11
+**Download the Helm chart:** [`langsmith-0.15.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.11/langsmith-0.15.11.tgz)
 
-  * Improved the UI for tracing to enhance the user experience.
-  * Fixed a bug that affected playground performance.
-  * Added support for mTLS in self-hosted infrastructure.
-  * Added Redis Cluster compatibility for better scalability.
-  * Implemented PostgreSQL IAM support to enhance database security.
-  * Enhanced streaming performance to reduce load times.
-  * Added new API endpoints to expand developer capabilities.
-  * Improved the Agent Builder interface for more intuitive usage.
-  * Updated authentication features to increase security in self-hosted deployments.
+## 2026-06-15
+## langsmith-0.16.0-rc.3
 
-  **Download the Helm chart:** [`langsmith-0.15.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.11/langsmith-0.15.11.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-06-15" tags={["self-hosted"]} rss={{ title: "2026-06-15 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.3
+* Included extended stats were made available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Included extended stats were made available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub App was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Users can now create multiple cron schedules with the same expression on the same agent.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links now always open in the fleet tracing project.
 
-  * Users can now create multiple cron schedules with the same expression on the same agent.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links now always open in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into Include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now see configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` is off.
 
-  * Sandbox-enabled agents now see configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` is off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
+* Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supports MCP server registration with header-based authentication.
 
-  * Self-hosted OIDC: fixed SSO Groups Sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supports MCP server registration with header-based authentication.
+* Clarified the stats unavailable message when text filters are applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the stats unavailable message when text filters are applied.
+* Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete) endpoints.
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete) endpoints.
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now takes full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enables it; their explicit choice persisted across the UI and backend gates.
 
-  * Waterfall turn view now takes full height if available.
+* Workspace admins could override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel, while non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enables it; their explicit choice persisted across the UI and backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel, while non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope; the old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope; the old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view; meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view; meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports, limited to 250 experiments per export, with potential for increase upon request.
 
-  * Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports, limited to 250 experiments per export, with potential for increase upon request.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet used langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use now had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use now had an in-chat callout for eligible general chat users.
+* This enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * This enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed the SSRF policy for the `playground` service so that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed the SSRF policy for the `playground` service so that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixed the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Fixed the project stats sidebar trace count label and header layout.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
+* Experiment loading progress bars now displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars now displayed the number of runs completed and evaluated within the experiments table.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.3/langsmith-0.16.0-rc.3.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-06-11
+## langsmith-0.16.0-rc.2
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.3/langsmith-0.16.0-rc.3.tgz)
-</Update>
+* For the full list of changes in the 0.16.0 release candidate, refer to the [langsmith-0.16.0-rc.1](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-16-0-rc-1) release notes below.
 
-<Update label="2026-06-11" tags={["self-hosted"]} rss={{ title: "2026-06-11 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.2
+**Download the Helm chart:** [`langsmith-0.16.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.2/langsmith-0.16.0-rc.2.tgz)
 
-  * For the full list of changes in the 0.16.0 release candidate, refer to the [langsmith-0.16.0-rc.1](#langsmith-0-16-0-rc-1) release notes below.
+## 2026-06-11
+## langsmith-0.15.10
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.2/langsmith-0.16.0-rc.2.tgz)
-</Update>
+* Patched dependencies.
 
-<Update label="2026-06-11" tags={["self-hosted"]} rss={{ title: "2026-06-11 - self-hosted" }}>
-  ## langsmith-0.15.10
+* Fixed security vulnerabilities. See CVE-2026-25087, CVE-2026-45134, CVE-2026-9256 for details.
 
-  * Patched dependencies.
+**Download the Helm chart:** [`langsmith-0.15.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.10/langsmith-0.15.10.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-25087, CVE-2026-45134, CVE-2026-9256 for details.
+## 2026-06-09
+## langsmith-0.16.0-rc.1
 
-  **Download the Helm chart:** [`langsmith-0.15.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.10/langsmith-0.15.10.tgz)
-</Update>
+* Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
 
-<Update label="2026-06-09" tags={["self-hosted"]} rss={{ title: "2026-06-09 - self-hosted" }}>
-  ## langsmith-0.16.0-rc.1
+* Included extended stats became available to all organizations for code evaluators.
 
-  * Evaluator detach confirmation dialog showed a "Detach" button instead of "Delete."
+* Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
 
-  * Included extended stats became available to all organizations for code evaluators.
+* Fixed the Engine "Connect GitHub" flow when the GitHub app was already installed via another workspace in the same organization.
 
-  * Added two dedicated permissions `bulk-exports:read` and `bulk-exports:manage` for fetching and creating/updating bulk exports.
+* Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
 
-  * Fixed the Engine "Connect GitHub" flow when the GitHub app was already installed via another workspace in the same organization.
+* Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
 
-  * Bumped `@langchain/langgraph-sdk` to 1.9.4 in `smith-frontend`.
+* Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
 
-  * Added an opt-in Smith-ACE v2 sandbox implementation behind `SMITH_ACE_SANDBOX_IMPLEMENTATION=v2`.
+* Hid the \$0.00 cost badge for tool calls in the trace tree view.
 
-  * Threads table now showed the actual last output in the *Last Output* column and surfaced thread-level errors in a new *Last Error* column.
+* Similar cron schedules on the same agent could now be created multiple times with the same expression.
 
-  * Hid the \$0.00 cost badge for tool calls in the trace tree view.
+* Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
 
-  * Similar cron schedules on the same agent could now be created multiple times with the same expression.
+* Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
 
-  * Agent Builder "View agent traces" and "View trace" links always opened in the fleet tracing project.
+* LLM-as-judge evaluators could now opt into include extended stats and map prompt variables from `run.*` fields.
 
-  * Added LangSmith model pricing entry for `gemini-3.1-flash-lite`.
+* Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
 
-  * LLM-as-judge evaluators could now opt into include extended stats and map prompt variables from `run.*` fields.
+* Added cost tracking for `gemini-3.6-flash`.
 
-  * Default sandbox rootfs images now included Docker Compose and started the Docker daemon automatically.
+* Gateway spend cap policies could now be configured with a weekly period.
 
-  * Added cost tracking for `gemini-3.6-flash`.
+* Added Centralize as an MCP marketplace integration.
 
-  * Gateway spend cap policies could now be configured with a weekly period.
+* Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
 
-  * Added Centralize as an MCP marketplace integration.
+* Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
 
-  * Sandbox-enabled agents now saw configured proxy profiles (hosts, injected header keys, network rule, OAuth providers) in their system prompt, replacing the older hosts-only auth-proxy section.
+* Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
 
-  * Hid the Sandboxes nav entry and `/sandboxes` page in regions where `SANDBOX_FEATURE_ENABLED` was off.
+* Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
 
-  * Self-hosted DockerHub images now included Cosign signatures and signed SPDX SBOM attestations.
+* Fixed "Query timeout exceeded" errors when opening large traces.
 
-  * Fixed a bug where special characters in thread IDs were not encoded, causing the UI to not be able to query these threads.
+* Self-hosted OIDC: fixed SSO groups sync silently no-op'ing during login.
 
-  * Fixed "Query timeout exceeded" errors when opening large traces.
+* Managed Deep Agents private preview now supported MCP server registration with header-based auth.
 
-  * Self-hosted OIDC: fixed SSO groups sync silently no-op'ing during login.
+* Emitted Prometheus metrics from `queue` workers.
 
-  * Managed Deep Agents private preview now supported MCP server registration with header-based auth.
+* Clarified the "Stats unavailable" message when text filters were applied.
 
-  * Emitted Prometheus metrics from `queue` workers.
+* Context repos now supported metadata updates and deletion from the Hub overflow menu.
 
-  * Clarified the "Stats unavailable" message when text filters were applied.
+* Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
 
-  * Context repos now supported metadata updates and deletion from the Hub overflow menu.
+* Sandbox snapshots could now export a Docker image built inside a sandbox.
 
-  * Typed responses and standard error envelope for Fleet `/v1/fleet/agents/{agent_id}/connections` (List / Create / Delete).
+* Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
 
-  * Sandbox snapshots could now export a Docker image built inside a sandbox.
+* Fixed large integer preservation in native run ingest payloads.
 
-  * Fixed ACE subprocess handling so early child-process exits returned request failures instead of crashing the service.
+* Waterfall turn view now took full height if available.
 
-  * Fixed large integer preservation in native run ingest payloads.
+* Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
 
-  * Waterfall turn view now took full height if available.
+* Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
 
-  * Organization admins could now disable Engine even when their plan auto-enabled it; their explicit choice persisted across the UI and the backend gates.
+* Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
 
-  * Workspace admins could now override the workspace-default weekly spend cap on a per-evaluator-rule basis from the evaluator side panel; non-admins saw the resolved cap as read-only text.
+* Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
 
-  * Fixed incorrect metadata facet suggestions and improved group stats latency for projects with rich run metadata.
+* Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
 
-  * Alert rules for Run Count, Errors, Latency, and Cost now supported `<`, `<=`, `>`, and `>=` comparison operators (previously the UI only allowed `>=`).
+* Fixed Fleet redirect after deleting the active agent.
 
-  * Fleet `/v1/fleet/auth-agents/{agent_id}/connections` endpoints moved to `/v1/fleet/agents/{agent_id}/connections` with typed responses, request validation, and the standard Fleet error envelope. The old URL returned 404.
+* Removed the Type column from the LangSmith datasets table.
 
-  * Fixed Fleet redirect after deleting the active agent.
+* Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
 
-  * Removed the Type column from the LangSmith datasets table.
+* Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
 
-  * Encrypted/redacted "reasoning" content blocks no longer appeared as empty or garbled cards in the trace messages view. Meaningful extended-thinking content continued to render normally.
+* Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
 
-  * Fleet agent APIs now required `thread_scoped_sandbox` or `agent_scoped_sandbox` for sandbox-backed agents.
+* Fleet uses langchain-fireworks 1.4.2 for Fireworks model calls.
 
-  * Allowed exporting all experiments in a workspace via the new `all_experiments` parameter for bulk exports. Limited to 250 experiments per export, could be increased at request.
+* This enabled a redesign of the run details panel with improved readability and more robust message parsing.
 
-  * Fleet uses langchain-fireworks 1.4.2 for Fireworks model calls.
+* Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
 
-  * This enabled a redesign of the run details panel with improved readability and more robust message parsing.
+* Computer use now had an in-chat callout for eligible general chat users.
 
-  * Fleet/Agent Builder now included Gemini 3.5 Flash as a selectable built-in model.
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
 
-  * Computer use now had an in-chat callout for eligible general chat users.
+* This enabled a new way to leave feedback on a run, directly within the run details panel.
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Added token pricing support for Claude Opus 4.8.
 
-  * This enabled a new way to leave feedback on a run, directly within the run details panel.
+* Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
 
-  * Added token pricing support for Claude Opus 4.8.
+* Org admins could now update an existing API key's role via the service-keys API without rotating the key.
 
-  * Agent Builder now offered Claude Opus 4.8 as a built-in Anthropic model.
+* Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
 
-  * Org admins could now update an existing API key's role via the service-keys API without rotating the key.
+* Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
 
-  * Managed Deep Agents MCP server setup now supported OAuth under the `/v1/deepagents` API namespace.
+* Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
 
-  * Extra Parameters entered for Bedrock Nova 2 (and any other provider requiring camelCase API fields) now preserved their original key casing when the model configuration was saved and reloaded in the Playground.
+* Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
 
-  * Self-hosted OIDC users now got a display name resolved from the `name` / `given_name`+`family_name` id\_token claims.
+* Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
 
-  * Fixed SSRF policy for `playground` service such that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
 
-  * Fixed an LLM gateway data-protection bug that could corrupt Anthropic images or documents when PII redaction was enabled.
+* Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
 
-  * Hid sandbox file explorer controls while allowing explicit sandbox summary downloads.
+* Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
 
-  * Engine now supported an optional monthly LCU spend limit (set by finance, plan, or org admins) that paused new Engine runs once reached.
+* Fleet Default now appeared first in the model picker for eligible plans.
 
-  * Chat-input file uploads in agent builder/fleet now reached the sandbox filesystem at `/tmp/uploads/` when sandboxes were enabled.
+* Fixes the project stats sidebar trace count label and header layout.
 
-  * Fleet Default now appeared first in the model picker for eligible plans.
+* Run rules webhook payloads now included a `trace_url` deep link for each run.
 
-  * Fixes the project stats sidebar trace count label and header layout.
+* Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
 
-  * Run rules webhook payloads now included a `trace_url` deep link for each run.
+* Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
 
-  * Experiment loading progress bars displayed the number of runs completed and evaluated within the experiments table.
+* Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
 
-  * Sandboxes now allowed password-based SSH for non-root users while keeping root SSH login key-only.
+* Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
 
-  * Workspace switcher on the data-plane no-access screen only listed current organization workspaces.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
 
-  * Restored cron execution for enterprise Fleet agents that had been silently failing to fire since early March 2026.
+**Download the Helm chart:** [`langsmith-0.16.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.1/langsmith-0.16.0-rc.1.tgz)
 
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664, CVE-2025-71176 for details.
+## 2026-06-09
+## langsmith-0.15.9
 
-  **Download the Helm chart:** [`langsmith-0.16.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.0-rc.1/langsmith-0.16.0-rc.1.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.7. Refer to the [langsmith-0.15.7](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-7) release notes below.
 
-<Update label="2026-06-09" tags={["self-hosted"]} rss={{ title: "2026-06-09 - self-hosted" }}>
-  ## langsmith-0.15.9
+**Download the Helm chart:** [`langsmith-0.15.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.9/langsmith-0.15.9.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.7. Refer to the [langsmith-0.15.7](#langsmith-0-15-7) release notes below.
+## 2026-06-08
+## langsmith-0.15.8
 
-  **Download the Helm chart:** [`langsmith-0.15.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.9/langsmith-0.15.9.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.7. Refer to the [langsmith-0.15.7](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-7) release notes below.
 
-<Update label="2026-06-08" tags={["self-hosted"]} rss={{ title: "2026-06-08 - self-hosted" }}>
-  ## langsmith-0.15.8
+**Download the Helm chart:** [`langsmith-0.15.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.8/langsmith-0.15.8.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.7. Refer to the [langsmith-0.15.7](#langsmith-0-15-7) release notes below.
+## 2026-06-06
+## langsmith-0.15.7
 
-  **Download the Helm chart:** [`langsmith-0.15.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.8/langsmith-0.15.8.tgz)
-</Update>
+* Added support for API key authentication with Amazon Bedrock in the Playground. Bedrock API keys let you authenticate requests with a bearer token instead of AWS credentials.
+* Fixed the LLM auth proxy for two cases: evaluator batch requests and Bedrock model configurations.
 
-<Update label="2026-06-06" tags={["self-hosted"]} rss={{ title: "2026-06-06 - self-hosted" }}>
-  ## langsmith-0.15.7
+**Download the Helm chart:** [`langsmith-0.15.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.7/langsmith-0.15.7.tgz)
 
-  * Added support for API key authentication with Amazon Bedrock in the Playground. Bedrock API keys let you authenticate requests with a bearer token instead of AWS credentials.
-  * Fixed the LLM auth proxy for two cases: evaluator batch requests and Bedrock model configurations.
+## 2026-06-03
+## langsmith-0.15.6
 
-  **Download the Helm chart:** [`langsmith-0.15.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.7/langsmith-0.15.7.tgz)
-</Update>
+* Fixed a bug in SSO Groups Sync where the group-name separator was ignored and did not behave like SCIM sync.
+* Added structured server logs identifying which workspace group claims resolved and which did not, simplifying SSO Groups Sync diagnosis.
+* Patched dependencies.
 
-<Update label="2026-06-03" tags={["self-hosted"]} rss={{ title: "2026-06-03 - self-hosted" }}>
-  ## langsmith-0.15.6
+**Download the Helm chart:** [`langsmith-0.15.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.6/langsmith-0.15.6.tgz)
 
-  * Fixed a bug in SSO Groups Sync where the group-name separator was ignored and did not behave like SCIM sync.
-  * Added structured server logs identifying which workspace group claims resolved and which did not, simplifying SSO Groups Sync diagnosis.
-  * Patched dependencies.
+## 2026-06-02
+## langsmith-0.15.5
 
-  **Download the Helm chart:** [`langsmith-0.15.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.6/langsmith-0.15.6.tgz)
-</Update>
+* Fixed the SSRF policy for the `playground` service so that it respected `SSRF_ALLOW_K8S_INTERNAL`.
+* Patched dependencies.
+* Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664 for details.
 
-<Update label="2026-06-02" tags={["self-hosted"]} rss={{ title: "2026-06-02 - self-hosted" }}>
-  ## langsmith-0.15.5
+**Download the Helm chart:** [`langsmith-0.15.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.5/langsmith-0.15.5.tgz)
 
-  * Fixed the SSRF policy for the `playground` service so that it respected `SSRF_ALLOW_K8S_INTERNAL`.
-  * Patched dependencies.
-  * Fixed security vulnerabilities. See CVE-2026-45736, CVE-2026-44664 for details.
+## 2026-06-01
+## langsmith-0.15.4
 
-  **Download the Helm chart:** [`langsmith-0.15.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.5/langsmith-0.15.5.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.2. Refer to the [langsmith-0.15.2](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-2) release notes below.
 
-<Update label="2026-06-01" tags={["self-hosted"]} rss={{ title: "2026-06-01 - self-hosted" }}>
-  ## langsmith-0.15.4
+**Download the Helm chart:** [`langsmith-0.15.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.4/langsmith-0.15.4.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.2. Refer to the [langsmith-0.15.2](#langsmith-0-15-2) release notes below.
+## 2026-05-29
+## langsmith-0.15.3
 
-  **Download the Helm chart:** [`langsmith-0.15.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.4/langsmith-0.15.4.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.2. Refer to the [langsmith-0.15.2](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-2) release notes below.
 
-<Update label="2026-05-29" tags={["self-hosted"]} rss={{ title: "2026-05-29 - self-hosted" }}>
-  ## langsmith-0.15.3
+**Download the Helm chart:** [`langsmith-0.15.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.3/langsmith-0.15.3.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.2. Refer to the [langsmith-0.15.2](#langsmith-0-15-2) release notes below.
+## 2026-05-29
+## langsmith-0.15.2
 
-  **Download the Helm chart:** [`langsmith-0.15.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.3/langsmith-0.15.3.tgz)
-</Update>
+* Fixed an OIDC login redirect loop (`ERR_TOO_MANY_REDIRECTS`) for identity providers that use the hybrid flow with a `form_post` callback.
 
-<Update label="2026-05-29" tags={["self-hosted"]} rss={{ title: "2026-05-29 - self-hosted" }}>
-  ## langsmith-0.15.2
+**Download the Helm chart:** [`langsmith-0.15.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.2/langsmith-0.15.2.tgz)
 
-  * Fixed an OIDC login redirect loop (`ERR_TOO_MANY_REDIRECTS`) for identity providers that use the hybrid flow with a `form_post` callback.
+## 2026-05-29
+## langsmith-0.15.1
 
-  **Download the Helm chart:** [`langsmith-0.15.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.2/langsmith-0.15.2.tgz)
-</Update>
+* Fixed a bug where the blob storage banner incorrectly flashed on page load.
+* Fixed an issue in self-hosted OIDC (v15) where the SSO Groups Sync silently no-op'ed during login.
 
-<Update label="2026-05-29" tags={["self-hosted"]} rss={{ title: "2026-05-29 - self-hosted" }}>
-  ## langsmith-0.15.1
+**Download the Helm chart:** [`langsmith-0.15.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.1/langsmith-0.15.1.tgz)
 
-  * Fixed a bug where the blob storage banner incorrectly flashed on page load.
-  * Fixed an issue in self-hosted OIDC (v15) where the SSO Groups Sync silently no-op'ed during login.
+## 2026-05-26
+## langsmith-0.15.0
 
-  **Download the Helm chart:** [`langsmith-0.15.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.1/langsmith-0.15.1.tgz)
-</Update>
+LangSmith Self-Hosted v0.15 brings **reusable evaluators and a library of 30+ evaluator templates** that centralize evaluation across your workspace, ships **per-example assertions** alongside reference outputs in annotation queues, lets you download **Insights reports** as PDFs for offline analysis, and introduces the **Context Hub** for version-controlled, environment-aware management of agent instructions and tools. Several breaking changes are worth reviewing before upgrade: the `agent-bootstrap` script is deprecated, the Agent Builder rename to [Fleet](https://docs.langchain.com/langsmith/fleet) may require workload-identity service-account updates, and the `projects:update-retention` permission splits into `projects:increase-trace-tier` and `projects:decrease-trace-tier`.
 
-<Update label="2026-05-26" tags={["self-hosted"]}>
-  ## langsmith-0.15.0
+Follow the [upgrade instructions](https://docs.langchain.com/langsmith/self-host-upgrades) to get access to everything. To book time with LangChain support for your upgrade, contact the team via the [Support Portal](https://support.langchain.com).
 
-  LangSmith Self-Hosted v0.15 brings **reusable evaluators and a library of 30+ evaluator templates** that centralize evaluation across your workspace, ships **per-example assertions** alongside reference outputs in annotation queues, lets you download **Insights reports** as PDFs for offline analysis, and introduces the **Context Hub** for version-controlled, environment-aware management of agent instructions and tools. Several breaking changes are worth reviewing before upgrade: the `agent-bootstrap` script is deprecated, the Agent Builder rename to [Fleet](/langsmith/fleet) may require workload-identity service-account updates, and the `projects:update-retention` permission splits into `projects:increase-trace-tier` and `projects:decrease-trace-tier`.
+### Breaking changes
 
-  Follow the [upgrade instructions](/langsmith/self-host-upgrades) to get access to everything. To book time with LangChain support for your upgrade, contact the team via the [Support Portal](https://support.langchain.com).
+* Deprecated the `agent-bootstrap` script. LangSmith agents are now standalone services that deploy with the Helm chart instead of through the LangSmith Deployment control plane. If you were using [Fleet](https://docs.langchain.com/langsmith/fleet) through this script previously, this may require a migration. See the [Fleet rename and migration guide](https://kb.langchain.com/articles/9482666900-upgrading-self-hosted-langsmith-to-v0-15-fleet-rename-and-migration-guide) or contact support to walk through migration.
+* Renamed Agent Builder to [Fleet](https://docs.langchain.com/langsmith/fleet). If you use workload identity, you may need to update any service accounts.
+* `POST /workspaces/current/members` now requires `role_id` for [RBAC](https://docs.langchain.com/langsmith/rbac)-enabled organizations. Requests without it return `400` instead of defaulting to `WORKSPACE_ADMIN`.
+* Deprecated the `USAGE_EXPORT_ADMIN_EMAILS` environment variable. Use `INSTANCE_ADMIN_EMAILS` instead.
+* Replaced the `projects:update-retention` permission with `projects:increase-trace-tier` and `projects:decrease-trace-tier` for separate control over raising and lowering trace retention. Permissions were backfilled to existing roles, so no changes are needed for existing roles. New roles should use the new permissions. See [RBAC permissions](https://docs.langchain.com/langsmith/rbac).
+* Added a `fleet-admin:read` permission that gates the new Fleet Admin section. Admins of existing tenants need to grant it. Permissions were backfilled to existing roles, so no changes are needed for existing roles. New roles should use the new permissions. See [RBAC permissions](https://docs.langchain.com/langsmith/rbac).
 
-  ### Breaking changes
+### Infrastructure changes
 
-  * Deprecated the `agent-bootstrap` script. LangSmith agents are now standalone services that deploy with the Helm chart instead of through the LangSmith Deployment control plane. If you were using [Fleet](/langsmith/fleet) through this script previously, this may require a migration. See the [Fleet rename and migration guide](https://kb.langchain.com/articles/9482666900-upgrading-self-hosted-langsmith-to-v0-15-fleet-rename-and-migration-guide) or contact support to walk through migration.
-  * Renamed Agent Builder to [Fleet](/langsmith/fleet). If you use workload identity, you may need to update any service accounts.
-  * `POST /workspaces/current/members` now requires `role_id` for [RBAC](/langsmith/rbac)-enabled organizations. Requests without it return `400` instead of defaulting to `WORKSPACE_ADMIN`.
-  * Deprecated the `USAGE_EXPORT_ADMIN_EMAILS` environment variable. Use `INSTANCE_ADMIN_EMAILS` instead.
-  * Replaced the `projects:update-retention` permission with `projects:increase-trace-tier` and `projects:decrease-trace-tier` for separate control over raising and lowering trace retention. Permissions were backfilled to existing roles, so no changes are needed for existing roles. New roles should use the new permissions. See [RBAC permissions](/langsmith/rbac).
-  * Added a `fleet-admin:read` permission that gates the new Fleet Admin section. Admins of existing tenants need to grant it. Permissions were backfilled to existing roles, so no changes are needed for existing roles. New roles should use the new permissions. See [RBAC permissions](/langsmith/rbac).
+* **Section renames from the Fleet rename**—several sections were renamed as part of the Agent Builder to [Fleet](https://docs.langchain.com/langsmith/fleet) rename (see [Breaking changes](https://docs.langchain.com/langsmith/self-hosted-changelog#breaking-changes)). You may need to update service accounts or shift values in your configuration.
+* **LLM Auth Proxy without a public ingress**—if the LLM Auth Proxy is deployed without a public ingress and is only reachable through internal Kubernetes networking, you must add `SSRF_ALLOW_K8S_INTERNAL` to all services that make LLM calls and `SSRF_ALLOW_PRIVATE_IPS_PLAYGROUND` to the `playground` service. Without these settings, the built-in SSRF protection blocks requests to private IPs. See [Deploy without a public ingress](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#deploy-without-a-public-ingress) for full configuration details.
 
-  ### Infrastructure changes
+### New features
 
-  * **Section renames from the Fleet rename**—several sections were renamed as part of the Agent Builder to [Fleet](/langsmith/fleet) rename (see [Breaking changes](#breaking-changes)). You may need to update service accounts or shift values in your configuration.
-  * **LLM Auth Proxy without a public ingress**—if the LLM Auth Proxy is deployed without a public ingress and is only reachable through internal Kubernetes networking, you must add `SSRF_ALLOW_K8S_INTERNAL` to all services that make LLM calls and `SSRF_ALLOW_PRIVATE_IPS_PLAYGROUND` to the `playground` service. Without these settings, the built-in SSRF protection blocks requests to private IPs. See [Deploy without a public ingress](/langsmith/llm-auth-proxy-self-hosted#deploy-without-a-public-ingress) for full configuration details.
+* **Context Hub**—version-controlled, environment-aware management of agent instructions and tools. Create and manage versioned [skill and agent repos](https://docs.langchain.com/langsmith/context-engineering-concepts), promote commits to `staging` or `production` environments, and resolve context by environment tag at runtime. See [Use the Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) and [Manage contexts with the SDK](https://docs.langchain.com/langsmith/manage-contexts-sdk) to get started.
+* **Reusable evaluators and evaluator templates**—a new [Evaluators](https://docs.langchain.com/langsmith/evaluators) tab centralizes every evaluator in your workspace, with 30+ templates covering safety, response quality, trajectory, user behavior, and multimodal evaluation. Attach an existing evaluator to a new tracing project in seconds without maintaining duplicate copies.
+* **Per-example assertions**—write [assertions](https://docs.langchain.com/langsmith/assertions) instead of or alongside reference outputs when editing examples in an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues).
+* **Downloadable Insights reports**—download an [Insights](https://docs.langchain.com/langsmith/insights) report as a PDF from the report details page for offline analysis.
 
-  ### New features
+### Admin changes
 
-  * **Context Hub**—version-controlled, environment-aware management of agent instructions and tools. Create and manage versioned [skill and agent repos](/langsmith/context-engineering-concepts), promote commits to `staging` or `production` environments, and resolve context by environment tag at runtime. See [Use the Context Hub](/langsmith/use-the-context-hub) and [Manage contexts with the SDK](/langsmith/manage-contexts-sdk) to get started.
-  * **Reusable evaluators and evaluator templates**—a new [Evaluators](/langsmith/evaluators) tab centralizes every evaluator in your workspace, with 30+ templates covering safety, response quality, trajectory, user behavior, and multimodal evaluation. Attach an existing evaluator to a new tracing project in seconds without maintaining duplicate copies.
-  * **Per-example assertions**—write [assertions](/langsmith/assertions) instead of or alongside reference outputs when editing examples in an [annotation queue](/langsmith/annotation-queues).
-  * **Downloadable Insights reports**—download an [Insights](/langsmith/insights) report as a PDF from the report details page for offline analysis.
+* **Expanded ABAC coverage**—[ABAC](https://docs.langchain.com/langsmith/abac) now applies to `runs:create` on `POST /runs` and `POST /runs/batch`, plus the remaining `/sessions/{session_id}/` endpoints.
+* **SCIM email-case-mismatch fix**—identity providers that send a different email casing are no longer rejected as email-change attempts.
 
-  ### Admin changes
+**Download the Helm chart:** [`langsmith-0.15.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0/langsmith-0.15.0.tgz)
 
-  * **Expanded ABAC coverage**—[ABAC](/langsmith/abac) now applies to `runs:create` on `POST /runs` and `POST /runs/batch`, plus the remaining `/sessions/{session_id}/` endpoints.
-  * **SCIM email-case-mismatch fix**—identity providers that send a different email casing are no longer rejected as email-change attempts.
+## 2026-05-26
+## langsmith-0.15.0-rc.17
 
-  **Download the Helm chart:** [`langsmith-0.15.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0/langsmith-0.15.0.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-14) release notes below.
 
-<Update label="2026-05-26" tags={["self-hosted"]} rss={{ title: "2026-05-26 - self-hosted" }}>
-  ## langsmith-0.15.0-rc.17
+**Download the Helm chart:** [`langsmith-0.15.0-rc.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.17/langsmith-0.15.0-rc.17.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](#langsmith-0-15-0-rc-14) release notes below.
+## 2026-05-21
+## langsmith-0.15.0-rc.16
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.17/langsmith-0.15.0-rc.17.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-14) release notes below.
 
-<Update label="2026-05-21" tags={["self-hosted"]} rss={{ title: "2026-05-21 - self-hosted" }}>
-  ## langsmith-0.15.0-rc.16
+**Download the Helm chart:** [`langsmith-0.15.0-rc.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.16/langsmith-0.15.0-rc.16.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](#langsmith-0-15-0-rc-14) release notes below.
+## 2026-05-20
+## langsmith-0.15.0-rc.15
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.16/langsmith-0.15.0-rc.16.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-14) release notes below.
 
-<Update label="2026-05-20" tags={["self-hosted"]} rss={{ title: "2026-05-20 - self-hosted" }}>
-  ## langsmith-0.15.0-rc.15
+**Download the Helm chart:** [`langsmith-0.15.0-rc.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.15/langsmith-0.15.0-rc.15.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.14. Refer to the [langsmith-0.15.0-rc.14](#langsmith-0-15-0-rc-14) release notes below.
+## 2026-05-20
+## langsmith-0.8.31
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.15/langsmith-0.15.0-rc.15.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.8.30. Refer to the [langsmith-0.8.30](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-8-30) release notes below.
 
-<Update label="2026-05-20" tags={["self-hosted"]} rss={{ title: "2026-05-20 - self-hosted" }}>
-  ## langsmith-0.8.31
+**Download the Helm chart:** [`langsmith-0.8.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.8.31/langsmith-0.8.31.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.8.30. Refer to the [langsmith-0.8.30](#langsmith-0-8-30) release notes below.
+## 2026-05-18
+## langsmith-0.15.0-rc.14
 
-  **Download the Helm chart:** [`langsmith-0.8.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.8.31/langsmith-0.8.31.tgz)
-</Update>
+* Fixed the truncation issue of the 'Enabled' column in the automations table.
+* Improved handling of click events in the UI with the polly button icon fix.
+* Implemented multiple UI enhancements such as the addition of solid icons, icon xs variants, and updated details view headers.
+* Improved performance by removing unused join operations from session stats and optimizing query handling.
+* Added new event hooks for model invocation and updated the fleet-admin permissions to include read access.
+* Expanded model support with new tools for GLM5 and Minimax 2.5.
+* Added new features to the evaluator UI, including filters by created\_by, feedback key, and resource.
+* Recognized external type definitions in evaluators, enabling more sophisticated feedback and sorting options.
+* Introduced loading improvements for better data handling in various Fleet UI components.
+* Enhanced fleet management with tool usage breakdowns, spend limit enforcement, and improved usage dashboards.
+* Added support for auditing logs across Go write endpoints and audit logging for sensitive data access.
+* Implemented new security features such as SSRF protection, transparent HTTP/HTTPS proxying, and enhanced authorization for self-hosted environments.
+* Supported service identification with GitHub OAuth installation synchronization and CRUD operations.
+* Introduced mobile-friendly login and a Progressive Web App (PWA) capability.
+* Added the capability to invite users to organizations via a new endpoint.
+* Enhanced message processing with SubAgentDetails, facilitating better context capture and management.
 
-<Update label="2026-05-18" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.14
+**Download the Helm chart:** [`langsmith-0.15.0-rc.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.14/langsmith-0.15.0-rc.14.tgz)
 
-  * Fixed the truncation issue of the 'Enabled' column in the automations table.
-  * Improved handling of click events in the UI with the polly button icon fix.
-  * Implemented multiple UI enhancements such as the addition of solid icons, icon xs variants, and updated details view headers.
-  * Improved performance by removing unused join operations from session stats and optimizing query handling.
-  * Added new event hooks for model invocation and updated the fleet-admin permissions to include read access.
-  * Expanded model support with new tools for GLM5 and Minimax 2.5.
-  * Added new features to the evaluator UI, including filters by created\_by, feedback key, and resource.
-  * Recognized external type definitions in evaluators, enabling more sophisticated feedback and sorting options.
-  * Introduced loading improvements for better data handling in various Fleet UI components.
-  * Enhanced fleet management with tool usage breakdowns, spend limit enforcement, and improved usage dashboards.
-  * Added support for auditing logs across Go write endpoints and audit logging for sensitive data access.
-  * Implemented new security features such as SSRF protection, transparent HTTP/HTTPS proxying, and enhanced authorization for self-hosted environments.
-  * Supported service identification with GitHub OAuth installation synchronization and CRUD operations.
-  * Introduced mobile-friendly login and a Progressive Web App (PWA) capability.
-  * Added the capability to invite users to organizations via a new endpoint.
-  * Enhanced message processing with SubAgentDetails, facilitating better context capture and management.
+## 2026-05-14
+## langsmith-0.15.0-rc.13
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.14/langsmith-0.15.0-rc.14.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.12. Refer to the [langsmith-0.15.0-rc.12](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-12) release notes below.
 
-<Update label="2026-05-14" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.13
+**Download the Helm chart:** [`langsmith-0.15.0-rc.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.13/langsmith-0.15.0-rc.13.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.12. Refer to the [langsmith-0.15.0-rc.12](#langsmith-0-15-0-rc-12) release notes below.
+## 2026-05-14
+## langsmith-0.14.6
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.13/langsmith-0.15.0-rc.13.tgz)
-</Update>
+* Fixed storage issue by backporting S3 CopyObject KMS headers to v14, improving data transfer security for S3 integrations.
+* Fixed security vulnerabilities: CVE-2026-40192, CVE-2026-40347, CVE-2026-41205, CVE-2026-42561
 
-<Update label="2026-05-14" tags={["self-hosted"]}>
-  ## langsmith-0.14.6
+**Download the Helm chart:** [`langsmith-0.14.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.6/langsmith-0.14.6.tgz)
 
-  * Fixed storage issue by backporting S3 CopyObject KMS headers to v14, improving data transfer security for S3 integrations.
-  * Fixed security vulnerabilities: CVE-2026-40192, CVE-2026-40347, CVE-2026-41205, CVE-2026-42561
+## 2026-05-13
+## langsmith-0.15.0-rc.12
 
-  **Download the Helm chart:** [`langsmith-0.14.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.6/langsmith-0.14.6.tgz)
-</Update>
+* Fixed the truncation issue in the 'Enabled' column of the automations table to improve UI usability.
+* Improved the evaluator details page and added sorting capabilities for created and updated timestamps.
+* Enhanced evaluator tables by adding a type filter and click-to-filter functionality for type, feedback key, and resource cells.
+* Added a new evaluator reuse feature to streamline the use of existing evaluators.
+* Improved frontend evaluators to include feedback key and resource filters, enhancing usability.
+* Added support for tracing tool usage and displaying agent names in the usage dashboard, enhancing performance insights.
+* Enhanced mobile friendliness and PWA support for login interfaces.
+* Improved performance by optimizing session synchronization and indexing strategies.
+* Added mTLS support for ClickHouse migrations.
+* Added parallel tool calls rendering in the messages view for better visual representation of concurrent processes.
+* Introduced a new endpoint to update licenses for self-hosted instances via JWT.
+* Added a new UI section for displaying evaluator actions required when creating an issue board.
+* Implemented mobile-friendly login and an installable PWA to enhance accessibility for mobile users.
+* Enhanced DataGrid components for better UI performance in tracing views.
 
-<Update label="2026-05-13" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.12
+These updates focus on improving user experience, performance, security, and feature set for self-hosted deployments.
 
-  * Fixed the truncation issue in the 'Enabled' column of the automations table to improve UI usability.
-  * Improved the evaluator details page and added sorting capabilities for created and updated timestamps.
-  * Enhanced evaluator tables by adding a type filter and click-to-filter functionality for type, feedback key, and resource cells.
-  * Added a new evaluator reuse feature to streamline the use of existing evaluators.
-  * Improved frontend evaluators to include feedback key and resource filters, enhancing usability.
-  * Added support for tracing tool usage and displaying agent names in the usage dashboard, enhancing performance insights.
-  * Enhanced mobile friendliness and PWA support for login interfaces.
-  * Improved performance by optimizing session synchronization and indexing strategies.
-  * Added mTLS support for ClickHouse migrations.
-  * Added parallel tool calls rendering in the messages view for better visual representation of concurrent processes.
-  * Introduced a new endpoint to update licenses for self-hosted instances via JWT.
-  * Added a new UI section for displaying evaluator actions required when creating an issue board.
-  * Implemented mobile-friendly login and an installable PWA to enhance accessibility for mobile users.
-  * Enhanced DataGrid components for better UI performance in tracing views.
+**Download the Helm chart:** [`langsmith-0.15.0-rc.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.12/langsmith-0.15.0-rc.12.tgz)
 
-  These updates focus on improving user experience, performance, security, and feature set for self-hosted deployments.
+## 2026-05-11
+## langsmith-0.15.0-rc.10
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.12/langsmith-0.15.0-rc.12.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-11" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.10
+**Download the Helm chart:** [`langsmith-0.15.0-rc.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.10/langsmith-0.15.0-rc.10.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-09
+## langsmith-0.15.0-rc.9
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.10/langsmith-0.15.0-rc.10.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-09" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.9
+**Download the Helm chart:** [`langsmith-0.15.0-rc.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.9/langsmith-0.15.0-rc.9.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-08
+## langsmith-0.15.0-rc.8
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.9/langsmith-0.15.0-rc.9.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-08" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.8
+**Download the Helm chart:** [`langsmith-0.15.0-rc.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.8/langsmith-0.15.0-rc.8.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-08
+## langsmith-0.15.0-rc.7
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.8.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.8/langsmith-0.15.0-rc.8.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-08" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.7
+**Download the Helm chart:** [`langsmith-0.15.0-rc.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.7/langsmith-0.15.0-rc.7.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-06
+## langsmith-0.15.0-rc.6
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.7/langsmith-0.15.0-rc.7.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-06" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.6
+**Download the Helm chart:** [`langsmith-0.15.0-rc.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.6/langsmith-0.15.0-rc.6.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-05
+## langsmith-0.15.0-rc.5
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.6/langsmith-0.15.0-rc.6.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-4) release notes below.
 
-<Update label="2026-05-05" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.5
+**Download the Helm chart:** [`langsmith-0.15.0-rc.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.5/langsmith-0.15.0-rc.5.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.4. Refer to the [langsmith-0.15.0-rc.4](#langsmith-0-15-0-rc-4) release notes below.
+## 2026-05-04
+## langsmith-0.15.0-rc.4
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.5/langsmith-0.15.0-rc.5.tgz)
-</Update>
+* Enhanced the Messages View with auto-scroll navigation, parallel tool calls rendering, and improved styling
+* Improved Messages View performance with better memory utilization and processing times
+* Added thread ID display in run details with copy-to-clipboard functionality
+* Added the ability to open threads in new tabs
+* Fixed dark mode gradient styling
+* Fixed OAuth refresh race condition in Fleet
+* Fixed run rules not marking matched runs as completed in Redis at max attempts
+* Fixed dataset evaluators incorrectly created with group\_by thread\_id
+* Added new run rules logic for workspaces with no existing rules
+* Removed self-hosted gate for Fleet usage page
+* Hidden minimal reasoning effort option for GPT-5.x models in the playground
 
-<Update label="2026-05-04" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.4
+**Download the Helm chart:** [`langsmith-0.15.0-rc.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.4/langsmith-0.15.0-rc.4.tgz)
 
-  * Enhanced the Messages View with auto-scroll navigation, parallel tool calls rendering, and improved styling
-  * Improved Messages View performance with better memory utilization and processing times
-  * Added thread ID display in run details with copy-to-clipboard functionality
-  * Added the ability to open threads in new tabs
-  * Fixed dark mode gradient styling
-  * Fixed OAuth refresh race condition in Fleet
-  * Fixed run rules not marking matched runs as completed in Redis at max attempts
-  * Fixed dataset evaluators incorrectly created with group\_by thread\_id
-  * Added new run rules logic for workspaces with no existing rules
-  * Removed self-hosted gate for Fleet usage page
-  * Hidden minimal reasoning effort option for GPT-5.x models in the playground
+## 2026-05-01
+## langsmith-0.14.5
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.4/langsmith-0.15.0-rc.4.tgz)
-</Update>
+* Fixed the agent-builder failure to start on v14 self-hosted 0.14.6 due to the `langgraph-api 0.8.3` base image bundling `LangSmith 0.7.37`, which removed `SandboxTemplate`, by pinning `LangSmith<0.7.34` to downgrade to a compatible version.
 
-<Update label="2026-05-01" tags={["self-hosted"]}>
-  ## langsmith-0.14.5
+**Download the Helm chart:** [`langsmith-0.14.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.5/langsmith-0.14.5.tgz)
 
-  * Fixed the agent-builder failure to start on v14 self-hosted 0.14.6 due to the `langgraph-api 0.8.3` base image bundling `LangSmith 0.7.37`, which removed `SandboxTemplate`, by pinning `LangSmith<0.7.34` to downgrade to a compatible version.
+## 2026-04-30
+## langsmith-0.15.0-rc.3
 
-  **Download the Helm chart:** [`langsmith-0.14.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.5/langsmith-0.14.5.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.1. Refer to the [langsmith-0.15.0-rc.1](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-1) release notes below.
 
-<Update label="2026-04-30" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.3
+**Download the Helm chart:** [`langsmith-0.15.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.3/langsmith-0.15.0-rc.3.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.1. Refer to the [langsmith-0.15.0-rc.1](#langsmith-0-15-0-rc-1) release notes below.
+## 2026-04-29
+## langsmith-0.14.3
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.3/langsmith-0.15.0-rc.3.tgz)
-</Update>
+* Fixed silent corruption of `traceId`, `spanId`, and `parentSpanId` for OTLP/JSON (`Content-Type: application/json`) trace ingestion.
+* Reduced Microsoft Graph permission requirements for Microsoft 365 docs and Teams private-message tools.
 
-<Update label="2026-04-29" tags={["self-hosted"]}>
-  ## langsmith-0.14.3
+**Download the Helm chart:** [`langsmith-0.14.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.3/langsmith-0.14.3.tgz)
 
-  * Fixed silent corruption of `traceId`, `spanId`, and `parentSpanId` for OTLP/JSON (`Content-Type: application/json`) trace ingestion.
-  * Reduced Microsoft Graph permission requirements for Microsoft 365 docs and Teams private-message tools.
+## 2026-04-24
+## langsmith-0.15.0-rc.2
 
-  **Download the Helm chart:** [`langsmith-0.14.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.3/langsmith-0.14.3.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.15.0-rc.1. Refer to the [langsmith-0.15.0-rc.1](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-15-0-rc-1) release notes below.
 
-<Update label="2026-04-24" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.2
+**Download the Helm chart:** [`langsmith-0.15.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.2/langsmith-0.15.0-rc.2.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.15.0-rc.1. Refer to the [langsmith-0.15.0-rc.1](#langsmith-0-15-0-rc-1) release notes below.
+## 2026-04-24
+## langsmith-0.15.0-rc.1
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.2/langsmith-0.15.0-rc.2.tgz)
-</Update>
+* Fixed truncation issue by widening the 'Enabled' column in the automations table for better header visibility.
+* Updated details view header for improved user experience.
+* Improved performance by removing dead run\_stats\_facets join from session stats queries.
+* Fixed MCP server filter dropdown to make it scrollable.
+* Added 'user cost' table and toggle for agent/user view in the fleet.
+* Enhanced security by adding URL allowlist enforcement for JWT injection.
+* Added ability to sort evaluators by creation and update time in the backend.
+* Added 'Feedback Key' filtering in the evaluators table for more precise searches.
+* Showed back button on the full-page trace view to enhance navigation.
+* Fixed audit-logs and various performance improvements for lower latency.
+* Enhanced UI by showing 'Feedback Key' in evaluator column dropdown.
+* Added session insights, views, metadata, and dashboard endpoints to improve data accessibility.
+* Fixed file creation issues to prevent active interrupt state clearance.
+* Provided async support for agents in the fleet to improve reliability.
+* Fixed issues with agent cloning that previously caused flow issues.
+* Added spend limit enforcement and the ability to track usage, enhancing cost management features.
+* Made more efficient use of resources with new skill memory-store mirror updates in fleets.
+* Improved evaluator reuse UX for users with better management of evaluator actions on issue generation.
+* Enhanced security features by preventing sub-agents from triggering unauthorized actions.
+* Optimized memory and resource management in the agent builder chat.
+* Improved evaluator trace detail navigation by preserving search model in URLs.
+* Upgraded per-environment favicon colors for clarity in staging and dev environments.
+* Performance improvements in session sync reducing resource usage.
+* Added default agent name support in usage dashboard for clarity in report generation.
+* Made UI improvements to evaluator details for a smoother experience.
+* Enabled auto-wake and auto-stop for Sandbox environments to save resources.
+* Integrated tracing tool functionality in issue creation for better context and reliability.
+* Added "create agent manually" button to navigation for easier agent management.
+* Enhanced memory management tools UI for better approval process visualization.
+* Fixed tool usage table and improved its performance for a better UX.
+* Enabled auditing for sensitive data access endpoints for enhanced security compliance.
+* Improved tracing project name display in usage dashboard for better project clarity.
+* Introduced keyboard shortcuts in the editor page for rapid interaction.
+* Set default MSP cron schedule as standard to reduce manual setup effort.
+* Added integration user flow with prompt messages for smooth operation and understanding.
+* Fixed default tracing project selection to Fleet to prevent inconsistencies.
 
-<Update label="2026-04-24" tags={["self-hosted"]}>
-  ## langsmith-0.15.0-rc.1
+**Download the Helm chart:** [`langsmith-0.15.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.1/langsmith-0.15.0-rc.1.tgz)
 
-  * Fixed truncation issue by widening the 'Enabled' column in the automations table for better header visibility.
-  * Updated details view header for improved user experience.
-  * Improved performance by removing dead run\_stats\_facets join from session stats queries.
-  * Fixed MCP server filter dropdown to make it scrollable.
-  * Added 'user cost' table and toggle for agent/user view in the fleet.
-  * Enhanced security by adding URL allowlist enforcement for JWT injection.
-  * Added ability to sort evaluators by creation and update time in the backend.
-  * Added 'Feedback Key' filtering in the evaluators table for more precise searches.
-  * Showed back button on the full-page trace view to enhance navigation.
-  * Fixed audit-logs and various performance improvements for lower latency.
-  * Enhanced UI by showing 'Feedback Key' in evaluator column dropdown.
-  * Added session insights, views, metadata, and dashboard endpoints to improve data accessibility.
-  * Fixed file creation issues to prevent active interrupt state clearance.
-  * Provided async support for agents in the fleet to improve reliability.
-  * Fixed issues with agent cloning that previously caused flow issues.
-  * Added spend limit enforcement and the ability to track usage, enhancing cost management features.
-  * Made more efficient use of resources with new skill memory-store mirror updates in fleets.
-  * Improved evaluator reuse UX for users with better management of evaluator actions on issue generation.
-  * Enhanced security features by preventing sub-agents from triggering unauthorized actions.
-  * Optimized memory and resource management in the agent builder chat.
-  * Improved evaluator trace detail navigation by preserving search model in URLs.
-  * Upgraded per-environment favicon colors for clarity in staging and dev environments.
-  * Performance improvements in session sync reducing resource usage.
-  * Added default agent name support in usage dashboard for clarity in report generation.
-  * Made UI improvements to evaluator details for a smoother experience.
-  * Enabled auto-wake and auto-stop for Sandbox environments to save resources.
-  * Integrated tracing tool functionality in issue creation for better context and reliability.
-  * Added "create agent manually" button to navigation for easier agent management.
-  * Enhanced memory management tools UI for better approval process visualization.
-  * Fixed tool usage table and improved its performance for a better UX.
-  * Enabled auditing for sensitive data access endpoints for enhanced security compliance.
-  * Improved tracing project name display in usage dashboard for better project clarity.
-  * Introduced keyboard shortcuts in the editor page for rapid interaction.
-  * Set default MSP cron schedule as standard to reduce manual setup effort.
-  * Added integration user flow with prompt messages for smooth operation and understanding.
-  * Fixed default tracing project selection to Fleet to prevent inconsistencies.
+## 2026-04-20
+## langsmith-0.14.2
 
-  **Download the Helm chart:** [`langsmith-0.15.0-rc.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.15.0-rc.1/langsmith-0.15.0-rc.1.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.14.0. Refer to the [langsmith-0.14.0](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-14-0) release notes below.
 
-<Update label="2026-04-20" tags={["self-hosted"]}>
-  ## langsmith-0.14.2
+**Download the Helm chart:** [`langsmith-0.14.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.2/langsmith-0.14.2.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.14.0. Refer to the [langsmith-0.14.0](#langsmith-0-14-0) release notes below.
+## 2026-04-20
+## langsmith-0.14.1
 
-  **Download the Helm chart:** [`langsmith-0.14.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.2/langsmith-0.14.2.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.14.0. Refer to the [langsmith-0.14.0](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-14-0) release notes below.
 
-<Update label="2026-04-20" tags={["self-hosted"]}>
-  ## langsmith-0.14.1
+**Download the Helm chart:** [`langsmith-0.14.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.1/langsmith-0.14.1.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.14.0. Refer to the [langsmith-0.14.0](#langsmith-0-14-0) release notes below.
+## 2026-04-20
+## langsmith-0.14.0
 
-  **Download the Helm chart:** [`langsmith-0.14.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.1/langsmith-0.14.1.tgz)
-</Update>
+LangSmith Self-Hosted v0.14 brings **Chat** (our in-product chat for traces and runs) to self-hosted, takes **ABAC and audit logs** GA (on by default), and enables the **LLM Auth Proxy** by default with URL allowlisting and richer JWT claims. Admins get **unified model configurations** shared across Agent Builder, Chat, Insights, Playground, and Evaluators, and fine-grained **Prompt Owners** for locking down who can promote or delete individual prompts. Evaluators gain **multi-modal support** and workspaces can now set **cost alerts** on tracing projects. Playground model support expands (Anthropic via Vertex AI, custom Azure models, Bedrock inference profiles, Gemini 3.1 Pro, GPT-5.3 / 5.4, Baseten + GLM-5), and new agent tools and triggers land for Google Sheets & Docs, Outlook, Teams, and Salesforce SOQL. On the infrastructure side, v0.14 adds **GCS Workload Identity** support for blob storage, **Valkey** as a drop-in Redis replacement, and a pre-upgrade migration hook for safer rollouts.
 
-<Update label="2026-04-20" tags={["self-hosted"]}>
-  ## langsmith-0.14.0
+Follow the [upgrade instructions](https://docs.langchain.com/langsmith/self-host-upgrades) to get access to everything. To book time with LangChain support for your upgrade, contact the team via the [Support Portal](https://support.langchain.com).
 
-  LangSmith Self-Hosted v0.14 brings **Chat** (our in-product chat for traces and runs) to self-hosted, takes **ABAC and audit logs** GA (on by default), and enables the **LLM Auth Proxy** by default with URL allowlisting and richer JWT claims. Admins get **unified model configurations** shared across Agent Builder, Chat, Insights, Playground, and Evaluators, and fine-grained **Prompt Owners** for locking down who can promote or delete individual prompts. Evaluators gain **multi-modal support** and workspaces can now set **cost alerts** on tracing projects. Playground model support expands (Anthropic via Vertex AI, custom Azure models, Bedrock inference profiles, Gemini 3.1 Pro, GPT-5.3 / 5.4, Baseten + GLM-5), and new agent tools and triggers land for Google Sheets & Docs, Outlook, Teams, and Salesforce SOQL. On the infrastructure side, v0.14 adds **GCS Workload Identity** support for blob storage, **Valkey** as a drop-in Redis replacement, and a pre-upgrade migration hook for safer rollouts.
+### Breaking changes
 
-  Follow the [upgrade instructions](/langsmith/self-host-upgrades) to get access to everything. To book time with LangChain support for your upgrade, contact the team via the [Support Portal](https://support.langchain.com).
+* Fixed an issue where `host-backend` wasn't picking up `commonEnv`. This may result in duplicate environment variables that need to be removed.
 
-  ### Breaking changes
+### Infrastructure changes
 
-  * Fixed an issue where `host-backend` wasn't picking up `commonEnv`. This may result in duplicate environment variables that need to be removed.
+* Migrations now run as a `Pre-upgrade` hook prior to image versions rolling out. This will prevent issues when migrations fail.
+* **GCS Workload Identity support**—authenticate to GCS blob storage using cloud-native workload identity instead of long-lived credentials.
+* **Valkey support**—Valkey can now be used as a drop-in replacement for Redis.
 
-  ### Infrastructure changes
+### New features
 
-  * Migrations now run as a `Pre-upgrade` hook prior to image versions rolling out. This will prevent issues when migrations fail.
-  * **GCS Workload Identity support**—authenticate to GCS blob storage using cloud-native workload identity instead of long-lived credentials.
-  * **Valkey support**—Valkey can now be used as a drop-in replacement for Redis.
+* **Chat on self-hosted**—in-product Chat for understanding traces, runs, and evaluator feedback is now available in self-hosted.
+* **ABAC and audit logs GA**—Attribute-Based Access Control and audit logs are enabled by default for self-hosted deployments.
+* **LLM Auth Proxy on by default**—URL allowlist prevents credential forwarding to unintended hosts, and JWTs now carry `organization_name` and `workspace_name` claims.
+* **Unified model configurations**—Agent Builder, Chat, Insights, Playground, and Evaluators now share a single set of model configs, with workspace-admin controls over model access across all AI features.
+* **Prompt Owners**—designate a specific group of users with fine-grained permission to promote or delete individual prompts, without granting broader org access.
+* **Multi-modal evaluators**—pass attachments and base64 content (images, audio, PDFs) directly into evaluators.
+* **Cost alerts on tracing projects**—set alerts on tracing project-level costs alongside existing LangSmith alerts.
+* **Expanded playground model support**—Anthropic via Vertex AI, custom Azure models, Bedrock inference profiles and configurable base URLs, Gemini 3.1 Pro, GPT-5.3 / 5.4 (now default), and Baseten + GLM-5.
+* **New agent tools and triggers**—Google Sheets and Docs, Outlook mail and calendar, Microsoft Teams, Salesforce SOQL, Gmail OAuth v2 with refresh tokens, and an Outlook Trigger.
+* **Insights enhancements**—scheduled Insights reports, categories trending over time, full feedback comments in analysis, and a lower minimum job interval (6h → 1h).
+* **Annotation and review upgrades**—required reviewers per queue, pairwise queues that honor `reviewer_access_mode`, an "Assigned to me" filter, per-annotator CSV export, and bulk table actions.
+* **Prompt Hub and tool registry**—commit tag search, model select in template creation, a workspace-scoped tool registry API, and a private registry UI.
+* **Evaluator workflow improvements**—prebuilt LLM evaluators use strict structured outputs by default, evaluators support tagging and reuse, retries no longer lose scores, and a new API runs playground experiments programmatically.
+* **Custom iframe output renderer**—drag-to-resize HTML chart outputs in experiments and trace views.
+* **Thread and inbox UX**—auto-generated thread titles, redesigned run details in threads, session-level feedback stats, keyboard shortcuts, and filtering out internal helper threads.
 
-  ### New features
+### Admin changes
 
-  * **Chat on self-hosted**—in-product Chat for understanding traces, runs, and evaluator feedback is now available in self-hosted.
-  * **ABAC and audit logs GA**—Attribute-Based Access Control and audit logs are enabled by default for self-hosted deployments.
-  * **LLM Auth Proxy on by default**—URL allowlist prevents credential forwarding to unintended hosts, and JWTs now carry `organization_name` and `workspace_name` claims.
-  * **Unified model configurations**—Agent Builder, Chat, Insights, Playground, and Evaluators now share a single set of model configs, with workspace-admin controls over model access across all AI features.
-  * **Prompt Owners**—designate a specific group of users with fine-grained permission to promote or delete individual prompts, without granting broader org access.
-  * **Multi-modal evaluators**—pass attachments and base64 content (images, audio, PDFs) directly into evaluators.
-  * **Cost alerts on tracing projects**—set alerts on tracing project-level costs alongside existing LangSmith alerts.
-  * **Expanded playground model support**—Anthropic via Vertex AI, custom Azure models, Bedrock inference profiles and configurable base URLs, Gemini 3.1 Pro, GPT-5.3 / 5.4 (now default), and Baseten + GLM-5.
-  * **New agent tools and triggers**—Google Sheets and Docs, Outlook mail and calendar, Microsoft Teams, Salesforce SOQL, Gmail OAuth v2 with refresh tokens, and an Outlook Trigger.
-  * **Insights enhancements**—scheduled Insights reports, categories trending over time, full feedback comments in analysis, and a lower minimum job interval (6h → 1h).
-  * **Annotation and review upgrades**—required reviewers per queue, pairwise queues that honor `reviewer_access_mode`, an "Assigned to me" filter, per-annotator CSV export, and bulk table actions.
-  * **Prompt Hub and tool registry**—commit tag search, model select in template creation, a workspace-scoped tool registry API, and a private registry UI.
-  * **Evaluator workflow improvements**—prebuilt LLM evaluators use strict structured outputs by default, evaluators support tagging and reuse, retries no longer lose scores, and a new API runs playground experiments programmatically.
-  * **Custom iframe output renderer**—drag-to-resize HTML chart outputs in experiments and trace views.
-  * **Thread and inbox UX**—auto-generated thread titles, redesigned run details in threads, session-level feedback stats, keyboard shortcuts, and filtering out internal helper threads.
+* **Granular usage reporting**—granular billable usage APIs that allow you to retrieve detailed trace usage data broken down by workspace, project, user, or API key.
 
-  ### Admin changes
+**Download the Helm chart:** [`langsmith-0.14.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.0/langsmith-0.14.0.tgz)
 
-  * **Granular usage reporting**—granular billable usage APIs that allow you to retrieve detailed trace usage data broken down by workspace, project, user, or API key.
+## 2026-04-17
+## langsmith-0.13.43
 
-  **Download the Helm chart:** [`langsmith-0.14.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.14.0/langsmith-0.14.0.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.42. Refer to the [langsmith-0.13.42](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-42) release notes below.
 
-<Update label="2026-04-17" tags={["self-hosted"]}>
-  ## langsmith-0.13.43
+**Download the Helm chart:** [`langsmith-0.13.43.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.43/langsmith-0.13.43.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.42. Refer to the [langsmith-0.13.42](#langsmith-0-13-42) release notes below.
+## 2026-04-14
+## langsmith-0.13.42
 
-  **Download the Helm chart:** [`langsmith-0.13.43.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.43/langsmith-0.13.43.tgz)
-</Update>
+* Fixed issue in metadata filtering to recognize json.Number as a primitive type, improving data ingestion accuracy.
 
-<Update label="2026-04-14" tags={["self-hosted"]}>
-  ## langsmith-0.13.42
+**Download the Helm chart:** [`langsmith-0.13.42.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.42/langsmith-0.13.42.tgz)
 
-  * Fixed issue in metadata filtering to recognize json.Number as a primitive type, improving data ingestion accuracy.
+## 2026-04-14
+## langsmith-0.13.41
 
-  **Download the Helm chart:** [`langsmith-0.13.42.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.42/langsmith-0.13.42.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2026-04-14" tags={["self-hosted"]}>
-  ## langsmith-0.13.41
+**Download the Helm chart:** [`langsmith-0.13.41.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.41/langsmith-0.13.41.tgz)
 
-  * Internal improvements and maintenance updates
+## 2026-04-09
+## langsmith-0.13.40
 
-  **Download the Helm chart:** [`langsmith-0.13.41.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.41/langsmith-0.13.41.tgz)
-</Update>
+* Added support for mTLS configuration to enhance self-hosted security.
+* Improved the loading speed of the Fleet interface.
+* Fixed a bug in the tracing UI that caused intermittent display issues.
+* Added support for Redis Cluster, improving scalability for self-hosted deployments.
+* Improved PostgreSQL IAM integration for better database management in self-hosted instances.
 
-<Update label="2026-04-09" tags={["self-hosted"]}>
-  ## langsmith-0.13.40
+**Download the Helm chart:** [`langsmith-0.13.40.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.40/langsmith-0.13.40.tgz)
 
-  * Added support for mTLS configuration to enhance self-hosted security.
-  * Improved the loading speed of the Fleet interface.
-  * Fixed a bug in the tracing UI that caused intermittent display issues.
-  * Added support for Redis Cluster, improving scalability for self-hosted deployments.
-  * Improved PostgreSQL IAM integration for better database management in self-hosted instances.
+## 2026-04-07
+## langsmith-0.13.39
 
-  **Download the Helm chart:** [`langsmith-0.13.40.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.40/langsmith-0.13.40.tgz)
-</Update>
+* Users can now run experiments without `projects:create`, decoupling experiment execution from project governance controls.
+* Added skeleton loading state when switching between agent chat threads instead of a blank chat input.
+* Improved the Fleet Arcade integrations page to display correct actions and clearer backend states.
+* Arcade gateway installs now automatically sanitize invalid MCP server names before adding them to a workspace.
+* Users can now see assigned reviewers as name chips in the annotation queue list and filter to queues they are assigned to via an "Assigned to me" button.
+* Improved run details hover on the trace tree for less flicker when clicking or moving quickly between rows.
+* Fixed a timeout when generating Insights reports with feedback enabled on high-volume workspaces.
+* Arcade integrations now show a permission error instead of a generic upstream failure when a connected user lacks access to the configured Arcade project.
+* Added a clickable ID badge to the experiment detail page header for easy copying of the experiment ID.
+* LLM auth proxy JWTs now include `organization_name` and `workspace_name` claims.
+* Added dataset split selection to the evaluator playground, allowing users to run evaluator experiments on specific dataset splits.
+* Fixed experiment comparison view showing contradictory improvement arrows and regression cell colors for composite scores.
+* Fixed a bug where deleting traces from pre-compression multipart blob storage objects could corrupt byte ranges for other traces in the same object, causing 416 errors when reading their payloads.
+* Fixed crash when viewing a tool run in an in-progress trace.
+* Lowered Insights job schedule minimum interval from 6 hours to 1 hour, configurable via `CLIO_SCHEDULE_MIN_INTERVAL_SECONDS` environment variable.
+* LLM auth proxy now supports Insights (CLIO) service identity for JWT-based LLM authentication.
+* Fixed subagent files not being deleted from hub repo memory when subagents are removed in the agent editor.
+* Simplified Arcade workspace connection status to show "Workspace configured" instead of the confusing "Connected account" label with a redundant badge.
+* Fixed a bug where expanding a tool call in the run detail view and scrolling away caused it to collapse back when scrolled into view again.
+* Agent file reads (clone, inspect, startup) now correctly use the hub as the source of truth when hub memory is enabled.
+* Fixed custom output rendering (HTML charts via iframe) not working in the redesigned experiment detail panes.
+* Allowed usage of LLM Auth Proxy in self-hosted by default.
+* Sessions facets raw path now returns input/output KV facets when `RUNS_LITE_STATS_TENANTS` is enabled, matching the Python backend behavior.
+* Click-to-copy tooltips (e.g. project ID) now respond to clicks on the tooltip content itself, not just the trigger badge.
+* Improved MCP server authorization enforcement in the platform backend.
+* Added Baseten as a model provider with GLM-5 support.
+* Improved LLM inference efficiency by reducing date precision in system prompts from minute-level to date-only.
+* Fixed Polly losing trace context when a trace page is expanded to full page view.
+* Added a unified files sidebar to Fleet chat, accessible via a "Files" button in the header, to browse, search, create, rename, move, and preview all agent-generated files in one panel.
+* Added `SSRF_ALLOW_PRIVATE_IPS_WEBHOOKS`, `SSRF_ALLOW_PRIVATE_IPS_MCP_SERVERS`, and `SSRF_ALLOW_PRIVATE_IPS_TOOLS` environment variables to allow self-hosted deployments to connect to services on private IP ranges.
+* Added `get_current_time` tool to Polly so relative time expressions in filter queries resolve correctly.
+* Reference outputs are now always visible in the experiment trace detail view, fixing an issue where they were hidden for some organizations.
+* Fixed agent OAuth connections failing with "Unknown provider" errors for non-personal agents.
+* Added Base URL configuration support for Bedrock models in the playground and model configurations, enabling custom endpoint URLs for proxy or gateway deployments.
+* Added sign out button back to the settings page sidebar.
+* The run rules list endpoint now returns `backfill_id` when backfill progress is requested.
+* SSO users can no longer see or accept pending invites to organizations other than their own SSO organization.
+* Fleet webhook execution now uses a dedicated endpoint instead of the MCP proxy.
+* Added session-level feedback stats to the sessions API for parity with the Python backend.
+* Improved MCP proxy authorization and URL safety checks for agent runtime requests.
 
-<Update label="2026-04-07" tags={["self-hosted"]}>
-  ## langsmith-0.13.39
+**Download the Helm chart:** [`langsmith-0.13.39.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.39/langsmith-0.13.39.tgz)
 
-  * Users can now run experiments without `projects:create`, decoupling experiment execution from project governance controls.
-  * Added skeleton loading state when switching between agent chat threads instead of a blank chat input.
-  * Improved the Fleet Arcade integrations page to display correct actions and clearer backend states.
-  * Arcade gateway installs now automatically sanitize invalid MCP server names before adding them to a workspace.
-  * Users can now see assigned reviewers as name chips in the annotation queue list and filter to queues they are assigned to via an "Assigned to me" button.
-  * Improved run details hover on the trace tree for less flicker when clicking or moving quickly between rows.
-  * Fixed a timeout when generating Insights reports with feedback enabled on high-volume workspaces.
-  * Arcade integrations now show a permission error instead of a generic upstream failure when a connected user lacks access to the configured Arcade project.
-  * Added a clickable ID badge to the experiment detail page header for easy copying of the experiment ID.
-  * LLM auth proxy JWTs now include `organization_name` and `workspace_name` claims.
-  * Added dataset split selection to the evaluator playground, allowing users to run evaluator experiments on specific dataset splits.
-  * Fixed experiment comparison view showing contradictory improvement arrows and regression cell colors for composite scores.
-  * Fixed a bug where deleting traces from pre-compression multipart blob storage objects could corrupt byte ranges for other traces in the same object, causing 416 errors when reading their payloads.
-  * Fixed crash when viewing a tool run in an in-progress trace.
-  * Lowered Insights job schedule minimum interval from 6 hours to 1 hour, configurable via `CLIO_SCHEDULE_MIN_INTERVAL_SECONDS` environment variable.
-  * LLM auth proxy now supports Insights (CLIO) service identity for JWT-based LLM authentication.
-  * Fixed subagent files not being deleted from hub repo memory when subagents are removed in the agent editor.
-  * Simplified Arcade workspace connection status to show "Workspace configured" instead of the confusing "Connected account" label with a redundant badge.
-  * Fixed a bug where expanding a tool call in the run detail view and scrolling away caused it to collapse back when scrolled into view again.
-  * Agent file reads (clone, inspect, startup) now correctly use the hub as the source of truth when hub memory is enabled.
-  * Fixed custom output rendering (HTML charts via iframe) not working in the redesigned experiment detail panes.
-  * Allowed usage of LLM Auth Proxy in self-hosted by default.
-  * Sessions facets raw path now returns input/output KV facets when `RUNS_LITE_STATS_TENANTS` is enabled, matching the Python backend behavior.
-  * Click-to-copy tooltips (e.g. project ID) now respond to clicks on the tooltip content itself, not just the trigger badge.
-  * Improved MCP server authorization enforcement in the platform backend.
-  * Added Baseten as a model provider with GLM-5 support.
-  * Improved LLM inference efficiency by reducing date precision in system prompts from minute-level to date-only.
-  * Fixed Polly losing trace context when a trace page is expanded to full page view.
-  * Added a unified files sidebar to Fleet chat, accessible via a "Files" button in the header, to browse, search, create, rename, move, and preview all agent-generated files in one panel.
-  * Added `SSRF_ALLOW_PRIVATE_IPS_WEBHOOKS`, `SSRF_ALLOW_PRIVATE_IPS_MCP_SERVERS`, and `SSRF_ALLOW_PRIVATE_IPS_TOOLS` environment variables to allow self-hosted deployments to connect to services on private IP ranges.
-  * Added `get_current_time` tool to Polly so relative time expressions in filter queries resolve correctly.
-  * Reference outputs are now always visible in the experiment trace detail view, fixing an issue where they were hidden for some organizations.
-  * Fixed agent OAuth connections failing with "Unknown provider" errors for non-personal agents.
-  * Added Base URL configuration support for Bedrock models in the playground and model configurations, enabling custom endpoint URLs for proxy or gateway deployments.
-  * Added sign out button back to the settings page sidebar.
-  * The run rules list endpoint now returns `backfill_id` when backfill progress is requested.
-  * SSO users can no longer see or accept pending invites to organizations other than their own SSO organization.
-  * Fleet webhook execution now uses a dedicated endpoint instead of the MCP proxy.
-  * Added session-level feedback stats to the sessions API for parity with the Python backend.
-  * Improved MCP proxy authorization and URL safety checks for agent runtime requests.
+## 2026-04-03
+## langsmith-0.13.38
 
-  **Download the Helm chart:** [`langsmith-0.13.39.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.39/langsmith-0.13.39.tgz)
-</Update>
+* Fixed MCP OAuth tools (e.g., Hex, Notion) failing on self-hosted deployments when `HOST_BACKEND_ENDPOINT_PUBLIC` lacked an `https://` scheme.
+* Insights agent now includes full feedback comments when analyzing traces.
+* Removed the legacy Feed page in Fleet; Inbox is now the default thread view for all tenants.
+* Fixed a permission error that blocked users from creating evaluators when using the evaluator reuse feature.
+* Org admins can now grant Model Configuration management to workspace editors and custom roles via Settings > Roles.
+* Pairwise annotation queues now respect `reviewer_access_mode`: completion/archive logic gates on assigned reviewers only, and GET responses include `assigned_reviewers`.
+* Agent chat messages are no longer grouped into a collapsible "Completed N steps" container. A single copy dropdown on the last AI message of each turn lets you copy just the response or all steps including tool outputs.
+* Fixed pagination in the waterfall view for thread traces, where threads with more than 20 turns now load additional traces when scrolling.
+* Fixed "Empty Message" text appearing in the agent editor chat when AI invokes tools without accompanying text.
+* Added Salesforce SOQL query tool to Fleet, enabling agents to query Salesforce data via OAuth.
+* Annotation queue run list items now show reviewer names and avatars when hovering over the review stats badge.
+* Go session stats now return `feedback_key`, `feedback_key_score`, `feedback_value`, and `feedback_source` facets in `run_facets`, matching the Python backend.
+* Fixed `/info` endpoint returning 401 when `infoEndpointAuthRequired` is enabled with SSO authentication.
+* Added a documentation link button to the "Trigger Webhook" section in the Save prompt dialog for easier access to webhook docs.
+* Fixed layout shift in agent chat caused by the copy button unmounting during streaming.
 
-<Update label="2026-04-03" tags={["self-hosted"]}>
-  ## langsmith-0.13.38
+**Download the Helm chart:** [`langsmith-0.13.38.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.38/langsmith-0.13.38.tgz)
 
-  * Fixed MCP OAuth tools (e.g., Hex, Notion) failing on self-hosted deployments when `HOST_BACKEND_ENDPOINT_PUBLIC` lacked an `https://` scheme.
-  * Insights agent now includes full feedback comments when analyzing traces.
-  * Removed the legacy Feed page in Fleet; Inbox is now the default thread view for all tenants.
-  * Fixed a permission error that blocked users from creating evaluators when using the evaluator reuse feature.
-  * Org admins can now grant Model Configuration management to workspace editors and custom roles via Settings > Roles.
-  * Pairwise annotation queues now respect `reviewer_access_mode`: completion/archive logic gates on assigned reviewers only, and GET responses include `assigned_reviewers`.
-  * Agent chat messages are no longer grouped into a collapsible "Completed N steps" container. A single copy dropdown on the last AI message of each turn lets you copy just the response or all steps including tool outputs.
-  * Fixed pagination in the waterfall view for thread traces, where threads with more than 20 turns now load additional traces when scrolling.
-  * Fixed "Empty Message" text appearing in the agent editor chat when AI invokes tools without accompanying text.
-  * Added Salesforce SOQL query tool to Fleet, enabling agents to query Salesforce data via OAuth.
-  * Annotation queue run list items now show reviewer names and avatars when hovering over the review stats badge.
-  * Go session stats now return `feedback_key`, `feedback_key_score`, `feedback_value`, and `feedback_source` facets in `run_facets`, matching the Python backend.
-  * Fixed `/info` endpoint returning 401 when `infoEndpointAuthRequired` is enabled with SSO authentication.
-  * Added a documentation link button to the "Trigger Webhook" section in the Save prompt dialog for easier access to webhook docs.
-  * Fixed layout shift in agent chat caused by the copy button unmounting during streaming.
+## 2026-04-01
+## langsmith-0.13.37
 
-  **Download the Helm chart:** [`langsmith-0.13.38.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.38/langsmith-0.13.38.tgz)
-</Update>
+* Added URL allowlist for the LLM Auth Proxy to prevent credential forwarding to unintended hosts.
+* Enabled audit logs by default for self-hosted deployments.
+* MCP servers now respect granular RBAC permissions in the UI; users only see actions their role allows.
+* Enabled ABAC by default for self-hosted deployments.
+* Fixed a bug with OpenAI tools rendering.
 
-<Update label="2026-04-01" tags={["self-hosted"]}>
-  ## langsmith-0.13.37
+**Download the Helm chart:** [`langsmith-0.13.37.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.37/langsmith-0.13.37.tgz)
 
-  * Added URL allowlist for the LLM Auth Proxy to prevent credential forwarding to unintended hosts.
-  * Enabled audit logs by default for self-hosted deployments.
-  * MCP servers now respect granular RBAC permissions in the UI; users only see actions their role allows.
-  * Enabled ABAC by default for self-hosted deployments.
-  * Fixed a bug with OpenAI tools rendering.
+## 2026-03-30
+## langsmith-0.13.36
 
-  **Download the Helm chart:** [`langsmith-0.13.37.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.37/langsmith-0.13.37.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-32) release notes below.
 
-<Update label="2026-03-30" tags={["self-hosted"]}>
-  ## langsmith-0.13.36
+**Download the Helm chart:** [`langsmith-0.13.36.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.36/langsmith-0.13.36.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](#langsmith-0-13-32) release notes below.
+## 2026-03-27
+## langsmith-0.13.35
 
-  **Download the Helm chart:** [`langsmith-0.13.36.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.36/langsmith-0.13.36.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-32) release notes below.
 
-<Update label="2026-03-27" tags={["self-hosted"]}>
-  ## langsmith-0.13.35
+**Download the Helm chart:** [`langsmith-0.13.35.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.35/langsmith-0.13.35.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](#langsmith-0-13-32) release notes below.
+## 2026-03-27
+## langsmith-0.13.34
 
-  **Download the Helm chart:** [`langsmith-0.13.35.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.35/langsmith-0.13.35.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-32) release notes below.
 
-<Update label="2026-03-27" tags={["self-hosted"]}>
-  ## langsmith-0.13.34
+**Download the Helm chart:** [`langsmith-0.13.34.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.34/langsmith-0.13.34.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](#langsmith-0-13-32) release notes below.
+## 2026-03-27
+## langsmith-0.13.33
 
-  **Download the Helm chart:** [`langsmith-0.13.34.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.34/langsmith-0.13.34.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-32) release notes below.
 
-<Update label="2026-03-27" tags={["self-hosted"]}>
-  ## langsmith-0.13.33
+**Download the Helm chart:** [`langsmith-0.13.33.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.33/langsmith-0.13.33.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.32. Refer to the [langsmith-0.13.32](#langsmith-0-13-32) release notes below.
+## 2026-03-27
+## langsmith-0.13.32
 
-  **Download the Helm chart:** [`langsmith-0.13.33.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.33/langsmith-0.13.33.tgz)
-</Update>
+* Added ability for users to find account labels for first-class providers.
+* Fixed issue where switching alerts did not switch charts accordingly.
+* Fixed key error for experiments with attachments.
+* Added dismiss button functionality to the agentify banner.
+* Improved responsiveness in run details header and compare traces.
+* Added truncate property to feedback chips list to respond to container width.
+* Fixed subpixel bleed on body rows in the repetition summary table.
+* Fixed race condition in AQ run archive check.
+* Patched 9 medium security alerts and 4 high security alerts.
+* Renamed Metadata to Attributes in the comparison detail pane.
+* Enabled toggle panel size button in RepetitionDetailPane.
+* Updated model cards in the frontend.
+* Fixed issue to load prompt picker when opening playground from experiments table.
+* Properly disabled environment promotion buttons for users without tag permissions.
+* Enabled granular usage rollup cron for self-hosted instances.
+* Onboarded more CUD operations for audit logs.
+* Added Ashby integration migration to Agent Builder.
+* Improved performance by parallelizing graph loading and eliminating redundant MCP fetches in Agent Builder.
+* Automatically expanded/collapsed keys for improved UI.
+* Fixed blue hover state for trace comparison divider.
+* Avoided MITM races during sandbox startup with Smithbox proxy.
+* Fixed bar height calculation in the granular usage chart.
+* Added Dynatrace webhook integration for alerts.
+* Displayed toast notification on "run now" button click in Forge.
+* Handled non-string resource fields in MCP OAuth discovery.
+* Added feedback banner for experiment sidebar redesign.
+* Added example attachments to experiment detail panes.
+* Wired Arcade integration to real OAuth flow in Agent Builder.
+* Fixed loading flash in host revisions table during revalidation.
+* Fixed imports in host backend for truststore.
+* Added request context to authentication middleware error log in Agent Builder.
+* Fixed editing prompt feature in evaluator.
+* Fetched full run data in new experiment detail pane.
 
-<Update label="2026-03-27" tags={["self-hosted"]}>
-  ## langsmith-0.13.32
+**Download the Helm chart:** [`langsmith-0.13.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.32/langsmith-0.13.32.tgz)
 
-  * Added ability for users to find account labels for first-class providers.
-  * Fixed issue where switching alerts did not switch charts accordingly.
-  * Fixed key error for experiments with attachments.
-  * Added dismiss button functionality to the agentify banner.
-  * Improved responsiveness in run details header and compare traces.
-  * Added truncate property to feedback chips list to respond to container width.
-  * Fixed subpixel bleed on body rows in the repetition summary table.
-  * Fixed race condition in AQ run archive check.
-  * Patched 9 medium security alerts and 4 high security alerts.
-  * Renamed Metadata to Attributes in the comparison detail pane.
-  * Enabled toggle panel size button in RepetitionDetailPane.
-  * Updated model cards in the frontend.
-  * Fixed issue to load prompt picker when opening playground from experiments table.
-  * Properly disabled environment promotion buttons for users without tag permissions.
-  * Enabled granular usage rollup cron for self-hosted instances.
-  * Onboarded more CUD operations for audit logs.
-  * Added Ashby integration migration to Agent Builder.
-  * Improved performance by parallelizing graph loading and eliminating redundant MCP fetches in Agent Builder.
-  * Automatically expanded/collapsed keys for improved UI.
-  * Fixed blue hover state for trace comparison divider.
-  * Avoided MITM races during sandbox startup with Smithbox proxy.
-  * Fixed bar height calculation in the granular usage chart.
-  * Added Dynatrace webhook integration for alerts.
-  * Displayed toast notification on "run now" button click in Forge.
-  * Handled non-string resource fields in MCP OAuth discovery.
-  * Added feedback banner for experiment sidebar redesign.
-  * Added example attachments to experiment detail panes.
-  * Wired Arcade integration to real OAuth flow in Agent Builder.
-  * Fixed loading flash in host revisions table during revalidation.
-  * Fixed imports in host backend for truststore.
-  * Added request context to authentication middleware error log in Agent Builder.
-  * Fixed editing prompt feature in evaluator.
-  * Fetched full run data in new experiment detail pane.
+## 2026-03-23
+## langsmith-0.13.31
 
-  **Download the Helm chart:** [`langsmith-0.13.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.32/langsmith-0.13.32.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-28) release notes below.
 
-<Update label="2026-03-23" tags={["self-hosted"]}>
-  ## langsmith-0.13.31
+**Download the Helm chart:** [`langsmith-0.13.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.31/langsmith-0.13.31.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](#langsmith-0-13-28) release notes below.
+## 2026-03-23
+## langsmith-0.13.30
 
-  **Download the Helm chart:** [`langsmith-0.13.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.31/langsmith-0.13.31.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-28) release notes below.
 
-<Update label="2026-03-23" tags={["self-hosted"]}>
-  ## langsmith-0.13.30
+**Download the Helm chart:** [`langsmith-0.13.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.30/langsmith-0.13.30.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](#langsmith-0-13-28) release notes below.
+## 2026-03-21
+## langsmith-0.13.29
 
-  **Download the Helm chart:** [`langsmith-0.13.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.30/langsmith-0.13.30.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-28) release notes below.
 
-<Update label="2026-03-21" tags={["self-hosted"]}>
-  ## langsmith-0.13.29
+**Download the Helm chart:** [`langsmith-0.13.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.29/langsmith-0.13.29.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.28. Refer to the [langsmith-0.13.28](#langsmith-0-13-28) release notes below.
+## 2026-03-21
+## langsmith-0.13.28
 
-  **Download the Helm chart:** [`langsmith-0.13.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.29/langsmith-0.13.29.tgz)
-</Update>
+* Fixed ABAC permission checks to improve self-hosted instance functionality.
+* Enhanced agent builder by handling DotDict in decrypting passthrough headers.
+* Improved fleet logo for better dark mode support.
+* Updated Slack reauthorization required message with link to integrations page in Agent Builder.
+* Added network allow-deny list feature.
+* Introduced new access control UI for the sandbox proxy.
+* Fixed GCS workload identity in storage and added copy health check.
+* Reduced concurrency and added timeout for scheduled insights jobs.
+* Enhanced frontend performance by reducing the number of preload chunks during initial load.
+* Added caching for `/info` and `/auth/v1/user` responses in localStorage to improve frontend performance.
+* Enabled JWT generation for auth-proxy in playground service for enhanced security.
+* Recreated feedbacks index in the backend for storage optimization.
+* Implemented gating for workspace skill editing by repo ownership in the Agent Builder.
+* Added static TTL expiry for sandbox claims for improved management.
+* Enabled Slack channels for personal agents in Agent Builder.
+* Adjusted frontend contrast for run status icons in light mode for better visibility.
+* Implemented JWT generation for LLM-as-judge evals to enhance evaluation security.
+* Always display creator name on agent workspace cards for better transparency.
+* Reordered inbox tabs to improve navigation.
+* Supported Google IAP session refresh in self-hosted environments.
+* Replaced MUI checkboxes in various sections to improve UI consistency.
+* Improved experimental evaluator SAQ timeouts matching online eval paths for better performance.
+* Supported RDS DB instance on k8s platform for enhanced infrastructure flexibility.
+* Loaded LLM auth proxy JWT signing key from `LANGSMITH_SIGNING_JWKS` to align with security standards.
+* Improved run detail dropdown design for a better user experience.
+* Added service key authentication to runs, sessions, and sandbox endpoints for enhanced security.
+* Added LangChain vendor extractor to enhance message processing capabilities.
+* Fixed parsing errors related to cache reads impacting costs for better performance metrics.
+* Introduced support for specifying environment variables from secret references for improved configuration management.
 
-<Update label="2026-03-21" tags={["self-hosted"]}>
-  ## langsmith-0.13.28
+**Download the Helm chart:** [`langsmith-0.13.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.28/langsmith-0.13.28.tgz)
 
-  * Fixed ABAC permission checks to improve self-hosted instance functionality.
-  * Enhanced agent builder by handling DotDict in decrypting passthrough headers.
-  * Improved fleet logo for better dark mode support.
-  * Updated Slack reauthorization required message with link to integrations page in Agent Builder.
-  * Added network allow-deny list feature.
-  * Introduced new access control UI for the sandbox proxy.
-  * Fixed GCS workload identity in storage and added copy health check.
-  * Reduced concurrency and added timeout for scheduled insights jobs.
-  * Enhanced frontend performance by reducing the number of preload chunks during initial load.
-  * Added caching for `/info` and `/auth/v1/user` responses in localStorage to improve frontend performance.
-  * Enabled JWT generation for auth-proxy in playground service for enhanced security.
-  * Recreated feedbacks index in the backend for storage optimization.
-  * Implemented gating for workspace skill editing by repo ownership in the Agent Builder.
-  * Added static TTL expiry for sandbox claims for improved management.
-  * Enabled Slack channels for personal agents in Agent Builder.
-  * Adjusted frontend contrast for run status icons in light mode for better visibility.
-  * Implemented JWT generation for LLM-as-judge evals to enhance evaluation security.
-  * Always display creator name on agent workspace cards for better transparency.
-  * Reordered inbox tabs to improve navigation.
-  * Supported Google IAP session refresh in self-hosted environments.
-  * Replaced MUI checkboxes in various sections to improve UI consistency.
-  * Improved experimental evaluator SAQ timeouts matching online eval paths for better performance.
-  * Supported RDS DB instance on k8s platform for enhanced infrastructure flexibility.
-  * Loaded LLM auth proxy JWT signing key from `LANGSMITH_SIGNING_JWKS` to align with security standards.
-  * Improved run detail dropdown design for a better user experience.
-  * Added service key authentication to runs, sessions, and sandbox endpoints for enhanced security.
-  * Added LangChain vendor extractor to enhance message processing capabilities.
-  * Fixed parsing errors related to cache reads impacting costs for better performance metrics.
-  * Introduced support for specifying environment variables from secret references for improved configuration management.
+## 2026-03-18
+## langsmith-0.13.27
 
-  **Download the Helm chart:** [`langsmith-0.13.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.28/langsmith-0.13.28.tgz)
-</Update>
+* Organization admins can now edit member display names inline from the members table in Settings.
+* Multipart ingestion requests no longer accept Inputs, Outputs, or Events as inline fields. These must be sent as dedicated out-of-band parts.
+* Tracing support email on the Home page error banner is now a clickable mailto link.
+* Improved run details tab highlighting so selected sections stay correctly highlighted near scroll boundaries.
+* Improved keyboard shortcut rendering in the chat assistant tooltip.
+* Fixed connect/disconnect button on Slack integrations.
+* Added prompt environments support.
 
-<Update label="2026-03-18" tags={["self-hosted"]}>
-  ## langsmith-0.13.27
+**Download the Helm chart:** [`langsmith-0.13.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.27/langsmith-0.13.27.tgz)
 
-  * Organization admins can now edit member display names inline from the members table in Settings.
-  * Multipart ingestion requests no longer accept Inputs, Outputs, or Events as inline fields. These must be sent as dedicated out-of-band parts.
-  * Tracing support email on the Home page error banner is now a clickable mailto link.
-  * Improved run details tab highlighting so selected sections stay correctly highlighted near scroll boundaries.
-  * Improved keyboard shortcut rendering in the chat assistant tooltip.
-  * Fixed connect/disconnect button on Slack integrations.
-  * Added prompt environments support.
+## 2026-03-13
+## langsmith-0.13.26
 
-  **Download the Helm chart:** [`langsmith-0.13.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.27/langsmith-0.13.27.tgz)
-</Update>
+* Sub-agents spawned during Fleet conversations now display real-time status cards inline in the chat, with a detail sidebar showing the sub-agent's live timeline, tool calls, and results.
+* Prebuilt LLM evaluators now use strict structured output mode by default. Strict mode automatically toggles when switching between OpenAI and non-OpenAI model providers.
+* Fixed a bug where online evaluator scores were lost when the evaluation succeeded on a retry but the total job time exceeded the queue timeout.
+* Deleting a run from an annotation queue now fully removes it instead of incorrectly marking it as completed.
+* Included per-annotator feedback in experiments CSV export.
+* Uploading dataset examples with invalid UTF-8 in inputs or outputs now returns a 422 error instead of a 500.
+* Reduced CPU and memory requirements for dev and dev\_free self-hosted deployments.
+* Reject insecure default JWT secret at startup for improved security.
+* Updated brand colors for neutral backgrounds and surfaces.
+* Renamed prompt usage example label from "Use object in LangChain" to "Use Programmatically".
+* Fixed agent zip upload to correctly place cron schedules in the Schedule section.
+* Inbox now sorts the All tab by recency and properly wraps long messages in preview.
+* Fixed chat assistant tooltips rendering behind the chatbox.
+* Added ABAC authorization middleware.
 
-<Update label="2026-03-13" tags={["self-hosted"]}>
-  ## langsmith-0.13.26
+**Download the Helm chart:** [`langsmith-0.13.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.26/langsmith-0.13.26.tgz)
 
-  * Sub-agents spawned during Fleet conversations now display real-time status cards inline in the chat, with a detail sidebar showing the sub-agent's live timeline, tool calls, and results.
-  * Prebuilt LLM evaluators now use strict structured output mode by default. Strict mode automatically toggles when switching between OpenAI and non-OpenAI model providers.
-  * Fixed a bug where online evaluator scores were lost when the evaluation succeeded on a retry but the total job time exceeded the queue timeout.
-  * Deleting a run from an annotation queue now fully removes it instead of incorrectly marking it as completed.
-  * Included per-annotator feedback in experiments CSV export.
-  * Uploading dataset examples with invalid UTF-8 in inputs or outputs now returns a 422 error instead of a 500.
-  * Reduced CPU and memory requirements for dev and dev\_free self-hosted deployments.
-  * Reject insecure default JWT secret at startup for improved security.
-  * Updated brand colors for neutral backgrounds and surfaces.
-  * Renamed prompt usage example label from "Use object in LangChain" to "Use Programmatically".
-  * Fixed agent zip upload to correctly place cron schedules in the Schedule section.
-  * Inbox now sorts the All tab by recency and properly wraps long messages in preview.
-  * Fixed chat assistant tooltips rendering behind the chatbox.
-  * Added ABAC authorization middleware.
+## 2026-03-12
+## langsmith-0.13.25
 
-  **Download the Helm chart:** [`langsmith-0.13.26.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.26/langsmith-0.13.26.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.24. Refer to the [langsmith-0.13.24](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-24) release notes below.
 
-<Update label="2026-03-12" tags={["self-hosted"]}>
-  ## langsmith-0.13.25
+**Download the Helm chart:** [`langsmith-0.13.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.25/langsmith-0.13.25.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.24. Refer to the [langsmith-0.13.24](#langsmith-0-13-24) release notes below.
+## 2026-03-10
+## langsmith-0.13.24
 
-  **Download the Helm chart:** [`langsmith-0.13.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.25/langsmith-0.13.25.tgz)
-</Update>
+* Added rich markdown editor with toolbar and slash commands in Fleet.
+* Added skill creation flow with page entry and navigation in Fleet.
+* Annotation queue CSV exports now include per-annotator feedback scores and a reviewer notes column.
+* Fixed dataset metadata filters not matching number fields across pages.
+* Fixed datasets table only showing first page of results on tall screens.
+* Alert like/notlike filters on error, inputs, and outputs now correctly match individual tokens instead of the full phrase.
+* Fixed `list_runs` tool crashing when the LangSmith API returns an error.
+* Fixed stray artifact in system prompt for Gemini models.
+* Accepting an organization invite now navigates to the newly joined organization.
+* Improved Playground auto-scroll during streaming output.
+* Added workspace scope display for personal API keys.
+* Bumped Python to 3.13 and pinned OpenSSL to resolve security vulnerabilities.
+* Blocked shell injection characters in build/install commands.
+* Improved Polly assistant understanding of traces and runs.
+* Fixed baseline experiment stats not showing on initial page load.
+* Fixed duplicated x-axis date labels on the insights time series chart.
+* Re-enabled ABAC for listing datasets.
+* Added ABAC runs delete endpoint.
 
-<Update label="2026-03-10" tags={["self-hosted"]}>
-  ## langsmith-0.13.24
+**Download the Helm chart:** [`langsmith-0.13.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.24/langsmith-0.13.24.tgz)
 
-  * Added rich markdown editor with toolbar and slash commands in Fleet.
-  * Added skill creation flow with page entry and navigation in Fleet.
-  * Annotation queue CSV exports now include per-annotator feedback scores and a reviewer notes column.
-  * Fixed dataset metadata filters not matching number fields across pages.
-  * Fixed datasets table only showing first page of results on tall screens.
-  * Alert like/notlike filters on error, inputs, and outputs now correctly match individual tokens instead of the full phrase.
-  * Fixed `list_runs` tool crashing when the LangSmith API returns an error.
-  * Fixed stray artifact in system prompt for Gemini models.
-  * Accepting an organization invite now navigates to the newly joined organization.
-  * Improved Playground auto-scroll during streaming output.
-  * Added workspace scope display for personal API keys.
-  * Bumped Python to 3.13 and pinned OpenSSL to resolve security vulnerabilities.
-  * Blocked shell injection characters in build/install commands.
-  * Improved Polly assistant understanding of traces and runs.
-  * Fixed baseline experiment stats not showing on initial page load.
-  * Fixed duplicated x-axis date labels on the insights time series chart.
-  * Re-enabled ABAC for listing datasets.
-  * Added ABAC runs delete endpoint.
+## 2026-03-07
+## langsmith-0.13.23
 
-  **Download the Helm chart:** [`langsmith-0.13.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.24/langsmith-0.13.24.tgz)
-</Update>
+* Patched security vulnerabilities in smith-frontend.
+* Patched security vulnerabilities in smith-polly.
+* Fixed a code injection vulnerability.
+* Restricted `--allow-run` to only the deno binary in smith-ace.
+* Fixed XSS vulnerability by escaping URLs in the RichTextEditor.
+* Fixed Playground functionality in self-hosted environments.
 
-<Update label="2026-03-07" tags={["self-hosted"]}>
-  ## langsmith-0.13.23
+**Download the Helm chart:** [`langsmith-0.13.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.23/langsmith-0.13.23.tgz)
 
-  * Patched security vulnerabilities in smith-frontend.
-  * Patched security vulnerabilities in smith-polly.
-  * Fixed a code injection vulnerability.
-  * Restricted `--allow-run` to only the deno binary in smith-ace.
-  * Fixed XSS vulnerability by escaping URLs in the RichTextEditor.
-  * Fixed Playground functionality in self-hosted environments.
+## 2026-03-06
+## langsmith-0.13.21
 
-  **Download the Helm chart:** [`langsmith-0.13.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.23/langsmith-0.13.23.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.20. Refer to the [langsmith-0.13.20](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-20) release notes below.
 
-<Update label="2026-03-06" tags={["self-hosted"]}>
-  ## langsmith-0.13.21
+**Download the Helm chart:** [`langsmith-0.13.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.21/langsmith-0.13.21.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.20. Refer to the [langsmith-0.13.20](#langsmith-0-13-20) release notes below.
+## 2026-03-06
+## langsmith-0.13.20
 
-  **Download the Helm chart:** [`langsmith-0.13.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.21/langsmith-0.13.21.tgz)
-</Update>
+* Added JSON/YAML syntax highlighting to experiment comparison for better readability.
+* Improved thread trace opening behavior in the frontend, removing the need for an expand button.
+* Eliminated n+1 query issue in the backend for listing personal access tokens, improving performance.
+* Fixed support for OpenAI compatible endpoints with smith-polly integration.
+* Timed out bulk exports stuck in `CREATED` status to avoid indefinite processing.
+* Addressed issue where service identity access was blocked from creating repository endpoints.
+* Recorded hub prompt commit in experiment session metadata for better session tracking.
+* Improved authentication for /sessions shadow queries.
+* Updated backend deployments with ABAC (Attribute-Based Access Control).
+* Enhanced UI with projects and runs write permissions support.
+* Added support for new models: GPT-5.4 and GPT-5.4 pro.
+* Fixed large attachment image preview issue for better UI experience.
+* Made GPT-5.4 the default OpenAI playground model, simplifying model selection.
+* Increased maximum tags displayed in `RunTags` component for better visibility.
+* Added models and prompts columns to experiments table, enhancing data insights.
+* Resolved agent builder runs rejection issue when limit settings were changed.
+* Fixed float errors in /sessions go endpoint for improved data handling.
+* Returned fetched value when Redis cache `SET` fails, improving reliability.
+* Enabled AWS IAM role support for agent builder, Polly, and Insights features.
+* Redesigned custom chart CRUD in the frontend, enhancing user satisfaction.
+* Introduced prompt filtering in the experiments table for targeted data analysis.
+* Updated inbox counts and thread fetching logic in Agent Builder for real-time information.
+* Added a feature to group experiments by prompt for streamlined data management.
 
-<Update label="2026-03-06" tags={["self-hosted"]}>
-  ## langsmith-0.13.20
+**Download the Helm chart:** [`langsmith-0.13.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.20/langsmith-0.13.20.tgz)
 
-  * Added JSON/YAML syntax highlighting to experiment comparison for better readability.
-  * Improved thread trace opening behavior in the frontend, removing the need for an expand button.
-  * Eliminated n+1 query issue in the backend for listing personal access tokens, improving performance.
-  * Fixed support for OpenAI compatible endpoints with smith-polly integration.
-  * Timed out bulk exports stuck in `CREATED` status to avoid indefinite processing.
-  * Addressed issue where service identity access was blocked from creating repository endpoints.
-  * Recorded hub prompt commit in experiment session metadata for better session tracking.
-  * Improved authentication for /sessions shadow queries.
-  * Updated backend deployments with ABAC (Attribute-Based Access Control).
-  * Enhanced UI with projects and runs write permissions support.
-  * Added support for new models: GPT-5.4 and GPT-5.4 pro.
-  * Fixed large attachment image preview issue for better UI experience.
-  * Made GPT-5.4 the default OpenAI playground model, simplifying model selection.
-  * Increased maximum tags displayed in `RunTags` component for better visibility.
-  * Added models and prompts columns to experiments table, enhancing data insights.
-  * Resolved agent builder runs rejection issue when limit settings were changed.
-  * Fixed float errors in /sessions go endpoint for improved data handling.
-  * Returned fetched value when Redis cache `SET` fails, improving reliability.
-  * Enabled AWS IAM role support for agent builder, Polly, and Insights features.
-  * Redesigned custom chart CRUD in the frontend, enhancing user satisfaction.
-  * Introduced prompt filtering in the experiments table for targeted data analysis.
-  * Updated inbox counts and thread fetching logic in Agent Builder for real-time information.
-  * Added a feature to group experiments by prompt for streamlined data management.
+## 2026-03-06
+## langsmith-0.13.19
 
-  **Download the Helm chart:** [`langsmith-0.13.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.20/langsmith-0.13.20.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.18. Refer to the [langsmith-0.13.18](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-18) release notes below.
 
-<Update label="2026-03-06" tags={["self-hosted"]}>
-  ## langsmith-0.13.19
+**Download the Helm chart:** [`langsmith-0.13.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.19/langsmith-0.13.19.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.18. Refer to the [langsmith-0.13.18](#langsmith-0-13-18) release notes below.
+## 2026-03-05
+## langsmith-0.13.18
 
-  **Download the Helm chart:** [`langsmith-0.13.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.19/langsmith-0.13.19.tgz)
-</Update>
+* Introduced a redesigned run details view in threads for improved user experience.
+* Fixed an issue where popovers were covering other content in the UI.
+* Added Microsoft Outlook Calendar Tools to the Agent Builder for integration.
+* Addressed bugs related to agent chat popups and placeholders in the Agent Builder.
+* Improved support for disabling feedback comment filtering in self-hosted instances.
+* Enhanced performance with improved code splitting in the frontend.
+* Added model support for GPT 5.3 instant and GPT-5.3-chat-latest.
+* Introduced a new single\_run filter type for more refined querying.
+* Added ability to read insights reports and show insights categories over time.
+* Added drag-to-resize functionality with persistence in custom iframe output renderer.
+* Enhanced security with more robust user migration processes.
+* Enabled tagging support for evaluators and enhanced their reuse functionality.
+* Fixed issues with session expired warnings after logout.
+* Enhanced UI components for better user interaction in the playground and feedback tagging.
+* Improved metadata handling in datasets and fixed overflow issues.
+* Introduced support for Microsoft Teams Tools in the Agent Builder.
+* Implemented better handling for OAuth provider updates.
+* Added new /orgs/current/info endpoint to the platform-backend for more robust organizational information retrieval.
+* Introduced compatibility testing for session API with added safety checks for PostgreSQL and Redis connections.
+* Added functionality to bind Slack agents dynamically, enhancing the integration experience.
 
-<Update label="2026-03-05" tags={["self-hosted"]}>
-  ## langsmith-0.13.18
+**Download the Helm chart:** [`langsmith-0.13.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.18/langsmith-0.13.18.tgz)
 
-  * Introduced a redesigned run details view in threads for improved user experience.
-  * Fixed an issue where popovers were covering other content in the UI.
-  * Added Microsoft Outlook Calendar Tools to the Agent Builder for integration.
-  * Addressed bugs related to agent chat popups and placeholders in the Agent Builder.
-  * Improved support for disabling feedback comment filtering in self-hosted instances.
-  * Enhanced performance with improved code splitting in the frontend.
-  * Added model support for GPT 5.3 instant and GPT-5.3-chat-latest.
-  * Introduced a new single\_run filter type for more refined querying.
-  * Added ability to read insights reports and show insights categories over time.
-  * Added drag-to-resize functionality with persistence in custom iframe output renderer.
-  * Enhanced security with more robust user migration processes.
-  * Enabled tagging support for evaluators and enhanced their reuse functionality.
-  * Fixed issues with session expired warnings after logout.
-  * Enhanced UI components for better user interaction in the playground and feedback tagging.
-  * Improved metadata handling in datasets and fixed overflow issues.
-  * Introduced support for Microsoft Teams Tools in the Agent Builder.
-  * Implemented better handling for OAuth provider updates.
-  * Added new /orgs/current/info endpoint to the platform-backend for more robust organizational information retrieval.
-  * Introduced compatibility testing for session API with added safety checks for PostgreSQL and Redis connections.
-  * Added functionality to bind Slack agents dynamically, enhancing the integration experience.
+## 2026-03-03
+## langsmith-0.13.17
 
-  **Download the Helm chart:** [`langsmith-0.13.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.18/langsmith-0.13.18.tgz)
-</Update>
+* Fixed a bug in the executor deployment handling for new operator versions.
+* Added a setting to filter out internal helper threads from the inbox.
+* Improved the evaluator's page by providing context to Polly's feedback.
+* Forced trace filtering for dataset code evaluators to enhance stability.
+* Updated OAuth mode management, restricting changes during updates.
+* Fixed an issue with experiment cell colors to enhance user clarity.
+* Improved the usage configuration modal to utilize a new TTL endpoint for trace retention.
+* Addressed a bug where workspace invites were not displaying correctly in the UI.
+* Applied brand color adjustments in dark mode and various UI elements.
+* Enhanced OAuth callback security by preventing potential reflected XSS vulnerabilities.
+* Added a dynamic OAuth feature for user management.
+* Fixed a bug preventing filter updates when certain conditions were met.
+* Implemented rebranding updates for the auth screen.
+* Added a feature to collapse sidebar automatically on small viewports.
+* Fixed issues with variable handling in playground evaluate mode.
+* Enhanced the Agent Builder with infinite scroll and improved inbox fetching.
+* Added a new Outlook Trigger feature in the Agent Builder.
+* Upgraded agent-builder to use websockets and new OpenAI model API (gpt-5.3-codex).
+* Fixed auto-save on API key during onboarding process.
+* Resolved issues causing errors in the playground due to empty placeholders.
+* Updated frontend with a new logo for favicon.
+* Fixed authorization bugs in cron deployment for Gmail/Outlook.
+* Updated styling in various UI components, including studio button and index column behavior.
+* Enhanced onboarding snippets for better integration with Langchain Python.
+* Added support for [custom separators in SCIM group names](https://docs.langchain.com/langsmith/user-management#configure-custom-separator).
 
-<Update label="2026-03-03" tags={["self-hosted"]}>
-  ## langsmith-0.13.17
+**Download the Helm chart:** [`langsmith-0.13.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.17/langsmith-0.13.17.tgz)
 
-  * Fixed a bug in the executor deployment handling for new operator versions.
-  * Added a setting to filter out internal helper threads from the inbox.
-  * Improved the evaluator's page by providing context to Polly's feedback.
-  * Forced trace filtering for dataset code evaluators to enhance stability.
-  * Updated OAuth mode management, restricting changes during updates.
-  * Fixed an issue with experiment cell colors to enhance user clarity.
-  * Improved the usage configuration modal to utilize a new TTL endpoint for trace retention.
-  * Addressed a bug where workspace invites were not displaying correctly in the UI.
-  * Applied brand color adjustments in dark mode and various UI elements.
-  * Enhanced OAuth callback security by preventing potential reflected XSS vulnerabilities.
-  * Added a dynamic OAuth feature for user management.
-  * Fixed a bug preventing filter updates when certain conditions were met.
-  * Implemented rebranding updates for the auth screen.
-  * Added a feature to collapse sidebar automatically on small viewports.
-  * Fixed issues with variable handling in playground evaluate mode.
-  * Enhanced the Agent Builder with infinite scroll and improved inbox fetching.
-  * Added a new Outlook Trigger feature in the Agent Builder.
-  * Upgraded agent-builder to use websockets and new OpenAI model API (gpt-5.3-codex).
-  * Fixed auto-save on API key during onboarding process.
-  * Resolved issues causing errors in the playground due to empty placeholders.
-  * Updated frontend with a new logo for favicon.
-  * Fixed authorization bugs in cron deployment for Gmail/Outlook.
-  * Updated styling in various UI components, including studio button and index column behavior.
-  * Enhanced onboarding snippets for better integration with Langchain Python.
-  * Added support for [custom separators in SCIM group names](/langsmith/user-management#configure-custom-separator).
+## 2026-02-26
+## langsmith-0.13.16
 
-  **Download the Helm chart:** [`langsmith-0.13.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.17/langsmith-0.13.17.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.15. Refer to the [langsmith-0.13.15](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-15) release notes below.
 
-<Update label="2026-02-26" tags={["self-hosted"]}>
-  ## langsmith-0.13.16
+**Download the Helm chart:** [`langsmith-0.13.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.16/langsmith-0.13.16.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.15. Refer to the [langsmith-0.13.15](#langsmith-0-13-15) release notes below.
+## 2026-02-26
+## langsmith-0.13.15
 
-  **Download the Helm chart:** [`langsmith-0.13.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.16/langsmith-0.13.16.tgz)
-</Update>
+* Added rebranded primary colors to button under feature flag in the frontend UI.
+* Replaced dataset autocomplete with tag input to improve user experience.
+* Auto-hide and position Models column in the frontend based on data.
+* Fixed revalidation conflict in the Smith frontend.
+* Improved workspace model configurations to prevent text overflow with tooltips.
+* Surfaced Models option in Group By popover under a feature flag.
+* Supported loading ChatAnthropicVertex model configs in Smith-Polly.
+* Added "No matching filters" message for empty search results in Filter Component Select V2.
+* Enabled navigating automatically to insights with global scroll support.
+* Resolved issues with playground and evaluators provider selector not filtering out disabled providers.
+* Improved messaging mode user experience and styling.
+* Implemented Raw Query Mode for Inline Filters.
+* Allow `secret_key_ref` to be `None` in `K8sEnvVarSource` for backend improvements.
+* Fixed agent builder UI to wrap question text on narrow viewports and dismiss "Add API Key to Get Started" dialog.
+* Updated UX to match evaluator button height with tool button pattern.
+* Persisted selected model in local storage for a consistent UI experience.
+* Auto-generated thread titles for improved thread management.
+* Enhanced backend by gating secrets access with granular RBAC permissions.
+* Implemented Outlook Email Tools in the Agent Builder.
+* Improved keyboard shortcuts in the inbox feature of the Agent Builder UI.
 
-<Update label="2026-02-26" tags={["self-hosted"]}>
-  ## langsmith-0.13.15
+**Download the Helm chart:** [`langsmith-0.13.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.15/langsmith-0.13.15.tgz)
 
-  * Added rebranded primary colors to button under feature flag in the frontend UI.
-  * Replaced dataset autocomplete with tag input to improve user experience.
-  * Auto-hide and position Models column in the frontend based on data.
-  * Fixed revalidation conflict in the Smith frontend.
-  * Improved workspace model configurations to prevent text overflow with tooltips.
-  * Surfaced Models option in Group By popover under a feature flag.
-  * Supported loading ChatAnthropicVertex model configs in Smith-Polly.
-  * Added "No matching filters" message for empty search results in Filter Component Select V2.
-  * Enabled navigating automatically to insights with global scroll support.
-  * Resolved issues with playground and evaluators provider selector not filtering out disabled providers.
-  * Improved messaging mode user experience and styling.
-  * Implemented Raw Query Mode for Inline Filters.
-  * Allow `secret_key_ref` to be `None` in `K8sEnvVarSource` for backend improvements.
-  * Fixed agent builder UI to wrap question text on narrow viewports and dismiss "Add API Key to Get Started" dialog.
-  * Updated UX to match evaluator button height with tool button pattern.
-  * Persisted selected model in local storage for a consistent UI experience.
-  * Auto-generated thread titles for improved thread management.
-  * Enhanced backend by gating secrets access with granular RBAC permissions.
-  * Implemented Outlook Email Tools in the Agent Builder.
-  * Improved keyboard shortcuts in the inbox feature of the Agent Builder UI.
+## 2026-02-24
+## langsmith-0.13.14
 
-  **Download the Helm chart:** [`langsmith-0.13.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.15/langsmith-0.13.15.tgz)
-</Update>
+* Fixed agent generation interruptions and handling, improving stability in the user experience.
+* Fixed long feedback header text overflow when dragged to the last column.
+* Added OAuth connections for built-in tools and providers on the tool page.
+* Fixed crashes occurring on the run details page.
+* Fixed onboarding dialog not fetching tools unnecessarily.
+* Updated agent builder frontend to show real-time run count.
+* Added private registry UI to the frontend.
+* Enhanced support for SerializedConstructor model configs in playground and insights.
+* Added Gemini 3.1 Pro model to playground and backend model lists.
+* Fixed tool registry crash in the playground.
+* Added support for Gmail authentication improvements, including refresh token capability.
+* Added new API endpoints for running playground experiments using a new service.
+* Improved UI for trace filters with version 2 UX using Filterbar.
+* Enhanced syntax highlighting to match Figma design for standardization.
+* Supported Gmail OAuth v2 with cron logic for higher reliability.
+* Added new models column in the experiment view with updated filtering options.
+* Supported multiple paths for query shadowing log improvements.
+* Added UIs for managing and editing model API key names in the playground.
 
-<Update label="2026-02-24" tags={["self-hosted"]}>
-  ## langsmith-0.13.14
+**Download the Helm chart:** [`langsmith-0.13.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.14/langsmith-0.13.14.tgz)
 
-  * Fixed agent generation interruptions and handling, improving stability in the user experience.
-  * Fixed long feedback header text overflow when dragged to the last column.
-  * Added OAuth connections for built-in tools and providers on the tool page.
-  * Fixed crashes occurring on the run details page.
-  * Fixed onboarding dialog not fetching tools unnecessarily.
-  * Updated agent builder frontend to show real-time run count.
-  * Added private registry UI to the frontend.
-  * Enhanced support for SerializedConstructor model configs in playground and insights.
-  * Added Gemini 3.1 Pro model to playground and backend model lists.
-  * Fixed tool registry crash in the playground.
-  * Added support for Gmail authentication improvements, including refresh token capability.
-  * Added new API endpoints for running playground experiments using a new service.
-  * Improved UI for trace filters with version 2 UX using Filterbar.
-  * Enhanced syntax highlighting to match Figma design for standardization.
-  * Supported Gmail OAuth v2 with cron logic for higher reliability.
-  * Added new models column in the experiment view with updated filtering options.
-  * Supported multiple paths for query shadowing log improvements.
-  * Added UIs for managing and editing model API key names in the playground.
+## 2026-02-14
+## langsmith-0.13.13
 
-  **Download the Helm chart:** [`langsmith-0.13.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.14/langsmith-0.13.14.tgz)
-</Update>
+* Reverted the PostgreSQL version to v14.7 and the Redis version to v7. This fixes breaking changes introduced in langsmith-0.13.10.
+* Fixed internal error details being leaked in 5xx responses to enhance security.
+* Improved View UI by moving SaveViewButton from ViewDropdown and changing SaveForm to a modal for better usability.
+* Added model select dropdown to the template creation flow for enhanced user experience.
+* Added warning for duplicate URLs when creating MCP server to prevent configuration errors.
+* Added user context to agents and sub-agents for better feature functionality.
+* Added support for SerializedConstructor model configs in the playground for improved flexibility.
+* Enhanced UI by showing categorical feedback in experiment view config and hiding the sort icon.
+* Improved playground and experiment views by fixing cell alignment.
+* Added image upload support to facilitate better asset management.
+* Added onboarding dialog to general-purpose agent for improved user guidance.
+* Added spinner to loading triggers skeleton for better loading indication.
 
-<Update label="2026-02-14" tags={["self-hosted"]}>
-  ## langsmith-0.13.13
+**Download the Helm chart:** [`langsmith-0.13.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.13/langsmith-0.13.13.tgz)
 
-  * Reverted the PostgreSQL version to v14.7 and the Redis version to v7. This fixes breaking changes introduced in langsmith-0.13.10.
-  * Fixed internal error details being leaked in 5xx responses to enhance security.
-  * Improved View UI by moving SaveViewButton from ViewDropdown and changing SaveForm to a modal for better usability.
-  * Added model select dropdown to the template creation flow for enhanced user experience.
-  * Added warning for duplicate URLs when creating MCP server to prevent configuration errors.
-  * Added user context to agents and sub-agents for better feature functionality.
-  * Added support for SerializedConstructor model configs in the playground for improved flexibility.
-  * Enhanced UI by showing categorical feedback in experiment view config and hiding the sort icon.
-  * Improved playground and experiment views by fixing cell alignment.
-  * Added image upload support to facilitate better asset management.
-  * Added onboarding dialog to general-purpose agent for improved user guidance.
-  * Added spinner to loading triggers skeleton for better loading indication.
+## 2026-02-12
+## langsmith-0.13.12
 
-  **Download the Helm chart:** [`langsmith-0.13.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.13/langsmith-0.13.13.tgz)
-</Update>
+* Improved button sizes and filter chip alignment in the InlineFilters UX.
+* Added commit tags search and display to the Prompt Hub.
+* Fixed issue with viewing experiments having objects for feedback scores.
+* Enhanced tracing for the deploy\_image task.
+* Added a search bar for the new consolidated filter dropdown.
+* Added environment variable for globally disabling personal access token creation.
+* Added cost charts feature.
+* Improved homepage styling and fixed related design issues.
+* Fixed issues with rerendering in General Purpose API (GPA).
+* Improved system to count PENDING, RETRY, and FAILED transactions in self-hosted offline usage reporting.
+* Enhanced the agent builder to localize the current date to the user's timezone.
+* Added Bedrock inference profile dropdown to the playground.
+* Improved error detection and messaging for server issues in agent-chat.
+* Fixed styling issues including email count in invite modal and load state display in the agent editor.
+* Implemented initial design for a tools page with feature flags.
+* Added icon-only filter popover mode to the frontend filter UI.
+* Added beacon endpoint for Self Hosted Agent Builder Runs Limiting.
+* Enable new Granular Usage tab for reporting billable usage by workspace, project, user, and API key (enable with `DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true` and `GRANULAR_USAGE_TABLE_ENABLED=true` environment variables in `commonEnv`)
 
-<Update label="2026-02-12" tags={["self-hosted"]}>
-  ## langsmith-0.13.12
+**Download the Helm chart:** [`langsmith-0.13.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.12/langsmith-0.13.12.tgz)
 
-  * Improved button sizes and filter chip alignment in the InlineFilters UX.
-  * Added commit tags search and display to the Prompt Hub.
-  * Fixed issue with viewing experiments having objects for feedback scores.
-  * Enhanced tracing for the deploy\_image task.
-  * Added a search bar for the new consolidated filter dropdown.
-  * Added environment variable for globally disabling personal access token creation.
-  * Added cost charts feature.
-  * Improved homepage styling and fixed related design issues.
-  * Fixed issues with rerendering in General Purpose API (GPA).
-  * Improved system to count PENDING, RETRY, and FAILED transactions in self-hosted offline usage reporting.
-  * Enhanced the agent builder to localize the current date to the user's timezone.
-  * Added Bedrock inference profile dropdown to the playground.
-  * Improved error detection and messaging for server issues in agent-chat.
-  * Fixed styling issues including email count in invite modal and load state display in the agent editor.
-  * Implemented initial design for a tools page with feature flags.
-  * Added icon-only filter popover mode to the frontend filter UI.
-  * Added beacon endpoint for Self Hosted Agent Builder Runs Limiting.
-  * Enable new Granular Usage tab for reporting billable usage by workspace, project, user, and API key (enable with `DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true` and `GRANULAR_USAGE_TABLE_ENABLED=true` environment variables in `commonEnv`)
+## 2026-02-12
+## langsmith-0.13.11
 
-  **Download the Helm chart:** [`langsmith-0.13.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.12/langsmith-0.13.12.tgz)
-</Update>
+* Improved Agent Builder by using persisted simple model config.
+* Fixed UI for Playground with better message block and tool button consistency.
+* Added a search bar for the new consolidated filter dropdown.
+* Fixed agent builder model selector for users without 'workspaces:manage' permission.
+* Added file upload feature for General Purpose Agent.
+* Added button to create General Purpose Agent.
+* Enhanced the Playground by preserving baseline setting in URL on page reload.
+* Improved Playground experiment table UI and alignment.
+* Fixed bulk deletion of datasets to update the table correctly.
+* Added new API: workspace-scoped tool registry API.
+* Improved support for multifield runFields.
+* Enhanced insights scheduler with backend changes.
+* Added ability to navigate pages in Polly and an initial set of base evaluations.
+* Added tracing enhancements to Agent Builder, including tool call tracing.
+* Integrated changes to support custom model configs temporarily.
 
-<Update label="2026-02-12" tags={["self-hosted"]}>
-  ## langsmith-0.13.11
+**Download the Helm chart:** [`langsmith-0.13.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.11/langsmith-0.13.11.tgz)
 
-  * Improved Agent Builder by using persisted simple model config.
-  * Fixed UI for Playground with better message block and tool button consistency.
-  * Added a search bar for the new consolidated filter dropdown.
-  * Fixed agent builder model selector for users without 'workspaces:manage' permission.
-  * Added file upload feature for General Purpose Agent.
-  * Added button to create General Purpose Agent.
-  * Enhanced the Playground by preserving baseline setting in URL on page reload.
-  * Improved Playground experiment table UI and alignment.
-  * Fixed bulk deletion of datasets to update the table correctly.
-  * Added new API: workspace-scoped tool registry API.
-  * Improved support for multifield runFields.
-  * Enhanced insights scheduler with backend changes.
-  * Added ability to navigate pages in Polly and an initial set of base evaluations.
-  * Added tracing enhancements to Agent Builder, including tool call tracing.
-  * Integrated changes to support custom model configs temporarily.
+## 2026-02-10
+## langsmith-0.13.10
 
-  **Download the Helm chart:** [`langsmith-0.13.11.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.11/langsmith-0.13.11.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.9. Refer to the [langsmith-0.13.9](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-9) release notes below.
 
-<Update label="2026-02-10" tags={["self-hosted"]}>
-  ## langsmith-0.13.10
+**Download the Helm chart:** [`langsmith-0.13.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.10/langsmith-0.13.10.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.9. Refer to the [langsmith-0.13.9](#langsmith-0-13-9) release notes below.
+## 2026-02-09
+## langsmith-0.13.9
 
-  **Download the Helm chart:** [`langsmith-0.13.10.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.10/langsmith-0.13.10.tgz)
-</Update>
+* Fixed sorting of workspaces alphabetically in the new switcher to improve user experience.
+* Improved playground with new tool modal design and model config popup windows for enhanced usability.
+* Fixed issue with creating tags being idempotent.
+* Modified Agent Builder to cache MCP tools list, session ID, and OAuth tokens for better performance.
+* Fixed updated error message for exhausted agent builder runs.
+* Fixed routing configuration for the agent builder /allow-run API endpoint.
+* Fixed spacing of home page tables for improved UI.
+* Fixed issue with datasets repeatedly fetching if empty.
+* Fixed edit access for API keys for non-admin users.
+* Added cost and token columns in the experiment view for better data insights.
+* Fixed an issue where the Slack trigger was dropping messages due to authentication errors.
+* Fixed boolean feedback values handling in comparison table cells.
+* Updated service key subject for API calls to /allow-run for accurate authentication.
+* Improved agent builder to use persisted simple model config.
+* Fixed error state handling for OAuth login failures.
+* Enhanced agent builder by ensuring threads display errors on reconnect in agent chat.
+* Fixed UI to ensure the footer menu closes on organization switch.
+* Improved tagging authentication by using specific resource auth.
+* Enhanced UI to prevent closing the pane from within the app selector dropdown.
+* Fixed potential SQL injection risks in feedback and annotation queue listing.
+* Added a 15-second timeout to the OAuth HTTP client for improved connection reliability.
 
-<Update label="2026-02-09" tags={["self-hosted"]}>
-  ## langsmith-0.13.9
+**Download the Helm chart:** [`langsmith-0.13.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.9/langsmith-0.13.9.tgz)
 
-  * Fixed sorting of workspaces alphabetically in the new switcher to improve user experience.
-  * Improved playground with new tool modal design and model config popup windows for enhanced usability.
-  * Fixed issue with creating tags being idempotent.
-  * Modified Agent Builder to cache MCP tools list, session ID, and OAuth tokens for better performance.
-  * Fixed updated error message for exhausted agent builder runs.
-  * Fixed routing configuration for the agent builder /allow-run API endpoint.
-  * Fixed spacing of home page tables for improved UI.
-  * Fixed issue with datasets repeatedly fetching if empty.
-  * Fixed edit access for API keys for non-admin users.
-  * Added cost and token columns in the experiment view for better data insights.
-  * Fixed an issue where the Slack trigger was dropping messages due to authentication errors.
-  * Fixed boolean feedback values handling in comparison table cells.
-  * Updated service key subject for API calls to /allow-run for accurate authentication.
-  * Improved agent builder to use persisted simple model config.
-  * Fixed error state handling for OAuth login failures.
-  * Enhanced agent builder by ensuring threads display errors on reconnect in agent chat.
-  * Fixed UI to ensure the footer menu closes on organization switch.
-  * Improved tagging authentication by using specific resource auth.
-  * Enhanced UI to prevent closing the pane from within the app selector dropdown.
-  * Fixed potential SQL injection risks in feedback and annotation queue listing.
-  * Added a 15-second timeout to the OAuth HTTP client for improved connection reliability.
+## 2026-02-06
+## langsmith-0.13.7
 
-  **Download the Helm chart:** [`langsmith-0.13.9.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.9/langsmith-0.13.9.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.6. Refer to the [langsmith-0.13.6](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-6) release notes below.
 
-<Update label="2026-02-06" tags={["self-hosted"]}>
-  ## langsmith-0.13.7
+**Download the Helm chart:** [`langsmith-0.13.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.7/langsmith-0.13.7.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.6. Refer to the [langsmith-0.13.6](#langsmith-0-13-6) release notes below.
+## 2026-02-05
+## langsmith-0.13.6
 
-  **Download the Helm chart:** [`langsmith-0.13.7.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.7/langsmith-0.13.7.tgz)
-</Update>
+* Fixed an issue with truncated large numbers affecting the user interface.
+* Improved error string conversion from S3 to enhance error handling.
+* Updated Filters UX to save DateTimeRange, improving user experience.
+* Fixed UUID conversion to ensure consistent general agent identification.
+* Fixed agent ID conversion to always use a string instead of UUID for stability.
+* Enhanced the experiment comparison view by showing custom computed columns.
+* Fixed chat preview for langchain-shaped output for better user experience.
+* Improved caching mechanisms and authentication control planes' RetryableHTTP.
+* Fixed the issue of incorrect tenant usage when bootstrapping agents.
+* Improved user interface by adjusting page padding to remove visual obstructions.
+* Updated wording for trace-related inquiries to improve clarity.
+* Enhanced large field uploads to S3 for single run POST/PATCH endpoints.
 
-<Update label="2026-02-05" tags={["self-hosted"]}>
-  ## langsmith-0.13.6
+**Download the Helm chart:** [`langsmith-0.13.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.6/langsmith-0.13.6.tgz)
 
-  * Fixed an issue with truncated large numbers affecting the user interface.
-  * Improved error string conversion from S3 to enhance error handling.
-  * Updated Filters UX to save DateTimeRange, improving user experience.
-  * Fixed UUID conversion to ensure consistent general agent identification.
-  * Fixed agent ID conversion to always use a string instead of UUID for stability.
-  * Enhanced the experiment comparison view by showing custom computed columns.
-  * Fixed chat preview for langchain-shaped output for better user experience.
-  * Improved caching mechanisms and authentication control planes' RetryableHTTP.
-  * Fixed the issue of incorrect tenant usage when bootstrapping agents.
-  * Improved user interface by adjusting page padding to remove visual obstructions.
-  * Updated wording for trace-related inquiries to improve clarity.
-  * Enhanced large field uploads to S3 for single run POST/PATCH endpoints.
+## 2026-02-05
+## langsmith-0.13.5
 
-  **Download the Helm chart:** [`langsmith-0.13.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.6/langsmith-0.13.6.tgz)
-</Update>
+* Fixed regression on cloning prebuilt dashboards to enhance user experience.
+* Updated Filters UX to match new mocks and improved the view dropdown.
+* Fixed Agent Builder by converting `UUID` to `str` before JSON encoding to prevent errors.
+* Added an updated insights sidebar for a more informative UI.
+* Implemented bulk actions for tables to improve data management efficiency.
+* Added a redesigned feedback banner for annotation queue in the frontend.
+* Provided option to require feedback in the Smith frontend to enhance user communication.
+* Limited Agent Builder template list to 2 rows for better usability.
+* Fixed cursor jumping issue when editing agent builder skill name and description.
+* Solved SSO+SCIM issue, always provisioning users to workspaces.
+* Fixed Slack Auth disconnecting issue for workspace users.
+* Enhanced missing tool experience in the Agent Builder by adjusting prompts.
+* Prevented session fixation in self-hosted OAuth for enhanced security.
+* Fixed the 'view run' regression in the annotation queue redesign in Smith frontend.
+* Reduced gRPC streaming chunk size from 1MB to 64KB for improved performance.
+* Added download zip button inside the Agent Builder Explorer.
+* Enhanced tracing URLs allowed by adding them to the Datadog RUM config.
 
-<Update label="2026-02-05" tags={["self-hosted"]}>
-  ## langsmith-0.13.5
+**Download the Helm chart:** [`langsmith-0.13.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.5/langsmith-0.13.5.tgz)
 
-  * Fixed regression on cloning prebuilt dashboards to enhance user experience.
-  * Updated Filters UX to match new mocks and improved the view dropdown.
-  * Fixed Agent Builder by converting `UUID` to `str` before JSON encoding to prevent errors.
-  * Added an updated insights sidebar for a more informative UI.
-  * Implemented bulk actions for tables to improve data management efficiency.
-  * Added a redesigned feedback banner for annotation queue in the frontend.
-  * Provided option to require feedback in the Smith frontend to enhance user communication.
-  * Limited Agent Builder template list to 2 rows for better usability.
-  * Fixed cursor jumping issue when editing agent builder skill name and description.
-  * Solved SSO+SCIM issue, always provisioning users to workspaces.
-  * Fixed Slack Auth disconnecting issue for workspace users.
-  * Enhanced missing tool experience in the Agent Builder by adjusting prompts.
-  * Prevented session fixation in self-hosted OAuth for enhanced security.
-  * Fixed the 'view run' regression in the annotation queue redesign in Smith frontend.
-  * Reduced gRPC streaming chunk size from 1MB to 64KB for improved performance.
-  * Added download zip button inside the Agent Builder Explorer.
-  * Enhanced tracing URLs allowed by adding them to the Datadog RUM config.
+## 2026-02-04
+## langsmith-0.13.4
 
-  **Download the Helm chart:** [`langsmith-0.13.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.5/langsmith-0.13.5.tgz)
-</Update>
+* Fixed the toggle functionality for all column sections when clicking the Columns header.
+* Fixed failure to edit SSO settings
+* Improved frontend performance by using BarSeries instead of AnimatedBarSeries for granular usage tabs.
+* Added a Cmd + Enter hotkey to the new annotation queue for enhanced user interaction.
+* Added an option in the playground UI to mitigate loading errors by defaulting to `use_responses_api=true`.
+* Added support for custom Azure models.
+* Updated the playground UI for improved user experience.
+* Improved studio chat UX with auto-resize textarea and keyboard shortcuts.
+* Fixed prompt saving issue with incorrect naming.
+* Improved visibility and user experience by making search icons larger and tracking navigation of AQ, prompts, and deployments.
+* Enhanced UI for the Agent Builder with the introduction of a new Diff UI with context lines.
+* Enabled accurate Y-axis margins using d3 nice ticks for better frontend visualization.
+* Allowed the 'recently added to' section to pop over in the 'add to dataset' UI.
+* Added pagination to the dashboard select view for better usability.
+* Added support to limit long-lived TTL options and expose them in the org TTL settings endpoint.
+* Fixed a bug with streaming flicker using the responses API in the playground.
+* Enhanced the annotation queue user experience with custom output rendering in new queues.
+* Optimized dataset session comparison using example\_ids filtering for better performance.
+* Provided a download ZIP file button in the Agent Builder for user convenience.
+* Added a streamlined loading state for the Agent Builder's agent generator graph.
+* Allowed updating and creating SSO settings specifically in self-hosted environments.
+* Added support for displaying SCIM user's `displayName` attribute.
 
-<Update label="2026-02-04" tags={["self-hosted"]}>
-  ## langsmith-0.13.4
+These changes improve user interaction, enhance system performance, and expand support for custom models and infrastructure, benefiting self-hosted deployments.
 
-  * Fixed the toggle functionality for all column sections when clicking the Columns header.
-  * Fixed failure to edit SSO settings
-  * Improved frontend performance by using BarSeries instead of AnimatedBarSeries for granular usage tabs.
-  * Added a Cmd + Enter hotkey to the new annotation queue for enhanced user interaction.
-  * Added an option in the playground UI to mitigate loading errors by defaulting to `use_responses_api=true`.
-  * Added support for custom Azure models.
-  * Updated the playground UI for improved user experience.
-  * Improved studio chat UX with auto-resize textarea and keyboard shortcuts.
-  * Fixed prompt saving issue with incorrect naming.
-  * Improved visibility and user experience by making search icons larger and tracking navigation of AQ, prompts, and deployments.
-  * Enhanced UI for the Agent Builder with the introduction of a new Diff UI with context lines.
-  * Enabled accurate Y-axis margins using d3 nice ticks for better frontend visualization.
-  * Allowed the 'recently added to' section to pop over in the 'add to dataset' UI.
-  * Added pagination to the dashboard select view for better usability.
-  * Added support to limit long-lived TTL options and expose them in the org TTL settings endpoint.
-  * Fixed a bug with streaming flicker using the responses API in the playground.
-  * Enhanced the annotation queue user experience with custom output rendering in new queues.
-  * Optimized dataset session comparison using example\_ids filtering for better performance.
-  * Provided a download ZIP file button in the Agent Builder for user convenience.
-  * Added a streamlined loading state for the Agent Builder's agent generator graph.
-  * Allowed updating and creating SSO settings specifically in self-hosted environments.
-  * Added support for displaying SCIM user's `displayName` attribute.
+**Download the Helm chart:** [`langsmith-0.13.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.4/langsmith-0.13.4.tgz)
 
-  These changes improve user interaction, enhance system performance, and expand support for custom models and infrastructure, benefiting self-hosted deployments.
+## 2026-01-26
+## langsmith-0.13.3
 
-  **Download the Helm chart:** [`langsmith-0.13.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.4/langsmith-0.13.4.tgz)
-</Update>
+* Improved streaming to accumulate streamed delta data without loss.
+* Added Google Sheets/Docs tools integration.
+* Enhanced UX for OAuth servers in settings.
+* Made view trace links more obvious in the UI.
+* Resolved multiple bugs and performance issues in Agent Builder, including writing self-hosted Agent Builder runs to a single project and collapsing subagent tool cards by default.
+* Improved experiment UI, now showing experiment descriptions on the single experiment page and fixing a blank page issue when accessing experiments via public URL.
+* Enhanced UX by solving bulk export flakiness and allowing updating of bulk export destination credentials.
+* Improved inline filter UX with multiple bug fixes and added edit functionality.
+* Added support for configurable run input/output preview paths on the backend.
+* Introduced new workspace management permissions for managing members' access.
+* Optimized Agent Builder to reduce network calls.
+* Added Action Menu to MyAgents Navlink in Agent Builder.
+* Improved frontend performance, including solving slowness when loading authentication status.
+* Enhanced Agent Builder with the API Key Needed Label/Button and collapsed action cluster features.
+* Resolved playground tool modal overflow issue.
+* Improved security by fixing frontend vulnerability in remix run router and clearing URLs on logout to prevent workspace misdirection.
+* Updated API to use invoices for monthly burndown tracking and added support for V2 API.
+* Improved frontend to handle malformed LLM outputs gracefully.
+* Improved date/time selection UI by allowing bold "Last time" values for DateTimeRangePicker component.
 
-<Update label="2026-01-26" tags={["self-hosted"]}>
-  ## langsmith-0.13.3
+**Download the Helm chart:** [`langsmith-0.13.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.3/langsmith-0.13.3.tgz)
 
-  * Improved streaming to accumulate streamed delta data without loss.
-  * Added Google Sheets/Docs tools integration.
-  * Enhanced UX for OAuth servers in settings.
-  * Made view trace links more obvious in the UI.
-  * Resolved multiple bugs and performance issues in Agent Builder, including writing self-hosted Agent Builder runs to a single project and collapsing subagent tool cards by default.
-  * Improved experiment UI, now showing experiment descriptions on the single experiment page and fixing a blank page issue when accessing experiments via public URL.
-  * Enhanced UX by solving bulk export flakiness and allowing updating of bulk export destination credentials.
-  * Improved inline filter UX with multiple bug fixes and added edit functionality.
-  * Added support for configurable run input/output preview paths on the backend.
-  * Introduced new workspace management permissions for managing members' access.
-  * Optimized Agent Builder to reduce network calls.
-  * Added Action Menu to MyAgents Navlink in Agent Builder.
-  * Improved frontend performance, including solving slowness when loading authentication status.
-  * Enhanced Agent Builder with the API Key Needed Label/Button and collapsed action cluster features.
-  * Resolved playground tool modal overflow issue.
-  * Improved security by fixing frontend vulnerability in remix run router and clearing URLs on logout to prevent workspace misdirection.
-  * Updated API to use invoices for monthly burndown tracking and added support for V2 API.
-  * Improved frontend to handle malformed LLM outputs gracefully.
-  * Improved date/time selection UI by allowing bold "Last time" values for DateTimeRangePicker component.
+## 2026-01-21
+## langsmith-0.13.2
 
-  **Download the Helm chart:** [`langsmith-0.13.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.3/langsmith-0.13.3.tgz)
-</Update>
+* Fixed content-type validation for dataset uploads to improve data handling.
+* Improved the new annotation queue page with a pretty JSON editor and message list editor.
+* Enabled better handling of retriable ingest errors on QueueRunPayloads.
+* Fixed Cron Trigger updates in the Agent Builder UI.
+* Added support for Redis Cluster, enhancing scalability for self-hosted setups.
+* Fixed OAuth account takeover vulnerability to enhance security.
+* Improved rendering of raw output in the playground.
+* Added new inline UX filters and a View Dropdown component for enhanced user interaction.
+* Increased line-height on XS Text variant to prevent clipping issues in the frontend.
 
-<Update label="2026-01-21" tags={["self-hosted"]}>
-  ## langsmith-0.13.2
+**Download the Helm chart:** [`langsmith-0.13.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.2/langsmith-0.13.2.tgz)
 
-  * Fixed content-type validation for dataset uploads to improve data handling.
-  * Improved the new annotation queue page with a pretty JSON editor and message list editor.
-  * Enabled better handling of retriable ingest errors on QueueRunPayloads.
-  * Fixed Cron Trigger updates in the Agent Builder UI.
-  * Added support for Redis Cluster, enhancing scalability for self-hosted setups.
-  * Fixed OAuth account takeover vulnerability to enhance security.
-  * Improved rendering of raw output in the playground.
-  * Added new inline UX filters and a View Dropdown component for enhanced user interaction.
-  * Increased line-height on XS Text variant to prevent clipping issues in the frontend.
+## 2026-01-16
+## langsmith-0.13.1
 
-  **Download the Helm chart:** [`langsmith-0.13.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.2/langsmith-0.13.2.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.13.0. Refer to the [langsmith-0.13.0](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-0) release notes below.
 
-<Update label="2026-01-16" tags={["self-hosted"]}>
-  ## langsmith-0.13.1
+**Download the Helm chart:** [`langsmith-0.13.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.1/langsmith-0.13.1.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.13.0. Refer to the [langsmith-0.13.0](#langsmith-0-13-0) release notes below.
+## 2026-01-16
+## langsmith-0.13.0
 
-  **Download the Helm chart:** [`langsmith-0.13.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.1/langsmith-0.13.1.tgz)
-</Update>
+* Added support for [Agent Builder](https://docs.langchain.com/langsmith/fleet/index) in self-hosted deployments
+* Added configurable trace TTL for long-lived traces
+* Added ability to conditionally enable OAuth tools and triggers
+* Added sample application creation during onboarding
+* Fixed feedback pagination and auto-pagination bugs
+* Fixed trace drawer skeleton not appearing immediately
 
-<Update label="2026-01-16" tags={["self-hosted"]}>
-  ## langsmith-0.13.0
+**Download the Helm chart:** [`langsmith-0.13.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.0/langsmith-0.13.0.tgz)
 
-  * Added support for [Agent Builder](/langsmith/fleet/index) in self-hosted deployments
-  * Added configurable trace TTL for long-lived traces
-  * Added ability to conditionally enable OAuth tools and triggers
-  * Added sample application creation during onboarding
-  * Fixed feedback pagination and auto-pagination bugs
-  * Fixed trace drawer skeleton not appearing immediately
+## 2026-01-12
+## langsmith-0.12.37
 
-  **Download the Helm chart:** [`langsmith-0.13.0.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.13.0/langsmith-0.13.0.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.36. Refer to the [langsmith-0.12.36](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-36) release notes below.
 
-<Update label="2026-01-12" tags={["self-hosted"]}>
-  ## langsmith-0.12.37
+**Download the Helm chart:** [`langsmith-0.12.37.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.37/langsmith-0.12.37.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.36. Refer to the [langsmith-0.12.36](#langsmith-0-12-36) release notes below.
+## 2026-01-09
+## langsmith-0.12.36
 
-  **Download the Helm chart:** [`langsmith-0.12.37.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.37/langsmith-0.12.37.tgz)
-</Update>
+* Added support for custom MCP servers with OAuth in Agent Builder
+* Added ability to view and edit memory files in Agent Builder
+* Added support for attachments in the frontend
+* Improved streaming tree performance in trace viewer
+* Fixed scroll behavior in trace tree
+* Fixed unicode truncation issues in trace display
+* Fixed onboarding screen showing incorrectly when runs exist
+* Increased maximum automation rules per workspace to 200
 
-<Update label="2026-01-09" tags={["self-hosted"]}>
-  ## langsmith-0.12.36
+**Download the Helm chart:** [`langsmith-0.12.36.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.36/langsmith-0.12.36.tgz)
 
-  * Added support for custom MCP servers with OAuth in Agent Builder
-  * Added ability to view and edit memory files in Agent Builder
-  * Added support for attachments in the frontend
-  * Improved streaming tree performance in trace viewer
-  * Fixed scroll behavior in trace tree
-  * Fixed unicode truncation issues in trace display
-  * Fixed onboarding screen showing incorrectly when runs exist
-  * Increased maximum automation rules per workspace to 200
+## 2026-01-08
+## langsmith-0.12.35
 
-  **Download the Helm chart:** [`langsmith-0.12.36.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.36/langsmith-0.12.36.tgz)
-</Update>
+* Added per-bar highlighting for feedback charts in experiments
+* Added Agent Builder activity feed
+* Changed experiment chip to hover card for better usability
+* Fixed agents appearing in random sidebar positions
+* Fixed tool modal nesting issue in playground
+* Fixed diff mode fallback on comparison page
+* Fixed race condition in OAuth authentication requests
 
-<Update label="2026-01-08" tags={["self-hosted"]}>
-  ## langsmith-0.12.35
+**Download the Helm chart:** [`langsmith-0.12.35.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.35/langsmith-0.12.35.tgz)
 
-  * Added per-bar highlighting for feedback charts in experiments
-  * Added Agent Builder activity feed
-  * Changed experiment chip to hover card for better usability
-  * Fixed agents appearing in random sidebar positions
-  * Fixed tool modal nesting issue in playground
-  * Fixed diff mode fallback on comparison page
-  * Fixed race condition in OAuth authentication requests
+## 2025-12-26
+## langsmith-0.12.34
 
-  **Download the Helm chart:** [`langsmith-0.12.35.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.35/langsmith-0.12.35.tgz)
-</Update>
+* Added Redis IAM authentication support for GCP and Azure
+* Added self-serve audit logs in OCSF format
+* Added hide column option to experiment outputs header
+* Added message\_user tool to the tool server
+* Improved trace tree loading speed
+* Allowed basic auth installations to disable invites via API
+* Fixed tenant ID handling in navigation
+* Fixed scrolling in Agent Builder templates view
+* Fixed Gmail account connection limit tooltip
+* Fixed user view preference persistence on page load
+* Fixed tab wrapping in UI
+* Made feedback charts visible by default
+* Made SCIM group name matching case-insensitive
 
-<Update label="2025-12-26" tags={["self-hosted"]}>
-  ## langsmith-0.12.34
+**Download the Helm chart:** [`langsmith-0.12.34.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.34/langsmith-0.12.34.tgz)
 
-  * Added Redis IAM authentication support for GCP and Azure
-  * Added self-serve audit logs in OCSF format
-  * Added hide column option to experiment outputs header
-  * Added message\_user tool to the tool server
-  * Improved trace tree loading speed
-  * Allowed basic auth installations to disable invites via API
-  * Fixed tenant ID handling in navigation
-  * Fixed scrolling in Agent Builder templates view
-  * Fixed Gmail account connection limit tooltip
-  * Fixed user view preference persistence on page load
-  * Fixed tab wrapping in UI
-  * Made feedback charts visible by default
-  * Made SCIM group name matching case-insensitive
+## 2025-12-20
+## langsmith-0.12.33
 
-  **Download the Helm chart:** [`langsmith-0.12.34.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.34/langsmith-0.12.34.tgz)
-</Update>
+* Security fix: fixed Studio vulnerability to malicious `baseUrl` param by requiring user-defined allowed origins
+* Allow enabling invites alongside JIT provisioning for SSO (OAuth with Client Secret mode only)
+* Added self-serve audit logs for administrative actions (Private Preview)
 
-<Update label="2025-12-20" tags={["self-hosted"]}>
-  ## langsmith-0.12.33
+**Download the Helm chart:** [`langsmith-0.12.33.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.33/langsmith-0.12.33.tgz)
 
-  * Security fix: fixed Studio vulnerability to malicious `baseUrl` param by requiring user-defined allowed origins
-  * Allow enabling invites alongside JIT provisioning for SSO (OAuth with Client Secret mode only)
-  * Added self-serve audit logs for administrative actions (Private Preview)
+## 2025-12-12
+## langsmith-0.12.32
 
-  **Download the Helm chart:** [`langsmith-0.12.33.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.33/langsmith-0.12.33.tgz)
-</Update>
+* Added IAM connection support for PostgreSQL (AWS only).
+* Added GPT-5.2 model support to the playground.
+* Added support for setting memory limits on executor pods.
 
-<Update label="2025-12-12" tags={["self-hosted"]}>
-  ## langsmith-0.12.32
+**Download the Helm chart:** [`langsmith-0.12.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.32/langsmith-0.12.32.tgz)
 
-  * Added IAM connection support for PostgreSQL (AWS only).
-  * Added GPT-5.2 model support to the playground.
-  * Added support for setting memory limits on executor pods.
+## 2025-12-11
+## langsmith-0.12.31
 
-  **Download the Helm chart:** [`langsmith-0.12.32.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.32/langsmith-0.12.32.tgz)
-</Update>
+* Improved error messages for basic authentication misconfiguration.
+* Added organization operator role support.
+* Fixed issues with streaming datasets endpoint.
 
-<Update label="2025-12-11" tags={["self-hosted"]}>
-  ## langsmith-0.12.31
+**Download the Helm chart:** [`langsmith-0.12.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.31/langsmith-0.12.31.tgz)
 
-  * Improved error messages for basic authentication misconfiguration.
-  * Added organization operator role support.
-  * Fixed issues with streaming datasets endpoint.
+## 2025-12-09
+## langsmith-0.12.30
 
-  **Download the Helm chart:** [`langsmith-0.12.31.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.31/langsmith-0.12.31.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.29. Refer to the [langsmith-0.12.29](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-29) release notes below.
 
-<Update label="2025-12-09" tags={["self-hosted"]}>
-  ## langsmith-0.12.30
+**Download the Helm chart:** [`langsmith-0.12.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.30/langsmith-0.12.30.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.29. Refer to the [langsmith-0.12.29](#langsmith-0-12-29) release notes below.
+## 2025-12-08
+## langsmith-0.12.29
 
-  **Download the Helm chart:** [`langsmith-0.12.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.30/langsmith-0.12.30.tgz)
-</Update>
+* Added mTLS (mutual TLS) support for ClickHouse connections to enhance security for database communication.
 
-<Update label="2025-12-08" tags={["self-hosted"]}>
-  ## langsmith-0.12.29
+**Download the Helm chart:** [`langsmith-0.12.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.29/langsmith-0.12.29.tgz)
 
-  * Added mTLS (mutual TLS) support for ClickHouse connections to enhance security for database communication.
+## 2025-12-05
+## langsmith-0.12.28
 
-  **Download the Helm chart:** [`langsmith-0.12.29.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.29/langsmith-0.12.29.tgz)
-</Update>
+* Added mTLS (mutual TLS) support for PostgreSQL connections to enhance security for database communication.
+* Added mTLS support for ClickHouse clients.
+* Fixed Agent Builder onboarding and side navigation visibility when disabled in self-hosted deployments.
 
-<Update label="2025-12-05" tags={["self-hosted"]}>
-  ## langsmith-0.12.28
+**Download the Helm chart:** [`langsmith-0.12.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.28/langsmith-0.12.28.tgz)
 
-  * Added mTLS (mutual TLS) support for PostgreSQL connections to enhance security for database communication.
-  * Added mTLS support for ClickHouse clients.
-  * Fixed Agent Builder onboarding and side navigation visibility when disabled in self-hosted deployments.
+## 2025-12-04
+## langsmith-0.12.27
 
-  **Download the Helm chart:** [`langsmith-0.12.28.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.28/langsmith-0.12.28.tgz)
-</Update>
+* Added mTLS (mutual TLS) support for Redis connections to enhance security.
+* Added support for empty trigger server configuration in self-hosted deployments.
+* Improved incident banner styling and content.
 
-<Update label="2025-12-04" tags={["self-hosted"]}>
-  ## langsmith-0.12.27
+**Download the Helm chart:** [`langsmith-0.12.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.27/langsmith-0.12.27.tgz)
 
-  * Added mTLS (mutual TLS) support for Redis connections to enhance security.
-  * Added support for empty trigger server configuration in self-hosted deployments.
-  * Improved incident banner styling and content.
+## 2025-12-02
+## langsmith-0.8.30
 
-  **Download the Helm chart:** [`langsmith-0.12.27.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.27/langsmith-0.12.27.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-12-02" tags={["self-hosted"]}>
-  ## langsmith-0.8.30
+**Download the Helm chart:** [`langsmith-0.8.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.8.30/langsmith-0.8.30.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-12-01
+## langsmith-0.12.25
 
-  **Download the Helm chart:** [`langsmith-0.8.30.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.8.30/langsmith-0.8.30.tgz)
-</Update>
+* Enabled Agent Builder UI feature flag for self-hosted deployments.
+* Added Redis Cluster support for improved scalability and high availability.
 
-<Update label="2025-12-01" tags={["self-hosted"]}>
-  ## langsmith-0.12.25
+**Download the Helm chart:** [`langsmith-0.12.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.25/langsmith-0.12.25.tgz)
 
-  * Enabled Agent Builder UI feature flag for self-hosted deployments.
-  * Added Redis Cluster support for improved scalability and high availability.
+## 2025-11-27
+## langsmith-0.12.24
 
-  **Download the Helm chart:** [`langsmith-0.12.25.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.25/langsmith-0.12.25.tgz)
-</Update>
+* Added dequeue timeouts to all SAQ (Simple Async Queue) queues to improve reliability.
+* Performance improvements and bug fixes.
 
-<Update label="2025-11-27" tags={["self-hosted"]}>
-  ## langsmith-0.12.24
+**Download the Helm chart:** [`langsmith-0.12.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.24/langsmith-0.12.24.tgz)
 
-  * Added dequeue timeouts to all SAQ (Simple Async Queue) queues to improve reliability.
-  * Performance improvements and bug fixes.
+## 2025-11-26
+## langsmith-0.12.23
 
-  **Download the Helm chart:** [`langsmith-0.12.24.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.24/langsmith-0.12.24.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-26" tags={["self-hosted"]}>
-  ## langsmith-0.12.23
+**Download the Helm chart:** [`langsmith-0.12.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.23/langsmith-0.12.23.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-26
+## langsmith-0.12.22
 
-  **Download the Helm chart:** [`langsmith-0.12.23.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.23/langsmith-0.12.23.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.21. Refer to the [langsmith-0.12.21](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-21) release notes below.
 
-<Update label="2025-11-26" tags={["self-hosted"]}>
-  ## langsmith-0.12.22
+**Download the Helm chart:** [`langsmith-0.12.22.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.22/langsmith-0.12.22.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.21. Refer to the [langsmith-0.12.21](#langsmith-0-12-21) release notes below.
+## 2025-11-26
+## langsmith-0.12.21
 
-  **Download the Helm chart:** [`langsmith-0.12.22.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.22/langsmith-0.12.22.tgz)
-</Update>
+* Added explicit `revisionHistoryLimit` configuration for operator deployment template.
 
-<Update label="2025-11-26" tags={["self-hosted"]}>
-  ## langsmith-0.12.21
+**Download the Helm chart:** [`langsmith-0.12.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.21/langsmith-0.12.21.tgz)
 
-  * Added explicit `revisionHistoryLimit` configuration for operator deployment template.
+## 2025-11-24
+## langsmith-0.12.20
 
-  **Download the Helm chart:** [`langsmith-0.12.21.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.21/langsmith-0.12.21.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.18. Refer to the [langsmith-0.12.18](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-18) release notes below.
 
-<Update label="2025-11-24" tags={["self-hosted"]}>
-  ## langsmith-0.12.20
+**Download the Helm chart:** [`langsmith-0.12.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.20/langsmith-0.12.20.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.18. Refer to the [langsmith-0.12.18](#langsmith-0-12-18) release notes below.
+## 2025-11-24
+## langsmith-0.12.19
 
-  **Download the Helm chart:** [`langsmith-0.12.20.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.20/langsmith-0.12.20.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.18. Refer to the [langsmith-0.12.18](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-18) release notes below.
 
-<Update label="2025-11-24" tags={["self-hosted"]}>
-  ## langsmith-0.12.19
+**Download the Helm chart:** [`langsmith-0.12.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.19/langsmith-0.12.19.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.18. Refer to the [langsmith-0.12.18](#langsmith-0-12-18) release notes below.
+## 2025-11-20
+## langsmith-0.12.18
 
-  **Download the Helm chart:** [`langsmith-0.12.19.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.19/langsmith-0.12.19.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-20" tags={["self-hosted"]}>
-  ## langsmith-0.12.18
+**Download the Helm chart:** [`langsmith-0.12.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.18/langsmith-0.12.18.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-19
+## langsmith-0.12.17
 
-  **Download the Helm chart:** [`langsmith-0.12.18.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.18/langsmith-0.12.18.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-19" tags={["self-hosted"]}>
-  ## langsmith-0.12.17
+**Download the Helm chart:** [`langsmith-0.12.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.17/langsmith-0.12.17.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-19
+## langsmith-0.12.16
 
-  **Download the Helm chart:** [`langsmith-0.12.17.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.17/langsmith-0.12.17.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-19" tags={["self-hosted"]}>
-  ## langsmith-0.12.16
+**Download the Helm chart:** [`langsmith-0.12.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.16/langsmith-0.12.16.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-17
+## langsmith-0.12.15
 
-  **Download the Helm chart:** [`langsmith-0.12.16.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.16/langsmith-0.12.16.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-17" tags={["self-hosted"]}>
-  ## langsmith-0.12.15
+**Download the Helm chart:** [`langsmith-0.12.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.15/langsmith-0.12.15.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-17
+## langsmith-0.12.14
 
-  **Download the Helm chart:** [`langsmith-0.12.15.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.15/langsmith-0.12.15.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-17" tags={["self-hosted"]}>
-  ## langsmith-0.12.14
+**Download the Helm chart:** [`langsmith-0.12.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.14/langsmith-0.12.14.tgz)
 
-  * Internal improvements and maintenance updates
+## 2025-11-13
+## langsmith-0.12.13
 
-  **Download the Helm chart:** [`langsmith-0.12.14.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.14/langsmith-0.12.14.tgz)
-</Update>
+* This release packages the same LangSmith application version as langsmith-0.12.12. Refer to the [langsmith-0.12.12](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-12-12) release notes below.
 
-<Update label="2025-11-13" tags={["self-hosted"]}>
-  ## langsmith-0.12.13
+**Download the Helm chart:** [`langsmith-0.12.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.13/langsmith-0.12.13.tgz)
 
-  * This release packages the same LangSmith application version as langsmith-0.12.12. Refer to the [langsmith-0.12.12](#langsmith-0-12-12) release notes below.
+## 2025-11-13
+## langsmith-0.12.12
 
-  **Download the Helm chart:** [`langsmith-0.12.13.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.13/langsmith-0.12.13.tgz)
-</Update>
+* Internal improvements and maintenance updates
 
-<Update label="2025-11-13" tags={["self-hosted"]}>
-  ## langsmith-0.12.12
-
-  * Internal improvements and maintenance updates
-
-  **Download the Helm chart:** [`langsmith-0.12.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.12/langsmith-0.12.12.tgz)
-</Update>
+**Download the Helm chart:** [`langsmith-0.12.12.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.12.12/langsmith-0.12.12.tgz)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted-changelog.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

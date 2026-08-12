@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OracleAI vector search integrations
 
 > Integrate with OracleAI vector search using LangChain Python.
@@ -18,53 +14,51 @@ Oracle AI Database is built for AI workloads where you query data by **meaning**
 
 Install `langchain-oracledb`. The `python-oracledb` driver will be installed automatically as a dependency.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oracledb
-  ```
+```bash
+pip install -qU langchain-oracledb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oracledb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oracledb
+```
 
 ## Document loaders
 
-Please check the [usage example](/oss/python/integrations/document_loaders/oracleai).
+Please check the [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/oracleai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.document_loaders.oracleai import OracleDocLoader
 ```
 
 ## Text splitter
 
-Please check the [usage example](/oss/python/integrations/document_loaders/oracleai).
+Please check the [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/oracleai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.document_loaders.oracleai import OracleTextSplitter
 ```
 
 ## Embeddings
 
-Please check the [usage example](/oss/python/integrations/embeddings/oracleai).
+Please check the [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/oracleai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.embeddings.oracleai import OracleEmbeddings
 ```
 
 ## Summary
 
-Please check the [usage example](/oss/python/integrations/tools/oracleai).
+Please check the [usage example](https://docs.langchain.com/oss/python/integrations/tools/oracleai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.utilities.oracleai import OracleSummary
 ```
 
 ## Vector store
 
-Please check the [usage example](/oss/python/integrations/vectorstores/oracle).
+Please check the [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/oracle).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oracledb.vectorstores.oraclevs import OracleVS
 ```
 
@@ -80,12 +74,8 @@ Please check the [Oracle AI Vector Search End-to-End Demo Guide](https://github.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oracleai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

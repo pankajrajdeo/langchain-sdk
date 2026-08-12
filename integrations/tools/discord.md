@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Discord integration
 
 > Integrate with the Discord tool using LangChain Python.
 
-This guide provides a quick overview for getting started with Discord tooling in [langchain\_discord](/oss/python/integrations/tools/). For more details on each tool and configuration, see the docstrings in your repository or relevant doc pages.
+This guide provides a quick overview for getting started with Discord tooling in [langchain\_discord](https://docs.langchain.com/oss/python/integrations/tools/). For more details on each tool and configuration, see the docstrings in your repository or relevant doc pages.
 
 ## Overview
 
@@ -25,7 +21,7 @@ This guide provides a quick overview for getting started with Discord tooling in
 
 The integration is provided by the `langchain-discord-shikenso` package. Install it as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install --quiet -U langchain-discord-shikenso
 ```
 
@@ -33,11 +29,11 @@ pip install --quiet -U langchain-discord-shikenso
 
 This integration requires you to set `DISCORD_BOT_TOKEN` as an environment variable to authenticate with the Discord API.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export DISCORD_BOT_TOKEN="your-bot-token"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -48,7 +44,7 @@ import os
 
 You can optionally set up [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-python-integrations-tools-discord) for tracing or observability:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
@@ -57,7 +53,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Below is an example showing how to instantiate the Discord tools in `langchain_discord`. Adjust as needed for your specific usage.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_discord.tools.discord_read_messages import DiscordReadMessages
 from langchain_discord.tools.discord_send_messages import DiscordSendMessage
 
@@ -78,7 +74,7 @@ send_tool = DiscordSendMessage()
 
 Below is a simple example of calling the tool with keyword arguments in a dictionary.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 invocation_args = {"channel_id": "1234567890", "limit": 3}
 response = read_tool(invocation_args)
 response
@@ -88,7 +84,7 @@ response
 
 If you have a model-generated `ToolCall`, pass it to `tool.invoke()` in the format shown below.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool_call = {
     "args": {"channel_id": "1234567890", "limit": 2},
     "id": "1",
@@ -103,13 +99,12 @@ tool.invoke(tool_call)
 
 Below is a complete example showing how you might integrate the `DiscordReadMessages` and `DiscordSendMessage` tools in a chain or agent with an LLM. This example assumes you have a function (like [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)) that sets up a LangChain-style agent capable of calling tools when appropriate.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Example: Using Discord Tools in an Agent
 
 from langchain.agents import create_agent
 from langchain_discord.tools.discord_read_messages import DiscordReadMessages
 from langchain_discord.tools.discord_send_messages import DiscordSendMessage
-
 
 # 1. Instantiate or configure your language model
 # (Replace with your actual LLM, e.g., ChatOpenAI(temperature=0))
@@ -150,12 +145,8 @@ for usage details, parameters, and advanced configurations.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/discord.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/discord.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

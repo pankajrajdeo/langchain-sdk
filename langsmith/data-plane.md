@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith data plane
-
-The *data plane* consists of your [Agent Servers](/langsmith/agent-server) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](/langsmith/control-plane).
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-plane)
+The *data plane* consists of your [Agent Servers](https://docs.langchain.com/langsmith/agent-server) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](https://docs.langchain.com/langsmith/control-plane).
 
 ## Server infrastructure
 
-In addition to the [Agent Server](/langsmith/agent-server) itself, the following infrastructure components for each server are also included in the broad definition of "data plane":
+In addition to the [Agent Server](https://docs.langchain.com/langsmith/agent-server) itself, the following infrastructure components for each server are also included in the broad definition of "data plane":
 
 * **PostgreSQL**: persistence layer for user, run, and memory data.
 * **Redis**: communication and ephemeral metadata for workers.
@@ -17,7 +13,7 @@ In addition to the [Agent Server](/langsmith/agent-server) itself, the following
 
 ## "Listener" application
 
-The data plane "listener" application periodically calls [control plane APIs](/langsmith/control-plane#control-plane-api) to:
+The data plane "listener" application periodically calls [control plane APIs](https://docs.langchain.com/langsmith/control-plane#control-plane-api) to:
 
 * Determine if new deployments should be created.
 * Determine if existing deployments should be updated (i.e. new revisions).
@@ -27,7 +23,7 @@ In other words, the data plane "listener" reads the latest state of the control 
 
 ## PostgreSQL
 
-PostgreSQL stores server resources (threads, runs, assistants, crons) and items saved in the [long-term memory store](/oss/python/langgraph/persistence#memory-store). It is also the default backend for [checkpoints](/oss/python/langgraph/persistence) (graph execution state). You can optionally store checkpoints in MongoDB instead—see [Configure checkpointer backend](/langsmith/configure-checkpointer). PostgreSQL is always required regardless of the checkpointer backend.
+PostgreSQL stores server resources (threads, runs, assistants, crons) and items saved in the [long-term memory store](https://docs.langchain.com/oss/python/langgraph/persistence#memory-store). It is also the default backend for [checkpoints](https://docs.langchain.com/oss/python/langgraph/persistence) (graph execution state). You can optionally store checkpoints in MongoDB instead—see [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer). PostgreSQL is always required regardless of the checkpointer backend.
 
 ## Redis
 
@@ -47,15 +43,15 @@ Runs in an Agent Server may be retried for specific failures (currently only for
 
 ## Data plane features
 
-This section describes various features of the data plane. For platform-specific behavior, see [Cloud platform features](/langsmith/cloud-platform-features) or [Deploy to self-hosted](/langsmith/deploy-to-self-hosted-overview).
+This section describes various features of the data plane. For platform-specific behavior, see [Cloud platform features](https://docs.langchain.com/langsmith/cloud-platform-features) or [Deploy to self-hosted](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview).
 
 ### Autoscaling
 
-[Dedicated type](/langsmith/cloud-platform-features#deployment-types) deployments automatically scale across containers. Scaling is based on 3 metrics:
+[Dedicated type](https://docs.langchain.com/langsmith/cloud-platform-features#deployment-types) deployments automatically scale across containers. Scaling is based on 3 metrics:
 
 1. CPU utilization
 2. Memory utilization
-3. Number of pending (in progress) [runs](/langsmith/runs)
+3. Number of pending (in progress) [runs](https://docs.langchain.com/langsmith/runs)
 
 For CPU utilization, the autoscaler targets 75% utilization. This means the autoscaler will scale the number of containers up or down to ensure that CPU utilization is at or near 75%. For memory utilization, the autoscaler targets 75% utilization as well.
 
@@ -63,19 +59,18 @@ For number of pending runs, the autoscaler targets 10 pending runs. For example,
 
 Each metric is computed independently and the autoscaler will determine the scaling action based on the metric that results in the largest number of containers.
 
-These metrics don't all apply to every container type. [Queue workers](/langsmith/agent-server#runtime-architecture) scale on pending run count—when the backlog grows, more workers spin up to drain it. [API servers](/langsmith/agent-server#runtime-architecture) scale on CPU and memory, responding to client request volume. This means a spike in run submissions won't slow down read operations like fetching thread state. For self-hosted configuration details, see [Configure Agent Server for scale](/langsmith/agent-server-scale).
+These metrics don't all apply to every container type. [Queue workers](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) scale on pending run count—when the backlog grows, more workers spin up to drain it. [API servers](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) scale on CPU and memory, responding to client request volume. This means a spike in run submissions won't slow down read operations like fetching thread state. For self-hosted configuration details, see [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale).
 
 Scale down actions are delayed for 30 minutes before any action is taken. In other words, if the autoscaler decides to scale down a deployment, it will first wait for 30 minutes before scaling down. After 30 minutes, the metrics are recomputed and the deployment will scale down if the recomputed metrics result in a lower number of containers than the current number. Otherwise, the deployment remains scaled up. This "cool down" period ensures that deployments do not scale up and down too frequently.
 
 ### MongoDB checkpointing
 
-<Info>
-  Available for [Cloud](/langsmith/cloud) (with an externally managed MongoDB instance) and [Standalone](/langsmith/deploy-standalone-server) deployments.
-</Info>
+> [!NOTE]
+> Available for [Cloud](https://docs.langchain.com/langsmith/cloud) (with an externally managed MongoDB instance) and [Standalone](https://docs.langchain.com/langsmith/deploy-standalone-server) deployments.
 
 You can use MongoDB as an alternative backend for checkpoint storage. When configured, MongoDB handles only checkpoint data—PostgreSQL remains required for all other server resources.
 
-See [Configure checkpointer backend](/langsmith/configure-checkpointer) for setup instructions.
+See [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer) for setup instructions.
 
 ### LangSmith tracing
 
@@ -103,12 +98,8 @@ Agent Server is automatically configured to perform license key validation. See 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-plane.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OCI Generative AI Integration for LangChain
 
 > Integrate with OCI Generative AI embeddings using LangChain Python.
 
-This doc will help you get started with OCI Generative AI [embedding models](/oss/python/integrations/embeddings). Oracle Cloud Infrastructure (OCI) Generative AI provides state-of-the-art embedding models for text and images, enabling semantic search, RAG, clustering, and cross-modal applications.
+This doc will help you get started with OCI Generative AI [embedding models](https://docs.langchain.com/oss/python/integrations/embeddings). Oracle Cloud Infrastructure (OCI) Generative AI provides state-of-the-art embedding models for text and images, enabling semantic search, RAG, clustering, and cross-modal applications.
 
 For detailed documentation, see the [OCI Generative AI documentation](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm) and [API reference](https://docs.oracle.com/en-us/iaas/api/#/en/generative-ai/20231130/).
 
@@ -26,25 +22,23 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ## Setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oci oci
-  ```
+```bash
+pip install -qU langchain-oci oci
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oci oci
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oci oci
+```
 
 Set up authentication:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 oci setup config
 ```
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import OCIGenAIEmbeddings
 
 embeddings = OCIGenAIEmbeddings(
@@ -58,7 +52,7 @@ embeddings = OCIGenAIEmbeddings(
 
 Build semantic search over technical documentation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Index code documentation
 docs = [
     "authenticate() validates JWT tokens and returns user object",
@@ -88,7 +82,7 @@ best_match = docs[np.argmax(similarities)]
 
 Search visual assets with text queries using multimodal embeddings:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import numpy as np
 from langchain_oci import OCIGenAIEmbeddings
 
@@ -125,11 +119,10 @@ See the [OCI model catalog](https://docs.oracle.com/en-us/iaas/Content/generativ
 
 ## RAG Example
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.vectorstores import FAISS
 
 # Create vector store
@@ -143,7 +136,7 @@ results = vectorstore.similarity_search("your query", k=3)
 
 Async operations for production use:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_vector = await embeddings.aembed_query("What is AI?")
 doc_vectors = await embeddings.aembed_documents(["Doc 1", "Doc 2"])
 ```
@@ -154,19 +147,15 @@ For detailed documentation of all `OCIGenAIEmbeddings` features and configuratio
 
 ## Related
 
-* [OCI Provider Overview](/oss/python/integrations/providers/oci)
-* [`ChatOCIGenAI`](/oss/python/integrations/chat/oci_generative_ai)
-* [Embeddings Guide](/oss/python/integrations/embeddings)
-* [RAG Tutorial](/oss/python/deepagents/rag)
+* [OCI Provider Overview](https://docs.langchain.com/oss/python/integrations/providers/oci)
+* [`ChatOCIGenAI`](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai)
+* [Embeddings Guide](https://docs.langchain.com/oss/python/integrations/embeddings)
+* [RAG Tutorial](https://docs.langchain.com/oss/python/deepagents/rag)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/oci_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google cloud SQL for mysql integration
 
 > Integrate with the Google cloud SQL for mysql document loader using LangChain Python.
 
 > [Cloud SQL](https://cloud.google.com/sql) is a fully managed relational database service that offers high performance, seamless integration, and impressive scalability. It offers [MySQL](https://cloud.google.com/sql/mysql), [PostgreSQL](https://cloud.google.com/sql/postgresql), and [SQL Server](https://cloud.google.com/sql/sqlserver) database engines. Extend your database application to build AI-powered experiences leveraging Cloud SQL's LangChain integrations.
 
-This notebook goes over how to use [Cloud SQL for MySQL](https://cloud.google.com/sql/mysql) to [save, load and delete langchain documents](/oss/python/integrations/document_loaders) with `MySQLLoader` and `MySQLDocumentSaver`.
+This notebook goes over how to use [Cloud SQL for MySQL](https://cloud.google.com/sql/mysql) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `MySQLLoader` and `MySQLDocumentSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-cloud-sql-mysql-python/).
 
@@ -26,7 +22,7 @@ To run this notebook, you will need to do the following:
 
 After confirmed access to database in the runtime environment of this notebook, filling the following values and run the cell before running example scripts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the both the Google Cloud region and name of your Cloud SQL instance.
 REGION = "us-central1"  # @param {type:"string"}
 INSTANCE = "test-instance"  # @param {type:"string"}
@@ -40,13 +36,13 @@ TABLE_NAME = "test-default"  # @param {type:"string"}
 
 The integration lives in its own `langchain-google-cloud-sql-mysql` package, so we need to install it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -upgrade --quiet langchain-google-cloud-sql-mysql
 ```
 
 **Colab only**: Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -64,7 +60,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -80,7 +76,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -111,7 +107,7 @@ Optionally, [built-in database authentication](https://cloud.google.com/sql/docs
 * `user` : Database user to use for built-in database authentication and login
 * `password` : Database password to use for built-in database authentication and login.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLEngine
 
 engine = MySQLEngine.from_instance(
@@ -128,7 +124,7 @@ Initialize a table of default schema via `MySQLEngine.init_document_table(<table
 
 `overwrite_existing=True` flag means the newly initialized table will replace any existing table of the same name.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 engine.init_document_table(TABLE_NAME, overwrite_existing=True)
 ```
 
@@ -139,7 +135,7 @@ Save langchain documents with `MySQLDocumentSaver.add_documents(<documents>)`. T
 1. `engine` - An instance of a `MySQLEngine` engine.
 2. `table_name` - The name of the table within the Cloud SQL database to store langchain documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_google_cloud_sql_mysql import MySQLDocumentSaver
 
@@ -168,7 +164,7 @@ Load langchain documents with `MySQLLoader.load()` or `MySQLLoader.lazy_load()`.
 1. `engine` - An instance of a `MySQLEngine` engine.
 2. `table_name` - The name of the table within the Cloud SQL database to store langchain documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLLoader
 
 loader = MySQLLoader(engine=engine, table_name=TABLE_NAME)
@@ -181,7 +177,7 @@ for doc in docs:
 
 Other than loading documents from a table, we can also choose to load documents from a view generated from a SQL query. For example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLLoader
 
 loader = MySQLLoader(
@@ -192,7 +188,7 @@ onedoc = loader.load()
 onedoc
 ```
 
-The view generated from SQL query can have different schema than default table. In such cases, the behavior of MySQLLoader is the same as loading from table with non-default schema. Please refer to section [Load documents with customized document page content & metadata](#load-documents-with-customized-document-page-content-and-metadata).
+The view generated from SQL query can have different schema than default table. In such cases, the behavior of MySQLLoader is the same as loading from table with non-default schema. Please refer to section [Load documents with customized document page content & metadata](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mysql#load-documents-with-customized-document-page-content-and-metadata).
 
 ### Delete documents
 
@@ -205,7 +201,7 @@ A `row` should be deleted if there exists a `document` in the list, such that
 * `document.page_content` equals `row[page_content]`
 * `document.metadata` equals `row[langchain_metadata]`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLLoader
 
 loader = MySQLLoader(engine=engine, table_name=TABLE_NAME)
@@ -221,7 +217,7 @@ print("Documents after delete:", loader.load())
 
 First we prepare an example table with non-default schema, and populate it with some arbitrary data.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sqlalchemy
 
 with engine.connect() as conn:
@@ -257,7 +253,7 @@ with engine.connect() as conn:
 
 If we still load langchain documents with default parameters of `MySQLLoader` from this example table, the `page_content` of loaded documents will be the first column of the table, and `metadata` will be consisting of key-value pairs of all the other columns.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = MySQLLoader(
     engine=engine,
     table_name=TABLE_NAME,
@@ -272,7 +268,7 @@ We can specify the content and metadata we want to load by setting the `content_
 
 For example here, the values of columns in `content_columns` will be joined together into a space-separated string, as `page_content` of loaded documents, and `metadata` of loaded documents will only contain key-value pairs of columns specified in `metadata_columns`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = MySQLLoader(
     engine=engine,
     table_name=TABLE_NAME,
@@ -303,7 +299,7 @@ We can use the following parameters with `MySQLEngine.init_document_table()` to 
 3. `content_column`: The name of column to store `page_content` of langchain document. Default: `page_content`.
 4. `metadata_json_column`: The name of JSON column to store extra `metadata` of langchain document. Default: `langchain_metadata`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 engine.init_document_table(
     TABLE_NAME,
     metadata_columns=[
@@ -333,7 +329,7 @@ Save documents with `MySQLDocumentSaver.add_documents(<documents>)`. As you can 
 * `document.metadata.organic` will be saved into `organic` column.
 * `document.metadata.fruit_id` will be saved into `other_metadata` column in JSON format.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 test_docs = [
     Document(
         page_content="Granny Smith 150 0.99",
@@ -349,7 +345,7 @@ saver = MySQLDocumentSaver(
 saver.add_documents(test_docs)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with engine.connect() as conn:
     result = conn.execute(sqlalchemy.text(f"select * from `{TABLE_NAME}`;"))
     print(result.keys())
@@ -367,7 +363,7 @@ A `row` should be deleted if there exists a `document` in the list, such that
   * `document.metadata[k]` equals `row[k]` or `document.metadata[k]` equals `row[langchain_metadata][k]`
 * There no extra metadata field presents in `row` but not in `document.metadata`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = MySQLLoader(engine=engine, table_name=TABLE_NAME)
 docs = loader.load()
 print("Documents before delete:", docs)
@@ -377,12 +373,8 @@ print("Documents after delete:", loader.load())
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_cloud_sql_mysql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_cloud_sql_mysql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,32 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Backend integrations
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/backends/index)
+Community-built filesystem backends for Deep Agents.
 
-> Community-built filesystem backends for Deep Agents.
-
-Browse available filesystem backends for Deep Agents or contribute your own to the ecosystem. Learn more about how backends work in the [backends docs](/oss/python/deepagents/backends).
+Browse available filesystem backends for Deep Agents or contribute your own to the ecosystem. Learn more about how backends work in the [backends docs](https://docs.langchain.com/oss/python/deepagents/backends).
 
 ## Share your backend
 
 Custom backends connect Deep Agents to storage systems such as databases, object stores, and virtual filesystems. Share yours with the community:
 
-<CardGroup cols={2}>
-  <Card title="Implement a custom backend" icon="database" href="/oss/python/deepagents/backends#custom-backends">
-    Follow the custom backends guide to build your own backend.
-  </Card>
+#### [Implement a custom backend](https://docs.langchain.com/oss/python/deepagents/backends#custom-backends)
+Follow the custom backends guide to build your own backend.
 
-  <Card title="Share a community backend" icon="users" href="https://github.com/langchain-ai/docs">
-    Open a PR to the docs repo to add your backend to the table below.
-  </Card>
-</CardGroup>
+#### [Share a community backend](https://github.com/langchain-ai/docs)
+Open a PR to the docs repo to add your backend to the table below.
 
 ## Community integrations
 
-<Note>
-  The community maintains these backend integrations. They are contributed on an open-source basis and are not managed or maintained by LangChain.
-</Note>
+> [!NOTE]
+> The community maintains these backend integrations. They are contributed on an open-source basis and are not managed or maintained by LangChain.
 
 | Backend                                                                                              | Description                                                                                                                                                | Source                                                                                                                                        |
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -36,12 +27,8 @@ Have a backend to share? [Open a PR](https://github.com/langchain-ai/docs) to ad
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/backends/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/backends/index.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

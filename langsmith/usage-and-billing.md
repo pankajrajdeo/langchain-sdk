@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Usage and billing
-
-> Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/usage-and-billing)
+Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits.
 
 ## Data retention
 
@@ -13,11 +9,10 @@ This section covers how data retention works and how it's priced in LangSmith.
 ### Why retention matters
 
 * **Privacy**: Many data privacy regulations, such as GDPR in Europe or CCPA in California, require organizations to delete personal data once it's no longer necessary for the purposes for which it was collected. Setting retention periods aids in compliance with such regulations.
-* **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](/langsmith/billing#enforce-spend-limits).
+* **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](https://docs.langchain.com/langsmith/billing#enforce-spend-limits).
 
-<Tip>
-  Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](/langsmith/billing#change-project-level-default-retention).
-</Tip>
+> [!TIP]
+> Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](https://docs.langchain.com/langsmith/billing#change-project-level-default-retention).
 
 ### How it works
 
@@ -28,9 +23,8 @@ LangSmith has two tiers of traces based on Data Retention with the following cha
 | **Price**            | [See pricing page](https://www.langchain.com/pricing-langsmith) | [See pricing page](https://www.langchain.com/pricing-langsmith) |
 | **Retention Period** | 14 days                                                         | 400 days                                                        |
 
-<Note>
-  Enterprise customers can customize the extended retention period per workspace. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](/langsmith/data-purging-compliance#customize-extended-retention-policy).
-</Note>
+> [!NOTE]
+> Enterprise customers can customize the extended retention period per workspace. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy).
 
 **Data deletion after retention ends**
 
@@ -38,9 +32,8 @@ After the specified retention period, traces are no longer accessible in the tra
 
 ### Data retention auto-upgrades
 
-<Warning>
-  Auto upgrades can have an impact on your bill. Please read this section carefully to fully understand your estimated LangSmith tracing costs.
-</Warning>
+> [!WARNING]
+> Auto upgrades can have an impact on your bill. Please read this section carefully to fully understand your estimated LangSmith tracing costs.
 
 Most traces use base retention. Some actions, such as online evaluators and automation rules, can extend a trace to a longer retention period at a higher cost. You control which actions extend retention.
 
@@ -48,20 +41,18 @@ When you use certain features with `base` tier traces, their data retention may 
 
 Retention behavior by action:
 
-* **Feedback via API or SDK**: Feedback is added to any run on the trace (or any trace in the thread) through an API or SDK call that explicitly passes `extend_trace_retention=true` (`extendTraceRetention: true` in TypeScript). For more information, see [Attach user feedback](/langsmith/attach-user-feedback). The LangSmith UI sends feedback and notes without extending retention.
+* **Feedback via API or SDK**: Feedback is added to any run on the trace (or any trace in the thread) through an API or SDK call that explicitly passes `extend_trace_retention=true` (`extendTraceRetention: true` in TypeScript). For more information, see [Attach user feedback](https://docs.langchain.com/langsmith/attach-user-feedback). The LangSmith UI sends feedback and notes without extending retention.
 * **Online evaluators**: An online evaluator scores the trace and its retention setting is enabled. Both trace-level and thread-level evaluators can opt out of this upgrade.
-* **Automation rules**: An [automation rule](/langsmith/rules#create-a-rule) with retention extension enabled matches any run within a trace.
-* **Manual annotation queue adds** (no upgrade): Manually adding runs or threads to an [annotation queue](/langsmith/annotation-queues#assign-runs-and-threads-to-a-single-run-queue) does not upgrade retention by default.
+* **Automation rules**: An [automation rule](https://docs.langchain.com/langsmith/rules#create-a-rule) with retention extension enabled matches any run within a trace.
+* **Manual annotation queue adds** (no upgrade): Manually adding runs or threads to an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues#assign-runs-and-threads-to-a-single-run-queue) does not upgrade retention by default.
 
 This change applies to new actions only. Traces that were already upgraded by a previous action keep their extended retention.
 
-<Note>
-  When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](/langsmith/evaluators#manage-evaluator-trace-retention).
-</Note>
+> [!NOTE]
+> When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](https://docs.langchain.com/langsmith/evaluators#manage-evaluator-trace-retention).
 
-<Note>
-  Retention extension is enabled by default for new online evaluators and automation rules. You can opt out when configuring each evaluator or rule.
-</Note>
+> [!NOTE]
+> Retention extension is enabled by default for new online evaluators and automation rules. You can opt out when configuring each evaluator or rule.
 
 **Why auto-upgrade traces?**
 
@@ -130,9 +121,8 @@ This 429 is thrown by our application load balancer and is a mechanism in place 
 | `POST`            | `/feedbacks*` | 5000  | 1 minute |
 | `*`               | `*`           | 2000  | 1 minute |
 
-<Note>
-  The LangSmith SDK takes steps to minimize the likelihood of reaching these limits on run-related endpoints by batching up to 100 runs from a single session ID into a single API call.
-</Note>
+> [!NOTE]
+> The LangSmith SDK takes steps to minimize the likelihood of reaching these limits on run-related endpoints by batching up to 100 runs from a single session ID into a single API call.
 
 ### Plan-level hourly trace event limit
 
@@ -186,7 +176,7 @@ Each trace is limited to a maximum of 25,000 runs. Once the trace reaches this l
 
 ### Run query endpoint
 
-The [`POST /runs/query`](/langsmith/smith-api/run/query-runs) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](/langsmith/export-traces#rate-limits) for details.
+The [`POST /runs/query`](https://docs.langchain.com/langsmith/smith-api/run/query-runs) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](https://docs.langchain.com/langsmith/export-traces#rate-limits) for details.
 
 ### Workspace invite batch endpoint
 
@@ -198,11 +188,10 @@ Since some 429 responses are temporary and may succeed on a successive call, if 
 
 For convenience, LangChain applications built with the LangSmith SDK has this capability built-in.
 
-<Note>
-  It is important to note that if you are saturating the endpoints for extended periods of time, retries may not be effective as your application will eventually run large enough backlogs to exhaust all retries.
-
-  If that is the case, we would like to discuss your needs more specifically. Please contact support via [LangSmith Support](https://support.langchain.com) with details about your applications throughput needs and sample code and we can work with you to better understand whether the best approach is fixing a bug, changes to your application code, or a different LangSmith plan.
-</Note>
+> [!NOTE]
+> It is important to note that if you are saturating the endpoints for extended periods of time, retries may not be effective as your application will eventually run large enough backlogs to exhaust all retries.
+>
+> If that is the case, we would like to discuss your needs more specifically. Please contact support via [LangSmith Support](https://support.langchain.com) with details about your applications throughput needs and sample code and we can work with you to better understand whether the best approach is fixing a bug, changes to your application code, or a different LangSmith plan.
 
 ## Usage limits
 
@@ -234,16 +223,12 @@ Usage limits can be updated from the `Settings` page under `Usage and Billing`. 
 
 ## Related content
 
-* Tutorial on how to [enforce spend limits](/langsmith/billing#enforce-spend-limits)
+* Tutorial on how to [enforce spend limits](https://docs.langchain.com/langsmith/billing#enforce-spend-limits)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/usage-and-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/usage-and-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

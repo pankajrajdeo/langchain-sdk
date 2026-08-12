@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Configure Context Hub commit webhooks
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/context-hub-webhooks)
+Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
 
-> Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
+[Context Hub](https://docs.langchain.com/langsmith/context-hub) commit webhooks notify external services whenever an agent or skill commit is created in your [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces). Use them to trigger automation from Context Hub changes, including commits created through [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 
-[Context Hub](/langsmith/context-hub) commit webhooks notify external services whenever an agent or skill commit is created in your [workspace](/langsmith/administration-overview#workspaces). Use them to trigger automation from Context Hub changes, including commits created through [LangSmith Fleet](/langsmith/fleet).
-
-Managing Context Hub webhooks requires the [`prompts:update`](/langsmith/organization-workspace-operations) permission, which [Workspace Admins](/langsmith/rbac#workspace-admin) and [Workspace Editors](/langsmith/rbac#workspace-editor) have by default.
+Managing Context Hub webhooks requires the [`prompts:update`](https://docs.langchain.com/langsmith/organization-workspace-operations) permission, which [Workspace Admins](https://docs.langchain.com/langsmith/rbac#workspace-admin) and [Workspace Editors](https://docs.langchain.com/langsmith/rbac#workspace-editor) have by default.
 
 ## Add a webhook
 
@@ -57,73 +53,70 @@ Retries contain the byte-identical request body and retain the event `id`. Dedup
 
 Each request includes an `X-LangSmith-Signature` header in this format:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 sha256=<lowercase hex HMAC-SHA256 digest>
 ```
 
 Compute the HMAC-SHA256 digest over the exact raw request body bytes with the webhook's signing secret. Verify the signature before parsing the JSON, and compare the complete header value in constant time. Parsing and reserializing the body before verification can change its bytes and invalidate the signature.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import hashlib
-  import hmac
-  from typing import Optional
+```python
+import hashlib
+import hmac
+from typing import Optional
 
+def verify_langsmith_signature(
+    *,
+    body: bytes,
+    signing_secret: str,
+    signature_header: Optional[str],
+) -> bool:
+    if not signature_header or not signature_header.startswith("sha256="):
+        return False
 
-  def verify_langsmith_signature(
-      *,
-      body: bytes,
-      signing_secret: str,
-      signature_header: Optional[str],
-  ) -> bool:
-      if not signature_header or not signature_header.startswith("sha256="):
-          return False
+    expected = "sha256=" + hmac.new(
+        signing_secret.encode("utf-8"),
+        body,
+        hashlib.sha256,
+    ).hexdigest()
 
-      expected = "sha256=" + hmac.new(
-          signing_secret.encode("utf-8"),
-          body,
-          hashlib.sha256,
-      ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
+```
 
-      return hmac.compare_digest(expected, signature_header)
-  ```
+```typescript
+import { createHmac, timingSafeEqual } from "node:crypto";
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { createHmac, timingSafeEqual } from "node:crypto";
-
-  export function verifyLangSmithSignature({
-    body,
-    signingSecret,
-    signatureHeader,
-  }: {
-    body: Buffer;
-    signingSecret: string;
-    signatureHeader: string | undefined;
-  }) {
-    if (!signatureHeader?.startsWith("sha256=")) {
-      return false;
-    }
-
-    const expected = `sha256=${createHmac("sha256", signingSecret)
-      .update(body)
-      .digest("hex")}`;
-
-    const expectedBytes = Buffer.from(expected);
-    const actualBytes = Buffer.from(signatureHeader);
-
-    return (
-      expectedBytes.length === actualBytes.length &&
-      timingSafeEqual(expectedBytes, actualBytes)
-    );
+export function verifyLangSmithSignature({
+  body,
+  signingSecret,
+  signatureHeader,
+}: {
+  body: Buffer;
+  signingSecret: string;
+  signatureHeader: string | undefined;
+}) {
+  if (!signatureHeader?.startsWith("sha256=")) {
+    return false;
   }
-  ```
-</CodeGroup>
+
+  const expected = `sha256=${createHmac("sha256", signingSecret)
+    .update(body)
+    .digest("hex")}`;
+
+  const expectedBytes = Buffer.from(expected);
+  const actualBytes = Buffer.from(signatureHeader);
+
+  return (
+    expectedBytes.length === actualBytes.length &&
+    timingSafeEqual(expectedBytes, actualBytes)
+  );
+}
+```
 
 ## Event envelope
 
 The outer `id`, `type`, `created`, and `data` envelope is frozen. The `.v1` suffix on the event type versions the `data.commit` schema.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "id": "0198...",
   "type": "context_hub.commit.created.v1",
@@ -184,7 +177,7 @@ Each entry summarizes a changed path. It does not contain the file contents.
 
 Branch on the complete event type before parsing `data.commit`:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 if (event.type === "context_hub.commit.created.v1") {
   await handleCommitCreatedV1(event.data.commit);
 } else {
@@ -196,16 +189,12 @@ A breaking change to `data.commit` uses a new event type suffix, such as `.v2`. 
 
 ## Next step
 
-* [Use the Context Hub](/langsmith/use-the-context-hub): Create, inspect, and promote agent and skill commits.
+* [Use the Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub): Create, inspect, and promote agent and skill commits.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/context-hub-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/context-hub-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

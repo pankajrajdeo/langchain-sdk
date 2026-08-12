@@ -1,118 +1,104 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Stateless runs
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/stateless-runs)
 Most of the time, you provide a `thread_id` to your client when you run your graph in order to keep track of prior runs through the persistent state implemented in LangSmith Deployment. However, if you don't need to persist the runs you don't need to use the built-in persistent state and can create stateless runs.
 
 ## Setup
 
 First, let's setup our client:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langgraph_sdk import get_client
+#### Python
+```python
+from langgraph_sdk import get_client
 
-    client = get_client(url=<DEPLOYMENT_URL>)
-    # Using the graph deployed with the name "agent"
-    assistant_id = "agent"
-    ```
-  </Tab>
+client = get_client(url=<DEPLOYMENT_URL>)
+# Using the graph deployed with the name "agent"
+assistant_id = "agent"
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import { Client } from "@langchain/langgraph-sdk";
+#### Javascript
+```js
+import { Client } from "@langchain/langgraph-sdk";
 
-    const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-    // Using the graph deployed with the name "agent"
-    const assistantId = "agent";
-    ```
-  </Tab>
+const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+// Using the graph deployed with the name "agent"
+const assistantId = "agent";
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/assistants/search \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "limit": 10,
-            "offset": 0
-        }' | jq -c 'map(select(.config == null or .config == {})) | .[0].graph_id' && \
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/threads \
-        --header 'Content-Type: application/json' \
-        --data '{}'
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/assistants/search \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "limit": 10,
+        "offset": 0
+    }' | jq -c 'map(select(.config == null or .config == {})) | .[0].graph_id' && \
+curl --request POST \
+    --url <DEPLOYMENT_URL>/threads \
+    --header 'Content-Type: application/json' \
+    --data '{}'
+```
 
 ## Stateless streaming
 
 We can stream the results of a stateless run in an almost identical fashion to how we stream from a run with the state attribute, but instead of passing a value to the `thread_id` parameter, we pass `None`:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    input = {
-        "messages": [
-            {"role": "user", "content": "Hello! My name is Bagatur and I am 26 years old."}
+#### Python
+```python
+input = {
+    "messages": [
+        {"role": "user", "content": "Hello! My name is Bagatur and I am 26 years old."}
+    ]
+}
+
+async for chunk in client.runs.stream(
+    # Don't pass in a thread_id and the stream will be stateless
+    None,
+    assistant_id,
+    input=input,
+    stream_mode="updates",
+):
+    if chunk.data and "run_id" not in chunk.data:
+        print(chunk.data)
+```
+
+#### Javascript
+```js
+let input = {
+  messages: [
+    { role: "user", content: "Hello! My name is Bagatur and I am 26 years old." }
+  ]
+};
+
+const streamResponse = client.runs.stream(
+  // Don't pass in a thread_id and the stream will be stateless
+  null,
+  assistantId,
+  {
+    input,
+    streamMode: "updates"
+  }
+);
+for await (const chunk of streamResponse) {
+  if (chunk.data && !("run_id" in chunk.data)) {
+    console.log(chunk.data);
+  }
+}
+```
+
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/runs/stream \
+    --header 'Content-Type: application/json' \
+    --data "{
+        \"assistant_id\": \"agent\",
+        \"input\": {\"messages\": [{\"role\": \"human\", \"content\": \"Hello! My name is Bagatur and I am 26 years old.\"}]},
+        \"stream_mode\": [
+            \"updates\"
         ]
-    }
-
-    async for chunk in client.runs.stream(
-        # Don't pass in a thread_id and the stream will be stateless
-        None,
-        assistant_id,
-        input=input,
-        stream_mode="updates",
-    ):
-        if chunk.data and "run_id" not in chunk.data:
-            print(chunk.data)
-    ```
-  </Tab>
-
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    let input = {
-      messages: [
-        { role: "user", content: "Hello! My name is Bagatur and I am 26 years old." }
-      ]
-    };
-
-    const streamResponse = client.runs.stream(
-      // Don't pass in a thread_id and the stream will be stateless
-      null,
-      assistantId,
-      {
-        input,
-        streamMode: "updates"
-      }
-    );
-    for await (const chunk of streamResponse) {
-      if (chunk.data && !("run_id" in chunk.data)) {
-        console.log(chunk.data);
-      }
-    }
-    ```
-  </Tab>
-
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/runs/stream \
-        --header 'Content-Type: application/json' \
-        --data "{
-            \"assistant_id\": \"agent\",
-            \"input\": {\"messages\": [{\"role\": \"human\", \"content\": \"Hello! My name is Bagatur and I am 26 years old.\"}]},
-            \"stream_mode\": [
-                \"updates\"
-            ]
-        }" | jq -c 'select(.data and (.data | has("run_id") | not)) | .data'
-    ```
-  </Tab>
-</Tabs>
+    }" | jq -c 'select(.data and (.data | has("run_id") | not)) | .data'
+```
 
 Output:
 
@@ -124,40 +110,35 @@ Output:
 
 In addition to streaming, you can also wait for a stateless result by using the `.wait` function like follows:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    stateless_run_result = await client.runs.wait(
-        None,
-        assistant_id,
-        input=input,
-    )
-    print(stateless_run_result)
-    ```
-  </Tab>
+#### Python
+```python
+stateless_run_result = await client.runs.wait(
+    None,
+    assistant_id,
+    input=input,
+)
+print(stateless_run_result)
+```
 
-  <Tab title="Javascript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    let statelessRunResult = await client.runs.wait(
-      null,
-      assistantId,
-      { input: input }
-    );
-    console.log(statelessRunResult);
-    ```
-  </Tab>
+#### Javascript
+```js
+let statelessRunResult = await client.runs.wait(
+  null,
+  assistantId,
+  { input: input }
+);
+console.log(statelessRunResult);
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/runs/wait \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "assistant_id": <ASSISTANT_IDD>,
-        }'
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/runs/wait \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "assistant_id": <ASSISTANT_IDD>,
+    }'
+```
 
 Output:
 
@@ -191,12 +172,8 @@ Output:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/stateless-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/stateless-runs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

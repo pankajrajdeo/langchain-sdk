@@ -1,19 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Human-in-the-loop
-
-The Human-in-the-Loop (HITL) [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) lets you add human oversight to agent tool calls.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop)
+The Human-in-the-Loop (HITL) [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) lets you add human oversight to agent tool calls.
 When a model proposes an action that might require review—for example, writing to a file or executing SQL—the middleware can pause execution and wait for a decision.
 
-It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](/oss/python/langgraph/persistence), so execution can pause safely and resume later.
+It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](https://docs.langchain.com/oss/python/langgraph/persistence), so execution can pause safely and resume later.
 
 A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), rejected with feedback (`reject`), or responded to directly (`respond`) for "ask user" style tools.
 
 ## Interrupt decision types
 
-The [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) defines four built-in ways a human can respond to an interrupt:
+The [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) defines four built-in ways a human can respond to an interrupt:
 
 | Decision Type | Description                                                                                                     | Example Use Case                                  |
 | ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -28,21 +24,19 @@ Decisions must be provided in the same order as the actions appear in the interr
 
 Use `reject` when the human is denying the requested action. Use `respond` only when the human is acting as the tool, such as answering an `ask_user` prompt. Do not use `respond` to deny side-effecting tools, because its message is treated as a successful tool result.
 
-<Tip>
-  When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
-</Tip>
+> [!TIP]
+> When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
 
 ## Configuring interrupts
 
-To use HITL, add the [middleware](/oss/python/langchain/middleware/built-in#human-in-the-loop) to the agent's `middleware` list when creating the agent.
+To use HITL, add the [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) to the agent's `middleware` list when creating the agent.
 
 You configure it with a mapping of tool actions to the decision types that are allowed for each action. The middleware will interrupt execution when a tool call matches an action in the mapping.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware # [!code highlight]
 from langgraph.checkpoint.memory import InMemorySaver # [!code highlight]
-
 
 agent = create_agent(
     model="gpt-5.5",
@@ -66,63 +60,56 @@ agent = create_agent(
 )
 ```
 
-<Info>
-  You must configure a checkpointer to persist the graph state across interrupts.
-  In production, use a persistent checkpointer like [`AsyncPostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.aio.AsyncPostgresSaver) or [`MongoDBSaver`](https://pypi.org/project/langgraph-checkpoint-mongodb/). For testing or prototyping, use [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver).
+> [!NOTE]
+> You must configure a checkpointer to persist the graph state across interrupts.
+> In production, use a persistent checkpointer like [`AsyncPostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.aio.AsyncPostgresSaver) or [`MongoDBSaver`](https://pypi.org/project/langgraph-checkpoint-mongodb/). For testing or prototyping, use [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver).
+>
+> When invoking the agent, pass a `config` that includes the **thread ID** to associate execution with a conversation thread.
+> See the [LangGraph interrupts documentation](https://docs.langchain.com/oss/python/langgraph/interrupts) for details.
 
-  When invoking the agent, pass a `config` that includes the **thread ID** to associate execution with a conversation thread.
-  See the [LangGraph interrupts documentation](/oss/python/langgraph/interrupts) for details.
-</Info>
+<details>
+<summary>Configuration options</summary>
 
-<Accordion title="Configuration options">
-  <ParamField body="interrupt_on" type="dict" required>
-    Mapping of tool names to approval configs. Values can be `True` (interrupt with default config), `False` (auto-approve), or an `InterruptOnConfig` object.
-  </ParamField>
+#### `Field` — `dict`
+Mapping of tool names to approval configs. Values can be `True` (interrupt with default config), `False` (auto-approve), or an `InterruptOnConfig` object.
 
-  <ParamField body="description_prefix" type="string" default="Tool execution requires approval">
-    Prefix for action request descriptions
-  </ParamField>
+#### `Field` — `string`
+Prefix for action request descriptions
 
-  **`InterruptOnConfig` options:**
+**`InterruptOnConfig` options:**
 
-  <ParamField body="allowed_decisions" type="list[string]">
-    List of allowed decisions: `'approve'`, `'edit'`, `'reject'`, or `'respond'`
-  </ParamField>
+#### `Field` — `list[string]`
+List of allowed decisions: `'approve'`, `'edit'`, `'reject'`, or `'respond'`
 
-  <ParamField body="description" type="string | callable">
-    Static string or callable function for custom description
-  </ParamField>
+#### `Field` — `string | callable`
+Static string or callable function for custom description
 
-  <ParamField body="when" type="callable">
-    Optional predicate that receives a [ToolCallRequest](https://reference.langchain.com/python/langgraph.prebuilt/tool_node/ToolCallRequest) and returns `True` to interrupt or `False` to auto-approve. Use it to gate interrupts on a call's arguments. Requires `langchain>=1.3.3`.
-  </ParamField>
-</Accordion>
+#### `Field` — `callable`
+Optional predicate that receives a [ToolCallRequest](https://reference.langchain.com/python/langgraph.prebuilt/tool_node/ToolCallRequest) and returns `True` to interrupt or `False` to auto-approve. Use it to gate interrupts on a call's arguments. Requires `langchain>=1.3.3`.
+
+</details>
 
 ## Conditional interrupts
 
 By default, every tool call listed in `interrupt_on` pauses for review. To pause only some calls, add a `when` predicate to a tool's `InterruptOnConfig`. The predicate receives a `ToolCallRequest` and returns `True` to interrupt or `False` to auto-approve, so you can gate on the tool's arguments.
 
-<Note>
-  Conditional interrupts require `langchain>=1.3.3`.
-</Note>
+> [!NOTE]
+> Conditional interrupts require `langchain>=1.3.3`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware, ToolCallRequest
 from langgraph.checkpoint.memory import InMemorySaver
-
 
 def writes_outside_workspace(request: ToolCallRequest) -> bool:
     """Pause writes to paths outside the workspace directory."""
     path = request.tool_call["args"].get("path", "")
     return not path.startswith("/workspace/")
 
-
 def is_write_query(request: ToolCallRequest) -> bool:
     """Pause SQL that isn't a read-only SELECT."""
     query = request.tool_call["args"].get("query", "")
     return not query.lstrip().upper().startswith("SELECT")
-
 
 agent = create_agent(
     model="gpt-5.5",
@@ -151,7 +138,7 @@ When the `when` predicate returns `False`, the call runs without interrupting. W
 
 When you invoke the agent, it runs until it either completes or an interrupt is raised. An interrupt is triggered when a tool call matches the policy you configured in `interrupt_on`. With `version="v2"`, the result is a `GraphOutput` with an `interrupts` attribute containing the actions that require review. You can then present those actions to a reviewer and resume execution once decisions are provided.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import Command
 
 # Human-in-the-loop leverages LangGraph's persistence layer.
@@ -194,7 +181,6 @@ print(result.interrupts)  # [!code highlight]
 # >    ),
 # > )
 
-
 # Resume with approval decision
 agent.invoke(
     Command( # [!code highlight]
@@ -207,121 +193,114 @@ agent.invoke(
 
 ### Decision types
 
-<Tabs>
-  <Tab title="✅ approve">
-    Use `approve` to approve the tool call as-is and execute it without changes.
+#### ✅ approve
+Use `approve` to approve the tool call as-is and execute it without changes.
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    agent.invoke(
-        Command(
-            # Decisions are provided as a list, one per action under review.
-            # The order of decisions must match the order of actions
-            # in the interrupt request.
-            resume={
-                "decisions": [
-                    {
-                        "type": "approve",
+```python
+agent.invoke(
+    Command(
+        # Decisions are provided as a list, one per action under review.
+        # The order of decisions must match the order of actions
+        # in the interrupt request.
+        resume={
+            "decisions": [
+                {
+                    "type": "approve",
+                }
+            ]
+        }
+    ),
+    config=config,  # Same thread ID to resume the paused conversation
+    version="v2",
+)
+```
+
+#### ✏️ edit
+Use `edit` to modify the tool call before execution.
+Provide the edited action with the new tool name and arguments.
+
+```python
+agent.invoke(
+    Command(
+        # Decisions are provided as a list, one per action under review.
+        # The order of decisions must match the order of actions
+        # in the interrupt request.
+        resume={
+            "decisions": [
+                {
+                    "type": "edit",
+                    # Edited action with tool name and args
+                    "edited_action": {
+                        # Tool name to call.
+                        # Will usually be the same as the original action.
+                        "name": "new_tool_name",
+                        # Arguments to pass to the tool.
+                        "args": {"key1": "new_value", "key2": "original_value"},
                     }
-                ]
-            }
-        ),
-        config=config,  # Same thread ID to resume the paused conversation
-        version="v2",
-    )
-    ```
-  </Tab>
+                }
+            ]
+        }
+    ),
+    config=config,  # Same thread ID to resume the paused conversation
+    version="v2",
+)
+```
 
-  <Tab title="✏️ edit">
-    Use `edit` to modify the tool call before execution.
-    Provide the edited action with the new tool name and arguments.
+> [!TIP]
+> When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    agent.invoke(
-        Command(
-            # Decisions are provided as a list, one per action under review.
-            # The order of decisions must match the order of actions
-            # in the interrupt request.
-            resume={
-                "decisions": [
-                    {
-                        "type": "edit",
-                        # Edited action with tool name and args
-                        "edited_action": {
-                            # Tool name to call.
-                            # Will usually be the same as the original action.
-                            "name": "new_tool_name",
-                            # Arguments to pass to the tool.
-                            "args": {"key1": "new_value", "key2": "original_value"},
-                        }
-                    }
-                ]
-            }
-        ),
-        config=config,  # Same thread ID to resume the paused conversation
-        version="v2",
-    )
-    ```
+#### ❌ reject
+Use `reject` to deny the tool call and provide feedback instead of execution. The tool is not executed.
 
-    <Tip>
-      When **editing** tool arguments, make changes conservatively. Significant modifications to the original arguments may cause the model to re-evaluate its approach and potentially execute the tool multiple times or take unexpected actions.
-    </Tip>
-  </Tab>
+```python
+agent.invoke(
+    Command(
+        # Decisions are provided as a list, one per action under review.
+        # The order of decisions must match the order of actions
+        # in the interrupt request.
+        resume={
+            "decisions": [
+                {
+                    "type": "reject",
+                    # Optional: explain why the action was rejected
+                    # and whether the agent should retry a different approach.
+                    "message": "User rejected this action. Do not retry this tool call.",
+                }
+            ]
+        }
+    ),
+    config=config,  # Same thread ID to resume the paused conversation
+    version="v2",
+)
+```
 
-  <Tab title="❌ reject">
-    Use `reject` to deny the tool call and provide feedback instead of execution. The tool is not executed.
+The `message` is added to the conversation as feedback to help the agent understand why the action was rejected and what it should do instead. When you omit `message`, the middleware uses a default rejection message that tells the model the tool was not executed and not to retry the same tool call unless the user asks. For side-effecting tools, provide a domain-specific message that is explicit about whether the agent should abandon the action, ask a follow-up question, or try a safer alternative.
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    agent.invoke(
-        Command(
-            # Decisions are provided as a list, one per action under review.
-            # The order of decisions must match the order of actions
-            # in the interrupt request.
-            resume={
-                "decisions": [
-                    {
-                        "type": "reject",
-                        # Optional: explain why the action was rejected
-                        # and whether the agent should retry a different approach.
-                        "message": "User rejected this action. Do not retry this tool call.",
-                    }
-                ]
-            }
-        ),
-        config=config,  # Same thread ID to resume the paused conversation
-        version="v2",
-    )
-    ```
+#### 💬 respond
+Use `respond` for "ask user" style tools where the tool's real implementation is the human's reply. The `message` content is returned directly as the tool result; the tool itself is not executed.
 
-    The `message` is added to the conversation as feedback to help the agent understand why the action was rejected and what it should do instead. When you omit `message`, the middleware uses a default rejection message that tells the model the tool was not executed and not to retry the same tool call unless the user asks. For side-effecting tools, provide a domain-specific message that is explicit about whether the agent should abandon the action, ask a follow-up question, or try a safer alternative.
-  </Tab>
+```python
+agent.invoke(
+    Command(
+        # Decisions are provided as a list, one per action under review.
+        # The order of decisions must match the order of actions
+        # in the interrupt request.
+        resume={
+            "decisions": [
+                {
+                    "type": "respond",
+                    # The human's reply, returned directly as the tool result
+                    "message": "Blue.",
+                }
+            ]
+        }
+    ),
+    config=config,  # Same thread ID to resume the paused conversation
+    version="v2",
+)
+```
 
-  <Tab title="💬 respond">
-    Use `respond` for "ask user" style tools where the tool's real implementation is the human's reply. The `message` content is returned directly as the tool result; the tool itself is not executed.
-
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    agent.invoke(
-        Command(
-            # Decisions are provided as a list, one per action under review.
-            # The order of decisions must match the order of actions
-            # in the interrupt request.
-            resume={
-                "decisions": [
-                    {
-                        "type": "respond",
-                        # The human's reply, returned directly as the tool result
-                        "message": "Blue.",
-                    }
-                ]
-            }
-        ),
-        config=config,  # Same thread ID to resume the paused conversation
-        version="v2",
-    )
-    ```
-
-    The `message` is returned to the agent as a successful `ToolMessage`. Use `respond` when the tool is intentionally a placeholder for human input, for example, an `ask_user` tool that prompts for clarification. Do not use `respond` to deny a proposed action, because it tells the model that the tool completed successfully.
-  </Tab>
-</Tabs>
+The `message` is returned to the agent as a successful `ToolMessage`. Use `respond` when the tool is intentionally a placeholder for human input, for example, an `ask_user` tool that prompts for clarification. Do not use `respond` to deny a proposed action, because it tells the model that the tool completed successfully.
 
 ***
 
@@ -329,7 +308,7 @@ agent.invoke(
 
 When multiple actions are under review, provide a decision for each action in the same order as they appear in the interrupt:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {
     "decisions": [
         {"type": "approve"},
@@ -352,7 +331,7 @@ When multiple actions are under review, provide a decision for each action in th
 
 You can stream real-time updates while the agent runs and handles interrupts using `stream_events()`. Use `stream.messages` to stream LLM tokens and `stream.values` to check agent state snapshots for interrupts.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.types import Command
 
 config = {"configurable": {"thread_id": "some_id"}}
@@ -382,7 +361,7 @@ for message in stream.messages:  # [!code highlight]
         print(token, end="", flush=True)
 ```
 
-See the [Streaming](/oss/python/langchain/streaming) guide for more details on stream modes.
+See the [Streaming](https://docs.langchain.com/oss/python/langchain/streaming) guide for more details on stream modes.
 
 ## Execution lifecycle
 
@@ -396,18 +375,14 @@ The middleware defines an `after_model` hook that runs after the model generates
 
 ## Custom HITL logic
 
-For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) primitive and [middleware](/oss/python/langchain/middleware) abstraction.
+For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) primitive and [middleware](https://docs.langchain.com/oss/python/langchain/middleware) abstraction.
 
-Review the [execution lifecycle](#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
+Review the [execution lifecycle](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/human-in-the-loop.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

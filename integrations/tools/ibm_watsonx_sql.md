@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # IBM watsonx.ai SQL integration
 
 > Integrate with the IBM watsonx.ai SQL tool using LangChain Python.
 
 This example shows how to use `langchain-ibm` `watsonx.ai` SQL Database Toolkit that uses Flight service.
 
-<Warning>
-  Building Q\&A systems of SQL databases requires executing model-generated SQL queries, which carries inherent security risks. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
-</Warning>
+> [!WARNING]
+> Building Q\&A systems of SQL databases requires executing model-generated SQL queries, which carries inherent security risks. Make sure that your database connection permissions are always scoped as narrowly as possible for your agent's needs. This will mitigate, though not eliminate, the risks of building a model-driven system.
 
 ## Overview
 
@@ -31,7 +26,7 @@ This cell defines the WML credentials required to work with watsonx SQL Database
 **Action:** Provide the IBM Cloud user API key. For details, see
 [documentation](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -41,7 +36,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -55,7 +50,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU "langchain-ibm[sql-toolkit]"
 ```
 
@@ -63,7 +58,7 @@ pip install -qU "langchain-ibm[sql-toolkit]"
 
 To set up the SQL Database toolkit, you must first instantiate the `WatsonxSQLDatabase` class, which retrieves necessary information from IBM watsonx.ai database connection assets via the Flight SQL client. For more details on creating the Database connection Asset programmatically see a watsonx.ai Python SDK [documentation](https://ibm.github.io/watsonx-ai-python-sdk/v1.4.7/autoai_working_with_dataconnection.html#connection-asset-databaselocation).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm.utilities.sql_database import WatsonxSQLDatabase
 
 wx_sql_database = WatsonxSQLDatabase(
@@ -77,7 +72,7 @@ Alternatively, you can use Cloud Pak for Data credentials. For details, see [wat
 
 For certain requirements, there is an option to pass the IBM's [`APIClient`](https://ibm.github.io/watsonx-ai-python-sdk/base.html#apiclient) object into the `WatsonxSQLDatabase` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai import APIClient
 
 api_client = APIClient(...)
@@ -91,7 +86,7 @@ wx_sql_database = WatsonxSQLDatabse(
 
 Finally, initialize the `WatsonxSQLDatabaseToolkit`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 llm = ChatWatsonx(...)
@@ -110,11 +105,11 @@ wx_sql_toolkit = WatsonxSQLDatabaseToolkit(
 
 Running `.get_tools` method, one can get all available tools as a list.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 wx_sql_toolkit.get_tools()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [QuerySQLDatabaseTool(description="Input to this tool is a detailed and correct SQL query, output is a result from the database. If the query is not correct, an error message will be returned. If an error is returned, rewrite the query, check the query, and try again. If you encounter an issue with Unknown column 'xxxx' in 'field list', use sql_db_schema to query the correct table fields.", db=<langchain_ibm.utilities.sql_database.WatsonxSQLDatabase object at 0x111c03810>),
  InfoSQLDatabaseTool(description='Input to this tool is a comma-separated list of tables, output is the SQL statement with table metadata. Be sure that the tables actually exist by calling sql_db_list_tables first! Example Input: table1, table2, table3', db=<langchain_ibm.utilities.sql_database.WatsonxSQLDatabase object at 0x111c03810>),
  ListSQLDatabaseTool(db=<langchain_ibm.utilities.sql_database.WatsonxSQLDatabase object at 0x111c03810>),
@@ -124,7 +119,7 @@ wx_sql_toolkit.get_tools()
 
 You can use the individual tools directly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm.agent_toolkits.sql.tool import (
     InfoSQLDatabaseTool,
     ListSQLDatabaseTool,
@@ -135,7 +130,7 @@ from langchain_ibm.agent_toolkits.sql.tool import (
 
 ## Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 llm = ChatWatsonx(
@@ -145,7 +140,7 @@ llm = ChatWatsonx(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 
 # Use one of the prompt from langchain hub
@@ -157,7 +152,7 @@ system_message = prompt_template.format(dialect="PostgreSQL", top_k=5)
 agent_executor = create_agent(llm, wx_sql_toolkit.get_tools(), system_prompt=system_message)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 example_query = "What city has the highest population?"
 
 stream = agent.stream_events(
@@ -168,7 +163,7 @@ for snapshot in stream.values:
     snapshot["messages"][-1].pretty_print()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ================================[1m Human Message [0m=================================
 
 What city has the largest population?
@@ -190,7 +185,6 @@ Tool Calls:
     table_names: cities
 =================================[1m Tool Message [0m=================================
 Name: sql_db_schema
-
 
 CREATE TABLE "public"."cities" (
 	"id" INTEGER NOT NULL,
@@ -238,12 +232,8 @@ For detailed documentation of all `WatsonxSQLDatabaseToolkit` features and confi
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx_sql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

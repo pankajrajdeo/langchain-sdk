@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # BGE on Hugging Face integration
 
 > Integrate with BGE embedding models on Hugging Face using LangChain Python.
@@ -14,11 +10,11 @@ LangChain provides two ways to use BGE models:
 
 ## `BAAI/bge-m3` and newer
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install -qU langchain-huggingface
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(
@@ -31,7 +27,7 @@ embeddings = HuggingFaceEmbeddings(
 
 ## `BAAI/bge-*-en-v1.5` (quick path)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(
@@ -54,20 +50,16 @@ Different BGE variants use different prompts; check each model card on Hugging F
 | `BAAI/bge-large-en-v1.5` | 335M | Stronger English, widely used baseline                     |
 | `BAAI/bge-m3`            | 570M | Multilingual; dense, sparse, and multi-vector in one model |
 
-For reranking (not embedding), see [`BAAI/bge-reranker-v2-m3`](https://huggingface.co/BAAI/bge-reranker-v2-m3) via the [Cross Encoder Reranker guide](/oss/python/integrations/document_transformers/cross_encoder_reranker).
+For reranking (not embedding), see [`BAAI/bge-reranker-v2-m3`](https://huggingface.co/BAAI/bge-reranker-v2-m3) via the [Cross Encoder Reranker guide](https://docs.langchain.com/oss/python/integrations/document_transformers/cross_encoder_reranker).
 
 ## More
 
-See the [Sentence Transformers integration page](/oss/python/integrations/embeddings/sentence_transformers) for GPU configuration, batch sizes, query/document prompts, and deployment options.
+See the [Sentence Transformers integration page](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers) for GPU configuration, batch sizes, query/document prompts, and deployment options.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/bge_huggingface.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/bge_huggingface.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

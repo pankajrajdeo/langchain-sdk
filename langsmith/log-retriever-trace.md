@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Log retriever traces
-
-> Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-retriever-trace)
+Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
 
 Many LLM applications retrieve documents from vector databases, knowledge graphs, or other indexes as part of a retrieval-augmented generation (RAG) pipeline. LangSmith provides dedicated rendering for retriever steps, which makes it easier to inspect retrieved documents and diagnose retrieval issues.
 
-<Note>
-  These steps are **optional**. If you skip them, your retriever data will still be logged, but LangSmith will not render it with retriever-specific formatting.
-</Note>
+> [!NOTE]
+> These steps are **optional**. If you skip them, your retriever data will still be logged, but LangSmith will not render it with retriever-specific formatting.
 
 To enable retriever-specific rendering, complete the following two steps.
 
 ## Set `run_type` to retriever
 
-Pass [`run_type="retriever"`](/langsmith/run-data-format#run-types) to the [traceable](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator (Python) or `traceable` wrapper (TypeScript). This tells LangSmith to treat the step as a retrieval run and apply retriever-specific rendering in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-log-retriever-trace):
+Pass [`run_type="retriever"`](https://docs.langchain.com/langsmith/run-data-format#run-types) to the [traceable](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator (Python) or `traceable` wrapper (TypeScript). This tells LangSmith to treat the step as a retrieval run and apply retriever-specific rendering in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-log-retriever-trace):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import traceable
 
 @traceable(run_type="retriever")
@@ -26,7 +21,7 @@ def retrieve_docs(query):
     ...
 ```
 
-If you are using the [RunTree API](/langsmith/annotate-code#use-the-runtree-api) instead of `traceable`, pass `run_type="retriever"` when creating the `RunTree` object.
+If you are using the [RunTree API](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api) instead of `traceable`, pass `run_type="retriever"` when creating the `RunTree` object.
 
 ## Return documents in the expected format
 
@@ -40,76 +35,70 @@ Return a list of dictionaries (Python) or objects (TypeScript) from your retriev
 
 The following examples show a complete retriever implementation with both requirements applied:
 
-<CodeGroup>
-  ```python Python wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langsmith import traceable
+```python
+from langsmith import traceable
 
-  def _convert_docs(results):
-      return [
-          {
-              "page_content": r,
-              "type": "Document",
-              "metadata": {"foo": "bar"}
-          }
-          for r in results
-      ]
+def _convert_docs(results):
+    return [
+        {
+            "page_content": r,
+            "type": "Document",
+            "metadata": {"foo": "bar"}
+        }
+        for r in results
+    ]
 
-  @traceable(run_type="retriever")
-  def retrieve_docs(query):
-      # Returning hardcoded placeholder documents.
-      # In production, replace with a real vector database or document index.
-      contents = ["Document contents 1", "Document contents 2", "Document contents 3"]
-      return _convert_docs(contents)
+@traceable(run_type="retriever")
+def retrieve_docs(query):
+    # Returning hardcoded placeholder documents.
+    # In production, replace with a real vector database or document index.
+    contents = ["Document contents 1", "Document contents 2", "Document contents 3"]
+    return _convert_docs(contents)
 
-  retrieve_docs("User query")
-  ```
+retrieve_docs("User query")
+```
 
-  ```typescript TypeScript wrap theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { traceable } from "langsmith/traceable";
+```typescript
+import { traceable } from "langsmith/traceable";
 
-  interface Document {
-      page_content: string;
-      type: string;
-      metadata: { foo: string };
-  }
+interface Document {
+    page_content: string;
+    type: string;
+    metadata: { foo: string };
+}
 
-  function convertDocs(results: string[]): Document[] {
-      return results.map((r) => ({
-          page_content: r,
-          type: "Document",
-          metadata: { foo: "bar" }
-      }));
-  }
+function convertDocs(results: string[]): Document[] {
+    return results.map((r) => ({
+        page_content: r,
+        type: "Document",
+        metadata: { foo: "bar" }
+    }));
+}
 
-  const retrieveDocs = traceable((query: string): Document[] => {
-      // Returning hardcoded placeholder documents.
-      // In production, replace with a real vector database or document index.
-      const contents = ["Document contents 1", "Document contents 2", "Document contents 3"];
-      return convertDocs(contents);
-  }, {
-      name: "retrieveDocs",
-      run_type: "retriever"
-  });
+const retrieveDocs = traceable((query: string): Document[] => {
+    // Returning hardcoded placeholder documents.
+    // In production, replace with a real vector database or document index.
+    const contents = ["Document contents 1", "Document contents 2", "Document contents 3"];
+    return convertDocs(contents);
+}, {
+    name: "retrieveDocs",
+    run_type: "retriever"
+});
 
-  await retrieveDocs("User query");
-  ```
-</CodeGroup>
+await retrieveDocs("User query");
+```
 
 In the LangSmith UI, you'll find each retrieved document with its contents and metadata.
 
 ## Related
 
-* [Annotate code for tracing](/langsmith/annotate-code): Overview of all tracing methods, including `traceable`, `RunTree`, and the REST API.
-* [Log LLM calls](/langsmith/log-llm-trace): Similar custom logging requirements for LLM steps.
+* [Annotate code for tracing](https://docs.langchain.com/langsmith/annotate-code): Overview of all tracing methods, including `traceable`, `RunTree`, and the REST API.
+* [Log LLM calls](https://docs.langchain.com/langsmith/log-llm-trace): Similar custom logging requirements for LLM steps.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-retriever-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/log-retriever-trace.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

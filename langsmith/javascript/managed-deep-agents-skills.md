@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add skills to Managed Deep Agents
-
-> Add reusable task-specific instructions to a Managed Deep Agent.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-skills)
+Add reusable task-specific instructions to a Managed Deep Agent.
 
 Skills package task-specific procedures and context into reusable directories. You can define them in markdown files, and they are picked up automatically by the agent.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Keep the agent entry point at the project root and define each skill under `skills/`:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   skills/
@@ -28,7 +23,7 @@ my-agent/
 
 Each skill directory needs a `SKILL.md` file with `name` and `description` frontmatter:
 
-```markdown skills/research/SKILL.md theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```markdown
 ---
 name: research
 description: Gather and synthesize context before answering complex questions.
@@ -53,7 +48,7 @@ This progressive disclosure gives the agent access to detailed procedures withou
 
 ## Syncing to Context Hub
 
-When you run `mda deploy`, every UTF-8 file under `skills/` is automatically synced to the agent's [Context Hub](/langsmith/use-the-context-hub) repo. You can then edit skills in the LangSmith UI and make the changes available to the agent.
+When you run `mda deploy`, every UTF-8 file under `skills/` is automatically synced to the agent's [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) repo. You can then edit skills in the LangSmith UI and make the changes available to the agent.
 
 A later deployment syncs the project copies again and removes deployed skill files that no longer exist locally.
 
@@ -61,20 +56,16 @@ A later deployment syncs the project copies again and removes deployed skill fil
 
 Skills is context that is loaded dynamically, when the agent chooses to. The agent cannot modify them.
 
-Use [instructions](/langsmith/javascript/managed-deep-agents-instructions) for behavior that should ALWAYS be loaded by the agent.
+Use [instructions](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-instructions) for behavior that should ALWAYS be loaded by the agent.
 
-Use [memory](/langsmith/javascript/managed-deep-agents-memory) for knowledge you want the agent to be able to update.
+Use [memory](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory) for knowledge you want the agent to be able to update.
 
-For skill authoring patterns and the complete format, see [Skills](/oss/javascript/deepagents/skills).
+For skill authoring patterns and the complete format, see [Skills](https://docs.langchain.com/oss/javascript/deepagents/skills).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

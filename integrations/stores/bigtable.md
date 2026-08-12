@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # BigTableByteStore integration
 
 > Integrate with the BigTableByteStore store using LangChain Python.
@@ -38,7 +34,7 @@ To get started, you will need a Google Cloud project with an active Bigtable ins
 
 The integration is in the `langchain-google-bigtable` package. The command below also installs `langchain-google-vertexai` for the embedding cache example.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-bigtable langchain-google-vertexai
 ```
 
@@ -48,7 +44,7 @@ Set your Google Cloud project to use its resources within this notebook.
 
 If you don't know your project ID, you can run `gcloud config list` or see the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in your project, instance, and table details.
 PROJECT_ID = "your-gcp-project-id"  # @param {type:"string"}
 INSTANCE_ID = "your-instance-id"  # @param {type:"string"}
@@ -64,7 +60,7 @@ Authenticate to Google Cloud to access your project resources.
 * For **Colab**, use the cell below.
 * For **Vertex AI Workbench**, see the [setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -74,7 +70,7 @@ auth.authenticate_user()
 
 To use `BigtableByteStore`, we first ensure a table exists and then initialize a `BigtableEngine` to manage connections.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_bigtable import (
     BigtableByteStore,
     BigtableEngine,
@@ -93,7 +89,7 @@ init_key_value_store_table(
 
 A `BigtableEngine` object handles the execution context for the store, especially for async operations. It's recommended to initialize a single engine and reuse it across multiple stores for better performance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize the engine to manage async operations.
 engine = await BigtableEngine.async_initialize(
     project_id=PROJECT_ID, instance_id=INSTANCE_ID
@@ -104,7 +100,7 @@ engine = await BigtableEngine.async_initialize(
 
 This is the main class for interacting with the key-value store. It provides the methods for setting, getting, and deleting data.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize the store.
 store = await BigtableByteStore.create(engine=engine, table_id=TABLE_ID)
 ```
@@ -117,7 +113,7 @@ The store supports both sync (`mset`, `mget`) and async (`amset`, `amget`) metho
 
 Use `amset` to save key-value pairs to the store.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_pairs = [
     ("key1", b"value1"),
     ("key2", b"value2"),
@@ -131,7 +127,7 @@ await store.amset(kv_pairs)
 
 Use `amget` to retrieve values. If a key is not found, `None` is returned for that key.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retrieved_vals = await store.amget(["key1", "key2", "nonexistent_key"])
 print(retrieved_vals)
 ```
@@ -140,7 +136,7 @@ print(retrieved_vals)
 
 Use `amdelete` to remove keys from the store.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 await store.amdelete(["key3"])
 
 # Verifying the key was deleted
@@ -151,7 +147,7 @@ await store.amget(["key1", "key3"])
 
 Use `ayield_keys` to iterate over all keys or keys with a specific prefix.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 all_keys = [key async for key in store.ayield_keys()]
 print(f"All keys: {all_keys}")
 
@@ -163,7 +159,7 @@ print(f"Prefixed keys: {prefixed_keys}")
 
 A common use case for a key-value store is to cache expensive operations like computing text embeddings, which saves time and cost.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.embeddings import CacheBackedEmbeddings
 from langchain_google_vertexai.embeddings import VertexAIEmbeddings
 
@@ -177,12 +173,12 @@ cached_embedder = CacheBackedEmbeddings.from_bytes_store(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print("First call (computes and caches embedding):")
 %time embedding_result_1 = await cached_embedder.aembed_query("Hello, world!")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print("\nSecond call (retrieves from cache):")
 %time embedding_result_2 = await cached_embedder.aembed_query("Hello, world!")
 ```
@@ -191,13 +187,12 @@ print("\nSecond call (retrieves from cache):")
 
 This section shows how to create a simple retriever using the Bigtable store. It acts as a document persistence layer, fetching documents that match a query prefix.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.retrievers import BaseRetriever
 from langchain_core.documents import Document
 from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from typing import List, Optional, Any, Union
 import json
-
 
 class SimpleKVStoreRetriever(BaseRetriever):
     """A simple retriever that retrieves documents based on a prefix match in the key-value store."""
@@ -259,7 +254,7 @@ class SimpleKVStoreRetriever(BaseRetriever):
         return documents_retrieved
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 documents = [
     Document(
         page_content="Goldfish are popular pets for beginners, requiring relatively simple care.",
@@ -279,7 +274,7 @@ documents = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever_store = BigtableByteStore.create_sync(
     engine=engine, instance_id=INSTANCE_ID, table_id=TABLE_ID
 )
@@ -291,11 +286,11 @@ KVDocumentRetriever = SimpleKVStoreRetriever(
 KVDocumentRetriever.set_up_store()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 KVDocumentRetriever.invoke("fish")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 KVDocumentRetriever.invoke("mammals")
 ```
 
@@ -305,12 +300,8 @@ For full details on the `BigtableByteStore` class, see the source code on [GitHu
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/bigtable.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/bigtable.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

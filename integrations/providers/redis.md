@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Redis integrations
 
 > Integrate with Redis using LangChain Python.
@@ -19,31 +15,29 @@ It is broken into two parts: installation and setup, and then references to spec
 
 Install the Python SDK and LangChain Redis integration:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install redis langchain-redis
-  ```
+```bash
+pip install redis langchain-redis
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add redis langchain-redis
-  ```
-</CodeGroup>
+```bash
+uv add redis langchain-redis
+```
 
 To run Redis locally, you can use Docker:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run --name langchain-redis -d -p 6379:6379 redis redis-server --save 60 1 --loglevel warning
 ```
 
 To stop the container:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker stop langchain-redis
 ```
 
 And to start it again:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker start langchain-redis
 ```
 
@@ -88,13 +82,13 @@ The Cache wrapper allows for [Redis](https://redis.io) to be used as a remote, l
 
 The standard cache is the Redis bread & butter of use case in production for both [open-source](https://redis.io) and [enterprise](https://redis.com) users globally.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_redis import RedisCache
 ```
 
 To use this cache with your LLMs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 import redis
 
@@ -106,13 +100,13 @@ set_llm_cache(RedisCache(redis_client))
 
 Semantic caching allows users to retrieve cached prompts based on semantic similarity between the user input and previously cached results. Under the hood it blends Redis as both a cache and a vectorstore.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_redis import RedisSemanticCache
 ```
 
 To use this cache with your LLMs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.globals import set_llm_cache
 import redis
 
@@ -131,11 +125,11 @@ set_llm_cache(RedisSemanticCache(
 
 Redis includes a vector store integration for low-latency retrieval, metadata filtering, MMR, and hybrid full-text and vector search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_redis import RedisVectorStore
 ```
 
-For a detailed walkthrough, see the [Redis vector store integration guide](/oss/python/integrations/vectorstores/redis).
+For a detailed walkthrough, see the [Redis vector store integration guide](https://docs.langchain.com/oss/python/integrations/vectorstores/redis).
 
 ## Retriever
 
@@ -145,12 +139,8 @@ call `.as_retriever()` on the base vectorstore class.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Cursor sessions
-
-> Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-cursor)
+Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith.
 
 Trace [Cursor](https://cursor.com/) agent sessions in LangSmith using [Cursor hooks](https://cursor.com/docs/agent/hooks). Each turn becomes one trace, grouped into a thread per Cursor conversation, which captures prompts, model responses, tool calls, token usage, and subagent activity. Use the traces to debug agent behavior, audit tool calls, track token spend per turn, and compare Cursor runs.
 
@@ -16,7 +12,7 @@ Before setting up tracing, ensure you have:
 
 * [Cursor](https://cursor.com/) installed.
 * [Node.js](https://nodejs.org/) 22.13 or later. The hooks use the built-in `node:sqlite` module to recover attachments from Cursor's local database.
-* A [LangSmith API key](/langsmith/create-account-api-key).
+* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
 
 ## Install and enable the plugin
 
@@ -28,27 +24,26 @@ Install the plugin directly from the GitHub repository in Cursor's settings:
 
 This is the recommended path: it installs the hooks with no clone or build step, since the repository ships a precompiled bundle.
 
-<Warning>
-  Fully restart Cursor after installing so it reloads `hooks.json`.
-</Warning>
+> [!WARNING]
+> Fully restart Cursor after installing so it reloads `hooks.json`.
 
 ### Alternative: install from a local clone
 
 Install the hooks from a local clone of [`langsmith-cursor-plugins`](https://github.com/langchain-ai/langsmith-cursor-plugins). This writes `~/.cursor/hooks.json` for all Cursor projects:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 node scripts/install.mjs
 ```
 
 To scope the hooks to a single project instead, run the installer from the project directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 node scripts/install.mjs --project
 ```
 
 To preview the hook configuration without writing it, run:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 node scripts/install.mjs --print
 ```
 
@@ -58,7 +53,7 @@ Restart Cursor after installing so it reloads `hooks.json`.
 
 ## Configure tracing
 
-Tracing is disabled until both `enabled` (or `TRACE_TO_LANGSMITH=true`) and an API key are set. Configure credentials with [environment variables](#environment-variables), a [JSON config file](#config-file), or both.
+Tracing is disabled until both `enabled` (or `TRACE_TO_LANGSMITH=true`) and an API key are set. Configure credentials with [environment variables](https://docs.langchain.com/langsmith/trace-with-cursor#environment-variables), a [JSON config file](https://docs.langchain.com/langsmith/trace-with-cursor#config-file), or both.
 
 ### Environment variables
 
@@ -80,7 +75,7 @@ Every `LANGSMITH_CURSOR_*` variable also accepts the shorter `LANGSMITH_*` form.
 
 Add the variables to your shell configuration file (`~/.zshrc`, `~/.bashrc`, or `~/.bash_profile`):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export TRACE_TO_LANGSMITH="true"
 export LANGSMITH_CURSOR_API_KEY="<your-langsmith-api-key>"
 export LANGSMITH_CURSOR_PROJECT="cursor"
@@ -88,7 +83,7 @@ export LANGSMITH_CURSOR_PROJECT="cursor"
 
 To verify hook activity, tail the log file:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 tail -f ~/.cursor/langsmith-hook.log
 ```
 
@@ -96,7 +91,7 @@ tail -f ~/.cursor/langsmith-hook.log
 
 Use `~/.cursor/langsmith.json` for global defaults or `./.cursor/langsmith.json` for project-level settings. Settings resolve in this order, with later sources overriding earlier ones: defaults, global config, project config, environment variables.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<your-langsmith-api-key>",
@@ -129,13 +124,11 @@ The plugin listens to Cursor hooks and assembles one trace per agent turn:
 * **Attachments**: image and file attachments recovered from Cursor's local database and rendered inline on the user message. Set `attachments` to `false` to skip this step.
 * **Subagents**: each subagent appears as a nested chain run with its own tool calls underneath, linked to the parent turn.
 
-<Note>
-  The plugin does not compute cost locally. Because `ls_model_name` is normalized to a canonical id and `usage_metadata` carries the token breakdown, LangSmith's server-side model price table renders cost in the UI. Auto mode reports `default`, which LangSmith cannot price.
-</Note>
+> [!NOTE]
+> The plugin does not compute cost locally. Because `ls_model_name` is normalized to a canonical id and `usage_metadata` carries the token breakdown, LangSmith's server-side model price table renders cost in the UI. Auto mode reports `default`, which LangSmith cannot price.
 
-<Warning>
-  The plugin uploads Cursor conversation data, including prompts, model responses, tool inputs and outputs, and recovered attachments. Do not enable tracing for sessions that contain data you do not want stored in LangSmith.
-</Warning>
+> [!WARNING]
+> The plugin uploads Cursor conversation data, including prompts, model responses, tool inputs and outputs, and recovered attachments. Do not enable tracing for sessions that contain data you do not want stored in LangSmith.
 
 ### Trace metadata
 
@@ -182,12 +175,8 @@ If traces do not appear in LangSmith:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-cursor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-cursor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

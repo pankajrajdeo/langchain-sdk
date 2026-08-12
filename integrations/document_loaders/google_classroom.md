@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google Classroom integration
 
 > Integrate with the Google Classroom document loader using LangChain Python.
@@ -41,13 +37,13 @@ To use this loader, you will need:
 
 Install the integration package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-google-classroom
 ```
 
 To enable parsing of PDF and DOCX attachments, install with the optional `parsers` extra:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU "langchain-google-classroom[parsers]"
 ```
 
@@ -59,7 +55,7 @@ pip install -qU "langchain-google-classroom[parsers]"
 2. Download the client secrets file and save it as `credentials.json` in your working directory.
 3. On first run, a browser window will open for user consent. The resulting token is cached to `token.json` for subsequent runs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_classroom import GoogleClassroomLoader
 
 loader = GoogleClassroomLoader()
@@ -73,7 +69,7 @@ docs = loader.load()
 2. Enable [Domain-Wide Delegation](https://developers.google.com/identity/protocols/oauth2/service-account#delegatingauthority) for the service account.
 3. Download the key file and save it as `service_account.json`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_classroom import GoogleClassroomLoader
 
 loader = GoogleClassroomLoader(
@@ -84,7 +80,7 @@ docs = loader.load()
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_classroom import GoogleClassroomLoader
 
 loader = GoogleClassroomLoader(
@@ -121,7 +117,7 @@ loader = GoogleClassroomLoader(
 
 Use `load()` to fetch all documents at once:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_classroom import GoogleClassroomLoader
 
 loader = GoogleClassroomLoader(
@@ -133,13 +129,13 @@ print(f"Loaded {len(docs)} documents")
 
 Each `Document` has structured `page_content` and rich `metadata`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc = docs[0]
 print(doc.page_content[:200])
 print(doc.metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Example metadata
 {
     "source": "google_classroom",
@@ -157,7 +153,7 @@ print(doc.metadata)
 
 For large courses or memory-constrained environments, use `lazy_load()` to stream documents one at a time:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_classroom import GoogleClassroomLoader
 
 loader = GoogleClassroomLoader(
@@ -172,10 +168,9 @@ for doc in loader.lazy_load():
 
 The loader supports async iteration via `alazy_load()`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 from langchain_google_classroom import GoogleClassroomLoader
-
 
 async def main():
     loader = GoogleClassroomLoader(
@@ -186,7 +181,6 @@ async def main():
         docs.append(doc)
     return docs
 
-
 docs = asyncio.run(main())
 ```
 
@@ -194,7 +188,7 @@ docs = asyncio.run(main())
 
 ### Student submissions
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleClassroomLoader(
     course_ids=["123456789"],
     load_submissions=True,
@@ -205,7 +199,7 @@ docs = loader.load()
 
 ### Topics
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleClassroomLoader(
     course_ids=["123456789"],
     load_topics=True,
@@ -216,7 +210,7 @@ docs = loader.load()
 
 ### Class roster (students and teachers)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleClassroomLoader(
     course_ids=["123456789"],
     load_roster=True,
@@ -244,7 +238,7 @@ When `load_attachments=True` (the default), the loader resolves Google Drive fil
 
 To process image attachments and extract visual context from PDF pages, provide a vision-capable model:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_google_classroom import GoogleClassroomLoader
 
@@ -261,7 +255,7 @@ docs = loader.load()
 
 You can replace the built-in parsers with any `BaseBlobParser` subclass:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders.parsers.pdf import PyMuPDFParser
 from langchain_google_classroom import GoogleClassroomLoader
 
@@ -279,12 +273,8 @@ docs = loader.load()
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_classroom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_classroom.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Parallel search integration
 
 > Integrate with the ParallelSearchTool tool using LangChain Python.
@@ -10,9 +6,8 @@
 
 `ParallelSearchTool` calls Parallel's [Search API](https://docs.parallel.ai/search/search-quickstart), which collapses the traditional search → scrape → extract pipeline into one call and returns structured, LLM-optimized excerpts.
 
-<Note>
-  `ParallelSearchTool` is the canonical class name. The earlier `ParallelWebSearchTool` continues to work as an alias for the same class. Looking for a `BaseRetriever` to drop into a RAG chain instead? See [ParallelSearchRetriever](/oss/python/integrations/retrievers/parallel).
-</Note>
+> [!NOTE]
+> `ParallelSearchTool` is the canonical class name. The earlier `ParallelWebSearchTool` continues to work as an alias for the same class. Looking for a `BaseRetriever` to drop into a RAG chain instead? See [ParallelSearchRetriever](https://docs.langchain.com/oss/python/integrations/retrievers/parallel).
 
 ## Overview
 
@@ -20,27 +15,25 @@
 
 | Class                                                                                                            | Package                                                                            | Serializable | JS support |                                                                                                                   Package latest                                                                                                                   |
 | :--------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelSearchTool`](https://reference.langchain.com/python/langchain-parallel/search_tool/ParallelSearchTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ParallelSearchTool`](https://reference.langchain.com/python/langchain-parallel/search_tool/ParallelSearchTool) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ❌      |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -50,7 +43,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelSearchTool
 
 tool = ParallelSearchTool()
@@ -68,7 +61,7 @@ tool = ParallelSearchTool()
 
 The tool requires `search_queries` (one or more keyword strings). Pair it with an `objective` for richer relevance ranking, and add domain filtering, fetch policies, and other settings as needed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = tool.invoke(
     {
         "search_queries": [
@@ -97,7 +90,7 @@ for r in result["results"][:3]:
     print(r["title"], "—", r["url"])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Found 8 results
 Latest AI Developments 2026 — https://arxiv.org/abs/...
 ...
@@ -109,7 +102,7 @@ Latest AI Developments 2026 — https://arxiv.org/abs/...
 
 Invoking with a model-generated `ToolCall` returns a `ToolMessage`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model_generated_tool_call = {
     "args": {
         "search_queries": [
@@ -133,7 +126,7 @@ result = tool.invoke(model_generated_tool_call)
 
 ### Async usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def search_async():
     return await tool.ainvoke(
         {
@@ -169,7 +162,7 @@ result = await search_async()
 
 [`SourcePolicy`](https://reference.langchain.com/python/langchain-parallel/_types/SourcePolicy) mirrors the API's `include_domains` / `exclude_domains` / `after_date`. Use it for type safety; raw dicts are also accepted.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import SourcePolicy
 
 result = tool.invoke({
@@ -184,9 +177,9 @@ result = tool.invoke({
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 
@@ -196,13 +189,12 @@ agent = create_agent(model=llm, tools=[tool])
 agent.invoke({"messages": [("human", "What are the latest breakthroughs in quantum computing?")]})
 ```
 
-<Note>
-  `ChatParallel` itself does not support tool calling. Use it as a research assistant inside a chain, or use the Parallel search/extract tools alongside another tool-calling model.
-</Note>
+> [!NOTE]
+> `ChatParallel` itself does not support tool calling. Use it as a research assistant inside a chain, or use the Parallel search/extract tools alongside another tool-calling model.
 
 ## Response format
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {
     "search_id": "search_abc123...",
     "session_id": "sess_...",
@@ -233,12 +225,8 @@ For detailed documentation, head to the [`ParallelSearchTool`](https://reference
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/parallel_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

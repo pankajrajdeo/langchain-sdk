@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatTogether integration
 
 > Integrate with the ChatTogether chat model using LangChain Python.
 
-This page will help you get started with Together AI [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatTogether` features and configurations, head to the [API reference](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether).
+This page will help you get started with Together AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatTogether` features and configurations, head to the [API reference](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether).
 
 [Together AI](https://www.together.ai/) offers an API to query [50+ leading open-source models](https://docs.together.ai/docs/chat-models)
 
@@ -20,7 +16,7 @@ This page will help you get started with Together AI [chat models](/oss/python/l
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
 
@@ -32,7 +28,7 @@ To access Together models you'll need to create a Together account, get an API k
 
 Head to [this page](https://api.together.ai) to sign up to Together and generate an API key. Once you've done this, set the TOGETHER\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -40,9 +36,9 @@ if "TOGETHER_API_KEY" not in os.environ:
     os.environ["TOGETHER_API_KEY"] = getpass.getpass("Enter your Together API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -51,7 +47,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Together integration is included in the `langchain-together` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-together
 ```
 
@@ -59,7 +55,7 @@ pip install -qU langchain-together
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_together import ChatTogether
 
 llm = ChatTogether(
@@ -74,7 +70,7 @@ llm = ChatTogether(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -86,15 +82,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", response_metadata={'token_usage': {'completion_tokens': 9, 'prompt_tokens': 35, 'total_tokens': 44}, 'model_name': 'meta-llama/Llama-3-70b-chat-hf', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}, id='run-eabcbe33-cdd8-45b8-ab0b-f90b6e7dfad8-0', usage_metadata={'input_tokens': 35, 'output_tokens': 9, 'total_tokens': 44})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
@@ -106,12 +102,8 @@ For detailed documentation of all `ChatTogether` features and configurations, he
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/together.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

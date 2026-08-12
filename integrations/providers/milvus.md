@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Milvus integrations
 
 > Integrate with Milvus using LangChain Python.
@@ -13,34 +9,28 @@
 
 Install the Python SDK:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-milvus
-  ```
+```bash
+pip install langchain-milvus
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-milvus
-  ```
-</CodeGroup>
+```bash
+uv add langchain-milvus
+```
 
 ## Vector store
 
-See a [usage example](/oss/python/integrations/vectorstores/milvus).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/milvus).
 
 To import this vectorstore:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_milvus import Milvus
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/milvus.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/milvus.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

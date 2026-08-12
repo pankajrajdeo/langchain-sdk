@@ -1,75 +1,52 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Prompt & Context Hub
-
-> Store, version, and update the prompts and contexts your agents use in production.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-context-hub)
+Store, version, and update the prompts and contexts your agents use in production.
 
 Prompts, retrieval context, skills, and task instructions change more often than the application code around them, and often need to be edited by people who are not engineers. Use the Prompt & Context Hub to store, version, review, and update the non-code parts of your agent so you can change behavior without a full deploy and let domain experts own the context they know best.
 
-[Prompts](#prompts) are individual message templates you send to a model. [Contexts](#context-hub) are versioned bundles of instructions and tools that define a skill or a full agent, promoted through environments so your agents pull the right version.
+[Prompts](https://docs.langchain.com/langsmith/prompt-context-hub#prompts) are individual message templates you send to a model. [Contexts](https://docs.langchain.com/langsmith/prompt-context-hub#context-hub) are versioned bundles of instructions and tools that define a skill or a full agent, promoted through environments so your agents pull the right version.
 
 ## Prompts
 
-<Columns cols={3}>
-  <Card title="Create and update prompts" icon="edit" href="/langsmith/create-a-prompt" arrow="true">
-    Build prompts via the UI or SDK, configure settings, use tools, add multimodal inputs, and connect model providers.
-  </Card>
+#### [Create and update prompts](https://docs.langchain.com/langsmith/create-a-prompt)
+Build prompts via the UI or SDK, configure settings, use tools, add multimodal inputs, and connect model providers.
 
-  <Card title="Manage prompts" icon="tags" href="/langsmith/manage-prompts" arrow="true">
-    Organize with tags, commit changes, trigger webhooks, and share through the public prompt hub.
-  </Card>
+#### [Manage prompts](https://docs.langchain.com/langsmith/manage-prompts)
+Organize with tags, commit changes, trigger webhooks, and share through the public prompt hub.
 
-  <Card title="Explore the prompt hub" icon="folders" href="/langsmith/manage-prompts#public-prompt-hub" arrow="true">
-    Browse and manage prompt tags and discover community prompts from the LangChain Hub.
-  </Card>
+#### [Explore the prompt hub](https://docs.langchain.com/langsmith/manage-prompts#public-prompt-hub)
+Browse and manage prompt tags and discover community prompts from the LangChain Hub.
 
-  <Card title="Open the Playground" icon="test-pipe" href="/langsmith/prompt-engineering-concepts#playground" arrow="true">
-    Test and experiment with prompts using custom endpoints and model configurations.
-  </Card>
+#### [Open the Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground)
+Test and experiment with prompts using custom endpoints and model configurations.
 
-  <Card title="Follow tutorials" icon="notebook" href="/langsmith/optimize-classifier" arrow="true">
-    Learn step-by-step techniques, like optimizing classifiers and advanced prompt engineering.
-  </Card>
-</Columns>
+#### [Follow tutorials](https://docs.langchain.com/langsmith/optimize-classifier)
+Learn step-by-step techniques, like optimizing classifiers and advanced prompt engineering.
 
-<Callout type="info" icon="feather">
-  Use the **[Chat](/langsmith/chat)** in the Playground to optimize prompts, generate tools, and create output schemas with AI-powered assistance.
-</Callout>
+> [!NOTE]
+> Use the **[Chat](https://docs.langchain.com/langsmith/chat)** in the Playground to optimize prompts, generate tools, and create output schemas with AI-powered assistance.
 
 ## Context Hub
 
-<Columns cols={3}>
-  <Card title="Concepts" icon="bulb" href="/langsmith/context-engineering-concepts" arrow="true">
-    Learn the core concepts of context engineering: skills, agents, versioning, and sharing.
-  </Card>
+#### [Concepts](https://docs.langchain.com/langsmith/context-engineering-concepts)
+Learn the core concepts of context engineering: skills, agents, versioning, and sharing.
 
-  <Card title="Use the Context Hub" icon="pointer" href="/langsmith/use-the-context-hub" arrow="true">
-    Create a context, view its files and history, and promote it to an environment.
-  </Card>
+#### [Use the Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub)
+Create a context, view its files and history, and promote it to an environment.
 
-  <Card title="Manage contexts with the SDK" icon="code" href="/langsmith/manage-contexts-sdk" arrow="true">
-    Push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
-  </Card>
+#### [Manage contexts with the SDK](https://docs.langchain.com/langsmith/manage-contexts-sdk)
+Push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
 
-  <Card title="Configure commit webhooks" icon="webhook" href="/langsmith/context-hub-webhooks" arrow="true">
-    Send every agent and skill commit in your workspace to an external HTTPS endpoint.
-  </Card>
-</Columns>
+#### [Configure commit webhooks](https://docs.langchain.com/langsmith/context-hub-webhooks)
+Send every agent and skill commit in your workspace to an external HTTPS endpoint.
 
-<Note>
-  To set up a LangSmith instance, visit the [Platform setup section](/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
-</Note>
+> [!NOTE]
+> To set up a LangSmith instance, visit the [Platform setup section](https://docs.langchain.com/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/prompt-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/prompt-context-hub.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

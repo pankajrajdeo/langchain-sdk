@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Microsoft Foundry Tools (formerly Azure AI Services) tools integration
 
 > Integrate with Microsoft Foundry Tools (formerly Azure AI Services) using LangChain Python.
@@ -14,12 +10,12 @@ Use these tools when you want LangChain agents to analyze documents, images, or 
 
 | Tool                                                                  | Description                                                               |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`AzureAIContentUnderstandingTool`](#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video.      |
-| [`AzureAIDocumentIntelligenceTool`](#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs.               |
-| [`AzureAIImageAnalysisTool`](#azureaiimageanalysistool)               | Run OCR, captions, tagging, object detection, and related image analysis. |
-| [`AzureAISpeechToTextTool`](#azureaispeechtotexttool)                 | Transcribe audio files to text with language support.                     |
-| [`AzureAITextToSpeechTool`](#azureaitexttospeechtool)                 | Convert text to synthesized speech audio with multi-language support.     |
-| [`AzureAITextAnalyticsHealthTool`](#azureaitextanalyticshealthtool)   | Extract medical entities from healthcare text.                            |
+| [`AzureAIContentUnderstandingTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video.      |
+| [`AzureAIDocumentIntelligenceTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs.               |
+| [`AzureAIImageAnalysisTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaiimageanalysistool)               | Run OCR, captions, tagging, object detection, and related image analysis. |
+| [`AzureAISpeechToTextTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaispeechtotexttool)                 | Transcribe audio files to text with language support.                     |
+| [`AzureAITextToSpeechTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitexttospeechtool)                 | Convert text to synthesized speech audio with multi-language support.     |
+| [`AzureAITextAnalyticsHealthTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitextanalyticshealthtool)   | Extract medical entities from healthcare text.                            |
 
 ### Features
 
@@ -39,15 +35,13 @@ Install the integration package, configure either an Azure AI Foundry project en
 
 Install the package with the `tools` extra:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U "langchain-azure-ai[tools]"
-  ```
+```bash
+pip install -U "langchain-azure-ai[tools]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langchain-azure-ai[tools]"
-  ```
-</CodeGroup>
+```bash
+uv add "langchain-azure-ai[tools]"
+```
 
 This extra installs the service-specific dependencies used by these tools, including `azure-ai-documentintelligence`, `azure-ai-vision-imageanalysis`, `azure-cognitiveservices-speech`, and `azure-ai-textanalytics`. The base package includes `azure-ai-contentunderstanding`.
 
@@ -55,7 +49,7 @@ This extra installs the service-specific dependencies used by these tools, inclu
 
 Pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument. If you use a Foundry project endpoint, use a Microsoft Entra ID credential such as `DefaultAzureCredential()`.
 
-```python Initialize credential icon="shield-lock" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 
 credential = DefaultAzureCredential()
@@ -70,7 +64,7 @@ The service tools support two endpoint styles:
 
 If both are available, prefer `project_endpoint` because it resolves the backing service endpoint automatically for Foundry-based workflows.
 
-```bash Configure endpoint icon="key" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
 ```
 
@@ -78,7 +72,7 @@ export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/p
 
 If `AZURE_AI_PROJECT_ENDPOINT` is already set, you can usually omit `project_endpoint` during instantiation.
 
-```python Initialize tool icon="arrows-shuffle" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIContentUnderstandingTool
 
@@ -96,7 +90,7 @@ print(result)
 
 Pass one or more tools to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent).
 
-```python Agent with tools icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
@@ -125,7 +119,7 @@ agent = create_agent(
 
 Use `AzureAIServicesToolkit` to get all services tools with a shared credential and endpoint configuration.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIServicesToolkit
 
@@ -141,7 +135,7 @@ tools = toolkit.get_tools()
 
 The tool defaults to `analyzer_id="prebuilt-documentSearch"`. You can switch analyzers for other modalities, such as `prebuilt-audioSearch` or `prebuilt-videoSearch`, and you can provide `model_deployments` when your analyzer depends on custom model deployment names.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIContentUnderstandingTool
 
@@ -156,23 +150,22 @@ result = tool.invoke(
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="source" type="str">
-    The input to analyze. Pass a public URL, local file path, or base64-encoded payload.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="source_type" type="Literal['url', 'path', 'base64']" default="url">
-    Controls how the tool interprets `source`.
-  </ParamField>
+#### `Field` — `str`
+The input to analyze. Pass a public URL, local file path, or base64-encoded payload.
 
-  <ParamField body="analyzer_id" type="str" default="prebuilt-documentSearch">
-    The Content Understanding analyzer to run.
-  </ParamField>
+#### `Field` — `Literal[`
+Controls how the tool interprets `source`.
 
-  <ParamField body="model_deployments" type="dict[str, str] | None">
-    Optional mapping from model names to deployment names when a custom analyzer needs them.
-  </ParamField>
-</Accordion>
+#### `Field` — `str`
+The Content Understanding analyzer to run.
+
+#### `Field` — `dict[str, str] | None`
+Optional mapping from model names to deployment names when a custom analyzer needs them.
+
+</details>
 
 ### AzureAIDocumentIntelligenceTool
 
@@ -180,7 +173,7 @@ print(result)
 
 The tool defaults to `model_id="prebuilt-layout"`. Its public input schema accepts `url`, `path`, and `base64` sources.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIDocumentIntelligenceTool
 
@@ -195,19 +188,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="source" type="str">
-    The document input. Pass a public URL, local file path, or base64-encoded payload.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="source_type" type="Literal['url', 'path', 'base64']" default="url">
-    Controls how the tool interprets `source`.
-  </ParamField>
+#### `Field` — `str`
+The document input. Pass a public URL, local file path, or base64-encoded payload.
 
-  <ParamField body="model_id" type="str" default="prebuilt-layout">
-    The Document Intelligence model to run.
-  </ParamField>
-</Accordion>
+#### `Field` — `Literal[`
+Controls how the tool interprets `source`.
+
+#### `Field` — `str`
+The Document Intelligence model to run.
+
+</details>
 
 ### AzureAIImageAnalysisTool
 
@@ -215,7 +208,7 @@ print(result)
 
 By default, the tool enables a broad set of visual features, including `TAGS`, `OBJECTS`, `CAPTION`, `DENSE_CAPTIONS`, `READ`, `SMART_CROPS`, and `PEOPLE`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from azure.ai.vision.imageanalysis.models import VisualFeatures
 from langchain_azure_ai.tools import AzureAIImageAnalysisTool
@@ -235,19 +228,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="source" type="str">
-    The image input. Pass a public URL, local file path, or base64-encoded payload.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="source_type" type="Literal['url', 'path', 'base64']">
-    Controls how the tool interprets `source`.
-  </ParamField>
+#### `Field` — `str`
+The image input. Pass a public URL, local file path, or base64-encoded payload.
 
-  <ParamField body="visual_features" type="list[VisualFeatures] | None">
-    Optional list of image-analysis features to request. If omitted, the tool uses its default feature set.
-  </ParamField>
-</Accordion>
+#### `Field` — `Literal[`
+Controls how the tool interprets `source`.
+
+#### `Field` — `list[VisualFeatures] | None`
+Optional list of image-analysis features to request. If omitted, the tool uses its default feature set.
+
+</details>
 
 ### AzureAITextAnalyticsHealthTool
 
@@ -255,7 +248,7 @@ print(result)
 
 The tool accepts a plain-text `query` and can be configured with optional `language` and `country_hint` defaults.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAITextAnalyticsHealthTool
 
@@ -271,19 +264,19 @@ result = tool.invoke(
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="query" type="str">
-    The healthcare text to analyze.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="language" type="str | None">
-    Optional default language for the input text.
-  </ParamField>
+#### `Field` — `str`
+The healthcare text to analyze.
 
-  <ParamField body="country_hint" type="str | None">
-    Optional country hint used by the underlying Text Analytics client.
-  </ParamField>
-</Accordion>
+#### `Field` — `str | None`
+Optional default language for the input text.
+
+#### `Field` — `str | None`
+Optional country hint used by the underlying Text Analytics client.
+
+</details>
 
 ### AzureAISpeechToTextTool
 
@@ -291,7 +284,7 @@ print(result)
 
 The tool automatically detects whether the input is a local file path or a remote URL, and handles downloading remote files as needed. It is useful for workflows where the agent needs to convert spoken audio into written text.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAISpeechToTextTool
 
@@ -305,23 +298,22 @@ result = tool.invoke("path/to/audio.wav")
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="query" type="str">
-    Path to a local audio file or a URL pointing to an audio file. Supports WAV, MP3, OGG, FLAC, and other common audio formats.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="speech_language" type="str" default="en-US">
-    The language of the speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
-  </ParamField>
+#### `Field` — `str`
+Path to a local audio file or a URL pointing to an audio file. Supports WAV, MP3, OGG, FLAC, and other common audio formats.
 
-  <ParamField body="endpoint" type="str">
-    The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
-  </ParamField>
+#### `Field` — `str`
+The language of the speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
 
-  <ParamField body="credential" type="str | TokenCredential">
-    The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
-  </ParamField>
-</Accordion>
+#### `Field` — `str`
+The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
+
+#### `Field` — `str | TokenCredential`
+The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
+
+</details>
 
 ### AzureAITextToSpeechTool
 
@@ -329,7 +321,7 @@ print(result)
 
 The tool supports multi-language synthesis with BCP-47 language codes and is useful for workflows where the agent needs to generate audio narration, voice-over content, or audio notifications from text.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAITextToSpeechTool
 
@@ -343,27 +335,26 @@ result = tool.invoke("Hello, this is a test of text to speech synthesis.")
 print(result)  # Returns path to generated WAV file
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="query" type="str">
-    The text to convert to speech.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="speech_language" type="str" default="en-US">
-    The language of the synthesized speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
-  </ParamField>
+#### `Field` — `str`
+The text to convert to speech.
 
-  <ParamField body="endpoint" type="str">
-    The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
-  </ParamField>
+#### `Field` — `str`
+The language of the synthesized speech in BCP-47 format (e.g., `"en-US"`, `"es-ES"`, `"fr-FR"`). Defaults to `"en-US"`.
 
-  <ParamField body="credential" type="str | TokenCredential">
-    The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
-  </ParamField>
-</Accordion>
+#### `Field` — `str`
+The Azure AI Speech service endpoint. For example, `https://eastus.api.cognitive.microsoft.com/`. Can be set via `AZURE_AI_INFERENCE_ENDPOINT` environment variable or resolved from `AZURE_AI_PROJECT_ENDPOINT`.
+
+#### `Field` — `str | TokenCredential`
+The credentials to use. Either a subscription key string or any `TokenCredential` such as `DefaultAzureCredential`.
+
+</details>
 
 ## API reference
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools import (
     AzureAIServicesToolkit,
     AzureAIContentUnderstandingTool,
@@ -377,12 +368,8 @@ from langchain_azure_ai.tools import (
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai_services.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai_services.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

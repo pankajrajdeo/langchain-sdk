@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to add evaluators to an existing experiment (Python only)
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-existing-experiment)
 Evaluation of existing experiments is currently only supported in the Python SDK.
 
 After running an experiment, you may want to **add new evaluation metrics without re-running your application**. This is useful when you've added new evaluators or want to apply different scoring criteria to existing results. Instead of re-executing your target function on all examples, you can evaluate the existing experiment traces directly.
@@ -12,7 +8,7 @@ To add evaluators to an existing experiment, pass the experiment name or ID to `
 
 ## Example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import evaluate
 
 def always_half(inputs: dict, outputs: dict) -> float:
@@ -25,18 +21,14 @@ evaluate(experiment_name, evaluators=[always_half])
 
 ## Related topics
 
-* [Retry failed examples in experiments](/langsmith/evaluate-with-retry)
-* [Run an evaluation](/langsmith/evaluate-llm-application)
-* [Run an evaluation asynchronously](/langsmith/evaluation-async)
+* [Retry failed examples in experiments](https://docs.langchain.com/langsmith/evaluate-with-retry)
+* [Run an evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application)
+* [Run an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-existing-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-existing-experiment.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

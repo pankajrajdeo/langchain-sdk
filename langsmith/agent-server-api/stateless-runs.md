@@ -1,16 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Create Run, Stream Output
 
 > Create a run and stream the output.
 
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json post /runs/stream
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment
@@ -235,7 +229,6 @@ components:
           description: >-
             Generate pre-signed URLs for assigning feedback keys to the run.
 
-
             For each key specified, a unique URL will be generated that can be
             called to assign the feedback key to the run. See [LangSmith
             Feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback)
@@ -273,7 +266,6 @@ components:
           title: Checkpoint During
           description: >-
             Whether to checkpoint during the run.
-
 
             Deprecated. Use `durability` instead to control checkpoint
             persistence behavior during the run.

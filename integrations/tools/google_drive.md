@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google drive integration
 
 > Integrate with the Google drive tool using LangChain Python.
@@ -24,7 +20,7 @@ The location of `token.json` use the same directory (or use the parameter `token
 
 By default, If you use a `folder_id`, all the files inside this folder can be retrieved to `Document`, if the name match the query.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
@@ -35,7 +31,7 @@ You can obtain your folder and document id from the URL:
 
 The special value `root` is for your personal home.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 folder_id = "root"
 # folder_id='1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5'
 ```
@@ -63,11 +59,11 @@ It's possible to update or customize this. See the documentation of `GoogleDrive
 
 The corresponding packages must be installed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  unstructured langchain-googledrive
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from langchain_googledrive.tools.google_drive.tool import GoogleDriveSearchTool
@@ -85,21 +81,21 @@ tool = GoogleDriveSearchTool(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import logging
 
 logging.basicConfig(level=logging.INFO)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool.run("machine learning")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool.description
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 "A wrapper around Google Drive Search. Useful for when you need to find a document in google drive. The input should be formatted as a list of entities separated with a space. As an example, a list of keywords is 'hello word'."
 ```
 
@@ -107,21 +103,19 @@ tool.description
 
 In order to create an agent that uses the Google Jobs tool install LangGraph
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langgraph langchain-openai
 ```
 
 and use the [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) functionality to initialize a ReAct agent. You will also need to set up your OPEN\_API\_KEY (visit [platform.openai.com](https://platform.openai.com)) in order to access OpenAI's chat models.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from langchain.chat_models import init_chat_model
 from langchain.agents import create_agent
 
-
 os.environ["OPENAI_API_KEY"] = "your-openai-api-key"
-
 
 model = init_chat_model("gpt-5.4-mini", model_provider="openai", temperature=0)
 agent = create_agent(model, tools=[tool])
@@ -136,12 +130,8 @@ for snapshot in stream.values:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

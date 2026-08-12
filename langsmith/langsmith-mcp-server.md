@@ -1,86 +1,45 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith MCP Server
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-mcp-server)
+Use the Model Context Protocol (MCP) server to let language models fetch conversation history, prompts, runs, datasets, experiments, and billing from LangSmith.
 
-> Use the Model Context Protocol (MCP) server to let language models fetch conversation history, prompts, runs, datasets, experiments, and billing from LangSmith.
+> [!WARNING]
+> **Deprecated—use the [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp) instead.**
+>
+> LangSmith now hosts an OAuth-authenticated remote MCP server on LangSmith Cloud and on [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) v0.15 or later. Cloud endpoints:
+>
+> <table>
+>   <thead>
+>     <tr>
+>       <th>Region</th>
+>     </tr>
+>   </thead>
+>
+>   <tbody>
+>     <tr>
+>       <td>GCP US</td>
+>     </tr>
+>
+>     <tr>
+>       <td>GCP EU</td>
+>     </tr>
+>
+>     <tr>
+>       <td>GCP APAC</td>
+>     </tr>
+>
+>     <tr>
+>       <td>AWS US</td>
+>     </tr>
+>   </tbody>
+> </table>
+>
+> Self-hosted endpoint: `https://<your-langsmith-host>/api/mcp`.
+>
+> It exposes the same tool surface as the standalone server documented on this page, but authenticates via OAuth 2.1 with dynamic client registration—no API key, no separate deployment, no header configuration.
+>
+> The standalone server documented below remains the supported path for self-hosted deployments on versions earlier than v0.15 and for users who prefer running the server themselves.
 
-export const protocol_0 = undefined
-
-export const prefix_0 = "api.smith"
-
-export const suffix_0 = "/mcp"
-
-<Warning>
-  **Deprecated—use the [LangSmith Remote MCP](/langsmith/langsmith-remote-mcp) instead.**
-
-  LangSmith now hosts an OAuth-authenticated remote MCP server on LangSmith Cloud and on [self-hosted LangSmith](/langsmith/self-hosted) v0.15 or later. Cloud endpoints:
-
-  <table>
-    <thead>
-      <tr>
-        <th>Region</th>
-
-        <th>
-          {protocol_0 === false ? "Host" : "URL"}
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td>GCP US</td>
-
-        <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
-        </td>
-      </tr>
-
-      <tr>
-        <td>GCP EU</td>
-
-        <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
-        </td>
-      </tr>
-
-      <tr>
-        <td>GCP APAC</td>
-
-        <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
-        </td>
-      </tr>
-
-      <tr>
-        <td>AWS US</td>
-
-        <td>
-          <code>
-            {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
-          </code>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  BYOC endpoint: `https://<data_plane_url>/api/mcp`, where `<data_plane_url>` is the URL of your [BYOC](/langsmith/byoc) data plane.
-
-  Self-hosted endpoint: `https://<your-langsmith-host>/api/mcp`.
-
-  It exposes the same tool surface as the standalone server documented on this page, but authenticates via OAuth 2.1 with dynamic client registration—no API key, no separate deployment, no header configuration.
-
-  The standalone server documented below remains the supported path for self-hosted deployments on versions earlier than v0.15 and for users who prefer running the server themselves.
-</Warning>
-
-The LangSmith MCP Server is a [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) server that integrates with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-langsmith-mcp-server). It lets MCP-compatible clients (for example, AI coding assistants) read [conversation history](/langsmith/observability-concepts#threads), [prompts](/langsmith/manage-prompts-programmatically), [runs and traces](/langsmith/observability-concepts#runs), [datasets](/langsmith/evaluation-concepts#datasets), [experiments](/langsmith/evaluation-concepts#experiment), and billing usage from your LangSmith workspace.
+The LangSmith MCP Server is a [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) server that integrates with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-langsmith-mcp-server). It lets MCP-compatible clients (for example, AI coding assistants) read [conversation history](https://docs.langchain.com/langsmith/observability-concepts#threads), [prompts](https://docs.langchain.com/langsmith/manage-prompts-programmatically), [runs and traces](https://docs.langchain.com/langsmith/observability-concepts#runs), [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment), and billing usage from your LangSmith workspace.
 
 ## Example use cases
 
@@ -91,33 +50,38 @@ The LangSmith MCP Server is a [Model Context Protocol](https://modelcontextproto
 * **Experiments**: "List experiments for dataset 'my-eval-set' with latency and cost metrics"
 * **Billing**: "Get billing usage for September 2025"
 
-<Tip>
-  **Use the server in code or Fleet**
-
-  * To connect and use remote MCP servers (including this one) in your Python application, see [MCP (Model Context Protocol)](/oss/python/langchain/mcp).
-  * To connect and use this server in Fleet, see [Remote MCP servers](/langsmith/fleet/remote-mcp-servers).
-</Tip>
+> [!TIP]
+> **Use the server in code or Fleet**
+>
+> * To connect and use remote MCP servers (including this one) in your Python application, see [MCP (Model Context Protocol)](https://docs.langchain.com/oss/python/langchain/mcp).
+> * To connect and use this server in Fleet, see [Remote MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers).
 
 ## Quickstart (hosted)
 
-A hosted version of the LangSmith MCP Server is available through the [LangSmith Remote MCP](/langsmith/langsmith-remote-mcp), so you can connect without running the server yourself.
+A hosted version of the LangSmith MCP Server is available over HTTP, so you can connect without running the server yourself.
 
-* **URL:** `https://api.smith.langchain.com/mcp`
-* **Authentication:** Interactive MCP clients use OAuth 2.1. See [LangSmith Remote MCP authentication](/langsmith/langsmith-remote-mcp#authentication) for programmatic API key access.
+* **URL:** `https://langsmith-mcp-server.onrender.com/mcp`
+* **Authentication:** Send your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) in the `LANGSMITH-API-KEY` header.
+
+> [!NOTE]
+> The hosted instance is for [LangSmith Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud). For a [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) instance, run the server yourself and point it at your endpoint (see [Docker deployment](https://docs.langchain.com/langsmith/langsmith-mcp-server#docker-deployment-http-streamable)).
 
 **Example (Cursor `mcp.json`):**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
-    "langsmith": {
-      "url": "https://api.smith.langchain.com/mcp"
+    "LangSmith MCP (Hosted)": {
+      "url": "https://langsmith-mcp-server.onrender.com/mcp",
+      "headers": {
+        "LANGSMITH-API-KEY": "lsv2_pt_your_api_key_here"
+      }
     }
   }
 }
 ```
 
-The MCP client opens a browser window to complete the OAuth flow when you first connect.
+Optional headers: `LANGSMITH-WORKSPACE-ID`, `LANGSMITH-ENDPOINT` (same as in [Environment variables](https://docs.langchain.com/langsmith/langsmith-mcp-server#environment-variables)).
 
 ## Available tools
 
@@ -182,14 +146,14 @@ If you prefer to run the server locally (or use a self-hosted LangSmith endpoint
 ### Prerequisites
 
 1. Install [uv](https://github.com/astral-sh/uv) (Python package installer):
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    curl -LsSf https://astral.sh/uv/install.sh | sh
-   ```
+```
 
 2. Install the package:
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    uv run pip install --upgrade langsmith-mcp-server
-   ```
+```
 
 ### MCP client configuration
 
@@ -197,7 +161,7 @@ Add the server to your MCP client config. Use the path from `which uvx` for the 
 
 **PyPI / uvx:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "LangSmith API MCP Server": {
@@ -215,7 +179,7 @@ Add the server to your MCP client config. Use the path from `which uvx` for the 
 
 **From source** (clone [langsmith-mcp-server](https://github.com/langchain-ai/langsmith-mcp-server) first):
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "LangSmith API MCP Server": {
@@ -243,26 +207,26 @@ Replace `/path/to/uv`, `/path/to/uvx`, and `/path/to/langsmith-mcp-server` with 
 You can run the server as an HTTP service with Docker so clients connect via the HTTP-streamable protocol.
 
 1. Build and run:
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    docker build -t langsmith-mcp-server .
    docker run -p 8000:8000 langsmith-mcp-server
-   ```
+```
    Use the [langsmith-mcp-server](https://github.com/langchain-ai/langsmith-mcp-server) repository for the Dockerfile and context.
 
 2. Connect your MCP client to `http://localhost:8000/mcp` with the `LANGSMITH-API-KEY` header (and optional `LANGSMITH-WORKSPACE-ID`, `LANGSMITH-ENDPOINT`).
 
 3. Health check (no auth):
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    curl http://localhost:8000/health
-   ```
+```
 
 For full Docker and HTTP-streamable details, see the [LangSmith MCP Server repository](https://github.com/langchain-ai/langsmith-mcp-server).
 
 ## Deployment overview
 
-Use the **hosted** MCP server to connect to [LangSmith Cloud](/langsmith/cloud) (`smith.langchain.com`, `eu.smith.langchain.com`, `apac.smith.langchain.com`, or `aws.smith.langchain.com`). To connect to Cloud or [self-hosted LangSmith](/langsmith/self-hosted), run the server [locally](#installation-run-locally) and set `LANGSMITH_ENDPOINT`. For self-hosted deployments, you can also run the server via the [Docker image](#docker-deployment-http-streamable) inside your VPC.
+Use the **hosted** MCP server to connect to [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) (`smith.langchain.com`, `eu.smith.langchain.com`, `apac.smith.langchain.com`, or `aws.smith.langchain.com`). To connect to Cloud or [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted), run the server [locally](https://docs.langchain.com/langsmith/langsmith-mcp-server#installation-run-locally) and set `LANGSMITH_ENDPOINT`. For self-hosted deployments, you can also run the server via the [Docker image](https://docs.langchain.com/langsmith/langsmith-mcp-server#docker-deployment-http-streamable) inside your VPC.
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart LR
   subgraph Client["MCP client"]
     C[Cursor / Claude Code / etc.]
@@ -295,9 +259,9 @@ flowchart LR
 
 | Variable                 | Required | Description                                                                                                                 |
 | ------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `LANGSMITH_API_KEY`      | Yes      | Your [LangSmith API key](/langsmith/create-account-api-key) for authentication.                                             |
+| `LANGSMITH_API_KEY`      | Yes      | Your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) for authentication.                                             |
 | `LANGSMITH_WORKSPACE_ID` | No       | Workspace ID when your API key has access to multiple workspaces.                                                           |
-| `LANGSMITH_ENDPOINT`     | No       | API endpoint URL (for [self-hosted](/langsmith/self-hosted) or custom regions). Default: `https://api.smith.langchain.com`. |
+| `LANGSMITH_ENDPOINT`     | No       | API endpoint URL (for [self-hosted](https://docs.langchain.com/langsmith/self-hosted) or custom regions). Default: `https://api.smith.langchain.com`. |
 
 For the **hosted** server, use the same names as **headers**: `LANGSMITH-API-KEY`, `LANGSMITH-WORKSPACE-ID`, `LANGSMITH-ENDPOINT`.
 
@@ -309,12 +273,8 @@ Source and package: [GitHub](https://github.com/amitrechavia/langsmith-mcp-serve
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-mcp-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/langsmith-mcp-server.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Chroma integration
 
 > Integrate with the Chroma vector store using LangChain Python.
@@ -10,19 +6,18 @@ This notebook covers how to get started with the `Chroma` vector store.
 
 > [Chroma](https://docs.trychroma.com/getting-started) is an AI-native open-source vector database focused on developer productivity and happiness. Chroma is licensed under Apache 2.0. View the full docs of `Chroma` at [this page](https://docs.trychroma.com/reference/py-collection), and find the API reference for the LangChain integration at [this page](https://reference.langchain.com/python/langchain-chroma/vectorstores/Chroma).
 
-<Info>
-  **Chroma Cloud**
-
-  Chroma Cloud powers serverless vector and full-text search. It's extremely fast, cost-effective, scalable and painless. Create a DB and try it out in under 30 seconds with \$5 of free credits.
-
-  [Get started with Chroma Cloud](https://trychroma.com/signup)
-</Info>
+> [!NOTE]
+> **Chroma Cloud**
+>
+> Chroma Cloud powers serverless vector and full-text search. It's extremely fast, cost-effective, scalable and painless. Create a DB and try it out in under 30 seconds with \$5 of free credits.
+>
+> [Get started with Chroma Cloud](https://trychroma.com/signup)
 
 ## Setup
 
 To access `Chroma` vector stores you'll need to install the `langchain-chroma` integration package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU "langchain-chroma>=0.1.2"
 ```
 
@@ -34,13 +29,13 @@ If you are a [Chroma Cloud](https://trychroma.com/signup) user, set your `CHROMA
 
 When you install the `chromadb` package you also get access to the Chroma CLI, which can set these for you. First, [login](https://docs.trychroma.com/docs/cli/login) via the CLI, and then use the [`connect` command](https://docs.trychroma.com/docs/cli/db):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 chroma db connect [db_name] --env-file
 ```
 
-If you want to get best in-class automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key and enable tracing:
+If you want to get best in-class automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key and enable tracing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -51,9 +46,9 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The following example shows setting up an embedding function for Chroma, followed by configuring local persistence for storing vector data.
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -65,7 +60,7 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 
 You can get a Chroma server running in memory by simply instantiating a `Chroma` instance with a collection name and your embeddings provider:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_chroma import Chroma
 
 vector_store = Chroma(
@@ -80,7 +75,7 @@ If you don't need data persistence, this is a great option for experimenting whi
 
 You can provide the `persist_directory` argument to save your data across multiple runs of your program:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_chroma import Chroma
 
 vector_store = Chroma(
@@ -96,7 +91,7 @@ If you have a Chroma server running locally, or you have [deployed](https://docs
 
 For example, you can start a Chroma server running locally with `chroma run`, and then connect it with `host='localhost'`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_chroma import Chroma
 
 vector_store = Chroma(
@@ -112,7 +107,7 @@ For other deployments you can use the `port`, `ssl`, and `headers` arguments to 
 
 Chroma Cloud users can also build with LangChain. Provide your `Chroma` instance with your Chroma Cloud API key, tenant, and DB name:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_chroma import Chroma
 
 vector_store = Chroma(
@@ -130,7 +125,7 @@ You can also initialize from a `Chroma` client, which is particularly useful if 
 
 #### Running locally (In-Memory)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import chromadb
 
 client = chromadb.Client()
@@ -138,7 +133,7 @@ client = chromadb.Client()
 
 #### Running locally (with data persistence)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import chromadb
 
 client = chromadb.PersistentClient(path="./chroma_langchain_db")
@@ -148,7 +143,7 @@ client = chromadb.PersistentClient(path="./chroma_langchain_db")
 
 For example, if you are running a Chroma server locally (using `chroma run`):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import chromadb
 
 client = chromadb.HttpClient(host="localhost", port=8000, ssl=False)
@@ -158,7 +153,7 @@ client = chromadb.HttpClient(host="localhost", port=8000, ssl=False)
 
 After setting your `CHROMA_API_KEY`, `CHROMA_TENANT`, and `CHROMA_DATABASE`, you can simply instantiate:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import chromadb
 
 client = chromadb.CloudClient()
@@ -166,14 +161,14 @@ client = chromadb.CloudClient()
 
 #### Access your chroma DB
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 collection = client.get_or_create_collection("collection_name")
 collection.add(ids=["1", "2", "3"], documents=["a", "b", "c"])
 ```
 
 #### Create a chroma vectorstore
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store_from_client = Chroma(
     client=client,
     collection_name="collection_name",
@@ -189,7 +184,7 @@ Once you have created your vector store, we can interact with it by adding and d
 
 We can add items to our vector store by using the `add_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from uuid import uuid4
 
 from langchain_core.documents import Document
@@ -275,7 +270,7 @@ vector_store.add_documents(documents=documents, ids=uuids)
 
 Now that we have added documents to our vector store, we can update existing documents by using the `update_documents` function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 updated_document_1 = Document(
     page_content="I had chocolate chip pancakes and fried eggs for breakfast this morning.",
     metadata={"source": "tweet"},
@@ -299,7 +294,7 @@ vector_store.update_documents(
 
 We can also delete items from our vector store as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=uuids[-1])
 ```
 
@@ -313,7 +308,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     "LangChain provides abstractions to make working with LLMs easy",
     k=2,
@@ -327,7 +322,7 @@ for res in results:
 
 If you want to execute a similarity search and receive the corresponding scores you can run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     "Will it be hot tomorrow?", k=1, filter={"source": "news"}
 )
@@ -339,7 +334,7 @@ for res, score in results:
 
 You can also search by vector:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_by_vector(
     embedding=embeddings.embed_query("I love green eggs and ham!"), k=1
 )
@@ -355,7 +350,7 @@ There are a variety of other search methods that are not covered in this noteboo
 
 You can also transform the vector store into a retriever for easier usage in your chains. For more information on the different search types and kwargs you can pass, please visit the [Chroma API reference](https://reference.langchain.com/python/langchain-chroma/vectorstores/Chroma#langchain_chroma.vectorstores.Chroma.as_retriever).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="mmr", search_kwargs={"k": 1, "fetch_k": 5}
 )
@@ -366,9 +361,9 @@ retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ***
 
@@ -378,12 +373,8 @@ For detailed documentation of all `Chroma` vector store features and configurati
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/chroma.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/chroma.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

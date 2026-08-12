@@ -1,206 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenUI
-
-> Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang
-
-export const ExampleEmbed = ({example, theme, minHeight = 500, maxHeight = 700}) => {
-  var PROD_BASE = "https://ui-patterns.langchain.com";
-  var iframeCache = (() => {
-    const g = globalThis;
-    if (!g.__lcExampleIframeCache) {
-      g.__lcExampleIframeCache = new Map();
-    }
-    return g.__lcExampleIframeCache;
-  })();
-  function detectPageTheme() {
-    if (typeof document === "undefined") return "light";
-    const root = document.documentElement;
-    if (root.classList.contains("dark") || root.getAttribute("data-theme") === "dark" || root.style.colorScheme === "dark") {
-      return "dark";
-    }
-    return "light";
-  }
-  var LOCAL_BASE = "http://localhost";
-  var LOCAL_PORTS = {
-    "ai-elements": 4600,
-    "assistant-ui": 4500
-  };
-  function isLocalhost() {
-    return typeof location !== "undefined" && (location.hostname === "localhost" || location.hostname === "127.0.0.1");
-  }
-  var EMBED_CSS = `
-[data-lc-ee] .lc-border{border-color:#B8DFFF}
-[data-lc-ee].dark .lc-border{border-color:#1A2740}
-[data-lc-ee] .lc-bg-surface{background-color:white}
-[data-lc-ee].dark .lc-bg-surface{background-color:#0B1120}
-[data-lc-ee] .lc-bg-wash{background-color:#F2FAFF}
-[data-lc-ee].dark .lc-bg-wash{background-color:#030710}
-[data-lc-ee] .lc-spinner{border-color:#B8DFFF;border-top-color:#7FC8FF}
-[data-lc-ee].dark .lc-spinner{border-color:#1A2740;border-top-color:#7FC8FF}
-`;
-  const slotRef = useRef(null);
-  const [ready, setReady] = useState(() => Boolean(iframeCache.get(example)?.iframe));
-  const [iframeHeight, setIframeHeight] = useState(minHeight);
-  const [pageTheme, setPageTheme] = useState(detectPageTheme);
-  const effectiveTheme = theme ?? pageTheme;
-  const effectiveThemeRef = useRef(effectiveTheme);
-  effectiveThemeRef.current = effectiveTheme;
-  useEffect(() => {
-    if (document.getElementById("lc-ee-css")) return;
-    const style = document.createElement("style");
-    style.id = "lc-ee-css";
-    style.textContent = EMBED_CSS;
-    document.head.appendChild(style);
-  }, []);
-  useEffect(() => {
-    setPageTheme(detectPageTheme());
-    const observer = new MutationObserver(() => setPageTheme(detectPageTheme()));
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class", "data-theme", "style"]
-    });
-    return () => observer.disconnect();
-  }, []);
-  useEffect(() => {
-    const useLocal = isLocalhost();
-    const localPort = LOCAL_PORTS[example];
-    const src = useLocal && localPort ? `${LOCAL_BASE}:${localPort}/` : `${PROD_BASE}/${example}/`;
-    let cached = iframeCache.get(example);
-    if (cached?.hideTimer) {
-      clearTimeout(cached.hideTimer);
-      cached.hideTimer = void 0;
-    }
-    if (!cached) {
-      const iframe = document.createElement("iframe");
-      iframe.src = src;
-      iframe.setAttribute("sandbox", "allow-scripts allow-same-origin allow-forms");
-      iframe.setAttribute("allow", "clipboard-write");
-      iframe.title = `${example} example`;
-      Object.assign(iframe.style, {
-        position: "fixed",
-        border: "none",
-        visibility: "hidden",
-        pointerEvents: "auto",
-        zIndex: "1",
-        borderRadius: "15px"
-      });
-      document.body.appendChild(iframe);
-      cached = {
-        iframe
-      };
-      iframeCache.set(example, cached);
-      window.addEventListener("message", e => {
-        if (e.data?.type === "RESIZE" && iframeCache.get(example)?.iframe === iframe) {
-          const h = Math.min(maxHeight, Math.max(minHeight, e.data.height));
-          setIframeHeight(h);
-        }
-      });
-      iframe.addEventListener("load", () => {
-        iframe.style.visibility = "visible";
-        setReady(true);
-        try {
-          iframe.contentWindow?.postMessage({
-            type: "CHAT_LC_SET_THEME",
-            theme: effectiveThemeRef.current
-          }, "*");
-        } catch {}
-      });
-    } else {
-      cached.iframe.style.visibility = "visible";
-      setReady(true);
-    }
-    function syncPosition() {
-      const slot = slotRef.current;
-      if (!slot) return;
-      const rect = slot.getBoundingClientRect();
-      const {style} = cached.iframe;
-      style.top = `${rect.top}px`;
-      style.left = `${rect.left}px`;
-      style.width = `${rect.width}px`;
-      style.setProperty("height", `${rect.height}px`, "important");
-    }
-    syncPosition();
-    const ro = new ResizeObserver(syncPosition);
-    if (slotRef.current) ro.observe(slotRef.current);
-    document.addEventListener("scroll", syncPosition, {
-      passive: true,
-      capture: true
-    });
-    window.addEventListener("resize", syncPosition, {
-      passive: true
-    });
-    let frameCount = 0;
-    let rafId = 0;
-    function initialSync() {
-      syncPosition();
-      if (++frameCount < 5) rafId = requestAnimationFrame(initialSync);
-    }
-    rafId = requestAnimationFrame(initialSync);
-    return () => {
-      cancelAnimationFrame(rafId);
-      ro.disconnect();
-      document.removeEventListener("scroll", syncPosition, {
-        capture: true
-      });
-      window.removeEventListener("resize", syncPosition);
-      cached.hideTimer = setTimeout(() => {
-        if (cached?.iframe) cached.iframe.style.visibility = "hidden";
-      }, 200);
-    };
-  }, [example, minHeight, maxHeight]);
-  useEffect(() => {
-    const cached = iframeCache.get(example);
-    if (!cached?.iframe || !ready) return;
-    try {
-      cached.iframe.contentWindow?.postMessage({
-        type: "CHAT_LC_SET_THEME",
-        theme: effectiveTheme
-      }, "*");
-    } catch {}
-  }, [effectiveTheme, ready, example]);
-  return <div data-lc-ee="" className={effectiveTheme === "dark" ? "dark" : ""} style={{
-    position: "relative",
-    fontFamily: "inherit"
-  }}>
-      <div className="lc-border lc-bg-surface" style={{
-    border: "1px solid",
-    borderRadius: "16px",
-    overflow: "hidden"
-  }}>
-        {}
-        <div ref={slotRef} className="lc-bg-wash" style={{
-    height: iframeHeight,
-    position: "relative"
-  }}>
-          {!ready && <div style={{
-    position: "absolute",
-    inset: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }}>
-              <div className="lc-spinner" style={{
-    width: 24,
-    height: 24,
-    border: "3px solid",
-    borderRadius: "50%",
-    animation: "spin 0.8s linear infinite"
-  }} />
-              <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-            </div>}
-        </div>
-      </div>
-    </div>;
-};
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
+Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang
 
 [OpenUI](https://github.com/thesysdev/openui) is a generative UI library that lets a language model produce complete, interactive UIs in a declarative format called **openui-lang**. Instead of returning a chat message, the agent returns a component tree with cards, charts, tables, tabs, and forms that the `Renderer` turns into a real React UI.
 
 This integration is well-suited for data-rich outputs like reports, dashboards, and data explorers, where the model is both the data analyst and the UI designer.
 
-<ExampleEmbed example="openui" minHeight={700} />
+> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui).
 
 ## How it works
 
@@ -209,7 +15,7 @@ This integration is well-suited for data-rich outputs like reports, dashboards, 
 3. **Model writes openui-lang:** the model responds with a program like `root = Stack([header, kpis, chart])` instead of prose
 4. **Render with `Renderer`:** pass the text to OpenUI's `Renderer` and the component library; it parses and renders the tree
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -231,19 +37,18 @@ graph LR
 
 ## Installation
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 npm install @langchain/react @openuidev/react-ui @openuidev/react-headless @openuidev/react-lang
 ```
 
-<Tip>
-  OpenUI requires React 19+ and [`zustand`](https://www.npmjs.com/package/zustand). The frontend code is React-only; the LangGraph agent backend can be written in TypeScript or Python.
-</Tip>
+> [!TIP]
+> OpenUI requires React 19+ and [`zustand`](https://www.npmjs.com/package/zustand). The frontend code is React-only; the LangGraph agent backend can be written in TypeScript or Python.
 
 ## Import the component styles
 
 Import OpenUI's bundled styles in your CSS entry point or directly in your root component:
 
-```css theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```css
 @import "@openuidev/react-ui/components.css";
 @import "@openuidev/react-ui/styles/index.css";
 ```
@@ -252,7 +57,7 @@ Import OpenUI's bundled styles in your CSS entry point or directly in your root 
 
 OpenUI ships a `openuiLibrary.prompt()` function that generates the complete openui-lang reference, with all component signatures, syntax rules, streaming tips, and examples. Call it once at module load time:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { openuiLibrary, openuiPromptOptions } from "@openuidev/react-ui/genui-lib";
 
 // Generate the full openui-lang system prompt. Call this once at startup,
@@ -269,7 +74,7 @@ const SYSTEM_PROMPT = openuiLibrary.prompt({
 
 The `preamble` overrides the default persona. Add `additionalRules` to inject task-specific constraints:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 const SYSTEM_PROMPT = openuiLibrary.prompt({
   ...openuiPromptOptions,
   preamble: "You are a report generator...",
@@ -286,7 +91,7 @@ const SYSTEM_PROMPT = openuiLibrary.prompt({
 
 Send the system prompt as the first message of every new thread. Check `stream.messages.length === 0` to detect a fresh thread and prepend a `system` message:
 
-```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import { useCallback } from "react";
 import { useStream } from "@langchain/react";
 
@@ -323,7 +128,7 @@ export function App() {
 
 Pass the AI message's text content directly to `Renderer` along with `openuiLibrary`:
 
-```tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import { Renderer } from "@openuidev/react-lang";
 import { openuiLibrary } from "@openuidev/react-ui/genui-lib";
 import { AIMessage } from "langchain";
@@ -389,9 +194,9 @@ Wiring [`useStream`](https://reference.langchain.com/javascript/langchain-react/
 | **No `root` yet / fallback** | `buildProgressiveRoot` — synthesise a `root = Stack([…])` from top-level variables when the model hasn't written one |
 | **Snake\_case identifiers**  | `sanitizeIdentifiers` — the parser only accepts camelCase; convert any `snake_case` names the model emits            |
 
-Copy the full block into your project and pass `stable` to `<Renderer>`:
+Copy the full block into your project and pass `stable` to ``:
 
-````tsx expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+````tsx
 import {
   useCallback,
   useEffect,
@@ -690,9 +495,9 @@ root = Stack([..., followUpCard])
 
 ## Build a parallel dashboard with Deep Agents
 
-The flow above renders one OpenUI program into one surface. For richer apps, a [Deep Agents](/oss/python/deepagents/overview) coordinator can delegate to several specialist agents that each stream their own OpenUI panel concurrently, all over one [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) connection. The [OpenUI parallel dashboard example](https://github.com/langchain-ai/streaming-cookbook/tree/main/typescript/openui) turns one dashboard brief into independently streaming Stripe, PostHog, GitHub, and Calendar panels, with no custom graph or stream-demultiplexing code.
+The flow above renders one OpenUI program into one surface. For richer apps, a [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) coordinator can delegate to several specialist agents that each stream their own OpenUI panel concurrently, all over one [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) connection. The [OpenUI parallel dashboard example](https://github.com/langchain-ai/streaming-cookbook/tree/main/typescript/openui) turns one dashboard brief into independently streaming Stripe, PostHog, GitHub, and Calendar panels, with no custom graph or stream-demultiplexing code.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -718,7 +523,7 @@ graph LR
 
 Use the same library object on the server (to generate the panel prompt) and on the client (as the `Renderer` prop) so the components the model is told about always match the ones the renderer can draw:
 
-```ts library.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { openuiChatLibrary, openuiChatPromptOptions } from "@openuidev/react-ui";
 
 export const library = openuiChatLibrary;
@@ -729,7 +534,7 @@ export const promptOptions = openuiChatPromptOptions;
 
 [`createDeepAgent`](https://reference.langchain.com/javascript/deepagents/agent/createDeepAgent) builds a coordinator whose only job is routing: it picks the specialists a brief needs and emits all of their `task()` calls in one message so the panels run concurrently. Each panel subagent shares one pre-generated OpenUI system prompt and receives only the tools for its data domain.
 
-```ts expandable agent.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { createDeepAgent, type SubAgent } from "deepagents";
 
 import { library, promptOptions } from "./library.js";
@@ -787,7 +592,7 @@ The coordinator never writes openui-lang. Each panel agent calls its tools, then
 
 Point `langgraph.json` at the exported coordinator:
 
-```json langgraph.json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "node_version": "22",
   "graphs": {
@@ -801,7 +606,7 @@ Point `langgraph.json` at the exported coordinator:
 
 One `useStream` connection carries the coordinator and every panel. The panels are not hardcoded: each parallel `task()` call surfaces as a `stream.subagents` snapshot. For each snapshot, scope a `useMessages(stream, snapshot)` projection so a panel receives only its own subagent's messages, then feed its OpenUI program into an isolated `Renderer`:
 
-```tsx expandable App.tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```tsx
 import { memo } from "react";
 
 import type { SubagentDiscoverySnapshot } from "@langchain/langgraph-sdk/stream";
@@ -884,12 +689,8 @@ Because the SDK keeps subagent token events out of the root store and each `Pane
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/openui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/integrations/openui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Visualize your wiki
 
 > Explore an OpenWiki Markdown wiki with a local interactive node graph and reader
@@ -12,7 +8,7 @@ For exploring OpenWiki Markdown wikis, `openwiki visualize` serves a local inter
 
 From a repository that already has an `openwiki/` directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki visualize
 ```
 
@@ -20,7 +16,7 @@ This serves `./openwiki` on `127.0.0.1:4321` and opens your browser to the graph
 
 ## Options
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki visualize openwiki --port 4400 --no-open
 ```
 
@@ -32,13 +28,11 @@ openwiki visualize openwiki --port 4400 --no-open
 
 To explore a personal wiki:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki visualize ~/.openwiki/wiki
 ```
 
-<Frame>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/BPy4qr0YTTF2625M/oss/images/openwiki/visualizer.gif?s=fe0362d13c1436c8a9f1a95cc864c447" alt="OpenWiki visualizer with an interactive node graph beside a live Markdown reader" width="880" height="498" data-path="oss/images/openwiki/visualizer.gif" />
-</Frame>
+<img src="https://mintcdn.com/langchain-5e9cc07a/BPy4qr0YTTF2625M/oss/images/openwiki/visualizer.gif?s=fe0362d13c1436c8a9f1a95cc864c447" alt="OpenWiki visualizer with an interactive node graph beside a live Markdown reader" width="880" height="498" data-path="oss/images/openwiki/visualizer.gif" />
 
 The visualizer shows:
 
@@ -49,18 +43,14 @@ The graph does not show `INSTRUCTIONS.md` and other scaffolding files.
 
 ## See also
 
-* [Quickstart](/oss/openwiki/quickstart)
-* [Code mode](/oss/openwiki/code-mode)
-* [CLI reference](/oss/openwiki/cli-reference)
+* [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart)
+* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
+* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/visualize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/visualize.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

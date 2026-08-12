@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Connect a Managed Deep Agent to Slack
-
-> Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-channels-slack)
+Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
 
 A Slack channel lets people invoke a Managed Deep Agent through app mentions, direct messages, and replies in an active Slack thread. Managed Deep Agents verifies Slack events, maps each conversation to a thread, runs the agent as the resolved caller, and posts the response back to Slack.
 
 Slack is a bring-your-own-app integration. You define a Slack app manifest in the agent project.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Slack setup uses a channel declaration, an editable manifest template, and a generated manifest:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   channels/
@@ -33,7 +28,7 @@ my-agent/
 
 Export a channel created with `channels.slack()`:
 
-```ts channels/slack.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { channels } from "managed-deepagents";
 
 export const channel = channels.slack();
@@ -45,84 +40,76 @@ The file name sets the channel name to `slack` and mounts its Events API route a
 
 After setting up the Slack channel, you need to create and deploy your Slack app.
 
-<Steps>
-  <Step title="Deploy your Managed Deep Agent">
-    First, [deploy your Managed Deep Agent](/langsmith/javascript/managed-deep-agents-deploy).
+### Deploy your Managed Deep Agent
+First, [deploy your Managed Deep Agent](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy).
 
-    ```
-    mda deploy .
-    ```
+```
+mda deploy .
+```
 
-    Wait for the deployment to finish. The agent is deployed even though Slack is
-    not active yet.
-  </Step>
+Wait for the deployment to finish. The agent is deployed even though Slack is
+not active yet.
 
-  <Step title="Generate the app manifest template">
-    Run a command to generate the Slack app manifest template.
+### Generate the app manifest template
+Run a command to generate the Slack app manifest template.
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    mda channel add slack .
-    ```
+```bash
+mda channel add slack .
+```
 
-    MDA finds the existing deployment and writes two files:
+MDA finds the existing deployment and writes two files:
 
-    * A "template" manifest to `slack-app-manifest.json`
-    * The full manifest to `.mda/slack/app-manifest.json`
+* A "template" manifest to `slack-app-manifest.json`
+* The full manifest to `.mda/slack/app-manifest.json`
 
-    The template manifest is what you should edit directly to change scopes, etc. The full manifest is generated from this template manifest and includes information about the deployment.
-    If you make changes to the template manifest, you will need rerun `mda channel add slack .` to regenerate the full template.
-    Do not directly edit the generated file at `.mda/slack/app-manifest.json`
-  </Step>
+The template manifest is what you should edit directly to change scopes, etc. The full manifest is generated from this template manifest and includes information about the deployment.
+If you make changes to the template manifest, you will need rerun `mda channel add slack .` to regenerate the full template.
+Do not directly edit the generated file at `.mda/slack/app-manifest.json`
 
-  <Step title="Create and install the Slack app once">
-    1. Open [https://api.slack.com/apps](https://api.slack.com/apps).
-    2. Select **Create New App**.
-    3. Select **From an app manifest**.
-    4. Choose the target Slack workspace.
-    5. Import `.mda/slack/app-manifest.json` and create the app.
-    6. Open **OAuth & Permissions** and select **Install to Workspace**.
-    7. Approve the requested permissions.
-    8. Copy the **Bot User OAuth Token** from **OAuth & Permissions**.
-    9. Copy the **Signing Secret** from **Basic Information → App Credentials**.
+### Create and install the Slack app once
+1. Open [https://api.slack.com/apps](https://api.slack.com/apps).
+2. Select **Create New App**.
+3. Select **From an app manifest**.
+4. Choose the target Slack workspace.
+5. Import `.mda/slack/app-manifest.json` and create the app.
+6. Open **OAuth & Permissions** and select **Install to Workspace**.
+7. Approve the requested permissions.
+8. Copy the **Bot User OAuth Token** from **OAuth & Permissions**.
+9. Copy the **Signing Secret** from **Basic Information → App Credentials**.
 
-    The Events request URL is already in the generated manifest, so there is no
-    bootstrap manifest and no second manifest import.
-  </Step>
+The Events request URL is already in the generated manifest, so there is no
+bootstrap manifest and no second manifest import.
 
-  <Step title="Add the Slack credentials">
-    Add the two values to the project .env:
+### Add the Slack credentials
+Add the two values to the project .env:
 
-    ```
-    SLACK_SIGNING_SECRET=...
-    SLACK_BOT_TOKEN=xoxb-...
-    ```
+```
+SLACK_SIGNING_SECRET=...
+SLACK_BOT_TOKEN=xoxb-...
+```
 
-    Do not commit .env and do not copy these values into either manifest.
-  </Step>
+Do not commit .env and do not copy these values into either manifest.
 
-  <Step title="Redeploy to activate Slack">
-    ```
-    mda deploy .
-    ```
+### Redeploy to activate Slack
+```
+mda deploy .
+```
 
-    This deployment forwards the Slack credentials to the managed runtime and
-    enables authenticated event handling.
-  </Step>
+This deployment forwards the Slack credentials to the managed runtime and
+enables authenticated event handling.
 
-  <Step title="Updating Slack Bot Configurations">
-    The previous steps guide you through deploying the first iteration of your Managed Deepagent as a Slack bot. If you want to make any updates to the agent, you just simply rerun `mda deploy .` to update the deployed app.
+### Updating Slack Bot Configurations
+The previous steps guide you through deploying the first iteration of your Managed Deepagent as a Slack bot. If you want to make any updates to the agent, you just simply rerun `mda deploy .` to update the deployed app.
 
-    If you want to make any configuration changes to the Slack application itself, the recommended steps are:
+If you want to make any configuration changes to the Slack application itself, the recommended steps are:
 
-    1. Update the `slack-app-manifest.json` file locally
-    2. Run `mda channel add slack .` — this will regenerate the manifest with the latest changes. These changes are written to the `.mda/slack/app-manifest.json` file
-    3. On [https://api.slack.com/apps](https://api.slack.com/apps) → locate your app → App Manifest
-    4. Replace the contents of the manifest with the new `.mda/slack/app-manifest.json` file → Click **Save Changes**
-    5. Navigate to the **OAuth & Permissions** tab. Click on **Reinstall to Workspace**
+1. Update the `slack-app-manifest.json` file locally
+2. Run `mda channel add slack .` — this will regenerate the manifest with the latest changes. These changes are written to the `.mda/slack/app-manifest.json` file
+3. On [https://api.slack.com/apps](https://api.slack.com/apps) → locate your app → App Manifest
+4. Replace the contents of the manifest with the new `.mda/slack/app-manifest.json` file → Click **Save Changes**
+5. Navigate to the **OAuth & Permissions** tab. Click on **Reinstall to Workspace**
 
-    This ensures the manifest in your mda filesystem remains as the source of truth for the Slack app.
-  </Step>
-</Steps>
+This ensures the manifest in your mda filesystem remains as the source of truth for the Slack app.
 
 Treat `slack-app-manifest.json` as the source of truth. When you change its scopes, bot events, branding, or other settings, rerun `mda deploy . --configure-slack`, apply the regenerated `.mda/slack/app-manifest.json`, and reinstall the app if Slack requests it. The generated files under `.mda/` are build artifacts; do not commit them.
 
@@ -130,7 +117,7 @@ Treat `slack-app-manifest.json` as the source of truth. When you change its scop
 
 Pass options to `channels.slack(...)` to control Managed Deep Agents runtime behavior. Configure OAuth scopes and delivered event types in the Slack app, not in the channel declaration.
 
-```ts channels/slack.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { channels } from "managed-deepagents";
 
 export const channel = channels.slack({
@@ -188,7 +175,7 @@ Channel-originated runs also expose `runtime.channel` in tools and middleware. U
 
 The following tool posts the final response explicitly:
 
-```ts tools/send-channel-reply.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { tool } from "langchain";
 import type { ManagedDeepAgentRuntime } from "managed-deepagents";
 import { z } from "zod";
@@ -211,7 +198,7 @@ export const sendChannelReply = tool(
 
 Pass `{ final: true }` only when the posted message is the final response. It suppresses the automatic reply so the user does not receive the final response twice. A post without that option is an intermediate message and does not suppress auto-reply.
 
-`runtime.channel.post(...)` can post only to the originating Slack thread. Explicit destinations are not supported for channel-originated runs. To send a scheduled result to a specific Slack conversation, use [`deliverTo`](/langsmith/javascript/managed-deep-agents-schedules#deliver-results-to-slack).
+`runtime.channel.post(...)` can post only to the originating Slack thread. Explicit destinations are not supported for channel-originated runs. To send a scheduled result to a specific Slack conversation, use [`deliverTo`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-schedules#deliver-results-to-slack).
 
 ## Understand Slack caller identity
 
@@ -230,9 +217,8 @@ Avoid making lasting configuration changes only in the Slack dashboard. A later 
 * `runtime.channel` does not expose `SLACK_BOT_TOKEN` or other provider credentials.
 * Event deduplication is currently process-local. A multi-replica deployment can invoke the agent more than once when Slack retries an event.
 
-<Warning>
-  Design channel-triggered tools as idempotent when they perform external side effects. Slack retries and multi-replica processing can produce more than one run for the same logical event.
-</Warning>
+> [!WARNING]
+> Design channel-triggered tools as idempotent when they perform external side effects. Slack retries and multi-replica processing can produce more than one run for the same logical event.
 
 ## Troubleshoot Slack channels
 
@@ -248,20 +234,16 @@ Avoid making lasting configuration changes only in the Slack dashboard. A later 
 
 ## See also
 
-* [Channels overview](/langsmith/javascript/managed-deep-agents-channels): understand the provider-neutral channel model.
-* [Identity](/langsmith/javascript/managed-deep-agents-identity): configure authentication and caller ownership.
-* [Schedules](/langsmith/javascript/managed-deep-agents-schedules): deliver scheduled results to Slack.
-* [Custom tools](/langsmith/javascript/managed-deep-agents-tools): attach a tool that uses `runtime.channel`.
-* [Deploy an agent](/langsmith/javascript/managed-deep-agents-deploy): configure deployment secrets and inspect builds.
+* [Channels overview](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-channels): understand the provider-neutral channel model.
+* [Identity](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-identity): configure authentication and caller ownership.
+* [Schedules](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-schedules): deliver scheduled results to Slack.
+* [Custom tools](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools): attach a tool that uses `runtime.channel`.
+* [Deploy an agent](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy): configure deployment secrets and inspect builds.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-channels-slack.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

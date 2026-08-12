@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Generative UI overview
-
-> Understand the generative UI spectrum from controlled to declarative to open-ended interfaces
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
+Understand the generative UI spectrum from controlled to declarative to open-ended interfaces
 
 Generative UI is any pattern where an agent's output presents a user interface
 beyond text. Instead of streaming a paragraph into a chat bubble, the agent drives
@@ -22,7 +18,7 @@ predictability for expressive range.
 The spectrum runs from full control over every pixel to full agent autonomy, using
 three primary approaches:
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -46,13 +42,9 @@ graph LR
   class O deep;
 ```
 
-<div style={{ display: "flex", alignItems: "center", gap: "12px", margin: "0.25rem 0 0.5rem" }}>
-  <span style={{ fontSize: "0.8rem", opacity: 0.65, whiteSpace: "nowrap" }}>More control</span>
+<span>More control</span>
 
-  <div style={{ flex: 1, height: "3px", borderRadius: "2px", background: "linear-gradient(90deg, #B8DFFF 0%, #006DDD 50%, #00457A 100%)" }} />
-
-  <span style={{ fontSize: "0.8rem", opacity: 0.65, whiteSpace: "nowrap" }}>More autonomy</span>
-</div>
+<span>More autonomy</span>
 
 Moving left to right, predictability and per-capability engineering cost both fall,
 while the agent's expressive range grows. Accessibility and visual consistency are
@@ -69,7 +61,7 @@ tickets and booking confirmations. Your component library is the boundary: the a
 can only render what you shipped. Controlled generative UI covers components as
 tools, tool-call rendering, state rendering, and reasoning.
 
-For details, see [Controlled generative UI](/oss/python/langchain/frontend/controlled-generative-ui).
+For details, see [Controlled generative UI](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui).
 
 ### Declarative
 
@@ -79,7 +71,7 @@ guardrail and boundary: the agent can arrange and combine your components freely
 cannot step outside the set you approve. This is where the long tail lives. It
 trades pixel-perfection for breadth, which suits secondary interactions, internal
 tools, and dashboards where showing something useful matters more than exact
-control. [Declarative generative UI](/oss/python/langchain/frontend/declarative-generative-ui)
+control. [Declarative generative UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
 covers this with [json-render](https://json-render.dev); Google's A2UI, integrated via
 CopilotKit, offers the same shape with dynamic and fixed schema variants.
 
@@ -94,7 +86,7 @@ experimental approach: the least deterministic, and the hardest in which to
 guarantee accessibility, consistency, and safety, so the UI must be isolated. The
 sandbox and your prompt are the boundary.
 
-For details, see [Open-ended generative UI](/oss/python/langchain/frontend/open-ended-generative-ui).
+For details, see [Open-ended generative UI](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui).
 
 ## Choosing an approach
 
@@ -102,9 +94,9 @@ Start from how much you need to constrain the interface:
 
 | If you need to...                                                           | Choose                                                                  |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Guarantee branding, layout, and accessibility for a known set of outputs    | [Controlled](/oss/python/langchain/frontend/controlled-generative-ui)   |
-| Let the agent compose novel layouts using only approved components          | [Declarative](/oss/python/langchain/frontend/declarative-generative-ui) |
-| Surface interfaces authored by third parties without building them yourself | [Open-ended](/oss/python/langchain/frontend/open-ended-generative-ui)   |
+| Guarantee branding, layout, and accessibility for a known set of outputs    | [Controlled](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)   |
+| Let the agent compose novel layouts using only approved components          | [Declarative](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui) |
+| Surface interfaces authored by third parties without building them yourself | [Open-ended](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)   |
 
 Choosing a single approach for an entire product is the most common mistake. Real
 applications mix approaches and match each surface to its purpose: controlled
@@ -118,28 +110,19 @@ transcript.
 
 ## Explore the spectrum
 
-<CardGroup cols={3}>
-  <Card title="Controlled" icon="components" href="/oss/python/langchain/frontend/controlled-generative-ui">
-    Author the components; the agent picks which to render and what data to pass.
-  </Card>
+#### [Controlled](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
+Author the components; the agent picks which to render and what data to pass.
 
-  <Card title="Declarative" icon="schema" href="/oss/python/langchain/frontend/declarative-generative-ui">
-    The agent emits a spec; the frontend composes from a registered catalog.
-  </Card>
+#### [Declarative](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
+The agent emits a spec; the frontend composes from a registered catalog.
 
-  <Card title="Open-ended" icon="world" href="/oss/python/langchain/frontend/open-ended-generative-ui">
-    Render UI created elsewhere, such as sandboxed MCP Apps.
-  </Card>
-</CardGroup>
+#### [Open-ended](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
+Render UI created elsewhere, such as sandboxed MCP Apps.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/generative-ui-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/generative-ui-overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

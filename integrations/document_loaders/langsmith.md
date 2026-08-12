@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmithLoader integration
 
 > Integrate with the LangSmithLoader document loader using LangChain Python.
 
-This guide provides a quick overview for getting started with the `LangSmithLoader` [document loader](/oss/python/integrations/document_loaders). For detailed documentation of all `LangSmithLoader` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/document_loaders/langsmith/LangSmithLoader).
+This guide provides a quick overview for getting started with the `LangSmithLoader` [document loader](https://docs.langchain.com/oss/python/integrations/document_loaders). For detailed documentation of all `LangSmithLoader` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/document_loaders/langsmith/LangSmithLoader).
 
 ## Overview
 
@@ -30,7 +26,7 @@ To access the LangSmith document loader you'll need to install `langchain-core`,
 
 Sign up at [langsmith.com](https://langsmith.com) and generate an API key. Once you've done this set the LANGSMITH\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -40,7 +36,7 @@ if not os.environ.get("LANGSMITH_API_KEY"):
 
 If you want to get automated best-in-class tracing, you can also turn on LangSmith tracing:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
 
@@ -48,7 +44,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Install `langchain-core`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-core
 ```
 
@@ -56,7 +52,7 @@ pip install -qU langchain-core
 
 For this example, we'll clone and load a public LangSmith dataset. Cloning creates a copy of this dataset on our personal LangSmith account. You can only load datasets that you have a personal copy of.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client as LangSmithClient
 
 ls_client = LangSmithClient()
@@ -73,7 +69,7 @@ ls_client.clone_public_dataset(dataset_public_url)
 
 Now we can instantiate our document loader and load documents:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.document_loaders import LangSmithLoader
 
 loader = LangSmithLoader(
@@ -87,36 +83,36 @@ loader = LangSmithLoader(
 
 ## Load
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 print(docs[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Show me an example using Weaviate, but customizing the vectorStoreRetriever to return the top 10 k nearest neighbors.
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(docs[0].metadata["inputs"])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'question': 'Show me an example using Weaviate, but customizing the vectorStoreRetriever to return the top 10 k nearest neighbors. '}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(docs[0].metadata["outputs"])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'answer': 'To customize the Weaviate client and return the top 10 k nearest neighbors, you can utilize the `as_retriever` method with the appropriate parameters. Here\'s how you can achieve this:\n\n\`\`\`python\n# Assuming you have imported the necessary modules and classes\n\n# Create the Weaviate client\nclient = weaviate.Client(url=os.environ["WEAVIATE_URL"], ...)\n\n# Initialize the Weaviate wrapper\nweaviate = Weaviate(client, index_name, text_key)\n\n# Customize the client to return top 10 k nearest neighbors using as_retriever\ncustom_retriever = weaviate.as_retriever(\n    search_type="similarity",\n    search_kwargs={\n        \'k\': 10  # Customize the value of k as needed\n    }\n)\n\n# Now you can use the custom_retriever to perform searches\nresults = custom_retriever.search(query, ...)\n\`\`\`'}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 list(docs[0].metadata.keys())
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['dataset_id',
  'inputs',
  'outputs',
@@ -130,7 +126,7 @@ list(docs[0].metadata.keys())
 
 ## Lazy load
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 page = []
 for doc in loader.lazy_load():
     page.append(doc)
@@ -142,7 +138,7 @@ for doc in loader.lazy_load():
 len(page)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 10
 ```
 
@@ -150,12 +146,8 @@ len(page)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/langsmith.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

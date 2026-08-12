@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Redis integration
 
 > Integrate with the Redis vector store using LangChain Python.
@@ -14,13 +10,13 @@ This notebook shows how to use functionality related to the `RedisVectorStore`.
 
 To use the `RedisVectorStore` you first need to install the partner package, as well as the other packages used throughout this notebook.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-redis langchain-openai
 ```
 
 You'll need a running Redis instance with Redis Search features enabled. We recommend Redis 8.4+. You can start one locally with Docker:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run -d --name redis -p 6379:6379 redis:8.4
 ```
 
@@ -28,7 +24,7 @@ Or use [Redis Cloud](https://redis.io/cloud/) for a managed deployment.
 
 (Optional) Download [RedisInsight](https://redis.io/insight/) — a browser-based GUI for inspecting your data and indexes.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run -d --name redisinsight -p 5540:5540 redis/redisinsight:latest
 ```
 
@@ -36,19 +32,19 @@ docker run -d --name redisinsight -p 5540:5540 redis/redisinsight:latest
 
 Configure your Redis connection by setting the following environment variable:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export REDIS_URL="redis://localhost:6379"
 ```
 
 For Redis with authentication:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export REDIS_URL="redis://username:password@localhost:6379"
 ```
 
 For Redis Cloud, use the connection string from your database dashboard:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export REDIS_URL="redis://default:<password>@<host>:<port>"
 ```
 
@@ -56,24 +52,23 @@ This package also supports SSL/TLS (`rediss://`) and high-availability Redis Sen
 
 Set your OpenAI API key:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export OPENAI_API_KEY="your-api-key-here"
 ```
 
-<Tip>
-  The [`langchain-redis`](https://github.com/langchain-ai/langchain-redis/blob/main/libs/redis/README.md) package also provides `RedisChatMessageHistory` for conversation memory and `RedisSemanticCache` for LLM response caching — all backed by the same Redis instance as your vector store.
-</Tip>
+> [!TIP]
+> The [`langchain-redis`](https://github.com/langchain-ai/langchain-redis/blob/main/libs/redis/README.md) package also provides `RedisChatMessageHistory` for conversation memory and `RedisSemanticCache` for LLM response caching — all backed by the same Redis instance as your vector store.
 
 ## Initialization
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from langchain_openai import OpenAIEmbeddings
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_redis import RedisConfig, RedisVectorStore
 
 config = RedisConfig(
@@ -89,15 +84,14 @@ config = RedisConfig(
 vector_store = RedisVectorStore(embeddings=embeddings, config=config)
 ```
 
-<Note>
-  The `metadata_schema` parameter tells Redis which metadata fields to index. Fields not listed here cannot be used in filters. Use `"tag"` for categorical string values and `"numeric"` for numbers.
-</Note>
+> [!NOTE]
+> The `metadata_schema` parameter tells Redis which metadata fields to index. Fields not listed here cannot be used in filters. Use `"tag"` for categorical string values and `"numeric"` for numbers.
 
 ## Manage vector store
 
 ### Add items to vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 texts = ["foo", "bar"]
 metadatas = [{"baz": "bar"}, {"foo": "baz"}]
 vector_store.add_texts(texts, metadatas=metadatas)
@@ -105,14 +99,14 @@ vector_store.add_texts(texts, metadatas=metadatas)
 
 You can also add documents with custom keys:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 custom_keys = ["doc1", "doc2"]
 vector_store.add_texts(texts, metadatas=metadatas, keys=custom_keys)
 ```
 
 Or use `add_documents` with LangChain `Document` objects:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 document_1 = Document(page_content="foo", metadata={"baz": "bar"})
@@ -126,7 +120,7 @@ vector_store.add_documents(documents=documents, ids=ids)
 
 ### Delete items from vector store
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=["3"])
 ```
 
@@ -138,7 +132,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "foo"
 docs = vector_store.similarity_search(query, k=2)
 for doc in docs:
@@ -147,7 +141,7 @@ for doc in docs:
 
 #### Similarity search with score
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs_and_scores = vector_store.similarity_search_with_score(query, k=2)
 for doc, score in docs_and_scores:
     print(f"* [SIM={score:.3f}] {doc.page_content} [{doc.metadata}]")
@@ -155,7 +149,7 @@ for doc, score in docs_and_scores:
 
 #### Similarity search with filtering
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from redisvl.query.filter import Tag
 
 results = vector_store.similarity_search(
@@ -169,7 +163,7 @@ for doc in results:
 
 #### Maximum marginal relevance search
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = vector_store.max_marginal_relevance_search(query, k=2, fetch_k=10)
 for doc in docs:
     print(f"* {doc.page_content} [{doc.metadata}]")
@@ -179,15 +173,14 @@ for doc in docs:
 
 There are more search methods not listed in this notebook, to find all of them be sure to read the [`API reference`](https://reference.langchain.com/python/langchain-redis/vectorstores/RedisVectorStore).
 
-<Tip>
-  Redis supports hybrid search combining vector similarity with full-text search. See the [`API reference`](https://reference.langchain.com/python/langchain-redis/vectorstores/RedisVectorStore) for `similarity_search` parameters including `return_all` and `distance_threshold`.
-</Tip>
+> [!TIP]
+> Redis supports hybrid search combining vector similarity with full-text search. See the [`API reference`](https://reference.langchain.com/python/langchain-redis/vectorstores/RedisVectorStore) for `similarity_search` parameters including `return_all` and `distance_threshold`.
 
 ### Query by turning into retriever
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(
     search_type="mmr",
     search_kwargs={"k": 1, "fetch_k": 2, "lambda_mult": 0.5},
@@ -199,9 +192,9 @@ retriever.invoke("your query here")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 For a full RAG walkthrough using `langchain-redis`, see this [example notebook](https://github.com/redis-developer/redis-ai-resources/blob/main/python-recipes/RAG/02_langchain.ipynb).
 
@@ -213,12 +206,8 @@ For detailed documentation of `RedisVectorStore` features and configurations hea
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,15 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Controlled generative UI
-
-> Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
+Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning
 
 ## Overview
 
 Controlled generative UI is at the author-controlled end of the
-[generative UI spectrum](/oss/python/langchain/frontend/generative-ui-overview). You write the
+[generative UI spectrum](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview). You write the
 components, and the agent decides which one to render and what data to pass into
 it. The agent never produces markup: it chooses from a fixed set of interfaces you
 build and test.
@@ -28,7 +24,7 @@ where the set of outputs is known ahead of time and correctness matters more tha
 novelty: forms, confirmation flows, and any surface with strict branding or
 accessibility requirements. When you need the agent to compose layouts you did not
 anticipate, across the long tail of secondary interactions, move one step further
-along the spectrum to [declarative generative UI](/oss/python/langchain/frontend/declarative-generative-ui).
+along the spectrum to [declarative generative UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui).
 
 Controlled generative UI covers four techniques, starting with the agent picking a
 whole interface and ending with the frontend reacting to agent internals.
@@ -52,7 +48,7 @@ as a loading card while a search runs, a result card when it returns, and an err
 state if it fails, instead of showing raw JSON. This makes the agent's actions
 legible and gives users confidence in what is happening.
 
-See the [Tool calling](/oss/python/langchain/frontend/tool-calling) pattern.
+See the [Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling) pattern.
 
 ## State rendering
 
@@ -62,9 +58,9 @@ rendering binds your components to that state so the UI becomes a live view of t
 agent's work rather than a transcript. As the agent updates state, the interface
 updates with it.
 
-See [typed agent state](/oss/python/langchain/frontend/overview) in the frontend overview.
+See [typed agent state](https://docs.langchain.com/oss/python/langchain/frontend/overview) in the frontend overview.
 For mapping a single typed response payload to custom UI, see
-[Structured output](/oss/python/langchain/frontend/structured-output).
+[Structured output](https://docs.langchain.com/oss/python/langchain/frontend/structured-output).
 
 ## Reasoning
 
@@ -73,22 +69,18 @@ Rendering reasoning shows users how the agent arrived at a result, which builds
 trust, aids debugging, and supports auditing. You control how and when the reasoning
 appears, for example in a collapsible block distinct from the response.
 
-See the [Reasoning tokens](/oss/python/langchain/frontend/reasoning-tokens) pattern.
+See the [Reasoning tokens](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens) pattern.
 
 ## See also
 
-* [Generative UI overview](/oss/python/langchain/frontend/generative-ui-overview)
-* [Declarative generative UI](/oss/python/langchain/frontend/declarative-generative-ui)
-* [Open-ended generative UI](/oss/python/langchain/frontend/open-ended-generative-ui)
+* [Generative UI overview](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
+* [Declarative generative UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
+* [Open-ended generative UI](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/controlled-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/controlled-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

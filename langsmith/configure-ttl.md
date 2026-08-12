@@ -1,15 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to add TTLs to your application
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-ttl)
+> [!TIP]
+> **Prerequisites**
+> This guide assumes familiarity with [LangSmith](https://docs.langchain.com/langsmith/observability), [Persistence](https://docs.langchain.com/oss/python/langgraph/persistence), and [Cross-thread persistence](https://docs.langchain.com/oss/python/langgraph/stores) concepts.
 
-<Tip>
-  **Prerequisites**
-  This guide assumes familiarity with [LangSmith](/langsmith/observability), [Persistence](/oss/python/langgraph/persistence), and [Cross-thread persistence](/oss/python/langgraph/stores) concepts.
-</Tip>
-
-LangSmith persists both [checkpoints](/oss/python/langgraph/checkpointers#checkpoints) (thread state) and [cross-thread memories](/oss/python/langgraph/stores) (store items). You can configure Time-to-Live (TTL) policies in [`langgraph.json`](/langsmith/application-structure#configuration-file) to manage the lifecycle of this data automatically, preventing indefinite accumulation.
+LangSmith persists both [checkpoints](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) (thread state) and [cross-thread memories](https://docs.langchain.com/oss/python/langgraph/stores) (store items). You can configure Time-to-Live (TTL) policies in [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file) to manage the lifecycle of this data automatically, preventing indefinite accumulation.
 
 ## Configuring thread and checkpoint TTL
 
@@ -17,7 +12,7 @@ Checkpoints capture the state of conversation threads. Setting a TTL automatical
 
 Add a `checkpointer.ttl` configuration to your `langgraph.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -40,9 +35,8 @@ Add a `checkpointer.ttl` configuration to your `langgraph.json` file:
 * `default_ttl`: Sets the default TTL window in minutes (e.g., 43200 minutes = 30 days). The `delete` window starts when the TTL is applied and does not refresh with activity. The `keep_latest` window refreshes when a run finishes or thread state is updated. If omitted, threads do not expire by default.
 * `sweep_limit`: (*Agent server v0.8+*) Sets how many threads the sweeper processes in a single iteration. Defaults to `10000` (Agent server v0.12+) or `1000` (Agent server v0.8-0.11).
 
-<Note>
-  Global TTL configuration applies to new threads. The `delete` strategy does not apply retroactively to existing threads. The `keep_latest` strategy applies to an existing thread after a run finishes or its state is updated; inactive existing threads remain unchanged.
-</Note>
+> [!NOTE]
+> Global TTL configuration applies to new threads. The `delete` strategy does not apply retroactively to existing threads. The `keep_latest` strategy applies to an existing thread after a run finishes or its state is updated; inactive existing threads remain unchanged.
 
 ## Configuring store item TTL
 
@@ -50,7 +44,7 @@ Store items allow cross-thread data persistence. Configuring TTL for store items
 
 Add a `store.ttl` configuration to your `langgraph.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -74,7 +68,7 @@ Add a `store.ttl` configuration to your `langgraph.json` file:
 
 You can configure TTLs for both checkpoints and store items in the same `langgraph.json` file to set different policies for each data type. Here is an example:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": ["."],
   "graphs": {
@@ -101,7 +95,7 @@ You can configure TTLs for both checkpoints and store items in the same `langgra
 
 You can apply [TTL configurations per-thread](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.create).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 thread = await client.threads.create(
     ttl={
         "strategy": "delete",
@@ -110,9 +104,8 @@ thread = await client.threads.create(
 )
 ```
 
-<Note>
-  A thread-level TTL overrides the default TTL for that thread and uses the strategy behavior described above.
-</Note>
+> [!NOTE]
+> A thread-level TTL overrides the default TTL for that thread and uses the strategy behavior described above.
 
 ## Runtime overrides
 
@@ -120,18 +113,14 @@ For store items, pass `ttl` to `put` to override the default lifespan. Pass `ref
 
 ## Deployment process
 
-After configuring TTLs in `langgraph.json`, deploy or restart your LangGraph application for the changes to take effect. Use [`langgraph dev`](/langsmith/local-dev-testing#langgraph-dev) for local development or [`langgraph up`](/langsmith/local-dev-testing#langgraph-up) for Docker deployment.
+After configuring TTLs in `langgraph.json`, deploy or restart your LangGraph application for the changes to take effect. Use [`langgraph dev`](https://docs.langchain.com/langsmith/local-dev-testing#langgraph-dev) for local development or [`langgraph up`](https://docs.langchain.com/langsmith/local-dev-testing#langgraph-up) for Docker deployment.
 
-For details on other configurable options, refer to the [LangGraph CLI reference page](/langsmith/cli#configuration-file).
+For details on other configurable options, refer to the [LangGraph CLI reference page](https://docs.langchain.com/langsmith/cli#configuration-file).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configure-ttl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

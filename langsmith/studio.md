@@ -1,34 +1,29 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Studio
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/studio)
+> [!NOTE]
+> **Prerequisites**
+>
+> * [LangSmith](https://docs.langchain.com/langsmith/observability)
+> * [Agent Server](https://docs.langchain.com/langsmith/agent-server)
+> * [LangGraph CLI](https://docs.langchain.com/langsmith/cli)
 
-<Info>
-  **Prerequisites**
-
-  * [LangSmith](/langsmith/observability)
-  * [Agent Server](/langsmith/agent-server)
-  * [LangGraph CLI](/langsmith/cli)
-</Info>
-
-Studio is a specialized agent IDE that enables visualization, interaction, and debugging of agentic systems that implement the Agent Server API protocol. Studio also integrates with [tracing](/langsmith/observability-concepts), [evaluation](/langsmith/evaluation), and [prompt engineering](/langsmith/prompt-context-hub#prompts).
+Studio is a specialized agent IDE that enables visualization, interaction, and debugging of agentic systems that implement the Agent Server API protocol. Studio also integrates with [tracing](https://docs.langchain.com/langsmith/observability-concepts), [evaluation](https://docs.langchain.com/langsmith/evaluation), and [prompt engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts).
 
 ## Features
 
 Key features of Studio:
 
 * Visualize your graph architecture
-* [Run and interact with your agent](/langsmith/use-studio#run-application)
-* [Manage assistants](/langsmith/use-studio#manage-assistants)
-* [Manage threads](/langsmith/use-studio#manage-threads)
-* [Iterate on prompts](/langsmith/observability-studio)
-* [Run experiments over a dataset](/langsmith/observability-studio#run-experiments-over-a-dataset)
-* Manage [long term memory](/oss/python/concepts/memory)
-* Debug agent state via [time travel](/oss/python/langgraph/use-time-travel)
+* [Run and interact with your agent](https://docs.langchain.com/langsmith/use-studio#run-application)
+* [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants)
+* [Manage threads](https://docs.langchain.com/langsmith/use-studio#manage-threads)
+* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio)
+* [Run experiments over a dataset](https://docs.langchain.com/langsmith/observability-studio#run-experiments-over-a-dataset)
+* Manage [long term memory](https://docs.langchain.com/oss/python/concepts/memory)
+* Debug agent state via [time travel](https://docs.langchain.com/oss/python/langgraph/use-time-travel)
 * 1 Click deploy to LangSmith Cloud.
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 flowchart
     subgraph LangSmith Deployment
         A[LangGraph CLI] -->|creates| B(Agent Server deployment)
@@ -42,7 +37,7 @@ flowchart
     class A,B,D,E,F process
 ```
 
-Studio works for graphs that are deployed on [LangSmith](/langsmith/deployment-quickstart) or for graphs that are running locally via the [Agent Server](/langsmith/local-dev-testing).
+Studio works for graphs that are deployed on [LangSmith](https://docs.langchain.com/langsmith/deployment-quickstart) or for graphs that are running locally via the [Agent Server](https://docs.langchain.com/langsmith/local-dev-testing).
 
 Studio supports two modes:
 
@@ -52,28 +47,24 @@ Graph mode exposes the full feature-set and is useful when you would like as man
 
 ### Chat mode
 
-Chat mode is a simpler UI for iterating on and testing chat-specific agents. It is useful for business users and those who want to test overall agent behavior. Chat mode is only supported for graph's whose state includes or extends [`MessagesState`](/oss/python/langgraph/use-graph-api#messagesstate).
+Chat mode is a simpler UI for iterating on and testing chat-specific agents. It is useful for business users and those who want to test overall agent behavior. Chat mode is only supported for graph's whose state includes or extends [`MessagesState`](https://docs.langchain.com/oss/python/langgraph/use-graph-api#messagesstate).
 
 ## Deploy from Studio
 
-Go from [testing graphs locally](/langsmith/local-dev-testing) in Studio to deploying them on Langsmith Cloud in 1 Click, directly from Studio. You can use this to create a brand new deployment for quick prototyping or to redeploy an existing deployment.
+Go from [testing graphs locally](https://docs.langchain.com/langsmith/local-dev-testing) in Studio to deploying them on Langsmith Cloud in 1 Click, directly from Studio. You can use this to create a brand new deployment for quick prototyping or to redeploy an existing deployment.
 
 ## Learn more
 
-* See this guide on how to [get started](/langsmith/quick-start-studio) with Studio.
+* See this guide on how to [get started](https://docs.langchain.com/langsmith/quick-start-studio) with Studio.
 
 ## Video guide
 
-<iframe className="w-full aspect-video rounded-xl" src="https://www.youtube.com/embed/Mi1gSlHwZLM?si=oWCeHQ640zPHoLwn" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+> **Embedded Content:** [YouTube video player](https://docs.langchain.com/langsmith/studio)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/studio.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

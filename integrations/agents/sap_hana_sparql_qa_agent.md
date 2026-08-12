@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Question Answering with HanaSparqlQAAgent
 
 > Integrate with the HanaSparqlQAAgent type using LangChain Python.
@@ -10,7 +6,7 @@
 
 To use this feature, install the `langchain-hana` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install langchain_hana
 ```
 
@@ -28,11 +24,11 @@ You need:
 * An **LLM** to power the agent's reasoning
 * A **`HanaRdfGraph`** (with connection, `graph_uri`, and ontology)
 
-Follow the steps here [HanaRdfGraph](/oss/python/integrations/graphs/sap_hana_rdf_graph) to know more about creating a `HanaRdfGraph` instance.
+Follow the steps here [HanaRdfGraph](https://docs.langchain.com/oss/python/integrations/graphs/sap_hana_rdf_graph) to know more about creating a `HanaRdfGraph` instance.
 
 Import the `HanaSparqlQAAgent`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_hana import HanaSparqlQAAgent
 agent = HanaSparqlQAAgent.create_agent(graph=graph, model=llm)
 ```
@@ -58,7 +54,7 @@ The agent uses tools iteratively to:
 
 You can customize the agent's behavior by providing additional parameters to `create_agent`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 agent = HanaSparqlQAAgent.create_agent(
     graph=graph,  # Required: HanaRdfGraph instance
     model=llm,  # Required: LLM to power the agent
@@ -85,7 +81,7 @@ The example below:
 
 This demonstrates how the agent dynamically retrieves the ontology, generates SPARQL queries, and returns human-readable answers.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from dotenv import load_dotenv
@@ -105,14 +101,14 @@ connection = dbapi.connect(
 
 Then, set up the knowledge graph instance
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from gen_ai_hub.proxy.langchain.openai import ChatOpenAI
 from langchain_hana import HanaRdfGraph, HanaSparqlQAChain
 
 # from langchain_openai import ChatOpenAI  # or your chosen LLM
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Set up the Knowledge Graph
 graph_uri = "kgdocu_movies"
 
@@ -123,13 +119,13 @@ graph = HanaRdfGraph(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # a basic graph schema is extracted from the data graph. This schema will guide the LLM to generate a proper SPARQL query.
 schema_graph = graph.get_schema
 print(schema_graph.serialize(format="turtle"))
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -190,14 +186,14 @@ rdfs:label a owl:DatatypeProperty ;
 
 After that, initialise the LLM.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize the LLM
 llm = ChatOpenAI(proxy_model_name="gpt-4o", temperature=0)
 ```
 
 Then, create the SPARQL QA Agent.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a SPARQL QA Agent
 agent = HanaSparqlQAAgent.create_agent(
     graph=graph,
@@ -205,7 +201,7 @@ agent = HanaSparqlQAAgent.create_agent(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Example queries:
 # question = "Which movies are in the data?"
 # question = "In which movies did Keanu Reeves and Carrie-Anne Moss play together"
@@ -222,7 +218,7 @@ for event in agent.stream(
     event["messages"][-1].pretty_print()
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 
 ================================ Human Message =================================
 
@@ -297,7 +293,6 @@ rdfs:label a owl:DatatypeProperty ;
 
 <http://kg.demo.sap.com/Film> a owl:Class ;
     rdfs:label "Film" .
-
 
 ================================== Ai Message ==================================
 Tool Calls:
@@ -401,12 +396,8 @@ The actors who acted in "Blade Runner" are:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/agents/sap_hana_sparql_qa_agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/agents/sap_hana_sparql_qa_agent.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

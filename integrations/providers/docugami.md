@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Docugami integrations
 
 > Integrate with Docugami using LangChain Python.
@@ -12,34 +8,28 @@
 
 ## Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install dgml-utils
-  pip install docugami-langchain
-  ```
+```bash
+pip install dgml-utils
+pip install docugami-langchain
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add dgml-utils
-  uv add docugami-langchain
-  ```
-</CodeGroup>
+```bash
+uv add dgml-utils
+uv add docugami-langchain
+```
 
 ## Document loader
 
-See a [usage example](/oss/python/integrations/document_loaders/docugami).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/docugami).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from docugami_langchain.document_loaders import DocugamiLoader
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/docugami.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Neo4j integration
 
 > Integrate with the Neo4j graph using LangChain Python.
@@ -31,18 +27,18 @@ docker run \
 
 If you are using the docker container, you need to wait a couple of second for the database to start.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 from langchain_openai import ChatOpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph = Neo4jGraph(url="bolt://localhost:7687", username="neo4j", password="password")
 ```
 
 We default to OpenAI models in this guide.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -54,7 +50,7 @@ if "OPENAI_API_KEY" not in os.environ:
 
 Assuming your database is empty, you can populate it using Cypher query language. The following Cypher statement is idempotent, which means the database information will be the same if you run it one or multiple times.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.query(
     """
 MERGE (m:Movie {name:"Top Gun", runtime: 120})
@@ -66,7 +62,7 @@ MERGE (a)-[:ACTED_IN]->(m)
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 []
 ```
 
@@ -74,15 +70,15 @@ MERGE (a)-[:ACTED_IN]->(m)
 
 If the schema of database changes, you can refresh the schema information needed to generate Cypher statements.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.refresh_schema()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(graph.schema)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Node properties:
 Movie {runtime: INTEGER, name: STRING}
 Actor {name: STRING}
@@ -96,7 +92,7 @@ The relationships:
 
 Choosing the enhanced schema version enables the system to automatically scan for example values within the databases and calculate some distribution metrics. For example, if a node property has less than 10 distinct values, we return all possible values in the schema. Otherwise, return only a single example value per node and relationship property.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 enhanced_graph = Neo4jGraph(
     url="bolt://localhost:7687",
     username="neo4j",
@@ -106,7 +102,7 @@ enhanced_graph = Neo4jGraph(
 print(enhanced_graph.schema)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Node properties:
 - **Movie**
   - `runtime`: INTEGER Min: 120, Max: 120
@@ -123,17 +119,17 @@ The relationships:
 
 We can now use the graph cypher QA chain to ask question of the graph
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     ChatOpenAI(temperature=0), graph=graph, verbose=True, allow_dangerous_requests=True
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -145,7 +141,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': 'Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan played in Top Gun.'}
 ```
@@ -155,7 +151,7 @@ Full Context:
 You can limit the number of results from the Cypher QA Chain using the `top_k` parameter.
 The default is 10.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     ChatOpenAI(temperature=0),
     graph=graph,
@@ -165,11 +161,11 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -181,7 +177,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': 'Tom Cruise, Val Kilmer played in Top Gun.'}
 ```
@@ -190,7 +186,7 @@ Full Context:
 
 You can return intermediate steps from the Cypher QA Chain using the `return_intermediate_steps` parameter
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     ChatOpenAI(temperature=0),
     graph=graph,
@@ -200,13 +196,13 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = chain.invoke({"query": "Who played in Top Gun?"})
 print(f"Intermediate steps: {result['intermediate_steps']}")
 print(f"Final answer: {result['result']}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -224,7 +220,7 @@ Final answer: Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan played in To
 
 You can return direct results from the Cypher QA Chain using the `return_direct` parameter
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     ChatOpenAI(temperature=0),
     graph=graph,
@@ -234,11 +230,11 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -248,7 +244,7 @@ RETURN a.name
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': [{'a.name': 'Tom Cruise'},
   {'a.name': 'Val Kilmer'},
@@ -260,7 +256,7 @@ RETURN a.name
 
 You can define the Cypher statement you want the LLM to generate for particular questions
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts.prompt import PromptTemplate
 
 CYPHER_GENERATION_TEMPLATE = """Task:Generate Cypher statement to query a graph database.
@@ -293,11 +289,11 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "How many people played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (m:Movie {name:"Top Gun"})<-[:ACTED_IN]-()
@@ -308,7 +304,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'How many people played in Top Gun?',
  'result': 'There were 4 actors in Top Gun.'}
 ```
@@ -317,7 +313,7 @@ Full Context:
 
 You can use the `cypher_llm` and `qa_llm` parameters to define different llms
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     graph=graph,
     cypher_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
@@ -327,11 +323,11 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -343,7 +339,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': 'Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan played in Top Gun.'}
 ```
@@ -352,7 +348,7 @@ Full Context:
 
 You can use `include_types` or `exclude_types` to ignore parts of the graph schema when generating Cypher statements.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     graph=graph,
     cypher_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
@@ -363,12 +359,12 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Inspect graph schema
 print(chain.graph_schema)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Node properties are the following:
 Actor {name: STRING}
 Relationship properties are the following:
@@ -380,7 +376,7 @@ The relationships are the following:
 
 You can use the `validate_cypher` parameter to validate and correct relationship directions in generated Cypher statements
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
     graph=graph,
@@ -390,11 +386,11 @@ chain = GraphCypherQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -406,7 +402,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': 'Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan played in Top Gun.'}
 ```
@@ -416,7 +412,7 @@ Full Context:
 You can use the `use_function_response` parameter to pass context from database results to an LLM as a tool/function output. This method improves the response accuracy and relevance of an answer as the LLM follows the provided context more closely.
 *You will need to use an LLM with native function calling support to use this feature*.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
     graph=graph,
@@ -427,7 +423,7 @@ chain = GraphCypherQAChain.from_llm(
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -439,7 +435,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': 'The main actors in Top Gun are Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan.'}
 ```
@@ -448,7 +444,7 @@ You can provide custom system message when using the function response feature b
 
 *Note that `qa_prompt` will have no effect when using `use_function_response`*
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = GraphCypherQAChain.from_llm(
     llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
     graph=graph,
@@ -460,7 +456,7 @@ chain = GraphCypherQAChain.from_llm(
 chain.invoke({"query": "Who played in Top Gun?"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new GraphCypherQAChain chain...
 Generated Cypher:
 MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)
@@ -472,19 +468,15 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who played in Top Gun?',
  'result': "Arrr matey! In the film Top Gun, ye be seein' Tom Cruise, Val Kilmer, Anthony Edwards, and Meg Ryan sailin' the high seas of the sky! Aye, they be a fine crew of actors, they be!"}
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/neo4j_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/neo4j_cypher.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

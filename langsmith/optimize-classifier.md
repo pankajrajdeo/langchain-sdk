@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Optimize a classifier
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/optimize-classifier)
 This tutorial shows you how to optimize a classifier based on user feedback. Classifiers are great to optimize because its generally pretty simple to collect the desired output, which makes it easy to create few shot examples based on user feedback. That is exactly what we will do in this example.
 
 ## The objective
@@ -14,14 +10,14 @@ In this example, we will build a bot that classify GitHub issues based on their 
 
 To get started, we will first set it up so that we send all traces to a specific project. We can do this by setting an environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 os.environ["LANGSMITH_PROJECT"] = "classifier"
 ```
 
 We can then create our initial application. This will be a really simple function that just takes in a GitHub issue title and tries to label it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import openai
 from langsmith import traceable, Client
 import uuid
@@ -64,7 +60,7 @@ We can then start to interact with it. When interacting with it, we will generat
 
 Here's how we can invoke the application:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import uuid7
 
 run_id = uuid7()
@@ -77,7 +73,7 @@ Here's how we can attach feedback after. We can collect feedback in two forms.
 
 First, we can collect "positive" feedback - this is for examples that the model got right.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ls_client = Client()
 run_id = uuid7()
 topic_classifier(
@@ -95,7 +91,7 @@ ls_client.create_feedback(
 
 Next, we can focus on collecting feedback that corresponds to a "correction" to the generation. In this example the model will classify it as a bug, whereas I really want this to be classified as documentation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ls_client = Client()
 run_id = uuid7()
 topic_classifier(
@@ -115,17 +111,17 @@ We can now set up automations to move examples with feedback of some form into a
 
 The first will take all runs with positive feedback and automatically add them to a dataset. The logic behind this is that any run with positive feedback we can use as a good example in future iterations. Let's create a dataset called `classifier-github-issues` to add this data to.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/class-optimization-neg.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=e36c57f7e0e224ff1ea29bcfbe9891fc" alt="Optimization Negative" width="1033" height="558" data-path="langsmith/images/class-optimization-neg.png" />
+> **Image:** [Optimization Negative](https://docs.langchain.com/langsmith/optimize-classifier)
 
 The second will take all runs with a correction and use a webhook to add them to a dataset. When creating this webhook, we will select the option to "Use Corrections". This option will make it so that when creating a dataset from a run, rather than using the output of the run as the gold-truth output of the datapoint, it will use the correction.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/class-optimization-pos.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=6485ca961ed1c29d33f25f75f90ba939" alt="Optimization Positive" width="1038" height="506" data-path="langsmith/images/class-optimization-pos.png" />
+> **Image:** [Optimization Positive](https://docs.langchain.com/langsmith/optimize-classifier)
 
 ## Update the application
 
 We can now update our code to pull down the dataset we are sending runs to. Once we pull it down, we can create a string with the examples in it. We can then put this string as part of the prompt!
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ### NEW CODE ###
 # Initialize the LangSmith Client so we can use to get the dataset
 ls_client = Client()
@@ -186,7 +182,7 @@ def topic_classifier(
 
 If now run the application with a similar input as before, we can see that it correctly learns that anything related to docs (even if a bug) should be classified as `documentation`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ls_client = Client()
 run_id = uuid7()
 topic_classifier(
@@ -200,7 +196,7 @@ One additional thing we can do is only use the most semantically similar example
 
 In order to do this, we can first define an example to find the `k` most similar examples:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import numpy as np
 
 def find_similar(examples, topic, k=5):
@@ -215,7 +211,7 @@ def find_similar(examples, topic, k=5):
 
 We can then use that in the application
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ls_client = Client()
 
 def create_example_string(examples):
@@ -270,12 +266,8 @@ def topic_classifier(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/optimize-classifier.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/optimize-classifier.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

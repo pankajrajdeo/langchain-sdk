@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatSambanova integration
 
 > Integrate with the ChatSambanova chat model using LangChain Python.
 
-This will help you get started with SambaNova [chat models](/oss/python/langchain/models/). For detailed documentation of all `ChatSambaNova` features and configurations head to the [API reference](https://docs.sambanova.ai/cloud/docs/get-started/overview).
+This will help you get started with SambaNova [chat models](https://docs.langchain.com/oss/python/langchain/models/). For detailed documentation of all `ChatSambaNova` features and configurations head to the [API reference](https://docs.sambanova.ai/cloud/docs/get-started/overview).
 
 **[SambaNova](https://sambanova.ai/)'s** [SambaCloud](http://cloud.sambanova.ai?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup) is a cloud platform for performing inference with open-source models
 
@@ -16,11 +12,11 @@ This will help you get started with SambaNova [chat models](/oss/python/langchai
 
 | Class                                                                        | Package                                                                | Serializable | JS support |                                               Downloads                                              |                                              Version                                              |
 | :--------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :--------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](/oss/python/integrations/providers/sambanova/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
+| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -28,7 +24,7 @@ This will help you get started with SambaNova [chat models](/oss/python/langchai
 
 To access SambaNova models you will need to create a [SambaCloud](http://cloud.sambanova.ai?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup) account, get an API key, install the `langchain_sambanova` integration package.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-sambanova
 ```
 
@@ -36,7 +32,7 @@ pip install langchain-sambanova
 
 Get an API Key from [cloud.sambanova.ai](http://cloud.sambanova.ai/apis?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signupapis) Once you've done this set the SAMBANOVA\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,9 +42,9 @@ if not os.getenv("SAMBANOVA_API_KEY"):
     )
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -57,7 +53,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain **SambaNova** integration lives in the `langchain_sambanova` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-sambanova
 ```
 
@@ -65,7 +61,7 @@ pip install -qU langchain-sambanova
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_sambanova import ChatSambaNova
 
 llm = ChatSambaNova(
@@ -79,7 +75,7 @@ llm = ChatSambaNova(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -92,21 +88,21 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'finish_reason': 'stop', 'usage': {'acceptance_rate': 7, 'completion_tokens': 8, 'completion_tokens_after_first_per_sec': 195.0204119588971, 'completion_tokens_after_first_per_sec_first_ten': 618.3422770734173, 'completion_tokens_per_sec': 53.25837044790076, 'end_time': 1731535338.1864908, 'is_last_response': True, 'prompt_tokens': 55, 'start_time': 1731535338.0133238, 'time_to_first_token': 0.13727331161499023, 'total_latency': 0.15021112986973353, 'total_tokens': 63, 'total_tokens_per_sec': 419.4096672772185}, 'model_name': 'Meta-Llama-3.1-70B-Instruct', 'system_fingerprint': 'fastcoe', 'created': 1731535338}, id='f04b7c2c-bc46-47e0-9c6b-19a002e8f390')
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
 ## Streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 system = "You are a helpful assistant with pirate accent."
 human = "I want to learn more about this animal: {animal}"
 prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
@@ -117,7 +113,7 @@ for chunk in chain.stream({"animal": "owl"}):
     print(chunk.content, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Yer lookin' fer some knowledge about owls, eh? Alright then, matey, settle yerself down with a pint o' grog and listen close.
 
 Owls be a fascinatin' lot, with their big round eyes and silent wings. They be birds o' prey, which means they hunt other creatures fer food. There be over 220 species o' owls, rangin' in size from the tiny Elf Owl (which be smaller than a parrot) to the Great Grey Owl (which be as big as a small eagle).
@@ -140,7 +136,7 @@ So there ye have it, matey! Owls be amazin' creatures, with their big eyes, sile
 
 ## Async
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -154,13 +150,13 @@ chain = prompt | llm
 await chain.ainvoke({"country": "France"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='The capital of France is Paris.', additional_kwargs={}, response_metadata={'finish_reason': 'stop', 'usage': {'acceptance_rate': 1, 'completion_tokens': 7, 'completion_tokens_after_first_per_sec': 442.126212227688, 'completion_tokens_after_first_per_sec_first_ten': 0, 'completion_tokens_per_sec': 46.28540439646366, 'end_time': 1731535343.0321083, 'is_last_response': True, 'prompt_tokens': 42, 'start_time': 1731535342.8808727, 'time_to_first_token': 0.137664794921875, 'total_latency': 0.15123558044433594, 'total_tokens': 49, 'total_tokens_per_sec': 323.99783077524563}, 'model_name': 'Meta-Llama-3.1-70B-Instruct', 'system_fingerprint': 'fastcoe', 'created': 1731535342}, id='c4b8c714-df38-4206-9aa8-fc8231f7275a')
 ```
 
 ## Async streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -175,18 +171,17 @@ async for chunk in chain.astream({"num_words": 30, "topic": "quantum computers"}
     print(chunk.content, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Quantum computers use quantum bits (qubits) to process info, leveraging superposition and entanglement to perform calculations exponentially faster than classical computers for certain complex problems.
 ```
 
 ## Tool calling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from datetime import datetime
 
 from langchain.messages import HumanMessage, ToolMessage
 from langchain.tools import tool
-
 
 @tool
 def get_time(kind: str = "both") -> str:
@@ -207,9 +202,7 @@ def get_time(kind: str = "both") -> str:
         time = datetime.now().strftime("%H:%M:%S")
         return f"Current date: {date}, Current time: {time}"
 
-
 tools = [get_time]
-
 
 def invoke_tools(tool_calls, messages):
     available_functions = {tool.name: tool for tool in tools}
@@ -221,7 +214,7 @@ def invoke_tools(tool_calls, messages):
     return messages
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm_with_tools = llm.bind_tools(tools=tools)
 messages = [
     HumanMessage(
@@ -231,7 +224,7 @@ messages = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = llm_with_tools.invoke(messages)
 while len(response.tool_calls) > 0:
     print(f"Intermediate model response: {response.tool_calls}")
@@ -242,7 +235,7 @@ while len(response.tool_calls) > 0:
 print(f"final response: {response.content}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Intermediate model response: [{'name': 'get_time', 'args': {'kind': 'date'}, 'id': 'call_7352ce7a18e24a7c9d', 'type': 'tool_call'}]
 Tool output: Current date: 11/13/2024
 final response: The meeting should be scheduled for two weeks from November 13th, 2024.
@@ -250,9 +243,8 @@ final response: The meeting should be scheduled for two weeks from November 13th
 
 ## Structured outputs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class Joke(BaseModel):
     """Joke to tell user."""
@@ -260,19 +252,18 @@ class Joke(BaseModel):
     setup: str = Field(description="The setup of the joke")
     punchline: str = Field(description="The punchline to the joke")
 
-
 structured_llm = llm.with_structured_output(Joke)
 
 structured_llm.invoke("Tell me a joke about cats")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Joke(setup='Why did the cat join a band?', punchline='Because it wanted to be the purr-cussionist!')
 ```
 
 ## Input image
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 multimodal_llm = ChatSambaNova(
     model="Llama-4-Maverick-17B-128E-Instruct",
     max_tokens=1024,
@@ -281,7 +272,7 @@ multimodal_llm = ChatSambaNova(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 
 import httpx
@@ -304,7 +295,7 @@ response = multimodal_llm.invoke([message])
 print(response.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The weather in this image is a serene and peaceful atmosphere, with a blue sky and white clouds, suggesting a pleasant day with mild temperatures and gentle breezes.
 ```
 
@@ -316,12 +307,8 @@ For detailed documentation of all `SambaNova` features and configurations head t
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/sambanova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

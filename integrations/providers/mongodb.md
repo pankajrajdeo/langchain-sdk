@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MongoDB integrations
 
 > Integrate with MongoDB using LangChain Python.
@@ -14,15 +10,13 @@ Install `langchain-mongodb` for both self-managed and Atlas integration points. 
 
 Install the Python package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-mongodb
-  ```
+```bash
+pip install langchain-mongodb
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-mongodb
-  ```
-</CodeGroup>
+```bash
+uv add langchain-mongodb
+```
 
 ### Get your MongoDB connection string
 
@@ -37,7 +31,7 @@ MongoDB Atlas is MongoDB's fully managed cloud database, available on AWS, Azure
 
 Example connection string:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 MONGODB_ATLAS_URI = "mongodb+srv://<username>:<password>@<cluster-url>/"
 ```
 
@@ -52,7 +46,7 @@ To determine the right connection string format for your deployment type, see th
 
 Example local connection string:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 MONGODB_URI = "mongodb://localhost:27017/"
 ```
 
@@ -62,7 +56,7 @@ MONGODB_URI = "mongodb://localhost:27017/"
 
 `MongoDBCache` stores LLM responses in MongoDB without requiring a search index or an Atlas deployment. It works with both self-managed and Atlas deployments.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_mongodb.cache import MongoDBCache
 ```
 
@@ -74,18 +68,14 @@ The following integrations require MongoDB Atlas. You can use MongoDB Atlas with
 * **Retrievers**: `MongoDBAtlasFullTextSearchRetriever` and `MongoDBAtlasHybridSearchRetriever` support full-text and combined vector + keyword retrieval workflows.
 * **Semantic cache**: `MongoDBAtlasSemanticCache` retrieves cached LLM responses based on semantic similarity, backed by Atlas Vector Search.
 
-See the [MongoDB Atlas integrations](/oss/python/integrations/providers/mongodb_atlas) page for imports and usage examples.
+See the [MongoDB Atlas integrations](https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas) page for imports and usage examples.
 
-For a detailed walkthrough of vector store setup, index creation, semantic search, and more, see the [MongoDB Atlas vector store](/oss/python/integrations/vectorstores/mongodb_atlas) guide.
+For a detailed walkthrough of vector store setup, index creation, semantic search, and more, see the [MongoDB Atlas vector store](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas) guide.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/mongodb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

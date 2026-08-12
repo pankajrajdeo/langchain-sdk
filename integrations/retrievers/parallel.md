@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ParallelSearchRetriever integration
 
 > Integrate with the ParallelSearchRetriever retriever using LangChain Python.
 
-[`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) is a LangChain [`BaseRetriever`](/oss/python/deepagents/retrieval) backed by [Parallel](https://platform.parallel.ai/)'s [Search API](https://docs.parallel.ai/search/search-quickstart). It returns `list[Document]` with rich `metadata` (`url`, `title`, `publish_date`, `search_id`, `excerpts`, `query`) and slots into any RAG pipeline.
+[`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) is a LangChain [`BaseRetriever`](https://docs.langchain.com/oss/python/deepagents/retrieval) backed by [Parallel](https://platform.parallel.ai/)'s [Search API](https://docs.parallel.ai/search/search-quickstart). It returns `list[Document]` with rich `metadata` (`url`, `title`, `publish_date`, `search_id`, `excerpts`, `query`) and slots into any RAG pipeline.
 
-<Note>
-  Looking for an LLM-callable tool that returns the raw search response instead of `Document`s? See [ParallelSearchTool](/oss/python/integrations/tools/parallel_search).
-</Note>
+> [!NOTE]
+> Looking for an LLM-callable tool that returns the raw search response instead of `Document`s? See [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search).
 
 ## Overview
 
@@ -18,27 +13,25 @@
 
 | Class                                                                                                                     | Package                                                                            | JS support |                                                                                                                   Package latest                                                                                                                   |
 | :------------------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------- | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |      ❌     | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ## Setup
 
 The integration lives in the `langchain-parallel` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -48,7 +41,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ParallelSearchRetriever
 
 retriever = ParallelSearchRetriever(
@@ -61,14 +54,14 @@ retriever = ParallelSearchRetriever(
 
 Each returned `Document` has its excerpts joined into `page_content` and exposes the source URL, title, and publish date in `metadata`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = retriever.invoke("breakthroughs in fusion energy 2025")
 for d in docs:
     print(d.metadata.get("title"), "—", d.metadata.get("url"))
     print(d.page_content[:200], "...\n")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Net energy gain in fusion: NIF results — https://www.nature.com/articles/...
 The National Ignition Facility achieved net energy gain on December 5, 2022 ...
 
@@ -80,7 +73,7 @@ SPARC is on track for first plasma in 2026 ...
 
 Pass an `objective` for a richer retrieval target alongside the keyword `search_queries`. The retriever forwards source and fetch policies to the underlying Search API.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 configured = ParallelSearchRetriever(
     max_results=5,
     excerpts={"max_chars_per_result": 1500},
@@ -97,7 +90,7 @@ docs = configured.invoke(
 
 ### Async
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = await retriever.ainvoke("Latest GLP-1 trial results 2025")
 ```
 
@@ -105,7 +98,7 @@ docs = await retriever.ainvoke("Latest GLP-1 trial results 2025")
 
 `ParallelSearchRetriever` plugs into any LangChain chain:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -139,12 +132,8 @@ For detailed documentation, head to the [`ParallelSearchRetriever`](https://refe
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

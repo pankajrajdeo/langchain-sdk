@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatCerebras integration
 
 > Integrate with the ChatCerebras chat model using LangChain Python.
 
-This guide provides a quick overview for getting started with Cerebras [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatCerebras` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras).
+This guide provides a quick overview for getting started with Cerebras [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatCerebras` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras).
 
 At Cerebras, we've developed the world's largest and fastest AI processor, the Wafer-Scale Engine-3 (WSE-3). The Cerebras CS-3 system, powered by the WSE-3, represents a new class of AI supercomputer that sets the standard for generative AI training and inference with unparalleled performance and scalability.
 
@@ -32,13 +28,13 @@ For more information about Cerebras Cloud, visit [cloud.cerebras.ai](https://clo
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools/) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
 ## Setup
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-cerebras
 ```
 
@@ -50,7 +46,7 @@ Get an API Key from [cloud.cerebras.ai](https://cloud.cerebras.ai/) and add it t
 export CEREBRAS_API_KEY="your-api-key-here"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -58,13 +54,13 @@ if "CEREBRAS_API_KEY" not in os.environ:
     os.environ["CEREBRAS_API_KEY"] = getpass.getpass("Enter your Cerebras API key: ")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Enter your Cerebras API key:  ········
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -73,7 +69,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Cerebras integration lives in the `langchain-cerebras` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-cerebras
 ```
 
@@ -81,7 +77,7 @@ pip install -qU langchain-cerebras
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cerebras import ChatCerebras
 
 llm = ChatCerebras(
@@ -92,7 +88,7 @@ llm = ChatCerebras(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -104,13 +100,13 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='Je adore le programmation.', response_metadata={'token_usage': {'completion_tokens': 7, 'prompt_tokens': 35, 'total_tokens': 42}, 'model_name': 'llama3-8b-8192', 'system_fingerprint': 'fp_be27ec77ff', 'finish_reason': 'stop'}, id='run-e5d66faf-019c-4ac6-9265-71093b13202d-0', usage_metadata={'input_tokens': 35, 'output_tokens': 7, 'total_tokens': 42})
 ```
 
 ## Streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cerebras import ChatCerebras
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -129,7 +125,7 @@ for chunk in chain.stream({"animal": "Lion"}):
     print(chunk.content, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 OH BOY! Let me tell you all about LIONS!
 
 Lions are the kings of the jungle! They're really big and have beautiful, fluffy manes around their necks. The mane is like a big, golden crown!
@@ -149,7 +145,7 @@ So, that's lions! Aren't they just the coolest?
 
 ## Async
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cerebras import ChatCerebras
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -170,13 +166,13 @@ chain = prompt | llm
 await chain.ainvoke({"topic": "fire"})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='Ice', response_metadata={'token_usage': {'completion_tokens': 2, 'prompt_tokens': 36, 'total_tokens': 38}, 'model_name': 'llama3-8b-8192', 'system_fingerprint': 'fp_be27ec77ff', 'finish_reason': 'stop'}, id='run-7434bdde-1bec-44cf-827b-8d978071dfe8-0', usage_metadata={'input_tokens': 36, 'output_tokens': 2, 'total_tokens': 38})
 ```
 
 ## Async streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cerebras import ChatCerebras
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -199,7 +195,7 @@ async for chunk in chain.astream({"num_paragraphs": 3, "subject": "blackholes"})
     print(chunk.content, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 In the distant reaches of the cosmos, there existed a peculiar phenomenon known as the "Eclipse of Eternity," a swirling vortex of darkness that had been shrouded in mystery for eons. It was said that this blackhole, born from the cataclysmic collision of two ancient stars, had been slowly devouring the fabric of space-time itself, warping the very essence of reality. As the celestial bodies of the galaxy danced around it, they began to notice a strange, almost imperceptible distortion in the fabric of space, as if the blackhole's gravitational pull was exerting an influence on the very course of events itself.
 
 As the centuries passed, astronomers from across the galaxy became increasingly fascinated by the Eclipse of Eternity, pouring over ancient texts and scouring the cosmos for any hint of its secrets. One such scholar, a brilliant and reclusive astrophysicist named Dr. Elara Vex, became obsessed with unraveling the mysteries of the blackhole. She spent years pouring over ancient texts, deciphering cryptic messages and hidden codes that hinted at the existence of a long-lost civilization that had once thrived in the heart of the blackhole itself. According to legend, this ancient civilization had possessed knowledge of the cosmos that was beyond human comprehension, and had used their mastery of the universe to create the Eclipse of Eternity as a gateway to other dimensions.
@@ -215,12 +211,8 @@ For detailed documentation of all `ChatCerebras` features and configurations hea
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/cerebras.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

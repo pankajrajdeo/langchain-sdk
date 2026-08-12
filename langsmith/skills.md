@@ -1,44 +1,36 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith skills
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/skills)
+Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
 
-> Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
+Agent Skills are reusable, on‑demand capabilities that bundle instructions plus optional helper scripts. This page summarizes the LangSmith‑oriented skills you can add to a compatible coding agent to query traces, generate datasets, and define evaluators. To work with the same LangSmith data directly from the terminal, use the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli).
 
-Agent Skills are reusable, on‑demand capabilities that bundle instructions plus optional helper scripts. This page summarizes the LangSmith‑oriented skills you can add to a compatible coding agent to query traces, generate datasets, and define evaluators. To work with the same LangSmith data directly from the terminal, use the [LangSmith CLI](/langsmith/langsmith-cli).
-
-<Note>
-  These skills follow the Agent Skills specification and are maintained in the [`langsmith-skills` GitHub repository](https://github.com/langchain-ai/langsmith-skills). You can copy the `SKILL.md` and any referenced `scripts/` into your agent’s skills directory. The installers below only install the LangSmith skills (trace, dataset, evaluator).
-</Note>
+> [!NOTE]
+> These skills follow the Agent Skills specification and are maintained in the [`langsmith-skills` GitHub repository](https://github.com/langchain-ai/langsmith-skills). You can copy the `SKILL.md` and any referenced `scripts/` into your agent’s skills directory. The installers below only install the LangSmith skills (trace, dataset, evaluator).
 
 ## Quick install
 
 Install only the LangSmith skills (trace, dataset, evaluator) using `npx skills`:
 
-<CodeGroup>
-  ```bash Local (current project) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npx skills add langchain-ai/langsmith-skills --skill '*' --yes
-  ```
+```bash
+npx skills add langchain-ai/langsmith-skills --skill '*' --yes
+```
 
-  ```bash Global (all projects) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npx skills add langchain-ai/langsmith-skills --skill '*' --yes --global
-  ```
+```bash
+npx skills add langchain-ai/langsmith-skills --skill '*' --yes --global
+```
 
-  ```bash Link to a specific agent (e.g., Claude Code) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npx skills add langchain-ai/langsmith-skills --agent claude-code --skill '*' --yes --global
-  ```
-</CodeGroup>
+```bash
+npx skills add langchain-ai/langsmith-skills --agent claude-code --skill '*' --yes --global
+```
 
-<Tip>
-  To update, re‑run the command. If target skill folders already exist, remove them first (e.g., `rm -rf ~/.claude/skills/langsmith-*`).
-</Tip>
+> [!TIP]
+> To update, re‑run the command. If target skill folders already exist, remove them first (e.g., `rm -rf ~/.claude/skills/langsmith-*`).
 
 ## Configure environment
 
-After installing the skills, set environment variables used by all LangSmith skills, helper scripts, and the [LangSmith CLI](/langsmith/langsmith-cli):
+After installing the skills, set environment variables used by all LangSmith skills, helper scripts, and the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_API_KEY=<your-key>
 # Optional defaults
 export LANGSMITH_PROJECT=<default-project>
@@ -48,17 +40,17 @@ export LANGSMITH_PROJECT=<default-project>
 
 ## What these skills cover
 
-* [Traces](/langsmith/observability-concepts#traces): Add tracing to apps; list, filter, inspect, and export traces for debugging and analysis.
-* [Datasets](/langsmith/evaluation-concepts#datasets): Turn traces into evaluation datasets (final\_response, single\_step, trajectory, RAG) and optionally upload to LangSmith.
-* [Evaluators](/langsmith/evaluation-concepts#evaluators): Define code or LLM‑as‑judge evaluators and attach them to datasets (offline) or projects (online).
+* [Traces](https://docs.langchain.com/langsmith/observability-concepts#traces): Add tracing to apps; list, filter, inspect, and export traces for debugging and analysis.
+* [Datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets): Turn traces into evaluation datasets (final\_response, single\_step, trajectory, RAG) and optionally upload to LangSmith.
+* [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators): Define code or LLM‑as‑judge evaluators and attach them to datasets (offline) or projects (online).
 
-Each skill directory ships with a `SKILL.md` plus optional `scripts/` helpers you can run or adapt. These skills are designed to plug into compatible coding agents (such as Claude Code or Deep Agents Code), though you can also reuse the helper scripts directly if you prefer not to wire up a full agent. For heavier querying, exports, or automation, you can pair these skills with the [LangSmith CLI](/langsmith/langsmith-cli) to script against the same projects, datasets, and evaluators from your terminal.
+Each skill directory ships with a `SKILL.md` plus optional `scripts/` helpers you can run or adapt. These skills are designed to plug into compatible coding agents (such as Claude Code or Deep Agents Code), though you can also reuse the helper scripts directly if you prefer not to wire up a full agent. For heavier querying, exports, or automation, you can pair these skills with the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli) to script against the same projects, datasets, and evaluators from your terminal.
 
 ## Manual install
 
 Clone the repo and run the install script for more options:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 git clone https://github.com/langchain-ai/langsmith-skills.git
 cd langsmith-skills
 
@@ -88,12 +80,8 @@ Included LangSmith skills:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

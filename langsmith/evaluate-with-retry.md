@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to retry failed runs in experiments (Python only)
-
-When running [evaluations](/langsmith/evaluation-concepts#evaluation-lifecycle) on large [datasets](/langsmith/evaluation-concepts#datasets), you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire evaluation, you can identify and retry only the failed examples on an [experiment](/langsmith/evaluation-concepts#experiment).
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-with-retry)
+When running [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) on large [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire evaluation, you can identify and retry only the failed examples on an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment).
 
 This guide shows an approach to build retry logic into your evaluation workflow and to retry only the failed examples. You can use the `error_handling='ignore'` parameter to skip logging errored runs, then automatically identify unsuccessful examples and re-run them in Python.
 
@@ -12,7 +8,7 @@ This guide shows an approach to build retry logic into your evaluation workflow 
 
 Run the initial evaluation, ignoring errors to  prevent errored runs from being logged:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import Client
 
 client = Client()
@@ -31,7 +27,7 @@ results = await client.aevaluate(
 
 Fetch all the unsuccessful examples:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Identify unsuccessful examples
 runs = client.list_runs(project_name=results.experiment_name)
 successful_example_ids = [r.reference_example_id for r in runs]
@@ -40,7 +36,7 @@ unsuccessful_examples = (e for e in client.list_examples(dataset_name="dataset")
 
 Next, re-run all the failed examples and log them to the same experiment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Retry only the failed examples, log
 results_retry = await client.aevaluate(
     target,
@@ -53,20 +49,16 @@ results_retry = await client.aevaluate(
 
 ## Related topics
 
-* [Run an evaluation](/langsmith/evaluate-llm-application)
-* [Run an evaluation asynchronously](/langsmith/evaluation-async)
-* [Handle model rate limits](/langsmith/handle-model-rate-limiting)
-* [Experiment configuration](/langsmith/experiment-configuration)
-* [Evaluate existing experiment](/langsmith/evaluate-existing-experiment)
+* [Run an evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application)
+* [Run an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async)
+* [Handle model rate limits](https://docs.langchain.com/langsmith/handle-model-rate-limiting)
+* [Experiment configuration](https://docs.langchain.com/langsmith/experiment-configuration)
+* [Evaluate existing experiment](https://docs.langchain.com/langsmith/evaluate-existing-experiment)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-retry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluate-with-retry.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

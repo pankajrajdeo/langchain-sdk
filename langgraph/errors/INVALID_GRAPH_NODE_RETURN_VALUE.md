@@ -1,13 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # INVALID_GRAPH_NODE_RETURN_VALUE
 
 A LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph)
 received a non-dict return type from a node. Here's an example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 class State(TypedDict):
     some_key: str
 
@@ -24,7 +20,7 @@ graph = builder.compile()
 
 Invoking the above graph will result in an error like this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.invoke({ "some_key": "someval" });
 ```
 
@@ -43,12 +39,8 @@ The following may help resolve this error:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

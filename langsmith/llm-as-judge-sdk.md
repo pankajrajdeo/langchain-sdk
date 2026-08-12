@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to define an LLM-as-a-judge evaluator
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-as-judge-sdk)
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 
-This guide shows you how to define an [LLM-as-a-judge evaluator](/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](/langsmith/evaluation-concepts#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
+This guide shows you how to define an [LLM-as-a-judge evaluator](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
-<Tip>
-  For a quick start, use [openevals](/langsmith/openevals), which provides ready-to-use LLM-as-a-judge evaluators.
-</Tip>
+> [!TIP]
+> For a quick start, use [openevals](https://docs.langchain.com/langsmith/openevals), which provides ready-to-use LLM-as-a-judge evaluators.
 
 ## Create your own LLM-as-a-judge evaluator
 
@@ -26,7 +21,7 @@ An LLM-as-a-judge evaluator consists of three key components:
 
 ### Example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import evaluate, traceable, wrappers, Client
 from openai import OpenAI
 from pydantic import BaseModel
@@ -84,16 +79,12 @@ results = evaluate(
 )
 ```
 
-For more information on how to write a custom evaluator, refer to [How to define a code evaluator (SDK)](/langsmith/code-evaluator-sdk).
+For more information on how to write a custom evaluator, refer to [How to define a code evaluator (SDK)](https://docs.langchain.com/langsmith/code-evaluator-sdk).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-as-judge-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

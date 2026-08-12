@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add instructions to Managed Deep Agents
-
-> Define the system prompt for a Managed Deep Agent in instructions.md.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-instructions)
+Define the system prompt for a Managed Deep Agent in instructions.md.
 
 Instructions define the agent's behavior. They make up the core of the agent's system prompt. You can define them in a simple markdown file and they are picked up automatically by the agent.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 The `instructions.md` file lives at the project root:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.py
   instructions.md
@@ -26,7 +21,7 @@ my-agent/
 
 Create or modify `instructions.md`:
 
-```markdown instructions.md theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```markdown
 # Assistant
 
 You are a helpful assistant.
@@ -40,20 +35,16 @@ Instructions are inserted into the agents system prompt on every run. They are a
 
 ## Syncing to Context Hub
 
-When you run `mda deploy` to deploy the agent, instructions are automatically synced to the agent's [Context Hub](/langsmith/use-the-context-hub) repo. You can then edit the instructions in the LangSmith UI and have your changes automatically propagated to the agent.
+When you run `mda deploy` to deploy the agent, instructions are automatically synced to the agent's [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) repo. You can then edit the instructions in the LangSmith UI and have your changes automatically propagated to the agent.
 
 ## How instructions compare to other concepts
 
-Use [skills](/langsmith/python/managed-deep-agents-skills) for task-specific procedures that the agent loads only when relevant. Use [memory](/langsmith/python/managed-deep-agents-memory) for knowledge the agent learns and retains across threads.
+Use [skills](https://docs.langchain.com/langsmith/python/managed-deep-agents-skills) for task-specific procedures that the agent loads only when relevant. Use [memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory) for knowledge the agent learns and retains across threads.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-instructions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-instructions.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

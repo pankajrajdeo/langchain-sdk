@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # CrateDB integrations
 
 > Integrate with CrateDB using LangChain Python.
@@ -23,7 +19,7 @@ choose other [CrateDB installation options].
 Example: Run a single-node CrateDB instance with security disabled,
 using Docker or Podman. This is not recommended for production use.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run --name=cratedb --rm \
   --publish=4200:4200 --publish=5432:5432 --env=CRATE_HEAP_SIZE=2g \
   crate:latest -Cdiscovery.type=single-node
@@ -39,15 +35,13 @@ docker run --name=cratedb --rm \
 Install the most recent version of the [langchain-cratedb] package
 and a few others that are needed for this tutorial.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-cratedb langchain-openai unstructured
-  ```
+```bash
+pip install -U langchain-cratedb langchain-openai unstructured
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-cratedb langchain-openai unstructured
-  ```
-</CodeGroup>
+```bash
+uv add langchain-cratedb langchain-openai unstructured
+```
 
 ## Documentation
 
@@ -67,15 +61,14 @@ for similarity search and other purposes. See also [CrateDBVectorStore Tutorial]
 
 Make sure you've configured a valid OpenAI API key.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export OPENAI_API_KEY=sk-XJZ...
 ```
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import UnstructuredURLLoader
 from langchain_cratedb import CrateDBVectorStore
 from langchain_openai import OpenAIEmbeddings
@@ -109,11 +102,10 @@ Load documents from a CrateDB database table, using the document loader
 
 To use the document loader in your applications:
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sqlalchemy as sa
 from langchain_community.utilities import SQLDatabase
 from langchain_cratedb import CrateDBLoader
@@ -137,7 +129,7 @@ See also [CrateDBChatMessageHistory Tutorial].
 
 To use the chat message history in your applications:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cratedb import CrateDBChatMessageHistory
 
 # Connect to a self-managed CrateDB instance on localhost.
@@ -159,7 +151,7 @@ See also [CrateDBCache Example].
 
 To use the full cache in your applications:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sqlalchemy as sa
 from langchain_core.globals import set_llm_cache
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -189,7 +181,7 @@ See also [CrateDBSemanticCache Example].
 
 To use the semantic cache in your applications:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sqlalchemy as sa
 from langchain_core.globals import set_llm_cache
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -242,12 +234,8 @@ print(answer.content)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cratedb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cratedb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

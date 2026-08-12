@@ -1,22 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Agent Server API reference for LangSmith Deployment
-
-The Agent Server API reference is available within each [deployment](/langsmith/deployment) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-api-ref)
+The Agent Server API reference is available within each [deployment](https://docs.langchain.com/langsmith/deployment) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
 
 Browse the full API reference in the **Agent Server API** section in the sidebar, or see the endpoint groups below:
 
-* [Assistants](/langsmith/agent-server-api/assistants) - Configured instances of a graph
-* [Threads](/langsmith/agent-server-api/threads) - Accumulated outputs of a group of runs
-* [Thread Runs](/langsmith/agent-server-api/thread-runs) - Invocations of a graph/assistant on a thread
-* [Stateless Runs](/langsmith/agent-server-api/stateless-runs) - Invocations with no state persistence
-* [Crons](/langsmith/agent-server-api/crons) - Periodic runs on a schedule
-* [Store](/langsmith/agent-server-api/store) - Persistent key-value store for long-term memory
-* [A2A](/langsmith/agent-server-api/a2a) - Agent-to-Agent Protocol endpoints
-* [MCP](/langsmith/agent-server-api/mcp) - Model Context Protocol endpoints
-* [System](/langsmith/agent-server-api/system) - Health checks and server info
+* [Assistants](https://docs.langchain.com/langsmith/agent-server-api/assistants) - Configured instances of a graph
+* [Threads](https://docs.langchain.com/langsmith/agent-server-api/threads) - Accumulated outputs of a group of runs
+* [Thread Runs](https://docs.langchain.com/langsmith/agent-server-api/thread-runs) - Invocations of a graph/assistant on a thread
+* [Stateless Runs](https://docs.langchain.com/langsmith/agent-server-api/stateless-runs) - Invocations with no state persistence
+* [Crons](https://docs.langchain.com/langsmith/agent-server-api/crons) - Periodic runs on a schedule
+* [Store](https://docs.langchain.com/langsmith/agent-server-api/store) - Persistent key-value store for long-term memory
+* [A2A](https://docs.langchain.com/langsmith/agent-server-api/a2a) - Agent-to-Agent Protocol endpoints
+* [MCP](https://docs.langchain.com/langsmith/agent-server-api/mcp) - Model Context Protocol endpoints
+* [System](https://docs.langchain.com/langsmith/agent-server-api/system) - Health checks and server info
 
 ## Authentication
 
@@ -24,7 +20,7 @@ For deployments to LangSmith, authentication is required. Pass the `X-Api-Key` h
 
 Example `curl` command:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 curl --request POST \
   --url http://localhost:8124/assistants/search \
   --header 'Content-Type: application/json' \
@@ -38,12 +34,8 @@ curl --request POST \
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-api-ref.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/server-api-ref.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

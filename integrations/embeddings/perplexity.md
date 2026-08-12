@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # PerplexityEmbeddings integration
 
 > Integrate with Perplexity's embedding models using LangChain Python.
@@ -24,7 +20,7 @@ To access Perplexity embedding models you'll need to create a Perplexity account
 
 Head to [https://www.perplexity.ai/account/api/keys](https://www.perplexity.ai/account/api/keys) to sign up for the Perplexity API and generate an API key. Once you've done this, set the `PPLX_API_KEY` (or `PERPLEXITY_API_KEY`) environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -32,9 +28,9 @@ if not os.getenv("PPLX_API_KEY"):
     os.environ["PPLX_API_KEY"] = getpass.getpass("Enter your Perplexity API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -43,7 +39,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 The LangChain Perplexity integration lives in the `langchain-perplexity` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-perplexity
 ```
 
@@ -51,7 +47,7 @@ pip install -qU langchain-perplexity
 
 Now we can instantiate our embedding model object and generate embeddings:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexityEmbeddings
 
 embeddings = PerplexityEmbeddings(
@@ -66,11 +62,11 @@ Available models include `pplx-embed-v1-4b` (default) and `pplx-embed-v1-0.6b`. 
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a vector store with a sample text
 from langchain_core.vectorstores import InMemoryVectorStore
 
@@ -91,7 +87,7 @@ retrieved_documents = retriever.invoke("What is LangChain?")
 retrieved_documents[0].page_content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'LangChain is the framework for building context-aware reasoning applications'
 ```
 
@@ -105,7 +101,7 @@ You can directly call these methods to get embeddings for your own use cases.
 
 You can embed single texts or documents with `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = embeddings.embed_query(text)
 print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 ```
@@ -114,7 +110,7 @@ print(str(single_vector)[:100])  # Show the first 100 characters of the vector
 
 You can embed multiple texts with `embed_documents`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text2 = (
     "LangGraph is a library for building stateful, multi-actor applications with LLMs"
 )
@@ -127,14 +123,13 @@ for vector in two_vectors:
 
 `PerplexityEmbeddings` also exposes async methods:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 single_vector = await embeddings.aembed_query(text)
 two_vectors = await embeddings.aembed_documents([text, text2])
 ```
 
-<Note>
-  Perplexity returns base64-encoded signed int8 embeddings. `PerplexityEmbeddings` decodes these into `list[float]` values in the range `[-128, 127]`. The magnitude is preserved from the API's quantized output; cosine similarity is unaffected by the lack of unit-length normalization.
-</Note>
+> [!NOTE]
+> Perplexity returns base64-encoded signed int8 embeddings. `PerplexityEmbeddings` decodes these into `list[float]` values in the range `[-128, 127]`. The magnitude is preserved from the API's quantized output; cosine similarity is unaffected by the lack of unit-length normalization.
 
 ***
 
@@ -144,12 +139,8 @@ For detailed documentation on `PerplexityEmbeddings` features and configuration 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/perplexity.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

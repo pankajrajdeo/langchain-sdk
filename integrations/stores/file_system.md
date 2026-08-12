@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LocalFileStore integration
 
 > Integrate with the LocalFileStore store using LangChain Python.
 
-This will help you get started with local filesystem [key-value stores](/oss/python/integrations/stores). For detailed documentation of all `LocalFileStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-classic/storage/file_system/LocalFileStore).
+This will help you get started with local filesystem [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `LocalFileStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-classic/storage/file_system/LocalFileStore).
 
 ## Overview
 
@@ -22,7 +18,7 @@ The `LocalFileStore` is a persistent implementation of `ByteStore` that stores e
 
 The LangChain `LocalFileStore` integration lives in the `langchain` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-classic
 ```
 
@@ -30,7 +26,7 @@ pip install -qU langchain-classic
 
 Now we can instantiate our byte store:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pathlib import Path
 
 from langchain_classic.storage import LocalFileStore
@@ -44,7 +40,7 @@ kv_store = LocalFileStore(root_path)
 
 You can set data under keys like this using the `mset` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mset(
     [
         ["key1", b"value1"],
@@ -60,23 +56,23 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [b'value1', b'value2']
 ```
 
 You can see the created files in your `data` folder:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !ls {root_path}
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 key1 key2
 ```
 
 And you can delete data using the `mdelete` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mdelete(
     [
         "key1",
@@ -92,7 +88,7 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [None, None]
 ```
 
@@ -104,12 +100,8 @@ For detailed documentation of all `LocalFileStore` features and configurations, 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/file_system.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/file_system.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Evaluate Managed Deep Agents
-
-> Create and run Harbor evals for Managed Deep Agents.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals)
+Create and run Harbor evals for Managed Deep Agents.
 
 Managed Deep Agents evals are [Harbor](https://www.harborframework.com/docs/tasks) evals. `evals/tasks/` is the canonical Harbor dataset. Author complete tasks there with Harbor's task format, environments, and verifiers.
 
 The `mda evals` commands do not introduce a separate eval format or run trials. They package the managed agent for Harbor and can optionally turn a minimal starter task under `evals/scaffold/` into a complete task under `evals/tasks/`.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Keep all eval files under one top-level `evals/` directory:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
 ├── agent.py
 └── evals/                          # Harbor workspace
@@ -30,13 +25,12 @@ my-agent/
 
 An optional scaffold has a one-way relationship with its canonical Harbor task:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 evals/scaffold/<task>/ → mda evals compile → evals/tasks/<task>/
 ```
 
-<Note>
-  `evals/scaffold/` is not a second eval system. Harbor runs the tasks under `evals/tasks/`. Use scaffolding only when you want MDA to create a minimal starting point.
-</Note>
+> [!NOTE]
+> `evals/scaffold/` is not a second eval system. Harbor runs the tasks under `evals/tasks/`. Use scaffolding only when you want MDA to create a minimal starting point.
 
 ## Choose an authoring workflow
 
@@ -49,19 +43,18 @@ Use one of the following ways to populate the canonical Harbor dataset:
 
 * A Managed Deep Agents project created with `mda init`, or an existing project with an agent entry.
 * [Docker](https://docs.docker.com/get-docker/) running locally when using Harbor's default `docker` environment.
-* The `mda` CLI from `managed-deepagents`. See the [CLI reference](/langsmith/python/managed-deep-agents-cli#install).
+* The `mda` CLI from `managed-deepagents`. See the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#install).
 * [Harbor](https://www.harborframework.com/docs) on your `PATH`, or [`uv`](https://docs.astral.sh/uv/) so you can run `uv run --with harbor …`.
 * Model and tool credentials exported in the shell that runs Harbor.
 
-<Note>
-  Harbor does not load values from the project `.env` file. When MDA generates a Harbor job config, it writes `${VAR}` placeholders for eligible `.env` keys, not their values. Export the required variables before you run Harbor.
-</Note>
+> [!NOTE]
+> Harbor does not load values from the project `.env` file. When MDA generates a Harbor job config, it writes `${VAR}` placeholders for eligible `.env` keys, not their values. Export the required variables before you run Harbor.
 
 ## Author Harbor evals directly
 
 Use Harbor's complete task format when you need full control. A task can define its instruction, environment, verifier, metadata, and other Harbor configuration:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 evals/
   tasks/
     my-task/
@@ -93,7 +86,7 @@ MDA scaffolds the task from an instruction and a Python test.
 
 Run the following command from the Managed Deep Agents project root:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda evals init smoke
 ```
 
@@ -101,7 +94,7 @@ The task name can contain ASCII letters, numbers, `_`, and `-`. Run the command 
 
 The command creates the following layout:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 evals/
   scaffold/
     smoke/
@@ -112,9 +105,8 @@ evals/
 
 The starter task asks the agent to write `answer.txt` containing `PONG`. Replace the instruction and test with behavior that represents your application.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pathlib import Path
-
 
 def test_answer_is_pong():
     assert Path("/app/answer.txt").read_text().strip() == "PONG"
@@ -124,13 +116,13 @@ def test_answer_is_pong():
 
 Compile every scaffold under `evals/scaffold/`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda evals compile .
 ```
 
 To refresh specific scaffolds, repeat `--task`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda evals compile . --task smoke --task regression
 ```
 
@@ -142,9 +134,8 @@ For each selected scaffold, MDA:
 
 Unselected tasks under `evals/tasks/` are preserved, including tasks authored directly as Harbor tasks. The generated Harbor job uses all tasks under `evals/tasks/` as its dataset.
 
-<Warning>
-  Treat `evals/scaffold/<name>/` as the source of truth for a scaffolded task. Compiling that scaffold replaces the entire matching `evals/tasks/<name>/` directory, including changes made only to the canonical copy.
-</Warning>
+> [!WARNING]
+> Treat `evals/scaffold/<name>/` as the source of truth for a scaffolded task. Compiling that scaffold replaces the entire matching `evals/tasks/<name>/` directory, including changes made only to the canonical copy.
 
 You can add Harbor files such as `task.toml`, `environment/`, or a custom `tests/test.sh` to a scaffold under `evals/scaffold/<name>/`. MDA copies them into the canonical Harbor task during compilation.
 
@@ -173,7 +164,7 @@ Check in the Harbor definitions and configuration under `evals/` that your proje
 
 `mda evals compile` prints a Harbor command configured for the compiled agent. Export the variables listed in the compile summary, then run the command from the project root:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export OPENAI_API_KEY="<OPENAI_API_KEY>"
 
 PYTHONPATH=evals/harbor-adapter \
@@ -188,18 +179,14 @@ Running the same command again resumes the jobs directory referenced by the conf
 
 ## Next steps
 
-* [CLI reference](/langsmith/python/managed-deep-agents-cli): Review all `mda evals` commands and flags.
-* [Deploy an agent](/langsmith/python/managed-deep-agents-deploy): Deploy the agent after its evals pass.
+* [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli): Review all `mda evals` commands and flags.
+* [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy): Deploy the agent after its evals pass.
 * [Harbor documentation](https://www.harborframework.com/docs): Configure tasks, environments, jobs, and verifiers.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-evals.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

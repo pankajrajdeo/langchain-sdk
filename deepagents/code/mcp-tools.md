@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MCP tools
-
-> Load additional tools from MCP (Model Context Protocol) servers
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
+Load additional tools from MCP (Model Context Protocol) servers
 
 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) lets you extend Deep Agents Code with tools from external servers—file systems, APIs, databases, and more—without modifying the agent itself. Deep Agents Code connects to MCP servers at startup, discovers their tools, and makes them available to the agent alongside the built-in tools.
 
@@ -19,74 +15,64 @@ This quickstart adds the LangChain MCP servers to every Deep Agents Code session
 | `docs-langchain`      | `https://docs.langchain.com/mcp`      | Conceptual guides, how-tos, and tutorials                 |
 | `reference-langchain` | `https://reference.langchain.com/mcp` | Canonical API reference: classes, methods, and parameters |
 
-<Steps>
-  <Step title="Create the config file" icon="file">
-    If it is not already present, create the `.mcp.json` file at the user level to make the server available to every project on the machine, or at the project level.
+### Create the config file
+If it is not already present, create the `.mcp.json` file at the user level to make the server available to every project on the machine, or at the project level.
 
-    <Tabs>
-      <Tab title="User">
-        ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        mkdir -p ~/.deepagents
-        touch ~/.deepagents/.mcp.json
-        ```
+#### User
+```bash
+mkdir -p ~/.deepagents
+touch ~/.deepagents/.mcp.json
+```
 
-        Servers in this file (`~/.deepagents/.mcp.json`) are available in every project on this machine.
-      </Tab>
+Servers in this file (`~/.deepagents/.mcp.json`) are available in every project on this machine.
 
-      <Tab title="Project">
-        ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        touch .mcp.json
-        ```
+#### Project
+```bash
+touch .mcp.json
+```
 
-        Servers in this file (`<project>/.mcp.json`) are available to this project.
-      </Tab>
+Servers in this file (`<project>/.mcp.json`) are available to this project.
 
-      <Tab title="Project (hidden)">
-        ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-        mkdir -p .deepagents
-        touch .deepagents/.mcp.json
-        ```
+#### Project (hidden)
+```bash
+mkdir -p .deepagents
+touch .deepagents/.mcp.json
+```
 
-        Servers in this file (`<project>/.deepagents/.mcp.json`) are available to this project but kept out of the repo root.
-      </Tab>
-    </Tabs>
+Servers in this file (`<project>/.deepagents/.mcp.json`) are available to this project but kept out of the repo root.
 
-    See [Discovery locations](#discovery-locations) for full precedence rules.
-  </Step>
+See [Discovery locations](https://docs.langchain.com/oss/deepagents/code/mcp-tools#discovery-locations) for full precedence rules.
 
-  <Step title="Add the MCP servers" icon="plug">
-    ```json title="~/.deepagents/.mcp.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    {
-        "mcpServers": {
-            "docs-langchain": {
-                "type": "http",
-                "url": "https://docs.langchain.com/mcp"
-            },
-            "reference-langchain": {
-                "type": "http",
-                "url": "https://reference.langchain.com/mcp"
-            }
+### Add the MCP servers
+```json
+{
+    "mcpServers": {
+        "docs-langchain": {
+            "type": "http",
+            "url": "https://docs.langchain.com/mcp"
+        },
+        "reference-langchain": {
+            "type": "http",
+            "url": "https://reference.langchain.com/mcp"
         }
     }
-    ```
+}
+```
 
-    To add more servers, add more entries to `mcpServers`. See [Configuration format](#configuration-format) for OAuth, stdio, SSE, and HTTP server fields, environment variables, and headers.
-  </Step>
+To add more servers, add more entries to `mcpServers`. See [Configuration format](https://docs.langchain.com/oss/deepagents/code/mcp-tools#configuration-format) for OAuth, stdio, SSE, and HTTP server fields, environment variables, and headers.
 
-  <Step title="Launch Deep Agents Code" icon="terminal">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    dcode
-    ```
+### Launch Deep Agents Code
+```bash
+dcode
+```
 
-    On startup, Deep Agents Code auto-discovers the config, connects to each server, discovers its tools, and prints a confirmation:
+On startup, Deep Agents Code auto-discovers the config, connects to each server, discovers its tools, and prints a confirmation:
 
-    ```
-    ✓ Loaded 3 MCP tools
-    ```
+```
+✓ Loaded 3 MCP tools
+```
 
-    Run `/mcp` in an interactive session to see per-server status, transport, and the loaded tool list. The agent can now use those tools for the duration of the session—stdio servers are kept alive between tool calls.
-  </Step>
-</Steps>
+Run `/mcp` in an interactive session to see per-server status, transport, and the loaded tool list. The agent can now use those tools for the duration of the session—stdio servers are kept alive between tool calls.
 
 ## Auto-discovery
 
@@ -113,9 +99,8 @@ When multiple config files exist, their `mcpServers` entries are merged by serve
 | `--mcp-config PATH` | Add an explicit config as the highest-precedence source (merged on top of auto-discovered configs) |
 | `--no-mcp`          | Disable MCP entirely—no servers are loaded                                                         |
 
-<Note>
-  `--mcp-config` and `--no-mcp` are mutually exclusive.
-</Note>
+> [!NOTE]
+> `--mcp-config` and `--no-mcp` are mutually exclusive.
 
 ### Claude Code compatibility
 
@@ -129,7 +114,7 @@ Each key under `mcpServers` is a server name. The server's fields determine how 
 
 stdio servers are spawned as child processes. Deep Agents Code communicates with them over stdin/stdout.
 
-```json title="mcp-config.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "filesystem": {
@@ -150,7 +135,7 @@ stdio servers are spawned as child processes. Deep Agents Code communicates with
 
 For remote MCP servers, set `type` to `"sse"` or `"http"` and provide a `url`:
 
-```json title="mcp-config.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "remote-api": {
@@ -164,77 +149,71 @@ For remote MCP servers, set `type` to `"sse"` or `"http"` and provide a `url`:
 
 ### Field reference
 
-<AccordionGroup>
-  <Accordion title="stdio (default)">
-    **Required:** `command`. **Optional:** `args`, `env`, plus the shared [tool-filter fields](#tool-filtering).
+<details>
+<summary>stdio (default)</summary>
 
-    <ResponseField name="command" type="string" required>
-      The executable to run.
-    </ResponseField>
+**Required:** `command`. **Optional:** `args`, `env`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
 
-    <ResponseField name="args" type="string[]">
-      Arguments passed to the command.
-    </ResponseField>
+#### `command` — `string`
+The executable to run.
 
-    <ResponseField name="env" type="object">
-      Environment variables set for the subprocess. Use this to pass API keys and other credentials without exposing them in shell history.
-    </ResponseField>
-  </Accordion>
+#### `args` — `string[]`
+Arguments passed to the command.
 
-  <Accordion title="sse">
-    **Required:** `type: "sse"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](#tool-filtering).
+#### `env` — `object`
+Environment variables set for the subprocess. Use this to pass API keys and other credentials without exposing them in shell history.
 
-    <ResponseField name="type" type="&#x22;sse&#x22;" required>
-      Transport type. Use `"sse"` for Server-Sent Events.
-    </ResponseField>
+</details>
 
-    <ResponseField name="url" type="string" required>
-      The server endpoint URL.
-    </ResponseField>
+<details>
+<summary>sse</summary>
 
-    <ResponseField name="headers" type="object">
-      HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
-    </ResponseField>
+**Required:** `type: "sse"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
 
-    <ResponseField name="auth" type="&#x22;oauth&#x22;">
-      Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](#oauth-login).
-    </ResponseField>
-  </Accordion>
+#### `type` — `&#x22;sse&#x22;`
+Transport type. Use `"sse"` for Server-Sent Events.
 
-  <Accordion title="http">
-    **Required:** `type: "http"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](#tool-filtering).
+#### `url` — `string`
+The server endpoint URL.
 
-    <ResponseField name="type" type="&#x22;http&#x22;" required>
-      Transport type. Use `"http"` for streamable HTTP. `streamable_http` and `streamable-http` are accepted as aliases.
-    </ResponseField>
+#### `headers` — `object`
+HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
 
-    <ResponseField name="url" type="string" required>
-      The server endpoint URL.
-    </ResponseField>
+#### `auth` — `&#x22;oauth&#x22;`
+Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](https://docs.langchain.com/oss/deepagents/code/mcp-tools#oauth-login).
 
-    <ResponseField name="headers" type="object">
-      HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
-    </ResponseField>
+</details>
 
-    <ResponseField name="auth" type="&#x22;oauth&#x22;">
-      Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](#oauth-login).
-    </ResponseField>
-  </Accordion>
-</AccordionGroup>
+<details>
+<summary>http</summary>
 
-<Note>
-  The `type` field can also be written as `transport` for compatibility with other MCP clients.
-</Note>
+**Required:** `type: "http"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
 
-<Note>
-  Server names must match `[A-Za-z0-9_-]+`. Names are used as on-disk basenames for OAuth token files, so path separators and other shell metacharacters are rejected at config load.
-</Note>
+#### `type` — `&#x22;http&#x22;`
+Transport type. Use `"http"` for streamable HTTP. `streamable_http` and `streamable-http` are accepted as aliases.
+
+#### `url` — `string`
+The server endpoint URL.
+
+#### `headers` — `object`
+HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
+
+#### `auth` — `&#x22;oauth&#x22;`
+Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](https://docs.langchain.com/oss/deepagents/code/mcp-tools#oauth-login).
+
+</details>
+
+> [!NOTE]
+> The `type` field can also be written as `transport` for compatibility with other MCP clients.
+
+> [!NOTE]
+> Server names must match `[A-Za-z0-9_-]+`. Names are used as on-disk basenames for OAuth token files, so path separators and other shell metacharacters are rejected at config load.
 
 ### Header environment variables
 
 Header values support `${VAR}` substitution from the parent shell, resolved at server activation rather than at config load. One unset variable only fails the server that needs it; the rest still come up.
 
-```json title=".mcp.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "mcpServers": {
         "internal-api": {
@@ -250,7 +229,7 @@ Header values support `${VAR}` substitution from the parent shell, resolved at s
 
 You can configure as many servers as you need. Tools from all servers are merged and available to the agent:
 
-```json title="mcp-config.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "filesystem": {
@@ -283,7 +262,7 @@ Filtering applies to stdio, HTTP, and SSE servers alike. Both of the following a
 * Setting `allowedTools` and `disabledTools` on the same server.
 * Setting either field to an empty list (would silently strip every tool, or be a no-op). Omit the field instead.
 
-```json title=".mcp.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "mcpServers": {
     "filesystem": {
@@ -304,27 +283,24 @@ Filtering applies to stdio, HTTP, and SSE servers alike. Both of the following a
 
 Each entry is a literal tool name or an [`fnmatch`](https://docs.python.org/3/library/fnmatch.html)-style glob (any entry containing `*`, `?`, or `[` is treated as a pattern). Entries are matched against both the bare MCP tool name and the server-prefixed form (`{server}_{tool}`), so either form works:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "allowedTools": ["read_file", "fs_list_*"]
 }
 ```
 
-<Note>
-  Entries that match no loaded tool are logged as a warning, not an error — the underlying MCP server can evolve its tool list across versions without breaking your config.
-</Note>
+> [!NOTE]
+> Entries that match no loaded tool are logged as a warning, not an error — the underlying MCP server can evolve its tool list across versions without breaking your config.
 
-<ResponseField name="allowedTools" type="string[]">
-  Tool names or `fnmatch` glob patterns to keep. All other tools from this server are dropped. Mutually exclusive with `disabledTools`.
-</ResponseField>
+#### `allowedTools` — `string[]`
+Tool names or `fnmatch` glob patterns to keep. All other tools from this server are dropped. Mutually exclusive with `disabledTools`.
 
-<ResponseField name="disabledTools" type="string[]">
-  Tool names or `fnmatch` glob patterns to drop. All other tools from this server are kept. Mutually exclusive with `allowedTools`.
-</ResponseField>
+#### `disabledTools` — `string[]`
+Tool names or `fnmatch` glob patterns to drop. All other tools from this server are kept. Mutually exclusive with `allowedTools`.
 
 ### Read-only tool annotations in Auto mode
 
-MCP servers can attach standard `ToolAnnotations` when advertising a tool. Deep Agents Code lets a tool bypass classifier review in [Auto approval mode](/oss/deepagents/code/approval-modes) only when all of the following are true:
+MCP servers can attach standard `ToolAnnotations` when advertising a tool. Deep Agents Code lets a tool bypass classifier review in [Auto approval mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) only when all of the following are true:
 
 * `readOnlyHint` is the literal Boolean `true`.
 * `destructiveHint` is absent, `null`, or `false`.
@@ -338,7 +314,7 @@ For remote MCP servers that require OAuth (Slack, GitHub, Notion, Linear, and ot
 
 ### Configure the server
 
-```json title=".mcp.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "mcpServers": {
         "linear": {
@@ -352,9 +328,9 @@ For remote MCP servers that require OAuth (Slack, GitHub, Notion, Linear, and ot
 
 `auth: "oauth"` is mutually exclusive with an `Authorization` header on the same entry, and cannot be set on a stdio server.
 
-To connect Deep Agents Code to LangSmith, use the [LangSmith Remote MCP](/langsmith/langsmith-remote-mcp):
+To connect Deep Agents Code to LangSmith, use the [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp):
 
-```json title=".mcp.json" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "mcpServers": {
         "langsmith": {
@@ -368,7 +344,7 @@ To connect Deep Agents Code to LangSmith, use the [LangSmith Remote MCP](/langsm
 
 ### Run the login flow
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 dcode mcp login linear
 ```
 
@@ -380,27 +356,25 @@ What happens depends on the server's host:
 
 By default, `dcode mcp login` reads the same auto-discovered configs Deep Agents Code uses at runtime (subject to project-level trust gating). Pass `--mcp-config <path>` to use a specific file:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 dcode mcp login linear --mcp-config ./mcp-config.json
 ```
 
-<Warning>
-  Project-level configs that have not been trusted (see [Project-level trust](#project-level-trust)) are skipped during `mcp login` to prevent attacker-controlled `headers` entries from exfiltrating local secrets through `${VAR}` interpolation. Run `dcode` in the project and choose `Allow for this project — until changed` to save an approval, or pass `--mcp-config <path>` explicitly.
-</Warning>
+> [!WARNING]
+> Project-level configs that have not been trusted (see [Project-level trust](https://docs.langchain.com/oss/deepagents/code/mcp-tools#project-level-trust)) are skipped during `mcp login` to prevent attacker-controlled `headers` entries from exfiltrating local secrets through `${VAR}` interpolation. Run `dcode` in the project and choose `Allow for this project — until changed` to save an approval, or pass `--mcp-config <path>` explicitly.
 
 ### Token storage
 
 Tokens are written to:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ~/.deepagents/.state/mcp-tokens/<server>-<sha256-16(url)>.json
 ```
 
 The `<sha256-16(url)>` segment is the first 16 hex characters of the SHA-256 of the server URL. The directory is locked to mode `0700` and each token file is mode `0600`. Files include the OAuth access token, refresh token, and the dynamically registered client info, all in a schema-versioned payload that's written atomically (write-to-temp + `rename`).
 
-<Note>
-  Hashing the URL into the filename means the same server name pointing at different URLs (for example, dev vs. prod) gets independent token files and can't trample each other.
-</Note>
+> [!NOTE]
+> Hashing the URL into the filename means the same server name pointing at different URLs (for example, dev vs. prod) gets independent token files and can't trample each other.
 
 ### Re-authentication
 
@@ -422,9 +396,8 @@ A single failing server no longer aborts startup. The agent runs with whichever 
 
 Project-level configs can contain stdio servers that execute local commands and remote servers whose `headers` may interpolate `${VAR}` from your environment. To prevent untrusted repositories from running arbitrary code or exfiltrating local secrets on CLI startup, Deep Agents Code enforces a **default-deny** policy for project-level entries.
 
-<Note>
-  Saved project MCP approvals and the per-server allow and deny policy require `deepagents-code>=0.1.40`.
-</Note>
+> [!NOTE]
+> Saved project MCP approvals and the per-server allow and deny policy require `deepagents-code>=0.1.40`.
 
 ### How it works
 
@@ -441,7 +414,7 @@ Project-level configs can contain stdio servers that execute local commands and 
 | --------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `--trust-project-mcp` | Trust project-level servers without prompting for the current run. Servers denied by user policy remain disabled. |
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Skip the approval prompt
 dcode --trust-project-mcp
 
@@ -453,7 +426,7 @@ dcode -n "run tests" --trust-project-mcp
 
 Saved approvals are stored in `~/.deepagents/config.toml`:
 
-```toml title="~/.deepagents/config.toml" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```toml
 [mcp]
 enabled_project_server_approvals = [
   { project_root = "/Users/you/myproject", name = "docs-langchain", fingerprint = "sha256:abc123..." }
@@ -472,9 +445,8 @@ For automation that must pre-approve project MCP servers by name, set `DEEPAGENT
 
 `deepagents-code>=0.1.40` ignores the former `DEEPAGENTS_CODE_ENABLED_PROJECT_MCP_SERVERS` variable. Replace it with `DEEPAGENTS_CODE_DANGEROUSLY_ENABLE_PROJECT_MCP_SERVERS` if you need the same name-based behavior.
 
-<Warning>
-  A trusted stdio MCP server runs with the permissions of your user account. Approving a remote server allows Deep Agents Code to contact its URL during pre-flight and send its configured headers. Only approve servers from repositories you trust, and review the commands and URLs shown in the approval prompt.
-</Warning>
+> [!WARNING]
+> A trusted stdio MCP server runs with the permissions of your user account. Approving a remote server allows Deep Agents Code to contact its URL during pre-flight and send its configured headers. Only approve servers from repositories you trust, and review the commands and URLs shown in the approval prompt.
 
 ## System prompt awareness
 
@@ -482,52 +454,64 @@ Connected MCP servers and their tools are automatically listed in the agent's sy
 
 ## Troubleshooting
 
-<AccordionGroup>
-  <Accordion title="Server fails to start (stdio)">
-    Verify the command works outside Deep Agents Code:
+<details>
+<summary>Server fails to start (stdio)</summary>
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    npx -y @modelcontextprotocol/server-filesystem /tmp
-    ```
+Verify the command works outside Deep Agents Code:
 
-    Common causes: the package isn't installed, `npx` isn't on `PATH`, or required environment variables are missing.
-  </Accordion>
+```bash
+npx -y @modelcontextprotocol/server-filesystem /tmp
+```
 
-  <Accordion title="Connection refused (SSE/HTTP)">
-    Check that the remote server is running and the URL is correct. If the server requires authentication, make sure `headers` includes the correct credentials.
-  </Accordion>
+Common causes: the package isn't installed, `npx` isn't on `PATH`, or required environment variables are missing.
 
-  <Accordion title="Tools not appearing">
-    Deep Agents Code prints the number of tools loaded at startup (e.g., `✓ Loaded 3 MCP tools`). If you see `0`, the server started successfully but didn't advertise any tools—check the server's own logs or documentation.
-  </Accordion>
+</details>
 
-  <Accordion title="Server shows `unauthenticated` in /mcp">
-    Either you haven't run `dcode mcp login <server>` yet, or the persisted refresh token expired or was revoked server-side. Run the login command again — your session keeps running and the server will re-attach once tokens are refreshed.
-  </Accordion>
+<details>
+<summary>Connection refused (SSE/HTTP)</summary>
 
-  <Accordion title="`Invalid MCP config at ...`">
-    A pre-flight validation rejected `--mcp-config` (or an auto-discovered `.mcp.json`). Common causes: an unsupported server name (must match `[A-Za-z0-9_-]+`), `auth: oauth` on a stdio server, both `command` and `url` set on the same entry, or a header value that isn't a string. Fix the highlighted reason and relaunch — Deep Agents Code no longer dumps a multi-page subprocess trace for config errors.
-  </Accordion>
+Check that the remote server is running and the URL is correct. If the server requires authentication, make sure `headers` includes the correct credentials.
 
-  <Accordion title="`${VAR}` header references fail">
-    Header interpolation runs at activation time, so an unset variable only fails the server that needs it. Export the variable in the parent shell or add it to `~/.deepagents/.env`. To debug, set `DEEPAGENTS_CODE_DEBUG=1` and inspect the per-session log path printed to stderr on shutdown.
-  </Accordion>
-</AccordionGroup>
+</details>
+
+<details>
+<summary>Tools not appearing</summary>
+
+Deep Agents Code prints the number of tools loaded at startup (e.g., `✓ Loaded 3 MCP tools`). If you see `0`, the server started successfully but didn't advertise any tools—check the server's own logs or documentation.
+
+</details>
+
+<details>
+<summary>Server shows `unauthenticated` in /mcp</summary>
+
+Either you haven't run `dcode mcp login <server>` yet, or the persisted refresh token expired or was revoked server-side. Run the login command again — your session keeps running and the server will re-attach once tokens are refreshed.
+
+</details>
+
+<details>
+<summary>`Invalid MCP config at ...`</summary>
+
+A pre-flight validation rejected `--mcp-config` (or an auto-discovered `.mcp.json`). Common causes: an unsupported server name (must match `[A-Za-z0-9_-]+`), `auth: oauth` on a stdio server, both `command` and `url` set on the same entry, or a header value that isn't a string. Fix the highlighted reason and relaunch — Deep Agents Code no longer dumps a multi-page subprocess trace for config errors.
+
+</details>
+
+<details>
+<summary>`${VAR}` header references fail</summary>
+
+Header interpolation runs at activation time, so an unset variable only fails the server that needs it. Export the variable in the parent shell or add it to `~/.deepagents/.env`. To debug, set `DEEPAGENTS_CODE_DEBUG=1` and inspect the per-session log path printed to stderr on shutdown.
+
+</details>
 
 ## Further reading
 
-* [LangSmith Remote MCP](/langsmith/langsmith-remote-mcp): connect Deep Agents Code to LangSmith tools over OAuth
-* [LangChain MCP guide](/oss/python/langchain/mcp): protocol details, building custom servers, and using `langchain-mcp-adapters` programmatically
+* [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp): connect Deep Agents Code to LangSmith tools over OAuth
+* [LangChain MCP guide](https://docs.langchain.com/oss/python/langchain/mcp): protocol details, building custom servers, and using `langchain-mcp-adapters` programmatically
 * [MCP specification](https://modelcontextprotocol.io/): the official protocol spec and server registry
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/mcp-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/mcp-tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

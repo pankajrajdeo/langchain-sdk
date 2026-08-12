@@ -1,14 +1,9 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # FIPS-compliant images
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-fips)
+Run self-hosted LangSmith installation on FIPS 140 compliant container images
 
-> Run self-hosted LangSmith installation on FIPS 140 compliant container images
-
-<Note>
-  FIPS and airgapped LangSmith deployments require a conversation with your LangChain account executive before rollout. Reach out to scope licensing, supported configurations, and upgrade paths before you change your installation.
-</Note>
+> [!NOTE]
+> FIPS and airgapped LangSmith deployments require a conversation with your LangChain account executive before rollout. Reach out to scope licensing, supported configurations, and upgrade paths before you change your installation.
 
 As of v15, every LangChain-authored LangSmith image has a `-fips` counterpart that runs in FIPS 140 mode. Use these images when your self-hosted deployment needs FIPS compliance, for example in federal agencies, defense contractors, and regulated industries.
 
@@ -25,13 +20,12 @@ Every LangChain-authored image has a `-fips` counterpart published at the same t
 | `langchain/langsmith-frontend`    | `langchain/langsmith-frontend-fips`    |
 | `langchain/langgraph-operator`    | `langchain/langgraph-operator-fips`    |
 
-<Note>
-  **Fewer images from LangSmith 0.16.21 (chart `0.16.0-rc.17`) onward.** The platform backend, playground, host backend, and the Fleet tool and trigger servers now all run from the single `langsmith-backend` image, so `langsmith-go-backend-fips`, `langsmith-playground-fips`, `hosted-langserve-backend-fips`, `agent-builder-tool-server-fips`, and `agent-builder-trigger-server-fips` are no longer needed. The corresponding `values.yaml` keys: `platformBackendImage`, `playgroundImage`, `hostBackendImage`, `fleetToolServerImage`, and `fleetTriggerServerImage`, have been removed from the chart; any values you still set for them are ignored.
+> [!NOTE]
+> **Fewer images from LangSmith 0.16.21 (chart `0.16.0-rc.17`) onward.** The platform backend, playground, host backend, and the Fleet tool and trigger servers now all run from the single `langsmith-backend` image, so `langsmith-go-backend-fips`, `langsmith-playground-fips`, `hosted-langserve-backend-fips`, `agent-builder-tool-server-fips`, and `agent-builder-trigger-server-fips` are no longer needed. The corresponding `values.yaml` keys: `platformBackendImage`, `playgroundImage`, `hostBackendImage`, `fleetToolServerImage`, and `fleetTriggerServerImage`, have been removed from the chart; any values you still set for them are ignored.
+>
+> On **earlier** versions those five images are published with `-fips` counterparts at the same tag as well; point each of those keys at its `-fips` repository too.
 
-  On **earlier** versions those five images are published with `-fips` counterparts at the same tag as well; point each of those keys at its `-fips` repository too.
-</Note>
-
-PostgreSQL, Redis, and ClickHouse are not published as FIPS variants by LangChain. If your deployment requires FIPS for these components, bring your own FIPS-mode service and connect via [external Postgres](/langsmith/self-host-external-postgres), [external Redis](/langsmith/self-host-external-redis), or [external ClickHouse](/langsmith/self-host-external-clickhouse).
+PostgreSQL, Redis, and ClickHouse are not published as FIPS variants by LangChain. If your deployment requires FIPS for these components, bring your own FIPS-mode service and connect via [external Postgres](https://docs.langchain.com/langsmith/self-host-external-postgres), [external Redis](https://docs.langchain.com/langsmith/self-host-external-redis), or [external ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse).
 
 ### ACE backend FIPS boundary note
 
@@ -41,9 +35,9 @@ We consider this acceptable for regulated environments: FIPS governs the platfor
 
 ## Use FIPS images
 
-Update `values.yaml` in your LangSmith Helm installation to point each LangChain image repository at its `-fips` counterpart, keeping your existing tag. Replace `0.16.21` with the [LangSmith version](/langsmith/self-hosted-changelog) you want to deploy:
+Update `values.yaml` in your LangSmith Helm installation to point each LangChain image repository at its `-fips` counterpart, keeping your existing tag. Replace `0.16.21` with the [LangSmith version](https://docs.langchain.com/langsmith/self-hosted-changelog) you want to deploy:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 images:
   aceBackendImage:
     repository: "langchain/langsmith-ace-backend-fips"
@@ -63,7 +57,7 @@ images:
     tag: "0.16.21"
 ```
 
-Apply the change and upgrade following the [Upgrading LangSmith](/langsmith/self-host-upgrades) guide.
+Apply the change and upgrade following the [Upgrading LangSmith](https://docs.langchain.com/langsmith/self-host-upgrades) guide.
 
 ## Verify FIPS mode
 
@@ -71,13 +65,13 @@ Chainguard ships the `openssl-fips-test` tool inside every FIPS image. Running i
 
 Check a running pod:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 kubectl exec <pod-name> -- openssl-fips-test
 ```
 
 Expected output (abridged):
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Checking OpenSSL lifecycle assurance.
 	✓ Self-test KAT_Integrity HMAC ... passed.
 	✓ Self-test Module_Integrity HMAC ... passed.
@@ -96,7 +90,7 @@ Locate applicable CMVP certificate(s) at: CMVP #4985
 
 You can also verify an image outside Kubernetes:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run --rm --entrypoint openssl-fips-test langchain/langsmith-backend-fips:0.16.21
 ```
 
@@ -104,16 +98,12 @@ For more detail on interpreting the output, see [Chainguard's FIPS verification 
 
 ## Mirror for airgapped deployments
 
-The `-fips` naming convention applies identically when mirroring images to a private registry. Follow the [image mirroring guide](/langsmith/self-host-mirroring-images) and substitute each repository with its `-fips` counterpart. Airgapped rollouts, with or without FIPS, require scoping with your LangChain account executive before you begin.
+The `-fips` naming convention applies identically when mirroring images to a private registry. Follow the [image mirroring guide](https://docs.langchain.com/langsmith/self-host-mirroring-images) and substitute each repository with its `-fips` counterpart. Airgapped rollouts, with or without FIPS, require scoping with your LangChain account executive before you begin.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-fips.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-fips.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

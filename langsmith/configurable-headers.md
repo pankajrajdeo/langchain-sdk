@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Use HTTP headers for runtime configuration
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configurable-headers)
+LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment-quickstart), you can pass this configuration in the request body (`config`) or specific request headers. This enables adjustments based on user identity or other requests.
 
-LangGraph allows runtime configuration to modify agent behavior and permissions dynamically. When using [LangSmith Deployment](/langsmith/deployment-quickstart), you can pass this configuration in the request body (`config`) or specific request headers. This enables adjustments based on user identity or other requests.
-
-For privacy, control which headers are passed to the runtime configuration via the `http.configurable_headers` section in your [`langgraph.json`](/langsmith/application-structure#configuration-file) file.
+For privacy, control which headers are passed to the runtime configuration via the `http.configurable_headers` section in your [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file) file.
 
 Here's how to customize the included and excluded headers:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "http": {
     "configurable_headers": {
@@ -27,7 +23,7 @@ The `includes` and `excludes` lists accept exact header names or patterns using 
 
 You can access the included headers in your graph using the `config` argument of any node.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def my_node(state, config):
   organization_id = config["configurable"].get("x-organization-id")
   ...
@@ -35,7 +31,7 @@ def my_node(state, config):
 
 Or by fetching from context (useful in tools and or within other nested functions).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.config import get_config
 
 def search_everything(query: str):
@@ -45,7 +41,7 @@ def search_everything(query: str):
 
 You can even use this to dynamically compile the graph.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # my_graph.py.
 import contextlib
 
@@ -61,7 +57,7 @@ async def generate_agent(config):
 
 ```
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "graphs": {"agent": "my_grph.py:generate_agent"}
 }
@@ -71,7 +67,7 @@ async def generate_agent(config):
 
 If you'd like to opt-out of configurable headers, you can simply set a wildcard pattern in the `s` list:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "http": {
     "configurable_headers": {
@@ -87,12 +83,8 @@ Note that exclusions take precedence over inclusions.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configurable-headers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/configurable-headers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Elasticsearch integration
 
 > Integrate with the Elasticsearch retriever using LangChain Python.
@@ -10,11 +6,11 @@
 
 The `ElasticsearchRetriever` is a generic wrapper to enable flexible access to all `Elasticsearch` features through the [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).  For most use cases the other classes (`ElasticsearchStore`, `ElasticsearchEmbeddings`, etc.) should suffice, but if they don't you can use `ElasticsearchRetriever`.
 
-This guide will help you get started with the Elasticsearch [retriever](/oss/python/deepagents/retrieval). For detailed documentation of all `ElasticsearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/retrievers/ElasticsearchRetriever).
+This guide will help you get started with the Elasticsearch [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). For detailed documentation of all `ElasticsearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/retrievers/ElasticsearchRetriever).
 
 ### Integration details
 
-<ItemTable category="document_retrievers" item="ElasticsearchRetriever" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/retrievers/elasticsearch_retriever).
 
 ## Setup
 
@@ -25,26 +21,25 @@ There are two main ways to set up an Elasticsearch instance:
 
 * Local Install Elasticsearch: Get started with Elasticsearch by running it locally. The easiest way is to use the official Elasticsearch Docker image. See the [Elasticsearch Docker documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html) for more information.
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
 
 ### Installation
 
-This retriever lives in the `langchain-elasticsearch` package. For demonstration purposes, we will also install `langchain-community` to generate text [embeddings](/oss/python/integrations/embeddings).
+This retriever lives in the `langchain-elasticsearch` package. For demonstration purposes, we will also install `langchain-community` to generate text [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings).
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-community langchain-elasticsearch
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from typing import Any, Dict, Iterable
 
 from elasticsearch import Elasticsearch
@@ -59,21 +54,21 @@ from langchain_elasticsearch import ElasticsearchRetriever
 
 Here we define the connection to Elasticsearch. In this example we use a locally running instance. Alternatively, you can make an account in [Elastic Cloud](https://cloud.elastic.co/) and start a [free trial](https://www.elastic.co/cloud/cloud-trial-overview).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 es_url = "http://localhost:9200"
 es_client = Elasticsearch(hosts=[es_url])
 es_client.info()
 ```
 
-For vector search, we are going to use random embeddings just for illustration. For real use cases, pick one of the available LangChain [Embeddings](/oss/python/integrations/embeddings) classes.
+For vector search, we are going to use random embeddings just for illustration. For real use cases, pick one of the available LangChain [Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings) classes.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embeddings = DeterministicFakeEmbedding(size=3)
 ```
 
 #### Define example data
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 index_name = "test-langchain-retriever"
 text_field = "text"
 dense_vector_field = "fake_embedding"
@@ -93,7 +88,7 @@ texts = [
 
 Typically, users make use of `ElasticsearchRetriever` when they already have data in an Elasticsearch index. Here we index some example text documents. If you created an index for example using `ElasticsearchStore.from_documents` that's also fine.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def create_index(
     es_client: Elasticsearch,
     index_name: str,
@@ -111,7 +106,6 @@ def create_index(
             }
         },
     )
-
 
 def index_data(
     es_client: Elasticsearch,
@@ -147,11 +141,11 @@ def index_data(
     return len(requests)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 index_data(es_client, index_name, text_field, dense_vector_field, embeddings, texts)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 7
 ```
 
@@ -161,7 +155,7 @@ index_data(es_client, index_name, text_field, dense_vector_field, embeddings, te
 
 Dense vector retrieval using fake embeddings in this example.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def vector_query(search_query: str) -> Dict:
     vector = embeddings.embed_query(search_query)  # same embeddings as for indexing
     return {
@@ -173,7 +167,6 @@ def vector_query(search_query: str) -> Dict:
         }
     }
 
-
 vector_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
     body_func=vector_query,
@@ -184,7 +177,7 @@ vector_retriever = ElasticsearchRetriever.from_es_params(
 vector_retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'_index': 'test-langchain-index', '_id': '0', '_score': 1.0, '_source': {'fake_embedding': [-2.336764233933763, 0.27510289545940503, -0.7957597268194339], 'num_characters': 3}}),
  Document(page_content='world', metadata={'_index': 'test-langchain-index', '_id': '2', '_score': 0.6770179, '_source': {'fake_embedding': [-0.7041151202179595, -1.4652961969276497, -0.25786766898672847], 'num_characters': 5}}),
  Document(page_content='hello world', metadata={'_index': 'test-langchain-index', '_id': '3', '_score': 0.4816144, '_source': {'fake_embedding': [0.42728413221815387, -1.1889908285425348, -1.445433230084671], 'num_characters': 11}}),
@@ -196,7 +189,7 @@ vector_retriever.invoke("foo")
 
 Traditional keyword matching.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def bm25_query(search_query: str) -> Dict:
     return {
         "query": {
@@ -205,7 +198,6 @@ def bm25_query(search_query: str) -> Dict:
             },
         },
     }
-
 
 bm25_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
@@ -217,7 +209,7 @@ bm25_retriever = ElasticsearchRetriever.from_es_params(
 bm25_retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'_index': 'test-langchain-index', '_id': '0', '_score': 0.9711467, '_source': {'fake_embedding': [-2.336764233933763, 0.27510289545940503, -0.7957597268194339], 'num_characters': 3}}),
  Document(page_content='foo bar', metadata={'_index': 'test-langchain-index', '_id': '5', '_score': 0.7437035, '_source': {'fake_embedding': [0.2533670476638539, 0.08100381646160418, 0.7763644080870179], 'num_characters': 7}}),
  Document(page_content='bla bla foo', metadata={'_index': 'test-langchain-index', '_id': '6', '_score': 0.6025789, '_source': {'fake_embedding': [1.7365927060137358, -0.5230400847844948, 0.7978339724186192], 'num_characters': 11}})]
@@ -227,7 +219,7 @@ bm25_retriever.invoke("foo")
 
 The combination of vector search and BM25 search using [Reciprocal Rank Fusion](https://www.elastic.co/guide/en/elasticsearch/reference/current/rrf.html) (RRF) to combine the result sets.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def hybrid_query(search_query: str) -> Dict:
     vector = embeddings.embed_query(search_query)  # same embeddings as for indexing
     return {
@@ -256,7 +248,6 @@ def hybrid_query(search_query: str) -> Dict:
         }
     }
 
-
 hybrid_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
     body_func=hybrid_query,
@@ -267,7 +258,7 @@ hybrid_retriever = ElasticsearchRetriever.from_es_params(
 hybrid_retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'_index': 'test-langchain-index', '_id': '0', '_score': 0.9711467, '_source': {'fake_embedding': [-2.336764233933763, 0.27510289545940503, -0.7957597268194339], 'num_characters': 3}}),
  Document(page_content='foo bar', metadata={'_index': 'test-langchain-index', '_id': '5', '_score': 0.7437035, '_source': {'fake_embedding': [0.2533670476638539, 0.08100381646160418, 0.7763644080870179], 'num_characters': 7}}),
  Document(page_content='bla bla foo', metadata={'_index': 'test-langchain-index', '_id': '6', '_score': 0.6025789, '_source': {'fake_embedding': [1.7365927060137358, -0.5230400847844948, 0.7978339724186192], 'num_characters': 11}})]
@@ -277,7 +268,7 @@ hybrid_retriever.invoke("foo")
 
 Keyword matching with typo tolerance.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def fuzzy_query(search_query: str) -> Dict:
     return {
         "query": {
@@ -290,7 +281,6 @@ def fuzzy_query(search_query: str) -> Dict:
         },
     }
 
-
 fuzzy_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
     body_func=fuzzy_query,
@@ -301,7 +291,7 @@ fuzzy_retriever = ElasticsearchRetriever.from_es_params(
 fuzzy_retriever.invoke("fox")  # note the character tolernace
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo', metadata={'_index': 'test-langchain-index', '_id': '0', '_score': 0.6474311, '_source': {'fake_embedding': [-2.336764233933763, 0.27510289545940503, -0.7957597268194339], 'num_characters': 3}}),
  Document(page_content='foo bar', metadata={'_index': 'test-langchain-index', '_id': '5', '_score': 0.49580228, '_source': {'fake_embedding': [0.2533670476638539, 0.08100381646160418, 0.7763644080870179], 'num_characters': 7}}),
  Document(page_content='bla bla foo', metadata={'_index': 'test-langchain-index', '_id': '6', '_score': 0.40171927, '_source': {'fake_embedding': [1.7365927060137358, -0.5230400847844948, 0.7978339724186192], 'num_characters': 11}})]
@@ -311,7 +301,7 @@ fuzzy_retriever.invoke("fox")  # note the character tolernace
 
 Combination of filters on different fields.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def filter_query_func(search_query: str) -> Dict:
     return {
         "query": {
@@ -329,7 +319,6 @@ def filter_query_func(search_query: str) -> Dict:
         }
     }
 
-
 filtering_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
     body_func=filter_query_func,
@@ -340,7 +329,7 @@ filtering_retriever = ElasticsearchRetriever.from_es_params(
 filtering_retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='foo bar', metadata={'_index': 'test-langchain-index', '_id': '5', '_score': 1.7437035, '_source': {'fake_embedding': [0.2533670476638539, 0.08100381646160418, 0.7763644080870179], 'num_characters': 7}}),
  Document(page_content='world', metadata={'_index': 'test-langchain-index', '_id': '2', '_score': 1.0, '_source': {'fake_embedding': [-0.7041151202179595, -1.4652961969276497, -0.25786766898672847], 'num_characters': 5}}),
  Document(page_content='hello world', metadata={'_index': 'test-langchain-index', '_id': '3', '_score': 1.0, '_source': {'fake_embedding': [0.42728413221815387, -1.1889908285425348, -1.445433230084671], 'num_characters': 11}}),
@@ -353,7 +342,7 @@ Note that the query match is on top. The other documents that got passed the fil
 
 It is possible to customize the function that maps an Elasticsearch result (hit) to a LangChain document.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 def num_characters_mapper(hit: Dict[str, Any]) -> Document:
     num_chars = hit["_source"][num_characters_field]
     content = hit["_source"][text_field]
@@ -361,7 +350,6 @@ def num_characters_mapper(hit: Dict[str, Any]) -> Document:
         page_content=f"This document has {num_chars} characters",
         metadata={"text_content": content},
     )
-
 
 custom_mapped_retriever = ElasticsearchRetriever.from_es_params(
     index_name=index_name,
@@ -373,7 +361,7 @@ custom_mapped_retriever = ElasticsearchRetriever.from_es_params(
 custom_mapped_retriever.invoke("foo")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='This document has 7 characters', metadata={'text_content': 'foo bar'}),
  Document(page_content='This document has 5 characters', metadata={'text_content': 'world'}),
  Document(page_content='This document has 11 characters', metadata={'text_content': 'hello world'}),
@@ -392,12 +380,8 @@ For detailed documentation of all `ElasticsearchRetriever` features and configur
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/elasticsearch_retriever.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/elasticsearch_retriever.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

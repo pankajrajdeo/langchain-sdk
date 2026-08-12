@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Databricks vector search integration
 
 > Integrate with the Databricks vector search vector store using LangChain Python.
@@ -20,7 +16,7 @@ If you are running LangChain app inside Databricks, you can skip this step.
 
 Otherwise, you need manually set the Databricks workspace hostname and personal access token to `DATABRICKS_HOST` and `DATABRICKS_TOKEN` environment variables, respectively. See [Authentication Documentation](https://docs.databricks.com/en/dev-tools/auth/index.html#databricks-personal-access-tokens) for how to get an access token.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -35,7 +31,7 @@ if "DATABRICKS_TOKEN" not in os.environ:
 
 The LangChain Databricks integration lives in the `databricks-langchain` package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU databricks-langchain
 ```
 
@@ -47,7 +43,7 @@ If you already have an endpoint and an index, you can skip the section and go st
 
 First, instantiate the Databricks VectorSearch client:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from databricks.vector_search.client import VectorSearchClient
 
 client = VectorSearchClient()
@@ -55,7 +51,7 @@ client = VectorSearchClient()
 
 Next, we will create a new VectorSearch endpoint.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 endpoint_name = "<your-endpoint-name>"
 
 client.create_endpoint(name=endpoint_name, endpoint_type="STANDARD")
@@ -71,7 +67,7 @@ Also for delta-sync index, you can choose to use Databricks-managed embeddings o
 
 The following code creates a **direct-access** index. Please refer to the [Databricks documentation](https://docs.databricks.com/en/generative-ai/create-query-vector-search.html) for the instruction to create the other type of indexes.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 index_name = "<your-index-name>"  # Format: "<catalog>.<schema>.<index-name>"
 
 index = client.create_direct_access_index(
@@ -100,7 +96,7 @@ The instantiation of `DatabricksVectorSearch` is a bit different depending on wh
 
 If you are using a delta-sync index with Databricks-managed embeddings:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from databricks_langchain import DatabricksVectorSearch
 
 vector_store = DatabricksVectorSearch(
@@ -113,9 +109,9 @@ If you are using a direct-access index or a delta-sync index with self-managed e
 you also need to provide the embedding model and text column in your source table to
 use for the embeddings:
 
-<EmbeddingTabs />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/databricks_vector_search).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 from langchain_openai import OpenAIEmbeddings
@@ -123,7 +119,7 @@ from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = DatabricksVectorSearch(
     endpoint=endpoint_name,
     index_name=index_name,
@@ -139,7 +135,7 @@ vector_store = DatabricksVectorSearch(
 
 Note: Adding items to vector store via `add_documents` method is only supported for a **direct-access** index.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 document_1 = Document(page_content="foo", metadata={"source": "https://example.com"})
@@ -153,7 +149,7 @@ documents = [document_1, document_2, document_3]
 vector_store.add_documents(documents=documents, ids=["1", "2", "3"])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['1', '2', '3']
 ```
 
@@ -161,11 +157,11 @@ vector_store.add_documents(documents=documents, ids=["1", "2", "3"])
 
 Note: Deleting items to vector store via `delete` method is only supported for a **direct-access** index.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store.delete(ids=["3"])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 True
 ```
 
@@ -177,7 +173,7 @@ Once your vector store has been created and the relevant documents have been add
 
 Performing a simple similarity search can be done as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search(
     query="thud", k=1, filter={"source": "https://example.com"}
 )
@@ -185,13 +181,13 @@ for doc in results:
     print(f"* {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * foo [{'id': '1'}]
 ```
 
 Note: By default, similarity search only returns the primary key and text column. If you want to retrieve the custom metadata associated with the document, pass the additional columns in the `columns` parameter when initializing the vector store.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = DatabricksVectorSearch(
     endpoint=endpoint_name,
     index_name=index_name,
@@ -205,13 +201,13 @@ for doc in results:
     print(f"* {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * foo [{'source': 'https://example.com', 'id': '1'}]
 ```
 
 If you want to execute a similarity search and receive the corresponding scores you can run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = vector_store.similarity_search_with_score(
     query="thud", k=1, filter={"source": "https://example.com"}
 )
@@ -219,7 +215,7 @@ for doc, score in results:
     print(f"* [SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 * [SIM=0.414035] foo [{'source': 'https://example.com', 'id': '1'}]
 ```
 
@@ -227,12 +223,12 @@ for doc, score in results:
 
 You can also transform the vector store into a retriever for easier usage in your chains.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = vector_store.as_retriever(search_type="mmr", search_kwargs={"k": 1})
 retriever.invoke("thud")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'https://example.com', 'id': '1'}, page_content='foo')]
 ```
 
@@ -240,9 +236,9 @@ retriever.invoke("thud")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](/oss/python/deepagents/rag)
-* [Agentic RAG](/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
+* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 
 ***
 
@@ -252,12 +248,8 @@ For detailed documentation of all DatabricksVectorSearch features and configurat
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/databricks_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/databricks_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

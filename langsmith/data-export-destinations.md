@@ -1,26 +1,21 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage bulk export destinations
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export-destinations)
+Configure and manage S3-compatible export destinations for LangSmith bulk exports.
 
-> Configure and manage S3-compatible export destinations for LangSmith bulk exports.
+> [!NOTE]
+> **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
+>
+> Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
 
-<Note>
-  **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
-
-  Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
-</Note>
-
-A destination is a named configuration that tells LangSmith where to write exported trace data. You [create a destination](/langsmith/data-export#1-create-a-destination) once, then reference it by ID when [creating export jobs](/langsmith/data-export#2-create-an-export-job). LangSmith currently supports S3 and any S3-compatible bucket (such as GCS or MinIO) as a destination. Exported data is written in [Parquet](https://parquet.apache.org/docs/overview/) columnar format and contains equivalent fields to the [Run data format](/langsmith/run-data-format).
+A destination is a named configuration that tells LangSmith where to write exported trace data. You [create a destination](https://docs.langchain.com/langsmith/data-export#1-create-a-destination) once, then reference it by ID when [creating export jobs](https://docs.langchain.com/langsmith/data-export#2-create-an-export-job). LangSmith currently supports S3 and any S3-compatible bucket (such as GCS or MinIO) as a destination. Exported data is written in [Parquet](https://parquet.apache.org/docs/overview/) columnar format and contains equivalent fields to the [Run data format](https://docs.langchain.com/langsmith/run-data-format).
 
 This page covers:
 
-* The [configuration fields](#configuration-fields) needed to set up a destination.
-* Required bucket [permissions](#permissions-required) for AWS S3 and GCS.
-* How to [create a destination](#create-a-destination) via the API, including provider-specific examples and credential options.
-* How to [rotate destination credentials](#rotate-destination-credentials) without recreating the destination.
-* How to [debug destination errors](#debug-destination-errors).
+* The [configuration fields](https://docs.langchain.com/langsmith/data-export-destinations#configuration-fields) needed to set up a destination.
+* Required bucket [permissions](https://docs.langchain.com/langsmith/data-export-destinations#permissions-required) for AWS S3 and GCS.
+* How to [create a destination](https://docs.langchain.com/langsmith/data-export-destinations#create-a-destination) via the API, including provider-specific examples and credential options.
+* How to [rotate destination credentials](https://docs.langchain.com/langsmith/data-export-destinations#rotate-destination-credentials) without recreating the destination.
+* How to [debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
 
 ## Configuration fields
 
@@ -58,7 +53,7 @@ The minimal AWS S3 permission policy relies on the following permissions:
 
 Minimal IAM policy example:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -77,7 +72,7 @@ Minimal IAM policy example:
 
 Recommended IAM policy example with additional permissions:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -111,7 +106,7 @@ These permissions can be granted through the "Storage Object Admin" predefined r
 The following example demonstrates how to create a destination using cURL. Replace the placeholder values with your actual configuration details.
 Note that credentials will be stored securely in an encrypted form in our system.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -136,11 +131,11 @@ curl --request POST \
 
 Use the returned `id` to reference this destination in subsequent bulk export operations.
 
-**If you receive an error while creating a destination, see [Debug destination errors](#debug-destination-errors) for details on how to debug this.**
+**If you receive an error while creating a destination, see [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors) for details on how to debug this.**
 
 ### Credentials configuration
 
-<Note>**Requires LangSmith Helm version >= `0.10.34` (application version >= `0.10.91`)**</Note>
+**Requires LangSmith Helm version >= `0.10.34` (application version >= `0.10.91`)**
 
 We support the following additional credentials formats besides static `access_key_id` and `secret_access_key`:
 
@@ -154,7 +149,7 @@ We support the following additional credentials formats besides static `access_k
 
 For AWS S3, you can leave off the `endpoint_url` and supply the region that matches the region of your bucket.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -181,7 +176,7 @@ When using Google's GCS bucket, you need to use the XML S3 compatible API, and s
 which is typically `https://storage.googleapis.com`.
 Here is an example of the API request when using the GCS XML API which is compatible with S3:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -209,7 +204,7 @@ See [Google documentation](https://cloud.google.com/storage/docs/interoperabilit
 
 Some S3-compatible services (such as Volcengine TOS) require virtual-hosted style addressing, where the bucket name is part of the hostname rather than the URL path. Use `config_kwargs_s3` with `addressing_style: "virtual"` to enable this:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -237,7 +232,7 @@ curl --request POST \
 
 If your endpoint URL already includes the bucket name (virtual-hosted style), set `include_bucket_in_prefix` to `false` to avoid duplicating the bucket name in the path:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request POST \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations' \
   --header 'Content-Type: application/json' \
@@ -275,7 +270,7 @@ Plan your rotation accordingly: the old credentials must remain valid until all 
 
 ### Request
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request PATCH \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/destinations/{destination_id}' \
   --header 'Content-Type: application/json' \
@@ -291,15 +286,15 @@ curl --request PATCH \
 
 The `session_token` field is optional, which you can include for [temporary credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html).
 
-[**Required permission**](/langsmith/organization-workspace-operations): `bulk-exports:manage` (or `workspaces:manage`, which historically granted this access).
+[**Required permission**](https://docs.langchain.com/langsmith/organization-workspace-operations): `bulk-exports:manage` (or `workspaces:manage`, which historically granted this access).
 
-Before storing new credentials, LangSmith validates them by performing a test write to the bucket using the existing destination configuration. The request fails with `400` if the credentials do not have sufficient write permissions. If the request fails, refer to [Debug destination errors](#debug-destination-errors).
+Before storing new credentials, LangSmith validates them by performing a test write to the bucket using the existing destination configuration. The request fails with `400` if the credentials do not have sufficient write permissions. If the request fails, refer to [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
 
 ### Response
 
 Returns the updated destination object. Credential values are never returned—only the credential field names are included in the response under `credentials_keys`.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "id": "destination-uuid",
   "tenant_id": "tenant-uuid",
@@ -313,7 +308,7 @@ Returns the updated destination object. Credential values are never returned—o
 
 1. Provision new credentials in your cloud provider with write access to the destination bucket and prefix.
 2. Call the PATCH endpoint with the new credentials. LangSmith validates them before saving.
-3. Keep old credentials active until all in-flight bulk export runs finish (up to the [maximum run duration](/langsmith/data-export-monitor#automatic-retry-behavior)).
+3. Keep old credentials active until all in-flight bulk export runs finish (up to the [maximum run duration](https://docs.langchain.com/langsmith/data-export-monitor#automatic-retry-behavior)).
 4. Revoke old credentials once no runs are using them.
 
 ## Debug destination errors
@@ -327,7 +322,7 @@ data that you supplied to the destinations API above.
 
 **AWS S3:**
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 aws configure
 
 # set the same access key credentials and region as you used for the destination
@@ -348,7 +343,7 @@ aws s3 cp ./test.txt s3://<bucket-name>/tmp/test.txt
 You will need to supply the endpoint\_url with `--endpoint-url` option.
 For GCS, the `endpoint_url` is typically `https://storage.googleapis.com`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 aws configure
 
 # set the same access key credentials and region as you used for the destination
@@ -378,12 +373,8 @@ Here are some common errors:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-destinations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-destinations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

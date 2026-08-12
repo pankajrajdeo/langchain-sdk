@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Open agent spec integrations
 
 > Integrate with Open agent spec using LangChain Python.
@@ -16,7 +12,7 @@ You can refer to the [installation guide](https://oracle.github.io/agent-spec/in
 
 You can subsequently install the LangGraph Adapter through its extra dependency:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install "pyagentspec[langgraph]"
 ```
 
@@ -28,7 +24,7 @@ The `AgentSpecLoader` class is responsible for loading Agent Spec configurations
 The following example shows the creation of a simple Agent Spec Agent and its conversion into a LangGraph assistant.
 Starting from the Agent Spec Agent creation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create an Agent Spec agent
 from pyagentspec.agent import Agent
 from pyagentspec.llms.openaicompatibleconfig import OpenAiCompatibleConfig
@@ -59,7 +55,7 @@ agentspec_agent = Agent(
 
 The Agent can be subsequently exported to JSON:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Export the Agent Spec configuration
 from pyagentspec.serialization import AgentSpecSerializer
 
@@ -69,7 +65,7 @@ agentspec_config = AgentSpecSerializer().to_json(agentspec_agent)
 And converted into a LangGraph assistant using `AgentSpecLoader`.
 The example also showcases the mapping of the tool and the execution of a conversation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Load and run the Agent Spec configuration with LangGraph
 from pyagentspec.adapters.langgraph import AgentSpecLoader
 
@@ -92,12 +88,8 @@ async def main():
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/open_agent_spec.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/open_agent_spec.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

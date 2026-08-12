@@ -1,63 +1,41 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith reference
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/reference)
 The following sections provide API references and SDK documentation for LangSmith:
 
 ## LangSmith SDKs
 
-<CardGroup cols={2}>
-  <Card title="Python SDK" icon="brand-python" href="/langsmith/smith-python-sdk">
-    Reference documentation for the LangSmith Python SDK.
-  </Card>
+#### [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk)
+Reference documentation for the LangSmith Python SDK.
 
-  <Card title="JavaScript/TypeScript SDK" icon="brand-javascript" href="/langsmith/smith-js-ts-sdk">
-    Reference documentation for the LangSmith JavaScript/TypeScript SDK.
-  </Card>
+#### [JavaScript/TypeScript SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk)
+Reference documentation for the LangSmith JavaScript/TypeScript SDK.
 
-  <Card title="Go SDK" icon="brand-golang" href="/langsmith/smith-go-sdk">
-    Reference documentation for the LangSmith Go SDK.
-  </Card>
+#### [Go SDK](https://docs.langchain.com/langsmith/smith-go-sdk)
+Reference documentation for the LangSmith Go SDK.
 
-  <Card title="Java SDK" icon="coffee" href="/langsmith/smith-java-sdk">
-    Reference documentation for the LangSmith Java SDK.
-  </Card>
-</CardGroup>
+#### [Java SDK](https://docs.langchain.com/langsmith/smith-java-sdk)
+Reference documentation for the LangSmith Java SDK.
 
 ## LangGraph SDKs
 
-<CardGroup cols={2}>
-  <Card title="LangGraph Python SDK" icon="sitemap" href="/langsmith/langgraph-python-sdk">
-    Reference documentation for deploying LangGraph applications with Python.
-  </Card>
+#### [LangGraph Python SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk)
+Reference documentation for deploying LangGraph applications with Python.
 
-  <Card title="LangGraph JS/TS SDK" icon="sitemap" href="/langsmith/langgraph-js-ts-sdk">
-    Reference documentation for deploying LangGraph applications with JavaScript/TypeScript.
-  </Card>
-</CardGroup>
+#### [LangGraph JS/TS SDK](https://docs.langchain.com/langsmith/langgraph-js-ts-sdk)
+Reference documentation for deploying LangGraph applications with JavaScript/TypeScript.
 
 ## APIs
 
-<CardGroup cols={2}>
-  <Card title="LangSmith API" icon="code" href="/langsmith/smith-api-ref">
-    Complete REST API reference for LangSmith platform features.
-  </Card>
+#### [LangSmith API](https://docs.langchain.com/langsmith/smith-api-ref)
+Complete REST API reference for LangSmith platform features.
 
-  <Card title="Deployment APIs" icon="server" href="/langsmith/server-api-ref">
-    API references for self-hosted and hybrid LangSmith deployments.
-  </Card>
-</CardGroup>
+#### [Deployment APIs](https://docs.langchain.com/langsmith/server-api-ref)
+API references for self-hosted and hybrid LangSmith deployments.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/reference.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

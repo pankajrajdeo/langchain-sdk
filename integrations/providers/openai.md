@@ -1,57 +1,38 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OpenAI integrations
-
-> Integrate with OpenAI using LangChain Python.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/openai)
+Integrate with OpenAI using LangChain Python.
 
 This page covers all LangChain integrations with [OpenAI](https://en.wikipedia.org/wiki/OpenAI)
 
 ## Model interfaces
 
-<Columns cols={2}>
-  <Card title="ChatOpenAI" href="/oss/python/integrations/chat/openai" cta="Get started" icon="message" arrow>
-    OpenAI chat models.
-  </Card>
+#### [ChatOpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai)
+OpenAI chat models.
 
-  <Card title="AzureChatOpenAI" href="/oss/python/integrations/chat/azure_chat_openai" cta="Get started" icon="brand-windows" arrow>
-    Azure OpenAI chat models with enterprise features.
-  </Card>
+#### [AzureChatOpenAI](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai)
+Azure OpenAI chat models with enterprise features.
 
-  <Card title="OpenAIEmbeddings" href="/oss/python/integrations/embeddings/openai" cta="Get started" icon="stack-2" arrow>
-    OpenAI embedding models.
-  </Card>
+#### [OpenAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/openai)
+OpenAI embedding models.
 
-  <Card title="AzureOpenAIEmbeddings" href="/oss/python/integrations/embeddings/azure_openai" cta="Get started" icon="brand-windows" arrow>
-    Azure OpenAI embedding models with enterprise features.
-  </Card>
-</Columns>
+#### [AzureOpenAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai)
+Azure OpenAI embedding models with enterprise features.
 
 ## Other
 
-<Columns cols={2}>
-  <Card title="OpenAI" href="/oss/python/integrations/llms/openai" cta="Get started" icon="cursor-text" arrow>
-    (Legacy) OpenAI text completion models.
-  </Card>
+#### [OpenAI](https://docs.langchain.com/oss/python/integrations/llms/openai)
+(Legacy) OpenAI text completion models.
 
-  <Card title="AzureOpenAI" href="/oss/python/integrations/llms/azure_openai" cta="Get started" icon="brand-windows" arrow>
-    Wrapper for (legacy) OpenAI text completion models hosted on Azure.
-  </Card>
+#### [AzureOpenAI](https://docs.langchain.com/oss/python/integrations/llms/azure_openai)
+Wrapper for (legacy) OpenAI text completion models hosted on Azure.
 
-  <Card title="OpenAIModerationChain" href="https://python.langchain.com/v0.1/docs/guides/productionization/safety/moderation" cta="Get started" icon="link" arrow>
-    Detect text that could be hateful, violent, etc.
-  </Card>
-</Columns>
+#### [OpenAIModerationChain](https://python.langchain.com/v0.1/docs/guides/productionization/safety/moderation)
+Detect text that could be hateful, violent, etc.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Versioning
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/versioning)
 Our OSS version numbers follow the format: `MAJOR.MINOR.PATCH`, as defined by [Semantic Versioning](https://semver.org/).
 
 * **Major**: Breaking API updates that require code changes.
@@ -50,39 +46,46 @@ Certain APIs are explicitly marked as "internal" in a couple of ways:
 
 ## Release cycles
 
-<AccordionGroup>
-  <Accordion title="Major releases">
-    Major releases (e.g., `1.0.0` → `2.0.0`) may include:
+<details>
+<summary>Major releases</summary>
 
-    * Breaking API changes
-    * Removal of deprecated features
-    * Significant architectural improvements
+Major releases (e.g., `1.0.0` → `2.0.0`) may include:
 
-    We provide:
+* Breaking API changes
+* Removal of deprecated features
+* Significant architectural improvements
 
-    * Detailed migration guides
-    * Automated migration tools when possible
-    * Extended support period for the previous major version
-  </Accordion>
+We provide:
 
-  <Accordion title="Minor releases">
-    Minor releases (e.g., `1.0.0` → `1.1.0`) include:
+* Detailed migration guides
+* Automated migration tools when possible
+* Extended support period for the previous major version
 
-    * New features and capabilities
-    * Performance improvements
-    * New optional parameters
-    * Backward-compatible enhancements
-  </Accordion>
+</details>
 
-  <Accordion title="Patch releases">
-    Patch releases (e.g., `1.0.0` → `1.0.1`) include:
+<details>
+<summary>Minor releases</summary>
 
-    * Bug fixes
-    * Security updates
-    * Documentation improvements
-    * Performance optimizations without API changes
-  </Accordion>
-</AccordionGroup>
+Minor releases (e.g., `1.0.0` → `1.1.0`) include:
+
+* New features and capabilities
+* Performance improvements
+* New optional parameters
+* Backward-compatible enhancements
+
+</details>
+
+<details>
+<summary>Patch releases</summary>
+
+Patch releases (e.g., `1.0.0` → `1.0.1`) include:
+
+* Bug fixes
+* Security updates
+* Documentation improvements
+* Performance optimizations without API changes
+
+</details>
 
 ## Version support policy
 
@@ -103,51 +106,47 @@ Both LangChain and LangGraph 1.0 are designated as LTS releases:
 
 **Deep Agents** (`deepagents`) is a pre-1.0 package under active development. As a rapidly evolving package, the API may change between minor versions, though we minimize breaking changes when possible. Deep Agents will adopt the same LTS policies as LangChain and LangGraph after reaching version 1.0.
 
-For detailed information about release status and support timelines, see the [Release policy](/oss/python/release-policy).
+For detailed information about release status and support timelines, see the [Release policy](https://docs.langchain.com/oss/python/release-policy).
 
 ## Check your version
 
 To check your installed version:
 
-<CodeGroup>
-  ```python LangChain theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import langchain_core
-  print(langchain_core.__version__)
-  ```
+```python
+import langchain_core
+print(langchain_core.__version__)
+```
 
-  ```python LangGraph theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import langgraph
-  print(langgraph.__version__)
-  ```
-</CodeGroup>
+```python
+import langgraph
+print(langgraph.__version__)
+```
 
 ## Upgrade
 
-<CodeGroup>
-  ```bash LangChain theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Upgrade to the latest version
-  pip install -U langchain-core langchain
+```bash
+# Upgrade to the latest version
+pip install -U langchain-core langchain
 
-  # Upgrade to a specific version
-  pip install langchain-core==1.0.0
-  ```
+# Upgrade to a specific version
+pip install langchain-core==1.0.0
+```
 
-  ```bash LangGraph theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Upgrade to the latest version
-  pip install -U langgraph
+```bash
+# Upgrade to the latest version
+pip install -U langgraph
 
-  # Upgrade to a specific version
-  pip install langgraph==1.0.0
-  ```
+# Upgrade to a specific version
+pip install langgraph==1.0.0
+```
 
-  ```bash Deep Agents theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # Upgrade to the latest version
-  pip install -U deepagents
+```bash
+# Upgrade to the latest version
+pip install -U deepagents
 
-  # Upgrade to a specific version
-  pip install deepagents==0.1.0
-  ```
-</CodeGroup>
+# Upgrade to a specific version
+pip install deepagents==0.1.0
+```
 
 ## Pre-release versions
 
@@ -159,16 +158,12 @@ We occasionally release alpha and beta versions for early testing:
 
 ## See also
 
-* [Release policy](/oss/python/release-policy) - Detailed release and deprecation policies
+* [Release policy](https://docs.langchain.com/oss/python/release-policy) - Detailed release and deprecation policies
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/versioning.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/versioning.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

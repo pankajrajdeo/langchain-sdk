@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google cloud SQL for mysql integration
 
 > Integrate with the Google cloud SQL for mysql vector store using LangChain Python.
@@ -28,13 +24,13 @@ To run this notebook, you will need to do the following:
 
 Install the integration library, `langchain-google-cloud-sql-mysql`, and the library for the embedding service, `langchain-google-vertexai`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-cloud-sql-mysql langchain-google-vertexai
 ```
 
 **Colab only:** Uncomment the following cell to restart the kernel or use the button to restart the kernel. For Vertex AI Workbench you can restart the terminal using the button on top.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # # Automatically restart kernel after installs so that your environment can access the new packages
 # import IPython
 
@@ -49,7 +45,7 @@ Authenticate to Google Cloud as the IAM user logged into this notebook in order 
 * If you are using Colab to run this notebook, use the cell below and continue.
 * If you are using Vertex AI Workbench, check out the [Vertex AI Workbench setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.colab import auth
 
 auth.authenticate_user()
@@ -65,7 +61,7 @@ If you don't know your project ID, try the following:
 * Run `gcloud projects list`.
 * See the support page: [Locate the project ID](https://support.google.com/googleapi/answer/7014113).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @markdown Please fill in the value below with your Google Cloud project ID and then run the cell.
 
 PROJECT_ID = "my-project-id"  # @param {type:"string"}
@@ -84,7 +80,7 @@ Find your database values, in the [Cloud SQL Instances page](https://console.clo
 
 For existing instances, you may need to perform a [self-service maintenance update](https://cloud.google.com/sql/docs/mysql/self-service-maintenance) to update your maintenance version to **MYSQL\_8\_0\_36.R20240401.03\_00** or greater. Once updated, [configure your database flags](https://cloud.google.com/sql/docs/mysql/flags) to have the new **cloudsql\_vector** flag to "On".
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # @title Set Your Values Here { display-mode: "form" }
 REGION = "us-central1"  # @param {type: "string"}
 INSTANCE = "my-mysql-instance"  # @param {type: "string"}
@@ -115,7 +111,7 @@ Optionally, [built-in database authentication](https://cloud.google.com/sql/docs
 * `user` : Database user to use for built-in database authentication and login
 * `password` : Database password to use for built-in database authentication and login.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLEngine
 
 engine = MySQLEngine.from_instance(
@@ -127,7 +123,7 @@ engine = MySQLEngine.from_instance(
 
 The `MySQLVectorStore` class requires a database table. The `MySQLEngine` class has a helper method `init_vectorstore_table()` that can be used to create a table with the proper schema for you.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 engine.init_vectorstore_table(
     table_name=TABLE_NAME,
     vector_size=768,  # Vector size for VertexAI model(textembedding-gecko@latest)
@@ -136,17 +132,17 @@ engine.init_vectorstore_table(
 
 ### Create an embedding class instance
 
-You can use any [LangChain embeddings model](/oss/python/integrations/embeddings/).
+You can use any [LangChain embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/).
 You may need to enable the Vertex AI API to use `VertexAIEmbeddings`.
 
 We recommend pinning the embedding model's version for production, learn more about the [Text embeddings models](https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/text-embeddings).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # enable Vertex AI API
 !gcloud services enable aiplatform.googleapis.com
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIEmbeddings
 
 embedding = VertexAIEmbeddings(
@@ -162,7 +158,7 @@ To initialize a `MySQLVectorStore` class you need to provide only 3 things:
 2. `embedding_service` - An instance of a LangChain embedding model.
 3. `table_name` : The name of the table within the Cloud SQL database to use as the vector store.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import MySQLVectorStore
 
 store = MySQLVectorStore(
@@ -174,7 +170,7 @@ store = MySQLVectorStore(
 
 ### Add texts
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 all_texts = ["Apples and oranges", "Cars and airplanes", "Pineapple", "Train", "Banana"]
@@ -188,19 +184,19 @@ store.add_texts(all_texts, metadatas=metadatas, ids=ids)
 
 Delete vectors from the vector store by ID.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 store.delete([ids[1]])
 ```
 
 ### Search for documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "I'd like a fruit."
 docs = store.similarity_search(query)
 print(docs[0].page_content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Pineapple
 ```
 
@@ -208,13 +204,13 @@ Pineapple
 
 It is also possible to do a search for documents similar to a given embedding vector using `similarity_search_by_vector` which accepts an embedding vector as a parameter instead of a string.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query_vector = embedding.embed_query(query)
 docs = store.similarity_search_by_vector(query_vector, k=2)
 print(docs)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='Pineapple', metadata={'len': 9}), Document(page_content='Banana', metadata={'len': 6})]
 ```
 
@@ -231,7 +227,7 @@ GRANT EXECUTE ON PROCEDURE mysql.drop_vector_index TO '<IAM_DB_USER>'@'%';
 GRANT SELECT ON mysql.vector_indexes TO '<IAM_DB_USER>'@'%';
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import VectorIndex
 
 store.apply_vector_index(VectorIndex())
@@ -239,7 +235,7 @@ store.apply_vector_index(VectorIndex())
 
 ### Remove an index
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 store.drop_vector_index()
 ```
 
@@ -251,7 +247,7 @@ A vector store can take advantage of relational data to filter similarity search
 
 Create a table and `MySQLVectorStore` instance with custom metadata columns.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_cloud_sql_mysql import Column
 
 # set table name
@@ -262,7 +258,6 @@ engine.init_vectorstore_table(
     vector_size=768,  # VertexAI model: textembedding-gecko@latest
     metadata_columns=[Column("len", "INTEGER")],
 )
-
 
 # initialize MySQLVectorStore with custom metadata columns
 custom_store = MySQLVectorStore(
@@ -283,7 +278,7 @@ It can be helpful to narrow down the documents before working with them.
 
 For example, documents can be filtered on metadata using the `filter` argument.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 # add texts to the vector store
@@ -299,18 +294,14 @@ docs = custom_store.similarity_search_by_vector(query_vector, filter="len >= 6")
 print(docs)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='Pineapple', metadata={'len': 9}), Document(page_content='Banana', metadata={'len': 6}), Document(page_content='Apples and oranges', metadata={'len': 18}), Document(page_content='Cars and airplanes', metadata={'len': 18})]
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_cloud_sql_mysql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_cloud_sql_mysql.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,55 +1,45 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Channels
-
-> Configure channels to trigger your Fleet agents automatically.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/channels)
+Configure channels to trigger your Fleet agents automatically.
 
 Channels define when your agent starts running. Connect your agent to external events so it responds automatically to messages, emails, or other events.
 
-<Tip>
-  To trigger an agent on a recurring basis, use [schedules](/langsmith/fleet/schedules).
-</Tip>
+> [!TIP]
+> To trigger an agent on a recurring basis, use [schedules](https://docs.langchain.com/langsmith/fleet/schedules).
 
 ## Add a channel
 
 To add a channel:
 
-<Steps>
-  <Step title="Open your agent">
-    Open your agent in the [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-channels) inbox.
-  </Step>
+### Open your agent
+Open your agent in the [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-channels) inbox.
 
-  <Step title="Add the channel">
-    1. In the sidebar, expand the **Channels** drawer and click **Connect your first channel**.
-    2. Select the channel you want to add, then follow the prompts to authenticate.
-  </Step>
-</Steps>
+### Add the channel
+1. In the sidebar, expand the **Channels** drawer and click **Connect your first channel**.
+2. Select the channel you want to add, then follow the prompts to authenticate.
 
 ### Add a Gmail channel
 
-The Gmail channel activates your agent when new emails arrive in your inbox. To let your agent read and respond to emails, add Gmail tools in the **Tools** section. Available Gmail tools include reading emails, sending replies, creating drafts, managing labels, and marking messages as read. See [Tool integrations](/langsmith/fleet/tools) for more information.
+The Gmail channel activates your agent when new emails arrive in your inbox. To let your agent read and respond to emails, add Gmail tools in the **Tools** section. Available Gmail tools include reading emails, sending replies, creating drafts, managing labels, and marking messages as read. See [Tool integrations](https://docs.langchain.com/langsmith/fleet/tools) for more information.
 
-<Warning>
-  The Gmail channel only monitors your primary inbox. The following emails do not activate the channel:
-
-  * **Alias emails**: Messages sent to an email alias rather than your primary address.
-  * **Mailing list emails**: Messages received through a mailing list or group.
-  * **Emails outside the inbox**: Messages that skip the inbox due to filters, or that land in spam, trash, or other folders.
-</Warning>
+> [!WARNING]
+> The Gmail channel only monitors your primary inbox. The following emails do not activate the channel:
+>
+> * **Alias emails**: Messages sent to an email alias rather than your primary address.
+> * **Mailing list emails**: Messages received through a mailing list or group.
+> * **Emails outside the inbox**: Messages that skip the inbox due to filters, or that land in spam, trash, or other folders.
 
 ### Add a Slack channel
 
 The Slack channel lets your team chat with your agent directly in Slack. After you authenticate with Slack once, Fleet adds the agent to Slack in one click and configures a Slack app with the agent's name, description, and icon. Mention the agent in a channel or send it a direct message to start a run.
 
-For setup instructions, see [Integrate Slack with an agent](/langsmith/fleet/slack-app).
+For setup instructions, see [Integrate Slack with an agent](https://docs.langchain.com/langsmith/fleet/slack-app).
 
 ### Add a Microsoft Teams channel
 
 The Teams channel activates your agent when messages are sent in Microsoft Teams conversations.
 
-For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Teams with an agent](/langsmith/fleet/teams-app).
+For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Teams with an agent](https://docs.langchain.com/langsmith/fleet/teams-app).
 
 ## Pause and resume channels
 
@@ -57,9 +47,9 @@ You can pause and resume channels without removing them. To pause all channels:
 
 1. In the [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-channels) inbox, open your agent.
 2. In the sidebar, expand the **Channels** drawer.
-3. Click the <Icon icon="player-pause" /> **Pause channels** button to pause all channels.
+3. Click the  **Pause channels** button to pause all channels.
 
-To resume all channels, click <Icon icon="player-play" /> **Resume channels** button.
+To resume all channels, click  **Resume channels** button.
 
 ## Thread behavior
 
@@ -72,12 +62,8 @@ You can manually mark any thread as read or unread at any time.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/channels.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

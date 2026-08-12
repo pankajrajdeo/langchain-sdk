@@ -1,20 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Pinecone integration
 
 > Integrate with the Pinecone embedding model using LangChain Python.
 
 Pinecone's inference API can be accessed via `PineconeEmbeddings`. Providing text embeddings via the Pinecone service. We start by installing prerequisite libraries:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU "langchain-pinecone>=0.2.0"
 ```
 
 Next, we [sign up / log in to Pinecone](https://app.pinecone.io) to get our API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -25,7 +21,7 @@ os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_API_KEY") or getpass(
 
 Check the document for available [models](https://docs.pinecone.io/models/overview). Now we initialize our embedding model like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_pinecone import PineconeEmbeddings
 
 embeddings = PineconeEmbeddings(model="multilingual-e5-large")
@@ -33,7 +29,7 @@ embeddings = PineconeEmbeddings(model="multilingual-e5-large")
 
 From here we can create embeddings either sync or async, let's start with sync! We embed a single text as a query embedding (ie what we search with in RAG) using `embed_query`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = [
     "Apple is a popular fruit known for its sweetness and crisp texture.",
     "The tech company Apple is known for its innovative products like the iPhone.",
@@ -43,12 +39,12 @@ docs = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc_embeds = embeddings.embed_documents(docs)
 doc_embeds
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "Tell me about the tech company known as Apple"
 query_embed = embeddings.embed_query(query)
 query_embed
@@ -56,12 +52,8 @@ query_embed
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/pinecone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

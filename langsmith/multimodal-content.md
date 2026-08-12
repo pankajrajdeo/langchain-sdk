@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Include multimodal content in a prompt
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/multimodal-content)
 Some applications are based around multimodal content, like a chatbot that can answer questions about a PDF or image. In these cases, you'll want to include multimodal content in your prompt and test the model's ability to answer questions about the content.
 
 The Playground supports two methods for incorporating multimodal content in your prompts:
@@ -15,40 +11,35 @@ The Playground supports two methods for incorporating multimodal content in your
    * Test how the model handles different inputs
    * Create reusable prompts that work with varying content
 
-<Note>
-  Not all models support multimodal content. Before using multimodal features in the Playground, make sure your selected model supports the file types you want to use.
-</Note>
+> [!NOTE]
+> Not all models support multimodal content. Before using multimodal features in the Playground, make sure your selected model supports the file types you want to use.
 
 ## Inline content
 
 Click the file icon in the message where you want to add multimodal content. Under the `Upload content` tab, you can upload a file and include it inline in the prompt.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/upload-inline-multimodal-content.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=b93d2a6731d26d3ff58a3d0d6d909159" alt="Upload inline multimodal content" width="410" height="339" data-path="langsmith/images/upload-inline-multimodal-content.png" />
+> **Image:** [Upload inline multimodal content](https://docs.langchain.com/langsmith/multimodal-content)
 
 ## Template variables
 
 Click the file icon in the message where you want to add multimodal content. Under the `Template variables` tab, you can create a template variable for a specific attachment type. Currently, only images, PDFs, and audio files (.wav, .mp3) are supported.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/template-variable-multimodal-content.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=e69596dd9fe7d16252c7054bf9efcdf0" alt="Template variable multimodal content" width="391" height="303" data-path="langsmith/images/template-variable-multimodal-content.png" />
+> **Image:** [Template variable multimodal content](https://docs.langchain.com/langsmith/multimodal-content)
 
 ## Populate the template variable
 
 Once you've added a template variable, you can provide content for it using the panel on the right side of the screen. Simply click the `+` button to upload or select content that will be used to populate the template variable.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/manual-prompt-multimodal.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=5983e91ca9f596918c9068f8d7450d8d" alt="Manual prompt multimodal" width="1466" height="482" data-path="langsmith/images/manual-prompt-multimodal.png" />
+> **Image:** [Manual prompt multimodal](https://docs.langchain.com/langsmith/multimodal-content)
 
 ## Run an evaluation
 
-After testing out your prompt manually, you can [run an evaluation](/langsmith/evaluate-with-attachments?mode=ui) to see how the prompt performs over a golden dataset of examples.
+After testing out your prompt manually, you can [run an evaluation](https://docs.langchain.com/langsmith/evaluate-with-attachments?mode=ui) to see how the prompt performs over a golden dataset of examples.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multimodal-content.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/multimodal-content.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

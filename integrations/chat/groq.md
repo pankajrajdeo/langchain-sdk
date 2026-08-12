@@ -1,20 +1,14 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatGroq integration
 
 > Integrate with the ChatGroq chat model using LangChain Python.
 
-<Warning>
-  This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](/oss/python/integrations/providers/xai).
-</Warning>
+> [!WARNING]
+> This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](https://docs.langchain.com/oss/python/integrations/providers/xai).
 
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatGroq`](https://reference.langchain.com/python/langchain-groq/chat_models/ChatGroq) API reference.
 
 For a list of all Groq models, visit their [docs](https://console.groq.com/docs/models?utm_source=langchain).
 
@@ -28,7 +22,7 @@ For a list of all Groq models, visit their [docs](https://console.groq.com/docs/
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -40,7 +34,7 @@ To access Groq models you'll need to create a Groq account, get an API key, and 
 
 Head to the [Groq console](https://console.groq.com/login?utm_source=langchain\&utm_content=chat_page) to sign up to Groq and generate an API key. Once you've done this set the GROQ\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -48,9 +42,9 @@ if "GROQ_API_KEY" not in os.environ:
     os.environ["GROQ_API_KEY"] = getpass.getpass("Enter your Groq API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -59,7 +53,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Groq integration lives in the `langchain-groq` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-groq
 ```
 
@@ -67,13 +61,12 @@ pip install -qU langchain-groq
 
 Now we can instantiate our model object and generate chat completions.
 
-<Note>
-  **Reasoning Format**
+> [!NOTE]
+> **Reasoning Format**
+>
+> If you choose to set a `reasoning_format`, you must ensure that the model you are using supports it. You can find a list of supported models in the [Groq documentation](https://console.groq.com/docs/reasoning).
 
-  If you choose to set a `reasoning_format`, you must ensure that the model you are using supports it. You can find a list of supported models in the [Groq documentation](https://console.groq.com/docs/reasoning).
-</Note>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_groq import ChatGroq
 
 llm = ChatGroq(
@@ -89,7 +82,7 @@ llm = ChatGroq(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -101,15 +94,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'aime la programmation.", additional_kwargs={'reasoning_content': 'Okay, so I need to translate the sentence "I love programming." into French. Let me think about how to approach this. \n\nFirst, I know that "I" in French is "Je." That\'s straightforward. Now, the verb "love" in French is "aime" when referring to oneself. So, "I love" would be "J\'aime." \n\nNext, the word "programming." In French, programming is "la programmation." But wait, in French, when you talk about loving an activity, you often use the definite article. So, it would be "la programmation." \n\nPutting it all together, "I love programming" becomes "J\'aime la programmation." That sounds right. I think that\'s the correct translation. \n\nI should double-check to make sure I\'m not missing anything. Maybe I can think of similar phrases. For example, "I love reading" is "J\'aime lire," but when it\'s a noun, like "I love music," it\'s "J\'aime la musique." So, yes, using "la programmation" makes sense here. \n\nI don\'t think I need to change anything else. The sentence structure in French is Subject-Verb-Object, just like in English, so "J\'aime la programmation" should be correct. \n\nI guess another way to say it could be "J\'adore la programmation," using "adore" instead of "aime," but "aime" is more commonly used in this context. So, sticking with "J\'aime la programmation" is probably the best choice.\n'}, response_metadata={'token_usage': {'completion_tokens': 346, 'prompt_tokens': 23, 'total_tokens': 369, 'completion_time': 1.447541218, 'prompt_time': 0.000983386, 'queue_time': 0.009673684, 'total_time': 1.448524604}, 'model_name': 'deepseek-r1-distill-llama-70b', 'system_fingerprint': 'fp_e98d30d035', 'finish_reason': 'stop', 'logprobs': None}, id='run--5679ae4f-f4e8-4931-bcd5-7304223832c0-0', usage_metadata={'input_tokens': 23, 'output_tokens': 346, 'total_tokens': 369})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'aime la programmation.
 ```
 
@@ -117,16 +110,15 @@ J'aime la programmation.
 
 Groq supports vision capabilities with select models, allowing you to send images along with text prompts.
 
-<Note>
-  **Vision-capable models**
+> [!NOTE]
+> **Vision-capable models**
+>
+> * `meta-llama/llama-4-scout-17b-16e-instruct`
+> * `meta-llama/llama-4-maverick-17b-128e-instruct`
+>
+> For the latest list of vision-capable models, check the [Groq documentation](https://console.groq.com/docs/vision).
 
-  * `meta-llama/llama-4-scout-17b-16e-instruct`
-  * `meta-llama/llama-4-maverick-17b-128e-instruct`
-
-  For the latest list of vision-capable models, check the [Groq documentation](https://console.groq.com/docs/vision).
-</Note>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_groq import ChatGroq
 from langchain.messages import HumanMessage
 
@@ -146,15 +138,14 @@ response = llm.invoke([message])
 print(response.content)
 ```
 
-<Tip>
-  **Image URL requirements**
-
-  Groq fetches images from URLs directly. Ensure your image URLs:
-
-  * Are publicly accessible (no authentication required)
-  * Return the image directly (no redirects)
-  * Maximum image size: 20MB per request
-</Tip>
+> [!TIP]
+> **Image URL requirements**
+>
+> Groq fetches images from URLs directly. Ensure your image URLs:
+>
+> * Are publicly accessible (no authentication required)
+> * Return the image directly (no redirects)
+> * Maximum image size: 20MB per request
 
 ***
 
@@ -164,12 +155,8 @@ For detailed documentation of all `ChatGroq` features and configurations head to
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/groq.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

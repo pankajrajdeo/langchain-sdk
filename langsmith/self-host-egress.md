@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Egress for billing and operational telemetry
-
-<Info>
-  This page only applies to customers who are not running in offline (air-gapped) mode and assumes you are using a self-hosted LangSmith instance serving version 0.9.0 or later.
-</Info>
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-egress)
+> [!NOTE]
+> This page only applies to customers who are not running in offline (air-gapped) mode and assumes you are using a self-hosted LangSmith instance serving version 0.9.0 or later.
 
 Self-hosted LangSmith stores platform data in your environment. Unless you are running in offline mode, LangSmith requires egress to `https://beacon.langchain.com` for the following:
 
@@ -14,21 +9,18 @@ Self-hosted LangSmith stores platform data in your environment. Unless you are r
 * **Operational telemetry**: Logs, metrics, and traces for support diagnostics (optional, can be disabled)
 * **Usage telemetry**: Anonymized usage snapshots for product insights (optional, can be disabled)
 
-<Warning>
-  **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](/langsmith/cloud#allowlisting-ip-addresses) for static IP addresses, if needed.
-</Warning>
+> [!WARNING]
+> **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](https://docs.langchain.com/langsmith/cloud#allowlisting-ip-addresses) for static IP addresses, if needed.
 
-<Note>
-  If you enable [Engine](/langsmith/deploy-self-hosted-full-platform#enable-engine), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine).
-</Note>
+> [!NOTE]
+> If you enable [Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](https://docs.langchain.com/langsmith/self-host-egress#langsmith-intelligence-for-engine).
 
 ## Billing telemetry
 
 Billing telemetry is **required** for self-hosted LangSmith instances that are not running in offline mode. This includes license verification and subscription/usage reporting.
 
-<Info>
-  Billing telemetry **cannot be disabled**. If you need to run without any egress, contact your account team about an offline (air-gapped) license.
-</Info>
+> [!NOTE]
+> Billing telemetry **cannot be disabled**. If you need to run without any egress, contact your account team about an offline (air-gapped) license.
 
 ### What it does
 
@@ -49,7 +41,7 @@ Billing telemetry is **required** for self-hosted LangSmith instances that are n
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "license": "<YOUR_LICENSE_KEY>"
 }
@@ -57,7 +49,7 @@ Billing telemetry is **required** for self-hosted LangSmith instances that are n
 
 **Response:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "token": "Valid JWT" //Short-lived JWT token to avoid repeated license checks
 }
@@ -69,7 +61,7 @@ Billing telemetry is **required** for self-hosted LangSmith instances that are n
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "license": "<YOUR_LICENSE_KEY>",
   "trace_transactions": [
@@ -93,7 +85,7 @@ Billing telemetry is **required** for self-hosted LangSmith instances that are n
 
 **Response:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "inserted_count": 1 //Number of transactions successfully ingested
 }
@@ -103,9 +95,8 @@ Billing telemetry is **required** for self-hosted LangSmith instances that are n
 
 As of version **0.11**, LangSmith deployments send operational telemetry by default. This telemetry helps the LangChain team provide proactive support and faster troubleshooting for self-hosted instances.
 
-<Info>
-  Operational telemetry is **separate from** billing telemetry. You can disable operational telemetry while billing telemetry remains active.
-</Info>
+> [!NOTE]
+> Operational telemetry is **separate from** billing telemetry. You can disable operational telemetry while billing telemetry remains active.
 
 ### What it does
 
@@ -120,15 +111,14 @@ As of version **0.11**, LangSmith deployments send operational telemetry by defa
 * **Operational traces**: Timing and error information for high-latency or failed requests (these are **not** customer traces — they are traces about the functioning of the LangSmith instance itself)
 * **Log messages**: Warning and error log messages only
 
-<Info>
-  We do not collect actual payload contents, database records, or any data that can identify your end users or customers. All telemetry data is associated with an organization and deployment, but never identified with individual users. We **do not collect PII** (personally identifiable information) in any form.
-</Info>
+> [!NOTE]
+> We do not collect actual payload contents, database records, or any data that can identify your end users or customers. All telemetry data is associated with an organization and deployment, but never identified with individual users. We **do not collect PII** (personally identifiable information) in any form.
 
 ### How to disable
 
 You can disable operational telemetry by setting the following values in your `langsmith_config.yaml` file:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   telemetry:
     logs: false
@@ -138,9 +128,8 @@ config:
 
 You can also disable individual telemetry types by setting only specific values to `false`.
 
-<Warning>
-  Disabling operational telemetry stops exporting the logs, metrics, and traces described in this section. It does **not** disable billing telemetry (license verification and subscription/usage reporting).
-</Warning>
+> [!WARNING]
+> Disabling operational telemetry stops exporting the logs, metrics, and traces described in this section. It does **not** disable billing telemetry (license verification and subscription/usage reporting).
 
 ### Example payloads
 
@@ -150,7 +139,7 @@ You can also disable individual telemetry types by setting only specific values 
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "resourceMetrics": [
     {
@@ -239,7 +228,7 @@ You can also disable individual telemetry types by setting only specific values 
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "resourceSpans": [
     {
@@ -324,7 +313,7 @@ We only export error log messages from self-hosted LangSmith instances. This all
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "resourceLogs": [
     {
@@ -404,9 +393,8 @@ We only export error log messages from self-hosted LangSmith instances. This all
 
 Usage telemetry collects anonymized snapshots of your LangSmith instance's usage metrics. This data helps LangChain understand platform adoption patterns and inform product development decisions.
 
-<Info>
-  Usage telemetry is **enabled by default** and can be disabled. Unlike billing telemetry, you have full control over whether these snapshots are sent to LangChain.
-</Info>
+> [!NOTE]
+> Usage telemetry is **enabled by default** and can be disabled. Unlike billing telemetry, you have full control over whether these snapshots are sent to LangChain.
 
 ### What it does
 
@@ -421,9 +409,8 @@ Usage telemetry collects anonymized snapshots of your LangSmith instance's usage
 * **Users**: Total number of registered users and count of active PATs (Personal Access Tokens) in the last 30 days
 * **Timestamps**: Time range for the snapshot (from/to timestamps in UTC)
 
-<Info>
-  All metrics are **aggregated counts only**. No individual resource data, identifiers, or usage patterns are collected. We do not collect any information that could identify your end users or customers.
-</Info>
+> [!NOTE]
+> All metrics are **aggregated counts only**. No individual resource data, identifiers, or usage patterns are collected. We do not collect any information that could identify your end users or customers.
 
 ### Example payloads
 
@@ -431,7 +418,7 @@ Usage telemetry collects anonymized snapshots of your LangSmith instance's usage
 
 **Request:**
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "license_key": "<YOUR_LICENSE_KEY>",
   "from_timestamp": "2026-03-25T02:00:00+00:00",
@@ -457,29 +444,26 @@ Usage telemetry collects anonymized snapshots of your LangSmith instance's usage
 
 You can disable usage telemetry by setting the following environment variable in your deployment configuration:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 PHONE_HOME_USAGE_REPORTING_ENABLED: false
 ```
 
 Add this to the `commonEnv` section of your Helm configuration to permanently disable usage telemetry reporting.
 
-<Warning>
-  Disabling usage telemetry does **not** affect billing or operational telemetry. License verification and subscription/usage reporting will continue to function normally.
-</Warning>
+> [!WARNING]
+> Disabling usage telemetry does **not** affect billing or operational telemetry. License verification and subscription/usage reporting will continue to function normally.
 
 ## LangSmith Intelligence for Engine
 
-This section applies only if you enable [Engine](/langsmith/deploy-self-hosted-full-platform#enable-engine). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
+This section applies only if you enable [Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
 
-Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](/langsmith/engine-self-hosted#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
+Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](https://docs.langchain.com/langsmith/engine-self-hosted#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
 
-<Note>
-  Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. AWS EU and Azure are planned. See [Availability by cloud and region](/langsmith/engine-self-hosted#availability-by-cloud-and-region).
-</Note>
+> [!NOTE]
+> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. AWS EU and Azure are planned. See [Availability by cloud and region](https://docs.langchain.com/langsmith/engine-self-hosted#availability-by-cloud-and-region).
 
-<Warning>
-  Add the gateway as a specific allowlist entry rather than opening general outbound access. Requests authenticate with a short-lived license JWT obtained during LangSmith license verification. No additional model-provider credentials are needed.
-</Warning>
+> [!WARNING]
+> Add the gateway as a specific allowlist entry rather than opening general outbound access. Requests authenticate with a short-lived license JWT obtained during LangSmith license verification. No additional model-provider credentials are needed.
 
 ### What it does
 
@@ -494,24 +478,19 @@ LangSmith Intelligence retains the following metadata for usage attribution and 
 * Account, workspace, and project identifiers used to attribute usage.
 * Model and token-usage metadata used for billing.
 
-For the complete data flow and model-provider commitments, see [Engine on Self-hosted](/langsmith/engine-self-hosted).
+For the complete data flow and model-provider commitments, see [Engine on Self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted).
 
-<Info>
-  Offline (air-gapped) Self-hosted cannot run Engine, because it cannot reach LangSmith Intelligence. Every other LangSmith feature continues to work offline.
-</Info>
+> [!NOTE]
+> Offline (air-gapped) Self-hosted cannot run Engine, because it cannot reach LangSmith Intelligence. Every other LangSmith feature continues to work offline.
 
 ## Our commitment
 
-The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](/langsmith/engine-self-hosted). If you have any concerns about the data being sent, disable optional telemetry or contact your account team.
+The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted). If you have any concerns about the data being sent, disable optional telemetry or contact your account team.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-egress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-egress.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

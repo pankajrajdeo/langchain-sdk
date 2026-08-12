@@ -1,32 +1,27 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Monitor and troubleshoot bulk exports
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export-monitor)
+Monitor bulk export status, manage running exports, and troubleshoot failures.
 
-> Monitor bulk export status, manage running exports, and troubleshoot failures.
-
-Once you have [created an export job](/langsmith/data-export#2-create-an-export-job), you can use the APIs on this page to track its progress, inspect individual runs, and stop it if needed. This page also covers how LangSmith handles failures automatically, and what to do when an export fails after exhausting retries.
+Once you have [created an export job](https://docs.langchain.com/langsmith/data-export#2-create-an-export-job), you can use the APIs on this page to track its progress, inspect individual runs, and stop it if needed. This page also covers how LangSmith handles failures automatically, and what to do when an export fails after exhausting retries.
 
 This page covers:
 
-* [Monitoring export status](#monitor-export-status) and [listing runs](#list-runs-for-an-export) for a specific export.
-* [Listing all exports](#list-all-exports) in your workspace.
-* [Stopping an export](#stop-an-export).
-* [Failure modes and retry policy](#failure-modes-and-retry-policy), including automatic retry behavior, failure scenarios, status lifecycle, concurrency limits, and progress tracking.
-* [Troubleshooting failed exports](#troubleshooting-failed-exports).
+* [Monitoring export status](https://docs.langchain.com/langsmith/data-export-monitor#monitor-export-status) and [listing runs](https://docs.langchain.com/langsmith/data-export-monitor#list-runs-for-an-export) for a specific export.
+* [Listing all exports](https://docs.langchain.com/langsmith/data-export-monitor#list-all-exports) in your workspace.
+* [Stopping an export](https://docs.langchain.com/langsmith/data-export-monitor#stop-an-export).
+* [Failure modes and retry policy](https://docs.langchain.com/langsmith/data-export-monitor#failure-modes-and-retry-policy), including automatic retry behavior, failure scenarios, status lifecycle, concurrency limits, and progress tracking.
+* [Troubleshooting failed exports](https://docs.langchain.com/langsmith/data-export-monitor#troubleshooting-failed-exports).
 
-<Note>
-  **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
-
-  Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
-</Note>
+> [!NOTE]
+> **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**
+>
+> Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
 
 ## Monitor export status
 
 To monitor the status of an export job, use the following cURL command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request GET \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/{export_id}' \
   --header 'Content-Type: application/json' \
@@ -41,7 +36,7 @@ Replace `{export_id}` with the ID of the export you want to monitor. This comman
 An export is typically broken up into multiple runs which correspond to a specific date partition to export.
 To list all runs associated with a specific export, use the following cURL command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request GET \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/{export_id}/runs' \
   --header 'Content-Type: application/json' \
@@ -55,7 +50,7 @@ This command fetches all runs related to the specified export, providing details
 
 To retrieve a list of all export jobs, use the following cURL command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request GET \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports' \
   --header 'Content-Type: application/json' \
@@ -69,7 +64,7 @@ This command returns a list of all export jobs along with their current statuses
 
 To stop an existing export, use the following cURL command:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl --request PATCH \
   --url 'https://api.smith.langchain.com/api/v1/bulk-exports/{export_id}' \
   --header 'Content-Type: application/json' \
@@ -87,13 +82,13 @@ you will need to create a new export job instead.
 
 LangSmith bulk exports handle transient failures and infrastructure issues automatically to ensure resilience.
 
-Each bulk export is divided into multiple *runs*, where each run processes data for a [specific date partition](/langsmith/data-export#partitioning-scheme) (typically organized by day). Runs are processed independently, which enables:
+Each bulk export is divided into multiple *runs*, where each run processes data for a [specific date partition](https://docs.langchain.com/langsmith/data-export#partitioning-scheme) (typically organized by day). Runs are processed independently, which enables:
 
 * Parallel processing of different time periods.
 * Independent retry logic for each run.
 * Resumption from specific checkpoints if interrupted.
 
-Each run (date range) in your export has its own [failure handling](#failure-scenarios) and [retry budget](#automatic-retry-behavior). If a run fails after exhausting all retries, the entire export is marked as `FAILED`.
+Each run (date range) in your export has its own [failure handling](https://docs.langchain.com/langsmith/data-export-monitor#failure-scenarios) and [retry budget](https://docs.langchain.com/langsmith/data-export-monitor#automatic-retry-behavior). If a run fails after exhausting all retries, the entire export is marked as `FAILED`.
 
 ### Automatic retry behavior
 
@@ -108,16 +103,15 @@ Export jobs automatically retry transient failures with the following behavior:
 
 | Failure type                    | Cause                                                                                                                                                                                                                                           | Automatic retry?                                    | Action required                                                                                                              |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Infrastructure interruption** | [Deployments](/langsmith/deployment), server restarts, worker crashes                                                                                                                                                                           | Yes, automatically requeued with remaining retries. | None, jobs resume automatically.                                                                                             |
-| **Run timeout**                 | Single run exceeds 4-hour limit                                                                                                                                                                                                                 | Yes, retried up to 20 times (subject to change).    | If persistent, narrow date range, add filters, or [limit the exported fields](/langsmith/data-export#limit-exported-fields). |
+| **Infrastructure interruption** | [Deployments](https://docs.langchain.com/langsmith/deployment), server restarts, worker crashes                                                                                                                                                                           | Yes, automatically requeued with remaining retries. | None, jobs resume automatically.                                                                                             |
+| **Run timeout**                 | Single run exceeds 4-hour limit                                                                                                                                                                                                                 | Yes, retried up to 20 times (subject to change).    | If persistent, narrow date range, add filters, or [limit the exported fields](https://docs.langchain.com/langsmith/data-export#limit-exported-fields). |
 | **Workflow timeout**            | Entire export exceeds 72 hours                                                                                                                                                                                                                  | No                                                  | Reduce export scope (date range, filters) or break into smaller exports.                                                     |
-| **Storage/destination errors**  | [Invalid credentials](/langsmith/data-export-destinations#credentials-configuration), [missing bucket](/langsmith/data-export-destinations#configuration-fields), [permission issues](/langsmith/data-export-destinations#permissions-required) | No                                                  | Fix destination configuration and create new export.                                                                         |
+| **Storage/destination errors**  | [Invalid credentials](https://docs.langchain.com/langsmith/data-export-destinations#credentials-configuration), [missing bucket](https://docs.langchain.com/langsmith/data-export-destinations#configuration-fields), [permission issues](https://docs.langchain.com/langsmith/data-export-destinations#permissions-required) | No                                                  | Fix destination configuration and create new export.                                                                         |
 | **Destination deleted**         | Bucket removed during export                                                                                                                                                                                                                    | No                                                  | Recreate destination and restart export.                                                                                     |
 | **Terminal processing errors**  | Data serialization issues, resource exhaustion                                                                                                                                                                                                  | Yes, retried up to 20 times (subject to change).    | Check run error details; may require investigation.                                                                          |
 
-<Note>
-  Any single run failure (after all retries are exhausted) causes the entire export to fail.
-</Note>
+> [!NOTE]
+> Any single run failure (after all retries are exhausted) causes the entire export to fail.
 
 ### Export status lifecycle
 
@@ -145,7 +139,7 @@ If you have multiple exports running, new run jobs will queue until capacity bec
 
 #### Self-hosted: tuning bulk export concurrency and payload size
 
-On [LangSmith Self-hosted](/langsmith/self-hosted), the concurrency limits are the defaults. To tune pod memory usage during bulk exports, configure the following environment variables on the `langsmith-backend` service:
+On [LangSmith Self-hosted](https://docs.langchain.com/langsmith/self-hosted), the concurrency limits are the defaults. To tune pod memory usage during bulk exports, configure the following environment variables on the `langsmith-backend` service:
 
 | Environment variable                    | Default           | Description                                                                                                                                                           |
 | --------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -155,7 +149,7 @@ On [LangSmith Self-hosted](/langsmith/self-hosted), the concurrency limits are t
 
 **Example: conservative settings for memory-constrained deployments**
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 # In your Helm values
 BULK_EXPORT_MAX_CONCURRENT_RUNS: "10"
 DATA_EXPORT_RUN_LIMIT: "5"
@@ -182,22 +176,18 @@ This progress tracking enables:
 
 If your export fails, follow these steps:
 
-1. **Check the export status**: Use the [`GET /api/v1/bulk-exports/{export_id}` endpoint](/langsmith/smith-api/bulk-exports/get-bulk-export) to retrieve the export details and status.
-2. **Review run errors**: You can monitor your runs using the [List Runs API](#list-runs-for-an-export). Each run includes an `errors` field with detailed error messages keyed by retry attempt (e.g., `retry_0`, `retry_1`).
-3. **Verify destination access**: Ensure your [destination bucket](/langsmith/data-export-destinations#configuration-fields) still exists and [credentials](/langsmith/data-export-destinations#credentials-configuration) are valid.
-4. **Check run size**: If you see timeout errors, your date partitions may contain too much data. It may be helpful to [limit the exported fields](/langsmith/data-export#limit-exported-fields).
-5. **Review system limits**: Ensure you're not hitting [concurrency limits](#concurrency-and-rate-limits) (5 runs per export, 3 exports per workspace).
+1. **Check the export status**: Use the [`GET /api/v1/bulk-exports/{export_id}` endpoint](https://docs.langchain.com/langsmith/smith-api/bulk-exports/get-bulk-export) to retrieve the export details and status.
+2. **Review run errors**: You can monitor your runs using the [List Runs API](https://docs.langchain.com/langsmith/data-export-monitor#list-runs-for-an-export). Each run includes an `errors` field with detailed error messages keyed by retry attempt (e.g., `retry_0`, `retry_1`).
+3. **Verify destination access**: Ensure your [destination bucket](https://docs.langchain.com/langsmith/data-export-destinations#configuration-fields) still exists and [credentials](https://docs.langchain.com/langsmith/data-export-destinations#credentials-configuration) are valid.
+4. **Check run size**: If you see timeout errors, your date partitions may contain too much data. It may be helpful to [limit the exported fields](https://docs.langchain.com/langsmith/data-export#limit-exported-fields).
+5. **Review system limits**: Ensure you're not hitting [concurrency limits](https://docs.langchain.com/langsmith/data-export-monitor#concurrency-and-rate-limits) (5 runs per export, 3 exports per workspace).
 
 For storage-related errors, you can test your destination configuration using the AWS CLI or gsutil before retrying the export.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/data-export-monitor.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

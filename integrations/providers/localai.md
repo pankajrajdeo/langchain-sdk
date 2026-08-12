@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Localai integrations
 
 > Integrate with Localai using LangChain Python.
@@ -12,22 +8,19 @@
 > audio (and not only) locally or on-prem with consumer grade hardware,
 > supporting multiple model families and architectures.
 
-<Info>
-  `langchain-localai` is a 3rd party integration package for LocalAI. It provides a simple way to use LocalAI services in LangChain.
-  The source code is available on [GitHub](https://github.com/mkhludnev/langchain-localai)
-</Info>
+> [!NOTE]
+> `langchain-localai` is a 3rd party integration package for LocalAI. It provides a simple way to use LocalAI services in LangChain.
+> The source code is available on [GitHub](https://github.com/mkhludnev/langchain-localai)
 
 ## Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-localai
-  ```
+```bash
+pip install langchain-localai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-localai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-localai
+```
 
 ## Embedding models
 
@@ -35,16 +28,12 @@ See a [usage example](https://localai.io/features/embeddings/index.html).
 
 ## Reranker
 
-See a [usage example](/oss/python/integrations/document_transformers/localai_rerank).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/document_transformers/localai_rerank).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/localai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/localai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

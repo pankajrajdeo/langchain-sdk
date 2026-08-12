@@ -1,142 +1,99 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Evaluation
-
-> Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation)
+Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio.
 
 LangSmith's testing tools help you measure agent quality, iterate on prompts, and debug live in an interactive environment. Evaluation is the core of testing: it scores your agent's outputs against datasets and criteria so you can benchmark versions, catch regressions, and track quality over time.
 
 LangSmith supports two types of evaluation based on when and where they run:
 
-<CardGroup cols={2}>
-  <Card title="Offline Evaluation" icon="flask">
-    **Test before you ship**
+#### Offline Evaluation
+**Test before you ship**
 
-    Run evaluations on curated datasets during development to compare versions, benchmark performance, and catch regressions.
-  </Card>
+Run evaluations on curated datasets during development to compare versions, benchmark performance, and catch regressions.
 
-  <Card title="Online Evaluation" icon="radar">
-    **Monitor in production**
+#### Online Evaluation
+**Monitor in production**
 
-    Evaluate real user interactions in real-time to detect issues and measure quality on live traffic.
-  </Card>
-</CardGroup>
+Evaluate real user interactions in real-time to detect issues and measure quality on live traffic.
 
 ## Set up your account
 
-<Steps>
-  <Step title="Create an account" icon="user-plus">
-    Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-account-api-key-quickstart) (no credit card required).
-    You can log in with **Google**, **GitHub**, or **email**.
-  </Step>
+### Create an account
+Sign up at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-account-api-key-quickstart) (no credit card required).
+You can log in with **Google**, **GitHub**, or **email**.
 
-  <Step title="Create an API key" icon="key">
-    Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
-    Copy the key and save it securely.
-  </Step>
-</Steps>
+### Create an API key
+Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
+Copy the key and save it securely.
 
-Once your account and API key are ready, [run your first evaluation](/langsmith/evaluation-quickstart).
+Once your account and API key are ready, [run your first evaluation](https://docs.langchain.com/langsmith/evaluation-quickstart).
 
 ## Evaluation workflow
 
-<Tabs>
-  <Tab title="Offline evaluation flow">
-    <Steps>
-      <Step title="Create a dataset">
-        Create a [dataset](/langsmith/manage-datasets) with <Tooltip tip="Individual test cases with inputs and reference outputs">[examples](/langsmith/evaluation-concepts#examples)</Tooltip> from manually curated test cases, historical production traces, or synthetic data generation.
-      </Step>
+#### Offline evaluation flow
+### Create a dataset
+Create a [dataset](https://docs.langchain.com/langsmith/manage-datasets) with [examples](https://docs.langchain.com/langsmith/evaluation-concepts#examples) from manually curated test cases, historical production traces, or synthetic data generation.
 
-      <Step title="Define evaluators">
-        Create <Tooltip tip="Functions that score how well your application performs">[evaluators](/langsmith/evaluation-concepts#evaluators)</Tooltip> to score performance:
+### Define evaluators
+Create [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) to score performance:
 
-        * [Human](/langsmith/evaluation-concepts#human) review
-        * [Code](/langsmith/evaluation-concepts#code) rules
-        * [LLM-as-judge](/langsmith/llm-as-judge)
-        * [Pairwise](/langsmith/evaluate-pairwise) comparison
-      </Step>
+* [Human](https://docs.langchain.com/langsmith/evaluation-concepts#human) review
+* [Code](https://docs.langchain.com/langsmith/evaluation-concepts#code) rules
+* [LLM-as-judge](https://docs.langchain.com/langsmith/llm-as-judge)
+* [Pairwise](https://docs.langchain.com/langsmith/evaluate-pairwise) comparison
 
-      <Step title="Run an experiment">
-        Execute your application on the dataset to create an <Tooltip tip="Results of evaluating a specific application version on a dataset">[experiment](/langsmith/evaluation-concepts#experiment)</Tooltip>. Configure [repetitions, concurrency, and caching](/langsmith/experiment-configuration) to optimize runs.
-      </Step>
+### Run an experiment
+Execute your application on the dataset to create an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment). Configure [repetitions, concurrency, and caching](https://docs.langchain.com/langsmith/experiment-configuration) to optimize runs.
 
-      <Step title="Analyze results">
-        Compare experiments for [benchmarking](/langsmith/evaluation-types#benchmarking), [unit tests](/langsmith/evaluation-types#unit-tests), [regression tests](/langsmith/evaluation-types#regression-tests), or [backtesting](/langsmith/evaluation-types#backtesting).
-      </Step>
-    </Steps>
-  </Tab>
+### Analyze results
+Compare experiments for [benchmarking](https://docs.langchain.com/langsmith/evaluation-types#benchmarking), [unit tests](https://docs.langchain.com/langsmith/evaluation-types#unit-tests), [regression tests](https://docs.langchain.com/langsmith/evaluation-types#regression-tests), or [backtesting](https://docs.langchain.com/langsmith/evaluation-types#backtesting).
 
-  <Tab title="Online evaluation flow">
-    <Steps>
-      <Step title="Deploy your application">
-        Each interaction creates a <Tooltip tip="A single execution trace including inputs, outputs, and intermediate steps">[run](/langsmith/evaluation-concepts#runs)</Tooltip> without reference outputs.
-      </Step>
+#### Online evaluation flow
+### Deploy your application
+Each interaction creates a [run](https://docs.langchain.com/langsmith/evaluation-concepts#runs) without reference outputs.
 
-      <Step title="Configure online evaluators">
-        Set up [evaluators](/langsmith/online-evaluations-llm-as-judge) to run automatically on production traces: safety checks, format validation, quality heuristics, and reference-free LLM-as-judge. Apply [filters and sampling rates](/langsmith/online-evaluations-llm-as-judge#configure-a-sampling-rate) to control costs.
-      </Step>
+### Configure online evaluators
+Set up [evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) to run automatically on production traces: safety checks, format validation, quality heuristics, and reference-free LLM-as-judge. Apply [filters and sampling rates](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge#configure-a-sampling-rate) to control costs.
 
-      <Step title="Monitor in real-time">
-        Evaluators run automatically on [runs](/langsmith/evaluation-concepts#runs) or <Tooltip tip="Collections of related runs forming multi-turn conversations">[threads](/langsmith/online-evaluations-multi-turn)</Tooltip>, providing real-time monitoring, anomaly detection, and alerting.
-      </Step>
+### Monitor in real-time
+Evaluators run automatically on [runs](https://docs.langchain.com/langsmith/evaluation-concepts#runs) or [threads](https://docs.langchain.com/langsmith/online-evaluations-multi-turn), providing real-time monitoring, anomaly detection, and alerting.
 
-      <Step title="Establish a feedback loop">
-        Add failing production traces to your [dataset](/langsmith/manage-datasets), create targeted evaluators, validate fixes with offline experiments, and redeploy.
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+### Establish a feedback loop
+Add failing production traces to your [dataset](https://docs.langchain.com/langsmith/manage-datasets), create targeted evaluators, validate fixes with offline experiments, and redeploy.
 
-<Tip>
-  For more on the differences between offline and online evaluation, refer to the [Evaluation concepts](/langsmith/evaluation-concepts#quick-reference-offline-vs-online-evaluation) page.
-</Tip>
+> [!TIP]
+> For more on the differences between offline and online evaluation, refer to the [Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts#quick-reference-offline-vs-online-evaluation) page.
 
 ## Get started
 
-<Columns cols={3}>
-  <Card title="Evaluation quickstart" icon="rocket" href="/langsmith/evaluation-quickstart" arrow="true">
-    Get started with offline evaluation.
-  </Card>
+#### [Evaluation quickstart](https://docs.langchain.com/langsmith/evaluation-quickstart)
+Get started with offline evaluation.
 
-  <Card title="Manage datasets" icon="database" href="/langsmith/manage-datasets" arrow="true">
-    Create and manage datasets for evaluation through the UI or SDK.
-  </Card>
+#### [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets)
+Create and manage datasets for evaluation through the UI or SDK.
 
-  <Card title="Run offline evaluations" icon="microscope" href="/langsmith/evaluate-llm-application" arrow="true">
-    Explore evaluation types, techniques, and frameworks for comprehensive testing.
-  </Card>
+#### [Run offline evaluations](https://docs.langchain.com/langsmith/evaluate-llm-application)
+Explore evaluation types, techniques, and frameworks for comprehensive testing.
 
-  <Card title="Analyze results" icon="chart-bar" href="/langsmith/analyze-an-experiment" arrow="true">
-    View and analyze evaluation results, compare experiments, filter data, and export findings.
-  </Card>
+#### [Analyze results](https://docs.langchain.com/langsmith/analyze-an-experiment)
+View and analyze evaluation results, compare experiments, filter data, and export findings.
 
-  <Card title="Run online evaluations" icon="radar" href="/langsmith/online-evaluations-llm-as-judge" arrow="true">
-    Monitor production quality in real-time from the Observability tab.
-  </Card>
+#### [Run online evaluations](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+Monitor production quality in real-time from the Observability tab.
 
-  <Card title="Follow tutorials" icon="book" href="/langsmith/evaluate-chatbot-tutorial" arrow="true">
-    Learn by following step-by-step tutorials, from simple chatbots to complex agent evaluations.
-  </Card>
+#### [Follow tutorials](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+Learn by following step-by-step tutorials, from simple chatbots to complex agent evaluations.
 
-  <Card title="Studio" icon="window" href="/langsmith/studio" arrow="true">
-    Use an interactive environment for developing and debugging agents.
-  </Card>
-</Columns>
+#### [Studio](https://docs.langchain.com/langsmith/studio)
+Use an interactive environment for developing and debugging agents.
 
-<Note>
-  To set up a LangSmith instance, visit the [Platform setup section](/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
-</Note>
+> [!NOTE]
+> To set up a LangSmith instance, visit the [Platform setup section](https://docs.langchain.com/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

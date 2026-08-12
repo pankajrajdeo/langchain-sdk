@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Cohere integrations
 
 > Integrate with Cohere using LangChain Python.
@@ -13,15 +9,13 @@
 
 * Install the Python SDK :
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-cohere
-  ```
+```bash
+pip install langchain-cohere
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-cohere
-  ```
-</CodeGroup>
+```bash
+uv add langchain-cohere
+```
 
 Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environment variable (`COHERE_API_KEY`)
 
@@ -29,17 +23,17 @@ Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environmen
 
 | API              | description                      | Endpoint docs                                          | Import                                                                       | Example usage                                                       |
 | ---------------- | -------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Chat             | Build chat bots                  | [chat](https://docs.cohere.com/reference/chat)         | `from langchain_cohere import ChatCohere`                                    | [cohere.ipynb](/oss/python/integrations/chat/cohere)                |
-| LLM              | Generate text                    | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere`                                   | [cohere.ipynb](/oss/python/integrations/llms/cohere)                |
-| RAG Retriever    | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat)   | `from langchain_classic.retrievers import CohereRagRetriever`                | [cohere.ipynb](/oss/python/integrations/retrievers/cohere)          |
-| Text Embedding   | Embed strings to vectors         | [embed](https://docs.cohere.com/reference/embed)       | `from langchain_cohere import CohereEmbeddings`                              | [cohere.ipynb](/oss/python/integrations/embeddings/cohere)          |
-| Rerank Retriever | Rank strings based on relevance  | [rerank](https://docs.cohere.com/reference/rerank)     | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](/oss/python/integrations/retrievers/cohere-reranker) |
+| Chat             | Build chat bots                  | [chat](https://docs.cohere.com/reference/chat)         | `from langchain_cohere import ChatCohere`                                    | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/chat/cohere)                |
+| LLM              | Generate text                    | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere`                                   | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/llms/cohere)                |
+| RAG Retriever    | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat)   | `from langchain_classic.retrievers import CohereRagRetriever`                | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/retrievers/cohere)          |
+| Text Embedding   | Embed strings to vectors         | [embed](https://docs.cohere.com/reference/embed)       | `from langchain_cohere import CohereEmbeddings`                              | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)          |
+| Rerank Retriever | Rank strings based on relevance  | [rerank](https://docs.cohere.com/reference/rerank)     | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/retrievers/cohere-reranker) |
 
 ## Quick copy examples
 
 ### Chat
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import ChatCohere
 from langchain.messages import HumanMessage
 chat = ChatCohere()
@@ -47,22 +41,22 @@ messages = [HumanMessage(content="knock knock")]
 print(chat.invoke(messages))
 ```
 
-Usage of the Cohere [chat model](/oss/python/integrations/chat/cohere)
+Usage of the Cohere [chat model](https://docs.langchain.com/oss/python/integrations/chat/cohere)
 
 ### LLM
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere.llms import Cohere
 
 llm = Cohere()
 print(llm.invoke("Come up with a pet name"))
 ```
 
-Usage of the Cohere (legacy) [LLM model](/oss/python/integrations/llms/cohere)
+Usage of the Cohere (legacy) [LLM model](https://docs.langchain.com/oss/python/integrations/llms/cohere)
 
 ### Tool calling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import ChatCohere
 from langchain.messages import (
     HumanMessage,
@@ -115,11 +109,10 @@ An alternative, is to support multi hop tool calling with the ReAct agent as see
 The agent is based on the paper
 [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629).
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_cohere import ChatCohere, create_cohere_react_agent
 from langchain_core.prompts import ChatPromptTemplate
@@ -150,7 +143,7 @@ The ReAct agent can be used to call multiple tools in sequence.
 
 ### RAG retriever
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import ChatCohere
 from langchain_classic.retrievers import CohereRagRetriever
 from langchain_core.documents import Document
@@ -159,31 +152,27 @@ rag = CohereRagRetriever(llm=ChatCohere())
 print(rag.invoke("What is cohere ai?"))
 ```
 
-Usage of the Cohere [RAG Retriever](/oss/python/integrations/retrievers/cohere)
+Usage of the Cohere [RAG Retriever](https://docs.langchain.com/oss/python/integrations/retrievers/cohere)
 
 ### Text embedding
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cohere import CohereEmbeddings
 
 embeddings = CohereEmbeddings(model="embed-english-light-v3.0")
 print(embeddings.embed_documents(["This is a test document."]))
 ```
 
-Usage of the Cohere [Text Embeddings model](/oss/python/integrations/embeddings/cohere)
+Usage of the Cohere [Text Embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)
 
 ### Reranker
 
-Usage of the Cohere [Reranker](/oss/python/integrations/retrievers/cohere-reranker)
+Usage of the Cohere [Reranker](https://docs.langchain.com/oss/python/integrations/retrievers/cohere-reranker)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cohere.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

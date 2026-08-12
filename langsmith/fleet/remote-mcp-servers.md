@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Remote MCP servers
-
-> Connect Fleet to popular remote MCP servers
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers)
+Connect Fleet to popular remote MCP servers
 
 You can connect LangSmith Fleet to remote MCP servers to extend your agents with additional tools and integrations. This page covers how to add custom MCP servers and provides configuration details for popular remote servers.
 
@@ -26,7 +22,7 @@ LangSmith Fleet doesn't execute these tools itself, it forwards requests to the 
 
 **Runtime**: Fleet automatically connects to your MCP server and uses its tools.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 sequenceDiagram
     participant Agent as Fleet
     participant MCP as Remote MCP Server
@@ -44,69 +40,49 @@ sequenceDiagram
 
 You can add MCP servers directly from your agent or from workspace settings.
 
-<Note>
-  Adding MCP servers requires the **MCP Server Create** permission. Workspace admins can grant this permission to users from workspace settings.
-</Note>
+> [!NOTE]
+> Adding MCP servers requires the **MCP Server Create** permission. Workspace admins can grant this permission to users from workspace settings.
 
 ### Add to a specific agent
 
 To add a remote MCP server to a specific agent:
 
-<Steps>
-  <Step title="Open the Connections drawer">
-    Open your agent, then in the sidebar expand the **Connections** drawer.
-  </Step>
+### Open the Connections drawer
+Open your agent, then in the sidebar expand the **Connections** drawer.
 
-  <Step title="Add the MCP server">
-    1. Click **Add connection**, then click **+ Add custom MCP**.
-    2. Enter the server name and URL, then configure authentication (see [authentication types](#authentication-types)).
-  </Step>
+### Add the MCP server
+1. Click **Add connection**, then click **+ Add custom MCP**.
+2. Enter the server name and URL, then configure authentication (see [authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types)).
 
-  <Step title="Discover tools">
-    Fleet discovers available tools from your MCP server and makes them available in this agent.
-  </Step>
-</Steps>
+### Discover tools
+Fleet discovers available tools from your MCP server and makes them available in this agent.
 
 ### Add to all agents in the workspace
 
 To add a remote MCP server to all agents in the workspace:
 
-<Tabs>
-  <Tab title="From Fleet > Integrations">
-    <Steps>
-      <Step title="Navigate to Fleet > Integrations">
-        In the LangSmith UI, navigate to the [**Fleet** > **Integrations**](https://smith.langchain.com/agents/tools) tab.
-      </Step>
+ Integrations">
+   Integrations">
+    In the LangSmith UI, navigate to the [**Fleet** > **Integrations**](https://smith.langchain.com/agents/tools) tab.
 
-      <Step title="Add the server">
-        1. Click **+ Custom MCP** at the bottom of the left sidebar.
-        2. Add a **Name** for the MCP server.
-        3. Add the MCP **URL** (e.g., `https://api.example.com/mcp`)
-        4. Select the **Authentication** type. See [Authentication types](#authentication-types) for more details.
-      </Step>
+### Add the server
+  1. Click **+ Custom MCP** at the bottom of the left sidebar.
+  2. Add a **Name** for the MCP server.
+  3. Add the MCP **URL** (e.g., `https://api.example.com/mcp`)
+  4. Select the **Authentication** type. See [Authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types) for more details.
 
-      <Step title="Save the server">
-        Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
-      </Step>
-    </Steps>
-  </Tab>
+### Save the server
+  Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
 
-  <Tab title="From workspace settings">
-    <Steps>
-      <Step title="Navigate to MCP server settings">
-        In the LangSmith UI, navigate to the [Settings > MCP servers](https://smith.langchain.com/settings/workspaces/mcp-servers) tab.
-      </Step>
+#### From workspace settings
+### Navigate to MCP server settings
+In the LangSmith UI, navigate to the [Settings > MCP servers](https://smith.langchain.com/settings/workspaces/mcp-servers) tab.
 
-      <Step title="Add the server">
-        Click **Add server** and enter the server name and URL, then configure authentication (see [authentication types](#authentication-types)).
-      </Step>
+### Add the server
+Click **Add server** and enter the server name and URL, then configure authentication (see [authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types)).
 
-      <Step title="Save the server">
-        Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+### Save the server
+Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
 
 ### Authentication types
 
@@ -117,9 +93,8 @@ Select an authentication type based on the server's requirements:
   * **Key**: `Authorization`
   * **Value**: `Bearer API_KEY`
 
-  <Info>
-    You can add multiple headers if your MCP server requires additional authentication or configuration parameters. Each header key-value pair is sent with every request to the server.
-  </Info>
+> [!NOTE]
+>   You can add multiple headers if your MCP server requires additional authentication or configuration parameters. Each header key-value pair is sent with every request to the server.
 
 * **OAuth 2.1 (Auto)**: Select this for servers that support OAuth via dynamic client registration. You'll be prompted to log in with your account for that service.
 
@@ -127,9 +102,8 @@ Select an authentication type based on the server's requirements:
 
 ## Update your MCP server URL
 
-<Warning>
-  Changing the URL of a custom MCP server will break any agents that use tools from that server.
-</Warning>
+> [!WARNING]
+> Changing the URL of a custom MCP server will break any agents that use tools from that server.
 
 Fleet stores tool references by MCP server URL. If you update the URL of a custom MCP server, existing agents will fail when attempting to call those tools because the stored URL no longer matches.
 
@@ -147,12 +121,8 @@ To view all available MCP servers and configuration details, navigate to the [Fl
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/remote-mcp-servers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/remote-mcp-servers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

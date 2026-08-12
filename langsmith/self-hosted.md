@@ -1,25 +1,16 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Self-hosted LangSmith
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted)
+> [!NOTE]
+> **Important**<br />
+> Self-hosted LangSmith is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
-<Note>
-  **Important**<br />
-  Self-hosted LangSmith is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
-</Note>
+Host an instance of LangSmith in your own infrastructure for [observability](https://docs.langchain.com/langsmith/observability), [evaluation](https://docs.langchain.com/langsmith/evaluation), and [prompt engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts). You can optionally enable [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform) to deploy and manage agents through the LangSmith UI.
 
-Host an instance of LangSmith in your own infrastructure for [observability](/langsmith/observability), [evaluation](/langsmith/evaluation), and [prompt engineering](/langsmith/prompt-context-hub#prompts). You can optionally enable [LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform) to deploy and manage agents through the LangSmith UI.
+> [!TIP]
+> **For step-by-step setup instructions for self-hosted LangSmith on AWS, GCP, or Azure**, refer to our cloud architecture guides: [AWS](https://docs.langchain.com/langsmith/aws-self-hosted), [GCP](https://docs.langchain.com/langsmith/gcp-self-hosted), or [Azure](https://docs.langchain.com/langsmith/azure-self-hosted).
 
-<Tip>
-  **For step-by-step setup instructions for self-hosted LangSmith on AWS, GCP, or Azure**, refer to our cloud architecture guides: [AWS](/langsmith/aws-self-hosted), [GCP](/langsmith/gcp-self-hosted), or [Azure](/langsmith/azure-self-hosted).
-</Tip>
-
-<Note>
-  Before installing or upgrading, review the [minimum versions for self-hosting dependencies](/langsmith/self-host-dependency-versions).
-</Note>
-
-<a id="langsmith" />
+> [!NOTE]
+> Before installing or upgrading, review the [minimum versions for self-hosting dependencies](https://docs.langchain.com/langsmith/self-host-dependency-versions).
 
 ## What's included
 
@@ -41,52 +32,47 @@ A self-hosted LangSmith instance includes:
 * Redis (queuing and caching)
 * Blob storage (optional, but recommended for production)
 
-<img className="block dark:hidden" src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-light.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=0790cbdf4fe131c74d1e60bb120834e3" alt="LangSmith architecture showing services and datastores" width="2210" height="1463" data-path="langsmith/images/cloud-arch-light.png" />
+> **Image:** [LangSmith architecture showing services and datastores](https://docs.langchain.com/langsmith/self-hosted)
 
-<img className="hidden dark:block" src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-dark.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=767f3bc3dc73ffe1a806f54e0aaa428b" alt="LangSmith architecture showing services and datastores" width="2210" height="1463" data-path="langsmith/images/cloud-arch-dark.png" />
+> **Image:** [LangSmith architecture showing services and datastores](https://docs.langchain.com/langsmith/self-hosted)
 
-To access the LangSmith UI and send API requests, you will need to expose the [LangSmith frontend](#services) service. Depending on your installation method, this can be a load balancer or a port exposed on the host machine.
+To access the LangSmith UI and send API requests, you will need to expose the [LangSmith frontend](https://docs.langchain.com/langsmith/self-hosted#services) service. Depending on your installation method, this can be a load balancer or a port exposed on the host machine.
 
 ### Services
 
-| Service                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a id="langsmith-frontend" /> **LangSmith frontend**                                                           | The frontend uses Nginx to serve the LangSmith UI and route API requests to the other servers. This serves as the entrypoint for the application and is the only component that must be exposed to users.                                                                                                                                                |
-| <a id="langsmith-backend" /> **LangSmith backend**                                                             | The backend is the main entrypoint for CRUD API requests and handles the majority of the business logic for the application. This includes handling requests from the frontend and SDK, preparing traces for ingestion, and supporting the hub API.                                                                                                      |
-| <a id="langsmith-queue" /> **LangSmith queue**                                                                 | The queue handles incoming traces and feedback to ensure that they are ingested and persisted into the traces and feedback datastore asynchronously, handling checks for data integrity and ensuring successful insert into the datastore, handling retries in situations such as database errors or the temporary inability to connect to the database. |
-| <a id="langsmith-platform-backend" /> **LangSmith platform backend**                                           | The platform backend is another critical service that primarily handles authentication, run ingestion, and other high-volume tasks.                                                                                                                                                                                                                      |
-| <a id="langsmith-playground" /> **LangSmith Playground**                                                       | The Playground is a service that handles forwarding requests to various LLM APIs to support the Playground feature. This can also be used to connect to your own custom model servers.                                                                                                                                                                   |
-| <a id="langsmith-ace-arbitrary-code-execution-backend" /> **LangSmith ACE (Arbitrary Code Execution) backend** | The ACE backend is a service that handles executing arbitrary code in a secure environment. This is used to support running custom code within LangSmith.                                                                                                                                                                                                |
+| Service                                                    | Description                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a /> **LangSmith frontend**                               | The frontend uses Nginx to serve the LangSmith UI and route API requests to the other servers. This serves as the entrypoint for the application and is the only component that must be exposed to users.                                                                                                                                                |
+| <a /> **LangSmith backend**                                | The backend is the main entrypoint for CRUD API requests and handles the majority of the business logic for the application. This includes handling requests from the frontend and SDK, preparing traces for ingestion, and supporting the hub API.                                                                                                      |
+| <a /> **LangSmith queue**                                  | The queue handles incoming traces and feedback to ensure that they are ingested and persisted into the traces and feedback datastore asynchronously, handling checks for data integrity and ensuring successful insert into the datastore, handling retries in situations such as database errors or the temporary inability to connect to the database. |
+| <a /> **LangSmith platform backend**                       | The platform backend is another critical service that primarily handles authentication, run ingestion, and other high-volume tasks.                                                                                                                                                                                                                      |
+| <a /> **LangSmith Playground**                             | The Playground is a service that handles forwarding requests to various LLM APIs to support the Playground feature. This can also be used to connect to your own custom model servers.                                                                                                                                                                   |
+| <a /> **LangSmith ACE (Arbitrary Code Execution) backend** | The ACE backend is a service that handles executing arbitrary code in a secure environment. This is used to support running custom code within LangSmith.                                                                                                                                                                                                |
 
 ### Storage services
 
-<Note>
-  LangSmith will bundle all storage services by default. You can configure it to use external versions of all storage services. In a production setting, we **strongly recommend using external storage services**.
-</Note>
+> [!NOTE]
+> LangSmith will bundle all storage services by default. You can configure it to use external versions of all storage services. In a production setting, we **strongly recommend using external storage services**.
 
-| Service                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a id="clickhouse" /> **ClickHouse**     | [ClickHouse](https://clickhouse.com/docs/en/intro) is a high-performance, column-oriented SQL database management system (DBMS) for online analytical processing (OLAP).<br /><br />LangSmith uses ClickHouse as the primary data store for traces and feedback (high-volume data).<br /><br />💡 [Connect to external ClickHouse](/langsmith/self-host-external-clickhouse)                                                                                                                                                                                                  |
-| <a id="postgresql" /> **PostgreSQL**     | [PostgreSQL](https://www.postgresql.org/about/) is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.<br /><br />LangSmith uses PostgreSQL as the primary data store for transactional workloads and operational data (almost everything besides traces and feedback).<br /><br />💡 [Connect to external PostgreSQL](/langsmith/self-host-external-postgres) - AWS RDS, GCP Cloud SQL, Azure Database                             |
-| <a id="redis" /> **Redis / Valkey**      | [Redis](https://github.com/redis/redis) is a powerful in-memory key-value database that persists on disk. By holding data in memory, Redis offers high performance for operations like caching.<br /><br />LangSmith uses Redis to back queuing and caching operations. [Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis.<br /><br />💡 [Connect to external Redis or Valkey](/langsmith/self-host-external-redis) - AWS ElastiCache, GCP Memorystore, Azure Cache                                                                |
-| <a id="blob-storage" /> **Blob storage** | LangSmith supports several blob storage providers, including [AWS S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/), and [Google Cloud Storage](https://cloud.google.com/storage).<br /><br />LangSmith uses blob storage to store large files, such as trace artifacts, feedback attachments, and other large data objects. Blob storage is optional, but highly recommended for production deployments.<br /><br />💡 [Enable blob storage](/langsmith/self-host-blob-storage) - AWS S3, GCP GCS, Azure Blob |
+| Service                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <a /> **ClickHouse**     | [ClickHouse](https://clickhouse.com/docs/en/intro) is a high-performance, column-oriented SQL database management system (DBMS) for online analytical processing (OLAP).<br /><br />LangSmith uses ClickHouse as the primary data store for traces and feedback (high-volume data).<br /><br />💡 [Connect to external ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse)                                                                                                                                                                                                  |
+| <a /> **PostgreSQL**     | [PostgreSQL](https://www.postgresql.org/about/) is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.<br /><br />LangSmith uses PostgreSQL as the primary data store for transactional workloads and operational data (almost everything besides traces and feedback).<br /><br />💡 [Connect to external PostgreSQL](https://docs.langchain.com/langsmith/self-host-external-postgres) - AWS RDS, GCP Cloud SQL, Azure Database                             |
+| <a /> **Redis / Valkey** | [Redis](https://github.com/redis/redis) is a powerful in-memory key-value database that persists on disk. By holding data in memory, Redis offers high performance for operations like caching.<br /><br />LangSmith uses Redis to back queuing and caching operations. [Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis.<br /><br />💡 [Connect to external Redis or Valkey](https://docs.langchain.com/langsmith/self-host-external-redis) - AWS ElastiCache, GCP Memorystore, Azure Cache                                                                |
+| <a /> **Blob storage**   | LangSmith supports several blob storage providers, including [AWS S3](https://aws.amazon.com/s3/), [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/), and [Google Cloud Storage](https://cloud.google.com/storage).<br /><br />LangSmith uses blob storage to store large files, such as trace artifacts, feedback attachments, and other large data objects. Blob storage is optional, but highly recommended for production deployments.<br /><br />💡 [Enable blob storage](https://docs.langchain.com/langsmith/self-host-blob-storage) - AWS S3, GCP GCS, Azure Blob |
 
-To install, follow the [Kubernetes setup guide](/langsmith/kubernetes).
+To install, follow the [Kubernetes setup guide](https://docs.langchain.com/langsmith/kubernetes).
 
 ## Next steps
 
-* **[Enable LangSmith Deployment](/langsmith/deploy-self-hosted-full-platform)**: add a [control plane](/langsmith/control-plane) and [data plane](/langsmith/data-plane) to deploy and manage agents through the LangSmith UI.
-* **[Enable LangSmith Sandboxes](/langsmith/deploy-self-hosted-full-platform#enable-sandboxes)**: allow users to run code, expose temporary services, and create memory snapshots from self-hosted LangSmith.
-* **[Deploy standalone Agent Servers](/langsmith/deploy-standalone-server)**: deploy Agent Servers directly without enabling LangSmith Deployment.
+* **[Enable LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform)**: add a [control plane](https://docs.langchain.com/langsmith/control-plane) and [data plane](https://docs.langchain.com/langsmith/data-plane) to deploy and manage agents through the LangSmith UI.
+* **[Enable LangSmith Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes)**: allow users to run code, expose temporary services, and create memory snapshots from self-hosted LangSmith.
+* **[Deploy standalone Agent Servers](https://docs.langchain.com/langsmith/deploy-standalone-server)**: deploy Agent Servers directly without enabling LangSmith Deployment.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-hosted.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

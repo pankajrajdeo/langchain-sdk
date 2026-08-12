@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Personal mode
-
-> Build a local personal brain wiki from configured sources with OpenWiki.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/personal-mode)
+Build a local personal brain wiki from configured sources with OpenWiki.
 
 Personal mode builds a local personal brain wiki in `~/.openwiki/wiki` from configured sources such as local repositories, Gmail, Notion, web search, Hacker News, Slack, and X/Twitter.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki personal
 openwiki personal --init
 openwiki personal --update
@@ -36,9 +32,8 @@ During an ingestion run, connector tools write raw data and manifests under `~/.
 
 Connector secrets are referenced by env var name and stored in `~/.openwiki/.env`.
 
-<Important>
-  Connector config files should never contain raw secret values.
-</Important>
+> [!IMPORTANT]
+> Connector config files should never contain raw secret values.
 
 ### Built-in sources
 
@@ -50,7 +45,7 @@ Connector secrets are referenced by env var name and stored in `~/.openwiki/.env
 | `google`     | Gmail OAuth                          | Fetches recent mail via the Gmail API after `openwiki auth gmail`            |
 | `web-search` | `TAVILY_API_KEY`                     | Uses Tavily through LangChain                                                |
 | `hackernews` | None                                 | Public Hacker News feed and search APIs                                      |
-| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](#slack-oauth)     |
+| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](https://docs.langchain.com/oss/openwiki/personal-mode#slack-oauth)     |
 
 You can configure the same source more than once. For example, add one web search source for AI research and another for NBA news. OpenWiki stores them as separate instances such as `web-search-1` and `web-search-2`.
 
@@ -58,48 +53,44 @@ You can configure the same source more than once. For example, add one web searc
 
 For sources that need credentials, authenticate first, then ingest. Sources such as Hacker News need no auth; web search needs `TAVILY_API_KEY` in `~/.openwiki/.env`.
 
-<Steps>
-  <Step title="Authenticate the provider" icon="key">
-    Run a local browser OAuth flow for providers that require it. OpenWiki saves returned tokens to `~/.openwiki/.env`, creates connector config when possible, and discovers MCP tools for MCP-backed providers:
+### Authenticate the provider
+Run a local browser OAuth flow for providers that require it. OpenWiki saves returned tokens to `~/.openwiki/.env`, creates connector config when possible, and discovers MCP tools for MCP-backed providers:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki auth notion
-    openwiki auth gmail
-    openwiki auth x
-    openwiki auth slack
-    ```
+```bash
+openwiki auth notion
+openwiki auth gmail
+openwiki auth x
+openwiki auth slack
+```
 
-    * Slack and Gmail require app client credentials to already be set in `~/.openwiki/.env`
-    * Notion uses dynamic client registration for hosted MCP
-    * X uses OAuth 2.0 with PKCE
-    * After `openwiki auth gmail`, the Google connector can ingest Gmail directly with no MCP transport setup
+* Slack and Gmail require app client credentials to already be set in `~/.openwiki/.env`
+* Notion uses dynamic client registration for hosted MCP
+* X uses OAuth 2.0 with PKCE
+* After `openwiki auth gmail`, the Google connector can ingest Gmail directly with no MCP transport setup
 
-    Advanced retry helpers:
+Advanced retry helpers:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki auth configure <provider>
-    openwiki auth tools <provider>
-    ```
-  </Step>
+```bash
+openwiki auth configure <provider>
+openwiki auth tools <provider>
+```
 
-  <Step title="Ingest the source" icon="download">
-    Pull raw data into `~/.openwiki/connectors/` and synthesize updates into the personal wiki:
+### Ingest the source
+Pull raw data into `~/.openwiki/connectors/` and synthesize updates into the personal wiki:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki ingest all
-    openwiki ingest web-search
-    openwiki ingest web-search-2
-    ```
+```bash
+openwiki ingest all
+openwiki ingest web-search
+openwiki ingest web-search-2
+```
 
-    You can also refresh from chat or with `openwiki personal --update` after sources are configured.
-  </Step>
-</Steps>
+You can also refresh from chat or with `openwiki personal --update` after sources are configured.
 
 ### Slack OAuth
 
 Slack OAuth can require an HTTPS redirect URL:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki ngrok start
 # or with a fixed domain:
 openwiki ngrok start https://your-domain.ngrok.app
@@ -119,13 +110,13 @@ Common connector-related keys include Gmail, Notion, Slack, and X OAuth tokens, 
 * `OPENWIKI_OAUTH_CALLBACK_PORT`: local callback port
 * `OPENWIKI_HTTPS_OAUTH_REDIRECT_URI`: Slack HTTPS callback URL
 
-For model provider credentials, see [Model providers](/oss/openwiki/providers).
+For model provider credentials, see [Model providers](https://docs.langchain.com/oss/openwiki/providers).
 
 ## Manage schedules
 
 On macOS, manage the connector schedules with:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki cron list
 openwiki cron pause <source|all>
 openwiki cron resume <source|all>
@@ -136,18 +127,14 @@ openwiki cron delete <source|all>
 
 ## See also
 
-* [Code mode](/oss/openwiki/code-mode)
-* [CLI reference](/oss/openwiki/cli-reference)
-* [Customize OpenWiki](/oss/openwiki/customize)
+* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
+* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
+* [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/personal-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/personal-mode.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

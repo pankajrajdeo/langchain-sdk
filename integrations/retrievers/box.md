@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # BoxRetriever integration
 
 > Integrate with the BoxRetriever retriever using LangChain Python.
 
-This will help you get started with the Box [retriever](/oss/python/deepagents/retrieval).
+This will help you get started with the Box [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval).
 
 # Overview
 
 The `BoxRetriever` class helps you get your unstructured content from Box in LangChain's [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) format. You can do this by searching for files based on a full-text search or using Box AI to retrieve a [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) containing the result of an AI query against files. This requires including a `List[str]` containing Box file ids, i.e. `["12345","67890"]`
 
-<Info>
-  Box AI requires an Enterprise Plus license
-</Info>
+> [!NOTE]
+> Box AI requires an Enterprise Plus license
 
 Files without a text representation will be skipped.
 
@@ -36,18 +31,18 @@ In order to use the Box package, you will need a few things:
 
 ### Credentials
 
-For these examples, we will use [token authentication](https://developer.box.com/guides/authentication/tokens/developer-tokens). This can be used with any [authentication method](https://developer.box.com/guides/authentication/). Just get the token with whatever methodology. If you want to learn more about how to use other authentication types with `langchain-box`, visit the [Box provider](/oss/python/integrations/providers/box) document.
+For these examples, we will use [token authentication](https://developer.box.com/guides/authentication/tokens/developer-tokens). This can be used with any [authentication method](https://developer.box.com/guides/authentication/). Just get the token with whatever methodology. If you want to learn more about how to use other authentication types with `langchain-box`, visit the [Box provider](https://docs.langchain.com/oss/python/integrations/providers/box) document.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
 box_developer_token = getpass.getpass("Enter your Box Developer Token: ")
 ```
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -56,7 +51,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 This retriever lives in the `langchain-box` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-box
 ```
 
@@ -66,7 +61,7 @@ Now we can instantiate our retriever:
 
 ## Search
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box import BoxRetriever
 
 retriever = BoxRetriever(box_developer_token=box_developer_token)
@@ -76,7 +71,7 @@ For more granular search, we offer a series of options to help you filter down t
 
 For more information, check out the [API reference](https://python.langchain.com/v0.2/api_reference/box/utilities/langchain_box.utilities.box.SearchOptions.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.utilities import BoxSearchOptions, DocumentFiles, SearchTypeFilter
 
 box_folder_id = "260931903795"
@@ -97,13 +92,13 @@ retriever = BoxRetriever(
 retriever.invoke("AstroTech Solutions")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'https://dl.boxcloud.com/api/2.0/internal_files/1514555423624/versions/1663171610024/representations/extracted_text/content/', 'title': 'Invoice-A5555_txt'}, page_content='Vendor: AstroTech Solutions\nInvoice Number: A5555\n\nLine Items:\n    - Gravitational Wave Detector Kit: $800\n    - Exoplanet Terrarium: $120\nTotal: $920')]
 ```
 
 ## Box AI
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box import BoxRetriever
 
 box_file_ids = ["1514555423624", "1514553902288"]
@@ -115,13 +110,13 @@ retriever = BoxRetriever(
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What was the most expensive item purchased"
 
 retriever.invoke(query)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'Box AI', 'title': 'Box AI What was the most expensive item purchased'}, page_content='The most expensive item purchased is the **Gravitational Wave Detector Kit** from AstroTech Solutions, which costs **$800**.')]
 ```
 
@@ -131,7 +126,7 @@ With Box AI and the `BoxRetriever`, you can return the answer to your prompt, re
 
 ### Get both
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = BoxRetriever(
     box_developer_token=box_developer_token, box_file_ids=box_file_ids, citations=True
 )
@@ -139,14 +134,14 @@ retriever = BoxRetriever(
 retriever.invoke(query)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'Box AI', 'title': 'Box AI What was the most expensive item purchased'}, page_content='The most expensive item purchased is the **Gravitational Wave Detector Kit** from AstroTech Solutions, which costs **$800**.'),
  Document(metadata={'source': 'Box AI What was the most expensive item purchased', 'file_name': 'Invoice-A5555.txt', 'file_id': '1514555423624', 'file_type': 'file'}, page_content='Vendor: AstroTech Solutions\nInvoice Number: A5555\n\nLine Items:\n    - Gravitational Wave Detector Kit: $800\n    - Exoplanet Terrarium: $120\nTotal: $920')]
 ```
 
 ### Citations only
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = BoxRetriever(
     box_developer_token=box_developer_token,
     box_file_ids=box_file_ids,
@@ -157,7 +152,7 @@ retriever = BoxRetriever(
 retriever.invoke(query)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={'source': 'Box AI What was the most expensive item purchased', 'file_name': 'Invoice-A5555.txt', 'file_id': '1514555423624', 'file_type': 'file'}, page_content='Vendor: AstroTech Solutions\nInvoice Number: A5555\n\nLine Items:\n    - Gravitational Wave Detector Kit: $800\n    - Exoplanet Terrarium: $120\nTotal: $920')]
 ```
 
@@ -165,17 +160,17 @@ retriever.invoke(query)
 
 Like other retrievers, BoxRetriever can be also be added to a LangGraph agent as a tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U langsmith
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 from langchain.tools.retriever import create_retriever_tool
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 box_search_options = BoxSearchOptions(
     ancestor_folder_ids=[box_folder_id],
     search_type_filter=[SearchTypeFilter.FILE_CONTENT],
@@ -197,7 +192,7 @@ box_search_tool = create_retriever_tool(
 tools = [box_search_tool]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 prompt = hub.pull("hwchase17/openai-tools-agent")
 prompt.messages
 
@@ -207,12 +202,12 @@ agent = create_openai_tools_agent(llm, tools, prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 /Users/shurrey/local/langchain/.venv/lib/python3.11/site-packages/langsmith/client.py:312: LangSmithMissingAPIKeyWarning: API key must be provided when using hosted LangSmith API
   warnings.warn(
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = agent_executor.invoke(
     {
         "input": "list the items I purchased from AstroTech Solutions from most expensive to least expensive"
@@ -220,11 +215,11 @@ result = agent_executor.invoke(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(f"result {result['output']}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 result The items you purchased from AstroTech Solutions from most expensive to least expensive are:
 
 1. Gravitational Wave Detector Kit: $800
@@ -247,12 +242,8 @@ If you have questions, you can check out our [developer documentation](https://d
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

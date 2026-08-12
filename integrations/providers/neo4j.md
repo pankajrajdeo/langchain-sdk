@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Neo4j integrations
 
 > Integrate with Neo4j using LangChain Python.
@@ -22,22 +18,22 @@
 The Neo4j vector index is used as a vectorstore,
 whether for semantic search or example selection.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_neo4j import Neo4jVector
 ```
 
-See a [usage example](/oss/python/integrations/vectorstores/neo4jvector).
+See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/neo4jvector).
 
 ## GraphCypherQAChain
 
 There exists a wrapper around Neo4j graph database that allows you to generate Cypher statements based on the user input
 and use them to retrieve relevant information from the database.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 ```
 
-See a [usage example](/oss/python/integrations/graphs/neo4j_cypher)
+See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/neo4j_cypher)
 
 ## Constructing a knowledge graph from text
 
@@ -46,11 +42,10 @@ Diffbot's NLP API allows for the extraction of entities, relationships, and sema
 By coupling Diffbot's NLP API with Neo4j, a graph database, you can create powerful, dynamic graph structures based on the information extracted from text.
 These graph structures are fully queryable and can be integrated into various applications.
 
-<Warning>
-  The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_neo4j import Neo4jGraph
 from langchain_experimental.graph_transformers.diffbot import DiffbotGraphTransformer
 ```
@@ -60,7 +55,7 @@ from langchain_experimental.graph_transformers.diffbot import DiffbotGraphTransf
 Neo4j implementation of LangGraph checkpoint saver for persistent GitHub agent memory with branching time-travel support. Checkpoint savers persist graph state at every super-step, enabling session memory, human-in-the-loop workflows, time travel, and fault tolerance.
 Works with LangGraph graphs and LangChain agents:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_neo4j import Neo4jSaver
 
 with Neo4jSaver.from_conn_string(
@@ -80,12 +75,8 @@ with Neo4jSaver.from_conn_string(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/neo4j.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/neo4j.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

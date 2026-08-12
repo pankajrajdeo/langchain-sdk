@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatGoogleGenerativeAI integration
 
 > Integrate with the ChatGoogleGenerativeAI chat model using LangChain Python.
@@ -10,21 +6,19 @@ Access Google's Generative AI models, including the Gemini family, via the **Gem
 
 For information on the latest models, model IDs, their features, context windows, etc. head to the [Google AI docs](https://ai.google.dev/gemini-api/docs).
 
-<Note>
-  **Vertex AI consolidation & compatibility**
+> [!NOTE]
+> **Vertex AI consolidation & compatibility**
+>
+> As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK instead of the legacy [`google-ai-generativelanguage`](https://googleapis.dev/python/generativelanguage/latest/) SDK.
+>
+> This migration brings support for Gemini models both via the Gemini Developer API and Gemini API in Vertex AI, superseding certain classes in `langchain-google-vertexai`, such as `ChatVertexAI`.
+>
+> Read the [full announcement and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
-  As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK instead of the legacy [`google-ai-generativelanguage`](https://googleapis.dev/python/generativelanguage/latest/) SDK.
-
-  This migration brings support for Gemini models both via the Gemini Developer API and Gemini API in Vertex AI, superseding certain classes in `langchain-google-vertexai`, such as `ChatVertexAI`.
-
-  Read the [full announcement and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
-</Note>
-
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langchain-google-genai/chat_models/ChatGoogleGenerativeAI) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langchain-google-genai/chat_models/ChatGoogleGenerativeAI) API reference.
 
 ## Overview
 
@@ -36,7 +30,7 @@ For information on the latest models, model IDs, their features, context windows
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                             ⚠️                             |
 
@@ -46,7 +40,7 @@ To access Google AI models you'll need to create a Google Account, get a Google 
 
 ### Installation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -U langchain-google-genai
 ```
 
@@ -65,86 +59,81 @@ The backend is determined as follows:
 
 You can also explicitly set `vertexai=True` or `vertexai=False` to override auto-detection.
 
-<Tabs>
-  <Tab title="Gemini Developer API">
-    **Quick setup with API key**
+#### Gemini Developer API
+**Quick setup with API key**
 
-    Recommended for individual developers / new users.
+Recommended for individual developers / new users.
 
-    Head to [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-key) to generate an API key:
+Head to [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-key) to generate an API key:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import getpass
-    import os
+```python
+import getpass
+import os
 
-    if "GOOGLE_API_KEY" not in os.environ:
-        os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
-    ```
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass("Enter your Google AI API key: ")
+```
 
-    The integration checks for `GOOGLE_API_KEY` first, then `GEMINI_API_KEY` as a fallback.
-  </Tab>
+The integration checks for `GOOGLE_API_KEY` first, then `GEMINI_API_KEY` as a fallback.
 
-  <Tab title="Vertex AI with API key">
-    **Vertex AI using API key authentication**
+#### Vertex AI with API key
+**Vertex AI using API key authentication**
 
-    You can use Vertex AI with API key authentication for simpler setup:
+You can use Vertex AI with API key authentication for simpler setup:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export GEMINI_API_KEY='your-api-key'
-    export GOOGLE_GENAI_USE_VERTEXAI=true
-    export GOOGLE_CLOUD_PROJECT='your-project-id'
-    ```
+```bash
+export GEMINI_API_KEY='your-api-key'
+export GOOGLE_GENAI_USE_VERTEXAI=true
+export GOOGLE_CLOUD_PROJECT='your-project-id'
+```
 
-    Or programmatically:
+Or programmatically:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
-        api_key="your-api-key", # [!code highlight]
-        project="your-project-id", # [!code highlight]
-        vertexai=True, # [!code highlight]
-    )
-    ```
-  </Tab>
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    api_key="your-api-key", # [!code highlight]
+    project="your-project-id", # [!code highlight]
+    vertexai=True, # [!code highlight]
+)
+```
 
-  <Tab title="Vertex AI with credentials">
-    **Vertex AI using service account or ADC**
+#### Vertex AI with credentials
+**Vertex AI using service account or ADC**
 
-    Set up [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials):
+Set up [Application Default Credentials (ADC)](https://cloud.google.com/docs/authentication/application-default-credentials):
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    gcloud auth application-default login
-    ```
+```bash
+gcloud auth application-default login
+```
 
-    Set your Google Cloud project:
+Set your Google Cloud project:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export GOOGLE_CLOUD_PROJECT='your-project-id'
-    # Optional: set region (defaults to us-central1)
-    export GOOGLE_CLOUD_LOCATION='us-central1'
-    ```
+```bash
+export GOOGLE_CLOUD_PROJECT='your-project-id'
+# Optional: set region (defaults to us-central1)
+export GOOGLE_CLOUD_LOCATION='us-central1'
+```
 
-    Or use service account credentials:
+Or use service account credentials:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from google.oauth2 import service_account
-    from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from google.oauth2 import service_account
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-    credentials = service_account.Credentials.from_service_account_file(
-        "path/to/service-account.json",
-        scopes=["https://www.googleapis.com/auth/cloud-platform"],
-    )
+credentials = service_account.Credentials.from_service_account_file(
+    "path/to/service-account.json",
+    scopes=["https://www.googleapis.com/auth/cloud-platform"],
+)
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
-        credentials=credentials, # [!code highlight]
-        project="your-project-id", # [!code highlight]
-    )
-    ```
-  </Tab>
-</Tabs>
+llm = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash",
+    credentials=credentials, # [!code highlight]
+    project="your-project-id", # [!code highlight]
+)
+```
 
 #### Environment variables
 
@@ -156,9 +145,9 @@ You can also explicitly set `vertexai=True` or `vertexai=False` to override auto
 | `GOOGLE_CLOUD_PROJECT`      | GCP project ID                           | Vertex AI                              |
 | `GOOGLE_CLOUD_LOCATION`     | GCP region (default: `us-central1`)      | Vertex AI                              |
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -167,47 +156,42 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Now we can instantiate our model object and generate responses:
 
-<Tabs>
-  <Tab title="Gemini Developer API">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_genai import ChatGoogleGenerativeAI
+#### Gemini Developer API
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-    model = ChatGoogleGenerativeAI(
-        model="gemini-3.6-flash",
-        temperature=1.0,  # Gemini 3.0+ defaults to 1.0
-        max_tokens=None,
-        timeout=None,
-        max_retries=2,
-        # other params...
-    )
-    ```
-  </Tab>
+model = ChatGoogleGenerativeAI(
+    model="gemini-3.6-flash",
+    temperature=1.0,  # Gemini 3.0+ defaults to 1.0
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    # other params...
+)
+```
 
-  <Tab title="Vertex AI">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_google_genai import ChatGoogleGenerativeAI
+#### Vertex AI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-    model = ChatGoogleGenerativeAI(
-        model="gemini-3.6-flash",
-        project="your-project-id", # [!code highlight]
-        location="us-central1",  # Optional, defaults to us-central1 [!code highlight]
-        temperature=1.0,  # Gemini 3.0+ defaults to 1.0
-        max_tokens=None,
-        timeout=None,
-        max_retries=2,
-        # other params...
-    )
-    ```
+model = ChatGoogleGenerativeAI(
+    model="gemini-3.6-flash",
+    project="your-project-id", # [!code highlight]
+    location="us-central1",  # Optional, defaults to us-central1 [!code highlight]
+    temperature=1.0,  # Gemini 3.0+ defaults to 1.0
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    # other params...
+)
+```
 
-    Providing `project` automatically selects the Vertex AI backend unless you explicitly set `vertexai=False`.
-  </Tab>
-</Tabs>
+Providing `project` automatically selects the Vertex AI backend unless you explicitly set `vertexai=False`.
 
-<Note>
-  **Temperature for Gemini 3.0+ models**
-
-  If `temperature` is not explicitly set and the model is Gemini 3.0 or later, it will be automatically set to `1.0` instead of the default `0.7` per Google GenAI API best practices. Using `0.7` with Gemini 3.0+ can cause infinite loops, degraded reasoning performance, and failure on complex tasks.
-</Note>
+> [!NOTE]
+> **Temperature for Gemini 3.0+ models**
+>
+> If `temperature` is not explicitly set and the model is Gemini 3.0 or later, it will be automatically set to `1.0` instead of the default `0.7` per Google GenAI API best practices. Using `0.7` with Gemini 3.0+ can cause infinite loops, degraded reasoning performance, and failure on complex tasks.
 
 See the [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langchain-google-genai/chat_models/ChatGoogleGenerativeAI) API Reference for the full set of available model parameters.
 
@@ -215,14 +199,14 @@ See the [`ChatGoogleGenerativeAI`](https://reference.langchain.com/python/langch
 
 If you need to use a proxy, set these environment variables before initializing:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export HTTPS_PROXY='http://username:password@proxy_uri:port'
 export SSL_CERT_FILE='path/to/cert.pem'  # Optional: custom SSL certificate
 ```
 
 For SOCKS5 proxies or advanced proxy configuration, use the `client_args` parameter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatGoogleGenerativeAI(
     model="gemini-3.6-flash",
     client_args={"proxy": "socks5://user:pass@host:port"},
@@ -233,7 +217,7 @@ model = ChatGoogleGenerativeAI(
 
 Use `base_url` and `additional_headers` for model-level HTTP options, such as routing requests through an internal gateway:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatGoogleGenerativeAI(
     model="gemini-3.6-flash",
     base_url="https://your-gemini-gateway.example.com",
@@ -243,7 +227,7 @@ model = ChatGoogleGenerativeAI(
 
 To pass headers or other HTTP options for a single request, provide `http_options` when invoking the model:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 token = "..."
 messages = [("human", "Hello!")]
 
@@ -259,7 +243,7 @@ response = model.invoke(
 
 The same call-time options work with async invocation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = await model.ainvoke(
     messages,
     http_options={"headers": {"Authorization": f"Bearer {token}"}},
@@ -268,7 +252,7 @@ response = await model.ainvoke(
 
 The per-request `http_options` may be a dictionary or a `google.genai.types.HttpOptions` object. Header dictionaries are merged with model-level `additional_headers`, and per-request header values take precedence. Model-level `timeout` and `max_retries` settings are preserved unless you explicitly override `timeout` or `retry_options` in `http_options`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.genai.types import HttpOptions
 
 response = model.invoke(
@@ -281,7 +265,7 @@ response = model.invoke(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -293,28 +277,25 @@ ai_msg = model.invoke(messages)
 ai_msg
 ```
 
-<CodeGroup>
-  ```plaintext Gemini 3 theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  AIMessage(content=[{'type': 'text', 'text': "J'adore la programmation.", 'extras': {'signature': 'EpoWCpc...'}}], additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-3.6-flash', 'safety_ratings': [], 'model_provider': 'google_genai'}, id='lc_run--fb732b64-1ab4-4a28-b93b-dcfb2a164a3d-0', usage_metadata={'input_tokens': 21, 'output_tokens': 779, 'total_tokens': 800, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 772}})
-  ```
+```plaintext
+AIMessage(content=[{'type': 'text', 'text': "J'adore la programmation.", 'extras': {'signature': 'EpoWCpc...'}}], additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-3.6-flash', 'safety_ratings': [], 'model_provider': 'google_genai'}, id='lc_run--fb732b64-1ab4-4a28-b93b-dcfb2a164a3d-0', usage_metadata={'input_tokens': 21, 'output_tokens': 779, 'total_tokens': 800, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 772}})
+```
 
-  ```plaintext Gemini 2.5 theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.5-flash', 'safety_ratings': []}, id='run-3b28d4b8-8a62-4e6c-ad4e-b53e6e825749-0', usage_metadata={'input_tokens': 20, 'output_tokens': 7, 'total_tokens': 27, 'input_token_details': {'cache_read': 0}})
-  ```
-</CodeGroup>
+```plaintext
+AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'prompt_feedback': {'block_reason': 0, 'safety_ratings': []}, 'finish_reason': 'STOP', 'model_name': 'gemini-2.5-flash', 'safety_ratings': []}, id='run-3b28d4b8-8a62-4e6c-ad4e-b53e6e825749-0', usage_metadata={'input_tokens': 20, 'output_tokens': 7, 'total_tokens': 27, 'input_token_details': {'cache_read': 0}})
+```
 
-<Note>
-  **Message content shape**
-
-  Gemini 3 series models return a list of content blocks to capture [thought signatures](#thought-signatures). Use `.text` to get string content:
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  response.content  # -> [{"type": "text", "text": "Hello!", "extras": {"signature": "EpQFCp..."}}]
-  response.text     # -> "Hello!"
-  ```
-
-  Gemini 2.5 and earlier return a plain string for `.content`.
-</Note>
+> [!NOTE]
+> **Message content shape**
+>
+> Gemini 3 series models return a list of content blocks to capture [thought signatures](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#thought-signatures). Use `.text` to get string content:
+>
+> ```python
+> response.content  # -> [{"type": "text", "text": "Hello!", "extras": {"signature": "EpQFCp..."}}]
+> response.text     # -> "Hello!"
+> ```
+>
+> Gemini 2.5 and earlier return a plain string for `.content`.
 
 ## Multimodal usage
 
@@ -322,9 +303,9 @@ Gemini models accept multimodal inputs (text, images, audio, video, PDFs) and so
 
 ### Supported input methods
 
-| Method                                  | [Image](#image-input) | [Video](#video-input) | [Audio](#audio-input) | [PDF](#pdf-input) |
+| Method                                  | [Image](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#image-input) | [Video](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#video-input) | [Audio](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#audio-input) | [PDF](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#pdf-input) |
 | --------------------------------------- | :-------------------: | :-------------------: | :-------------------: | :---------------: |
-| [File upload](#file-upload) (Files API) |           ✅           |           ✅           |           ✅           |         ✅         |
+| [File upload](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#file-upload) (Files API) |           ✅           |           ✅           |           ✅           |         ✅         |
 | Base64 inline data                      |           ✅           |           ✅           |           ✅           |         ✅         |
 | HTTP/HTTPS URLs\*                       |           ✅           |           ✅           |           ✅           |         ✅         |
 | GCS URIs (`gs://...`)                   |           ✅           |           ✅           |           ✅           |         ✅         |
@@ -335,7 +316,7 @@ Gemini models accept multimodal inputs (text, images, audio, video, PDFs) and so
 
 You can upload files to Google's servers and reference them by URI. This works for PDFs, images, videos, and audio files.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import time
 from google import genai
 from langchain.messages import HumanMessage
@@ -370,92 +351,90 @@ Once uploaded, you can reference the file in any of the media-specific sections 
 
 Provide image inputs along with text using a [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) with a list content format.
 
-<CodeGroup>
-  ```python Image URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the image at the URL."},
-          {
-              "type": "image",
-              "url": "https://picsum.photos/seed/picsum/200/300",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the image at the URL."},
+        {
+            "type": "image",
+            "url": "https://picsum.photos/seed/picsum/200/300",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Chat Completions image_url format theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the image at the URL."},
-          {"type": "image_url", "image_url": "https://picsum.photos/seed/picsum/200/300"},
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the image at the URL."},
+        {"type": "image_url", "image_url": "https://picsum.photos/seed/picsum/200/300"},
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import base64
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  image_bytes = open("path/to/your/image.jpg", "rb").read()
-  image_base64 = base64.b64encode(image_bytes).decode("utf-8")
-  mime_type = "image/jpeg"
+image_bytes = open("path/to/your/image.jpg", "rb").read()
+image_base64 = base64.b64encode(image_bytes).decode("utf-8")
+mime_type = "image/jpeg"
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the local image."},
-          {
-              "type": "image",
-              "base64": image_base64,
-              "mime_type": mime_type,
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the local image."},
+        {
+            "type": "image",
+            "base64": image_base64,
+            "mime_type": mime_type,
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Uploaded file theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import time
+from google import genai
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  client = genai.Client()
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+client = genai.Client()
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  # Upload and wait for processing
-  myfile = client.files.upload(file="/path/to/image.jpg")
-  while myfile.state.name == "PROCESSING":
-      time.sleep(2)
-      myfile = client.files.get(name=myfile.name)
+# Upload and wait for processing
+myfile = client.files.upload(file="/path/to/image.jpg")
+while myfile.state.name == "PROCESSING":
+    time.sleep(2)
+    myfile = client.files.get(name=myfile.name)
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe this image."},
-          {
-              "type": "file",
-              "file_id": myfile.uri,
-              "mime_type": "image/jpeg",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe this image."},
+        {
+            "type": "file",
+            "file_id": myfile.uri,
+            "mime_type": "image/jpeg",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
 Other supported image formats:
 
@@ -465,243 +444,236 @@ Other supported image formats:
 
 Provide PDF file inputs along with text.
 
-<CodeGroup>
-  ```python URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the document in a sentence."},
-          {
-              "type": "image_url",  # (PDFs are treated as images)
-              "image_url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the document in a sentence."},
+        {
+            "type": "image_url",  # (PDFs are treated as images)
+            "image_url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import base64
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  pdf_bytes = open("path/to/your/document.pdf", "rb").read()
-  pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
-  mime_type = "application/pdf"
+pdf_bytes = open("path/to/your/document.pdf", "rb").read()
+pdf_base64 = base64.b64encode(pdf_bytes).decode("utf-8")
+mime_type = "application/pdf"
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the document in a sentence."},
-          {
-              "type": "file",
-              "base64": pdf_base64,
-              "mime_type": mime_type,
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the document in a sentence."},
+        {
+            "type": "file",
+            "base64": pdf_base64,
+            "mime_type": mime_type,
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Uploaded file theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import time
+from google import genai
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  client = genai.Client()
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+client = genai.Client()
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  # Upload and wait for processing
-  myfile = client.files.upload(file="/path/to/document.pdf")
-  while myfile.state.name == "PROCESSING":
-      time.sleep(2)
-      myfile = client.files.get(name=myfile.name)
+# Upload and wait for processing
+myfile = client.files.upload(file="/path/to/document.pdf")
+while myfile.state.name == "PROCESSING":
+    time.sleep(2)
+    myfile = client.files.get(name=myfile.name)
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe the document in a sentence."},
-          {
-              "type": "file",
-              "file_id": myfile.uri,
-              "mime_type": "application/pdf",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe the document in a sentence."},
+        {
+            "type": "file",
+            "file_id": myfile.uri,
+            "mime_type": "application/pdf",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
 ### Audio input
 
 Provide audio file inputs along with text.
 
-<CodeGroup>
-  ```python URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize this audio in a sentence."},
-          {
-              "type": "image_url",
-              "image_url": "https://example.com/audio.mp3",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize this audio in a sentence."},
+        {
+            "type": "image_url",
+            "image_url": "https://example.com/audio.mp3",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import base64
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  audio_bytes = open("path/to/your/audio.mp3", "rb").read()
-  audio_base64 = base64.b64encode(audio_bytes).decode("utf-8")
-  mime_type = "audio/mpeg"
+audio_bytes = open("path/to/your/audio.mp3", "rb").read()
+audio_base64 = base64.b64encode(audio_bytes).decode("utf-8")
+mime_type = "audio/mpeg"
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize this audio in a sentence."},
-          {
-              "type": "audio",
-              "base64": audio_base64,
-              "mime_type": mime_type,
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize this audio in a sentence."},
+        {
+            "type": "audio",
+            "base64": audio_base64,
+            "mime_type": mime_type,
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Uploaded file theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import time
+from google import genai
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  client = genai.Client()
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+client = genai.Client()
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  # Upload and wait for processing
-  myfile = client.files.upload(file="/path/to/audio.mp3")
-  while myfile.state.name == "PROCESSING":
-      time.sleep(2)
-      myfile = client.files.get(name=myfile.name)
+# Upload and wait for processing
+myfile = client.files.upload(file="/path/to/audio.mp3")
+while myfile.state.name == "PROCESSING":
+    time.sleep(2)
+    myfile = client.files.get(name=myfile.name)
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize this audio in a sentence."},
-          {
-              "type": "file",
-              "file_id": myfile.uri,
-              "mime_type": "audio/mpeg",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize this audio in a sentence."},
+        {
+            "type": "file",
+            "file_id": myfile.uri,
+            "mime_type": "audio/mpeg",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
 ### Video input
 
 Provide video file inputs along with text.
 
-<CodeGroup>
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import base64
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  video_bytes = open("path/to/your/video.mp4", "rb").read()
-  video_base64 = base64.b64encode(video_bytes).decode("utf-8")
-  mime_type = "video/mp4"
+video_bytes = open("path/to/your/video.mp4", "rb").read()
+video_base64 = base64.b64encode(video_bytes).decode("utf-8")
+mime_type = "video/mp4"
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe what's in this video in a sentence."},
-          {
-              "type": "video",
-              "base64": video_base64,
-              "mime_type": mime_type,
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe what's in this video in a sentence."},
+        {
+            "type": "video",
+            "base64": video_base64,
+            "mime_type": mime_type,
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Uploaded file theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+import time
+from google import genai
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  client = genai.Client()
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+client = genai.Client()
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  # Upload and wait for processing
-  myfile = client.files.upload(file="/path/to/video.mp4")
-  while myfile.state.name == "PROCESSING":
-      time.sleep(2)
-      myfile = client.files.get(name=myfile.name)
+# Upload and wait for processing
+myfile = client.files.upload(file="/path/to/video.mp4")
+while myfile.state.name == "PROCESSING":
+    time.sleep(2)
+    myfile = client.files.get(name=myfile.name)
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize the video in 3 sentences."},
-          {
-              "type": "file",
-              "file_id": myfile.uri,
-              "mime_type": "video/mp4",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize the video in 3 sentences."},
+        {
+            "type": "file",
+            "file_id": myfile.uri,
+            "mime_type": "video/mp4",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python YouTube URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize the video in 3 sentences."},
-          {
-              "type": "video",
-              "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-              "mime_type": "video/mp4",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize the video in 3 sentences."},
+        {
+            "type": "video",
+            "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "mime_type": "video/mp4",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-<Note>
-  **YouTube video input (preview)**
-
-  * Only public videos are supported (not private or unlisted)
-  * Free tier: max 8 hours of YouTube video per day
-</Note>
+> [!NOTE]
+> **YouTube video input (preview)**
+>
+> * Only public videos are supported (not private or unlisted)
+> * Free tier: max 8 hours of YouTube video per day
 
 ### Image generation
 
 Certain models can generate text and images inline. See [Gemini API docs](https://ai.google.dev/gemini-api/docs/image-generation) for details.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 from IPython.display import Image, display
 from langchain.messages import AIMessage
@@ -725,7 +697,7 @@ display(Image(data=base64.b64decode(image_base64), width=300))
 
 Use `image_config` to control image dimensions and quality (see [`genai.types.ImageConfig`](https://googleapis.github.io/python-genai/genai.html#genai.types.ImageConfig)). It can be set at instantiation (applies to all calls) or at invocation (per-call override):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Set at instantiation (applies to all calls)
@@ -745,45 +717,42 @@ By default, image generation models may return both text and images (e.g. *"Ok! 
 
 You can request that the model only return images by setting the `response_modalities` parameter:
 
-<CodeGroup>
-  ```python Instantiation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI, Modality
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI, Modality
 
-  model = ChatGoogleGenerativeAI(
-      model="gemini-2.5-flash-image",
-      response_modalities=[Modality.IMAGE],  # [!code highlight]
-  )
+model = ChatGoogleGenerativeAI(
+    model="gemini-2.5-flash-image",
+    response_modalities=[Modality.IMAGE],  # [!code highlight]
+)
 
-  # All invocations will return only images
-  response = model.invoke("Generate a photorealistic image of a cuddly cat wearing a hat.")
-  ```
+# All invocations will return only images
+response = model.invoke("Generate a photorealistic image of a cuddly cat wearing a hat.")
+```
 
-  ```python Invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI, Modality
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI, Modality
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-image")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-image")
 
-  # Only this invocation will return images; others may return text+images
-  response = model.invoke(
-      "Generate a photorealistic image of a cuddly cat wearing a hat.",
-      response_modalities=[Modality.IMAGE], # [!code highlight]
-  )
-  ```
-</CodeGroup>
+# Only this invocation will return images; others may return text+images
+response = model.invoke(
+    "Generate a photorealistic image of a cuddly cat wearing a hat.",
+    response_modalities=[Modality.IMAGE], # [!code highlight]
+)
+```
 
 ### Audio generation
 
 Certain models can generate audio files. See [Gemini API docs](https://ai.google.dev/gemini-api/docs/speech-generation) for details.
 
-<Warning>
-  **Vertex AI Limitation**
+> [!WARNING]
+> **Vertex AI Limitation**
+>
+> Audio generation models are currently in limited preview on Vertex AI and may require allowlist access. If you encounter an `INVALID_ARGUMENT` error when using TTS models with `vertexai=True`, your GCP project may need to be allowlisted.
+>
+> For more details, see this [Google AI forum discussion](https://discuss.ai.google.dev/t/request-allowlist-access-for-audio-output-in-gemini-2-5-pro-flash-tts-vertex-ai/108067).
 
-  Audio generation models are currently in limited preview on Vertex AI and may require allowlist access. If you encounter an `INVALID_ARGUMENT` error when using TTS models with `vertexai=True`, your GCP project may need to be allowlisted.
-
-  For more details, see this [Google AI forum discussion](https://discuss.ai.google.dev/t/request-allowlist-access-for-audio-output-in-gemini-2-5-pro-flash-tts-vertex-ai/108067).
-</Warning>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-preview-tts") # [!code highlight]
@@ -800,17 +769,15 @@ with open("output.wav", "wb") as f:
 
 You can equip the model with tools to call.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 from langchain.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
-
 
 # Define the tool
 @tool(description="Get the current weather in a given location")
 def get_weather(location: str) -> str:
     return "It's sunny."
-
 
 # Initialize and bind (potentially multiple) tools to the model
 model_with_tools = ChatGoogleGenerativeAI(model="gemini-3.6-flash").bind_tools([get_weather])
@@ -834,7 +801,7 @@ final_response = model_with_tools.invoke(messages)
 final_response
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'get_weather', 'args': {'location': 'Boston'}, 'id': '879b4233-901b-4bbb-af56-3771ca8d3a75', 'type': 'tool_call'}]
 ```
 
@@ -842,16 +809,14 @@ final_response
 
 Force the model to respond with a specific structure. See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/structured-output) for more info.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel
 from typing import Literal
 
-
 class Feedback(BaseModel):
     sentiment: Literal["positive", "neutral", "negative"]
     summary: str
-
 
 model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 structured_model = model.with_structured_output(
@@ -865,7 +830,7 @@ response["summary"]  # "The user expresses positive..."
 
 For streaming structured output, merge dictionaries instead of using `+=`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = structured_model.stream("The interface is intuitive and beautiful!")
 full = next(stream)
 for chunk in stream:
@@ -887,16 +852,14 @@ When using `with_structured_output(method="function_calling")`, do not pass addi
 
 To get structured output **and** search grounding in a single call, use `.bind()` with `response_mime_type` and `response_schema` instead of `with_structured_output`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import BaseModel
-
 
 class MatchResult(BaseModel):
     winner: str
     final_match_score: str
     scorers: list[str]
-
 
 llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
@@ -917,7 +880,7 @@ This uses Gemini's native JSON schema mode for structuring the output while allo
 
 Access token usage information from the response metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
@@ -929,7 +892,7 @@ print("\nUsage Metadata:")
 print(result.usage_metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 Prompt engineering is the art and science of crafting effective text prompts to elicit desired and accurate responses from large language models.
 
 Usage Metadata:
@@ -940,13 +903,12 @@ Usage Metadata:
 
 A service tier sets the price and performance class a request is billed against. Use `flex` to pay less for latency-tolerant work, or `priority` to pay a premium for lower latency. Requests use the standard tier when the parameter is omitted.
 
-<Note>
-  `service_tier` requires `langchain-google-genai>=4.4.0`.
-</Note>
+> [!NOTE]
+> `service_tier` requires `langchain-google-genai>=4.4.0`.
 
 Set the tier on the model, or pass it per request:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 model = ChatGoogleGenerativeAI(
@@ -962,7 +924,7 @@ Accepted values are `"standard"`, `"flex"`, and `"priority"`. The value is the s
 
 A tier has to be enabled for both the project and the model. An unavailable tier returns a `400` instead of falling back to the standard tier, so the request fails rather than billing at a price you did not ask for:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ClientError: 400 INVALID_ARGUMENT. Flex API is not supported for model: gemini-2.5-flash.
 ```
 
@@ -977,7 +939,7 @@ Certain Gemini models support configurable thinking depth. The parameter depends
 | Gemini 3+    | `thinking_level`  | `"minimal"`, `"low"`, `"medium"`, `"high"` (default for Pro)   |
 | Gemini 2.5   | `thinking_budget` | `0` (off), `-1` (dynamic), or a positive integer (token limit) |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 # Gemini 3+: use thinking_level
@@ -989,16 +951,15 @@ llm = ChatGoogleGenerativeAI(
 response = llm.invoke("How many O's are in Google?")
 ```
 
-`thinking_level` is Gemini's native name for the standard [`reasoning_effort`](/oss/python/langchain/models#reasoning) parameter, and the two are interchangeable aliases at both construction and call time. If both are set, `thinking_level` wins. Check a model's [profile](/oss/python/langchain/models#model-profiles) for the levels it supports and its default:
+`thinking_level` is Gemini's native name for the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, and the two are interchangeable aliases at both construction and call time. If both are set, `thinking_level` wins. Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the levels it supports and its default:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.profile["reasoning_effort_levels"]  # e.g. ['minimal', 'low', 'medium', 'high']
 llm.profile["reasoning_effort_default"]  # e.g. 'medium'
 ```
 
-<Note>
-  `reasoning_effort` as a standard parameter requires `langchain-google-genai>=4.3.1`.
-</Note>
+> [!NOTE]
+> `reasoning_effort` as a standard parameter requires `langchain-google-genai>=4.3.1`.
 
 ### Gemini 2.5 models: `thinking_budget`
 
@@ -1008,7 +969,7 @@ For Gemini 2.5 models, use `thinking_budget` (an integer token count) instead:
 * Set to `-1` for dynamic thinking (model decides)
 * Set to a positive integer to constrain token usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(
@@ -1017,15 +978,14 @@ llm = ChatGoogleGenerativeAI(
 )
 ```
 
-<Warning>
-  Not all models allow disabling thinking. See the [Gemini models documentation](https://ai.google.dev/gemini-api/docs/models) for details.
-</Warning>
+> [!WARNING]
+> Not all models allow disabling thinking. See the [Gemini models documentation](https://ai.google.dev/gemini-api/docs/models) for details.
 
 ### Viewing model thoughts
 
 To see a thinking model's reasoning, set `include_thoughts=True`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(
@@ -1040,7 +1000,7 @@ print("Response:", response.content)
 print("Reasoning tokens used:", reasoning_tokens)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Response: [{'type': 'thinking', 'thinking': '**Analyzing and Cou...'}, {'type': 'text', 'text': 'There a...', 'extras': {'signature': 'EroR...'}}]
 Reasoning tokens used: 672
 ```
@@ -1051,20 +1011,18 @@ See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/thinking) for mo
 
 [Thought signatures](https://ai.google.dev/gemini-api/docs/thinking) are encrypted representations of the model's reasoning. They enable Gemini to maintain thought context across multi-turn conversations, since the API is stateless.
 
-<Note>
-  Gemini 3 may raise 4xx errors if thought signatures are not passed back with tool call responses. Upgrade to `langchain-google-genai >= 3.1.0` to ensure this is handled correctly.
-</Note>
+> [!NOTE]
+> Gemini 3 may raise 4xx errors if thought signatures are not passed back with tool call responses. Upgrade to `langchain-google-genai >= 3.1.0` to ensure this is handled correctly.
 
 Signatures appear in `AIMessage` responses:
 
 * **Text blocks**: `extras.signature` within the content block
 * **Tool calls**: `additional_kwargs["__gemini_function_call_thought_signatures__"]`
 
-For multi-turn conversations, pass the full `AIMessage` back to the model so signatures are preserved. This happens automatically when you append the `AIMessage` to your messages list (as shown in the [tool calling](#tool-calling) example above).
+For multi-turn conversations, pass the full `AIMessage` back to the model so signatures are preserved. This happens automatically when you append the `AIMessage` to your messages list (as shown in the [tool calling](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#tool-calling) example above).
 
-<Warning>
-  **Don't reconstruct messages manually.** If you create a new `AIMessage` instead of passing the original object, the signatures will be lost and the API may reject the request.
-</Warning>
+> [!WARNING]
+> **Don't reconstruct messages manually.** If you create a new `AIMessage` instead of passing the original object, the signatures will be lost and the API may reject the request.
 
 ## Built-in tools
 
@@ -1074,33 +1032,31 @@ Google Gemini supports a variety of built-in tools, which can be bound to the mo
 
 See [Gemini docs](https://ai.google.dev/gemini-api/docs/grounding/search-suggestions) for detail.
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  model_with_search = model.bind_tools([{"google_search": {}}]) # [!code highlight]
-  response = model_with_search.invoke("When is the next total solar eclipse in US?")
+model_with_search = model.bind_tools([{"google_search": {}}]) # [!code highlight]
+response = model_with_search.invoke("When is the next total solar eclipse in US?")
 
-  response.content_blocks
-  ```
+response.content_blocks
+```
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  response = model.invoke(
-      "When is the next total solar eclipse in US?",
-      tools=[{"google_search": {}}], # [!code highlight]
-  )
+response = model.invoke(
+    "When is the next total solar eclipse in US?",
+    tools=[{"google_search": {}}], # [!code highlight]
+)
 
-  response.content_blocks
-  ```
-</CodeGroup>
+response.content_blocks
+```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'text',
   'text': 'The next total solar eclipse visible in the contiguous United States will occur on...',
   'annotations': [{'type': 'citation',
@@ -1120,137 +1076,129 @@ See [Gemini docs](https://ai.google.dev/gemini-api/docs/grounding/search-suggest
 
 Certain models support grounding using Google Maps. Maps grounding connects Gemini's generative capabilities with Google Maps' current, factual location data. This enables location-aware applications that provide accurate, geographically specific responses. See [Gemini docs](https://ai.google.dev/gemini-api/docs/maps-grounding) for detail.
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
 
-  model_with_maps = model.bind_tools([{"google_maps": {}}]) # [!code highlight]
-  response = model_with_maps.invoke(
-      "What are some good Italian restaurants near the Eiffel Tower in Paris?"
-  )
-  ```
+model_with_maps = model.bind_tools([{"google_maps": {}}]) # [!code highlight]
+response = model_with_maps.invoke(
+    "What are some good Italian restaurants near the Eiffel Tower in Paris?"
+)
+```
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
 
-  response = model.invoke(
-      "What are some good Italian restaurants near the Eiffel Tower in Paris?",
-      tools=[{"google_maps": {}}], # [!code highlight]
-  )
-  ```
-</CodeGroup>
+response = model.invoke(
+    "What are some good Italian restaurants near the Eiffel Tower in Paris?",
+    tools=[{"google_maps": {}}], # [!code highlight]
+)
+```
 
 The response will include grounding metadata with location information from Google Maps.
 
 You can optionally provide a specific location context using `tool_config` with `lat_lng`. This is useful when you want to ground queries relative to a specific geographic point.
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
 
-  # Provide location context (latitude and longitude)
-  model_with_maps = model.bind_tools(
-      [{"google_maps": {}}], # [!code highlight]
-      tool_config={
-          "retrieval_config": {  # Eiffel Tower
-              "lat_lng": { # [!code highlight]
-                  "latitude": 48.858844, # [!code highlight]
-                  "longitude": 2.294351, # [!code highlight]
-              } # [!code highlight]
-          }
-      },
-  )
+# Provide location context (latitude and longitude)
+model_with_maps = model.bind_tools(
+    [{"google_maps": {}}], # [!code highlight]
+    tool_config={
+        "retrieval_config": {  # Eiffel Tower
+            "lat_lng": { # [!code highlight]
+                "latitude": 48.858844, # [!code highlight]
+                "longitude": 2.294351, # [!code highlight]
+            } # [!code highlight]
+        }
+    },
+)
 
-  response = model_with_maps.invoke(
-      "What Italian restaurants are within a 5 minute walk from here?"
-  )
-  ```
+response = model_with_maps.invoke(
+    "What Italian restaurants are within a 5 minute walk from here?"
+)
+```
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
 
-  response = model.invoke(
-      "What Italian restaurants are within a 5 minute walk from here?",
-      tools=[{"google_maps": {}}], # [!code highlight]
-      tool_config={
-          "retrieval_config": {  # Eiffel Tower
-              "lat_lng": { # [!code highlight]
-                  "latitude": 48.858844, # [!code highlight]
-                  "longitude": 2.294351, # [!code highlight]
-              } # [!code highlight]
-          }
-      },
-  )
-  ```
-</CodeGroup>
+response = model.invoke(
+    "What Italian restaurants are within a 5 minute walk from here?",
+    tools=[{"google_maps": {}}], # [!code highlight]
+    tool_config={
+        "retrieval_config": {  # Eiffel Tower
+            "lat_lng": { # [!code highlight]
+                "latitude": 48.858844, # [!code highlight]
+                "longitude": 2.294351, # [!code highlight]
+            } # [!code highlight]
+        }
+    },
+)
+```
 
 ### URL context
 
 The URL context tool enables the model to access and analyze content from URLs you provide in your prompt. This is useful for tasks like summarizing web pages, extracting data from multiple sources, or answering questions about online content. See [Gemini docs](https://ai.google.dev/gemini-api/docs/url-context) for detail and limitations.
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-  model_with_url_context = model.bind_tools([{"url_context": {}}]) # [!code highlight]
-  response = model_with_url_context.invoke(
-      "Summarize the content at https://docs.langchain.com"
-  )
-  ```
+model_with_url_context = model.bind_tools([{"url_context": {}}]) # [!code highlight]
+response = model_with_url_context.invoke(
+    "Summarize the content at https://docs.langchain.com"
+)
+```
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 
-  response = model.invoke(
-      "Summarize the content at https://docs.langchain.com",
-      tools=[{"url_context": {}}], # [!code highlight]
-  )
-  ```
-</CodeGroup>
+response = model.invoke(
+    "Summarize the content at https://docs.langchain.com",
+    tools=[{"url_context": {}}], # [!code highlight]
+)
+```
 
 ### Code execution
 
 See [Gemini docs](https://ai.google.dev/gemini-api/docs/code-execution?lang=python) for detail.
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  model_with_code_interpreter = model.bind_tools([{"code_execution": {}}]) # [!code highlight]
-  response = model_with_code_interpreter.invoke("Use Python to calculate 3^3.")
+model_with_code_interpreter = model.bind_tools([{"code_execution": {}}]) # [!code highlight]
+response = model_with_code_interpreter.invoke("Use Python to calculate 3^3.")
 
-  response.content_blocks
-  ```
+response.content_blocks
+```
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
 
-  response = model.invoke(
-      "Use Python to calculate 3^3.",
-      tools=[{"code_execution": {}}], # [!code highlight]
-  )
+response = model.invoke(
+    "Use Python to calculate 3^3.",
+    tools=[{"code_execution": {}}], # [!code highlight]
+)
 
-  response.content_blocks
-  ```
-</CodeGroup>
+response.content_blocks
+```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'server_tool_call',
   'name': 'code_interpreter',
   'args': {'code': 'print(3**3)', 'language': <Language.PYTHON: 1>},
@@ -1268,39 +1216,36 @@ See [Gemini docs](https://ai.google.dev/gemini-api/docs/code-execution?lang=pyth
 
 The Gemini 2.5 Computer Use model (`gemini-2.5-computer-use-preview-10-2025`) can interact with browser environments to automate web tasks like clicking, typing, and scrolling.
 
-<Warning>
-  **Preview model limitations**
+> [!WARNING]
+> **Preview model limitations**
+>
+> The Computer Use model is in preview and may produce unexpected behavior. Always supervise automated tasks and avoid use with sensitive data or critical operations. See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/computer-use) for safety best practices.
 
-  The Computer Use model is in preview and may produce unexpected behavior. Always supervise automated tasks and avoid use with sensitive data or critical operations. See the [Gemini API docs](https://ai.google.dev/gemini-api/docs/computer-use) for safety best practices.
-</Warning>
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-<CodeGroup>
-  ```python Bind to model theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+model = ChatGoogleGenerativeAI(model="gemini-2.5-computer-use-preview-10-2025") # [!code highlight]
+model_with_computer = model.bind_tools([{"computer_use": {}}]) # [!code highlight]
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-computer-use-preview-10-2025") # [!code highlight]
-  model_with_computer = model.bind_tools([{"computer_use": {}}]) # [!code highlight]
+response = model_with_computer.invoke("Please navigate to example.com")
 
-  response = model_with_computer.invoke("Please navigate to example.com")
+response.content_blocks
+```
 
-  response.content_blocks
-  ```
+```python
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  ```python Use on invocation theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_google_genai import ChatGoogleGenerativeAI
+model = ChatGoogleGenerativeAI(model="gemini-2.5-computer-use-preview-10-2025") # [!code highlight]
 
-  model = ChatGoogleGenerativeAI(model="gemini-2.5-computer-use-preview-10-2025") # [!code highlight]
+response = model.invoke(
+    "Please navigate to example.com",
+    tools=[{"computer_use": {}}], # [!code highlight]
+)
 
-  response = model.invoke(
-      "Please navigate to example.com",
-      tools=[{"computer_use": {}}], # [!code highlight]
-  )
+response.content_blocks
+```
 
-  response.content_blocks
-  ```
-</CodeGroup>
-
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'tool_call',
   'id': '08a8b175-16ab-4861-8965-b736d5d4dd7e',
   'name': 'open_web_browser',
@@ -1309,7 +1254,7 @@ The Gemini 2.5 Computer Use model (`gemini-2.5-computer-use-preview-10-2025`) ca
 
 You can configure the environment and exclude specific UI actions:
 
-```python Advanced configuration theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI, Environment
 
 model = ChatGoogleGenerativeAI(model="gemini-2.5-computer-use-preview-10-2025") # [!code highlight]
@@ -1343,7 +1288,7 @@ The model returns function calls for UI actions (like `click_at`, `type_text_at`
 
 Gemini models have default safety settings that can be overridden. If you are receiving lots of `'Safety Warnings'` from your models, you can try tweaking the `safety_settings` attribute of the model. For example, to turn off safety blocking for dangerous content, you can construct your LLM as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import (
     ChatGoogleGenerativeAI,
     HarmBlockThreshold,
@@ -1364,107 +1309,113 @@ For an enumeration of the categories and thresholds available, see Google's [saf
 
 Context caching allows you to store and reuse content (e.g., PDFs, images) for faster processing. The `cached_content` parameter accepts a cache name created via the Google Generative AI API.
 
-<Accordion title="Single file example">
-  This caches a single file and queries it.
+<details>
+<summary>Single file example</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from google.genai import types
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+This caches a single file and queries it.
 
-  client = genai.Client()
+```python
+import time
+from google import genai
+from google.genai import types
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  # Upload file
-  file = client.files.upload(file="path/to/your/file")
-  while file.state.name == "PROCESSING":
-      time.sleep(2)
-      file = client.files.get(name=file.name)
+client = genai.Client()
 
-  # Create cache
-  model = "gemini-3.6-flash"
-  cache = client.caches.create(
-      model=model,
-      config=types.CreateCachedContentConfig(
-          display_name="Cached Content",
-          system_instruction=(
-              "You are an expert content analyzer, and your job is to answer "
-              "the user's query based on the file you have access to."
-          ),
-          contents=[file],
-          ttl="300s",
-      ),
-  )
+# Upload file
+file = client.files.upload(file="path/to/your/file")
+while file.state.name == "PROCESSING":
+    time.sleep(2)
+    file = client.files.get(name=file.name)
 
-  # Query with LangChain
-  llm = ChatGoogleGenerativeAI(
-      model=model,
-      cached_content=cache.name,
-  )
-  message = HumanMessage(content="Summarize the main points of the content.")
-  llm.invoke([message])
-  ```
-</Accordion>
+# Create cache
+model = "gemini-3.6-flash"
+cache = client.caches.create(
+    model=model,
+    config=types.CreateCachedContentConfig(
+        display_name="Cached Content",
+        system_instruction=(
+            "You are an expert content analyzer, and your job is to answer "
+            "the user's query based on the file you have access to."
+        ),
+        contents=[file],
+        ttl="300s",
+    ),
+)
 
-<Accordion title="Multiple files example">
-  This caches two files using `Part` and queries them together.
+# Query with LangChain
+llm = ChatGoogleGenerativeAI(
+    model=model,
+    cached_content=cache.name,
+)
+message = HumanMessage(content="Summarize the main points of the content.")
+llm.invoke([message])
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import time
-  from google import genai
-  from google.genai.types import CreateCachedContentConfig, Content, Part
-  from langchain.messages import HumanMessage
-  from langchain_google_genai import ChatGoogleGenerativeAI
+</details>
 
-  client = genai.Client()
+<details>
+<summary>Multiple files example</summary>
 
-  # Upload files
-  file_1 = client.files.upload(file="./file1")
-  while file_1.state.name == "PROCESSING":
-      time.sleep(2)
-      file_1 = client.files.get(name=file_1.name)
+This caches two files using `Part` and queries them together.
 
-  file_2 = client.files.upload(file="./file2")
-  while file_2.state.name == "PROCESSING":
-      time.sleep(2)
-      file_2 = client.files.get(name=file_2.name)
+```python
+import time
+from google import genai
+from google.genai.types import CreateCachedContentConfig, Content, Part
+from langchain.messages import HumanMessage
+from langchain_google_genai import ChatGoogleGenerativeAI
 
-  # Create cache with multiple files
-  contents = [
-      Content(
-          role="user",
-          parts=[
-              Part.from_uri(file_uri=file_1.uri, mime_type=file_1.mime_type),
-              Part.from_uri(file_uri=file_2.uri, mime_type=file_2.mime_type),
-          ],
-      )
-  ]
-  model = "gemini-3.6-flash"
-  cache = client.caches.create(
-      model=model,
-      config=CreateCachedContentConfig(
-          display_name="Cached Contents",
-          system_instruction=(
-              "You are an expert content analyzer, and your job is to answer "
-              "the user's query based on the files you have access to."
-          ),
-          contents=contents,
-          ttl="300s",
-      ),
-  )
+client = genai.Client()
 
-  # Query with LangChain
-  llm = ChatGoogleGenerativeAI(
-      model=model,
-      cached_content=cache.name,
-  )
-  message = HumanMessage(
-      content="Provide a summary of the key information across both files."
-  )
-  llm.invoke([message])
-  ```
-</Accordion>
+# Upload files
+file_1 = client.files.upload(file="./file1")
+while file_1.state.name == "PROCESSING":
+    time.sleep(2)
+    file_1 = client.files.get(name=file_1.name)
+
+file_2 = client.files.upload(file="./file2")
+while file_2.state.name == "PROCESSING":
+    time.sleep(2)
+    file_2 = client.files.get(name=file_2.name)
+
+# Create cache with multiple files
+contents = [
+    Content(
+        role="user",
+        parts=[
+            Part.from_uri(file_uri=file_1.uri, mime_type=file_1.mime_type),
+            Part.from_uri(file_uri=file_2.uri, mime_type=file_2.mime_type),
+        ],
+    )
+]
+model = "gemini-3.6-flash"
+cache = client.caches.create(
+    model=model,
+    config=CreateCachedContentConfig(
+        display_name="Cached Contents",
+        system_instruction=(
+            "You are an expert content analyzer, and your job is to answer "
+            "the user's query based on the files you have access to."
+        ),
+        contents=contents,
+        ttl="300s",
+    ),
+)
+
+# Query with LangChain
+llm = ChatGoogleGenerativeAI(
+    model=model,
+    cached_content=cache.name,
+)
+message = HumanMessage(
+    content="Provide a summary of the key information across both files."
+)
+llm.invoke([message])
+```
+
+</details>
 
 See the Gemini API docs on [context caching](https://ai.google.dev/gemini-api/docs/caching?lang=python) for more information.
 
@@ -1472,7 +1423,7 @@ See the Gemini API docs on [context caching](https://ai.google.dev/gemini-api/do
 
 Access response metadata from the model response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
@@ -1481,7 +1432,7 @@ response = llm.invoke("Hello!")
 response.response_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'prompt_feedback': {'block_reason': 0, 'safety_ratings': []},
  'finish_reason': 'STOP',
  'model_name': 'gemini-3.6-flash',
@@ -1497,12 +1448,8 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_generative_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

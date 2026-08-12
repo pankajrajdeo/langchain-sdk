@@ -1,48 +1,41 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Basic authentication with email and password
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-basic-auth)
+Basic authentication lets users log in to LangSmith [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) with an email and password, without configuring an external identity provider. [Organization Admins](https://docs.langchain.com/langsmith/rbac#organization-admin) manage users directly from LangSmith, so authentication runs self-contained without depending on [OAuth or SSO](https://docs.langchain.com/langsmith/self-host-sso).
 
-Basic authentication lets users log in to LangSmith [Self-hosted](/langsmith/self-hosted) with an email and password, without configuring an external identity provider. [Organization Admins](/langsmith/rbac#organization-admin) manage users directly from LangSmith, so authentication runs self-contained without depending on [OAuth or SSO](/langsmith/self-host-sso).
-
-<Tip>
-  For a description of the supported authentication methods in LangSmith Self-hosted, refer to the [Authentication methods](/langsmith/authentication-methods#self-hosted) page.
-</Tip>
+> [!TIP]
+> For a description of the supported authentication methods in LangSmith Self-hosted, refer to the [Authentication methods](https://docs.langchain.com/langsmith/authentication-methods#self-hosted) page.
 
 ## Considerations
 
-* You can upgrade a basic auth installation to [OAuth with client secret](/langsmith/self-host-sso#with-client-secret-recommended) by swapping the configuration parameters, but you cannot switch back to basic auth from any OAuth mode.
+* You can upgrade a basic auth installation to [OAuth with client secret](https://docs.langchain.com/langsmith/self-host-sso#with-client-secret-recommended) by swapping the configuration parameters, but you cannot switch back to basic auth from any OAuth mode.
 * You cannot switch between basic auth and OAuth with PKCE (deprecated), in either direction.
-* A new basic auth installation requires a fresh installation including a separate PostgreSQL database/schema, unless migrating from an existing [None](/langsmith/authentication-methods#none) auth installation (refer to [Migrating from none auth](#migrating-from-none-auth)).
+* A new basic auth installation requires a fresh installation including a separate PostgreSQL database/schema, unless migrating from an existing [None](https://docs.langchain.com/langsmith/authentication-methods#none) auth installation (refer to [Migrating from none auth](https://docs.langchain.com/langsmith/self-host-basic-auth#migrating-from-none-auth)).
 * Users receive an auto-generated initial password when invited, which must be shared with them out of band. Any Organization Admin can change this password later.
 * You cannot enable basic auth and OAuth with client secret at the same time.
-* All basic auth users share a single `Default` [organization](/langsmith/administration-overview#organizations) that is provisioned at install time. Creating additional organizations is not supported.
+* All basic auth users share a single `Default` [organization](https://docs.langchain.com/langsmith/administration-overview#organizations) that is provisioned at install time. Creating additional organizations is not supported.
 
 ## Requirements and features
 
-* Your initial password must be at least 12 characters long and contain at least one lowercase, uppercase, and symbol (refer to [Configuration](#configuration)).
+* Your initial password must be at least 12 characters long and contain at least one lowercase, uppercase, and symbol (refer to [Configuration](https://docs.langchain.com/langsmith/self-host-basic-auth#configuration)).
 * The secret used for signing JWTs has no strict requirements, but should be a securely generated string of at least 32 characters. For example, [`openssl rand -base64 32`](https://docs.openssl.org/1.0.2/man1/rand/#description).
 
 ## Migrating from none auth
 
-<Note>
-  Only supported in [versions 0.7 and later](/langsmith/self-hosted-changelog).
-</Note>
+> [!NOTE]
+> Only supported in [versions 0.7 and later](https://docs.langchain.com/langsmith/self-hosted-changelog).
 
-Migrating from [None](/langsmith/authentication-methods#none) auth mode to basic auth preserves your existing traces, datasets, and other resources. LangSmith replaces the single "default" user with a user created from the basic auth credentials you set up in your [configuration file](#configuration). The pre-existing workspace keeps its ID (`00000000-0000-0000-0000-000000000000`) so existing resources remain bound to it. Aside from the user swap, the resulting migrated installation behaves the same as a fresh basic auth install.
+Migrating from [None](https://docs.langchain.com/langsmith/authentication-methods#none) auth mode to basic auth preserves your existing traces, datasets, and other resources. LangSmith replaces the single "default" user with a user created from the basic auth credentials you set up in your [configuration file](https://docs.langchain.com/langsmith/self-host-basic-auth#configuration). The pre-existing workspace keeps its ID (`00000000-0000-0000-0000-000000000000`) so existing resources remain bound to it. Aside from the user swap, the resulting migrated installation behaves the same as a fresh basic auth install.
 
-To migrate, apply the basic auth configuration shown in [Configuration](#configuration) and then run `helm upgrade`.
+To migrate, apply the basic auth configuration shown in [Configuration](https://docs.langchain.com/langsmith/self-host-basic-auth#configuration) and then run `helm upgrade`.
 
 ## Configuration
 
-<Note>
-  Changing the JWT secret will log out your users.
-</Note>
+> [!NOTE]
+> Changing the JWT secret will log out your users.
 
 Enable basic auth by adding the following block to your LangSmith Helm values. On first install, LangSmith uses these values to create the initial Organization Admin user for the `Default` organization:
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 config:
   authType: mixed
   basicAuth:
@@ -52,16 +45,12 @@ config:
     jwtSecret: <SECRET>
 ```
 
-Once configured, LangSmith displays a login screen with email and password. Log in with the `initialOrgAdminEmail` and `initialOrgAdminPassword` values, and your user is auto-provisioned with the `Organization Admin` role. For more details, refer to [Organization roles](/langsmith/administration-overview#organization-roles).
+Once configured, LangSmith displays a login screen with email and password. Log in with the `initialOrgAdminEmail` and `initialOrgAdminPassword` values, and your user is auto-provisioned with the `Organization Admin` role. For more details, refer to [Organization roles](https://docs.langchain.com/langsmith/administration-overview#organization-roles).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-basic-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-basic-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

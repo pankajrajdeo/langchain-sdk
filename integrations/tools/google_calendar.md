@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google calendar toolkit integration
 
 > Integrate with the Google calendar toolkit using LangChain Python.
@@ -26,9 +22,9 @@ To use this toolkit, you will need to:
 1. Have a Google account with access to Google Calendar.
 2. Set up your credentials as explained in the [Google Calendar API docs](https://developers.google.com/calendar/api/quickstart/python#authorize_credentials_for_a_desktop_application). Once you've downloaded the `credentials.json` file, you can start using the Google Calendar API.
 
-To enable automated tracing of individual tools, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -37,7 +33,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 This toolkit lives in the `langchain-google-community` package of the [langchain-google](https://github.com/langchain-ai/langchain-google) repository. We'll need the `calendar` extra:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-community\[calendar\]
 ```
 
@@ -45,7 +41,7 @@ pip install -qU langchain-google-community\[calendar\]
 
 By default the toolkit reads the local `credentials.json` file. You can also manually provide a `Credentials` object.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import CalendarToolkit
 
 toolkit = CalendarToolkit()
@@ -55,7 +51,7 @@ toolkit = CalendarToolkit()
 
 Behind the scenes, a `googleapi` resource is created using the following methods. you can manually build a `googleapi` resource for more auth control.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import CalendarToolkit
 from langchain_google_community.calendar.utils import (
     build_resource_service,
@@ -78,12 +74,12 @@ toolkit = CalendarToolkit(api_resource=api_resource)
 
 View available tools:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tools = toolkit.get_tools()
 tools
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [CalendarCreateEvent(api_resource=<googleapiclient.discovery.Resource object at 0x10ad13fb0>),
  CalendarSearchEvents(api_resource=<googleapiclient.discovery.Resource object at 0x10ad13fb0>),
  CalendarUpdateEvent(api_resource=<googleapiclient.discovery.Resource object at 0x10ad13fb0>),
@@ -103,11 +99,11 @@ tools
 
 ## Invocation
 
-### [Invoke directly with args](/oss/python/langchain/tools#create-tools)
+### [Invoke directly with args](https://docs.langchain.com/oss/python/langchain/tools#create-tools)
 
 You can invoke the tool directly by passing the required arguments in a dictionary format. Here is an example of creating a new event using the `CalendarCreateEvent` tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community.calendar.create_event import CalendarCreateEvent
 
 tool = CalendarCreateEvent()
@@ -126,19 +122,19 @@ tool.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'Event created: https://www.google.com/calendar/event?eid=amoxdjVsM2UzMW51Yjk2czc4ajhvaGdkcGcgam9yZ2VhbmczM0Bt'
 ```
 
 ## Use within an agent
 
-Below we show how to incorporate the toolkit into an [agent](/oss/python/langchain/agents).
+Below we show how to incorporate the toolkit into an [agent](https://docs.langchain.com/oss/python/langchain/agents).
 
 We will need an LLM or chat model:
 
-<ChatModelTabs customVarName="llm" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/google_calendar).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # | output: false
 # | echo: false
 
@@ -147,14 +143,13 @@ from langchain_openai import ChatOpenAI
 llm = ChatOpenAI(model="gpt-5.4-mini", temperature=0)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
-
 
 agent_executor = create_agent(llm, tools)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 example_query = "Create a green event for this afternoon to go for a 30-minute run."
 
 stream = agent_executor.stream_events(
@@ -165,7 +160,7 @@ for snapshot in stream.values:
     snapshot["messages"][-1].pretty_print()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ================================ Human Message =================================
 
 Create a green event for this afternoon to go for a 30-minute run.
@@ -206,12 +201,8 @@ I have created a green event for your run this afternoon. You can view it [in Go
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_calendar.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_calendar.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

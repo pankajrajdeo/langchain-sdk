@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Runtime
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/runtime)
 ## Overview
 
 LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) runs on LangGraph's runtime under the hood.
@@ -11,16 +7,15 @@ LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/ag
 LangGraph exposes a [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object with the following information:
 
 1. **Context**: static information like user id, db connections, or other dependencies for an agent invocation
-2. **Store**: a [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore) instance used for [long-term memory](/oss/python/langchain/long-term-memory)
+2. **Store**: a [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore) instance used for [long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory)
 3. **Stream writer**: an object used for streaming information via the `"custom"` stream mode
 4. **Execution info**: identity and retry information for the current execution (thread ID, run ID, attempt number)
 5. **Server info**: server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)
 
-<Tip>
-  Runtime context provides **dependency injection** for your tools and middleware. Instead of hardcoding values or using global state, you can inject runtime dependencies (like database connections, user IDs, or configuration) when invoking your agent. This makes your tools more testable, reusable, and flexible.
-</Tip>
+> [!TIP]
+> Runtime context provides **dependency injection** for your tools and middleware. Instead of hardcoding values or using global state, you can inject runtime dependencies (like database connections, user IDs, or configuration) when invoking your agent. This makes your tools more testable, reusable, and flexible.
 
-You can access the runtime information within [tools](#inside-tools) and [middleware](#inside-middleware).
+You can access the runtime information within [tools](https://docs.langchain.com/oss/python/langchain/runtime#inside-tools) and [middleware](https://docs.langchain.com/oss/python/langchain/runtime#inside-middleware).
 
 ## Access
 
@@ -28,11 +23,10 @@ When creating an agent with [`create_agent`](https://reference.langchain.com/pyt
 
 When invoking the agent, pass the `context` argument with the relevant configuration for the run:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dataclasses import dataclass
 
 from langchain.agents import create_agent
-
 
 @dataclass
 class Context:
@@ -56,11 +50,11 @@ You can access the runtime information inside tools to:
 
 * Access the context
 * Read or write long-term memory
-* Write to the [custom stream](/oss/python/langchain/streaming#custom-updates) (ex, tool progress / updates)
+* Write to the [custom stream](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates) (ex, tool progress / updates)
 
 Use the `ToolRuntime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside a tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dataclasses import dataclass
 from langchain.tools import tool, ToolRuntime  # [!code highlight]
 
@@ -85,7 +79,7 @@ def fetch_user_email_preferences(runtime: ToolRuntime[Context]) -> str:  # [!cod
 
 Access execution identity (thread ID, run ID) via `runtime.execution_info`, and server-specific metadata (assistant ID, authenticated user) via `runtime.server_info` when running on LangGraph Server:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool, ToolRuntime
 
 @tool
@@ -107,24 +101,22 @@ def context_aware_tool(runtime: ToolRuntime) -> str:
 
 `server_info` is `None` when not running on LangGraph Server (e.g., during local development).
 
-<Note>
-  Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`) for `runtime.execution_info` and `runtime.server_info`.
-</Note>
+> [!NOTE]
+> Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`) for `runtime.execution_info` and `runtime.server_info`.
 
 ### Inside middleware
 
 You can access runtime information in middleware to create dynamic prompts, modify messages, or control agent behavior based on user context.
 
-Use the `Runtime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside [node-style hooks](/oss/python/langchain/middleware/custom#node-style-hooks).  For [wrap-style hooks](/oss/python/langchain/middleware/custom#wrap-style-hooks), the `Runtime` object is available inside the [`ModelRequest`](https://reference.langchain.com/python/langchain/agents/middleware/types/ModelRequest) parameter.
+Use the `Runtime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside [node-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#node-style-hooks).  For [wrap-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#wrap-style-hooks), the `Runtime` object is available inside the [`ModelRequest`](https://reference.langchain.com/python/langchain/agents/middleware/types/ModelRequest) parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from dataclasses import dataclass
 
 from langchain.messages import AnyMessage
 from langchain.agents import create_agent, AgentState
 from langchain.agents.middleware import dynamic_prompt, ModelRequest, before_model, after_model
 from langgraph.runtime import Runtime
-
 
 @dataclass
 class Context:
@@ -166,11 +158,10 @@ agent.invoke(
 
 Middleware hooks can also access `runtime.execution_info` and `runtime.server_info`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import AgentState
 from langchain.agents.middleware import before_model
 from langgraph.runtime import Runtime
-
 
 @before_model
 def auth_gate(state: AgentState, runtime: Runtime) -> dict | None:
@@ -182,18 +173,13 @@ def auth_gate(state: AgentState, runtime: Runtime) -> dict | None:
     return None
 ```
 
-<Note>
-  Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
-</Note>
+> [!NOTE]
+> Requires `deepagents>=0.5.0` (or `langgraph>=1.1.5`).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/runtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/runtime.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

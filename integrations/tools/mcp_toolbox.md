@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Mcp toolbox for databases integration
 
 > Integrate with the Mcp toolbox for databases tool using LangChain Python.
@@ -34,13 +30,13 @@ First, let's set up a PostgreSQL database. We'll create a new database, a dedica
 
 Connect to PostgreSQL using the `psql` command. You may need to adjust the command based on your PostgreSQL setup (e.g., if you need to specify a host or a different superuser).
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 psql -U postgres
 ```
 
 Now, run the following SQL commands to create the user, database, and grant the necessary permissions:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 CREATE USER toolbox_user WITH PASSWORD 'my-password';
 CREATE DATABASE toolbox_db;
 GRANT ALL PRIVILEGES ON DATABASE toolbox_db TO toolbox_user;
@@ -49,13 +45,13 @@ ALTER DATABASE toolbox_db OWNER TO toolbox_user;
 
 Connect to your newly created database with the new user:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 \c toolbox_db toolbox_user
 ```
 
 Finally, create the `hotels` table and insert some data:
 
-```sql theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sql
 CREATE TABLE hotels(
   id            INTEGER NOT NULL PRIMARY KEY,
   name          VARCHAR NOT NULL,
@@ -79,7 +75,7 @@ Next, we will install MCP Toolbox, define our tools in a `tools.yaml` configurat
 
 For **macOS** users, the easiest way to install is with [Homebrew](https://formulae.brew.sh/formula/mcp-toolbox):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 brew install mcp-toolbox
 ```
 
@@ -87,7 +83,7 @@ For other platforms, [download the latest MCP Toolbox binary for your operating 
 
 Create a `tools.yaml` file. This file defines the data sources MCP Toolbox can connect to and the tools it can expose to your agent. For production use, always use environment variables for secrets.
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 sources:
   my-pg-source:
     kind: postgres
@@ -126,7 +122,7 @@ toolsets:
 
 Now, in a separate terminal window, start the MCP Toolbox server. If you installed via Homebrew, you can just run `toolbox`. If you downloaded the binary manually, you'll need to run `./toolbox` from the directory where you saved it:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 toolbox --tools-file "tools.yaml"
 ```
 
@@ -134,11 +130,11 @@ MCP Toolbox will start on `http://127.0.0.1:5000` by default and will hot-reload
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install toolbox-langchain
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from toolbox_langchain import ToolboxClient
 
 with ToolboxClient("http://127.0.0.1:5000") as client:
@@ -147,7 +143,7 @@ with ToolboxClient("http://127.0.0.1:5000") as client:
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from toolbox_langchain import ToolboxClient
 
 with ToolboxClient("http://127.0.0.1:5000") as client:
@@ -156,7 +152,7 @@ with ToolboxClient("http://127.0.0.1:5000") as client:
     print(results)
 ```
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 [{"id":1,"location":"Basel","name":"Hilton Basel","price_tier":"Luxury"},{"id":3,"location":"Basel","name":"Hyatt Regency Basel","price_tier":"Upper Upscale"}]
 ```
 
@@ -164,7 +160,7 @@ with ToolboxClient("http://127.0.0.1:5000") as client:
 
 Now for the fun part! We'll install the required LangChain packages and create an agent that can use the tools we defined in MCP Toolbox.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU toolbox-langchain langgraph langchain-google-vertexai
 ```
 
@@ -172,12 +168,11 @@ With the packages installed, we can define our agent. We will use `ChatVertexAI`
 
 **Note:** Ensure your MCP Toolbox server is running in a separate terminal before executing the code below.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain_google_vertexai import ChatVertexAI
 from langgraph.checkpoint.memory import MemorySaver
 from toolbox_langchain import ToolboxClient
-
 
 prompt = """
 You're a helpful hotel assistant. You handle hotel searching and booking.
@@ -186,7 +181,6 @@ Always use the hotel ID for booking operations.
 For any bookings, provide a clear confirmation message.
 Don't ask for clarification or confirmation from the user; perform the requested action directly.
 """
-
 
 async def run_queries(agent_executor):
     config = {"configurable": {"thread_id": "hotel-thread-1"}}
@@ -214,10 +208,9 @@ async def run_queries(agent_executor):
 
 ## Run the agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def main():
     await run_hotel_agent()
-
 
 async def run_hotel_agent():
     model = ChatVertexAI(model_name="gemini-2.5-flash")
@@ -229,7 +222,6 @@ async def run_hotel_agent():
         agent = create_agent(model, tools, checkpointer=MemorySaver())
 
         await run_queries(agent)
-
 
 await main()
 ```
@@ -264,12 +256,8 @@ We encourage you to get involved with the community:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/mcp_toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/mcp_toolbox.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

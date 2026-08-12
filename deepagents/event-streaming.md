@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Event streaming
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/event-streaming)
+Stream subagents, messages, tool calls, and final output from Deep Agents.
 
-> Stream subagents, messages, tool calls, and final output from Deep Agents.
-
-This page covers streaming concerns specific to Deep Agents—most importantly, streaming from delegated subagents via `stream.subagents`. For general agent streaming (`stream.messages`, `stream.values`, tool calls, custom updates), see [LangChain Event Streaming](/oss/python/langchain/event-streaming).
+This page covers streaming concerns specific to Deep Agents—most importantly, streaming from delegated subagents via `stream.subagents`. For general agent streaming (`stream.messages`, `stream.values`, tool calls, custom updates), see [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming).
 
 ## Stream subagents
 
@@ -14,7 +10,7 @@ Deep Agents add a subagent projection on top of LangGraph streaming. Use `stream
 
 Each handle's `name` is the sub-agent's configured name: the `subagent_type` the coordinator passes when it calls the `task` tool. Deep Agents binds that name to the delegated run, so the same label you defined in your subagent specs is what you filter and route on in the stream.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(
     {
         "messages": [{"role": "user", "content": "Write me a haiku about the sea"}],
@@ -34,7 +30,7 @@ for subagent in stream.subagents:
 
 ## Subagent stream fields
 
-Each subagent stream exposes the same kinds of projections as the parent run, such as messages, tool calls, nested subagents, and final output. For the general parent-run streaming model, see [LangChain Event Streaming](/oss/python/langchain/event-streaming).
+Each subagent stream exposes the same kinds of projections as the parent run, such as messages, tool calls, nested subagents, and final output. For the general parent-run streaming model, see [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming).
 
 Python uses snake\_case projection names such as `tool_calls`. Each subagent stream can expose `.messages`, `.tool_calls`, `.values`, `.subagents`, and `.output`.
 
@@ -52,7 +48,7 @@ Python uses snake\_case projection names such as `tool_calls`. Each subagent str
 
 Use `stream.subagents` when you only need to show which subagents started and finished. You do not need to subscribe to message or value streams unless you access those projections on an individual subagent.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 running = 0
@@ -78,7 +74,7 @@ for subagent in stream.subagents:
 
 Deep Agents can emit messages from the coordinator agent and from delegated subagents. Use `stream.messages` for top-level messages and `subagent.messages` for each delegated subagent.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 coordinator_messages: list[str] = []
@@ -95,7 +91,7 @@ for subagent in stream.subagents:
 
 Deep Agents expose tool calls at each level of the agent tree. Use the top-level `stream.tool_calls` for coordinator tools and each `subagent.tool_calls` for delegated work.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 coordinator_tool_names: list[str] = []
@@ -120,7 +116,7 @@ for subagent in stream.subagents:
 
 You can recurse into a subagent stream to observe nested subagents, messages, and tool calls.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 subagent_names: list[str] = []
@@ -144,7 +140,7 @@ Coordinator and subagent output often interleave. Consume projections concurrent
 
 For concurrent consumption in async code, use `astream_events` with `asyncio.gather`:
 
-```py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```py
 import asyncio
 
 stream = await agent.astream_events(input, version="v3")
@@ -163,7 +159,7 @@ await asyncio.gather(consume_coordinator(), consume_subagents())
 
 For synchronous code, use `stream.interleave(...)` instead:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 for name, item in stream.interleave("messages", "subagents"):
@@ -176,7 +172,7 @@ for name, item in stream.interleave("messages", "subagents"):
 
 When you need exact arrival order across the coordinator and all subagents, iterate raw protocol events and use `namespace` to identify the source:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = agent.stream_events(input, version="v3")
 
 text_deltas: list[str] = []
@@ -203,18 +199,14 @@ for event in stream:
 
 ## Related
 
-* [LangChain Event Streaming](/oss/python/langchain/event-streaming) covers general agent message and tool-call streaming concepts.
-* [Subagent frontend streaming](/oss/python/deepagents/frontend/subagent-streaming) shows UI patterns that separate coordinator messages from subagent cards.
-* [LangGraph Event Streaming](/oss/python/langgraph/event-streaming) covers the underlying graph streaming model.
+* [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming) covers general agent message and tool-call streaming concepts.
+* [Subagent frontend streaming](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming) shows UI patterns that separate coordinator messages from subagent cards.
+* [LangGraph Event Streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) covers the underlying graph streaming model.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/event-streaming.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # CockroachDB integrations
 
 > Integrate with CockroachDB using LangChain Python.
@@ -21,7 +17,7 @@
 
 Install the LangChain integration:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-cockroachdb
 ```
 
@@ -37,7 +33,7 @@ You'll need a CockroachDB cluster. Choose one option:
 
 **Option 2: Docker (Development)**
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 docker run -d --name cockroachdb -p 26257:26257 \
   cockroachdb/cockroach:latest start-single-node --insecure
 ```
@@ -63,11 +59,11 @@ CockroachDB can be used as a vector store with native `VECTOR` type and C-SPANN 
 * Multi-tenancy with prefix columns
 * Horizontal scalability
 
-See the [CockroachDB entry in the vector stores overview](/oss/python/integrations/vectorstores#cockroachdb) for links to detailed usage.
+See the [CockroachDB entry in the vector stores overview](https://docs.langchain.com/oss/python/integrations/vectorstores#cockroachdb) for links to detailed usage.
 
 **Quick example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cockroachdb import AsyncCockroachDBVectorStore, CockroachDBEngine
 from langchain_openai import OpenAIEmbeddings
 
@@ -94,7 +90,7 @@ results = await vectorstore.asimilarity_search("Hi", k=1)
 
 **Hybrid search** (v0.3.0+) runs full-text and vector search in parallel and fuses the ranked results, using reciprocal rank fusion by default:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cockroachdb import HybridSearchConfig
 
 # create_tsvector=True adds the TSVECTOR column and GIN index
@@ -126,11 +122,11 @@ Store conversation history in CockroachDB for persistent, distributed chat appli
 * Session-based organization
 * High availability
 
-See [CockroachDB chat history documentation](/oss/python/integrations/chat_message_histories/cockroachdb) for detailed usage.
+See [CockroachDB chat history documentation](https://docs.langchain.com/oss/python/integrations/chat_message_histories/cockroachdb) for detailed usage.
 
 **Quick example:**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cockroachdb import CockroachDBChatMessageHistory
 import uuid
 
@@ -154,113 +150,106 @@ Persist LangGraph workflow state in CockroachDB for short-term memory, human-in-
 
 Both sync (`CockroachDBSaver`) and async (`AsyncCockroachDBSaver`) implementations are available.
 
-<Tip>
-  Call `checkpointer.setup()` (or `await checkpointer.setup()`) the first time you use the CockroachDB checkpointer to create the required tables.
-</Tip>
+> [!TIP]
+> Call `checkpointer.setup()` (or `await checkpointer.setup()`) the first time you use the CockroachDB checkpointer to create the required tables.
 
-<Tabs>
-  <Tab title="Sync">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import os
-    from langchain.chat_models import init_chat_model
-    from langgraph.graph import StateGraph, MessagesState, START
-    from langchain_cockroachdb import CockroachDBSaver
+#### Sync
+```python
+import os
+from langchain.chat_models import init_chat_model
+from langgraph.graph import StateGraph, MessagesState, START
+from langchain_cockroachdb import CockroachDBSaver
 
-    model = init_chat_model(model="claude-haiku-4-5-20251001")
+model = init_chat_model(model="claude-haiku-4-5-20251001")
 
-    DB_URI = os.environ["COCKROACHDB_URI"]
-    # Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
-    with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
-        # checkpointer.setup()
+DB_URI = os.environ["COCKROACHDB_URI"]
+# Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
+with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
+    # checkpointer.setup()
 
-        def call_model(state: MessagesState):
-            response = model.invoke(state["messages"])
-            return {"messages": response}
+    def call_model(state: MessagesState):
+        response = model.invoke(state["messages"])
+        return {"messages": response}
 
-        builder = StateGraph(MessagesState)
-        builder.add_node(call_model)
-        builder.add_edge(START, "call_model")
+    builder = StateGraph(MessagesState)
+    builder.add_node(call_model)
+    builder.add_edge(START, "call_model")
 
-        graph = builder.compile(checkpointer=checkpointer)
+    graph = builder.compile(checkpointer=checkpointer)
 
-        config = {"configurable": {"thread_id": "1"}}
+    config = {"configurable": {"thread_id": "1"}}
 
-        stream = graph.stream_events(
-            {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-            config,
-            version="v3",
-        )
-        for snapshot in stream.values:
-            snapshot["messages"][-1].pretty_print()
+    stream = graph.stream_events(
+        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+        config,
+        version="v3",
+    )
+    for snapshot in stream.values:
+        snapshot["messages"][-1].pretty_print()
 
-        stream = graph.stream_events(
-            {"messages": [{"role": "user", "content": "what's my name?"}]},
-            config,
-            version="v3",
-        )
-        for snapshot in stream.values:
-            snapshot["messages"][-1].pretty_print()
-    ```
-  </Tab>
+    stream = graph.stream_events(
+        {"messages": [{"role": "user", "content": "what's my name?"}]},
+        config,
+        version="v3",
+    )
+    for snapshot in stream.values:
+        snapshot["messages"][-1].pretty_print()
+```
 
-  <Tab title="Async">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import os
-    from langchain.chat_models import init_chat_model
-    from langgraph.graph import StateGraph, MessagesState, START
-    from langchain_cockroachdb import AsyncCockroachDBSaver
+#### Async
+```python
+import os
+from langchain.chat_models import init_chat_model
+from langgraph.graph import StateGraph, MessagesState, START
+from langchain_cockroachdb import AsyncCockroachDBSaver
 
-    model = init_chat_model(model="claude-haiku-4-5-20251001")
+model = init_chat_model(model="claude-haiku-4-5-20251001")
 
-    DB_URI = os.environ["COCKROACHDB_URI"]
-    # Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
-    async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
-        # await checkpointer.setup()
+DB_URI = os.environ["COCKROACHDB_URI"]
+# Example: "cockroachdb://user:password@host:26257/defaultdb?sslmode=verify-full"
+async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
+    # await checkpointer.setup()
 
-        async def call_model(state: MessagesState):
-            response = await model.ainvoke(state["messages"])
-            return {"messages": response}
+    async def call_model(state: MessagesState):
+        response = await model.ainvoke(state["messages"])
+        return {"messages": response}
 
-        builder = StateGraph(MessagesState)
-        builder.add_node(call_model)
-        builder.add_edge(START, "call_model")
+    builder = StateGraph(MessagesState)
+    builder.add_node(call_model)
+    builder.add_edge(START, "call_model")
 
-        graph = builder.compile(checkpointer=checkpointer)
+    graph = builder.compile(checkpointer=checkpointer)
 
-        config = {"configurable": {"thread_id": "1"}}
+    config = {"configurable": {"thread_id": "1"}}
 
-        stream = await graph.astream_events(
-            {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
-            config,
-            version="v3",
-        )
-        async for snapshot in stream.values:
-            snapshot["messages"][-1].pretty_print()
+    stream = await graph.astream_events(
+        {"messages": [{"role": "user", "content": "hi! I'm bob"}]},
+        config,
+        version="v3",
+    )
+    async for snapshot in stream.values:
+        snapshot["messages"][-1].pretty_print()
 
-        stream = await graph.astream_events(
-            {"messages": [{"role": "user", "content": "what's my name?"}]},
-            config,
-            version="v3",
-        )
-        async for snapshot in stream.values:
-            snapshot["messages"][-1].pretty_print()
-    ```
-  </Tab>
-</Tabs>
+    stream = await graph.astream_events(
+        {"messages": [{"role": "user", "content": "what's my name?"}]},
+        config,
+        version="v3",
+    )
+    async for snapshot in stream.values:
+        snapshot["messages"][-1].pretty_print()
+```
 
-<Note>
-  See [Get your CockroachDB connection string](#get-your-cockroachdb-connection-string) above for connection options including CockroachDB Cloud (recommended for production), Docker, and local binary installs. For local development, `sslmode=disable` is acceptable; always use `sslmode=verify-full` in production.
-</Note>
+> [!NOTE]
+> See [Get your CockroachDB connection string](https://docs.langchain.com/oss/python/integrations/providers/cockroachdb#get-your-cockroachdb-connection-string) above for connection options including CockroachDB Cloud (recommended for production), Docker, and local binary installs. For local development, `sslmode=disable` is acceptable; always use `sslmode=verify-full` in production.
 
-<Tip>
-  The checkpointer uses raw `psycopg3` connections (not SQLAlchemy) for compatibility with LangGraph's checkpoint interface. The `from_conn_string` factory accepts `cockroachdb://` URLs and converts them automatically.
-</Tip>
+> [!TIP]
+> The checkpointer uses raw `psycopg3` connections (not SQLAlchemy) for compatibility with LangGraph's checkpoint interface. The `from_conn_string` factory accepts `cockroachdb://` URLs and converts them automatically.
 
 #### Row-Level TTL (v0.2.1+)
 
 Automatically expire old checkpoint data using CockroachDB's [Row-Level TTL](https://www.cockroachlabs.com/docs/stable/row-level-ttl):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
     checkpointer.setup()
 
@@ -276,9 +265,8 @@ with CockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
 
 Async variant: `await checkpointer.aenable_ttl(ttl_interval="7 days", cron="@hourly")`
 
-<Note>
-  TTL deletion is **eventual** -- expired rows remain queryable until CockroachDB's background job runs on the specified cron schedule.
-</Note>
+> [!NOTE]
+> TTL deletion is **eventual** -- expired rows remain queryable until CockroachDB's background job runs on the specified cron schedule.
 
 #### Performance optimizations (v0.2.1+)
 
@@ -294,7 +282,7 @@ Isolate vector data by tenant using an opt-in namespace column. When enabled, al
 
 CockroachDB's C-SPANN indexes support prefix columns, so namespace filtering uses the vector index directly without a separate scan.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_cockroachdb import AsyncCockroachDBVectorStore, CockroachDBEngine
 from langchain_openai import OpenAIEmbeddings
 
@@ -362,12 +350,8 @@ results = await vectorstore.asimilarity_search("query", k=5)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

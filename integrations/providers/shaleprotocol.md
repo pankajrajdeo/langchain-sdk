@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Shale protocol integrations
 
 > Integrate with Shale protocol using LangChain Python.
@@ -24,7 +20,7 @@ As of June 2023, the API supports Vicuna-13B by default. We are going to support
 
 For example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -41,7 +37,6 @@ template = """Question: {question}
 
 prompt = PromptTemplate.from_template(template)
 
-
 llm_chain = prompt | llm | StrOutputParser()
 
 question = "What NFL team won the Super Bowl in the year Justin Beiber was born?"
@@ -52,12 +47,8 @@ llm_chain.invoke(question)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/shaleprotocol.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/shaleprotocol.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

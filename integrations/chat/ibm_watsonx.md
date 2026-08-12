@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatWatsonx integration
 
 > Integrate with the ChatWatsonx chat model using LangChain Python.
@@ -20,7 +16,7 @@ The aim of these examples is to show how to communicate with `watsonx.ai` models
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools/) | [Structured output](/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |      ✅      |      ❌      |      ❌      |                             ✅                             |       ❌      |                            ✅                            |                              ✅                             |
 
@@ -35,7 +31,7 @@ The cell below defines the credentials required to work with watsonx Foundation 
 **Action:** Provide the IBM Cloud user API key. For details, see
 [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -45,7 +41,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -59,7 +55,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-ibm
 ```
 
@@ -67,7 +63,7 @@ The LangChain IBM integration lives in the `langchain-ibm` package:
 
 You might need to adjust model `parameters` for different models or tasks. For details, refer to [Available TextChatParameters](https://ibm.github.io/watsonx-ai-python-sdk/fm_schema.html#ibm_watsonx_ai.foundation_models.schema.TextChatParameters).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 parameters = {
     "temperature": 0.9,
     "max_tokens": 200,
@@ -85,7 +81,7 @@ In this example, we’ll use the `project_id` and Dallas URL.
 
 You need to specify the `model_id` that will be used for inferencing. You can find the list of all the available models in [Supported chat models](https://ibm.github.io/watsonx-ai-python-sdk/fm_helpers.html#ibm_watsonx_ai.foundation_models_manager.FoundationModelsManager.get_chat_model_specs).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 chat = ChatWatsonx(
@@ -98,7 +94,7 @@ chat = ChatWatsonx(
 
 Alternatively, you can use Cloud Pak for Data credentials. For details, see [watsonx.ai software setup](https://ibm.github.io/watsonx-ai-python-sdk/setup_cpd.html).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatWatsonx(
     model_id="ibm/granite-34b-code-instruct",
     url="PASTE YOUR URL HERE",
@@ -113,7 +109,7 @@ chat = ChatWatsonx(
 
 Instead of `model_id`, you can also pass the `deployment_id` of the previously [deployed model with reference to a Prompt Template](https://cloud.ibm.com/apidocs/watsonx-ai#deployments-text-chat).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chat = ChatWatsonx(
     deployment_id="PASTE YOUR DEPLOYMENT_ID HERE",
     url="https://us-south.ml.cloud.ibm.com",
@@ -124,7 +120,7 @@ chat = ChatWatsonx(
 
 For certain requirements, there is an option to pass the IBM's [`APIClient`](https://ibm.github.io/watsonx-ai-python-sdk/base.html#apiclient) object into the `ChatWatsonx` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai import APIClient
 
 api_client = APIClient(...)
@@ -139,7 +135,7 @@ chat = ChatWatsonx(
 
 To obtain completions, you can call the model directly using a string prompt.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Invocation
 
 messages = [
@@ -153,11 +149,11 @@ messages = [
 chat.invoke(messages)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore que tu escois de écouter de la rock ! ", additional_kwargs={}, response_metadata={'token_usage': {'completion_tokens': 19, 'prompt_tokens': 34, 'total_tokens': 53}, 'model_name': 'ibm/granite-34b-code-instruct', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='chat-ef888fc41f0d4b37903b622250ff7528', usage_metadata={'input_tokens': 34, 'output_tokens': 19, 'total_tokens': 53})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Invocation multiple chat
 from langchain.messages import (
     HumanMessage,
@@ -172,7 +168,7 @@ human_message = HumanMessage(content="horse")
 chat.invoke([system_message, human_message])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='horses are quadrupedal mammals that are members of the family Equidae. They are typically farm animals, competing in horse racing and other forms of equine competition. With over 200 breeds, horses are diverse in their physical appearance and behavior. They are intelligent, social animals that are often used for transportation, food, and entertainment.', additional_kwargs={}, response_metadata={'token_usage': {'completion_tokens': 89, 'prompt_tokens': 29, 'total_tokens': 118}, 'model_name': 'ibm/granite-34b-code-instruct', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='chat-9a6e28abb3d448aaa4f83b677a9fd653', usage_metadata={'input_tokens': 29, 'output_tokens': 89, 'total_tokens': 118})
 ```
 
@@ -180,7 +176,7 @@ AIMessage(content='horses are quadrupedal mammals that are members of the family
 
 Create `ChatPromptTemplate` objects which will be responsible for creating a random question.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 
 system = (
@@ -192,7 +188,7 @@ prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)]
 
 Provide inputs and run the chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = prompt | chat
 chain.invoke(
     {
@@ -203,7 +199,7 @@ chain.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='Ich liebe Python.', additional_kwargs={}, response_metadata={'token_usage': {'completion_tokens': 7, 'prompt_tokens': 28, 'total_tokens': 35}, 'model_name': 'ibm/granite-34b-code-instruct', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='chat-fef871190b6047a7a3e68c58b3810c33', usage_metadata={'input_tokens': 28, 'output_tokens': 7, 'total_tokens': 35})
 ```
 
@@ -211,7 +207,7 @@ AIMessage(content='Ich liebe Python.', additional_kwargs={}, response_metadata={
 
 You can stream the model output.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 system_message = SystemMessage(
     content="You are a helpful assistant which telling short-info about provided topic."
 )
@@ -222,7 +218,7 @@ for token in stream.text:
     print(token, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The Moon is the fifth largest moon in the solar system and the largest relative to its host planet. It is the fifth brightest object in Earth's night sky after the Sun, the stars, the Milky Way, and the Moon itself. It orbits around the Earth at an average distance of 238,855 miles (384,400 kilometers). The Moon's gravity is about one-sixthth of Earth's and thus allows for the formation of tides on Earth. The Moon is thought to have formed around 4.5 billion years ago from debris from a collision between Earth and a Mars-sized body named Theia. The Moon is effectively immutable, with its current characteristics remaining from formation. Aside from Earth, the Moon is the only other natural satellite of Earth. The most widely accepted theory is that it formed from the debris of a collision
 ```
 
@@ -230,7 +226,7 @@ The Moon is the fifth largest moon in the solar system and the largest relative 
 
 You can batch the model output.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 message_1 = [
     SystemMessage(
         content="You are a helpful assistant which telling short-info about provided topic."
@@ -247,7 +243,7 @@ message_2 = [
 chat.batch([message_1, message_2])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [AIMessage(content='The cat is a popular domesticated carnivorous mammal that belongs to the family Felidae. Cats arefriendly, intelligent, and independent animals that are well-known for their playful behavior, agility, and ability to hunt prey. cats come in a wide range of breeds, each with their own unique physical and behavioral characteristics. They are kept as pets worldwide due to their affectionate nature and companionship. Cats are important members of the household and are often involved in everything from childcare to entertainment.', additional_kwargs={}, response_metadata={'token_usage': {'completion_tokens': 127, 'prompt_tokens': 28, 'total_tokens': 155}, 'model_name': 'ibm/granite-34b-code-instruct', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='chat-fa452af0a0fa4a668b6a704aecd7d718', usage_metadata={'input_tokens': 28, 'output_tokens': 127, 'total_tokens': 155}),
  AIMessage(content='Dogs are domesticated animals that belong to the Canidae family, also known as wolves. They are one of the most popular pets worldwide, known for their loyalty and affection towards their owners. Dogs come in various breeds, each with unique characteristics, and are trained for different purposes such as hunting, herding, or guarding. They require a lot of exercise and mental stimulation to stay healthy and happy, and they need proper training and socialization to be well-behaved. Dogs are also known for their playful and energetic nature, making them great companions for people of all ages.', additional_kwargs={}, response_metadata={'token_usage': {'completion_tokens': 144, 'prompt_tokens': 28, 'total_tokens': 172}, 'model_name': 'ibm/granite-34b-code-instruct', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='chat-cae7663c50cf4f3499726821cc2f0ec7', usage_metadata={'input_tokens': 28, 'output_tokens': 144, 'total_tokens': 172})]
 ```
@@ -256,7 +252,7 @@ chat.batch([message_1, message_2])
 
 ### ChatWatsonx.bind\_tools()
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 chat = ChatWatsonx(
@@ -267,27 +263,25 @@ chat = ChatWatsonx(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class GetWeather(BaseModel):
     """Get the current weather in a given location"""
 
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
-
 llm_with_tools = chat.bind_tools([GetWeather])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = llm_with_tools.invoke(
     "Which city is hotter today: LA or NY?",
 )
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='', additional_kwargs={'tool_calls': [{'id': 'chatcmpl-tool-6c06a19bbe824d78a322eb193dbde12d', 'type': 'function', 'function': {'name': 'GetWeather', 'arguments': '{"location": "Los Angeles, CA"}'}}, {'id': 'chatcmpl-tool-493542e46f1141bfbfeb5deae6c9e086', 'type': 'function', 'function': {'name': 'GetWeather', 'arguments': '{"location": "New York, NY"}'}}]}, response_metadata={'token_usage': {'completion_tokens': 46, 'prompt_tokens': 95, 'total_tokens': 141}, 'model_name': 'mistralai/mistral-large', 'system_fingerprint': '', 'finish_reason': 'tool_calls'}, id='chat-027f2bdb217e4238909cb26d3e8a8fbf', tool_calls=[{'name': 'GetWeather', 'args': {'location': 'Los Angeles, CA'}, 'id': 'chatcmpl-tool-6c06a19bbe824d78a322eb193dbde12d', 'type': 'tool_call'}, {'name': 'GetWeather', 'args': {'location': 'New York, NY'}, 'id': 'chatcmpl-tool-493542e46f1141bfbfeb5deae6c9e086', 'type': 'tool_call'}], usage_metadata={'input_tokens': 95, 'output_tokens': 46, 'total_tokens': 141})
 ```
 
@@ -295,11 +289,11 @@ AIMessage(content='', additional_kwargs={'tool_calls': [{'id': 'chatcmpl-tool-6c
 
 Notice that the `AIMessage` has a [`tool_calls`](https://reference.langchain.com/python/langchain/messages/#langchain.messages.AIMessage.tool_calls) attribute. This contains in a standardized `ToolCall` format that is model-provider agnostic.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg.tool_calls
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'GetWeather',
   'args': {'location': 'Los Angeles, CA'},
   'id': 'chatcmpl-tool-6c06a19bbe824d78a322eb193dbde12d',
@@ -318,12 +312,8 @@ For detailed documentation of all `ChatWatsonx` features and configurations head
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

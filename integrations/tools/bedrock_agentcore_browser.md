@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Amazon Bedrock agentcore browser integration
 
 > Integrate with the Amazon Bedrock agentcore browser tool using LangChain Python.
@@ -18,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](/oss/python/langchain/tools) | Native async | Supports browser interaction |      Pricing      |
+| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async | Supports browser interaction |      Pricing      |
 | :---------------------------------------------: | :----------: | :--------------------------: | :---------------: |
 |                        ✅                        |       ✅      |               ✅              | Pay-per-use (AWS) |
 
@@ -44,17 +40,15 @@ The toolkit provides multiple tools for browser automation:
 
 The integration lives in the `langchain-aws` package. It also requires `playwright` and `beautifulsoup4` for browser automation and HTML parsing.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-aws bedrock-agentcore playwright beautifulsoup4
-  playwright install chromium
-  ```
+```bash
+pip install -U langchain-aws bedrock-agentcore playwright beautifulsoup4
+playwright install chromium
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
-  playwright install chromium
-  ```
-</CodeGroup>
+```bash
+uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
+playwright install chromium
+```
 
 ### Credentials
 
@@ -62,7 +56,7 @@ You need AWS credentials configured with permissions for Bedrock AgentCore Brows
 
 It's also helpful (but not needed) to set up LangSmith for best-in-class observability:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["LANGSMITH_API_KEY"] = "your-api-key"
@@ -73,20 +67,20 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The toolkit is created using a factory function. In its simplest form, only the AWS region is required:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 # Create toolkit and get tools
 toolkit, browser_tools = create_browser_toolkit(region="us-west-2")
 ```
 
-The factory function also accepts optional parameters for [proxy configuration](#proxy-configuration), [browser extensions](#browser-extensions), and [browser profiles](#browser-profiles). See the sections below for details.
+The factory function also accepts optional parameters for [proxy configuration](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#proxy-configuration), [browser extensions](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#browser-extensions), and [browser profiles](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#browser-profiles). See the sections below for details.
 
 ## Proxy configuration
 
 Route browser traffic through external proxies using the `proxy_configuration` parameter. This is useful for geo-targeting, IP rotation, or accessing region-restricted content.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 toolkit, browser_tools = create_browser_toolkit(
@@ -115,7 +109,7 @@ For more details, see the [AWS documentation on browser proxies](https://docs.aw
 
 Load browser extensions from S3 into the managed browser session using the `extensions` parameter. Extensions are packaged as ZIP files and hosted in an S3 bucket.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 toolkit, browser_tools = create_browser_toolkit(
@@ -138,7 +132,7 @@ Persist browser state (cookies, local storage, cached data) across sessions usin
 
 Create a profile using the AWS CLI or Boto3, then pass the returned profile ID:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 toolkit, browser_tools = create_browser_toolkit(
@@ -157,7 +151,7 @@ For more details, see the [AWS documentation on browser profiles](https://docs.a
 
 All three configuration options can be used together:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws.tools import create_browser_toolkit
 
 toolkit, browser_tools = create_browser_toolkit(
@@ -192,7 +186,7 @@ toolkit, browser_tools = create_browser_toolkit(
 
 Get specific tools and invoke them:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Get tools by name
 tools_by_name = toolkit.get_tools_by_name()
 
@@ -212,7 +206,7 @@ print(text)
 
 ### Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 from langchain.agents import create_react_agent
 from langchain.chat_models import init_chat_model
@@ -257,7 +251,7 @@ asyncio.run(main())
 
 The toolkit maintains separate browser sessions for each `thread_id`. This enables concurrent usage without interference:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Each thread gets its own browser session
 config_user1 = {"configurable": {"thread_id": "user-1"}}
 config_user2 = {"configurable": {"thread_id": "user-2"}}
@@ -279,7 +273,7 @@ tools_by_name["navigate_browser"].invoke(
 
 ### Navigation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 config = {"configurable": {"thread_id": "session-123"}}
 
 # Navigate to URL
@@ -295,7 +289,7 @@ print(current)  # URL and title
 
 ### Interacting with elements
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Click an element
 tools_by_name["click_element"].invoke({"selector": "#submit-button"}, config=config)
 
@@ -315,7 +309,7 @@ tools_by_name["wait_for_element"].invoke({
 
 ### Extracting content
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Extract all text
 text = tools_by_name["extract_text"].invoke({}, config=config)
 
@@ -331,7 +325,7 @@ elements = tools_by_name["get_elements"].invoke(
 
 ### Screenshots and scrolling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Take screenshot of visible viewport (returns base64 image)
 screenshot = tools_by_name["take_screenshot"].invoke(
     {"capture_type": "viewport"},
@@ -355,7 +349,7 @@ tools_by_name["scroll_page"].invoke({
 
 Always clean up browser sessions when done to release resources:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Clean up all browser sessions
 await toolkit.cleanup()
 ```
@@ -366,7 +360,7 @@ await toolkit.cleanup()
 
 The toolkit includes built-in concurrency protection. Each browser session is tied to a specific `thread_id`, and attempting to access the same session while it's already in use will raise a `RuntimeError`. Use different `thread_id` values for concurrent operations.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Good: Different thread IDs for concurrent operations
 config_a = {"configurable": {"thread_id": "task-a"}}
 config_b = {"configurable": {"thread_id": "task-b"}}
@@ -392,12 +386,8 @@ For detailed documentation of all features and configurations, see:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_browser.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_browser.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

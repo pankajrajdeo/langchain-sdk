@@ -1,14 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # PerplexitySearch integration
 
 > Integrate with the PerplexitySearchRetriever using LangChain Python.
 
 > [Perplexity Search](https://docs.perplexity.ai/docs/search/quickstart) is a web search API that returns ranked, source-attributed results designed for use by LLMs and agents. The [Search API endpoint](https://docs.perplexity.ai/api-reference/search-post) returns the underlying web results that power Perplexity's answer engine.
 
-We can use this as a [retriever](/oss/python/deepagents/retrieval). It will show functionality specific to this integration. After going through, it may be useful to explore [relevant use-case pages](/oss/python/deepagents/rag) to learn how to use this retriever as part of a larger chain.
+We can use this as a [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). It will show functionality specific to this integration. After going through, it may be useful to explore [relevant use-case pages](https://docs.langchain.com/oss/python/deepagents/rag) to learn how to use this retriever as part of a larger chain.
 
 ## Setup
 
@@ -16,7 +12,7 @@ We can use this as a [retriever](/oss/python/deepagents/retrieval). It will show
 
 The integration lives in the `langchain-perplexity` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-perplexity
 ```
 
@@ -24,7 +20,7 @@ pip install -qU langchain-perplexity
 
 You'll need a Perplexity API key to use this integration. Create one in the [Perplexity API key dashboard](https://www.perplexity.ai/account/api/keys), then set it as the `PPLX_API_KEY` environment variable (the integration also accepts `PERPLEXITY_API_KEY`).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -32,9 +28,9 @@ if not os.environ.get("PPLX_API_KEY"):
     os.environ["PPLX_API_KEY"] = getpass.getpass("Perplexity API key:\n")
 ```
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 # os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -51,7 +47,7 @@ If you want to get automated tracing from individual queries, you can also set y
 * `search_recency_filter` — one of `"day"`, `"week"`, `"month"`, `"year"`. See the [date and time filter docs](https://docs.perplexity.ai/docs/search/filters/date-time-filters).
 * `search_after_date` / `search_before_date` — date strings in `MM/DD/YYYY` format.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchRetriever
 
 retriever = PerplexitySearchRetriever(k=3)
@@ -59,7 +55,7 @@ retriever = PerplexitySearchRetriever(k=3)
 
 ## Usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "what year was breath of the wild released?"
 
 retriever.invoke(query)
@@ -71,7 +67,7 @@ Each returned [`Document`](https://reference.langchain.com/python/langchain-core
 
 You can constrain the search with the same filters supported by the Perplexity Search API:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchRetriever
 
 retriever = PerplexitySearchRetriever(
@@ -84,7 +80,7 @@ retriever = PerplexitySearchRetriever(
 retriever.invoke("US Federal Reserve interest rate decisions")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_perplexity import PerplexitySearchRetriever
 
 # Restrict results to a specific date range
@@ -101,7 +97,7 @@ retriever.invoke("US Federal Reserve interest rate decisions")
 
 We can easily combine this retriever into a chain to build a simple RAG pipeline.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -117,10 +113,8 @@ Question: {question}"""
 
 llm = ChatOpenAI(model="gpt-5.5")
 
-
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
-
 
 chain = (
     {"context": retriever | format_docs, "question": RunnablePassthrough()}
@@ -140,12 +134,8 @@ For detailed documentation of the Perplexity Search API and all of its options, 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/perplexity_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/perplexity_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

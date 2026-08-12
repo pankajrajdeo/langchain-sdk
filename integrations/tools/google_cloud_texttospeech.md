@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google cloud text-to-speech integration
 
 > Integrate with the Google cloud text-to-speech tool using LangChain Python.
@@ -14,27 +10,26 @@ This notebook shows how to interact with the `Google Cloud Text-to-Speech API` t
 
 First, you need to set up a Google Cloud project. You can follow the [Google Cloud Text-to-Speech setup instructions](https://cloud.google.com/text-to-speech/docs/before-you-begin).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -U langchain-google-community[texttospeech]
 ```
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import TextToSpeechTool
 ```
 
 ## Deprecated GoogleCloudTextToSpeechTool
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.tools import GoogleCloudTextToSpeechTool
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text_to_speak = "Hello world!"
 
 tts = GoogleCloudTextToSpeechTool()
@@ -43,18 +38,14 @@ tts.name
 
 We can generate audio, save it to the temporary file and then play it.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 speech_file = tts.run(text_to_speak)
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_cloud_texttospeech.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_cloud_texttospeech.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # OCI Generative AI Integration for LangChain
 
 > Integrate with OCI Generative AI using LangChain Python.
@@ -10,21 +6,18 @@ This page covers all LangChain integrations with [Oracle Cloud Infrastructure (O
 
 ## Installation and Setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-oci oci
-  ```
+```bash
+pip install langchain-oci oci
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oci oci
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oci oci
+```
 
 ## Authentication
 
-<Note>
-  Initializing [ChatOCIGenAI](#chatocigenai) is resource-intensive. For optimal performance, it is recommended to treat this client as a singleton and reuse the instance across your application.
-</Note>
+> [!NOTE]
+> Initializing [ChatOCIGenAI](https://docs.langchain.com/oss/python/integrations/providers/oci#chatocigenai) is resource-intensive. For optimal performance, it is recommended to treat this client as a singleton and reuse the instance across your application.
 
 Four authentication methods are supported for OCI services. All methods follow the [standard OCI SDK authentication](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_authentication_methods.htm).
 
@@ -32,7 +25,7 @@ Four authentication methods are supported for OCI services. All methods follow t
 
 Uses credentials from `~/.oci/config`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIGenAI
 
 llm = ChatOCIGenAI(
@@ -48,11 +41,11 @@ llm = ChatOCIGenAI(
 
 For session-based authentication:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 oci session authenticate --profile-name MY_PROFILE
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOCIGenAI(
     model_id="meta.llama-3.3-70b-instruct",
     service_endpoint="https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
@@ -66,7 +59,7 @@ llm = ChatOCIGenAI(
 
 For applications running on OCI compute instances:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOCIGenAI(
     model_id="meta.llama-3.3-70b-instruct",
     service_endpoint="https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
@@ -79,7 +72,7 @@ llm = ChatOCIGenAI(
 
 For OCI Functions and other resources:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOCIGenAI(
     model_id="meta.llama-3.3-70b-instruct",
     service_endpoint="https://inference.generativeai.us-chicago-1.oci.oraclecloud.com",
@@ -101,9 +94,9 @@ llm = ChatOCIGenAI(
 
 Main chat model for OCI Generative AI service with full LangChain feature support.
 
-See [usage example](/oss/python/integrations/chat/oci_generative_ai).
+See [usage example](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIGenAI
 
 llm = ChatOCIGenAI(
@@ -126,7 +119,7 @@ llm = ChatOCIGenAI(
 
 OpenAI Responses API compatibility for OCI commercial OpenAI models.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIOpenAI
 
 llm = ChatOCIOpenAI(
@@ -148,9 +141,9 @@ llm = ChatOCIOpenAI(
 
 Text and image embedding models.
 
-See [usage example](/oss/python/integrations/embeddings/oci_generative_ai).
+See [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/oci_generative_ai).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import OCIGenAIEmbeddings
 
 # Text embeddings
@@ -174,7 +167,7 @@ vector = embeddings.embed_image("./architecture_diagram.png")
 
 13+ vision-capable models across Meta Llama, Google Gemini, xAI Grok, and Cohere:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage
 from langchain_oci import ChatOCIGenAI, load_image
 
@@ -193,7 +186,7 @@ response = llm.invoke([message])
 
 **Gemini Multimodal** (PDF, video, audio):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 from langchain.messages import HumanMessage
 from langchain_oci import ChatOCIGenAI
@@ -219,7 +212,7 @@ response = llm.invoke([message])
 
 Create LangGraph-powered ReAct agents with OCI models:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 from langchain_oci import create_oci_agent
 
@@ -275,9 +268,9 @@ result = agent.invoke({
 
 Chat model for OCI Data Science Model Deployments.
 
-See the [ChatOCIModelDeployment integration guide](/oss/python/integrations/chat/oci_data_science).
+See the [ChatOCIModelDeployment integration guide](https://docs.langchain.com/oss/python/integrations/chat/oci_data_science).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeployment
 
 llm = ChatOCIModelDeployment(
@@ -290,7 +283,7 @@ llm = ChatOCIModelDeployment(
 
 Optimized for vLLM-based deployments with streaming support:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeploymentVLLM
 
 llm = ChatOCIModelDeploymentVLLM(
@@ -304,7 +297,7 @@ llm = ChatOCIModelDeploymentVLLM(
 
 For Text Generation Inference (TGI) deployments:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeploymentTGI
 
 llm = ChatOCIModelDeploymentTGI(
@@ -341,12 +334,8 @@ For comprehensive guides covering all features, see the [langchain-oci samples](
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oci.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/oci.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

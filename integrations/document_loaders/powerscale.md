@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Dell powerscale integration
 
 > Integrate with the Dell powerscale document loader using LangChain Python.
@@ -36,7 +32,7 @@ This document loader requires the use of a Dell PowerScale system with MetadataI
 
 The document loader lives in an external pip package and can be installed using standard tooling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  powerscale-rag-connector
 ```
 
@@ -48,7 +44,7 @@ Now we can instantiate document loader:
 
 Our generic document loader can be used to incrementally load all files from PowerScale in the following manner:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from powerscale_rag_connector import PowerScaleDocumentLoader
 
 loader = PowerScaleDocumentLoader(
@@ -63,7 +59,7 @@ loader = PowerScaleDocumentLoader(
 
 Optionally, the `PowerScaleUnstructuredLoader` can be used to locate the changed files *and* automatically process the files producing elements of the source file. This is done using LangChain's `UnstructuredLoader` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from powerscale_rag_connector import PowerScaleUnstructuredLoader
 
 # Or load files with the Unstructured Loader
@@ -89,12 +85,12 @@ The fields:
 
 Internally, all code is asynchronous with PowerScale and MetadataIQ and the load and lazy load methods will return a python generator. We recommend using the lazy load function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for doc in loader.load():
     print(doc)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [Document(page_content='' metadata={'source': '/ifs/pdfs/1994-Graph.Theoretic.Obstacles.to.Perfect.Hashing.TR0257.pdf', 'snapshot': 20834, 'change_types': ['ENTRY_ADDED']}),
 Document(page_content='' metadata={'source': '/ifs/pdfs/New.sendfile-FreeBSD.20.Feb.2015.pdf', 'snapshot': 20920, 'change_types': ['ENTRY_MODIFIED']}),
 Document(page_content='' metadata={'source': '/ifs/pdfs/FAST-Fast.Architecture.Sensitive.Tree.Search.on.Modern.CPUs.and.GPUs-Slides.pdf', 'snapshot': 20924, 'change_types': ['ENTRY_ADDED']})]
@@ -116,7 +112,7 @@ When using `PowerScaleUnstructuredLoader` the `page_content` field will be fille
 
 Internally, all code is asynchronous with PowerScale and MetadataIQ and the load and lazy load methods will return a python generator. We recommend using the lazy load function.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for doc in loader.lazy_load():
     print(doc)  # do something specific with the document
 ```
@@ -139,12 +135,8 @@ For detailed documentation of all PowerScale Document Loader features and config
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/powerscale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/powerscale.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

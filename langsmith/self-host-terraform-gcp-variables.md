@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # GCP Terraform variables reference
-
-> Complete reference of Terraform variables for LangSmith self-hosted on GCP GKE.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-variables)
+Complete reference of Terraform variables for LangSmith self-hosted on GCP GKE.
 
 Complete reference for every input variable exposed by the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp). Use it while filling in `terraform.tfvars` for the first time or tuning an existing deployment.
 
@@ -13,7 +9,7 @@ Variables come in two categories:
 * **Non-sensitive** (region, sizing, feature flags): set in `infra/terraform.tfvars`.
 * **Sensitive** (license key, passwords, encryption keys): sourced through `infra/scripts/setup-env.sh`, which writes them to Google Secret Manager and exports them for the Terraform and Helm steps.
 
-For the end-to-end install, refer to the [deploy guide](/langsmith/self-host-terraform-gcp-deploy). For how the modules fit together, refer to the [architecture reference](/langsmith/self-host-terraform-gcp-architecture).
+For the end-to-end install, refer to the [deploy guide](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy). For how the modules fit together, refer to the [architecture reference](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture).
 
 ## Core
 
@@ -170,12 +166,8 @@ Sourcing `infra/scripts/setup-env.sh` writes these to Google Secret Manager and 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-gcp-variables.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

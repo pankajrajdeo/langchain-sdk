@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Yeager.ai integrations
 
 > Integrate with Yeager.ai using LangChain Python.
@@ -20,17 +16,15 @@ Low code generative agent designed to help you build, prototype, and deploy Lang
 
 ### How to use?
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install yeagerai-agent
-  yeagerai-agent
-  ```
+```bash
+pip install yeagerai-agent
+yeagerai-agent
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add yeagerai-agent
-  yeagerai-agent
-  ```
-</CodeGroup>
+```bash
+uv add yeagerai-agent
+yeagerai-agent
+```
 
 Go to [http://127.0.0.1:7860](http://127.0.0.1:7860)
 
@@ -61,12 +55,8 @@ For more information, see [yAgents' GitHub](https://github.com/yeagerai/yeagerai
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/yeagerai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/yeagerai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

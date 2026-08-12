@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AgentCoreSandbox integration
 
 > Integrate with the AgentCoreSandbox sandbox backend using LangChain Python.
@@ -10,21 +6,19 @@
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install langchain-agentcore-codeinterpreter
-  ```
+```bash
+pip install langchain-agentcore-codeinterpreter
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-agentcore-codeinterpreter
-  ```
-</CodeGroup>
+```bash
+uv add langchain-agentcore-codeinterpreter
+```
 
 ## Create a sandbox backend
 
-See the [sandboxes guide](/oss/python/deepagents/sandboxes) for usage, file operations, and lifecycle details.
+See the [sandboxes guide](https://docs.langchain.com/oss/python/deepagents/sandboxes) for usage, file operations, and lifecycle details.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
 from langchain_agentcore_codeinterpreter import AgentCoreSandbox
 
@@ -40,7 +34,7 @@ interpreter.stop()
 
 ## Use with Deep Agents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
 from langchain_agentcore_codeinterpreter import AgentCoreSandbox
 from langchain_anthropic import ChatAnthropic
@@ -70,16 +64,12 @@ finally:
 
 Always stop the interpreter when you are done to release resources.
 
-See also: [Sandboxes](/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/sandboxes/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

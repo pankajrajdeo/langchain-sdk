@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Context engineering in agents
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/context-engineering)
 ## Overview
 
 The hard part of building agents (or any LLM application) is making them reliable enough. While they may work for a prototype, they often fail in real-world use cases.
@@ -19,9 +15,8 @@ More often than not - it's actually the second reason that causes agents to not 
 
 **Context engineering** is providing the right information and tools in the right format so the LLM can accomplish a task. This is the number one job of AI Engineers. This lack of "right" context is the number one blocker for more reliable agents, and LangChain's agent abstractions are uniquely designed to facilitate context engineering.
 
-<Tip>
-  New to context engineering? Start with the [conceptual overview](/oss/python/concepts/context) to understand the different types of context and when to use them.
-</Tip>
+> [!TIP]
+> New to context engineering? Start with the [conceptual overview](https://docs.langchain.com/oss/python/concepts/context) to understand the different types of context and when to use them.
 
 ### The agent loop
 
@@ -30,9 +25,7 @@ A typical agent loop consists of two main steps:
 1. **Model call** - calls the LLM with a prompt and available tools, returns either a response or a request to execute tools
 2. **Tool execution** - executes the tools that the LLM requested, returns tool results
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" className="rounded-lg" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
-</div>
+> **Image:** [Core agent loop diagram](https://docs.langchain.com/oss/python/langchain/context-engineering)
 
 This loop continues until the LLM decides to finish.
 
@@ -42,19 +35,15 @@ To build reliable agents, you need to control what happens at each step of the a
 
 | Context Type                                  | What You Control                                                                     | Transient or Persistent |
 | --------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------- |
-| **[Model Context](#model-context)**           | What goes into model calls (instructions, message history, tools, response format)   | Transient               |
-| **[Tool Context](#tool-context)**             | What tools can access and produce (reads/writes to state, store, runtime context)    | Persistent              |
-| **[Life-cycle Context](#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent              |
+| **[Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#model-context)**           | What goes into model calls (instructions, message history, tools, response format)   | Transient               |
+| **[Tool Context](https://docs.langchain.com/oss/python/langchain/context-engineering#tool-context)**             | What tools can access and produce (reads/writes to state, store, runtime context)    | Persistent              |
+| **[Life-cycle Context](https://docs.langchain.com/oss/python/langchain/context-engineering#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent              |
 
-<CardGroup>
-  <Card title="Transient context" icon="bolt" iconType="duotone">
-    What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
-  </Card>
+#### Transient context
+What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
 
-  <Card title="Persistent context" icon="database" iconType="duotone">
-    What gets saved in state across turns. Life-cycle hooks and tool writes modify this permanently.
-  </Card>
-</CardGroup>
+#### Persistent context
+What gets saved in state across turns. Life-cycle hooks and tool writes modify this permanently.
 
 ### Data sources
 
@@ -68,7 +57,7 @@ Throughout this process, your agent accesses (reads / writes) different sources 
 
 ### How it works
 
-LangChain [middleware](/oss/python/langchain/middleware) is the mechanism under the hood that makes context engineering practical for developers using LangChain.
+LangChain [middleware](https://docs.langchain.com/oss/python/langchain/middleware) is the mechanism under the hood that makes context engineering practical for developers using LangChain.
 
 Middleware allows you to hook into any step in the agent lifecycle and:
 
@@ -81,27 +70,20 @@ Throughout this guide, you'll see frequent use of the middleware API as a means 
 
 Control what goes into each model call - instructions, available tools, which model to use, and output format. These decisions directly impact reliability and cost.
 
-<CardGroup cols={2}>
-  <Card title="System Prompt" icon="message-2" href="#system-prompt">
-    Base instructions from the developer to the LLM.
-  </Card>
+#### [System Prompt](https://docs.langchain.com/oss/python/langchain/context-engineering#system-prompt)
+Base instructions from the developer to the LLM.
 
-  <Card title="Messages" icon="messages" href="#messages">
-    The full list of messages (conversation history) sent to the LLM.
-  </Card>
+#### [Messages](https://docs.langchain.com/oss/python/langchain/context-engineering#messages)
+The full list of messages (conversation history) sent to the LLM.
 
-  <Card title="Tools" icon="tool" href="#tools">
-    Utilities the agent has access to for taking actions.
-  </Card>
+#### [Tools](https://docs.langchain.com/oss/python/langchain/context-engineering#tools)
+Utilities the agent has access to for taking actions.
 
-  <Card title="Model" icon="cpu" href="#model">
-    The actual model (including configuration) to be called.
-  </Card>
+#### [Model](https://docs.langchain.com/oss/python/langchain/context-engineering#model)
+The actual model (including configuration) to be called.
 
-  <Card title="Response Format" icon="braces" href="#response-format">
-    Schema specification for the model's final response.
-  </Card>
-</CardGroup>
+#### [Response Format](https://docs.langchain.com/oss/python/langchain/context-engineering#response-format)
+Schema specification for the model's final response.
 
 All of these types of model context can draw from **state** (short-term memory), **store** (long-term memory), or **runtime context** (static configuration).
 
@@ -109,294 +91,283 @@ All of these types of model context can draw from **state** (short-term memory),
 
 The system prompt sets the LLM's behavior and capabilities. Different users, contexts, or conversation stages need different instructions. Successful agents draw on memories, preferences, and configuration to provide the right instructions for the current state of the conversation.
 
-<Tabs>
-  <Tab title="State">
-    Access message count or conversation context from state:
+#### State
+Access message count or conversation context from state:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import dynamic_prompt, ModelRequest
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import dynamic_prompt, ModelRequest
 
-    @dynamic_prompt
-    def state_aware_prompt(request: ModelRequest) -> str:
-        # request.messages is a shortcut for request.state["messages"]
-        message_count = len(request.messages)
+@dynamic_prompt
+def state_aware_prompt(request: ModelRequest) -> str:
+    # request.messages is a shortcut for request.state["messages"]
+    message_count = len(request.messages)
 
-        base = "You are a helpful assistant."
+    base = "You are a helpful assistant."
 
-        if message_count > 10:
-            base += "\nThis is a long conversation - be extra concise."
+    if message_count > 10:
+        base += "\nThis is a long conversation - be extra concise."
 
-        return base
+    return base
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[state_aware_prompt]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[state_aware_prompt]
+)
+```
 
-  <Tab title="Store">
-    Access user preferences from long-term memory:
+#### Store
+Access user preferences from long-term memory:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import dynamic_prompt, ModelRequest
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import dynamic_prompt, ModelRequest
+from langgraph.store.memory import InMemoryStore
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-    @dynamic_prompt
-    def store_aware_prompt(request: ModelRequest) -> str:
-        user_id = request.runtime.context.user_id
+@dynamic_prompt
+def store_aware_prompt(request: ModelRequest) -> str:
+    user_id = request.runtime.context.user_id
 
-        # Read from Store: get user preferences
-        store = request.runtime.store
-        user_prefs = store.get(("preferences",), user_id)
+    # Read from Store: get user preferences
+    store = request.runtime.store
+    user_prefs = store.get(("preferences",), user_id)
 
-        base = "You are a helpful assistant."
+    base = "You are a helpful assistant."
 
-        if user_prefs:
-            style = user_prefs.value.get("communication_style", "balanced")
-            base += f"\nUser prefers {style} responses."
+    if user_prefs:
+        style = user_prefs.value.get("communication_style", "balanced")
+        base += f"\nUser prefers {style} responses."
 
-        return base
+    return base
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[store_aware_prompt],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[store_aware_prompt],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-  <Tab title="Runtime Context">
-    Access user ID or configuration from Runtime Context:
+#### Runtime Context
+Access user ID or configuration from Runtime Context:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import dynamic_prompt, ModelRequest
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import dynamic_prompt, ModelRequest
 
-    @dataclass
-    class Context:
-        user_role: str
-        deployment_env: str
+@dataclass
+class Context:
+    user_role: str
+    deployment_env: str
 
-    @dynamic_prompt
-    def context_aware_prompt(request: ModelRequest) -> str:
-        # Read from Runtime Context: user role and environment
-        user_role = request.runtime.context.user_role
-        env = request.runtime.context.deployment_env
+@dynamic_prompt
+def context_aware_prompt(request: ModelRequest) -> str:
+    # Read from Runtime Context: user role and environment
+    user_role = request.runtime.context.user_role
+    env = request.runtime.context.deployment_env
 
-        base = "You are a helpful assistant."
+    base = "You are a helpful assistant."
 
-        if user_role == "admin":
-            base += "\nYou have admin access. You can perform all operations."
-        elif user_role == "viewer":
-            base += "\nYou have read-only access. Guide users to read operations only."
+    if user_role == "admin":
+        base += "\nYou have admin access. You can perform all operations."
+    elif user_role == "viewer":
+        base += "\nYou have read-only access. Guide users to read operations only."
 
-        if env == "production":
-            base += "\nBe extra careful with any data modifications."
+    if env == "production":
+        base += "\nBe extra careful with any data modifications."
 
-        return base
+    return base
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[context_aware_prompt],
-        context_schema=Context
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[context_aware_prompt],
+    context_schema=Context
+)
+```
 
 ### Messages
 
 Messages make up the prompt that is sent to the LLM.
 It's critical to manage the content of messages to ensure that the LLM has the right information to respond well.
 
-<Tabs>
-  <Tab title="State">
-    Inject uploaded file context from State when relevant to current query:
+#### State
+Inject uploaded file context from State when relevant to current query:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-    @wrap_model_call
-    def inject_file_context(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Inject context about files user has uploaded this session."""
-        # Read from State: get uploaded files metadata
-        uploaded_files = request.state.get("uploaded_files", [])  # [!code highlight]
+@wrap_model_call
+def inject_file_context(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Inject context about files user has uploaded this session."""
+    # Read from State: get uploaded files metadata
+    uploaded_files = request.state.get("uploaded_files", [])  # [!code highlight]
 
-        if uploaded_files:
-            # Build context about available files
-            file_descriptions = []
-            for file in uploaded_files:
-                file_descriptions.append(
-                    f"- {file['name']} ({file['type']}): {file['summary']}"
-                )
+    if uploaded_files:
+        # Build context about available files
+        file_descriptions = []
+        for file in uploaded_files:
+            file_descriptions.append(
+                f"- {file['name']} ({file['type']}): {file['summary']}"
+            )
 
-            file_context = f"""Files you have access to in this conversation:
-    {chr(10).join(file_descriptions)}
+        file_context = f"""Files you have access to in this conversation:
+{chr(10).join(file_descriptions)}
 
-    Reference these files when answering questions."""
+Reference these files when answering questions."""
 
-            # Inject file context before recent messages
-            messages = [  # [!code highlight]
-                *request.messages,
-                {"role": "user", "content": file_context},
-            ]
-            request = request.override(messages=messages)  # [!code highlight]
+        # Inject file context before recent messages
+        messages = [  # [!code highlight]
+            *request.messages,
+            {"role": "user", "content": file_context},
+        ]
+        request = request.override(messages=messages)  # [!code highlight]
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[inject_file_context]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[inject_file_context]
+)
+```
 
-  <Tab title="Store">
-    Inject user's email writing style from Store to guide drafting:
+#### Store
+Inject user's email writing style from Store to guide drafting:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
+from langgraph.store.memory import InMemoryStore
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-    @wrap_model_call
-    def inject_writing_style(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Inject user's email writing style from Store."""
-        user_id = request.runtime.context.user_id  # [!code highlight]
+@wrap_model_call
+def inject_writing_style(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Inject user's email writing style from Store."""
+    user_id = request.runtime.context.user_id  # [!code highlight]
 
-        # Read from Store: get user's writing style examples
-        store = request.runtime.store  # [!code highlight]
-        writing_style = store.get(("writing_style",), user_id)  # [!code highlight]
+    # Read from Store: get user's writing style examples
+    store = request.runtime.store  # [!code highlight]
+    writing_style = store.get(("writing_style",), user_id)  # [!code highlight]
 
-        if writing_style:
-            style = writing_style.value
-            # Build style guide from stored examples
-            style_context = f"""Your writing style:
-    - Tone: {style.get('tone', 'professional')}
-    - Typical greeting: "{style.get('greeting', 'Hi')}"
-    - Typical sign-off: "{style.get('sign_off', 'Best')}"
-    - Example email you've written:
-    {style.get('example_email', '')}"""
+    if writing_style:
+        style = writing_style.value
+        # Build style guide from stored examples
+        style_context = f"""Your writing style:
+- Tone: {style.get('tone', 'professional')}
+- Typical greeting: "{style.get('greeting', 'Hi')}"
+- Typical sign-off: "{style.get('sign_off', 'Best')}"
+- Example email you've written:
+{style.get('example_email', '')}"""
 
-            # Append at end - models pay more attention to final messages
-            messages = [
-                *request.messages,
-                {"role": "user", "content": style_context}
-            ]
-            request = request.override(messages=messages)  # [!code highlight]
+        # Append at end - models pay more attention to final messages
+        messages = [
+            *request.messages,
+            {"role": "user", "content": style_context}
+        ]
+        request = request.override(messages=messages)  # [!code highlight]
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[inject_writing_style],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[inject_writing_style],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-  <Tab title="Runtime Context">
-    Inject compliance rules from Runtime Context based on user's jurisdiction:
+#### Runtime Context
+Inject compliance rules from Runtime Context based on user's jurisdiction:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-    @dataclass
-    class Context:
-        user_jurisdiction: str
-        industry: str
-        compliance_frameworks: list[str]
+@dataclass
+class Context:
+    user_jurisdiction: str
+    industry: str
+    compliance_frameworks: list[str]
 
-    @wrap_model_call
-    def inject_compliance_rules(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Inject compliance constraints from Runtime Context."""
-        # Read from Runtime Context: get compliance requirements
-        jurisdiction = request.runtime.context.user_jurisdiction  # [!code highlight]
-        industry = request.runtime.context.industry  # [!code highlight]
-        frameworks = request.runtime.context.compliance_frameworks  # [!code highlight]
+@wrap_model_call
+def inject_compliance_rules(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Inject compliance constraints from Runtime Context."""
+    # Read from Runtime Context: get compliance requirements
+    jurisdiction = request.runtime.context.user_jurisdiction  # [!code highlight]
+    industry = request.runtime.context.industry  # [!code highlight]
+    frameworks = request.runtime.context.compliance_frameworks  # [!code highlight]
 
-        # Build compliance constraints
-        rules = []
-        if "GDPR" in frameworks:
-            rules.append("- Must obtain explicit consent before processing personal data")
-            rules.append("- Users have right to data deletion")
-        if "HIPAA" in frameworks:
-            rules.append("- Cannot share patient health information without authorization")
-            rules.append("- Must use secure, encrypted communication")
-        if industry == "finance":
-            rules.append("- Cannot provide financial advice without proper disclaimers")
+    # Build compliance constraints
+    rules = []
+    if "GDPR" in frameworks:
+        rules.append("- Must obtain explicit consent before processing personal data")
+        rules.append("- Users have right to data deletion")
+    if "HIPAA" in frameworks:
+        rules.append("- Cannot share patient health information without authorization")
+        rules.append("- Must use secure, encrypted communication")
+    if industry == "finance":
+        rules.append("- Cannot provide financial advice without proper disclaimers")
 
-        if rules:
-            compliance_context = f"""Compliance requirements for {jurisdiction}:
-    {chr(10).join(rules)}"""
+    if rules:
+        compliance_context = f"""Compliance requirements for {jurisdiction}:
+{chr(10).join(rules)}"""
 
-            # Append at end - models pay more attention to final messages
-            messages = [
-                *request.messages,
-                {"role": "user", "content": compliance_context}
-            ]
-            request = request.override(messages=messages)  # [!code highlight]
+        # Append at end - models pay more attention to final messages
+        messages = [
+            *request.messages,
+            {"role": "user", "content": compliance_context}
+        ]
+        request = request.override(messages=messages)  # [!code highlight]
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[inject_compliance_rules],
-        context_schema=Context
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[inject_compliance_rules],
+    context_schema=Context
+)
+```
 
-<Note>
-  **Transient vs Persistent Message Updates:**
-
-  The examples above use `wrap_model_call` to make **transient** updates - modifying what messages are sent to the model for a single call without changing what's saved in state.
-
-  For **persistent** updates that modify state, you can:
-
-  * Return a [`ExtendedModelResponse`](https://reference.langchain.com/python/langchain/agents/middleware/types/ExtendedModelResponse) with a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from `wrap_model_call` to inject state updates from the model call layer.
-  * Use life-cycle hooks like `before_model`, `after_model`, or `wrap_tool_call` (for tool returns) to update the conversation history. See the [middleware documentation](/oss/python/langchain/middleware) for more details.
-
-  See [State updates](/oss/python/langchain/middleware/custom#state-updates) for more information.
-</Note>
+> [!NOTE]
+> **Transient vs Persistent Message Updates:**
+>
+> The examples above use `wrap_model_call` to make **transient** updates - modifying what messages are sent to the model for a single call without changing what's saved in state.
+>
+> For **persistent** updates that modify state, you can:
+>
+> * Return a [`ExtendedModelResponse`](https://reference.langchain.com/python/langchain/agents/middleware/types/ExtendedModelResponse) with a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from `wrap_model_call` to inject state updates from the model call layer.
+> * Use life-cycle hooks like `before_model`, `after_model`, or `wrap_tool_call` (for tool returns) to update the conversation history. See the [middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware) for more details.
+>
+> See [State updates](https://docs.langchain.com/oss/python/langchain/middleware/custom#state-updates) for more information.
 
 ### Tools
 
@@ -406,7 +377,7 @@ Tools let the model interact with databases, APIs, and external systems. How you
 
 Each tool needs a clear name, description, argument names, and argument descriptions. These aren't just metadata—they guide the model's reasoning about when and how to use the tool.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 
 @tool(parse_docstring=True)
@@ -433,294 +404,284 @@ def search_orders(
 
 Not every tool is appropriate for every situation. Too many tools may overwhelm the model (overload context) and increase errors; too few limit capabilities. Dynamic tool selection adapts the available toolset based on authentication state, user permissions, feature flags, or conversation stage.
 
-<Tabs>
-  <Tab title="State">
-    Enable advanced tools only after certain conversation milestones:
+#### State
+Enable advanced tools only after certain conversation milestones:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-    @wrap_model_call
-    def state_based_tools(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Filter tools based on conversation State."""
-        # Read from State: check if user has authenticated
-        state = request.state  # [!code highlight]
-        is_authenticated = state.get("authenticated", False)  # [!code highlight]
-        message_count = len(state["messages"])
+@wrap_model_call
+def state_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on conversation State."""
+    # Read from State: check if user has authenticated
+    state = request.state  # [!code highlight]
+    is_authenticated = state.get("authenticated", False)  # [!code highlight]
+    message_count = len(state["messages"])
 
-        # Only enable sensitive tools after authentication
-        if not is_authenticated:
-            tools = [t for t in request.tools if t.name.startswith("public_")]
-            request = request.override(tools=tools)  # [!code highlight]
-        elif message_count < 5:
-            # Limit tools early in conversation
-            tools = [t for t in request.tools if t.name != "advanced_search"]
-            request = request.override(tools=tools)  # [!code highlight]
+    # Only enable sensitive tools after authentication
+    if not is_authenticated:
+        tools = [t for t in request.tools if t.name.startswith("public_")]
+        request = request.override(tools=tools)  # [!code highlight]
+    elif message_count < 5:
+        # Limit tools early in conversation
+        tools = [t for t in request.tools if t.name != "advanced_search"]
+        request = request.override(tools=tools)  # [!code highlight]
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[public_search, private_search, advanced_search],
-        middleware=[state_based_tools]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[public_search, private_search, advanced_search],
+    middleware=[state_based_tools]
+)
+```
 
-  <Tab title="Store">
-    Filter tools based on user preferences or feature flags in Store:
+#### Store
+Filter tools based on user preferences or feature flags in Store:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
+from langgraph.store.memory import InMemoryStore
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-    @wrap_model_call
-    def store_based_tools(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Filter tools based on Store preferences."""
-        user_id = request.runtime.context.user_id
+@wrap_model_call
+def store_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on Store preferences."""
+    user_id = request.runtime.context.user_id
 
-        # Read from Store: get user's enabled features
-        store = request.runtime.store
-        feature_flags = store.get(("features",), user_id)
+    # Read from Store: get user's enabled features
+    store = request.runtime.store
+    feature_flags = store.get(("features",), user_id)
 
-        if feature_flags:
-            enabled_features = feature_flags.value.get("enabled_tools", [])
-            # Only include tools that are enabled for this user
-            tools = [t for t in request.tools if t.name in enabled_features]
-            request = request.override(tools=tools)
+    if feature_flags:
+        enabled_features = feature_flags.value.get("enabled_tools", [])
+        # Only include tools that are enabled for this user
+        tools = [t for t in request.tools if t.name in enabled_features]
+        request = request.override(tools=tools)
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[search_tool, analysis_tool, export_tool],
-        middleware=[store_based_tools],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[search_tool, analysis_tool, export_tool],
+    middleware=[store_based_tools],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-  <Tab title="Runtime Context">
-    Filter tools based on user permissions from Runtime Context:
+#### Runtime Context
+Filter tools based on user permissions from Runtime Context:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from typing import Callable
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from typing import Callable
 
-    @dataclass
-    class Context:
-        user_role: str
+@dataclass
+class Context:
+    user_role: str
 
-    @wrap_model_call
-    def context_based_tools(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Filter tools based on Runtime Context permissions."""
-        # Read from Runtime Context: get user role
-        user_role = request.runtime.context.user_role
+@wrap_model_call
+def context_based_tools(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Filter tools based on Runtime Context permissions."""
+    # Read from Runtime Context: get user role
+    user_role = request.runtime.context.user_role
 
-        if user_role == "admin":
-            # Admins get all tools
-            pass
-        elif user_role == "editor":
-            # Editors can't delete
-            tools = [t for t in request.tools if t.name != "delete_data"]
-            request = request.override(tools=tools)
-        else:
-            # Viewers get read-only tools
-            tools = [t for t in request.tools if t.name.startswith("read_")]
-            request = request.override(tools=tools)
+    if user_role == "admin":
+        # Admins get all tools
+        pass
+    elif user_role == "editor":
+        # Editors can't delete
+        tools = [t for t in request.tools if t.name != "delete_data"]
+        request = request.override(tools=tools)
+    else:
+        # Viewers get read-only tools
+        tools = [t for t in request.tools if t.name.startswith("read_")]
+        request = request.override(tools=tools)
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[read_data, write_data, delete_data],
-        middleware=[context_based_tools],
-        context_schema=Context
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[read_data, write_data, delete_data],
+    middleware=[context_based_tools],
+    context_schema=Context
+)
+```
 
-See [Dynamic tools](/oss/python/langchain/tools#dynamic-tool-selection) for both filtering pre-registered tools and registering tools at runtime (e.g., from MCP servers).
+See [Dynamic tools](https://docs.langchain.com/oss/python/langchain/tools#dynamic-tool-selection) for both filtering pre-registered tools and registering tools at runtime (e.g., from MCP servers).
 
 ### Model
 
 Different models have different strengths, costs, and context windows. Select the right model for the task at hand, which
 might change during an agent run.
 
-<Tabs>
-  <Tab title="State">
-    Use different models based on conversation length from State:
+#### State
+Use different models based on conversation length from State:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from langchain.chat_models import init_chat_model
-    from typing import Callable
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from langchain.chat_models import init_chat_model
+from typing import Callable
 
-    # Initialize models once outside the middleware
-    large_model = init_chat_model("claude-sonnet-4-6")
-    standard_model = init_chat_model("gpt-5.5")
-    efficient_model = init_chat_model("gpt-5.4-mini")
+# Initialize models once outside the middleware
+large_model = init_chat_model("claude-sonnet-4-6")
+standard_model = init_chat_model("gpt-5.5")
+efficient_model = init_chat_model("gpt-5.4-mini")
 
-    @wrap_model_call
-    def state_based_model(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select model based on State conversation length."""
-        # request.messages is a shortcut for request.state["messages"]
-        message_count = len(request.messages)  # [!code highlight]
+@wrap_model_call
+def state_based_model(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select model based on State conversation length."""
+    # request.messages is a shortcut for request.state["messages"]
+    message_count = len(request.messages)  # [!code highlight]
 
-        if message_count > 20:
-            # Long conversation - use model with larger context window
-            model = large_model
-        elif message_count > 10:
-            # Medium conversation
-            model = standard_model
-        else:
-            # Short conversation - use efficient model
-            model = efficient_model
+    if message_count > 20:
+        # Long conversation - use model with larger context window
+        model = large_model
+    elif message_count > 10:
+        # Medium conversation
+        model = standard_model
+    else:
+        # Short conversation - use efficient model
+        model = efficient_model
 
-        request = request.override(model=model)  # [!code highlight]
+    request = request.override(model=model)  # [!code highlight]
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.4-mini",
-        tools=[...],
-        middleware=[state_based_model]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.4-mini",
+    tools=[...],
+    middleware=[state_based_model]
+)
+```
 
-  <Tab title="Store">
-    Use user's preferred model from Store:
+#### Store
+Use user's preferred model from Store:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from langchain.chat_models import init_chat_model
-    from typing import Callable
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from langchain.chat_models import init_chat_model
+from typing import Callable
+from langgraph.store.memory import InMemoryStore
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-    # Initialize available models once
-    MODEL_MAP = {
-        "gpt-5.5": init_chat_model("gpt-5.5"),
-        "gpt-5.4-mini": init_chat_model("gpt-5.4-mini"),
-        "claude-sonnet": init_chat_model("claude-sonnet-4-6"),
-    }
+# Initialize available models once
+MODEL_MAP = {
+    "gpt-5.5": init_chat_model("gpt-5.5"),
+    "gpt-5.4-mini": init_chat_model("gpt-5.4-mini"),
+    "claude-sonnet": init_chat_model("claude-sonnet-4-6"),
+}
 
-    @wrap_model_call
-    def store_based_model(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select model based on Store preferences."""
-        user_id = request.runtime.context.user_id
+@wrap_model_call
+def store_based_model(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select model based on Store preferences."""
+    user_id = request.runtime.context.user_id
 
-        # Read from Store: get user's preferred model
-        store = request.runtime.store
-        user_prefs = store.get(("preferences",), user_id)
+    # Read from Store: get user's preferred model
+    store = request.runtime.store
+    user_prefs = store.get(("preferences",), user_id)
 
-        if user_prefs:
-            preferred_model = user_prefs.value.get("preferred_model")
-            if preferred_model and preferred_model in MODEL_MAP:
-                request = request.override(model=MODEL_MAP[preferred_model])
+    if user_prefs:
+        preferred_model = user_prefs.value.get("preferred_model")
+        if preferred_model and preferred_model in MODEL_MAP:
+            request = request.override(model=MODEL_MAP[preferred_model])
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[store_based_model],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[store_based_model],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-  <Tab title="Runtime Context">
-    Select model based on cost limits or environment from Runtime Context:
+#### Runtime Context
+Select model based on cost limits or environment from Runtime Context:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from langchain.chat_models import init_chat_model
-    from typing import Callable
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from langchain.chat_models import init_chat_model
+from typing import Callable
 
-    @dataclass
-    class Context:
-        cost_tier: str
-        environment: str
+@dataclass
+class Context:
+    cost_tier: str
+    environment: str
 
-    # Initialize models once outside the middleware
-    premium_model = init_chat_model("claude-sonnet-4-6")
-    standard_model = init_chat_model("gpt-5.5")
-    budget_model = init_chat_model("gpt-5.4-mini")
+# Initialize models once outside the middleware
+premium_model = init_chat_model("claude-sonnet-4-6")
+standard_model = init_chat_model("gpt-5.5")
+budget_model = init_chat_model("gpt-5.4-mini")
 
-    @wrap_model_call
-    def context_based_model(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select model based on Runtime Context."""
-        # Read from Runtime Context: cost tier and environment
-        cost_tier = request.runtime.context.cost_tier
-        environment = request.runtime.context.environment
+@wrap_model_call
+def context_based_model(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select model based on Runtime Context."""
+    # Read from Runtime Context: cost tier and environment
+    cost_tier = request.runtime.context.cost_tier
+    environment = request.runtime.context.environment
 
-        if environment == "production" and cost_tier == "premium":
-            # Production premium users get best model
-            model = premium_model
-        elif cost_tier == "budget":
-            # Budget tier gets efficient model
-            model = budget_model
-        else:
-            # Standard tier
-            model = standard_model
+    if environment == "production" and cost_tier == "premium":
+        # Production premium users get best model
+        model = premium_model
+    elif cost_tier == "budget":
+        # Budget tier gets efficient model
+        model = budget_model
+    else:
+        # Standard tier
+        model = standard_model
 
-        request = request.override(model=model)
+    request = request.override(model=model)
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[context_based_model],
-        context_schema=Context
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[context_based_model],
+    context_schema=Context
+)
+```
 
-See [Dynamic model](/oss/python/langchain/models#dynamic-model-selection) for more examples.
+See [Dynamic model](https://docs.langchain.com/oss/python/langchain/models#dynamic-model-selection) for more examples.
 
 ### Response format
 
@@ -732,7 +693,7 @@ Structured output transforms unstructured text into validated, structured data. 
 
 Schema definitions guide the model. Field names, types, and descriptions specify exactly what format the output should adhere to.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class CustomerSupportTicket(BaseModel):
@@ -756,160 +717,155 @@ class CustomerSupportTicket(BaseModel):
 
 Dynamic response format selection adapts schemas based on user preferences, conversation stage, or role—returning simple formats early and detailed formats as complexity increases.
 
-<Tabs>
-  <Tab title="State">
-    Configure structured output based on conversation state:
+#### State
+Configure structured output based on conversation state:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from pydantic import BaseModel, Field
-    from typing import Callable
+```python
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from pydantic import BaseModel, Field
+from typing import Callable
 
-    class SimpleResponse(BaseModel):
-        """Simple response for early conversation."""
-        answer: str = Field(description="A brief answer")
+class SimpleResponse(BaseModel):
+    """Simple response for early conversation."""
+    answer: str = Field(description="A brief answer")
 
-    class DetailedResponse(BaseModel):
-        """Detailed response for established conversation."""
-        answer: str = Field(description="A detailed answer")
-        reasoning: str = Field(description="Explanation of reasoning")
-        confidence: float = Field(description="Confidence score 0-1")
+class DetailedResponse(BaseModel):
+    """Detailed response for established conversation."""
+    answer: str = Field(description="A detailed answer")
+    reasoning: str = Field(description="Explanation of reasoning")
+    confidence: float = Field(description="Confidence score 0-1")
 
-    @wrap_model_call
-    def state_based_output(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select output format based on State."""
-        # request.messages is a shortcut for request.state["messages"]
-        message_count = len(request.messages)  # [!code highlight]
+@wrap_model_call
+def state_based_output(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select output format based on State."""
+    # request.messages is a shortcut for request.state["messages"]
+    message_count = len(request.messages)  # [!code highlight]
 
-        if message_count < 3:
-            # Early conversation - use simple format
-            request = request.override(response_format=SimpleResponse)  # [!code highlight]
+    if message_count < 3:
+        # Early conversation - use simple format
+        request = request.override(response_format=SimpleResponse)  # [!code highlight]
+    else:
+        # Established conversation - use detailed format
+        request = request.override(response_format=DetailedResponse)  # [!code highlight]
+
+    return handler(request)
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[state_based_output]
+)
+```
+
+#### Store
+Configure output format based on user preferences in Store:
+
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from pydantic import BaseModel, Field
+from typing import Callable
+from langgraph.store.memory import InMemoryStore
+
+@dataclass
+class Context:
+    user_id: str
+
+class VerboseResponse(BaseModel):
+    """Verbose response with details."""
+    answer: str = Field(description="Detailed answer")
+    sources: list[str] = Field(description="Sources used")
+
+class ConciseResponse(BaseModel):
+    """Concise response."""
+    answer: str = Field(description="Brief answer")
+
+@wrap_model_call
+def store_based_output(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select output format based on Store preferences."""
+    user_id = request.runtime.context.user_id
+
+    # Read from Store: get user's preferred response style
+    store = request.runtime.store
+    user_prefs = store.get(("preferences",), user_id)
+
+    if user_prefs:
+        style = user_prefs.value.get("response_style", "concise")
+        if style == "verbose":
+            request = request.override(response_format=VerboseResponse)
         else:
-            # Established conversation - use detailed format
-            request = request.override(response_format=DetailedResponse)  # [!code highlight]
+            request = request.override(response_format=ConciseResponse)
 
-        return handler(request)
+    return handler(request)
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[state_based_output]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[store_based_output],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-  <Tab title="Store">
-    Configure output format based on user preferences in Store:
+#### Runtime Context
+Configure output format based on Runtime Context like user role or environment:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from pydantic import BaseModel, Field
-    from typing import Callable
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
+from pydantic import BaseModel, Field
+from typing import Callable
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_role: str
+    environment: str
 
-    class VerboseResponse(BaseModel):
-        """Verbose response with details."""
-        answer: str = Field(description="Detailed answer")
-        sources: list[str] = Field(description="Sources used")
+class AdminResponse(BaseModel):
+    """Response with technical details for admins."""
+    answer: str = Field(description="Answer")
+    debug_info: dict = Field(description="Debug information")
+    system_status: str = Field(description="System status")
 
-    class ConciseResponse(BaseModel):
-        """Concise response."""
-        answer: str = Field(description="Brief answer")
+class UserResponse(BaseModel):
+    """Simple response for regular users."""
+    answer: str = Field(description="Answer")
 
-    @wrap_model_call
-    def store_based_output(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select output format based on Store preferences."""
-        user_id = request.runtime.context.user_id
+@wrap_model_call
+def context_based_output(
+    request: ModelRequest,
+    handler: Callable[[ModelRequest], ModelResponse]
+) -> ModelResponse:
+    """Select output format based on Runtime Context."""
+    # Read from Runtime Context: user role and environment
+    user_role = request.runtime.context.user_role
+    environment = request.runtime.context.environment
 
-        # Read from Store: get user's preferred response style
-        store = request.runtime.store
-        user_prefs = store.get(("preferences",), user_id)
+    if user_role == "admin" and environment == "production":
+        # Admins in production get detailed output
+        request = request.override(response_format=AdminResponse)
+    else:
+        # Regular users get simple output
+        request = request.override(response_format=UserResponse)
 
-        if user_prefs:
-            style = user_prefs.value.get("response_style", "concise")
-            if style == "verbose":
-                request = request.override(response_format=VerboseResponse)
-            else:
-                request = request.override(response_format=ConciseResponse)
+    return handler(request)
 
-        return handler(request)
-
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[store_based_output],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
-
-  <Tab title="Runtime Context">
-    Configure output format based on Runtime Context like user role or environment:
-
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.agents import create_agent
-    from langchain.agents.middleware import wrap_model_call, ModelRequest, ModelResponse
-    from pydantic import BaseModel, Field
-    from typing import Callable
-
-    @dataclass
-    class Context:
-        user_role: str
-        environment: str
-
-    class AdminResponse(BaseModel):
-        """Response with technical details for admins."""
-        answer: str = Field(description="Answer")
-        debug_info: dict = Field(description="Debug information")
-        system_status: str = Field(description="System status")
-
-    class UserResponse(BaseModel):
-        """Simple response for regular users."""
-        answer: str = Field(description="Answer")
-
-    @wrap_model_call
-    def context_based_output(
-        request: ModelRequest,
-        handler: Callable[[ModelRequest], ModelResponse]
-    ) -> ModelResponse:
-        """Select output format based on Runtime Context."""
-        # Read from Runtime Context: user role and environment
-        user_role = request.runtime.context.user_role
-        environment = request.runtime.context.environment
-
-        if user_role == "admin" and environment == "production":
-            # Admins in production get detailed output
-            request = request.override(response_format=AdminResponse)
-        else:
-            # Regular users get simple output
-            request = request.override(response_format=UserResponse)
-
-        return handler(request)
-
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[...],
-        middleware=[context_based_output],
-        context_schema=Context
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[...],
+    middleware=[context_based_output],
+    context_schema=Context
+)
+```
 
 ## Tool context
 
@@ -923,227 +879,216 @@ Tools can also fetch important information for the model that allows it to perfo
 
 Most real-world tools need more than just the LLM's parameters. They need user IDs for database queries, API keys for external services, or current session state to make decisions. Tools read from state, store, and runtime context to access this information.
 
-<Tabs>
-  <Tab title="State">
-    Read from State to check current session information:
+#### State
+Read from State to check current session information:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.tools import tool, ToolRuntime
-    from langchain.agents import create_agent
+```python
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
 
-    @tool
-    def check_authentication(
-        runtime: ToolRuntime
-    ) -> str:
-        """Check if user is authenticated."""
-        # Read from State: check current auth status
-        current_state = runtime.state
-        is_authenticated = current_state.get("authenticated", False)
+@tool
+def check_authentication(
+    runtime: ToolRuntime
+) -> str:
+    """Check if user is authenticated."""
+    # Read from State: check current auth status
+    current_state = runtime.state
+    is_authenticated = current_state.get("authenticated", False)
 
-        if is_authenticated:
-            return "User is authenticated"
-        else:
-            return "User is not authenticated"
+    if is_authenticated:
+        return "User is authenticated"
+    else:
+        return "User is not authenticated"
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[check_authentication]
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[check_authentication]
+)
+```
+
+#### Store
+Read from Store to access persisted user preferences:
+
+```python
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langgraph.store.memory import InMemoryStore
+
+@dataclass
+class Context:
+    user_id: str
+
+@tool
+def get_preference(
+    preference_key: str,
+    runtime: ToolRuntime[Context]
+) -> str:
+    """Get user preference from Store."""
+    user_id = runtime.context.user_id
+
+    # Read from Store: get existing preferences
+    store = runtime.store
+    existing_prefs = store.get(("preferences",), user_id)
+
+    if existing_prefs:
+        value = existing_prefs.value.get(preference_key)
+        return f"{preference_key}: {value}" if value else f"No preference set for {preference_key}"
+    else:
+        return "No preferences found"
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[get_preference],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
+
+#### Runtime Context
+Read from Runtime Context for configuration like API keys and user IDs:
+
+```python
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+
+@dataclass
+class Context:
+    user_id: str
+    api_key: str
+    db_connection: str
+
+@tool
+def fetch_user_data(
+    query: str,
+    runtime: ToolRuntime[Context]
+) -> str:
+    """Fetch data using Runtime Context configuration."""
+    # Read from Runtime Context: get API key and DB connection
+    user_id = runtime.context.user_id
+    api_key = runtime.context.api_key
+    db_connection = runtime.context.db_connection
+
+    # Use configuration to fetch data
+    results = perform_database_query(db_connection, query, api_key)
+
+    return f"Found {len(results)} results for user {user_id}"
+
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[fetch_user_data],
+    context_schema=Context
+)
+
+# Invoke with runtime context
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "Get my data"}]},
+    context=Context(
+        user_id="user_123",
+        api_key="sk-...",
+        db_connection="postgresql://..."
     )
-    ```
-  </Tab>
-
-  <Tab title="Store">
-    Read from Store to access persisted user preferences:
-
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.tools import tool, ToolRuntime
-    from langchain.agents import create_agent
-    from langgraph.store.memory import InMemoryStore
-
-    @dataclass
-    class Context:
-        user_id: str
-
-    @tool
-    def get_preference(
-        preference_key: str,
-        runtime: ToolRuntime[Context]
-    ) -> str:
-        """Get user preference from Store."""
-        user_id = runtime.context.user_id
-
-        # Read from Store: get existing preferences
-        store = runtime.store
-        existing_prefs = store.get(("preferences",), user_id)
-
-        if existing_prefs:
-            value = existing_prefs.value.get(preference_key)
-            return f"{preference_key}: {value}" if value else f"No preference set for {preference_key}"
-        else:
-            return "No preferences found"
-
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[get_preference],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
-
-  <Tab title="Runtime Context">
-    Read from Runtime Context for configuration like API keys and user IDs:
-
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.tools import tool, ToolRuntime
-    from langchain.agents import create_agent
-
-    @dataclass
-    class Context:
-        user_id: str
-        api_key: str
-        db_connection: str
-
-    @tool
-    def fetch_user_data(
-        query: str,
-        runtime: ToolRuntime[Context]
-    ) -> str:
-        """Fetch data using Runtime Context configuration."""
-        # Read from Runtime Context: get API key and DB connection
-        user_id = runtime.context.user_id
-        api_key = runtime.context.api_key
-        db_connection = runtime.context.db_connection
-
-        # Use configuration to fetch data
-        results = perform_database_query(db_connection, query, api_key)
-
-        return f"Found {len(results)} results for user {user_id}"
-
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[fetch_user_data],
-        context_schema=Context
-    )
-
-    # Invoke with runtime context
-    result = agent.invoke(
-        {"messages": [{"role": "user", "content": "Get my data"}]},
-        context=Context(
-            user_id="user_123",
-            api_key="sk-...",
-            db_connection="postgresql://..."
-        )
-    )
-    ```
-  </Tab>
-</Tabs>
+)
+```
 
 ### Writes
 
 Tool results can be used to help an agent complete a given task. Tools can both return results directly to the model
 and update the memory of the agent to make important context available to future steps.
 
-<Tabs>
-  <Tab title="State">
-    Write to State to track session-specific information using Command:
+#### State
+Write to State to track session-specific information using Command:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain.tools import tool, ToolRuntime
-    from langchain.agents import create_agent
-    from langgraph.types import Command
+```python
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langgraph.types import Command
 
-    @tool
-    def authenticate_user(
-        password: str,
-        runtime: ToolRuntime
-    ) -> Command:
-        """Authenticate user and update State."""
-        # Perform authentication (simplified)
-        if password == "correct":
-            # Write to State: mark as authenticated using Command
-            return Command(
-                update={"authenticated": True},
-            )
-        else:
-            return Command(update={"authenticated": False})
+@tool
+def authenticate_user(
+    password: str,
+    runtime: ToolRuntime
+) -> Command:
+    """Authenticate user and update State."""
+    # Perform authentication (simplified)
+    if password == "correct":
+        # Write to State: mark as authenticated using Command
+        return Command(
+            update={"authenticated": True},
+        )
+    else:
+        return Command(update={"authenticated": False})
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[authenticate_user]
-    )
-    ```
-  </Tab>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[authenticate_user]
+)
+```
 
-  <Tab title="Store">
-    Write to Store to persist data across sessions:
+#### Store
+Write to Store to persist data across sessions:
 
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from dataclasses import dataclass
-    from langchain.tools import tool, ToolRuntime
-    from langchain.agents import create_agent
-    from langgraph.store.memory import InMemoryStore
+```python
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langgraph.store.memory import InMemoryStore
 
-    @dataclass
-    class Context:
-        user_id: str
+@dataclass
+class Context:
+    user_id: str
 
-    @tool
-    def save_preference(
-        preference_key: str,
-        preference_value: str,
-        runtime: ToolRuntime[Context]
-    ) -> str:
-        """Save user preference to Store."""
-        user_id = runtime.context.user_id
+@tool
+def save_preference(
+    preference_key: str,
+    preference_value: str,
+    runtime: ToolRuntime[Context]
+) -> str:
+    """Save user preference to Store."""
+    user_id = runtime.context.user_id
 
-        # Read existing preferences
-        store = runtime.store
-        existing_prefs = store.get(("preferences",), user_id)
+    # Read existing preferences
+    store = runtime.store
+    existing_prefs = store.get(("preferences",), user_id)
 
-        # Merge with new preference
-        prefs = existing_prefs.value if existing_prefs else {}
-        prefs[preference_key] = preference_value
+    # Merge with new preference
+    prefs = existing_prefs.value if existing_prefs else {}
+    prefs[preference_key] = preference_value
 
-        # Write to Store: save updated preferences
-        store.put(("preferences",), user_id, prefs)
+    # Write to Store: save updated preferences
+    store.put(("preferences",), user_id, prefs)
 
-        return f"Saved preference: {preference_key} = {preference_value}"
+    return f"Saved preference: {preference_key} = {preference_value}"
 
-    agent = create_agent(
-        model="gpt-5.5",
-        tools=[save_preference],
-        context_schema=Context,
-        store=InMemoryStore()
-    )
-    ```
-  </Tab>
-</Tabs>
+agent = create_agent(
+    model="gpt-5.5",
+    tools=[save_preference],
+    context_schema=Context,
+    store=InMemoryStore()
+)
+```
 
-See [Tools](/oss/python/langchain/tools) for comprehensive examples of accessing state, store, and runtime context in tools.
+See [Tools](https://docs.langchain.com/oss/python/langchain/tools) for comprehensive examples of accessing state, store, and runtime context in tools.
 
 ## Life-cycle context
 
 Control what happens **between** the core agent steps - intercepting data flow to implement cross-cutting concerns like summarization, guardrails, and logging.
 
-As you've seen in [Model Context](#model-context) and [Tool Context](#tool-context), [middleware](/oss/python/langchain/middleware) is the mechanism that makes context engineering practical. Middleware allows you to hook into any step in the agent lifecycle and either:
+As you've seen in [Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#model-context) and [Tool Context](https://docs.langchain.com/oss/python/langchain/context-engineering#tool-context), [middleware](https://docs.langchain.com/oss/python/langchain/middleware) is the mechanism that makes context engineering practical. Middleware allows you to hook into any step in the agent lifecycle and either:
 
 1. **Update context** - Modify state and store to persist changes, update conversation history, or save insights
 2. **Jump in the lifecycle** - Move to different steps in the agent cycle based on context (e.g., skip tool execution if a condition is met, repeat model call with modified context)
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware hooks in the agent loop" className="rounded-lg" width="500" height="560" data-path="oss/images/middleware_final.png" />
-</div>
+> **Image:** [Middleware hooks in the agent loop](https://docs.langchain.com/oss/python/langchain/context-engineering)
 
 ### Example: Summarization
 
-One of the most common life-cycle patterns is automatically condensing conversation history when it gets too long. Unlike the transient message trimming shown in [Model Context](#messages), summarization **persistently updates state** - permanently replacing old messages with a summary that's saved for all future turns.
+One of the most common life-cycle patterns is automatically condensing conversation history when it gets too long. Unlike the transient message trimming shown in [Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#messages), summarization **persistently updates state** - permanently replacing old messages with a summary that's saved for all future turns.
 
 LangChain offers built-in middleware for this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from langchain.agents.middleware import SummarizationMiddleware
 
@@ -1168,35 +1113,30 @@ When the conversation exceeds the token limit, `SummarizationMiddleware` automat
 
 The summarized conversation history is permanently updated - future turns will see the summary instead of the original messages.
 
-<Note>
-  For a complete list of built-in middleware, available hooks, and how to create custom middleware, see the [Middleware documentation](/oss/python/langchain/middleware).
-</Note>
+> [!NOTE]
+> For a complete list of built-in middleware, available hooks, and how to create custom middleware, see the [Middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware).
 
 ## Best practices
 
 1. **Start simple** - Begin with static prompts and tools, add dynamics only when needed
 2. **Test incrementally** - Add one context engineering feature at a time
 3. **Monitor performance** - Track model calls, token usage, and latency
-4. **Use built-in middleware** - Leverage [`SummarizationMiddleware`](/oss/python/langchain/middleware#summarization), [`LLMToolSelectorMiddleware`](/oss/python/langchain/middleware#llm-tool-selector), etc.
+4. **Use built-in middleware** - Leverage [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization), [`LLMToolSelectorMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#llm-tool-selector), etc.
 5. **Document your context strategy** - Make it clear what context is being passed and why
 6. **Understand transient vs persistent**: Model context changes are transient (per-call), while life-cycle context changes persist to state
 
 ## Related resources
 
-* [Context conceptual overview](/oss/python/concepts/context) - Understand context types and when to use them
-* [Middleware](/oss/python/langchain/middleware) - Complete middleware guide
-* [Tools](/oss/python/langchain/tools) - Tool creation and context access
-* [Memory](/oss/python/concepts/memory) - Short-term and long-term memory patterns
-* [Agents](/oss/python/langchain/agents) - Core agent concepts
+* [Context conceptual overview](https://docs.langchain.com/oss/python/concepts/context) - Understand context types and when to use them
+* [Middleware](https://docs.langchain.com/oss/python/langchain/middleware) - Complete middleware guide
+* [Tools](https://docs.langchain.com/oss/python/langchain/tools) - Tool creation and context access
+* [Memory](https://docs.langchain.com/oss/python/concepts/memory) - Short-term and long-term memory patterns
+* [Agents](https://docs.langchain.com/oss/python/langchain/agents) - Core agent concepts
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/context-engineering.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

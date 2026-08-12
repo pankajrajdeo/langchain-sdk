@@ -1,23 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to use the REST API
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-evals-api-only)
+The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts) in LangSmith. They include optimizations and features that enhance performance and reliability.
 
-The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](/langsmith/evaluation-concepts) in LangSmith. They include optimizations and features that enhance performance and reliability.
-
-If you cannot use the SDKs—for example, if you are working in a different language or a restricted environment—you can use the REST API directly. This guide demonstrates how to run evaluations using the [REST API](/langsmith/smith-api-ref) with Python's [`requests`](https://requests.readthedocs.io/) library, but the same principles apply to any language.
+If you cannot use the SDKs—for example, if you are working in a different language or a restricted environment—you can use the REST API directly. This guide demonstrates how to run evaluations using the [REST API](https://docs.langchain.com/langsmith/smith-api-ref) with Python's [`requests`](https://requests.readthedocs.io/) library, but the same principles apply to any language.
 
 Before diving into this content, it might be helpful to read the following:
 
-* [Evaluate LLM applications](/langsmith/evaluate-llm-application).
-* [LangSmith API Reference](/langsmith/smith-api-ref): Complete API documentation for all endpoints used in this guide.
+* [Evaluate LLM applications](https://docs.langchain.com/langsmith/evaluate-llm-application).
+* [LangSmith API Reference](https://docs.langchain.com/langsmith/smith-api-ref): Complete API documentation for all endpoints used in this guide.
 
 ## Create a dataset
 
-For this example, we use the Python SDK to create a [dataset](/langsmith/evaluation-concepts#datasets) quickly. To create datasets via the API or UI instead, refer to [Managing datasets](/langsmith/manage-datasets-in-application).
+For this example, we use the Python SDK to create a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) quickly. To create datasets via the API or UI instead, refer to [Managing datasets](https://docs.langchain.com/langsmith/manage-datasets-in-application).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import requests
 
@@ -73,7 +69,7 @@ To run an experiment via the API, you'll need to:
 
 First, pull all of the examples you'd want to use in your experiment using the `/examples` endpoint:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 #  Pick a dataset id. In this case, we are using the dataset we created above.
 #  API Reference: https://docs.langchain.com/langsmith/smith-api/examples/read-examples
 dataset_id = dataset.id
@@ -96,7 +92,7 @@ Next, define a function that will run your model on a single example and log the
 * Tracking parent-child relationships between runs (e.g., a parent "chain" run containing a child "llm" run).
 * Updating runs with outputs via PATCH to `/runs/{run_id}`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["OPENAI_API_KEY"] = "sk-..."
 
 def run_completion_on_example(example, model_name, experiment_id):
@@ -152,7 +148,6 @@ def run_completion_on_example(example, model_name, experiment_id):
         {"role": "user", "content": text},
     ]
 
-
     # Create parent run
     parent_run_id = uuid7()
     _post_run(parent_run_id, "LLM Pipeline", "chain", {"text": text})
@@ -177,7 +172,7 @@ def run_completion_on_example(example, model_name, experiment_id):
 
 Now create the experiments and run completions on all examples. In the API, an "experiment" is represented as a session (or "tracer session") that references a dataset via `reference_dataset_id`. The key difference from regular tracing is that runs in an experiment must have a `reference_example_id` that links each run to a specific example in the dataset.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 #  Create a new experiment using the /sessions endpoint
 #  An experiment is a collection of runs with a reference to the dataset used
 #  API Reference: https://docs.langchain.com/langsmith/smith-api/tracer-sessions/create-tracer-session
@@ -216,13 +211,13 @@ for model_name in model_names:
 
 ### Add evaluation feedback
 
-After running your [experiments](/langsmith/evaluation-concepts#experiment), you'll typically want to evaluate the results by adding feedback scores. This allows you to track metrics like correctness, accuracy, or any custom evaluation criteria.
+After running your [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment), you'll typically want to evaluate the results by adding feedback scores. This allows you to track metrics like correctness, accuracy, or any custom evaluation criteria.
 
 In this example, the evaluation checks if each model's output matches the expected label in the dataset. The code posts a "correctness" score (1.0 for correct, 0.0 for incorrect) to track how accurately each model classifies toxic vs. non-toxic text.
 
-The following code adds feedback to the runs from the [single experiment example](#run-a-single-experiment):
+The following code adds feedback to the runs from the [single experiment example](https://docs.langchain.com/langsmith/run-evals-api-only#run-a-single-experiment):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Fetch the runs from one of the experiments
 # API Reference: https://docs.langchain.com/langsmith/smith-api/run/query-runs
 experiment_id = experiment_ids[0]  # Evaluate the first experiment
@@ -277,9 +272,9 @@ You can add multiple feedback scores with different keys to track various metric
 
 Next, we'll demonstrate how to run a pairwise experiment. In a pairwise experiment, you compare two examples against each other.
 
-For more information, check out [How to run a pairwise evaluation](/langsmith/evaluate-pairwise).
+For more information, check out [How to run a pairwise evaluation](https://docs.langchain.com/langsmith/evaluate-pairwise).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 #  A comparative experiment allows you to provide a preferential ranking on the outputs of two or more experiments
 #  API Reference: https://docs.langchain.com/langsmith/smith-api/datasets/create-comparative-experiment
 resp = requests.post(
@@ -358,12 +353,8 @@ for example_id, runs in example_id_to_runs_map.items():
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evals-api-only.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/run-evals-api-only.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

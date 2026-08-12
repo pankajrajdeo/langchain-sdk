@@ -1,18 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Create Assistant
 
 > Create an assistant.
 
 An initial version of the assistant will be created and the assistant is set to that version. To change versions, use the `POST /assistants/{assistant_id}/latest` endpoint.
 
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json post /assistants
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment
@@ -64,7 +58,6 @@ paths:
       summary: Create Assistant
       description: >-
         Create an assistant.
-
 
         An initial version of the assistant will be created and the assistant is
         set to that version. To change versions, use the `POST

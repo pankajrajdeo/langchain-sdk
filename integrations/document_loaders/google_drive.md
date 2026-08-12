@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google drive integration
 
 > Integrate with the Google drive document loader using LangChain Python.
@@ -30,15 +26,15 @@ The first time you use GoogleDriveLoader, you will be displayed with the consent
 * Folder: [drive.google.com/drive/u/0/folders/1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5](https://drive.google.com/drive/u/0/folders/1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5) -> folder id is `"1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5"`
 * Document: [docs.google.com/document/d/1bfaMQ18\_i56204VaQDVeAFpqEijJTgvurupdEDiaUQw/edit](https://docs.google.com/document/d/1bfaMQ18_i56204VaQDVeAFpqEijJTgvurupdEDiaUQw/edit) -> document id is `"1bfaMQ18_i56204VaQDVeAFpqEijJTgvurupdEDiaUQw"`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-community[drive]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import GoogleDriveLoader
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     folder_id="1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5",
     token_path="/path/where/you/want/token/to/be/created/google_token.json",
@@ -47,13 +43,13 @@ loader = GoogleDriveLoader(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 ```
 
 When you pass a `folder_id` by default all files of type document, sheet and pdf are loaded. You can modify this behaviour by passing a `file_types` argument
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     folder_id="1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5",
     file_types=["document", "sheet"],
@@ -65,16 +61,15 @@ loader = GoogleDriveLoader(
 
 When processing files other than Google Docs and Google Sheets, it can be helpful to pass an optional file loader to `GoogleDriveLoader`. If you pass in a file loader, that file loader will be used on documents that do not have a Google Docs or Google Sheets MIME type. Here is an example of how to load an Excel document from Google Drive using a file loader.
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import UnstructuredFileIOLoader
 from langchain_google_community import GoogleDriveLoader
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 file_id = "1x9WBtFPWMEAdjcJzPScRsjpjQvpSo_kz"
 loader = GoogleDriveLoader(
     file_ids=[file_id],
@@ -83,17 +78,17 @@ loader = GoogleDriveLoader(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs[0]
 ```
 
 You can also process a folder with a mix of files and Google Docs/Sheets using the following pattern:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 folder_id = "1asMOHY1BqBS84JcRbOag5LOJac74gpmD"
 loader = GoogleDriveLoader(
     folder_id=folder_id,
@@ -102,15 +97,15 @@ loader = GoogleDriveLoader(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs = loader.load()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ```
 
 ## Extended usage
@@ -121,21 +116,21 @@ in its place.
 
 To be compatible with containers, the authentication uses an environment variable `̀GOOGLE_ACCOUNT_FILE` to credential file (for user or service).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-googledrive
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 folder_id = "root"
 # folder_id='1yucgL9WGgWZdM1TOuKkeghlPizuzMYb5'
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Use the advanced version.
 from langchain_googledrive.document_loaders import GoogleDriveLoader
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     folder_id=folder_id,
     recursive=False,
@@ -166,11 +161,11 @@ It's possible to update or customize this. See the documentation of `GDriveLoade
 
 The corresponding packages must be installed.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  unstructured
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 for doc in loader.load():
     print("---")
     print(doc.page_content.strip()[:60] + "...")
@@ -180,7 +175,7 @@ for doc in loader.load():
 
 Authorized identities for each file ingested by Google Drive Loader can be loaded along with metadata per Document.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import GoogleDriveLoader
 
 loader = GoogleDriveLoader(
@@ -194,7 +189,7 @@ doc = loader.load()
 
 You can pass load\_auth=True, to add Google Drive document access identities to metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc[0].metadata
 ```
 
@@ -206,7 +201,7 @@ Following extra fields can also be fetched within metadata of each Document:
 * owner - owner of the file/s.
 * size - size of the file/s.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import GoogleDriveLoader
 
 loader = GoogleDriveLoader(
@@ -220,7 +215,7 @@ doc = loader.load()
 
 You can pass load\_extended\_matadata=True, to add Google Drive document extended details to metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 doc[0].metadata
 ```
 
@@ -246,7 +241,7 @@ You can customize the criteria to select the files. A set of predefined filter a
 | gdrive-query-with-mime-type            | Search `query` with a specific `mime_type`                          |
 | gdrive-query-with-mime-type-and-folder | Search `query` with a specific `mime_type` and in `folder_id`       |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     folder_id=folder_id,
     recursive=False,
@@ -262,7 +257,7 @@ for doc in loader.load():
 
 You can customize your pattern.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts.prompt import PromptTemplate
 
 loader = GoogleDriveLoader(
@@ -299,11 +294,11 @@ The parameter mode accepts different values:
 
 The parameter `gslide_mode` accepts different values:
 
-* "single" : one document with \<PAGE BREAK>
+* "single" : one document with \
 * "slide" : one document by slide
 * "elements" : one document for each elements.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     template="gdrive-mime-type",
     mime_type="application/vnd.google-apps.presentation",  # Only GSlide files
@@ -318,9 +313,9 @@ for doc in loader.load():
 The parameter `gsheet_mode` accepts different values:
 
 * `"single"`: Generate one document by line
-* `"elements"` : one document with markdown array and \<PAGE BREAK> tags.
+* `"elements"` : one document with markdown array and \ tags.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = GoogleDriveLoader(
     template="gdrive-mime-type",
     mime_type="application/vnd.google-apps.spreadsheet",  # Only GSheet files
@@ -342,7 +337,7 @@ Sometime, a specific filter can be used to extract some information from the fil
 
 Sometimes, many documents are returned. It's not necessary to have all documents in memory at the same time. You can use the lazy versions of methods, to get one document at a time. It's better to use a complex query in place of a recursive search. For each folder, a query must be applied if you activate `recursive=True`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 loader = GoogleDriveLoader(
@@ -360,12 +355,8 @@ for doc in loader.load():
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_drive.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

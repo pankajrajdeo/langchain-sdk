@@ -1,26 +1,21 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Managed Deep Agents CLI reference
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli)
+Reference for mda commands, project files, and deploy behavior.
 
-> Reference for mda commands, project files, and deploy behavior.
-
-The `mda` CLI compiles and deploys code-first [Managed Deep Agents](/langsmith/python/managed-deep-agents-overview).
+The `mda` CLI compiles and deploys code-first [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview).
 
 It is included with the `managed-deepagents` Python package.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
-For the fastest end-to-end path, see the [quickstart](/langsmith/python/managed-deep-agents-quickstart). For workflow guidance, see [Identity](/langsmith/python/managed-deep-agents-identity), [Memory](/langsmith/python/managed-deep-agents-memory), [Evals](/langsmith/python/managed-deep-agents-evals), [Custom tools](/langsmith/python/managed-deep-agents-tools), [Custom middleware](/langsmith/python/managed-deep-agents-middleware), [Sandboxes](/langsmith/python/managed-deep-agents-sandboxes), [Channels](/langsmith/python/managed-deep-agents-channels), [Schedules](/langsmith/python/managed-deep-agents-schedules), and [Deploy an agent](/langsmith/python/managed-deep-agents-deploy).
+For the fastest end-to-end path, see the [quickstart](https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart). For workflow guidance, see [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity), [Memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory), [Evals](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals), [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools), [Custom middleware](https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware), [Sandboxes](https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes), [Channels](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels), [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules), and [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy).
 
 ## Install
 
 Install the package for the language you use to author your agent. The package exposes the `mda` binary.
 
-```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 uv tool install managed-deepagents
 ```
 
@@ -38,7 +33,7 @@ The package provides agent, identity, schedule, and sandbox authoring APIs with 
 
 The CLI reads those values from the project `.env` file first, then from the process environment. If no key is found in an interactive terminal, `mda deploy` prompts for a LangSmith API key and saves it to the project `.env` file.
 
-```text .env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
 ```
@@ -67,7 +62,7 @@ The LangSmith API key authenticates the deploy. The agent's model provider also 
 
 Use `mda init` to create a new project directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda init my-agent
 ```
 
@@ -105,7 +100,7 @@ Eval tasks are opt-in and are not created by `mda init`. Managed Deep Agents eva
 
 Use `mda build` to compile a project into a managed LangGraph app without deploying it:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda build .
 ```
 
@@ -118,7 +113,7 @@ mda build .
 
 `evals/tasks/` is the canonical Harbor dataset. Author complete Harbor tasks there directly. The `mda eval` command, also available as `mda evals`, can scaffold a starter task and package the managed agent for Harbor. MDA prints a `harbor run` command but does not run trials.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda evals init smoke
 mda evals compile .
 # then run the printed `harbor run` command
@@ -138,13 +133,13 @@ Task names passed to `mda evals init` can contain ASCII letters, numbers, `_`, a
 | `--task <name>`            | Select one task. Repeat to select multiple tasks. A selected scaffold refreshes the matching task under `evals/tasks/`. If omitted, all tasks are selected and every scaffold is refreshed. Existing canonical tasks are preserved unless a selected scaffold has the same name. |
 | `--model <provider:model>` | Record a model in the artifact manifest. Repeat to record multiple models; the generated job config uses the first value.                                                                                                                                                        |
 
-For Harbor task authoring, optional scaffolding, credentials, and running trials, see [Evals](/langsmith/python/managed-deep-agents-evals).
+For Harbor task authoring, optional scaffolding, credentials, and running trials, see [Evals](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals).
 
 ## Develop locally
 
 Use `mda dev` to compile a project and run the local LangGraph dev server:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda dev .
 ```
 
@@ -172,7 +167,7 @@ For local development, `mda dev` stages the project `.env` file into `.mda/build
 
 Use `mda deploy` to compile and deploy a project to LangSmith:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda deploy .
 ```
 
@@ -198,15 +193,15 @@ Deploy runs these steps:
 9. Poll the revision until it reaches `DEPLOYED` unless `--no-wait` is set.
 10. Reconcile the managed LangSmith cron jobs for schedules unless `--no-wait` is set.
 
-With `--configure-slack`, deploy requires exactly one Slack channel and a project-root `slack-app-manifest.json`. When the Slack credentials are missing, it writes `.mda/slack/bootstrap-manifest.json` and exits before changing remote state. After you create the app and add its credentials, rerun the waited deployment to write `.mda/slack/app-manifest.json` with the deployed Events URL. For the complete workflow, see [Slack channels](/langsmith/python/managed-deep-agents-channels-slack#create-and-deploy-the-slack-app).
+With `--configure-slack`, deploy requires exactly one Slack channel and a project-root `slack-app-manifest.json`. When the Slack credentials are missing, it writes `.mda/slack/bootstrap-manifest.json` and exits before changing remote state. After you create the app and add its credentials, rerun the waited deployment to write `.mda/slack/app-manifest.json` with the deployed Events URL. For the complete workflow, see [Slack channels](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack#create-and-deploy-the-slack-app).
 
-On success, the CLI prints the LangSmith deployment dashboard URL. For secrets routing and deploy tips, see [Deploy an agent](/langsmith/python/managed-deep-agents-deploy).
+On success, the CLI prints the LangSmith deployment dashboard URL. For secrets routing and deploy tips, see [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy).
 
 ## Read deployment logs
 
 Use `mda logs` to tail Agent Server logs for a deployed agent:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda logs .
 ```
 
@@ -224,7 +219,7 @@ mda logs .
 
 Use `mda delete` to delete a deployed Managed Deep Agent and the LangSmith resources it created. `mda destroy` is an alias.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda delete .
 ```
 
@@ -251,12 +246,8 @@ mda delete .
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-cli.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # NVIDIAEmbeddings integration
 
 > Integrate with the NVIDIAEmbeddings embedding model using LangChain Python.
@@ -14,11 +10,11 @@ NIM microservices are packaged as container images on a per model/model family b
 
 This example goes over how to use LangChain to interact with the supported [NVIDIA Retrieval QA Embedding Model](https://build.nvidia.com/nvidia/embed-qa-4) for [retrieval-augmented generation](https://developer.nvidia.com/blog/build-enterprise-retrieval-augmented-generation-apps-with-nvidia-retrieval-qa-embedding-model/) via the `NVIDIAEmbeddings` class.
 
-For more information on accessing the chat models through this API, refer to the [ChatNVIDIA](/oss/python/integrations/chat/nvidia_ai_endpoints) documentation.
+For more information on accessing the chat models through this API, refer to the [ChatNVIDIA](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints) documentation.
 
 ## Install the package
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-nvidia-ai-endpoints
 ```
 
@@ -33,7 +29,7 @@ To get access to the NVIDIA API Catalog, do the following:
 5. Copy and save the key as `NVIDIA_API_KEY`.
 6. To verify your key, use the following code.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -53,7 +49,7 @@ You can now use your key to access endpoints on the NVIDIA API Catalog.
 
 When initializing an embedding model you can select a model by passing it, e.g. `NV-Embed-QA` below, or use the default by not passing any arguments.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import NVIDIAEmbeddings
 
 embedder = NVIDIAEmbeddings(model="NV-Embed-QA")
@@ -73,7 +69,7 @@ When you are ready to deploy your AI application, you can self-host models with 
 
 The following code connects to locally hosted NIM Microservices.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings, NVIDIARerank
 
 # connect to a chat NIM running at localhost:8000, specifying a model
@@ -116,7 +112,7 @@ The following is a quick test of the similarity for these data points:
 
 ### Embedding runtimes
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print("\nSequential Embedding: ")
 q_embeddings = [
     embedder.embed_query("What's the weather like in Komchatka?"),
@@ -130,7 +126,7 @@ print("Shape:", (len(q_embeddings), len(q_embeddings[0])))
 
 ### Document embedding
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print("\nBatch Document Embedding: ")
 d_embeddings = embedder.embed_documents(
     [
@@ -146,11 +142,11 @@ print("Shape:", (len(d_embeddings), len(d_embeddings[0])))
 
 Now that we've generated our embeddings, we can do a simple similarity check on the results to see which documents would have triggered as reasonable answers in a retrieval task:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  matplotlib scikit-learn
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
@@ -212,11 +208,11 @@ The `truncate` parameter has three options:
 * "START": The server truncates the input from the start (left), discarding tokens as necessary.
 * "END": The server truncates the input from the end (right), discarding tokens as necessary.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 long_text = "AI is amazing, amazing is " * 100
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 strict_embedder = NVIDIAEmbeddings()
 try:
     strict_embedder.embed_query(long_text)
@@ -224,7 +220,7 @@ except Exception as e:
     print("Error:", e)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 truncating_embedder = NVIDIAEmbeddings(truncate="END")
 truncating_embedder.embed_query(long_text)[:5]
 ```
@@ -235,15 +231,14 @@ The following is a repurposing of the initial example of the [LangChain Expressi
 
 **TIP:** We would recommend using Mixtral for internal reasoning (i.e. instruction following for data extraction, tool selection, etc.) and Llama-Chat for a single final "wrap-up by making a simple response that works for this user based on the history and context" response.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain faiss-cpu tiktoken langchain-community
 ```
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from operator import itemgetter
 
 from langchain_community.vectorstores import FAISS
@@ -253,7 +248,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vectorstore = FAISS.from_texts(
     ["harrison worked at kensho"],
     embedding=NVIDIAEmbeddings(model="NV-Embed-QA"),
@@ -282,7 +277,7 @@ chain = (
 chain.invoke("where did harrison work?")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -314,17 +309,13 @@ chain.invoke({"question": "where did harrison work", "language": "italian"})
 * [Overview of NVIDIA NIM for Large Language Models (LLMs)](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html)
 * [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 * [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
-* [`ChatNVIDIA` Model](/oss/python/integrations/chat/nvidia_ai_endpoints)
-* [NVIDIA Provider Page](/oss/python/integrations/providers/nvidia)
+* [`ChatNVIDIA` Model](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)
+* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/embeddings/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

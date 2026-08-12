@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Scalability & resilience
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/scalability-and-resilience)
 LangSmith is designed to scale horizontally with your workload. Each instance of the service is stateless, and keeps no resources in memory. The service is designed to gracefully handle new instances being added or removed, including hard shutdown cases.
 
 ## Server scalability
@@ -28,7 +24,7 @@ If a hard shutdown occurs due to a server crash or an infrastructure failure, an
 
 ## Postgres resilience
 
-For deployment modalities where LangSmith manages the Postgres database, there are periodic backups and continuously replicated standby replicas for automatic failover. This Postgres configuration is available in the [Cloud deployment option](/langsmith/cloud) for [Dedicated deployment type](/langsmith/cloud-platform-features#deployment-types) only.
+For deployment modalities where LangSmith manages the Postgres database, there are periodic backups and continuously replicated standby replicas for automatic failover. This Postgres configuration is available in the [Cloud deployment option](https://docs.langchain.com/langsmith/cloud) for [Dedicated deployment type](https://docs.langchain.com/langsmith/cloud-platform-features#deployment-types) only.
 
 All communication with Postgres implements retries for retry-able errors. If Postgres is momentarily unavailable, such as during a database restart, most/all traffic should continue to succeed. Prolonged failure of Postgres will render the Agent Server unavailable.
 
@@ -40,12 +36,8 @@ All communication with Redis implements retries for retry-able errors. If Redis 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/scalability-and-resilience.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/scalability-and-resilience.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

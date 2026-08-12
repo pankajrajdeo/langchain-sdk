@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Troubleshoot trace nesting
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/nest-traces)
 When tracing with the LangSmith SDK, LangGraph, and LangChain, tracing should automatically propagate the correct context so that code executed within a parent trace will be rendered in the expected location in the UI.
 
 If you see a child run go to a separate trace (and appear on the top level), it may be caused by one of the following known "edge cases".
@@ -28,7 +24,7 @@ LangChain and LangSmith SDK use [contextvars](https://docs.python.org/3/library/
 
    a) **Using LangGraph or LangChain** Pass the parent `config` to the child call:
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    import asyncio
    from langchain_core.runnables import RunnableConfig, RunnableLambda
 
@@ -49,11 +45,11 @@ LangChain and LangSmith SDK use [contextvars](https://docs.python.org/3/library/
        return [val async for val in parent_runnable.astream("call")]
 
    asyncio.run(main())
-   ```
+```
 
    b) **Using LangSmith Directly** Pass the run tree directly:
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    import asyncio
    import langsmith as ls
 
@@ -75,11 +71,11 @@ LangChain and LangSmith SDK use [contextvars](https://docs.python.org/3/library/
        return [val async for val in parent_function("call")]
 
    asyncio.run(main())
-   ```
+```
 
    c) **Combining Decorated Code with LangGraph/LangChain** Use a combination of techniques for manual handoff:
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    import asyncio
    import langsmith as ls
    from langchain_core.runnables import RunnableConfig, RunnableLambda
@@ -112,7 +108,7 @@ LangChain and LangSmith SDK use [contextvars](https://docs.python.org/3/library/
        return [val async for val in parent_function("call")]
 
    asyncio.run(main())
-   ```
+```
 
 ### Context propagation using threading
 
@@ -128,7 +124,7 @@ Python's contextvars start empty within new threads. Here are two approaches to 
 
    LangSmith provides a `ContextThreadPoolExecutor` that automatically handles context propagation:
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    from langsmith.utils import ContextThreadPoolExecutor
    from langsmith import traceable
 
@@ -143,13 +139,13 @@ Python's contextvars start empty within new threads. Here are two approaches to 
        print(x)
 
    outer_func()
-   ```
+```
 
 2. **Manually providing the parent run tree**
 
    Alternatively, you can manually pass the parent run tree to the inner function:
 
-   ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
    from langsmith import traceable, get_current_run_tree
    from concurrent.futures import ThreadPoolExecutor
 
@@ -168,7 +164,7 @@ Python's contextvars start empty within new threads. Here are two approaches to 
        print(x)
 
    outer_func()
-   ```
+```
 
 In this approach, we use `get_current_run_tree()` to obtain the current run tree and pass it to the inner function using the `langsmith_extra` parameter.
 
@@ -176,12 +172,8 @@ Both methods ensure that the inner function calls are correctly aggregated under
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/nest-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/nest-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AstraDBByteStore integration
 
 > Integrate with the AstraDBByteStore store using LangChain Python.
 
-This will help you get started with Astra DB [key-value stores](/oss/python/integrations/stores). For detailed documentation of all `AstraDBByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore).
+This will help you get started with Astra DB [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `AstraDBByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore).
 
 ## Overview
 
@@ -28,7 +24,7 @@ To create an `AstraDBByteStore` byte store, you'll need to [create a DataStax ac
 
 After signing up, set the following credentials:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from getpass import getpass
 
 ASTRA_DB_API_ENDPOINT = getpass("ASTRA_DB_API_ENDPOINT = ")
@@ -39,7 +35,7 @@ ASTRA_DB_APPLICATION_TOKEN = getpass("ASTRA_DB_APPLICATION_TOKEN = ")
 
 The LangChain AstraDB integration lives in the `langchain-astradb` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-astradb
 ```
 
@@ -47,7 +43,7 @@ pip install -qU langchain-astradb
 
 Now we can instantiate our byte store:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_astradb import AstraDBByteStore
 
 kv_store = AstraDBByteStore(
@@ -61,7 +57,7 @@ kv_store = AstraDBByteStore(
 
 You can set data under keys like this using the `mset` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mset(
     [
         ["key1", b"value1"],
@@ -77,13 +73,13 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [b'value1', b'value2']
 ```
 
 And you can delete data using the `mdelete` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 kv_store.mdelete(
     [
         "key1",
@@ -99,7 +95,7 @@ kv_store.mget(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [None, None]
 ```
 
@@ -113,12 +109,8 @@ For detailed documentation of all `AstraDBByteStore` features and configurations
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/stores/astradb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

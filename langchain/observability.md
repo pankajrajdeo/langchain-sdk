@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Observability
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/observability)
+As you build and run agents with LangChain, you need visibility into how they behave: which [tools](https://docs.langchain.com/oss/python/langchain/tools) they call, what prompts they generate, and how they make decisions. LangChain agents built with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) automatically support tracing through [LangSmith](https://docs.langchain.com/langsmith/observability), a platform for capturing, debugging, evaluating, and monitoring LLM application behavior.
 
-As you build and run agents with LangChain, you need visibility into how they behave: which [tools](/oss/python/langchain/tools) they call, what prompts they generate, and how they make decisions. LangChain agents built with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) automatically support tracing through [LangSmith](/langsmith/observability), a platform for capturing, debugging, evaluating, and monitoring LLM application behavior.
-
-[*Traces*](/langsmith/observability-concepts#traces) record every step of your agent's execution, from the initial user input to the final response, including all tool calls, model interactions, and decision points. This execution data helps you debug issues, evaluate performance across different inputs, and monitor usage patterns in production.
+[*Traces*](https://docs.langchain.com/langsmith/observability-concepts#traces) record every step of your agent's execution, from the initial user input to the final response, including all tool calls, model interactions, and decision points. This execution data helps you debug issues, evaluate performance across different inputs, and monitor usage patterns in production.
 
 This guide shows you how to enable tracing for your LangChain agents and use LangSmith to analyze their execution.
 
@@ -15,13 +11,13 @@ This guide shows you how to enable tracing for your LangChain agents and use Lan
 Before you begin, ensure you have the following:
 
 * **A LangSmith account**: Sign up (for free) or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-observability).
-* **A LangSmith API key**: Follow the [Create an API key](/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
 
 ## Enable tracing
 
 All LangChain agents automatically support LangSmith tracing. To enable it, set the following environment variables:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
 ```
@@ -30,9 +26,8 @@ export LANGSMITH_API_KEY=<your-api-key>
 
 No extra code is needed to log a trace to LangSmith. Just run your agent code as you normally would:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
-
 
 def send_email(to: str, subject: str, body: str):
     """Send an email to a recipient."""
@@ -56,13 +51,13 @@ response = agent.invoke({
 })
 ```
 
-By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](/langsmith/log-traces-to-project).
+By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](https://docs.langchain.com/langsmith/log-traces-to-project).
 
 ## Trace selectively
 
 You may opt to trace specific invocations or parts of your application using LangSmith's `tracing_context` context manager:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import langsmith as ls
 
 # This WILL be traced
@@ -75,32 +70,38 @@ agent.invoke({"messages": [{"role": "user", "content": "Send another email"}]})
 
 ## Log to a project
 
-<Accordion title="Statically">
-  You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
+<details>
+<summary>Statically</summary>
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  export LANGSMITH_PROJECT=my-agent-project
-  ```
-</Accordion>
+You can set a custom project name for your entire application by setting the `LANGSMITH_PROJECT` environment variable:
 
-<Accordion title="Dynamically">
-  You can set the project name programmatically for specific operations:
+```bash
+export LANGSMITH_PROJECT=my-agent-project
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import langsmith as ls
+</details>
 
-  with ls.tracing_context(project_name="email-agent-test", enabled=True):
-      response = agent.invoke({
-          "messages": [{"role": "user", "content": "Send a welcome email"}]
-      })
-  ```
-</Accordion>
+<details>
+<summary>Dynamically</summary>
+
+You can set the project name programmatically for specific operations:
+
+```python
+import langsmith as ls
+
+with ls.tracing_context(project_name="email-agent-test", enabled=True):
+    response = agent.invoke({
+        "messages": [{"role": "user", "content": "Send a welcome email"}]
+    })
+```
+
+</details>
 
 ## Add metadata to traces
 
 You can annotate your traces with custom metadata and tags:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = agent.invoke(
     {"messages": [{"role": "user", "content": "Send a welcome email"}]},
     config={
@@ -116,7 +117,7 @@ response = agent.invoke(
 
 `tracing_context` also accepts tags and metadata for fine-grained control:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with ls.tracing_context(
     project_name="email-agent-test",
     enabled=True,
@@ -129,18 +130,13 @@ with ls.tracing_context(
 
 This custom metadata and tags will be attached to the trace in LangSmith.
 
-<Tip>
-  To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](/langsmith/observability).
-</Tip>
+> [!TIP]
+> To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](https://docs.langchain.com/langsmith/observability).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

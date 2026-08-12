@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # LangSmith Engine webhook events
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-webhooks)
+Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues.
 
-> Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues.
+Forward LangSmith-detected agent issues into your incident-management, paging, or chat tools. [LangSmith Engine](https://docs.langchain.com/langsmith/engine) sends a webhook event to your endpoint when it opens a new issue, or when it links a new trace to an issue it has already opened.
 
-Forward LangSmith-detected agent issues into your incident-management, paging, or chat tools. [LangSmith Engine](/langsmith/engine) sends a webhook event to your endpoint when it opens a new issue, or when it links a new trace to an issue it has already opened.
+To configure webhook subscriptions, open the **Engine Settings** panel on the **Engine** tab of a tracing project. See [Configure Engine](https://docs.langchain.com/langsmith/engine#configure-engine).
 
-To configure webhook subscriptions, open the **Engine Settings** panel on the **Engine** tab of a tracing project. See [Configure Engine](/langsmith/engine#configure-engine).
-
-<Note>
-  A destination delivers to either a webhook URL or a **Slack channel**. Both use the same [event types](#event-types) and [minimum-priority filtering](#severity-filtering) described on this page. Slack destinations post through LangSmith's managed Slack app instead of sending the [JSON payload](#event-envelope) below, so the [signing secret](#signing-secret) and [custom headers](#custom-headers) do not apply.
-
-  To set up Slack delivery, see [Notify a Slack channel](/langsmith/engine#notify-a-slack-channel). The rest of this page documents **webhook URL** destinations.
-</Note>
+> [!NOTE]
+> A destination delivers to either a webhook URL or a **Slack channel**. Both use the same [event types](https://docs.langchain.com/langsmith/engine-webhooks#event-types) and [minimum-priority filtering](https://docs.langchain.com/langsmith/engine-webhooks#severity-filtering) described on this page. Slack destinations post through LangSmith's managed Slack app instead of sending the [JSON payload](https://docs.langchain.com/langsmith/engine-webhooks#event-envelope) below, so the [signing secret](https://docs.langchain.com/langsmith/engine-webhooks#signing-secret) and [custom headers](https://docs.langchain.com/langsmith/engine-webhooks#custom-headers) do not apply.
+>
+> To set up Slack delivery, see [Notify a Slack channel](https://docs.langchain.com/langsmith/engine#notify-a-slack-channel). The rest of this page documents **webhook URL** destinations.
 
 ## Delivery
 
@@ -23,16 +18,15 @@ LangSmith sends a `POST` request with a JSON body to your webhook URL. The reque
 | Property  | Value                                                                                                                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Method    | `POST`                                                                                                                                                                                                     |
-| Body      | JSON, [common envelope](#event-envelope) below                                                                                                                                                             |
+| Body      | JSON, [common envelope](https://docs.langchain.com/langsmith/engine-webhooks#event-envelope) below                                                                                                                                                             |
 | Scheme    | `http://` and `https://` are accepted. `https://` is strongly recommended                                                                                                                                  |
 | Signature | `X-LangSmith-Signature` header, signed with the subscription's signing secret                                                                                                                              |
 | Timeout   | 20 seconds per attempt                                                                                                                                                                                     |
 | Attempts  | Up to 4 attempts (1 initial plus 3 retries with exponential backoff) on transport errors, HTTP `408`, `425`, `429`, and any HTTP `5xx`. Other `4xx` responses are treated as permanent and are not retried |
 | Response  | Success is determined from the status code alone. Response bodies are ignored.                                                                                                                             |
 
-<Note>
-  Retries deliver a byte-identical payload, including the same `id`. Dedupe on `id` so a retried delivery does not produce a duplicate downstream effect.
-</Note>
+> [!NOTE]
+> Retries deliver a byte-identical payload, including the same `id`. Dedupe on `id` so a retried delivery does not produce a duplicate downstream effect.
 
 ### Custom headers
 
@@ -44,67 +38,64 @@ Each subscription has a signing secret. LangSmith uses this secret to sign the r
 
 The header value has this format:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 sha256=<hex-encoded HMAC-SHA256 digest>
 ```
 
 Verify the signature before parsing or acting on the payload. The HMAC input is the exact raw request body bytes, and the HMAC key is the subscription's signing secret. Do not parse and reserialize the JSON body before verification.
 
-<CodeGroup>
-  ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import hashlib
-  import hmac
-  from typing import Optional
+```python
+import hashlib
+import hmac
+from typing import Optional
 
+def verify_langsmith_signature(
+    *,
+    body: bytes,
+    signing_secret: str,
+    signature_header: Optional[str],
+) -> bool:
+    if not signature_header or not signature_header.startswith("sha256="):
+        return False
 
-  def verify_langsmith_signature(
-      *,
-      body: bytes,
-      signing_secret: str,
-      signature_header: Optional[str],
-  ) -> bool:
-      if not signature_header or not signature_header.startswith("sha256="):
-          return False
+    expected = "sha256=" + hmac.new(
+        signing_secret.encode("utf-8"),
+        body,
+        hashlib.sha256,
+    ).hexdigest()
 
-      expected = "sha256=" + hmac.new(
-          signing_secret.encode("utf-8"),
-          body,
-          hashlib.sha256,
-      ).hexdigest()
+    return hmac.compare_digest(expected, signature_header)
+```
 
-      return hmac.compare_digest(expected, signature_header)
-  ```
+```typescript
+import { createHmac, timingSafeEqual } from "node:crypto";
 
-  ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { createHmac, timingSafeEqual } from "node:crypto";
-
-  export function verifyLangSmithSignature({
-    body,
-    signingSecret,
-    signatureHeader,
-  }: {
-    body: Buffer;
-    signingSecret: string;
-    signatureHeader: string | undefined;
-  }) {
-    if (!signatureHeader?.startsWith("sha256=")) {
-      return false;
-    }
-
-    const expected = `sha256=${createHmac("sha256", signingSecret)
-      .update(body)
-      .digest("hex")}`;
-
-    const expectedBytes = Buffer.from(expected);
-    const actualBytes = Buffer.from(signatureHeader);
-
-    return (
-      expectedBytes.length === actualBytes.length &&
-      timingSafeEqual(expectedBytes, actualBytes)
-    );
+export function verifyLangSmithSignature({
+  body,
+  signingSecret,
+  signatureHeader,
+}: {
+  body: Buffer;
+  signingSecret: string;
+  signatureHeader: string | undefined;
+}) {
+  if (!signatureHeader?.startsWith("sha256=")) {
+    return false;
   }
-  ```
-</CodeGroup>
+
+  const expected = `sha256=${createHmac("sha256", signingSecret)
+    .update(body)
+    .digest("hex")}`;
+
+  const expectedBytes = Buffer.from(expected);
+  const actualBytes = Buffer.from(signatureHeader);
+
+  return (
+    expectedBytes.length === actualBytes.length &&
+    timingSafeEqual(expectedBytes, actualBytes)
+  );
+}
+```
 
 ### Roll a signing secret
 
@@ -127,11 +118,11 @@ Each subscription has a `severity_threshold` from `0` to `3`. For issue events, 
 
 For example, a subscription with `severity_threshold: 1` receives events for `URGENT` (0) and `HIGH` (1) issues only.
 
-Severity thresholds do not apply to [`issue.agent_run.failed`](#issue-agent_run-failed), because run-failure events are scoped to an Engine session rather than to a specific issue.
+Severity thresholds do not apply to [`issue.agent_run.failed`](https://docs.langchain.com/langsmith/engine-webhooks#issue-agent_run-failed), because run-failure events are scoped to an Engine session rather than to a specific issue.
 
 ### Event-type filtering
 
-Each subscription specifies the [event types](#event-types) it wants to receive. Subscriptions created without an explicit list default to `["issue.created"]`.
+Each subscription specifies the [event types](https://docs.langchain.com/langsmith/engine-webhooks#event-types) it wants to receive. Subscriptions created without an explicit list default to `["issue.created"]`.
 
 ## Event envelope
 
@@ -140,21 +131,21 @@ Every event delivered to your endpoint uses the same outer JSON shape.
 | Field        | Type    | Description                                                                                                                                              |
 | ------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `id`         | UUID    | Unique identifier for this delivery. Stable across retries. Use it to dedupe.                                                                            |
-| `type`       | string  | Event type. One of [`issue.created`](#issue-created), [`issue.trace.added`](#issue-trace-added), or [`issue.agent_run.failed`](#issue-agent_run-failed). |
+| `type`       | string  | Event type. One of [`issue.created`](https://docs.langchain.com/langsmith/engine-webhooks#issue-created), [`issue.trace.added`](https://docs.langchain.com/langsmith/engine-webhooks#issue-trace-added), or [`issue.agent_run.failed`](https://docs.langchain.com/langsmith/engine-webhooks#issue-agent_run-failed). |
 | `created`    | integer | Unix seconds (UTC) when the event was enqueued.                                                                                                          |
-| `request_id` | UUID    | Shared by every event fired from the same upstream action. See [Batch coalescing](#batch-coalescing).                                                    |
-| `data`       | object  | Event payload. Always contains `data.object`. Contains [`data.trace`](#data-trace) only on [`issue.trace.added`](#issue-trace-added) events.             |
+| `request_id` | UUID    | Shared by every event fired from the same upstream action. See [Batch coalescing](https://docs.langchain.com/langsmith/engine-webhooks#batch-coalescing).                                                    |
+| `data`       | object  | Event payload. Always contains `data.object`. Contains [`data.trace`](https://docs.langchain.com/langsmith/engine-webhooks#data-trace) only on [`issue.trace.added`](https://docs.langchain.com/langsmith/engine-webhooks#issue-trace-added) events.             |
 
 ### Issue `data.object`
 
-For [`issue.created`](#issue-created) and [`issue.trace.added`](#issue-trace-added), `data.object` is a snapshot of the issue. Treat it as the authoritative state of the issue at the time the event was generated.
+For [`issue.created`](https://docs.langchain.com/langsmith/engine-webhooks#issue-created) and [`issue.trace.added`](https://docs.langchain.com/langsmith/engine-webhooks#issue-trace-added), `data.object` is a snapshot of the issue. Treat it as the authoritative state of the issue at the time the event was generated.
 
 | Field          | Type    | Description                                                                    |
 | -------------- | ------- | ------------------------------------------------------------------------------ |
 | `id`           | UUID    | Issue ID.                                                                      |
 | `name`         | string  | Short title of the issue.                                                      |
 | `description`  | string  | Human-readable description.                                                    |
-| `severity`     | integer | `0` (urgent) through `3` (low). See [Severity filtering](#severity-filtering). |
+| `severity`     | integer | `0` (urgent) through `3` (low). See [Severity filtering](https://docs.langchain.com/langsmith/engine-webhooks#severity-filtering). |
 | `tenant_id`    | UUID    | Workspace the issue belongs to.                                                |
 | `tenant_name`  | string  | Workspace display name.                                                        |
 | `session_id`   | UUID    | Tracing project the issue belongs to.                                          |
@@ -163,7 +154,7 @@ For [`issue.created`](#issue-created) and [`issue.trace.added`](#issue-trace-add
 
 ### Run failure `data.object`
 
-For [`issue.agent_run.failed`](#issue-agent_run-failed), `data.object` describes the Engine run that failed.
+For [`issue.agent_run.failed`](https://docs.langchain.com/langsmith/engine-webhooks#issue-agent_run-failed), `data.object` describes the Engine run that failed.
 
 | Field           | Type   | Description                                               |
 | --------------- | ------ | --------------------------------------------------------- |
@@ -180,7 +171,7 @@ For [`issue.agent_run.failed`](#issue-agent_run-failed), `data.object` describes
 
 ### `data.trace`
 
-`data.trace` is included only on [`issue.trace.added`](#issue-trace-added) events.
+`data.trace` is included only on [`issue.trace.added`](https://docs.langchain.com/langsmith/engine-webhooks#issue-trace-added) events.
 
 | Field        | Type           | Description                                                           |
 | ------------ | -------------- | --------------------------------------------------------------------- |
@@ -191,7 +182,7 @@ For [`issue.agent_run.failed`](#issue-agent_run-failed), `data.object` describes
 
 ### Batch coalescing
 
-A single upstream action can produce multiple webhook events. When Engine opens a new issue and attaches five traces to it, you receive one [`issue.created`](#issue-created) event and five [`issue.trace.added`](#issue-trace-added) events, all sharing the same `request_id`. Use `request_id` to group these into a single downstream notification.
+A single upstream action can produce multiple webhook events. When Engine opens a new issue and attaches five traces to it, you receive one [`issue.created`](https://docs.langchain.com/langsmith/engine-webhooks#issue-created) event and five [`issue.trace.added`](https://docs.langchain.com/langsmith/engine-webhooks#issue-trace-added) events, all sharing the same `request_id`. Use `request_id` to group these into a single downstream notification.
 
 ## Event types
 
@@ -201,7 +192,7 @@ The event types below are the complete set LangSmith Engine sends today. New typ
 
 Sent when LangSmith Engine creates a new issue. `data.trace` is omitted.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "id": "b91c1f0e-7c4a-4f53-9d3e-9f1c8e7a2b10",
   "type": "issue.created",
@@ -227,7 +218,7 @@ Sent when LangSmith Engine creates a new issue. `data.trace` is omitted.
 
 Sent when a new trace is linked to an existing issue. `data.trace` describes the linked trace.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "id": "c02e3a4b-5c6d-7e8f-9a0b-1c2d3e4f5a6b",
   "type": "issue.trace.added",
@@ -259,7 +250,7 @@ Sent when a new trace is linked to an existing issue. `data.trace` describes the
 
 Sent when LangSmith Engine fails to complete a run. This event is session-scoped, so it does not include `data.trace` and does not use severity filtering.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "id": "4d0e8db2-81e6-4491-b8e5-b13a8f5afc0d",
   "type": "issue.agent_run.failed",
@@ -286,14 +277,14 @@ Sent when LangSmith Engine fails to complete a run. This event is session-scoped
 
 Before pointing a real subscription at your endpoint, send a sample payload to verify it accepts and acknowledges within the 20-second timeout:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 curl -X POST https://your-endpoint.example.com/webhook \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $WEBHOOK_SECRET" \
   -d @sample-issue-created.json
 ```
 
-Use the example body from [`issue.created`](#issue-created) as `sample-issue-created.json`. Verify that:
+Use the example body from [`issue.created`](https://docs.langchain.com/langsmith/engine-webhooks#issue-created) as `sample-issue-created.json`. Verify that:
 
 * The custom `Authorization` header arrives and matches the secret you configured on the subscription.
 * The handler persists the event keyed by its `id` so retries are deduped.
@@ -314,12 +305,8 @@ Use the example body from [`issue.created`](#issue-created) as `sample-issue-cre
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/engine-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Splitting code text splitter integration guide
 
-[RecursiveCharacterTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) includes prebuilt lists of separators that are useful for [splitting text](/oss/python/integrations/splitters/) in a specific programming language.
+[RecursiveCharacterTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) includes prebuilt lists of separators that are useful for [splitting text](https://docs.langchain.com/oss/python/integrations/splitters/) in a specific programming language.
 
 Supported languages are stored in the `langchain_text_splitters.Language` enum. They include:
 
@@ -37,23 +33,23 @@ Supported languages are stored in the `langchain_text_splitters.Language` enum. 
 
 To view the list of separators for a given language, pass a value from this enum into
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 RecursiveCharacterTextSplitter.get_separators_for_language
 ```
 
 To instantiate a splitter that is tailored for a specific language, pass a value from the enum into
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 RecursiveCharacterTextSplitter.from_language
 ```
 
 Below we demonstrate examples for the various languages.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-text-splitters
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_text_splitters import (
     Language,
     RecursiveCharacterTextSplitter,
@@ -62,11 +58,11 @@ from langchain_text_splitters import (
 
 To view the full list of supported languages:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [e.value for e in Language]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['cpp',
  'go',
  'java',
@@ -98,11 +94,11 @@ To view the full list of supported languages:
 
 You can also see the separators used for a given language:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 RecursiveCharacterTextSplitter.get_separators_for_language(Language.PYTHON)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['\nclass ', '\ndef ', '\n\tdef ', '\n\n', '\n', ' ', '']
 ```
 
@@ -110,7 +106,7 @@ RecursiveCharacterTextSplitter.get_separators_for_language(Language.PYTHON)
 
 Here's an example using the PythonTextSplitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 PYTHON_CODE = """
 def hello_world():
     print("Hello, World!")
@@ -125,7 +121,7 @@ python_docs = python_splitter.create_documents([PYTHON_CODE])
 python_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='def hello_world():\n    print("Hello, World!")'),
  Document(metadata={}, page_content='# Call the function\nhello_world()')]
 ```
@@ -134,7 +130,7 @@ python_docs
 
 Here's an example using the JS text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 JS_CODE = """
 function helloWorld() {
   console.log("Hello, World!");
@@ -151,7 +147,7 @@ js_docs = js_splitter.create_documents([JS_CODE])
 js_docs
 ```
 
-```javascript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```javascript
 [Document(metadata={}, page_content='function helloWorld() {\n  console.log("Hello, World!");\n}'),
  Document(metadata={}, page_content='// Call the function\nhelloWorld();')]
 ```
@@ -160,7 +156,7 @@ js_docs
 
 Here's an example using the typescript text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 TS_CODE = """
 function helloWorld(): void {
   console.log("Hello, World!");
@@ -177,7 +173,7 @@ ts_docs = ts_splitter.create_documents([TS_CODE])
 ts_docs
 ```
 
-```javascript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```javascript
 [Document(metadata={}, page_content='function helloWorld(): void {'),
  Document(metadata={}, page_content='console.log("Hello, World!");\n}'),
  Document(metadata={}, page_content='// Call the function\nhelloWorld();')]
@@ -187,7 +183,7 @@ ts_docs
 
 Here's an example using the Markdown text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 markdown_text = """
 # 🦜️🔗 LangChain
 
@@ -202,7 +198,7 @@ As an open-source project in a rapidly developing field, we are extremely open t
 """
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 md_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.MARKDOWN, chunk_size=60, chunk_overlap=0
 )
@@ -210,7 +206,7 @@ md_docs = md_splitter.create_documents([markdown_text])
 md_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='# 🦜️🔗 LangChain'),
  Document(metadata={}, page_content='⚡ Building applications with LLMs through composability ⚡'),
  Document(metadata={}, page_content='## What is LangChain?'),
@@ -224,7 +220,7 @@ md_docs
 
 Here's an example on Latex text:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 latex_text = """
 \documentclass{article}
 
@@ -245,7 +241,7 @@ LLMs have many applications in industry, including chatbots, content creation, a
 """
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 latex_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.MARKDOWN, chunk_size=60, chunk_overlap=0
 )
@@ -253,7 +249,7 @@ latex_docs = latex_splitter.create_documents([latex_text])
 latex_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='\\documentclass{article}\n\n\x08egin{document}\n\n\\maketitle'),
  Document(metadata={}, page_content='\\section{Introduction}'),
  Document(metadata={}, page_content='Large language models (LLMs) are a type of machine learning'),
@@ -282,7 +278,7 @@ latex_docs
 
 Here's an example using an HTML text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 html_text = """
 <!DOCTYPE html>
 <html>
@@ -310,7 +306,7 @@ html_text = """
 """
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 html_splitter = RecursiveCharacterTextSplitter.from_language(
     language=Language.HTML, chunk_size=60, chunk_overlap=0
 )
@@ -318,7 +314,7 @@ html_docs = html_splitter.create_documents([html_text])
 html_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='<!DOCTYPE html>\n<html>'),
  Document(metadata={}, page_content='<head>\n        <title>🦜️🔗 LangChain</title>'),
  Document(metadata={}, page_content='<style>\n            body {\n                font-family: Aria'),
@@ -338,7 +334,7 @@ html_docs
 
 Here's an example using the Solidity text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 SOL_CODE = """
 pragma solidity ^0.8.20;
 contract HelloWorld {
@@ -355,7 +351,7 @@ sol_docs = sol_splitter.create_documents([SOL_CODE])
 sol_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='pragma solidity ^0.8.20;'),
  Document(metadata={}, page_content='contract HelloWorld {\n   function add(uint a, uint b) pure public returns(uint) {\n       return a + b;\n   }\n}')]
 ```
@@ -364,7 +360,7 @@ sol_docs
 
 Here's an example using the C# text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 C_CODE = """
 using System;
 class Program
@@ -396,7 +392,7 @@ c_docs = c_splitter.create_documents([C_CODE])
 c_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='using System;'),
  Document(metadata={}, page_content='class Program\n{\n    static void Main()\n    {\n        int age = 30; // Change the age value as needed'),
  Document(metadata={}, page_content='// Categorize the age without any console output\n        if (age < 18)\n        {\n            // Age is under 18'),
@@ -408,7 +404,7 @@ c_docs
 
 Here's an example using the Haskell text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 HASKELL_CODE = """
 main :: IO ()
 main = do
@@ -424,7 +420,7 @@ haskell_docs = haskell_splitter.create_documents([HASKELL_CODE])
 haskell_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='main :: IO ()'),
  Document(metadata={}, page_content='main = do\n    putStrLn "Hello, World!"\n-- Some'),
  Document(metadata={}, page_content='sample functions\nadd :: Int -> Int -> Int\nadd x y'),
@@ -435,7 +431,7 @@ haskell_docs
 
 Here's an example using the PHP text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 PHP_CODE = """<?php
 namespace foo;
 class Hello {
@@ -460,7 +456,7 @@ php_docs = php_splitter.create_documents([PHP_CODE])
 php_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='<?php\nnamespace foo;'),
  Document(metadata={}, page_content='class Hello {'),
  Document(metadata={}, page_content='public function __construct() { }\n}'),
@@ -474,7 +470,7 @@ php_docs
 
 Here's an example using the PowerShell text splitter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 POWERSHELL_CODE = """
 $directoryPath = Get-Location
 
@@ -495,7 +491,7 @@ powershell_docs = powershell_splitter.create_documents([POWERSHELL_CODE])
 powershell_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='$directoryPath = Get-Location\n\n$items = Get-ChildItem -Path $directoryPath'),
  Document(metadata={}, page_content='$files = $items | Where-Object { -not $_.PSIsContainer }'),
  Document(metadata={}, page_content='$sortedFiles = $files | Sort-Object LastWriteTime'),
@@ -505,7 +501,7 @@ powershell_docs
 
 ## Visual basic 6
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 VISUALBASIC6_CODE = """Option Explicit
 
 Public Sub HelloWorld()
@@ -525,7 +521,7 @@ visualbasic6_docs = visualbasic6_splitter.create_documents([VISUALBASIC6_CODE])
 visualbasic6_docs
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [Document(metadata={}, page_content='Option Explicit'),
  Document(metadata={}, page_content='Public Sub HelloWorld()\n    MsgBox "Hello, World!"\nEnd Sub'),
  Document(metadata={}, page_content='Private Function Add(a As Integer, b As Integer) As Integer\n    Add = a + b\nEnd Function')]
@@ -533,12 +529,8 @@ visualbasic6_docs
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/code_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/code_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

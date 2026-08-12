@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Huggingface endpoints integration
 
 > Integrate with the Huggingface endpoints LLM using LangChain Python.
@@ -13,7 +9,7 @@ This example showcases how to connect to the different Endpoints types.
 
 In particular, text generation inference is powered by [Text Generation Inference](https://github.com/huggingface/text-generation-inference): a custom-built Rust, Python and gRPC server for blazing-faset text generation inference.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFaceEndpoint
 ```
 
@@ -21,11 +17,11 @@ from langchain_huggingface import HuggingFaceEndpoint
 
 To use, you should have the `huggingface_hub` python [package installed](https://huggingface.co/docs/huggingface_hub/installation).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU huggingface_hub
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # get a token: https://huggingface.co/docs/api-inference/quicktour#get-your-api-token
 
 from getpass import getpass
@@ -33,7 +29,7 @@ from getpass import getpass
 HUGGINGFACEHUB_API_TOKEN = getpass()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
@@ -41,16 +37,16 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] = HUGGINGFACEHUB_API_TOKEN
 
 ## Prepare examples
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import HuggingFaceEndpoint
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import LLMChain
 from langchain_core.prompts import PromptTemplate
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 question = "Who won the FIFA World Cup in the year 1994? "
 
 template = """Question: {question}
@@ -64,7 +60,7 @@ prompt = PromptTemplate.from_template(template)
 
 Here is an example of how you can access `HuggingFaceEndpoint` integration of the serverless [Inference Providers](https://huggingface.co/docs/inference-providers) API.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 repo_id = "deepseek-ai/DeepSeek-R1-0528"
 
 llm = HuggingFaceEndpoint(
@@ -88,12 +84,12 @@ The free serverless API lets you implement solutions and iterate in no time, but
 For enterprise workloads, the best is to use [Inference Endpoints - Dedicated](https://huggingface.co/inference-endpoints/dedicated).
 This gives access to a fully managed infrastructure that offer more flexibility and speed. These resoucres come with continuous support and uptime guarantees, as well as options like AutoScaling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Set the url to your Inference Endpoint below
 your_endpoint_url = "https://fayjubiy2xqn36z0.us-east-1.aws.endpoints.huggingface.cloud"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = HuggingFaceEndpoint(
     endpoint_url=f"{your_endpoint_url}",
     max_new_tokens=512,
@@ -108,7 +104,7 @@ llm("What did foo say about bar?")
 
 ### Streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.callbacks import StreamingStdOutCallbackHandler
 from langchain_huggingface import HuggingFaceEndpoint
 
@@ -129,12 +125,8 @@ This same `HuggingFaceEndpoint` class can be used with a local [HuggingFace TGI 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/huggingface_endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/huggingface_endpoint.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

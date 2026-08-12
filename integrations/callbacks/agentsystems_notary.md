@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AgentSystems Notary
 
 > Cryptographically verifiable audit trails for LangChain applications.
@@ -38,113 +34,106 @@ Hashes (not raw data) can be written to either storage option:
 | [Decentralized (Arweave)](https://docs.agentsystems.ai/notary/configuration/hash-storage?utm_source=langchain-docs\&utm_medium=docs) | No vendor lock-in  | Public append-only ledger, open-source verification, no account needed |
 | [`Custodied`](https://agentsystems.ai/notary?utm_source=langchain-docs\&utm_medium=docs)                                             | Managed compliance | Write-once storage, verification UI, signed attestations for audits    |
 
-<Info>
-  [Custodied plans](https://agentsystems.ai/notary?utm_source=langchain-docs\&utm_medium=docs) offer WORM-compliant hash storage, managed signing, and signed attestations.
-</Info>
+> [!NOTE]
+> [Custodied plans](https://agentsystems.ai/notary?utm_source=langchain-docs\&utm_medium=docs) offer WORM-compliant hash storage, managed signing, and signed attestations.
 
 ## Prerequisites
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 pip install agentsystems-notary langchain langchain-anthropic python-dotenv
 ```
 
 ## Example (decentralized)
 
-<Steps>
-  <Step title="Generate signing key">
-    ```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openssl genrsa -out arweave-key.pem 4096
-    ```
+### Generate signing key
+```shell
+openssl genrsa -out arweave-key.pem 4096
+```
 
-    <Warning>
-      Retain this key. It is required to prove ownership of on-chain hashes during verification.
-    </Warning>
+> [!WARNING]
+> Retain this key. It is required to prove ownership of on-chain hashes during verification.
 
-    For production, use a [cloud key management service](https://docs.agentsystems.ai/notary/configuration/signing?utm_source=langchain-docs\&utm_medium=docs).
-  </Step>
+For production, use a [cloud key management service](https://docs.agentsystems.ai/notary/configuration/signing?utm_source=langchain-docs\&utm_medium=docs).
 
-  <Step title="Create .env file">
-    Create a `.env` file in your project root:
+### Create .env file
+Create a `.env` file in your project root:
 
-    ```
-    # AWS S3 for raw payload storage
-    ORG_AWS_S3_BUCKET_NAME=your-bucket
-    ORG_AWS_S3_ACCESS_KEY_ID=AKIA...
-    ORG_AWS_S3_SECRET_ACCESS_KEY=...
-    ORG_AWS_S3_REGION=us-east-1
+```
+# AWS S3 for raw payload storage
+ORG_AWS_S3_BUCKET_NAME=your-bucket
+ORG_AWS_S3_ACCESS_KEY_ID=AKIA...
+ORG_AWS_S3_SECRET_ACCESS_KEY=...
+ORG_AWS_S3_REGION=us-east-1
 
-    # Path to signing key
-    ARWEAVE_PRIVATE_KEY_PATH=./arweave-key.pem
+# Path to signing key
+ARWEAVE_PRIVATE_KEY_PATH=./arweave-key.pem
 
-    # Anthropic
-    ANTHROPIC_API_KEY=sk-ant-...
-    ```
-  </Step>
+# Anthropic
+ANTHROPIC_API_KEY=sk-ant-...
+```
 
-  <Step title="Run the example">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import os
+### Run the example
+```python
+import os
 
-    from agentsystems_notary import (
-        LangChainNotary,
-        ArweaveHashStorage,
-        AwsS3StorageConfig,
-        LocalKeySignerConfig,
-        RawPayloadStorage,
-    )
-    from langchain_anthropic import ChatAnthropic
-    from dotenv import load_dotenv
+from agentsystems_notary import (
+    LangChainNotary,
+    ArweaveHashStorage,
+    AwsS3StorageConfig,
+    LocalKeySignerConfig,
+    RawPayloadStorage,
+)
+from langchain_anthropic import ChatAnthropic
+from dotenv import load_dotenv
 
-    load_dotenv()
+load_dotenv()
 
-    # Your S3 bucket for raw LLM payloads
-    s3_config = AwsS3StorageConfig(
-        bucket_name=os.environ["ORG_AWS_S3_BUCKET_NAME"],
-        aws_access_key_id=os.environ["ORG_AWS_S3_ACCESS_KEY_ID"],
-        aws_secret_access_key=os.environ["ORG_AWS_S3_SECRET_ACCESS_KEY"],
-        aws_region=os.environ["ORG_AWS_S3_REGION"],
-    )
-    raw_payload_storage = RawPayloadStorage(storage=s3_config)
+# Your S3 bucket for raw LLM payloads
+s3_config = AwsS3StorageConfig(
+    bucket_name=os.environ["ORG_AWS_S3_BUCKET_NAME"],
+    aws_access_key_id=os.environ["ORG_AWS_S3_ACCESS_KEY_ID"],
+    aws_secret_access_key=os.environ["ORG_AWS_S3_SECRET_ACCESS_KEY"],
+    aws_region=os.environ["ORG_AWS_S3_REGION"],
+)
+raw_payload_storage = RawPayloadStorage(storage=s3_config)
 
-    # Local RSA key for signing
-    signer = LocalKeySignerConfig(
-        private_key_path=os.environ["ARWEAVE_PRIVATE_KEY_PATH"],
-    )
+# Local RSA key for signing
+signer = LocalKeySignerConfig(
+    private_key_path=os.environ["ARWEAVE_PRIVATE_KEY_PATH"],
+)
 
-    # Arweave for decentralized hash storage
-    # Namespace is public — written to the ledger and used to segment stored data
-    # Namespace should be one anonymous ID per customer, agent, or environment
-    # Retain a record of your namespace mappings
-    arweave_storage = ArweaveHashStorage(
-        namespace="tenant_a1b2c3d4",  # See namespace comments above
-        signer=signer,
-    )
+# Arweave for decentralized hash storage
+# Namespace is public — written to the ledger and used to segment stored data
+# Namespace should be one anonymous ID per customer, agent, or environment
+# Retain a record of your namespace mappings
+arweave_storage = ArweaveHashStorage(
+    namespace="tenant_a1b2c3d4",  # See namespace comments above
+    signer=signer,
+)
 
-    # Create notary callback
-    notary = LangChainNotary(
-        raw_payload_storage=raw_payload_storage,
-        hash_storage=[arweave_storage],
-        debug=True,
-    )
+# Create notary callback
+notary = LangChainNotary(
+    raw_payload_storage=raw_payload_storage,
+    hash_storage=[arweave_storage],
+    debug=True,
+)
 
-    # Attach to model
-    model = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.environ["ANTHROPIC_API_KEY"],
-        callbacks=[notary],
-    )
+# Attach to model
+model = ChatAnthropic(
+    model="claude-sonnet-4-6",
+    api_key=os.environ["ANTHROPIC_API_KEY"],
+    callbacks=[notary],
+)
 
-    response = model.invoke("What is the capital of France?")
-    print(response.content)
-    ```
-  </Step>
-</Steps>
+response = model.invoke("What is the capital of France?")
+print(response.content)
+```
 
 ## Verification
 
 **Decentralized (Arweave)**: Download raw payloads from your storage bucket, zip them, and verify with the open-source CLI:
 
-```shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```shell
 aws s3 sync s3://your-bucket/arweave/tenant_a1b2c3d4/ ./logs
 zip -r logs.zip logs
 npm install -g agentsystems-verify
@@ -169,12 +158,8 @@ Alternatively, the [Verify UI](https://verify.agentsystems.ai?utm_source=langcha
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/agentsystems_notary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/agentsystems_notary.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

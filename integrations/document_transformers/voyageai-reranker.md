@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # VoyageAI reranker integration
 
 > Integrate with the VoyageAI reranker document transformer using LangChain Python.
@@ -10,12 +6,12 @@
 
 This notebook shows how to use [Voyage AI's rerank endpoint](https://api.voyageai.com/v1/rerank) in a retriever. This builds on top of ideas in the ContextualCompressionRetriever.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  voyageai
 pip install -qU  langchain-voyageai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  faiss
 
 # OR  (depending on Python version)
@@ -23,7 +19,7 @@ pip install -qU  faiss
 pip install -qU  faiss-cpu
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # To obtain your key, create an account on https://www.voyageai.com
 
 import getpass
@@ -33,9 +29,8 @@ if "VOYAGE_API_KEY" not in os.environ:
     os.environ["VOYAGE_API_KEY"] = getpass.getpass("Voyage AI API Key:")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Helper function for printing docs
-
 
 def pretty_print_docs(docs):
     print(
@@ -65,11 +60,10 @@ Let's start by initializing a simple vector store retriever and storing the 2023
 * `voyage-finance-2`
 * `voyage-multilingual-2`
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -87,7 +81,7 @@ docs = retriever.invoke(query)
 pretty_print_docs(docs)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
@@ -307,7 +301,7 @@ Now let's wrap our base retriever with a `ContextualCompressionRetriever`. We'll
 * `rerank-1`
 * `rerank-lite-1`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.retrievers.contextual_compression import ContextualCompressionRetriever
 from langchain_openai import OpenAI
 from langchain_voyageai import VoyageAIRerank
@@ -326,7 +320,7 @@ compressed_docs = compression_retriever.invoke(
 pretty_print_docs(compressed_docs)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Document 1:
 
 One of the most serious constitutional responsibilities a President has is nominating someone to serve on the United States Supreme Court.
@@ -354,33 +348,29 @@ So let’s not abandon our streets. Or choose between safety and equal justice.
 
 You can of course use this retriever within a QA pipeline
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import RetrievalQA
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = RetrievalQA.from_chain_type(
     llm=OpenAI(temperature=0), retriever=compression_retriever
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain({"query": query})
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'What did the president say about Ketanji Brown Jackson',
  'result': " The president nominated Ketanji Brown Jackson to serve on the United States Supreme Court. "}
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/voyageai-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_transformers/voyageai-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

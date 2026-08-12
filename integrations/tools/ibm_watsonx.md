@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # IBM watsonx.ai integration
 
 > Integrate with the IBM watsonx.ai tool using LangChain Python.
@@ -29,7 +25,7 @@ This cell defines the WML credentials required to work with watsonx Toolkit.
 **Action:** Provide the IBM Cloud user API key. For details, see
 [documentation](https://cloud.ibm.com/docs/account?topic=account-userapikey\&interface=ui).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from getpass import getpass
 
@@ -39,7 +35,7 @@ os.environ["WATSONX_APIKEY"] = watsonx_api_key
 
 Additionally you are able to pass additional secrets as an environment variable.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["WATSONX_URL"] = "your service instance url"
@@ -53,7 +49,7 @@ os.environ["WATSONX_INSTANCE_ID"] = "your instance_id for accessing the CPD clus
 
 The LangChain IBM integration lives in the `langchain-ibm` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install -qU langchain-ibm
 ```
 
@@ -61,7 +57,7 @@ The LangChain IBM integration lives in the `langchain-ibm` package:
 
 Initialize the `WatsonxToolkit` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm.agent_toolkits.utility import WatsonxToolkit
 
 watsonx_toolkit = WatsonxToolkit(
@@ -73,7 +69,7 @@ Alternatively, you can use Cloud Pak for Data credentials. For details, see [wat
 
 For certain requirements, there is an option to pass the IBM's [`APIClient`](https://ibm.github.io/watsonx-ai-python-sdk/base.html#apiclient) object into the `WatsonxToolkit` class.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from ibm_watsonx_ai import APIClient
 
 api_client = APIClient(...)
@@ -89,15 +85,14 @@ watsonx_toolkit = WatsonxToolkit(
 
 It is possible to get all available tools as a list of `WatsonxTool` objects.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 watsonx_toolkit.get_tools()
 ```
 
-<Note>
-  The list of available tools may vary depending on whether it is IBM watsonx.ai for IBM Cloud or IBM watsonx.ai software.
-</Note>
+> [!NOTE]
+> The list of available tools may vary depending on whether it is IBM watsonx.ai for IBM Cloud or IBM watsonx.ai software.
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [WatsonxTool(name='GoogleSearch', description='Search for online trends, news, current events, real-time information, or research topics.', args_schema=<class 'langchain_ibm.toolkit.ToolArgsSchema'>, agent_description='Search for online trends, news, current events, real-time information, or research topics.', tool_config_schema={'title': 'config schema for GoogleSearch tool', 'type': 'object', 'properties': {'maxResults': {'title': 'Max number of results to return', 'type': 'integer', 'minimum': 1, 'maximum': 20}}}, watsonx_client=<ibm_watsonx_ai.client.APIClient object at 0x127e0f490>),
  WatsonxTool(name='WebCrawler', description='Useful for when you need to summarize a webpage. Do not use for Web search.', args_schema=<class 'langchain_ibm.toolkit.ToolArgsSchema'>, agent_description='Useful for when you need to summarize a webpage. Do not use for Web search.', tool_input_schema={'type': 'object', 'properties': {'url': {'title': 'url', 'description': 'URL for the webpage to be scraped', 'type': 'string', 'pattern': '^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$'}}, 'required': ['url']}, watsonx_client=<ibm_watsonx_ai.client.APIClient object at 0x127e0f490>),
  WatsonxTool(name='SDXLTurbo', description='Generate an image from text using Stability.ai', args_schema=<class 'langchain_ibm.toolkit.ToolArgsSchema'>, agent_description='Generate an image from text. Not for image refining. Use very precise language about the desired image, including setting, lighting, style, filters and lenses used. Do not ask the tool to refine an image.', watsonx_client=<ibm_watsonx_ai.client.APIClient object at 0x127e0f490>),
@@ -109,7 +104,7 @@ watsonx_toolkit.get_tools()
 
 You can also get a specific `WatsonxTool` by name.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 google_search = watsonx_toolkit.get_tool(tool_name="GoogleSearch")
 ```
 
@@ -117,18 +112,18 @@ google_search = watsonx_toolkit.get_tool(tool_name="GoogleSearch")
 
 ### Invoke the tool with a simple input
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 search_result = google_search.invoke({"q": "IBM"})
 search_result
 ```
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {'output': '[{"title":"IBM - United States","description":"Technology & Consulting. From next-generation AI to cutting edge hybrid cloud solutions to the deep expertise of IBM Consulting, IBM has what it takes to help\xa0...","url":"https://www.ibm.com/us-en"},{"title":"IBM - Wikipedia","description":"International Business Machines Corporation (using the trademark IBM), nicknamed Big Blue, is an American multinational technology company headquartered in\xa0...","url":"https://en.wikipedia.org/wiki/IBM"},{"title":"IBM Envizi ESG Suite","description":"Envizi systemizes the capture, transformation and consolidation of disparate sustainability data into a single source of truth and delivers actionable insights.","url":"https://www.ibm.com/products/envizi"},{"title":"IBM Research","description":"Tools + Code · BeeAI Framework. Open-source framework for building, deploying, and serving powerful agentic workflows at scale. · Docling. An open-source tool\xa0...","url":"https://research.ibm.com/"},{"title":"IBM SkillsBuild: Free Skills-Based Learning From Technology Experts","description":"IBM SkillsBuildPower your future in tech with job skills, courses, and credentials—for free. Power your future in tech with job skills, courses, and credentials\xa0...","url":"https://skillsbuild.org/"},{"title":"IBM | LinkedIn","description":"Locations · Primary. International Business Machines Corp. · 590 Madison Ave · 90 Grayston Dr · Plaza Independencia 721 · 388 Phahon Yothin Road · Jalan Prof.","url":"https://www.linkedin.com/company/ibm"},{"title":"International Business Machines Corporation (IBM)","description":"PROFITABILITY_AND_INCOME_STATEMENT · 9.60% · (TTM). 3.06% · (TTM). 24.06% · (TTM). 62.75B · (TTM). 6.02B · (TTM). 6.41. BALANCE_SHEET_AND_CASH_FLOW. (MRQ).","url":"https://finance.yahoo.com/quote/IBM/"},{"title":"Zurich - IBM Research","description":"The location in Zurich is one of IBM\'s 12 global research labs. IBM has maintained a research laboratory in Switzerland since 1956.","url":"https://research.ibm.com/labs/zurich"},{"title":"IBM (@ibm) • Instagram photos and videos","description":"Science, Technology & Engineering. We partner with developers, data scientists, CTOs and other creators to make the world work better.","url":"https://www.instagram.com/ibm/?hl=en"},{"title":"IBM Newsroom","description":"News and press releases from around the IBM world. Media contacts. Sources by topic and by region. IBM Media center. Explore IBM\'s latest and most popular\xa0...","url":"https://newsroom.ibm.com/"}]'}
 ```
 
 To fetch a list of received results, you can execute the below cell.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 output = json.loads(search_result.get("output"))
@@ -141,11 +136,11 @@ To check if a tool has a config schema and view its properties you can look at t
 
 In this example, the tool has a config schema that contains `maxResults` parameter to set maximum number of results to be returned.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 google_search.tool_config_schema
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'title': 'config schema for GoogleSearch tool',
  'type': 'object',
  'properties': {'maxResults': {'title': 'Max number of results to return',
@@ -156,7 +151,7 @@ google_search.tool_config_schema
 
 To set `tool_config` parameters, you need to use `set_tool_config()` method and pass correct `dict` according to above `tool_config_schema`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 config = {"maxResults": 3}
@@ -168,11 +163,11 @@ output = json.loads(search_result.get("output"))
 
 There is supposed to be maximum 3 results.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(len(output))
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 3
 ```
 
@@ -180,7 +175,7 @@ print(len(output))
 
 We need to get another tool (with an input schema) for the example purpose.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 weather_tool = watsonx_toolkit.get_tool("Weather")
 ```
 
@@ -188,11 +183,11 @@ To check if a tool has an input schema and view its properties, you can look at 
 
 In this example, the tool has an input schema that contains one required and one optional parameter.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 weather_tool.tool_input_schema
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'type': 'object',
  'properties': {'location': {'title': 'location',
    'description': 'Name of the location',
@@ -205,7 +200,7 @@ weather_tool.tool_input_schema
 
 To correctly pass an input to `invoke()`, you need to create an `invoke_input` dictionary with required parameter as a key with its value.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 invoke_input = {
     "location": "New York",
 }
@@ -214,18 +209,18 @@ weather_result = weather_tool.invoke(input=invoke_input)
 weather_result
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'output': 'Current weather in New York:\nTemperature: 0°C\nRain: 0mm\nRelative humidity: 63%\nWind: 7.6km/h\n'}
 ```
 
 This time the output is a single string value. To fetch and print it you can execute the below cell.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 output = weather_result.get("output")
 print(output)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Current weather in New York:
 Temperature: 0°C
 Rain: 0mm
@@ -237,7 +232,7 @@ Wind: 7.6km/h
 
 We can also invoke the tool with a ToolCall, in which case a ToolMessage will be returned:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 invoke_input = {
     "location": "Los Angeles",
 }
@@ -250,13 +245,13 @@ tool_call = dict(
 weather_tool.invoke(input=tool_call)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ToolMessage(content='{"output": "Current weather in Los Angeles:\\nTemperature: 8.6°C\\nRain: 0mm\\nRelative humidity: 61%\\nWind: 8.4km/h\\n"}', name='Weather', tool_call_id='1')
 ```
 
 ## Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_ibm import ChatWatsonx
 
 llm = ChatWatsonx(
@@ -266,15 +261,14 @@ llm = ChatWatsonx(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
-
 
 tools = [weather_tool]
 agent = create_agent(llm, tools)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 example_query = "What is the weather in Boston?"
 
 stream = agent.stream_events(
@@ -285,7 +279,7 @@ for snapshot in stream.values:
     snapshot["messages"][-1].pretty_print()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ================================ Human Message =================================
 
 What is the weather in Boston?
@@ -312,12 +306,8 @@ For detailed documentation of all `WatsonxToolkit` features and configurations h
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/ibm_watsonx.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

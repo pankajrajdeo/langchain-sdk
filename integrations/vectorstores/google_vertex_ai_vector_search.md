@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google Vertex AI vector search integration
 
 > Integrate with the Google Vertex AI vector search vector store using LangChain Python.
@@ -19,8 +15,8 @@ Vertex AI Vector Search is available in two versions:
 
 Choose the section below based on which version you're using:
 
-* [Vector Search 2.0](#vector-search-2-0) - If you're using Collections
-* [Vector Search 1.0](#vector-search-1-0) - If you're using Indexes and Endpoints
+* [Vector Search 2.0](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#vector-search-2-0) - If you're using Collections
+* [Vector Search 1.0](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#vector-search-1-0) - If you're using Indexes and Endpoints
 
 For migrating from Vertex AI Vector Search 1.0 to 2.0, see the [Migration Guide](https://cloud.google.com/vertex-ai/docs/vector-search-2/migration-from-vs-1_0).
 
@@ -28,7 +24,7 @@ For migrating from Vertex AI Vector Search 1.0 to 2.0, see the [Migration Guide]
 
 Install the LangChain Google Vertex AI integration:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U langchain-google-vertexai
 ```
 
@@ -42,11 +38,11 @@ Vector Search 2.0 uses Collections to store Data Objects. Each Data Object conta
 
 * Google Cloud project with Vertex AI API and Vector Search APIs enabled
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
   gcloud services enable vectorsearch.googleapis.com aiplatform.googleapis.com --project "{PROJECT_ID}"
-  ```
+```
 
-* Vector Search Collection created (see [Creating a Collection](#creating-a-collection-v2))
+* Vector Search Collection created (see [Creating a Collection](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#creating-a-collection-v2))
 
 * Appropriate IAM permissions (`Vertex AI User` role or equivalent)
 
@@ -54,7 +50,7 @@ Vector Search 2.0 uses Collections to store Data Objects. Each Data Object conta
 
 Before using Vector Search 2.0, you need to create a collection. Here's how to create a collection compatible with LangChain:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import vectorsearch_v1beta
 
 # Configuration
@@ -112,7 +108,7 @@ print(f"Resource name: {result.name}")
 
 ## Initialization
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VectorSearchVectorStore, VertexAIEmbeddings
 
 # Initialize embeddings
@@ -139,7 +135,7 @@ vector_store = VectorSearchVectorStore.from_components(
 
 ## Adding Documents
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 
 # Create documents
@@ -161,7 +157,7 @@ print(f"Added documents with IDs: {ids}")
 
 ### Adding Texts
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 texts = [
     "Vertex AI provides scalable ML infrastructure",
     "Vector Search enables similarity search at scale",
@@ -179,7 +175,7 @@ ids = vector_store.add_texts(texts=texts, metadatas=metadatas)
 
 ### Basic Similarity Search
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Basic similarity search
 query = "What is Vertex AI?"
 results = vector_store.similarity_search(query, k=5)
@@ -191,7 +187,7 @@ for doc in results:
 
 ### Similarity Search with Scores
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Get similarity scores along with documents
 results_with_scores = vector_store.similarity_search_with_score(
     "What is Vertex AI?",
@@ -206,7 +202,7 @@ for doc, score in results_with_scores:
 
 ### Search by Vector
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Search using a pre-computed embedding
 embedding = embeddings.embed_query("Vertex AI features")
 
@@ -221,7 +217,7 @@ for doc, score in results:
 
 Vector Search 2.0 uses dict-based query syntax for filtering Data Objects:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Simple equality filter
 results = vector_store.similarity_search(
     "AI features",
@@ -286,7 +282,7 @@ See the [Vector Search 2.0 query documentation](https://cloud.google.com/vertex-
 
 ### Delete by IDs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Delete specific documents by ID
 ids_to_delete = ["id1", "id2", "id3"]
 vector_store.delete(ids=ids_to_delete)
@@ -299,7 +295,7 @@ vector_store.delete(ids=ids_to_delete)
 1. Use `similarity_search` with your filter to get document IDs
 2. Delete by IDs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Recommended: Search first, then delete by IDs
 results = vector_store.similarity_search(
     "query",  # Use a broad query
@@ -312,7 +308,7 @@ vector_store.delete(ids=ids_to_delete)
 
 Alternatively, if direct metadata deletion is supported in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Direct deletion by metadata (may have limitations)
 try:
     vector_store.delete(metadata={"source": {"$eq": "old_docs"}})
@@ -329,7 +325,7 @@ Vector Search 2.0 offers several advanced search capabilities that go beyond tra
 
 Semantic search automatically generates embeddings from your query text using Vertex AI models. Your collection must be configured with `vertex_embedding_config` in the vector schema.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Semantic search with auto-generated embeddings
 results = vector_store.semantic_search(
     query="Tell me about animals",
@@ -356,7 +352,7 @@ for doc in results:
 
 Text search performs keyword/full-text matching on data fields without using embeddings.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Keyword search on data fields
 results = vector_store.text_search(
     query="Python programming",
@@ -375,7 +371,7 @@ Text search does not support filters. Use `semantic_search()` or `similarity_sea
 
 Hybrid search combines semantic search (with auto-generated embeddings) and text search (keyword matching) using Reciprocal Rank Fusion (RRF) to produce optimally ranked results.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Hybrid search: semantic understanding + keyword matching
 results = vector_store.hybrid_search(
     query="Men's outfit for beach",
@@ -406,7 +402,7 @@ See the [Vector Search 2.0 documentation](https://cloud.google.com/vertex-ai/doc
 
 If your Collection schema uses a custom field name for vectors:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = VectorSearchVectorStore.from_components(
     project_id="your-project-id",
     region="us-central1",
@@ -436,14 +432,14 @@ This notebook shows how to use functionality related to the `Google Cloud Vertex
 
 **Note**: LangChain API expects an endpoint and deployed index already created.Index creation time can take upto one hour.
 
-> To see how to create an index refer to the section [Create Index and deploy it to an Endpoint](#create-index-and-deploy-it-to-an-endpoint)
-> If you already have an index deployed , skip to [Create VectorStore from texts](#create-vector-store-from-texts)
+> To see how to create an index refer to the section [Create Index and deploy it to an Endpoint](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#create-index-and-deploy-it-to-an-endpoint)
+> If you already have an index deployed , skip to [Create VectorStore from texts](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#create-vector-store-from-texts)
 
 ## Create index and deploy it to an endpoint
 
 * This section demonstrates creating a new index and deploying it to an endpoint
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # TODO : Set values as per your requirements
 # Project and Storage Constants
 PROJECT_ID = "<my_project_id>"
@@ -460,23 +456,23 @@ DISPLAY_NAME = "<my_matching_engine_index_id>"
 DEPLOYED_INDEX_ID = "<my_matching_engine_endpoint_id>"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create a bucket.
 ! gsutil mb -l $REGION -p $PROJECT_ID $BUCKET_URI
 ```
 
 ### Use `VertexAIEmbeddings` as the embeddings model
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud import aiplatform
 from langchain_google_vertexai import VertexAIEmbeddings
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 aiplatform.init(project=PROJECT_ID, location=REGION, staging_bucket=BUCKET_URI)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 embedding_model = VertexAIEmbeddings(model_name="text-embedding-005")
 ```
 
@@ -488,7 +484,7 @@ embedding_model = VertexAIEmbeddings(model_name="text-embedding-005")
 
 Refer [Official Documentation](https://cloud.google.com/vertex-ai/docs/vector-search/create-manage-index#create-index-batch) for more details on configuring indexes
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # NOTE : This operation can take upto 30 seconds
 my_index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
     display_name=DISPLAY_NAME,
@@ -501,7 +497,7 @@ my_index = aiplatform.MatchingEngineIndex.create_tree_ah_index(
 
 ### Create an endpoint
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create an endpoint
 my_index_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
     display_name=f"{DISPLAY_NAME}-endpoint", public_endpoint_enabled=True
@@ -510,7 +506,7 @@ my_index_endpoint = aiplatform.MatchingEngineIndexEndpoint.create(
 
 ### Deploy index to the endpoint
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # NOTE : This operation can take upto 20 minutes
 my_index_endpoint = my_index_endpoint.deploy_index(
     index=my_index, deployed_index_id=DEPLOYED_INDEX_ID
@@ -523,7 +519,7 @@ my_index_endpoint.deployed_indexes
 
 NOTE : If you have existing Index and Endpoints, you can load them using below code
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # TODO : replace 1234567890123456789 with your actual index ID
 my_index = aiplatform.MatchingEngineIndex("1234567890123456789")
 
@@ -531,7 +527,7 @@ my_index = aiplatform.MatchingEngineIndex("1234567890123456789")
 my_index_endpoint = aiplatform.MatchingEngineIndexEndpoint("1234567890123456789")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import (
     VectorSearchVectorStore,
     VectorSearchVectorStoreDatastore,
@@ -542,7 +538,7 @@ from langchain_google_vertexai import (
 
 ### Create simple vectorstore ( without filters)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Input texts
 texts = [
     "The cat sat on",
@@ -571,7 +567,7 @@ vector_store.add_texts(texts=texts)
 
 ### OPTIONAL : You can also create vector and store chunks in a datastore
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # NOTE : This operation can take upto 20 mins
 vector_store = VectorSearchVectorStoreDatastore.from_components(
     project_id=PROJECT_ID,
@@ -585,14 +581,14 @@ vector_store = VectorSearchVectorStoreDatastore.from_components(
 vector_store.add_texts(texts=texts, is_complete_overwrite=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a simialarity search
 vector_store.similarity_search("pizza")
 ```
 
 ### Create vectorstore with metadata filters
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Input text with metadata
 record_data = [
     {
@@ -637,7 +633,7 @@ record_data = [
 ]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Parse and prepare input data
 
 texts = []
@@ -651,12 +647,12 @@ for record in record_data:
         metadatas.append(metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Inspect metadatas
 metadatas
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # NOTE : This operation can take more than 20 mins
 vector_store = VectorSearchVectorStore.from_components(
     project_id=PROJECT_ID,
@@ -670,21 +666,21 @@ vector_store = VectorSearchVectorStore.from_components(
 vector_store.add_texts(texts=texts, metadatas=metadatas, is_complete_overwrite=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud.aiplatform.matching_engine.matching_engine_index_endpoint import (
     Namespace,
     NumericNamespace,
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a simple similarity search
 
 # Below code should return 5 results
 vector_store.similarity_search("shirt", k=5)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a similarity search with text filter
 filters = [Namespace(name="season", allow_tokens=["spring"])]
 
@@ -692,7 +688,7 @@ filters = [Namespace(name="season", allow_tokens=["spring"])]
 vector_store.similarity_search("shirt", k=5, filter=filters)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a similarity search with combination of text and numeric filter
 filters = [Namespace(name="season", allow_tokens=["spring"])]
 numeric_filters = [NumericNamespace(name="price", value_float=40.0, op="LESS")]
@@ -705,17 +701,17 @@ vector_store.similarity_search(
 
 ### Use vector store as retriever
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Initialize the vectore_store as retriever
 retriever = vector_store.as_retriever()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # perform simple similarity search on retriever
 retriever.invoke("What are my options in breathable fabric?")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a similarity search with text filter
 filters = [Namespace(name="season", allow_tokens=["spring"])]
 
@@ -725,11 +721,10 @@ retriever.search_kwargs = {"filter": filters}
 retriever.invoke("What are my options in breathable fabric?")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Try running a similarity search with combination of text and numeric filter
 filters = [Namespace(name="season", allow_tokens=["spring"])]
 numeric_filters = [NumericNamespace(name="price", value_float=40.0, op="LESS")]
-
 
 retriever.search_kwargs = {"filter": filters, "numeric_filter": numeric_filters}
 
@@ -738,13 +733,13 @@ retriever.invoke("What are my options in breathable fabric?")
 
 ### Use filters with retriever in question answering chains
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAI
 
 llm = VertexAI(model_name="gemini-pro")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import RetrievalQA
 
 filters = [Namespace(name="season", allow_tokens=["spring"])]
@@ -768,25 +763,24 @@ print(f"{response['source_documents']}")
 
 ## Read , chunk , vectorise and index PDFs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 !pip install pypdf
 ```
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = PyPDFLoader("https://arxiv.org/pdf/1706.03762.pdf")
 pages = loader.load()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text_splitter = RecursiveCharacterTextSplitter(
     # Set a really small chunk size, just to show.
     chunk_size=1000,
@@ -797,21 +791,21 @@ text_splitter = RecursiveCharacterTextSplitter(
 doc_splits = text_splitter.split_documents(pages)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 texts = [doc.page_content for doc in doc_splits]
 metadatas = [doc.metadata for doc in doc_splits]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 texts[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Inspect Metadata of 1st page
 metadatas[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = VectorSearchVectorStore.from_components(
     project_id=PROJECT_ID,
     region=REGION,
@@ -824,7 +818,7 @@ vector_store = VectorSearchVectorStore.from_components(
 vector_store.add_texts(texts=texts, metadatas=metadatas, is_complete_overwrite=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 vector_store = VectorSearchVectorStore.from_components(
     project_id=PROJECT_ID,
     region=REGION,
@@ -843,7 +837,7 @@ Read the [Vertex AI hybrid search documentation](https://cloud.google.com/vertex
 In order to use hybrid search, we need to fit a sparse embedding vectorizer and handle the embeddings outside of the Vector Search integration.
 An example of sparse embedding vectorizer is sklearn TfidfVectorizer but other techniques can be used, for instance BM25.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Define some sample data
 texts = [
     "The cat sat on",
@@ -862,7 +856,7 @@ ids = ["i_" + str(i + 1) for i in range(len(texts))]
 metadatas = [{"my_metadata": i} for i in range(len(texts))]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Fit the TFIDF Vectorizer (This is usually done on a very large corpus of data to make sure that word statistics generalize well on new data)
@@ -870,7 +864,7 @@ vectorizer = TfidfVectorizer()
 vectorizer.fit(texts)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Utility function to transform text into a TF-IDF Sparse Vector
 def get_sparse_embedding(tfidf_vectorizer, text):
     tfidf_vector = tfidf_vectorizer.transform([text])
@@ -882,18 +876,18 @@ def get_sparse_embedding(tfidf_vectorizer, text):
     return {"values": values, "dimensions": dims}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # semantic (dense) embeddings
 embeddings = embedding_model.embed_documents(texts)
 # tfidf (sparse) embeddings
 sparse_embeddings = [get_sparse_embedding(vectorizer, x) for x in texts]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 sparse_embeddings[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Add the dense and sparse embeddings in Vector Search
 
 vector_store.add_texts_with_embeddings(
@@ -905,7 +899,7 @@ vector_store.add_texts_with_embeddings(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Run hybrid search
 query = "the cat"
 embedding = embedding_model.embed_query(query)
@@ -921,12 +915,8 @@ vector_store.similarity_search_by_vector_with_score(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_vertex_ai_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/vectorstores/google_vertex_ai_vector_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

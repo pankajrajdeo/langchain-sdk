@@ -1,18 +1,14 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Auth-aware tool responses
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/auth-format)
+Format tool responses to trigger OAuth flows and resume execution automatically.
 
-> Format tool responses to trigger OAuth flows and resume execution automatically.
-
-Some [tools](/langsmith/fleet/tools) require user authorization (for example, Google, Slack, GitHub). LangSmith Fleet includes middleware to detect when a tool needs authorization and to pause the run with a clear prompt to the user. After the user completes auth, the same tool call is retried automatically.
+Some [tools](https://docs.langchain.com/langsmith/fleet/tools) require user authorization (for example, Google, Slack, GitHub). LangSmith Fleet includes middleware to detect when a tool needs authorization and to pause the run with a clear prompt to the user. After the user completes auth, the same tool call is retried automatically.
 
 ## Return shape to request auth
 
 If a tool detects missing authorization, return a JSON string containing the following fields:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "auth_required": true,
   "auth_url": "https://auth.example.com/start",
@@ -28,18 +24,13 @@ When Fleet detects this response, it interrupts the run, displays the authentica
 
 If you want your custom tools to reuse the same authentication required interrupt + UI, ensure your tools return the same shape of JSON.
 
-<Note>
-  Return only this JSON as the tool's output. Avoid including additional text or content. Fleet parses the response to trigger the authentication flow.
-</Note>
+> [!NOTE]
+> Return only this JSON as the tool's output. Avoid including additional text or content. Fleet parses the response to trigger the authentication flow.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/auth-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/fleet/auth-format.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Deploy full-stack web apps
-
-> Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history.
 
 The following pages provide reference implementations for running LangChain agents in production on JavaScript frameworks and hosting platforms. Each example in the [deployment cookbook repository](https://github.com/langchain-ai/deployment-cookbook) is a full-stack chat app with streaming UI, subagents, and thread history, deployed on a different platform using the same [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming).
 
@@ -16,41 +12,30 @@ Use these guides when you need to ship an agent-backed product: copy the stack t
 
 The agent runs as a LangSmith Deployment, and a separate web app streams from the Agent Server API.
 
-<CardGroup cols={3}>
-  <Card title="LangSmith + Vite" icon="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/langchain.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=b910ed9cd0b6b8adb4b6da400882e92c" href="/langsmith/deploy-vite-langsmith" width="65" height="65" data-path="images/providers/light/langchain.svg">
-    Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
-  </Card>
-</CardGroup>
+#### [LangSmith + Vite](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
+Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
 
 ### Embed in your web framework
 
 The agent runs inside the framework's route handlers and ships as one deployable app to the host platform.
 
-<CardGroup cols={3}>
-  <Card title="Next.js" icon="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nextjs.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=4f3336e9534db50f25f87173a41322d5" href="/langsmith/deploy-nextjs" width="24" height="24" data-path="images/providers/light/nextjs.svg">
-    App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
-  </Card>
+#### [Next.js](https://docs.langchain.com/langsmith/deploy-nextjs)
+App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
 
-  <Card title="SvelteKit" icon="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/svelte.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=07e7e35c40e4522f739feea9ef3e33b7" href="/langsmith/deploy-sveltekit" width="24" height="24" data-path="images/providers/light/svelte.svg">
-    SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
-  </Card>
+#### [SvelteKit](https://docs.langchain.com/langsmith/deploy-sveltekit)
+SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
 
-  <Card title="Nuxt" icon="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nuxt.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=5d965ed1f93f51ac604e66b935a65368" href="/langsmith/deploy-nuxt" width="24" height="24" data-path="images/providers/light/nuxt.svg">
-    Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
-  </Card>
+#### [Nuxt](https://docs.langchain.com/langsmith/deploy-nuxt)
+Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
 
-  <Card title="Cloudflare Workers" icon="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/cloudflare.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=ae129fcbfc78ccaece42b1c4d3699311" href="/langsmith/deploy-cloudflare-workers" width="24" height="24" data-path="images/providers/light/cloudflare.svg">
-    Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
-  </Card>
+#### [Cloudflare Workers](https://docs.langchain.com/langsmith/deploy-cloudflare-workers)
+Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
 
-  <Card title="Deno Deploy" icon="https://mintcdn.com/langchain-5e9cc07a/Tz8fh3A43FeUPf69/images/providers/light/deno.svg?fit=max&auto=format&n=Tz8fh3A43FeUPf69&q=85&s=8d213b0000104542fcaa7ab160595224" href="/langsmith/deploy-deno" width="24" height="24" data-path="images/providers/light/deno.svg">
-    Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
-  </Card>
-</CardGroup>
+#### [Deno Deploy](https://docs.langchain.com/langsmith/deploy-deno)
+Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
 
-<Tip>
-  Each cookbook example shares the same demo agent: a coordinator that delegates to `researcher` and `math-whiz` subagents with mock tools, so you can compare hosting choices without changing application behavior.
-</Tip>
+> [!TIP]
+> Each cookbook example shares the same demo agent: a coordinator that delegates to `researcher` and `math-whiz` subagents with mock tools, so you can compare hosting choices without changing application behavior.
 
 ## What goes into an agent deployment
 
@@ -92,23 +77,19 @@ Server-side logic tracks active runs, bridges commands to the agent, and fans ou
 
 A browser UI wired to the protocol through `HttpAgentServerAdapter`, from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react), [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue), [`@langchain/svelte`](https://www.npmjs.com/package/@langchain/svelte), or [`@langchain/angular`](https://www.npmjs.com/package/@langchain/angular). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
 
-These bindings ship no components of their own. Hooks like `useStream` return plain reactive state (messages, tool calls, loading flags, thread metadata) that you wire to whatever visual layer you prefer. For adapter patterns and trade-offs, see the [frontend integrations overview](/oss/python/langchain/frontend/integrations/overview).
+These bindings ship no components of their own. Hooks like `useStream` return plain reactive state (messages, tool calls, loading flags, thread metadata) that you wire to whatever visual layer you prefer. For adapter patterns and trade-offs, see the [frontend integrations overview](https://docs.langchain.com/oss/python/langchain/frontend/integrations/overview).
 
 ## See also
 
-* [LangSmith Deployment overview](/langsmith/deployment)
-* [Agent Server](/langsmith/agent-server)
-* [Configure checkpointer](/langsmith/configure-checkpointer)
-* [Frontend overview](/oss/python/langchain/frontend/overview)
+* [LangSmith Deployment overview](https://docs.langchain.com/langsmith/deployment)
+* [Agent Server](https://docs.langchain.com/langsmith/agent-server)
+* [Configure checkpointer](https://docs.langchain.com/langsmith/configure-checkpointer)
+* [Frontend overview](https://docs.langchain.com/oss/python/langchain/frontend/overview)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-frameworks-and-platforms.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/deploy-frameworks-and-platforms.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

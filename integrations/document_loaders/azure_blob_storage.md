@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure blob storage loader integration
 
 > Integrate with the Azure blob storage loader document loader using LangChain Python.
@@ -19,17 +15,16 @@
 
 This notebook covers how to load document objects from a container on `Azure Blob Storage`. For more detailed documentation on the document loader, see the [Azure Blob Storage Loader API Reference](https://reference.langchain.com/python/integrations/langchain_azure/storage/).
 
-<Note>
-  It is recommended to use this new loader over the previous [`AzureBlobStorageFileLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_file/AzureBlobStorageFileLoader) and [`AzureBlobStorageContainerLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_container/AzureBlobStorageContainerLoader) from `langchain_community`. For detailed instructions on migrating to the new loader, refer to the [migration guide](https://github.com/langchain-ai/langchain-azure/blob/main/libs/azure-storage/README.md#migrating-from-langchain-community-azure-storage-document-loaders)
-</Note>
+> [!NOTE]
+> It is recommended to use this new loader over the previous [`AzureBlobStorageFileLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_file/AzureBlobStorageFileLoader) and [`AzureBlobStorageContainerLoader`](https://reference.langchain.com/python/langchain-community/document_loaders/azure_blob_storage_container/AzureBlobStorageContainerLoader) from `langchain_community`. For detailed instructions on migrating to the new loader, refer to the [migration guide](https://github.com/langchain-ai/langchain-azure/blob/main/libs/azure-storage/README.md#migrating-from-langchain-community-azure-storage-document-loaders)
 
 ## Setup
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-azure-storage
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 ```
 
@@ -39,7 +34,7 @@ The `AzureBlobStorageLoader` loads all blobs from a given container in Azure Blo
 
 No explicit credential configuration is needed, as it uses [`DefaultAzureCredential`](https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), which automatically retrieves [Microsoft Entra ID tokens](https://learn.microsoft.com/en-us/azure/storage/blobs/authorize-access-azure-active-directory) based on your current environment.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = AzureBlobStorageLoader(
     "https://<storage-account-name>.blob.core.windows.net",
     "<container-name>",
@@ -49,13 +44,13 @@ for doc in loader.load():
     print(doc)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 page_content='Lorem ipsum dolor sit amet.' metadata={'source': 'https://<storage-account-name>.blob.core.windows.net/<container-name>/<blob-name>'}
 ```
 
 You can also specify a prefix to only return blobs that start with that prefix.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = AzureBlobStorageLoader(
     "https://<storage-account-name>.blob.core.windows.net",
     "<container-name>",
@@ -67,7 +62,7 @@ loader = AzureBlobStorageLoader(
 
 You can load documents from a list of blob names, which uses only the blobs provided instead of an API call to list blobs.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 loader = AzureBlobStorageLoader(
     "https://<storage-account-name>.blob.core.windows.net",
     "<container-name>",
@@ -79,7 +74,7 @@ loader = AzureBlobStorageLoader(
 
 By default, the document loader uses the [`DefaultAzureCredential`](https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview). The examples below show how to override this:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.core.credentials import AzureSasCredential
 from azure.identity import ManagedIdentityCredential
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
@@ -108,11 +103,10 @@ This works by downloading the blob content to a temporary file. The `loader_fact
 
 Below shows how to override the default loader used to parse blobs as PDFs using the [PyPDFLoader](https://reference.langchain.com/python/langchain-community/document_loaders/pdf/PyPDFLoader):
 
-<Warning>
-  The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 from langchain_community.document_loaders import PyPDFLoader  # This example requires installing `langchain-community` and `pypdf`
 
@@ -129,7 +123,7 @@ for doc in loader.lazy_load():
 
 To provide additional configuration, you can define a callable that returns an instantiated document loader as shown below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 from langchain_community.document_loaders import PyPDFLoader  # This example requires installing `langchain-community` and `pypdf`
 
@@ -152,12 +146,8 @@ for doc in loader.lazy_load():
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/azure_blob_storage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/azure_blob_storage.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

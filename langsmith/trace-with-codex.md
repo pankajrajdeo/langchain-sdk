@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace OpenAI Codex sessions
-
-> Capture OpenAI Codex agent turns, tool calls, model metadata, and subagent threads in LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-codex)
+Capture OpenAI Codex agent turns, tool calls, model metadata, and subagent threads in LangSmith.
 
 The [`langsmith-codex-plugins`](https://github.com/langchain-ai/langsmith-codex-plugins) marketplace ships a tracing plugin that sends [OpenAI Codex](https://developers.openai.com/codex) session data to LangSmith. Use it to inspect agent turns, model metadata, token usage, tool calls, and subagent threads from your Codex workflows.
 
@@ -13,19 +9,19 @@ The [`langsmith-codex-plugins`](https://github.com/langchain-ai/langsmith-codex-
 Before setting up tracing, ensure you have:
 
 * [Codex CLI](https://developers.openai.com/codex/quickstart?setup=cli) v0.128 or later.
-* A [LangSmith API key](/langsmith/create-account-api-key).
+* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
 
 ## Install and enable the plugin
 
 Add the marketplace using the Codex CLI:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 codex plugin marketplace add langchain-ai/langsmith-codex-plugins
 ```
 
 Enable plugin hooks and the tracing plugin globally in `~/.codex/config.toml`, or only for a specific project in `.codex/config.toml`:
 
-```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```toml
 [features]
 plugin_hooks = true
 
@@ -52,7 +48,7 @@ The plugin reads Codex-specific variables first, then falls back to the generic 
 
 Add the variables to your shell configuration file (`~/.zshrc`, `~/.bashrc`, or `~/.bash_profile`):
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export TRACE_TO_LANGSMITH="true"
 export LANGSMITH_CODEX_API_KEY="<your-langsmith-api-key>"
 export LANGSMITH_CODEX_PROJECT="codex"
@@ -62,7 +58,7 @@ export LANGSMITH_CODEX_PROJECT="codex"
 
 Use `<project>/.codex/langsmith.json` for project-level settings or `~/.codex/langsmith.json` for global defaults. The global file loads first, the project file overrides it, and matching environment variables take precedence over both.
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<your-langsmith-api-key>",
@@ -90,48 +86,44 @@ Keep config files that include API keys out of version control.
 
 Set `replicas` in `langsmith.json` or `LANGSMITH_CODEX_RUNS_ENDPOINTS` to send the same trace data to additional LangSmith workspaces or projects. When set, the replica list overrides the other client settings.
 
-Tracing to multiple [replicas](/langsmith/log-traces-to-project) is useful for:
+Tracing to multiple [replicas](https://docs.langchain.com/langsmith/log-traces-to-project) is useful for:
 
 * Sending traces to both a production and staging project.
 * Tracing to multiple workspaces with different API keys.
 * Adding extra metadata to specific replica destinations.
 
-<Tabs>
-  <Tab title="Config file (recommended)">
-    In `<project>/.codex/langsmith.json` or `~/.codex/langsmith.json`:
+#### Config file (recommended)
+In `<project>/.codex/langsmith.json` or `~/.codex/langsmith.json`:
 
-    ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
+{
+  "enabled": true,
+  "replicas": [
     {
-      "enabled": true,
-      "replicas": [
-        {
-          "apiUrl": "https://api.smith.langchain.com",
-          "apiKey": "lsv2_pt_workspace_a",
-          "projectName": "project-prod"
-        },
-        {
-          "apiUrl": "https://api.smith.langchain.com",
-          "apiKey": "lsv2_pt_workspace_b",
-          "projectName": "project-staging",
-          "updates": { "metadata": { "environment": "staging" } }
-        }
-      ]
+      "apiUrl": "https://api.smith.langchain.com",
+      "apiKey": "lsv2_pt_workspace_a",
+      "projectName": "project-prod"
+    },
+    {
+      "apiUrl": "https://api.smith.langchain.com",
+      "apiKey": "lsv2_pt_workspace_b",
+      "projectName": "project-staging",
+      "updates": { "metadata": { "environment": "staging" } }
     }
-    ```
-  </Tab>
+  ]
+}
+```
 
-  <Tab title="Shell environment variable">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export LANGSMITH_CODEX_RUNS_ENDPOINTS='[{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_a","projectName":"project-prod"},{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_b","projectName":"project-staging","updates":{"metadata":{"environment":"staging"}}}]'
-    ```
+#### Shell environment variable
+```bash
+export LANGSMITH_CODEX_RUNS_ENDPOINTS='[{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_a","projectName":"project-prod"},{"apiUrl":"https://api.smith.langchain.com","apiKey":"lsv2_pt_workspace_b","projectName":"project-staging","updates":{"metadata":{"environment":"staging"}}}]'
+```
 
-    To generate the escaped JSON string, use:
+To generate the escaped JSON string, use:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    echo '[{"apiUrl":"...","apiKey":"...","projectName":"..."}]' | jq -c .
-    ```
-  </Tab>
-</Tabs>
+```bash
+echo '[{"apiUrl":"...","apiKey":"...","projectName":"..."}]' | jq -c .
+```
 
 Each replica object supports the following fields:
 
@@ -158,9 +150,8 @@ Interrupted turns where the user cancels mid-response are still uploaded once th
 
 Open the configured LangSmith project and complete a Codex turn. By default traces appear in the `codex` project. The plugin uploads completed Codex transcript data, including messages, tool call inputs and outputs, model metadata, token usage, and subagent thread structure.
 
-<Warning>
-  The plugin uploads full Codex transcript data to LangSmith. Do not enable tracing for sessions that contain data you do not want stored in LangSmith.
-</Warning>
+> [!WARNING]
+> The plugin uploads full Codex transcript data to LangSmith. Do not enable tracing for sessions that contain data you do not want stored in LangSmith.
 
 ## Troubleshooting
 
@@ -174,12 +165,8 @@ If traces do not appear in LangSmith:
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-codex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-codex.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

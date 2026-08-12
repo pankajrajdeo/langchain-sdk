@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Persistence
 
 > LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
@@ -22,16 +18,16 @@ Persistence lets LangGraph applications keep useful information beyond a single 
 
 LangGraph provides two complementary persistence systems:
 
-* **[Checkpointers](/oss/python/langgraph/checkpointers)** persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance.
-* **[Stores](/oss/python/langgraph/stores)** persist application-defined data outside the graph state. Use them for long-term, cross-thread memory, including user preferences, facts, and shared knowledge.
+* **[Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers)** persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance.
+* **[Stores](https://docs.langchain.com/oss/python/langgraph/stores)** persist application-defined data outside the graph state. Use them for long-term, cross-thread memory, including user preferences, facts, and shared knowledge.
 
-Most applications can use both: a [checkpointer](/oss/python/langgraph/checkpointers) tracks the current thread, and a [store](/oss/python/langgraph/stores) tracks durable information across threads.
+Most applications can use both: a [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers) tracks the current thread, and a [store](https://docs.langchain.com/oss/python/langgraph/stores) tracks durable information across threads.
 
 ## Quickstart
 
 Compile your graph with a checkpointer, a store, or both:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.store.memory import InMemoryStore
 
@@ -46,10 +42,9 @@ result = graph.invoke(
 )
 ```
 
-<Info>
-  **Agent Server handles persistence automatically**
-  When using the [Agent Server](/langsmith/agent-server), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
-</Info>
+> [!NOTE]
+> **Agent Server handles persistence automatically**
+> When using the [Agent Server](https://docs.langchain.com/langsmith/agent-server), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
 
 ## Checkpointer vs. store
 
@@ -60,7 +55,7 @@ result = graph.invoke(
 | Memory type    | Short-term, thread-scoped memory                                             | Long-term, cross-thread memory                      |
 | Use for        | Conversation continuity, human-in-the-loop, time travel, and fault tolerance | User preferences, facts, and shared knowledge       |
 | Access pattern | Pass a `thread_id` in graph config                                           | Read and write items from nodes or application code |
-| Full guide     | [Checkpointers](/oss/python/langgraph/checkpointers)                         | [Stores](/oss/python/langgraph/stores)              |
+| Full guide     | [Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers)                         | [Stores](https://docs.langchain.com/oss/python/langgraph/stores)              |
 
 ## Troubleshooting common issues
 
@@ -70,7 +65,7 @@ When using `PostgresSaver` (or `AsyncPostgresSaver`), the `thread_id` is stored 
 
 **Fix:** Keep `thread_id` values under 255 characters. Use a UUID or hash if you need deterministic IDs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import uuid
 
 config = {"configurable": {"thread_id": str(uuid.uuid4())[:255]}}
@@ -91,7 +86,7 @@ Over long conversations, checkpoints accumulate. This can increase latency and s
 
 **Fix:** Prune old checkpoints periodically or set a retention policy:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph.checkpoint.postgres import PostgresSaver
 
 checkpointer = PostgresSaver.from_conn_string("postgresql://...")
@@ -103,21 +98,17 @@ checkpointer.setup()  # Creates tables with indexes
 
 When a subgraph updates state, the parent graph may not see the changes immediately. This is because each subgraph manages its own checkpoint namespace.
 
-**Fix:** Use [shared state via Store](/oss/python/langgraph/stores) for data that needs to cross graph boundaries, or configure your subgraph to write to the parent checkpoint.
+**Fix:** Use [shared state via Store](https://docs.langchain.com/oss/python/langgraph/stores) for data that needs to cross graph boundaries, or configure your subgraph to write to the parent checkpoint.
 
 ## Next steps
 
-* [Use checkpointers](/oss/python/langgraph/checkpointers) to persist and inspect thread state.
-* [Use stores](/oss/python/langgraph/stores) to persist durable data across threads.
+* [Use checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers) to persist and inspect thread state.
+* [Use stores](https://docs.langchain.com/oss/python/langgraph/stores) to persist durable data across threads.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/persistence.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/persistence.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

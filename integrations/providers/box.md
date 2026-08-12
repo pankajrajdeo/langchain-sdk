@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Box integrations
 
 > Integrate with Box using LangChain Python.
@@ -15,15 +11,13 @@ In this package, we make available a number of ways to include Box content in yo
 
 ### Installation and setup
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-box
-  ```
+```bash
+pip install -U langchain-box
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-box
-  ```
-</CodeGroup>
+```bash
+uv add langchain-box
+```
 
 # langchain-box
 
@@ -64,13 +58,12 @@ We will cover passing it directly to the loader in the section below.
 * CCG with a service account
 * CCG with a specified user
 
-<Note>
-  **If using JWT authentication, you will need to download the configuration from the Box**
-
-  developer console after generating your public/private key pair. Place this file in your
-  application directory structure somewhere. You will use the path to this file when using
-  the `BoxAuth` helper class.
-</Note>
+> [!NOTE]
+> **If using JWT authentication, you will need to download the configuration from the Box**
+>
+> developer console after generating your public/private key pair. Place this file in your
+> application directory structure somewhere. You will use the path to this file when using
+> the `BoxAuth` helper class.
 
 For more information, learn about how to
 [set up a Box application](https://developer.box.com/guides/getting-started/first-application/),
@@ -82,7 +75,7 @@ Examples:
 
 **Token**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 from langchain_box.utilities import BoxAuth, BoxAuthType
 
@@ -99,7 +92,7 @@ loader = BoxLoader(
 
 **JWT with a service account**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 from langchain_box.utilities import BoxAuth, BoxAuthType
 
@@ -115,7 +108,7 @@ loader = BoxLoader(
 
 **JWT with a specified user**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 from langchain_box.utilities import BoxAuth, BoxAuthType
 
@@ -132,7 +125,7 @@ loader = BoxLoader(
 
 **CCG with a service account**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 from langchain_box.utilities import BoxAuth, BoxAuthType
 
@@ -150,7 +143,7 @@ loader = BoxLoader(
 
 **CCG with a specified user**
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 from langchain_box.utilities import BoxAuth, BoxAuthType
 
@@ -174,7 +167,7 @@ If you wish to use OAuth2 with the authorization\_code flow, please use `BoxAuth
 
 [See usage example](https://developer.box.com/)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.document_loaders import BoxLoader
 
 ```
@@ -183,9 +176,9 @@ from langchain_box.document_loaders import BoxLoader
 
 ### BoxRetriever
 
-[See usage example](/oss/python/integrations/retrievers/box)
+[See usage example](https://docs.langchain.com/oss/python/integrations/retrievers/box)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.retrievers import BoxRetriever
 
 ```
@@ -196,19 +189,15 @@ from langchain_box.retrievers import BoxRetriever
 
 [See usage example](https://developer.box.com/)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_box.blob_loaders import BoxBlobLoader
 
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/box.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

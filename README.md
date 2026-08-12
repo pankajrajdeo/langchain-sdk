@@ -15,10 +15,23 @@ SDK categories and nested pages are discovered and created automatically.
 - OpenWiki documentation from `/oss/openwiki`
 - LangSmith documentation from `/langsmith`
 
-Discovery combines the LangChain sitemap, `llms.txt`, configured entry points,
-and recursive links found inside downloaded Markdown. The generated
-`.mirror-manifest.json` records sources, resolved URLs, byte sizes, and SHA-256
-checksums for every managed page.
+Discovery starts with `llms.txt` and `llms-full.txt`, then combines the
+LangChain sitemap, configured entry points, and recursive links found inside
+downloaded Markdown. This lets newly published URL categories and arbitrarily
+deep subdirectories appear automatically on the next run.
+
+The updater converts Mintlify MDX into GitHub Flavored Markdown. Tabs, code
+groups, callouts, cards, accordions, file trees, prompts, interactive embeds,
+JSX attributes, and relative links are normalized so their contents remain
+readable on GitHub. Links and in-text fragment citations point to the official
+documentation, where custom upstream anchors and interactive widgets continue
+to work.
+
+The generated `.mirror-manifest.json` records each source and resolved URL,
+normalized and upstream byte sizes and SHA-256 checksums, content source, crawl
+failures, and normalization warnings. A run exits unsuccessfully if it leaves
+unclosed code fences, executable MDX, JSX attributes, or relative links in the
+renderable Markdown.
 
 ## Update locally
 
@@ -45,6 +58,12 @@ python3 update_docs.py --no-clean
 Updates are atomic. Stale files are removed only when they were listed in the
 previous managed manifest and the current crawl completes without required-page
 failures.
+
+Run the normalization regression tests with:
+
+```bash
+python3 -m unittest discover -s tests
+```
 
 ## Automatic updates
 

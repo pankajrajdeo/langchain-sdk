@@ -1,86 +1,76 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Quickstart
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/quickstart)
+Install OpenWiki, configure a model provider, and generate your first wiki.
 
-> Install OpenWiki, configure a model provider, and generate your first wiki.
-
-OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or personal knowledge. Coding agents use that wiki as durable context, so they spend less time and fewer tokens rediscovering architecture, integrations, and other repository details. Humans can read the same docs, but agents are the primary audience. This guide covers installation, provider setup, and your first documentation run. For a feature overview, see [OpenWiki overview](/oss/openwiki/overview).
+OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or personal knowledge. Coding agents use that wiki as durable context, so they spend less time and fewer tokens rediscovering architecture, integrations, and other repository details. Humans can read the same docs, but agents are the primary audience. This guide covers installation, provider setup, and your first documentation run. For a feature overview, see [OpenWiki overview](https://docs.langchain.com/oss/openwiki/overview).
 
 ## Install and generate repository docs
 
-<Steps>
-  <Step title="Install the CLI" icon="package">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    npm install -g openwiki
-    ```
+### Install the CLI
+```bash
+npm install -g openwiki
+```
 
-    On Windows, prefer `npm` or `pnpm`. Installing with Bun can fall back to compiling the native `better-sqlite3` dependency and may require Visual Studio Build Tools with the Desktop development with C++ workload.
-  </Step>
+On Windows, prefer `npm` or `pnpm`. Installing with Bun can fall back to compiling the native `better-sqlite3` dependency and may require Visual Studio Build Tools with the Desktop development with C++ workload.
 
-  <Step title="Initialize in your repository" icon="player-play">
-    From the repository root, run the following command:
+### Initialize in your repository
+From the repository root, run the following command:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki --init
-    ```
+```bash
+openwiki --init
+```
 
-    On the first interactive run, OpenWiki prompts for:
+On the first interactive run, OpenWiki prompts for:
 
-    * An inference provider and model
-    * The provider API key (or equivalent credentials)
-    * An optional LangSmith API key for tracing
+* An inference provider and model
+* The provider API key (or equivalent credentials)
+* An optional LangSmith API key for tracing
 
-    OpenWiki saves its configuration and secrets to `~/.openwiki/.env`.
-  </Step>
+OpenWiki saves its configuration and secrets to `~/.openwiki/.env`.
 
-  <Step title="Review the generated wiki" icon="book">
-    OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It also maintains an `AGENTS.md` and `CLAUDE.md` at the repository root, adding a block that instructs coding agents to consult the wiki for codebase context.
+### Review the generated wiki
+OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It also maintains an `AGENTS.md` and `CLAUDE.md` at the repository root, adding a block that instructs coding agents to consult the wiki for codebase context.
 
-    Repository-specific wiki instructions live in `openwiki/INSTRUCTIONS.md`. OpenWiki reads this file for scope and priorities. To change it, edit the file, or ask OpenWiki in chat to change the brief (for example, `openwiki "Update openwiki/INSTRUCTIONS.md to focus on the public API"`). Normal `--init` and `--update` runs do not rewrite it.
+Repository-specific wiki instructions live in `openwiki/INSTRUCTIONS.md`. OpenWiki reads this file for scope and priorities. To change it, edit the file, or ask OpenWiki in chat to change the brief (for example, `openwiki "Update openwiki/INSTRUCTIONS.md to focus on the public API"`). Normal `--init` and `--update` runs do not rewrite it.
 
-    To explore the wiki in a browser, run:
+To explore the wiki in a browser, run:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki visualize
-    ```
+```bash
+openwiki visualize
+```
 
-    This opens a local interactive node graph with a side-by-side Markdown reader. See [Visualize your wiki](/oss/openwiki/visualize).
-  </Step>
+This opens a local interactive node graph with a side-by-side Markdown reader. See [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize).
 
-  <Step title="Keep docs up to date" icon="refresh">
-    Refresh documentation after code changes:
+### Keep docs up to date
+Refresh documentation after code changes:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    openwiki --update
-    ```
+```bash
+openwiki --update
+```
 
-    For automated updates in CI, see [Automate updates](/oss/openwiki/automate-updates).
-  </Step>
-</Steps>
+For automated updates in CI, see [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates).
 
 ## Personal wiki (optional)
 
 To initialize a local personal brain instead of repository docs:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki personal --init
 ```
 
-Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](/oss/openwiki/personal-mode).
+Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode).
 
 ## Interactive and one-shot runs
 
 Bare `openwiki` opens an interactive session in code mode for the current repository. Pass a message to start with a request:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki "Please generate documentation for this repository"
 ```
 
 Use `-p` / `--print` for a one-shot non-interactive run that prints the final assistant output and exits:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 openwiki -p "Summarize what you can do"
 ```
 
@@ -90,7 +80,7 @@ In chat, use `/api-key` to update the current provider API key and `/langsmith-k
 
 During onboarding, provide a LangSmith API key to trace OpenWiki runs to a LangSmith project named `openwiki`. You can also set these values in `~/.openwiki/.env` or the process environment:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 LANGSMITH_API_KEY=your-key
 LANGCHAIN_TRACING_V2=true
 LANGCHAIN_PROJECT=openwiki
@@ -98,20 +88,16 @@ LANGCHAIN_PROJECT=openwiki
 
 ## Next steps
 
-* [Code mode](/oss/openwiki/code-mode): repository wikis, OKF output, and agent instruction files
-* [Personal mode](/oss/openwiki/personal-mode): local brain and connectors
-* [Model providers](/oss/openwiki/providers): supported providers and credentials
-* [Automate updates](/oss/openwiki/automate-updates): GitHub Actions, GitLab CI, and Bitbucket Pipelines
-* [CLI reference](/oss/openwiki/cli-reference): commands and flags
+* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode): repository wikis, OKF output, and agent instruction files
+* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode): local brain and connectors
+* [Model providers](https://docs.langchain.com/oss/openwiki/providers): supported providers and credentials
+* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates): GitHub Actions, GitLab CI, and Bitbucket Pipelines
+* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference): commands and flags
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/openwiki/quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

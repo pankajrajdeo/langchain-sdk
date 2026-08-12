@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google speech-to-text audio transcripts integration
 
 > Integrate with the Google speech-to-text audio transcripts document loader using LangChain Python.
@@ -20,7 +16,7 @@ You can find more info about it on the [Speech-to-Text client libraries](https:/
 
 Follow the [quickstart guide](https://cloud.google.com/speech-to-text/v2/docs/sync-recognize) in the Google Cloud documentation to create a project and enable the API.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-community[speech]
 ```
 
@@ -30,7 +26,7 @@ The `SpeechToTextLoader` must include the `project_id` and `file_path` arguments
 
 Only synchronous requests are supported by the loader, which has a [limit of 60 seconds or 10MB](https://cloud.google.com/speech-to-text/v2/docs/sync-recognize#:~:text=60%20seconds%20and/or%2010%20MB) per audio file.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import SpeechToTextLoader
 
 project_id = "<PROJECT_ID>"
@@ -46,7 +42,7 @@ Note: Calling `loader.load()` blocks until the transcription is finished.
 
 The transcribed text is available in the `page_content`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs[0].page_content
 ```
 
@@ -56,11 +52,11 @@ docs[0].page_content
 
 The `metadata` contains the full JSON response with more meta information:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 docs[0].metadata
 ```
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   'language_code': 'en-US',
   'result_end_offset': datetime.timedelta(seconds=1)
@@ -80,7 +76,7 @@ If you don't specify a `config`, the following options will be selected automati
 * Audio Encoding: Automatically Detected
 * Automatic Punctuation: Enabled
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.cloud.speech_v2 import (
     AutoDetectDecodingConfig,
     RecognitionConfig,
@@ -116,12 +112,8 @@ loader = SpeechToTextLoader(
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_speech_to_text.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/document_loaders/google_speech_to_text.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Overview
-
-> Build generative UIs with real-time streaming from LangChain agents
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/overview)
+Build generative UIs with real-time streaming from LangChain agents
 
 Build rich, interactive frontends for agents created with `createAgent`. These
 patterns cover everything from basic message rendering to advanced workflows
@@ -17,15 +13,14 @@ agent's durable thread state, tool-call lifecycle, interrupts, checkpoint
 history, and custom state values, so your UI can become a control plane for
 long-running agent work.
 
-<Note>
-  These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
-</Note>
+> [!NOTE]
+> These patterns use the v1 frontend SDK packages. If you are using an earlier version, see the migration guides for [React](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-react/docs/v1-migration.md), [Vue](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-vue/docs/v1-migration.md), [Svelte](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-svelte/docs/v1-migration.md), and [Angular](https://github.com/langchain-ai/langgraphjs/blob/main/libs/sdk-angular/docs/v1-migration.md).
 
 ## Architecture
 
 Every pattern follows the same architecture: a `createAgent` backend streams state to a frontend via the SDK stream API.
 
-```mermaid theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 %%{
   init: {
     "fontFamily": "monospace",
@@ -68,48 +63,46 @@ need:
 These primitives let you design UIs where users can inspect, steer, pause,
 resume, and fork agent work while it is happening.
 
-<CodeGroup>
-  ```python agent.py theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain import create_agent
-  from langgraph.checkpoint.memory import MemorySaver
+```python
+from langchain import create_agent
+from langgraph.checkpoint.memory import MemorySaver
 
-  agent = create_agent(
-      model="openai:gpt-5.5",
-      tools=[get_weather, search_web],
-      checkpointer=MemorySaver(),
-  )
-  ```
+agent = create_agent(
+    model="openai:gpt-5.5",
+    tools=[get_weather, search_web],
+    checkpointer=MemorySaver(),
+)
+```
 
-  ```ts types.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  export interface GraphState {
-    messages: BaseMessage[];
-  }
-  ```
+```ts
+export interface GraphState {
+  messages: BaseMessage[];
+}
+```
 
-  ```tsx Chat.tsx theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { useStream } from "@langchain/react";
-  import type { GraphState } from "./types";
+```tsx
+import { useStream } from "@langchain/react";
+import type { GraphState } from "./types";
 
-  function Chat() {
-    const stream = useStream<GraphState>({
-      apiUrl: "http://localhost:2024",
-      assistantId: "agent",
-    });
+function Chat() {
+  const stream = useStream<GraphState>({
+    apiUrl: "http://localhost:2024",
+    assistantId: "agent",
+  });
 
-    return (
-      <div>
-        {stream.messages.map((msg) => (
-          <Message key={msg.id} message={msg} />
-        ))}
-      </div>
-    );
-  }
-  ```
-</CodeGroup>
+  return (
+    <div>
+      {stream.messages.map((msg) => (
+        <Message key={msg.id} message={msg} />
+      ))}
+    </div>
+  );
+}
+```
 
 React, Vue, and Svelte use `useStream`. Angular uses `injectStream`:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { useStream } from "@langchain/react";      // React
 import { useStream } from "@langchain/vue";        // Vue
 import { useStream } from "@langchain/svelte";     // Svelte
@@ -122,7 +115,7 @@ Pass a type parameter to [`useStream`](https://reference.langchain.com/javascrip
 
 Define a TypeScript interface that matches your agent's state schema and pass it as the type parameter:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import type { BaseMessage } from "langchain";
 
 interface AgentState {
@@ -139,7 +132,7 @@ Use the graph name from `langgraph.json` as `assistantId`. In the pattern exampl
 
 If your agent exposes custom state keys, extend the interface:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import type { BaseMessage, Todo } from "langchain";
 
 interface AgentState {
@@ -152,63 +145,44 @@ interface AgentState {
 
 ### Render messages and output
 
-<CardGroup cols={3}>
-  <Card title="Markdown messages" icon="markdown" href="/oss/python/langchain/frontend/markdown-messages">
-    Parse and render streamed markdown with proper formatting and code highlighting.
-  </Card>
+#### [Markdown messages](https://docs.langchain.com/oss/python/langchain/frontend/markdown-messages)
+Parse and render streamed markdown with proper formatting and code highlighting.
 
-  <Card title="Structured output" icon="layout-grid" href="/oss/python/langchain/frontend/structured-output">
-    Render typed agent responses as custom UI components instead of plain text.
-  </Card>
+#### [Structured output](https://docs.langchain.com/oss/python/langchain/frontend/structured-output)
+Render typed agent responses as custom UI components instead of plain text.
 
-  <Card title="Reasoning tokens" icon="brain" href="/oss/python/langchain/frontend/reasoning-tokens">
-    Display model thinking processes in collapsible blocks.
-  </Card>
+#### [Reasoning tokens](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens)
+Display model thinking processes in collapsible blocks.
 
-  <Card title="Generative UI" icon="wand" href="/oss/python/langchain/frontend/generative-ui-overview">
-    Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
-  </Card>
-</CardGroup>
+#### [Generative UI](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
+Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
 
 ### Display agent actions
 
-<CardGroup cols={3}>
-  <Card title="Tool calling" icon="tool" href="/oss/python/langchain/frontend/tool-calling">
-    Show tool calls as rich, type-safe UI cards with loading and error states.
-  </Card>
+#### [Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling)
+Show tool calls as rich, type-safe UI cards with loading and error states.
 
-  <Card title="Headless tools" icon="device-desktop" href="/oss/python/langchain/frontend/headless-tools">
-    Run browser and device APIs on the client while keeping typed tool schemas on the agent.
-  </Card>
+#### [Headless tools](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools)
+Run browser and device APIs on the client while keeping typed tool schemas on the agent.
 
-  <Card title="Human-in-the-loop" icon="user-check" href="/oss/python/langchain/frontend/human-in-the-loop">
-    Pause the agent for human review with approve, reject, and edit workflows.
-  </Card>
-</CardGroup>
+#### [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop)
+Pause the agent for human review with approve, reject, and edit workflows.
 
 ### Manage conversations
 
-<CardGroup cols={3}>
-  <Card title="Branching chat" icon="git-branch" href="/oss/python/langchain/frontend/branching-chat">
-    Edit messages, regenerate responses, and navigate conversation branches.
-  </Card>
+#### [Branching chat](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat)
+Edit messages, regenerate responses, and navigate conversation branches.
 
-  <Card title="Message queues" icon="list-check" href="/oss/python/langchain/frontend/message-queues">
-    Queue multiple messages while the agent processes them sequentially.
-  </Card>
-</CardGroup>
+#### [Message queues](https://docs.langchain.com/oss/python/langchain/frontend/message-queues)
+Queue multiple messages while the agent processes them sequentially.
 
 ### Advanced streaming
 
-<CardGroup cols={3}>
-  <Card title="Join & rejoin streams" icon="plug-connected" href="/oss/python/langchain/frontend/join-rejoin">
-    Disconnect from and reconnect to running agent streams without losing progress.
-  </Card>
+#### [Join & rejoin streams](https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin)
+Disconnect from and reconnect to running agent streams without losing progress.
 
-  <Card title="Time travel" icon="clock" href="/oss/python/langchain/frontend/time-travel">
-    Inspect, navigate, and resume from any checkpoint in the conversation history.
-  </Card>
-</CardGroup>
+#### [Time travel](https://docs.langchain.com/oss/python/langchain/frontend/time-travel)
+Inspect, navigate, and resume from any checkpoint in the conversation history.
 
 ## Choosing a frontend pattern
 
@@ -216,12 +190,12 @@ Start from the UX question your application needs to answer:
 
 | If users need to...                        | Start with                                                                                                                                                                                                                   |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Understand what the agent is doing         | [Tool calling](/oss/python/langchain/frontend/tool-calling) and [reasoning tokens](/oss/python/langchain/frontend/reasoning-tokens)                                                                                          |
-| Safely approve sensitive actions           | [Human-in-the-loop](/oss/python/langchain/frontend/human-in-the-loop)                                                                                                                                                        |
-| Send work while a run is active            | [Message queues](/oss/python/langchain/frontend/message-queues)                                                                                                                                                              |
-| Leave and come back to long-running work   | [Join & rejoin streams](/oss/python/langchain/frontend/join-rejoin)                                                                                                                                                          |
-| Edit or retry from an earlier turn         | [Branching chat](/oss/python/langchain/frontend/branching-chat) and [time travel](/oss/python/langchain/frontend/time-travel)                                                                                                |
-| Render state as an application, not a chat | [Structured output](/oss/python/langchain/frontend/structured-output), [generative UI](/oss/python/langchain/frontend/generative-ui-overview), and [Deep Agents frontend patterns](/oss/python/deepagents/frontend/overview) |
+| Understand what the agent is doing         | [Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling) and [reasoning tokens](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens)                                                                                          |
+| Safely approve sensitive actions           | [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop)                                                                                                                                                        |
+| Send work while a run is active            | [Message queues](https://docs.langchain.com/oss/python/langchain/frontend/message-queues)                                                                                                                                                              |
+| Leave and come back to long-running work   | [Join & rejoin streams](https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin)                                                                                                                                                          |
+| Edit or retry from an earlier turn         | [Branching chat](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat) and [time travel](https://docs.langchain.com/oss/python/langchain/frontend/time-travel)                                                                                                |
+| Render state as an application, not a chat | [Structured output](https://docs.langchain.com/oss/python/langchain/frontend/structured-output), [generative UI](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview), and [Deep Agents frontend patterns](https://docs.langchain.com/oss/python/deepagents/frontend/overview) |
 
 ## Integrations
 
@@ -230,28 +204,19 @@ framework. Component libraries can own the presentation layer while LangChain's
 SDK owns the agent runtime state, resumability, interrupts, and checkpoint
 semantics underneath.
 
-<CardGroup cols={3}>
-  <Card title="AI Elements" icon="package" href="/oss/python/langchain/frontend/integrations/ai-elements">
-    Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
-  </Card>
+#### [AI Elements](https://docs.langchain.com/oss/python/langchain/frontend/integrations/ai-elements)
+Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
 
-  <Card title="assistant-ui" icon="package" href="/oss/python/langchain/frontend/integrations/assistant-ui">
-    Headless React framework with built-in thread management, branching, and attachment support.
-  </Card>
+#### [assistant-ui](https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui)
+Headless React framework with built-in thread management, branching, and attachment support.
 
-  <Card title="OpenUI" icon="package" href="/oss/python/langchain/frontend/integrations/openui">
-    Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
-  </Card>
-</CardGroup>
+#### [OpenUI](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
+Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/overview.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

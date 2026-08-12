@@ -1,30 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatVertexAI integration
 
 > Integrate with the ChatVertexAI chat model using LangChain Python.
 
-<Danger>
-  **Deprecated**
-
-  This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](/oss/python/integrations/chat/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
-</Danger>
+> [!CAUTION]
+> **Deprecated**
+>
+> This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 Vertex AI exposes all foundational models available in Google Cloud, like `gemini-2.5-pro`, `gemini-2.5-flash`, etc. For a full and updated list of available models visit [VertexAI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
 
-<Info>
-  **Google Cloud VertexAI vs Gemini API**
+> [!NOTE]
+> **Google Cloud VertexAI vs Gemini API**
+>
+> The Google Cloud VertexAI integration is separate from the [Google Gemini API](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
 
-  The Google Cloud VertexAI integration is separate from the [Google Gemini API](/oss/python/integrations/chat/google_generative_ai/). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
-</Info>
-
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-community/chat_models/vertexai/ChatVertexAI) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatVertexAI`](https://reference.langchain.com/python/langchain-community/chat_models/vertexai/ChatVertexAI) API reference.
 
 ## Overview
 
@@ -36,7 +29,7 @@ Vertex AI exposes all foundational models available in Google Cloud, like `gemin
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -55,9 +48,9 @@ This codebase uses the `google.auth` library which first looks for the applicati
 
 For more information, see the `google.auth` [API reference](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html#module-google.auth).
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -66,7 +59,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain VertexAI integration lives in the `langchain-google-vertexai` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-vertexai
 ```
 
@@ -74,7 +67,7 @@ pip install -qU langchain-google-vertexai
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import ChatVertexAI
 
 llm = ChatVertexAI(
@@ -89,7 +82,7 @@ llm = ChatVertexAI(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -101,15 +94,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore programmer. \n", response_metadata={'is_blocked': False, 'safety_ratings': [{'category': 'HARM_CATEGORY_HATE_SPEECH', 'probability_label': 'NEGLIGIBLE', 'blocked': False}, {'category': 'HARM_CATEGORY_DANGEROUS_CONTENT', 'probability_label': 'NEGLIGIBLE', 'blocked': False}, {'category': 'HARM_CATEGORY_HARASSMENT', 'probability_label': 'NEGLIGIBLE', 'blocked': False}, {'category': 'HARM_CATEGORY_SEXUALLY_EXPLICIT', 'probability_label': 'NEGLIGIBLE', 'blocked': False}], 'usage_metadata': {'prompt_token_count': 20, 'candidates_token_count': 7, 'total_token_count': 27}}, id='run-7032733c-d05c-4f0c-a17a-6c575fdd1ae0-0', usage_metadata={'input_tokens': 20, 'output_tokens': 7, 'total_tokens': 27})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore programmer.
 ```
 
@@ -119,13 +112,12 @@ Gemini supports a range of tools that are executed server-side.
 
 ### Google search
 
-<Info>
-  **Requires `langchain-google-vertexai>=2.0.11`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-google-vertexai>=2.0.11`**
 
 Gemini can execute a Google search and use the results to [ground its responses](https://ai.google.dev/gemini-api/docs/grounding):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import ChatVertexAI
 
 llm = ChatVertexAI(model="gemini-2.5-flash").bind_tools([{"google_search": {}}])
@@ -135,13 +127,12 @@ response = llm.invoke("What is today's news?")
 
 ### Code execution
 
-<Info>
-  **Requires `langchain-google-vertexai>=2.0.25`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-google-vertexai>=2.0.25`**
 
 Gemini can [generate and execute Python code](https://ai.google.dev/gemini-api/docs/code-execution):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import ChatVertexAI
 
 llm = ChatVertexAI(model="gemini-2.5-flash").bind_tools([{"code_execution": {}}])
@@ -157,12 +148,8 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/google_vertex_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

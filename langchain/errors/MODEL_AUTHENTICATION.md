@@ -1,12 +1,7 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MODEL_AUTHENTICATION
 
-<Note>
-  Currently only used in `langchainjs` (JavaScript/TypeScript).
-</Note>
+> [!NOTE]
+> Currently only used in `langchainjs` (JavaScript/TypeScript).
 
 Your model provider is denying you access to their service.
 
@@ -22,7 +17,7 @@ This error typically occurs when there's an issue with your authentication crede
 * If using a proxy or non-standard endpoint, make sure that your custom provider does not expect an alternative authentication scheme.
 * Bypass environment variable issues by passing credentials explicitly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 model = ChatOpenAI(api_key="YOUR_KEY_HERE")
@@ -30,12 +25,8 @@ model = ChatOpenAI(api_key="YOUR_KEY_HERE")
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_AUTHENTICATION.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/errors/MODEL_AUTHENTICATION.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

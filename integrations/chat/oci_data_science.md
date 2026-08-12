@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatOCIModelDeployment integration
 
 > Integrate with the ChatOCIModelDeployment chat model using LangChain Python.
 
-This will help you get started with OCIModelDeployment [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatOCIModelDeployment` features and configurations, see the [langchain-oci package](https://github.com/oracle/langchain-oracle/tree/main/libs/oci).
+This will help you get started with OCIModelDeployment [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatOCIModelDeployment` features and configurations, see the [langchain-oci package](https://github.com/oracle/langchain-oracle/tree/main/libs/oci).
 
 [OCI Data Science](https://docs.oracle.com/en-us/iaas/data-science/using/home.htm) is a fully managed and serverless platform for data science teams to build, train, and manage machine learning models in the Oracle Cloud Infrastructure. You can use [AI Quick Actions](https://blogs.oracle.com/ai-and-datascience/post/ai-quick-actions-in-oci-data-science) to easily deploy LLMs on [OCI Data Science Model Deployment Service](https://docs.oracle.com/en-us/iaas/data-science/using/model-dep-about.htm). You may choose to deploy the model with popular inference frameworks such as vLLM or TGI. By default, the model deployment endpoint mimics the OpenAI API protocol.
 
@@ -22,7 +18,7 @@ This will help you get started with OCIModelDeployment [chat models](/oss/python
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                   depends                   |                            depends                           |                          depends                         |   depends   |   depends   |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -42,7 +38,7 @@ Make sure to have the required [policies](https://docs.oracle.com/en-us/iaas/dat
 
 You can set authentication through Oracle ADS. When you are working in OCI Data Science Notebook Session, you can leverage resource principal to access other OCI resources.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import ads
 
 # Set authentication through ads
@@ -54,7 +50,7 @@ ads.set_auth("resource_principal")
 
 Alternatively, you can configure the credentials using the following environment variables. For example, to use API key with specific profile:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 # Set authentication through environment variables
@@ -72,15 +68,13 @@ Check out [Oracle ADS docs](https://accelerated-data-science.readthedocs.io/en/l
 
 The LangChain OCIModelDeployment integration lives in the `langchain-oci` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-oci oracle-ads
-  ```
+```bash
+pip install -qU langchain-oci oracle-ads
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-oci oracle-ads
-  ```
-</CodeGroup>
+```bash
+uv add langchain-oci oracle-ads
+```
 
 ## Instantiation
 
@@ -88,7 +82,7 @@ You may instantiate the model with the generic `ChatOCIModelDeployment` or frame
 
 * Using `ChatOCIModelDeployment` when you need a generic entry point for deploying models. You can pass model parameters through `model_kwargs` during the instantiation of this class. This allows for flexibility and ease of configuration without needing to rely on framework-specific details.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeployment
 
 # Create an instance of OCI Model Deployment Endpoint
@@ -113,7 +107,7 @@ chat = ChatOCIModelDeployment(
 
 * Using framework specific class like `ChatOCIModelDeploymentVLLM`: This is suitable when you are working with a specific framework (e.g. `vLLM`) and need to pass model parameters directly through the constructor, streamlining the setup process.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeploymentVLLM
 
 # Create an instance of OCI Model Deployment Endpoint
@@ -127,7 +121,7 @@ chat = ChatOCIModelDeploymentVLLM(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -140,21 +134,21 @@ ai_msg = chat.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore programmer.", response_metadata={'token_usage': {'prompt_tokens': 44, 'total_tokens': 52, 'completion_tokens': 8}, 'model_name': 'odsc-llm', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='run-ca145168-efa9-414c-9dd1-21d10766fdd3-0')
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore programmer.
 ```
 
 ## Chaining
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 
 prompt = ChatPromptTemplate.from_messages(
@@ -177,13 +171,13 @@ chain.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='Ich liebe Programmierung.', response_metadata={'token_usage': {'prompt_tokens': 38, 'total_tokens': 48, 'completion_tokens': 10}, 'model_name': 'odsc-llm', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='run-5dd936b0-b97e-490e-9869-2ad3dd524234-0')
 ```
 
 ## Asynchronous calls
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeployment
 
 system = "You are a helpful translator that translates {input_language} to {output_language}."
@@ -204,13 +198,13 @@ await chain.ainvoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='我喜欢编程', response_metadata={'token_usage': {'prompt_tokens': 37, 'total_tokens': 50, 'completion_tokens': 13}, 'model_name': 'odsc-llm', 'system_fingerprint': '', 'finish_reason': 'stop'}, id='run-a2dc9393-f269-41a4-b908-b1d8a92cf827-0')
 ```
 
 ## Streaming calls
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sys
 
 from langchain_oci import ChatOCIModelDeployment
@@ -231,7 +225,7 @@ for chunk in chain.stream({}):
     sys.stdout.flush()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 1. California
 2. Texas
 3. Florida
@@ -241,17 +235,15 @@ for chunk in chain.stream({}):
 
 ## Structured output
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_oci import ChatOCIModelDeployment
 from pydantic import BaseModel
-
 
 class Joke(BaseModel):
     """A setup to a joke and the punchline."""
 
     setup: str
     punchline: str
-
 
 chat = ChatOCIModelDeployment(
     endpoint="https://modeldeployment.us-ashburn-1.oci.customer-oci.com/<ocid>/predict",
@@ -264,7 +256,7 @@ output = structured_llm.invoke(
 output.dict()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'setup': 'Why did the cat get stuck in the tree?',
  'punchline': 'Because it was chasing its tail!'}
 ```
@@ -279,12 +271,8 @@ For comprehensive details on all features and configurations, see the [langchain
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/oci_data_science.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/oci_data_science.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

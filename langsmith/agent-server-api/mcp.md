@@ -1,16 +1,10 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # MCP Get
 
 > Implemented according to the Streamable HTTP Transport specification.
 
-
-
 ## OpenAPI
 
-````yaml /langsmith/agent-server-openapi.json get /mcp/
+````yaml
 openapi: 3.1.0
 info:
   title: LangSmith Deployment

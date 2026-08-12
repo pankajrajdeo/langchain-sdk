@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Graph RAG integration
 
 > Integrate with the Graph RAG retriever using LangChain Python.
@@ -13,7 +9,7 @@ supported features and configurations, refer to the
 ## Overview
 
 The `GraphRetriever` from the `langchain-graph-retriever` package provides a LangChain
-[retriever](/oss/python/deepagents/retrieval/) that combines **unstructured** similarity search
+[retriever](https://docs.langchain.com/oss/python/deepagents/retrieval/) that combines **unstructured** similarity search
 on vectors with **structured** traversal of metadata properties. This enables graph-based
 retrieval over an **existing** vector store.
 
@@ -47,15 +43,13 @@ retrieval over an **existing** vector store.
 
 This retriever lives in the `langchain-graph-retriever` package.
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-graph-retriever
-  ```
+```bash
+pip install -qU langchain-graph-retriever
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-graph-retriever
-  ```
-</CodeGroup>
+```bash
+uv add langchain-graph-retriever
+```
 
 ## Instantiation
 
@@ -67,22 +61,20 @@ Documents about animals.
 <details>
   <summary>Toggle for Details</summary>
 
-  <div>
-    1. Ensure you have Python 3.10+ installed
+  1. Ensure you have Python 3.10+ installed
 
-    2. Install the following package that provides sample data.
-       ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-       pip install -qU graph_rag_example_helpers
-       ```
+  2. Install the following package that provides sample data.
+```bash
+     pip install -qU graph_rag_example_helpers
+```
 
-    3. Download the test documents:
-       ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-       from graph_rag_example_helpers.datasets.animals import fetch_documents
-       animals = fetch_documents()
-       ```
+  3. Download the test documents:
+```python
+     from graph_rag_example_helpers.datasets.animals import fetch_documents
+     animals = fetch_documents()
+```
 
-    4.     <EmbeddingTabs />
-  </div>
+  4.     
 </details>
 
 ### Populating the vector store
@@ -93,103 +85,92 @@ For help on choosing one of the vector stores below, or to add support for your
 vector store, consult the documentation about
 [Adapters and Supported Stores](https://datastax.github.io/graph-rag/guide/adapters/).
 
-<Tabs groupId="vector-store" queryString>
-  <Tab title="AstraDB">
-    <div style={{ paddingLeft: '30px' }}>
-      Install the `langchain-graph-retriever` package with the `astra` extra:
+#### AstraDB
+Install the `langchain-graph-retriever` package with the `astra` extra:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install "langchain-graph-retriever[astra]"
-      ```
+```bash
+pip install "langchain-graph-retriever[astra]"
+```
 
-      Then create a vector store and load the test documents:
+Then create a vector store and load the test documents:
 
-      ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langchain_astradb import AstraDBVectorStore
+```python
+from langchain_astradb import AstraDBVectorStore
 
-      vector_store = AstraDBVectorStore.from_documents(
-          documents=animals,
-          embedding=embeddings,
-          collection_name="animals",
-          api_endpoint=ASTRA_DB_API_ENDPOINT,
-          token=ASTRA_DB_APPLICATION_TOKEN,
-      )
-      ```
+vector_store = AstraDBVectorStore.from_documents(
+    documents=animals,
+    embedding=embeddings,
+    collection_name="animals",
+    api_endpoint=ASTRA_DB_API_ENDPOINT,
+    token=ASTRA_DB_APPLICATION_TOKEN,
+)
+```
 
-      For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
-      consult the [AstraDB Vector Store Guide](/oss/python/integrations/vectorstores/astradb).
+For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
+consult the [AstraDB Vector Store Guide](https://docs.langchain.com/oss/python/integrations/vectorstores/astradb).
 
-      :::note
-      For faster initial testing, consider using the **InMemory** Vector Store.
-      :::
-    </div>
-  </Tab>
+:::note
+For faster initial testing, consider using the **InMemory** Vector Store.
+:::
 
-  <Tab title="Chroma">
-    <div style={{ paddingLeft: '30px' }}>
-      Install the `langchain-graph-retriever` package with the `chroma` extra:
+#### Chroma
+Install the `langchain-graph-retriever` package with the `chroma` extra:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install "langchain-graph-retriever[chroma]"
-      ```
+```bash
+pip install "langchain-graph-retriever[chroma]"
+```
 
-      Then create a vector store and load the test documents:
+Then create a vector store and load the test documents:
 
-      ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langchain_chroma.vectorstores import Chroma
-      from langchain_graph_retriever.transformers import ShreddingTransformer
+```python
+from langchain_chroma.vectorstores import Chroma
+from langchain_graph_retriever.transformers import ShreddingTransformer
 
-      vector_store = Chroma.from_documents(
-          documents=list(ShreddingTransformer().transform_documents(animals)),
-          embedding=embeddings,
-          collection_name="animals",
-      )
-      ```
+vector_store = Chroma.from_documents(
+    documents=list(ShreddingTransformer().transform_documents(animals)),
+    embedding=embeddings,
+    collection_name="animals",
+)
+```
 
-      For help creating a Chroma connection, consult the [Chroma Vector Store Guide](/oss/python/integrations/vectorstores/chroma).
+For help creating a Chroma connection, consult the [Chroma Vector Store Guide](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma).
 
-      :::note
-      Chroma doesn't support searching in nested metadata. Because of this
-      it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
-      when inserting documents.
-      :::
-    </div>
-  </Tab>
+:::note
+Chroma doesn't support searching in nested metadata. Because of this
+it is necessary to use the [`ShreddingTransformer`](https://datastax.github.io/graph-rag/reference/langchain_graph_retriever/transformers/#langchain_graph_retriever.transformers.shredding.ShreddingTransformer)
+when inserting documents.
+:::
 
-  <Tab title="InMemory">
-    <div style={{ paddingLeft: '30px' }}>
-      Install the `langchain-graph-retriever` package:
+#### InMemory
+Install the `langchain-graph-retriever` package:
 
-      ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      pip install "langchain-graph-retriever"
-      ```
+```bash
+pip install "langchain-graph-retriever"
+```
 
-      Then create a vector store and load the test documents:
+Then create a vector store and load the test documents:
 
-      ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      from langchain_core.vectorstores import InMemoryVectorStore
+```python
+from langchain_core.vectorstores import InMemoryVectorStore
 
-      vector_store = InMemoryVectorStore.from_documents(
-          documents=animals,
-          embedding=embeddings,
-      )
-      ```
+vector_store = InMemoryVectorStore.from_documents(
+    documents=animals,
+    embedding=embeddings,
+)
+```
 
-      :::tip
-      Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
-      but it isn't recommended for production use. Instead it is recommended to use
-      **AstraDB** or **OpenSearch**.
-      :::
-    </div>
-  </Tab>
-</Tabs>
+:::tip
+Using the `InMemoryVectorStore` is the fastest way to get started with Graph RAG
+but it isn't recommended for production use. Instead it is recommended to use
+**AstraDB** or **OpenSearch**.
+:::
 
 ### Graph traversal
 
 This graph retriever starts with a single animal that best matches the query, then
 traverses to other animals sharing the same `habitat` and/or `origin`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from graph_retriever.strategies import Eager
 from langchain_graph_retriever import GraphRetriever
 
@@ -207,14 +188,14 @@ that are at most 2 steps away from the first animal (`max_depth=2`).
 The `edges` define how metadata values can be used for traversal. In this case, every
 animal is connected to other animals with the same `habitat` and/or `origin`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = traversal_retriever.invoke("what animals could be found near a capybara?")
 
 for doc in results:
     print(f"{doc.id}: {doc.page_content}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 capybara: capybaras are the largest rodents in the world and are highly social animals.
 heron: herons are wading birds known for their long legs and necks, often seen near water.
 crocodile: crocodiles are large reptiles with powerful jaws and a long lifespan, often living over 70 years.
@@ -234,7 +215,7 @@ Document Relevance and the quality of the answer from the LLM.
 
 When `max_depth=0`, the graph traversing retriever behaves like a standard retriever:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 standard_retriever = GraphRetriever(
     store = vector_store,
     edges = [("habitat", "habitat"), ("origin", "origin")],
@@ -248,20 +229,20 @@ are ignored in this case.
 
 This is essentially the same as:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 standard_retriever = vector_store.as_retriever(search_kwargs={"k":5})
 ```
 
 For either case, invoking the retriever returns:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results = standard_retriever.invoke("what animals could be found near a capybara?")
 
 for doc in results:
     print(f"{doc.id}: {doc.page_content}")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 capybara: capybaras are the largest rodents in the world and are highly social animals.
 iguana: iguanas are large herbivorous lizards often found basking in trees and near water.
 guinea pig: guinea pigs are small rodents often kept as pets due to their gentle and social nature.
@@ -287,12 +268,8 @@ To explore all available parameters and advanced configurations, refer to the
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/graph_rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/graph_rag.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

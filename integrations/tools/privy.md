@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Privy integration
 
 > Integrate with the Privy tool using LangChain Python.
@@ -33,7 +29,7 @@ Trusted by leading Web3 applications, Privy handles secure key generation, multi
 
 ### Quickstart
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from langchain_privy import PrivyWalletTool
 from langchain.agents import create_agent
@@ -67,13 +63,13 @@ Head to [Privy's dashboard](https://dashboard.privy.io) to sign up and create a 
 
 1. Install the package:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-privy
 ```
 
 2. Set your credentials:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import getpass
 
@@ -83,7 +79,7 @@ os.environ["PRIVY_APP_SECRET"] = getpass.getpass("Enter your Privy App Secret: "
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_privy import PrivyWalletTool
 
 # Automatically creates a new Ethereum wallet
@@ -101,7 +97,7 @@ existing_tool = PrivyWalletTool(wallet_id="wal_abc123...")
 
 ### Available operations
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Get wallet address for any chain
 tool.invoke({
     "operation": "get_wallet_address",
@@ -133,7 +129,7 @@ tool.invoke({
 
 ## Use within an agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from langchain_privy import PrivyWalletTool
 from langchain.agents import create_agent
@@ -166,12 +162,8 @@ agent.invoke({
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/privy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/privy.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

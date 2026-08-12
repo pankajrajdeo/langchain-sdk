@@ -1,15 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Open-ended generative UI
-
-> Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
+Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum
 
 ## Overview
 
 Open-ended generative UI is at the agent-created end of the
-[generative UI spectrum](/oss/python/langchain/frontend/generative-ui-overview). The interface is
+[generative UI spectrum](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview). The interface is
 authored outside your application, for example by an MCP server, and your frontend
 renders it inside a sandbox. Neither you nor the agent writes the components: a
 third party ships them, and your app hosts them.
@@ -29,8 +25,8 @@ Reach for open-ended generative UI when you want to surface capabilities and
 interfaces that live outside your application and evolve independently of it, such
 as tools published by an ecosystem of MCP servers. When you need to guarantee
 branding, accessibility, or layout, move back along the spectrum toward
-[declarative](/oss/python/langchain/frontend/declarative-generative-ui) or
-[controlled](/oss/python/langchain/frontend/controlled-generative-ui) generative UI, where
+[declarative](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui) or
+[controlled](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui) generative UI, where
 your application owns the components.
 
 ## MCP Apps
@@ -54,18 +50,14 @@ it contains the expressive range rather than limiting it.
 
 ## See also
 
-* [Generative UI overview](/oss/python/langchain/frontend/generative-ui-overview)
-* [Controlled generative UI](/oss/python/langchain/frontend/controlled-generative-ui)
-* [Declarative generative UI](/oss/python/langchain/frontend/declarative-generative-ui)
+* [Generative UI overview](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
+* [Controlled generative UI](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
+* [Declarative generative UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/open-ended-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/frontend/open-ended-generative-ui.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

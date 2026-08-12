@@ -1,26 +1,20 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Connect to an external Redis or Valkey database
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-external-redis)
 LangSmith uses Redis to back our queuing/caching operations. By default, LangSmith Self-Hosted will use an internal Redis instance. However, you can configure LangSmith to use an external Redis instance. By configuring an external Redis instance, you can more easily manage backups, scaling, and other operational tasks for your Redis instance.
 
-[Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](#requirements) for supported versions.
+[Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](https://docs.langchain.com/langsmith/self-host-external-redis#requirements) for supported versions.
 
-<Warning>
-  Each LangSmith installation must use its own dedicated Redis instance. Redis cannot be shared across separate LangSmith installations (for example, between an existing and new cluster during a migration). Sharing it across installations causes deployment tasks to be routed to the wrong cluster.
-</Warning>
+> [!WARNING]
+> Each LangSmith installation must use its own dedicated Redis instance. Redis cannot be shared across separate LangSmith installations (for example, between an existing and new cluster during a migration). Sharing it across installations causes deployment tasks to be routed to the wrong cluster.
 
-<Tip>
-  **If you're using a managed Redis service**, we recommend:
-
-  * [Amazon ElastiCache](https://aws.amazon.com/elasticache/redis/) (AWS)
-  * [Google Cloud Memorystore](https://cloud.google.com/memorystore) (GCP)
-  * [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/) (Azure)
-
-  For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](#iam-authentication).
-</Tip>
+> [!TIP]
+> **If you're using a managed Redis service**, we recommend:
+>
+> * [Amazon ElastiCache](https://aws.amazon.com/elasticache/redis/) (AWS)
+> * [Google Cloud Memorystore](https://cloud.google.com/memorystore) (GCP)
+> * [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/) (Azure)
+>
+> For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication).
 
 ## Requirements
 
@@ -34,14 +28,13 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
 
 * We support both Standalone and Redis Cluster (including Valkey Cluster). See the appropriate sections for deployment instructions.
 
-* We support no authentication, password, and [IAM/Workload Identity](#iam-authentication) authentication.
+* We support no authentication, password, and [IAM/Workload Identity](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication) authentication.
 
 * By default, we recommend an instance with at least 2 vCPUs and 8GB of memory. However, the actual requirements will depend on your tracing workload. We recommend monitoring your Redis instance and scaling up as needed.
 
-<Tip>
-  If you enable [LangSmith Sandboxes](/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
-  With `noeviction`, Redis writes can fail when the instance reaches max memory, so keep enough memory headroom for sandbox metadata growth.
-</Tip>
+> [!TIP]
+> If you enable [LangSmith Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
+> With `noeviction`, Redis writes can fail when the instance reaches max memory, so keep enough memory headroom for sandbox metadata growth.
 
 ## Standalone Redis
 
@@ -73,13 +66,13 @@ Note: If your Standalone Redis requires authentication or TLS, include these dir
 
 For example:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 rediss://langsmith-redis:6380/0?password=foo
 ```
 
 For IAM authentication, use the identity as the username (no password):
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 rediss://<iam-identity>@host:6380
 ```
 
@@ -87,7 +80,7 @@ rediss://<iam-identity>@host:6380
 
 With your connection string in hand, you can configure your LangSmith instance to use an external Redis instance. You can do this by modifying the `values` file for your LangSmith Helm Chart installation.
 
-```yaml Helm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 redis:
   external:
     enabled: true
@@ -96,28 +89,26 @@ redis:
 
 You can also store the connection URL in an existing Kubernetes Secret and reference it in your Helm values.
 
-<CodeGroup>
-  ```yaml Helm (using an existing Secret) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  redis:
-    external:
-      enabled: true
-      # Name of an existing Secret that contains the connection URL
-      existingSecretName: "my-redis-secret"
-      # Key in the Secret that stores the connection URL (default shown)
-      connectionUrlSecretKey: "connection_url"
-  ```
+```yaml
+redis:
+  external:
+    enabled: true
+    # Name of an existing Secret that contains the connection URL
+    existingSecretName: "my-redis-secret"
+    # Key in the Secret that stores the connection URL (default shown)
+    connectionUrlSecretKey: "connection_url"
+```
 
-  ```yaml Kubernetes Secret theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: my-redis-secret
-  type: Opaque
-  stringData:
-    # Full connection URL, e.g., using TLS with password
-    connection_url: "rediss://langsmith-redis:6380/0?password=foo"
-  ```
-</CodeGroup>
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-redis-secret
+type: Opaque
+stringData:
+  # Full connection URL, e.g., using TLS with password
+  connection_url: "rediss://langsmith-redis:6380/0?password=foo"
+```
 
 Once configured, you should be able to reinstall your LangSmith instance. If everything is configured correctly, your LangSmith instance should now be using your external Redis instance.
 
@@ -129,13 +120,13 @@ As of LangSmith helm version **0.12.25**, we officially support **Redis Cluster*
 
 When using Redis Cluster, provide a list of node hostnames and ports. Each node URI must be in the form:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 redis://hostname:port
 ```
 
 For example:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 redis://redis-node-0:6379
 redis://redis-node-1:6379
 redis://redis-node-2:6379
@@ -153,55 +144,51 @@ When connecting to an external Redis Cluster, configure the Helm values under `r
 * Provide node URIs and (optionally) a password directly in `values.yaml`.
 * Or reference an existing Kubernetes `Secret` containing node URIs and password.
 
-<CodeGroup>
-  ```yaml Helm (inline values) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  redis:
-    external:
+```yaml
+redis:
+  external:
+    enabled: true
+    cluster:
       enabled: true
-      cluster:
-        enabled: true
-        # List of cluster node URIs. Format: redis://host:port
-        nodeUris:
-          - "redis://redis-node-0:6379"
-          - "redis://redis-node-1:6379"
-          - "redis://redis-node-2:6379"
-        # Optional. If your cluster requires auth, set a password or use a Secret (recommended).
-        password: "your_redis_password"
-        # TLS is enabled by default. Set to false if your cluster does not use TLS.
-        tlsEnabled: true
-  ```
+      # List of cluster node URIs. Format: redis://host:port
+      nodeUris:
+        - "redis://redis-node-0:6379"
+        - "redis://redis-node-1:6379"
+        - "redis://redis-node-2:6379"
+      # Optional. If your cluster requires auth, set a password or use a Secret (recommended).
+      password: "your_redis_password"
+      # TLS is enabled by default. Set to false if your cluster does not use TLS.
+      tlsEnabled: true
+```
 
-  ```yaml Helm (using an existing Secret) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  redis:
-    external:
+```yaml
+redis:
+  external:
+    enabled: true
+    # Name of an existing Secret that contains cluster connection details
+    existingSecretName: "my-redis-cluster-secret"
+    cluster:
       enabled: true
-      # Name of an existing Secret that contains cluster connection details
-      existingSecretName: "my-redis-cluster-secret"
-      cluster:
-        enabled: true
-        # Keys in the Secret. Defaults shown here; override if your Secret uses different keys.
-        nodeUrisSecretKey: "redis_cluster_node_uris"
-        passwordSecretKey: "redis_cluster_password"
-        tlsEnabled: true
-  ```
-</CodeGroup>
+      # Keys in the Secret. Defaults shown here; override if your Secret uses different keys.
+      nodeUrisSecretKey: "redis_cluster_node_uris"
+      passwordSecretKey: "redis_cluster_password"
+      tlsEnabled: true
+```
 
 If using an existing Secret, it should contain:
 
-<CodeGroup>
-  ```yaml Kubernetes Secret theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: my-redis-cluster-secret
-  type: Opaque
-  stringData:
-    # JSON array of node URIs (as a string)
-    redis_cluster_node_uris: '["redis://redis-node-0:6379","redis://redis-node-1:6379","redis://redis-node-2:6379"]'
-    # Optional if your cluster requires a password
-    redis_cluster_password: "your_redis_password"
-  ```
-</CodeGroup>
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-redis-cluster-secret
+type: Opaque
+stringData:
+  # JSON array of node URIs (as a string)
+  redis_cluster_node_uris: '["redis://redis-node-0:6379","redis://redis-node-1:6379","redis://redis-node-2:6379"]'
+  # Optional if your cluster requires a password
+  redis_cluster_password: "your_redis_password"
+```
 
 ## Azure managed Redis
 
@@ -213,7 +200,7 @@ LangSmith connects to OSS clustering policy instances using Redis Cluster mode.
 
 As of LangSmith helm chart version **0.13.33**, `ssl_check_hostname=false` is supported as a node URI parameter. In our testing, the OSS clustering policy requires disabling SSL hostname verification. Azure's proxy resolves connections to internal node IPs that are not present in the certificate's SAN, causing hostname verification to fail.
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 redis:
   external:
     enabled: true
@@ -228,7 +215,7 @@ redis:
 
 As of LangSmith helm chart version **0.13.33**, LangSmith supports Azure Managed Redis with the EnterpriseCluster policy. This policy exposes a single endpoint that handles sharding internally. LangSmith must connect to it as a standalone (single-instance) client, but it does not support cluster unsafe operations such as MULTI/EXEC. Set `redis.external.clusterSafeMode: true` to disable unsafe cluster operations.
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 redis:
   external:
     enabled: true
@@ -237,11 +224,11 @@ redis:
     clusterSafeMode: true
 ```
 
-For Microsoft Entra (IAM) authentication with EnterpriseCluster, see the [Azure tab in IAM authentication](#azure-cache-for-redis) and include `clusterSafeMode: true` in your Helm values.
+For Microsoft Entra (IAM) authentication with EnterpriseCluster, see the [Azure tab in IAM authentication](https://docs.langchain.com/langsmith/self-host-external-redis#azure-cache-for-redis) and include `clusterSafeMode: true` in your Helm values.
 
 ## TLS with Redis
 
-Use this section to configure TLS for Redis connections. For mounting internal/public CAs so LangSmith trusts your Redis server certificate, see [Configure custom TLS certificates](/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls).
+Use this section to configure TLS for Redis connections. For mounting internal/public CAs so LangSmith trusts your Redis server certificate, see [Configure custom TLS certificates](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls).
 
 ### Server TLS (one-way)
 
@@ -251,58 +238,55 @@ To validate the Redis server certificate:
 * For Standalone Redis, use `rediss://` in the connection URL.
 * For Redis Cluster, `redis.external.cluster.tlsEnabled` defaults to `true`. Ensure it is not set to `false`.
 
-<Warning>
-  Mount a custom CA only when your Redis server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
-</Warning>
+> [!WARNING]
+> Mount a custom CA only when your Redis server uses an internal or private CA. Publicly trusted CAs do not require this configuration.
 
-<CodeGroup>
-  ```yaml Helm (Standalone - server TLS) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  config:
-    customCa:
-      secretName: "langsmith-custom-ca"  # Secret containing your CA bundle
-      secretKey: "ca.crt"    # Key in the Secret with the CA bundle
-  redis:
-    external:
+```yaml
+config:
+  customCa:
+    secretName: "langsmith-custom-ca"  # Secret containing your CA bundle
+    secretKey: "ca.crt"    # Key in the Secret with the CA bundle
+redis:
+  external:
+    enabled: true
+    # Use rediss:// and include password if required by your server
+    connectionUrl: "rediss://host:6380/0?password=<PASSWORD>"
+```
+
+```yaml
+config:
+  customCa:
+    secretName: "langsmith-custom-ca"  # Secret containing your CA bundle
+    secretKey: "ca.crt"    # Key in the Secret with the CA bundle
+redis:
+  external:
+    enabled: true
+    cluster:
       enabled: true
-      # Use rediss:// and include password if required by your server
-      connectionUrl: "rediss://host:6380/0?password=<PASSWORD>"
-  ```
+      tlsEnabled: true
+      nodeUris:
+        - "redis://redis-node-0:6379"
+        - "redis://redis-node-1:6379"
+        - "redis://redis-node-2:6379"
+      password: "<PASSWORD>"
+```
 
-  ```yaml Helm (Cluster - server TLS) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  config:
-    customCa:
-      secretName: "langsmith-custom-ca"  # Secret containing your CA bundle
-      secretKey: "ca.crt"    # Key in the Secret with the CA bundle
-  redis:
-    external:
-      enabled: true
-      cluster:
-        enabled: true
-        tlsEnabled: true
-        nodeUris:
-          - "redis://redis-node-0:6379"
-          - "redis://redis-node-1:6379"
-          - "redis://redis-node-2:6379"
-        password: "<PASSWORD>"
-  ```
-
-  ```yaml Kubernetes Secret (CA bundle) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: langsmith-custom-ca
-  type: Opaque
-  stringData:
-    ca.crt: |
-      -----BEGIN CERTIFICATE-----
-      <ROOT_OR_INTERMEDIATE_CA_CERT_CHAIN>
-      -----END CERTIFICATE-----
-  ```
-</CodeGroup>
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: langsmith-custom-ca
+type: Opaque
+stringData:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    <ROOT_OR_INTERMEDIATE_CA_CERT_CHAIN>
+    -----END CERTIFICATE-----
+```
 
 ### Mutual TLS with client auth (mTLS)
 
-As of LangSmith helm chart version **0.12.29**, we support mTLS for Redis clients. For server-side authentication in mTLS, use the [Server TLS steps](#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
+As of LangSmith helm chart version **0.12.29**, we support mTLS for Redis clients. For server-side authentication in mTLS, use the [Server TLS steps](https://docs.langchain.com/langsmith/self-host-external-redis#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
 
 If your Redis server requires client certificate authentication:
 
@@ -311,45 +295,43 @@ If your Redis server requires client certificate authentication:
 * For Standalone Redis, keep using `rediss://` in the connection URL.
 * For Redis Cluster, `redis.external.cluster.tlsEnabled` defaults to `true`. Ensure it is not set to `false`.
 
-<CodeGroup>
-  ```yaml Helm (client Auth) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  redis:
-    external:
+```yaml
+redis:
+  external:
+    enabled: true
+    clientCert:
+      secretName: "redis-mtls-secret"
+      certSecretKey: "tls.crt"
+      keySecretKey: "tls.key"
+    # Standalone example:
+    # connectionUrl: "rediss://host:6380/0?password=<PASSWORD>"
+    # Or, for Cluster:
+    cluster:
       enabled: true
-      clientCert:
-        secretName: "redis-mtls-secret"
-        certSecretKey: "tls.crt"
-        keySecretKey: "tls.key"
-      # Standalone example:
-      # connectionUrl: "rediss://host:6380/0?password=<PASSWORD>"
-      # Or, for Cluster:
-      cluster:
-        enabled: true
-        tlsEnabled: true
-        nodeUris:
-          - "redis://redis-node-0:6379"
-          - "redis://redis-node-1:6379"
-          - "redis://redis-node-2:6379"
-        password: "<PASSWORD>"
-  ```
+      tlsEnabled: true
+      nodeUris:
+        - "redis://redis-node-0:6379"
+        - "redis://redis-node-1:6379"
+        - "redis://redis-node-2:6379"
+      password: "<PASSWORD>"
+```
 
-  ```yaml Kubernetes Secret (client cert/key) theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  apiVersion: v1
-  kind: Secret
-  metadata:
-    name: redis-mtls-secret
-  type: Opaque
-  stringData:
-    tls.crt: |
-      -----BEGIN CERTIFICATE-----
-      <CLIENT_CERT>
-      -----END CERTIFICATE-----
-    tls.key: |
-      -----BEGIN PRIVATE KEY-----
-      <CLIENT_KEY>
-      -----END PRIVATE KEY-----
-  ```
-</CodeGroup>
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-mtls-secret
+type: Opaque
+stringData:
+  tls.crt: |
+    -----BEGIN CERTIFICATE-----
+    <CLIENT_CERT>
+    -----END CERTIFICATE-----
+  tls.key: |
+    -----BEGIN PRIVATE KEY-----
+    <CLIENT_KEY>
+    -----END PRIVATE KEY-----
+```
 
 #### Pod security context for certificate volumes
 
@@ -361,7 +343,7 @@ You can configure this in one of two ways:
 
 Set the `fsGroup` at the top level to apply it to all pods:
 
-```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```yaml
 commonPodSecurityContext:
   fsGroup: 1000
 ```
@@ -374,291 +356,277 @@ If you need more granular control, add the `fsGroup` to each pod's security cont
 
 As of LangSmith helm chart version **0.12.34**, LangSmith supports IAM authentication for standalone Redis. As of LangSmith version **v0.16.0** (v16), Redis Cluster also supports IAM authentication. This allows you to use cloud provider workload identity instead of static passwords.
 
-<Note>
-  Redis Cluster with IAM authentication requires LangSmith v0.16.0 or later. Earlier LangSmith versions support IAM authentication only for standalone Redis. Also, not all cloud providers support IAM authentication for all Redis offerings. Check your cloud provider's documentation to verify IAM support for your specific Redis setup (e.g., GCP only supports IAM for Memorystore Cluster, not standalone Memorystore).
-</Note>
+> [!NOTE]
+> Redis Cluster with IAM authentication requires LangSmith v0.16.0 or later. Earlier LangSmith versions support IAM authentication only for standalone Redis. Also, not all cloud providers support IAM authentication for all Redis offerings. Check your cloud provider's documentation to verify IAM support for your specific Redis setup (e.g., GCP only supports IAM for Memorystore Cluster, not standalone Memorystore).
 
-<Tabs>
-  <Tab title="AWS">
-    <a id="amazon-elasticache" />
+#### AWS
 
-    ### ElastiCache for Redis IAM authentication
+### ElastiCache for Redis IAM authentication
 
-    ElastiCache for Redis supports [IAM authentication](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth-iam.html), which allows you to authenticate using AWS IAM credentials instead of Redis AUTH passwords.
+ElastiCache for Redis supports [IAM authentication](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth-iam.html), which allows you to authenticate using AWS IAM credentials instead of Redis AUTH passwords.
 
-    #### Prerequisites
+#### Prerequisites
 
-    1. **Configure workload identity** in your Kubernetes cluster using [AWS IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html)
-    2. **Enable IAM authentication** on your ElastiCache instance and grant access to your workload identity
+1. **Configure workload identity** in your Kubernetes cluster using [AWS IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) or [EKS Pod Identity](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html)
+2. **Enable IAM authentication** on your ElastiCache instance and grant access to your workload identity
 
-    #### Configuration
+#### Configuration
 
-    **Standalone Redis:**
+**Standalone Redis:**
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    redis:
-      external:
-        enabled: true
-        existingSecretName: "redis-secret"
-        iamAuthProvider: "aws"
-    ```
+```yaml
+redis:
+  external:
+    enabled: true
+    existingSecretName: "redis-secret"
+    iamAuthProvider: "aws"
+```
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: redis-secret
-    type: Opaque
-    stringData:
-      # IAM connection URL - identity as username, no password
-      connection_url: "rediss://<iam-identity>@<elasticache-host>:6380"
-    ```
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+type: Opaque
+stringData:
+  # IAM connection URL - identity as username, no password
+  connection_url: "rediss://<iam-identity>@<elasticache-host>:6380"
+```
 
-    **Redis Cluster:**
+**Redis Cluster:**
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    redis:
-      external:
-        enabled: true
-        existingSecretName: "redis-cluster-secret"
-        iamAuthProvider: "aws"
-        cluster:
-          enabled: true
-          nodeUrisSecretKey: "redis_cluster_node_uris"
-          tlsEnabled: true
-    ```
+```yaml
+redis:
+  external:
+    enabled: true
+    existingSecretName: "redis-cluster-secret"
+    iamAuthProvider: "aws"
+    cluster:
+      enabled: true
+      nodeUrisSecretKey: "redis_cluster_node_uris"
+      tlsEnabled: true
+```
 
-    #### Required annotations
+#### Required annotations
 
-    You must apply the ServiceAccount annotations required by AWS IRSA to all LangSmith components that connect to Redis:
+You must apply the ServiceAccount annotations required by AWS IRSA to all LangSmith components that connect to Redis:
 
-    **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
 
-    Example configuration:
+Example configuration:
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    backend:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+```yaml
+backend:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
 
-    queue:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+queue:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
 
-    platformBackend:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+platformBackend:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
 
-    hostBackend:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+hostBackend:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
 
-    ingestQueue:
-      serviceAccount:
-        annotations:
-          eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
-    ```
+ingestQueue:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::<account-id>:role/<role-name>"
+```
 
-    See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
-  </Tab>
+See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-  <Tab title="GCP">
-    <a id="google-cloud-memorystore" />
+#### GCP
 
-    ### Memorystore for Redis IAM authentication
+### Memorystore for Redis IAM authentication
 
-    Memorystore for Redis supports [IAM authentication](https://docs.cloud.google.com/memorystore/docs/cluster/about-iam-auth) for **Cluster instances only** (not standalone Memorystore). This allows you to authenticate using GCP service accounts.
+Memorystore for Redis supports [IAM authentication](https://docs.cloud.google.com/memorystore/docs/cluster/about-iam-auth) for **Cluster instances only** (not standalone Memorystore). This allows you to authenticate using GCP service accounts.
 
-    <Note>
-      IAM authentication is only available for Memorystore Cluster, not standalone Memorystore instances.
-    </Note>
+> [!NOTE]
+> IAM authentication is only available for Memorystore Cluster, not standalone Memorystore instances.
 
-    #### Prerequisites
+#### Prerequisites
 
-    1. **Configure workload identity** in your Kubernetes cluster using [GCP Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
-    2. **Enable IAM authentication** on your Memorystore Cluster and grant access to your workload identity
+1. **Configure workload identity** in your Kubernetes cluster using [GCP Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity)
+2. **Enable IAM authentication** on your Memorystore Cluster and grant access to your workload identity
 
-    #### Configuration
+#### Configuration
 
-    **Memorystore Cluster with IAM:**
+**Memorystore Cluster with IAM:**
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    redis:
-      external:
-        enabled: true
-        existingSecretName: "redis-cluster-secret"
-        iamAuthProvider: "gcp"
-        cluster:
-          enabled: true
-          nodeUrisSecretKey: "redis_cluster_node_uris"
-          tlsEnabled: true
-    ```
+```yaml
+redis:
+  external:
+    enabled: true
+    existingSecretName: "redis-cluster-secret"
+    iamAuthProvider: "gcp"
+    cluster:
+      enabled: true
+      nodeUrisSecretKey: "redis_cluster_node_uris"
+      tlsEnabled: true
+```
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: redis-cluster-secret
-    type: Opaque
-    stringData:
-      redis_cluster_node_uris: '["redis://node-0:6379","redis://node-1:6379","redis://node-2:6379"]'
-    ```
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-cluster-secret
+type: Opaque
+stringData:
+  redis_cluster_node_uris: '["redis://node-0:6379","redis://node-1:6379","redis://node-2:6379"]'
+```
 
-    #### Required annotations
+#### Required annotations
 
-    You must apply the ServiceAccount annotations required by GCP Workload Identity to all LangSmith components that connect to Redis:
+You must apply the ServiceAccount annotations required by GCP Workload Identity to all LangSmith components that connect to Redis:
 
-    **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
 
-    Example configuration:
+Example configuration:
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    backend:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+```yaml
+backend:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
 
-    queue:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+queue:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
 
-    platformBackend:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+platformBackend:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
 
-    hostBackend:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+hostBackend:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
 
-    ingestQueue:
-      serviceAccount:
-        annotations:
-          iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
-    ```
+ingestQueue:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: "<service-account>@<project>.iam.gserviceaccount.com"
+```
 
-    See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
-  </Tab>
+See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
-  <Tab title="Azure">
-    <a id="azure-cache-for-redis" />
+#### Azure
 
-    ### Azure Cache for Redis with Microsoft Entra authentication
+### Azure Cache for Redis with Microsoft Entra authentication
 
-    Azure Cache for Redis supports [Microsoft Entra authentication](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-azure-active-directory-for-authentication), which allows you to authenticate using Azure managed identities.
+Azure Cache for Redis supports [Microsoft Entra authentication](https://learn.microsoft.com/en-us/azure/azure-cache-for-redis/cache-azure-active-directory-for-authentication), which allows you to authenticate using Azure managed identities.
 
-    #### Prerequisites
+#### Prerequisites
 
-    1. **Configure workload identity** in your Kubernetes cluster using [Azure Workload Identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview)
-    2. **Enable Microsoft Entra authentication** on your Azure Cache for Redis and grant access to your workload identity
+1. **Configure workload identity** in your Kubernetes cluster using [Azure Workload Identity](https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview)
+2. **Enable Microsoft Entra authentication** on your Azure Cache for Redis and grant access to your workload identity
 
-    #### Configuration
+#### Configuration
 
-    **Standalone Redis:**
+**Standalone Redis:**
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    redis:
-      external:
-        enabled: true
-        existingSecretName: "redis-secret"
-        iamAuthProvider: "azure"
-        # Include if using EnterpriseCluster policy. See the Azure managed Redis section for details.
-        # clusterSafeMode: true
-    ```
+```yaml
+redis:
+  external:
+    enabled: true
+    existingSecretName: "redis-secret"
+    iamAuthProvider: "azure"
+    # Include if using EnterpriseCluster policy. See the Azure managed Redis section for details.
+    # clusterSafeMode: true
+```
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: redis-secret
-    type: Opaque
-    stringData:
-      # IAM connection URL - managed identity as username, no password
-      connection_url: "rediss://<managed-identity>@<azure-redis-host>:6380"
-    ```
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis-secret
+type: Opaque
+stringData:
+  # IAM connection URL - managed identity as username, no password
+  connection_url: "rediss://<managed-identity>@<azure-redis-host>:6380"
+```
 
-    **Redis Cluster:**
+**Redis Cluster:**
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    redis:
-      external:
-        enabled: true
-        existingSecretName: "redis-cluster-secret"
-        iamAuthProvider: "azure"
-        cluster:
-          enabled: true
-          nodeUrisSecretKey: "redis_cluster_node_uris"
-          tlsEnabled: true
-    ```
+```yaml
+redis:
+  external:
+    enabled: true
+    existingSecretName: "redis-cluster-secret"
+    iamAuthProvider: "azure"
+    cluster:
+      enabled: true
+      nodeUrisSecretKey: "redis_cluster_node_uris"
+      tlsEnabled: true
+```
 
-    #### Required annotations
+#### Required annotations
 
-    You must apply the ServiceAccount annotations and pod labels required by Azure Workload Identity to all LangSmith components that connect to Redis:
+You must apply the ServiceAccount annotations and pod labels required by Azure Workload Identity to all LangSmith components that connect to Redis:
 
-    **Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
+**Deployments:** `backend`, `queue`, `platformBackend`, `hostBackend`, `ingestQueue`
 
-    Example configuration:
+Example configuration:
 
-    ```yaml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    backend:
-      serviceAccount:
-        annotations:
-          azure.workload.identity/client-id: "<managed-identity-client-id>"
-      deployment:
-        labels:
-          azure.workload.identity/use: "true"
+```yaml
+backend:
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "<managed-identity-client-id>"
+  deployment:
+    labels:
+      azure.workload.identity/use: "true"
 
-    queue:
-      serviceAccount:
-        annotations:
-          azure.workload.identity/client-id: "<managed-identity-client-id>"
-      deployment:
-        labels:
-          azure.workload.identity/use: "true"
+queue:
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "<managed-identity-client-id>"
+  deployment:
+    labels:
+      azure.workload.identity/use: "true"
 
-    platformBackend:
-      serviceAccount:
-        annotations:
-          azure.workload.identity/client-id: "<managed-identity-client-id>"
-      deployment:
-        labels:
-          azure.workload.identity/use: "true"
+platformBackend:
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "<managed-identity-client-id>"
+  deployment:
+    labels:
+      azure.workload.identity/use: "true"
 
-    hostBackend:
-      serviceAccount:
-        annotations:
-          azure.workload.identity/client-id: "<managed-identity-client-id>"
-      deployment:
-        labels:
-          azure.workload.identity/use: "true"
+hostBackend:
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "<managed-identity-client-id>"
+  deployment:
+    labels:
+      azure.workload.identity/use: "true"
 
-    ingestQueue:
-      serviceAccount:
-        annotations:
-          azure.workload.identity/client-id: "<managed-identity-client-id>"
-      deployment:
-        labels:
-          azure.workload.identity/use: "true"
-    ```
+ingestQueue:
+  serviceAccount:
+    annotations:
+      azure.workload.identity/client-id: "<managed-identity-client-id>"
+  deployment:
+    labels:
+      azure.workload.identity/use: "true"
+```
 
-    See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
-  </Tab>
-</Tabs>
+See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-external-redis.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

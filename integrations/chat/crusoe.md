@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatCrusoe integration
 
 > Integrate with the ChatCrusoe chat model using LangChain Python.
 
-This page will help you get started with Crusoe AI [chat models](/oss/python/langchain/models). For detailed documentation of all ChatCrusoe features and configurations, head to the [Crusoe managed inference docs](https://docs.crusoecloud.com/managed-inference/overview).
+This page will help you get started with Crusoe AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all ChatCrusoe features and configurations, head to the [Crusoe managed inference docs](https://docs.crusoecloud.com/managed-inference/overview).
 
 [Crusoe AI](https://www.crusoe.ai/) provides high-performance managed inference for [leading open-source models](https://docs.crusoecloud.com/managed-inference/overview) via the Crusoe Intelligence Foundry, powered by proprietary MemoryAlloy™ technology for ultra-low latency and high throughput.
 
@@ -20,7 +16,7 @@ This page will help you get started with Crusoe AI [chat models](/oss/python/lan
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -32,7 +28,7 @@ To access Crusoe models you'll need to create a Crusoe Cloud account, get an Inf
 
 Head to the [Crusoe Cloud Console](https://console.crusoecloud.com/) to sign up. Then navigate to the **Security** tab and select **Inference API Key** to generate your key. Once you've done this, set the CRUSOE\_API\_KEY environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -40,9 +36,9 @@ if "CRUSOE_API_KEY" not in os.environ:
     os.environ["CRUSOE_API_KEY"] = getpass.getpass("Enter your Crusoe API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -51,21 +47,19 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Crusoe integration is included in the `langchain-crusoe` package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -qU langchain-crusoe
-  ```
+```bash
+pip install -qU langchain-crusoe
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-crusoe
-  ```
-</CodeGroup>
+```bash
+uv add langchain-crusoe
+```
 
 ## Instantiation
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_crusoe import ChatCrusoe
 
 llm = ChatCrusoe(
@@ -96,7 +90,7 @@ Crusoe serves leading open-source models via the Intelligence Foundry. See the [
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -108,23 +102,23 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", response_metadata={'token_usage': {'completion_tokens': 9, 'prompt_tokens': 35, 'total_tokens': 44}, 'model_name': 'meta-llama/Llama-3.3-70B-Instruct', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}, id='run-...', usage_metadata={'input_tokens': 35, 'output_tokens': 9, 'total_tokens': 44})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
 ## Chaining
 
-We can [chain](/oss/python/langchain/overview) our model with a prompt template like so:
+We can [chain](https://docs.langchain.com/oss/python/langchain/overview) our model with a prompt template like so:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 
 prompt = ChatPromptTemplate.from_messages(
@@ -147,13 +141,13 @@ chain.invoke(
 )
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='Ich liebe Programmieren.', response_metadata={...}, id='run-...')
 ```
 
 ## Streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events(messages, version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
@@ -161,7 +155,7 @@ for token in stream.text:
 
 ## Tool calling
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class GetWeather(BaseModel):
@@ -175,7 +169,7 @@ print(ai_msg.tool_calls)
 
 ## Structured output
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from typing import Optional
 
@@ -189,7 +183,7 @@ structured_llm = llm.with_structured_output(Joke)
 structured_llm.invoke("Tell me a joke about cats")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Joke(setup='Why was the cat sitting on the computer?', punchline='To keep an eye on the mouse!', rating=7)
 ```
 
@@ -199,12 +193,8 @@ For detailed documentation of all ChatCrusoe features and configurations, head t
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/crusoe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/crusoe.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

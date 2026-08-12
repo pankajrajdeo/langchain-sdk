@@ -1,22 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to add semantic search to your agent deployment
-
-Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](/oss/python/langgraph/stores) so your agent retains context across conversations and personalizes responses based on prior interactions.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/semantic-search)
+Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](https://docs.langchain.com/oss/python/langgraph/stores) so your agent retains context across conversations and personalizes responses based on prior interactions.
 
 ## Prerequisites
 
-* A deployment (refer to [how to set up an application for deployment](/langsmith/setup-app-requirements-txt)) and details on [hosting options](/langsmith/platform-setup).
+* A deployment (refer to [how to set up an application for deployment](https://docs.langchain.com/langsmith/setup-app-requirements-txt)) and details on [hosting options](https://docs.langchain.com/langsmith/platform-setup).
 * API keys for your embedding provider (in this case, OpenAI).
 * `langchain >= 0.3.8` (if you specify using the string format in this guide).
 
 ## Steps
 
-1. Update your [`langgraph.json` configuration file](/langsmith/application-structure#configuration-file) to include the store configuration:
+1. Update your [`langgraph.json` configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file) to include the store configuration:
 
-   ```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
    {
        ...
        "store": {
@@ -27,7 +23,7 @@ Semantic search lets your agent recall stored memories and documents by meaning 
            }
        }
    }
-   ```
+```
 
    This configuration:
 
@@ -35,31 +31,30 @@ Semantic search lets your agent recall stored memories and documents by meaning 
    * Sets the embedding dimension to 1536 (matching the model's output).
    * Indexes all fields in your stored data (`["$"]` means index everything, or specify specific fields like `["text", "metadata.title"]`).
 
-   <Note>
-     Each deployment supports a single embedding model. LangSmith does not support configuring multiple embedding models, because it would cause ambiguity in `/store` endpoints and result in mixed-index issues.
-   </Note>
+> [!NOTE]
+>    Each deployment supports a single embedding model. LangSmith does not support configuring multiple embedding models, because it would cause ambiguity in `/store` endpoints and result in mixed-index issues.
 
 2. To use the string embedding format, make sure your dependencies include `langchain >= 0.3.8`:
 
-   ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```toml
    # In pyproject.toml
    [project]
    dependencies = [
        "langchain>=0.3.8"
    ]
-   ```
+```
 
-   Or, if using [requirements.txt](/langsmith/setup-app-requirements-txt):
+   Or, if using [requirements.txt](https://docs.langchain.com/langsmith/setup-app-requirements-txt):
 
-   ```
+```
    langchain>=0.3.8
-   ```
+```
 
 ## Usage
 
-Once configured, you can use semantic search in your [nodes](/oss/python/langgraph/graph-api#nodes). The store requires a namespace tuple to organize memories:
+Once configured, you can use semantic search in your [nodes](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes). The store requires a namespace tuple to organize memories:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def search_memory(state: State, *, store: BaseStore):
     # Search the store using semantic similarity
     # The namespace tuple helps organize different types of memories
@@ -74,7 +69,7 @@ async def search_memory(state: State, *, store: BaseStore):
 
 Each result is a `SearchItem` (extends `Item` with an additional `score` field). When semantic search is configured, `score` contains the similarity score:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results[0].key       # "07e0caf4-1631-47b7-b15f-65515d4c1843"
 results[0].value     # {"text": "User prefers dark mode"}
 results[0].namespace # ("memory", "facts")
@@ -83,15 +78,14 @@ results[0].score     # 0.92 (similarity score, present when semantic search is c
 
 ### Changing your embedding model
 
-<Warning>
-  Changing the embedding model or dimensions requires re-embedding all existing data. There is no automated migration tooling for this. Plan accordingly if you need to switch models.
-</Warning>
+> [!WARNING]
+> Changing the embedding model or dimensions requires re-embedding all existing data. There is no automated migration tooling for this. Plan accordingly if you need to switch models.
 
 ## Custom embeddings
 
 If you want to use custom embeddings, you can pass a path to a custom embedding function:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     ...
     "store": {
@@ -106,7 +100,7 @@ If you want to use custom embeddings, you can pass a path to a custom embedding 
 
 The deployment will look for the function in the specified path. The function must be async and accept a list of strings:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # path/to/embedding_function.py
 from openai import AsyncOpenAI
 
@@ -127,9 +121,9 @@ async def aembed_texts(texts: list[str]) -> list[list[float]]:
 
 ## Querying via the API
 
-You can also query the store using the [LangGraph SDK](/langsmith/langgraph-python-sdk). Since the SDK uses async operations:
+You can also query the store using the [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk). Since the SDK uses async operations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langgraph_sdk import get_client
 
 async def search_store():
@@ -147,7 +141,7 @@ results = await search_store()
 
 Each result item includes a `score` field when semantic search is configured:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 results["items"][0]["key"]       # "07e0caf4-1631-47b7-b15f-65515d4c1843"
 results["items"][0]["value"]     # {"text": "User prefers dark mode"}
 results["items"][0]["namespace"] # ["memory", "facts"]
@@ -156,12 +150,8 @@ results["items"][0]["score"]     # 0.92 (similarity score)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/semantic-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/semantic-search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

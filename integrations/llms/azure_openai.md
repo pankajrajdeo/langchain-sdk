@@ -1,16 +1,11 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Azure OpenAI integration
 
 > Integrate with the Azure OpenAI LLM using LangChain Python.
 
-<Warning>
-  **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](/oss/python/langchain/models).**
-
-  Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](/oss/python/integrations/chat/azure_chat_openai/).
-</Warning>
+> [!WARNING]
+> **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+>
+> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/).
 
 This page goes over how to use LangChain with [Azure OpenAI](https://aka.ms/azure-openai).
 
@@ -20,7 +15,7 @@ The Azure OpenAI API is compatible with OpenAI's API.  The `openai` Python packa
 
 You can configure the `openai` package to use Azure OpenAI using environment variables.  The following is for `bash`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # The API version you want to use: set this to `2023-12-01-preview` for the released version.
 export OPENAI_API_VERSION=2023-12-01-preview
 # The base URL for your Azure OpenAI resource.  You can find this in the Azure portal under your Azure OpenAI resource.
@@ -31,7 +26,7 @@ export AZURE_OPENAI_API_KEY=<your Azure OpenAI API key>
 
 Alternatively, you can configure the API right within your running Python environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 os.environ["OPENAI_API_VERSION"] = "2023-12-01-preview"
 ```
@@ -53,7 +48,7 @@ Add a role an Azure role assignment `Cognitive Services OpenAI User` scoped to y
 
 To use AAD in Python with LangChain, install the `azure-identity` package. Then, set `OPENAI_API_TYPE` to `azure_ad`. Next, use the `DefaultAzureCredential` class to get a token from AAD by calling `get_token` as shown below. Finally, set the `OPENAI_API_KEY` environment variable to the token value.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 from azure.identity import DefaultAzureCredential
 
@@ -68,7 +63,7 @@ os.environ["OPENAI_API_KEY"] = credential.get_token("https://cognitiveservices.a
 
 The `DefaultAzureCredential` class is an easy way to get started with AAD authentication. You can also customize the credential chain if necessary. In the example shown below, we first try Managed Identity, then fall back to the Azure CLI. This is useful if you are running your code in Azure, but want to develop locally.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import ChainedTokenCredential, ManagedIdentityCredential, AzureCliCredential
 
 credential = ChainedTokenCredential(
@@ -81,11 +76,11 @@ credential = ChainedTokenCredential(
 
 With Azure OpenAI, you set up your own deployments of the common GPT-3 and Codex models.  When calling the API, you need to specify the deployment you want to use.
 
-***Note**: These docs are for the Azure text completion models. Models like GPT-4 are chat models. They have a slightly different interface, and can be accessed via the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) class. For docs on Azure chat see [Azure Chat OpenAI documentation](/oss/python/integrations/chat/azure_chat_openai).*
+***Note**: These docs are for the Azure text completion models. Models like GPT-4 are chat models. They have a slightly different interface, and can be accessed via the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) class. For docs on Azure chat see [Azure Chat OpenAI documentation](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai).*
 
 Let's say your deployment name is `gpt-35-turbo-instruct-prod`.  In the `openai` Python API, you can specify this deployment with the `engine` parameter.  For example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import openai
 
 client = openai.AzureOpenAI(
@@ -98,11 +93,11 @@ response = client.completions.create(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-openai
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["OPENAI_API_VERSION"] = "2023-12-01-preview"
@@ -110,12 +105,12 @@ os.environ["AZURE_OPENAI_ENDPOINT"] = "..."
 os.environ["AZURE_OPENAI_API_KEY"] = "..."
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Import Azure OpenAI
 from langchain_openai import AzureOpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create an instance of Azure OpenAI
 # Replace the deployment name with your own
 llm = AzureOpenAI(
@@ -123,37 +118,33 @@ llm = AzureOpenAI(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Run the LLM
 llm.invoke("Tell me a joke")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 " Why couldn't the bicycle stand up by itself?\n\nBecause it was two-tired!"
 ```
 
 We can also print the LLM and see its custom print.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(llm)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AzureOpenAI
 Params: {'deployment_name': 'gpt-35-turbo-instruct-0914', 'model_name': 'gpt-3.5-turbo-instruct', 'temperature': 0.7, 'top_p': 1, 'frequency_penalty': 0, 'presence_penalty': 0, 'n': 1, 'logit_bias': {}, 'max_tokens': 256}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/llms/azure_openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

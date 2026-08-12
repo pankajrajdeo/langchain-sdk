@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Learn
-
-> Tutorials, conceptual guides, and resources to help you get started.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/learn)
+Tutorials, conceptual guides, and resources to help you get started.
 
 In the **Learn** section of the documentation, you'll find a collection of tutorials, conceptual overviews, and additional resources to help you build powerful applications with LangChain and LangGraph.
 
@@ -14,107 +10,85 @@ Below are tutorials for common use cases, organized by framework.
 
 ### Deep Agents
 
-[Deep Agents](/oss/python/deepagents/overview) include built-in functionality for managing context, a virtual filesystem, and other common agent requirements.
+[Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) include built-in functionality for managing context, a virtual filesystem, and other common agent requirements.
 
-<Card title="Data analysis" icon="chart-pie" href="/oss/python/deepagents/data-analysis" horizontal>
-  Build a data analysis agent that sends reports to Slack.
-</Card>
+#### [Data analysis](https://docs.langchain.com/oss/python/deepagents/data-analysis)
+Build a data analysis agent that sends reports to Slack.
 
-<Card title="Deep research" icon="search" href="/oss/python/deepagents/deep-research" horizontal>
-  Build a multi-step web research agent with subagent delegation and strategic reflection.
-</Card>
+#### [Deep research](https://docs.langchain.com/oss/python/deepagents/deep-research)
+Build a multi-step web research agent with subagent delegation and strategic reflection.
 
 ### LangChain
 
-[LangChain](/oss/python/langchain/overview) [agent](/oss/python/langchain/agents) implementations make it easy to get started for simple use cases.
+[LangChain](https://docs.langchain.com/oss/python/langchain/overview) [agent](https://docs.langchain.com/oss/python/langchain/agents) implementations make it easy to get started for simple use cases.
 
-<Card title="Semantic Search" icon="search" href="/oss/python/langchain/knowledge-base" horizontal>
-  Build a semantic search engine over a PDF with LangChain components.
-</Card>
+#### [Semantic Search](https://docs.langchain.com/oss/python/langchain/knowledge-base)
+Build a semantic search engine over a PDF with LangChain components.
 
-<Card title="RAG Agent" icon="user-search" href="/oss/python/deepagents/rag" horizontal>
-  Create a Retrieval Augmented Generation (RAG) agent.
-</Card>
+#### [RAG Agent](https://docs.langchain.com/oss/python/deepagents/rag)
+Create a Retrieval Augmented Generation (RAG) agent.
 
-<Card title="SQL Agent" icon="database" href="/oss/python/langchain/sql-agent" horizontal>
-  Build a SQL agent to interact with databases with human-in-the-loop review.
-</Card>
+#### [SQL Agent](https://docs.langchain.com/oss/python/langchain/sql-agent)
+Build a SQL agent to interact with databases with human-in-the-loop review.
 
-<Card title="Voice Agent" icon="microphone" href="/oss/python/langchain/voice-agent" horizontal>
-  Build an agent you can speak and listen to.
-</Card>
+#### [Voice Agent](https://docs.langchain.com/oss/python/langchain/voice-agent)
+Build an agent you can speak and listen to.
 
 ### LangGraph
 
-LangChain's [agent](/oss/python/langchain/agents) implementations use [LangGraph](/oss/python/langgraph/overview) primitives.
+LangChain's [agent](https://docs.langchain.com/oss/python/langchain/agents) implementations use [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) primitives.
 If deeper customization is required, agents can be implemented directly in LangGraph.
 
-<Card title="Custom RAG Agent" icon="user-search" href="/oss/python/langgraph/agentic-rag" horizontal>
-  Build a RAG agent using LangGraph primitives for fine-grained control.
-</Card>
+#### [Custom RAG Agent](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+Build a RAG agent using LangGraph primitives for fine-grained control.
 
-<Card title="Custom SQL Agent" icon="database" href="/oss/python/langgraph/sql-agent" horizontal>
-  Implement a SQL agent directly in LangGraph for maximum flexibility.
-</Card>
+#### [Custom SQL Agent](https://docs.langchain.com/oss/python/langgraph/sql-agent)
+Implement a SQL agent directly in LangGraph for maximum flexibility.
 
 ### Multi-agent
 
-These tutorials demonstrate [multi-agent patterns](/oss/python/langchain/multi-agent), blending LangChain agents with LangGraph workflows.
+These tutorials demonstrate [multi-agent patterns](https://docs.langchain.com/oss/python/langchain/multi-agent), blending LangChain agents with LangGraph workflows.
 
-<Card title="Subagents: Personal assistant" icon="sitemap" href="/oss/python/langchain/multi-agent/subagents-personal-assistant" horizontal>
-  Build a personal assistant that delegates to sub-agents.
-</Card>
+#### [Subagents: Personal assistant](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant)
+Build a personal assistant that delegates to sub-agents.
 
-<Card title="Handoffs: Customer support" icon="users" href="/oss/python/langchain/multi-agent/handoffs-customer-support" horizontal>
-  Build a customer support workflow where a single agent transitions between different states.
-</Card>
+#### [Handoffs: Customer support](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs-customer-support)
+Build a customer support workflow where a single agent transitions between different states.
 
-<Card title="Router: Knowledge base" icon="share" href="/oss/python/langchain/multi-agent/router-knowledge-base" horizontal>
-  Build a multi-source knowledge base that routes queries to specialized agents.
-</Card>
+#### [Router: Knowledge base](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)
+Build a multi-source knowledge base that routes queries to specialized agents.
 
-<Card title="Skills: SQL assistant" icon="wand" href="/oss/python/langchain/multi-agent/skills-sql-assistant" horizontal>
-  Build an agent that loads specialized skills progressively using on-demand context loading.
-</Card>
+#### [Skills: SQL assistant](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant)
+Build an agent that loads specialized skills progressively using on-demand context loading.
 
 ## Conceptual overviews
 
 These guides explain the core concepts and APIs underlying LangChain and LangGraph.
 
-<Card title="Memory" icon="brain" href="/oss/python/concepts/memory" horizontal>
-  Understand persistence of interactions within and across threads.
-</Card>
+#### [Memory](https://docs.langchain.com/oss/python/concepts/memory)
+Understand persistence of interactions within and across threads.
 
-<Card title="Context engineering" icon="notebook" href="/oss/python/concepts/context" horizontal>
-  Learn methods for providing AI applications the right information and tools to accomplish a task.
-</Card>
+#### [Context engineering](https://docs.langchain.com/oss/python/concepts/context)
+Learn methods for providing AI applications the right information and tools to accomplish a task.
 
-<Card title="Graph API" icon="topology-star" href="/oss/python/langgraph/graph-api" horizontal>
-  Explore LangGraph’s declarative graph-building API.
-</Card>
+#### [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
+Explore LangGraph’s declarative graph-building API.
 
-<Card title="Functional API" icon="code" href="/oss/python/langgraph/functional-api" horizontal>
-  Build agents as a single function.
-</Card>
+#### [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api)
+Build agents as a single function.
 
 ## Additional resources
 
-<Card title="LangChain Academy" icon="school" href="https://academy.langchain.com/" horizontal>
-  Courses and exercises to level up your LangChain skills.
-</Card>
+#### [LangChain Academy](https://academy.langchain.com/)
+Courses and exercises to level up your LangChain skills.
 
-<Card title="Case Studies" icon="presentation" href="/oss/python/langgraph/case-studies" horizontal>
-  See how teams are using LangChain and LangGraph in production.
-</Card>
+#### [Case Studies](https://docs.langchain.com/oss/python/langgraph/case-studies)
+See how teams are using LangChain and LangGraph in production.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/learn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/learn.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,18 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to run an evaluation asynchronously
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-async)
+> [!NOTE]
+> [Evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) | [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) | [Datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) | [Experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment)
 
-<Info>
-  [Evaluations](/langsmith/evaluation-concepts#evaluation-lifecycle) | [Evaluators](/langsmith/evaluation-concepts#evaluators) | [Datasets](/langsmith/evaluation-concepts#datasets) | [Experiments](/langsmith/evaluation-concepts#experiment)
-</Info>
+We can run evaluations asynchronously via the SDK using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), which accepts all of the same arguments as [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](https://docs.langchain.com/langsmith/evaluate-llm-application).
 
-We can run evaluations asynchronously via the SDK using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), which accepts all of the same arguments as [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](/langsmith/evaluate-llm-application).
-
-<Info>
-  This guide is only relevant when using the Python SDK. In JS/TS the `evaluate()` function is already async. For more information, see [Evaluate LLM applications](/langsmith/evaluate-llm-application).
-</Info>
+> [!NOTE]
+> This guide is only relevant when using the Python SDK. In JS/TS the `evaluate()` function is already async. For more information, see [Evaluate LLM applications](https://docs.langchain.com/langsmith/evaluate-llm-application).
 
 ## Use `aevaluate()`
 
@@ -20,7 +14,7 @@ We can run evaluations asynchronously via the SDK using [aevaluate()](https://do
 
 Requires `langsmith>=0.3.13`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langsmith import wrappers, Client
 from openai import AsyncOpenAI
 
@@ -74,17 +68,13 @@ results = await ls_client.aevaluate(
 
 ## Related
 
-* [Run an evaluation (synchronously)](/langsmith/evaluate-llm-application)
-* [Handle model rate limits](/langsmith/handle-model-rate-limiting)
+* [Run an evaluation (synchronously)](https://docs.langchain.com/langsmith/evaluate-llm-application)
+* [Handle model rate limits](https://docs.langchain.com/langsmith/handle-model-rate-limiting)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-async.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/evaluation-async.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

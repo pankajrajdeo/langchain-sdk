@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # AWS Terraform architecture
-
-> Platform layers, services, IRSA roles, networking, and module dependencies for LangSmith self-hosted on AWS EKS.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture)
+Platform layers, services, IRSA roles, networking, and module dependencies for LangSmith self-hosted on AWS EKS.
 
 Understand what the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws) provision and how the pieces fit together, so you can size, secure, and customize your LangSmith deployment before running `make apply`.
 
@@ -16,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * LangSmith Deployment add-on.
 * Module dependency graph and opt-in security modules.
 
-If you are ready to install, start with the [deployment walkthrough](/langsmith/self-host-terraform-aws-deploy).
+If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy).
 
 ## Platform layers
 
 LangSmith on AWS deploys in two stages with one optional add-on. The infrastructure stage provisions the cloud foundation. The application stage installs the LangSmith Helm chart. The LangSmith Deployment add-on is opt-in and adds the host-backend, listener, and operator services for managing LangGraph applications from the UI.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/aws-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=b5c82e77df6510b1c3d0d8589ffc4ae7" alt="LangSmith on AWS service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/aws-architecture.png" />
+> **Image:** [LangSmith on AWS service layout](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture)
 
 | Stage                                | Layer                 | What it adds                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,13 +51,11 @@ These pods run on every deployment. All write logs and metrics; the busier compo
 | `langsmith-ace-backend`      | Async compute (dataset runs, evaluations, background jobs) | —    | 1 to 5                      | No       | Postgres, Redis                 |
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica | No       | EBS GP3 PVC                     |
 
-<Warning>
-  In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
-</Warning>
+> [!WARNING]
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
 
-<Note>
-  [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
-</Note>
+> [!NOTE]
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 
@@ -114,7 +108,7 @@ When `postgres_source = "external"` and `redis_source = "external"` (the recomme
 
 ## Cluster infrastructure
 
-Two Terraform modules install the cluster-level services LangSmith depends on. The `eks` module installs the AWS-integration controllers through `eks-blueprints-addons`; the `k8s-bootstrap` module installs the workload dependencies and the optional ingress gateways (see [Ingress options](#ingress-options)):
+Two Terraform modules install the cluster-level services LangSmith depends on. The `eks` module installs the AWS-integration controllers through `eks-blueprints-addons`; the `k8s-bootstrap` module installs the workload dependencies and the optional ingress gateways (see [Ingress options](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture#ingress-options)):
 
 | Service                        | Installed by    | Namespace          | IRSA     | Purpose                                                                                                                                                                                    |
 | ------------------------------ | --------------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -138,7 +132,7 @@ IRSA replaces static credentials. The EKS cluster's OIDC issuer is the trust anc
 
 ### Default ALB ingress
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TD
     Internet(["Internet"])
     ALB["AWS Application Load Balancer<br/>port 80/443, TLS via ACM or Let's Encrypt"]
@@ -169,9 +163,9 @@ graph TD
 
 ### Envoy Gateway (opt-in)
 
-With the Terraform default (`enable_envoy_gateway = true`), the pre-provisioned ALB stays in front and binds to the Envoy service on port 8080 through a `TargetGroupBinding`, as shown in the [ingress options](#ingress-options) table. The standalone Network Load Balancer path below is an overlay variant (`helm/values/examples/langsmith-values-ingress-envoy-gateway.yaml`) in which the NLB terminates TLS directly:
+With the Terraform default (`enable_envoy_gateway = true`), the pre-provisioned ALB stays in front and binds to the Envoy service on port 8080 through a `TargetGroupBinding`, as shown in the [ingress options](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture#ingress-options) table. The standalone Network Load Balancer path below is an overlay variant (`helm/values/examples/langsmith-values-ingress-envoy-gateway.yaml`) in which the NLB terminates TLS directly:
 
-```mermaid actions={false} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```mermaid
 graph TD
     Internet(["Internet"])
     NLB["AWS Network Load Balancer<br/>ACM TLS termination at 443"]
@@ -205,7 +199,7 @@ Both `langsmith` and `langsmith-agents` attach to the shared `langsmith-gateway`
 
 When `create_firewall = true`, all outbound internet traffic from private subnets is inspected before reaching the NAT gateway:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 EKS pods / RDS / ElastiCache (private subnets)
   → AWS Network Firewall (TLS SNI + HTTP Host inspection)
      ALLOWLIST: firewall_allowed_fqdns (default: beacon.langchain.com)
@@ -235,7 +229,7 @@ Standard Kubernetes Ingress is namespace-scoped. The ALB controller routes only 
 
 When the existing ALB already provides SSO (Okta or Cognito OIDC), WAF, and TLS, Envoy Gateway slots in behind it instead of replacing it:
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 Internet
   → ALB (unchanged: WAF, SSO, TLS, DNS)
     → Envoy Gateway NLB (internal-scheme, auto-provisioned by k8s-bootstrap)
@@ -287,7 +281,7 @@ Set `acm_certificate_arn` directly to skip the `dns` module. For in-cluster gate
 
 ## Module dependency graph
 
-```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
 vpc ─► firewall (optional, create_firewall = true)
 │
 ├─► eks ─► k8s-bootstrap (KEDA, ESO, Envoy Gateway [opt-in])
@@ -324,7 +318,7 @@ vpc ─► firewall (optional, create_firewall = true)
 | ElastiCache Redis | `cache.m6g.xlarge` | 4    | 13.07 GB |
 | RDS storage       | 10 GB              | —    | —        |
 
-For production sizing recommendations, see the [scaling guide](/langsmith/self-host-scale) and the [AWS deployment guide](/langsmith/self-host-terraform-aws-deploy#cluster-sizing-reference).
+For production sizing recommendations, see the [scaling guide](https://docs.langchain.com/langsmith/self-host-scale) and the [AWS deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy#cluster-sizing-reference).
 
 ## Validated behaviors and known constraints
 
@@ -343,7 +337,7 @@ These constraints were validated during the April 2026 gateway permutation test 
 
 ## Verification commands
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # EKS cluster status
 aws eks describe-cluster --name <cluster-name> --query "cluster.status"
 
@@ -368,12 +362,8 @@ kubectl run s3-test --rm -it --image=amazon/aws-cli -n langsmith -- \
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/self-host-terraform-aws-architecture.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

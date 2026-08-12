@@ -1,56 +1,46 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace with the Vercel AI SDK (Legacy)
 
-<Warning>
-  This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see [the new guide](/langsmith/trace-with-vercel-ai-sdk).
-</Warning>
+> [!WARNING]
+> This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see [the new guide](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk).
 
 You can use LangSmith to trace runs from the Vercel AI SDK using OpenTelemetry (OTEL). This guide will walk through an example.
 
-<Note>
-  Many popular [OpenTelemetry implementations](https://www.npmjs.com/package/@opentelemetry/sdk-node) in JavaScript are currently experimental,
-  and may behave erratically in production, especially when instrumenting LangSmith alongside other providers. If you are on AI SDK 5,
-  we strongly suggest using [our recommended approach for tracing AI SDK runs](/langsmith/trace-with-vercel-ai-sdk).
-</Note>
+> [!NOTE]
+> Many popular [OpenTelemetry implementations](https://www.npmjs.com/package/@opentelemetry/sdk-node) in JavaScript are currently experimental,
+> and may behave erratically in production, especially when instrumenting LangSmith alongside other providers. If you are on AI SDK 5,
+> we strongly suggest using [our recommended approach for tracing AI SDK runs](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk).
 
 ## 0. Installation
 
 Install the Vercel AI SDK and required OTEL packages. We use their OpenAI integration for the code snippets below, but you can use any of their other options as well.
 
-<CodeGroup>
-  ```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npm install ai @ai-sdk/openai zod
-  ```
+```bash
+npm install ai @ai-sdk/openai zod
+```
 
-  ```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  yarn add ai @ai-sdk/openai zod
-  ```
+```bash
+yarn add ai @ai-sdk/openai zod
+```
 
-  ```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pnpm add ai @ai-sdk/openai zod
-  ```
-</CodeGroup>
+```bash
+pnpm add ai @ai-sdk/openai zod
+```
 
-<CodeGroup>
-  ```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npm install @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
-  ```
+```bash
+npm install @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
+```
 
-  ```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  yarn add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
-  ```
+```bash
+yarn add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
+```
 
-  ```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pnpm add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
-  ```
-</CodeGroup>
+```bash
+pnpm add @opentelemetry/sdk-trace-base @opentelemetry/exporter-trace-otlp-proto @opentelemetry/context-async-hooks
+```
 
 ## 1. Configure your environment
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_TRACING=true
 export LANGSMITH_API_KEY=<your-api-key>
 export LANGSMITH_OTEL_ENABLED=true
@@ -65,7 +55,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 
 To start tracing, you will need to import and call the `initializeOTEL` method at the start of your code:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { initializeOTEL } from "langsmith/experimental/otel/setup";
 
 const { DEFAULT_LANGSMITH_SPAN_PROCESSOR } = initializeOTEL();
@@ -73,11 +63,10 @@ const { DEFAULT_LANGSMITH_SPAN_PROCESSOR } = initializeOTEL();
 
 Afterwards, add the `experimental_telemetry` argument to your AI SDK calls that you want to trace.
 
-<Info>
-  Do not forget to call `await DEFAULT_LANGSMITH_SPAN_PROCESSOR.shutdown();` before your application shuts down in order to flush any remaining traces to LangSmith.
-</Info>
+> [!NOTE]
+> Do not forget to call `await DEFAULT_LANGSMITH_SPAN_PROCESSOR.shutdown();` before your application shuts down in order to flush any remaining traces to LangSmith.
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 
@@ -99,7 +88,7 @@ You should see a trace in your LangSmith dashboard [like this one](https://smith
 
 You can also trace runs with tool calls:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { generateText, tool } from "ai";
 import { openai } from "@ai-sdk/openai";
 import { z } from "zod";
@@ -139,7 +128,7 @@ Which results in a trace like [this one](https://smith.langchain.com/public/e612
 
 You can wrap `traceable` calls around or within AI SDK tool calls. If you do so, we recommend you initialize a LangSmith `client` instance that you pass into each `traceable`, then call `client.awaitPendingTraceBatches();` to ensure all traces flush. If you do this, you do not need to manually call `shutdown()` or `forceFlush()` on the `DEFAULT_LANGSMITH_SPAN_PROCESSOR`. Here's an example:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { initializeOTEL } from "langsmith/experimental/otel/setup";
 
 initializeOTEL();
@@ -197,25 +186,23 @@ The resulting trace will look [like this](https://smith.langchain.com/public/296
 
 First, install the [`@vercel/otel`](https://www.npmjs.com/package/@vercel/otel) package:
 
-<CodeGroup>
-  ```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npm install @vercel/otel
-  ```
+```bash
+npm install @vercel/otel
+```
 
-  ```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  yarn add @vercel/otel
-  ```
+```bash
+yarn add @vercel/otel
+```
 
-  ```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pnpm add @vercel/otel
-  ```
-</CodeGroup>
+```bash
+pnpm add @vercel/otel
+```
 
 Then, set up an [`instrumentation.ts`](https://nextjs.org/docs/app/guides/instrumentation) file in your root directory.
 Call `initializeOTEL` and pass the resulting `DEFAULT_LANGSMITH_SPAN_PROCESSOR` into the `spanProcessors` field into your `registerOTEL(...)` call.
 It should look something like this:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { registerOTel } from "@vercel/otel";
 import { initializeOTEL } from "langsmith/experimental/otel/setup";
 
@@ -231,7 +218,7 @@ export function register() {
 
 And finally, in your API routes, call `initializeOTEL` as well and add an `experimental_telemetry` field to your AI SDK calls:
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 
@@ -258,25 +245,22 @@ You can also wrap parts of your code in `traceables` for more granularity.
 
 If you're using Sentry, you can attach the LangSmith trace exporter to Sentry's default OpenTelemetry instrumentation as show in the example below.
 
-<Warning>
-  At time of writing, Sentry only supports OTEL v1 packages. LangSmith supports both v1 and v2, but you **must** make sure you install OTEL v1 packages in order to make instrumentation work.
+> [!WARNING]
+> At time of writing, Sentry only supports OTEL v1 packages. LangSmith supports both v1 and v2, but you **must** make sure you install OTEL v1 packages in order to make instrumentation work.
+>
+> ```bash
+> npm install @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
+> ```
+>
+> ```bash
+> yarn add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
+> ```
+>
+> ```bash
+> pnpm add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
+> ```
 
-  <CodeGroup>
-    ```bash npm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    npm install @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-    ```
-
-    ```bash yarn theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    yarn add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-    ```
-
-    ```bash pnpm theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pnpm add @opentelemetry/sdk-trace-base@1.30.1 @opentelemetry/exporter-trace-otlp-proto@0.57.2 @opentelemetry/context-async-hooks@1.30.1
-    ```
-  </CodeGroup>
-</Warning>
-
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { initializeOTEL } from "langsmith/experimental/otel/setup";
 import { LangSmithOTLPTraceExporter } from "langsmith/experimental/otel/exporter";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
@@ -327,7 +311,7 @@ try {
 
 You can add other metadata to your traces to help organize and filter them in the LangSmith UI:
 
-```typescript {highlight={9}} theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 
@@ -348,7 +332,7 @@ Note that AI SDK propagates metadata on internal child spans as well.
 
 You can customize the run name by passing a metadata key named `ls_run_name` into `experimental_telemetry`.
 
-```typescript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```typescript
 import { generateText } from "ai";
 import { openai } from "@ai-sdk/openai";
 
@@ -368,12 +352,8 @@ await generateText({
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/legacy-trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/legacy-trace-with-vercel-ai-sdk.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

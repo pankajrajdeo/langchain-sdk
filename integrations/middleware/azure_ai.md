@@ -1,28 +1,23 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Microsoft Foundry middleware integration
 
 > Integrate with the Azure AI middleware using LangChain Python.
 
-Middleware specifically designed for Microsoft Foundry and Azure AI Content Safety. Learn more about [middleware](/oss/python/langchain/middleware/overview).
+Middleware specifically designed for Microsoft Foundry and Azure AI Content Safety. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
 
 These middleware classes live in the `langchain-azure-ai` package and are exported from `langchain_azure_ai.agents.middleware`.
 
-<Info>
-  Azure AI Content Safety middleware is currently marked experimental upstream. Expect the API surface to evolve as Azure AI Content Safety and LangChain middleware support continue to mature.
-</Info>
+> [!NOTE]
+> Azure AI Content Safety middleware is currently marked experimental upstream. Expect the API surface to evolve as Azure AI Content Safety and LangChain middleware support continue to mature.
 
 ## Overview
 
 | Middleware                                | Description                                                                  |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| [Text moderation](#text-moderation)       | Screen input and output text for harmful content and blocklist matches       |
-| [Image moderation](#image-moderation)     | Screen image inputs and outputs using Azure AI Content Safety image analysis |
-| [Prompt shield](#prompt-shield)           | Detect direct and indirect prompt injection attempts                         |
-| [Protected material](#protected-material) | Detect copyrighted or otherwise protected text or code                       |
-| [Groundedness](#groundedness)             | Evaluate model outputs against grounding sources and flag hallucinations     |
+| [Text moderation](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#text-moderation)       | Screen input and output text for harmful content and blocklist matches       |
+| [Image moderation](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#image-moderation)     | Screen image inputs and outputs using Azure AI Content Safety image analysis |
+| [Prompt shield](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#prompt-shield)           | Detect direct and indirect prompt injection attempts                         |
+| [Protected material](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#protected-material) | Detect copyrighted or otherwise protected text or code                       |
+| [Groundedness](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#groundedness)             | Evaluate model outputs against grounding sources and flag hallucinations     |
 
 ### Features
 
@@ -41,21 +36,19 @@ To use the Azure AI Content Safety middleware, install the integration package, 
 
 Install the package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-azure-ai
-  ```
+```bash
+pip install -U langchain-azure-ai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-azure-ai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-azure-ai
+```
 
 ### Credentials
 
 For authentication, pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument. Using a Foundry Project requires the use of Microsoft Entra ID for authentication.
 
-```python Initialize credential icon="shield-lock" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 
 credential = DefaultAzureCredential()
@@ -70,7 +63,7 @@ The middleware supports two endpoint styles:
 
 If both are available, prefer `project_endpoint` because it gives better defaults for Azure AI Foundry-based workflows. In most setups, you can set the environment variable once and omit `endpoint` or `project_endpoint` from each middleware instantiation.
 
-```python Configure endpoint icon="key" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 os.environ["AZURE_AI_PROJECT_ENDPOINT"] = "https://<resource>.services.ai.azure.com/api/projects/<project>"
@@ -78,7 +71,7 @@ os.environ["AZURE_AI_PROJECT_ENDPOINT"] = "https://<resource>.services.ai.azure.
 
 Import and configure your middleware from `langchain_azure_ai.agents.middleware`.
 
-```python Initialize middleware icon="arrows-shuffle" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import AzureContentModerationMiddleware
 
@@ -92,9 +85,9 @@ middleware = AzureContentModerationMiddleware(
 
 ## Use with an agent
 
-Pass middleware to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) in order. You can combine Azure AI middleware with [built-in middleware](/oss/python/langchain/middleware/built-in).
+Pass middleware to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) in order. You can combine Azure AI middleware with [built-in middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in).
 
-```python Agent with middleware icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain.agents import create_agent
 from langchain_azure_ai.agents.middleware import AzureContentModerationMiddleware
@@ -112,9 +105,8 @@ agent = create_agent(
 )
 ```
 
-<Tip>
-  If `AZURE_AI_PROJECT_ENDPOINT` is already set, you can usually omit `project_endpoint` during instantiation.
-</Tip>
+> [!TIP]
+> If `AZURE_AI_PROJECT_ENDPOINT` is already set, you can usually omit `project_endpoint` during instantiation.
 
 ## Azure AI Content Safety
 
@@ -129,7 +121,7 @@ Text moderation is useful for the following:
 * Enforcing custom blocklists in regulated or enterprise deployments
 * Composing multiple moderation passes with different category and direction settings
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import AzureContentModerationMiddleware
 
@@ -144,35 +136,31 @@ middleware = AzureContentModerationMiddleware(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="categories" type="list[str] | None">
-    Harm categories to analyze. Valid values are `'Hate'`, `'SelfHarm'`, `'Sexual'`, and `'Violence'`. Defaults to all four categories.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="severity_threshold" type="int" default="4">
-    Minimum severity score from `0` to `6` that triggers the configured behavior.
-  </ParamField>
+#### `Field` — `list[str] | None`
+Harm categories to analyze. Valid values are `'Hate'`, `'SelfHarm'`, `'Sexual'`, and `'Violence'`. Defaults to all four categories.
 
-  <ParamField body="exit_behavior" type="string" default="error">
-    One of `'error'`, `'continue'`, or `'replace'`.
-  </ParamField>
+#### `Field` — `int`
+Minimum severity score from `0` to `6` that triggers the configured behavior.
 
-  <ParamField body="apply_to_input" type="bool" default="True">
-    Whether to screen the last `HumanMessage` before the agent runs.
-  </ParamField>
+#### `Field` — `string`
+One of `'error'`, `'continue'`, or `'replace'`.
 
-  <ParamField body="apply_to_output" type="bool" default="True">
-    Whether to screen the last `AIMessage` after the agent runs.
-  </ParamField>
+#### `Field` — `bool`
+Whether to screen the last `HumanMessage` before the agent runs.
 
-  <ParamField body="blocklist_names" type="list[str] | None">
-    Names of custom blocklists configured in your Azure Content Safety resource.
-  </ParamField>
+#### `Field` — `bool`
+Whether to screen the last `AIMessage` after the agent runs.
 
-  <ParamField body="context_extractor" type="Callable | None">
-    Optional callable that extracts the text to screen from agent state and runtime.
-  </ParamField>
-</Accordion>
+#### `Field` — `list[str] | None`
+Names of custom blocklists configured in your Azure Content Safety resource.
+
+#### `Field` — `Callable | None`
+Optional callable that extracts the text to screen from agent state and runtime.
+
+</details>
 
 ### Image moderation
 
@@ -183,7 +171,7 @@ This middleware supports:
 * Base64 data URLs such as `data:image/png;base64,...`
 * Public HTTP(S) image URLs
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import (
     AzureContentModerationForImagesMiddleware,
@@ -200,37 +188,34 @@ middleware = AzureContentModerationForImagesMiddleware(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="categories" type="list[str] | None">
-    Image harm categories to analyze. Defaults to all four supported categories.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="severity_threshold" type="int" default="4">
-    Minimum severity score from `0` to `6` that triggers the configured behavior.
-  </ParamField>
+#### `Field` — `list[str] | None`
+Image harm categories to analyze. Defaults to all four supported categories.
 
-  <ParamField body="exit_behavior" type="string" default="error">
-    One of `'error'` or `'continue'`.
-  </ParamField>
+#### `Field` — `int`
+Minimum severity score from `0` to `6` that triggers the configured behavior.
 
-  <ParamField body="apply_to_input" type="bool" default="True">
-    Whether to screen images in the latest `HumanMessage`.
-  </ParamField>
+#### `Field` — `string`
+One of `'error'` or `'continue'`.
 
-  <ParamField body="apply_to_output" type="bool" default="False">
-    Whether to screen images in the latest `AIMessage`.
-  </ParamField>
+#### `Field` — `bool`
+Whether to screen images in the latest `HumanMessage`.
 
-  <ParamField body="context_extractor" type="Callable | None">
-    Optional callable that extracts images from agent state and runtime.
-  </ParamField>
-</Accordion>
+#### `Field` — `bool`
+Whether to screen images in the latest `AIMessage`.
+
+#### `Field` — `Callable | None`
+Optional callable that extracts images from agent state and runtime.
+
+</details>
 
 ### Prompt shield
 
 Use `AzurePromptShieldMiddleware` to detect prompt injection in user prompts and optional supporting documents. By default it screens input only, because prompt injection is usually an input-side attack, but you can also enable output screening.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import AzurePromptShieldMiddleware
 
@@ -243,29 +228,28 @@ middleware = AzurePromptShieldMiddleware(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="exit_behavior" type="string" default="error">
-    One of `'error'`, `'continue'`, or `'replace'`.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="apply_to_input" type="bool" default="True">
-    Whether to screen the latest `HumanMessage` before the agent runs.
-  </ParamField>
+#### `Field` — `string`
+One of `'error'`, `'continue'`, or `'replace'`.
 
-  <ParamField body="apply_to_output" type="bool" default="False">
-    Whether to screen the latest `AIMessage` after the agent runs.
-  </ParamField>
+#### `Field` — `bool`
+Whether to screen the latest `HumanMessage` before the agent runs.
 
-  <ParamField body="context_extractor" type="Callable | None">
-    Optional callable that extracts the user prompt and grounding documents from agent state and runtime.
-  </ParamField>
-</Accordion>
+#### `Field` — `bool`
+Whether to screen the latest `AIMessage` after the agent runs.
+
+#### `Field` — `Callable | None`
+Optional callable that extracts the user prompt and grounding documents from agent state and runtime.
+
+</details>
 
 ### Protected material
 
 Use `AzureProtectedMaterialMiddleware` to detect protected content such as copyrighted text or code. This middleware can screen both the latest user input and the latest model output.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import AzureProtectedMaterialMiddleware
 
@@ -280,27 +264,25 @@ middleware = AzureProtectedMaterialMiddleware(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="type" type="string" default="text">
-    The content type to screen: `'text'` or `'code'`.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="exit_behavior" type="string" default="error">
-    One of `'error'`, `'continue'`, or `'replace'`.
-  </ParamField>
+#### `Field` — `string`
+The content type to screen: `'text'` or `'code'`.
 
-  <ParamField body="apply_to_input" type="bool" default="True">
-    Whether to screen the latest `HumanMessage`.
-  </ParamField>
+#### `Field` — `string`
+One of `'error'`, `'continue'`, or `'replace'`.
 
-  <ParamField body="apply_to_output" type="bool" default="True">
-    Whether to screen the latest `AIMessage`.
-  </ParamField>
+#### `Field` — `bool`
+Whether to screen the latest `HumanMessage`.
 
-  <ParamField body="context_extractor" type="Callable | None">
-    Optional callable that extracts text from agent state and runtime.
-  </ParamField>
-</Accordion>
+#### `Field` — `bool`
+Whether to screen the latest `AIMessage`.
+
+#### `Field` — `Callable | None`
+Optional callable that extracts text from agent state and runtime.
+
+</details>
 
 ### Groundedness
 
@@ -308,7 +290,7 @@ Use `AzureGroundednessMiddleware` to evaluate whether a model response is ground
 
 By default, groundedness collects sources from the current conversation, including system content, tool outputs, and relevant annotations attached to model responses.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.agents.middleware import AzureGroundednessMiddleware
 
@@ -321,23 +303,22 @@ middleware = AzureGroundednessMiddleware(
 )
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="domain" type="string" default="Generic">
-    The analysis domain. Supported values are `'Generic'` and `'Medical'`.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="task" type="string" default="Summarization">
-    The task type for the analysis. Supported values are `'Summarization'` and `'QnA'`.
-  </ParamField>
+#### `Field` — `string`
+The analysis domain. Supported values are `'Generic'` and `'Medical'`.
 
-  <ParamField body="exit_behavior" type="string" default="error">
-    One of `'error'` or `'continue'`.
-  </ParamField>
+#### `Field` — `string`
+The task type for the analysis. Supported values are `'Summarization'` and `'QnA'`.
 
-  <ParamField body="context_extractor" type="Callable | None">
-    Optional callable that extracts the answer, grounding sources, and optional question from agent state and runtime.
-  </ParamField>
-</Accordion>
+#### `Field` — `string`
+One of `'error'` or `'continue'`.
+
+#### `Field` — `Callable | None`
+Optional callable that extracts the answer, grounding sources, and optional question from agent state and runtime.
+
+</details>
 
 ## API reference
 
@@ -345,12 +326,8 @@ For the full public API, see the middleware exports in [`langchain_azure_ai.agen
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/middleware/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

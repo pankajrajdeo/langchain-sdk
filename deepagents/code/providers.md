@@ -1,121 +1,106 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Model providers
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/providers)
+Configure any LangChain-compatible model provider for Deep Agents Code
 
-> Configure any LangChain-compatible model provider for Deep Agents Code
-
-Deep Agents Code supports any [chat model provider compatible with LangChain](/oss/python/integrations/chat), unlocking use for virtually any LLM that supports tool calling. Any service that exposes an OpenAI-compatible or Anthropic-compatible API also works out of the box—see [Compatible APIs](/oss/deepagents/code/config-file#compatible-apis).
+Deep Agents Code supports any [chat model provider compatible with LangChain](https://docs.langchain.com/oss/python/integrations/chat), unlocking use for virtually any LLM that supports tool calling. Any service that exposes an OpenAI-compatible or Anthropic-compatible API also works out of the box—see [Compatible APIs](https://docs.langchain.com/oss/deepagents/code/config-file#compatible-apis).
 
 ## Quickstart
 
-Deep Agents Code integrates automatically with the [following model providers](#provider-reference): no extra configuration needed beyond installing the relevant provider package.
+Deep Agents Code integrates automatically with the [following model providers](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference): no extra configuration needed beyond installing the relevant provider package.
 
 1. **Install provider packages**
 
    Each model provider requires its corresponding LangChain integration package. These ship as optional extras to keep the application lightweight. OpenAI, Anthropic, and Gemini are included by default. Install any other extra from within a session with `/install`, or from the shell with `dcode --install`:
 
-   <CodeGroup>
-     ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     /install groq
-     ```
+```txt
+   /install groq
+```
 
-     ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     dcode --install groq
-     ```
-   </CodeGroup>
+```bash
+   dcode --install groq
+```
 
    Run `/install` with no argument to list the valid extras. To preinstall extras during the initial CLI install, set `DEEPAGENTS_CODE_EXTRAS`:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    DEEPAGENTS_CODE_EXTRAS="baseten,groq" curl -LsSf https://langch.in/dcode | bash
-   ```
+```
 
 2. **Set credentials**
 
-   Add an API key for your provider with the [`/auth`](/oss/deepagents/code/credentials#use-%2Fauth-recommended) credential manager:
+   Add an API key for your provider with the [`/auth`](https://docs.langchain.com/oss/deepagents/code/credentials#use-%2Fauth-recommended) credential manager:
 
-   ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
    /auth
-   ```
+```
 
    `/auth` shows a list of available providers and stores credentials for reuse across sessions.
 
-   For non-interactive runs, CI/CD, or anywhere a TUI isn't available, store the same key from the shell with [`dcode auth set`](/oss/deepagents/code/credentials#manage-credentials-from-the-shell-dcode-auth) or set the provider's environment variable instead. See [Provider credentials](/oss/deepagents/code/credentials) for the full key resolution order, the [`DEEPAGENTS_CODE_` prefix](/oss/deepagents/code/configuration#deepagents_code_-prefix) for scoping a key to Deep Agents Code, and the [Provider reference](#provider-reference) for each provider's environment variable.
+   For non-interactive runs, CI/CD, or anywhere a TUI isn't available, store the same key from the shell with [`dcode auth set`](https://docs.langchain.com/oss/deepagents/code/credentials#manage-credentials-from-the-shell-dcode-auth) or set the provider's environment variable instead. See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials) for the full key resolution order, the [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) for scoping a key to Deep Agents Code, and the [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference) for each provider's environment variable.
 
-   To configure model parameters, see [Model parameters](#model-parameters).
+   To configure model parameters, see [Model parameters](https://docs.langchain.com/oss/deepagents/code/providers#model-parameters).
 
 ## Provider reference
 
-Using a provider not listed here? See [Arbitrary providers](/oss/deepagents/code/config-file#arbitrary-providers): any LangChain-compatible provider can be used in Deep Agents Code with additional setup.
+Using a provider not listed here? See [Arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers): any LangChain-compatible provider can be used in Deep Agents Code with additional setup.
 
 | Provider             | Package                                                                                    | Credential env var                                   | Model profiles |
 | -------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- | -------------- |
-| OpenAI               | [`langchain-openai`](/oss/python/integrations/chat/openai)                                 | `OPENAI_API_KEY`                                     | ✅              |
-| OpenAI (Codex)       | [`langchain-openai`](/oss/python/integrations/chat/openai)                                 | None — [sign in with ChatGPT](#sign-in-with-chatgpt) | ✅              |
-| Azure OpenAI         | [`langchain-openai`](/oss/python/integrations/chat/azure_chat_openai)                      | `AZURE_OPENAI_API_KEY`                               | ✅              |
-| Anthropic            | [`langchain-anthropic`](/oss/python/integrations/chat/anthropic)                           | `ANTHROPIC_API_KEY`                                  | ✅              |
-| Google Gemini API    | [`langchain-google-genai`](/oss/python/integrations/chat/google_generative_ai)             | `GOOGLE_API_KEY`                                     | ✅              |
-| Google Vertex AI     | [`langchain-google-genai`](/oss/python/integrations/chat/google_generative_ai#credentials) | `GOOGLE_CLOUD_PROJECT`                               | ✅              |
+| OpenAI               | [`langchain-openai`](https://docs.langchain.com/oss/python/integrations/chat/openai)                                 | `OPENAI_API_KEY`                                     | ✅              |
+| OpenAI (Codex)       | [`langchain-openai`](https://docs.langchain.com/oss/python/integrations/chat/openai)                                 | None — [sign in with ChatGPT](https://docs.langchain.com/oss/deepagents/code/providers#sign-in-with-chatgpt) | ✅              |
+| Azure OpenAI         | [`langchain-openai`](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai)                      | `AZURE_OPENAI_API_KEY`                               | ✅              |
+| Anthropic            | [`langchain-anthropic`](https://docs.langchain.com/oss/python/integrations/chat/anthropic)                           | `ANTHROPIC_API_KEY`                                  | ✅              |
+| Google Gemini API    | [`langchain-google-genai`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai)             | `GOOGLE_API_KEY`                                     | ✅              |
+| Google Vertex AI     | [`langchain-google-genai`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#credentials) | `GOOGLE_CLOUD_PROJECT`                               | ✅              |
 | Baseten              | [`langchain-baseten`](https://github.com/basetenlabs/langchain-baseten)                    | `BASETEN_API_KEY`                                    | ✅              |
-| AWS Bedrock          | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
-| AWS Bedrock Converse | [`langchain-aws`](/oss/python/integrations/chat/bedrock)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
-| Hugging Face         | [`langchain-huggingface`](/oss/python/integrations/chat/huggingface)                       | `HUGGINGFACEHUB_API_TOKEN`                           | ✅              |
-| Ollama               | [`langchain-ollama`](/oss/python/integrations/chat/ollama)                                 | `OLLAMA_API_KEY` (cloud only; optional)              | ❌              |
-| Groq                 | [`langchain-groq`](/oss/python/integrations/chat/groq)                                     | `GROQ_API_KEY`                                       | ✅              |
-| Cohere               | [`langchain-cohere`](/oss/python/integrations/chat/cohere)                                 | `COHERE_API_KEY`                                     | ❌              |
-| Fireworks            | [`langchain-fireworks`](/oss/python/integrations/chat/fireworks)                           | `FIREWORKS_API_KEY`                                  | ✅              |
-| Together             | [`langchain-together`](/oss/python/integrations/chat/together)                             | `TOGETHER_API_KEY`                                   | ❌              |
+| AWS Bedrock          | [`langchain-aws`](https://docs.langchain.com/oss/python/integrations/chat/bedrock)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
+| AWS Bedrock Converse | [`langchain-aws`](https://docs.langchain.com/oss/python/integrations/chat/bedrock)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
+| Hugging Face         | [`langchain-huggingface`](https://docs.langchain.com/oss/python/integrations/chat/huggingface)                       | `HUGGINGFACEHUB_API_TOKEN`                           | ✅              |
+| Ollama               | [`langchain-ollama`](https://docs.langchain.com/oss/python/integrations/chat/ollama)                                 | `OLLAMA_API_KEY` (cloud only; optional)              | ❌              |
+| Groq                 | [`langchain-groq`](https://docs.langchain.com/oss/python/integrations/chat/groq)                                     | `GROQ_API_KEY`                                       | ✅              |
+| Cohere               | [`langchain-cohere`](https://docs.langchain.com/oss/python/integrations/chat/cohere)                                 | `COHERE_API_KEY`                                     | ❌              |
+| Fireworks            | [`langchain-fireworks`](https://docs.langchain.com/oss/python/integrations/chat/fireworks)                           | `FIREWORKS_API_KEY`                                  | ✅              |
+| Together             | [`langchain-together`](https://docs.langchain.com/oss/python/integrations/chat/together)                             | `TOGETHER_API_KEY`                                   | ❌              |
 | Meta                 | [`langchain-meta`](https://github.com/langchain-ai/langchain-meta)                         | `MODEL_API_KEY`                                      | ✅              |
-| Mistral AI           | [`langchain-mistralai`](/oss/python/integrations/chat/mistralai)                           | `MISTRAL_API_KEY`                                    | ✅              |
-| DeepSeek             | [`langchain-deepseek`](/oss/python/integrations/chat/deepseek)                             | `DEEPSEEK_API_KEY`                                   | ✅              |
-| IBM (watsonx.ai)     | [`langchain-ibm`](/oss/python/integrations/chat/ibm_watsonx)                               | `WATSONX_APIKEY`                                     | ❌              |
-| Nvidia               | [`langchain-nvidia-ai-endpoints`](/oss/python/integrations/chat/nvidia_ai_endpoints)       | `NVIDIA_API_KEY`                                     | ✅              |
-| xAI                  | [`langchain-xai`](/oss/python/integrations/chat/xai)                                       | `XAI_API_KEY`                                        | ✅              |
-| Perplexity           | [`langchain-perplexity`](/oss/python/integrations/chat/perplexity)                         | `PERPLEXITY_API_KEY` (or `PPLX_API_KEY`)             | ✅              |
-| OpenRouter           | [`langchain-openrouter`](/oss/python/integrations/chat/openrouter)                         | `OPENROUTER_API_KEY`                                 | ✅              |
-| LiteLLM              | [`langchain-litellm`](/oss/python/integrations/chat/litellm)                               | Per-provider (see [docs](https://docs.litellm.ai/))  | ❌              |
+| Mistral AI           | [`langchain-mistralai`](https://docs.langchain.com/oss/python/integrations/chat/mistralai)                           | `MISTRAL_API_KEY`                                    | ✅              |
+| DeepSeek             | [`langchain-deepseek`](https://docs.langchain.com/oss/python/integrations/chat/deepseek)                             | `DEEPSEEK_API_KEY`                                   | ✅              |
+| IBM (watsonx.ai)     | [`langchain-ibm`](https://docs.langchain.com/oss/python/integrations/chat/ibm_watsonx)                               | `WATSONX_APIKEY`                                     | ❌              |
+| Nvidia               | [`langchain-nvidia-ai-endpoints`](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)       | `NVIDIA_API_KEY`                                     | ✅              |
+| xAI                  | [`langchain-xai`](https://docs.langchain.com/oss/python/integrations/chat/xai)                                       | `XAI_API_KEY`                                        | ✅              |
+| Perplexity           | [`langchain-perplexity`](https://docs.langchain.com/oss/python/integrations/chat/perplexity)                         | `PERPLEXITY_API_KEY` (or `PPLX_API_KEY`)             | ✅              |
+| OpenRouter           | [`langchain-openrouter`](https://docs.langchain.com/oss/python/integrations/chat/openrouter)                         | `OPENROUTER_API_KEY`                                 | ✅              |
+| LiteLLM              | [`langchain-litellm`](https://docs.langchain.com/oss/python/integrations/chat/litellm)                               | Per-provider (see [docs](https://docs.litellm.ai/))  | ❌              |
 
-<Tip>
-  You can scope any credential to Deep Agents Code by adding a `DEEPAGENTS_CODE_` prefix. For example, `DEEPAGENTS_CODE_OPENAI_API_KEY` takes priority over `OPENAI_API_KEY` within Deep Agents Code without affecting other tools. See [`DEEPAGENTS_CODE_` prefix](/oss/deepagents/code/configuration#deepagents_code_-prefix) for details.
-</Tip>
+> [!TIP]
+> You can scope any credential to Deep Agents Code by adding a `DEEPAGENTS_CODE_` prefix. For example, `DEEPAGENTS_CODE_OPENAI_API_KEY` takes priority over `OPENAI_API_KEY` within Deep Agents Code without affecting other tools. See [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) for details.
 
-<Tip>
-  [Model profiles](/oss/python/langchain/models#model-profiles) provide model metadata used by the interactive `/model` switcher. If a model is missing from the switcher, pass the model name directly or add it via `config.toml`.
-</Tip>
+> [!TIP]
+> [Model profiles](https://docs.langchain.com/oss/python/langchain/models#model-profiles) provide model metadata used by the interactive `/model` switcher. If a model is missing from the switcher, pass the model name directly or add it via `config.toml`.
 
 ### Sign in with ChatGPT
 
 The `openai_codex` provider lets you use OpenAI's Codex models with your paid **ChatGPT** subscription instead of an `OPENAI_API_KEY`. You sign in with your ChatGPT account, and it shows up as its own provider in both `/auth` and the `/model` switcher, separate from the API-key-based `openai` provider.
 
-<Steps>
-  <Step title="Start the sign-in">
-    Run `/auth` in any session and select **`openai_codex`**. Because ChatGPT signs you in through your browser, this starts a browser sign-in instead of asking for an API key.
-  </Step>
+### Start the sign-in
+Run `/auth` in any session and select **`openai_codex`**. Because ChatGPT signs you in through your browser, this starts a browser sign-in instead of asking for an API key.
 
-  <Step title="Authorize in your browser">
-    Deep Agents Code opens your browser to the ChatGPT sign-in page. If it can't open a browser (for example, over SSH), it also shows the sign-in URL on screen so you can copy it to a browser on another device.
-  </Step>
+### Authorize in your browser
+Deep Agents Code opens your browser to the ChatGPT sign-in page. If it can't open a browser (for example, over SSH), it also shows the sign-in URL on screen so you can copy it to a browser on another device.
 
-  <Step title="Select a Codex model">
-    Once signed in, the Codex models appear in the `/model` switcher under the `openai_codex` provider. Switch to one directly with its spec:
+### Select a Codex model
+Once signed in, the Codex models appear in the `/model` switcher under the `openai_codex` provider. Switch to one directly with its spec:
 
-    ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    /model openai_codex:gpt-5.5
-    ```
-  </Step>
-</Steps>
+```txt
+/model openai_codex:gpt-5.5
+```
 
 Your sign-in persists across sessions. To check your status or sign out, run `/auth`, select `openai_codex`, and choose to re-authenticate or sign out.
 
-<Note>
-  `openai_codex` is separate from `openai`. To use OpenAI models with a standard API key instead, use the regular `openai` provider (e.g. `/model openai:gpt-5.5`).
-</Note>
+> [!NOTE]
+> `openai_codex` is separate from `openai`. To use OpenAI models with a standard API key instead, use the regular `openai` provider (e.g. `/model openai:gpt-5.5`).
 
-<Note>
-  Some provider-specific account types or key scopes may not work for API access. If a provider appears configured in `/auth` but requests still fail, verify that the account plan and API-key permissions match the provider's API requirements.
-</Note>
+> [!NOTE]
+> Some provider-specific account types or key scopes may not work for API access. If a provider appears configured in `/auth` but requests still fail, verify that the account plan and API-key permissions match the provider's API requirements.
 
 ### Model routers and proxies
 
@@ -125,32 +110,28 @@ Use the dedicated integration packages for these services:
 
 | Router     | Package                                                            | Config                                                                         |
 | ---------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| OpenRouter | [`langchain-openrouter`](/oss/python/integrations/chat/openrouter) | `openrouter:<model>` (built-in, see [Provider reference](#provider-reference)) |
-| LiteLLM    | [`langchain-litellm`](/oss/python/integrations/chat/litellm)       | `litellm:<model>` (built-in, see [Provider reference](#provider-reference))    |
+| OpenRouter | [`langchain-openrouter`](https://docs.langchain.com/oss/python/integrations/chat/openrouter) | `openrouter:<model>` (built-in, see [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference)) |
+| LiteLLM    | [`langchain-litellm`](https://docs.langchain.com/oss/python/integrations/chat/litellm)       | `litellm:<model>` (built-in, see [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference))    |
 
 **OpenRouter** is a built-in provider—install the extra and use it directly:
 
-<CodeGroup>
-  ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  /install openrouter
-  ```
+```txt
+/install openrouter
+```
 
-  ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  dcode --install openrouter
-  ```
-</CodeGroup>
+```bash
+dcode --install openrouter
+```
 
 **LiteLLM** is also a built-in provider:
 
-<CodeGroup>
-  ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  /install litellm
-  ```
+```txt
+/install litellm
+```
 
-  ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  dcode --install litellm
-  ```
-</CodeGroup>
+```bash
+dcode --install litellm
+```
 
 ## Switch models
 
@@ -158,46 +139,51 @@ To switch models in Deep Agents Code, either:
 
 1. **Use the interactive model switcher** with the `/model` command.
 
-   <Note>
-     Not all models appear here. If yours is missing, pass the model name directly (e.g. `/model gpt-5.5`) or add it to `config.toml`.
-   </Note>
+> [!NOTE]
+>    Not all models appear here. If yours is missing, pass the model name directly (e.g. `/model gpt-5.5`) or add it to `config.toml`.
+
 2. **Specify a model name directly** as an argument, e.g. `/model gpt-5.5`. You can use any model supported by the chosen provider, regardless of whether it appears in the list from option 1. The model name will be passed to the API request.
 3. **Specify the model at launch** via `--model`, e.g.
 
-   ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
    dcode --model openai:gpt-5.5
-   ```
+```
 
-<Accordion title="Model resolution order" icon="list-numbers">
-  When Deep Agents Code launches, it resolves which model to use in the following order:
+<details>
+<summary>Model resolution order</summary>
 
-  1. **`--model` flag** always wins when provided.
-  2. **`[models].default`** in `~/.deepagents/config.toml`—the user's intentional long-term preference.
-  3. **`[models].recent`** in `~/.deepagents/config.toml`—the last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
-  4. **Environment auto-detection**: falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Vertex AI).
+When Deep Agents Code launches, it resolves which model to use in the following order:
 
-  This startup fallback intentionally checks only those four credentials. Other supported providers (for example, Groq) are still available via `--model`, `/model`, and saved defaults (`[models].default` / `[models].recent`).
-</Accordion>
+1. **`--model` flag** always wins when provided.
+2. **`[models].default`** in `~/.deepagents/config.toml`—the user's intentional long-term preference.
+3. **`[models].recent`** in `~/.deepagents/config.toml`—the last model switched to via `/model`. Written automatically; never overwrites `[models].default`.
+4. **Environment auto-detection**: falls back to the first available startup credential, checked in order: `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, `GOOGLE_CLOUD_PROJECT` (Vertex AI).
+
+This startup fallback intentionally checks only those four credentials. Other supported providers (for example, Groq) are still available via `--model`, `/model`, and saved defaults (`[models].default` / `[models].recent`).
+
+</details>
 
 ### Which models appear in the switcher
 
 The `/model` selector dynamically builds its list from installed provider packages. Expand below for the full criteria and troubleshooting.
 
-<Accordion title="How the switcher builds its model list" icon="list-search">
-  The interactive `/model` selector builds its list from installed provider packages and models configured in `config.toml`.
+<details>
+<summary>How the switcher builds its model list</summary>
 
-  A model appears when:
+The interactive `/model` selector builds its list from installed provider packages and models configured in `config.toml`.
 
-  1. The provider package is installed.
-  2. The model is available from the provider package, a local provider, or your `config.toml`.
-  3. The model profile does not mark text input or output as unsupported.
+A model appears when:
 
-  If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
+1. The provider package is installed.
+2. The model is available from the provider package, a local provider, or your `config.toml`.
+3. The model profile does not mark text input or output as unsupported.
 
-  <Tip>
-    Credential status does **not** affect whether a model is listed. You can still select a model with missing credentials. The provider reports an authentication error at request time.
-  </Tip>
-</Accordion>
+If a model is missing, use `/model <provider>:<model>` directly or add it to [`[models.providers.<name>].models`](/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
+
+> [!TIP]
+> Credential status does **not** affect whether a model is listed. You can still select a model with missing credentials. The provider reports an authentication error at request time.
+
+</details>
 
 ### Open weights models
 
@@ -207,33 +193,29 @@ If you want to use an open weights model, there are two common paths depending o
 
 1. [Install Ollama](https://ollama.com/) and pull a model, for example:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    ollama pull qwen3:4b
-   ```
+```
 
 2. Install the Ollama extra:
 
-   <CodeGroup>
-     ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     /install ollama
-     ```
+```txt
+   /install ollama
+```
 
-     ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     dcode --install ollama
-     ```
-   </CodeGroup>
+```bash
+   dcode --install ollama
+```
 
 3. Select the model:
 
-   <CodeGroup>
-     ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     /model
-     ```
+```txt
+   /model
+```
 
-     ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     dcode --model ollama:qwen3:4b
-     ```
-   </CodeGroup>
+```bash
+   dcode --model ollama:qwen3:4b
+```
 
    Use the interactive switcher, or pass the model directly with `/model ollama:qwen3:4b`.
 
@@ -243,73 +225,64 @@ If you want to use an open weights model, there are two common paths depending o
 
 2. Install the Groq extra:
 
-   <CodeGroup>
-     ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     /install groq
-     ```
+```txt
+   /install groq
+```
 
-     ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     dcode --install groq
-     ```
-   </CodeGroup>
+```bash
+   dcode --install groq
+```
 
 3. Select a model:
 
-   <CodeGroup>
-     ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     /model
-     ```
+```txt
+   /model
+```
 
-     ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     GROQ_API_KEY="your-api-key" dcode --model groq:openai/gpt-oss-120b
-     ```
-   </CodeGroup>
+```bash
+   GROQ_API_KEY="your-api-key" dcode --model groq:openai/gpt-oss-120b
+```
 
    Use the interactive switcher, or pass the model directly with `/model groq:openai/gpt-oss-120b`.
 
 **Fireworks** is another popular cloud provider for open weights models:
 
-<CodeGroup>
-  ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  /install fireworks
-  /model
-  ```
+```txt
+/install fireworks
+/model
+```
 
-  ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  dcode --install fireworks
-  FIREWORKS_API_KEY="your-api-key" dcode --model fireworks:accounts/fireworks/models/deepseek-v4-pro
-  ```
-</CodeGroup>
+```bash
+dcode --install fireworks
+FIREWORKS_API_KEY="your-api-key" dcode --model fireworks:accounts/fireworks/models/deepseek-v4-pro
+```
 
 Use the interactive switcher, or pass the model directly with `/model fireworks:accounts/fireworks/models/deepseek-v4-pro`.
 
 **Baseten** is another cloud provider for open weights models:
 
-<CodeGroup>
-  ```txt In session theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  /install baseten
-  /model
-  ```
+```txt
+/install baseten
+/model
+```
 
-  ```bash Shell theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  dcode --install baseten
-  BASETEN_API_KEY="your-api-key" dcode --model baseten:moonshotai/Kimi-K2.7-Code
-  ```
-</CodeGroup>
+```bash
+dcode --install baseten
+BASETEN_API_KEY="your-api-key" dcode --model baseten:moonshotai/Kimi-K2.7-Code
+```
 
 Use the interactive switcher, or pass the model directly with `/model baseten:moonshotai/Kimi-K2.7-Code`.
 
-<Tip>
-  If you want a provider preinstalled at the same time as the CLI itself, use `DEEPAGENTS_CODE_EXTRAS` during the initial install:
+> [!TIP]
+> If you want a provider preinstalled at the same time as the CLI itself, use `DEEPAGENTS_CODE_EXTRAS` during the initial install:
+>
+> ```bash
+> DEEPAGENTS_CODE_EXTRAS="fireworks" curl -LsSf https://langch.in/dcode | bash
+> ```
+>
+> You can combine multiple providers: `DEEPAGENTS_CODE_EXTRAS="groq,fireworks,ollama"`. If Deep Agents Code is already installed, use `/install <extra>` in a session or `dcode --install <extra>` from the shell instead.
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  DEEPAGENTS_CODE_EXTRAS="fireworks" curl -LsSf https://langch.in/dcode | bash
-  ```
-
-  You can combine multiple providers: `DEEPAGENTS_CODE_EXTRAS="groq,fireworks,ollama"`. If Deep Agents Code is already installed, use `/install <extra>` in a session or `dcode --install <extra>` from the shell instead.
-</Tip>
-
-**Together**, **OpenRouter**, and **Hugging Face** (`langchain-huggingface`) are other options for cloud-hosted open weights. See the [Provider reference](#provider-reference) for credentials and package names.
+**Together**, **OpenRouter**, and **Hugging Face** (`langchain-huggingface`) are other options for cloud-hosted open weights. See the [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference) for credentials and package names.
 
 ### Set a default model
 
@@ -317,16 +290,16 @@ You can set a persistent default model that applies to all future CLI launches:
 
 * **Via model selector:** Open `/model`, navigate to the desired model, and press `Ctrl+S` to pin it as the default. Pressing `Ctrl+S` again on the current default clears it.
 * **Via command:** `/model --default provider:model` (e.g., `/model --default anthropic:claude-opus-4-8`)
-* **Via config file:** Set `[models].default` in `~/.deepagents/config.toml` (see [Configuration](/oss/deepagents/code/configuration)).
+* **Via config file:** Set `[models].default` in `~/.deepagents/config.toml` (see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)).
 * **From the shell:**
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
   dcode --default-model anthropic:claude-opus-4-8
-  ```
+```
 
 To view the current default:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 dcode --default-model
 ```
 
@@ -334,9 +307,9 @@ To clear the default:
 
 * **From the shell:**
 
-  ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
   dcode --clear-default-model
-  ```
+```
 
 * **Via command:** `/model --default --clear`
 
@@ -350,24 +323,24 @@ Pass extra constructor kwargs to the model—sampling controls, reasoning/thinki
 
 1. **One-off at launch with `--model-params`.** JSON string, session-only:
 
-   ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
    # OpenAI reasoning effort
    dcode --model openai:gpt-5.5 --model-params '{"reasoning": {"effort": "high"}}'
 
    # Anthropic extended thinking
    dcode --model anthropic:claude-opus-4-8 --model-params '{"thinking": {"type": "enabled", "budget_tokens": 10000}, "max_tokens": 16000}'
-   ```
+```
 
 2. **Mid-session via `/model --model-params`.** Same JSON syntax—swaps params (and optionally the model) without restarting:
 
-   ```txt theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```txt
    /model --model-params '{"temperature": 0.7}' anthropic:claude-opus-4-8
    /model --model-params '{"num_ctx": 16384}'           # opens selector, applies params to choice
-   ```
+```
 
 3. **Persistent in `config.toml`.** Provider-level defaults (with optional per-model sub-tables) that apply on every launch:
 
-   ```toml theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```toml
    [models.providers.anthropic.params]
    thinking = { type = "enabled", budget_tokens = 10000 }
    max_tokens = 16000
@@ -383,34 +356,28 @@ Pass extra constructor kwargs to the model—sampling controls, reasoning/thinki
    # Per-model override—wins over provider-level keys
    [models.providers.ollama.params."qwen3:4b"]
    temperature = 0.5
-   ```
+```
 
-CLI flags override config-file `params` and are session-only (mid-session changes are not persisted). Per-model sub-tables in `config.toml` override provider-level keys (shallow merge—see [Model constructor params](/oss/deepagents/code/config-file#model-constructor-params) for full semantics). `--model-params` cannot be combined with `--default`.
+CLI flags override config-file `params` and are session-only (mid-session changes are not persisted). Per-model sub-tables in `config.toml` override provider-level keys (shallow merge—see [Model constructor params](https://docs.langchain.com/oss/deepagents/code/config-file#model-constructor-params) for full semantics). `--model-params` cannot be combined with `--default`.
 
 For retry counts, prefer `--max-retries` or the top-level [`[retries]` config](/oss/deepagents/code/config-file#retries).
 
-<Tip>
-  Any kwarg accepted by the underlying chat-model constructor is valid. Refer to the provider's reference docs for the full list—e.g. [`ChatAnthropic`](https://reference.langchain.com/python/langchain-anthropic/langchain_anthropic/chat_models/ChatAnthropic), [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/langchain_openai/chat_models/base/ChatOpenAI), [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/langchain_ollama/chat_models/ChatOllama). Unknown kwargs are forwarded to the upstream API request, so newly released parameters work without a CLI update.
-</Tip>
+> [!TIP]
+> Any kwarg accepted by the underlying chat-model constructor is valid. Refer to the provider's reference docs for the full list—e.g. [`ChatAnthropic`](https://reference.langchain.com/python/langchain-anthropic/langchain_anthropic/chat_models/ChatAnthropic), [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/langchain_openai/chat_models/base/ChatOpenAI), [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/langchain_ollama/chat_models/ChatOllama). Unknown kwargs are forwarded to the upstream API request, so newly released parameters work without a CLI update.
 
-<Note>
-  Don't put credentials (`api_key`) in `params`—use [`api_key_env`](/oss/deepagents/code/config-file#provider-configuration) to point at an environment variable instead.
-</Note>
+> [!NOTE]
+> Don't put credentials (`api_key`) in `params`—use [`api_key_env`](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration) to point at an environment variable instead.
 
-To override fields on the model's runtime *profile* (`max_input_tokens`, `tool_calling`, capability flags)—distinct from constructor params—see [Profile overrides](/oss/deepagents/code/config-file#profile-overrides-advanced).
+To override fields on the model's runtime *profile* (`max_input_tokens`, `tool_calling`, capability flags)—distinct from constructor params—see [Profile overrides](https://docs.langchain.com/oss/deepagents/code/config-file#profile-overrides-advanced).
 
 ## Advanced configuration
 
-For detailed configuration of provider params, profile overrides, custom base URLs, compatible APIs, arbitrary providers, and lifecycle hooks, see [Config file](/oss/deepagents/code/config-file) and [Hooks](/oss/deepagents/code/hooks).
+For detailed configuration of provider params, profile overrides, custom base URLs, compatible APIs, arbitrary providers, and lifecycle hooks, see [Config file](https://docs.langchain.com/oss/deepagents/code/config-file) and [Hooks](https://docs.langchain.com/oss/deepagents/code/hooks).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

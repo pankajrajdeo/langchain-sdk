@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatHuggingFace integration
 
 > Integrate with the ChatHuggingFace chat model using LangChain Python.
 
-This will help you get started with `langchain_huggingface` [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatHuggingFace` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace). For a list of models supported by Hugging Face check out [this page](https://huggingface.co/models).
+This will help you get started with `langchain_huggingface` [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatHuggingFace` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace). For a list of models supported by Hugging Face check out [this page](https://huggingface.co/models).
 
 ## Overview
 
@@ -18,7 +14,7 @@ This will help you get started with `langchain_huggingface` [chat models](/oss/p
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ❌                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -30,7 +26,7 @@ To access Hugging Face models you'll need to create a Hugging Face account, get 
 
 Generate a [Hugging Face Access Token](https://huggingface.co/docs/hub/security-tokens) and store it as an environment variable: `HUGGINGFACEHUB_API_TOKEN`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -46,7 +42,7 @@ if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ❌                             |       ❌      |                            ❌                            |                              ❌                             |
 
@@ -58,7 +54,7 @@ To access `langchain_huggingface` models you'll need to create a `Hugging Face` 
 
 You'll need to have a [Hugging Face Access Token](https://huggingface.co/docs/hub/security-tokens) saved as an environment variable: `HUGGINGFACEHUB_API_TOKEN`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -67,7 +63,7 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] = getpass.getpass(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU  langchain-huggingface text-generation transformers google-search-results numexpr langchainhub sentencepiece jinja2 bitsandbytes accelerate
 ```
 
@@ -77,7 +73,7 @@ You can instantiate a `ChatHuggingFace` model in two different ways, either from
 
 ### `HuggingFaceEndpoint`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
 llm = HuggingFaceEndpoint(
@@ -92,7 +88,7 @@ llm = HuggingFaceEndpoint(
 chat_model = ChatHuggingFace(llm=llm)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The token has not been saved to the git credentials helper. Pass `add_to_git_credential=True` in this function directly or `--add-to-git-credential` if using via `huggingface-cli` if you want to set the git credential as well.
 Token is valid (permission: fineGrained).
 Your token has been saved to /Users/isaachershenson/.cache/huggingface/token
@@ -101,7 +97,7 @@ Login successful
 
 Now let's take advantage of [Inference Providers](https://huggingface.co/docs/inference-providers) to run the model on specific third-party providers
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = HuggingFaceEndpoint(
     repo_id="deepseek-ai/DeepSeek-R1-0528",
     task="text-generation",
@@ -115,7 +111,7 @@ chat_model = ChatHuggingFace(llm=llm)
 
 ### `HuggingFacePipeline`
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_huggingface import ChatHuggingFace, HuggingFacePipeline
 
 llm = HuggingFacePipeline.from_model_id(
@@ -131,55 +127,55 @@ llm = HuggingFacePipeline.from_model_id(
 chat_model = ChatHuggingFace(llm=llm)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 config.json:   0%|          | 0.00/638 [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model.safetensors.index.json:   0%|          | 0.00/23.9k [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Downloading shards:   0%|          | 0/8 [00:00<?, ?it/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00001-of-00008.safetensors:   0%|          | 0.00/1.89G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00002-of-00008.safetensors:   0%|          | 0.00/1.95G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00003-of-00008.safetensors:   0%|          | 0.00/1.98G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00004-of-00008.safetensors:   0%|          | 0.00/1.95G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00005-of-00008.safetensors:   0%|          | 0.00/1.98G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00006-of-00008.safetensors:   0%|          | 0.00/1.95G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00007-of-00008.safetensors:   0%|          | 0.00/1.98G [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 model-00008-of-00008.safetensors:   0%|          | 0.00/816M [00:00<?, ?B/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 generation_config.json:   0%|          | 0.00/111 [00:00<?, ?B/s]
 ```
 
@@ -187,7 +183,7 @@ generation_config.json:   0%|          | 0.00/111 [00:00<?, ?B/s]
 
 To run a quantized version of your model, you can specify a `bitsandbytes` quantization config as follows:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from transformers import BitsAndBytesConfig
 
 quantization_config = BitsAndBytesConfig(
@@ -200,7 +196,7 @@ quantization_config = BitsAndBytesConfig(
 
 and pass it to the `HuggingFacePipeline` as a part of its `model_kwargs`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = HuggingFacePipeline.from_model_id(
     model_id="HuggingFaceH4/zephyr-7b-beta",
     task="text-generation",
@@ -218,7 +214,7 @@ chat_model = ChatHuggingFace(llm=llm)
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import (
     HumanMessage,
     SystemMessage,
@@ -234,11 +230,11 @@ messages = [
 ai_msg = chat_model.invoke(messages)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 According to the popular phrase and hypothetical scenario, when an unstoppable force meets an immovable object, a paradoxical situation arises as both forces are seemingly contradictory. On one hand, an unstoppable force is an entity that cannot be stopped or prevented from moving forward, while on the other hand, an immovable object is something that cannot be moved or displaced from its position.
 
 In this scenario, it is un
@@ -252,12 +248,8 @@ For detailed documentation of all `ChatHuggingFace` features and configurations 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/huggingface.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/huggingface.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Pi coding agent sessions
-
-> Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-pi)
+Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations.
 
 This guide shows you how to trace [Pi coding agent](https://pi.dev) sessions to LangSmith using the `@langchain/langsmith-pi-extension` extension.
 
@@ -15,13 +11,13 @@ Once configured, each Pi session sends traces to LangSmith. Each trace includes 
 Before setting up tracing, ensure you have:
 
 * [**Pi**](https://pi.dev) installed.
-* A [**LangSmith API key**](/langsmith/create-account-api-key).
+* A [**LangSmith API key**](https://docs.langchain.com/langsmith/create-account-api-key).
 
 ## Installation
 
 Install the extension via Pi:
 
-```sh theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sh
 pi install npm:@langchain/langsmith-pi-extension
 ```
 
@@ -29,14 +25,14 @@ pi install npm:@langchain/langsmith-pi-extension
 
 Tracing is disabled by default. Set the following environment variables to enable tracing and connect to your LangSmith account:
 
-```sh theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sh
 export TRACE_TO_LANGSMITH=true
 export LANGSMITH_PI_API_KEY="<your-langsmith-api-key>"
 ```
 
 [Run Pi](https://pi.dev/docs/latest/quickstart) as usual. When a session starts, the extension reports whether LangSmith tracing is enabled. You can also check the current tracing state at any time from within Pi:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 /langsmith-tracing
 ```
 
@@ -64,7 +60,7 @@ Configuration can come from environment variables or JSON config files. Values a
 
 Example:
 
-```sh theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```sh
 export TRACE_TO_LANGSMITH=true
 export LANGSMITH_PI_API_KEY="<your-langsmith-api-key>"
 export LANGSMITH_PI_PROJECT="pi-coding-agent-dev"
@@ -75,7 +71,7 @@ export LANGSMITH_PI_METADATA='{"team":"infra","environment":"local"}'
 
 Create `~/.pi/langsmith.json` for global settings or `.pi/langsmith.json` in a project directory for local overrides:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<your-langsmith-api-key>",
@@ -98,9 +94,9 @@ Config file fields:
 
 ## Replicas
 
-Use `replicas` to send traces to multiple LangSmith destinations simultaneously. This is useful for forwarding traces to both a personal workspace and a shared team project, or to a [self-hosted LangSmith](/langsmith/self-hosted) instance alongside the [cloud](/langsmith/cloud).
+Use `replicas` to send traces to multiple LangSmith destinations simultaneously. This is useful for forwarding traces to both a personal workspace and a shared team project, or to a [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) instance alongside the [cloud](https://docs.langchain.com/langsmith/cloud).
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "enabled": true,
   "api_key": "<primary-api-key>",
@@ -122,12 +118,8 @@ Each replica entry can include an `updates` object to override metadata or tags 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-pi.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

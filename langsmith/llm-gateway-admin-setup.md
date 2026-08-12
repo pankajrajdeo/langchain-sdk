@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Admin setup
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-admin-setup)
+One-time organization setup to enable the LLM Gateway and grant user access.
 
-> One-time organization setup to enable the LLM Gateway and grant user access.
+> [!NOTE]
+> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
 
-<Note>
-  **Beta:** The LLM Gateway is in [beta](/langsmith/release-stages).
-</Note>
-
-One-time setup to enable the LLM Gateway for your LangSmith [organization](/langsmith/administration-overview#organizations). [Organization admins](/langsmith/rbac#organization-admin) should complete this before individual users can route calls through the gateway.
+One-time setup to enable the LLM Gateway for your LangSmith [organization](https://docs.langchain.com/langsmith/administration-overview#organizations). [Organization admins](https://docs.langchain.com/langsmith/rbac#organization-admin) should complete this before individual users can route calls through the gateway.
 
 ## Prerequisites
 
-You need [`organization:manage` permission](/langsmith/organization-workspace-operations) in LangSmith. [Step 2 Option A](/langsmith/llm-gateway-admin-setup#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](/langsmith/rbac) (custom roles).
+You need [`organization:manage` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) in LangSmith. [Step 2 Option A](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](https://docs.langchain.com/langsmith/rbac) (custom roles).
 
 ## 1. Add Provider Secrets
 
@@ -63,37 +58,33 @@ Gateway policy management requires `organization:manage` permission.
 
 Go to **Settings → Gateway → LLM Gateway** to create governance policies. You can configure:
 
-* **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](/langsmith/llm-gateway-spend-policies).
-* **Data protection:** detect and redact PII and secrets before they reach the model. Refer to [Data protection](/langsmith/llm-gateway-data-protection).
+* **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies).
+* **Data protection:** detect and redact PII and secrets before they reach the model. Refer to [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection).
 
 Policies are optional during initial setup. The gateway will freely allow invocations until you have configured policies.
 
 ## 4. Distribute API keys to users
 
-Create workspace-scoped [Service Keys](/langsmith/administration-overview#service-keys) for users who need gateway access. Each key should be attached to a role that includes `gateway:invoke` and `workspaces:read`.
+Create workspace-scoped [Service Keys](https://docs.langchain.com/langsmith/administration-overview#service-keys) for users who need gateway access. Each key should be attached to a role that includes `gateway:invoke` and `workspaces:read`.
 
-Use workspace-scoped keys, not organization-scoped keys. See [API key scoping](/langsmith/llm-gateway-access#api-key-scoping) for details.
+Use workspace-scoped keys, not organization-scoped keys. See [API key scoping](https://docs.langchain.com/langsmith/llm-gateway-access#api-key-scoping) for details.
 
-Share the key and the gateway endpoint with each user, or distribute them via MDM (mobile device management) for company-wide coding agent rollouts. For per-agent configuration instructions, refer to [Set up coding agents](/langsmith/llm-gateway-coding-agents).
+Share the key and the gateway endpoint with each user, or distribute them via MDM (mobile device management) for company-wide coding agent rollouts. For per-agent configuration instructions, refer to [Set up coding agents](https://docs.langchain.com/langsmith/llm-gateway-coding-agents).
 
 ## Verification
 
-Ask a user to run the [verification cURL from the quickstart](/langsmith/llm-gateway-quickstart#2-make-a-call). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
+Ask a user to run the [verification cURL from the quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart#2-make-a-call). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
 
 ## Next steps
 
-* [Quickstart](/langsmith/llm-gateway-quickstart): share with your users as the getting-started guide.
-* [Set up coding agents](/langsmith/llm-gateway-coding-agents): configure Claude Code, Codex, and other agents org-wide.
-* [Traces, Engine, and access control](/langsmith/llm-gateway-access): deep dive on roles, scoped keys, trace routing, and who can see what.
+* [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart): share with your users as the getting-started guide.
+* [Set up coding agents](https://docs.langchain.com/langsmith/llm-gateway-coding-agents): configure Claude Code, Codex, and other agents org-wide.
+* [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access): deep dive on roles, scoped keys, trace routing, and who can see what.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-admin-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/llm-gateway-admin-setup.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

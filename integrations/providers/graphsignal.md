@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Graphsignal integrations
 
 > Integrate with Graphsignal using LangChain Python.
@@ -20,7 +16,7 @@ Graphsignal automatically instruments and starts tracing and monitoring chains. 
 
 Initialize the tracer by providing a deployment name:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import graphsignal
 
 graphsignal.configure(deployment='my-langchain-app-prod')
@@ -28,20 +24,20 @@ graphsignal.configure(deployment='my-langchain-app-prod')
 
 To additionally trace any function or code, you can use a decorator or a context manager:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 @graphsignal.trace_function
 def handle_request():
     chain.run("some initial text")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with graphsignal.start_trace('my-chain'):
     chain.run("some initial text")
 ```
 
 Optionally, enable profiling to record function-level statistics for each trace.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 with graphsignal.start_trace(
         'my-chain', options=graphsignal.TraceOptions(enable_profiling=True)):
     chain.run("some initial text")
@@ -51,12 +47,8 @@ See the [Quick Start](https://graphsignal.com/docs/guides/quick-start/) guide fo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/graphsignal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/graphsignal.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

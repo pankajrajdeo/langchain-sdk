@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Why BYOC
 
 > Compare LangSmith BYOC with self-hosted LangSmith to decide which deployment model fits your organization.
@@ -39,18 +35,14 @@ To plan a migration, [contact the LangChain sales team](https://www.langchain.co
 
 ## See also
 
-* [BYOC overview](/langsmith/byoc)
-* [BYOC architecture](/langsmith/byoc-architecture)
-* [Self-hosted LangSmith](/langsmith/self-hosted)
+* [BYOC overview](https://docs.langchain.com/langsmith/byoc)
+* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
+* [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-why.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-why.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

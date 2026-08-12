@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Helicone integrations
 
 > Integrate with Helicone using LangChain Python.
@@ -16,7 +12,7 @@ Helicone is an [open-source](https://github.com/Helicone/helicone) observability
 
 With your LangChain environment you can just add the following parameter.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export OPENAI_API_BASE="https://oai.hconeai.com/v1"
 ```
 
@@ -24,7 +20,7 @@ Now head over to [helicone.ai](https://www.helicone.ai/signup) to create your ac
 
 ## How to enable helicone caching
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 import openai
 openai.api_base = "https://oai.hconeai.com/v1"
@@ -38,7 +34,7 @@ print(llm.invoke(text))
 
 ## How to use helicone custom properties
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import OpenAI
 import openai
 openai.api_base = "https://oai.hconeai.com/v1"
@@ -56,12 +52,8 @@ print(llm.invoke(text))
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/helicone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/helicone.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

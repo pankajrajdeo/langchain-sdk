@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Build a data analysis agent from scratch
-
-> Build a data analysis agent step by step using create_agent and Deep Agents middleware.
+> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch)
+Build a data analysis agent step by step using create_agent and Deep Agents middleware.
 
 This guide builds a data analysis agent from first principles using `create_agent` and Deep Agents middleware.
 
@@ -28,48 +24,43 @@ Each step adds one capability to the same data analysis agent:
 | Step                 | Problem without it                     | What you add                                                                                             |
 | -------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Minimal agent        | —                                      | Baseline loop: model + tools, no harness                                                                 |
-| Sandbox + filesystem | Agent cannot read CSVs or run Python   | Isolated [backend](/oss/python/deepagents/backends) + file and execute tools                             |
+| Sandbox + filesystem | Agent cannot read CSVs or run Python   | Isolated [backend](https://docs.langchain.com/oss/python/deepagents/backends) + file and execute tools                             |
 | Summarization        | Long sessions hit context limits       | Automatic history compression                                                                            |
-| Skills               | Domain rules bloat the system prompt   | On-demand expertise via [progressive disclosure](/oss/python/langchain/multi-agent/skills-sql-assistant) |
+| Skills               | Domain rules bloat the system prompt   | On-demand expertise via [progressive disclosure](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant) |
 | Subagent             | Chart iteration crowds the main thread | Isolated worker + parallel delegation                                                                    |
 
 ## Setup
 
-<Steps>
-  <Step title="Install packages">
-    Install the packages for this tutorial:
+### Install packages
+Install the packages for this tutorial:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pip install deepagents langsmith
-    ```
-  </Step>
+```bash
+pip install deepagents langsmith
+```
 
-  <Step title="Set up LangSmith API keys">
-    This tutorial uses [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), which provisions sandboxes through `SandboxClient`. That client authenticates with LangSmith using `LANGSMITH_API_KEY` from your environment, so an API key is required to run the tutorial. Setting up LangSmith also allows you to see traces of what happens when your agent runs.
+### Set up LangSmith API keys
+This tutorial uses [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), which provisions sandboxes through `SandboxClient`. That client authenticates with LangSmith using `LANGSMITH_API_KEY` from your environment, so an API key is required to run the tutorial. Setting up LangSmith also allows you to see traces of what happens when your agent runs.
 
-    1. [Sign up for a free account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You can use Google, GitHub, or email.
-    2. [Create an API key](/langsmith/create-account-api-key) in **Settings → API Keys**.
-    3. Export the LangSmith API key:
+1. [Sign up for a free account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You can use Google, GitHub, or email.
+2. [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) in **Settings → API Keys**.
+3. Export the LangSmith API key:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export LANGSMITH_API_KEY=...
-    ```
+```bash
+export LANGSMITH_API_KEY=...
+```
 
-    4. Enable tracing to inspect tool calls, middleware steps, and subagent delegation as you add each piece:
+4. Enable tracing to inspect tool calls, middleware steps, and subagent delegation as you add each piece:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export LANGSMITH_TRACING=true
-    ```
-  </Step>
+```bash
+export LANGSMITH_TRACING=true
+```
 
-  <Step title="Add a model provider API key">
-    Export the API key for the model provider you use in the code samples. For example:
+### Add a model provider API key
+Export the API key for the model provider you use in the code samples. For example:
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    export ANTHROPIC_API_KEY=...
-    ```
-  </Step>
-</Steps>
+```bash
+export ANTHROPIC_API_KEY=...
+```
 
 ## Build the agent
 
@@ -79,7 +70,7 @@ A data analysis agent needs more than a chat loop, but to begin with, start with
 
 Use [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and specify the model that you want to use:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 
 agent = create_agent("anthropic:claude-sonnet-4-6", tools=[])
@@ -91,17 +82,17 @@ This runs, but the agent has no filesystem and no way to execute code. If you as
 
 To analyze data efficiently, the agent needs to run code on files. This requires two things:
 
-* An isolated [sandbox](/oss/python/deepagents/sandboxes) where the agent can place files and run code on the files without giving the agent access to your host machine.
+* An isolated [sandbox](https://docs.langchain.com/oss/python/deepagents/sandboxes) where the agent can place files and run code on the files without giving the agent access to your host machine.
 
-* A [backend](/oss/python/deepagents/backends) which provides the file system tools to work with the sandbox (`read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`) using the [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):\*\*. Because the `LangSmithSandbox` backend implements the sandbox protocol, [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) also adds the `execute` tool, which allows the agent to run shell commands.
+* A [backend](https://docs.langchain.com/oss/python/deepagents/backends) which provides the file system tools to work with the sandbox (`read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`) using the [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):\*\*. Because the `LangSmithSandbox` backend implements the sandbox protocol, [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) also adds the `execute` tool, which allows the agent to run shell commands.
 
 [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) is where files live and commands run. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) is what exposes that environment to the model as tools. The same middleware works with other backends if you swap the backend later.
 
-[`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) gives the agent an isolated environment with a filesystem and an `execute` tool for running shell commands. With it, the agent can install packages, write scripts, and run them without touching the host. To boot from a custom image instead of the default runtime, pass `snapshot_name` or `snapshot_id` to `create_sandbox()`; see [Sandbox snapshots](/langsmith/sandbox-snapshots).
+[`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) gives the agent an isolated environment with a filesystem and an `execute` tool for running shell commands. With it, the agent can install packages, write scripts, and run them without touching the host. To boot from a custom image instead of the default runtime, pass `snapshot_name` or `snapshot_id` to `create_sandbox()`; see [Sandbox snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots).
 
 Replace the agent from the previous step with one that includes [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.agents import create_agent
 from deepagents.backends.langsmith import LangSmithSandbox
 from deepagents.middleware import FilesystemMiddleware
@@ -121,7 +112,7 @@ agent = create_agent(
 
 The sandbox filesystem is separate from your laptop. You must upload the files you need to it before you invoke the agent:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import csv
 import io
 
@@ -156,13 +147,12 @@ for item in upload_stream.messages:
 upload_stream.output
 ```
 
-<Note>
-  With [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), upload paths must be absolute POSIX paths (for example, `/sales.csv`). Relative paths such as `sales.csv` are rejected with `invalid_path` and the file is not written to the sandbox.
-</Note>
+> [!NOTE]
+> With [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), upload paths must be absolute POSIX paths (for example, `/sales.csv`). Relative paths such as `sales.csv` are rejected with `invalid_path` and the file is not written to the sandbox.
 
 Combine the code from the previous steps into one script and run it:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 python analyze_sales.py
 ```
 
@@ -178,118 +168,116 @@ After step 2, every tool result stays in the message history. A real analysis se
 
 Update your agent from step 2 by adding [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware) to the middleware list:
 
-<CodeGroup>
-  ```python Google theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="google_genai:gemini-3.6-flash"
+model="google_genai:gemini-3.6-flash"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="openai:gpt-5.5"
+model="openai:gpt-5.5"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="anthropic:claude-sonnet-4-6"
+model="anthropic:claude-sonnet-4-6"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python OpenRouter theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="openrouter:z-ai/glm-5.2"
+model="openrouter:z-ai/glm-5.2"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python Fireworks theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="fireworks:accounts/fireworks/models/glm-5p2"
+model="fireworks:accounts/fireworks/models/glm-5p2"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python Baseten theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="baseten:zai-org/GLM-5.2"
+model="baseten:zai-org/GLM-5.2"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-  ```python Ollama theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
+```python
+from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-  model="ollama:north-mini-code-1.0"
+model="ollama:north-mini-code-1.0"
 
-  agent = create_agent(
-      model=model,
-      tools=[],
-      middleware=[
-          FilesystemMiddleware(backend=backend),
-          SummarizationMiddleware(model=model, backend=backend),
-      ],
-  )
-  ```
-</CodeGroup>
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+    ],
+)
+```
 
-Run a multi-turn session to see summarization in action. After the initial analysis, ask follow-up questions that trigger more file reads or script runs. In LangSmith, look for a summarization step before later model calls. For more information, [Context engineering](/oss/python/langchain/context-engineering).
+Run a multi-turn session to see summarization in action. After the initial analysis, ask follow-up questions that trigger more file reads or script runs. In LangSmith, look for a summarization step before later model calls. For more information, [Context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering).
 
 ## Add skills
 
-[Skills](/oss/python/langchain/multi-agent/skills-sql-assistant) provide a way to give an agent on-demand domain knowledge when needed using progressive disclosure. Skills can include multi-step workflows, rules, and conventions. By placing this information in a skill, it isn't added to the system prompt by default which ensures the tokens are only used when the information from the skill is needed for a task.
+[Skills](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant) provide a way to give an agent on-demand domain knowledge when needed using progressive disclosure. Skills can include multi-step workflows, rules, and conventions. By placing this information in a skill, it isn't added to the system prompt by default which ensures the tokens are only used when the information from the skill is needed for a task.
 
 When the agent starts, it sees only lightweight metadata about each skill. When a task needs a skill, the agent loads the full skill file on demand.
 
@@ -301,7 +289,7 @@ skills/
     SKILL.md
 ```
 
-```markdown theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```markdown
 ---
 name: pandas-patterns
 description: Common pandas and matplotlib patterns for data analysis and visualization
@@ -322,7 +310,7 @@ This skill contains information on how the visualization should be done.
 
 With [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), skill paths resolve on the sandbox filesystem, not your local machine. Upload your local `skills/` directory before configuring [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pathlib import Path
 
 skills_dir = (Path(__file__).resolve().parent / "skills").resolve()
@@ -337,7 +325,7 @@ backend.upload_files(skill_files)
 
 Then create your agent with your skills by adding [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 agent = create_agent(
@@ -355,13 +343,13 @@ You can try a prompt such as "Analyze sales.csv using our pandas patterns." The 
 
 ## Add a visualization subagent
 
-Some tasks produce large intermediate output (script drafts, failed runs, file reads) that would crowd the main agent's context if kept in one thread. A [subagent](/oss/python/deepagents/subagents) runs in its own context window so the supervisor sees only the final result, not every tool call along the way. That keeps the main analysis focused and leaves room for follow-up questions.
+Some tasks produce large intermediate output (script drafts, failed runs, file reads) that would crowd the main agent's context if kept in one thread. A [subagent](https://docs.langchain.com/oss/python/deepagents/subagents) runs in its own context window so the supervisor sees only the final result, not every tool call along the way. That keeps the main analysis focused and leaves room for follow-up questions.
 
 One example where using a subagent makes sense is chart generation. Plotting often means iterating on Python scripts, installing packages, and reading error output before a figure is ready. The following `visualizer` subagent can handle that work in isolation while the main agent continues planning and analysis. With [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware), the main agent can also delegate that chart work in parallel instead of blocking on each plot.
 
 Update your agent from step 4 by adding [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) and [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import SubAgent
 from deepagents.middleware import (
     FilesystemMiddleware,
@@ -394,7 +382,7 @@ agent = create_agent(
 
 Try a prompt such as "Analyze sales.csv, then create a bar chart of revenue by product." The main agent handles analysis and planning and delegates chart generation to the `visualizer` subagent via the `task` tool.
 
-If you enabled tracing in [Setup](#setup), open the run in [LangSmith](https://smith.langchain.com/?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You should see a `task` call to `visualizer`, a separate sub-run with its own tool loop, and a short result returned to the supervisor.
+If you enabled tracing in [Setup](https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch#setup), open the run in [LangSmith](https://smith.langchain.com/?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You should see a `task` call to `visualizer`, a separate sub-run with its own tool loop, and a short result returned to the supervisor.
 
 ## What you built
 
@@ -409,18 +397,14 @@ You've built a customized agent with the following middleware:
 
 This is the same foundation as [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent): assembled manually so you control exactly what's included.
 
-The possibilities don't end here: see [Prebuilt middleware](/oss/python/langchain/middleware/built-in) for the full list of composable capabilities, and the [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) reference for all configuration options.
+The possibilities don't end here: see [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in) for the full list of composable capabilities, and the [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) reference for all configuration options.
 
-To work with the pre-assembled version, see [Customize Deep Agents](/oss/python/deepagents/customization). For the full data analysis example using `create_deep_agent`, see [Data analysis](/oss/python/deepagents/data-analysis).
+To work with the pre-assembled version, see [Customize Deep Agents](https://docs.langchain.com/oss/python/deepagents/customization). For the full data analysis example using `create_deep_agent`, see [Data analysis](https://docs.langchain.com/oss/python/deepagents/data-analysis).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deep-agent-from-scratch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/deep-agent-from-scratch.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

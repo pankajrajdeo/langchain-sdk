@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google imagen integration
 
 > Integrate with the Google imagen tool using LangChain Python.
@@ -10,37 +6,37 @@
 
 With Imagen on LangChain , You can do the following tasks
 
-* [VertexAIImageGeneratorChat](#image-generation) : Generate novel images using only a text prompt (text-to-image AI generation).
-* [VertexAIImageEditorChat](#image-editing) : Edit an entire uploaded or generated image with a text prompt.
-* [VertexAIImageCaptioning](#image-captioning) : Get text descriptions of images with visual captioning.
-* [VertexAIVisualQnAChat](#visual-question-answering-vqa) : Get answers to a question about an image with Visual Question Answering (VQA).
+* [VertexAIImageGeneratorChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation) : Generate novel images using only a text prompt (text-to-image AI generation).
+* [VertexAIImageEditorChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-editing) : Edit an entire uploaded or generated image with a text prompt.
+* [VertexAIImageCaptioning](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-captioning) : Get text descriptions of images with visual captioning.
+* [VertexAIVisualQnAChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#visual-question-answering-vqa) : Get answers to a question about an image with Visual Question Answering (VQA).
   * NOTE : Currently we support only single-turn chat for Visual QnA (VQA)
 
 ## Image generation
 
 Generate novel images using only a text prompt (text-to-image AI generation)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import AIMessage, HumanMessage
 from langchain_google_vertexai.vision_models import VertexAIImageGeneratorChat
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create Image Generation model Object
 generator = VertexAIImageGeneratorChat()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [HumanMessage(content=["a cat at the beach"])]
 response = generator.invoke(messages)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # To view the generated Image
 generated_image = response.content[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 import io
 
@@ -66,7 +62,7 @@ Edit an entire uploaded or generated image with a text prompt.
 
 ### Edit generated image
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import AIMessage, HumanMessage
 from langchain_google_vertexai.vision_models import (
     VertexAIImageEditorChat,
@@ -74,7 +70,7 @@ from langchain_google_vertexai.vision_models import (
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create Image Generation model Object
 generator = VertexAIImageGeneratorChat()
 
@@ -88,12 +84,12 @@ response = generator.invoke(messages)
 generated_image = response.content[0]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Create Image Editor model Object
 editor = VertexAIImageEditorChat()
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Write prompt for editing and pass the "generated_image"
 messages = [HumanMessage(content=[generated_image, "a dog at the beach "])]
 
@@ -101,7 +97,7 @@ messages = [HumanMessage(content=[generated_image, "a dog at the beach "])]
 editor_response = editor.invoke(messages)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 import io
 
@@ -125,16 +121,16 @@ edited_img
 
 ## Image captioning
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIImageCaptioning
 
 # Initialize the Image Captioning Object
 model = VertexAIImageCaptioning()
 ```
 
-NOTE :  we're using generated image in [Image Generation Section](#image-generation)
+NOTE :  we're using generated image in [Image Generation Section](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # use image generated in Image Generation Section
 img_base64 = generated_image["image_url"]["url"]
 response = model.invoke(img_base64)
@@ -149,7 +145,7 @@ img = Image.open(
 img
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Generated Cpation : a cat sitting on the beach looking at the camera
 ```
 
@@ -159,15 +155,15 @@ Generated Cpation : a cat sitting on the beach looking at the camera
 
 ## Visual question answering (VQA)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_vertexai import VertexAIVisualQnAChat
 
 model = VertexAIVisualQnAChat()
 ```
 
-NOTE :  we're using generated image in [Image Generation Section](#image-generation)
+NOTE :  we're using generated image in [Image Generation Section](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 question = "What animal is shown in the image?"
 response = model.invoke(
     input=[
@@ -191,7 +187,7 @@ img = Image.open(
 img
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 question : What animal is shown in the image?
 answer : cat
 ```
@@ -202,12 +198,8 @@ answer : cat
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_imagen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/google_imagen.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

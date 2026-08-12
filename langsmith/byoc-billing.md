@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # BYOC billing
 
 > How LangSmith BYOC is billed across your AWS account and your LangSmith contract, which AWS services carry cost, and the account quotas to check before you deploy.
@@ -40,7 +36,7 @@ Every data plane creates the following resources in your account. AWS charges fo
 
 There are a few data transfer cost drivers in BYOC:
 
-* Cross-availability-zone traffic, since the data plane runs [highly available](/langsmith/byoc-operations#high-availability) across zones.
+* Cross-availability-zone traffic, since the data plane runs [highly available](https://docs.langchain.com/langsmith/byoc-operations#high-availability) across zones.
 * Egress through the NAT gateway, for example if calling model providers, or an external API through a webhook.
 * Public IPv4 addresses, which AWS charges per address-hour. The regional NAT gateway uses one, and an internet-facing load balancer uses another when public ingress is enabled.
 
@@ -59,22 +55,18 @@ AWS enforces default quotas per region and per account. Defaults are often too l
 
 For current default values, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 
-If provisioning stalls or fails, an exhausted quota is a common cause, alongside missing permissions and service control policies. See [What happens if provisioning fails?](/langsmith/byoc-faq).
+If provisioning stalls or fails, an exhausted quota is a common cause, alongside missing permissions and service control policies. See [What happens if provisioning fails?](https://docs.langchain.com/langsmith/byoc-faq).
 
 ## See also
 
-* [BYOC architecture](/langsmith/byoc-architecture)
-* [Operations](/langsmith/byoc-operations)
-* [BYOC FAQ](/langsmith/byoc-faq)
+* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
+* [Operations](https://docs.langchain.com/langsmith/byoc-operations)
+* [BYOC FAQ](https://docs.langchain.com/langsmith/byoc-faq)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/byoc-billing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

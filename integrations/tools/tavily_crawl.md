@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tavily crawl integration
 
 > Integrate with the Tavily crawl tool using LangChain Python.
@@ -18,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](/oss/python/langchain/tools) | Native async |                    Return data                   |           Pricing          |
+| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async |                    Return data                   |           Pricing          |
 | :---------------------------------------------: | :----------: | :----------------------------------------------: | :------------------------: |
 |                        ❌                        |       ✅      | base URL, page URL, raw content, images, favicon | 1,000 free credits / month |
 
@@ -26,7 +22,7 @@
 
 The integration lives in the `langchain-tavily` package.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-tavily
 ```
 
@@ -34,7 +30,7 @@ pip install -qU langchain-tavily
 
 We also need to set our Tavily API key. You can get an API key by visiting [this site](https://app.tavily.com/sign-in) and creating an account.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -61,7 +57,7 @@ The tool accepts the following parameters during instantiation:
 
 For a comprehensive overview of the available parameters, refer to the [Tavily Crawl API documentation](https://docs.tavily.com/documentation/api-reference/endpoint/crawl).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilyCrawl
 
 tool = TavilyCrawl(
@@ -77,7 +73,7 @@ tool = TavilyCrawl(
 
 ## Invocation
 
-### [Invoke directly with args](/oss/python/langchain/tools)
+### [Invoke directly with args](https://docs.langchain.com/oss/python/langchain/tools)
 
 The Tavily crawl tool accepts the following arguments during invocation:
 
@@ -86,11 +82,11 @@ The Tavily crawl tool accepts the following arguments during invocation:
 
 NOTE: The optional arguments are available for agents to dynamically set. If you set an argument during instantiation and then invoke the tool with a different value, the tool will use the value you passed during invocation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool.invoke({"url": "https://docs.tavily.com"})
 ```
 
-````json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+````json
 {
   "base_url": "https://docs.tavily.com",
   "results": [
@@ -119,11 +115,11 @@ tool.invoke({"url": "https://docs.tavily.com"})
 }
 ````
 
-### [Invoke with ToolCall](/oss/python/langchain/tools)
+### [Invoke with ToolCall](https://docs.langchain.com/oss/python/langchain/tools)
 
 We can also invoke the tool with a model-generated ToolCall, in which case a ToolMessage will be returned:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model_generated_tool_call = {
     "args": {"url": "https://docs.tavily.com", "instructions": "Find API reference pages"},
     "id": "1",
@@ -139,23 +135,22 @@ print(tool_msg.content[:400])
 
 We can use the crawl tool directly with an agent by binding it to the model. The agent can then dynamically set the available arguments to control where and how deep to crawl.
 
-<ChatModelTabs customVarName="llm" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/tavily_crawl).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 if not os.environ.get("OPENAI_API_KEY"):
     os.environ["OPENAI_API_KEY"] = getpass.getpass("OPENAI_API_KEY:\n")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.chat_models import init_chat_model
 
 model = init_chat_model(model="gpt-5.5", model_provider="openai", temperature=0)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tavily import TavilyCrawl
 from langchain.agents import create_agent
-
 
 tavily_crawl_tool = TavilyCrawl(max_depth=1, max_breadth=10, limit=10)
 
@@ -176,12 +171,8 @@ For detailed documentation of all Tavily Crawl API features and configurations h
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_crawl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/tavily_crawl.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Add schedules to Managed Deep Agents
-
-> Declare managed cron schedules for Managed Deep Agents deployments.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-schedules)
+Declare managed cron schedules for Managed Deep Agents deployments.
 
 Managed Deep Agents can run agents on a cron schedule. When you deploy the project, `mda deploy` provisions each schedule as a LangSmith cron after the deployment is live.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 Schedule declarations live in the project-level `schedules/` directory, with one schedule per file:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
   schedules/
@@ -29,7 +24,7 @@ The file name becomes the managed schedule name.
 
 The schedule module must export a named `schedule` declaration.
 
-```ts schedules/daily-digest.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineSchedule } from "managed-deepagents";
 
 export const schedule = defineSchedule({
@@ -46,7 +41,7 @@ Each schedule must define exactly one of:
 * `prompt`: A natural-language prompt. MDA converts it to a user message when the cron fires.
 * `input`: A structured LangGraph input object. Use this when you need to pass custom graph input instead of a single prompt.
 
-```ts schedules/nightly-sweep.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineSchedule } from "managed-deepagents";
 
 export const schedule = defineSchedule({
@@ -67,11 +62,10 @@ Schedules use ephemeral threads by default. MDA creates a fresh thread for each 
 
 Use a persistent thread only when scheduled runs should accumulate durable thread state across invocations.
 
-<Note>
-  The following example requires [durable memory](/langsmith/javascript/managed-deep-agents-memory).
-</Note>
+> [!NOTE]
+> The following example requires [durable memory](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory).
 
-```ts schedules/nightly-memory.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineSchedule } from "managed-deepagents";
 
 export const schedule = defineSchedule({
@@ -83,15 +77,14 @@ export const schedule = defineSchedule({
 
 ## Deliver results to Slack
 
-Set `deliverTo` to post the final response through a configured [Slack channel](/langsmith/javascript/managed-deep-agents-channels-slack).
+Set `deliverTo` to post the final response through a configured [Slack channel](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-channels-slack).
 
 Use a Slack channel ID because scheduled runs have no originating thread.
 
-<Note>
-  Schedule delivery requires `managed-deepagents` version 0.4.0 or later.
-</Note>
+> [!NOTE]
+> Schedule delivery requires `managed-deepagents` version 0.4.0 or later.
 
-```ts schedules/monday-greeting.ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineSchedule } from "managed-deepagents";
 
 export const schedule = defineSchedule({
@@ -121,13 +114,12 @@ Schedule declarations are extracted at compile time. Keep schedule configuration
 
 ## Deploy schedules
 
-Test the project locally with [`mda dev`](/langsmith/javascript/managed-deep-agents-cli#develop-locally), then deploy it with [`mda deploy`](/langsmith/javascript/managed-deep-agents-deploy). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
+Test the project locally with [`mda dev`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-cli#develop-locally), then deploy it with [`mda deploy`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
 
 When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing MDA-owned cron jobs on the deployed Agent Server, deletes them, and creates cron jobs for the current `schedules/` declarations. Removing a local schedule file and redeploying removes the corresponding managed cron.
 
-<Warning>
-  If you deploy with `--no-wait`, the CLI triggers the remote build and exits before the deployment reaches `DEPLOYED`, so it does not reconcile schedules during that invocation. Run `mda deploy .` without `--no-wait` when adding, changing, or removing schedules.
-</Warning>
+> [!WARNING]
+> If you deploy with `--no-wait`, the CLI triggers the remote build and exits before the deployment reaches `DEPLOYED`, so it does not reconcile schedules during that invocation. Run `mda deploy .` without `--no-wait` when adding, changing, or removing schedules.
 
 ## Troubleshoot schedules
 
@@ -143,24 +135,16 @@ When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing MDA-o
 
 ## Next steps
 
-<CardGroup cols={2}>
-  <Card title="Deploy an agent" icon="upload" href="/langsmith/javascript/managed-deep-agents-deploy">
-    Deploy and reconcile schedule changes.
-  </Card>
+#### [Deploy an agent](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy)
+Deploy and reconcile schedule changes.
 
-  <Card title="CLI reference" icon="terminal" href="/langsmith/javascript/managed-deep-agents-cli">
-    Look up `mda deploy` flags and troubleshooting.
-  </Card>
-</CardGroup>
+#### [CLI reference](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-cli)
+Look up `mda deploy` flags and troubleshooting.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-schedules.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,24 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatBedrock integration
 
 > Integrate with the ChatBedrock chat model using LangChain Python.
 
-This doc will help you get started with AWS Bedrock [chat models](/oss/python/langchain/models). Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models (FMs) from leading AI companies like AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon via a single API, along with a broad set of capabilities you need to build generative AI applications with security, privacy, and responsible AI. Using Amazon Bedrock, you can easily experiment with and evaluate top FMs for your use case, privately customize them with your data using techniques such as fine-tuning and Retrieval Augmented Generation (RAG), and build agents that execute tasks using your enterprise systems and data sources. Since Amazon Bedrock is serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy generative AI capabilities into your applications using the AWS services you are already familiar with.
+This doc will help you get started with AWS Bedrock [chat models](https://docs.langchain.com/oss/python/langchain/models). Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models (FMs) from leading AI companies like AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon via a single API, along with a broad set of capabilities you need to build generative AI applications with security, privacy, and responsible AI. Using Amazon Bedrock, you can easily experiment with and evaluate top FMs for your use case, privately customize them with your data using techniques such as fine-tuning and Retrieval Augmented Generation (RAG), and build agents that execute tasks using your enterprise systems and data sources. Since Amazon Bedrock is serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy generative AI capabilities into your applications using the AWS services you are already familiar with.
 
 AWS Bedrock maintains a [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) which provides a unified conversational interface for Bedrock models. This API does not yet support custom models. You can see a list of all [models that are supported here](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html).
 
-<Info>
-  **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
-</Info>
+> [!NOTE]
+> **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
 
-<Info>
-  **Anthropic models on Bedrock**
-
-  For Anthropic models specifically, you can use `ChatAnthropicBedrock` which extends `ChatAnthropic` and provides the same API while running on AWS Bedrock. See the [ChatAnthropicBedrock section](#chatanthropicbedrock) below for details.
-</Info>
+> [!NOTE]
+> **Anthropic models on Bedrock**
+>
+> For Anthropic models specifically, you can use `ChatAnthropicBedrock` which extends `ChatAnthropic` and provides the same API while running on AWS Bedrock. See the [ChatAnthropicBedrock section](https://docs.langchain.com/oss/python/integrations/chat/bedrock#chatanthropicbedrock) below for details.
 
 For detailed documentation of all Bedrock features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).
 
@@ -35,7 +29,7 @@ For detailed documentation of all Bedrock features and configurations head to th
 
 The below apply to both `ChatBedrock` and `ChatBedrockConverse`.
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ❌      |                            ✅                            |                              ❌                             |
 
@@ -49,7 +43,7 @@ Head to the [AWS docs](https://docs.aws.amazon.com/bedrock/latest/userguide/sett
 
 Alternatively, `ChatBedrockConverse` will read from the following environment variables by default:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # os.environ["AWS_ACCESS_KEY_ID"] = "..."
 # os.environ["AWS_SECRET_ACCESS_KEY"] = "..."
 
@@ -59,9 +53,9 @@ Alternatively, `ChatBedrockConverse` will read from the following environment va
 
 You'll also need to turn on model access for your account, which you can do by following [these instructions](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -70,7 +64,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The LangChain Bedrock integration lives in the `langchain-aws` package:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-aws
 ```
 
@@ -78,7 +72,7 @@ pip install -qU langchain-aws
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 
 llm = ChatBedrockConverse(
@@ -95,7 +89,7 @@ llm = ChatBedrockConverse(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -107,15 +101,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_metadata={'ResponseMetadata': {'RequestId': 'b07d1630-06f2-44b1-82bf-e82538dd2215', 'HTTPStatusCode': 200, 'HTTPHeaders': {'date': 'Wed, 16 Apr 2025 19:35:34 GMT', 'content-type': 'application/json', 'content-length': '206', 'connection': 'keep-alive', 'x-amzn-requestid': 'b07d1630-06f2-44b1-82bf-e82538dd2215'}, 'RetryAttempts': 0}, 'stopReason': 'end_turn', 'metrics': {'latencyMs': [488]}, 'model_name': 'us.anthropic.claude-sonnet-4-6'}, id='run-d09ed928-146a-4336-b1fd-b63c9e623494-0', usage_metadata={'input_tokens': 29, 'output_tokens': 11, 'total_tokens': 40, 'input_token_details': {'cache_creation': 0, 'cache_read': 0}})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
@@ -123,23 +117,23 @@ J'adore la programmation.
 
 Use `stream_events` to stream tokens directly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events(messages, version="v3")
 for token in stream.text:
     print(token, end="|")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J|'adore la| programmation.|
 ```
 
 ### Streaming tool calls and structured output
 
-When using [tool calling](/oss/python/langchain/tools) or [structured output](/oss/python/langchain/structured-output) with Anthropic models, tool call arguments stream as partial JSON chunks by default.
+When using [tool calling](https://docs.langchain.com/oss/python/langchain/tools) or [structured output](https://docs.langchain.com/oss/python/langchain/structured-output) with Anthropic models, tool call arguments stream as partial JSON chunks by default.
 
 To reduce latency and get more evenly distributed chunks, you can enable Anthropic's fine-grained tool streaming beta:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 
 llm = ChatBedrockConverse(
@@ -150,13 +144,11 @@ llm = ChatBedrockConverse(
 )
 ```
 
-<Note>
-  Fine-grained tool streaming is supported on Claude 4.5+ models. See the [Claude documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) for more details.
-</Note>
+> [!NOTE]
+> Fine-grained tool streaming is supported on Claude 4.5+ models. See the [Claude documentation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming) for more details.
 
-<Warning>
-  When using fine-grained tool streaming, you may receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
-</Warning>
+> [!WARNING]
+> When using fine-grained tool streaming, you may receive invalid or partial JSON inputs. Make sure to account for these edge cases in your code.
 
 ## Extended thinking
 
@@ -172,7 +164,7 @@ Extended Thinking is available for the following Claude models on AWS Bedrock:
 | **Claude Sonnet 4**   | `anthropic.claude-sonnet-4-20250514-v1:0`      |
 | **Claude 3.7 Sonnet** | `us.anthropic.claude-3-7-sonnet-20250219-v1:0` |
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 
 llm = ChatBedrockConverse(
@@ -188,7 +180,7 @@ ai_msg = llm.invoke(messages)
 ai_msg.content_blocks
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'reasoning',
   'reasoning': 'The user wants me to translate "I love programming" from English to French.\n\n"I love" translates to "J\'aime" in French.\n"Programming" translates to "la programmation" in French.\n\nSo the full translation would be "J\'aime la programmation."',
   'extras': {'signature': 'EpkDCkgIBxABGAIqQGI0KGz8LoVaFwqSAYPN7N+FecI1ZGtb0zpfPr5F8Sb1yxtQHQlmbKUS8JByenWCFGpRKigNaQh1+rLZ59GEX/sSDB+6gxZAT24DJrq4pxoMySVhzwALI6FEC+1UIjDcozOIznjRTYlDWPcYUNYvpt8rwF9IHE38Ha2uqVY8ROJa1tjOMk3OEnbSoV13Pa8q/gETsz+1UwxNX5tgxOa+38jLEryhdFyyAk2JDLrmluZBM6TMrtyzALQvVbZqjpkKAXdtcVCrsz8zUo/LZT1B/92Ukux2dE0O1ZOdcW3tORK+NFLSBaWuqigcFUTDH9XNQoHd2WpQNhl+ypnCItbL2wDRscN/tEBkgGMQugvPmL0LAuLKBmsRKStKRi/RMYGJb3Ft2yEDsRnYNJBJ6TtgxXFvjDwqc/UaI9cIcTxdoVVlsPFsYccpVwirzwAOiz6CSQ1oOQTYJVT90eQ71QW74n1ubbFIZAvDBKk0KG8jK1FGx4FpuuZyFhBpXtfrgOCdrlVSAO/EE9fKCbP9FlhPbRgB'}},
@@ -199,14 +191,14 @@ ai_msg.content_blocks
 
 When extended thinking is turned on, Claude creates thinking content blocks where it outputs its internal reasoning. Claude incorporates insights from this reasoning before crafting a final response. The API response will include thinking content blocks, followed by text content blocks.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 next_messages = messages + [("ai", ai_msg.content), ("human", "I love AI")]
 
 ai_msg = llm.invoke(next_messages)
 ai_msg.content_blocks
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'reasoning',
   'reasoning': 'The user wants me to translate "I love AI" from English to French. \n\n"I love" translates to "J\'aime" in French.\n"AI" stands for "Artificial Intelligence" which in French is "Intelligence Artificielle" or "IA" (the French abbreviation).\n\nSo the translation would be "J\'aime l\'IA" or "J\'aime l\'intelligence artificielle".\n\nI think using the abbreviation "IA" would be more natural and concise, similar to how the user used "AI" in English.',
   'extras': {'signature': 'EuAECkgIBxABGAIqQLWbkzJ8RzfxhVN1BhfRj5+On8/M9Utt0yH9kvj9P2zlQkO5xloq6I/AiEeArwwdJeqJVcLRjqLtinh6HIBbSDwSDFwt0GL409TqjSZNBhoMPQtJdZmx/uiPrLHUIjCJXyyjgSK3vzbcSEnsvo7pdpoo+waUFrAPDCGL/CIN5u7c8ueLCuCn8W0qGGc+BNgqxQO6UbV11RnMdnUyFmVgTPJErfzBr6U6KyUHd5dJmFWIUVpbbxT2C9vawpbKMPThaRW3BhItEafWGUpPqztzFhqJpSegXtXehIn5iY4yHzTUZ5FPdkNIuAmTsFNNGxiKr9H/gqknvQ2B7I4ushRHLg+drU4cH18EGZlAo5Tu1O9yH5GbweIEew4Uv7oWje+R8TIku0OFVhrbnQqqqukBicMV2JRifUYuz6dYM1UDYS8SfxQ1MmcVY5t1L9LDpoL4F/CtpL8/6YDsB/FosU37Qc1qm+D+pKEPTYnyxaP5tRXqTBfqUIiNJGqr9Egl17Akoy6NIv234rPfuf8HjTcu5scZoPGhOreG5rWxJ7AbTCIXgGWqpcf2TqDtniOac3jW4OtnlID9fsloKNq6Y5twgXHDR47c4Jh6vWmucZiIlL6hkklQzt5To6vOnqcTOGUtuCis8Y2wRzlNGeR2d8A+ocYm7mBvR/Y5DvDgstJwB/vCLoQlIL+jm6+h8k6EX/24GqOsh5hxsS5IsNIob/p8tr4TBbc9noCoUSYkMhbQPi2xpRrNML9GUIo7Skbh1ni67uqeShj1xuUrFG+cN6x4yzDaRb59LCAYAQ=='}},
@@ -215,13 +207,12 @@ ai_msg.content_blocks
 
 ## Reasoning effort
 
-<Note>
-  `reasoning_effort` requires `langchain-aws>=1.6.5`.
-</Note>
+> [!NOTE]
+> `reasoning_effort` requires `langchain-aws>=1.6.5`.
 
-[`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) supports the standard [`reasoning_effort`](/oss/python/langchain/models#reasoning) parameter for models with configurable reasoning, including Claude (Opus 5, Sonnet 5), Amazon Nova 2, and OpenAI gpt-oss and Moonshot Kimi K2 models on Bedrock. Like `temperature`, it can be set at model construction or per invocation, and it is translated into the request format for the underlying model family:
+[`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) supports the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter for models with configurable reasoning, including Claude (Opus 5, Sonnet 5), Amazon Nova 2, and OpenAI gpt-oss and Moonshot Kimi K2 models on Bedrock. Like `temperature`, it can be set at model construction or per invocation, and it is translated into the request format for the underlying model family:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatBedrockConverse
 
 llm = ChatBedrockConverse(
@@ -233,9 +224,9 @@ llm = ChatBedrockConverse(
 response = llm.invoke("What is the cube root of 50.653?")
 ```
 
-Supported effort levels vary by model. Check a model's [profile](/oss/python/langchain/models#model-profiles) for the levels it supports:
+Supported effort levels vary by model. Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the levels it supports:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high', 'xhigh', 'max']
 ```
 
@@ -243,19 +234,17 @@ An explicit `additional_model_request_fields` value takes precedence over the fi
 
 ## Prompt caching
 
-Bedrock supports [caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) of elements of your prompts, including messages and tools. This allows you to reuse large documents, instructions, [few-shot documents](/langsmith/create-few-shot-evaluators), and other data to reduce latency and costs.
+Bedrock supports [caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) of elements of your prompts, including messages and tools. This allows you to reuse large documents, instructions, [few-shot documents](https://docs.langchain.com/langsmith/create-few-shot-evaluators), and other data to reduce latency and costs.
 
-<Note>
-  **Not all models support prompt caching. See [Bedrock prompt caching supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).**
-</Note>
+> [!NOTE]
+> **Not all models support prompt caching. See [Bedrock prompt caching supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).**
 
-<Note>
-  For LangChain agents, use [`BedrockPromptCachingMiddleware`](/oss/python/integrations/middleware/aws#prompt-caching) to let LangChain optimize stable system prompt and tool content. For direct model calls, use manual `cachePoint` blocks or invocation-level `cache_control`, depending on the model and API.
-</Note>
+> [!NOTE]
+> For LangChain agents, use [`BedrockPromptCachingMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/aws#prompt-caching) to let LangChain optimize stable system prompt and tool content. For direct model calls, use manual `cachePoint` blocks or invocation-level `cache_control`, depending on the model and API.
 
 To enable caching on an element of a prompt, mark its associated content block using the `cachePoint` key. See example below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import requests
 from langchain_aws import ChatBedrockConverse
 
@@ -296,7 +285,7 @@ print(f"First invocation:\n{usage_1}")
 print(f"\nSecond:\n{usage_2}")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 First invocation:
 {'cache_creation': 1528, 'cache_read': 0}
 
@@ -309,75 +298,73 @@ Second:
 Citations can be generated if they are enabled on input documents. Documents can be
 specified in Bedrock's
 [native format](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_DocumentBlock.html)
-or LangChain's [standard types](/oss/python/langchain/messages#multimodal):
+or LangChain's [standard types](https://docs.langchain.com/oss/python/langchain/messages#multimodal):
 
-<CodeGroup>
-  ```python Bedrock format theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_aws import ChatBedrockConverse
+```python
+from langchain_aws import ChatBedrockConverse
 
-  llm = ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-20250514-v1:0")
+llm = ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-20250514-v1:0")
 
-  pdf_path = "path/to/your/file.pdf"
+pdf_path = "path/to/your/file.pdf"
 
-  with open(pdf_path, "rb") as f:
-      pdf_bytes = f.read()
+with open(pdf_path, "rb") as f:
+    pdf_bytes = f.read()
 
-  document = {
-      "document": {
-          "format": "pdf",
-          "source": {"bytes": pdf_bytes},
-          "name": "my-pdf",
-          "citations": {"enabled": True},  # [!code highlight]
-      },
-  }
+document = {
+    "document": {
+        "format": "pdf",
+        "source": {"bytes": pdf_bytes},
+        "name": "my-pdf",
+        "citations": {"enabled": True},  # [!code highlight]
+    },
+}
 
-  response = llm.invoke(
-      [
-          {
-              "role": "user",
-              "content": [
-                  {"type": "text", "text": "Describe this document."},
-                  document,
-              ]
-          },
-      ]
-  )
-  response.content_blocks
-  ```
+response = llm.invoke(
+    [
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "Describe this document."},
+                document,
+            ]
+        },
+    ]
+)
+response.content_blocks
+```
 
-  ```python LangChain standard format theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from langchain_aws import ChatBedrockConverse
+```python
+import base64
+from langchain_aws import ChatBedrockConverse
 
-  llm = ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-20250514-v1:0")
+llm = ChatBedrockConverse(model="us.anthropic.claude-sonnet-4-20250514-v1:0")
 
-  pdf_path = "path/to/your/file.pdf"
+pdf_path = "path/to/your/file.pdf"
 
-  with open(pdf_path, "rb") as f:
-      pdf_base64 = base64.b64encode(f.read()).decode("utf-8")
+with open(pdf_path, "rb") as f:
+    pdf_base64 = base64.b64encode(f.read()).decode("utf-8")
 
-  document = {
-      "type": "file",
-      "mime_type": "application/pdf",
-      "base64": pdf_base64,
-      "name": "my-pdf",  # Converse requires a filename
-      "citations": {"enabled": True},  # [!code highlight]
-  }
+document = {
+    "type": "file",
+    "mime_type": "application/pdf",
+    "base64": pdf_base64,
+    "name": "my-pdf",  # Converse requires a filename
+    "citations": {"enabled": True},  # [!code highlight]
+}
 
-  response = llm.invoke(
-      [
-          {
-              "role": "user",
-              "content": [
-                  {"type": "text", "text": "Describe this document."},
-                  document,
-              ]
-          },
-      ]
-  )
-  response.content_blocks
-  ```
-</CodeGroup>
+response = llm.invoke(
+    [
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "Describe this document."},
+                document,
+            ]
+        },
+    ]
+)
+response.content_blocks
+```
 
 ***
 
@@ -389,21 +376,19 @@ For AWS Bedrock users specifically interested in Anthropic models, `langchain-aw
 
 Install `langchain-aws` with the `anthropic` extra to get the required dependencies:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install --upgrade "langchain-aws[anthropic]"
-  ```
+```bash
+pip install --upgrade "langchain-aws[anthropic]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langchain-aws[anthropic]"
-  ```
-</CodeGroup>
+```bash
+uv add "langchain-aws[anthropic]"
+```
 
 ### Usage
 
 `ChatAnthropicBedrock` supports the same features and parameters as `ChatAnthropic`. You can initialize it with AWS-specific parameters:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_aws import ChatAnthropicBedrock
 
 model = ChatAnthropicBedrock(
@@ -417,7 +402,7 @@ model = ChatAnthropicBedrock(
 
 AWS credentials can also be read from environment variables or discovered automatically by boto3:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Set environment variables
 # os.environ["AWS_ACCESS_KEY_ID"] = "..."
 # os.environ["AWS_SECRET_ACCESS_KEY"] = "..."
@@ -428,7 +413,7 @@ from langchain_aws import ChatAnthropicBedrock
 model = ChatAnthropicBedrock(model="us.anthropic.claude-haiku-4-5-20251001-v1:0")
 ```
 
-For detailed documentation on available parameters and features, refer to the [`ChatAnthropic` integration page](/oss/python/integrations/chat/anthropic).
+For detailed documentation on available parameters and features, refer to the [`ChatAnthropic` integration page](https://docs.langchain.com/oss/python/integrations/chat/anthropic).
 
 ***
 
@@ -438,12 +423,8 @@ For detailed documentation of all `ChatBedrock`, `ChatBedrockConverse`, and `Cha
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/bedrock.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

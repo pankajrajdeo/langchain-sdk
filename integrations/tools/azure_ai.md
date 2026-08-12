@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Microsoft Foundry tools integration
 
 > Integrate with Microsoft Foundry model tools using LangChain Python.
 
-This page covers Microsoft Foundry project tools from `langchain_azure_ai.tools`. See also the tools provided as part of [Microsoft Foundry Tools (formerly Azure AI Services)](/oss/python/integrations/tools/azure_ai_services).
+This page covers Microsoft Foundry project tools from `langchain_azure_ai.tools`. See also the tools provided as part of [Microsoft Foundry Tools (formerly Azure AI Services)](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services).
 
 Use these tools when you want agents to call capabilities in tools provided by Microsoft Foundry projects.
 
@@ -14,14 +10,14 @@ Use these tools when you want agents to call capabilities in tools provided by M
 
 | Tool                                                              | Description                                                                                   |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool)   | Generate images through an OpenAI-compatible `/images/generations` endpoint.                  |
-| [`AzureOpenAITranscriptionsTool`](#azureopenaitranscriptionstool) | Transcribe audio files to text through an OpenAI-compatible `/audio/transcriptions` endpoint. |
-| [`CodeInterpreterTool`](#codeinterpretertool)                     | Run Python code server-side in a sandboxed container.                                         |
-| [`WebSearchTool`](#websearchtool)                                 | Search the internet for current information and sources.                                      |
-| [`FileSearchTool`](#filesearchtool)                               | Search vector stores for relevant document content.                                           |
-| [`ImageGenerationTool`](#imagegenerationtool)                     | Generate or edit images using GPT image models.                                               |
-| [`McpTool`](#mcptool)                                             | Access external Model Context Protocol (MCP) servers.                                         |
-| [`AzureAIProjectToolbox`](#azureaiprojecttoolbox)                 | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP).    |
+| [`AzureOpenAIModelImageGenTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaimodelimagegentool)   | Generate images through an OpenAI-compatible `/images/generations` endpoint.                  |
+| [`AzureOpenAITranscriptionsTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaitranscriptionstool) | Transcribe audio files to text through an OpenAI-compatible `/audio/transcriptions` endpoint. |
+| [`CodeInterpreterTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#codeinterpretertool)                     | Run Python code server-side in a sandboxed container.                                         |
+| [`WebSearchTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#websearchtool)                                 | Search the internet for current information and sources.                                      |
+| [`FileSearchTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#filesearchtool)                               | Search vector stores for relevant document content.                                           |
+| [`ImageGenerationTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#imagegenerationtool)                     | Generate or edit images using GPT image models.                                               |
+| [`McpTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#mcptool)                                             | Access external Model Context Protocol (MCP) servers.                                         |
+| [`AzureAIProjectToolbox`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureaiprojecttoolbox)                 | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP).    |
 
 ## Setup
 
@@ -31,21 +27,19 @@ Install dependencies, create the resources used by the tools, and provide creden
 
 Install the integration package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U "langchain-azure-ai[tools]"
-  ```
+```bash
+pip install -U "langchain-azure-ai[tools]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langchain-azure-ai[tools]"
-  ```
-</CodeGroup>
+```bash
+uv add "langchain-azure-ai[tools]"
+```
 
 ### Credentials
 
 Pass either `DefaultAzureCredential()` or an API-key string through the `credential` argument (except for `AzureAIProjectToolbox` which doesn't support keys.)
 
-```python Initialize credential icon="shield-lock" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 
 credential = DefaultAzureCredential()
@@ -62,11 +56,11 @@ The tools support two endpoint styles:
 
 If both are available, prefer `project_endpoint` because it resolves the backing service endpoint automatically for Foundry-based workflows.
 
-```bash Configure endpoint icon="key" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
     export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureOpenAIModelImageGenTool
 
@@ -96,47 +90,40 @@ Use this tool when you want explicit tool invocation for image generation in an 
 
 You must deploy an image generation model first, then pass the deployment name in `model`.
 
-<Accordion title="Configuration options">
-  <ParamField body="project_endpoint" type="str">
-    The Foundry project where the image model is deployed. Using this parameter requires using Microsoft Entra ID.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="endpoint" type="str">
-    The OpenAI-compatible endpoint where the route `/images/generations` is present.
-  </ParamField>
+#### `Field` — `str`
+The Foundry project where the image model is deployed. Using this parameter requires using Microsoft Entra ID.
 
-  <ParamField body="credential" type="str | TokenCredential">
-    The credentials to use, either keys or token credentials.
-  </ParamField>
+#### `Field` — `str`
+The OpenAI-compatible endpoint where the route `/images/generations` is present.
 
-  <ParamField body="prompt" type="str">
-    Text prompt describing the image to generate.
-  </ParamField>
+#### `Field` — `str | TokenCredential`
+The credentials to use, either keys or token credentials.
 
-  <ParamField body="n" type="int" default="1">
-    Number of images to generate.
-  </ParamField>
+#### `Field` — `str`
+Text prompt describing the image to generate.
 
-  <ParamField body="size" type="str | None" default="1024x1024">
-    Output image size (for example `1024x1024`, `1024x1792`, or `1792x1024`, model-dependent).
-  </ParamField>
+#### `Field` — `int`
+Number of images to generate.
 
-  <ParamField body="quality" type="str | None">
-    Optional quality parameter passed to the image-generation model (for example `hd`, model-dependent).
-  </ParamField>
+#### `Field` — `str | None`
+Output image size (for example `1024x1024`, `1024x1792`, or `1792x1024`, model-dependent).
 
-  <ParamField body="style" type="str | None">
-    Optional style parameter such as `vivid` or `natural` (model-dependent).
-  </ParamField>
+#### `Field` — `str | None`
+Optional quality parameter passed to the image-generation model (for example `hd`, model-dependent).
 
-  <ParamField body="model" type="str">
-    Required deployment name of the image generation model to use. Create this deployment in Microsoft Foundry before using the tool. Any OpenAI-compatible model can be used (for example, MAI-Image-2).
-  </ParamField>
+#### `Field` — `str | None`
+Optional style parameter such as `vivid` or `natural` (model-dependent).
 
-  <ParamField body="output_directory" type="str | None">
-    If set, generated images are saved as PNG files and the tool returns saved file paths. If omitted, the tool returns base64 PNG data.
-  </ParamField>
-</Accordion>
+#### `Field` — `str`
+Required deployment name of the image generation model to use. Create this deployment in Microsoft Foundry before using the tool. Any OpenAI-compatible model can be used (for example, MAI-Image-2).
+
+#### `Field` — `str | None`
+If set, generated images are saved as PNG files and the tool returns saved file paths. If omitted, the tool returns base64 PNG data.
+
+</details>
 
 ### AzureOpenAITranscriptionsTool
 
@@ -146,7 +133,7 @@ Use this tool when you want to convert audio files or remote audio URLs into tex
 
 You must deploy a speech-to-text model first, then pass the deployment name in `model`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureOpenAITranscriptionsTool
 
@@ -165,41 +152,37 @@ result = tool.invoke(
 print(result)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="project_endpoint" type="str">
-    The Foundry project where the speech-to-text model is deployed. Using this parameter requires using Microsoft Entra ID.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="endpoint" type="str">
-    The OpenAI-compatible endpoint where the route `/audio/transcriptions` is present.
-  </ParamField>
+#### `Field` — `str`
+The Foundry project where the speech-to-text model is deployed. Using this parameter requires using Microsoft Entra ID.
 
-  <ParamField body="credential" type="str | TokenCredential">
-    The credentials to use, either keys or token credentials.
-  </ParamField>
+#### `Field` — `str`
+The OpenAI-compatible endpoint where the route `/audio/transcriptions` is present.
 
-  <ParamField body="audio_path" type="str">
-    Path to a local audio file or a URL pointing to an audio file.
-  </ParamField>
+#### `Field` — `str | TokenCredential`
+The credentials to use, either keys or token credentials.
 
-  <ParamField body="language" type="str | None">
-    Optional language code in ISO-639-1 format (e.g., `"en"`, `"es"`, `"fr"`). If not specified, the language will be auto-detected by the model.
-  </ParamField>
+#### `Field` — `str`
+Path to a local audio file or a URL pointing to an audio file.
 
-  <ParamField body="model" type="str">
-    Required deployment name of the speech-to-text model to use. Create this deployment in Microsoft Foundry before using the tool.
-  </ParamField>
-</Accordion>
+#### `Field` — `str | None`
+Optional language code in ISO-639-1 format (e.g., `"en"`, `"es"`, `"fr"`). If not specified, the language will be auto-detected by the model.
+
+#### `Field` — `str`
+Required deployment name of the speech-to-text model to use. Create this deployment in Microsoft Foundry before using the tool.
+
+</details>
 
 ### CodeInterpreterTool
 
 `CodeInterpreterTool` allows the model to write and execute Python code within a sandboxed container and include the results in its response. This is useful for data analysis, mathematical computations, visualization, and general problem-solving.
 
-<Warning>
-  Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
-</Warning>
+> [!WARNING]
+> Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools.builtin import CodeInterpreterTool
 
 tool = CodeInterpreterTool(
@@ -211,29 +194,28 @@ response = model_with_code.invoke("Plot a sine wave using Python and explain it"
 print(response)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="file_ids" type="list[str] | None">
-    Optional list of uploaded file IDs to make available inside the container for the code to process.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="memory_limit" type="str | None">
-    Memory limit for the container. Accepted values are `"1g"`, `"4g"`, `"16g"`, and `"64g"`.
-  </ParamField>
+#### `Field` — `list[str] | None`
+Optional list of uploaded file IDs to make available inside the container for the code to process.
 
-  <ParamField body="network_policy" type="dict | None">
-    Optional network access policy for the container.
-  </ParamField>
-</Accordion>
+#### `Field` — `str | None`
+Memory limit for the container. Accepted values are `"1g"`, `"4g"`, `"16g"`, and `"64g"`.
+
+#### `Field` — `dict | None`
+Optional network access policy for the container.
+
+</details>
 
 ### WebSearchTool
 
 `WebSearchTool` allows the model to search the internet for current information and sources related to its queries. This is useful for providing up-to-date information, research, fact-checking, and accessing real-time data.
 
-<Warning>
-  Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
-</Warning>
+> [!WARNING]
+> Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools.builtin import WebSearchTool
 
 tool = WebSearchTool(
@@ -247,29 +229,28 @@ response = model_with_search.invoke(
 print(response)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="search_context_size" type="'low' | 'medium' | 'high' | None">
-    High-level guidance for the amount of context window space to use for the search results. Defaults to `"medium"`.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="user_location" type="dict | None">
-    Approximate location of the user. Can include optional keys: `city`, `country` (ISO-3166 two-letter code), `region`, `timezone` (IANA), and `type="approximate"`.
-  </ParamField>
+#### `Field`
+High-level guidance for the amount of context window space to use for the search results. Defaults to `"medium"`.
 
-  <ParamField body="filters" type="dict | None">
-    Search filters. Can include an optional `allowed_domains` list to restrict results to specific domains.
-  </ParamField>
-</Accordion>
+#### `Field` — `dict | None`
+Approximate location of the user. Can include optional keys: `city`, `country` (ISO-3166 two-letter code), `region`, `timezone` (IANA), and `type="approximate"`.
+
+#### `Field` — `dict | None`
+Search filters. Can include an optional `allowed_domains` list to restrict results to specific domains.
+
+</details>
 
 ### FileSearchTool
 
 `FileSearchTool` searches for relevant content from uploaded vector stores. This is useful for retrieving information from large document collections, knowledge bases, and custom data sources that have been indexed in vector stores.
 
-<Warning>
-  Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
-</Warning>
+> [!WARNING]
+> Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools.builtin import FileSearchTool
 
 tool = FileSearchTool(
@@ -284,33 +265,31 @@ response = model_with_search.invoke(
 print(response)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="vector_store_ids" type="list[str]" required>
-    IDs of the vector stores to search. At least one ID must be provided.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="max_num_results" type="int | None">
-    Maximum number of results to return (1-50). Defaults to a reasonable number.
-  </ParamField>
+#### `Field` — `list[str]`
+IDs of the vector stores to search. At least one ID must be provided.
 
-  <ParamField body="filters" type="dict | None">
-    Optional metadata filter to narrow results using comparison or compound filters.
-  </ParamField>
+#### `Field` — `int | None`
+Maximum number of results to return (1-50). Defaults to a reasonable number.
 
-  <ParamField body="ranking_options" type="dict | None">
-    Ranking options. Can include optional keys `ranker` and `score_threshold` to control result ranking.
-  </ParamField>
-</Accordion>
+#### `Field` — `dict | None`
+Optional metadata filter to narrow results using comparison or compound filters.
+
+#### `Field` — `dict | None`
+Ranking options. Can include optional keys `ranker` and `score_threshold` to control result ranking.
+
+</details>
 
 ### ImageGenerationTool
 
-`ImageGenerationTool` allows the model to generate or edit images using GPT image models. This is useful for creating visuals, editing images, and generating artwork based on text descriptions. This tool must be used with an OpenAI model deployed in a Microsoft Foundry project. If you are using another model, use [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool) instead.
+`ImageGenerationTool` allows the model to generate or edit images using GPT image models. This is useful for creating visuals, editing images, and generating artwork based on text descriptions. This tool must be used with an OpenAI model deployed in a Microsoft Foundry project. If you are using another model, use [`AzureOpenAIModelImageGenTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaimodelimagegentool) instead.
 
-<Warning>
-  Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
-</Warning>
+> [!WARNING]
+> Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools.builtin import ImageGenerationTool
 
 tool = ImageGenerationTool(
@@ -326,65 +305,55 @@ response = model_with_images.invoke(
 print(response)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="model_deployment" type="str | None">
-    Deployment name of the image generation model in Azure AI Foundry. When set, the tool automatically injects the `x-ms-oai-image-generation-deployment` HTTP request header.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="model" type="'gpt-image-1' | 'gpt-image-1-mini' | 'gpt-image-1.5' | None">
-    Image generation model to use.
-  </ParamField>
+#### `Field` — `str | None`
+Deployment name of the image generation model in Azure AI Foundry. When set, the tool automatically injects the `x-ms-oai-image-generation-deployment` HTTP request header.
 
-  <ParamField body="action" type="'generate' | 'edit' | 'auto' | None">
-    Whether to generate a new image or edit an existing one. Defaults to `"auto"`.
-  </ParamField>
+#### `Field`
+Image generation model to use.
 
-  <ParamField body="quality" type="'low' | 'medium' | 'high' | 'auto' | None">
-    Image quality. Defaults to `"auto"`.
-  </ParamField>
+#### `Field`
+Whether to generate a new image or edit an existing one. Defaults to `"auto"`.
 
-  <ParamField body="size" type="'1024x1024' | '1024x1536' | '1536x1024' | 'auto' | None">
-    Image size. Defaults to `"auto"`.
-  </ParamField>
+#### `Field`
+Image quality. Defaults to `"auto"`.
 
-  <ParamField body="output_format" type="'png' | 'webp' | 'jpeg' | None">
-    Output format. Defaults to `"png"`.
-  </ParamField>
+#### `Field`
+Image size. Defaults to `"auto"`.
 
-  <ParamField body="background" type="'transparent' | 'opaque' | 'auto' | None">
-    Background type for image generation.
-  </ParamField>
+#### `Field`
+Output format. Defaults to `"png"`.
 
-  <ParamField body="input_fidelity" type="str | None">
-    How closely the output should match style and facial features of input images. One of `"high"` or `"low"`.
-  </ParamField>
+#### `Field`
+Background type for image generation.
 
-  <ParamField body="input_image_mask" type="dict | None">
-    Mask for inpainting operations.
-  </ParamField>
+#### `Field` — `str | None`
+How closely the output should match style and facial features of input images. One of `"high"` or `"low"`.
 
-  <ParamField body="moderation" type="'auto' | 'low' | None">
-    Moderation level. Defaults to `"auto"`.
-  </ParamField>
+#### `Field` — `dict | None`
+Mask for inpainting operations.
 
-  <ParamField body="output_compression" type="int | None">
-    Compression level (0-100, default 100).
-  </ParamField>
+#### `Field`
+Moderation level. Defaults to `"auto"`.
 
-  <ParamField body="partial_images" type="int | None">
-    Number of partial images to stream (0-3).
-  </ParamField>
-</Accordion>
+#### `Field` — `int | None`
+Compression level (0-100, default 100).
+
+#### `Field` — `int | None`
+Number of partial images to stream (0-3).
+
+</details>
 
 ### McpTool
 
 `McpTool` gives the model access to an external Model Context Protocol (MCP) server. This allows the model to call tools exposed by remote MCP servers within a single conversational turn, enabling integration with custom services and external systems.
 
-<Warning>
-  Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
-</Warning>
+> [!WARNING]
+> Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools.builtin import McpTool
 
 tool = McpTool(
@@ -400,39 +369,34 @@ response = model_with_mcp.invoke(
 print(response)
 ```
 
-<Accordion title="Configuration options">
-  <ParamField body="server_label" type="str" required>
-    A label for this MCP server, used to identify it in tool calls.
-  </ParamField>
+<details>
+<summary>Configuration options</summary>
 
-  <ParamField body="server_url" type="str | None">
-    The URL for the MCP server. Either `server_url` or `connector_id` must be provided.
-  </ParamField>
+#### `Field` — `str`
+A label for this MCP server, used to identify it in tool calls.
 
-  <ParamField body="connector_id" type="str | None">
-    Identifier for a built-in service connector (e.g., `"connector_gmail"`). Either `server_url` or `connector_id` must be provided.
-  </ParamField>
+#### `Field` — `str | None`
+The URL for the MCP server. Either `server_url` or `connector_id` must be provided.
 
-  <ParamField body="allowed_tools" type="list[str] | dict | None">
-    List of tool names, or a tool filter dict, that the model is allowed to call on this server.
-  </ParamField>
+#### `Field` — `str | None`
+Identifier for a built-in service connector (e.g., `"connector_gmail"`). Either `server_url` or `connector_id` must be provided.
 
-  <ParamField body="headers" type="dict[str, str] | None">
-    Optional HTTP headers to send with every request to the MCP server (e.g., for authentication).
-  </ParamField>
+#### `Field` — `list[str] | dict | None`
+List of tool names, or a tool filter dict, that the model is allowed to call on this server.
 
-  <ParamField body="require_approval" type="'always' | 'never' | dict | None">
-    Whether tool calls require human approval before execution.
-  </ParamField>
+#### `Field` — `dict[str, str] | None`
+Optional HTTP headers to send with every request to the MCP server (e.g., for authentication).
 
-  <ParamField body="server_description" type="str | None">
-    Optional description of the MCP server for the model.
-  </ParamField>
+#### `Field`
+Whether tool calls require human approval before execution.
 
-  <ParamField body="authorization" type="str | None">
-    OAuth access token for the MCP server.
-  </ParamField>
-</Accordion>
+#### `Field` — `str | None`
+Optional description of the MCP server for the model.
+
+#### `Field` — `str | None`
+OAuth access token for the MCP server.
+
+</details>
 
 ## Toolboxes
 
@@ -440,15 +404,13 @@ print(response)
 
 Install required dependencies:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
-  ```
+```bash
+pip install -U "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
-  ```
-</CodeGroup>
+```bash
+uv add "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
+```
 
 ### AzureAIProjectToolbox
 
@@ -464,31 +426,29 @@ The toolbox automatically handles:
 
 Create a toolbox in your Microsoft Foundry project. For documentation see [Toolbox in Foundry](https://learn.microsoft.com/azure/foundry/agents/how-to/tools/toolbox).
 
-<Accordion title="Configuration parameters">
-  <ParamField body="project_endpoint" type="str">
-    Azure AI Foundry project endpoint, e.g., `https://<resource>.services.ai.azure.com/api/projects/<project>`. Falls back to `AZURE_AI_PROJECT_ENDPOINT` or `FOUNDRY_PROJECT_ENDPOINT` environment variables.
-  </ParamField>
+<details>
+<summary>Configuration parameters</summary>
 
-  <ParamField body="toolbox_name" type="str">
-    Name of the toolbox as configured in Azure AI Foundry. This parameter is required.
-  </ParamField>
+#### `Field` — `str`
+Azure AI Foundry project endpoint, e.g., `https://<resource>.services.ai.azure.com/api/projects/<project>`. Falls back to `AZURE_AI_PROJECT_ENDPOINT` or `FOUNDRY_PROJECT_ENDPOINT` environment variables.
 
-  <ParamField body="api_version" type="str" default="v1">
-    Toolbox API version appended to the MCP URL.
-  </ParamField>
+#### `Field` — `str`
+Name of the toolbox as configured in Azure AI Foundry. This parameter is required.
 
-  <ParamField body="credential" type="str | TokenCredential">
-    Azure credential for Bearer-token authentication. Accepts a string (static Bearer token) or any `TokenCredential` such as `DefaultAzureCredential`. Defaults to `DefaultAzureCredential()`.
-  </ParamField>
+#### `Field` — `str`
+Toolbox API version appended to the MCP URL.
 
-  <ParamField body="extra_headers" type="dict[str, str]">
-    Additional HTTP headers to include in MCP requests. The `Foundry-Features` header is automatically added with the default value unless already present.
-  </ParamField>
-</Accordion>
+#### `Field` — `str | TokenCredential`
+Azure credential for Bearer-token authentication. Accepts a string (static Bearer token) or any `TokenCredential` such as `DefaultAzureCredential`. Defaults to `DefaultAzureCredential()`.
+
+#### `Field` — `dict[str, str]`
+Additional HTTP headers to include in MCP requests. The `Foundry-Features` header is automatically added with the default value unless already present.
+
+</details>
 
 #### Basic usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIProjectToolbox
 from langchain.agents import create_agent
@@ -516,13 +476,13 @@ async def main():
 
 Or use environment variables instead:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export AZURE_AI_PROJECT_ENDPOINT="https://<resource>.services.ai.azure.com/api/projects/<project>"
 ```
 
 Then instantiate without arguments (or just `toolbox_name`):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools import AzureAIProjectToolbox
 
 toolbox = AzureAIProjectToolbox(toolbox_name="my-toolbox")
@@ -533,7 +493,7 @@ tools = await toolbox.get_tools()
 
 `async with` is supported for ergonomic compatibility:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async with AzureAIProjectToolbox(toolbox_name="my-toolbox") as toolbox:
     tools = await toolbox.get_tools()
 ```
@@ -542,7 +502,7 @@ async with AzureAIProjectToolbox(toolbox_name="my-toolbox") as toolbox:
 
 The `get_tools()` method returns a list of `BaseTool` instances ready for use with any LangChain agent pattern:
 
-```python Agent with AzureAIProjectToolbox icon="robot" theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from azure.identity import DefaultAzureCredential
 from langchain_azure_ai.tools import AzureAIProjectToolbox
 from langchain.agents import create_agent
@@ -572,7 +532,7 @@ async def main():
 
 ## API reference
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_azure_ai.tools import (
     AzureAIProjectToolbox,
     AzureOpenAIModelImageGenTool,
@@ -589,12 +549,8 @@ from langchain_azure_ai.tools.builtin import (
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/azure_ai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

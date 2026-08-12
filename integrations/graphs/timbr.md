@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Timbr integration
 
 > Integrate with the Timbr graph using LangChain Python.
@@ -28,7 +24,7 @@ For a comprehensive example of the `langchain-timbr` integration, see the [demo 
 
 #### Install the package
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install langchain-timbr
 ```
 
@@ -36,13 +32,13 @@ pip install langchain-timbr
 
 Choose one of: `openai, anthropic, google, azure_openai, snowflake, databricks, vertex_ai (or 'all')`
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install 'langchain-timbr[<your selected providers, separated by comma without spaces>]'
 ```
 
 We default to OpenAI models in this guide.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -74,7 +70,7 @@ When LLM environment variables are set, the `llm` parameter becomes optional and
 
 Example environment setup:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 # Timbr connection
 export TIMBR_URL="https://your-timbr-app.com/"
 export TIMBR_TOKEN="tk_XXXXXXXXXXXXXXXXXXXXXXXX"
@@ -92,12 +88,12 @@ export LLM_ADDITIONAL_PARAMS='{"max_tokens": 1000}'
 
 We can now use Timbr's chains to query the semantic layer. Import and utilize your intended chain/node, or use TimbrLlmConnector to manually integrate with Timbr's semantic layer.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_timbr import ExecuteTimbrQueryChain
 from langchain_openai import ChatOpenAI
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # You can use the standard LangChain ChatOpenAI/ChatAnthropic models
 # or any other LLM model based on langchain_core.language_models.chat.BaseChatModel
 llm = ChatOpenAI(model="gpt-5.5", temperature=0, openai_api_key="open-ai-api-key")
@@ -109,7 +105,7 @@ llm = LlmWrapper(llm_type=LlmTypes.OpenAI, api_key="open-ai-api-key", model="gpt
 
 ### ExecuteTimbrQueryChain example
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 execute_timbr_query_chain = ExecuteTimbrQueryChain(
     llm=llm,
     url="https://your-timbr-app.com/",
@@ -139,7 +135,7 @@ generate_sql_usage = usage_metadata.get('generate_sql', {})
 # * 'input_tokens'/'output_tokens'/'total_tokens'/etc.: Actual token usage metrics returned by the LLM
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'rows': [{'total_sales': 150000}], 'sql': 'SELECT SUM(amount) as total_sales FROM sales WHERE date >= DATEADD(month, -1, GETDATE())', 'concept': 'Sales', 'schema': 'dtimbr'}
 ```
 
@@ -147,7 +143,7 @@ generate_sql_usage = usage_metadata.get('generate_sql', {})
 
 You can combine multiple Timbr chains to create more complex workflows.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_classic.chains import SequentialChain
 from langchain_timbr import ExecuteTimbrQueryChain, GenerateAnswerChain
 
@@ -173,7 +169,7 @@ pipeline = SequentialChain(
 result = pipeline.invoke({"prompt": "What are the total sales for last month?"})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {'prompt': 'What are the total sales for last month?', 'answer': 'Based on the query results, the total sales for last month amount to $150,000.', 'sql': 'SELECT SUM(amount) as total_sales FROM sales WHERE date >= DATEADD(month, -1, GETDATE())'}
 ```
 
@@ -190,7 +186,7 @@ For manual integration with Timbr's semantic layer, you can use the `TimbrLlmCon
 * `run_timbr_query` - Execute (semantic and regular) SQL queries against Timbr knowledge graph databases
 * `run_llm_query` - Execute agent pipeline to determine concept, generate SQL, and run query from natural language prompt
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_timbr import TimbrLlmConnector
 
 connector = TimbrLlmConnector(
@@ -218,12 +214,8 @@ print("Query result:", result)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/timbr.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/timbr.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

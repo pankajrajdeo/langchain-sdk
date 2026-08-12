@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Delete traces
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-delete-traces)
 The LangSmith UI does not currently support the deletion of an individual trace. This, however, can be accomplished by directly removing the trace from all materialized views in ClickHouse (except the runs\_history views) and the runs and feedback table themselves.
 
 This command can either be run using a trace ID as an argument or using a file that is a list of trace IDs.
@@ -36,27 +32,26 @@ Ensure you have the following tools/items ready.
 
    * Download the [trace script](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/scripts/delete_trace_by_id.sh)
 
-<Warning>
-  **Batch size limits**
-
-  This script issues `DELETE` mutations against multiple ClickHouse tables per batch. Large deletions can cause service disruption.
-
-  * **Maximum 10,000 traces per run**: split larger files and process sequentially.
-  * **Wait between batches**: allow time for deletions to complete before starting the next batch.
-  * Use the `--sync` flag for sequential (slower but safer) deletion.
-</Warning>
+> [!WARNING]
+> **Batch size limits**
+>
+> This script issues `DELETE` mutations against multiple ClickHouse tables per batch. Large deletions can cause service disruption.
+>
+> * **Maximum 10,000 traces per run**: split larger files and process sequentially.
+> * **Wait between batches**: allow time for deletions to complete before starting the next batch.
+> * Use the `--sync` flag for sequential (slower but safer) deletion.
 
 ### Running the deletion script for a single trace
 
 Run the following command to run the trace deletion script using a single trace ID:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_trace_by_id.sh <clickhouse_url> --trace_id <trace_id>
 ```
 
 For example, if you are using the bundled version with port-forwarding, the command would look like:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_trace_by_id.sh "clickhouse://default:password@localhost:8123/default" --trace_id 4ec70ec7-0808-416a-b836-7100aeec934b
 ```
 
@@ -66,13 +61,13 @@ If you visit the LangSmith UI, you should now see specified trace ID is no longe
 
 Run the following command to run the trace deletion script using a list of trace IDs:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_trace_by_id.sh <clickhouse_url> --file <path/to/foo.txt>
 ```
 
 For example, if you are using the bundled version with port-forwarding, the command would look like:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_trace_by_id.sh "clickhouse://default:password@localhost:8123/default" --file path/to/traces.txt
 ```
 
@@ -86,7 +81,7 @@ If you receive an error message stating that trace IDs could not be found, add t
 
 Example with SSL flag:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 sh delete_trace_by_id.sh "clickhouse://default:password@localhost:8123/default" --file path/to/traces.txt --ssl
 ```
 
@@ -102,12 +97,8 @@ If you experience issues after a large deletion, contact [support](https://suppo
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/script-delete-traces.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

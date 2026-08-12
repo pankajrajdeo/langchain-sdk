@@ -1,24 +1,19 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatAmazonNova integration
 
 > Integrate with the ChatAmazonNova chat model using LangChain Python.
 
-This guide provides a quick overview for getting started with Amazon Nova [chat models](/oss/python/langchain/models). Amazon Nova models are OpenAI-compatible and accessed via the OpenAI SDK pointed at Nova's endpoint, providing seamless integration with LangChain's standard interfaces. The Amazon Nova API is free tier with rate limits.
+This guide provides a quick overview for getting started with Amazon Nova [chat models](https://docs.langchain.com/oss/python/langchain/models). Amazon Nova models are OpenAI-compatible and accessed via the OpenAI SDK pointed at Nova's endpoint, providing seamless integration with LangChain's standard interfaces. The Amazon Nova API is free tier with rate limits.
 
-For production deployments requiring higher throughput and enterprise features, consider using Amazon Nova models via [Amazon Bedrock](/oss/python/integrations/chat/bedrock).
+For production deployments requiring higher throughput and enterprise features, consider using Amazon Nova models via [Amazon Bedrock](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
 
 You can find information about Amazon Nova's models, their features, and API details in the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) features and configuration options, head to the [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) API reference.
-
-  For Amazon Nova model details and capabilities, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) features and configuration options, head to the [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) API reference.
+>
+> For Amazon Nova model details and capabilities, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
 ## Overview
 
@@ -30,7 +25,7 @@ You can find information about Amazon Nova's models, their features, and API det
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input |        Video input       | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input |        Video input       | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :----------------------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                      Model-dependent                     |      ❌      | Model-dependent (Nova 2) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -40,21 +35,19 @@ To access Amazon Nova models, you'll need to [obtain API credentials](https://no
 
 ### Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-amazon-nova
-  ```
+```bash
+pip install -U langchain-amazon-nova
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-amazon-nova
-  ```
-</CodeGroup>
+```bash
+uv add langchain-amazon-nova
+```
 
 ### Credentials
 
 Set your Nova API credentials as environment variables:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -65,9 +58,9 @@ if "NOVA_BASE_URL" not in os.environ:
     os.environ["NOVA_BASE_URL"] = getpass.getpass("Enter your Nova base URL: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -76,7 +69,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_amazon_nova import ChatAmazonNova
 
 model = ChatAmazonNova(
@@ -89,13 +82,12 @@ model = ChatAmazonNova(
 )
 ```
 
-<Info>
-  For a complete list of supported parameters and their descriptions, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
-</Info>
+> [!NOTE]
+> For a complete list of supported parameters and their descriptions, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -107,15 +99,15 @@ ai_msg = model.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", response_metadata={'model': 'nova-2-lite-v1', 'finish_reason': 'stop'}, id='run-12345678-1234-1234-1234-123456789abc', usage_metadata={'input_tokens': 29, 'output_tokens': 8, 'total_tokens': 37})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.content)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
@@ -123,23 +115,23 @@ J'adore la programmation.
 
 Amazon Nova messages can contain either a single string or a list of content blocks. You can access standardized content blocks using the `content_blocks` property:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg.content_blocks
 ```
 
-Using `content_blocks` will render the content in a standard format that is consistent across other model providers. Read more about [content blocks](/oss/python/langchain/messages#standard-content-blocks).
+Using `content_blocks` will render the content in a standard format that is consistent across other model providers. Read more about [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
 
 ## Streaming
 
 Amazon Nova supports token-level streaming for real-time response generation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = model.stream_events(messages, version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
@@ -147,7 +139,7 @@ J'adore la programmation.
 
 For async applications, use `astream_events`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 
 async def main():
@@ -162,15 +154,14 @@ asyncio.run(main())
 
 Amazon Nova supports tool calling (function calling) on compatible models. You can check if a model supports tool calling using LangChain model profiles.
 
-<Info>
-  For details on Nova's tool calling implementation and available parameters, see the [tool calling documentation](https://nova.amazon.com/dev/documentation).
-</Info>
+> [!NOTE]
+> For details on Nova's tool calling implementation and available parameters, see the [tool calling documentation](https://nova.amazon.com/dev/documentation).
 
 ### Basic tool usage
 
 Bind tools to the model using Pydantic models or LangChain [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class GetWeather(BaseModel):
@@ -183,17 +174,17 @@ response = model_with_tools.invoke("What's the weather in Paris?")
 print(response.tool_calls)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'GetWeather', 'args': {'location': 'Paris'}, 'id': 'call_abc123', 'type': 'tool_call'}]
 ```
 
 You can also access tool calls specifically in a standard format using the `tool_calls` attribute:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response.tool_calls
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'GetWeather',
   'args': {'location': 'Paris'},
   'id': 'call_abc123',
@@ -204,7 +195,7 @@ response.tool_calls
 
 You can also use standard LangChain tools:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 
 @tool
@@ -220,7 +211,7 @@ response = model_with_tools.invoke("What's the weather in San Francisco?")
 
 Amazon Nova supports controlling when the model should use tools via the `tool_choice` parameter:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Model decides whether to call tools (default)
 model_auto = model.bind_tools([get_weather], tool_choice="auto")
 
@@ -231,11 +222,10 @@ model_required = model.bind_tools([get_weather], tool_choice="required")
 model_none = model.bind_tools([get_weather], tool_choice="none")
 ```
 
-<Warning>
-  **Nova's tool\_choice values**
-
-  Amazon Nova supports `tool_choice` values of `"auto"`, `"required"`, and `"none"`. Unlike some other providers, Nova does not support `tool_choice="any"` or specifying a specific tool name as the choice value.
-</Warning>
+> [!WARNING]
+> **Nova's tool\_choice values**
+>
+> Amazon Nova supports `tool_choice` values of `"auto"`, `"required"`, and `"none"`. Unlike some other providers, Nova does not support `tool_choice="any"` or specifying a specific tool name as the choice value.
 
 The `tool_choice="required"` option is particularly useful for ensuring the model always uses tools, such as in structured output scenarios.
 
@@ -251,7 +241,7 @@ Amazon Nova supports the following built-in tools:
 
 The grounding tool allows the model to search the web and ground its responses with real-time information from external sources.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_amazon_nova import ChatAmazonNova
 
 model_with_grounding = ChatAmazonNova(
@@ -268,7 +258,7 @@ The grounding tool will automatically search for relevant information and includ
 
 The code interpreter tool enables the model to write and execute Python code in a sandboxed environment, useful for mathematical computations, data analysis, and code generation tasks.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_amazon_nova import ChatAmazonNova
 
 model_with_code = ChatAmazonNova(
@@ -285,7 +275,7 @@ The code interpreter executes code securely and returns both the code and its ou
 
 You can enable multiple system tools simultaneously:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_amazon_nova import ChatAmazonNova
 
 model_with_tools = ChatAmazonNova(
@@ -304,7 +294,7 @@ The model will automatically determine which tool(s) to use based on the query.
 
 You can also specify system tools at invocation time instead of during initialization:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_amazon_nova import ChatAmazonNova
 
 model = ChatAmazonNova(model="nova-2-lite-v1")
@@ -318,17 +308,16 @@ response = model.invoke(
 
 This approach is useful when you want to use different system tools for different queries with the same model instance.
 
-<Info>
-  **Tool outputs and citations**
-
-  When using system tools, the model's response will include:
-
-  * The main text response
-  * Citations or references (for grounding tool)
-  * Code execution results (for code interpreter)
-
-  These outputs are included in the message's `response_metadata` and can be accessed for displaying sources or debugging.
-</Info>
+> [!NOTE]
+> **Tool outputs and citations**
+>
+> When using system tools, the model's response will include:
+>
+> * The main text response
+> * Citations or references (for grounding tool)
+> * Code execution results (for code interpreter)
+>
+> These outputs are included in the message's `response_metadata` and can be accessed for displaying sources or debugging.
 
 For complete details on system tools, their parameters, and capabilities, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
@@ -340,7 +329,7 @@ Amazon Nova supports structured output through the `with_structured_output()` me
 
 You can constrain LLM responses to match a specific structure using Pydantic models:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from langchain_amazon_nova import ChatAmazonNova
 
@@ -356,7 +345,7 @@ result = structured_model.invoke("John is 30 years old")
 print(result)
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 Person(name='John', age=30)
 ```
 
@@ -364,7 +353,7 @@ Person(name='John', age=30)
 
 You can also provide JSON schemas directly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 json_schema = {
     "type": "object",
     "properties": {
@@ -379,7 +368,7 @@ result = structured_model.invoke("Sarah is 28 years old")
 print(result)
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 {'name': 'Sarah', 'age': 28}
 ```
 
@@ -387,7 +376,7 @@ print(result)
 
 Structured output works with streaming. The parsed object is returned once the complete response arrives:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class Person(BaseModel):
@@ -401,7 +390,7 @@ for chunk in structured_model.stream("Michael is 35 years old"):
     print(chunk)
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 Person(name='Michael', age=35)
 ```
 
@@ -409,7 +398,7 @@ Person(name='Michael', age=35)
 
 The `include_raw` parameter allows access to both the parsed output and the raw AIMessage:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 structured_model = model.with_structured_output(Person, include_raw=True)
 result = structured_model.invoke("John is 30 years old")
 
@@ -417,7 +406,7 @@ print(f"Parsed: {result['parsed']}")
 print(f"Raw message: {result['raw']}")
 ```
 
-```output theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```output
 Parsed: Person(name='John', age=30)
 Raw message: AIMessage(content='', additional_kwargs={'tool_calls': [...]}, ...)
 ```
@@ -428,7 +417,7 @@ This is useful for debugging, accessing metadata, or handling edge cases where p
 
 You can use nested Pydantic models for complex data structures:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 from typing import List
 
@@ -452,29 +441,27 @@ result = structured_model.invoke(
 print(result)
 ```
 
-<Info>
-  **Implementation details**
-
-  Structured output uses Nova's tool calling capabilities under the hood with `tool_choice='required'` to ensure consistent structured responses. The schema is converted to a tool definition, and the tool call response is parsed back into the requested format.
-</Info>
+> [!NOTE]
+> **Implementation details**
+>
+> Structured output uses Nova's tool calling capabilities under the hood with `tool_choice='required'` to ensure consistent structured responses. The schema is converted to a tool definition, and the tool call response is parsed back into the requested format.
 
 ## Model profile
 
-Amazon Nova provides different models with varying capabilities. It includes support for LangChain [model profiles](/oss/python/langchain/models#model-profiles).
+Amazon Nova provides different models with varying capabilities. It includes support for LangChain [model profiles](https://docs.langchain.com/oss/python/langchain/models#model-profiles).
 
-<Info>
-  **Model capabilities vary by model**
-
-  Some Amazon Nova models support vision inputs while others do not. Always check model capabilities before using multimodal features.
-
-  For a complete list of available models and their capabilities, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
-</Info>
+> [!NOTE]
+> **Model capabilities vary by model**
+>
+> Some Amazon Nova models support vision inputs while others do not. Always check model capabilities before using multimodal features.
+>
+> For a complete list of available models and their capabilities, see the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
 ## Async operations
 
 For production applications requiring high throughput, use native async operations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import asyncio
 
 async def main():
@@ -488,7 +475,7 @@ async def main():
 asyncio.run(main())
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 The capital of France is Paris.
 ```
 
@@ -496,7 +483,7 @@ The capital of France is Paris.
 
 Amazon Nova models work seamlessly with LangChain's LCEL (LangChain Expression Language) for building chains:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -515,7 +502,7 @@ result = chain.invoke({
 print(result)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Hola, ¿cómo estás?
 ```
 
@@ -523,7 +510,7 @@ Hola, ¿cómo estás?
 
 The model includes built-in retry logic with configurable parameters:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatAmazonNova(
     model="nova-2-lite-v1",
     max_retries=3,  # Number of retries on failure
@@ -533,7 +520,7 @@ model = ChatAmazonNova(
 
 For additional control over retries, use the `with_retry` method:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model_with_custom_retry = model.with_retry(
     stop_after_attempt=5,
     wait_exponential_jitter=True,
@@ -546,7 +533,7 @@ model_with_custom_retry = model.with_retry(
 
 If you encounter connection errors, verify your environment variables are set correctly:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 print(f"API Key set: {'NOVA_API_KEY' in os.environ}")
 print(f"Base URL: {os.environ.get('NOVA_BASE_URL', 'Not set')}")
@@ -556,13 +543,12 @@ For authentication and connection issues, refer to the [Amazon Nova documentatio
 
 ### Compression errors
 
-<Note>
-  The [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) client automatically disables compression to avoid potential decompression issues.
-</Note>
+> [!NOTE]
+> The [`ChatAmazonNova`](https://reference.langchain.com/python/langchain-amazon-nova/chat_models/ChatAmazonNova) client automatically disables compression to avoid potential decompression issues.
 
 If you need to customize HTTP client behavior, you can access the underlying OpenAI client:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # The client is automatically configured with no compression
 model = ChatAmazonNova(model="nova-2-lite-v1")
 # model.client is the configured OpenAI client
@@ -582,12 +568,8 @@ For Amazon Nova-specific features, model details, and API specifications, see th
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/amazon_nova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/amazon_nova.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

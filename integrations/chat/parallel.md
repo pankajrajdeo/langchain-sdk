@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatParallel integration
 
 > Integrate with the ChatParallel chat model using LangChain Python.
@@ -10,9 +6,8 @@
 
 `ChatParallel` is an OpenAI-compatible chat interface to Parallel's models. The `speed` model is a low-latency conversational model with no citations; the research models (`lite`, `base`, `core`) browse the web and return per-field citations and structured output via JSON schema.
 
-<Note>
-  `ChatParallel` is the canonical class name. The earlier `ChatParallelWeb` continues to work as an alias for the same class.
-</Note>
+> [!NOTE]
+> `ChatParallel` is the canonical class name. The earlier `ChatParallelWeb` continues to work as an alias for the same class.
 
 ## Overview
 
@@ -20,11 +15,11 @@
 
 | Class                                                                                                | Package                                                                            | Serializable | JS/TS Support |                                                                                                    Downloads                                                                                                   |                                                                                                                   Latest Version                                                                                                                   |
 | :--------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- | :----------: | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ✅      |       ❌       | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-parallel/month" alt="Downloads per month" noZoom height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ChatParallel`](https://reference.langchain.com/python/langchain-parallel/chat_models/ChatParallel) | [`langchain-parallel`](https://reference.langchain.com/python/langchain-parallel/) |       ✅      |       ❌       | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-parallel/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-parallel/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-parallel?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ❌                      |                      ✅ (research models)                     |      ❌      |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ❌                            |                              ❌                             |
 
@@ -45,21 +40,19 @@ To access Parallel models, install the `langchain-parallel` integration package 
 
 ### Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-parallel
-  ```
+```bash
+pip install -U langchain-parallel
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-parallel
-  ```
-</CodeGroup>
+```bash
+uv add langchain-parallel
+```
 
 ### Credentials
 
 Head to [Parallel](https://platform.parallel.ai) to sign up and generate an API key. Set `PARALLEL_API_KEY` in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -69,7 +62,7 @@ if not os.environ.get("PARALLEL_API_KEY"):
 
 ## Instantiation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ChatParallel
 
 llm = ChatParallel(
@@ -85,7 +78,7 @@ See the [`ChatParallel`](https://reference.langchain.com/python/langchain-parall
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     ("system", "You are a helpful assistant with access to real-time web information."),
     ("human", "What are the latest developments in AI?"),
@@ -98,7 +91,7 @@ print(ai_msg.content)
 
 Chain the model with a prompt template:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.prompts import ChatPromptTemplate
 
 prompt = ChatPromptTemplate(
@@ -125,7 +118,7 @@ chain.invoke(
 
 On the research models (`lite`, `base`, `core`), `ChatParallel.with_structured_output(...)` binds a JSON-schema `response_format` and returns a parsed pydantic object (or dict). Calling it on `speed` raises a `ValueError`, since `speed` silently ignores `response_format`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
 
 class Founder(BaseModel):
@@ -137,13 +130,13 @@ parsed = structured.invoke([("human", "Who founded SpaceX?")])
 print(parsed)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 name='Elon Musk' company='SpaceX'
 ```
 
 `method="json_schema"` (the default), `method="json_mode"`, and `method="function_calling"` are all accepted. Pass `include_raw=True` to receive the full `{"raw", "parsed", "parsing_error"}` envelope and capture parser failures:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 structured = ChatParallel(model="lite").with_structured_output(Founder, include_raw=True)
 res = structured.invoke([("human", "Who founded SpaceX?")])
 res["parsed"]          # Founder(...) or None
@@ -155,7 +148,7 @@ res["raw"]             # original AIMessage
 
 Research models populate `AIMessage.response_metadata["basis"]` with per-field citations, the model's reasoning, and a confidence label. `response_metadata["interaction_id"]` is surfaced for multi-turn context chaining; `system_fingerprint` is forwarded when present.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 cited = ChatParallel(model="lite").invoke([
     ("human", "Who is the current CEO of OpenAI? One sentence."),
 ])
@@ -168,7 +161,7 @@ print("interaction_id:", cited.response_metadata.get("interaction_id"))
 
 `ChatParallel` supports per-token streaming:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events(messages, version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
@@ -176,7 +169,7 @@ for token in stream.text:
 
 ## Async
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = await llm.ainvoke(messages)
 
 stream = await llm.astream_events(messages, version="v3")
@@ -188,7 +181,7 @@ async for token in stream.text:
 
 Parallel does not currently provide token usage metadata. `usage_metadata` is `None`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = llm.invoke(messages)
 print(ai_msg.usage_metadata)
 # None
@@ -196,7 +189,7 @@ print(ai_msg.usage_metadata)
 
 ## Response metadata
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = llm.invoke(messages)
 print(ai_msg.response_metadata)
 # {'model_name': 'speed', 'finish_reason': 'stop', 'created': 1764043410}
@@ -208,7 +201,7 @@ For research models, `response_metadata` additionally carries `basis` (per-field
 
 The integration raises `ValueError` with a descriptive message on common failure modes:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_parallel import ChatParallel
 
 try:
@@ -225,7 +218,7 @@ except ValueError as e:
 
 `ChatParallel` accepts many [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) parameters for drop-in OpenAI-client migration. Advanced parameters such as `tools`, `tool_choice`, `top_p`, and `frequency_penalty` are accepted but ignored by the Parallel API.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatParallel(
     model="speed",
     # accepted but ignored by Parallel:
@@ -240,13 +233,13 @@ llm = ChatParallel(
 )
 ```
 
-For structured output, prefer `ChatParallel.with_structured_output(...)` (see [Structured output](#structured-output)) over passing `response_format` directly. It works on the research models and returns a parsed object.
+For structured output, prefer `ChatParallel.with_structured_output(...)` (see [Structured output](https://docs.langchain.com/oss/python/integrations/chat/parallel#structured-output)) over passing `response_format` directly. It works on the research models and returns a parsed object.
 
 ## Message handling
 
 The integration merges consecutive messages of the same type to satisfy API requirements:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage, SystemMessage
 
 # Consecutive system messages are automatically merged before the API call.
@@ -265,12 +258,8 @@ For detailed documentation, head to the [`ChatParallel`](https://reference.langc
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/parallel.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

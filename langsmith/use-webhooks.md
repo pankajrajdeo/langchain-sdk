@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Use webhooks
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-webhooks)
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
 
 Many LangSmith endpoints accept a `webhook` parameter. If this parameter is specified by an endpoint that can accept POST requests, LangSmith will send a request at the completion of a run.
@@ -32,46 +28,41 @@ In this guide, we’ll show how to trigger a webhook after streaming a run.
 
 Before making API calls, set up your assistant and thread.
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langgraph_sdk import get_client
+#### Python
+```python
+from langgraph_sdk import get_client
 
-    client = get_client(url=<DEPLOYMENT_URL>)
-    assistant_id = "agent"
-    thread = await client.threads.create()
-    print(thread)
-    ```
-  </Tab>
+client = get_client(url=<DEPLOYMENT_URL>)
+assistant_id = "agent"
+thread = await client.threads.create()
+print(thread)
+```
 
-  <Tab title="JavaScript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    import { Client } from "@langchain/langgraph-sdk";
+#### JavaScript
+```js
+import { Client } from "@langchain/langgraph-sdk";
 
-    const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
-    const assistantID = "agent";
-    const thread = await client.threads.create();
-    console.log(thread);
-    ```
-  </Tab>
+const client = new Client({ apiUrl: <DEPLOYMENT_URL> });
+const assistantID = "agent";
+const thread = await client.threads.create();
+console.log(thread);
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/assistants/search \
-        --header 'Content-Type: application/json' \
-        --data '{ "limit": 10, "offset": 0 }' | jq -c 'map(select(.config == null or .config == {})) | .[0]' && \
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/threads \
-        --header 'Content-Type: application/json' \
-        --data '{}'
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/assistants/search \
+    --header 'Content-Type: application/json' \
+    --data '{ "limit": 10, "offset": 0 }' | jq -c 'map(select(.config == null or .config == {})) | .[0]' && \
+curl --request POST \
+    --url <DEPLOYMENT_URL>/threads \
+    --header 'Content-Type: application/json' \
+    --data '{}'
+```
 
 Example response:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
     "thread_id": "9dde5490-2b67-47c8-aa14-4bfec88af217",
     "created_at": "2024-08-30T23:07:38.242730+00:00",
@@ -89,58 +80,53 @@ To use a webhook, specify the `webhook` parameter in your API request. When the 
 
 For example, if your server listens for webhook events at `https://my-server.app/my-webhook-endpoint`, include this in your request:
 
-<Tabs>
-  <Tab title="Python">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    input = { "messages": [{ "role": "user", "content": "Hello!" }] }
+#### Python
+```python
+input = { "messages": [{ "role": "user", "content": "Hello!" }] }
 
-    async for chunk in client.runs.stream(
-        thread_id=thread["thread_id"],
-        assistant_id=assistant_id,
-        input=input,
-        stream_mode="events",
-        webhook="https://my-server.app/my-webhook-endpoint"
-    ):
-        pass
-    ```
-  </Tab>
+async for chunk in client.runs.stream(
+    thread_id=thread["thread_id"],
+    assistant_id=assistant_id,
+    input=input,
+    stream_mode="events",
+    webhook="https://my-server.app/my-webhook-endpoint"
+):
+    pass
+```
 
-  <Tab title="JavaScript">
-    ```js theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    const input = { messages: [{ role: "human", content: "Hello!" }] };
+#### JavaScript
+```js
+const input = { messages: [{ role: "human", content: "Hello!" }] };
 
-    const streamResponse = client.runs.stream(
-      thread["thread_id"],
-      assistantID,
-      {
-        input: input,
-        webhook: "https://my-server.app/my-webhook-endpoint"
-      }
-    );
+const streamResponse = client.runs.stream(
+  thread["thread_id"],
+  assistantID,
+  {
+    input: input,
+    webhook: "https://my-server.app/my-webhook-endpoint"
+  }
+);
 
-    for await (const chunk of streamResponse) {
-      // Handle stream output
-    }
-    ```
-  </Tab>
+for await (const chunk of streamResponse) {
+  // Handle stream output
+}
+```
 
-  <Tab title="cURL">
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    curl --request POST \
-        --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "assistant_id": <ASSISTANT_ID>,
-            "input": {"messages": [{"role": "user", "content": "Hello!"}]},
-            "webhook": "https://my-server.app/my-webhook-endpoint"
-        }'
-    ```
-  </Tab>
-</Tabs>
+#### cURL
+```bash
+curl --request POST \
+    --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/runs/stream \
+    --header 'Content-Type: application/json' \
+    --data '{
+        "assistant_id": <ASSISTANT_ID>,
+        "input": {"messages": [{"role": "user", "content": "Hello!"}]},
+        "webhook": "https://my-server.app/my-webhook-endpoint"
+    }'
+```
 
 ## Webhook payload
 
-LangSmith sends webhook notifications in the format of a [Run](/langsmith/runs). The request payload includes run input, configuration, and other metadata in the `kwargs` field. In addition to the standard run fields, the webhook payload also includes `values`, `webhook_sent_at`, and `error` fields.
+LangSmith sends webhook notifications in the format of a [Run](https://docs.langchain.com/langsmith/runs). The request payload includes run input, configuration, and other metadata in the `kwargs` field. In addition to the standard run fields, the webhook payload also includes `values`, `webhook_sent_at`, and `error` fields.
 
 The full webhook payload contains the following fields:
 
@@ -163,7 +149,7 @@ The full webhook payload contains the following fields:
 
 Example payload:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "run_id": "1ef6a5b8-4457-6db0-8b15-cffd3797fa04",
   "thread_id": "9dde5490-2b67-47c8-aa14-4bfec88af217",
@@ -193,7 +179,7 @@ Example payload:
 
 When a run fails, the `error` field contains details about the failure:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "error": {
     "error": "TimeoutError",
@@ -214,15 +200,14 @@ Your server should extract and validate this token before processing requests.
 
 ## Add headers to webhook requests
 
-<Note>
-  Available in `langgraph-api>=0.5.36`.
-</Note>
+> [!NOTE]
+> Available in `langgraph-api>=0.5.36`.
 
 You can configure static headers to include with all outbound webhook requests. This is useful for authentication, routing, or passing metadata to your webhook endpoint.
 
 Add a `webhooks.headers` configuration to your `langgraph.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "webhooks": {
     "headers": {
@@ -237,7 +222,7 @@ Add a `webhooks.headers` configuration to your `langgraph.json` file:
 
 To include secrets or environment-specific values without checking them into your configuration file, use the `${{ env.VAR }}` template syntax:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "webhooks": {
     "headers": {
@@ -249,7 +234,7 @@ To include secrets or environment-specific values without checking them into you
 
 For security, only environment variables starting with `LG_WEBHOOK_` can be referenced by default. This prevents accidentally leaking unrelated environment variables. You can customize this prefix using `env_prefix`:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "webhooks": {
     "env_prefix": "MY_APP_",
@@ -260,19 +245,17 @@ For security, only environment variables starting with `LG_WEBHOOK_` can be refe
 }
 ```
 
-<Note>
-  Missing required environment variables will block server startup, ensuring you don't deploy with incomplete configuration.
-</Note>
+> [!NOTE]
+> Missing required environment variables will block server startup, ensuring you don't deploy with incomplete configuration.
 
 ## Restrict webhook destinations
 
-<Note>
-  Available in `langgraph-api>=0.5.36`.
-</Note>
+> [!NOTE]
+> Available in `langgraph-api>=0.5.36`.
 
 For security or compliance purposes, you can restrict which URLs are valid webhook destinations using the `webhooks.url` configuration:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "webhooks": {
     "url": {
@@ -297,7 +280,7 @@ Available options:
 
 As of `langgraph-api>=0.2.78`, developers can disable webhooks in the `langgraph.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "http": {
     "disable_webhooks": true
@@ -307,7 +290,7 @@ As of `langgraph-api>=0.2.78`, developers can disable webhooks in the `langgraph
 
 This feature is primarily intended for self-hosted deployments, where platform administrators or developers may prefer to disable webhooks to simplify their security posture—especially if they are not configuring firewall rules or other network controls. Disabling webhooks helps prevent untrusted payloads from being sent to internal endpoints.
 
-For full configuration details, refer to the [configuration file reference](/langsmith/cli?h=disable_webhooks#configuration-file).
+For full configuration details, refer to the [configuration file reference](https://docs.langchain.com/langsmith/cli?h=disable_webhooks#configuration-file).
 
 ## Test webhooks
 
@@ -320,12 +303,8 @@ These tools help you verify that LangSmith is correctly triggering and sending w
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

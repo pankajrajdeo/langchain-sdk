@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Mistral applications
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-mistral)
 [Mistral](https://mistral.ai/) provides hosted access to open-weight language models via a simple API.
 
 This guide shows you how to trace Mistral API calls with LangSmith, allowing you to record prompts, responses, and metadata for debugging and observability. Traces are sent directly to LangSmith using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and standard span instrumentation.
@@ -12,23 +8,21 @@ This guide shows you how to trace Mistral API calls with LangSmith, allowing you
 
 Install Mistral’s official library and LangSmith:
 
-<CodeGroup>
-  ```bash Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install mistralai langsmith
-  ```
+```bash
+pip install mistralai langsmith
+```
 
-  ```bash JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  npm install @mistralai/mistralai langsmith dotenv
-  ```
-</CodeGroup>
+```bash
+npm install @mistralai/mistralai langsmith dotenv
+```
 
 [`mistralai`](https://docs.mistral.ai/getting-started/clients) provides a Mistral client for interacting with Mistral’s API.
 
 ## Setup
 
-Set your [API keys](/langsmith/create-account-api-key) and project name:
+Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export MISTRAL_API_KEY="<your_mistral_api_key>"
 export LANGSMITH_TRACING="true"
 export LANGSMITH_API_KEY="<your_langsmith_api_key>"
@@ -37,83 +31,81 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
 * Ensure you have a Mistral API key from your [Mistral AI account](https://v2.auth.mistral.ai/login) (set this as `MISTRAL_API_KEY`).
 * Set `LANGSMITH_TRACING=true` and provide your LangSmith API key (`LANGSMITH_API_KEY`) activates automatic logging of traces.
-* Specify a [`LANGSMITH_PROJECT`](/langsmith/log-traces-to-project) name to organize traces by project; if not set, traces go to the default project (named "default").
+* Specify a [`LANGSMITH_PROJECT`](https://docs.langchain.com/langsmith/log-traces-to-project) name to organize traces by project; if not set, traces go to the default project (named "default").
 * The `LANGSMITH_TRACING` flag must be true for any traces to be recorded.
 
 ## Configure tracing
 
 1. Instrument the Mistral API call with LangSmith. In your script, create a Mistral client and wrap a call in a traced function:
 
-   <CodeGroup>
-     ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     import os
-     from mistralai import Mistral
-     from langsmith import traceable
+```python
+   import os
+   from mistralai import Mistral
+   from langsmith import traceable
 
-     # Initialize Mistral API client with your API key
-     client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+   # Initialize Mistral API client with your API key
+   client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
 
-     @traceable(
-         run_type="llm",
-         metadata={"ls_provider": "mistral", "ls_model_name": "mistral-medium-latest"},
-     )
-     def query_mistral(prompt: str):
-         response = client.chat.complete(
-             model="mistral-medium-latest",
-             messages=[{"role": "user", "content": prompt}],
-         )
-         return response.choices[0].message
+   @traceable(
+       run_type="llm",
+       metadata={"ls_provider": "mistral", "ls_model_name": "mistral-medium-latest"},
+   )
+   def query_mistral(prompt: str):
+       response = client.chat.complete(
+           model="mistral-medium-latest",
+           messages=[{"role": "user", "content": prompt}],
+       )
+       return response.choices[0].message
 
-     # Example usage
-     result = query_mistral("Hello, how are you?")
-     print("Mistral response:", result.content)
-     ```
+   # Example usage
+   result = query_mistral("Hello, how are you?")
+   print("Mistral response:", result.content)
+```
 
-     ```typescript TypeScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     import { Client } from "langsmith";
-     import { traceable } from "langsmith/traceable";
-     import { Mistral } from "@mistralai/mistralai";
-     import "dotenv/config";
+```typescript
+   import { Client } from "langsmith";
+   import { traceable } from "langsmith/traceable";
+   import { Mistral } from "@mistralai/mistralai";
+   import "dotenv/config";
 
-     const mistral = new Mistral({
-       apiKey: process.env.MISTRAL_API_KEY,
+   const mistral = new Mistral({
+     apiKey: process.env.MISTRAL_API_KEY,
+   });
+
+   const langsmith = new Client();
+
+   const tracedChatCompletion = traceable(
+     async (params: {
+       model: string;
+       messages: Array<{ role: string; content: string }>;
+     }) => {
+       const response = await mistral.chat.complete(params);
+       // Return the message content so LangSmith captures it correctly
+       return response.choices[0].message.content;
+     },
+     {
+       name: "Mistral Chat Completion",
+       run_type: "llm",
+       metadata: {
+         ls_provider: "mistral",
+         ls_model_name: "mistral-small-latest",
+       },
+     }
+   );
+
+   async function main() {
+     const response = await tracedChatCompletion({
+       model: "mistral-small-latest",
+       messages: [
+         { role: "user", content: "Say hello in one short sentence." },
+       ],
      });
 
-     const langsmith = new Client();
+     console.log(response);
+   }
 
-     const tracedChatCompletion = traceable(
-       async (params: {
-         model: string;
-         messages: Array<{ role: string; content: string }>;
-       }) => {
-         const response = await mistral.chat.complete(params);
-         // Return the message content so LangSmith captures it correctly
-         return response.choices[0].message.content;
-       },
-       {
-         name: "Mistral Chat Completion",
-         run_type: "llm",
-         metadata: {
-           ls_provider: "mistral",
-           ls_model_name: "mistral-small-latest",
-         },
-       }
-     );
-
-     async function main() {
-       const response = await tracedChatCompletion({
-         model: "mistral-small-latest",
-         messages: [
-           { role: "user", content: "Say hello in one short sentence." },
-         ],
-       });
-
-       console.log(response);
-     }
-
-     main();
-     ```
-   </CodeGroup>
+   main();
+```
 
    In this example, you use the [Mistral SDK](https://docs.mistral.ai/getting-started/clients) to send a chat completion request (with a user prompt) and retrieve the model’s answer.
 
@@ -123,15 +115,13 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
 2. Execute your script to generate a trace. For example:
 
-   <CodeGroup>
-     ```bash Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     python mistral_trace.py
-     ```
+```bash
+   python mistral_trace.py
+```
 
-     ```bash JavaScript theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-     node index.js
-     ```
-   </CodeGroup>
+```bash
+   node index.js
+```
 
    The `query_mistral("Hello, how are you?")` call will reach out to the Mistral API, and because of the `@traceable`/`traceable` wrapper, LangSmith will log this call’s inputs and outputs as a new trace. You'll find the model’s response printed to the console, and a corresponding run appear in [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-mistral).
 
@@ -152,18 +142,14 @@ Although Mistral models are open-weight, using the hosted Mistral API may incur 
 
 LangSmith can automatically associate costs with traced LLM calls by estimating token usage and applying model-specific pricing. When tracing Mistral API calls, LangSmith uses the recorded prompt and response messages to calculate token counts and attach cost information to each run.
 
-To enable automatic cost tracking for LLM calls, refer to [Automatically track costs based on token counts](/langsmith/cost-tracking#llm-calls:-automatically-track-costs-based-on-token-counts).
+To enable automatic cost tracking for LLM calls, refer to [Automatically track costs based on token counts](https://docs.langchain.com/langsmith/cost-tracking#llm-calls:-automatically-track-costs-based-on-token-counts).
 
 Once enabled, costs appear directly in the LangSmith UI alongside each traced Mistral run, so that you can monitor usage and compare experiments over time.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-mistral.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

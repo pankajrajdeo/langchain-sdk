@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Coding agent metadata contract
-
-> The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/coding-agent-metadata-contract)
+The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
 
 This schema is the authoritative contract for metadata that coding agents attach to LangSmith runs. It defines which fields are required on every run, which fields are expected when the runtime can supply them, and which fields apply only to specific run types.
 
@@ -16,13 +12,13 @@ The following integrations implement this schema:
 
 | Integration                                            | `ls_integration` value |
 | ------------------------------------------------------ | ---------------------- |
-| [Claude Code](/langsmith/trace-claude-code)            | `claude-code`          |
-| [OpenAI Codex](/langsmith/trace-with-codex)            | `openai-codex`         |
-| [Deep Agents](/langsmith/trace-deep-agents)            | `deepagents-code`      |
-| [Cursor](/langsmith/trace-with-cursor)                 | `cursor`               |
-| [Pi](/langsmith/trace-with-pi)                         | `pi`                   |
-| [Opencode](/langsmith/trace-with-opencode)             | `opencode`             |
-| [GitHub Copilot](/langsmith/trace-with-vscode-copilot) | `copilot`              |
+| [Claude Code](https://docs.langchain.com/langsmith/trace-claude-code)            | `claude-code`          |
+| [OpenAI Codex](https://docs.langchain.com/langsmith/trace-with-codex)            | `openai-codex`         |
+| [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents)            | `deepagents-code`      |
+| [Cursor](https://docs.langchain.com/langsmith/trace-with-cursor)                 | `cursor`               |
+| [Pi](https://docs.langchain.com/langsmith/trace-with-pi)                         | `pi`                   |
+| [Opencode](https://docs.langchain.com/langsmith/trace-with-opencode)             | `opencode`             |
+| [GitHub Copilot](https://docs.langchain.com/langsmith/trace-with-vscode-copilot) | `copilot`              |
 
 ## Global identity block
 
@@ -32,7 +28,7 @@ Every run type must include the following identity fields in its metadata:
 | ------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `ls_agent_type`           | The run's type within the agent. Should be one of `"root"`, `"subagent"`, `"middleware"`, or `"compaction"`. |
 | `ls_agent_purpose`        | High-level purpose of the agent, for example `"coding"`.                                                     |
-| `ls_integration`          | Identifier of the integration emitting the run (see [Supported integrations](#supported-integrations)).      |
+| `ls_integration`          | Identifier of the integration emitting the run (see [Supported integrations](https://docs.langchain.com/langsmith/coding-agent-metadata-contract#supported-integrations)).      |
 | `ls_agent_runtime`        | Human-readable runtime name, for example `"Claude Code 1.0.28"`.                                             |
 | `thread_id`               | Stable identifier for the conversation thread. Used to group related runs in LangSmith's Threads view.       |
 | `ls_trace_schema_version` | Currently `"coding-agent-v1"`.                                                                               |
@@ -63,7 +59,7 @@ This schema distinguishes five run types. Some fields apply only to a subset of 
 
 ### All run types
 
-The [global identity block](#global-identity-block) fields are **always** required on every run type.
+The [global identity block](https://docs.langchain.com/langsmith/coding-agent-metadata-contract#global-identity-block) fields are **always** required on every run type.
 
 Additional fields required on all run types:
 
@@ -101,17 +97,13 @@ Interrupted runs carry the same fields as `root` runs. The run type itself signa
 
 ## Related
 
-* [Metadata parameters reference](/langsmith/ls-metadata-parameters): `ls_` prefixed fields used in LangSmith runs generally.
-* [Add metadata and tags](/langsmith/add-metadata-tags): how to attach metadata to traces using the LangSmith SDK.
+* [Metadata parameters reference](https://docs.langchain.com/langsmith/ls-metadata-parameters): `ls_` prefixed fields used in LangSmith runs generally.
+* [Add metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags): how to attach metadata to traces using the LangSmith SDK.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/coding-agent-metadata-contract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/coding-agent-metadata-contract.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

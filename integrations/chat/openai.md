@@ -1,24 +1,18 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatOpenAI integration
 
 > Integrate with the ChatOpenAI chat model using LangChain Python.
 
 You can find information about OpenAI's latest models, their costs, context windows, and supported input types in the [OpenAI Platform](https://platform.openai.com) docs.
 
-<Tip>
-  **API Reference**
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) API reference.
 
-  For detailed documentation of all features and configuration options, head to the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) API reference.
-</Tip>
-
-<Warning>
-  **API scope**
-
-  `ChatOpenAI` targets [official OpenAI API specifications](https://github.com/openai/openai-openapi) only. Non-standard response fields from third-party providers (e.g., `reasoning_content`, `reasoning`, `reasoning_details`) **are not extracted or preserved**. If you are using a provider that extends the Chat Completions or Responses formats, such as [OpenRouter](https://openrouter.ai/), [LiteLLM](https://litellm.ai/), [vLLM](https://docs.vllm.ai/), or [DeepSeek](https://api-docs.deepseek.com/), use a provider-specific package instead. See [Chat Completions API compatibility](/oss/python/integrations/chat#chat-completions-api) for details.
-</Warning>
+> [!WARNING]
+> **API scope**
+>
+> `ChatOpenAI` targets [official OpenAI API specifications](https://github.com/openai/openai-openapi) only. Non-standard response fields from third-party providers (e.g., `reasoning_content`, `reasoning`, `reasoning_details`) **are not extracted or preserved**. If you are using a provider that extends the Chat Completions or Responses formats, such as [OpenRouter](https://openrouter.ai/), [LiteLLM](https://litellm.ai/), [vLLM](https://docs.vllm.ai/), or [DeepSeek](https://api-docs.deepseek.com/), use a provider-specific package instead. See [Chat Completions API compatibility](https://docs.langchain.com/oss/python/integrations/chat#chat-completions-api) for details.
 
 ## Overview
 
@@ -26,11 +20,11 @@ You can find information about OpenAI's latest models, their costs, context wind
 
 | Class                                                                                               | Package                                                                        | Serializable |                           JS/TS Support                           |                                                                                                  Downloads                                                                                                 |                                                                                                                 Latest Version                                                                                                                 |
 | :-------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------- | :----------: | :---------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) |     beta     | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/openai) | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openai/month" alt="Downloads per month" noZoom height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openai?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) | [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) |     beta     | ✅ [(npm)](https://js.langchain.com/docs/integrations/chat/openai) | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openai/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openai/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openai?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |      ✅      |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -40,21 +34,19 @@ To access OpenAI models you'll need to install the `langchain-openai` integratio
 
 ### Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-openai
-  ```
+```bash
+pip install -U langchain-openai
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-openai
-  ```
-</CodeGroup>
+```bash
+uv add langchain-openai
+```
 
 ### Credentials
 
 Head to the [OpenAI Platform](https://platform.openai.com/docs/api-reference/authentication) to sign up and generate an API key. Once you've done this set the `OPENAI_API_KEY` environment variable in your environment:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -68,9 +60,9 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client. LangChain also inspects this to decide whether to default-enable `stream_usage`; when set, the default is left off because many non-OpenAI endpoints don't support streaming token usage.
 
-If you want to get automated tracing of your model calls you can also set your [LangSmith](/langsmith/observability) API key:
+If you want to get automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -79,7 +71,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Now we can instantiate our model object and generate responses:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -99,17 +91,16 @@ llm = ChatOpenAI(
 
 See the [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) API Reference for the full set of available model parameters.
 
-<Note>
-  **Token parameter deprecation**
-
-  OpenAI deprecated `max_tokens` in favor of `max_completion_tokens` in September 2024. While `max_tokens` is still supported for backwards compatibility, it's automatically converted to `max_completion_tokens` internally.
-</Note>
+> [!NOTE]
+> **Token parameter deprecation**
+>
+> OpenAI deprecated `max_tokens` in favor of `max_completion_tokens` in September 2024. While `max_tokens` is still supported for backwards compatibility, it's automatically converted to `max_completion_tokens` internally.
 
 ***
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -121,15 +112,15 @@ ai_msg = llm.invoke(messages)
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 5, 'prompt_tokens': 31, 'total_tokens': 36}, 'model_name': 'gpt-4o-2024-05-13', 'system_fingerprint': 'fp_3aa7262c27', 'finish_reason': 'stop', 'logprobs': None}, id='run-63219b22-03e3-4561-8cc4-78b7c7c3a3ca-0', usage_metadata={'input_tokens': 31, 'output_tokens': 5, 'total_tokens': 36})
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.text)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 J'adore la programmation.
 ```
 
@@ -141,7 +132,7 @@ OpenAI's Chat Completions API does not stream token usage statistics by default 
 
 To recover token counts when streaming with [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) or `AzureChatOpenAI`, set `stream_usage=True` as an initialization parameter or on invocation:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.4-mini", stream_usage=True)  # [!code highlight]
@@ -151,93 +142,96 @@ llm = ChatOpenAI(model="gpt-5.4-mini", stream_usage=True)  # [!code highlight]
 
 ## Using with Azure OpenAI
 
-<Info>
-  **Azure OpenAI v1 API support**
+> [!NOTE]
+> **Azure OpenAI v1 API support**
+>
+> As of `langchain-openai>=1.0.1`, `ChatOpenAI` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI models whether hosted on OpenAI or Azure.
+>
+> For the traditional Azure-specific implementation, continue to use [`AzureChatOpenAI`](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/).
 
-  As of `langchain-openai>=1.0.1`, `ChatOpenAI` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI models whether hosted on OpenAI or Azure.
+<details>
+<summary>Using Azure OpenAI v1 API with API Key</summary>
 
-  For the traditional Azure-specific implementation, continue to use [`AzureChatOpenAI`](/oss/python/integrations/chat/azure_chat_openai/).
-</Info>
+To use `ChatOpenAI` with Azure OpenAI, set the `base_url` to your Azure endpoint with `/openai/v1/` appended:
 
-<Accordion title="Using Azure OpenAI v1 API with API Key">
-  To use `ChatOpenAI` with Azure OpenAI, set the `base_url` to your Azure endpoint with `/openai/v1/` appended:
+```python
+from langchain_openai import ChatOpenAI
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openai import ChatOpenAI
+llm = ChatOpenAI(
+    model="gpt-5-mini",  # Your Azure deployment name
+    base_url="https://{your-resource-name}.openai.azure.com/openai/v1/",
+    api_key="your-azure-api-key"
+)
 
-  llm = ChatOpenAI(
-      model="gpt-5-mini",  # Your Azure deployment name
-      base_url="https://{your-resource-name}.openai.azure.com/openai/v1/",
-      api_key="your-azure-api-key"
-  )
+response = llm.invoke("Hello, how are you?")
+print(response.content)
+```
 
-  response = llm.invoke("Hello, how are you?")
-  print(response.content)
-  ```
-</Accordion>
+</details>
 
-<Accordion title="Using Azure OpenAI with Microsoft Entra ID">
-  The v1 API adds native support for [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity) (formerly Azure AD) authentication with automatic token refresh. Pass a token provider callable to the `api_key` parameter:
+<details>
+<summary>Using Azure OpenAI with Microsoft Entra ID</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-  from langchain_openai import ChatOpenAI
+The v1 API adds native support for [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity) (formerly Azure AD) authentication with automatic token refresh. Pass a token provider callable to the `api_key` parameter:
 
-  # Create a token provider that handles automatic refresh
-  token_provider = get_bearer_token_provider(
-      DefaultAzureCredential(),
-      "https://cognitiveservices.azure.com/.default"
-  )
+```python
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from langchain_openai import ChatOpenAI
 
-  llm = ChatOpenAI(
-      model="gpt-5-mini",  # Your Azure deployment name
-      base_url="https://{your-resource-name}.openai.azure.com/openai/v1/",
-      api_key=token_provider  # Callable that handles token refresh
-  )
+# Create a token provider that handles automatic refresh
+token_provider = get_bearer_token_provider(
+    DefaultAzureCredential(),
+    "https://cognitiveservices.azure.com/.default"
+)
 
-  # Use the model as normal
-  messages = [
-      ("system", "You are a helpful assistant."),
-      ("human", "Translate 'I love programming' to French.")
-  ]
-  response = llm.invoke(messages)
-  print(response.content)
-  ```
+llm = ChatOpenAI(
+    model="gpt-5-mini",  # Your Azure deployment name
+    base_url="https://{your-resource-name}.openai.azure.com/openai/v1/",
+    api_key=token_provider  # Callable that handles token refresh
+)
 
-  The token provider is a callable that automatically retrieves and refreshes authentication tokens, eliminating the need to manually manage token expiration.
+# Use the model as normal
+messages = [
+    ("system", "You are a helpful assistant."),
+    ("human", "Translate 'I love programming' to French.")
+]
+response = llm.invoke(messages)
+print(response.content)
+```
 
-  <Tip>
-    **Installation requirements**
+The token provider is a callable that automatically retrieves and refreshes authentication tokens, eliminating the need to manually manage token expiration.
 
-    To use Microsoft Entra ID authentication, install the Azure Identity library:
+> [!TIP]
+> **Installation requirements**
+>
+> To use Microsoft Entra ID authentication, install the Azure Identity library:
+>
+> ```bash
+> pip install azure-identity
+> ```
 
-    ```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    pip install azure-identity
-    ```
-  </Tip>
+You can also pass a token provider callable to the `api_key` parameter when using
+asynchronous functions. You must import DefaultAzureCredential from `azure.identity.aio`:
 
-  You can also pass a token provider callable to the `api_key` parameter when using
-  asynchronous functions. You must import DefaultAzureCredential from `azure.identity.aio`:
+```python
+from azure.identity.aio import DefaultAzureCredential
+from langchain_openai import ChatOpenAI
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from azure.identity.aio import DefaultAzureCredential
-  from langchain_openai import ChatOpenAI
+credential = DefaultAzureCredential()
 
-  credential = DefaultAzureCredential()
+llm_async = ChatOpenAI(
+    model="gpt-5-nano",
+    api_key=credential
+)
 
-  llm_async = ChatOpenAI(
-      model="gpt-5-nano",
-      api_key=credential
-  )
+# Use async methods when using async callable
+response = await llm_async.ainvoke("Hello!")
+```
 
-  # Use async methods when using async callable
-  response = await llm_async.ainvoke("Hello!")
-  ```
+> [!NOTE]
+> When using an async callable for the API key, you must use async methods (`ainvoke`, `astream`, etc.). Sync methods will raise an error.
 
-  <Note>
-    When using an async callable for the API key, you must use async methods (`ainvoke`, `astream`, etc.). Sync methods will raise an error.
-  </Note>
-</Accordion>
+</details>
 
 ***
 
@@ -259,45 +253,41 @@ With `ChatOpenAI.bind_tools`, we can easily pass in Pydantic classes, dict schem
 
 ...and are passed in every model invocation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class GetWeather(BaseModel):
     """Get the current weather in a given location"""
 
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
-
 llm_with_tools = llm.bind_tools([GetWeather])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = llm_with_tools.invoke(
     "what is the weather like in San Francisco",
 )
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='', additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 17, 'prompt_tokens': 68, 'total_tokens': 85}, 'model_name': 'gpt-4o-2024-05-13', 'system_fingerprint': 'fp_3aa7262c27', 'finish_reason': 'tool_calls', 'logprobs': None}, id='run-1617c9b2-dda5-4120-996b-0333ed5992e2-0', tool_calls=[{'name': 'GetWeather', 'args': {'location': 'San Francisco, CA'}, 'id': 'call_o9udf3EVOWiV4Iupktpbpofk', 'type': 'tool_call'}], usage_metadata={'input_tokens': 68, 'output_tokens': 17, 'total_tokens': 85})
 ```
 
 ### Strict mode
 
-<Info>
-  **Requires `langchain-openai>=0.1.21`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-openai>=0.1.21`**
 
 As of Aug 6, 2024, OpenAI supports a `strict` argument when calling tools that will enforce that the tool argument schema is respected by the model. [See more](https://platform.openai.com/docs/guides/function-calling).
 
-<Note>
-  If `strict=True` the tool definition will also be validated, and a subset of JSON schema are accepted. Crucially, schema cannot have optional args (those with default values).
+> [!NOTE]
+> If `strict=True` the tool definition will also be validated, and a subset of JSON schema are accepted. Crucially, schema cannot have optional args (those with default values).
+>
+> Read [the full docs](https://developers.openai.com/api/docs/guides/structured-outputs#supported-schemas) on what types of schema are supported.
 
-  Read [the full docs](https://developers.openai.com/api/docs/guides/structured-outputs#supported-schemas) on what types of schema are supported.
-</Note>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm_with_tools = llm.bind_tools([GetWeather], strict=True)
 ai_msg = llm_with_tools.invoke(
     "what is the weather like in San Francisco",
@@ -305,7 +295,7 @@ ai_msg = llm_with_tools.invoke(
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='', additional_kwargs={'tool_calls': [{'id': 'call_jUqhd8wzAIzInTJl72Rla8ht', 'function': {'arguments': '{"location":"San Francisco, CA"}', 'name': 'GetWeather'}, 'type': 'function'}], 'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 17, 'prompt_tokens': 68, 'total_tokens': 85}, 'model_name': 'gpt-4o-2024-05-13', 'system_fingerprint': 'fp_3aa7262c27', 'finish_reason': 'tool_calls', 'logprobs': None}, id='run-5e3356a9-132d-4623-8e73-dd5a898cf4a6-0', tool_calls=[{'name': 'GetWeather', 'args': {'location': 'San Francisco, CA'}, 'id': 'call_jUqhd8wzAIzInTJl72Rla8ht', 'type': 'tool_call'}], usage_metadata={'input_tokens': 68, 'output_tokens': 17, 'total_tokens': 85})
 ```
 
@@ -313,37 +303,34 @@ AIMessage(content='', additional_kwargs={'tool_calls': [{'id': 'call_jUqhd8wzAIz
 
 Notice that the AIMessage has a `tool_calls` attribute. This contains in a standardized ToolCall format that is model-provider agnostic.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg.tool_calls
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'GetWeather',
   'args': {'location': 'San Francisco, CA'},
   'id': 'call_jUqhd8wzAIzInTJl72Rla8ht',
   'type': 'tool_call'}]
 ```
 
-For more on binding tools and tool call outputs, head to the [tool calling](/oss/python/langchain/tools) docs.
+For more on binding tools and tool call outputs, head to the [tool calling](https://docs.langchain.com/oss/python/langchain/tools) docs.
 
 ### Custom tools
 
-<Info>
-  **Requires `langchain-openai>=0.3.29`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-openai>=0.3.29`**
 
 [Custom tools](https://platform.openai.com/docs/guides/function-calling#custom-tools) support tools with arbitrary string inputs. They can be particularly useful when you expect your string arguments to be long or complex.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI, custom_tool
 from langchain.agents import create_agent
-
 
 @custom_tool
 def execute_code(code: str) -> str:
     """Execute python code."""
     return "27"
-
 
 llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
 
@@ -358,7 +345,7 @@ for snapshot in stream.values:
     snapshot["messages"][-1].pretty_print()
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 ================================ Human Message =================================
 
 Use the tool to calculate 3^3.
@@ -379,70 +366,70 @@ Name: execute_code
 [{'type': 'text', 'text': '27', 'annotations': [], 'id': 'msg_68b73371e9e081a0927f54f88f2cd7a20d6082d28f91357a'}]
 ```
 
-<Accordion title="Context-free grammars">
-  OpenAI supports the specification of a [context-free grammar](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for custom tool inputs in `lark` or `regex` format. See [OpenAI docs](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for details. The `format` parameter can be passed into `@custom_tool` as shown below:
+<details>
+<summary>Context-free grammars</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openai import ChatOpenAI, custom_tool
-  from langchain.agents import create_agent
+OpenAI supports the specification of a [context-free grammar](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for custom tool inputs in `lark` or `regex` format. See [OpenAI docs](https://platform.openai.com/docs/guides/function-calling#context-free-grammars) for details. The `format` parameter can be passed into `@custom_tool` as shown below:
 
+```python
+from langchain_openai import ChatOpenAI, custom_tool
+from langchain.agents import create_agent
 
-  grammar = """
-  start: expr
-  expr: term (SP ADD SP term)* -> add
-  | term
-  term: factor (SP MUL SP factor)* -> mul
-  | factor
-  factor: INT
-  SP: " "
-  ADD: "+"
-  MUL: "*"
-  %import common.INT
-  """
+grammar = """
+start: expr
+expr: term (SP ADD SP term)* -> add
+| term
+term: factor (SP MUL SP factor)* -> mul
+| factor
+factor: INT
+SP: " "
+ADD: "+"
+MUL: "*"
+%import common.INT
+"""
 
-  format_ = {"type": "grammar", "syntax": "lark", "definition": grammar}
+format_ = {"type": "grammar", "syntax": "lark", "definition": grammar}
 
+@custom_tool(format=format_)  # [!code highlight]
+def do_math(input_string: str) -> str:
+    """Do a mathematical operation."""
+    return "27"
 
-  @custom_tool(format=format_)  # [!code highlight]
-  def do_math(input_string: str) -> str:
-      """Do a mathematical operation."""
-      return "27"
+llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
 
+agent = create_agent(llm, [do_math])
 
-  llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+input_message = {"role": "user", "content": "Use the tool to calculate 3^3."}
+stream = agent.stream_events(
+    {"messages": [input_message]},
+    version="v3",
+)
+for snapshot in stream.values:
+    snapshot["messages"][-1].pretty_print()
+```
 
-  agent = create_agent(llm, [do_math])
+```text
+================================ Human Message =================================
 
-  input_message = {"role": "user", "content": "Use the tool to calculate 3^3."}
-  stream = agent.stream_events(
-      {"messages": [input_message]},
-      version="v3",
-  )
-  for snapshot in stream.values:
-      snapshot["messages"][-1].pretty_print()
-  ```
+Use the tool to calculate 3^3.
+================================== Ai Message ==================================
 
-  ```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  ================================ Human Message =================================
+[{'id': 'rs_68b733f066a48194a41001c0cc1081760811f11b6f4bae47', 'summary': [], 'type': 'reasoning'}, {'call_id': 'call_7hTYtlTj9NgWyw8AQGqETtV9', 'input': '3 * 3 * 3', 'name': 'do_math', 'type': 'custom_tool_call', 'id': 'ctc_68b733f3a0a08194968b8338d33ad89f0811f11b6f4bae47', 'status': 'completed'}]
+Tool Calls:
+  do_math (call_7hTYtlTj9NgWyw8AQGqETtV9)
+ Call ID: call_7hTYtlTj9NgWyw8AQGqETtV9
+  Args:
+    __arg1: 3 * 3 * 3
+================================= Tool Message =================================
+Name: do_math
 
-  Use the tool to calculate 3^3.
-  ================================== Ai Message ==================================
+[{'type': 'custom_tool_call_output', 'output': '27'}]
+================================== Ai Message ==================================
 
-  [{'id': 'rs_68b733f066a48194a41001c0cc1081760811f11b6f4bae47', 'summary': [], 'type': 'reasoning'}, {'call_id': 'call_7hTYtlTj9NgWyw8AQGqETtV9', 'input': '3 * 3 * 3', 'name': 'do_math', 'type': 'custom_tool_call', 'id': 'ctc_68b733f3a0a08194968b8338d33ad89f0811f11b6f4bae47', 'status': 'completed'}]
-  Tool Calls:
-    do_math (call_7hTYtlTj9NgWyw8AQGqETtV9)
-   Call ID: call_7hTYtlTj9NgWyw8AQGqETtV9
-    Args:
-      __arg1: 3 * 3 * 3
-  ================================= Tool Message =================================
-  Name: do_math
+[{'type': 'text', 'text': '27', 'annotations': [], 'id': 'msg_68b733f4bb008194937130796372bd0f0811f11b6f4bae47'}]
+```
 
-  [{'type': 'custom_tool_call_output', 'output': '27'}]
-  ================================== Ai Message ==================================
-
-  [{'type': 'text', 'text': '27', 'annotations': [], 'id': 'msg_68b733f4bb008194937130796372bd0f0811f11b6f4bae47'}]
-  ```
-</Accordion>
+</details>
 
 ***
 
@@ -450,88 +437,91 @@ Name: execute_code
 
 OpenAI supports a native [structured output feature](https://platform.openai.com/docs/guides/structured-outputs), which guarantees that its responses adhere to a given schema.
 
-You can access this feature in individual model calls, or by specifying the [response format](/oss/python/langchain/structured-output) of a LangChain [agent](/oss/python/langchain/agents). See below for examples.
+You can access this feature in individual model calls, or by specifying the [response format](https://docs.langchain.com/oss/python/langchain/structured-output) of a LangChain [agent](https://docs.langchain.com/oss/python/langchain/agents). See below for examples.
 
-<Accordion title="Individual model calls">
-  Use the [`with_structured_output`](/oss/python/langchain/models#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable OpenAI's native structured output feature; otherwise the method defaults to using function calling.
+<details>
+<summary>Individual model calls</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openai import ChatOpenAI
-  from pydantic import BaseModel, Field
+Use the [`with_structured_output`](https://docs.langchain.com/oss/python/langchain/models#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable OpenAI's native structured output feature; otherwise the method defaults to using function calling.
 
-  llm = ChatOpenAI(model="gpt-5.5")
+```python
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
 
-  class Movie(BaseModel):
-      """A movie with details."""
-      title: str = Field(description="The title of the movie")
-      year: int = Field(description="The year the movie was released")
-      director: str = Field(description="The director of the movie")
-      rating: float = Field(description="The movie's rating out of 10")
+llm = ChatOpenAI(model="gpt-5.5")
 
-  structured_llm = llm.with_structured_output(Movie, method="json_schema")  # [!code highlight]
-  response = structured_llm.invoke("Provide details about the movie Inception")
-  response
-  ```
+class Movie(BaseModel):
+    """A movie with details."""
+    title: str = Field(description="The title of the movie")
+    year: int = Field(description="The year the movie was released")
+    director: str = Field(description="The director of the movie")
+    rating: float = Field(description="The movie's rating out of 10")
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
-  ```
-</Accordion>
+structured_llm = llm.with_structured_output(Movie, method="json_schema")  # [!code highlight]
+response = structured_llm.invoke("Provide details about the movie Inception")
+response
+```
 
-<Accordion title="Agent response format">
-  Specify `response_format` with [`ProviderStrategy`](/oss/python/langchain/structured-output) to engage OpenAI's structured output feature when generating its final response.
+```python
+Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ProviderStrategy
-  from pydantic import BaseModel
+</details>
 
-  class Weather(BaseModel):
-      temperature: float
-      condition: str
+<details>
+<summary>Agent response format</summary>
 
-  def weather_tool(location: str) -> str:
-      """Get the weather at a location."""
-      return "Sunny and 75 degrees F."
+Specify `response_format` with [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output) to engage OpenAI's structured output feature when generating its final response.
 
-  agent = create_agent(
-      model="openai:gpt-5.5",
-      tools=[weather_tool],
-      response_format=ProviderStrategy(Weather),  # [!code highlight]
-  )
+```python
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ProviderStrategy
+from pydantic import BaseModel
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What's the weather in SF?"}]
-  })
+class Weather(BaseModel):
+    temperature: float
+    condition: str
 
-  result["structured_response"]
-  ```
+def weather_tool(location: str) -> str:
+    """Get the weather at a location."""
+    return "Sunny and 75 degrees F."
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  Weather(temperature=75.0, condition='Sunny')
-  ```
-</Accordion>
+agent = create_agent(
+    model="openai:gpt-5.5",
+    tools=[weather_tool],
+    response_format=ProviderStrategy(Weather),  # [!code highlight]
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What's the weather in SF?"}]
+})
+
+result["structured_response"]
+```
+
+```python
+Weather(temperature=75.0, condition='Sunny')
+```
+
+</details>
 
 ### Structured output with tool calls
 
 OpenAI's [structured output](https://platform.openai.com/docs/guides/structured-outputs) feature can be used simultaneously with tool-calling. The model will either generate tool calls or a response adhering to a desired schema. See example below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
-
 
 def get_weather(location: str) -> None:
     """Get weather at a location."""
     return "It's sunny."
-
 
 class OutputSchema(BaseModel):
     """Schema for response."""
 
     answer: str
     justification: str
-
 
 llm = ChatOpenAI(model="gpt-5.5")
 
@@ -554,11 +544,10 @@ structured_response = structured_llm.invoke(
 
 ## Responses API
 
-<Info>
-  **Requires `langchain-openai>=0.3.9`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-openai>=0.3.9`**
 
-OpenAI supports a [Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions) API that is oriented toward building [agentic](/oss/python/langchain/agents) applications. It includes a suite of [built-in tools](https://platform.openai.com/docs/guides/tools?api-mode=responses), including web and file search. It also supports management of [conversation state](https://platform.openai.com/docs/guides/conversation-state?api-mode=responses), allowing you to continue a conversational thread without explicitly passing in previous messages, as well as the output from [reasoning processes](https://platform.openai.com/docs/guides/reasoning?api-mode=responses).
+OpenAI supports a [Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions) API that is oriented toward building [agentic](https://docs.langchain.com/oss/python/langchain/agents) applications. It includes a suite of [built-in tools](https://platform.openai.com/docs/guides/tools?api-mode=responses), including web and file search. It also supports management of [conversation state](https://platform.openai.com/docs/guides/conversation-state?api-mode=responses), allowing you to continue a conversational thread without explicitly passing in previous messages, as well as the output from [reasoning processes](https://platform.openai.com/docs/guides/reasoning?api-mode=responses).
 
 [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) will route to the Responses API if one of these features is used. You can also specify `use_responses_api=True` when instantiating [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
 
@@ -566,15 +555,14 @@ OpenAI supports a [Responses](https://platform.openai.com/docs/guides/responses-
 
 To trigger a web search, pass `{"type": "web_search"}` to the model as you would another tool.
 
-<Tip>
-  **You can also pass built-in tools as invocation params:**
+> [!TIP]
+> **You can also pass built-in tools as invocation params:**
+>
+> ```python
+> llm.invoke("...", tools=[{"type": "web_search"}])
+> ```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  llm.invoke("...", tools=[{"type": "web_search"}])
-  ```
-</Tip>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.4-mini")
@@ -585,13 +573,13 @@ llm_with_tools = llm.bind_tools([tool])
 response = llm_with_tools.invoke("What was a positive news story from today?")
 ```
 
-Note that the response includes structured [content blocks](/oss/python/langchain/messages/#message-content) that include both the text of the response and OpenAI [annotations](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses#output-and-citations) citing its sources. The output message will also contain information from any tool invocations:
+Note that the response includes structured [content blocks](https://docs.langchain.com/oss/python/langchain/messages/#message-content) that include both the text of the response and OpenAI [annotations](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses#output-and-citations) citing its sources. The output message will also contain information from any tool invocations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response.content_blocks
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'server_tool_call',
   'name': 'web_search',
   'args': {'query': 'positive news stories today', 'type': 'search'},
@@ -614,35 +602,32 @@ response.content_blocks
   'id': 'msg_68cd6f8e8d448195a807b89f483a1277080067ad5ea8144a'}]
 ```
 
-<Tip>
-  **You can recover just the text content of the response as a string by using `response.text`. For example, to stream response text:**
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  stream = llm_with_tools.stream_events("...", version="v3")
-  for token in stream.text:
-      print(token, end="|")
-  ```
-
-  See the [streaming guide](/oss/python/langchain/streaming/) for more detail.
-</Tip>
+> [!TIP]
+> **You can recover just the text content of the response as a string by using `response.text`. For example, to stream response text:**
+>
+> ```python
+> stream = llm_with_tools.stream_events("...", version="v3")
+> for token in stream.text:
+>     print(token, end="|")
+> ```
+>
+> See the [streaming guide](https://docs.langchain.com/oss/python/langchain/streaming/) for more detail.
 
 ### Image generation
 
-<Info>
-  **Requires `langchain-openai>=0.3.19`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-openai>=0.3.19`**
 
 To trigger an image generation, pass `{"type": "image_generation"}` to the model as you would another tool.
 
-<Tip>
-  You can also pass built-in tools as invocation params:
+> [!TIP]
+> You can also pass built-in tools as invocation params:
+>
+> ```python
+> llm.invoke("...", tools=[{"type": "image_generation"}])
+> ```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  llm.invoke("...", tools=[{"type": "image_generation"}])
-  ```
-</Tip>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.4-mini")
@@ -656,7 +641,7 @@ ai_message = llm_with_tools.invoke(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 
 from IPython.display import Image
@@ -675,7 +660,7 @@ Image(base64.b64decode(image["base64"]), width=200)
 
 To trigger a file search, pass a [file search tool](https://platform.openai.com/docs/guides/tools-file-search) to the model as you would another tool. You will need to populate an OpenAI-managed vector store and include the vector store ID in the tool definition. See [OpenAI documentation](https://platform.openai.com/docs/guides/tools-file-search) for more detail.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -697,27 +682,27 @@ response = llm_with_tools.invoke("What is deep research by OpenAI?")
 print(response.text)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Deep Research by OpenAI is...
 ```
 
-As with [web search](#web-search), the response will include content blocks with citations:
+As with [web search](https://docs.langchain.com/oss/python/integrations/chat/openai#web-search), the response will include content blocks with citations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 [block["type"] for block in response.content_blocks]
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ['server_tool_call', 'server_tool_result', 'text']
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text_block = next(block for block in response.content_blocks if block["type"] == "text")
 
 text_block["annotations"][:2]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'citation',
   'title': 'deep_research_blog.pdf',
   'extras': {'file_id': 'file-3UzgX7jcC8Dt9ZAFzywg5k', 'index': 2712}},
@@ -728,11 +713,11 @@ text_block["annotations"][:2]
 
 It will also include information from the built-in tool invocations:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response.content_blocks[0]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'type': 'server_tool_call',
  'name': 'file_search',
  'id': 'fs_68cd704c191c81959281b3b2ec6b139908f8f7fb31b1123c',
@@ -741,288 +726,293 @@ response.content_blocks[0]
 
 ### Tool search
 
-<Info>
-  Requires `langchain-openai>=1.1.11`
-</Info>
+> [!NOTE]
+> Requires `langchain-openai>=1.1.11`
 
-OpenAI supports a [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search/) feature allowing models to search for and load tools into its context as needed. OpenAI injects the retrieved tool definitions at the end of the active context to preserve its [cache](#prompt-caching).
+OpenAI supports a [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search/) feature allowing models to search for and load tools into its context as needed. OpenAI injects the retrieved tool definitions at the end of the active context to preserve its [cache](https://docs.langchain.com/oss/python/integrations/chat/openai#prompt-caching).
 
 To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` and add OpenAI's search tool to available tools. See below for examples.
 
-<Accordion title="Server-side tool search">
-  OpenAI can search across available tools and return the loaded tool (together with a tool call if appropriate) in the same response:
+<details>
+<summary>Server-side tool search</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  @tool(extras={"defer_loading": True})  # [!code highlight]
-  def get_weather(location: str) -> str:
-      """Get the current weather for a location."""
-      return f"The weather in {location} is sunny and 72°F"
+OpenAI can search across available tools and return the loaded tool (together with a tool call if appropriate) in the same response:
 
-  @tool(extras={"defer_loading": True})  # [!code highlight]
-  def get_recipe(query: str) -> None:
-      """Get a recipe for chicken soup."""
+```python
+@tool(extras={"defer_loading": True})  # [!code highlight]
+def get_weather(location: str) -> str:
+    """Get the current weather for a location."""
+    return f"The weather in {location} is sunny and 72°F"
 
-  model = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+@tool(extras={"defer_loading": True})  # [!code highlight]
+def get_recipe(query: str) -> None:
+    """Get a recipe for chicken soup."""
 
-  agent = create_agent(
-      model=model,
-      tools=[
-          get_weather,
-          get_recipe,
-          {"type": "tool_search"}  # [!code highlight]
-      ],
-  )
-  input_message = {"role": "user", "content": "What's the weather in San Francisco?"}
-  result = agent.invoke({"messages": [input_message]})
+model = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
 
-  for message in result["messages"]:
-      message.pretty_print()
-  ```
+agent = create_agent(
+    model=model,
+    tools=[
+        get_weather,
+        get_recipe,
+        {"type": "tool_search"}  # [!code highlight]
+    ],
+)
+input_message = {"role": "user", "content": "What's the weather in San Francisco?"}
+result = agent.invoke({"messages": [input_message]})
 
-  ```Result expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  ================================ Human Message =================================
+for message in result["messages"]:
+    message.pretty_print()
+```
 
-  What's the weather in San Francisco?
-  ================================== Ai Message ==================================
+```Result
+================================ Human Message =================================
 
-  [
-    {
-      "id": "tsc_0667642bae2ae6c70069ad6cb31f0c819c838b18b0e1cf1279",
-      "arguments": {
-        "paths": [
-          "get_weather"
-        ]
-      },
-      "execution": "server",
-      "status": "completed",
-      "type": "tool_search_call"
+What's the weather in San Francisco?
+================================== Ai Message ==================================
+
+[
+  {
+    "id": "tsc_0667642bae2ae6c70069ad6cb31f0c819c838b18b0e1cf1279",
+    "arguments": {
+      "paths": [
+        "get_weather"
+      ]
     },
-    {
-      "id": "tso_0667642bae2ae6c70069ad6cb339dc819c9bbc05cb432f347e",
-      "execution": "server",
-      "status": "completed",
-      "tools": [
-        {
-          "name": "get_weather",
-          "parameters": {
-            "properties": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "location"
-            ],
-            "type": "object",
-            "additionalProperties": false
+    "execution": "server",
+    "status": "completed",
+    "type": "tool_search_call"
+  },
+  {
+    "id": "tso_0667642bae2ae6c70069ad6cb339dc819c9bbc05cb432f347e",
+    "execution": "server",
+    "status": "completed",
+    "tools": [
+      {
+        "name": "get_weather",
+        "parameters": {
+          "properties": {
+            "location": {
+              "type": "string"
+            }
           },
-          "strict": true,
-          "type": "function",
-          "defer_loading": true,
-          "description": "Get the current weather for a location."
-        }
-      ],
-      "type": "tool_search_output"
-    },
-    {
-      "arguments": "{\"location\":\"San Francisco\"}",
-      "call_id": "call_nwy9NDI24fTe8qESIRqZGtYm",
-      "name": "get_weather",
-      "type": "function_call",
-      "id": "fc_0667642bae2ae6c70069ad6cb37adc819cbc55cde85e111e32",
-      "namespace": "get_weather",
-      "status": "completed"
-    }
-  ]
-  Tool Calls:
-    get_weather (call_nwy9NDI24fTe8qESIRqZGtYm)
-   Call ID: call_nwy9NDI24fTe8qESIRqZGtYm
-    Args:
-      location: San Francisco
-  ================================= Tool Message =================================
-  Name: get_weather
-
-  The weather in San Francisco is sunny and 72°F
-  ================================== Ai Message ==================================
-
-  [
-    {
-      "type": "text",
-      "text": "It\u2019s currently sunny and 72\u00b0F in San Francisco.",
-      "annotations": [],
-      "id": "msg_0667642bae2ae6c70069ad6cb4829c819c8e26bc7ccc68dcd7"
-    }
-  ]
-  ```
-</Accordion>
-
-<Accordion title="Client-executed tool search">
-  For full control of the underlying tool search process, you can specify `"execution": "client"` in the search tool definition. If the model elects to search for a tool, it will include a `tool_search_call` block in its response. You can then supply a `tool_search_output` block that includes the tool definition.
-
-  The following example shows how you can orchestrate this using [custom middleware](/oss/python/langchain/middleware/custom). The example implements a callable defining the search logic. The middleware then includes:
-
-  1. An `after_model` hook to check for `tool_search_call` blocks and invoke our callable
-  2. A `wrap_tool_call` hook for [runtime tool registration](/oss/python/langchain/tools#dynamic-tool-selection)
-
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  @tool
-  def get_weather(location: str) -> str:
-      """Get the current weather for a location."""
-      return f"The weather in {location} is sunny and 72°F"
-
-  # Implement a callable that returns a tool definition
-  def search_tools(goal: str) -> list[dict]:
-      """Search for available tools to help answer the question."""
-      # Arbitrary logic here
-      return [
-          {
-              "type": "function",
-              "defer_loading": True,
-              **convert_to_openai_tool(get_weather)["function"],
-          }
-      ]
-
-  tool_search_schema = convert_to_openai_tool(search_tools, strict=True)
-  tool_search_config: dict = {
-      "type": "tool_search",
-      "execution": "client",
-      "description": tool_search_schema["function"]["description"],
-      "parameters": tool_search_schema["function"]["parameters"],
+          "required": [
+            "location"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "strict": true,
+        "type": "function",
+        "defer_loading": true,
+        "description": "Get the current weather for a location."
+      }
+    ],
+    "type": "tool_search_output"
+  },
+  {
+    "arguments": "{\"location\":\"San Francisco\"}",
+    "call_id": "call_nwy9NDI24fTe8qESIRqZGtYm",
+    "name": "get_weather",
+    "type": "function_call",
+    "id": "fc_0667642bae2ae6c70069ad6cb37adc819cbc55cde85e111e32",
+    "namespace": "get_weather",
+    "status": "completed"
   }
+]
+Tool Calls:
+  get_weather (call_nwy9NDI24fTe8qESIRqZGtYm)
+ Call ID: call_nwy9NDI24fTe8qESIRqZGtYm
+  Args:
+    location: San Francisco
+================================= Tool Message =================================
+Name: get_weather
 
-  # Implement middleware to invoke the callable and register the tool.
-  class ClientToolSearchMiddleware(AgentMiddleware):
+The weather in San Francisco is sunny and 72°F
+================================== Ai Message ==================================
 
-      @hook_config(can_jump_to=["model"])
-      def after_model(self, state: AgentState, runtime: Any) -> dict[str, Any] | None:
-          last_message = state["messages"][-1]
-          if not isinstance(last_message, AIMessage):
-              return None
-          for block in last_message.content:
-              if isinstance(block, dict) and block.get("type") == "tool_search_call":
-                  call_id = block.get("call_id")
-                  args = block.get("arguments", {})
-                  goal = args.get("goal", "") if isinstance(args, dict) else ""
-                  loaded_tools = search_tools(goal)
-                  tool_search_output = {
-                      "type": "tool_search_output",
-                      "execution": "client",
-                      "call_id": call_id,
-                      "status": "completed",
-                      "tools": loaded_tools,
-                  }
-                  return {
-                      "messages": [HumanMessage(content=[tool_search_output])],
-                      "jump_to": "model",
-                  }
-          return None
+[
+  {
+    "type": "text",
+    "text": "It\u2019s currently sunny and 72\u00b0F in San Francisco.",
+    "annotations": [],
+    "id": "msg_0667642bae2ae6c70069ad6cb4829c819c8e26bc7ccc68dcd7"
+  }
+]
+```
 
-      def wrap_tool_call(
-          self,
-          request: ToolCallRequest,
-          handler: Any,
-      ) -> Any:
-          if request.tool_call["name"] == "get_weather":
-              return handler(request.override(tool=get_weather))
-          return handler(request)
+</details>
 
-  llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+<details>
+<summary>Client-executed tool search</summary>
 
-  agent = create_agent(
-      model=llm,
-      tools=[tool_search_config],
-      middleware=[ClientToolSearchMiddleware()],
-  )
+For full control of the underlying tool search process, you can specify `"execution": "client"` in the search tool definition. If the model elects to search for a tool, it will include a `tool_search_call` block in its response. You can then supply a `tool_search_output` block that includes the tool definition.
 
-  result = agent.invoke(
-      {"messages": [HumanMessage("What's the weather in San Francisco?")]}
-  )
+The following example shows how you can orchestrate this using [custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom). The example implements a callable defining the search logic. The middleware then includes:
 
-  for message in result["messages"]:
-      message.pretty_print()
-  ```
+1. An `after_model` hook to check for `tool_search_call` blocks and invoke our callable
+2. A `wrap_tool_call` hook for [runtime tool registration](https://docs.langchain.com/oss/python/langchain/tools#dynamic-tool-selection)
 
-  ```Result expandable theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  ================================ Human Message =================================
+```python
+@tool
+def get_weather(location: str) -> str:
+    """Get the current weather for a location."""
+    return f"The weather in {location} is sunny and 72°F"
 
-  What's the weather in San Francisco?
-  ================================== Ai Message ==================================
-
-  [
-    {
-      "id": "tsc_0311ca847e392d540069acdd40394c8196a99345e2992eb657",
-      "arguments": {
-        "goal": "Find available tool(s) or weather capability to get current weather for San Francisco."
-      },
-      "call_id": "call_EcvKsh3r9IamaBW4Zz9r7RiK",
-      "execution": "client",
-      "status": "completed",
-      "type": "tool_search_call"
-    }
-  ]
-  ================================ Human Message =================================
-
-  [
-    {
-      "type": "tool_search_output",
-      "execution": "client",
-      "call_id": "call_EcvKsh3r9IamaBW4Zz9r7RiK",
-      "status": "completed",
-      "tools": [
+# Implement a callable that returns a tool definition
+def search_tools(goal: str) -> list[dict]:
+    """Search for available tools to help answer the question."""
+    # Arbitrary logic here
+    return [
         {
-          "type": "function",
-          "defer_loading": true,
-          "name": "get_weather",
-          "description": "Get the current weather for a location.",
-          "parameters": {
-            "properties": {
-              "location": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "location"
-            ],
-            "type": "object"
-          }
+            "type": "function",
+            "defer_loading": True,
+            **convert_to_openai_tool(get_weather)["function"],
         }
-      ]
-    }
-  ]
-  ================================== Ai Message ==================================
+    ]
 
-  [
-    {
-      "arguments": "{\"location\":\"San Francisco\"}",
-      "call_id": "call_wH09dZpqDoVtpeu7uBdvY91l",
-      "name": "get_weather",
-      "type": "function_call",
-      "id": "fc_0311ca847e392d540069acdd41502881968b29d96840633746",
-      "namespace": "get_weather",
-      "status": "completed"
-    }
-  ]
-  Tool Calls:
-    get_weather (call_wH09dZpqDoVtpeu7uBdvY91l)
-   Call ID: call_wH09dZpqDoVtpeu7uBdvY91l
-    Args:
-      location: San Francisco
-  ================================= Tool Message =================================
-  Name: get_weather
+tool_search_schema = convert_to_openai_tool(search_tools, strict=True)
+tool_search_config: dict = {
+    "type": "tool_search",
+    "execution": "client",
+    "description": tool_search_schema["function"]["description"],
+    "parameters": tool_search_schema["function"]["parameters"],
+}
 
-  The weather in San Francisco is sunny and 72°F
-  ================================== Ai Message ==================================
+# Implement middleware to invoke the callable and register the tool.
+class ClientToolSearchMiddleware(AgentMiddleware):
 
-  [
-    {
-      "type": "text",
-      "text": "San Francisco is sunny and 72\u00b0F.",
-      "annotations": [],
-      "id": "msg_0311ca847e392d540069acdd420b648196a603306f5546fabd"
-    }
-  ]
-  ```
-</Accordion>
+    @hook_config(can_jump_to=["model"])
+    def after_model(self, state: AgentState, runtime: Any) -> dict[str, Any] | None:
+        last_message = state["messages"][-1]
+        if not isinstance(last_message, AIMessage):
+            return None
+        for block in last_message.content:
+            if isinstance(block, dict) and block.get("type") == "tool_search_call":
+                call_id = block.get("call_id")
+                args = block.get("arguments", {})
+                goal = args.get("goal", "") if isinstance(args, dict) else ""
+                loaded_tools = search_tools(goal)
+                tool_search_output = {
+                    "type": "tool_search_output",
+                    "execution": "client",
+                    "call_id": call_id,
+                    "status": "completed",
+                    "tools": loaded_tools,
+                }
+                return {
+                    "messages": [HumanMessage(content=[tool_search_output])],
+                    "jump_to": "model",
+                }
+        return None
+
+    def wrap_tool_call(
+        self,
+        request: ToolCallRequest,
+        handler: Any,
+    ) -> Any:
+        if request.tool_call["name"] == "get_weather":
+            return handler(request.override(tool=get_weather))
+        return handler(request)
+
+llm = ChatOpenAI(model="gpt-5.5", use_responses_api=True)
+
+agent = create_agent(
+    model=llm,
+    tools=[tool_search_config],
+    middleware=[ClientToolSearchMiddleware()],
+)
+
+result = agent.invoke(
+    {"messages": [HumanMessage("What's the weather in San Francisco?")]}
+)
+
+for message in result["messages"]:
+    message.pretty_print()
+```
+
+```Result
+================================ Human Message =================================
+
+What's the weather in San Francisco?
+================================== Ai Message ==================================
+
+[
+  {
+    "id": "tsc_0311ca847e392d540069acdd40394c8196a99345e2992eb657",
+    "arguments": {
+      "goal": "Find available tool(s) or weather capability to get current weather for San Francisco."
+    },
+    "call_id": "call_EcvKsh3r9IamaBW4Zz9r7RiK",
+    "execution": "client",
+    "status": "completed",
+    "type": "tool_search_call"
+  }
+]
+================================ Human Message =================================
+
+[
+  {
+    "type": "tool_search_output",
+    "execution": "client",
+    "call_id": "call_EcvKsh3r9IamaBW4Zz9r7RiK",
+    "status": "completed",
+    "tools": [
+      {
+        "type": "function",
+        "defer_loading": true,
+        "name": "get_weather",
+        "description": "Get the current weather for a location.",
+        "parameters": {
+          "properties": {
+            "location": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "location"
+          ],
+          "type": "object"
+        }
+      }
+    ]
+  }
+]
+================================== Ai Message ==================================
+
+[
+  {
+    "arguments": "{\"location\":\"San Francisco\"}",
+    "call_id": "call_wH09dZpqDoVtpeu7uBdvY91l",
+    "name": "get_weather",
+    "type": "function_call",
+    "id": "fc_0311ca847e392d540069acdd41502881968b29d96840633746",
+    "namespace": "get_weather",
+    "status": "completed"
+  }
+]
+Tool Calls:
+  get_weather (call_wH09dZpqDoVtpeu7uBdvY91l)
+ Call ID: call_wH09dZpqDoVtpeu7uBdvY91l
+  Args:
+    location: San Francisco
+================================= Tool Message =================================
+Name: get_weather
+
+The weather in San Francisco is sunny and 72°F
+================================== Ai Message ==================================
+
+[
+  {
+    "type": "text",
+    "text": "San Francisco is sunny and 72\u00b0F.",
+    "annotations": [],
+    "id": "msg_0311ca847e392d540069acdd420b648196a603306f5546fabd"
+  }
+]
+```
+
+</details>
 
 ### Computer use
 
@@ -1032,15 +1022,13 @@ Currently, tool outputs for computer use are present in the message `content` fi
 
 First, load two screenshots:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
-
 
 def load_png_as_base64(file_path):
     with open(file_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         return encoded_string.decode("utf-8")
-
 
 screenshot_1_base64 = load_png_as_base64(
     "/path/to/screenshot_1.png"
@@ -1050,7 +1038,7 @@ screenshot_2_base64 = load_png_as_base64(
 )  # perhaps a screenshot of the Desktop
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 # Initialize model
@@ -1094,11 +1082,11 @@ response = llm_with_tools.invoke(
 
 The response will include a call to the computer-use tool in its `content`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response.content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'id': 'rs_685da051742c81a1bb35ce46a9f3f53406b50b8696b0f590',
   'summary': [{'text': "Clicking red 'X' to show desktop",
     'type': 'summary_text'}],
@@ -1117,7 +1105,7 @@ We next construct a [`ToolMessage`](https://reference.langchain.com/python/langc
 2. It has `{"type": "computer_call_output"}` in its `additional_kwargs`.
 3. Its content is either an `image_url` or an `input_image` output block (see [OpenAI docs](https://platform.openai.com/docs/guides/tools-computer-use#5-repeat) for formatting).
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import ToolMessage
 
 tool_call_id = next(
@@ -1139,7 +1127,7 @@ tool_message = ToolMessage(
 
 We can now invoke the model again using the message history:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     input_message,
     response,
@@ -1154,17 +1142,17 @@ response_2 = llm_with_tools.invoke(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response_2.text
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'VS Code has been closed, and the desktop is now visible.'
 ```
 
-Instead of passing back the entire sequence, we can also use the [`previous_response_id`](#passing-previous_response_id):
+Instead of passing back the entire sequence, we can also use the [`previous_response_id`](https://docs.langchain.com/oss/python/integrations/chat/openai#passing-previous_response_id):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 previous_response_id = response.response_metadata["id"]
 
 response_2 = llm_with_tools.invoke(
@@ -1176,11 +1164,11 @@ response_2 = llm_with_tools.invoke(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response_2.text
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 'The VS Code window is closed, and the desktop is now visible. Let me know if you need any further assistance.'
 ```
 
@@ -1188,7 +1176,7 @@ response_2.text
 
 OpenAI implements a [code interpreter](https://platform.openai.com/docs/guides/tools-code-interpreter) tool to support the sandboxed generation and execution of code.
 
-```python Example use theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -1212,7 +1200,7 @@ response = llm_with_tools.invoke(
 
 Note that the above command created a new container. We can also specify an existing container ID:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 code_interpreter_calls = [
     item for item in response.content if item["type"] == "code_interpreter_call"
 ]
@@ -1232,15 +1220,14 @@ llm_with_tools = llm.bind_tools(
 
 ### Apply patch
 
-<Info>
-  Requires `langchain-openai>=1.3.0`
-</Info>
+> [!NOTE]
+> Requires `langchain-openai>=1.3.0`
 
 OpenAI implements an [apply patch](https://developers.openai.com/api/docs/guides/tools-apply-patch) tool that lets the model create, update, or delete files using unified diffs. The tool is client-executed: the model proposes a file operation, your application applies it locally, and you return the result so the model can continue.
 
 To engage it, pass `{"type": "apply_patch"}` to the model as you would another tool. No input schema is required — the model knows how to construct the `operation` object.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.5")
@@ -1254,7 +1241,7 @@ response = llm_with_tools.invoke(
 
 The model returns one or more `apply_patch_call` content blocks, each describing a single file operation (`create_file`, `update_file`, or `delete_file`):
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 apply_patch_calls = [
     block
     for block in response.content_blocks
@@ -1262,7 +1249,7 @@ apply_patch_calls = [
 ]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'type': 'apply_patch_call',
   'id': 'apply_patch_...',
   'call_id': 'call_...',
@@ -1274,7 +1261,7 @@ apply_patch_calls = [
 
 Apply each operation to your filesystem, then send the result back as an `apply_patch_call_output` block keyed by the same `call_id`. Set `status` to `"completed"` on success, or `"failed"` with a descriptive `output` so the model can adjust and retry:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage
 
 call = apply_patch_calls[0]
@@ -1300,15 +1287,14 @@ follow_up = llm_with_tools.invoke(
 )
 ```
 
-<Tip>
-  You can also continue the conversation with OpenAI's stateful API by passing `previous_response_id` instead of the full message history. See [Managing conversation state](#managing-conversation-state).
-</Tip>
+> [!TIP]
+> You can also continue the conversation with OpenAI's stateful API by passing `previous_response_id` instead of the full message history. See [Managing conversation state](https://docs.langchain.com/oss/python/integrations/chat/openai#managing-conversation-state).
 
 ### Remote MCP
 
 OpenAI implements a [remote MCP](https://platform.openai.com/docs/guides/tools-remote-mcp) tool that allows for model-generated calls to MCP servers.
 
-```python Example use theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.4-mini")
@@ -1329,57 +1315,60 @@ response = llm_with_tools.invoke(
 )
 ```
 
-<Accordion title="MCP Approvals">
-  OpenAI will at times request approval before sharing data with a remote MCP server.
+<details>
+<summary>MCP Approvals</summary>
 
-  In the above command, we instructed the model to never require approval. We can also configure the model to always request approval, or to always request approval for specific tools:
+OpenAI will at times request approval before sharing data with a remote MCP server.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  llm_with_tools = llm.bind_tools(
-      [
-          {
-              "type": "mcp",
-              "server_label": "deepwiki",
-              "server_url": "https://mcp.deepwiki.com/mcp",
-              "require_approval": {
-                  "always": {
-                      "tool_names": ["read_wiki_structure"]
-                  }
-              }
-          }
-      ]
-  )
-  response = llm_with_tools.invoke(
-      "What transport protocols does the 2025-03-26 version of the MCP "
-      "spec (modelcontextprotocol/modelcontextprotocol) support?"
-  )
-  ```
+In the above command, we instructed the model to never require approval. We can also configure the model to always request approval, or to always request approval for specific tools:
 
-  Responses may then include blocks with type `"mcp_approval_request"`.
+```python
+llm_with_tools = llm.bind_tools(
+    [
+        {
+            "type": "mcp",
+            "server_label": "deepwiki",
+            "server_url": "https://mcp.deepwiki.com/mcp",
+            "require_approval": {
+                "always": {
+                    "tool_names": ["read_wiki_structure"]
+                }
+            }
+        }
+    ]
+)
+response = llm_with_tools.invoke(
+    "What transport protocols does the 2025-03-26 version of the MCP "
+    "spec (modelcontextprotocol/modelcontextprotocol) support?"
+)
+```
 
-  To submit approvals for an approval request, structure it into a content block in an input message:
+Responses may then include blocks with type `"mcp_approval_request"`.
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  approval_message = {
-      "role": "user",
-      "content": [
-          {
-              "type": "mcp_approval_response",
-              "approve": True,
-              "approval_request_id": block["id"],
-          }
-          for block in response.content
-          if block["type"] == "mcp_approval_request"
-      ]
-  }
+To submit approvals for an approval request, structure it into a content block in an input message:
 
-  next_response = llm_with_tools.invoke(
-      [approval_message],
-      # continue existing thread
-      previous_response_id=response.response_metadata["id"]
-  )
-  ```
-</Accordion>
+```python
+approval_message = {
+    "role": "user",
+    "content": [
+        {
+            "type": "mcp_approval_response",
+            "approve": True,
+            "approval_request_id": block["id"],
+        }
+        for block in response.content
+        if block["type"] == "mcp_approval_request"
+    ]
+}
+
+next_response = llm_with_tools.invoke(
+    [approval_message],
+    # continue existing thread
+    previous_response_id=response.response_metadata["id"]
+)
+```
+
+</details>
 
 ### Managing conversation state
 
@@ -1387,9 +1376,9 @@ The Responses API supports management of [conversation state](https://platform.o
 
 #### Manually manage state
 
-You can manage the state manually or using [LangGraph](/oss/python/langgraph/quickstart), as with other chat models:
+You can manage the state manually or using [LangGraph](https://docs.langchain.com/oss/python/langgraph/quickstart), as with other chat models:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.4-mini", use_responses_api=True)
@@ -1401,11 +1390,11 @@ response = llm.invoke(messages)
 print(response.text)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Hi Bob! Nice to meet you. How can I assist you today?
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 second_query = "What is my name?"
 
 messages.extend(
@@ -1418,19 +1407,18 @@ second_response = llm.invoke(messages)
 print(second_response.text)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 You mentioned that your name is Bob. How can I assist you further, Bob?
 ```
 
-<Tip>
-  **You can use [LangGraph](https://langchain-ai.github.io/langgraph/) to manage conversational threads for you in a variety of backends, including in-memory and Postgres. See [this tutorial](/oss/python/langgraph/quickstart) to get started.**
-</Tip>
+> [!TIP]
+> **You can use [LangGraph](https://langchain-ai.github.io/langgraph/) to manage conversational threads for you in a variety of backends, including in-memory and Postgres. See [this tutorial](https://docs.langchain.com/oss/python/langgraph/quickstart) to get started.**
 
 #### Passing `previous_response_id`
 
 When using the Responses API, LangChain messages will include an `"id"` field in its metadata. Passing this ID to subsequent invocations will continue the conversation. Note that this is [equivalent](https://platform.openai.com/docs/guides/conversation-state?api-mode=responses#openai-apis-for-conversation-state) to manually passing in messages from a billing perspective.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 second_response = llm.invoke(
     "What is my name?",
     previous_response_id=response.id,  # [!code highlight]
@@ -1438,13 +1426,13 @@ second_response = llm.invoke(
 print(second_response.text)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Your name is Bob. How can I help you today, Bob?
 ```
 
 ChatOpenAI can also automatically specify `previous_response_id` using the last response in a message sequence:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -1457,7 +1445,7 @@ If we set `use_previous_response_id=True`, input messages up to the most recent 
 
 That is,
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.invoke(
     [
         HumanMessage("Hello"),
@@ -1469,7 +1457,7 @@ llm.invoke(
 
 ...is equivalent to:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm.invoke([HumanMessage("How are you?")], previous_response_id="resp_123")
 ```
 
@@ -1477,7 +1465,7 @@ llm.invoke([HumanMessage("How are you?")], previous_response_id="resp_123")
 
 The Responses API supports automatic [server-side context compaction](https://developers.openai.com/api/docs/guides/compaction). This reduces conversation size when it reaches a token threshold, allowing for support of long-running interactions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 model = ChatOpenAI(
@@ -1488,7 +1476,7 @@ model = ChatOpenAI(
 )
 ```
 
-When enabled, `AIMessage` responses may contain blocks with `"type": "compaction"` in content. These should be retained in the conversation history, and can be appended to the message sequence in the [usual way](/oss/python/langchain/short-term-memory). Messages prior to the most recent `compaction` item can be kept, or discarded to improve latency.
+When enabled, `AIMessage` responses may contain blocks with `"type": "compaction"` in content. These should be retained in the conversation history, and can be appended to the message sequence in the [usual way](https://docs.langchain.com/oss/python/langchain/short-term-memory). Messages prior to the most recent `compaction` item can be kept, or discarded to improve latency.
 
 ### Reasoning output
 
@@ -1496,7 +1484,7 @@ Some OpenAI models will generate separate text content illustrating their reason
 
 OpenAI can return a summary of the model's reasoning (although it doesn't expose the raw reasoning tokens). To configure [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) to return this summary, specify the `reasoning` parameter. [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) will automatically route to the Responses API if this parameter is set.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 reasoning = {
@@ -1511,40 +1499,38 @@ response = llm.invoke("What is 3^3?")
 response.text
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 '3³ = 3 × 3 × 3 = 27.'
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Reasoning
 for block in response.content_blocks:
     if block["type"] == "reasoning":
         print(block["reasoning"])
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 **Calculating the power of three**
 
 The user is asking about 3 raised to the power of 3. That's a pretty simple calculation! I know that 3^3 equals 27, so I can say, "3 to the power of 3 equals 27." I might also include a quick explanation that it's 3 multiplied by itself three times: 3 × 3 × 3 = 27. So, the answer is definitely 27.
 ```
 
-For a simpler equivalent, use the standard [`reasoning_effort`](/oss/python/langchain/models#reasoning) parameter, which translates to `reasoning.effort` and adds `summary: "auto"`:
+For a simpler equivalent, use the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which translates to `reasoning.effort` and adds `summary: "auto"`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOpenAI(model="gpt-5-nano", reasoning_effort="medium")
 ```
 
-<Note>
-  `reasoning_effort` as a standard parameter requires `langchain-openai>=1.4.1`.
-</Note>
+> [!NOTE]
+> `reasoning_effort` as a standard parameter requires `langchain-openai>=1.4.1`.
 
-<Tip>
-  **Troubleshooting: Empty responses from reasoning models**
-
-  If you're getting empty responses from reasoning models like `gpt-5-nano`, this is likely due to restrictive token limits. The model uses tokens for internal reasoning and may not have any left for the final output.
-
-  Ensure `max_tokens` is set to `None` or increase the token limit to allow sufficient tokens for both reasoning and output generation.
-</Tip>
+> [!TIP]
+> **Troubleshooting: Empty responses from reasoning models**
+>
+> If you're getting empty responses from reasoning models like `gpt-5-nano`, this is likely due to restrictive token limits. The model uses tokens for internal reasoning and may not have any left for the final output.
+>
+> Ensure `max_tokens` is set to `None` or increase the token limit to allow sufficient tokens for both reasoning and output generation.
 
 ***
 
@@ -1554,7 +1540,7 @@ You can call fine-tuned OpenAI models by passing in your corresponding `modelNam
 
 This generally takes the form of `ft:{OPENAI_MODEL_NAME}:{ORG_NAME}::{MODEL_ID}`. For example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 fine_tuned_model = ChatOpenAI(
     temperature=0, model_name="ft:gpt-3.5-turbo-0613:langchain::7qTVM5AR"
 )
@@ -1562,7 +1548,7 @@ fine_tuned_model = ChatOpenAI(
 fine_tuned_model.invoke(messages)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content="J'adore la programmation.", additional_kwargs={'refusal': None}, response_metadata={'token_usage': {'completion_tokens': 8, 'prompt_tokens': 31, 'total_tokens': 39}, 'model_name': 'ft:gpt-3.5-turbo-0613:langchain::7qTVM5AR', 'system_fingerprint': None, 'finish_reason': 'stop', 'logprobs': None}, id='run-0f39b30e-c56e-4f3b-af99-5c948c984146-0', usage_metadata={'input_tokens': 31, 'output_tokens': 8, 'total_tokens': 39})
 ```
 
@@ -1570,15 +1556,15 @@ AIMessage(content="J'adore la programmation.", additional_kwargs={'refusal': Non
 
 ## Multimodal inputs (images, PDFs, audio)
 
-OpenAI has models that support multimodal inputs. You can pass in images, PDFs, or audio to these models. For more information on how to do this in LangChain, head to the [multimodal inputs](/oss/python/langchain/messages#multimodal) docs.
+OpenAI has models that support multimodal inputs. You can pass in images, PDFs, or audio to these models. For more information on how to do this in LangChain, head to the [multimodal inputs](https://docs.langchain.com/oss/python/langchain/messages#multimodal) docs.
 
 You can see the list of models that support different modalities in [OpenAI's documentation](https://platform.openai.com/docs/models).
 
 For all modalities, LangChain supports both its cross-provider standard as well as OpenAI's native content-block format.
 
-To pass multimodal data into [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI), create a [content block](/oss/python/langchain/messages/) containing the data and incorporate it into a message, e.g., as below:
+To pass multimodal data into [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI), create a [content block](https://docs.langchain.com/oss/python/langchain/messages/) containing the data and incorporate it into a message, e.g., as below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 message = {
     "role": "user",
     "content": [
@@ -1594,102 +1580,110 @@ message = {
 
 See below for examples of content blocks.
 
-<Accordion title="Images">
-  Refer to examples in the [multimodal messages how-to guide](/oss/python/langchain/messages#multimodal).
+<details>
+<summary>Images</summary>
 
-  ```python URLs theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # LangChain format
-  content_block = {
-      "type": "image",
-      "url": url_string,
-  }
+Refer to examples in the [multimodal messages how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
 
-  # OpenAI Chat Completions format
-  content_block = {
-      "type": "image_url",
-      "image_url": {"url": url_string},
-  }
-  ```
+```python
+# LangChain format
+content_block = {
+    "type": "image",
+    "url": url_string,
+}
 
-  ```python In-line base64 data theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # LangChain format
-  content_block = {
-      "type": "image",
-      "base64": base64_string,
-      "mime_type": "image/jpeg",
-  }
+# OpenAI Chat Completions format
+content_block = {
+    "type": "image_url",
+    "image_url": {"url": url_string},
+}
+```
 
-  # OpenAI Chat Completions format
-  content_block = {
-      "type": "image_url",
-      "image_url": {
-          "url": f"data:image/jpeg;base64,{base64_string}",
-      },
-  }
-  ```
-</Accordion>
+```python
+# LangChain format
+content_block = {
+    "type": "image",
+    "base64": base64_string,
+    "mime_type": "image/jpeg",
+}
 
-<Accordion title="PDFs">
-  Note: OpenAI requires file-names be specified for PDF inputs. When using LangChain's format, include the `filename` key.
+# OpenAI Chat Completions format
+content_block = {
+    "type": "image_url",
+    "image_url": {
+        "url": f"data:image/jpeg;base64,{base64_string}",
+    },
+}
+```
 
-  Read more about [OpenAI file names for multimodal messages](/oss/python/langchain/messages#multimodal).
+</details>
 
-  Refer to examples in the [PDF documents how-to guide](/oss/python/langchain/messages#multimodal).
+<details>
+<summary>PDFs</summary>
 
-  ```python In-line base64 data theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # LangChain format
-  content_block = {
-      "type": "file",
-      "base64": base64_string,
-      "mime_type": "application/pdf",
-      "filename": "my-file.pdf",  # [!code highlight]
-  }
+Note: OpenAI requires file-names be specified for PDF inputs. When using LangChain's format, include the `filename` key.
 
-  # OpenAI Chat Completions format
-  content_block = {
-      "type": "file",
-      "file": {
-          "filename": "my-file.pdf",
-          "file_data": f"data:application/pdf;base64,{base64_string}",
-      }
-  }
-  ```
-</Accordion>
+Read more about [OpenAI file names for multimodal messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
 
-<Accordion title="Audio">
-  See [supported models](https://platform.openai.com/docs/models), e.g., `"gpt-4o-audio-preview"`.
+Refer to examples in the [PDF documents how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
 
-  Refer to examples in the [audio how-to guide](/oss/python/langchain/messages#multimodal).
+```python
+# LangChain format
+content_block = {
+    "type": "file",
+    "base64": base64_string,
+    "mime_type": "application/pdf",
+    "filename": "my-file.pdf",  # [!code highlight]
+}
 
-  ```python In-line base64 data theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  # LangChain format
-  content_block = {
-      "type": "audio",
-      "mime_type": "audio/wav",  # or appropriate mime-type
-      "base64": base64_string,
-  }
+# OpenAI Chat Completions format
+content_block = {
+    "type": "file",
+    "file": {
+        "filename": "my-file.pdf",
+        "file_data": f"data:application/pdf;base64,{base64_string}",
+    }
+}
+```
 
-  # OpenAI Chat Completions format
-  content_block = {
-      "type": "input_audio",
-      "input_audio": {"data": base64_string, "format": "wav"},
-  }
-  ```
-</Accordion>
+</details>
+
+<details>
+<summary>Audio</summary>
+
+See [supported models](https://platform.openai.com/docs/models), e.g., `"gpt-4o-audio-preview"`.
+
+Refer to examples in the [audio how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+
+```python
+# LangChain format
+content_block = {
+    "type": "audio",
+    "mime_type": "audio/wav",  # or appropriate mime-type
+    "base64": base64_string,
+}
+
+# OpenAI Chat Completions format
+content_block = {
+    "type": "input_audio",
+    "input_audio": {"data": base64_string, "format": "wav"},
+}
+```
+
+</details>
 
 ***
 
 ## Predicted output
 
-<Info>
-  **Requires `langchain-openai>=0.2.6`**
-</Info>
+> [!NOTE]
+> **Requires `langchain-openai>=0.2.6`**
 
 Some OpenAI models (such as their `gpt-4o` and `gpt-4o-mini` series) support [Predicted Outputs](https://platform.openai.com/docs/guides/latency-optimization#use-predicted-outputs), which allow you to pass in a known portion of the LLM's expected output ahead of time to reduce latency. This is useful for cases such as editing text or code, where only a small part of the model's output will change.
 
 Here's an example:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 code = """
 /// <summary>
 /// Represents a user with a first name, last name, and username.
@@ -1726,7 +1720,7 @@ print(response.content)
 print(response.response_metadata)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 /// <summary>
 /// Represents a user with a first name, last name, and email.
 /// </summary>
@@ -1750,19 +1744,17 @@ public class User
 {'token_usage': {'completion_tokens': 226, 'prompt_tokens': 166, 'total_tokens': 392, 'completion_tokens_details': {'accepted_prediction_tokens': 49, 'audio_tokens': None, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 107}, 'prompt_tokens_details': {'audio_tokens': None, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-08-06', 'system_fingerprint': 'fp_45cf54deae', 'finish_reason': 'stop', 'logprobs': None}
 ```
 
-<Note>
-  Predictions are billed as additional tokens and may increase your usage and costs in exchange for this reduced latency.
-</Note>
+> [!NOTE]
+> Predictions are billed as additional tokens and may increase your usage and costs in exchange for this reduced latency.
 
 ## Audio generation (Preview)
 
-<Info>
-  Requires `langchain-openai>=0.2.3`
-</Info>
+> [!NOTE]
+> Requires `langchain-openai>=0.2.3`
 
 OpenAI has a new [audio generation feature](https://platform.openai.com/docs/guides/audio?audio-generation-quickstart-example=audio-out) that allows you to use audio inputs and outputs with the `gpt-4o-audio-preview` model.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -1783,7 +1775,7 @@ output_message = llm.invoke(
 
 `output_message.additional_kwargs['audio']` will contain a dictionary like
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 {
     'data': '<audio data b64-encoded',
     'expires_at': 1729268602,
@@ -1796,13 +1788,12 @@ output_message = llm.invoke(
 
 We can also pass this message with audio data back to the model as part of a message history before openai `expires_at` is reached.
 
-<Note>
-  \*\*Output audio is stored under the `audio` key in `AIMessage.additional_kwargs`, but input content blocks are typed with an `input_audio` type and key in `HumanMessage.content` lists. \*\*
+> [!NOTE]
+> \*\*Output audio is stored under the `audio` key in `AIMessage.additional_kwargs`, but input content blocks are typed with an `input_audio` type and key in `HumanMessage.content` lists. \*\*
+>
+> For more information, see OpenAI's [audio docs](https://platform.openai.com/docs/guides/audio).
 
-  For more information, see OpenAI's [audio docs](https://platform.openai.com/docs/guides/audio).
-</Note>
-
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 history = [
     ("human", "Are you made by OpenAI? Just answer yes or no"),
     output_message,
@@ -1821,7 +1812,7 @@ OpenAI's [prompt caching](https://platform.openai.com/docs/guides/prompt-caching
 
 You can use the `prompt_cache_key` parameter to influence OpenAI's caching and optimize cache hit rates:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-5.5")
@@ -1842,15 +1833,14 @@ cache_read_tokens = response.usage_metadata.input_token_details.cache_read
 print(f"Cached tokens used: {cache_read_tokens}")
 ```
 
-<Warning>
-  Cache hits require the prompt prefix to match exactly
-</Warning>
+> [!WARNING]
+> Cache hits require the prompt prefix to match exactly
 
 ### Cache key strategies
 
 You can use different cache key strategies based on your application's needs:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Static cache keys for consistent prompt templates
 customer_response = llm.invoke(
     messages,
@@ -1872,7 +1862,7 @@ response = llm.invoke(messages, prompt_cache_key=cache_key)
 
 You can also set a default cache key at the model level using `model_kwargs`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOpenAI(
     model="gpt-5.4-mini",
     model_kwargs={"prompt_cache_key": "default-cache-v1"}
@@ -1887,78 +1877,73 @@ response2 = llm.invoke(messages, prompt_cache_key="override-cache-v1")
 
 ### Explicit caching with breakpoints
 
-<Note>
-  Requires `langchain-openai>=1.3.5`. Supported on both the Chat Completions API and the [Responses API](/oss/python/integrations/chat/openai#responses-api).
-</Note>
+> [!NOTE]
+> Requires `langchain-openai>=1.3.5`. Supported on both the Chat Completions API and the [Responses API](https://docs.langchain.com/oss/python/integrations/chat/openai#responses-api).
 
 OpenAI supports [explicit prompt-cache breakpoints](https://developers.openai.com/api/docs/guides/prompt-caching#prompt-cache-breakpoints), which let you designate specific content blocks as cache boundaries. This gives you fine-grained control over which parts of a prompt are cached, rather than relying solely on automatic prefix caching.
 
 To mark a content block as a cache breakpoint, add `"prompt_cache_breakpoint": {"mode": "explicit"}` to the block. Explicit breakpoints require GPT-5.6 or later model families.
 
-<Tabs>
-  <Tab title="Chat Completions">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_openai import ChatOpenAI
+#### Chat Completions
+```python
+from langchain_openai import ChatOpenAI
 
-    llm = ChatOpenAI(
-        model="gpt-5.6-sol",
-        prompt_cache_options={"mode": "explicit"},
-    )
+llm = ChatOpenAI(
+    model="gpt-5.6-sol",
+    prompt_cache_options={"mode": "explicit"},
+)
 
-    messages = [
-        {
-            "role": "system",
-            "content": [
-                {
-                    "type": "text",
-                    "text": (
-                        "You are a helpful assistant with access to a large knowledge base."
-                    ),
-                    "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
-                }
-            ],
-        },
-        {"role": "user", "content": "Summarize the key points."},
-    ]
+messages = [
+    {
+        "role": "system",
+        "content": [
+            {
+                "type": "text",
+                "text": (
+                    "You are a helpful assistant with access to a large knowledge base."
+                ),
+                "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
+            }
+        ],
+    },
+    {"role": "user", "content": "Summarize the key points."},
+]
 
-    response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
-    ```
-  </Tab>
+response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
+```
 
-  <Tab title="Responses API">
-    ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-    from langchain_openai import ChatOpenAI
+#### Responses API
+```python
+from langchain_openai import ChatOpenAI
 
-    llm = ChatOpenAI(
-        model="gpt-5.6-sol",
-        use_responses_api=True,
-        prompt_cache_options={"mode": "explicit"},
-    )
+llm = ChatOpenAI(
+    model="gpt-5.6-sol",
+    use_responses_api=True,
+    prompt_cache_options={"mode": "explicit"},
+)
 
-    messages = [
-        {
-            "role": "system",
-            "content": [
-                {
-                    "type": "text",
-                    "text": (
-                        "You are a helpful assistant with access to a large knowledge base."
-                    ),
-                    "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
-                }
-            ],
-        },
-        {"role": "user", "content": "Summarize the key points."},
-    ]
+messages = [
+    {
+        "role": "system",
+        "content": [
+            {
+                "type": "text",
+                "text": (
+                    "You are a helpful assistant with access to a large knowledge base."
+                ),
+                "prompt_cache_breakpoint": {"mode": "explicit"},  # [!code highlight]
+            }
+        ],
+    },
+    {"role": "user", "content": "Summarize the key points."},
+]
 
-    response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
-    ```
-  </Tab>
-</Tabs>
+response = llm.invoke(messages, prompt_cache_key="docs-breakpoint-v1")
+```
 
 Breakpoints are supported on text, image, and file content blocks. You can also nest `prompt_cache_breakpoint` inside an `extras` dict if you prefer to keep the LangChain content block structure clean:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 content_block = {
     "type": "text",
     "text": "Long system prompt...",
@@ -1968,16 +1953,15 @@ content_block = {
 
 ### Request-level cache options
 
-<Note>
-  Requires `langchain-openai>=1.3.5`. `prompt_cache_options` applies to GPT-5.6 and later model families.
-</Note>
+> [!NOTE]
+> Requires `langchain-openai>=1.3.5`. `prompt_cache_options` applies to GPT-5.6 and later model families.
 
 You can pass request-level prompt cache options using the `prompt_cache_options` parameter on the model or per invocation:
 
 * **`mode`**: `"implicit"` (default) or `"explicit"`. In `"implicit"` mode, OpenAI places a cache breakpoint on the latest message and also uses any explicit breakpoints you provide. In `"explicit"` mode, only your breakpoints are used for cache reads and writes. If the request has no explicit breakpoints, it does not use prompt caching.
 * **`ttl`**: Minimum cache lifetime for breakpoints written by the request. The only supported value is `"30m"`, which is also the default.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(
@@ -2000,7 +1984,7 @@ For models before the GPT-5.6 family, use `prompt_cache_retention` instead (`"in
 
 When OpenAI writes new content to the prompt cache, it reports `cache_write_tokens` in the response. `ChatOpenAI` surfaces this as `cache_creation` in `input_token_details`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = llm.invoke(messages)
 
 cache_read = response.usage_metadata["input_token_details"].get("cache_read")
@@ -2019,7 +2003,7 @@ OpenAI offers a variety of [service tiers](https://platform.openai.com/docs/guid
 
 To use it, initialize the model with `service_tier="flex"`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatOpenAI(model="o4-mini", service_tier="flex")
 ```
 
@@ -2033,12 +2017,8 @@ For detailed documentation of all features and configuration options, head to th
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

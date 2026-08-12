@@ -1,119 +1,107 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Manage your organization using the API
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-organization-by-api)
+LangSmith's API supports programmatic access via API key to all of the actions available in the UI, with only a few exceptions that are noted in [User-only endpoints](https://docs.langchain.com/langsmith/manage-organization-by-api#user-only-endpoints).
 
-LangSmith's API supports programmatic access via API key to all of the actions available in the UI, with only a few exceptions that are noted in [User-only endpoints](#user-only-endpoints).
+> [!TIP]
+> Prefer infrastructure-as-code? Use the [LangSmith Terraform provider](https://docs.langchain.com/langsmith/manage-with-terraform) to manage workspaces, roles, members, evaluators, and alerts declaratively.
 
-<Tip>
-  Prefer infrastructure-as-code? Use the [LangSmith Terraform provider](/langsmith/manage-with-terraform) to manage workspaces, roles, members, evaluators, and alerts declaratively.
-</Tip>
+> [!TIP]
+> Before diving into this content, it might be helpful to read the following:
+>
+> * [Conceptual guide on organizations and workspaces](https://docs.langchain.com/langsmith/administration-overview)
+> * [Organization setup how-to guild](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-an-organization)
 
-<Check>
-  Before diving into this content, it might be helpful to read the following:
+> [!NOTE]
+> There are a few limitations that will be lifted soon:
+>
+> * The LangSmith SDKs do not support these organization management actions yet.
+> * Organization-scoped [service keys](https://docs.langchain.com/langsmith/administration-overview#service-keys) with Organization Admin permission may be used for these actions.
 
-  * [Conceptual guide on organizations and workspaces](/langsmith/administration-overview)
-  * [Organization setup how-to guild](/langsmith/set-up-hierarchy#set-up-an-organization)
-</Check>
+> [!WARNING]
+> Use the `X-Tenant-Id` header to specify which workspace to target. If the header is not present, operations will default to the workspace the key was initially created in if it is not organization-scoped.
+>
+> **If `X-Tenant-Id` is not specified when accessing workspace-scoped resources with an organization-scoped service key, the request will fail with `403 Forbidden`.**
 
-<Note>
-  There are a few limitations that will be lifted soon:
-
-  * The LangSmith SDKs do not support these organization management actions yet.
-  * Organization-scoped [service keys](/langsmith/administration-overview#service-keys) with Organization Admin permission may be used for these actions.
-</Note>
-
-<Warning>
-  Use the `X-Tenant-Id` header to specify which workspace to target. If the header is not present, operations will default to the workspace the key was initially created in if it is not organization-scoped.
-
-  **If `X-Tenant-Id` is not specified when accessing workspace-scoped resources with an organization-scoped service key, the request will fail with `403 Forbidden`.**
-</Warning>
-
-Some commonly-used endpoints and use cases are listed below. For a complete list of available endpoints, see the [API docs](/langsmith/smith-api-ref). **The `X-Organization-Id` header should be present on all requests, and `X-Tenant-Id` header should be present on requests that are scoped to a particular workspace.**
+Some commonly-used endpoints and use cases are listed below. For a complete list of available endpoints, see the [API docs](https://docs.langchain.com/langsmith/smith-api-ref). **The `X-Organization-Id` header should be present on all requests, and `X-Tenant-Id` header should be present on requests that are scoped to a particular workspace.**
 
 ## Workspaces
 
-* [List workspaces](/langsmith/smith-api/workspaces/list-workspaces)
-* [Create workspace](/langsmith/smith-api/workspaces/create-workspace)
-* [Update workspace name](/langsmith/smith-api/workspaces/patch-workspace)
+* [List workspaces](https://docs.langchain.com/langsmith/smith-api/workspaces/list-workspaces)
+* [Create workspace](https://docs.langchain.com/langsmith/smith-api/workspaces/create-workspace)
+* [Update workspace name](https://docs.langchain.com/langsmith/smith-api/workspaces/patch-workspace)
 
 ## User management
 
 ### RBAC
 
-* [List roles](/langsmith/smith-api/orgs/list-organization-roles)
-* [List permissions](/langsmith/smith-api/orgs/update-organization-roles)
-* [Create role](/langsmith/smith-api/orgs/create-organization-roles)
-* [Update role](/langsmith/smith-api/orgs/update-organization-roles)
+* [List roles](https://docs.langchain.com/langsmith/smith-api/orgs/list-organization-roles)
+* [List permissions](https://docs.langchain.com/langsmith/smith-api/orgs/update-organization-roles)
+* [Create role](https://docs.langchain.com/langsmith/smith-api/orgs/create-organization-roles)
+* [Update role](https://docs.langchain.com/langsmith/smith-api/orgs/update-organization-roles)
 
 ### Membership management
 
-`List roles` under [RBAC](#rbac) should be used for retrieving role IDs of these operations. `List [organization|workspace] members` endpoints (below) response `"id"`s should be used as `identity_id` in these operations.
+`List roles` under [RBAC](https://docs.langchain.com/langsmith/manage-organization-by-api#rbac) should be used for retrieving role IDs of these operations. `List [organization|workspace] members` endpoints (below) response `"id"`s should be used as `identity_id` in these operations.
 
 Organization level:
 
-* [List active organization members](/langsmith/smith-api/orgs/get-current-active-org-members)
-* [List pending organization members](/langsmith/smith-api/orgs/get-current-pending-org-members)
-* [Invite a user to the organization and one or more workspaces](/langsmith/smith-api/orgs/add-members-to-current-org-batch). This should be used when the user is not already a member in the organization.
-* [Update a user's organization role](/langsmith/smith-api/workspaces/add-member-to-current-workspace)
-* [Remove someone from the organization](/langsmith/smith-api/orgs/remove-member-from-current-org)
+* [List active organization members](https://docs.langchain.com/langsmith/smith-api/orgs/get-current-active-org-members)
+* [List pending organization members](https://docs.langchain.com/langsmith/smith-api/orgs/get-current-pending-org-members)
+* [Invite a user to the organization and one or more workspaces](https://docs.langchain.com/langsmith/smith-api/orgs/add-members-to-current-org-batch). This should be used when the user is not already a member in the organization.
+* [Update a user's organization role](https://docs.langchain.com/langsmith/smith-api/workspaces/add-member-to-current-workspace)
+* [Remove someone from the organization](https://docs.langchain.com/langsmith/smith-api/orgs/remove-member-from-current-org)
 
 Workspace level:
 
-* [List workspace members](/langsmith/smith-api/workspaces/get-current-workspace-members)
-* [Add a member to a workspace that is already part of the organization](/langsmith/smith-api/workspaces/add-member-to-current-workspace)
-* [Update a user's workspace role](/langsmith/smith-api/workspaces/add-member-to-current-workspace)
-* [Remove someone from a workspace](/langsmith/smith-api/workspaces/delete-current-workspace-member)
+* [List workspace members](https://docs.langchain.com/langsmith/smith-api/workspaces/get-current-workspace-members)
+* [Add a member to a workspace that is already part of the organization](https://docs.langchain.com/langsmith/smith-api/workspaces/add-member-to-current-workspace)
+* [Update a user's workspace role](https://docs.langchain.com/langsmith/smith-api/workspaces/add-member-to-current-workspace)
+* [Remove someone from a workspace](https://docs.langchain.com/langsmith/smith-api/workspaces/delete-current-workspace-member)
 
-<Note>
-  These params should be omitted: `read_only` (deprecated), `password` and `full_name` ([basic auth](/langsmith/authentication-methods) only)
-</Note>
+> [!NOTE]
+> These params should be omitted: `read_only` (deprecated), `password` and `full_name` ([basic auth](https://docs.langchain.com/langsmith/authentication-methods) only)
 
 ## API keys
 
-* [Create a service key](/langsmith/smith-api/api-key/generate-api-key)
-* [Update a service key role](/langsmith/smith-api/orgs/update-org-service-key)
-* [Delete a service key](/langsmith/smith-api/api-key/delete-api-key)
+* [Create a service key](https://docs.langchain.com/langsmith/smith-api/api-key/generate-api-key)
+* [Update a service key role](https://docs.langchain.com/langsmith/smith-api/orgs/update-org-service-key)
+* [Delete a service key](https://docs.langchain.com/langsmith/smith-api/api-key/delete-api-key)
 
 ## Security settings
 
-<Note>
-  Organization Admin permissions are required to make these changes.
-</Note>
+> [!NOTE]
+> Organization Admin permissions are required to make these changes.
 
-<Note>
-  "Shared resources" in this context refer to [public prompts](/langsmith/create-a-prompt#save-your-prompt), [shared runs](/langsmith/manage-trace#share-a-trace), and [shared datasets](/langsmith/manage-datasets#share-a-dataset).
-</Note>
+> [!NOTE]
+> "Shared resources" in this context refer to [public prompts](https://docs.langchain.com/langsmith/create-a-prompt#save-your-prompt), [shared runs](https://docs.langchain.com/langsmith/manage-trace#share-a-trace), and [shared datasets](https://docs.langchain.com/langsmith/manage-datasets#share-a-dataset).
 
-<Warning>
-  Updating these settings affects **all resources in the organization**.
-</Warning>
+> [!WARNING]
+> Updating these settings affects **all resources in the organization**.
 
 You can update these settings under the **Settings > Shared** tab for a workspace, or via API:
 
-* [Update organization sharing settings](/langsmith/smith-api/orgs/update-current-organization-info)
+* [Update organization sharing settings](https://docs.langchain.com/langsmith/smith-api/orgs/update-current-organization-info)
   * use `unshare_all` to unshare **ALL** shared resources for the selected workspace - use `disable_public_sharing` to prevent future sharing of resources
 
 These settings are only editable via API:
 
-* [Disable/enable PAT creation](/langsmith/smith-api/orgs/update-current-organization-info) (for self-hosted, available in Helm chart version 0.11.25+)
+* [Disable/enable PAT creation](https://docs.langchain.com/langsmith/smith-api/orgs/update-current-organization-info) (for self-hosted, available in Helm chart version 0.11.25+)
   * Use `pat_creation_disabled` to disable PAT creation for the entire organization.
-  * See the [admin guide](/langsmith/administration-overview#organization-roles) for information about the Organization Viewer role, which cannot create PATs.
-  * For self-hosted deployments, you can also [globally disable PAT creation](/langsmith/self-host-user-management#disabling-personal-access-token-creation) across all organizations using an environment variable.
+  * See the [admin guide](https://docs.langchain.com/langsmith/administration-overview#organization-roles) for information about the Organization Viewer role, which cannot create PATs.
+  * For self-hosted deployments, you can also [globally disable PAT creation](https://docs.langchain.com/langsmith/self-host-user-management#disabling-personal-access-token-creation) across all organizations using an environment variable.
 
 ## User-only endpoints
 
 These endpoints are user-scoped and require a logged-in user's JWT, so they should only be executed through the UI.
 
 * `/api-key/current` endpoints: these are related a user's PATs
-* `/sso/email-verification/send` (Cloud-only): this endpoint is related to [SAML SSO](/langsmith/user-management)
+* `/sso/email-verification/send` (Cloud-only): this endpoint is related to [SAML SSO](https://docs.langchain.com/langsmith/user-management)
 
 ## Sample code
 
 The sample code below goes through a few common workflows related to organization management. Make sure to make necessary replacements wherever `<replace_me>` is in the code.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import requests
 
@@ -225,12 +213,8 @@ if __name__ == "__main__":
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-organization-by-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/manage-organization-by-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -1,20 +1,15 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Trace Gemini Live applications
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-gemini-live)
+Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
 
-> Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
-
-<Note>
-  This integration is in beta, so its API may change.
-</Note>
+> [!NOTE]
+> This integration is in beta, so its API may change.
 
 Gemini Live is a speech-to-speech model that streams typed events over a WebSocket. Whether you build with a raw `google-genai` connection or the Google Agent Development Kit (ADK), the integration captures each conversation as a single LangSmith trace with spans for transcripts, model responses, tool calls, turn boundaries, and interruptions.
 
-Trace your [Gemini Live](https://ai.google.dev/gemini-api/docs/live-api) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](/langsmith/trace-voice-fundamentals).
+Trace your [Gemini Live](https://ai.google.dev/gemini-api/docs/live-api) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals).
 
-To trace non-live text agents, tools, and multi-agent workflows built with ADK, see [Trace Google ADK applications](/langsmith/trace-with-google-adk).
+To trace non-live text agents, tools, and multi-agent workflows built with ADK, see [Trace Google ADK applications](https://docs.langchain.com/langsmith/trace-with-google-adk).
 
 ## Choose an approach
 
@@ -29,37 +24,32 @@ LangSmith provides a tracing integration for each way to connect to Gemini Live:
 
 Install the `gemini-live` extra for a raw `google-genai` connection:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "langsmith[gemini-live]"
-  ```
+```bash
+pip install "langsmith[gemini-live]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langsmith[gemini-live]"
-  ```
-</CodeGroup>
+```bash
+uv add "langsmith[gemini-live]"
+```
 
 ### Use Google ADK
 
 Install the `google-adk-live` extra for an ADK application:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install "langsmith[google-adk-live]"
-  ```
+```bash
+pip install "langsmith[google-adk-live]"
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add "langsmith[google-adk-live]"
-  ```
-</CodeGroup>
+```bash
+uv add "langsmith[google-adk-live]"
+```
 
-<Note>
-  The ADK Live integration requires `langsmith[google-adk-live]>=0.9.7`. This extra is separate from the `langsmith[google-adk]` batch integration.
-</Note>
+> [!NOTE]
+> The ADK Live integration requires `langsmith[google-adk-live]>=0.9.7`. This extra is separate from the `langsmith[google-adk]` batch integration.
 
 ## Set environment variables
 
-```bash .env theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 LANGSMITH_API_KEY=<your-langsmith-api-key>
 LANGSMITH_TRACING=true
 LANGSMITH_PROJECT=<your-desired-langsmith-project>
@@ -75,7 +65,7 @@ Use this approach when your application opens the WebSocket with `client.aio.liv
 
 Enable input and output transcription in the live configuration. `wrap_gemini_live` returns a transparent proxy for the connected session, so your existing receive loop, audio handling, and tool dispatch remain unchanged:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 
 from google import genai
@@ -102,15 +92,14 @@ async with (
         ...  # play audio, run tools, handle barge-ins, and update the UI
 ```
 
-<Note>
-  Transcription is opt-in. To show transcripts in the trace, set both `input_audio_transcription` and `output_audio_transcription` on `LiveConnectConfig`.
-</Note>
+> [!NOTE]
+> Transcription is opt-in. To show transcripts in the trace, set both `input_audio_transcription` and `output_audio_transcription` on `LiveConnectConfig`.
 
 ### Group a conversation into a thread
 
-Each wrapped session is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](/langsmith/threads), pass `thread_id`:
+Each wrapped session is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads), pass `thread_id`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 wrap_gemini_live(
     raw,
     model=model,
@@ -125,7 +114,7 @@ Create one wrapper per connected Gemini Live session. Each wrapper owns isolated
 
 Feed microphone and playback audio to the wrapped session to attach a single stereo recording, with the user on the left channel and the agent on the right channel:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 RECORDING_SAMPLE_RATE = 24_000
 
 async with (
@@ -156,7 +145,7 @@ async with (
         )
 ```
 
-Record both channels as PCM16 at the wrapper's `sample_rate`. Record the agent's audio from the speaker so the attachment reflects only what the user heard. For the underlying attachment API, see [Upload files with traces](/langsmith/upload-files-with-traces).
+Record both channels as PCM16 at the wrapper's `sample_rate`. Record the agent's audio from the speaker so the attachment reflects only what the user heard. For the underlying attachment API, see [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces).
 
 ## Use Google ADK
 
@@ -166,7 +155,7 @@ Use this approach when ADK owns the Gemini Live session and tool loop.
 
 Import `LangSmithGoogleADKLivePlugin` and register it on your `Runner`. It runs alongside your `run_live` loop, so your loop only handles audio playback, barge-ins, and UI updates:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from google.adk.agents.run_config import RunConfig, StreamingMode
 from google.adk.runners import Runner
 from google.genai import types as genai_types
@@ -197,21 +186,19 @@ async for event in runner.run_live(
     ...  # play audio, handle barge-ins, and update the UI
 ```
 
-<Note>
-  Transcription is opt-in. To show transcripts, set both `input_audio_transcription` and `output_audio_transcription` on `RunConfig`.
-</Note>
+> [!NOTE]
+> Transcription is opt-in. To show transcripts, set both `input_audio_transcription` and `output_audio_transcription` on `RunConfig`.
 
-<Note>
-  On a graceful end, when the live request queue closes, ADK sends its `after_run` callback and the plugin finalizes the trace.
-
-  On a cancelled run, such as a console app that stops `run_live` on Ctrl-C, ADK might not send that callback. Call `plugin.finalize(session_id=adk_session.id)` during teardown so the trace and audio attachment are finalized. The call is idempotent, so it does nothing if ADK's callback already ran.
-</Note>
+> [!NOTE]
+> On a graceful end, when the live request queue closes, ADK sends its `after_run` callback and the plugin finalizes the trace.
+>
+> On a cancelled run, such as a console app that stops `run_live` on Ctrl-C, ADK might not send that callback. Call `plugin.finalize(session_id=adk_session.id)` during teardown so the trace and audio attachment are finalized. The call is idempotent, so it does nothing if ADK's callback already ran.
 
 ### Group a conversation into a thread
 
-Each conversation is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](/langsmith/threads), pass a `thread_id_provider` to the plugin:
+Each conversation is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads), pass a `thread_id_provider` to the plugin:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 plugin = LangSmithGoogleADKLivePlugin(
     project_name="gemini-live-voice",
     thread_id_provider=lambda: thread_id,
@@ -224,33 +211,25 @@ A single plugin instance is shared across every `run_live` call and resolves the
 
 Feed microphone and playback audio to the plugin to attach a single stereo recording, with the user on the left channel and the agent on the right channel:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 plugin.record_user_audio(mic_chunk)      # user mic PCM16
 plugin.record_agent_audio(played_chunk)  # agent PCM16 as played
 ```
 
-Record the user's microphone capture before resampling it for ADK, and record the agent's audio from the speaker. Feed both channels at the same sample rate. The plugin's `sample_rate` is 24 kHz by default. For the underlying attachment API, see [Upload files with traces](/langsmith/upload-files-with-traces).
+Record the user's microphone capture before resampling it for ADK, and record the agent's audio from the speaker. Feed both channels at the same sample rate. The plugin's `sample_rate` is 24 kHz by default. For the underlying attachment API, see [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces).
 
 ## Next steps
 
-<CardGroup cols={2}>
-  <Card title="Voice fundamentals" icon="waveform" href="/langsmith/trace-voice-fundamentals">
-    Core conventions for tracing voice agents.
-  </Card>
+#### [Voice fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
+Core conventions for tracing voice agents.
 
-  <Card title="Upload files with traces" icon="paperclip" href="/langsmith/upload-files-with-traces">
-    Attach the conversation audio recording to your trace.
-  </Card>
-</CardGroup>
+#### [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces)
+Attach the conversation audio recording to your trace.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-gemini-live.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-gemini-live.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

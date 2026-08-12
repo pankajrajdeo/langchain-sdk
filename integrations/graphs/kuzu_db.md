@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Kuzu integration
 
 > Integrate with the Kuzu graph using LangChain Python.
@@ -24,11 +20,10 @@
 Kùzu is an embedded database (it runs in-process), so there are no servers to manage. Install the
 following dependencies to get started:
 
-<Warning>
-  The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
-</Warning>
+> [!WARNING]
+> The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -U langchain-kuzu langchain-openai langchain-experimental langchain-neo4j
 ```
 
@@ -38,7 +33,7 @@ respective Python packages that come with LangChain.
 
 Here's how you would first create a Kùzu database on your local machine and connect to it:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import kuzu
 
 db = kuzu.Database("test_db")
@@ -50,7 +45,7 @@ conn = kuzu.Connection(db)
 Kùzu's integration with LangChain makes it convenient to create and update graphs from unstructured text, and also to query graphs via a Text2Cypher pipeline that utilizes the
 power of LangChain's LLM chains. To begin, we create a `KuzuGraph` object that uses the database object we created above in combination with the `KuzuGraph` constructor.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_kuzu.graphs.kuzu_graph import KuzuGraph
 
 graph = KuzuGraph(db, allow_dangerous_requests=True)
@@ -58,7 +53,7 @@ graph = KuzuGraph(db, allow_dangerous_requests=True)
 
 Say we want to transform the following text into a graph:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 text = "Tim Cook is the CEO of Apple. Apple has its headquarters in California."
 ```
 
@@ -66,7 +61,7 @@ We will make use of `LLMGraphTransformer` to use an LLM to extract nodes and rel
 To make the graph more useful, we will define the following schema, such that the LLM will only
 extract nodes and relationships that match the schema.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Define schema
 allowed_nodes = ["Person", "Company", "Location"]
 allowed_relationships = [
@@ -77,7 +72,7 @@ allowed_relationships = [
 
 The `LLMGraphTransformer` class provides a convenient way to convert the text into a list of graph documents.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.documents import Document
 from langchain_neo4j import LLMGraphTransformer
 from langchain_openai import ChatOpenAI
@@ -93,18 +88,18 @@ documents = [Document(page_content=text)]
 graph_documents = llm_transformer.convert_to_graph_documents(documents)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph_documents[:2]
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [GraphDocument(nodes=[Node(id='Tim Cook', type='Person', properties={}), Node(id='Apple', type='Company', properties={}), Node(id='California', type='Location', properties={})], relationships=[Relationship(source=Node(id='Tim Cook', type='Person', properties={}), target=Node(id='Apple', type='Company', properties={}), type='IS_CEO_OF', properties={}), Relationship(source=Node(id='Apple', type='Company', properties={}), target=Node(id='California', type='Location', properties={}), type='HAS_HEADQUARTERS_IN', properties={})], source=Document(metadata={}, page_content='Tim Cook is the CEO of Apple. Apple has its headquarters in California.'))]
 ```
 
 We can then call the above defined `KuzuGraph` object's `add_graph_documents` method to ingest the graph documents into the Kùzu database.
 The `include_source` argument is set to `True` so that we also create relationships between each entity node and the source document that it came from.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Add the graph document to the graph
 graph.add_graph_documents(
     graph_documents,
@@ -116,7 +111,7 @@ graph.add_graph_documents(
 
 To query the graph via a Text2Cypher pipeline, we can define a `KuzuQAChain` object. Then, we can invoke the chain with a query by connecting to the existing database that's stored in the `test_db` directory defined above.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_kuzu.chains.graph_qa.kuzu import KuzuQAChain
 
 # Create the KuzuQAChain with verbosity enabled to see the generated Cypher queries
@@ -132,11 +127,11 @@ Note that we set a temperature that's slightly higher than zero to avoid the LLM
 
 Let's ask some questions using the QA chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke("Who is the CEO of Apple?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new KuzuQAChain chain...
 Generated Cypher:
 MATCH (p:Person)-[:IS_CEO_OF]->(c:Company {id: 'Apple'}) RETURN p
@@ -146,16 +141,16 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who is the CEO of Apple?',
  'result': 'Tim Cook is the CEO of Apple.'}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke("Where is Apple headquartered?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new KuzuQAChain chain...
 Generated Cypher:
 MATCH (c:Company {id: 'Apple'})-[:HAS_HEADQUARTERS_IN]->(l:Location) RETURN l
@@ -165,7 +160,7 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Where is Apple headquartered?',
  'result': 'Apple is headquartered in California.'}
 ```
@@ -175,13 +170,13 @@ Full Context:
 If you mutate or update the graph, you can inspect the refreshed schema information that's used by the Text2Cypher chain to generate Cypher statements.
 You don't need to manually call `refresh_schema()` each time as it's called automatically when you invoke the chain.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 graph.refresh_schema()
 
 print(graph.get_schema)
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 Node properties: [{'properties': [('id', 'STRING'), ('type', 'STRING')], 'label': 'Person'}, {'properties': [('id', 'STRING'), ('type', 'STRING')], 'label': 'Location'}, {'properties': [('id', 'STRING'), ('text', 'STRING'), ('type', 'STRING')], 'label': 'Chunk'}, {'properties': [('id', 'STRING'), ('type', 'STRING')], 'label': 'Company'}]
 Relationships properties: [{'properties': [], 'label': 'HAS_HEADQUARTERS_IN'}, {'properties': [('label', 'STRING'), ('triplet_source_id', 'STRING')], 'label': 'MENTIONS_Chunk_Person'}, {'properties': [('label', 'STRING'), ('triplet_source_id', 'STRING')], 'label': 'MENTIONS_Chunk_Location'}, {'properties': [], 'label': 'IS_CEO_OF'}, {'properties': [('label', 'STRING'), ('triplet_source_id', 'STRING')], 'label': 'MENTIONS_Chunk_Company'}]
 Relationships: ['(:Company)-[:HAS_HEADQUARTERS_IN]->(:Location)', '(:Chunk)-[:MENTIONS_Chunk_Person]->(:Person)', '(:Chunk)-[:MENTIONS_Chunk_Location]->(:Location)', '(:Person)-[:IS_CEO_OF]->(:Company)', '(:Chunk)-[:MENTIONS_Chunk_Company]->(:Company)']
@@ -191,7 +186,7 @@ Relationships: ['(:Company)-[:HAS_HEADQUARTERS_IN]->(:Location)', '(:Chunk)-[:ME
 
 You can specify `cypher_llm` and `qa_llm` separately to use different LLMs for Cypher generation and answer generation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain = KuzuQAChain.from_llm(
     cypher_llm=ChatOpenAI(temperature=0, model="gpt-5.4-mini"),
     qa_llm=ChatOpenAI(temperature=0, model="gpt-4"),
@@ -201,11 +196,11 @@ chain = KuzuQAChain.from_llm(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 chain.invoke("Who is the CEO of Apple?")
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 > Entering new KuzuQAChain chain...
 Generated Cypher:
 MATCH (p:Person)-[:IS_CEO_OF]->(c:Company {id: 'Apple'}) RETURN p.id, p.type
@@ -215,19 +210,15 @@ Full Context:
 > Finished chain.
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'query': 'Who is the CEO of Apple?',
  'result': 'Tim Cook is the CEO of Apple.'}
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/kuzu_db.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/graphs/kuzu_db.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

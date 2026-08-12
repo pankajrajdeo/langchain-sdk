@@ -1,10 +1,6 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Harbor integrations
-
-> Run evaluations, Deep Agents, and sandboxes on LangSmith with Harbor.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/harbor-integrations)
+Run evaluations, Deep Agents, and sandboxes on LangSmith with Harbor.
 
 Use LangSmith to run, trace, compare, and cost agent evaluations from one place, with [Harbor](https://harborframework.com/docs) as the execution layer. Harbor is a framework for evaluating and optimizing agents and language models in sandboxed environments, from the creators of [Terminal-Bench](https://www.tbench.ai). It runs each trial in an isolated container, so you can parallelize evaluations and rollouts across many environments at once.
 
@@ -18,7 +14,7 @@ This page covers the LangSmith-specific Harbor flags. For the complete CLI, run 
 
 ## Prerequisites
 
-* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-harbor-integrations) and an [API key](/langsmith/create-account-api-key).
+* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-harbor-integrations) and an [API key](https://docs.langchain.com/langsmith/create-account-api-key).
 * Python 3.12 or later with `pip`.
 * A provider API key for the model your agent calls, such as `ANTHROPIC_API_KEY`.
 
@@ -26,24 +22,21 @@ This page covers the LangSmith-specific Harbor flags. For the complete CLI, run 
 
 Install Harbor with the `langsmith` extra. The extra includes the `harbor-langsmith` package used by the LangSmith plugin, environment, and agent:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install "harbor[langsmith]"
 ```
 
 ### Authenticate
 
-Harbor authenticates with your LangSmith credentials. Set an API key and the endpoint that key belongs to:
+Harbor authenticates with your LangSmith credentials. Set an API key:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
-export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
 ```
 
-`LANGSMITH_ENDPOINT` defaults to `https://api.smith.langchain.com` (GCP US). Set it to your data plane URL on [BYOC](/langsmith/byoc), your instance URL on [self-hosted](/langsmith/self-hosted), or the [API URL for your region](/langsmith/create-account-api-key#configure-the-sdk) on other Cloud regions.
+Alternatively, select a [LangSmith SDK profile](https://docs.langchain.com/langsmith/profile-configuration) instead of exporting a key:
 
-Alternatively, select a [LangSmith SDK profile](/langsmith/profile-configuration) instead of exporting a key:
-
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_PROFILE=prod
 ```
 
@@ -51,26 +44,26 @@ export LANGSMITH_PROFILE=prod
 
 Record a Harbor job to LangSmith as an experiment:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 harbor run -d "terminal-bench@2.0" \
   --agent <agent> \
   --model <provider:model> \
   --plugin langsmith
 ```
 
-Replace `<agent>` with a Harbor agent, and `<provider:model>` with a model in `provider:model` format that an installed `langchain-*` provider can resolve, for example `anthropic:claude-opus-4-8`. Run `harbor run --help` to list the available agents, or see [Deep Agents](#deep-agents) for a complete `langgraph` run.
+Replace `<agent>` with a Harbor agent, and `<provider:model>` with a model in `provider:model` format that an installed `langchain-*` provider can resolve, for example `anthropic:claude-opus-4-8`. Run `harbor run --help` to list the available agents, or see [Deep Agents](https://docs.langchain.com/langsmith/harbor-integrations#deep-agents) for a complete `langgraph` run.
 
-Open [Datasets & Experiments](/langsmith/manage-datasets), select the dataset Harbor synced, such as `terminal-bench@2.0`, then open the Experiments tab to view the run.
+Open [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets), select the dataset Harbor synced, such as `terminal-bench@2.0`, then open the Experiments tab to view the run.
 
 ## LangSmith evaluations
 
-The LangSmith plugin records every Harbor job to LangSmith, so you can view and compare results under Datasets & Experiments. The plugin works with any Harbor agent, not only Deep Agents. Enable it with `--plugin langsmith`. The [Quickstart](#quickstart) shows the basic invocation, and this section covers what the plugin records and how to configure it.
+The LangSmith plugin records every Harbor job to LangSmith, so you can view and compare results under Datasets & Experiments. The plugin works with any Harbor agent, not only Deep Agents. Enable it with `--plugin langsmith`. The [Quickstart](https://docs.langchain.com/langsmith/harbor-integrations#quickstart) shows the basic invocation, and this section covers what the plugin records and how to configure it.
 
 Choose an agent that traces to LangSmith to capture full agent traces alongside the experiment. If the agent does not trace to LangSmith, the plugin still creates the dataset and the experiment with results and feedback, without the agent trace.
 
 Pass the full import path instead of the short plugin name when you need to disambiguate it:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 harbor run ... --plugin harbor_langsmith:LangSmithPlugin
 ```
 
@@ -88,7 +81,7 @@ As the job runs, the plugin writes to LangSmith over the API:
 
 ### View results in LangSmith
 
-Open [Datasets & Experiments](/langsmith/manage-datasets) in LangSmith, select the dataset the plugin synced, such as `terminal-bench@2.0`, then open the Experiments tab. Each Harbor job appears as an experiment, and you can [compare experiments](/langsmith/analyze-an-experiment) by the `reward` and `harbor_error` feedback, the token counts and cost recorded on each run, and latency.
+Open [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets) in LangSmith, select the dataset the plugin synced, such as `terminal-bench@2.0`, then open the Experiments tab. Each Harbor job appears as an experiment, and you can [compare experiments](https://docs.langchain.com/langsmith/analyze-an-experiment) by the `reward` and `harbor_error` feedback, the token counts and cost recorded on each run, and latency.
 
 ### Configure the plugin inputs
 
@@ -109,7 +102,7 @@ The `langgraph` agent runs a LangGraph application, such as a Deep Agent, as the
 
 Set your LangSmith and model credentials, then run Harbor. `harbor run` is an alias for `harbor job start`, which builds a job, spins up the environment, and runs the LangGraph agent:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 export LANGSMITH_PROFILE=prod
 export LANGSMITH_TRACING=true
 export LANGSMITH_PROJECT=harbor-deepagents
@@ -139,7 +132,7 @@ Filter the selected tasks with `-i` and `-x` (glob include and exclude) and cap 
 
 A task directory has this layout:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 hello-world/
 ├── task.toml         # timeouts, CPU, and memory
 ├── instruction.md    # the prompt given to the agent
@@ -153,7 +146,7 @@ hello-world/
 
 A dataset is a directory of task directories:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 terminal-bench/
 ├── hello-world/      # each subdirectory is a full task
 ├── fix-bug/          # (task.toml + instruction.md + environment/ + tests/)
@@ -177,7 +170,7 @@ Pass agent kwargs with `--ak`:
 
 The agent loads graphs from the `langgraph.json` file in `project_path`. The file declares the graph entry points and the pip dependencies Harbor installs in the sandbox virtual environment:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dependencies": [
     "deepagents>=0.6.10,<0.7.0",
@@ -198,13 +191,11 @@ The project exposes two graphs, selected with `--ak graph`. Both build a Deep Ag
 
 Each graph passes the model from `--model` (read from `configurable.model`) to `create_deep_agent`, which resolves it with `init_chat_model()`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
-
 
 def make_graph(config):
     return create_deep_agent(model=config["configurable"]["model"])
-
 
 def make_research_graph(config):
     return create_deep_agent(
@@ -215,7 +206,7 @@ def make_research_graph(config):
 
 A factory function that reads `configurable.model` keeps the graph model-agnostic, but you can also hardcode the model in the graph when it should always run the same one. For a fixed model, point `langgraph.json` at a compiled graph instead of a factory:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from deepagents import create_deep_agent
 
 graph = create_deep_agent(model="fireworks:accounts/fireworks/models/glm-5p2")
@@ -225,17 +216,20 @@ graph = create_deep_agent(model="fireworks:accounts/fireworks/models/glm-5p2")
 
 Harbor runs the entire agent inside the trial container.
 
-<Accordion title="Single-trial lifecycle">
-  1. **Parse and prepare**: `harbor run` parses the flags into a job config. The job factory resolves and caches the tasks, validates the environment resource limits, and resolves the metrics before any trial runs. Caching applies to remote tasks only, so a `-p` local task is read in place.
-  2. **Fan out**: Harbor builds the trial list from `n_attempts × tasks × agents`, then runs trials concurrently up to the `-n` limit, with `-r` retries. Parallelism is per trial, so different tasks, agents, and attempts run together, each in its own sandbox.
-  3. **Create the trial**: The trial loads the cached task, builds the LangGraph agent from `project_path`, `graph`, and `model`, and constructs the environment without starting it.
-  4. **Start the environment**: The environment starts and brings up the container. For the Docker environment, this builds or reuses the image and runs the container.
-  5. **Install the agent**: Harbor creates a virtual environment in the container, uploads `project_path`, and pip installs the `langgraph.json` dependencies inside the container.
-  6. **Run and verify**: Harbor runs the graph inside the container through the LangGraph runner, then runs `tests/test.sh`, which writes the reward to `/logs/verifier/reward.txt`.
-  7. **Finalize**: Harbor stops and deletes the container and writes the trial result. The job aggregates all trial results into one job result.
-</Accordion>
+<details>
+<summary>Single-trial lifecycle</summary>
 
-For more information on building Deep Agents, see the [Deep Agents documentation](/oss/python/deepagents/overview).
+1. **Parse and prepare**: `harbor run` parses the flags into a job config. The job factory resolves and caches the tasks, validates the environment resource limits, and resolves the metrics before any trial runs. Caching applies to remote tasks only, so a `-p` local task is read in place.
+2. **Fan out**: Harbor builds the trial list from `n_attempts × tasks × agents`, then runs trials concurrently up to the `-n` limit, with `-r` retries. Parallelism is per trial, so different tasks, agents, and attempts run together, each in its own sandbox.
+3. **Create the trial**: The trial loads the cached task, builds the LangGraph agent from `project_path`, `graph`, and `model`, and constructs the environment without starting it.
+4. **Start the environment**: The environment starts and brings up the container. For the Docker environment, this builds or reuses the image and runs the container.
+5. **Install the agent**: Harbor creates a virtual environment in the container, uploads `project_path`, and pip installs the `langgraph.json` dependencies inside the container.
+6. **Run and verify**: Harbor runs the graph inside the container through the LangGraph runner, then runs `tests/test.sh`, which writes the reward to `/logs/verifier/reward.txt`.
+7. **Finalize**: Harbor stops and deletes the container and writes the trial result. The job aggregates all trial results into one job result.
+
+</details>
+
+For more information on building Deep Agents, see the [Deep Agents documentation](https://docs.langchain.com/oss/python/deepagents/overview).
 
 ## Sandboxes
 
@@ -245,7 +239,7 @@ The `langsmith` Harbor environment runs each trial on a LangSmith sandbox. Selec
 
 Run a Harbor job and select the LangSmith environment with `--env langsmith`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 harbor run -d "<org/name>" \
   --model "<model>" \
   --agent "<agent>" \
@@ -260,12 +254,12 @@ Harbor creates one LangSmith sandbox per trial and runs the agent and verifier i
 The LangSmith environment boots each sandbox from a filesystem snapshot. Provide one of the following in your Harbor task:
 
 * **Prebuilt image**: Set `[environment].docker_image` in `task.toml`. Harbor reuses or creates a snapshot from that image.
-* **Existing snapshot**: Pass `environment.kwargs.snapshot_name` to boot from a [snapshot](/langsmith/sandbox-snapshots) you already created.
-* **Dockerfile**: Include an `environment/Dockerfile`. Harbor builds a snapshot from it with the [build-from-Dockerfile flow](/langsmith/sandbox-snapshots#build-a-snapshot-from-a-dockerfile), using the task `environment/` directory as the build context.
+* **Existing snapshot**: Pass `environment.kwargs.snapshot_name` to boot from a [snapshot](https://docs.langchain.com/langsmith/sandbox-snapshots) you already created.
+* **Dockerfile**: Include an `environment/Dockerfile`. Harbor builds a snapshot from it with the [build-from-Dockerfile flow](https://docs.langchain.com/langsmith/sandbox-snapshots#build-a-snapshot-from-a-dockerfile), using the task `environment/` directory as the build context.
 
 Tune the sandbox lifecycle with environment kwargs, passed on the command line with `--ek`:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 harbor run -d "<org/name>" \
   --model "<model>" \
   --agent "<agent>" \
@@ -285,20 +279,16 @@ harbor run -d "<org/name>" \
 
 ## See also
 
-* [Deep Agents documentation](/oss/python/deepagents/overview)
-* [Datasets & Experiments](/langsmith/manage-datasets)
-* [Analyze an experiment](/langsmith/analyze-an-experiment)
-* [Sandbox snapshots](/langsmith/sandbox-snapshots)
+* [Deep Agents documentation](https://docs.langchain.com/oss/python/deepagents/overview)
+* [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets)
+* [Analyze an experiment](https://docs.langchain.com/langsmith/analyze-an-experiment)
+* [Sandbox snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots)
 * [Harbor documentation](https://harborframework.com/docs)
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/harbor-integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/harbor-integrations.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

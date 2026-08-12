@@ -1,12 +1,8 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatNVIDIA integration
 
 > Integrate with ChatNVIDIA and ChatNVIDIADynamo chat models using LangChain Python.
 
-This will help you get started with NVIDIA [chat models](/oss/python/langchain/models). For detailed documentation of all `ChatNVIDIA` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA).
+This will help you get started with NVIDIA [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatNVIDIA` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA).
 
 ## Overview
 
@@ -18,7 +14,7 @@ NVIDIA AI Foundation models run on NIM microservices: container images distribut
 
 This page covers how to use LangChain to interact with NVIDIA models via `ChatNVIDIA`, including Nemotron and other models from the API Catalog.
 
-For more information on accessing embedding models through this API, refer to the [`NVIDIAEmbeddings`](/oss/python/integrations/embeddings/nvidia_ai_endpoints) documentation.
+For more information on accessing embedding models through this API, refer to the [`NVIDIAEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints) documentation.
 
 ### Integration details
 
@@ -28,13 +24,13 @@ For more information on accessing embedding models through this API, refer to th
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
 ## Install the package
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 pip install -qU langchain-nvidia-ai-endpoints
 ```
 
@@ -49,7 +45,7 @@ To get access to the NVIDIA API Catalog, do the following:
 5. Copy and save the key as `NVIDIA_API_KEY`.
 6. To verify your key, use the following code.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -65,9 +61,9 @@ else:
 
 You can now use your key to access endpoints on the NVIDIA API Catalog.
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_TRACING"] = "true"
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 ```
@@ -76,7 +72,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 Now we can access models in the NVIDIA API Catalog. [Nemotron](https://www.nvidia.com/en-us/ai-data-science/foundation-models/nemotron/) models are a recommended starting point for agentic and reasoning workloads:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 # Nemotron 3 Ultra - frontier reasoning and agentic workflows
@@ -85,13 +81,13 @@ llm = ChatNVIDIA(model="nvidia/nemotron-3-ultra-550b-a55b")
 
 Any other model from the API Catalog can be used by passing its model ID:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 llm = ChatNVIDIA(model="mistralai/mixtral-8x7b-instruct-v0.1")
 ```
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = llm.invoke("Write a ballad about LangChain.")
 print(result.content)
 ```
@@ -100,7 +96,7 @@ print(result.content)
 
 Some NVIDIA reasoning models support a configurable thinking mode. Enable thinking for a single request by passing `thinking_mode=True` to `invoke`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 model = ChatNVIDIA(model="nvidia/nemotron-3-nano-30b-a3b")
@@ -111,14 +107,14 @@ print(response.content_blocks)
 
 Use `with_thinking_mode` when you want a reusable runnable with thinking enabled:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 thinking_model = model.with_thinking_mode(enabled=True)
 response = thinking_model.invoke("Solve this step by step: 17 * 23")
 ```
 
 To list models that are known to support thinking mode, call `get_available_models` and inspect `supports_thinking`. This queries the NVIDIA model-listing API, then filters the returned model metadata:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 thinking_models = [
     model for model in ChatNVIDIA.get_available_models() if model.supports_thinking
 ]
@@ -128,11 +124,11 @@ thinking_models = [
 
 Do not pass `thinking_mode=True` when constructing `ChatNVIDIA`. Unknown constructor arguments become raw `model_kwargs`, which are merged directly into the API payload. The thinking-mode translation runs only for invocation kwargs or bound kwargs, so use one of these forms instead:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 response = model.invoke("Solve this step by step: 17 * 23", thinking_mode=True)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 thinking_model = model.with_thinking_mode(enabled=True)
 response = thinking_model.invoke("Solve this step by step: 17 * 23")
 ```
@@ -143,7 +139,7 @@ When you are ready to deploy your AI application, you can self-host models with 
 
 The following code connects to locally hosted NIM Microservices.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings, NVIDIARerank
 
 # Connect to a chat NIM running at localhost:8000, specifying a model
@@ -160,20 +156,20 @@ ranker = NVIDIARerank(base_url="http://localhost:2016/v1")
 
 These models natively support streaming, and as is the case with all LangChain LLMs they expose a batch method to handle concurrent requests, as well as async methods for invoke, stream, and batch. Below are a few examples.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(llm.batch(["What's 2*3?", "What's 2*6?"]))
 # Or via the async API
 # await llm.abatch(["What's 2*3?", "What's 2*6?"])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm.stream_events("How far can a seagull fly in one day?", version="v3")
 for token in stream.text:
     # Show the token separations
     print(token, end="|")
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = await llm.astream_events(
     "How long does it take for monarch butterflies to migrate?", version="v3"
 )
@@ -187,7 +183,7 @@ Querying `available_models` will still give you all of the other models offered 
 
 The `playground_` prefix is optional.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ChatNVIDIA.get_available_models()
 # llm.get_available_models()
 ```
@@ -209,7 +205,7 @@ Some model types support unique prompting techniques and chat messages. We will 
 * **Agentic reasoning**: trained specifically for multi-step planning, tool use, and autonomous software engineering tasks
 * **Open**: weights, training recipes, and curated datasets published under the NVIDIA Open Model License
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
@@ -230,7 +226,7 @@ for txt in chain.stream({"input": "What are the key considerations when designin
 
 Models such as `meta/llama3-8b-instruct` and `mistralai/mixtral-8x22b-instruct-v0.1` are good all-around models that you can use for with any LangChain chat messages. Example below.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
@@ -248,7 +244,7 @@ for txt in chain.stream({"input": "What's your name?"}):
 
 These models accept the same arguments and input structure as regular chat models, but they tend to perform better on code-generation and structured code tasks. An example of this is `meta/codellama-70b`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 prompt = ChatPromptTemplate.from_messages(
     [
         (
@@ -270,7 +266,7 @@ NVIDIA also supports multimodal inputs, meaning you can provide both images and 
 
 Below is an example use:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import IPython
 import requests
 
@@ -280,7 +276,7 @@ image_content = requests.get(image_url).content
 IPython.display.Image(image_content)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 llm = ChatNVIDIA(model="nvidia/neva-22b")
@@ -288,7 +284,7 @@ llm = ChatNVIDIA(model="nvidia/neva-22b")
 
 #### Passing an image as a URL
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.messages import HumanMessage
 
 llm.invoke(
@@ -307,7 +303,7 @@ llm.invoke(
 
 At the moment, some extra processing happens client-side to support larger images like the one above. But for smaller images (and to better illustrate the process going on under the hood), we can directly pass in the image as shown below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import IPython
 import requests
 
@@ -317,7 +313,7 @@ image_content = requests.get(image_url).content
 IPython.display.Image(image_content)
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 
 from langchain.messages import HumanMessage
@@ -344,33 +340,31 @@ llm.invoke(
 
 The NVIDIA API uniquely accepts images as base64 images inlined within `<img/>` HTML tags. While this isn't interoperable with other LLMs, you can directly prompt the model accordingly.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 base64_with_mime_type = f"data:image/png;base64,{b64_string}"
-llm.invoke(f'What\'s in this image?\n<img src="{base64_with_mime_type}" />')
+llm.invoke(f'What\'s in this image?\n<img src="https://docs.langchain.com/oss/python/integrations/chat/{base64_with_mime_type}" />')
 ```
 
 ## Example usage within a `RunnableWithMessageHistory`
 
 Like any other integration, `ChatNVIDIA` is fine to support chat utilities like RunnableWithMessageHistory which is analogous to using `ConversationChain`. Below, we show the [LangChain `RunnableWithMessageHistory`](https://reference.langchain.com/python/langchain-core/runnables/history/RunnableWithMessageHistory) example applied to the `mistralai/mixtral-8x22b-instruct-v0.1` model.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
 # store is a dictionary that maps session IDs to their corresponding chat histories.
 store = {}  # memory is maintained outside the chain
 
-
 # A function that returns the chat history for a given session ID.
 def get_session_history(session_id: str) -> InMemoryChatMessageHistory:
     if session_id not in store:
         store[session_id] = InMemoryChatMessageHistory()
     return store[session_id]
-
 
 chat = ChatNVIDIA(
     model="nvidia/nemotron-3-ultra-550b-a55b",
@@ -393,14 +387,14 @@ conversation.invoke(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 conversation.invoke(
     "I'm doing well! Just having a conversation with an AI.",
     config=config,
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 conversation.invoke(
     "Tell me about yourself.",
     config=config,
@@ -415,7 +409,7 @@ Starting in v0.2, `ChatNVIDIA` supports [`bind_tools`](https://reference.langcha
 
 You can get a list of models that are known to support tool calling with,
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 tool_models = [
     model for model in ChatNVIDIA.get_available_models() if model.supports_tools
 ]
@@ -424,10 +418,9 @@ tool_models
 
 With a tool capable model,
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain.tools import tool
 from pydantic import Field
-
 
 @tool
 def get_current_weather(
@@ -436,13 +429,12 @@ def get_current_weather(
     """Get the current weather for a location."""
     ...
 
-
 llm = ChatNVIDIA(model=tool_models[0].id).bind_tools(tools=[get_current_weather])
 response = llm.invoke("What is the weather in Boston?")
 response.tool_calls
 ```
 
-See [How to use chat models to call tools](/oss/python/langchain/tools) for additional examples.
+See [How to use chat models to call tools](https://docs.langchain.com/oss/python/langchain/tools) for additional examples.
 
 ## Use with NVIDIA Dynamo
 
@@ -457,15 +449,14 @@ See [How to use chat models to call tools](/oss/python/langchain/tools) for addi
 
 A unique `prefix_id` is auto-generated for every request, enabling the router to track KV cache affinity.
 
-<Note>
-  This section assumes you have a running [NVIDIA Dynamo deployment](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart).
-</Note>
+> [!NOTE]
+> This section assumes you have a running [NVIDIA Dynamo deployment](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart).
 
 ### Basic usage
 
 Swap `ChatNVIDIA` for `ChatNVIDIADynamo` and every request automatically includes routing hints. All standard `ChatNVIDIA` parameters are supported.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, ChatNVIDIADynamo
 
 BASE_URL = "http://localhost:8099/v1"
@@ -494,7 +485,7 @@ print(result.content)
 
 Configure Dynamo hints when creating the model instance. This is useful when a model instance always serves a particular role, such as a high-priority interactive assistant versus a low-priority background summarizer.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # High-priority: short responses, latency-critical
 llm_critical = ChatNVIDIADynamo(
     base_url=BASE_URL,
@@ -518,7 +509,7 @@ llm_background = ChatNVIDIADynamo(
 
 Dynamo parameters can also be overridden on each call. This is useful when the same model instance handles requests with varying characteristics.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 result = llm.invoke(
     "Classify this as positive or negative: 'I love this product!'",
     osl=10,
@@ -533,7 +524,7 @@ print(result.content)
 
 Dynamo hints are included in the initial streaming request. Dynamo uses them to select the optimal worker before tokens start flowing.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = llm_critical.stream_events("Give a one-sentence summary of GPU computing.", version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
@@ -543,7 +534,7 @@ for token in stream.text:
 
 For debugging, inspect the exact payload that `ChatNVIDIADynamo` sends to the NIM endpoint using the internal `_get_payload` method.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import json
 
 payload = llm_critical._get_payload(
@@ -555,7 +546,7 @@ print(json.dumps(payload["nvext"], indent=2))
 
 This outputs the `nvext.agent_hints` section:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "agent_hints": {
     "prefix_id": "langchain-dynamo-a1b2c3d4e5f6",
@@ -579,22 +570,18 @@ For detailed documentation of all `ChatNVIDIA` features and configurations head 
 * [Overview of NVIDIA NIM for Large Language Models (LLMs)](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html)
 * [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 * [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
-* [`NVIDIAEmbeddings` Model for RAG Workflows](/oss/python/integrations/embeddings/nvidia_ai_endpoints)
-* [NVIDIA Provider Page](/oss/python/integrations/providers/nvidia)
-* [Sandboxed agents with NVIDIA OpenShell](/oss/python/integrations/providers/nvidia#sandboxed-agents-with-openshell)
-* [Post-training agent workflows](/oss/python/integrations/providers/nvidia#post-training-agent-workflows)
+* [`NVIDIAEmbeddings` Model for RAG Workflows](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)
+* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
+* [Sandboxed agents with NVIDIA OpenShell](https://docs.langchain.com/oss/python/integrations/providers/nvidia#sandboxed-agents-with-openshell)
+* [Post-training agent workflows](https://docs.langchain.com/oss/python/integrations/providers/nvidia#post-training-agent-workflows)
 * [NVIDIA Dynamo](https://developer.nvidia.com/dynamo) — open-source inference framework
 * [Dynamo Quickstart Guide](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart) — get a local deployment running
 * [KV Cache-Aware Routing](https://docs.nvidia.com/dynamo/latest/user-guides/kv-cache-aware-routing) — how the Smart Router works
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/nvidia_ai_endpoints.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

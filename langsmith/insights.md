@@ -1,99 +1,83 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Discover errors and usage patterns with Insights
-
-> Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/insights)
+Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review.
 
 Insights automatically analyzes your traces to detect usage patterns, common agent behaviors, and failure modes, so you do not need to review thousands of traces manually.
 
 Insights uses hierarchical categorization to make sense of your data and highlight actionable trends.
 
-<Note>
-  Insights is available for LangSmith Plus and Enterprise [plans](/langsmith/pricing-plans).
-</Note>
+> [!NOTE]
+> Insights is available for LangSmith Plus and Enterprise [plans](https://docs.langchain.com/langsmith/pricing-plans).
 
 ## Prerequisites
 
-* A [model configuration](/langsmith/model-configurations) set up for Insights in your workspace.
-* [Permissions](/langsmith/organization-workspace-operations#projects) to create rules in LangSmith (required to generate new Insights Reports).
-* [Permissions](/langsmith/organization-workspace-operations#projects) to view tracing projects in LangSmith (required to view existing Insights Reports).
+* A [model configuration](https://docs.langchain.com/langsmith/model-configurations) set up for Insights in your workspace.
+* [Permissions](https://docs.langchain.com/langsmith/organization-workspace-operations#projects) to create rules in LangSmith (required to generate new Insights Reports).
+* [Permissions](https://docs.langchain.com/langsmith/organization-workspace-operations#projects) to view tracing projects in LangSmith (required to view existing Insights Reports).
 
 ## Generate your first Insights report
 
-<Tabs>
-  <Tab title="UI" icon="layout-dashboard">
-    1. Navigate to **Tracing Projects** in the left-hand menu and select a tracing project.
-    2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over the project.
-    3. Enter a name for your job.
-    4. If you haven't already, [configure a model](/langsmith/model-configurations) for Insights in your workspace settings.
-    5. Answer the guided questions to focus your Insights Report on what you want to learn about your agent, then click **Run job**.
+#### UI
+1. Navigate to **Tracing Projects** in the left-hand menu and select a tracing project.
+2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over the project.
+3. Enter a name for your job.
+4. If you haven't already, [configure a model](https://docs.langchain.com/langsmith/model-configurations) for Insights in your workspace settings.
+5. Answer the guided questions to focus your Insights Report on what you want to learn about your agent, then click **Run job**.
 
-    <Tip>Toggle to Manual mode to [configure the job manually](#configure-a-job).</Tip>
+Toggle to Manual mode to [configure the job manually](https://docs.langchain.com/langsmith/insights#configure-a-job).
 
-    This will kick off a background Insights Report. Reports can take up to 30 minutes to complete.
-  </Tab>
+This will kick off a background Insights Report. Reports can take up to 30 minutes to complete.
 
-  <Tab title="SDK" icon="code">
-    You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](/langsmith/smith-python-sdk). This allows you to analyze chat histories from your production systems, logs, or other sources.
+#### SDK
+You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk). This allows you to analyze chat histories from your production systems, logs, or other sources.
 
-    When you call `generate_insights()`, the SDK will:
+When you call `generate_insights()`, the SDK will:
 
-    1. Upload your chat histories as traces to a new LangSmith project.
-    2. Generate an Insights Report over those uploaded traces.
-    3. Return a link to your results in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-insights).
+1. Upload your chat histories as traces to a new LangSmith project.
+2. Generate an Insights Report over those uploaded traces.
+3. Return a link to your results in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-insights).
 
-    <CodeGroup>
-      ```python Python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-      import os
-      from langsmith import Client
+```python
+import os
+from langsmith import Client
 
-      client = Client()
+client = Client()
 
-      chat_histories = [
-          [
-              {"role": "user", "content": "how are you"},
-              {"role": "assistant", "content": "good!"},
-          ],
-          [
-              {"role": "user", "content": "do you like art"},
-              {"role": "assistant", "content": "only Tarkovsky"},
-          ],
-      ]
+chat_histories = [
+    [
+        {"role": "user", "content": "how are you"},
+        {"role": "assistant", "content": "good!"},
+    ],
+    [
+        {"role": "user", "content": "do you like art"},
+        {"role": "assistant", "content": "only Tarkovsky"},
+    ],
+]
 
-      report = client.generate_insights(
-          chat_histories=chat_histories,
-          name="Customer Support Topics - March 2024",
-          instructions="What are the main topics and questions users are asking about?",
-          openai_api_key=os.environ["OPENAI_API_KEY"],  # optional if already set as workspace secret
-      )
+report = client.generate_insights(
+    chat_histories=chat_histories,
+    name="Customer Support Topics - March 2024",
+    instructions="What are the main topics and questions users are asking about?",
+    openai_api_key=os.environ["OPENAI_API_KEY"],  # optional if already set as workspace secret
+)
 
-      # client.poll_insights(report=report)
-      ```
-    </CodeGroup>
-  </Tab>
-</Tabs>
+# client.poll_insights(report=report)
+```
 
-<Note>
-  Generating insights over 1,000 threads typically costs \$1.00-\$2.00 with OpenAI models and \$3.00-\$4.00 with current Anthropic models. The cost scales with the number of threads sampled and the size of each thread.
-</Note>
+> [!NOTE]
+> Generating insights over 1,000 threads typically costs \$1.00-\$2.00 with OpenAI models and \$3.00-\$4.00 with current Anthropic models. The cost scales with the number of threads sampled and the size of each thread.
 
 ## Understand the results
 
 Once your job has completed, you can navigate to the **Insights** tab where you'll see a table of Insights Report. Each Report contains insights generated over a specific sample of traces from the tracing project.
 
-<Frame caption="Insights Reports for a single tracing project">
-  <img src="https://mintcdn.com/langchain-5e9cc07a/lC4dVnXBXgUXGkP0/langsmith/images/insights-job-results.png?fit=max&auto=format&n=lC4dVnXBXgUXGkP0&q=85&s=1a95e426b2984bcf417f92d1c4d739b6" width="2964" height="1814" data-path="langsmith/images/insights-job-results.png" />
-</Frame>
+> **Image:** [Image](https://docs.langchain.com/langsmith/insights)
 
 Click into your job to see traces organized into a set of auto-generated categories.
 
 You can drill down through categories and subcategories to view the underlying traces, feedback, and run statistics.
 
-<Frame caption="Common topics of conversations with the https://chat.langchain.com chatbot">
-  <img src="https://mintcdn.com/langchain-5e9cc07a/4-kFQm9_42J5OnwH/langsmith/images/insights-nav.gif?s=6a22bfd0d94262b7aa78468a8379ea0f" width="800" height="516" data-path="langsmith/images/insights-nav.gif" />
-</Frame>
+> **Image:** [Image](https://docs.langchain.com/langsmith/insights)
 
 ### Executive summary
 
@@ -112,7 +96,7 @@ Each category has a brief description and displays aggregated metrics over the t
 
 * Typical trace stats (like error rates, latency, cost)
 * Feedback scores from your evaluators
-* [Attributes](#attributes) extracted as part of the job
+* [Attributes](https://docs.langchain.com/langsmith/insights#attributes) extracted as part of the job
 
 ### Subcategories
 
@@ -140,7 +124,7 @@ For best results, write a sentence or two for each prompt that gives Insights th
 
 **Describing your traces**
 
-Explain how your data is organized: are these single runs or multi-turn conversations? Which inputs and outputs contain the key information? This helps Insights generate summary prompts and attributes that focus on what matters. You can also directly specify variables from the [summary prompt](#summary-prompt) section if needed.
+Explain how your data is organized: are these single runs or multi-turn conversations? Which inputs and outputs contain the key information? This helps Insights generate summary prompts and attributes that focus on what matters. You can also directly specify variables from the [summary prompt](https://docs.langchain.com/langsmith/insights#summary-prompt) section if needed.
 
 ### Choose models
 
@@ -149,7 +133,7 @@ Insights uses two models:
 * **Thinking model**: performs the clustering step (more capable, higher cost).
 * **Summarization model**: generates the per-trace summaries (faster, lower cost).
 
-Both models are selected from the providers you have configured in your workspace. When specific models have been enabled for Insights in your [model configurations](/langsmith/model-configurations), you can select them individually. If no individual models are configured, you select a provider (OpenAI or Anthropic) and Insights uses default models for that provider.
+Both models are selected from the providers you have configured in your workspace. When specific models have been enabled for Insights in your [model configurations](https://docs.langchain.com/langsmith/model-configurations), you can select them individually. If no individual models are configured, you select a provider (OpenAI or Anthropic) and Insights uses default models for that provider.
 
 For best results, use models from the same provider for both roles.
 
@@ -195,13 +179,12 @@ You must specify what parts of each trace to send to the summarizer using at lea
 | `run.error`           | Error string, if the run failed                                                                      | `{{run.error}}`                |
 | `run.feedback`        | All feedback scores as a JSON blob                                                                   | `{{run.feedback}}`             |
 | `run.feedback.<key>`  | A specific feedback score by key                                                                     | `{{run.feedback.correctness}}` |
-| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](/langsmith/threads)) | `{{all_thread_messages}}`      |
+| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](https://docs.langchain.com/langsmith/threads)) | `{{all_thread_messages}}`      |
 
 You can access nested fields using dot notation. For example, `{{run.inputs.foo.bar}}` includes only the `bar` field within `foo` in the last run's inputs.
 
-<Note>
-  For projects with [threads](/langsmith/threads), Insights analyzes full conversations. Only the most recent root run from each thread is used for `run.*` variables. Use `all_thread_messages` to access the complete conversation history.
-</Note>
+> [!NOTE]
+> For projects with [threads](https://docs.langchain.com/langsmith/threads), Insights analyzes full conversations. Only the most recent root run from each thread is used for `run.*` variables. Use `all_thread_messages` to access the complete conversation history.
 
 #### Attributes
 
@@ -242,12 +225,8 @@ Select from previously saved configs in the dropdown in the top-left corner of t
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/insights.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/insights.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

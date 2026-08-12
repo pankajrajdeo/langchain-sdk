@@ -1,18 +1,13 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # ChatOpenRouter integration
 
 > Integrate with the ChatOpenRouter chat model using LangChain Python.
 
-This will help you get started with OpenRouter [chat models](/oss/python/langchain/models). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
+This will help you get started with OpenRouter [chat models](https://docs.langchain.com/oss/python/langchain/models). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
 
-<Tip>
-  **API Reference**
-
-  For detailed documentation of all features and configuration options, head to the [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) API reference.
-</Tip>
+> [!TIP]
+> **API Reference**
+>
+> For detailed documentation of all features and configuration options, head to the [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) API reference.
 
 For a full list of available models, visit the [OpenRouter models page](https://openrouter.ai/models).
 
@@ -22,11 +17,11 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 | Class                                                                                        | Package                                                                                            | Serializable | JS/TS Support |                                                                                                      Downloads                                                                                                     |                                                                                                                     Latest Version                                                                                                                     |
 | :------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- | :----------: | :-----------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) |     beta     |       ❌       | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openrouter/month" alt="Downloads per month" noZoom height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" noZoom height="100" class="rounded" /></a> |
+| [`ChatOpenRouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) | [`langchain-openrouter`](https://reference.langchain.com/python/integrations/langchain_openrouter) |     beta     |       ❌       | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://static.pepy.tech/badge/langchain-openrouter/month" alt="Downloads per month" height="100" class="rounded" /></a> | <a href="https://pypi.org/project/langchain-openrouter/" target="_blank"><img src="https://img.shields.io/pypi/v/langchain-openrouter?style=flat-square&label=%20&color=orange" alt="PyPI - Latest version" height="100" class="rounded" /></a> |
 
 ### Model features
 
-| [Tool calling](/oss/python/langchain/tools) | [Structured output](/oss/python/langchain/structured-output) | [Image input](/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](/oss/python/langchain/streaming/) | Native async | [Token usage](/oss/python/langchain/models#token-usage) | [Logprobs](/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -38,21 +33,19 @@ To access models via OpenRouter you'll need to create an [OpenRouter account](ht
 
 The LangChain OpenRouter integration lives in the `langchain-openrouter` package:
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-openrouter
-  ```
+```bash
+pip install -U langchain-openrouter
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-openrouter
-  ```
-</CodeGroup>
+```bash
+uv add langchain-openrouter
+```
 
 ### Credentials
 
 Head to the [OpenRouter keys page](https://openrouter.ai/settings/keys) to sign up and generate an API key. Once you've done this set the `OPENROUTER_API_KEY` environment variable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import getpass
 import os
 
@@ -60,9 +53,9 @@ if not os.getenv("OPENROUTER_API_KEY"):
     os.environ["OPENROUTER_API_KEY"] = getpass.getpass("Enter your OpenRouter API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -71,7 +64,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 Now we can instantiate our model object and generate chat completions:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openrouter import ChatOpenRouter
 
 model = ChatOpenRouter(
@@ -87,7 +80,7 @@ model = ChatOpenRouter(
 
 ## Invocation
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 messages = [
     (
         "system",
@@ -99,7 +92,7 @@ ai_msg = model.invoke(messages)
 ai_msg.content
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 "J'adore la programmation."
 ```
 
@@ -107,7 +100,7 @@ ai_msg.content
 
 ## Streaming
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = model.stream_events("Write a short poem about the sea.", version="v3")
 for token in stream.text:
     print(token, end="", flush=True)
@@ -115,7 +108,7 @@ for token in stream.text:
 
 Async streaming is also supported:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = await model.astream_events("Write a short poem about the sea.", version="v3")
 async for token in stream.text:
     print(token, end="", flush=True)
@@ -131,27 +124,25 @@ OpenRouter uses the OpenAI-compatible tool calling format. You can describe tool
 
 With `ChatOpenRouter.bind_tools`, you can pass in Pydantic classes, dict schemas, LangChain tools, or functions as tools to the model. Under the hood these are converted to OpenAI tool schemas and passed in every model invocation.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from pydantic import BaseModel, Field
-
 
 class GetWeather(BaseModel):
     """Get the current weather in a given location"""
 
     location: str = Field(description="The city and state, e.g. San Francisco, CA")
 
-
 model_with_tools = model.bind_tools([GetWeather])
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = model_with_tools.invoke(
     "what is the weather like in San Francisco",
 )
 ai_msg
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 AIMessage(content='', response_metadata={'finish_reason': 'tool_calls'}, tool_calls=[{'name': 'GetWeather', 'args': {'location': 'San Francisco, CA'}, 'id': 'call_abc123', 'type': 'tool_call'}], usage_metadata={'input_tokens': 68, 'output_tokens': 17, 'total_tokens': 85})
 ```
 
@@ -159,11 +150,11 @@ AIMessage(content='', response_metadata={'finish_reason': 'tool_calls'}, tool_ca
 
 The AIMessage has a `tool_calls` attribute. This contains tool calls in a standardized format that is model-provider agnostic.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg.tool_calls
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 [{'name': 'GetWeather',
   'args': {'location': 'San Francisco, CA'},
   'id': 'call_abc123',
@@ -174,81 +165,87 @@ ai_msg.tool_calls
 
 Pass `strict=True` to guarantee that model output exactly matches the JSON Schema provided in the tool definition:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model_with_tools = model.bind_tools([GetWeather], strict=True)
 ```
 
-For more on binding tools and tool call outputs, head to the [tool calling](/oss/python/langchain/tools) docs.
+For more on binding tools and tool call outputs, head to the [tool calling](https://docs.langchain.com/oss/python/langchain/tools) docs.
 
 ***
 
 ## Structured output
 
-`ChatOpenRouter` supports structured output via the [`with_structured_output`](/oss/python/langchain/models#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
+`ChatOpenRouter` supports structured output via the [`with_structured_output`](https://docs.langchain.com/oss/python/langchain/models#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
 
-<Accordion title="Individual model calls">
-  Use `with_structured_output` to generate a structured model response. Specify `method="json_schema"` to use JSON Schema-based structured output; otherwise the method defaults to function calling.
+<details>
+<summary>Individual model calls</summary>
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openrouter import ChatOpenRouter
-  from pydantic import BaseModel, Field
+Use `with_structured_output` to generate a structured model response. Specify `method="json_schema"` to use JSON Schema-based structured output; otherwise the method defaults to function calling.
 
-  model = ChatOpenRouter(model="openai/gpt-5.5")
+```python
+from langchain_openrouter import ChatOpenRouter
+from pydantic import BaseModel, Field
 
-  class Movie(BaseModel):
-      """A movie with details."""
-      title: str = Field(description="The title of the movie")
-      year: int = Field(description="The year the movie was released")
-      director: str = Field(description="The director of the movie")
-      rating: float = Field(description="The movie's rating out of 10")
+model = ChatOpenRouter(model="openai/gpt-5.5")
 
-  structured_model = model.with_structured_output(Movie, method="json_schema")  # [!code highlight]
-  response = structured_model.invoke("Provide details about the movie Inception")
-  response
-  ```
+class Movie(BaseModel):
+    """A movie with details."""
+    title: str = Field(description="The title of the movie")
+    year: int = Field(description="The year the movie was released")
+    director: str = Field(description="The director of the movie")
+    rating: float = Field(description="The movie's rating out of 10")
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
-  ```
-</Accordion>
+structured_model = model.with_structured_output(Movie, method="json_schema")  # [!code highlight]
+response = structured_model.invoke("Provide details about the movie Inception")
+response
+```
 
-<Accordion title="Agent response format">
-  Specify `response_format` with [`ProviderStrategy`](/oss/python/langchain/structured-output) to engage structured output when generating the agent's final response.
+```python
+Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
+```
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain.agents import create_agent
-  from langchain.agents.structured_output import ProviderStrategy
-  from pydantic import BaseModel
+</details>
 
-  class Weather(BaseModel):
-      temperature: float
-      condition: str
+<details>
+<summary>Agent response format</summary>
 
-  def weather_tool(location: str) -> str:
-      """Get the weather at a location."""
-      return "Sunny and 75 degrees F."
+Specify `response_format` with [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output) to engage structured output when generating the agent's final response.
 
-  agent = create_agent(
-      model="openrouter:openai/gpt-5.5",
-      tools=[weather_tool],
-      response_format=ProviderStrategy(Weather),  # [!code highlight]
-  )
+```python
+from langchain.agents import create_agent
+from langchain.agents.structured_output import ProviderStrategy
+from pydantic import BaseModel
 
-  result = agent.invoke({
-      "messages": [{"role": "user", "content": "What's the weather in SF?"}]
-  })
+class Weather(BaseModel):
+    temperature: float
+    condition: str
 
-  result["structured_response"]
-  ```
+def weather_tool(location: str) -> str:
+    """Get the weather at a location."""
+    return "Sunny and 75 degrees F."
 
-  ```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  Weather(temperature=75.0, condition='Sunny')
-  ```
-</Accordion>
+agent = create_agent(
+    model="openrouter:openai/gpt-5.5",
+    tools=[weather_tool],
+    response_format=ProviderStrategy(Weather),  # [!code highlight]
+)
+
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "What's the weather in SF?"}]
+})
+
+result["structured_response"]
+```
+
+```python
+Weather(temperature=75.0, condition='Sunny')
+```
+
+</details>
 
 You can pass `strict=True` with the `function_calling` and `json_schema` methods to enforce exact schema adherence. The `strict` parameter is not supported with `json_mode`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 structured_model = model.with_structured_output(Movie, method="json_schema", strict=True)
 ```
 
@@ -258,7 +255,7 @@ structured_model = model.with_structured_output(Movie, method="json_schema", str
 
 For models that support reasoning (e.g., `anthropic/claude-sonnet-4.5`, `deepseek/deepseek-r1`), you can enable reasoning tokens via the `reasoning` parameter. See the [OpenRouter reasoning docs](https://openrouter.ai/docs/guides/best-practices/reasoning-tokens) for details:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     max_tokens=16384,
@@ -273,7 +270,7 @@ for block in ai_msg.content_blocks:
         print(block["reasoning"])
 ```
 
-For more on content blocks, see the [standard content blocks](/oss/python/langchain/messages#standard-content-blocks) guide.
+For more on content blocks, see the [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) guide.
 
 The `reasoning` dict supports two keys:
 
@@ -282,21 +279,20 @@ The `reasoning` dict supports two keys:
 
 Reasoning token usage is included in `usage_metadata`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 print(ai_msg.usage_metadata)
 # {'input_tokens': ..., 'output_tokens': ..., 'total_tokens': ...,
 #  'output_token_details': {'reasoning': ...}}
 ```
 
-<Note>
-  The effort-to-budget mapping is model-dependent. For example, Google Gemini models map effort to an internal `thinkingLevel` rather than an exact token budget. See the [OpenRouter reasoning docs](https://openrouter.ai/docs/guides/best-practices/reasoning-tokens) for details.
-</Note>
+> [!NOTE]
+> The effort-to-budget mapping is model-dependent. For example, Google Gemini models map effort to an internal `thinkingLevel` rather than an exact token budget. See the [OpenRouter reasoning docs](https://openrouter.ai/docs/guides/best-practices/reasoning-tokens) for details.
 
 ***
 
 ## Multimodal inputs
 
-OpenRouter supports [multimodal inputs](/oss/python/langchain/messages#multimodal) for models that accept them. The available modalities depend on the model you select—check the [OpenRouter models page](https://openrouter.ai/models) for details.
+OpenRouter supports [multimodal inputs](https://docs.langchain.com/oss/python/langchain/messages#multimodal) for models that accept them. The available modalities depend on the model you select—check the [OpenRouter models page](https://openrouter.ai/models) for details.
 
 ### Supported input methods
 
@@ -305,63 +301,60 @@ OpenRouter supports [multimodal inputs](/oss/python/langchain/messages#multimoda
 | HTTP/HTTPS URLs    |   ✅   |   ❌   |   ✅   |  ✅  |
 | Base64 inline data |   ✅   |   ✅   |   ✅   |  ✅  |
 
-<Note>
-  Not all models support all modalities. Check the [OpenRouter models page](https://openrouter.ai/models) for model-specific support.
-</Note>
+> [!NOTE]
+> Not all models support all modalities. Check the [OpenRouter models page](https://openrouter.ai/models) for model-specific support.
 
 ### Image input
 
 Provide image inputs along with text using a [`HumanMessage`](https://reference.langchain.com/python/langchain-core/messages/human/HumanMessage) with list content format.
 
-<CodeGroup>
-  ```python URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="openai/gpt-4o")
+model = ChatOpenRouter(model="openai/gpt-4o")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe this image."},
-          {
-              "type": "image",
-              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe this image."},
+        {
+            "type": "image",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  import httpx
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+import base64
+import httpx
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="openai/gpt-4o")
+model = ChatOpenRouter(model="openai/gpt-4o")
 
-  image_url = "https://picsum.photos/id/237/200/300"
-  image_data = base64.b64encode(httpx.get(image_url, follow_redirects=True).content).decode("utf-8")
+image_url = "https://picsum.photos/id/237/200/300"
+image_data = base64.b64encode(httpx.get(image_url, follow_redirects=True).content).decode("utf-8")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe this image."},
-          { # [!code highlight]
-              "type": "image", # [!code highlight]
-              "base64": image_data, # [!code highlight]
-              "mime_type": "image/jpeg", # [!code highlight]
-          }, # [!code highlight]
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe this image."},
+        { # [!code highlight]
+            "type": "image", # [!code highlight]
+            "base64": image_data, # [!code highlight]
+            "mime_type": "image/jpeg", # [!code highlight]
+        }, # [!code highlight]
+    ]
+)
+response = model.invoke([message])
+```
 
 ### Audio input
 
 Provide audio inputs along with text. Audio is passed as base64 inline data.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import base64
 from pathlib import Path
 from langchain_openrouter import ChatOpenRouter
@@ -388,96 +381,92 @@ response = model.invoke([message])
 
 Video inputs are automatically converted to OpenRouter's `video_url` format.
 
-<CodeGroup>
-  ```python URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
+model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe this video."},
-          {
-              "type": "video",
-              "url": "https://example.com/video.mp4",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe this video."},
+        {
+            "type": "video",
+            "url": "https://example.com/video.mp4",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from pathlib import Path
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+import base64
+from pathlib import Path
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
+model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
 
-  video_data = base64.b64encode(Path("/path/to/video.mp4").read_bytes()).decode("utf-8")
+video_data = base64.b64encode(Path("/path/to/video.mp4").read_bytes()).decode("utf-8")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Describe this video."},
-          { # [!code highlight]
-              "type": "video", # [!code highlight]
-              "base64": video_data, # [!code highlight]
-              "mime_type": "video/mp4", # [!code highlight]
-          }, # [!code highlight]
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Describe this video."},
+        { # [!code highlight]
+            "type": "video", # [!code highlight]
+            "base64": video_data, # [!code highlight]
+            "mime_type": "video/mp4", # [!code highlight]
+        }, # [!code highlight]
+    ]
+)
+response = model.invoke([message])
+```
 
 ### PDF input
 
 Provide PDF file inputs along with text.
 
-<CodeGroup>
-  ```python URL theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
+model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize this document."},
-          {
-              "type": "file",
-              "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-              "mime_type": "application/pdf",
-          },
-      ]
-  )
-  response = model.invoke([message])
-  ```
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize this document."},
+        {
+            "type": "file",
+            "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+            "mime_type": "application/pdf",
+        },
+    ]
+)
+response = model.invoke([message])
+```
 
-  ```python Base64 encoded theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import base64
-  from pathlib import Path
-  from langchain_openrouter import ChatOpenRouter
-  from langchain.messages import HumanMessage
+```python
+import base64
+from pathlib import Path
+from langchain_openrouter import ChatOpenRouter
+from langchain.messages import HumanMessage
 
-  model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
+model = ChatOpenRouter(model="google/gemini-2.5-pro-preview")
 
-  pdf_data = base64.b64encode(Path("/path/to/document.pdf").read_bytes()).decode("utf-8")
+pdf_data = base64.b64encode(Path("/path/to/document.pdf").read_bytes()).decode("utf-8")
 
-  message = HumanMessage(
-      content=[
-          {"type": "text", "text": "Summarize this document."},
-          { # [!code highlight]
-              "type": "file", # [!code highlight]
-              "base64": pdf_data, # [!code highlight]
-              "mime_type": "application/pdf", # [!code highlight]
-          }, # [!code highlight]
-      ]
-  )
-  response = model.invoke([message])
-  ```
-</CodeGroup>
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "Summarize this document."},
+        { # [!code highlight]
+            "type": "file", # [!code highlight]
+            "base64": pdf_data, # [!code highlight]
+            "mime_type": "application/pdf", # [!code highlight]
+        }, # [!code highlight]
+    ]
+)
+response = model.invoke([message])
+```
 
 ***
 
@@ -485,12 +474,12 @@ Provide PDF file inputs along with text.
 
 After an invocation, token usage information is available on the `usage_metadata` attribute of the response:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = model.invoke("Tell me a joke.")
 ai_msg.usage_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input_tokens': 12,
  'output_tokens': 25,
  'total_tokens': 37}
@@ -502,7 +491,7 @@ When the underlying provider includes detailed token breakdowns in its response,
 
 `output_token_details.reasoning` reports the number of tokens the model used for internal chain-of-thought reasoning. This appears when using reasoning models (e.g., `deepseek/deepseek-r1`, `openai/o3`) or when reasoning is explicitly enabled:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openrouter import ChatOpenRouter
 
 model = ChatOpenRouter(
@@ -514,7 +503,7 @@ ai_msg = model.invoke("What is the square root of 529?")
 ai_msg.usage_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input_tokens': 39,
  'output_tokens': 98,
  'total_tokens': 137,
@@ -527,7 +516,7 @@ ai_msg.usage_metadata
 
 Prompt caching requires explicit `cache_control` breakpoints in message content blocks. Pass `{"cache_control": {"type": "ephemeral"}}` on the content block you want cached:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_openrouter import ChatOpenRouter
 
 model = ChatOpenRouter(model="anthropic/claude-sonnet-4.5")
@@ -543,39 +532,38 @@ ai_msg = model.invoke(messages)
 ai_msg.usage_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input_tokens': 1210,
  'output_tokens': 12,
  'total_tokens': 1222,
  'input_token_details': {'cache_creation': 1201}}
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Second call reads from cache
 ai_msg = model.invoke(messages)
 ai_msg.usage_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input_tokens': 1210,
  'output_tokens': 12,
  'total_tokens': 1222,
  'input_token_details': {'cache_read': 1201}}
 ```
 
-<Note>
-  Without `cache_control` on message content blocks, the provider will not cache the prompt and these fields will not appear.
-</Note>
+> [!NOTE]
+> Without `cache_control` on message content blocks, the provider will not cache the prompt and these fields will not appear.
 
 When streaming, access token usage from the full output:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 stream = model.stream_events("Tell me a joke.", version="v3")
 full = stream.output
 full.usage_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'input_tokens': 12,
  'output_tokens': 25,
  'total_tokens': 37}
@@ -587,12 +575,12 @@ full.usage_metadata
 
 After an invocation, provider and model metadata is available on the `response_metadata` attribute:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 ai_msg = model.invoke("Tell me a joke.")
 ai_msg.response_metadata
 ```
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 {'model_name': 'anthropic/claude-sonnet-4.5',
  'id': 'gen-1771043112-yLUz3txgvHSjkyCQK8KQ',
  'created': 1771043112,
@@ -614,7 +602,7 @@ Many models on OpenRouter are served by multiple providers. The `openrouter_prov
 
 Use `order` to set a preferred provider sequence. OpenRouter tries each provider in order and falls back to the next if one is unavailable:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     openrouter_provider={
@@ -626,7 +614,7 @@ model = ChatOpenRouter(
 
 To restrict requests to specific providers only, use `only`. To exclude certain providers, use `ignore`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Only use these providers (no fallback to others)
 model = ChatOpenRouter(
     model="openai/gpt-4o",
@@ -644,7 +632,7 @@ model = ChatOpenRouter(
 
 By default, OpenRouter load-balances across providers with a preference for lower cost. Use `sort` to change the priority:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Prefer the fastest providers (highest tokens/second)
 model = ChatOpenRouter(
     model="openai/gpt-4o",
@@ -662,7 +650,7 @@ model = ChatOpenRouter(
 
 If your use case requires that providers do not store or train on your data, set `data_collection` to `"deny"`:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     openrouter_provider={"data_collection": "deny"},
@@ -673,7 +661,7 @@ model = ChatOpenRouter(
 
 For open-weight models, you can restrict routing to specific precision levels:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="meta-llama/llama-4-maverick",
     openrouter_provider={"quantizations": ["fp16", "bf16"]},
@@ -687,7 +675,7 @@ The `route` parameter controls high-level routing behavior:
 * `"fallback"`: enable automatic failover across providers (default behavior).
 * `"sort"`: route based on the sorting strategy configured in `openrouter_provider`.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     route="fallback",
@@ -698,7 +686,7 @@ model = ChatOpenRouter(
 
 Provider options can be composed together:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="openai/gpt-4o",
     openrouter_provider={
@@ -718,7 +706,7 @@ See the [OpenRouter provider routing docs](https://openrouter.ai/docs/guides/rou
 
 OpenRouter supports app attribution via HTTP headers. You can set these through init params or environment variables:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     app_url="https://myapp.com",   # or OPENROUTER_APP_URL env var
@@ -736,7 +724,7 @@ OpenRouter can broadcast request data to configured observability destinations. 
 
 Pass a `session_id` to associate multiple requests with the same workflow (a conversation, an agent run, a batch job, a CI run, and so on). Maximum 256 characters.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     session_id="workflow-abc-123",   # or OPENROUTER_SESSION_ID env var
@@ -747,7 +735,7 @@ The `OPENROUTER_SESSION_ID` environment variable is read at instantiation when n
 
 You can also override the value per call:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model.invoke("Summarize the doc", session_id="workflow-abc-123-step-1")
 ```
 
@@ -755,7 +743,7 @@ model.invoke("Summarize the doc", session_id="workflow-abc-123-step-1")
 
 Pass `trace` to attach per-request metadata that OpenRouter forwards to broadcast destinations. Recognized keys are `trace_id`, `trace_name`, `span_name`, `generation_name`, and `parent_span_id`; additional keys are passed through as custom metadata.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 model = ChatOpenRouter(
     model="anthropic/claude-sonnet-4.5",
     trace={
@@ -777,12 +765,8 @@ For more information about OpenRouter's platform, models, and features, see the 
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat/openrouter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

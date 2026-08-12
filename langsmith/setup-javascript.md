@@ -1,16 +1,12 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to set up a JavaScript application
-
-An application must be configured with a [configuration file](/langsmith/cli#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up a JavaScript application for deployment using `package.json` to specify project dependencies.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/setup-javascript)
+An application must be configured with a [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up a JavaScript application for deployment using `package.json` to specify project dependencies.
 
 This walkthrough is based on [this repository](https://github.com/langchain-ai/langgraphjs-studio-starter), which you can play around with to learn more about how to set up your application for deployment.
 
 The final repository structure will look something like this:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 my-app/
 ├── src # all project code lies within here
 │   ├── utils # optional utilities for your graph
@@ -23,19 +19,18 @@ my-app/
 └── langgraph.json # configuration file for LangGraph
 ```
 
-<Tip>
-  LangSmith Deployment supports deploying a [LangGraph](/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](/langsmith/deployment), scaling, and [observability](/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
-</Tip>
+> [!TIP]
+> LangSmith Deployment supports deploying a [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](https://docs.langchain.com/langsmith/deployment), scaling, and [observability](https://docs.langchain.com/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](https://docs.langchain.com/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
 
 After each step, an example file directory is provided to demonstrate how code can be organized.
 
 ## Specify dependencies
 
-Dependencies can be specified in a `package.json`. If none of these files is created, then dependencies can be specified later in the [configuration file](#create-the-api-config).
+Dependencies can be specified in a `package.json`. If none of these files is created, then dependencies can be specified later in the [configuration file](https://docs.langchain.com/langsmith/setup-javascript#create-the-api-config).
 
 Example `package.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "name": "langgraphjs-studio-starter",
   "packageManager": "yarn@1.22.22",
@@ -58,14 +53,14 @@ When deploying your app, the dependencies will be installed using the package ma
 
 Example file directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 my-app/
 └── package.json # package dependencies
 ```
 
 ## Specify environment variables
 
-Environment variables can optionally be specified in a file (e.g. `.env`). See the [Environment Variables reference](/langsmith/env-var-cloud) to configure additional variables for a deployment.
+Environment variables can optionally be specified in a file (e.g. `.env`). See the [Environment Variables reference](https://docs.langchain.com/langsmith/env-var-cloud) to configure additional variables for a deployment.
 
 Example `.env` file:
 
@@ -78,7 +73,7 @@ TAVILY_API_KEY=key_2
 
 Example file directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 my-app/
 ├── package.json
 └── .env # environment variables
@@ -86,11 +81,11 @@ my-app/
 
 ## Define graphs
 
-Implement your graphs. Graphs can be defined in a single file or multiple files. Make note of the variable names of each compiled graph to be included in the application. The variable names will be used later when creating the [configuration file](/langsmith/cli#configuration-file).
+Implement your graphs. Graphs can be defined in a single file or multiple files. Make note of the variable names of each compiled graph to be included in the application. The variable names will be used later when creating the [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file).
 
 Here is an example `agent.ts`:
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import type { AIMessage } from "@langchain/core/messages";
 import { TavilySearch } from "@langchain/tavily";
 import { ChatOpenAI } from "@langchain/openai";
@@ -165,7 +160,7 @@ export const graph = workflow.compile();
 
 Example file directory:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 my-app/
 ├── src # all project code lies within here
 │   ├── utils # optional utilities for your graph
@@ -180,11 +175,11 @@ my-app/
 
 ## Create the API config
 
-Create a [configuration file](/langsmith/cli#configuration-file) called `langgraph.json`. See the [configuration file reference](/langsmith/cli#configuration-file) for detailed explanations of each key in the JSON object of the configuration file.
+Create a [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file) called `langgraph.json`. See the [configuration file reference](https://docs.langchain.com/langsmith/cli#configuration-file) for detailed explanations of each key in the JSON object of the configuration file.
 
 Example `langgraph.json` file:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "node_version": "20",
   "dockerfile_lines": [],
@@ -198,23 +193,18 @@ Example `langgraph.json` file:
 
 Note that the variable name of the `CompiledGraph` appears at the end of the value of each subkey in the top-level `graphs` key (i.e. `:<variable_name>`).
 
-<Info>
-  **Configuration Location**
-  The configuration file must be placed in a directory that is at the same level or higher than the TypeScript files that contain compiled graphs and associated dependencies.
-</Info>
+> [!NOTE]
+> **Configuration Location**
+> The configuration file must be placed in a directory that is at the same level or higher than the TypeScript files that contain compiled graphs and associated dependencies.
 
 ## Next
 
-After you setup your project and place it in a GitHub repository, it's time to [deploy your app](/langsmith/deployment-quickstart).
+After you setup your project and place it in a GitHub repository, it's time to [deploy your app](https://docs.langchain.com/langsmith/deployment-quickstart).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-javascript.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/setup-javascript.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

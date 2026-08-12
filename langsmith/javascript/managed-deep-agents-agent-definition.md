@@ -1,22 +1,17 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Define a Managed Deep Agent
-
-> Configure the model and core capabilities of a Managed Deep Agent.
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition)
+Configure the model and core capabilities of a Managed Deep Agent.
 
 The agent definition selects the model and core capabilities of a Managed Deep Agent.
 
-<Note>
-  Managed Deep Agents is in **public [beta](/langsmith/release-stages)** and available on [LangSmith Cloud](/langsmith/cloud) in the US region only.
-</Note>
+> [!NOTE]
+> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
 
 ## Project structure
 
 The agent entry lives at the project root:
 
-```text theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```text
 my-agent/
   agent.ts
 ```
@@ -27,45 +22,43 @@ Export the agent definition as a named `agent`. You can also use `agent.tsx`.
 
 Use `defineDeepAgent`:
 
-<CodeGroup>
-  ```ts OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "openai:gpt-5.5",
-  });
-  ```
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "openai:gpt-5.5",
+});
+```
 
-  ```ts Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "anthropic:claude-sonnet-4-6",
-  });
-  ```
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "anthropic:claude-sonnet-4-6",
+});
+```
 
-  ```ts Google Gemini theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "google-genai:gemini-3.6-flash",
-  });
-  ```
-</CodeGroup>
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "google-genai:gemini-3.6-flash",
+});
+```
 
 | Parameter                              | What it does                                                          |
 | -------------------------------------- | --------------------------------------------------------------------- |
-| [`name`](#name)                        | Sets the agent and default deployment name                            |
-| [`model`](#model)                      | Selects the chat model                                                |
-| [`tools`](#tools)                      | Adds tools the agent can call                                         |
-| [`middleware`](#middleware)            | Adds behavior around model calls, tool calls, and the agent lifecycle |
-| [`subagents`](#subagents)              | Defines specialized agents for delegated tasks                        |
-| [`permissions`](#permissions)          | Controls path-level access for filesystem tools                       |
-| [`interruptOn`](#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
-| [`responseFormat`](#structured-output) | Defines a structured output schema                                    |
+| [`name`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#name)                        | Sets the agent and default deployment name                            |
+| [`model`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#model)                      | Selects the chat model                                                |
+| [`tools`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#tools)                      | Adds tools the agent can call                                         |
+| [`middleware`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#middleware)            | Adds behavior around model calls, tool calls, and the agent lifecycle |
+| [`subagents`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#subagents)              | Defines specialized agents for delegated tasks                        |
+| [`permissions`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#permissions)          | Controls path-level access for filesystem tools                       |
+| [`interruptOn`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
+| [`responseFormat`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#structured-output) | Defines a structured output schema                                    |
 
 ## Name
 
@@ -77,40 +70,38 @@ MDA uses the name as the LangGraph assistant ID and the default LangSmith deploy
 
 Set `model` to the chat model the agent uses. The simplest option is a `provider:model` string. Add the provider's API key to `.env` so the model works locally and in the deployment.
 
-<CodeGroup>
-  ```ts OpenAI theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "openai:gpt-5.5",
-  });
-  ```
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "openai:gpt-5.5",
+});
+```
 
-  ```ts Anthropic theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "anthropic:claude-sonnet-4-6",
-  });
-  ```
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "anthropic:claude-sonnet-4-6",
+});
+```
 
-  ```ts Google Gemini theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  import { defineDeepAgent } from "managed-deepagents";
+```ts
+import { defineDeepAgent } from "managed-deepagents";
 
-  export const agent = defineDeepAgent({
-    name: "research-assistant",
-    model: "google-genai:gemini-3.6-flash",
-  });
-  ```
-</CodeGroup>
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "google-genai:gemini-3.6-flash",
+});
+```
 
-Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](/oss/javascript/deepagents/models).
+Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](https://docs.langchain.com/oss/javascript/deepagents/models).
 
 ### Using LangSmith Gateway
 
-You can use [LangSmith Gateway](langsmith/llm-gateway) to control rate limits, fallbacks, and more.
+You can use [LangSmith Gateway](https://docs.langchain.com/langsmith/llm-gateway) to control rate limits, fallbacks, and more.
 
 In order to use, you should:
 
@@ -120,7 +111,7 @@ In order to use, you should:
 
 This should look like (illustrative):
 
-```ts theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```ts
 import { defineDeepAgent } from "managed-deepagents";
 import { ChatOpenAI } from "@langchain/openai";
 
@@ -138,13 +129,12 @@ export const agent = defineDeepAgent({
 });
 ```
 
-<Note>
-  The model slug should be `provider/model-name` when using Gateway. When NOT using Gateway, it is normally `provider:model-name`
-</Note>
+> [!NOTE]
+> The model slug should be `provider/model-name` when using Gateway. When NOT using Gateway, it is normally `provider:model-name`
 
 In order to scaffold your project to use Gateway from the start, you can pass a `--gateway` flag when initializing your agent:
 
-```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```bash
 mda init my-agent --gateway
 ```
 
@@ -152,44 +142,40 @@ mda init my-agent --gateway
 
 Pass tools in the `tools` array to let the agent call application logic or external services.
 
-Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](/langsmith/javascript/managed-deep-agents-tools). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](/langsmith/javascript/managed-deep-agents-mcp-connectors).
+Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors).
 
 ## Middleware
 
 Pass middleware in the `middleware` array to add behavior around model calls, tool calls, and the agent lifecycle. Middleware runs in array order.
 
-See [Custom middleware](/langsmith/javascript/managed-deep-agents-middleware).
+See [Custom middleware](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-middleware).
 
 ## Subagents
 
-Pass subagent definitions in `subagents` when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](/oss/javascript/deepagents/subagents).
+Pass subagent definitions in `subagents` when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](https://docs.langchain.com/oss/javascript/deepagents/subagents).
 
 ## Permissions
 
-Pass filesystem permission rules in `permissions` to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](/oss/javascript/deepagents/permissions).
+Pass filesystem permission rules in `permissions` to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](https://docs.langchain.com/oss/javascript/deepagents/permissions).
 
 ## Human-in-the-loop
 
 Set `interruptOn` to pause before selected tool calls.
 
-Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](/langsmith/javascript/managed-deep-agents-tools#human-in-the-loop).
+Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools#human-in-the-loop).
 
 ## Structured output
 
 Set `responseFormat` when the agent must return data that matches a schema instead of an unconstrained text response.
 
-See [Structured output](/oss/javascript/langchain/structured-output).
+See [Structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output).
 
-Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](/langsmith/javascript/managed-deep-agents-project-structure).
+Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-project-structure).
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-agent-definition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/managed-deep-agents-agent-definition.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

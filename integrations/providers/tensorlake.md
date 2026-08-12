@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Tensorlake integrations
 
 > Integrate with Tensorlake using LangChain Python.
@@ -25,15 +21,13 @@ Learn more at [docs.tensorlake.ai](https://docs.tensorlake.ai/introduction)
 
 ## Installation
 
-<CodeGroup>
-  ```bash pip theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  pip install -U langchain-tensorlake
-  ```
+```bash
+pip install -U langchain-tensorlake
+```
 
-  ```bash uv theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
-  uv add langchain-tensorlake
-  ```
-</CodeGroup>
+```bash
+uv add langchain-tensorlake
+```
 
 ***
 
@@ -60,7 +54,7 @@ Get your Tensorlake API key from the [Tensorlake Cloud Console](https://cloud.te
 
 ### 2. Import necessary packages
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_tensorlake import document_markdown_tool
 from langchain.agents import create_agent
 import asyncio
@@ -69,7 +63,7 @@ import os
 
 ### 3. Build a signature detection Agent
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 async def main(question):
     # Create the agent with the Tensorlake tool
     agent = create_agent(
@@ -94,7 +88,7 @@ async def main(question):
 
 ### 4. Example usage
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 # Define the path to the document to be parsed
 path = "path/to/your/document.pdf"
 
@@ -112,12 +106,8 @@ Reach out to us on [Slack](https://join.slack.com/t/tensorlakecloud/shared_invit
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tensorlake.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/tensorlake.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

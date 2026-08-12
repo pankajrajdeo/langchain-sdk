@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Google Vertex AI search integration
 
 > Integrate with the Google Vertex AI search retriever using LangChain Python.
@@ -12,13 +8,13 @@
 
 > `Vertex AI Search` is available in the `Google Cloud Console` and via an API for enterprise workflow integration.
 
-This notebook demonstrates how to configure `Vertex AI Search` and use the Vertex AI Search [retriever](/oss/python/deepagents/retrieval). The Vertex AI Search retriever encapsulates the [Python client library](https://cloud.google.com/generative-ai-app-builder/docs/libraries#client-libraries-install-python) and uses it to access the [Search Service API](https://cloud.google.com/python/docs/reference/discoveryengine/latest/google.cloud.discoveryengine_v1beta.services.search_service).
+This notebook demonstrates how to configure `Vertex AI Search` and use the Vertex AI Search [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). The Vertex AI Search retriever encapsulates the [Python client library](https://cloud.google.com/generative-ai-app-builder/docs/libraries#client-libraries-install-python) and uses it to access the [Search Service API](https://cloud.google.com/python/docs/reference/discoveryengine/latest/google.cloud.discoveryengine_v1beta.services.search_service).
 
 For detailed documentation of all `VertexAISearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-google-community/vertex_ai_search/VertexAISearchRetriever).
 
 ### Integration details
 
-<ItemTable category="document_retrievers" item="VertexAISearchRetriever" />
+> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/retrievers/google_vertex_ai_search).
 
 ## Setup
 
@@ -26,7 +22,7 @@ For detailed documentation of all `VertexAISearchRetriever` features and configu
 
 You need to install the `langchain-google-community` and `google-cloud-discoveryengine` packages to use the Vertex AI Search retriever.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 pip install -qU langchain-google-community google-cloud-discoveryengine
 ```
 
@@ -51,7 +47,7 @@ With ADC, you can make credentials available to your application in a variety of
 
 If running in [Google Colab](https://colab.google) authenticate with `google.colab.google.auth` otherwise follow one of the [supported methods](https://cloud.google.com/docs/authentication/application-default-credentials) to make sure that you Application Default Credentials are properly set.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import sys
 
 if "google.colab" in sys.modules:
@@ -125,9 +121,9 @@ To update to the new retriever, make the following changes:
 * Change the import from: `from langchain.retrievers import GoogleCloudEnterpriseSearchRetriever` -> `from langchain_google_community import VertexAISearchRetriever`.
 * Change all class references from `GoogleCloudEnterpriseSearchRetriever` -> `VertexAISearchRetriever`.
 
-Note: When using the retriever, if you want to get automated tracing from individual queries, you can also set your [LangSmith](/langsmith/observability) API key by uncommenting below:
+Note: When using the retriever, if you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
 os.environ["LANGSMITH_TRACING"] = "true"
 ```
@@ -136,7 +132,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ### Configure and use the retriever for **unstructured** data with extractive segments
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_google_community import (
     VertexAIMultiTurnSearchRetriever,
     VertexAISearchRetriever,
@@ -148,7 +144,7 @@ SEARCH_ENGINE_ID = "<YOUR SEARCH APP ID>"  # Set to your search app ID
 DATA_STORE_ID = "<YOUR DATA STORE ID>"  # Set to your data store ID
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAISearchRetriever(
     project_id=PROJECT_ID,
     location_id=LOCATION_ID,
@@ -157,7 +153,7 @@ retriever = VertexAISearchRetriever(
 )
 ```
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 query = "What are Alphabet's Other Bets?"
 
 result = retriever.invoke(query)
@@ -167,7 +163,7 @@ for doc in result:
 
 ### Configure and use the retriever for **unstructured** data with extractive answers
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAISearchRetriever(
     project_id=PROJECT_ID,
     location_id=LOCATION_ID,
@@ -184,7 +180,7 @@ for doc in result:
 
 ### Configure and use the retriever for **structured** data
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAISearchRetriever(
     project_id=PROJECT_ID,
     location_id=LOCATION_ID,
@@ -200,7 +196,7 @@ for doc in result:
 
 ### Configure and use the retriever for **website** data with advanced website indexing
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAISearchRetriever(
     project_id=PROJECT_ID,
     location_id=LOCATION_ID,
@@ -218,7 +214,7 @@ for doc in result:
 
 ### Configure and use the retriever for **blended** data
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAISearchRetriever(
     project_id=PROJECT_ID,
     location_id=LOCATION_ID,
@@ -236,7 +232,7 @@ for doc in result:
 
 [Search with follow-ups](https://cloud.google.com/generative-ai-app-builder/docs/multi-turn-search) is based on generative AI models and it is different from the regular unstructured data search.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 retriever = VertexAIMultiTurnSearchRetriever(
     project_id=PROJECT_ID, location_id=LOCATION_ID, data_store_id=DATA_STORE_ID
 )
@@ -258,12 +254,8 @@ For detailed documentation of all `VertexAISearchRetriever` features and configu
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_vertex_ai_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/google_vertex_ai_search.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

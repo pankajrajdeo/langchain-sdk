@@ -1,7 +1,3 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # Alibaba cloud integrations
 
 > Integrate with Alibaba cloud using LangChain Python.
@@ -19,28 +15,24 @@
 
 ### Qwen QwQ chat
 
-See [installation instructions and a usage example](/oss/python/integrations/chat/qwq)
+See [installation instructions and a usage example](https://docs.langchain.com/oss/python/integrations/chat/qwq)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qwq import ChatQwQ
 ```
 
 ### Qwen model chat
 
-See [installation instructions and a usage example](/oss/python/integrations/chat/qwen)
+See [installation instructions and a usage example](https://docs.langchain.com/oss/python/integrations/chat/qwen)
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 from langchain_qwq import ChatQwen
 ```
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/alibaba_cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/alibaba_cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

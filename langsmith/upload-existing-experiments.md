@@ -1,9 +1,5 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
-> Use this file to discover all available pages before exploring further.
-
 # How to upload experiments run outside of LangSmith with the REST API
-
+> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/upload-existing-experiments)
 Some users prefer to manage their datasets and run their experiments outside of LangSmith, but want to use the LangSmith UI to view the results. This is supported via our endpoint.
 
 This guide will show you how to upload evals using the REST API, using the `requests` library in Python as an example. However, the same principles apply to any language.
@@ -14,7 +10,7 @@ Uploading an experiment requires specifying the relevant high-level information 
 
 You may use the following schema to upload experiments to the `/datasets/upload-experiment` endpoint:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "experiment_name": "string (required)",
   "experiment_description": "string (optional)",
@@ -104,7 +100,7 @@ The response JSON will be a dict with keys `experiment` and `dataset`, each of w
 
 ## Considerations
 
-You may upload multiple experiments to the same dataset by providing the same dataset\_id or dataset\_name between multiple calls. Your experiments will be grouped together under a single dataset, and you will be able to [use the comparison view to compare results between experiments](/langsmith/compare-experiment-results).
+You may upload multiple experiments to the same dataset by providing the same dataset\_id or dataset\_name between multiple calls. Your experiments will be grouped together under a single dataset, and you will be able to [use the comparison view to compare results between experiments](https://docs.langchain.com/langsmith/compare-experiment-results).
 
 Ensure that the start and end times of your individual rows are all between the start and end time of your experiment.
 
@@ -116,7 +112,7 @@ You may not upload experiments to a dataset that was not created via this endpoi
 
 Below is an example of a simple call to the `/datasets/upload-experiment`. This is a basic example that just uses the most important fields as an illustration.
 
-```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```python
 import os
 import requests
 
@@ -195,7 +191,7 @@ print(resp.json())
 
 Below is the response received:
 
-```json theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+```json
 {
   "dataset": {
     "name": "my-external-dataset",
@@ -250,22 +246,18 @@ Note that the latency and feedback stats in the experiment results are null beca
 
 ## View the experiment in the UI
 
-Now, login to the UI and click on your newly-created dataset! You should see a single experiment: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=797dd62e7cd3f833cd13bafcedfa5607" alt="Uploaded experiments table" width="3454" height="1914" data-path="langsmith/images/uploaded-dataset.png" />
+Now, login to the UI and click on your newly-created dataset! You should see a single experiment: <img alt="Uploaded experiments table" />
 
-Your examples will have been uploaded: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset-examples.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=093061568ece423d5a2c4cb2b5df2721" alt="Uploaded examples" width="3454" height="1912" data-path="langsmith/images/uploaded-dataset-examples.png" />
+Your examples will have been uploaded: <img alt="Uploaded examples" />
 
-Clicking on your experiment will bring you to the comparison view: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-experiment.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=d66c9ea1cfbb1acf4f591b11f54a71da" alt="Uploaded experiment comparison view" width="3452" height="1912" data-path="langsmith/images/uploaded-experiment.png" />
+Clicking on your experiment will bring you to the comparison view: <img alt="Uploaded experiment comparison view" />
 
 As you upload more experiments to your dataset, you will be able to compare the results and easily identify regressions in the comparison view.
 
 ***
 
-<div className="source-links">
-  <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
-  </Callout>
+> [!NOTE]
+> [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
 
-  <Callout icon="edit">
-    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-existing-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
-  </Callout>
-</div>
+> [!NOTE]
+> [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/upload-existing-experiments.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
