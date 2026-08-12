@@ -1,0 +1,168 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# CockroachDB chat message history
+
+> Store chat conversation history in CockroachDB using LangChain Python.
+
+`CockroachDBChatMessageHistory` stores chat conversation history in CockroachDB's distributed SQL database.
+
+The code lives in the integration package: [langchain-cockroachdb](https://github.com/cockroachdb/langchain-cockroachdb/).
+
+## Overview
+
+CockroachDBChatMessageHistory provides:
+
+* **Distributed storage**: Chat history automatically replicated across nodes
+* **Strong consistency**: SERIALIZABLE transactions prevent message ordering issues
+* **High availability**: Automatic failover with no data loss
+* **Session isolation**: Each conversation has a unique session ID
+* **PostgreSQL compatibility**: Easy migration from PostgreSQL-based systems
+
+## Setup
+
+### Install
+
+```bash theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install -qU langchain-cockroachdb
+```
+
+### Connection string
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# CockroachDB Cloud
+CONNECTION_STRING = "cockroachdb://user:password@host:26257/database?sslmode=verify-full"
+
+# Local insecure cluster  
+CONNECTION_STRING = "cockroachdb://root@localhost:26257/defaultdb?sslmode=disable"
+```
+
+## Initialization
+
+### Create the message history table
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import asyncio
+from langchain_cockroachdb import CockroachDBChatMessageHistory
+
+# Create table (only needs to be done once)
+async def setup():
+    chat_history = CockroachDBChatMessageHistory(
+        session_id="setup",
+        connection_string=CONNECTION_STRING,
+        table_name="chat_history",
+    )
+    await chat_history._acreate_table_if_not_exists()
+
+asyncio.run(setup())
+```
+
+<Tip>
+  **Optional**: Specify a schema name by using `schema` parameter (default: "public")
+</Tip>
+
+### Initialize for a session
+
+Create a chat history instance for a specific conversation:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+import uuid
+
+session_id = str(uuid.uuid4())  # Unique ID for this conversation
+
+chat_history = CockroachDBChatMessageHistory(
+    session_id=session_id,
+    connection_string=CONNECTION_STRING,
+    table_name="chat_history",
+)
+```
+
+## Usage
+
+### Add messages
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain.messages import HumanMessage, AIMessage
+
+# Add messages to the conversation
+await chat_history.aadd_message(HumanMessage(content="Hello! What is CockroachDB?"))
+await chat_history.aadd_message(AIMessage(content="CockroachDB is a distributed SQL database..."))
+```
+
+### Add multiple messages at once
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+messages = [
+    HumanMessage(content="What are vector indexes?"),
+    AIMessage(content="Vector indexes enable fast similarity search..."),
+    HumanMessage(content="How do they work?"),
+    AIMessage(content="They use approximate nearest neighbor algorithms..."),
+]
+
+await chat_history.aadd_messages(messages)
+```
+
+### Retrieve messages
+
+Get all messages for the session:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+messages = await chat_history.aget_messages()
+
+for msg in messages:
+    if isinstance(msg, HumanMessage):
+        print(f"User: {msg.content}")
+    elif isinstance(msg, AIMessage):
+        print(f"AI: {msg.content}")
+```
+
+### Clear conversation history
+
+Delete all messages for the session:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+await chat_history.aclear()
+```
+
+## Sync interface
+
+Use the synchronous API:
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Sync usage
+chat_history_sync = CockroachDBChatMessageHistory(
+    session_id=session_id,
+    connection_string=CONNECTION_STRING,
+    table_name="chat_history",
+)
+
+# Sync operations
+chat_history_sync.add_message(HumanMessage(content="Hello!"))
+messages = chat_history_sync.messages
+chat_history_sync.clear()
+```
+
+## API reference
+
+For detailed documentation:
+
+* [GitHub repository](https://github.com/cockroachdb/langchain-cockroachdb)
+* [PyPI package](https://pypi.org/project/langchain-cockroachdb/)
+
+## Additional resources
+
+* [CockroachDB documentation](https://www.cockroachlabs.com/docs/)
+* [CockroachDB Cloud](https://cockroachlabs.cloud)
+
+***
+
+<div className="source-links">
+  <Callout icon="terminal-2">
+    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+  </Callout>
+
+  <Callout icon="edit">
+    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/chat_message_histories/cockroachdb.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+  </Callout>
+</div>

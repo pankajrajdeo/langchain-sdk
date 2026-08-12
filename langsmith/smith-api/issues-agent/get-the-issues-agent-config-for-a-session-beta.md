@@ -1,0 +1,347 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Get the issues agent config for a session (Beta)
+
+> **Beta:** This endpoint is in active development and may change without notice.
+
+Returns the issues agent config attached to the given tracer session.
+
+
+
+## OpenAPI
+
+````yaml /langsmith/langsmith-platform-openapi.json get /api/v1/platform/sessions/{session_id}/issues-agent
+openapi: 3.1.0
+info:
+  title: LangSmith
+  description: >+
+    The LangSmith API is used to programmatically create and manage LangSmith
+    resources.
+
+
+    ## Host
+
+    https://api.smith.langchain.com
+
+
+    ## Authentication
+
+    To authenticate with the LangSmith API, set the `X-Api-Key` header
+
+    to a valid [LangSmith API
+    key](https://docs.langchain.com/langsmith/create-account-api-key#create-an-api-key).
+
+  version: 0.1.0
+servers:
+  - url: /
+security: []
+tags:
+  - name: run
+    x-group: Tracing
+  - name: runs
+    x-group: Tracing
+  - name: sessions
+    x-group: Tracing
+  - name: tracer-sessions
+    x-group: Tracing
+  - name: threads
+    x-group: Threads
+  - name: datasets
+    x-group: Datasets
+  - name: examples
+    x-group: Datasets
+  - name: evaluators
+    x-group: Evaluation
+  - name: experiment-view-overrides
+    x-group: Evaluation
+  - name: experiments
+    x-group: Evaluation
+  - name: annotation-queues
+    x-group: Feedback & Annotation
+  - name: annotation_queues
+    x-group: Feedback & Annotation
+  - name: feedback
+    x-group: Feedback & Annotation
+  - name: feedback-configs
+    x-group: Feedback & Annotation
+  - name: alert_rules
+    x-group: Monitoring
+  - name: bulk-exports
+    x-group: Monitoring
+  - name: charts
+    x-group: Monitoring
+  - name: commits
+    x-group: Prompts & Playground
+  - name: directories
+    x-group: Prompts & Playground
+  - name: hub_environments
+    x-group: Prompts & Playground
+  - name: playground-settings
+    x-group: Prompts & Playground
+  - name: prompt-webhooks
+    x-group: Prompts & Playground
+  - name: prompts
+    x-group: Prompts & Playground
+  - name: tag-transitions
+    x-group: Prompts & Playground
+  - name: comments
+    x-group: Prompt Hub
+  - name: likes
+    x-group: Prompt Hub
+  - name: optimization-jobs
+    x-group: Prompt Hub
+  - name: ownerships
+    x-group: Prompt Hub
+  - name: repos
+    x-group: Prompt Hub
+  - name: settings
+    x-group: Prompt Hub
+  - name: tags
+    x-group: Prompt Hub
+  - name: integrations
+    x-group: Integrations & Tools
+  - name: mcp
+    x-group: Integrations & Tools
+  - name: mcp_vendors
+    x-group: Integrations & Tools
+  - name: oauth
+    x-group: Integrations & Tools
+  - name: tools
+    x-group: Integrations & Tools
+  - name: gateway-policies
+    x-group: LLM Gateway
+  - name: sandboxes
+    x-group: Sandboxes
+  - name: issues
+    x-group: Issues
+  - name: issues-agent
+    x-group: Issues
+  - name: Organizations
+    x-group: Administration
+  - name: SCIM Tokens
+    x-group: Administration
+  - name: TTL Settings
+    x-group: Administration
+  - name: access_policies
+    x-group: Administration
+  - name: api-key
+    x-group: Administration
+  - name: audit-logs
+    x-group: Administration
+  - name: auth
+    x-group: Administration
+  - name: aws_marketplace
+    x-group: Administration
+  - name: data_planes
+    x-group: Administration
+  - name: me
+    x-group: Administration
+  - name: orgs
+    x-group: Administration
+  - name: service-accounts
+    x-group: Administration
+  - name: tenant
+    x-group: Administration
+  - name: ttl-settings
+    x-group: Administration
+  - name: usage-limits
+    x-group: Administration
+  - name: workspaces
+    x-group: Administration
+  - name: ace
+    x-group: System
+  - name: backfills
+    x-group: System
+  - name: features
+    x-group: System
+  - name: info
+    x-group: System
+  - name: model-price-map
+    x-group: System
+  - name: public
+    x-group: System
+  - name: fleet orgs
+  - name: fleet secrets
+  - name: fleet tenants
+  - name: fleet users
+paths:
+  /api/v1/platform/sessions/{session_id}/issues-agent:
+    get:
+      tags:
+        - issues-agent
+      summary: Get the issues agent config for a session (Beta)
+      description: >-
+        **Beta:** This endpoint is in active development and may change without
+        notice.
+
+
+        Returns the issues agent config attached to the given tracer session.
+      parameters:
+        - description: Tracer session ID (UUID)
+          name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.IssuesAgent'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+      security:
+        - API Key: []
+        - Tenant ID: []
+        - Bearer Auth: []
+components:
+  schemas:
+    tracer_session_issues_agent.IssuesAgent:
+      type: object
+      properties:
+        agent_overview_accepted:
+          type: boolean
+        context_hub_repo_handle:
+          type: string
+        created_at:
+          type: string
+        cron_enabled:
+          type: boolean
+        cron_schedule:
+          type: string
+        engine_version:
+          type: string
+        github_base_branch:
+          type: string
+        github_repo_subdir:
+          type: string
+        github_repo_url:
+          type: string
+        id:
+          type: string
+        issue_count:
+          type: integer
+        latest_run_id:
+          type: string
+        latest_thread_id:
+          description: >-
+            IDs of the latest run on LangSmith Deployments; NULL until first
+            trigger.
+          type: string
+        preview_verify_enabled:
+          description: >-
+            PreviewVerifyEnabled lets this board's fix runs use preview
+            deployments
+
+            when the deployment-wide preview verification kill switch is also
+            on.
+          type: boolean
+        priorities:
+          items:
+            type: string
+          type: array
+        run_filter:
+          description: >-
+            RunFilter is a runs-filter-DSL string scoping which traces Engine
+            analyzes
+
+            (prompt guidance, not an enforced query). NULL = no scope. Clamped
+            by
+
+            validateRunFilter.
+          type: string
+        session_agent_overview_repo_id:
+          type: string
+        session_id:
+          type: string
+        session_lcu_spend_limit_monthly:
+          description: >-
+            SessionLCUSpendLimitMonthly is the per-project monthly Engine LCU
+            spend
+
+            limit: NULL/negative = no limit; 0 or positive = monthly cap (spend
+            is
+
+            never negative, so a cap of 0 always reads as reached). Enforced in
+
+            addition to (and independently of) the org-level limit. Serialized
+            as a
+
+            string to preserve NUMERIC(28,6) precision.
+          type: string
+        session_name:
+          description: JOINed from tracer_session
+          type: string
+        tenant_id:
+          type: string
+        tenant_name:
+          description: >-
+            JOINed from tenants (workspace label); resolved server-side so the
+            org-admin list can label rows across workspaces the caller isn't a
+            member of
+          type: string
+        updated_at:
+          type: string
+        user_instructions:
+          description: >-
+            User-owned freeform preferences. Engine reads this as authoritative
+
+            context and reconciles it into the Agent Overview on the next scan,
+            but
+
+            never edits it. NULL when the user hasn't set any.
+          type: string
+    tracer_session_issues_agent.ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    API Key:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    Tenant ID:
+      type: apiKey
+      in: header
+      name: X-Tenant-Id
+    Bearer Auth:
+      type: http
+      description: >-
+        Bearer tokens are used to authenticate from the UI. Must also specify
+        x-tenant-id or x-organization-id (for org scoped apis).
+      scheme: bearer
+
+````

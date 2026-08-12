@@ -1,0 +1,46 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# Alibaba cloud integrations
+
+> Integrate with Alibaba cloud using LangChain Python.
+
+> [Alibaba Group Holding Limited (Wikipedia)](https://en.wikipedia.org/wiki/Alibaba_Group), or `Alibaba`
+> (Chinese: 阿里巴巴), is a Chinese multinational technology company specializing in e-commerce, retail,
+> Internet, and technology.
+>
+> [Alibaba Cloud (Wikipedia)](https://en.wikipedia.org/wiki/Alibaba_Cloud), also known as `Aliyun`
+> (Chinese: 阿里云; pinyin: Ālǐyún; lit. 'Ali Cloud'), is a cloud computing company, a subsidiary
+> of `Alibaba Group`. `Alibaba Cloud` provides cloud computing services to online businesses and
+> Alibaba's own e-commerce ecosystem.
+
+## Chat models
+
+### Qwen QwQ chat
+
+See [installation instructions and a usage example](/oss/python/integrations/chat/qwq)
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain_qwq import ChatQwQ
+```
+
+### Qwen model chat
+
+See [installation instructions and a usage example](/oss/python/integrations/chat/qwen)
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+from langchain_qwq import ChatQwen
+```
+
+***
+
+<div className="source-links">
+  <Callout icon="terminal-2">
+    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+  </Callout>
+
+  <Callout icon="edit">
+    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/alibaba_cloud.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+  </Callout>
+</div>

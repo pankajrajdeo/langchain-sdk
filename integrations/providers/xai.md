@@ -1,0 +1,58 @@
+> ## Documentation Index
+> Fetch the complete documentation index at: https://docs.langchain.com/llms.txt
+> Use this file to discover all available pages before exploring further.
+
+# xAI integrations
+
+> Integrate with xAI using LangChain Python.
+
+<Warning>
+  This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](/oss/python/integrations/providers/groq).
+</Warning>
+
+[xAI](https://console.x.ai) offers an API to interact with Grok models. This example goes over how to use LangChain to interact with xAI models.
+
+## Installation
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+pip install -U langchain-xai
+```
+
+## Environment
+
+To use xAI, you'll need to [create an API key](https://console.x.ai/). The API key can be passed in as an init param `xai_api_key` or set as environment variable `XAI_API_KEY`.
+
+## Example
+
+See [ChatXAI docs](/oss/python/integrations/chat/xai) for detail and supported features.
+
+```python theme={"theme":{"light":"catppuccin-latte","dark":"catppuccin-mocha"}}
+# Querying chat models with xAI
+
+from langchain_xai import ChatXAI
+
+chat = ChatXAI(
+    # xai_api_key="YOUR_API_KEY",
+    model="grok-4",
+)
+
+# stream the response back from the model
+stream = chat.stream_events("Tell me fun things to do in NYC", version="v3")
+for token in stream.text:
+    print(token, end="", flush=True)
+
+# if you don't want to do streaming, you can use the invoke method
+# chat.invoke("Tell me fun things to do in NYC")
+```
+
+***
+
+<div className="source-links">
+  <Callout icon="terminal-2">
+    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+  </Callout>
+
+  <Callout icon="edit">
+    [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/xai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
+  </Callout>
+</div>
