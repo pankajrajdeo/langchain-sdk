@@ -58,7 +58,7 @@ It remembers for future sessions:
 Both files are appended to the system prompt at startup.
 
 > [!TIP]
-> To generate a repository wiki and wire pointers into `AGENTS.md` and `CLAUDE.md` for coding agents, see [OpenWiki](../../OpenWiki/overview.md).
+> To generate a repository wiki and wire pointers into `AGENTS.md` and `CLAUDE.md` for coding agents, see [OpenWiki](../../openwiki/overview.md).
 
 ### How memory works
 

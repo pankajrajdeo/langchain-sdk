@@ -5,7 +5,7 @@ Add persistent memory to agents built with Deep Agents so they learn and improve
 Memory lets your agent learn and improve across conversations. Deep Agents makes memory first class with filesystem-backed memory: the agent reads and writes memory as files, and you control where those files are stored using [backends](backends.md).
 
 > [!TIP]
-> To generate a repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](../OpenWiki/overview.md).
+> To generate a repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](../openwiki/overview.md).
 
 > [!NOTE]
 > This page covers **long-term memory**: memory that persists across conversations. For short-term memory (conversation history and scratch files within a single session), see the [context engineering](context-engineering.md) guide. Short-term memory is managed automatically as part of the agent's [state](../langgraph/graph-api.md#state).
@@ -20,7 +20,7 @@ Memory lets your agent learn and improve across conversations. Deep Agents makes
 
 The two most common patterns are [agent-scoped memory](#agent-scoped-memory) (shared across all users) and [user-scoped memory](#user-scoped-memory) (isolated per user).
 
-For a generated repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](../OpenWiki/overview.md).
+For a generated repository wiki that coding agents discover through [`AGENTS.md`](https://agents.md/), see [OpenWiki](../openwiki/overview.md).
 
 ## Scoped memory
 
@@ -258,7 +258,7 @@ On top of the basic configuration options for memory paths and scope, you can al
 
 ### Episodic memory
 
-Episodic memory stores records of past experiences: what happened, in what order, and what the outcome was. Unlike semantic memory (facts and preferences stored in files like `AGENTS.md`), episodic memory preserves the full conversational context so the agent can recall *how* a problem was solved, not just *what* was learned from it. To generate and maintain a repository-level wiki for coding agents, see [OpenWiki](../OpenWiki/overview.md).
+Episodic memory stores records of past experiences: what happened, in what order, and what the outcome was. Unlike semantic memory (facts and preferences stored in files like `AGENTS.md`), episodic memory preserves the full conversational context so the agent can recall *how* a problem was solved, not just *what* was learned from it. To generate and maintain a repository-level wiki for coding agents, see [OpenWiki](../openwiki/overview.md).
 
 Deep Agents already use [checkpointers](../langgraph/checkpointers.md#checkpoints) which is the mechanism that supports episodic memory: every conversation is persisted as a checkpointed thread.
 
@@ -504,7 +504,7 @@ Use `assistant_id` alone if you only need per-agent isolation without per-user s
 
 ## See also
 
-* [OpenWiki](../OpenWiki/overview.md): Generate and maintain repository wikis that coding agents find through `AGENTS.md`
+* [OpenWiki](../openwiki/overview.md): Generate and maintain repository wikis that coding agents find through `AGENTS.md`
 * [Backends](backends.md): Choose where memory files are stored
 * [Context engineering](context-engineering.md): Short-term memory, offloading, and summarization
 * [Skills](skills.md): On-demand procedural memory

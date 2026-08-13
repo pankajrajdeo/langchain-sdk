@@ -23,7 +23,7 @@ This page explains how to:
 > We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 > [!TIP]
-> To generate a durable repository wiki that agents can read through filesystem tools, see [OpenWiki](../OpenWiki/overview.md).
+> To generate a durable repository wiki that agents can read through filesystem tools, see [OpenWiki](../openwiki/overview.md).
 
 ## Quickstart
 
@@ -304,7 +304,7 @@ agent = create_deep_agent(
 * CI sandboxes
 * Mounted persistent volumes
 
-For a durable repository wiki that agents can read with these filesystem tools (from `openwiki/`), see [OpenWiki](../OpenWiki/overview.md).
+For a durable repository wiki that agents can read with these filesystem tools (from `openwiki/`), see [OpenWiki](../openwiki/overview.md).
 
 > [!TIP]
 > **Wrap `FilesystemBackend` in a `CompositeBackend`** for most use cases. Deep Agents automatically write internal data to the backend, including offloaded large tool results (under `/large_tool_results/`) and conversation history (under `/conversation_history/`). When you use `FilesystemBackend` alone, these internal files are written to real disk under `root_dir`, mixing agent artifacts with your project files.
@@ -1154,7 +1154,7 @@ Supporting types:
 
 ## See also
 
-* [OpenWiki](../OpenWiki/overview.md): Generate durable repository Markdown that agents read through filesystem tools
+* [OpenWiki](../openwiki/overview.md): Generate durable repository Markdown that agents read through filesystem tools
 * [Memory](memory.md): Filesystem-backed long-term memory
 * [Sandboxes](sandboxes.md): Isolated filesystem and shell execution
 

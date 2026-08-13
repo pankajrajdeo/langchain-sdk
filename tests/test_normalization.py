@@ -4,6 +4,7 @@ from update_docs import (
     Download,
     add_fragment_aliases,
     links_from,
+    local_path_for,
     normalize_markdown,
     validate_mirror_links,
 )
@@ -17,6 +18,13 @@ class MarkdownNormalizationTests(unittest.TestCase):
         body, warnings = normalize_markdown(text.encode(), PAGE_URL)
         self.assertEqual(warnings, [])
         return body.decode()
+
+    def test_openwiki_paths_use_lowercase_directory(self) -> None:
+        path = local_path_for(
+            "https://docs.langchain.com/oss/openwiki/automate-updates"
+        )
+        self.assertEqual(path.parent.name, "openwiki")
+        self.assertEqual(path.name, "automate-updates.md")
 
     def test_nested_tabs_and_code_groups_become_gfm(self) -> None:
         output = self.normalize(

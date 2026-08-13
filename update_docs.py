@@ -67,7 +67,7 @@ SECTIONS = (
     Section("deepagents", "/oss/python/deepagents", f"{ORIGIN}/oss/python/deepagents/"),
     Section("langchain", "/oss/python/langchain", f"{ORIGIN}/oss/python/langchain/"),
     Section("langgraph", "/oss/python/langgraph", f"{ORIGIN}/oss/python/langgraph/"),
-    Section("OpenWiki", "/oss/openwiki", f"{ORIGIN}/oss/openwiki/"),
+    Section("openwiki", "/oss/openwiki", f"{ORIGIN}/oss/openwiki/"),
     Section("integrations", "/oss/python/integrations", f"{ORIGIN}/oss/python/integrations/"),
     Section("langsmith", "/langsmith", f"{ORIGIN}/langsmith/"),
     # This user-requested route does not exist as of the latest run. Keeping

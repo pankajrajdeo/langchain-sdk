@@ -3043,7 +3043,7 @@ result = agent.invoke(
 Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your deep agent.
 
 > [!TIP]
-> To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../OpenWiki/overview.md).
+> To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../openwiki/overview.md).
 
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 

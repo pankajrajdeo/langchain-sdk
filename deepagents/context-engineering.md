@@ -192,7 +192,7 @@ agent = create_deep_agent(
 
 Unlike skills, memory is always injected—there is no progressive disclosure. Keep memory minimal to avoid context overload; use [skills](skills.md) for detailed workflows and domain-specific content. See [Memory](customization.md#memory) for configuration details.
 
-To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../OpenWiki/overview.md).
+To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../openwiki/overview.md).
 
 ### Skills
 
@@ -1146,7 +1146,7 @@ See [Long-term memory](memory.md) for setup and use cases.
 * [Multimodal](multimodal.md): images, audio, video, and multimodal tool outputs
 * [Subagents](subagents.md): Context isolation, runtime context propagation
 * [Long-term memory](memory.md): Cross-thread persistence
-* * [OpenWiki](../OpenWiki/overview.md): Repository wikis that coding agents find through `AGENTS.md`
+* * [OpenWiki](../openwiki/overview.md): Repository wikis that coding agents find through `AGENTS.md`
 * [Skills](skills.md): Progressive disclosure and skill authoring
 * [Backends](backends.md): Filesystem backends and CompositeBackend
 * [Context conceptual overview](../concepts/context.md): Context types and lifecycle

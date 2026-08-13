@@ -291,7 +291,7 @@ Passing your own [`FilesystemMiddleware`](https://reference.langchain.com/python
 The virtual filesystem is used by several other harness capabilities such as skills, memory, code execution, and context management.
 You can also use the file system when building custom tools and middleware for Deep Agents.
 
-For more information, see [backends](backends.md). To generate a durable repository wiki that agents can read from the filesystem, see [OpenWiki](../OpenWiki/overview.md).
+For more information, see [backends](backends.md). To generate a durable repository wiki that agents can read from the filesystem, see [OpenWiki](../openwiki/overview.md).
 
 ### Filesystem permissions
 
@@ -355,7 +355,7 @@ Memory uses [`AGENTS.md` files](https://agents.md/) that you pass through the `m
 
 The agent can also update memory based on interactions and feedback, so preferences and patterns can carry forward without needing to restate them in each thread.
 
-For configuration details and examples, see [Memory](customization.md#memory). To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../OpenWiki/overview.md).
+For configuration details and examples, see [Memory](customization.md#memory). To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../openwiki/overview.md).
 
 ### Summarization and context offloading
 
