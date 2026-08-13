@@ -1,6 +1,6 @@
 # Track and limit evaluator spend
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluator-spend)
-Cap weekly LLM spend on evaluators with an organization-wide default or per-evaluator overrides to keep evaluator costs predictable.
+
+> Cap weekly LLM spend on evaluators with an organization-wide default or per-evaluator overrides to keep evaluator costs predictable.
 
 Cap weekly LLM spend per evaluator to prevent a single evaluator from exceeding your budget. LangSmith tracks week-to-date evaluator spend, resetting at Monday 12AM UTC. It lets [organization admins](rbac.md#organization-admin) set a weekly cap on each evaluator's [attached projects and datasets](evaluation-concepts.md#attaching-an-evaluator-to-a-tracing-project-or-dataset). The cap can be a single organization-wide default or a custom override on a specific attached project or dataset.
 

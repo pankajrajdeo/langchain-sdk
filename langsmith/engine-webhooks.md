@@ -1,6 +1,6 @@
 # LangSmith Engine webhook events
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-webhooks)
-Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues.
+
+> Reference for the webhook events LangSmith Engine sends when it creates issues or links new traces to existing issues.
 
 Forward LangSmith-detected agent issues into your incident-management, paging, or chat tools. [LangSmith Engine](engine.md) sends a webhook event to your endpoint when it opens a new issue, or when it links a new trace to an issue it has already opened.
 

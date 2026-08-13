@@ -1,5 +1,5 @@
 # Contributing
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/overview)
+
 **Welcome! Thank you for your interest in contributing.**
 
 LangChain has helped form the largest developer community in generative AI, and we're always open to new contributors. Whether you're fixing bugs, adding features, improving documentation, or sharing feedback, your involvement helps make LangChain and LangGraph better for everyone 🦜❤️

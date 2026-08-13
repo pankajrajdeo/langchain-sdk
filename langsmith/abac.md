@@ -1,5 +1,5 @@
 # Attribute-based access control
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/abac)
+
 This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](rbac.md). For automated user provisioning into roles, see [SCIM](user-management.md#set-up-scim-for-your-organization).
 
 > [!NOTE]

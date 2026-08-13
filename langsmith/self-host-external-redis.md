@@ -1,5 +1,5 @@
 # Connect to an external Redis or Valkey database
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-external-redis)
+
 LangSmith uses Redis to back our queuing/caching operations. By default, LangSmith Self-Hosted will use an internal Redis instance. However, you can configure LangSmith to use an external Redis instance. By configuring an external Redis instance, you can more easily manage backups, scaling, and other operational tasks for your Redis instance.
 
 [Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](#requirements) for supported versions.
@@ -190,13 +190,9 @@ stringData:
   redis_cluster_password: "your_redis_password"
 ```
 
-<a id="azure-cache-for-redis"></a>
-
 ## Azure managed Redis
 
 [Azure Managed Redis](https://azure.microsoft.com/en-us/products/managed-redis) supports two clustering policies that affect how LangSmith connects to it. Choose the configuration below based on the clustering policy of your instance.
-
-<a id="google-cloud-memorystore"></a>
 
 ### OSS Cluster
 
@@ -356,8 +352,6 @@ commonPodSecurityContext:
 
 If you need more granular control, add the `fsGroup` to each pod's security context individually. See the [mtls configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/mtls_config.yaml) for a complete reference.
 
-<a id="amazon-elasticache"></a>
-
 ## IAM authentication
 
 As of LangSmith helm chart version **0.12.34**, LangSmith supports IAM authentication for standalone Redis. As of LangSmith version **v0.16.0** (v16), Redis Cluster also supports IAM authentication. This allows you to use cloud provider workload identity instead of static passwords.
@@ -366,6 +360,7 @@ As of LangSmith helm chart version **0.12.34**, LangSmith supports IAM authentic
 > Redis Cluster with IAM authentication requires LangSmith v0.16.0 or later. Earlier LangSmith versions support IAM authentication only for standalone Redis. Also, not all cloud providers support IAM authentication for all Redis offerings. Check your cloud provider's documentation to verify IAM support for your specific Redis setup (e.g., GCP only supports IAM for Memorystore Cluster, not standalone Memorystore).
 
 #### AWS
+<a id="amazon-elasticache" />
 
 ### ElastiCache for Redis IAM authentication
 
@@ -451,6 +446,7 @@ ingestQueue:
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 #### GCP
+<a id="google-cloud-memorystore" />
 
 ### Memorystore for Redis IAM authentication
 
@@ -528,6 +524,7 @@ ingestQueue:
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 #### Azure
+<a id="azure-cache-for-redis" />
 
 ### Azure Cache for Redis with Microsoft Entra authentication
 

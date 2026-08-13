@@ -1,6 +1,6 @@
 # AWS Terraform quick reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference)
-Make targets, Terraform commands, kubectl, AWS CLI, and Helm operations for LangSmith self-hosted on AWS EKS.
+
+> Make targets, Terraform commands, kubectl, AWS CLI, and Helm operations for LangSmith self-hosted on AWS EKS.
 
 Command cheat sheet for day-to-day operations against an AWS LangSmith deployment provisioned with the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). All `make` targets run from `modules/aws/`. Run `make help` for an inline summary.
 

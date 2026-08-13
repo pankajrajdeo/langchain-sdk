@@ -1,10 +1,10 @@
 # Sandbox service URLs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-service-urls)
-Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically.
+
+> Access HTTP services running inside sandboxes via authenticated URLs, from a browser or programmatically.
 
 Service URLs let you access an HTTP service running inside a sandbox (a REST API, a Streamlit app, a Jupyter notebook, API documentation) without tunnels, port forwarding, or CLI tools. Each sandbox + port combination gets its own URL that you can open in a browser, call from code, or share with a teammate.
 
-> **Image:** [Service URLs view](sandbox-service-urls.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JxIMPFSEbdqv0n3F/images/langsmith/sandboxes/sb-service-feature.png?fit=max&auto=format&n=JxIMPFSEbdqv0n3F&q=85&s=17f16908ceed5efff1dcf8620e7aea4a" alt="Service URLs view" width="2220" height="1224" data-path="images/langsmith/sandboxes/sb-service-feature.png" />
 
 ## Quick start
 

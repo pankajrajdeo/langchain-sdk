@@ -1,5 +1,5 @@
 # Context engineering in agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/context-engineering)
+
 ## Overview
 
 The hard part of building agents (or any LLM application) is making them reliable enough. While they may work for a prototype, they often fail in real-world use cases.
@@ -25,7 +25,7 @@ A typical agent loop consists of two main steps:
 1. **Model call** - calls the LLM with a prompt and available tools, returns either a response or a request to execute tools
 2. **Tool execution** - executes the tools that the LLM requested, returns tool results
 
-> **Image:** [Core agent loop diagram](context-engineering.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
 
 This loop continues until the LLM decides to finish.
 
@@ -1080,7 +1080,7 @@ As you've seen in [Model Context](#model-context) and [Tool Context](#tool-conte
 1. **Update context** - Modify state and store to persist changes, update conversation history, or save insights
 2. **Jump in the lifecycle** - Move to different steps in the agent cycle based on context (e.g., skip tool execution if a condition is met, repeat model call with modified context)
 
-> **Image:** [Middleware hooks in the agent loop](context-engineering.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware hooks in the agent loop" width="500" height="560" data-path="oss/images/middleware_final.png" />
 
 ### Example: Summarization
 

@@ -1,6 +1,6 @@
 # Build a data analysis agent from scratch
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch)
-Build a data analysis agent step by step using create_agent and Deep Agents middleware.
+
+> Build a data analysis agent step by step using create_agent and Deep Agents middleware.
 
 This guide builds a data analysis agent from first principles using `create_agent` and Deep Agents middleware.
 

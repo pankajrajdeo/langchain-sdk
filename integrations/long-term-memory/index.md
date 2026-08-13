@@ -1,6 +1,6 @@
 # Store integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/long-term-memory/index)
-Integrate with store backends for LangGraph long-term memory.
+
+> Integrate with store backends for LangGraph long-term memory.
 
 Stores enable [long-term memory](../../langgraph/stores.md) in LangGraph, allowing agents to persist and retrieve information across threads.
 

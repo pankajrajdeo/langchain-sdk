@@ -1,6 +1,6 @@
 # Build a custom RAG agent with LangGraph
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
-Build a custom retrieval agent with LangGraph that decides when to search a vector store or respond directly.
+
+> Build a custom retrieval agent with LangGraph that decides when to search a vector store or respond directly.
 
 Build a [retrieval](../deepagents/retrieval.md) agent with LangGraph that decides when to search a vector store versus answering the user directly.
 
@@ -12,7 +12,7 @@ In this tutorial you will:
 2. Index those documents for semantic search and create a retriever tool for the agent.
 3. Build an agentic RAG system that can decide when to use the retriever tool.
 
-> **Image:** [Hybrid RAG](agentic-rag.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/I6RpA28iE233vhYX/images/langgraph-hybrid-rag-tutorial.png?fit=max&auto=format&n=I6RpA28iE233vhYX&q=85&s=855348219691485642b22a1419939ea7" alt="Hybrid RAG" width="1615" height="589" data-path="images/langgraph-hybrid-rag-tutorial.png" />
 
 ### Concepts
 
@@ -527,7 +527,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Agentic RAG graph](agentic-rag.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agentic-rag-output.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=ddedbd57514888e614ece260092201df" alt="Agentic RAG graph" width="1245" height="1395" data-path="oss/images/agentic-rag-output.png" />
 
 ## Run the agentic RAG
 

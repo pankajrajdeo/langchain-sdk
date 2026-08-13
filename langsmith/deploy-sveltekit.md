@@ -1,6 +1,6 @@
 # Deploy with SvelteKit
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-sveltekit)
-Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
+
+> Deploy a LangChain deep agent in a SvelteKit project on Cloudflare Workers with streaming chat and thread history.
 
 The following page details an example app that deploys a LangChain **deep agent** inside a [SvelteKit](https://svelte.dev/docs/kit/introduction) project, built for [Cloudflare Workers](https://svelte.dev/docs/kit/adapter-cloudflare) with [`@sveltejs/adapter-cloudflare`](https://www.npmjs.com/package/@sveltejs/adapter-cloudflare): streaming chat UI, subagent detail views, thread history, and the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) exposed under `/api/threads/...`. No separate backend process is required.
 

@@ -1,5 +1,5 @@
 # Set up LLM-as-a-judge online evaluators
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production traces. This is useful to monitor the performance of your application continuously—to identify issues, measure improvements, and ensure consistent quality over time.
 
 **[LLM-as-a-judge](evaluation-concepts.md#llm-as-judge)** evaluators use an LLM to evaluate traces as a scalable substitute for human-like judgment. This guide covers **run-level** evaluators that evaluate a single run. For evaluating entire conversation threads, see [multi-turn online evaluators](online-evaluations-multi-turn.md).
@@ -76,9 +76,9 @@ If your traces contain multimodal content like images, audio, or documents, you 
      * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator.
      * If you want to include all attachments, use the `{{attachments}`}\` variable.
 
-> **Image:** [Edit evaluator modal with an image attachment selected for the input.](online-evaluations-llm-as-judge.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/PCte2XqN2om94BaK/langsmith/images/variable-multimodal-content-light.png?fit=max&auto=format&n=PCte2XqN2om94BaK&q=85&s=4f96e959ec461208c43add7c5c02b8b0" alt="Edit evaluator modal with an image attachment selected for the input." width="1998" height="1714" data-path="langsmith/images/variable-multimodal-content-light.png" />
 
-> **Image:** [Edit evaluator modal with an image attachment selected for the input.](online-evaluations-llm-as-judge.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/PCte2XqN2om94BaK/langsmith/images/variable-multimodal-content-dark.png?fit=max&auto=format&n=PCte2XqN2om94BaK&q=85&s=d4ac320167a83552d1b928d949b34b04" alt="Edit evaluator modal with an image attachment selected for the input." width="2000" height="1716" data-path="langsmith/images/variable-multimodal-content-dark.png" />
 
 The evaluator can then access these attachments when evaluating the trace. This is useful for evaluators that need to:
 

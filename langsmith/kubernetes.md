@@ -1,5 +1,5 @@
 # Self-host LangSmith on Kubernetes
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/kubernetes)
+
 > [!NOTE]
 > Self-hosting LangSmith is an add-on to the Enterprise Plan designed for our largest, most security-conscious customers. See our [pricing page](https://www.langchain.com/pricing) for more detail, and [contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
@@ -252,7 +252,7 @@ You will also need to specify connection details for any external databases you 
 
    The LangSmith UI should be visible/operational
 
-> **Image:** [Langsmith ui](kubernetes.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-ui.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=5310f686e7b9eebaaee4fe2a152a8675" alt="Langsmith ui" width="2886" height="1698" data-path="langsmith/images/langsmith-ui.png" />
 
 ## Using LangSmith
 

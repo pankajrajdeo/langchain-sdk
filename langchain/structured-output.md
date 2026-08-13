@@ -1,5 +1,5 @@
 # Structured output
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/structured-output)
+
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, [Pydantic models](https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage), or dataclasses that your application can use directly.
 
 > [!TIP]
@@ -66,7 +66,7 @@ class ProviderStrategy(Generic[SchemaT]):
 > [!NOTE]
 > The `strict` param requires `langchain>=1.2`.
 
-#### `Field`
+#### `schema`
 The schema defining the structured output format. Supports:
 
 * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
@@ -74,7 +74,7 @@ The schema defining the structured output format. Supports:
 * **TypedDict**: Typed dictionary classes. Returns dict.
 * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 
-#### `Field`
+#### `strict`
 Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](../integrations/chat/openai.md) and [xAI](../integrations/chat/xai.md)). Defaults to `None` (disabled).
 
 LangChain automatically uses `ProviderStrategy` when you pass a schema type directly to [`create_agent.response_format`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and the model supports native structured output:
@@ -207,7 +207,7 @@ class ToolStrategy(Generic[SchemaT]):
     ]
 ```
 
-#### `Field`
+#### `schema`
 The schema defining the structured output format. Supports:
 
 * **Pydantic models**: `BaseModel` subclasses with field validation. Returns validated Pydantic instance.
@@ -216,11 +216,11 @@ The schema defining the structured output format. Supports:
 * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 * **Union types**: Multiple schema options. The model will choose the most appropriate schema based on the context.
 
-#### `Field`
+#### `tool_message_content`
 Custom content for the tool message returned when structured output is generated.
 If not provided, defaults to a message showing the structured response data.
 
-#### `Field`
+#### `handle_errors`
 Error handling strategy for structured output validation failures. Defaults to `True`.
 
 * **`True`**: Catch all errors with default error template

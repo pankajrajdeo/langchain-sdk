@@ -1,5 +1,5 @@
 # LangSmith Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/studio)
+
 > [!NOTE]
 > **Prerequisites**
 >
@@ -59,7 +59,7 @@ Go from [testing graphs locally](local-dev-testing.md) in Studio to deploying th
 
 ## Video guide
 
-> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/studio).
+> **Embedded Content:** [YouTube video player](https://www.youtube.com/embed/Mi1gSlHwZLM?si=oWCeHQ640zPHoLwn)
 
 ***
 

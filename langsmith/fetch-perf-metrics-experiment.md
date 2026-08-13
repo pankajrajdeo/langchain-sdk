@@ -1,5 +1,5 @@
 # How to fetch performance metrics for an experiment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fetch-perf-metrics-experiment)
+
 > [!TIP]
 > Tracing projects and experiments use the same underlying data structure in our backend, which is called a "session."
 >

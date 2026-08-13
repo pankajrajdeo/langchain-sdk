@@ -1,13 +1,11 @@
 # Streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/streaming)
+
 > [!TIP]
 > For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in LangGraph v1.2. Event streaming gives you separate iterators per projection (messages, values, subgraphs, output) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 This page covers LangGraph's stream-mode API. It exposes graph execution through stream modes such as `updates`, `values`, `messages`, `custom`, `checkpoints`, `tasks`, and `debug`. Use it when you need direct access to graph-runtime events or specific stream-mode output.
 
 ## Get started
-
-<a id="messages"></a>
 
 ### Basic usage
 
@@ -146,6 +144,8 @@ Pass one or more of the following stream modes as a list to the [`stream`](https
 | [checkpoints](#checkpoints) | [`CheckpointStreamPart`](https://reference.langchain.com/python/langgraph/types/CheckpointStreamPart) | Checkpoint events (same format as `get_state()`). Requires a checkpointer.                                                           |
 | [tasks](#tasks)             | [`TasksStreamPart`](https://reference.langchain.com/python/langgraph/types/TasksStreamPart)           | Task start/finish events with results and errors. Requires a checkpointer.                                                           |
 | [debug](#debug)             | [`DebugStreamPart`](https://reference.langchain.com/python/langgraph/types/DebugStreamPart)           | All available info — combines `checkpoints` and `tasks` with extra metadata.                                                         |
+
+<a id="messages" />
 
 ### Graph state
 
@@ -740,6 +740,8 @@ for chunk in graph.stream(
         print(chunk["data"])
 ```
 
+<a id="debug" />
+
 ### Debug
 
 Use the `debug` streaming mode to stream as much information as possible throughout the execution of the graph. The streamed outputs include the name of the node as well as the full state.
@@ -776,8 +778,6 @@ for chunk in graph.stream(inputs, stream_mode=["updates", "custom"], version="v2
 for mode, chunk in graph.stream(inputs, stream_mode=["updates", "custom"]):
     print(chunk)
 ```
-
-<a id="async"></a>
 
 ## Advanced
 
@@ -1039,6 +1039,8 @@ for chunk in graph.stream(
 ):
     print(type(chunk["data"]))  # <class 'MyState'>
 ```
+
+<a id="async" />
 
 ### Async with Python \< 3.11
 

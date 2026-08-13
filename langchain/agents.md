@@ -1,8 +1,8 @@
 # Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/agents)
+
 An agent is a model calling tools in a loop until a given task is complete.
 
-> **Image:** [Core agent loop diagram](agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/core_agent_loop.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=4b4cbb497b6273758a565de1bc90ece0" alt="Core agent loop diagram" width="1060" height="760" data-path="oss/images/core_agent_loop.svg" />
 
 A harness is everything around that loop: the prompt, the tools, and any middleware that shapes the model's behavior.
 
@@ -62,7 +62,7 @@ Building on that, you can configure the basics directly with the `model=`, `tool
 
 ## Core components
 
-> **Image:** [Agent model and harness components diagram](agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_model_harness.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=5ac6a7e0343af7cb5ba3ca632e2224af" alt="Agent model and harness components diagram" width="1200" height="760" data-path="oss/images/agent_model_harness.svg" />
 
 ### Model
 
@@ -863,7 +863,7 @@ for snapshot in stream.values:
 
 Common patterns are prebuilt as first-class middleware. You can build anything else as [custom middleware](middleware/custom.md).
 
-> **Image:** [Agent harness capabilities by category](agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=0ff671d72badd0844826660dfcb04391" alt="Agent harness capabilities by category" width="1500" height="360" data-path="oss/images/agent_harness_capabilities.svg" />
 
 As agents take on complex work, they need support across a few key areas. The middleware ecosystem provides:
 

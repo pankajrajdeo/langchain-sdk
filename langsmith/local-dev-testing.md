@@ -1,6 +1,6 @@
 # Local development & testing
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/local-dev-testing)
-Compare langgraph dev and langgraph up for local development and production-like testing of Agent Server applications.
+
+> Compare langgraph dev and langgraph up for local development and production-like testing of Agent Server applications.
 
 This guide covers how to develop and test [Agent Server](agent-server.md) applications locally. The [LangGraph CLI](cli.md) provides two commands for local development, each optimized for different stages of your workflow:
 

@@ -1,6 +1,6 @@
 # Trace OpenCode sessions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-opencode)
-Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith.
+
+> Capture OpenCode sessions, assistant turns, tool calls, and subagent activity in LangSmith.
 
 The `@langchain/langsmith-opencode` plugin sends [OpenCode](https://opencode.ai/) session traces to LangSmith. Use it to inspect agent turns, model metadata, token usage, tool calls, tool errors, attachments, and subagent activity from your OpenCode workflows.
 

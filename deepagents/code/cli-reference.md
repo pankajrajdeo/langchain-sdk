@@ -1,6 +1,6 @@
 # Command reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/cli-reference)
-Deep Agents Code command-line flags and management subcommands
+
+> Deep Agents Code command-line flags and management subcommands
 
 Deep Agents Code (`dcode`) accepts command-line flags at launch and exposes management subcommands for tools, agents, sessions, skills, credentials, and configuration. Use this page as a reference when you need to override defaults from the shell, run non-interactive tasks in scripts, or automate administration without opening a session. For installation and daily interactive use, see [Quickstart](quickstart.md). For how CLI flags fit into the broader configuration model, see [Configuration](configuration.md).
 

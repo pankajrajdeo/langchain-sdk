@@ -1,6 +1,6 @@
 # Export trace data to BigQuery
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/big-query-bulk-export)
-Load LangSmith trace data into BigQuery using bulk export to GCS.
+
+> Load LangSmith trace data into BigQuery using bulk export to GCS.
 
 > [!NOTE]
 > **Plan restrictions apply**

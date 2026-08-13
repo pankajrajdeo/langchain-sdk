@@ -1,6 +1,6 @@
 # Direct model access
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access)
-Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
+
+> Access provider APIs directly through provider-specific LLM Gateway paths without using the gateway standardization layer.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

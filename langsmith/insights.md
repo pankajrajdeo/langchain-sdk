@@ -1,6 +1,6 @@
 # Discover errors and usage patterns with Insights
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/insights)
-Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review.
+
+> Use LangSmith Insights to automatically analyze traces, detect usage patterns, identify common agent behaviors, and surface failure modes without manual trace review.
 
 Insights automatically analyzes your traces to detect usage patterns, common agent behaviors, and failure modes, so you do not need to review thousands of traces manually.
 
@@ -71,13 +71,13 @@ report = client.generate_insights(
 
 Once your job has completed, you can navigate to the **Insights** tab where you'll see a table of Insights Report. Each Report contains insights generated over a specific sample of traces from the tracing project.
 
-> **Image:** [Image](insights.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/lC4dVnXBXgUXGkP0/langsmith/images/insights-job-results.png?fit=max&auto=format&n=lC4dVnXBXgUXGkP0&q=85&s=1a95e426b2984bcf417f92d1c4d739b6" width="2964" height="1814" data-path="langsmith/images/insights-job-results.png" />
 
 Click into your job to see traces organized into a set of auto-generated categories.
 
 You can drill down through categories and subcategories to view the underlying traces, feedback, and run statistics.
 
-> **Image:** [Image](insights.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4-kFQm9_42J5OnwH/langsmith/images/insights-nav.gif?s=6a22bfd0d94262b7aa78468a8379ea0f" width="800" height="516" data-path="langsmith/images/insights-nav.gif" />
 
 ### Executive summary
 

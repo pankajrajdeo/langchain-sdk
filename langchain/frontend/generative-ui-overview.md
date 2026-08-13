@@ -1,6 +1,6 @@
 # Generative UI overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
-Understand the generative UI spectrum from controlled to declarative to open-ended interfaces
+
+> Understand the generative UI spectrum from controlled to declarative to open-ended interfaces
 
 Generative UI is any pattern where an agent's output presents a user interface
 beyond text. Instead of streaming a paragraph into a chat bubble, the agent drives

@@ -1,5 +1,5 @@
 # Customize user management
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-user-management)
+
 > [!NOTE]
 > This guide assumes you have read the [admin guide](administration-overview.md) and [organization setup guide](set-up-hierarchy.md#set-up-an-organization).
 
@@ -35,7 +35,7 @@ Once a user joins an organization, any changes to their workspaces or roles beyo
 > [!NOTE]
 > By default, all new users are added to the organization’s initially provisioned workspace (**Workspace 1** by default) with the **Workspace Editor** role.
 
-> **Image:** [Update SSO Member Settings](self-host-user-management.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/QEp_iTXiY5U9rQvE/langsmith/images/sso-member-settings-update.png?fit=max&auto=format&n=QEp_iTXiY5U9rQvE&q=85&s=e7274ed7fdd47fe7c4c1f514d78f3ac7" alt="Update SSO Member Settings" width="1769" height="1251" data-path="langsmith/images/sso-member-settings-update.png" />
 
 > [!NOTE]
 > To change your default organization, use **Set Default Organization** in the organization selector dropdown. (Org Admin permissions required in both the source and target organization.)

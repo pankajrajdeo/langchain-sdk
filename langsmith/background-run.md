@@ -1,5 +1,5 @@
 # How to kick off background runs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/background-run)
+
 This guide covers how to kick off background runs for your agent.
 This can be useful for long running jobs.
 

@@ -1,6 +1,6 @@
 # LangSmith Evaluation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation)
-Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio.
+
+> Evaluate and test agent quality at scale with datasets, evaluators, prompts, and Studio.
 
 LangSmith's testing tools help you measure agent quality, iterate on prompts, and debug live in an interactive environment. Evaluation is the core of testing: it scores your agent's outputs against datasets and criteria so you can benchmark versions, catch regressions, and track quality over time.
 

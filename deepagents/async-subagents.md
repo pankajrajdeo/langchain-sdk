@@ -1,6 +1,6 @@
 # Async subagents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/async-subagents)
-Launch background subagents that run concurrently while the supervisor continues interacting with the user
+
+> Launch background subagents that run concurrently while the supervisor continues interacting with the user
 
 Async subagents let a supervisor agent launch background tasks that return immediately, so the supervisor can continue interacting with the user while subagents work concurrently. The supervisor can check progress, send follow-up instructions, or cancel tasks at any point.
 

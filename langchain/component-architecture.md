@@ -1,5 +1,5 @@
 # Component architecture
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/component-architecture)
+
 LangChain's power comes from how its components work together to create sophisticated AI applications. This page provides diagrams showcasing the relationships between different components.
 
 ## Core component ecosystem

@@ -1,6 +1,6 @@
 # Personal mode
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/personal-mode)
-Build a local personal brain wiki from configured sources with OpenWiki.
+
+> Build a local personal brain wiki from configured sources with OpenWiki.
 
 Personal mode builds a local personal brain wiki in `~/.openwiki/wiki` from configured sources such as local repositories, Gmail, Notion, web search, Hacker News, Slack, and X/Twitter.
 

@@ -1,6 +1,6 @@
 # Manage prompts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-prompts)
-Manage prompt versions, environments, and access controls in LangSmith.
+
+> Manage prompt versions, environments, and access controls in LangSmith.
 
 LangSmith provides several tools to help you manage your [*prompts*](prompt-engineering-concepts.md) effectively. This page describes the following features:
 
@@ -144,7 +144,7 @@ Commit to a prompt to trigger the webhook you've configured.
 
 If you do this in the Playground, you'll be prompted to deselect the webhooks you'd like to avoid triggering.
 
-> **Image:** [Commit Playground](manage-prompts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jxELuvrYOtmqoWuD/langsmith/images/commit-playground.png?fit=max&auto=format&n=jxELuvrYOtmqoWuD&q=85&s=e66f27045c1207d84d3477e04009c013" alt="Commit Playground" width="736" height="540" data-path="langsmith/images/commit-playground.png" />
 
 #### Using the API
 
@@ -163,7 +163,7 @@ Here you'll find all of the publicly listed prompts in the LangChain Hub. You ca
 
 To view prompts tied to your workspace, navigate to **Prompts** in the sidebar.
 
-> **Image:** [Prompts tab](manage-prompts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompts-tab.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=d689013c2158309249c547086e145783" alt="Prompts tab" width="3012" height="1704" data-path="langsmith/images/prompts-tab.png" />
 
 ***
 

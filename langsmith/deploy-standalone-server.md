@@ -1,6 +1,6 @@
 # Self-host standalone servers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-standalone-server)
-Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
+
+> Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
 
 This guide shows you how to deploy standalone [Agent Servers](agent-server.md) directly, without a [control plane](control-plane.md). You can deploy the server independently and still send traces to LangSmith ([self-hosted](self-hosted.md) or [Cloud](cloud.md)) for [observability](observability.md) and [evaluation](evaluation.md). Standalone servers are production-ready and provide the most lightweight option for running agents.
 
@@ -18,9 +18,9 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 > [!WARNING]
 > Do not run standalone servers in serverless environments. Scale-to-zero may cause task loss and scaling up will not work reliably.
 
-> **Image:** [Standalone server architecture](deploy-standalone-server.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Mwtbhvs2R50foe4Y/langsmith/images/standalone-server-light.png?fit=max&auto=format&n=Mwtbhvs2R50foe4Y&q=85&s=db67e2add4cf039b1ce2324fa1c1f244" alt="Standalone server architecture" width="752" height="821" data-path="langsmith/images/standalone-server-light.png" />
 
-> **Image:** [Standalone server architecture](deploy-standalone-server.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Mwtbhvs2R50foe4Y/langsmith/images/standalone-server-dark.png?fit=max&auto=format&n=Mwtbhvs2R50foe4Y&q=85&s=57ede6682332db867f1900200f675a5f" alt="Standalone server architecture" width="752" height="821" data-path="langsmith/images/standalone-server-dark.png" />
 
 ### Workflow
 
@@ -73,6 +73,8 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 7. `LANGGRAPH_CLOUD_LICENSE_KEY`: LangSmith license key. This will be used to authenticate ONCE at server start up.
 8. `LANGSMITH_ENDPOINT`: To send traces to a [self-hosted LangSmith](self-hosted.md) instance, set `LANGSMITH_ENDPOINT` to the hostname of the self-hosted LangSmith instance. Do not add a trailing slash to the URL, as this can cause authentication errors.
 9. Egress to `https://beacon.langchain.com` from your network. This is required for license verification and usage reporting if not running in air-gapped mode. See the [Egress documentation](self-host-egress.md) for more details.
+
+<a id="helm" />
 
 ## Kubernetes
 

@@ -1,5 +1,5 @@
 # LangSmith Observability
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/observability)
+
 Traces are a series of steps that your application takes to go from input to output. Each of these individual steps is represented by a run. You can use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-observability) to visualize these execution steps. To use it, [enable tracing for your application](../langsmith/trace-with-langgraph.md). This enables you to do the following:
 
 * [Debug a locally running application](../langsmith/observability-studio.md#debug-langsmith-traces).

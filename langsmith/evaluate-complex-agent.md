@@ -1,5 +1,5 @@
 # Evaluate a complex agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-complex-agent)
+
 In this tutorial, we'll build a customer support bot that helps users navigate a digital music store. Then, we'll go through the three most effective types of evaluations to run on chat bots:
 
 * **[Final response](#final-response-evaluator)**: Evaluate the agent's final response.
@@ -72,7 +72,7 @@ import sqlite3
 
 And here's the database schema (image from [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)):
 
-> **Image:** [Chinook DB](evaluate-complex-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/chinook-diagram.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=5da2a8dcca68f02dfcec11f9c472d341" alt="Chinook DB" width="1672" height="1132" data-path="langsmith/images/chinook-diagram.png" />
 
 ### Define the customer support agent
 
@@ -279,7 +279,7 @@ We can visualize our refund graph:
 # Assumes you're in an interactive Python environmentfrom IPython.display import Image, display ...
 ```
 
-> **Image:** [Refund graph](evaluate-complex-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/refund-graph.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=a65951850208fd3b03848629bdda8ae0" alt="Refund graph" width="256" height="333" data-path="langsmith/images/refund-graph.png" />
 
 #### Lookup agent
 
@@ -322,7 +322,7 @@ qa_graph = create_agent(qa_llm, tools=[lookup_track, lookup_artist, lookup_album
 display(Image(qa_graph.get_graph(xray=True).draw_mermaid_png()))
 ```
 
-> **Image:** [QA Graph](evaluate-complex-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/qa-graph.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=fa838edc78b2b29e8c29807d8c3dd7fd" alt="QA Graph" width="214" height="249" data-path="langsmith/images/qa-graph.png" />
 
 #### Parent agent
 
@@ -394,7 +394,7 @@ We can visualize our compiled parent graph including all of its subgraphs:
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [graph](evaluate-complex-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/agent-tutorial-graph.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=619f9b540ea69b1662b2a599ce78241b" alt="graph" width="646" height="680" data-path="langsmith/images/agent-tutorial-graph.png" />
 
 #### Try it out
 

@@ -1,5 +1,5 @@
 # Evaluation concepts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-concepts)
+
 LLM outputs are non-deterministic, which makes response quality hard to assess. Evaluations (evals) are a way to breakdown what "good" looks like and measure it. LangSmith Evaluation provides a framework for measuring quality throughout the application lifecycle, from pre-deployment testing to production monitoring.
 
 ## What to evaluate
@@ -95,9 +95,9 @@ Offline evaluations run on datasets and examples. The presence of reference outp
 
 A dataset is a *collection of examples* used for evaluating an application. An example is a test input, reference output pair.
 
-> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](evaluation-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/VoZdM8AAAwg3DXcJ/langsmith/images/datasets-light.png?fit=max&auto=format&n=VoZdM8AAAwg3DXcJ&q=85&s=63d27de8050bedc78eb18ccc0d1cad35" alt="List of datasets on the Examples tab in the LangSmith UI." width="2858" height="1016" data-path="langsmith/images/datasets-light.png" />
 
-> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](evaluation-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/VoZdM8AAAwg3DXcJ/langsmith/images/datasets-dark.png?fit=max&auto=format&n=VoZdM8AAAwg3DXcJ&q=85&s=e8d5d874df75cdf0471bcbfb1d29e12c" alt="List of datasets on the Examples tab in the LangSmith UI." width="2838" height="1228" data-path="langsmith/images/datasets-dark.png" />
 
 #### Examples
 
@@ -107,9 +107,9 @@ Each example consists of:
 * **Reference outputs** (optional): a dictionary of reference outputs. These do not get passed to your application, they are only used in evaluators.
 * **Metadata** (optional): a dictionary of additional information that can be used to create filtered views of a dataset.
 
-> **Image:** [Example in the LangSmith UI.](evaluation-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/FQbj5E6QVw8CM9M2/langsmith/images/example-light.png?fit=max&auto=format&n=FQbj5E6QVw8CM9M2&q=85&s=f6d052b31a7f05ad79ed6e7911dfce32" alt="Example in the LangSmith UI." width="2860" height="1456" data-path="langsmith/images/example-light.png" />
 
-> **Image:** [Example in the LangSmith UI.](evaluation-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/FQbj5E6QVw8CM9M2/langsmith/images/example-dark.png?fit=max&auto=format&n=FQbj5E6QVw8CM9M2&q=85&s=aed71efcd061f31f2ee308ef56a44606" alt="Example in the LangSmith UI." width="2868" height="1280" data-path="langsmith/images/example-dark.png" />
 
 Learn more about [managing datasets](manage-datasets.md).
 
@@ -117,7 +117,7 @@ Learn more about [managing datasets](manage-datasets.md).
 
 An *experiment* represents the results of evaluating a specific application version on a dataset. Each experiment captures outputs, evaluator scores, and execution traces for every example in the dataset.
 
-> **Image:** [Experiment view](evaluation-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/experiment-view.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=89c78822157136d0e28e9a110dbdbfd5" alt="Experiment view" width="1633" height="942" data-path="langsmith/images/experiment-view.png" />
 
 Multiple experiments typically run on a given dataset to test different application configurations (e.g., different prompts or LLMs). LangSmith displays all experiments associated with a dataset and supports [comparing multiple experiments](compare-experiment-results.md) side-by-side.
 

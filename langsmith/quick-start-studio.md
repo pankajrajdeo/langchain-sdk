@@ -1,5 +1,5 @@
 # Get started with Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/quick-start-studio)
+
 [Studio](studio.md) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
 
 * Graphs deployed on [cloud or self-hosted](#deployed-graphs).

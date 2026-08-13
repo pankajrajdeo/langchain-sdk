@@ -1,10 +1,10 @@
 # Create a prompt
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/create-a-prompt)
+
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-create-a-prompt), navigate to the **Playground** in the left-hand sidebar or from the application homepage.
 
-> **Image:** [Empty playground](create-a-prompt.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/W4JD1iHHqOz2208Y/langsmith/images/empty-playground-light.png?fit=max&auto=format&n=W4JD1iHHqOz2208Y&q=85&s=786a59677dc324a56ace6047f9e842c7" alt="Empty playground" width="1436" height="529" data-path="langsmith/images/empty-playground-light.png" />
 
-> **Image:** [Empty playground](create-a-prompt.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/W4JD1iHHqOz2208Y/langsmith/images/empty-playground-dark.png?fit=max&auto=format&n=W4JD1iHHqOz2208Y&q=85&s=395803856f558538a1b6412b579ead74" alt="Empty playground" width="1436" height="521" data-path="langsmith/images/empty-playground-dark.png" />
 
 ## Compose your prompt
 
@@ -29,15 +29,15 @@ Prompts become particularly useful when you add variables in your prompt. You ca
 
 * Add `{variable_name}` to your prompt (with one curly brace on each side for f-string or two for mustache).
 
-> **Image:** [Variable in prompt box.](create-a-prompt.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/IBetwXCjfWGXPKi_/langsmith/images/prompt-with-variable-light.png?fit=max&auto=format&n=IBetwXCjfWGXPKi_&q=85&s=82145f5811abf37c65895de427fedcd4" alt="Variable in prompt box." width="1616" height="584" data-path="langsmith/images/prompt-with-variable-light.png" />
 
-> **Image:** [Variable in prompt box.](create-a-prompt.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/IBetwXCjfWGXPKi_/langsmith/images/prompt-with-variable-dark.png?fit=max&auto=format&n=IBetwXCjfWGXPKi_&q=85&s=fd59e4415c81a9c627206e0df182d261" alt="Variable in prompt box." width="1610" height="568" data-path="langsmith/images/prompt-with-variable-dark.png" />
 
 * Highlight text you want to templatize and click **Convert to variable** tooltip button that displays. Enter a name for your variable, and convert.
 
-> **Image:** [Double clicking on a prompt displays the variable icon.](create-a-prompt.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/M4xkWV5X4-OcEJgy/langsmith/images/convert-to-variable-light.png?fit=max&auto=format&n=M4xkWV5X4-OcEJgy&q=85&s=a1c23d34cb194d5c63f0fcab575fc194" alt="Double clicking on a prompt displays the variable icon." width="1590" height="624" data-path="langsmith/images/convert-to-variable-light.png" />
 
-> **Image:** [Double clicking on a prompt displays the variable icon.](create-a-prompt.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/M4xkWV5X4-OcEJgy/langsmith/images/convert-to-variable-dark.png?fit=max&auto=format&n=M4xkWV5X4-OcEJgy&q=85&s=58922b751727b746fd9be5978c7666f7" alt="Double clicking on a prompt displays the variable icon." width="1562" height="634" data-path="langsmith/images/convert-to-variable-dark.png" />
 
 Once you've added a variable, the right panel of the playground will have an **Input** box for a sample input for the prompt variable. Fill these in with values to test the prompt.
 

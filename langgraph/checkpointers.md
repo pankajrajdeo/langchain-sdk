@@ -1,10 +1,10 @@
 # Checkpointers
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/checkpointers)
-LangGraph checkpointers save graph state as checkpoints at each step, enabling persistence, human-in-the-loop, and fault-tolerant execution.
+
+> LangGraph checkpointers save graph state as checkpoints at each step, enabling persistence, human-in-the-loop, and fault-tolerant execution.
 
 A checkpointer saves a snapshot of graph state at each super-step, organized into **threads**. Compile a graph with a checkpointer to enable human-in-the-loop workflows, time travel debugging, fault-tolerant execution, and conversational memory.
 
-> **Image:** [Checkpoints](checkpointers.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/checkpoints.jpg?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=966566aaae853ed4d240c2d0d067467c" alt="Checkpoints" width="2316" height="748" data-path="oss/images/checkpoints.jpg" />
 
 > [!NOTE]
 > **Agent Server handles checkpointing automatically**
@@ -21,6 +21,8 @@ Checkpointers are required for the following features:
 * **Memory**: Checkpointers allow for ["memory"](../concepts/memory.md) between interactions. In the case of repeated human interactions (like conversations) any follow up messages can be sent to that thread, which will retain its memory of previous ones. See [Add memory](add-memory.md) for information on how to add and manage conversation memory using checkpointers.
 * **Time travel**: Checkpointers allow for ["time travel"](use-time-travel.md), allowing users to replay prior graph executions to review and / or debug specific graph steps. In addition, checkpointers make it possible to fork the graph state at arbitrary checkpoints to explore alternative trajectories.
 * **Fault-tolerance**: Checkpointing provides fault-tolerance and error recovery: if one or more nodes fail at a given superstep, you can restart your graph from the last successful step.
+
+<a id="pending-writes" />
 
 * **Pending writes**: When a graph node fails mid-execution at a given [super-step](#super-steps), LangGraph stores pending checkpoint writes from any other nodes that completed successfully at that super-step. When you resume graph execution from that super-step you don't re-run the successful nodes.
 
@@ -209,7 +211,7 @@ In this example, the output of [`get_state_history`](https://reference.langchain
 ]
 ```
 
-> **Image:** [State](checkpointers.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/get_state.jpg?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=38ffff52be4d8806b287836295a3c058" alt="State" width="2692" height="1056" data-path="oss/images/get_state.jpg" />
 
 #### Find a specific checkpoint
 
@@ -240,7 +242,7 @@ Replay re-executes steps from a prior checkpoint. Invoke the graph with a prior 
 
 See [Time travel](use-time-travel.md) for full details and code examples on replaying past executions.
 
-> **Image:** [Replay](checkpointers.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/re_play.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=d7b34b85c106e55d181ae1f4afb50251" alt="Replay" width="2276" height="986" data-path="oss/images/re_play.png" />
 
 ### Update state
 
@@ -248,7 +250,7 @@ You can edit the graph state using [`update_state`](https://reference.langchain.
 
 You can optionally specify `as_node` to control which node the update is treated as coming from, which affects which node executes next. See [Time travel: `as_node`](use-time-travel.md#from-a-specific-node) for details.
 
-> **Image:** [Update](checkpointers.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/checkpoints_full_story.jpg?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=a52016b2c44b57bd395d6e1eac47aa36" alt="Update" width="3705" height="2598" data-path="oss/images/checkpoints_full_story.jpg" />
 
 ## Durability modes
 
@@ -743,8 +745,6 @@ async def aget_delta_channel_history(self, *, config, channels):
 
     return result
 ```
-
-<a id="pending-writes"></a>
 
 #### Pruning with delta channels
 

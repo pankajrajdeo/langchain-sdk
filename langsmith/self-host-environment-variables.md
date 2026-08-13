@@ -1,6 +1,6 @@
 # Configure environment variables in the Helm chart
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-environment-variables)
-How to use commonEnv and extraEnv to configure environment variables across LangSmith services in the Helm chart.
+
+> How to use commonEnv and extraEnv to configure environment variables across LangSmith services in the Helm chart.
 
 The LangSmith Helm chart provides two ways to inject environment variables into services: `commonEnv` and `extraEnv`. Understanding the difference between them helps you configure your deployment correctly and avoid runtime errors.
 

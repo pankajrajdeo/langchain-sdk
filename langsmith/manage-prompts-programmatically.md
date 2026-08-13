@@ -1,5 +1,5 @@
 # Manage prompts programmatically
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-prompts-programmatically)
+
 You can use the LangSmith Python, TypeScript, and Java SDKs to manage prompts programmatically.
 
 > [!NOTE]

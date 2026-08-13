@@ -1,6 +1,6 @@
 # Deploy a Managed Deep Agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy)
-Test and deploy a Managed Deep Agent with the mda CLI.
+
+> Test and deploy a Managed Deep Agent with the mda CLI.
 
 Deploying a Managed Deep Agent compiles a code-first project into a managed LangGraph app, syncs deploy-owned context to [Context Hub](../use-the-context-hub.md), uploads the compiled source, and triggers a LangSmith hosted deployment build.
 

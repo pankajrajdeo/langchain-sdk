@@ -1,5 +1,5 @@
 # Get help
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/get-help)
+
 Connect with the LangChain community, access learning resources, and get the support you need to build with confidence.
 
 ## Learning resources

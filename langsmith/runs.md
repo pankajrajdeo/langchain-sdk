@@ -1,6 +1,6 @@
 # Runs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/runs)
-An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
+
+> An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
 
 A *run* is an invocation of an [assistant](assistants.md). When you execute a run, you specify which assistant to use—either by graph ID for the default assistant, or by assistant ID for a specific configuration.
 

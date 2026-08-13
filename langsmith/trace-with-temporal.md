@@ -1,6 +1,6 @@
 # Trace with Temporal
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-temporal)
-Learn how to trace Temporal workflows and activities in LangSmith using OpenTelemetry.
+
+> Learn how to trace Temporal workflows and activities in LangSmith using OpenTelemetry.
 
 [Temporal](https://temporal.io/) is a durable execution platform that enables developers to build resilient distributed applications. This guide shows you how to trace Temporal workflows and activities in LangSmith using OpenTelemetry.
 

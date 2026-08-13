@@ -1,5 +1,5 @@
 # Subagents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents)
+
 In the **subagents** architecture, a central main [agent](../agents.md) (often referred to as a **supervisor**) coordinates subagents by calling them as [tools](../tools.md). The main agent decides which subagent to invoke, what input to provide, and how to combine results. Subagents are stateless—they don't remember past interactions, with all conversation memory maintained by the main agent. This provides [context](../context-engineering.md) isolation: each subagent invocation works in a clean context window, preventing context bloat in the main conversation.
 
 For built-in subagent support, see [Deep Agents](../../deepagents/subagents.md).

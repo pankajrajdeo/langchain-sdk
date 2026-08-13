@@ -1,6 +1,6 @@
 # LangSmith Observability
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability)
-Instrument your LLM application, investigate traces, and monitor performance in production with LangSmith.
+
+> Instrument your LLM application, investigate traces, and monitor performance in production with LangSmith.
 
 LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics.
 

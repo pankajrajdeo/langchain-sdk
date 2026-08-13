@@ -1,6 +1,6 @@
 # Join & rejoin streams
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin)
-Disconnect from and reconnect to running agent streams
+
+> Disconnect from and reconnect to running agent streams
 
 Join and rejoin lets you disconnect from a running agent stream without stopping the agent, then reconnect to it later. The agent continues executing server-side while the client is away, and you pick up the stream exactly where you left off.
 

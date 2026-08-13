@@ -1,11 +1,11 @@
 # Workflows and agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+
 This guide reviews common workflow and agent patterns.
 
 * Workflows have predetermined code paths and are designed to operate in a certain order.
 * Agents are dynamic and define their own processes and tool usage.
 
-> **Image:** [Agent Workflow](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agent_workflow.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=c217c9ef517ee556cae3fc928a21dc55" alt="Agent Workflow" width="4572" height="2047" data-path="oss/images/agent_workflow.png" />
 
 LangGraph offers several benefits when building agents and workflows, including [persistence](persistence.md), [streaming](streaming.md), and support for debugging as well as [deployment](deploy.md).
 
@@ -43,7 +43,7 @@ llm = ChatAnthropic(model="claude-sonnet-4-6")
 
 Workflows and agentic systems are based on LLMs and the various augmentations you add to them. [Tool calling](../langchain/tools.md), [structured outputs](../langchain/structured-output.md), and [short term memory](../langchain/short-term-memory.md) are a few options for tailoring LLMs to your needs.
 
-> **Image:** [LLM augmentations](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/augmented_llm.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=7ea9656f46649b3ebac19e8309ae9006" alt="LLM augmentations" width="1152" height="778" data-path="oss/images/augmented_llm.png" />
 
 ```python
 # Schema for structured output
@@ -82,7 +82,7 @@ Prompt chaining is when each LLM call processes the output of the previous call.
 * Translating documents into different languages
 * Verifying generated content for consistency
 
-> **Image:** [Prompt chaining](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/prompt_chain.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=762dec147c31b8dc6ebb0857e236fc1f" alt="Prompt chaining" width="1412" height="444" data-path="oss/images/prompt_chain.png" />
 
 ```python
 from typing_extensions import TypedDict
@@ -219,7 +219,7 @@ Some examples include:
 * Running one subtask that processes a document for keywords, and a second subtask to check for formatting errors
 * Running a task multiple times that scores a document for accuracy based on different criteria, like the number of citations, the number of sources used, and the quality of the sources
 
-> **Image:** [parallelization.png](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/parallelization.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=8afe3c427d8cede6fed1e4b2a5107b71" alt="parallelization.png" width="1020" height="684" data-path="oss/images/parallelization.png" />
 
 ```python
 # Graph state
@@ -335,7 +335,7 @@ for snapshot in stream.values:
 
 Routing workflows process inputs and then directs them to context-specific tasks. This allows you to define specialized flows for complex tasks. For example, a workflow built to answer product related questions might process the type of question first, and then route the request to specific processes for pricing, refunds, returns, etc.
 
-> **Image:** [routing.png](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/routing.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=272e0e9b681b89cd7d35d5c812c50ee6" alt="routing.png" width="1214" height="678" data-path="oss/images/routing.png" />
 
 ```python
 from typing_extensions import Literal
@@ -508,7 +508,7 @@ In an orchestrator-worker configuration, the orchestrator:
 * Delegates subtasks to workers
 * Synthesizes worker outputs into a final result
 
-> **Image:** [worker.png](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/worker.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=2e423c67cd4f12e049cea9c169ff0676" alt="worker.png" width="1486" height="548" data-path="oss/images/worker.png" />
 
 Orchestrator-worker workflows provide more flexibility and are often used when subtasks cannot be predefined the way they can with [parallelization](#parallelization). This is common with workflows that write code or need to update content across multiple files. For example, a workflow that needs to update installation instructions for multiple Python libraries across an unknown number of documents might use this pattern.
 
@@ -711,7 +711,7 @@ In evaluator-optimizer workflows, one LLM call creates a response and the other 
 
 Evaluator-optimizer workflows are commonly used when there's particular success criteria for a task, but iteration is required to meet that criteria. For example, there's not always a perfect match when translating text between two languages. It might take a few iterations to generate a translation with the same meaning across the two languages.
 
-> **Image:** [evaluator_optimizer.png](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/evaluator_optimizer.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=9bd0474f42b6040b14ed6968a9ab4e3c" alt="evaluator_optimizer.png" width="1004" height="340" data-path="oss/images/evaluator_optimizer.png" />
 
 ```python
 # Graph state
@@ -843,7 +843,7 @@ for snapshot in stream.values:
 
 Agents are typically implemented as an LLM performing actions using [tools](../langchain/tools.md). They operate in continuous feedback loops, and are used in situations where problems and solutions are unpredictable. Agents have more autonomy than workflows, and can make decisions about the tools they use and how to solve problems. You can still define the available toolset and guidelines for how agents behave.
 
-> **Image:** [agent.png](workflows-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/agent.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=bd8da41dbf8b5e6fc9ea6bb10cb63e38" alt="agent.png" width="1732" height="712" data-path="oss/images/agent.png" />
 
 > [!NOTE]
 > To get started with agents, see the [quickstart](../langchain/quickstart.md) or read more about [how they work](../langchain/agents.md) in LangChain.

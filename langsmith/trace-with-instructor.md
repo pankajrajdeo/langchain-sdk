@@ -1,5 +1,5 @@
 # Trace Instructor applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-instructor)
+
 LangSmith provides a convenient integration with [Instructor](https://python.useinstructor.com/), a popular open-source library for generating structured output with LLMs.
 
 In order to use, you first need to set your LangSmith API key.

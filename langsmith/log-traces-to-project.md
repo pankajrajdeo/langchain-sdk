@@ -1,6 +1,6 @@
 # Log traces to a specific project
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-traces-to-project)
-Route LangSmith traces to a named project instead of the default project using environment variables or the SDK.
+
+> Route LangSmith traces to a named project instead of the default project using environment variables or the SDK.
 
 This page covers how to control where LangSmith sends your traces:
 

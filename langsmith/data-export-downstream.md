@@ -1,6 +1,6 @@
 # Import exported data
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export-downstream)
-Import LangSmith bulk-exported Parquet data into BigQuery, Snowflake, Redshift, Clickhouse, or DuckDB.
+
+> Import LangSmith bulk-exported Parquet data into BigQuery, Snowflake, Redshift, Clickhouse, or DuckDB.
 
 Importing data from S3 and Parquet format is commonly supported by the majority of analytical systems. See below for documentation links:
 

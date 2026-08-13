@@ -1,6 +1,6 @@
 # Set up Agent Auth
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-auth)
-Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
+
+> Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
 
 Agent Auth is in **[beta](release-stages.md)** and under active development. To provide feedback or use this feature, reach out to the [LangChain team](https://forum.langchain.com/c/help/langsmith/).
 
@@ -153,11 +153,11 @@ auth_result = await client.authenticate(
 
 During execution, if authentication is required, the SDK will throw an [interrupt](add-human-in-the-loop.md). The agent execution pauses and presents the OAuth URL to the user:
 
-> **Image:** [Image](agent-auth.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/images/langgraph-auth-interrupt.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=94f84dd7ec822ca69f9a27b4458dca9f" width="1197" height="530" data-path="images/langgraph-auth-interrupt.png" />
 
 After the user completes OAuth authentication and we receive the callback from the provider, they will see the auth success page.
 
-> **Image:** [Image](agent-auth.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/images/github-auth-success.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=72e6492f074507bc8888804066205fcb" width="447" height="279" data-path="images/github-auth-success.png" />
 
 The agent then resumes execution from the point it left off at, and the token can be used for any API calls. We store and refresh OAuth tokens so that future uses of the service by either the user or agent do not require an OAuth flow.
 

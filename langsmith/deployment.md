@@ -1,6 +1,6 @@
 # LangSmith Deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deployment)
-Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
+
+> Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
 
 **LangSmith Deployment** is a workflow orchestration runtime purpose-built for agent workloads. It provides the managed infrastructure agents need to run reliably in production at scale, supporting the full lifecycle from local development to deployment.
 
@@ -71,27 +71,27 @@ Ship a LangChain.js agent and chat UI together as a single web app. The Vite exa
 Ship a LangChain.js chat app: embed the agent in Next.js, SvelteKit, Nuxt, Cloudflare Workers, or Deno Deploy (no Agent Server required), or pair LangSmith Deployment with a Vite + React UI.
 
 <span>
-> **Image:** [LangSmith](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/ZPKed1feKJ8F6LVo/images/providers/light/langchain.svg?fit=max&auto=format&n=ZPKed1feKJ8F6LVo&q=85&s=b910ed9cd0b6b8adb4b6da400882e92c" alt="LangSmith" width="65" height="65" data-path="images/providers/light/langchain.svg" />
 </span>
 
 <span>
-> **Image:** [Next.js](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nextjs.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=4f3336e9534db50f25f87173a41322d5" alt="Next.js" width="24" height="24" data-path="images/providers/light/nextjs.svg" />
 </span>
 
 <span>
-> **Image:** [SvelteKit](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/svelte.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=07e7e35c40e4522f739feea9ef3e33b7" alt="SvelteKit" width="24" height="24" data-path="images/providers/light/svelte.svg" />
 </span>
 
 <span>
-> **Image:** [Nuxt](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/nuxt.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=5d965ed1f93f51ac604e66b935a65368" alt="Nuxt" width="24" height="24" data-path="images/providers/light/nuxt.svg" />
 </span>
 
 <span>
-> **Image:** [Cloudflare Workers](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/h9vvRKKSgCSjvd_Y/images/providers/light/cloudflare.svg?fit=max&auto=format&n=h9vvRKKSgCSjvd_Y&q=85&s=ae129fcbfc78ccaece42b1c4d3699311" alt="Cloudflare Workers" width="24" height="24" data-path="images/providers/light/cloudflare.svg" />
 </span>
 
 <span>
-> **Image:** [Deno Deploy](deployment.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/Tz8fh3A43FeUPf69/images/providers/light/deno.svg?fit=max&auto=format&n=Tz8fh3A43FeUPf69&q=85&s=8d213b0000104542fcaa7ab160595224" alt="Deno Deploy" width="24" height="24" data-path="images/providers/light/deno.svg" />
 </span>
 
 ***

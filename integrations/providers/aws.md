@@ -1,6 +1,6 @@
 # AWS (Amazon) integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/aws)
-Integrate with AWS (Amazon) using LangChain Python.
+
+> Integrate with AWS (Amazon) using LangChain Python.
 
 This page covers all LangChain integrations with the [Amazon Web Services (AWS)](https://aws.amazon.com/) platform.
 

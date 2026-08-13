@@ -1,5 +1,5 @@
 # View trace counts across your organization
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-organization-charts)
+
 > [!NOTE]
 > This feature is available on Helm chart versions 0.9.5 and later.
 

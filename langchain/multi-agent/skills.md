@@ -1,5 +1,5 @@
 # Skills
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)
+
 In the **skills** architecture, specialized capabilities are packaged as invocable "skills" that augment an [agent's](../agents.md) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
 For built-in skill support, see [Deep Agents](../../deepagents/skills.md).
 

@@ -1,5 +1,5 @@
 # Mirror images for your LangSmith installation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-mirroring-images)
+
 By default, LangSmith will pull images from our public Docker registry. However, if you are running LangSmith in an environment that does not have internet access, or if you would like to use a private Docker registry, you can mirror the images to your own registry and then configure your LangSmith installation to use those images.
 
 ## Requirements
@@ -129,9 +129,14 @@ The chart does not set `images.juicefsMountImage` by default. When it is unset, 
 
 ## Additional images for Engine
 
-[Engine](deploy-self-hosted-full-platform.md#enable-engine) runs on `langsmith-insights-engine`, which the mirroring script includes by default, and requires Sandboxes, so mirror with `--include-sandboxes` and configure the sandbox runtime image as described in [Additional images for Sandboxes](#additional-images-for-sandboxes).
+If you mirror images to a private registry, [Engine](deploy-self-hosted-full-platform.md#enable-engine) requires the combined `langsmith-insights-engine` image and the sandbox runtime image.
 
-Then, point the Engine and Insights image at your mirror:
+To mirror the required images:
+
+1. Mirror `langsmith-insights-engine` to your private registry using the [manual mirroring process](#mirroring-the-images).
+2. Engine requires Sandboxes, so mirror the sandbox runtime image with `--include-sandboxes` and configure it as described in [Additional images for Sandboxes](#additional-images-for-sandboxes).
+
+Override `images.engineInsightsAgentImage.repository` to use your mirrored Engine and Insights image:
 
 ```yaml
 images:
@@ -142,9 +147,9 @@ images:
 ```
 
 > [!NOTE]
-> The repository name must still end in `langsmith-insights-engine`; the chart validates it to catch installs left pointing at the retired `langsmith-clio` image, which serves only Insights.
+> Do not use `langsmith-clio`. If you are upgrading an existing installation that points to this retired Insights-only image, replace the image repository. The repository name must end in `langsmith-insights-engine`; the chart validates this requirement.
 
-Engine also depends on LangSmith Intelligence, which is a network dependency rather than an image, so mirroring does not remove it. See [LangSmith Intelligence for Engine](self-host-egress.md#langsmith-intelligence-for-engine).
+Image mirroring does not remove Engine's LangSmith Intelligence egress requirement, so fully air-gapped installations cannot run Engine. See [LangSmith Intelligence for Engine](self-host-egress.md#langsmith-intelligence-for-engine).
 
 ## Additional images for Fleet and Insights
 

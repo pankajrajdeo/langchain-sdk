@@ -1,6 +1,6 @@
 # Configure checkpointer backend
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-checkpointer)
-Configure Agent Server to use PostgreSQL, MongoDB, or a custom implementation for checkpoint storage.
+
+> Configure Agent Server to use PostgreSQL, MongoDB, or a custom implementation for checkpoint storage.
 
 [Agent Server](agent-server.md) persists graph state using a checkpointer backend. By default, LangSmith stores checkpoints in PostgreSQL alongside other server data. You can switch to MongoDB or provide a custom implementation.
 

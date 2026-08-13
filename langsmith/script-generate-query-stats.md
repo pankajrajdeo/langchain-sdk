@@ -1,5 +1,5 @@
 # Generate query stats
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-generate-query-stats)
+
 As part of troubleshooting your self-hosted instance of LangSmith, the LangChain team may ask you to generate LangSmith query statistics that will help us understand the performance of various queries that drive the LangSmith product experience.
 
 This command will generate a CSV that can be shared with the LangChain team.

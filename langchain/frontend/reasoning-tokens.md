@@ -1,6 +1,6 @@
 # Reasoning tokens
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens)
-Display model thinking and reasoning processes in collapsible blocks
+
+> Display model thinking and reasoning processes in collapsible blocks
 
 Reasoning tokens expose the internal thought process of advanced models like OpenAI's GPT-5 and Anthropic's Claude with extended thinking. These models produce structured content blocks that separate reasoning from the final answer, letting you build UIs that show *how* the model arrived at its response.
 

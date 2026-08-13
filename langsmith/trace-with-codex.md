@@ -1,6 +1,6 @@
 # Trace OpenAI Codex sessions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-codex)
-Capture OpenAI Codex agent turns, tool calls, model metadata, and subagent threads in LangSmith.
+
+> Capture OpenAI Codex agent turns, tool calls, model metadata, and subagent threads in LangSmith.
 
 The [`langsmith-codex-plugins`](https://github.com/langchain-ai/langsmith-codex-plugins) marketplace ships a tracing plugin that sends [OpenAI Codex](https://developers.openai.com/codex) session data to LangSmith. Use it to inspect agent turns, model metadata, token usage, tool calls, and subagent threads from your Codex workflows.
 

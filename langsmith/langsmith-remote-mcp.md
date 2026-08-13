@@ -1,10 +1,10 @@
 # LangSmith Remote MCP
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-remote-mcp)
-Connect MCP-compatible clients to LangSmith over OAuth, or authenticate programmatic clients with a LangSmith API key.
+
+> Connect MCP-compatible clients to LangSmith over OAuth, or authenticate programmatic clients with a LangSmith API key.
 
 The LangSmith Remote MCP is a [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP) server hosted by LangSmith. It exposes the same tools as the [standalone LangSmith MCP Server](langsmith-mcp-server.md) (conversation history, prompts, runs and traces, datasets, experiments, billing) without a separate deployment. Interactive MCP clients connect over OAuth with no API key or header configuration; programmatic clients can authenticate with a LangSmith API key via the `X-Api-Key` header.
 
-The Remote MCP is available on all LangSmith Cloud regions and on [self-hosted LangSmith](self-hosted.md) deployments running v0.16 or later (self-hosted additionally requires configuring a signing JWKS—see [Self-hosted LangSmith](#self-hosted-langsmith)). Self-hosted deployments on earlier versions should continue to use the [standalone LangSmith MCP Server](langsmith-mcp-server.md).
+The Remote MCP is available on all LangSmith Cloud regions, on [BYOC](byoc.md) data planes, and on [self-hosted LangSmith](self-hosted.md) deployments running v0.16 or later (self-hosted additionally requires configuring a signing JWKS—see [Self-hosted LangSmith](#self-hosted-langsmith)). Self-hosted deployments on earlier versions should continue to use the [standalone LangSmith MCP Server](langsmith-mcp-server.md).
 
 ## Endpoints
 
@@ -14,24 +14,52 @@ The Remote MCP is available on all LangSmith Cloud regions and on [self-hosted L
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_0 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -41,6 +69,10 @@ The server discovers the rest of its OAuth metadata via [RFC 8414](https://datat
 **Self-hosted LangSmith:**
 
 `https://<your-langsmith-host>/api/mcp`, where `<your-langsmith-host>` is the hostname of your LangSmith instance.
+
+**BYOC:**
+
+`https://<data_plane_url>/api/mcp`, where `<data_plane_url>` is the URL of your [BYOC](byoc.md) data plane.
 
 ## Authentication
 
@@ -64,6 +96,9 @@ The session is scoped to your LangSmith user and workspace permissions—calls t
 Send a [LangSmith API key](create-account-api-key.md) in the `X-Api-Key` header on every request. This suits backend services, scripts, and SDKs, for example, the [AI SDK](#ai-sdk), where the interactive OAuth flow is not practical.
 
 Requests are authorized as the user that owns the API key, scoped to that key's workspace and permissions—the same authorization the key has elsewhere in the LangSmith API. Tools that accept a `workspace_id` argument can target a specific workspace; otherwise the key's own workspace is used.
+
+> [!WARNING]
+> On [BYOC](byoc.md), the API key must be assigned to your LangSmith workspace.
 
 > [!NOTE]
 > The `X-Api-Key` header is specific to the Remote MCP. The [standalone LangSmith MCP Server](langsmith-mcp-server.md) uses a different header, `LANGSMITH-API-KEY`.

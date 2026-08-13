@@ -1,6 +1,6 @@
 # Enable additional LangSmith features
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform)
-Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance.
+
+> Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance.
 
 In addition to the base [LangSmith](self-hosted.md) platform, you can enable the following features on LangSmith Self-hosted:
 
@@ -1061,16 +1061,15 @@ Sandboxes are not proactively restarted. They start again when a user or API act
 ## Enable Engine
 
 > [!NOTE]
-> Self-hosted Engine requires LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. [Contact your account team](https://www.langchain.com/contact-sales) to have it added to your order.
+> Self-hosted deployments require LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. Engine is licensed separately and meters its own usage in LCUs. [Contact your account team](https://www.langchain.com/contact-sales) to have it added to your order.
 
-[Engine](engine-overview.md) watches a tracing project, clusters recurring failures into issues, diagnoses each one, and proposes a fix. Engine is disabled by default.
+[Engine](engine-overview.md) watches production traces, clusters recurring failures into issues, diagnoses each issue, and proposes fixes. Engine is disabled by default.
 
-Engine requires Sandboxes and shares a runtime with Insights:
+Engine requires [Sandboxes](#enable-sandboxes), a connection to [LangSmith Intelligence](#allow-egress-to-langsmith-intelligence), an externally reachable [`config.hostname`](#verify-your-hostname-is-externally-reachable), and an [Engine encryption key](#generate-the-engine-encryption-key). Complete the prerequisites before enabling Engine.
 
-* **[Sandboxes](#enable-sandboxes):** Every Engine run executes in one. Enable Sandboxes first. The chart refuses to render when `engine.enabled` is set without them.
-* **[Insights](#enable-fleet-insights-and-chat):** Engine and Insights are served by the same image and share one deployment. Insights is not an Engine prerequisite. On an install that already runs Insights, enabling Engine adds configuration rather than new pods.
+Engine and [Insights](#enable-fleet-insights-and-chat) run from the same image and share one deployment. Insights is not required for Engine. If your installation already runs Insights, enabling Engine adds configuration rather than new pods.
 
-Unlike the other features on this page, Engine cannot run entirely inside your cluster. It depends on LangSmith Intelligence, a LangChain-managed zero data retention service, and authenticates with a short-lived license JWT obtained during LangSmith license verification. For the data flow and retained billing metadata, refer to [Engine on self-hosted](engine-self-hosted.md).
+Unlike the other features on this page, Engine cannot run entirely inside your cluster. Engine uses LangSmith Intelligence, a LangChain-managed zero data retention service, for the model work that powers diagnosis and fixes. For the data flow and retained billing metadata, refer to [Engine on Self-hosted](engine-self-hosted.md).
 
 ### Components
 
@@ -1088,28 +1087,32 @@ Engine also adds configuration to `platform-backend` and `ingest-queue`, which d
 ### Enable Sandboxes
 Complete [Enable Sandboxes](#enable-sandboxes) first, including the KVM-capable node pool and JuiceFS storage.
 
-Engine's sandboxes are owned by a single workspace. By default LangSmith resolves the install's own workspace, which works when there is exactly one non-personal organization; with more than one it declines rather than guess, and you must set `engine.sandboxTenantId`.
+Engine's sandboxes are associated with one workspace. An install with Engine must have a [shared organization](administration-overview.md#organizations). If the shared organization has exactly one workspace, LangSmith uses that workspace. If the shared organization has more than one workspace, LangSmith does not choose one automatically. You must set `engine.sandboxTenantId` to the workspace ID.
 
 > [!WARNING]
-> Prefer a workspace reserved for Engine. Engine's sandboxes are not billed on the Sandboxes product because Engine meters its own usage in LCUs. They do count against that workspace's concurrent sandbox, CPU, and memory quotas. A workspace already near its cap can push an Engine run into a quota error, and Engine's own sandboxes can crowd out interactive ones.
+> Use a workspace reserved for Engine:
 >
-> Those sandboxes are also listed in that workspace and can be stopped by anyone with access to it. Each one runs agent-generated code. Repository credentials are held by the sandbox auth proxy and are not readable inside the sandbox.
+> * Engine's sandboxes are not billed on the Sandboxes product because Engine meters its own usage in LCUs.
+> * Engine's sandboxes use the same concurrent sandbox, CPU, and memory quotas as other sandboxes in the workspace. If the workspace is near its limits, Engine runs can fail or leave less capacity for interactive sandboxes.
+> * Engine's sandboxes are listed in that workspace and can be stopped by anyone with access to it.
+> * Each sandbox runs agent-generated code.
+> * Repository credentials remain in the sandbox auth proxy and are not available to code running inside the sandbox.
 
 ### Confirm the license entitlement
 Engine is licensed separately, in the same way as Sandboxes. Your license must carry the Engine entitlement. LangSmith validates your license key against `https://beacon.langchain.com` at startup and periodically thereafter, so the entitlement takes effect without you changing any configuration once it is added to your order.
 
 ### Allow egress to LangSmith Intelligence
-Allow outbound HTTPS from the cluster to the LangSmith Intelligence gateway for your cloud. This is the host in `engine.intelligenceBaseUrl`.
+Allow outbound HTTPS from the cluster to the LangSmith Intelligence gateway URL for your cloud. Use this URL as the value of `engine.intelligenceBaseUrl`.
 
-| Cloud | Gateway host               |
-| ----- | -------------------------- |
-| AWS   | `beacon.aws.langchain.com` |
-| GCP   | `beacon.langchain.com`     |
+| Cloud | `engine.intelligenceBaseUrl`                    |
+| ----- | ----------------------------------------------- |
+| AWS   | `https://beacon.aws.langchain.com/intelligence` |
+| GCP   | `https://beacon.langchain.com/intelligence`     |
 
-On GCP, it is the same host LangSmith already uses for license verification and billing telemetry, so Engine adds a path rather than a new egress destination.
+On GCP, this uses the same host LangSmith already uses for license verification and billing telemetry, so Engine adds a path rather than a new egress destination.
 
 > [!NOTE]
-> Engine is available for self-hosted deployments in **AWS US** and **GCP US**. AWS EU and Azure are planned. Check [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region) and confirm coverage with your account team before planning a rollout.
+> Engine is available for self-hosted deployments in **AWS US** and **GCP US**. Check [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region) and confirm coverage with your account team before planning a rollout.
 
 Add the gateway as a specific allowlist entry rather than opening general egress. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). Requests use a short-lived license JWT obtained during LangSmith license verification. Engine's traffic is separate from the billing and operational telemetry described in [Configure egress](self-host-egress.md), even where it shares a host.
 
@@ -1117,7 +1120,7 @@ Add the gateway as a specific allowlist entry rather than opening general egress
 > Offline (air-gapped) installs cannot run Engine. There is no in-cluster model for it to fall back on.
 
 ### Verify your hostname is externally reachable
-Engine's sandboxes call your LangSmith install using the `langsmith` CLI, so `config.hostname` must be reachable from the sandbox network. The chart rejects `localhost` and in-cluster `*.svc` addresses.
+Engine's sandboxes call your LangSmith install using the `langsmith` CLI, so `config.hostname` must be reachable from the sandbox network. Helm validation rejects `localhost` and in-cluster `*.svc` addresses.
 
 Serve that hostname through your ingress with TLS, as described in [Set up an ingress](self-host-ingress.md). Engine does not require you to expose anything beyond the address your own users already reach. Sandbox egress is allowlisted to your LangSmith hostname, `github.com`, `api.github.com`, and the Python package registries. Per-run credentials are injected by a proxy outside the sandbox rather than being readable inside it.
 
@@ -1134,7 +1137,7 @@ To rotate the key later, copy the current value to `engine_encryption_key_previo
 
 ### Enable with Helm
 
-Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts), alongside the Sandboxes values from [Enable Sandboxes](#enable-sandboxes):
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts), alongside the complete Sandboxes values from [Enable Sandboxes](#enable-sandboxes). These examples show only the Engine-specific values and the `sandboxes.enabled` flag.
 
 #### Using Kubernetes secrets (recommended)
 Reference your existing Secret by name. The chart reads `engine_encryption_key` from it automatically.
@@ -1147,7 +1150,6 @@ config:
 
 engine:
   enabled: true
-  # AWS; on GCP use https://beacon.langchain.com/intelligence
   intelligenceBaseUrl: "https://beacon.aws.langchain.com/intelligence"
 
 sandboxes:
@@ -1166,7 +1168,6 @@ config:
 
 engine:
   enabled: true
-  # AWS; on GCP use https://beacon.langchain.com/intelligence
   intelligenceBaseUrl: "https://beacon.aws.langchain.com/intelligence"
   encryptionKey: "<engine-encryption-key>"
 
@@ -1174,15 +1175,27 @@ sandboxes:
   enabled: true
 ```
 
-> [!WARNING]
-> Engine runs on `langsmith-insights-engine`, the combined image serving both the `engine` and `insights` graphs. The chart uses it by default, so a new install needs no image configuration. If you are upgrading an install whose values pin `images.engineInsightsAgentImage.repository` to the retired `langsmith-clio` image, remove or update that pin. `langsmith-clio` serves Insights only, and the chart rejects it.
-
-If your install has more than one non-personal organization, also set the workspace that owns Engine's sandboxes:
+> [!NOTE]
+> If your install has a shared organization with more than one workspace, set the workspace that owns Engine's sandboxes:
 
 ```yaml
 engine:
   sandboxTenantId: "<workspace-id>"
 ```
+
+> [!WARNING]
+> Upgrades from older Insights image pins require one extra check: if your values pin `images.engineInsightsAgentImage.repository` to the retired `langsmith-clio` image, remove or update that pin. Engine and Insights now run on `langsmith-insights-engine`, and the chart rejects `langsmith-clio`. For more information, see [Mirror images for your LangSmith installation](self-host-mirroring-images.md#additional-images-for-engine).
+
+Validate the updated chart before applying it:
+
+```bash
+helm template langsmith langchain/langsmith \
+  --values langsmith_config.yaml \
+  --version <version> \
+  --namespace <namespace>
+```
+
+The chart validates the Engine configuration at render time and fails with a message naming the missing value, so this command catches a misconfiguration before it reaches your cluster.
 
 Apply the updated chart:
 
@@ -1193,9 +1206,6 @@ helm upgrade -i langsmith langchain/langsmith \
   --namespace <namespace> \
   --wait
 ```
-
-> [!TIP]
-> The chart validates the Engine configuration at render time and fails with a message naming the missing value, so `helm template` catches a misconfiguration before it reaches your cluster.
 
 ### Verify the installation
 
@@ -1213,16 +1223,18 @@ kubectl rollout status deployment/langsmith-platform-backend -n <namespace>
 
 If Engine does not appear in the LangSmith UI after this, the most common causes are a license without the Engine entitlement and the organization-level toggle described in [Turn on Engine in LangSmith](#turn-on-engine-in-langsmith).
 
-After completing the in-product setup, start an Engine analysis and confirm that results appear for the tracing project. This verifies the complete path through Engine, Sandboxes, and LangSmith Intelligence. Running pods alone does not verify that path.
+After [enabling and configuring Engine](#turn-on-engine-in-langsmith) in the LangSmith UI, start an Engine analysis and confirm that results appear for the tracing project. This verifies the complete path through Engine, Sandboxes, and LangSmith Intelligence. Running pods alone does not verify that path.
+
+If the analysis does not complete, check that Engine pods are running, the sandbox workspace has quota available, and the cluster can reach the LangSmith Intelligence gateway URL configured in `engine.intelligenceBaseUrl`.
 
 ### Turn on Engine in LangSmith
 
-Enabling Engine in Helm makes the feature available; it does not start any scans. Two in-product steps remain, both covered in [Find and fix issues](engine.md):
+Enabling Engine in Helm makes the feature available; it does not start any scans. After enabling the chart values, finish setup in LangSmith:
 
-1. An [Organization Admin](rbac.md#organization-admin) turns Engine on for the organization under **Settings > Engine enablement**.
-2. Any user sets Engine up for a tracing project from the project's **Engine** tab.
+1. An [Organization Admin](rbac.md#organization-admin) turns Engine on for the organization under **Settings > Engine enablement**. For more information, see [Find and fix issues](engine.md#enable-engine-for-your-organization).
+2. Any user sets Engine up for a tracing project from the project's **Engine** tab. For more information, see [Set up Engine for a tracing project](engine.md#set-up-engine-for-a-tracing-project).
 
-Connecting a GitHub repository is optional and improves Engine's diagnosis and fixes. Without one, Engine still detects and diagnoses issues and proposes prompt fixes, but it cannot read your source code or open pull requests. To create the GitHub App and configure `host-backend`, see [Connect Engine to GitHub](engine-github.md#self-hosted).
+Connecting a GitHub repository is optional and improves Engine's diagnosis and fixes. Without one, Engine cannot read your source code or open pull requests. To create the GitHub App and configure `host-backend`, see [Connect Engine to GitHub](engine-github.md#self-hosted).
 
 ### Disable Engine
 
@@ -1233,7 +1245,7 @@ engine:
   enabled: false
 ```
 
-Engine stops dispatching runs. Existing issues remain in the database and reappear if you re-enable it. Insights shares the same deployment, so the `standalone-insights` pods keep running when `insights.enabled` is `true`.
+Engine stops dispatching runs. Insights shares the same deployment, so the `standalone-insights` pods keep running when `insights.enabled` is `true`.
 
 ## Optional configuration
 

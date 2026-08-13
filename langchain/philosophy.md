@@ -1,6 +1,6 @@
 # Philosophy
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/philosophy)
-LangChain exists to be the easiest place to start building with LLMs, while also being flexible and production-ready.
+
+> LangChain exists to be the easiest place to start building with LLMs, while also being flexible and production-ready.
 
 LangChain is driven by a few core beliefs:
 

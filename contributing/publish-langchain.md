@@ -1,5 +1,5 @@
 # Publish an integration
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/publish-langchain)
+
 **Make your integration available to the community.**
 
 > [!WARNING]

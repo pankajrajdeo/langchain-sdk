@@ -1,5 +1,5 @@
 # LangSmith Observability
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/observability)
+
 As you build and run agents with LangChain, you need visibility into how they behave: which [tools](tools.md) they call, what prompts they generate, and how they make decisions. LangChain agents built with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) automatically support tracing through [LangSmith](../langsmith/observability.md), a platform for capturing, debugging, evaluating, and monitoring LLM application behavior.
 
 [*Traces*](../langsmith/observability-concepts.md#traces) record every step of your agent's execution, from the initial user input to the final response, including all tool calls, model interactions, and decision points. This execution data helps you debug issues, evaluate performance across different inputs, and monitor usage patterns in production.

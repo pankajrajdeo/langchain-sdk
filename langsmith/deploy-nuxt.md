@@ -1,6 +1,6 @@
 # Deploy with Nuxt
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-nuxt)
-Deploy a LangChain deep agent in a Nuxt 4 app with Nitro server routes, Vue composables, and subagent-aware chat UI.
+
+> Deploy a LangChain deep agent in a Nuxt 4 app with Nitro server routes, Vue composables, and subagent-aware chat UI.
 
 The following page details an example app that deploys a LangChain **deep agent** inside a [Nuxt 4](https://nuxt.com) project: streaming chat UI, subagent detail views, thread history, and reasoning-token streaming, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as Nitro route handlers (HTTP + SSE). No separate backend process.
 
@@ -12,8 +12,8 @@ Source: [`js-nuxt`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 ### Import the repository
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-nuxt&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents">
-> **Image:** [Deploy with Vercel](deploy-nuxt.md)
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-nuxt&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents" target="_blank" rel="noopener noreferrer">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
 </a>
 
 ### Configure the project
@@ -26,8 +26,8 @@ Deploy the project. Nuxt detects Vercel automatically and builds Nitro server ro
 ### Import the repository
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-nuxt">
-> **Image:** [Deploy to Netlify](deploy-nuxt.md)
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-nuxt" target="_blank" rel="noopener noreferrer">
+  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
 </a>
 
 ### Configure the project

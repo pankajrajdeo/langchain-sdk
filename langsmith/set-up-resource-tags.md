@@ -1,6 +1,6 @@
 # Set up resource tags
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/set-up-resource-tags)
-Create and manage resource tags to organize projects, datasets, prompts, and other resources within a LangSmith workspace.
+
+> Create and manage resource tags to organize projects, datasets, prompts, and other resources within a LangSmith workspace.
 
 > [!NOTE]
 > Resource tags are available for [Plus and Enterprise plans](pricing-plans.md).
@@ -24,9 +24,9 @@ To create a tag:
 2. Here, you'll find the existing tag values, grouped by key. LangSmith creates the **Application** and **Environment** keys by default. You can use the **Application** key to filter resources shown in the UI.
 3. Select  **New Tag** at the top of the page. You'll be prompted to enter a key and a value for the tag. Note that you can use an existing key or create a new one.
 
-> **Image:** [Create resource tag modal accessed from the Settings menu in the LangSmith UI.](set-up-resource-tags.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/86CKyoiUyLIrfcjr/langsmith/images/create-tag-light.png?fit=max&auto=format&n=86CKyoiUyLIrfcjr&q=85&s=3b409ea215cfd522d6c31c5231b26bd3" alt="Create resource tag modal accessed from the Settings menu in the LangSmith UI." width="865" height="1076" data-path="langsmith/images/create-tag-light.png" />
 
-> **Image:** [Create resource tag modal accessed from the Settings menu in the LangSmith UI.](set-up-resource-tags.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/86CKyoiUyLIrfcjr/langsmith/images/create-tag-dark.png?fit=max&auto=format&n=86CKyoiUyLIrfcjr&q=85&s=4f99d9a64c2a0cd3fce8d89aa19e406d" alt="Create resource tag modal accessed from the Settings menu in the LangSmith UI." width="866" height="1082" data-path="langsmith/images/create-tag-dark.png" />
 
 ## Assign a tag to a resource
 

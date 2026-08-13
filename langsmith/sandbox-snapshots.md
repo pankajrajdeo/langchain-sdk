@@ -1,12 +1,12 @@
 # Sandbox snapshots
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-snapshots)
-Build and capture reusable filesystem images for sandboxes.
+
+> Build and capture reusable filesystem images for sandboxes.
 
 A **snapshot** is a reusable filesystem bundle backed by a Docker image. Build or capture a snapshot when you want to boot sandboxes from a custom filesystem image.
 
 You can also capture a snapshot from a running sandbox—install packages, write data files, or configure state, then snapshot the result and reuse it as a new starting point.
 
-> **Image:** [Sandboxes snapshots page](sandbox-snapshots.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-snapshots.png?fit=max&auto=format&n=5nd3ca6haxRbnJZj&q=85&s=6f56db23342150d156d0c6d783a1ead7" alt="Sandboxes snapshots page" width="2848" height="974" data-path="images/langsmith/sandboxes/sb-snapshots.png" />
 
 ## Build a snapshot from a Docker image
 

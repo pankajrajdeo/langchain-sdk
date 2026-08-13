@@ -1,5 +1,5 @@
 # How to upload experiments run outside of LangSmith with the REST API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/upload-existing-experiments)
+
 Some users prefer to manage their datasets and run their experiments outside of LangSmith, but want to use the LangSmith UI to view the results. This is supported via our endpoint.
 
 This guide will show you how to upload evals using the REST API, using the `requests` library in Python as an example. However, the same principles apply to any language.
@@ -246,11 +246,11 @@ Note that the latency and feedback stats in the experiment results are null beca
 
 ## View the experiment in the UI
 
-Now, login to the UI and click on your newly-created dataset! You should see a single experiment: <img alt="Uploaded experiments table" />
+Now, login to the UI and click on your newly-created dataset! You should see a single experiment: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=797dd62e7cd3f833cd13bafcedfa5607" alt="Uploaded experiments table" width="3454" height="1914" data-path="langsmith/images/uploaded-dataset.png" />
 
-Your examples will have been uploaded: <img alt="Uploaded examples" />
+Your examples will have been uploaded: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-dataset-examples.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=093061568ece423d5a2c4cb2b5df2721" alt="Uploaded examples" width="3454" height="1912" data-path="langsmith/images/uploaded-dataset-examples.png" />
 
-Clicking on your experiment will bring you to the comparison view: <img alt="Uploaded experiment comparison view" />
+Clicking on your experiment will bring you to the comparison view: <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/uploaded-experiment.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=d66c9ea1cfbb1acf4f591b11f54a71da" alt="Uploaded experiment comparison view" width="3452" height="1912" data-path="langsmith/images/uploaded-experiment.png" />
 
 As you upload more experiments to your dataset, you will be able to compare the results and easily identify regressions in the comparison view.
 

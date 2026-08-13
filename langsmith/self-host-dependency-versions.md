@@ -1,6 +1,6 @@
 # Minimum versions for self-hosting dependencies
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-dependency-versions)
-Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith.
+
+> Minimum supported versions for the databases, tools, and infrastructure required to self-host LangSmith.
 
 This page lists the minimum supported versions for the databases, tools, and infrastructure used by self-hosted LangSmith. Install a version that meets or exceeds the minimum before deploying or upgrading. Using a version below the minimum is not supported and may cause installation or runtime failures.
 

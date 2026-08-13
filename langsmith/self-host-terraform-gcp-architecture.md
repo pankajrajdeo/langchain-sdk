@@ -1,6 +1,6 @@
 # GCP Terraform architecture
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture)
-Platform layers, services, Workload Identity, networking, and module dependencies for LangSmith self-hosted on GKE.
+
+> Platform layers, services, Workload Identity, networking, and module dependencies for LangSmith self-hosted on GKE.
 
 Understand what the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp) provision and how the pieces fit together, so you can size, secure, and customize your LangSmith deployment before running `make apply`.
 
@@ -18,7 +18,7 @@ If you are ready to install, start with the [deployment walkthrough](self-host-t
 
 LangSmith on GCP deploys in up to five stages. Each stage adds a capability layer on top of the previous. All layers share the same GKE cluster and `langsmith` namespace.
 
-> **Image:** [LangSmith on GCP deployment stages and service layout](self-host-terraform-gcp-architecture.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/gcp-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=195d16f6a26452c58eb3d749e36774da" alt="LangSmith on GCP deployment stages and service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/gcp-architecture.png" />
 
 | Stage | Layer                | What it adds                                                                                                       |
 | ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |

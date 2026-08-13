@@ -1,5 +1,5 @@
 # Set up SSO with OAuth2.0 and OIDC
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-sso)
+
 LangSmith [Self-Hosted](self-hosted.md) provides SSO via OAuth2.0 and OIDC, which delegates authentication to your Identity Provider (IdP) to manage access to LangSmith.
 
 The LangSmith implementation supports any provider that is OIDC compliant. Once configured, you will see a login screen that prompts to **Log in via SSO**.

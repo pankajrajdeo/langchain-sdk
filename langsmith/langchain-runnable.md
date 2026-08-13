@@ -1,5 +1,5 @@
 # How to evaluate a runnable
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langchain-runnable)
+
 > [!NOTE]
 > * `langchain`: [Python](../langchain/overview.md) and [JS/TS](https://docs.langchain.com/oss/javascript/langchain/overview)
 > * Runnable: [Python](https://reference.langchain.com/python/langchain_core/runnables/) and [JS/TS](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.Runnable.html)
@@ -110,7 +110,7 @@ await evaluate(chain, {
 
 The runnable is traced appropriately for each output.
 
-> **Image:** [Runnable Evaluation](langchain-runnable.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/zvmH6RwOjls6RwAc/langsmith/images/runnable-eval.png?fit=max&auto=format&n=zvmH6RwOjls6RwAc&q=85&s=dbaeb6a5c2b1f4d7a8700178c7679d83" alt="Runnable Evaluation" width="1909" height="925" data-path="langsmith/images/runnable-eval.png" />
 
 ## Related
 

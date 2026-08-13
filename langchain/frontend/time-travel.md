@@ -1,6 +1,6 @@
 # Time travel
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/time-travel)
-Inspect, navigate, and resume from any checkpoint in the conversation history
+
+> Inspect, navigate, and resume from any checkpoint in the conversation history
 
 Every state change in a LangGraph agent creates a **checkpoint**, a complete
 snapshot of the agent's state at that moment. Time travel lets you inspect any

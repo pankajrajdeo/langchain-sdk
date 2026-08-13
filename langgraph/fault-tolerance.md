@@ -1,6 +1,6 @@
 # Fault tolerance
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/fault-tolerance)
-Configure per-node timeouts, retries, and error handlers in LangGraph.
+
+> Configure per-node timeouts, retries, and error handlers in LangGraph.
 
 When a node fails—from a slow external API, a transient network error, or an unhandled exception—LangGraph gives you three composable mechanisms to respond:
 

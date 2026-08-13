@@ -1,6 +1,6 @@
 # Sandbox access permissions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-permissions)
-Control who in your workspace can interact with a sandbox after it has been created.
+
+> Control who in your workspace can interact with a sandbox after it has been created.
 
 Each sandbox has a recorded **creator**, the workspace member whose API key or session created it. By default, only the creator can run commands, read or write files, open tunnels, or reach service URLs on that sandbox. Other workspace members need the `sandboxes:exec` [permission](rbac.md) to interact with sandboxes they did not create. Sandboxes are never reachable from workspaces other than the one they were created in.
 

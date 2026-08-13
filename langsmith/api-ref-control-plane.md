@@ -1,5 +1,5 @@
 # Control plane API reference for LangSmith Deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/api-ref-control-plane)
+
 The control plane API is part of [LangSmith Deployment](deployment.md). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](agent-server.md) deployments—for example, as part of a custom CI/CD workflow.
 
 Browse the full API reference in the **Control Plane API** section in the sidebar, or refer to the endpoint groups:
@@ -17,24 +17,52 @@ The control plane hosts for Cloud data regions:
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_0 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>

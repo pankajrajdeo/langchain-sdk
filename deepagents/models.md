@@ -1,6 +1,6 @@
 # Models
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/models)
-Configure model providers and parameters for Deep Agents
+
+> Configure model providers and parameters for Deep Agents
 
 Deep Agents work with any [LangChain chat model](../langchain/models.md) that supports [tool calling](../langchain/models.md#tool-calling).
 

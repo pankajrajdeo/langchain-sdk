@@ -1,5 +1,5 @@
 # Configure custom TLS certificates
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates)
+
 Use this guide to configure TLS in LangSmith. Start by mounting internal certificate authorities (CAs) so your deployment trusts the right roots system‑wide, for database or external service calls. You can then configure [Playground](prompt-engineering-concepts.md#playground)-specific mTLS for communicating securely with supported model providers.
 
 This page covers:

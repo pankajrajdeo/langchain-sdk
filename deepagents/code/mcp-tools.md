@@ -1,6 +1,6 @@
 # MCP tools
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
-Load additional tools from MCP (Model Context Protocol) servers
+
+> Load additional tools from MCP (Model Context Protocol) servers
 
 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) lets you extend Deep Agents Code with tools from external servers—file systems, APIs, databases, and more—without modifying the agent itself. Deep Agents Code connects to MCP servers at startup, discovers their tools, and makes them available to the agent alongside the built-in tools.
 

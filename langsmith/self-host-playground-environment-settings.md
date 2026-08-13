@@ -1,5 +1,5 @@
 # Use environment variables for model providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-playground-environment-settings)
+
 > [!NOTE]
 > This feature is only available on Helm chart versions 0.10.27 (application version 0.10.74) and later.
 

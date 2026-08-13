@@ -1,6 +1,6 @@
 # Govern
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/govern-overview)
-Administer users, access control, organizational structure, and compliance policies for your LangSmith organization.
+
+> Administer users, access control, organizational structure, and compliance policies for your LangSmith organization.
 
 Administer your LangSmith organization: manage users and access control, organize workspaces and applications, and configure policies and compliance.
 

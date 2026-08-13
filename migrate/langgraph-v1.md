@@ -1,5 +1,5 @@
 # LangGraph v1 migration guide
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langgraph-v1)
+
 This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](../releases/langgraph-v1.md) page.
 
 To upgrade:

@@ -1,5 +1,5 @@
 # Trace Claude Code applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-claude-code)
+
 This guide shows you how to send conversations automatically from the [Claude Code CLI](https://code.claude.com/docs/en/overview) to LangSmith.
 
 Once configured, each Claude Code project can opt in to sending traces to LangSmith. Each trace includes user messages, tool calls, compaction, subagent runs, and assistant responses. System prompts are not included, because Claude Code does not return them in conversation transcripts.

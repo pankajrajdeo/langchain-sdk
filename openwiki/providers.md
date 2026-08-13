@@ -1,6 +1,6 @@
 # Model providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/providers)
-Configure inference providers and credentials for OpenWiki
+
+> Configure inference providers and credentials for OpenWiki
 
 OpenWiki supports the following providers:.
 

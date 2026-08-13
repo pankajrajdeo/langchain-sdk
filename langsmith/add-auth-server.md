@@ -1,5 +1,5 @@
 # Connect an authentication provider
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/add-auth-server)
+
 In [the last tutorial](resource-auth.md), you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace those tokens with real user accounts using [OAuth2](deployment-quickstart.md).
 
 You'll keep the same [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object and [resource-level access control](auth.md#single-owner-resources), but upgrade authentication to use Supabase as your identity provider. While Supabase is used in this tutorial, the concepts apply to any OAuth2 provider. You'll learn how to:
@@ -55,7 +55,7 @@ cd custom-auth
 uv add "langgraph-cli[inmem]"
 ```
 
-<a id="setup-auth-provider"></a>
+<a id="setup-auth-provider" />
 
 ## 2. Set up the authentication provider
 

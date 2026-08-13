@@ -1,5 +1,5 @@
 # How to run evaluations with pytest
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/pytest)
+
 The LangSmith pytest plugin lets Python developers define their datasets and evaluations as pytest test cases.
 
 Compared to the standard evaluation flow, this is useful when:
@@ -95,11 +95,11 @@ Each time you run this test suite, LangSmith:
 
 Here's what a test suite dataset looks like:
 
-> **Image:** [Dataset](pytest.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest-dataset.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=f40d29e4260eebc87838ea7be78bd08d" alt="Dataset" width="1078" height="437" data-path="langsmith/images/simple-pytest-dataset.png" />
 
 And what an experiment against that test suite looks like:
 
-> **Image:** [Experiment](pytest.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-pytest.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=09776ac389e88f7f5058f4f7cf44dc72" alt="Experiment" width="1077" height="444" data-path="langsmith/images/simple-pytest.png" />
 
 ## Log inputs, outputs, and reference outputs
 
@@ -342,7 +342,7 @@ pytest --langsmith-output tests
 
 You'll get a nice table per test suite that updates live as the results are uploaded to LangSmith:
 
-> **Image:** [Rich pytest outputs](pytest.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/rich-pytest-outputs.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=10712bc97e37900ca83cb70df1c9357d" alt="Rich pytest outputs" width="1340" height="548" data-path="langsmith/images/rich-pytest-outputs.png" />
 
 Some important notes for using this feature:
 

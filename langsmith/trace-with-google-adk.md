@@ -1,5 +1,5 @@
 # Trace Google ADK applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-google-adk)
+
 This guide shows you how to trace [Google Agent Development Kit (ADK)](https://github.com/google/adk-python) agents in LangSmith. You'll configure automatic tracing for your ADK applications to capture agent invocations, tool calls, and LLM interactions.
 
 > [!NOTE]

@@ -1,6 +1,6 @@
 # Redact secrets from traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/redact-secrets)
-Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using the SDK anonymizer.
+
+> Prevent API keys, tokens, and other secrets from appearing in LangSmith traces using the SDK anonymizer.
 
 When your application handles API keys, tokens, or other credentials, those values can appear in LangSmith traces if they are passed as part of inputs or outputs. Use the LangSmith SDK's built-in anonymizer to redact secrets before they are sent to the backend.
 

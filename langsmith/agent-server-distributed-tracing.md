@@ -1,6 +1,6 @@
 # Distributed tracing with Agent Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-distributed-tracing)
-Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
+
+> Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
 
 When you call a deployed [Agent Server](agent-server.md) from another service, you can propagate trace context so that the entire request appears as a single unified trace in LangSmith. This uses LangSmith's [distributed tracing](distributed-tracing.md) capabilities, which propagate context via HTTP headers.
 

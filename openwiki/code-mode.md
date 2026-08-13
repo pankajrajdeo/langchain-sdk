@@ -1,6 +1,6 @@
 # Code mode
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/code-mode)
-Generate and maintain repository documentation for coding agents with OpenWiki
+
+> Generate and maintain repository documentation for coding agents with OpenWiki
 
 Code mode builds a repository wiki in `openwiki/` with durable details such as architecture, integrations, and workflows. Coding agents use that wiki as context so they can work in the package more efficiently, with less rediscovery and fewer tokens. Humans can read the same Markdown, but agents are the primary audience. Agents discover the wiki through pointers OpenWiki adds to `AGENTS.md` and `CLAUDE.md`.
 

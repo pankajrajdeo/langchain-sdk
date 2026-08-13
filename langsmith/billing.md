@@ -1,5 +1,5 @@
 # Manage billing in your account
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/billing)
+
 This page describes how to manage billing for your LangSmith organization:
 
 * [Set up billing for your account](#set-up-billing-for-your-account): Complete the billing setup process for Developer and Plus plans, including special instructions for legacy accounts.
@@ -104,7 +104,7 @@ LangSmith measures usage per workspace, because workspaces often represent devel
 
 ### Set limits on usage
 
-> **Image:** [P2usagelimitsempty v2](billing.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-XAfdD9knKGGfZBx/langsmith/images/p2usagelimitsempty-v2.png?fit=max&auto=format&n=-XAfdD9knKGGfZBx&q=85&s=27addecc92b87dd4131683fb8500f96c" alt="P2usagelimitsempty v2" width="2598" height="1582" data-path="langsmith/images/p2usagelimitsempty-v2.png" />
 
 #### Set spend limit for workspace
 
@@ -137,7 +137,7 @@ Data retention settings are adjustable per tracing project. At the project level
 
 Navigate to **Projects** > ***Your project name*** > Select **Retention** and select the desired default retention. This will only affect retention (and pricing) for **traces going forward**.
 
-> **Image:** [P1projectretention](billing.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/p1projectretention.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=394b513df5ef31d0309f5f3c78bd315a" alt="P1projectretention" width="1358" height="452" data-path="langsmith/images/p1projectretention.png" />
 
 #### Apply extended data retention to a percentage of traces
 
@@ -157,7 +157,7 @@ To configure this:
 
 For example, this is the expected configuration to keep 10% of all traces for extended data retention:
 
-> **Image:** [P2sampletraces](billing.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/langsmith/images/P2SampleTraces.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=09bbdf5ef7cf3a5a99d6bf0a704e2143" alt="P2sampletraces" width="640" height="610" data-path="langsmith/images/P2SampleTraces.png" />
 
 If you want to keep a subset of traces for **longer than 400 days** for data collection purposes, you can create another run rule that sends some runs to a dataset of your choosing. A dataset allows you to store the trace inputs and outputs (e.g., as a key-value dataset), and will persist indefinitely, even after the trace gets deleted.
 

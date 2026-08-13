@@ -1,6 +1,6 @@
 # Set up coding agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-coding-agents)
-Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
+
+> Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

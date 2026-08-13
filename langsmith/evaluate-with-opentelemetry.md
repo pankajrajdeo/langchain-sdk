@@ -1,5 +1,5 @@
 # How to evaluate with OpenTelemetry
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-with-opentelemetry)
+
 This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith.
 
 > [!NOTE]

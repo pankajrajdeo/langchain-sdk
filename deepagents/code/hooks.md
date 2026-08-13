@@ -1,6 +1,6 @@
 # Hooks
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/hooks)
-Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json
+
+> Observe and control Deep Agents Code lifecycle events with command hooks configured in hooks.json
 
 Hooks let external programs observe and control Deep Agents Code lifecycle events.
 

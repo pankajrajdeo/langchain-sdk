@@ -1,10 +1,10 @@
 # Assistants
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/assistants)
+
 *Assistants* are an [Agent Server](agent-server.md) concept that allow you to manage configurations (e.g., prompts, LLM selection, tools) separately from your graph's core logic. This enables you to create multiple, specialized versions of the same graph architecture with different behavior at runtime. Through configuration variations (rather than structural graph changes), each assistant is optimized for a different [use case](#use-cases).
 
 For example, imagine a general-purpose writing agent built on a common graph architecture. While the structure remains the same, different writing styles—such as blog posts and tweets—require tailored configurations to optimize performance. To support these variations, you can create multiple assistants (e.g., one for blogs and another for tweets) that share the underlying graph but differ in model selection and system prompt.
 
-> **Image:** [assistant versions](assistants.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/assistants.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=05402316c8fe86fead077ec774e873f0" alt="assistant versions" width="1824" height="692" data-path="langsmith/images/assistants.png" />
 
 The Agent Server API provides several endpoints for creating and managing assistants and their versions. See the [API reference](server-api-ref.md) for more details.
 

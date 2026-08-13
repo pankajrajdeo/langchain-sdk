@@ -1,6 +1,6 @@
 # Managed Deep Agents project structure
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-project-structure)
-Understand the files and directories in a Managed Deep Agents project.
+
+> Understand the files and directories in a Managed Deep Agents project.
 
 A Managed Deep Agents project has a required agent entry and optional files that enable managed capabilities.
 

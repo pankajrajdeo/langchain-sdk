@@ -1,5 +1,5 @@
 # Trace LangChain applications (Python and JS/TS)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-langchain)
+
 LangSmith integrates seamlessly with LangChain (Python and JavaScript), the popular open-source framework for building LLM applications.
 
 ## Installation
@@ -44,24 +44,52 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >   <thead>
 >     <tr>
 >       <th>Region</th>
+>
+>       <th>
+>         {protocol_0 === false ? "Host" : "URL"}
+>       </th>
 >     </tr>
 >   </thead>
 >
 >   <tbody>
 >     <tr>
 >       <td>GCP US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP EU</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP APAC</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>AWS US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >   </tbody>
 > </table>
@@ -575,7 +603,7 @@ def invoke_runnnable(question, context):
 invoke_runnnable("Can you summarize this morning's meetings?", "During this morning's meeting, we solved all world conflict.")
 ```
 
-This will produce the following trace tree: <img alt="Trace tree python interop" />
+This will produce the following trace tree: <img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-python-interop.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=52c64fd784522c4b2d75886ae76f8c18" alt="Trace tree python interop" width="1334" height="734" data-path="langsmith/images/trace-tree-python-interop.png" />
 
 ## Interoperability between LangChain.JS and LangSmith SDK
 
@@ -640,7 +668,7 @@ const parrot = new RunnableLambda({
 });
 ```
 
-> **Image:** [Trace Tree](trace-with-langchain.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/trace-tree-manual-tracing.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=7b117d3aa9b419fe2a314ec6d9cc7c16" alt="Trace Tree" width="2564" height="1530" data-path="langsmith/images/trace-tree-manual-tracing.png" />
 
 Alternatively, you can convert LangChain's [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to a equivalent RunTree object by using `RunTree.fromRunnableConfig` or pass the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) as the first argument of `traceable`-wrapped function.
 

@@ -1,5 +1,5 @@
 # How to sync prompts with GitHub
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-commit)
+
 LangSmith provides a collaborative interface to create, test, and iterate on prompts.
 
 While you can [dynamically fetch prompts](manage-prompts-programmatically.md#pull-a-prompt) from LangSmith into your application at runtime, you may prefer to sync prompts with your own database or version control system. To support this workflow, LangSmith allows you to receive notifications of prompt updates via webhooks.
@@ -9,7 +9,7 @@ While you can [dynamically fetch prompts](manage-prompts-programmatically.md#pul
 * **Version Control:** Keep your prompts versioned alongside your application code in a familiar system.
 * **CI/CD Integration:** Trigger automated staging or production deployments when critical prompts change.
 
-> **Image:** [Prompt Webhook Diagram](prompt-commit.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompt-excalidraw.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=a7fd1ae2a70f91c14298803a48785f89" alt="Prompt Webhook Diagram" width="1336" height="343" data-path="langsmith/images/prompt-excalidraw.png" />
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ Before we begin, ensure you have the following set up:
    * Go to **GitHub > Settings > Developer settings > Personal access tokens > Tokens (classic)**.
    * Click **Generate new token (classic)**.
    * Name it (e.g., "LangSmith Prompt Sync"), set an expiration, and select the required scopes.
-   * Click **Generate token** and **copy it immediately** — it won't be shown again.
+   * Click **Generate token** and **copy it immediately** because it is not shown again.
    * Store the token securely and provide it as an environment variable to your server.
 
 ## Understanding LangSmith "Prompt commits" and webhooks
@@ -343,7 +343,7 @@ async def health_check():
 * **Webhook Endpoint (`/webhook/commit`):** This is the URL path your LangSmith webhook will target.
 * **Error Handling:** Basic error handling for GitHub API interactions is included.
 
-**Deploy this server to your chosen platform (e.g., Render) and note down its public URL (e.g., `https://prompt-commit-webhook.onrender.com`).**
+**Deploy this server to your chosen platform (e.g., Render) and note down its public URL (e.g., `https://<your-render-service>.onrender.com`).**
 
 </details>
 
@@ -355,15 +355,15 @@ Once your FastAPI server is deployed and you have its public URL, you can config
 
 2. Go to the **Prompts** section. Here you'll see a list of your prompts.
 
-> **Image:** [LangSmith Prompts section](prompt-commit.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompt-commit-main.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=7e61c83cdd67749970d8f0e401066d60" alt="LangSmith Prompts section" width="2996" height="852" data-path="langsmith/images/prompt-commit-main.png" />
 
 3. On the top right of the Prompts page, click the **+ Webhook** button.
 
 4. You'll be presented with a form to configure your webhook:
 
-> **Image:** [LangSmith Webhook configuration modal](prompt-commit.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompt-commit-webhook.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=775cc6392de007e894c42400117d113e" alt="LangSmith Webhook configuration modal" width="3008" height="1454" data-path="langsmith/images/prompt-commit-webhook.png" />
 
-   * **Webhook URL:** Enter the full public URL of your deployed FastAPI server's endpoint. For our example server, this would be `https://prompt-commit-webhook.onrender.com/webhook/commit`.
+   * **Webhook URL:** Enter the full public URL of your deployed FastAPI server's endpoint. For our example server, this would be `https://<your-render-service>.onrender.com/webhook/commit`.
    * **Headers (Optional):**
      * You can add custom headers that LangSmith will send with each webhook request.
 
@@ -373,7 +373,7 @@ Once your FastAPI server is deployed and you have its public URL, you can config
 
 ## The workflow in action
 
-> **Image:** [Workflow Diagram showing: User saves prompt in LangSmith, LangSmith sends webhook to FastAPI Server, which interacts with GitHub to update files](prompt-commit.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompt-sequence-diagram.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=823988be6300f39a6e9de784b34a2a77" alt="Workflow Diagram showing: User saves prompt in LangSmith, LangSmith sends webhook to FastAPI Server, which interacts with GitHub to update files" width="2922" height="1014" data-path="langsmith/images/prompt-sequence-diagram.png" />
 
 Now, with everything set up, here's what happens:
 
@@ -381,7 +381,7 @@ Now, with everything set up, here's what happens:
 
 2. **Webhook Trigger:** LangSmith detects this new prompt commit and triggers the configured webhook.
 
-3. **HTTP Request:** LangSmith sends an HTTP POST request to the public URL of your FastAPI server (e.g., `https://prompt-commit-webhook.onrender.com/webhook/commit`). The body of this request contains the JSON prompt manifest for the entire workspace.
+3. **HTTP Request:** LangSmith sends an HTTP POST request to the public URL of your FastAPI server (e.g., `https://<your-render-service>.onrender.com/webhook/commit`). The body of this request contains the JSON prompt manifest for the entire workspace.
 
 4. **Server Receives Payload:** Your FastAPI server's endpoint receives the request.
 
@@ -392,7 +392,7 @@ Now, with everything set up, here's what happens:
 
 6. **Confirmation:** You should see the new commit appear in your GitHub repository.
 
-> **Image:** [Manifest committed to GitHub](prompt-commit.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/prompt-commit-github.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=213d6364ce20e4acf4e3eb7fe8c1b13d" alt="Manifest committed to GitHub" width="2982" height="1270" data-path="langsmith/images/prompt-commit-github.png" />
 
 You've now successfully synced your LangSmith prompts with GitHub!
 

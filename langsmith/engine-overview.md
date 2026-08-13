@@ -1,6 +1,6 @@
 # LangSmith Engine
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-overview)
-LangSmith Engine is the agent for agent engineering, turning production traces into fixes, evaluators, and datasets across the development lifecycle.
+
+> LangSmith Engine is the agent for agent engineering, turning production traces into fixes, evaluators, and datasets across the development lifecycle.
 
 LangSmith Engine is the LangSmith Agent for agent engineering. It works from your production traces to surface recurring issues, diagnose their root cause, and drive the fix across every stage of the development lifecycle.
 

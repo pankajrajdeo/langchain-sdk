@@ -1,6 +1,6 @@
 # Add custom middleware to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware)
-Add built-in or custom middleware to Managed Deep Agents projects.
+
+> Add built-in or custom middleware to Managed Deep Agents projects.
 
 Managed Deep Agents support the normal Deep Agents `middleware` configuration surface.
 

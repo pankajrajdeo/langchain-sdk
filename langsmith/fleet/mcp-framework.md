@@ -1,5 +1,5 @@
 # LangSmith Tool Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/mcp-framework)
+
 The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:
 
 * [Create custom tools](#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](../agent-auth.md) for OAuth authentication

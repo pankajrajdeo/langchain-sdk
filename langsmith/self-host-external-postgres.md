@@ -1,5 +1,5 @@
 # Connect to an external PostgreSQL database
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-external-postgres)
+
 LangSmith uses a PostgreSQL database as the primary data store for transactional workloads and operational data (almost everything besides runs). By default, LangSmith Self-Hosted will use an internal PostgreSQL database. However, you can configure LangSmith to use an external PostgreSQL database. By configuring an external PostgreSQL database, you can more easily manage backups, scaling, and other operational tasks for your database.
 
 > [!TIP]
@@ -186,8 +186,7 @@ As of LangSmith helm chart version **0.12.34**, we support IAM authentication fo
 > IAM authentication only handles connection authentication. You may still need to run SQL commands in your database to create the IAM user/role and grant it the necessary permissions and privileges to access the LangSmith schema.
 
 #### AWS
-
-<a id="amazon-rds"></a>
+<a id="amazon-rds" />
 
 ### Amazon RDS IAM authentication
 
@@ -270,8 +269,7 @@ ingestQueue:
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 #### GCP
-
-<a id="google-cloud-sql"></a>
+<a id="google-cloud-sql" />
 
 ### Cloud SQL IAM authentication
 
@@ -354,8 +352,7 @@ ingestQueue:
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 #### Azure
-
-<a id="azure-database-for-postgresql"></a>
+<a id="azure-database-for-postgresql" />
 
 ### Azure Database for PostgreSQL with Microsoft Entra authentication
 

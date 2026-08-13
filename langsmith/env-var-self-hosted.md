@@ -1,6 +1,6 @@
 # Self-hosted Agent Server environment variables
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/env-var-self-hosted)
-Environment variables supported by the LangSmith Agent Server when deployed on self-hosted infrastructure.
+
+> Environment variables supported by the LangSmith Agent Server when deployed on self-hosted infrastructure.
 
 The Agent Server supports the following environment variables when deployed on [self-hosted](deploy-to-self-hosted-overview.md) infrastructure. For variables specific to Cloud deployments, see [Cloud Agent Server environment variables](env-var-cloud.md).
 
@@ -210,6 +210,18 @@ Defaults to `120` seconds.
 
 > [!NOTE]
 > Setting a very high value for `RESUMABLE_STREAM_TTL_SECONDS` can result in substantial Redis memory usage when there are many concurrent runs with large or frequent streaming output. Set this value to the minimum value to enable recovery during network interruptions and prefer checkpointing for long term durability and execution snapshotting.
+
+## `AGENT_POSTGRES_IAM_AUTH_PROVIDER`
+
+Set `AGENT_POSTGRES_IAM_AUTH_PROVIDER` to `aws`, `azure`, or `gcp` to replace the password in the PostgreSQL connection URI with a short-lived cloud identity token. Requires `langgraph-api>=0.12.0`.
+
+For provider prerequisites and connection URI requirements, see [Configure IAM authentication for data stores](configure-iam-auth.md).
+
+## `AGENT_REDIS_IAM_AUTH_PROVIDER`
+
+Set `AGENT_REDIS_IAM_AUTH_PROVIDER` to `aws`, `azure`, or `gcp` to authenticate Redis connections with a short-lived cloud identity token. Requires `langgraph-api>=0.12.0`.
+
+For provider prerequisites and connection URI requirements, see [Configure IAM authentication for data stores](configure-iam-auth.md).
 
 ## `LANGSMITH_API_KEY`
 

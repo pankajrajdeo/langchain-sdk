@@ -1,5 +1,5 @@
 # Manage your organization using the API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-organization-by-api)
+
 LangSmith's API supports programmatic access via API key to all of the actions available in the UI, with only a few exceptions that are noted in [User-only endpoints](#user-only-endpoints).
 
 > [!TIP]

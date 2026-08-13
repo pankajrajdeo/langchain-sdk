@@ -1,6 +1,6 @@
 # Custom stream channels
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/custom-stream-channels)
-Stream custom server-side data to the frontend and read it with useExtension and useChannel
+
+> Stream custom server-side data to the frontend and read it with useExtension and useChannel
 
 LangGraph agents stream more than messages and tool calls. A server-side
 **stream transformer** can inspect or rewrite the protocol as it flows to the

@@ -1,5 +1,5 @@
 # Install LangChain
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/install)
+
 To install the LangChain package:
 
 ```bash

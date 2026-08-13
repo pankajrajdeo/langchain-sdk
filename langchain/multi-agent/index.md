@@ -1,5 +1,5 @@
 # Multi-agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/index)
+
 Multi-agent systems coordinate specialized components to tackle complex workflows. However, not every complex task requires this approach—a single agent with the right (sometimes dynamic) tools and prompt can often achieve similar results.
 
 > [!TIP]
@@ -54,22 +54,22 @@ Use this table to match your requirements to the right pattern:
 #### Subagents
 A main agent coordinates subagents as tools. All routing passes through the main agent.
 
-> **Image:** [Subagents pattern: main agent coordinates subagents as tools](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/pattern-subagents.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=f924dde09057820b08f0c577e08fcfe7" alt="Subagents pattern: main agent coordinates subagents as tools" width="1020" height="734" data-path="oss/langchain/multi-agent/images/pattern-subagents.png" />
 
 #### Handoffs
 Agents transfer control to each other via tool calls. Each agent can hand off to others or respond directly to the user.
 
-> **Image:** [Handoffs pattern: agents transfer control via tool calls](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/pattern-handoffs.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=57d935e6a8efab4afb3faa385113f4dd" alt="Handoffs pattern: agents transfer control via tool calls" width="1568" height="464" data-path="oss/langchain/multi-agent/images/pattern-handoffs.png" />
 
 #### Skills
 A single agent loads specialized prompts and knowledge on-demand while staying in control.
 
-> **Image:** [Skills pattern: single agent loads specialized context on-demand](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/pattern-skills.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=119131d1f19be1f0c6fb1e30f080b427" alt="Skills pattern: single agent loads specialized context on-demand" width="874" height="734" data-path="oss/langchain/multi-agent/images/pattern-skills.png" />
 
 #### Router
 A routing step classifies input and directs it to specialized agents. Results are synthesized.
 
-> **Image:** [Router pattern: routing step classifies input to specialized agents](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/pattern-router.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=ceab32819240ba87f3a132357cc78b09" alt="Router pattern: routing step classifies input to specialized agents" width="1560" height="556" data-path="oss/langchain/multi-agent/images/pattern-router.png" />
 
 > [!TIP]
 > Trace the full coordination flow across agents with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-index). Follow the [tracing quickstart](../../langsmith/trace-with-langchain.md) to get set up.
@@ -101,22 +101,22 @@ A specialized coffee agent/skill can call a `buy_coffee` tool.
 #### Subagents
 **4 model calls:**
 
-> **Image:** [Subagents one-shot: 4 model calls for buy coffee request](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/oneshot-subagents.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=bd4eeef41d8870bfa887dd0aa97d0b79" alt="Subagents one-shot: 4 model calls for buy coffee request" width="1568" height="1124" data-path="oss/langchain/multi-agent/images/oneshot-subagents.png" />
 
 #### Handoffs
 **3 model calls:**
 
-> **Image:** [Handoffs one-shot: 3 model calls for buy coffee request](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/oneshot-handoffs.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=42ec50519ff04f034050dc77cf869907" alt="Handoffs one-shot: 3 model calls for buy coffee request" width="1568" height="948" data-path="oss/langchain/multi-agent/images/oneshot-handoffs.png" />
 
 #### Skills
 **3 model calls:**
 
-> **Image:** [Skills one-shot: 3 model calls for buy coffee request](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/oneshot-skills.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=c8dbf69ed4509e30e5280e7e8a391dab" alt="Skills one-shot: 3 model calls for buy coffee request" width="1568" height="1036" data-path="oss/langchain/multi-agent/images/oneshot-skills.png" />
 
 #### Router
 **3 model calls:**
 
-> **Image:** [Router one-shot: 3 model calls for buy coffee request](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/oneshot-router.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=be5707931d3e520e3ae66af544f2cf2f" alt="Router one-shot: 3 model calls for buy coffee request" width="1568" height="994" data-path="oss/langchain/multi-agent/images/oneshot-router.png" />
 
 **Key insight:** Handoffs, Skills, and Router are most efficient for single tasks (3 calls each). Subagents adds one extra call because results flow back through the main agent—this overhead provides centralized control.
 
@@ -182,28 +182,28 @@ Each language agent/skill contains \~2000 tokens of documentation. All patterns 
 #### Subagents
 **5 calls, \~9K tokens**
 
-> **Image:** [Subagents multi-domain: 5 calls with parallel execution](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/multidomain-subagents.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=9cc5d2d46bfa98b7ceeacdc473512c94" alt="Subagents multi-domain: 5 calls with parallel execution" width="1568" height="1232" data-path="oss/langchain/multi-agent/images/multidomain-subagents.png" />
 
 Each subagent works in **isolation** with only its relevant context. Total: **9K tokens**.
 
 #### Handoffs
 **7+ calls, \~14K+ tokens**
 
-> **Image:** [Handoffs multi-domain: 7+ sequential calls](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/multidomain-handoffs.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=7ede44260515e49ff1d0217f0030d66d" alt="Handoffs multi-domain: 7+ sequential calls" width="1568" height="834" data-path="oss/langchain/multi-agent/images/multidomain-handoffs.png" />
 
 Handoffs executes **sequentially**—can't research all three languages in parallel. Growing conversation history adds overhead. Total: **\~14K+ tokens**.
 
 #### Skills
 **3 calls, \~15K tokens**
 
-> **Image:** [Skills multi-domain: 3 calls with accumulated context](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/multidomain-skills.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=2162584b6076aee83396760bc6de4cf4" alt="Skills multi-domain: 3 calls with accumulated context" width="1560" height="988" data-path="oss/langchain/multi-agent/images/multidomain-skills.png" />
 
 After loading, **every subsequent call processes all 6K tokens of skill documentation**. Subagents processes 67% fewer tokens overall due to context isolation. Total: **15K tokens**.
 
 #### Router
 **5 calls, \~9K tokens**
 
-> **Image:** [Router multi-domain: 5 calls with parallel execution](index.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/multidomain-router.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=ef11573bc65e5a2996d671bb3030ca6b" alt="Router multi-domain: 5 calls with parallel execution" width="1568" height="1052" data-path="oss/langchain/multi-agent/images/multidomain-router.png" />
 
 Router uses an **LLM for routing**, then invokes agents in parallel. Similar to Subagents but with explicit routing step. Total: **9K tokens**.
 

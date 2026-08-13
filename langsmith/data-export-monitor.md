@@ -1,6 +1,6 @@
 # Monitor and troubleshoot bulk exports
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export-monitor)
-Monitor bulk export status, manage running exports, and troubleshoot failures.
+
+> Monitor bulk export status, manage running exports, and troubleshoot failures.
 
 Once you have [created an export job](data-export.md#2-create-an-export-job), you can use the APIs on this page to track its progress, inspect individual runs, and stop it if needed. This page also covers how LangSmith handles failures automatically, and what to do when an export fails after exhausting retries.
 

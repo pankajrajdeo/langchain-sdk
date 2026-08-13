@@ -1,5 +1,5 @@
 # Log LLM calls
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-llm-trace)
+
 When you call an LLM directly, outside of [LangChain](../langchain/overview.md) or a LangSmith [supported integration](integrations.md), you need to provide specific metadata so that LangSmith can display token counts, calculate costs, and let you open the [run](observability-concepts.md#runs) in the [Playground](prompt-engineering-concepts.md#playground) with the correct provider and model.
 
 There are four requirements for a fully functional LLM trace:
@@ -21,142 +21,142 @@ There are four requirements for a fully functional LLM trace:
 When tracing a custom model or a custom input/output format, it must either follow the LangChain format, OpenAI completions format or Anthropic messages format. For more details,  refer to the [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create) or [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) documentation. The LangChain format is:
 
 **LangChain format**
-#### `Field` — `array`
+#### `messages` — `array`
 A list of messages containing the content of the conversation.
 
-#### `Field` — `string`
+#### `role` — `string`
 Identifies the message type. One of: <code>system</code> | <code>reasoning</code> | <code>user</code> | <code>assistant</code> | <code>tool</code>
 
-#### `Field` — `array`
+#### `content` — `array`
 Content of the message. List of typed dictionaries.
 
 **Content options**
-#### `Field` — `string`
+#### `type` — `string`
 One of: <code>text</code> | <code>image</code> | <code>file</code> | <code>audio</code> | <code>video</code> | <code>tool\_call</code> | <code>server\_tool\_call</code> | <code>server\_tool\_result</code>.
 
 **text**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `text` — `string`
 Text content.
 
-#### `Field` — `object[]`
+#### `annotations` — `object[]`
 List of annotations for the text
 
-#### `Field` — `object`
+#### `extras` — `object`
 Additional provider-specific data.
 
 **reasoning**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `text` — `string`
 Text content.
 
-#### `Field` — `object`
+#### `extras` — `object`
 Additional provider-specific data.
 
 **image**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `url` — `string`
 URL pointing to the image location.
 
-#### `Field` — `string`
+#### `base64` — `string`
 Base64-encoded image data.
 
-#### `Field` — `string`
+#### `id` — `string`
 Reference ID to an externally stored image (e.g., in a provider’s file system or in a bucket).
 
-#### `Field` — `string`
+#### `mime_type` — `string`
 Image [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `image/jpeg`, `image/png`).
 
 **file (e.g., PDFs)**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `url` — `string`
 URL pointing to the file.
 
-#### `Field` — `string`
+#### `base64` — `string`
 Base64-encoded file data.
 
-#### `Field` — `string`
+#### `id` — `string`
 Reference ID to an externally stored file (e.g., in a provider’s file system or in a bucket).
 
-#### `Field` — `string`
+#### `mime_type` — `string`
 File [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `application/pdf`).
 
 **audio**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `url` — `string`
 URL pointing to the audio file.
 
-#### `Field` — `string`
+#### `base64` — `string`
 Base64-encoded audio data.
 
-#### `Field` — `string`
+#### `id` — `string`
 Reference ID to an externally stored audio file (e.g., in a provider’s file system or in a bucket).
 
-#### `Field` — `string`
+#### `mime_type` — `string`
 Audio [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `audio/mpeg`, `audio/wav`).
 
 **video**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `url` — `string`
 URL pointing to the video file.
 
-#### `Field` — `string`
+#### `base64` — `string`
 Base64-encoded video data.
 
-#### `Field` — `string`
+#### `id` — `string`
 Reference ID to an externally stored video file (e.g., in a provider’s file system or in a bucket).
 
-#### `Field` — `string`
+#### `mime_type` — `string`
 Video [MIME type](https://www.iana.org/assignments/media-types/media-types.xhtml#image) (e.g., `video/mp4`, `video/webm`).
 
 **tool_call**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `name` — `string`
 
-#### `Field` — `object`
+#### `args` — `object`
 Arguments to pass to the tool.
 
-#### `Field` — `string`
+#### `id` — `string`
 Unique identifier for this tool call.
 
 **server_tool_call**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `id` — `string`
 Unique identifier for this tool call.
 
-#### `Field` — `string`
+#### `name` — `string`
 The name of the tool to be called.
 
-#### `Field` — `object`
+#### `args` — `object`
 Arguments to pass to the tool.
 
 **server_tool_result**
-#### `Field` — `literal(`
+#### `type` — `literal(`
 
-#### `Field` — `string`
+#### `tool_call_id` — `string`
 Identifier of the corresponding server tool call.
 
-#### `Field` — `string`
+#### `id` — `string`
 Unique identifier for this tool call.
 
-#### `Field` — `string`
+#### `status` — `string`
 Execution status of the server-side tool. One of: <code>success</code> | <code>error</code>.
 
-#### `Field`
+#### `output`
 Output of the executed tool.
 
-#### `Field` — `string`
+#### `tool_call_id` — `string`
 Must match the <code>id</code> of a prior <code>assistant</code> message’s <code>tool\_calls\[i]</code> entry. Only valid when <code>role</code> is <code>tool</code>.
 
-#### `Field` — `object`
+#### `usage_metadata` — `object`
 Use this field to send token counts and/or costs with your model's output. See [Provide token and cost information](#provide-token-and-cost-information) for more details.
 
 ```python

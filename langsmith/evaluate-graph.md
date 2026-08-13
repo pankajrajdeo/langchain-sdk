@@ -1,5 +1,5 @@
 # How to evaluate a graph
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-graph)
+
 > [!NOTE]
 > [langgraph](https://langchain-ai.github.io/langgraph/)
 

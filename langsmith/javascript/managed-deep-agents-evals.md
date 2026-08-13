@@ -1,6 +1,6 @@
 # Evaluate Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-evals)
-Create and run Harbor evals for Managed Deep Agents.
+
+> Create and run Harbor evals for Managed Deep Agents.
 
 Managed Deep Agents evals are [Harbor](https://www.harborframework.com/docs/tasks) evals. `evals/tasks/` is the canonical Harbor dataset. Author complete tasks there with Harbor's task format, environments, and verifiers.
 

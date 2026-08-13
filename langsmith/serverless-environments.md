@@ -1,5 +1,5 @@
 # Trace JS functions in serverless environments
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/serverless-environments)
+
 > [!NOTE]
 > This section is relevant for those using the LangSmith JS SDK version 0.2.0 and higher. If you are tracing using LangChain.js or LangGraph.js in serverless environments, see [this guide](https://js.langchain.com/docs/how_to/callbacks_serverless).
 

@@ -1,5 +1,5 @@
 # How to add custom middleware
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-middleware)
+
 When deploying agents to LangSmith, you can add custom middleware to your server to handle concerns like logging request metrics, injecting or checking headers, and enforcing security policies without modifying core server logic. This works the same way as [adding custom routes](custom-routes.md). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
 
 Adding middleware lets you intercept and modify requests and responses globally across your deployment, whether they're hitting your custom endpoints or the built-in LangSmith APIs.

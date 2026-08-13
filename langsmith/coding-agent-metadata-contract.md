@@ -1,6 +1,6 @@
 # Coding agent metadata contract
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/coding-agent-metadata-contract)
-The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
+
+> The metadata schema that standardizes what trace metadata coding agents must emit when sending runs to LangSmith.
 
 This schema is the authoritative contract for metadata that coding agents attach to LangSmith runs. It defines which fields are required on every run, which fields are expected when the runtime can supply them, and which fields apply only to specific run types.
 

@@ -1,6 +1,6 @@
 # Test
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/index)
-Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations.
+
+> Strategies for testing LangChain agents, including unit tests, integration tests, and trajectory evaluations.
 
 Agentic applications let an LLM decide its own next steps to solve a problem. That flexibility is powerful, but the model's black-box nature makes it hard to predict how a tweak in one part of your agent will affect the whole. To build production-ready agents, thorough testing is essential.
 

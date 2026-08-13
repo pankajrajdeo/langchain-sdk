@@ -1,6 +1,6 @@
 # Hugging Face integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/huggingface)
-Integrate with Hugging Face using LangChain Python.
+
+> Integrate with Hugging Face using LangChain Python.
 
 This page covers all LangChain integrations with [Hugging Face Hub](https://huggingface.co/) and libraries like [transformers](https://huggingface.co/docs/transformers/index), [sentence transformers](https://sbert.net/), and [datasets](https://huggingface.co/docs/datasets/index).
 

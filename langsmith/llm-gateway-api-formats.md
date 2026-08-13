@@ -1,6 +1,6 @@
 # API formats
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-api-formats)
-Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
+
+> Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to call models across providers through the LLM Gateway.
 
 The standard LLM Gateway API supports three request and response formats. Choose the format your application already uses, then call bring-your-own-key or Gateway Credits models through the same endpoint.
 
@@ -279,6 +279,98 @@ Replace `gateway.smith.langchain.com` with the hostname for your LangSmith regio
 | AWS US   | `aws.gateway.smith.langchain.com`  |
 
 Keep the same path for the selected API format.
+
+## Use a BYOC data plane
+
+The LLM Gateway is also available on [BYOC](byoc.md), where it runs inside your data plane so model requests and their traces stay in your VPC. Replace the gateway hostname with your [data plane endpoint](byoc-usage.md#find-your-data-plane-endpoint) and prefix the path with `/gateway`:
+
+| API format              | Base URL                               | Prompt endpoint          |
+| ----------------------- | -------------------------------------- | ------------------------ |
+| OpenAI Chat Completions | `https://<data_plane_host>/gateway/v1` | `POST /chat/completions` |
+| Anthropic Messages      | `https://<data_plane_host>/gateway`    | `POST /v1/messages`      |
+| OpenAI Responses        | `https://<data_plane_host>/gateway/v1` | `POST /responses`        |
+
+Authenticate with an API key scoped to a workspace in that data plane. Pass it as an `Authorization: Bearer` token:
+
+```bash
+curl https://<data_plane_host>/gateway/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
+```
+
+```python
+import os
+
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://<data_plane_host>/gateway/v1",
+    api_key=os.environ["LANGSMITH_API_KEY"],
+)
+response = client.chat.completions.create(
+    model="anthropic/claude-sonnet-4-6",
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+```
+
+```typescript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://<data_plane_host>/gateway/v1",
+  apiKey: process.env.LANGSMITH_API_KEY,
+});
+const response = await client.chat.completions.create({
+  model: "anthropic/claude-sonnet-4-6",
+  messages: [{ role: "user", content: "Hello!" }],
+});
+```
+
+Or pass it as the provider API key. For example, an Anthropic Messages request sends the key in the `X-Api-Key` header:
+
+```bash
+curl https://<data_plane_host>/gateway/v1/messages \
+    -H "X-Api-Key: $LANGSMITH_API_KEY" \
+    -H "Anthropic-Version: 2023-06-01" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"openai/gpt-5.4-mini","max_tokens":1024,"messages":[{"role":"user","content":"Hello!"}]}'
+```
+
+```python
+import os
+
+import anthropic
+
+client = anthropic.Anthropic(
+    base_url="https://<data_plane_host>/gateway",
+    api_key=os.environ["LANGSMITH_API_KEY"],
+)
+message = client.messages.create(
+    model="openai/gpt-5.4-mini",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+```
+
+```typescript
+import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic({
+  baseURL: "https://<data_plane_host>/gateway",
+  apiKey: process.env.LANGSMITH_API_KEY,
+});
+const message = await client.messages.create({
+  model: "openai/gpt-5.4-mini",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "Hello!" }],
+});
+```
+
+Provider secrets, model IDs, policies, and tracing behave the same as on Cloud.
+
+> [!WARNING]
+> Data planes are provisioned with a private endpoint by default, so you need private connectivity to reach the base URL, such as Tailscale, AWS PrivateLink, or VPC peering.
 
 ## Handle errors
 

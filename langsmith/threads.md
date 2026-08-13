@@ -1,5 +1,5 @@
 # Configure threads
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/threads)
+
 Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use [*threads*](observability-concepts.md#threads) in LangSmith.
 
 ## Group traces into threads

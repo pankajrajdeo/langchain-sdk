@@ -1,5 +1,5 @@
 # Set up composite online evaluators
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-composite)
+
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: to identify issues, measure improvements, and ensure consistent quality over time.
 
 [**Composite evaluators**](composite-evaluators-ui.md) are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.

@@ -1,5 +1,5 @@
 # Models
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/models)
+
 [LLMs](https://en.wikipedia.org/wiki/Large_language_model) are powerful AI tools that can interpret and generate text like humans. They're versatile enough to write content, translate languages, summarize, and answer questions without needing specialized training for each task.
 
 In addition to text generation, many models support:
@@ -292,7 +292,7 @@ Send multiple requests to a model in a batch for more efficient processing.
 A chat model takes parameters that can be used to configure its behavior. The full set of supported parameters varies by model and provider, but standard ones include:
 
 #### `Field` — `string`
-The name or identifier of the specific model you want to use with a provider. You can also specify both the model and its provider in a single argument using the ':' format, for example, 'openai:o1'.
+The name or identifier of the specific model you want to use with a provider. You can also specify both the model and its provider in a single argument using the '{model_provider}:{model}' format, for example, 'openai:o1'.
 
 #### `Field` — `string`
 The key required for authenticating with the model's provider. This is usually issued when you sign up for access to the model. Often accessed by setting an environment variable.

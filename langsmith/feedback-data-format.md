@@ -1,5 +1,5 @@
 # Feedback data format
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/feedback-data-format)
+
 > [!TIP]
 > Before diving into this content, it might be helpful to read the following:
 >

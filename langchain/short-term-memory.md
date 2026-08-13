@@ -1,5 +1,5 @@
 # Short-term memory
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/short-term-memory)
+
 ## Overview
 
 Memory is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user preferences. As agents tackle more complex tasks with numerous user interactions, this capability becomes essential for both efficiency and user satisfaction.
@@ -493,7 +493,7 @@ for snapshot in stream.values:
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue.
 Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-> **Image:** [Summary](short-term-memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c8ed3facdccd4ef5c7e52902c72ba938" alt="Summary" width="609" height="242" data-path="oss/images/summary.png" />
 
 To summarize message history in an agent, use the built-in [`SummarizationMiddleware`](middleware.md#summarization):
 

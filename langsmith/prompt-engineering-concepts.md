@@ -1,5 +1,5 @@
 # Prompt engineering concepts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-engineering-concepts)
+
 While traditional software applications are built by writing code, AI applications often derive their logic from prompts.
 
 This guide will walk through the key concepts of prompt engineering in LangSmith.
@@ -152,13 +152,13 @@ In the Playground you can:
 
 You can add multiple prompts to your Playground to compare outputs and evaluate performance:
 
-> **Image:** [Add prompt to Playground](prompt-engineering-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-prompt-to-playground.gif?s=1c6f0c32b45a3f480b16d704c09570fc" alt="Add prompt to Playground" width="1000" height="539" data-path="langsmith/images/add-prompt-to-playground.gif" />
 
 ## Testing over a dataset
 
 To test over a dataset, select the dataset from the top right and click Start. You can configure whether results are streamed and the number of repetitions for the test.
 
-> **Image:** [Test over dataset in Playground](prompt-engineering-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/test-over-dataset-in-playground.gif?s=aaf0f90a0c61934a928f81d5e11e2c35" alt="Test over dataset in Playground" width="1000" height="539" data-path="langsmith/images/test-over-dataset-in-playground.gif" />
 
 Click the "View Experiment" button to view detailed test results.
 

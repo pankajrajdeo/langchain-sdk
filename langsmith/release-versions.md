@@ -1,6 +1,6 @@
 # Release policy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/release-versions)
-Release channels, cadence, and version support for self-hosted LangSmith.
+
+> Release channels, cadence, and version support for self-hosted LangSmith.
 
 Self-hosted LangSmith ships on two release channels: a stable channel that customers run in production, and a preview channel that tracks the next major version.
 

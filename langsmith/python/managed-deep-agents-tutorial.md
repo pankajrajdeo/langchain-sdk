@@ -1,27 +1,26 @@
-# Build a scheduled research agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-tutorial)
-Build a Managed Deep Agent with a tool, durable memory, and a daily schedule, then deploy it.
+# Add memory and a schedule to your research assistant
 
-This tutorial builds a research assistant one capability at a time. Complete the [quickstart](managed-deep-agents-quickstart.md) first to scaffold a project, add API keys, and run `mda dev` locally. Then add a search tool, use durable memory, run the agent on a daily schedule, and deploy it to LangSmith.
+> Add durable memory and a daily schedule to the research assistant from the quickstart, then deploy it.
+
+This tutorial continues from the [quickstart](managed-deep-agents-quickstart.md). Use the `research-assistant` project you created there, with your model, instructions, search tool, and a working `mda dev` setup.
+
+`mda init` may also scaffold files such as `identity` and `sandbox/`. Leave those as they are; this tutorial does not change them.
+
+This guide shows you how to you enable durable memory and a daily schedule, then deploy. Optionally, you can also add a custom tool.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-## Build the agent
+## Extend the agent
 
-### Write the instructions
-Replace `instructions.md` with the research assistant's behavior. The instructions reference the tool you add next and the shared durable memory you explicitly enable later in this tutorial:
+### Update the instructions for memory
+Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior from the quickstart and add a memory policy:
 
 ```markdown
 # Research assistant
 
-You are a careful research assistant. Find sources, keep notes, and return
-concise answers with citations.
-
-## Behavior
-
-- Use the `web_search` tool to find sources instead of guessing.
-- Cite the sources you used.
+You are a careful research assistant. Use internet search to find sources,
+keep notes, and return concise answers with citations.
 
 ## Memory
 
@@ -29,49 +28,6 @@ concise answers with citations.
 - For release research, check the project's official changelog before secondary sources.
 - Never store personal data or secrets in memory.
 ```
-
-### Add a search tool
-Create a `tools/` module with a search tool, then import it into the agent entry. This example returns a placeholder result, so it runs without an external API. Replace the body with a call to your search provider.
-
-```python
-from langchain.tools import tool
-
-@tool(parse_docstring=True)
-def web_search(query: str) -> str:
-    """Search the web for a query and return result snippets.
-
-    Args:
-        query: The search query.
-    """
-    # Replace this stub with a call to your search provider.
-    return f"Top results for '{query}': ..."
-```
-
-Import the tool into the agent entry and pass it to the definition:
-
-```python
-from managed_deepagents import define_deep_agent
-
-from tools.search import web_search
-
-agent = define_deep_agent(
-    name="research-assistant",
-    model="openai:gpt-5.5",
-    tools=[web_search],
-)
-```
-
-For more on authored tools, see [Custom tools](managed-deep-agents-tools.md).
-
-### Run the agent locally
-Install dependencies and start the local dev server:
-
-```bash
-uv sync
-mda dev .
-```
-
-`mda dev` opens the agent in LangSmith Studio. Send a question and confirm the agent calls `web_search` and answers with the returned snippets.
 
 ### Enable and use durable memory
 Durable memory is opt-in. Before asking the agent to remember anything, add a memory declaration at the project root:
@@ -88,6 +44,96 @@ Restart `mda dev` so it discovers the new file. In one thread, ask the agent to 
 
 See [Memory](managed-deep-agents-memory.md) for details.
 
+### (Optional) Add a custom tool
+Provider search covers the open web. Authored tools cover your application logic: private APIs, databases, and internal data. Create a module under `tools/`, import it into the agent entry, and add it to the `tools` list next to your existing search tool.
+
+This example returns a placeholder project record so it runs without an external API. Replace the body with a call to your system.
+
+```python
+from langchain.tools import tool
+
+@tool(parse_docstring=True)
+def lookup_tracked_project(project: str) -> str:
+    """Look up an internally tracked project by name.
+
+    Args:
+        project: Project or product name to look up.
+    """
+    # Replace this stub with a call to your project catalog or database.
+    return (
+        f"Project '{project}': status=active, owners=docs, "
+        f"changelog=https://example.com/{project}/changelog"
+    )
+```
+
+Append the custom tool next to your existing search tool, keep your quickstart `model`, and choose the tab that matches your search setup:
+
+#### Provider search
+Open `agent.py`:
+
+```python
+from managed_deepagents import define_deep_agent
+
+from tools.projects import lookup_tracked_project
+
+agent = define_deep_agent(
+    name="research-assistant",
+    model="openai:gpt-5.5",
+    tools=[
+        {"type": "web_search"},
+        lookup_tracked_project,
+    ],
+)
+```
+
+```python
+from managed_deepagents import define_deep_agent
+
+from tools.projects import lookup_tracked_project
+
+agent = define_deep_agent(
+    name="research-assistant",
+    model="google_genai:gemini-3.6-flash",
+    tools=[
+        {"google_search": {}},
+        lookup_tracked_project,
+    ],
+)
+```
+
+```python
+from managed_deepagents import define_deep_agent
+
+from tools.projects import lookup_tracked_project
+
+agent = define_deep_agent(
+    name="research-assistant",
+    model="anthropic:claude-sonnet-4-6",
+    tools=[
+        {"type": "web_search_20260209", "name": "web_search"},
+        lookup_tracked_project,
+    ],
+)
+```
+
+#### Tavily
+Open `agent.py`. Keep your quickstart `model` value:
+
+```python
+from managed_deepagents import define_deep_agent
+
+from tools.projects import lookup_tracked_project
+from tools.search import internet_search
+
+agent = define_deep_agent(
+    name="research-assistant",
+    model="provider:model",
+    tools=[internet_search, lookup_tracked_project],
+)
+```
+
+Restart `mda dev` if it is already running. In Studio, ask for the status of a tracked project and confirm the agent calls `lookup_tracked_project`.
+
 ### Schedule a daily digest
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
 
@@ -97,23 +143,39 @@ from managed_deepagents import define_schedule
 schedule = define_schedule(
     cron="0 8 * * 1-5",
     timezone="America/Los_Angeles",
-    prompt="Summarize what you learned yesterday and list open questions.",
+    prompt=(
+        "Review durable memory for reusable research rules. "
+        "Summarize anything useful, then list open questions for today."
+    ),
 )
 ```
 
-`mda deploy` reconciles this schedule into a LangSmith cron job after the deployment is live. For thread behavior and constraints, see [Schedules](managed-deep-agents-schedules.md).
+If memory is empty on the first fire, the agent still returns open questions.
 
-### Deploy the agent
+`mda deploy` reconciles this schedule into a LangSmith cron job after the deployment is live. After you deploy in the next step, you should see:
+
+* `mda deploy` finish without schedule errors (do not pass `--no-wait`, or schedules are not reconciled).
+* A managed cron for this file on the deployment. The schedule name matches the module stem: `daily_digest` (Python) or `daily-digest` (TypeScript).
+* No immediate digest run from this cron. The first fire waits until 8:00 America/Los\_Angeles on a weekday.
+
+For thread behavior and constraints, see [Schedules](managed-deep-agents-schedules.md).
+
+### Deploy and inspect
 Deploy the project to LangSmith:
 
 ```bash
 mda deploy .
 ```
 
-On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule. For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-deploy.md) and the [CLI reference](managed-deep-agents-cli.md#deploy-projects).
+On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule.
 
-### Inspect the run
-Open the printed URL in LangSmith to inspect build status and revisions. Open traces to inspect the agent's inputs, model calls, `web_search` calls, memory reads and writes, and final responses.
+Open that URL and confirm:
+
+* The deployment is ready.
+* The `daily_digest` or `daily-digest` cron exists.
+* A test chat run shows model calls, search or custom tool calls, and memory reads or writes in the traces.
+
+For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-deploy.md) and the [CLI reference](managed-deep-agents-cli.md#deploy-projects).
 
 ## Next steps
 
@@ -123,14 +185,8 @@ Add logging, retries, limits, and guardrails around model and tool calls.
 #### [Identity](managed-deep-agents-identity.md)
 Authenticate callers and use verified identity in tools and middleware.
 
-#### [Memory](managed-deep-agents-memory.md)
-Persist shared procedural and project knowledge across threads.
-
 #### [Evals](managed-deep-agents-evals.md)
 Author Harbor tasks and compile the managed agent for Harbor.
-
-#### [Sandboxes](managed-deep-agents-sandboxes.md)
-Configure isolated filesystem and shell access for agent work.
 
 ***
 

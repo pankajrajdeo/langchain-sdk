@@ -1,6 +1,6 @@
 # Backend integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/backends/index)
-Community-built filesystem backends for Deep Agents.
+
+> Community-built filesystem backends for Deep Agents.
 
 Browse available filesystem backends for Deep Agents or contribute your own to the ecosystem. Learn more about how backends work in the [backends docs](../../deepagents/backends.md).
 

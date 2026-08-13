@@ -1,5 +1,5 @@
 # How to evaluate an application's intermediate steps
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-on-intermediate-steps)
+
 While, in many scenarios, it is sufficient to evaluate the final output of your task, in some cases you might want to evaluate the intermediate steps of your pipeline.
 
 For example, for retrieval-augmented generation (RAG), you might want to
@@ -179,7 +179,7 @@ const ragPipeline = traceable(
 );
 ```
 
-This pipeline will produce a trace that looks something like: <img alt="evaluation_intermediate_trace.png" />
+This pipeline will produce a trace that looks something like: <img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-trace.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=3b691ca56f9d60035dcba2c248692fa1" alt="evaluation_intermediate_trace.png" width="2586" height="1676" data-path="langsmith/images/evaluation-intermediate-trace.png" />
 
 ## 2. Create a dataset and examples to evaluate the pipeline
 
@@ -398,7 +398,7 @@ await evaluate((inputs) => ragPipeline({ question: inputs.input }), {
 });
 ```
 
-The experiment will contain the results of the evaluation, including the scores and comments from the evaluators: <img alt="evaluation_intermediate_experiment.png" />
+The experiment will contain the results of the evaluation, including the scores and comments from the evaluators: <img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluation-intermediate-experiment.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=e926744573c6b9757ba22ff245a3da2c" alt="evaluation_intermediate_experiment.png" width="2446" height="1244" data-path="langsmith/images/evaluation-intermediate-experiment.png" />
 
 ## Related
 

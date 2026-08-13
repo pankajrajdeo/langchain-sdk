@@ -1,5 +1,5 @@
 # Build a voice agent with LangChain
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/voice-agent)
+
 ## Overview
 
 Chat interfaces have dominated how we interact with AI, but recent breakthroughs in multimodal AI are opening up exciting new possibilities. High-quality generative models and expressive text-to-speech (TTS) systems now make it possible to build agents that feel less like tools and more like conversational partners.

@@ -1,5 +1,5 @@
 # Application structure
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/application-structure)
+
 A LangGraph application consists of one or more graphs, a configuration file (`langgraph.json`), a file that specifies dependencies, and an optional `.env` file that specifies environment variables.
 
 This guide shows a typical structure of an application and shows you how to provide the required configuration to deploy an application with [LangSmith Deployment](../langsmith/deployment.md).
@@ -55,7 +55,7 @@ my-app/
 > [!NOTE]
 > The directory structure of a LangGraph application can vary depending on the programming language and the package manager used.
 
-<a id="configuration-file-concepts"></a>
+<a id="configuration-file-concepts" />
 
 ## Configuration file
 

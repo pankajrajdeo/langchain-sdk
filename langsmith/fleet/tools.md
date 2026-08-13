@@ -1,6 +1,6 @@
 # Tool integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/tools)
-Give your agents access to a wide range of tools and services.
+
+> Give your agents access to a wide range of tools and services.
 
 You can access a variety of tools in LangSmith Fleet. Use tool integrations and [MCP servers](remote-mcp-servers.md) to give your agents access to email, calendars, chat, project management, code hosting, spreadsheets/BI, search, social, and general web utilities.
 

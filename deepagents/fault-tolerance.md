@@ -1,6 +1,6 @@
 # Fault tolerance
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/fault-tolerance)
-Make your deep agent resilient with rate limiting, retries, fallbacks, and error handling
+
+> Make your deep agent resilient with rate limiting, retries, fallbacks, and error handling
 
 Fault tolerance middleware keeps your deep agent running when things go wrong. Not all errors should be handled the same way: transient failures (network timeouts, rate limits) should be retried automatically, errors the LLM can recover from (bad tool output, parsing failures) should be fed back to the model, and errors that need human input should pause the agent.
 

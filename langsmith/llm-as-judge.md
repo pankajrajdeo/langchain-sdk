@@ -1,5 +1,5 @@
 # How to define an LLM-as-a-judge evaluator
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-as-judge)
+
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 
 This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-concepts.md#llm-as-judge) for [offline evaluation](evaluation-concepts.md#offline-evaluations) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge).

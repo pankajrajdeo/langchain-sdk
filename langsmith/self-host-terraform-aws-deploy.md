@@ -1,6 +1,6 @@
 # Deploy LangSmith on AWS with Terraform
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy)
-End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
+
+> End-to-end walkthrough for provisioning LangSmith self-hosted on AWS EKS using the LangChain Terraform modules.
 
 Deploy LangSmith to AWS with the public [Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). Managing the deployment as code lets you version, review, and reproduce your LangSmith environment across accounts instead of clicking through the AWS Console.
 

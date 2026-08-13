@@ -1,6 +1,6 @@
 # Granular billable usage
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/granular-usage)
-Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
+
+> Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
 
 > [!NOTE]
 > **Trace usage:** For LangSmith [Cloud](cloud.md), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.

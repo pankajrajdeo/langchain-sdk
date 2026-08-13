@@ -1,5 +1,5 @@
 # Co-marketing
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/comarketing)
+
 With over 60 million monthly downloads, LangChain has a large audience of developers building LLM applications. Beyond just listing integrations, we aim to highlight high-quality, educational examples that inspire developers and advance the ecosystem.
 
 > [!NOTE]

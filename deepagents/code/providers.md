@@ -1,6 +1,6 @@
 # Model providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/providers)
-Configure any LangChain-compatible model provider for Deep Agents Code
+
+> Configure any LangChain-compatible model provider for Deep Agents Code
 
 Deep Agents Code supports any [chat model provider compatible with LangChain](../../integrations/chat.md), unlocking use for virtually any LLM that supports tool calling. Any service that exposes an OpenAI-compatible or Anthropic-compatible API also works out of the box—see [Compatible APIs](config-file.md#compatible-apis).
 

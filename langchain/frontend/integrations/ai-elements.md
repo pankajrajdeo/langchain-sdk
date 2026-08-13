@@ -1,6 +1,6 @@
 # AI Elements
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/ai-elements)
-Composable shadcn/ui-based components for AI chat interfaces with useStream
+
+> Composable shadcn/ui-based components for AI chat interfaces with useStream
 
 [AI Elements](https://elements.ai-sdk.dev/) is a composable, shadcn/ui-based component library purpose-built for AI chat interfaces. Components like `Conversation`, `Message`, `Tool`, `Reasoning`, and `PromptInput` are designed to drop directly into any React project and wire to `stream.messages` with minimal glue code.
 

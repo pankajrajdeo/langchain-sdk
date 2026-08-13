@@ -1,6 +1,6 @@
 # Use remote sandboxes
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes)
-Run Deep Agents Code tool execution in LangSmith, AgentCore, Daytona, Modal, Runloop, Vercel, or E2B sandboxes. Install provider dependencies, set credentials, and use flags and setup scripts.
+
+> Run Deep Agents Code tool execution in LangSmith, AgentCore, Daytona, Modal, Runloop, Vercel, or E2B sandboxes. Install provider dependencies, set credentials, and use flags and setup scripts.
 
 Deep Agents Code uses the [sandbox as tool](../sandboxes.md#sandbox-as-tool-pattern) pattern: the `dcode` process (LLM loop, memory, tool dispatch) runs on your machine, but agent tool calls (`read_file`, `write_file`, `execute`, etc.) target the remote sandbox, not your local filesystem. To get files into the sandbox, use a [setup script](#setup-scripts) or the provider's file transfer APIs (see [Working with files](../sandboxes.md#working-with-files)).
 

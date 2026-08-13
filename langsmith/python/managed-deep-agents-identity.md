@@ -1,6 +1,6 @@
 # Add identity to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity)
-Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key or Supabase.
+
+> Authenticate callers to a Managed Deep Agents deployment with a LangSmith API key or Supabase.
 
 Identity controls who can call your Managed Deep Agents deployment. By default, identity is secure: `mda init` configures authentication with a LangSmith API key.
 

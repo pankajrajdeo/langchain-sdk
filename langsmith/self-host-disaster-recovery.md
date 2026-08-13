@@ -1,5 +1,5 @@
 # Disaster recovery for self-hosted LangSmith
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-disaster-recovery)
+
 This page describes how to plan, configure, and operate disaster recovery (DR) for self-hosted LangSmith Observability and Evaluation. It covers what data must be protected, where it lives, how to back it up, and how to recover the platform after a regional or zonal failure.
 
 > [!NOTE]

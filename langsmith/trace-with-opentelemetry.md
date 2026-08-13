@@ -1,6 +1,6 @@
 # Trace with OpenTelemetry
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
-Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector.
+
+> Configure OpenTelemetry tracing in LangSmith, including LANGSMITH_OTEL_ENABLED and OTEL fanout with the OpenTelemetry Collector.
 
 LangSmith supports OpenTelemetry-based tracing, allowing you to send traces from any OpenTelemetry-compatible application. This guide covers both automatic instrumentation for LangChain applications and manual instrumentation for other frameworks.
 

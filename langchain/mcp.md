@@ -1,5 +1,5 @@
 # Model Context Protocol (MCP)
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/mcp)
+
 [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) is an open protocol that standardizes how applications provide tools and context to LLMs. LangChain agents can use tools defined on MCP servers using the [`langchain-mcp-adapters`](https://github.com/langchain-ai/langchain-mcp-adapters) library.
 
 ## Quickstart

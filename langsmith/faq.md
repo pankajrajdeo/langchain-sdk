@@ -1,5 +1,5 @@
 # Frequently asked questions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/faq)
+
 ## Observability
 
 ### *I can't create API keys or manage users in the UI, what's wrong?*

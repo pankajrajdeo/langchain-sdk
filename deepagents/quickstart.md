@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/quickstart)
-Build your first deep agent in minutes
+
+> Build your first deep agent in minutes
 
 This guide walks you through creating your first deep agent with file system tools and subagent capabilities. You will build a research agent that can conduct research and write reports.
 

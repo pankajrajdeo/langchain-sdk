@@ -1,12 +1,12 @@
 # LangSmith Chat
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/chat)
-Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
+
+> Use Chat in LangSmith to analyze traces, threads, prompts, and evaluations.
 
 **LangSmith Chat** (formerly Polly) is built directly into your LangSmith [workspace](administration-overview.md#workspaces) to help you analyze and understand your application data.
 
 Chat helps you gain insight from your traces, conversation threads, and prompts without having to dig through data manually. By asking natural language questions, you can quickly understand agent performance, debug issues, and analyze user sentiment.
 
-<img alt="LangSmith Chat icon" /> Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
+<img src="https://mintcdn.com/langchain-5e9cc07a/NVEcSyCXgAhfub1c/images/brand/polly-icon.png?fit=max&auto=format&n=NVEcSyCXgAhfub1c&q=85&s=d58c4caab502fcaa02864b5a8f833604" alt="LangSmith Chat icon" width="650" height="650" data-path="images/brand/polly-icon.png" /> Chat appears in the right-hand bottom corner of the following locations within [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-chat):
 
 <br /><br />**Observability & Debugging:**
 
@@ -26,9 +26,9 @@ Chat helps you gain insight from your traces, conversation threads, and prompts 
 * [Annotation Queues](#annotation-queues): Review runs and make informed annotation decisions.
 * [Evaluators](#evaluators): Build and refine evaluators with AI assistance.
 
-> **Image:** [Chat in the sidebar on a dataset view.](chat.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-light.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=771a678928374d181e5d9d5e33d16cb0" alt="Chat in the sidebar on a dataset view." width="1437" height="747" data-path="langsmith/images/polly-datasets-light.png" />
 
-> **Image:** [Chat in the sidebar on a dataset view.](chat.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Cd9j6FYj16b1asiM/langsmith/images/polly-datasets-dark.png?fit=max&auto=format&n=Cd9j6FYj16b1asiM&q=85&s=e58462239dc037d880ec2c309e86f463" alt="Chat in the sidebar on a dataset view." width="1436" height="751" data-path="langsmith/images/polly-datasets-dark.png" />
 
 ## Get started
 

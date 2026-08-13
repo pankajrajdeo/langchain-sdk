@@ -1,8 +1,8 @@
 # Connect LangSmith Engine to GitHub
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-github)
-Connect LangSmith Engine to GitHub in LangSmith Cloud, or create and configure your own GitHub App for a self-hosted deployment.
 
-LangSmith Engine reads your source code to diagnose issues and opens pull requests with proposed fixes. It connects to GitHub through a GitHub App. This page covers connecting repositories in LangSmith Cloud and configuring your own GitHub App for a self-hosted deployment.
+> Connect LangSmith Engine to GitHub in LangSmith Cloud, or create and configure your own GitHub App for a self-hosted deployment.
+
+Connecting a GitHub repository is optional. When connected, LangSmith Engine reads source code to diagnose issues and opens pull requests with proposed fixes. Engine uses a LangChain-managed GitHub App in LangSmith Cloud, while self-hosted operators create and manage their own GitHub App.
 
 ## LangSmith Cloud
 
@@ -19,7 +19,7 @@ For the access and retention model of the managed app, see [Engine security](eng
 
 ## Self-hosted
 
-In a self-hosted deployment, you create and manage your own GitHub App and pass its credentials to the LangSmith Helm chart.
+To create and configure a GitHub App for a self-hosted deployment:
 
 ### Create a GitHub App
 
@@ -38,7 +38,7 @@ https://<langsmith-host>/api-host/v1/integrations/forge/github/callback
 ```
 
 ### Set the webhook URL and secret
-Generate a random webhook secret of at least 32 bytes with your secret manager or another cryptographically secure generator. Use the same value in GitHub and your LangSmith secret store.
+Generate a random webhook secret of at least 32 bytes with your secret manager or another cryptographically secure generator. Store this value in your LangSmith secret store.
 
 Under **Webhook**, select **Active** and set the **Webhook URL**, replacing `<langsmith-host>` with your LangSmith hostname:
 
@@ -46,7 +46,7 @@ Under **Webhook**, select **Active** and set the **Webhook URL**, replacing `<la
 https://<langsmith-host>/api-host/v1/integrations/forge/github/webhook
 ```
 
-Paste the generated value into **Webhook secret**.
+Enter the generated value in **Webhook secret**.
 
 ### Set repository permissions
 Under **Permissions > Repository permissions**, grant the following:
@@ -69,12 +69,15 @@ Click **Create GitHub App**. GitHub supplies the following values on the app set
 | **Private key**   | Under **Private keys**, click **Generate a private key** (downloads a `.pem` file) | `FORGE_GITHUB_APP_PEM`         |
 
 ### Generate a state JWT secret
-LangSmith signs short-lived OAuth state tokens with an HMAC key. Generate a random secret of at least 32 bytes with your secret manager or another cryptographically secure generator. GitHub does not provide this value.
+LangSmith uses an HMAC key to sign short-lived OAuth state tokens and protect callback state. Generate a random secret of at least 32 bytes with your secret manager or another cryptographically secure generator. GitHub does not provide this value.
 
 This is `FORGE_GITHUB_STATE_JWT_SECRET`. Generate it separately, and do not reuse the webhook secret or any other credential.
 
 ### Create a Kubernetes Secret
-With your existing secret-management workflow, create a Kubernetes Secret named `langsmith-forge-github` with these keys:
+> [!WARNING]
+> The GitHub client secret, private key, state JWT secret, and webhook secret are credentials. Store them only in a Kubernetes Secret, never in Helm values or command-line arguments.
+
+Using your existing [secret-management workflow](self-host-using-an-existing-secret.md), create a Kubernetes Secret named `langsmith-forge-github` with these keys:
 
 | Key                             | Value                                      |
 | ------------------------------- | ------------------------------------------ |
@@ -83,10 +86,10 @@ With your existing secret-management workflow, create a Kubernetes Secret named 
 | `forge_github_app_pem`          | Contents of the GitHub App private-key PEM |
 | `forge_github_webhook_secret`   | Webhook secret also configured in GitHub   |
 
-Do not put these values in Helm values or command-line arguments. For production deployments, use your existing secrets workflow, such as [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/). See [Use an existing secret](self-host-using-an-existing-secret.md) for more.
+For production deployments, use your existing secrets workflow, such as [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/).
 
 ### Add the configuration to your langsmith_config.yaml
-Add the following to `hostBackend.deployment.extraEnv` in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts). Reference the sensitive values with `secretKeyRef`; never set them through `commonEnv` or as inline values:
+Add the following to `hostBackend.deployment.extraEnv` in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts). The App ID, public link, and client ID use literal `value` entries. Reference the client secret, state JWT secret, private key, and webhook secret with `secretKeyRef`; never set them through `commonEnv` or as inline values:
 
 ```yaml
 hostBackend:
@@ -120,7 +123,7 @@ hostBackend:
             key: forge_github_webhook_secret
 ```
 
-Then apply the updated chart:
+Apply the Helm configuration:
 
 ```bash
 helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --version <version> -n <namespace> --wait --debug
@@ -132,6 +135,8 @@ Once pods are healthy, install the GitHub App on the repositories Engine should 
 1. Open the app's public link (`FORGE_GITHUB_APP_PUBLIC_LINK`) and click **Install**, or open **Settings > Applications > GitHub Apps** in your GitHub organization.
 2. Select the repositories Engine should access. If the installation does not grant access to all repositories, explicitly select each private repository Engine needs.
 3. In LangSmith, open a tracing project, go to the **Engine** tab, and select the repository in the **GitHub Repository** field.
+
+The connected repository lets Engine use your source code for diagnosis and open pull requests with proposed fixes.
 
 ## See also
 

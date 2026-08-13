@@ -1,5 +1,5 @@
 # Trace Mastra applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-mastra)
+
 [Mastra](https://mastra.ai/docs) is a TypeScript framework for building AI-powered applications and agents. Using Mastra’s [LangSmith exporter](https://mastra.ai/docs/observability/ai-tracing/exporters/langsmith), you can send traces from your Mastra agents and workflows to LangSmith for debugging, evaluation, and observability.
 
 This guide shows you how to integrate Mastra with LangSmith using Mastra’s AI tracing system.

@@ -1,6 +1,6 @@
 # Manage agent settings
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/manage-agent-settings)
-Manage your agents in Fleet.
+
+> Manage your agents in Fleet.
 
 This page explains how to manage the settings for your agents in LangSmith Fleet.
 

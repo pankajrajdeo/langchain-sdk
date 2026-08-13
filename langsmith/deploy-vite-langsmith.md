@@ -1,6 +1,6 @@
 # Deploy with LangSmith and Vite
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
-Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
+
+> Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
 
 This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs as a [LangSmith Deployment](deployment.md), and the frontend is a Vite + React app that streams from it.
 
@@ -144,8 +144,8 @@ The agent and the UI deploy separately. After `pnpm run deploy` succeeds, host t
 ### Import the repository
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key">
-> **Image:** [Deploy with Vercel](deploy-vite-langsmith.md)
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key" target="_blank" rel="noopener noreferrer">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
 </a>
 
 ### Configure the project
@@ -159,8 +159,8 @@ Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook
 ### Import the repository
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-langsmith">
-> **Image:** [Deploy to Netlify](deploy-vite-langsmith.md)
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-langsmith" target="_blank" rel="noopener noreferrer">
+  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
 </a>
 
 ### Configure the project

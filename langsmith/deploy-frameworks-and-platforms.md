@@ -1,6 +1,6 @@
 # Deploy full-stack web apps
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
-Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history.
+
+> Deploy LangChain agents as full-stack web apps on Next.js, SvelteKit, Nuxt, Cloudflare Workers, Deno Deploy, and Vite with streaming UI and thread history.
 
 The following pages provide reference implementations for running LangChain agents in production on JavaScript frameworks and hosting platforms. Each example in the [deployment cookbook repository](https://github.com/langchain-ai/deployment-cookbook) is a full-stack chat app with streaming UI, subagents, and thread history, deployed on a different platform using the same [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming).
 

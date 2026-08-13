@@ -1,6 +1,6 @@
 # Multimodal inputs and outputs
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/multimodal)
-Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
+
+> Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
 
 Deep Agents supports multimodal workflows when you use a [Large Language Model](../integrations/chat.md) that accepts multimodal inputs and tool results or returns multimodal outputs. You can attach images and other media to user messages, read non-text files with the built-in `read_file` tool, and return multimodal content from custom tools.
 

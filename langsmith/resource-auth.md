@@ -1,8 +1,8 @@
 # Make conversations private
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/resource-auth)
+
 In this tutorial, you will extend [the chatbot created in the last tutorial](set-up-custom-auth.md) to give each user their own private conversations. You'll add [resource-level access control](auth.md#single-owner-resources) so users can only see their own threads.
 
-> **Image:** [Authorization flow: after authentication, an authorization handler tags each resource with owner=user id and returns a filter so users only see their own threads.](resource-auth.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/authorization.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=8daa07dd8efb13d7f9d7aa35117b2138" alt="Authorization flow: after authentication, an authorization handler tags each resource with owner=user id and returns a filter so users only see their own threads." width="2617" height="1673" data-path="langsmith/images/authorization.png" />
 
 ## Prerequisites
 
@@ -184,7 +184,7 @@ This means:
 2. Users can't see each other's threads
 3. Listing threads only shows your own
 
-<a id="scoped-authorization"></a>
+<a id="scoped-authorization" />
 
 ## 3. Add scoped authorization handlers
 

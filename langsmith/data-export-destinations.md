@@ -1,6 +1,6 @@
 # Manage bulk export destinations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export-destinations)
-Configure and manage S3-compatible export destinations for LangSmith bulk exports.
+
+> Configure and manage S3-compatible export destinations for LangSmith bulk exports.
 
 > [!NOTE]
 > **For self-hosted, GCP EU, GCP APAC, and AWS US SaaS**

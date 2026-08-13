@@ -1,6 +1,6 @@
 # Schedules
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/schedules)
-Configure schedules to run your Fleet agents on a recurring basis.
+
+> Configure schedules to run your Fleet agents on a recurring basis.
 
 Schedules run your agent on a recurring time-based schedule. Use schedules when your agent needs to do work proactively, not just in response to a message or event.
 

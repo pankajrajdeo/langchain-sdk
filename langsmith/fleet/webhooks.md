@@ -1,6 +1,6 @@
 # Fleet webhooks
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/webhooks)
-Integrate agent publishing with external systems, CI/CD pipelines, or custom deployment workflows.
+
+> Integrate agent publishing with external systems, CI/CD pipelines, or custom deployment workflows.
 
 When triggered, a webhook sends a complete package of your agent's configuration and files to the specified endpoint.
 

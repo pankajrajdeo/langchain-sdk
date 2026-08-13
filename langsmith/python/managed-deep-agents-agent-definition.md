@@ -1,6 +1,6 @@
 # Define a Managed Deep Agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition)
-Configure the model and core capabilities of a Managed Deep Agent.
+
+> Configure the model and core capabilities of a Managed Deep Agent.
 
 The agent definition selects the model and core capabilities of a Managed Deep Agent.
 

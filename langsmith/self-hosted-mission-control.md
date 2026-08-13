@@ -1,6 +1,6 @@
 # Install Mission Control
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-mission-control)
-Install Mission Control, an in-cluster console for monitoring, configuring, and operating self-hosted LangSmith on Kubernetes.
+
+> Install Mission Control, an in-cluster console for monitoring, configuring, and operating self-hosted LangSmith on Kubernetes.
 
 Mission Control is an in-cluster console for monitoring, configuring, and operating LangSmith on Kubernetes. It runs inside your cluster and is accessed with `kubectl port-forward` by default, so no ingress is required.
 

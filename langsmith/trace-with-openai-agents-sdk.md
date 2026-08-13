@@ -1,6 +1,6 @@
 # Trace OpenAI Agents SDK applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-openai-agents-sdk)
-Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith.
+
+> Trace OpenAI Agents SDK Python and JavaScript applications with LangSmith.
 
 The OpenAI Agents SDK lets you build agentic applications powered by OpenAI models.
 

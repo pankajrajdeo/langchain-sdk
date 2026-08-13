@@ -1,5 +1,5 @@
 # Dataset transformations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/dataset-transformations)
+
 LangSmith allows you to attach transformations to fields in your dataset's schema that apply to your data before it is added to your dataset, whether that be from UI, API, or run rules.
 
 Coupled with [LangSmith's prebuilt JSON schema types](dataset-json-types.md), these allow you to do easy preprocessing of your data before saving it into your datasets.

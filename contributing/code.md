@@ -1,5 +1,5 @@
 # Contributing to code
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/code)
+
 Code contributions are welcome! Whether you're fixing bugs, adding features, or improving performance, your contributions help deliver a better developer experience for thousands of developers.
 
 ## Getting started

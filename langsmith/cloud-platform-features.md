@@ -1,6 +1,6 @@
 # Cloud platform features
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cloud-platform-features)
-Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types.
+
+> Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types.
 
 This page describes the platform features that apply only to [Cloud](cloud.md) deployments. For self-hosted equivalents, see [Deploy to self-hosted](deploy-to-self-hosted-overview.md).
 

@@ -1,5 +1,5 @@
 # Monitor projects with dashboards
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/dashboards)
+
 Dashboards give you high-level insights into your [trace](observability-concepts.md#traces) data, helping you spot trends and monitor the health of your applications. Dashboards are available in **Monitoring** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-dashboards).
 
 LangSmith offers two dashboard types:
@@ -210,7 +210,7 @@ You can create a chart to track and visualize the breakdown of these decisions.
 1. **Metric Selection**: Select the metric `Run count`.
 2. **Chart Filters**: Add a tree filter to include all of the traces with name `triage_input`. This means you only include traces that hit the `triage_input` node. Also add a chart filter for `Is Root` is `true`, so the count is not inflated by the number of nodes in the trace.
 3. **Data Series**: Create a data series for each decision made at the `triage_input` node. The output of the decision is stored in the `triage.response` field of the output object, and the value of the decision is either `no`, `email`, or `notify`. Each of these decisions generates a separate data series in the chart.
-> **Image:** [Decision at node](dashboards.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/decision-at-node.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=eb98a2c2c7988b5b6c5c3db9740ed172" alt="Decision at node" width="2578" height="1692" data-path="langsmith/images/decision-at-node.png" />
 
 Now you can visualize the decisions made at the `triage_input` node over time.
 

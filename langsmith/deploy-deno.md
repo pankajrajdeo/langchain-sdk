@@ -1,6 +1,6 @@
 # Deploy with Deno Deploy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-deno)
-Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint.
+
+> Deploy a LangChain deep agent on Deno Deploy with Hono route handlers and a Vite React SPA served from one entrypoint.
 
 The following page details an example app that deploys a LangChain **deep agent** on [Deno Deploy](https://deno.com/deploy): streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as HTTP + SSE route handlers on a Hono server. The React frontend is a Vite SPA (ported from the Next.js example); Deno serves the built static assets and the API from a single `main.ts` entrypoint.
 

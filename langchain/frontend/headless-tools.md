@@ -1,6 +1,6 @@
 # Headless tools
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools)
-Run browser and device APIs on the client with headless tool implementations
+
+> Run browser and device APIs on the client with headless tool implementations
 
 Headless tools let your agent call tools whose real execution must happen in the
 user's app instead of on the server. The agent still sees a normal tool schema,

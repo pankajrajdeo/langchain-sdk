@@ -1,5 +1,5 @@
 # Build customer support with handoffs
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs-customer-support)
+
 The [state machine pattern](handoffs.md) describes workflows where an agent's behavior changes as it moves through different states of a task. This tutorial shows how to implement a state machine by using tool calls to dynamically change a single agent's configuration—updating its available tools and instructions based on the current state. The state can be determined from multiple sources: the agent's past actions (tool calls), external state (such as API call results), or even initial user input (for example, by running a classifier to determine user intent).
 
 In this tutorial, you'll build a customer support agent that does the following:

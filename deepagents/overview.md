@@ -1,6 +1,6 @@
 # Deep Agents overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/overview)
-Build agents that can plan, use subagents, and leverage file systems for complex tasks
+
+> Build agents that can plan, use subagents, and leverage file systems for complex tasks
 
 Deep Agents is the easiest way to start building agents and applications that are powered by LLMs—with built-in capabilities for file systems for context management, subagent-spawning, and long-term memory.
 Optional capabilities such as [task planning](#task-planning) and [skills](#skills) extend the harness when your use case needs them.
@@ -159,7 +159,7 @@ See the [Quickstart](quickstart.md) and [Customization guide](customization.md) 
 
 ## Core capabilities
 
-> **Image:** [Agent harness capabilities by category](overview.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jtty0O--UJOKG0nK/oss/images/agent_harness_capabilities.svg?fit=max&auto=format&n=jtty0O--UJOKG0nK&q=85&s=0ff671d72badd0844826660dfcb04391" alt="Agent harness capabilities by category" width="1500" height="360" data-path="oss/images/agent_harness_capabilities.svg" />
 
 Deep Agents is an ["agent harness"](../concepts/products.md#agent-harnesses-like-the-deep-agents-sdk). It is the same core tool calling loop as other agent frameworks, but with built-in capabilities that make agents reliable for real tasks:
 

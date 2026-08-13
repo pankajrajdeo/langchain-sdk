@@ -1,6 +1,6 @@
 # Computer use
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/computer-use)
-Run code, manage files, and call authenticated APIs from a persistent virtual computer attached to your Fleet agent.
+
+> Run code, manage files, and call authenticated APIs from a persistent virtual computer attached to your Fleet agent.
 
 Computer use gives your Fleet agent access to an isolated virtual computer. The agent can write and execute code, manage files, install packages, and call authenticated external APIs without exposing credentials to the language model.
 

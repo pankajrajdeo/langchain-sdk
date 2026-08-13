@@ -1,6 +1,6 @@
 # Trace Visual Studio Code Copilot Chat sessions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-vscode-copilot)
-Capture VS Code Copilot Chat agent interactions, LLM calls, tool executions, and token usage in LangSmith via OpenTelemetry.
+
+> Capture VS Code Copilot Chat agent interactions, LLM calls, tool executions, and token usage in LangSmith via OpenTelemetry.
 
 [Visual Studio Code Copilot Chat](https://code.visualstudio.com/docs/copilot/overview) can export traces over [OpenTelemetry](https://opentelemetry.io/) (OTel). LangSmith ingests OTLP directly, so you can point Copilot Chat at LangSmith and inspect agent turns, model metadata, tool calls, and token usage alongside the rest of your LLM traces.
 

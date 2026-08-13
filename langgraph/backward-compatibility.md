@@ -1,6 +1,6 @@
 # Backward compatibility
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/backward-compatibility)
-Update LangGraph graph code in production without breaking in-flight runs.
+
+> Update LangGraph graph code in production without breaking in-flight runs.
 
 Software needs to change in production. New requirements, bug fixes, and refactors all eventually land in your graph code. Because LangGraph runs the latest deployed graph against state that has been [persisted](persistence.md) for existing threads, every change you ship is effectively a backward-compatible API change with respect to your existing checkpoints.
 

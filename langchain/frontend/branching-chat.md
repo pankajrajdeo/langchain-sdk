@@ -1,6 +1,6 @@
 # Branching chat
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat)
-Edit messages and regenerate responses by forking from checkpoints
+
+> Edit messages and regenerate responses by forking from checkpoints
 
 Conversations with AI agents are rarely linear. You may want to rephrase a
 question, regenerate a response you didn't like, or explore a different

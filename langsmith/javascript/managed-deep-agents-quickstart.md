@@ -1,8 +1,10 @@
 # Managed Deep Agents quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-quickstart)
-Create and deploy your first Managed Deep Agent with the mda CLI.
 
-Create an agent project, test it locally in [LangSmith Studio](../studio.md), and deploy it to managed LangSmith infrastructure with the [`mda` CLI](managed-deep-agents-cli.md). The project folder contains your agent's model, instructions, and tools. Managed Deep Agents supplies the [Deep Agents harness](https://docs.langchain.com/oss/javascript/deepagents/overview) and hosted runtime.
+> Create and deploy your first Managed Deep Agent with the mda CLI.
+
+Create and deploy your first Managed Deep Agent: scaffold a project, configure the model and instructions, add search, test in [LangSmith Studio](../studio.md), and deploy with the [`mda` CLI](managed-deep-agents-cli.md). Managed Deep Agents supplies the [Deep Agents harness](https://docs.langchain.com/oss/javascript/deepagents/overview) and hosted runtime.
+
+After this quickstart, the [tutorial](managed-deep-agents-tutorial.md) adds durable memory and a daily schedule on the same project.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
@@ -21,54 +23,33 @@ Before you start, make sure you have:
 
 ## Create and deploy an agent
 
-### Install the package
-Install `managed-deepagents`. The package includes the `mda` CLI.
+### Set up the project
+Install `managed-deepagents`, create a project, and open its directory:
 
 ```bash
 npm install managed-deepagents
-```
-
-### Create a project
-Create a project and open its directory:
-
-```bash
 mda init research-assistant
 cd research-assistant
 ```
 
-The files you edit in this quickstart are:
+You now have all the scaffolding for your agent.
 
-* **`agent.ts`**: Defines and exports the agent. See [Agent definition](managed-deep-agents-agent-definition.md).
-
-* **[`instructions.md`](managed-deep-agents-instructions.md)**: Contains the prompt that describes how the agent should behave.
-
-* **`.env`**: Stores API keys for local development and deployment. Do not commit this file.
-
-For all generated files, see [Project structure](managed-deep-agents-project-structure.md).
-
-### Add API keys
+### Add your keys
 Add your LangSmith API key and model provider API key to `.env`:
 
 ```text
 LANGSMITH_API_KEY=<LANGSMITH_API_KEY>
 OPENAI_API_KEY=<OPENAI_API_KEY>
+# ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY>
+# GOOGLE_API_KEY=<GOOGLE_API_KEY>
 ```
 
-This example uses an [OpenAI chat model](https://docs.langchain.com/oss/javascript/integrations/chat/openai). If you choose another model provider, add the API key required by that provider instead. `mda deploy` uses the LangSmith API key to deploy the agent and adds the provider key to the deployment.
+To create a LangSmith API key, [sign up](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-managed-deep-agents-quickstart), open [Settings](https://smith.langchain.com/settings), go to **API Keys**, and click **Create API Key**. For more details, see [Create an account and API key](../create-account-api-key.md).
 
-### Configure the agent
-Open `agent.ts` and set the agent name and model:
+This quickstart uses OpenAI by default. If you choose Google or Anthropic in the next step, set that provider's API key instead. `mda deploy` uses the LangSmith API key to deploy the agent and adds the provider key to the deployment. You can also use any [other chat provider](https://docs.langchain.com/oss/javascript/integrations/chat/).
 
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "openai:gpt-5.5",
-});
-```
-
-The model handles the agent's language understanding and reasoning. The agent name is also the default deployment name. For model concepts and provider options, see [Models](https://docs.langchain.com/oss/javascript/langchain/models).
+> [!WARNING]
+> Do not commit the `.env` file into version control. It contains secrets.
 
 ### Edit the instructions
 Open `instructions.md` and describe how the agent should behave:
@@ -82,15 +63,15 @@ keep notes, and return concise answers with citations.
 
 When you deploy, Managed Deep Agents syncs these instructions to [LangSmith Context Hub](../use-the-context-hub.md), where you can update them without redeploying the agent.
 
-### Add an internet search tool
-A tool is a function the agent can call to retrieve data or take an action. Choose your model provider's server-side search or create a [custom LangChain tool](https://docs.langchain.com/oss/javascript/langchain/tools) with Tavily.
+### Configure your model and search
+Now set the model and a built-in web search tool. Google, OpenAI, and Anthropic offer server-side search with no extra package or API key. Pass the provider tool dict that matches your model:
 
-#### Provider search (recommended)
-OpenAI provides a built-in web search tool that runs server-side, so it does not require another package or API key. Add it directly to the agent:
+Open `agent.ts`:
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";
 
+// OpenAI's built-in web search — no extra install or API key needed
 export const agent = defineDeepAgent({
   name: "research-assistant",
   model: "openai:gpt-5.5",
@@ -98,7 +79,34 @@ export const agent = defineDeepAgent({
 });
 ```
 
-#### Tavily (any provider)
+```ts
+import { defineDeepAgent } from "managed-deepagents";
+
+// Google's built-in search — no extra install or API key needed
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "google-genai:gemini-3.6-flash",
+  tools: [{ google_search: {} }],
+});
+```
+
+```ts
+import { defineDeepAgent } from "managed-deepagents";
+
+// Anthropic's built-in web search — no extra install or API key needed
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "anthropic:claude-sonnet-4-6",
+  tools: [{ type: "web_search_20250305", name: "web_search" }],
+});
+```
+
+The agent name is also the default deployment name. For model concepts and provider options, see [Models](https://docs.langchain.com/oss/javascript/langchain/models).
+
+<details>
+<summary>Using another provider?</summary>
+
+You can use a Tavily search tool instead.
 Add a [Tavily API key](https://app.tavily.com) to `.env`:
 
 ```text
@@ -153,7 +161,9 @@ export const agent = defineDeepAgent({
 });
 ```
 
-For more information, see [Custom tools](managed-deep-agents-tools.md).
+For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
+
+</details>
 
 ### Run locally
 Install the project dependencies and start the agent:
@@ -163,50 +173,36 @@ npm install
 mda dev .
 ```
 
-`mda dev` loads the API keys from `.env`, starts a local Agent Server, and opens the agent in LangSmith Studio. Send messages in Studio to inspect model responses and tool calls. For more information, see [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md).
+`mda dev` loads the API keys from `.env`, starts a local Agent Server, and opens the agent in LangSmith Studio.
+
+In Studio, send:
+
+```txt
+What were the main announcements from the latest LangChain release?
+```
+
+You should see the agent call the web search tool, then return a concise answer that cites sources. If search never appears in the trace, confirm the provider tool dict matches the model you set in `agent.py` or `agent.ts`.
+
+For more information, see [Develop locally with LangSmith Studio](managed-deep-agents-local-development.md).
 
 ### Deploy the agent
-Deploy the project:
+Deploy the project by running:
 
 ```bash
 mda deploy .
 ```
 
-Managed Deep Agents packages the project and runs it as a hosted deployment on [LangSmith Agent Server](../agent-server.md). When deployment finishes, the CLI prints the deployment dashboard URL. Open it to view and test the deployed agent.
+Managed Deep Agents packages the project and runs it as a hosted deployment on [LangSmith Agent Server](../agent-server.md). When deployment finishes, the CLI prints the deployment dashboard URL.
 
-For deployment options and secrets handling, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md). To inspect the agent's execution after it runs, use [LangSmith observability](../observability-quickstart.md).
+Open that URL. You should see the deployment in a ready state. Send the same research question from the previous step and confirm the hosted agent returns an answer with a search tool call. For deployment options and secrets handling, see [Deploy a Managed Deep Agent](managed-deep-agents-deploy.md). To inspect the agent's execution after it runs, use [LangSmith observability](../observability-quickstart.md).
 
 ## Next steps
 
 #### [Tutorial](managed-deep-agents-tutorial.md)
-Build a scheduled research agent from an empty directory.
-
-#### [Identity](managed-deep-agents-identity.md)
-Authenticate callers and provide private threads.
-
-#### [Memory](managed-deep-agents-memory.md)
-Persist preferences across threads with Context Hub `/memories`.
-
-#### [Evals](managed-deep-agents-evals.md)
-Author Harbor tasks and compile the managed agent for Harbor.
+Add durable memory and a daily schedule to this research assistant.
 
 #### [Custom tools](managed-deep-agents-tools.md)
-Add authored LangChain tools from your project source.
-
-#### [MCP connectors](managed-deep-agents-mcp-connectors.md)
-Add tools from remote MCP servers.
-
-#### [Custom middleware](managed-deep-agents-middleware.md)
-Add built-in or custom middleware around model and tool calls.
-
-#### [Schedules](managed-deep-agents-schedules.md)
-Run agents on managed cron schedules.
-
-#### [Deploy an agent](managed-deep-agents-deploy.md)
-Test and deploy Managed Deep Agents with `mda`.
-
-#### [CLI reference](managed-deep-agents-cli.md)
-Review `mda init`, `mda evals`, `mda dev`, and `mda deploy`.
+Add authored LangChain tools from your project alongside provider search.
 
 ***
 

@@ -1,8 +1,10 @@
 import unittest
+from unittest.mock import patch
 
 from update_docs import (
     Download,
     add_fragment_aliases,
+    download_one,
     links_from,
     local_path_for,
     normalize_markdown,
@@ -25,6 +27,27 @@ class MarkdownNormalizationTests(unittest.TestCase):
         )
         self.assertEqual(path.parent.name, "openwiki")
         self.assertEqual(path.name, "automate-updates.md")
+
+    @patch("update_docs.request_bytes")
+    def test_page_markdown_is_fresher_than_llms_full(self, request) -> None:
+        page = "https://docs.langchain.com/langsmith/example"
+        request.return_value = (
+            b"# Current\n\n## Example agent\n",
+            f"{page}.md",
+            "text/markdown",
+        )
+        result = download_one(page, 30, {page: b"# Older aggregate\n"})
+        self.assertEqual(result.raw_body, b"# Current\n\n## Example agent\n")
+        self.assertEqual(result.content_source, "page-markdown")
+        request.assert_called_once_with(f"{page}.md", 30)
+
+    @patch("update_docs.request_bytes", side_effect=RuntimeError("temporary failure"))
+    def test_llms_full_is_only_a_download_fallback(self, request) -> None:
+        page = "https://docs.langchain.com/langsmith/example"
+        result = download_one(page, 30, {page: b"# Aggregate fallback\n"})
+        self.assertEqual(result.raw_body, b"# Aggregate fallback\n")
+        self.assertEqual(result.content_source, "llms-full.txt-fallback")
+        request.assert_called_once_with(f"{page}.md", 30)
 
     def test_nested_tabs_and_code_groups_become_gfm(self) -> None:
         output = self.normalize(

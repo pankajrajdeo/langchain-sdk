@@ -1,5 +1,5 @@
 # Dataset prebuilt JSON schema types
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/dataset-json-types)
+
 LangSmith recommends that you set a schema on the inputs and outputs of your dataset schemas to ensure data consistency and that your examples are in the right format for downstream processing, like running evals.
 
 In order to better support LLM workflows, LangSmith has support for a few different predefined prebuilt types. These schemas are hosted publicly by the LangSmith API, and can be defined in your dataset schemas using [JSON Schema references](https://json-schema.org/understanding-json-schema/structuring#dollarref). The table of available schemas can be seen below

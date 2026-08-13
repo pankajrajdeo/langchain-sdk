@@ -1,5 +1,5 @@
 # Build a SQL agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/sql-agent)
+
 ## Overview
 
 In this tutorial, you will learn how to build an agent that can answer questions about a SQL database using LangChain [agents](agents.md).

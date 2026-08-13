@@ -1,5 +1,5 @@
 # Interact with your self-hosted instance of LangSmith
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-usage)
+
 This guide will walk you through the process of using your self-hosted instance of LangSmith.
 
 > [!NOTE]

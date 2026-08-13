@@ -1,5 +1,5 @@
 # Run support queries against ClickHouse
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-running-ch-support-queries)
+
 This Helm repository contains queries to produce output that the LangSmith UI does not currently support directly (e.g. obtaining query exception logs from Clickhouse).
 
 This command takes a clickhouse connection string that contains an embedded name and password (which can be passed in from a call to a secrets manager) and executes a query from an input file. In the example below, we are using the `ch_get_query_exceptions.sql` input file in the `support_queries/clickhouse` directory.

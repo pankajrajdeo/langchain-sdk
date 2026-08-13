@@ -1,5 +1,5 @@
 # Handoffs
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)
+
 In the **handoffs** architecture, behavior changes dynamically based on state. The core mechanism: [tools](../tools.md) update a state variable (e.g., `current_step` or `active_agent`) that persists across turns, and the system reads this variable to adjust behavior—either applying different configuration (system prompt, tools) or routing to a different [agent](../agents.md). This pattern supports both handoffs between distinct agents and dynamic configuration changes within a single agent.
 
 > [!TIP]

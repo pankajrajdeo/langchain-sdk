@@ -1,5 +1,5 @@
 # Connect to an external ClickHouse database
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-external-clickhouse)
+
 ClickHouse is a high-performance, column-oriented database system. It allows for fast ingestion of data and is optimized for analytical queries.
 
 LangSmith uses ClickHouse as the primary data store for traces and feedback. By default, self-hosted LangSmith will use an internal ClickHouse database that is bundled with the LangSmith instance. This is run as a stateful set in the same Kubernetes cluster as the LangSmith application.

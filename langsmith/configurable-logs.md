@@ -1,5 +1,5 @@
 # Include HTTP headers in server logs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configurable-logs)
+
 By default, the [Agent Server](agent-server.md) omits HTTP headers from server logs for privacy reasons. However, logging request and correlation IDs can help you debug issues and trace requests across distributed systems. You can opt-in to logging headers for all API calls by modifying the `logging_headers` section in your [`langgraph.json`](application-structure.md#configuration-file) file.
 
 ```json

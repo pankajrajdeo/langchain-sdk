@@ -1,6 +1,6 @@
 # Context engineering in Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/context-engineering)
-Control what context your deep agent has access to and how it is managed across long-running tasks
+
+> Control what context your deep agent has access to and how it is managed across long-running tasks
 
 Context engineering is providing the right information and tools in the right format so your deep agent can accomplish tasks reliably.
 
@@ -764,11 +764,11 @@ Content offloading happens when tool call inputs or results exceed a token thres
    Since this content is already persisted to the filesystem, it's often redundant.
    As the session context crosses 85% of the model's available window, deep agents truncate older tool calls, replacing them with a pointer to the file on disk and reducing the size of the active context.
 
-> **Image:** [An example of offloading showing a large input which is saved to disk and the truncated version is used for the tool call](context-engineering.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-inputs.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=fa18372080684d661965ea6f5ed1edd0" alt="An example of offloading showing a large input which is saved to disk and the truncated version is used for the tool call" width="1091" height="814" data-path="oss/images/deepagents/offloading-inputs.png" />
 
 2. **Tool call results exceed 20,000 tokens**: When this occurs, the deep agent offloads the response to the configured backend and substitutes it with a file path reference and a preview of the first 10 lines. Agents can then re-read or search the content as needed.
 
-> **Image:** [An example of offloading showing a large tool response that is replaced with a message about the location of the offloaded results and the first 10 lines of the result](context-engineering.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/offloading-results.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=11f3da2f37cae63b8aa4c440549f1a67" alt="An example of offloading showing a large tool response that is replaced with a message about the location of the offloaded results and the first 10 lines of the result" width="1360" height="922" data-path="oss/images/deepagents/offloading-results.png" />
 
 > [!NOTE]
 > Built-in context compression does not resize images, lower image resolution, or generate visual embeddings. For multimodal inputs, tool outputs, and how compression interacts with media, see [Multimodal](multimodal.md).
@@ -784,7 +784,7 @@ This process has two components:
 
 This dual approach ensures the agent maintains awareness of its goals and progress (via the summary) while preserving the ability to recover text details when needed (via filesystem search).
 
-> **Image:** [An example of summarization showing an agent](context-engineering.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0G7fpRWZQ2tFN1wL/oss/images/deepagents/summarization.png?fit=max&auto=format&n=0G7fpRWZQ2tFN1wL&q=85&s=a8fea59d4365dd688e49ce118e706e76" alt="An example of summarization showing an agent's conversation history, where several steps get compacted" width="1000" height="587" data-path="oss/images/deepagents/summarization.png" />
 
 **Configuration:**
 

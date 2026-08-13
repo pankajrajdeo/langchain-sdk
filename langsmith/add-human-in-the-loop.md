@@ -1,5 +1,5 @@
 # Human-in-the-loop using server API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/add-human-in-the-loop)
+
 To review, edit, and approve tool calls in an agent or workflow, use LangGraph's [human-in-the-loop](../langgraph/interrupts.md) features.
 
 ## Dynamic interrupts

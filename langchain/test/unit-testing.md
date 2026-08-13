@@ -1,6 +1,6 @@
 # Unit testing
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/unit-testing)
-Test agent logic without API calls using fake chat models and in-memory persistence.
+
+> Test agent logic without API calls using fake chat models and in-memory persistence.
 
 Unit tests exercise small, deterministic pieces of your agent in isolation. By replacing the real LLM with an in-memory fake (AKA fixture), you can script exact responses (text, tool calls, and errors) so tests are fast, free, and repeatable without API keys.
 

@@ -1,5 +1,5 @@
 # Filter traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/filter-traces-in-application)
+
 Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
 
 This page covers:
@@ -50,7 +50,7 @@ As you specify more filters, you can click each filter individually to update th
 
 You can filter tracing data based on the content in the inputs and outputs of the thread, trace, or run.
 
-To filter either inputs or outputs, you can use the ** Full-Text Search** filter, which will match keywords in either field. For a more targeted search, you can use the&#x20;**&#x20;Input** or ** Output** filters, which will only match content based on the respective field.
+To filter either inputs or outputs, you can use the ** Full-Text Search** filter, which will match keywords in either field. For a more targeted search, you can use the **{} Input** or ** Output** filters, which will only match content based on the respective field.
 
 > [!NOTE]
 > For performance, LangSmith indexes up to 250 characters of data for full-text search. If your search query exceeds this limit, we recommend using [Input/Output key-value search](#filter-based-on-input-%2F-output-key-value-pairs) instead.
@@ -65,9 +65,9 @@ LangSmith splits the text and matches any partial keyword matches in any order. 
 > [!NOTE]
 > Tokens must be at least 2 characters long to be indexed. Single-character tokens (for example, `a`, `x`) are excluded from search.
 
-> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PUuoao8vpJsRGlfG/langsmith/images/filter-bar-search-light.png?fit=max&auto=format&n=PUuoao8vpJsRGlfG&q=85&s=bbec4ff93f1bbf16577f7d9c4105f8e3" alt="LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune" width="2066" height="156" data-path="langsmith/images/filter-bar-search-light.png" />
 
-> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PUuoao8vpJsRGlfG/langsmith/images/filter-bar-search-dark.png?fit=max&auto=format&n=PUuoao8vpJsRGlfG&q=85&s=cd8ef87e187cc295f2261bf97059b459" alt="LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune" width="2084" height="146" data-path="langsmith/images/filter-bar-search-dark.png" />
 
 Based on the filters in the image, the system will search for `python` and `tensorflow` in either inputs or outputs, and `embedding` in the inputs along with `fine` and `tune` in the outputs.
 
@@ -112,9 +112,9 @@ Select **Output Key**, enter `documents.page_content` as the key and enter `The 
 
 You can add multiple key-value filters to create more complex queries. You can also use the **Filter Shortcuts** on the right side to filter based on common key-value pairs quickly:
 
-> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PUuoao8vpJsRGlfG/langsmith/images/filter-shortcut-pane-light.png?fit=max&auto=format&n=PUuoao8vpJsRGlfG&q=85&s=cfc23409c3e4aa8d002bf81dca0ea4f1" alt="LangSmith filter shortcuts panel showing quick access to common key-value pair filters" width="361" height="598" data-path="langsmith/images/filter-shortcut-pane-light.png" />
 
-> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PUuoao8vpJsRGlfG/langsmith/images/filter-shortcut-pane-dark.png?fit=max&auto=format&n=PUuoao8vpJsRGlfG&q=85&s=78177f170c00f3018dd48fb179295d65" alt="LangSmith filter shortcuts panel showing quick access to common key-value pair filters" width="365" height="587" data-path="langsmith/images/filter-shortcut-pane-dark.png" />
 
 ### Example: Filtering for tool calls
 
@@ -241,9 +241,9 @@ You can also apply filters directly in the [Details view](view-traces.md#details
 
 By default, only the runs that match the filters will be shown. To see the matched runs within the broader context of the trace tree, switch the view option from "Filtered Only" to "Show All" or "Most relevant".
 
-> **Image:** [LangSmith trace view showing filter options with ](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ztEgJlzh5Nckzc57/langsmith/images/trace-view-filter-light.png?fit=max&auto=format&n=ztEgJlzh5Nckzc57&q=85&s=76902cc9c8b0a8809dff49a192d9dbcb" alt="LangSmith trace view showing filter options with 'Filtered Only', 'Show All', and 'Most relevant' view modes" width="348" height="706" data-path="langsmith/images/trace-view-filter-light.png" />
 
-> **Image:** [LangSmith trace view showing filter options with ](filter-traces-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ztEgJlzh5Nckzc57/langsmith/images/trace-view-filter-dark.png?fit=max&auto=format&n=ztEgJlzh5Nckzc57&q=85&s=563f3eb1fe59618503b02865c3de3c0c" alt="LangSmith trace view showing filter options with 'Filtered Only', 'Show All', and 'Most relevant' view modes" width="327" height="701" data-path="langsmith/images/trace-view-filter-dark.png" />
 
 ## Manually specify a raw query in LangSmith query language
 

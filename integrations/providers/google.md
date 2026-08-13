@@ -1,6 +1,6 @@
 # Google integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/google)
-Integrate with Google using LangChain Python.
+
+> Integrate with Google using LangChain Python.
 
 This page covers all LangChain integrations with [Google Gemini](https://ai.google.dev/gemini-api/docs), [Google Cloud](https://cloud.google.com/), and other Google products (such as Google Maps, YouTube, and [more](#other-google-products)).
 

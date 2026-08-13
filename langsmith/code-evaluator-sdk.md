@@ -1,5 +1,5 @@
 # How to define a code evaluator
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/code-evaluator-sdk)
+
 Code evaluators are functions that take a dataset example and the resulting application output, and return one or more metrics. These functions can be passed directly into the [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) or [`aevaluate()`](https://reference.langchain.com/python/langsmith/client/Client/aevaluate) functions.
 
 > [!TIP]

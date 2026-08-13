@@ -1,5 +1,5 @@
 # Add encryption at rest
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/encryption)
+
 Agent Server supports encryption at rest for checkpoint data and metadata. You can choose between basic encryption with a single key or custom encryption for advanced use cases.
 
 ## Choosing an encryption method

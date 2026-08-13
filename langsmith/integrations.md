@@ -1,5 +1,5 @@
 # Integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/integrations)
+
 [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-integrations) provides integrations for a growing set of popular [LLM providers](#llm-providers) and [agent frameworks](#agent-frameworks) as well as [Deep Agents](../deepagents/overview.md), [LangChain](../langchain/overview.md), and [LangGraph](../langgraph/overview.md). For setup and usage, refer to the guides listed on this page.
 
 ## LLM providers
@@ -28,6 +28,8 @@
 - [AutoGen](trace-with-autogen.md)
 
 - [Claude Agent SDK](trace-claude-agent-sdk.md)
+
+- [Claude Managed Agents](trace-with-claude-managed-agents.md)
 
 - [CrewAI](trace-with-crewai.md)
 

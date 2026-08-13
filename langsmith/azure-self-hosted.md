@@ -1,5 +1,5 @@
 # Self-hosted LangSmith on Azure
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/azure-self-hosted)
+
 When running LangSmith on [Microsoft Azure](https://azure.microsoft.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
 
 This page provides:
@@ -57,9 +57,9 @@ We recommend using Azure's managed services to provide a scalable, secure, and r
 | **LangSmith Helm release** | Frontend, backend, queue, platform backend, Playground, ACE, and optionally the LangSmith Deployment control/data plane | One `helm upgrade --install` from the [`langchain/langsmith`](https://github.com/langchain-ai/helm/tree/main/charts/langsmith) chart |
 | **You provision**          | AKS, PostgreSQL, Managed Redis, Blob Storage, Key Vault, ingress, and ClickHouse                                        | Your IaC tooling (Terraform, ARM templates, or Azure portal) before installing LangSmith                                             |
 
-> **Image:** [Architecture diagram showing Azure relations to LangSmith services](azure-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/_pHMPlUcXtBZtZXs/langsmith/images/azure-architecture-self-hosted.png?fit=max&auto=format&n=_pHMPlUcXtBZtZXs&q=85&s=b865048fe887c518fced3d41b3220d40" alt="Architecture diagram showing Azure relations to LangSmith services" width="2142" height="1602" data-path="langsmith/images/azure-architecture-self-hosted.png" />
 
-> **Image:** [Architecture diagram showing Azure relations to LangSmith services](azure-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/_pHMPlUcXtBZtZXs/langsmith/images/azure-architecture-self-hosted-dark.png?fit=max&auto=format&n=_pHMPlUcXtBZtZXs&q=85&s=374ed93c5a400f9e26f8de9d2e13c59c" alt="Architecture diagram showing Azure relations to LangSmith services" width="2156" height="1614" data-path="langsmith/images/azure-architecture-self-hosted-dark.png" />
 
 **Installation order:** provision Azure infrastructure → provision or subscribe to ClickHouse → configure Entra ID and Workload Identity → run `helm upgrade --install`. LangSmith Deployment, Fleet, Insights, and Chat are enabled through the same Helm release, not as separate installs.
 

@@ -1,6 +1,6 @@
 # Use Fleet agents in code
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/code)
-Invoke Fleet agents via the LangGraph SDK or REST API, or download and run them locally with the fleet-deepagents-export package.
+
+> Invoke Fleet agents via the LangGraph SDK or REST API, or download and run them locally with the fleet-deepagents-export package.
 
 There are two main ways to use Fleet agents programmatically:
 
@@ -503,7 +503,7 @@ cd my-agent
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-code), open your agent and export it as a `.zip` file.
 
-> **Image:** [fleet-export-code](code.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/luI6OY90jvPyduNd/langsmith/images/fleet-export-code.gif?s=f05e7949959291040ddb5472cb83b41f" alt="fleet-export-code" width="1092" height="720" data-path="langsmith/images/fleet-export-code.gif" />
 
 Then drop the contents into the `fleet/` directory of your starter project:
 

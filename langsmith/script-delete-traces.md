@@ -1,5 +1,5 @@
 # Delete traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-delete-traces)
+
 The LangSmith UI does not currently support the deletion of an individual trace. This, however, can be accomplished by directly removing the trace from all materialized views in ClickHouse (except the runs\_history views) and the runs and feedback table themselves.
 
 This command can either be run using a trace ID as an argument or using a file that is a list of trace IDs.

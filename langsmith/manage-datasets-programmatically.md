@@ -1,5 +1,5 @@
 # How to create and manage datasets programmatically
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-datasets-programmatically)
+
 You can use the Python and TypeScript SDK to manage datasets programmatically. This includes creating, updating, and deleting datasets, as well as adding examples to them.
 
 ## Create a dataset

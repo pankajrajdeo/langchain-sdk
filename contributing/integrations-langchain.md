@@ -1,5 +1,5 @@
 # Contributing integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/integrations-langchain)
+
 **Integrations are a core component of LangChain.**
 
 LangChain provides standard interfaces for several different components (language models, vector stores, etc) that are crucial when building LLM applications. Implementing a new integration helps expand LangChain's ecosystem and makes your service discoverable to millions of developers.

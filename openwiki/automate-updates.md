@@ -1,6 +1,6 @@
 # Automate updates
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/automate-updates)
-Schedule OpenWiki documentation updates with GitHub Actions, GitLab CI, or Bitbucket Pipelines
+
+> Schedule OpenWiki documentation updates with GitHub Actions, GitLab CI, or Bitbucket Pipelines
 
 OpenWiki can refresh repository documentation on a schedule and open a pull request or merge request when the wiki changes. Example workflows ship in the [OpenWiki repository](https://github.com/langchain-ai/openwiki/tree/main/examples).
 

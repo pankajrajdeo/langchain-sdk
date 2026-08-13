@@ -1,5 +1,5 @@
 # Use an existing secret for your installation (Kubernetes)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret)
+
 By default, LangSmith will provision several Kubernetes secrets to store sensitive information such as license keys, salts, and other configuration parameters. However, you may want to use an existing secret that you have already created in your Kubernetes cluster (or provisioned via some sort of secrets operator). This can be useful if you want to manage sensitive information in a centralized way or if you have specific security requirements.
 
 By default we will provision the following secrets corresponding to different components of LangSmith:

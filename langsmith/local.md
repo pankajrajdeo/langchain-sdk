@@ -1,5 +1,5 @@
 # How to run an evaluation locally (Python only)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/local)
+
 Sometimes it is helpful to run an evaluation locally without uploading any results to LangSmith. For example, if you're quickly iterating on a prompt and want to smoke test it on a few examples, or if you're validating that your target and evaluator functions are defined correctly, you may not want to record these evaluations.
 
 You can do this by using the LangSmith Python SDK and passing `upload_results=False` to `evaluate()` / `aevaluate()`.

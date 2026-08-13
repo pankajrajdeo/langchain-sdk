@@ -1,5 +1,5 @@
 # Trace without setting environment variables
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-without-env-vars)
+
 The following environment variables allow you to configure tracing enabled, the API endpoint, the API key, and the tracing project:
 
 * `LANGSMITH_TRACING`

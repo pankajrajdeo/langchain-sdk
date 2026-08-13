@@ -1,5 +1,5 @@
 # Trace Deep Agents applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-deep-agents)
+
 [`deepagents`](../deepagents/overview.md) is an open-source agent framework built on top of LangGraph, designed for complex, multi-step tasks that require planning, tool usage, and sub-agent delegation. Deep Agents supports native LangSmith tracing.
 
 This guide shows you how to enable LangSmith tracing for Deep Agents, view traces in the LangSmith UI, and (optionally) customize trace configuration for more advanced use cases.
@@ -154,7 +154,7 @@ Deep Agents automatically writes the subagent's `name` to the `lc_agent_name` me
 3. Click **Add filter** and select **Metadata**.
 4. Set the **Key** to `lc_agent_name` and the **Value** to the subagent name, for example `coordinator`.
 
-> **Image:** [LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator](trace-deep-agents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
 
 Save the filter as a named view for quick reuse. For a full reference on filter options, see [Filter traces](filter-traces-in-application.md).
 

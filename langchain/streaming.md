@@ -1,6 +1,6 @@
 # Streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/streaming)
-Stream real-time updates from agent runs
+
+> Stream real-time updates from agent runs
 
 > [!TIP]
 > For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in LangChain v1.3. Event streaming gives you separate iterators per projection (messages, values, tool calls, subgraphs) so you can consume them independently instead of branching on `stream_mode` chunks.

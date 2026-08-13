@@ -1,6 +1,6 @@
 # Agent Server metrics
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics)
-Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
+
+> Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
 
 The [Agent Server](agent-server.md) emits metrics through an OpenTelemetry (OTel) client. Metrics use the `lg_api_` name prefix by default (override with `METRIC_PREFIX`).
 

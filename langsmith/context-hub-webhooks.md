@@ -1,6 +1,6 @@
 # Configure Context Hub commit webhooks
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/context-hub-webhooks)
-Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
+
+> Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
 
 [Context Hub](context-hub.md) commit webhooks notify external services whenever an agent or skill commit is created in your [workspace](administration-overview.md#workspaces). Use them to trigger automation from Context Hub changes, including commits created through [LangSmith Fleet](fleet.md).
 

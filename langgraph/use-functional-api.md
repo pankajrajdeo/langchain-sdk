@@ -1,5 +1,5 @@
 # Use the functional API
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-functional-api)
+
 The [**Functional API**](functional-api.md) allows you to add LangGraph's key features ([persistence](persistence.md), [memory](add-memory.md), [human-in-the-loop](interrupts.md), and [streaming](streaming.md)) to your applications with minimal changes to your existing code.
 
 > [!TIP]
@@ -639,6 +639,8 @@ Short-term memory allows storing information across different **invocations** of
 
 You can view and delete the information stored by the checkpointer.
 
+<a id="checkpoint" />
+
 #### View thread state
 
 ```python
@@ -671,6 +673,8 @@ StateSnapshot(
     interrupts=()
 )
 ```
+
+<a id="checkpoints" />
 
 #### View the history of the thread
 

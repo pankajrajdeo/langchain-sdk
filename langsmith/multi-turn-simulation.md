@@ -1,5 +1,5 @@
 # How to simulate multi-turn interactions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/multi-turn-simulation)
+
 AI applications with conversational interfaces, like chatbots, operate over multiple interactions with a user, also called conversation *turns*. When evaluating the performance of such applications, core concepts such as [building a dataset](evaluation-concepts.md#datasets) and defining [evaluators](evaluation-concepts.md#evaluators) and metrics to judge your app outputs remain useful. However, you may also find it useful to run a *simulation* between your app and a user, then evaluate this dynamically created trajectory.
 
 Some advantages of doing this are:
@@ -10,7 +10,7 @@ Some advantages of doing this are:
 
 The downside is that because you are broadening your evaluation surface area to contain multiple turns, there is less consistency than evaluating a single output from your app given a static input from a dataset.
 
-> **Image:** [Multi turn trace](multi-turn-simulation.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=c903f388600ab575e70edb92209c6b2e" alt="Multi turn trace" width="2952" height="1790" data-path="langsmith/images/multi-turn-trace.png" />
 
 This guide will show you how to simulate multi-turn interactions and evaluate them using the open-source [`openevals`](https://github.com/langchain-ai/openevals) package, which contains prebuilt evaluators and other convenient resources for evaluating your AI apps. It will also use OpenAI models, though you can use other providers as well.
 
@@ -175,7 +175,7 @@ The simulation first generates an initial query from the simulated `user`, then 
 
 The final trace will look something [like this](https://smith.langchain.com/public/648ca37d-1c4d-4f7b-9b6a-89e35dc5d4f0/r) with responses from your `app` and `user` interleaved:
 
-> **Image:** [Multi turn trace](multi-turn-simulation.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-trace.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=c903f388600ab575e70edb92209c6b2e" alt="Multi turn trace" width="2952" height="1790" data-path="langsmith/images/multi-turn-trace.png" />
 
 Congrats! You just ran your first multi-turn simulation. Next, we'll cover how to run it in a LangSmith experiment.
 
@@ -193,7 +193,7 @@ You can use the results of multi-turn simulations as part of a LangSmith experim
 
 If you are using one of the [LangSmith test framework integrations](pytest.md), you can pass in an array of OpenEvals evaluators as a `trajectory_evaluators` param when running the simulation. These evaluators will run at the end of the simulation, taking the final list of chat messages as an `outputs` kwarg. Your passed `trajectory_evaluator` must therefore accept this kwarg.
 
-> **Image:** [Multi turn vitest](multi-turn-simulation.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/multi-turn-vitest.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=04c56e67e7bb9f01cb905d8a184d62d5" alt="Multi turn vitest" width="3448" height="1128" data-path="langsmith/images/multi-turn-vitest.png" />
 
 Here's an example:
 

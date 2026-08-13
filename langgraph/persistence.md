@@ -1,6 +1,18 @@
 # Persistence
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/persistence)
-LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
+
+> LangGraph's persistence layer gives agents short-term memory through checkpointers and long-term memory through stores.
+
+<a id="checkpoints" />
+
+<a id="threads" />
+
+<a id="memory-store" />
+
+<a id="checkpointer-libraries" />
+
+<a id="pending-writes" />
+
+<a id="durability-modes" />
 
 Persistence lets LangGraph applications keep useful information beyond a single graph run. It matters when an agent needs to continue a conversation, resume after an interruption, recover from a failure, or remember information across interactions.
 
@@ -34,9 +46,6 @@ result = graph.invoke(
 > **Agent Server handles persistence automatically**
 > When using the [Agent Server](../langsmith/agent-server.md), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
 
-<a id="checkpointer-libraries"></a>
-<a id="memory-store"></a>
-
 ## Checkpointer vs. store
 
 |                | Checkpointer                                                                 | Store                                               |
@@ -47,8 +56,6 @@ result = graph.invoke(
 | Use for        | Conversation continuity, human-in-the-loop, time travel, and fault tolerance | User preferences, facts, and shared knowledge       |
 | Access pattern | Pass a `thread_id` in graph config                                           | Read and write items from nodes or application code |
 | Full guide     | [Checkpointers](checkpointers.md)                         | [Stores](stores.md)              |
-
-<a id="durability-modes"></a>
 
 ## Troubleshooting common issues
 

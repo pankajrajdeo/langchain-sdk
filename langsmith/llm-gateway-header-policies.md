@@ -1,6 +1,6 @@
 # Per-customer policies
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-header-policies)
-Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
+
+> Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

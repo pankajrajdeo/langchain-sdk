@@ -1,5 +1,5 @@
 # Prompt template format guide
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-template-format)
+
 This page describes the [prompt template](prompt-engineering-concepts.md#prompts-vs-prompt-templates) formats supported in the [Playground](prompt-engineering-concepts.md#playground), [prompt hub](manage-prompts.md#public-prompt-hub), and [evaluators](evaluation-concepts.md#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
 
 > [!TIP]

@@ -1,5 +1,5 @@
 # How to create a composite evaluator
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/composite-evaluators-ui)
+
 *Composite evaluators* are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
 
 This guide shows you how to define a [composite evaluator](evaluation-concepts.md#llm-as-judge) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-composite-evaluators-ui).
@@ -11,9 +11,9 @@ This guide shows you how to define a [composite evaluator](evaluation-concepts.m
 
 You can create composite evaluators on a [tracing project](observability-concepts.md#projects) (for [online evaluations](evaluation-concepts.md#online-evaluations)) or a [dataset](evaluation-concepts.md#datasets) (for [offline evaluations](evaluation-concepts.md#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
-> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](composite-evaluators-ui.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-light.png?fit=max&auto=format&n=cRRwi1N4-QohYC73&q=85&s=b3859ada8b576ebeaf5399ff15359b10" alt="LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output." width="756" height="594" data-path="langsmith/images/create_composite_evaluator-light.png" />
 
-> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](composite-evaluators-ui.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/cRRwi1N4-QohYC73/langsmith/images/create_composite_evaluator-dark.png?fit=max&auto=format&n=cRRwi1N4-QohYC73&q=85&s=ac13f4d2d4a5e3b67285284150b7d592" alt="LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output." width="761" height="585" data-path="langsmith/images/create_composite_evaluator-dark.png" />
 
 ### 1. Navigate to the tracing project or dataset
 

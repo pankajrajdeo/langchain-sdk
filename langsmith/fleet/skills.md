@@ -1,6 +1,6 @@
 # Skills
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/skills)
-Use skills to give your agents access to specific capabilities.
+
+> Use skills to give your agents access to specific capabilities.
 
 Skills are reusable capabilities that provide specialized workflows and domain knowledge to your agent. Each skill is stored in the agent's long-term memory at `memories/skills/<skill-name>`. The skill's name and description is loaded when the agent starts. Based on this info the agent can decide to use the skill. The full skill file is only loaded when the agent determines it is relevant to the current task. Any referenced additional resources may be loaded by the agent if they become relevant.
 

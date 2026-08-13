@@ -1,6 +1,6 @@
 # Customize Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/customization)
-Learn how to customize Deep Agents with system prompts, tools, subagents, and more
+
+> Learn how to customize Deep Agents with system prompts, tools, subagents, and more
 
 Build the harness around your goal. `create_deep_agent` gives you a production-ready foundation: connect it to your data, shape its behavior, and add the capabilities your use case needs.
 

@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-quickstart)
-Make your first LLM Gateway request with cURL, Python, or TypeScript.
+
+> Make your first LLM Gateway request with cURL, Python, or TypeScript.
 
 The LLM Gateway lets you call models across configured providers through one standard endpoint with one LangSmith API key. This quickstart uses the OpenAI Chat Completions format to call an Anthropic model.
 
@@ -29,6 +29,8 @@ The unified base URL accepts provider-prefixed bring-your-own-key model IDs, suc
 
 > [!NOTE]
 > If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-api-formats.md#use-a-regional-gateway).
+>
+> On [BYOC](byoc.md), use `https://<data_plane_host>/gateway/v1` instead.
 
 To preserve a provider's native API without format translation, use a [direct provider route](llm-gateway-direct-model-access.md) instead.
 
@@ -57,6 +59,16 @@ export LANGSMITH_GATEWAY_API_KEY="$LANGSMITH_API_KEY"
 
 > [!NOTE]
 > If the gateway is enabled but `LANGSMITH_GATEWAY_API_KEY` is unset, the gateway falls back to `LANGSMITH_API_KEY`.
+
+Configuring these environment variables will route supported chat models through their [direct access endpoints](llm-gateway-direct-model-access.md). To access the unified `/v1` endpoint or [Gateway Credits](llm-gateway-credits.md), specify the `"langsmith"` provider in [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model), or other entrypoint as shown below (requires `langchain >= 1.3.15`)
+
+```python
+from deepagents import create_deep_agent
+
+agent = create_deep_agent(
+    model="langsmith:anthropic/claude-opus-5",
+)
+```
 
 You can also configure base URLs and API keys for individual providers. See the following accordion for provider support and interactions with provider-specific environment variables.
 

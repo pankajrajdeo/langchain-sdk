@@ -1,6 +1,6 @@
 # Azure Terraform architecture
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture)
-Platform layers, services, Workload Identity, networking, ingress options, and module dependencies for LangSmith self-hosted on AKS.
+
+> Platform layers, services, Workload Identity, networking, ingress options, and module dependencies for LangSmith self-hosted on AKS.
 
 Understand what the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure) provision and how the pieces fit together, so you can size, secure, and customize your LangSmith deployment before running `make apply`.
 
@@ -18,7 +18,7 @@ If you are ready to install, start with the [deployment walkthrough](self-host-t
 
 LangSmith on Azure deploys in stages. Each stage adds a capability layer on top of the previous. All layers share the same AKS cluster and `langsmith` namespace.
 
-> **Image:** [LangSmith on Azure service layout](self-host-terraform-azure-architecture.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/D6uoP5M0BV8YGC-1/images/self-hosted-terraform/azure-architecture.png?fit=max&auto=format&n=D6uoP5M0BV8YGC-1&q=85&s=5ee76baf8bca85d865a4e75e2ab7d4b6" alt="LangSmith on Azure service layout" width="2900" height="1640" data-path="images/self-hosted-terraform/azure-architecture.png" />
 
 | Stage                       | Layer                | What it adds                                                                                  |
 | --------------------------- | -------------------- | --------------------------------------------------------------------------------------------- |

@@ -1,6 +1,6 @@
 # Log retriever traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-retriever-trace)
-Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
+
+> Log retrieval steps in LangSmith traces for document-level visibility into your RAG pipeline.
 
 Many LLM applications retrieve documents from vector databases, knowledge graphs, or other indexes as part of a retrieval-augmented generation (RAG) pipeline. LangSmith provides dedicated rendering for retriever steps, which makes it easier to inspect retrieved documents and diagnose retrieval issues.
 

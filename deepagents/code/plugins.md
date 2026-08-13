@@ -1,6 +1,6 @@
 # Plugins and marketplaces
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/plugins)
-Install plugins from marketplaces or package skills, MCP servers, and hooks for Deep Agents Code
+
+> Install plugins from marketplaces or package skills, MCP servers, and hooks for Deep Agents Code
 
 Plugins extend Deep Agents Code with reusable [skills](memory-and-skills.md), [MCP servers](mcp-tools.md), and [hooks](hooks.md). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. Deep Agents Code supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](#create-a-plugin) and [Create a marketplace](#create-a-marketplace).
 
@@ -23,6 +23,22 @@ To browse marketplaces and manage plugins in a `dcode` session:
 The plugin manager also lets you enable, disable, and uninstall installed plugins. Disabling a plugin keeps it installed but excludes its skills, MCP servers, and hooks after you run `/reload` or start a new session.
 
 Removing a marketplace uninstalls its plugins and removes managed cache data. Deep Agents Code preserves the original source when the marketplace came from a local directory or file. Run `/reload` or start a new session to apply the removal to an active session.
+
+## Automatically update plugins
+
+Deep Agents Code can update installed plugins in the background after the first prompt. Updates apply only to enabled plugins that opt in through their own manifest. Plugin authors opt in per plugin by adding this block to that plugin's `plugin.json`:
+
+```json
+{
+  "extensions": {
+    "com.langchain.deepagents.code": {
+      "autoUpdate": true
+    }
+  }
+}
+```
+
+The running session continues to use its current plugin version until you run `/reload`. To disable automatic plugin updates globally, set `[plugins].auto_update = false` in `config.toml` or `DEEPAGENTS_CODE_PLUGIN_AUTO_UPDATE=false` in the environment.
 
 ## Manage plugins from the command line
 

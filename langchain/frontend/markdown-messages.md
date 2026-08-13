@@ -1,6 +1,6 @@
 # Markdown messages
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/markdown-messages)
-Render LLM responses as rich, formatted markdown with proper streaming support
+
+> Render LLM responses as rich, formatted markdown with proper streaming support
 
 LLMs naturally produce markdown-formatted text, including headings, lists, code blocks,
 tables, and inline formatting. Rendering this content as plain text wastes the

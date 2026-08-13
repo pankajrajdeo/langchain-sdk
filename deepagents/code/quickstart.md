@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/quickstart)
-Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
+
+> Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
 
 Deep Agents Code (`dcode`) is a terminal coding agent built on the [Deep Agents SDK](../quickstart.md). This guide covers installation, your first task, daily interactive use, automation with piping, and LangSmith tracing. For a feature overview, see [Deep Agents Code overview](overview.md). For `config.toml` and provider settings, see [Configuration](configuration.md).
 
@@ -54,6 +54,7 @@ Use these commands within a Deep Agents Code session:
 * `/skill:<name> [args]`: Directly invoke a skill by name. The skill's `SKILL.md` instructions are injected into the prompt along with any arguments you provide.
 * `/skill-creator [task]`: Guide for creating effective agent skills.
 * `/offload` (alias `/compact`) - Free up context window space by offloading messages to storage with a summary placeholder. The agent can retrieve the full history from the offloaded file if needed.
+* `/context`: Open a color-coded context-window usage report with model capacity, usage categories, and remaining space.
 * `/tokens`: Display current context window token usage breakdown.
 * `/clear`: Clear conversation history and start a new thread.
 * `/force-clear`: Stop active work, clear the chat, and start a new thread.
@@ -65,6 +66,7 @@ Use these commands within a Deep Agents Code session:
 * `/reload`: Re-read `.env` files, refresh configuration, and re-discover skills without restarting. This also reloads plugin skills and MCP configuration. Conversation state is preserved. See [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for override behavior.
 * `/theme`: Open the interactive theme selector to switch color themes. Built-in themes are available plus any [user-defined themes](configuration.md#themes).
 * `/scrollbar`: Show or hide the chat scrollbar.
+* `/line-numbers`: Show or hide file-relative line numbers in new diffs. See [Diff line numbers](config-file.md#diff-line-numbers).
 * `/update`: Check for and install Deep Agents Code updates inline. Detects your install method (uv, Homebrew, pip) and runs the appropriate upgrade command.
 * `/auto-update`: Toggle automatic updates on or off.
 * `/install`: Install an optional integration.
@@ -140,6 +142,12 @@ The chat input uses standard readline-style bindings:
 > Word-wise motion (`Option+Left` / `Option+Right`) is handled the same way: terminals send `Esc+b` / `Esc+f`, which Deep Agents Code interprets as word-left/right.
 
 </details>
+
+### Inspect context-window usage
+
+Run `/context` to open a color-coded report of the current model's context-window usage. The report shows the model's context limit, used tokens, remaining capacity, and a breakdown between the conversation and system prompt plus tools when those values are available.
+
+Provider-reported totals remain distinct from local conversation estimates. When a provider total is unavailable, the report labels the conversation count as an estimate and marks the total usage as unavailable. Use `/tokens` when you want a text summary in the conversation transcript instead.
 
 ### External editor
 

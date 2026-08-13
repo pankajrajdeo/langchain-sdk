@@ -1,6 +1,6 @@
 # Trace OpenAI-compatible providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-openai-compatible)
-Trace LLM calls from any OpenAI-compatible provider to LangSmith.
+
+> Trace LLM calls from any OpenAI-compatible provider to LangSmith.
 
 Many LLM providers accept requests in the same format as the OpenAI API. To trace calls from these providers to LangSmith, construct an OpenAI client pointed at the provider's base URL, then wrap it with [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/modules/langsmith.html).
 

@@ -1,6 +1,6 @@
 # Build a content builder agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/content-builder)
-Build a content writing agent with brand memory, skills, subagents, and image generation
+
+> Build a content writing agent with brand memory, skills, subagents, and image generation
 
 ## Overview
 

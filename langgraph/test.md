@@ -1,5 +1,5 @@
 # Test
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/test)
+
 After you've prototyped your LangGraph agent, a natural next step is to add tests. This guide covers some useful patterns you can use when writing unit tests.
 
 Note that this guide is LangGraph-specific and covers scenarios around graphs with custom structures - if you are just getting started, check out [Test](../langchain/test.md) that uses LangChain's built-in [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) instead.

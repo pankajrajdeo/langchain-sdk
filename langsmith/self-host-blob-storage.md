@@ -1,5 +1,5 @@
 # Enable blob storage
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-blob-storage)
+
 By default, LangSmith stores run inputs, outputs, errors, manifests, extras, and events in ClickHouse. If you so choose, you can instead store this information in blob storage, which has a couple of notable benefits. For the best results in production deployments, we **strongly** recommend using blob storage, which offers the following benefits:
 
 1. In high trace environments, inputs, outputs, errors, manifests, extras, and events may balloon the size of your databases.
@@ -73,7 +73,7 @@ Once you have the correct policy, there are three ways to authenticate with Amaz
    1. You will need to create an IAM role with the policy attached.
    2. You will need to allow LangSmith service accounts to assume the role. The `langsmith-queue`, `langsmith-backend`, `langsmith-platform-backend`, and `langsmith-ingest-queue` service accounts will need to be able to assume the role.
 > [!WARNING]
->       The service account names will be different if you are using a custom release name. You can find the service account names by running `kubectl get serviceaccounts` in your cluster.
+>           The service account names will be different if you are using a custom release name. You can find the service account names by running `kubectl get serviceaccounts` in your cluster.
 
    3. You will need to provide the role ARN to LangSmith. You can do this by adding the `eks.amazonaws.com/role-arn: "<role_arn>"` annotation to the `queue`, `backend`, `platform-backend`, and `ingest-queue` services in your Helm Chart installation.
 

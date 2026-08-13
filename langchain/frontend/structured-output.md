@@ -1,6 +1,6 @@
 # Structured output
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/structured-output)
-Render structured agent responses with custom UI components instead of plain text
+
+> Render structured agent responses with custom UI components instead of plain text
 
 Structured output lets the agent return typed, machine-readable data instead of plain text. Instead of rendering a single string, you get a structured object you can map to any UI: cards, tables, charts, step-by-step breakdowns, or domain-specific renderers.
 

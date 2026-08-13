@@ -1,5 +1,5 @@
 # Errors
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/common-errors)
+
 This page contains guides around resolving common errors you may find while building with LangChain and LangGraph.
 
 Errors referenced below will have an `lc_error_code` property corresponding to one of the below codes when they are thrown in code.

@@ -1,6 +1,6 @@
 # LangSmith Cloud changelog
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/changelog)
-Weekly updates to LangSmith Cloud
+
+> Weekly updates to LangSmith Cloud
 
 Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](fleet.md).
 
@@ -341,7 +341,7 @@ Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](flee
 * Expanding the run tree for repetition runs in [experiment comparison](compare-experiment-results.md) views now works reliably when a repetition root has a project ID but no session ID.
 * [Evaluators](evaluators.md) linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
 * Code evaluator upload now accepts Python entrypoints annotated with PEP 604 union return types (for example `-> dict | None`).
-* POST /v2/datasets//experiment-runs is the supported public API for paginated experiment comparison. Legacy dataset comparison helpers are removed from the public OpenAPI spec and generated SDKs; existing HTTP routes continue to work for LangSmith UI clients.
+* POST /v2/datasets/{dataset_id}/experiment-runs is the supported public API for paginated experiment comparison. Legacy dataset comparison helpers are removed from the public OpenAPI spec and generated SDKs; existing HTTP routes continue to work for LangSmith UI clients.
 * Each example's dataset splits now render as chips in the dataset Examples table, laid out from real measurements with a clickable +N overflow menu when an example belongs to more splits than fit the column.
 * Adds `langsmith evaluator create-llm` to define structured LLM-as-judge evaluator rules from a prompt, schema, and model config file, targeting a project or dataset.
 * The experiment comparison view now offers an optional, reorderable "Splits (latest)" column that shows each example's current dataset split assignments as chips, reflecting live membership rather than the as-of-run snapshot.
@@ -363,7 +363,7 @@ Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](flee
 * Evaluator spend chart y-axes now abbreviate amounts of \$1,000 or more, making high-spend values easier to scan.
 * Exporting a dataset comparison view as CSV now returns a clear "file is too large to export" error instead of a generic server error when the export exceeds internal size limits.
 * Each split chip in a row's Splits cell is now interactive in the experiment results and comparison views, with an Edit splits action that opens the single-example split picker so you can reassign splits without leaving the table.
-* Add RUN items to a single [annotation queue](annotation-queues.md) with POST /annotation-queues//items. The server resolves runs via ClickHouse or SmithDB and returns a standards-shaped items envelope; THREAD support follows in a later release.
+* Add RUN items to a single [annotation queue](annotation-queues.md) with POST /annotation-queues/{queue_id}/items. The server resolves runs via ClickHouse or SmithDB and returns a standards-shaped items envelope; THREAD support follows in a later release.
 * The LangSmith CLI now updates existing code evaluator rules in place when `evaluator upload --replace` is used, avoiding a delete-before-create window if the replacement upload fails.
 * Split the read datasets into a new download datasets permission.  Enforce this new permission in both the application and in APIs.  The download button is disabled for those users without the download permission. [Learn more](organization-workspace-operations.md#datasets).
 * Public dataset experiment traces open correctly when experiment runs provide their project identifier through the v2 response shape.
@@ -371,9 +371,9 @@ Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](flee
 * Dataset and experiment tables now truncate long input and reference-output text and show detected base64 images as small thumbnails with a delayed larger preview, avoiding oversized hidden DOM content.
 * Experiment tables now defer full payload rendering and output diff preparation until those views are requested, improving responsiveness for runs with large agent trajectories.
 * Public dataset share links now resolve the sessions list (with stats) from SmithDB when ClickHouse querying is disabled, so shared dataset pages no longer fail to load on SmithDB-only deployments.
-* Add conversation threads to a single [annotation queue](annotation-queues.md) with POST /annotation-queues//items using item\_type THREAD (thread\_id + session\_id). Mixed RUN and THREAD batches are supported; the server resolves threads via ClickHouse or SmithDB.
+* Add conversation threads to a single [annotation queue](annotation-queues.md) with POST /annotation-queues/{queue_id}/items using item\_type THREAD (thread\_id + session\_id). Mixed RUN and THREAD batches are supported; the server resolves threads via ClickHouse or SmithDB.
 * Code evaluators now get more time to run each batch, so evaluators that import heavy libraries like scikit-learn are less likely to time out.
-* POST /annotation-queues//items now accepts at most 200 items per request and returns a clear validation error when the limit is exceeded. Requests at the limit continue to succeed.
+* POST /annotation-queues/{queue_id}/items now accepts at most 200 items per request and returns a clear validation error when the limit is exceeded. Requests at the limit continue to succeed.
 * Applying an evaluator to an existing experiment could fail with "Failed to start evaluation" on large experiments. It now starts reliably even when the run count is temporarily unavailable.
 * Linked runs load correctly from public dataset shares when LangSmith uses the ClickHouse compatibility path.
 
@@ -515,7 +515,7 @@ Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](flee
 * A new Project and user limits tab on the enterprise Usage configuration page lets you set monthly trace-count limits scoped to a specific project or user. Add, edit, and delete limits from the page.
 * Anonymous organizations now show an "Anonymity mode is on" banner on the members page, and the usage breakdown hides the group-by-user option for non-internal viewers.
 * New API keys now default to a finite expiration date instead of requiring a custom value. When an organization enforces a shorter maximum, the form defaults to that maximum instead.
-* You can now fetch a single workspace directly via GET /api/v1/workspaces/ instead of listing all workspaces and filtering client-side.
+* You can now fetch a single workspace directly via GET /api/v1/workspaces/{workspace_id} instead of listing all workspaces and filtering client-side.
 * Org and workspace admins can now edit the role of a pending member invite directly from the Members settings page, without needing to cancel and re-send the invite.
 * The Usage limits page now shows each workspace's configured total and extended (long-lived) trace limits, including caps that were previously hidden while the spend limit displayed "Unlimited".
 * The batch workspace invite endpoint no longer returns a 409 error when inviting users who are already pending org invitees or active org members. Those users are added directly to the workspace without requiring a new org invite.
@@ -825,7 +825,7 @@ Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](flee
 * A new Project and user limits tab on the enterprise Usage configuration page lets you set monthly trace-count limits scoped to a specific project or user. Add, edit, and delete limits from the page.
 * Anonymous organizations now show an "Anonymity mode is on" banner on the members page, and the usage breakdown hides the group-by-user option for non-internal viewers.
 * New API keys now default to a finite expiration date instead of requiring a custom value. When an organization enforces a shorter maximum, the form defaults to that maximum instead.
-* You can now fetch a single workspace directly via GET /api/v1/workspaces/ instead of listing all workspaces and filtering client-side.
+* You can now fetch a single workspace directly via GET /api/v1/workspaces/{workspace_id} instead of listing all workspaces and filtering client-side.
 * Org and workspace admins can now edit the role of a pending member invite directly from the Members settings page, without needing to cancel and re-send the invite.
 * The Usage limits page now shows each workspace's configured total and extended (long-lived) trace limits, including caps that were previously hidden while the spend limit displayed "Unlimited".
 * The batch workspace invite endpoint no longer returns a 409 error when inviting users who are already pending org invitees or active org members. Those users are added directly to the workspace without requiring a new org invite.

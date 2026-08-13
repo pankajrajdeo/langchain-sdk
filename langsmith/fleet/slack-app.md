@@ -1,6 +1,6 @@
 # Integrate Slack with an agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/slack-app)
-Connect LangSmith Fleet to your Slack workspace so your agents work as Slack bots your team can tag directly.
+
+> Connect LangSmith Fleet to your Slack workspace so your agents work as Slack bots your team can tag directly.
 
 Fleet turns any agent into a Slack teammate your team can tag in a channel or message directly. The bot is the agent, not a relay in front of it: it runs with the agent's own instructions, tools, and permissions. Every agent can have its own Slack app, so a single Slack workspace can run as many Slack bots as you have agents: one triaging support, one watching the on-call rotation, one digging through research.
 

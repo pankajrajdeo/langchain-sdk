@@ -1,5 +1,5 @@
 # What's new in LangChain v1
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/langchain-v1)
+
 **LangChain v1 is a focused, production-ready foundation for building agents.** We've streamlined the framework around three core improvements:
 
 #### [create_agent](#create_agent)
@@ -47,7 +47,7 @@ result = agent.invoke({
 
 Under the hood, [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on the basic agent loop -- calling a model, letting it choose tools to execute, and then finishing when it calls no more tools:
 
-> **Image:** [Core agent loop diagram](langchain-v1.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
 
 For more information, see [Agents](../langchain/agents.md).
 
@@ -106,7 +106,7 @@ agent = create_agent(
 
 You can also build custom middleware to fit your needs. Middleware exposes hooks at each step in an agent's execution:
 
-> **Image:** [Middleware flow diagram](langchain-v1.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" width="500" height="560" data-path="oss/images/middleware_final.png" />
 
 Build custom middleware by implementing any of these hooks on a subclass of the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) class:
 

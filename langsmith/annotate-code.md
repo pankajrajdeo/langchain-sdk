@@ -1,6 +1,6 @@
 # Custom instrumentation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotate-code)
-Instrument your code directly to control which functions are traced and how they appear in LangSmith.
+
+> Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 
 Adding [instrumentation](observability-concepts.md#manual-instrumentation) directly to your code gives you precise control over which functions your application traces, what inputs and outputs are logged, and how your [trace](observability-concepts.md#traces) hierarchy is structured. The three core instrumentation approaches are:
 

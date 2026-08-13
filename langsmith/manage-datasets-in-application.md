@@ -1,5 +1,5 @@
 # Create and manage datasets in the UI
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-datasets-in-application)
+
 [*Datasets*](evaluation-concepts.md#datasets) enable you to perform repeatable evaluations over time using consistent data. Datasets are made up of [*examples*](evaluation-concepts.md#examples), which store inputs, outputs, and optionally, reference outputs.
 
 This page outlines the various methods for [creating](#create-a-dataset-and-add-examples) and [managing](#manage-a-dataset) datasets in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-datasets-in-application).
@@ -99,17 +99,17 @@ In **Generate examples**, do the following:
 
 4. Click **Generate**.
 
-> **Image:** [The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate.](manage-datasets-in-application.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/4E7JL9dL7Pg6moF1/langsmith/images/generate-synthetic-light.png?fit=max&auto=format&n=4E7JL9dL7Pg6moF1&q=85&s=4ec726f80ee38a829ade96caedb61925" alt="The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate." width="689" height="383" data-path="langsmith/images/generate-synthetic-light.png" />
 
-> **Image:** [The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate.](manage-datasets-in-application.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/4E7JL9dL7Pg6moF1/langsmith/images/generate-synthetic-dark.png?fit=max&auto=format&n=4E7JL9dL7Pg6moF1&q=85&s=6c0ba9da5bf342e702c23406bdfdf18c" alt="The AI-Generated Examples configuration window. Selections for manual and automatic and number of examples to generate." width="674" height="361" data-path="langsmith/images/generate-synthetic-dark.png" />
 
 5. The examples will appear on the **Select generated examples** page. Choose which examples to add to your dataset, with the option to edit them before finalizing. Click **Save Examples**.
 
 6. Each example will be validated against your specified dataset schema and tagged as **synthetic** in the source metadata.
 
-> **Image:** [Select generated examples page with generated examples selected and Save examples button.](manage-datasets-in-application.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/mw9POU1xwbwaPxuQ/langsmith/images/select-generated-examples-light.png?fit=max&auto=format&n=mw9POU1xwbwaPxuQ&q=85&s=146c5f6238415bb8d77da15a8a17c839" alt="Select generated examples page with generated examples selected and Save examples button." width="1781" height="856" data-path="langsmith/images/select-generated-examples-light.png" />
 
-> **Image:** [Select generated examples page with generated examples selected and Save examples button.](manage-datasets-in-application.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/mw9POU1xwbwaPxuQ/langsmith/images/select-generated-examples-dark.png?fit=max&auto=format&n=mw9POU1xwbwaPxuQ&q=85&s=1f1235b31b2d86cf5c7c615c84061e9c" alt="Select generated examples page with generated examples selected and Save examples button." width="1779" height="838" data-path="langsmith/images/select-generated-examples-dark.png" />
 
 ## Manage a dataset
 
@@ -136,7 +136,7 @@ To create and manage splits in the UI:
 2. Click **Add to Split**.
 3. From the resulting popup menu, you can select and unselect splits for the selected examples, or create a new split.
 
-> **Image:** [Add to Split](manage-datasets-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-to-split2.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=014aa1fdc735f055c9e66a2a18720d4c" alt="Add to Split" width="1309" height="915" data-path="langsmith/images/add-to-split2.png" />
 
 ### Edit example metadata
 
@@ -157,7 +157,7 @@ You can filter examples by split, metadata key/value or perform full-text search
 
 You may add multiple filters, and only examples that satisfy all of the filters will be displayed in the table.
 
-> **Image:** [Filters Applied to Examples](manage-datasets-in-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filters-applied.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=2d1f300884d5e886267a137a3cb3e4c7" alt="Filters Applied to Examples" width="1307" height="370" data-path="langsmith/images/filters-applied.png" />
 
 ***
 

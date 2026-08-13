@@ -1,6 +1,6 @@
 # API and SDK deprecation policy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/endpoint-deprecation)
-How LangSmith deprecates and removes API endpoints and SDK methods in cloud and self-hosted deployments.
+
+> How LangSmith deprecates and removes API endpoints and SDK methods in cloud and self-hosted deployments.
 
 LangSmith deprecates API endpoints and SDK methods before removing them, so you have time to migrate to a replacement. This page describes how deprecations are announced and how long they stay supported.
 

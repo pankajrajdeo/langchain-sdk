@@ -1,6 +1,6 @@
 # Subagent streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming)
-Display specialist subagents with streaming content, progress tracking, and collapsible cards
+
+> Display specialist subagents with streaming content, progress tracking, and collapsible cards
 
 When a coordinator agent spawns specialist subagents (a researcher, an
 analyst, a writer), you need to render the orchestrator's messages separately

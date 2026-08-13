@@ -1,6 +1,6 @@
 # Overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/overview)
-Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents
+
+> Build UIs that display real-time subagent streams, task progress, and sandbox for Deep Agents
 
 Build frontends that visualize deep agent workflows in real time. These patterns
 show how to render subagent progress, task planning, streaming content, and

@@ -1,5 +1,5 @@
 # Studio troubleshooting
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/troubleshooting-studio)
+
 ## Safari connection issues
 
 Safari blocks plain-HTTP traffic on localhost. When running Studio with `langgraph dev`, you may see "Failed to load assistants" errors.
@@ -132,6 +132,8 @@ graph.add_conditional_edges("node_a", routing_function, {True: "node_b", False: 
 ```ts
 graph.addConditionalEdges("node_a", routingFunction, { true: "node_b", false: "node_c" });
 ```
+
+<a id="python" />
 
 ### Solution 2: Router type definition
 

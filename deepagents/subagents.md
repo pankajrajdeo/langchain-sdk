@@ -1,6 +1,6 @@
 # Subagents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/subagents)
-Learn how to use subagents to delegate work and keep context clean
+
+> Learn how to use subagents to delegate work and keep context clean
 
 A deep agent can create subagents to delegate work. You can specify custom subagents in the `subagents` parameter. Subagents are useful for [context quarantine](https://www.dbreunig.com/2025/06/26/how-to-fix-your-context.html#context-quarantine) (keeping the main agent's context clean) and for providing specialized instructions.
 
@@ -564,7 +564,7 @@ To trigger dynamic subagents, ask for a "workflow". Instead of grinding through 
 
 As subagents spawn, `dcode` shows them live in the dynamic subagents panel, grouped into phases by dispatch.
 
-> **Image:** [The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch](subagents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/mcM5dSw40KzBUENf/oss/images/deepagents/dcode-dynamic-subagents-panel.png?fit=max&auto=format&n=mcM5dSw40KzBUENf&q=85&s=bc20632b54e21fecfc5ff4f8d169a2c7" alt="The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch" width="3134" height="1832" data-path="oss/images/deepagents/dcode-dynamic-subagents-panel.png" />
 
 `dcode` is the fastest way to try this, but you can also use dynamic subagents in the coding agent of your choice over [ACP](acp.md) (for example, Zed).
 
@@ -967,7 +967,7 @@ if __name__ == "__main__":
 
 As your deep agent runs, all runs executed by a subagent or the coordinator will have the agent name in their metadata under the `lc_agent_name` key—for example, `{'lc_agent_name': 'research-agent'}`. This lets you identify and filter runs by subagent in LangSmith.
 
-> **Image:** [LangSmith Example trace showing the metadata](subagents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/IlqYrcANJ39avG84/oss/images/deepagents/deepagents-langsmith.png?fit=max&auto=format&n=IlqYrcANJ39avG84&q=85&s=4c3a1512fb27abc30da37751aee19afd" alt="LangSmith Example trace showing the metadata" width="907" height="866" data-path="oss/images/deepagents/deepagents-langsmith.png" />
 
 > [!TIP]
 > Open the run in [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-subagents) to compare the coordinator trace with each subagent run. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
@@ -983,7 +983,7 @@ Because each subagent's `name` is written to the `lc_agent_name` metadata key on
 3. Click **Add filter** and select **Metadata**.
 4. Set the **Key** to `lc_agent_name` and the **Value** to the subagent name, for example `coordinator`.
 
-> **Image:** [LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator](subagents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/t_yuR4Fo_XGdcWGH/langsmith/images/deepagents-lc-agent-name-filter.png?fit=max&auto=format&n=t_yuR4Fo_XGdcWGH&q=85&s=ffc65c0b9b5292fce5f0589b8f2478ce" alt="LangSmith Runs view with a metadata filter on lc_agent_name set to coordinator" width="1024" height="533" data-path="langsmith/images/deepagents-lc-agent-name-filter.png" />
 
 This shows only the runs produced by that subagent. You can save the filter as a named view for reuse. For a full reference on filtering options, see [Filter traces](../langsmith/filter-traces-in-application.md).
 

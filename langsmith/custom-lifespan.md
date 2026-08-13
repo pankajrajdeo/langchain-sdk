@@ -1,5 +1,5 @@
 # How to add custom lifespan events
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-lifespan)
+
 When deploying agents to LangSmith, you often need to initialize resources like database connections when your server starts up, and ensure they're properly closed when it shuts down. Lifespan events let you hook into your server's startup and shutdown sequence to handle these critical setup and teardown tasks.
 
 This works the same way as [adding custom routes](custom-routes.md). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).

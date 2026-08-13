@@ -1,6 +1,6 @@
 # Prompt & Context Hub
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-context-hub)
-Store, version, and update the prompts and contexts your agents use in production.
+
+> Store, version, and update the prompts and contexts your agents use in production.
 
 Prompts, retrieval context, skills, and task instructions change more often than the application code around them, and often need to be edited by people who are not engineers. Use the Prompt & Context Hub to store, version, review, and update the non-code parts of your agent so you can change behavior without a full deploy and let domain experts own the context they know best.
 

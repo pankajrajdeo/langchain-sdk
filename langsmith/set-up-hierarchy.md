@@ -1,5 +1,5 @@
 # Set up hierarchy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/set-up-hierarchy)
+
 This page describes setting up and managing your LangSmith [*organization*](administration-overview.md#organizations) and [*workspaces*](administration-overview.md#workspaces):
 
 * [Set up an organization](#set-up-an-organization): Create and manage organizations for team collaboration, including user management and role assignments.

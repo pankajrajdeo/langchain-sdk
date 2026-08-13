@@ -1,5 +1,5 @@
 # How to run an evaluation asynchronously
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-async)
+
 > [!NOTE]
 > [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Evaluators](evaluation-concepts.md#evaluators) | [Datasets](evaluation-concepts.md#datasets) | [Experiments](evaluation-concepts.md#experiment)
 

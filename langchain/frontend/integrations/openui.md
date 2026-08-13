@@ -1,6 +1,6 @@
 # OpenUI
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
-Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang
+
+> Generate complete, interactive dashboards and reports using the OpenUI component library and openui-lang
 
 [OpenUI](https://github.com/thesysdev/openui) is a generative UI library that lets a language model produce complete, interactive UIs in a declarative format called **openui-lang**. Instead of returning a chat message, the agent returns a component tree with cards, charts, tables, tabs, and forms that the `Renderer` turns into a real React UI.
 

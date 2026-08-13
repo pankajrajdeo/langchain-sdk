@@ -1,5 +1,5 @@
 # User management
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/user-management)
+
 This page covers user management features in LangSmith, including access control, authentication, and automated user provisioning:
 
 * [Set up access control](#set-up-access-control): Configure role-based access control (RBAC) to manage user permissions within workspaces, including creating custom roles and assigning them to users.
@@ -34,7 +34,7 @@ To create a role, navigate to the **Roles** tab in the **Members and roles** sec
 
 Click on the **Create Role** button to create a new role. A **Create role** form will open.
 
-> **Image:** [Create Role](user-management.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-role.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=6a413dbec076a37d680fa2ed8a91c495" alt="Create Role" width="3078" height="1932" data-path="langsmith/images/create-role.png" />
 
 Assign permissions for the different LangSmith resources that you want to control access to.
 
@@ -44,11 +44,11 @@ Once you have your roles set up, you can assign them to users. To assign a role 
 
 Each user will have a **Role** dropdown that you can use to assign a role to them.
 
-> **Image:** [Assign Role](user-management.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/assign-role.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=ec5748a2c884693a24f984cc517a3860" alt="Assign Role" width="1888" height="574" data-path="langsmith/images/assign-role.png" />
 
 You can also invite new users with a given role.
 
-> **Image:** [Invite User](user-management.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/invite-user.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=3787cb55cbefcd5c95d6c01b6e9f6e75" alt="Invite User" width="1204" height="886" data-path="langsmith/images/invite-user.png" />
 
 ## Set up SAML SSO for your organization
 
@@ -121,24 +121,52 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_0 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -149,24 +177,52 @@ For instructions on using SCIM along with SAML for user provisioning and deprovi
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_1 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -246,24 +302,52 @@ For additional information, see Microsoft's [documentation](https://learn.micros
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_2 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_2 === false ? "" : "https://"}${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_2 === false ? "" : "https://"}eu.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_2 === false ? "" : "https://"}apac.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_2 === false ? "" : "https://"}aws.${prefix_2 || "api.smith"}.langchain.com${suffix_2 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -274,24 +358,52 @@ For additional information, see Microsoft's [documentation](https://learn.micros
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_3 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_3 === false ? "" : "https://"}${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_3 === false ? "" : "https://"}eu.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_3 === false ? "" : "https://"}apac.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_3 === false ? "" : "https://"}aws.${prefix_3 || "api.smith"}.langchain.com${suffix_3 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -352,24 +464,52 @@ For additional information, see Google's [documentation](https://support.google.
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_4 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_4 === false ? "" : "https://"}${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_4 === false ? "" : "https://"}eu.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_4 === false ? "" : "https://"}apac.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_4 === false ? "" : "https://"}aws.${prefix_4 || "api.smith"}.langchain.com${suffix_4 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -380,24 +520,52 @@ For additional information, see Google's [documentation](https://support.google.
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_5 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_5 === false ? "" : "https://"}${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_5 === false ? "" : "https://"}eu.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_5 === false ? "" : "https://"}apac.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_5 === false ? "" : "https://"}aws.${prefix_5 || "api.smith"}.langchain.com${suffix_5 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -474,24 +642,52 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
      <thead>
        <tr>
          <th>Region</th>
+
+         <th>
+           {protocol_6 === false ? "Host" : "URL"}
+         </th>
        </tr>
      </thead>
 
      <tbody>
        <tr>
          <td>GCP US</td>
+
+         <td>
+           <code>
+             {`${protocol_6 === false ? "" : "https://"}${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>GCP EU</td>
+
+         <td>
+           <code>
+             {`${protocol_6 === false ? "" : "https://"}eu.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>GCP APAC</td>
+
+         <td>
+           <code>
+             {`${protocol_6 === false ? "" : "https://"}apac.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>AWS US</td>
+
+         <td>
+           <code>
+             {`${protocol_6 === false ? "" : "https://"}aws.${prefix_6 || "api.smith"}.langchain.com${suffix_6 || ""}`}
+           </code>
+         </td>
        </tr>
      </tbody>
    </table>
@@ -502,24 +698,52 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
      <thead>
        <tr>
          <th>Region</th>
+
+         <th>
+           {protocol_7 === false ? "Host" : "URL"}
+         </th>
        </tr>
      </thead>
 
      <tbody>
        <tr>
          <td>GCP US</td>
+
+         <td>
+           <code>
+             {`${protocol_7 === false ? "" : "https://"}${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>GCP EU</td>
+
+         <td>
+           <code>
+             {`${protocol_7 === false ? "" : "https://"}eu.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>GCP APAC</td>
+
+         <td>
+           <code>
+             {`${protocol_7 === false ? "" : "https://"}apac.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
+           </code>
+         </td>
        </tr>
 
        <tr>
          <td>AWS US</td>
+
+         <td>
+           <code>
+             {`${protocol_7 === false ? "" : "https://"}aws.${prefix_7 || "api.smith"}.langchain.com${suffix_7 || ""}`}
+           </code>
+         </td>
        </tr>
      </tbody>
    </table>
@@ -557,24 +781,52 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_8 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_8 === false ? "" : "https://"}${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_8 === false ? "" : "https://"}eu.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_8 === false ? "" : "https://"}apac.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_8 === false ? "" : "https://"}aws.${prefix_8 || "api.smith"}.langchain.com${suffix_8 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -585,24 +837,52 @@ For additional information, see Okta's [documentation](https://help.okta.com/en-
         <thead>
           <tr>
             <th>Region</th>
+
+            <th>
+              {protocol_9 === false ? "Host" : "URL"}
+            </th>
           </tr>
         </thead>
 
         <tbody>
           <tr>
             <td>GCP US</td>
+
+            <td>
+              <code>
+                {`${protocol_9 === false ? "" : "https://"}${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP EU</td>
+
+            <td>
+              <code>
+                {`${protocol_9 === false ? "" : "https://"}eu.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>GCP APAC</td>
+
+            <td>
+              <code>
+                {`${protocol_9 === false ? "" : "https://"}apac.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
+              </code>
+            </td>
           </tr>
 
           <tr>
             <td>AWS US</td>
+
+            <td>
+              <code>
+                {`${protocol_9 === false ? "" : "https://"}aws.${prefix_9 || "api.smith"}.langchain.com${suffix_9 || ""}`}
+              </code>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -892,24 +1172,52 @@ For additional information, see Microsoft's [documentation](https://learn.micros
        <thead>
          <tr>
            <th>Region</th>
+
+           <th>
+             {protocol_10 === false ? "Host" : "URL"}
+           </th>
          </tr>
        </thead>
 
        <tbody>
          <tr>
            <td>GCP US</td>
+
+           <td>
+             <code>
+               {`${protocol_10 === false ? "" : "https://"}${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
+             </code>
+           </td>
          </tr>
 
          <tr>
            <td>GCP EU</td>
+
+           <td>
+             <code>
+               {`${protocol_10 === false ? "" : "https://"}eu.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
+             </code>
+           </td>
          </tr>
 
          <tr>
            <td>GCP APAC</td>
+
+           <td>
+             <code>
+               {`${protocol_10 === false ? "" : "https://"}apac.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
+             </code>
+           </td>
          </tr>
 
          <tr>
            <td>AWS US</td>
+
+           <td>
+             <code>
+               {`${protocol_10 === false ? "" : "https://"}aws.${prefix_10 || "api.smith"}.langchain.com${suffix_10 || ""}`}
+             </code>
+           </td>
          </tr>
        </tbody>
      </table>
@@ -1013,7 +1321,7 @@ See [SAML SSO setup](#okta) for cloud or [OAuth2.0 setup](self-host-sso.md#okta-
 1. Configure provisioning: under `Provisioning > To App > Provisioning to App`, click `Edit`, then check `Create Users`, `Update User Attributes`, and `Deactivate Users`.
 2. Under `<application_name> Attribute Mappings`, set the user attribute mappings as shown below, and delete the rest:
 
-> **Image:** [SCIM Okta User Attributes Mapping](user-management.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fd2sBZqE3DLR7pWt/langsmith/images/scim_okta_user_attributes.png?fit=max&auto=format&n=Fd2sBZqE3DLR7pWt&q=85&s=4951533e29e0f0f75e7aac74dcfab3bb" alt="SCIM Okta User Attributes Mapping" width="748" height="467" data-path="langsmith/images/scim_okta_user_attributes.png" />
 
 **Step 4: Push Groups**
 

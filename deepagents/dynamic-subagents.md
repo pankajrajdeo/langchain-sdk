@@ -1,6 +1,6 @@
 # Dynamic subagents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents)
-Use interpreters to dispatch and orchestrate Deep Agents subagents from code
+
+> Use interpreters to dispatch and orchestrate Deep Agents subagents from code
 
 Dynamic subagents let an agent dispatch [subagents](subagents.md) from interpreter code. Instead of asking the model to choose one subagent call at a time, the agent can use JavaScript loops, branches, and parallel batches to route work across configured subagents and synthesize the results.
 

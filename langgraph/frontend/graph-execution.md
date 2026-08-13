@@ -1,6 +1,6 @@
 # Graph execution
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution)
-Visualize multi-step graph pipelines with per-node status and streaming content
+
+> Visualize multi-step graph pipelines with per-node status and streaming content
 
 LangGraph agents aren't black boxes. Every graph is composed of **named nodes**
 that execute in sequence or in parallel: classify, research, analyze,

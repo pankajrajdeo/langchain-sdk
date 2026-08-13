@@ -1,6 +1,6 @@
 # Auth-aware tool responses
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/auth-format)
-Format tool responses to trigger OAuth flows and resume execution automatically.
+
+> Format tool responses to trigger OAuth flows and resume execution automatically.
 
 Some [tools](tools.md) require user authorization (for example, Google, Slack, GitHub). LangSmith Fleet includes middleware to detect when a tool needs authorization and to pause the run with a clear prompt to the user. After the user completes auth, the same tool call is retried automatically.
 

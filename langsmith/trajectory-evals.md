@@ -1,5 +1,5 @@
 # How to evaluate your agent with trajectory evaluations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trajectory-evals)
+
 Many agent behaviors only emerge when using a real LLM, such as which tool the agent decides to call, how it formats responses, or whether a prompt modification affects the entire execution trajectory. LangChain's [`agentevals`](https://github.com/langchain-ai/agentevals) package provides evaluators specifically designed for testing agent trajectories with live models.
 
 > [!NOTE]

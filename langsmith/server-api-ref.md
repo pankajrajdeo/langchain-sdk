@@ -1,5 +1,5 @@
 # Agent Server API reference for LangSmith Deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-api-ref)
+
 The Agent Server API reference is available within each [deployment](deployment.md) at the `/docs` endpoint (e.g. `http://localhost:8124/docs`).
 
 Browse the full API reference in the **Agent Server API** section in the sidebar, or see the endpoint groups below:

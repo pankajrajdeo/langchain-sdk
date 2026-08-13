@@ -1,6 +1,6 @@
 # FIPS-compliant images
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-fips)
-Run self-hosted LangSmith installation on FIPS 140 compliant container images
+
+> Run self-hosted LangSmith installation on FIPS 140 compliant container images
 
 > [!NOTE]
 > FIPS and airgapped LangSmith deployments require a conversation with your LangChain account executive before rollout. Reach out to scope licensing, supported configurations, and upgrade paths before you change your installation.

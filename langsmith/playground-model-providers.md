@@ -1,5 +1,5 @@
 # Model providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/playground-model-providers)
+
 The [Playground](prompt-engineering-concepts.md#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
 
 Use this page for a list of the available providers and their configuration options:
@@ -78,7 +78,7 @@ To set this up:
 
 3. In the LangSmith Playground, open the Bedrock provider's secrets configuration by clicking the **Key** icon (the IAM Trusted Entity option is not available in the model configuration dropdown itself). Then expand the **IAM Trusted Entity** section and enter the ARN of the role you created.
 
-> **Image:** [Bedrock secrets and API keys configuration with the IAM Trusted Entity section](playground-model-providers.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/5xyMbImu-yvQUeiG/images/langsmith/bedrock-secrets-config.png?fit=max&auto=format&n=5xyMbImu-yvQUeiG&q=85&s=5ba03ea30f7bba78bc51d0fa8e273878" alt="Bedrock secrets and API keys configuration with the IAM Trusted Entity section" width="2850" height="1918" data-path="images/langsmith/bedrock-secrets-config.png" />
 
 For more details on trust policies, see the [AWS documentation](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/).
 

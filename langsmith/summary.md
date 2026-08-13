@@ -1,5 +1,5 @@
 # How to define a summary evaluator
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/summary)
+
 Some metrics can only be defined on the entire experiment level as opposed to the individual runs of the experiment. For example, you may want to compute the overall pass rate or f1 score of your evaluation target across all examples in the dataset. These are called summary evaluators.
 
 ## Basic example
@@ -128,7 +128,7 @@ await evaluate(badClassifier, {
 
 In the LangSmith UI, you'll the summary evaluator's score displayed with the corresponding key.
 
-> **Image:** [summary_eval.png](summary.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/summary-eval.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=d0f259baa7d7467bf172ef8197c3bb17" alt="summary_eval.png" width="1535" height="122" data-path="langsmith/images/summary-eval.png" />
 
 ## Summary evaluator args
 

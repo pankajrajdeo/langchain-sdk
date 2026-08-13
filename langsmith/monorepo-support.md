@@ -1,5 +1,5 @@
 # Monorepo support
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/monorepo-support)
+
 LangSmith supports deploying agents from monorepo setups where your agent code may depend on shared packages located elsewhere in the repository. This guide shows how to structure your monorepo and configure your `langgraph.json` file to work with shared dependencies.
 
 ## Repository structure

@@ -1,6 +1,6 @@
 # Runtimes, frameworks, and harnesses
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/concepts/products)
-Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one
+
+> Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one
 
 LangChain maintains several open source packages to help you build agents. Each serves a different purpose in the agent development stack. Understanding the distinctions between [agent frameworks](#agent-frameworks-like-langchain), [agent runtimes](#agent-runtimes-like-langgraph), and [agent harnesses](#agent-harnesses-like-the-deep-agents-sdk) helps you choose the right tool for your needs.
 
@@ -18,23 +18,23 @@ LangChain maintains several open source packages to help you build agents. Each 
   <tbody>
     <tr>
       <td>Value add</td>
-      <td><ul><li>Durable execution</li><li>Streaming</li><li>HITL</li><li>Persistence</li></ul></td>
-      <td><ul><li>Abstractions</li><li>Integrations</li></ul></td>
-      <td><ul><li>Predefined tools</li><li>Prompts</li><li>Subagents</li></ul></td>
+      <td class="tdlist"><ul><li>Durable execution</li><li>Streaming</li><li>HITL</li><li>Persistence</li></ul></td>
+      <td class="tdlist"><ul><li>Abstractions</li><li>Integrations</li></ul></td>
+      <td class="tdlist"><ul><li>Predefined tools</li><li>Prompts</li><li>Subagents</li></ul></td>
     </tr>
 
     <tr>
       <td>When to use</td>
-      <td><ul><li>Low-level control</li><li>Long running, stateful workflows and agents</li></ul></td>
-      <td><ul><li>Getting started quickly</li><li>Standardizing how a team builds</li></ul></td>
-      <td><ul><li>More autonomous agents</li><li>Agents faced with complex, non-deterministic tasks</li></ul></td>
+      <td class="tdlist"><ul><li>Low-level control</li><li>Long running, stateful workflows and agents</li></ul></td>
+      <td class="tdlist"><ul><li>Getting started quickly</li><li>Standardizing how a team builds</li></ul></td>
+      <td class="tdlist"><ul><li>More autonomous agents</li><li>Agents faced with complex, non-deterministic tasks</li></ul></td>
     </tr>
 
     <tr>
       <td>Options</td>
-      <td><ul><li>LangGraph</li><li>Temporal</li><li>Inngest</li></ul></td>
-      <td><ul><li>LangChain</li><li>Vercel's AI SDK</li><li>CrewAI</li><li>OpenAI Agents SDK</li><li>Google ADK</li><li>LlamaIndex</li></ul></td>
-      <td><ul><li>Deep Agents SDK</li><li>Claude Agent SDK</li><li>Manus</li></ul></td>
+      <td class="tdlist"><ul><li>LangGraph</li><li>Temporal</li><li>Inngest</li></ul></td>
+      <td class="tdlist"><ul><li>LangChain</li><li>Vercel's AI SDK</li><li>CrewAI</li><li>OpenAI Agents SDK</li><li>Google ADK</li><li>LlamaIndex</li></ul></td>
+      <td class="tdlist"><ul><li>Deep Agents SDK</li><li>Claude Agent SDK</li><li>Manus</li></ul></td>
     </tr>
   </tbody>
 </table>

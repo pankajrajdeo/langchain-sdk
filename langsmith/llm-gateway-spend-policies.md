@@ -1,6 +1,6 @@
 # Spend policies
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-spend-policies)
-Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
+
+> Set cost limits on LLM usage across your organization and prevent runaway spend before it reaches providers.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

@@ -1,6 +1,6 @@
 # Rebuild graph at runtime
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/graph-rebuild)
-Rebuild your graph with different configurations for each run using ServerRuntime.
+
+> Rebuild your graph with different configurations for each run using ServerRuntime.
 
 You might need to rebuild your graph with a different configuration for a new run. For example, you might want to load different tools depending on the user's credentials. This guide shows how you can do this using `ServerRuntime`.
 

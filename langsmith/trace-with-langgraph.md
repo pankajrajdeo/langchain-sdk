@@ -1,5 +1,5 @@
 # Trace LangGraph applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-langgraph)
+
 LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace agents, whether you're using LangChain modules or other SDKs.
 
 ## With LangChain
@@ -48,24 +48,52 @@ export LANGSMITH_WORKSPACE_ID=<your-workspace-id>
 >   <thead>
 >     <tr>
 >       <th>Region</th>
+>
+>       <th>
+>         {protocol_0 === false ? "Host" : "URL"}
+>       </th>
 >     </tr>
 >   </thead>
 >
 >   <tbody>
 >     <tr>
 >       <td>GCP US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP EU</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP APAC</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>AWS US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >   </tbody>
 > </table>
@@ -265,24 +293,52 @@ export OPENAI_API_KEY=<your-openai-api-key>
 >   <thead>
 >     <tr>
 >       <th>Region</th>
+>
+>       <th>
+>         {protocol_1 === false ? "Host" : "URL"}
+>       </th>
 >     </tr>
 >   </thead>
 >
 >   <tbody>
 >     <tr>
 >       <td>GCP US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP EU</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>GCP APAC</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >
 >     <tr>
 >       <td>AWS US</td>
+>
+>       <td>
+>         <code>
+>           {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+>         </code>
+>       </td>
 >     </tr>
 >   </tbody>
 > </table>

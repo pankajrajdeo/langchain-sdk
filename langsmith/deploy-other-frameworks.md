@@ -1,6 +1,6 @@
 # Deploy other frameworks
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-other-frameworks)
-Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment.
+
+> Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment.
 
 LangSmith Deployment runs any framework. For agents not built on Deep Agents, LangChain, or LangGraph, deploy using either the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package (Google ADK) or the [LangGraph Functional API](../langgraph/functional-api.md) (Claude Agent SDK, Strands, CrewAI, AutoGen, and other libraries).
 

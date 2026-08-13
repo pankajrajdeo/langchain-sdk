@@ -1,6 +1,6 @@
 # Audit logs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/audit-logs)
-Track and review administrative actions across your LangSmith organization for security, compliance, and operational visibility.
+
+> Track and review administrative actions across your LangSmith organization for security, compliance, and operational visibility.
 
 > [!NOTE]
 > Audit logs are available on [**Enterprise** plans](pricing-plans.md). If you're interested in upgrading to Enterprise, [contact our sales team](https://www.langchain.com/contact-sales).

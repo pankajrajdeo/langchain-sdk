@@ -1,5 +1,5 @@
 # Router
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/router)
+
 In the **router** architecture, a routing step classifies input and directs it to specialized [agents](../agents.md). This is useful when you have distinct **verticals** (separate knowledge domains that each require their own agent).
 
 ```mermaid

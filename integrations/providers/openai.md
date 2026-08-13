@@ -1,6 +1,6 @@
 # OpenAI integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/openai)
-Integrate with OpenAI using LangChain Python.
+
+> Integrate with OpenAI using LangChain Python.
 
 This page covers all LangChain integrations with [OpenAI](https://en.wikipedia.org/wiki/OpenAI)
 

@@ -1,5 +1,5 @@
 # Overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/administration-overview)
+
 This overview covers topics related to managing users, organizations, workspaces, and applications within LangSmith.
 
 ## Resource hierarchy
@@ -41,7 +41,7 @@ Resources are the concrete entities used to build, run, and observe applications
 
 ### Additional info
 
-The following diagram explains the relationship between organizations, workspaces, applications, and resources: <img alt="Resource Hierarchy" />
+The following diagram explains the relationship between organizations, workspaces, applications, and resources: <img src="https://mintcdn.com/langchain-5e9cc07a/CxwZomSRGiBmNIp6/langsmith/images/resource-hierarchy.png?fit=max&auto=format&n=CxwZomSRGiBmNIp6&q=85&s=d117245dabd42d5dd4ef0733f8abcb21" alt="Resource Hierarchy" width="878" height="420" data-path="langsmith/images/resource-hierarchy.png" />
 
 See the table below for details on which features are available in which scope(s):
 

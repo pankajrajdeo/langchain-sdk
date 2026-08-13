@@ -1,6 +1,6 @@
 # Monitor LLM Gateway spend
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-monitoring)
-View and analyze LLM Gateway costs by user, API key, and model.
+
+> View and analyze LLM Gateway costs by user, API key, and model.
 
 The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](administration-overview.md#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](create-account-api-key.md), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
 

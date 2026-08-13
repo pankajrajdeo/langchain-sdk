@@ -1,5 +1,5 @@
 # Cloud (SaaS)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cloud)
+
 The **Cloud** hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
 
 * **Fully managed infrastructure**: LangChain handles all infrastructure, updates, scaling, and maintenance.
@@ -16,7 +16,7 @@ The **Cloud** hosting option is a fully managed model where LangChain hosts and 
 > [!NOTE]
 > If you're ready to deploy your app to LangSmith Cloud (AWS or GCP), follow the [Cloud deployment quickstart](deployment-quickstart.md) or the [full setup guide](deploy-to-cloud.md). This page explains the Cloud managed architecture for reference.
 
-> **Image:** [Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers.](cloud.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/langgraph-cloud-architecture.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=3f0316122425895270d0ecd47b12e139" alt="Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers." width="1425" height="1063" data-path="langsmith/images/langgraph-cloud-architecture.png" />
 
 ## Cloud architecture and scalability
 
@@ -109,9 +109,9 @@ Some additional AWS services we use include:
 * Amazon CloudFront for caching static assets (including the web UI hostname `aws.smith.langchain.com`).
 * AWS WAF on CloudFront for managed rule groups at the edge (for example, AWS Managed Rules common protections and Bot Control).
 
-> **Image:** [Light mode overview](cloud.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-light.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=0790cbdf4fe131c74d1e60bb120834e3" alt="Light mode overview" width="2210" height="1463" data-path="langsmith/images/cloud-arch-light.png" />
 
-> **Image:** [Dark mode overview](cloud.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/rqYqeBEA_2oeiw17/langsmith/images/cloud-arch-dark.png?fit=max&auto=format&n=rqYqeBEA_2oeiw17&q=85&s=767f3bc3dc73ffe1a806f54e0aaa428b" alt="Dark mode overview" width="2210" height="1463" data-path="langsmith/images/cloud-arch-dark.png" />
 
 ## Allowlisting IP addresses
 

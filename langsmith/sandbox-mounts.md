@@ -1,6 +1,6 @@
 # Sandbox mounts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-mounts)
-Mount S3 buckets, GCS buckets, and public Git repositories into LangSmith sandboxes.
+
+> Mount S3 buckets, GCS buckets, and public Git repositories into LangSmith sandboxes.
 
 Sandbox mounts attach external data sources to a sandbox filesystem when the sandbox is created. Use mounts when sandbox code needs direct file access to object storage buckets or public Git repositories without copying the data into the sandbox image.
 

@@ -1,6 +1,6 @@
 # Trace Cursor sessions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-cursor)
-Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith.
+
+> Capture Cursor agent turns, tool calls, model metadata, token usage, attachments, and subagents in LangSmith.
 
 Trace [Cursor](https://cursor.com/) agent sessions in LangSmith using [Cursor hooks](https://cursor.com/docs/agent/hooks). Each turn becomes one trace, grouped into a thread per Cursor conversation, which captures prompts, model responses, tool calls, token usage, and subagent activity. Use the traces to debug agent behavior, audit tool calls, track token spend per turn, and compare Cursor runs.
 

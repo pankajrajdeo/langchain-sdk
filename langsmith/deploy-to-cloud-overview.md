@@ -1,6 +1,6 @@
 # Deploy to Cloud
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-to-cloud-overview)
-Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP.
+
+> Deploy LangSmith agents to LangChain-managed Cloud infrastructure on AWS and GCP.
 
 [LangSmith Cloud](cloud.md) is a **managed platform for deploying your agents**. LangChain hosts and operates the [control plane](control-plane.md), [data plane](data-plane.md), [Agent Server](agent-server.md) runtime, and supporting databases on AWS and GCP. Push code to a connected GitHub repository or invoke the `langgraph deploy` CLI, and the platform handles build, provisioning, scaling, and ongoing operations. Deployments come in two types: Serverless, a lightweight, fully managed option that scales to zero after a period of inactivity, and Dedicated, always-on infrastructure for production workloads. For details, see [Deployment types](cloud-platform-features.md#deployment-types).
 

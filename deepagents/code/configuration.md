@@ -1,6 +1,6 @@
 # Configuration
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/configuration)
-Configure Deep Agents Code with config.toml, environment variables, hooks, and CLI flags
+
+> Configure Deep Agents Code with config.toml, environment variables, hooks, and CLI flags
 
 Deep Agents Code stores configuration under `~/.deepagents/` and in project-level dotfiles. For the full directory tree, session storage, and skill paths, see [Data locations](#data-locations).
 

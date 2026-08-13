@@ -1,5 +1,5 @@
 # Log multimodal traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/log-multimodal-traces)
+
 LangSmith supports logging and rendering images as part of traces. This is currently supported for multimodal LLM runs.
 
 In order to log images, use `wrap_openai`/ `wrapOpenAI` in Python or TypeScript respectively and pass an image URL or base64 encoded image as part of the input.

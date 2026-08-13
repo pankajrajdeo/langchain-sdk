@@ -1,8 +1,10 @@
 # Find and fix your agent's issues with LangSmith Engine
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine)
-Automatically detect and resolve recurring issues in your tracing project using LangSmith Engine.
+
+> Automatically detect and resolve recurring issues in your tracing project using LangSmith Engine.
 
 LangSmith Engine helps you ship more reliable agents without manually searching through traces. It is the LangSmith Agent for agent engineering: working from your production traces, it surfaces recurring issues, diagnoses their root cause, and drives the fix across every stage of the development lifecycle. For a product overview, see [Engine](engine-overview.md).
+
+## How Engine works
 
 Each issue moves through a closed loop in which Engine:
 
@@ -27,6 +29,18 @@ flowchart LR
 ```
 
 This page covers how to set up Engine, work through the fix and evaluation loop, control costs, and route notifications.
+
+## How Engine samples and prioritizes traces
+
+Engine analyzes both trace content and run feedback when selecting and ranking traces for each scan. It treats feedback—including online evaluator scores, annotation queue scores, and user feedback submitted via the SDK—as a high-priority signal, not supplementary data.
+
+To apply this signal, Engine:
+
+* Reads the feedback keys present in your project and performs a dedicated pull of low-scoring traces for each key, so the sample includes traces with poor evaluator scores rather than leaving them to recency.
+* Prioritizes traces with non-empty feedback scores ahead of other traces when screening the sample.
+* Preserves feedback scores on every trace in the analysis context, even when trace payloads are compacted to fit within context limits.
+
+Any source that writes feedback to a run contributes to this prioritization automatically. Engine requires no setup beyond evaluators or annotation queues.
 
 ## Set up Engine
 
@@ -60,8 +74,8 @@ Engine runs in two phases:
 
 | Phase               | Trigger                                   | Typical LCU usage |
 | ------------------- | ----------------------------------------- | ----------------- |
-| **Initialization**  | First time you enable Engine on a project | 30–40 LCUs        |
-| **Recurring scans** | Every 6 hours automatically               | 10–15 LCUs        |
+| **Initialization**  | First time you enable Engine on a project | 30-40 LCUs        |
+| **Recurring scans** | Every 6 hours automatically               | 10-15 LCUs        |
 
 On initialization, Engine audits past traces, clusters and prioritizes issues by severity, and proposes fixes to your prompts or code (if a repository is connected). Recurring scans run on the 6-hour schedule whether or not new issues are found, and surface new issues not previously detected.
 
@@ -98,9 +112,9 @@ Click **Start Analyzing**. The dialog may show an estimated monthly cost range b
 ### Review the agent overview document
 Before surfacing issues, Engine generates an agent overview document describing your project's purpose, architecture, and key metrics based on your traces. Review and edit the document, then click **Accept & Continue** to proceed. If the overview is inaccurate, edit it before continuing, since Engine uses it as context for all analysis, so accuracy here affects the quality of detected issues. You can update it at any time from the [**Engine Settings**](#configure-engine) panel.
 
-> **Image:** [Setup dialog showing the code repository field and category selections for prioritizing issue types](engine.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/uylG76jx_SPO3cOU/langsmith/images/langsmith-engine-setup-light.png?fit=max&auto=format&n=uylG76jx_SPO3cOU&q=85&s=d9079b8e0f01dffa3edd4b7abbedb566" alt="Setup dialog showing the code repository field and category selections for prioritizing issue types" width="698" height="785" data-path="langsmith/images/langsmith-engine-setup-light.png" />
 
-> **Image:** [Setup dialog showing the code repository field and category selections for prioritizing issue types](engine.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/uylG76jx_SPO3cOU/langsmith/images/langsmith-engine-setup-dark.png?fit=max&auto=format&n=uylG76jx_SPO3cOU&q=85&s=c173a1d805617239a05ccd95c69a4605" alt="Setup dialog showing the code repository field and category selections for prioritizing issue types" width="696" height="779" data-path="langsmith/images/langsmith-engine-setup-dark.png" />
 
 ### Focus on specific traces
 
@@ -117,6 +131,9 @@ Add scope conditions with the same [filter editor](filter-traces-in-application.
 * **Metadata**: Pick a metadata key, then a value. Both autocomplete from the metadata present on your project's recent runs.
 
 To add a condition, choose its kind from the field selector, fill in the values, then click **Add**. Each condition appears as a chip, for example `Run Name is chatbot` or `env is prod`. Click the **×** on a chip to remove that condition.
+
+> [!NOTE]
+> **Scope limitation:** The scope filter only accepts run name and metadata conditions. You cannot scope Engine's scan by feedback key, evaluator name, or score threshold. To focus Engine on traces with a specific evaluator's low scores, use the [**Preferences** and **Agent overview** settings](#configure-engine) to tell Engine what to prioritize. Engine already factors in all feedback signals automatically. See [How Engine samples and prioritizes traces](#how-engine-samples-and-prioritizes-traces).
 
 Scope determines which traces Engine analyzes to detect issues and build the agent overview document. Scope set during initial setup applies to Engine's first scan. Scope changed later in the [**Engine Settings**](#configure-engine) panel does not re-run Engine immediately; it applies on the next scan, which runs every 6 hours.
 
@@ -245,7 +262,7 @@ Within a tracing project, click the **Engine Settings**  icon on the **Engine** 
 * **Agent overview**: Edit your agent overview document to keep Engine's understanding of your project accurate as your application evolves.
 * **Preferences**: Areas Engine should focus on, prioritize, or ignore. Engine treats these as authoritative and folds them into the agent overview document on the next scan. Select category chips such as **Cost & Tokens**, **Latency**, or **Tool Call Failures**, or click **+ Add something specific** to describe a custom concern. Changes take effect on the next scan.
 * **Engine spend**: View the month-to-date Engine LCU spend for this project. Click **Set limit** to cap monthly spend. New runs pause when the monthly limit is reached.
-* **Focus on specific traces**: Narrow Engine's attention to a subset of runs by run name or metadata. Edits save automatically and take effect on the next scan. See [Focus on specific traces](#focus-on-specific-traces).
+* **Focus on specific traces**: Narrow Engine's attention to a subset of runs by run name or metadata. Edits save automatically and take effect on the next scan. Scope conditions accept only run name and metadata; you cannot filter by feedback key or score. See [Focus on specific traces](#focus-on-specific-traces).
 * **Notifications**: Click **Add destination** to add a Slack channel or webhook destination that receives a notification when Engine detects a new issue. Set a minimum priority level per destination to control which issues trigger a notification. See [Get notified about new issues](#get-notified-about-new-issues).
 * **Code repository**: Connect or update a GitHub repository so the agent can reference source code when diagnosing issues. Optionally set a **Subfolder** and a **Branch** (defaults to the repository default). For setup, see [Connect Engine to GitHub](engine-github.md).
 * **Context repository**: Connect a Context Hub repository so Engine can propose fixes to instructions, docs, and linked skills.

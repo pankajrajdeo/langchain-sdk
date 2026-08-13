@@ -1,6 +1,6 @@
 # Learn
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/learn)
-Tutorials, conceptual guides, and resources to help you get started.
+
+> Tutorials, conceptual guides, and resources to help you get started.
 
 In the **Learn** section of the documentation, you'll find a collection of tutorials, conceptual overviews, and additional resources to help you build powerful applications with LangChain and LangGraph.
 

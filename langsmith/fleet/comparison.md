@@ -1,6 +1,6 @@
 # Agent platform comparison
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/comparison)
-Compare LangSmith Fleet with Claude Cowork, Amazon Quick, Google Workspace Studio, and Microsoft Copilot to choose the right enterprise agent platform for your team
+
+> Compare LangSmith Fleet with Claude Cowork, Amazon Quick, Google Workspace Studio, and Microsoft Copilot to choose the right enterprise agent platform for your team
 
 [**LangSmith Fleet**](index.md) is an enterprise agent platform for building, sharing, and governing agents across your organization. This page compares it with similar platforms to help you choose the right one for your team.
 

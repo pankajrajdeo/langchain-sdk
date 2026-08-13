@@ -1,6 +1,6 @@
 # Groq integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/groq)
-Integrate with Groq using LangChain Python.
+
+> Integrate with Groq using LangChain Python.
 
 > [!WARNING]
 > This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](xai.md).

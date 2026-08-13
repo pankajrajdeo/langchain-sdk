@@ -1,6 +1,6 @@
 # Agent Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-overview)
-Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization.
+
+> Configure and operate the LangSmith Agent Server runtime, including capabilities, application structure, auth, and customization.
 
 Configure and build applications on the [Agent Server](agent-server.md) runtime. Once deployed, agents work with three primitives: [**assistants**](assistants.md) for configuration, [**threads**](use-threads.md) for state, and [**runs**](runs.md) for workloads. The pages in this tab cover the capabilities Agent Server provides, how to [structure your application](application-structure.md), and how to [secure](auth.md) and [customize](custom-routes.md) the server.
 

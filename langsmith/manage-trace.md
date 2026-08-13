@@ -1,6 +1,6 @@
 # Manage a trace
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-trace)
-Share traces publicly, and view server logs from the Details view in LangSmith.
+
+> Share traces publicly, and view server logs from the Details view in LangSmith.
 
 You can [share a trace publicly](#share-a-trace), and [view the server logs](#view-server-logs) associated with a trace execution.
 
@@ -51,7 +51,7 @@ The server logs view displays logs from both:
 
 When you navigate from the Details view, the **Filters** box will automatically pre-fill with the Trace ID from the trace you just viewed, so you can quickly filter the logs to see only those related to your specific trace execution.
 
-> **Image:** [Deployment server logs filters](manage-trace.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/lgp-server-logs-filters.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=cb6f3c15ca3c8d462ee10c5fd190c73e" alt="Deployment server logs filters" width="1348" height="681" data-path="langsmith/images/lgp-server-logs-filters.png" />
 
 ## Delete a trace
 

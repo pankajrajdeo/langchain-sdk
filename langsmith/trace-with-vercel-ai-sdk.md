@@ -1,6 +1,6 @@
 # Trace Vercel AI SDK applications (JS/TS only)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk)
-Trace Vercel AI SDK applications with LangSmith for AI SDK v5, v6, and v7.
+
+> Trace Vercel AI SDK applications with LangSmith for AI SDK v5, v6, and v7.
 
 You can use LangSmith to trace runs from the Vercel AI SDK. This guide shows you how to set up tracing for AI SDK v5, v6, and v7.
 

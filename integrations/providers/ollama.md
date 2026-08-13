@@ -1,6 +1,6 @@
 # Ollama integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/ollama)
-Integrate with Ollama using LangChain Python.
+
+> Integrate with Ollama using LangChain Python.
 
 This page covers all LangChain integrations with [Ollama](https://ollama.com/).
 

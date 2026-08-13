@@ -1,5 +1,5 @@
 # How to set up an application with pyproject.toml
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/setup-pyproject)
+
 An application must be configured with a [configuration file](cli.md#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up an application for deployment using `pyproject.toml` to define your package's dependencies.
 
 This example is based on [this repository](https://github.com/langchain-ai/langgraph-example-pyproject), which uses the LangGraph framework.

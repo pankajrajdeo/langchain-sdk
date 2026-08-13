@@ -1,5 +1,5 @@
 # How to use Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-studio)
+
 This page describes the core workflows you’ll use in Studio. It explains how to run your application, manage assistant configurations, and work with conversation threads. Each section includes steps in both graph mode (full-featured view of your graph’s execution) and chat mode (lightweight conversational interface):
 
 * [Run application](#run-application): Execute your application or agent and observe its behavior.

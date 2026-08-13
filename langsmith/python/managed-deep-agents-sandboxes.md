@@ -1,6 +1,6 @@
 # Add a sandbox to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes)
-Configure an isolated filesystem and shell for Managed Deep Agents.
+
+> Configure an isolated filesystem and shell for Managed Deep Agents.
 
 Agents often want to write or execute code when doing their job.
 A sandbox gives a Managed Deep Agent an isolated filesystem and shell for working with files, running code, and executing commands.

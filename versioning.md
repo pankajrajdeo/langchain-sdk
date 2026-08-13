@@ -1,5 +1,5 @@
 # Versioning
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/versioning)
+
 Our OSS version numbers follow the format: `MAJOR.MINOR.PATCH`, as defined by [Semantic Versioning](https://semver.org/).
 
 * **Major**: Breaking API updates that require code changes.

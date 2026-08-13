@@ -1,5 +1,5 @@
 # Authentication & access control
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/auth)
+
 LangSmith provides a flexible authentication and authorization system that can integrate with most authentication schemes.
 
 ## Core concepts
@@ -230,6 +230,8 @@ async def add_owner(
     return filters
 ```
 
+<a id="resource-specific-handlers" />
+
 ### Resource-specific handlers
 
 You can register handlers for specific resources and actions by chaining the resource and action names together with the [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) decorator.
@@ -329,6 +331,8 @@ async def on_assistant_create(
 ```
 
 Notice that we are mixing global and resource-specific handlers in the above example. Since each request is handled by the most specific handler, a request to create a `thread` would match the `on_thread_create` handler but NOT the `reject_unhandled_requests` handler. A request to `update` a thread, however would be handled by the global handler, since we don't have a more specific handler for that resource and action.
+
+<a id="filter-operations" />
 
 ### Filter operations
 
@@ -442,7 +446,7 @@ If a more specific handler is registered, the more general handler will not be c
 >
 > More specific handlers provide better type hints since they handle fewer action types.
 
-<a id="supported-actions"></a>
+<a id="supported-actions" />
 
 #### Supported actions and types
 

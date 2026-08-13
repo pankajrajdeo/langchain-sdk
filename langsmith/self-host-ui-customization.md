@@ -1,6 +1,6 @@
 # Customize the error support message
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ui-customization)
-Customize support contact information in the LangSmith frontend for self-hosted deployments.
+
+> Customize support contact information in the LangSmith frontend for self-hosted deployments.
 
 ## Custom error support message
 

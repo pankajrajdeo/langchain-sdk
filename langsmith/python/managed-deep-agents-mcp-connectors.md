@@ -1,6 +1,6 @@
 # Connect to MCP servers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors)
-Add tools from remote MCP servers to Managed Deep Agents.
+
+> Add tools from remote MCP servers to Managed Deep Agents.
 
 An MCP connector adds tools from remote [Model Context Protocol (MCP)](../../deepagents/mcp.md) servers to a Managed Deep Agent. Managed Deep Agents creates the MCP client, loads the tools, and adds them to the agent.
 
@@ -32,7 +32,6 @@ connector = connectors.mcp(
         "langchainDocs": {
             "transport": "http",
             "url": "https://docs.langchain.com/mcp",
-            "include_tools": ["search_docs_by_lang_chain"],
         },
     },
 )

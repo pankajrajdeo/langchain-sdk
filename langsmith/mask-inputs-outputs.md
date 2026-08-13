@@ -1,5 +1,5 @@
 # Prevent logging of sensitive data in traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/mask-inputs-outputs)
+
 When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches to protect your data before it's sent to the backend:
 
 * [Completely hide inputs and outputs](#hide-inputs-and-outputs) using environment variables or [Client](https://reference.langchain.com/python/langsmith/client/Client) configuration.
@@ -237,7 +237,7 @@ Please note, that using the anonymizer might incur a performance hit with comple
 > [!NOTE]
 > Improving the performance of `anonymizer` API is on our roadmap! If you are encountering performance issues, please contact support via [support.langchain.com](https://support.langchain.com).
 
-> **Image:** [Hide inputs outputs](mask-inputs-outputs.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/hide-inputs-outputs.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=ac9ba9a6729029a7fa38da03e1466a1a" alt="Hide inputs outputs" width="1708" height="717" data-path="langsmith/images/hide-inputs-outputs.png" />
 
 Older versions of LangSmith SDKs can use the `hide_inputs` and `hide_outputs` parameters to achieve the same effect. You can also use these parameters to process the inputs and outputs more efficiently.
 
@@ -482,9 +482,9 @@ response_without_anonymization = openai_client.chat.completions.create(
 )
 ```
 
-The anonymized run will look like this in LangSmith: <img alt="Anonymized run" />
+The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-anonymized.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=d42154587a9440675d2d506e1124b3fe" alt="Anonymized run" width="3178" height="1836" data-path="langsmith/images/regex-anonymized.png" />
 
-The non-anonymized run will look like this in LangSmith: <img alt="Non-anonymized run" />
+The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/regex-not-anonymized.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=98da1cf86195ebb3be2119cddbf1ae0d" alt="Non-anonymized run" width="3176" height="1830" data-path="langsmith/images/regex-not-anonymized.png" />
 
 ### Microsoft Presidio
 
@@ -587,9 +587,9 @@ response_without_anonymization = openai_client.chat.completions.create(
 )
 ```
 
-The anonymized run will look like this in LangSmith: <img alt="Anonymized run" />
+The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-anonymized.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=100d741a3fb32d0c1f251186f57568ac" alt="Anonymized run" width="3174" height="1830" data-path="langsmith/images/presidio-anonymized.png" />
 
-The non-anonymized run will look like this in LangSmith: <img alt="Non-anonymized run" />
+The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/presidio-not-anonymized.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=2ef3e46591877ffdf23c0c240ec389c2" alt="Non-anonymized run" width="3176" height="1684" data-path="langsmith/images/presidio-not-anonymized.png" />
 
 ### Amazon Comprehend
 
@@ -724,9 +724,9 @@ response_without_anonymization = openai_client.chat.completions.create(
 )
 ```
 
-The anonymized run will look like this in LangSmith: <img alt="Anonymized run" />
+The anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-anonymized.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=cea182d95ef02e614a6f1bbd7e3a2657" alt="Anonymized run" width="3180" height="1616" data-path="langsmith/images/aws-comprehend-anonymized.png" />
 
-The non-anonymized run will look like this in LangSmith: <img alt="Non-anonymized run" />
+The non-anonymized run will look like this in LangSmith: <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/aws-comprehend-not-anonymized.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=ec61e5c8d78268b5b34b6b9c184871cc" alt="Non-anonymized run" width="3180" height="1648" data-path="langsmith/images/aws-comprehend-not-anonymized.png" />
 
 ### Batch processing for high-throughput masking
 

@@ -1,6 +1,6 @@
 # Deploy with Cloudflare Workers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-cloudflare-workers)
-Deploy a LangChain deep agent on Cloudflare Workers with Vite, React, Hono, and Durable Objects for SSE replay.
+
+> Deploy a LangChain deep agent on Cloudflare Workers with Vite, React, Hono, and Durable Objects for SSE replay.
 
 The following page details an example app that deploys a LangChain **deep agent** on [Cloudflare Workers](https://developers.cloudflare.com/workers/): streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as Worker routes (HTTP + SSE). The React SPA is served from the same Worker via [Workers Assets](https://developers.cloudflare.com/workers/static-assets/). No separate backend process: one Worker serves the SPA and the protocol API.
 

@@ -1,5 +1,5 @@
 # How to add evaluators to an existing experiment (Python only)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-existing-experiment)
+
 Evaluation of existing experiments is currently only supported in the Python SDK.
 
 After running an experiment, you may want to **add new evaluation metrics without re-running your application**. This is useful when you've added new evaluators or want to apply different scoring criteria to existing results. Instead of re-executing your target function on all examples, you can evaluate the existing experiment traces directly.

@@ -1,6 +1,6 @@
 # Manage model configurations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/model-configurations)
-Manage model configurations and control their availability across LangSmith features.
+
+> Manage model configurations and control their availability across LangSmith features.
 
 Model configurations define the model and parameters that LangSmith features use when calling an AI provider. A single shared library of configurations spans your entire [workspace](administration-overview.md#workspaces), so any configuration you create is available across the following features without duplication:
 
@@ -117,9 +117,9 @@ Configuring OAuth requires the [Workspace Admin](rbac.md#workspace-admin) role, 
    * **Extra headers**: additional headers sent with the token request. Reserved headers such as `Authorization` are rejected at save time.
 5. Click **Save**.
 
-> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](model-configurations.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/8fWMAwmd5vok0QuC/langsmith/images/model-config-oauth-create-light.png?fit=max&auto=format&n=8fWMAwmd5vok0QuC&q=85&s=28ae7c822f8a52653b8820ceffe59b72" alt="Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic." width="1600" height="1128" data-path="langsmith/images/model-config-oauth-create-light.png" />
 
-> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](model-configurations.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/8fWMAwmd5vok0QuC/langsmith/images/model-config-oauth-create-dark.png?fit=max&auto=format&n=8fWMAwmd5vok0QuC&q=85&s=bb9659d943a891fc76b4c26b8887cdef" alt="Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic." width="1600" height="1128" data-path="langsmith/images/model-config-oauth-create-dark.png" />
 
 ### Edit semantics
 

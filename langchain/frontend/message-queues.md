@@ -1,6 +1,6 @@
 # Message queues
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/message-queues)
-Queue multiple messages and manage them while the agent processes sequentially
+
+> Queue multiple messages and manage them while the agent processes sequentially
 
 Message queuing lets users send multiple messages in rapid succession without waiting for the agent to finish processing the current one. Each message is accepted immediately, queued for the active thread, and processed sequentially, giving you full visibility and control over the pending work.
 

@@ -1,6 +1,6 @@
 # Permissions
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/permissions)
-Control filesystem access with declarative permission rules for Deep Agents
+
+> Control filesystem access with declarative permission rules for Deep Agents
 
 Control which files and directories an agent can read or write to using declarative permission rules. Pass a list of rules to `permissions=` and the agent's built-in filesystem tools respect them.
 

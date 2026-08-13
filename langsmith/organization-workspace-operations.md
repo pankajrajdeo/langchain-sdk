@@ -1,5 +1,5 @@
 # Organization and workspace operations reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/organization-workspace-operations)
+
 This page provides a comprehensive reference table of [workspace](administration-overview.md#workspaces) and [organization](administration-overview.md#organizations) operations and which roles can perform them.
 
 The list includes API operations in LangSmith along with:

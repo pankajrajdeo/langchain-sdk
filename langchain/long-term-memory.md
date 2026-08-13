@@ -1,6 +1,6 @@
 # Long-term memory
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/long-term-memory)
-Add long-term memory to LangChain agents to store and recall data across conversations and sessions
+
+> Add long-term memory to LangChain agents to store and recall data across conversations and sessions
 
 Long-term memory lets your agent store and recall information across different conversations and sessions.
 Unlike [short-term memory](short-term-memory.md), which is scoped to a single thread, long-term memory persists across threads and can be recalled at any time.
@@ -548,6 +548,8 @@ with PostgresStore.from_conn_string(DB_URI) as store:
         context=Context(user_id="user_123"),
     )
 ```
+
+<a id="write-long-term" />
 
 ## Write long-term memory from tools
 

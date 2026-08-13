@@ -1,5 +1,5 @@
 # Evaluate a chatbot
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+
 In this guide we will set up evaluations for a chatbot. These allow you to measure how well your application is performing over a set of data. Being able to get this insight quickly and reliably will allow you to iterate with confidence.
 
 At a high level, in this tutorial we will:
@@ -91,7 +91,7 @@ client.create_examples(
 
 Now, if we go the LangSmith UI and look for `QA Example Dataset` in the `Datasets & Testing` page, when we click into it we should see that we have five new examples.
 
-> **Image:** [Testing tutorial dataset](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-dataset.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=9ab5110714d009d5865ba0e2d8ee0ffa" alt="Testing tutorial dataset" width="1251" height="560" data-path="langsmith/images/testing-tutorial-dataset.png" />
 
 ## Define metrics
 
@@ -176,11 +176,11 @@ experiment_results = client.evaluate(
 
 This will output a URL. If we click on it, we should see results of our evaluation!
 
-> **Image:** [Testing tutorial run](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-run.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=9517dd9f9fc23062fcba7b061fe5cdda" alt="Testing tutorial run" width="3022" height="1128" data-path="langsmith/images/testing-tutorial-run.png" />
 
 If we go back to the dataset page and select the `Experiments` tab, we can now see a summary of our one run!
 
-> **Image:** [Testing tutorial one run](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-one-run.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=4c30f7474727d2f537c75e5f80ae1298" alt="Testing tutorial one run" width="3022" height="1532" data-path="langsmith/images/testing-tutorial-one-run.png" />
 
 Let's now try it out with a different model! Let's try `gpt-4-turbo`
 
@@ -219,23 +219,23 @@ experiment_results = client.evaluate(
 
 If we go back to the `Experiments` tab on the datasets page, we should see that all three runs now show up!
 
-> **Image:** [Testing tutorial three runs](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-three-runs.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=9d74c18991c33d4fbd5180dbb12a4f91" alt="Testing tutorial three runs" width="3020" height="1540" data-path="langsmith/images/testing-tutorial-three-runs.png" />
 
 ## Comparing results
 
 Awesome, we've evaluated three different runs. But how can we compare results? The first way we can do this is just by looking at the runs in the `Experiments` tab. If we do that, we can see a high level view of the metrics for each run:
 
-> **Image:** [Testing tutorial compare metrics](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-compare-metrics.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=224acfbea78b8b1d0e08ce59d06b5088" alt="Testing tutorial compare metrics" width="3020" height="1540" data-path="langsmith/images/testing-tutorial-compare-metrics.png" />
 
 We can tell that GPT-4 is better than GPT-3.5 at knowing who companies are, and that the strict prompt helped a lot with the length. But what if we want to explore in more detail?
 
 In order to do that, we can select all the runs we want to compare (in this case all three) and open them up in a comparison view. We immediately see all three tests side by side. Some of the cells are color coded - this is showing a regression of *a certain metric* compared to *a certain baseline*. We automatically choose defaults for the baseline and metric, but you can change those yourself. You can also choose which columns and which metrics you see by using the `Display` control. You can also automatically filter to only see the runs that have improvements/regressions by clicking on the icons at the top.
 
-> **Image:** [Testing tutorial compare runs](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-compare-runs.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=de5575b837cdf97d479e5c91aff9dc78" alt="Testing tutorial compare runs" width="3022" height="1548" data-path="langsmith/images/testing-tutorial-compare-runs.png" />
 
 If we want to see more information, we can also select the `Expand` button that appears when hovering over a row to open up a side panel with more detailed information:
 
-> **Image:** [Testing tutorial side panel](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-side-panel.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=a72c4924a0ad9bebceae2da9518c56cc" alt="Testing tutorial side panel" width="2824" height="1546" data-path="langsmith/images/testing-tutorial-side-panel.png" />
 
 ## Set up automated testing to run in CI/CD
 
@@ -262,7 +262,7 @@ def test_length_score() -> None:
 
 Now that we've got these experiments running in an automated fashion, we want to track these results over time. We can do this from the overall `Experiments` tab in the datasets page. By default, we show evaluation metrics over time (highlighted in red). We also automatically track git metrics, to easily associate it with the branch of your code (highlighted in yellow).
 
-> **Image:** [Testing tutorial over time](evaluate-chatbot-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/testing-tutorial-over-time.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=a5961747b6ea92bb2f838d025ca5e3d5" alt="Testing tutorial over time" width="3020" height="1544" data-path="langsmith/images/testing-tutorial-over-time.png" />
 
 ## Conclusion
 

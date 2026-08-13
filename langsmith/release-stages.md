@@ -1,6 +1,6 @@
 # Release stages
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/release-stages)
-How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
+
+> How LangSmith labels features as alpha, beta, or generally available, and what each stage means for stability, support, and availability
 
 LangSmith ships features through three release stages: alpha, beta, and generally available (GA). Each stage sets a consistent expectation for how stable a feature is, where it runs, and how it is supported, so you can decide when to adopt it.
 

@@ -1,5 +1,5 @@
 # Run backtests on a new version of an agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-backtests-new-agent)
+
 Deploying your application is just the beginning of a continuous improvement process. After you deploy to production, you'll want to refine your system by enhancing prompts, language models, tools, and architectures. Backtesting involves assessing new versions of your application using historical data and comparing the new outputs to the original ones. Compared to evaluations using pre-production datasets, backtesting offers a clearer indication of whether the new version of your application is an improvement over the current deployment.
 
 Here are the basic steps for backtesting:
@@ -171,7 +171,7 @@ convert_runs_to_test(
 
 Once this step is complete, you should see a new dataset in your LangSmith project called "Tweet Writing Task-backtesting TODAYS DATE", with a single experiment like so:
 
-> **Image:** [Baseline experiment](run-backtests-new-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/baseline-experiment.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=73b60a75d6b33f2830f5ed68464c586b" alt="Baseline experiment" width="3456" height="1852" data-path="langsmith/images/baseline-experiment.png" />
 
 ## Benchmark against new system
 
@@ -257,7 +257,7 @@ candidate_results = await client.aevaluate(
 
 After running both experiments, you can view them in your dataset:
 
-> **Image:** [Dataset page](run-backtests-new-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/dataset-page.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=1c5d4f1cf212e2c38917319c7bbf7f99" alt="Dataset page" width="3022" height="1536" data-path="langsmith/images/dataset-page.png" />
 
 The results reveal an interesting tradeoff between the two models:
 
@@ -273,7 +273,7 @@ This backtesting exercise revealed that while GPT-4o is generally considered a m
 
 This insight demonstrates the value of backtesting - it helped us identify potential issues before deployment.
 
-> **Image:** [Tutorial comparison view](run-backtests-new-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/tutorial-comparison-view.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=a8ab311399f3d0e69554a62f939fd475" alt="Tutorial comparison view" width="3018" height="1532" data-path="langsmith/images/tutorial-comparison-view.png" />
 
 ***
 

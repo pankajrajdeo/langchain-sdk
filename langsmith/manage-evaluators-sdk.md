@@ -1,6 +1,6 @@
 # Manage evaluators with the SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-evaluators-sdk)
-Create, retrieve, update, list, and delete LangSmith evaluators programmatically with the SDK.
+
+> Create, retrieve, update, list, and delete LangSmith evaluators programmatically with the SDK.
 
 Use the LangSmith SDK to create and manage [evaluators](evaluation-concepts.md#evaluators) programmatically. Evaluators created through the SDK are [workspace-level](administration-overview.md#workspaces) resources that appear in the **Evaluators** table in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-evaluators-sdk), the same as [evaluators created in the UI](evaluators.md#create-an-evaluator-in-the-ui). You can attach them to datasets to run [offline evaluations](evaluation-concepts.md#offline-evaluations) and to tracing projects to run [online evaluations](evaluation-concepts.md#online-evaluations). Use the SDK to automate evaluator management and integrate evaluation into your existing workflows.
 

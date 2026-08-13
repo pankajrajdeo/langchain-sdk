@@ -1,5 +1,5 @@
 # Enable TTL and data retention
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ttl)
+
 LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient space usage and auto cleanup of your traces. Traces will also have their data retention period automatically extended based on certain actions or run rule applications.
 
 > [!NOTE]

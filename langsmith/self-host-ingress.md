@@ -1,5 +1,5 @@
 # Create an Ingress for installations (Kubernetes)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-ingress)
+
 By default, LangSmith will provision a LoadBalancer service for the `langsmith-frontend`. Depending on your cloud provider, this may result in a public IP address being assigned to the service. If you would like to use a custom domain or have more control over the routing of traffic to your LangSmith installation, you can configure an Ingress, Gateway API, or Istio Gateway.
 
 ## Requirements

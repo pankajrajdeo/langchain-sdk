@@ -1,6 +1,6 @@
 # Trace Pi coding agent sessions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-pi)
-Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations.
+
+> Trace Pi coding agent invocations to LangSmith to observe turns, debug tool calls, track token usage, and inspect individual LLM invocations.
 
 This guide shows you how to trace [Pi coding agent](https://pi.dev) sessions to LangSmith using the `@langchain/langsmith-pi-extension` extension.
 

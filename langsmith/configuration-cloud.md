@@ -1,5 +1,5 @@
 # Manage assistants
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configuration-cloud)
+
 This page describes how to create, configure, and manage [assistants](assistants.md). Assistants allow you to customize your [deployed](deployment.md) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
 
 You can work with the [SDK](https://reference.langchain.com/python/langsmith/deployment/sdk/) or in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud).

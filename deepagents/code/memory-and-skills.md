@@ -1,6 +1,6 @@
 # Memory and Skills
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/memory-and-skills)
-Persistent memory, AGENTS.md files, and reusable skills for Deep Agents Code, including creation, discovery, and invocation.
+
+> Persistent memory, AGENTS.md files, and reusable skills for Deep Agents Code, including creation, discovery, and invocation.
 
 There are two primary ways to customize an agent in Deep Agents Code:
 

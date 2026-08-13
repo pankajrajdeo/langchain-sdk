@@ -1,5 +1,5 @@
 # Set up online code evaluators
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-code)
+
 [Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
 
 Code evaluators allow you to write an evaluator in Python or JavaScript directly in LangSmith. Often used for validating structure or statistical properties of your data.

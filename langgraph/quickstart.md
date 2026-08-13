@@ -1,5 +1,5 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/quickstart)
+
 This quickstart demonstrates how to build a calculator agent using the LangGraph Graph API or the Functional API.
 
 > [!TIP]

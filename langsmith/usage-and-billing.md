@@ -1,6 +1,6 @@
 # Usage and billing
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/usage-and-billing)
-Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits.
+
+> Understand LangSmith trace data retention tiers, pricing, rate limits, and usage limits.
 
 ## Data retention
 

@@ -1,5 +1,5 @@
 # Manage user access in SSO organizations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/jit-invite-sso)
+
 LangSmith provides flexible controls for managing how users join your [organization](administration-overview.md#organizations) when using [Single Sign-On (SSO) authentication](authentication-methods.md). You can independently enable or disable both Just-In-Time (JIT) provisioning and user invites to match your organization's security and onboarding requirements.
 
 When SSO is enabled, you have two independent settings: [JIT provisioning](#jit-provisioning) automatically adds users when they sign in via SSO, while [invites](#invites) allow administrators to invite users manually before they can access the organization. [Configure these settings](#configuration-scenarios) in any combination to control your user onboarding workflow.

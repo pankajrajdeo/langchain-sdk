@@ -1,5 +1,5 @@
 # Trace OpenAI applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-openai)
+
 The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_openai/wrap_openai) / [`wrapOpenAI`](https://reference.langchain.com/javascript/langsmith/wrappers/wrapOpenAI) methods in Python/TypeScript allow you to wrap your OpenAI client in order to automatically log traces -- no decorator or function wrapping required! Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. Also note that the wrapper works seamlessly with the [`@traceable`](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator or [`traceable`](https://reference.langchain.com/javascript/functions/langsmith.traceable.traceable.html) function and you can use both in the same application.
 
 > [!NOTE]

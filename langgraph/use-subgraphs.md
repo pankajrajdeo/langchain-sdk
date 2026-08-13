@@ -1,5 +1,5 @@
 # Subgraphs
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-subgraphs)
+
 This guide explains the mechanics of using subgraphs. A subgraph is a [graph](graph-api.md#graphs) that is used as a [node](graph-api.md#nodes) in another graph.
 
 Subgraphs are useful for:
@@ -30,6 +30,8 @@ When adding subgraphs, you need to define how the parent graph and the subgraph 
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
 | [Call a subgraph inside a node](#call-a-subgraph-inside-a-node) | Parent and subgraph have **different state schemas** (no shared keys), or you need to transform state between them | You write a wrapper function that maps parent state to subgraph input and subgraph output back to parent state |
 | [Add a subgraph as a node](#add-a-subgraph-as-a-node)           | Parent and subgraph **share state keys**—the subgraph reads from and writes to the same channels as the parent     | You pass the compiled subgraph directly to `add_node`—no wrapper function needed                               |
+
+<a id="invoke-a-graph-from-a-node" />
 
 ### Call a subgraph inside a node
 
@@ -219,11 +221,13 @@ for event in stream:
 
 </details>
 
+<a id="add-a-graph-as-a-node" />
+
 ### Add a subgraph as a node
 
 When the parent graph and subgraph **share state keys**, you can pass a compiled subgraph directly to `add_node`. No wrapper function is needed—the subgraph reads from and writes to the parent's state channels automatically. For example, in [multi-agent](../langchain/multi-agent.md) systems, the agents often communicate over a shared [messages](graph-api.md#why-use-messages) key.
 
-> **Image:** [SQL agent graph](use-subgraphs.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/subgraph.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c280df5c968cd4237b0b5d03823d8946" alt="SQL agent graph" width="1177" height="818" data-path="oss/images/subgraph.png" />
 
 If your subgraph shares state keys with the parent graph, you can follow these steps to add it to your graph:
 
@@ -643,14 +647,14 @@ Control subgraph persistence with the `checkpointer` parameter on `.compile()`:
 subgraph = builder.compile(checkpointer=False)  # or True / None
 ```
 
-| Feature                              | Per-invocation (default) | Per-thread            | Stateless |
-| ------------------------------------ | ------------------------ | --------------------- | --------- |
-| `checkpointer=`                      | `None`                   | `True`                | `False`   |
-| Interrupts (HITL)                    | ✅                        | ✅                     | ❌         |
-| Multi-turn memory                    | ❌                        | ✅                     | ❌         |
-| Multiple calls (different subgraphs) | ✅                        | ⚠️ | ✅         |
-| Multiple calls (same subgraph)       | ✅                        | ❌                     | ✅         |
-| State inspection                     | ⚠️    | ✅                     | ❌         |
+| Feature                              | Per-invocation (default)                                                                                                                                                                                                                                 | Per-thread                                                                                                                                    | Stateless |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `checkpointer=`                      | `None`                                                                                                                                                                                                                                                   | `True`                                                                                                                                        | `False`   |
+| Interrupts (HITL)                    | ✅                                                                                                                                                                                                                                                        | ✅                                                                                                                                             | ❌         |
+| Multi-turn memory                    | ❌                                                                                                                                                                                                                                                        | ✅                                                                                                                                             | ❌         |
+| Multiple calls (different subgraphs) | ✅                                                                                                                                                                                                                                                        | ⚠️ | ✅         |
+| Multiple calls (same subgraph)       | ✅                                                                                                                                                                                                                                                        | ❌                                                                                                                                             | ✅         |
+| State inspection                     | ⚠️ | ✅                                                                                                                                             | ❌         |
 
 * **Interrupts (HITL)**: The subgraph can use [interrupt()](interrupts.md) to pause execution and wait for user input, then resume where it left off.
 * **Multi-turn memory**: The subgraph retains its state across multiple invocations within the same [thread](checkpointers.md#threads). Each call picks up where the last one left off rather than starting fresh.

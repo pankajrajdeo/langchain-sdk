@@ -1,6 +1,6 @@
 # Build a deep research agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/deep-research)
-Build a multi-step web research agent with subagent delegation
+
+> Build a multi-step web research agent with subagent delegation
 
 ## Overview
 

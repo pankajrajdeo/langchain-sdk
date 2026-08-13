@@ -1,6 +1,6 @@
 # Develop locally with LangSmith Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-local-development)
-Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
+
+> Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
 
 `mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](../studio.md) so you can interact with the agent and inspect its behavior before deploying.
 

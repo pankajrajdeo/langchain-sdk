@@ -1,6 +1,6 @@
 # Admin setup
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-admin-setup)
-One-time organization setup to enable the LLM Gateway and grant user access.
+
+> One-time organization setup to enable the LLM Gateway and grant user access.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

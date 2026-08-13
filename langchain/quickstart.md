@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/quickstart)
-Build your first agent in minutes
+
+> Build your first agent in minutes
 
 This quickstart shows you how to create a fully functional AI agent in just a few minutes.
 

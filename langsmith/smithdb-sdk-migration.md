@@ -1,6 +1,6 @@
 # Migrate to SmithDB-backed SDK methods
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/smithdb-sdk-migration)
-Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
+
+> Migrate your existing LangSmith SDK methods to their SmithDB-backed equivalents for faster agent observability.
 
 ## Context
 

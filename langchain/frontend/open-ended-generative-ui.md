@@ -1,6 +1,6 @@
 # Open-ended generative UI
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
-Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum
+
+> Render UI created outside your application, such as sandboxed MCP Apps, at the open end of the generative UI spectrum
 
 ## Overview
 

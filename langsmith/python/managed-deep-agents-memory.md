@@ -1,6 +1,6 @@
 # Add memory to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory)
-Opt in to deployment-shared durable memory for Managed Deep Agents.
+
+> Opt in to deployment-shared durable memory for Managed Deep Agents.
 
 Normally, a Managed Deep Agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain **across** threads and sessions.
 

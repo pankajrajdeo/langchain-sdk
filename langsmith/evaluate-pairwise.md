@@ -1,5 +1,5 @@
 # How to run a pairwise evaluation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-pairwise)
+
 > [!NOTE]
 > Concept: [Pairwise evaluations](evaluation-concepts.md#pairwise)
 
@@ -221,15 +221,15 @@ await evaluate(["earnest-name-40", "reflecting-pump-91"], {
 
 Navigate to the "Pairwise Experiments" tab from the dataset page:
 
-> **Image:** [Pairwise Experiments Tab](evaluate-pairwise.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-from-dataset.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=dddf35fd971055d0d94ae4184c91dea3" alt="Pairwise Experiments Tab" width="3454" height="1912" data-path="langsmith/images/pairwise-from-dataset.png" />
 
 Click on a pairwise experiment that you would like to inspect, and you will be brought to the Comparison View:
 
-> **Image:** [Pairwise Comparison View](evaluate-pairwise.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pairwise-comparison-view.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=8afa7467faf707c0bb5ede23b007beda" alt="Pairwise Comparison View" width="3430" height="1886" data-path="langsmith/images/pairwise-comparison-view.png" />
 
 You may filter to runs where the first experiment was better or vice versa by clicking the thumbs up/thumbs down buttons in the table header:
 
-> **Image:** [Pairwise Filtering](evaluate-pairwise.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/filter-pairwise.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=677c48099cee9848d2119c154c7b0d88" alt="Pairwise Filtering" width="3454" height="1914" data-path="langsmith/images/filter-pairwise.png" />
 
 ***
 

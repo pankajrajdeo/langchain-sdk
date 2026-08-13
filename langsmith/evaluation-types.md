@@ -1,5 +1,5 @@
 # Evaluation types
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-types)
+
 This page covers two aspects of evaluation in LangSmith:
 
 1. **[Evaluation types](#offline-evaluation-types)**: *When and why* to evaluate. Offline evaluation types (benchmarking, unit tests, regression tests) for pre-deployment testing, and online evaluation types (monitoring, anomaly detection) for production.
@@ -13,7 +13,7 @@ Offline evaluation tests applications on curated datasets before deployment. By 
 
 Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Playground](prompt-engineering-concepts.md#playground) or by [binding evaluators to a dataset](bind-evaluator-to-dataset.md).
 
-> **Image:** [Offline](evaluation-types.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/offline.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=879e4ee3616cecd7cff39879cfc6ec7b" alt="Offline" width="1581" height="477" data-path="langsmith/images/offline.png" />
 
 ### Benchmarking
 
@@ -38,7 +38,7 @@ For more details, refer to the [Pytest](pytest.md) and [Vitest/Jest](vitest-jest
 
 LangSmith's comparison view highlights regressions (red) and improvements (green) relative to the baseline, enabling quick identification of changes.
 
-> **Image:** [Comparison view](evaluation-types.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/comparison-diff-view-light.png?fit=max&auto=format&n=Tdk8epB4BZgbugRX&q=85&s=2ddb234fd3779b443b9e41f7addeef21" alt="Comparison view" width="1038" height="758" data-path="langsmith/images/comparison-diff-view-light.png" />
 
 ### Backtesting
 
@@ -60,7 +60,7 @@ Online evaluation assesses production application outputs in near real-time. Wit
 
 Online evaluators typically run server-side. LangSmith provides built-in [LLM-as-judge evaluators](llm-as-judge.md) for configuration, and supports custom code evaluators that run within LangSmith.
 
-> **Image:** [Online](evaluation-types.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/online.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=8d6c1b932e5487c4c01d84ae4f984240" alt="Online" width="1474" height="521" data-path="langsmith/images/online.png" />
 
 ### Real-time monitoring
 

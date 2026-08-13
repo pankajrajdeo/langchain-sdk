@@ -1,6 +1,6 @@
 # Declarative generative UI
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
-Compose agent-generated interfaces from a registered component catalog using json-render and A2UI
+
+> Compose agent-generated interfaces from a registered component catalog using json-render and A2UI
 
 ## Overview
 

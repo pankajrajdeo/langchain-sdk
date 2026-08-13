@@ -1,5 +1,5 @@
 # Manage feedback & annotation queues programmatically
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues-sdk)
+
 Use the LangSmith SDK to manage feedback configurations and [annotation queue](evaluation-concepts.md#human) rubrics programmatically. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
 
 > [!NOTE]

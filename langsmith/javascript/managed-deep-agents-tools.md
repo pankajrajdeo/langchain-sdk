@@ -1,6 +1,6 @@
 # Add custom tools to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools)
-Define authored tools for Managed Deep Agents projects.
+
+> Define authored tools for Managed Deep Agents projects.
 
 Managed Deep Agents support the normal Deep Agents `tools` configuration surface.
 

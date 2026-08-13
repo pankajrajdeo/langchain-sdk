@@ -1,6 +1,6 @@
 # AWS Terraform variables reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-variables)
-Complete reference of Terraform variables for LangSmith self-hosted on AWS EKS.
+
+> Complete reference of Terraform variables for LangSmith self-hosted on AWS EKS.
 
 Complete reference for every input variable exposed by the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). Use it while filling in `terraform.tfvars` for the first time or tuning an existing deployment.
 

@@ -1,5 +1,5 @@
 # Trace Amazon Bedrock applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-bedrock)
+
 This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedrock) model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with [LangChain's Bedrock integrations](../integrations/providers/aws.md). Either approach provides insights into:
 
 * Request and response payloads

@@ -1,6 +1,6 @@
 # Deploy LangSmith with Terraform
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform)
-Provision LangSmith self-hosted on AWS, Azure, or GCP using LangChain's production-ready Terraform modules.
+
+> Provision LangSmith self-hosted on AWS, Azure, or GCP using LangChain's production-ready Terraform modules.
 
 > [!NOTE]
 > Self-hosted LangSmith is an add-on to the Enterprise plan designed for LangChain's largest, most security-conscious customers. See [pricing](https://www.langchain.com/pricing) for details, or [contact sales](https://www.langchain.com/contact-sales) to request a license key for trial.

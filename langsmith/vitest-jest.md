@@ -1,8 +1,8 @@
 # How to run evaluations with Vitest/Jest
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/vitest-jest)
+
 LangSmith provides integrations with [Vitest](https://vitest.dev/) and [Jest](https://jestjs.io/) that allow JavaScript and TypeScript developers to define their [datasets](evaluation-concepts.md#datasets) and evaluate using familiar syntax.
 
-> **Image:** [Jest/Vitest reporter output](vitest-jest.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/jest-vitest-reporter-output.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=94fd2a6f61c9dc386002fadbab7024a8" alt="Jest/Vitest reporter output" width="2200" height="564" data-path="langsmith/images/jest-vitest-reporter-output.png" />
 
 Compared to the [`evaluate()`](https://reference.langchain.com/javascript/langsmith/evaluation/evaluate) evaluation flow, the Vitest or Jest testing frameworks are useful when:
 
@@ -259,7 +259,7 @@ Once it finishes, if you've set your LangSmith environment variables, you should
 
 Here's what an experiment against that test suite looks like:
 
-> **Image:** [Experiment](vitest-jest.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/simple-vitest.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=9cde688950dd2fc454a8514b02ed7268" alt="Experiment" width="2752" height="902" data-path="langsmith/images/simple-vitest.png" />
 
 ## Trace feedback
 

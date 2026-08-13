@@ -1,5 +1,5 @@
 # Evaluate a RAG application
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-rag-tutorial)
+
 Retrieval Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge. It has become one of the most widely used approaches for building LLM applications. To build a RAG application first, see [RAG with Deep Agents](../deepagents/rag.md).
 
 This tutorial shows how to evaluate RAG applications with LangSmith:
@@ -333,7 +333,7 @@ RAG evaluators compare one artifact to another (response, input, retrieved docs,
 
 For more on these evaluator types, see [Evaluate RAG applications](evaluation-approaches.md#evaluate-rag-applications).
 
-> **Image:** [Rag eval overview](evaluate-rag-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/rag-eval-overview.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=6f303c2a284296b42e7d2d2e658f5171" alt="Rag eval overview" width="1252" height="547" data-path="langsmith/images/rag-eval-overview.png" />
 
 ### Correctness: Response vs reference answer
 

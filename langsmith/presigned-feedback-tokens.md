@@ -1,6 +1,6 @@
 # Collect feedback with presigned URLs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/presigned-feedback-tokens)
-Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
+
+> Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
 
 Presigned feedback tokens let you collect [feedback](observability-concepts.md#feedback) from client-side applications (browsers, mobile apps, etc.) without exposing your [LangSmith API key](create-account-api-key.md). Each token generates a URL scoped to a specific [run](observability-concepts.md#runs) and feedback key. Clients submit feedback by calling that URL directly with no authentication required.
 

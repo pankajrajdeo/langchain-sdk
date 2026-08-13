@@ -1,6 +1,6 @@
 # Memory
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/memory)
-Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
+
+> Add persistent memory to agents built with Deep Agents so they learn and improve across conversations
 
 Memory lets your agent learn and improve across conversations. Deep Agents makes memory first class with filesystem-backed memory: the agent reads and writes memory as files, and you control where those files are stored using [backends](backends.md).
 
@@ -10,7 +10,7 @@ Memory lets your agent learn and improve across conversations. Deep Agents makes
 > [!NOTE]
 > This page covers **long-term memory**: memory that persists across conversations. For short-term memory (conversation history and scratch files within a single session), see the [context engineering](context-engineering.md) guide. Short-term memory is managed automatically as part of the agent's [state](../langgraph/graph-api.md#state).
 >
-> > **Image:** [Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store](memory.md)
+> <img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/memory.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=3ec585271dcd8d62e0207d79d68c296b" alt="Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store" width="1920" height="1160" data-path="oss/images/deepagents/production/memory.png" />
 
 ## How memory works
 

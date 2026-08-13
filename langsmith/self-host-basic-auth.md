@@ -1,5 +1,5 @@
 # Basic authentication with email and password
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-basic-auth)
+
 Basic authentication lets users log in to LangSmith [Self-hosted](self-hosted.md) with an email and password, without configuring an external identity provider. [Organization Admins](rbac.md#organization-admin) manage users directly from LangSmith, so authentication runs self-contained without depending on [OAuth or SSO](self-host-sso.md).
 
 > [!TIP]

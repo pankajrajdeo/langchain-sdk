@@ -1,10 +1,10 @@
 # Configure webhook notifications for rules
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/webhooks)
-Configure webhook notifications to receive POST requests when automation rules match new runs in LangSmith.
+
+> Configure webhook notifications to receive POST requests when automation rules match new runs in LangSmith.
 
 When you add a webhook URL on an automation action, LangSmith makes a POST request to your webhook endpoint any time the rules you defined match any new runs.
 
-> **Image:** [Webhook](webhooks.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/webhook.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=da310e976aa8824071d65b8fb44b9123" alt="Webhook" width="872" height="991" data-path="langsmith/images/webhook.png" />
 
 ## Webhook payload
 
@@ -118,7 +118,7 @@ If you'd like to send any specific headers with your webhook, this can be config
 > [!NOTE]
 > Headers are stored in encrypted format.
 
-> **Image:** [Webhook headers](webhooks.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/webhook-headers.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=8d6fde711d74784b803c13aba4b38837" alt="Webhook headers" width="848" height="1004" data-path="langsmith/images/webhook-headers.png" />
 
 ### Webhook delivery
 
@@ -198,7 +198,7 @@ Name the secret `ls-webhook` and set an environment variable with the name `LS_W
 
 You can also set up a LangSmith secret—luckily there is already an integration template for this!
 
-> **Image:** [LangSmith Modal Template](webhooks.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/modal-langsmith-secret.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=0c3209b59cb36273d82fb44383efa1d5" alt="LangSmith Modal Template" width="1229" height="779" data-path="langsmith/images/modal-langsmith-secret.png" />
 
 ### Service
 

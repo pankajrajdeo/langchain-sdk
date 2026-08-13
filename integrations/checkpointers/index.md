@@ -1,6 +1,6 @@
 # Checkpointer integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/checkpointers/index)
-Integrate with checkpointer backends for LangGraph persistence.
+
+> Integrate with checkpointer backends for LangGraph persistence.
 
 Checkpointers enable [persistence](../../langgraph/persistence.md) in LangGraph, allowing agents to save and resume state across interactions.
 

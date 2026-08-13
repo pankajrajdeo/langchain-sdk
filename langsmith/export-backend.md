@@ -1,5 +1,5 @@
 # Export LangSmith telemetry to your observability backend
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/export-backend)
+
 > [!WARNING]
 > **This section is only applicable for Kubernetes deployments.**
 

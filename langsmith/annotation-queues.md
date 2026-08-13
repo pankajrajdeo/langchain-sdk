@@ -1,5 +1,5 @@
 # Use annotation queues
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues)
+
 *Annotation queues* give human reviewers a focused workflow for attaching feedback to specific [runs](observability-concepts.md#runs) or [threads](observability-concepts.md#threads). While you can always annotate [traces](observability-concepts.md#traces) inline, annotation queues let you group runs and threads together, prescribe rubrics, and track reviewer progress. Reviewing an entire thread lets you evaluate a full multi-turn conversation, capturing quality signals that a single run cannot.
 
 > [!NOTE]
@@ -99,24 +99,24 @@ There are several ways to populate a single-run queue with items:
 
   You can add any intermediate [run](observability-concepts.md#runs) as a run item, but not the root run. **Entire thread** requires the run to be part of a thread (instrumented with `thread_id` / `session_id` metadata).
 
-> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/add-to-annotation-queue-what-to-add-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=091e403e9ecb1819f49d19b630909801" alt="Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker." width="1912" height="965" data-path="langsmith/images/add-to-annotation-queue-what-to-add-light.png" />
 
-> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/add-to-annotation-queue-what-to-add-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=a5886513a1b75ddaa945627e6d761439" alt="Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker." width="1921" height="963" data-path="langsmith/images/add-to-annotation-queue-what-to-add-dark.png" />
 
 > [!NOTE]
 >   If the **Entire thread** option is unavailable or the **Threads** tab is empty, the runs are not instrumented with `thread_id` / `session_id` metadata.
 
 * **From the Traces or Runs tab**: In a tracing project, select either the **Traces** or **Runs** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Use **What to add** to enqueue each selection as a **Selected run** or as its **Entire thread**.
 
-> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/multi-select-annotation-queue-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=7a158b4656431ec3484955a282f7ab36" alt="View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page." width="1545" height="766" data-path="langsmith/images/multi-select-annotation-queue-light.png" />
 
-> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/multi-select-annotation-queue-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=975379c9e076dc08866e42c7c330190f" alt="View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page." width="1547" height="767" data-path="langsmith/images/multi-select-annotation-queue-dark.png" />
 
 * **From the Threads tab**: In a tracing project, select the **Threads** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Selected threads are added as thread items.
 
-> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/threads-tab-add-to-annotation-queue-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=afc074fae70055e8c5d6c86380fec8e0" alt="Threads tab with selected threads and the Add to Annotation Queue bulk action." width="1545" height="765" data-path="langsmith/images/threads-tab-add-to-annotation-queue-light.png" />
 
-> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/threads-tab-add-to-annotation-queue-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=28035e2231b8ce6bc00cba61f8268bae" alt="Threads tab with selected threads and the Add to Annotation Queue bulk action." width="1546" height="765" data-path="langsmith/images/threads-tab-add-to-annotation-queue-dark.png" />
 
 * **Automation rules**: [Set up a rule](rules.md) to automatically assign **runs** that match a filter (for example, errors or low user scores) into a queue.
 
@@ -125,9 +125,9 @@ There are several ways to populate a single-run queue with items:
 
 * **Datasets & Experiments**: Select one or more [experiments](evaluation-concepts.md#experiment) within a dataset and click ** Annotate**. Select **Add to Annotation Queue**, then choose an existing queue or create a new one. Experiment annotate flows add run items.
 
-> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/annotate-experiment-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=12a78322893a51bb468f6da8b9f40d35" alt="Selected experiments with the Annotate button at the bottom of the page." width="1484" height="820" data-path="langsmith/images/annotate-experiment-light.png" />
 
-> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](annotation-queues.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/annotate-experiment-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=6aa2cfad777b8c92b65458498c9068bb" alt="Selected experiments with the Annotate button at the bottom of the page." width="1488" height="818" data-path="langsmith/images/annotate-experiment-dark.png" />
 
 > [!NOTE]
 > You can add at most **100** runs or threads to an annotation queue in a single action. To enqueue more, repeat the add flow in batches of 100 or fewer.
@@ -152,9 +152,9 @@ There are several ways to populate a single-run queue with items:
 > [!NOTE]
 >    Thread items support rubric feedback only. See the [capability table](#single-run-annotation-queues) for what differs between run and thread items.
 
-> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](annotation-queues.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/annotation-queue-thread-review-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=635f04e056d3092c5174dc54c54559b3" alt="Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane." width="1482" height="910" data-path="langsmith/images/annotation-queue-thread-review-light.png" />
 
-> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](annotation-queues.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/annotation-queue-thread-review-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=b912167eba67bc23aa48882ade7f8995" alt="Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane." width="1482" height="908" data-path="langsmith/images/annotation-queue-thread-review-dark.png" />
 
    Feedback and notes submitted while reviewing an annotation queue do not change the trace's [retention tier](usage-and-billing.md#data-retention-auto-upgrades).
 
@@ -171,7 +171,7 @@ Pairwise annotation queues (PAQs) present two runs side-by-side so reviewers can
 
 2. Click **Annotate**. In the popover, choose **Add to Pairwise Annotation Queue**. (The button is disabled until exactly two experiments are selected.)
 
-> **Image:** [Popover showing the &#x22;Add to Pairwise Annotation Queue&#x22; card highlighted after two experiments are selected.](annotation-queues.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/jimZt8pd1vc7LfPM/langsmith/images/pairwise-annotation-queue-popup.png?fit=max&auto=format&n=jimZt8pd1vc7LfPM&q=85&s=ef08b7166abce2d890ba4b9be8cae927" alt="Popover showing the &#x22;Add to Pairwise Annotation Queue&#x22; card highlighted after two experiments are selected." width="3456" height="1980" data-path="langsmith/images/pairwise-annotation-queue-popup.png" />
 
 3. Decide whether to send the experiments to an existing pairwise queue or create a new one.
 
@@ -212,14 +212,14 @@ Selecting two experiments and creating a PAQ automatically pairs the runs. When 
 
 Reservations, reviewer thresholds, and comments behave identically to those in single-run queues, enabling teams to use different queue types without modifying their existing workflow.
 
-> **Image:** [Pairwise review screen showing runs side-by-side with the feedback pane containing A/B/Equal buttons and keyboard shortcuts.](annotation-queues.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/jimZt8pd1vc7LfPM/langsmith/images/pairwise-annotation-queue-review-feedback-pane.png?fit=max&auto=format&n=jimZt8pd1vc7LfPM&q=85&s=b144d168c4f4fd1f624c1d0fd5ce7e3e" alt="Pairwise review screen showing runs side-by-side with the feedback pane containing A/B/Equal buttons and keyboard shortcuts." width="3456" height="1980" data-path="langsmith/images/pairwise-annotation-queue-review-feedback-pane.png" />
 
 > [!TIP]
 > Consider routing runs that already have user feedback (e.g., thumbs-down) into a single-run queue for triage and a pairwise queue for head-to-head comparisons against a stronger baseline. This helps you identify regressions quickly. To learn more about how to capture user feedback from your LLM application, follow the guide on [attaching user feedback](attach-user-feedback.md).
 
 ## Video guide
 
-> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues).
+> **Embedded Content:** [YouTube video player](https://www.youtube.com/embed/rxKYHA-2KS0?si=V4EnrUmzJaUVJh0m)
 
 ***
 

@@ -1,5 +1,5 @@
 # Set up custom authentication
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/set-up-custom-auth)
+
 In this tutorial, we will build a chatbot that only lets specific users access it. We'll start with the LangGraph template and add token-based security step by step. By the end, you'll have a working chatbot that checks for valid tokens before allowing access.
 
 This is part 1 of our authentication series:
@@ -61,7 +61,7 @@ The server will start and open [Studio](studio.md) in your browser:
 
 If you were to self-host this on the public internet, anyone could access it.
 
-> **Image:** [No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet.](set-up-custom-auth.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/N1xJUsnxxRqnrjxV/langsmith/images/no-auth.png?fit=max&auto=format&n=N1xJUsnxxRqnrjxV&q=85&s=3ca2c9a8d65891ef71abfb7ad0aae7d3" alt="No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet." width="1974" height="1412" data-path="langsmith/images/no-auth.png" />
 
 ## 2. Add authentication
 
@@ -148,7 +148,7 @@ If you didn't add the `--no-browser`, the Studio UI will open in the browser. By
 
 You should now only be able to access the bot if you provide a valid token in the request header. Users will still, however, be able to access each other's resources until you add [resource authorization handlers](auth.md#resource-specific-handlers) in the next section of the tutorial.
 
-> **Image:** [Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step.](set-up-custom-auth.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/IMK8wJkjSpMCGODD/langsmith/images/authentication.png?fit=max&auto=format&n=IMK8wJkjSpMCGODD&q=85&s=3ccfa86789baea630b8f418e9eb5b648" alt="Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step." width="2617" height="1673" data-path="langsmith/images/authentication.png" />
 
 Run the following code in a file or notebook:
 

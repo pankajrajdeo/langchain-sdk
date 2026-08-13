@@ -1,5 +1,5 @@
 # Agent Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server)
+
 LangSmith Deployment's **Agent Server** offers an API for creating and managing agent-based applications. It is built on the concept of [assistants](assistants.md), which are agents configured for specific tasks, and includes built-in [persistence](../langgraph/persistence.md#memory-store) and a [**task queue**](#task-queue). This versatile API supports a wide range of agentic application use cases, from background processing to real-time interactions.
 
 Use Agent Server to create and manage:

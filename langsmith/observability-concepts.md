@@ -1,6 +1,6 @@
 # Observability concepts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-concepts)
-How LangSmith structures observability data as runs, traces, threads, and trajectories, and how to send traces.
+
+> How LangSmith structures observability data as runs, traces, threads, and trajectories, and how to send traces.
 
 LangSmith Observability lets you record, inspect, and analyze every step your AI agent takes. This page explains how that data is structured and visualized in LangSmith as well as how to start sending traces.
 
@@ -10,9 +10,9 @@ In LangSmith, every unit of work an agent performs, such as a model call, tool i
 
 A [*trajectory*](#trajectories) is another way to structure and visualize that data. While a thread groups the traces of a session and keeps their nested structure, a trajectory flattens the entire session into an ordered list of messages that shows the path an agent took from start to finish.
 
-> **Image:** [A thread groups a session](observability-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/_6XeQZT2NAQ4WqkK/langsmith/images/thread-trajectory-light.png?fit=max&auto=format&n=_6XeQZT2NAQ4WqkK&q=85&s=e770ae021710ef231582cd59aae3a403" alt="A thread groups a session's traces and keeps their nesting, while a trajectory flattens the same session into an ordered list of messages" width="2160" height="1730" data-path="langsmith/images/thread-trajectory-light.png" />
 
-> **Image:** [A thread groups a session](observability-concepts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/_6XeQZT2NAQ4WqkK/langsmith/images/thread-trajectory-dark.png?fit=max&auto=format&n=_6XeQZT2NAQ4WqkK&q=85&s=b60e198867da6e9a43877a66b0d90e54" alt="A thread groups a session's traces and keeps their nesting, while a trajectory flattens the same session into an ordered list of messages" width="2160" height="1730" data-path="langsmith/images/thread-trajectory-dark.png" />
 
 ### Runs
 

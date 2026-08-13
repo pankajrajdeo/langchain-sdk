@@ -1,5 +1,5 @@
 # Using standard tests
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain)
+
 **Standard tests ensure your integration works as expected.**
 
 When creating either a custom class for yourself or to publish in a LangChain integration, it is necessary to add tests to ensure it works as expected. LangChain provides a comprehensive [set of tests](https://pypi.org/project/langchain-tests/) for each integration type for you. This guide will show you how to add LangChain's standard test suite to each integration type.

@@ -1,5 +1,5 @@
 # LangGraph runtime
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/pregel)
+
 [`Pregel`](https://reference.langchain.com/python/langgraph/pregel/main/Pregel) implements LangGraph's runtime, managing the execution of LangGraph applications.
 
 Compiling a [StateGraph](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) or creating an [`@entrypoint`](https://reference.langchain.com/python/langgraph/func/entrypoint) produces a [`Pregel`](https://reference.langchain.com/python/langgraph/pregel/main/Pregel) instance that can be invoked with input.

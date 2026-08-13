@@ -1,6 +1,6 @@
 # Access & oversight
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/access-and-oversight)
-Control who can access agents, how they authenticate, and audit everything they do.
+
+> Control who can access agents, how they authenticate, and audit everything they do.
 
 Fleet gives you the control layer for scaling agents across your organization: tiered permissions, credential management, human-in-the-loop oversight, and an audit trail for agent actions.
 

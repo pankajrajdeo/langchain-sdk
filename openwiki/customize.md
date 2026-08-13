@@ -1,6 +1,6 @@
 # Customize OpenWiki
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/customize)
-Ignore paths, wiki instructions, agent pointers, and telemetry for OpenWiki
+
+> Ignore paths, wiki instructions, agent pointers, and telemetry for OpenWiki
 
 Customize OpenWiki with ignore rules, wiki briefs, agent instruction pointers, and telemetry.
 

@@ -1,5 +1,5 @@
 # Connect to an OpenAI compliant model provider/proxy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-openai-compliant-model)
+
 The Playground allows you to use any model that is compliant with the OpenAI API. You can utilize your model by setting the Proxy Provider for  in the Playground.
 
 ## Deploy an OpenAI compliant model
@@ -24,9 +24,9 @@ To access the **Prompt Settings** menu:
 3. For the **Provider** dropdown, select **OpenAI Compatible Endpoint**.
 4. Add your OpenAI Compatible Endpoint to the **Base URL** input. See [Base URL format](#base-url-format) for examples.
 
-> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](custom-openai-compliant-model.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/cemWY9w7h0W8uMbk/langsmith/images/openai-compatible-endpoint.png?fit=max&auto=format&n=cemWY9w7h0W8uMbk&q=85&s=fdbe548e512ed40fb512578d02986b45" alt="Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected." width="897" height="572" data-path="langsmith/images/openai-compatible-endpoint.png" />
 
-> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](custom-openai-compliant-model.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/cemWY9w7h0W8uMbk/langsmith/images/openai-compatible-endpoint-dark.png?fit=max&auto=format&n=cemWY9w7h0W8uMbk&q=85&s=97459563da21d17228a1bb94a1b9edf3" alt="Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected." width="896" height="552" data-path="langsmith/images/openai-compatible-endpoint-dark.png" />
 
 If everything is set up correctly, you should see the model's response in the Playground. You can also use this functionality to invoke downstream pipelines.
 

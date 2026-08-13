@@ -1,5 +1,5 @@
 # Create an account and API key
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/create-account-api-key)
+
 To get started with LangSmith, you need to create an account. You can sign up for a free account in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-create-account-api-key). LangSmith supports sign in with Google, GitHub, and email.
 
 ## API keys
@@ -66,24 +66,52 @@ You may also need the following additional environment variables:
     <thead>
       <tr>
         <th>Region</th>
+
+        <th>
+          {protocol_0 === false ? "Host" : "URL"}
+        </th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
         <td>GCP US</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>GCP EU</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>GCP APAC</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>AWS US</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
     </tbody>
   </table>

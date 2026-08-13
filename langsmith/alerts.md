@@ -1,5 +1,5 @@
 # Alerts in LangSmith
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/alerts)
+
 > [!NOTE]
 > **Self-hosted version requirement**: Access to alerts requires Helm chart version **0.10.3** or later.
 
@@ -45,13 +45,13 @@ Alert conditions consist of several components:
 * **Aggregation Window**: Time period for metric calculation (choose between 5 or 15 minutes).
 * **Feedback Key** (Feedback Score alerts only): Specific feedback metric to monitor.
 
-> **Image:** [Alert Condition Configuration](alerts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/define-conditions.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=d92406d84dec4f1b827b82a989df30b9" alt="Alert Condition Configuration" width="597" height="112" data-path="langsmith/images/define-conditions.png" />
 
 **Example:** The configuration in the screenshot would generate an alert when more than 5% of runs within the past 5 minutes result in errors.
 
 You can preview alert behavior over a historical time window to understand how many datapoints, and which ones, would have triggered an alert at a chosen threshold (indicated in red). For example, setting an average latency threshold of 60 seconds for a project lets you visualize potential alerts, as shown in the following screenshot.
 
-> **Image:** [Alert Metrics](alerts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=d7f26bce1113c50bec8f5853c6448415" alt="Alert Metrics" width="863" height="545" data-path="langsmith/images/alert-preview.png" />
 
 ## Step 4: Configure notification channel
 
@@ -118,14 +118,14 @@ After creating the service, retrieve the Integration Key:
 3. Find the "Events API V2" integration
 4. Copy the **Integration Key** (a 32-character alphanumeric string)
 
-> **Image:** [PagerDuty Integration Key Location](alerts.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pager-duty.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=c46b2b6d7d262bacd653c9c144bec21a" alt="PagerDuty Integration Key Location" width="1396" height="729" data-path="langsmith/images/pager-duty.png" />
 
 ### 3. Configure LangSmith alert with PagerDuty
 
 > [!NOTE]
 > To receive the same alert again within an hour of it being triggered, you must resolve the active incident created by the alert in PagerDuty.
 
-> **Image:** [PagerDuty Setup](alerts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/pagerduty-setup.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=f277b7801c893695d72cebce7356c37c" alt="PagerDuty Setup" width="590" height="413" data-path="langsmith/images/pagerduty-setup.png" />
 
 1. In the notification section of your alert set-up in LangSmith, select **PagerDuty**
 2. Click the key icon to save the Integration Key as a Workspace secret or select an existing Workspace secret. As a best practice, we recommend saving the Integration Key as a Workspace Secret rather than adding it directly. This will allow you to reuse the same key across alerts for a workspace.
@@ -398,7 +398,7 @@ It is required to fill in the `{channel_id}` from the value found in Step 4. <br
 
 After creating an alert, you can optionally link to its preview in the webhook's request body.
 
-> **Image:** [Alert Preview Pane](alerts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/alert-preview-pane.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=286ebb8f90bafbdcacf9a0602aaf749c" alt="Alert Preview Pane" width="832" height="773" data-path="langsmith/images/alert-preview-pane.png" />
 
 To configure this:
 

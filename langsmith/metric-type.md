@@ -1,5 +1,5 @@
 # How to return categorical vs numerical metrics
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/metric-type)
+
 LangSmith supports both categorical and numerical metrics, and you can return either when writing a custom evaluator.
 
 For an evaluator result to be logged as a numerical metric, it must returned as:

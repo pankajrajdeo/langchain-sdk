@@ -1,34 +1,32 @@
 # LangSmith Engine on Self-hosted
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-self-hosted)
-How LangSmith Engine runs in a self-hosted deployment, what it depends on outside your environment, and how it handles your data.
+
+> How LangSmith Engine runs in a self-hosted deployment, what it depends on outside your environment, and how it handles your data.
 
 > [!NOTE]
 > Self-hosted Engine requires LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. It is not available on earlier chart versions. [Contact your account team](https://www.langchain.com/contact-sales) to have the entitlement added to your order.
 
 LangSmith Engine is an agent within LangSmith that monitors your production traces, clusters them into issues, diagnoses each issue against your source code, proposes a fix as a PR, and identifies ground truth evals to add to your datasets. For a product overview, see [Engine](engine-overview.md).
 
-This page explains how Engine runs in Self-hosted LangSmith, what it depends on outside your environment, and what that means for your data. To install it, see [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine). To connect it to your source code, create and configure your own GitHub App as described in [Connect Engine to GitHub](engine-github.md).
+In self-hosted LangSmith, Engine's orchestration, including its detect, fix, and verify loop, runs inside your VPC as part of LangSmith. Model work cannot run entirely in your VPC: Engine sends the content it needs to LangSmith Intelligence (LSI), a LangChain-managed zero data retention (ZDR) service. This page explains what that means for your data.
+
+To install Engine, see [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine). To connect Engine to your source code, create and configure your own GitHub App as described in [Connect Engine to GitHub](engine-github.md).
 
 Engine works with three kinds of data:
 
-* **Code** (optional)**:** your agent's source, which Engine reads to diagnose issues and propose fixes.
-* **Traces:** runtime data from your agents, which can include user messages, tool outputs, and PII.
-* **Model:** the LLM calls Engine makes to run diagnosis, generate fixes, and write evaluators.
-
-In Self-hosted LangSmith, Engine's orchestration runs inside your VPC as part of LangSmith: reading traces, reading code, and running its detect, fix, and verify loop. It cannot run entirely there, however. Engine depends on LangSmith Intelligence (LSI), a LangChain-managed zero data retention (ZDR) service, and sends LSI the content it needs to do its work.
+* **Code** (optional)**:** Your agent's source, which Engine reads to diagnose issues and propose fixes.
+* **Traces:** Runtime data from your agents, which can include user messages, tool outputs, and PII.
+* **Model:** The LLM calls Engine makes to run diagnosis, generate fixes, and write evaluators.
 
 ## Availability by cloud and region
 
-Engine depends on LSI coverage. That coverage is expanding, so availability varies by cloud and region:
+Engine is available where LSI is available:
 
 | Cloud | Region | Status    |
 | ----- | ------ | --------- |
 | AWS   | US     | Available |
 | GCP   | US     | Available |
-| AWS   | EU     | Planned   |
-| Azure | US     | Planned   |
 
-Contact your account team to confirm coverage for your region and for current timing.
+For availability in other regions, contact your account team.
 
 ## How it works
 
@@ -41,7 +39,7 @@ The flow:
 * LSI validates the JWT and routes the request to the model provider over private networking inside LangChain's environment.
 * LSI returns the response to your self-hosted Engine.
 
-Each request carries the trace content, code, and intermediate outputs Engine needs to do its work. LSI and the model provider process that content to serve the request. LSI does not persist prompt or completion bodies.
+Each request carries the trace content, code, and intermediate outputs Engine needs to do its work. LSI and the model provider process that content to serve the request.
 
 Your cluster must allow outbound HTTPS to that gateway. The connection can use public egress or private connectivity. On AWS, follow [Connect with AWS PrivateLink](#connect-with-aws-privatelink) to keep Engine traffic on private networking.
 
@@ -49,22 +47,26 @@ If the connection to LSI is unavailable, Engine stops and returns an error rathe
 
 ## What LangSmith Intelligence retains
 
-LSI does not persist prompt or completion bodies. It retains the following metadata for usage attribution and billing:
+LSI does not persist the content of prompts or model responses. It retains the following metadata for usage attribution and billing:
 
 * Account, workspace, and project identifiers used to attribute usage.
 * Model and token-usage metadata used for billing.
 
 For model-provider retention and training commitments, see [Engine security](engine-security.md).
 
+## Connect by cloud
+
 ### AWS (available in US)
 
-The gateway host is `beacon.aws.langchain.com`. LSI routes requests to AWS Bedrock in LangChain's AWS environment.
+The gateway host is [`beacon.aws.langchain.com`](deploy-self-hosted-full-platform.md#allow-egress-to-langsmith-intelligence). LSI routes requests to AWS Bedrock in LangChain's AWS environment.
 
 #### Connect with AWS PrivateLink
 
+Before configuring PrivateLink, complete [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine), including its Helm and egress configuration.
+
 [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/) routes Engine traffic from your VPC to LSI without exposing that traffic to the public internet. The LSI endpoint service is hosted in `us-east-2`, and AWS supports access from VPCs in other regions.
 
-Before you begin, collect your AWS account ID, VPC ID, private subnet IDs, and a security group for the endpoint. Configure the security group to allow inbound TCP traffic on port 443 only from the security group attached to the nodes or workloads that run Engine (or the smallest private CIDR that contains them). Do not allow `0.0.0.0/0`.
+Before you begin, collect your AWS account ID, VPC ID, private subnet IDs, and a security group for the interface endpoint. Configure that endpoint security group to allow inbound TCP traffic on port 443 only from the security group attached to the nodes or workloads that run Engine, or from the smallest private CIDR that contains them. Do not allow `0.0.0.0/0`.
 
 To connect your VPC to LSI:
 
@@ -126,38 +128,36 @@ From a node or container that runs Engine, resolve the gateway hostname:
 getent ahostsv4 beacon.aws.langchain.com
 ```
 
-Confirm that the result contains the private IP addresses assigned to the endpoint network interfaces. Then [enable Engine](deploy-self-hosted-full-platform.md#enable-engine), start an analysis, and confirm that it completes successfully.
+Confirm that the result contains the private IP addresses assigned to the endpoint network interfaces. Then [enable Engine](deploy-self-hosted-full-platform.md#enable-engine), start an analysis, and confirm that it completes successfully. If the analysis does not complete, review the Engine installation and egress configuration.
 
-> **Image:** [Architecture diagram. Your VPC contains the LangSmith UI, an NLB, an EKS cluster running LangSmith services, and storage on S3, RDS, and ElastiCache. LangChain](engine-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ry58UzmmALISsnzO/langsmith/images/engine-self-hosted-aws.png?fit=max&auto=format&n=ry58UzmmALISsnzO&q=85&s=ae209b16e4cf2ad7199e7ea6bb333f84" alt="Architecture diagram of self-hosted LangSmith in your VPC connected by AWS PrivateLink to LangSmith Intelligence and Bedrock in LangChain's AWS environment." width="2240" height="1540" data-path="langsmith/images/engine-self-hosted-aws.png" />
 
 ### GCP (available in US)
 
-The gateway host is `beacon.langchain.com`. LSI routes requests to Vertex in LangChain's GCP environment.
+The gateway host is [`beacon.langchain.com`](deploy-self-hosted-full-platform.md#allow-egress-to-langsmith-intelligence). LSI routes requests to Vertex in LangChain's GCP environment.
 
 > [!NOTE]
-> That is the same host Self-hosted LangSmith already uses for license verification and billing telemetry, so a GCP deployment adds a path rather than a new egress destination. See [Configure egress](self-host-egress.md).
+> This is the same host self-hosted LangSmith uses for license verification and billing telemetry, so a GCP deployment adds a path rather than a new egress destination. See [Configure egress](self-host-egress.md).
 
-> **Image:** [Architecture diagram showing a self-hosted LangSmith deployment in your GCP project connecting to LangSmith Intelligence in LangChain](engine-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/I8T-TucKLNgYMiUb/langsmith/images/engine-self-hosted-gcp.png?fit=max&auto=format&n=I8T-TucKLNgYMiUb&q=85&s=d4769b8b4ed0e80f425e0a1dd615a5e9" alt="Architecture diagram of self-hosted LangSmith in your GCP project connected to LangSmith Intelligence and Vertex in LangChain's GCP environment." width="2240" height="1540" data-path="langsmith/images/engine-self-hosted-gcp.png" />
 
 ## Model selection and quality
 
-Model selection drives much of what makes Engine effective. Engine uses different models, tuned differently, for each step of its work: clustering issues, diagnosing root cause against your code, generating a fix, and writing the evaluator that verifies it. LangChain tunes these models for both quality and token efficiency, and upgrades them as better models ship.
+Engine uses different models, each tuned for its role, to cluster issues, diagnose root causes against your code, generate fixes, and write evaluators that verify them. LangChain tunes these models for quality and token efficiency, and updates them as better models become available.
 
-Managed inference makes that possible. Because Engine always runs the model LangChain has tuned for each step, behavior stays consistent and improves as those models are upgraded. A bring-your-own-key setup would instead tie Engine to the models you have configured, so tuning and token efficiency would vary from request to request.
+Engine uses managed inference, not a bring-your-own-key setup. This keeps Engine behavior consistent and improves it as LangChain updates the models. With a bring-your-own-key setup, model selection, tuning, and token efficiency can vary between requests.
 
-## What this means for your data
+## Where Engine processes data
 
-In Self-hosted, Engine separates data handling between your environment and LangChain's:
+In a self-hosted deployment, Engine separates data handling between your environment and LangChain's:
 
 * **Your environment:** Engine orchestration and LangSmith-stored traces remain in your self-hosted environment.
-* **LangChain's environment:** Content Engine sends is processed by LSI and the model provider. LSI retains the billing metadata listed above, but it does not persist prompt or completion bodies.
+* **LangChain's environment:** LSI and the model provider process content that Engine sends. LSI retains the billing metadata described above.
 
 Engine's deployment-independent data handling, including zero data retention with every model provider and no use of customer data to train or fine-tune models, is described in [Engine security](engine-security.md).
 
 ## See also
 
-* [Enable Engine on self-hosted](deploy-self-hosted-full-platform.md#enable-engine)
-* [Connect Engine to GitHub](engine-github.md)
 * [Engine](engine-overview.md)
 * [Configure Engine](engine.md)
 * [Engine security](engine-security.md)

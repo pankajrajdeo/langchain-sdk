@@ -1,5 +1,5 @@
 # Run support queries against PostgreSQL
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-running-pg-support-queries)
+
 This Helm repository contains queries to produce output that the LangSmith UI does not currently support directly (e.g. obtaining trace counts for multiple organizations in a single query).
 
 This command takes a PostgreSQL connection string that contains an embedded name and password (which can be passed in from a call to a secrets manager) and executes a query from an input file. The following example uses the `pg_get_historic_trace_counts_daily.sql` input file in the `support_queries/postgres` directory.

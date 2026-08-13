@@ -1,6 +1,6 @@
 # Harbor integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/harbor-integrations)
-Run evaluations, Deep Agents, and sandboxes on LangSmith with Harbor.
+
+> Run evaluations, Deep Agents, and sandboxes on LangSmith with Harbor.
 
 Use LangSmith to run, trace, compare, and cost agent evaluations from one place, with [Harbor](https://harborframework.com/docs) as the execution layer. Harbor is a framework for evaluating and optimizing agents and language models in sandboxed environments, from the creators of [Terminal-Bench](https://www.tbench.ai). It runs each trial in an isolated container, so you can parallelize evaluations and rollouts across many environments at once.
 
@@ -28,11 +28,14 @@ pip install "harbor[langsmith]"
 
 ### Authenticate
 
-Harbor authenticates with your LangSmith credentials. Set an API key:
+Harbor authenticates with your LangSmith credentials. Set an API key and the endpoint that key belongs to:
 
 ```bash
 export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
+export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
 ```
+
+`LANGSMITH_ENDPOINT` defaults to `https://api.smith.langchain.com` (GCP US). Set it to your data plane URL on [BYOC](byoc.md), your instance URL on [self-hosted](self-hosted.md), or the [API URL for your region](create-account-api-key.md#configure-the-sdk) on other Cloud regions.
 
 Alternatively, select a [LangSmith SDK profile](profile-configuration.md) instead of exporting a key:
 

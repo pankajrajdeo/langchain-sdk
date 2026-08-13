@@ -1,5 +1,5 @@
 # Contributing to documentation
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/documentation)
+
 We welcome contributions to LangChain documentation, including new features, [integrations](publish-langchain.md), and improvements to existing docs.
 
 ## Quick start - local development

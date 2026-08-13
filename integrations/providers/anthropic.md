@@ -1,6 +1,6 @@
 # Anthropic (Claude) integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/anthropic)
-Integrate with Anthropic (Claude) using LangChain Python.
+
+> Integrate with Anthropic (Claude) using LangChain Python.
 
 This page covers all LangChain integrations with [Anthropic](https://www.anthropic.com/), the makers of Claude.
 

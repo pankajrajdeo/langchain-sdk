@@ -1,5 +1,5 @@
 # Generate ClickHouse stats
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-generate-clickhouse-stats)
+
 As part of troubleshooting your self-hosted instance of LangSmith, the LangChain team may ask you to generate Clickhouse statistics that will help us understand memory and CPU consumption and connection concurrency.
 
 This command will generate a CSV that can be shared with the LangChain team.

@@ -1,6 +1,6 @@
 # Traces and access control
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-access)
-Understand where gateway traces land and who can see and configure what.
+
+> Understand where gateway traces land and who can see and configure what.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

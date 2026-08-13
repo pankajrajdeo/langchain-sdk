@@ -1,5 +1,5 @@
 # Build a multi-source knowledge base with routing
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)
+
 ## Overview
 
 The **router pattern** is a [multi-agent](../multi-agent.md) architecture where a routing step classifies input and directs it to specialized agents, with results synthesized into a combined response. This pattern excels when your organization's knowledge lives across distinct **verticals** (separate knowledge domains that each require their own agent with specialized tools and prompts).

@@ -1,5 +1,5 @@
 # How to set up a JavaScript application
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/setup-javascript)
+
 An application must be configured with a [configuration file](cli.md#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up a JavaScript application for deployment using `package.json` to specify project dependencies.
 
 This walkthrough is based on [this repository](https://github.com/langchain-ai/langgraphjs-studio-starter), which you can play around with to learn more about how to set up your application for deployment.

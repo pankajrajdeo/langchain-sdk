@@ -1,5 +1,5 @@
 # LangSmith-managed ClickHouse
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse)
+
 > [!TIP]
 > Please read the [LangSmith architectural overview](self-hosted.md) and [guide on connecting to external ClickHouse](self-host-external-clickhouse.md) before proceeding with this guide.
 
@@ -15,9 +15,9 @@ The architecture of using LangSmith-managed ClickHouse with your self-hosted Lan
 
 The overall architecture looks like this:
 
-> **Image:** [LangSmith managed ClickHouse architecture.](langsmith-managed-clickhouse.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/managed-clickhouse-light.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=26fae5c3f413c15302ea0c00bebf8e93" alt="LangSmith managed ClickHouse architecture." width="2196" height="1755" data-path="langsmith/images/managed-clickhouse-light.png" />
 
-> **Image:** [LangSmith managed ClickHouse architecture.](langsmith-managed-clickhouse.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/managed-clickhouse-dark.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=a3062f45f9c01f05e6917bca3f34735e" alt="LangSmith managed ClickHouse architecture." width="2196" height="1755" data-path="langsmith/images/managed-clickhouse-dark.png" />
 
 ## Requirements
 

@@ -1,5 +1,5 @@
 # Upgrade an installation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-upgrades)
+
 > [!WARNING]
 > Downgrades are not officially supported. LangSmith upgrades may include database migrations and other changes that are not backward-compatible. If you need to roll back to a previous version, contact technical support via the [Support Portal](https://support.langchain.com) for guidance.
 
@@ -100,7 +100,7 @@ langsmith-queue-d58cb64f7-87d68          1/1     Running     0          15h
 
 3. Visit the external IP for the `langsmith-frontend` service on your browser. The LangSmith UI should be visible and operational.
 
-> **Image:** [LangSmith UI](self-host-upgrades.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-ui.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=5310f686e7b9eebaaee4fe2a152a8675" alt="LangSmith UI" width="2886" height="1698" data-path="langsmith/images/langsmith-ui.png" />
 
 ***
 

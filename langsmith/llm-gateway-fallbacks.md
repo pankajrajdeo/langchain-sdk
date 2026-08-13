@@ -1,6 +1,6 @@
 # Model fallbacks
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-fallbacks)
-Automatically retry a request against backup model configurations when the primary model rate-limits, errors, or returns another configured status code.
+
+> Automatically retry a request against backup model configurations when the primary model rate-limits, errors, or returns another configured status code.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

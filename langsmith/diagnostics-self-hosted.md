@@ -1,6 +1,6 @@
 # Troubleshooting for self-hosted deployments
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
-Diagnostic steps for troubleshooting self-hosted LangSmith Deployment issues before contacting support.
+
+> Diagnostic steps for troubleshooting self-hosted LangSmith Deployment issues before contacting support.
 
 This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Deployment](deployment.md) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
 

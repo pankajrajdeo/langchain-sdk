@@ -1,6 +1,6 @@
 # A2A endpoint in Agent Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-a2a)
-Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
+
+> Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
 
 [Agent2Agent (A2A)](https://a2a-protocol.org/latest/) is Google's protocol for enabling communication between conversational AI agents. [LangSmith implements A2A support](server-api-ref.md#tag/a2a/post/a2a/\{assistant_id}), allowing your agents to communicate with other A2A-compatible agents through a standardized protocol.
 

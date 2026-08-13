@@ -1,5 +1,5 @@
 # Trace Google Gemini applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-google-gemini)
+
 This guide shows you how to trace and log [Google's Gemini](https://ai.google.dev/gemini-api/docs) models in LangSmith. You'll instrument Gemini calls using the latest [`google-genai` SDK](https://googleapis.github.io/python-genai/) (Python) or [`@google/genai` SDK](https://googleapis.github.io/js-genai/release_docs/index.html) (JavaScript), wrap the Gemini client for tracing, and try examples including basic prompts, metadata tagging, and multi-turn conversations.
 
 > [!NOTE]

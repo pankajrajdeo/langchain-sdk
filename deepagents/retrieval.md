@@ -1,5 +1,5 @@
 # Retrieval
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/retrieval)
+
 Large Language Models (LLMs) are powerful, but they have two key limitations:
 
 * **Finite context**: they can’t ingest entire corpora at once.

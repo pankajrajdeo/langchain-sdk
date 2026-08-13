@@ -1,5 +1,5 @@
 # Run (span) data format
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-data-format)
+
 LangSmith stores each [run](observability-concepts.md) as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations.
 
 | Field Name                     | Type             | Description                                                                                                                                                 |

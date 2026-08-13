@@ -1,6 +1,6 @@
 # Providers and models
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/concepts/providers-and-models)
-Understand how LangChain uses providers to give you a single API for any model from any provider
+
+> Understand how LangChain uses providers to give you a single API for any model from any provider
 
 LangChain gives you a single, unified API to work with models from any provider. Install a provider package, pick a model name, and start building—the same code works whether you use OpenAI, Anthropic, Google, or any other supported provider.
 

@@ -1,5 +1,5 @@
 # Regions FAQ
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/regions-faq)
+
 > [!NOTE]
 > See the [cloud architecture reference](cloud.md#cloud-architecture-and-scalability) for additional details.
 

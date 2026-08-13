@@ -1,10 +1,10 @@
 # Agent Chat UI
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/ui)
+
 [Agent Chat UI](https://github.com/langchain-ai/agent-chat-ui) is a Next.js application that provides a conversational interface for interacting with any LangChain agent. It supports real-time chat, tool visualization, and advanced features like time-travel debugging and state forking. Agent Chat UI works seamlessly with agents created using [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and provides interactive experiences for your agents with minimal setup, whether you're running locally or in a deployed context (such as [LangSmith](../langsmith/observability.md)).
 
 Agent Chat UI is open source and can be adapted to your application needs.
 
-> **Embedded Content:** Agent Chat UI — [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/ui).
+> **Embedded Content:** [Agent Chat UI](https://www.youtube.com/embed/lInrwVnZ83o?si=Uw66mPtCERJm0EjU)
 
 > [!TIP]
 > You can use generative UI in the Agent Chat UI. For more information, see [Implement generative user interfaces with LangGraph](../langsmith/generative-ui-react.md).

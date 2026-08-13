@@ -1,6 +1,6 @@
 # Deploy on Cloud
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-to-cloud)
-Create and manage LangSmith Cloud deployments including revisions, logs, metrics, and settings.
+
+> Create and manage LangSmith Cloud deployments including revisions, logs, metrics, and settings.
 
 This is the comprehensive setup and management guide for deploying applications to LangSmith Cloud. LangSmith Cloud runs on AWS and GCP (see the [Cloud overview page](cloud.md) for region details).
 
@@ -66,7 +66,7 @@ Starting from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&ut
    langgraph deploy --name my-agent --deployment-type dedicated
 ```
 > [!NOTE]
->    Organizations still on previous pricing until October 1, 2026 use `--deployment-type prod` or `--deployment-type dev` instead. For details, see [`langgraph deploy`](cli.md#deploy) and [Manage billing](billing.md#langsmith-deployment-billing).
+>        Organizations still on previous pricing until October 1, 2026 use `--deployment-type prod` or `--deployment-type dev` instead. For details, see [`langgraph deploy`](cli.md#deploy) and [Manage billing](billing.md#langsmith-deployment-billing).
 
    After the command completes, the deployment is queued for provisioning. Environment variables can be managed through the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-to-cloud) after the deployment is created, or configured in the [`env` field of your `langgraph.json`](cli.md#configuration-file).
 

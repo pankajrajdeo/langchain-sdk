@@ -1,6 +1,6 @@
 # Controlled generative UI
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
-Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning
+
+> Render agent output with components you author using components as tools, tool-call rendering, state rendering, and reasoning
 
 ## Overview
 

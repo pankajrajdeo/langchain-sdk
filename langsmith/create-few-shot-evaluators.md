@@ -1,5 +1,5 @@
 # How to improve your evaluator with few-shot examples
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/create-few-shot-evaluators)
+
 Using LLM-as-a-judge evaluators can be very helpful when you can't evaluate your system programmatically. However, their effectiveness depends on their quality and how well they align with human reviewer feedback. LangSmith provides the ability to improve the alignment of LLM-as-a-judge evaluator to human preferences using few-shot examples.
 
 Human corrections are automatically inserted into your evaluator prompt using few-shot examples. Few-shot examples is a technique inspired by [few-shot prompting](https://www.promptingguide.ai/techniques/fewshot) that guides the models output with a few high-quality examples.
@@ -40,7 +40,7 @@ As you start logging traces or running experiments, you will likely disagree wit
 
 The inputs to the few-shot examples will be the relevant fields from the inputs, outputs, and reference (if this an offline evaluator) of your chain/dataset. The outputs will be the corrected evaluator score and the explanations that you created when you left the corrections. Feel free to edit these to your liking. Here is an example of a few-shot example in a corrections dataset:
 
-> **Image:** [Few-shot example](create-few-shot-evaluators.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/few-shot-example.png?fit=max&auto=format&n=0B2PFrFBMRWNccee&q=85&s=8c7bfcc6cc4ab86c18240c3cbf2ea44c" alt="Few-shot example" width="1572" height="790" data-path="langsmith/images/few-shot-example.png" />
 
 Note that the corrections may take a minute or two to be populated into your few-shot dataset. Once they are there, future runs of your evaluator will include them in the prompt!
 
@@ -51,11 +51,11 @@ In order to view your corrections dataset:
 * **Online evaluators**: Select your run rule and click **Edit Rule**
 * **Offline evaluators**: Select your evaluator and click **Edit Evaluator**
 
-> **Image:** [Edit Evaluator](create-few-shot-evaluators.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/edit-evaluator.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=03453ef08f1c272d5d9aaf71d1fb7301" alt="Edit Evaluator" width="800" height="284" data-path="langsmith/images/edit-evaluator.png" />
 
 Head to your dataset of corrections linked in the **Improve evaluator accuracy using few-shot examples** section. You can view and update your few-shot examples in the dataset.
 
-> **Image:** [View few-shot dataset](create-few-shot-evaluators.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/view-few-shot-ds.png?fit=max&auto=format&n=1RIJxfRpkszanJLL&q=85&s=3215f3f24a08186fd76c6dbad18a3cf5" alt="View few-shot dataset" width="1470" height="478" data-path="langsmith/images/view-few-shot-ds.png" />
 
 ***
 

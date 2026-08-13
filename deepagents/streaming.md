@@ -1,6 +1,6 @@
 # Streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/streaming)
-Stream real-time updates from deep agent runs and subagent execution
+
+> Stream real-time updates from deep agent runs and subagent execution
 
 > [!TIP]
 > For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in Deep Agents v0.6. Event streaming gives you separate iterators per projection (subagents, messages, tool calls, values) so you can consume them independently instead of branching on `stream_mode` chunks.

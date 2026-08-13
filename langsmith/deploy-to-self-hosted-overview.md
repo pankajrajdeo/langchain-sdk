@@ -1,6 +1,6 @@
 # Deploy to self-hosted
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview)
-Run the LangSmith Deployment platform on your own infrastructure with full control over data, networking, and resources.
+
+> Run the LangSmith Deployment platform on your own infrastructure with full control over data, networking, and resources.
 
 Self-hosted LangSmith Deployment runs the [Agent Server](agent-server.md), control plane, data plane, and supporting databases inside infrastructure that you operate.
 

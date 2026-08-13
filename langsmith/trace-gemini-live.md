@@ -1,6 +1,6 @@
 # Trace Gemini Live applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-gemini-live)
-Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
+
+> Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
 
 > [!NOTE]
 > This integration is in beta, so its API may change.

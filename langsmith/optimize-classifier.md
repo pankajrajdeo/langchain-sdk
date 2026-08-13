@@ -1,5 +1,5 @@
 # Optimize a classifier
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/optimize-classifier)
+
 This tutorial shows you how to optimize a classifier based on user feedback. Classifiers are great to optimize because its generally pretty simple to collect the desired output, which makes it easy to create few shot examples based on user feedback. That is exactly what we will do in this example.
 
 ## The objective
@@ -111,11 +111,11 @@ We can now set up automations to move examples with feedback of some form into a
 
 The first will take all runs with positive feedback and automatically add them to a dataset. The logic behind this is that any run with positive feedback we can use as a good example in future iterations. Let's create a dataset called `classifier-github-issues` to add this data to.
 
-> **Image:** [Optimization Negative](optimize-classifier.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/class-optimization-neg.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=e36c57f7e0e224ff1ea29bcfbe9891fc" alt="Optimization Negative" width="1033" height="558" data-path="langsmith/images/class-optimization-neg.png" />
 
 The second will take all runs with a correction and use a webhook to add them to a dataset. When creating this webhook, we will select the option to "Use Corrections". This option will make it so that when creating a dataset from a run, rather than using the output of the run as the gold-truth output of the datapoint, it will use the correction.
 
-> **Image:** [Optimization Positive](optimize-classifier.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/class-optimization-pos.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=6485ca961ed1c29d33f25f75f90ba939" alt="Optimization Positive" width="1038" height="506" data-path="langsmith/images/class-optimization-pos.png" />
 
 ## Update the application
 

@@ -1,11 +1,16 @@
 # LLM Gateway
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway)
-Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
+
+> Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
 
 Use one [LangSmith API key](create-account-api-key.md) to call models across configured providers. Switch providers by changing the model ID, while the LLM Gateway traces every call and applies centralized governance policies.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).
+>
+> The gateway is also available on [BYOC](byoc.md), where it runs inside your data plane. Send requests to your [data plane endpoint](byoc-usage.md#find-your-data-plane-endpoint) behind the `/gateway` path prefix, and authenticate with an API key scoped to a workspace in that data plane. For more information, see [Use a BYOC data plane](llm-gateway-api-formats.md#use-a-byoc-data-plane).
+
+> [!NOTE]
+> **Self-hosted availability:** LLM Gateway is not included in the LangSmith v0.16.0 self-hosted stable release. It will be available in a future stable release. To express interest, submit the [LLM Gateway self-hosted access request](https://www.langchain.com/langsmith-llm-gateway-self-hosted-access-request). You can also try LLM Gateway on v17 RC versions or BYOC (bring your own cloud) ahead of the stable release.
 
 ## Make your first request
 
@@ -18,6 +23,15 @@ Set your key and make a standard Chat Completions request. This example assumes 
 export LANGSMITH_API_KEY="lsv2_..._....cbed3e"
 
 curl https://gateway.smith.langchain.com/v1/chat/completions \
+    -H "Authorization: Bearer $LANGSMITH_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
+```
+
+```bash
+export LANGSMITH_API_KEY="lsv2_..._....cbed3e"
+
+curl https://<data_plane_host>/gateway/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
@@ -44,7 +58,9 @@ Choose the request format already used by your application. The format does not 
 
 Set `model` to a provider-prefixed bring-your-own-key ID such as `openai/gpt-5.4-mini` or `anthropic/claude-opus-5`, or use a [Gateway Credits](llm-gateway-credits.md) model slug such as `moonshotai/kimi-k3`. The model ID determines the upstream route. When the selected provider uses a different native format, the gateway translates the request and response.
 
-For base URLs, examples, translation behavior, and regional endpoints, see [API formats](llm-gateway-api-formats.md).
+On BYOC, the same paths sit behind the `/gateway` prefix, such as `POST /gateway/v1/chat/completions`.
+
+For base URLs, examples, translation behavior, regional endpoints, and BYOC data plane endpoints, see [API formats](llm-gateway-api-formats.md).
 
 ## Choose how credentials are managed
 

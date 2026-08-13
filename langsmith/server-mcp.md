@@ -1,5 +1,5 @@
 # MCP endpoint in Agent Server
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-mcp)
+
 The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API.
 
 [Agent Server](agent-server.md) implements MCP using the [Streamable HTTP transport](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/transports/#streamable-http). This allows LangGraph **agents** to be exposed as **MCP tools**, making them usable with any MCP-compliant client supporting Streamable HTTP.

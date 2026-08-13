@@ -1,5 +1,5 @@
 # Implement a LangChain integration
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/implement-langchain)
+
 Integration packages are Python packages that users can install for use in their projects. They implement one or more components that adhere to the LangChain interface standards.
 
 LangChain components are subclasses of base classes in [`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core). Examples include [chat models](../integrations/chat.md), [tools](../integrations/tools.md), [retrievers](../integrations/retrievers.md), and more.

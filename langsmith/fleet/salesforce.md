@@ -1,6 +1,6 @@
 # Salesforce integration
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/salesforce)
-Connect LangSmith Fleet to Salesforce so your agents can query records, navigate schemas, and read custom fields.
+
+> Connect LangSmith Fleet to Salesforce so your agents can query records, navigate schemas, and read custom fields.
 
 The Salesforce integration gives your agents read-only access to data in your Salesforce org. Once connected, an agent can:
 

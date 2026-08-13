@@ -1,16 +1,16 @@
 # Application-specific evaluation approaches
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-approaches)
+
 Below, we will discuss evaluation of a few popular types of LLM applications.
 
 ## Agents
 
 [LLM-powered autonomous agents](https://lilianweng.github.io/posts/2023-06-23-agent/) combine three components (1) Tool calling, (2) Memory, and (3) Planning. Agents [use tool calling](../langchain/tools.md) with planning (e.g., often via prompting) and memory (e.g., often short-term message history) to generate responses. [Tool calling](../langchain/tools.md) allows a model to respond to a given prompt by generating two things: (1) a tool to invoke and (2) the input arguments required.
 
-> **Image:** [Tool use](evaluation-approaches.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/tool-use.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=a1c10f940f40ad89c90de8fae3607c1f" alt="Tool use" width="1021" height="424" data-path="langsmith/images/tool-use.png" />
 
 Below is a tool-calling agent in [LangGraph](https://langchain-ai.github.io/langgraph/tutorials/introduction/). The `assistant node` is an LLM that determines whether to invoke a tool based upon the input. The `tool condition` sees if a tool was selected by the `assistant node` and, if so, routes to the `tool node`. The `tool node` executes the tool and returns the output as a tool message to the `assistant node`. This loop continues as long as the `assistant node` selects a tool. If no tool is selected, then the agent directly returns the LLM response.
 
-> **Image:** [Agent](evaluation-approaches.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langgraph-agent.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=37f3c09958c1e2543f633c59cc89df36" alt="Agent" width="1259" height="492" data-path="langsmith/images/langgraph-agent.png" />
 
 This sets up three general types of agent evaluations that users are often interested in:
 
@@ -18,7 +18,7 @@ This sets up three general types of agent evaluations that users are often inter
 * `Single step`: Evaluate any agent step in isolation (e.g., whether it selects the appropriate tool).
 * `Trajectory`: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
 
-> **Image:** [Agent-eval](evaluation-approaches.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/agent-eval.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=5fe3c96402623ed8a61118f22a6426b6" alt="Agent-eval" width="1825" height="915" data-path="langsmith/images/agent-eval.png" />
 
 The following sections cover what these are, the components (inputs, outputs, evaluators) needed for each one, and when you should consider this. Common use cases often use multiple or all of these types of evaluations; they are not mutually exclusive.
 
@@ -75,7 +75,7 @@ When you evaluate RAG applications, start by deciding whether you have a referen
 
 LLM-as-judge evaluators work well for RAG because they can score factual accuracy and consistency between texts.
 
-> **Image:** [rag-types.png](evaluation-approaches.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Fr2lazPB4XVeEA7l/langsmith/images/rag-types.png?fit=max&auto=format&n=Fr2lazPB4XVeEA7l&q=85&s=1252b1369be04ddb4c480af277443ac2" alt="rag-types.png" width="1696" height="731" data-path="langsmith/images/rag-types.png" />
 
 You can use two kinds of evaluators:
 

@@ -1,6 +1,6 @@
 # Cloud Agent Server environment variables
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/env-var-cloud)
-Environment variables supported by the LangSmith Agent Server when deployed on Cloud.
+
+> Environment variables supported by the LangSmith Agent Server when deployed on Cloud.
 
 The Agent Server supports the following environment variables when deployed on [Cloud](deploy-to-cloud-overview.md). For variables specific to self-hosted deployments, see [Self-hosted Agent Server environment variables](env-var-self-hosted.md).
 

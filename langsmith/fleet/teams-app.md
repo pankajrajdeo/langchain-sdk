@@ -1,6 +1,6 @@
 # Integrate Teams with an agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/teams-app)
-Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
+
+> Connect LangSmith Fleet to Microsoft Teams by bringing your own Azure Bot to let agents communicate with users in Teams.
 
 With LangSmith Fleet, you can connect your agents to Microsoft Teams by registering a custom Azure Bot. Once connected, your agents can:
 

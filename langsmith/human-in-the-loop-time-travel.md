@@ -1,5 +1,5 @@
 # Time travel using the server API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/human-in-the-loop-time-travel)
+
 LangGraph provides the [**time travel**](../langgraph/use-time-travel.md) functionality to resume execution from a prior checkpoint, either replaying the same state or modifying it to explore alternatives. In all cases, resuming past execution produces a new fork in the history.
 
 To time travel using the LangSmith Deployment API (via the LangGraph SDK):
@@ -145,6 +145,8 @@ curl --request GET \
 --url <DEPLOYMENT_URL>/threads/<THREAD_ID>/history \
 --header 'Content-Type: application/json'
 ```
+
+<a id="optional" />
 
 ### 3. Update the state
 

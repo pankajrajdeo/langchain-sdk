@@ -1,6 +1,6 @@
 # Thinking in LangGraph
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph)
-Learn how to think about building agents with LangGraph
+
+> Learn how to think about building agents with LangGraph
 
 When you build an agent with LangGraph, you will first break it apart into discrete steps called **nodes**. Then, you will describe the different decisions and transitions from each of your nodes. Finally, you connect nodes together through a shared **state** that each node can read from and write to.
 

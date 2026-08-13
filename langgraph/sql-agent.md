@@ -1,5 +1,5 @@
 # Build a custom SQL agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/sql-agent)
+
 In this tutorial we will build a custom agent that can answer questions about a SQL database using LangGraph.
 
 LangChain offers built-in [agent](../langchain/agents.md) implementations, implemented using [LangGraph](overview.md) primitives. If deeper customization is required, agents can be implemented directly in LangGraph. This guide demonstrates an example implementation of a SQL agent. For a practical introduction, see [building a SQL agent using higher-level LangChain abstractions](../langchain/sql-agent.md).
@@ -588,7 +588,7 @@ import pathlib
 pathlib.Path("graph.png").write_bytes(agent.get_graph().draw_mermaid_png())
 ```
 
-> **Image:** [SQL agent graph](sql-agent.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aAi4RLdXQAh8fThS/oss/images/sql-agent-langgraph.png?fit=max&auto=format&n=aAi4RLdXQAh8fThS&q=85&s=1ddd4aae369fb8c143edaccb0a09c81f" alt="SQL agent graph" width="308" height="645" data-path="oss/images/sql-agent-langgraph.png" />
 
 We can now invoke the graph:
 

@@ -1,5 +1,5 @@
 # LangSmith data plane
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-plane)
+
 The *data plane* consists of your [Agent Servers](agent-server.md) (deployments), their supporting infrastructure, and the "listener" application that continuously polls for updates from the [LangSmith control plane](control-plane.md).
 
 ## Server infrastructure

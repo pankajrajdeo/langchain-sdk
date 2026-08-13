@@ -1,5 +1,5 @@
 # Self-hosted LangSmith on GCP
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/gcp-self-hosted)
+
 When running LangSmith on [Google Cloud Platform (GCP)](https://cloud.google.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
 
 This page provides:
@@ -52,7 +52,7 @@ After completing these initial setup steps, you can review the complete GCP arch
 
 We recommend leveraging GCP's managed services to provide a scalable, secure, and resilient platform. The following architecture applies to both self-hosted and hybrid and aligns with the [Google Cloud Well-Architected Framework](https://docs.cloud.google.com/architecture/framework):
 
-> **Image:** [Architecture diagram showing GCP relations to LangSmith services](gcp-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/LfXIN_8o8vFFKdKi/langsmith/images/gcp-architecture-self-hosted.png?fit=max&auto=format&n=LfXIN_8o8vFFKdKi&q=85&s=0d2e8479b285ddad25a0d9f649f9ab43" alt="Architecture diagram showing GCP relations to LangSmith services" width="2196" height="1489" data-path="langsmith/images/gcp-architecture-self-hosted.png" />
 
 *  **Ingress & networking**: Requests enter via [Cloud Load Balancing](https://cloud.google.com/load-balancing) within your [VPC](https://cloud.google.com/vpc), secured using [Cloud Armor](https://cloud.google.com/armor) and [IAM](https://cloud.google.com/iam)-based authentication.
 

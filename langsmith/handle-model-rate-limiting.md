@@ -1,5 +1,5 @@
 # How to handle model rate limits
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/handle-model-rate-limiting)
+
 A common issue when running large evaluation jobs is running into third-party API rate limits, usually from model providers. There are a few ways to deal with rate limits.
 
 ## Using `langchain` RateLimiters (Python only)

@@ -1,5 +1,5 @@
 # Human-in-the-loop
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop)
+
 The Human-in-the-Loop (HITL) [middleware](middleware/built-in.md#human-in-the-loop) lets you add human oversight to agent tool calls.
 When a model proposes an action that might require review—for example, writing to a file or executing SQL—the middleware can pause execution and wait for a decision.
 

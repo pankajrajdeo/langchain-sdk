@@ -1,6 +1,6 @@
 # Profile configuration
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/profile-configuration)
-Configure LangSmith SDK credentials and endpoints with a local profile file.
+
+> Configure LangSmith SDK credentials and endpoints with a local profile file.
 
 LangSmith SDK profiles let you keep [API keys](create-account-api-key.md), endpoints, and workspace IDs in a reusable JSON file instead of setting the same environment variables in every shell session.
 

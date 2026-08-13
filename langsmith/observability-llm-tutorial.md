@@ -1,6 +1,6 @@
 # Trace an LLM application tutorial
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-llm-tutorial)
-Add LangSmith observability to an LLM application across prototyping, beta testing, and production.
+
+> Add LangSmith observability to an LLM application across prototyping, beta testing, and production.
 
 In this tutorial, you will build a customer support chatbot using retrieval-augmented generation (RAG) and add LangSmith observability at each stage of development, from early prototyping through production.
 
@@ -213,9 +213,9 @@ const supportBot = traceable(async function supportBot(question: string): Promis
 
 Calling `support_bot("How many users can I have on the Starter plan?")` now produces a trace of the full RAG pipeline.
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-whole-pipeline.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=158b82743e86bc48be7ccbd2ddf79e4a" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2502" height="1244" data-path="langsmith/images/trace-whole-pipeline.png" />
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/trace-whole-pipeline-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=3aab7ffdd51cee1beefa5d02d8d0c871" alt="LangSmith UI showing a trace with an outer application span and a nested LLM call span." width="2518" height="1214" data-path="langsmith/images/trace-whole-pipeline-dark.png" />
 
 ### Check your traces from the terminal
 
@@ -450,9 +450,9 @@ With strong observability in place, you can confidently ship to production. In p
 
 In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](dashboards.md).
 
-> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=43b082b4db51b58f74d98d4d99f747cc" alt="LangSmith UI showing the monitoring page with the trace count chart and available tabs." width="2856" height="1450" data-path="langsmith/images/monitoring-page-light.png" />
 
-> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/monitoring-page-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=a5bbd0dd8f6c026cb50dabb059d4b737" alt="LangSmith UI showing the monitoring page with the trace count chart and available tabs." width="2836" height="1442" data-path="langsmith/images/monitoring-page-dark.png" />
 
 ### A/B testing
 
@@ -465,9 +465,9 @@ Because you have been logging the `llm` metadata attribute, you can group monito
 
 When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](filter-traces-in-application.md).
 
-> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-light.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=d3e8433d168cfdd019822b93d05f4420" alt="LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted." width="2838" height="814" data-path="langsmith/images/drilldown-monitoring-light.png" />
 
-> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](observability-llm-tutorial.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/EKYgNtnIIDPnseTv/langsmith/images/drilldown-monitoring-dark.png?fit=max&auto=format&n=EKYgNtnIIDPnseTv&q=85&s=a011006d13972bdf3dcbaf5326fc5ace" alt="LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted." width="2826" height="824" data-path="langsmith/images/drilldown-monitoring-dark.png" />
 
 ## Conclusion
 

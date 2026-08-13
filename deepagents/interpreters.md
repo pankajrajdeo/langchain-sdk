@@ -1,6 +1,6 @@
 # Interpreters
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/interpreters)
-Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data
+
+> Run lightweight code inside Deep Agents to compose tools, orchestrate subagents, and transform structured data
 
 Interpreters give agents a programmable, **in-memory** workspace inside the agent loop. The agent writes code to complete a task, and the runtime executes it and returns only the relevant results. Intermediate results do not become part of the model context.
 

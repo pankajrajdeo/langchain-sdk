@@ -1,6 +1,6 @@
 # Add instructions to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-instructions)
-Define the system prompt for a Managed Deep Agent in instructions.md.
+
+> Define the system prompt for a Managed Deep Agent in instructions.md.
 
 Instructions define the agent's behavior. They make up the core of the agent's system prompt. You can define them in a simple markdown file and they are picked up automatically by the agent.
 

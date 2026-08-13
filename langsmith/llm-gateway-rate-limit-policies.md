@@ -1,6 +1,6 @@
 # Rate limit policies
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies)
-Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
+
+> Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

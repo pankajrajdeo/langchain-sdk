@@ -1,5 +1,5 @@
 # Agent Server changelog
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-changelog)
+
 > [!NOTE]
 > **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/agent-server-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
@@ -1112,7 +1112,7 @@ This is not a breaking change and does not require code changes to upgrade, but 
 ## 2026-02-05
 ## v0.7.21
 
-* Support for PATCH /crons/
+* Support for PATCH /crons/{cron_id}
 
 ## 2026-02-04
 ## v0.7.19
@@ -1295,7 +1295,7 @@ This is not a breaking change and does not require code changes to upgrade, but 
 * Added functionality to enforce specific license claims for self-hosted Enterprise users, enabling remote disabling of the Agent Builder product.
 * Added a new Prune endpoint for better resource management.
 * Merged graph configuration with invoke configuration in Pregel, giving precedence to invoke settings.
-* Introduced the `include=ttl` query parameter to the GET /threads/ endpoint for optional TTL information retrieval without affecting standard read performance.
+* Introduced the `include=ttl` query parameter to the GET /threads/{id} endpoint for optional TTL information retrieval without affecting standard read performance.
 * Introduced a `keep_latest` TTL strategy to preserve the latest state while pruning older checkpoints via the core API.
 
 ## 2025-12-31

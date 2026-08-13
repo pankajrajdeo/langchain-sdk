@@ -1,10 +1,10 @@
 # Stores
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/stores)
-LangGraph stores provide cross-thread long-term memory, complementing per-thread checkpointer persistence.
+
+> LangGraph stores provide cross-thread long-term memory, complementing per-thread checkpointer persistence.
 
 Stores let agents persist information across threads, including user preferences, accumulated knowledge, and facts that should survive beyond a single conversation. Unlike [checkpointers](checkpointers.md), which save the full graph state scoped to one thread, stores hold arbitrary key-value data accessible from any thread.
 
-> **Image:** [Model of shared state](stores.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/shared_state.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=354526fb48c5eb11b4b2684a2df40d6c" alt="Model of shared state" width="1482" height="777" data-path="oss/images/shared_state.png" />
 
 > [!NOTE]
 > **Agent Server handles stores automatically**

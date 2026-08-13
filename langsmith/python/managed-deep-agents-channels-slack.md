@@ -1,6 +1,6 @@
 # Connect a Managed Deep Agent to Slack
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack)
-Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
+
+> Start Managed Deep Agents runs from Slack messages and send responses to Slack conversations.
 
 A Slack channel lets people invoke a Managed Deep Agent through app mentions, direct messages, and replies in an active Slack thread. Managed Deep Agents verifies Slack events, maps each conversation to a thread, runs the agent as the resolved caller, and posts the response back to Slack.
 
@@ -111,7 +111,7 @@ If you want to make any configuration changes to the Slack application itself, t
 
 This ensures the manifest in your mda filesystem remains as the source of truth for the Slack app.
 
-Treat `slack-app-manifest.json` as the source of truth. When you change its scopes, bot events, branding, or other settings, rerun `mda deploy . --configure-slack`, apply the regenerated `.mda/slack/app-manifest.json`, and reinstall the app if Slack requests it. The generated files under `.mda/` are build artifacts; do not commit them.
+Treat `slack-app-manifest.json` as the source of truth. When you change its scopes, bot events, branding, or other settings, rerun `mda channel add slack .`, apply the regenerated `.mda/slack/app-manifest.json`, and reinstall the app if Slack requests it. The generated files under `.mda/` are build artifacts; do not commit them.
 
 ## Configure Slack behavior
 
@@ -201,7 +201,7 @@ A Slack event runs as an identity derived from the Slack workspace and user, suc
 
 ## Deploy changes
 
-Redeploy after changing the channel declaration, secrets, or identity configuration. Include `--configure-slack` when you change `slack-app-manifest.json`, the channel name, or the deployment so MDA can regenerate the final manifest with the current Events URL. Apply the generated manifest to the existing Slack app after the deployment completes.
+Redeploy after changing the channel declaration, secrets, or identity configuration. Rerun `mda channel add slack .` when you change `slack-app-manifest.json`, the channel name, or the deployment so MDA can regenerate the final manifest with the current Events URL. Apply the generated manifest to the existing Slack app after the deployment completes.
 
 Avoid making lasting configuration changes only in the Slack dashboard. A later manifest update can replace settings that are not present in the checked-in template.
 
@@ -217,10 +217,10 @@ Avoid making lasting configuration changes only in the Slack dashboard. A later 
 
 ## Troubleshoot Slack channels
 
-* **`--configure-slack` reports that it needs exactly one channel**: Keep exactly one `channels.slack(...)` declaration in the project when using the manifest workflow.
+* **`mda channel add slack` reports that it needs exactly one channel**: Keep exactly one `channels.slack(...)` declaration in the project when using the manifest workflow.
 * **MDA cannot read the template**: Confirm `slack-app-manifest.json` is a regular JSON file at the project root. Remove credentials and any `settings.event_subscriptions.request_url`, and keep Socket Mode disabled.
 * **The first deploy writes a bootstrap manifest and exits**: This is expected when the Slack credentials do not exist yet. Create and install the app, add both credentials, then rerun the same command.
-* **MDA does not write the final manifest**: Rerun `mda deploy . --configure-slack` without `--no-wait`. The CLI needs the deployed Agent Server URL.
+* **MDA does not write the final manifest**: Run `mda deploy .` without `--no-wait`, then rerun `mda channel add slack .`. The CLI needs the deployed Agent Server URL.
 * **Slack cannot verify the request URL**: Confirm the deployment is healthy, the URL on the app's **Event Subscriptions** page matches `https://<agent-server>/channels/<name>/events`, and `SLACK_SIGNING_SECRET` belongs to that app. Redeploy after adding the Slack credentials, then apply the regenerated final manifest.
 * **Mentions do not start runs**: Subscribe to `app_mention`, add `app_mentions:read`, invite the bot to the conversation, and reinstall the app after changing scopes.
 * **Direct messages do not start runs**: Subscribe to `message.im` and add `im:history`.

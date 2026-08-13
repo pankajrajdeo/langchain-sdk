@@ -1,5 +1,5 @@
 # Experiment configuration
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/experiment-configuration)
+
 LangSmith supports several configuration options for experiments:
 
 * [Repetitions](#repetitions)

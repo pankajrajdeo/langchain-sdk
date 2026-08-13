@@ -1,5 +1,5 @@
 # How to collect user feedback for Agent Server runs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-feedback)
+
 This tutorial shows you how to collect user feedback for [Agent Server](agent-server.md) runs and automatically link them to [traces](observability-concepts.md#traces) in LangSmith. When creating a run, include the keys in the `feedback_keys` field of the request body. The response will return a pre-signed URL for each key, which your client can use to collect user feedback for the Agent Server run.
 
 LangSmith uses feedback to continuously improve the implementation of your agent. To learn more about how feedback works in LangSmith, refer to [LangSmith feedback](observability-concepts.md#feedback).

@@ -1,11 +1,9 @@
 # Streaming API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/streaming)
+
 The [LangGraph SDK](langgraph-python-sdk.md) lets you stream outputs from the [LangSmith Deployment API](server-api-ref.md) in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports resumability: if a connection drops, reconnect with the last event ID to pick up where you left off.
 
 > [!NOTE]
 > LangGraph SDK and Agent Server are a part of [LangSmith](observability.md).
-
-<a id="messages"></a>
 
 ## Basic usage
 
@@ -567,7 +565,7 @@ curl --request POST \
 
 </details>
 
-<a id="debug"></a>
+<a id="debug" />
 
 ## Debugging
 
@@ -610,6 +608,8 @@ curl --request POST \
   \"stream_mode\": \"debug\"
 }"
 ```
+
+<a id="messages" />
 
 ## LLM tokens
 

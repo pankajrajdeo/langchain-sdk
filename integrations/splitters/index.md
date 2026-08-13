@@ -1,6 +1,6 @@
 # Text splitter integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/splitters/index)
-Integrate with text splitters using LangChain.
+
+> Integrate with text splitters using LangChain.
 
 ```bash
 pip install -U langchain-text-splitters

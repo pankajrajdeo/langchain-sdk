@@ -1,6 +1,6 @@
 # Build a data analysis agent
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/data-analysis)
-Build an agent that analyzes data files, generates visualizations, and shares results
+
+> Build an agent that analyzes data files, generates visualizations, and shares results
 
 ## Overview
 
@@ -688,7 +688,7 @@ View the full [LangSmith trace](https://smith.langchain.com/public/ac2443a8-16ad
 
 The agent successfully analyzes the data and shares a comprehensive report with visualizations to Slack:
 
-> **Image:** [Sales analysis results in Slack](data-analysis.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/7KAsBk-8tguhrRJ6/images/data_analysis_slack_response.png?fit=max&auto=format&n=7KAsBk-8tguhrRJ6&q=85&s=b0a89738510117d55b35fc7a10265053" alt="Sales analysis results in Slack" width="514" height="961" data-path="images/data_analysis_slack_response.png" />
 
 > [!TIP]
 > You can download artifacts directly from the backend without using external tools:

@@ -1,6 +1,6 @@
 # Sandbox auth proxy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-auth-proxy)
-Inject credentials into outbound requests and control which destinations a sandbox can reach.
+
+> Inject credentials into outbound requests and control which destinations a sandbox can reach.
 
 The auth proxy lets sandbox code call external APIs (OpenAI, Anthropic, GitHub, etc.) without hardcoding credentials. When configured on a sandbox, a proxy sidecar automatically injects authentication headers into matching outbound requests using your workspace secrets or write-only credentials you provide in the proxy config.
 

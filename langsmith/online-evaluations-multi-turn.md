@@ -1,5 +1,5 @@
 # Set up multi-turn online evaluators
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-multi-turn)
+
 Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
 
 You can use multi-turn evaluations to measure:

@@ -1,6 +1,6 @@
 # Trace with API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-api)
-Learn how to trace LLM applications using the LangSmith REST API directly.
+
+> Learn how to trace LLM applications using the LangSmith REST API directly.
 
 This guide covers two approaches to tracing with the [REST API](smith-api-ref.md): basic tracing using the `POST /runs` and `PATCH /runs` endpoints, and batch ingestion using `POST /runs/multipart` for higher throughput.
 

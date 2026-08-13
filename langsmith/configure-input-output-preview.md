@@ -1,6 +1,6 @@
 # Configure run input and output preview
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-input-output-preview)
-Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
+
+> Customize what appears in the Input and Output columns of the Runs table by configuring custom preview paths for specific trace types.
 
 By default, LangSmith uses a heuristic to determine what to display in the **Input** and **Output** columns of your **Runs** table. However, you can customize exactly what appears in these columns by configuring custom preview paths for specific trace types.
 
@@ -26,9 +26,9 @@ When you select a trace name, LangSmith loads a successful trace example and ren
 * Item counts for arrays (e.g., (3) indicating 3 items).
 * Preview values for strings and numbers displayed inline.
 
-> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](configure-input-output-preview.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=0fbc9a7b69a70c39daaf477d93b7623a" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="586" height="651" data-path="langsmith/images/configure-preview.png" />
 
-> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](configure-input-output-preview.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/PK5r912I08t0EBD8/langsmith/images/configure-preview-dark.png?fit=max&auto=format&n=PK5r912I08t0EBD8&q=85&s=2e3c8eec7ae6ddb32c94cf3450805d9b" alt="Configure Input and Output previews side panel showing the tree view of trace data structure" width="583" height="582" data-path="langsmith/images/configure-preview-dark.png" />
 
 ### Set the path
 

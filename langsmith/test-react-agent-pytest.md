@@ -1,5 +1,5 @@
 # Test a ReAct agent with Pytest/Vitest and LangSmith
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/test-react-agent-pytest)
+
 This tutorial will show you how to use LangSmith's integrations with popular testing tools (Pytest, Vitest, and Jest) to evaluate your LLM application. We will create a ReAct agent that answers questions about publicly traded stocks and write a comprehensive test suite for it.
 
 ## Setup

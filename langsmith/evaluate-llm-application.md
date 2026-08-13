@@ -1,5 +1,5 @@
 # How to evaluate agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-llm-application)
+
 This guide shows you how to run an evaluation on an agent using the LangSmith SDK.
 
 > [!NOTE]
@@ -283,15 +283,15 @@ Metadata is a set of key-value pairs you can attach to an experiment to group an
 
 To open the **Edit Experiment** panel, hover over an experiment row in the experiments table and click the **Edit** pencil icon that appears at the right of the row.
 
-> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/KfkdDMKasYJPf8Y9/langsmith/images/experiments-table-edit-icon-light.png?fit=max&auto=format&n=KfkdDMKasYJPf8Y9&q=85&s=6f19164df2971132ae0b62bcbacdba44" alt="Experiments table with the edit pencil icon visible on a hovered row." width="1161" height="754" data-path="langsmith/images/experiments-table-edit-icon-light.png" />
 
-> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/KfkdDMKasYJPf8Y9/langsmith/images/experiments-table-edit-icon-dark.png?fit=max&auto=format&n=KfkdDMKasYJPf8Y9&q=85&s=29025193edcbd98ac178914b7d702c43" alt="Experiments table with the edit pencil icon visible on a hovered row." width="1158" height="706" data-path="langsmith/images/experiments-table-edit-icon-dark.png" />
 
 The **Edit Experiment** panel lets you update the experiment name and description, and manage metadata key-value pairs. Click **+ Add Metadata** to add a new key-value pair, then click **Submit** in the top right to save your changes.
 
-> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/KfkdDMKasYJPf8Y9/langsmith/images/edit-experiment-panel-light.png?fit=max&auto=format&n=KfkdDMKasYJPf8Y9&q=85&s=e1fe8339c6b8907186444fcfb2919e2e" alt="Edit Experiment panel showing metadata key-value pairs and the Add Metadata button." width="1314" height="1275" data-path="langsmith/images/edit-experiment-panel-light.png" />
 
-> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/KfkdDMKasYJPf8Y9/langsmith/images/edit-experiment-panel-dark.png?fit=max&auto=format&n=KfkdDMKasYJPf8Y9&q=85&s=f2abffd97fd4edcfd8e8c9eff39dedca" alt="Edit Experiment panel showing metadata key-value pairs and the Add Metadata button." width="1303" height="1264" data-path="langsmith/images/edit-experiment-panel-dark.png" />
 
 Once experiments are tagged with metadata, use the **Group by** control at the top of the experiments table to cluster experiments by any metadata field. The summary charts above the table update per group, showing average feedback scores, latency, and token usage for each configuration. This makes it easy to compare how different prompt versions, models, or other changes perform across the same dataset.
 
@@ -303,9 +303,9 @@ Each invocation of `evaluate()` creates an [experiment](evaluation-concepts.md#e
 
 Experiments run against a dataset are listed in the experiments table.
 
-> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiments-table-light.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=759df857faafe4ff749c46bc5b728537" alt="Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more." width="1785" height="598" data-path="langsmith/images/experiments-table-light.png" />
 
-> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiments-table-dark.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=e402709500d25c31f0b5ca5b6d4588fa" alt="Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more." width="1778" height="592" data-path="langsmith/images/experiments-table-dark.png" />
 
 For experiments run from the Playground or through the SDK, the **Progress** column tracks completion in real time. Progress reflects both run and evaluation status. Hover over the progress bar to view the number of runs completed and runs evaluated.
 
@@ -317,15 +317,15 @@ For experiments run from the Playground or through the SDK, the **Progress** col
 
 Click an experiment row to see scores for each example. Filter and sort by score to identify patterns in where your application performs well or poorly.
 
-> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiment-view-light.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=43f973430fc98700e15fca1ef2adbd70" alt="Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more." width="1790" height="349" data-path="langsmith/images/experiment-view-light.png" />
 
-> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiment-view-dark.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=7fdf34e0b32b25839297696000ddf488" alt="Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more." width="1789" height="353" data-path="langsmith/images/experiment-view-dark.png" />
 
 Click an example to open its details panel, which includes inputs, outputs, reference outputs, and any associated traces (if you've annotated your code for tracing).
 
-> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiment-view-details-panel-light.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=051534e90a2b76c04ab579044c817b90" alt="Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example." width="1874" height="849" data-path="langsmith/images/experiment-view-details-panel-light.png" />
 
-> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](evaluate-llm-application.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4y4TUahoyWs6oiHd/langsmith/images/experiment-view-details-panel-dark.png?fit=max&auto=format&n=4y4TUahoyWs6oiHd&q=85&s=ccc2496d1e96e9bc7f5ae3ba557ec057" alt="Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example." width="1870" height="842" data-path="langsmith/images/experiment-view-details-panel-dark.png" />
 
 ## Reference code
 

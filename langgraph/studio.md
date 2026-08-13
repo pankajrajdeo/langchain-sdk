@@ -1,5 +1,5 @@
 # LangSmith Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/studio)
+
 When building agents with LangChain locally, it's helpful to visualize what's happening inside your agent, interact with it in real-time, and debug issues as they occur. **LangSmith Studio** is a free visual interface for developing and testing your LangChain agents from your local machine.
 
 Studio connects to your locally running agent to show you each step your agent takes: the prompts sent to the model, tool calls and their results, and the final output. You can test different inputs, inspect intermediate states, and iterate on your agent's behavior without additional code or deployment.
@@ -115,7 +115,7 @@ langgraph dev
 
 Once the server is running, your agent is accessible both via API at `http://127.0.0.1:2024` and through the Studio UI at `https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024`:
 
-> **Image:** [Agent view in the Studio UI](studio.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/TCDks4pdsHdxWmuJ/oss/images/studio_create-agent.png?fit=max&auto=format&n=TCDks4pdsHdxWmuJ&q=85&s=ebd259e9fa24af7d011dfcc568f74be2" alt="Agent view in the Studio UI" width="2836" height="1752" data-path="oss/images/studio_create-agent.png" />
 
 With Studio connected to your local agent, you can iterate quickly on your agent's behavior. Run a test input, inspect the full execution trace including prompts, tool arguments, return values, and token/latency metrics in [LangSmith](../langsmith/observability-studio.md). When something goes wrong, Studio captures exceptions with the surrounding state to help you understand what happened.
 
@@ -132,7 +132,7 @@ For more information on how to run Studio, refer to the following guides in the 
 
 ## Video guide
 
-> **Embedded Content:** Studio — [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/studio).
+> **Embedded Content:** [Studio](https://www.youtube.com/embed/Mi1gSlHwZLM?si=zA47TNuTC5aH0ahd)
 
 ***
 

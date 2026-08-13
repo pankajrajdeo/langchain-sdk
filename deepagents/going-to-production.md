@@ -1,6 +1,6 @@
 # Going to production
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/going-to-production)
-Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
+
+> Take your deep agent to production with persistent memory, sandboxes, resilience middleware, and deployment options
 
 This guide covers considerations for taking a deep agent from a local prototype to a production deployment. It walks through scoping memory, configuring execution environments, adding guardrails, and connecting a frontend.
 
@@ -24,7 +24,7 @@ This page covers:
 
 ## LangSmith Deployments
 
-> **Image:** [Managed Deep Agents packages your agent configuration, tools, and runtime settings for LangSmith](going-to-production.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/deepagents-deploy-config.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=5c3f2961994afe5fe67a2f5c9e9ba7ac" alt="Managed Deep Agents packages your agent configuration, tools, and runtime settings for LangSmith" width="1100" height="950" data-path="oss/images/deepagents/production/deepagents-deploy-config.png" />
 
 The recommended path for taking a Deep Agent to production is [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md), a CLI-first hosted runtime for creating, running, and operating deep agents in LangSmith. Managed Deep Agents is currently in private preview ([join the waitlist](https://www.langchain.com/langsmith-managed-deep-agents-waitlist)). For teams that need custom application code, custom routes, advanced authentication, you can configure a [LangSmith Deployment](../langsmith/deployment.md) directly. Either path provisions the infrastructure your agent needs: [threads](../langsmith/use-threads.md), [runs](../langsmith/runs.md), a store, and a checkpointer, so you don't have to set these up yourself. A traditional LangSmith Deployment also gives you [authentication](../langsmith/auth.md), [webhooks](../langsmith/use-webhooks.md), [cron jobs](../langsmith/cron-jobs.md), and [observability](../langsmith/observability.md) out of the box, and can expose your agent via [MCP](../langsmith/server-mcp.md) or [A2A](../langsmith/server-a2a.md).
 
@@ -306,7 +306,7 @@ async for chunk in client.runs.stream(
 
 When your agent serves multiple users, you need to handle three concerns: verifying who each user is, controlling what they can access, and managing the credentials the agent uses to act on their behalf.
 
-> **Image:** [Three authentication layers compose: end-user auth, agent-acting-as-user auth, and team RBAC](going-to-production.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/auth-layers.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=11137d8bae74093c459416fd3e541d68" alt="Three authentication layers compose: end-user auth, agent-acting-as-user auth, and team RBAC" width="2000" height="1060" data-path="oss/images/deepagents/production/auth-layers.png" />
 
 <a id="example-syncing-skills-and-memories-with-custom-middleware"></a>
 
@@ -379,7 +379,7 @@ When building for production:
 
 Deep Agents run on LangGraph, which provides durable execution out of the box. The [persistence](../langgraph/persistence.md) layer checkpoints state at each step, so a run interrupted by a failure, timeout, or [human-in-the-loop](../langgraph/interrupts.md) pause resumes from its last recorded state without reprocessing previous steps. For long-running deep agents that spawn many subagents, this means a mid-run failure doesn't lose completed work.
 
-> **Image:** [Durable execution: when a worker crashes mid-run, another worker picks the run up from the latest checkpoint](going-to-production.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/durable-execution.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=d3bfd69460769dba142c68c7a20ae43b" alt="Durable execution: when a worker crashes mid-run, another worker picks the run up from the latest checkpoint" width="962" height="545" data-path="oss/images/deepagents/production/durable-execution.png" />
 
 Checkpointing also enables:
 
@@ -394,7 +394,7 @@ Checkpointing also enables:
 
 Without memory, every conversation starts from scratch. Memory lets your agent retain information across conversations (user preferences, learned instructions, past experiences) so it can personalize its behavior over time. For an overview of memory types, see the [memory concepts guide](../concepts/memory.md).
 
-> **Image:** [Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store](going-to-production.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/memory.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=3ec585271dcd8d62e0207d79d68c296b" alt="Short-term memory is scoped to a single thread via checkpoints; long-term memory persists across threads via the store" width="1920" height="1160" data-path="oss/images/deepagents/production/memory.png" />
 
 ### Scoping
 
@@ -784,7 +784,7 @@ Sandboxes are isolated containers, so environment variables from your host aren'
 
 **Auth proxy (recommended).** The [sandbox auth proxy](../langsmith/sandbox-auth-proxy.md) intercepts outbound requests from the sandbox and injects authentication headers automatically. Sandbox code calls external APIs normally, and the proxy adds the correct credentials based on the destination host. This means API keys never appear in sandbox code, environment variables, or logs.
 
-> **Image:** [The sandbox auth proxy injects credentials into outbound requests so secrets never enter the sandbox](going-to-production.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/9oyV6nbtSbBRfaE1/oss/images/deepagents/production/sandbox-auth-proxy.png?fit=max&auto=format&n=9oyV6nbtSbBRfaE1&q=85&s=632c4a493f1d5928e41c6865ab86d1da" alt="The sandbox auth proxy injects credentials into outbound requests so secrets never enter the sandbox" width="2110" height="1040" data-path="oss/images/deepagents/production/sandbox-auth-proxy.png" />
 
 ```json
 {

@@ -1,5 +1,5 @@
 # Connect to a custom model
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-endpoint)
+
 The Playground allows you to use your own custom models. You can deploy a model server that exposes your model's API via [LangServe](https://github.com/langchain-ai/langserve), an open source library for serving LangChain applications. Behind the scenes, the Playground will interact with your model server to generate responses.
 
 ## Deploy a custom model server
@@ -33,7 +33,7 @@ Once you have deployed a model server, you can use it in the Playground. Enter t
 
 Enter the `URL`. The Playground will automatically detect the available endpoints and configurable fields. You can then invoke the model with the desired parameters.
 
-> **Image:** [ChatCustomModel in Playground](custom-endpoint.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/playground-custom-model.png?fit=max&auto=format&n=H9jA2WRyA-MV4-H0&q=85&s=7a2889af5f55cc73661033837a50fad6" alt="ChatCustomModel in Playground" width="2816" height="1676" data-path="langsmith/images/playground-custom-model.png" />
 
 If everything is set up correctly, you should see the model's response in the Playground as well as the configurable fields specified in the `with_configurable_fields`.
 

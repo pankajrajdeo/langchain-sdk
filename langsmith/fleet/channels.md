@@ -1,6 +1,6 @@
 # Channels
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/channels)
-Configure channels to trigger your Fleet agents automatically.
+
+> Configure channels to trigger your Fleet agents automatically.
 
 Channels define when your agent starts running. Connect your agent to external events so it responds automatically to messages, emails, or other events.
 

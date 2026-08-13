@@ -1,6 +1,6 @@
 # OpenWiki
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/overview)
-CLI that writes and maintains agent wikis so coding agents work faster
+
+> CLI that writes and maintains agent wikis so coding agents work faster
 
 OpenWiki is an open source CLI that writes and maintains a Markdown wiki about your codebase or personal knowledge. The wiki captures details such as architecture, integrations, evals, and workflows so [coding agents](../deepagents/overview.md) can use it as durable context instead of rediscovering the repository on every task.
 

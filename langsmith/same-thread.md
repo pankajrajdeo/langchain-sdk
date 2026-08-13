@@ -1,5 +1,5 @@
 # How to run multiple assistants on the same thread
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/same-thread)
+
 In LangSmith Deployment, a thread is not explicitly associated with a particular assistant.
 This means that you can run multiple assistants on the same thread, which allows a different assistant to continue from an initial assistant's progress.
 

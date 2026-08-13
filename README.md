@@ -17,8 +17,11 @@ SDK categories and nested pages are discovered and created automatically.
 
 Discovery starts with `llms.txt` and `llms-full.txt`, then combines the
 LangChain sitemap, configured entry points, and recursive links found inside
-downloaded Markdown. This lets newly published URL categories and arbitrarily
-deep subdirectories appear automatically on the next run.
+downloaded Markdown. Each page's dedicated `.md` endpoint is the authoritative
+content source; `llms-full.txt` is retained as a fallback if that endpoint is
+temporarily unavailable. This lets newly published URL categories and
+arbitrarily deep subdirectories appear automatically on the next run without
+being held back by a stale aggregate index.
 
 The updater converts Mintlify MDX into GitHub Flavored Markdown. Tabs, code
 groups, callouts, cards, accordions, file trees, prompts, interactive embeds,

@@ -1,5 +1,5 @@
 # Application structure
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/application-structure)
+
 To deploy on LangSmith, an application must consist of one or more graphs, a configuration file (`langgraph.json`), a file that specifies dependencies, and an optional `.env` file that specifies environment variables.
 
 This page explains how a LangSmith application is organized and how to provide the configuration details required for deployment.
@@ -71,7 +71,7 @@ my-app/
 > [!NOTE]
 > The directory structure of an application can vary depending on the programming language and the package manager used.
 
-<a id="configuration-file-concepts"></a>
+<a id="configuration-file-concepts" />
 
 ## Configuration file
 

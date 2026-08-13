@@ -1,5 +1,5 @@
 # Authentication methods
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/authentication-methods)
+
 LangSmith supports multiple authentication methods for easy sign-up and login.
 
 ## Cloud

@@ -1,6 +1,6 @@
 # LangSmith CLI
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-cli)
-Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
+
+> Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
 
 The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs JSON by default for scripting, with a `--format pretty` option for human-readable tables. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](observability-concepts.md).
 

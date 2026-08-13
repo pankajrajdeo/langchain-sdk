@@ -1,6 +1,6 @@
 # Azure Terraform quick reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-quick-reference)
-Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS.
+
+> Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith self-hosted on AKS.
 
 Command cheat sheet for day-to-day operations against an Azure LangSmith deployment provisioned with the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure). All `make` targets run from `modules/azure/`. Run `make help` for an inline summary.
 

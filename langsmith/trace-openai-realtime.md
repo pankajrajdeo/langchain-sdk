@@ -1,6 +1,6 @@
 # Trace OpenAI Realtime applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-openai-realtime)
-Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
+
+> Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
 
 > [!NOTE]
 > This integration is in beta, so its API may change.

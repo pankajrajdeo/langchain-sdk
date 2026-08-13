@@ -1,5 +1,5 @@
 # Data storage and privacy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-storage-and-privacy)
+
 This document describes how data is processed in the LangGraph CLI and the Agent Server for both the in-memory server (`langgraph dev`) and the local Docker server (`langgraph up`). It also describes what data is tracked when interacting with the hosted Studio frontend.
 
 ## CLI
@@ -9,6 +9,8 @@ LangGraph **CLI** is the command-line interface for building and running LangGra
 By default, calls to most CLI commands log a single analytics event upon invocation. This helps us better prioritize improvements to the CLI experience. Each telemetry event contains the calling process's OS, OS version, Python version, the CLI version, the command name (`dev`, `up`, `run`, etc.), and booleans representing whether a flag was passed to the command. For more information, see the [full analytics logic](https://github.com/langchain-ai/langgraph/blob/main/libs/cli/langgraph-cli/analytics.py).
 
 You can disable all CLI telemetry by setting `LANGGRAPH_CLI_NO_ANALYTICS=1`.
+
+<a id="in-memory-docker" />
 
 ## Agent Server
 
@@ -21,9 +23,13 @@ When running the Agent server (either in-memory or in Docker), LangSmith tracing
 > [!NOTE]
 > For more granular control, you can use [conditional tracing](conditional-tracing.md) to selectively enable or disable tracing based on runtime conditions, such as client requirements or data sensitivity.
 
+<a id="langgraph-dev" />
+
 ### In-memory development server
 
 `langgraph dev` runs an [in-memory development server](local-dev-testing.md) as a single Python process, designed for quick development and testing. It saves all checkpointing and memory data to disk within a `.langgraph_api` directory in the current working directory. Apart from the telemetry data described in the [CLI](#cli) section, no data leaves the machine unless you have enabled tracing or your graph code explicitly contacts an external service.
+
+<a id="langgraph-up" />
 
 ### Standalone Server
 

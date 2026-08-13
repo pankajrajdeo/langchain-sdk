@@ -1,6 +1,6 @@
 # Use subagents in Deep Agents Code
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/subagents)
-Define custom Deep Agents Code subagents as AGENTS.md files with YAML frontmatter. Covers project and user paths, optional model overrides, and examples.
+
+> Define custom Deep Agents Code subagents as AGENTS.md files with YAML frontmatter. Covers project and user paths, optional model overrides, and examples.
 
 Define custom synchronous [subagents](../subagents.md) as markdown files so Deep Agents Code can delegate specialized tasks to them.
 
@@ -47,7 +47,7 @@ To trigger dynamic subagents, ask for a "workflow". Instead of doing the work it
 
 As subagents spawn, `dcode` shows them live in the dynamic subagents panel, grouped into phases by dispatch.
 
-> **Image:** [The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch](subagents.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/mcM5dSw40KzBUENf/oss/images/deepagents/dcode-dynamic-subagents-panel.png?fit=max&auto=format&n=mcM5dSw40KzBUENf&q=85&s=bc20632b54e21fecfc5ff4f8d169a2c7" alt="The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch" width="3134" height="1832" data-path="oss/images/deepagents/dcode-dynamic-subagents-panel.png" />
 
 You can also use dynamic subagents in the coding agent of your choice over [ACP](../acp.md) (for example, Zed).
 

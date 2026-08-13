@@ -1,6 +1,6 @@
 # Deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/deploy)
-Deploy LangGraph agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
+
+> Deploy LangGraph agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
 
 When you are ready to deploy your LangGraph agent to production, choose a hosting model that fits your stack. **[LangSmith Cloud](../langsmith/deploy-to-cloud.md)** provides fully managed infrastructure for stateful, long-running agents with persistent state and background execution.
 

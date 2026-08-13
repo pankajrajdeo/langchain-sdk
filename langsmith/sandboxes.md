@@ -1,21 +1,25 @@
 # LangSmith Sandboxes
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandboxes)
-Use LangSmith managed sandboxes to safely execute code and interact with the filesystem in isolated environments.
+
+> Use LangSmith managed sandboxes to safely execute code and interact with the filesystem in isolated environments.
 
 Sandboxes are isolated environments that allow agents to safely execute potentially risky operations, like running arbitrary code or interacting with the filesystem, without affecting your main infrastructure.
 
 From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-sandboxes), select **Sandboxes** to manage all your sandbox resources.
 
-> **Image:** [Sandboxes overview page](sandboxes.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/5nd3ca6haxRbnJZj/images/langsmith/sandboxes/sb-overview.png?fit=max&auto=format&n=5nd3ca6haxRbnJZj&q=85&s=6c2848ea69c0a99cbdd0930ceb91daa5" alt="Sandboxes overview page" width="2846" height="1936" data-path="images/langsmith/sandboxes/sb-overview.png" />
 
 ## Environment availability
 
-| Environment                           | Status              |
-| ------------------------------------- | ------------------- |
-| GCP US (`smith.langchain.com`)        | Generally available |
-| GCP EU (`eu.smith.langchain.com`)     | Generally available |
-| GCP APAC (`apac.smith.langchain.com`) | Generally available |
-| AWS US (`aws.smith.langchain.com`)    | Generally available |
+| Environment                                   | Status              |
+| --------------------------------------------- | ------------------- |
+| GCP US (`smith.langchain.com`)                | Generally available |
+| GCP EU (`eu.smith.langchain.com`)             | Generally available |
+| GCP APAC (`apac.smith.langchain.com`)         | Generally available |
+| AWS US (`aws.smith.langchain.com`)            | Generally available |
+| [BYOC](byoc.md) (your data plane URL) | Generally available |
+
+> [!WARNING]
+> On BYOC, use an API key that belongs to a BYOC workspace.
 
 For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](deploy-self-hosted-full-platform.md#enable-sandboxes).
 

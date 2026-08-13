@@ -1,6 +1,6 @@
 # LangSmith for Enterprise
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/enterprise)
-Hosting options, access control, data privacy, cost controls, and security compliance for Enterprise users.
+
+> Hosting options, access control, data privacy, cost controls, and security compliance for Enterprise users.
 
 This page is a reference hub for enterprise teams and includes information on features that are important for your organization, like [hosting options](#hosting-options), [access control](#access-control), [data privacy](#data-privacy-and-pii), and [cost controls](#cost-controls-and-usage).
 

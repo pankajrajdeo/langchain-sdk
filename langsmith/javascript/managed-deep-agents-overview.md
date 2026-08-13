@@ -1,42 +1,51 @@
 # Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-overview)
-Overview of Managed Deep Agents public beta features, workflows, and limits.
 
-Managed Deep Agents lets you define an agent as a folder and run it on managed LangSmith infrastructure. You provide the business logic, and Managed Deep Agents provides the agent harness and production infrastructure.
+> Build your agent as a directory of files while LangSmith runs the harness and runtime.
 
-## Define your agent
+Managed Deep Agents (MDA) is the simplest way to build and deploy production agents. You focus on what your agent does. MDA runs it. There are no servers to run and no infrastructure to wire together.
 
-An agent starts as a project folder that contains the business logic for its behavior:
+You write the agent's intelligence: its instructions, the tools it can call, the skills it follows and you select the model that drives it. MDA provides everything underneath:
 
-* **[Instructions](managed-deep-agents-instructions.md)**: The prompt that defines what the agent does and how it behaves.
-* **[Tools](managed-deep-agents-tools.md)**: Functions the agent can call to interact with other systems or take actions.
-* **[MCP connectors](managed-deep-agents-mcp-connectors.md)**: Remote MCP servers that provide tools to the agent.
-* **[Skills](managed-deep-agents-skills.md)**: Reusable, task-specific instructions and resources.
+* **The Deep Agents harness**: The agent loop that plans, calls tools, manages a filesystem, and delegates to subagents. See [Deep Agents](https://docs.langchain.com/oss/javascript/deepagents/overview).
+* **A managed runtime**: LangSmith Agent Server hosts and operates the agent, and keeps sessions running across restarts.
 
-You can add other capabilities as needed. For the complete folder layout, see [Project structure](managed-deep-agents-project-structure.md).
+## Example agent
 
-## Run on a managed harness
+A managed deep agent, consists of a project folder, which contains the business logic for its behavior:
 
-Managed Deep Agents combines three layers:
+When you upload this folder with the `mda` CLI, it will automatically run on managed LangSmith infrastructure.
+You provide the business logic, and Managed Deep Agents provides the agent harness and production infrastructure.
 
-* **Your business logic**: The instructions, tools, and skills in your project folder.
-* **Agent harness**: The battle-tested [Deep Agents harness](https://docs.langchain.com/oss/javascript/deepagents/overview) that runs the agent and connects its business logic.
-* **Managed infrastructure**: LangSmith infrastructure that operates the agent at scale for production and multi-user applications.
+To get started, see the [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md).
 
-This separation lets you focus on what the agent should do instead of building and operating the systems required to run it.
+## Core capabilities
 
-## Managed infrastructure
+Each part of the agent maps to a file or directory. Add the ones your agent needs:
 
-The opinionated infrastructure consists of several pieces:
+| Capability                                                                            | Path              | Description                                                                              |
+| ------------------------------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------- |
+| [Model and configuration](managed-deep-agents-agent-definition.md) | `agent.ts`        | The model and core options. Required.                                                    |
+| [Instructions](managed-deep-agents-instructions.md)                | `instructions.md` | The system prompt that defines how the agent behaves.                                    |
+| [Skills](managed-deep-agents-skills.md)                            | `skills/`         | Task-specific playbooks the agent loads when they are relevant.                          |
+| [Tools](managed-deep-agents-tools.md)                              | `tools/`          | Functions the agent calls to run your application logic or reach external services.      |
+| [MCP connectors](managed-deep-agents-mcp-connectors.md)            | `connectors/`     | Remote MCP servers that provide tools to the agent.                                      |
+| [Middleware](managed-deep-agents-middleware.md)                    | `middleware/`     | Custom logic that runs around model and tool calls.                                      |
+| [Sandbox](managed-deep-agents-sandboxes.md)                        | `sandbox/`        | An isolated filesystem and shell for running agent-written code.                         |
+| [Memory](managed-deep-agents-memory.md)                            | `memory.ts`       | Preferences and knowledge that persist across threads.                                   |
+| [Identity](managed-deep-agents-identity.md)                        | `identity.ts`     | Per-caller private threads, memory, and credentials for multi-user deployments.          |
+| [Channels](managed-deep-agents-channels.md)                        | `channels/`       | Connections to messaging services, such as Slack, that start runs and receive responses. |
+| [Schedules](managed-deep-agents-schedules.md)                      | `schedules/`      | Managed cron schedules that run the agent on a recurring basis.                          |
+| [Evals](managed-deep-agents-evals.md)                              | `evals/`          | Harbor-style tasks that test the agent.                                                  |
 
-* **Runtime**: [LangSmith Agent Server](../agent-server.md) runs agents in a durable, fault-tolerant manner.
-* **Sandboxes**: [LangSmith Sandboxes](../sandboxes.md) let agents write and execute untrusted code in an isolated environment.
-* **Evals**: Managed Deep Agents uses [Harbor tasks](managed-deep-agents-evals.md) to test agent behavior.
-* **Channels**: The [channels abstraction](managed-deep-agents-channels.md) connects an agent to platforms where its users work.
-* **Memory**: [Managed memory](managed-deep-agents-memory.md) lets agents remember information across interactions.
-* **Context management**: [LangSmith Context Hub](../use-the-context-hub.md) manages agent instructions and skills. You can update them in the LangSmith UI without redeploying the agent.
+For the full layout, see [Project structure](managed-deep-agents-project-structure.md).
 
-To create and deploy an agent, follow the [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md).
+## Next steps
+
+#### [Quickstart](managed-deep-agents-quickstart.md)
+Create and deploy your first Managed Deep Agent with the `mda` CLI.
+
+#### [Tutorial](managed-deep-agents-tutorial.md)
+Add durable memory and a daily schedule to the quickstart research assistant.
 
 ***
 

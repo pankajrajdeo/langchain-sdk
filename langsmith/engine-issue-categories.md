@@ -1,6 +1,6 @@
 # LangSmith Engine issue categories
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-issue-categories)
-Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples.
+
+> Reference for the issue categories LangSmith Engine assigns to detected issues, including descriptions and examples.
 
 When [LangSmith Engine](engine.md) detects a recurring issue in your traces, it tags the issue with a category. This page lists every category Engine assigns, with a description and concrete example for each. Engine automatically scans your traces and assigns the best-fitting category to each detected issue.
 

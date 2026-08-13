@@ -1,5 +1,5 @@
 # Automatically run evaluators on experiments
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset)
+
 LangSmith supports two ways to grade experiments created via the SDK:
 
 * **Programmatically**, by specifying evaluators in your code (see [How to evaluate an LLM application](evaluate-llm-application.md) for details)

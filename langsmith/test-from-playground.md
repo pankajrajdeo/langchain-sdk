@@ -1,6 +1,6 @@
 # Test from the Playground
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/test-from-playground)
-Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
+
+> Test prompts and model configurations over datasets in the LangSmith Playground without writing code.
 
 The [Playground](prompt-engineering-concepts.md#playground) provides an interface for iterating on and testing prompts and model configurations. Test a prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without writing any code.
 

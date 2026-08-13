@@ -1,5 +1,5 @@
 # Trace query syntax
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-query-syntax)
+
 The [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and [REST API](smith-api-ref.md) let you filter, query, and export [runs](observability-concepts.md#runs) programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments and query language, with examples for common queries.
 
 For runnable end-to-end examples that combine these filters with the SDK, refer to [Query traces using the SDK](export-traces.md).

@@ -1,5 +1,5 @@
 # Access the current run (span) within a traced function
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/access-current-span)
+
 In some cases you will want to access the current run (span) within a traced function. This can be useful for extracting UUIDs, tags, or other information from the current run.
 
 You can access the current run by calling the `get_current_run_tree`/`getCurrentRunTree` function in the Python or TypeScript SDK, respectively.

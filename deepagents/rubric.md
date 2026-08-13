@@ -1,6 +1,6 @@
 # Grading rubrics
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/rubric)
-LLM-as-a-judge grading for agents that iterate against a rubric until done
+
+> LLM-as-a-judge grading for agents that iterate against a rubric until done
 
 > [!NOTE]
 > `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](../versioning.md); the API may change in the future.

@@ -1,6 +1,6 @@
 # Overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/frontend/overview)
-Render LangGraph agents to the frontend
+
+> Render LangGraph agents to the frontend
 
 Build frontends that visualize LangGraph pipelines in real time. These patterns
 show how to render multi-step graph execution with per-node status and streaming

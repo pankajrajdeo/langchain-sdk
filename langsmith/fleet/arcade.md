@@ -1,6 +1,6 @@
 # Arcade integration
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/arcade)
-Connect your workspace to Arcade to give agents access to third-party tools like GitHub, Gmail, Slack, and more.
+
+> Connect your workspace to Arcade to give agents access to third-party tools like GitHub, Gmail, Slack, and more.
 
 [Arcade](https://arcade.dev) provides managed MCP gateways that give your agents access to thousands of third-party tools behind a single integration. Supported services span email, calendars, code hosting, project management, CRM, messaging, search, and more, including GitHub, Gmail, Google Drive, Slack, Notion, Jira, Salesforce, Linear, and HubSpot.
 

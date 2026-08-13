@@ -1,5 +1,5 @@
 # Add custom authentication
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-auth)
+
 This guide shows you how to add custom authentication to your LangSmith application. The steps on this page apply to both [cloud](cloud.md) and [self-hosted](self-hosted.md) deployments. It does not apply to isolated usage of the [LangGraph open source library](../langgraph/overview.md) in your own custom server.
 
 ## Add custom authentication to your deployment

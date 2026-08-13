@@ -1,6 +1,6 @@
 # Manage LangSmith with Terraform
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-with-terraform)
-Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code.
+
+> Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code.
 
 The official [LangSmith Terraform provider](https://registry.terraform.io/providers/langchain-ai/langsmith/latest) lets you manage LangSmith organization and workspace resources as code: workspaces, custom roles, organization and workspace members, resource tags, access policies, evaluators, run rules, and alert rules. It is the infrastructure-as-code counterpart to [managing your organization using the API](manage-organization-by-api.md).
 

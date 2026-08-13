@@ -1026,18 +1026,29 @@ def discover_seed_urls(timeout: float) -> tuple[set[str], dict[str, bytes], list
 
 
 def download_one(page_url: str, timeout: float, full_pages: dict[str, bytes]) -> Download:
-    if page_url in full_pages:
-        raw_body = full_pages[page_url]
+    def llms_full_fallback() -> Download | None:
+        raw_body = full_pages.get(page_url)
+        if raw_body is None:
+            return None
         return Download(
             page_url=page_url,
             final_url=LLMS_FULL_URL,
             raw_body=raw_body,
-            content_source="llms-full.txt",
+            content_source="llms-full.txt-fallback",
         )
+
+    # llms-full.txt is an excellent discovery index, but it can lag behind a
+    # page's dedicated Markdown endpoint. Always request the page itself first
+    # so edits and newly added heading anchors arrive on the next mirror run.
     try:
         raw_body, final_url, content_type = request_bytes(markdown_url(page_url), timeout)
         if urlsplit(final_url).netloc.lower() != "docs.langchain.com":
-            return Download(page_url=page_url, final_url=final_url, skipped="redirects outside docs.langchain.com")
+            fallback = llms_full_fallback()
+            return fallback or Download(
+                page_url=page_url,
+                final_url=final_url,
+                skipped="redirects outside docs.langchain.com",
+            )
         prefix = raw_body[:200].lstrip().lower()
         if content_type == "text/html" or prefix.startswith((b"<!doctype html", b"<html")):
             raise RuntimeError("server returned HTML instead of Markdown")
@@ -1048,9 +1059,15 @@ def download_one(page_url: str, timeout: float, full_pages: dict[str, bytes]) ->
             raw_body=raw_body,
         )
     except ExternalRedirect as exc:
-        return Download(page_url=page_url, final_url=exc.url, skipped="redirects outside docs.langchain.com")
+        fallback = llms_full_fallback()
+        return fallback or Download(
+            page_url=page_url,
+            final_url=exc.url,
+            skipped="redirects outside docs.langchain.com",
+        )
     except (RuntimeError, UnicodeDecodeError) as exc:
-        return Download(page_url=page_url, error=str(exc))
+        fallback = llms_full_fallback()
+        return fallback or Download(page_url=page_url, error=str(exc))
 
 
 def links_from(download: Download) -> set[str]:
@@ -1077,7 +1094,7 @@ def links_from(download: Download) -> set[str]:
     text = "\n".join(renderable_lines)
     final_page = (
         download.page_url
-        if download.content_source == "llms-full.txt"
+        if download.content_source.startswith("llms-full.txt")
         else (download.final_url or download.page_url).removesuffix(".md")
     )
     candidates: Iterable[str] = (
@@ -1274,7 +1291,12 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
     for page in completed:
         section_counts[section_for(page).prefix] += 1
     print(f"Mirrored {len(files)} pages ({changed} changed, {len(removed)} stale removed).")
-    print(f"Used llms-full.txt for {sum(r.content_source == 'llms-full.txt' for r in completed.values())} pages.")
+    print(
+        "Used page-specific Markdown for "
+        f"{sum(r.content_source == 'page-markdown' for r in completed.values())} pages; "
+        "llms-full.txt fallback for "
+        f"{sum(r.content_source == 'llms-full.txt-fallback' for r in completed.values())}."
+    )
     print("Scopes: " + ", ".join(f"{name}={count}" for name, count in section_counts.items()))
     if discovery_errors:
         print("Discovery warnings:", file=sys.stderr)

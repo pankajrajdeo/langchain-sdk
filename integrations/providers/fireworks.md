@@ -1,6 +1,6 @@
 # Fireworks integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/fireworks)
-Integrate with Fireworks AI using LangChain Python.
+
+> Integrate with Fireworks AI using LangChain Python.
 
 [Fireworks AI](https://fireworks.ai/) hosts open and proprietary language models with fast inference. The `langchain-fireworks` package implements LangChain chat and embedding interfaces for the Fireworks API.
 

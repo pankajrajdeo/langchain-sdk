@@ -1,5 +1,5 @@
 # Troubleshoot trace nesting
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/nest-traces)
+
 When tracing with the LangSmith SDK, LangGraph, and LangChain, tracing should automatically propagate the correct context so that code executed within a parent trace will be rendered in the expected location in the UI.
 
 If you see a child run go to a separate trace (and appear on the top level), it may be caused by one of the following known "edge cases".

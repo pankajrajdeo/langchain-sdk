@@ -1,5 +1,5 @@
 # How to use the REST API
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-evals-api-only)
+
 The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](evaluation-concepts.md) in LangSmith. They include optimizations and features that enhance performance and reliability.
 
 If you cannot use the SDKs—for example, if you are working in a different language or a restricted environment—you can use the REST API directly. This guide demonstrates how to run evaluations using the [REST API](smith-api-ref.md) with Python's [`requests`](https://requests.readthedocs.io/) library, but the same principles apply to any language.

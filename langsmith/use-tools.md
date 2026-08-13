@@ -1,5 +1,5 @@
 # Use tools in a prompt
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-tools)
+
 Tools allow language models to interact with external systems and perform actions beyond just generating text. In the Playground, you can use two types of tools:
 
 1. [**Built-in tools**](#built-in-tools): Pre-configured tools provided by model providers (like OpenAI and Anthropic) that are ready to use. Use built-in tools when you need common capabilities like web search or code interpretation.
@@ -31,16 +31,16 @@ The Playground lets you quickly [add tools](#add-a-tool) to any prompt with a si
 
 To add a tool to your prompt, click the **+ Tool** button at the bottom of the prompt editor.
 
-> **Image:** [The prompt interface with the + Tool button following the editing boxes.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/8MkMsKDgPnLdByVh/langsmith/images/add-tool-light.png?fit=max&auto=format&n=8MkMsKDgPnLdByVh&q=85&s=e2e0487ec8c22be3d806202a88cee623" alt="The prompt interface with the + Tool button following the editing boxes." width="644" height="316" data-path="langsmith/images/add-tool-light.png" />
 
-> **Image:** [The prompt interface with the + Tool button following the editing boxes.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/8MkMsKDgPnLdByVh/langsmith/images/add-tool-dark.png?fit=max&auto=format&n=8MkMsKDgPnLdByVh&q=85&s=b53652f98ef394be849bde93098f4571" alt="The prompt interface with the + Tool button following the editing boxes." width="642" height="311" data-path="langsmith/images/add-tool-dark.png" />
 
 ### Use a built-in tool
 
 1. In the tool section, select the built-in tool you want to use. You'll only see the tools that are compatible with the provider and model you've chosen.
 2. When the model calls the tool, the Playground will display the response.
 
-> **Image:** [Web search tool](use-tools.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/1RIJxfRpkszanJLL/langsmith/images/web-search-tool.gif?s=2fb882f785abc26d0e5412557cc982ca" alt="Web search tool" width="1036" height="720" data-path="langsmith/images/web-search-tool.gif" />
 
 ### Create a custom tool
 
@@ -50,11 +50,11 @@ To create a custom tool, you'll need to provide:
 * **Description**: Clear explanation of what the tool does.
 * **Arguments**: The inputs your tool requires.
 
-> **Image:** [Custom tool](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/custom-tool.gif?s=69638e515cd7c5be413cf13348e10974" alt="Custom tool" width="1028" height="720" data-path="langsmith/images/custom-tool.gif" />
 
 When running a custom tool in the Playground, the model will respond with a JSON object containing the tool name and the tool call.
 
-> **Image:** [Tool call](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ImHGLQW1HnQYwnJV/langsmith/images/tool-call.png?fit=max&auto=format&n=ImHGLQW1HnQYwnJV&q=85&s=44458ff5a2790122ffd7e8b62bf14032" alt="Tool call" width="1488" height="747" data-path="langsmith/images/tool-call.png" />
 
 ### Manage tools with the registry
 
@@ -67,9 +67,9 @@ Click the **+ Tool** button in the Playground to open **Manage tools**. You can 
 * Edit existing tools by clicking on them in the list.
 * Delete tools using the **Delete** at the bottom of **Manage tools**.
 
-> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/DLQJsqCmBpQwR_BQ/langsmith/images/tool-registry-manage-light.png?fit=max&auto=format&n=DLQJsqCmBpQwR_BQ&q=85&s=8dcd79666a6d90b31cdd26ebee9a8504" alt="Manage tools with a list of available tools, Enabled switch, and edit functionality." width="863" height="807" data-path="langsmith/images/tool-registry-manage-light.png" />
 
-> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/DLQJsqCmBpQwR_BQ/langsmith/images/tool-registry-manage-dark.png?fit=max&auto=format&n=DLQJsqCmBpQwR_BQ&q=85&s=50e598a0e4f02397b214c94da0460ab7" alt="Manage tools with a list of available tools, Enabled switch, and edit functionality." width="858" height="815" data-path="langsmith/images/tool-registry-manage-dark.png" />
 
 Tools are stored with their complete configuration including name, description, parameters, and metadata. The registry supports both custom function tools and built-in tool configurations.
 
@@ -83,9 +83,9 @@ Some models provide control over which tools are called. To configure this:
 
 To understand the available tool choice options, check the documentation for your specific provider. For example, [OpenAI's documentation on tool choice](https://platform.openai.com/docs/guides/function-calling/function-calling-behavior?api-mode=responses#tool-choice).
 
-> **Image:** [Select tools from the Tool Choice Settings tab.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/DLQJsqCmBpQwR_BQ/langsmith/images/tool-choice-light.png?fit=max&auto=format&n=DLQJsqCmBpQwR_BQ&q=85&s=d617d46d139efe842b8fc630db4d5318" alt="Select tools from the Tool Choice Settings tab." width="1732" height="1156" data-path="langsmith/images/tool-choice-light.png" />
 
-> **Image:** [Select tools from the Tool Choice Settings tab.](use-tools.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/DLQJsqCmBpQwR_BQ/langsmith/images/tool-choice-dark.png?fit=max&auto=format&n=DLQJsqCmBpQwR_BQ&q=85&s=1a1305cd31d20af587e328b4177da55d" alt="Select tools from the Tool Choice Settings tab." width="1724" height="1118" data-path="langsmith/images/tool-choice-dark.png" />
 
 ***
 

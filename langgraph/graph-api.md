@@ -1,5 +1,5 @@
 # Graph API overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/graph-api)
+
 ## Graphs
 
 At its core, LangGraph models agent workflows as graphs. You define the behavior of your agents using three key components:

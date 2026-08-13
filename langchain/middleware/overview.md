@@ -1,6 +1,6 @@
 # Overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/middleware/overview)
-Control and customize agent execution at every step
+
+> Control and customize agent execution at every step
 
 Middleware provides a way to more tightly control what happens inside the agent. Middleware is useful for the following:
 
@@ -29,11 +29,11 @@ agent = create_agent(
 
 The core agent loop involves calling a model, letting it choose tools to execute, and then finishing when it calls no more tools:
 
-> **Image:** [Core agent loop diagram](overview.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Tazq8zGc0yYUYrDl/oss/images/core_agent_loop.png?fit=max&auto=format&n=Tazq8zGc0yYUYrDl&q=85&s=ac72e48317a9ced68fd1be64e89ec063" alt="Core agent loop diagram" width="300" height="268" data-path="oss/images/core_agent_loop.png" />
 
 Middleware exposes hooks before and after each of those steps:
 
-> **Image:** [Middleware flow diagram](overview.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" width="500" height="560" data-path="oss/images/middleware_final.png" />
 
 ## Use middleware inside a LangGraph workflow
 

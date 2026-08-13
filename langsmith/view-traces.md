@@ -1,6 +1,6 @@
 # View traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/view-traces)
-Inspect agent threads in LangSmith using the Messages view or Details view.
+
+> Inspect agent threads in LangSmith using the Messages view or Details view.
 
 From a tracing project, use the **Threads**, **Traces**, or **Runs** tabs to change what appears in the table. Click into any row to open the side panel.
 

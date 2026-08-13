@@ -1,6 +1,6 @@
 # Remote MCP servers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers)
-Connect Fleet to popular remote MCP servers
+
+> Connect Fleet to popular remote MCP servers
 
 You can connect LangSmith Fleet to remote MCP servers to extend your agents with additional tools and integrations. This page covers how to add custom MCP servers and provides configuration details for popular remote servers.
 

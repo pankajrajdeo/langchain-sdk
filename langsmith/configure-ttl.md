@@ -1,5 +1,5 @@
 # How to add TTLs to your application
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-ttl)
+
 > [!TIP]
 > **Prerequisites**
 > This guide assumes familiarity with [LangSmith](observability.md), [Persistence](../langgraph/persistence.md), and [Cross-thread persistence](../langgraph/stores.md) concepts.

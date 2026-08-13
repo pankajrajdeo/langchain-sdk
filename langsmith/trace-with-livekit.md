@@ -1,5 +1,5 @@
 # Trace LiveKit applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-livekit)
+
 > [!NOTE]
 > This integration is in beta, so its API may change.
 

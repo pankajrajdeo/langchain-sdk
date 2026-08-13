@@ -1,6 +1,6 @@
 # Essentials
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/essentials)
-Fleet's core features
+
+> Fleet's core features
 
 LangSmith Fleet essentials are the core features that make up the foundation of your agents. They include tools, channels, memory, sub-agents, and approvals.
 
@@ -111,10 +111,10 @@ Fleet manages models for you. It selects and maintains a strong model for each t
 Fleet provides three managed tiers. The model behind each tier may change over time as new models become available, so you can choose based on the work you need done instead of a specific provider or model.
 
 | Tier     | Best for                                                        | Relative cost |
-| -------- | --------------------------------------------------------------- | -------------------------------- |
-| **Fast** | Everyday tasks such as research, summaries, and drafting        | Low                              |
-| **Pro**  | More complex tasks that benefit from stronger reasoning         | Medium                           |
-| **Max**  | The most demanding tasks, where maximum capability matters most | High                             |
+| -------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Fast** | Everyday tasks such as research, summaries, and drafting        | Low                                                                                      |
+| **Pro**  | More complex tasks that benefit from stronger reasoning         | Medium                                                                                   |
+| **Max**  | The most demanding tasks, where maximum capability matters most | High                                                                                     |
 
 ### Custom models
 

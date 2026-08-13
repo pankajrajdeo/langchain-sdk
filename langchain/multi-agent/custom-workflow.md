@@ -1,5 +1,5 @@
 # Custom workflow
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/custom-workflow)
+
 In the **custom workflow** architecture, you define your own bespoke execution flow using [LangGraph](../../langgraph/overview.md). You have complete control over the graph structure—including sequential steps, conditional branches, loops, and parallel execution.
 
 ```mermaid

@@ -1,5 +1,5 @@
 # Troubleshooting
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/troubleshooting)
+
 This guide will walk you through common issues you may encounter when running a self-hosted instance of LangSmith.
 
 While running LangSmith, you may encounter unexpected 500 errors, slow performance, or other issues. This guide will help you diagnose and resolve these issues.

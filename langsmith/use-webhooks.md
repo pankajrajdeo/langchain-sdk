@@ -1,5 +1,5 @@
 # Use webhooks
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-webhooks)
+
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
 
 Many LangSmith endpoints accept a `webhook` parameter. If this parameter is specified by an endpoint that can accept POST requests, LangSmith will send a request at the completion of a run.

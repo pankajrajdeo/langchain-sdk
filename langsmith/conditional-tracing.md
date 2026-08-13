@@ -1,5 +1,5 @@
 # Conditional tracing
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/conditional-tracing)
+
 When you have the environment variable `LANGSMITH_TRACING=true` set globally, traces are automatically sent to LangSmith. This guide shows you how to disable or customize tracing selectively for specific requests.
 
 Use conditional tracing when you need to:

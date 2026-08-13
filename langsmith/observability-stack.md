@@ -1,5 +1,5 @@
 # Deploy an observability stack for your LangSmith deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-stack)
+
 > [!CAUTION]
 > **Deprecated**: The LangSmith Observability Helm chart is deprecated. We no longer maintain or provide support for it. The documentation below is preserved for reference only.
 
@@ -150,7 +150,7 @@ Then port-forward into the `langsmith-observability-grafana` container at port 3
 
 Once in Grafana, you can use the UI to monitor logs, metrics and traces. Grafana also comes pre-packaged with sets of dashboards for monitoring the main components of your deployment.
 
-> **Image:** [LangSmith Grafana Dashboards](observability-stack.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/langsmith-grafana-dashboards.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=ee47243826737bab23944e01536dec71" alt="LangSmith Grafana Dashboards" width="1715" height="1073" data-path="langsmith/images/langsmith-grafana-dashboards.png" />
 
 ***
 

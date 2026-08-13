@@ -1,6 +1,6 @@
 # How to use a custom checkpointer
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-checkpointer)
-Replace the built-in Postgres checkpointer with a custom BaseCheckpointSaver implementation in your agent deployment.
+
+> Replace the built-in Postgres checkpointer with a custom BaseCheckpointSaver implementation in your agent deployment.
 
 When deploying agents to LangSmith, the server provides a built-in Postgres-backed checkpointer that handles state persistence across graph runs. You can replace this with your own [BaseCheckpointSaver](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver) implementation to use a different storage backend.
 

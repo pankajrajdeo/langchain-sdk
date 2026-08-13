@@ -1,5 +1,5 @@
 # Memory overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/concepts/memory)
+
 [Memory](../langgraph/add-memory.md) is a system that remembers information about previous interactions. For AI agents, memory is crucial because it lets them remember previous interactions, learn from feedback, and adapt to user preferences. As agents tackle more complex tasks with numerous user interactions, this capability becomes essential for both efficiency and user satisfaction.
 
 This conceptual guide covers two types of memory, based on their recall scope:
@@ -7,7 +7,7 @@ This conceptual guide covers two types of memory, based on their recall scope:
 * [Short-term memory](#short-term-memory), or [thread](../langgraph/checkpointers.md#threads)-scoped memory, tracks the ongoing conversation by maintaining message history within a session. LangGraph manages short-term memory as a part of your agent's [state](../langgraph/graph-api.md#state). State is persisted to a database using a [checkpointer](../langgraph/checkpointers.md#checkpoints) so the thread can be resumed at any time. Short-term memory updates when the graph is invoked or a step is completed, and the State is read at the start of each step.
 * [Long-term memory](#long-term-memory) stores user-specific or application-level data across sessions and is shared *across* conversational threads. It can be recalled *at any time* and *in any thread*. Memories are scoped to any custom namespace, not just within a single thread ID. LangGraph provides [stores](../langgraph/stores.md) ([reference doc](https://langchain-ai.github.io/langgraph/reference/store/#langgraph.store.base.BaseStore)) to let you save and recall long-term memories.
 
-> **Image:** [Short vs long](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/short-vs-long.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=62665893848db800383dffda7367438a" alt="Short vs long" width="571" height="372" data-path="oss/images/short-vs-long.png" />
 
 ## Short-term memory
 
@@ -21,7 +21,7 @@ Conversation history is the most common form of short-term memory, and long conv
 
 Chat models accept context using messages, which include developer provided instructions (a system message) and user inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited and token-rich message lists can be costly, many applications can benefit from using techniques to manually remove or forget stale information.
 
-> **Image:** [Filter](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/filter.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=89c50725dda7add80732bd2096e07ef2" alt="Filter" width="594" height="200" data-path="oss/images/filter.png" />
 
 For more information on common techniques for managing messages, see the [Add and manage memory](../langgraph/add-memory.md#manage-short-term-memory) guide.
 
@@ -57,7 +57,7 @@ Memories can be a single, continuously updated "profile" of well-scoped and spec
 
 When remembering a profile, you will want to make sure that you are **updating** the profile each time. As a result, you will want to pass in the previous profile and [ask the model to generate a new profile](https://github.com/langchain-ai/memory-template) (or some [JSON patch](https://github.com/hinthornw/trustcall) to apply to the old profile). This can be become error-prone as the profile gets larger, and may benefit from splitting a profile into multiple documents or **strict** decoding when generating documents to ensure the memory schemas remains valid.
 
-> **Image:** [Update profile](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/update-profile.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=8843788f6afd855450986c4cc4cd6abf" alt="Update profile" width="507" height="516" data-path="oss/images/update-profile.png" />
 
 #### Collection
 
@@ -69,7 +69,7 @@ Working with document collections also shifts complexity to memory **search** ov
 
 Finally, using a collection of memories can make it challenging to provide comprehensive context to the model. While individual memories may follow a specific schema, this structure might not capture the full context or relationships between memories. As a result, when using these memories to generate responses, the model may lack important contextual information that would be more readily available in a unified profile approach.
 
-> **Image:** [Update list](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/update-list.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=38851b242981cc87128620091781f7c9" alt="Update list" width="483" height="491" data-path="oss/images/update-list.png" />
 
 Regardless of memory management approach, the central point is that the agent will use the semantic memories to [ground its responses](../deepagents/retrieval.md), which often leads to more personalized and relevant interactions.
 
@@ -116,13 +116,13 @@ def update_instructions(state: State, store: BaseStore):
     ...
 ```
 
-> **Image:** [Update instructions](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/update-instructions.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=13644c954ed79a45b8a1a762b3e39da1" alt="Update instructions" width="493" height="515" data-path="oss/images/update-instructions.png" />
 
 ### Writing memories
 
 There are two primary methods for agents to write memories: ["in the hot path"](#in-the-hot-path) and ["in the background"](#in-the-background).
 
-> **Image:** [Hot path vs background](memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/hot_path_vs_background.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=edd006d6189dc29a2edcba57c41fd744" alt="Hot path vs background" width="842" height="418" data-path="oss/images/hot_path_vs_background.png" />
 
 #### In the hot path
 

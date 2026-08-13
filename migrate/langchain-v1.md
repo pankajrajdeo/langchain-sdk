@@ -1,5 +1,5 @@
 # LangChain v1 migration guide
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langchain-v1)
+
 This guide outlines the major changes between [LangChain v1](../releases/langchain-v1.md) and previous versions.
 
 ## Simplified package

@@ -1,6 +1,6 @@
 # Goals and rubrics
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics)
-Define objectives and acceptance criteria for Deep Agents Code sessions
+
+> Define objectives and acceptance criteria for Deep Agents Code sessions
 
 Goals and rubrics help Deep Agents Code check whether its work satisfies the criteria you care about. Use a goal for objective-driven work where the agent should help define acceptance criteria, and use a rubric when you already know the criteria.
 

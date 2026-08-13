@@ -1,6 +1,6 @@
 # Use time-travel
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-time-travel)
-Replay past executions and fork to explore alternative paths in LangGraph
+
+> Replay past executions and fork to explore alternative paths in LangGraph
 
 ## Overview
 
@@ -18,7 +18,7 @@ Invoke the graph with a prior checkpoint's config to replay from that point.
 > [!WARNING]
 > Replay re-executes nodes—it doesn't just read from cache. LLM calls, API requests, and [interrupts](interrupts.md) fire again and may return different results. Replaying from the final checkpoint (no `next` nodes) is a no-op.
 
-> **Image:** [Replay](use-time-travel.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/re_play.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=d7b34b85c106e55d181ae1f4afb50251" alt="Replay" width="2276" height="986" data-path="oss/images/re_play.png" />
 
 Use [`get_state_history`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state_history) to find the checkpoint you want to replay from, then call [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with that checkpoint's config:
 
@@ -69,7 +69,7 @@ replay_result = graph.invoke(None, before_joke.config)
 
 Fork creates a new branch from a past checkpoint with modified state. Call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) on a prior checkpoint to create the fork, then [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with `None` to continue execution.
 
-> **Image:** [Fork](use-time-travel.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/checkpoints_full_story.jpg?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=a52016b2c44b57bd395d6e1eac47aa36" alt="Fork" width="3705" height="2598" data-path="oss/images/checkpoints_full_story.jpg" />
 
 > [!WARNING]
 > `update_state` does **not** roll back a thread. It creates a new checkpoint that branches from the specified point. The original execution history remains intact.

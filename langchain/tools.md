@@ -1,5 +1,5 @@
 # Tools
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/tools)
+
 Tools extend what [agents](agents.md) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
 
 Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](models.md). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.

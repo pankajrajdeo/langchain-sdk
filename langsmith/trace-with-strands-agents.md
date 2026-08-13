@@ -1,6 +1,6 @@
 # Trace Strands Agents applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-strands-agents)
-Trace Strands Agents applications with LangSmith.
+
+> Trace Strands Agents applications with LangSmith.
 
 [Strands Agents](https://strandsagents.com/) is an SDK for building model-driven agents. LangSmith provides a Strands Agents integration that exports Strands OpenTelemetry spans in a LangSmith-compatible format, including agent runs, model calls, tool calls, prompts, completions, and token usage.
 

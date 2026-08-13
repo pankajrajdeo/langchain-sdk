@@ -1,6 +1,6 @@
 # LangSmith Deployment components
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/components)
-Overview of Agent Server, LangGraph CLI, Studio, SDKs, RemoteGraph, control plane, and data plane components.
+
+> Overview of Agent Server, LangGraph CLI, Studio, SDKs, RemoteGraph, control plane, and data plane components.
 
 A [LangSmith Deployment](deployment.md) installation includes several key components. Together these tools and services provide a complete solution for building, deploying, and managing graphs (including agentic applications), whether on [Cloud](cloud.md) or in your own [self-hosted](self-hosted.md) infrastructure:
 

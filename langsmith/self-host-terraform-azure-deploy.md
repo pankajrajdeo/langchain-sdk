@@ -1,6 +1,6 @@
 # Deploy LangSmith on Azure with Terraform
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy)
-End-to-end walkthrough for provisioning LangSmith self-hosted on Azure AKS using the LangChain Terraform modules.
+
+> End-to-end walkthrough for provisioning LangSmith self-hosted on Azure AKS using the LangChain Terraform modules.
 
 Deploy LangSmith to Azure with the public [Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure). Managing the deployment as code lets you version, review, and reproduce your LangSmith environment across subscriptions instead of clicking through the Azure Portal.
 

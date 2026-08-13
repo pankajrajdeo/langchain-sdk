@@ -1,36 +1,40 @@
 # Set up LangSmith
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/platform-setup)
-Host and manage LangSmith infrastructure for observability, evaluation, and prompt engineering.
 
-Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers two hosting models: fully managed Cloud, or Self-hosted (Enterprise) for full control.
+> Host and manage LangSmith infrastructure for observability, evaluation, and prompt engineering.
 
-If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with either hosting model.
+# Overview
+
+Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers Cloud, Bring Your Own Cloud (BYOC), and Self-hosted options.
+
+If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with Cloud, BYOC, or Self-hosted.
 
 #### [Cloud](cloud.md)
 Fully managed observability, evaluation, and prompt engineering.
+
+#### [BYOC](byoc.md)
+**(Enterprise)** Full control over your data, while LangChain manages the infrastructure.
 
 #### [Self-hosted](self-hosted.md)
 **(Enterprise)** Full control with observability, evaluation, and prompt engineering in your infrastructure.
 
 > [!NOTE]
-> Self-hosted is available on the [Enterprise plan](pricing-plans.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
+> Self-hosted and BYOC are available on the [Enterprise plan](pricing-plans.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
 
-## Compare Cloud and Self-hosted
+## Compare Cloud, BYOC, and Self-hosted
 
-| Feature                                          | **Cloud**                           | **Self-hosted**                      |
-| ------------------------------------------------ | ----------------------------------- | ------------------------------------ |
-| **Infrastructure location**                      | LangChain's cloud                   | Your infrastructure                  |
-| **Who manages updates**                          | LangChain                           | You                                  |
-| **Observability data location**                  | LangChain cloud                     | Your infrastructure                  |
-| **Pairs with LangSmith Deployment**              | Yes                                 | When you enable LangSmith Deployment |
-| **[Pricing](https://www.langchain.com/pricing)** | Plus tier                           | Enterprise                           |
-| **Best for**                                     | Quick setup, managed infrastructure | Full control, data isolation         |
+| Feature                         | **Cloud**         | **BYOC**                                                   | **Self-hosted** |
+| ------------------------------- | ----------------- | ---------------------------------------------------------- | --------------- |
+| **Who runs the infrastructure** | LangChain         | LangChain runs the control plane, you run your data planes | You             |
+| **Where sensitive data lives**  | LangChain's cloud | Your VPC                                                   | Your VPC        |
+| **Upgrades and patches**        | Automatic         | Automatic                                                  | Manual          |
+| **Scaling**                     | Automatic         | Automatic, managed by LangChain                            | Manual          |
 
-Both hosting models support [LangSmith Deployment](deployment.md) for agent workloads. Refer to the [LangSmith Deployment overview](deployment.md) to pick a topology (Cloud managed, Hybrid, self-hosted with control plane, or standalone).
+Cloud, BYOC, and Self-hosted support [LangSmith Deployment](deployment.md) for agent workloads. Refer to the [LangSmith Deployment overview](deployment.md) to pick a topology (Cloud managed, BYOC, Hybrid, self-hosted with control plane, or standalone).
 
 ## Common setups
 
 * **Fastest to start, managed everything.** [LangSmith Cloud](cloud.md) paired with [LangSmith Deployment](deployment.md) on Cloud. LangChain hosts the platform, and, when you use LangSmith Deployment, also hosts your [Agent Servers](agent-server.md).
+* **Bring Your Own Cloud.** Data stays in your VPC, and LangChain manages the infrastructure. Refer to the [BYOC overview](byoc.md).
 * **Observability data must stay in your infrastructure.** Self-hosted LangSmith, paired with any LangSmith Deployment topology, including [self-hosted LangSmith Deployment](deploy-with-control-plane.md) for agent workloads.
 * **Managed observability, agents in your VPC.** LangSmith Cloud paired with [Hybrid](hybrid.md) LangSmith Deployment. Traces and evaluations stay on SaaS while agent workloads stay in your infrastructure.
 * **Observability only, no agent hosting.** LangSmith Cloud or self-hosted, without LangSmith Deployment. Run your agents wherever you already run apps and send traces to LangSmith.

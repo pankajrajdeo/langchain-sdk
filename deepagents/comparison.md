@@ -1,6 +1,6 @@
 # Comparison with Claude Agent SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/comparison)
-Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
+
+> Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
 
 This page explains how [LangChain Deep Agents](overview.md) compares to the [Claude Agent SDK](https://platform.anthropic.com/docs/en/agent-sdk/overview). Both are harnesses for building custom agents, but they make different tradeoffs around execution environments, deployment, and vendor coupling.
 

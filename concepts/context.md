@@ -1,5 +1,5 @@
 # Context overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/concepts/context)
+
 **Context engineering** is the practice of building dynamic systems that provide the right information and tools, in the right format, so that an AI application can accomplish a task. Context can be characterized along two key dimensions:
 
 1. By **mutability**:

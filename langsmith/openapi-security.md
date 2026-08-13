@@ -1,5 +1,5 @@
 # Document API authentication in OpenAPI
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/openapi-security)
+
 This guide shows how to customize the OpenAPI security schema for your LangSmith API documentation. A well-documented security schema helps API consumers understand how to authenticate with your API and even enables automatic client generation. See the [Authentication & Access Control conceptual guide](auth.md) for more details about LangGraph's authentication system.
 
 > [!NOTE]

@@ -1,6 +1,6 @@
 # Deep Agents Code
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/overview)
-Terminal coding agent built on the Deep Agents SDK
+
+> Terminal coding agent built on the Deep Agents SDK
 
 Deep Agents Code (`dcode`) is an open source coding agent built on the [Deep Agents SDK](../quickstart.md).
 It works with any large language model and supports switching providers or models.
@@ -17,7 +17,7 @@ dcode
 
 See the [Quickstart](quickstart.md) to add provider credentials, run your first task, and learn interactive mode.
 
-> **Video:** Deep Agents Code terminal demo — [Open it in the original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/overview).
+> **Video:** [Deep Agents Code terminal demo](https://mintcdn.com/langchain-5e9cc07a/RVTbVyxmLiI04cgS/oss/images/deepagents/dcode-small.mp4?fit=max&auto=format&n=RVTbVyxmLiI04cgS&q=85&s=0d35e29a34f349183e83bd3d1eceb68b)
 
 ## Capabilities
 

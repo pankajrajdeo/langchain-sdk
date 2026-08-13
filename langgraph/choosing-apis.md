@@ -1,5 +1,5 @@
 # Choosing between Graph and Functional APIs
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/choosing-apis)
+
 LangGraph provides two different APIs to build agent workflows: the **Graph API** and the **Functional API**. Both APIs share the same underlying runtime and can be used together in the same application, but they are designed for different use cases and development preferences.
 
 This guide will help you understand when to use each API based on your specific requirements.

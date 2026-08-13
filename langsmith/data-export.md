@@ -1,6 +1,6 @@
 # Bulk export trace data
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-export)
-Export LangSmith trace data to an S3-compatible bucket in Parquet format.
+
+> Export LangSmith trace data to an S3-compatible bucket in Parquet format.
 
 > [!NOTE]
 > **Plan restrictions apply**

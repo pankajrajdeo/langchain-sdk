@@ -1,6 +1,6 @@
 # Guardrails
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/guardrails)
-Implement safety checks and content filtering for your agents
+
+> Implement safety checks and content filtering for your agents
 
 Guardrails help you build safe, compliant AI applications by validating and filtering content at key points in your agent's execution. They can detect sensitive information, enforce content policies, validate outputs, and prevent unsafe behaviors before they cause problems.
 
@@ -14,7 +14,7 @@ Common use cases include:
 
 You can implement guardrails using [middleware](middleware.md) to intercept execution at strategic points - before the agent starts, after it completes, or around model and tool calls.
 
-> **Image:** [Middleware flow diagram](guardrails.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/RAP6mjwE5G00xYsA/oss/images/middleware_final.png?fit=max&auto=format&n=RAP6mjwE5G00xYsA&q=85&s=eb4404b137edec6f6f0c8ccb8323eaf1" alt="Middleware flow diagram" width="500" height="560" data-path="oss/images/middleware_final.png" />
 
 Guardrails can be implemented using two complementary approaches:
 

@@ -1,5 +1,5 @@
 # Query traces using the SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/export-traces)
+
 The recommended way to query [runs](observability-concepts.md#runs) (the span data in LangSmith traces) is to use the `list_runs` method in the [SDK](https://reference.langchain.com/python/langsmith/) or `/runs/query` endpoint in the [API](smith-api-ref.md). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](run-data-format.md).
 
 This page covers:

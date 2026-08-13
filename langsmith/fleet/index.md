@@ -1,6 +1,6 @@
 # No-code agents with LangSmith Fleet
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/index)
-Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control.
+
+> Create helpful AI agents without code. Start from a template, connect your accounts, and let the agent handle routine work while you stay in control.
 
 > [!NOTE]
 > **Agent Builder is now LangSmith Fleet.** All existing agents, configurations, and integrations continue to work. No action is required.

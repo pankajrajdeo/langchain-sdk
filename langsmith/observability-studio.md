@@ -1,5 +1,5 @@
 # Observability in Studio
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-studio)
+
 LangSmith [Studio](studio.md) provides tools to inspect, debug, and improve your app beyond execution. By working with traces, datasets, and prompts, you can see how your application behaves in detail, measure its performance, and refine its outputs:
 
 * [Iterate on prompts](#iterate-on-prompts): Modify prompts inside graph nodes directly or with the Playground.

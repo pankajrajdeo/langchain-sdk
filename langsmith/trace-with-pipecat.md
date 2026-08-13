@@ -1,5 +1,5 @@
 # Trace Pipecat applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-pipecat)
+
 > [!NOTE]
 > This integration is in beta, so its API may change.
 

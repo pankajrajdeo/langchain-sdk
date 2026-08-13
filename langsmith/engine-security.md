@@ -1,6 +1,6 @@
 # LangSmith Engine security
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/engine-security)
-How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
+
+> How LangSmith Engine handles your data, the GitHub and model subprocessor controls that govern its access, and its compliance posture.
 
 LangSmith Engine is an AI agent built into LangSmith that improves the agents you build. Engine reviews the trace data already in LangSmith, surfaces and prioritizes issues, and opens pull requests with suggested fixes, proposed prompt changes, and evaluations. For a product overview, see [Engine](engine-overview.md).
 

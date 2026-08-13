@@ -1,5 +1,5 @@
 # Install LangGraph
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/install)
+
 To install the base LangGraph package:
 
 ```bash

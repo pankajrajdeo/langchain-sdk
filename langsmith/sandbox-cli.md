@@ -1,6 +1,6 @@
 # Sandbox CLI
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-cli)
-Create, inspect, connect to, and tunnel into LangSmith sandboxes from the command line.
+
+> Create, inspect, connect to, and tunnel into LangSmith sandboxes from the command line.
 
 The [LangSmith CLI](langsmith-cli.md) includes sandbox commands for creating snapshots, booting sandboxes, running commands, opening interactive shells, and tunneling TCP connections into a sandbox.
 
@@ -15,11 +15,14 @@ curl -fsSL https://cli.langsmith.com/install.sh | sh
 langsmith self-update
 ```
 
-Authenticate the CLI with your LangSmith API key:
+Authenticate the CLI with your LangSmith API key, and point it at the environment that key belongs to:
 
 ```bash
 export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
+export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
 ```
+
+`LANGSMITH_ENDPOINT` defaults to `https://api.smith.langchain.com` (GCP US). Set it to your data plane URL on [BYOC](byoc.md), your instance URL on [self-hosted](self-hosted.md), or the [API URL for your region](create-account-api-key.md#configure-the-sdk) on other Cloud regions.
 
 CLI output is JSON by default. Add `--format pretty` to list commands for human-readable tables:
 

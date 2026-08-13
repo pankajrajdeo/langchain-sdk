@@ -1,5 +1,5 @@
 # Improve LLM-as-judge evaluators using human feedback
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback)
+
 > [!TIP]
 > Before working through this page, it might be helpful to read the following:
 >
@@ -46,7 +46,7 @@ You can enter the alignment flow for both new and existing evaluators in dataset
 
 Select one or more experiments (or runs) to send for human labeling. This will add runs to an [annotation queue](annotation-queues.md).
 
-> **Image:** [Add to evaluator queue](improve-judge-evaluator-feedback.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-to-evaluator-queue.gif?s=3c457faaaf2c7f31425ba510a518260e" alt="Add to evaluator queue" width="1976" height="1080" data-path="langsmith/images/add-to-evaluator-queue.gif" />
 
 To add any new experiments/runs to an existing annotation queue, head to the **Evaluators** tab, select the evaluator you are aligning and click **Add to Queue.**
 
@@ -68,7 +68,7 @@ Once you have labeled examples, the next step is iterating on your evaluator pro
 
 To go to the evaluator playground: Click the **View evaluator** button on the top right of the evaluator queue. This will take you to the detail page of the evaluator you are aligning. Click the **Evaluator Playground** button to access the playground.
 
-> **Image:** [Evaluator Playground](improve-judge-evaluator-feedback.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/evaluator-pg.gif?s=c8108ce3abc95ce756fcbd1b3726916d" alt="Evaluator Playground" width="1916" height="1080" data-path="langsmith/images/evaluator-pg.gif" />
 
 In the evaluator playground you can create or edit your evaluator prompt and click **Start Alignment** to run it over the set of labeled examples that you created in Step 2. After running your evaluator, you'll see how its generated scores compare to your human labels. The alignment score is the percentage of examples where the evaluator's judgment matches that of the human expert.
 
@@ -97,7 +97,7 @@ To understand why the LLM scored an example the way it did, you can enable reaso
 
 In order to see the reasoning in the evaluator playground, hover over the LLM score.
 
-> **Image:** [Enable reasoning](improve-judge-evaluator-feedback.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/0B2PFrFBMRWNccee/langsmith/images/enable-reasoning.gif?s=d6ed09e4149a63723ef9305544b8b652" alt="Enable reasoning" width="1520" height="1080" data-path="langsmith/images/enable-reasoning.gif" />
 
 This will show the reasoning behind the LLM's score in the evaluator playground.
 
@@ -107,7 +107,7 @@ To avoid overfitting to the labeled examples, it's important to add more labeled
 
 ## Video guide
 
-> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback).
+> **Embedded Content:** [YouTube video player](https://www.youtube.com/embed/-9o94oj4x0A?si=wfv9cN3L4DalMD2e)
 
 ***
 

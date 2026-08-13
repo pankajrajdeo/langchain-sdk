@@ -1,5 +1,5 @@
 # Release policy
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/release-policy)
+
 This page explains the LangChain and LangGraph release policies. Click on the tabs below to view the release policies for each:
 
 #### LangChain

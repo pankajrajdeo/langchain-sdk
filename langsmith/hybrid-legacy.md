@@ -1,6 +1,6 @@
 # Setup guide (legacy)
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/hybrid-legacy)
-Legacy hybrid deployment model with a LangChain-managed control plane and a self-managed data plane.
+
+> Legacy hybrid deployment model with a LangChain-managed control plane and a self-managed data plane.
 
 > [!WARNING]
 > This page describes the legacy hybrid deployment model, which uses a LangChain-managed control plane to orchestrate Agent Servers in your cloud. For the current hybrid model, see [Hybrid](hybrid.md).
@@ -18,10 +18,10 @@ This combines the convenience of a managed interface with the flexibility of run
 > [!NOTE]
 > Learn more about the [control plane](control-plane.md), [data plane](data-plane.md), and [Agent Server](agent-server.md) architecture concepts.
 
-| Component                        | Responsibilities                                                                                                                                    | Where it runs     | Who manages it |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------- |
-| Control plane | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul>                | LangChain's cloud | LangChain      |
-| Data plane    | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud        | You            |
+| Component                                                                                                | Responsibilities                                                                                                                                    | Where it runs     | Who manages it |
+| -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------- |
+| Control plane               | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul>                | LangChain's cloud | LangChain      |
+| Data plane | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud        | You            |
 
 When running LangSmith in a hybrid model, you authenticate with a [LangSmith API key](create-account-api-key.md).
 
@@ -36,9 +36,9 @@ When running LangSmith in a hybrid model, you authenticate with a [LangSmith API
 
 ### Architecture
 
-> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](hybrid-legacy.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/hybrid-with-deployment-light.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=86d548632d33be3644bad7213287ac78" alt="Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes." width="1784" height="1782" data-path="langsmith/images/hybrid-with-deployment-light.png" />
 
-> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](hybrid-legacy.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/hybrid-with-deployment-dark.png?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=829f0ef40c315c493ef8e30857e9abf5" alt="Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes." width="1784" height="1782" data-path="langsmith/images/hybrid-with-deployment-dark.png" />
 
 ### Compute platforms
 
@@ -86,24 +86,52 @@ LangSmith Deployment control plane:
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_0 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -114,24 +142,52 @@ LangSmith API:
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_1 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>

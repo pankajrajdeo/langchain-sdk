@@ -1,6 +1,6 @@
 # Trace n8n workflows
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-n8n)
-Learn how to trace n8n AI workflows in LangSmith.
+
+> Learn how to trace n8n AI workflows in LangSmith.
 
 [n8n](https://n8n.io/) is a workflow automation platform that includes advanced AI capabilities built on LangChain. You can connect your n8n instance to LangSmith to record and monitor AI workflow runs.
 

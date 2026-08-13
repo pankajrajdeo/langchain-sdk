@@ -1,6 +1,6 @@
 # Human-in-the-Loop
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop)
-Add approval workflows with interrupt-based human review
+
+> Add approval workflows with interrupt-based human review
 
 Not every agent action should run unsupervised. When an agent is about to send
 an email, delete a record, execute a financial transaction, or perform any

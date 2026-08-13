@@ -1,5 +1,5 @@
 # All LangChain Python integration providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/all_providers)
+
 Browse the complete collection of integrations available for Python. LangChain Python offers the most extensive ecosystem with 1000+ integrations across LLMs, chat models, retrievers, vector stores, document loaders, and more.
 
 ## Providers
@@ -175,7 +175,7 @@ High-performance analytics and data processing.
 #### [Box](box.md)
 Cloud content management and collaboration.
 
-#### [Brightdata](https://github.com/luminati-io/langchain-brightdata)
+#### [Brightdata](https://docs.brightdata.com/integrations/langchain)
 Web data platform and proxy services.
 
 #### [Browserbase](browserbase.md)
@@ -750,6 +750,9 @@ AI-powered content moderation platform.
 
 #### [Plasmate](https://docs.plasmate.app/integration-langchain)
 Agent-native headless browser with Set of Mark (SOM) structured UI extraction.
+
+#### [PolarDB PG](https://github.com/polardb/langchain-polardb-pg)
+PolarDB for PostgreSQL embeddings and vector store for LangChain.
 
 #### [Polaris](https://github.com/Veroq-ai/polaris-sdks/tree/main/python/langchain_polaris)
 Verified news intelligence tools and retriever for LangChain agents.

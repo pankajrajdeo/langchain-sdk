@@ -1,6 +1,6 @@
 # Event streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/event-streaming)
-Stream real-time updates from LangChain agent runs
+
+> Stream real-time updates from LangChain agent runs
 
 LangChain agents are built on LangGraph, so they support the same streaming stack with agent-focused projections for messages, tool calls, state, and custom updates.
 

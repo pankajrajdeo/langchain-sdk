@@ -1,5 +1,5 @@
 # Metadata parameters reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/ls-metadata-parameters)
+
 When you trace LLM calls with LangSmith, you often want to [track costs](cost-tracking.md), compare model configurations, and analyze performance across different providers. LangSmith's native integrations (like [LangChain](trace-with-langchain.md) or the [OpenAI](trace-openai.md)/[Anthropic](trace-anthropic.md) wrappers) handle this automatically, but custom model wrappers and self-hosted models require a standardized way to provide this information. LangSmith uses `ls_` metadata parameters for this purpose.
 
 These metadata parameters (all prefixed with `ls_`) let you pass model configuration and identification information through the standard `metadata` field. Once set, LangSmith can automatically calculate costs, display model information in the UI, and enable [filtering](filter-traces-in-application.md) and analytics across your traces.

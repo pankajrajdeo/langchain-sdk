@@ -1,5 +1,5 @@
 # Reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/reference/overview)
+
 Comprehensive API reference documentation for the LangChain and LangGraph Python and TypeScript libraries.
 
 ## Reference sites

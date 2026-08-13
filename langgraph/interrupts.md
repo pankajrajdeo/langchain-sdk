@@ -1,5 +1,5 @@
 # Interrupts
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/interrupts)
+
 Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When an interrupt is triggered, LangGraph saves the graph state using its [persistence](persistence.md) layer and waits indefinitely until you resume execution.
 
 Interrupts work by calling the `interrupt()` function at any point in your graph nodes. The function accepts any JSON-serializable value which is surfaced to the caller. When you're ready to continue, you resume execution by re-invoking the graph using `Command`, which then becomes the return value of the `interrupt()` call from inside the node.
@@ -929,7 +929,7 @@ graph.invoke(None, config=config)  # [!code highlight]
 
 You can use [LangSmith Studio](../langsmith/studio.md) to set static interrupts in your graph in the UI before running the graph. You can also use the UI to inspect the graph state at any point in the execution.
 
-> **Image:** [image](interrupts.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/static-interrupt.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=5aa4e7cea2ab147cef5b4e210dd6c4a1" alt="image" width="1252" height="1040" data-path="oss/images/static-interrupt.png" />
 
 ***
 

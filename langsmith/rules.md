@@ -1,5 +1,5 @@
 # Set up automation rules
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/rules)
+
 While you can manually sift through and process production logs from your LLM application, it often becomes difficult as your application scales to more users. LangSmith provides **Automations** that allow you to trigger certain actions on your trace data. You can define an automations by a **filter**, **sampling rate**, and **action**.
 
 Automation rules can trigger actions such as: adding traces to a dataset, adding to an annotation queue, triggering a webhook (e.g., for remote evaluations) or extending data retention. Some examples of automations you can set up:

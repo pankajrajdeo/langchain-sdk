@@ -1,5 +1,5 @@
 # How to evaluate with repetitions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/repetition)
+
 Running multiple repetitions can give a more accurate estimate of the performance of your system since LLM outputs are not deterministic. Outputs can differ from one repetition to the next. Repetitions are a way to reduce noise in systems prone to high variability, such as agents.
 
 ## Configuring repetitions on an experiment
@@ -33,7 +33,7 @@ await evaluate((inputs) => labelText(inputs["input"]), {
 
 If you've run your experiment with [repetitions](repetition.md), there will be arrows in the output results column so you can view outputs in the table. To view each run from the repetition, hover over the output cell and click the expanded view. When you run an experiment with repetitions, LangSmith displays the average for each feedback score in the table. Click on the feedback score to view the feedback scores from individual runs, or to view the standard deviation across repetitions.
 
-> **Image:** [Repetitions](repetition.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/Tdk8epB4BZgbugRX/langsmith/images/repetitions.png?fit=max&auto=format&n=Tdk8epB4BZgbugRX&q=85&s=15a7c9c1a20042fbcdf1d5f7adcc25de" alt="Repetitions" width="1592" height="922" data-path="langsmith/images/repetitions.png" />
 
 ***
 

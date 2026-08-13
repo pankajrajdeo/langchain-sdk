@@ -1,6 +1,6 @@
 # Deploy Google ADK agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-google-adk)
-Deploy Google Agent Development Kit (ADK) agents to LangSmith Agent Server using the deployments-wrap-sdk package.
+
+> Deploy Google Agent Development Kit (ADK) agents to LangSmith Agent Server using the deployments-wrap-sdk package.
 
 This guide shows you how to deploy a [Google Agent Development Kit (ADK)](https://github.com/google/adk-python) agent on [LangSmith Agent Server](agent-server.md) using the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package.
 

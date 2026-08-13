@@ -1,12 +1,12 @@
 # Run an evaluation from the Playground
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-evaluation-from-playground)
+
 LangSmith allows you to run evaluations directly in the UI. The [**Playground**](prompt-engineering-concepts.md#playground) allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without having to write any code.
 
 Before you run an evaluation, you need to have an [existing dataset](evaluation-concepts.md#datasets). Learn how to [create a dataset from the UI](manage-datasets-in-application.md#create-a-dataset-and-add-examples).
 
 To run evaluations from Studio instead, see [run experiments over a dataset in Studio](observability-studio.md#run-experiments-over-a-dataset). If you prefer to run experiments in code, see [run an evaluation using the SDK](evaluate-llm-application.md).
 
-> **Image:** [Playground experiment](run-evaluation-from-playground.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/H9jA2WRyA-MV4-H0/langsmith/images/playground-experiment.gif?s=05ec3d2b1aa6590c443a033924fc6141" alt="Playground experiment" width="1358" height="720" data-path="langsmith/images/playground-experiment.gif" />
 
 > [!NOTE]
 > The **[Chat](chat.md)** is available in the Playground to help you optimize prompts before running evaluations.

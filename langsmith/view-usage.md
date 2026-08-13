@@ -1,6 +1,6 @@
 # View usage
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/view-usage)
-What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
+
+> What usage data is available in LangSmith, what each metric means, and what differs for Self-hosted.
 
 LangSmith provides several views into your [organization's](administration-overview.md) usage, depending on your [plan](pricing-plans.md) and [hosting type](platform-setup.md). This page explains what data is available, what each metric means, and what limitations apply to [Self-hosted](self-hosted.md).
 

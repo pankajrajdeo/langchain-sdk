@@ -1,6 +1,6 @@
 # GCP Terraform quick reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-quick-reference)
-Make targets, Terraform, kubectl, gcloud, and Helm commands for LangSmith self-hosted on GKE.
+
+> Make targets, Terraform, kubectl, gcloud, and Helm commands for LangSmith self-hosted on GKE.
 
 Command cheat sheet for day-to-day operations against a GCP LangSmith deployment provisioned with the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp). All `make` targets run from `modules/gcp/`. Run `make help` for an inline summary.
 

@@ -1,5 +1,5 @@
 # Trace Mistral applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-mistral)
+
 [Mistral](https://mistral.ai/) provides hosted access to open-weight language models via a simple API.
 
 This guide shows you how to trace Mistral API calls with LangSmith, allowing you to record prompts, responses, and metadata for debugging and observability. Traces are sent directly to LangSmith using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and standard span instrumentation.

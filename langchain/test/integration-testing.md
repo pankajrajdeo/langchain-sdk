@@ -1,6 +1,6 @@
 # Integration testing
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/integration-testing)
-Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
+
+> Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
 
 Integration tests verify that your agent works correctly with model APIs and external services. Unlike [unit tests](unit-testing.md) that use fakes and mocks, integration tests make actual network calls to confirm that components work together, credentials are valid, and latency is acceptable.
 

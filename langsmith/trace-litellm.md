@@ -1,5 +1,5 @@
 # Trace LiteLLM applications
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-litellm)
+
 [LiteLLM](https://www.litellm.ai/) provides a unified interface for calling LLM providers using a consistent OpenAI-compatible API. It can be used either as a [Python SDK](https://docs.litellm.ai/docs/#litellm-python-sdk) embedded directly in your application, or as a [proxy server](https://docs.litellm.ai/docs/simple_proxy) that exposes an OpenAI-compatible endpoint for client applications.
 
 This guide shows you how to trace LiteLLM calls with LangSmith using:

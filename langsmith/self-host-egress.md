@@ -1,5 +1,5 @@
 # Egress for billing and operational telemetry
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-egress)
+
 > [!NOTE]
 > This page only applies to customers who are not running in offline (air-gapped) mode and assumes you are using a self-hosted LangSmith instance serving version 0.9.0 or later.
 
@@ -460,7 +460,7 @@ This section applies only if you enable [Engine](deploy-self-hosted-full-platfor
 Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
 
 > [!NOTE]
-> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. AWS EU and Azure are planned. See [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region).
+> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. See [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region).
 
 > [!WARNING]
 > Add the gateway as a specific allowlist entry rather than opening general outbound access. Requests authenticate with a short-lived license JWT obtained during LangSmith license verification. No additional model-provider credentials are needed.

@@ -1,5 +1,5 @@
 # LangSmith control plane
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/control-plane)
+
 The *control plane* is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update [Agent Servers](agent-server.md), and the control plane APIs, which support the UI and provide programmatic access.
 
 When you make an update through the control plane, the update is stored in the control plane state. The [data plane](data-plane.md) “listener” polls for these updates by calling the control plane APIs. The control plane never connects to the data plane directly.

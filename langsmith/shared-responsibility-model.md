@@ -1,6 +1,6 @@
 # LangSmith shared responsibility model
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/shared-responsibility-model)
-Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
+
+> Overview of how LangChain and customers share security responsibilities for the LangSmith platform.
 
 LangSmith operates as a multi-tenant SaaS solution. Our security model is designed to be simple: LangChain secures the platform infrastructure and application, while you secure your specific usage, data inputs, and the AI agents you build.
 

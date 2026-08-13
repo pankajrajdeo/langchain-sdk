@@ -1,6 +1,6 @@
 # Deploy your app to cloud
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deployment-quickstart)
-Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
+
+> Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
 
 This quickstart shows you how to deploy an application to LangSmith Cloud (AWS and GCP) using the [`langgraph deploy`](cli.md#deploy) command. Any app that exports a graph from a [`langgraph.json`](application-structure.md#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
 
@@ -86,7 +86,7 @@ langgraph dev
 ```
 
 2. Click the `deploy` button.
-> **Image:** [Deploy from Studio](deployment-quickstart.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/PcUh5lKODh7-SKGz/langsmith/images/deploy-from-studio.gif?s=a6735796def993c3be3242c6d1e2fd6c" alt="Deploy from Studio" width="1072" height="720" data-path="langsmith/images/deploy-from-studio.gif" />
 
 ## 4. Test in Studio
 

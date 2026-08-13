@@ -1,5 +1,5 @@
 # Build a semantic search engine with LangChain
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/knowledge-base)
+
 ## Overview
 
 Build a semantic search engine over a PDF with LangChain [embeddings](../integrations/embeddings.md) and [vector stores](../integrations/vectorstores.md). Use it to retrieve passages similar to a query, then plug the retriever into [retrieval-augmented generation (RAG)](../deepagents/retrieval.md) or other LLM workflows.

@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/quickstart)
-Build an agent from a template
+
+> Build an agent from a template
 
 By the end of this quickstart, you will have an Executive Assistant that labels the Gmail messages needing your attention and pauses for approval before acting, all set up without code or a model API key and controlled through chat.
 

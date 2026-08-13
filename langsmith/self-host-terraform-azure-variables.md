@@ -1,6 +1,6 @@
 # Azure Terraform variables reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables)
-Complete reference of Terraform variables for LangSmith self-hosted on Azure AKS.
+
+> Complete reference of Terraform variables for LangSmith self-hosted on Azure AKS.
 
 Complete reference for every input variable exposed by the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure). Use it while filling in `terraform.tfvars` for the first time or tuning an existing deployment.
 

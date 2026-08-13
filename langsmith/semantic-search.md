@@ -1,5 +1,5 @@
 # How to add semantic search to your agent deployment
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/semantic-search)
+
 Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](../langgraph/stores.md) so your agent retains context across conversations and personalizes responses based on prior interactions.
 
 ## Prerequisites

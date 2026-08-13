@@ -1,5 +1,5 @@
 # Log user feedback using the SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/attach-user-feedback)
+
 LangSmith makes it easy to attach [feedback](observability-concepts.md#feedback) to [traces](observability-concepts.md#traces). This feedback can come from users, annotators, automated evaluators, and so on, which is crucial for monitoring and evaluating applications.
 
 This page details how to log feedback using the [SDK](reference.md). For the structure of feedback objects, refer to [Feedback data format](feedback-data-format.md).

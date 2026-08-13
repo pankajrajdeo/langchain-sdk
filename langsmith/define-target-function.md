@@ -1,5 +1,5 @@
 # How to define a target function to evaluate
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/define-target-function)
+
 There are three main pieces need to run an evaluation:
 
 1. A [dataset](evaluation-concepts.md#datasets) of test inputs and expected outputs.

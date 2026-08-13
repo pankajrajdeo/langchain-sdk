@@ -1,6 +1,6 @@
 # Manage contexts with the SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-contexts-sdk)
-Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
+
+> Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
 
 Use the LangSmith [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md) SDKs to manage **agent repos** and **skill repos** in the [Context Hub](use-the-context-hub.md) programmatically. [Push](#push-an-agent) new versions from CI, [pull](#pull-an-agent) the latest or a pinned commit at runtime to inject context into your agent, and use additional methods to [check existence](#check-whether-a-repo-exists), [list and search](#list-agents-and-skills) repos, and [delete](#delete-an-agent-or-skill) what you no longer need.
 

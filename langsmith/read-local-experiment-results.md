@@ -1,5 +1,5 @@
 # How to read experiment results locally
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/read-local-experiment-results)
+
 When running [evaluations](evaluation-concepts.md), you may want to process results programmatically in your script rather than viewing them in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-read-local-experiment-results). This is useful for scenarios like:
 
 * **CI/CD pipelines**: Implement quality gates that fail builds if evaluation scores drop below a threshold.

@@ -1,5 +1,5 @@
 # Role-based access control
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/rbac)
+
 This reference explains LangSmith's Role-Based Access Control (RBAC) system for managing organization-level and workspace-level permissions.
 
 > [!NOTE]

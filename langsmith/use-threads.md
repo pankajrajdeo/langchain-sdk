@@ -1,5 +1,5 @@
 # Use threads
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-threads)
+
 This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](assistants.md) to enable [stateful](../langgraph/persistence.md) execution of your [deployed graphs](deployment.md).
 
 ## Understand threads

@@ -1,6 +1,6 @@
 # Set up the LLM auth proxy
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)
-Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway.
+
+> Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes LLM requests to your upstream provider or gateway.
 
 The LLM auth proxy lets your organization enforce its own authentication flows for all model invocations from LangSmith so that provider credentials are never exposed to end users and every request is traceable back to a specific actor.
 
@@ -28,9 +28,9 @@ Each request from LangSmith passes through the following steps in the proxy:
 
 Both the `ext_authz` service and the transformer are customer-deployed components that run alongside the proxy in your environment. Either or both can be enabled [depending on your use case](#when-to-use-ext_proc-vs-ext_authz).
 
-> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](llm-auth-proxy-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/P0dgApy5uvIpggEa/langsmith/images/llm-auth-proxy-architecture-light.png?fit=max&auto=format&n=P0dgApy5uvIpggEa&q=85&s=2358bba74cb9be8ca92a5f6028937ee1" alt="Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider." width="1016" height="1195" data-path="langsmith/images/llm-auth-proxy-architecture-light.png" />
 
-> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](llm-auth-proxy-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/P0dgApy5uvIpggEa/langsmith/images/llm-auth-proxy-architecture-dark.png?fit=max&auto=format&n=P0dgApy5uvIpggEa&q=85&s=60f84bc54a41125d0c0b03fb4f1cfb60" alt="Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider." width="1016" height="1195" data-path="langsmith/images/llm-auth-proxy-architecture-dark.png" />
 
 ## Prerequisites
 
@@ -124,9 +124,9 @@ In the LangSmith UI, navigate to **Settings** > **General**, configure the follo
    * **Block all:** blocks JWT forwarding to all URLs.
    * **Custom:** specify an explicit list of allowed URL patterns. Empty strings and bare `*` are not accepted. The control is disabled when the LLM auth proxy toggle is off.
 
-> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](llm-auth-proxy-self-hosted.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/bbAQLTZm05DckBS2/langsmith/images/llm-auth-proxy-settings-light.png?fit=max&auto=format&n=bbAQLTZm05DckBS2&q=85&s=b9bbd4314eeb945ca236a2c6dec2d221" alt="LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected." width="518" height="341" data-path="langsmith/images/llm-auth-proxy-settings-light.png" />
 
-> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](llm-auth-proxy-self-hosted.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/bbAQLTZm05DckBS2/langsmith/images/llm-auth-proxy-settings-dark.png?fit=max&auto=format&n=bbAQLTZm05DckBS2&q=85&s=b5a405d42f8fb2e7b351c7119147aa9c" alt="LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected." width="506" height="334" data-path="langsmith/images/llm-auth-proxy-settings-dark.png" />
 
 ## 4. Install the auth proxy Helm chart
 

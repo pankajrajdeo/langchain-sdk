@@ -1,5 +1,5 @@
 # Reject Concurrent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/reject-concurrent)
+
 This guide assumes knowledge of what double-texting is, which you can learn about in the [double-texting conceptual guide](double-texting.md).
 
 The guide covers the `reject` option for double texting, which rejects the new run of the graph by throwing an error and continues with the original run until completion. Below is a quick example of using the `reject` option.

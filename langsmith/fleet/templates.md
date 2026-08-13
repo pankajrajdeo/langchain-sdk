@@ -1,6 +1,6 @@
 # Templates
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/templates)
-Start faster with curated Fleet templates and customize tools, prompts, and channels.
+
+> Start faster with curated Fleet templates and customize tools, prompts, and channels.
 
 LangSmith Fleet includes [starter templates](https://www.langchain.com/templates) to help you create agents quickly. Templates include predefined instructions, [tools](tools.md), and [channels](essentials.md#channels) (if applicable) for common use cases. You can use templates as-is, or as a baseline to customize.
 

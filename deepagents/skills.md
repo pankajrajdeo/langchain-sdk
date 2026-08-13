@@ -1,6 +1,6 @@
 # Skills
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/skills)
-Learn how to extend your deep agent's capabilities with skills
+
+> Learn how to extend your deep agent's capabilities with skills
 
 Skills package domain expertise, such as workflows, best practices, scripts, reference docs, and templates, into reusable directories. The agent gets a summary of the contents on startup and discovers and reads the contained files only when relevant.
 
@@ -136,11 +136,11 @@ Skills load in three levels. Each level adds more detail only when the task need
 
 The following diagram shows what appears in agent context at a given moment. At startup, level 1 metadata for every skill is in the system prompt. When a skill is invoked, level 2 instructions join the context. Level 3 files stay on the backend until the agent reads them after invocation.
 
-> **Image:** [How skill components map into agent context at startup and activation](skills.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-composition.svg?fit=max&auto=format&n=-Q4wgirblfw7Ioet&q=85&s=9450c441ece57465053644ede8991271" alt="How skill components map into agent context at startup and activation" width="920" height="500" data-path="oss/images/deepagents/skills-composition.svg" />
 
 As the agent works through a task, it loads skill information in layers:
 
-> **Image:** [How skills load in layers from metadata to instructions to resources](skills.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-Q4wgirblfw7Ioet/oss/images/deepagents/skills-progressive-disclosure.svg?fit=max&auto=format&n=-Q4wgirblfw7Ioet&q=85&s=ba55587d858f5588bea425dc503e3246" alt="How skills load in layers from metadata to instructions to resources" width="720" height="460" data-path="oss/images/deepagents/skills-progressive-disclosure.svg" />
 
 In Deep Agents, [`SkillsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/skills/SkillsMiddleware) (part of the [Deep Agents stack](customization.md#deep-agents-stack) when you pass `skills`) handles the first two levels, with the third level being handled by the LLM:
 

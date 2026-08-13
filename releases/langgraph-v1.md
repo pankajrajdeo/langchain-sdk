@@ -1,5 +1,5 @@
 # What's new in LangGraph v1
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/langgraph-v1)
+
 **LangGraph v1 is a stability-focused release for the agent runtime.** It keeps the core graph APIs and execution model unchanged, while refining type safety, docs, and developer ergonomics.
 
 It's designed to work hand-in-hand with [LangChain v1](langchain-v1.md) (whose `create_agent` is built on LangGraph) so you can start high-level and drop down to granular control when needed.

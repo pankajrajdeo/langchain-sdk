@@ -1,6 +1,6 @@
 # Deploy with control plane
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-with-control-plane)
-Build Docker images and deploy applications to a self-hosted LangSmith instance using the control plane UI.
+
+> Build Docker images and deploy applications to a self-hosted LangSmith instance using the control plane UI.
 
 > [!NOTE]
 > **This guide is for self-hosted LangSmith customers** who have [enabled LangSmith Deployment](deploy-self-hosted-full-platform.md#enable-langsmith-deployment) on their instance. For Cloud customers, see [Deploy on Cloud](deploy-to-cloud.md). For standalone Agent Servers without a control plane, see [Self-host standalone servers](deploy-standalone-server.md).

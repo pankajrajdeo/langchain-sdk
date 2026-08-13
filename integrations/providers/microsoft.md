@@ -1,6 +1,6 @@
 # Microsoft integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/microsoft)
-Integrate with Microsoft using LangChain Python.
+
+> Integrate with Microsoft using LangChain Python.
 
 This page covers all LangChain integrations with [Microsoft Azure](https://portal.azure.com) and other [Microsoft](https://www.microsoft.com) products.
 

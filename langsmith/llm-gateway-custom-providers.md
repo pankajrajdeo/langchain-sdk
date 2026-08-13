@@ -1,6 +1,6 @@
 # Custom model providers
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-custom-providers)
-Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
+
+> Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

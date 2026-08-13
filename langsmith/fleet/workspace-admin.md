@@ -1,6 +1,6 @@
 # Manage workspace administration
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/workspace-admin)
-Configure workspace-level settings for Fleet.
+
+> Configure workspace-level settings for Fleet.
 
 Configure workspace secrets and manage spend limits for Fleet agents and users.
 

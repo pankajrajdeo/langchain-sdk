@@ -1,5 +1,5 @@
 # Configure prompt settings
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/managing-model-configurations)
+
 The [Playground](prompt-engineering-concepts.md#playground) enables you to control various settings for your prompts. The **Prompt Settings** window contains:
 
 * [Model configuration](#model-configurations)
@@ -11,9 +11,9 @@ To access **Prompt Settings**:
 1. Navigate to the **Playground** in the left sidebar.
 2. Under the **Prompts** heading select the gear  icon next to the model name, which will launch the **Prompt Settings** window.
 
-> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](managing-model-configurations.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/6r3GRtwWCl4ozaHW/langsmith/images/model-config-light.png?fit=max&auto=format&n=6r3GRtwWCl4ozaHW&q=85&s=6c0f7d7012b1e5295fe545149f955e6b" alt="Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc." width="886" height="689" data-path="langsmith/images/model-config-light.png" />
 
-> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](managing-model-configurations.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/ppc8uxWc01j4q7Ia/langsmith/images/model-config-dark.png?fit=max&auto=format&n=ppc8uxWc01j4q7Ia&q=85&s=2e9da272c3fc8f7ac958c6e6d1da85e3" alt="Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc." width="881" height="732" data-path="langsmith/images/model-config-dark.png" />
 
 ## Model configurations
 

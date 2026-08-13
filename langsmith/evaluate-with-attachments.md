@@ -1,6 +1,6 @@
 # Run an evaluation with multimodal content
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-with-attachments)
-Learn how to create dataset examples with file attachments and use them in prompts and evaluators when running LangSmith evaluations with multimodal content.
+
+> Learn how to create dataset examples with file attachments and use them in prompts and evaluators when running LangSmith evaluations with multimodal content.
 
 LangSmith lets you create dataset examples with file attachments, like images, audio files, or documents, and use them in your prompts and evaluators when running evaluations with multimodal content.
 
@@ -22,15 +22,15 @@ You can add examples with attachments to a dataset in a few different ways.
 
 When adding runs to a LangSmith dataset, attachments can be selectively propagated from the source run to the destination example. To learn more, please see [Manage datasets in application](manage-datasets-in-application.md#manually-from-a-tracing-project).
 
-> **Image:** [Add trace with attachments to dataset](evaluate-with-attachments.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/add-trace-with-attachments-to-dataset.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=b8fa62cb39c4f1fc67d9b24fa78d1653" alt="Add trace with attachments to dataset" width="1662" height="679" data-path="langsmith/images/add-trace-with-attachments-to-dataset.png" />
 
 #### From scratch
 
 You can create examples with attachments directly from the LangSmith UI. Click the `+ Example` button in the `Examples` tab of the dataset UI. Then upload attachments using the "Upload Files" button:
 
-> **Image:** [Create example with attachments](evaluate-with-attachments.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/aKRoUGXX6ygp4DlC/langsmith/images/create-example-with-attachments.png?fit=max&auto=format&n=aKRoUGXX6ygp4DlC&q=85&s=183f929c807f59157e93d40354057933" alt="Create example with attachments" width="3456" height="1856" data-path="langsmith/images/create-example-with-attachments.png" />
 
-Once uploaded, you can view examples with attachments in the LangSmith UI. Each attachment will be rendered with a preview for easy inspection. <img alt="Attachments with examples" />
+Once uploaded, you can view examples with attachments in the LangSmith UI. Each attachment will be rendered with a preview for easy inspection. <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachments-with-examples.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=8f813bdf7d3bfd5a840e5f8c47693ed3" alt="Attachments with examples" width="1331" height="593" data-path="langsmith/images/attachments-with-examples.png" />
 
 ## 2. Create a multimodal prompt
 
@@ -41,7 +41,7 @@ First, click the file icon in the message where you want to add multimodal conte
 * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator
 * If you want to include all attachments, use the `{{attachments}}` variable.
 
-> **Image:** [Adding multimodal variable](evaluate-with-attachments.md)
+      <img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/adding-multimodal-variable.gif?s=07a15c9fc5e6fc743f92b6b41ab8c9e0" alt="Adding multimodal variable" width="1700" height="1080" data-path="langsmith/images/adding-multimodal-variable.gif" />
 
 ## 3. Define custom evaluators
 
@@ -58,9 +58,9 @@ Since your dataset already has examples with attachments (added in step 1), you 
    * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator.
    * If you want to include all attachments, use the `{{attachments}}` variable.
 
-> **Image:** [Create evaluator modal with an audio attachment selected for output variable.](evaluate-with-attachments.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/33Yp30f4EIrgRH-K/langsmith/images/evaluator-attach-file-light.png?fit=max&auto=format&n=33Yp30f4EIrgRH-K&q=85&s=52a67ecb05d402fd8c93f030b8d5f0f1" alt="Create evaluator modal with an audio attachment selected for output variable." width="1996" height="1712" data-path="langsmith/images/evaluator-attach-file-light.png" />
 
-> **Image:** [Create evaluator modal with an audio attachment selected for output variable.](evaluate-with-attachments.md)
+       <img src="https://mintcdn.com/langchain-5e9cc07a/33Yp30f4EIrgRH-K/langsmith/images/evaluator-attach-file-dark.png?fit=max&auto=format&n=33Yp30f4EIrgRH-K&q=85&s=32abe202fe2fd3ab51acf728031e2bdf" alt="Create evaluator modal with an audio attachment selected for output variable." width="1998" height="1714" data-path="langsmith/images/evaluator-attach-file-dark.png" />
 
 The evaluator can then use these attachments along with the model's outputs to judge quality. For example, you could create an evaluator that:
 
@@ -91,7 +91,7 @@ When editing an example in the UI, you can:
 
 Changes are not saved until you click submit.
 
-> **Image:** [Attachment editing](evaluate-with-attachments.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/attachment-editing.gif?s=4f165ed98fe81722961778ebbe1691ed" alt="Attachment editing" width="1204" height="720" data-path="langsmith/images/attachment-editing.gif" />
 
 #### SDK
 ## 1. Create examples with attachments

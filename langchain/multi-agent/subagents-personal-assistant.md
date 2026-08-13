@@ -1,5 +1,5 @@
 # Build a personal assistant with subagents
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant)
+
 ## Overview
 
 The **supervisor pattern** is a [multi-agent](../multi-agent.md) architecture where a central supervisor agent coordinates specialized worker agents. This approach excels when tasks require different types of expertise. Rather than building one agent that manages tool selection across domains, you create focused specialists coordinated by a supervisor who understands the overall workflow.

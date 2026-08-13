@@ -1,5 +1,5 @@
 # Add metadata and tags to traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/add-metadata-tags)
+
 LangSmith supports sending arbitrary metadata and tags along with traces.
 
 Tags are strings that can be used to categorize or label a trace. Metadata is a dictionary of key-value pairs that can be used to store additional information about a trace.

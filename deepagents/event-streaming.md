@@ -1,6 +1,6 @@
 # Event streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/event-streaming)
-Stream subagents, messages, tool calls, and final output from Deep Agents.
+
+> Stream subagents, messages, tool calls, and final output from Deep Agents.
 
 This page covers streaming concerns specific to Deep Agents—most importantly, streaming from delegated subagents via `stream.subagents`. For general agent streaming (`stream.messages`, `stream.values`, tool calls, custom updates), see [LangChain Event Streaming](../langchain/event-streaming.md).
 

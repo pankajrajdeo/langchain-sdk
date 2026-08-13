@@ -1,6 +1,6 @@
 # LangSmith Fleet changelog
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/changelog)
-Weekly updates to LangSmith Fleet
+
+> Weekly updates to LangSmith Fleet
 
 Weekly updates to [LangSmith Fleet](../fleet.md).
 

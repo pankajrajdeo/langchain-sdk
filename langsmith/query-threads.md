@@ -1,6 +1,6 @@
 # Query threads using the SDK
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/query-threads)
-Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects.
+
+> Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects.
 
 If you're building a conversational agent or any multi-turn application, LangSmith automatically groups your [runs](run-data-format.md) into [*threads*](observability-concepts.md#threads). Querying threads lets you replay full conversations, audit agent behavior across sessions, build analytics on conversation length and latency, and feed downstream workflows like fine-tuning and evaluation.
 

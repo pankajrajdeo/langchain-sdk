@@ -1,6 +1,6 @@
 # Provider credentials
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/credentials)
-Add and manage API keys for model providers, Tavily web search, and LangSmith tracing
+
+> Add and manage API keys for model providers, Tavily web search, and LangSmith tracing
 
 Deep Agents Code needs an API key for each model provider you use. The recommended way to add one is the [`/auth`](#use-%2Fauth-recommended) credential manager. For non-interactive runs, manage the same stored keys from the shell with [`dcode auth`](#manage-credentials-from-the-shell-dcode-auth) or set [environment variables](#environment-variables-ci-and-headless) instead.
 

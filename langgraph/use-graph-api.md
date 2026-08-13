@@ -1,5 +1,5 @@
 # Use the graph API
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-graph-api)
+
 This guide demonstrates the basics of LangGraph's Graph API. It walks through [state](#define-and-update-state), as well as composing common graph structures such as [sequences](#create-a-sequence-of-steps), [branches](#create-branches), and [loops](#create-and-control-loops). It also covers LangGraph's control features, including the [Send API](#map-reduce-and-the-send-api) for map-reduce workflows and the [Command API](#combine-control-flow-and-state-updates-with-command) for combining state updates with "hops" across nodes.
 
 ## Setup
@@ -82,7 +82,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Simple graph with single node](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_1.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=cf3d978b707847e166d5ed15bc7cbbe4" alt="Simple graph with single node" width="107" height="134" data-path="oss/images/graph_api_image_1.png" />
 
 In this case, our graph just executes a single node. Let's proceed with a simple invocation:
 
@@ -1198,7 +1198,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Sequence of steps graph](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_2.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=fa0376786cc89d704a5435abba178804" alt="Sequence of steps graph" width="107" height="333" data-path="oss/images/graph_api_image_2.png" />
 
 Let's proceed with a simple invocation:
 
@@ -1286,7 +1286,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Parallel execution graph](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_3.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=8359f2e8d9dde03d7cc25f9d755a428d" alt="Parallel execution graph" width="143" height="432" data-path="oss/images/graph_api_image_3.png" />
 
 With the reducer, you can see that the values added in each node are accumulated.
 
@@ -1388,7 +1388,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Deferred execution graph](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_4.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=44cd97f020dfefeaffbe2b012514f343" alt="Deferred execution graph" width="161" height="531" data-path="oss/images/graph_api_image_4.png" />
 
 ```python
 graph.invoke({"aggregate": []})
@@ -1456,7 +1456,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Conditional branching graph](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_5.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=3373a383d5acc3e4d6a4d1575e849146" alt="Conditional branching graph" width="143" height="333" data-path="oss/images/graph_api_image_5.png" />
 
 ```python
 result = graph.invoke({"aggregate": []})
@@ -1529,7 +1529,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Map-reduce graph with fanout](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_6.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=48249d2085e8bfc63a142ccfba5082f5" alt="Map-reduce graph with fanout" width="160" height="432" data-path="oss/images/graph_api_image_6.png" />
 
 ```python
 # Call the graph: here we call it to generate a list of jokes
@@ -1632,7 +1632,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Simple loop graph](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/graph_api_image_7.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=e1b99e7efe45b1fdc5836d590d5fbbc3" alt="Simple loop graph" width="188" height="249" data-path="oss/images/graph_api_image_7.png" />
 
 This architecture is similar to a [ReAct agent](workflows-agents.md) in which node `"a"` is a tool-calling model, and node `"b"` represents the tools.
 
@@ -1791,7 +1791,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Complex loop graph with branches](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/dL5Sn6Cmy9pwtY0V/oss/images/graph_api_image_8.png?fit=max&auto=format&n=dL5Sn6Cmy9pwtY0V&q=85&s=20e2a9e8c15760eb9ecb07fc411aa70e" alt="Complex loop graph with branches" width="297" height="348" data-path="oss/images/graph_api_image_8.png" />
 
 This graph looks complex, but can be conceptualized as loop of [supersteps](graph-api.md#graphs):
 
@@ -2178,7 +2178,7 @@ from IPython.display import display, Image
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Command-based graph navigation](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_11.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=f11e5cddedbf2760d40533f294c44aea" alt="Command-based graph navigation" width="232" height="333" data-path="oss/images/graph_api_image_11.png" />
 
 If we run the graph multiple times, we'd see it take different paths (A -> B or A -> C) based on the random choice in node A.
 
@@ -2413,7 +2413,7 @@ from langchain_core.runnables.graph import CurveStyle, MermaidDrawMethod, NodeSt
 display(Image(app.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Fractal graph visualization](use-graph-api.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-_xGPoyjhyiDWTPJ/oss/images/graph_api_image_10.png?fit=max&auto=format&n=-_xGPoyjhyiDWTPJ&q=85&s=6cb916b7c627e81c2816cc74ebf3f913" alt="Fractal graph visualization" width="2382" height="1131" data-path="oss/images/graph_api_image_10.png" />
 
 **Using Mermaid + Pyppeteer**
 

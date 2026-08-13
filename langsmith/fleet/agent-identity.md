@@ -1,6 +1,6 @@
 # Agent identity
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/agent-identity)
-Choose whether your Fleet agent authenticates with its own credentials or with each user's credentials.
+
+> Choose whether your Fleet agent authenticates with its own credentials or with each user's credentials.
 
 Agent identity controls whose [credentials](workspace-admin.md) the agent uses when it interacts with apps and services.
 

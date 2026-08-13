@@ -1,6 +1,6 @@
 # Event streaming
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/event-streaming)
-Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
+
+> Stream LangGraph runs with typed projections for messages, state, subgraphs, output, and extensions.
 
 Event streaming is the recommended in-process streaming model for most LangGraph application code. It returns a run stream object that can be consumed in multiple ways at the same time.
 

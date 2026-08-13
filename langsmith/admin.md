@@ -1,6 +1,6 @@
 # Account
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/admin)
-Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers.
+
+> Set up your LangSmith account, including API keys, profile configuration, integrations, and pricing tiers.
 
 Set up your LangSmith account: create API keys, configure your profile, connect integrations, and choose the right pricing tier.
 

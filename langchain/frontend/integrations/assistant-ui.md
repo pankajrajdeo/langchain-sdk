@@ -1,6 +1,6 @@
 # assistant-ui
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui)
-Headless React AI chat framework with a full runtime layer, bridged to useStream
+
+> Headless React AI chat framework with a full runtime layer, bridged to useStream
 
 [assistant-ui](https://www.assistant-ui.com/) is a headless React UI framework for AI chat. It provides a full runtime layer—thread management, message branching, attachment handling—that connects to [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) via the `useExternalStoreRuntime` adapter.
 

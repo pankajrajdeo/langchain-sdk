@@ -1,5 +1,5 @@
 # Rollback Concurrent
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/rollback-concurrent)
+
 This guide assumes knowledge of what double-texting is, which you can learn about in the [double-texting conceptual guide](double-texting.md).
 
 The guide covers the `rollback` option for double texting, which interrupts the prior run of the graph and starts a new one with the double-text. This option is very similar to the `interrupt` option, but in this case the first run is completely deleted from the database and cannot be restarted. Below is a quick example of using the `rollback` option.

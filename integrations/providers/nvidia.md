@@ -1,6 +1,6 @@
 # NVIDIA
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
-Integrate with NVIDIA using LangChain Python.
+
+> Integrate with NVIDIA using LangChain Python.
 
 LangChain and NVIDIA have partnered across the agent stack:
 

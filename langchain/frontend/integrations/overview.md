@@ -1,6 +1,6 @@
 # Overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/integrations/overview)
-Connect useStream to any React UI component library or generative UI framework
+
+> Connect useStream to any React UI component library or generative UI framework
 
 [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) is UI-agnostic. It returns plain reactive state with messages, tool calls, loading flags, values, and thread metadata that you wire to any visual layer you choose. These pages show how different libraries integrate with LangChain frontends, each with a different philosophy for building AI chat and generative UI.
 

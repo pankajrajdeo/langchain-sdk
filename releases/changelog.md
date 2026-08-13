@@ -1,6 +1,6 @@
 # Changelog
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/changelog)
-Log of updates and improvements to our Python packages
+
+> Log of updates and improvements to our Python packages
 
 > [!NOTE]
 > **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/python/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
@@ -131,16 +131,16 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 <summary>Disable data retention with the Responses API</summary>
 
 ```python
-  from langchain.chat_models import init_chat_model
+    from langchain.chat_models import init_chat_model
 
-  agent = create_deep_agent(
-      model=init_chat_model(
-          "openai:...",
-          use_responses_api=True,
-          store=False,
-          include=["reasoning.encrypted_content"],
-      )
-  )
+    agent = create_deep_agent(
+        model=init_chat_model(
+            "openai:...",
+            use_responses_api=True,
+            store=False,
+            include=["reasoning.encrypted_content"],
+        )
+    )
 ```
 
 </details>

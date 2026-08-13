@@ -1,5 +1,5 @@
 # Data purging for compliance
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/data-purging-compliance)
+
 This guide covers the various features available after data reaches LangSmith Cloud servers to help you achieve your privacy goals.
 
 ## Data retention

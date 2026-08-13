@@ -1,5 +1,5 @@
 # Self-hosted LangSmith on AWS
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/aws-self-hosted)
+
 When running LangSmith on [Amazon Web Services (AWS)](https://aws.amazon.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
 
 This page provides:
@@ -52,7 +52,7 @@ After completing these initial setup steps, you can review the complete AWS arch
 
 We recommend leveraging AWS's managed services to provide a scalable, secure, and resilient platform. The following architecture applies to both self-hosted and hybrid and aligns with the [AWS Well-Architected Framework](https://aws.amazon.com/architecture/well-architected/):
 
-> **Image:** [Architecture diagram showing AWS relations to LangSmith services](aws-self-hosted.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/MMsbRrh5gYIlD_3t/langsmith/images/aws-architecture-self-hosted.png?fit=max&auto=format&n=MMsbRrh5gYIlD_3t&q=85&s=c2ae668eb790588e05a86aaca8e8fc76" alt="Architecture diagram showing AWS relations to LangSmith services" width="2198" height="1498" data-path="langsmith/images/aws-architecture-self-hosted.png" />
 
 *  **Ingress & networking**: Requests enter via [Amazon Application Load Balancer (ALB)](https://aws.amazon.com/elasticloadbalancing/application-load-balancer/) within your [VPC](https://aws.amazon.com/vpc/), secured using [AWS WAF](https://aws.amazon.com/waf/) and [IAM](https://aws.amazon.com/iam/)-based authentication.
 

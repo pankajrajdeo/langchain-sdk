@@ -1,6 +1,6 @@
 # Data protection
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-data-protection)
-Scan and redact PII and secrets from LLM requests before they reach providers.
+
+> Scan and redact PII and secrets from LLM requests before they reach providers.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).

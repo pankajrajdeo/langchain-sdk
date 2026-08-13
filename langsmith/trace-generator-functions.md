@@ -1,5 +1,5 @@
 # Trace generator functions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-generator-functions)
+
 In most LLM applications, you will want to stream outputs to minimize the time to the first token seen by the user.
 
 LangSmith's tracing functionality natively supports streamed outputs via `generator` functions. Below is an example.

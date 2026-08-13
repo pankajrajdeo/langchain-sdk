@@ -1,6 +1,6 @@
 # Sandboxes
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/sandboxes)
-Execute code in isolated environments with sandbox backends
+
+> Execute code in isolated environments with sandbox backends
 
 Agents generate code, interact with filesystems, and run shell commands. Because you can't predict what an agent might do, it's important that its environment is isolated so it can't access credentials, files, or the network. Sandboxes provide this isolation by creating a boundary between the agent's execution environment and your host system.
 

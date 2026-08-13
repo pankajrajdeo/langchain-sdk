@@ -1,6 +1,6 @@
 # GCP Terraform variables reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-variables)
-Complete reference of Terraform variables for LangSmith self-hosted on GCP GKE.
+
+> Complete reference of Terraform variables for LangSmith self-hosted on GCP GKE.
 
 Complete reference for every input variable exposed by the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp). Use it while filling in `terraform.tfvars` for the first time or tuning an existing deployment.
 

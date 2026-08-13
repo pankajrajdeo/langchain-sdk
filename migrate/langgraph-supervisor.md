@@ -1,6 +1,6 @@
 # Migrate from langgraph-supervisor
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langgraph-supervisor)
-Migrate from the langgraph-supervisor package to the subagents pattern with create_agent and tool-wrapped subagents.
+
+> Migrate from the langgraph-supervisor package to the subagents pattern with create_agent and tool-wrapped subagents.
 
 The [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package is no longer actively maintained. Instead use the [subagents](../langchain/multi-agent/subagents.md) pattern: a main agent coordinates specialized workers by calling them as [tools](../langchain/tools.md).
 

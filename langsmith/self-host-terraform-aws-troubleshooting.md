@@ -1,6 +1,6 @@
 # AWS Terraform troubleshooting
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-aws-troubleshooting)
-Common issues, fixes, and diagnostic commands for LangSmith self-hosted on AWS EKS deployed with the LangChain Terraform modules.
+
+> Common issues, fixes, and diagnostic commands for LangSmith self-hosted on AWS EKS deployed with the LangChain Terraform modules.
 
 This page documents common issues, fixes, and diagnostic commands for LangSmith deployments provisioned with the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws).
 

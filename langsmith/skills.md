@@ -1,6 +1,6 @@
 # LangSmith skills
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/skills)
-Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
+
+> Use Agent Skills to work with LangSmith traces, datasets, and evaluators from your coding agent.
 
 Agent Skills are reusable, on‑demand capabilities that bundle instructions plus optional helper scripts. This page summarizes the LangSmith‑oriented skills you can add to a compatible coding agent to query traces, generate datasets, and define evaluators. To work with the same LangSmith data directly from the terminal, use the [LangSmith CLI](langsmith-cli.md).
 

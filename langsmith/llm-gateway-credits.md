@@ -1,6 +1,6 @@
 # Gateway Credits
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-credits)
-Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
+
+> Use Gateway Credits to access models without a provider key, just authenticate with LangSmith.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md). APIs and features may change as we iterate.

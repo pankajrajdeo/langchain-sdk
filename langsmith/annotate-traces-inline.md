@@ -1,5 +1,5 @@
 # Annotate traces and runs inline
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotate-traces-inline)
+
 LangSmith allows you to manually annotate traces with feedback within the application. This can be useful for adding context to a trace, such as a user's comment or a note about a specific issue.
 You can annotate a trace either inline or by sending the trace to an annotation queue, which allows you to closely inspect and log feedbacks to runs one at a time.
 Feedback tags are associated with your [workspace](administration-overview.md#workspaces).
@@ -16,7 +16,7 @@ You can also set up new feedback criteria from within the pane itself.
 
 Inline feedback and notes in the LangSmith UI do not change the trace's [retention tier](usage-and-billing.md#data-retention-auto-upgrades); the trace keeps the retention configured for its project unless another action explicitly extends retention.
 
-> **Image:** [Annotation sidebar](annotate-traces-inline.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/E8FdemkcQxROovD9/langsmith/images/annotation-sidebar.png?fit=max&auto=format&n=E8FdemkcQxROovD9&q=85&s=6a16e79d91b435f6c5de94d0d58daa59" alt="Annotation sidebar" width="1376" height="758" data-path="langsmith/images/annotation-sidebar.png" />
 
 You can use the labeled keyboard shortcuts to streamline the annotation process.
 

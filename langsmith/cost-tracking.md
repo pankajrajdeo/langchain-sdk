@@ -1,5 +1,5 @@
 # Cost tracking
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cost-tracking)
+
 Building agents at scale introduces non-trivial, usage-based costs that can be difficult to track. LangSmith automatically records LLM token usage and costs for major providers, and also allows you to submit custom cost data for any additional components.
 
 This gives you a single, unified view of costs across your entire application, which makes it easy to monitor, understand, and debug your spend.
@@ -20,9 +20,9 @@ The UI separates token usage and costs into three categories:
 
 You can view detailed breakdowns by hovering over cost sections in the UI. When available, each section is further categorized by subtype.
 
-> **Image:** [Cost tooltip](cost-tracking.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/S029Harmw-iSrSVw/langsmith/images/cost-tooltip-light.png?fit=max&auto=format&n=S029Harmw-iSrSVw&q=85&s=49971715854df465e81e53ad6b7b297c" alt="Cost tooltip" width="894" height="400" data-path="langsmith/images/cost-tooltip-light.png" />
 
-> **Image:** [Cost tooltip](cost-tracking.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/S029Harmw-iSrSVw/langsmith/images/cost-tooltip-dark.png?fit=max&auto=format&n=S029Harmw-iSrSVw&q=85&s=a51c9bc7bbd1836231b80d7d5a8db735" alt="Cost tooltip" width="900" height="394" data-path="langsmith/images/cost-tooltip-dark.png" />
 
 You can inspect these breakdowns throughout the LangSmith UI:
 
@@ -542,38 +542,38 @@ To compute cost automatically from token usage, you need to provide **token coun
 
    The following fields in the `usage_metadata` dict are recognized by LangSmith. You can view the full [Python types](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/python/langsmith/schemas.py#L1196-L1227) or [TypeScript interfaces](https://github.com/langchain-ai/langsmith-sdk/blob/e705fbd362be69dd70229f94bc09651ef8056a61/js/src/schemas.ts#L637-L689) directly.
 
-#### `Field` — `number`
+#### `input_tokens` — `number`
    Number of tokens used in the model input. Sum of all input token types.
 
-#### `Field` — `number`
+#### `output_tokens` — `number`
    Number of tokens used in the model response. Sum of all output token types.
 
-#### `Field` — `number`
+#### `total_tokens` — `number`
    Number of tokens used in the input and output. Optional, can be inferred. Sum of input\_tokens + output\_tokens.
 
-#### `Field` — `object`
+#### `input_token_details` — `object`
    Breakdown of input token types. Keys are token-type strings, values are counts. Example `{"cache_read": 5}`.
 
    Known fields include: `audio`, `text`, `image`, `cache_read`, `cache_creation`, `cache_read_over_200k` (Gemini), `ephemeral_5m_input_tokens`, `ephemeral_1h_input_tokens` (Anthropic ephemeral caching tiers). Additional fields are possible depending on the model or provider.
 
-#### `Field` — `object`
+#### `output_token_details` — `object`
    Breakdown of output token types. Keys are token-type strings, values are counts. Example `{"reasoning": 5}`.
 
    Known fields include: `audio`, `text`, `image`, `reasoning`. Additional fields are possible depending on the model or provider.
 
-#### `Field` — `number`
+#### `input_cost` — `number`
    Cost of the input tokens.
 
-#### `Field` — `number`
+#### `output_cost` — `number`
    Cost of the output tokens.
 
-#### `Field` — `number`
+#### `total_cost` — `number`
    Cost of the tokens. Optional, can be inferred.  Sum of input\_cost + output\_cost.
 
-#### `Field` — `object`
+#### `input_cost_details` — `object`
    Details of the input cost. Keys are token-type strings, values are cost amounts.
 
-#### `Field` — `object`
+#### `output_cost_details` — `object`
    Details of the output cost. Keys are token-type strings, values are cost amounts.
 
    **Cost Calculations**

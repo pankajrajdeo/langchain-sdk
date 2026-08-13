@@ -1,6 +1,6 @@
 # Redact sensitive data with the OpenTelemetry Gateway architecture
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/otel-gateway-trace-redaction)
-Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith.
+
+> Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith.
 
 [LangChain](trace-with-langchain.md), [LangGraph](trace-with-langgraph.md), and [Deep Agents](trace-deep-agents.md) applications support [OpenTelemetry-based tracing](trace-with-opentelemetry.md). Instead of sending traces directly to LangSmith, you can route them through an OpenTelemetry collector you control, apply redaction rules to strip sensitive fields, and forward the sanitized traces to LangSmith.
 

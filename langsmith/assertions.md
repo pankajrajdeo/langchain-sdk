@@ -1,6 +1,6 @@
 # Use assertions
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/assertions)
-Capture free-form acceptance criteria as dataset examples by writing assertions while reviewing runs in an annotation queue.
+
+> Capture free-form acceptance criteria as dataset examples by writing assertions while reviewing runs in an annotation queue.
 
 Assertions turn a reviewer's English-language standards into an automated check. They are short, free-form claims about what a correct answer should or shouldn't include. You write them while reviewing a run in a [single-run annotation queue](annotation-queues.md#single-run-annotation-queues), and LangSmith saves each one on a [dataset example](example-data-format.md). Any [offline evaluator](evaluation-concepts.md#offline-evaluations) can then check whether new outputs from your application satisfy each claim.
 
@@ -31,9 +31,9 @@ Use assertions when:
 
    The run editor shows the run's inputs and outputs alongside the assertions side panel. As soon as you add at least one assertion, the run editor's **Outputs** panel switches from the run's actual output to a read-only preview of the assertions you've added. This preview is what gets saved to the dataset. The run's actual output is not saved, because assertions describe what a correct answer should include, not what this run produced.
 
-> **Image:** [Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions.](assertions.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/kbN1Ka5QXqhpP8_U/langsmith/images/assertions-example-light.png?fit=max&auto=format&n=kbN1Ka5QXqhpP8_U&q=85&s=e8a7d284293aad69176dd9f6caff0042" alt="Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions." width="1907" height="856" data-path="langsmith/images/assertions-example-light.png" />
 
-> **Image:** [Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions.](assertions.md)
+   <img src="https://mintcdn.com/langchain-5e9cc07a/kbN1Ka5QXqhpP8_U/langsmith/images/assertions-example-dark.png?fit=max&auto=format&n=kbN1Ka5QXqhpP8_U&q=85&s=ed7a3ee9efbfa80a58ba76bc37cafda9" alt="Annotation queue run editor with assertions added in the side panel and the Outputs panel showing a read-only preview of those assertions." width="1903" height="849" data-path="langsmith/images/assertions-example-dark.png" />
 
    You can keep editing the run's **Inputs** at any time, for example to refine the prompt before saving the example. The **Outputs** panel stays locked to the assertion preview while any assertions remain.
 

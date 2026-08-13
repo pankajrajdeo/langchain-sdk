@@ -1,5 +1,5 @@
 # Memory
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/add-memory)
+
 AI applications need [memory](../concepts/memory.md) to share context across multiple interactions. In LangGraph, you can add two types of memory:
 
 * [Add short-term memory](#add-short-term-memory) as a part of your agent's [state](graph-api.md#state) to enable multi-turn conversations.
@@ -1351,7 +1351,7 @@ for snapshot in stream.values:
 
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue. Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-> **Image:** [Summary](add-memory.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/ybiAaBfoBvFquMDz/oss/images/summary.png?fit=max&auto=format&n=ybiAaBfoBvFquMDz&q=85&s=c8ed3facdccd4ef5c7e52902c72ba938" alt="Summary" width="609" height="242" data-path="oss/images/summary.png" />
 
 Prompting and orchestration logic can be used to summarize the message history. For example, in LangGraph you can extend the [`MessagesState`](graph-api.md#working-with-messages-in-graph-state) to include a `summary` key:
 
@@ -1468,6 +1468,8 @@ Summary: In this conversation, I was introduced to Bob, who then asked me to wri
 
 You can view and delete the information stored by the checkpointer.
 
+<a id="checkpoint" />
+
 #### View thread state
 
 #### Graph/Functional API
@@ -1537,6 +1539,8 @@ CheckpointTuple(
     pending_writes=[]
 )
 ```
+
+<a id="checkpoints" />
 
 #### View the history of the thread
 

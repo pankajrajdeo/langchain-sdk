@@ -1,6 +1,6 @@
 # Voice tracing fundamentals
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
-Best practices for tracing voice and audio agents in LangSmith, including conversation audio, single-trace conversations, and the audio modality flag.
+
+> Best practices for tracing voice and audio agents in LangSmith, including conversation audio, single-trace conversations, and the audio modality flag.
 
 [Tracing](observability-concepts.md#traces) a voice agent is different from tracing a text agent. A conversation is continuous, bidirectional, and interruptible: users talk over the agent, change topics mid-sentence, and expect sub-second responses. To debug and evaluate these systems, your traces need to capture the conversation as a single, audio-aware unit rather than a series of disconnected text exchanges.
 

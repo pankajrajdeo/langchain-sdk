@@ -1,6 +1,6 @@
 # Manage evaluators
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluators)
-View and manage evaluators at the workspace level in LangSmith.
+
+> View and manage evaluators at the workspace level in LangSmith.
 
 [Evaluators](evaluation-concepts.md#evaluators) in LangSmith are [workspace-level](administration-overview.md#workspaces) resources. You can attach a single evaluator to multiple [tracing projects](observability-concepts.md#projects) and [datasets](evaluation-concepts.md#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
 

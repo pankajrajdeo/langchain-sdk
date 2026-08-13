@@ -1,6 +1,6 @@
 # Sandbox SDK usage
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-sdk)
-Create and manage sandboxes programmatically with the Python or TypeScript SDK.
+
+> Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
 The [LangSmith SDK](reference.md) provides a programmatic interface to create and interact with sandboxes.
 
@@ -27,6 +27,15 @@ npm install ws
 ```
 
 ## Create and run a sandbox
+
+The client reads `LANGSMITH_API_KEY` and `LANGSMITH_ENDPOINT` from the environment, so export both before you create a sandbox:
+
+```bash
+export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
+export LANGSMITH_ENDPOINT="<LANGSMITH_ENDPOINT>"
+```
+
+`LANGSMITH_ENDPOINT` defaults to `https://api.smith.langchain.com` (GCP US). Set it to your data plane URL on [BYOC](byoc.md), your instance URL on [self-hosted](self-hosted.md), or the [API URL for your region](create-account-api-key.md#configure-the-sdk) on other Cloud regions.
 
 Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](sandbox-snapshots.md) for that flow.
 

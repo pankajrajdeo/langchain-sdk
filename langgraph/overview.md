@@ -1,6 +1,6 @@
 # LangGraph overview
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/overview)
-Gain control with LangGraph to design agents that reliably handle complex tasks
+
+> Gain control with LangGraph to design agents that reliably handle complex tasks
 
 Trusted by companies shaping the future of agents—including Klarna, Uber, J.P. Morgan, and more—LangGraph is a low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents. LangGraph gives you fine-grained control to mix deterministic, hand-coded steps with LLM-driven agentic steps in the same graph, so you can build bespoke agents that behave exactly the way your application requires.
 

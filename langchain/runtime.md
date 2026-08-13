@@ -1,5 +1,5 @@
 # Runtime
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/runtime)
+
 ## Overview
 
 LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) runs on LangGraph's runtime under the hood.

@@ -1,5 +1,5 @@
 # Set a sampling rate for traces
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sample-traces)
+
 When working with high-volume applications, you may not want to log every trace to LangSmith. Sampling rates allow you to control what percentage of traces are logged, helping you balance observability needs with cost considerations.
 
 This guide shows you how to set a global sampling rate with the `LANGSMITH_TRACING_SAMPLING_RATE` environment variable, and how to apply different sampling rates per `Client` instance for finer-grained control over which operations are traced.

@@ -1,5 +1,5 @@
 # Workload isolation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/workload-isolation)
+
 LangSmith uses a hierarchical structure to organize your work: [*organizations*](administration-overview.md#organizations), [*workspaces*](administration-overview.md#workspaces), [*applications*](administration-overview.md#applications), and [*resources*](administration-overview.md#resources). This structure lets you balance collaboration with access control, allowing you to choose the right level of isolation for your team's needs.
 
 The LangSmith permission system builds on this hierarchy. With [role-based access control (RBAC)](rbac.md), user [permissions](organization-workspace-operations.md) are scoped to one or more workspaces, enforcing isolation between workspaces. With more fine-grained [attribute-based access control](organization-workspace-operations.md#access-policies) (ABAC), access can be further restricted or granted based on attributes such as tags or applications within a workspace (for example, allowing users to access only development resources or only resources associated with a specific application).

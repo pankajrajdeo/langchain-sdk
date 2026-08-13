@@ -1,6 +1,6 @@
 # Command reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/cli-reference)
-OpenWiki command-line usage, flags, and connector subcommands
+
+> OpenWiki command-line usage, flags, and connector subcommands
 
 OpenWiki ships as a single `openwiki` binary for interactive chat and one-shot documentation runs. For installation and first use, see [Quickstart](quickstart.md).
 

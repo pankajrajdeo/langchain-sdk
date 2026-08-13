@@ -1,6 +1,6 @@
 # Approval modes
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/approval-modes)
-Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
+
+> Choose how Deep Agents Code reviews gated tool calls with Manual, Auto, and YOLO modes
 
 By default, Deep Agents Code asks for your approval before running potentially consequential actions. These are called **gated actions** and include things like:
 

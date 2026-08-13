@@ -1,6 +1,6 @@
 # GCP Terraform troubleshooting
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-terraform-gcp-troubleshooting)
-Common issues, fixes, and diagnostic commands for LangSmith self-hosted on GKE deployed with the LangChain Terraform modules.
+
+> Common issues, fixes, and diagnostic commands for LangSmith self-hosted on GKE deployed with the LangChain Terraform modules.
 
 This page documents common issues, fixes, and diagnostic commands for LangSmith deployments provisioned with the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp).
 

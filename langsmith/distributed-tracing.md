@@ -1,5 +1,5 @@
 # Implement distributed tracing
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/distributed-tracing)
+
 Sometimes, you need to trace a request across multiple services.
 
 LangSmith supports distributed tracing out of the box, linking runs within a trace across services using context propagation headers (`langsmith-trace` and optional `baggage` for metadata/tags).

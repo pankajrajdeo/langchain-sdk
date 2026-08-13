@@ -1,6 +1,6 @@
 # Use server-side caching
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/caching)
-Cache values server-side in your agent deployment using stale-while-revalidate and key-value cache APIs.
+
+> Cache values server-side in your agent deployment using stale-while-revalidate and key-value cache APIs.
 
 [Agent Server](agent-server.md) includes a built-in cache you can use inside your deployed graphs. Call `swr` with a key and a loader function, and the server caches the result, revalidates stale entries in the background, and returns fresh data on every read.
 

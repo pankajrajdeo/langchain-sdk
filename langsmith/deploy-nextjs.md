@@ -1,6 +1,6 @@
 # Deploy with Next.js
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-nextjs)
-Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history.
+
+> Deploy a LangChain deep agent in a Next.js App Router project with streaming chat, subagents, and thread history.
 
 The following page details an example app that deploys a LangChain **deep agent** entirely inside a [Next.js App](https://nextjs.org/) Router project: streaming chat UI, subagents, and thread history, all backed by the [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming) implemented as Next.js Route Handlers (HTTP + SSE). No separate backend process.
 
@@ -11,8 +11,8 @@ Source: [`js-next`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 ### Import the repository
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
-<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents">
-> **Image:** [Deploy with Vercel](deploy-nextjs.md)
+<a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents" target="_blank" rel="noopener noreferrer">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
 </a>
 
 ### Configure the project

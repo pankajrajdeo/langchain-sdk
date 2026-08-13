@@ -1,5 +1,5 @@
 # LangSmith reference
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/reference)
+
 The following sections provide API references and SDK documentation for LangSmith:
 
 ## LangSmith SDKs

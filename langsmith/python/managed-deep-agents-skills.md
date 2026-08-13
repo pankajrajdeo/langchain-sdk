@@ -1,6 +1,6 @@
 # Add skills to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-skills)
-Add reusable task-specific instructions to a Managed Deep Agent.
+
+> Add reusable task-specific instructions to a Managed Deep Agent.
 
 Skills package task-specific procedures and context into reusable directories. You can define them in markdown files, and they are picked up automatically by the agent.
 

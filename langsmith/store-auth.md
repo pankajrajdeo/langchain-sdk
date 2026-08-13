@@ -1,6 +1,6 @@
 # Isolate store data per user
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/store-auth)
-Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.
+
+> Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.
 
 Every [LangSmith Deployment](deployment.md) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
 

@@ -1,5 +1,5 @@
 # How to implement generative user interfaces with LangGraph
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/generative-ui-react)
+
 > [!NOTE]
 > **Prerequisites**
 >
@@ -9,7 +9,7 @@
 
 Generative user interfaces (Generative UI) allows agents to go beyond text and generate rich user interfaces. This enables creating more interactive and context-aware applications where the UI adapts based on the conversation flow and AI responses.
 
-> **Image:** [Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components.](generative-ui-react.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/JOyLr_spVEW0t2KF/langsmith/images/generative-ui-sample.jpg?fit=max&auto=format&n=JOyLr_spVEW0t2KF&q=85&s=105943c6c28853fad0a9bc3b4af3a999" alt="Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components." width="1814" height="898" data-path="langsmith/images/generative-ui-sample.jpg" />
 
 LangSmith supports colocating your React components with your graph code. This allows you to focus on building specific UI components for your graph while easily plugging into existing chat interfaces such as [Agent Chat](https://agentchat.vercel.app) and loading the code only when actually needed.
 

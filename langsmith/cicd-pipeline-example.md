@@ -1,5 +1,5 @@
 # Implement a CI/CD pipeline using LangSmith Deployment and Evaluation
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cicd-pipeline-example)
+
 This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the [LangGraph](../langgraph/overview.md) open source framework for orchestrating and building the agent, [LangSmith](observability.md) for observability and evaluations. This pipeline is based on the [cicd-pipeline-example repository](https://github.com/langchain-ai/cicd-pipeline-example).
 
 ## Overview
@@ -102,11 +102,11 @@ The workflow includes:
 
 * **Agent deployment revision**: A revision happens when an existing deployment with the same ID is found, or when the PR is merged into main. In the case of merging to main, the preview deployment is deleted and a production deployment is created. This ensures that any updates to the agent are properly deployed and integrated into the production infrastructure.
 
-> **Image:** [Agent Deployment Revision Workflow](cicd-pipeline-example.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-new-lgp-revision.png?fit=max&auto=format&n=-UAx6PdOIJpPyTy2&q=85&s=3ef7d51a322b8b5e2f9c2c70579fcc97" alt="Agent Deployment Revision Workflow" width="1022" height="196" data-path="langsmith/images/cicd-new-lgp-revision.png" />
 
 * **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](evaluation-concepts.md#offline-evaluations) and [Agent dev server testing](local-dev-testing.md) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
 
-> **Image:** [Test with Results Workflow](cicd-pipeline-example.md)
+  <img src="https://mintcdn.com/langchain-5e9cc07a/MrTet_AXQVddxOlO/langsmith/images/cicd-test-with-results.png?fit=max&auto=format&n=MrTet_AXQVddxOlO&q=85&s=477c3f5ec3d9bb9dfc354b9a57860636" alt="Test with Results Workflow" width="2050" height="996" data-path="langsmith/images/cicd-test-with-results.png" />
 
 <details>
 <summary>Final Response Evaluation</summary>
@@ -244,7 +244,7 @@ Example `langgraph.json`:
 
 ### Local development and testing
 
-> **Image:** [Studio CLI Interface](cicd-pipeline-example.md)
+<img src="https://mintcdn.com/langchain-5e9cc07a/-UAx6PdOIJpPyTy2/langsmith/images/cicd-studio-cli.png?fit=max&auto=format&n=-UAx6PdOIJpPyTy2&q=85&s=425460d3401221ab441e21fc706c9cf1" alt="Studio CLI Interface" width="2972" height="1354" data-path="langsmith/images/cicd-studio-cli.png" />
 
 First, test your agent locally using [Studio](studio.md):
 
@@ -348,24 +348,52 @@ For LangSmith API operations (traces, evaluations, datasets):
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_0 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -383,24 +411,52 @@ For LangSmith Deployment operations (deployments, revisions):
   <thead>
     <tr>
       <th>Region</th>
+
+      <th>
+        {protocol_1 === false ? "Host" : "URL"}
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <tr>
       <td>GCP US</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP EU</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}eu.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>GCP APAC</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}apac.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
 
     <tr>
       <td>AWS US</td>
+
+      <td>
+        <code>
+          {`${protocol_1 === false ? "" : "https://"}aws.${prefix_1 || "api.smith"}.langchain.com${suffix_1 || ""}`}
+        </code>
+      </td>
     </tr>
   </tbody>
 </table>

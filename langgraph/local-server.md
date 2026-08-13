@@ -1,5 +1,5 @@
 # Run a local server
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/local-server)
+
 This guide shows you how to run a LangGraph application locally.
 
 ## Prerequisites

@@ -1,6 +1,6 @@
 # Messages view integrations
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/messages-view-integrations)
-Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets.
+
+> Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets.
 
 > [!NOTE]
 > The [Messages view](view-traces.md#messages-view) is in **[beta](release-stages.md)**.

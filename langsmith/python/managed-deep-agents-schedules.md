@@ -1,6 +1,6 @@
 # Add schedules to Managed Deep Agents
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules)
-Declare managed cron schedules for Managed Deep Agents deployments.
+
+> Declare managed cron schedules for Managed Deep Agents deployments.
 
 Managed Deep Agents can run agents on a cron schedule. When you deploy the project, `mda deploy` provisions each schedule as a LangSmith cron after the deployment is live.
 

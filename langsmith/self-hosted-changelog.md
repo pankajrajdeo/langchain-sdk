@@ -1,14 +1,65 @@
 # Self-hosted LangSmith changelog
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-changelog)
+
 > [!NOTE]
 > **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/self-hosted-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
 [Self-hosted LangSmith](self-hosted.md) is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
+## 2026-08-12
+## langsmith-0.16.4
+
+* This release packages the same LangSmith application version as langsmith-0.16.2. Refer to the [langsmith-0.16.2](#langsmith-0-16-2) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.4/langsmith-0.16.4.tgz)
+
+## 2026-08-12
+## langsmith-0.17.0-rc.6
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](#langsmith-0-17-0-rc-1) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.6.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.6/langsmith-0.17.0-rc.6.tgz)
+
+## 2026-08-11
+## langsmith-0.16.3
+
+* This release packages the same LangSmith application version as langsmith-0.16.2. Refer to the [langsmith-0.16.2](#langsmith-0-16-2) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.16.3.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.3/langsmith-0.16.3.tgz)
+
+## 2026-08-11
+## langsmith-0.17.0-rc.5
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](#langsmith-0-17-0-rc-1) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.5.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.5/langsmith-0.17.0-rc.5.tgz)
+
+## 2026-08-11
+<a id="langsmith-0-16-2"></a>
+
+## langsmith-0.16.2
+
+* Internal improvements and maintenance updates
+
+**Download the Helm chart:** [`langsmith-0.16.2.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.2/langsmith-0.16.2.tgz)
+
+## 2026-08-07
+## langsmith-0.17.0-rc.4
+
+* This release packages the same LangSmith application version as langsmith-0.17.0-rc.1. Refer to the [langsmith-0.17.0-rc.1](#langsmith-0-17-0-rc-1) release notes below.
+
+**Download the Helm chart:** [`langsmith-0.17.0-rc.4.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.17.0-rc.4/langsmith-0.17.0-rc.4.tgz)
+
+## 2026-08-07
+## langsmith-0.16.1
+
+* Fixed issues with initial file uploads on Sandbox-backed Fleet agents.
+
+**Download the Helm chart:** [`langsmith-0.16.1.tgz`](https://github.com/langchain-ai/helm/releases/download/langsmith-0.16.1/langsmith-0.16.1.tgz)
+
 ## 2026-08-05
 ## langsmith-0.16.0
 
-LangSmith Self-Hosted v0.16 is our recommended release for all self-hosted deployments. It brings four major capabilities to Self-hosted: **SmithDB**, **Engine**, the **LLM Gateway**, and **Sandboxes**, alongside broad improvements across the rest of our platform.
+LangSmith Self-Hosted v0.16 is our recommended release for all self-hosted deployments. It brings three major capabilities to Self-hosted: **SmithDB**, **Engine**, and **Sandboxes**, alongside broad improvements across the rest of our platform.
 
 Follow the upgrade instructions to get access to everything: [https://docs.langchain.com/langsmith/self-host-upgrades](self-host-upgrades.md).
 
@@ -38,11 +89,6 @@ If you want to book time for your upgrade, feel free to contact LangChain suppor
   * Proposes fixes, opens PRs if source code is connected, creates evaluators and ground truth examples to catch regressions, and monitors issues automatically for recurrence.
   * Usage is charged in [LangChain Compute Units (LCUs)](pricing-plans.md) with an optional monthly spend limit at the organization and project level. On self-hosted, Engine emits no LangSmith traces.
   * Sends trace content to LangSmith Intelligence, a LangChain-managed zero-data-retention service. Requires egress to `beacon.langchain.com` on GCP or `beacon.aws.langchain.com` on AWS. Air-gapped installs cannot run Engine.
-* **LangSmith LLM Gateway** is available in public beta. If you are interested in LLM Gateway for self-hosted deployments, submit the [LLM Gateway self-hosted access request](https://www.langchain.com/langsmith-llm-gateway-self-hosted-access-request).
-  * **Spend and rate limits**: Rate-limit policies alongside spend caps, weekly cap periods, and scoping of both by custom header for any subject.
-  * **Data protection**: Configurable guard timeout action (allow or block), granular PII rule selection, expanded secret-token detection, and redacted-placeholder explanations passed to the model.
-  * **Provider coverage**: Full OpenAI API route pass-through, OpenAI embeddings with cost and trace tracking, and Anthropic Files and Managed Agents.
-  * **Fallback routing**: Route configs can fall back to alternate models, support multiple fallback chains, use custom providers as fallback targets, and route chains by a custom model alias.
 * **Self-hosted Sandboxes** are available in AWS and GCP. For installation instructions, see [Enable sandboxes](deploy-self-hosted-full-platform.md#enable-sandboxes) and [LangSmith Sandboxes](sandboxes.md). You may need to contact your account representative to enable this feature on your license.
   * Isolated environments where agents can safely execute arbitrary code and interact with a filesystem without touching your main infrastructure.
   * Boot from snapshots built off a Docker image, a local `Dockerfile`, or a captured running sandbox, and mount S3, GCS, and Git repositories without exposing credentials to the agent.

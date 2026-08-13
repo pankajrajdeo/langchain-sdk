@@ -1,5 +1,5 @@
 # Case studies
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/case-studies)
+
 This list of companies using LangGraph and their success stories is compiled from public sources. If your company uses LangGraph, we'd love for you to share your story and add it to the list. You’re also welcome to contribute updates based on publicly available information from other companies, such as blog posts or press releases.
 
 | Company                                                                                                                                 | Industry                             | Use case                                                      | Reference                                                                                                                                                                                                                                                                                                                                     |

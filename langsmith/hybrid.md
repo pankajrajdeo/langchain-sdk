@@ -1,6 +1,6 @@
 # Hybrid
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/hybrid)
-A LangSmith Deployment setup where you self-host Agent Servers in your infrastructure and send traces to LangSmith Cloud or a self-hosted LangSmith instance.
+
+> A LangSmith Deployment setup where you self-host Agent Servers in your infrastructure and send traces to LangSmith Cloud or a self-hosted LangSmith instance.
 
 Hybrid is a platform setup for [LangSmith Deployment](deployment.md), which **deploys and runs agents in production**.
 
@@ -10,10 +10,10 @@ This setup gives you control over where your agent workloads run while letting y
 
 ## Components
 
-| Component                                                                                | Where it runs                                         | Who manages it                        |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
+| Component                                                                                                                              | Where it runs                                         | Who manages it                        |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------------- |
 | Agent Servers <br />for [LangSmith Deployment](deployment.md) | Your infrastructure                                   | You                                   |
-| LangSmith <br />(tracing, evaluation, prompts)                                           | Self-hosted in your infrastructure, or LangSmith SaaS | You (self-hosted) or LangSmith (SaaS) |
+| LangSmith <br />(tracing, evaluation, prompts)                                                                                         | Self-hosted in your infrastructure, or LangSmith SaaS | You (self-hosted) or LangSmith (SaaS) |
 
 > [!NOTE]
 > Hybrid is a platform setup for LangSmith Deployment (agent serving). To set up LangSmith for observability, evaluation, and prompt engineering only, see [Set up LangSmith](platform-setup.md).
@@ -38,24 +38,52 @@ Agent Servers send traces to LangSmith based on the `LANGSMITH_ENDPOINT` environ
     <thead>
       <tr>
         <th>Region</th>
+
+        <th>
+          {protocol_0 === false ? "Host" : "URL"}
+        </th>
       </tr>
     </thead>
 
     <tbody>
       <tr>
         <td>GCP US</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>GCP EU</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}eu.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>GCP APAC</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}apac.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
 
       <tr>
         <td>AWS US</td>
+
+        <td>
+          <code>
+            {`${protocol_0 === false ? "" : "https://"}aws.${prefix_0 || "api.smith"}.langchain.com${suffix_0 || ""}`}
+          </code>
+        </td>
       </tr>
     </tbody>
   </table>

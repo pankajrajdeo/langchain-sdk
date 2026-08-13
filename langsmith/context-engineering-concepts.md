@@ -1,6 +1,6 @@
 # Context engineering concepts
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/context-engineering-concepts)
-Core concepts for context engineering in LangSmith, including skills, agents, versioning, and sharing.
+
+> Core concepts for context engineering in LangSmith, including skills, agents, versioning, and sharing.
 
 Agents behave inconsistently in production when their context is poorly managed. *Context* is the information an agent relies on to act, such as system instructions, tool definitions, and reference material. *Context engineering* is the practice of building and optimizing that context to improve agent performance and capabilities.
 

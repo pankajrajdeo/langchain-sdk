@@ -1,6 +1,6 @@
 # How to use a custom store
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-store)
-Replace the built-in Postgres store with a custom BaseStore implementation in your agent deployment.
+
+> Replace the built-in Postgres store with a custom BaseStore implementation in your agent deployment.
 
 When deploying agents to LangSmith, the server provides a built-in Postgres-backed long-term memory store with optional vector search via pgvector. You can replace this with your own [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore) implementation to use a different storage backend, custom indexing, or specialized search capabilities.
 

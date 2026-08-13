@@ -1,5 +1,5 @@
 # Use cron jobs
-> Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cron-jobs)
+
 There are many situations in which it is useful to run an assistant on a schedule.
 
 For example, say that you're building an assistant that runs daily and sends an email summary

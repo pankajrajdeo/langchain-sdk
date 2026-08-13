@@ -1,6 +1,6 @@
 # Sandbox
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox)
-Build an IDE-like UI for a coding agent backed by a sandbox environment
+
+> Build an IDE-like UI for a coding agent backed by a sandbox environment
 
 Coding agents need more than a chat window. They need a file browser, a code
 viewer, and a diff panel, an IDE experience. This pattern connects a deep

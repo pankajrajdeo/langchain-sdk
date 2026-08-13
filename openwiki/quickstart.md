@@ -1,6 +1,6 @@
 # Quickstart
-> Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/quickstart)
-Install OpenWiki, configure a model provider, and generate your first wiki.
+
+> Install OpenWiki, configure a model provider, and generate your first wiki.
 
 OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or personal knowledge. Coding agents use that wiki as durable context, so they spend less time and fewer tokens rediscovering architecture, integrations, and other repository details. Humans can read the same docs, but agents are the primary audience. This guide covers installation, provider setup, and your first documentation run. For a feature overview, see [OpenWiki overview](overview.md).
 
