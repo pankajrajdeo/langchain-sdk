@@ -194,7 +194,7 @@ curl --request DELETE \
 Every time a stateless cron is triggered, a new thread is created. Control what happens to that thread after the run completes using the `on_run_completed` parameter:
 
 * **`"delete"`** (default): Automatically deletes the thread after the run completes.
-* **`"keep"`**: Preserves the thread for later retrieval. You are responsible for cleaning up these threads. See [how to add TTLs to your application](https://docs.langchain.com/langsmith/configure-ttl) for the recommended approach.
+* **`"keep"`**: Preserves the thread for later retrieval. You are responsible for cleaning up these threads. See [how to add TTLs to your application](configure-ttl.md) for the recommended approach.
 
 ### Example: Keeping threads for later retrieval
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-auth)
 Enable secure access from agents to any system using OAuth 2.0 credentials with Agent Auth.
 
-Agent Auth is in **[beta](https://docs.langchain.com/langsmith/release-stages)** and under active development. To provide feedback or use this feature, reach out to the [LangChain team](https://forum.langchain.com/c/help/langsmith/).
+Agent Auth is in **[beta](release-stages.md)** and under active development. To provide feedback or use this feature, reach out to the [LangChain team](https://forum.langchain.com/c/help/langsmith/).
 
 ## Installation
 
@@ -151,13 +151,13 @@ auth_result = await client.authenticate(
 )
 ```
 
-During execution, if authentication is required, the SDK will throw an [interrupt](https://docs.langchain.com/langsmith/add-human-in-the-loop). The agent execution pauses and presents the OAuth URL to the user:
+During execution, if authentication is required, the SDK will throw an [interrupt](add-human-in-the-loop.md). The agent execution pauses and presents the OAuth URL to the user:
 
-> **Image:** [Image](https://docs.langchain.com/langsmith/agent-auth)
+> **Image:** [Image](agent-auth.md)
 
 After the user completes OAuth authentication and we receive the callback from the provider, they will see the auth success page.
 
-> **Image:** [Image](https://docs.langchain.com/langsmith/agent-auth)
+> **Image:** [Image](agent-auth.md)
 
 The agent then resumes execution from the point it left off at, and the token can be used for any API calls. We store and refresh OAuth tokens so that future uses of the service by either the user or agent do not require an OAuth flow.
 

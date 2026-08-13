@@ -112,9 +112,9 @@ OPENWIKI_OPENROUTER_PROVIDER_ONLY=Novita
 
 ## See also
 
-* [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart)
-* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
-* [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize)
+* [Quickstart](quickstart.md)
+* [CLI reference](cli-reference.md)
+* [Customize OpenWiki](customize.md)
 
 ***
 

@@ -3,7 +3,7 @@
 > [!NOTE]
 > This integration is in beta, so its API may change.
 
-Trace your [LiveKit Agents](https://docs.livekit.io/agents/) voice agents to LangSmith with the LangSmith LiveKit integration. For high-level conventions, see [Voice tracing fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals).
+Trace your [LiveKit Agents](https://docs.livekit.io/agents/) voice agents to LangSmith with the LangSmith LiveKit integration. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
 > [!NOTE]
 > The LiveKit integration requires `langsmith[livekit]>=0.9.7`.
@@ -60,7 +60,7 @@ async def my_agent(ctx: agents.JobContext):
     await session.start(room=ctx.room, agent=Agent(instructions="You are a helpful assistant."))
 ```
 
-This works for both the STT/LLM/TTS cascade and speech-to-speech (realtime) models. Realtime models (for example, `lk_openai.realtime.RealtimeModel(...)`) need one extra call to capture the user's transcript. Refer to [When using LiveKit with a realtime model](https://docs.langchain.com/langsmith/trace-with-livekit#when-using-livekit-with-a-realtime-model).
+This works for both the STT/LLM/TTS cascade and speech-to-speech (realtime) models. Realtime models (for example, `lk_openai.realtime.RealtimeModel(...)`) need one extra call to capture the user's transcript. Refer to [When using LiveKit with a realtime model](#when-using-livekit-with-a-realtime-model).
 
 ### Use your own tracer provider
 
@@ -79,7 +79,7 @@ telemetry.set_tracer_provider(provider)
 
 ## Group a conversation into a thread
 
-To group a conversation's runs into a LangSmith [thread](https://docs.langchain.com/langsmith/threads), for thread-level views and token and cost aggregation, call `set_thread_id` once per conversation, inside its `@server.rtc_session()` handler before its spans are emitted:
+To group a conversation's runs into a LangSmith [thread](threads.md), for thread-level views and token and cost aggregation, call `set_thread_id` once per conversation, inside its `@server.rtc_session()` handler before its spans are emitted:
 
 ```python
 from langsmith.integrations.livekit import configure_livekit, set_thread_id
@@ -222,10 +222,10 @@ async def my_agent(ctx: agents.JobContext):
 
 ## Next steps
 
-#### [Voice fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
+#### [Voice fundamentals](trace-voice-fundamentals.md)
 Core conventions for tracing voice agents.
 
-#### [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces)
+#### [Upload files with traces](upload-files-with-traces.md)
 Attach the conversation audio recording to your trace.
 
 ***

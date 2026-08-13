@@ -198,7 +198,7 @@ ov_config = {
 }
 ```
 
-For more information refer to [OpenVINO LLM guide](https://docs.openvino.ai/2024/learn-openvino/llm_inference_guide.html) and [OpenVINO Local Pipelines notebook](https://docs.langchain.com/oss/python/integrations/llms/openvino/).
+For more information refer to [OpenVINO LLM guide](https://docs.openvino.ai/2024/learn-openvino/llm_inference_guide.html) and [OpenVINO Local Pipelines notebook](openvino.md).
 
 ***
 

@@ -20,26 +20,26 @@ Watsonx.ai offers:
 
 ### Model interfaces
 
-#### [ChatWatsonx](https://docs.langchain.com/oss/python/integrations/chat/ibm_watsonx)
+#### [ChatWatsonx](../chat/ibm_watsonx.md)
 IBM watsonx.ai chat models.
 
-#### [WatsonxLLM](https://docs.langchain.com/oss/python/integrations/llms/ibm_watsonx)
+#### [WatsonxLLM](../llms/ibm_watsonx.md)
 (Legacy) IBM watsonx.ai text completion models.
 
-#### [WatsonxEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx)
+#### [WatsonxEmbeddings](../embeddings/ibm_watsonx.md)
 IBM watsonx.ai embedding models.
 
 ### Tools and toolkits
 
-#### [WatsonxToolkit](https://docs.langchain.com/oss/python/integrations/tools/ibm_watsonx)
+#### [WatsonxToolkit](../tools/ibm_watsonx.md)
 IBM watsonx.ai toolkit.
 
-#### [WatsonxSQLDatabaseToolkit](https://docs.langchain.com/oss/python/integrations/tools/ibm_watsonx_sql)
+#### [WatsonxSQLDatabaseToolkit](../tools/ibm_watsonx_sql.md)
 IBM watsonx.ai SQL Database toolkit.
 
 ### Retrievers
 
-#### [WatsonxRerank](https://docs.langchain.com/oss/python/integrations/retrievers/ibm_watsonx_ranker)
+#### [WatsonxRerank](../retrievers/ibm_watsonx_ranker.md)
 IBM watsonx.ai document retriever.
 
 ## DB2

@@ -8,9 +8,9 @@ A feature advances through the stages as it matures, though smaller features may
 
 | Stage                         | Availability              | Changes                                                                       | Self-hosted / BYOC          | Support                                    |
 | ----------------------------- | ------------------------- | ----------------------------------------------------------------------------- | --------------------------- | ------------------------------------------ |
-| [Alpha](https://docs.langchain.com/langsmith/release-stages#alpha)               | Design partners only      | Breaking changes expected; the feature may change significantly or never ship | Not guaranteed              | No formal SLA                              |
-| [Beta](https://docs.langchain.com/langsmith/release-stages#beta)                 | Public or a private group | Interface or behavior may still change; GA expected within a few months       | Typically added during beta | Actively maintained; SLA varies by feature |
-| [GA](https://docs.langchain.com/langsmith/release-stages#generally-available-ga) | Public                    | Stable; breaking changes require a deprecation period                         | Supported                   | Fully supported                            |
+| [Alpha](#alpha)               | Design partners only      | Breaking changes expected; the feature may change significantly or never ship | Not guaranteed              | No formal SLA                              |
+| [Beta](#beta)                 | Public or a private group | Interface or behavior may still change; GA expected within a few months       | Typically added during beta | Actively maintained; SLA varies by feature |
+| [GA](#generally-available-ga) | Public                    | Stable; breaking changes require a deprecation period                         | Supported                   | Fully supported                            |
 
 ## Alpha
 
@@ -53,9 +53,9 @@ Any feature that is not marked alpha or beta is GA, and is supported immediately
 
 ## See also
 
-* [Release policy](https://docs.langchain.com/langsmith/release-versions) for self-hosted release channels, cadence, and version support
-* [API and SDK deprecation policy](https://docs.langchain.com/langsmith/endpoint-deprecation) for how deprecated endpoints and methods are removed
-* [Changelog](https://docs.langchain.com/langsmith/changelog) for recent LangSmith updates
+* [Release policy](release-versions.md) for self-hosted release channels, cadence, and version support
+* [API and SDK deprecation policy](endpoint-deprecation.md) for how deprecated endpoints and methods are removed
+* [Changelog](changelog.md) for recent LangSmith updates
 
 ***
 

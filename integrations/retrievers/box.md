@@ -2,7 +2,7 @@
 
 > Integrate with the BoxRetriever retriever using LangChain Python.
 
-This will help you get started with the Box [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval).
+This will help you get started with the Box [retriever](../../deepagents/retrieval.md).
 
 # Overview
 
@@ -31,7 +31,7 @@ In order to use the Box package, you will need a few things:
 
 ### Credentials
 
-For these examples, we will use [token authentication](https://developer.box.com/guides/authentication/tokens/developer-tokens). This can be used with any [authentication method](https://developer.box.com/guides/authentication/). Just get the token with whatever methodology. If you want to learn more about how to use other authentication types with `langchain-box`, visit the [Box provider](https://docs.langchain.com/oss/python/integrations/providers/box) document.
+For these examples, we will use [token authentication](https://developer.box.com/guides/authentication/tokens/developer-tokens). This can be used with any [authentication method](https://developer.box.com/guides/authentication/). Just get the token with whatever methodology. If you want to learn more about how to use other authentication types with `langchain-box`, visit the [Box provider](../providers/box.md) document.
 
 ```python
 import getpass
@@ -40,7 +40,7 @@ import os
 box_developer_token = getpass.getpass("Enter your Box Developer Token: ")
 ```
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

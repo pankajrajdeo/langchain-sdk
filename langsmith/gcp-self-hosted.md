@@ -1,21 +1,21 @@
 # Self-hosted LangSmith on GCP
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/gcp-self-hosted)
-When running LangSmith on [Google Cloud Platform (GCP)](https://cloud.google.com/), [self-hosted](https://docs.langchain.com/langsmith/self-hosted) mode deploys a complete LangSmith platform with observability functionality.
+When running LangSmith on [Google Cloud Platform (GCP)](https://cloud.google.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
 
 This page provides:
 
-* [Initial setup steps](https://docs.langchain.com/langsmith/gcp-self-hosted#initial-setup) for deploying to GKE, configuring managed services, and setting up authentication.
-* [GCP-specific architecture patterns](https://docs.langchain.com/langsmith/gcp-self-hosted#reference-architecture) and reference diagrams.
-* [Service recommendations](https://docs.langchain.com/langsmith/gcp-self-hosted#compute-options) and best practices.
-* [Google Cloud Well-Architected best practices](https://docs.langchain.com/langsmith/gcp-self-hosted#google-cloud-well-architected-best-practices) for operational excellence, security, and reliability.
+* [Initial setup steps](#initial-setup) for deploying to GKE, configuring managed services, and setting up authentication.
+* [GCP-specific architecture patterns](#reference-architecture) and reference diagrams.
+* [Service recommendations](#compute-options) and best practices.
+* [Google Cloud Well-Architected best practices](#google-cloud-well-architected-best-practices) for operational excellence, security, and reliability.
 
 > [!NOTE]
-> LangChain publishes production-ready [Terraform modules for GCP](https://github.com/langchain-ai/terraform/tree/main/modules/gcp) that provision GKE, Cloud SQL, Memorystore, Cloud Storage, and networking in a single workflow. Start with the [Deploy with Terraform overview](https://docs.langchain.com/langsmith/self-host-terraform) to choose between the Terraform and Helm-only paths.
+> LangChain publishes production-ready [Terraform modules for GCP](https://github.com/langchain-ai/terraform/tree/main/modules/gcp) that provision GKE, Cloud SQL, Memorystore, Cloud Storage, and networking in a single workflow. Start with the [Deploy with Terraform overview](self-host-terraform.md) to choose between the Terraform and Helm-only paths.
 
 ## Initial setup
 
 ### Deploy to Kubernetes
-Follow the [Kubernetes installation guide](https://docs.langchain.com/langsmith/kubernetes). LangSmith is tested on Google Kubernetes Engine (GKE).
+Follow the [Kubernetes installation guide](kubernetes.md). LangSmith is tested on Google Kubernetes Engine (GKE).
 
 **GKE-specific notes:**
 
@@ -25,16 +25,16 @@ Follow the [Kubernetes installation guide](https://docs.langchain.com/langsmith/
 ### Configure external services
 For production deployments, connect to GCP managed services:
 
-#### [Google Cloud Storage](https://docs.langchain.com/langsmith/self-host-blob-storage#google-cloud-storage)
+#### [Google Cloud Storage](self-host-blob-storage.md#google-cloud-storage)
 Store trace data in GCS
 
-#### [Cloud SQL](https://docs.langchain.com/langsmith/self-host-external-postgres#google-cloud-sql)
+#### [Cloud SQL](self-host-external-postgres.md#google-cloud-sql)
 PostgreSQL database
 
-#### [Memorystore](https://docs.langchain.com/langsmith/self-host-external-redis#google-cloud-memorystore)
+#### [Memorystore](self-host-external-redis.md#google-cloud-memorystore)
 Redis or Valkey for caching
 
-#### [ClickHouse Cloud](https://docs.langchain.com/langsmith/self-host-external-clickhouse)
+#### [ClickHouse Cloud](self-host-external-clickhouse.md)
 Analytics database
 
 ### Set up authentication
@@ -42,9 +42,9 @@ Use [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/w
 
 **Key pages:**
 
-* [GCS HMAC key authentication](https://docs.langchain.com/langsmith/self-host-blob-storage#google-cloud-storage)
-* [Cloud SQL IAM authentication](https://docs.langchain.com/langsmith/self-host-external-postgres#iam-authentication)
-* [Memorystore IAM authentication](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication)
+* [GCS HMAC key authentication](self-host-blob-storage.md#google-cloud-storage)
+* [Cloud SQL IAM authentication](self-host-external-postgres.md#iam-authentication)
+* [Memorystore IAM authentication](self-host-external-redis.md#iam-authentication)
 
 After completing these initial setup steps, you can review the complete GCP architecture and best practices below.
 
@@ -52,7 +52,7 @@ After completing these initial setup steps, you can review the complete GCP arch
 
 We recommend leveraging GCP's managed services to provide a scalable, secure, and resilient platform. The following architecture applies to both self-hosted and hybrid and aligns with the [Google Cloud Well-Architected Framework](https://docs.cloud.google.com/architecture/framework):
 
-> **Image:** [Architecture diagram showing GCP relations to LangSmith services](https://docs.langchain.com/langsmith/gcp-self-hosted)
+> **Image:** [Architecture diagram showing GCP relations to LangSmith services](gcp-self-hosted.md)
 
 *  **Ingress & networking**: Requests enter via [Cloud Load Balancing](https://cloud.google.com/load-balancing) within your [VPC](https://cloud.google.com/vpc), secured using [Cloud Armor](https://cloud.google.com/armor) and [IAM](https://cloud.google.com/iam)-based authentication.
 
@@ -62,7 +62,7 @@ We recommend leveraging GCP's managed services to provide a scalable, secure, an
   * [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres): metadata, projects, users, and short-term and long-term memory for deployed agents. LangSmith supports PostgreSQL version 14 or higher.
   * [Memorystore](https://cloud.google.com/memorystore) ([Redis](https://cloud.google.com/memorystore/docs/redis) or [Valkey](https://cloud.google.com/memorystore/docs/valkey)): caching and job queues. Memorystore can be in single-instance or cluster mode. LangSmith requires Redis OSS version 5 or higher, or Valkey 8.
   * ClickHouse + [Persistent Disks](https://cloud.google.com/compute/docs/disks): analytics and trace storage.
-    * We recommend using an [externally managed ClickHouse solution](https://docs.langchain.com/langsmith/self-host-external-clickhouse) unless security or compliance reasons
+    * We recommend using an [externally managed ClickHouse solution](self-host-external-clickhouse.md) unless security or compliance reasons
       prevent you from doing so.
     * ClickHouse is not required for hybrid deployments.
   * [Cloud Storage](https://cloud.google.com/storage): object storage for trace artifacts and telemetry.
@@ -88,8 +88,8 @@ This reference is designed to align with the six pillars of the Google Cloud Wel
 
 * Automate deployments with IaC ([Terraform](https://www.terraform.io/) / [Deployment Manager](https://cloud.google.com/deployment-manager)).
 * Use [Secret Manager](https://cloud.google.com/secret-manager) for configuration and sensitive data.
-* Configure your LangSmith instance to [export telemetry data](https://docs.langchain.com/langsmith/export-backend) and continuously monitor via [Cloud Logging](https://cloud.google.com/logging).
-* The preferred method to manage [LangSmith deployments](https://docs.langchain.com/langsmith/deployment) is to create a CI process that builds [Agent Server](https://docs.langchain.com/langsmith/agent-server) images and pushes them to [Artifact Registry](https://cloud.google.com/artifact-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
+* Configure your LangSmith instance to [export telemetry data](export-backend.md) and continuously monitor via [Cloud Logging](https://cloud.google.com/logging).
+* The preferred method to manage [LangSmith deployments](deployment.md) is to create a CI process that builds [Agent Server](agent-server.md) images and pushes them to [Artifact Registry](https://cloud.google.com/artifact-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
 
 ### Security
 
@@ -100,7 +100,7 @@ This reference is designed to align with the six pillars of the Google Cloud Wel
 
 ### Reliability
 
-* Replicate the LangSmith [data plane](https://docs.langchain.com/langsmith/data-plane) across regions: Deploy identical data planes to Kubernetes clusters in different regions for LangSmith Deployment. Deploy [Cloud SQL](https://cloud.google.com/sql/docs/postgres/high-availability) and [GKE](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/configuration-overview) services across multiple zones.
+* Replicate the LangSmith [data plane](data-plane.md) across regions: Deploy identical data planes to Kubernetes clusters in different regions for LangSmith Deployment. Deploy [Cloud SQL](https://cloud.google.com/sql/docs/postgres/high-availability) and [GKE](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/configuration-overview) services across multiple zones.
 * Implement [autoscaling](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler) for backend workers using [Horizontal Pod Autoscaler](https://cloud.google.com/kubernetes-engine/docs/concepts/horizontalpodautoscaler) and [Cluster Autoscaler](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler).
 * Use [Cloud DNS](https://cloud.google.com/dns) health checks and failover policies.
 
@@ -135,7 +135,7 @@ Customers can deploy in [Assured Workloads](https://cloud.google.com/assured-wor
 Use LangSmith to:
 
 * Capture traces from LLM apps running on [Vertex AI](https://cloud.google.com/vertex-ai).
-* Evaluate model outputs via [LangSmith datasets](https://docs.langchain.com/langsmith/manage-datasets).
+* Evaluate model outputs via [LangSmith datasets](manage-datasets.md).
 * Track latency, token usage, and success rates.
 
 Integrate with:

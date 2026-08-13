@@ -2,14 +2,14 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli)
 Reference for mda commands, project files, and deploy behavior.
 
-The `mda` CLI compiles and deploys code-first [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview).
+The `mda` CLI compiles and deploys code-first [Managed Deep Agents](managed-deep-agents-overview.md).
 
 It is included with the `managed-deepagents` Python package.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-For the fastest end-to-end path, see the [quickstart](https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart). For workflow guidance, see [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity), [Memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory), [Evals](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals), [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools), [Custom middleware](https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware), [Sandboxes](https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes), [Channels](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels), [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules), and [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy).
+For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quickstart.md). For workflow guidance, see [Identity](managed-deep-agents-identity.md), [Memory](managed-deep-agents-memory.md), [Evals](managed-deep-agents-evals.md), [Custom tools](managed-deep-agents-tools.md), [Custom middleware](managed-deep-agents-middleware.md), [Sandboxes](managed-deep-agents-sandboxes.md), [Channels](managed-deep-agents-channels.md), [Schedules](managed-deep-agents-schedules.md), and [Deploy an agent](managed-deep-agents-deploy.md).
 
 ## Install
 
@@ -133,7 +133,7 @@ Task names passed to `mda evals init` can contain ASCII letters, numbers, `_`, a
 | `--task <name>`            | Select one task. Repeat to select multiple tasks. A selected scaffold refreshes the matching task under `evals/tasks/`. If omitted, all tasks are selected and every scaffold is refreshed. Existing canonical tasks are preserved unless a selected scaffold has the same name. |
 | `--model <provider:model>` | Record a model in the artifact manifest. Repeat to record multiple models; the generated job config uses the first value.                                                                                                                                                        |
 
-For Harbor task authoring, optional scaffolding, credentials, and running trials, see [Evals](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals).
+For Harbor task authoring, optional scaffolding, credentials, and running trials, see [Evals](managed-deep-agents-evals.md).
 
 ## Develop locally
 
@@ -193,9 +193,9 @@ Deploy runs these steps:
 9. Poll the revision until it reaches `DEPLOYED` unless `--no-wait` is set.
 10. Reconcile the managed LangSmith cron jobs for schedules unless `--no-wait` is set.
 
-With `--configure-slack`, deploy requires exactly one Slack channel and a project-root `slack-app-manifest.json`. When the Slack credentials are missing, it writes `.mda/slack/bootstrap-manifest.json` and exits before changing remote state. After you create the app and add its credentials, rerun the waited deployment to write `.mda/slack/app-manifest.json` with the deployed Events URL. For the complete workflow, see [Slack channels](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack#create-and-deploy-the-slack-app).
+With `--configure-slack`, deploy requires exactly one Slack channel and a project-root `slack-app-manifest.json`. When the Slack credentials are missing, it writes `.mda/slack/bootstrap-manifest.json` and exits before changing remote state. After you create the app and add its credentials, rerun the waited deployment to write `.mda/slack/app-manifest.json` with the deployed Events URL. For the complete workflow, see [Slack channels](managed-deep-agents-channels-slack.md#create-and-deploy-the-slack-app).
 
-On success, the CLI prints the LangSmith deployment dashboard URL. For secrets routing and deploy tips, see [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy).
+On success, the CLI prints the LangSmith deployment dashboard URL. For secrets routing and deploy tips, see [Deploy an agent](managed-deep-agents-deploy.md).
 
 ## Read deployment logs
 

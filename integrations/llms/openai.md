@@ -3,9 +3,9 @@
 > Integrate with the OpenAI LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of OpenAI text completion models. The latest and most popular OpenAI models are [chat completion models](../../langchain/models.md).**
 >
-> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/openai/).
+> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/openai.md).
 
 [OpenAI](https://platform.openai.com/docs/introduction) offers a spectrum of models with different levels of power suitable for different tasks.
 
@@ -41,7 +41,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

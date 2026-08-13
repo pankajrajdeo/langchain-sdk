@@ -11,7 +11,7 @@ To enable retriever-specific rendering, complete the following two steps.
 
 ## Set `run_type` to retriever
 
-Pass [`run_type="retriever"`](https://docs.langchain.com/langsmith/run-data-format#run-types) to the [traceable](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator (Python) or `traceable` wrapper (TypeScript). This tells LangSmith to treat the step as a retrieval run and apply retriever-specific rendering in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-log-retriever-trace):
+Pass [`run_type="retriever"`](run-data-format.md#run-types) to the [traceable](https://reference.langchain.com/python/langsmith/run_helpers/traceable) decorator (Python) or `traceable` wrapper (TypeScript). This tells LangSmith to treat the step as a retrieval run and apply retriever-specific rendering in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-log-retriever-trace):
 
 ```python
 from langsmith import traceable
@@ -21,7 +21,7 @@ def retrieve_docs(query):
     ...
 ```
 
-If you are using the [RunTree API](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api) instead of `traceable`, pass `run_type="retriever"` when creating the `RunTree` object.
+If you are using the [RunTree API](annotate-code.md#use-the-runtree-api) instead of `traceable`, pass `run_type="retriever"` when creating the `RunTree` object.
 
 ## Return documents in the expected format
 
@@ -92,8 +92,8 @@ In the LangSmith UI, you'll find each retrieved document with its contents and m
 
 ## Related
 
-* [Annotate code for tracing](https://docs.langchain.com/langsmith/annotate-code): Overview of all tracing methods, including `traceable`, `RunTree`, and the REST API.
-* [Log LLM calls](https://docs.langchain.com/langsmith/log-llm-trace): Similar custom logging requirements for LLM steps.
+* [Annotate code for tracing](annotate-code.md): Overview of all tracing methods, including `traceable`, `RunTree`, and the REST API.
+* [Log LLM calls](log-llm-trace.md): Similar custom logging requirements for LLM steps.
 
 ***
 

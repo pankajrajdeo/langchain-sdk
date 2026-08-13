@@ -1,8 +1,8 @@
 # Log user feedback using the SDK
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/attach-user-feedback)
-LangSmith makes it easy to attach [feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback) to [traces](https://docs.langchain.com/langsmith/observability-concepts#traces). This feedback can come from users, annotators, automated evaluators, and so on, which is crucial for monitoring and evaluating applications.
+LangSmith makes it easy to attach [feedback](observability-concepts.md#feedback) to [traces](observability-concepts.md#traces). This feedback can come from users, annotators, automated evaluators, and so on, which is crucial for monitoring and evaluating applications.
 
-This page details how to log feedback using the [SDK](https://docs.langchain.com/langsmith/reference). For the structure of feedback objects, refer to [Feedback data format](https://docs.langchain.com/langsmith/feedback-data-format).
+This page details how to log feedback using the [SDK](reference.md). For the structure of feedback objects, refer to [Feedback data format](feedback-data-format.md).
 
 ## Use `create_feedback()` / `createFeedback`
 
@@ -83,15 +83,15 @@ await client.createFeedback({
 });
 ```
 
-You can even log feedback for in-progress runs using [`create_feedback()`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback) / [`createFeedback`](https://reference.langchain.com/javascript/classes/langsmith.client.Client.html#createfeedback). See [Access the current run (span) within a traced function](https://docs.langchain.com/langsmith/access-current-span) for how to get the run ID of an in-progress run.
+You can even log feedback for in-progress runs using [`create_feedback()`](https://reference.langchain.com/python/langsmith/client/Client/create_feedback) / [`createFeedback`](https://reference.langchain.com/javascript/classes/langsmith.client.Client.html#createfeedback). See [Access the current run (span) within a traced function](access-current-span.md) for how to get the run ID of an in-progress run.
 
 ## Collect feedback from client-side applications
 
 If you need to collect feedback from a browser or other client-side environment without exposing your API key, use **presigned feedback tokens**. These generate a URL scoped to a specific run and feedback key that clients can call directly.
 
-See [Collect feedback with presigned URLs](https://docs.langchain.com/langsmith/presigned-feedback-tokens) for the full guide.
+See [Collect feedback with presigned URLs](presigned-feedback-tokens.md) for the full guide.
 
-To learn more about how to filter traces based on various attributes, including user feedback, see [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+To learn more about how to filter traces based on various attributes, including user feedback, see [Filter traces](filter-traces-in-application.md).
 
 ***
 

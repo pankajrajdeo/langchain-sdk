@@ -1,8 +1,8 @@
 # Prompt engineering quickstart
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
-Prompts guide the behavior of Large Language Models (LLM). [*Prompt engineering*](https://docs.langchain.com/langsmith/prompt-engineering-concepts) is the process of crafting, testing, and refining the instructions you give to an LLM so it produces reliable and useful responses.
+Prompts guide the behavior of Large Language Models (LLM). [*Prompt engineering*](prompt-engineering-concepts.md) is the process of crafting, testing, and refining the instructions you give to an LLM so it produces reliable and useful responses.
 
-LangSmith provides tools to create, version, test, and collaborate on prompts. You’ll also encounter common concepts like [*prompt templates*](https://docs.langchain.com/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates), which let you reuse structured prompts, and [*variables*](https://docs.langchain.com/langsmith/prompt-engineering-concepts#f-string-vs-mustache), which allow you to dynamically insert values (such as a user’s question) into a prompt.
+LangSmith provides tools to create, version, test, and collaborate on prompts. You’ll also encounter common concepts like [*prompt templates*](prompt-engineering-concepts.md#prompts-vs-prompt-templates), which let you reuse structured prompts, and [*variables*](prompt-engineering-concepts.md#f-string-vs-mustache), which allow you to dynamically insert values (such as a user’s question) into a prompt.
 
 In this quickstart, you’ll create, test, and improve prompts using either the UI or the SDK. This quickstart will use OpenAI as the example LLM provider, but the same workflow applies across other providers.
 
@@ -11,7 +11,7 @@ In this quickstart, you’ll create, test, and improve prompts using either the 
 Before you begin, make sure you have:
 
 * **A LangSmith account**: Sign up or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-prompt-engineering-quickstart).
-* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](create-account-api-key.md) guide.
 * **An OpenAI API key**: Generate this from the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
 
 Select the tab for UI or SDK workflows:
@@ -19,7 +19,7 @@ Select the tab for UI or SDK workflows:
 #### UI
 ## 1. Set workspace secret
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](https://docs.langchain.com/langsmith/set-up-hierarchy#configure-workspace-settings).
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](set-up-hierarchy.md#configure-workspace-settings).
 
 1. Navigate to  **Settings** and then move to the **Secrets** tab.
 2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
@@ -27,7 +27,7 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
  When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.
 
-If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
+If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
 
 ## 2. Create a prompt
 
@@ -35,43 +35,43 @@ If your provider authenticates with OAuth2 `client_credentials`, configure the c
 2. Click on **+ Prompt** to create a prompt.
 3. Modify the prompt by editing or adding prompts and input variables as needed.
 
-> **Image:** [Playground with the system prompt ready for editing.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [Playground with the system prompt ready for editing.](prompt-engineering-quickstart.md)
 
-> **Image:** [Playground with the system prompt ready for editing.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [Playground with the system prompt ready for editing.](prompt-engineering-quickstart.md)
 
 ## 3. Test a prompt
 
 1. Under the **Prompts** heading select the gear  icon next to the model name, which will launch the **Prompt Settings** window on the **Model Configuration** tab.
 
-2. Set the [model configuration](https://docs.langchain.com/langsmith/managing-model-configurations) you want to use. The **Provider** and **Model** you select will determine the parameters that are configurable on this configuration page. Once set, click **Save as**.
+2. Set the [model configuration](managing-model-configurations.md) you want to use. The **Provider** and **Model** you select will determine the parameters that are configurable on this configuration page. Once set, click **Save as**.
 
-> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](prompt-engineering-quickstart.md)
 
-> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [Model Configuration window in the LangSmith UI, settings for Provider, Model, Temperature, Max Output Tokens, Top P, Presence Penalty, Frequency Penalty, Reasoning Effort, etc.](prompt-engineering-quickstart.md)
 
 3. Specify the input variables you would like to test in the **Inputs** box and then click  **Start**.
 
-> **Image:** [The input box with a question entered. The output box contains the response to the prompt.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [The input box with a question entered. The output box contains the response to the prompt.](prompt-engineering-quickstart.md)
 
-> **Image:** [The input box with a question entered. The output box contains the response to the prompt.](https://docs.langchain.com/langsmith/prompt-engineering-quickstart)
+> **Image:** [The input box with a question entered. The output box contains the response to the prompt.](prompt-engineering-quickstart.md)
 
-   To learn about more options for configuring your prompt in the Playground, refer to [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations).
+   To learn about more options for configuring your prompt in the Playground, refer to [Configure prompt settings](managing-model-configurations.md).
 
 4. After testing and refining your prompt, click **Save** to store it for future use.
 
 ## 4. Iterate on a prompt
 
-LangSmith allows for team-based prompt iteration. [Workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) members can experiment with prompts in the Playground and save their changes as a new [*commit*](https://docs.langchain.com/langsmith/prompt-engineering-concepts#commits) when ready.
+LangSmith allows for team-based prompt iteration. [Workspace](administration-overview.md#workspaces) members can experiment with prompts in the Playground and save their changes as a new [*commit*](prompt-engineering-concepts.md#commits) when ready.
 
 To improve your prompts:
 
 * Reference the documentation provided by your model provider for best practices in prompt creation, such as:
   * [Best practices for prompt engineering with the OpenAI API](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api)
   * [Gemini's Introduction to prompt design](https://ai.google.dev/gemini-api/docs/prompting-intro)
-* Build and refine your prompts with the Prompt Canvas—an interactive tool in LangSmith. Learn more in the [Prompt Canvas guide](https://docs.langchain.com/langsmith/write-prompt-with-ai).
+* Build and refine your prompts with the Prompt Canvas—an interactive tool in LangSmith. Learn more in the [Prompt Canvas guide](write-prompt-with-ai.md).
 * Tag specific commits to mark important moments in your commit history.
   1. To create a commit, navigate to the **Playground** and select **Commit**. Choose the prompt to commit changes to and then **Commit**.
-  2. Navigate to **Prompts** in the left-hand menu. Select the prompt. On the prompt detail page, select **Tag** on the top right to add a [commit tag](https://docs.langchain.com/langsmith/manage-prompts#commit-tags).
+  2. Navigate to **Prompts** in the left-hand menu. Select the prompt. On the prompt detail page, select **Tag** on the top right to add a [commit tag](manage-prompts.md#commit-tags).
 
 #### SDK
 ## 1. Set up your environment
@@ -140,7 +140,7 @@ Use the language-specific constructor and push method:
    });
 ```
 
-   This creates an ordered list of messages, wraps them in `ChatPromptTemplate`, and then pushes the prompt by name to your [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) for versioning and reuse.
+   This creates an ordered list of messages, wraps them in `ChatPromptTemplate`, and then pushes the prompt by name to your [workspace](administration-overview.md#workspaces) for versioning and reuse.
 
 2. Run `create_prompt`:
 
@@ -156,7 +156,7 @@ Follow the resulting link to view the newly created Prompt Hub prompt in the Lan
 
 ## 3. Test a prompt
 
-In this step, you'll pull the prompt you created in [step 2](https://docs.langchain.com/langsmith/prompt-engineering-quickstart#2-create-a-prompt) by name (`"prompt-quickstart"`), format it with a test input, convert it to OpenAI’s chat format, and call the OpenAI Chat Completions API.
+In this step, you'll pull the prompt you created in [step 2](#2-create-a-prompt) by name (`"prompt-quickstart"`), format it with a test input, convert it to OpenAI’s chat format, and call the OpenAI Chat Completions API.
 
 Then, you'll iterate on the prompt by creating a new version. Members of your workspace can open an existing prompt, experiment with changes in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-prompt-engineering-quickstart), and save those changes as a new commit on the same prompt, which preserves history for the whole team.
 
@@ -263,16 +263,16 @@ To improve your prompts:
 * Reference the documentation provided by your model provider for best practices in prompt creation, such as:
   * [Best practices for prompt engineering with the OpenAI API](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-the-openai-api)
   * [Gemini's Introduction to prompt design](https://ai.google.dev/gemini-api/docs/prompting-intro)
-* Build and refine your prompts with the Prompt Canvas—an interactive tool in LangSmith. Learn more in the [Prompt Canvas guide](https://docs.langchain.com/langsmith/write-prompt-with-ai).
+* Build and refine your prompts with the Prompt Canvas—an interactive tool in LangSmith. Learn more in the [Prompt Canvas guide](write-prompt-with-ai.md).
 
 ## Next steps
 
-* Learn more about how to store and manage prompts using the Prompt Hub in the [Create a prompt guide](https://docs.langchain.com/langsmith/create-a-prompt).
-* Learn how to set up the Playground to [Test multi-turn conversations](https://docs.langchain.com/langsmith/multiple-messages) in this tutorial.
-* Learn how to test your prompt's performance over a dataset instead of individual examples, refer to [Run an evaluation from the Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground).
+* Learn more about how to store and manage prompts using the Prompt Hub in the [Create a prompt guide](create-a-prompt.md).
+* Learn how to set up the Playground to [Test multi-turn conversations](multiple-messages.md) in this tutorial.
+* Learn how to test your prompt's performance over a dataset instead of individual examples, refer to [Run an evaluation from the Playground](run-evaluation-from-playground.md).
 
 > [!NOTE]
-> Use the **[Chat](https://docs.langchain.com/langsmith/chat)** in the Playground to help optimize your prompts, generate tools, and create output schemas.
+> Use the **[Chat](chat.md)** in the Playground to help optimize your prompts, generate tools, and create output schemas.
 
 ***
 

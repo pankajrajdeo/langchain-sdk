@@ -442,9 +442,9 @@ For a full list of the different searches you can execute on a `AzurePGVectorSto
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ## API reference
 

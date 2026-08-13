@@ -1,10 +1,10 @@
 # Add custom authentication
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-auth)
-This guide shows you how to add custom authentication to your LangSmith application. The steps on this page apply to both [cloud](https://docs.langchain.com/langsmith/cloud) and [self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments. It does not apply to isolated usage of the [LangGraph open source library](https://docs.langchain.com/oss/python/langgraph/overview) in your own custom server.
+This guide shows you how to add custom authentication to your LangSmith application. The steps on this page apply to both [cloud](cloud.md) and [self-hosted](self-hosted.md) deployments. It does not apply to isolated usage of the [LangGraph open source library](../langgraph/overview.md) in your own custom server.
 
 ## Add custom authentication to your deployment
 
-To leverage custom authentication and access user-level metadata in your deployments, set up custom authentication to automatically populate the `config["configurable"]["langgraph_auth_user"]` object through a custom authentication handler. You can then access this object in your graph with the `langgraph_auth_user` key to [allow an agent to perform authenticated actions on behalf of the user](https://docs.langchain.com/langsmith/custom-auth#enable-agent-authentication).
+To leverage custom authentication and access user-level metadata in your deployments, set up custom authentication to automatically populate the `config["configurable"]["langgraph_auth_user"]` object through a custom authentication handler. You can then access this object in your graph with the `langgraph_auth_user` key to [allow an agent to perform authenticated actions on behalf of the user](#enable-agent-authentication).
 
 1. Implement authentication:
 
@@ -41,7 +41,7 @@ To leverage custom authentication and access user-level metadata in your deploym
 * This handler receives the request (headers, etc.), validates the user, and returns a dictionary with at least an identity field.
 * You can add any custom fields you want (e.g., OAuth tokens, roles, org IDs, etc.).
 
-2. In your [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file), add the path to your auth file:
+2. In your [`langgraph.json`](application-structure.md#configuration-file), add the path to your auth file:
 
 ```json
    {
@@ -112,11 +112,11 @@ To leverage custom authentication and access user-level metadata in your deploym
    curl -H "Authorization: Bearer ${your-token}" http://localhost:2024/threads
 ```
 
-   For more details on RemoteGraph, refer to the [Use RemoteGraph](https://docs.langchain.com/langsmith/use-remote-graph) guide.
+   For more details on RemoteGraph, refer to the [Use RemoteGraph](use-remote-graph.md) guide.
 
 ## Enable agent authentication
 
-After [authentication](https://docs.langchain.com/langsmith/custom-auth#add-custom-authentication-to-your-deployment), the platform creates a special configuration object (`config`) that is passed to LangSmith deployment. This object contains information about the current user, including any custom fields you return from your `@auth.authenticate` handler.
+After [authentication](#add-custom-authentication-to-your-deployment), the platform creates a special configuration object (`config`) that is passed to LangSmith deployment. This object contains information about the current user, including any custom fields you return from your `@auth.authenticate` handler.
 
 To allow an agent to perform authenticated actions on behalf of the user, access this object in your graph with the `langgraph_auth_user` key:
 
@@ -133,7 +133,7 @@ def my_node(state, config):
 
 ### Authorizing a user for Studio
 
-By default, if you add custom authorization on your resources, this will also apply to interactions made from [Studio](https://docs.langchain.com/langsmith/studio). If you want, you can handle logged-in Studio users differently by checking [is\_studio\_user()](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.auth.types.StudioUser).
+By default, if you add custom authorization on your resources, this will also apply to interactions made from [Studio](studio.md). If you want, you can handle logged-in Studio users differently by checking [is\_studio\_user()](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph_sdk.auth.types.StudioUser).
 
 > [!NOTE]
 > `is_studio_user` was added in version 0.1.73 of the langgraph-sdk. If you're on an older version, you can still check whether `isinstance(ctx.user, StudioUser)`.
@@ -162,8 +162,8 @@ Only use this if you want to permit developer access to a graph deployed on the 
 
 ## Learn more
 
-* [Authentication & Access Control](https://docs.langchain.com/langsmith/auth)
-* [Setting up custom authentication tutorial](https://docs.langchain.com/langsmith/set-up-custom-auth)
+* [Authentication & Access Control](auth.md)
+* [Setting up custom authentication tutorial](set-up-custom-auth.md)
 
 ***
 

@@ -1,6 +1,6 @@
 # Configure threads
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/threads)
-Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use [*threads*](https://docs.langchain.com/langsmith/observability-concepts#threads) in LangSmith.
+Many LLM applications have a chatbot-like interface in which the user and the LLM application engage in a multi-turn conversation. In order to track these conversations, you can use [*threads*](observability-concepts.md#threads) in LangSmith.
 
 ## Group traces into threads
 
@@ -11,12 +11,12 @@ To associate traces together into a thread, you need to pass in a special `metad
 
 The value can be any string you want, but we recommend using **UUID v7** thread IDs.
 
-The [LangSmith SDK](https://docs.langchain.com/langsmith/reference) exports a `uuid7` helper (Python v0.4.43+, JS v0.3.80+):
+The [LangSmith SDK](reference.md) exports a `uuid7` helper (Python v0.4.43+, JS v0.3.80+):
 
 * **Python**: `from langsmith import uuid7`
 * **JS/TS**: `import { uuid7 } from 'langsmith'`
 
-For instructions, refer to [Add metadata and tags to traces](https://docs.langchain.com/langsmith/add-metadata-tags).
+For instructions, refer to [Add metadata and tags to traces](add-metadata-tags.md).
 
 > [!WARNING]
 > **Important:** To ensure filtering and token counting work correctly across your entire thread, you must set the thread metadata (`session_id` or `thread_id`) on **all runs**, including child runs within a trace.
@@ -506,7 +506,7 @@ You can view threads in the [UI](https://smith.langchain.com?utm_source=docs\&ut
 The right panel displays aggregate stats for the project, including thread and trace counts, total and median token usage, error rate, and P50/P99 latency.
 
 > [!NOTE]
-> Use the **[Chat](https://docs.langchain.com/langsmith/chat)** in thread views to analyze conversation threads, understand user sentiment, identify pain points, and track whether issues were resolved.
+> Use the **[Chat](chat.md)** in thread views to analyze conversation threads, understand user sentiment, identify pain points, and track whether issues were resolved.
 
 You can then click into a particular thread. You can view the thread in three different ways:
 
@@ -514,28 +514,28 @@ You can then click into a particular thread. You can view the thread in three di
 * **Turns** view: the per-turn summary. View each turn as a card showing its inputs and outputs, with expand/collapse and customizable input/output fields.
 * **Details** view: the debugging layer. Drill into a specific run to inspect inputs, outputs, metadata, timing, errors, and child runs. The surrounding thread context stays visible so you can see where the run fits in the broader conversation.
 
-Switch between views using the buttons at the top of the page or keyboard shortcuts `M` (Messages), `T` (Turns), and `D` (Details). While the Messages view is in beta, the thread side panel defaults to the Details view. The right panel shows stats for the thread, including turn count, first and last start times, P50/P99 latency, and a cost breakdown by input and output tokens. For a full description of each view, see [View traces](https://docs.langchain.com/langsmith/view-traces).
+Switch between views using the buttons at the top of the page or keyboard shortcuts `M` (Messages), `T` (Turns), and `D` (Details). While the Messages view is in beta, the thread side panel defaults to the Details view. The right panel shows stats for the thread, including turn count, first and last start times, P50/P99 latency, and a cost breakdown by input and output tokens. For a full description of each view, see [View traces](view-traces.md).
 
 ### View feedback
 
 Feedback scores are visible in the **Feedback** column of the threads table on the project's **Threads** tab.
 
-Within a thread, open the Messages view and click the **LLM call** link in a turn's metadata row to go to the Details view for that run, where you can review feedback for the run. You can also see [thread-level feedback](https://docs.langchain.com/langsmith/online-evaluations-multi-turn) there.
+Within a thread, open the Messages view and click the **LLM call** link in a turn's metadata row to go to the Details view for that run, where you can review feedback for the run. You can also see [thread-level feedback](online-evaluations-multi-turn.md) there.
 
 ### Save thread-level filter
 
 > [!NOTE]
 > Thread filters look through all runs and surface a thread if at least 1 run matches the filter.
 
-On the **Threads** tab of a project, you can save commonly used filters: [Set a filter](https://docs.langchain.com/langsmith/filter-traces-in-application#create-and-apply-filters) using the **Add filter** button, then click **Save view**.
+On the **Threads** tab of a project, you can save commonly used filters: [Set a filter](filter-traces-in-application.md#create-and-apply-filters) using the **Add filter** button, then click **Save view**.
 
 ## Related
 
-* [Observability concepts](https://docs.langchain.com/langsmith/observability-concepts#threads): background on threads and how they relate to runs and traces.
-* [Add metadata and tags to traces](https://docs.langchain.com/langsmith/add-metadata-tags): how to pass `thread_id` and other metadata keys.
-* [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application): filter by thread metadata in the tracing UI.
-* [Set up multi-turn online evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn): evaluate threads rather than individual runs.
-* [Log user feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback): attach feedback to runs within a thread.
+* [Observability concepts](observability-concepts.md#threads): background on threads and how they relate to runs and traces.
+* [Add metadata and tags to traces](add-metadata-tags.md): how to pass `thread_id` and other metadata keys.
+* [Filter traces](filter-traces-in-application.md): filter by thread metadata in the tracing UI.
+* [Set up multi-turn online evaluators](online-evaluations-multi-turn.md): evaluate threads rather than individual runs.
+* [Log user feedback using the SDK](attach-user-feedback.md): attach feedback to runs within a thread.
 
 ***
 

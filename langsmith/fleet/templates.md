@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/templates)
 Start faster with curated Fleet templates and customize tools, prompts, and channels.
 
-LangSmith Fleet includes [starter templates](https://www.langchain.com/templates) to help you create agents quickly. Templates include predefined instructions, [tools](https://docs.langchain.com/langsmith/fleet/tools), and [channels](https://docs.langchain.com/langsmith/fleet/essentials#channels) (if applicable) for common use cases. You can use templates as-is, or as a baseline to customize.
+LangSmith Fleet includes [starter templates](https://www.langchain.com/templates) to help you create agents quickly. Templates include predefined instructions, [tools](tools.md), and [channels](essentials.md#channels) (if applicable) for common use cases. You can use templates as-is, or as a baseline to customize.
 
 > [!TIP]
-> If you're new to Fleet, start with the step-by-step [quickstart](https://docs.langchain.com/langsmith/fleet/quickstart) to build your first agent using a template.
+> If you're new to Fleet, start with the step-by-step [quickstart](quickstart.md) to build your first agent using a template.
 
 ## Features
 
@@ -13,7 +13,7 @@ Templates are pre-configured agents designed for specific use cases. Each templa
 
 ### Pre-configured tools
 
-Templates come with a curated set of [tools](https://docs.langchain.com/langsmith/fleet/essentials#tools) that enable the agent to perform specific actions. For example, an email assistant template includes tools for reading, sending, and organizing emails. Tools connect to external services through OAuth authentication, allowing your agent to interact with apps like Gmail, Slack, or Linear. For a complete list, refer to [Supported tools](https://docs.langchain.com/langsmith/fleet/tools).
+Templates come with a curated set of [tools](essentials.md#tools) that enable the agent to perform specific actions. For example, an email assistant template includes tools for reading, sending, and organizing emails. Tools connect to external services through OAuth authentication, allowing your agent to interact with apps like Gmail, Slack, or Linear. For a complete list, refer to [Supported tools](tools.md).
 
 ### System instructions
 
@@ -21,7 +21,7 @@ Each template includes a *system prompt* (also called *instructions*) that defin
 
 ### Channels (optional)
 
-Some templates include [channels](https://docs.langchain.com/langsmith/fleet/essentials#channels) that allow agents to respond to external events automatically. For example, a Slack bot template might include a channel that activates when someone mentions the agent in a Slack conversation. Channels enable proactive agent behavior beyond chat-based interactions.
+Some templates include [channels](essentials.md#channels) that allow agents to respond to external events automatically. For example, a Slack bot template might include a channel that activates when someone mentions the agent in a Slack conversation. Channels enable proactive agent behavior beyond chat-based interactions.
 
 ### Cloning and customization
 

@@ -58,7 +58,7 @@ Click **Save changes**.
 
 ## Computer lifecycle
 
-Each agent has two lifecycle settings that control how long a computer stays active and how long it is kept after it stops. [Configure both in the settings popover](https://docs.langchain.com/langsmith/fleet/computer-use#configure-lifecycle-and-snapshot).
+Each agent has two lifecycle settings that control how long a computer stays active and how long it is kept after it stops. [Configure both in the settings popover](#configure-lifecycle-and-snapshot).
 
 * **Idle timeout**: When the computer has not received any commands for this duration, it pauses and the disk is archived. The agent can resume the same computer later without losing data. Default: **15 minutes**.
 * **Stopped computer cleanup**: After a computer has been stopped for this duration, it is permanently deleted along with all disk data. Default: **14 days**.
@@ -68,7 +68,7 @@ Each agent has two lifecycle settings that control how long a computer stays act
 
 ## Base snapshot
 
-A snapshot is the disk image used to boot the computer. By default, all Fleet agents use the workspace default snapshot. To build, capture, or configure custom snapshots, see [Sandbox snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots). [Change the snapshot for an agent](https://docs.langchain.com/langsmith/fleet/computer-use#configure-lifecycle-and-snapshot) in the settings popover.
+A snapshot is the disk image used to boot the computer. By default, all Fleet agents use the workspace default snapshot. To build, capture, or configure custom snapshots, see [Sandbox snapshots](../sandbox-snapshots.md). [Change the snapshot for an agent](#configure-lifecycle-and-snapshot) in the settings popover.
 
 > [!NOTE]
 > Snapshot changes apply only to new computers for the agent. The single shared computer in **Shared computer** mode keeps its original snapshot for its lifetime.

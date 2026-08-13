@@ -58,7 +58,7 @@ current run). Pass each discovered subgraph snapshot to a selector to read the
 messages scoped to that node.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";

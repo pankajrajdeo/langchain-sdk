@@ -3,7 +3,7 @@
 This guide shows you how to trace [Google Agent Development Kit (ADK)](https://github.com/google/adk-python) agents in LangSmith. You'll configure automatic tracing for your ADK applications to capture agent invocations, tool calls, and LLM interactions.
 
 > [!NOTE]
-> This guide covers ADK's standard execution paths (text agents, tools, and multi-agent workflows). To trace a **Gemini Live** voice agent, which uses ADK's `Runner.run_live` streaming loop, see [Trace Gemini Live applications](https://docs.langchain.com/langsmith/trace-gemini-live).
+> This guide covers ADK's standard execution paths (text agents, tools, and multi-agent workflows). To trace a **Gemini Live** voice agent, which uses ADK's `Runner.run_live` streaming loop, see [Trace Gemini Live applications](trace-gemini-live.md).
 
 ## Installation
 
@@ -19,7 +19,7 @@ pip install langsmith[google-adk]
 
 ## Setup
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key):
+Set your [API keys](create-account-api-key.md):
 
 ```bash
 export LANGSMITH_TRACING=true

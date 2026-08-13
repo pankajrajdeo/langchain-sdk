@@ -117,8 +117,8 @@ dcode -n "implement OAuth refresh handling" \
 
 ## See also
 
-* [Deep Agents Code overview](https://docs.langchain.com/oss/deepagents/code/overview)
-* [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart)
+* [Deep Agents Code overview](overview.md)
+* [Quickstart](quickstart.md)
 
 ***
 

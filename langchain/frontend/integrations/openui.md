@@ -495,7 +495,7 @@ root = Stack([..., followUpCard])
 
 ## Build a parallel dashboard with Deep Agents
 
-The flow above renders one OpenUI program into one surface. For richer apps, a [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) coordinator can delegate to several specialist agents that each stream their own OpenUI panel concurrently, all over one [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) connection. The [OpenUI parallel dashboard example](https://github.com/langchain-ai/streaming-cookbook/tree/main/typescript/openui) turns one dashboard brief into independently streaming Stripe, PostHog, GitHub, and Calendar panels, with no custom graph or stream-demultiplexing code.
+The flow above renders one OpenUI program into one surface. For richer apps, a [Deep Agents](../../../deepagents/overview.md) coordinator can delegate to several specialist agents that each stream their own OpenUI panel concurrently, all over one [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) connection. The [OpenUI parallel dashboard example](https://github.com/langchain-ai/streaming-cookbook/tree/main/typescript/openui) turns one dashboard brief into independently streaming Stripe, PostHog, GitHub, and Calendar panels, with no custom graph or stream-demultiplexing code.
 
 ```mermaid
 %%{

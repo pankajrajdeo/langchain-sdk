@@ -2,21 +2,21 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotate-code)
 Instrument your code directly to control which functions are traced and how they appear in LangSmith.
 
-Adding [instrumentation](https://docs.langchain.com/langsmith/observability-concepts#manual-instrumentation) directly to your code gives you precise control over which functions your application traces, what inputs and outputs are logged, and how your [trace](https://docs.langchain.com/langsmith/observability-concepts#traces) hierarchy is structured. The three core instrumentation approaches are:
+Adding [instrumentation](observability-concepts.md#manual-instrumentation) directly to your code gives you precise control over which functions your application traces, what inputs and outputs are logged, and how your [trace](observability-concepts.md#traces) hierarchy is structured. The three core instrumentation approaches are:
 
-* [`@traceable` decorator](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable): recommended for most cases
-* [`trace` context manager](https://docs.langchain.com/langsmith/annotate-code#use-the-trace-context-manager-python-only): Python only
-* [`RunTree` API](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api): explicit, low-level control
+* [`@traceable` decorator](#use-%40traceable-%2F-traceable): recommended for most cases
+* [`trace` context manager](#use-the-trace-context-manager-python-only): Python only
+* [`RunTree` API](#use-the-runtree-api): explicit, low-level control
 
 This page also covers:
 
-* [Specifying a custom run ID](https://docs.langchain.com/langsmith/annotate-code#specify-a-custom-run-id), which is useful for attaching feedback immediately after a run or correlating with external systems.
-* [Ensuring all traces are submitted](https://docs.langchain.com/langsmith/annotate-code#ensure-all-traces-are-submitted-before-exiting) before your process exits.
+* [Specifying a custom run ID](#specify-a-custom-run-id), which is useful for attaching feedback immediately after a run or correlating with external systems.
+* [Ensuring all traces are submitted](#ensure-all-traces-are-submitted-before-exiting) before your process exits.
 
-For LangChain (Python or JS/TS), refer to the [LangChain-specific instructions](https://docs.langchain.com/langsmith/trace-with-langchain).
+For LangChain (Python or JS/TS), refer to the [LangChain-specific instructions](trace-with-langchain.md).
 
 > [!NOTE]
-> If you're using an LLM provider or agent framework with a built-in LangSmith integration, refer to the [integrations overview](https://docs.langchain.com/langsmith/integrations) instead
+> If you're using an LLM provider or agent framework with a built-in LangSmith integration, refer to the [integrations overview](integrations.md) instead
 
 ## Prerequisites
 
@@ -25,11 +25,13 @@ Before tracing, set the following environment variables:
 * `LANGSMITH_TRACING=true`: enables tracing. Set this to toggle tracing on and off without changing your code.
 
 > [!NOTE]
->   `LANGSMITH_TRACING` controls the `@traceable` decorator and the `trace` context manager. To override this at runtime for `@traceable` without changing environment variables, use [`tracing_context(enabled=True/False)`](https://docs.langchain.com/langsmith/annotate-code#use-the-trace-context-manager-python-only) (Python) or pass `tracingEnabled` directly to `traceable` (JS/TS). [`RunTree` objects](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api) are not affected by any of these controls; they always send data to LangSmith when posted.
+>   `LANGSMITH_TRACING` controls the `@traceable` decorator and the `trace` context manager. To override this at runtime for `@traceable` without changing environment variables, use [`tracing_context(enabled=True/False)`](#use-the-trace-context-manager-python-only) (Python) or pass `tracingEnabled` directly to `traceable` (JS/TS). [`RunTree` objects](#use-the-runtree-api) are not affected by any of these controls; they always send data to LangSmith when posted.
 
-* `LANGSMITH_API_KEY`: your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* `LANGSMITH_API_KEY`: your [LangSmith API key](create-account-api-key.md).
 
-* By default, LangSmith logs traces to a project named `default`. To log to a different project, set `LANGSMITH_PROJECT`. For more details, refer to [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project).
+* By default, LangSmith logs traces to a project named `default`. To log to a different project, set `LANGSMITH_PROJECT`. For more details, refer to [Log traces to a specific project](log-traces-to-project.md).
+
+<a id="use-@traceable-/-traceable"></a>
 
 ## Use `@traceable` / `traceable`
 
@@ -634,7 +636,7 @@ MyClass(13).combine(29)
 
 ## Specify a custom run ID
 
-By default, LangSmith assigns a random ID to each run. You can override this when you need to know the run ID ahead of time (for example, to attach [feedback](https://docs.langchain.com/langsmith/attach-user-feedback) immediately after a run), correlate LangSmith runs with IDs from an external system, or make runs idempotent using a deterministic ID.
+By default, LangSmith assigns a random ID to each run. You can override this when you need to know the run ID ahead of time (for example, to attach [feedback](attach-user-feedback.md) immediately after a run), correlate LangSmith runs with IDs from an external system, or make runs idempotent using a deterministic ID.
 
 > [!NOTE]
 > Use **UUID v7** for custom run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. The LangSmith SDK exports a `uuid7` helper (Python v0.4.43+, JS v0.3.80+):
@@ -697,8 +699,8 @@ Use one of the following:
 
 LangSmith performs tracing in a background thread to avoid obstructing your production application. This means that your process may end before all traces are successfully posted to LangSmith. Refer to the following options:
 
-* If you are using LangChain, refer to the [LangChain tracing guide](https://docs.langchain.com/langsmith/trace-with-langchain#ensure-all-traces-are-submitted-before-exiting).
-* If you are using the [LangSmith SDK](https://docs.langchain.com/langsmith/reference) standalone, you can use the `flush` method before exit:
+* If you are using LangChain, refer to the [LangChain tracing guide](trace-with-langchain.md#ensure-all-traces-are-submitted-before-exiting).
+* If you are using the [LangSmith SDK](reference.md) standalone, you can use the `flush` method before exit:
 
 ```python
   from langsmith import Client
@@ -734,12 +736,12 @@ LangSmith performs tracing in a background thread to avoid obstructing your prod
 
 ## Related
 
-* [Observability concepts](https://docs.langchain.com/langsmith/observability-concepts): background on runs, traces, and the LangSmith data model
-* [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format): schema reference for run fields including `dotted_order`, `trace_id`, and `parent_run_id`
-* [Log user feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback): common use case for pre-specifying a run ID
-* [Access the current run (span) within a traced function](https://docs.langchain.com/langsmith/access-current-span): read or modify the active run from inside a trace
-* [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project): route traces to a named project instead of `default`
-* [Trace with API](https://docs.langchain.com/langsmith/trace-with-api): low-level REST API alternative to the SDK
+* [Observability concepts](observability-concepts.md): background on runs, traces, and the LangSmith data model
+* [Run (span) data format](run-data-format.md): schema reference for run fields including `dotted_order`, `trace_id`, and `parent_run_id`
+* [Log user feedback using the SDK](attach-user-feedback.md): common use case for pre-specifying a run ID
+* [Access the current run (span) within a traced function](access-current-span.md): read or modify the active run from inside a trace
+* [Log traces to a specific project](log-traces-to-project.md): route traces to a named project instead of `default`
+* [Trace with API](trace-with-api.md): low-level REST API alternative to the SDK
 * [Tracing Basics video](https://academy.langchain.com/pages/intro-to-langsmith-preview) from the Introduction to LangSmith Course
 
 ***

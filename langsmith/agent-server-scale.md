@@ -5,28 +5,28 @@ Tune the Agent Server for self-hosted deployments—write load, read load, and e
 The default configuration for the LangSmith Agent Server is designed to handle substantial read and write load across a variety of different workloads. By following the best practices outlined below, you can tune your Agent Server to perform optimally for your specific workload. This page describes scaling considerations for the Agent Server on self-hosted deployments and provides example configurations.
 
 > [!TIP]
-> If you're not yet familiar with how API servers and queue workers operate at the container level, read the [runtime architecture](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) overview first.
+> If you're not yet familiar with how API servers and queue workers operate at the container level, read the [runtime architecture](agent-server.md#runtime-architecture) overview first.
 
-For [Cloud](https://docs.langchain.com/langsmith/cloud-platform-features#scaling), the platform autoscales automatically and the Helm configurations below do not apply.
+For [Cloud](cloud-platform-features.md#scaling), the platform autoscales automatically and the Helm configurations below do not apply.
 
 ## Request vs. run concurrency
 
 Two independent kinds of concurrency determine how the Agent Server scales, and they are controlled separately:
 
 * **Request concurrency** is how many API requests (creating runs, reading thread state, streaming results) the deployment serves at once. API servers handle requests asynchronously, and request concurrency scales horizontally with the number of API server replicas.
-* **Run concurrency** is how many runs execute at once. A single queue worker executes up to [`N_JOBS_PER_WORKER`](https://docs.langchain.com/langsmith/env-var-self-hosted) runs concurrently (default 10). Run concurrency is capped at the number of queue workers multiplied by `N_JOBS_PER_WORKER`.
+* **Run concurrency** is how many runs execute at once. A single queue worker executes up to [`N_JOBS_PER_WORKER`](env-var-self-hosted.md) runs concurrently (default 10). Run concurrency is capped at the number of queue workers multiplied by `N_JOBS_PER_WORKER`.
 
-Creating a run is a fast write request: the API server persists a pending run and returns immediately, without waiting for the run to execute. If every run slot is busy, additional runs wait in the [queue](https://docs.langchain.com/langsmith/agent-server#run-execution-lifecycle) until a slot frees. Raising `N_JOBS_PER_WORKER` or adding queue workers increases run throughput; it does not change how many requests the deployment can serve concurrently.
+Creating a run is a fast write request: the API server persists a pending run and returns immediately, without waiting for the run to execute. If every run slot is busy, additional runs wait in the [queue](agent-server.md#run-execution-lifecycle) until a slot frees. Raising `N_JOBS_PER_WORKER` or adding queue workers increases run throughput; it does not change how many requests the deployment can serve concurrently.
 
 ## Write load
 
 Write load is primarily driven by the following factors:
 
-* Creation of new [runs](https://docs.langchain.com/langsmith/background-run)
+* Creation of new [runs](background-run.md)
 * Creation of new checkpoints during run execution
 * Writing to long term memory
-* Creation of new [threads](https://docs.langchain.com/langsmith/use-threads)
-* Creation of new [assistants](https://docs.langchain.com/langsmith/assistants)
+* Creation of new [threads](use-threads.md)
+* Creation of new [assistants](assistants.md)
 * Deletion of runs, checkpoints, threads, assistants and cron jobs
 
 The following components are primarily responsible for handling write load:
@@ -38,7 +38,7 @@ The following components are primarily responsible for handling write load:
 
 ### Tune `N_JOBS_PER_WORKER` based on assistant characteristics
 
-The default value of [`N_JOBS_PER_WORKER`](https://docs.langchain.com/langsmith/env-var-self-hosted) is 10. You can change this value to scale the maximum number of runs that can be executed at a time by a single queue worker based on the characteristics of your assistant.
+The default value of [`N_JOBS_PER_WORKER`](env-var-self-hosted.md) is 10. You can change this value to scale the maximum number of runs that can be executed at a time by a single queue worker based on the characteristics of your assistant.
 
 Some general guidelines for changing `N_JOBS_PER_WORKER`:
 
@@ -74,7 +74,7 @@ If an assistant requires synchronous blocking operations, run those in `asyncio.
 
 ### Minimize redundant checkpointing
 
-Minimize redundant checkpointing by setting [`durability`](https://docs.langchain.com/oss/python/langgraph/checkpointers#durability-modes) to the minimum value necessary to ensure your data is durable.
+Minimize redundant checkpointing by setting [`durability`](../langgraph/checkpointers.md#durability-modes) to the minimum value necessary to ensure your data is durable.
 
 The default durability mode is `"async"`, meaning checkpoints are written after each step asynchronously. If an assistant needs to persist only the final state of the run, `durability` can be set to `"exit"`, storing only the final state of the run. This can be set when creating the run:
 
@@ -103,7 +103,7 @@ This offloads queue management from the API server to dedicated queue workers, r
 
 ### Size jobs for expected throughput
 
-This section sizes run-execution capacity (queue workers), which is separate from request-serving capacity (API server replicas). For more information, see [Request vs. run concurrency](https://docs.langchain.com/langsmith/agent-server-scale#request-vs-run-concurrency).
+This section sizes run-execution capacity (queue workers), which is separate from request-serving capacity (API server replicas). For more information, see [Request vs. run concurrency](#request-vs-run-concurrency).
 
 The more runs you execute in parallel, the more jobs you will need to handle the load. There are two main parameters to scale the available jobs:
 
@@ -136,9 +136,9 @@ Autoscaling is disabled by default, but should be configured for bursty workload
 
 Read load is primarily driven by the following factors:
 
-* Getting the results of a [run](https://docs.langchain.com/langsmith/background-run)
-* Getting the state of a [thread](https://docs.langchain.com/langsmith/use-threads)
-* Searching for [runs](https://docs.langchain.com/langsmith/background-run), [threads](https://docs.langchain.com/langsmith/use-threads), [cron jobs](https://docs.langchain.com/langsmith/cron-jobs) and [assistants](https://docs.langchain.com/langsmith/assistants)
+* Getting the results of a [run](background-run.md)
+* Getting the state of a [thread](use-threads.md)
+* Searching for [runs](background-run.md), [threads](use-threads.md), [cron jobs](cron-jobs.md) and [assistants](assistants.md)
 * Retrieving checkpoints and long term memory
 
 The following components are primarily responsible for handling read load:
@@ -149,11 +149,11 @@ The following components are primarily responsible for handling read load:
 
 ### Use filtering to reduce results per request
 
-[Agent Server](https://docs.langchain.com/langsmith/agent-server) provides a search API for each resource type. These APIs implement pagination by default and offer many filtering options. Use filtering to reduce the number of resources returned per request and improve performance.
+[Agent Server](agent-server.md) provides a search API for each resource type. These APIs implement pagination by default and offer many filtering options. Use filtering to reduce the number of resources returned per request and improve performance.
 
 ### Set TTLs to automatically delete old data
 
-Set a [TTL on threads](https://docs.langchain.com/langsmith/configure-ttl) to automatically clean up old data. Runs and checkpoints are automatically deleted when the associated thread is deleted.
+Set a [TTL on threads](configure-ttl.md) to automatically clean up old data. Runs and checkpoints are automatically deleted when the associated thread is deleted.
 
 ### Avoid polling; use `/join` to monitor a run
 
@@ -172,7 +172,7 @@ Autoscaling is disabled by default, but should be configured for bursty workload
 
 The following table provides an overview comparing different Agent Server configurations for various load patterns (read requests per second / write requests per second) and standard assistant characteristics (average run execution time of 1 second, moderate CPU and memory usage). The request rates drive the required steady-state run throughput, which is sized through queue workers and `N_JOBS_PER_WORKER`, while API server replicas are sized to serve the request volume itself:
 
-|                                                | **[Low / low](https://docs.langchain.com/langsmith/agent-server-scale#low-reads-low-writes)** | **[Low / high](https://docs.langchain.com/langsmith/agent-server-scale#low-reads-high-writes)** | **[High / low](https://docs.langchain.com/langsmith/agent-server-scale#high-reads-low-writes)** | [Medium / medium](https://docs.langchain.com/langsmith/agent-server-scale#medium-reads-medium-writes) | [High / high](https://docs.langchain.com/langsmith/agent-server-scale#high-reads-high-writes) |
+|                                                | **[Low / low](#low-reads-low-writes)** | **[Low / high](#low-reads-high-writes)** | **[High / low](#high-reads-low-writes)** | [Medium / medium](#medium-reads-medium-writes) | [High / high](#high-reads-high-writes) |
 | :--------------------------------------------- | :------------------------------------- | :--------------------------------------- | :--------------------------------------- | :--------------------------------------------- | :------------------------------------- |
 | Write requests per second   | 5                                      | 5                                        | 500                                      | 50                                             | 500                                    |
 | Read requests per second    | 5                                      | 500                                      | 5                                        | 50                                             | 500                                    |
@@ -190,7 +190,7 @@ Load levels in the examples are defined as:
 
 ### Low reads, low writes
 
-The default [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) configuration will handle this load. No custom resource configuration is needed here.
+The default [LangSmith Deployment](deployment.md) configuration will handle this load. No custom resource configuration is needed here.
 
 ### Low reads, high writes
 

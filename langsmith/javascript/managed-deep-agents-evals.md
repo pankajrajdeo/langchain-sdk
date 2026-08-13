@@ -7,7 +7,7 @@ Managed Deep Agents evals are [Harbor](https://www.harborframework.com/docs/task
 The `mda evals` commands do not introduce a separate eval format or run trials. They package the managed agent for Harbor and can optionally turn a minimal starter task under `evals/scaffold/` into a complete task under `evals/tasks/`.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -43,7 +43,7 @@ Use one of the following ways to populate the canonical Harbor dataset:
 
 * A Managed Deep Agents project created with `mda init`, or an existing project with an agent entry.
 * [Docker](https://docs.docker.com/get-docker/) running locally when using Harbor's default `docker` environment.
-* The `mda` CLI from `managed-deepagents`. See the [CLI reference](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-cli#install).
+* The `mda` CLI from `managed-deepagents`. See the [CLI reference](managed-deep-agents-cli.md#install).
 * [Harbor](https://www.harborframework.com/docs) on your `PATH`, or [`uv`](https://docs.astral.sh/uv/) so you can run `uv run --with harbor …`.
 * Model and tool credentials exported in the shell that runs Harbor.
 
@@ -183,8 +183,8 @@ Running the same command again resumes the jobs directory referenced by the conf
 
 ## Next steps
 
-* [CLI reference](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-cli): Review all `mda evals` commands and flags.
-* [Deploy an agent](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-deploy): Deploy the agent after its evals pass.
+* [CLI reference](managed-deep-agents-cli.md): Review all `mda evals` commands and flags.
+* [Deploy an agent](managed-deep-agents-deploy.md): Deploy the agent after its evals pass.
 * [Harbor documentation](https://www.harborframework.com/docs): Configure tasks, environments, jobs, and verifiers.
 
 ***

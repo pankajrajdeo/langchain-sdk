@@ -11,7 +11,7 @@ This integration provides two chat model classes:
 * [ChatLiteLLM](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm/ChatLiteLLM): The main LangChain chat wrapper for LiteLLM.
 * [ChatLiteLLMRouter](https://reference.langchain.com/python/langchain-litellm/chat_models/litellm_router/ChatLiteLLMRouter): A `ChatLiteLLM` wrapper that leverages LiteLLM's Router for load balancing and fallbacks.
 
-The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings), [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter), and [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader). See the [providers page](https://docs.langchain.com/oss/python/integrations/providers/litellm) for details.
+The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm/LiteLLMEmbeddings), [LiteLLMEmbeddingsRouter](https://reference.langchain.com/python/langchain-litellm/embeddings/litellm_router/LiteLLMEmbeddingsRouter), and [LiteLLMOCRLoader](https://reference.langchain.com/python/langchain-litellm/document_loaders/litellm_ocr/LiteLLMOCRLoader). See the [providers page](../providers/litellm.md) for details.
 
 ## Overview
 
@@ -24,7 +24,7 @@ The package also ships [LiteLLMEmbeddings](https://reference.langchain.com/pytho
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Native async](https://docs.langchain.com/oss/python/integrations/chat/litellm#async-and-streaming-functionality) | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | Image input | Audio input | Video input | [Token-level streaming](#async-and-streaming-functionality) | [Native async](#async-and-streaming-functionality) | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |      ✅      |      ✅      |      ❌      |                                                 ✅                                                |                                            ✅                                            |                            ✅                            |                              ✅                             |
 

@@ -2,13 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/config-file)
 Configure model providers, defaults, retries, and gateways in config.toml
 
-`~/.deepagents/config.toml` lets you customize model providers, set defaults, and pass extra parameters to model constructors. For environment variables and inspection commands, see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration). This page covers:
+`~/.deepagents/config.toml` lets you customize model providers, set defaults, and pass extra parameters to model constructors. For environment variables and inspection commands, see [Configuration](configuration.md). This page covers:
 
-* **Defaults**: pin a [default model](https://docs.langchain.com/oss/deepagents/code/config-file#default-and-recent-model) or [agent](https://docs.langchain.com/oss/deepagents/code/config-file#default-and-recent-agent).
-* **Provider setup**: the [`[models.providers.<name>]` table](#provider-configuration), [constructor params](https://docs.langchain.com/oss/deepagents/code/config-file#model-constructor-params), [retries](https://docs.langchain.com/oss/deepagents/code/config-file#retries), [profile overrides](https://docs.langchain.com/oss/deepagents/code/config-file#profile-overrides-advanced), and [adding models to the `/model` switcher](https://docs.langchain.com/oss/deepagents/code/config-file#adding-models-to-the-interactive-switcher).
-* **Auto mode**: the [auto classifier timeout](https://docs.langchain.com/oss/deepagents/code/config-file#auto-classifier-timeout).
-* **Custom endpoints and providers**: [custom base URLs](https://docs.langchain.com/oss/deepagents/code/config-file#custom-base-url), [OpenAI- or Anthropic-compatible APIs](https://docs.langchain.com/oss/deepagents/code/config-file#compatible-apis), and [arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers).
-* **Endpoints and gateways**: how [API keys and base URLs resolve together](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways), including through a managed gateway.
+* **Defaults**: pin a [default model](#default-and-recent-model) or [agent](#default-and-recent-agent).
+* **Provider setup**: the [`[models.providers.<name>]` table](#provider-configuration), [constructor params](#model-constructor-params), [retries](#retries), [profile overrides](#profile-overrides-advanced), and [adding models to the `/model` switcher](#adding-models-to-the-interactive-switcher).
+* **Auto mode**: the [auto classifier timeout](#auto-classifier-timeout).
+* **Custom endpoints and providers**: [custom base URLs](#custom-base-url), [OpenAI- or Anthropic-compatible APIs](#compatible-apis), and [arbitrary providers](#arbitrary-providers).
+* **Endpoints and gateways**: how [API keys and base URLs resolve together](#endpoints-keys-and-gateways), including through a managed gateway.
 
 ## Default and recent model
 
@@ -21,7 +21,7 @@ auto_classifier = "openai:gpt-5.6-luna"  # optional: cheaper model for Auto appr
 
 `[models].default` always takes priority over `[models].recent`. The `/model` command only writes to `[models].recent`, so your configured default is never overwritten by mid-session switches. To remove the default, use `/model --default --clear` or delete the `default` key from the config file.
 
-`[models].auto_classifier` sets the model used by the [Auto approval classifier](https://docs.langchain.com/oss/deepagents/code/approval-modes#select-a-classifier-model) to review gated tool calls. When unset, the classifier inherits the main agent model. You can override this at runtime with `--auto-classifier-model` or `/auto model`. See [Select a classifier model](https://docs.langchain.com/oss/deepagents/code/approval-modes#select-a-classifier-model) for full precedence and security notes.
+`[models].auto_classifier` sets the model used by the [Auto approval classifier](approval-modes.md#select-a-classifier-model) to review gated tool calls. When unset, the classifier inherits the main agent model. You can override this at runtime with `--auto-classifier-model` or `/auto model`. See [Select a classifier model](approval-modes.md#select-a-classifier-model) for full precedence and security notes.
 
 ## Default and recent agent
 
@@ -33,7 +33,7 @@ recent = "frontend-dev"  # last /agents switch (written automatically)
 
 `[agents].default` always takes priority over `[agents].recent`. Selecting an agent in the `/agents` picker with `Enter` writes to `recent`; pressing `Ctrl+S` on the highlighted row pins it as `default`. Pressing `Ctrl+S` again on the same row clears the default.
 
-Explicit `-a`/`--agent` always overrides both, and `-r`/`--resume` bypasses both so the thread's original agent is restored. See [Command reference](https://docs.langchain.com/oss/deepagents/code/cli-reference#command-line-options) for related flags.
+Explicit `-a`/`--agent` always overrides both, and `-r`/`--resume` bypasses both so the thread's original agent is restored. See [Command reference](cli-reference.md#command-line-options) for related flags.
 
 ## Redact LangSmith trace secrets
 
@@ -55,7 +55,7 @@ langsmith_redact = true
 export DEEPAGENTS_CODE_LANGSMITH_REDACT=true
 ```
 
-The environment variable takes precedence over the config file. When redaction is enabled, Deep Agents Code disables tracing for that run if redaction cannot be configured. Secret redaction does not redact general personally identifiable information (PII), trace metadata, or traces emitted by shell processes. For broader options, see [Redact secrets from traces](https://docs.langchain.com/langsmith/redact-secrets).
+The environment variable takes precedence over the config file. When redaction is enabled, Deep Agents Code disables tracing for that run if redaction cannot be configured. Secret redaction does not redact general personally identifiable information (PII), trace metadata, or traces emitted by shell processes. For broader options, see [Redact secrets from traces](../../langsmith/redact-secrets.md).
 
 ## Provider configuration
 
@@ -82,16 +82,16 @@ temperature = 0.7
 Providers have the following configuration options:
 
 #### `models` — `string[]`
-A list of model names to show in the interactive `/model` switcher for the provider defined as `<name>`. For providers that already ship with model profiles, any names you add here appear in addition to bundled ones (useful for newly released models that haven't been added to the package yet). For [arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers), this list is the only source of models in the switcher.
+A list of model names to show in the interactive `/model` switcher for the provider defined as `<name>`. For providers that already ship with model profiles, any names you add here appear in addition to bundled ones (useful for newly released models that haven't been added to the package yet). For [arbitrary providers](#arbitrary-providers), this list is the only source of models in the switcher.
 
-Models listed here **bypass** any applied profile-based [filtering criteria](https://docs.langchain.com/oss/deepagents/code/providers#which-models-appear-in-the-switcher), always appearing in the switcher. This makes it the recommended way to surface models that are excluded because their profile lacks `tool_calling` support or doesn't exist yet.
+Models listed here **bypass** any applied profile-based [filtering criteria](providers.md#which-models-appear-in-the-switcher), always appearing in the switcher. This makes it the recommended way to surface models that are excluded because their profile lacks `tool_calling` support or doesn't exist yet.
 
 This key is optional. You can always pass any model name directly to `/model` or `--model` regardless of whether it appears in the switcher; the provider validates the name at request time.
 
 #### `api_key_env` — `string`
 The **name** of the environment variable that holds the API key (e.g., `"OPENAI_API_KEY"`). Deep Agents Code reads the credential from this env var at startup to verify access before creating the model.
 
-Most chat model packages read from a default env var automatically. See the [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference) table for which variable name each built-in provider checks. For a provider not in that table, set `api_key_env` to its variable name (see [Arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers)).
+Most chat model packages read from a default env var automatically. See the [Provider reference](providers.md#provider-reference) table for which variable name each built-in provider checks. For a provider not in that table, set `api_key_env` to its variable name (see [Arbitrary providers](#arbitrary-providers)).
 
 #### `display_name` — `string`
 Human-readable provider name shown in auth UI. Use this for arbitrary providers whose config key is optimized for machines (for example, `my_gateway`) but whose UI label should include spaces or brand capitalization.
@@ -102,10 +102,10 @@ URL for the provider page where users create or manage API keys. The `/auth` mod
 #### `base_url` — `string`
 Override the base URL used by the provider, if supported. Refer to your provider packages' [reference docs](https://reference.langchain.com/python/integrations/) for more info.
 
-See [Compatible APIs](https://docs.langchain.com/oss/deepagents/code/config-file#compatible-apis) for pointing a built-in provider at a wire-compatible endpoint, or [Arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers) for one configured via `class_path`.
+See [Compatible APIs](#compatible-apis) for pointing a built-in provider at a wire-compatible endpoint, or [Arbitrary providers](#arbitrary-providers) for one configured via `class_path`.
 
 #### `base_url_env` — `string`
-Name of the environment variable that holds this provider's base URL, parallel to `api_key_env`. Reach for this instead of `base_url` when the endpoint comes from the environment rather than a fixed value — for example a gateway URL that differs by machine or CI job — so it can change without editing `config.toml` and can take part in endpoint resolution and key/endpoint pairing (see [Endpoints, keys, and gateways](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways)). It also extends those to providers outside the [built-in set](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference); see [Arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers).
+Name of the environment variable that holds this provider's base URL, parallel to `api_key_env`. Reach for this instead of `base_url` when the endpoint comes from the environment rather than a fixed value — for example a gateway URL that differs by machine or CI job — so it can change without editing `config.toml` and can take part in endpoint resolution and key/endpoint pairing (see [Endpoints, keys, and gateways](#endpoints-keys-and-gateways)). It also extends those to providers outside the [built-in set](providers.md#provider-reference); see [Arbitrary providers](#arbitrary-providers).
 
 If both are set, the static `base_url` wins:
 
@@ -118,20 +118,20 @@ base_url_env = "EXAMPLE_BASE_URL"        # ignored while base_url is set
 #### `params` — `object`
 Extra keyword arguments forwarded to the model constructor. Flat keys (e.g., `temperature = 0`) apply to every model from this provider. Model-keyed sub-tables (e.g., `[params."gpt-5.5"]`) override individual values for that model only; the merge is shallow (model wins on conflict).
 
-Do not put credentials (e.g., `api_key`) in `params`. Use [`api_key_env`](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration) to point at an environment variable instead.
+Do not put credentials (e.g., `api_key`) in `params`. Use [`api_key_env`](#provider-configuration) to point at an environment variable instead.
 
 #### `profile` — `object`
-(Advanced) Override fields in the model's runtime [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) (e.g., `max_input_tokens`). Flat keys apply to every model from this provider. Model-keyed sub-tables (e.g., `[profile."claude-sonnet-4-5"]`) override individual values for that model only; the merge is shallow (model wins on conflict). These overrides are applied after the model is created, so they take effect for context-limit display, auto-summarization, and any other feature that reads the profile. See [Profile overrides](https://docs.langchain.com/oss/deepagents/code/config-file#profile-overrides-advanced) for examples and the `--profile-override` flag.
+(Advanced) Override fields in the model's runtime [profile](../../langchain/models.md#model-profiles) (e.g., `max_input_tokens`). Flat keys apply to every model from this provider. Model-keyed sub-tables (e.g., `[profile."claude-sonnet-4-5"]`) override individual values for that model only; the merge is shallow (model wins on conflict). These overrides are applied after the model is created, so they take effect for context-limit display, auto-summarization, and any other feature that reads the profile. See [Profile overrides](#profile-overrides-advanced) for examples and the `--profile-override` flag.
 
 #### `class_path` — `string`
-Used for [arbitrary model](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers) providers. Fully-qualified Python class in `module.path:ClassName` format. When set, Deep Agents Code imports and instantiates this class directly for provider `<name>`. The class must be a `BaseChatModel` subclass.
+Used for [arbitrary model](#arbitrary-providers) providers. Fully-qualified Python class in `module.path:ClassName` format. When set, Deep Agents Code imports and instantiates this class directly for provider `<name>`. The class must be a `BaseChatModel` subclass.
 
 #### `enabled` — `boolean`
 Whether this provider appears in the `/model` selector. Set to `false` to hide a provider that was auto-discovered from an installed package (e.g., a transitive dependency you don't want cluttering the model switcher). You can still use a disabled provider directly via `/model provider:model` or `--model`.
 
 ## Model constructor params
 
-The [`params` field](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration) forwards extra arguments to the model constructor. To give one model different values, add a model-keyed sub-table so you do not have to duplicate the whole provider config:
+The [`params` field](#provider-configuration) forwards extra arguments to the model constructor. To give one model different values, add a model-keyed sub-table so you do not have to duplicate the whole provider config:
 
 ```toml
 [models.providers.ollama]
@@ -154,7 +154,7 @@ With this configuration:
 The merge is shallow: any key present in the model sub-table replaces the same key from the provider-level params, while keys only at the provider level are preserved.
 
 > [!TIP]
-> For one-off adjustments without editing `config.toml`, pass a JSON object via `--model-params` at launch or mid-session with `/model`. CLI flags take highest priority over the config file. See [Model parameters](https://docs.langchain.com/oss/deepagents/code/providers#model-parameters) on the providers page for syntax and provider-specific examples.
+> For one-off adjustments without editing `config.toml`, pass a JSON object via `--model-params` at launch or mid-session with `/model`. CLI flags take highest priority over the config file. See [Model parameters](providers.md#model-parameters) on the providers page for syntax and provider-specific examples.
 
 ## Retries
 
@@ -197,7 +197,7 @@ max_retries = 4
 
 ## Startup approval mode
 
-Set the default [approval mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) for interactive sessions with the top-level `[startup].mode` key:
+Set the default [approval mode](approval-modes.md) for interactive sessions with the top-level `[startup].mode` key:
 
 ```toml
 [startup]
@@ -208,9 +208,9 @@ Accepted values are `manual` (the fail-closed default), `auto` (classifier-backe
 
 ## Auto classifier timeout
 
-When [Auto mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) is active, the classifier has a time budget to review each batch of gated actions. Batches not reviewed within the deadline are denied as `classifier_unavailable`; repeated misses fall back to the manual approval UI. The default is 20 seconds.
+When [Auto mode](approval-modes.md) is active, the classifier has a time budget to review each batch of gated actions. Batches not reviewed within the deadline are denied as `classifier_unavailable`; repeated misses fall back to the manual approval UI. The default is 20 seconds.
 
-If reviews are timing out, the first thing to try is [selecting a faster classifier model](https://docs.langchain.com/oss/deepagents/code/config-file#default-and-recent-model) (see `[models].auto_classifier`). If you have already done that and still need more headroom, you can raise the deadline:
+If reviews are timing out, the first thing to try is [selecting a faster classifier model](#default-and-recent-model) (see `[models].auto_classifier`). If you have already done that and still need more headroom, you can raise the deadline:
 
 #### Config file
 ```toml
@@ -271,7 +271,7 @@ These are merged on top of config file profile overrides (CLI wins). The priorit
 
 ## Adding models to the interactive switcher
 
-Some providers (e.g. `langchain-ollama`) don't bundle model profile data (see [Provider reference](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference) for full listing). When this is the case, the interactive `/model` switcher won't list models for that provider. You can fill in the gap by defining a `models` list in your config file for the provider:
+Some providers (e.g. `langchain-ollama`) don't bundle model profile data (see [Provider reference](providers.md#provider-reference) for full listing). When this is the case, the interactive `/model` switcher won't list models for that provider. You can fill in the gap by defining a `models` list in your config file for the provider:
 
 ```toml
 [models.providers.ollama]
@@ -331,7 +331,7 @@ models = ["my-model"]
 
 ## Arbitrary providers
 
-Deep Agents Code works with any tool calling LLM available as a [LangChain `BaseChatModel`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel). The [built-in providers](https://docs.langchain.com/oss/deepagents/code/providers#provider-reference) work out of the box; a less common or in-house model takes a little more setup. Point `class_path` at its `BaseChatModel` subclass and Deep Agents Code imports and instantiates the class directly.
+Deep Agents Code works with any tool calling LLM available as a [LangChain `BaseChatModel`](https://reference.langchain.com/python/langchain_core/language_models/#langchain_core.language_models.BaseChatModel). The [built-in providers](providers.md#provider-reference) work out of the box; a less common or in-house model takes a little more setup. Point `class_path` at its `BaseChatModel` subclass and Deep Agents Code imports and instantiates the class directly.
 
 ```toml
 [models.providers.my_custom]
@@ -346,7 +346,7 @@ temperature = 0
 max_tokens = 4096
 ```
 
-`api_key_env` and `base_url` are optional. `display_name` and `api_key_url` customize the provider name and key-acquisition link shown by `/auth`; omit them to fall back to the provider config key and provider setup docs. To read the endpoint from an environment variable instead of hardcoding `base_url`, use [`base_url_env`](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration); it then resolves and pairs with the key the same way as for the built-in providers (see [Endpoints, keys, and gateways](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways)).
+`api_key_env` and `base_url` are optional. `display_name` and `api_key_url` customize the provider name and key-acquisition link shown by `/auth`; omit them to fall back to the provider config key and provider setup docs. To read the endpoint from an environment variable instead of hardcoding `base_url`, use [`base_url_env`](#provider-configuration); it then resolves and pairs with the key the same way as for the built-in providers (see [Endpoints, keys, and gateways](#endpoints-keys-and-gateways)).
 
 `class_path` providers are expected to handle their own authentication internally — useful when your model uses custom auth (JWT tokens, proprietary headers, mTLS, etc.) rather than a standard API key:
 
@@ -373,7 +373,7 @@ With this config, switch to the model with `/model xyz:abc-xyz-1` or `--model xy
 >
 > Although optional, setting `max_input_tokens` to your model's context window is strongly encouraged. Without it, Deep Agents Code cannot show how full the context is, and auto-summarization falls back to a fixed trigger (around 170,000 tokens) instead of a fraction of your model's window. For a model with a smaller window, summarization may not run before you reach the model's hard limit, so requests start failing once the conversation grows.
 
-Because Deep Agents Code imports the `class_path` class at startup, the package that defines it must be importable from the same environment that runs `dcode`. Built-in providers ship as [install extras](https://docs.langchain.com/oss/deepagents/code/providers#quickstart), but a custom or in-house package is not one. Install it into the `dcode` environment with the `--package` flag:
+Because Deep Agents Code imports the `class_path` class at startup, the package that defines it must be importable from the same environment that runs `dcode`. Built-in providers ship as [install extras](providers.md#quickstart), but a custom or in-house package is not one. Install it into the `dcode` environment with the `--package` flag:
 
 ```bash
 dcode --install my_package --package
@@ -403,13 +403,13 @@ Deep Agents Code resolves a provider's endpoint in this order (first match wins)
 1. **`base_url` in `config.toml`** for the provider.
 2. **The `DEEPAGENTS_CODE_`-prefixed endpoint variable.**
 3. **The plain endpoint variable** in the environment (for example, `OPENAI_BASE_URL`).
-4. **The endpoint saved with a `/auth` credential.** This step applies the saved endpoint for a provider that has no endpoint variable—such as a provider you add without declaring [`base_url_env`](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration). Steps 2-3 have no variable to read for these, so the saved endpoint is used directly here. For a provider that does have an endpoint variable, the saved endpoint already took effect at step 2 or 3 (it is written to that variable), so this step changes nothing. Either way, an endpoint entered in `/auth` applies.
+4. **The endpoint saved with a `/auth` credential.** This step applies the saved endpoint for a provider that has no endpoint variable—such as a provider you add without declaring [`base_url_env`](#provider-configuration). Steps 2-3 have no variable to read for these, so the saved endpoint is used directly here. For a provider that does have an endpoint variable, the saved endpoint already took effect at step 2 or 3 (it is written to that variable), so this step changes nothing. Either way, an endpoint entered in `/auth` applies.
 5. **The provider SDK's own default endpoint**, when none of the above is set.
 
 > [!NOTE]
 > Resolved endpoints are delivered to the model as the `base_url` constructor argument.
 
-As with API keys, the [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) scopes the endpoint to Deep Agents Code without affecting other tools. For any other provider, declare the name with [`base_url_env`](https://docs.langchain.com/oss/deepagents/code/config-file#provider-configuration) and the endpoint resolves and pairs the same way:
+As with API keys, the [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) scopes the endpoint to Deep Agents Code without affecting other tools. For any other provider, declare the name with [`base_url_env`](#provider-configuration) and the endpoint resolves and pairs the same way:
 
 ```toml
 [models.providers.myprovider]
@@ -482,10 +482,10 @@ recursion_limit = 5000
 
 ## See also
 
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials)
-* [Providers](https://docs.langchain.com/oss/deepagents/code/providers)
-* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
+* [Configuration](configuration.md)
+* [Provider credentials](credentials.md)
+* [Providers](providers.md)
+* [CLI reference](cli-reference.md)
 
 ***
 

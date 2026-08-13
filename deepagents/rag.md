@@ -4,9 +4,9 @@ RAG patterns for Deep Agents, including skills-guided retrieval, rubric grading,
 
 One of the most powerful LLM-based applications are sophisticated question-answering (Q\&A) chatbots which augment LLMs by providing it with inference-time access to a set of data.
 This might be private data, recent data, or data that is not part of the training data the LLM is trained on.
-These applications use a technique known as Retrieval Augmented Generation, or [RAG](https://docs.langchain.com/oss/python/deepagents/retrieval/).
+These applications use a technique known as Retrieval Augmented Generation, or [RAG](retrieval.md).
 
-[Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) gives you primitives for RAG: custom retrieval tools, a [filesystem backend](https://docs.langchain.com/oss/python/deepagents/backends), [subagents](https://docs.langchain.com/oss/python/deepagents/subagents), [skills](https://docs.langchain.com/oss/python/deepagents/skills), and [grading rubrics](https://docs.langchain.com/oss/python/deepagents/rubric). You can combine them in different ways depending on your corpus size, latency requirements, and how strictly answers must be grounded in source data.
+[Deep Agents](overview.md) gives you primitives for RAG: custom retrieval tools, a [filesystem backend](backends.md), [subagents](subagents.md), [skills](skills.md), and [grading rubrics](rubric.md). You can combine them in different ways depending on your corpus size, latency requirements, and how strictly answers must be grounded in source data.
 
 This guide introduces several RAG patterns and walks through one end-to-end example: a documentation Q\&A agent that indexes a subset of [docs.langchain.com](https://docs.langchain.com), retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents so the orchestrator context stays clean.
 
@@ -16,11 +16,11 @@ Deep Agents allows you to orchestrate retrieval, analysis, and synthesis in seve
 
 * **Skills-guided retrieval**: The user asks a question. The agent loads a relevant skill that describes how to search your corpus (which index to use, query formulation, citation format). The agent calls your retrieval tool following that guidance, then synthesizes an answer.
 * **Rubric-checked grounding**: The user asks a question. The agent retrieves evidence and drafts an answer. A grader sub-agent, configured with `RubricMiddleware`, evaluates whether the response is grounded in the retrieved source material. The agent revises until the rubric passes or an iteration cap is reached.
-* **Todo-driven investigation**: The user asks a question. If you [opt into task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning), the agent uses the planning tool to create a todo list of documentation pages or search queries to investigate. It retrieves results for each item, then synthesizes a response from the collected evidence.
-* **Retrieve, offload, and delegate**: The user asks a question. The agent retrieves matching chunks and writes them to the filesystem backend rather than keeping full text in the orchestrator context. Subagents read, search, and summarize individual files in parallel. For large documents, the agent can paginate through files with built-in search tools or run a [code interpreter](https://docs.langchain.com/oss/deepagents/code/overview) to produce tables, timelines, or visuals from source data.
+* **Todo-driven investigation**: The user asks a question. If you [opt into task planning](overview.md#task-planning), the agent uses the planning tool to create a todo list of documentation pages or search queries to investigate. It retrieves results for each item, then synthesizes a response from the collected evidence.
+* **Retrieve, offload, and delegate**: The user asks a question. The agent retrieves matching chunks and writes them to the filesystem backend rather than keeping full text in the orchestrator context. Subagents read, search, and summarize individual files in parallel. For large documents, the agent can paginate through files with built-in search tools or run a [code interpreter](code/overview.md) to produce tables, timelines, or visuals from source data.
 
 > [!NOTE]
-> Grading rubrics require `deepagents>=0.6.5` and are currently in [beta](https://docs.langchain.com/langsmith/release-stages).
+> Grading rubrics require `deepagents>=0.6.5` and are currently in [beta](../langsmith/release-stages.md).
 
 This tutorial implements the **retrieve, offload, and delegate** pattern. The same primitives appear in the other patterns: skills often wrap retrieval workflows, rubrics can grade any of these flows, and opt-in todo planning helps break complex questions into focused searches.
 
@@ -34,7 +34,7 @@ This tutorial uses one question throughout:
 
 > How do I stream intermediate tool results from a subagent?
 
-Pass that question to a [Deep Agent](https://docs.langchain.com/oss/python/deepagents/overview) with no custom tools and no access to the documentation corpus, to see what the model comes up with:
+Pass that question to a [Deep Agent](overview.md) with no custom tools and no access to the documentation corpus, to see what the model comes up with:
 
 ```python
 from deepagents import create_deep_agent
@@ -190,7 +190,7 @@ result = baseline_agent.invoke(
 print(result["messages"][-1].text)
 ```
 
-Without retrieval, the agent cannot look up current LangChain documentation. Responses tend to be generic, may omit guidance such as [subagent streaming](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming), or include outdated information.
+Without retrieval, the agent cannot look up current LangChain documentation. Responses tend to be generic, may omit guidance such as [subagent streaming](frontend/subagent-streaming.md), or include outdated information.
 
 The example in this tutorial indexes LangChain documentation, retrieves evidence with a vector search tool, analyzes each chunk in parallel subagents, and answers a question with citations to the docs.
 
@@ -205,8 +205,8 @@ The example in this tutorial indexes LangChain documentation, retrieves evidence
 
 API keys for:
 
-* A [chat model integration](https://docs.langchain.com/oss/python/integrations/chat) for the agent
-* OpenAI (or another [embeddings integration](https://docs.langchain.com/oss/python/integrations/embeddings)) for indexing
+* A [chat model integration](../integrations/chat.md) for the agent
+* OpenAI (or another [embeddings integration](../integrations/embeddings.md)) for indexing
 
 ## Setup
 
@@ -234,10 +234,10 @@ export ANTHROPIC_API_KEY="your_anthropic_api_key"   # If using Claude
 export GOOGLE_API_KEY="your_google_api_key"         # If using Gemini
 ```
 
-For any other provider, please see the respective [chat model](https://docs.langchain.com/oss/python/integrations/chat) documentation.
+For any other provider, please see the respective [chat model](../integrations/chat.md) documentation.
 
 ### Set up LangSmith
-RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](https://docs.langchain.com/langsmith/observability) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
+RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](../langsmith/observability.md) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
 After you [sign up for LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-rag), set your environment variables to start logging traces:
 
 ```shell
@@ -256,7 +256,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
 
 > [!TIP]
-> If you are building a production agent, we also recommend you set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> If you are building a production agent, we also recommend you set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Index LangChain documentation
 
@@ -264,12 +264,12 @@ In the indexing step, you'll take the source content and convert *chunks* of it 
 
 Indexing commonly works in four steps:
 
-1. **[Load](https://docs.langchain.com/oss/python/deepagents/rag#load-documents)**: Load your data sources into [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects.
-2. **[Split](https://docs.langchain.com/oss/python/deepagents/rag#split-documents)**: Use [text splitters](https://docs.langchain.com/oss/python/integrations/splitters) to break large `Document`s into smaller chunks. This is useful both for indexing data and passing it to a model, as large chunks are harder to search over and either do not fit in a model's finite context window or use more tokens than necessary.
-3. **[Embed](https://docs.langchain.com/oss/python/deepagents/rag#select-an-embeddings-model)**: [Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings) models convert each chunk into a numeric vector that captures its meaning, enabling similarity search over your content.
-4. **[Store](https://docs.langchain.com/oss/python/deepagents/rag#store-chunks-and-embeddings-in-vectorstore)**: Use a [VectorStore](https://docs.langchain.com/oss/python/integrations/vectorstores) to index chunks and their embeddings for retrieval.
+1. **[Load](#load-documents)**: Load your data sources into [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects.
+2. **[Split](#split-documents)**: Use [text splitters](../integrations/splitters.md) to break large `Document`s into smaller chunks. This is useful both for indexing data and passing it to a model, as large chunks are harder to search over and either do not fit in a model's finite context window or use more tokens than necessary.
+3. **[Embed](#select-an-embeddings-model)**: [Embeddings](../integrations/embeddings.md) models convert each chunk into a numeric vector that captures its meaning, enabling similarity search over your content.
+4. **[Store](#store-chunks-and-embeddings-in-vectorstore)**: Use a [VectorStore](../integrations/vectorstores.md) to index chunks and their embeddings for retrieval.
 
-> **Image:** [index_diagram](https://docs.langchain.com/oss/python/deepagents/rag)
+> **Image:** [index_diagram](rag.md)
 
 In the indexing step, fetch documentation pages, split them into chunks, embed the chunks, and store them in a `VectorStore`. The agent searches this index at runtime; it does not re-fetch the full site on every question.
 
@@ -307,7 +307,7 @@ DOC_PATHS = [
 ```
 
 > [!NOTE]
-> For a more detailed tutorial on indexing, vector stores, and retrieval, see [Semantic search](https://docs.langchain.com/oss/python/langchain/knowledge-base).
+> For a more detailed tutorial on indexing, vector stores, and retrieval, see [Semantic search](../langchain/knowledge-base.md).
 
 ### Load documents
 
@@ -380,13 +380,13 @@ print(f"Split documentation into {len(all_splits)} chunks.")
 Split documentation into 782 chunks.
 ```
 
-If you want to learn more about text splitters, check out the [`TextSplitter` interface](https://reference.langchain.com/python/langchain-text-splitters/base/TextSplitter) and [text splitter integrations](https://docs.langchain.com/oss/python/integrations/splitters/).
+If you want to learn more about text splitters, check out the [`TextSplitter` interface](https://reference.langchain.com/python/langchain-text-splitters/base/TextSplitter) and [text splitter integrations](../integrations/splitters.md).
 
 ### Select an embeddings model
 
-An [embedding](https://docs.langchain.com/oss/python/integrations/embeddings) is a numeric vector that captures the meaning of each documentation chunk. An [Embeddings](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) model converts those chunks into vectors so that similar meanings land close together in vector space, enabling you to retrieve relevant sections when a user asks a question.
+An [embedding](../integrations/embeddings.md) is a numeric vector that captures the meaning of each documentation chunk. An [Embeddings](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) model converts those chunks into vectors so that similar meanings land close together in vector space, enabling you to retrieve relevant sections when a user asks a question.
 
-You can choose from many different [embedding integrations](https://docs.langchain.com/oss/python/integrations/embeddings/) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings):
+You can choose from many different [embedding integrations](../integrations/embeddings.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings):
 
 #### OpenAI
 ```shell
@@ -626,8 +626,8 @@ embeddings = IsaacusEmbeddings(model="kanon-2-embedder")
 
 ### Store chunks and embeddings in VectorStore
 
-A [`VectorStore`](https://docs.langchain.com/oss/python/integrations/vectorstores) persists document chunks and their embeddings, enabling similarity search to retrieve relevant sections when a user asks a question.
-You can choose from many different [vector store integrations](https://docs.langchain.com/oss/python/integrations/vectorstores/) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore).
+A [`VectorStore`](../integrations/vectorstores.md) persists document chunks and their embeddings, enabling similarity search to retrieve relevant sections when a user asks a question.
+You can choose from many different [vector store integrations](../integrations/vectorstores.md) which all use the same [Interface](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore).
 Use the embeddings model that you selected in the previous step to configure your `VectorStore`:
 
 #### In-memory
@@ -827,12 +827,12 @@ Indexed 782 chunks.
 
 This completes the **Indexing** portion of the tutorial. You now have a queryable vector store containing chunked LangChain documentation.
 
-The next step is to build a Deep Agent that searches this index at run time, offloads retrieved chunks to the filesystem, and delegates analysis to subagents. See [Build the agent](https://docs.langchain.com/oss/python/deepagents/rag#build-the-agent). To think of it in RAG terms:
+The next step is to build a Deep Agent that searches this index at run time, offloads retrieved chunks to the filesystem, and delegates analysis to subagents. See [Build the agent](#build-the-agent). To think of it in RAG terms:
 
-1. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](https://docs.langchain.com/oss/python/integrations/retrievers).
-2. **Generate**: A [model](https://docs.langchain.com/oss/python/langchain/models) produces an answer using a prompt that includes both the question and the retrieved data.
+1. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](../integrations/retrievers.md).
+2. **Generate**: A [model](../langchain/models.md) produces an answer using a prompt that includes both the question and the retrieved data.
 
-> **Image:** [retrieval_diagram](https://docs.langchain.com/oss/python/deepagents/rag)
+> **Image:** [retrieval_diagram](rag.md)
 
 ## Build the agent
 
@@ -1216,7 +1216,7 @@ When the agent runs, it:
 3. Launches one or more `task()` calls to `chunk-analyst`, each scoped to a single chunk file.
 4. Synthesizes a final answer with links to the relevant documentation pages.
 
-If you enabled LangSmith in [Setup](https://docs.langchain.com/oss/python/deepagents/rag#setup), open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-rag) and inspect the trace to see search calls, filesystem writes, subagent delegations, and the final response.
+If you enabled LangSmith in [Setup](#setup), open [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-rag) and inspect the trace to see search calls, filesystem writes, subagent delegations, and the final response.
 
 ## Security considerations
 
@@ -1416,13 +1416,13 @@ if __name__ == "__main__":
 
 ## Next steps
 
-You implemented one RAG pattern with [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Combine it with other Deep Agents capabilities or try a different pattern from [RAG patterns](https://docs.langchain.com/oss/python/deepagents/rag#rag-patterns):
+You implemented one RAG pattern with [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent). Combine it with other Deep Agents capabilities or try a different pattern from [RAG patterns](#rag-patterns):
 
-* Add [Skills](https://docs.langchain.com/oss/python/deepagents/skills) to package retrieval workflows and domain-specific search guidance
-* Use [Grading rubrics](https://docs.langchain.com/oss/python/deepagents/rubric) to verify answers are grounded in retrieved source material
-* [Evaluate a RAG application](https://docs.langchain.com/langsmith/evaluate-rag-tutorial) with LangSmith datasets and evaluators
-* Read [Context engineering](https://docs.langchain.com/oss/python/deepagents/context-engineering) for offloading and subagent isolation strategies
-* Deploy your application with [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)
+* Add [Skills](skills.md) to package retrieval workflows and domain-specific search guidance
+* Use [Grading rubrics](rubric.md) to verify answers are grounded in retrieved source material
+* [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md) with LangSmith datasets and evaluators
+* Read [Context engineering](context-engineering.md) for offloading and subagent isolation strategies
+* Deploy your application with [LangSmith Deployment](../langsmith/deployment.md)
 
 ***
 

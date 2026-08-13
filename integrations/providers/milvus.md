@@ -19,7 +19,7 @@ uv add langchain-milvus
 
 ## Vector store
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/milvus).
+See a [usage example](../vectorstores/milvus.md).
 
 To import this vectorstore:
 

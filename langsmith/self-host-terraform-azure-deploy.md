@@ -91,7 +91,7 @@ You also need a LangSmith license key ([contact sales](https://www.langchain.com
 ## Quickstart
 
 > [!TIP]
-> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [Azure quick reference](https://docs.langchain.com/langsmith/self-host-terraform-azure-quick-reference).
+> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [Azure quick reference](self-host-terraform-azure-quick-reference.md).
 
 For the fastest path from zero to a running LangSmith instance:
 
@@ -200,12 +200,12 @@ sizing_profile = "production"   # minimum | dev | production | production-large
 ```
 
 > [!WARNING]
-> In-cluster ClickHouse runs as a single pod with no replication or backups, dev/POC only. For production, use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse).
+> In-cluster ClickHouse runs as a single pod with no replication or backups, dev/POC only. For production, use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md).
 
 > [!NOTE]
 > Blob Storage is always required, regardless of tier. Trace payloads must go to Azure Blob, never to ClickHouse.
 
-For all variables, see the [Azure variables reference](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables).
+For all variables, see the [Azure variables reference](self-host-terraform-azure-variables.md).
 
 ### Bootstrap secrets
 
@@ -350,7 +350,7 @@ make deploy   # ~10 min
 > while true; do clear; kubectl get pods -n langsmith; sleep 3; done
 > ```
 
-If you completed the Helm path, skip to [Verify the deployment](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy#verify-the-deployment). The following Terraform path is an alternative to the Helm path, not an additional step.
+If you completed the Helm path, skip to [Verify the deployment](#verify-the-deployment). The following Terraform path is an alternative to the Helm path, not an additional step.
 
 ### Terraform path
 
@@ -455,7 +455,7 @@ Each add-on is gated by a flag in `infra/terraform.tfvars`. Set the flag, re-run
 
 ### LangSmith Deployment
 
-Enables [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
+Enables [LangSmith Deployment](deploy-self-hosted-full-platform.md), which lets you deploy and manage agents as API servers directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-self-host-terraform-azure-deploy). This adds three new pods.
 
 | Pod                      | Role                                                                                                     | Workload Identity |
 | ------------------------ | -------------------------------------------------------------------------------------------------------- | ----------------- |
@@ -704,10 +704,10 @@ create_dns_zone        = true
 
 ## Next steps
 
-* Reference the [Azure variables](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables) and the [quick reference](https://docs.langchain.com/langsmith/self-host-terraform-azure-quick-reference).
-* Review the [Azure architecture](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture) for module structure, traffic flow, and Workload Identity.
-* When something breaks, check the [Azure troubleshooting guide](https://docs.langchain.com/langsmith/self-host-terraform-azure-troubleshooting).
-* Enable agent deployment in the UI with [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
+* Reference the [Azure variables](self-host-terraform-azure-variables.md) and the [quick reference](self-host-terraform-azure-quick-reference.md).
+* Review the [Azure architecture](self-host-terraform-azure-architecture.md) for module structure, traffic flow, and Workload Identity.
+* When something breaks, check the [Azure troubleshooting guide](self-host-terraform-azure-troubleshooting.md).
+* Enable agent deployment in the UI with [LangSmith Deployment](deploy-self-hosted-full-platform.md).
 
 ***
 

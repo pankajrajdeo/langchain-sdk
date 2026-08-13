@@ -12,9 +12,9 @@ Common use cases include:
 * Enforcing business rules and compliance requirements
 * Validating output quality and accuracy
 
-You can implement guardrails using [middleware](https://docs.langchain.com/oss/python/langchain/middleware) to intercept execution at strategic points - before the agent starts, after it completes, or around model and tool calls.
+You can implement guardrails using [middleware](middleware.md) to intercept execution at strategic points - before the agent starts, after it completes, or around model and tool calls.
 
-> **Image:** [Middleware flow diagram](https://docs.langchain.com/oss/python/langchain/guardrails)
+> **Image:** [Middleware flow diagram](guardrails.md)
 
 Guardrails can be implemented using two complementary approaches:
 
@@ -24,7 +24,7 @@ Use rule-based logic like regex patterns, keyword matching, or explicit checks. 
 #### Model-based guardrails
 Use LLMs or classifiers to evaluate content with semantic understanding. Catch subtle issues that rules miss, but are slower and more expensive.
 
-LangChain provides both built-in guardrails (e.g., [PII detection](https://docs.langchain.com/oss/python/langchain/guardrails#pii-detection), [human-in-the-loop](https://docs.langchain.com/oss/python/langchain/guardrails#human-in-the-loop)) and a flexible middleware system for building custom guardrails using either approach.
+LangChain provides both built-in guardrails (e.g., [PII detection](#pii-detection), [human-in-the-loop](#human-in-the-loop)) and a flexible middleware system for building custom guardrails using either approach.
 
 ## Built-in guardrails
 
@@ -44,7 +44,7 @@ The PII middleware supports multiple strategies for handling detected PII:
 | `block`  | Raise exception when detected           | Error thrown          |
 
 > [!NOTE]
-> With `apply_to_output=True`, `PIIMiddleware` also redacts streamed wire output—text deltas, tool-call args, tool outputs, and state snapshots—via a registered stream transformer. Requires `langchain>=1.3.2`. See [Register transformers on middleware](https://docs.langchain.com/oss/python/langchain/event-streaming#register-transformers-on-middleware).
+> With `apply_to_output=True`, `PIIMiddleware` also redacts streamed wire output—text deltas, tool-call args, tool outputs, and state snapshots—via a registered stream transformer. Requires `langchain>=1.3.2`. See [Register transformers on middleware](event-streaming.md#register-transformers-on-middleware).
 
 ```python
 from langchain.agents import create_agent
@@ -106,7 +106,7 @@ result = agent.invoke({
 
 </details>
 
-See the [middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware#pii-detection) for complete details on PII detection capabilities.
+See the [middleware documentation](middleware.md#pii-detection) for complete details on PII detection capabilities.
 
 ### Human-in-the-loop
 
@@ -154,7 +154,7 @@ result = agent.invoke(
 ```
 
 > [!TIP]
-> See the [human-in-the-loop documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) for complete details on implementing approval workflows.
+> See the [human-in-the-loop documentation](human-in-the-loop.md) for complete details on implementing approval workflows.
 
 ## Custom guardrails
 
@@ -404,10 +404,10 @@ agent = create_agent(
 
 ## Additional resources
 
-* [Middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware) - Complete guide to custom middleware
+* [Middleware documentation](middleware.md) - Complete guide to custom middleware
 * [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/) - Complete guide to custom middleware
-* [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) - Add human review for sensitive operations
-* [Testing agents](https://docs.langchain.com/oss/python/langchain/test/) - Strategies for testing safety mechanisms
+* [Human-in-the-loop](human-in-the-loop.md) - Add human review for sensitive operations
+* [Testing agents](test.md) - Strategies for testing safety mechanisms
 
 ***
 

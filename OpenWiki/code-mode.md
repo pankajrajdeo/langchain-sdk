@@ -23,7 +23,7 @@ After a successful init or update, the repository typically includes:
 
 ## Markdown output
 
-OpenWiki's durable output is Markdown (OKF), not a static HTML site. To explore the wiki in a browser, run [`openwiki visualize`](https://docs.langchain.com/oss/openwiki/visualize). The command serves a viewer only on your local machine (`127.0.0.1`). To host a human-readable site, render the Markdown with another tool (for example GitHub Pages, MkDocs, or an OKF-compatible viewer).
+OpenWiki's durable output is Markdown (OKF), not a static HTML site. To explore the wiki in a browser, run [`openwiki visualize`](visualize.md). The command serves a viewer only on your local machine (`127.0.0.1`). To host a human-readable site, render the Markdown with another tool (for example GitHub Pages, MkDocs, or an OKF-compatible viewer).
 
 ## Open Knowledge Format
 
@@ -73,10 +73,10 @@ Normal `--init` and `--update` runs do not rewrite this file.
 
 ## See also
 
-* [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize)
-* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
-* [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize)
-* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
+* [Visualize your wiki](visualize.md)
+* [Automate updates](automate-updates.md)
+* [Customize OpenWiki](customize.md)
+* [Personal mode](personal-mode.md)
 
 ***
 

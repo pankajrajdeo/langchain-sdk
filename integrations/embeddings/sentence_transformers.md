@@ -41,7 +41,7 @@ Start from the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard
 | `lightonai/DenseOn`                       | 149M | modern architecture, strong performance for its size                          |
 | `Qwen/Qwen3-Embedding-0.6B`               | 595M | Multilingual, instruction-aware, top MTEB performance                         |
 
-See also [Factors to weigh](https://docs.langchain.com/oss/python/integrations/embeddings#factors-to-weigh) for a deeper walkthrough of the tradeoffs.
+See also [Factors to weigh](../embeddings.md#factors-to-weigh) for a deeper walkthrough of the tradeoffs.
 
 ## Normalize embeddings
 
@@ -83,11 +83,11 @@ Using the right prompts at indexing and query time typically gives a meaningful 
 
 ## Deploy for production
 
-For serving Sentence Transformers models at scale, use [Text Embeddings Inference (TEI)](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference), a dedicated inference server from Hugging Face with batching, GPU support, and OpenAI-compatible APIs. Point LangChain at a TEI deployment via `OpenAIEmbeddings`: see the [TEI integration guide](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference).
+For serving Sentence Transformers models at scale, use [Text Embeddings Inference (TEI)](text_embeddings_inference.md), a dedicated inference server from Hugging Face with batching, GPU support, and OpenAI-compatible APIs. Point LangChain at a TEI deployment via `OpenAIEmbeddings`: see the [TEI integration guide](text_embeddings_inference.md).
 
 ## Reranking
 
-The same ecosystem hosts [cross-encoder reranker models](https://huggingface.co/models?pipeline_tag=text-ranking). For a local reranker on top of a vector store, see the [Cross Encoder Reranker guide](https://docs.langchain.com/oss/python/integrations/document_transformers/cross_encoder_reranker).
+The same ecosystem hosts [cross-encoder reranker models](https://huggingface.co/models?pipeline_tag=text-ranking). For a local reranker on top of a vector store, see the [Cross Encoder Reranker guide](../document_transformers/cross_encoder_reranker.md).
 
 ## Troubleshooting
 

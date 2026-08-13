@@ -2,7 +2,7 @@
 
 > Integrate with the ChatQwen chat model using LangChain Python.
 
-This will help you get started with Qwen [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatQwen` features and configurations head to the [API reference](https://pypi.org/project/langchain-qwq/).
+This will help you get started with Qwen [chat models](../../langchain/models.md). For detailed documentation of all `ChatQwen` features and configurations head to the [API reference](https://pypi.org/project/langchain-qwq/).
 
 ## Overview
 
@@ -14,7 +14,7 @@ This will help you get started with Qwen [chat models](https://docs.langchain.co
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ✅      |                                  ✅                                  |       ✅      |                            ✅                            |                              ❌                             |
 

@@ -2,33 +2,33 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview)
 Run the LangSmith Deployment platform on your own infrastructure with full control over data, networking, and resources.
 
-Self-hosted LangSmith Deployment runs the [Agent Server](https://docs.langchain.com/langsmith/agent-server), control plane, data plane, and supporting databases inside infrastructure that you operate.
+Self-hosted LangSmith Deployment runs the [Agent Server](agent-server.md), control plane, data plane, and supporting databases inside infrastructure that you operate.
 
 LangChain ships the container images, Helm charts, and license; you provide the Kubernetes cluster (or Docker host), PostgreSQL, Redis, and the networking and observability tooling that fit your environment. Self-hosted is the best deployment option when you have data residency, regulatory constraints, custom networking, or air-gapped requirements.
 
 > [!NOTE]
-> Self-hosted deployments require an [Enterprise plan](https://www.langchain.com/pricing) and the LangSmith license key delivered with that plan. For a setup guide, see [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted).
+> Self-hosted deployments require an [Enterprise plan](https://www.langchain.com/pricing) and the LangSmith license key delivered with that plan. For a setup guide, see [Self-hosted LangSmith](self-hosted.md).
 
 ## Topologies
 
-LangSmith supports three self-hosted topologies that trade off setup complexity against control-plane features. Reference pages for [platform features](https://docs.langchain.com/langsmith/self-hosted-platform-features), [Agent Server metrics](https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics), and [diagnostics](https://docs.langchain.com/langsmith/diagnostics-self-hosted) apply to all three.
+LangSmith supports three self-hosted topologies that trade off setup complexity against control-plane features. Reference pages for [platform features](self-hosted-platform-features.md), [Agent Server metrics](self-hosted-agent-server-metrics.md), and [diagnostics](diagnostics-self-hosted.md) apply to all three.
 
-#### [Full self-hosted platform](https://docs.langchain.com/langsmith/deploy-with-control-plane)
-The complete LangSmith platform—[control plane](https://docs.langchain.com/langsmith/control-plane) UI and APIs, [data plane](https://docs.langchain.com/langsmith/data-plane) listener, observability, evaluation, and agent deployment management. Best for teams that want the LangSmith product experience inside their own network.
+#### [Full self-hosted platform](deploy-with-control-plane.md)
+The complete LangSmith platform—[control plane](control-plane.md) UI and APIs, [data plane](data-plane.md) listener, observability, evaluation, and agent deployment management. Best for teams that want the LangSmith product experience inside their own network.
 
-#### [Hybrid](https://docs.langchain.com/langsmith/hybrid)
+#### [Hybrid](hybrid.md)
 LangChain-hosted control plane with the data plane (Agent Servers and databases) in your infrastructure. Best when you want managed deployment workflows but need agent workloads and customer data to stay inside your VPC.
 
-#### [Standalone server](https://docs.langchain.com/langsmith/deploy-standalone-server)
+#### [Standalone server](deploy-standalone-server.md)
 The lightest option—Agent Server containers (API + queue workers) with your own PostgreSQL and Redis. No control plane, no managed UI. Best for embedding the runtime into existing infrastructure or running air-gapped.
 
-#### [Platform features](https://docs.langchain.com/langsmith/self-hosted-platform-features)
+#### [Platform features](self-hosted-platform-features.md)
 Reference for self-hosted-only platform behavior: custom Postgres and Redis, listeners, and resource customization.
 
-#### [Agent Server metrics](https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics)
+#### [Agent Server metrics](self-hosted-agent-server-metrics.md)
 Prometheus and Datadog export for Agent Server, including Deployment UI metrics and internal metrics.
 
-#### [Diagnostics](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
+#### [Diagnostics](diagnostics-self-hosted.md)
 Collect logs, inspect state, and troubleshoot a self-hosted installation.
 
 ## Who manages what
@@ -43,14 +43,14 @@ Self-hosted shifts ownership of infrastructure operations from LangChain to your
 | CI/CD for your apps                       | You                | Your CI environment |
 | Upgrades, scaling, and backups            | You                | Your infrastructure |
 
-In return, you can integrate with your own [Postgres](https://docs.langchain.com/langsmith/self-hosted-platform-features#custom-postgresql) and [Redis](https://docs.langchain.com/langsmith/self-hosted-platform-features#custom-redis), size [CPU and memory](https://docs.langchain.com/langsmith/self-hosted-platform-features#resource-customization) for your workload, and operate inside your existing network and observability stack. For the corresponding Cloud-managed model, see [Deploy to Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud-overview).
+In return, you can integrate with your own [Postgres](self-hosted-platform-features.md#custom-postgresql) and [Redis](self-hosted-platform-features.md#custom-redis), size [CPU and memory](self-hosted-platform-features.md#resource-customization) for your workload, and operate inside your existing network and observability stack. For the corresponding Cloud-managed model, see [Deploy to Cloud](deploy-to-cloud-overview.md).
 
 ## Next steps
 
-#### [Pick a topology](https://docs.langchain.com/langsmith/deploy-standalone-server)
+#### [Pick a topology](deploy-standalone-server.md)
 Compare standalone server, full platform, and hybrid to find the right fit.
 
-#### [Install the full platform](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform)
+#### [Install the full platform](deploy-self-hosted-full-platform.md)
 Deploy LangSmith on Kubernetes with the control plane and data plane.
 
 ***

@@ -5,7 +5,7 @@ Connect Managed Deep Agents to external messaging services that can start runs a
 A channel connects a Managed Deep Agent to an external messaging service. Messages from the service can start agent runs, and the agent can respond through the same service without a separate application server.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -82,23 +82,23 @@ Ordinary HTTP runs and scheduled runs do not have an originating channel, so `ru
 
 By default, the managed runner posts the agent's final response to the originating conversation. Provider guides describe how to customize that behavior and send intermediate messages.
 
-Scheduled runs can deliver results through a named channel even though they do not originate from one. See [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules#deliver-results-to-slack).
+Scheduled runs can deliver results through a named channel even though they do not originate from one. See [Schedules](managed-deep-agents-schedules.md#deliver-results-to-slack).
 
 ## Distinguish channels from connectors
 
-A channel receives messages that start agent runs and delivers responses. An [MCP connector](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors) gives the agent tools from a remote MCP server. A project can use either or both.
+A channel receives messages that start agent runs and delivers responses. An [MCP connector](managed-deep-agents-mcp-connectors.md) gives the agent tools from a remote MCP server. A project can use either or both.
 
 ## Supported channels
 
-#### [Slack](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack)
+#### [Slack](managed-deep-agents-channels-slack.md)
 Start runs from Slack mentions, direct messages, and thread replies.
 
 ## See also
 
-* [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity): authenticate callers and scope channel runs to the resolved user.
-* [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules): deliver scheduled results through a configured channel.
-* [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy): deploy project changes and configure secrets.
-* [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli): review channel project-file conventions.
+* [Identity](managed-deep-agents-identity.md): authenticate callers and scope channel runs to the resolved user.
+* [Schedules](managed-deep-agents-schedules.md): deliver scheduled results through a configured channel.
+* [Deploy an agent](managed-deep-agents-deploy.md): deploy project changes and configure secrets.
+* [CLI reference](managed-deep-agents-cli.md): review channel project-file conventions.
 
 ***
 

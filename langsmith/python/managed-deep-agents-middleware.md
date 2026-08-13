@@ -7,7 +7,7 @@ Managed Deep Agents support the normal Deep Agents `middleware` configuration su
 Add LangChain middleware to `define_deep_agent` to monitor tool calls, add guardrails, redact data, retry transient failures, or customize model calls.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -22,7 +22,7 @@ my-agent/
 
 The managed runtime still owns `backend`, `store`, `checkpointer`, `memory`, `skills`, and the system prompt. Middleware should focus on agent behavior around model calls, tool calls, and lifecycle hooks.
 
-For deeper hook, state, and context details, see [custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom).
+For deeper hook, state, and context details, see [custom middleware](../../langchain/middleware/custom.md).
 
 ## Use prebuilt middleware
 
@@ -46,7 +46,7 @@ Middleware is the right place for cross-cutting behavior such as PII handling, r
 
 ## Add a custom middleware module
 
-For a more advanced option, you can also define [custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom).
+For a more advanced option, you can also define [custom middleware](../../langchain/middleware/custom.md).
 
 > [!NOTE]
 > Managed Deep Agents use `ainvoke` and `astream`, so custom middleware must use async hooks. Synchronous hooks remain supported with Deep Agents `invoke` and `stream`.
@@ -92,7 +92,7 @@ Your middleware imports should work the same way they do in a normal local Pytho
 
 Middleware can read per-run context through the normal LangChain runtime APIs. Use context for user IDs, organization IDs, feature flags, request metadata, or credentials that should not be part of the model prompt by default.
 
-For examples, see [Custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom).
+For examples, see [Custom middleware](../../langchain/middleware/custom.md).
 
 ***
 

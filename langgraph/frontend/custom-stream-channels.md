@@ -101,7 +101,7 @@ Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react
 `stream` handle returned here.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -211,7 +211,7 @@ React and Svelte, a `Ref` in Vue (`latest.value`), and a signal in Angular
 
 An optional third `target` argument scopes the subscription to a namespace, the
 same way `useMessages(stream, node)` scopes messages to a discovered graph node.
-See [Graph execution](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution) for namespace
+See [Graph execution](graph-execution.md) for namespace
 targeting.
 
 ## Buffer raw events with `useChannel`
@@ -320,9 +320,9 @@ messages, tool calls, or graph state:
 
 ## Related
 
-* [Overview](https://docs.langchain.com/oss/python/langgraph/frontend/overview) — the LangGraph frontend stream
+* [Overview](overview.md) — the LangGraph frontend stream
   API and architecture.
-* [Graph execution](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution) — namespace-scoped
+* [Graph execution](graph-execution.md) — namespace-scoped
   selectors for multi-node pipelines.
 
 ***

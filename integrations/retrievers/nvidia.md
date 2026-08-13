@@ -97,9 +97,9 @@ For detailed documentation of all `NVIDIARAGRetriever` features and configuratio
 
 ## Related topics
 
-* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
-* [`ChatNVIDIA` integration](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)
-* [`NVIDIAEmbeddings` integration](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)
+* [NVIDIA Provider Page](../providers/nvidia.md)
+* [`ChatNVIDIA` integration](../chat/nvidia_ai_endpoints.md)
+* [`NVIDIAEmbeddings` integration](../embeddings/nvidia_ai_endpoints.md)
 * [NVIDIA RAG Blueprint documentation](https://docs.nvidia.com/rag/latest/index.html)
 
 ***

@@ -2,28 +2,28 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant)
 ## Overview
 
-The **supervisor pattern** is a [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) architecture where a central supervisor agent coordinates specialized worker agents. This approach excels when tasks require different types of expertise. Rather than building one agent that manages tool selection across domains, you create focused specialists coordinated by a supervisor who understands the overall workflow.
+The **supervisor pattern** is a [multi-agent](../multi-agent.md) architecture where a central supervisor agent coordinates specialized worker agents. This approach excels when tasks require different types of expertise. Rather than building one agent that manages tool selection across domains, you create focused specialists coordinated by a supervisor who understands the overall workflow.
 
 In this tutorial, you'll build a personal assistant system that demonstrates these benefits through a realistic workflow. The system will coordinate two specialists with fundamentally different responsibilities:
 
 * A **calendar agent** that handles scheduling, availability checking, and event management.
 * An **email agent** that manages communication, drafts messages, and sends notifications.
 
-We will also incorporate [human-in-the-loop review](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) to allow users to approve, edit, and reject actions (such as outbound emails) as desired.
+We will also incorporate [human-in-the-loop review](../human-in-the-loop.md) to allow users to approve, edit, and reject actions (such as outbound emails) as desired.
 
 > [!NOTE]
-> If you are migrating from the [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package, see [Migrate from langgraph-supervisor](https://docs.langchain.com/oss/python/migrate/langgraph-supervisor) for before-and-after patterns, including interrupt and resume flows.
+> If you are migrating from the [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package, see [Migrate from langgraph-supervisor](../../migrate/langgraph-supervisor.md) for before-and-after patterns, including interrupt and resume flows.
 
 ### Why use a supervisor?
 
-Multi-agent architectures allow you to partition [tools](https://docs.langchain.com/oss/python/langchain/tools) across workers, each with their own individual prompts or instructions. Consider an agent with direct access to all calendar and email APIs: it must choose from many similar tools, understand exact formats for each API, and handle multiple domains simultaneously. If performance degrades, it may be helpful to separate related tools and associated prompts into logical groups (in part to manage iterative improvements).
+Multi-agent architectures allow you to partition [tools](../tools.md) across workers, each with their own individual prompts or instructions. Consider an agent with direct access to all calendar and email APIs: it must choose from many similar tools, understand exact formats for each API, and handle multiple domains simultaneously. If performance degrades, it may be helpful to separate related tools and associated prompts into logical groups (in part to manage iterative improvements).
 
 ### Concepts
 
 We will cover the following concepts:
 
-* [Multi-agent systems](https://docs.langchain.com/oss/python/langchain/multi-agent)
-* [Human-in-the-loop review](https://docs.langchain.com/oss/python/langchain/human-in-the-loop)
+* [Multi-agent systems](../multi-agent.md)
+* [Human-in-the-loop review](../human-in-the-loop.md)
 
 ## Setup
 
@@ -39,7 +39,7 @@ pip install langchain
 conda install langchain -c conda-forge
 ```
 
-For more details, see our [Installation guide](https://docs.langchain.com/oss/python/langchain/install).
+For more details, see our [Installation guide](../install.md).
 
 ### LangSmith
 
@@ -63,7 +63,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 We will need to select a chat model from LangChain's suite of integrations:
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -92,7 +92,7 @@ model = ChatOpenAI(model="gpt-5.5")
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -121,7 +121,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -160,7 +160,7 @@ model = AzureChatOpenAI(
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -189,7 +189,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -218,7 +218,7 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -257,7 +257,7 @@ model = ChatHuggingFace(llm=llm)
 ```
 
 #### OpenRouter
-👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
+👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 ```bash
 pip install -U "langchain-openrouter"
@@ -807,12 +807,12 @@ This separation of concerns provides several benefits: each layer has a focused 
 
 ## 6. Add human-in-the-loop review
 
-It can be prudent to incorporate [human-in-the-loop review](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) of sensitive actions. LangChain includes [built-in middleware](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#configuring-interrupts) to review tool calls, in this case the tools invoked by sub-agents.
+It can be prudent to incorporate [human-in-the-loop review](../human-in-the-loop.md) of sensitive actions. LangChain includes [built-in middleware](../human-in-the-loop.md#configuring-interrupts) to review tool calls, in this case the tools invoked by sub-agents.
 
 Let's add human-in-the-loop review to both sub-agents:
 
-* We configure the `create_calendar_event` and `send_email` tools to interrupt, permitting all [response types](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) (`approve`, `edit`, `reject`)
-* We add a [checkpointer](https://docs.langchain.com/oss/python/langchain/short-term-memory) **only to the top-level agent**. This is required to pause and resume execution.
+* We configure the `create_calendar_event` and `send_email` tools to interrupt, permitting all [response types](../human-in-the-loop.md) (`approve`, `edit`, `reject`)
+* We add a [checkpointer](../short-term-memory.md) **only to the top-level agent**. This is required to pause and resume execution.
 
 ```python
 from langchain.agents import create_agent
@@ -919,7 +919,7 @@ Tool: send_email
 Args: {'to': ['designteam@example.com'], 'subject': 'Reminder: Review New Mockups Before Meeting Next Tuesday at 2pm', 'body': "Hello Team,\n\nThis is a reminder to review the new mockups ahead of our meeting scheduled for next Tuesday at 2pm. Your feedback and insights will be valuable for our discussion and next steps.\n\nPlease ensure you've gone through the designs and are ready to share your thoughts during the meeting.\n\nThank you!\n\nBest regards,\n[Your Name]"}
 ```
 
-We can specify decisions for each interrupt by referring to its ID using a [`Command`](https://reference.langchain.com/python/langgraph/types/Command). Refer to the [human-in-the-loop guide](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) for additional details. For demonstration purposes, here we will accept the calendar event, but edit the subject of the outbound email:
+We can specify decisions for each interrupt by referring to its ID using a [`Command`](https://reference.langchain.com/python/langgraph/types/Command). Refer to the [human-in-the-loop guide](../human-in-the-loop.md) for additional details. For demonstration purposes, here we will accept the calendar event, but edit the subject of the outbound email:
 
 ```python
 from langgraph.types import Command # [!code highlight]
@@ -1052,11 +1052,11 @@ The supervisor pattern creates layers of abstraction where each layer has a clea
 >
 > Use the supervisor pattern when you have multiple distinct domains (calendar, email, CRM, database), each domain has multiple tools or complex logic, you want centralized workflow control, and sub-agents don't need to converse directly with users.
 >
-> For simpler cases with just a few tools, use a single agent. When agents need to have conversations with users, use [handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) instead. For peer-to-peer collaboration between agents, consider other multi-agent patterns.
+> For simpler cases with just a few tools, use a single agent. When agents need to have conversations with users, use [handoffs](handoffs.md) instead. For peer-to-peer collaboration between agents, consider other multi-agent patterns.
 
 ## Next steps
 
-Learn about [handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) for agent-to-agent conversations, explore [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) to fine-tune information flow, read the [multi-agent overview](https://docs.langchain.com/oss/python/langchain/multi-agent) to compare different patterns, and use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-subagents-personal-assistant) to debug and monitor your multi-agent system.
+Learn about [handoffs](handoffs.md) for agent-to-agent conversations, explore [context engineering](../context-engineering.md) to fine-tune information flow, read the [multi-agent overview](../multi-agent.md) to compare different patterns, and use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-subagents-personal-assistant) to debug and monitor your multi-agent system.
 
 ***
 

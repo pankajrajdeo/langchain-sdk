@@ -2,13 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/multimodal)
 Use images, audio, video, and documents with Deep Agents when your model supports multimodal inputs and tool results
 
-Deep Agents supports multimodal workflows when you use a [Large Language Model](https://docs.langchain.com/oss/python/integrations/chat) that accepts multimodal inputs and tool results or returns multimodal outputs. You can attach images and other media to user messages, read non-text files with the built-in `read_file` tool, and return multimodal content from custom tools.
+Deep Agents supports multimodal workflows when you use a [Large Language Model](../integrations/chat.md) that accepts multimodal inputs and tool results or returns multimodal outputs. You can attach images and other media to user messages, read non-text files with the built-in `read_file` tool, and return multimodal content from custom tools.
 
-Built-in [context compression](https://docs.langchain.com/oss/python/deepagents/context-engineering#context-compression) is primarily text-oriented. Plan multimodal workloads accordingly: store large media in a backend and pass references when possible.
+Built-in [context compression](context-engineering.md#context-compression) is primarily text-oriented. Plan multimodal workloads accordingly: store large media in a backend and pass references when possible.
 
 ## Multimodal user input
 
-Pass multimodal content in the `messages` you send to the agent, using the same [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) as LangChain chat models:
+Pass multimodal content in the `messages` you send to the agent, using the same [standard content blocks](../langchain/messages.md#standard-content-blocks) as LangChain chat models:
 
 ```python
 result = agent.invoke({
@@ -22,27 +22,27 @@ result = agent.invoke({
 })
 ```
 
-For block types, provider-specific requirements, and additional examples (PDF, audio, video), see [Multimodal messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+For block types, provider-specific requirements, and additional examples (PDF, audio, video), see [Multimodal messages](../langchain/messages.md#multimodal).
 
 ## Built-in `read_file` tool
 
-The harness `read_file` tool returns [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) for supported multimodal files instead of plain text. The agent can inspect images, documents, and media stored in its [filesystem](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) when the selected model supports the corresponding modality. Check the provider's documentation for your model's supported MIME types.
+The harness `read_file` tool returns [standard content blocks](../langchain/messages.md#standard-content-blocks) for supported multimodal files instead of plain text. The agent can inspect images, documents, and media stored in its [filesystem](overview.md#virtual-filesystem-access) when the selected model supports the corresponding modality. Check the provider's documentation for your model's supported MIME types.
 
 <details>
 <summary>Supported multimodal file extensions</summary>
 
 | Type                                               | Extensions                                                                |
 | -------------------------------------------------- | ------------------------------------------------------------------------- |
-| [Image](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif`                |
-| [Video](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
-| [Audio](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`                          |
-| [File](https://docs.langchain.com/oss/python/langchain/messages#multimodal)  | `.pdf`, `.ppt`, `.pptx`                                                   |
+| [Image](../langchain/messages.md#multimodal) | `.png`, `.jpg`, `.jpeg`, `.gif`, `.webp`, `.heic`, `.heif`                |
+| [Video](../langchain/messages.md#multimodal) | `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`, `.3gpp` |
+| [Audio](../langchain/messages.md#multimodal) | `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`                          |
+| [File](../langchain/messages.md#multimodal)  | `.pdf`, `.ppt`, `.pptx`                                                   |
 
 </details>
 
 ## Custom tool outputs
 
-[Custom tools](https://docs.langchain.com/oss/python/deepagents/tools#custom-tools) can contain multimodal files, such as images:
+[Custom tools](tools.md#custom-tools) can contain multimodal files, such as images:
 
 ```python
 from langchain.tools import tool
@@ -56,10 +56,10 @@ def capture_screenshot() -> list[dict]:
     ]
 ```
 
-The return value is converted to a `ToolMessage` the model reads on the next turn. Access the normalized representation with `content_blocks` on the resulting message. For return-type options, serialization behavior, and MCP examples, see [Tool return values](https://docs.langchain.com/oss/python/langchain/tools#tool-return-values) and [Multimodal tool content](https://docs.langchain.com/oss/python/langchain/mcp#multimodal-tool-content).
+The return value is converted to a `ToolMessage` the model reads on the next turn. Access the normalized representation with `content_blocks` on the resulting message. For return-type options, serialization behavior, and MCP examples, see [Tool return values](../langchain/tools.md#tool-return-values) and [Multimodal tool content](../langchain/mcp.md#multimodal-tool-content).
 
 > [!TIP]
-> When a tool produces images or other large binary data, save the artifact to a [backend](https://docs.langchain.com/oss/python/deepagents/backends) and return a concise text description plus a path or URL. This keeps message history smaller and works better with [context compression](https://docs.langchain.com/oss/python/deepagents/context-engineering#context-compression).
+> When a tool produces images or other large binary data, save the artifact to a [backend](backends.md) and return a concise text description plus a path or URL. This keeps message history smaller and works better with [context compression](context-engineering.md#context-compression).
 
 ## Context compression and multimodal content
 
@@ -97,16 +97,16 @@ Built-in offloading and summarization are optimized for text and message history
   )}
 ```
 
-  The original conversation is still written to the filesystem as text. See [Summarization](https://docs.langchain.com/oss/python/deepagents/context-engineering#summarization) for triggers, keep thresholds, and the full flow.
+  The original conversation is still written to the filesystem as text. See [Summarization](context-engineering.md#summarization) for triggers, keep thresholds, and the full flow.
 
 For multimodal-heavy workloads:
 
 * Store images, screenshots, and charts in a filesystem backend or external object store, then pass file paths or URLs through messages.
 * Prefer references over base64-encoded image blocks in long-running conversations.
-* Use [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) for image-heavy inspection so the main agent receives a compact text result.
+* Use [subagents](subagents.md) for image-heavy inspection so the main agent receives a compact text result.
 * Tune summarization thresholds or provide a custom token counter when your provider charges many tokens for images.
 
-See [Context compression](https://docs.langchain.com/oss/python/deepagents/context-engineering#context-compression) for offloading thresholds, summarization triggers, and customization options.
+See [Context compression](context-engineering.md#context-compression) for offloading thresholds, summarization triggers, and customization options.
 
 ***
 

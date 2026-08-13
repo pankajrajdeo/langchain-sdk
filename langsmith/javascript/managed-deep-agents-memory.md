@@ -4,10 +4,10 @@ Opt in to deployment-shared durable memory for Managed Deep Agents.
 
 Normally, a Managed Deep Agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain **across** threads and sessions.
 
-When enabled, durable memory is backed by [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller. Managed Deep Agents do **not** have durable memory by default.
+When enabled, durable memory is backed by [Context Hub](../use-the-context-hub.md). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller. Managed Deep Agents do **not** have durable memory by default.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -27,7 +27,7 @@ my-agent/
 | **Thread state**            | Conversation continuity                       | One thread                                          |
 | **Durable memory**          | Knowledge learned and retained in Context Hub | Shared by the deployment across threads             |
 
-Memory is not your system prompt. Define always-on behavior in [instructions](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-instructions) and task-specific procedures in [skills](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-skills); use memory for durable knowledge the agent learns while it runs.
+Memory is not your system prompt. Define always-on behavior in [instructions](managed-deep-agents-instructions.md) and task-specific procedures in [skills](managed-deep-agents-skills.md); use memory for durable knowledge the agent learns while it runs.
 
 ## Enable memory
 

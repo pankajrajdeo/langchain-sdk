@@ -10,12 +10,12 @@ Use these tools when you want LangChain agents to analyze documents, images, or 
 
 | Tool                                                                  | Description                                                               |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [`AzureAIContentUnderstandingTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video.      |
-| [`AzureAIDocumentIntelligenceTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs.               |
-| [`AzureAIImageAnalysisTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaiimageanalysistool)               | Run OCR, captions, tagging, object detection, and related image analysis. |
-| [`AzureAISpeechToTextTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaispeechtotexttool)                 | Transcribe audio files to text with language support.                     |
-| [`AzureAITextToSpeechTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitexttospeechtool)                 | Convert text to synthesized speech audio with multi-language support.     |
-| [`AzureAITextAnalyticsHealthTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitextanalyticshealthtool)   | Extract medical entities from healthcare text.                            |
+| [`AzureAIContentUnderstandingTool`](#azureaicontentunderstandingtool) | Extract structured content from documents, images, audio, and video.      |
+| [`AzureAIDocumentIntelligenceTool`](#azureaidocumentintelligencetool) | Parse documents into OCR text, tables, and key-value pairs.               |
+| [`AzureAIImageAnalysisTool`](#azureaiimageanalysistool)               | Run OCR, captions, tagging, object detection, and related image analysis. |
+| [`AzureAISpeechToTextTool`](#azureaispeechtotexttool)                 | Transcribe audio files to text with language support.                     |
+| [`AzureAITextToSpeechTool`](#azureaitexttospeechtool)                 | Convert text to synthesized speech audio with multi-language support.     |
+| [`AzureAITextAnalyticsHealthTool`](#azureaitextanalyticshealthtool)   | Extract medical entities from healthcare text.                            |
 
 ### Features
 

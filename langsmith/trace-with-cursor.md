@@ -12,7 +12,7 @@ Before setting up tracing, ensure you have:
 
 * [Cursor](https://cursor.com/) installed.
 * [Node.js](https://nodejs.org/) 22.13 or later. The hooks use the built-in `node:sqlite` module to recover attachments from Cursor's local database.
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith API key](create-account-api-key.md).
 
 ## Install and enable the plugin
 
@@ -53,7 +53,7 @@ Restart Cursor after installing so it reloads `hooks.json`.
 
 ## Configure tracing
 
-Tracing is disabled until both `enabled` (or `TRACE_TO_LANGSMITH=true`) and an API key are set. Configure credentials with [environment variables](https://docs.langchain.com/langsmith/trace-with-cursor#environment-variables), a [JSON config file](https://docs.langchain.com/langsmith/trace-with-cursor#config-file), or both.
+Tracing is disabled until both `enabled` (or `TRACE_TO_LANGSMITH=true`) and an API key are set. Configure credentials with [environment variables](#environment-variables), a [JSON config file](#config-file), or both.
 
 ### Environment variables
 

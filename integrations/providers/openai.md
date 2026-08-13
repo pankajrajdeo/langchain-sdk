@@ -6,24 +6,24 @@ This page covers all LangChain integrations with [OpenAI](https://en.wikipedia.o
 
 ## Model interfaces
 
-#### [ChatOpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai)
+#### [ChatOpenAI](../chat/openai.md)
 OpenAI chat models.
 
-#### [AzureChatOpenAI](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai)
+#### [AzureChatOpenAI](../chat/azure_chat_openai.md)
 Azure OpenAI chat models with enterprise features.
 
-#### [OpenAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/openai)
+#### [OpenAIEmbeddings](../embeddings/openai.md)
 OpenAI embedding models.
 
-#### [AzureOpenAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai)
+#### [AzureOpenAIEmbeddings](../embeddings/azure_openai.md)
 Azure OpenAI embedding models with enterprise features.
 
 ## Other
 
-#### [OpenAI](https://docs.langchain.com/oss/python/integrations/llms/openai)
+#### [OpenAI](../llms/openai.md)
 (Legacy) OpenAI text completion models.
 
-#### [AzureOpenAI](https://docs.langchain.com/oss/python/integrations/llms/azure_openai)
+#### [AzureOpenAI](../llms/azure_openai.md)
 Wrapper for (legacy) OpenAI text completion models hosted on Azure.
 
 #### [OpenAIModerationChain](https://python.langchain.com/v0.1/docs/guides/productionization/safety/moderation)

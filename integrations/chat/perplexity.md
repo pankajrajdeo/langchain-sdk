@@ -2,7 +2,7 @@
 
 > Integrate with the ChatPerplexity chat model using LangChain Python.
 
-This page will help you get started with Perplexity [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatPerplexity` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity).
+This page will help you get started with Perplexity [chat models](../../langchain/models.md). For detailed documentation of all `ChatPerplexity` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity).
 
 ## Overview
 
@@ -10,11 +10,11 @@ This page will help you get started with Perplexity [chat models](https://docs.l
 
 | Class                                                                                                      | Package                                                                               | Serializable | [JS support](https://js.langchain.com/docs/integrations/chat/xai) |                                               Downloads                                               |                                               Version                                              |
 | :--------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :----------: | :---------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-| [`ChatPerplexity`](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity) | [`langchain-perplexity`](https://reference.langchain.com/python/langchain-perplexity) |     beta     |           [✅](https://docs.langchain.com/oss/python/integrations/chat/perplexity)           | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
+| [`ChatPerplexity`](https://reference.langchain.com/python/langchain-perplexity/chat_models/ChatPerplexity) | [`langchain-perplexity`](https://reference.langchain.com/python/langchain-perplexity) |     beta     |           [✅](perplexity.md)           | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-perplexity?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-perplexity?style=flat-square\&label=%20) |
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ❌                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ❌      |                            ✅                            |                              ❌                             |
 
@@ -34,7 +34,7 @@ if "PPLX_API_KEY" not in os.environ:
     os.environ["PPLX_API_KEY"] = getpass.getpass("Enter your Perplexity API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -85,6 +85,8 @@ response.content
 ```text
 'Here\'s a joke about cats:\n\nWhy did the cat want math lessons from a mermaid?\n\nBecause it couldn\'t find its "core purpose" in life!\n\nRemember, cats are unique and fascinating creatures, and each one has its own special traits and abilities. While some may see them as mysterious or even a bit aloof, they are still beloved pets that bring joy and companionship to their owners. So, if your cat ever seeks guidance from a mermaid, just remember that they are on their own journey to self-discovery!\n'
 ```
+
+<a id="agent-api-support-use_responses_api"></a>
 
 ## Agent API support (`use_responses_api`)
 

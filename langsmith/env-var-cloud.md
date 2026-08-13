@@ -2,7 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/env-var-cloud)
 Environment variables supported by the LangSmith Agent Server when deployed on Cloud.
 
-The Agent Server supports the following environment variables when deployed on [Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud-overview). For variables specific to self-hosted deployments, see [Self-hosted Agent Server environment variables](https://docs.langchain.com/langsmith/env-var-self-hosted).
+The Agent Server supports the following environment variables when deployed on [Cloud](deploy-to-cloud-overview.md). For variables specific to self-hosted deployments, see [Self-hosted Agent Server environment variables](env-var-self-hosted.md).
+
+<a id="bg_job_isolated_loops"></a>
 
 ## `BG_JOB_ISOLATED_LOOPS`
 
@@ -45,7 +47,7 @@ Set `CORS_ALLOW_ORIGINS` to specify allowed origins.
 * Example for allowing a single origin: `CORS_ALLOW_ORIGINS=https://example.com`
 * Example for allowing multiple origins: `CORS_ALLOW_ORIGINS=https://example.com,https://app.example.com`
 
-For advanced CORS configuration, see [how to add custom CORS configuration](https://docs.langchain.com/langsmith/cli#customizing-http-middleware-and-headers).
+For advanced CORS configuration, see [how to add custom CORS configuration](cli.md#customizing-http-middleware-and-headers).
 
 Defaults to `*` (all origins).
 
@@ -74,7 +76,7 @@ Beginning with langgraph-api version `0.2.12`, the maximum size of the Postgres 
 
 For example, if a deployment is scaled up to 10 replicas and `LANGGRAPH_POSTGRES_POOL_MAX_SIZE` is configured to `150`, then up to `1500` connections to Postgres can be established. This is particularly useful for deployments where database resources are limited (or more available) or where you need to tune connection behavior for performance or scaling reasons.
 
-When [`BG_JOB_ISOLATED_LOOPS`](https://docs.langchain.com/langsmith/env-var-cloud#bg_job_isolated_loops) is enabled, the pool is not shared. Instead, each background worker thread creates its own pool with a maximum size of `LANGGRAPH_POSTGRES_POOL_MAX_SIZE / N_JOBS_PER_WORKER`. Keep this in mind when lowering the pool size. A value that works well for a shared pool may result in very small per-worker pools under isolated loops.
+When [`BG_JOB_ISOLATED_LOOPS`](#bg_job_isolated_loops) is enabled, the pool is not shared. Instead, each background worker thread creates its own pool with a maximum size of `LANGGRAPH_POSTGRES_POOL_MAX_SIZE / N_JOBS_PER_WORKER`. Keep this in mind when lowering the pool size. A value that works well for a shared pool may result in very small per-worker pools under isolated loops.
 
 Defaults to `150` connections.
 
@@ -99,18 +101,18 @@ Defaults to disabled (synchronous checkpoint deletion).
 
 ## `LS_DEFAULT_CHECKPOINTER_BACKEND`
 
-Sets the default [checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer) for agent servers that don't specify one in `langgraph.json`. Accepted values: `"default"` (PostgreSQL), `"mongo"`, `"custom"`.
+Sets the default [checkpointer backend](configure-checkpointer.md) for agent servers that don't specify one in `langgraph.json`. Accepted values: `"default"` (PostgreSQL), `"mongo"`, `"custom"`.
 
 If the application's `langgraph.json` includes a `checkpointer.backend` value, it takes precedence over this variable.
 
-When set to `"mongo"`, you must also provide the MongoDB connection URI via [`LS_MONGODB_URI`](https://docs.langchain.com/langsmith/env-var-cloud#ls_mongodb_uri).
+When set to `"mongo"`, you must also provide the MongoDB connection URI via [`LS_MONGODB_URI`](#ls_mongodb_uri).
 
 ## `LANGSMITH_TRACING`
 
 Set `LANGSMITH_TRACING` to `false` to disable tracing to LangSmith.
 
 > [!NOTE]
-> For selective tracing control based on runtime conditions (such as per-client requirements or data sensitivity), see [Conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing).
+> For selective tracing control based on runtime conditions (such as per-client requirements or data sensitivity), see [Conditional tracing](conditional-tracing.md).
 
 Defaults to `true`.
 
@@ -130,7 +132,7 @@ Set `LOG_JSON` to `true` to render all log messages as JSON objects using the co
 
 Maximum number of runs a single queue worker executes concurrently from the Agent Server task queue. Defaults to `10`.
 
-This limits concurrent run execution, not the number of API requests your deployment can serve. Request-serving capacity is handled by API servers and scales independently of this value. For tuning guidance, see [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale).
+This limits concurrent run execution, not the number of API requests your deployment can serve. Request-serving capacity is handled by API servers and scales independently of this value. For tuning guidance, see [Configure Agent Server for scale](agent-server-scale.md).
 
 ## `LS_APM_OTEL_ENABLED`
 
@@ -168,13 +170,15 @@ OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_INGEST_LICENSE_KEY>
 > [!NOTE]
 > OTel APM tracing was added in Agent Server version `0.5.32` and is currently in Alpha.
 
+<a id="ls_mongodb_uri"></a>
+
 ## `LS_MONGODB_URI`
 
 MongoDB connection URI for the MongoDB checkpointer backend.
 
 The URI must point to a replica set member or `mongos` router and must include the database name in the path.
 
-See [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer) for details.
+See [Configure checkpointer backend](configure-checkpointer.md) for details.
 
 ## `REDIS_KEY_PREFIX`
 

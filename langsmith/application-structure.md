@@ -8,15 +8,15 @@ This page explains how a LangSmith application is organized and how to provide t
 
 To deploy using LangSmith, provide the following information:
 
-1. A [configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts) (`langgraph.json`) that specifies the dependencies, graphs, and environment variables to use for the application.
-2. The [graphs](https://docs.langchain.com/langsmith/application-structure#graphs) that implement the logic of the application.
-3. A file that specifies [dependencies](https://docs.langchain.com/langsmith/application-structure#dependencies) required to run the application.
-4. [Environment variables](https://docs.langchain.com/langsmith/application-structure#environment-variables) that are required for the application to run.
+1. A [configuration file](#configuration-file-concepts) (`langgraph.json`) that specifies the dependencies, graphs, and environment variables to use for the application.
+2. The [graphs](#graphs) that implement the logic of the application.
+3. A file that specifies [dependencies](#dependencies) required to run the application.
+4. [Environment variables](#environment-variables) that are required for the application to run.
 
 > [!TIP]
 > **Framework agnostic**
 >
-> LangSmith Deployment supports deploying a [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](https://docs.langchain.com/langsmith/deployment), scaling, and [observability](https://docs.langchain.com/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](https://docs.langchain.com/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
+> LangSmith Deployment supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deployment.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Deployment](#use-any-framework-with-langsmith-deployment).
 
 ## File structure
 
@@ -71,14 +71,16 @@ my-app/
 > [!NOTE]
 > The directory structure of an application can vary depending on the programming language and the package manager used.
 
+<a id="configuration-file-concepts"></a>
+
 ## Configuration file
 
 The `langgraph.json` file is a JSON file that specifies the dependencies, graphs, environment variables, and other settings required to deploy an application.
 
-For details on all supported keys in the JSON file, refer to the [LangGraph configuration file reference](https://docs.langchain.com/langsmith/cli#configuration-file).
+For details on all supported keys in the JSON file, refer to the [LangGraph configuration file reference](cli.md#configuration-file).
 
 > [!TIP]
-> The [LangGraph CLI](https://docs.langchain.com/langsmith/cli) defaults to using the configuration file `langgraph.json` in the current directory.
+> The [LangGraph CLI](cli.md) defaults to using the configuration file `langgraph.json` in the current directory.
 
 ### Examples
 
@@ -126,12 +128,12 @@ An application may depend on other Python packages or JavaScript libraries (depe
 You will generally need to specify the following information for dependencies to be set up correctly:
 
 1. A file in the directory that specifies the dependencies (e.g., `requirements.txt`, `pyproject.toml`, or `package.json`).
-2. A `dependencies` key in the [configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts) that specifies the dependencies required to run the application.
-3. Any additional binaries or system libraries can be specified using `dockerfile_lines` key in the [LangGraph configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts).
+2. A `dependencies` key in the [configuration file](#configuration-file-concepts) that specifies the dependencies required to run the application.
+3. Any additional binaries or system libraries can be specified using `dockerfile_lines` key in the [LangGraph configuration file](#configuration-file-concepts).
 
 ## Graphs
 
-Use the `graphs` key in the [configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts) to specify which graphs will be available in the deployed application.
+Use the `graphs` key in the [configuration file](#configuration-file-concepts) to specify which graphs will be available in the deployed application.
 
 You can specify one or more graphs in the configuration file. Each graph is identified by a unique name and a path to either (1) a compiled graph or (2) a function that defines a graph.
 
@@ -218,11 +220,11 @@ export const app = graph.compile();
 
 In this example, the node functions (`my_app_node` for Python and `myAppNode` for JavaScript) can contain calls to any framework or library. The LangGraph structure simply provides the deployment interface and orchestration layer.
 
-For end-to-end examples, refer to the deployment guides for [Google ADK](https://docs.langchain.com/langsmith/deploy-google-adk) and [Claude Agent SDK, Strands, CrewAI, and AutoGen](https://docs.langchain.com/langsmith/deploy-other-frameworks). LangSmith added support for Google ADK through [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/), an extensible package for wrapping agent SDKs to run on LangSmith Deployment.
+For end-to-end examples, refer to the deployment guides for [Google ADK](deploy-google-adk.md) and [Claude Agent SDK, Strands, CrewAI, and AutoGen](deploy-other-frameworks.md). LangSmith added support for Google ADK through [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/), an extensible package for wrapping agent SDKs to run on LangSmith Deployment.
 
 ## Environment variables
 
-If you're working with a deployed LangGraph application [locally](https://docs.langchain.com/langsmith/local-dev-testing), you can configure environment variables in the `env` key of the [configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts).
+If you're working with a deployed LangGraph application [locally](local-dev-testing.md), you can configure environment variables in the `env` key of the [configuration file](#configuration-file-concepts).
 
 For a production deployment, you will typically want to configure the environment variables in the deployment environment.
 

@@ -119,7 +119,7 @@ This example runs as a **single Deno process**:
 * **`server/registry.ts`**: process-local singleton owning the agent and one session per thread id.
 * **`server/agent/`**: same `createDeepAgent` orchestrator as the Next.js example (researcher + math-whiz subagents, mock tools).
 
-Deno Deploy runs each isolate with its own in-memory `MemorySaver` checkpointer. For production persistence across isolates, swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) (Postgres, Redis, …). The route handlers and `server/threads.ts` helpers stay the same.
+Deno Deploy runs each isolate with its own in-memory `MemorySaver` checkpointer. For production persistence across isolates, swap in a [durable checkpointer](../langgraph/checkpointers.md#checkpointer-libraries) (Postgres, Redis, …). The route handlers and `server/threads.ts` helpers stay the same.
 
 ## Production persistence
 
@@ -164,8 +164,8 @@ Open [http://localhost:8000](http://localhost:8000).
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
-* [Deploy with Next.js](https://docs.langchain.com/langsmith/deploy-nextjs)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
+* [Deploy with Next.js](deploy-nextjs.md)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 
 ***

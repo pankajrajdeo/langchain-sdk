@@ -6,10 +6,10 @@ Managed Deep Agents support the normal Deep Agents `tools` configuration surface
 
 Define LangChain tools in your project, import them into `agent.ts`, and pass them to `defineDeepAgent`.
 
-To load tools from a remote MCP server instead, use an [MCP connector](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors).
+To load tools from a remote MCP server instead, use an [MCP connector](managed-deep-agents-mcp-connectors.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -99,7 +99,7 @@ When a run hits an interrupt, it pauses and waits for a human response before co
 
 * **During local development**, `mda dev` runs the agent in LangSmith Studio, which surfaces the interrupt so you can inspect the pending tool call and resume the run.
 
-* **On a deployed agent**, resume the paused run through the LangGraph server API with a resume payload. See [Human-in-the-loop using server API](https://docs.langchain.com/langsmith/add-human-in-the-loop).
+* **On a deployed agent**, resume the paused run through the LangGraph server API with a resume payload. See [Human-in-the-loop using server API](../add-human-in-the-loop.md).
 
 > [!NOTE]
 > During public beta, Managed Deep Agents is CLI-first and programmatic invocation is not yet documented. To resume runs programmatically from your own application, contact your LangChain team.

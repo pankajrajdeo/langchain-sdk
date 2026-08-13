@@ -1,6 +1,6 @@
 # Human-in-the-loop using server API
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/add-human-in-the-loop)
-To review, edit, and approve tool calls in an agent or workflow, use LangGraph's [human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts) features.
+To review, edit, and approve tool calls in an agent or workflow, use LangGraph's [human-in-the-loop](../langgraph/interrupts.md) features.
 
 ## Dynamic interrupts
 
@@ -129,7 +129,7 @@ curl --request POST \
 <summary>Extended example: using `interrupt`</summary>
 
 This is an example graph you can run in the Agent Server.
-See [LangSmith quickstart](https://docs.langchain.com/langsmith/deployment-quickstart) for more details.
+See [LangSmith quickstart](deployment-quickstart.md) for more details.
 
 ```python
 from typing import TypedDict
@@ -166,7 +166,7 @@ graph = graph_builder.compile()
 3. Once resumed, the return value of `interrupt(...)` is the human-provided input, which is used to update the state.
 
 Once you have a running Agent Server, you can interact with it using
-[LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk)
+[LangGraph SDK](langgraph-python-sdk.md)
 
 #### Python
 ```python
@@ -455,8 +455,8 @@ curl --request POST \
 
 ## Learn more
 
-* [Human-in-the-loop conceptual guide](https://docs.langchain.com/oss/python/langgraph/interrupts): learn more about LangGraph human-in-the-loop features.
-* [Common patterns](https://docs.langchain.com/oss/python/langgraph/interrupts#common-patterns): learn how to implement patterns like approving/rejecting actions, requesting user input, tool call review, and validating human input.
+* [Human-in-the-loop conceptual guide](../langgraph/interrupts.md): learn more about LangGraph human-in-the-loop features.
+* [Common patterns](../langgraph/interrupts.md#common-patterns): learn how to implement patterns like approving/rejecting actions, requesting user input, tool call review, and validating human input.
 
 ***
 

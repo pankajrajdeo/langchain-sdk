@@ -18,7 +18,7 @@ uv add langsmith crewai opentelemetry-instrumentation-crewai opentelemetry-instr
 
 ### 1. Configure environment variables
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
@@ -151,7 +151,7 @@ OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 ## Resources
 
 * [CrewAI documentation](https://docs.crewai.com/)
-* [LangSmith OpenTelemetry guide](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+* [LangSmith OpenTelemetry guide](trace-with-opentelemetry.md)
 
 ***
 

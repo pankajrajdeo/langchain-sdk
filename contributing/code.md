@@ -50,10 +50,10 @@ git checkout -b your-username/short-bugfix-name
 ```
 
 ### Write failing tests
-Add [unit tests](https://docs.langchain.com/oss/python/contributing/code#test-writing-guidelines) that will fail without your fix. This allows us to verify the bug is resolved and prevents regressions
+Add [unit tests](#test-writing-guidelines) that will fail without your fix. This allows us to verify the bug is resolved and prevents regressions
 
 ### Make your changes
-Fix the bug while following our [code quality standards](https://docs.langchain.com/oss/python/contributing/code#code-quality-standards). Make the **minimal change necessary** to resolve the issue. We strongly encourage contributors to comment on the issue before they start coding. For example:
+Fix the bug while following our [code quality standards](#code-quality-standards). Make the **minimal change necessary** to resolve the issue. We strongly encourage contributors to comment on the issue before they start coding. For example:
 
 > *"I'd like to work on this. My intended approach would be to \[...brief description...]. Does this align with maintainer expectations?"*
 
@@ -82,10 +82,10 @@ Follow the PR template provided. If applicable, reference the issue you're fixin
 
 For ongoing development or larger contributions:
 
-1. Review our [contribution guidelines](https://docs.langchain.com/oss/python/contributing/code#contribution-guidelines) for features, bugfixes, and integrations
-2. Set up your environment following our [setup guide](https://docs.langchain.com/oss/python/contributing/code#development-environment) below
-3. Understand the [repository structure](https://docs.langchain.com/oss/python/contributing/code#repository-structure) and package organization
-4. Learn our [development workflow](https://docs.langchain.com/oss/python/contributing/code#development-workflow) including testing and linting
+1. Review our [contribution guidelines](#contribution-guidelines) for features, bugfixes, and integrations
+2. Set up your environment following our [setup guide](#development-environment) below
+3. Understand the [repository structure](#repository-structure) and package organization
+4. Learn our [development workflow](#development-workflow) including testing and linting
 
 ***
 
@@ -100,7 +100,7 @@ Contributing to open source projects takes time and effort, but it can also help
 > [!WARNING]
 > Breaking changes to public APIs are not allowed except for critical security fixes.
 >
-> See our [versioning policy](https://docs.langchain.com/oss/python/versioning) for details on major version releases.
+> See our [versioning policy](../versioning.md) for details on major version releases.
 
 Maintain compatibility via:
 
@@ -220,7 +220,7 @@ Our Python projects use [`uv`](https://docs.astral.sh/uv/getting-started/install
 > make test  # Verify unit tests pass before starting development
 > ```
 
-Once you've reviewed the [contribution guidelines](https://docs.langchain.com/oss/python/contributing/code#contribution-guidelines), find the package directory for the component you're working on in the [repository structure](https://docs.langchain.com/oss/python/contributing/code#repository-structure) section below.
+Once you've reviewed the [contribution guidelines](#contribution-guidelines), find the package directory for the component you're working on in the [repository structure](#repository-structure) section below.
 
 ***
 
@@ -242,11 +242,11 @@ LangChain is organized as a monorepo with multiple packages:
 
 Located in `libs/partners/`, these are independently versioned packages for specific integrations. For example:
 
-* **[`langchain-openai`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/openai#readme)**: [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai) integrations
-* **[`langchain-anthropic`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/anthropic#readme)**: [Anthropic](https://docs.langchain.com/oss/python/integrations/providers/anthropic) integrations
-* **[`langchain-google-genai`](https://github.com/langchain-ai/langchain-google/)**: [Google Generative AI](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) integrations
+* **[`langchain-openai`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/openai#readme)**: [OpenAI](../integrations/providers/openai.md) integrations
+* **[`langchain-anthropic`](https://github.com/langchain-ai/langchain/tree/master/libs/partners/anthropic#readme)**: [Anthropic](../integrations/providers/anthropic.md) integrations
+* **[`langchain-google-genai`](https://github.com/langchain-ai/langchain-google/)**: [Google Generative AI](../integrations/chat/google_generative_ai.md) integrations
 
-Many partner packages are in external repositories. Please check the [list of integrations](https://docs.langchain.com/oss/python/integrations/providers/overview) for details.
+Many partner packages are in external repositories. Please check the [list of integrations](../integrations/providers/overview.md) for details.
 
 </details>
 
@@ -634,7 +634,7 @@ Once your tests pass and code meets quality standards:
 4. Wait for CI checks to complete
 
 > [!NOTE]
-> If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](https://docs.langchain.com/oss/python/contributing/overview#acceptable-uses-of-llms) policy. PRs that appear to be low-effort, AI-generated spam will be closed without comment.
+> If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](overview.md#acceptable-uses-of-llms) policy. PRs that appear to be low-effort, AI-generated spam will be closed without comment.
 
 > [!WARNING]
 > Address CI failures promptly. Maintainers may close PRs that do not pass CI within a reasonable timeframe.

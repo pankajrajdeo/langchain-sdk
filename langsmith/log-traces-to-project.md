@@ -4,15 +4,15 @@ Route LangSmith traces to a named project instead of the default project using e
 
 This page covers how to control where LangSmith sends your traces:
 
-* [Set the destination project statically](https://docs.langchain.com/langsmith/log-traces-to-project#set-the-destination-project-statically)
-* [Set the destination project dynamically](https://docs.langchain.com/langsmith/log-traces-to-project#set-the-destination-project-dynamically)
-* [Set the destination workspace dynamically](https://docs.langchain.com/langsmith/log-traces-to-project#set-the-destination-workspace-dynamically)
-* [Write traces to multiple destinations with replicas](https://docs.langchain.com/langsmith/log-traces-to-project#write-traces-to-multiple-destinations-with-replicas)
-* [Leave feedback on all replica instances](https://docs.langchain.com/langsmith/log-traces-to-project#leave-feedback-on-all-replica-instances)
+* [Set the destination project statically](#set-the-destination-project-statically)
+* [Set the destination project dynamically](#set-the-destination-project-dynamically)
+* [Set the destination workspace dynamically](#set-the-destination-workspace-dynamically)
+* [Write traces to multiple destinations with replicas](#write-traces-to-multiple-destinations-with-replicas)
+* [Leave feedback on all replica instances](#leave-feedback-on-all-replica-instances)
 
 ## Set the destination project statically
 
-LangSmith uses the concept of a [*project*](https://docs.langchain.com/langsmith/observability-concepts#projects) to group traces. If left unspecified, the project is set to `default`.
+LangSmith uses the concept of a [*project*](observability-concepts.md#projects) to group traces. If left unspecified, the project is set to `default`.
 
 You can set the `LANGSMITH_PROJECT` environment variable to configure a custom project name for an entire application run. Set this before running your application:
 
@@ -27,7 +27,7 @@ If the project specified does not exist, LangSmith will automatically create it 
 
 ## Set the destination project dynamically
 
-You can also set the project name at program runtime in various ways, depending on how you are [annotating your code for tracing](https://docs.langchain.com/langsmith/annotate-code). This is useful when you want to log traces to different projects within the same application:
+You can also set the project name at program runtime in various ways, depending on how you are [annotating your code for tracing](annotate-code.md). This is useful when you want to log traces to different projects within the same application:
 
 * Pass the project name at decoration or configuration time.
 * Override it per individual call.
@@ -214,17 +214,17 @@ public class OtelLangSmithSimpleExample {
 
 ## Set the destination workspace dynamically
 
-If you need to route traces dynamically to different LangSmith [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces) based on runtime configuration (e.g., routing different users or tenants to separate workspaces), the approach differs by language:
+If you need to route traces dynamically to different LangSmith [workspaces](administration-overview.md#workspaces) based on runtime configuration (e.g., routing different users or tenants to separate workspaces), the approach differs by language:
 
-* **Python**: use workspace-specific LangSmith clients with [`tracing_context`](https://docs.langchain.com/langsmith/annotate-code#use-the-trace-context-manager-python-only).
-* **TypeScript**: pass a custom client to [`traceable`](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable), or use `LangChainTracer` with callbacks.
+* **Python**: use workspace-specific LangSmith clients with [`tracing_context`](annotate-code.md#use-the-trace-context-manager-python-only).
+* **TypeScript**: pass a custom client to [`traceable`](annotate-code.md#use-%40traceable-%2F-traceable), or use `LangChainTracer` with callbacks.
 
 This approach is useful for multi-tenant applications where you want to isolate traces by customer, environment, or team at the workspace level. It works with any LangSmith-compatible tracing, including LangChain, OpenAI, and custom functions decorated with `@traceable`.
 
 ### Prerequisites
 
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) with access to multiple workspaces.
-* The [workspace IDs](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-a-workspace) for each target workspace.
+* A [LangSmith API key](create-account-api-key.md) with access to multiple workspaces.
+* The [workspace IDs](set-up-hierarchy.md#set-up-a-workspace) for each target workspace.
 
 ### Generic cross-workspace tracing
 
@@ -355,7 +355,7 @@ await handleCustomerRequest("standard_user_456", { query: "Hi" });
 
 ### Override default workspace for LangSmith deployments
 
-When [deploying agents](https://docs.langchain.com/langsmith/deployment) to LangSmith, you can override the default workspace that traces are sent to by using a graph lifespan context manager. This is useful when you want to route traces from a deployed agent to different workspaces based on runtime configuration passed through the `config` parameter.
+When [deploying agents](deployment.md) to LangSmith, you can override the default workspace that traces are sent to by using a graph lifespan context manager. This is useful when you want to route traces from a deployed agent to different workspaces based on runtime configuration passed through the `config` parameter.
 
 ```python
 import os
@@ -624,7 +624,7 @@ const myPipeline = traceable(
 await myPipeline("What is LangSmith?");
 ```
 
-You can also use the `updates` field to merge additional fields (such as [metadata or tags](https://docs.langchain.com/langsmith/ls-metadata-parameters)) into a run for a specific replica only—the primary trace is unchanged. Replica errors are non-fatal: if a replica endpoint is unavailable, LangSmith logs the error without affecting the primary trace.
+You can also use the `updates` field to merge additional fields (such as [metadata or tags](ls-metadata-parameters.md)) into a run for a specific replica only—the primary trace is unchanged. Replica errors are non-fatal: if a replica endpoint is unavailable, LangSmith logs the error without affecting the primary trace.
 
 > [!WARNING]
 > Auth does not propagate in distributed traces. When a trace spans multiple services, LangSmith forwards replica `project_name` and `updates` to downstream services automatically, but not API keys or credentials. Each service must configure its own credentials for replica destinations.

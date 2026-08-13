@@ -16,7 +16,7 @@ uv add langchain-daytona
 
 ## Create a sandbox backend
 
-In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](https://docs.langchain.com/oss/python/deepagents/backends).
+In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](../../deepagents/backends.md).
 
 ```python
 from daytona import Daytona
@@ -62,7 +62,7 @@ result = agent.invoke(
 You are responsible for managing the sandbox lifecycle via the Daytona SDK.
 When you are done, stop or destroy the sandbox.
 
-See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](../../deepagents/sandboxes.md).
 
 ***
 

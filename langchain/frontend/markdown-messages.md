@@ -28,7 +28,7 @@ The markdown pattern uses a simple chat agent with no special configuration.
 Wire up [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) with your agent URL and assistant ID.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";

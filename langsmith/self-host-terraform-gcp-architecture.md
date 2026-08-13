@@ -12,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * Add-ons: LangSmith Deployment, Fleet, Insights, and Polly.
 * GCP managed services and Secret Manager integration.
 
-If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy).
+If you are ready to install, start with the [deployment walkthrough](self-host-terraform-gcp-deploy.md).
 
 ## Platform layers
 
 LangSmith on GCP deploys in up to five stages. Each stage adds a capability layer on top of the previous. All layers share the same GKE cluster and `langsmith` namespace.
 
-> **Image:** [LangSmith on GCP deployment stages and service layout](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture)
+> **Image:** [LangSmith on GCP deployment stages and service layout](self-host-terraform-gcp-architecture.md)
 
 | Stage | Layer                | What it adds                                                                                                       |
 | ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -29,7 +29,7 @@ LangSmith on GCP deploys in up to five stages. Each stage adds a capability laye
 | 5     | Insights + Polly     | Clio analytics (ClickHouse-backed), Polly eval agent                                                               |
 
 > [!NOTE]
-> Fleet (chart v0.15+) is the current form of the feature formerly called Agent Builder. Enable it with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require the LangSmith Deployment layer. The two flags are mutually exclusive and share the same encryption key. See [Enable add-ons](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#enable-add-ons) in the deployment guide.
+> Fleet (chart v0.15+) is the current form of the feature formerly called Agent Builder. Enable it with `enable_fleet`. Unlike the deprecated `enable_agent_builder` path, it does not require the LangSmith Deployment layer. The two flags are mutually exclusive and share the same encryption key. See [Enable add-ons](self-host-terraform-gcp-deploy.md#enable-add-ons) in the deployment guide.
 
 ## Module descriptions
 
@@ -111,10 +111,10 @@ GCS Bucket (Workload Identity, no static keys)
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica | No                | 500Gi `premium-rwo` PVC          |
 
 > [!WARNING]
-> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production, use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production, use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external cluster.
 
 > [!NOTE]
-> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](smithdb-sdk-migration.md#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 

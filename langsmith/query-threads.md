@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/query-threads)
 Programmatically fetch and inspect multi-turn conversation threads from your LangSmith projects.
 
-If you're building a conversational agent or any multi-turn application, LangSmith automatically groups your [runs](https://docs.langchain.com/langsmith/run-data-format) into [*threads*](https://docs.langchain.com/langsmith/observability-concepts#threads). Querying threads lets you replay full conversations, audit agent behavior across sessions, build analytics on conversation length and latency, and feed downstream workflows like fine-tuning and evaluation.
+If you're building a conversational agent or any multi-turn application, LangSmith automatically groups your [runs](run-data-format.md) into [*threads*](observability-concepts.md#threads). Querying threads lets you replay full conversations, audit agent behavior across sessions, build analytics on conversation length and latency, and feed downstream workflows like fine-tuning and evaluation.
 
 The SDK exposes two methods for working with threads:
 
@@ -21,7 +21,7 @@ Each run you create can carry a `thread_id` in its metadata. LangSmith uses this
 > * **Python**: `from langsmith import uuid7`
 > * **JS/TS**: `import { uuid7 } from 'langsmith'`
 
-If you're using a [tracing integration](https://docs.langchain.com/langsmith/integrations), pass `thread_id` in the run metadata:
+If you're using a [tracing integration](integrations.md), pass `thread_id` in the run metadata:
 
 ```python
 from langsmith import traceable, uuid7
@@ -97,7 +97,7 @@ conv-def456
 | `project_id` / `projectId`     | `string`            | —         | Project ID. Required if `project_name` is not set.                                                                 |
 | `limit`                        | `int`               | all       | Maximum number of threads to return.                                                                               |
 | `offset`                       | `int`               | `0`       | Number of threads to skip (for pagination).                                                                        |
-| `filter`                       | `string`            | —         | Filter expression applied when fetching runs, using [LangSmith trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax). |
+| `filter`                       | `string`            | —         | Filter expression applied when fetching runs, using [LangSmith trace query syntax](trace-query-syntax.md). |
 | `start_time` / `startTime`     | `datetime` / `Date` | 1 day ago | Only include runs started after this time. Widen this window to surface older threads.                             |
 
 ### Return value
@@ -175,7 +175,7 @@ An iterator ([Python](https://reference.langchain.com/python/langsmith)) or asyn
 
 ### Filter threads by run properties
 
-Pass a filter expression to narrow results using [LangSmith trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax). For example, to surface only threads containing at least one failed run:
+Pass a filter expression to narrow results using [LangSmith trace query syntax](trace-query-syntax.md). For example, to surface only threads containing at least one failed run:
 
 ```python
 threads = client.list_threads(

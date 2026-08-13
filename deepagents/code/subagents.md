@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/subagents)
 Define custom Deep Agents Code subagents as AGENTS.md files with YAML frontmatter. Covers project and user paths, optional model overrides, and examples.
 
-Define custom synchronous [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) as markdown files so Deep Agents Code can delegate specialized tasks to them.
+Define custom synchronous [subagents](../subagents.md) as markdown files so Deep Agents Code can delegate specialized tasks to them.
 
 > [!NOTE]
 > Async subagents are not available to end-users in Deep Agents Code at this time.
@@ -14,9 +14,9 @@ Each subagent lives in its own folder with an `AGENTS.md` file:
 ~/.deepagents/{agent}/agents/{subagent-name}/AGENTS.md  # User-level
 ```
 
-Project subagents override user subagents with the same name (see [precedence rules](https://docs.langchain.com/oss/deepagents/code/configuration#subagents)).
+Project subagents override user subagents with the same name (see [precedence rules](configuration.md#subagents)).
 
-The frontmatter requires `name` and `description` (same as the [`SubAgent` dictionary spec](https://docs.langchain.com/oss/python/deepagents/subagents#subagent-dictionary-based)). The markdown body becomes the subagent's `system_prompt`. In addition to the base spec, `AGENTS.md` files support an optional `model` frontmatter field that overrides the main agent's model for this subagent. Use the `provider:model-name` format (e.g., `anthropic:claude-opus-4-8`, `openai:gpt-5.5`). Omit it to inherit the main agent's model.
+The frontmatter requires `name` and `description` (same as the [`SubAgent` dictionary spec](../subagents.md#subagent-dictionary-based)). The markdown body becomes the subagent's `system_prompt`. In addition to the base spec, `AGENTS.md` files support an optional `model` frontmatter field that overrides the main agent's model for this subagent. Use the `provider:model-name` format (e.g., `anthropic:claude-opus-4-8`, `openai:gpt-5.5`). Omit it to inherit the main agent's model.
 
 > [!NOTE]
 > Other `SubAgent` fields (`tools`, `middleware`, `interrupt_on`, `skills`) are currently not configurable via `AGENTS.md` frontmatter—custom subagents defined this way inherit the main agent's tools. Use the SDK directly for full control.
@@ -41,15 +41,15 @@ You are a research assistant with access to web search.
 
 ## Dynamic subagents
 
-`dcode` ships with the code interpreter enabled, so [dynamic subagents](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents) work out of the box.
+`dcode` ships with the code interpreter enabled, so [dynamic subagents](../dynamic-subagents.md) work out of the box.
 
 To trigger dynamic subagents, ask for a "workflow". Instead of doing the work itself or managing fan-out through its native `task` tool, the agent writes an orchestration script that calls the built-in `task()` global and runs it in the code interpreter. For example: "Run a workflow to review every file in src/ for SQL injection."
 
 As subagents spawn, `dcode` shows them live in the dynamic subagents panel, grouped into phases by dispatch.
 
-> **Image:** [The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch](https://docs.langchain.com/oss/deepagents/code/subagents)
+> **Image:** [The dcode dynamic subagents panel showing spawned subagents grouped into phases by dispatch](subagents.md)
 
-You can also use dynamic subagents in the coding agent of your choice over [ACP](https://docs.langchain.com/oss/python/deepagents/acp) (for example, Zed).
+You can also use dynamic subagents in the coding agent of your choice over [ACP](../acp.md) (for example, Zed).
 
 ## Example: cost-efficient subagents
 
@@ -65,7 +65,7 @@ model: anthropic:claude-haiku-4-5-20251001
 You are a general-purpose assistant. Complete the task efficiently and return a concise summary.
 ```
 
-This overrides the built-in general-purpose subagent, routing all delegated tasks to a cheaper model. See [Override the general-purpose subagent](https://docs.langchain.com/oss/python/deepagents/subagents#override-the-general-purpose-subagent) for more.
+This overrides the built-in general-purpose subagent, routing all delegated tasks to a cheaper model. See [Override the general-purpose subagent](../subagents.md#override-the-general-purpose-subagent) for more.
 
 ***
 

@@ -3,9 +3,9 @@
 Limit the number of requests or tokens a user, workspace, or API key can send through the LLM Gateway in a rolling time window.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
-A rate limit policy restricts how many **requests** or **tokens** a subject can consume through the [LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway) in a short rolling time window. The gateway enforces the limit in real time and blocks any request that would push the subject past it, returning a `429` response with a `Retry-After` header:
+A rate limit policy restricts how many **requests** or **tokens** a subject can consume through the [LLM Gateway](llm-gateway.md) in a short rolling time window. The gateway enforces the limit in real time and blocks any request that would push the subject past it, returning a `429` response with a `Retry-After` header:
 
 ```
 API Error: 429 request blocked by gateway policies: Dev Team Rate Limit
@@ -14,11 +14,11 @@ Retry-After: 42
 
 The `Retry-After` value is the number of seconds until the current window resets. Clients should honor this header and back off before retrying.
 
-Rate limit policies and [spend cap policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) are complementary and can be applied together—spend caps for cost control, rate limits for throughput and traffic control.
+Rate limit policies and [spend cap policies](llm-gateway-spend-policies.md) are complementary and can be applied together—spend caps for cost control, rate limits for throughput and traffic control.
 
 ## Policy dimensions
 
-Rate limit policies are evaluated for every incoming request. You can set a policy as a default (applying a blanket rate limit to all users, [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces), or [API keys](https://docs.langchain.com/langsmith/create-account-api-key) or as a granular policy (an individual limit or a limit on a group of subjects).
+Rate limit policies are evaluated for every incoming request. You can set a policy as a default (applying a blanket rate limit to all users, [workspaces](administration-overview.md#workspaces), or [API keys](create-account-api-key.md) or as a granular policy (an individual limit or a limit on a group of subjects).
 
 | Subject       | What it limits                                                                                 | Example                                                                    |
 | ------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -57,7 +57,7 @@ Rules:
 ## Create a rate limit policy
 
 > [!WARNING]
-> Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access).
+> Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 1. Go to **Settings → Gateway → LLM Gateway**.
 2. Click **Create policy**.
@@ -68,13 +68,13 @@ Rules:
 
 Policies take effect immediately.
 
-A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each of your own end customers its own throughput allowance under one API key. For more information, see [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies).
+A rate limit policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to give each of your own end customers its own throughput allowance under one API key. For more information, see [Per-customer policies](llm-gateway-header-policies.md).
 
 ## Next steps
 
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): set cost caps alongside rate limits.
-* [Per-customer policies](https://docs.langchain.com/langsmith/llm-gateway-header-policies): split a limit by a custom request header so each end customer gets its own allowance.
-* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): add data protection policies.
+* [Spend policies](llm-gateway-spend-policies.md): set cost caps alongside rate limits.
+* [Per-customer policies](llm-gateway-header-policies.md): split a limit by a custom request header so each end customer gets its own allowance.
+* [Data protection](llm-gateway-data-protection.md): add data protection policies.
 
 ***
 

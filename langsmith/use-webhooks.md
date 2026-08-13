@@ -126,7 +126,7 @@ curl --request POST \
 
 ## Webhook payload
 
-LangSmith sends webhook notifications in the format of a [Run](https://docs.langchain.com/langsmith/runs). The request payload includes run input, configuration, and other metadata in the `kwargs` field. In addition to the standard run fields, the webhook payload also includes `values`, `webhook_sent_at`, and `error` fields.
+LangSmith sends webhook notifications in the format of a [Run](runs.md). The request payload includes run input, configuration, and other metadata in the `kwargs` field. In addition to the standard run fields, the webhook payload also includes `values`, `webhook_sent_at`, and `error` fields.
 
 The full webhook payload contains the following fields:
 
@@ -290,7 +290,7 @@ As of `langgraph-api>=0.2.78`, developers can disable webhooks in the `langgraph
 
 This feature is primarily intended for self-hosted deployments, where platform administrators or developers may prefer to disable webhooks to simplify their security posture—especially if they are not configuring firewall rules or other network controls. Disabling webhooks helps prevent untrusted payloads from being sent to internal endpoints.
 
-For full configuration details, refer to the [configuration file reference](https://docs.langchain.com/langsmith/cli?h=disable_webhooks#configuration-file).
+For full configuration details, refer to the [configuration file reference](cli.md#configuration-file).
 
 ## Test webhooks
 

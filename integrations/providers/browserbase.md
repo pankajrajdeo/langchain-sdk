@@ -22,7 +22,7 @@ pip install browserbase
 
 ## Deep Agents integration
 
-[Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) work well with Browserbase by exposing browser capabilities as Python tools rather than routing through the CLI. The integration pattern gives the main planner cheap, stateless tools for search and page retrieval, while delegating expensive rendered and interactive browser work to a dedicated `browser-specialist` subagent.
+[Deep Agents](../../deepagents/overview.md) work well with Browserbase by exposing browser capabilities as Python tools rather than routing through the CLI. The integration pattern gives the main planner cheap, stateless tools for search and page retrieval, while delegating expensive rendered and interactive browser work to a dedicated `browser-specialist` subagent.
 
 ### Install
 

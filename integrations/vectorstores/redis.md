@@ -192,9 +192,9 @@ retriever.invoke("your query here")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 For a full RAG walkthrough using `langchain-redis`, see this [example notebook](https://github.com/redis-developer/redis-ai-resources/blob/main/python-recipes/RAG/02_langchain.ipynb).
 

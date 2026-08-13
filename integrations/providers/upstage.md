@@ -12,10 +12,10 @@
 
 | API                | Description                                 | Import                                                     | Example usage                                                   |
 | ------------------ | ------------------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------- |
-| Chat               | Build assistants using Solar Chat           | `from langchain_upstage import ChatUpstage`                | [Go](https://docs.langchain.com/oss/python/integrations/chat/upstage)                     |
-| Text Embedding     | Embed strings to vectors                    | `from langchain_upstage import UpstageEmbeddings`          | [Go](https://docs.langchain.com/oss/python/integrations/embeddings/upstage)               |
-| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck`   | [Go](https://docs.langchain.com/oss/python/integrations/tools/upstage_groundedness_check) |
-| Document Parse     | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](https://docs.langchain.com/oss/python/integrations/document_loaders/upstage)         |
+| Chat               | Build assistants using Solar Chat           | `from langchain_upstage import ChatUpstage`                | [Go](../chat/upstage.md)                     |
+| Text Embedding     | Embed strings to vectors                    | `from langchain_upstage import UpstageEmbeddings`          | [Go](../embeddings/upstage.md)               |
+| Groundedness Check | Verify groundedness of assistant's response | `from langchain_upstage import UpstageGroundednessCheck`   | [Go](../tools/upstage_groundedness_check.md) |
+| Document Parse     | Serialize documents with tables and figures | `from langchain_upstage import UpstageDocumentParseLoader` | [Go](../document_loaders/upstage.md)         |
 
 See [documentations](https://console.upstage.ai/docs/getting-started/overview) for more details about the models and features.
 
@@ -39,7 +39,7 @@ os.environ["UPSTAGE_API_KEY"] = "YOUR_API_KEY"
 
 ### Solar LLM
 
-See [a usage example](https://docs.langchain.com/oss/python/integrations/chat/upstage).
+See [a usage example](../chat/upstage.md).
 
 ```python
 from langchain_upstage import ChatUpstage
@@ -51,7 +51,7 @@ print(response)
 
 ## Embedding models
 
-See [a usage example](https://docs.langchain.com/oss/python/integrations/embeddings/upstage).
+See [a usage example](../embeddings/upstage.md).
 
 ```python
 from langchain_upstage import UpstageEmbeddings
@@ -70,7 +70,7 @@ print(query_result)
 
 ### Document parse
 
-See [a usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/upstage).
+See [a usage example](../document_loaders/upstage.md).
 
 ```python
 from langchain_upstage import UpstageDocumentParseLoader
@@ -89,7 +89,7 @@ for doc in docs[:3]:
 
 ### Groundedness check
 
-See [a usage example](https://docs.langchain.com/oss/python/integrations/tools/upstage_groundedness_check).
+See [a usage example](../tools/upstage_groundedness_check.md).
 
 ```python
 from langchain_upstage import UpstageGroundednessCheck

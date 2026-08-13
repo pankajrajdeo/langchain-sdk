@@ -41,7 +41,7 @@ To import this vectorstore:
 from langchain_weaviate import WeaviateVectorStore
 ```
 
-For a more detailed walkthrough of the Weaviate wrapper, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/weaviate)
+For a more detailed walkthrough of the Weaviate wrapper, see [this notebook](../vectorstores/weaviate.md)
 
 ***
 

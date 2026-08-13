@@ -2,7 +2,7 @@
 
 > Integrate with the ChatSambanova chat model using LangChain Python.
 
-This will help you get started with SambaNova [chat models](https://docs.langchain.com/oss/python/langchain/models/). For detailed documentation of all `ChatSambaNova` features and configurations head to the [API reference](https://docs.sambanova.ai/cloud/docs/get-started/overview).
+This will help you get started with SambaNova [chat models](../../langchain/models.md). For detailed documentation of all `ChatSambaNova` features and configurations head to the [API reference](https://docs.sambanova.ai/cloud/docs/get-started/overview).
 
 **[SambaNova](https://sambanova.ai/)'s** [SambaCloud](http://cloud.sambanova.ai?utm_source=langchain\&utm_medium=external\&utm_campaign=cloud_signup) is a cloud platform for performing inference with open-source models
 
@@ -12,11 +12,11 @@ This will help you get started with SambaNova [chat models](https://docs.langcha
 
 | Class                                                                        | Package                                                                | Serializable | JS support |                                               Downloads                                              |                                              Version                                              |
 | :--------------------------------------------------------------------------- | :--------------------------------------------------------------------- | :----------: | :--------: | :--------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
+| [`ChatSambaNova`](https://docs.sambanova.ai/cloud/docs/get-started/overview) | [`langchain-sambanova`](../providers/sambanova.md) |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain_sambanova?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain_sambanova?style=flat-square\&label=%20) |
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -42,7 +42,7 @@ if not os.getenv("SAMBANOVA_API_KEY"):
     )
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"

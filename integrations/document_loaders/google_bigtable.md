@@ -4,7 +4,7 @@
 
 > [Bigtable](https://cloud.google.com/bigtable) is a key-value and wide-column store, ideal for fast access to structured, semi-structured, or unstructured data. Extend your database application to build AI-powered experiences leveraging Bigtable's LangChain integrations.
 
-This notebook goes over how to use [Bigtable](https://cloud.google.com/bigtable) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `BigtableLoader` and `BigtableSaver`.
+This notebook goes over how to use [Bigtable](https://cloud.google.com/bigtable) to [save, load and delete langchain documents](../document_loaders.md) with `BigtableLoader` and `BigtableSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-bigtable-python/).
 

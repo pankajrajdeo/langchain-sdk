@@ -5,7 +5,7 @@ Prevent API keys, tokens, and other secrets from appearing in LangSmith traces u
 When your application handles API keys, tokens, or other credentials, those values can appear in LangSmith traces if they are passed as part of inputs or outputs. Use the LangSmith SDK's built-in anonymizer to redact secrets before they are sent to the backend.
 
 > [!NOTE]
-> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](https://docs.langchain.com/langsmith/mask-inputs-outputs). To redact secrets at the LLM Gateway layer, see [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection).
+> This page covers redacting secrets (API keys, tokens, credentials) from trace data via the SDK. For redacting personally identifiable information (PII) such as emails, names, or SSNs, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md). To redact secrets at the LLM Gateway layer, see [Data protection](llm-gateway-data-protection.md).
 
 ## Use the SDK anonymizer
 
@@ -136,7 +136,7 @@ const client = new Client({ anonymizer });
 
 If your use case requires completely suppressing all inputs (for example, for zero-retention compliance), use `LANGSMITH_HIDE_INPUTS=true` instead. The anonymizer is skipped when `LANGSMITH_HIDE_INPUTS` or `LANGSMITH_HIDE_OUTPUTS` is set to `true`.
 
-For more options, including hiding all inputs and outputs, hiding metadata, function-level processors, and third-party PII libraries, see [Prevent logging of sensitive data in traces](https://docs.langchain.com/langsmith/mask-inputs-outputs).
+For more options, including hiding all inputs and outputs, hiding metadata, function-level processors, and third-party PII libraries, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md).
 
 ***
 

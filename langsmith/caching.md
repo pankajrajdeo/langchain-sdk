@@ -2,12 +2,12 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/caching)
 Cache values server-side in your agent deployment using stale-while-revalidate and key-value cache APIs.
 
-[Agent Server](https://docs.langchain.com/langsmith/agent-server) includes a built-in cache you can use inside your deployed graphs. Call `swr` with a key and a loader function, and the server caches the result, revalidates stale entries in the background, and returns fresh data on every read.
+[Agent Server](agent-server.md) includes a built-in cache you can use inside your deployed graphs. Call `swr` with a key and a loader function, and the server caches the result, revalidates stale entries in the background, and returns fresh data on every read.
 
 All cache APIs are **server-side only** and require the LangGraph Agent Server runtime. Values must be JSON-serializable.
 
 > [!NOTE]
-> `swr` requires Agent Server runtime **v0.7.79** or later and is currently in **[beta](https://docs.langchain.com/langsmith/release-stages)**.
+> `swr` requires Agent Server runtime **v0.7.79** or later and is currently in **[beta](release-stages.md)**.
 > `cache_get` and `cache_set` require **v0.7.29** or later.
 
 ## Quick start
@@ -78,7 +78,7 @@ profile: UserProfile = result.value  # deserialized automatically
 
 ## Cache auth credentials
 
-You can cache credential validation in a [custom auth handler](https://docs.langchain.com/langsmith/custom-auth) to avoid hitting your identity provider on every request:
+You can cache credential validation in a [custom auth handler](custom-auth.md) to avoid hitting your identity provider on every request:
 
 ```python
 from datetime import timedelta
@@ -159,9 +159,9 @@ async def cache_set(key: str, value: Any, *, ttl: timedelta | None = None) -> No
 
 ## Next steps
 
-* [Add custom authentication](https://docs.langchain.com/langsmith/custom-auth) to your deployment.
-* [Add custom lifespan events](https://docs.langchain.com/langsmith/custom-lifespan) to initialize resources at server startup.
-* Learn about the [agent server architecture](https://docs.langchain.com/langsmith/agent-server).
+* [Add custom authentication](custom-auth.md) to your deployment.
+* [Add custom lifespan events](custom-lifespan.md) to initialize resources at server startup.
+* Learn about the [agent server architecture](agent-server.md).
 
 ***
 

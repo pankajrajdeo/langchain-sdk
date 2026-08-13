@@ -2,7 +2,7 @@
 
 > Integrate with the LocalFileStore store using LangChain Python.
 
-This will help you get started with local filesystem [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `LocalFileStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-classic/storage/file_system/LocalFileStore).
+This will help you get started with local filesystem [key-value stores](../stores.md). For detailed documentation of all `LocalFileStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-classic/storage/file_system/LocalFileStore).
 
 ## Overview
 

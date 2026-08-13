@@ -1,6 +1,6 @@
 # Contributing to documentation
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/documentation)
-We welcome contributions to LangChain documentation, including new features, [integrations](https://docs.langchain.com/oss/python/contributing/publish-langchain), and improvements to existing docs.
+We welcome contributions to LangChain documentation, including new features, [integrations](publish-langchain.md), and improvements to existing docs.
 
 ## Quick start - local development
 
@@ -65,12 +65,12 @@ For typos or small changes, edit directly on GitHub without local setup:
 > [!NOTE]
 > **Only edit files in `src/`**-- The `build/` directory is automatically generated.
 
-1. Edit files in `src/` following our [writing standards](https://docs.langchain.com/oss/python/contributing/documentation#writing-standards).
-2. Run [quality checks](https://docs.langchain.com/oss/python/contributing/documentation#run-quality-checks) before submitting.
+1. Edit files in `src/` following our [writing standards](#writing-standards).
+2. Run [quality checks](#run-quality-checks) before submitting.
 3. Create a pull request for review.
 
 > [!NOTE]
-> All pull requests must link to an issue or discussion where a solution has been approved by a maintainer. See our [pull request requirements](https://docs.langchain.com/oss/python/contributing/overview#pull-request-requirements).
+> All pull requests must link to an issue or discussion where a solution has been approved by a maintainer. See our [pull request requirements](overview.md#pull-request-requirements).
 
 <details>
 <summary>Create a sharable preview build (LangChain team only)</summary>
@@ -116,24 +116,24 @@ For more details, see the [available commands](https://github.com/langchain-ai/d
 
 All documentation falls under one of four categories:
 
-#### [How-to guides](https://docs.langchain.com/oss/python/contributing/documentation#how-to-guides)
+#### [How-to guides](#how-to-guides)
 Task-oriented instructions for users who know what they want to accomplish.
 
-#### [Conceptual guides](https://docs.langchain.com/oss/python/contributing/documentation#conceptual-guides)
+#### [Conceptual guides](#conceptual-guides)
 Explanations that provide deeper understanding and insights.
 
-#### [Reference](https://docs.langchain.com/oss/python/contributing/documentation#reference)
+#### [Reference](#reference)
 Technical descriptions of APIs and implementation details.
 
-#### [Tutorials](https://docs.langchain.com/oss/python/contributing/documentation#tutorials)
+#### [Tutorials](#tutorials)
 Lessons that guide users through practical activities to build understanding.
 
 > [!NOTE]
-> Where applicable, all documentation must have both Python and JavaScript/TypeScript content. For more details, see the [co-locate Python and JavaScript/TypeScript content](https://docs.langchain.com/oss/python/contributing/documentation#co-locate-python-and-javascript%2Ftypescript-content) section.
+> Where applicable, all documentation must have both Python and JavaScript/TypeScript content. For more details, see the [co-locate Python and JavaScript/TypeScript content](#co-locate-python-and-javascript%2Ftypescript-content) section.
 
 ### How-to guides
 
-How-to guides are task-oriented instructions for users who know what they want to accomplish. Examples of how-to guides are on the [LangChain](https://docs.langchain.com/oss/python/langchain/overview) and [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) tabs.
+How-to guides are task-oriented instructions for users who know what they want to accomplish. Examples of how-to guides are on the [LangChain](../langchain/overview.md) and [LangGraph](../langgraph/overview.md) tabs.
 
 <details>
 <summary>Characteristics</summary>
@@ -157,9 +157,9 @@ How-to guides are task-oriented instructions for users who know what they want t
 <details>
 <summary>Examples</summary>
 
-* [Messages](https://docs.langchain.com/oss/python/langchain/messages)
-* [Tools](https://docs.langchain.com/oss/python/langchain/tools)
-* [Streaming](https://docs.langchain.com/oss/python/langgraph/streaming)
+* [Messages](../langchain/messages.md)
+* [Tools](../langchain/tools.md)
+* [Streaming](../langgraph/streaming.md)
 
 </details>
 
@@ -191,10 +191,10 @@ Conceptual guide cover core concepts abstractly, providing deep understanding.
 <details>
 <summary>Examples</summary>
 
-* [Memory](https://docs.langchain.com/oss/python/concepts/memory)
-* [Context](https://docs.langchain.com/oss/python/concepts/context)
-* [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
-* [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api)
+* [Memory](../concepts/memory.md)
+* [Context](../concepts/context.md)
+* [Graph API](../langgraph/graph-api.md)
+* [Functional API](../langgraph/functional-api.md)
 
 </details>
 
@@ -231,7 +231,7 @@ The generated API reference at [reference.langchain.com](https://reference.langc
 <details>
 <summary>When to create new reference documentation</summary>
 
-* New integrations that meet the [hosted-guide eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides) (50,000+ monthly downloads or featured)
+* New integrations that meet the [hosted-guide eligibility criteria](publish-langchain.md#eligibility-for-hosted-guides) (50,000+ monthly downloads or featured)
 * Complex configuration options require detailed explanation
 * API changes introduce new parameters or behavior
 * Community frequently asks questions about specific functionality
@@ -240,7 +240,7 @@ The generated API reference at [reference.langchain.com](https://reference.langc
 
 ### Tutorials
 
-Tutorials are longer form step-by-step guides that builds upon itself and takes users through a specific practical activity to build understanding. Tutorials are typically found on the [Learn](https://docs.langchain.com/oss/python/learn) tab.
+Tutorials are longer form step-by-step guides that builds upon itself and takes users through a specific practical activity to build understanding. Tutorials are typically found on the [Learn](../learn.md) tab.
 
 > [!NOTE]
 > We generally do not merge new tutorials from outside contributors without an acute need. If you feel that a certain topic is missing from docs or is not sufficiently covered, please [open a new issue](https://github.com/langchain-ai/docs/issues).
@@ -266,8 +266,8 @@ Tutorials are longer form step-by-step guides that builds upon itself and takes 
 <details>
 <summary>Examples</summary>
 
-* [Semantic search](https://docs.langchain.com/oss/python/langchain/knowledge-base)
-* [RAG agent](https://docs.langchain.com/oss/python/deepagents/rag)
+* [Semantic search](../langchain/knowledge-base.md)
+* [RAG agent](../deepagents/rag.md)
 
 </details>
 
@@ -323,6 +323,8 @@ title: "Clear, specific title"
 sidebarTitle: "Short title for the sidebar (optional)"
 ---
 ```
+
+<a id="co-locate-python-and-javascript/typescript-content"></a>
 
 ### Co-locate Python and JavaScript/TypeScript content
 
@@ -426,7 +428,7 @@ Cross-links and deep anchors in the published Python API reference are generated
 
 ### Localization
 
-Where a feature exists in both SDKs, document it for [Python and JavaScript/TypeScript together](https://docs.langchain.com/oss/python/contributing/documentation#co-locate-python-and-javascript%2Ftypescript-content). If only one language is supported yet, ensure the feature and references to it are only visible for that language.
+Where a feature exists in both SDKs, document it for [Python and JavaScript/TypeScript together](#co-locate-python-and-javascript%2Ftypescript-content). If only one language is supported yet, ensure the feature and references to it are only visible for that language.
 
 ### In-code documentation
 

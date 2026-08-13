@@ -13,7 +13,7 @@ When you connect Arcade to your workspace, a workspace admin selects an Arcade o
 
 ## Set up Arcade as a workspace admin
 
-Only [workspace admins](https://docs.langchain.com/langsmith/rbac#workspace-admin) can configure the Arcade integration, including adding or deleting MCP Gateways. Once configured, the integration is available to all users in the workspace.
+Only [workspace admins](../rbac.md#workspace-admin) can configure the Arcade integration, including adding or deleting MCP Gateways. Once configured, the integration is available to all users in the workspace.
 
 ### Open the Integrations tab
 Navigate to [**Fleet** > **Integrations**](https://smith.langchain.com/agents/tools). In the left menu under **Apps**, click **Arcade**.
@@ -77,13 +77,13 @@ Admins can remove the Arcade integration entirely by deleting the workspace conf
 
 ## Next steps
 
-#### [Add more tools](https://docs.langchain.com/langsmith/fleet/tools)
+#### [Add more tools](tools.md)
 Connect additional services to your agent
 
-#### [Remote MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers)
+#### [Remote MCP servers](remote-mcp-servers.md)
 Connect custom MCP servers to your workspace
 
-#### [Manage agent settings](https://docs.langchain.com/langsmith/fleet/manage-agent-settings)
+#### [Manage agent settings](manage-agent-settings.md)
 Configure agent behavior and permissions
 
 ***

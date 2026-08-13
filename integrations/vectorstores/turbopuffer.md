@@ -26,7 +26,7 @@ if not os.getenv("TURBOPUFFER_API_KEY"):
     os.environ["TURBOPUFFER_API_KEY"] = getpass.getpass("Enter your turbopuffer API key: ")
 ```
 
-If you want to get automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing of your model calls you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -194,8 +194,8 @@ See the [turbopuffer filter documentation](https://turbopuffer.com/docs/referenc
 
 ## Related
 
-* Vector store [conceptual guide](https://docs.langchain.com/oss/python/integrations/vectorstores)
-* Vector store [how-to guides](https://docs.langchain.com/oss/python/integrations/vectorstores)
+* Vector store [conceptual guide](../vectorstores.md)
+* Vector store [how-to guides](../vectorstores.md)
 
 ***
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/evals)
 Evaluate agent trajectories using deterministic matching or LLM-as-judge evaluators with AgentEvals and LangSmith.
 
-Evaluations ("evals") measure how well your agent performs by assessing its execution trajectory, the sequence of messages and tool calls it produces. Unlike [integration tests](https://docs.langchain.com/oss/python/langchain/test/integration-testing) that verify basic correctness, evals score agent behavior against a reference or rubric, making them useful for catching regressions when you change prompts, tools, or models.
+Evaluations ("evals") measure how well your agent performs by assessing its execution trajectory, the sequence of messages and tool calls it produces. Unlike [integration tests](integration-testing.md) that verify basic correctness, evals score agent behavior against a reference or rubric, making them useful for catching regressions when you change prompts, tools, or models.
 
 An evaluator is a function that takes agent outputs (and optionally reference outputs) and returns a score:
 
@@ -18,8 +18,8 @@ The [`agentevals`](https://github.com/langchain-ai/agentevals) package provides 
 
 | Approach                                        | When to use                                                                     |
 | ----------------------------------------------- | ------------------------------------------------------------------------------- |
-| [Trajectory match](https://docs.langchain.com/oss/python/langchain/test/evals#trajectory-match-evaluator) | You know the expected tool calls and want fast, deterministic, cost-free checks |
-| [LLM-as-judge](https://docs.langchain.com/oss/python/langchain/test/evals#llm-as-judge-evaluator)         | You want to assess overall quality and reasoning without strict expectations    |
+| [Trajectory match](#trajectory-match-evaluator) | You know the expected tool calls and want fast, deterministic, cost-free checks |
+| [LLM-as-judge](#llm-as-judge-evaluator)         | You want to assess overall quality and reasoning without strict expectations    |
 
 ## Install AgentEvals
 
@@ -275,7 +275,7 @@ export LANGSMITH_API_KEY="your_langsmith_api_key"
 export LANGSMITH_TRACING="true"
 ```
 
-LangSmith offers two main approaches for running evaluations: [pytest](https://docs.langchain.com/langsmith/pytest) integration and the `evaluate` function.
+LangSmith offers two main approaches for running evaluations: [pytest](../../langsmith/pytest.md) integration and the `evaluate` function.
 
 <details>
 <summary>Use pytest integration</summary>
@@ -326,7 +326,7 @@ pytest test_trajectory.py --langsmith-output
 <details>
 <summary>Use the evaluate function</summary>
 
-Create a [LangSmith dataset](https://docs.langchain.com/langsmith/manage-datasets) and use the `evaluate` function. The dataset must have the following schema:
+Create a [LangSmith dataset](../../langsmith/manage-datasets.md) and use the `evaluate` function. The dataset must have the following schema:
 
 * **input**: `{"messages": [...]}` input messages to call the agent with.
 * **output**: `{"messages": [...]}` expected message history in the agent output. For trajectory evaluation, you can choose to keep only assistant messages.
@@ -355,7 +355,7 @@ experiment_results = client.evaluate(
 </details>
 
 > [!TIP]
-> To learn more about evaluating your agent, see the [LangSmith docs](https://docs.langchain.com/langsmith/pytest).
+> To learn more about evaluating your agent, see the [LangSmith docs](../../langsmith/pytest.md).
 
 ***
 

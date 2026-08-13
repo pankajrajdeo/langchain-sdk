@@ -3,13 +3,13 @@
 LangSmith Self-Hosted allows enablement of automatic TTL and Data Retention of traces. This can be useful if you're complying with data privacy regulations, or if you want to have more efficient space usage and auto cleanup of your traces. Traces will also have their data retention period automatically extended based on certain actions or run rule applications.
 
 > [!NOTE]
-> **Self-hosted [Enterprise](https://docs.langchain.com/langsmith/pricing-plans) customers:** You can now configure extended data retention at the workspace level through the UI, which provides more granular control without requiring environment variable changes. For more information, refer to [Customize extended retention policy](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy). The system-wide TTL configuration documented on this page is still supported.
+> **Self-hosted [Enterprise](pricing-plans.md) customers:** You can now configure extended data retention at the workspace level through the UI, which provides more granular control without requiring environment variable changes. For more information, refer to [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy). The system-wide TTL configuration documented on this page is still supported.
 
 ## Requirements
 
 You can configure retention through helm or environment variable settings. There are a few options that are configurable:
 
-* *Enabled:* Whether data retention is enabled or disabled. If enabled, via the UI you can your default organization and project TTL tiers to apply to traces (see [data retention guide](https://docs.langchain.com/langsmith/usage-and-billing#data-retention) for details).
+* *Enabled:* Whether data retention is enabled or disabled. If enabled, via the UI you can your default organization and project TTL tiers to apply to traces (see [data retention guide](usage-and-billing.md#data-retention) for details).
 * *Retention Periods:* You can configure system-wide retention periods for shortlived and longlived traces. Once configured, you can manage the retention level at each project as well as set an organization-wide default for new projects.
 
 ```yaml

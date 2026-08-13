@@ -4,7 +4,7 @@ Build an IDE-like UI for a coding agent backed by a sandbox environment
 
 Coding agents need more than a chat window. They need a file browser, a code
 viewer, and a diff panel, an IDE experience. This pattern connects a deep
-agent to a [sandbox](https://docs.langchain.com/oss/python/deepagents/sandboxes) so it can read,
+agent to a [sandbox](../sandboxes.md) so it can read,
 write, and execute code in an isolated environment, then exposes the sandbox
 filesystem through a custom API server so the frontend can display files in
 real time as the agent works.
@@ -12,7 +12,7 @@ real time as the agent works.
 This page covers the **three-panel UI** (file tree, code viewer, and chat) and
 the **custom API routes** that expose the sandbox filesystem to it. For sandbox
 providers, lifecycle scoping, seeding files, secrets, deployment, and production
-`useStream` configuration, see [Going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production).
+`useStream` configuration, see [Going to production](../going-to-production.md).
 
 > **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox).
 
@@ -63,14 +63,14 @@ graph LR
 ## Sandbox lifecycle
 
 Choose how long a sandbox lives and who shares it before wiring the frontend.
-See [Sandbox lifecycle](https://docs.langchain.com/oss/python/deepagents/going-to-production#lifecycle) for thread-scoped
-vs assistant-scoped sandboxes, async [graph factory](https://docs.langchain.com/langsmith/graph-rebuild)
+See [Sandbox lifecycle](../going-to-production.md#lifecycle) for thread-scoped
+vs assistant-scoped sandboxes, async [graph factory](../../langsmith/graph-rebuild.md)
 setup, TTL behavior, and SDK invocation examples.
 
 This guide uses **thread-scoped sandboxes** by default. The frontend and
 custom API server both resolve the sandbox from the LangGraph
-[thread](https://docs.langchain.com/langsmith/use-threads) ID. That keeps conversations isolated and
-lets page reloads reconnect to the same environment when you [persist the thread ID](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox#thread-creation).
+[thread](../../langsmith/use-threads.md) ID. That keeps conversations isolated and
+lets page reloads reconnect to the same environment when you [persist the thread ID](#thread-creation).
 
 ```mermaid
 sequenceDiagram
@@ -99,15 +99,15 @@ sequenceDiagram
     LG->>SB: connect to same sandbox
 ```
 
-For [multi-tenant](https://docs.langchain.com/oss/python/deepagents/going-to-production#multi-tenancy) apps,
+For [multi-tenant](../going-to-production.md#multi-tenancy) apps,
 scope sandboxes by user or assistant in your backend factory instead. For
 demos without LangGraph threads, pass a client-generated session ID in the
 API URL. The session ID does not persist across browser sessions.
 
 ## Connect the agent and API server
 
-Configure the deep agent with a [sandbox backend](https://docs.langchain.com/oss/python/deepagents/sandboxes)
-as described in [Execution environment](https://docs.langchain.com/oss/python/deepagents/going-to-production#execution-environment).
+Configure the deep agent with a [sandbox backend](../sandboxes.md)
+as described in [Execution environment](../going-to-production.md#execution-environment).
 The agent gets filesystem tools and an `execute` tool automatically; no extra
 tool configuration is needed.
 
@@ -323,7 +323,7 @@ def agent():
 ```
 
 > [!NOTE]
-> Similar to the example in [Going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production#lifecycle), the
+> Similar to the example in [Going to production](../going-to-production.md#lifecycle), the
 > agent is an async graph factory invoked on each run. Store the sandbox ID on
 > thread metadata so custom `http.app` routes can call the same
 > `getOrCreateSandboxForThread` helper. Going to production uses provider label
@@ -332,11 +332,11 @@ def agent():
 ### Seed project files
 
 Before the agent runs, upload starter files with `uploadFiles` /
-`upload_files`. See [File transfers](https://docs.langchain.com/oss/python/deepagents/going-to-production#file-transfers)
+`upload_files`. See [File transfers](../going-to-production.md#file-transfers)
 for seeding patterns, provider examples, and syncing
-[memories](https://docs.langchain.com/oss/python/deepagents/memory) or [skills](https://docs.langchain.com/oss/python/deepagents/skills) into
+[memories](../memory.md) or [skills](../skills.md) into
 the sandbox. For LangSmith sandboxes, pass `templateName` from a
-[sandbox snapshot](https://docs.langchain.com/langsmith/sandbox-snapshots) when creating the container.
+[sandbox snapshot](../../langsmith/sandbox-snapshots.md) when creating the container.
 
 > [!TIP]
 > Run `sandbox.execute("cd /app && npm install")` after uploading
@@ -405,8 +405,8 @@ async def read_file(
 
 Register both the agent graph and the API server. The `http.app` field tells
 the LangGraph platform to serve your custom routes alongside the default ones.
-See [application structure](https://docs.langchain.com/oss/python/langgraph/application-structure) and
-[LangSmith Deployments](https://docs.langchain.com/oss/python/deepagents/going-to-production#langsmith-deployments)
+See [application structure](../../langgraph/application-structure.md) and
+[LangSmith Deployments](../going-to-production.md#langsmith-deployments)
 for the full set of `langgraph.json` options.
 
 ```json
@@ -436,11 +436,11 @@ chat panel. It uses [`useStream`](https://reference.langchain.com/javascript/lan
 endpoints for file browsing.
 
 For production deployment, point `apiUrl` at your
-[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), and pass a stable
+[LangSmith Deployment](../../langsmith/deployment.md), and pass a stable
 `thread_id` on each run. See
-[Frontend](https://docs.langchain.com/oss/python/deepagents/going-to-production#frontend) in
-[Going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production) for those settings
-and for [invoking the agent](https://docs.langchain.com/oss/python/deepagents/going-to-production#invoking-the-agent)
+[Frontend](../going-to-production.md#frontend) in
+[Going to production](../going-to-production.md) for those settings
+and for [invoking the agent](../going-to-production.md#invoking-the-agent)
 with `thread_id` and runtime `context`.
 
 ### Thread creation
@@ -839,32 +839,32 @@ Frontend-specific:
 For backends and sandboxes:
 
 * **Use thread-scoped sandboxes** for production apps. See
-  [Sandbox lifecycle](https://docs.langchain.com/oss/python/deepagents/going-to-production#lifecycle).
+  [Sandbox lifecycle](../going-to-production.md#lifecycle).
 * **Share sandbox resolution** between the agent backend and the API server via
   thread metadata so both resolve the same environment with no in-memory caches.
 * **Seed the sandbox with a real project**. See
-  [File transfers](https://docs.langchain.com/oss/python/deepagents/going-to-production#file-transfers).
+  [File transfers](../going-to-production.md#file-transfers).
 * **Keep secrets out of the sandbox**. Use the
-  [sandbox auth proxy](https://docs.langchain.com/oss/python/deepagents/going-to-production#managing-secrets)
+  [sandbox auth proxy](../going-to-production.md#managing-secrets)
   instead of environment variables or file uploads for API keys.
 * **Add guardrails before launch**. Configure
-  [rate limits](https://docs.langchain.com/oss/python/deepagents/fault-tolerance#rate-limiting),
-  [error handling](https://docs.langchain.com/oss/python/deepagents/fault-tolerance#error-handling), and
-  [data privacy](https://docs.langchain.com/oss/python/deepagents/going-to-production#data-privacy) middleware
+  [rate limits](../fault-tolerance.md#rate-limiting),
+  [error handling](../fault-tolerance.md#error-handling), and
+  [data privacy](../going-to-production.md#data-privacy) middleware
   for autonomous coding agents.
 
 ## Related
 
-#### [Going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production)
+#### [Going to production](../going-to-production.md)
 Deploy the agent with persistent sandboxes, auth, guardrails, and production `useStream` settings.
 
-#### [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes)
+#### [Sandboxes](../sandboxes.md)
 Sandbox providers, security model, and file transfer APIs.
 
-#### [Frontend overview](https://docs.langchain.com/oss/python/deepagents/frontend/overview)
+#### [Frontend overview](overview.md)
 Other deep agent UI patterns: subagent streaming, todo lists, and custom state.
 
-#### [Application structure](https://docs.langchain.com/oss/python/langgraph/application-structure)
+#### [Application structure](../../langgraph/application-structure.md)
 Full `langgraph.json` reference, including custom `http.app` routes.
 
 ***

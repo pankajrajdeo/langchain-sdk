@@ -16,7 +16,7 @@ uv add langchain-modal
 
 ## Create a sandbox backend
 
-In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](https://docs.langchain.com/oss/python/deepagents/backends).
+In Python, you create the sandbox using the provider SDK, then wrap it with the [deepagents backend](../../deepagents/backends.md).
 
 ```python
 import modal
@@ -60,7 +60,7 @@ result = agent.invoke(
 You are responsible for managing the sandbox lifecycle via Modal.
 When you are done, terminate the sandbox.
 
-See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](../../deepagents/sandboxes.md).
 
 ***
 

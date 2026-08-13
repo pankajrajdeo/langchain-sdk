@@ -2,7 +2,7 @@
 
 > Integrate with the Gmail toolkit using LangChain Python.
 
-This will help you get started with the Gmail [toolkit](https://docs.langchain.com/oss/python/integrations/tools/google_gmail). This toolkit interacts with the Gmail API to read messages, draft and send messages, and more. For detailed documentation of all `GmailToolkit` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-google-community/gmail/toolkit/GmailToolkit).
+This will help you get started with the Gmail [toolkit](google_gmail.md). This toolkit interacts with the Gmail API to read messages, draft and send messages, and more. For detailed documentation of all `GmailToolkit` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-google-community/gmail/toolkit/GmailToolkit).
 
 ## Setup
 
@@ -16,7 +16,7 @@ This toolkit lives in the `langchain-google-community` package. We'll need the `
 pip install -qU langchain-google-community\[gmail\]
 ```
 
-To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -80,11 +80,11 @@ tools
 
 ## Use within an agent
 
-Below we show how to incorporate the toolkit into an [agent](https://docs.langchain.com/oss/python/langchain/agents).
+Below we show how to incorporate the toolkit into an [agent](../../langchain/agents.md).
 
 We will need an LLM or chat model:
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/google_gmail).
+> **Interactive content:** [View this section in the original documentation](google_gmail.md).
 
 ```python
 # | output: false

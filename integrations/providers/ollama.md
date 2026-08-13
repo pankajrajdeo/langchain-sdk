@@ -10,15 +10,15 @@ For a complete list of supported models and variants, see the [Ollama model libr
 
 ## Model interfaces
 
-#### [ChatOllama](https://docs.langchain.com/oss/python/integrations/chat/ollama)
+#### [ChatOllama](../chat/ollama.md)
 Ollama chat models.
 
-#### [OllamaEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ollama)
+#### [OllamaEmbeddings](../embeddings/ollama.md)
 Ollama embedding models.
 
 ## Other
 
-#### [OllamaLLM](https://docs.langchain.com/oss/python/integrations/llms/ollama)
+#### [OllamaLLM](../llms/ollama.md)
 (Legacy) Ollama text completion models.
 
 ***

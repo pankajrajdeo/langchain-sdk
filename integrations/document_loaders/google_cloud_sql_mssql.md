@@ -4,7 +4,7 @@
 
 > [Cloud SQL](https://cloud.google.com/sql) is a fully managed relational database service that offers high performance, seamless integration, and impressive scalability. It offers [MySQL](https://cloud.google.com/sql/mysql), [PostgreSQL](https://cloud.google.com/sql/postgres), and [SQL Server](https://cloud.google.com/sql/sqlserver) database engines. Extend your database application to build AI-powered experiences leveraging Cloud SQL's LangChain integrations.
 
-This notebook goes over how to use [Cloud SQL for SQL server](https://cloud.google.com/sql/sqlserver) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `MSSQLLoader` and `MSSQLDocumentSaver`.
+This notebook goes over how to use [Cloud SQL for SQL server](https://cloud.google.com/sql/sqlserver) to [save, load and delete langchain documents](../document_loaders.md) with `MSSQLLoader` and `MSSQLDocumentSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-cloud-sql-mssql-python/).
 
@@ -196,7 +196,7 @@ onedoc = loader.load()
 onedoc
 ```
 
-The view generated from SQL query can have different schema than default table. In such cases, the behavior of MSSQLLoader is the same as loading from table with non-default schema. Please refer to section [Load documents with customized document page content & metadata](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mssql#load-documents-with-customized-document-page-content-and-metadata).
+The view generated from SQL query can have different schema than default table. In such cases, the behavior of MSSQLLoader is the same as loading from table with non-default schema. Please refer to section [Load documents with customized document page content & metadata](#load-documents-with-customized-document-page-content-and-metadata).
 
 ### Delete documents
 

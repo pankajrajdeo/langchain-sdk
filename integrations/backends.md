@@ -2,13 +2,13 @@
 
 > Community-built filesystem backends for Deep Agents.
 
-Browse available filesystem backends for Deep Agents or contribute your own to the ecosystem. Learn more about how backends work in the [backends docs](https://docs.langchain.com/oss/python/deepagents/backends).
+Browse available filesystem backends for Deep Agents or contribute your own to the ecosystem. Learn more about how backends work in the [backends docs](../deepagents/backends.md).
 
 ## Share your backend
 
 Custom backends connect Deep Agents to storage systems such as databases, object stores, and virtual filesystems. Share yours with the community:
 
-#### [Implement a custom backend](https://docs.langchain.com/oss/python/deepagents/backends#custom-backends)
+#### [Implement a custom backend](../deepagents/backends.md#custom-backends)
 Follow the custom backends guide to build your own backend.
 
 #### [Share a community backend](https://github.com/langchain-ai/docs)

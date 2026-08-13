@@ -8,10 +8,10 @@ Baseten provides infrastructure for deploying and serving ML models. Access open
 
 ## Model interfaces
 
-#### [ChatBaseten](https://docs.langchain.com/oss/python/integrations/chat/baseten)
+#### [ChatBaseten](../chat/baseten.md)
 Baseten chat models.
 
-#### [BasetenEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/baseten)
+#### [BasetenEmbeddings](../embeddings/baseten.md)
 Baseten embedding models.
 
 ***

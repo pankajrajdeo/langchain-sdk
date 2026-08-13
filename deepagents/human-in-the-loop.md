@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop)
 Learn how to configure human approval for sensitive tool operations
 
-Some tool operations may be sensitive and require human approval before execution. Deep Agents support human-in-the-loop workflows through LangGraph's interrupt capabilities. You can configure which tools require approval using the `interrupt_on` parameter. When `interrupt_on` is set, `HumanInTheLoopMiddleware` is added to the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack). If a run is cancelled or interrupted before a tool returns a result, [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware) in the same stack repairs the message history automatically.
+Some tool operations may be sensitive and require human approval before execution. Deep Agents support human-in-the-loop workflows through LangGraph's interrupt capabilities. You can configure which tools require approval using the `interrupt_on` parameter. When `interrupt_on` is set, `HumanInTheLoopMiddleware` is added to the [Deep Agents stack](customization.md#deep-agents-stack). If a run is cancelled or interrupted before a tool returns a result, [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware) in the same stack repairs the message history automatically.
 
 ```mermaid
 graph LR
@@ -36,7 +36,7 @@ The `interrupt_on` parameter accepts a dictionary mapping tool names to interrup
 * **`True`**: Enable interrupts with default behavior (approve, edit, reject, respond allowed)
 * **`False`**: Disable interrupts for this tool
 * **`InterruptOnConfig`**: Custom configuration. Set `allowed_decisions` to control review options.
-  In Python, add an optional `when` predicate to interrupt only specific calls (see [Conditional interrupts](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop#conditional-interrupts)).
+  In Python, add an optional `when` predicate to interrupt only specific calls (see [Conditional interrupts](#conditional-interrupts)).
 
 ```python
 from langchain.tools import tool
@@ -477,7 +477,7 @@ agent = create_deep_agent(
 
 When the `when` predicate returns `False`, the call runs without interrupting. When it returns `True`, or when you omit `when`, the call pauses as usual. Calls that evaluate to `False` are never added to the interrupt batch, so a reviewer only sees the actions that need a decision.
 
-See the [LangChain human-in-the-loop documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#conditional-interrupts) for additional configuration options and examples.
+See the [LangChain human-in-the-loop documentation](../langchain/human-in-the-loop.md#conditional-interrupts) for additional configuration options and examples.
 
 ## Handle interrupts
 
@@ -617,7 +617,7 @@ if result.interrupts:  # [!code highlight]
 
 ## Subagent interrupts
 
-When using subagents, you can use interrupts [on tool calls](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop#interrupts-on-tool-calls) and [within tool calls](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop#interrupts-within-tool-calls).
+When using subagents, you can use interrupts [on tool calls](#interrupts-on-tool-calls) and [within tool calls](#interrupts-within-tool-calls).
 
 ### Interrupts on tool calls
 
@@ -772,7 +772,7 @@ Execution completed!
 > [!NOTE]
 > Filesystem permission interrupts require `deepagents>=0.6.8`.
 
-Beyond `interrupt_on`, you can pause the built-in filesystem tools by marking a [permission rule](https://docs.langchain.com/oss/python/deepagents/permissions) with `mode="interrupt"`. When the agent calls `write_file` or `edit_file` on a path that matches an interrupt-mode rule, `create_deep_agent` raises the same human-in-the-loop interrupt as a configured tool, using the filesystem tool's name as the action name.
+Beyond `interrupt_on`, you can pause the built-in filesystem tools by marking a [permission rule](permissions.md) with `mode="interrupt"`. When the agent calls `write_file` or `edit_file` on a path that matches an interrupt-mode rule, `create_deep_agent` raises the same human-in-the-loop interrupt as a configured tool, using the filesystem tool's name as the action name.
 
 ```python
 from deepagents import FilesystemPermission, create_deep_agent

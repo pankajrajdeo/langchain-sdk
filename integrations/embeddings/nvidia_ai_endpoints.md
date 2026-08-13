@@ -10,7 +10,7 @@ NIM microservices are packaged as container images on a per model/model family b
 
 This example goes over how to use LangChain to interact with the supported [NVIDIA Retrieval QA Embedding Model](https://build.nvidia.com/nvidia/embed-qa-4) for [retrieval-augmented generation](https://developer.nvidia.com/blog/build-enterprise-retrieval-augmented-generation-apps-with-nvidia-retrieval-qa-embedding-model/) via the `NVIDIAEmbeddings` class.
 
-For more information on accessing the chat models through this API, refer to the [ChatNVIDIA](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints) documentation.
+For more information on accessing the chat models through this API, refer to the [ChatNVIDIA](../chat/nvidia_ai_endpoints.md) documentation.
 
 ## Install the package
 
@@ -309,8 +309,8 @@ chain.invoke({"question": "where did harrison work", "language": "italian"})
 * [Overview of NVIDIA NIM for Large Language Models (LLMs)](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html)
 * [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 * [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
-* [`ChatNVIDIA` Model](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)
-* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
+* [`ChatNVIDIA` Model](../chat/nvidia_ai_endpoints.md)
+* [NVIDIA Provider Page](../providers/nvidia.md)
 
 ***
 

@@ -43,9 +43,9 @@ The graph does not show `INSTRUCTIONS.md` and other scaffolding files.
 
 ## See also
 
-* [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart)
-* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
-* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
+* [Quickstart](quickstart.md)
+* [Code mode](code-mode.md)
+* [CLI reference](cli-reference.md)
 
 ***
 

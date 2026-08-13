@@ -2,7 +2,7 @@
 
 > Integrate with OCI Generative AI chat models using LangChain Python.
 
-This doc will help you get started with Oracle Cloud Infrastructure (OCI) Generative AI [chat models](https://docs.langchain.com/oss/python/langchain/models). OCI Generative AI is a fully managed service providing state-of-the-art, customizable large language models covering a wide range of use cases through a single API. Access ready-to-use pretrained models or create and host fine-tuned custom models on dedicated AI clusters.
+This doc will help you get started with Oracle Cloud Infrastructure (OCI) Generative AI [chat models](../../langchain/models.md). OCI Generative AI is a fully managed service providing state-of-the-art, customizable large language models covering a wide range of use cases through a single API. Access ready-to-use pretrained models or create and host fine-tuned custom models on dedicated AI clusters.
 
 For detailed documentation, see the [OCI Generative AI documentation](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm) and [API reference](https://docs.oracle.com/en-us/iaas/api/#/en/generative-ai/20231130/).
 
@@ -16,7 +16,7 @@ For detailed documentation, see the [OCI Generative AI documentation](https://do
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |                             ✅                            |  ✅ (Gemini) |  ✅ (Gemini) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -57,7 +57,7 @@ llm = ChatOCIGenAI(
 
 **Key parameters:**
 
-* `model_id` - The model to use (see [available models](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai#available-models))
+* `model_id` - The model to use (see [available models](#available-models))
 * `service_endpoint` - Regional endpoint (`us-chicago-1`, `eu-frankfurt-1`, etc.)
 * `compartment_id` - Your OCI compartment OCID
 * `model_kwargs` - Model settings like temperature, max\_tokens
@@ -364,11 +364,11 @@ For detailed documentation of all `ChatOCIGenAI` features and configurations, he
 
 ## Related
 
-* [OCI Provider Overview](https://docs.langchain.com/oss/python/integrations/providers/oci)
-* [OCI Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings/oci_generative_ai)
-* [Tool Calling Guide](https://docs.langchain.com/oss/python/langchain/tools/)
-* [Structured Output Guide](https://docs.langchain.com/oss/python/langchain/structured-output)
-* [Multimodal Messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal)
+* [OCI Provider Overview](../providers/oci.md)
+* [OCI Embeddings](../embeddings/oci_generative_ai.md)
+* [Tool Calling Guide](../../langchain/tools.md)
+* [Structured Output Guide](../../langchain/structured-output.md)
+* [Multimodal Messages](../../langchain/messages.md#multimodal)
 
 ***
 

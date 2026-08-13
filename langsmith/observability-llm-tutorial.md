@@ -18,9 +18,9 @@ The application will retrieve relevant documentation snippets and use them to an
 Before you begin, make sure you have:
 
 * **A LangSmith account**: Sign up or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-llm-tutorial).
-* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](create-account-api-key.md) guide.
 * **An OpenAI API key**: Generate this from the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
-* **LangSmith CLI** (optional): Install to inspect traces from the terminal. For instructions, refer to [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli).
+* **LangSmith CLI** (optional): Install to inspect traces from the terminal. For instructions, refer to [LangSmith CLI](langsmith-cli.md).
 
 Install the required packages:
 
@@ -47,7 +47,7 @@ export LANGSMITH_API_KEY="<your-api-key>"
 export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
-To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](https://docs.langchain.com/langsmith/log-traces-to-project). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
+To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
 
 > [!NOTE]
 > You may see these variables referenced as `LANGCHAIN_*` in other places. Both work, but `LANGSMITH_TRACING` and `LANGSMITH_API_KEY` are the recommended names.
@@ -213,13 +213,13 @@ const supportBot = traceable(async function supportBot(question: string): Promis
 
 Calling `support_bot("How many users can I have on the Starter plan?")` now produces a trace of the full RAG pipeline.
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-llm-tutorial.md)
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-llm-tutorial.md)
 
 ### Check your traces from the terminal
 
-If you installed the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli), list recent traces for your project without opening the UI:
+If you installed the [LangSmith CLI](langsmith-cli.md), list recent traces for your project without opening the UI:
 
 ```bash
 langsmith trace list --project <your-project> --limit 5
@@ -237,7 +237,7 @@ Once your app is working well in prototyping, you release it to a small group of
 
 ### Collect feedback
 
-Linking [user feedback](https://docs.langchain.com/langsmith/attach-user-feedback) to specific traces lets you identify which responses were helpful or unhelpful. Update `app.py` (or `app.ts`) from the previous step to add a run ID to each call and attach a score afterward:
+Linking [user feedback](attach-user-feedback.md) to specific traces lets you identify which responses were helpful or unhelpful. Update `app.py` (or `app.ts`) from the previous step to add a run ID to each call and attach a score afterward:
 
 ```python
 import os  # [!code highlight]
@@ -354,7 +354,7 @@ The feedback appears in the **Feedback** tab when you inspect the run in the UI.
 
 ### Log metadata
 
-[Metadata](https://docs.langchain.com/langsmith/add-metadata-tags) lets you tag runs with attributes useful for filtering and comparison. For example, which model version was used or which user made the request.
+[Metadata](add-metadata-tags.md) lets you tag runs with attributes useful for filtering and comparison. For example, which model version was used or which user made the request.
 
 The following example traces both the retriever (with `run_type="retriever"`) and the main function (with a `metadata` attribute for the model name):
 
@@ -448,26 +448,26 @@ With strong observability in place, you can confidently ship to production. In p
 
 ### Monitoring
 
-In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](https://docs.langchain.com/langsmith/dashboards).
+In the UI sidebar, select **Monitoring**, then choose a tracing project from the dropdown at the top left. Charts display key metrics for the project over time, including trace count, latency, error rate, feedback scores, and costs. For more on available metrics and chart configuration, refer to [Dashboards](dashboards.md).
 
-> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](observability-llm-tutorial.md)
 
-> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing the monitoring page with the trace count chart and available tabs.](observability-llm-tutorial.md)
 
 ### A/B testing
 
 > [!NOTE]
 > Group-by functionality requires at least two different values for a given metadata key.
 
-Because you have been logging the `llm` metadata attribute, you can group monitoring charts by that attribute to compare model performance over time. From **Monitoring** in the UI sidebar, click **Group by** in the top left corner, select **Metadata** from the dropdown, then select `llm`. The charts update to show results grouped by that attribute. For more on grouping and custom charts, refer to [Dashboards](https://docs.langchain.com/langsmith/dashboards).
+Because you have been logging the `llm` metadata attribute, you can group monitoring charts by that attribute to compare model performance over time. From **Monitoring** in the UI sidebar, click **Group by** in the top left corner, select **Metadata** from the dropdown, then select `llm`. The charts update to show results grouped by that attribute. For more on grouping and custom charts, refer to [Dashboards](dashboards.md).
 
 ### Drilldown
 
-When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+When a monitoring chart shows something unexpected, click a data point to freeze the tooltip, then click the metric name (for example, **Input**) to jump to the filtered runs table for that time window. For more on searching and filtering runs, refer to [Filter traces](filter-traces-in-application.md).
 
-> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](observability-llm-tutorial.md)
 
-> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+> **Image:** [LangSmith UI showing the monitoring page with a specific point on the Input Tokens chart highlighted.](observability-llm-tutorial.md)
 
 ## Conclusion
 
@@ -475,9 +475,9 @@ In this tutorial, you added LangSmith observability to an application across its
 
 For more, see:
 
-* [Observability concepts](https://docs.langchain.com/langsmith/observability-concepts): terminology and core ideas.
-* [Tracing integrations](https://docs.langchain.com/langsmith/integrations): LangChain, LangGraph, Anthropic, and other providers.
-* [Automations](https://docs.langchain.com/langsmith/rules): rules and online evaluations that run automatically on your traces.
+* [Observability concepts](observability-concepts.md): terminology and core ideas.
+* [Tracing integrations](integrations.md): LangChain, LangGraph, Anthropic, and other providers.
+* [Automations](rules.md): rules and online evaluations that run automatically on your traces.
 
 ***
 

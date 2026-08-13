@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-contexts-sdk)
 Use the LangSmith SDK to push, pull, list, and delete agent and skill repos in the Context Hub programmatically.
 
-Use the LangSmith [Python](https://docs.langchain.com/langsmith/smith-python-sdk) and [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk) SDKs to manage **agent repos** and **skill repos** in the [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) programmatically. [Push](https://docs.langchain.com/langsmith/manage-contexts-sdk#push-an-agent) new versions from CI, [pull](https://docs.langchain.com/langsmith/manage-contexts-sdk#pull-an-agent) the latest or a pinned commit at runtime to inject context into your agent, and use additional methods to [check existence](https://docs.langchain.com/langsmith/manage-contexts-sdk#check-whether-a-repo-exists), [list and search](https://docs.langchain.com/langsmith/manage-contexts-sdk#list-agents-and-skills) repos, and [delete](https://docs.langchain.com/langsmith/manage-contexts-sdk#delete-an-agent-or-skill) what you no longer need.
+Use the LangSmith [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md) SDKs to manage **agent repos** and **skill repos** in the [Context Hub](use-the-context-hub.md) programmatically. [Push](#push-an-agent) new versions from CI, [pull](#pull-an-agent) the latest or a pinned commit at runtime to inject context into your agent, and use additional methods to [check existence](#check-whether-a-repo-exists), [list and search](#list-agents-and-skills) repos, and [delete](#delete-an-agent-or-skill) what you no longer need.
 
 > [!NOTE]
 > Context Hub methods require `langsmith>=0.7.35` (Python) and `langsmith>=0.5.23` (TypeScript).
@@ -23,7 +23,7 @@ Use the LangSmith [Python](https://docs.langchain.com/langsmith/smith-python-sdk
    yarn add langsmith
 ```
 
-2. Configure environment variables. If you already have [`LANGSMITH_API_KEY`](https://docs.langchain.com/langsmith/create-account-api-key) set in your environment, skip this step. Otherwise, create one in **Settings > API Keys > Create API Key** in LangSmith, then set it as an environment variable:
+2. Configure environment variables. If you already have [`LANGSMITH_API_KEY`](create-account-api-key.md) set in your environment, skip this step. Otherwise, create one in **Settings > API Keys > Create API Key** in LangSmith, then set it as an environment variable:
 
 ```bash
    export LANGSMITH_API_KEY="lsv2_..."

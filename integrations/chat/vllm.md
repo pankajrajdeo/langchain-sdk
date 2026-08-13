@@ -6,7 +6,7 @@ vLLM can be deployed as a server that mimics the OpenAI API protocol. This allow
 
 ## Overview
 
-This will help you get started with vLLM [chat models](https://docs.langchain.com/oss/python/langchain/models), which leverages the `langchain-openai` package. For detailed documentation of all [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
+This will help you get started with vLLM [chat models](../../langchain/models.md), which leverages the `langchain-openai` package. For detailed documentation of all [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
 
 ### Integration details
 
@@ -28,7 +28,7 @@ To access vLLM models through LangChain, you'll need to install the `langchain-o
 
 Authentication will depend on specifics of the inference server.
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"

@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-a2a)
 Use the A2A protocol to enable agent-to-agent communication with distributed tracing in LangSmith.
 
-[Agent2Agent (A2A)](https://a2a-protocol.org/latest/) is Google's protocol for enabling communication between conversational AI agents. [LangSmith implements A2A support](https://docs.langchain.com/langsmith/server-api-ref#tag/a2a/post/a2a/\{assistant_id}), allowing your agents to communicate with other A2A-compatible agents through a standardized protocol.
+[Agent2Agent (A2A)](https://a2a-protocol.org/latest/) is Google's protocol for enabling communication between conversational AI agents. [LangSmith implements A2A support](server-api-ref.md#tag/a2a/post/a2a/\{assistant_id}), allowing your agents to communicate with other A2A-compatible agents through a standardized protocol.
 
-The A2A endpoint is available in [Agent Server](https://docs.langchain.com/langsmith/agent-server) at `/a2a/{assistant_id}`.
+The A2A endpoint is available in [Agent Server](agent-server.md) at `/a2a/{assistant_id}`.
 
 ## Supported methods
 
@@ -145,7 +145,7 @@ graph = (
 
 ## Agent-to-agent communication
 
-Once your agents are running locally via `langgraph dev` or [deployed to production](https://docs.langchain.com/langsmith/deployment), you can facilitate communication between them using the A2A protocol.
+Once your agents are running locally via `langgraph dev` or [deployed to production](deployment.md), you can facilitate communication between them using the A2A protocol.
 
 This example demonstrates how two agents can communicate by sending JSON-RPC messages to each other's A2A endpoints. The script simulates a multi-turn conversation where each agent processes the other's response and continues the dialogue.
 
@@ -247,7 +247,7 @@ For complete working examples, see:
 
 ## Distributed tracing
 
-When multiple agents communicate over A2A, LangSmith can group all their [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) into a single [thread](https://docs.langchain.com/langsmith/observability-concepts#threads), which gives you a unified view of the entire multi-agent conversation.
+When multiple agents communicate over A2A, LangSmith can group all their [traces](observability-concepts.md#traces) into a single [thread](observability-concepts.md#threads), which gives you a unified view of the entire multi-agent conversation.
 
 ### How contextId maps to thread\_id
 
@@ -257,7 +257,7 @@ The flow works as follows:
 
 1. On the first message, the client omits `contextId`. The server generates one and returns it in the response.
 2. The client passes the `contextId` in all subsequent messages to maintain conversation continuity.
-3. Agent Server maps the `contextId` to `thread_id` in LangSmith [metadata](https://docs.langchain.com/langsmith/add-metadata-tags), so all turns appear in the same thread.
+3. Agent Server maps the `contextId` to `thread_id` in LangSmith [metadata](add-metadata-tags.md), so all turns appear in the same thread.
 
 ### Tracing across multiple agents
 
@@ -356,7 +356,7 @@ asyncio.run(run_conversation(
 
 ### Receive thread\_id in non-LangGraph agents
 
-The [previous section](https://docs.langchain.com/langsmith/server-a2a#tracing-across-multiple-agents) covers the client side—propagating `thread_id` when sending messages. If one of your agents is not built on LangGraph, it also needs to extract and attach the `thread_id` on the receiving end so its traces land in the same LangSmith thread. Use `langsmith.integrations.otel.configure()` to set up automatic tracing, and extract the `thread_id` from incoming A2A request metadata to group traces in the same thread.
+The [previous section](#tracing-across-multiple-agents) covers the client side—propagating `thread_id` when sending messages. If one of your agents is not built on LangGraph, it also needs to extract and attach the `thread_id` on the receiving end so its traces land in the same LangSmith thread. Use `langsmith.integrations.otel.configure()` to set up automatic tracing, and extract the `thread_id` from incoming A2A request metadata to group traces in the same thread.
 
 ```python
 from fastapi import FastAPI, Request

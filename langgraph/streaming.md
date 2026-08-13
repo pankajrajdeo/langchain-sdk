@@ -1,15 +1,17 @@
 # Streaming
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/streaming)
 > [!TIP]
-> For new applications, we recommend [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming)—the typed-projection API introduced in LangGraph v1.2. Event streaming gives you separate iterators per projection (messages, values, subgraphs, output) so you can consume them independently instead of branching on `stream_mode` chunks.
+> For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in LangGraph v1.2. Event streaming gives you separate iterators per projection (messages, values, subgraphs, output) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 This page covers LangGraph's stream-mode API. It exposes graph execution through stream modes such as `updates`, `values`, `messages`, `custom`, `checkpoints`, `tasks`, and `debug`. Use it when you need direct access to graph-runtime events or specific stream-mode output.
 
 ## Get started
 
+<a id="messages"></a>
+
 ### Basic usage
 
-LangGraph graphs expose the [`stream`](https://reference.langchain.com/python/langgraph/pregel/#langgraph.pregel.Pregel.stream) (sync) and [`astream`](https://reference.langchain.com/python/langgraph/pregel/#langgraph.pregel.Pregel.astream) (async) methods to yield streamed outputs as iterators. Pass one or more [stream modes](https://docs.langchain.com/oss/python/langgraph/streaming#stream-modes) to control what data you receive.
+LangGraph graphs expose the [`stream`](https://reference.langchain.com/python/langgraph/pregel/#langgraph.pregel.Pregel.stream) (sync) and [`astream`](https://reference.langchain.com/python/langgraph/pregel/#langgraph.pregel.Pregel.astream) (async) methods to yield streamed outputs as iterators. Pass one or more [stream modes](#stream-modes) to control what data you receive.
 
 ```python
 for chunk in graph.stream(
@@ -74,7 +76,7 @@ Node generate_joke updated: {'joke': 'Why did the ice cream go to school? To get
 </details>
 
 > [!TIP]
-> Debug streaming events, inspect token-by-token LLM output, and monitor latency with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-streaming). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langgraph) to get set up.
+> Debug streaming events, inspect token-by-token LLM output, and monitor latency with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-streaming). Follow the [tracing quickstart](../langsmith/trace-with-langgraph.md) to get set up.
 
 ### Stream output format (v2)
 
@@ -137,13 +139,13 @@ Pass one or more of the following stream modes as a list to the [`stream`](https
 
 | Mode                        | Type                                                                                                  | Description                                                                                                                          |
 | :-------------------------- | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| [values](https://docs.langchain.com/oss/python/langgraph/streaming#graph-state)      | [`ValuesStreamPart`](https://reference.langchain.com/python/langgraph/types/ValuesStreamPart)         | Full state after each step.                                                                                                          |
-| [updates](https://docs.langchain.com/oss/python/langgraph/streaming#graph-state)     | [`UpdatesStreamPart`](https://reference.langchain.com/python/langgraph/types/UpdatesStreamPart)       | State updates after each step. Multiple updates in the same step are streamed separately.                                            |
-| [messages](https://docs.langchain.com/oss/python/langgraph/streaming#llm-tokens)     | [`MessagesStreamPart`](https://reference.langchain.com/python/langgraph/types/MessagesStreamPart)     | 2-tuples of (LLM token, metadata) from LLM calls.                                                                                    |
-| [custom](https://docs.langchain.com/oss/python/langgraph/streaming#custom-data)      | [`CustomStreamPart`](https://reference.langchain.com/python/langgraph/types/CustomStreamPart)         | Custom data emitted from nodes via [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer). |
-| [checkpoints](https://docs.langchain.com/oss/python/langgraph/streaming#checkpoints) | [`CheckpointStreamPart`](https://reference.langchain.com/python/langgraph/types/CheckpointStreamPart) | Checkpoint events (same format as `get_state()`). Requires a checkpointer.                                                           |
-| [tasks](https://docs.langchain.com/oss/python/langgraph/streaming#tasks)             | [`TasksStreamPart`](https://reference.langchain.com/python/langgraph/types/TasksStreamPart)           | Task start/finish events with results and errors. Requires a checkpointer.                                                           |
-| [debug](https://docs.langchain.com/oss/python/langgraph/streaming#debug)             | [`DebugStreamPart`](https://reference.langchain.com/python/langgraph/types/DebugStreamPart)           | All available info — combines `checkpoints` and `tasks` with extra metadata.                                                         |
+| [values](#graph-state)      | [`ValuesStreamPart`](https://reference.langchain.com/python/langgraph/types/ValuesStreamPart)         | Full state after each step.                                                                                                          |
+| [updates](#graph-state)     | [`UpdatesStreamPart`](https://reference.langchain.com/python/langgraph/types/UpdatesStreamPart)       | State updates after each step. Multiple updates in the same step are streamed separately.                                            |
+| [messages](#llm-tokens)     | [`MessagesStreamPart`](https://reference.langchain.com/python/langgraph/types/MessagesStreamPart)     | 2-tuples of (LLM token, metadata) from LLM calls.                                                                                    |
+| [custom](#custom-data)      | [`CustomStreamPart`](https://reference.langchain.com/python/langgraph/types/CustomStreamPart)         | Custom data emitted from nodes via [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer). |
+| [checkpoints](#checkpoints) | [`CheckpointStreamPart`](https://reference.langchain.com/python/langgraph/types/CheckpointStreamPart) | Checkpoint events (same format as `get_state()`). Requires a checkpointer.                                                           |
+| [tasks](#tasks)             | [`TasksStreamPart`](https://reference.langchain.com/python/langgraph/types/TasksStreamPart)           | Task start/finish events with results and errors. Requires a checkpointer.                                                           |
+| [debug](#debug)             | [`DebugStreamPart`](https://reference.langchain.com/python/langgraph/types/DebugStreamPart)           | All available info — combines `checkpoints` and `tasks` with extra metadata.                                                         |
 
 ### Graph state
 
@@ -219,16 +221,16 @@ topic: ice cream and cats, joke: This is a joke about ice cream and cats
 
 Use the `messages` streaming mode to stream Large Language Model (LLM) outputs **token by token** from any part of your graph, including nodes, tools, subgraphs, or tasks.
 
-The streamed output from [`messages` mode](https://docs.langchain.com/oss/python/langgraph/streaming#stream-modes) is a tuple `(message_chunk, metadata)` where:
+The streamed output from [`messages` mode](#stream-modes) is a tuple `(message_chunk, metadata)` where:
 
 * `message_chunk`: the token or message segment from the LLM.
 * `metadata`: a dictionary containing details about the graph node and LLM invocation.
 
-> If your LLM is not available as a LangChain integration, you can stream its outputs using `custom` mode instead. See [use with any LLM](https://docs.langchain.com/oss/python/langgraph/streaming#use-with-any-llm) for details.
+> If your LLM is not available as a LangChain integration, you can stream its outputs using `custom` mode instead. See [use with any LLM](#use-with-any-llm) for details.
 
 > [!WARNING]
 > **Manual config required for async in Python \< 3.11**
-> When using Python \< 3.11 with async code, you must explicitly pass [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to `ainvoke()` to enable proper streaming. See [Async with Python \< 3.11](https://docs.langchain.com/oss/python/langgraph/streaming#async) for details or upgrade to Python 3.11+.
+> When using Python \< 3.11 with async code, you must explicitly pass [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to `ainvoke()` to enable proper streaming. See [Async with Python \< 3.11](#async) for details or upgrade to Python 3.11+.
 
 ```python
 from dataclasses import dataclass
@@ -499,7 +501,7 @@ To send **custom user-defined data** from inside a LangGraph node or tool, follo
 > **No [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer) in async for Python \< 3.11**
 > In async code running on Python \< 3.11, [`get_stream_writer`](https://reference.langchain.com/python/langgraph/config/get_stream_writer) will not work.
 > Instead, add a `writer` parameter to your node or tool and pass it manually.
-> See [Async with Python \< 3.11](https://docs.langchain.com/oss/python/langgraph/streaming#async) for usage examples.
+> See [Async with Python \< 3.11](#async) for usage examples.
 
 #### node
 ```python
@@ -560,7 +562,7 @@ for chunk in graph.stream(inputs, stream_mode="custom", version="v2"):
 
 ### Subgraph outputs
 
-To include outputs from [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs) in the streamed outputs, you can set `subgraphs=True` in the `.stream()` method of the parent graph. This will stream outputs from both the parent graph and any subgraphs.
+To include outputs from [subgraphs](use-subgraphs.md) in the streamed outputs, you can set `subgraphs=True` in the `.stream()` method of the parent graph. This will stream outputs from both the parent graph and any subgraphs.
 
 The outputs will be streamed as tuples `(namespace, data)`, where `namespace` is a tuple with the path to the node where a subgraph is invoked, e.g. `("parent_node:<task_id>", "child_node:<task_id>")`.
 
@@ -682,7 +684,7 @@ Root: {'node_2': {'foo': 'hi! foobar'}}
 
 ### Checkpoints
 
-Use the `checkpoints` streaming mode to receive checkpoint events as the graph executes. Each checkpoint event has the same format as the output of `get_state()`. Requires a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence).
+Use the `checkpoints` streaming mode to receive checkpoint events as the graph executes. Each checkpoint event has the same format as the output of `get_state()`. Requires a [checkpointer](persistence.md).
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -711,7 +713,7 @@ for chunk in graph.stream(
 
 ### Tasks
 
-Use the `tasks` streaming mode to receive task start and finish events as the graph executes. Task events include information about which node is running, its results, and any errors. Requires a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence).
+Use the `tasks` streaming mode to receive task start and finish events as the graph executes. Task events include information about which node is running, its results, and any errors. Requires a [checkpointer](persistence.md).
 
 ```python
 from langgraph.checkpoint.memory import MemorySaver
@@ -774,6 +776,8 @@ for chunk in graph.stream(inputs, stream_mode=["updates", "custom"], version="v2
 for mode, chunk in graph.stream(inputs, stream_mode=["updates", "custom"]):
     print(chunk)
 ```
+
+<a id="async"></a>
 
 ## Advanced
 

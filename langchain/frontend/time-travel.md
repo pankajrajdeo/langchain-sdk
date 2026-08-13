@@ -11,7 +11,7 @@ an audit log all in one.
 > **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/time-travel).
 
 > [!NOTE]
-> This feature requires the [LangGraph Agent Server](https://docs.langchain.com/oss/python/langgraph/local-server). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](https://docs.langchain.com/langsmith/deployment) to use this pattern.
+> This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## How checkpoints work
 
@@ -34,7 +34,7 @@ the LangGraph client for the active thread. Resuming from a checkpoint uses
 `forkFrom: { checkpointId }`.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -432,7 +432,7 @@ Time travel is invaluable across many scenarios:
 
 > [!NOTE]
 > Time travel is especially powerful when combined with
-> [human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop) patterns. If a human reviewer
+> [human-in-the-loop](human-in-the-loop.md) patterns. If a human reviewer
 > rejects an agent's action at an interrupt, they can resume from the checkpoint
 > before the action was taken and provide corrective input.
 

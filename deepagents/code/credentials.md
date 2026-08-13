@@ -2,11 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/credentials)
 Add and manage API keys for model providers, Tavily web search, and LangSmith tracing
 
-Deep Agents Code needs an API key for each model provider you use. The recommended way to add one is the [`/auth`](https://docs.langchain.com/oss/deepagents/code/credentials#use-%2Fauth-recommended) credential manager. For non-interactive runs, manage the same stored keys from the shell with [`dcode auth`](https://docs.langchain.com/oss/deepagents/code/credentials#manage-credentials-from-the-shell-dcode-auth) or set [environment variables](https://docs.langchain.com/oss/deepagents/code/credentials#environment-variables-ci-and-headless) instead.
+Deep Agents Code needs an API key for each model provider you use. The recommended way to add one is the [`/auth`](#use-%2Fauth-recommended) credential manager. For non-interactive runs, manage the same stored keys from the shell with [`dcode auth`](#manage-credentials-from-the-shell-dcode-auth) or set [environment variables](#environment-variables-ci-and-headless) instead.
 
-If the same key is set in more than one place, see [Key resolution order](https://docs.langchain.com/oss/deepagents/code/credentials#key-resolution-order) for which one wins.
+If the same key is set in more than one place, see [Key resolution order](#key-resolution-order) for which one wins.
 
-For `.env` loading order and the `DEEPAGENTS_CODE_` prefix, see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables).
+For `.env` loading order and the `DEEPAGENTS_CODE_` prefix, see [Configuration](configuration.md#environment-variables).
+
+<a id="use-/auth-recommended"></a>
 
 ## Use `/auth` (recommended)
 
@@ -31,7 +33,7 @@ Each row shows the provider name followed by where its key comes from:
 
 </details>
 
-The `/auth` prompt also has an optional **base URL** field. Leave it blank to use the provider's default endpoint, or set a custom one to use with this key. The base URL is saved alongside the key. See [Endpoints, keys, and gateways](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways) for how endpoints resolve, including with gateways.
+The `/auth` prompt also has an optional **base URL** field. Leave it blank to use the provider's default endpoint, or set a custom one to use with this key. The base URL is saved alongside the key. See [Endpoints, keys, and gateways](config-file.md#endpoints-keys-and-gateways) for how endpoints resolve, including with gateways.
 
 > [!WARNING]
 > A stored base URL is not a secret and may be logged; the key paired with it is never logged.
@@ -41,9 +43,9 @@ The `/auth` prompt also has an optional **base URL** field. Leave it blank to us
 
 ### Sign in with ChatGPT
 
-Selecting the `openai_codex` provider in `/auth` starts a browser sign-in instead of prompting for an API key, letting you use OpenAI models with a ChatGPT subscription. To re-authenticate or sign out, select `openai_codex` again. See [Sign in with ChatGPT (Codex models)](https://docs.langchain.com/oss/deepagents/code/providers) for the full flow.
+Selecting the `openai_codex` provider in `/auth` starts a browser sign-in instead of prompting for an API key, letting you use OpenAI models with a ChatGPT subscription. To re-authenticate or sign out, select `openai_codex` again. See [Sign in with ChatGPT (Codex models)](providers.md) for the full flow.
 
-`/auth` manages LLM provider credentials, the Tavily web-search key, and LangSmith tracing. Enter a Tavily key to [activate web search](https://docs.langchain.com/oss/deepagents/code/credentials#enable-web-search-with-tavily) on the next launch. Enter a LangSmith key to enable tracing. Keys are also read from the environment. You can [set them in `~/.deepagents/.env` or your shell](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables).
+`/auth` manages LLM provider credentials, the Tavily web-search key, and LangSmith tracing. Enter a Tavily key to [activate web search](#enable-web-search-with-tavily) on the next launch. Enter a LangSmith key to enable tracing. Keys are also read from the environment. You can [set them in `~/.deepagents/.env` or your shell](configuration.md#environment-variables).
 
 ## Manage credentials from the shell (`dcode auth`)
 
@@ -78,7 +80,7 @@ dcode auth path
 ```
 
 > [!NOTE]
-> `dcode auth set` manages API keys only. The `openai_codex` provider uses a ChatGPT browser sign-in rather than an API key, so run [`/auth` and select `openai_codex`](https://docs.langchain.com/oss/deepagents/code/credentials#sign-in-with-chatgpt) to sign in instead. `dcode auth remove openai_codex` does sign you out.
+> `dcode auth set` manages API keys only. The `openai_codex` provider uses a ChatGPT browser sign-in rather than an API key, so run [`/auth` and select `openai_codex`](#sign-in-with-chatgpt) to sign in instead. `dcode auth remove openai_codex` does sign you out.
 
 ## Environment variables (CI and headless)
 
@@ -93,13 +95,13 @@ export OPENAI_API_KEY="sk-..."
 export DEEPAGENTS_CODE_OPENAI_API_KEY="sk-..."
 ```
 
-To keep keys in a file instead, define them in a [`.env` file](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables).
+To keep keys in a file instead, define them in a [`.env` file](configuration.md#environment-variables).
 
 ## Key resolution order
 
 When a provider's key is set in more than one place, Deep Agents Code uses the first of these that is set:
 
-1. **`DEEPAGENTS_CODE_`-prefixed env var** — for example `DEEPAGENTS_CODE_OPENAI_API_KEY` as an inline shell export. The [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) is the explicit "use this key in Deep Agents Code" override.
+1. **`DEEPAGENTS_CODE_`-prefixed env var** — for example `DEEPAGENTS_CODE_OPENAI_API_KEY` as an inline shell export. The [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) is the explicit "use this key in Deep Agents Code" override.
 2. **App-stored key** — entered in the `/auth` credential manager.
 3. **Plain provider env var** — for example `OPENAI_API_KEY`, from your shell or `.env` files.
 
@@ -116,11 +118,11 @@ DEEPAGENTS_CODE_OPENAI_API_KEY=sk-xxxx dcode -n "..."
 
 This layering exists for the common case where your machine already exports a plain provider variable for some other purpose — a shared `OPENAI_API_KEY` used by other tools, scripts, or CI — that you do not want Deep Agents Code to reuse. An app-stored key or a `DEEPAGENTS_CODE_`-prefixed variable gives Deep Agents Code its own value while leaving the unprefixed one untouched for everything else, so the two never mix.
 
-Each provider's API key and its endpoint (`base_url`) resolve as a pair from the same source. See [Endpoints, keys, and gateways](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways).
+Each provider's API key and its endpoint (`base_url`) resolve as a pair from the same source. See [Endpoints, keys, and gateways](config-file.md#endpoints-keys-and-gateways).
 
 ## Enable web search with Tavily
 
-The built-in `web_search` tool uses [Tavily](https://tavily.com). Deep Agents Code shows a "Web search disabled" notification on startup until you provide a key. You can store the key in the [`/auth`](https://docs.langchain.com/oss/deepagents/code/credentials#use-%2Fauth-recommended) credential manager, where Tavily appears as a non-model service, or set the `TAVILY_API_KEY` environment variable.
+The built-in `web_search` tool uses [Tavily](https://tavily.com). Deep Agents Code shows a "Web search disabled" notification on startup until you provide a key. You can store the key in the [`/auth`](#use-%2Fauth-recommended) credential manager, where Tavily appears as a non-model service, or set the `TAVILY_API_KEY` environment variable.
 
 #### Use /auth (recommended)
 Get a key from [tavily.com](https://tavily.com) (it starts with `tvly-`; the free tier is sufficient for most Deep Agents Code usage), then store it in the credential manager:
@@ -142,17 +144,17 @@ Add the key to `~/.deepagents/.env` so every session picks it up:
 TAVILY_API_KEY=tvly-...
 ```
 
-Shell exports take precedence over `.env` values (see [Loading order and precedence](https://docs.langchain.com/oss/deepagents/code/configuration#loading-order-and-precedence)). To scope a key to Deep Agents Code only without affecting other tools that read `TAVILY_API_KEY`, use the [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix): `DEEPAGENTS_CODE_TAVILY_API_KEY=tvly-...`.
+Shell exports take precedence over `.env` values (see [Loading order and precedence](configuration.md#loading-order-and-precedence)). To scope a key to Deep Agents Code only without affecting other tools that read `TAVILY_API_KEY`, use the [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix): `DEEPAGENTS_CODE_TAVILY_API_KEY=tvly-...`.
 
 ### Reload or restart
 In an existing session, run `/reload` to re-read `.env` files. On the next launch, the "Web search disabled" notification goes away and the agent can call `web_search`.
 
 ## See also
 
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Config file](https://docs.langchain.com/oss/deepagents/code/config-file)
-* [Providers](https://docs.langchain.com/oss/deepagents/code/providers)
-* [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart)
+* [Configuration](configuration.md)
+* [Config file](config-file.md)
+* [Providers](providers.md)
+* [Quickstart](quickstart.md)
 
 ***
 

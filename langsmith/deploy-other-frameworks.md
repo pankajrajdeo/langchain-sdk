@@ -2,22 +2,22 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-other-frameworks)
 Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment.
 
-LangSmith Deployment runs any framework. For agents not built on Deep Agents, LangChain, or LangGraph, deploy using either the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package (Google ADK) or the [LangGraph Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api) (Claude Agent SDK, Strands, CrewAI, AutoGen, and other libraries).
+LangSmith Deployment runs any framework. For agents not built on Deep Agents, LangChain, or LangGraph, deploy using either the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package (Google ADK) or the [LangGraph Functional API](../langgraph/functional-api.md) (Claude Agent SDK, Strands, CrewAI, AutoGen, and other libraries).
 
 > [!TIP]
-> For new builds, consider [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview), an open-source harness for agents that plan, use tools, delegate to subagents, and work over long horizons. Deep Agents deploy directly to LangSmith Deployment, with [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview) available for a fully hosted runtime.
+> For new builds, consider [Deep Agents](../deepagents/overview.md), an open-source harness for agents that plan, use tools, delegate to subagents, and work over long horizons. Deep Agents deploy directly to LangSmith Deployment, with [Managed Deep Agents](python/managed-deep-agents-overview.md) available for a fully hosted runtime.
 
 ## Supported frameworks
 
-The following frameworks have end-to-end examples in this guide. Each example exports a LangGraph-compatible graph from `agent.py` that [Agent Server](https://docs.langchain.com/langsmith/agent-server) can serve:
+The following frameworks have end-to-end examples in this guide. Each example exports a LangGraph-compatible graph from `agent.py` that [Agent Server](agent-server.md) can serve:
 
-- [Claude Agent SDK](https://docs.langchain.com/langsmith/deploy-other-frameworks#general-deployment-pattern)
+- [Claude Agent SDK](#general-deployment-pattern)
 
-- [Strands Agents](https://docs.langchain.com/langsmith/deploy-other-frameworks#general-deployment-pattern)
+- [Strands Agents](#general-deployment-pattern)
 
-- [CrewAI](https://docs.langchain.com/langsmith/deploy-other-frameworks#general-deployment-pattern)
+- [CrewAI](#general-deployment-pattern)
 
-- [AutoGen](https://docs.langchain.com/langsmith/deploy-other-frameworks#general-deployment-pattern)
+- [AutoGen](#general-deployment-pattern)
 
 > [!NOTE]
 > Don't see your framework? The Functional API accepts any callable, so you can apply the same pattern shown in the following examples to any agent library. Wrap your agent's entrypoint with `@task` and `@entrypoint`, then deploy.
@@ -38,11 +38,11 @@ This pattern preserves your framework's execution semantics while giving you sta
 Regardless of framework, you need:
 
 * Python 3.10+ for Functional API frameworks (Strands Agents supports Python 3.9+)
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key)
+* A [LangSmith API key](create-account-api-key.md)
 
 ## General deployment pattern
 
-Follow the same steps for each framework. Choose your stack in the tabs inside each step, combine the snippets in one module (for example `agent.py`), and export the `@entrypoint`-decorated function as a module-level variable named `agent`. The [end-to-end example](https://docs.langchain.com/langsmith/deploy-other-frameworks#end-to-end-example) section shows complete files you can copy.
+Follow the same steps for each framework. Choose your stack in the tabs inside each step, combine the snippets in one module (for example `agent.py`), and export the `@entrypoint`-decorated function as a module-level variable named `agent`. The [end-to-end example](#end-to-end-example) section shows complete files you can copy.
 
 ### Install dependencies
 Install Python packages for your framework plus LangGraph and LangSmith.
@@ -225,10 +225,10 @@ from langsmith.integrations.claude_agent_sdk import configure_claude_agent_sdk
 configure_claude_agent_sdk()
 ```
 
-For full setup details, see [Trace Claude Agent SDK applications](https://docs.langchain.com/langsmith/trace-claude-agent-sdk).
+For full setup details, see [Trace Claude Agent SDK applications](trace-claude-agent-sdk.md).
 
 #### Strands Agents
-Set your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and project name. If you use Amazon Bedrock, also configure AWS credentials.
+Set your [LangSmith API key](create-account-api-key.md) and project name. If you use Amazon Bedrock, also configure AWS credentials.
 
 ```python
 from langsmith.integrations.strands_agents import setup_langsmith_telemetry
@@ -237,12 +237,12 @@ setup_langsmith_telemetry()
 ```
 
 > [!NOTE]
-> If you're [self-hosting LangSmith](https://docs.langchain.com/langsmith/self-hosted), configure the OpenTelemetry OTLP endpoint and headers for your deployment. See [Trace Strands Agents applications](https://docs.langchain.com/langsmith/trace-with-strands-agents).
+> If you're [self-hosting LangSmith](self-hosted.md), configure the OpenTelemetry OTLP endpoint and headers for your deployment. See [Trace Strands Agents applications](trace-with-strands-agents.md).
 
 > [!NOTE]
-> Strands' OTel tracing contains synchronous code. You may need to set `BG_JOB_ISOLATED_LOOPS=true` when deploying to Agent Server. See [`BG_JOB_ISOLATED_LOOPS`](https://docs.langchain.com/langsmith/env-var#bg_job_isolated_loops).
+> Strands' OTel tracing contains synchronous code. You may need to set `BG_JOB_ISOLATED_LOOPS=true` when deploying to Agent Server. See [`BG_JOB_ISOLATED_LOOPS`](env-var.md#bg_job_isolated_loops).
 
-For full setup details, see [Trace Strands Agents applications](https://docs.langchain.com/langsmith/trace-with-strands-agents).
+For full setup details, see [Trace Strands Agents applications](trace-with-strands-agents.md).
 
 #### CrewAI
 Register the LangSmith span processor with the CrewAI and OpenAI instrumentors:
@@ -266,7 +266,7 @@ CrewAIInstrumentor().instrument(tracer_provider=tracer_provider)
 OpenAIInstrumentor().instrument(tracer_provider=tracer_provider)
 ```
 
-For full setup details, see [Trace CrewAI applications](https://docs.langchain.com/langsmith/trace-with-crewai).
+For full setup details, see [Trace CrewAI applications](trace-with-crewai.md).
 
 #### AutoGen
 Register the LangSmith span processor with the OpenAI instrumentor:
@@ -283,7 +283,7 @@ trace.set_tracer_provider(tracer_provider)
 OpenAIInstrumentor().instrument()
 ```
 
-For full setup details, see [Trace AutoGen applications](https://docs.langchain.com/langsmith/trace-with-autogen).
+For full setup details, see [Trace AutoGen applications](trace-with-autogen.md).
 
 ## End-to-end example
 
@@ -446,7 +446,7 @@ my-agent/
 └── .env                  # Provider credentials and LangSmith variables
 ```
 
-[`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts) points Agent Server at the exported symbol:
+[`langgraph.json`](application-structure.md#configuration-file-concepts) points Agent Server at the exported symbol:
 
 #### Claude Agent SDK
 ```json
@@ -587,15 +587,15 @@ pip install -e .
 
 ## Enable tracing
 
-Use the framework-specific `.env` template in [Project layout](https://docs.langchain.com/langsmith/deploy-other-frameworks#project-layout). Agent Server loads this file when `"env": ".env"` is set in `langgraph.json`.
+Use the framework-specific `.env` template in [Project layout](#project-layout). Agent Server loads this file when `"env": ".env"` is set in `langgraph.json`.
 
 Set `LANGSMITH_PROJECT` and your framework provider credentials in that file. For Claude Agent SDK and Strands Agents, also set `LANGSMITH_TRACING=true`. For CrewAI and AutoGen, tracing is enabled in `agent.py` through `OtelSpanProcessor()` and the framework instrumentors, so set `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` only.
 
-[Traces](https://docs.langchain.com/langsmith/observability) show agent invocations, tool calls, and LLM interactions in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-other-frameworks). For framework-specific tracing options, see the links in [Configure tracing](https://docs.langchain.com/langsmith/deploy-other-frameworks#configure-tracing).
+[Traces](observability.md) show agent invocations, tool calls, and LLM interactions in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deploy-other-frameworks). For framework-specific tracing options, see the links in [Configure tracing](#configure-tracing).
 
 ## Run locally
 
-Start the local Agent Server with the [LangGraph CLI](https://docs.langchain.com/langsmith/cli):
+Start the local Agent Server with the [LangGraph CLI](cli.md):
 
 ```bash
 langgraph dev
@@ -604,7 +604,7 @@ langgraph dev
 > [!NOTE]
 > If `langgraph dev` reports that `langgraph-api` is missing, install `langgraph-cli[inmem]` in the same environment.
 
-This serves the agent at `http://127.0.0.1:2024` and opens [LangSmith Studio](https://docs.langchain.com/langsmith/studio). Send a request with `curl`:
+This serves the agent at `http://127.0.0.1:2024` and opens [LangSmith Studio](studio.md). Send a request with `curl`:
 
 > [!NOTE]
 > `langgraph dev` may serve on a different port. Check the URL in the terminal output and update the `curl` commands below if needed.
@@ -652,7 +652,7 @@ curl -s -X POST "http://127.0.0.1:2024/threads/$THREAD/runs/wait" \
 Replace `ASSISTANT_ID` with the graph key from your `langgraph.json` `graphs` object. For example, if your config is `"graphs": {"claude_agent": "./agent.py:agent"}`, use `claude_agent`; if your config is `"graphs": {"strands_agent": "./agent.py:agent"}`, use `strands_agent`.
 
 > [!NOTE]
-> [Verify that the LangGraph API runs locally](https://docs.langchain.com/langsmith/local-dev-testing) before deploying. If `langgraph dev` fails, deployment to LangSmith will fail as well.
+> [Verify that the LangGraph API runs locally](local-dev-testing.md) before deploying. If `langgraph dev` fails, deployment to LangSmith will fail as well.
 
 ## Deploy to LangSmith
 
@@ -662,7 +662,7 @@ Once the agent runs locally, deploy it with `langgraph deploy`:
 langgraph deploy --name my-agent
 ```
 
-For environment configuration, deployment types, and revision management, see [Deploy to cloud](https://docs.langchain.com/langsmith/deploy-to-cloud). For self-hosted setups, see [Self-hosted deployments](https://docs.langchain.com/langsmith/self-hosted). For Docker-only hosting without the control plane, see [Deploy standalone](https://docs.langchain.com/langsmith/deploy-standalone-server).
+For environment configuration, deployment types, and revision management, see [Deploy to cloud](deploy-to-cloud.md). For self-hosted setups, see [Self-hosted deployments](self-hosted.md). For Docker-only hosting without the control plane, see [Deploy standalone](deploy-standalone-server.md).
 
 ***
 

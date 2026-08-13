@@ -4,7 +4,7 @@
 
 > [Databricks](https://www.databricks.com/) Lakehouse Platform unifies data, analytics, and AI on one platform.
 
-This guide provides a quick overview for getting started with `DatabricksEmbeddings` [embedding models](https://docs.langchain.com/oss/python/integrations/embeddings). For detailed documentation of all `DatabricksEmbeddings` features and configurations head to the [API reference](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings).
+This guide provides a quick overview for getting started with `DatabricksEmbeddings` [embedding models](../embeddings.md). For detailed documentation of all `DatabricksEmbeddings` features and configurations head to the [API reference](https://api-docs.databricks.com/python/databricks-ai-bridge/latest/databricks_langchain.html#databricks_langchain.DatabricksEmbeddings).
 
 ## Overview
 
@@ -71,7 +71,7 @@ embeddings = DatabricksEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 

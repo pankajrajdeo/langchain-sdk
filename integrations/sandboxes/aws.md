@@ -16,7 +16,7 @@ uv add langchain-agentcore-codeinterpreter
 
 ## Create a sandbox backend
 
-See the [sandboxes guide](https://docs.langchain.com/oss/python/deepagents/sandboxes) for usage, file operations, and lifecycle details.
+See the [sandboxes guide](../../deepagents/sandboxes.md) for usage, file operations, and lifecycle details.
 
 ```python
 from bedrock_agentcore.tools.code_interpreter_client import CodeInterpreter
@@ -64,7 +64,7 @@ finally:
 
 Always stop the interpreter when you are done to release resources.
 
-See also: [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
+See also: [Sandboxes](../../deepagents/sandboxes.md).
 
 ***
 

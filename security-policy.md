@@ -33,7 +33,7 @@ Please report security vulnerabilities associated with the LangChain open source
 1. **Submit a security advisory** on the Security tab in the GitHubrepository where the vulnerability exists.
 2. **Send an email** to `security@langchain.dev` notifying us that you've filed a security issue and which repository it was filed in.
 
-Before reporting a vulnerability, please review the [Best Practices](https://docs.langchain.com/oss/python/security-policy#best-practices) above to understand what we consider to be a security vulnerability vs. developer responsibility.
+Before reporting a vulnerability, please review the [Best Practices](#best-practices) above to understand what we consider to be a security vulnerability vs. developer responsibility.
 
 ### Bug bounty eligibility
 
@@ -53,7 +53,7 @@ The following are out-of-scope for security vulnerability reports:
 * **langchain-experimental**: This archived repository is for experimental code and is not in scope for security reports (see [package warning](https://pypi.org/project/langchain-experimental/)).
 * **Examples and example applications**: Example code and demo applications are not in scope for security reports.
 * **Code documented with security notices**: This will be decided on a case-by-case basis, but likely will not be in scope as the code is already documented with guidelines for developers that should be followed for making their application secure.
-* **LangSmith related repositories or APIs**: See [Reporting LangSmith Vulnerabilities](https://docs.langchain.com/oss/python/security-policy#reporting-langsmith-vulnerabilities) below.
+* **LangSmith related repositories or APIs**: See [Reporting LangSmith Vulnerabilities](#reporting-langsmith-vulnerabilities) below.
 
 ## Reporting LangSmith vulnerabilities
 

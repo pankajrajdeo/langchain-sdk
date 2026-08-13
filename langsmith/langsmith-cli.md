@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langsmith-cli)
 Query and manage LangSmith projects, traces, runs, datasets, evaluators, experiments, and threads from the terminal
 
-The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs JSON by default for scripting, with a `--format pretty` option for human-readable tables. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](https://docs.langchain.com/langsmith/observability-concepts).
+The LangSmith CLI is a command-line tool for querying and managing your LangSmith data. It's designed for both developers and AI coding agents and outputs JSON by default for scripting, with a `--format pretty` option for human-readable tables. Use it when you need scriptable access to your LangSmith data, such as bulk exports, automation, or giving a coding agent direct access to your [traces, runs, and datasets](observability-concepts.md).
 
 ## Install
 
@@ -40,7 +40,7 @@ langsmith self-update
 Use the `--dry-run` flag to preview the update without installing.
 
 > [!NOTE]
-> Querying a [SmithDB](https://docs.langchain.com/langsmith/smithdb-sdk-migration)-backed deployment requires LangSmith CLI `v0.2.44` or later.
+> Querying a [SmithDB](smithdb-sdk-migration.md)-backed deployment requires LangSmith CLI `v0.2.44` or later.
 
 ## Authenticate
 
@@ -49,13 +49,13 @@ Use the `--dry-run` flag to preview the update without installing.
 The recommended local setup is to authenticate with OAuth:
 
 > [!NOTE]
-> `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and newer, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled (requires a signing JWKS to be configured). See [Self-hosted instances](https://docs.langchain.com/langsmith/langsmith-cli#self-hosted-instances). On earlier deployments, or without a signing JWKS, authenticate with an API key or create an API-key profile.
+> `langsmith auth login` also works against self-hosted instances from LangSmith CLI `v0.2.46` and newer, provided the deployment is on LangSmith `0.16` or later with the OAuth authorization server enabled (requires a signing JWKS to be configured). See [Self-hosted instances](#self-hosted-instances). On earlier deployments, or without a signing JWKS, authenticate with an API key or create an API-key profile.
 
 ```bash
 langsmith auth login
 ```
 
-This opens a browser-based authorization flow and stores OAuth tokens in `~/.langsmith/config.json` under the selected [profile](https://docs.langchain.com/langsmith/profile-configuration). Select a profile with `--profile` or `LANGSMITH_PROFILE`:
+This opens a browser-based authorization flow and stores OAuth tokens in `~/.langsmith/config.json` under the selected [profile](profile-configuration.md). Select a profile with `--profile` or `LANGSMITH_PROFILE`:
 
 ```bash
 langsmith auth login --profile dev
@@ -77,11 +77,11 @@ langsmith profile use dev
 langsmith profile set-workspace <workspace-id>
 ```
 
-For the full profile configuration reference, see [Profile configuration](https://docs.langchain.com/langsmith/profile-configuration).
+For the full profile configuration reference, see [Profile configuration](profile-configuration.md).
 
 You can also authenticate with an API key directly.
 
-Set your [API key](https://docs.langchain.com/langsmith/create-account-api-key) as an environment variable:
+Set your [API key](create-account-api-key.md) as an environment variable:
 
 ```bash
 export LANGSMITH_API_KEY="lsv2_..."
@@ -93,7 +93,7 @@ Optionally, set a default project for queries:
 export LANGSMITH_PROJECT="my-default-project"
 ```
 
-If you're using LangSmith [self-hosted](https://docs.langchain.com/langsmith/self-hosted), also set the endpoint:
+If you're using LangSmith [self-hosted](self-hosted.md), also set the endpoint:
 
 ```bash
 export LANGSMITH_ENDPOINT="https://your-langsmith-instance.com"
@@ -110,7 +110,7 @@ langsmith --api-key lsv2_... trace list --project my-app
 Point the CLI at your instance with `--api-url`, or with `LANGSMITH_ENDPOINT`. Both the browser-based login and API keys are supported.
 
 #### OAuth
-Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you configure a signing JWKS. For setup steps, see [Enabling Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp#enabling-remote-mcp).
+Requires LangSmith CLI `v0.2.46` or later and a deployment on LangSmith `0.16` or later, with the OAuth authorization server enabled. The chart exposes the OAuth authorization server under `/api`, but those endpoints stay inert until you configure a signing JWKS. For setup steps, see [Enabling Remote MCP](langsmith-remote-mcp.md#enabling-remote-mcp).
 
 The OAuth authorization server is enabled automatically when `config.hostname` is set in your Helm chart **and** a signing JWKS is configured (via `config.signingJwks`, or the key `langsmith_signing_jwks` in `config.existingSecretName`). Without the signing JWKS, the OAuth endpoints are inactive and the CLI will receive a `404` — use the API key tab instead.
 
@@ -203,11 +203,11 @@ langsmith trace list --project my-app -o traces.json
 
 ## Commands
 
-Each command group targets a specific LangSmith resource. Most commands support `--limit`, `--offset`, and a shared set of [filter flags](https://docs.langchain.com/langsmith/langsmith-cli#filter-flags).
+Each command group targets a specific LangSmith resource. Most commands support `--limit`, `--offset`, and a shared set of [filter flags](#filter-flags).
 
 ### List projects
 
-Returns up to 20 projects by default, sorted by most recent activity. Lists tracing projects only. (Use [`experiment list`](https://docs.langchain.com/langsmith/langsmith-cli#view-experiments) to list evaluation experiments.)
+Returns up to 20 projects by default, sorted by most recent activity. Lists tracing projects only. (Use [`experiment list`](#view-experiments) to list evaluation experiments.)
 
 ```bash
 langsmith project list
@@ -296,7 +296,7 @@ langsmith evaluator delete accuracy --yes
 
 ### View experiments
 
-`experiment list` shows evaluation experiments, not tracing projects. (Use [`project list`](https://docs.langchain.com/langsmith/langsmith-cli#list-projects) to list tracing projects.)
+`experiment list` shows evaluation experiments, not tracing projects. (Use [`project list`](#list-projects) to list tracing projects.)
 
 ```bash
 langsmith experiment list
@@ -308,7 +308,7 @@ langsmith experiment get my-experiment-2024-01-15
 
 Sandbox commands let you build snapshots, create sandboxes, execute commands, open interactive consoles, and tunnel TCP ports to services running inside sandboxes.
 
-See [Sandbox CLI](https://docs.langchain.com/langsmith/sandbox-cli) for the full sandbox command reference.
+See [Sandbox CLI](sandbox-cli.md) for the full sandbox command reference.
 
 ### Call the LangSmith API directly
 

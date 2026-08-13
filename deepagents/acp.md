@@ -6,7 +6,7 @@ Expose Deep Agents over the Agent Client Protocol (ACP) to integrate with code e
 With the ACP protocol, you can make use of your custom deep agents with any ACP-compatible client, allowing your code editor to provide project context and receive rich updates.
 
 > [!NOTE]
-> ACP is designed for agent-editor integrations. If you want your agent to call tools hosted by external servers, see [Model Context Protocol (MCP)](https://docs.langchain.com/oss/python/langchain/mcp/).
+> ACP is designed for agent-editor integrations. If you want your agent to call tools hosted by external servers, see [Model Context Protocol (MCP)](../langchain/mcp.md).
 
 ## Quickstart
 

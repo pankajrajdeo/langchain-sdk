@@ -19,7 +19,7 @@
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | Image input | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ❌                      |                      ✅ (research models)                     |      ❌      |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ❌                            |                              ❌                             |
 
@@ -233,7 +233,7 @@ llm = ChatParallel(
 )
 ```
 
-For structured output, prefer `ChatParallel.with_structured_output(...)` (see [Structured output](https://docs.langchain.com/oss/python/integrations/chat/parallel#structured-output)) over passing `response_format` directly. It works on the research models and returns a parsed object.
+For structured output, prefer `ChatParallel.with_structured_output(...)` (see [Structured output](#structured-output)) over passing `response_format` directly. It works on the research models and returns a parsed object.
 
 ## Message handling
 

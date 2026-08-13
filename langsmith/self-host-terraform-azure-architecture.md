@@ -12,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * Add-ons: LangSmith Deployment, Agent Builder, Insights, and Polly.
 * Ingress controllers, resource sizing, and optional modules.
 
-If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy).
+If you are ready to install, start with the [deployment walkthrough](self-host-terraform-azure-deploy.md).
 
 ## Platform layers
 
 LangSmith on Azure deploys in stages. Each stage adds a capability layer on top of the previous. All layers share the same AKS cluster and `langsmith` namespace.
 
-> **Image:** [LangSmith on Azure service layout](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture)
+> **Image:** [LangSmith on Azure service layout](self-host-terraform-azure-architecture.md)
 
 | Stage                       | Layer                | What it adds                                                                                  |
 | --------------------------- | -------------------- | --------------------------------------------------------------------------------------------- |
@@ -117,10 +117,10 @@ All subnets are private. Postgres and Redis have no public endpoints; both are a
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica, 500Gi PVC | No                |
 
 > [!WARNING]
-> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external cluster.
 
 > [!NOTE]
-> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](smithdb-sdk-migration.md#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 
@@ -307,7 +307,7 @@ Four sizing profiles are available.
 | large   | `Standard_D16s_v3` | 16   | 64 GB | 0   | 2   | ClickHouse (in-cluster), LGP agent pods                |
 
 > [!NOTE]
-> ClickHouse (when in-cluster) requests 1 to 4 CPU and 2 to 16 GB RAM depending on profile. With [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse), the `large` pool is only needed for LGP operator-spawned agent pods.
+> ClickHouse (when in-cluster) requests 1 to 4 CPU and 2 to 16 GB RAM depending on profile. With [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md), the `large` pool is only needed for LGP operator-spawned agent pods.
 
 ## Optional modules
 

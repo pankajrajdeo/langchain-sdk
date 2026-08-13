@@ -1,12 +1,12 @@
 # Evaluation quickstart
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-quickstart)
-[*Evaluations*](https://docs.langchain.com/langsmith/evaluation-concepts) are a quantitative way to measure the performance of LLM applications. LLMs can behave unpredictably, even small changes to prompts, models, or inputs can significantly affect results. Evaluations provide a structured way to identify failures, compare versions, and build more reliable AI applications.
+[*Evaluations*](evaluation-concepts.md) are a quantitative way to measure the performance of LLM applications. LLMs can behave unpredictably, even small changes to prompts, models, or inputs can significantly affect results. Evaluations provide a structured way to identify failures, compare versions, and build more reliable AI applications.
 
 Running an evaluation in LangSmith requires three key components:
 
-* [*Dataset*](https://docs.langchain.com/langsmith/evaluation-concepts#datasets): A set of test inputs (and optionally, expected outputs).
-* [*Target function*](https://docs.langchain.com/langsmith/define-target-function): The part of your application you want to test—this might be a single LLM call with a new prompt, one module, or your entire workflow.
-* [*Evaluators*](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators): Functions that score your target function’s outputs.
+* [*Dataset*](evaluation-concepts.md#datasets): A set of test inputs (and optionally, expected outputs).
+* [*Target function*](define-target-function.md): The part of your application you want to test—this might be a single LLM call with a new prompt, one module, or your entire workflow.
+* [*Evaluators*](evaluation-concepts.md#evaluators): Functions that score your target function’s outputs.
 
 This quickstart guides you through running a starter evaluation that checks the correctness of LLM responses, using either the LangSmith SDK or UI.
 
@@ -15,7 +15,7 @@ This quickstart guides you through running a starter evaluation that checks the 
 Before you begin, make sure you have:
 
 * **A LangSmith account**: Sign up or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluation-quickstart).
-* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](create-account-api-key.md) guide.
 * **An OpenAI API key**: Generate this from the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
 
 **Select the UI or SDK filter for instructions:**
@@ -23,7 +23,7 @@ Before you begin, make sure you have:
 #### UI
 ## 1. Set workspace secrets
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](https://docs.langchain.com/langsmith/set-up-hierarchy#configure-workspace-settings).
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=snippets-langsmith-set-workspace-secrets), ensure that your API key is set as a [workspace secret](set-up-hierarchy.md#configure-workspace-settings).
 
 1. Navigate to  **Settings** and then move to the **Secrets** tab.
 2. Select **Add secret** and enter the key environment variable (e.g.,`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`) and your API key as the **Value**.
@@ -31,11 +31,11 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
  When adding workspace secrets in the LangSmith UI, make sure the secret keys match the environment variable names expected by your model provider.
 
-If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
+If your provider authenticates with OAuth2 `client_credentials`, configure the credentials on the model configuration instead. Workspace secrets are not required in that case. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
 
 ## 2. Create a prompt
 
-The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) makes it possible to run evaluations over different prompts, new models, or test different model configurations.
+The [Playground](prompt-engineering-concepts.md#playground) makes it possible to run evaluations over different prompts, new models, or test different model configurations.
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluation-quickstart), click **Playground** in the sidebar.
 2. Under the **Prompts** panel, modify the **system** prompt to:
@@ -52,9 +52,9 @@ The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concept
 
 2. In the **Select or create a new dataset** dropdown, click the **+ New** button to create a new dataset.
 
-> **Image:** [Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset.](evaluation-quickstart.md)
 
-> **Image:** [Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Playground with the edited system prompt and new experiment with the dropdown for creating a new dataset.](evaluation-quickstart.md)
 
 3. Add the following examples to the dataset:
 
@@ -72,24 +72,24 @@ The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concept
 
 ## 5. Run your evaluation
 
-1. Select  **Start** on the top right to run your evaluation. This will create an [*experiment*](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) with a preview in the **New Experiment** table. You can view in full by clicking the experiment name.
+1. Select  **Start** on the top right to run your evaluation. This will create an [*experiment*](evaluation-concepts.md#experiment) with a preview in the **New Experiment** table. You can view in full by clicking the experiment name.
 
-> **Image:** [Full experiment view of the results that used the example dataset.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Full experiment view of the results that used the example dataset.](evaluation-quickstart.md)
 
-> **Image:** [Full experiment view of the results that used the example dataset.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Full experiment view of the results that used the example dataset.](evaluation-quickstart.md)
 
 ## Next steps
 
 > [!TIP]
-> To learn more about running experiments in LangSmith, read the [evaluation conceptual guide](https://docs.langchain.com/langsmith/evaluation-concepts).
+> To learn more about running experiments in LangSmith, read the [evaluation conceptual guide](evaluation-concepts.md).
 
-* For more details on evaluations, refer to the [Evaluation documentation](https://docs.langchain.com/langsmith/evaluation).
-* Learn how to [create and manage datasets in the UI](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples).
-* Learn how to [run an evaluation from the Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground).
+* For more details on evaluations, refer to the [Evaluation documentation](evaluation.md).
+* Learn how to [create and manage datasets in the UI](manage-datasets-in-application.md#create-a-dataset-and-add-examples).
+* Learn how to [run an evaluation from the Playground](run-evaluation-from-playground.md).
 
 #### SDK
 > [!TIP]
-> This guide uses prebuilt LLM-as-judge evaluators from the open-source [`openevals`](https://github.com/langchain-ai/openevals) package. OpenEvals includes a set of commonly used evaluators and is a great starting point if you're new to evaluations. If you want greater flexibility in how you evaluate your apps, you can also [define completely custom evaluators](https://docs.langchain.com/langsmith/code-evaluator-ui).
+> This guide uses prebuilt LLM-as-judge evaluators from the open-source [`openevals`](https://github.com/langchain-ai/openevals) package. OpenEvals includes a set of commonly used evaluators and is a great starting point if you're new to evaluations. If you want greater flexibility in how you evaluate your apps, you can also [define completely custom evaluators](code-evaluator-ui.md).
 
 ## 1. Install dependencies
 
@@ -110,7 +110,7 @@ npx tsc --init
 ```
 
 > [!NOTE]
-> If you are using `yarn` as your package manager, you will also need to manually install `@langchain/core` as a peer dependency of `openevals`. This is not required for LangSmith evals in general, you may define evaluators [using arbitrary custom code](https://docs.langchain.com/langsmith/code-evaluator-ui).
+> If you are using `yarn` as your package manager, you will also need to manually install `@langchain/core` as a peer dependency of `openevals`. This is not required for LangSmith evals in general, you may define evaluators [using arbitrary custom code](code-evaluator-ui.md).
 
 ## 2. Set up environment variables
 
@@ -119,7 +119,7 @@ Set the following environment variables:
 * `LANGSMITH_TRACING`
 * `LANGSMITH_API_KEY`
 * `OPENAI_API_KEY` (or your LLM provider's API key)
-* (optional) `LANGSMITH_WORKSPACE_ID`: If your LangSmith API key is linked to multiple [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces), set this variable to specify which workspace to use.
+* (optional) `LANGSMITH_WORKSPACE_ID`: If your LangSmith API key is linked to multiple [workspaces](administration-overview.md#workspaces), set this variable to specify which workspace to use.
 
 ```bash
 export LANGSMITH_TRACING=true
@@ -129,7 +129,7 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 ```
 
 > [!NOTE]
-> If you're using Anthropic, use the [Anthropic wrapper](https://docs.langchain.com/langsmith/trace-anthropic) to trace your calls. For other providers, use [the traceable wrapper](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable).
+> If you're using Anthropic, use the [Anthropic wrapper](trace-anthropic.md) to trace your calls. For other providers, use [the traceable wrapper](annotate-code.md#use-%40traceable-%2F-traceable).
 
 ## 3. Create a dataset
 
@@ -137,7 +137,7 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 
    * Import the `Client` to connect to LangSmith.
    * Create a dataset.
-   * Define example [*inputs* and *outputs*](https://docs.langchain.com/langsmith/evaluation-concepts#examples).
+   * Define example [*inputs* and *outputs*](evaluation-concepts.md#examples).
    * Associate the input and output pairs with that dataset in LangSmith so they can be used in evaluations.
 
 ```python
@@ -231,7 +231,7 @@ export LANGSMITH_WORKSPACE_ID="<your-workspace-id>"
 
 ## 4. Create your target function
 
-Define a [target function](https://docs.langchain.com/langsmith/define-target-function) that contains what you're evaluating. In this guide, you'll define a target function that contains a single LLM call to answer a question.
+Define a [target function](define-target-function.md) that contains what you're evaluating. In this guide, you'll define a target function that contains a single LLM call to answer a question.
 
 Add the following to an `eval` file:
 
@@ -281,7 +281,7 @@ async function target(inputs: Record<string, any>): Promise<Record<string, any>>
 
 In this step, you’re telling LangSmith how to grade the answers your app produces.
 
-Import a prebuilt evaluation prompt (`CORRECTNESS_PROMPT`) from [`openevals`](https://github.com/langchain-ai/openevals) and a helper that wraps it into an [*LLM-as-judge evaluator*](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge), which will score the application's output.
+Import a prebuilt evaluation prompt (`CORRECTNESS_PROMPT`) from [`openevals`](https://github.com/langchain-ai/openevals) and a helper that wraps it into an [*LLM-as-judge evaluator*](evaluation-concepts.md#llm-as-judge), which will score the application's output.
 
 > [!NOTE]
 > `CORRECTNESS_PROMPT` is just an f-string with variables for `"inputs"`, `"outputs"`, and `"reference_outputs"`. See [customizing OpenEvals prompts](https://github.com/langchain-ai/openevals#customizing-prompts) for more information.
@@ -290,7 +290,7 @@ The evaluator compares:
 
 * `inputs`: what was passed into your target function (e.g., the question text).
 * `outputs`: what your target function returned (e.g., the model’s answer).
-* `reference_outputs`: the ground truth answers you attached to each dataset example in [Step 3](https://docs.langchain.com/langsmith/evaluation-quickstart#3-create-a-dataset).
+* `reference_outputs`: the ground truth answers you attached to each dataset example in [Step 3](#3-create-a-dataset).
 
 Add the following highlighted code to your `eval` file:
 
@@ -372,10 +372,10 @@ async function correctnessEvaluator(run: {
 
 To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
-* Pulls example from the dataset you created in [Step 3](https://docs.langchain.com/langsmith/evaluation-quickstart#3-create-a-dataset).
-* Sends each example's inputs to your target function from [Step 4](https://docs.langchain.com/langsmith/evaluation-quickstart#4-add-an-evaluator).
+* Pulls example from the dataset you created in [Step 3](#3-create-a-dataset).
+* Sends each example's inputs to your target function from [Step 4](#4-add-an-evaluator).
 * Collects the outputs (the model's answers).
-* Passes the outputs along with the `reference_outputs` to your evaluator from [Step 5](https://docs.langchain.com/langsmith/evaluation-quickstart#5-define-an-evaluator).
+* Passes the outputs along with the `reference_outputs` to your evaluator from [Step 5](#5-define-an-evaluator).
 * Records all results in LangSmith as an experiment, so you can view them in the UI.
 
 1. Add the highlighted code to your `eval` file:
@@ -512,17 +512,17 @@ To run the evaluation experiment, you'll call `evaluate(...)`, which:
 
 4. Follow the link in the output of your evaluation run to access the **Datasets & Experiments** page in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluation-quickstart), and explore the results of the experiment. This will direct you to the created experiment with a table showing the **Inputs**, **Reference Output**, and **Outputs**. You can select a dataset to open an expanded view of the results.
 
-> **Image:** [Experiment results in the UI after following the link.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Experiment results in the UI after following the link.](evaluation-quickstart.md)
 
-> **Image:** [Experiment results in the UI after following the link.](https://docs.langchain.com/langsmith/evaluation-quickstart)
+> **Image:** [Experiment results in the UI after following the link.](evaluation-quickstart.md)
 
 ## Next steps
 
 Here are some topics you might want to explore next:
 
-* [Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts) provides descriptions of the key terminology for evaluations in LangSmith.
+* [Evaluation concepts](evaluation-concepts.md) provides descriptions of the key terminology for evaluations in LangSmith.
 * [OpenEvals README](https://github.com/langchain-ai/openevals) to see all available prebuilt evaluators and how to customize them.
-* [Define custom evaluators](https://docs.langchain.com/langsmith/code-evaluator-ui).
+* [Define custom evaluators](code-evaluator-ui.md).
 * [Python](https://docs.smith.langchain.com/reference/python/reference) or [TypeScript](https://docs.smith.langchain.com/reference/js) SDK references for comprehensive descriptions of every class and function.
 
 ***

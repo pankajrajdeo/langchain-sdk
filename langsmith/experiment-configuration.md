@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/experiment-configuration)
 LangSmith supports several configuration options for experiments:
 
-* [Repetitions](https://docs.langchain.com/langsmith/experiment-configuration#repetitions)
-* [Concurrency](https://docs.langchain.com/langsmith/experiment-configuration#concurrency)
-* [Caching](https://docs.langchain.com/langsmith/experiment-configuration#caching)
+* [Repetitions](#repetitions)
+* [Concurrency](#concurrency)
+* [Caching](#caching)
 
 ### Repetitions
 
@@ -12,7 +12,7 @@ LangSmith supports several configuration options for experiments:
 
 Configure repetitions by passing the `num_repetitions` argument to `evaluate` / `aevaluate` ([Python](https://reference.langchain.com/python/langsmith/evaluation/_runner/evaluate), [TypeScript](https://reference.langchain.com/javascript/langsmith/evaluation/EvaluateOptions#member-numRepetitions-9)). Each repetition re-runs both the target function and all evaluators.
 
-Learn more in the [repetitions how-to guide](https://docs.langchain.com/langsmith/repetition).
+Learn more in the [repetitions how-to guide](repetition.md).
 
 ### Concurrency
 

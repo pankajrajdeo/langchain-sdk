@@ -2,19 +2,19 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/stores)
 LangGraph stores provide cross-thread long-term memory, complementing per-thread checkpointer persistence.
 
-Stores let agents persist information across threads, including user preferences, accumulated knowledge, and facts that should survive beyond a single conversation. Unlike [checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers), which save the full graph state scoped to one thread, stores hold arbitrary key-value data accessible from any thread.
+Stores let agents persist information across threads, including user preferences, accumulated knowledge, and facts that should survive beyond a single conversation. Unlike [checkpointers](checkpointers.md), which save the full graph state scoped to one thread, stores hold arbitrary key-value data accessible from any thread.
 
-> **Image:** [Model of shared state](https://docs.langchain.com/oss/python/langgraph/stores)
+> **Image:** [Model of shared state](stores.md)
 
 > [!NOTE]
 > **Agent Server handles stores automatically**
-> When using the [Agent Server](https://docs.langchain.com/langsmith/agent-server), you do not need to implement or configure stores manually. The API handles all storage infrastructure for you behind the scenes.
+> When using the [Agent Server](../langsmith/agent-server.md), you do not need to implement or configure stores manually. The API handles all storage infrastructure for you behind the scenes.
 
 > [!NOTE]
 > [InMemoryStore](https://reference.langchain.com/python/langchain-core/stores/InMemoryStore) is suitable for development and testing. For production, use a persistent store like `PostgresStore`, `MongoDBStore`, `RedisStore`, or `UpstashStore`. All implementations extend [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore), which is the type annotation to use in node function signatures.
 
 > [!NOTE]
-> See [store integrations](https://docs.langchain.com/oss/python/integrations/long-term-memory/index) for the full list of available providers.
+> See [store integrations](../integrations/long-term-memory/index.md) for the full list of available providers.
 
 ## Basic usage
 
@@ -40,7 +40,7 @@ memory = {"food_preference" : "I like pizza"}
 store.put(namespace_for_memory, memory_id, memory)
 ```
 
-Read out memories from your namespace using the `store.search` method, which returns memories for a given user as a list, up to the `limit` argument (default `10`). With `InMemoryStore`, items are returned in insertion order, so the most recent memory is last in the list; other backends may order memories differently (see [Listing items in a namespace](https://docs.langchain.com/oss/python/langgraph/stores#listing-items-in-a-namespace)).
+Read out memories from your namespace using the `store.search` method, which returns memories for a given user as a list, up to the `limit` argument (default `10`). With `InMemoryStore`, items are returned in insertion order, so the most recent memory is last in the list; other backends may order memories differently (see [Listing items in a namespace](#listing-items-in-a-namespace)).
 
 ```python
 memories = store.search(namespace_for_memory)
@@ -278,7 +278,7 @@ for update in graph.stream(
     print(update)
 ```
 
-When you use LangSmith locally (e.g., in [Studio](https://docs.langchain.com/langsmith/studio)) or [hosted](https://docs.langchain.com/langsmith/platform-setup), the base store is available to use by default and you do not need to specify it during graph compilation. To enable semantic search, however, you **do** need to configure the indexing settings in your `langgraph.json` file. For example:
+When you use LangSmith locally (e.g., in [Studio](../langsmith/studio.md)) or [hosted](../langsmith/platform-setup.md), the base store is available to use by default and you do not need to specify it during graph compilation. To enable semantic search, however, you **do** need to configure the indexing settings in your `langgraph.json` file. For example:
 
 ```json
 {
@@ -293,7 +293,7 @@ When you use LangSmith locally (e.g., in [Studio](https://docs.langchain.com/lan
 }
 ```
 
-See the [deployment guide](https://docs.langchain.com/langsmith/semantic-search) for more details and configuration options.
+See the [deployment guide](../langsmith/semantic-search.md) for more details and configuration options.
 
 ## Build a custom store
 
@@ -397,8 +397,8 @@ async def test_search_prefix(store, reference):
 
 ### Next steps
 
-* [Add a custom store to Agent Server](https://docs.langchain.com/langsmith/custom-store) — deploying your implementation
-* [Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers) — thread-scoped state persistence
+* [Add a custom store to Agent Server](../langsmith/custom-store.md) — deploying your implementation
+* [Checkpointers](checkpointers.md) — thread-scoped state persistence
 
 ***
 

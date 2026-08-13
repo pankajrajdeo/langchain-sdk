@@ -1,20 +1,20 @@
 # Query traces using the SDK
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/export-traces)
-The recommended way to query [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) (the span data in LangSmith traces) is to use the `list_runs` method in the [SDK](https://reference.langchain.com/python/langsmith/) or `/runs/query` endpoint in the [API](https://docs.langchain.com/langsmith/smith-api-ref). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format).
+The recommended way to query [runs](observability-concepts.md#runs) (the span data in LangSmith traces) is to use the `list_runs` method in the [SDK](https://reference.langchain.com/python/langsmith/) or `/runs/query` endpoint in the [API](smith-api-ref.md). LangSmith stores traces in a simple format that is specified in the [Run (span) data format](run-data-format.md).
 
 This page covers:
 
-* [Use filter arguments](https://docs.langchain.com/langsmith/export-traces#use-filter-arguments): keyword-based filtering using SDK parameters.
-* [Use filter query language](https://docs.langchain.com/langsmith/export-traces#use-filter-query-language): complex queries using LangSmith's filter syntax.
-* [Query trace trees with child-run predicates](https://docs.langchain.com/langsmith/export-traces#query-trace-trees-with-child-run-predicates): combine server-side narrowing with local child-run traversal.
-* [Rate limits](https://docs.langchain.com/langsmith/export-traces#rate-limits): per-tenant limits and best practices for staying within them.
+* [Use filter arguments](#use-filter-arguments): keyword-based filtering using SDK parameters.
+* [Use filter query language](#use-filter-query-language): complex queries using LangSmith's filter syntax.
+* [Query trace trees with child-run predicates](#query-trace-trees-with-child-run-predicates): combine server-side narrowing with local child-run traversal.
+* [Rate limits](#rate-limits): per-tenant limits and best practices for staying within them.
 
 > [!NOTE]
-> If you are looking to export a large volume of traces, we recommend that you use the [Bulk Data Export](https://docs.langchain.com/langsmith/data-export) functionality, as it will better handle large data volumes and will support automatic retries and parallelization across partitions.
+> If you are looking to export a large volume of traces, we recommend that you use the [Bulk Data Export](data-export.md) functionality, as it will better handle large data volumes and will support automatic retries and parallelization across partitions.
 
 ## Use filter arguments
 
-For simple queries, you don't have to rely on our query syntax. You can use the filter arguments specified in the [filter arguments reference](https://docs.langchain.com/langsmith/trace-query-syntax#filter-arguments).
+For simple queries, you don't have to rely on our query syntax. You can use the filter arguments specified in the [filter arguments reference](trace-query-syntax.md#filter-arguments).
 
 > [!WARNING]
 > **Prerequisites**
@@ -226,15 +226,15 @@ RunQueryParams runIdRun = RunQueryParams.builder()
 > [!TIP]
 > **Replay traces locally with LangGraph**
 >
-> If you're using LangGraph with checkpointing, you can fetch a trace from LangSmith and replay it locally for debugging. See [LangGraph's time travel and replay documentation](https://docs.langchain.com/oss/python/langgraph/use-time-travel) for details on resuming execution from checkpoints.
+> If you're using LangGraph with checkpointing, you can fetch a trace from LangSmith and replay it locally for debugging. See [LangGraph's time travel and replay documentation](../langgraph/use-time-travel.md) for details on resuming execution from checkpoints.
 
 ## Use filter query language
 
-For more complex queries, you can use the filter query language. The following examples cover the most common patterns. For the full operator and field reference, including all comparators, filterable fields, value formatting rules, and a quick-reference example table, refer to [Trace query syntax: filter query language](https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language).
+For more complex queries, you can use the filter query language. The following examples cover the most common patterns. For the full operator and field reference, including all comparators, filterable fields, value formatting rules, and a quick-reference example table, refer to [Trace query syntax: filter query language](trace-query-syntax.md#filter-query-language).
 
 ### List all root runs in a conversational thread
 
-This is the way to fetch runs in a conversational thread. For more information on setting up threads, refer to our [how-to guide on setting up threads](https://docs.langchain.com/langsmith/threads).
+This is the way to fetch runs in a conversational thread. For more information on setting up threads, refer to our [how-to guide on setting up threads](threads.md).
 Threads are grouped by setting a shared thread ID. The LangSmith UI lets you use either of the following metadata keys: `session_id` or `thread_id`. The session ID is also known as the tracing project ID. The following query matches on either of them.
 
 ```python
@@ -721,7 +721,7 @@ RunQueryParams runs = RunQueryParams.builder()
 
 Use `trace_filter` to match fields on the root run and `tree_filter` to match supported searchable fields on any run in the trace tree. For predicates over arbitrary returned child-run fields, such as nested `inputs`, `outputs`, or `extra` payloads, use the steps below:
 
-1. Narrow candidate root traces server-side with `filter`, `trace_filter`, `tree_filter`, `run_type`, metadata filters, `parent_run_id`, and the `ls_run_depth` [system metadata key](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_run_depth).
+1. Narrow candidate root traces server-side with `filter`, `trace_filter`, `tree_filter`, `run_type`, metadata filters, `parent_run_id`, and the `ls_run_depth` [system metadata key](ls-metadata-parameters.md#ls_run_depth).
 2. Hydrate each candidate root trace with child runs by calling `read_run(..., load_child_runs=True)` in Python or `readRun(..., { loadChildRuns: true })` in TypeScript.
 3. Traverse the hydrated `child_runs` tree locally and apply your predicate to the fields that are not available as server-side filter fields.
 
@@ -1001,7 +1001,7 @@ df.head()
 
 ## Rate limits
 
-The [`POST /runs/query`](https://docs.langchain.com/langsmith/smith-api/run/query-runs) endpoint ([`list_runs`](https://reference.langchain.com/python/langsmith/client/Client/list_runs) in Python, [`listRuns`](https://reference.langchain.com/javascript/langsmith/client/Client/listRuns) in JavaScript) has per-tenant rate limits that vary based on query parameters:
+The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint ([`list_runs`](https://reference.langchain.com/python/langsmith/client/Client/list_runs) in Python, [`listRuns`](https://reference.langchain.com/javascript/langsmith/client/Client/listRuns) in JavaScript) has per-tenant rate limits that vary based on query parameters:
 
 | **Query type**                                       | **Limit**   | **Window** |
 | ---------------------------------------------------- | ----------- | ---------- |
@@ -1024,7 +1024,7 @@ To avoid hitting rate limits and reduce query time, especially for runs with lar
 * **Avoid full-text search**: `filter='search("...")'` has the strictest rate limits; use structured filters (e.g., `eq()`, `has()`) when possible.
 * **Avoid selecting `child_run_ids`**: this also triggers a stricter rate limit tier.
 
-When you exceed these limits, the API returns a `429 Too Many Requests` response. For general rate limit information, refer to [Administration overview](https://docs.langchain.com/langsmith/usage-and-billing#rate-limits).
+When you exceed these limits, the API returns a `429 Too Many Requests` response. For general rate limit information, refer to [Administration overview](usage-and-billing.md#rate-limits).
 
 ***
 

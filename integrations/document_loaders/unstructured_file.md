@@ -2,9 +2,9 @@
 
 > Integrate with the Unstructured document loader using LangChain Python.
 
-This notebook covers how to use the Unstructured [document loader](https://docs.langchain.com/oss/python/integrations/document_loaders) to load files of many types. `Unstructured` currently supports loading of text files, powerpoints, html, pdfs, images, and more.
+This notebook covers how to use the Unstructured [document loader](../document_loaders.md) to load files of many types. `Unstructured` currently supports loading of text files, powerpoints, html, pdfs, images, and more.
 
-Please see [Unstructured](https://docs.langchain.com/oss/python/integrations/providers/unstructured) for more instructions on setting up Unstructured locally, including setting up required system dependencies.
+Please see [Unstructured](../providers/unstructured.md) for more instructions on setting up Unstructured locally, including setting up required system dependencies.
 
 ## Overview
 

@@ -178,7 +178,7 @@ public class CreateDatasetExample {
 
 ### Create a dataset from traces
 
-To create datasets from the runs (spans) of your traces, you can use the same approach. For **many** more examples of how to fetch and filter runs, see the [export traces](https://docs.langchain.com/langsmith/export-traces) guide. Below is an example:
+To create datasets from the runs (spans) of your traces, you can use the same approach. For **many** more examples of how to fetch and filter runs, see the [export traces](export-traces.md) guide. Below is an example:
 
 ```python
 from langsmith import Client
@@ -678,7 +678,7 @@ var examples = client.examples().list(listParams);
 
 ### List examples by structured filter
 
-Similar to how you can use the structured filter query language to [fetch runs](https://docs.langchain.com/langsmith/export-traces#use-filter-query-language), you can use it to fetch examples.
+Similar to how you can use the structured filter query language to [fetch runs](export-traces.md#use-filter-query-language), you can use it to fetch examples.
 
 > [!NOTE]
 > This is currently only available in v0.1.83 and later of the Python SDK and v0.1.35 and later of the TypeScript SDK.

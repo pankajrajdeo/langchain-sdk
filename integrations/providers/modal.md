@@ -4,7 +4,7 @@
 
 [Modal](https://modal.com) provides serverless container infrastructure with GPU support. See the [Modal docs](https://modal.com/docs) for signup, authentication, and platform details.
 
-#### [ModalSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/modal)
+#### [ModalSandbox](../sandboxes/modal.md)
 Modal sandbox backend for deepagents.
 
 ***

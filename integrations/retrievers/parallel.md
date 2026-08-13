@@ -2,10 +2,10 @@
 
 > Integrate with the ParallelSearchRetriever retriever using LangChain Python.
 
-[`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) is a LangChain [`BaseRetriever`](https://docs.langchain.com/oss/python/deepagents/retrieval) backed by [Parallel](https://platform.parallel.ai/)'s [Search API](https://docs.parallel.ai/search/search-quickstart). It returns `list[Document]` with rich `metadata` (`url`, `title`, `publish_date`, `search_id`, `excerpts`, `query`) and slots into any RAG pipeline.
+[`ParallelSearchRetriever`](https://reference.langchain.com/python/langchain-parallel/retrievers/ParallelSearchRetriever) is a LangChain [`BaseRetriever`](../../deepagents/retrieval.md) backed by [Parallel](https://platform.parallel.ai/)'s [Search API](https://docs.parallel.ai/search/search-quickstart). It returns `list[Document]` with rich `metadata` (`url`, `title`, `publish_date`, `search_id`, `excerpts`, `query`) and slots into any RAG pipeline.
 
 > [!NOTE]
-> Looking for an LLM-callable tool that returns the raw search response instead of `Document`s? See [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search).
+> Looking for an LLM-callable tool that returns the raw search response instead of `Document`s? See [ParallelSearchTool](../tools/parallel_search.md).
 
 ## Overview
 

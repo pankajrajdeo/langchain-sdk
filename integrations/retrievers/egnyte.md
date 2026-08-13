@@ -1,6 +1,6 @@
 # EgnyteRetriever
 
-This will help you get started with the Egnyte [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). For detailed documentation of all `EgnyteRetriever` features and configurations head to the [API reference](https://github.com/egnyte/egnyte-langchain-connector).
+This will help you get started with the Egnyte [retriever](../../deepagents/retrieval.md). For detailed documentation of all `EgnyteRetriever` features and configurations head to the [API reference](https://github.com/egnyte/egnyte-langchain-connector).
 
 # Overview
 

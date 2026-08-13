@@ -2,14 +2,14 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-commit)
 LangSmith provides a collaborative interface to create, test, and iterate on prompts.
 
-While you can [dynamically fetch prompts](https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt) from LangSmith into your application at runtime, you may prefer to sync prompts with your own database or version control system. To support this workflow, LangSmith allows you to receive notifications of prompt updates via webhooks.
+While you can [dynamically fetch prompts](manage-prompts-programmatically.md#pull-a-prompt) from LangSmith into your application at runtime, you may prefer to sync prompts with your own database or version control system. To support this workflow, LangSmith allows you to receive notifications of prompt updates via webhooks.
 
 **Why sync prompts with GitHub?**
 
 * **Version Control:** Keep your prompts versioned alongside your application code in a familiar system.
 * **CI/CD Integration:** Trigger automated staging or production deployments when critical prompts change.
 
-> **Image:** [Prompt Webhook Diagram](https://docs.langchain.com/langsmith/prompt-commit)
+> **Image:** [Prompt Webhook Diagram](prompt-commit.md)
 
 ## Prerequisites
 
@@ -355,13 +355,13 @@ Once your FastAPI server is deployed and you have its public URL, you can config
 
 2. Go to the **Prompts** section. Here you'll see a list of your prompts.
 
-> **Image:** [LangSmith Prompts section](https://docs.langchain.com/langsmith/prompt-commit)
+> **Image:** [LangSmith Prompts section](prompt-commit.md)
 
 3. On the top right of the Prompts page, click the **+ Webhook** button.
 
 4. You'll be presented with a form to configure your webhook:
 
-> **Image:** [LangSmith Webhook configuration modal](https://docs.langchain.com/langsmith/prompt-commit)
+> **Image:** [LangSmith Webhook configuration modal](prompt-commit.md)
 
    * **Webhook URL:** Enter the full public URL of your deployed FastAPI server's endpoint. For our example server, this would be `https://prompt-commit-webhook.onrender.com/webhook/commit`.
    * **Headers (Optional):**
@@ -373,7 +373,7 @@ Once your FastAPI server is deployed and you have its public URL, you can config
 
 ## The workflow in action
 
-> **Image:** [Workflow Diagram showing: User saves prompt in LangSmith, LangSmith sends webhook to FastAPI Server, which interacts with GitHub to update files](https://docs.langchain.com/langsmith/prompt-commit)
+> **Image:** [Workflow Diagram showing: User saves prompt in LangSmith, LangSmith sends webhook to FastAPI Server, which interacts with GitHub to update files](prompt-commit.md)
 
 Now, with everything set up, here's what happens:
 
@@ -392,7 +392,7 @@ Now, with everything set up, here's what happens:
 
 6. **Confirmation:** You should see the new commit appear in your GitHub repository.
 
-> **Image:** [Manifest committed to GitHub](https://docs.langchain.com/langsmith/prompt-commit)
+> **Image:** [Manifest committed to GitHub](prompt-commit.md)
 
 You've now successfully synced your LangSmith prompts with GitHub!
 

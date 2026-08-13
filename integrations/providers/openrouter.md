@@ -6,7 +6,7 @@
 
 ## Chat models
 
-#### [ChatOpenRouter](https://docs.langchain.com/oss/python/integrations/chat/openrouter)
+#### [ChatOpenRouter](../chat/openrouter.md)
 Access chat models from multiple providers through the OpenRouter unified API.
 
 ***

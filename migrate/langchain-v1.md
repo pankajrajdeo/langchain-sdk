@@ -1,6 +1,6 @@
 # LangChain v1 migration guide
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langchain-v1)
-This guide outlines the major changes between [LangChain v1](https://docs.langchain.com/oss/python/releases/langchain-v1) and previous versions.
+This guide outlines the major changes between [LangChain v1](../releases/langchain-v1.md) and previous versions.
 
 ## Simplified package
 
@@ -68,6 +68,8 @@ uv add langchain-classic
 
 ***
 
+<a id="migrate-to-create_agent"></a>
+
 ## Migrate to `create_agent`
 
 Prior to v1.0, we recommended using [`langgraph.prebuilt.create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) to build agents. Now, we recommend you use [`langchain.agents.create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) to build agents.
@@ -76,17 +78,17 @@ The table below outlines what functionality has changed from [`create_react_agen
 
 | Section                                            | TL;DR - What's changed                                                                                                                                                                     |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Import path](https://docs.langchain.com/oss/python/migrate/langchain-v1#import-path)                        | Package moved from `langgraph.prebuilt` to `langchain.agents`                                                                                                                              |
-| [Prompts](https://docs.langchain.com/oss/python/migrate/langchain-v1#prompts)                                | Parameter renamed to [`system_prompt`](https://reference.langchain.com/python/langchain/agents/#langchain.agents.create_agent\(system_prompt\)), dynamic prompts use middleware            |
-| [Pre-model hook](https://docs.langchain.com/oss/python/migrate/langchain-v1#pre-model-hook)                  | Replaced by middleware with `before_model` method                                                                                                                                          |
-| [Post-model hook](https://docs.langchain.com/oss/python/migrate/langchain-v1#post-model-hook)                | Replaced by middleware with `after_model` method                                                                                                                                           |
-| [Custom state](https://docs.langchain.com/oss/python/migrate/langchain-v1#custom-state)                      | `TypedDict` only, can be defined via [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) or middleware |
-| [Model](https://docs.langchain.com/oss/python/migrate/langchain-v1#model)                                    | Dynamic selection via middleware, pre-bound models not supported                                                                                                                           |
-| [Tools](https://docs.langchain.com/oss/python/migrate/langchain-v1#tools)                                    | Tool error handling moved to middleware with `wrap_tool_call`                                                                                                                              |
-| [Structured output](https://docs.langchain.com/oss/python/migrate/langchain-v1#structured-output)            | prompted output removed, use `ToolStrategy`/`ProviderStrategy`                                                                                                                             |
-| [Streaming node name](https://docs.langchain.com/oss/python/migrate/langchain-v1#streaming-node-name-rename) | Node name changed from `"agent"` to `"model"`                                                                                                                                              |
-| [Runtime context](https://docs.langchain.com/oss/python/migrate/langchain-v1#runtime-context)                | Dependency injection via `context` argument instead of `config["configurable"]`                                                                                                            |
-| [Namespace](https://docs.langchain.com/oss/python/migrate/langchain-v1#simplified-package)                   | Streamlined to focus on agent building blocks, legacy code moved to `langchain-classic`                                                                                                    |
+| [Import path](#import-path)                        | Package moved from `langgraph.prebuilt` to `langchain.agents`                                                                                                                              |
+| [Prompts](#prompts)                                | Parameter renamed to [`system_prompt`](https://reference.langchain.com/python/langchain/agents/#langchain.agents.create_agent\(system_prompt\)), dynamic prompts use middleware            |
+| [Pre-model hook](#pre-model-hook)                  | Replaced by middleware with `before_model` method                                                                                                                                          |
+| [Post-model hook](#post-model-hook)                | Replaced by middleware with `after_model` method                                                                                                                                           |
+| [Custom state](#custom-state)                      | `TypedDict` only, can be defined via [`state_schema`](https://reference.langchain.com/python/langchain/middleware/#langchain.agents.middleware.AgentMiddleware.state_schema) or middleware |
+| [Model](#model)                                    | Dynamic selection via middleware, pre-bound models not supported                                                                                                                           |
+| [Tools](#tools)                                    | Tool error handling moved to middleware with `wrap_tool_call`                                                                                                                              |
+| [Structured output](#structured-output)            | prompted output removed, use `ToolStrategy`/`ProviderStrategy`                                                                                                                             |
+| [Streaming node name](#streaming-node-name-rename) | Node name changed from `"agent"` to `"model"`                                                                                                                                              |
+| [Runtime context](#runtime-context)                | Dependency injection via `context` argument instead of `config["configurable"]`                                                                                                            |
+| [Namespace](#simplified-package)                   | Streamlined to focus on agent building blocks, legacy code moved to `langchain-classic`                                                                                                    |
 
 ### Import path
 
@@ -98,7 +100,7 @@ from langgraph.prebuilt import create_react_agent # [!code --]
 from langchain.agents import create_agent # [!code ++]
 ```
 
-For more information, see [Agents](https://docs.langchain.com/oss/python/langchain/agents).
+For more information, see [Agents](../langchain/agents.md).
 
 ### Prompts
 
@@ -285,7 +287,7 @@ reusing common patterns across different agents.
 
 Common use cases include:
 
-* [Human in the loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop)
+* [Human in the loop](../langchain/human-in-the-loop.md)
 * Output guardrails
 
 v1 has a built in middleware for human in the loop approval for tool calls:
@@ -418,7 +420,7 @@ agent = create_agent(
 )
 ```
 
-See the [middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware#custom-state-schema) for more details on defining custom state via middleware.
+See the [middleware documentation](../langchain/middleware.md#custom-state-schema) for more details on defining custom state via middleware.
 
 #### State type restrictions
 
@@ -740,7 +742,7 @@ In v1, messages gain provider-agnostic standard content blocks. Access them via 
 ### What changed
 
 * New [`content_blocks`](https://reference.langchain.com/python/langchain-core/messages/base/BaseMessage) property on messages for normalized content
-* Standardized block shapes, documented in [Messages](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks)
+* Standardized block shapes, documented in [Messages](../langchain/messages.md#standard-content-blocks)
 * Optional serialization of standard blocks into `content` via `LC_OUTPUT_VERSION=v1` or `output_version="v1"`
 
 ### Read standardized content
@@ -810,7 +812,7 @@ image_block = {
 }
 ```
 
-See the content blocks [reference](https://docs.langchain.com/oss/python/langchain/messages#content-block-reference) for more details.
+See the content blocks [reference](../langchain/messages.md#content-block-reference) for more details.
 
 ### Serialize standard content
 
@@ -830,7 +832,7 @@ model = init_chat_model(
 ```
 
 > [!NOTE]
-> Learn more: [Messages](https://docs.langchain.com/oss/python/langchain/messages#message-content), [Standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks), and [Multimodal](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+> Learn more: [Messages](../langchain/messages.md#message-content), [Standard content blocks](../langchain/messages.md#standard-content-blocks), and [Multimodal](../langchain/messages.md#multimodal).
 
 ***
 
@@ -871,7 +873,7 @@ The `max_tokens` parameter in `langchain-anthropic` now defaults to higher value
 
 ### Legacy code moved to `langchain-classic`
 
-Existing functionality outside the focus of standard interfaces and agents has been moved to the [`langchain-classic`](https://pypi.org/project/langchain-classic) package. See the [Simplified namespace](https://docs.langchain.com/oss/python/migrate/langchain-v1#simplified-package) section for details on what's available in the core `langchain` package and what moved to `langchain-classic`.
+Existing functionality outside the focus of standard interfaces and agents has been moved to the [`langchain-classic`](https://pypi.org/project/langchain-classic) package. See the [Simplified namespace](#simplified-package) section for details on what's available in the core `langchain` package and what moved to `langchain-classic`.
 
 ### Removal of deprecated APIs
 

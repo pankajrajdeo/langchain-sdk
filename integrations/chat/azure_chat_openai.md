@@ -2,7 +2,7 @@
 
 > Integrate with the AzureChatOpenAI chat model using LangChain Python.
 
-You can find information about Azure OpenAI's latest models and their costs, context windows, and supported input types in the [Azure docs](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models). For the full set of Microsoft integrations in LangChain (including tools like Azure AI Search, Azure Database for PostgreSQL, and the M365 suite), see the [Microsoft provider page](https://docs.langchain.com/oss/python/integrations/providers/microsoft).
+You can find information about Azure OpenAI's latest models and their costs, context windows, and supported input types in the [Azure docs](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models). For the full set of Microsoft integrations in LangChain (including tools like Azure AI Search, Azure Database for PostgreSQL, and the M365 suite), see the [Microsoft provider page](../providers/microsoft.md).
 
 > [!NOTE]
 > **Azure OpenAI vs OpenAI**
@@ -12,7 +12,7 @@ You can find information about Azure OpenAI's latest models and their costs, con
 > [!NOTE]
 > **Use `ChatOpenAI` with v1 API (recommended)**
 >
-> Azure OpenAI's [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python) (Generally Available as of August 2025) allows you to use [`ChatOpenAI`](https://docs.langchain.com/oss/python/integrations/chat/openai/#using-with-azure-openai) directly with Azure endpoints. This removes the need for dated `api-version` parameters and provides native support for Microsoft Entra ID authentication with automatic token refresh.
+> Azure OpenAI's [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python) (Generally Available as of August 2025) allows you to use [`ChatOpenAI`](openai.md#using-with-azure-openai) directly with Azure endpoints. This removes the need for dated `api-version` parameters and provides native support for Microsoft Entra ID authentication with automatic token refresh.
 >
 > We continue to support [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI), which now shares the same underlying base implementation as [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI), which interfaces with OpenAI services directly.
 >
@@ -21,7 +21,7 @@ You can find information about Azure OpenAI's latest models and their costs, con
 > [!TIP]
 > **API Reference**
 >
-> For detailed documentation of all features and configuration options, head to the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) API reference. Visit the [`ChatOpenAI` docs](https://docs.langchain.com/oss/python/integrations/chat/openai/) for details on available features.
+> For detailed documentation of all features and configuration options, head to the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) API reference. Visit the [`ChatOpenAI` docs](openai.md) for details on available features.
 
 ## Overview
 
@@ -33,7 +33,7 @@ You can find information about Azure OpenAI's latest models and their costs, con
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -87,7 +87,7 @@ if "AZURE_OPENAI_API_KEY" not in os.environ:
 os.environ["AZURE_OPENAI_ENDPOINT"] = "https://YOUR-RESOURCE-NAME.openai.azure.com/"
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -208,7 +208,7 @@ ai_msg.tool_calls
   'type': 'tool_call'}]
 ```
 
-For more on binding tools and tool call outputs, head to the [tool calling](https://docs.langchain.com/oss/python/langchain/tools) docs.
+For more on binding tools and tool call outputs, head to the [tool calling](../../langchain/tools.md) docs.
 
 ## Build an agent
 

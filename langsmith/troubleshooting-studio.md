@@ -37,7 +37,7 @@ Chrome and other Chromium browsers allow HTTP on localhost. Use `langgraph dev` 
 
 ## Chrome connection issues
 
-Starting with Chrome version 142, you may experience "Failed to initialize Studio" errors with "TypeError: Failed to fetch" when trying to connect [LangSmith Studio](https://docs.langchain.com/langsmith/studio) to your local development server via [`langgraph dev`](https://docs.langchain.com/langsmith/cli). This occurs even when the API server at `http://127.0.0.1:2024/docs` loads successfully.
+Starting with Chrome version 142, you may experience "Failed to initialize Studio" errors with "TypeError: Failed to fetch" when trying to connect [LangSmith Studio](studio.md) to your local development server via [`langgraph dev`](cli.md). This occurs even when the API server at `http://127.0.0.1:2024/docs` loads successfully.
 
 **Root Cause:** Chrome 142 fully enforces the Private Network Access (PNA) specification with no fallback, which blocks HTTPS sites (like `https://smith.langchain.com`) from accessing HTTP localhost servers by default.
 

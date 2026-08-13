@@ -27,7 +27,7 @@ uv add langchain-predictionguard
 | API            | Description             | Endpoint Docs                                                                           | Import                                                            | Example Usage                                                                                         |
 | -------------- | ----------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | Chat           | Build Chat Bots         | [Chat](https://docs.predictionguard.com/api-reference/api-reference/chat-completions)   | `from langchain_predictionguard import ChatPredictionGuard`       | [`langchain-predictionguard`](https://github.com/predictionguard/langchain-predictionguard)           |
-| Completions    | Generate Text           | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard`           | [PredictionGuard.ipynb](https://docs.langchain.com/oss/python/integrations/llms/predictionguard)                                |
+| Completions    | Generate Text           | [Completions](https://docs.predictionguard.com/api-reference/api-reference/completions) | `from langchain_predictionguard import PredictionGuard`           | [PredictionGuard.ipynb](../llms/predictionguard.md)                                |
 | Text Embedding | Embed String to Vectors | [Embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings)   | `from langchain_predictionguard import PredictionGuardEmbeddings` | [PredictionGuard embeddings](https://docs.predictionguard.com/api-reference/api-reference/embeddings) |
 
 ## Getting started
@@ -75,7 +75,7 @@ output = embeddings.embed_query(text)
 
 ### Prediction guard LLM
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/predictionguard)
+See a [usage example](../llms/predictionguard.md)
 
 ```python
 from langchain_predictionguard import PredictionGuard

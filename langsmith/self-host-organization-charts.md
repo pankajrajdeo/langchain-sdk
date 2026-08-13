@@ -18,7 +18,7 @@ You can retrieve trace counts programmatically using two different methods:
 
 ### Method 1: Use the LangSmith REST API
 
-If your self-hosted installation uses an online key, you can use the [LangSmith REST API](https://docs.langchain.com/langsmith/smith-api/orgs/get-org-usage) to fetch organization usage data.
+If your self-hosted installation uses an online key, you can use the [LangSmith REST API](smith-api/orgs/get-org-usage.md) to fetch organization usage data.
 
 ```bash
 curl -X GET "https://your-langsmith-instance.com/api/v1/orgs/current/billing/usage" \
@@ -40,7 +40,7 @@ sh run_support_query_pg.sh "postgres://postgres:postgres@localhost:5432/postgres
   --output trace_counts.csv
 ```
 
-For more detailed information about running support queries, see the [Run support queries against PostgreSQL](https://docs.langchain.com/langsmith/script-running-pg-support-queries) guide.
+For more detailed information about running support queries, see the [Run support queries against PostgreSQL](script-running-pg-support-queries.md) guide.
 
 ***
 

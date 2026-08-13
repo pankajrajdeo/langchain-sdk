@@ -1,18 +1,18 @@
 # Make conversations private
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/resource-auth)
-In this tutorial, you will extend [the chatbot created in the last tutorial](https://docs.langchain.com/langsmith/set-up-custom-auth) to give each user their own private conversations. You'll add [resource-level access control](https://docs.langchain.com/langsmith/auth#single-owner-resources) so users can only see their own threads.
+In this tutorial, you will extend [the chatbot created in the last tutorial](set-up-custom-auth.md) to give each user their own private conversations. You'll add [resource-level access control](auth.md#single-owner-resources) so users can only see their own threads.
 
-> **Image:** [Authorization flow: after authentication, an authorization handler tags each resource with owner=user id and returns a filter so users only see their own threads.](https://docs.langchain.com/langsmith/resource-auth)
+> **Image:** [Authorization flow: after authentication, an authorization handler tags each resource with owner=user id and returns a filter so users only see their own threads.](resource-auth.md)
 
 ## Prerequisites
 
-Before you start this tutorial, ensure you have the [bot from the first tutorial](https://docs.langchain.com/langsmith/set-up-custom-auth) running without errors.
+Before you start this tutorial, ensure you have the [bot from the first tutorial](set-up-custom-auth.md) running without errors.
 
 ## 1. Add resource authorization
 
-Recall that in the last tutorial, the [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object lets you register an [authentication function](https://docs.langchain.com/langsmith/auth#authentication), which LangSmith uses to validate the bearer tokens in incoming requests. Now you'll use it to register an **authorization** handler.
+Recall that in the last tutorial, the [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object lets you register an [authentication function](auth.md#authentication), which LangSmith uses to validate the bearer tokens in incoming requests. Now you'll use it to register an **authorization** handler.
 
-Authorization handlers are functions that run **after** authentication succeeds. These handlers can add [metadata](https://docs.langchain.com/langsmith/auth#filter-operations) to resources (like who owns them) and filter what each user can see.
+Authorization handlers are functions that run **after** authentication succeeds. These handlers can add [metadata](auth.md#filter-operations) to resources (like who owns them) and filter what each user can see.
 
 Update your `src/security/auth.py` and add one authorization handler to run on every request:
 
@@ -104,7 +104,7 @@ async def add_owner(
 The handler receives two parameters:
 
 1. `ctx` ([AuthContext](https://reference.langchain.com/python/langgraph-sdk/auth/types/AuthContext)): contains info about the current `user`, the user's `permissions`, the `resource` ("threads", "crons", "assistants"), and the `action` being taken ("create", "read", "update", "delete", "search", "create\_run")
-2. `value` (`dict`): data that is being created or accessed. The contents of this dict depend on the resource and action being accessed. See [adding scoped authorization handlers](https://docs.langchain.com/langsmith/resource-auth#scoped-authorization) below for information on how to get more tightly scoped access control.
+2. `value` (`dict`): data that is being created or accessed. The contents of this dict depend on the resource and action being accessed. See [adding scoped authorization handlers](#scoped-authorization) below for information on how to get more tightly scoped access control.
 
 Notice that the simple handler does two things:
 
@@ -184,9 +184,11 @@ This means:
 2. Users can't see each other's threads
 3. Listing threads only shows your own
 
+<a id="scoped-authorization"></a>
+
 ## 3. Add scoped authorization handlers
 
-The broad `@auth.on` handler matches on all [authorization events](https://docs.langchain.com/langsmith/auth#supported-resources). This is concise, but it means the contents of the `value` dict are not well-scoped, and the same user-level access control is applied to every resource. If you want to be more fine-grained, you can also control specific actions on resources.
+The broad `@auth.on` handler matches on all [authorization events](auth.md#supported-resources). This is concise, but it means the contents of the `value` dict are not well-scoped, and the same user-level access control is applied to every resource. If you want to be more fine-grained, you can also control specific actions on resources.
 
 Update `src/security/auth.py` to add handlers for specific resource types:
 
@@ -264,9 +266,9 @@ Notice that instead of one global handler, you now have specific handlers for:
 2. Reading threads
 3. Accessing assistants
 
-The first three of these match specific **actions** on each resource (see [resource actions](https://docs.langchain.com/langsmith/auth#resource-specific-handlers)), while the last two (`@auth.on.assistants` and `@auth.on.store`) matche *any* action on the `assistants` and `store` resources. For each request, LangGraph will run the most specific handler that matches the resource and action being accessed. This means that the four handlers above will run rather than the broadly scoped "`@auth.on`" handler.
+The first three of these match specific **actions** on each resource (see [resource actions](auth.md#resource-specific-handlers)), while the last two (`@auth.on.assistants` and `@auth.on.store`) matche *any* action on the `assistants` and `store` resources. For each request, LangGraph will run the most specific handler that matches the resource and action being accessed. This means that the four handlers above will run rather than the broadly scoped "`@auth.on`" handler.
 
-Store authorization works differently from threads and assistants. For store isolation patterns and tradeoffs, see [Isolate store per user](https://docs.langchain.com/langsmith/store-auth).
+Store authorization works differently from threads and assistants. For store isolation patterns and tradeoffs, see [Isolate store per user](store-auth.md).
 
 Try adding the following test code to your test file:
 
@@ -311,8 +313,8 @@ Congratulations! You've built a chatbot where each user has their own private co
 
 Now that you can control access to resources, you might want to:
 
-1. Move on to [Connect an authentication provider](https://docs.langchain.com/langsmith/add-auth-server) to add real user accounts.
-2. Read more about [authorization patterns](https://docs.langchain.com/langsmith/auth#authorization).
+1. Move on to [Connect an authentication provider](add-auth-server.md) to add real user accounts.
+2. Read more about [authorization patterns](auth.md#authorization).
 3. Check out the [API reference](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) for details about the interfaces and methods used in this tutorial.
 
 ***

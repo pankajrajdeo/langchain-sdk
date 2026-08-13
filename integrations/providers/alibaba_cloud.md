@@ -15,7 +15,7 @@
 
 ### Qwen QwQ chat
 
-See [installation instructions and a usage example](https://docs.langchain.com/oss/python/integrations/chat/qwq)
+See [installation instructions and a usage example](../chat/qwq.md)
 
 ```python
 from langchain_qwq import ChatQwQ
@@ -23,7 +23,7 @@ from langchain_qwq import ChatQwQ
 
 ### Qwen model chat
 
-See [installation instructions and a usage example](https://docs.langchain.com/oss/python/integrations/chat/qwen)
+See [installation instructions and a usage example](../chat/qwen.md)
 
 ```python
 from langchain_qwq import ChatQwen

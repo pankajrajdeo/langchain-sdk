@@ -25,7 +25,7 @@ uv add langchain-graph-retriever
 from langchain_graph_retriever import GraphRetriever
 ```
 
-For more information, see the [Graph RAG Integration Guide](https://docs.langchain.com/oss/python/integrations/retrievers/graph_rag).
+For more information, see the [Graph RAG Integration Guide](../retrievers/graph_rag.md).
 
 ***
 

@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/context-hub-webhooks)
 Send Context Hub commit events to an external HTTPS endpoint and verify that LangSmith signed each request.
 
-[Context Hub](https://docs.langchain.com/langsmith/context-hub) commit webhooks notify external services whenever an agent or skill commit is created in your [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces). Use them to trigger automation from Context Hub changes, including commits created through [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
+[Context Hub](context-hub.md) commit webhooks notify external services whenever an agent or skill commit is created in your [workspace](administration-overview.md#workspaces). Use them to trigger automation from Context Hub changes, including commits created through [LangSmith Fleet](fleet.md).
 
-Managing Context Hub webhooks requires the [`prompts:update`](https://docs.langchain.com/langsmith/organization-workspace-operations) permission, which [Workspace Admins](https://docs.langchain.com/langsmith/rbac#workspace-admin) and [Workspace Editors](https://docs.langchain.com/langsmith/rbac#workspace-editor) have by default.
+Managing Context Hub webhooks requires the [`prompts:update`](organization-workspace-operations.md) permission, which [Workspace Admins](rbac.md#workspace-admin) and [Workspace Editors](rbac.md#workspace-editor) have by default.
 
 ## Add a webhook
 
@@ -189,7 +189,7 @@ A breaking change to `data.commit` uses a new event type suffix, such as `.v2`. 
 
 ## Next step
 
-* [Use the Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub): Create, inspect, and promote agent and skill commits.
+* [Use the Context Hub](use-the-context-hub.md): Create, inspect, and promote agent and skill commits.
 
 ***
 

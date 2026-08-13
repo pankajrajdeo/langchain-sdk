@@ -4,7 +4,7 @@
 
 [Daytona](https://daytona.io) provides fast-starting sandbox environments with multi-language support. See the [Daytona docs](https://www.daytona.io/docs) for signup, authentication, and platform details.
 
-#### [DaytonaSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/daytona)
+#### [DaytonaSandbox](../sandboxes/daytona.md)
 Daytona sandbox backend for deepagents.
 
 #### [DaytonaDataAnalysisTool](https://github.com/daytonaio/daytona)

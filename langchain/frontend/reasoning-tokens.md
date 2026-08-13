@@ -69,7 +69,7 @@ the last message while `stream.isLoading` is true so thinking blocks update as
 tokens arrive.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";

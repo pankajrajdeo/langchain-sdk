@@ -13,7 +13,7 @@ With LangSmith Fleet, you can connect your agents to Microsoft Teams by register
 
 ## Prerequisites
 
-* An existing agent in Fleet (see [Quickstart](https://docs.langchain.com/langsmith/fleet/quickstart) to create one)
+* An existing agent in Fleet (see [Quickstart](quickstart.md) to create one)
 * An [Azure account](https://portal.azure.com) with permission to create resources
 * Admin access to a Microsoft Teams workspace, or permission to install apps
 
@@ -157,13 +157,13 @@ Adjust the instructions based on your use case—for example, you might want the
 
 ## Next steps
 
-#### [Add more tools](https://docs.langchain.com/langsmith/fleet/tools)
+#### [Add more tools](tools.md)
 Connect additional services to your agent
 
-#### [Add more channels](https://docs.langchain.com/langsmith/fleet/channels)
+#### [Add more channels](channels.md)
 Set up email, schedule, or webhook channels
 
-#### [Use templates](https://docs.langchain.com/langsmith/fleet/templates)
+#### [Use templates](templates.md)
 Start from a prebuilt agent template
 
 ***

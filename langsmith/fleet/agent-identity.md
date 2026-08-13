@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/agent-identity)
 Choose whether your Fleet agent authenticates with its own credentials or with each user's credentials.
 
-Agent identity controls whose [credentials](https://docs.langchain.com/langsmith/fleet/workspace-admin) the agent uses when it interacts with apps and services.
+Agent identity controls whose [credentials](workspace-admin.md) the agent uses when it interacts with apps and services.
 
 > [!WARNING]
 > Once an agent identity is set, it cannot be changed.
@@ -15,7 +15,7 @@ Use fixed credentials when:
 
 * The agent operates as a shared service (for example, a team Slack bot or a daily briefing agent).
 * You want a single set of authenticated accounts for all users.
-* The agent needs to run on [channels](https://docs.langchain.com/langsmith/fleet/channels) or [schedules](https://docs.langchain.com/langsmith/fleet/schedules), which require fixed credentials.
+* The agent needs to run on [channels](channels.md) or [schedules](schedules.md), which require fixed credentials.
 
 With fixed credentials, all actions the agent takes (sending emails, posting messages, reading calendars) use the account that the agent owner connected during setup.
 

@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/deploy)
 Deploy LangGraph agents to production with LangSmith Cloud or JavaScript frameworks and hosting platforms.
 
-When you are ready to deploy your LangGraph agent to production, choose a hosting model that fits your stack. **[LangSmith Cloud](https://docs.langchain.com/langsmith/deploy-to-cloud)** provides fully managed infrastructure for stateful, long-running agents with persistent state and background execution.
+When you are ready to deploy your LangGraph agent to production, choose a hosting model that fits your stack. **[LangSmith Cloud](../langsmith/deploy-to-cloud.md)** provides fully managed infrastructure for stateful, long-running agents with persistent state and background execution.
 
 > [!TIP]
-> LangSmith offers multiple deployment options beyond Cloud, including [hybrid](https://docs.langchain.com/langsmith/hybrid), [standalone servers](https://docs.langchain.com/langsmith/deploy-standalone-server), and [self-hosted with control plane](https://docs.langchain.com/langsmith/deploy-with-control-plane). For more information, see the [LangSmith Deployment overview](https://docs.langchain.com/langsmith/deployment).
+> LangSmith offers multiple deployment options beyond Cloud, including [hybrid](../langsmith/hybrid.md), [standalone servers](../langsmith/deploy-standalone-server.md), and [self-hosted with control plane](../langsmith/deploy-with-control-plane.md). For more information, see the [LangSmith Deployment overview](../langsmith/deployment.md).
 
 ## LangSmith Cloud
 
@@ -22,7 +22,7 @@ Before you begin, ensure you have the following:
 
 #### 1. Create a repository on GitHub
 
-Your application's code must reside in a GitHub repository to be deployed on LangSmith. Both public and private repositories are supported. For this quickstart, first make sure your app is LangGraph-compatible by following the [local server setup guide](https://docs.langchain.com/oss/python/langgraph/studio#set-up-local-agent-server). Then, push your code to the repository.
+Your application's code must reside in a GitHub repository to be deployed on LangSmith. Both public and private repositories are supported. For this quickstart, first make sure your app is LangGraph-compatible by following the [local server setup guide](studio.md#set-up-local-agent-server). Then, push your code to the repository.
 
 #### 2. Deploy to LangSmith
 

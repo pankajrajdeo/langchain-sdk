@@ -21,9 +21,9 @@ evaluate(experiment_name, evaluators=[always_half])
 
 ## Related topics
 
-* [Retry failed examples in experiments](https://docs.langchain.com/langsmith/evaluate-with-retry)
-* [Run an evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application)
-* [Run an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async)
+* [Retry failed examples in experiments](evaluate-with-retry.md)
+* [Run an evaluation](evaluate-llm-application.md)
+* [Run an evaluation asynchronously](evaluation-async.md)
 
 ***
 

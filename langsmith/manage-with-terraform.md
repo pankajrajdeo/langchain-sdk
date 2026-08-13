@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-with-terraform)
 Use the official LangSmith Terraform provider to manage workspaces, access controls, resource tags, evaluators, run rules, and alert rules as code.
 
-The official [LangSmith Terraform provider](https://registry.terraform.io/providers/langchain-ai/langsmith/latest) lets you manage LangSmith organization and workspace resources as code: workspaces, custom roles, organization and workspace members, resource tags, access policies, evaluators, run rules, and alert rules. It is the infrastructure-as-code counterpart to [managing your organization using the API](https://docs.langchain.com/langsmith/manage-organization-by-api).
+The official [LangSmith Terraform provider](https://registry.terraform.io/providers/langchain-ai/langsmith/latest) lets you manage LangSmith organization and workspace resources as code: workspaces, custom roles, organization and workspace members, resource tags, access policies, evaluators, run rules, and alert rules. It is the infrastructure-as-code counterpart to [managing your organization using the API](manage-organization-by-api.md).
 
 > [!NOTE]
 > Managing resource tags and access policies requires LangSmith Terraform provider v0.0.6 or later.
@@ -10,8 +10,8 @@ The official [LangSmith Terraform provider](https://registry.terraform.io/provid
 > [!TIP]
 > Before diving in, it might be helpful to read:
 >
-> * [Conceptual guide on organizations and workspaces](https://docs.langchain.com/langsmith/administration-overview)
-> * [Organization setup how-to](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-an-organization)
+> * [Conceptual guide on organizations and workspaces](administration-overview.md)
+> * [Organization setup how-to](set-up-hierarchy.md#set-up-an-organization)
 
 ## Install and configure
 
@@ -47,7 +47,7 @@ The provider resolves credentials the same way as the LangSmith SDK and CLI. Pre
 * **Profile**—set `profile` (or `LANGSMITH_PROFILE`) to use a LangSmith CLI profile.
 * **Provider arguments**—`api_key`, `api_url`, `workspace_id`, `profile`.
 
-Create an API key or [service key](https://docs.langchain.com/langsmith/administration-overview#service-keys) in your LangSmith settings. See [Authentication methods](https://docs.langchain.com/langsmith/authentication-methods) for the available key types.
+Create an API key or [service key](administration-overview.md#service-keys) in your LangSmith settings. See [Authentication methods](authentication-methods.md) for the available key types.
 
 > [!WARNING]
 > Organization-scoped operations, like creating workspaces, inviting organization members, and managing access policies, require an **organization-scoped service key with Organization Admin permissions**. Set `workspace_id` (or `LANGSMITH_WORKSPACE_ID`) to target workspace-scoped resources such as workspace memberships, resource tags, evaluators, and run rules.
@@ -100,7 +100,7 @@ resource "langsmith_workspace_role" "issues_agent" {
 
 ### Manage resource tags and access policies
 
-Use [resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) to organize workspace resources and apply [attribute-based access control (ABAC)](https://docs.langchain.com/langsmith/abac). The `langsmith_tag` convenience resource owns one tag key and one value. Use the independent `langsmith_tag_key` and `langsmith_tag_value` resources when keys or values are shared across configurations.
+Use [resource tags](set-up-resource-tags.md) to organize workspace resources and apply [attribute-based access control (ABAC)](abac.md). The `langsmith_tag` convenience resource owns one tag key and one value. Use the independent `langsmith_tag_key` and `langsmith_tag_value` resources when keys or values are shared across configurations.
 
 The following configuration creates an `Environment=production` tag, applies it to a tracing project, and limits a workspace role to production projects:
 
@@ -149,7 +149,7 @@ resource "langsmith_access_policy_attachment" "production_reader" {
 
 ### Automate evaluators, run rules, and alerts
 
-The provider manages more than accounts. You can codify [online code evaluators](https://docs.langchain.com/langsmith/online-evaluations-code), the [run rules](https://docs.langchain.com/langsmith/rules) that apply them, and [alerts](https://docs.langchain.com/langsmith/alerts) alongside your workspaces:
+The provider manages more than accounts. You can codify [online code evaluators](online-evaluations-code.md), the [run rules](rules.md) that apply them, and [alerts](alerts.md) alongside your workspaces:
 
 ```hcl
 resource "langsmith_evaluator" "tool_calls" {

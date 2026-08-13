@@ -2,11 +2,11 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/models)
 Configure model providers and parameters for Deep Agents
 
-Deep Agents work with any [LangChain chat model](https://docs.langchain.com/oss/python/langchain/models) that supports [tool calling](https://docs.langchain.com/oss/python/langchain/models#tool-calling).
+Deep Agents work with any [LangChain chat model](../langchain/models.md) that supports [tool calling](../langchain/models.md#tool-calling).
 
 ## Supported models
 
-Specify models in `provider:model` format (for example, `google_genai:gemini-3.6-flash`, `openai:gpt-5.4`, or `anthropic:claude-sonnet-4-6`). The provider prefix selects the LangChain integration, and everything after the colon is passed through to that provider as the model identifier. For valid provider strings, see the `model_provider` parameter of [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model). For provider-specific configuration, see [chat model integrations](https://docs.langchain.com/oss/python/integrations/chat).
+Specify models in `provider:model` format (for example, `google_genai:gemini-3.6-flash`, `openai:gpt-5.4`, or `anthropic:claude-sonnet-4-6`). The provider prefix selects the LangChain integration, and everything after the colon is passed through to that provider as the model identifier. For valid provider strings, see the `model_provider` parameter of [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model). For provider-specific configuration, see [chat model integrations](../integrations/chat.md).
 
 The model identifier must match the format expected by the provider. Some providers use simple names like `gpt-5.5`; others use namespaced IDs or deployment paths like `zai-org/GLM-5.2`, so the full Deep Agents string would be `baseten:zai-org/GLM-5.2`. Check the provider's model catalog or integration docs for the current identifiers.
 
@@ -16,12 +16,12 @@ These models perform well on the [Deep Agents eval suite](https://github.com/lan
 
 | Provider                                                  | Models                                                  |
 | --------------------------------------------------------- | ------------------------------------------------------- |
-| [Google](https://docs.langchain.com/oss/python/integrations/providers/google)       | `gemini-3.1-pro-preview`, `gemini-3.6-flash`            |
-| [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai)       | `gpt-5.5`, `gpt-5.4`                                    |
-| [Anthropic](https://docs.langchain.com/oss/python/integrations/providers/anthropic) | `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6` |
+| [Google](../integrations/providers/google.md)       | `gemini-3.1-pro-preview`, `gemini-3.6-flash`            |
+| [OpenAI](../integrations/providers/openai.md)       | `gpt-5.5`, `gpt-5.4`                                    |
+| [Anthropic](../integrations/providers/anthropic.md) | `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6` |
 | Open-weight                                               | `GLM-5.2`, `Kimi-K2.7 Code`, `MiniMax-M3`               |
 
-Open-weight models are available through providers like [Baseten](https://docs.langchain.com/oss/python/integrations/providers/baseten), [Fireworks](https://docs.langchain.com/oss/python/integrations/chat/fireworks), [OpenRouter](https://docs.langchain.com/oss/python/integrations/providers/openrouter), and [Ollama](https://docs.langchain.com/oss/python/integrations/providers/ollama).
+Open-weight models are available through providers like [Baseten](../integrations/providers/baseten.md), [Fireworks](../integrations/chat/fireworks.md), [OpenRouter](../integrations/providers/openrouter.md), and [Ollama](../integrations/providers/ollama.md).
 
 ### Model evaluations
 
@@ -74,11 +74,11 @@ agent = create_deep_agent(model=model)
 ```
 
 > [!NOTE]
-> Available parameters vary by provider. See the [chat model integrations](https://docs.langchain.com/oss/python/integrations/chat) page for provider-specific configuration options.
+> Available parameters vary by provider. See the [chat model integrations](../integrations/chat.md) page for provider-specific configuration options.
 
 ### Provider profiles
 
-A [`ProviderProfile`](https://docs.langchain.com/oss/python/deepagents/profiles#provider-profiles) packages initialization parameters that apply when you provide a `provider:model` string when creating the deep agent. It does not apply when you pass a preconfigured model with [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model).
+A [`ProviderProfile`](profiles.md#provider-profiles) packages initialization parameters that apply when you provide a `provider:model` string when creating the deep agent. It does not apply when you pass a preconfigured model with [`init_chat_model`](https://reference.langchain.com/python/langchain/chat_models/base/init_chat_model).
 
 You can register at two levels, and both can coexist:
 
@@ -102,16 +102,16 @@ register_provider_profile(
 )
 ```
 
-See [Profiles](https://docs.langchain.com/oss/python/deepagents/profiles) for the full field list, merge semantics, and plugin packaging.
+See [Profiles](profiles.md) for the full field list, merge semantics, and plugin packaging.
 
 > [!TIP]
-> For shaping how the *agent* behaves once the model is built, use a [harness profile](https://docs.langchain.com/oss/python/deepagents/profiles#harness-profiles).
+> For shaping how the *agent* behaves once the model is built, use a [harness profile](profiles.md#harness-profiles).
 
 ## Select a model at runtime
 
-If your application lets users choose a model (for example using a dropdown in the UI), use [middleware](https://docs.langchain.com/oss/python/langchain/middleware) to swap the model at runtime without rebuilding the agent.
+If your application lets users choose a model (for example using a dropdown in the UI), use [middleware](../langchain/middleware.md) to swap the model at runtime without rebuilding the agent.
 
-Pass the user's model selection through [runtime context](https://docs.langchain.com/oss/python/langchain/models#dynamic-model-selection), then use a `wrap_model_call` middleware to override the model on each invocation using the [`@wrap_model_call`](https://reference.langchain.com/python/langchain/agents/middleware/types/wrap_model_call) decorator:
+Pass the user's model selection through [runtime context](../langchain/models.md#dynamic-model-selection), then use a `wrap_model_call` middleware to override the model on each invocation using the [`@wrap_model_call`](https://reference.langchain.com/python/langchain/agents/middleware/types/wrap_model_call) decorator:
 
 ```python
 from dataclasses import dataclass
@@ -148,11 +148,11 @@ result = agent.invoke(
 ```
 
 > [!TIP]
-> For more dynamic model patterns (for example routing based on conversation complexity or cost optimization), see [Dynamic model](https://docs.langchain.com/oss/python/langchain/models#dynamic-model-selection) in the LangChain agents guide.
+> For more dynamic model patterns (for example routing based on conversation complexity or cost optimization), see [Dynamic model](../langchain/models.md#dynamic-model-selection) in the LangChain agents guide.
 
 ## Learn more
 
-* [Models in LangChain](https://docs.langchain.com/oss/python/langchain/models): chat model features including tool calling, structured output, and multimodality
+* [Models in LangChain](../langchain/models.md): chat model features including tool calling, structured output, and multimodality
 
 ***
 

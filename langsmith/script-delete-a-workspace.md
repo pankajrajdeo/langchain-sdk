@@ -1,7 +1,7 @@
 # Delete workspaces
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/script-delete-a-workspace)
 > [!NOTE]
-> Deleting a workspace is supported **nativley in LangSmith Self-Hosted v0.10**. View [instructions for deleting a workspace](https://docs.langchain.com/langsmith/set-up-hierarchy#delete-a-workspace).
+> Deleting a workspace is supported **nativley in LangSmith Self-Hosted v0.10**. View [instructions for deleting a workspace](set-up-hierarchy.md#delete-a-workspace).
 >
 > Follow the guide below for Self-Hosted versions before v0.10.
 

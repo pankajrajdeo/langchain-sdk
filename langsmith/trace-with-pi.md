@@ -11,7 +11,7 @@ Once configured, each Pi session sends traces to LangSmith. Each trace includes 
 Before setting up tracing, ensure you have:
 
 * [**Pi**](https://pi.dev) installed.
-* A [**LangSmith API key**](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [**LangSmith API key**](create-account-api-key.md).
 
 ## Installation
 
@@ -94,7 +94,7 @@ Config file fields:
 
 ## Replicas
 
-Use `replicas` to send traces to multiple LangSmith destinations simultaneously. This is useful for forwarding traces to both a personal workspace and a shared team project, or to a [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) instance alongside the [cloud](https://docs.langchain.com/langsmith/cloud).
+Use `replicas` to send traces to multiple LangSmith destinations simultaneously. This is useful for forwarding traces to both a personal workspace and a shared team project, or to a [self-hosted LangSmith](self-hosted.md) instance alongside the [cloud](cloud.md).
 
 ```json
 {

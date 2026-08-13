@@ -6,10 +6,10 @@ Persistence lets LangGraph applications keep useful information beyond a single 
 
 LangGraph provides two complementary persistence systems:
 
-* **[Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers)** persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance.
-* **[Stores](https://docs.langchain.com/oss/python/langgraph/stores)** persist application-defined data outside the graph state. Use them for long-term, cross-thread memory, including user preferences, facts, and shared knowledge.
+* **[Checkpointers](checkpointers.md)** persist a thread's graph state as checkpoints. Use them for short-term, thread-scoped memory, including conversation continuity, human-in-the-loop workflows, time travel, and fault tolerance.
+* **[Stores](stores.md)** persist application-defined data outside the graph state. Use them for long-term, cross-thread memory, including user preferences, facts, and shared knowledge.
 
-Most applications can use both: a [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers) tracks the current thread, and a [store](https://docs.langchain.com/oss/python/langgraph/stores) tracks durable information across threads.
+Most applications can use both: a [checkpointer](checkpointers.md) tracks the current thread, and a [store](stores.md) tracks durable information across threads.
 
 ## Quickstart
 
@@ -32,7 +32,10 @@ result = graph.invoke(
 
 > [!NOTE]
 > **Agent Server handles persistence automatically**
-> When using the [Agent Server](https://docs.langchain.com/langsmith/agent-server), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
+> When using the [Agent Server](../langsmith/agent-server.md), you do not need to implement or configure checkpointers or stores manually. The server handles persistence infrastructure behind the scenes.
+
+<a id="checkpointer-libraries"></a>
+<a id="memory-store"></a>
 
 ## Checkpointer vs. store
 
@@ -43,7 +46,9 @@ result = graph.invoke(
 | Memory type    | Short-term, thread-scoped memory                                             | Long-term, cross-thread memory                      |
 | Use for        | Conversation continuity, human-in-the-loop, time travel, and fault tolerance | User preferences, facts, and shared knowledge       |
 | Access pattern | Pass a `thread_id` in graph config                                           | Read and write items from nodes or application code |
-| Full guide     | [Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers)                         | [Stores](https://docs.langchain.com/oss/python/langgraph/stores)              |
+| Full guide     | [Checkpointers](checkpointers.md)                         | [Stores](stores.md)              |
+
+<a id="durability-modes"></a>
 
 ## Troubleshooting common issues
 
@@ -86,12 +91,12 @@ checkpointer.setup()  # Creates tables with indexes
 
 When a subgraph updates state, the parent graph may not see the changes immediately. This is because each subgraph manages its own checkpoint namespace.
 
-**Fix:** Use [shared state via Store](https://docs.langchain.com/oss/python/langgraph/stores) for data that needs to cross graph boundaries, or configure your subgraph to write to the parent checkpoint.
+**Fix:** Use [shared state via Store](stores.md) for data that needs to cross graph boundaries, or configure your subgraph to write to the parent checkpoint.
 
 ## Next steps
 
-* [Use checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers) to persist and inspect thread state.
-* [Use stores](https://docs.langchain.com/oss/python/langgraph/stores) to persist durable data across threads.
+* [Use checkpointers](checkpointers.md) to persist and inspect thread state.
+* [Use stores](stores.md) to persist durable data across threads.
 
 ***
 

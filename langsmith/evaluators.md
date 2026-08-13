@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluators)
 View and manage evaluators at the workspace level in LangSmith.
 
-[Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) in LangSmith are [workspace-level](https://docs.langchain.com/langsmith/administration-overview#workspaces) resources. You can attach a single evaluator to multiple [tracing projects](https://docs.langchain.com/langsmith/observability-concepts#projects) and [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
+[Evaluators](evaluation-concepts.md#evaluators) in LangSmith are [workspace-level](administration-overview.md#workspaces) resources. You can attach a single evaluator to multiple [tracing projects](observability-concepts.md#projects) and [datasets](evaluation-concepts.md#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
 
 > [!TIP]
-> The [LangSmith Engine](https://docs.langchain.com/langsmith/engine) suggests custom evaluators for detected issues and can deploy them with one click.
+> The [LangSmith Engine](engine.md) suggests custom evaluators for detected issues and can deploy them with one click.
 
 ## View evaluators
 
@@ -28,14 +28,14 @@ The evaluators table shows the following columns:
 
 ## Create an evaluator
 
-You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators) or programmatically with the [SDK](https://docs.langchain.com/langsmith/evaluators#create-an-evaluator-with-the-sdk). Evaluators created either way are workspace-level resources that appear in the **Evaluators** table.
+You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators) or programmatically with the [SDK](#create-an-evaluator-with-the-sdk). Evaluators created either way are workspace-level resources that appear in the **Evaluators** table.
 
 ### Create an evaluator in the UI
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluators), select **Evaluators** in the left sidebar.
 2. Click **+ Evaluator** to open the new evaluator panel.
 3. The panel lets you:
-   * **Create from scratch**: Build a new [LLM-as-a-Judge](https://docs.langchain.com/langsmith/llm-as-judge) or [Code](https://docs.langchain.com/langsmith/online-evaluations-code) evaluator.
+   * **Create from scratch**: Build a new [LLM-as-a-Judge](llm-as-judge.md) or [Code](online-evaluations-code.md) evaluator.
    * **Create from a template**: Start from a ready-made evaluator (also known as a prebuilt evaluator) for common evaluation patterns. A **Recommended** section surfaces popular templates first, followed by templates organized by the following categories:
 
      | Category          | Description                                          |
@@ -48,11 +48,11 @@ You can create an evaluator in the [LangSmith UI](https://smith.langchain.com?ut
      | Image Evaluations | Evaluate image content quality and safety.           |
      | Voice Evaluation  | Evaluate voice and audio interaction quality.        |
 
-You can also add an evaluator directly from a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects) or [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets). In that flow, you can additionally **attach an existing evaluator** from your workspace, or create a [Composite](https://docs.langchain.com/langsmith/composite-evaluators-ui) evaluator. Refer to [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) and [Automatically run evaluators on experiments](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset).
+You can also add an evaluator directly from a [tracing project](observability-concepts.md#projects) or [dataset](evaluation-concepts.md#datasets). In that flow, you can additionally **attach an existing evaluator** from your workspace, or create a [Composite](composite-evaluators-ui.md) evaluator. Refer to [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md) and [Automatically run evaluators on experiments](bind-evaluator-to-dataset.md).
 
 ### Create an evaluator with the SDK
 
-Use the LangSmith SDK to create evaluators programmatically. The SDK is available for [Python](https://docs.langchain.com/langsmith/smith-python-sdk) and [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk). Evaluators created through the SDK appear in the **Evaluators** table alongside those created in the UI.
+Use the LangSmith SDK to create evaluators programmatically. The SDK is available for [Python](smith-python-sdk.md) and [TypeScript](smith-js-ts-sdk.md). Evaluators created through the SDK appear in the **Evaluators** table alongside those created in the UI.
 
 > [!NOTE]
 > Managing evaluators through the SDK requires `langsmith>=0.9.8` (Python, PyPI) or `langsmith>=0.7.16` (TypeScript, npm).
@@ -94,7 +94,7 @@ const created = await client.evaluators.create({
 console.log("Created evaluator:", created.evaluator?.id);
 ```
 
-To create an LLM-as-a-judge evaluator and to retrieve, update, list, or delete evaluators, refer to [Manage evaluators with the SDK](https://docs.langchain.com/langsmith/manage-evaluators-sdk).
+To create an LLM-as-a-judge evaluator and to retrieve, update, list, or delete evaluators, refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md).
 
 ## View evaluator details
 
@@ -103,7 +103,7 @@ Click any evaluator in the table to open its detail view. The detail view has fo
 * **Overview**: The evaluator's feedback configuration and prompt or code definition.
 * **Traces**: Traces processed by this evaluator across all attached resources.
 * **Logs**: Execution logs for this evaluator across all attached resources.
-* **Projects & Datasets**: The tracing projects and datasets this evaluator is attached to, with each attachment's [weekly spend and limit](https://docs.langchain.com/langsmith/evaluator-spend).
+* **Projects & Datasets**: The tracing projects and datasets this evaluator is attached to, with each attachment's [weekly spend and limit](evaluator-spend.md).
 
 ## Edit an evaluator
 
@@ -113,19 +113,19 @@ Because the evaluator is shared, changes apply across all tracing projects and d
 
 ## Manage evaluator trace retention
 
-When an online evaluator scores a trace, it attaches feedback to the trace. This can auto-upgrade the trace to [extended retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades), depending on the evaluator's retention setting. Extended retention keeps the trace longer but costs more. When you set up an online evaluator on a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects), you can opt out of this upgrade so that scored traces stay at the project's base retention.
+When an online evaluator scores a trace, it attaches feedback to the trace. This can auto-upgrade the trace to [extended retention](usage-and-billing.md#data-retention-auto-upgrades), depending on the evaluator's retention setting. Extended retention keeps the trace longer but costs more. When you set up an online evaluator on a [tracing project](observability-concepts.md#projects), you can opt out of this upgrade so that scored traces stay at the project's base retention.
 
-This control is available only when the project's [default retention](https://docs.langchain.com/langsmith/billing#change-project-level-default-retention) is the [base tier](https://docs.langchain.com/langsmith/usage-and-billing#how-it-works). If the project defaults to extended retention ([set at the project or workspace level](https://docs.langchain.com/langsmith/data-purging-compliance#data-retention)), traces scored by the evaluator follow that default and the option is locked.
+This control is available only when the project's [default retention](billing.md#change-project-level-default-retention) is the [base tier](usage-and-billing.md#how-it-works). If the project defaults to extended retention ([set at the project or workspace level](data-purging-compliance.md#data-retention)), traces scored by the evaluator follow that default and the option is locked.
 
 To opt out of extending retention for scored traces:
 
-1. When you [create](https://docs.langchain.com/langsmith/evaluators#create-an-evaluator) or [edit](https://docs.langchain.com/langsmith/evaluators#edit-an-evaluator) an online evaluator, set the source to a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects), rather than a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets).
+1. When you [create](#create-an-evaluator) or [edit](#edit-an-evaluator) an online evaluator, set the source to a [tracing project](observability-concepts.md#projects), rather than a [dataset](evaluation-concepts.md#datasets).
 2. Expand the **Advanced** section in the evaluator configuration panel.
 3. Clear **Extend trace retention**.
 
 The change applies to traces scored after you save the evaluator. Existing scored traces keep their current retention tier.
 
-The **Extend trace retention** toggle described above applies to both trace-level and thread-level (multi-turn) online evaluators. For more information on multi-turn evaluators, see [Set up multi-turn online evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn).
+The **Extend trace retention** toggle described above applies to both trace-level and thread-level (multi-turn) online evaluators. For more information on multi-turn evaluators, see [Set up multi-turn online evaluators](online-evaluations-multi-turn.md).
 
 ## Delete an evaluator
 

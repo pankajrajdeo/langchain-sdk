@@ -117,7 +117,7 @@ npx wrangler dev .svelte-kit/cloudflare/_worker.js
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
 * [SvelteKit Cloudflare adapter](https://svelte.dev/docs/kit/adapter-cloudflare)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [`@langchain/svelte`](https://reference.langchain.com/javascript/langchain-svelte/getting-started)

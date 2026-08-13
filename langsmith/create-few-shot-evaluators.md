@@ -17,9 +17,9 @@ This guide covers how to set up few-shot examples as part of your LLM-as-a-judge
 > [!NOTE]
 > Few-shot examples are not currently supported in LLM-as-a-judge evaluators that use the prompt hub and are only compatible with prompts that use mustache formatting.
 >
-> Few-shot examples are only supported for run-level evaluators, not thread-level. Toggle on **Runs** in the [**Configure Evaluator** panel](https://docs.langchain.com/langsmith/evaluators#edit-an-evaluator).
+> Few-shot examples are only supported for run-level evaluators, not thread-level. Toggle on **Runs** in the [**Configure Evaluator** panel](evaluators.md#edit-an-evaluator).
 
-Before enabling few-shot examples, set up your LLM-as-a-judge evaluator. If you haven't done this yet, follow the steps in the [LLM-as-a-judge evaluator guide](https://docs.langchain.com/langsmith/llm-as-judge).
+Before enabling few-shot examples, set up your LLM-as-a-judge evaluator. If you haven't done this yet, follow the steps in the [LLM-as-a-judge evaluator guide](llm-as-judge.md).
 
 ### 1. Configure variable mapping
 
@@ -34,13 +34,13 @@ You may also specify the number of few-shot examples to use. The default is 5. I
 ## Make corrections
 
 > [!NOTE]
-> [Audit evaluator scores](https://docs.langchain.com/langsmith/audit-evaluator-scores)
+> [Audit evaluator scores](audit-evaluator-scores.md)
 
-As you start logging traces or running experiments, you will likely disagree with some of the scores that your evaluator has given. When you [make corrections to these scores](https://docs.langchain.com/langsmith/audit-evaluator-scores), you will begin seeing examples populated inside your corrections dataset. As you make corrections, make sure to attach explanations - these will get populated into your evaluator prompt in place of the `few_shot_explanation` variable.
+As you start logging traces or running experiments, you will likely disagree with some of the scores that your evaluator has given. When you [make corrections to these scores](audit-evaluator-scores.md), you will begin seeing examples populated inside your corrections dataset. As you make corrections, make sure to attach explanations - these will get populated into your evaluator prompt in place of the `few_shot_explanation` variable.
 
 The inputs to the few-shot examples will be the relevant fields from the inputs, outputs, and reference (if this an offline evaluator) of your chain/dataset. The outputs will be the corrected evaluator score and the explanations that you created when you left the corrections. Feel free to edit these to your liking. Here is an example of a few-shot example in a corrections dataset:
 
-> **Image:** [Few-shot example](https://docs.langchain.com/langsmith/create-few-shot-evaluators)
+> **Image:** [Few-shot example](create-few-shot-evaluators.md)
 
 Note that the corrections may take a minute or two to be populated into your few-shot dataset. Once they are there, future runs of your evaluator will include them in the prompt!
 
@@ -51,11 +51,11 @@ In order to view your corrections dataset:
 * **Online evaluators**: Select your run rule and click **Edit Rule**
 * **Offline evaluators**: Select your evaluator and click **Edit Evaluator**
 
-> **Image:** [Edit Evaluator](https://docs.langchain.com/langsmith/create-few-shot-evaluators)
+> **Image:** [Edit Evaluator](create-few-shot-evaluators.md)
 
 Head to your dataset of corrections linked in the **Improve evaluator accuracy using few-shot examples** section. You can view and update your few-shot examples in the dataset.
 
-> **Image:** [View few-shot dataset](https://docs.langchain.com/langsmith/create-few-shot-evaluators)
+> **Image:** [View few-shot dataset](create-few-shot-evaluators.md)
 
 ***
 

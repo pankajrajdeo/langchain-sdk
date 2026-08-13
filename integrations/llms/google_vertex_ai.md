@@ -5,12 +5,12 @@
 > [!CAUTION]
 > **Deprecated**
 >
-> This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/llms/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
+> This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Google Vertex text completion models. Many Google models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Google Vertex text completion models. Many Google models are [chat completion models](../../langchain/models.md).**
 >
-> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/google_vertex_ai/).
+> You may be looking for [this page instead](../chat/google_vertex_ai.md).
 
 **Note:** This is separate from the `Google Generative AI` integration, it exposes [Vertex AI Generative API](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/overview) on `Google Cloud`.
 
@@ -40,7 +40,7 @@ pip install -qU  langchain-core langchain-google-vertexai
 
 ## Usage
 
-VertexAI supports all [LLM](https://docs.langchain.com/oss/python/langchain/models) functionality.
+VertexAI supports all [LLM](../../langchain/models.md) functionality.
 
 ```python
 from langchain_google_vertexai import VertexAI

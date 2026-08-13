@@ -12,9 +12,9 @@ You can find information about Anthropic's latest models, their costs, context w
 > [!NOTE]
 > **AWS Bedrock and Google VertexAI**
 >
-> Note that certain Anthropic models can also be accessed via AWS Bedrock and Google VertexAI. See the [`ChatBedrock`](https://docs.langchain.com/oss/python/integrations/chat/bedrock/) and [`ChatVertexAI`](https://docs.langchain.com/oss/python/integrations/chat/google_vertex_ai) integrations to use Anthropic models via these services.
+> Note that certain Anthropic models can also be accessed via AWS Bedrock and Google VertexAI. See the [`ChatBedrock`](bedrock.md) and [`ChatVertexAI`](google_vertex_ai.md) integrations to use Anthropic models via these services.
 >
-> For Anthropic models on AWS Bedrock with the same API as `ChatAnthropic`, use [`ChatAnthropicBedrock`](https://docs.langchain.com/oss/python/integrations/chat/bedrock#chatanthropicbedrock) from `langchain-aws`.
+> For Anthropic models on AWS Bedrock with the same API as `ChatAnthropic`, use [`ChatAnthropicBedrock`](bedrock.md#chatanthropicbedrock) from `langchain-aws`.
 
 ## Overview
 
@@ -26,7 +26,7 @@ You can find information about Anthropic's latest models, their costs, context w
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -56,7 +56,7 @@ if "ANTHROPIC_API_KEY" not in os.environ:
     os.environ["ANTHROPIC_API_KEY"] = getpass.getpass("Enter your Anthropic API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -178,11 +178,11 @@ AIMessage(
 
 </details>
 
-Learn more about supported invocation methods in our [models](https://docs.langchain.com/oss/python/langchain/models#invocation) guide.
+Learn more about supported invocation methods in our [models](../../langchain/models.md#invocation) guide.
 
 ## Content blocks
 
-When using tools, [extended thinking](https://docs.langchain.com/oss/python/integrations/chat/anthropic#extended-thinking), and other features, content from a single Anthropic [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) can either be a single string or a list of Anthropic content blocks.
+When using tools, [extended thinking](#extended-thinking), and other features, content from a single Anthropic [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) can either be a single string or a list of Anthropic content blocks.
 
 For example, when an Anthropic model invokes a tool, the tool invocation is part of the message content (as well as being exposed in the standardized [`AIMessage.tool_calls`](https://reference.langchain.com/python/langchain/messages/#langchain.messages.AIMessage.tool_calls)):
 
@@ -216,7 +216,7 @@ response.content
   'type': 'tool_use'}]
 ```
 
-Using `content_blocks` will render the content in LangChain's standard format that is consistent across other model providers. Read more about [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
+Using `content_blocks` will render the content in LangChain's standard format that is consistent across other model providers. Read more about [content blocks](../../langchain/messages.md#standard-content-blocks).
 
 ```python
 response.content_blocks
@@ -245,7 +245,7 @@ Anthropic's tool use features allow you to define external functions that Claude
 See [`ChatAnthropic.bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) for details on how to bind tools to your model instance.
 
 > [!NOTE]
-> For information about Claude's built-in tools (code execution, web browsing, files API, etc), see the [Built-in tools](https://docs.langchain.com/oss/python/integrations/chat/anthropic#built-in-tools).
+> For information about Claude's built-in tools (code execution, web browsing, files API, etc), see the [Built-in tools](#built-in-tools).
 
 ```python
 from pydantic import BaseModel, Field
@@ -423,9 +423,9 @@ response = model_with_tools.invoke(
 
 The `extras` parameter also supports:
 
-* `defer_loading` (bool): Load tool on-demand for [tool search](https://docs.langchain.com/oss/python/integrations/chat/anthropic#tool-search)
-* `cache_control` (dict): Enable [prompt caching](https://docs.langchain.com/oss/python/integrations/chat/anthropic#caching-tools) for the tool
-* `eager_input_streaming` (bool): Enable [fine-grained tool streaming](https://docs.langchain.com/oss/python/integrations/chat/anthropic#fine-grained-tool-streaming) for that tool
+* `defer_loading` (bool): Load tool on-demand for [tool search](#tool-search)
+* `cache_control` (dict): Enable [prompt caching](#caching-tools) for the tool
+* `eager_input_streaming` (bool): Enable [fine-grained tool streaming](#fine-grained-tool-streaming) for that tool
 
 ### Fine-grained tool streaming
 
@@ -499,14 +499,14 @@ Complete args: {'title': 'Artificial Intelligence: An Overview', 'content': '# A
 > [!NOTE]
 > Programmatic tool calling requires `langchain-anthropic>=1.3.0`. See the [Claude docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) for supported models.
 
-Tools can be configured to be callable from Claude's [code execution](https://docs.langchain.com/oss/python/integrations/chat/anthropic#code-execution) environment, reducing latency and token consumption in contexts involving large data processing or multi-tool workflows.
+Tools can be configured to be callable from Claude's [code execution](#code-execution) environment, reducing latency and token consumption in contexts involving large data processing or multi-tool workflows.
 
 Refer to Claude's [programmatic tool calling guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling) for details. To use this feature:
 
-* Include the [code execution](https://docs.langchain.com/oss/python/integrations/chat/anthropic#code-execution) built-in tool in your set of tools
+* Include the [code execution](#code-execution) built-in tool in your set of tools
 * Specify `extras={"allowed_callers": ["code_execution_20250825"]}` on tools you wish to call programmatically
 
-See below for a full example with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents).
+See below for a full example with [`create_agent`](../../langchain/agents.md).
 
 > [!TIP]
 > You can specify `reuse_last_container` on initialization to automatically reuse code execution containers from previous model responses.
@@ -543,7 +543,7 @@ result = agent.invoke({"messages": [input_query]})
 
 ## Multimodal
 
-Claude supports image and PDF inputs as content blocks, both in Anthropic's native format (see docs for [vision](https://platform.claude.com/docs/en/build-with-claude/vision) and [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support)) as well as LangChain's [standard format](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+Claude supports image and PDF inputs as content blocks, both in Anthropic's native format (see docs for [vision](https://platform.claude.com/docs/en/build-with-claude/vision) and [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support)) as well as LangChain's [standard format](../../langchain/messages.md#multimodal).
 
 ### Supported input methods
 
@@ -554,7 +554,7 @@ Claude supports image and PDF inputs as content blocks, both in Anthropic's nati
 | [Files API](https://platform.claude.com/docs/en/build-with-claude/files) |   ✅   |  ✅  |
 
 > [!TIP]
-> The Files API can also be used to upload files to a container for use with Claude's built-in code-execution tools. See the [code execution](https://docs.langchain.com/oss/python/integrations/chat/anthropic#code-execution) section for details.
+> The Files API can also be used to upload files to a container for use with Claude's built-in code-execution tools. See the [code execution](#code-execution) section for details.
 
 ### Image input
 
@@ -797,7 +797,7 @@ response = model.invoke("Analyze the trade-offs between microservices and monoli
 > [!NOTE]
 > Setting `effort` to `"high"` produces exactly the same behavior as omitting the parameter altogether.
 
-`effort` is an alias for the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, at both construction and call time. If both are set, `effort` wins.
+`effort` is an alias for the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, at both construction and call time. If both are set, `effort` wins.
 
 > [!NOTE]
 > `reasoning_effort` requires `langchain-anthropic>=1.5.3`.
@@ -921,7 +921,7 @@ def retrieval_tool(query: str) -> list[dict]:
 <details>
 <summary>End to end example with LangGraph</summary>
 
-Here we demonstrate an end-to-end example in which we populate a LangChain [vector store](https://docs.langchain.com/oss/python/integrations/vectorstores/) with sample documents and equip Claude with a tool that queries those documents.
+Here we demonstrate an end-to-end example in which we populate a LangChain [vector store](../vectorstores.md) with sample documents and equip Claude with a tool that queries those documents.
 
 The tool here takes a search query and a `category` string literal, but any valid tool signature can be used.
 
@@ -1033,7 +1033,7 @@ async for snapshot in stream.values:
 
 ### Using with text splitters
 
-Anthropic also lets you specify your own splits using [custom document](https://platform.claude.com/docs/en/build-with-claude/citations#custom-content-documents) types. LangChain [text splitters](https://docs.langchain.com/oss/python/integrations/splitters/) can be used to generate meaningful splits for this purpose. See the below example, where we split the LangChain `README.md` (a markdown document) and pass it to Claude as context:
+Anthropic also lets you specify your own splits using [custom document](https://platform.claude.com/docs/en/build-with-claude/citations#custom-content-documents) types. LangChain [text splitters](../splitters.md) can be used to generate meaningful splits for this purpose. See the below example, where we split the LangChain `README.md` (a markdown document) and pass it to Claude as context:
 
 This example requires [`langchain-text-splitters`](https://reference.langchain.com/python/langchain-text-splitters/) to be installed:
 
@@ -1085,18 +1085,18 @@ response = model.invoke([message])
 
 ## Prompt caching
 
-Anthropic supports [caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) of elements of your prompts, including messages, tool definitions, tool results, images and documents. This allows you to reuse large documents, instructions, [few-shot documents](https://docs.langchain.com/langsmith/create-few-shot-evaluators), and other data to reduce latency and costs.
+Anthropic supports [caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) of elements of your prompts, including messages, tool definitions, tool results, images and documents. This allows you to reuse large documents, instructions, [few-shot documents](../../langsmith/create-few-shot-evaluators.md), and other data to reduce latency and costs.
 
 There are two ways to enable prompt caching on direct model calls:
 
-* **[Automatic caching](https://docs.langchain.com/oss/python/integrations/chat/anthropic#automatic-caching)**: Pass `cache_control` at invocation time (`model.invoke(..., cache_control=...)`). This is provider/API-level caching: the Anthropic API applies the cache breakpoint to the last cacheable block and moves it forward as conversations grow.
-* **[Explicit cache breakpoints](https://docs.langchain.com/oss/python/integrations/chat/anthropic#explicit-cache-breakpoints)**: Place `cache_control` directly on individual content blocks for fine-grained, direct breakpoint control over exactly what gets cached.
+* **[Automatic caching](#automatic-caching)**: Pass `cache_control` at invocation time (`model.invoke(..., cache_control=...)`). This is provider/API-level caching: the Anthropic API applies the cache breakpoint to the last cacheable block and moves it forward as conversations grow.
+* **[Explicit cache breakpoints](#explicit-cache-breakpoints)**: Place `cache_control` directly on individual content blocks for fine-grained, direct breakpoint control over exactly what gets cached.
 
 > [!WARNING]
 > Only certain Claude models support prompt caching. See the [Claude documentation](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#supported-models) for details.
 
 > [!NOTE]
-> For LangChain agents, prefer [`AnthropicPromptCachingMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#prompt-caching) when you want LangChain to optimize stable system prompt and tool content. The middleware is a LangChain agent/harness optimization and is not the same as the invocation-level `cache_control` shown below, which mirrors the Anthropic API behavior.
+> For LangChain agents, prefer [`AnthropicPromptCachingMiddleware`](../middleware/anthropic.md#prompt-caching) when you want LangChain to optimize stable system prompt and tool content. The middleware is a LangChain agent/harness optimization and is not the same as the invocation-level `cache_control` shown below, which mirrors the Anthropic API behavior.
 
 ### Automatic caching
 
@@ -1312,7 +1312,7 @@ Prompt caching can be used in [multi-turn conversations](https://platform.claude
 
 We can enable incremental caching by marking the final message with `cache_control`. Claude will automatically use the longest previously-cached prefix for follow-up messages.
 
-Below, we implement a simple chatbot that incorporates this feature. We follow the LangChain [chatbot tutorial](https://docs.langchain.com/oss/python/langchain/quickstart), but add a custom [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) that automatically marks the last content block in each user message with `cache_control`:
+Below, we implement a simple chatbot that incorporates this feature. We follow the LangChain [chatbot tutorial](../../langchain/quickstart.md), but add a custom [reducer](../../langgraph/graph-api.md#reducers) that automatically marks the last content block in each user message with `cache_control`:
 
 <details>
 <summary>Chatbot with incremental prompt caching</summary>
@@ -1564,12 +1564,12 @@ When a compaction event is triggered, `ChatAnthropic` will return [compaction bl
 
 Anthropic supports a native [structured output feature](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), which guarantees that its responses adhere to a given schema.
 
-You can access this feature in individual model calls, or by specifying the [response format](https://docs.langchain.com/oss/python/langchain/structured-output) of a LangChain [agent](https://docs.langchain.com/oss/python/langchain/agents). See below for examples.
+You can access this feature in individual model calls, or by specifying the [response format](../../langchain/structured-output.md) of a LangChain [agent](../../langchain/agents.md). See below for examples.
 
 <details>
 <summary>Individual model calls</summary>
 
-Use the [`with_structured_output`](https://docs.langchain.com/oss/python/langchain/models#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable Anthropic's native structured output feature; otherwise the method defaults to using function calling.
+Use the [`with_structured_output`](../../langchain/models.md#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable Anthropic's native structured output feature; otherwise the method defaults to using function calling.
 
 ```python
 from langchain_anthropic import ChatAnthropic
@@ -1598,7 +1598,7 @@ Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 <details>
 <summary>Agent response format</summary>
 
-Specify `response_format` with [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output) to engage Anthropic's structured output feature when generating its final response.
+Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage Anthropic's structured output feature when generating its final response.
 
 ```python
 from langchain.agents import create_agent
@@ -1634,9 +1634,9 @@ Weather(temperature=75.0, condition='Sunny')
 
 ## Built-in tools
 
-Anthropic supports a variety of built-in client and server-side [tools](https://docs.langchain.com/oss/python/langchain/tools/).
+Anthropic supports a variety of built-in client and server-side [tools](../../langchain/tools.md).
 
-Server-side tools (e.g., [web search](https://docs.langchain.com/oss/python/integrations/chat/anthropic#web-search)) are passed to the model and executed by Anthropic. Client-side tools (e.g., [bash tool](https://docs.langchain.com/oss/python/integrations/chat/anthropic#bash-tool)) require you to implement the callback execution logic in your application and return results to the model.
+Server-side tools (e.g., [web search](#web-search)) are passed to the model and executed by Anthropic. Client-side tools (e.g., [bash tool](#bash-tool)) require you to implement the callback execution logic in your application and return results to the model.
 
 In either case, you make tools accessible to your chat model by using [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) on the model instance.
 
@@ -1645,7 +1645,7 @@ Importantly, client-side tools require you to implement the execution logic. See
 > [!NOTE]
 > **Middleware vs tools**
 >
-> For client-side tools (e.g. [bash](https://docs.langchain.com/oss/python/integrations/chat/anthropic#bash-tool), [text editor](https://docs.langchain.com/oss/python/integrations/chat/anthropic#text-editor), [memory](https://docs.langchain.com/oss/python/integrations/chat/anthropic#memory-tool)), you may opt to use [middleware](https://docs.langchain.com/oss/python/integrations/middleware/anthropic), which provide production-ready implementations that contain built-in execution, state management, and security policies.
+> For client-side tools (e.g. [bash](#bash-tool), [text editor](#text-editor), [memory](#memory-tool)), you may opt to use [middleware](../middleware/anthropic.md), which provide production-ready implementations that contain built-in execution, state management, and security policies.
 >
 > Use middleware when you want a turnkey solution; use tools (documented below) when you need custom execution logic or want to use [`bind_tools`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic/bind_tools) directly.
 
@@ -1802,7 +1802,7 @@ The bash tool supports two parameters:
 * `restart` (optional): Set to `true` to restart the bash session
 
 > [!TIP]
-> For a "batteries-included" implementation, consider using [`ClaudeBashToolMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#bash-tool) which provides persistent sessions, Docker isolation, output redaction, and startup/shutdown commands out of the box.
+> For a "batteries-included" implementation, consider using [`ClaudeBashToolMiddleware`](../middleware/anthropic.md#bash-tool) which provides persistent sessions, Docker isolation, output redaction, and startup/shutdown commands out of the box.
 
 ### Code execution
 
@@ -2393,7 +2393,7 @@ Using [`create_agent`](https://reference.langchain.com/python/langchain/agents/f
 > * `text_editor_20250728` (recommended)
 
 > [!TIP]
-> For a "batteries-included" implementation, consider using [`StateClaudeTextEditorMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#text-editor) or [`FilesystemClaudeTextEditorMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#text-editor) which provide LangGraph state integration or filesystem persistence, path validation, and other features.
+> For a "batteries-included" implementation, consider using [`StateClaudeTextEditorMiddleware`](../middleware/anthropic.md#text-editor) or [`FilesystemClaudeTextEditorMiddleware`](../middleware/anthropic.md#text-editor) which provide LangGraph state integration or filesystem persistence, path validation, and other features.
 
 ### Web fetching
 
@@ -2693,7 +2693,7 @@ response.content_blocks
 ```
 
 > [!TIP]
-> For a "batteries-included" implementation, consider using [`StateClaudeMemoryMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#memory) or [`FilesystemClaudeMemoryMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#memory) which provide LangGraph state integration or filesystem persistence, automatic system prompt injection, and other features.
+> For a "batteries-included" implementation, consider using [`StateClaudeMemoryMiddleware`](../middleware/anthropic.md#memory) or [`FilesystemClaudeMemoryMiddleware`](../middleware/anthropic.md#memory) which provide LangGraph state integration or filesystem persistence, automatic system prompt injection, and other features.
 
 ### Tool search
 

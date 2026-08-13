@@ -27,7 +27,7 @@ def evaluator(inputs: dict, outputs: dict, reference_outputs: dict) -> dict:
     ...
 ```
 
-See the [`langchain`](https://docs.langchain.com/oss/python/langchain/models#rate-limiting) documentation for more on how to configure rate limiters.
+See the [`langchain`](../langchain/models.md#rate-limiting) documentation for more on how to configure rate limiters.
 
 ## Retrying with exponential backoff
 

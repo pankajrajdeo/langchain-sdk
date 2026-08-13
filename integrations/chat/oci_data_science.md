@@ -2,7 +2,7 @@
 
 > Integrate with the ChatOCIModelDeployment chat model using LangChain Python.
 
-This will help you get started with OCIModelDeployment [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatOCIModelDeployment` features and configurations, see the [langchain-oci package](https://github.com/oracle/langchain-oracle/tree/main/libs/oci).
+This will help you get started with OCIModelDeployment [chat models](../../langchain/models.md). For detailed documentation of all `ChatOCIModelDeployment` features and configurations, see the [langchain-oci package](https://github.com/oracle/langchain-oracle/tree/main/libs/oci).
 
 [OCI Data Science](https://docs.oracle.com/en-us/iaas/data-science/using/home.htm) is a fully managed and serverless platform for data science teams to build, train, and manage machine learning models in the Oracle Cloud Infrastructure. You can use [AI Quick Actions](https://blogs.oracle.com/ai-and-datascience/post/ai-quick-actions-in-oci-data-science) to easily deploy LLMs on [OCI Data Science Model Deployment Service](https://docs.oracle.com/en-us/iaas/data-science/using/model-dep-about.htm). You may choose to deploy the model with popular inference frameworks such as vLLM or TGI. By default, the model deployment endpoint mimics the OpenAI API protocol.
 
@@ -18,7 +18,7 @@ This will help you get started with OCIModelDeployment [chat models](https://doc
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                   depends                   |                            depends                           |                          depends                         |   depends   |   depends   |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 

@@ -1,10 +1,10 @@
 # Set up online code evaluators
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-code)
-[Online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations) provide real-time feedback on your production [traces](https://docs.langchain.com/langsmith/observability-concepts#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
+[Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: identify issues, measure improvements, and ensure consistent quality over time.
 
 Code evaluators allow you to write an evaluator in Python or JavaScript directly in LangSmith. Often used for validating structure or statistical properties of your data.
 
-When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
+When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
 
 ## View online evaluators
 
@@ -24,11 +24,11 @@ Provide a name for your evaluator. This name will be used when referencing the e
 
 For example, you may want to apply specific evaluators based on:
 
-* Runs where a [user left feedback](https://docs.langchain.com/langsmith/attach-user-feedback) indicating the response was unsatisfactory.
-* Runs that invoke a specific tool call. See [filtering for tool calls](https://docs.langchain.com/langsmith/filter-traces-in-application#example-filtering-for-tool-calls) for more information.
-* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](https://docs.langchain.com/langsmith/add-metadata-tags) for more information.
+* Runs where a [user left feedback](attach-user-feedback.md) indicating the response was unsatisfactory.
+* Runs that invoke a specific tool call. See [filtering for tool calls](filter-traces-in-application.md#example-filtering-for-tool-calls) for more information.
+* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](add-metadata-tags.md) for more information.
 
-Filters on evaluators work the same way as when you're filtering traces in a project. For more information on filters, you can refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+Filters on evaluators work the same way as when you're filtering traces in a project. For more information on filters, you can refer to [Filter traces](filter-traces-in-application.md).
 
 > [!TIP]
 > It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.
@@ -41,7 +41,7 @@ Configure a sampling rate to control the percentage of filtered runs that trigge
 
 Apply rule to past runs by toggling the **Apply to past runs** and entering a "Backfill from" date. This is only possible upon rule creation. Note: the backfill is processed as a background job, so you will not see the results immediately.
 
-In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](https://docs.langchain.com/langsmith/rules#view-logs-for-your-automations).
+In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](rules.md#view-logs-for-your-automations).
 
 * Add an evaluator name
 * Optionally filter runs that you would like to apply your evaluator on or configure a sampling rate.
@@ -70,7 +70,7 @@ In the UI, you will find a panel that lets you write your code inline, with some
 
 Code evaluators take in one argument:
 
-* A `Run` ([reference](https://docs.langchain.com/langsmith/run-data-format)). This represents the sampled run to evaluate.
+* A `Run` ([reference](run-data-format.md)). This represents the sampled run to evaluate.
 
 They return a single value:
 

@@ -2,7 +2,7 @@
 
 > Set up a LangSmith BYOC data plane, from enabling BYOC on your organization to creating workspaces and connecting privately.
 
-Before you start, review the [prerequisites](https://docs.langchain.com/langsmith/byoc#prerequisites).
+Before you start, review the [prerequisites](byoc.md#prerequisites).
 
 ### Enable BYOC on your organization
 Create an organization in LangSmith on AWS at [aws.smith.langchain.com](https://aws.smith.langchain.com), or reuse an existing one.
@@ -19,7 +19,7 @@ Apply the [`langsmith-byoc-role` Terraform module](https://github.com/langchain-
 Navigate to **Settings > Data Planes** and create a data plane with the following parameters:
 
 * **Name**: Lowercase letters, digits, and hyphens, up to 24 characters.
-* **AWS region**: One of the [supported regions](https://docs.langchain.com/langsmith/byoc#regions-and-cloud-providers).
+* **AWS region**: One of the [supported regions](byoc.md#regions-and-cloud-providers).
 * **AWS IAM role ARN**: The ARN of the role you created in the previous step, which LangSmith assumes in your account.
 * **External ID**: Must match the `ExternalId` condition in the role's trust policy.
 * **VPC CIDR range**: A private RFC 1918 range, from `/16` to `/18`.
@@ -47,14 +47,14 @@ You can create additional workspaces in the data plane. Select the target data p
 > Pick the correct data plane carefully when you create a workspace. A workspace cannot be moved to another data plane after creation.
 
 ### (Optional) Migrate existing data
-If you are moving from an existing LangSmith Cloud or [self-hosted](https://docs.langchain.com/langsmith/self-hosted) instance, users, roles, datasets, prompts, experiments, annotation queue configuration, automation rules, and dashboards can be copied over. Traces cannot be migrated today.
+If you are moving from an existing LangSmith Cloud or [self-hosted](self-hosted.md) instance, users, roles, datasets, prompts, experiments, annotation queue configuration, automation rules, and dashboards can be copied over. Traces cannot be migrated today.
 
 To plan a migration, contact the LangChain team.
 
 ## Next steps
 
-* [Use your data plane](https://docs.langchain.com/langsmith/byoc-usage) to point applications and API clients at the right endpoint.
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture) covers what LangChain provisions and how the planes communicate.
+* [Use your data plane](byoc-usage.md) to point applications and API clients at the right endpoint.
+* [BYOC architecture](byoc-architecture.md) covers what LangChain provisions and how the planes communicate.
 
 ***
 

@@ -5,9 +5,9 @@ Common issues, fixes, and diagnostic commands for LangSmith self-hosted on Azure
 This page documents common issues, fixes, and diagnostic commands for LangSmith deployments provisioned with the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure).
 
 > [!TIP]
-> Before upgrading, review the [LangSmith self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) for breaking changes and required variable updates. Run `az aks get-credentials --name <cluster> --resource-group <rg>` before running any `kubectl` commands.
+> Before upgrading, review the [LangSmith self-hosted changelog](self-hosted-changelog.md) for breaking changes and required variable updates. Run `az aks get-credentials --name <cluster> --resource-group <rg>` before running any `kubectl` commands.
 
-For a copy-paste reference of the `kubectl`, `helm`, and `az` calls used throughout this page, skip to [Diagnostic commands](https://docs.langchain.com/langsmith/self-host-terraform-azure-troubleshooting#diagnostic-commands).
+For a copy-paste reference of the `kubectl`, `helm`, and `az` calls used throughout this page, skip to [Diagnostic commands](#diagnostic-commands).
 
 ## Infrastructure stage
 
@@ -367,7 +367,7 @@ terraform apply -target=module.aks
 kubectl rollout restart deployment/langsmith-<service> -n langsmith
 ```
 
-See the [architecture page](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture#workload-identity) for the full pod-to-WI mapping.
+See the [architecture page](self-host-terraform-azure-architecture.md#workload-identity) for the full pod-to-WI mapping.
 
 ## Teardown and cleanup
 

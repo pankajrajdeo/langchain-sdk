@@ -1,37 +1,37 @@
 # Model providers
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/playground-model-providers)
-The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
+The [Playground](prompt-engineering-concepts.md#playground) supports a wide range of model providers. You can select a provider, configure your preferred settings, and save these configurations to reuse across multiple prompts.
 
 Use this page for a list of the available providers and their configuration options:
 
-- [Amazon Bedrock](https://docs.langchain.com/langsmith/playground-model-providers#amazon-bedrock)
+- [Amazon Bedrock](#amazon-bedrock)
 
-- [Anthropic](https://docs.langchain.com/langsmith/playground-model-providers#anthropic)
+- [Anthropic](#anthropic)
 
-- [Azure OpenAI](https://docs.langchain.com/langsmith/playground-model-providers#azure-openai)
+- [Azure OpenAI](#azure-openai)
 
-- [DeepSeek](https://docs.langchain.com/langsmith/playground-model-providers#deepseek)
+- [DeepSeek](#deepseek)
 
-- [Fireworks](https://docs.langchain.com/langsmith/playground-model-providers#fireworks)
+- [Fireworks](#fireworks)
 
-- [Google Gemini](https://docs.langchain.com/langsmith/playground-model-providers#google-gemini)
+- [Google Gemini](#google-gemini)
 
-- [Google Vertex AI](https://docs.langchain.com/langsmith/playground-model-providers#google-vertex-ai)
+- [Google Vertex AI](#google-vertex-ai)
 
-- [Groq](https://docs.langchain.com/langsmith/playground-model-providers#groq)
+- [Groq](#groq)
 
-- [Mistral AI](https://docs.langchain.com/langsmith/playground-model-providers#mistral-ai)
+- [Mistral AI](#mistral-ai)
 
-- [OpenAI](https://docs.langchain.com/langsmith/playground-model-providers#openai)
+- [OpenAI](#openai)
 
-<a href="https://docs.langchain.com/langsmith/playground-model-providers#openai-compatible-endpoint">
+<a href="#openai-compatible-endpoint">
 
   <span>OpenAI compatible endpoint</span>
 </a>
 
-- [XAI](https://docs.langchain.com/langsmith/playground-model-providers#xai)
+- [XAI](#xai)
 
-For details on creating and managing model configurations, refer to the [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations) page.
+For details on creating and managing model configurations, refer to the [Configure prompt settings](managing-model-configurations.md) page.
 
 ## Amazon Bedrock
 
@@ -44,7 +44,7 @@ Amazon Bedrock supports two authentication methods. **IAM trusted entity is the 
 #### IAM trusted entity (recommended)
 
 > [!NOTE]
-> **Not applicable for [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted).** Use Access Keys (or the Bedrock API Key) instead.
+> **Not applicable for [self-hosted LangSmith](self-hosted.md).** Use Access Keys (or the Bedrock API Key) instead.
 
 With IAM trusted entity authentication, you create an IAM role in your AWS account and allow LangSmith to assume it. No access keys are stored in LangSmith. Instead, LangSmith uses [AWS STS](https://docs.aws.amazon.com/STS/latest/APIReference/welcome.html) to assume the role on each request.
 
@@ -78,7 +78,7 @@ To set this up:
 
 3. In the LangSmith Playground, open the Bedrock provider's secrets configuration by clicking the **Key** icon (the IAM Trusted Entity option is not available in the model configuration dropdown itself). Then expand the **IAM Trusted Entity** section and enter the ARN of the role you created.
 
-> **Image:** [Bedrock secrets and API keys configuration with the IAM Trusted Entity section](https://docs.langchain.com/langsmith/playground-model-providers)
+> **Image:** [Bedrock secrets and API keys configuration with the IAM Trusted Entity section](playground-model-providers.md)
 
 For more details on trust policies, see the [AWS documentation](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/).
 
@@ -104,7 +104,7 @@ Parameters depend on the underlying model provider:
 
 #### For Anthropic models
 
-Uses Anthropic configuration (see [Anthropic](https://docs.langchain.com/langsmith/playground-model-providers#anthropic) section below).
+Uses Anthropic configuration (see [Anthropic](#anthropic) section below).
 
 #### For Amazon Titan
 
@@ -488,9 +488,9 @@ Controls request priority and processing allocation.
 
 Authentication varies by endpoint. Common options:
 
-* **API key**: stored as a [workspace secret](https://docs.langchain.com/langsmith/administration-overview#workspaces) and forwarded as `Authorization: Bearer <key>`.
+* **API key**: stored as a [workspace secret](administration-overview.md#workspaces) and forwarded as `Authorization: Bearer <key>`.
 * **None**: for unauthenticated local endpoints (for example, Ollama on `localhost`).
-* **OAuth2 `client_credentials`**: stored on the model configuration. LangSmith mints a short-lived bearer at request time and refreshes it before expiry. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
+* **OAuth2 `client_credentials`**: stored on the model configuration. LangSmith mints a short-lived bearer at request time and refreshes it before expiry. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
 
 ### Configuration
 
@@ -612,10 +612,10 @@ Set this when running experiments or evaluations to avoid hitting rate limits.
 
 ## Next steps
 
-#### [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations)
+#### [Configure prompt settings](managing-model-configurations.md)
 Learn how to create and manage model configurations in the Playground.
 
-#### [Create a prompt](https://docs.langchain.com/langsmith/create-a-prompt)
+#### [Create a prompt](create-a-prompt.md)
 Get started building prompts with your chosen model provider.
 
 ***

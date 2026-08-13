@@ -2,11 +2,11 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/server-mcp)
 The Model Context Protocol (MCP) is an open protocol for describing tools and data sources in a model-agnostic format, enabling LLMs to discover and use them via a structured API.
 
-[Agent Server](https://docs.langchain.com/langsmith/agent-server) implements MCP using the [Streamable HTTP transport](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/transports/#streamable-http). This allows LangGraph **agents** to be exposed as **MCP tools**, making them usable with any MCP-compliant client supporting Streamable HTTP.
+[Agent Server](agent-server.md) implements MCP using the [Streamable HTTP transport](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/transports/#streamable-http). This allows LangGraph **agents** to be exposed as **MCP tools**, making them usable with any MCP-compliant client supporting Streamable HTTP.
 
-The MCP endpoint is available at `/mcp` on [Agent Server](https://docs.langchain.com/langsmith/agent-server).
+The MCP endpoint is available at `/mcp` on [Agent Server](agent-server.md).
 
-You can set up [custom authentication middleware](https://docs.langchain.com/langsmith/custom-auth) to authenticate a user with an MCP server to get access to user-scoped tools within your LangSmith deployment.
+You can set up [custom authentication middleware](custom-auth.md) to authenticate a user with an MCP server to get access to user-scoped tools within your LangSmith deployment.
 
 An example architecture for this flow:
 
@@ -188,7 +188,7 @@ After deployment, you can update the name and description using the LangGraph SD
 
 Define clear, minimal input and output schemas to avoid exposing unnecessary internal complexity to the LLM.
 
-The default [MessagesState](https://docs.langchain.com/oss/python/langgraph/graph-api#messagesstate) uses `AnyMessage`, which supports many message types but is too general for direct LLM exposure.
+The default [MessagesState](../langgraph/graph-api.md#messagesstate) uses `AnyMessage`, which supports many message types but is too general for direct LLM exposure.
 
 Instead, define **custom agents or workflows** that use explicitly typed input and output structures.
 
@@ -226,13 +226,13 @@ graph = builder.compile()
 print(graph.invoke({"question": "hi"}))
 ```
 
-For more details, see the [low-level concepts guide](https://docs.langchain.com/oss/python/langgraph/graph-api#state).
+For more details, see the [low-level concepts guide](../langgraph/graph-api.md#state).
 
 ## Use user-scoped MCP tools in your deployment
 
 > [!TIP]
 > **Prerequisites**
-> You have added your own [custom auth middleware](https://docs.langchain.com/langsmith/custom-auth) that populates the `langgraph_auth_user` object, making it accessible through configurable context for every node in your graph.
+> You have added your own [custom auth middleware](custom-auth.md) that populates the `langgraph_auth_user` object, making it accessible through configurable context for every node in your graph.
 
 To make user-scoped tools available to your LangSmith deployment, start with implementing a snippet like the following:
 
@@ -264,7 +264,7 @@ def mcp_tools_node(state, config):
 2. Your MCP server URL.
 3. Get available tools from your MCP server.
 
-*This can also be done by [rebuilding your graph at runtime](https://docs.langchain.com/langsmith/graph-rebuild) to have a different configuration for a new run*
+*This can also be done by [rebuilding your graph at runtime](graph-rebuild.md) to have a different configuration for a new run*
 
 ## Session behavior
 
@@ -272,7 +272,7 @@ The current LangGraph MCP implementation does not support sessions. Each `/mcp` 
 
 ## Authentication
 
-The `/mcp` endpoint uses the same authentication as the rest of the LangGraph API. Refer to the [authentication guide](https://docs.langchain.com/langsmith/auth) for setup details.
+The `/mcp` endpoint uses the same authentication as the rest of the LangGraph API. Refer to the [authentication guide](auth.md) for setup details.
 
 ## Disable MCP
 

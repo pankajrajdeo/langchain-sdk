@@ -14,7 +14,7 @@ This page covers the LangSmith-specific Harbor flags. For the complete CLI, run 
 
 ## Prerequisites
 
-* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-harbor-integrations) and an [API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-harbor-integrations) and an [API key](create-account-api-key.md).
 * Python 3.12 or later with `pip`.
 * A provider API key for the model your agent calls, such as `ANTHROPIC_API_KEY`.
 
@@ -34,7 +34,7 @@ Harbor authenticates with your LangSmith credentials. Set an API key:
 export LANGSMITH_API_KEY="<LANGSMITH_API_KEY>"
 ```
 
-Alternatively, select a [LangSmith SDK profile](https://docs.langchain.com/langsmith/profile-configuration) instead of exporting a key:
+Alternatively, select a [LangSmith SDK profile](profile-configuration.md) instead of exporting a key:
 
 ```bash
 export LANGSMITH_PROFILE=prod
@@ -51,13 +51,13 @@ harbor run -d "terminal-bench@2.0" \
   --plugin langsmith
 ```
 
-Replace `<agent>` with a Harbor agent, and `<provider:model>` with a model in `provider:model` format that an installed `langchain-*` provider can resolve, for example `anthropic:claude-opus-4-8`. Run `harbor run --help` to list the available agents, or see [Deep Agents](https://docs.langchain.com/langsmith/harbor-integrations#deep-agents) for a complete `langgraph` run.
+Replace `<agent>` with a Harbor agent, and `<provider:model>` with a model in `provider:model` format that an installed `langchain-*` provider can resolve, for example `anthropic:claude-opus-4-8`. Run `harbor run --help` to list the available agents, or see [Deep Agents](#deep-agents) for a complete `langgraph` run.
 
-Open [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets), select the dataset Harbor synced, such as `terminal-bench@2.0`, then open the Experiments tab to view the run.
+Open [Datasets & Experiments](manage-datasets.md), select the dataset Harbor synced, such as `terminal-bench@2.0`, then open the Experiments tab to view the run.
 
 ## LangSmith evaluations
 
-The LangSmith plugin records every Harbor job to LangSmith, so you can view and compare results under Datasets & Experiments. The plugin works with any Harbor agent, not only Deep Agents. Enable it with `--plugin langsmith`. The [Quickstart](https://docs.langchain.com/langsmith/harbor-integrations#quickstart) shows the basic invocation, and this section covers what the plugin records and how to configure it.
+The LangSmith plugin records every Harbor job to LangSmith, so you can view and compare results under Datasets & Experiments. The plugin works with any Harbor agent, not only Deep Agents. Enable it with `--plugin langsmith`. The [Quickstart](#quickstart) shows the basic invocation, and this section covers what the plugin records and how to configure it.
 
 Choose an agent that traces to LangSmith to capture full agent traces alongside the experiment. If the agent does not trace to LangSmith, the plugin still creates the dataset and the experiment with results and feedback, without the agent trace.
 
@@ -81,7 +81,7 @@ As the job runs, the plugin writes to LangSmith over the API:
 
 ### View results in LangSmith
 
-Open [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets) in LangSmith, select the dataset the plugin synced, such as `terminal-bench@2.0`, then open the Experiments tab. Each Harbor job appears as an experiment, and you can [compare experiments](https://docs.langchain.com/langsmith/analyze-an-experiment) by the `reward` and `harbor_error` feedback, the token counts and cost recorded on each run, and latency.
+Open [Datasets & Experiments](manage-datasets.md) in LangSmith, select the dataset the plugin synced, such as `terminal-bench@2.0`, then open the Experiments tab. Each Harbor job appears as an experiment, and you can [compare experiments](analyze-an-experiment.md) by the `reward` and `harbor_error` feedback, the token counts and cost recorded on each run, and latency.
 
 ### Configure the plugin inputs
 
@@ -229,7 +229,7 @@ Harbor runs the entire agent inside the trial container.
 
 </details>
 
-For more information on building Deep Agents, see the [Deep Agents documentation](https://docs.langchain.com/oss/python/deepagents/overview).
+For more information on building Deep Agents, see the [Deep Agents documentation](../deepagents/overview.md).
 
 ## Sandboxes
 
@@ -254,8 +254,8 @@ Harbor creates one LangSmith sandbox per trial and runs the agent and verifier i
 The LangSmith environment boots each sandbox from a filesystem snapshot. Provide one of the following in your Harbor task:
 
 * **Prebuilt image**: Set `[environment].docker_image` in `task.toml`. Harbor reuses or creates a snapshot from that image.
-* **Existing snapshot**: Pass `environment.kwargs.snapshot_name` to boot from a [snapshot](https://docs.langchain.com/langsmith/sandbox-snapshots) you already created.
-* **Dockerfile**: Include an `environment/Dockerfile`. Harbor builds a snapshot from it with the [build-from-Dockerfile flow](https://docs.langchain.com/langsmith/sandbox-snapshots#build-a-snapshot-from-a-dockerfile), using the task `environment/` directory as the build context.
+* **Existing snapshot**: Pass `environment.kwargs.snapshot_name` to boot from a [snapshot](sandbox-snapshots.md) you already created.
+* **Dockerfile**: Include an `environment/Dockerfile`. Harbor builds a snapshot from it with the [build-from-Dockerfile flow](sandbox-snapshots.md#build-a-snapshot-from-a-dockerfile), using the task `environment/` directory as the build context.
 
 Tune the sandbox lifecycle with environment kwargs, passed on the command line with `--ek`:
 
@@ -279,10 +279,10 @@ harbor run -d "<org/name>" \
 
 ## See also
 
-* [Deep Agents documentation](https://docs.langchain.com/oss/python/deepagents/overview)
-* [Datasets & Experiments](https://docs.langchain.com/langsmith/manage-datasets)
-* [Analyze an experiment](https://docs.langchain.com/langsmith/analyze-an-experiment)
-* [Sandbox snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots)
+* [Deep Agents documentation](../deepagents/overview.md)
+* [Datasets & Experiments](manage-datasets.md)
+* [Analyze an experiment](analyze-an-experiment.md)
+* [Sandbox snapshots](sandbox-snapshots.md)
 * [Harbor documentation](https://harborframework.com/docs)
 
 ***

@@ -8,7 +8,7 @@ This will help you get started with OpenAI embedding models using LangChain. For
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/openai).
+> **Interactive content:** [View this section in the original documentation](openai.md).
 
 ## Setup
 
@@ -32,7 +32,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client.
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -66,11 +66,11 @@ embeddings = OpenAIEmbeddings(
 > [!NOTE]
 > **Azure OpenAI v1 API support**
 >
-> As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1), including support for Microsoft Entra ID authentication. See the [Using with Azure OpenAI](https://docs.langchain.com/oss/python/integrations/embeddings/openai#using-with-azure-openai) section below for details.
+> As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1), including support for Microsoft Entra ID authentication. See the [Using with Azure OpenAI](#using-with-azure-openai) section below for details.
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 
@@ -143,7 +143,7 @@ for vector in two_vectors:
 >
 > As of `langchain-openai>=1.0.1`, `OpenAIEmbeddings` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI embeddings whether hosted on OpenAI or Azure.
 >
-> For the traditional Azure-specific implementation, continue to use [`AzureOpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai).
+> For the traditional Azure-specific implementation, continue to use [`AzureOpenAIEmbeddings`](azure_openai.md).
 
 ### Using Azure OpenAI v1 API with API Key
 

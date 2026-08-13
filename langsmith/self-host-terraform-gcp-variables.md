@@ -9,7 +9,7 @@ Variables come in two categories:
 * **Non-sensitive** (region, sizing, feature flags): set in `infra/terraform.tfvars`.
 * **Sensitive** (license key, passwords, encryption keys): sourced through `infra/scripts/setup-env.sh`, which writes them to Google Secret Manager and exports them for the Terraform and Helm steps.
 
-For the end-to-end install, refer to the [deploy guide](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy). For how the modules fit together, refer to the [architecture reference](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture).
+For the end-to-end install, refer to the [deploy guide](self-host-terraform-gcp-deploy.md). For how the modules fit together, refer to the [architecture reference](self-host-terraform-gcp-architecture.md).
 
 ## Core
 

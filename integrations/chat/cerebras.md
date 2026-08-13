@@ -2,7 +2,7 @@
 
 > Integrate with the ChatCerebras chat model using LangChain Python.
 
-This guide provides a quick overview for getting started with Cerebras [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatCerebras` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras).
+This guide provides a quick overview for getting started with Cerebras [chat models](../../langchain/models.md). For detailed documentation of all `ChatCerebras` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-cerebras/chat_models/ChatCerebras).
 
 At Cerebras, we've developed the world's largest and fastest AI processor, the Wafer-Scale Engine-3 (WSE-3). The Cerebras CS-3 system, powered by the WSE-3, represents a new class of AI supercomputer that sets the standard for generative AI training and inference with unparalleled performance and scalability.
 
@@ -28,7 +28,7 @@ For more information about Cerebras Cloud, visit [cloud.cerebras.ai](https://clo
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -58,7 +58,7 @@ if "CEREBRAS_API_KEY" not in os.environ:
 Enter your Cerebras API key:  ········
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

@@ -6,13 +6,13 @@ LangSmith smoothly integrates with LangGraph (Python and JS) to help you trace a
 
 If you are using LangChain modules within LangGraph, you only need to set a few environment variables to enable tracing.
 
-This guide will walk through a basic example. For more detailed information on configuration, see the [Trace With LangChain](https://docs.langchain.com/langsmith/trace-with-langchain) guide.
+This guide will walk through a basic example. For more detailed information on configuration, see the [Trace With LangChain](trace-with-langchain.md) guide.
 
 ### 1. Installation
 
 Install the LangGraph library and the OpenAI integration for Python and JS (we use the OpenAI integration for the code snippets below).
 
-For a full list of packages available, see the [LangChain Python docs](https://docs.langchain.com/oss/python/integrations/providers/overview) and [LangChain JS docs](https://docs.langchain.com/oss/javascript/integrations/providers/overview).
+For a full list of packages available, see the [LangChain Python docs](../integrations/providers/overview.md) and [LangChain JS docs](https://docs.langchain.com/oss/javascript/integrations/providers/overview).
 
 ```bash
 pip install langchain_openai langgraph
@@ -225,7 +225,7 @@ The **Messages** view in the LangSmith UI shows a simplified conversation histor
 
 ## Without LangChain
 
-If you are using other SDKs or custom functions within LangGraph, you will need to [wrap or decorate them appropriately](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable) (with the `@traceable` decorator in Python or the `traceable` function in JS, or something like e.g. `wrap_openai` for SDKs). If you do so, LangSmith will automatically nest traces from those wrapped methods.
+If you are using other SDKs or custom functions within LangGraph, you will need to [wrap or decorate them appropriately](annotate-code.md#use-%40traceable-%2F-traceable) (with the `@traceable` decorator in Python or the `traceable` function in JS, or something like e.g. `wrap_openai` for SDKs). If you do so, LangSmith will automatically nest traces from those wrapped methods.
 
 Here's an example. You can also see this page for more information.
 
@@ -302,7 +302,7 @@ export OPENAI_API_KEY=<your-openai-api-key>
 
 ### 3. Log a trace
 
-Once you've set up your environment, [wrap or decorate the custom functions/SDKs](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable) you want to trace. LangSmith will then infer the proper tracing config:
+Once you've set up your environment, [wrap or decorate the custom functions/SDKs](annotate-code.md#use-%40traceable-%2F-traceable) you want to trace. LangSmith will then infer the proper tracing config:
 
 ```python
 import json
@@ -346,7 +346,7 @@ def call_tools(state):
     function_name = tool_call["function"]["name"]
     function_arguments = tool_call["function"]["arguments"]
     arguments = json.loads(function_arguments)
-    function_response = function_name_to_function[function_name](https://docs.langchain.com/langsmith/**arguments)
+    function_response = function_name_to_function[function_name](**arguments)
     tool_message = {
         "tool_call_id": tool_call["id"],
         "role": "tool",
@@ -451,7 +451,7 @@ const callTools = async ({ messages }: GraphState) => {
   };
   const functionName = toolCalls[0].function.name;
   const functionArguments = JSON.parse(toolCalls[0].function.arguments);
-  const response = await toolNameMap[functionName](https://docs.langchain.com/langsmith/functionArguments);
+  const response = await toolNameMap[functionName](functionArguments);
   const toolMessage = {
     tool_call_id: toolCalls[0].id,
     role: "tool",

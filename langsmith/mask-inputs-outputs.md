@@ -2,17 +2,17 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/mask-inputs-outputs)
 When working with LangSmith traces, you may need to prevent sensitive information from being logged to maintain privacy and comply with security requirements. LangSmith provides multiple approaches to protect your data before it's sent to the backend:
 
-* [Completely hide inputs and outputs](https://docs.langchain.com/langsmith/mask-inputs-outputs#hide-inputs-and-outputs) using environment variables or [Client](https://reference.langchain.com/python/langsmith/client/Client) configuration.
-* [Hide metadata](https://docs.langchain.com/langsmith/mask-inputs-outputs#hide-metadata) to remove or transform run metadata.
-* [Apply rule-based masking](https://docs.langchain.com/langsmith/mask-inputs-outputs#rule-based-masking-of-inputs-and-outputs) with regex patterns or anonymization libraries to selectively redact sensitive information.
-* [Redact secrets from traces](https://docs.langchain.com/langsmith/redact-secrets) using the SDK anonymizer with ready-to-use regex patterns for API keys, tokens, and credentials.
-* [Process inputs and outputs for individual functions](https://docs.langchain.com/langsmith/mask-inputs-outputs#processing-inputs-and-outputs-for-a-single-function) with function-level customization.
-* [Use third-party anonymizers](https://docs.langchain.com/langsmith/mask-inputs-outputs#examples) like Microsoft Presidio and Amazon Comprehend for advanced PII detection.
-* [Batch process run operations](https://docs.langchain.com/langsmith/mask-inputs-outputs#batch-processing-for-high-throughput-masking) to apply expensive masking logic across multiple runs at once, reducing per-run overhead. LangSmith processes runs in a background thread, which does not block your application.
-* [Redact inputs and outputs per request](https://docs.langchain.com/langsmith/conditional-tracing#conditionally-redact-inputs-and-outputs) using `tracing_context` to mask data only for specific invocations (for example, based on tenant or feature flag) while leaving other traces untouched.
+* [Completely hide inputs and outputs](#hide-inputs-and-outputs) using environment variables or [Client](https://reference.langchain.com/python/langsmith/client/Client) configuration.
+* [Hide metadata](#hide-metadata) to remove or transform run metadata.
+* [Apply rule-based masking](#rule-based-masking-of-inputs-and-outputs) with regex patterns or anonymization libraries to selectively redact sensitive information.
+* [Redact secrets from traces](redact-secrets.md) using the SDK anonymizer with ready-to-use regex patterns for API keys, tokens, and credentials.
+* [Process inputs and outputs for individual functions](#processing-inputs-and-outputs-for-a-single-function) with function-level customization.
+* [Use third-party anonymizers](#examples) like Microsoft Presidio and Amazon Comprehend for advanced PII detection.
+* [Batch process run operations](#batch-processing-for-high-throughput-masking) to apply expensive masking logic across multiple runs at once, reducing per-run overhead. LangSmith processes runs in a background thread, which does not block your application.
+* [Redact inputs and outputs per request](conditional-tracing.md#conditionally-redact-inputs-and-outputs) using `tracing_context` to mask data only for specific invocations (for example, based on tenant or feature flag) while leaving other traces untouched.
 
 > [!NOTE]
-> If your compliance or privacy requirements mandate that certain operations should never be traced at all (for example, clients with zero-retention policies), consider using [conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing) to disable tracing selectively for specific requests instead of masking data.
+> If your compliance or privacy requirements mandate that certain operations should never be traced at all (for example, clients with zero-retention policies), consider using [conditional tracing](conditional-tracing.md) to disable tracing selectively for specific requests instead of masking data.
 
 ## Hide inputs and outputs
 
@@ -180,7 +180,7 @@ client = Client(hide_metadata=add_marker)
 To mask specific data in inputs and outputs, you can use the `create_anonymizer` / `createAnonymizer` function and pass the newly created anonymizer when instantiating the [Client](https://reference.langchain.com/python/langsmith/client/Client). The anonymizer can be either constructed from a list of regex patterns and the replacement values or from a function that accepts and returns a string value.
 
 > [!TIP]
-> For redacting API keys, tokens, and other credentials, see [Redact secrets from traces](https://docs.langchain.com/langsmith/redact-secrets) for ready-to-use regex patterns and recipes.
+> For redacting API keys, tokens, and other credentials, see [Redact secrets from traces](redact-secrets.md) for ready-to-use regex patterns and recipes.
 
 The anonymizer will be skipped for inputs if `LANGSMITH_HIDE_INPUTS = true`. Same applies for outputs if `LANGSMITH_HIDE_OUTPUTS = true`.
 
@@ -237,7 +237,7 @@ Please note, that using the anonymizer might incur a performance hit with comple
 > [!NOTE]
 > Improving the performance of `anonymizer` API is on our roadmap! If you are encountering performance issues, please contact support via [support.langchain.com](https://support.langchain.com).
 
-> **Image:** [Hide inputs outputs](https://docs.langchain.com/langsmith/mask-inputs-outputs)
+> **Image:** [Hide inputs outputs](mask-inputs-outputs.md)
 
 Older versions of LangSmith SDKs can use the `hide_inputs` and `hide_outputs` parameters to achieve the same effect. You can also use these parameters to process the inputs and outputs more efficiently.
 
@@ -731,7 +731,7 @@ The non-anonymized run will look like this in LangSmith: <img alt="Non-anonymize
 ### Batch processing for high-throughput masking
 
 > [!NOTE]
-> [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) is available in the [Python SDK only](https://docs.langchain.com/langsmith/smith-python-sdk).
+> [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) is available in the [Python SDK only](smith-python-sdk.md).
 
 The previous approaches on this page process each run individually. If your masking logic involves a rate-limited API or model inference—such as the Presidio or Amazon Comprehend examples—processing runs one at a time can create a bottleneck. [`process_buffered_run_ops`](https://reference.langchain.com/python/langsmith/client/Client) lets you intercept a batch of raw run dicts before they are serialized and sent to the API, so you can amortize the cost across multiple runs at once. LangSmith processes these runs in a background thread, which does not block your application.
 

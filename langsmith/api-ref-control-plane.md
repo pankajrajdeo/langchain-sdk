@@ -1,6 +1,6 @@
 # Control plane API reference for LangSmith Deployment
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/api-ref-control-plane)
-The control plane API is part of [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](https://docs.langchain.com/langsmith/agent-server) deployments—for example, as part of a custom CI/CD workflow.
+The control plane API is part of [LangSmith Deployment](deployment.md). With the control plane API, you can programmatically create, manage, and automate your [Agent Server](agent-server.md) deployments—for example, as part of a custom CI/CD workflow.
 
 Browse the full API reference in the **Control Plane API** section in the sidebar, or refer to the endpoint groups:
 
@@ -39,7 +39,7 @@ The control plane hosts for Cloud data regions:
   </tbody>
 </table>
 
-**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [the self-host usage guide](https://docs.langchain.com/langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) for more details.
+**Note**: Self-hosted deployments of LangSmith will have a custom host for the control plane. The control plane APIs can be accessed at the path `/api-host`. For example, `http(s)://<host>/api-host/v2/deployments`. See [the self-host usage guide](self-host-usage.md#configuring-the-application-you-want-to-use-with-langsmith) for more details.
 
 ## Authentication
 

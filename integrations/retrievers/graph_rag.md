@@ -9,7 +9,7 @@ supported features and configurations, refer to the
 ## Overview
 
 The `GraphRetriever` from the `langchain-graph-retriever` package provides a LangChain
-[retriever](https://docs.langchain.com/oss/python/deepagents/retrieval/) that combines **unstructured** similarity search
+[retriever](../../deepagents/retrieval.md) that combines **unstructured** similarity search
 on vectors with **structured** traversal of metadata properties. This enables graph-based
 retrieval over an **existing** vector store.
 
@@ -107,7 +107,7 @@ vector_store = AstraDBVectorStore.from_documents(
 ```
 
 For the `ASTRA_DB_API_ENDPOINT` and `ASTRA_DB_APPLICATION_TOKEN` credentials,
-consult the [AstraDB Vector Store Guide](https://docs.langchain.com/oss/python/integrations/vectorstores/astradb).
+consult the [AstraDB Vector Store Guide](../vectorstores/astradb.md).
 
 :::note
 For faster initial testing, consider using the **InMemory** Vector Store.
@@ -133,7 +133,7 @@ vector_store = Chroma.from_documents(
 )
 ```
 
-For help creating a Chroma connection, consult the [Chroma Vector Store Guide](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma).
+For help creating a Chroma connection, consult the [Chroma Vector Store Guide](../vectorstores/chroma.md).
 
 :::note
 Chroma doesn't support searching in nested metadata. Because of this

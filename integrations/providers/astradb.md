@@ -87,7 +87,7 @@ Notable features of class `AstraDBVectorStore`:
 * [hybrid search](https://docs.datastax.com/en/astra-db-serverless/databases/hybrid-search.html#the-hybrid-search-process) (vector + BM25 and then a rerank step);
 * support for non-Astra Data API (e.g. self-hosted [HCD](https://docs.datastax.com/en/hyper-converged-database/1.1/get-started/get-started-hcd.html) deployments);
 
-Learn more in the [example notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/astradb).
+Learn more in the [example notebook](../vectorstores/astradb.md).
 
 See the [example provided by DataStax](https://docs.datastax.com/en/astra/astra-db-vector/integrations/langchain.html).
 
@@ -128,7 +128,7 @@ loader = AstraDBLoader(
 )
 ```
 
-Learn more in the [example notebook](https://docs.langchain.com/oss/python/integrations/document_loaders/astradb).
+Learn more in the [example notebook](../document_loaders/astradb.md).
 
 ## Self-querying retriever
 

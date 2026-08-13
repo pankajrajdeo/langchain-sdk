@@ -2,15 +2,15 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway)
 Access models across providers with one LangSmith API key while tracing calls and enforcing spend and data-protection policies.
 
-Use one [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) to call models across configured providers. Switch providers by changing the model ID, while the LLM Gateway traces every call and applies centralized governance policies.
+Use one [LangSmith API key](create-account-api-key.md) to call models across configured providers. Switch providers by changing the model ID, while the LLM Gateway traces every call and applies centralized governance policies.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
 ## Make your first request
 
 > [!NOTE]
-> An administrator must [enable the gateway, add a provider secret, and grant access](https://docs.langchain.com/langsmith/llm-gateway-admin-setup) once for your workspace. After setup, developers need only a workspace-scoped LangSmith API key.
+> An administrator must [enable the gateway, add a provider secret, and grant access](llm-gateway-admin-setup.md) once for your workspace. After setup, developers need only a workspace-scoped LangSmith API key.
 
 Set your key and make a standard Chat Completions request. This example assumes the workspace has an Anthropic provider secret:
 
@@ -23,14 +23,14 @@ curl https://gateway.smith.langchain.com/v1/chat/completions \
     -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
 
-A `200` response confirms that the gateway, your LangSmith API key, permissions, and the selected provider secret are configured correctly. For Python, TypeScript, alternative API formats, and troubleshooting, follow the [quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart).
+A `200` response confirms that the gateway, your LangSmith API key, permissions, and the selected provider secret are configured correctly. For Python, TypeScript, alternative API formats, and troubleshooting, follow the [quickstart](llm-gateway-quickstart.md).
 
 ## What the gateway provides
 
 * **One key, multiple providers:** Developers authenticate with a LangSmith API key instead of storing provider keys locally.
 * **One request format, multiple models:** Use Chat Completions, Messages, or Responses with models across configured providers.
-* **Built-in observability:** Every gateway call appears as a [LangSmith trace](https://docs.langchain.com/langsmith/llm-gateway-access).
-* **Central governance:** Apply [spend limits](https://docs.langchain.com/langsmith/llm-gateway-spend-policies), [rate limits](https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies), and [data-protection policies](https://docs.langchain.com/langsmith/llm-gateway-data-protection).
+* **Built-in observability:** Every gateway call appears as a [LangSmith trace](llm-gateway-access.md).
+* **Central governance:** Apply [spend limits](llm-gateway-spend-policies.md), [rate limits](llm-gateway-rate-limit-policies.md), and [data-protection policies](llm-gateway-data-protection.md).
 
 ## Use the standard API
 
@@ -42,26 +42,26 @@ Choose the request format already used by your application. The format does not 
 | Anthropic Messages      | `POST /v1/messages`         |
 | OpenAI Responses        | `POST /v1/responses`        |
 
-Set `model` to a provider-prefixed bring-your-own-key ID such as `openai/gpt-5.4-mini` or `anthropic/claude-opus-5`, or use a [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits) model slug such as `moonshotai/kimi-k3`. The model ID determines the upstream route. When the selected provider uses a different native format, the gateway translates the request and response.
+Set `model` to a provider-prefixed bring-your-own-key ID such as `openai/gpt-5.4-mini` or `anthropic/claude-opus-5`, or use a [Gateway Credits](llm-gateway-credits.md) model slug such as `moonshotai/kimi-k3`. The model ID determines the upstream route. When the selected provider uses a different native format, the gateway translates the request and response.
 
-For base URLs, examples, translation behavior, and regional endpoints, see [API formats](https://docs.langchain.com/langsmith/llm-gateway-api-formats).
+For base URLs, examples, translation behavior, and regional endpoints, see [API formats](llm-gateway-api-formats.md).
 
 ## Choose how credentials are managed
 
 | Option                                            | Upstream credential                                                                                                                  | Setup and billing                                                                 |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| Bring your own provider account                   | An administrator stores the provider key in workspace [Provider Secrets](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#1-add-provider-secrets). | The provider bills usage to your provider account.                                |
-| [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits) | LangChain owns the upstream credential.                                                                                              | No provider secret is required. Invocations are billed to your LangSmith account. |
+| Bring your own provider account                   | An administrator stores the provider key in workspace [Provider Secrets](llm-gateway-admin-setup.md#1-add-provider-secrets). | The provider bills usage to your provider account.                                |
+| [Gateway Credits](llm-gateway-credits.md) | LangChain owns the upstream credential.                                                                                              | No provider secret is required. Invocations are billed to your LangSmith account. |
 
 ## Go further
 
-#### [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart)
+#### [Quickstart](llm-gateway-quickstart.md)
 Make a request with cURL, Python, or TypeScript, then view its trace.
 
-#### [Administrator setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup)
+#### [Administrator setup](llm-gateway-admin-setup.md)
 Enable the gateway, add provider credentials, and grant developer access.
 
-Need provider-native request and response behavior? Use [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access) to bypass the standardization layer. This is an advanced alternative to the standard API.
+Need provider-native request and response behavior? Use [Direct model access](llm-gateway-direct-model-access.md) to bypass the standardization layer. This is an advanced alternative to the standard API.
 
 For further questions, contact [LangChain support](https://support.langchain.com).
 

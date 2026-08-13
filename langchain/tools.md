@@ -1,13 +1,13 @@
 # Tools
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/tools)
-Tools extend what [agents](https://docs.langchain.com/oss/python/langchain/agents) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
+Tools extend what [agents](agents.md) can do—letting them fetch real-time data, execute code, query external databases, and take actions in the world.
 
-Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](https://docs.langchain.com/oss/python/langchain/models). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
+Under the hood, tools are callable functions with well-defined inputs and outputs that get passed to a [chat model](models.md). The model decides when to invoke a tool based on the conversation context, and what input arguments to provide.
 
 > [!TIP]
-> For details on how models handle tool calls, see [Tool calling](https://docs.langchain.com/oss/python/langchain/models#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up.
+> For details on how models handle tool calls, see [Tool calling](models.md#tool-calling). Trace tool calls and debug errors with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-tools). Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Create tools
 
@@ -32,7 +32,7 @@ def search_database(query: str, limit: int = 10) -> str:
 Type hints are **required** as they define the tool's input schema. The docstring should be informative and concise to help the model understand the tool's purpose.
 
 > [!NOTE]
-> **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](https://docs.langchain.com/oss/python/langchain/tools#server-side-tool-use) for details.
+> **Server-side tool use:** Some chat models feature built-in tools (web search, code interpreters) that are executed server-side. See [Server-side tool use](#server-side-tool-use) for details.
 
 > [!WARNING]
 > Prefer `snake_case` for tool names (e.g., `web_search` instead of `Web Search`). Some model providers have issues with or reject names containing spaces or special characters with errors. Sticking to alphanumeric characters, underscores, and hyphens helps to improve compatibility across providers.
@@ -125,7 +125,7 @@ The following parameter names are reserved and cannot be used as tool arguments.
 
 To access runtime information, use the [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime) parameter instead of naming your own arguments `config` or `runtime`.
 
-If you use `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`, see [Migrate from older injection patterns](https://docs.langchain.com/oss/python/langchain/tools#migrate-from-older-injection-patterns).
+If you use `InjectedState`, `InjectedStore`, `get_runtime()`, or `InjectedToolCallId`, see [Migrate from older injection patterns](#migrate-from-older-injection-patterns).
 
 ## Access context
 
@@ -195,7 +195,7 @@ graph LR
 
 ### Short-term memory (State)
 
-State represents short-term memory that exists for the duration of a conversation. It includes the message history and any custom fields you define in your [graph state](https://docs.langchain.com/oss/python/langgraph/graph-api#state).
+State represents short-term memory that exists for the duration of a conversation. It includes the message history and any custom fields you define in your [graph state](../langgraph/graph-api.md#state).
 
 > [!NOTE]
 > Add `runtime: ToolRuntime` to your tool signature to access state. This parameter is automatically injected and hidden from the LLM - it won't appear in the tool's schema.
@@ -265,7 +265,7 @@ def set_user_name(new_name: str, runtime: ToolRuntime[None, CustomState]) -> Com
 ```
 
 > [!TIP]
-> When tools update state variables, consider defining a [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
+> When tools update state variables, consider defining a [reducer](../langgraph/graph-api.md#reducers) for those fields. Since LLMs can call multiple tools in parallel, a reducer determines how to resolve conflicts when the same state field is updated by concurrent tool calls.
 
 ### Context
 
@@ -675,7 +675,7 @@ The [`BaseStore`](https://reference.langchain.com/python/langchain-core/stores/B
 Access the store through `runtime.store`. The store uses a namespace/key pattern to organize data:
 
 > [!TIP]
-> For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](https://docs.langchain.com/oss/python/langgraph/add-memory) for setup details.
+> For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](../langgraph/add-memory.md) for setup details.
 
 ```python
 from typing import Any
@@ -746,7 +746,7 @@ def get_weather(city: str, runtime: ToolRuntime) -> str:
 ```
 
 > [!NOTE]
-> If you use `runtime.stream_writer` inside your tool, the tool must be invoked within a LangGraph execution context. See [Streaming](https://docs.langchain.com/oss/python/langchain/streaming) for more details.
+> If you use `runtime.stream_writer` inside your tool, the tool must be invoked within a LangGraph execution context. See [Streaming](streaming.md) for more details.
 
 ### Execution info
 
@@ -807,6 +807,8 @@ def summarize(state: InjectedState) -> str:
     return f"Conversation length: {len(messages)} messages."
 ```
 
+<a id="migrate-from-older-injection-patterns"></a>
+
 #### Recommended pattern
 
 ```python
@@ -819,15 +821,15 @@ def summarize(runtime: ToolRuntime) -> str:
     return f"Conversation length: {len(messages)} messages."
 ```
 
-For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1).
+For agent-level migrations (for example `create_react_agent` and custom state), see the [LangChain v1 migration guide](../migrate/langchain-v1.md).
 
 </details>
 
 ## Tool execution
 
-In LangChain, tools are used by agents (for example via [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)) and tool error handling is configured through [middleware](https://docs.langchain.com/oss/python/langchain/middleware).
+In LangChain, tools are used by agents (for example via [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent)) and tool error handling is configured through [middleware](middleware.md).
 
-For LangGraph workflows, tool execution is handled by [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode). See [ToolNode](https://docs.langchain.com/oss/python/langgraph/workflows-agents#toolnode) for Graph API usage, including how tools can access the current graph state and run-scoped context.
+For LangGraph workflows, tool execution is handled by [`ToolNode`](https://reference.langchain.com/python/langgraph/agents/#langgraph.prebuilt.tool_node.ToolNode). See [ToolNode](../langgraph/workflows-agents.md#toolnode) for Graph API usage, including how tools can access the current graph state and run-scoped context.
 
 ### Tool return values
 
@@ -885,7 +887,7 @@ Use this when downstream reasoning benefits from explicit fields instead of free
 
 #### Return multimodal content
 
-Tools are not limited to plain text. When the model supports multimodal tool results, the tool can return [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) so the model receives text, images, and other media in one tool result.
+Tools are not limited to plain text. When the model supports multimodal tool results, the tool can return [standard content blocks](messages.md#standard-content-blocks) so the model receives text, images, and other media in one tool result.
 
 ```python
 from langchain.tools import tool
@@ -903,9 +905,9 @@ Behavior:
 
 * The return value is converted to a `ToolMessage` with multimodal `content`.
 * Use `message.content_blocks` to read the normalized block list after the tool runs.
-* The model must support the modalities you return. Check your [model's capabilities](https://docs.langchain.com/oss/python/integrations/chat) before returning images, audio, or video.
+* The model must support the modalities you return. Check your [model's capabilities](../integrations/chat.md) before returning images, audio, or video.
 
-For block types and provider-specific requirements, see [Multimodal messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal). MCP tools that return images or mixed content are converted the same way; see [Multimodal tool content](https://docs.langchain.com/oss/python/langchain/mcp#multimodal-tool-content).
+For block types and provider-specific requirements, see [Multimodal messages](messages.md#multimodal). MCP tools that return images or mixed content are converted the same way; see [Multimodal tool content](mcp.md#multimodal-tool-content).
 
 #### Return a Command
 
@@ -1124,7 +1126,7 @@ Use this when:
 
 ### Error handling
 
-Handle tool errors using LangChain agent [middleware](https://docs.langchain.com/oss/python/langchain/middleware) to retry failed tool calls or return custom error messages:
+Handle tool errors using LangChain agent [middleware](middleware.md) to retry failed tool calls or return custom error messages:
 
 ```python
 from collections.abc import Callable
@@ -1331,7 +1333,7 @@ agent = create_agent(
 
 ### State injection
 
-Tools access graph state through [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime). See [Access context](https://docs.langchain.com/oss/python/langchain/tools#access-context) for state, context, store, and streaming APIs.
+Tools access graph state through [`ToolRuntime`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.ToolRuntime). See [Access context](#access-context) for state, context, store, and streaming APIs.
 
 ```python
 from langchain.tools import tool, ToolRuntime
@@ -1343,7 +1345,7 @@ def get_message_count(runtime: ToolRuntime) -> str:
     return f"There are {len(messages)} messages."
 ```
 
-For more details on accessing state, context, and long-term memory from tools, see [Access context](https://docs.langchain.com/oss/python/langchain/tools#access-context).
+For more details on accessing state, context, and long-term memory from tools, see [Access context](#access-context).
 
 ## Dynamic tool selection
 
@@ -1488,7 +1490,7 @@ This approach is best when:
 * You want to filter based on permissions, feature flags, or conversation state
 * Tools are static but their availability is dynamic
 
-See [Dynamically selecting tools](https://docs.langchain.com/oss/python/langchain/middleware/custom#dynamically-selecting-tools) for more examples.
+See [Dynamically selecting tools](middleware/custom.md#dynamically-selecting-tools) for more examples.
 
 #### Runtime tool registration
 When tools are discovered or created at runtime (e.g., loaded from an MCP server, generated based on user data, or fetched from a remote registry), you need to both register the tools and handle their execution dynamically.
@@ -1550,7 +1552,7 @@ This approach is best when:
 
 Some tools should run **where your user's app runs** (typically the browser), not inside the process. **Headless tools** are tool definitions, which include the name, description, and argument schema, that you register on the **server** with your agent. The **implementation** is registered only on the **client** and executed after a short interrupt/resume handshake.
 
-This is different from ordinary tools whose function body runs on the server, and from [server-side tool use](https://docs.langchain.com/oss/python/langchain/tools#server-side-tool-use) where the model provider executes built-in tools remotely.
+This is different from ordinary tools whose function body runs on the server, and from [server-side tool use](#server-side-tool-use) where the model provider executes built-in tools remotely.
 
 ### When to use headless tools
 
@@ -1577,20 +1579,20 @@ When the model issues a tool call for one of these tools, the run **interrupts**
 
 Use the optional **`onTool`** callback to observe lifecycle events (`start`, `success`, `error`) for UI feedback such as spinners or toasts.
 
-#### [Headless tools frontend pattern](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools)
+#### [Headless tools frontend pattern](frontend/headless-tools.md)
 See an end-to-end example of schema-only tools executed in the client with `useStream`.
 
 ## Prebuilt tools
 
 LangChain provides a large collection of prebuilt tools and toolkits for common tasks like web search, code interpretation, database access, and more. These ready-to-use tools can be directly integrated into your agents without writing custom code.
 
-See the [tools and toolkits](https://docs.langchain.com/oss/python/integrations/tools) integration page for a complete list of available tools organized by category.
+See the [tools and toolkits](../integrations/tools.md) integration page for a complete list of available tools organized by category.
 
 ## Server-side tool use
 
 Some chat models feature built-in tools that are executed server-side by the model provider. These include capabilities like web search and code interpreters that don't require you to define or host the tool logic.
 
-Refer to the individual [chat model integration pages](https://docs.langchain.com/oss/python/integrations/providers) and the [tool calling documentation](https://docs.langchain.com/oss/python/langchain/models#server-side-tool-use) for details on enabling and using these built-in tools.
+Refer to the individual [chat model integration pages](../integrations/providers.md) and the [tool calling documentation](models.md#server-side-tool-use) for details on enabling and using these built-in tools.
 
 ***
 

@@ -1,10 +1,10 @@
 # Set up composite online evaluators
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-composite)
-[Online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations) provide real-time feedback on your production [traces](https://docs.langchain.com/langsmith/observability-concepts#traces). This is useful to continuously monitor the performance of your application: to identify issues, measure improvements, and ensure consistent quality over time.
+[Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production [traces](observability-concepts.md#traces). This is useful to continuously monitor the performance of your application: to identify issues, measure improvements, and ensure consistent quality over time.
 
-[**Composite evaluators**](https://docs.langchain.com/langsmith/composite-evaluators-ui) are a way to combine multiple evaluator scores into a single [score](https://docs.langchain.com/langsmith/evaluation-concepts#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
+[**Composite evaluators**](composite-evaluators-ui.md) are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
 
-When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
+When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
 
 ## View online evaluators
 
@@ -12,7 +12,7 @@ Head to the **Tracing Projects** tab and select a tracing project. To view exist
 
 ## Configure composite online evaluators
 
-You can create composite evaluators on a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects) for [online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
+You can create composite evaluators on a [tracing project](observability-concepts.md#projects) for [online evaluations](evaluation-concepts.md#online-evaluations). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
 ### 1. Navigate to the tracing project
 
@@ -39,8 +39,8 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 **On a tracing project**:
 
 * Composite scores appear as feedback on runs.
-* [Filter for runs](https://docs.langchain.com/langsmith/filter-traces-in-application) with a composite score, or where the composite score meets a certain threshold.
-* [Create a chart](https://docs.langchain.com/langsmith/dashboards#custom-dashboards) to visualize trends in the composite score over time.
+* [Filter for runs](filter-traces-in-application.md) with a composite score, or where the composite score meets a certain threshold.
+* [Create a chart](dashboards.md#custom-dashboards) to visualize trends in the composite score over time.
 
  If any of the constituent evaluators are not configured on the run, the composite score will not be calculated for that run. 
 

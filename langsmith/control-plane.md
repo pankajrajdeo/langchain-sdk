@@ -1,8 +1,8 @@
 # LangSmith control plane
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/control-plane)
-The *control plane* is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update [Agent Servers](https://docs.langchain.com/langsmith/agent-server), and the control plane APIs, which support the UI and provide programmatic access.
+The *control plane* is the part of LangSmith that manages deployments. It includes the control plane UI, where users create and update [Agent Servers](agent-server.md), and the control plane APIs, which support the UI and provide programmatic access.
 
-When you make an update through the control plane, the update is stored in the control plane state. The [data plane](https://docs.langchain.com/langsmith/data-plane) “listener” polls for these updates by calling the control plane APIs. The control plane never connects to the data plane directly.
+When you make an update through the control plane, the update is stored in the control plane state. The [data plane](data-plane.md) “listener” polls for these updates by calling the control plane APIs. The control plane never connects to the data plane directly.
 
 ## Control plane UI
 
@@ -21,7 +21,7 @@ The Control plane UI is embedded in [LangSmith](https://docs.smith.langchain.com
 
 ## Control plane API
 
-This section describes the data model of the control plane API. The API is used to create, update, and delete deployments. See the [control plane API reference](https://docs.langchain.com/langsmith/api-ref-control-plane) for more details.
+This section describes the data model of the control plane API. The API is used to create, update, and delete deployments. See the [control plane API reference](api-ref-control-plane.md) for more details.
 
 ### Integrations
 
@@ -37,11 +37,11 @@ A revision is an iteration of a deployment. When a new deployment is created, an
 
 ### Listeners
 
-A listener is an instance of a ["listener" application](https://docs.langchain.com/langsmith/data-plane#listener-application). A listener contains metadata about the application (e.g. version) and metadata about the compute infrastructure where it can deploy to (e.g. Kubernetes namespaces).
+A listener is an instance of a ["listener" application](data-plane.md#listener-application). A listener contains metadata about the application (e.g. version) and metadata about the compute infrastructure where it can deploy to (e.g. Kubernetes namespaces).
 
 ## Control plane features
 
-This section describes various features of the control plane. For platform-specific behavior such as Cloud deployment types or self-hosted resource customization, see [Cloud platform features](https://docs.langchain.com/langsmith/cloud-platform-features) or [Deploy to self-hosted](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview).
+This section describes various features of the control plane. For platform-specific behavior such as Cloud deployment types or self-hosted resource customization, see [Cloud platform features](cloud-platform-features.md) or [Deploy to self-hosted](deploy-to-self-hosted-overview.md).
 
 ### Asynchronous deployment
 
@@ -51,7 +51,7 @@ Infrastructure for deployments and revisions are provisioned and deployed asynch
 * When a subsequent revision is created for a deployment, there is no database creation step. The deployment time for a subsequent revision is significantly faster compared to the deployment time of the initial revision.
 * The deployment process for each revision contains a build step, which can take up to a few minutes.
 
-The control plane and [data plane](https://docs.langchain.com/langsmith/data-plane) "listener" application coordinate to achieve asynchronous deployments.
+The control plane and [data plane](data-plane.md) "listener" application coordinate to achieve asynchronous deployments.
 
 ### Monitoring
 
@@ -59,16 +59,16 @@ After a deployment is ready, the control plane monitors the deployment and recor
 
 * CPU and memory usage of the deployment.
 * Number of container restarts.
-* Number of replicas (this will increase with [autoscaling](https://docs.langchain.com/langsmith/data-plane#autoscaling)).
-* [PostgreSQL](https://docs.langchain.com/langsmith/data-plane#postgresql) CPU, memory usage, and disk usage.
-* [Agent Server queue](https://docs.langchain.com/langsmith/agent-server#task-queue) pending/active run count.
-* [Agent Server API](https://docs.langchain.com/langsmith/agent-server) success response count, error response count, and latency.
+* Number of replicas (this will increase with [autoscaling](data-plane.md#autoscaling)).
+* [PostgreSQL](data-plane.md#postgresql) CPU, memory usage, and disk usage.
+* [Agent Server queue](agent-server.md#task-queue) pending/active run count.
+* [Agent Server API](agent-server.md) success response count, error response count, and latency.
 
 These metrics are displayed as charts in the Control Plane UI.
 
 ### LangSmith integration
 
-A [LangSmith](https://docs.langchain.com/langsmith/observability) tracing project is automatically created for each deployment. The tracing project has the same name as the deployment. When creating a deployment, the `LANGCHAIN_TRACING` and `LANGSMITH_API_KEY`/`LANGCHAIN_API_KEY` environment variables do not need to be specified; they are set automatically by the control plane.
+A [LangSmith](observability.md) tracing project is automatically created for each deployment. The tracing project has the same name as the deployment. When creating a deployment, the `LANGCHAIN_TRACING` and `LANGSMITH_API_KEY`/`LANGCHAIN_API_KEY` environment variables do not need to be specified; they are set automatically by the control plane.
 
 When a deployment is deleted, the traces and the tracing project are not deleted.
 

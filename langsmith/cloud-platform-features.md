@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cloud-platform-features)
 Cloud-only platform features for LangSmith Deployment, including data regions, static IP addresses, payload limits, and deployment types.
 
-This page describes the platform features that apply only to [Cloud](https://docs.langchain.com/langsmith/cloud) deployments. For self-hosted equivalents, see [Deploy to self-hosted](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview).
+This page describes the platform features that apply only to [Cloud](cloud.md) deployments. For self-hosted equivalents, see [Deploy to self-hosted](deploy-to-self-hosted-overview.md).
 
 ## Data region
 
@@ -12,7 +12,7 @@ The data region for a deployment is implied by the data region of the LangSmith 
 
 ## Static IP addresses
 
-All traffic from deployments created after January 6, 2025 comes through a NAT gateway. This NAT gateway has several static IP addresses depending on the data region. For the list of static IP addresses, see the [Allowlist IP addresses table](https://docs.langchain.com/langsmith/deploy-to-cloud#allowlist-ip-addresses).
+All traffic from deployments created after January 6, 2025 comes through a NAT gateway. This NAT gateway has several static IP addresses depending on the data region. For the list of static IP addresses, see the [Allowlist IP addresses table](deploy-to-cloud.md#allowlist-ip-addresses).
 
 ## Payload size
 
@@ -22,7 +22,7 @@ The maximum payload size for all requests sent to Cloud deployments is 25 MB. A
 
 The control plane offers two deployment types: Serverless and Dedicated. Each is available in three sizes: Small, Medium, and Large.
 
-Organizations still on previous pricing continue to create Development and Production deployments until October 1, 2026. Those types do not include scale to zero. To select them with the CLI, pass `--deployment-type dev` or `--deployment-type prod`. For pricing and the transition timeline, see [Manage billing](https://docs.langchain.com/langsmith/billing#langsmith-deployment-billing). For the full list of `--deployment-type` values, see [`langgraph deploy`](https://docs.langchain.com/langsmith/cli#deploy).
+Organizations still on previous pricing continue to create Development and Production deployments until October 1, 2026. Those types do not include scale to zero. To select them with the CLI, pass `--deployment-type dev` or `--deployment-type prod`. For pricing and the transition timeline, see [Manage billing](billing.md#langsmith-deployment-billing). For the full list of `--deployment-type` values, see [`langgraph deploy`](cli.md#deploy).
 
 | **Deployment type** | **Scaling**                                                | **Database**                                            | **Best for**                                                               |
 | ------------------- | ---------------------------------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ Organizations still on previous pricing continue to create Development and Produ
 
 > [!WARNING]
 > **Immutable deployment type**
-> Once a deployment is created, the deployment type cannot be changed. You can still change its [size](https://docs.langchain.com/langsmith/cloud-platform-features#sizes).
+> Once a deployment is created, the deployment type cannot be changed. You can still change its [size](#sizes).
 
 ### Serverless
 
@@ -40,13 +40,13 @@ Serverless deployments are cost-optimized for background and latency-tolerant ag
 For workloads that need consistently low latency or guaranteed uptime, use Dedicated instead. Serverless deployments run on shared, multi-tenant infrastructure.
 
 > [!NOTE]
-> Scale to zero is in [beta](https://docs.langchain.com/langsmith/release-stages) and is initially available only for deployments on the new usage-based pricing. The inactivity window before scale-down may change as the feature rolls out. See [Manage billing](https://docs.langchain.com/langsmith/billing#langsmith-deployment-billing) for pricing and the transition timeline.
+> Scale to zero is in [beta](release-stages.md) and is initially available only for deployments on the new usage-based pricing. The inactivity window before scale-down may change as the feature rolls out. See [Manage billing](billing.md#langsmith-deployment-billing) for pricing and the transition timeline.
 
 Agent Server is fault-tolerant: it automatically recovers from transient Redis or Postgres interruptions and retries failed background runs.
 
 ### Dedicated
 
-Dedicated deployments are always-on and built for production workloads in the critical path, such as customer-facing applications. Each Dedicated deployment has its own database with automatic backups and high availability, and autoscales across replicas as load increases. For details, see [Scaling](https://docs.langchain.com/langsmith/cloud-platform-features#scaling).
+Dedicated deployments are always-on and built for production workloads in the critical path, such as customer-facing applications. Each Dedicated deployment has its own database with automatic backups and high availability, and autoscales across replicas as load increases. For details, see [Scaling](#scaling).
 
 Resources for Dedicated deployments can be increased on a case-by-case basis depending on use case and capacity constraints. Contact support via [support.langchain.com](https://support.langchain.com) to request an increase in resources.
 
@@ -65,27 +65,27 @@ Both Serverless and Dedicated are available in three sizes: Small, Medium, and L
 > [!NOTE]
 > Runtime compute and memory are the total vCPU and memory provisioned across a deployment's containers, rounded to the nearest whole unit. Serverless deployments use a shared, multi-tenant database, so they have no dedicated database resources. Dedicated storage is an auto-scaling disk that grows with usage.
 
-For the price of each size, see the [pricing page](https://www.langchain.com/pricing), which includes a deployment cost calculator. For how Serverless and Dedicated deployments are billed, see [Manage billing](https://docs.langchain.com/langsmith/billing#langsmith-deployment-billing).
+For the price of each size, see the [pricing page](https://www.langchain.com/pricing), which includes a deployment cost calculator. For how Serverless and Dedicated deployments are billed, see [Manage billing](billing.md#langsmith-deployment-billing).
 
 ## Database provisioning
 
-The control plane and [data plane](https://docs.langchain.com/langsmith/data-plane) listener application coordinate to automatically create a Postgres database for each Cloud deployment. The database serves as the [persistence layer](https://docs.langchain.com/oss/python/langgraph/persistence#memory-store) for the deployment.
+The control plane and [data plane](data-plane.md) listener application coordinate to automatically create a Postgres database for each Cloud deployment. The database serves as the [persistence layer](../langgraph/persistence.md#memory-store) for the deployment.
 
-When implementing a LangGraph application, a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence#checkpointer-libraries) does not need to be configured. A checkpointer is automatically configured for the graph. Any checkpointer configured for a graph is replaced by the one that is automatically configured.
+When implementing a LangGraph application, a [checkpointer](../langgraph/persistence.md#checkpointer-libraries) does not need to be configured. A checkpointer is automatically configured for the graph. Any checkpointer configured for a graph is replaced by the one that is automatically configured.
 
-There is no direct access to the database. All access to the database occurs through the [Agent Server](https://docs.langchain.com/langsmith/agent-server).
+There is no direct access to the database. All access to the database occurs through the [Agent Server](agent-server.md).
 
 The database is never deleted until the deployment itself is deleted.
 
-For self-hosted deployments, see [custom PostgreSQL configuration](https://docs.langchain.com/langsmith/self-hosted-platform-features#custom-postgresql).
+For self-hosted deployments, see [custom PostgreSQL configuration](self-hosted-platform-features.md#custom-postgresql).
 
 ## Scaling
 
-Cloud deployments autoscale automatically; you do not configure queue workers, replicas, or pool sizes directly. A Dedicated deployment adds and removes replicas based on CPU utilization, memory utilization, and the number of pending runs, up to the maximum for its size. Each metric is evaluated independently, and the deployment scales to satisfy whichever requires the most replicas. [Queue workers](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) scale on pending run count while [API servers](https://docs.langchain.com/langsmith/agent-server#runtime-architecture) scale on CPU and memory, so read traffic does not slow run submission and vice versa. Scale-down is delayed to avoid thrashing under bursty load.
+Cloud deployments autoscale automatically; you do not configure queue workers, replicas, or pool sizes directly. A Dedicated deployment adds and removes replicas based on CPU utilization, memory utilization, and the number of pending runs, up to the maximum for its size. Each metric is evaluated independently, and the deployment scales to satisfy whichever requires the most replicas. [Queue workers](agent-server.md#runtime-architecture) scale on pending run count while [API servers](agent-server.md#runtime-architecture) scale on CPU and memory, so read traffic does not slow run submission and vice versa. Scale-down is delayed to avoid thrashing under bursty load.
 
-Autoscaling changes the number of replicas, but the CPU and memory available to each replica are fixed by the deployment's [size](https://docs.langchain.com/langsmith/cloud-platform-features#sizes). If a deployment is under sustained CPU or memory pressure, upgrade it to a larger size. A size change rolls out as a new revision with no downtime; the deployment type cannot be changed.
+Autoscaling changes the number of replicas, but the CPU and memory available to each replica are fixed by the deployment's [size](#sizes). If a deployment is under sustained CPU or memory pressure, upgrade it to a larger size. A size change rolls out as a new revision with no downtime; the deployment type cannot be changed.
 
-Application-level scaling levers (durability modes, async patterns, avoiding synchronous blocking, using `/join` instead of polling) apply to Cloud the same as to self-hosted. See [Scaling on self-hosted](https://docs.langchain.com/langsmith/agent-server-scale) for the underlying concepts; the Helm and resource configurations there do not apply to Cloud.
+Application-level scaling levers (durability modes, async patterns, avoiding synchronous blocking, using `/join` instead of polling) apply to Cloud the same as to self-hosted. See [Scaling on self-hosted](agent-server-scale.md) for the underlying concepts; the Helm and resource configurations there do not apply to Cloud.
 
 ***
 

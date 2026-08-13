@@ -1,8 +1,8 @@
 # How to collect user feedback for Agent Server runs
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-feedback)
-This tutorial shows you how to collect user feedback for [Agent Server](https://docs.langchain.com/langsmith/agent-server) runs and automatically link them to [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) in LangSmith. When creating a run, include the keys in the `feedback_keys` field of the request body. The response will return a pre-signed URL for each key, which your client can use to collect user feedback for the Agent Server run.
+This tutorial shows you how to collect user feedback for [Agent Server](agent-server.md) runs and automatically link them to [traces](observability-concepts.md#traces) in LangSmith. When creating a run, include the keys in the `feedback_keys` field of the request body. The response will return a pre-signed URL for each key, which your client can use to collect user feedback for the Agent Server run.
 
-LangSmith uses feedback to continuously improve the implementation of your agent. To learn more about how feedback works in LangSmith, refer to [LangSmith feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback).
+LangSmith uses feedback to continuously improve the implementation of your agent. To learn more about how feedback works in LangSmith, refer to [LangSmith feedback](observability-concepts.md#feedback).
 
 ## How it works
 
@@ -17,7 +17,7 @@ LangSmith uses feedback to continuously improve the implementation of your agent
        "user_disliked": "https://api.smith.langchain.com/api/v1/feedback/tokens/e952734e-c0a0-417b-a04d-fc2209691ed5"
    }
 ```
-3. Request the returned URL (e.g. `POST /api/v1/feedback/tokens/{token_id}`) to associate the feedback key with the trace generated from the Agent Server run. For more details, refer to the [LangSmith API reference](https://docs.langchain.com/langsmith/smith-api-ref).
+3. Request the returned URL (e.g. `POST /api/v1/feedback/tokens/{token_id}`) to associate the feedback key with the trace generated from the Agent Server run. For more details, refer to the [LangSmith API reference](smith-api-ref.md).
 4. LangSmith associates the submitted feedback with the run using the selected feedback key (e.g. `user_liked` or `user_disliked`).
 
 ## Call the streaming run API with `feedback_keys`
@@ -118,7 +118,7 @@ Each key in `data` matches one of the values you passed in `feedback_keys`. Each
 
 ## Submit feedback with the generated URL
 
-When the user chooses a feedback option, `POST` to the corresponding URL. `GET` is also supported. See the [LangSmith API reference](https://docs.langchain.com/langsmith/smith-api-ref) for more details.
+When the user chooses a feedback option, `POST` to the corresponding URL. `GET` is also supported. See the [LangSmith API reference](smith-api-ref.md) for more details.
 
 For example, if the user clicks a thumbs down button, call the `user_disliked` URL:
 

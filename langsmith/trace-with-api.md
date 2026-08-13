@@ -2,30 +2,30 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-with-api)
 Learn how to trace LLM applications using the LangSmith REST API directly.
 
-This guide covers two approaches to tracing with the [REST API](https://docs.langchain.com/langsmith/smith-api-ref): basic tracing using the `POST /runs` and `PATCH /runs` endpoints, and batch ingestion using `POST /runs/multipart` for higher throughput.
+This guide covers two approaches to tracing with the [REST API](smith-api-ref.md): basic tracing using the `POST /runs` and `PATCH /runs` endpoints, and batch ingestion using `POST /runs/multipart` for higher throughput.
 
-For a full list of endpoints and request/response schemas, refer to the [API reference](https://docs.langchain.com/langsmith/smith-api-ref).
+For a full list of endpoints and request/response schemas, refer to the [API reference](smith-api-ref.md).
 
 > [!WARNING]
-> We strongly recommend using the [Python](https://docs.langchain.com/langsmith/smith-python-sdk) or [TypeScript](https://docs.langchain.com/langsmith/smith-js-ts-sdk) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
+> We strongly recommend using the [Python](smith-python-sdk.md) or [TypeScript](smith-js-ts-sdk.md) SDK to send traces to LangSmith instead of the REST API directly. The SDKs include batching and background sending optimizations that prevent tracing from affecting your application's performance.
 >
 > If you cannot use an SDK, note that sending traces synchronously may impact application performance.
 
 > [!NOTE]
-> We recommend using **UUID v7** for run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. Use `uuid7()` from the LangSmith SDK to generate them, or see [Specify a custom run ID](https://docs.langchain.com/langsmith/annotate-code#specify-a-custom-run-id) for more details.
+> We recommend using **UUID v7** for run IDs. UUIDv7 embeds a timestamp, which preserves correct time-ordering of runs in a trace. Use `uuid7()` from the LangSmith SDK to generate them, or see [Specify a custom run ID](annotate-code.md#specify-a-custom-run-id) for more details.
 
 ## Basic tracing
 
 The simplest way to log runs is via the `POST /runs` and `PATCH /runs` endpoints. This approach requires minimal information to establish the trace hierarchy.
 
 > [!NOTE]
-> When using the LangSmith REST API, provide your [API key](https://docs.langchain.com/langsmith/create-account-api-key) in the request headers as `"x-api-key"`.
+> When using the LangSmith REST API, provide your [API key](create-account-api-key.md) in the request headers as `"x-api-key"`.
 >
 > If your API key is linked to multiple workspaces, specify the workspace in the header with `"x-tenant-id"`.
 >
 > In this approach, you do not need to set the `dotted_order` or `trace_id` fields—the system generates them automatically. Though simpler, it is slower and subject to lower rate limits than batch ingestion.
 
-The following example traces a chat completion with a parent chain run and a child LLM run. Set [`parent_run_id`](https://docs.langchain.com/langsmith/run-data-format) on a child run to attach it to its parent:
+The following example traces a chat completion with a parent chain run and a child LLM run. Set [`parent_run_id`](run-data-format.md) on a child run to attach it to its parent:
 
 ```python
 import openai
@@ -102,13 +102,13 @@ patch_run(child_run_id, chat_completion.dict())
 patch_run(parent_run_id, {"answer": chat_completion.choices[0].message.content})
 ```
 
-For more information, refer to [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format).
+For more information, refer to [Run (span) data format](run-data-format.md).
 
 ## Batch ingestion
 
-For faster ingestion and higher rate limits, use the [`POST /runs/multipart`](https://docs.langchain.com/langsmith/smith-api/runs/ingest-runs-multipart) endpoint. This requires the [`requests-toolbelt`](https://pypi.org/project/requests-toolbelt/) and [`uuid-utils`](https://pypi.org/project/uuid-utils/) packages.
+For faster ingestion and higher rate limits, use the [`POST /runs/multipart`](smith-api/runs/ingest-runs-multipart.md) endpoint. This requires the [`requests-toolbelt`](https://pypi.org/project/requests-toolbelt/) and [`uuid-utils`](https://pypi.org/project/uuid-utils/) packages.
 
-Unlike basic tracing, this endpoint requires you to compute and set [`dotted_order`](https://docs.langchain.com/langsmith/run-data-format#what-is-dotted_order) and [`trace_id`](https://docs.langchain.com/langsmith/run-data-format) yourself. `dotted_order` encodes each run's timestamp and UUID with parent and child entries joined by dots (e.g., `20240101T000000Z<parent-uuid>.20240101T000001Z<child-uuid>`), telling LangSmith how runs relate and in what order they occurred. `trace_id` is the UUID of the root run.
+Unlike basic tracing, this endpoint requires you to compute and set [`dotted_order`](run-data-format.md#what-is-dotted_order) and [`trace_id`](run-data-format.md) yourself. `dotted_order` encodes each run's timestamp and UUID with parent and child entries joined by dots (e.g., `20240101T000000Z<parent-uuid>.20240101T000001Z<child-uuid>`), telling LangSmith how runs relate and in what order they occurred. `trace_id` is the UUID of the root run.
 
 The following example creates a parent run and a child run, sends them in a single batch request, then patches both with their outputs:
 
@@ -307,9 +307,9 @@ batch_ingest_runs(api_url, api_key, patches=patches)
 
 ## Related
 
-* [Run (span) data format](https://docs.langchain.com/langsmith/run-data-format)
-* [Specify a custom run ID](https://docs.langchain.com/langsmith/annotate-code#specify-a-custom-run-id)
-* [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code)
+* [Run (span) data format](run-data-format.md)
+* [Specify a custom run ID](annotate-code.md#specify-a-custom-run-id)
+* [Custom instrumentation](annotate-code.md)
 
 ***
 

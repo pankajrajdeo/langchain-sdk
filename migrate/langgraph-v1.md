@@ -1,6 +1,6 @@
 # LangGraph v1 migration guide
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langgraph-v1)
-This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](https://docs.langchain.com/oss/python/releases/langgraph-v1) page.
+This guide outlines changes in LangGraph v1 and how to migrate from previous versions. For a high-level overview of changes, see the [what's new](../releases/langgraph-v1.md) page.
 
 To upgrade:
 
@@ -39,8 +39,8 @@ LangGraph v1 deprecates the [`create_react_agent`](https://reference.langchain.c
 
 See the LangChain v1 docs for details:
 
-* [Release notes](https://docs.langchain.com/oss/python/releases/langchain-v1#create_agent)
-* [Migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1#migrate-to-create_agent)
+* [Release notes](../releases/langchain-v1.md#create_agent)
+* [Migration guide](langchain-v1.md#migrate-to-create_agent)
 
 ```python
 from langchain.agents import create_agent

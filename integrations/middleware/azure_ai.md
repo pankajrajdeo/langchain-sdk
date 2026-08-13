@@ -2,7 +2,7 @@
 
 > Integrate with the Azure AI middleware using LangChain Python.
 
-Middleware specifically designed for Microsoft Foundry and Azure AI Content Safety. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
+Middleware specifically designed for Microsoft Foundry and Azure AI Content Safety. Learn more about [middleware](../../langchain/middleware/overview.md).
 
 These middleware classes live in the `langchain-azure-ai` package and are exported from `langchain_azure_ai.agents.middleware`.
 
@@ -13,11 +13,11 @@ These middleware classes live in the `langchain-azure-ai` package and are export
 
 | Middleware                                | Description                                                                  |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
-| [Text moderation](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#text-moderation)       | Screen input and output text for harmful content and blocklist matches       |
-| [Image moderation](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#image-moderation)     | Screen image inputs and outputs using Azure AI Content Safety image analysis |
-| [Prompt shield](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#prompt-shield)           | Detect direct and indirect prompt injection attempts                         |
-| [Protected material](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#protected-material) | Detect copyrighted or otherwise protected text or code                       |
-| [Groundedness](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai#groundedness)             | Evaluate model outputs against grounding sources and flag hallucinations     |
+| [Text moderation](#text-moderation)       | Screen input and output text for harmful content and blocklist matches       |
+| [Image moderation](#image-moderation)     | Screen image inputs and outputs using Azure AI Content Safety image analysis |
+| [Prompt shield](#prompt-shield)           | Detect direct and indirect prompt injection attempts                         |
+| [Protected material](#protected-material) | Detect copyrighted or otherwise protected text or code                       |
+| [Groundedness](#groundedness)             | Evaluate model outputs against grounding sources and flag hallucinations     |
 
 ### Features
 
@@ -85,7 +85,7 @@ middleware = AzureContentModerationMiddleware(
 
 ## Use with an agent
 
-Pass middleware to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) in order. You can combine Azure AI middleware with [built-in middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in).
+Pass middleware to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) in order. You can combine Azure AI middleware with [built-in middleware](../../langchain/middleware/built-in.md).
 
 ```python
 from azure.identity import DefaultAzureCredential

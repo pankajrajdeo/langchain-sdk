@@ -1,6 +1,6 @@
 # Splitting by token - Text splitter integration guide
 
-Language models have a token limit. You should not exceed the token limit. When you [split your text](https://docs.langchain.com/oss/python/integrations/splitters/) into chunks it is therefore a good idea to count the number of tokens. There are many tokenizers. When you count tokens in your text you should use the same tokenizer as used in the language model.
+Language models have a token limit. You should not exceed the token limit. When you [split your text](../splitters.md) into chunks it is therefore a good idea to count the number of tokens. There are many tokenizers. When you count tokens in your text you should use the same tokenizer as used in the language model.
 
 ## tiktoken
 

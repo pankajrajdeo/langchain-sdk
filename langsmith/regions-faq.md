@@ -1,7 +1,7 @@
 # Regions FAQ
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/regions-faq)
 > [!NOTE]
-> See the [cloud architecture reference](https://docs.langchain.com/langsmith/cloud#cloud-architecture-and-scalability) for additional details.
+> See the [cloud architecture reference](cloud.md#cloud-architecture-and-scalability) for additional details.
 
 ## Legal and compliance
 
@@ -9,7 +9,7 @@
 
 LangSmith complies with the General Data Protection Regulation (GDPR) and other laws and regulations applicable to the LangSmith service. We are also SOC 2 Type 2 certified and are HIPAA compliant. You can request more information about our security policies and posture at [trust.langchain.com](https://trust.langchain.com). If you would like to sign a Data Processing Addendum (DPA) with us, please contact support via [support.langchain.com](https://support.langchain.com).
 
-For the security posture of LangSmith Engine, including its model subprocessors and data handling, see [Engine security](https://docs.langchain.com/langsmith/engine-security).
+For the security posture of LangSmith Engine, including its model subprocessors and data handling, see [Engine security](engine-security.md).
 
 #### *My company isn't based in a region, can I still have my data hosted there?*
 
@@ -27,7 +27,7 @@ The terms are the same across supported cloud regions.
 
 #### *How do I use a specific regional instance?*
 
-Follow the [account and API key setup guide](https://docs.langchain.com/langsmith/create-account-api-key) to create an account and an API key. Make sure to choose the correct region in the region dropdown.
+Follow the [account and API key setup guide](create-account-api-key.md) to create an account and an API key. Make sure to choose the correct region in the region dropdown.
 
 #### *Are there any functional differences between cloud-managed LangSmith regions?*
 
@@ -43,7 +43,7 @@ LangSmith does not support this at the moment, but if you are interested, please
 
 #### *What data will be stored in my selected region?*
 
-See the [cloud architecture reference](https://docs.langchain.com/langsmith/cloud#cloud-architecture-and-scalability) for details.
+See the [cloud architecture reference](cloud.md#cloud-architecture-and-scalability) for details.
 
 #### *How can I see my organization's region?*
 

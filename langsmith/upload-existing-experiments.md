@@ -100,7 +100,7 @@ The response JSON will be a dict with keys `experiment` and `dataset`, each of w
 
 ## Considerations
 
-You may upload multiple experiments to the same dataset by providing the same dataset\_id or dataset\_name between multiple calls. Your experiments will be grouped together under a single dataset, and you will be able to [use the comparison view to compare results between experiments](https://docs.langchain.com/langsmith/compare-experiment-results).
+You may upload multiple experiments to the same dataset by providing the same dataset\_id or dataset\_name between multiple calls. Your experiments will be grouped together under a single dataset, and you will be able to [use the comparison view to compare results between experiments](compare-experiment-results.md).
 
 Ensure that the start and end times of your individual rows are all between the start and end time of your experiment.
 

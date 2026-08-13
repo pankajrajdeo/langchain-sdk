@@ -1,9 +1,9 @@
 # How to define a code evaluator
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/code-evaluator-ui)
-Code evaluators in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-code-evaluator-ui) allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike [LLM-as-a-judge](https://docs.langchain.com/langsmith/llm-as-judge) evaluators that use a model to evaluate outputs, code evaluators use deterministic logic you define.
+Code evaluators in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-code-evaluator-ui) allow you to write custom evaluation logic using Python or TypeScript code directly in the interface. Unlike [LLM-as-a-judge](llm-as-judge.md) evaluators that use a model to evaluate outputs, code evaluators use deterministic logic you define.
 
 > [!NOTE]
-> To create a code evaluator that appears in the LangSmith UI programmatically, refer to [Manage evaluators with the SDK](https://docs.langchain.com/langsmith/manage-evaluators-sdk). To define a code evaluator function that you pass to `evaluate()`, refer to [How to define a code evaluator (SDK)](https://docs.langchain.com/langsmith/code-evaluator-sdk). To grade outputs against assertions saved on dataset examples, refer to [Use assertions](https://docs.langchain.com/langsmith/assertions).
+> To create a code evaluator that appears in the LangSmith UI programmatically, refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md). To define a code evaluator function that you pass to `evaluate()`, refer to [How to define a code evaluator (SDK)](code-evaluator-sdk.md). To grade outputs against assertions saved on dataset examples, refer to [Use assertions](assertions.md).
 
 ## Step 1. Create the evaluator
 
@@ -87,13 +87,13 @@ def perform_eval(run, example):
 
 Once created, you can use your code evaluator:
 
-* When running evaluations from the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground)
-* As part of a dataset to [automatically run evaluations on experiments](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset)
+* When running evaluations from the [Playground](prompt-engineering-concepts.md#playground)
+* As part of a dataset to [automatically run evaluations on experiments](bind-evaluator-to-dataset.md)
 
 ## Related
 
-* [LLM-as-a-judge evaluator (UI)](https://docs.langchain.com/langsmith/llm-as-judge): Use an LLM to evaluate outputs
-* [Composite evaluators](https://docs.langchain.com/langsmith/composite-evaluators-ui): Combine multiple evaluator scores
+* [LLM-as-a-judge evaluator (UI)](llm-as-judge.md): Use an LLM to evaluate outputs
+* [Composite evaluators](composite-evaluators-ui.md): Combine multiple evaluator scores
 
 ***
 

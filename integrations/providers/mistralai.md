@@ -22,7 +22,7 @@ uv add langchain-mistralai
 
 ### ChatMistralAI
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/mistralai).
+See a [usage example](../chat/mistralai.md).
 
 ```python
 from langchain_mistralai.chat_models import ChatMistralAI
@@ -32,7 +32,7 @@ from langchain_mistralai.chat_models import ChatMistralAI
 
 ### MistralAIEmbeddings
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai).
+See a [usage example](../embeddings/mistralai.md).
 
 ```python
 from langchain_mistralai import MistralAIEmbeddings

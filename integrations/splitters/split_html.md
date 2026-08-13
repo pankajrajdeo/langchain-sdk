@@ -4,9 +4,9 @@
 
 Splitting HTML documents into manageable chunks is essential for various text processing tasks such as natural language processing, search indexing, and more. In this guide, we will explore three different text splitters provided by LangChain that you can use to split HTML content effectively:
 
-* [**HTMLHeaderTextSplitter**](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlheadertextsplitter)
-* [**HTMLSectionSplitter**](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlsectionsplitter)
-* [**HTMLSemanticPreservingSplitter**](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlsemanticpreservingsplitter)
+* [**HTMLHeaderTextSplitter**](#using-htmlheadertextsplitter)
+* [**HTMLSectionSplitter**](#using-htmlsectionsplitter)
+* [**HTMLSemanticPreservingSplitter**](#using-htmlsemanticpreservingsplitter)
 
 Each of these splitters has unique features and use cases. This guide will help you understand the differences between them, why you might choose one over the others, and how to use them effectively.
 
@@ -16,7 +16,7 @@ pip install -qU langchain-text-splitters
 
 ## Overview of the splitters
 
-### [HTMLHeaderTextSplitter](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlheadertextsplitter)
+### [HTMLHeaderTextSplitter](#using-htmlheadertextsplitter)
 
 > [!NOTE]
 > **Useful when you want to preserve the hierarchical structure of a document based on its headings.**
@@ -31,7 +31,7 @@ pip install -qU langchain-text-splitters
 
 ***
 
-### [HTMLSectionSplitter](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlsectionsplitter)
+### [HTMLSectionSplitter](#using-htmlsectionsplitter)
 
 > [!NOTE]
 > Useful when you want to split HTML documents into larger sections, such as `<section>`, `<div>`, or custom-defined sections.
@@ -46,7 +46,7 @@ pip install -qU langchain-text-splitters
 
 ***
 
-### [HTMLSemanticPreservingSplitter](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlsemanticpreservingsplitter)
+### [HTMLSemanticPreservingSplitter](#using-htmlsemanticpreservingsplitter)
 
 > [!NOTE]
 > \*\*Ideal when you need to ensure that structured elements are not split across chunks, preserving contextual relevancy. \*\*
@@ -100,7 +100,7 @@ html_string = """
     <ul>
       <li>First item</li>
       <li>Second item</li>
-      <li>Third item with <strong>bold text</strong> and <a href='https://docs.langchain.com/oss/python/integrations/splitters/split_html'>a link</a></li>
+      <li>Third item with <strong>bold text</strong> and <a href='#'>a link</a></li>
     </ul>
 
     <h3>Subsection 1.1: Details</h3>
@@ -129,8 +129,8 @@ html_string = """
 
     <h2>Section 2: Media Content</h2>
     <p>This section contains an image and a video:</p>
-      <img src='https://docs.langchain.com/oss/python/integrations/splitters/example_image_link.mp4' alt='Example Image'>
-      <video controls width='250' src='https://docs.langchain.com/oss/python/integrations/splitters/example_video_link.mp4' type='video/mp4'>
+      <img src='example_image_link.mp4' alt='Example Image'>
+      <video controls width='250' src='example_video_link.mp4' type='video/mp4'>
       Your browser does not support the video tag.
     </video>
 
@@ -151,9 +151,9 @@ html_string = """
 
 ## Using HTMLHeaderTextSplitter
 
-[HTMLHeaderTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/html/HTMLHeaderTextSplitter) is a "structure-aware" [text splitter](https://docs.langchain.com/oss/python/integrations/splitters) that splits text at the HTML element level and adds metadata for each header "relevant" to any given chunk. It can return chunks element by element or combine elements with the same metadata, with the objectives of (a) keeping related text grouped (more or less) semantically and (b) preserving context-rich information encoded in document structures. It can be used with other text splitters as part of a chunking pipeline.
+[HTMLHeaderTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/html/HTMLHeaderTextSplitter) is a "structure-aware" [text splitter](../splitters.md) that splits text at the HTML element level and adds metadata for each header "relevant" to any given chunk. It can return chunks element by element or combine elements with the same metadata, with the objectives of (a) keeping related text grouped (more or less) semantically and (b) preserving context-rich information encoded in document structures. It can be used with other text splitters as part of a chunking pipeline.
 
-It is analogous to the [MarkdownHeaderTextSplitter](https://docs.langchain.com/oss/python/integrations/splitters/markdown_header_metadata_splitter) for markdown files.
+It is analogous to the [MarkdownHeaderTextSplitter](markdown_header_metadata_splitter.md) for markdown files.
 
 To specify what headers to split on, specify `headers_to_split_on` when instantiating `HTMLHeaderTextSplitter` as shown below.
 
@@ -292,7 +292,7 @@ Because the jet stream is essentially a river of air that storms flow through, t
 
 ## Using HTMLSectionSplitter
 
-Similar in concept to the [HTMLHeaderTextSplitter](https://docs.langchain.com/oss/python/integrations/splitters/split_html#using-htmlheadertextsplitter), the `HTMLSectionSplitter` is a "structure-aware" [text splitter](https://docs.langchain.com/oss/python/integrations/splitters) that splits text at the element level and adds metadata for each header "relevant" to any given chunk. It lets you split HTML by sections.
+Similar in concept to the [HTMLHeaderTextSplitter](#using-htmlheadertextsplitter), the `HTMLSectionSplitter` is a "structure-aware" [text splitter](../splitters.md) that splits text at the element level and adds metadata for each header "relevant" to any given chunk. It lets you split HTML by sections.
 
 It can return chunks element by element or combine elements with the same metadata, with the objectives of (a) keeping related text grouped (more or less) semantically and (b) preserving context-rich information encoded in document structures.
 
@@ -430,7 +430,7 @@ documents
  Document(metadata={'Header 2': 'Section 1: Introduction'}, page_content='This section introduces the topic'),
  Document(metadata={'Header 2': 'Section 1: Introduction'}, page_content='. Below is a list: First item Second item Third item with bold text and a link Subsection 1.1: Details This subsection provides additional details'),
  Document(metadata={'Header 2': 'Section 1: Introduction'}, page_content=". Here's a table: Header 1 Header 2 Header 3 Row 1, Cell 1 Row 1, Cell 2 Row 1, Cell 3 Row 2, Cell 1 Row 2, Cell 2 Row 2, Cell 3"),
- Document(metadata={'Header 2': 'Section 2: Media Content'}, page_content='This section contains an image and a video: ![image:example_image_link.mp4](https://docs.langchain.com/oss/python/integrations/splitters/example_image_link.mp4) ![video:example_video_link.mp4](https://docs.langchain.com/oss/python/integrations/splitters/example_video_link.mp4)'),
+ Document(metadata={'Header 2': 'Section 2: Media Content'}, page_content='This section contains an image and a video: ![image:example_image_link.mp4](example_image_link.mp4) ![video:example_video_link.mp4](example_video_link.mp4)'),
  Document(metadata={'Header 2': 'Section 3: Code Example'}, page_content='This section contains a code block: <code:html> <div> <p>This is a paragraph inside a div.</p> </div> </code>'),
  Document(metadata={'Header 2': 'Conclusion'}, page_content='This is the conclusion of the document.')]
 ```
@@ -515,7 +515,7 @@ This can be particularly useful for elements that require special processing, su
 ```python
 def custom_iframe_extractor(iframe_tag):
     iframe_src = iframe_tag.get("src", "")
-    return f"[iframe:{iframe_src}](https://docs.langchain.com/oss/python/integrations/splitters/{iframe_src})"
+    return f"[iframe:{iframe_src}]({iframe_src})"
 
 splitter = HTMLSemanticPreservingSplitter(
     headers_to_split_on=headers_to_split_on,

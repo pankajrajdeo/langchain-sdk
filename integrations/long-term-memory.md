@@ -2,9 +2,9 @@
 
 > Integrate with store backends for LangGraph long-term memory.
 
-Stores enable [long-term memory](https://docs.langchain.com/oss/python/langgraph/stores) in LangGraph, allowing agents to persist and retrieve information across threads.
+Stores enable [long-term memory](../langgraph/stores.md) in LangGraph, allowing agents to persist and retrieve information across threads.
 
-To implement your own store for a custom storage backend, see [Build a custom store](https://docs.langchain.com/oss/python/langgraph/stores#build-a-custom-store).
+To implement your own store for a custom storage backend, see [Build a custom store](../langgraph/stores.md#build-a-custom-store).
 
 | Backend                                                                                     | Package                                                                                    | Source                                                                                                                     |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |

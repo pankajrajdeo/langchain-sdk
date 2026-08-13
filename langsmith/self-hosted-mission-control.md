@@ -8,8 +8,8 @@ There are two install paths:
 
 | Path                              | Best for                                                                                    |
 | --------------------------------- | ------------------------------------------------------------------------------------------- |
-| [Quick install](https://docs.langchain.com/langsmith/self-hosted-mission-control#quick-install)   | Customers who can run a reviewed shell installer and want the shortest setup.               |
-| [Manual install](https://docs.langchain.com/langsmith/self-hosted-mission-control#manual-install) | Organizations that do not allow installer scripts or need each Kubernetes command reviewed. |
+| [Quick install](#quick-install)   | Customers who can run a reviewed shell installer and want the shortest setup.               |
+| [Manual install](#manual-install) | Organizations that do not allow installer scripts or need each Kubernetes command reviewed. |
 
 The public install assets are:
 
@@ -58,7 +58,7 @@ kubectl auth can-i create deployment -n langsmith
 kubectl auth can-i create secret -n langsmith
 ```
 
-All five commands should return `yes`. See [Permissions reference](https://docs.langchain.com/langsmith/self-hosted-mission-control#permissions-reference) for the runtime permissions granted to Mission Control.
+All five commands should return `yes`. See [Permissions reference](#permissions-reference) for the runtime permissions granted to Mission Control.
 
 ## Quick install
 

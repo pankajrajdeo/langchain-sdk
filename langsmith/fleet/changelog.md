@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/changelog)
 Weekly updates to LangSmith Fleet
 
-Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
+Weekly updates to [LangSmith Fleet](../fleet.md).
 
 > [!NOTE]
 > **Subscribe**: This changelog includes an [RSS feed](https://docs.langchain.com/langsmith/fleet-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
@@ -61,36 +61,36 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 ## Fleet
 
 * In the Agent Builder view, the footer workspace and tenant list is sourced from the Fleet API so you can switch between your Fleet workspaces.
-* The [Access Profiles](https://docs.langchain.com/langsmith/fleet/computer-use) dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
-* Fleet now completes OAuth for [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
+* The [Access Profiles](computer-use.md) dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
+* Fleet agents can now delete files from their memory and [skills](skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet now completes OAuth for [MCP servers](remote-mcp-servers.md) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
-* Creating an agent from a Fleet [template](https://docs.langchain.com/langsmith/fleet/templates) now skips the setup wizard and opens the agent editor with the template onboarding card.
+* Creating an agent from a Fleet [template](templates.md) now skips the setup wizard and opens the agent editor with the template onboarding card.
 * Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so MCP servers that require a newer version no longer return zero tools or fail tool calls.
 * Fleet agents receive the day of week alongside the current date (for example "Monday, June 29th 2026"), so scheduling and date reasoning no longer relies on the model inferring the weekday from the ISO date.
 * File edits in Fleet agent chat now render as syntax-highlighted, line-by-line diffs, making changes easier to review.
-* Fleet agents can now read files shared with them in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app). Attach an image, PDF, audio, video, or text file in a mention or DM and the agent ingests it into the conversation.
+* Fleet agents can now read files shared with them in [Slack](slack-app.md). Attach an image, PDF, audio, video, or text file in a mention or DM and the agent ingests it into the conversation.
 * On the Agent Builder Integrations page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
-* When you connect a custom [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
+* When you connect a custom [Slack](slack-app.md) bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
 * Fleet agents now have a Slack tool for listing channels the connected bot is a member of, making it easier to discover the right channel before posting or reading messages.
 * Fleet OAuth provider and integration responses now include an `owner` field (`workspace` or `platform`) so you can tell your own resources apart from built-in, platform-managed ones. The platform manager organization can now create and modify built-in OAuth providers.
-* Setting up a [schedule](https://docs.langchain.com/langsmith/fleet/schedules) is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
+* Setting up a [schedule](schedules.md) is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
 * When registering an integration OAuth provider for headless connections, `http://` redirect URIs are now accepted only for the loopback IP literals `127.0.0.1` or `[::1]`. The localhost hostname is no longer accepted over `http`; use the loopback IP literal or `https`.
-* The [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) settings page now scrolls when the pointer is over the servers list.
+* The [MCP servers](remote-mcp-servers.md) settings page now scrolls when the pointer is over the servers list.
 * The load previous conversations tool now writes conversation files into the attached Computer sandbox when one is enabled, so agents can inspect the downloaded history with their normal file tools.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
-* The Executive Assistant template can now deliver its daily brief and answer @mentions in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
+* The Executive Assistant template can now deliver its daily brief and answer @mentions in [Slack](slack-app.md) after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
 * You can now type and send a message in agent chat while a human-in-the-loop prompt is pending. Sending a new message dismisses the pending request and continues the conversation instead of leaving the composer locked.
 * Empty sections in the agent configuration panel (Channels, Connections, Skills, Schedules, Instructions, and Subagents) now explain what each one is for and what you can add before you connect anything.
 * Creating a new agent no longer fails with a contentBlocks.push error when the chat stream returns string message content.
 * Opening an agent in the chat inbox no longer issues repeated duplicate background requests while choosing which thread to open, reducing flicker.
-* Fleet agents now load your workspace's private [skills](https://docs.langchain.com/langsmith/fleet/skills). Previously, in workspaces with fine-grained access controls, an agent could start with only public skills available.
+* Fleet agents now load your workspace's private [skills](skills.md). Previously, in workspaces with fine-grained access controls, an agent could start with only public skills available.
 * Reloading an agent chat page no longer flashes the thread list through loading and loaded states multiple times. The sidebar now waits for agent scope to finish loading before fetching threads, so the list settles once.
 * GitHub App installations now sync through the authenticated LangSmith session after installation completes, keeping workspace linking aligned with the active user.
 * OAuth providers now accept an optional default redirect URI (`default_redirect_uri`). When set, headless OAuth flows for that provider return the authorization code to it instead of the LangSmith callback, without passing a redirect on every request. The value is validated against the provider's allowed redirect URIs.
 * Fleet agents now discover tools with find\_tools or an /tools listing before opening a tool's reference doc, so they no longer waste a turn reading guessed tool filenames that do not exist.
 * The Fleet Fast model tier (`gpt-5.4-mini`) now runs at medium reasoning effort instead of low, improving response quality on harder tasks.
-* The [templates](https://docs.langchain.com/langsmith/fleet/templates) gallery now features the Executive Assistant and Software Engineer templates as large cards with a hero illustration, each showing the agent's own icon.
+* The [templates](templates.md) gallery now features the Executive Assistant and Software Engineer templates as large cards with a hero illustration, each showing the agent's own icon.
 * Each tool inside a connection in the agent Configure panel now has a remove action (a trash button revealed on hover, matching the connection remove) instead of an on/off switch. The switch implied a reversible toggle, but turning a tool off actually removed it from the agent, so the control now reflects what it does.
 * Sending a chat message while clarifying questions were pending could fail the run and leave the thread stuck. Free-text now correctly dismisses the pending request before continuing.
 * In the Agent Builder chat, the Skills block's "Add skill" menu now opens the browse-workspace, create-skill, and import-from-URL dialogs. Previously choosing an option changed the URL but nothing appeared.
@@ -105,11 +105,11 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 ## July 13-17, 2026
 ## New features
 
-* You can now add any agent to [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) in one click. After you authenticate with Slack once, Fleet automatically creates a Slack app configured with the agent's name, description, and icon, and maps each agent to a single Slack app.
+* You can now add any agent to [Slack](slack-app.md) in one click. After you authenticate with Slack once, Fleet automatically creates a Slack app configured with the agent's name, description, and icon, and maps each agent to a single Slack app.
 * When an agent is first added to a Slack workspace, it sends the creator a direct message with tips for inviting it to channels and mentioning it.
-* Agents now raise tool approvals directly in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app), with Approve and Deny buttons in the thread, so you no longer need to switch to the Fleet UI to respond.
+* Agents now raise tool approvals directly in [Slack](slack-app.md), with Approve and Deny buttons in the thread, so you no longer need to switch to the Fleet UI to respond.
 * When an agent encounters an error during a run, it now replies in the Slack thread instead of going silent. Authentication errors and some other error types include more detail.
-* Agents can now read file attachments in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) messages.
+* Agents can now read file attachments in [Slack](slack-app.md) messages.
 * The agent editor is now a sidebar built into the agent chat page, which organizes configuration into Channels, Connections, Knowledge, Schedule, and Advanced settings drawers.
 * The agent creation experience now starts from a blank-slate agent that configures itself and pauses at key points to bring you into the process.
 
@@ -118,7 +118,7 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 
 * In the Agent Builder view, the footer workspace and tenant list is sourced from the Fleet API so you can switch between your Fleet workspaces.
 * The Access Profiles dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet agents can now delete files from their memory and [skills](skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
 * Fleet now completes OAuth for MCP servers whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
 * Creating an agent from a Fleet template now skips the setup wizard and opens the agent editor with the template onboarding card.
@@ -132,7 +132,7 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 * Fleet OAuth provider and integration responses now include an `owner` field (`workspace` or `platform`) so you can tell your own resources apart from built-in, platform-managed ones. The platform manager organization can now create and modify built-in OAuth providers.
 * Setting up a schedule is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
 * When registering an integration OAuth provider for headless connections, `http://` redirect URIs are now accepted only for the loopback IP literals `127.0.0.1` or `[::1]`. The localhost hostname is no longer accepted over `http`; use the loopback IP literal or `https`.
-* The [MCP servers settings page](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) now scrolls when the pointer is over the servers list.
+* The [MCP servers settings page](remote-mcp-servers.md) now scrolls when the pointer is over the servers list.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
 * The Executive Assistant template can now deliver its daily brief and answer @mentions in Slack after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
 * You can now type and send a message in agent chat while a human-in-the-loop prompt is pending. Sending a new message dismisses the pending request and continues the conversation instead of leaving the composer locked.
@@ -145,12 +145,12 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 ## June 29 - July 3, 2026
 ## New features
 
-* The Access Profiles dialog in chat now includes a Create an [access profile](https://docs.langchain.com/langsmith/fleet/computer-use) link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
-* Fleet now completes OAuth for [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
+* The Access Profiles dialog in chat now includes a Create an [access profile](computer-use.md) link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
+* Fleet agents can now delete files from their memory and [skills](skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet now completes OAuth for [MCP servers](remote-mcp-servers.md) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
-* Creating an agent from a Fleet [template](https://docs.langchain.com/langsmith/fleet/templates) now skips the setup wizard and opens the agent editor with the template onboarding card.
-* Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) that require a newer version no longer return zero tools or fail tool calls.
+* Creating an agent from a Fleet [template](templates.md) now skips the setup wizard and opens the agent editor with the template onboarding card.
+* Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so [MCP servers](remote-mcp-servers.md) that require a newer version no longer return zero tools or fail tool calls.
 * Fleet agents receive the day of week alongside the current date (for example "Monday, June 29th 2026"), so scheduling and date reasoning no longer relies on the model inferring the weekday from the ISO date.
 * File edits in Fleet agent chat now render as syntax-highlighted, line-by-line diffs, making changes easier to review.
 * When you connect a custom Slack bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
@@ -161,28 +161,28 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 
 ## Fixes
 
-* On the Agent Builder [Integrations](https://docs.langchain.com/langsmith/fleet/tools) page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
+* On the Agent Builder [Integrations](tools.md) page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
 
 ## June 15-19, 2026
 ## New features
 
-* [Fleet tools](https://docs.langchain.com/langsmith/fleet/tools) now include Salesforce OAuth provider setup for self-hosted users, so you can configure the provider end to end.
+* [Fleet tools](tools.md) now include Salesforce OAuth provider setup for self-hosted users, so you can configure the provider end to end.
 * Agent sharing is redesigned around two choices, who can use and who can edit an agent, plus a Publish as template option that lets others fork their own editable copy.
 * Fleet agents now post a notification to the originating thread, such as Slack, when they pause at a human-in-the-loop interrupt, with a link back to the agent chat.
 * You can now complete Fleet integration OAuth through your own callback URL, so headless setups can finish authentication without the LangSmith UI.
 * Agent cards now show the agent owner.
-* New first-party [templates](https://docs.langchain.com/langsmith/fleet/templates), Brand Copywriter and Applicant Screening, are available in the gallery.
+* New first-party [templates](templates.md), Brand Copywriter and Applicant Screening, are available in the gallery.
 
 ## Fixes
 
 * Switching threads in the agent chat now clears the previous thread immediately and shows a loading state instead of stale messages.
-* The [skills](https://docs.langchain.com/langsmith/fleet/skills) list now degrades gracefully when one skill fails to load, so the remaining skills still appear.
+* The [skills](skills.md) list now degrades gracefully when one skill fails to load, so the remaining skills still appear.
 
 ## June 8-12, 2026
 ## New features
 
-* [Templates](https://docs.langchain.com/langsmith/fleet/templates) now show “by Fleet” with the Fleet logo, so curated templates match Fleet branding.
+* [Templates](templates.md) now show “by Fleet” with the Fleet logo, so curated templates match Fleet branding.
 
 ## Fixes
 
@@ -192,35 +192,35 @@ Weekly updates to [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
 ## June 1-5, 2026
 ## New features
 
-* [Skills](https://docs.langchain.com/langsmith/fleet/skills) load faster: the skills list fetches lightweight metadata first and loads file contents only when you open a skill.
-* The agent creation menu adds a [Templates](https://docs.langchain.com/langsmith/fleet/templates) entry.
-* The [remote MCP](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) authorization screen now shows the connecting application's name, logo, and homepage, terms, and privacy links instead of its raw `client ID`.
-* [Slack integration](https://docs.langchain.com/langsmith/fleet/slack-app) available in AWS and APAC regions.
+* [Skills](skills.md) load faster: the skills list fetches lightweight metadata first and loads file contents only when you open a skill.
+* The agent creation menu adds a [Templates](templates.md) entry.
+* The [remote MCP](remote-mcp-servers.md) authorization screen now shows the connecting application's name, logo, and homepage, terms, and privacy links instead of its raw `client ID`.
+* [Slack integration](slack-app.md) available in AWS and APAC regions.
 
 ## Fixes
 
-* [Scheduled (cron) execution](https://docs.langchain.com/langsmith/fleet/schedules) is restored for enterprise Fleet agents.
+* [Scheduled (cron) execution](schedules.md) is restored for enterprise Fleet agents.
 * Long-running agent runs and agent-builder generations are no longer cut off after 60 seconds.
-* The Gmail read-emails [tool](https://docs.langchain.com/langsmith/fleet/tools) now returns results when you search sent mail with an `in:sent` query.
+* The Gmail read-emails [tool](tools.md) now returns results when you search sent mail with an `in:sent` query.
 * Scrolling is improved for long toolbox, skill, and sub-agent lists in the agent editor, and webhook dialogs now scroll within the viewport.
 
 ## March 16-20, 2026
 ## New features
 
-* Agent Builder is now [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet). The new name reflects Fleet's focus on building and managing agents for your whole team: creating them, sharing them, managing their tasks, and controlling agent access and identity. All existing agents, configurations, integrations, plans, and contracts continue to work unchanged, with no action required on your end.
+* Agent Builder is now [LangSmith Fleet](../fleet.md). The new name reflects Fleet's focus on building and managing agents for your whole team: creating them, sharing them, managing their tasks, and controlling agent access and identity. All existing agents, configurations, integrations, plans, and contracts continue to work unchanged, with no action required on your end.
 
 ## February 16-20, 2026
 ## New features
 
-* A central Chat agent connects to all of your workspace [tools](https://docs.langchain.com/langsmith/fleet/tools), including Slack, Gmail, Linear, and MCP servers, so you can ask questions and take actions without setting up a dedicated agent first.
+* A central Chat agent connects to all of your workspace [tools](tools.md), including Slack, Gmail, Linear, and MCP servers, so you can ask questions and take actions without setting up a dedicated agent first.
 * Turn a useful conversation into a recurring agent with one click, with no prompt engineering or conditional logic required.
 * Upload files directly into chat, including CSVs, images, documents, and style guides, for the agent to act on immediately.
-* A central tool registry lets workspace admins connect [tools](https://docs.langchain.com/langsmith/fleet/tools), manage authentication, and control access across the organization.
+* A central tool registry lets workspace admins connect [tools](tools.md), manage authentication, and control access across the organization.
 
 ## October 27-31, 2025
 ## New features
 
-* LangSmith Agent Builder launched in private preview as a no-code way for non-developers to build agents, with conversational setup, built-in memory, MCP integrations, automated triggers, and subagent support. Agent Builder later became [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
+* LangSmith Agent Builder launched in private preview as a no-code way for non-developers to build agents, with conversational setup, built-in memory, MCP integrations, automated triggers, and subagent support. Agent Builder later became [LangSmith Fleet](../fleet.md).
 
 ***
 

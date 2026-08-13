@@ -6,7 +6,7 @@ Customize OpenWiki with ignore rules, wiki briefs, agent instruction pointers, a
 
 ## Ignore paths
 
-Create `.openwikiignore` at the repository root to exclude private, generated, or irrelevant paths from documentation runs. See [Code mode](https://docs.langchain.com/oss/openwiki/code-mode#ignore-paths) for syntax and behavior.
+Create `.openwikiignore` at the repository root to exclude private, generated, or irrelevant paths from documentation runs. See [Code mode](code-mode.md#ignore-paths) for syntax and behavior.
 
 ## Wiki instructions
 
@@ -43,7 +43,7 @@ Both code and personal mode store machine-local state under `~/.openwiki/`:
 | `~/.openwiki/onboarding.json` | Personal        | Personal onboarding preferences and connector schedules                                                                   |
 | `~/.openwiki/connectors/`     | Mostly personal | Connector raw data and config. Personal sources use this path; code-mode LangSmith ingestion can also cache raw data here |
 
-Code-mode repository artifacts such as the generated wiki, `openwiki/INSTRUCTIONS.md`, and `openwiki/.last-update.json` live in the project, not under `~/.openwiki/`. For more detail, see [Code mode](https://docs.langchain.com/oss/openwiki/code-mode) and [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode).
+Code-mode repository artifacts such as the generated wiki, `openwiki/INSTRUCTIONS.md`, and `openwiki/.last-update.json` live in the project, not under `~/.openwiki/`. For more detail, see [Code mode](code-mode.md) and [Personal mode](personal-mode.md).
 
 ## Telemetry
 
@@ -72,10 +72,10 @@ To inspect exactly what a run would send, add `--telemetry-file=<path>` to any r
 
 ## See also
 
-* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
-* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
-* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
-* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
+* [Code mode](code-mode.md)
+* [Personal mode](personal-mode.md)
+* [Automate updates](automate-updates.md)
+* [Model providers](providers.md)
 
 ***
 

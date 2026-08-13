@@ -1,6 +1,6 @@
 # Build customer support with handoffs
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs-customer-support)
-The [state machine pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) describes workflows where an agent's behavior changes as it moves through different states of a task. This tutorial shows how to implement a state machine by using tool calls to dynamically change a single agent's configuration—updating its available tools and instructions based on the current state. The state can be determined from multiple sources: the agent's past actions (tool calls), external state (such as API call results), or even initial user input (for example, by running a classifier to determine user intent).
+The [state machine pattern](handoffs.md) describes workflows where an agent's behavior changes as it moves through different states of a task. This tutorial shows how to implement a state machine by using tool calls to dynamically change a single agent's configuration—updating its available tools and instructions based on the current state. The state can be determined from multiple sources: the agent's past actions (tool calls), external state (such as API call results), or even initial user input (for example, by running a classifier to determine user intent).
 
 In this tutorial, you'll build a customer support agent that does the following:
 
@@ -9,7 +9,7 @@ In this tutorial, you'll build a customer support agent that does the following:
 * Provides solutions or escalates to human support.
 * Maintains conversation state across multiple turns.
 
-Unlike the [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant) where sub-agents are called as tools, the **state machine pattern** uses a single agent whose configuration changes based on workflow progress. Each "step" is just a different configuration (system prompt + tools) of the same underlying agent, selected dynamically based on state.
+Unlike the [subagents pattern](subagents-personal-assistant.md) where sub-agents are called as tools, the **state machine pattern** uses a single agent whose configuration changes based on workflow progress. Each "step" is just a different configuration (system prompt + tools) of the same underlying agent, selected dynamically based on state.
 
 Here's the workflow we'll build:
 
@@ -66,7 +66,7 @@ uv add langchain
 conda install langchain -c conda-forge
 ```
 
-For more details, see our [Installation guide](https://docs.langchain.com/oss/python/langchain/install).
+For more details, see our [Installation guide](../install.md).
 
 ### LangSmith
 
@@ -90,7 +90,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 Select a chat model from LangChain's suite of integrations:
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -119,7 +119,7 @@ model = ChatOpenAI(model="gpt-5.5")
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -148,7 +148,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -187,7 +187,7 @@ model = AzureChatOpenAI(
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -216,7 +216,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -245,7 +245,7 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -284,7 +284,7 @@ model = ChatHuggingFace(llm=llm)
 ```
 
 #### OpenRouter
-👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
+👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 ```bash
 pip install -U "langchain-openrouter"
@@ -664,7 +664,7 @@ The key insight: **Tools drive the workflow** by updating `current_step`, and **
 
 ## 8. Manage message history
 
-As the agent progresses through steps, message history grows. Use [summarization middleware](https://docs.langchain.com/oss/python/langchain/short-term-memory#summarize-messages) to compress earlier messages while preserving conversational context:
+As the agent progresses through steps, message history grows. Use [summarization middleware](../short-term-memory.md#summarize-messages) to compress earlier messages while preserving conversational context:
 
 ```python
 from langchain.agents import create_agent
@@ -687,7 +687,7 @@ agent = create_agent(
 )
 ```
 
-See the [short-term memory guide](https://docs.langchain.com/oss/python/langchain/short-term-memory) for other memory management techniques.
+See the [short-term memory guide](../short-term-memory.md) for other memory management techniques.
 
 ## 9. Add flexibility: Go back
 
@@ -976,9 +976,9 @@ if __name__ == "__main__":
 
 ## Next steps
 
-* Learn about the [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant) for centralized orchestration
-* Explore [middleware](https://docs.langchain.com/oss/python/langchain/middleware) for more dynamic behaviors
-* Read the [multi-agent overview](https://docs.langchain.com/oss/python/langchain/multi-agent) to compare patterns
+* Learn about the [subagents pattern](subagents-personal-assistant.md) for centralized orchestration
+* Explore [middleware](../middleware.md) for more dynamic behaviors
+* Read the [multi-agent overview](../multi-agent.md) to compare patterns
 * Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-handoffs-customer-support) to debug and monitor your multi-agent system
 
 ***

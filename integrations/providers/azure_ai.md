@@ -110,7 +110,7 @@ vector_search = AzureCosmosDBNoSqlVectorSearch.from_documents(
 )
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql).
+See a [usage example](../vectorstores/azure_cosmos_db_no_sql.md).
 
 ### Azure CosmosDB mongo vCore vector search
 
@@ -142,7 +142,7 @@ vectorstore = AzureCosmosDBMongoVCoreVectorSearch.from_documents(
 )
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore).
+See a [usage example](../vectorstores/azure_cosmos_db_mongo_vcore.md).
 
 ***
 

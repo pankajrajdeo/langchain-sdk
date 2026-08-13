@@ -66,14 +66,14 @@ Here's how templates work in practice:
 ```
 
 > [!TIP]
-> Learn more about template variable syntax and formatting options in the [Prompt template format](https://docs.langchain.com/langsmith/create-a-prompt#template-format) guide.
+> Learn more about template variable syntax and formatting options in the [Prompt template format](create-a-prompt.md#template-format) guide.
 
 ## Prompts in LangSmith
 
 You can store and version prompt templates in LangSmith. These templates can be tested in the Playground, versioned with commits and tags, and pulled into your application code.
 
 > [!NOTE]
-> Open the [Playground](https://smith.langchain.com/playground) to create and test your first prompt template. For a step-by-step, refer to [Create a prompt](https://docs.langchain.com/langsmith/create-a-prompt).
+> Open the [Playground](https://smith.langchain.com/playground) to create and test your first prompt template. For a step-by-step, refer to [Create a prompt](create-a-prompt.md).
 
 The following sections describe key aspects of prompt templates.
 
@@ -81,18 +81,18 @@ The following sections describe key aspects of prompt templates.
 
 You can format your prompt template with input variables using either [f-string](https://realpython.com/python-f-strings/) or [mustache](https://mustache.github.io/mustache.5.html) format.
 
-For details on how to use these formats in the Playground, see [Template format](https://docs.langchain.com/langsmith/create-a-prompt#template-format).
+For details on how to use these formats in the Playground, see [Template format](create-a-prompt.md#template-format).
 
 > [!TIP]
 > The [Playground](https://smith.langchain.com/playground) uses `f-string` as the default template format, but you can switch to `mustache` format in the prompt settings/template format section. `mustache` gives you more flexibility around conditional variables, loops, and nested keys. For conditional variables, you'll need to manually add json variables in the 'inputs' section. Read [the documentation](https://mustache.github.io/mustache.5.html)
 
 ### Tools
 
-[Tools](https://docs.langchain.com/langsmith/use-tools) are interfaces the LLM can use to interact with the outside world. Tools consist of a name, description, and JSON schema of arguments used to call the tool.
+[Tools](use-tools.md) are interfaces the LLM can use to interact with the outside world. Tools consist of a name, description, and JSON schema of arguments used to call the tool.
 
 ### Structured output
 
-Structured output is a feature of most state of the art LLMs, wherein instead of producing raw text as output they stick to a specified schema. This may or may not use [Tools](https://docs.langchain.com/langsmith/prompt-engineering-concepts#tools) under the hood.
+Structured output is a feature of most state of the art LLMs, wherein instead of producing raw text as output they stick to a specified schema. This may or may not use [Tools](#tools) under the hood.
 
 > [!TIP]
 > Structured output is similar to tools, but different in a few key ways. With tools, the LLM choose which tool to call (or may choose not to call any); with structured output, the LLM **always** responds in this format. With tools, the LLM may select **multiple** tools; with structured output, only one response is generate.
@@ -114,7 +114,7 @@ Every saved update to a prompt creates a new commit with a unique commit hash. T
 * Revert to a previous state if needed.
 * Reference specific versions in your code using the commit hash (e.g., `client.pull_prompt("prompt_name:commit_hash")`).
 
-In the UI, you can compare a commit with its previous version by toggling **Diff** in the top-right corner of the [Prompt detail page](https://docs.langchain.com/langsmith/manage-prompts#prompt-detail-page).
+In the UI, you can compare a commit with its previous version by toggling **Diff** in the top-right corner of the [Prompt detail page](manage-prompts.md#prompt-detail-page).
 
 ### Tags
 
@@ -122,14 +122,14 @@ Commit tags are human-readable labels that point to specific commits in your pro
 
 Use cases for commit tags can include:
 
-* **Environments**: The `staging` and `production` tags are reserved for the [Environments](https://docs.langchain.com/langsmith/manage-prompts#environments) feature, which lets you promote commits between named deployment targets and switch versions without changing your code.
+* **Environments**: The `staging` and `production` tags are reserved for the [Environments](manage-prompts.md#environments) feature, which lets you promote commits between named deployment targets and switch versions without changing your code.
 * **Version control**: Mark stable versions of your prompts, for example, `v1`, `v2`, which lets you reference specific versions in your code and track changes over time.
 * **Collaboration**: Mark versions ready for review, which enables you to share specific versions with collaborators and get feedback.
 
 > [!NOTE]
-> **Not to be confused with resource tags**: Commit tags reference specific prompt versions. [Resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) are key-value pairs used to organize workspace resources.
+> **Not to be confused with resource tags**: Commit tags reference specific prompt versions. [Resource tags](set-up-resource-tags.md) are key-value pairs used to organize workspace resources.
 
-For detailed information on creating and managing commit tags, see [Manage prompts](https://docs.langchain.com/langsmith/manage-prompts#commit-tags).
+For detailed information on creating and managing commit tags, see [Manage prompts](manage-prompts.md#commit-tags).
 
 ## Playground
 
@@ -146,19 +146,19 @@ In the Playground you can:
 * Observe the outputs
 
 > [!NOTE]
-> Use the **[Chat](https://docs.langchain.com/langsmith/chat)** in the Playground to optimize prompts, generate tools, and create output schemas with AI assistance.
+> Use the **[Chat](chat.md)** in the Playground to optimize prompts, generate tools, and create output schemas with AI assistance.
 
 ## Testing multiple prompts
 
 You can add multiple prompts to your Playground to compare outputs and evaluate performance:
 
-> **Image:** [Add prompt to Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts)
+> **Image:** [Add prompt to Playground](prompt-engineering-concepts.md)
 
 ## Testing over a dataset
 
 To test over a dataset, select the dataset from the top right and click Start. You can configure whether results are streamed and the number of repetitions for the test.
 
-> **Image:** [Test over dataset in Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts)
+> **Image:** [Test over dataset in Playground](prompt-engineering-concepts.md)
 
 Click the "View Experiment" button to view detailed test results.
 

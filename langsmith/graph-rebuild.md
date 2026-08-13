@@ -9,7 +9,7 @@ You might need to rebuild your graph with a different configuration for a new ru
 
 ## Prerequisites
 
-* Make sure to check out [this how-to guide](https://docs.langchain.com/langsmith/setup-app-requirements-txt) on setting up your app for deployment first.
+* Make sure to check out [this how-to guide](setup-app-requirements-txt.md) on setting up your app for deployment first.
 * `ServerRuntime` requires `langgraph-api >= 0.7.31` and `langgraph-sdk >= 0.3.5`. Prior to that, graph factories only accepted a single `config: RunnableConfig` argument.
 
 ## Define graphs
@@ -61,7 +61,7 @@ To make the server aware of your graph, you need to specify a path to the variab
 To rebuild your graph on each new run, provide a **factory function** that returns (or yields) a graph. The factory can optionally accept a `ServerRuntime` parameter or a `RunnableConfig`. The server inspects your function's type annotations to determine which arguments to inject, so make sure to include the correct type hints. The server's queue workers will call your factory function any time they need to process a run. The function will also be called for certain other endpoints to update state, read state, or to fetch assistant schemas. The `ServerRuntime` tells you which context triggered the call.
 
 > [!NOTE]
-> `ServerRuntime` is in [beta](https://docs.langchain.com/langsmith/release-stages) and may change in future releases.
+> `ServerRuntime` is in [beta](release-stages.md) and may change in future releases.
 
 #### Simple factory
 
@@ -154,7 +154,7 @@ Your factory function receives a `ServerRuntime` instance with the following att
 | Attribute        | Type               | Description                                                                                                       |
 | ---------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `access_context` | `str`              | Why the factory was called: `"threads.create_run"`, `"threads.update"`, `"threads.read"`, or `"assistants.read"`. |
-| `user`           | `BaseUser \| None` | The authenticated user, or `None` if no [custom auth](https://docs.langchain.com/langsmith/custom-auth) is configured.                      |
+| `user`           | `BaseUser \| None` | The authenticated user, or `None` if no [custom auth](custom-auth.md) is configured.                      |
 | `store`          | `BaseStore`        | The store instance for persistence and memory.                                                                    |
 
 **Methods:**
@@ -177,9 +177,9 @@ The server calls your factory in several contexts beyond just executing runs. In
 
 ## Customize tracing per graph
 
-You can use the factory function to customize or disable tracing for a specific graph. See [Conditional tracing: Customize tracing in deployed agents](https://docs.langchain.com/langsmith/conditional-tracing#customize-tracing-in-deployed-agents) for examples.
+You can use the factory function to customize or disable tracing for a specific graph. See [Conditional tracing: Customize tracing in deployed agents](conditional-tracing.md#customize-tracing-in-deployed-agents) for examples.
 
-See more info on the [LangGraph API configuration file](https://docs.langchain.com/langsmith/cli#configuration-file).
+See more info on the [LangGraph API configuration file](cli.md#configuration-file).
 
 ***
 

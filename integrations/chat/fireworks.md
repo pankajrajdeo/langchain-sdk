@@ -2,7 +2,7 @@
 
 > Integrate with the ChatFireworks chat model using LangChain Python.
 
-This doc helps you get started with Fireworks AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For a list of all models served by Fireworks see the [Fireworks docs](https://fireworks.ai/models).
+This doc helps you get started with Fireworks AI [chat models](../../langchain/models.md). For a list of all models served by Fireworks see the [Fireworks docs](https://fireworks.ai/models).
 
 > [!TIP]
 > **API Reference**
@@ -19,7 +19,7 @@ This doc helps you get started with Fireworks AI [chat models](https://docs.lang
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -39,7 +39,7 @@ if "FIREWORKS_API_KEY" not in os.environ:
     os.environ["FIREWORKS_API_KEY"] = getpass.getpass("Enter your Fireworks API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -99,7 +99,7 @@ J'adore la programmation.
 
 ## Reasoning effort
 
-Some Fireworks-hosted models support the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. `ChatFireworks` forwards it unchanged as the `reasoning_effort` request field. Supported values vary by model. It can be set at model construction or per invocation:
+Some Fireworks-hosted models support the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, which controls the amount of reasoning the model does. `ChatFireworks` forwards it unchanged as the `reasoning_effort` request field. Supported values vary by model. It can be set at model construction or per invocation:
 
 ```python
 from langchain_fireworks import ChatFireworks
@@ -114,7 +114,7 @@ response = model.invoke(
 > [!NOTE]
 > `reasoning_effort` as a standard parameter requires `langchain-fireworks>=1.5.2`.
 
-Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the effort levels it supports:
+Check a model's [profile](../../langchain/models.md#model-profiles) for the effort levels it supports:
 
 ```python
 model.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high']

@@ -13,7 +13,7 @@ To change the model for your agent:
 3. In the **Model** section, select the model you want to use.
 4. If the model requires an API key, add it in the **API keys** section.
 
-Custom models are available for enterprise deployments. For more information, see [Custom models](https://docs.langchain.com/langsmith/fleet/essentials#custom-models).
+Custom models are available for enterprise deployments. For more information, see [Custom models](essentials.md#custom-models).
 
 ## Reconnect tool integrations
 
@@ -31,7 +31,7 @@ To download the files for your agent, open the agent, expand the **Advanced sett
 
 Agents can be private to the creator, shared with specific people, or shared with your entire LangSmith workspace.
 
-| Feature                  | Private agents                          | [Workspace agents](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#workspace-scoped-agent-details)                                                                    |
+| Feature                  | Private agents                          | [Workspace agents](#workspace-scoped-agent-details)                                                                    |
 | ------------------------ | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Ownership and access** | Only visible to creator                 | Visible to anyone within the same LangSmith workspace                                                                  |
 | **OAuth authentication** | OAuth credentials are scoped to creator | OAuth credentials are scoped to each user; new users cloning workspace agents must re-authenticate with selected tools |
@@ -54,7 +54,7 @@ Your agent can remember information from previous conversations and use it to ma
 By default, your agent requires approval before saving to the memories folder. When this setting is enabled, the agent pauses and waits for you to accept, edit, or reject each memory update in the Fleet UI before continuing.
 
 > [!TIP]
-> If your agent runs on a [schedule](https://docs.langchain.com/langsmith/fleet/schedules#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
+> If your agent runs on a [schedule](schedules.md#add-a-schedule) or other automated schedule, disable the memory approval requirement. Otherwise, the agent will pause on every scheduled run that involves a memory update and wait indefinitely for manual approval.
 
 ### Disable required approval for memory updates
 
@@ -66,14 +66,14 @@ To disable the memory approval requirement:
 
 ## Use the agent programmatically
 
-You can use the [LangGraph SDK](https://docs.langchain.com/langsmith/reference) to connect to your agent through code. To view the code snippets needed to call your agent programmatically:
+You can use the [LangGraph SDK](../reference.md) to connect to your agent through code. To view the code snippets needed to call your agent programmatically:
 
 1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-manage-agent-settings), open your agent.
 2. In the sidebar, expand the **Advanced settings** drawer.
 3. Under **Developer**, click **View code snippets**.
 4. Copy the pre-populated code snippets for your agent.
 
-For more information, see [Call agents from code](https://docs.langchain.com/langsmith/fleet/code).
+For more information, see [Call agents from code](code.md).
 
 ## Pause agent
 

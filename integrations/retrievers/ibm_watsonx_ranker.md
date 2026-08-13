@@ -85,7 +85,7 @@ def pretty_print_docs(docs):
 
 Let's start by initializing a simple vector store retriever and storing the 2023 State of the Union speech (in chunks). We can set up the retriever to retrieve a high number (20) of docs.
 
-Initialize the `WatsonxEmbeddings`. For more details see [WatsonxEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx).
+Initialize the `WatsonxEmbeddings`. For more details see [WatsonxEmbeddings](../embeddings/ibm_watsonx.md).
 
 **Note**:
 
@@ -244,7 +244,7 @@ In this struggle as President Zelenskyy said in his speech to the European Parli
 
 You can of course use this retriever within a QA pipeline
 
-Initialize the `ChatWatsonx`. For more details see [ChatWatsonx](https://docs.langchain.com/oss/python/integrations/chat/ibm_watsonx).
+Initialize the `ChatWatsonx`. For more details see [ChatWatsonx](../chat/ibm_watsonx.md).
 
 ```python
 from langchain_ibm import ChatWatsonx

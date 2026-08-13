@@ -24,7 +24,7 @@ pip install -qU langchain-qdrant
 
 There are no credentials needed to run the code in this notebook.
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -41,7 +41,7 @@ The Python client provides the option to run the code in local mode without runn
 
 For some testing scenarios and quick experiments, you may prefer to keep all the data in-memory only, so it gets removed when the client is destroyed - usually at the end of your script/notebook.
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/qdrant).
+> **Interactive content:** [View this section in the original documentation](qdrant.md).
 
 ```python
 # | output: false
@@ -445,9 +445,9 @@ retriever.invoke("Stealing from the bank is a crime")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ## Customizing qdrant
 

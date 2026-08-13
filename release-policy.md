@@ -175,8 +175,8 @@ Packages are marked with one of the following statuses:
 
 ## See also
 
-* [Versioning](https://docs.langchain.com/oss/python/versioning) - Version numbering and support details
-* [Releases](https://docs.langchain.com/oss/python/releases) - Version-specific release notes and migration guides
+* [Versioning](versioning.md) - Version numbering and support details
+* [Releases](releases.md) - Version-specific release notes and migration guides
 
 #### Deep Agents
 Deep Agents (`deepagents`) is a rapidly evolving package for building advanced agent architectures.
@@ -219,7 +219,7 @@ After 1.0, Deep Agents will follow the same semantic versioning and LTS policies
 
 ## See also
 
-* [Versioning](https://docs.langchain.com/oss/python/versioning) - Version numbering and support details
+* [Versioning](versioning.md) - Version numbering and support details
 
 ***
 

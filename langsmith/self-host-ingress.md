@@ -46,6 +46,8 @@ You may need to provide certain parameters to your LangSmith installation to con
 
 You can configure your LangSmith instance to use one of three routing options: standard Ingress, Gateway API, or Istio Gateway. Choose the option that best fits your infrastructure.
 
+<a id="option-1:-standard-ingress"></a>
+
 ### Option 1: Standard ingress
 
 With these parameters in hand, you can configure your LangSmith instance to use an Ingress. You can do this by modifying the `config.yaml` file for your LangSmith Helm Chart installation.
@@ -83,12 +85,14 @@ langsmith-ingress            nginx   <host>   35.227.243.203   80, 443   95d
 > [!WARNING]
 > If you do not have automated DNS setup, you will need to add the IP address to your DNS provider manually.
 
+<a id="option-2:-gateway-api"></a>
+
 ### Option 2: Gateway API
 
 > [!NOTE]
 > Gateway API support is available as of LangSmith v0.12.0
 
-If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/), you can configure LangSmith to provision HTTPRoute resources. This will create an HTTPRoute for LangSmith and an HTTPRoute for each [agent deployment](https://docs.langchain.com/langsmith/deployment).
+If your cluster uses the [Kubernetes Gateway API](https://gateway-api.sigs.k8s.io/), you can configure LangSmith to provision HTTPRoute resources. This will create an HTTPRoute for LangSmith and an HTTPRoute for each [agent deployment](deployment.md).
 
 #### Parameters
 
@@ -124,12 +128,14 @@ Once configured, you can check the status of your HTTPRoutes:
 kubectl get httproute
 ```
 
+<a id="option-3:-istio-gateway"></a>
+
 ### Option 3: Istio Gateway
 
 > [!NOTE]
 > Istio Gateway support is available as of LangSmith v0.12.0
 
-If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to provision VirtualService resources. This will create a VirtualService for LangSmith and a VirtualService for each [agent deployment](https://docs.langchain.com/langsmith/deployment).
+If your cluster uses [Istio](https://istio.io/), you can configure LangSmith to provision VirtualService resources. This will create a VirtualService for LangSmith and a VirtualService for each [agent deployment](deployment.md).
 
 #### Parameters
 

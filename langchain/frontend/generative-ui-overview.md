@@ -61,7 +61,7 @@ tickets and booking confirmations. Your component library is the boundary: the a
 can only render what you shipped. Controlled generative UI covers components as
 tools, tool-call rendering, state rendering, and reasoning.
 
-For details, see [Controlled generative UI](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui).
+For details, see [Controlled generative UI](controlled-generative-ui.md).
 
 ### Declarative
 
@@ -71,7 +71,7 @@ guardrail and boundary: the agent can arrange and combine your components freely
 cannot step outside the set you approve. This is where the long tail lives. It
 trades pixel-perfection for breadth, which suits secondary interactions, internal
 tools, and dashboards where showing something useful matters more than exact
-control. [Declarative generative UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
+control. [Declarative generative UI](declarative-generative-ui.md)
 covers this with [json-render](https://json-render.dev); Google's A2UI, integrated via
 CopilotKit, offers the same shape with dynamic and fixed schema variants.
 
@@ -86,7 +86,7 @@ experimental approach: the least deterministic, and the hardest in which to
 guarantee accessibility, consistency, and safety, so the UI must be isolated. The
 sandbox and your prompt are the boundary.
 
-For details, see [Open-ended generative UI](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui).
+For details, see [Open-ended generative UI](open-ended-generative-ui.md).
 
 ## Choosing an approach
 
@@ -94,9 +94,9 @@ Start from how much you need to constrain the interface:
 
 | If you need to...                                                           | Choose                                                                  |
 | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Guarantee branding, layout, and accessibility for a known set of outputs    | [Controlled](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)   |
-| Let the agent compose novel layouts using only approved components          | [Declarative](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui) |
-| Surface interfaces authored by third parties without building them yourself | [Open-ended](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)   |
+| Guarantee branding, layout, and accessibility for a known set of outputs    | [Controlled](controlled-generative-ui.md)   |
+| Let the agent compose novel layouts using only approved components          | [Declarative](declarative-generative-ui.md) |
+| Surface interfaces authored by third parties without building them yourself | [Open-ended](open-ended-generative-ui.md)   |
 
 Choosing a single approach for an entire product is the most common mistake. Real
 applications mix approaches and match each surface to its purpose: controlled
@@ -110,13 +110,13 @@ transcript.
 
 ## Explore the spectrum
 
-#### [Controlled](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
+#### [Controlled](controlled-generative-ui.md)
 Author the components; the agent picks which to render and what data to pass.
 
-#### [Declarative](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui)
+#### [Declarative](declarative-generative-ui.md)
 The agent emits a spec; the frontend composes from a registered catalog.
 
-#### [Open-ended](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
+#### [Open-ended](open-ended-generative-ui.md)
 Render UI created elsewhere, such as sandboxed MCP Apps.
 
 ***

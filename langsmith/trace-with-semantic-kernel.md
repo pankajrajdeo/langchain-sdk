@@ -18,7 +18,7 @@ uv add langsmith semantic-kernel opentelemetry-instrumentation-openai
 
 ### 1. Configure environment variables
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
@@ -148,7 +148,7 @@ HTTPXClientInstrumentor().instrument()
 
 * [Semantic Kernel documentation](https://learn.microsoft.com/en-us/semantic-kernel/overview/)
 * [Semantic Kernel observability guide](https://learn.microsoft.com/en-us/semantic-kernel/concepts/enterprise-readiness/observability/)
-* [LangSmith OpenTelemetry guide](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+* [LangSmith OpenTelemetry guide](trace-with-opentelemetry.md)
 
 ***
 

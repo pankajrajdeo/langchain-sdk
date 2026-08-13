@@ -2,14 +2,14 @@
 
 > Integrate with the NVIDIA middleware using LangChain Python.
 
-Middleware integrations and model-specific harness profiles for NVIDIA services and models. Use them to route calls across LangChain chat models or optimize Deep Agents behavior for NVIDIA Nemotron 3 Ultra. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
+Middleware integrations and model-specific harness profiles for NVIDIA services and models. Use them to route calls across LangChain chat models or optimize Deep Agents behavior for NVIDIA Nemotron 3 Ultra. Learn more about [middleware](../../langchain/middleware/overview.md).
 
 ## Overview
 
 | Integration                                                                            | Description                                                                       |
 | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [Deep Agents profile for Nemotron 3 Ultra](https://docs.langchain.com/oss/python/integrations/middleware/nvidia#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior    |
-| [Model routing with NeMo Switchyard](https://docs.langchain.com/oss/python/integrations/middleware/nvidia#model-routing-with-nemo-switchyard)              | Route each model call to the target selected by a configured Switchyard algorithm |
+| [Deep Agents profile for Nemotron 3 Ultra](#optimize-deep-agents-for-nemotron-3-ultra) | Apply model-specific prompts and middleware for more reliable agentic behavior    |
+| [Model routing with NeMo Switchyard](#model-routing-with-nemo-switchyard)              | Route each model call to the target selected by a configured Switchyard algorithm |
 
 ## Optimize Deep Agents for Nemotron 3 Ultra
 
@@ -34,7 +34,7 @@ Install Deep Agents and the NVIDIA chat model integration:
 pip install -U "deepagents>=0.7.0" langchain-nvidia-ai-endpoints
 ```
 
-Configure `NVIDIA_API_KEY` as described in the [ChatNVIDIA setup guide](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints#access-the-nvidia-api-catalog).
+Configure `NVIDIA_API_KEY` as described in the [ChatNVIDIA setup guide](../chat/nvidia_ai_endpoints.md#access-the-nvidia-api-catalog).
 
 ### Use the built-in profile
 
@@ -187,10 +187,10 @@ Some algorithms make more than one decision. Use `decisions` for the full trace;
 
 ## See also
 
-* [NVIDIA integrations](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
+* [NVIDIA integrations](../providers/nvidia.md)
 * [`langchain-nvidia-switchyard` package README](https://github.com/langchain-ai/langchain-nvidia/tree/main/libs/switchyard#readme)
 * [Create a Deep Agents harness profile for NVIDIA Nemotron 3 Ultra](https://developer.nvidia.com/blog/create-a-langchain-deep-agents-harness-profile-for-nvidia-nemotron-3-ultra-to-improve-performance/)
-* [Deep Agents models and dynamic selection](https://docs.langchain.com/oss/python/deepagents/models)
+* [Deep Agents models and dynamic selection](../../deepagents/models.md)
 
 ***
 

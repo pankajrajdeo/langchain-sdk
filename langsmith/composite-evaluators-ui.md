@@ -1,19 +1,19 @@
 # How to create a composite evaluator
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/composite-evaluators-ui)
-*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](https://docs.langchain.com/langsmith/evaluation-concepts#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
+*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
 
-This guide shows you how to define a [composite evaluator](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-composite-evaluators-ui).
+This guide shows you how to define a [composite evaluator](evaluation-concepts.md#llm-as-judge) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-composite-evaluators-ui).
 
 > [!NOTE]
-> To create composite evaluators programmatically using the SDK, refer to [How to create a composite evaluator (SDK)](https://docs.langchain.com/langsmith/composite-evaluators-sdk).
+> To create composite evaluators programmatically using the SDK, refer to [How to create a composite evaluator (SDK)](composite-evaluators-sdk.md).
 
 ## Create a composite evaluator
 
-You can create composite evaluators on a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects) (for [online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations)) or a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) (for [offline evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
+You can create composite evaluators on a [tracing project](observability-concepts.md#projects) (for [online evaluations](evaluation-concepts.md#online-evaluations)) or a [dataset](evaluation-concepts.md#datasets) (for [offline evaluations](evaluation-concepts.md#offline-evaluations)). With composite evaluators in the UI, you can compute a weighted average or weighted sum of multiple evaluator scores, with configurable weights.
 
-> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](https://docs.langchain.com/langsmith/composite-evaluators-ui)
+> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](composite-evaluators-ui.md)
 
-> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](https://docs.langchain.com/langsmith/composite-evaluators-ui)
+> **Image:** [LangSmith UI showing an LLM call trace called ChatOpenAI with a system and human input followed by an AI Output.](composite-evaluators-ui.md)
 
 ### 1. Navigate to the tracing project or dataset
 
@@ -41,8 +41,8 @@ Composite scores are attached to a run as **feedback**, similarly to feedback fr
 **On a tracing project**:
 
 * Composite scores appear as feedback on runs.
-* [Filter for runs](https://docs.langchain.com/langsmith/filter-traces-in-application) with a composite score, or where the composite score meets a certain threshold.
-* [Create a chart](https://docs.langchain.com/langsmith/dashboards#custom-dashboards) to visualize trends in the composite score over time.
+* [Filter for runs](filter-traces-in-application.md) with a composite score, or where the composite score meets a certain threshold.
+* [Create a chart](dashboards.md#custom-dashboards) to visualize trends in the composite score over time.
 
 **On a dataset**:
 

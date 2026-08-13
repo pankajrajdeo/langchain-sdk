@@ -55,7 +55,7 @@ Any maintenance or upgrade that could cause downtime, such as a restart of RDS o
 
 You can deploy observability tooling into the cluster, such as a Datadog agent or an OpenTelemetry collector, and your own security monitoring agents, as long as they do not interfere with LangSmith workloads.
 
-LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](https://docs.langchain.com/langsmith/export-backend).
+LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](export-backend.md).
 
 ## Troubleshooting
 
@@ -69,7 +69,7 @@ The LangChain team has no standing access to your data, and can only manage the 
 
 ## Auditing
 
-* **LangSmith audit logs**: Operations on data plane resources are recorded in the data plane and accessible at your data plane endpoint. Control plane actions, such as creating a user, are audited in the control plane. For how to access both, see [Audit logs](https://docs.langchain.com/langsmith/audit-logs).
+* **LangSmith audit logs**: Operations on data plane resources are recorded in the data plane and accessible at your data plane endpoint. Control plane actions, such as creating a user, are audited in the control plane. For how to access both, see [Audit logs](audit-logs.md).
 * **EKS audit logs**: Sent to CloudWatch in your account, so you can monitor the commands that were run.
 * **VPC flow logs**: Recorded in an S3 bucket in your account.
 
@@ -77,8 +77,8 @@ Setting up alerts on those logs is your responsibility.
 
 ## See also
 
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
-* [Using BYOC](https://docs.langchain.com/langsmith/byoc-usage)
+* [BYOC architecture](byoc-architecture.md)
+* [Using BYOC](byoc-usage.md)
 
 ***
 

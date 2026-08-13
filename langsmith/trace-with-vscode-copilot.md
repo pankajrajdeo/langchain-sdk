@@ -11,7 +11,7 @@ This guide is based on Copilot's [Monitor agent usage with OpenTelemetry](https:
 Before setting up tracing, ensure you have:
 
 * A recent version of [Visual Studio Code](https://code.visualstudio.com/) with GitHub Copilot Chat installed and signed in.
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith API key](create-account-api-key.md).
 
 ## Configure tracing
 
@@ -31,7 +31,7 @@ export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-
 | `COPILOT_OTEL_PROTOCOL`        | OTLP protocol. Use `http` to target LangSmith's HTTP OTLP ingestion endpoint.                                                                                                                                            |
 | `COPILOT_OTEL_ENDPOINT`        | LangSmith OTLP endpoint. Takes precedence over `OTEL_EXPORTER_OTLP_ENDPOINT`.                                                                                                                                            |
 | `COPILOT_OTEL_CAPTURE_CONTENT` | Capture full prompts, responses, tool arguments, and tool results on spans. Off by default.                                                                                                                              |
-| `OTEL_EXPORTER_OTLP_HEADERS`   | Authentication headers for the OTLP exporter. Use `x-api-key=<your_langsmith_api_key>` and optionally `Langsmith-Project=<project>` to route traces to a specific [LangSmith project](https://docs.langchain.com/langsmith/log-traces-to-project). |
+| `OTEL_EXPORTER_OTLP_HEADERS`   | Authentication headers for the OTLP exporter. Use `x-api-key=<your_langsmith_api_key>` and optionally `Langsmith-Project=<project>` to route traces to a specific [LangSmith project](log-traces-to-project.md). |
 
 VS Code must inherit these environment variables, so export them in the shell session that launches VS Code (for example, by adding them to `~/.zshrc`, `~/.bashrc`, or a shell profile) before starting the editor.
 
@@ -75,8 +75,8 @@ When an agent invokes a subagent, Copilot Chat propagates trace context automati
 ## Related resources
 
 * [VS Code Copilot: Monitor agent usage with OpenTelemetry](https://code.visualstudio.com/docs/copilot/guides/monitoring-agents)
-* [Trace with OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
-* [Log traces to a project](https://docs.langchain.com/langsmith/log-traces-to-project)
+* [Trace with OpenTelemetry](trace-with-opentelemetry.md)
+* [Log traces to a project](log-traces-to-project.md)
 
 ***
 

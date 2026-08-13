@@ -2,22 +2,22 @@
 
 > Integrate with the Anthropic middleware using LangChain Python.
 
-Middleware specifically designed for Anthropic's Claude models. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
+Middleware specifically designed for Anthropic's Claude models. Learn more about [middleware](../../langchain/middleware/overview.md).
 
 | Middleware                        | Description                                                    |
 | --------------------------------- | -------------------------------------------------------------- |
-| [Prompt caching](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#prompt-caching) | Reduce costs by caching repetitive prompt prefixes             |
-| [Bash tool](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#bash-tool)           | Execute Claude's native bash tool with local command execution |
-| [Text editor](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#text-editor)       | Provide Claude's text editor tool for file editing             |
-| [Memory](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#memory)                 | Provide Claude's memory tool for persistent agent memory       |
-| [File search](https://docs.langchain.com/oss/python/integrations/middleware/anthropic#file-search)       | Search tools for state-based file systems                      |
+| [Prompt caching](#prompt-caching) | Reduce costs by caching repetitive prompt prefixes             |
+| [Bash tool](#bash-tool)           | Execute Claude's native bash tool with local command execution |
+| [Text editor](#text-editor)       | Provide Claude's text editor tool for file editing             |
+| [Memory](#memory)                 | Provide Claude's memory tool for persistent agent memory       |
+| [File search](#file-search)       | Search tools for state-based file systems                      |
 
 ## Middleware vs tools
 
 `langchain-anthropic` provides two ways to use Claude's native tools:
 
 * **Middleware** (this page): Production-ready implementations with built-in execution, state management, and security policies
-* **Tools** (via [`bind_tools`](https://docs.langchain.com/oss/python/integrations/chat/anthropic#built-in-tools)): Low-level building blocks where you provide your own execution logic
+* **Tools** (via [`bind_tools`](../chat/anthropic.md#built-in-tools)): Low-level building blocks where you provide your own execution logic
 
 ### When to use which
 
@@ -123,7 +123,7 @@ Prompt caching is useful for the following:
 * High-volume deployments where reducing API costs and latency is critical
 
 > [!TIP]
-> For simpler use cases, you can also use [automatic caching](https://docs.langchain.com/oss/python/integrations/chat/anthropic#automatic-caching) by passing `cache_control` at invocation time without middleware. The middleware is recommended when you need explicit control over cache breakpoints on system prompts and tool definitions.
+> For simpler use cases, you can also use [automatic caching](../chat/anthropic.md#automatic-caching) by passing `cache_control` at invocation time without middleware. The middleware is recommended when you need explicit control over cache breakpoints on system prompts and tool definitions.
 
 > [!NOTE]
 > Learn more about [Anthropic prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-limitations) strategies and limitations.
@@ -260,7 +260,7 @@ Execution policy (`HostExecutionPolicy`, `DockerExecutionPolicy`, or `CodexSandb
 #### `Field` — `tuple[RedactionRule, ...] | list[RedactionRule] | None`
 Rules for sanitizing command output
 
-See [Shell tool](https://docs.langchain.com/oss/python/langchain/middleware/built-in#shell-tool) for full configuration details.
+See [Shell tool](../../langchain/middleware/built-in.md#shell-tool) for full configuration details.
 
 </details>
 

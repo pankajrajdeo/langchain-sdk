@@ -22,7 +22,7 @@ This installs LangSmith, Strands Agents, Strands Agents tools, and the OpenTelem
 
 ### 1. Configure environment variables
 
-Set your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and project name. If you use Amazon Bedrock as the model provider for Strands Agents, also configure AWS credentials with your preferred AWS authentication method.
+Set your [LangSmith API key](create-account-api-key.md) and project name. If you use Amazon Bedrock as the model provider for Strands Agents, also configure AWS credentials with your preferred AWS authentication method.
 
 ```bash
 export OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel/v1/traces
@@ -103,7 +103,7 @@ Use this approach when you want to configure exporter options in code instead of
 ## Resources
 
 * [Strands Agents documentation](https://strandsagents.com/)
-* [LangSmith OpenTelemetry guide](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+* [LangSmith OpenTelemetry guide](trace-with-opentelemetry.md)
 
 ***
 

@@ -3,7 +3,7 @@
 Legacy hybrid deployment model with a LangChain-managed control plane and a self-managed data plane.
 
 > [!WARNING]
-> This page describes the legacy hybrid deployment model, which uses a LangChain-managed control plane to orchestrate Agent Servers in your cloud. For the current hybrid model, see [Hybrid](https://docs.langchain.com/langsmith/hybrid).
+> This page describes the legacy hybrid deployment model, which uses a LangChain-managed control plane to orchestrate Agent Servers in your cloud. For the current hybrid model, see [Hybrid](hybrid.md).
 
 > [!NOTE]
 > The hybrid option requires an [Enterprise](https://langchain.com/pricing) plan. [Get a demo](https://www.langchain.com/contact-sales) to learn more.
@@ -16,42 +16,42 @@ The **hybrid** model splits LangSmith infrastructure between LangChain's cloud a
 This combines the convenience of a managed interface with the flexibility of running workloads in your own environment.
 
 > [!NOTE]
-> Learn more about the [control plane](https://docs.langchain.com/langsmith/control-plane), [data plane](https://docs.langchain.com/langsmith/data-plane), and [Agent Server](https://docs.langchain.com/langsmith/agent-server) architecture concepts.
+> Learn more about the [control plane](control-plane.md), [data plane](data-plane.md), and [Agent Server](agent-server.md) architecture concepts.
 
 | Component                        | Responsibilities                                                                                                                                    | Where it runs     | Who manages it |
 | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------- |
 | Control plane | <ul><li>UI for creating deployments and revisions</li><li>APIs for managing deployments</li><li>Observability data storage</li></ul>                | LangChain's cloud | LangChain      |
 | Data plane    | <ul><li>Operator/listener to reconcile deployments</li><li>Agent Servers (agents/graphs)</li><li>Backing services (Postgres, Redis, etc.)</li></ul> | Your cloud        | You            |
 
-When running LangSmith in a hybrid model, you authenticate with a [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+When running LangSmith in a hybrid model, you authenticate with a [LangSmith API key](create-account-api-key.md).
 
 ### Workflow
 
-1. Use the `langgraph-cli` or [Studio](https://docs.langchain.com/langsmith/studio) to test your graph locally.
+1. Use the `langgraph-cli` or [Studio](studio.md) to test your graph locally.
 2. Build a Docker image using the `langgraph build` command.
-3. Deploy your Agent Server from the [control plane UI](https://docs.langchain.com/langsmith/control-plane#control-plane-ui).
+3. Deploy your Agent Server from the [control plane UI](control-plane.md#control-plane-ui).
 
 > [!NOTE]
-> Supported Compute Platforms: [Kubernetes](https://kubernetes.io/). See [Kubernetes setup](https://docs.langchain.com/langsmith/hybrid-legacy#kubernetes-setup) below.
+> Supported Compute Platforms: [Kubernetes](https://kubernetes.io/). See [Kubernetes setup](#kubernetes-setup) below.
 
 ### Architecture
 
-> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](https://docs.langchain.com/langsmith/hybrid-legacy)
+> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](hybrid-legacy.md)
 
-> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](https://docs.langchain.com/langsmith/hybrid-legacy)
+> **Image:** [Hybrid deployment: LangChain-hosted control plane (LangSmith UI/APIs) manages deployments. Your cloud runs a listener, Agent Server instances, and backing stores (Postgres/Redis) on Kubernetes.](hybrid-legacy.md)
 
 ### Compute platforms
 
 * **Kubernetes**: Hybrid supports running the data plane on any Kubernetes cluster.
 
 > [!TIP]
-> For setup in Kubernetes, see [Kubernetes setup](https://docs.langchain.com/langsmith/hybrid-legacy#kubernetes-setup) below.
+> For setup in Kubernetes, see [Kubernetes setup](#kubernetes-setup) below.
 
 ### Egress to LangSmith and the control plane
 
 In the hybrid deployment model, your self-hosted data plane will send network requests to the control plane to poll for changes that need to be implemented in the data plane. Traces from data plane deployments also get sent to the LangSmith instance integrated with the control plane. This traffic to the control plane is encrypted, over HTTPS. The data plane authenticates with the control plane with a LangSmith API key.
 
-In order to enable this egress, you may need to update internal firewall rules or cloud resources (such as Security Groups) to [allow certain IP addresses](https://docs.langchain.com/langsmith/cloud#ingress-into-langchain-saas).
+In order to enable this egress, you may need to update internal firewall rules or cloud resources (such as Security Groups) to [allow certain IP addresses](cloud.md#ingress-into-langchain-saas).
 
 > [!WARNING]
 > AWS/Azure PrivateLink or GCP Private Service Connect is currently not supported. This traffic will go over the internet.
@@ -72,9 +72,9 @@ The following steps describe how to connect your self-hosted data plane to the m
 > [!NOTE]
 >    `KEDA` is used to automatically scale the deployment system based on queue size.
 
-2. A valid `Ingress` controller is installed on your cluster. For more information about configuring ingress for your deployment, refer to [Create an ingress for installations](https://docs.langchain.com/langsmith/self-host-ingress). We highly recommend using the modern [Gateway API](https://docs.langchain.com/langsmith/self-host-ingress#option-2%3A-gateway-api) in a production setup.
+2. A valid `Ingress` controller is installed on your cluster. For more information about configuring ingress for your deployment, refer to [Create an ingress for installations](self-host-ingress.md). We highly recommend using the modern [Gateway API](self-host-ingress.md#option-2%3A-gateway-api) in a production setup.
 
-3. If you plan to have the listener watch multiple namespaces, you **MUST** use the [Gateway API](https://docs.langchain.com/langsmith/self-host-ingress#option-2%3A-gateway-api) or an [Istio Gateway](https://docs.langchain.com/langsmith/self-host-ingress#option-3%3A-istio-gateway) instead of the [standard ingress](https://docs.langchain.com/langsmith/self-host-ingress#option-1%3A-standard-ingress) resource. A standard ingress resource can only route traffic to services in the same namespace, whereas a Gateway or Istio Gateway can route traffic to services across multiple namespaces.
+3. If you plan to have the listener watch multiple namespaces, you **MUST** use the [Gateway API](self-host-ingress.md#option-2%3A-gateway-api) or an [Istio Gateway](self-host-ingress.md#option-3%3A-istio-gateway) instead of the [standard ingress](self-host-ingress.md#option-1%3A-standard-ingress) resource. A standard ingress resource can only route traffic to services in the same namespace, whereas a Gateway or Istio Gateway can route traffic to services across multiple namespaces.
 
 4. You have slack space in your cluster for multiple deployments. `Cluster-Autoscaler` is recommended to automatically provision new nodes.
 
@@ -139,7 +139,7 @@ LangSmith API:
 ### Setup
 
 1. Provide your LangSmith organization ID to us. Your LangSmith organization will be configured to deploy the data plane in your cloud.
-2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual ["listener" application](https://docs.langchain.com/langsmith/data-plane#listener-application).
+2. Create a listener from the LangSmith UI. The `Listener` data model is configured for the actual ["listener" application](data-plane.md#listener-application).
    1. In the left-hand navigation, select `Deployments` > `Listeners`.
    2. In the top-right of the page, select `+ Create Listener`.
    3. Enter a unique `Compute ID` for the listener. The `Compute ID` is a user-defined identifier that should be unique across all listeners in the current LangSmith workspace. The `Compute ID` is displayed to end users when they are creating a new deployment. Ensure that the `Compute ID` provides context to the end user about where their Agent Server deployments will be deployed to. For example, a `Compute ID` can be set to `k8s-cluster-name-dev-01`. In this example, the name of the Kubernetes cluster is `k8s-cluster-name`, `dev` denotes that the cluster is reserved for "development" workloads, and `01` is a numerical suffix to reduce naming collisions.
@@ -151,7 +151,7 @@ LangSmith API:
 >    Creating a listener from the LangSmith UI does not install the "listener" application in the Kubernetes cluster.
 
 3. A [Helm chart](https://github.com/langchain-ai/helm/tree/main/charts/langgraph-dataplane) is provided to install the necessary components in your Kubernetes cluster.
-   * `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](https://docs.langchain.com/langsmith/control-plane) for changes to your deployments and creates/updates downstream CRDs. This is the ["listener" application](https://docs.langchain.com/langsmith/data-plane#listener-application).
+   * `langgraph-dataplane-listener`: This is a service that listens to LangChain's [control plane](control-plane.md) for changes to your deployments and creates/updates downstream CRDs. This is the ["listener" application](data-plane.md#listener-application).
    * `LangGraphPlatform CRD`: A CRD for LangSmith Deployment. This contains the spec for managing an instance of a LangSmith Deployment.
    * `langgraph-dataplane-operator`: This operator handles changes to your LangSmith CRDs.
    * `langgraph-dataplane-redis`: A Redis instance is used by the `langgraph-dataplane-listener` to manage various tasks (mainly creating and deleting deployments).
@@ -203,12 +203,12 @@ To create a data plane in a different namespace in the same cluster, repeat the 
 
 **When installing multiple data planes in the same cluster, it is very important to follow the rules below:**
 
-1. The `config.watchNamespaces` list should never intersect with other installations `config.watchNamespaces`. For example, if installation A is watching namespaces `foo,bar`, installation B cannot watch either `foo` or `bar`. Multiple operators or listeners watching the same namespace will lead to unexpected behavior. This means that multiple LangSmith workspaces cannot deploy to the same namespace! Please review the [cluster organization](https://docs.langchain.com/langsmith/hybrid-legacy#kubernetes-cluster-organization) section to understand this better.
-2. It is required to use the [Gateway API](https://docs.langchain.com/langsmith/self-host-ingress#option-2%3A-gateway-api) or an [Istio Gateway](https://docs.langchain.com/langsmith/self-host-ingress#option-3%3A-istio-gateway). Relying on the [standard ingress](https://docs.langchain.com/langsmith/self-host-ingress#option-1%3A-standard-ingress) resource can cause conflicts with Ingress objects created by other data planes in the same cluster. Because behavior in these cases depends on the specific ingress controller, this may result in unpredictable or undesired outcomes.
+1. The `config.watchNamespaces` list should never intersect with other installations `config.watchNamespaces`. For example, if installation A is watching namespaces `foo,bar`, installation B cannot watch either `foo` or `bar`. Multiple operators or listeners watching the same namespace will lead to unexpected behavior. This means that multiple LangSmith workspaces cannot deploy to the same namespace! Please review the [cluster organization](#kubernetes-cluster-organization) section to understand this better.
+2. It is required to use the [Gateway API](self-host-ingress.md#option-2%3A-gateway-api) or an [Istio Gateway](self-host-ingress.md#option-3%3A-istio-gateway). Relying on the [standard ingress](self-host-ingress.md#option-1%3A-standard-ingress) resource can cause conflicts with Ingress objects created by other data planes in the same cluster. Because behavior in these cases depends on the specific ingress controller, this may result in unpredictable or undesired outcomes.
 
 ## Listeners
 
-In the hybrid option, one or more ["listener" applications](https://docs.langchain.com/langsmith/data-plane#listener-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
+In the hybrid option, one or more ["listener" applications](data-plane.md#listener-application) can run depending on how your LangSmith workspaces and Kubernetes clusters are organized.
 
 ### Kubernetes cluster organization
 

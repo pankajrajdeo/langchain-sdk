@@ -38,7 +38,7 @@ export CEREBRAS_API_KEY="your-api-key-here"
 
 ## Chat model
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/cerebras).
+See a [usage example](../chat/cerebras.md).
 
 ***
 

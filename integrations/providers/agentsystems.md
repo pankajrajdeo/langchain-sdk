@@ -6,7 +6,7 @@
 
 ## Integrations
 
-* [AgentSystems Notary](https://docs.langchain.com/oss/python/integrations/callbacks/agentsystems_notary) - Tamper-evident audit logging for AI systems.
+* [AgentSystems Notary](../callbacks/agentsystems_notary.md) - Tamper-evident audit logging for AI systems.
 
 ***
 

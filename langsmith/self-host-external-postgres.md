@@ -9,7 +9,7 @@ LangSmith uses a PostgreSQL database as the primary data store for transactional
 > * [Google Cloud SQL](https://cloud.google.com/curated-resources/cloud-sql#section-1) (GCP)
 > * [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql#features) (Azure)
 >
-> For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](https://docs.langchain.com/langsmith/self-host-external-postgres#iam-authentication).
+> For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](#iam-authentication).
 
 ## Requirements
 
@@ -21,7 +21,7 @@ LangSmith uses a PostgreSQL database as the primary data store for transactional
 
 * Note: We only officially support PostgreSQL versions >= 14.
 
-* We support password and [IAM/Workload Identity](https://docs.langchain.com/langsmith/self-host-external-postgres#iam-authentication) authentication.
+* We support password and [IAM/Workload Identity](#iam-authentication) authentication.
 
 * A user with admin access to the PostgreSQL database. This user will be used to create the necessary tables, indexes, and schemas.
 
@@ -83,7 +83,7 @@ Once configured, you should be able to reinstall your LangSmith instance. If eve
 
 ## TLS with PostgreSQL
 
-Use this section to configure TLS for PostgreSQL connections. For mounting internal/public CAs so LangSmith trusts your PostgreSQL server certificate, see [Configure custom TLS certificates](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls).
+Use this section to configure TLS for PostgreSQL connections. For mounting internal/public CAs so LangSmith trusts your PostgreSQL server certificate, see [Configure custom TLS certificates](self-host-custom-tls-certificates.md#mount-internal-cas-for-tls).
 
 ### Server TLS (one-way)
 
@@ -122,7 +122,7 @@ stringData:
 
 ### Mutual TLS with client auth (mTLS)
 
-As of LangSmith helm chart version **0.12.29**, we support mTLS for PostgreSQL clients. For server-side authentication in mTLS, use the [Server TLS steps](https://docs.langchain.com/langsmith/self-host-external-postgres#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
+As of LangSmith helm chart version **0.12.29**, we support mTLS for PostgreSQL clients. For server-side authentication in mTLS, use the [Server TLS steps](#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
 
 If your PostgreSQL server requires client certificate authentication:
 
@@ -186,6 +186,8 @@ As of LangSmith helm chart version **0.12.34**, we support IAM authentication fo
 > IAM authentication only handles connection authentication. You may still need to run SQL commands in your database to create the IAM user/role and grant it the necessary permissions and privileges to access the LangSmith schema.
 
 #### AWS
+
+<a id="amazon-rds"></a>
 
 ### Amazon RDS IAM authentication
 
@@ -269,6 +271,8 @@ See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/c
 
 #### GCP
 
+<a id="google-cloud-sql"></a>
+
 ### Cloud SQL IAM authentication
 
 Cloud SQL supports [IAM authentication](https://cloud.google.com/sql/docs/postgres/iam-authentication), which allows you to authenticate using GCP service accounts instead of database passwords.
@@ -350,6 +354,8 @@ ingestQueue:
 See the [Helm values reference](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml) for the full list of configurable services.
 
 #### Azure
+
+<a id="azure-database-for-postgresql"></a>
 
 ### Azure Database for PostgreSQL with Microsoft Entra authentication
 

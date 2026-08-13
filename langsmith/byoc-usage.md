@@ -44,7 +44,7 @@ export LANGSMITH_ENDPOINT="https://<data_plane_host>"
 > [!WARNING]
 > Create `LANGSMITH_API_KEY` from a workspace inside the target data plane. Traces are tenant-scoped, so an API key from a workspace on a different data plane, including a Cloud workspace, is rejected.
 
-For a complete, runnable example, follow the [Observability quickstart](https://docs.langchain.com/langsmith/observability-quickstart) and substitute the environment variables above.
+For a complete, runnable example, follow the [Observability quickstart](observability-quickstart.md) and substitute the environment variables above.
 
 ## Route API requests
 
@@ -120,8 +120,8 @@ def handle_request(tenant_id: str, query: str):
 
 ## See also
 
-* [BYOC onboarding](https://docs.langchain.com/langsmith/byoc-onboarding)
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
+* [BYOC onboarding](byoc-onboarding.md)
+* [BYOC architecture](byoc-architecture.md)
 
 ***
 

@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-tools)
 Tools allow language models to interact with external systems and perform actions beyond just generating text. In the Playground, you can use two types of tools:
 
-1. [**Built-in tools**](https://docs.langchain.com/langsmith/use-tools#built-in-tools): Pre-configured tools provided by model providers (like OpenAI and Anthropic) that are ready to use. Use built-in tools when you need common capabilities like web search or code interpretation.
-2. [**Custom tools**](https://docs.langchain.com/langsmith/use-tools#create-a-custom-tool): Functions you define to perform specific tasks. These are useful when you need to integrate with your own systems or create specialized functionality. When you define custom tools within the Playground, you can verify that the model correctly identifies and calls these tools with the correct arguments.
+1. [**Built-in tools**](#built-in-tools): Pre-configured tools provided by model providers (like OpenAI and Anthropic) that are ready to use. Use built-in tools when you need common capabilities like web search or code interpretation.
+2. [**Custom tools**](#create-a-custom-tool): Functions you define to perform specific tasks. These are useful when you need to integrate with your own systems or create specialized functionality. When you define custom tools within the Playground, you can verify that the model correctly identifies and calls these tools with the correct arguments.
 
-LangSmith automatically saves tools you create to a workspace-wide [tool registry](https://docs.langchain.com/langsmith/use-tools#manage-tools-with-the-registry), which makes them available for reuse across all your prompts and sessions.
+LangSmith automatically saves tools you create to a workspace-wide [tool registry](#manage-tools-with-the-registry), which makes them available for reuse across all your prompts and sessions.
 
 ## Built-in tools
 
@@ -25,22 +25,22 @@ The Playground has native support for a variety of tools from OpenAI and Anthrop
 
 ## Add and use tools
 
-The Playground lets you quickly [add tools](https://docs.langchain.com/langsmith/use-tools#add-a-tool) to any prompt with a single click. You can choose from built-in tools provided by model providers like OpenAI and Anthropic, or define your own [custom tools](https://docs.langchain.com/langsmith/use-tools#create-a-custom-tool) tailored to your specific needs. Once you create a custom tool, it's automatically added to a workspace-wide [tool registry](https://docs.langchain.com/langsmith/use-tools#manage-tools-with-the-registry) where you can enable, disable, or edit it across different prompts without recreating it.
+The Playground lets you quickly [add tools](#add-a-tool) to any prompt with a single click. You can choose from built-in tools provided by model providers like OpenAI and Anthropic, or define your own [custom tools](#create-a-custom-tool) tailored to your specific needs. Once you create a custom tool, it's automatically added to a workspace-wide [tool registry](#manage-tools-with-the-registry) where you can enable, disable, or edit it across different prompts without recreating it.
 
 ### Add a tool
 
 To add a tool to your prompt, click the **+ Tool** button at the bottom of the prompt editor.
 
-> **Image:** [The prompt interface with the + Tool button following the editing boxes.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [The prompt interface with the + Tool button following the editing boxes.](use-tools.md)
 
-> **Image:** [The prompt interface with the + Tool button following the editing boxes.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [The prompt interface with the + Tool button following the editing boxes.](use-tools.md)
 
 ### Use a built-in tool
 
 1. In the tool section, select the built-in tool you want to use. You'll only see the tools that are compatible with the provider and model you've chosen.
 2. When the model calls the tool, the Playground will display the response.
 
-> **Image:** [Web search tool](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Web search tool](use-tools.md)
 
 ### Create a custom tool
 
@@ -50,15 +50,15 @@ To create a custom tool, you'll need to provide:
 * **Description**: Clear explanation of what the tool does.
 * **Arguments**: The inputs your tool requires.
 
-> **Image:** [Custom tool](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Custom tool](use-tools.md)
 
 When running a custom tool in the Playground, the model will respond with a JSON object containing the tool name and the tool call.
 
-> **Image:** [Tool call](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Tool call](use-tools.md)
 
 ### Manage tools with the registry
 
-The Playground includes a [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces)-scoped **tool registry** that persists both custom and built-in tools across prompts and sessions. When you create a custom tool or add a built-in tool, it's automatically saved to your workspace registry and becomes available for reuse in any prompt. You can enable or disable tools per prompt to control which tools are active for each specific prompt, and when editing a shared tool, you can choose to update the registry version or save as a new tool.
+The Playground includes a [workspace](administration-overview.md#workspaces)-scoped **tool registry** that persists both custom and built-in tools across prompts and sessions. When you create a custom tool or add a built-in tool, it's automatically saved to your workspace registry and becomes available for reuse in any prompt. You can enable or disable tools per prompt to control which tools are active for each specific prompt, and when editing a shared tool, you can choose to update the registry version or save as a new tool.
 
 Click the **+ Tool** button in the Playground to open **Manage tools**. You can do the following:
 
@@ -67,9 +67,9 @@ Click the **+ Tool** button in the Playground to open **Manage tools**. You can 
 * Edit existing tools by clicking on them in the list.
 * Delete tools using the **Delete** at the bottom of **Manage tools**.
 
-> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](use-tools.md)
 
-> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Manage tools with a list of available tools, Enabled switch, and edit functionality.](use-tools.md)
 
 Tools are stored with their complete configuration including name, description, parameters, and metadata. The registry supports both custom function tools and built-in tool configurations.
 
@@ -83,9 +83,9 @@ Some models provide control over which tools are called. To configure this:
 
 To understand the available tool choice options, check the documentation for your specific provider. For example, [OpenAI's documentation on tool choice](https://platform.openai.com/docs/guides/function-calling/function-calling-behavior?api-mode=responses#tool-choice).
 
-> **Image:** [Select tools from the Tool Choice Settings tab.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Select tools from the Tool Choice Settings tab.](use-tools.md)
 
-> **Image:** [Select tools from the Tool Choice Settings tab.](https://docs.langchain.com/langsmith/use-tools)
+> **Image:** [Select tools from the Tool Choice Settings tab.](use-tools.md)
 
 ***
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-agent-server-metrics)
 Reference for Agent Server OpenTelemetry metrics on self-hosted deployments, including Deployment UI metrics, internal metrics, and Datadog export.
 
-The [Agent Server](https://docs.langchain.com/langsmith/agent-server) emits metrics through an OpenTelemetry (OTel) client. Metrics use the `lg_api_` name prefix by default (override with `METRIC_PREFIX`).
+The [Agent Server](agent-server.md) emits metrics through an OpenTelemetry (OTel) client. Metrics use the `lg_api_` name prefix by default (override with `METRIC_PREFIX`).
 
 On self-hosted deployments, use this page to choose a scrape or push backend, enable the metric sets you need, and look up Prometheus names when building dashboards or alerts.
 
@@ -126,10 +126,10 @@ These metrics have `lsd_web_metric=false`. By default they are exported to Datad
 
 ## See also
 
-* [Self-hosted overview](https://docs.langchain.com/langsmith/deploy-to-self-hosted-overview)
-* [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale)
-* [Troubleshooting for self-hosted deployments](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
-* [Agent Server changelog](https://docs.langchain.com/langsmith/agent-server-changelog)
+* [Self-hosted overview](deploy-to-self-hosted-overview.md)
+* [Configure Agent Server for scale](agent-server-scale.md)
+* [Troubleshooting for self-hosted deployments](diagnostics-self-hosted.md)
+* [Agent Server changelog](agent-server-changelog.md)
 
 ***
 

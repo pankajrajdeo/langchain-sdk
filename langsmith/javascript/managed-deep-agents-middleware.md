@@ -7,7 +7,7 @@ Managed Deep Agents support the normal Deep Agents `middleware` configuration su
 Add LangChain middleware to `defineDeepAgent` to monitor tool calls, add guardrails, redact data, retry transient failures, or customize model calls.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 

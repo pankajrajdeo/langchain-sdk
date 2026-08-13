@@ -1,17 +1,17 @@
 # How to use the REST API
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-evals-api-only)
-The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts) in LangSmith. They include optimizations and features that enhance performance and reliability.
+The [Python](https://reference.langchain.com/python/langsmith/) and [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html) SDKs are the recommended way to run [evaluations](evaluation-concepts.md) in LangSmith. They include optimizations and features that enhance performance and reliability.
 
-If you cannot use the SDKs—for example, if you are working in a different language or a restricted environment—you can use the REST API directly. This guide demonstrates how to run evaluations using the [REST API](https://docs.langchain.com/langsmith/smith-api-ref) with Python's [`requests`](https://requests.readthedocs.io/) library, but the same principles apply to any language.
+If you cannot use the SDKs—for example, if you are working in a different language or a restricted environment—you can use the REST API directly. This guide demonstrates how to run evaluations using the [REST API](smith-api-ref.md) with Python's [`requests`](https://requests.readthedocs.io/) library, but the same principles apply to any language.
 
 Before diving into this content, it might be helpful to read the following:
 
-* [Evaluate LLM applications](https://docs.langchain.com/langsmith/evaluate-llm-application).
-* [LangSmith API Reference](https://docs.langchain.com/langsmith/smith-api-ref): Complete API documentation for all endpoints used in this guide.
+* [Evaluate LLM applications](evaluate-llm-application.md).
+* [LangSmith API Reference](smith-api-ref.md): Complete API documentation for all endpoints used in this guide.
 
 ## Create a dataset
 
-For this example, we use the Python SDK to create a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) quickly. To create datasets via the API or UI instead, refer to [Managing datasets](https://docs.langchain.com/langsmith/manage-datasets-in-application).
+For this example, we use the Python SDK to create a [dataset](evaluation-concepts.md#datasets) quickly. To create datasets via the API or UI instead, refer to [Managing datasets](manage-datasets-in-application.md).
 
 ```python
 import os
@@ -211,11 +211,11 @@ for model_name in model_names:
 
 ### Add evaluation feedback
 
-After running your [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment), you'll typically want to evaluate the results by adding feedback scores. This allows you to track metrics like correctness, accuracy, or any custom evaluation criteria.
+After running your [experiments](evaluation-concepts.md#experiment), you'll typically want to evaluate the results by adding feedback scores. This allows you to track metrics like correctness, accuracy, or any custom evaluation criteria.
 
 In this example, the evaluation checks if each model's output matches the expected label in the dataset. The code posts a "correctness" score (1.0 for correct, 0.0 for incorrect) to track how accurately each model classifies toxic vs. non-toxic text.
 
-The following code adds feedback to the runs from the [single experiment example](https://docs.langchain.com/langsmith/run-evals-api-only#run-a-single-experiment):
+The following code adds feedback to the runs from the [single experiment example](#run-a-single-experiment):
 
 ```python
 # Fetch the runs from one of the experiments
@@ -272,7 +272,7 @@ You can add multiple feedback scores with different keys to track various metric
 
 Next, we'll demonstrate how to run a pairwise experiment. In a pairwise experiment, you compare two examples against each other.
 
-For more information, check out [How to run a pairwise evaluation](https://docs.langchain.com/langsmith/evaluate-pairwise).
+For more information, check out [How to run a pairwise evaluation](evaluate-pairwise.md).
 
 ```python
 #  A comparative experiment allows you to provide a preferential ranking on the outputs of two or more experiments

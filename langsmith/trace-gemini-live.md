@@ -7,9 +7,9 @@ Trace Gemini Live voice agents in LangSmith using the LangSmith SDK.
 
 Gemini Live is a speech-to-speech model that streams typed events over a WebSocket. Whether you build with a raw `google-genai` connection or the Google Agent Development Kit (ADK), the integration captures each conversation as a single LangSmith trace with spans for transcripts, model responses, tool calls, turn boundaries, and interruptions.
 
-Trace your [Gemini Live](https://ai.google.dev/gemini-api/docs/live-api) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals).
+Trace your [Gemini Live](https://ai.google.dev/gemini-api/docs/live-api) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
-To trace non-live text agents, tools, and multi-agent workflows built with ADK, see [Trace Google ADK applications](https://docs.langchain.com/langsmith/trace-with-google-adk).
+To trace non-live text agents, tools, and multi-agent workflows built with ADK, see [Trace Google ADK applications](trace-with-google-adk.md).
 
 ## Choose an approach
 
@@ -97,7 +97,7 @@ async with (
 
 ### Group a conversation into a thread
 
-Each wrapped session is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads), pass `thread_id`:
+Each wrapped session is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](threads.md), pass `thread_id`:
 
 ```python
 wrap_gemini_live(
@@ -145,7 +145,7 @@ async with (
         )
 ```
 
-Record both channels as PCM16 at the wrapper's `sample_rate`. Record the agent's audio from the speaker so the attachment reflects only what the user heard. For the underlying attachment API, see [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces).
+Record both channels as PCM16 at the wrapper's `sample_rate`. Record the agent's audio from the speaker so the attachment reflects only what the user heard. For the underlying attachment API, see [Upload files with traces](upload-files-with-traces.md).
 
 ## Use Google ADK
 
@@ -196,7 +196,7 @@ async for event in runner.run_live(
 
 ### Group a conversation into a thread
 
-Each conversation is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads), pass a `thread_id_provider` to the plugin:
+Each conversation is captured as its own trace with its own thread ID. To supply an ID, for example to group the conversation with related interactions in a LangSmith [thread](threads.md), pass a `thread_id_provider` to the plugin:
 
 ```python
 plugin = LangSmithGoogleADKLivePlugin(
@@ -216,14 +216,14 @@ plugin.record_user_audio(mic_chunk)      # user mic PCM16
 plugin.record_agent_audio(played_chunk)  # agent PCM16 as played
 ```
 
-Record the user's microphone capture before resampling it for ADK, and record the agent's audio from the speaker. Feed both channels at the same sample rate. The plugin's `sample_rate` is 24 kHz by default. For the underlying attachment API, see [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces).
+Record the user's microphone capture before resampling it for ADK, and record the agent's audio from the speaker. Feed both channels at the same sample rate. The plugin's `sample_rate` is 24 kHz by default. For the underlying attachment API, see [Upload files with traces](upload-files-with-traces.md).
 
 ## Next steps
 
-#### [Voice fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
+#### [Voice fundamentals](trace-voice-fundamentals.md)
 Core conventions for tracing voice agents.
 
-#### [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces)
+#### [Upload files with traces](upload-files-with-traces.md)
 Attach the conversation audio recording to your trace.
 
 ***

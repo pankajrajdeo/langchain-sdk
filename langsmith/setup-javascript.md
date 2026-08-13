@@ -1,6 +1,6 @@
 # How to set up a JavaScript application
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/setup-javascript)
-An application must be configured with a [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up a JavaScript application for deployment using `package.json` to specify project dependencies.
+An application must be configured with a [configuration file](cli.md#configuration-file) in order to be deployed to LangSmith (or to be self-hosted). This how-to guide discusses the basic steps to set up a JavaScript application for deployment using `package.json` to specify project dependencies.
 
 This walkthrough is based on [this repository](https://github.com/langchain-ai/langgraphjs-studio-starter), which you can play around with to learn more about how to set up your application for deployment.
 
@@ -20,13 +20,13 @@ my-app/
 ```
 
 > [!TIP]
-> LangSmith Deployment supports deploying a [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](https://docs.langchain.com/langsmith/deployment), scaling, and [observability](https://docs.langchain.com/langsmith/observability). For more details, refer to [Use any framework with LangSmith Deployment](https://docs.langchain.com/langsmith/application-structure#use-any-framework-with-langsmith-deployment).
+> LangSmith Deployment supports deploying a [LangGraph](../langgraph/overview.md) *graph*. However, the implementation of a *node* of a graph can contain arbitrary code. This means any framework can be implemented within a node and deployed on LangSmith Deployment. This lets you implement your core application logic without using additional LangGraph OSS APIs while still using LangSmith for [deployment](deployment.md), scaling, and [observability](observability.md). For more details, refer to [Use any framework with LangSmith Deployment](application-structure.md#use-any-framework-with-langsmith-deployment).
 
 After each step, an example file directory is provided to demonstrate how code can be organized.
 
 ## Specify dependencies
 
-Dependencies can be specified in a `package.json`. If none of these files is created, then dependencies can be specified later in the [configuration file](https://docs.langchain.com/langsmith/setup-javascript#create-the-api-config).
+Dependencies can be specified in a `package.json`. If none of these files is created, then dependencies can be specified later in the [configuration file](#create-the-api-config).
 
 Example `package.json` file:
 
@@ -60,7 +60,7 @@ my-app/
 
 ## Specify environment variables
 
-Environment variables can optionally be specified in a file (e.g. `.env`). See the [Environment Variables reference](https://docs.langchain.com/langsmith/env-var-cloud) to configure additional variables for a deployment.
+Environment variables can optionally be specified in a file (e.g. `.env`). See the [Environment Variables reference](env-var-cloud.md) to configure additional variables for a deployment.
 
 Example `.env` file:
 
@@ -81,7 +81,7 @@ my-app/
 
 ## Define graphs
 
-Implement your graphs. Graphs can be defined in a single file or multiple files. Make note of the variable names of each compiled graph to be included in the application. The variable names will be used later when creating the [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file).
+Implement your graphs. Graphs can be defined in a single file or multiple files. Make note of the variable names of each compiled graph to be included in the application. The variable names will be used later when creating the [configuration file](cli.md#configuration-file).
 
 Here is an example `agent.ts`:
 
@@ -175,7 +175,7 @@ my-app/
 
 ## Create the API config
 
-Create a [configuration file](https://docs.langchain.com/langsmith/cli#configuration-file) called `langgraph.json`. See the [configuration file reference](https://docs.langchain.com/langsmith/cli#configuration-file) for detailed explanations of each key in the JSON object of the configuration file.
+Create a [configuration file](cli.md#configuration-file) called `langgraph.json`. See the [configuration file reference](cli.md#configuration-file) for detailed explanations of each key in the JSON object of the configuration file.
 
 Example `langgraph.json` file:
 
@@ -199,7 +199,7 @@ Note that the variable name of the `CompiledGraph` appears at the end of the val
 
 ## Next
 
-After you setup your project and place it in a GitHub repository, it's time to [deploy your app](https://docs.langchain.com/langsmith/deployment-quickstart).
+After you setup your project and place it in a GitHub repository, it's time to [deploy your app](deployment-quickstart.md).
 
 ***
 

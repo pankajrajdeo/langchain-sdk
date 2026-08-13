@@ -10,7 +10,7 @@ LangSmith applications expose telemetry data that can be sent to the backend of 
 
 # Section 1: Prometheus exporters
 
-Use this section if you would like to only deploy metrics exporters for the components in your self hosted deployment, which you can then scrape using your telemetry. If you would like a full observability stack deployed for you, go to the [End-to-End Deployment Section](https://docs.langchain.com/langsmith/observability-stack#prerequisites).
+Use this section if you would like to only deploy metrics exporters for the components in your self hosted deployment, which you can then scrape using your telemetry. If you would like a full observability stack deployed for you, go to the [End-to-End Deployment Section](#prerequisites).
 
 The helm chart provides a set of Prometheus exporters to expose metrics from [Redis](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-redis-exporter), [Postgres](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-postgres-exporter), [Nginx](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-nginx-exporter), and [Kube state metrics](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics).
 
@@ -150,7 +150,7 @@ Then port-forward into the `langsmith-observability-grafana` container at port 3
 
 Once in Grafana, you can use the UI to monitor logs, metrics and traces. Grafana also comes pre-packaged with sets of dashboards for monitoring the main components of your deployment.
 
-> **Image:** [LangSmith Grafana Dashboards](https://docs.langchain.com/langsmith/observability-stack)
+> **Image:** [LangSmith Grafana Dashboards](observability-stack.md)
 
 ***
 

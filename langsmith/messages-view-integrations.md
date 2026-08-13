@@ -3,35 +3,35 @@
 Frameworks and SDKs that render in the LangSmith Messages view and the metadata each one sets.
 
 > [!NOTE]
-> The [Messages view](https://docs.langchain.com/langsmith/view-traces#messages-view) is in **[beta](https://docs.langchain.com/langsmith/release-stages)**.
+> The [Messages view](view-traces.md#messages-view) is in **[beta](release-stages.md)**.
 
-The [Messages view](https://docs.langchain.com/langsmith/view-traces#messages-view) renders the [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) of a [thread](https://docs.langchain.com/langsmith/observability-concepts#threads) as a [trajectory](https://docs.langchain.com/langsmith/observability-concepts#trajectories): user prompts, model responses, tool calls, and tool results, in order. The Messages view needs two pieces of run metadata to render a trajectory:
+The [Messages view](view-traces.md#messages-view) renders the [traces](observability-concepts.md#traces) of a [thread](observability-concepts.md#threads) as a [trajectory](observability-concepts.md#trajectories): user prompts, model responses, tool calls, and tool results, in order. The Messages view needs two pieces of run metadata to render a trajectory:
 
 * **Thread grouping**: `thread_id` on each run tells LangSmith that a set of runs belongs to the same conversation.
 * **Run classification**: `ls_agent_type: "root"` on the top-level run of a turn marks that run as part of the main conversation. Runs marked as subagent appear as a subagent action in the thread while runs marked as middleware or compaction are currently filtered out.
 
-For most LangSmith integrations, both are set for you. When you need to set metadata manually, the following examples cover the [OpenAI Responses API in chaining mode](https://docs.langchain.com/langsmith/messages-view-integrations#openai-responses-api-with-chaining) and tagging custom middleware or guardrails.
+For most LangSmith integrations, both are set for you. When you need to set metadata manually, the following examples cover the [OpenAI Responses API in chaining mode](#openai-responses-api-with-chaining) and tagging custom middleware or guardrails.
 
 ## Supported integrations
 
 The following integrations set both `thread_id` and `ls_agent_type` automatically:
 
-* [Claude Code](https://docs.langchain.com/langsmith/trace-claude-code)
-* [Claude Agent SDK](https://docs.langchain.com/langsmith/trace-claude-agent-sdk)
-* [OpenAI Codex](https://docs.langchain.com/langsmith/trace-with-codex)
-* [Cursor](https://docs.langchain.com/langsmith/trace-with-cursor)
-* [Pi](https://docs.langchain.com/langsmith/trace-with-pi)
-* [OpenCode](https://docs.langchain.com/langsmith/trace-with-opencode)
-* [GitHub Copilot](https://docs.langchain.com/langsmith/trace-with-vscode-copilot)
-* [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents)
-* [LangChain](https://docs.langchain.com/langsmith/trace-with-langchain)
-* [LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph)
+* [Claude Code](trace-claude-code.md)
+* [Claude Agent SDK](trace-claude-agent-sdk.md)
+* [OpenAI Codex](trace-with-codex.md)
+* [Cursor](trace-with-cursor.md)
+* [Pi](trace-with-pi.md)
+* [OpenCode](trace-with-opencode.md)
+* [GitHub Copilot](trace-with-vscode-copilot.md)
+* [Deep Agents](trace-deep-agents.md)
+* [LangChain](trace-with-langchain.md)
+* [LangGraph](trace-with-langgraph.md)
 * OpenAI Chat Completions (`wrap_openai`)
 * OpenAI Responses API, single call (`wrap_openai`)
 
-The **OpenAI Responses API in chaining mode** (`previous_response_id`) sets `ls_agent_type` automatically, but you set `thread_id` yourself. For more details, refer to the [OpenAI Responses API with chaining](https://docs.langchain.com/langsmith/messages-view-integrations#openai-responses-api-with-chaining) example.
+The **OpenAI Responses API in chaining mode** (`previous_response_id`) sets `ls_agent_type` automatically, but you set `thread_id` yourself. For more details, refer to the [OpenAI Responses API with chaining](#openai-responses-api-with-chaining) example.
 
-For the full `ls_agent_type` schema and the other values (`subagent`, `middleware`, `compaction`) that official integrations set on non-root runs, see the [Coding agent metadata contract](https://docs.langchain.com/langsmith/coding-agent-metadata-contract). For the underlying thread-grouping mechanism, see [Configure threads](https://docs.langchain.com/langsmith/threads).
+For the full `ls_agent_type` schema and the other values (`subagent`, `middleware`, `compaction`) that official integrations set on non-root runs, see the [Coding agent metadata contract](coding-agent-metadata-contract.md). For the underlying thread-grouping mechanism, see [Configure threads](threads.md).
 
 ## OpenAI Responses API with chaining
 
@@ -344,7 +344,7 @@ const child = parent.createChild({
 
 ## Manual instrumentation
 
-If you trace without one of the wrappers in [Supported integrations](https://docs.langchain.com/langsmith/messages-view-integrations#supported-integrations) (for example, emitting runs through `RunTree`, the REST API, or a custom wrapper around a provider SDK), set `ls_message_format` on each LLM run's metadata to route the trace to the correct extractor:
+If you trace without one of the wrappers in [Supported integrations](#supported-integrations) (for example, emitting runs through `RunTree`, the REST API, or a custom wrapper around a provider SDK), set `ls_message_format` on each LLM run's metadata to route the trace to the correct extractor:
 
 | Trace shape                               | Set on metadata                    |
 | ----------------------------------------- | ---------------------------------- |
@@ -355,9 +355,9 @@ If you trace without one of the wrappers in [Supported integrations](https://doc
 
 ## Related
 
-* [Configure threads](https://docs.langchain.com/langsmith/threads): how `thread_id` groups runs across LangSmith.
-* [Coding agent metadata contract](https://docs.langchain.com/langsmith/coding-agent-metadata-contract): the full `ls_agent_type` schema.
-* [View traces](https://docs.langchain.com/langsmith/view-traces#messages-view): what the Messages view shows and how to customize it.
+* [Configure threads](threads.md): how `thread_id` groups runs across LangSmith.
+* [Coding agent metadata contract](coding-agent-metadata-contract.md): the full `ls_agent_type` schema.
+* [View traces](view-traces.md#messages-view): what the Messages view shows and how to customize it.
 
 ***
 

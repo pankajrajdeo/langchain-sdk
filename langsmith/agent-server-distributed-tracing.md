@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/agent-server-distributed-tracing)
 Unify traces when calling your deployed Agent Server from another service using RemoteGraph or the SDK.
 
-When you call a deployed [Agent Server](https://docs.langchain.com/langsmith/agent-server) from another service, you can propagate trace context so that the entire request appears as a single unified trace in LangSmith. This uses LangSmith's [distributed tracing](https://docs.langchain.com/langsmith/distributed-tracing) capabilities, which propagate context via HTTP headers.
+When you call a deployed [Agent Server](agent-server.md) from another service, you can propagate trace context so that the entire request appears as a single unified trace in LangSmith. This uses LangSmith's [distributed tracing](distributed-tracing.md) capabilities, which propagate context via HTTP headers.
 
 ## How it works
 
@@ -92,7 +92,7 @@ result = graph.invoke("What's the weather in SF?")
 ```
 
 #### SDK
-If you're using the [LangGraph SDK](https://docs.langchain.com/langsmith/reference) directly, propagate trace headers manually using `run_tree.to_headers()`:
+If you're using the [LangGraph SDK](reference.md) directly, propagate trace headers manually using `run_tree.to_headers()`:
 
 ```python
 from langgraph_sdk import get_client
@@ -117,8 +117,8 @@ result = await call_remote_agent("What's the weather in SF?")
 
 ## Related
 
-* [Distributed tracing](https://docs.langchain.com/langsmith/distributed-tracing): General distributed tracing concepts and patterns
-* [RemoteGraph](https://docs.langchain.com/langsmith/use-remote-graph): Full guide to interacting with deployments using RemoteGraph
+* [Distributed tracing](distributed-tracing.md): General distributed tracing concepts and patterns
+* [RemoteGraph](use-remote-graph.md): Full guide to interacting with deployments using RemoteGraph
 
 ***
 

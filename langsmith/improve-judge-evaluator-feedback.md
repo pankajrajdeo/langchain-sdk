@@ -3,16 +3,16 @@
 > [!TIP]
 > Before working through this page, it might be helpful to read the following:
 >
-> * [Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators)
-> * [Creating LLM-as-a-judge evaluators](https://docs.langchain.com/langsmith/llm-as-judge)
+> * [Evaluation concepts](evaluation-concepts.md#evaluators)
+> * [Creating LLM-as-a-judge evaluators](llm-as-judge.md)
 
-Reliable [*LLM-as-a-judge evaluators*](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) are critical for making informed decisions about your AI applications (e.g., prompt, model, architecture changes). Defining the evaluator prompt correctly can be difficult, but it directly affects the trustworthiness of your evaluations.
+Reliable [*LLM-as-a-judge evaluators*](evaluation-concepts.md#llm-as-judge) are critical for making informed decisions about your AI applications (e.g., prompt, model, architecture changes). Defining the evaluator prompt correctly can be difficult, but it directly affects the trustworthiness of your evaluations.
 
 This guide describes how to align your LLM-as-a-judge evaluator using human feedback to improve your evaluator's quality and help you build reliable AI applications.
 
 ## How it works
 
-LangSmith's **Align Evaluator** feature has a series of steps that help you align your LLM-as-a-judge evaluator with human expert feedback. You can use this feature to align evaluators that run on a dataset for [offline evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) or for [online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations). In either case, the steps are similar:
+LangSmith's **Align Evaluator** feature has a series of steps that help you align your LLM-as-a-judge evaluator with human expert feedback. You can use this feature to align evaluators that run on a dataset for [offline evaluations](evaluation-concepts.md#offline-evaluations) or for [online evaluations](evaluation-concepts.md#online-evaluations). In either case, the steps are similar:
 
 1. **Select experiments or runs** that contain outputs from your application.
 2. Add the selected experiments or runs to an **annotation queue** where a human expert can label the data.
@@ -21,17 +21,17 @@ LangSmith's **Align Evaluator** feature has a series of steps that help you alig
 
 ## Prerequisites
 
-You'll need the following before starting this guide for [offline evaluations](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback#offline-evaluations) or [online evaluations](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback#online-evaluations):
+You'll need the following before starting this guide for [offline evaluations](#offline-evaluations) or [online evaluations](#online-evaluations):
 
 ### Offline evaluations
 
-* A [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) with at least one [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment).
-* You'll need to upload or create datasets via the [SDK](https://docs.langchain.com/langsmith/manage-datasets-programmatically#create-a-dataset) or the [UI](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples) and run an experiment via the [SDK](https://docs.langchain.com/langsmith/evaluate-llm-application#run-the-evaluation) or the [Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground).
+* A [dataset](evaluation-concepts.md#datasets) with at least one [experiment](evaluation-concepts.md#experiment).
+* You'll need to upload or create datasets via the [SDK](manage-datasets-programmatically.md#create-a-dataset) or the [UI](manage-datasets-in-application.md#create-a-dataset-and-add-examples) and run an experiment via the [SDK](evaluate-llm-application.md#run-the-evaluation) or the [Playground](run-evaluation-from-playground.md).
 
 ### Online evaluations
 
 * An application that’s already sending traces to LangSmith.
-* Configure this with one of the [tracing integrations](https://docs.langchain.com/langsmith/observability-concepts) to start.
+* Configure this with one of the [tracing integrations](observability-concepts.md) to start.
 
 ## Getting started
 
@@ -44,9 +44,9 @@ You can enter the alignment flow for both new and existing evaluators in dataset
 
 ## 1. Select experiments or runs
 
-Select one or more experiments (or runs) to send for human labeling. This will add runs to an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues).
+Select one or more experiments (or runs) to send for human labeling. This will add runs to an [annotation queue](annotation-queues.md).
 
-> **Image:** [Add to evaluator queue](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback)
+> **Image:** [Add to evaluator queue](improve-judge-evaluator-feedback.md)
 
 To add any new experiments/runs to an existing annotation queue, head to the **Evaluators** tab, select the evaluator you are aligning and click **Add to Queue.**
 
@@ -68,7 +68,7 @@ Once you have labeled examples, the next step is iterating on your evaluator pro
 
 To go to the evaluator playground: Click the **View evaluator** button on the top right of the evaluator queue. This will take you to the detail page of the evaluator you are aligning. Click the **Evaluator Playground** button to access the playground.
 
-> **Image:** [Evaluator Playground](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback)
+> **Image:** [Evaluator Playground](improve-judge-evaluator-feedback.md)
 
 In the evaluator playground you can create or edit your evaluator prompt and click **Start Alignment** to run it over the set of labeled examples that you created in Step 2. After running your evaluator, you'll see how its generated scores compare to your human labels. The alignment score is the percentage of examples where the evaluator's judgment matches that of the human expert.
 
@@ -97,7 +97,7 @@ To understand why the LLM scored an example the way it did, you can enable reaso
 
 In order to see the reasoning in the evaluator playground, hover over the LLM score.
 
-> **Image:** [Enable reasoning](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback)
+> **Image:** [Enable reasoning](improve-judge-evaluator-feedback.md)
 
 This will show the reasoning behind the LLM's score in the evaluator playground.
 
@@ -107,7 +107,7 @@ To avoid overfitting to the labeled examples, it's important to add more labeled
 
 ## Video guide
 
-> **Embedded Content:** [YouTube video player](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback)
+> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/improve-judge-evaluator-feedback).
 
 ***
 

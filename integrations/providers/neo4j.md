@@ -22,7 +22,7 @@ whether for semantic search or example selection.
 from langchain_neo4j import Neo4jVector
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/neo4jvector).
+See a [usage example](../vectorstores/neo4jvector.md).
 
 ## GraphCypherQAChain
 
@@ -33,7 +33,7 @@ and use them to retrieve relevant information from the database.
 from langchain_neo4j import GraphCypherQAChain, Neo4jGraph
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/neo4j_cypher)
+See a [usage example](../graphs/neo4j_cypher.md)
 
 ## Constructing a knowledge graph from text
 

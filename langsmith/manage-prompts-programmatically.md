@@ -116,7 +116,7 @@ client.commits().create(
 );
 ```
 
-You can also push a prompt as a RunnableSequence of a prompt and a model. This is useful for storing the model configuration you want to use with this prompt. The provider must be supported by the Playground, see [supported model providers](https://docs.langchain.com/langsmith/playground-model-providers).
+You can also push a prompt as a RunnableSequence of a prompt and a model. This is useful for storing the model configuration you want to use with this prompt. The provider must be supported by the Playground, see [supported model providers](playground-model-providers.md).
 
 ```python
 from langsmith import Client
@@ -322,7 +322,7 @@ const chain = await hub.pull<Runnable>("joke-generator-with-model", { includeMod
 await chain.invoke({"topic": "cats"});
 ```
 
-When pulling a prompt, you can also specify a specific commit hash or [commit tag](https://docs.langchain.com/langsmith/manage-prompts#commit-tags) to pull a specific version of the prompt.
+When pulling a prompt, you can also specify a specific commit hash or [commit tag](manage-prompts.md#commit-tags) to pull a specific version of the prompt.
 
 ```python
 prompt = client.pull_prompt("joke-generator:12344e88")

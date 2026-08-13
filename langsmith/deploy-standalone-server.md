@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-standalone-server)
 Deploy standalone Agent Servers using Docker, Docker Compose, or Kubernetes without the LangSmith control plane.
 
-This guide shows you how to deploy standalone [Agent Servers](https://docs.langchain.com/langsmith/agent-server) directly, without a [control plane](https://docs.langchain.com/langsmith/control-plane). You can deploy the server independently and still send traces to LangSmith ([self-hosted](https://docs.langchain.com/langsmith/self-hosted) or [Cloud](https://docs.langchain.com/langsmith/cloud)) for [observability](https://docs.langchain.com/langsmith/observability) and [evaluation](https://docs.langchain.com/langsmith/evaluation). Standalone servers are production-ready and provide the most lightweight option for running agents.
+This guide shows you how to deploy standalone [Agent Servers](agent-server.md) directly, without a [control plane](control-plane.md). You can deploy the server independently and still send traces to LangSmith ([self-hosted](self-hosted.md) or [Cloud](cloud.md)) for [observability](observability.md) and [evaluation](evaluation.md). Standalone servers are production-ready and provide the most lightweight option for running agents.
 
 ## Overview
 
@@ -18,13 +18,13 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 > [!WARNING]
 > Do not run standalone servers in serverless environments. Scale-to-zero may cause task loss and scaling up will not work reliably.
 
-> **Image:** [Standalone server architecture](https://docs.langchain.com/langsmith/deploy-standalone-server)
+> **Image:** [Standalone server architecture](deploy-standalone-server.md)
 
-> **Image:** [Standalone server architecture](https://docs.langchain.com/langsmith/deploy-standalone-server)
+> **Image:** [Standalone server architecture](deploy-standalone-server.md)
 
 ### Workflow
 
-1. Define and test your graph locally using the `langgraph-cli` or [Studio](https://docs.langchain.com/langsmith/studio).
+1. Define and test your graph locally using the `langgraph-cli` or [Studio](studio.md).
 2. Package your agent as a Docker image.
 3. Deploy the Agent Server to your compute platform of choice (Kubernetes, Docker, VM).
 4. Optionally, configure LangSmith API keys and endpoints so the server reports traces and evaluations back to LangSmith (self-hosted or SaaS).
@@ -42,13 +42,13 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 > * **Independent queue autoscaling**: Configure scaling policies and queue metrics for bursty, write-heavy workloads.
 > * **Graceful run draining**: Configure shutdown draining and sufficient termination windows so in-flight runs can finish during deployments and scale-down events.
 > * **Split-mode wiring**: Provision and connect separate API and queue services. The Helm chart handles this when `queue.enabled` is `true`.
-> * **Reference scaling configuration**: Translate the [Agent Server scaling](https://docs.langchain.com/langsmith/agent-server-scale) settings, including `api.replicas`, `queue.replicas`, `numberOfJobsPerWorker`, and read replicas, into your orchestrator's task definitions and scaling policies.
+> * **Reference scaling configuration**: Translate the [Agent Server scaling](agent-server-scale.md) settings, including `api.replicas`, `queue.replicas`, `numberOfJobsPerWorker`, and read replicas, into your orchestrator's task definitions and scaling policies.
 > * **Version upgrades and support**: Maintain task definitions and apply version updates. LangChain tests and ships supported Helm chart version updates.
 
 ## Prerequisites
 
-1. Use the [LangGraph CLI](https://docs.langchain.com/langsmith/cli) to [test your application locally](https://docs.langchain.com/langsmith/local-dev-testing).
-2. Use the [LangGraph CLI](https://docs.langchain.com/langsmith/cli) to build a Docker image (i.e. `langgraph build`).
+1. Use the [LangGraph CLI](cli.md) to [test your application locally](local-dev-testing.md).
+2. Use the [LangGraph CLI](cli.md) to build a Docker image (i.e. `langgraph build`).
 3. The following environment variables are needed for a data plane deployment.
 4. `REDIS_URI`: Connection details to a Redis instance. Redis will be used as a pub-sub broker to enable streaming real time output from background runs. The value of `REDIS_URI` must be a valid [Redis connection URI](https://redis-py.readthedocs.io/en/stable/connections.html#redis.Redis.from_url).
 
@@ -67,18 +67,18 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 >    `<database_name_1>` and `database_name_2` are different databases within the same instance, but `<hostname_1>` is shared. **The same database cannot be used for separate deployments**.
 
 > [!TIP]
->    You can optionally store checkpoint data in MongoDB instead of PostgreSQL. PostgreSQL is still required for all other server data. See [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer) for details.
+>    You can optionally store checkpoint data in MongoDB instead of PostgreSQL. PostgreSQL is still required for all other server data. See [Configure checkpointer backend](configure-checkpointer.md) for details.
 
 6. `LANGSMITH_API_KEY`: LangSmith API key.
 7. `LANGGRAPH_CLOUD_LICENSE_KEY`: LangSmith license key. This will be used to authenticate ONCE at server start up.
-8. `LANGSMITH_ENDPOINT`: To send traces to a [self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) instance, set `LANGSMITH_ENDPOINT` to the hostname of the self-hosted LangSmith instance. Do not add a trailing slash to the URL, as this can cause authentication errors.
-9. Egress to `https://beacon.langchain.com` from your network. This is required for license verification and usage reporting if not running in air-gapped mode. See the [Egress documentation](https://docs.langchain.com/langsmith/self-host-egress) for more details.
+8. `LANGSMITH_ENDPOINT`: To send traces to a [self-hosted LangSmith](self-hosted.md) instance, set `LANGSMITH_ENDPOINT` to the hostname of the self-hosted LangSmith instance. Do not add a trailing slash to the URL, as this can cause authentication errors.
+9. Egress to `https://beacon.langchain.com` from your network. This is required for license verification and usage reporting if not running in air-gapped mode. See the [Egress documentation](self-host-egress.md) for more details.
 
 ## Kubernetes
 
 Use this [Helm chart](https://github.com/langchain-ai/helm/blob/main/charts/langgraph-cloud/README.md) to deploy an Agent Server to a Kubernetes cluster. This is the recommended setup for production standalone server deployments.
 
-The Helm chart (v0.2.6+) supports MongoDB checkpointing with a bundled instance (dev/testing) or an external deployment (production). Set `mongo.enabled: true` in your values file. See [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer#deploy-by-environment) for full configuration details.
+The Helm chart (v0.2.6+) supports MongoDB checkpointing with a bundled instance (dev/testing) or an external deployment (production). Set `mongo.enabled: true` in your values file. See [Configure checkpointer backend](configure-checkpointer.md#deploy-by-environment) for full configuration details.
 
 ## Docker
 
@@ -227,7 +227,7 @@ services:
             LS_MONGODB_URI: mongodb://langgraph-mongo:27017/langgraph?replicaSet=rs0
 ```
 
-See [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer) for more details on MongoDB configuration options.
+See [Configure checkpointer backend](configure-checkpointer.md) for more details on MongoDB configuration options.
 
 </details>
 

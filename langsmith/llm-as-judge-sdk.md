@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-as-judge-sdk)
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 
-This guide shows you how to define an [LLM-as-a-judge evaluator](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
+This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-concepts.md#llm-as-judge) for [offline evaluation](evaluation-concepts.md#offline-evaluations) using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
 > [!TIP]
-> For a quick start, use [openevals](https://docs.langchain.com/langsmith/openevals), which provides ready-to-use LLM-as-a-judge evaluators.
+> For a quick start, use [openevals](openevals.md), which provides ready-to-use LLM-as-a-judge evaluators.
 
 ## Create your own LLM-as-a-judge evaluator
 
@@ -79,7 +79,7 @@ results = evaluate(
 )
 ```
 
-For more information on how to write a custom evaluator, refer to [How to define a code evaluator (SDK)](https://docs.langchain.com/langsmith/code-evaluator-sdk).
+For more information on how to write a custom evaluator, refer to [How to define a code evaluator (SDK)](code-evaluator-sdk.md).
 
 ***
 

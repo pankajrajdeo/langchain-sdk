@@ -12,26 +12,26 @@ Use these guides when you need to ship an agent-backed product: copy the stack t
 
 The agent runs as a LangSmith Deployment, and a separate web app streams from the Agent Server API.
 
-#### [LangSmith + Vite](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
+#### [LangSmith + Vite](deploy-vite-langsmith.md)
 Agent graph on LangSmith Deployment; Vite + React UI streams from the Agent Server API.
 
 ### Embed in your web framework
 
 The agent runs inside the framework's route handlers and ships as one deployable app to the host platform.
 
-#### [Next.js](https://docs.langchain.com/langsmith/deploy-nextjs)
+#### [Next.js](deploy-nextjs.md)
 App Router route handlers implement the protocol under `/api/threads/...`. Deploy to Vercel with one click.
 
-#### [SvelteKit](https://docs.langchain.com/langsmith/deploy-sveltekit)
+#### [SvelteKit](deploy-sveltekit.md)
 SvelteKit server routes on Cloudflare Workers with `@langchain/svelte` and per-thread Durable Objects for SSE replay.
 
-#### [Nuxt](https://docs.langchain.com/langsmith/deploy-nuxt)
+#### [Nuxt](deploy-nuxt.md)
 Nitro route handlers and `@langchain/vue` composables in a single deployable Nuxt 4 app.
 
-#### [Cloudflare Workers](https://docs.langchain.com/langsmith/deploy-cloudflare-workers)
+#### [Cloudflare Workers](deploy-cloudflare-workers.md)
 Vite + React SPA and Hono API on one Worker with Workers Assets and Durable Objects.
 
-#### [Deno Deploy](https://docs.langchain.com/langsmith/deploy-deno)
+#### [Deno Deploy](deploy-deno.md)
 Deno.serve + Hono serves the protocol API and a Vite-built React SPA from one entrypoint.
 
 > [!TIP]
@@ -77,14 +77,14 @@ Server-side logic tracks active runs, bridges commands to the agent, and fans ou
 
 A browser UI wired to the protocol through `HttpAgentServerAdapter`, from [`@langchain/react`](https://www.npmjs.com/package/@langchain/react), [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue), [`@langchain/svelte`](https://www.npmjs.com/package/@langchain/svelte), or [`@langchain/angular`](https://www.npmjs.com/package/@langchain/angular). The client bootstraps thread state, submits messages, consumes the SSE stream, and renders tokens, tool calls, reasoning, and subagent activity.
 
-These bindings ship no components of their own. Hooks like `useStream` return plain reactive state (messages, tool calls, loading flags, thread metadata) that you wire to whatever visual layer you prefer. For adapter patterns and trade-offs, see the [frontend integrations overview](https://docs.langchain.com/oss/python/langchain/frontend/integrations/overview).
+These bindings ship no components of their own. Hooks like `useStream` return plain reactive state (messages, tool calls, loading flags, thread metadata) that you wire to whatever visual layer you prefer. For adapter patterns and trade-offs, see the [frontend integrations overview](../langchain/frontend/integrations/overview.md).
 
 ## See also
 
-* [LangSmith Deployment overview](https://docs.langchain.com/langsmith/deployment)
-* [Agent Server](https://docs.langchain.com/langsmith/agent-server)
-* [Configure checkpointer](https://docs.langchain.com/langsmith/configure-checkpointer)
-* [Frontend overview](https://docs.langchain.com/oss/python/langchain/frontend/overview)
+* [LangSmith Deployment overview](deployment.md)
+* [Agent Server](agent-server.md)
+* [Configure checkpointer](configure-checkpointer.md)
+* [Frontend overview](../langchain/frontend/overview.md)
 
 ***
 

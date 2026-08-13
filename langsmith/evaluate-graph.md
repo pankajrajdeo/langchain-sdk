@@ -220,7 +220,7 @@ async def main():
 If we need access to information about intermediate steps that isn't in state, we can look at the Run object. This contains the full traces for all node inputs and outputs:
 
 > [!TIP]
-> See more about what arguments you can pass to custom evaluators in this [how-to guide](https://docs.langchain.com/langsmith/code-evaluator-ui).
+> See more about what arguments you can pass to custom evaluators in this [how-to guide](code-evaluator-ui.md).
 
 ```python
 from langsmith.schemas import Run, Example

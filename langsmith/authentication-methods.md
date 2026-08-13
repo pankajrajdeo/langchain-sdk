@@ -14,19 +14,19 @@ Users can alternatively use their credentials from GitHub or Google.
 
 ### SAML SSO
 
-Enterprise customers can configure [SAML SSO](https://docs.langchain.com/langsmith/user-management) and [SCIM](https://docs.langchain.com/langsmith/user-management). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
+Enterprise customers can configure [SAML SSO](user-management.md) and [SCIM](user-management.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.
 
 ## Self-Hosted
 
-Self-hosted customers have more control over how their users can login to LangSmith. For more in-depth coverage of configuration options, see [the self-hosting docs](https://docs.langchain.com/langsmith/self-hosted) and [Helm chart](https://github.com/langchain-ai/helm/tree/main/charts/langsmith).
+Self-hosted customers have more control over how their users can login to LangSmith. For more in-depth coverage of configuration options, see [the self-hosting docs](self-hosted.md) and [Helm chart](https://github.com/langchain-ai/helm/tree/main/charts/langsmith).
 
 ### SSO with OAuth 2.0 and OIDC
 
-Production installations should configure SSO in order to use an external identity provider. This enables users to login through an identity platform like Auth0/Okta. LangSmith supports almost any OIDC-compliant provider. Learn more about configuring SSO in the [SSO configuration guide](https://docs.langchain.com/langsmith/self-host-sso)
+Production installations should configure SSO in order to use an external identity provider. This enables users to login through an identity platform like Auth0/Okta. LangSmith supports almost any OIDC-compliant provider. Learn more about configuring SSO in the [SSO configuration guide](self-host-sso.md)
 
 ### Email/Password a.k.a. basic auth
 
-This auth method requires very little configuration as it does not require an external identity provider. It is most appropriate to use for self-hosted trials. Learn more in the [basic auth configuration guide](https://docs.langchain.com/langsmith/self-host-basic-auth)
+This auth method requires very little configuration as it does not require an external identity provider. It is most appropriate to use for self-hosted trials. Learn more in the [basic auth configuration guide](self-host-basic-auth.md)
 
 ### None
 

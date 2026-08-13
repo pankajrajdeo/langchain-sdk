@@ -5,7 +5,7 @@ Configure channels to trigger your Fleet agents automatically.
 Channels define when your agent starts running. Connect your agent to external events so it responds automatically to messages, emails, or other events.
 
 > [!TIP]
-> To trigger an agent on a recurring basis, use [schedules](https://docs.langchain.com/langsmith/fleet/schedules).
+> To trigger an agent on a recurring basis, use [schedules](schedules.md).
 
 ## Add a channel
 
@@ -20,7 +20,7 @@ Open your agent in the [Fleet](https://smith.langchain.com/agents?utm_source=doc
 
 ### Add a Gmail channel
 
-The Gmail channel activates your agent when new emails arrive in your inbox. To let your agent read and respond to emails, add Gmail tools in the **Tools** section. Available Gmail tools include reading emails, sending replies, creating drafts, managing labels, and marking messages as read. See [Tool integrations](https://docs.langchain.com/langsmith/fleet/tools) for more information.
+The Gmail channel activates your agent when new emails arrive in your inbox. To let your agent read and respond to emails, add Gmail tools in the **Tools** section. Available Gmail tools include reading emails, sending replies, creating drafts, managing labels, and marking messages as read. See [Tool integrations](tools.md) for more information.
 
 > [!WARNING]
 > The Gmail channel only monitors your primary inbox. The following emails do not activate the channel:
@@ -33,13 +33,13 @@ The Gmail channel activates your agent when new emails arrive in your inbox. To 
 
 The Slack channel lets your team chat with your agent directly in Slack. After you authenticate with Slack once, Fleet adds the agent to Slack in one click and configures a Slack app with the agent's name, description, and icon. Mention the agent in a channel or send it a direct message to start a run.
 
-For setup instructions, see [Integrate Slack with an agent](https://docs.langchain.com/langsmith/fleet/slack-app).
+For setup instructions, see [Integrate Slack with an agent](slack-app.md).
 
 ### Add a Microsoft Teams channel
 
 The Teams channel activates your agent when messages are sent in Microsoft Teams conversations.
 
-For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Teams with an agent](https://docs.langchain.com/langsmith/fleet/teams-app).
+For full setup instructions including Azure Bot creation, credential registration, and tool configuration, see [Integrate Teams with an agent](teams-app.md).
 
 ## Pause and resume channels
 

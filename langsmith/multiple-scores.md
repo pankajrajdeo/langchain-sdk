@@ -21,7 +21,7 @@ To do so with the JS/TS SDK, return an object with a 'results' key and then a li
 {results: [{ key: string, score: number }, ...]};
 ```
 
-Each of these dictionaries can contain any or all of the [feedback fields](https://docs.langchain.com/langsmith/feedback-data-format); check out the linked document for more information.
+Each of these dictionaries can contain any or all of the [feedback fields](feedback-data-format.md); check out the linked document for more information.
 
 Example:
 
@@ -58,11 +58,11 @@ function multipleScores(rootRun: Run, example: Example) {
 
 Rows from the resulting experiment will display each of the scores.
 
-> **Image:** [multiple_scores.png](https://docs.langchain.com/langsmith/multiple-scores)
+> **Image:** [multiple_scores.png](multiple-scores.md)
 
 ## Related
 
-* [Return categorical vs numerical metrics](https://docs.langchain.com/langsmith/metric-type)
+* [Return categorical vs numerical metrics](metric-type.md)
 
 ***
 

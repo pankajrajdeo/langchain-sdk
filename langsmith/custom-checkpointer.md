@@ -10,7 +10,7 @@ You provide a path to an async context manager that yields a `BaseCheckpointSave
 > Custom checkpointers are in **alpha**. This feature may experience breaking changes in minor version updates.
 
 > [!TIP]
-> To use MongoDB instead of PostgreSQL for checkpoint storage, see [Configure checkpointer backend](https://docs.langchain.com/langsmith/configure-checkpointer). This page is for implementing a fully custom storage backend.
+> To use MongoDB instead of PostgreSQL for checkpoint storage, see [Configure checkpointer backend](configure-checkpointer.md). This page is for implementing a fully custom storage backend.
 
 ## Define the checkpointer
 
@@ -94,11 +94,11 @@ async def test_conformance():
     assert report.passed_all_base()
 ```
 
-To view the full list of base and extended operations that the suite validates, refer to the [capabilities](https://docs.langchain.com/langsmith/custom-checkpointer#capabilities) section.
+To view the full list of base and extended operations that the suite validates, refer to the [capabilities](#capabilities) section.
 
 ## Configure `langgraph.json`
 
-Add the `checkpointer` key to your [`langgraph.json` configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts). The `path` points to the async context manager you [defined earlier](https://docs.langchain.com/langsmith/custom-checkpointer#define-the-checkpointer).
+Add the `checkpointer` key to your [`langgraph.json` configuration file](application-structure.md#configuration-file-concepts). The `path` points to the async context manager you [defined earlier](#define-the-checkpointer).
 
 ```json
 {
@@ -151,9 +151,9 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 
 ## Next steps
 
-* [Build a custom checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#build-a-custom-checkpointer) including delta channel support.
-* [Use a custom store](https://docs.langchain.com/langsmith/custom-store) to replace the built-in long-term memory store.
-* Learn about [persistence and memory](https://docs.langchain.com/oss/python/langgraph/persistence) in LangGraph.
+* [Build a custom checkpointer](../langgraph/checkpointers.md#build-a-custom-checkpointer) including delta channel support.
+* [Use a custom store](custom-store.md) to replace the built-in long-term memory store.
+* Learn about [persistence and memory](../langgraph/persistence.md) in LangGraph.
 
 ***
 

@@ -4,7 +4,7 @@
 
 > [Parallel](https://platform.parallel.ai/) is a real-time web search and content extraction platform built for LLMs and AI applications.
 
-`ParallelExtractTool` calls Parallel's [Extract API](https://docs.parallel.ai/extract/extract-quickstart), which returns clean, markdown-formatted content from web pages, with optional focused excerpts driven by a `search_objective`. Pair it with [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search) to build a search → extract pipeline.
+`ParallelExtractTool` calls Parallel's [Extract API](https://docs.parallel.ai/extract/extract-quickstart), which returns clean, markdown-formatted content from web pages, with optional focused excerpts driven by a `search_objective`. Pair it with [ParallelSearchTool](parallel_search.md) to build a search → extract pipeline.
 
 ## Overview
 
@@ -195,7 +195,7 @@ for item in result:
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](../../langchain/agents.md):
 
 ```python
 from langchain.agents import create_agent

@@ -13,7 +13,7 @@ Source: [`js-nuxt`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-nuxt&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents">
-> **Image:** [Deploy with Vercel](https://docs.langchain.com/langsmith/deploy-nuxt)
+> **Image:** [Deploy with Vercel](deploy-nuxt.md)
 </a>
 
 ### Configure the project
@@ -27,7 +27,7 @@ Deploy the project. Nuxt detects Vercel automatically and builds Nitro server ro
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-nuxt">
-> **Image:** [Deploy to Netlify](https://docs.langchain.com/langsmith/deploy-nuxt)
+> **Image:** [Deploy to Netlify](deploy-nuxt.md)
 </a>
 
 ### Configure the project
@@ -150,7 +150,7 @@ The agent's checkpointer is the single source of truth for threads. There is no 
 
 Out of the box, the agent uses an in-memory `MemorySaver` checkpointer (`server/agent/index.ts`) and a process-local session map (`server/utils/runtime.ts`). That works for local dev and single-instance servers, but on serverless or multi-instance hosts conversation state is **not durable** across cold starts or replicas.
 
-For production, swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries):
+For production, swap in a [durable checkpointer](../langgraph/checkpointers.md#checkpointer-libraries):
 
 | Package                                                                                                              | Backend                    |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
@@ -162,7 +162,7 @@ Replace `MemorySaver` in `server/agent/index.ts` and pass the new checkpointer t
 
 You will also want a shared session/replay store in `server/utils/runtime.ts` so SSE reconnection works across serverless invocations.
 
-For more information, see [checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](https://docs.langchain.com/oss/python/langgraph/add-memory).
+For more information, see [checkpointer libraries](../langgraph/checkpointers.md#checkpointer-libraries) and [add memory / persistence](../langgraph/add-memory.md).
 
 ## Local development
 
@@ -216,11 +216,11 @@ pnpm typecheck  # vue-tsc over the project
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [`react-custom-backend`](https://github.com/langchain-ai/streaming-cookbook) — original Vite + Hono reference for a custom protocol server
 * [`@langchain/vue`](https://www.npmjs.com/package/@langchain/vue) — `useStream`, `provideStream`, and selector composables
-* [Frontend overview](https://docs.langchain.com/oss/python/langchain/frontend/overview)
+* [Frontend overview](../langchain/frontend/overview.md)
 
 ***
 

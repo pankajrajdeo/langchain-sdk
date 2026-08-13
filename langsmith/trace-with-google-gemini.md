@@ -3,7 +3,7 @@
 This guide shows you how to trace and log [Google's Gemini](https://ai.google.dev/gemini-api/docs) models in LangSmith. You'll instrument Gemini calls using the latest [`google-genai` SDK](https://googleapis.github.io/python-genai/) (Python) or [`@google/genai` SDK](https://googleapis.github.io/js-genai/release_docs/index.html) (JavaScript), wrap the Gemini client for tracing, and try examples including basic prompts, metadata tagging, and multi-turn conversations.
 
 > [!NOTE]
-> The LangSmith Gemini wrappers are in **[beta](https://docs.langchain.com/langsmith/release-stages)**. The API may change in future releases.
+> The LangSmith Gemini wrappers are in **[beta](release-stages.md)**. The API may change in future releases.
 
 ## Installation
 
@@ -19,7 +19,7 @@ npm install langsmith@latest @google/genai
 
 ## Setup
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>

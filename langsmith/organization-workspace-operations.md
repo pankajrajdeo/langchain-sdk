@@ -1,6 +1,6 @@
 # Organization and workspace operations reference
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/organization-workspace-operations)
-This page provides a comprehensive reference table of [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) and [organization](https://docs.langchain.com/langsmith/administration-overview#organizations) operations and which roles can perform them.
+This page provides a comprehensive reference table of [workspace](administration-overview.md#workspaces) and [organization](administration-overview.md#organizations) operations and which roles can perform them.
 
 The list includes API operations in LangSmith along with:
 
@@ -9,21 +9,21 @@ The list includes API operations in LangSmith along with:
 * Notes about partial access or special cases.
 
 > [!NOTE]
-> For an overview of LangSmith's RBAC system, role definitions, and permission concepts, refer to [Role-based access control](https://docs.langchain.com/langsmith/rbac).
+> For an overview of LangSmith's RBAC system, role definitions, and permission concepts, refer to [Role-based access control](rbac.md).
 
 ## Contents
 
 | Organization-level operations                                                                                                                                                                                                                                                                               | Workspace-level operations                                                                                                                                                                                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Core management:**<br />• [Organization settings](https://docs.langchain.com/langsmith/organization-workspace-operations#organization-settings): Org info and configuration<br />• [Workspaces](https://docs.langchain.com/langsmith/organization-workspace-operations#workspaces): Workspace management<br />• [Organization members](https://docs.langchain.com/langsmith/organization-workspace-operations#organization-members): Member management<br />• [Roles and permissions](https://docs.langchain.com/langsmith/organization-workspace-operations#roles-and-permissions): Custom roles | **Core resources:**<br />• [Projects](https://docs.langchain.com/langsmith/organization-workspace-operations#projects): Organize traces and runs<br />• [Runs](https://docs.langchain.com/langsmith/organization-workspace-operations#runs): Individual execution traces<br />• [Datasets](https://docs.langchain.com/langsmith/organization-workspace-operations#datasets): Test datasets for evaluation<br />• [Examples](https://docs.langchain.com/langsmith/organization-workspace-operations#examples): Individual dataset examples<br />• [Experiments](https://docs.langchain.com/langsmith/organization-workspace-operations#experiments): Comparative experiments |
-| **Security and authentication:**<br />• [SSO and authentication](https://docs.langchain.com/langsmith/organization-workspace-operations#sso-and-authentication): Single sign-on setup<br />• [SCIM](https://docs.langchain.com/langsmith/organization-workspace-operations#scim): Identity provisioning<br />• [Access policies](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies): Attribute-based access control                                                                      | **Monitoring and analysis:**<br />• [Rules](https://docs.langchain.com/langsmith/organization-workspace-operations#rules): Automated run rules<br />• [Alerts](https://docs.langchain.com/langsmith/organization-workspace-operations#alerts): Alert rules for monitoring<br />• [Feedback](https://docs.langchain.com/langsmith/organization-workspace-operations#feedback): Scores and labels on outputs<br />• [Annotation Queues](https://docs.langchain.com/langsmith/organization-workspace-operations#annotation-queues): Human review queues<br />• [Charts](https://docs.langchain.com/langsmith/organization-workspace-operations#charts): Custom visualizations  |
-| **Billing and accounts:**<br />• [Billing and payments](https://docs.langchain.com/langsmith/organization-workspace-operations#billing-and-payments): Subscription management<br />• [API keys](https://docs.langchain.com/langsmith/organization-workspace-operations#api-keys): Org-level keys                                                                                                                                                        | **Development and configuration:**<br />• [Prompts](https://docs.langchain.com/langsmith/organization-workspace-operations#prompts): Prompt templates (LangChain Hub)<br />• [Deployments](https://docs.langchain.com/langsmith/organization-workspace-operations#deployments): Deployment configurations<br />• [MCP Servers](https://docs.langchain.com/langsmith/organization-workspace-operations#mcp-servers): Model Context Protocol servers<br />• [Fleet](https://docs.langchain.com/langsmith/organization-workspace-operations#fleet): Fleet admin operations                               |
-| **Analytics:**<br />• [Charts and dashboards](https://docs.langchain.com/langsmith/organization-workspace-operations#organization-charts-and-dashboards): Org-level visualizations<br />• [Usage and analytics](https://docs.langchain.com/langsmith/organization-workspace-operations#usage-and-analytics): Usage tracking and TTL settings                                                                                                            | **Workspace management:**<br />• [Workspace settings](https://docs.langchain.com/langsmith/organization-workspace-operations#workspace-settings-and-management): Members, settings<br />• [Tags](https://docs.langchain.com/langsmith/organization-workspace-operations#tags): Metadata tagging system<br />• [Bulk Exports](https://docs.langchain.com/langsmith/organization-workspace-operations#bulk-exports): Data export operations                                                                                       |
+| **Core management:**<br />• [Organization settings](#organization-settings): Org info and configuration<br />• [Workspaces](#workspaces): Workspace management<br />• [Organization members](#organization-members): Member management<br />• [Roles and permissions](#roles-and-permissions): Custom roles | **Core resources:**<br />• [Projects](#projects): Organize traces and runs<br />• [Runs](#runs): Individual execution traces<br />• [Datasets](#datasets): Test datasets for evaluation<br />• [Examples](#examples): Individual dataset examples<br />• [Experiments](#experiments): Comparative experiments |
+| **Security and authentication:**<br />• [SSO and authentication](#sso-and-authentication): Single sign-on setup<br />• [SCIM](#scim): Identity provisioning<br />• [Access policies](#access-policies): Attribute-based access control                                                                      | **Monitoring and analysis:**<br />• [Rules](#rules): Automated run rules<br />• [Alerts](#alerts): Alert rules for monitoring<br />• [Feedback](#feedback): Scores and labels on outputs<br />• [Annotation Queues](#annotation-queues): Human review queues<br />• [Charts](#charts): Custom visualizations  |
+| **Billing and accounts:**<br />• [Billing and payments](#billing-and-payments): Subscription management<br />• [API keys](#api-keys): Org-level keys                                                                                                                                                        | **Development and configuration:**<br />• [Prompts](#prompts): Prompt templates (LangChain Hub)<br />• [Deployments](#deployments): Deployment configurations<br />• [MCP Servers](#mcp-servers): Model Context Protocol servers<br />• [Fleet](#fleet): Fleet admin operations                               |
+| **Analytics:**<br />• [Charts and dashboards](#organization-charts-and-dashboards): Org-level visualizations<br />• [Usage and analytics](#usage-and-analytics): Usage tracking and TTL settings                                                                                                            | **Workspace management:**<br />• [Workspace settings](#workspace-settings-and-management): Members, settings<br />• [Tags](#tags): Metadata tagging system<br />• [Bulk Exports](#bulk-exports): Data export operations                                                                                       |
 
 **Additional information:**
 
-* [User-level operations](https://docs.langchain.com/langsmith/organization-workspace-operations#user-level-operations): Operations for all authenticated users
-* [Permission inheritance](https://docs.langchain.com/langsmith/organization-workspace-operations#permission-inheritance): How roles inherit across org/workspaces
+* [User-level operations](#user-level-operations): Operations for all authenticated users
+* [Permission inheritance](#permission-inheritance): How roles inherit across org/workspaces
 
 ## Legend
 
@@ -34,7 +34,7 @@ The list includes API operations in LangSmith along with:
 ## Organization-level operations
 
 > [!NOTE]
-> Organization-level operations are controlled by organization roles, which are separate from the RBAC feature. Learn more in the [Role-based access control](https://docs.langchain.com/langsmith/rbac#organization-roles) guide.
+> Organization-level operations are controlled by organization roles, which are separate from the RBAC feature. Learn more in the [Role-based access control](rbac.md#organization-roles) guide.
 
 ### Organization settings
 
@@ -94,7 +94,7 @@ Organization-level workspace management operations.
 
 ### SCIM
 
-System for Cross-domain Identity Management for user provisioning. For setup instructions, refer to the [SCIM setup guide](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization).
+System for Cross-domain Identity Management for user provisioning. For setup instructions, refer to the [SCIM setup guide](user-management.md#set-up-scim-for-your-organization).
 
 | Operation         | Org Admin | Org Operator | Org User | Org Viewer | Required Permission   |
 | ----------------- | :-------: | :----------: | :------: | :--------: | --------------------- |
@@ -163,18 +163,18 @@ Attribute-based access control (ABAC) policies for fine-grained permissions.
 | Operation                                                            | Org Admin | Org Operator | Org User |      Org Viewer     | Required Permission   |
 | -------------------------------------------------------------------- | :-------: | :----------: | :------: | :-----------------: | --------------------- |
 | View organization usage                                              |     ✓     |       ✓      |     ✓    |          ✓          | `organization:read`   |
-| [View granular billable usage](https://docs.langchain.com/langsmith/granular-usage)            |     ✓     |       ✓      |     ✓    | `organization:read` |                       |
-| [Export granular usage as CSV](https://docs.langchain.com/langsmith/granular-usage#csv-export) |     ✓     |       ✓      |     ✓    | `organization:read` |                       |
+| [View granular billable usage](granular-usage.md)            |     ✓     |       ✓      |     ✓    | `organization:read` |                       |
+| [Export granular usage as CSV](granular-usage.md#csv-export) |     ✓     |       ✓      |     ✓    | `organization:read` |                       |
 | View workspace trace retention settings                              |     ✓     |       ✓      |     ✓    |          ✓          | `organization:read`   |
 | Set workspace default trace tier (base/extended)                     |     ✓     |       ✓      |     ✗    |          ✗          | `organization:manage` |
 | Set workspace extended retention duration (Enterprise)               |     ✓     |       ✓      |     ✗    |          ✗          | `organization:manage` |
 
 ## Workspace-level operations
 
-These operations are controlled by [workspace-level roles and permissions](https://docs.langchain.com/langsmith/rbac#workspace-roles).
+These operations are controlled by [workspace-level roles and permissions](rbac.md#workspace-roles).
 
 > [!TIP]
-> To understand what each role means and their overall capabilities, refer to the [Role-based access control](https://docs.langchain.com/langsmith/rbac) guide.
+> To understand what each role means and their overall capabilities, refer to the [Role-based access control](rbac.md) guide.
 
 ### Projects
 
@@ -353,7 +353,7 @@ Comparative experiments for evaluating LLM outputs.
 
 Scores, labels, and corrections on LLM outputs.
 
-The feedback formula operations are deprecated in favor of [composite evaluators](https://docs.langchain.com/langsmith/composite-evaluators-ui) and are scheduled for removal on 2026-08-20.
+The feedback formula operations are deprecated in favor of [composite evaluators](composite-evaluators-ui.md) and are scheduled for removal on 2026-08-20.
 
 | Operation                                     | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission |
 | --------------------------------------------- | :-------------: | :--------------: | :--------------: | ------------------- |
@@ -462,7 +462,7 @@ Custom visualizations and dashboards.
 
 ### Deployments
 
-[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) configurations.
+[LangSmith Deployment](deployment.md) configurations.
 
 | Operation         | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission  |
 | ----------------- | :-------------: | :--------------: | :--------------: | -------------------- |
@@ -531,7 +531,7 @@ Custom visualizations and dashboards.
 | Get filtered export runs       |        ✓        |         ✓        |         ✓        | `bulk-exports:read`   |
 
 > [!TIP]
-> `bulk-exports:read` and `bulk-exports:manage` are dedicated permissions that allow you to grant export access via a [custom role](https://docs.langchain.com/langsmith/rbac#custom-roles) without granting the broader `workspaces:manage` scope. This is useful for security-team service keys that need to export traces but should not be able to manage workspaces, members, or secrets.
+> `bulk-exports:read` and `bulk-exports:manage` are dedicated permissions that allow you to grant export access via a [custom role](rbac.md#custom-roles) without granting the broader `workspaces:manage` scope. This is useful for security-team service keys that need to export traces but should not be able to manage workspaces, members, or secrets.
 
 ### MCP servers
 
@@ -547,7 +547,7 @@ Model Context Protocol servers for extended functionality.
 
 ### Fleet
 
-[Fleet](https://docs.langchain.com/langsmith/fleet/index) workspace administration operations.
+[Fleet](fleet/index.md) workspace administration operations.
 
 | Operation                               | Workspace Admin | Workspace Editor | Workspace Viewer | Required Permission        |
 | --------------------------------------- | :-------------: | :--------------: | :--------------: | -------------------------- |
@@ -573,16 +573,16 @@ These operations are available to all authenticated users and don't require spec
 
 ### Organization to workspace
 
-* [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) automatically has full permissions in all workspaces.
-* [Organization Operator](https://docs.langchain.com/langsmith/rbac#organization-operator) only gets workspace access when explicitly added to workspaces with workspace-level roles (or to workspaces they create).
-* [Organization User](https://docs.langchain.com/langsmith/rbac#organization-user) and [Organization Viewer](https://docs.langchain.com/langsmith/rbac#organization-viewer) only get workspace access when explicitly added to workspaces with workspace-level roles.
+* [Organization Admin](rbac.md#organization-admin) automatically has full permissions in all workspaces.
+* [Organization Operator](rbac.md#organization-operator) only gets workspace access when explicitly added to workspaces with workspace-level roles (or to workspaces they create).
+* [Organization User](rbac.md#organization-user) and [Organization Viewer](rbac.md#organization-viewer) only get workspace access when explicitly added to workspaces with workspace-level roles.
 
-For detailed role definitions, refer to [Organization roles](https://docs.langchain.com/langsmith/rbac#organization-roles) and [Workspace roles](https://docs.langchain.com/langsmith/rbac#workspace-roles).
+For detailed role definitions, refer to [Organization roles](rbac.md#organization-roles) and [Workspace roles](rbac.md#workspace-roles).
 
 ### Workspace role independence
 
 * Users can have different workspace roles in different workspaces.
-* A user might be a [Workspace Admin](https://docs.langchain.com/langsmith/rbac#workspace-admin) in one workspace and a [Workspace Viewer](https://docs.langchain.com/langsmith/rbac#workspace-viewer) in another.
+* A user might be a [Workspace Admin](rbac.md#workspace-admin) in one workspace and a [Workspace Viewer](rbac.md#workspace-viewer) in another.
 
 ***
 

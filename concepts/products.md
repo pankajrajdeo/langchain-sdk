@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/concepts/products)
 Understand the differences between LangChain, LangGraph, and Deep Agents and when to use each one
 
-LangChain maintains several open source packages to help you build agents. Each serves a different purpose in the agent development stack. Understanding the distinctions between [agent frameworks](https://docs.langchain.com/oss/python/concepts/products#agent-frameworks-like-langchain), [agent runtimes](https://docs.langchain.com/oss/python/concepts/products#agent-runtimes-like-langgraph), and [agent harnesses](https://docs.langchain.com/oss/python/concepts/products#agent-harnesses-like-the-deep-agents-sdk) helps you choose the right tool for your needs.
+LangChain maintains several open source packages to help you build agents. Each serves a different purpose in the agent development stack. Understanding the distinctions between [agent frameworks](#agent-frameworks-like-langchain), [agent runtimes](#agent-runtimes-like-langgraph), and [agent harnesses](#agent-harnesses-like-the-deep-agents-sdk) helps you choose the right tool for your needs.
 
 <table>
   <thead>
@@ -43,11 +43,11 @@ LangChain maintains several open source packages to help you build agents. Each 
 
 Agent frameworks provide abstractions that make it easier to get started when building with LLMs.
 
-[LangChain](https://docs.langchain.com/oss/python/langchain/overview) is an agent framework that provides abstractions like structured content blocks, the agent loop, and middleware.
+[LangChain](../langchain/overview.md) is an agent framework that provides abstractions like structured content blocks, the agent loop, and middleware.
 
 LangChain's abstractions are designed to be easy to get started with while still providing the flexibility needed for advanced use cases.
 
-While LangChain is built on top of [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), you don't need to know LangGraph to use LangChain.
+While LangChain is built on top of [LangGraph](../langgraph/overview.md), you don't need to know LangGraph to use LangChain.
 
 Other examples of agent frameworks include [Vercel's AI SDK](https://ai-sdk.dev/docs/introduction), [CrewAI](https://www.crewai.com/), [OpenAI Agents SDK](https://openai.github.io/openai-agents-python/), [Google ADK](https://google.github.io/adk-docs/), [LlamaIndex](https://www.llamaindex.ai/), and many more.
 
@@ -71,7 +71,7 @@ Supported tools may include:
 * **Persistence**: Thread-level and cross-thread persistence for state management.
 * **Low-level control**: Direct control over agent orchestration without high-level abstractions.
 
-[LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) is a low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.
+[LangGraph](../langgraph/overview.md) is a low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents.
 
 Agent frameworks are generally higher level and run on agent runtimes.
 For example, LangChain 1.0 is built on top of LangGraph.
@@ -97,7 +97,7 @@ Supported tools may include:
 * **File system**: Read and write access to files on different pluggable storage backends.
 * **Token management**: Conversation history summarization and large tool result eviction.
 
-The [Deep Agents SDK](https://docs.langchain.com/oss/python/deepagents/overview) builds on top of LangGraph and adds planning capabilities, file systems for context management, the ability to spawn subagents, and more.
+The [Deep Agents SDK](../deepagents/overview.md) builds on top of LangGraph and adds planning capabilities, file systems for context management, the ability to spawn subagents, and more.
 Deep Agents is designed for complex, multi-step tasks that require planning and decomposition.
 
 Example tasks include working with search results, scripts, and other artifacts in state.
@@ -106,7 +106,7 @@ Other examples of agent harnesses include [Claude Agent SDK](https://platform.cl
 
 ### When to use the Deep Agents SDK
 
-Use the [Deep Agents SDK](https://docs.langchain.com/oss/python/deepagents/overview) when:
+Use the [Deep Agents SDK](../deepagents/overview.md) when:
 
 * You are building agents that run over long time periods.
 * You are building agents that need to handle complex, multi-step tasks.
@@ -119,18 +119,18 @@ While you can accomplish similar tasks with LangChain, LangGraph, and Deep Agent
 
 | Feature           | LangGraph                                                                   | LangChain                                                               | Deep Agents                                                                  |
 | ----------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Short-term memory | [Short-term memory](https://docs.langchain.com/oss/python/langgraph/add-memory#add-short-term-memory) | [Short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory)            | [`StateBackend`](https://docs.langchain.com/oss/python/deepagents/backends#statebackend)               |
-| Long-term memory  | [Long-term memory](https://docs.langchain.com/oss/python/langgraph/add-memory#add-long-term-memory)   | [Long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory)              | [Long-term memory](https://docs.langchain.com/oss/python/deepagents/memory)                            |
-| Skills            | -                                                                           | [Multi-agent skills](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)          | [Skills](https://docs.langchain.com/oss/python/deepagents/skills)                                      |
-| Subagents         | [Subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs)                            | [Multi-agent subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents)    | [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents)                                |
-| Human-in-the-loop | [Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)                              | [Human-in-the-loop middleware](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) | [`interrupt_on` parameter](https://docs.langchain.com/oss/python/deepagents/harness#human-in-the-loop) |
-| Streaming         | [Streaming](https://docs.langchain.com/oss/python/langgraph/streaming)                                | [Agent Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming)                | [Streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming)                          |
+| Short-term memory | [Short-term memory](../langgraph/add-memory.md#add-short-term-memory) | [Short-term memory](../langchain/short-term-memory.md)            | [`StateBackend`](../deepagents/backends.md#statebackend)               |
+| Long-term memory  | [Long-term memory](../langgraph/add-memory.md#add-long-term-memory)   | [Long-term memory](../langchain/long-term-memory.md)              | [Long-term memory](../deepagents/memory.md)                            |
+| Skills            | -                                                                           | [Multi-agent skills](../langchain/multi-agent/skills.md)          | [Skills](../deepagents/skills.md)                                      |
+| Subagents         | [Subgraphs](../langgraph/use-subgraphs.md)                            | [Multi-agent subagents](../langchain/multi-agent/subagents.md)    | [Subagents](../deepagents/subagents.md)                                |
+| Human-in-the-loop | [Interrupts](../langgraph/interrupts.md)                              | [Human-in-the-loop middleware](../langchain/human-in-the-loop.md) | [`interrupt_on` parameter](../deepagents/harness.md#human-in-the-loop) |
+| Streaming         | [Streaming](../langgraph/streaming.md)                                | [Agent Streaming](../langchain/event-streaming.md)                | [Streaming](../deepagents/event-streaming.md)                          |
 
 ## Learn more
 
-* [LangChain overview](https://docs.langchain.com/oss/python/langchain/overview)
-* [LangGraph overview](https://docs.langchain.com/oss/python/langgraph/overview)
-* [Deep Agents overview](https://docs.langchain.com/oss/python/deepagents/overview)
+* [LangChain overview](../langchain/overview.md)
+* [LangGraph overview](../langgraph/overview.md)
+* [Deep Agents overview](../deepagents/overview.md)
 
 ***
 

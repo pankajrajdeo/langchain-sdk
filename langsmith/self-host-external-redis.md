@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-external-redis)
 LangSmith uses Redis to back our queuing/caching operations. By default, LangSmith Self-Hosted will use an internal Redis instance. However, you can configure LangSmith to use an external Redis instance. By configuring an external Redis instance, you can more easily manage backups, scaling, and other operational tasks for your Redis instance.
 
-[Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](https://docs.langchain.com/langsmith/self-host-external-redis#requirements) for supported versions.
+[Valkey](https://valkey.io/) is also officially supported as a drop-in replacement for Redis. Anywhere this page refers to Redis, you can use a compatible Valkey instance. See [Requirements](#requirements) for supported versions.
 
 > [!WARNING]
 > Each LangSmith installation must use its own dedicated Redis instance. Redis cannot be shared across separate LangSmith installations (for example, between an existing and new cluster during a migration). Sharing it across installations causes deployment tasks to be routed to the wrong cluster.
@@ -14,7 +14,7 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
 > * [Google Cloud Memorystore](https://cloud.google.com/memorystore) (GCP)
 > * [Azure Cache for Redis](https://azure.microsoft.com/en-us/services/cache/) (Azure)
 >
-> For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication).
+> For cloud-specific IAM/Workload Identity authentication, refer to the [IAM authentication section](#iam-authentication).
 
 ## Requirements
 
@@ -28,12 +28,12 @@ LangSmith uses Redis to back our queuing/caching operations. By default, LangSmi
 
 * We support both Standalone and Redis Cluster (including Valkey Cluster). See the appropriate sections for deployment instructions.
 
-* We support no authentication, password, and [IAM/Workload Identity](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication) authentication.
+* We support no authentication, password, and [IAM/Workload Identity](#iam-authentication) authentication.
 
 * By default, we recommend an instance with at least 2 vCPUs and 8GB of memory. However, the actual requirements will depend on your tracing workload. We recommend monitoring your Redis instance and scaling up as needed.
 
 > [!TIP]
-> If you enable [LangSmith Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
+> If you enable [LangSmith Sandboxes](deploy-self-hosted-full-platform.md#enable-sandboxes), we recommend setting the Redis `maxmemory-policy` to `noeviction` for the Redis metadata store used by sandbox storage. This avoids evicting filesystem metadata under memory pressure.
 > With `noeviction`, Redis writes can fail when the instance reaches max memory, so keep enough memory headroom for sandbox metadata growth.
 
 ## Standalone Redis
@@ -190,9 +190,13 @@ stringData:
   redis_cluster_password: "your_redis_password"
 ```
 
+<a id="azure-cache-for-redis"></a>
+
 ## Azure managed Redis
 
 [Azure Managed Redis](https://azure.microsoft.com/en-us/products/managed-redis) supports two clustering policies that affect how LangSmith connects to it. Choose the configuration below based on the clustering policy of your instance.
+
+<a id="google-cloud-memorystore"></a>
 
 ### OSS Cluster
 
@@ -224,11 +228,11 @@ redis:
     clusterSafeMode: true
 ```
 
-For Microsoft Entra (IAM) authentication with EnterpriseCluster, see the [Azure tab in IAM authentication](https://docs.langchain.com/langsmith/self-host-external-redis#azure-cache-for-redis) and include `clusterSafeMode: true` in your Helm values.
+For Microsoft Entra (IAM) authentication with EnterpriseCluster, see the [Azure tab in IAM authentication](#azure-cache-for-redis) and include `clusterSafeMode: true` in your Helm values.
 
 ## TLS with Redis
 
-Use this section to configure TLS for Redis connections. For mounting internal/public CAs so LangSmith trusts your Redis server certificate, see [Configure custom TLS certificates](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls).
+Use this section to configure TLS for Redis connections. For mounting internal/public CAs so LangSmith trusts your Redis server certificate, see [Configure custom TLS certificates](self-host-custom-tls-certificates.md#mount-internal-cas-for-tls).
 
 ### Server TLS (one-way)
 
@@ -286,7 +290,7 @@ stringData:
 
 ### Mutual TLS with client auth (mTLS)
 
-As of LangSmith helm chart version **0.12.29**, we support mTLS for Redis clients. For server-side authentication in mTLS, use the [Server TLS steps](https://docs.langchain.com/langsmith/self-host-external-redis#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
+As of LangSmith helm chart version **0.12.29**, we support mTLS for Redis clients. For server-side authentication in mTLS, use the [Server TLS steps](#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
 
 If your Redis server requires client certificate authentication:
 
@@ -351,6 +355,8 @@ commonPodSecurityContext:
 **Option 2: Add to individual pod security contexts**
 
 If you need more granular control, add the `fsGroup` to each pod's security context individually. See the [mtls configuration example](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/examples/mtls_config.yaml) for a complete reference.
+
+<a id="amazon-elasticache"></a>
 
 ## IAM authentication
 

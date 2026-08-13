@@ -43,7 +43,7 @@ To import this vectorstore:
 from langchain_qdrant import QdrantVectorStore
 ```
 
-For a more detailed walkthrough of the Qdrant wrapper, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/qdrant)
+For a more detailed walkthrough of the Qdrant wrapper, see [this notebook](../vectorstores/qdrant.md)
 
 ***
 

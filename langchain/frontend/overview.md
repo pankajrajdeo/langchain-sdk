@@ -145,43 +145,43 @@ interface AgentState {
 
 ### Render messages and output
 
-#### [Markdown messages](https://docs.langchain.com/oss/python/langchain/frontend/markdown-messages)
+#### [Markdown messages](markdown-messages.md)
 Parse and render streamed markdown with proper formatting and code highlighting.
 
-#### [Structured output](https://docs.langchain.com/oss/python/langchain/frontend/structured-output)
+#### [Structured output](structured-output.md)
 Render typed agent responses as custom UI components instead of plain text.
 
-#### [Reasoning tokens](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens)
+#### [Reasoning tokens](reasoning-tokens.md)
 Display model thinking processes in collapsible blocks.
 
-#### [Generative UI](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
+#### [Generative UI](generative-ui-overview.md)
 Render agent-generated interfaces across the spectrum from controlled to declarative to open-ended.
 
 ### Display agent actions
 
-#### [Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling)
+#### [Tool calling](tool-calling.md)
 Show tool calls as rich, type-safe UI cards with loading and error states.
 
-#### [Headless tools](https://docs.langchain.com/oss/python/langchain/frontend/headless-tools)
+#### [Headless tools](headless-tools.md)
 Run browser and device APIs on the client while keeping typed tool schemas on the agent.
 
-#### [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop)
+#### [Human-in-the-loop](human-in-the-loop.md)
 Pause the agent for human review with approve, reject, and edit workflows.
 
 ### Manage conversations
 
-#### [Branching chat](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat)
+#### [Branching chat](branching-chat.md)
 Edit messages, regenerate responses, and navigate conversation branches.
 
-#### [Message queues](https://docs.langchain.com/oss/python/langchain/frontend/message-queues)
+#### [Message queues](message-queues.md)
 Queue multiple messages while the agent processes them sequentially.
 
 ### Advanced streaming
 
-#### [Join & rejoin streams](https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin)
+#### [Join & rejoin streams](join-rejoin.md)
 Disconnect from and reconnect to running agent streams without losing progress.
 
-#### [Time travel](https://docs.langchain.com/oss/python/langchain/frontend/time-travel)
+#### [Time travel](time-travel.md)
 Inspect, navigate, and resume from any checkpoint in the conversation history.
 
 ## Choosing a frontend pattern
@@ -190,12 +190,12 @@ Start from the UX question your application needs to answer:
 
 | If users need to...                        | Start with                                                                                                                                                                                                                   |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Understand what the agent is doing         | [Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling) and [reasoning tokens](https://docs.langchain.com/oss/python/langchain/frontend/reasoning-tokens)                                                                                          |
-| Safely approve sensitive actions           | [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop)                                                                                                                                                        |
-| Send work while a run is active            | [Message queues](https://docs.langchain.com/oss/python/langchain/frontend/message-queues)                                                                                                                                                              |
-| Leave and come back to long-running work   | [Join & rejoin streams](https://docs.langchain.com/oss/python/langchain/frontend/join-rejoin)                                                                                                                                                          |
-| Edit or retry from an earlier turn         | [Branching chat](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat) and [time travel](https://docs.langchain.com/oss/python/langchain/frontend/time-travel)                                                                                                |
-| Render state as an application, not a chat | [Structured output](https://docs.langchain.com/oss/python/langchain/frontend/structured-output), [generative UI](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview), and [Deep Agents frontend patterns](https://docs.langchain.com/oss/python/deepagents/frontend/overview) |
+| Understand what the agent is doing         | [Tool calling](tool-calling.md) and [reasoning tokens](reasoning-tokens.md)                                                                                          |
+| Safely approve sensitive actions           | [Human-in-the-loop](human-in-the-loop.md)                                                                                                                                                        |
+| Send work while a run is active            | [Message queues](message-queues.md)                                                                                                                                                              |
+| Leave and come back to long-running work   | [Join & rejoin streams](join-rejoin.md)                                                                                                                                                          |
+| Edit or retry from an earlier turn         | [Branching chat](branching-chat.md) and [time travel](time-travel.md)                                                                                                |
+| Render state as an application, not a chat | [Structured output](structured-output.md), [generative UI](generative-ui-overview.md), and [Deep Agents frontend patterns](../../deepagents/frontend/overview.md) |
 
 ## Integrations
 
@@ -204,13 +204,13 @@ framework. Component libraries can own the presentation layer while LangChain's
 SDK owns the agent runtime state, resumability, interrupts, and checkpoint
 semantics underneath.
 
-#### [AI Elements](https://docs.langchain.com/oss/python/langchain/frontend/integrations/ai-elements)
+#### [AI Elements](integrations/ai-elements.md)
 Composable shadcn/ui components for AI chat: `Conversation`, `Message`, `Tool`, `Reasoning`.
 
-#### [assistant-ui](https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui)
+#### [assistant-ui](integrations/assistant-ui.md)
 Headless React framework with built-in thread management, branching, and attachment support.
 
-#### [OpenUI](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
+#### [OpenUI](integrations/openui.md)
 Generative UI library for data-rich reports and dashboards using the openui-lang component DSL.
 
 ***

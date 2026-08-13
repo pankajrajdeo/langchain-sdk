@@ -19,7 +19,7 @@ from langchain_memgraph.chains.graph_qa import MemgraphQAChain
 from langchain_memgraph.graphs.memgraph import MemgraphLangChain
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/memgraph)
+See a [usage example](../graphs/memgraph.md)
 
 ## Constructing a knowledge graph from unstructured data
 
@@ -33,7 +33,7 @@ from langchain_memgraph.graphs.memgraph import MemgraphLangChain
 from langchain_neo4j import LLMGraphTransformer
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/memgraph)
+See a [usage example](../graphs/memgraph.md)
 
 ## Memgraph tools and toolkit
 

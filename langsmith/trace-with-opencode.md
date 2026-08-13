@@ -9,7 +9,7 @@ The `@langchain/langsmith-opencode` plugin sends [OpenCode](https://opencode.ai/
 Before setting up tracing, ensure you have:
 
 * [OpenCode](https://opencode.ai/) installed and configured.
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith API key](create-account-api-key.md).
 * Access to configure the OpenCode `plugin` key in `opencode.json` or `~/.config/opencode/opencode.json`.
 
 ## Install and enable the plugin

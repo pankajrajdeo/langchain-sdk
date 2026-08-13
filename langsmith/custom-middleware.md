@@ -1,6 +1,6 @@
 # How to add custom middleware
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-middleware)
-When deploying agents to LangSmith, you can add custom middleware to your server to handle concerns like logging request metrics, injecting or checking headers, and enforcing security policies without modifying core server logic. This works the same way as [adding custom routes](https://docs.langchain.com/langsmith/custom-routes). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
+When deploying agents to LangSmith, you can add custom middleware to your server to handle concerns like logging request metrics, injecting or checking headers, and enforcing security policies without modifying core server logic. This works the same way as [adding custom routes](custom-routes.md). You just need to provide your own [`Starlette`](https://www.starlette.io/applications/) app (including [`FastAPI`](https://fastapi.tiangolo.com/), [`FastHTML`](https://fastht.ml/) and other compatible apps).
 
 Adding middleware lets you intercept and modify requests and responses globally across your deployment, whether they're hitting your custom endpoints or the built-in LangSmith APIs.
 
@@ -92,7 +92,7 @@ You can deploy this app as-is to cloud or to your self-hosted platform.
 
 ## Next steps
 
-Now that you've added custom middleware to your deployment, you can use similar techniques to add [custom routes](https://docs.langchain.com/langsmith/custom-routes) or define [custom lifespan events](https://docs.langchain.com/langsmith/custom-lifespan) to further customize your server's behavior.
+Now that you've added custom middleware to your deployment, you can use similar techniques to add [custom routes](custom-routes.md) or define [custom lifespan events](custom-lifespan.md) to further customize your server's behavior.
 
 ***
 

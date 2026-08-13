@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
 Build a custom retrieval agent with LangGraph that decides when to search a vector store or respond directly.
 
-Build a [retrieval](https://docs.langchain.com/oss/python/deepagents/retrieval) agent with LangGraph that decides when to search a vector store versus answering the user directly.
+Build a [retrieval](../deepagents/retrieval.md) agent with LangGraph that decides when to search a vector store versus answering the user directly.
 
-LangChain offers built-in [agent](https://docs.langchain.com/oss/python/langchain/agents) implementations built on [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) primitives. When you need deeper customization, implement the agent directly in LangGraph. This tutorial walks through one retrieval-agent pattern.
+LangChain offers built-in [agent](../langchain/agents.md) implementations built on [LangGraph](overview.md) primitives. When you need deeper customization, implement the agent directly in LangGraph. This tutorial walks through one retrieval-agent pattern.
 
 In this tutorial you will:
 
@@ -12,17 +12,17 @@ In this tutorial you will:
 2. Index those documents for semantic search and create a retriever tool for the agent.
 3. Build an agentic RAG system that can decide when to use the retriever tool.
 
-> **Image:** [Hybrid RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+> **Image:** [Hybrid RAG](agentic-rag.md)
 
 ### Concepts
 
 This tutorial covers the following concepts:
 
-* [Retrieval](https://docs.langchain.com/oss/python/deepagents/retrieval) using
-  * [document loaders](https://docs.langchain.com/oss/python/integrations/document_loaders),
-  * [text splitters](https://docs.langchain.com/oss/python/integrations/splitters), [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings), and
-  * [vector stores](https://docs.langchain.com/oss/python/integrations/vectorstores)
-* The LangGraph [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api), including state, nodes, edges, and conditional edges.
+* [Retrieval](../deepagents/retrieval.md) using
+  * [document loaders](../integrations/document_loaders.md),
+  * [text splitters](../integrations/splitters.md), [embeddings](../integrations/embeddings.md), and
+  * [vector stores](../integrations/vectorstores.md)
+* The LangGraph [Graph API](graph-api.md), including state, nodes, edges, and conditional edges.
 
 ## Setup
 
@@ -45,7 +45,7 @@ _set_env("OPENAI_API_KEY")
 
 ### Set up LangSmith
 
-RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](https://docs.langchain.com/langsmith/observability) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
+RAG applications run retrieval and generation in sequence. When you run the examples in this tutorial, [LangSmith](../langsmith/observability.md) logs a trace for each query so you can inspect retrieval, tool calls, and model responses.
 After you [sign up for LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-agentic-rag), set your environment variables to start logging traces:
 
 ```shell
@@ -64,7 +64,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 ```
 
 > [!TIP]
-> If you are building a production agent, we also recommend you set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> If you are building a production agent, we also recommend you set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Preprocess documents
 
@@ -152,13 +152,13 @@ retriever_tool.invoke({"query": "types of reward hacking"})
 
 ## Generate a query or respond
 
-With the retriever tool ready, start building the agent as a LangGraph graph. In the [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api), a graph is made of:
+With the retriever tool ready, start building the agent as a LangGraph graph. In the [Graph API](graph-api.md), a graph is made of:
 
-* **[State](https://docs.langchain.com/oss/python/langgraph/graph-api#state)**: Shared data that nodes read and update. This tutorial uses [`MessagesState`](https://docs.langchain.com/oss/python/langgraph/graph-api#messagesstate), which stores a `messages` list of [chat messages](https://docs.langchain.com/oss/python/langchain/messages).
+* **[State](graph-api.md#state)**: Shared data that nodes read and update. This tutorial uses [`MessagesState`](graph-api.md#messagesstate), which stores a `messages` list of [chat messages](../langchain/messages.md).
 
-* **[Nodes](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes)**: Functions that take the current state, run a step (for example, call a model or a tool), and return state updates.
+* **[Nodes](graph-api.md#nodes)**: Functions that take the current state, run a step (for example, call a model or a tool), and return state updates.
 
-* **[Edges](https://docs.langchain.com/oss/python/langgraph/graph-api#edges)**: Connections that define which node runs next, including [conditional edges](https://docs.langchain.com/oss/python/langgraph/graph-api#conditional-edges) that branch based on the state.
+* **[Edges](graph-api.md#edges)**: Connections that define which node runs next, including [conditional edges](graph-api.md#conditional-edges) that branch based on the state.
 
 The first node is the agent decision point. Given the conversation so far, the model either answers the user directly or calls the retriever tool when the question needs blog context. That choice is what makes the system agentic rather than a fixed retrieve-then-generate pipeline: retrieval runs only when the model requests it.
 
@@ -221,7 +221,7 @@ Args:
 
 ## Grade documents
 
-A normal edge always sends the graph to the same next node. A [conditional edge](https://docs.langchain.com/oss/python/langgraph/graph-api#conditional-edges) chooses the next node at runtime by running a function over the current state. After retrieval, use that pattern to grade whether the documents are relevant: continue to answer generation if they are, or rewrite the question and try again if they are not.
+A normal edge always sends the graph to the same next node. A [conditional edge](graph-api.md#conditional-edges) chooses the next node at runtime by running a function over the current state. After retrieval, use that pattern to grade whether the documents are relevant: continue to answer generation if they are, or rewrite the question and try again if they are not.
 
 ### Add document grading
 Add a `grade_documents` routing function that uses a model with a structured output schema `GradeDocuments`. It returns the name of the next node based on the grading decision (`generate_answer` or `rewrite_question`):
@@ -527,7 +527,7 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [Agentic RAG graph](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+> **Image:** [Agentic RAG graph](agentic-rag.md)
 
 ## Run the agentic RAG
 
@@ -554,11 +554,11 @@ def run_agentic_rag() -> None:
 
 ## See also
 
-* [Retrieval](https://docs.langchain.com/oss/python/langchain/retrieval)
-* [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api)
-* [Agents](https://docs.langchain.com/oss/python/langchain/agents)
-* [Build a RAG agent](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Build a semantic search engine](https://docs.langchain.com/oss/python/langchain/knowledge-base)
+* [Retrieval](../langchain/retrieval.md)
+* [Graph API](graph-api.md)
+* [Agents](../langchain/agents.md)
+* [Build a RAG agent](../deepagents/rag.md)
+* [Build a semantic search engine](../langchain/knowledge-base.md)
 
 ***
 

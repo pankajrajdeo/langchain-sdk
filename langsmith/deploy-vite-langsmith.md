@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
 Deploy a LangChain deep agent to LangSmith Deployment and stream from a Vite React chat UI on Vercel, Netlify, or Cloudflare Pages.
 
-This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs as a [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), and the frontend is a Vite + React app that streams from it.
+This example gets you from a local checkout to a deployed LangChain deep agent with a working chat UI. The backend runs as a [LangSmith Deployment](deployment.md), and the frontend is a Vite + React app that streams from it.
 
 Use this guide when you want to run the agent locally, deploy it to LangSmith, and point the UI at the deployed Agent Server.
 
@@ -40,7 +40,7 @@ During local development, `pnpm run dev` starts both the LangGraph dev server an
 
 ### Prerequisites
 
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) with deployment access.
+* A [LangSmith API key](create-account-api-key.md) with deployment access.
 * An OpenAI API key for the agent model.
 * `pnpm`.
 
@@ -145,7 +145,7 @@ The agent and the UI deploy separately. After `pnpm run deploy` succeeds, host t
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-langsmith&env=VITE_AGENT_API_URL,LANGSMITH_API_KEY&envDescription=LangSmith%20deployment%20URL%20and%20API%20key">
-> **Image:** [Deploy with Vercel](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
+> **Image:** [Deploy with Vercel](deploy-vite-langsmith.md)
 </a>
 
 ### Configure the project
@@ -160,7 +160,7 @@ Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook
 Click **Deploy to Netlify** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/langchain-ai/deployment-cookbook&base=js-langsmith">
-> **Image:** [Deploy to Netlify](https://docs.langchain.com/langsmith/deploy-vite-langsmith)
+> **Image:** [Deploy to Netlify](deploy-vite-langsmith.md)
 </a>
 
 ### Configure the project
@@ -243,7 +243,7 @@ The frontend uses:
 * `client.threads.create()` and `client.threads.delete()` for conversation management.
 * `StreamProvider` with `assistantId: "agent"` for streaming chat.
 
-See the [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref) for the underlying thread and streaming APIs.
+See the [Agent Server API reference](server-api-ref.md) for the underlying thread and streaming APIs.
 
 </details>
 
@@ -288,10 +288,10 @@ The frontend deploys through your static host's Git integration (for example Ver
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
-* [LangSmith Deployment overview](https://docs.langchain.com/langsmith/deployment)
-* [LangGraph CLI](https://docs.langchain.com/langsmith/cli)
-* [Deep Agents going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
+* [LangSmith Deployment overview](deployment.md)
+* [LangGraph CLI](cli.md)
+* [Deep Agents going to production](../deepagents/going-to-production.md)
 
 ***
 

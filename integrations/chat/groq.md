@@ -3,7 +3,7 @@
 > Integrate with the ChatGroq chat model using LangChain Python.
 
 > [!WARNING]
-> This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](https://docs.langchain.com/oss/python/integrations/providers/xai).
+> This page makes reference to [Groq](https://console.groq.com/docs/overview), an AI hardware and software company. For information on how to use Grok models (provided by [xAI](https://docs.x.ai/docs/overview)), see the [xAI provider page](../providers/xai.md).
 
 > [!TIP]
 > **API Reference**
@@ -22,7 +22,7 @@ For a list of all Groq models, visit their [docs](https://console.groq.com/docs/
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -42,7 +42,7 @@ if "GROQ_API_KEY" not in os.environ:
     os.environ["GROQ_API_KEY"] = getpass.getpass("Enter your Groq API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

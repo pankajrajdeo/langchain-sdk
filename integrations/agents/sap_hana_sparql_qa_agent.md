@@ -24,7 +24,7 @@ You need:
 * An **LLM** to power the agent's reasoning
 * A **`HanaRdfGraph`** (with connection, `graph_uri`, and ontology)
 
-Follow the steps here [HanaRdfGraph](https://docs.langchain.com/oss/python/integrations/graphs/sap_hana_rdf_graph) to know more about creating a `HanaRdfGraph` instance.
+Follow the steps here [HanaRdfGraph](../graphs/sap_hana_rdf_graph.md) to know more about creating a `HanaRdfGraph` instance.
 
 Import the `HanaSparqlQAAgent`
 

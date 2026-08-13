@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/quickstart)
 Install OpenWiki, configure a model provider, and generate your first wiki.
 
-OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or personal knowledge. Coding agents use that wiki as durable context, so they spend less time and fewer tokens rediscovering architecture, integrations, and other repository details. Humans can read the same docs, but agents are the primary audience. This guide covers installation, provider setup, and your first documentation run. For a feature overview, see [OpenWiki overview](https://docs.langchain.com/oss/openwiki/overview).
+OpenWiki is a CLI that writes and maintains a Markdown wiki for your codebase or personal knowledge. Coding agents use that wiki as durable context, so they spend less time and fewer tokens rediscovering architecture, integrations, and other repository details. Humans can read the same docs, but agents are the primary audience. This guide covers installation, provider setup, and your first documentation run. For a feature overview, see [OpenWiki overview](overview.md).
 
 ## Install and generate repository docs
 
@@ -39,7 +39,7 @@ To explore the wiki in a browser, run:
 openwiki visualize
 ```
 
-This opens a local interactive node graph with a side-by-side Markdown reader. See [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize).
+This opens a local interactive node graph with a side-by-side Markdown reader. See [Visualize your wiki](visualize.md).
 
 ### Keep docs up to date
 Refresh documentation after code changes:
@@ -48,7 +48,7 @@ Refresh documentation after code changes:
 openwiki --update
 ```
 
-For automated updates in CI, see [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates).
+For automated updates in CI, see [Automate updates](automate-updates.md).
 
 ## Personal wiki (optional)
 
@@ -58,7 +58,7 @@ To initialize a local personal brain instead of repository docs:
 openwiki personal --init
 ```
 
-Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode).
+Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](personal-mode.md).
 
 ## Interactive and one-shot runs
 
@@ -88,11 +88,11 @@ LANGCHAIN_PROJECT=openwiki
 
 ## Next steps
 
-* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode): repository wikis, OKF output, and agent instruction files
-* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode): local brain and connectors
-* [Model providers](https://docs.langchain.com/oss/openwiki/providers): supported providers and credentials
-* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates): GitHub Actions, GitLab CI, and Bitbucket Pipelines
-* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference): commands and flags
+* [Code mode](code-mode.md): repository wikis, OKF output, and agent instruction files
+* [Personal mode](personal-mode.md): local brain and connectors
+* [Model providers](providers.md): supported providers and credentials
+* [Automate updates](automate-updates.md): GitHub Actions, GitLab CI, and Bitbucket Pipelines
+* [CLI reference](cli-reference.md): commands and flags
 
 ***
 

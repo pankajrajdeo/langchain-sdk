@@ -1,6 +1,6 @@
 # Use threads
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-threads)
-This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](https://docs.langchain.com/langsmith/assistants) to enable [stateful](https://docs.langchain.com/oss/python/langgraph/persistence) execution of your [deployed graphs](https://docs.langchain.com/langsmith/deployment).
+This guide shows you how to create, view, and inspect *threads*. Threads work with [assistants](assistants.md) to enable [stateful](../langgraph/persistence.md) execution of your [deployed graphs](deployment.md).
 
 ## Understand threads
 
@@ -45,7 +45,7 @@ sequenceDiagram
 * Later runs have access to the full conversation history.
 
 > [!NOTE]
-> - **[Assistants](https://docs.langchain.com/langsmith/assistants)** define the configuration (model, prompts, tools) for how your graph executes. When creating a run, you can specify either a **graph ID** (e.g., `"agent"`) to use the default assistant, or an **assistant ID** (UUID) to use a specific configuration.
+> - **[Assistants](assistants.md)** define the configuration (model, prompts, tools) for how your graph executes. When creating a run, you can specify either a **graph ID** (e.g., `"agent"`) to use the default assistant, or an **assistant ID** (UUID) to use a specific configuration.
 > - **Threads** maintain the state and conversation history.
 > - **Runs** combine an assistant and thread to execute your graph with a specific configuration and state.
 
@@ -94,7 +94,7 @@ curl --request POST \
     --data '{}'
 ```
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.create) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.create) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/create-thread) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.create) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.create) SDK docs, or the [REST API](agent-server-api/threads/create-thread.md) reference.
 
 Output:
 
@@ -130,7 +130,7 @@ curl --request POST --url <DEPLOYMENT_URL>/threads/thread["thread_id"]/copy \
 --header 'Content-Type: application/json'
 ```
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.copy) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.copy) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/copy-thread) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.copy) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.copy) SDK docs, or the [REST API](agent-server-api/threads/copy-thread.md) reference.
 
 ### Prepopulated state
 
@@ -141,7 +141,7 @@ You can create a thread with an arbitrary pre-defined state by providing a list 
 * Set up test scenarios with specific initial states.
 * Resume conversations from a previous session.
 
-For more information on checkpoints and state management, refer to the [LangGraph persistence documentation](https://docs.langchain.com/oss/python/langgraph/persistence).
+For more information on checkpoints and state management, refer to the [LangGraph persistence documentation](../langgraph/persistence.md).
 
 ```python
 from langgraph_sdk import get_client
@@ -302,7 +302,7 @@ Output:
 #### UI
 You can also create threads directly from the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
-1. Navigate to your [deployment](https://docs.langchain.com/langsmith/deployment).
+1. Navigate to your [deployment](deployment.md).
 2. Select the **Threads** tab.
 3. Click **+ New thread**.
 4. Optionally provide metadata or initial state for the thread.
@@ -338,7 +338,7 @@ curl --request POST \
 --data '{"status": "idle", "limit": 1}'
 ```
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.search) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.search) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/search-threads) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.search) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.search) SDK docs, or the [REST API](agent-server-api/threads/search-threads.md) reference.
 
 Output:
 
@@ -368,9 +368,9 @@ Common metadata fields you can filter on include:
 | Metadata key             | Description                                                                                                      |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------- |
 | `graph_id`               | The graph (deployment) the thread belongs to.                                                                    |
-| `assistant_id`           | The [assistant](https://docs.langchain.com/langsmith/assistants) used to create runs on the thread.                                        |
-| `langgraph_auth_user_id` | The authenticated user who owns the thread (set automatically when using [custom auth](https://docs.langchain.com/langsmith/custom-auth)). |
-| `cron_id`                | The [cron job](https://docs.langchain.com/langsmith/cron-jobs) that created runs on the thread.                                            |
+| `assistant_id`           | The [assistant](assistants.md) used to create runs on the thread.                                        |
+| `langgraph_auth_user_id` | The authenticated user who owns the thread (set automatically when using [custom auth](custom-auth.md)). |
+| `cron_id`                | The [cron job](cron-jobs.md) that created runs on the thread.                                            |
 
 You can also filter on any custom metadata you attach when creating or updating threads.
 
@@ -463,7 +463,7 @@ The SDK also supports sorting threads by `thread_id`, `status`, `created_at`, an
 #### UI
 You can also view and manage threads in a deployment via the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
-1. Navigate to your [deployment](https://docs.langchain.com/langsmith/deployment).
+1. Navigate to your [deployment](deployment.md).
 2. Select the **Threads** tab.
 
 This will load a table of all threads in your deployment.
@@ -514,7 +514,7 @@ Output:
 }
 ```
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get) SDK docs, or the [REST API](agent-server-api/threads/get-thread.md) reference.
 
 ### Inspect thread state
 
@@ -603,7 +603,7 @@ Output:
 }
 ```
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_state) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_state) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-state) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_state) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_state) SDK docs, or the [REST API](agent-server-api/threads/get-thread-state.md) reference.
 
 Optionally, to view the state of a thread at a given checkpoint, pass in the checkpoint ID. This is useful for inspecting the thread state at a specific point in its execution history.
 
@@ -699,16 +699,16 @@ This method is particularly useful for:
 * Auditing conversation history and state changes.
 * Replaying or analyzing past interactions.
 
-For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_history) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_history) SDK docs, or the [REST API](https://docs.langchain.com/langsmith/agent-server-api/threads/get-thread-history) reference.
+For more information, refer to the [Python](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_history) and [JS](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_history) SDK docs, or the [REST API](agent-server-api/threads/get-thread-history.md) reference.
 
 #### UI
 You can also view and inspect threads in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-threads):
 
-1. Navigate to your [deployment](https://docs.langchain.com/langsmith/deployment).
+1. Navigate to your [deployment](deployment.md).
 2. Select the **Threads** tab to view all threads.
 3. Click on a thread to inspect its current state.
 
-To view the full thread history and perform detailed debugging, click **Open in Studio** to open the thread in [Studio](https://docs.langchain.com/langsmith/studio). Studio provides a visual interface for exploring the thread's execution history, state changes, and checkpoint details.
+To view the full thread history and perform detailed debugging, click **Open in Studio** to open the thread in [Studio](studio.md). Studio provides a visual interface for exploring the thread's execution history, state changes, and checkpoint details.
 
 ***
 

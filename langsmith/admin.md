@@ -16,21 +16,21 @@ Copy the key and save it securely.
 
 ## Explore
 
-#### [Profile configuration](https://docs.langchain.com/langsmith/profile-configuration)
+#### [Profile configuration](profile-configuration.md)
 Configure your personal account settings and preferences.
 
-#### [Integrations](https://docs.langchain.com/langsmith/get-started-integrations)
+#### [Integrations](get-started-integrations.md)
 Connect LangSmith to your existing tools and services.
 
-#### [Pricing plans](https://docs.langchain.com/langsmith/pricing-plans)
+#### [Pricing plans](pricing-plans.md)
 Compare plans and choose the right tier for your team.
 
-#### [Enterprise](https://docs.langchain.com/langsmith/enterprise)
+#### [Enterprise](enterprise.md)
 Enterprise capabilities, support, and onboarding.
 
 ## Related
 
-* [Govern](https://docs.langchain.com/langsmith/govern-overview): manage organizations, users, access control, and compliance policies for your LangSmith deployment.
+* [Govern](govern-overview.md): manage organizations, users, access control, and compliance policies for your LangSmith deployment.
 
 ***
 

@@ -17,7 +17,7 @@ uv add langchain-tableau
 
 ## Tools
 
-See [Tableau tools documentation](https://docs.langchain.com/oss/python/integrations/tools/tableau) for available tools.
+See [Tableau tools documentation](../tools/tableau.md) for available tools.
 
 ***
 

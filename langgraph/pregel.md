@@ -333,7 +333,7 @@ app.invoke({"value": "a"})
 
 ## High-level API
 
-LangGraph provides two high-level APIs for creating a Pregel application: the [StateGraph (Graph API)](https://docs.langchain.com/oss/python/langgraph/graph-api) and the [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api).
+LangGraph provides two high-level APIs for creating a Pregel application: the [StateGraph (Graph API)](graph-api.md) and the [Functional API](functional-api.md).
 
 #### StateGraph (Graph API)
 The [StateGraph (Graph API)](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) is a higher-level abstraction that simplifies the creation of Pregel applications. It allows you to define a graph of nodes and edges. When you compile the graph, the StateGraph API automatically creates the Pregel application for you.
@@ -407,7 +407,7 @@ You should see something like this
 ```
 
 #### Functional API
-In the [Functional API](https://docs.langchain.com/oss/python/langgraph/functional-api), you can use an [`@entrypoint`](https://reference.langchain.com/python/langgraph/func/entrypoint) to create a Pregel application. The `entrypoint` decorator allows you to define a function that takes input and returns output.
+In the [Functional API](functional-api.md), you can use an [`@entrypoint`](https://reference.langchain.com/python/langgraph/func/entrypoint) to create a Pregel application. The `entrypoint` decorator allows you to define a function that takes input and returns output.
 
 ```python
 from typing import TypedDict

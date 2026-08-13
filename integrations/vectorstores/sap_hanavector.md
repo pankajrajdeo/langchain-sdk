@@ -40,7 +40,7 @@ To initialize a `HanaDB` vector store, you need a database connection and an emb
 
 * ### Using external embeddings
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/sap_hanavector).
+> **Interactive content:** [View this section in the original documentation](sap_hanavector.md).
 
 ```python
 # | output: false
@@ -444,9 +444,9 @@ Filter: {'$and': [{'name': {'$contains': 'bob'}}, {'name': {'$contains': 'johnso
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ## Reranking results
 

@@ -9,7 +9,7 @@ Variables come in two categories:
 * **Non-sensitive** (region, sizing, feature flags): set in `infra/terraform.tfvars`.
 * **Sensitive** (license key, passwords, encryption keys): set with `make setup-env`, which writes them to `infra/secrets.auto.tfvars` (gitignored, auto-loaded by Terraform) and stores them in Azure Key Vault.
 
-For the end-to-end install, refer to the [deploy guide](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy). For how the modules fit together, refer to the [architecture reference](https://docs.langchain.com/langsmith/self-host-terraform-azure-architecture).
+For the end-to-end install, refer to the [deploy guide](self-host-terraform-azure-deploy.md). For how the modules fit together, refer to the [architecture reference](self-host-terraform-azure-architecture.md).
 
 ## Core
 
@@ -55,7 +55,7 @@ For the end-to-end install, refer to the [deploy guide](https://docs.langchain.c
 | ------------------- | ------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `postgres_source`   | `external`   | no       | `external` provisions Azure Database for PostgreSQL Flexible Server (private VNet). `in-cluster` uses the chart-managed Postgres pod (dev/demo only). |
 | `redis_source`      | `external`   | no       | `external` provisions Azure Managed Redis (private VNet). `in-cluster` uses the chart-managed Redis pod (dev/demo only).                              |
-| `clickhouse_source` | `in-cluster` | no       | `in-cluster` (dev/POC only) or `external` for [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse), recommended for production.    |
+| `clickhouse_source` | `in-cluster` | no       | `in-cluster` (dev/POC only) or `external` for [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md), recommended for production.    |
 
 ## PostgreSQL
 
@@ -120,7 +120,7 @@ For the end-to-end install, refer to the [deploy guide](https://docs.langchain.c
 | ------------------------------ | ----------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `langsmith_namespace`          | `langsmith` | no       | Kubernetes namespace for LangSmith. Used to scope Workload Identity for blob storage.                                                                                                                       |
 | `langsmith_release_name`       | `langsmith` | no       | Helm release name. Used for Workload Identity federated credential subjects.                                                                                                                                |
-| `langsmith_domain`             | `""`        | no       | See [DNS and TLS](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables#dns-and-tls).                                                                                                                                                                            |
+| `langsmith_domain`             | `""`        | no       | See [DNS and TLS](#dns-and-tls).                                                                                                                                                                            |
 | `langsmith_helm_chart_version` | `""`        | no       | Pin a chart version for reproducible deploys. The deploy script precedence is the `CHART_VERSION` environment variable, then this variable, then the pinned line default `~0.15.1` (latest `0.15.x` patch). |
 | `langsmith_admin_email`        | `""`        | no       | Initial org admin email (`initialOrgAdminEmail` in Helm values). Set via `make setup-env`.                                                                                                                  |
 
@@ -153,7 +153,7 @@ For the end-to-end install, refer to the [deploy guide](https://docs.langchain.c
 
 `make setup-env` writes these to `secrets.auto.tfvars` and Terraform stores them in Azure Key Vault. Never set these inline in `terraform.tfvars`.
 
-`make setup-env` also manages `postgres_admin_password` and `langsmith_admin_email`, documented in the [PostgreSQL](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables#postgresql) and [LangSmith application](https://docs.langchain.com/langsmith/self-host-terraform-azure-variables#langsmith-application) sections. This table lists only the sensitive variables that do not appear elsewhere in this reference.
+`make setup-env` also manages `postgres_admin_password` and `langsmith_admin_email`, documented in the [PostgreSQL](#postgresql) and [LangSmith application](#langsmith-application) sections. This table lists only the sensitive variables that do not appear elsewhere in this reference.
 
 | Variable                                 | Description                                                     |
 | ---------------------------------------- | --------------------------------------------------------------- |
@@ -168,7 +168,7 @@ For the end-to-end install, refer to the [deploy guide](https://docs.langchain.c
 
 ## App module variables (Terraform path)
 
-The Terraform path (`make init-app` then `make apply-app`) manages the LangSmith Helm release, its Kubernetes Secret, and the Workload Identity ServiceAccount in Terraform state instead of through the Helm shell scripts. Its variables live in `app/terraform.tfvars`. Use this path as an alternative to `make init-values && make deploy`. For when to choose this path, refer to the [Azure deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy).
+The Terraform path (`make init-app` then `make apply-app`) manages the LangSmith Helm release, its Kubernetes Secret, and the Workload Identity ServiceAccount in Terraform state instead of through the Helm shell scripts. Its variables live in `app/terraform.tfvars`. Use this path as an alternative to `make init-values && make deploy`. For when to choose this path, refer to the [Azure deployment guide](self-host-terraform-azure-deploy.md).
 
 `make init-app` auto-populates the infrastructure passthrough variables (`subscription_id`, `resource_group_name`, `cluster_name`, `keyvault_name`, `storage_account_name`, `storage_container_name`, `workload_identity_client_id`, `langsmith_namespace`, `tls_certificate_source`, `ingress_controller`, and `dns_label`) from the infra module outputs. Each defaults to `null` and fails at plan time with a precondition error naming what is missing. Override them only when running the app module against infrastructure you provisioned separately.
 

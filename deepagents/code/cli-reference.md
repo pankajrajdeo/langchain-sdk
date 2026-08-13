@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/cli-reference)
 Deep Agents Code command-line flags and management subcommands
 
-Deep Agents Code (`dcode`) accepts command-line flags at launch and exposes management subcommands for tools, agents, sessions, skills, credentials, and configuration. Use this page as a reference when you need to override defaults from the shell, run non-interactive tasks in scripts, or automate administration without opening a session. For installation and daily interactive use, see [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart). For how CLI flags fit into the broader configuration model, see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration).
+Deep Agents Code (`dcode`) accepts command-line flags at launch and exposes management subcommands for tools, agents, sessions, skills, credentials, and configuration. Use this page as a reference when you need to override defaults from the shell, run non-interactive tasks in scripts, or automate administration without opening a session. For installation and daily interactive use, see [Quickstart](quickstart.md). For how CLI flags fit into the broader configuration model, see [Configuration](configuration.md).
 
 ## Example usage
 
@@ -43,7 +43,7 @@ When Deep Agents Code starts without `--model`, it resolves the model in this or
 3. **`[models].recent`** in `~/.deepagents/config.toml` (written automatically when you switch models in a session).
 4. **Environment auto-detection**: the first available credential among `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, and `GOOGLE_CLOUD_PROJECT` (Vertex AI).
 
-Other providers (for example, Groq or Fireworks) are still available via `--model` or saved defaults even though they are not part of the startup auto-detection list. See [Model providers](https://docs.langchain.com/oss/deepagents/code/providers) for the full provider list and credential setup.
+Other providers (for example, Groq or Fireworks) are still available via `--model` or saved defaults even though they are not part of the startup auto-detection list. See [Model providers](providers.md) for the full provider list and credential setup.
 
 ### Set or clear a default model
 
@@ -60,7 +60,7 @@ dcode --default-model
 dcode --clear-default-model
 ```
 
-You can also pin a default from the interactive `/model` switcher (`Ctrl+S`) or set `[models].default` in `config.toml`. See [Set a default model](https://docs.langchain.com/oss/deepagents/code/providers#set-a-default-model).
+You can also pin a default from the interactive `/model` switcher (`Ctrl+S`) or set `[models].default` in `config.toml`. See [Set a default model](providers.md#set-a-default-model).
 
 ### Model parameters and profile overrides
 
@@ -71,14 +71,14 @@ dcode --model openai:gpt-5.5 --model-params '{"reasoning": {"effort": "high"}}'
 dcode --model anthropic:claude-opus-4-8 --model-params '{"thinking": {"type": "enabled", "budget_tokens": 10000}, "max_tokens": 16000}'
 ```
 
-Override [model profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) fields (for example, `max_input_tokens`) with `--profile-override`. Values merge on top of config file overrides and persist across mid-session `/model` hot-swaps:
+Override [model profile](../../langchain/models.md#model-profiles) fields (for example, `max_input_tokens`) with `--profile-override`. Values merge on top of config file overrides and persist across mid-session `/model` hot-swaps:
 
 ```bash
 dcode --profile-override '{"max_input_tokens": 4096}'
 dcode --model google_genai:gemini-3.6-flash --profile-override '{"max_input_tokens": 4096}'
 ```
 
-For retry counts on transient errors, use `--max-retries` or the `[retries]` section in `config.toml`. See [Model parameters](https://docs.langchain.com/oss/deepagents/code/providers#model-parameters) and [Profile overrides](https://docs.langchain.com/oss/deepagents/code/config-file#profile-overrides-advanced).
+For retry counts on transient errors, use `--max-retries` or the `[retries]` section in `config.toml`. See [Model parameters](providers.md#model-parameters) and [Profile overrides](config-file.md#profile-overrides-advanced).
 
 ### Install provider extras
 
@@ -90,7 +90,7 @@ dcode --install fireworks
 dcode --install ollama
 ```
 
-Add `--package` to install an arbitrary provider package via `uv --with` (see [Arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers)), and `--yes` to skip confirmation prompts. To preinstall extras during the initial CLI install, set `DEEPAGENTS_CODE_EXTRAS` (for example, `DEEPAGENTS_CODE_EXTRAS="groq,fireworks"`).
+Add `--package` to install an arbitrary provider package via `uv --with` (see [Arbitrary providers](config-file.md#arbitrary-providers)), and `--yes` to skip confirmation prompts. To preinstall extras during the initial CLI install, set `DEEPAGENTS_CODE_EXTRAS` (for example, `DEEPAGENTS_CODE_EXTRAS="groq,fireworks"`).
 
 ## Agents and sessions
 
@@ -107,7 +107,7 @@ dcode -r
 dcode -r abc123-thread-id
 ```
 
-List and delete sessions with `dcode threads list` and `dcode threads delete`. See [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills) for how per-agent memory works.
+List and delete sessions with `dcode threads list` and `dcode threads delete`. See [Memory and skills](memory-and-skills.md) for how per-agent memory works.
 
 ## Non-interactive mode and piping
 
@@ -154,7 +154,7 @@ dcode -n "Fix the build" -S all
 > [!WARNING]
 > `-S all` lets the agent execute arbitrary shell commands with no human confirmation.
 
-For more examples and tracing setup, see [Non-interactive mode and piping](https://docs.langchain.com/oss/deepagents/code/quickstart#non-interactive-mode-and-piping).
+For more examples and tracing setup, see [Non-interactive mode and piping](quickstart.md#non-interactive-mode-and-piping).
 
 ## Skills at launch
 
@@ -167,7 +167,7 @@ cat diff.txt | dcode --skill code-review -n 'review this patch'
 dcode --skill code-review -n 'review this patch' -q
 ```
 
-`--skill` with `--quiet` or `--no-stream` requires `-n`. Manage skills with `dcode skills list`, `create`, `info`, and `delete`. See [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills).
+`--skill` with `--quiet` or `--no-stream` requires `-n`. Manage skills with `dcode skills list`, `create`, `info`, and `delete`. See [Memory and skills](memory-and-skills.md).
 
 ## Rubrics in scripts
 
@@ -187,11 +187,11 @@ dcode -n "implement OAuth refresh handling" \
   --rubric-max-iterations 3
 ```
 
-All rubric flags require `-n` or piped stdin. See [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics).
+All rubric flags require `-n` or piped stdin. See [Goals and rubrics](goals-and-rubrics.md).
 
 ## Human-in-the-loop and shell access
 
-Potentially destructive tool calls require approval by default. There are three [approval modes](https://docs.langchain.com/oss/deepagents/code/approval-modes) to choose from: the default Manual mode requires confirmation at all checkpoints, Auto mode (`-y`/`--auto-approve`) uses an LLM classifier, and YOLO (`--yolo`) runs gated actions without review. Toggle between Manual and Auto during an interactive session with `Shift+Tab`:
+Potentially destructive tool calls require approval by default. There are three [approval modes](approval-modes.md) to choose from: the default Manual mode requires confirmation at all checkpoints, Auto mode (`-y`/`--auto-approve`) uses an LLM classifier, and YOLO (`--yolo`) runs gated actions without review. Toggle between Manual and Auto during an interactive session with `Shift+Tab`:
 
 ```bash
 dcode -y
@@ -267,7 +267,7 @@ dcode --sandbox
 > [!NOTE]
 > Because `--sandbox` accepts an optional value, keep the bare form **last** on the command line. Otherwise a following argument (for example, `dcode --sandbox agents`) is consumed as the flag's value.
 
-Install sandbox extras with `dcode --install` (for example, `dcode --install daytona` or `dcode --install all-sandboxes`). See [Remote sandboxes](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes) for provider setup, working directories, and third-party providers.
+Install sandbox extras with `dcode --install` (for example, `dcode --install daytona` or `dcode --install all-sandboxes`). See [Remote sandboxes](remote-sandboxes.md) for provider setup, working directories, and third-party providers.
 
 ## MCP flags
 
@@ -286,7 +286,7 @@ dcode --trust-project-mcp
 dcode -n "run tests" --trust-project-mcp
 ```
 
-Run OAuth login for MCP servers marked `auth: "oauth"` with `dcode mcp login <server>`. See [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools).
+Run OAuth login for MCP servers marked `auth: "oauth"` with `dcode mcp login <server>`. See [MCP tools](mcp-tools.md).
 
 ## Command-line options
 
@@ -296,8 +296,8 @@ Run OAuth login for MCP servers marked `auth: "oauth"` with `dcode mcp login <se
 | `-M`, `--model MODEL`           | Use a specific model (`provider:model`)                                                                                                                                                                                                                                                                                                                                                        |
 | `--model-params JSON`           | Extra kwargs to pass to the model as a JSON string (e.g., `'{"temperature": 0.7}'`)                                                                                                                                                                                                                                                                                                            |
 | `--max-retries N`               | Override the max retries for transient model errors                                                                                                                                                                                                                                                                                                                                            |
-| `--default-model [MODEL]`       | Set the [default model](https://docs.langchain.com/oss/deepagents/code/providers#set-a-default-model) (omit `MODEL` to view the current default)                                                                                                                                                                                                                                                                         |
-| `--clear-default-model`         | Clear the [default model](https://docs.langchain.com/oss/deepagents/code/providers#set-a-default-model)                                                                                                                                                                                                                                                                                                                  |
+| `--default-model [MODEL]`       | Set the [default model](providers.md#set-a-default-model) (omit `MODEL` to view the current default)                                                                                                                                                                                                                                                                         |
+| `--clear-default-model`         | Clear the [default model](providers.md#set-a-default-model)                                                                                                                                                                                                                                                                                                                  |
 | `-r`, `--resume [ID]`           | Resume a session: `-r` for most recent, `-r ` for a specific thread                                                                                                                                                                                                                                                                                                                        |
 | `-m`, `--message TEXT`          | Initial prompt to auto-submit when the session starts (interactive mode)                                                                                                                                                                                                                                                                                                                       |
 | `--skill NAME`                  | Invoke a skill at startup                                                                                                                                                                                                                                                                                                                                                                      |
@@ -307,16 +307,16 @@ Run OAuth login for MCP servers marked `auth: "oauth"` with `dcode mcp login <se
 | `--rubric-max-iterations N`     | Grader iterations per rubric attempt before stopping. Requires `-n` or piped stdin                                                                                                                                                                                                                                                                                                             |
 | `-n`, `--non-interactive TEXT`  | Run a single task non-interactively and exit. Shell is disabled unless `--shell-allow-list` is set                                                                                                                                                                                                                                                                                             |
 | `--recursion-limit N`           | LangGraph graph step budget (max node invocations per turn). Valid range: `25`–`100000`. Out-of-range or non-integer values log a warning and fall back to the default (`2000`). Overrides `DEEPAGENTS_CODE_RECURSION_LIMIT` and `[runtime].recursion_limit` in `config.toml`                                                                                                                  |
-| `--max-turns N`                 | Cap agentic turns in non-interactive mode. Exits with code 124 when exceeded. Requires `-n` or piped stdin. See [Non-interactive mode and piping](https://docs.langchain.com/oss/deepagents/code/cli-reference#non-interactive-mode-and-piping)                                                                                                                                                                                                            |
-| `--timeout SECONDS`             | Hard wall-clock timeout for non-interactive mode. Exits with code 124 when exceeded. Requires `-n` or piped stdin. See [Non-interactive mode and piping](https://docs.langchain.com/oss/deepagents/code/cli-reference#non-interactive-mode-and-piping)                                                                                                                                                                                                     |
+| `--max-turns N`                 | Cap agentic turns in non-interactive mode. Exits with code 124 when exceeded. Requires `-n` or piped stdin. See [Non-interactive mode and piping](#non-interactive-mode-and-piping)                                                                                                                                                                                                            |
+| `--timeout SECONDS`             | Hard wall-clock timeout for non-interactive mode. Exits with code 124 when exceeded. Requires `-n` or piped stdin. See [Non-interactive mode and piping](#non-interactive-mode-and-piping)                                                                                                                                                                                                     |
 | `-q`, `--quiet`                 | Clean output for piping—only the agent's response goes to stdout. Requires `-n` or piped stdin                                                                                                                                                                                                                                                                                                 |
 | `--no-stream`                   | Buffer the full response and write to stdout at once instead of streaming. Requires `-n` or piped stdin                                                                                                                                                                                                                                                                                        |
 | `--stdin`                       | Read input from stdin explicitly instead of auto-detection. Errors clearly when stdin is unavailable or is a TTY                                                                                                                                                                                                                                                                               |
-| `-y`, `--auto-approve`          | Enable classifier-backed [Auto](https://docs.langchain.com/oss/deepagents/code/approval-modes) mode. Requires an interactive local session; toggle with `Shift+Tab` during an interactive session                                                                                                                                                                                                                        |
-| `--auto-classifier-model MODEL` | Model used by the [Auto classifier](https://docs.langchain.com/oss/deepagents/code/approval-modes#select-a-classifier-model) to review gated tool calls (`provider:model` format). Overrides `DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` and `[models].auto_classifier` in `config.toml`. Interactive TUI sessions only                                                                                                      |
+| `-y`, `--auto-approve`          | Enable classifier-backed [Auto](approval-modes.md) mode. Requires an interactive local session; toggle with `Shift+Tab` during an interactive session                                                                                                                                                                                                                        |
+| `--auto-classifier-model MODEL` | Model used by the [Auto classifier](approval-modes.md#select-a-classifier-model) to review gated tool calls (`provider:model` format). Overrides `DEEPAGENTS_CODE_AUTO_CLASSIFIER_MODEL` and `[models].auto_classifier` in `config.toml`. Interactive TUI sessions only                                                                                                      |
 | `--yolo`                        | Run gated actions without review after the one-time local risk acknowledgement. Interactive mode only                                                                                                                                                                                                                                                                                          |
 | `-S`, `--shell-allow-list LIST` | Comma-separated shell commands to auto-approve, `'recommended'` for safe defaults, or `'all'` to allow any command. Applies to both `-n` and interactive modes                                                                                                                                                                                                                                 |
-| `--allow-fs-tools LIST`         | Filesystem tools to expose. Defaults to `all`. See [Restrict filesystem tools](https://docs.langchain.com/oss/deepagents/code/cli-reference#restrict-filesystem-tools)                                                                                                                                                                                                                                                                                     |
+| `--allow-fs-tools LIST`         | Filesystem tools to expose. Defaults to `all`. See [Restrict filesystem tools](#restrict-filesystem-tools)                                                                                                                                                                                                                                                                                     |
 | `--json`                        | Emit machine-readable JSON from supported management subcommands, including `tools`, `agents`, `threads`, `skills`, and `update`. Output envelope: `{"schema_version": 1, "command": "...", "data": ...}`                                                                                                                                                                                      |
 | `--sandbox TYPE`                | Remote sandbox for code execution: `none` (default), `langsmith`, `agentcore`, `daytona`, `modal`, `runloop`, `vercel`, and third-party providers. LangSmith is included; other built-ins require extras. Pass `--sandbox` with no value to use `[sandboxes].default` from config                                                                                                              |
 | `--sandbox-id ID`               | Reuse an existing sandbox (skips creation and cleanup)                                                                                                                                                                                                                                                                                                                                         |
@@ -331,7 +331,7 @@ Run OAuth login for MCP servers marked `auth: "oauth"` with `dcode mcp login <se
 | `--acp`                         | Run as an ACP server over stdio instead of launching the interactive UI                                                                                                                                                                                                                                                                                                                        |
 | `--update`                      | Check for and install updates, then exit                                                                                                                                                                                                                                                                                                                                                       |
 | `--auto-update`                 | Toggle automatic updates on or off, then exit                                                                                                                                                                                                                                                                                                                                                  |
-| `--install NAME`                | Install an optional extra (e.g., `quickjs`, `daytona`, `fireworks`), then exit. Add `--package` to treat `NAME` as a custom provider package installed via `uv --with` rather than an extra (see [arbitrary providers](https://docs.langchain.com/oss/deepagents/code/config-file#arbitrary-providers)), and `--yes` to skip confirmation prompts                                                                        |
+| `--install NAME`                | Install an optional extra (e.g., `quickjs`, `daytona`, `fireworks`), then exit. Add `--package` to treat `NAME` as a custom provider package installed via `uv --with` rather than an extra (see [arbitrary providers](config-file.md#arbitrary-providers)), and `--yes` to skip confirmation prompts                                                                        |
 | `-v`, `--version`               | Display version                                                                                                                                                                                                                                                                                                                                                                                |
 | `-h`, `--help`                  | Show help                                                                                                                                                                                                                                                                                                                                                                                      |
 
@@ -353,7 +353,7 @@ dcode auth remove anthropic
 dcode auth path
 ```
 
-`set` refuses to run in an interactive terminal unless you pipe the key via stdin or use `--from-env`. `dcode auth set` manages API keys only; the `openai_codex` provider uses ChatGPT browser sign-in via `/auth` instead. See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials#manage-credentials-from-the-shell-dcode-auth).
+`set` refuses to run in an interactive terminal unless you pipe the key via stdin or use `--from-env`. `dcode auth set` manages API keys only; the `openai_codex` provider uses ChatGPT browser sign-in via `/auth` instead. See [Provider credentials](credentials.md#manage-credentials-from-the-shell-dcode-auth).
 
 ## Inspect configuration (`dcode config`)
 
@@ -366,13 +366,13 @@ dcode config list
 dcode config path
 ```
 
-Provider credentials are reported as configured or not configured only; values are not printed. All four commands accept `--json`. See [Inspect configuration](https://docs.langchain.com/oss/deepagents/code/configuration#inspect-configuration).
+Provider credentials are reported as configured or not configured only; values are not printed. All four commands accept `--json`. See [Inspect configuration](configuration.md#inspect-configuration).
 
 ## Run diagnostics (`dcode doctor`)
 
 Use `dcode doctor` when Deep Agents Code is not starting correctly, a provider or MCP server does not connect, tracing is misconfigured, or an install or update looks wrong. It summarizes install method, dependency versions, update status, tracing configuration, and data directory health without launching a session.
 
-Pair `dcode doctor` with `dcode config show` when you need both a high-level health check and the exact source of a specific setting. See [Run diagnostics with `dcode doctor`](https://docs.langchain.com/oss/deepagents/code/configuration#run-diagnostics-with-dcode-doctor).
+Pair `dcode doctor` with `dcode config show` when you need both a high-level health check and the exact source of a specific setting. See [Run diagnostics with `dcode doctor`](configuration.md#run-diagnostics-with-dcode-doctor).
 
 ## CLI commands
 
@@ -391,9 +391,9 @@ Pair `dcode doctor` with `dcode config show` when you need both a high-level hea
 | `dcode skills delete NAME [--project] [-f]`       | Delete a skill and its contents. Supports `--dry-run`                                                                                                                                                                                                                                                                                                                                     |
 | `dcode threads list [--agent NAME] [--limit N]`   | List sessions (alias: `ls`). Default limit: 20. `-n` is a short flag for `--limit`. Additional flags: `--sort {created,updated}`, `--branch TEXT` (filter by git branch), `--cwd [PATH]` (filter by working directory; bare flag uses current directory), `-v`/`--verbose` (show all columns including branch, created time, and initial prompt), `-r`/`--relative` (relative timestamps) |
 | `dcode threads delete ID`                         | Delete a session. Supports `--dry-run`                                                                                                                                                                                                                                                                                                                                                    |
-| `dcode mcp login NAME [--mcp-config PATH]`        | Run the OAuth login flow for an MCP server marked `auth: "oauth"`. See [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools#oauth-login)                                                                                                                                                                                                                                                            |
+| `dcode mcp login NAME [--mcp-config PATH]`        | Run the OAuth login flow for an MCP server marked `auth: "oauth"`. See [MCP tools](mcp-tools.md#oauth-login)                                                                                                                                                                                                                                                            |
 | `dcode mcp config`                                | Show MCP config discovery paths                                                                                                                                                                                                                                                                                                                                                           |
-| `dcode config show`                               | Show every config option's effective value and the source it resolves from. See [Inspect configuration](https://docs.langchain.com/oss/deepagents/code/cli-reference#inspect-configuration-dcode-config)                                                                                                                                                                                                                                              |
+| `dcode config show`                               | Show every config option's effective value and the source it resolves from. See [Inspect configuration](#inspect-configuration-dcode-config)                                                                                                                                                                                                                                              |
 | `dcode config list`                               | List all available config options with their type, default, and where each can be set (alias: `ls`)                                                                                                                                                                                                                                                                                       |
 | `dcode config get KEY`                            | Show the effective value and source for one option (e.g. `interpreter.memory_limit_mb`)                                                                                                                                                                                                                                                                                                   |
 | `dcode config path`                               | Show config file locations and whether each exists                                                                                                                                                                                                                                                                                                                                        |
@@ -403,16 +403,16 @@ Pair `dcode doctor` with `dcode config show` when you need both a high-level hea
 | `dcode auth remove <provider>`                    | Remove a stored provider credential                                                                                                                                                                                                                                                                                                                                                       |
 | `dcode auth path`                                 | Show the credential store path                                                                                                                                                                                                                                                                                                                                                            |
 
-All management subcommands support `--json` for machine-readable output. See [command-line options](https://docs.langchain.com/oss/deepagents/code/cli-reference#command-line-options) for more information.
+All management subcommands support `--json` for machine-readable output. See [command-line options](#command-line-options) for more information.
 
 Destructive commands (`agents reset`, `skills delete`, `threads delete`) support `--dry-run` to preview what would happen without making changes. In JSON mode, `--dry-run` returns the same envelope with a `dry_run: true` field.
 
 ## See also
 
-* [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart)
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Config file](https://docs.langchain.com/oss/deepagents/code/config-file)
-* [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials)
+* [Quickstart](quickstart.md)
+* [Configuration](configuration.md)
+* [Config file](config-file.md)
+* [Provider credentials](credentials.md)
 
 ***
 

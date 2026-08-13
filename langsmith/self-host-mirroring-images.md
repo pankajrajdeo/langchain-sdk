@@ -48,7 +48,7 @@ You will need to repeat this for each image that you want to mirror.
 
 ## Configuration
 
-Once the images are mirrored, you will need to configure your LangSmith installation to use the mirrored images. You can do this by modifying the `values.yaml` file for your LangSmith Helm Chart installation. Replace tag with the [LangSmith version](https://docs.langchain.com/langsmith/self-hosted-changelog) you want to deploy. The following example uses `0.16.21`.
+Once the images are mirrored, you will need to configure your LangSmith installation to use the mirrored images. You can do this by modifying the `values.yaml` file for your LangSmith Helm Chart installation. Replace tag with the [LangSmith version](self-hosted-changelog.md) you want to deploy. The following example uses `0.16.21`.
 
 ```yaml
 images:
@@ -86,7 +86,7 @@ images:
 
 ## Additional images for Sandboxes
 
-If you enable [Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes), also mirror the sandbox runtime image. The sandbox runtime image is published for `linux/amd64`.
+If you enable [Sandboxes](deploy-self-hosted-full-platform.md#enable-sandboxes), also mirror the sandbox runtime image. The sandbox runtime image is published for `linux/amd64`.
 
 ```bash
 bash mirror_langsmith_images.sh --registry myregistry --platform linux/amd64 --version 0.16.0 --include-sandboxes
@@ -129,7 +129,7 @@ The chart does not set `images.juicefsMountImage` by default. When it is unset, 
 
 ## Additional images for Engine
 
-[Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine) runs on `langsmith-insights-engine`, which the mirroring script includes by default, and requires Sandboxes, so mirror with `--include-sandboxes` and configure the sandbox runtime image as described in [Additional images for Sandboxes](https://docs.langchain.com/langsmith/self-host-mirroring-images#additional-images-for-sandboxes).
+[Engine](deploy-self-hosted-full-platform.md#enable-engine) runs on `langsmith-insights-engine`, which the mirroring script includes by default, and requires Sandboxes, so mirror with `--include-sandboxes` and configure the sandbox runtime image as described in [Additional images for Sandboxes](#additional-images-for-sandboxes).
 
 Then, point the Engine and Insights image at your mirror:
 
@@ -144,7 +144,7 @@ images:
 > [!NOTE]
 > The repository name must still end in `langsmith-insights-engine`; the chart validates it to catch installs left pointing at the retired `langsmith-clio` image, which serves only Insights.
 
-Engine also depends on LangSmith Intelligence, which is a network dependency rather than an image, so mirroring does not remove it. See [LangSmith Intelligence for Engine](https://docs.langchain.com/langsmith/self-host-egress#langsmith-intelligence-for-engine).
+Engine also depends on LangSmith Intelligence, which is a network dependency rather than an image, so mirroring does not remove it. See [LangSmith Intelligence for Engine](self-host-egress.md#langsmith-intelligence-for-engine).
 
 ## Additional images for Fleet and Insights
 
@@ -242,7 +242,7 @@ operator:
 
 Replace `(your-registry)` with your registry URL. The template variables (`${service_name}`, `${namespace}`, `${max_connections}`, `${storage_gi}`) are replaced by the operator at runtime and must be kept as-is.
 
-Once configured, you will need to update your LangSmith installation. You can follow our upgrade guide here: [Upgrading LangSmith](https://docs.langchain.com/langsmith/self-host-upgrades). If your upgrade is successful, your LangSmith instance should now be using the mirrored images from your Docker registry.
+Once configured, you will need to update your LangSmith installation. You can follow our upgrade guide here: [Upgrading LangSmith](self-host-upgrades.md). If your upgrade is successful, your LangSmith instance should now be using the mirrored images from your Docker registry.
 
 ## Verifying image signatures
 

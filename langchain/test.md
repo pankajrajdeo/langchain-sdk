@@ -13,15 +13,15 @@ There are a few approaches to testing your agents:
 Agentic applications tend to lean more on integration because they chain multiple components together and must deal with flakiness due to the nondeterministic nature of LLMs.
 
 > [!TIP]
-> Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](https://docs.langchain.com/langsmith/evaluate-llm-application) to get started.
+> Run evaluations at scale, track results over time, and compare experiments with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-test-index). See [Evaluate an LLM application](../langsmith/evaluate-llm-application.md) to get started.
 
-#### [Unit testing](https://docs.langchain.com/oss/python/langchain/test/unit-testing)
+#### [Unit testing](test/unit-testing.md)
 Mock chat models and use in-memory persistence to test agent logic without API calls.
 
-#### [Integration testing](https://docs.langchain.com/oss/python/langchain/test/integration-testing)
+#### [Integration testing](test/integration-testing.md)
 Test your agent with real LLM APIs. Organize tests, manage keys, handle flakiness, and control costs.
 
-#### [Evals](https://docs.langchain.com/oss/python/langchain/test/evals)
+#### [Evals](test/evals.md)
 Evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators.
 
 ***

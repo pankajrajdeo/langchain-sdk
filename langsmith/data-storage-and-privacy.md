@@ -4,7 +4,7 @@ This document describes how data is processed in the LangGraph CLI and the Agent
 
 ## CLI
 
-LangGraph **CLI** is the command-line interface for building and running LangGraph applications; see the [CLI guide](https://docs.langchain.com/langsmith/cli) to learn more.
+LangGraph **CLI** is the command-line interface for building and running LangGraph applications; see the [CLI guide](cli.md) to learn more.
 
 By default, calls to most CLI commands log a single analytics event upon invocation. This helps us better prioritize improvements to the CLI experience. Each telemetry event contains the calling process's OS, OS version, Python version, the CLI version, the command name (`dev`, `up`, `run`, etc.), and booleans representing whether a flag was passed to the command. For more information, see the [full analytics logic](https://github.com/langchain-ai/langgraph/blob/main/libs/cli/langgraph-cli/analytics.py).
 
@@ -12,30 +12,30 @@ You can disable all CLI telemetry by setting `LANGGRAPH_CLI_NO_ANALYTICS=1`.
 
 ## Agent Server
 
-The [Agent Server](https://docs.langchain.com/langsmith/agent-server) provides a durable execution runtime that relies on persisting checkpoints of your application state, long-term memories, thread metadata, assistants, and similar resources to the local file system or a database. Unless you have deliberately customized the storage location, this information is either written to local disk (for `langgraph dev`) or a PostgreSQL database (for `langgraph up` and in all deployments).
+The [Agent Server](agent-server.md) provides a durable execution runtime that relies on persisting checkpoints of your application state, long-term memories, thread metadata, assistants, and similar resources to the local file system or a database. Unless you have deliberately customized the storage location, this information is either written to local disk (for `langgraph dev`) or a PostgreSQL database (for `langgraph up` and in all deployments).
 
 ### LangSmith tracing
 
 When running the Agent server (either in-memory or in Docker), LangSmith tracing may be enabled to facilitate faster debugging and offer observability of graph state and LLM prompts in production. You can always disable tracing by setting `LANGSMITH_TRACING=false` in your server's runtime environment.
 
 > [!NOTE]
-> For more granular control, you can use [conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing) to selectively enable or disable tracing based on runtime conditions, such as client requirements or data sensitivity.
+> For more granular control, you can use [conditional tracing](conditional-tracing.md) to selectively enable or disable tracing based on runtime conditions, such as client requirements or data sensitivity.
 
 ### In-memory development server
 
-`langgraph dev` runs an [in-memory development server](https://docs.langchain.com/langsmith/local-dev-testing) as a single Python process, designed for quick development and testing. It saves all checkpointing and memory data to disk within a `.langgraph_api` directory in the current working directory. Apart from the telemetry data described in the [CLI](https://docs.langchain.com/langsmith/data-storage-and-privacy#cli) section, no data leaves the machine unless you have enabled tracing or your graph code explicitly contacts an external service.
+`langgraph dev` runs an [in-memory development server](local-dev-testing.md) as a single Python process, designed for quick development and testing. It saves all checkpointing and memory data to disk within a `.langgraph_api` directory in the current working directory. Apart from the telemetry data described in the [CLI](#cli) section, no data leaves the machine unless you have enabled tracing or your graph code explicitly contacts an external service.
 
 ### Standalone Server
 
-`langgraph up` builds your local package into a Docker image and runs the server as the [data plane](https://docs.langchain.com/langsmith/self-hosted) consisting of three containers: the API server, a PostgreSQL container, and a Redis container. All persistent data (checkpoints, assistants, etc.) are stored in the PostgreSQL database. Redis is used as a pubsub connection for real-time streaming of events. You can encrypt all checkpoints before saving to the database by setting a valid `LANGGRAPH_AES_KEY` environment variable. You can also specify [TTLs](https://docs.langchain.com/langsmith/configure-ttl) for checkpoints and cross-thread memories in `langgraph.json` to control how long data is stored. All persisted threads, memories, and other data can be deleted via the relevant API endpoints.
+`langgraph up` builds your local package into a Docker image and runs the server as the [data plane](self-hosted.md) consisting of three containers: the API server, a PostgreSQL container, and a Redis container. All persistent data (checkpoints, assistants, etc.) are stored in the PostgreSQL database. Redis is used as a pubsub connection for real-time streaming of events. You can encrypt all checkpoints before saving to the database by setting a valid `LANGGRAPH_AES_KEY` environment variable. You can also specify [TTLs](configure-ttl.md) for checkpoints and cross-thread memories in `langgraph.json` to control how long data is stored. All persisted threads, memories, and other data can be deleted via the relevant API endpoints.
 
 Additional API calls are made to confirm that the server has a valid license and to track the number of executed runs and tasks. Periodically, the API server validates the provided license key (or API key).
 
-If you've disabled [tracing](https://docs.langchain.com/langsmith/data-storage-and-privacy#langsmith-tracing), no user data is persisted externally unless your graph code explicitly contacts an external service.
+If you've disabled [tracing](#langsmith-tracing), no user data is persisted externally unless your graph code explicitly contacts an external service.
 
 ## Studio
 
-[Studio](https://docs.langchain.com/langsmith/studio) is a graphical interface for interacting with your Agent Server. It does not persist any private data (the data you send to your server is not sent to LangSmith). Though the Studio interface is served at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-storage-and-privacy), it is run in your browser and connects directly to your local Agent Server so that no data needs to be sent to LangSmith.
+[Studio](studio.md) is a graphical interface for interacting with your Agent Server. It does not persist any private data (the data you send to your server is not sent to LangSmith). Though the Studio interface is served at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-storage-and-privacy), it is run in your browser and connects directly to your local Agent Server so that no data needs to be sent to LangSmith.
 
 If you are logged in, LangSmith does collect some usage analytics to help improve the debugging user experience. This includes:
 

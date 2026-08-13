@@ -1,8 +1,8 @@
 # LangSmith Observability
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/observability)
-As you build and run agents with LangChain, you need visibility into how they behave: which [tools](https://docs.langchain.com/oss/python/langchain/tools) they call, what prompts they generate, and how they make decisions. LangChain agents built with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) automatically support tracing through [LangSmith](https://docs.langchain.com/langsmith/observability), a platform for capturing, debugging, evaluating, and monitoring LLM application behavior.
+As you build and run agents with LangChain, you need visibility into how they behave: which [tools](tools.md) they call, what prompts they generate, and how they make decisions. LangChain agents built with [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) automatically support tracing through [LangSmith](../langsmith/observability.md), a platform for capturing, debugging, evaluating, and monitoring LLM application behavior.
 
-[*Traces*](https://docs.langchain.com/langsmith/observability-concepts#traces) record every step of your agent's execution, from the initial user input to the final response, including all tool calls, model interactions, and decision points. This execution data helps you debug issues, evaluate performance across different inputs, and monitor usage patterns in production.
+[*Traces*](../langsmith/observability-concepts.md#traces) record every step of your agent's execution, from the initial user input to the final response, including all tool calls, model interactions, and decision points. This execution data helps you debug issues, evaluate performance across different inputs, and monitor usage patterns in production.
 
 This guide shows you how to enable tracing for your LangChain agents and use LangSmith to analyze their execution.
 
@@ -11,7 +11,7 @@ This guide shows you how to enable tracing for your LangChain agents and use Lan
 Before you begin, ensure you have the following:
 
 * **A LangSmith account**: Sign up (for free) or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-observability).
-* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](../langsmith/create-account-api-key.md) guide.
 
 ## Enable tracing
 
@@ -51,7 +51,7 @@ response = agent.invoke({
 })
 ```
 
-By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](https://docs.langchain.com/langsmith/log-traces-to-project).
+By default, the trace will be logged to the project with the name `default`. To configure a custom project name, see [Log to a project](../langsmith/log-traces-to-project.md).
 
 ## Trace selectively
 
@@ -131,7 +131,7 @@ with ls.tracing_context(
 This custom metadata and tags will be attached to the trace in LangSmith.
 
 > [!TIP]
-> To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](https://docs.langchain.com/langsmith/observability).
+> To learn more about how to use traces to debug, evaluate, and monitor your agents, see the [LangSmith documentation](../langsmith/observability.md).
 
 ***
 

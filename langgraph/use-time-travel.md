@@ -4,21 +4,21 @@ Replay past executions and fork to explore alternative paths in LangGraph
 
 ## Overview
 
-LangGraph supports time travel through [checkpoints](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints):
+LangGraph supports time travel through [checkpoints](checkpointers.md#checkpoints):
 
-* **[Replay](https://docs.langchain.com/oss/python/langgraph/use-time-travel#replay)**: Retry from a prior checkpoint.
-* **[Fork](https://docs.langchain.com/oss/python/langgraph/use-time-travel#fork)**: Branch from a prior checkpoint with modified state to explore an alternative path.
+* **[Replay](#replay)**: Retry from a prior checkpoint.
+* **[Fork](#fork)**: Branch from a prior checkpoint with modified state to explore an alternative path.
 
-Both work by resuming from a prior checkpoint. Nodes before the checkpoint are not re-executed (results are already saved). Nodes after the checkpoint re-execute, including any LLM calls, API requests, and [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) (which may produce different results).
+Both work by resuming from a prior checkpoint. Nodes before the checkpoint are not re-executed (results are already saved). Nodes after the checkpoint re-execute, including any LLM calls, API requests, and [interrupts](interrupts.md) (which may produce different results).
 
 ## Replay
 
 Invoke the graph with a prior checkpoint's config to replay from that point.
 
 > [!WARNING]
-> Replay re-executes nodes—it doesn't just read from cache. LLM calls, API requests, and [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) fire again and may return different results. Replaying from the final checkpoint (no `next` nodes) is a no-op.
+> Replay re-executes nodes—it doesn't just read from cache. LLM calls, API requests, and [interrupts](interrupts.md) fire again and may return different results. Replaying from the final checkpoint (no `next` nodes) is a no-op.
 
-> **Image:** [Replay](https://docs.langchain.com/oss/python/langgraph/use-time-travel)
+> **Image:** [Replay](use-time-travel.md)
 
 Use [`get_state_history`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.get_state_history) to find the checkpoint you want to replay from, then call [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with that checkpoint's config:
 
@@ -69,7 +69,7 @@ replay_result = graph.invoke(None, before_joke.config)
 
 Fork creates a new branch from a past checkpoint with modified state. Call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state) on a prior checkpoint to create the fork, then [`invoke`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.invoke) with `None` to continue execution.
 
-> **Image:** [Fork](https://docs.langchain.com/oss/python/langgraph/use-time-travel)
+> **Image:** [Fork](use-time-travel.md)
 
 > [!WARNING]
 > `update_state` does **not** roll back a thread. It creates a new checkpoint that branches from the specified point. The original execution history remains intact.
@@ -92,14 +92,14 @@ print(fork_result["joke"])  # A joke about chickens, not socks
 
 ### From a specific node
 
-When you call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state), values are applied using the specified node's writers (including [reducers](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers)). The checkpoint records that node as having produced the update, and execution resumes from that node's successors.
+When you call [`update_state`](https://reference.langchain.com/python/langgraph/graphs/#langgraph.graph.state.CompiledStateGraph.update_state), values are applied using the specified node's writers (including [reducers](graph-api.md#reducers)). The checkpoint records that node as having produced the update, and execution resumes from that node's successors.
 
 By default, LangGraph infers `as_node` from the checkpoint's version history. When forking from a specific checkpoint, this inference is almost always correct.
 
 Specify `as_node` explicitly when:
 
 * **Parallel branches**: Multiple nodes updated state in the same step, and LangGraph can't determine which was last (`InvalidUpdateError`).
-* **No execution history**: Setting up state on a fresh thread (common in [testing](https://docs.langchain.com/oss/python/langgraph/test)).
+* **No execution history**: Setting up state on a fresh thread (common in [testing](test.md)).
 * **Skipping nodes**: Set `as_node` to a later node to make the graph think that node already ran.
 
 ```python
@@ -116,7 +116,7 @@ fork_config = graph.update_state(
 
 ## Interrupts
 
-If your graph uses [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) for [human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts) workflows, interrupts are always re-triggered during time travel. The node containing the interrupt re-executes, and `interrupt()` pauses for a new `Command(resume=...)`.
+If your graph uses [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) for [human-in-the-loop](interrupts.md) workflows, interrupts are always re-triggered during time travel. The node containing the interrupt re-executes, and `interrupt()` pauses for a new `Command(resume=...)`.
 
 ```python
 from langgraph.types import interrupt, Command
@@ -192,7 +192,7 @@ result = graph.invoke(None, fork_config)
 
 ## Subgraphs
 
-Time travel with [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs) depends on whether the subgraph has its own checkpointer. This determines the granularity of checkpoints you can time travel from.
+Time travel with [subgraphs](use-subgraphs.md) depends on whether the subgraph has its own checkpointer. This determines the granularity of checkpoints you can time travel from.
 
 #### Inherited checkpointer (default)
 By default, a subgraph inherits the parent's checkpointer. The parent treats the entire subgraph as a **single super-step** — there is only one parent-level checkpoint for the whole subgraph execution. Time traveling from before the subgraph re-executes it from scratch.
@@ -275,7 +275,7 @@ result = graph.invoke(None, fork_config)
 # step_b re-executes, step_a's result is preserved
 ```
 
-See [subgraph persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence) for more on configuring subgraph checkpointers.
+See [subgraph persistence](use-subgraphs.md#subgraph-persistence) for more on configuring subgraph checkpointers.
 
 ***
 

@@ -10,9 +10,9 @@ The following environment variables allow you to configure tracing enabled, the 
 If you need to trace runs with a custom configuration, are working in an environment that doesn’t support typical environment variables (such as Cloudflare Workers), or prefer not to rely on environment variables, LangSmith allows you to configure tracing programmatically.
 
 > [!WARNING]
-> In version **0.1.95** of the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk), `with trace` honors the `LANGSMITH_TRACING` environment variable. For details, refer to the [release notes](https://github.com/langchain-ai/langsmith-sdk/releases/tag/v0.1.95). To disable or enable tracing without setting environment variables, use the `with tracing_context` context manager, as shown in the following example.
+> In version **0.1.95** of the [Python SDK](smith-python-sdk.md), `with trace` honors the `LANGSMITH_TRACING` environment variable. For details, refer to the [release notes](https://github.com/langchain-ai/langsmith-sdk/releases/tag/v0.1.95). To disable or enable tracing without setting environment variables, use the `with tracing_context` context manager, as shown in the following example.
 
-* Python: The recommended way to do this in Python is to use the [`tracing_context`](https://docs.langchain.com/langsmith/annotate-code#use-the-trace-context-manager-python-only) context manager. This works for both code annotated with `traceable` and code within the `trace` context manager.
+* Python: The recommended way to do this in Python is to use the [`tracing_context`](annotate-code.md#use-the-trace-context-manager-python-only) context manager. This works for both code annotated with `traceable` and code within the `trace` context manager.
 * TypeScript: You can pass in both the client and the `tracingEnabled` flag to the [`traceable`](https://reference.langchain.com/javascript/langsmith/traceable) decorator.
 
 ```python
@@ -91,7 +91,7 @@ If you prefer a video tutorial, check out the [Alternative Ways to Trace video](
 
 ## Related
 
-If you need to dynamically enable or disable tracing based on runtime conditions (such as client requirements, data sensitivity, or compliance policies), refer to [Conditional tracing](https://docs.langchain.com/langsmith/conditional-tracing) for examples.
+If you need to dynamically enable or disable tracing based on runtime conditions (such as client requirements, data sensitivity, or compliance policies), refer to [Conditional tracing](conditional-tracing.md) for examples.
 
 ***
 

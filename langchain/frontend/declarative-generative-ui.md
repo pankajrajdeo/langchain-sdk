@@ -5,7 +5,7 @@ Compose agent-generated interfaces from a registered component catalog using jso
 ## Overview
 
 Declarative generative UI is in the middle of the
-[generative UI spectrum](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview). The agent emits a
+[generative UI spectrum](generative-ui-overview.md). The agent emits a
 structured specification, and the frontend composes the interface from a catalog of
 components you register ahead of time. Instead of rendering text responses in chat
 bubbles, the agent output **is** the UI: forms, cards, dashboards, and more. You
@@ -21,7 +21,7 @@ control. This page covers declarative generative UI with
 [json-render](https://json-render.dev), a generative UI framework
 that defines component catalogs, generates specs with AI, and renders them safely
 across React, Vue, Svelte, and Angular. For Google's A2UI specification (integrated
-via CopilotKit), see [A2UI](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui#a2ui-an-alternative-declarative-spec) below.
+via CopilotKit), see [A2UI](#a2ui-an-alternative-declarative-spec) below.
 
 > **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/declarative-generative-ui).
 
@@ -31,9 +31,9 @@ Use declarative generative UI for the long tail of your product, where the
 agent can compose layouts you did not fully anticipate while staying inside a set
 of components you approve: secondary interactions, internal tools, and dashboards.
 When a surface is high-traffic or brand-critical and must be exact, move toward
-[controlled generative UI](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui). When
+[controlled generative UI](controlled-generative-ui.md). When
 you want interfaces created outside your application, move toward
-[open-ended generative UI](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui).
+[open-ended generative UI](open-ended-generative-ui.md).
 
 ## How it works
 
@@ -336,7 +336,7 @@ variants:
 For details, see CopilotKit's docs on [A2UI](https://docs.copilotkit.ai/generative-ui/a2ui),
 [dynamic schema](https://docs.copilotkit.ai/generative-ui/a2ui/dynamic-schema), and
 [fixed schema](https://docs.copilotkit.ai/generative-ui/a2ui/fixed-schema). To
-wire CopilotKit to a LangGraph deployment, see [CopilotKit](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit).
+wire CopilotKit to a LangGraph deployment, see [CopilotKit](integrations/copilotkit.md).
 
 ## Best practices
 
@@ -354,9 +354,9 @@ wire CopilotKit to a LangGraph deployment, see [CopilotKit](https://docs.langcha
 
 ## See also
 
-* [Generative UI overview](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui-overview)
-* [Controlled generative UI](https://docs.langchain.com/oss/python/langchain/frontend/controlled-generative-ui)
-* [Open-ended generative UI](https://docs.langchain.com/oss/python/langchain/frontend/open-ended-generative-ui)
+* [Generative UI overview](generative-ui-overview.md)
+* [Controlled generative UI](controlled-generative-ui.md)
+* [Open-ended generative UI](open-ended-generative-ui.md)
 
 ***
 

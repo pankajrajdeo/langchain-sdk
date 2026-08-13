@@ -24,7 +24,7 @@ uv add langchain-oracledb
 
 ## Document loaders
 
-Please check the [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/oracleai).
+Please check the [usage example](../document_loaders/oracleai.md).
 
 ```python
 from langchain_oracledb.document_loaders.oracleai import OracleDocLoader
@@ -32,7 +32,7 @@ from langchain_oracledb.document_loaders.oracleai import OracleDocLoader
 
 ## Text splitter
 
-Please check the [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/oracleai).
+Please check the [usage example](../document_loaders/oracleai.md).
 
 ```python
 from langchain_oracledb.document_loaders.oracleai import OracleTextSplitter
@@ -40,7 +40,7 @@ from langchain_oracledb.document_loaders.oracleai import OracleTextSplitter
 
 ## Embeddings
 
-Please check the [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/oracleai).
+Please check the [usage example](../embeddings/oracleai.md).
 
 ```python
 from langchain_oracledb.embeddings.oracleai import OracleEmbeddings
@@ -48,7 +48,7 @@ from langchain_oracledb.embeddings.oracleai import OracleEmbeddings
 
 ## Summary
 
-Please check the [usage example](https://docs.langchain.com/oss/python/integrations/tools/oracleai).
+Please check the [usage example](../tools/oracleai.md).
 
 ```python
 from langchain_oracledb.utilities.oracleai import OracleSummary
@@ -56,7 +56,7 @@ from langchain_oracledb.utilities.oracleai import OracleSummary
 
 ## Vector store
 
-Please check the [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/oracle).
+Please check the [usage example](../vectorstores/oracle.md).
 
 ```python
 from langchain_oracledb.vectorstores.oraclevs import OracleVS

@@ -1,8 +1,8 @@
 # Connect an authentication provider
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/add-auth-server)
-In [the last tutorial](https://docs.langchain.com/langsmith/resource-auth), you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace those tokens with real user accounts using [OAuth2](https://docs.langchain.com/langsmith/deployment-quickstart).
+In [the last tutorial](resource-auth.md), you added resource authorization to give users private conversations. However, you are still using hard-coded tokens for authentication, which is not secure. Now you'll replace those tokens with real user accounts using [OAuth2](deployment-quickstart.md).
 
-You'll keep the same [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object and [resource-level access control](https://docs.langchain.com/langsmith/auth#single-owner-resources), but upgrade authentication to use Supabase as your identity provider. While Supabase is used in this tutorial, the concepts apply to any OAuth2 provider. You'll learn how to:
+You'll keep the same [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object and [resource-level access control](auth.md#single-owner-resources), but upgrade authentication to use Supabase as your identity provider. While Supabase is used in this tutorial, the concepts apply to any OAuth2 provider. You'll learn how to:
 
 1. Replace test tokens with real JWT tokens
 2. Integrate with OAuth2 providers for secure user authentication
@@ -38,7 +38,7 @@ sequenceDiagram
 
 Before you start this tutorial, ensure you have:
 
-* The [bot from the second tutorial](https://docs.langchain.com/langsmith/resource-auth) running without errors.
+* The [bot from the second tutorial](resource-auth.md) running without errors.
 * A [Supabase project](https://supabase.com/dashboard) to use its authentication server.
 
 ## 1. Install dependencies
@@ -54,6 +54,8 @@ pip install -U "langgraph-cli[inmem]"
 cd custom-auth
 uv add "langgraph-cli[inmem]"
 ```
+
+<a id="setup-auth-provider"></a>
 
 ## 2. Set up the authentication provider
 
@@ -82,7 +84,7 @@ SUPABASE_SERVICE_KEY=your-service-role-key
 
 ## 3. Implement token validation
 
-In the previous tutorials, you used the [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object to [validate hard-coded tokens](https://docs.langchain.com/langsmith/set-up-custom-auth) and [add resource ownership](https://docs.langchain.com/langsmith/resource-auth).
+In the previous tutorials, you used the [`Auth`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) object to [validate hard-coded tokens](set-up-custom-auth.md) and [add resource ownership](resource-auth.md).
 
 Now you'll upgrade your authentication to validate real JWT tokens from Supabase. The main changes will all be in the [`@auth.authenticate`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate) decorated function:
 
@@ -149,8 +151,8 @@ The most important change is that we're now validating tokens with a real authen
 Let's test out the new authentication flow. You can run the following code in a file or notebook. You will need to provide:
 
 * A valid email address
-* A Supabase project URL (from [above](https://docs.langchain.com/langsmith/add-auth-server#setup-auth-provider))
-* A Supabase anon **public key** (also from [above](https://docs.langchain.com/langsmith/add-auth-server#setup-auth-provider))
+* A Supabase project URL (from [above](#setup-auth-provider))
+* A Supabase anon **public key** (also from [above](#setup-auth-provider))
 
 ```python
 import os
@@ -194,7 +196,7 @@ await sign_up(email2, password)
 
 ⚠️ Before continuing: Check your email and click both confirmation links. Supabase will reject `/login` requests until after you have confirmed your users' email.
 
-Now test that users can only see their own data. Make sure the server is running (run `langgraph dev`) before proceeding. The following snippet requires the "anon public" key that you copied from the Supabase dashboard while [setting up the auth provider](https://docs.langchain.com/langsmith/add-auth-server#setup-auth-provider) previously.
+Now test that users can only see their own data. Make sure the server is running (run `langgraph dev`) before proceeding. The following snippet requires the "anon public" key that you copied from the Supabase dashboard while [setting up the auth provider](#setup-auth-provider) previously.
 
 ```python
 async def login(email: str, password: str):
@@ -273,7 +275,7 @@ You've successfully built a production-ready authentication system for your Lang
 Now that you have production authentication, consider:
 
 1. Building a web UI with your preferred framework (see the [Custom Auth](https://github.com/langchain-ai/custom-auth) template for an example)
-2. Learn more about the other aspects of authentication and authorization in the [conceptual guide on authentication](https://docs.langchain.com/langsmith/auth).
+2. Learn more about the other aspects of authentication and authorization in the [conceptual guide on authentication](auth.md).
 3. Customize your handlers and setup further after reading the [reference docs](https://reference.langchain.com/python/langgraph-sdk/auth/Auth).
 
 ***

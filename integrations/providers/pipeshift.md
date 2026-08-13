@@ -46,7 +46,7 @@ from langchain_pipeshift import ChatPipeshift
 
 ## LLMs
 
-See an [example](https://docs.langchain.com/oss/python/integrations/llms/pipeshift).
+See an [example](../llms/pipeshift.md).
 
 ```python
 from langchain_pipeshift import Pipeshift

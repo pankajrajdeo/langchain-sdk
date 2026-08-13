@@ -3,9 +3,9 @@
 > Integrate with the Ollama LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Ollama models as text completion models. Many popular Ollama models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Ollama models as text completion models. Many popular Ollama models are [chat completion models](../../langchain/models.md).**
 >
-> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/ollama/).
+> You may be looking for [this page instead](../chat/ollama.md).
 
 This page goes over how to use LangChain to interact with `Ollama` models.
 

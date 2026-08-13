@@ -5,7 +5,7 @@ Configure the model and core capabilities of a Managed Deep Agent.
 The agent definition selects the model and core capabilities of a Managed Deep Agent.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -51,14 +51,14 @@ agent = define_deep_agent(
 
 | Parameter                                | What it does                                                          |
 | ---------------------------------------- | --------------------------------------------------------------------- |
-| [`name=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#name)                         | Sets the agent and default deployment name                            |
-| [`model=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#model)                       | Selects the chat model                                                |
-| [`tools=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#tools)                       | Adds tools the agent can call                                         |
-| [`middleware=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#middleware)             | Adds behavior around model calls, tool calls, and the agent lifecycle |
-| [`subagents=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#subagents)               | Defines specialized agents for delegated tasks                        |
-| [`permissions=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#permissions)           | Controls path-level access for filesystem tools                       |
-| [`interrupt_on=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
-| [`response_format=`](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition#structured-output) | Defines a structured output schema                                    |
+| [`name=`](#name)                         | Sets the agent and default deployment name                            |
+| [`model=`](#model)                       | Selects the chat model                                                |
+| [`tools=`](#tools)                       | Adds tools the agent can call                                         |
+| [`middleware=`](#middleware)             | Adds behavior around model calls, tool calls, and the agent lifecycle |
+| [`subagents=`](#subagents)               | Defines specialized agents for delegated tasks                        |
+| [`permissions=`](#permissions)           | Controls path-level access for filesystem tools                       |
+| [`interrupt_on=`](#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
+| [`response_format=`](#structured-output) | Defines a structured output schema                                    |
 
 ## Name
 
@@ -97,11 +97,11 @@ agent = define_deep_agent(
 )
 ```
 
-Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](https://docs.langchain.com/oss/python/deepagents/models).
+Pass a LangChain chat model instance instead when you need to configure model parameters in code. For model options and supported providers, see [Models](../../deepagents/models.md).
 
 ### Using LangSmith Gateway
 
-You can use [LangSmith Gateway](https://docs.langchain.com/langsmith/llm-gateway) to control rate limits, fallbacks, and more.
+You can use [LangSmith Gateway](../llm-gateway.md) to control rate limits, fallbacks, and more.
 
 In order to use, you should:
 
@@ -146,35 +146,35 @@ mda init my-agent --gateway
 
 Pass tools in the `tools` list to let the agent call application logic or external services.
 
-Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors).
+Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](managed-deep-agents-tools.md). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](managed-deep-agents-mcp-connectors.md).
 
 ## Middleware
 
 Pass middleware in the `middleware` list to add behavior around model calls, tool calls, and the agent lifecycle. Middleware runs in list order.
 
-See [Custom middleware](https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware).
+See [Custom middleware](managed-deep-agents-middleware.md).
 
 ## Subagents
 
-Pass subagent definitions in `subagents` when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents).
+Pass subagent definitions in `subagents` when the agent should delegate specialized or context-heavy work. Each subagent can have its own prompt, model, and tools. See [Subagents](../../deepagents/subagents.md).
 
 ## Permissions
 
-Pass filesystem permission rules in `permissions` to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](https://docs.langchain.com/oss/python/deepagents/permissions).
+Pass filesystem permission rules in `permissions` to control which paths the agent's built-in filesystem tools can read or write. See [Permissions](../../deepagents/permissions.md).
 
 ## Human-in-the-loop
 
 Set `interrupt_on` to pause before selected tool calls.
 
-Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools#human-in-the-loop).
+Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop).
 
 ## Structured output
 
 Set `response_format` when the agent must return data that matches a schema instead of an unconstrained text response.
 
-See [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output).
+See [Structured output](../../langchain/structured-output.md).
 
-Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](https://docs.langchain.com/langsmith/python/managed-deep-agents-project-structure).
+Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

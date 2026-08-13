@@ -2,13 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/sandboxes/index)
 Integrate with sandbox providers using LangChain Python.
 
-Sandboxes provide isolated execution environments for running agent-generated code safely. Learn more about [sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
+Sandboxes provide isolated execution environments for running agent-generated code safely. Learn more about [sandboxes](../../deepagents/sandboxes.md).
 
 | Integration                                                                                     | Downloads                                                                                                                    |
 | :---------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| [`DaytonaSandbox`](https://docs.langchain.com/oss/python/integrations/sandboxes/daytona)                                  | <span><a href="https://pypi.org/project/langchain-daytona/">  <img alt="Downloads per month" /></a></span>                   |
-| [`ModalSandbox`](https://docs.langchain.com/oss/python/integrations/sandboxes/modal)                                      | <span><a href="https://pypi.org/project/langchain-modal/">  <img alt="Downloads per month" /></a></span>                     |
-| [`AgentCoreSandbox`](https://docs.langchain.com/oss/python/integrations/sandboxes/aws)                                    | <span><a href="https://pypi.org/project/langchain-agentcore-codeinterpreter/">  <img alt="Downloads per month" /></a></span> |
+| [`DaytonaSandbox`](daytona.md)                                  | <span><a href="https://pypi.org/project/langchain-daytona/">  <img alt="Downloads per month" /></a></span>                   |
+| [`ModalSandbox`](modal.md)                                      | <span><a href="https://pypi.org/project/langchain-modal/">  <img alt="Downloads per month" /></a></span>                     |
+| [`AgentCoreSandbox`](aws.md)                                    | <span><a href="https://pypi.org/project/langchain-agentcore-codeinterpreter/">  <img alt="Downloads per month" /></a></span> |
 | [`RunloopSandbox`](https://docs.runloop.ai/docs/overview/what-is-runloop)                       | <span><a href="https://pypi.org/project/langchain-runloop/">  <img alt="Downloads per month" /></a></span>                   |
 | [`VercelSandbox`](https://vercel.com/docs/sandbox)                                              | <span><a href="https://pypi.org/project/langchain-vercel-sandbox/">  <img alt="Downloads per month" /></a></span>            |
 | [`E2BSandbox`](https://e2b.dev/docs)                                                            | <span><a href="https://pypi.org/project/langchain-e2b/">  <img alt="Downloads per month" /></a></span>                       |
@@ -21,9 +21,9 @@ Sandboxes provide isolated execution environments for running agent-generated co
 | [`NovitaSandbox`](https://github.com/novitalabs/langchain-novita)                               | <span><a href="https://pypi.org/project/langchain-novita/">  <img alt="Downloads per month" /></a></span>                    |
 | [`Leap0Sandbox`](https://leap0.dev/docs)                                                        | <span><a href="https://pypi.org/project/langchain-leap0/">  <img alt="Downloads per month" /></a></span>                     |
 | [`SuperserveSandbox`](https://docs.superserve.ai/introduction)                                  | <span><a href="https://pypi.org/project/langchain-superserve/">  <img alt="Downloads per month" /></a></span>                |
-| [`LangSmith sandbox`](https://docs.langchain.com/oss/python/integrations/sandboxes/langsmith)                             | <span>N/A</span>                                                                                                             |
+| [`LangSmith sandbox`](langsmith.md)                             | <span>N/A</span>                                                                                                             |
 
-If you'd like to contribute a sandbox, see [Implement a sandbox integration](https://docs.langchain.com/oss/python/contributing/implement-langchain).
+If you'd like to contribute a sandbox, see [Implement a sandbox integration](../../contributing/implement-langchain.md).
 
 ***
 

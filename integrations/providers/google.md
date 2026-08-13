@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/integrations/providers/google)
 Integrate with Google using LangChain Python.
 
-This page covers all LangChain integrations with [Google Gemini](https://ai.google.dev/gemini-api/docs), [Google Cloud](https://cloud.google.com/), and other Google products (such as Google Maps, YouTube, and [more](https://docs.langchain.com/oss/python/integrations/providers/google#other-google-products)).
+This page covers all LangChain integrations with [Google Gemini](https://ai.google.dev/gemini-api/docs), [Google Cloud](https://cloud.google.com/), and other Google products (such as Google Maps, YouTube, and [more](#other-google-products)).
 
 > [!NOTE]
 > **Unified SDK & package consolidation**
@@ -25,7 +25,7 @@ Access Google Gemini models via the **[Gemini Developer API](https://ai.google.d
 
 Use the `langchain-google-genai` package for chat models, LLMs, and embeddings.
 
-[See integrations.](https://docs.langchain.com/oss/python/integrations/providers/google#google-generative-ai)
+[See integrations.](#google-generative-ai)
 
 </details>
 
@@ -36,7 +36,7 @@ Access Vertex AI platform-specific services beyond Gemini models: Model Garden (
 
 Use the `langchain-google-vertexai` package for platform services and specific packages (e.g., `langchain-google-community`, `langchain-google-cloud-sql-pg`) for other cloud services like databases and storage.
 
-[See integrations.](https://docs.langchain.com/oss/python/integrations/providers/google#google-cloud)
+[See integrations.](#google-cloud)
 
 </details>
 
@@ -50,17 +50,17 @@ Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev
 
 ### Chat models
 
-#### [ChatGoogleGenerativeAI](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai)
+#### [ChatGoogleGenerativeAI](../chat/google_generative_ai.md)
 Google Gemini chat models via **Gemini Developer API** or **Vertex AI**.
 
 ### LLMs
 
-#### [GoogleGenerativeAI](https://docs.langchain.com/oss/python/integrations/llms/google_generative_ai)
+#### [GoogleGenerativeAI](../llms/google_generative_ai.md)
 Gemini models using the (legacy) LLM text completion interface.
 
 ### Embedding models
 
-#### [GoogleGenerativeAIEmbeddings](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai)
+#### [GoogleGenerativeAIEmbeddings](../embeddings/google_generative_ai.md)
 Gemini embedding models via **Gemini Developer API** or **Vertex AI**.
 
 ***
@@ -70,17 +70,17 @@ Gemini embedding models via **Gemini Developer API** or **Vertex AI**.
 Access Vertex AI platform-specific services including Model Garden (Llama, Mistral, Anthropic), Vector Search, evaluation services, and specialized vision models.
 
 > [!NOTE]
-> **For Gemini models**, use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) from `langchain-google-genai`. The classes below focus on **Vertex AI platform services** not available in the consolidated SDK.
+> **For Gemini models**, use [`ChatGoogleGenerativeAI`](../chat/google_generative_ai.md) from `langchain-google-genai`. The classes below focus on **Vertex AI platform services** not available in the consolidated SDK.
 
 ### Chat models
 
-#### [ChatAnthropicVertex](https://docs.langchain.com/oss/python/integrations/chat/google_anthropic_vertex)
+#### [ChatAnthropicVertex](../chat/google_anthropic_vertex.md)
 Anthropic on Vertex AI Model Garden
 
 <details>
 <summary>ChatVertexAI (deprecated)</summary>
 
-**Deprecated**—Use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) for Gemini models instead.
+**Deprecated**—Use [`ChatGoogleGenerativeAI`](../chat/google_generative_ai.md) for Gemini models instead.
 
 ```python
 from langchain_google_vertexai import ChatVertexAI
@@ -191,13 +191,13 @@ from langchain_google_vertexai.vision_models import VertexAIVisualQnAChat
 
 (Legacy) string-in, string-out LLM interface.
 
-#### [VertexAIModelGarden](https://docs.langchain.com/oss/python/integrations/llms/google_vertex_ai#vertex-model-garden)
+#### [VertexAIModelGarden](../llms/google_vertex_ai.md#vertex-model-garden)
 Hundreds of OSS models via Vertex AI Model Garden.
 
 <details>
 <summary>VertexAI (deprecated)</summary>
 
-**Deprecated**—Use [`GoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/llms/google_generative_ai) for Gemini models instead.
+**Deprecated**—Use [`GoogleGenerativeAI`](../llms/google_generative_ai.md) for Gemini models instead.
 
 ```python
 from langchain_google_vertexai import VertexAI
@@ -252,7 +252,7 @@ from langchain_google_vertexai.vision_models import VertexAIImageCaptioning
 <details>
 <summary>VertexAIEmbeddings (deprecated)</summary>
 
-**Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai) instead.
+**Deprecated**—Use [`GoogleGenerativeAIEmbeddings`](../embeddings/google_generative_ai.md) instead.
 
 ```python
 from langchain_google_vertexai import VertexAIEmbeddings
@@ -262,46 +262,46 @@ from langchain_google_vertexai import VertexAIEmbeddings
 
 ### Document loaders
 
-#### [AlloyDB for PostgreSQL](https://docs.langchain.com/oss/python/integrations/document_loaders/google_alloydb)
+#### [AlloyDB for PostgreSQL](../document_loaders/google_alloydb.md)
 PostgreSQL-compatible database on Google Cloud.
 
-#### [BigQuery](https://docs.langchain.com/oss/python/integrations/document_loaders/google_bigquery)
+#### [BigQuery](../document_loaders/google_bigquery.md)
 Serverless data warehouse.
 
-#### [Bigtable](https://docs.langchain.com/oss/python/integrations/document_loaders/google_bigtable)
+#### [Bigtable](../document_loaders/google_bigtable.md)
 Key-value and wide-column store for structured and semi-structured data.
 
-#### [Cloud SQL for MySQL](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mysql)
+#### [Cloud SQL for MySQL](../document_loaders/google_cloud_sql_mysql.md)
 Managed MySQL database.
 
-#### [Cloud SQL for SQL Server](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_sql_mssql)
+#### [Cloud SQL for SQL Server](../document_loaders/google_cloud_sql_mssql.md)
 Managed SQL Server database.
 
 #### [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres)
 Managed PostgreSQL database.
 
-#### [Cloud Storage (directory)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_storage_directory)
+#### [Cloud Storage (directory)](../document_loaders/google_cloud_storage_directory.md)
 Load documents from a GCS bucket directory.
 
-#### [Cloud Storage (file)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_cloud_storage_file)
+#### [Cloud Storage (file)](../document_loaders/google_cloud_storage_file.md)
 Load a single document from GCS.
 
 #### [El Carro for Oracle Workloads](https://github.com/googleapis/langchain-google-el-carro-python/)
 Oracle databases on Kubernetes via El Carro.
 
-#### [Firestore (Native Mode)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_firestore)
+#### [Firestore (Native Mode)](../document_loaders/google_firestore.md)
 NoSQL document database.
 
-#### [Firestore (Datastore Mode)](https://docs.langchain.com/oss/python/integrations/document_loaders/google_datastore)
+#### [Firestore (Datastore Mode)](../document_loaders/google_datastore.md)
 Firestore in Datastore mode.
 
-#### [Memorystore for Redis](https://docs.langchain.com/oss/python/integrations/document_loaders/google_memorystore_redis)
+#### [Memorystore for Redis](../document_loaders/google_memorystore_redis.md)
 Managed Redis service.
 
-#### [Spanner](https://docs.langchain.com/oss/python/integrations/document_loaders/google_spanner)
+#### [Spanner](../document_loaders/google_spanner.md)
 Globally distributed relational database.
 
-#### [Speech-to-Text](https://docs.langchain.com/oss/python/integrations/document_loaders/google_speech_to_text)
+#### [Speech-to-Text](../document_loaders/google_speech_to_text.md)
 Transcribe audio files.
 
 <details>
@@ -317,49 +317,49 @@ from langchain_google_community.vision import CloudVisionLoader
 
 ### Document transformers
 
-#### [Document AI](https://docs.langchain.com/oss/python/integrations/document_transformers/google_docai)
+#### [Document AI](../document_transformers/google_docai.md)
 Extract structured data from unstructured documents.
 
-#### [Google Translate](https://docs.langchain.com/oss/python/integrations/document_transformers/google_translate)
+#### [Google Translate](../document_transformers/google_translate.md)
 Translate text and HTML via Cloud Translation API.
 
 ### Vector stores
 
 Store and search vectors using Google Cloud databases and Vertex AI Vector Search.
 
-#### [AlloyDB for PostgreSQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_alloydb)
+#### [AlloyDB for PostgreSQL](../vectorstores/google_alloydb.md)
 PostgreSQL-compatible vector store on AlloyDB.
 
-#### [BigQuery Vector Search](https://docs.langchain.com/oss/python/integrations/vectorstores/google_bigquery_vector_search)
+#### [BigQuery Vector Search](../vectorstores/google_bigquery_vector_search.md)
 Semantic search using GoogleSQL with vector indexes.
 
-#### [Memorystore for Redis](https://docs.langchain.com/oss/python/integrations/vectorstores/google_memorystore_redis)
+#### [Memorystore for Redis](../vectorstores/google_memorystore_redis.md)
 Vector store on Memorystore for Redis.
 
-#### [Spanner](https://docs.langchain.com/oss/python/integrations/vectorstores/google_spanner)
+#### [Spanner](../vectorstores/google_spanner.md)
 Vector store on Cloud Spanner.
 
 #### [Bigtable](https://cloud.google.com/bigtable)
 Vector store on Cloud Bigtable.
 
-#### [Firestore (Native Mode)](https://docs.langchain.com/oss/python/integrations/vectorstores/google_firestore)
+#### [Firestore (Native Mode)](../vectorstores/google_firestore.md)
 Vector store on Firestore.
 
-#### [Cloud SQL for MySQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_cloud_sql_mysql)
+#### [Cloud SQL for MySQL](../vectorstores/google_cloud_sql_mysql.md)
 Vector store on Cloud SQL for MySQL.
 
-#### [Cloud SQL for PostgreSQL](https://docs.langchain.com/oss/python/integrations/vectorstores/google_cloud_sql_pg)
+#### [Cloud SQL for PostgreSQL](../vectorstores/google_cloud_sql_pg.md)
 Vector store on Cloud SQL for PostgreSQL.
 
-#### [Vertex AI Vector Search](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search)
+#### [Vertex AI Vector Search](../vectorstores/google_vertex_ai_vector_search.md)
 Formerly known as Vertex AI Matching Engine, provides a low latency vector database. These vector databases are commonly referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
 
-#### [Vertex AI Vector Search + Datastore](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
+#### [Vertex AI Vector Search + Datastore](../vectorstores/google_vertex_ai_vector_search.md#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
 Vector search with Datastore for document storage.
 
 ### Retrievers
 
-#### [Vertex AI Search](https://docs.langchain.com/oss/python/integrations/retrievers/google_vertex_ai_search)
+#### [Vertex AI Search](../retrievers/google_vertex_ai_search.md)
 Generative AI powered search via Vertex AI Search.
 
 #### [Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
@@ -375,7 +375,7 @@ from langchain_google_community import VertexAISearchSummaryTool
 
 Integrate agents with various Google Cloud services.
 
-#### [Text-to-Speech](https://docs.langchain.com/oss/python/integrations/tools/google_cloud_texttospeech)
+#### [Text-to-Speech](../tools/google_cloud_texttospeech.md)
 Synthesize natural-sounding speech with 100+ voices.
 
 ### Callbacks
@@ -396,7 +396,7 @@ from langchain_google_vertexai.callbacks import VertexAICallbackHandler
 <details>
 <summary>Google BigQuery</summary>
 
-See the [documentation](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery) for more details.
+See the [documentation](../callbacks/google_bigquery.md) for more details.
 
 ```python
 from langchain_google_community.callbacks.bigquery_callback import BigQueryCallbackHandler
@@ -438,30 +438,30 @@ Integrations with various Google services beyond the core Cloud Platform.
 
 ### Document loaders
 
-#### [Google Drive](https://docs.langchain.com/oss/python/integrations/document_loaders/google_drive)
+#### [Google Drive](../document_loaders/google_drive.md)
 Load files from Google Drive. Currently supports Google Docs.
 
 ### Retrievers
 
-#### [Google Drive](https://docs.langchain.com/oss/python/integrations/retrievers/google_drive)
+#### [Google Drive](../retrievers/google_drive.md)
 Retrieve documents from Google Drive.
 
 ### Tools
 
-#### [Google Search](https://docs.langchain.com/oss/python/integrations/tools/google_search)
+#### [Google Search](../tools/google_search.md)
 Web search via Google Custom Search Engine (CSE).
 
-#### [Google Drive](https://docs.langchain.com/oss/python/integrations/tools/google_drive)
+#### [Google Drive](../tools/google_drive.md)
 Interact with Google Drive.
 
 ### MCP
 
-#### [MCP Toolbox](https://docs.langchain.com/oss/python/integrations/tools/mcp_toolbox)
+#### [MCP Toolbox](../tools/mcp_toolbox.md)
 Connect to databases including Cloud SQL and AlloyDB.
 
 ### Toolkits
 
-#### [Gmail](https://docs.langchain.com/oss/python/integrations/tools/google_gmail)
+#### [Gmail](../tools/google_gmail.md)
 Create, search, and send emails via the Gmail API.
 
 ***

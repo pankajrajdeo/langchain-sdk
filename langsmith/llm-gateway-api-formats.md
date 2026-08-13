@@ -5,7 +5,7 @@ Use OpenAI Chat Completions, Anthropic Messages, or OpenAI Responses requests to
 The standard LLM Gateway API supports three request and response formats. Choose the format your application already uses, then call bring-your-own-key or Gateway Credits models through the same endpoint.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
 ## Compare API formats
 
@@ -240,13 +240,13 @@ The endpoint determines the format your application sends and receives. The mode
 
 * When the provider supports the selected format natively, the gateway preserves that format.
 * Otherwise, the gateway translates the request into a format supported by the provider and translates the response back, including streaming responses.
-* Translation can reject fields that cannot be represented in the target provider format. Use [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access) when provider-native behavior is required.
+* Translation can reject fields that cannot be represented in the target provider format. Use [Direct model access](llm-gateway-direct-model-access.md) when provider-native behavior is required.
 
 Every request resolves the same Provider Secrets, policies, and tracing configuration regardless of format.
 
 ## List models
 
-Call `GET /v1/models` to list models available from providers configured for the workspace and from [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits). The gateway returns a single OpenAI-compatible list:
+Call `GET /v1/models` to list models available from providers configured for the workspace and from [Gateway Credits](llm-gateway-credits.md). The gateway returns a single OpenAI-compatible list:
 
 ```bash
 curl https://gateway.smith.langchain.com/v1/models \
@@ -290,13 +290,13 @@ Keep the same path for the selected API format.
 | `429 Too Many Requests`                                     | A gateway rate limit or an upstream provider rate limit was reached.                                                 |
 | No models with a provider prefix appear in `GET /v1/models` | The provider may not be configured or may not have returned a model catalog.                                         |
 
-For setup-specific resolutions, see the [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart).
+For setup-specific resolutions, see the [Quickstart](llm-gateway-quickstart.md).
 
 ## See also
 
-* [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart): make your first request and view its trace.
-* [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access): bypass format translation and use provider-native APIs.
-* [Model fallbacks](https://docs.langchain.com/langsmith/llm-gateway-fallbacks): retry requests against backup models.
+* [Quickstart](llm-gateway-quickstart.md): make your first request and view its trace.
+* [Direct model access](llm-gateway-direct-model-access.md): bypass format translation and use provider-native APIs.
+* [Model fallbacks](llm-gateway-fallbacks.md): retry requests against backup models.
 
 ***
 

@@ -53,7 +53,7 @@ The primary usage of `Unstructured` is in data loaders.
 
 ### UnstructuredLoader
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/unstructured_file) to see how you can use
+See a [usage example](../document_loaders/unstructured_file.md) to see how you can use
 this loader for both partitioning locally and remotely with the serverless Unstructured API.
 
 ```python

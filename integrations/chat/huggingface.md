@@ -2,7 +2,7 @@
 
 > Integrate with the ChatHuggingFace chat model using LangChain Python.
 
-This will help you get started with `langchain_huggingface` [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatHuggingFace` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace). For a list of models supported by Hugging Face check out [this page](https://huggingface.co/models).
+This will help you get started with `langchain_huggingface` [chat models](../../langchain/models.md). For detailed documentation of all `ChatHuggingFace` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-huggingface/chat_models/huggingface/ChatHuggingFace). For a list of models supported by Hugging Face check out [this page](https://huggingface.co/models).
 
 ## Overview
 
@@ -14,7 +14,7 @@ This will help you get started with `langchain_huggingface` [chat models](https:
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ❌                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -42,7 +42,7 @@ if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ❌                             |       ❌      |                            ❌                            |                              ❌                             |
 

@@ -20,7 +20,7 @@ uv add docugami-langchain
 
 ## Document loader
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/document_loaders/docugami).
+See a [usage example](../document_loaders/docugami.md).
 
 ```python
 from docugami_langchain.document_loaders import DocugamiLoader

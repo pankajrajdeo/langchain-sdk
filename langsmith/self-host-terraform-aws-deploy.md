@@ -133,15 +133,15 @@ Two independent settings control capacity:
 * **Infrastructure capacity** sets instance types and node counts directly through the infra variables `eks_managed_node_groups`, `postgres_instance_type`, and `redis_instance_type`. The module defaults are one `m5.4xlarge` node group (min 3, max 10), `db.t3.large` for RDS, and `cache.m6g.xlarge` for ElastiCache.
 * **`sizing_profile`** selects the Helm sizing overlay (pod resource requests and limits). `init-values.sh` and `deploy.sh` read it; Terraform does not.
 
-Size the infrastructure for your target tier before deploying. For per-tier recommendations, refer to [Scaling guidance](https://docs.langchain.com/langsmith/self-host-scale).
+Size the infrastructure for your target tier before deploying. For per-tier recommendations, refer to [Scaling guidance](self-host-scale.md).
 
 > [!NOTE]
-> For production workloads, also plan to provision external [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external ClickHouse cluster. In-cluster ClickHouse is supported for dev/POC only.
+> For production workloads, also plan to provision external [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external ClickHouse cluster. In-cluster ClickHouse is supported for dev/POC only.
 
 ## Quickstart
 
 > [!TIP]
-> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [AWS quick reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference).
+> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [AWS quick reference](self-host-terraform-aws-quick-reference.md).
 
 For the fastest path from zero to a running LangSmith instance, run these commands in order:
 
@@ -251,7 +251,7 @@ acm_certificate_arn    = "arn:aws:acm:us-west-2:<account-id>:certificate/<cert-i
 langsmith_domain       = "langsmith.example.com"
 ```
 
-See the [AWS variables reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-variables) for every input variable.
+See the [AWS variables reference](self-host-terraform-aws-variables.md) for every input variable.
 
 > [!TIP]
 > Configure a remote state backend before applying. Edit `infra/backend.tf` to point at an S3 bucket and DynamoDB lock table you control. The Terraform repo ships a local backend by default for first-time evaluations.
@@ -402,7 +402,7 @@ make init-values
 make deploy
 ```
 
-For details on each add-on, see [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
+For details on each add-on, see [LangSmith Deployment](deploy-self-hosted-full-platform.md).
 
 ### Fleet
 
@@ -479,10 +479,10 @@ This grants the `langsmith-host-backend` ServiceAccount read access to pods, pod
 
 ## Next steps
 
-* Reference the [AWS variables](https://docs.langchain.com/langsmith/self-host-terraform-aws-variables) and the [quick reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-quick-reference).
-* Review the [AWS architecture](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture) for platform layers, IRSA, and module dependencies.
-* When something breaks, check the [AWS troubleshooting guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-troubleshooting).
-* Enable agent deployment in the UI with [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
+* Reference the [AWS variables](self-host-terraform-aws-variables.md) and the [quick reference](self-host-terraform-aws-quick-reference.md).
+* Review the [AWS architecture](self-host-terraform-aws-architecture.md) for platform layers, IRSA, and module dependencies.
+* When something breaks, check the [AWS troubleshooting guide](self-host-terraform-aws-troubleshooting.md).
+* Enable agent deployment in the UI with [LangSmith Deployment](deploy-self-hosted-full-platform.md).
 
 ***
 

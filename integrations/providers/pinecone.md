@@ -25,7 +25,7 @@ whether for semantic search or example selection.
 from langchain_pinecone import PineconeVectorStore
 ```
 
-For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone)
+For a more detailed walkthrough of the Pinecone vectorstore, see [this notebook](../vectorstores/pinecone.md)
 
 ### Sparse vector store
 
@@ -45,7 +45,7 @@ vector_store.add_documents(documents)
 results = vector_store.similarity_search("your query", k=3)
 ```
 
-For a more detailed walkthrough, see the [Pinecone Sparse Vector Store notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone_sparse).
+For a more detailed walkthrough, see the [Pinecone Sparse Vector Store notebook](../vectorstores/pinecone_sparse.md).
 
 ### Sparse embedding
 
@@ -66,7 +66,7 @@ docs = ["Document 1 content", "Document 2 content"]
 doc_embeddings = sparse_embeddings.embed_documents(docs)
 ```
 
-For more detailed usage, see the [Pinecone Sparse Embeddings notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/pinecone_sparse).
+For more detailed usage, see the [Pinecone Sparse Embeddings notebook](../vectorstores/pinecone_sparse.md).
 
 ## Retrievers
 

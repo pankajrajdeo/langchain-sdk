@@ -1,6 +1,6 @@
 # Evaluate a RAG application
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-rag-tutorial)
-Retrieval Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge. It has become one of the most widely used approaches for building LLM applications. To build a RAG application first, see [RAG with Deep Agents](https://docs.langchain.com/oss/python/deepagents/rag).
+Retrieval Augmented Generation (RAG) is a technique that enhances Large Language Models (LLMs) by providing them with relevant external knowledge. It has become one of the most widely used approaches for building LLM applications. To build a RAG application first, see [RAG with Deep Agents](../deepagents/rag.md).
 
 This tutorial shows how to evaluate RAG applications with LangSmith:
 
@@ -14,7 +14,7 @@ A typical RAG evaluation workflow has three steps:
 
 1. Create a dataset of questions and expected answers.
 2. Run the RAG application on those questions.
-3. Score results with [evaluators](https://docs.langchain.com/langsmith/evaluators) for answer relevance, answer accuracy, and retrieval quality.
+3. Score results with [evaluators](evaluators.md) for answer relevance, answer accuracy, and retrieval quality.
 
 This tutorial builds and evaluates a bot that answers questions about a few of [Lilian Weng's](https://lilianweng.github.io/) blog posts.
 
@@ -311,29 +311,29 @@ await client.createExamples({ inputs, outputs, datasetId: dataset.id });
 
 RAG evaluators compare one artifact to another (response, input, retrieved docs, or reference answer):
 
-1. **[Correctness](https://docs.langchain.com/langsmith/evaluate-rag-tutorial#correctness-response-vs-reference-answer)** (response vs reference answer)
+1. **[Correctness](#correctness-response-vs-reference-answer)** (response vs reference answer)
    * **Goal**: Score how similar the RAG answer is to a ground-truth answer.
    * **Mode**: Requires a reference answer in the dataset.
    * **Evaluator**: LLM-as-judge for answer correctness.
 
-2. **[Relevance](https://docs.langchain.com/langsmith/evaluate-rag-tutorial#relevance-response-vs-input)** (response vs input)
+2. **[Relevance](#relevance-response-vs-input)** (response vs input)
    * **Goal**: Score how well the response addresses the user question.
    * **Mode**: No reference answer; compares the answer to the input.
    * **Evaluator**: LLM-as-judge for relevance and helpfulness.
 
-3. **[Groundedness](https://docs.langchain.com/langsmith/evaluate-rag-tutorial#groundedness-response-vs-retrieved-docs)** (response vs retrieved docs)
+3. **[Groundedness](#groundedness-response-vs-retrieved-docs)** (response vs retrieved docs)
    * **Goal**: Score how well the response agrees with the retrieved context.
    * **Mode**: No reference answer; compares the answer to retrieved documents.
    * **Evaluator**: LLM-as-judge for faithfulness and hallucinations.
 
-4. **[Retrieval relevance](https://docs.langchain.com/langsmith/evaluate-rag-tutorial#retrieval-relevance-retrieved-docs-vs-input)** (retrieved docs vs input)
+4. **[Retrieval relevance](#retrieval-relevance-retrieved-docs-vs-input)** (retrieved docs vs input)
    * **Goal**: Score how relevant the retrieved documents are to the query.
    * **Mode**: No reference answer; compares the question to retrieved documents.
    * **Evaluator**: LLM-as-judge for retrieval relevance.
 
-For more on these evaluator types, see [Evaluate RAG applications](https://docs.langchain.com/langsmith/evaluation-approaches#evaluate-rag-applications).
+For more on these evaluator types, see [Evaluate RAG applications](evaluation-approaches.md#evaluate-rag-applications).
 
-> **Image:** [Rag eval overview](https://docs.langchain.com/langsmith/evaluate-rag-tutorial)
+> **Image:** [Rag eval overview](evaluate-rag-tutorial.md)
 
 ### Correctness: Response vs reference answer
 

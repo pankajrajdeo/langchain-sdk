@@ -109,7 +109,7 @@ If you are using a direct-access index or a delta-sync index with self-managed e
 you also need to provide the embedding model and text column in your source table to
 use for the embeddings:
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/databricks_vector_search).
+> **Interactive content:** [View this section in the original documentation](databricks_vector_search.md).
 
 ```python
 # | output: false
@@ -236,9 +236,9 @@ retriever.invoke("thud")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ***
 

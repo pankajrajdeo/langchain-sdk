@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
 Diagnostic steps for troubleshooting self-hosted LangSmith Deployment issues before contacting support.
 
-This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
+This page provides diagnostic steps to help you troubleshoot issues with self-hosted [LangSmith Deployment](deployment.md) before reaching out to support. Follow these steps systematically to identify and resolve common deployment issues.
 
 > [!NOTE]
-> If you complete these diagnostic steps and still need assistance, refer to [Support](https://docs.langchain.com/langsmith/diagnostics-self-hosted#support) at the end of this guide for information on what to gather before reaching out.
+> If you complete these diagnostic steps and still need assistance, refer to [Support](#support) at the end of this guide for information on what to gather before reaching out.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ Before beginning the diagnostic steps, ensure you have:
 
 * `kubectl` access to your Kubernetes cluster.
 * Appropriate permissions to view pods, deployments, services, etc.
-* Familiarity with your [Helm chart configuration](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts:).
+* Familiarity with your [Helm chart configuration](kubernetes.md#configure-your-helm-charts:).
 
 ## Step 1. Understand your deployment
 
@@ -42,7 +42,7 @@ List all services:
 kubectl get services
 ```
 
-List all `lgps` resources (only present after creating an [Agent Server](https://docs.langchain.com/langsmith/agent-server)):
+List all `lgps` resources (only present after creating an [Agent Server](agent-server.md)):
 
 ```bash
 kubectl get lgps
@@ -52,14 +52,14 @@ kubectl get lgps
 
 Your deployment includes the following core components:
 
-* **`langsmith-frontend`**: The LangSmith frontend UI where you create Agent Server deployments. This app makes API calls to `langsmith-host-backend`. Part of the [control plane](https://docs.langchain.com/langsmith/control-plane).
-* **`langsmith-host-backend`**: The LangSmith Deployment [control plane](https://docs.langchain.com/langsmith/control-plane) that receives requests from `langsmith-frontend` and persists deployment requests to the control plane Postgres database.
-* **`langsmith-listener`**: Part of the LangSmith Deployment [data plane](https://docs.langchain.com/langsmith/data-plane). Polls `langsmith-host-backend` via HTTP API for deployments to create, update, or delete. Enqueues tasks for worker processes to handle.
-* **`langsmith-redis`**: The [Redis](https://docs.langchain.com/langsmith/data-plane#redis) instance serving as the task queue for `langsmith-listener`. The listener enqueues tasks here and workers pull tasks from this queue.
+* **`langsmith-frontend`**: The LangSmith frontend UI where you create Agent Server deployments. This app makes API calls to `langsmith-host-backend`. Part of the [control plane](control-plane.md).
+* **`langsmith-host-backend`**: The LangSmith Deployment [control plane](control-plane.md) that receives requests from `langsmith-frontend` and persists deployment requests to the control plane Postgres database.
+* **`langsmith-listener`**: Part of the LangSmith Deployment [data plane](data-plane.md). Polls `langsmith-host-backend` via HTTP API for deployments to create, update, or delete. Enqueues tasks for worker processes to handle.
+* **`langsmith-redis`**: The [Redis](data-plane.md#redis) instance serving as the task queue for `langsmith-listener`. The listener enqueues tasks here and workers pull tasks from this queue.
 * **`langsmith-operator`**: The `lgps` Kubernetes operator that reconciles underlying Kubernetes resources for `lgps` resources. Part of the data plane infrastructure.
 
 > [!NOTE]
-> Additional components may be present in your deployment depending on your configuration. For an overview, refer to [LangSmith Deployment components](https://docs.langchain.com/langsmith/components).
+> Additional components may be present in your deployment depending on your configuration. For an overview, refer to [LangSmith Deployment components](components.md).
 
 ## Step 2. Enable debug logging
 
@@ -115,8 +115,8 @@ Look for the following problem indicators:
 
 Based on the errors you find:
 
-* **Configuration issue**: If you suspect a configuration problem, raise the issue with the person who ran [`helm install`](https://docs.langchain.com/langsmith/kubernetes).
-* **User code bug**: If you suspect a bug in user code (for example, the LangGraph OSS graph implementation), raise the issue with the owner of the Agent Server application who created the [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file) file.
+* **Configuration issue**: If you suspect a configuration problem, raise the issue with the person who ran [`helm install`](kubernetes.md).
+* **User code bug**: If you suspect a bug in user code (for example, the LangGraph OSS graph implementation), raise the issue with the owner of the Agent Server application who created the [`langgraph.json`](application-structure.md#configuration-file) file.
 
 ## Step 3. Describe deployments and pods
 
@@ -158,14 +158,14 @@ Make sure there are no error events and that all events indicate healthy operati
 
 For more troubleshooting information, refer to:
 
-* [Troubleshooting](https://docs.langchain.com/langsmith/troubleshooting): General troubleshooting guide with solutions to common issues.
-* [Self-hosted overview](https://docs.langchain.com/langsmith/self-hosted): Details on system architecture and component interactions.
+* [Troubleshooting](troubleshooting.md): General troubleshooting guide with solutions to common issues.
+* [Self-hosted overview](self-hosted.md): Details on system architecture and component interactions.
 
 ## Support
 
 If you have followed these diagnostic steps and still need assistance, gather the following information before contacting support:
 
-* Output from the [diagnostic steps](https://docs.langchain.com/langsmith/diagnostics-self-hosted#step-1-understand-your-deployment).
+* Output from the [diagnostic steps](#step-1-understand-your-deployment).
 * Your Helm chart configuration.
 * Relevant error messages and logs.
 * Description of what you were trying to do when the issue occurred.

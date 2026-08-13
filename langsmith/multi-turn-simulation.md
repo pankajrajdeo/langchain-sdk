@@ -1,6 +1,6 @@
 # How to simulate multi-turn interactions
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/multi-turn-simulation)
-AI applications with conversational interfaces, like chatbots, operate over multiple interactions with a user, also called conversation *turns*. When evaluating the performance of such applications, core concepts such as [building a dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) and defining [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) and metrics to judge your app outputs remain useful. However, you may also find it useful to run a *simulation* between your app and a user, then evaluate this dynamically created trajectory.
+AI applications with conversational interfaces, like chatbots, operate over multiple interactions with a user, also called conversation *turns*. When evaluating the performance of such applications, core concepts such as [building a dataset](evaluation-concepts.md#datasets) and defining [evaluators](evaluation-concepts.md#evaluators) and metrics to judge your app outputs remain useful. However, you may also find it useful to run a *simulation* between your app and a user, then evaluate this dynamically created trajectory.
 
 Some advantages of doing this are:
 
@@ -10,7 +10,7 @@ Some advantages of doing this are:
 
 The downside is that because you are broadening your evaluation surface area to contain multiple turns, there is less consistency than evaluating a single output from your app given a static input from a dataset.
 
-> **Image:** [Multi turn trace](https://docs.langchain.com/langsmith/multi-turn-simulation)
+> **Image:** [Multi turn trace](multi-turn-simulation.md)
 
 This guide will show you how to simulate multi-turn interactions and evaluate them using the open-source [`openevals`](https://github.com/langchain-ai/openevals) package, which contains prebuilt evaluators and other convenient resources for evaluating your AI apps. It will also use OpenAI models, though you can use other providers as well.
 
@@ -175,13 +175,13 @@ The simulation first generates an initial query from the simulated `user`, then 
 
 The final trace will look something [like this](https://smith.langchain.com/public/648ca37d-1c4d-4f7b-9b6a-89e35dc5d4f0/r) with responses from your `app` and `user` interleaved:
 
-> **Image:** [Multi turn trace](https://docs.langchain.com/langsmith/multi-turn-simulation)
+> **Image:** [Multi turn trace](multi-turn-simulation.md)
 
 Congrats! You just ran your first multi-turn simulation. Next, we'll cover how to run it in a LangSmith experiment.
 
 ## Running in LangSmith experiments
 
-You can use the results of multi-turn simulations as part of a LangSmith experiment to track performance and progress over time. For these sections, it helps to be familiar with at least one of LangSmith's [`pytest`](https://docs.langchain.com/langsmith/pytest) (Python-only), [`Vitest`/`Jest`](https://docs.langchain.com/langsmith/vitest-jest) (JS only), or [`evaluate`](https://docs.langchain.com/langsmith/evaluate-llm-application) runners.
+You can use the results of multi-turn simulations as part of a LangSmith experiment to track performance and progress over time. For these sections, it helps to be familiar with at least one of LangSmith's [`pytest`](pytest.md) (Python-only), [`Vitest`/`Jest`](vitest-jest.md) (JS only), or [`evaluate`](evaluate-llm-application.md) runners.
 
 ### Using `pytest` or `Vitest/Jest`
 
@@ -191,9 +191,9 @@ You can use the results of multi-turn simulations as part of a LangSmith experim
 > * [`pytest`](https://docs.smith.langchain.com/langsmith/pytest)
 > * [`Vitest` or `Jest`](https://docs.smith.langchain.com/langsmith/vitest-jest)
 
-If you are using one of the [LangSmith test framework integrations](https://docs.langchain.com/langsmith/pytest), you can pass in an array of OpenEvals evaluators as a `trajectory_evaluators` param when running the simulation. These evaluators will run at the end of the simulation, taking the final list of chat messages as an `outputs` kwarg. Your passed `trajectory_evaluator` must therefore accept this kwarg.
+If you are using one of the [LangSmith test framework integrations](pytest.md), you can pass in an array of OpenEvals evaluators as a `trajectory_evaluators` param when running the simulation. These evaluators will run at the end of the simulation, taking the final list of chat messages as an `outputs` kwarg. Your passed `trajectory_evaluator` must therefore accept this kwarg.
 
-> **Image:** [Multi turn vitest](https://docs.langchain.com/langsmith/multi-turn-simulation)
+> **Image:** [Multi turn vitest](multi-turn-simulation.md)
 
 Here's an example:
 
@@ -342,7 +342,7 @@ You may also find it convenient to have the simulated user's system prompt be pa
 
 ### Using `evaluate`
 
-You can also use the [`evaluate`](https://docs.langchain.com/langsmith/evaluate-llm-application) runner to evaluate simulated multi-turn interactions. This will be a little bit different from the `pytest`/`Vitest`/`Jest` example in the following ways:
+You can also use the [`evaluate`](evaluate-llm-application.md) runner to evaluate simulated multi-turn interactions. This will be a little bit different from the `pytest`/`Vitest`/`Jest` example in the following ways:
 
 * The simulation should be part of your `target` function, and your target function should return the final trajectory.
   * This will make the trajectory the `outputs` that LangSmith will pass to your evaluators.
@@ -685,9 +685,9 @@ You've just seen some techniques for simulating multi-turn interactions and runn
 
 Here are some topics you might want to explore next:
 
-* [Trace multiturn conversations across different traces](https://docs.langchain.com/langsmith/threads)
-* [Use multiple messages in the playground UI](https://docs.langchain.com/langsmith/multiple-messages)
-* [Return multiple metrics in one evaluator](https://docs.langchain.com/langsmith/multiple-scores)
+* [Trace multiturn conversations across different traces](threads.md)
+* [Use multiple messages in the playground UI](multiple-messages.md)
+* [Return multiple metrics in one evaluator](multiple-scores.md)
 
 You can also explore the [OpenEvals readme](https://github.com/langchain-ai/openevals) for more on prebuilt evaluators.
 

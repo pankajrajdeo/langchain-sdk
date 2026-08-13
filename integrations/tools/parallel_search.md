@@ -7,7 +7,7 @@
 `ParallelSearchTool` calls Parallel's [Search API](https://docs.parallel.ai/search/search-quickstart), which collapses the traditional search → scrape → extract pipeline into one call and returns structured, LLM-optimized excerpts.
 
 > [!NOTE]
-> `ParallelSearchTool` is the canonical class name. The earlier `ParallelWebSearchTool` continues to work as an alias for the same class. Looking for a `BaseRetriever` to drop into a RAG chain instead? See [ParallelSearchRetriever](https://docs.langchain.com/oss/python/integrations/retrievers/parallel).
+> `ParallelSearchTool` is the canonical class name. The earlier `ParallelWebSearchTool` continues to work as an alias for the same class. Looking for a `BaseRetriever` to drop into a RAG chain instead? See [ParallelSearchRetriever](../retrievers/parallel.md).
 
 ## Overview
 
@@ -177,7 +177,7 @@ result = tool.invoke({
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](../../langchain/agents.md):
 
 ```python
 from langchain.agents import create_agent

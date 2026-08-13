@@ -220,9 +220,9 @@ for doc in final_docs:
 
 For guides on how to use the MongoDB Vector Store integration with LangChain for Retrieval-Augmented Generation (RAG), see the following tutorials:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 * [Basic RAG](https://www.mongodb.com/docs/atlas/ai-integrations/langchain/get-started/#answer-questions-on-your-data)
 * [RAG with Hybrid Search](https://www.mongodb.com/docs/atlas/ai-integrations/langchain/hybrid-search/#pass-results-to-a-rag-pipeline)
 

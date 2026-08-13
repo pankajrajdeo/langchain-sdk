@@ -1,10 +1,10 @@
 # Set up LLM-as-a-judge online evaluators
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
-[Online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations) provide real-time feedback on your production traces. This is useful to monitor the performance of your application continuously—to identify issues, measure improvements, and ensure consistent quality over time.
+[Online evaluations](evaluation-concepts.md#online-evaluations) provide real-time feedback on your production traces. This is useful to monitor the performance of your application continuously—to identify issues, measure improvements, and ensure consistent quality over time.
 
-**[LLM-as-a-judge](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge)** evaluators use an LLM to evaluate traces as a scalable substitute for human-like judgment. This guide covers **run-level** evaluators that evaluate a single run. For evaluating entire conversation threads, see [multi-turn online evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn).
+**[LLM-as-a-judge](evaluation-concepts.md#llm-as-judge)** evaluators use an LLM to evaluate traces as a scalable substitute for human-like judgment. This guide covers **run-level** evaluators that evaluate a single run. For evaluating entire conversation threads, see [multi-turn online evaluators](online-evaluations-multi-turn.md).
 
-When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
+When an online evaluator runs on any run within a trace, the trace will be auto-upgraded to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades). This upgrade will impact trace pricing, but ensures that traces meeting your evaluation criteria (typically those most valuable for analysis) are preserved for investigation. 
 
 ## View online evaluators
 
@@ -25,17 +25,17 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
 You can apply a filter to the runs that trigger the evaluator. You may want to apply an evaluator based on:
 
-* Runs where a [user left feedback](https://docs.langchain.com/langsmith/attach-user-feedback) indicating the response was unsatisfactory.
-* Runs that invoke a specific tool call. See [filtering for tool calls](https://docs.langchain.com/langsmith/filter-traces-in-application#example-filtering-for-tool-calls) for more information.
-* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](https://docs.langchain.com/langsmith/add-metadata-tags) for more information.
+* Runs where a [user left feedback](attach-user-feedback.md) indicating the response was unsatisfactory.
+* Runs that invoke a specific tool call. See [filtering for tool calls](filter-traces-in-application.md#example-filtering-for-tool-calls) for more information.
+* Runs that match a particular piece of metadata (e.g. if you log traces with a `plan_type` and only want to run evaluations on traces from your enterprise customers). See [adding metadata to your traces](add-metadata-tags.md) for more information.
 
-[Filters on evaluators](https://docs.langchain.com/langsmith/filter-traces-in-application) work the same way as when you're filtering traces in a project.
+[Filters on evaluators](filter-traces-in-application.md) work the same way as when you're filtering traces in a project.
 
 > [!TIP]
 > It's often helpful to inspect runs as you're creating a filter for your evaluator. With the evaluator configuration panel open, you can inspect runs and apply filters to them. Any filters you apply to the runs table will automatically be reflected in filters on your evaluator.
 
 > [!TIP]
-> If you also have a webhook automation rule on this project and want the webhook payload to include this evaluator's scores, add a feedback filter to the webhook rule rather than relying on rule ordering. For example, filter on `has(feedback_key, "answer_usefulness")` so the webhook only fires after the score exists. See [Ensuring evaluations complete before the webhook fires](https://docs.langchain.com/langsmith/webhooks#ensuring-evaluations-complete-before-the-webhook-fires) for details.
+> If you also have a webhook automation rule on this project and want the webhook payload to include this evaluator's scores, add a feedback filter to the webhook rule rather than relying on rule ordering. For example, filter on `has(feedback_key, "answer_usefulness")` so the webhook only fires after the score exists. See [Ensuring evaluations complete before the webhook fires](webhooks.md#ensuring-evaluations-complete-before-the-webhook-fires) for details.
 
 ## Configure a sampling rate
 
@@ -48,7 +48,7 @@ Apply a rule to past runs by toggling the **Apply to past runs** and entering a 
 > [!NOTE]
 > The backfill is processed as a background job, so you will not see the results immediately.
 
-In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](https://docs.langchain.com/langsmith/rules#view-logs-for-your-automations).
+In order to track progress of the backfill, you can view logs for your evaluator by heading to the **Evaluators** tab within a tracing project and clicking the Logs button for the evaluator you created. Online evaluator logs are similar to [automation rule logs](rules.md#view-logs-for-your-automations).
 
 1. Add an evaluator name.
 2. Optionally filter runs that you would like to apply your evaluator on or configure a sampling rate.
@@ -58,27 +58,27 @@ In order to track progress of the backfill, you can view logs for your evaluator
 
 You can cap LLM cost on this evaluator's attached projects and datasets per week. By default, the organization-wide evaluator limit applies. Organization admins can override this for a specific evaluator by setting a custom value in the **Spend limit** field under **Advanced**. To remove an override and inherit the organization default again, click **Reset to organization default**. When weekly spend reaches the effective limit, LangSmith pauses the evaluator on that project or dataset until the limit resets at Monday 12AM UTC or the limit is manually increased.
 
-For details, refer to [Track and limit evaluator spend](https://docs.langchain.com/langsmith/evaluator-spend).
+For details, refer to [Track and limit evaluator spend](evaluator-spend.md).
 
 ## Configure the LLM-as-a-judge evaluator
 
-View [LLM-as-a-judge evaluators](https://docs.langchain.com/langsmith/llm-as-judge#evaluator-templates) for more information.
+View [LLM-as-a-judge evaluators](llm-as-judge.md#evaluator-templates) for more information.
 
 ## Map multimodal content to evaluator
 
 If your traces contain multimodal content like images, audio, or documents, you can include this content in your evaluator prompts. There are two approaches:
 
 * **Using base64-encoded content from traces**: If your application logs multimodal content as base64-encoded data in the trace (for example, in the input or output of a run), you can reference this content directly in your evaluator prompt using template variables. The evaluator will extract the base64 data from the trace and pass it to the LLM.
-* **Using attachments from traces**: Similar to [offline evaluations with attachments](https://docs.langchain.com/langsmith/evaluate-with-attachments), you can use attachments from your traces in online evaluations. Since your traces already include attachments logged via the SDK, you can reference them directly in your evaluator.
+* **Using attachments from traces**: Similar to [offline evaluations with attachments](evaluate-with-attachments.md), you can use attachments from your traces in online evaluations. Since your traces already include attachments logged via the SDK, you can reference them directly in your evaluator.
 
   1. Select **+ Evaluator** from the dataset page.
   2. In the **Template variables** editor, add a variable for the attachment(s) to include:
      * If you want to include a specific attachment, you can use the suggested variable name, such as `{{attachment.file_name}}`, this will map the file with `file_name` in the attachment list to pass it to the evaluator.
      * If you want to include all attachments, use the `{{attachments}`}\` variable.
 
-> **Image:** [Edit evaluator modal with an image attachment selected for the input.](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+> **Image:** [Edit evaluator modal with an image attachment selected for the input.](online-evaluations-llm-as-judge.md)
 
-> **Image:** [Edit evaluator modal with an image attachment selected for the input.](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+> **Image:** [Edit evaluator modal with an image attachment selected for the input.](online-evaluations-llm-as-judge.md)
 
 The evaluator can then access these attachments when evaluating the trace. This is useful for evaluators that need to:
 

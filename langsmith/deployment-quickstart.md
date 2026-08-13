@@ -2,22 +2,22 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deployment-quickstart)
 Deploy your first application to LangSmith Cloud (AWS and GCP) using the LangGraph CLI.
 
-This quickstart shows you how to deploy an application to LangSmith Cloud (AWS and GCP) using the [`langgraph deploy`](https://docs.langchain.com/langsmith/cli#deploy) command. Any app that exports a graph from a [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
+This quickstart shows you how to deploy an application to LangSmith Cloud (AWS and GCP) using the [`langgraph deploy`](cli.md#deploy) command. Any app that exports a graph from a [`langgraph.json`](application-structure.md#configuration-file-concepts) config deploys the same way, regardless of which framework you used to author the agent.
 
 > [!TIP]
-> For a comprehensive Cloud deployment guide including GitHub-based deployments and all configuration options, refer to the [Cloud deployment setup guide](https://docs.langchain.com/langsmith/deploy-to-cloud).
+> For a comprehensive Cloud deployment guide including GitHub-based deployments and all configuration options, refer to the [Cloud deployment setup guide](deploy-to-cloud.md).
 
 > [!NOTE]
-> The `langgraph deploy` command is in **[beta](https://docs.langchain.com/langsmith/release-stages)**.
+> The `langgraph deploy` command is in **[beta](release-stages.md)**.
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 
-* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-quickstart) on the [Plus plan or above](https://www.langchain.com/pricing) and an [API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-quickstart) on the [Plus plan or above](https://www.langchain.com/pricing) and an [API key](create-account-api-key.md).
 * (Optional) **Docker** installed and the Docker daemon running for local builds. Not required for remote builds. [Install Docker Desktop](https://docs.docker.com/get-docker/). If Docker is not available, `langgraph deploy` triggers a remote build automatically.
 * (Optional) On Apple Silicon (M1/M2/M3): [Docker Buildx](https://docs.docker.com/build/install-buildx/) for cross-compiling to `linux/amd64` during local builds.
-* The [LangGraph CLI](https://docs.langchain.com/langsmith/cli):
+* The [LangGraph CLI](cli.md):
 
 ```shell
   uv tool install langgraph-cli
@@ -39,7 +39,7 @@ cd path/to/your/app
 > Run `langgraph new` without `--template` for an interactive menu of available templates.
 
 #### Bring your own framework
-Agents authored with Claude Agent SDK, Strands, CrewAI, AutoGen, or Google ADK deploy through the same CLI once they expose a graph from `langgraph.json`. For end-to-end examples, see [Deploy other frameworks](https://docs.langchain.com/langsmith/deploy-other-frameworks). Once your project exports a graph, return here for the remaining steps.
+Agents authored with Claude Agent SDK, Strands, CrewAI, AutoGen, or Google ADK deploy through the same CLI once they expose a graph from `langgraph.json`. For end-to-end examples, see [Deploy other frameworks](deploy-other-frameworks.md). Once your project exports a graph, return here for the remaining steps.
 
 ## 2. Set your API key
 
@@ -69,34 +69,34 @@ langgraph deploy
 This creates a Serverless deployment named after your project directory by default. Use `--name` or `--deployment-type dedicated` to override.
 
 > [!NOTE]
-> Organizations still on previous pricing until October 1, 2026 use `--deployment-type prod` or `--deployment-type dev` instead. For details, see [`langgraph deploy`](https://docs.langchain.com/langsmith/cli#deploy) and [Manage billing](https://docs.langchain.com/langsmith/billing#langsmith-deployment-billing).
+> Organizations still on previous pricing until October 1, 2026 use `--deployment-type prod` or `--deployment-type dev` instead. For details, see [`langgraph deploy`](cli.md#deploy) and [Manage billing](billing.md#langsmith-deployment-billing).
 
 > [!TIP]
 > To update an existing deployment after making code changes, re-run `langgraph deploy`. It finds the existing deployment by name and updates it in place.
 
-You can also use `langgraph deploy list` to see all deployments, `langgraph deploy logs` to tail runtime logs, and `langgraph deploy delete ` to remove a deployment. For details, refer to the [CLI reference](https://docs.langchain.com/langsmith/cli#deploy).
+You can also use `langgraph deploy list` to see all deployments, `langgraph deploy logs` to tail runtime logs, and `langgraph deploy delete ` to remove a deployment. For details, refer to the [CLI reference](cli.md#deploy).
 
 #### Deploy from Studio
 To deploy from studio:
 
-1. Start the [local development server](https://docs.langchain.com/langsmith/local-dev-testing#langgraph-dev). This will automatically open up [Studio](https://docs.langchain.com/langsmith/studio), an interactive agent IDE.
+1. Start the [local development server](local-dev-testing.md#langgraph-dev). This will automatically open up [Studio](studio.md), an interactive agent IDE.
 
 ```shell
 langgraph dev
 ```
 
 2. Click the `deploy` button.
-> **Image:** [Deploy from Studio](https://docs.langchain.com/langsmith/deployment-quickstart)
+> **Image:** [Deploy from Studio](deployment-quickstart.md)
 
 ## 4. Test in Studio
 
-[Studio](https://docs.langchain.com/langsmith/studio) is an interactive agent IDE connected directly to your deployment. Use it to send messages, inspect intermediate state at each node, edit state mid-run, and replay from any prior checkpoint without writing code.
+[Studio](studio.md) is an interactive agent IDE connected directly to your deployment. Use it to send messages, inspect intermediate state at each node, edit state mid-run, and replay from any prior checkpoint without writing code.
 
 Once the deployment is ready:
 
 1. Go to [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-deployment-quickstart) and select **Deployments** in the left sidebar.
 2. Select your deployment to view its details.
-3. Click **Studio** in the top right corner to open [Studio](https://docs.langchain.com/langsmith/studio).
+3. Click **Studio** in the top right corner to open [Studio](studio.md).
 
 ## 5. Test the API
 
@@ -209,13 +209,13 @@ curl -s --request POST \
 
 ## Next steps
 
-#### [Assistants](https://docs.langchain.com/langsmith/assistants)
+#### [Assistants](assistants.md)
 Deploy the same graph with different models, prompts, or tools per assistant.
 
-#### [Threads](https://docs.langchain.com/langsmith/use-threads)
+#### [Threads](use-threads.md)
 Persist state across multiple runs so your agent remembers context between interactions.
 
-#### [Runs](https://docs.langchain.com/langsmith/background-run)
+#### [Runs](background-run.md)
 Kick off background runs for long-running jobs and stream results back to your client.
 
 ***

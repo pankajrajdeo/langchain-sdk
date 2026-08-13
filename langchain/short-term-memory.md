@@ -13,10 +13,10 @@ Conversation history is the most common form of short-term memory. Long conversa
 
 Even if your model supports the full context length, most LLMs still perform poorly over long contexts. They get "distracted" by stale or off-topic content, all while suffering from slower response times and higher costs.
 
-Chat models accept context using [messages](https://docs.langchain.com/oss/python/langchain/messages), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
+Chat models accept context using [messages](messages.md), which include instructions (a system message) and inputs (human messages). In chat applications, messages alternate between human inputs and model responses, resulting in a list of messages that grows longer over time. Because context windows are limited, many applications can benefit from using techniques to remove or "forget" stale information.
 
 > [!TIP]
-> Need to remember information **across** conversations? Use [long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory) to store and recall user-specific or application-level data across different threads and sessions.
+> Need to remember information **across** conversations? Use [long-term memory](long-term-memory.md) to store and recall user-specific or application-level data across different threads and sessions.
 
 ## Usage
 
@@ -275,7 +275,7 @@ with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
 ```
 
 > [!NOTE]
-> For more checkpointer options including SQLite, Postgres, and Azure Cosmos DB, see the [list of checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) in the Persistence documentation.
+> For more checkpointer options including SQLite, Postgres, and Azure Cosmos DB, see the [list of checkpointer libraries](../langgraph/checkpointers.md#checkpointer-libraries) in the Persistence documentation.
 
 ## Customizing agent memory
 
@@ -310,15 +310,15 @@ result = agent.invoke(
 
 ## Common patterns
 
-With [short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
+With [short-term memory](#usage) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
-#### [Trim messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#trim-messages)
+#### [Trim messages](#trim-messages)
 Remove first or last N messages (before calling LLM)
 
-#### [Delete messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#delete-messages)
+#### [Delete messages](#delete-messages)
 Delete messages from LangGraph state permanently
 
-#### [Summarize messages](https://docs.langchain.com/oss/python/langchain/short-term-memory#summarize-messages)
+#### [Summarize messages](#summarize-messages)
 Summarize earlier messages in the history and replace them with a summary
 
 #### Custom strategies
@@ -394,7 +394,7 @@ This is useful when you want to remove specific messages or clear the entire mes
 
 To delete messages from the graph state, you can use the `RemoveMessage`.
 
-For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers).
+For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](../langgraph/graph-api.md#reducers).
 
 The default [`AgentState`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentState) provides this.
 
@@ -493,9 +493,9 @@ for snapshot in stream.values:
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue.
 Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-> **Image:** [Summary](https://docs.langchain.com/oss/python/langchain/short-term-memory)
+> **Image:** [Summary](short-term-memory.md)
 
-To summarize message history in an agent, use the built-in [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization):
+To summarize message history in an agent, use the built-in [`SummarizationMiddleware`](middleware.md#summarization):
 
 ```python
 from langchain.agents import create_agent
@@ -532,7 +532,7 @@ Your name is Bob!
 """
 ```
 
-See [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization) for more configuration options.
+See [`SummarizationMiddleware`](middleware.md#summarization) for more configuration options.
 
 ## Access memory
 

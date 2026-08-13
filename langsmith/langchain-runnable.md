@@ -1,7 +1,7 @@
 # How to evaluate a runnable
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/langchain-runnable)
 > [!NOTE]
-> * `langchain`: [Python](https://docs.langchain.com/oss/python/langchain/overview) and [JS/TS](https://docs.langchain.com/oss/javascript/langchain/overview)
+> * `langchain`: [Python](../langchain/overview.md) and [JS/TS](https://docs.langchain.com/oss/javascript/langchain/overview)
 > * Runnable: [Python](https://reference.langchain.com/python/langchain_core/runnables/) and [JS/TS](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.Runnable.html)
 
 `langchain` [`Runnable`](https://reference.langchain.com/python/langchain_core/runnables/) objects (such as chat models, retrievers, chains, etc.) can be passed directly into `evaluate()` / `aevaluate()`.
@@ -110,11 +110,11 @@ await evaluate(chain, {
 
 The runnable is traced appropriately for each output.
 
-> **Image:** [Runnable Evaluation](https://docs.langchain.com/langsmith/langchain-runnable)
+> **Image:** [Runnable Evaluation](langchain-runnable.md)
 
 ## Related
 
-* [How to evaluate a `langgraph` graph](https://docs.langchain.com/langsmith/evaluate-on-intermediate-steps)
+* [How to evaluate a `langgraph` graph](evaluate-on-intermediate-steps.md)
 
 ***
 

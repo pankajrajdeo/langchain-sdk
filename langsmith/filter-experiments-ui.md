@@ -62,19 +62,19 @@ for model_type, model in models.items():
 
 In the UI, we see all experiments that have been run by default.
 
-> **Image:** [Filter all experiments](https://docs.langchain.com/langsmith/filter-experiments-ui)
+> **Image:** [Filter all experiments](filter-experiments-ui.md)
 
 If we, say, have a preference for openai models, we can easily filter down and see scores within just openai models first:
 
-> **Image:** [Filter openai](https://docs.langchain.com/langsmith/filter-experiments-ui)
+> **Image:** [Filter openai](filter-experiments-ui.md)
 
 We can stack filters, allowing us to filter out low scores on correctness to make sure we only compare relevant experiments:
 
-> **Image:** [Filter feedback](https://docs.langchain.com/langsmith/filter-experiments-ui)
+> **Image:** [Filter feedback](filter-experiments-ui.md)
 
 Finally, we can clear and reset filters. For example, if we see there is clear there's a winner with the `singleminded` prompt, we can change filtering settings to see if any other model providers' models work as well with it:
 
-> **Image:** [Filter singleminded](https://docs.langchain.com/langsmith/filter-experiments-ui)
+> **Image:** [Filter singleminded](filter-experiments-ui.md)
 
 ***
 

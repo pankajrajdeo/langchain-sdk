@@ -9,7 +9,7 @@ Learn how to trace n8n AI workflows in LangSmith.
 
 ## Prerequisites
 
-* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-n8n) and [API key](https://docs.langchain.com/langsmith/create-account-api-key)
+* A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-with-n8n) and [API key](create-account-api-key.md)
 * A self-hosted n8n instance
 
 ## Set up tracing

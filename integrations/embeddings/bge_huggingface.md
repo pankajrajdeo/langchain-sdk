@@ -50,11 +50,11 @@ Different BGE variants use different prompts; check each model card on Hugging F
 | `BAAI/bge-large-en-v1.5` | 335M | Stronger English, widely used baseline                     |
 | `BAAI/bge-m3`            | 570M | Multilingual; dense, sparse, and multi-vector in one model |
 
-For reranking (not embedding), see [`BAAI/bge-reranker-v2-m3`](https://huggingface.co/BAAI/bge-reranker-v2-m3) via the [Cross Encoder Reranker guide](https://docs.langchain.com/oss/python/integrations/document_transformers/cross_encoder_reranker).
+For reranking (not embedding), see [`BAAI/bge-reranker-v2-m3`](https://huggingface.co/BAAI/bge-reranker-v2-m3) via the [Cross Encoder Reranker guide](../document_transformers/cross_encoder_reranker.md).
 
 ## More
 
-See the [Sentence Transformers integration page](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers) for GPU configuration, batch sizes, query/document prompts, and deployment options.
+See the [Sentence Transformers integration page](sentence_transformers.md) for GPU configuration, batch sizes, query/document prompts, and deployment options.
 
 ***
 

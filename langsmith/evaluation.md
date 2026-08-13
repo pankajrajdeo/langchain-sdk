@@ -26,69 +26,69 @@ You can log in with **Google**, **GitHub**, or **email**.
 Go to your [Settings page](https://smith.langchain.com/settings) → **API Keys** → **Create API Key**.
 Copy the key and save it securely.
 
-Once your account and API key are ready, [run your first evaluation](https://docs.langchain.com/langsmith/evaluation-quickstart).
+Once your account and API key are ready, [run your first evaluation](evaluation-quickstart.md).
 
 ## Evaluation workflow
 
 #### Offline evaluation flow
 ### Create a dataset
-Create a [dataset](https://docs.langchain.com/langsmith/manage-datasets) with [examples](https://docs.langchain.com/langsmith/evaluation-concepts#examples) from manually curated test cases, historical production traces, or synthetic data generation.
+Create a [dataset](manage-datasets.md) with [examples](evaluation-concepts.md#examples) from manually curated test cases, historical production traces, or synthetic data generation.
 
 ### Define evaluators
-Create [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) to score performance:
+Create [evaluators](evaluation-concepts.md#evaluators) to score performance:
 
-* [Human](https://docs.langchain.com/langsmith/evaluation-concepts#human) review
-* [Code](https://docs.langchain.com/langsmith/evaluation-concepts#code) rules
-* [LLM-as-judge](https://docs.langchain.com/langsmith/llm-as-judge)
-* [Pairwise](https://docs.langchain.com/langsmith/evaluate-pairwise) comparison
+* [Human](evaluation-concepts.md#human) review
+* [Code](evaluation-concepts.md#code) rules
+* [LLM-as-judge](llm-as-judge.md)
+* [Pairwise](evaluate-pairwise.md) comparison
 
 ### Run an experiment
-Execute your application on the dataset to create an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment). Configure [repetitions, concurrency, and caching](https://docs.langchain.com/langsmith/experiment-configuration) to optimize runs.
+Execute your application on the dataset to create an [experiment](evaluation-concepts.md#experiment). Configure [repetitions, concurrency, and caching](experiment-configuration.md) to optimize runs.
 
 ### Analyze results
-Compare experiments for [benchmarking](https://docs.langchain.com/langsmith/evaluation-types#benchmarking), [unit tests](https://docs.langchain.com/langsmith/evaluation-types#unit-tests), [regression tests](https://docs.langchain.com/langsmith/evaluation-types#regression-tests), or [backtesting](https://docs.langchain.com/langsmith/evaluation-types#backtesting).
+Compare experiments for [benchmarking](evaluation-types.md#benchmarking), [unit tests](evaluation-types.md#unit-tests), [regression tests](evaluation-types.md#regression-tests), or [backtesting](evaluation-types.md#backtesting).
 
 #### Online evaluation flow
 ### Deploy your application
-Each interaction creates a [run](https://docs.langchain.com/langsmith/evaluation-concepts#runs) without reference outputs.
+Each interaction creates a [run](evaluation-concepts.md#runs) without reference outputs.
 
 ### Configure online evaluators
-Set up [evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) to run automatically on production traces: safety checks, format validation, quality heuristics, and reference-free LLM-as-judge. Apply [filters and sampling rates](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge#configure-a-sampling-rate) to control costs.
+Set up [evaluators](online-evaluations-llm-as-judge.md) to run automatically on production traces: safety checks, format validation, quality heuristics, and reference-free LLM-as-judge. Apply [filters and sampling rates](online-evaluations-llm-as-judge.md#configure-a-sampling-rate) to control costs.
 
 ### Monitor in real-time
-Evaluators run automatically on [runs](https://docs.langchain.com/langsmith/evaluation-concepts#runs) or [threads](https://docs.langchain.com/langsmith/online-evaluations-multi-turn), providing real-time monitoring, anomaly detection, and alerting.
+Evaluators run automatically on [runs](evaluation-concepts.md#runs) or [threads](online-evaluations-multi-turn.md), providing real-time monitoring, anomaly detection, and alerting.
 
 ### Establish a feedback loop
-Add failing production traces to your [dataset](https://docs.langchain.com/langsmith/manage-datasets), create targeted evaluators, validate fixes with offline experiments, and redeploy.
+Add failing production traces to your [dataset](manage-datasets.md), create targeted evaluators, validate fixes with offline experiments, and redeploy.
 
 > [!TIP]
-> For more on the differences between offline and online evaluation, refer to the [Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts#quick-reference-offline-vs-online-evaluation) page.
+> For more on the differences between offline and online evaluation, refer to the [Evaluation concepts](evaluation-concepts.md#quick-reference-offline-vs-online-evaluation) page.
 
 ## Get started
 
-#### [Evaluation quickstart](https://docs.langchain.com/langsmith/evaluation-quickstart)
+#### [Evaluation quickstart](evaluation-quickstart.md)
 Get started with offline evaluation.
 
-#### [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets)
+#### [Manage datasets](manage-datasets.md)
 Create and manage datasets for evaluation through the UI or SDK.
 
-#### [Run offline evaluations](https://docs.langchain.com/langsmith/evaluate-llm-application)
+#### [Run offline evaluations](evaluate-llm-application.md)
 Explore evaluation types, techniques, and frameworks for comprehensive testing.
 
-#### [Analyze results](https://docs.langchain.com/langsmith/analyze-an-experiment)
+#### [Analyze results](analyze-an-experiment.md)
 View and analyze evaluation results, compare experiments, filter data, and export findings.
 
-#### [Run online evaluations](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+#### [Run online evaluations](online-evaluations-llm-as-judge.md)
 Monitor production quality in real-time from the Observability tab.
 
-#### [Follow tutorials](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+#### [Follow tutorials](evaluate-chatbot-tutorial.md)
 Learn by following step-by-step tutorials, from simple chatbots to complex agent evaluations.
 
-#### [Studio](https://docs.langchain.com/langsmith/studio)
+#### [Studio](studio.md)
 Use an interactive environment for developing and debugging agents.
 
 > [!NOTE]
-> To set up a LangSmith instance, visit the [Platform setup section](https://docs.langchain.com/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
+> To set up a LangSmith instance, visit the [Platform setup section](platform-setup.md) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
 
 ***
 

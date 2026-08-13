@@ -8,19 +8,19 @@ Managed Deep Agents lets you define an agent as a folder and run it on managed L
 
 An agent starts as a project folder that contains the business logic for its behavior:
 
-* **[Instructions](https://docs.langchain.com/langsmith/python/managed-deep-agents-instructions)**: The prompt that defines what the agent does and how it behaves.
-* **[Tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools)**: Functions the agent can call to interact with other systems or take actions.
-* **[MCP connectors](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors)**: Remote MCP servers that provide tools to the agent.
-* **[Skills](https://docs.langchain.com/langsmith/python/managed-deep-agents-skills)**: Reusable, task-specific instructions and resources.
+* **[Instructions](managed-deep-agents-instructions.md)**: The prompt that defines what the agent does and how it behaves.
+* **[Tools](managed-deep-agents-tools.md)**: Functions the agent can call to interact with other systems or take actions.
+* **[MCP connectors](managed-deep-agents-mcp-connectors.md)**: Remote MCP servers that provide tools to the agent.
+* **[Skills](managed-deep-agents-skills.md)**: Reusable, task-specific instructions and resources.
 
-You can add other capabilities as needed. For the complete folder layout, see [Project structure](https://docs.langchain.com/langsmith/python/managed-deep-agents-project-structure).
+You can add other capabilities as needed. For the complete folder layout, see [Project structure](managed-deep-agents-project-structure.md).
 
 ## Run on a managed harness
 
 Managed Deep Agents combines three layers:
 
 * **Your business logic**: The instructions, tools, and skills in your project folder.
-* **Agent harness**: The battle-tested [Deep Agents harness](https://docs.langchain.com/oss/python/deepagents/overview) that runs the agent and connects its business logic.
+* **Agent harness**: The battle-tested [Deep Agents harness](../../deepagents/overview.md) that runs the agent and connects its business logic.
 * **Managed infrastructure**: LangSmith infrastructure that operates the agent at scale for production and multi-user applications.
 
 This separation lets you focus on what the agent should do instead of building and operating the systems required to run it.
@@ -29,14 +29,14 @@ This separation lets you focus on what the agent should do instead of building a
 
 The opinionated infrastructure consists of several pieces:
 
-* **Runtime**: [LangSmith Agent Server](https://docs.langchain.com/langsmith/agent-server) runs agents in a durable, fault-tolerant manner.
-* **Sandboxes**: [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes) let agents write and execute untrusted code in an isolated environment.
-* **Evals**: Managed Deep Agents uses [Harbor tasks](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals) to test agent behavior.
-* **Channels**: The [channels abstraction](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels) connects an agent to platforms where its users work.
-* **Memory**: [Managed memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory) lets agents remember information across interactions.
-* **Context management**: [LangSmith Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) manages agent instructions and skills. You can update them in the LangSmith UI without redeploying the agent.
+* **Runtime**: [LangSmith Agent Server](../agent-server.md) runs agents in a durable, fault-tolerant manner.
+* **Sandboxes**: [LangSmith Sandboxes](../sandboxes.md) let agents write and execute untrusted code in an isolated environment.
+* **Evals**: Managed Deep Agents uses [Harbor tasks](managed-deep-agents-evals.md) to test agent behavior.
+* **Channels**: The [channels abstraction](managed-deep-agents-channels.md) connects an agent to platforms where its users work.
+* **Memory**: [Managed memory](managed-deep-agents-memory.md) lets agents remember information across interactions.
+* **Context management**: [LangSmith Context Hub](../use-the-context-hub.md) manages agent instructions and skills. You can update them in the LangSmith UI without redeploying the agent.
 
-To create and deploy an agent, follow the [Managed Deep Agents quickstart](https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart).
+To create and deploy an agent, follow the [Managed Deep Agents quickstart](managed-deep-agents-quickstart.md).
 
 ***
 

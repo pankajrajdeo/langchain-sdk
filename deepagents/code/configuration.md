@@ -2,20 +2,20 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/configuration)
 Configure Deep Agents Code with config.toml, environment variables, hooks, and CLI flags
 
-Deep Agents Code stores configuration under `~/.deepagents/` and in project-level dotfiles. For the full directory tree, session storage, and skill paths, see [Data locations](https://docs.langchain.com/oss/deepagents/code/configuration#data-locations).
+Deep Agents Code stores configuration under `~/.deepagents/` and in project-level dotfiles. For the full directory tree, session storage, and skill paths, see [Data locations](#data-locations).
 
 The main config files are:
 
-#### [Config file](https://docs.langchain.com/oss/deepagents/code/config-file)
+#### [Config file](config-file.md)
 Edit `config.toml` for model defaults, provider settings, themes, and update settings.
 
-#### [Environment variables](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables)
+#### [Environment variables](#environment-variables)
 Set global API keys and secrets in `~/.deepagents/.env` or shell exports.
 
-#### [Hooks](https://docs.langchain.com/oss/deepagents/code/hooks)
+#### [Hooks](hooks.md)
 Subscribe external commands to lifecycle events in `hooks.json`.
 
-#### [MCP servers](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
+#### [MCP servers](mcp-tools.md)
 Define global MCP servers in `~/.deepagents/.mcp.json`.
 
 ## How settings resolve
@@ -29,13 +29,13 @@ Deep Agents Code merges settings from several sources. Which source wins depends
 3. `~/.deepagents/config.toml`
 4. Built-in default
 
-Use `dcode config show` or `dcode config get <key>` to see the effective value and source. See [Inspect configuration](https://docs.langchain.com/oss/deepagents/code/configuration#inspect-configuration).
+Use `dcode config show` or `dcode config get <key>` to see the effective value and source. See [Inspect configuration](#inspect-configuration).
 
-**Provider API keys** use a separate order. See [Key resolution order](https://docs.langchain.com/oss/deepagents/code/credentials#key-resolution-order).
+**Provider API keys** use a separate order. See [Key resolution order](credentials.md#key-resolution-order).
 
-**Dotenv files** load at startup: the nearest project `.env` (walking up from the launch directory), then `~/.deepagents/.env`. Shell exports always beat `.env` values. See [Loading order and precedence](https://docs.langchain.com/oss/deepagents/code/configuration#loading-order-and-precedence).
+**Dotenv files** load at startup: the nearest project `.env` (walking up from the launch directory), then `~/.deepagents/.env`. Shell exports always beat `.env` values. See [Loading order and precedence](#loading-order-and-precedence).
 
-**Provider endpoints** (`base_url`) resolve with their matching API key. See [Endpoints, keys, and gateways](https://docs.langchain.com/oss/deepagents/code/config-file#endpoints-keys-and-gateways).
+**Provider endpoints** (`base_url`) resolve with their matching API key. See [Endpoints, keys, and gateways](config-file.md#endpoints-keys-and-gateways).
 
 ## Inspect configuration
 
@@ -48,7 +48,7 @@ The `dcode config` command group reports what configuration is in effect and whe
 | `dcode config get <key>`         | Show the effective value and source for a single option, e.g. `dcode config get interpreter.memory_limit_mb`                                     |
 | `dcode config path`              | Show the on-disk config file locations (`config.toml`, project and global `.env`, `hooks.json`, and managed state files) and whether each exists |
 
-All four commands accept `--json` for machine-readable output. For the full list of management subcommands, see [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference).
+All four commands accept `--json` for machine-readable output. For the full list of management subcommands, see [CLI reference](cli-reference.md).
 
 > [!WARNING]
 > Provider credentials and other secrets are reported as configured / not configured only—their values are never printed by `config show` or `config get`, so the output is safe to paste into a bug report.
@@ -62,18 +62,20 @@ ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
 ```
 
-For provider keys specifically, see [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials).
+For provider keys specifically, see [Provider credentials](credentials.md).
 
 ### Loading order and precedence
 
 At startup, Deep Agents Code reads the nearest project `.env`, found by searching the directory you launch from and walking up through its parents (the first `.env` found wins), then `~/.deepagents/.env` as a global fallback for all projects. A project `.env` wins over the global one, and neither overrides a value already set in your shell. Running `/reload` re-reads both `.env` files so you can change keys without restarting, with shell values still taking precedence. This applies to every variable Deep Agents Code reads (for example, `TAVILY_API_KEY` or the `DEEPAGENTS_CODE_*` settings), except `DEEPAGENTS_CODE_DANGEROUSLY_ENABLE_PROJECT_MCP_SERVERS` and `DEEPAGENTS_CODE_DISABLED_PROJECT_MCP_SERVERS`. Deep Agents Code ignores these project MCP trust settings in a project `.env` so a repository cannot approve its own servers. Set them in your shell or the global `~/.deepagents/.env` instead.
 
 > [!WARNING]
-> Running `dcode` inside an untrusted project directory exposes you to project-controlled files. A malicious `.env`, `Makefile`, or build script in that directory can influence the agent's process environment and what it runs. Treat any directory you would not run arbitrary scripts in as untrusted, and use a [remote sandbox](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes) for untrusted repositories.
+> Running `dcode` inside an untrusted project directory exposes you to project-controlled files. A malicious `.env`, `Makefile`, or build script in that directory can influence the agent's process environment and what it runs. Treat any directory you would not run arbitrary scripts in as untrusted, and use a [remote sandbox](remote-sandboxes.md) for untrusted repositories.
+
+<a id="deepagents_code_-prefix"></a>
 
 ### `DEEPAGENTS_CODE_` prefix
 
-All Deep Agents Code-specific environment variables use a `DEEPAGENTS_CODE_` prefix (e.g., `DEEPAGENTS_CODE_AUTO_UPDATE`, `DEEPAGENTS_CODE_DEBUG`). See the [environment variable reference](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variable-reference) for the full list.
+All Deep Agents Code-specific environment variables use a `DEEPAGENTS_CODE_` prefix (e.g., `DEEPAGENTS_CODE_AUTO_UPDATE`, `DEEPAGENTS_CODE_DEBUG`). See the [environment variable reference](#environment-variable-reference) for the full list.
 
 The prefix also works as an override mechanism for any environment variable Deep Agents Code reads, including third-party credentials. Deep Agents Code checks `DEEPAGENTS_CODE_{NAME}` first, then falls back to `{NAME}`:
 
@@ -87,7 +89,7 @@ DEEPAGENTS_CODE_ANTHROPIC_API_KEY=
 
 ## Skill directory allowlist
 
-By default, when Deep Agents Code loads skills it validates that a resolved skill file path stays inside one of the standard [skill directories](https://docs.langchain.com/oss/deepagents/code/configuration#skills). This prevents symlinks inside skill directories from reading arbitrary files outside those roots.
+By default, when Deep Agents Code loads skills it validates that a resolved skill file path stays inside one of the standard [skill directories](#skills). This prevents symlinks inside skill directories from reading arbitrary files outside those roots.
 
 If you store shared skill assets in a non-standard location and use symlinks from a standard skill directory to reference them, you can add that location to the containment allowlist. This does **not** add a new skill discovery location: skills are still only discovered from the standard directories.
 
@@ -121,7 +123,7 @@ Deep Agents Code ships with many built-in themes. The default theme is `langchai
 theme = "langchain-dark"
 ```
 
-For user-defined themes, built-in overrides, and terminal-specific mappings, see the `[themes.*]` and `[ui.terminal_themes]` sections in [Config file](https://docs.langchain.com/oss/deepagents/code/config-file) or configure them directly in `config.toml`:
+For user-defined themes, built-in overrides, and terminal-specific mappings, see the `[themes.*]` and `[ui.terminal_themes]` sections in [Config file](config-file.md) or configure them directly in `config.toml`:
 
 <details>
 <summary>User-defined themes, overrides, and terminal mapping</summary>
@@ -287,17 +289,17 @@ Path to the uv binary. Auto-detected if unset.
 
 Auto-update is enabled by default for managed installs. To opt out, set `DEEPAGENTS_CODE_AUTO_UPDATE=0` in the user's shell profile or deploy a `config.toml` with `[update] auto_update = false` to `~/.deepagents/config.toml`. To suppress automatic updates and update checks entirely, set `DEEPAGENTS_CODE_NO_UPDATE_CHECK=1` or deploy `[update] check = false`.
 
-To route every user's model traffic through a managed gateway (provisioning a gateway key and base URL fleet-wide), see [Managed gateways](https://docs.langchain.com/oss/deepagents/code/config-file#managed-gateways).
+To route every user's model traffic through a managed gateway (provisioning a gateway key and base URL fleet-wide), see [Managed gateways](config-file.md#managed-gateways).
 
 ## Environment variable reference
 
-All Deep Agents Code-specific environment variables use the `DEEPAGENTS_CODE_` prefix. See [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) for how the prefix also works as an override for third-party credentials.
+All Deep Agents Code-specific environment variables use the `DEEPAGENTS_CODE_` prefix. See [`DEEPAGENTS_CODE_` prefix](#deepagents_code_-prefix) for how the prefix also works as an override for third-party credentials.
 
 #### `DEEPAGENTS_CODE_AUTO_UPDATE` — `string`
 Toggle automatic Deep Agents Code updates. Enabled by default; set to `0`, `false`, `no`, or `off` to opt out.
 
 #### `DEEPAGENTS_CODE_AUTO_CLASSIFIER_TIMEOUT` — `integer`
-Time budget in seconds for the [Auto mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) classifier to review each batch of gated actions. Valid range: `1`–`300`. Out-of-range or non-integer values fall back to the default (`20`). Consider [selecting a faster classifier model](https://docs.langchain.com/oss/deepagents/code/config-file#default-and-recent-model) before raising this value. Overrides `[models].auto_classifier_timeout` in `config.toml`. See [Auto classifier timeout](https://docs.langchain.com/oss/deepagents/code/config-file#auto-classifier-timeout).
+Time budget in seconds for the [Auto mode](approval-modes.md) classifier to review each batch of gated actions. Valid range: `1`–`300`. Out-of-range or non-integer values fall back to the default (`20`). Consider [selecting a faster classifier model](config-file.md#default-and-recent-model) before raising this value. Overrides `[models].auto_classifier_timeout` in `config.toml`. See [Auto classifier timeout](config-file.md#auto-classifier-timeout).
 
 #### `DEEPAGENTS_CODE_DEBUG` — `string`
 Enable verbose debug logging to a file. Accepts `1`, `true`, `yes`, `on` (case-insensitive) as enabled; `0`, `false`, `no`, `off`, empty string, or unset disables it. When enabled, the per-session server log file is preserved on shutdown and its path is printed to stderr for triage.
@@ -318,16 +320,16 @@ Comma-separated project MCP server names to always reject by name. Deep Agents C
 Comma-separated project MCP server names to pre-approve by name for any project. This is a process-wide escape hatch: A different project, command change, or URL change under the same server name still matches. When set, this variable replaces saved approvals for the process. Prefer saved approvals from the project MCP prompt when possible.
 
 #### `DEEPAGENTS_CODE_EXTRA_SKILLS_DIRS` — `string`
-Colon-separated paths added to the [skill containment allowlist](https://docs.langchain.com/oss/deepagents/code/configuration#skill-directory-allowlist).
+Colon-separated paths added to the [skill containment allowlist](#skill-directory-allowlist).
 
 #### `DEEPAGENTS_CODE_LANGSMITH_PROJECT` — `string`
-Override the LangSmith project name for Deep Agents Code's own agent traces. Shell commands still run with the user's original `LANGSMITH_PROJECT`, so app, test, or script traces can appear in a separate project. See [Trace with LangSmith](https://docs.langchain.com/oss/deepagents/code/quickstart#trace-with-langsmith).
+Override the LangSmith project name for Deep Agents Code's own agent traces. Shell commands still run with the user's original `LANGSMITH_PROJECT`, so app, test, or script traces can appear in a separate project. See [Trace with LangSmith](quickstart.md#trace-with-langsmith).
 
 #### `DEEPAGENTS_CODE_LANGSMITH_REDACT` — `string`
-Toggle client-side secret redaction for Deep Agents Code's LangSmith agent-trace inputs and outputs. Accepts `1`, `true`, `yes`, or `on` to enable redaction and `0`, `false`, `no`, or `off` to disable it, case-insensitively. When redaction is enabled, tracing is disabled for that run if redaction cannot be configured. See [Configure LangSmith trace redaction](https://docs.langchain.com/oss/deepagents/code/config-file#redact-langsmith-trace-secrets).
+Toggle client-side secret redaction for Deep Agents Code's LangSmith agent-trace inputs and outputs. Accepts `1`, `true`, `yes`, or `on` to enable redaction and `0`, `false`, `no`, or `off` to disable it, case-insensitively. When redaction is enabled, tracing is disabled for that run if redaction cannot be configured. See [Configure LangSmith trace redaction](config-file.md#redact-langsmith-trace-secrets).
 
 #### `DEEPAGENTS_CODE_LANGSMITH_REPLICA_PROJECTS` — `string`
-A second LangSmith project to *also* write agent traces to. When set and tracing is active, each agent run is dual-written to the primary project (from `DEEPAGENTS_CODE_LANGSMITH_PROJECT`, or `deepagents-code` by default) and this project. Off by default. See [Trace with LangSmith](https://docs.langchain.com/oss/deepagents/code/quickstart#trace-with-langsmith).
+A second LangSmith project to *also* write agent traces to. When set and tracing is active, each agent run is dual-written to the primary project (from `DEEPAGENTS_CODE_LANGSMITH_PROJECT`, or `deepagents-code` by default) and this project. Off by default. See [Trace with LangSmith](quickstart.md#trace-with-langsmith).
 
 #### `DEEPAGENTS_CODE_NO_UPDATE_CHECK` — `string`
 Disable automatic update checking when set. This also prevents automatic update installs at startup.
@@ -336,7 +338,7 @@ Disable automatic update checking when set. This also prevents automatic update 
 Override the first-run onboarding flow. Set to a truthy value to force it open on every startup; set to a falsy value to suppress it entirely (useful for CI and provisioned machines). Leave unset for the default first-run behavior.
 
 #### `DEEPAGENTS_CODE_RECURSION_LIMIT` — `integer`
-LangGraph graph step budget, which is the maximum number of node invocations the `dcode` agent graph may execute per turn. Valid range: `25`–`100000`. Out-of-range or non-integer values log a warning and fall back to the default (`2000`). Overridden by `--recursion-limit` at the CLI. See [Agent runtime limits](https://docs.langchain.com/oss/deepagents/code/config-file#agent-runtime-limits).
+LangGraph graph step budget, which is the maximum number of node invocations the `dcode` agent graph may execute per turn. Valid range: `25`–`100000`. Out-of-range or non-integer values log a warning and fall back to the default (`2000`). Overridden by `--recursion-limit` at the CLI. See [Agent runtime limits](config-file.md#agent-runtime-limits).
 
 #### `DEEPAGENTS_CODE_SHELL_ALLOW_LIST` — `string`
 Comma-separated shell commands to allow (or `recommended` / `all`).
@@ -440,7 +442,7 @@ Deep Agents Code stores data in two directory hierarchies:
 | ------------------------ | ------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Sessions**             | `~/.deepagents/.state/sessions.db`         | R/W        | SQLite checkpoint database                                                                                                                                                  |
 | **Input history**        | `~/.deepagents/.state/history.jsonl`       | R/W        | JSON-lines, up/down arrow recall                                                                                                                                            |
-| **ChatGPT OAuth token**  | `~/.deepagents/.state/chatgpt-auth.json`   | R/W        | Backs the [`openai_codex`](https://docs.langchain.com/oss/deepagents/code/providers) provider; created when you sign in with ChatGPT and refreshed automatically. Readable only by your user account. |
+| **ChatGPT OAuth token**  | `~/.deepagents/.state/chatgpt-auth.json`   | R/W        | Backs the [`openai_codex`](providers.md) provider; created when you sign in with ChatGPT and refreshed automatically. Readable only by your user account. |
 | **Base instructions**    | Package `default_agent_prompt.md`          | R          | Immutable, updated with Deep Agents Code upgrades                                                                                                                           |
 | **User customizations**  | `~/.deepagents/{agent}/AGENTS.md`          | R/W        | Appended to base instructions                                                                                                                                               |
 | **Project instructions** | `.deepagents/AGENTS.md` or `AGENTS.md`     | R          | Both loaded if present                                                                                                                                                      |
@@ -472,7 +474,7 @@ Precedence order (lowest to highest):
 1. `~/.deepagents/{agent}/agents/` — User-level
 2. `.deepagents/agents/` — Project-level *(highest)*
 
-Each subagent is an `AGENTS.md` file with YAML frontmatter (`name`, `description`, optional `model`) and a markdown body for the system prompt. See [Use subagents in Deep Agents Code](https://docs.langchain.com/oss/deepagents/code/subagents) for the full format reference.
+Each subagent is an `AGENTS.md` file with YAML frontmatter (`name`, `description`, optional `model`) and a markdown body for the system prompt. See [Use subagents in Deep Agents Code](subagents.md) for the full format reference.
 
 #### Instructions
 
@@ -515,12 +517,12 @@ All instruction sources are **combined** (not overridden):
 
 ## See also
 
-* [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials)
-* [Config file](https://docs.langchain.com/oss/deepagents/code/config-file)
-* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
-* [Hooks](https://docs.langchain.com/oss/deepagents/code/hooks)
-* [Data locations](https://docs.langchain.com/oss/deepagents/code/configuration#data-locations)
-* [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
+* [Provider credentials](credentials.md)
+* [Config file](config-file.md)
+* [CLI reference](cli-reference.md)
+* [Hooks](hooks.md)
+* [Data locations](#data-locations)
+* [MCP tools](mcp-tools.md)
 
 ***
 

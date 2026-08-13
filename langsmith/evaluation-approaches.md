@@ -4,13 +4,13 @@ Below, we will discuss evaluation of a few popular types of LLM applications.
 
 ## Agents
 
-[LLM-powered autonomous agents](https://lilianweng.github.io/posts/2023-06-23-agent/) combine three components (1) Tool calling, (2) Memory, and (3) Planning. Agents [use tool calling](https://docs.langchain.com/oss/python/langchain/tools) with planning (e.g., often via prompting) and memory (e.g., often short-term message history) to generate responses. [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) allows a model to respond to a given prompt by generating two things: (1) a tool to invoke and (2) the input arguments required.
+[LLM-powered autonomous agents](https://lilianweng.github.io/posts/2023-06-23-agent/) combine three components (1) Tool calling, (2) Memory, and (3) Planning. Agents [use tool calling](../langchain/tools.md) with planning (e.g., often via prompting) and memory (e.g., often short-term message history) to generate responses. [Tool calling](../langchain/tools.md) allows a model to respond to a given prompt by generating two things: (1) a tool to invoke and (2) the input arguments required.
 
-> **Image:** [Tool use](https://docs.langchain.com/langsmith/evaluation-approaches)
+> **Image:** [Tool use](evaluation-approaches.md)
 
 Below is a tool-calling agent in [LangGraph](https://langchain-ai.github.io/langgraph/tutorials/introduction/). The `assistant node` is an LLM that determines whether to invoke a tool based upon the input. The `tool condition` sees if a tool was selected by the `assistant node` and, if so, routes to the `tool node`. The `tool node` executes the tool and returns the output as a tool message to the `assistant node`. This loop continues as long as the `assistant node` selects a tool. If no tool is selected, then the agent directly returns the LLM response.
 
-> **Image:** [Agent](https://docs.langchain.com/langsmith/evaluation-approaches)
+> **Image:** [Agent](evaluation-approaches.md)
 
 This sets up three general types of agent evaluations that users are often interested in:
 
@@ -18,7 +18,7 @@ This sets up three general types of agent evaluations that users are often inter
 * `Single step`: Evaluate any agent step in isolation (e.g., whether it selects the appropriate tool).
 * `Trajectory`: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
 
-> **Image:** [Agent-eval](https://docs.langchain.com/langsmith/evaluation-approaches)
+> **Image:** [Agent-eval](evaluation-approaches.md)
 
 The following sections cover what these are, the components (inputs, outputs, evaluators) needed for each one, and when you should consider this. Common use cases often use multiple or all of these types of evaluations; they are not mutually exclusive.
 
@@ -62,20 +62,20 @@ However, none of these approaches evaluate the input to the tools; they only foc
 
 ## Evaluate RAG applications
 
-[Retrieval-augmented generation (RAG)](https://github.com/langchain-ai/rag-from-scratch) retrieves documents for a user input and passes them to a model so the response can use external knowledge. For a step-by-step walkthrough, see [Evaluate a RAG application](https://docs.langchain.com/langsmith/evaluate-rag-tutorial).
+[Retrieval-augmented generation (RAG)](https://github.com/langchain-ai/rag-from-scratch) retrieves documents for a user input and passes them to a model so the response can use external knowledge. For a step-by-step walkthrough, see [Evaluate a RAG application](evaluate-rag-tutorial.md).
 
 ### Choose a dataset
 
 When you evaluate RAG applications, start by deciding whether you have a reference answer for each example:
 
 * **With reference answers**: Use them as ground truth to score answer correctness.
-* **Without reference answers**: Use reference-free prompts that check document relevance, answer faithfulness, and helpfulness (see [RAG evaluation summary](https://docs.langchain.com/langsmith/evaluation-approaches#rag-evaluation-summary)).
+* **Without reference answers**: Use reference-free prompts that check document relevance, answer faithfulness, and helpfulness (see [RAG evaluation summary](#rag-evaluation-summary)).
 
 ### Choose evaluators
 
 LLM-as-judge evaluators work well for RAG because they can score factual accuracy and consistency between texts.
 
-> **Image:** [rag-types.png](https://docs.langchain.com/langsmith/evaluation-approaches)
+> **Image:** [rag-types.png](evaluation-approaches.md)
 
 You can use two kinds of evaluators:
 
@@ -120,7 +120,7 @@ Classification and tagging apply a label to a given input (e.g., for toxicity de
 
 A central consideration for classification/tagging evaluation is whether you have a dataset with `reference` labels or not. If not, users frequently want to define an evaluator that uses criteria to apply label (e.g., toxicity, etc) to an input (e.g., text, user-question, etc). However, if ground truth class labels are provided, then the evaluation objective is focused on scoring a classification/tagging chain relative to the ground truth class label (e.g., using metrics such as precision, recall, etc).
 
-If ground truth reference labels are provided, then it's common to simply define a [custom heuristic evaluator](https://docs.langchain.com/langsmith/code-evaluator-ui) to compare ground truth labels to the chain output. However, it is increasingly common given the emergence of LLMs simply use `LLM-as-judge` to perform the classification/tagging of an input based upon specified criteria (without a ground truth reference).
+If ground truth reference labels are provided, then it's common to simply define a [custom heuristic evaluator](code-evaluator-ui.md) to compare ground truth labels to the chain output. However, it is increasingly common given the emergence of LLMs simply use `LLM-as-judge` to perform the classification/tagging of an input based upon specified criteria (without a ground truth reference).
 
 `Online` or `Offline` evaluation is feasible when using `LLM-as-judge` with the `Reference-free` prompt used. In particular, this is well suited to `Online` evaluation when a user wants to tag / classify application input (e.g., for toxicity, etc).
 

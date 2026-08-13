@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/knowledge-base)
 ## Overview
 
-Build a semantic search engine over a PDF with LangChain [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings) and [vector stores](https://docs.langchain.com/oss/python/integrations/vectorstores). Use it to retrieve passages similar to a query, then plug the retriever into [retrieval-augmented generation (RAG)](https://docs.langchain.com/oss/python/deepagents/retrieval) or other LLM workflows.
+Build a semantic search engine over a PDF with LangChain [embeddings](../integrations/embeddings.md) and [vector stores](../integrations/vectorstores.md). Use it to retrieve passages similar to a query, then plug the retriever into [retrieval-augmented generation (RAG)](../deepagents/retrieval.md) or other LLM workflows.
 
 This tutorial covers:
 
@@ -19,9 +19,9 @@ The guide also includes a minimal RAG implementation on top of the search engine
 This tutorial focuses on text retrieval and covers the following concepts:
 
 * [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document)
-* [Text splitters](https://docs.langchain.com/oss/python/integrations/splitters)
-* [Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings)
-* [Vector stores](https://docs.langchain.com/oss/python/integrations/vectorstores) and [retrievers](https://docs.langchain.com/oss/python/integrations/retrievers)
+* [Text splitters](../integrations/splitters.md)
+* [Embeddings](../integrations/embeddings.md)
+* [Vector stores](../integrations/vectorstores.md) and [retrievers](../integrations/retrievers.md)
 
 ## Setup
 
@@ -41,7 +41,7 @@ conda install pypdf -c conda-forge
 uv add pypdf
 ```
 
-For more details, see the [Installation guide](https://docs.langchain.com/oss/python/langchain/install).
+For more details, see the [Installation guide](install.md).
 
 ### Configure LangSmith
 
@@ -97,7 +97,7 @@ documents = [
 
 Vector search stores numeric vectors associated with text. Embed a query as a vector of the same dimension, then use similarity metrics (such as cosine similarity) to find related text.
 
-LangChain supports embeddings from [many providers](https://docs.langchain.com/oss/python/integrations/embeddings/). Select a model to specify how text should be converted into a numeric vector:
+LangChain supports embeddings from [many providers](../integrations/embeddings.md). Select a model to specify how text should be converted into a numeric vector:
 
 #### OpenAI
 ```shell
@@ -354,9 +354,9 @@ Next, store embeddings in a vector store that supports efficient similarity sear
 
 ## Select a vector store
 
-LangChain [`VectorStore`](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore) objects add text and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects to a store and query them with similarity metrics. They are often initialized with [embedding](https://docs.langchain.com/oss/python/integrations/embeddings) models that translate text into numeric vectors.
+LangChain [`VectorStore`](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore) objects add text and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects to a store and query them with similarity metrics. They are often initialized with [embedding](../integrations/embeddings.md) models that translate text into numeric vectors.
 
-LangChain includes [integrations](https://docs.langchain.com/oss/python/integrations/vectorstores) with many vector store technologies. Some are hosted and need credentials, some run in separate infrastructure (local or third-party), and others run in-memory for lightweight workloads. Select a vector store:
+LangChain includes [integrations](../integrations/vectorstores.md) with many vector store technologies. Some are hosted and need credentials, some run in separate infrastructure (local or third-party), and others run in-memory for lightweight workloads. Select a vector store:
 
 #### In-memory
 ```shell
@@ -592,7 +592,7 @@ Index the chunks into the vector store:
 ids = vector_store.add_documents(documents=all_splits)
 ```
 
-Most vector store integrations also support connecting to an existing store (for example with a client or index name). See the docs for a specific [integration](https://docs.langchain.com/oss/python/integrations/vectorstores) for details.
+Most vector store integrations also support connecting to an existing store (for example with a client or index name). See the docs for a specific [integration](../integrations/vectorstores.md) for details.
 
 ## Query the vector store
 
@@ -708,7 +708,7 @@ This was partially offset by:' metadata={'page': 36, 'source': '../example_data/
 Learn more:
 
 * [API Reference](https://reference.langchain.com/python/langchain-core/vectorstores/base/VectorStore)
-* [Integration-specific docs](https://docs.langchain.com/oss/python/integrations/vectorstores)
+* [Integration-specific docs](../integrations/vectorstores.md)
 
 ## Use retrievers
 
@@ -764,7 +764,7 @@ retriever.batch(
 
 `VectorStoreRetriever` supports search types of `"similarity"` (default), `"mmr"` (maximum marginal relevance), and `"similarity_score_threshold"`. Use the last option to filter documents by similarity score.
 
-You can use retrievers in more complex apps such as [retrieval-augmented generation (RAG)](https://docs.langchain.com/oss/python/deepagents/retrieval), which combine a question with retrieved context in a prompt for an LLM. To learn more about building such an application, check out the [RAG tutorial](https://docs.langchain.com/oss/python/deepagents/rag) tutorial.
+You can use retrievers in more complex apps such as [retrieval-augmented generation (RAG)](../deepagents/retrieval.md), which combine a question with retrieved context in a prompt for an LLM. To learn more about building such an application, check out the [RAG tutorial](../deepagents/rag.md) tutorial.
 
 ## Next steps
 
@@ -772,14 +772,14 @@ You've now seen how to build a semantic search engine over a PDF document.
 
 For more information see:
 
-* [Available embedding integrations](https://docs.langchain.com/oss/python/integrations/embeddings)
-* [Available vector store integrations](https://docs.langchain.com/oss/python/integrations/vectorstores)
+* [Available embedding integrations](../integrations/embeddings.md)
+* [Available vector store integrations](../integrations/vectorstores.md)
 
 For more on RAG:
 
-* [Retrieval overview](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [RAG with Deep Agents](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Evaluate a RAG application](https://docs.langchain.com/langsmith/evaluate-rag-tutorial)
+* [Retrieval overview](../deepagents/retrieval.md)
+* [RAG with Deep Agents](../deepagents/rag.md)
+* [Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md)
 
 ***
 

@@ -17,7 +17,7 @@ uv add langchain-oci oci
 ## Authentication
 
 > [!NOTE]
-> Initializing [ChatOCIGenAI](https://docs.langchain.com/oss/python/integrations/providers/oci#chatocigenai) is resource-intensive. For optimal performance, it is recommended to treat this client as a singleton and reuse the instance across your application.
+> Initializing [ChatOCIGenAI](#chatocigenai) is resource-intensive. For optimal performance, it is recommended to treat this client as a singleton and reuse the instance across your application.
 
 Four authentication methods are supported for OCI services. All methods follow the [standard OCI SDK authentication](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_authentication_methods.htm).
 
@@ -94,7 +94,7 @@ llm = ChatOCIGenAI(
 
 Main chat model for OCI Generative AI service with full LangChain feature support.
 
-See [usage example](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai).
+See [usage example](../chat/oci_generative_ai.md).
 
 ```python
 from langchain_oci import ChatOCIGenAI
@@ -141,7 +141,7 @@ llm = ChatOCIOpenAI(
 
 Text and image embedding models.
 
-See [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/oci_generative_ai).
+See [usage example](../embeddings/oci_generative_ai.md).
 
 ```python
 from langchain_oci import OCIGenAIEmbeddings
@@ -268,7 +268,7 @@ result = agent.invoke({
 
 Chat model for OCI Data Science Model Deployments.
 
-See the [ChatOCIModelDeployment integration guide](https://docs.langchain.com/oss/python/integrations/chat/oci_data_science).
+See the [ChatOCIModelDeployment integration guide](../chat/oci_data_science.md).
 
 ```python
 from langchain_oci import ChatOCIModelDeployment

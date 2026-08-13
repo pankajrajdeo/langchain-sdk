@@ -3,36 +3,36 @@
 Retrieve detailed trace and LangSmith Deployment usage data broken down by workspace, project, user, or API key.
 
 > [!NOTE]
-> **Trace usage:** For LangSmith [Cloud](https://docs.langchain.com/langsmith/cloud), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.
+> **Trace usage:** For LangSmith [Cloud](cloud.md), granular billable trace data collection started on January 5, 2026. Data is not available for traces ingested before this date.
 >
-> For [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) instances, trace data collection begins when the feature is enabled via the following environment variables, or after [upgrading to a version with it enabled by default](https://docs.langchain.com/langsmith/self-hosted-changelog#langsmith-0-13-12).
+> For [Self-hosted](self-hosted.md) instances, trace data collection begins when the feature is enabled via the following environment variables, or after [upgrading to a version with it enabled by default](self-hosted-changelog.md#langsmith-0-13-12).
 >
 > ```env
 > DEFAULT_ORG_FEATURE_ENABLE_GRANULAR_USAGE_REPORTING=true
 > GRANULAR_USAGE_TABLE_ENABLED=true
 > ```
 >
-> Starting with self-hosted version 0.16.0, long-lived trace usage is no longer tracked for [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments. The **Long-lived only** retention filter always shows zero results for these deployments.
+> Starting with self-hosted version 0.16.0, long-lived trace usage is no longer tracked for [Self-hosted](self-hosted.md) deployments. The **Long-lived only** retention filter always shows zero results for these deployments.
 >
-> **LangSmith Deployment usage** uses a separate data source. For more details, refer to the [LangSmith Deployment section](https://docs.langchain.com/langsmith/granular-usage#langsmith-deployment-usage-kind%3Dlangsmith_deployments).
+> **LangSmith Deployment usage** uses a separate data source. For more details, refer to the [LangSmith Deployment section](#langsmith-deployment-usage-kind%3Dlangsmith_deployments).
 
 LangSmith provides granular billable usage APIs that let you retrieve detailed usage data broken down by workspace, project, user, or API key. Two billable domains are supported by the same endpoint, selected via a `kind` query parameter:
 
 * **Trace usage** (`kind=traces`, default): number of traces ingested.
-* **LangSmith Deployment usage** (`kind=langsmith_deployments`): nodes executed, agent runs, and agent uptime for [LangSmith Deployment](https://docs.langchain.com/langsmith/billing).
+* **LangSmith Deployment usage** (`kind=langsmith_deployments`): nodes executed, agent runs, and agent uptime for [LangSmith Deployment](billing.md).
 
 Both kinds share the same query parameters (time range, workspace filter, grouping dimension) and return the same time-bucketed shape. The data sources are separate, so a record returned by one kind will not appear in the other.
 
 These APIs enable you to:
 
-* Track usage across different teams or [workspaces](https://docs.langchain.com/langsmith/administration-overview).
-* Identify which users or [API keys](https://docs.langchain.com/langsmith/create-account-api-key#api-keys) are consuming the most traces or running the most agents.
+* Track usage across different teams or [workspaces](administration-overview.md).
+* Identify which users or [API keys](create-account-api-key.md#api-keys) are consuming the most traces or running the most agents.
 * Analyze usage patterns over time.
 * Export usage data for internal reporting.
 
 ## Prerequisites
 
-* You must have the [`organization:read` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) to access granular usage data.
+* You must have the [`organization:read` permission](organization-workspace-operations.md) to access granular usage data.
 * You can only view usage for workspaces you have read access to.
 
 ## View in the UI
@@ -200,6 +200,8 @@ for record in data["usage"]:
     print(f"{user_email}: {record['traces']} long-lived traces")
 ```
 
+<a id="langsmith-deployment-usage-kind=langsmith_deployments"></a>
+
 ### LangSmith Deployment usage (`kind=langsmith_deployments`)
 
 Each record carries three metrics together so a single fetch powers the whole Deployment view.
@@ -213,7 +215,7 @@ Each record carries three metrics together so a single fetch powers the whole De
 > REMOTE_METRICS_ROLLUP_ENABLED=true
 > ```
 >
-> Or upgrade to a LangSmith version that enables it by default (see [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog)).
+> Or upgrade to a LangSmith version that enables it by default (see [self-hosted changelog](self-hosted-changelog.md)).
 
 #### Response
 
@@ -365,12 +367,12 @@ The `group_by` parameter determines how usage data is aggregated:
 | `user`      | Group by user      | `user_id`, `user_email`          | Both kinds    |
 | `api_key`   | Group by API key   | `api_key_short_key`              | Both kinds    |
 
-For trace usage, "project" refers to the [LangSmith tracer session](https://docs.langchain.com/langsmith/observability-concepts). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
+For trace usage, "project" refers to the [LangSmith tracer session](observability-concepts.md). For Deployment usage, "project" refers to the LangSmith Deployment project (a deployed agent).
 
 ## Related resources
 
-* [Manage billing in your account](https://docs.langchain.com/langsmith/billing)
-* [Organization and workspace operations](https://docs.langchain.com/langsmith/organization-workspace-operations)
+* [Manage billing in your account](billing.md)
+* [Organization and workspace operations](organization-workspace-operations.md)
 
 ***
 

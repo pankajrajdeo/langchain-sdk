@@ -3,9 +3,9 @@
 > Integrate with the Azure OpenAI LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Azure OpenAI text completion models. The latest and most popular Azure OpenAI models are [chat completion models](../../langchain/models.md).**
 >
-> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/).
+> Unless you are specifically using `gpt-3.5-turbo-instruct`, you are probably looking for [this page instead](../chat/azure_chat_openai.md).
 
 This page goes over how to use LangChain with [Azure OpenAI](https://aka.ms/azure-openai).
 
@@ -76,7 +76,7 @@ credential = ChainedTokenCredential(
 
 With Azure OpenAI, you set up your own deployments of the common GPT-3 and Codex models.  When calling the API, you need to specify the deployment you want to use.
 
-***Note**: These docs are for the Azure text completion models. Models like GPT-4 are chat models. They have a slightly different interface, and can be accessed via the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) class. For docs on Azure chat see [Azure Chat OpenAI documentation](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai).*
+***Note**: These docs are for the Azure text completion models. Models like GPT-4 are chat models. They have a slightly different interface, and can be accessed via the [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) class. For docs on Azure chat see [Azure Chat OpenAI documentation](../chat/azure_chat_openai.md).*
 
 Let's say your deployment name is `gpt-35-turbo-instruct-prod`.  In the `openai` Python API, you can specify this deployment with the `engine` parameter.  For example:
 

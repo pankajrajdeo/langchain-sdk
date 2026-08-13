@@ -1,16 +1,16 @@
 # How to add semantic search to your agent deployment
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/semantic-search)
-Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](https://docs.langchain.com/oss/python/langgraph/stores) so your agent retains context across conversations and personalizes responses based on prior interactions.
+Semantic search lets your agent recall stored memories and documents by meaning rather than exact wording. For example, a query for "UI preferences" surfaces a memory written as "user prefers dark interfaces". This guide shows you how to enable semantic search on your deployment's cross-thread [store](../langgraph/stores.md) so your agent retains context across conversations and personalizes responses based on prior interactions.
 
 ## Prerequisites
 
-* A deployment (refer to [how to set up an application for deployment](https://docs.langchain.com/langsmith/setup-app-requirements-txt)) and details on [hosting options](https://docs.langchain.com/langsmith/platform-setup).
+* A deployment (refer to [how to set up an application for deployment](setup-app-requirements-txt.md)) and details on [hosting options](platform-setup.md).
 * API keys for your embedding provider (in this case, OpenAI).
 * `langchain >= 0.3.8` (if you specify using the string format in this guide).
 
 ## Steps
 
-1. Update your [`langgraph.json` configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file) to include the store configuration:
+1. Update your [`langgraph.json` configuration file](application-structure.md#configuration-file) to include the store configuration:
 
 ```json
    {
@@ -44,7 +44,7 @@ Semantic search lets your agent recall stored memories and documents by meaning 
    ]
 ```
 
-   Or, if using [requirements.txt](https://docs.langchain.com/langsmith/setup-app-requirements-txt):
+   Or, if using [requirements.txt](setup-app-requirements-txt.md):
 
 ```
    langchain>=0.3.8
@@ -52,7 +52,7 @@ Semantic search lets your agent recall stored memories and documents by meaning 
 
 ## Usage
 
-Once configured, you can use semantic search in your [nodes](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes). The store requires a namespace tuple to organize memories:
+Once configured, you can use semantic search in your [nodes](../langgraph/graph-api.md#nodes). The store requires a namespace tuple to organize memories:
 
 ```python
 async def search_memory(state: State, *, store: BaseStore):
@@ -121,7 +121,7 @@ async def aembed_texts(texts: list[str]) -> list[list[float]]:
 
 ## Querying via the API
 
-You can also query the store using the [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk). Since the SDK uses async operations:
+You can also query the store using the [LangGraph SDK](langgraph-python-sdk.md). Since the SDK uses async operations:
 
 ```python
 from langgraph_sdk import get_client

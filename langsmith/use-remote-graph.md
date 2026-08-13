@@ -1,37 +1,37 @@
 # How to interact with a deployment using RemoteGraph
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-remote-graph)
-[`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph) is a client-side interface that allows you to interact with your [deployment](https://docs.langchain.com/langsmith/deployment) as if it were a local graph. It provides API parity with [`CompiledGraph`](https://docs.langchain.com/oss/python/langgraph/graph-api#compiling-your-graph), which means that you can use the same methods (`invoke()`, `stream()`, `get_state()`, etc.) in your development and production environments. This page describes how to initialize a `RemoteGraph` and interact with it.
+[`RemoteGraph`](https://reference.langchain.com/python/langgraph/pregel/remote/RemoteGraph) is a client-side interface that allows you to interact with your [deployment](deployment.md) as if it were a local graph. It provides API parity with [`CompiledGraph`](../langgraph/graph-api.md#compiling-your-graph), which means that you can use the same methods (`invoke()`, `stream()`, `get_state()`, etc.) in your development and production environments. This page describes how to initialize a `RemoteGraph` and interact with it.
 
 `RemoteGraph` is useful for the following:
 
-* Separation of development and deployment: Build and test a graph locally with `CompiledGraph`, deploy it to LangSmith, and then [use `RemoteGraph`](https://docs.langchain.com/langsmith/use-remote-graph#initialize-the-graph) to call it in production while working with the same API interface.
-* Thread-level persistence: [Persist and fetch the state](https://docs.langchain.com/langsmith/use-remote-graph#persist-state-at-the-thread-level) of a conversation across calls with a thread ID.
-* Subgraph embedding: Compose modular graphs for a multi-agent workflow by embedding a `RemoteGraph` as a [subgraph](https://docs.langchain.com/langsmith/use-remote-graph#use-as-a-subgraph) within another graph.
+* Separation of development and deployment: Build and test a graph locally with `CompiledGraph`, deploy it to LangSmith, and then [use `RemoteGraph`](#initialize-the-graph) to call it in production while working with the same API interface.
+* Thread-level persistence: [Persist and fetch the state](#persist-state-at-the-thread-level) of a conversation across calls with a thread ID.
+* Subgraph embedding: Compose modular graphs for a multi-agent workflow by embedding a `RemoteGraph` as a [subgraph](#use-as-a-subgraph) within another graph.
 * Reusable workflows: Use deployed graphs as nodes or [tools](https://reference.langchain.com/python/langsmith/deployment/remote_graph/#langgraph.pregel.remote.RemoteGraph.as_tool), so that you can reuse and expose complex logic.
 
 > [!WARNING]
 > **Important: Avoid calling the same deployment**
 >
-> `RemoteGraph` is designed to call graphs on other deployments. Do not use `RemoteGraph` to call itself or another graph on the same deployment, as this can lead to deadlocks and resource exhaustion. Instead, use local graph composition or [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs) for graphs within the same deployment.
+> `RemoteGraph` is designed to call graphs on other deployments. Do not use `RemoteGraph` to call itself or another graph on the same deployment, as this can lead to deadlocks and resource exhaustion. Instead, use local graph composition or [subgraphs](../langgraph/use-subgraphs.md) for graphs within the same deployment.
 
 ## Prerequisites
 
 Before getting started with `RemoteGraph`, make sure you have:
 
-* Access to [LangSmith](https://docs.langchain.com/langsmith/observability), where your graphs are developed and managed.
-* A running [Agent Server](https://docs.langchain.com/langsmith/agent-server), which hosts your deployed graphs for remote interaction.
+* Access to [LangSmith](observability.md), where your graphs are developed and managed.
+* A running [Agent Server](agent-server.md), which hosts your deployed graphs for remote interaction.
 
 ## Initialize the graph
 
 When initializing a `RemoteGraph`, you must always specify:
 
 * `name`: The name of the graph you want to interact with **or** an assistant ID. If you specify a graph name, the default assistant will be used. If you specify an assistant ID, that specific assistant will be used. The graph name is the same name you use in the `langgraph.json` configuration file for your deployment.
-* `api_key`: A valid [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key). You can set as an environment variable (`LANGSMITH_API_KEY`) or pass directly in the `api_key` argument. You can also provide the API key in the `client` / `sync_client` arguments, if `LangGraphClient` / `SyncLangGraphClient` was initialized with the `api_key` argument.
+* `api_key`: A valid [LangSmith API key](create-account-api-key.md). You can set as an environment variable (`LANGSMITH_API_KEY`) or pass directly in the `api_key` argument. You can also provide the API key in the `client` / `sync_client` arguments, if `LangGraphClient` / `SyncLangGraphClient` was initialized with the `api_key` argument.
 
 Additionally, you have to provide one of the following:
 
-* [`url`](https://docs.langchain.com/langsmith/use-remote-graph#use-a-url): The URL of the deployment you want to interact with. If you pass the `url` argument, both sync and async clients will be created using the provided URL, headers (if provided), and default configuration values (e.g., timeout).
-* [`client`](https://docs.langchain.com/langsmith/use-remote-graph#use-a-client): A `LangGraphClient` instance for interacting with the deployment asynchronously (e.g., using `.astream()`, `.ainvoke()`, `.aget_state()`, `.aupdate_state()`).
+* [`url`](#use-a-url): The URL of the deployment you want to interact with. If you pass the `url` argument, both sync and async clients will be created using the provided URL, headers (if provided), and default configuration values (e.g., timeout).
+* [`client`](#use-a-client): A `LangGraphClient` instance for interacting with the deployment asynchronously (e.g., using `.astream()`, `.ainvoke()`, `.aget_state()`, `.aupdate_state()`).
 * `sync_client`: A `SyncLangGraphClient` instance for interacting with the deployment synchronously (e.g., using `.stream()`, `.invoke()`, `.get_state()`, `.update_state()`).
 
 > [!NOTE]
@@ -210,7 +210,7 @@ console.log(threadState);
 > [!NOTE]
 > If you need to use a `checkpointer` with a graph that has a `RemoteGraph` subgraph node, make sure to use UUIDs as thread IDs.
 
-A graph can also call out to multiple `RemoteGraph` instances as [*subgraph*](https://docs.langchain.com/oss/python/langgraph/use-subgraphs) nodes. This allows for modular, scalable workflows where different responsibilities are split across separate graphs.
+A graph can also call out to multiple `RemoteGraph` instances as [*subgraph*](../langgraph/use-subgraphs.md) nodes. This allows for modular, scalable workflows where different responsibilities are split across separate graphs.
 
 `RemoteGraph` exposes the same interface as a regular `CompiledGraph`, so you can use it directly as a subgraph inside another graph. For example:
 

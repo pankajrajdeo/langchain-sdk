@@ -1,9 +1,11 @@
 # Streaming API
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/streaming)
-The [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk) lets you stream outputs from the [LangSmith Deployment API](https://docs.langchain.com/langsmith/server-api-ref) in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports resumability: if a connection drops, reconnect with the last event ID to pick up where you left off.
+The [LangGraph SDK](langgraph-python-sdk.md) lets you stream outputs from the [LangSmith Deployment API](server-api-ref.md) in multiple modes, from full state snapshots after each step to token-by-token LLM output. Thread streaming also supports resumability: if a connection drops, reconnect with the last event ID to pick up where you left off.
 
 > [!NOTE]
-> LangGraph SDK and Agent Server are a part of [LangSmith](https://docs.langchain.com/langsmith/observability).
+> LangGraph SDK and Agent Server are a part of [LangSmith](observability.md).
+
+<a id="messages"></a>
 
 ## Basic usage
 
@@ -85,7 +87,7 @@ curl --request POST \
 <summary>Extended example: streaming updates</summary>
 
 This is an example graph you can run in the Agent Server.
-See [LangSmith quickstart](https://docs.langchain.com/langsmith/deployment-quickstart) for more details.
+See [LangSmith quickstart](deployment-quickstart.md) for more details.
 
 ```python
 # graph.py
@@ -114,7 +116,7 @@ graph = (
 ```
 
 Once you have a running Agent Server, you can interact with it using
-[LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk)
+[LangGraph SDK](langgraph-python-sdk.md)
 
 #### Python
 ```python
@@ -139,7 +141,7 @@ async for chunk in client.runs.stream(  # (1)!
 ```
 
 1. The `client.runs.stream()` method returns an iterator that yields streamed outputs.
-   2\. Set `stream_mode="updates"` to stream only the updates to the graph state after each node. Other stream modes are also available. See [supported stream modes](https://docs.langchain.com/langsmith/streaming#supported-stream-modes) for details.
+   2\. Set `stream_mode="updates"` to stream only the updates to the graph state after each node. Other stream modes are also available. See [supported stream modes](#supported-stream-modes) for details.
 
 #### JavaScript
 ```javascript
@@ -168,7 +170,7 @@ for await (const chunk of streamResponse) {
 ```
 
 1. The `client.runs.stream()` method returns an iterator that yields streamed outputs.
-2. Set `streamMode: "updates"` to stream only the updates to the graph state after each node. Other stream modes are also available. See [supported stream modes](https://docs.langchain.com/langsmith/streaming#supported-stream-modes) for details.
+2. Set `streamMode: "updates"` to stream only the updates to the graph state after each node. Other stream modes are also available. See [supported stream modes](#supported-stream-modes) for details.
 
 #### cURL
 Create a thread:
@@ -205,12 +207,12 @@ curl --request POST \
 
 | Mode                             | Description                                                                                                                                                                         | LangGraph Library Method                                                                               |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [`values`](https://docs.langchain.com/langsmith/streaming#stream-graph-state)  | Stream the full graph state after each [super-step](https://docs.langchain.com/langsmith/graph-rebuild#define-graphs).                                                                                        | `.stream()` / `.astream()` with [`stream_mode="values"`](https://docs.langchain.com/oss/python/langgraph/streaming#graph-state)  |
-| [`updates`](https://docs.langchain.com/langsmith/streaming#stream-graph-state) | Streams the updates to the state after each step of the graph. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. | `.stream()` / `.astream()` with [`stream_mode="updates"`](https://docs.langchain.com/oss/python/langgraph/streaming#graph-state) |
-| [`messages-tuple`](https://docs.langchain.com/langsmith/streaming#messages)    | Streams LLM tokens and metadata for the graph node where the LLM is invoked (useful for chat apps).                                                                                 | `.stream()` / `.astream()` with [`stream_mode="messages"`](https://docs.langchain.com/oss/python/langgraph/streaming#messages)   |
-| [`debug`](https://docs.langchain.com/langsmith/streaming#debug)                | Streams as much information as possible throughout the execution of the graph.                                                                                                      | `.stream()` / `.astream()` with [`stream_mode="debug"`](https://docs.langchain.com/oss/python/langgraph/streaming#graph-state)   |
-| [`custom`](https://docs.langchain.com/langsmith/streaming#stream-custom-data)  | Streams custom data from inside your graph                                                                                                                                          | `.stream()` / `.astream()` with [`stream_mode="custom"`](https://docs.langchain.com/oss/python/langgraph/streaming#custom-data)  |
-| [`events`](https://docs.langchain.com/langsmith/streaming#stream-events)       | Stream all events (including the state of the graph); mainly useful when migrating large LCEL apps.                                                                                 | `.astream_events()`                                                                                    |
+| [`values`](#stream-graph-state)  | Stream the full graph state after each [super-step](graph-rebuild.md#define-graphs).                                                                                        | `.stream()` / `.astream()` with [`stream_mode="values"`](../langgraph/streaming.md#graph-state)  |
+| [`updates`](#stream-graph-state) | Streams the updates to the state after each step of the graph. If multiple updates are made in the same step (e.g., multiple nodes are run), those updates are streamed separately. | `.stream()` / `.astream()` with [`stream_mode="updates"`](../langgraph/streaming.md#graph-state) |
+| [`messages-tuple`](#messages)    | Streams LLM tokens and metadata for the graph node where the LLM is invoked (useful for chat apps).                                                                                 | `.stream()` / `.astream()` with [`stream_mode="messages"`](../langgraph/streaming.md#messages)   |
+| [`debug`](#debug)                | Streams as much information as possible throughout the execution of the graph.                                                                                                      | `.stream()` / `.astream()` with [`stream_mode="debug"`](../langgraph/streaming.md#graph-state)   |
+| [`custom`](#stream-custom-data)  | Streams custom data from inside your graph                                                                                                                                          | `.stream()` / `.astream()` with [`stream_mode="custom"`](../langgraph/streaming.md#custom-data)  |
+| [`events`](#stream-events)       | Stream all events (including the state of the graph); mainly useful when migrating large LCEL apps.                                                                                 | `.astream_events()`                                                                                    |
 
 ### Stream multiple modes
 
@@ -298,7 +300,7 @@ graph = (
 
 > [!NOTE]
 > **Stateful runs**
-> Examples below assume that you want to **persist the outputs** of a streaming run in the [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence) DB and have created a thread. To create a thread:
+> Examples below assume that you want to **persist the outputs** of a streaming run in the [checkpointer](../langgraph/persistence.md) DB and have created a thread. To create a thread:
 >
 > #### Python
 > ```python
@@ -420,7 +422,7 @@ curl --request POST \
 
 ## Subgraphs
 
-To include outputs from [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs) in the streamed outputs, you can set `subgraphs=True` in the `.stream()` method of the parent graph. This will stream outputs from both the parent graph and any subgraphs.
+To include outputs from [subgraphs](../langgraph/use-subgraphs.md) in the streamed outputs, you can set `subgraphs=True` in the `.stream()` method of the parent graph. This will stream outputs from both the parent graph and any subgraphs.
 
 ```python
 async for chunk in client.runs.stream(
@@ -439,7 +441,7 @@ async for chunk in client.runs.stream(
 <summary>Extended example: streaming from subgraphs</summary>
 
 This is an example graph you can run in the Agent Server.
-See [LangSmith quickstart](https://docs.langchain.com/langsmith/deployment-quickstart) for more details.
+See [LangSmith quickstart](deployment-quickstart.md) for more details.
 
 ```python
 # graph.py
@@ -480,7 +482,7 @@ graph = builder.compile()
 ```
 
 Once you have a running Agent Server, you can interact with it using
-[LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk)
+[LangGraph SDK](langgraph-python-sdk.md)
 
 #### Python
 ```python
@@ -565,6 +567,8 @@ curl --request POST \
 
 </details>
 
+<a id="debug"></a>
+
 ## Debugging
 
 Use the `debug` streaming mode to stream as much information as possible throughout the execution of the graph. The streamed outputs include the name of the node as well as the full state.
@@ -611,7 +615,7 @@ curl --request POST \
 
 Use the `messages-tuple` streaming mode to stream Large Language Model (LLM) outputs **token by token** from any part of your graph, including nodes, tools, subgraphs, or tasks.
 
-The streamed output from [`messages-tuple` mode](https://docs.langchain.com/langsmith/streaming#supported-stream-modes) is a tuple `(message_chunk, metadata)` where:
+The streamed output from [`messages-tuple` mode](#supported-stream-modes) is a tuple `(message_chunk, metadata)` where:
 
 * `message_chunk`: the token or message segment from the LLM.
 * `metadata`: a dictionary containing details about the graph node and LLM invocation.
@@ -705,8 +709,8 @@ curl --request POST \
 
 ### Filter LLM tokens
 
-* To filter the streamed tokens by LLM invocation, you can [associate `tags` with LLM invocations](https://docs.langchain.com/oss/python/langgraph/streaming#filter-by-llm-invocation).
-* To stream tokens only from specific nodes, use `stream_mode="messages"` and [filter the outputs by the `langgraph_node` field](https://docs.langchain.com/oss/python/langgraph/streaming#filter-by-node) in the streamed metadata.
+* To filter the streamed tokens by LLM invocation, you can [associate `tags` with LLM invocations](../langgraph/streaming.md#filter-by-llm-invocation).
+* To stream tokens only from specific nodes, use `stream_mode="messages"` and [filter the outputs by the `langgraph_node` field](../langgraph/streaming.md#filter-by-node) in the streamed metadata.
 
 ## Stream custom data
 
@@ -794,7 +798,7 @@ curl --request POST \
 
 ## Stateless runs
 
-If you don't want to **persist the outputs** of a streaming run in the [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence) DB, you can create a stateless run without creating a thread:
+If you don't want to **persist the outputs** of a streaming run in the [checkpointer](../langgraph/persistence.md) DB, you can create a stateless run without creating a thread:
 
 #### Python
 ```python
@@ -848,7 +852,7 @@ curl --request POST \
 
 ## Join and stream
 
-LangSmith allows you to join an active [background run](https://docs.langchain.com/langsmith/background-run) and stream outputs from it. To do so, you can use [LangGraph SDK's](https://docs.langchain.com/langsmith/langgraph-python-sdk) `client.runs.join_stream` method:
+LangSmith allows you to join an active [background run](background-run.md) and stream outputs from it. To do so, you can use [LangGraph SDK's](langgraph-python-sdk.md) `client.runs.join_stream` method:
 
 #### Python
 ```python
@@ -894,7 +898,7 @@ curl --request GET \
 
 ## Stream a thread
 
-Thread streaming opens a long-lived connection for a thread and streams output from **every run** executed on that thread. This lets you monitor all activity on a thread from a single connection, for example, in a chat UI where multiple runs may be triggered over time through follow-up messages, [human-in-the-loop](https://docs.langchain.com/langsmith/add-human-in-the-loop) resumptions, or [background runs](https://docs.langchain.com/langsmith/background-run). To join a specific existing run by ID, see [Join and stream](https://docs.langchain.com/langsmith/streaming#join-and-stream).
+Thread streaming opens a long-lived connection for a thread and streams output from **every run** executed on that thread. This lets you monitor all activity on a thread from a single connection, for example, in a chat UI where multiple runs may be triggered over time through follow-up messages, [human-in-the-loop](add-human-in-the-loop.md) resumptions, or [background runs](background-run.md). To join a specific existing run by ID, see [Join and stream](#join-and-stream).
 
 ### Compare thread and run streaming
 
@@ -1008,7 +1012,7 @@ curl --request GET \
 
 ## API reference
 
-For API usage and implementation, refer to the [API reference](https://docs.langchain.com/langsmith/server-api-ref).
+For API usage and implementation, refer to the [API reference](server-api-ref.md).
 
 ***
 

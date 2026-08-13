@@ -21,7 +21,7 @@ uv add langsmith pydantic-ai opentelemetry-exporter-otlp
 
 ### 1. Configure environment variables
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>

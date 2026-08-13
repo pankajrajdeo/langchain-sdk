@@ -27,7 +27,7 @@ For enterprise needs and critical applications, access dedicated support channel
 
 Help us improve LangChain for everyone. Whether you're fixing bugs, adding features, or improving documentation, we welcome your contributions.
 
-* **[Contributing Guide](https://docs.langchain.com/oss/python/contributing/overview)**: Everything you need to know about contributing to LangChain
+* **[Contributing Guide](../contributing/overview.md)**: Everything you need to know about contributing to LangChain
 
 ## Stay connected
 

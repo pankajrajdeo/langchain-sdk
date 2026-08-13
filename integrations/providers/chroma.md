@@ -23,7 +23,7 @@ whether for semantic search or example selection.
 from langchain_chroma import Chroma
 ```
 
-For a more detailed walkthrough of the Chroma wrapper, see [this notebook](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma).
+For a more detailed walkthrough of the Chroma wrapper, see [this notebook](../vectorstores/chroma.md).
 
 ## Retriever
 

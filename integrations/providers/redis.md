@@ -129,7 +129,7 @@ Redis includes a vector store integration for low-latency retrieval, metadata fi
 from langchain_redis import RedisVectorStore
 ```
 
-For a detailed walkthrough, see the [Redis vector store integration guide](https://docs.langchain.com/oss/python/integrations/vectorstores/redis).
+For a detailed walkthrough, see the [Redis vector store integration guide](../vectorstores/redis.md).
 
 ## Retriever
 

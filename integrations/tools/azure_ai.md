@@ -2,7 +2,7 @@
 
 > Integrate with Microsoft Foundry model tools using LangChain Python.
 
-This page covers Microsoft Foundry project tools from `langchain_azure_ai.tools`. See also the tools provided as part of [Microsoft Foundry Tools (formerly Azure AI Services)](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services).
+This page covers Microsoft Foundry project tools from `langchain_azure_ai.tools`. See also the tools provided as part of [Microsoft Foundry Tools (formerly Azure AI Services)](azure_ai_services.md).
 
 Use these tools when you want agents to call capabilities in tools provided by Microsoft Foundry projects.
 
@@ -10,14 +10,14 @@ Use these tools when you want agents to call capabilities in tools provided by M
 
 | Tool                                                              | Description                                                                                   |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [`AzureOpenAIModelImageGenTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaimodelimagegentool)   | Generate images through an OpenAI-compatible `/images/generations` endpoint.                  |
-| [`AzureOpenAITranscriptionsTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaitranscriptionstool) | Transcribe audio files to text through an OpenAI-compatible `/audio/transcriptions` endpoint. |
-| [`CodeInterpreterTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#codeinterpretertool)                     | Run Python code server-side in a sandboxed container.                                         |
-| [`WebSearchTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#websearchtool)                                 | Search the internet for current information and sources.                                      |
-| [`FileSearchTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#filesearchtool)                               | Search vector stores for relevant document content.                                           |
-| [`ImageGenerationTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#imagegenerationtool)                     | Generate or edit images using GPT image models.                                               |
-| [`McpTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#mcptool)                                             | Access external Model Context Protocol (MCP) servers.                                         |
-| [`AzureAIProjectToolbox`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureaiprojecttoolbox)                 | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP).    |
+| [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool)   | Generate images through an OpenAI-compatible `/images/generations` endpoint.                  |
+| [`AzureOpenAITranscriptionsTool`](#azureopenaitranscriptionstool) | Transcribe audio files to text through an OpenAI-compatible `/audio/transcriptions` endpoint. |
+| [`CodeInterpreterTool`](#codeinterpretertool)                     | Run Python code server-side in a sandboxed container.                                         |
+| [`WebSearchTool`](#websearchtool)                                 | Search the internet for current information and sources.                                      |
+| [`FileSearchTool`](#filesearchtool)                               | Search vector stores for relevant document content.                                           |
+| [`ImageGenerationTool`](#imagegenerationtool)                     | Generate or edit images using GPT image models.                                               |
+| [`McpTool`](#mcptool)                                             | Access external Model Context Protocol (MCP) servers.                                         |
+| [`AzureAIProjectToolbox`](#azureaiprojecttoolbox)                 | Load tools from an Azure AI Foundry Toolbox and use them via Model Context Protocol (MCP).    |
 
 ## Setup
 
@@ -284,7 +284,7 @@ Ranking options. Can include optional keys `ranker` and `score_threshold` to con
 
 ### ImageGenerationTool
 
-`ImageGenerationTool` allows the model to generate or edit images using GPT image models. This is useful for creating visuals, editing images, and generating artwork based on text descriptions. This tool must be used with an OpenAI model deployed in a Microsoft Foundry project. If you are using another model, use [`AzureOpenAIModelImageGenTool`](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureopenaimodelimagegentool) instead.
+`ImageGenerationTool` allows the model to generate or edit images using GPT image models. This is useful for creating visuals, editing images, and generating artwork based on text descriptions. This tool must be used with an OpenAI model deployed in a Microsoft Foundry project. If you are using another model, use [`AzureOpenAIModelImageGenTool`](#azureopenaimodelimagegentool) instead.
 
 > [!WARNING]
 > Tools in namespace `langchain_azure_ai.tools.builtin` must be used with an OpenAI model deployed in a Microsoft Foundry project. They are resolved within the model's inference request and are not available for models running outside Azure AI Foundry.

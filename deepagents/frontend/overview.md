@@ -69,7 +69,7 @@ agent = create_deep_agent(
 )
 ```
 
-On the frontend, connect with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) the same way as with `createAgent`. Pass a [type parameter](https://docs.langchain.com/oss/python/langchain/frontend/overview) for type-safe stream state. Deep agent patterns use `stream.subagents`, selector helpers such as `useMessages(stream, subagent)`, and custom state values like `stream.values.todos` to render subagent-specific UIs.
+On the frontend, connect with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) the same way as with `createAgent`. Pass a [type parameter](../../langchain/frontend/overview.md) for type-safe stream state. Deep agent patterns use `stream.subagents`, selector helpers such as `useMessages(stream, subagent)`, and custom state values like `stream.values.todos` to render subagent-specific UIs.
 
 ```ts
 import { useStream } from "@langchain/react";
@@ -104,24 +104,24 @@ workflow monitor than a plain chat transcript.
 
 ## Patterns
 
-#### [Subagent streaming](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming)
+#### [Subagent streaming](subagent-streaming.md)
 Display specialist subagents with streaming content, progress tracking, and collapsible cards.
 
-#### [Todo list](https://docs.langchain.com/oss/python/deepagents/frontend/todo-list)
+#### [Todo list](todo-list.md)
 Track progress with a real-time todo list when the agent opts into task planning.
 
-#### [Sandbox](https://docs.langchain.com/oss/python/deepagents/frontend/sandbox)
+#### [Sandbox](sandbox.md)
 Build an IDE-like UI with a file browser, code viewer, and diff panel backed by a sandbox.
 
 ## Related patterns
 
-The [LangChain frontend patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview), including
+The [LangChain frontend patterns](../../langchain/frontend/overview.md), including
 markdown messages, tool calling, and human-in-the-loop, all work with deep
 agents too. Deep Agents are built on the same LangGraph runtime, so
 `useStream` provides the same core API.
 
 For lower-level graph visualizations, see the
-[LangGraph frontend patterns](https://docs.langchain.com/oss/python/langgraph/frontend/overview). They show how
+[LangGraph frontend patterns](../../langgraph/frontend/overview.md). They show how
 to map graph nodes and state keys directly to UI components.
 
 ***

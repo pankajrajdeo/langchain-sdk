@@ -7,7 +7,7 @@ Identity controls who can call your Managed Deep Agents deployment. By default, 
 That default answers whether a caller is allowed. To also keep each signed-in person's conversations private, use Supabase.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Choose a path
 
@@ -28,7 +28,7 @@ identity = define_identity(auth=auth.langsmith_api_key())
 
 Clients send the key as `x-api-key`. You do not need to add verification endpoint or tenant settings to your project `.env`. LangSmith Cloud supplies those.
 
-Anyone with the key can reach the deployment, so treat the key as a secret. This default does not give each end user private threads. If Alice must not see Bob's threads, use [Supabase](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity#authenticate-end-users-with-supabase).
+Anyone with the key can reach the deployment, so treat the key as a secret. This default does not give each end user private threads. If Alice must not see Bob's threads, use [Supabase](#authenticate-end-users-with-supabase).
 
 ## Project structure
 
@@ -42,7 +42,7 @@ my-agent/
 
 ## Authenticate end users with Supabase
 
-Use Supabase when a browser or another client calls the deployment as a signed-in person. Each user gets private threads. Managed Deep Agents configures that ownership for you. For more information on the underlying LangSmith Deployment pattern, see [Make conversations private](https://docs.langchain.com/langsmith/resource-auth).
+Use Supabase when a browser or another client calls the deployment as a signed-in person. Each user gets private threads. Managed Deep Agents configures that ownership for you. For more information on the underlying LangSmith Deployment pattern, see [Make conversations private](../resource-auth.md).
 
 To configure Supabase authentication:
 
@@ -84,7 +84,7 @@ Managed Deep Agents verifies the JWT against the project's JWKS URL derived from
 
 ## Test and deploy
 
-Test the project locally with [`mda dev`](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#develop-locally), then deploy it with [`mda deploy`](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
+Test the project locally with [`mda dev`](managed-deep-agents-cli.md#develop-locally), then deploy it with [`mda deploy`](managed-deep-agents-deploy.md). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
 
 Authentication failures return 401. For the LangSmith API-key default, confirm that clients send `x-api-key`. For Supabase, confirm that clients send `Authorization: Bearer <access_token>`, that `project_ref` / `projectRef` matches your Supabase project, and that callers cannot access another user's threads (403).
 

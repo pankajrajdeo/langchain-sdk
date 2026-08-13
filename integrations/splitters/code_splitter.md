@@ -1,6 +1,6 @@
 # Splitting code text splitter integration guide
 
-[RecursiveCharacterTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) includes prebuilt lists of separators that are useful for [splitting text](https://docs.langchain.com/oss/python/integrations/splitters/) in a specific programming language.
+[RecursiveCharacterTextSplitter](https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter) includes prebuilt lists of separators that are useful for [splitting text](../splitters.md) in a specific programming language.
 
 Supported languages are stored in the `langchain_text_splitters.Language` enum. They include:
 

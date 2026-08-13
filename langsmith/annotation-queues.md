@@ -1,19 +1,19 @@
 # Use annotation queues
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues)
-*Annotation queues* give human reviewers a focused workflow for attaching feedback to specific [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) or [threads](https://docs.langchain.com/langsmith/observability-concepts#threads). While you can always annotate [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) inline, annotation queues let you group runs and threads together, prescribe rubrics, and track reviewer progress. Reviewing an entire thread lets you evaluate a full multi-turn conversation, capturing quality signals that a single run cannot.
+*Annotation queues* give human reviewers a focused workflow for attaching feedback to specific [runs](observability-concepts.md#runs) or [threads](observability-concepts.md#threads). While you can always annotate [traces](observability-concepts.md#traces) inline, annotation queues let you group runs and threads together, prescribe rubrics, and track reviewer progress. Reviewing an entire thread lets you evaluate a full multi-turn conversation, capturing quality signals that a single run cannot.
 
 > [!NOTE]
-> You can also manage annotation queues and feedback configs programmatically with the SDK. Refer to [Manage feedback & annotation queues programmatically](https://docs.langchain.com/langsmith/annotation-queues-sdk).
+> You can also manage annotation queues and feedback configs programmatically with the SDK. Refer to [Manage feedback & annotation queues programmatically](annotation-queues-sdk.md).
 
-To customize how run outputs appear during review, [configure custom output rendering for annotation queues](https://docs.langchain.com/langsmith/custom-output-rendering#for-annotation-queues).
+To customize how run outputs appear during review, [configure custom output rendering for annotation queues](custom-output-rendering.md#for-annotation-queues).
 
 LangSmith supports two queue styles:
 
-* [**Single-run annotation queues**](https://docs.langchain.com/langsmith/annotation-queues#single-run-annotation-queues) present one queue item at a time, either a run or a thread, and let reviewers submit any rubric feedback you configure. For **run** items, single-run queues also support [assertions](https://docs.langchain.com/langsmith/assertions) to capture acceptance criteria for offline evaluation.
-* [**Pairwise annotation queues (PAQs)**](https://docs.langchain.com/langsmith/annotation-queues#pairwise-annotation-queues) present two runs side-by-side so reviewers can quickly decide which output is better (or if they are equivalent) against the rubric items you define.
+* [**Single-run annotation queues**](#single-run-annotation-queues) present one queue item at a time, either a run or a thread, and let reviewers submit any rubric feedback you configure. For **run** items, single-run queues also support [assertions](assertions.md) to capture acceptance criteria for offline evaluation.
+* [**Pairwise annotation queues (PAQs)**](#pairwise-annotation-queues) present two runs side-by-side so reviewers can quickly decide which output is better (or if they are equivalent) against the rubric items you define.
 
 > [!TIP]
-> For a demonstration of using annotation queues, watch the [Getting started with annotation queues](https://docs.langchain.com/langsmith/annotation-queues#video-guide) video guide.
+> For a demonstration of using annotation queues, watch the [Getting started with annotation queues](#video-guide) video guide.
 
 ## Single-run annotation queues
 
@@ -39,7 +39,7 @@ Run items and thread items support different capabilities:
 
 1. Fill in the **Name** and **Description** of the queue.
 2. Optionally select an **Application**.
-3. Optionally **Select a default dataset** to streamline exporting reviewed runs into a dataset in your LangSmith [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces). Default datasets apply when you use **Add to Dataset** on run items; thread items do not support adding to a dataset.
+3. Optionally **Select a default dataset** to streamline exporting reviewed runs into a dataset in your LangSmith [workspace](administration-overview.md#workspaces). Default datasets apply when you use **Add to Dataset** on run items; thread items do not support adding to a dataset.
 
 #### Annotation rubric
 
@@ -53,7 +53,7 @@ Run items and thread items support different capabilities:
 
 Set a number of reviewers or the maximum time you want to reserve the item to a collaborator. When there are multiple annotators for an item, you can choose to have the item stay in the queue until all reviewers have marked it as **Done**. In these settings, "run" refers to any queue item, including thread items. The settings are as follows:
 
-* **All workspace members review each run**: When enabled, an item remains in the queue until every [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) member has marked their review as **Done**.
+* **All workspace members review each run**: When enabled, an item remains in the queue until every [workspace](administration-overview.md#workspaces) member has marked their review as **Done**.
 
 * **Enable reservations on runs**: Reserving an item locks it for your review for a set amount of time. While an item is reserved, other reviewers can view it but cannot add feedback or notes. Reservations are disabled if all workspace members review each run.
 
@@ -95,44 +95,44 @@ Because of these settings, the number of items visible to each reviewer can diff
 
 There are several ways to populate a single-run queue with items:
 
-* **From the Details view**: In a [tracing project](https://docs.langchain.com/langsmith/observability-concepts#projects), click into any row to open the side panel in the [Details view](https://docs.langchain.com/langsmith/view-traces#details-view). Click **+ Add**, then **Add to Annotation Queue** in the top-right. In the popover, under **What to add**, choose **Selected run** (the current run) or **Entire thread** (the full conversation that run belongs to).
+* **From the Details view**: In a [tracing project](observability-concepts.md#projects), click into any row to open the side panel in the [Details view](view-traces.md#details-view). Click **+ Add**, then **Add to Annotation Queue** in the top-right. In the popover, under **What to add**, choose **Selected run** (the current run) or **Entire thread** (the full conversation that run belongs to).
 
-  You can add any intermediate [run](https://docs.langchain.com/langsmith/observability-concepts#runs) as a run item, but not the root run. **Entire thread** requires the run to be part of a thread (instrumented with `thread_id` / `session_id` metadata).
+  You can add any intermediate [run](observability-concepts.md#runs) as a run item, but not the root run. **Entire thread** requires the run to be part of a thread (instrumented with `thread_id` / `session_id` metadata).
 
-> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](annotation-queues.md)
 
-> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker.](annotation-queues.md)
 
 > [!NOTE]
 >   If the **Entire thread** option is unavailable or the **Threads** tab is empty, the runs are not instrumented with `thread_id` / `session_id` metadata.
 
 * **From the Traces or Runs tab**: In a tracing project, select either the **Traces** or **Runs** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Use **What to add** to enqueue each selection as a **Selected run** or as its **Entire thread**.
 
-> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](annotation-queues.md)
 
-> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [View of the runs table with runs selected. Add to Annotation Queue button at the bottom of the page.](annotation-queues.md)
 
 * **From the Threads tab**: In a tracing project, select the **Threads** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Selected threads are added as thread items.
 
-> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](annotation-queues.md)
 
-> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Threads tab with selected threads and the Add to Annotation Queue bulk action.](annotation-queues.md)
 
-* **Automation rules**: [Set up a rule](https://docs.langchain.com/langsmith/rules) to automatically assign **runs** that match a filter (for example, errors or low user scores) into a queue.
+* **Automation rules**: [Set up a rule](rules.md) to automatically assign **runs** that match a filter (for example, errors or low user scores) into a queue.
 
 > [!NOTE]
 >   Automation rules enqueue run items only. They do not add entire threads as thread items.
 
-* **Datasets & Experiments**: Select one or more [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) within a dataset and click ** Annotate**. Select **Add to Annotation Queue**, then choose an existing queue or create a new one. Experiment annotate flows add run items.
+* **Datasets & Experiments**: Select one or more [experiments](evaluation-concepts.md#experiment) within a dataset and click ** Annotate**. Select **Add to Annotation Queue**, then choose an existing queue or create a new one. Experiment annotate flows add run items.
 
-> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](annotation-queues.md)
 
-> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Selected experiments with the Annotate button at the bottom of the page.](annotation-queues.md)
 
 > [!NOTE]
 > You can add at most **100** runs or threads to an annotation queue in a single action. To enqueue more, repeat the add flow in batches of 100 or fewer.
 >
-> Manually adding runs or threads to an annotation queue does not change trace retention by default. The trace keeps the retention configured for its project unless another action explicitly extends retention. For the full retention model, see [data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+> Manually adding runs or threads to an annotation queue does not change trace retention by default. The trace keeps the retention configured for its project unless another action explicitly extends retention. For the full retention model, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ### Review a single-run queue
 
@@ -144,19 +144,19 @@ There are several ways to populate a single-run queue with items:
 
 3. Review the current item:
 
-   * **Run items**: Inspect inputs and outputs in the center pane. Add **Reviewer Notes**, score [**Feedback**](https://docs.langchain.com/langsmith/observability-concepts#feedback) criteria, or mark the item as reviewed. To build a dataset, edit the run's input and output to create a corrected reference example and click **Add to Dataset**. Instead of crafting a corrected reference output by hand, you can [write **Assertions**](https://docs.langchain.com/langsmith/assertions) directly in the review side panel and save them as the example's expected output.
+   * **Run items**: Inspect inputs and outputs in the center pane. Add **Reviewer Notes**, score [**Feedback**](observability-concepts.md#feedback) criteria, or mark the item as reviewed. To build a dataset, edit the run's input and output to create a corrected reference example and click **Add to Dataset**. Instead of crafting a corrected reference output by hand, you can [write **Assertions**](assertions.md) directly in the review side panel and save them as the example's expected output.
    * **Thread items**: The center pane shows the conversation transcript for that thread. Read the transcript and score the same rubric **Feedback** keys. Use **View item** to open the thread in the conversation peek.
 
    Click **Delete** to remove the item from the queue for all users, regardless of any current reservations or queue settings.
 
 > [!NOTE]
->    Thread items support rubric feedback only. See the [capability table](https://docs.langchain.com/langsmith/annotation-queues#single-run-annotation-queues) for what differs between run and thread items.
+>    Thread items support rubric feedback only. See the [capability table](#single-run-annotation-queues) for what differs between run and thread items.
 
-> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](annotation-queues.md)
 
-> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Annotation queue reviewing a thread item with the conversation transcript and rubric feedback pane.](annotation-queues.md)
 
-   Feedback and notes submitted while reviewing an annotation queue do not change the trace's [retention tier](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+   Feedback and notes submitted while reviewing an annotation queue do not change the trace's [retention tier](usage-and-billing.md#data-retention-auto-upgrades).
 
 > [!TIP]
 >    Use the keyboard shortcuts next to each option to review items faster.
@@ -171,7 +171,7 @@ Pairwise annotation queues (PAQs) present two runs side-by-side so reviewers can
 
 2. Click **Annotate**. In the popover, choose **Add to Pairwise Annotation Queue**. (The button is disabled until exactly two experiments are selected.)
 
-> **Image:** [Popover showing the &#x22;Add to Pairwise Annotation Queue&#x22; card highlighted after two experiments are selected.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Popover showing the &#x22;Add to Pairwise Annotation Queue&#x22; card highlighted after two experiments are selected.](annotation-queues.md)
 
 3. Decide whether to send the experiments to an existing pairwise queue or create a new one.
 
@@ -182,7 +182,7 @@ Pairwise annotation queues (PAQs) present two runs side-by-side so reviewers can
 
 5. Submit the form to create the queue. LangSmith immediately pairs runs from the two experiments and populates the queue.
 
-Creating or populating a pairwise annotation queue does not change trace retention by default. Runs keep the [retention tier](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades) they had before they were added to the queue.
+Creating or populating a pairwise annotation queue does not change trace retention by default. Runs keep the [retention tier](usage-and-billing.md#data-retention-auto-upgrades) they had before they were added to the queue.
 
 Key differences for PAQs:
 
@@ -212,14 +212,14 @@ Selecting two experiments and creating a PAQ automatically pairs the runs. When 
 
 Reservations, reviewer thresholds, and comments behave identically to those in single-run queues, enabling teams to use different queue types without modifying their existing workflow.
 
-> **Image:** [Pairwise review screen showing runs side-by-side with the feedback pane containing A/B/Equal buttons and keyboard shortcuts.](https://docs.langchain.com/langsmith/annotation-queues)
+> **Image:** [Pairwise review screen showing runs side-by-side with the feedback pane containing A/B/Equal buttons and keyboard shortcuts.](annotation-queues.md)
 
 > [!TIP]
-> Consider routing runs that already have user feedback (e.g., thumbs-down) into a single-run queue for triage and a pairwise queue for head-to-head comparisons against a stronger baseline. This helps you identify regressions quickly. To learn more about how to capture user feedback from your LLM application, follow the guide on [attaching user feedback](https://docs.langchain.com/langsmith/attach-user-feedback).
+> Consider routing runs that already have user feedback (e.g., thumbs-down) into a single-run queue for triage and a pairwise queue for head-to-head comparisons against a stronger baseline. This helps you identify regressions quickly. To learn more about how to capture user feedback from your LLM application, follow the guide on [attaching user feedback](attach-user-feedback.md).
 
 ## Video guide
 
-> **Embedded Content:** [YouTube video player](https://docs.langchain.com/langsmith/annotation-queues)
+> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues).
 
 ***
 

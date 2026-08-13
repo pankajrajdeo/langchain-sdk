@@ -2,14 +2,14 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform)
 Enable LangSmith Deployment, Fleet, Insights, Chat, Sandboxes, and Engine on a self-hosted LangSmith instance.
 
-In addition to the base [LangSmith](https://docs.langchain.com/langsmith/self-hosted) platform, you can enable the following features on LangSmith Self-hosted:
+In addition to the base [LangSmith](self-hosted.md) platform, you can enable the following features on LangSmith Self-hosted:
 
-* **[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)** adds a [control plane](https://docs.langchain.com/langsmith/control-plane) and [data plane](https://docs.langchain.com/langsmith/data-plane) that let you deploy, scale, and manage agents and applications directly through the LangSmith UI. If you don't need the full UI-based setup, refer to [standalone servers](https://docs.langchain.com/langsmith/deploy-standalone-server) for a lightweight alternative.
-* **[Fleet](https://docs.langchain.com/langsmith/fleet/index)** allows you to create, deploy, and manage AI agents directly within LangSmith with no code.
-* **[Insights](https://docs.langchain.com/langsmith/insights)** provides AI-powered analysis of your traces and application data within LangSmith.
-* **[Chat](https://docs.langchain.com/langsmith/chat)** provides an in-workspace chat experience to help you analyze traces, threads, prompts, and experiment results.
-* **[Sandboxes](https://docs.langchain.com/langsmith/sandboxes)** let users run code, expose temporary services, and create memory snapshots from LangSmith.
-* **[Engine](https://docs.langchain.com/langsmith/engine-overview)** finds recurring issues in a tracing project, diagnoses them against your source code, and proposes fixes. Engine requires Sandboxes.
+* **[LangSmith Deployment](deployment.md)** adds a [control plane](control-plane.md) and [data plane](data-plane.md) that let you deploy, scale, and manage agents and applications directly through the LangSmith UI. If you don't need the full UI-based setup, refer to [standalone servers](deploy-standalone-server.md) for a lightweight alternative.
+* **[Fleet](fleet/index.md)** allows you to create, deploy, and manage AI agents directly within LangSmith with no code.
+* **[Insights](insights.md)** provides AI-powered analysis of your traces and application data within LangSmith.
+* **[Chat](chat.md)** provides an in-workspace chat experience to help you analyze traces, threads, prompts, and experiment results.
+* **[Sandboxes](sandboxes.md)** let users run code, expose temporary services, and create memory snapshots from LangSmith.
+* **[Engine](engine-overview.md)** finds recurring issues in a tracing project, diagnoses them against your source code, and proposes fixes. Engine requires Sandboxes.
 
 > [!NOTE]
 > These features require an [Enterprise](https://langchain.com/pricing) plan. [Get a demo](https://www.langchain.com/contact-sales) to learn more.
@@ -17,7 +17,7 @@ In addition to the base [LangSmith](https://docs.langchain.com/langsmith/self-ho
 ## Prerequisites
 
 ### Install the base LangSmith platform
-Follow the [Kubernetes installation guide](https://docs.langchain.com/langsmith/kubernetes) to install the base LangSmith platform before continuing.
+Follow the [Kubernetes installation guide](kubernetes.md) to install the base LangSmith platform before continuing.
 
 ### Install KEDA
 Run the following commands to install `KEDA` on your cluster:
@@ -31,7 +31,7 @@ helm upgrade --install keda kedacore/keda --namespace keda --create-namespace
 > KEDA automatically scales the deployment system based on queue size.
 
 ### Configure an ingress
-Configure an ingress, gateway, or Istio for your LangSmith instance. All agents will be deployed as Kubernetes services behind this ingress. See [Set up an ingress](https://docs.langchain.com/langsmith/self-host-ingress). You must provide a `hostname` in your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts).
+Configure an ingress, gateway, or Istio for your LangSmith instance. All agents will be deployed as Kubernetes services behind this ingress. See [Set up an ingress](self-host-ingress.md). You must provide a `hostname` in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts).
 
 ### Verify cluster capacity
 Ensure your cluster has available capacity for multiple deployments. A cluster autoscaler is recommended.
@@ -46,7 +46,7 @@ kubectl get storageclass
 At least one StorageClass should have a `PROVISIONER` value (not `kubernetes.io/no-provisioner`) and be marked `(default)`, or you must configure one before proceeding.
 
 ### Verify egress
-Ensure egress to `https://beacon.langchain.com` is available. See the [egress documentation](https://docs.langchain.com/langsmith/self-host-egress).
+Ensure egress to `https://beacon.langchain.com` is available. See the [egress documentation](self-host-egress.md).
 
 ## Enable LangSmith Deployment
 
@@ -54,14 +54,14 @@ Ensure egress to `https://beacon.langchain.com` is available. See the [egress do
 
 Enabling LangSmith Deployment provisions the following resources in your cluster:
 
-* `listener`: Listens to the [control plane](https://docs.langchain.com/langsmith/control-plane) for changes to your deployments and creates or updates downstream CRDs.
+* `listener`: Listens to the [control plane](control-plane.md) for changes to your deployments and creates or updates downstream CRDs.
 * `LangGraphPlatform CRD`: Manages instances of LangSmith Deployment.
 * `operator`: Handles changes to your LangSmith CRDs.
-* `host-backend`: The [control plane](https://docs.langchain.com/langsmith/control-plane).
+* `host-backend`: The [control plane](control-plane.md).
 
 ### Enable the feature
 
-To enable LangSmith Deployment, update your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts):
+To enable LangSmith Deployment, update your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts):
 
 ### Enable deployment in your config
 In your `langsmith_config.yaml`, enable the `deployment` option. You must also have a valid ingress configured.
@@ -76,7 +76,7 @@ config:
 > As of v0.12.0, the `langgraphPlatform` option is deprecated. Use `config.deployment` for any version after v0.12.0.
 
 ### (Optional) Configure image mirroring
-If you need to mirror images to a private registry, configure the `hostBackendImage` and `operatorImage` options in your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts). Use the image tags specified in the [latest LangSmith Helm chart release](https://github.com/langchain-ai/helm/releases).
+If you need to mirror images to a private registry, configure the `hostBackendImage` and `operatorImage` options in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts). Use the image tags specified in the [latest LangSmith Helm chart release](https://github.com/langchain-ai/helm/releases).
 
 ```yaml
 hostBackendImage:
@@ -88,7 +88,7 @@ operatorImage:
 ```
 
 ### (Optional) Configure base agent templates
-Override the [base agent templates in `values.yaml`](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml#L1428) if you need to customize how the operator creates agent Kubernetes resources. The most common use case is adding `imagePullSecrets` to authenticate with a private container registry. See [Configure authentication for private registries](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#configure-authentication-for-private-registries) for details.
+Override the [base agent templates in `values.yaml`](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml#L1428) if you need to customize how the operator creates agent Kubernetes resources. The most common use case is adding `imagePullSecrets` to authenticate with a private container registry. See [Configure authentication for private registries](#configure-authentication-for-private-registries) for details.
 
 ### Apply the changes
 Run the following command to apply the changes. This command is used throughout this guide whenever you are asked to apply changes. Replace `<version>` and `<namespace>` with your values:
@@ -129,7 +129,7 @@ Fleet additionally provisions:
 > [!WARNING]
 > As of chart `0.16.0`, Insights runs on `langsmith-insights-engine`, a combined image that serves both the `insights` and `engine` graphs, and the chart uses it by default. The previous Insights-only image, `langsmith-clio`, is retired.
 >
-> If your values pin `images.engineInsightsAgentImage.repository` to `langsmith-clio`, remove or update that pin before upgrading. The chart rejects it. If you mirror images to a private registry, mirror `langsmith-insights-engine` and point the repository at your copy. See [Mirroring images](https://docs.langchain.com/langsmith/self-host-mirroring-images#additional-images-for-engine).
+> If your values pin `images.engineInsightsAgentImage.repository` to `langsmith-clio`, remove or update that pin before upgrading. The chart rejects it. If you mirror images to a private registry, mirror `langsmith-insights-engine` and point the repository at your copy. See [Mirroring images](self-host-mirroring-images.md#additional-images-for-engine).
 
 ### Generate encryption keys
 
@@ -139,7 +139,7 @@ Each feature uses its own Fernet encryption key to encrypt feature-specific secr
 python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 ```
 
-We recommend storing each key in a predefined Kubernetes secret rather than setting them directly in your config file. See [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret#parameters) for the relevant parameters: `agent_builder_encryption_key`, `insights_encryption_key`, and `polly_encryption_key`.
+We recommend storing each key in a predefined Kubernetes secret rather than setting them directly in your config file. See [Use an existing secret](self-host-using-an-existing-secret.md#parameters) for the relevant parameters: `agent_builder_encryption_key`, `insights_encryption_key`, and `polly_encryption_key`.
 
 ### Enable features
 
@@ -234,16 +234,16 @@ To enable OAuth-based tools such as Gmail, Slack, or Linear in Fleet, configure 
 
 | Provider                                                                 | Tools enabled                                                      | Trigger enabled |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------ | --------------- |
-| `googleOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#google-oauth-provider)         | Gmail, Google Calendar,<br />Google Sheets, BigQuery               | Gmail           |
-| `linearOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#linear-oauth-provider)         | Linear                                                             | -               |
-| `linkedinOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#linkedin-oauth-provider)     | LinkedIn                                                           | -               |
-| `microsoftOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#microsoft-oauth-provider)   | Outlook, Calendar, Teams, SharePoint,<br />Word, Excel, PowerPoint | Outlook         |
-| `salesforceOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#salesforce-oauth-provider) | Salesforce                                                         | -               |
-| `slackOAuthProvider`<br />[setup guide](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#slack-oauth-provider)           | Slack                                                              | Slack           |
+| `googleOAuthProvider`<br />[setup guide](#google-oauth-provider)         | Gmail, Google Calendar,<br />Google Sheets, BigQuery               | Gmail           |
+| `linearOAuthProvider`<br />[setup guide](#linear-oauth-provider)         | Linear                                                             | -               |
+| `linkedinOAuthProvider`<br />[setup guide](#linkedin-oauth-provider)     | LinkedIn                                                           | -               |
+| `microsoftOAuthProvider`<br />[setup guide](#microsoft-oauth-provider)   | Outlook, Calendar, Teams, SharePoint,<br />Word, Excel, PowerPoint | Outlook         |
+| `salesforceOAuthProvider`<br />[setup guide](#salesforce-oauth-provider) | Salesforce                                                         | -               |
+| `slackOAuthProvider`<br />[setup guide](#slack-oauth-provider)           | Slack                                                              | Slack           |
 
 #### General configuration
 
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts). Include only the providers you need.
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts). Include only the providers you need.
 
 ```yaml
 fleet:
@@ -287,6 +287,8 @@ Add the following URLs to your OAuth client, replacing `<hostname>` with your La
 ### Copy credentials
 Copy the **Client ID** and **Client Secret** from the GCP OAuth app.
 
+<a id="google-oauth-provider"></a>
+
 ### Configure OAuth provider in LangSmith
 In LangSmith, go to **Settings > OAuth Providers** and add a new provider:
 
@@ -297,7 +299,7 @@ In LangSmith, go to **Settings > OAuth Providers** and add a new provider:
 * **Provider ID**: Unique string, for example: `google`
 
 ### Apply the changes
-Add the LangSmith OAuth provider ID to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts) and deploy:
+Add the LangSmith OAuth provider ID to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts) and deploy:
 
 ```yaml
 fleet:
@@ -372,7 +374,7 @@ In LangSmith, go to **Settings > OAuth Providers** and add a new provider:
 > If you created a single-tenant app registration, replace `common` in the authorization and token URLs with your tenant ID.
 
 ### Apply the changes
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts) and deploy:
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts) and deploy:
 
 ```yaml
 fleet:
@@ -391,6 +393,8 @@ helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --v
 <summary>Linear OAuth provider</summary>
 
 To enable Linear OAuth for Fleet, create a Linear OAuth app and configure it with the required credentials.
+
+<a id="linear-oauth-provider"></a>
 
 ### Create a Linear OAuth app
 Go to [Linear Settings > API > Applications](https://linear.app/settings/api/applications/new) and create a new OAuth application.
@@ -415,7 +419,7 @@ In LangSmith, go to **Settings > OAuth Providers** and add a new provider:
 * **Provider ID**: Unique string, for example: `linear`
 
 ### Apply the changes
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts) and deploy:
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts) and deploy:
 
 ```yaml
 fleet:
@@ -434,6 +438,8 @@ helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --v
 <summary>LinkedIn OAuth provider</summary>
 
 To enable LinkedIn OAuth for Fleet, create a LinkedIn OAuth app and configure it with the required credentials.
+
+<a id="linkedin-oauth-provider"></a>
 
 ### Create a LinkedIn OAuth app
 Go to [linkedin.com/developers/apps](https://www.linkedin.com/developers/apps/) and create a new app.
@@ -458,7 +464,7 @@ In LangSmith, go to **Settings > OAuth Providers** and add a new provider:
 * **Provider ID**: Unique string, for example: `linkedin`
 
 ### Apply the changes
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts) and deploy:
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts) and deploy:
 
 ```yaml
 fleet:
@@ -505,6 +511,10 @@ https://<hostname>/host-oauth-callback/<provider-id>
 
 Click **Create**.
 
+<a id="microsoft-oauth-provider"></a>
+<a id="salesforce-oauth-provider"></a>
+<a id="slack-oauth-provider"></a>
+
 ### Set the OAuth policies
 Open the app, select the **Policies** tab, and click **Edit**:
 
@@ -538,7 +548,7 @@ LangSmith recognizes Salesforce automatically from the Token URL, so there is no
 > Replace `` with your org's My Domain, found under **Setup > My Domain**. For a sandbox, use `https://--.sandbox.my.salesforce.com/services/oauth2/authorize` and the matching token URL.
 
 ### Apply the changes
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts) and deploy:
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts) and deploy:
 
 ```yaml
 fleet:
@@ -561,7 +571,7 @@ helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --v
 
 One Slack OAuth provider powers both Slack tools and the Slack apps you add to individual agents, so Slack setup lives with the rest of the Slack integration.
 
-For the full walkthrough, see [Set up Slack on Self-hosted](https://docs.langchain.com/langsmith/fleet/slack-app#set-up-slack-on-self-hosted). It covers creating the Slack app, adding bot scopes, registering the provider, setting the redirect URI, and configuring Helm values.
+For the full walkthrough, see [Set up Slack on Self-hosted](fleet/slack-app.md#set-up-slack-on-self-hosted). It covers creating the Slack app, adding bot scopes, registering the provider, setting the redirect URI, and configuring Helm values.
 
 </details>
 
@@ -569,7 +579,7 @@ For the full walkthrough, see [Set up Slack on Self-hosted](https://docs.langcha
 
 Fleet integrates with GitHub through a dedicated **GitHub App** (not an OAuth app). The GitHub App provides repository access for Fleet's GitHub tools and supports the user authorization flow required for private repository access.
 
-Setup involves creating a GitHub App, gathering its credentials, storing them as Kubernetes secrets, and referencing them from your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts).
+Setup involves creating a GitHub App, gathering its credentials, storing them as Kubernetes secrets, and referencing them from your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts).
 
 ### Create a GitHub App
 Go to [GitHub Settings > Developer settings > GitHub Apps](https://github.com/settings/apps) and click **New GitHub App**.
@@ -671,7 +681,7 @@ kubectl create secret generic fleet-github-app \
   --from-file=private_key=/path/to/fleet-app.private-key.pem
 ```
 
-For production deployments, manage this secret through your existing secrets workflow (for example, [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/)). See [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret) for more.
+For production deployments, manage this secret through your existing secrets workflow (for example, [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/)). See [Use an existing secret](self-host-using-an-existing-secret.md) for more.
 
 ### Add the configuration to your langsmith_config.yaml
 Add the following, replacing the placeholder values with the non-sensitive values gathered above:
@@ -735,7 +745,7 @@ Once pods are healthy:
 
 ### Disable features
 
-To disable any combination of Fleet, Insights, and Chat, set the corresponding flags to `false` in your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts):
+To disable any combination of Fleet, Insights, and Chat, set the corresponding flags to `false` in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts):
 
 ```yaml
 fleet:
@@ -753,7 +763,7 @@ polly:
 > [!NOTE]
 > Self-hosted Sandboxes require LangSmith Helm chart `0.16.0` or later.
 
-Sandboxes are disabled by default. After installation, see [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes) for user workflows in the LangSmith UI and APIs.
+Sandboxes are disabled by default. After installation, see [LangSmith Sandboxes](sandboxes.md) for user workflows in the LangSmith UI and APIs.
 
 ### Supported platforms
 
@@ -776,7 +786,7 @@ Enabling Sandboxes provisions the following resources:
 ### Prerequisites
 
 ### Install the base LangSmith platform
-Install LangSmith on Kubernetes before enabling Sandboxes. See [Self-host LangSmith on Kubernetes](https://docs.langchain.com/langsmith/kubernetes).
+Install LangSmith on Kubernetes before enabling Sandboxes. See [Self-host LangSmith on Kubernetes](kubernetes.md).
 
 Sandboxes run in the same Kubernetes cluster and namespace as the LangSmith release.
 
@@ -863,7 +873,7 @@ In GitOps workflows that render manifests without live cluster access, prefer `e
 
 ### Enable with Helm
 
-Add the following values to your `langsmith_config.yaml`, along with the sandbox secret values described in the [Prerequisites](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#prerequisites-2). Replace placeholders with your deployment-specific values.
+Add the following values to your `langsmith_config.yaml`, along with the sandbox secret values described in the [Prerequisites](#prerequisites-2). Replace placeholders with your deployment-specific values.
 
 ```yaml
 images:
@@ -1053,14 +1063,14 @@ Sandboxes are not proactively restarted. They start again when a user or API act
 > [!NOTE]
 > Self-hosted Engine requires LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. [Contact your account team](https://www.langchain.com/contact-sales) to have it added to your order.
 
-[Engine](https://docs.langchain.com/langsmith/engine-overview) watches a tracing project, clusters recurring failures into issues, diagnoses each one, and proposes a fix. Engine is disabled by default.
+[Engine](engine-overview.md) watches a tracing project, clusters recurring failures into issues, diagnoses each one, and proposes a fix. Engine is disabled by default.
 
 Engine requires Sandboxes and shares a runtime with Insights:
 
-* **[Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes):** Every Engine run executes in one. Enable Sandboxes first. The chart refuses to render when `engine.enabled` is set without them.
-* **[Insights](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-fleet-insights-and-chat):** Engine and Insights are served by the same image and share one deployment. Insights is not an Engine prerequisite. On an install that already runs Insights, enabling Engine adds configuration rather than new pods.
+* **[Sandboxes](#enable-sandboxes):** Every Engine run executes in one. Enable Sandboxes first. The chart refuses to render when `engine.enabled` is set without them.
+* **[Insights](#enable-fleet-insights-and-chat):** Engine and Insights are served by the same image and share one deployment. Insights is not an Engine prerequisite. On an install that already runs Insights, enabling Engine adds configuration rather than new pods.
 
-Unlike the other features on this page, Engine cannot run entirely inside your cluster. It depends on LangSmith Intelligence, a LangChain-managed zero data retention service, and authenticates with a short-lived license JWT obtained during LangSmith license verification. For the data flow and retained billing metadata, refer to [Engine on self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted).
+Unlike the other features on this page, Engine cannot run entirely inside your cluster. It depends on LangSmith Intelligence, a LangChain-managed zero data retention service, and authenticates with a short-lived license JWT obtained during LangSmith license verification. For the data flow and retained billing metadata, refer to [Engine on self-hosted](engine-self-hosted.md).
 
 ### Components
 
@@ -1069,14 +1079,14 @@ Enabling Engine provisions or reuses:
 * `standalone-insights-api-server`: serves both the `engine` and `insights` graphs.
 * `standalone-insights-queue`: background run processing for Engine and Insights.
 * A dedicated PostgreSQL and Redis instance for the shared deployment, each replaceable with an external instance.
-* The sandbox components described under [Enable Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes).
+* The sandbox components described under [Enable Sandboxes](#enable-sandboxes).
 
 Engine also adds configuration to `platform-backend` and `ingest-queue`, which dispatch and schedule its runs.
 
 ### Prerequisites
 
 ### Enable Sandboxes
-Complete [Enable Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes) first, including the KVM-capable node pool and JuiceFS storage.
+Complete [Enable Sandboxes](#enable-sandboxes) first, including the KVM-capable node pool and JuiceFS storage.
 
 Engine's sandboxes are owned by a single workspace. By default LangSmith resolves the install's own workspace, which works when there is exactly one non-personal organization; with more than one it declines rather than guess, and you must set `engine.sandboxTenantId`.
 
@@ -1099,9 +1109,9 @@ Allow outbound HTTPS from the cluster to the LangSmith Intelligence gateway for 
 On GCP, it is the same host LangSmith already uses for license verification and billing telemetry, so Engine adds a path rather than a new egress destination.
 
 > [!NOTE]
-> Engine is available for self-hosted deployments in **AWS US** and **GCP US**. AWS EU and Azure are planned. Check [Availability by cloud and region](https://docs.langchain.com/langsmith/engine-self-hosted#availability-by-cloud-and-region) and confirm coverage with your account team before planning a rollout.
+> Engine is available for self-hosted deployments in **AWS US** and **GCP US**. AWS EU and Azure are planned. Check [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region) and confirm coverage with your account team before planning a rollout.
 
-Add the gateway as a specific allowlist entry rather than opening general egress. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](https://docs.langchain.com/langsmith/engine-self-hosted#connect-with-aws-privatelink). Requests use a short-lived license JWT obtained during LangSmith license verification. Engine's traffic is separate from the billing and operational telemetry described in [Configure egress](https://docs.langchain.com/langsmith/self-host-egress), even where it shares a host.
+Add the gateway as a specific allowlist entry rather than opening general egress. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). Requests use a short-lived license JWT obtained during LangSmith license verification. Engine's traffic is separate from the billing and operational telemetry described in [Configure egress](self-host-egress.md), even where it shares a host.
 
 > [!NOTE]
 > Offline (air-gapped) installs cannot run Engine. There is no in-cluster model for it to fall back on.
@@ -1109,7 +1119,7 @@ Add the gateway as a specific allowlist entry rather than opening general egress
 ### Verify your hostname is externally reachable
 Engine's sandboxes call your LangSmith install using the `langsmith` CLI, so `config.hostname` must be reachable from the sandbox network. The chart rejects `localhost` and in-cluster `*.svc` addresses.
 
-Serve that hostname through your ingress with TLS, as described in [Set up an ingress](https://docs.langchain.com/langsmith/self-host-ingress). Engine does not require you to expose anything beyond the address your own users already reach. Sandbox egress is allowlisted to your LangSmith hostname, `github.com`, `api.github.com`, and the Python package registries. Per-run credentials are injected by a proxy outside the sandbox rather than being readable inside it.
+Serve that hostname through your ingress with TLS, as described in [Set up an ingress](self-host-ingress.md). Engine does not require you to expose anything beyond the address your own users already reach. Sandbox egress is allowlisted to your LangSmith hostname, `github.com`, `api.github.com`, and the Python package registries. Per-run credentials are injected by a proxy outside the sandbox rather than being readable inside it.
 
 ### Generate the Engine encryption key
 Engine uses its own Fernet key to encrypt the run payloads LangSmith passes to it, which carry short-lived credentials. Generate one:
@@ -1118,13 +1128,13 @@ Engine uses its own Fernet key to encrypt the run payloads LangSmith passes to i
 python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
 ```
 
-Store it in your predefined Kubernetes Secret as `engine_encryption_key` rather than in your config file. See [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret#parameters).
+Store it in your predefined Kubernetes Secret as `engine_encryption_key` rather than in your config file. See [Use an existing secret](self-host-using-an-existing-secret.md#parameters).
 
 To rotate the key later, copy the current value to `engine_encryption_key_previous` and set the new key as `engine_encryption_key`. The previous key is accepted for decryption only, so runs encrypted just before the swap still complete.
 
 ### Enable with Helm
 
-Add the following to your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts), alongside the Sandboxes values from [Enable Sandboxes](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes):
+Add the following to your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts), alongside the Sandboxes values from [Enable Sandboxes](#enable-sandboxes):
 
 #### Using Kubernetes secrets (recommended)
 Reference your existing Secret by name. The chart reads `engine_encryption_key` from it automatically.
@@ -1201,18 +1211,18 @@ Both the API server and queue pods should be `Running`. Then, confirm `platform-
 kubectl rollout status deployment/langsmith-platform-backend -n <namespace>
 ```
 
-If Engine does not appear in the LangSmith UI after this, the most common causes are a license without the Engine entitlement and the organization-level toggle described in [Turn on Engine in LangSmith](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#turn-on-engine-in-langsmith).
+If Engine does not appear in the LangSmith UI after this, the most common causes are a license without the Engine entitlement and the organization-level toggle described in [Turn on Engine in LangSmith](#turn-on-engine-in-langsmith).
 
 After completing the in-product setup, start an Engine analysis and confirm that results appear for the tracing project. This verifies the complete path through Engine, Sandboxes, and LangSmith Intelligence. Running pods alone does not verify that path.
 
 ### Turn on Engine in LangSmith
 
-Enabling Engine in Helm makes the feature available; it does not start any scans. Two in-product steps remain, both covered in [Find and fix issues](https://docs.langchain.com/langsmith/engine):
+Enabling Engine in Helm makes the feature available; it does not start any scans. Two in-product steps remain, both covered in [Find and fix issues](engine.md):
 
-1. An [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) turns Engine on for the organization under **Settings > Engine enablement**.
+1. An [Organization Admin](rbac.md#organization-admin) turns Engine on for the organization under **Settings > Engine enablement**.
 2. Any user sets Engine up for a tracing project from the project's **Engine** tab.
 
-Connecting a GitHub repository is optional and improves Engine's diagnosis and fixes. Without one, Engine still detects and diagnoses issues and proposes prompt fixes, but it cannot read your source code or open pull requests. To create the GitHub App and configure `host-backend`, see [Connect Engine to GitHub](https://docs.langchain.com/langsmith/engine-github#self-hosted).
+Connecting a GitHub repository is optional and improves Engine's diagnosis and fixes. Without one, Engine still detects and diagnoses issues and proposes prompt fixes, but it cannot read your source code or open pull requests. To create the GitHub App and configure `host-backend`, see [Connect Engine to GitHub](engine-github.md#self-hosted).
 
 ### Disable Engine
 
@@ -1230,17 +1240,17 @@ Engine stops dispatching runs. Existing issues remain in the database and reappe
 ### Configure additional data planes
 
 > [!WARNING]
-> **Not recommended; deprecation planned.** Configuring additional data planes through the control plane is not a recommended approach and will be deprecated in a future release. Instead, deploy [standalone Agent Servers](https://docs.langchain.com/langsmith/deploy-standalone-server) and configure them to trace to your self-hosted LangSmith instance.
+> **Not recommended; deprecation planned.** Configuring additional data planes through the control plane is not a recommended approach and will be deprecated in a future release. Instead, deploy [standalone Agent Servers](deploy-standalone-server.md) and configure them to trace to your self-hosted LangSmith instance.
 
 In addition to the data plane created above, you can create more data planes in different Kubernetes clusters or in the same cluster under a different namespace. There are different ways to achieve this, so implement the solution that works best for your use case.
 
 #### Prerequisites
 
 ### Review cluster organization
-Read through the cluster organization guide in the [hybrid (legacy) documentation](https://docs.langchain.com/langsmith/hybrid-legacy#listeners) to understand how to organize this for your use case.
+Read through the cluster organization guide in the [hybrid (legacy) documentation](hybrid-legacy.md#listeners) to understand how to organize this for your use case.
 
 ### Verify hybrid prerequisites
-Verify the prerequisites in the [hybrid section](https://docs.langchain.com/langsmith/hybrid-legacy#prerequisites) for the new cluster. In step 5 of the [prerequisites](https://docs.langchain.com/langsmith/hybrid-legacy#prerequisites), configure egress to your [self-hosted LangSmith instance](https://docs.langchain.com/langsmith/self-host-usage#configuring-the-application-you-want-to-use-with-langsmith) instead of `https://api.host.langchain.com` and `https://api.smith.langchain.com`.
+Verify the prerequisites in the [hybrid section](hybrid-legacy.md#prerequisites) for the new cluster. In step 5 of the [prerequisites](hybrid-legacy.md#prerequisites), configure egress to your [self-hosted LangSmith instance](self-host-usage.md#configuring-the-application-you-want-to-use-with-langsmith) instead of `https://api.host.langchain.com` and `https://api.smith.langchain.com`.
 
 ### Enable the feature in Postgres
 Run the following against your LangSmith Postgres instance to enable this feature. Note the workspace ID for later steps.
@@ -1253,18 +1263,18 @@ update tenants set config = config || '{"langgraph_remote_reconciler_enabled": t
 #### Deploy to a different cluster
 
 ### Follow the hybrid setup guide
-Follow steps 2 to 6 in the [hybrid setup guide](https://docs.langchain.com/langsmith/hybrid-legacy#setup). Set `config.langsmithWorkspaceId` to the workspace ID from the previous step.
+Follow steps 2 to 6 in the [hybrid setup guide](hybrid-legacy.md#setup). Set `config.langsmithWorkspaceId` to the workspace ID from the previous step.
 
 ### (Optional) Add more data planes to the same cluster
-To add more than one data plane to the same cluster, follow the instructions for [configuring additional data planes in the same cluster](https://docs.langchain.com/langsmith/hybrid-legacy#configuring-additional-data-planes-in-the-same-cluster).
+To add more than one data plane to the same cluster, follow the instructions for [configuring additional data planes in the same cluster](hybrid-legacy.md#configuring-additional-data-planes-in-the-same-cluster).
 
 #### Deploy to a different namespace in the same cluster
 
 ### Update your config
-In your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts), make the following modifications:
+In your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts), make the following modifications:
 
 * Set `operator.watchNamespaces` to the current namespace your self-hosted LangSmith instance is running in. This prevents conflicts with the operator added by the new data plane.
-* Use the [Gateway API](https://docs.langchain.com/langsmith/self-host-ingress#option-2%3A-gateway-api) or an [Istio Gateway](https://docs.langchain.com/langsmith/self-host-ingress#option-3%3A-istio-gateway). Adjust your `langsmith_config.yaml` accordingly.
+* Use the [Gateway API](self-host-ingress.md#option-2%3A-gateway-api) or an [Istio Gateway](self-host-ingress.md#option-3%3A-istio-gateway). Adjust your `langsmith_config.yaml` accordingly.
 
 ### Apply the changes
 ```bash
@@ -1272,14 +1282,14 @@ helm upgrade -i langsmith langchain/langsmith --values langsmith_config.yaml --v
 ```
 
 ### Follow the hybrid setup guide
-Follow steps 2 to 6 in the [hybrid setup guide](https://docs.langchain.com/langsmith/hybrid-legacy#setup). Set `config.langsmithWorkspaceId` to the workspace ID from the previous step. Set `config.watchNamespaces` to a different namespace than the one used by the existing data plane.
+Follow steps 2 to 6 in the [hybrid setup guide](hybrid-legacy.md#setup). Set `config.langsmithWorkspaceId` to the workspace ID from the previous step. Set `config.watchNamespaces` to a different namespace than the one used by the existing data plane.
 
 ### (Optional) Configure log access
-Configure access for the control plane to read Agent Server deployment logs from the new namespace. See [Read Agent Server logs from other namespaces](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#read-agent-server-logs-from-other-namespaces).
+Configure access for the control plane to read Agent Server deployment logs from the new namespace. See [Read Agent Server logs from other namespaces](#read-agent-server-logs-from-other-namespaces).
 
 ### Configure authentication for private registries
 
-If your [Agent Server deployments](https://docs.langchain.com/langsmith/agent-server) will use images from private container registries (for example, AWS ECR, Azure ACR, or GCP Artifact Registry), configure image pull secrets. This configuration applies to all deployments automatically, allowing them to authenticate with your private registry.
+If your [Agent Server deployments](agent-server.md) will use images from private container registries (for example, AWS ECR, Azure ACR, or GCP Artifact Registry), configure image pull secrets. This configuration applies to all deployments automatically, allowing them to authenticate with your private registry.
 
 ### Create a Kubernetes image pull secret
 ```bash
@@ -1420,7 +1430,7 @@ EOF
 
 ## Next steps
 
-Once LangSmith Deployment is enabled, see [Deploy with control plane](https://docs.langchain.com/langsmith/deploy-with-control-plane) to build and deploy your applications via the LangSmith UI.
+Once LangSmith Deployment is enabled, see [Deploy with control plane](deploy-with-control-plane.md) to build and deploy your applications via the LangSmith UI.
 
 ***
 

@@ -6,24 +6,24 @@ Administer your LangSmith organization: manage users and access control, organiz
 
 ## Explore
 
-#### [Organization administration](https://docs.langchain.com/langsmith/administration-overview)
+#### [Organization administration](administration-overview.md)
 Organizations, workspaces, applications, billing, and usage.
 
-#### [Users & access control](https://docs.langchain.com/langsmith/user-management)
+#### [Users & access control](user-management.md)
 Manage users, roles (RBAC), attribute-based access (ABAC), and authentication.
 
-#### [Tools](https://docs.langchain.com/langsmith/chat)
+#### [Tools](chat.md)
 Administrative tools and the LangSmith CLI.
 
-#### [Auditing & compliance](https://docs.langchain.com/langsmith/audit-logs)
+#### [Auditing & compliance](audit-logs.md)
 Audit logs, data storage and privacy, and compliance controls.
 
 ## Related
 
-#### [Account setup](https://docs.langchain.com/langsmith/admin)
+#### [Account setup](admin.md)
 Create an account, manage API keys, configure profiles, and review pricing tiers.
 
-#### [LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway)
+#### [LLM Gateway](llm-gateway.md)
 Proxy LLM calls to enforce spend limits, redact sensitive data, and centrally manage provider credentials.
 
 ***

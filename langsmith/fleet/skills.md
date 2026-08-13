@@ -10,7 +10,7 @@ Using skills can help:
 * Prevent the agent from having too much context in the system prompt, which can lead to hallucinations and incorrect responses.
 
 > [!NOTE]
-> Fleet skills are built on [Deep Agents](https://docs.langchain.com/oss/python/deepagents/skills) and follow the [Agent Skills specification](https://agentskills.io/specification). For details on skill structure, the `SKILL.md` format, and authoring best practices, see the [Deep Agents skills documentation](https://docs.langchain.com/oss/python/deepagents/skills).
+> Fleet skills are built on [Deep Agents](../../deepagents/skills.md) and follow the [Agent Skills specification](https://agentskills.io/specification). For details on skill structure, the `SKILL.md` format, and authoring best practices, see the [Deep Agents skills documentation](../../deepagents/skills.md).
 
 ## Private vs. shared skills
 
@@ -39,7 +39,7 @@ You can create a skill two ways:
 * **Manually**: Create a skill with a `SKILL.md` file.
 
 > [!NOTE]
-> By default, skills are **private** to the agent they belong to and are stored in the agent's long-term memory. You can [share a skill with the workspace](https://docs.langchain.com/langsmith/fleet/skills#share-a-skill).
+> By default, skills are **private** to the agent they belong to and are stored in the agent's long-term memory. You can [share a skill with the workspace](#share-a-skill).
 
 #### With AI
 In [Fleet](https://smith.langchain.com/agents?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-skills), select an agent and prompt it to create a skill:
@@ -63,7 +63,7 @@ Turn what we just did into a skill so you can repeat it in the future.
 4. Enter the skill name, description, and instructions.
 
 > [!TIP]
-> When you create a new agent, Fleet automatically generates relevant skills if the agent would benefit from them. These skills are private by default. You can [share them to your workspace](https://docs.langchain.com/langsmith/fleet/skills#share-a-skill) from the agent sidebar.
+> When you create a new agent, Fleet automatically generates relevant skills if the agent would benefit from them. These skills are private by default. You can [share them to your workspace](#share-a-skill) from the agent sidebar.
 
 ## Fix recurring mistakes
 

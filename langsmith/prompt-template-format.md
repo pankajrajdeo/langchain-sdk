@@ -1,9 +1,9 @@
 # Prompt template format guide
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/prompt-template-format)
-This page describes the [prompt template](https://docs.langchain.com/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates) formats supported in the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground), [prompt hub](https://docs.langchain.com/langsmith/manage-prompts#public-prompt-hub), and [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
+This page describes the [prompt template](prompt-engineering-concepts.md#prompts-vs-prompt-templates) formats supported in the [Playground](prompt-engineering-concepts.md#playground), [prompt hub](manage-prompts.md#public-prompt-hub), and [evaluators](evaluation-concepts.md#evaluators). Prompt templates allow you to create reusable prompts with dynamic placeholders that get filled in at runtime.
 
 > [!TIP]
-> For a general overview of prompt engineering and prompt templates, refer to the [Concepts](https://docs.langchain.com/langsmith/prompt-engineering-concepts#prompts-vs-prompt-templates) page.
+> For a general overview of prompt engineering and prompt templates, refer to the [Concepts](prompt-engineering-concepts.md#prompts-vs-prompt-templates) page.
 
 LangSmith supports two prompt template formats, which work for different levels of complexity:
 
@@ -12,16 +12,16 @@ LangSmith supports two prompt template formats, which work for different levels 
 | **f-string** | `{variable}`   | Simple prompts with basic variable substitution                      |
 | **mustache** | `{{variable}}` | Complex prompts with loops, conditionals, nested data, or evaluators |
 
-[F-string syntax](https://docs.langchain.com/langsmith/prompt-template-format#f-string-syntax) is ideal for straightforward prompts. [Mustache](https://docs.langchain.com/langsmith/prompt-template-format#mustache-syntax) provides features for handling complex data structures and logic, which is helpful for evaluators and advanced use cases.
+[F-string syntax](#f-string-syntax) is ideal for straightforward prompts. [Mustache](#mustache-syntax) provides features for handling complex data structures and logic, which is helpful for evaluators and advanced use cases.
 
-You can switch between formats in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-prompt-template-format). LangSmith will automatically [convert your template](https://docs.langchain.com/langsmith/prompt-template-format#conversion-between-formats) when possible, though some mustache features (like loops and conditionals) cannot be converted to f-string format.
+You can switch between formats in the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-prompt-template-format). LangSmith will automatically [convert your template](#conversion-between-formats) when possible, though some mustache features (like loops and conditionals) cannot be converted to f-string format.
 
 > [!NOTE]
 > Use the [Playground](https://smith.langchain.com/playground) to test out the examples on this page. Switch the **Prompt format** under the prompt settings  menu in the Playground.
 
 ## F-string syntax
 
-F-string templates use Python-style formatting with single curly braces `{variable}`. LangSmith uses a [simplified subset](https://docs.langchain.com/langsmith/prompt-template-format#limitations) of Python's [f-string syntax](https://realpython.com/python-f-strings/): it only supports basic variable substitution, not the full range of Python expressions and formatting options. When you have a flat data structure and only need to insert values into your prompt, f-strings are ideal.
+F-string templates use Python-style formatting with single curly braces `{variable}`. LangSmith uses a [simplified subset](#limitations) of Python's [f-string syntax](https://realpython.com/python-f-strings/): it only supports basic variable substitution, not the full range of Python expressions and formatting options. When you have a flat data structure and only need to insert values into your prompt, f-strings are ideal.
 
 ### Basic variables
 
@@ -63,7 +63,7 @@ Hello, Ashley!
 Your topic is: LangSmith
 ```
 
-If your input has nested objects like `{"user": {"name": "Ashley"}}`, you **cannot** access the nested value with `{user.name}` in f-string format. The dot would be treated as part of the variable name (literally looking for a key called `"user.name"`), not as a path separator. For nested access, use [mustache format](https://docs.langchain.com/langsmith/prompt-template-format#mustache-syntax) instead.
+If your input has nested objects like `{"user": {"name": "Ashley"}}`, you **cannot** access the nested value with `{user.name}` in f-string format. The dot would be treated as part of the variable name (literally looking for a key called `"user.name"`), not as a path separator. For nested access, use [mustache format](#mustache-syntax) instead.
 
 ### Literal braces
 
@@ -131,7 +131,7 @@ Hello, Ashley! Welcome to LangChain.
 ```
 
 > [!NOTE]
-> `{{!-- ... --}}` is a mustache comment and won't appear in the output. Refer to the [Comments](https://docs.langchain.com/langsmith/prompt-template-format#comments) section.
+> `{{!-- ... --}}` is a mustache comment and won't appear in the output. Refer to the [Comments](#comments) section.
 
 ### Nested object access
 
@@ -195,7 +195,7 @@ Shopping List:
   - Orange: $2.00
 ```
 
-Sections eliminate the need to manually construct repetitive text. In evaluators, you'll use sections to iterate over conversation messages or [few-shot examples](https://docs.langchain.com/langsmith/prompt-template-format#few-shot-examples).
+Sections eliminate the need to manually construct repetitive text. In evaluators, you'll use sections to iterate over conversation messages or [few-shot examples](#few-shot-examples).
 
 For deeply nested hierarchical data, you can nest multiple sections to handle complex structures with multiple levels of arrays and objects:
 
@@ -467,13 +467,13 @@ Use comments to explain complex sections, document expected data structures, or 
 
 ## Special variables for evaluators and threads
 
-When building [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) or working with conversational AI, LangSmith automatically provides special variables that structure conversation data in useful ways. These variables are **only available in evaluator contexts**, not in regular Playground prompts.
+When building [evaluators](evaluation-concepts.md#evaluators) or working with conversational AI, LangSmith automatically provides special variables that structure conversation data in useful ways. These variables are **only available in evaluator contexts**, not in regular Playground prompts.
 
 Evaluators need to analyze conversations holistically—looking at patterns across multiple messages, comparing the first question to the final answer, or examining how well the AI responds to follow-up questions. These variables make it easy to access conversation structure without manual data manipulation.
 
 ### Thread message variables
 
-LangSmith provides three pre-structured views of conversation [threads](https://docs.langchain.com/langsmith/evaluation-concepts#threads):
+LangSmith provides three pre-structured views of conversation [threads](evaluation-concepts.md#threads):
 
 ```mustache
 {{!-- Access all messages in the thread --}}
@@ -545,7 +545,7 @@ When you create an evaluator in LangSmith, select which thread variables you wan
 
 Few-shot prompting teaches the LLM by example. You provide several input-output pairs demonstrating the task, then ask it to perform the same task on new input.
 
-[Few-shot examples](https://docs.langchain.com/langsmith/create-few-shot-evaluators#how-few-shot-examples-work) help the LLM understand:
+[Few-shot examples](create-few-shot-evaluators.md#how-few-shot-examples-work) help the LLM understand:
 
 * **Format expectations** (e.g., "respond with JSON" or "use this tone")
 * **Edge cases** (e.g., how to handle ambiguous input)
@@ -605,7 +605,7 @@ If you try to convert a mustache template with these features, LangSmith will ei
 
 ## Additional resources
 
-* **[LangSmith Prompt Engineering Concepts](https://docs.langchain.com/langsmith/prompt-engineering-concepts)**: Higher-level guidance on effective prompting strategies.
+* **[LangSmith Prompt Engineering Concepts](prompt-engineering-concepts.md)**: Higher-level guidance on effective prompting strategies.
 * **[Mustache Manual](https://mustache.github.io/mustache.5.html)**: Full mustache specification with all features.
 * **[Python f-string Documentation](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)**: Official Python f-string syntax (note: LangSmith uses a simplified subset).
 

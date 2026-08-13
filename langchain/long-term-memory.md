@@ -3,9 +3,9 @@
 Add long-term memory to LangChain agents to store and recall data across conversations and sessions
 
 Long-term memory lets your agent store and recall information across different conversations and sessions.
-Unlike [short-term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory), which is scoped to a single thread, long-term memory persists across threads and can be recalled at any time.
+Unlike [short-term memory](short-term-memory.md), which is scoped to a single thread, long-term memory persists across threads and can be recalled at any time.
 
-Long-term memory is built on [LangGraph stores](https://docs.langchain.com/oss/python/langgraph/stores), which save data as JSON documents organized by namespace and key.
+Long-term memory is built on [LangGraph stores](../langgraph/stores.md), which save data as JSON documents organized by namespace and key.
 
 ## Usage
 
@@ -55,14 +55,14 @@ with PostgresStore.from_conn_string(DB_URI) as store:
     )
 ```
 
-Tools can then read from and write to the store using the `runtime.store` parameter. See [Read long-term memory in tools](https://docs.langchain.com/oss/python/langchain/long-term-memory#read-long-term-memory-in-tools) and [Write long-term memory from tools](https://docs.langchain.com/oss/python/langchain/long-term-memory#write-long-term-memory-from-tools) for examples.
+Tools can then read from and write to the store using the `runtime.store` parameter. See [Read long-term memory in tools](#read-long-term-memory-in-tools) and [Write long-term memory from tools](#write-long-term-memory-from-tools) for examples.
 
 > [!TIP]
-> For a deeper dive into memory types (semantic, episodic, procedural) and strategies for writing memories, see the [Memory conceptual guide](https://docs.langchain.com/oss/python/concepts/memory#long-term-memory).
+> For a deeper dive into memory types (semantic, episodic, procedural) and strategies for writing memories, see the [Memory conceptual guide](../concepts/memory.md#long-term-memory).
 
 ## Memory storage
 
-LangGraph stores long-term memories as JSON documents in a [store](https://docs.langchain.com/oss/python/langgraph/stores).
+LangGraph stores long-term memories as JSON documents in a [store](../langgraph/stores.md).
 
 Each memory is organized under a custom `namespace` (similar to a folder) and a distinct `key` (like a file name). Namespaces often include user or org IDs or other labels that makes it easier to organize information.
 
@@ -141,7 +141,7 @@ with PostgresStore.from_conn_string(
     )
 ```
 
-For more information about the memory store, see the [Persistence](https://docs.langchain.com/oss/python/langgraph/stores) guide.
+For more information about the memory store, see the [Persistence](../langgraph/stores.md) guide.
 
 ## Read long-term memory in tools
 

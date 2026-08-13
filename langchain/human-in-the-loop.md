@@ -1,15 +1,15 @@
 # Human-in-the-loop
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop)
-The Human-in-the-Loop (HITL) [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) lets you add human oversight to agent tool calls.
+The Human-in-the-Loop (HITL) [middleware](middleware/built-in.md#human-in-the-loop) lets you add human oversight to agent tool calls.
 When a model proposes an action that might require review—for example, writing to a file or executing SQL—the middleware can pause execution and wait for a decision.
 
-It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](https://docs.langchain.com/oss/python/langgraph/persistence), so execution can pause safely and resume later.
+It does this by checking each tool call against a configurable policy. If intervention is needed, the middleware issues an [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) that halts execution. The graph state is saved using LangGraph's [persistence layer](../langgraph/persistence.md), so execution can pause safely and resume later.
 
 A human decision then determines what happens next: the action can be approved as-is (`approve`), modified before running (`edit`), rejected with feedback (`reject`), or responded to directly (`respond`) for "ask user" style tools.
 
 ## Interrupt decision types
 
-The [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) defines four built-in ways a human can respond to an interrupt:
+The [middleware](middleware/built-in.md#human-in-the-loop) defines four built-in ways a human can respond to an interrupt:
 
 | Decision Type | Description                                                                                                     | Example Use Case                                  |
 | ------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
@@ -29,7 +29,7 @@ Use `reject` when the human is denying the requested action. Use `respond` only 
 
 ## Configuring interrupts
 
-To use HITL, add the [middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop) to the agent's `middleware` list when creating the agent.
+To use HITL, add the [middleware](middleware/built-in.md#human-in-the-loop) to the agent's `middleware` list when creating the agent.
 
 You configure it with a mapping of tool actions to the decision types that are allowed for each action. The middleware will interrupt execution when a tool call matches an action in the mapping.
 
@@ -65,7 +65,7 @@ agent = create_agent(
 > In production, use a persistent checkpointer like [`AsyncPostgresSaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.postgres.aio.AsyncPostgresSaver) or [`MongoDBSaver`](https://pypi.org/project/langgraph-checkpoint-mongodb/). For testing or prototyping, use [`InMemorySaver`](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.memory.InMemorySaver).
 >
 > When invoking the agent, pass a `config` that includes the **thread ID** to associate execution with a conversation thread.
-> See the [LangGraph interrupts documentation](https://docs.langchain.com/oss/python/langgraph/interrupts) for details.
+> See the [LangGraph interrupts documentation](../langgraph/interrupts.md) for details.
 
 <details>
 <summary>Configuration options</summary>
@@ -361,7 +361,7 @@ for message in stream.messages:  # [!code highlight]
         print(token, end="", flush=True)
 ```
 
-See the [Streaming](https://docs.langchain.com/oss/python/langchain/streaming) guide for more details on stream modes.
+See the [Streaming](streaming.md) guide for more details on stream modes.
 
 ## Execution lifecycle
 
@@ -375,9 +375,9 @@ The middleware defines an `after_model` hook that runs after the model generates
 
 ## Custom HITL logic
 
-For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) primitive and [middleware](https://docs.langchain.com/oss/python/langchain/middleware) abstraction.
+For more specialized workflows, you can build custom HITL logic directly using the [interrupt](https://reference.langchain.com/python/langgraph/types/interrupt) primitive and [middleware](middleware.md) abstraction.
 
-Review the [execution lifecycle](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
+Review the [execution lifecycle](#execution-lifecycle) above to understand how to integrate interrupts into the agent's operation.
 
 ***
 

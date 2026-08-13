@@ -2,12 +2,12 @@
 
 > Integrate with AWS middleware using LangChain Python.
 
-Middleware integrations for AWS services. Prompt caching is designed for models hosted on Amazon Bedrock, while AgentCore Payments works with LangGraph agents regardless of model provider. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
+Middleware integrations for AWS services. Prompt caching is designed for models hosted on Amazon Bedrock, while AgentCore Payments works with LangGraph agents regardless of model provider. Learn more about [middleware](../../langchain/middleware/overview.md).
 
 | Middleware                                | Description                                         |
 | ----------------------------------------- | --------------------------------------------------- |
-| [Prompt caching](https://docs.langchain.com/oss/python/integrations/middleware/aws#prompt-caching)         | Reduce costs by caching repetitive prompt prefixes  |
-| [AgentCore Payments](https://docs.langchain.com/oss/python/integrations/middleware/aws#agentcore-payments) | Autonomous x402 micropayment handling for paid APIs |
+| [Prompt caching](#prompt-caching)         | Reduce costs by caching repetitive prompt prefixes  |
+| [AgentCore Payments](#agentcore-payments) | Autonomous x402 micropayment handling for paid APIs |
 
 ## Prompt caching
 
@@ -343,7 +343,7 @@ MCP tools connected via `langchain-mcp-adapters` can work with the middleware wh
 1. The tool returns payment-related JSON (including `statusCode: 402`) as **text content** in `ToolMessage.content` (not in `ToolMessage.artifact` or `structuredContent`)
 2. The tool accepts a `headers` argument and forwards it in its outbound HTTP requests
 
-When these conditions are satisfied, the lenient fallback detection handles 402 responses automatically. For non-standard formats that are still exposed through `ToolMessage.content`, register a [custom handler](https://docs.langchain.com/oss/python/integrations/middleware/aws#custom-handlers). MCP `structuredContent` stored in `ToolMessage.artifact` and MCP transport-level headers require adapter or transport integration outside this middleware.
+When these conditions are satisfied, the lenient fallback detection handles 402 responses automatically. For non-standard formats that are still exposed through `ToolMessage.content`, register a [custom handler](#custom-handlers). MCP `structuredContent` stored in `ToolMessage.artifact` and MCP transport-level headers require adapter or transport integration outside this middleware.
 
 ### Error handling
 
@@ -686,7 +686,7 @@ agent = create_agent(
 )
 ```
 
-Compatible tools that meet the [custom tool integration contract](https://docs.langchain.com/oss/python/integrations/middleware/aws#custom-tool-integration-contract) are handled automatically.
+Compatible tools that meet the [custom tool integration contract](#custom-tool-integration-contract) are handled automatically.
 
 ### Configuration reference
 

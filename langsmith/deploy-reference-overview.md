@@ -2,30 +2,30 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/deploy-reference-overview)
 Reference for the LangSmith Deployment SDKs, CLI, and APIs for deploying and interacting with agents.
 
-This section is a reference for the SDKs, CLI, and APIs you use to deploy and interact with agents on the [Agent Server](https://docs.langchain.com/langsmith/agent-server) runtime.
+This section is a reference for the SDKs, CLI, and APIs you use to deploy and interact with agents on the [Agent Server](agent-server.md) runtime.
 
 ## SDKs and CLI
 
-#### [LangSmith Deployments SDK](https://docs.langchain.com/langsmith/smith-deployments-sdk)
+#### [LangSmith Deployments SDK](smith-deployments-sdk.md)
 Management of LangSmith deployments and revisions using the LangGraph SDK.
 
-#### [LangGraph CLI](https://docs.langchain.com/langsmith/cli)
+#### [LangGraph CLI](cli.md)
 Build, deploy, and interact with agents from the command line.
 
-#### [RemoteGraph](https://docs.langchain.com/langsmith/remote-graph)
+#### [RemoteGraph](remote-graph.md)
 Client-side interface for calling deployed graphs as if they were local.
 
 ## APIs
 
-#### [Agent Server API](https://docs.langchain.com/langsmith/server-api-ref)
+#### [Agent Server API](server-api-ref.md)
 REST endpoints exposed by the Agent Server runtime: assistants, threads, runs, cron jobs, and the long-term memory store.
 
-#### [Control Plane API](https://docs.langchain.com/langsmith/api-ref-control-plane)
+#### [Control Plane API](api-ref-control-plane.md)
 REST endpoints for managing deployments, revisions, and listeners.
 
 ## Releases
 
-#### [Agent Server changelog](https://docs.langchain.com/langsmith/agent-server-changelog)
+#### [Agent Server changelog](agent-server-changelog.md)
 Version history and release notes for the Agent Server runtime.
 
 ***

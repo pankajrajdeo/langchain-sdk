@@ -176,7 +176,7 @@ from langchain_box.document_loaders import BoxLoader
 
 ### BoxRetriever
 
-[See usage example](https://docs.langchain.com/oss/python/integrations/retrievers/box)
+[See usage example](../retrievers/box.md)
 
 ```python
 from langchain_box.retrievers import BoxRetriever

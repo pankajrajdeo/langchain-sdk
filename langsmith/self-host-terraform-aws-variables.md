@@ -9,7 +9,7 @@ Variables come in two categories:
 * **Non-sensitive** (region, sizing, feature flags): set in `infra/terraform.tfvars`.
 * **Sensitive** (license key, passwords, encryption keys): sourced through `infra/scripts/setup-env.sh`, which writes them to AWS SSM Parameter Store; External Secrets Operator then syncs them into the cluster.
 
-For the end-to-end install, refer to the [deploy guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy). For how the modules fit together, refer to the [architecture reference](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture).
+For the end-to-end install, refer to the [deploy guide](self-host-terraform-aws-deploy.md). For how the modules fit together, refer to the [architecture reference](self-host-terraform-aws-architecture.md).
 
 ## Core
 

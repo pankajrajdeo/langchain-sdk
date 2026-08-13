@@ -45,13 +45,13 @@ Scheduled and CI runs send anonymous reliability telemetry under a shared CI ide
 OPENWIKI_TELEMETRY_DISABLED=1
 ```
 
-You can uncomment the corresponding line in the example workflow. To understand what is collected and how to opt out locally, see [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize#telemetry).
+You can uncomment the corresponding line in the example workflow. To understand what is collected and how to opt out locally, see [Customize OpenWiki](customize.md#telemetry).
 
 ## See also
 
-* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
-* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
-* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
+* [Code mode](code-mode.md)
+* [Model providers](providers.md)
+* [CLI reference](cli-reference.md)
 
 ***
 

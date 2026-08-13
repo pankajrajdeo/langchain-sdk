@@ -33,7 +33,7 @@ pip install -U langchain
 
 ## Set up API keys
 
-Get an API key from [any supported model provider](https://docs.langchain.com/oss/python/integrations/providers/overview) (for example, Google Gemini or OpenAI).
+Get an API key from [any supported model provider](../integrations/providers/overview.md) (for example, Google Gemini or OpenAI).
 
 Set the API keys, for example:
 
@@ -94,12 +94,12 @@ export HUGGINGFACEHUB_API_TOKEN="hf_..."
 ```
 
 #### Other
-See the full list of supported [chat model integrations](https://docs.langchain.com/oss/python/integrations/chat).
+See the full list of supported [chat model integrations](../integrations/chat.md).
 
 > [!TIP]
 > **Using LangSmith Gateway**
 >
-> The [LangSmith Gateway](https://docs.langchain.com/langsmith/llm-gateway) routes most major providers through LangSmith. You can [bring your own provider keys](https://docs.langchain.com/langsmith/llm-gateway-quickstart#2-make-a-call), or use [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits) to access models without a provider key.
+> The [LangSmith Gateway](../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../langsmith/llm-gateway-quickstart.md#2-make-a-call), or use [Gateway Credits](../langsmith/llm-gateway-credits.md) to access models without a provider key.
 
 ## Build a basic agent
 
@@ -305,9 +305,9 @@ When you run the code and prompt the agent to tell you about the weather in San 
 The agent understands that you are asking about the weather for the city San Francisco and therefore calls the weather tool with the provided city name.
 
 > [!TIP]
-> You can use [any supported model](https://docs.langchain.com/oss/python/integrations/providers/overview) by changing the model name and setting up the appropriate API key. Trace what is happening inside your agent with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-quickstart). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up.
+> You can use [any supported model](../integrations/providers/overview.md) by changing the model name and setting up the appropriate API key. Trace what is happening inside your agent with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-quickstart). Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Build a real-world agent
 
@@ -334,8 +334,8 @@ Do not guess line counts or positions—ground them in tool results from the sav
 ```
 
 ### Create tools
-[Tools](https://docs.langchain.com/oss/python/langchain/tools) let a model interact with external systems by calling functions you define.
-Tools can depend on [runtime context](https://docs.langchain.com/oss/python/langchain/runtime) and also interact with [agent memory](https://docs.langchain.com/oss/python/langchain/short-term-memory).
+[Tools](tools.md) let a model interact with external systems by calling functions you define.
+Tools can depend on [runtime context](runtime.md) and also interact with [agent memory](short-term-memory.md).
 
 This example uses a tool to load a document from a given URL:
 
@@ -365,10 +365,10 @@ def fetch_text_from_url(url: str) -> str:
 > [!TIP]
 > Tools should be well-documented: their name, description, and argument names become part of the model's prompt.
 > LangChain's [`@tool` decorator](https://reference.langchain.com/python/langchain-core/tools/convert/tool) adds metadata and enables runtime injection with the `ToolRuntime` parameter.
-> Learn more in the [tools guide](https://docs.langchain.com/oss/python/langchain/tools).
+> Learn more in the [tools guide](tools.md).
 
 ### Configure your model
-Set up your [language model](https://docs.langchain.com/oss/python/langchain/models) with the right parameters for your use case. For example:
+Set up your [language model](models.md) with the right parameters for your use case. For example:
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -490,7 +490,7 @@ model = init_chat_model(
 Depending on the model and provider chosen, initialization parameters may vary; refer to their reference pages for details.
 
 ### Add memory
-Add [memory](https://docs.langchain.com/oss/python/langchain/short-term-memory) to your agent to maintain state across interactions. This allows
+Add [memory](short-term-memory.md) to your agent to maintain state across interactions. This allows
 the agent to remember previous conversations and context.
 
 ```python
@@ -501,7 +501,7 @@ checkpointer = InMemorySaver()
 
 > [!NOTE]
 > In production, use a persistent checkpointer that saves message history to a database.
-> See [Add and manage memory](https://docs.langchain.com/oss/python/langgraph/add-memory#manage-short-term-memory) for more details.
+> See [Add and manage memory](../langgraph/add-memory.md#manage-short-term-memory) for more details.
 
 ### Create and run the agent
 Now assemble your agent with all the components and run it.
@@ -698,9 +698,9 @@ If you look at the output on both tabs, you notice that the LangChain agent prov
 
 The deep agent, on the other hand can:
 
-1. **Plans its approach** using the built-in [`write_todos`](https://docs.langchain.com/oss/python/deepagents/harness#task-planning) tool to break down the research task.
+1. **Plans its approach** using the built-in [`write_todos`](../deepagents/harness.md#task-planning) tool to break down the research task.
 2. **Loads the file** by calling the `fetch_text_from_url` tool to gather information.
-3. **Manages context** by using file system tools ([`grep`](https://docs.langchain.com/oss/python/deepagents/harness#virtual-filesystem-access) and [`read_file`](https://docs.langchain.com/oss/python/deepagents/harness#virtual-filesystem-access)).
+3. **Manages context** by using file system tools ([`grep`](../deepagents/harness.md#virtual-filesystem-access) and [`read_file`](../deepagents/harness.md#virtual-filesystem-access)).
 4. **Spawns subagents** as needed to delegate complex subtasks to specialized subagents.
 
 For LangChain agents, you must implement more capabilities to get a similar level of service and can customize them along the way as needed.
@@ -719,9 +719,9 @@ export LANGSMITH_API_KEY="..."
 Once set, run your script again and then inspect what happened during your agent calls on [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-quickstart) .
 
 > [!TIP]
-> To learn more about tracing your agent with LangSmith, see the [LangSmith documentation](https://docs.langchain.com/langsmith/trace-with-langchain).
+> To learn more about tracing your agent with LangSmith, see the [LangSmith documentation](../langsmith/trace-with-langchain.md).
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Next steps
 
@@ -736,8 +736,8 @@ You now have agents that can:
 
 Continue with:
 
-* **LangChain agents**: [Add and manage memory](https://docs.langchain.com/oss/python/langgraph/add-memory#manage-short-term-memory), [deploy to production](https://docs.langchain.com/oss/python/langgraph/deploy)
-* **Deep Agents**: [Customization options](https://docs.langchain.com/oss/python/deepagents/customization), [persistent memory](https://docs.langchain.com/oss/python/deepagents/memory), [deploy to production](https://docs.langchain.com/oss/python/langgraph/deploy)
+* **LangChain agents**: [Add and manage memory](../langgraph/add-memory.md#manage-short-term-memory), [deploy to production](../langgraph/deploy.md)
+* **Deep Agents**: [Customization options](../deepagents/customization.md), [persistent memory](../deepagents/memory.md), [deploy to production](../langgraph/deploy.md)
 
 ***
 

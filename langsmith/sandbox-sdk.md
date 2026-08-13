@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-sdk)
 Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
-The [LangSmith SDK](https://docs.langchain.com/langsmith/reference) provides a programmatic interface to create and interact with sandboxes.
+The [LangSmith SDK](reference.md) provides a programmatic interface to create and interact with sandboxes.
 
 ## Install
 
@@ -28,7 +28,7 @@ npm install ws
 
 ## Create and run a sandbox
 
-Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots) for that flow.
+Pass a snapshot ID or name when you want to boot from a reusable custom filesystem image; see [Snapshots](sandbox-snapshots.md) for that flow.
 
 ```python
 from langsmith.sandbox import SandboxClient
@@ -424,7 +424,7 @@ with client.sandbox() as sb:
     resp = svc.post("/api/data", json={"key": "value"})
 ```
 
-For more details, including use cases, REST API access, and a full FastAPI example, see [Service URLs](https://docs.langchain.com/langsmith/sandbox-service-urls).
+For more details, including use cases, REST API access, and a full FastAPI example, see [Service URLs](sandbox-service-urls.md).
 
 ## TCP tunnels (Python)
 

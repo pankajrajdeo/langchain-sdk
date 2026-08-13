@@ -2,7 +2,7 @@
 
 > Integrate with ChatNVIDIA and ChatNVIDIADynamo chat models using LangChain Python.
 
-This will help you get started with NVIDIA [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatNVIDIA` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA).
+This will help you get started with NVIDIA [chat models](../../langchain/models.md). For detailed documentation of all `ChatNVIDIA` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-nvidia-ai-endpoints/chat_models/ChatNVIDIA).
 
 ## Overview
 
@@ -14,7 +14,7 @@ NVIDIA AI Foundation models run on NIM microservices: container images distribut
 
 This page covers how to use LangChain to interact with NVIDIA models via `ChatNVIDIA`, including Nemotron and other models from the API Catalog.
 
-For more information on accessing embedding models through this API, refer to the [`NVIDIAEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints) documentation.
+For more information on accessing embedding models through this API, refer to the [`NVIDIAEmbeddings`](../embeddings/nvidia_ai_endpoints.md) documentation.
 
 ### Integration details
 
@@ -24,7 +24,7 @@ For more information on accessing embedding models through this API, refer to th
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -61,7 +61,7 @@ else:
 
 You can now use your key to access endpoints on the NVIDIA API Catalog.
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -342,7 +342,7 @@ The NVIDIA API uniquely accepts images as base64 images inlined within `<img/>` 
 
 ```python
 base64_with_mime_type = f"data:image/png;base64,{b64_string}"
-llm.invoke(f'What\'s in this image?\n<img src="https://docs.langchain.com/oss/python/integrations/chat/{base64_with_mime_type}" />')
+llm.invoke(f'What\'s in this image?\n<img src="{base64_with_mime_type}" />')
 ```
 
 ## Example usage within a `RunnableWithMessageHistory`
@@ -434,7 +434,7 @@ response = llm.invoke("What is the weather in Boston?")
 response.tool_calls
 ```
 
-See [How to use chat models to call tools](https://docs.langchain.com/oss/python/langchain/tools) for additional examples.
+See [How to use chat models to call tools](../../langchain/tools.md) for additional examples.
 
 ## Use with NVIDIA Dynamo
 
@@ -570,10 +570,10 @@ For detailed documentation of all `ChatNVIDIA` features and configurations head 
 * [Overview of NVIDIA NIM for Large Language Models (LLMs)](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html)
 * [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 * [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
-* [`NVIDIAEmbeddings` Model for RAG Workflows](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)
-* [NVIDIA Provider Page](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
-* [Sandboxed agents with NVIDIA OpenShell](https://docs.langchain.com/oss/python/integrations/providers/nvidia#sandboxed-agents-with-openshell)
-* [Post-training agent workflows](https://docs.langchain.com/oss/python/integrations/providers/nvidia#post-training-agent-workflows)
+* [`NVIDIAEmbeddings` Model for RAG Workflows](../embeddings/nvidia_ai_endpoints.md)
+* [NVIDIA Provider Page](../providers/nvidia.md)
+* [Sandboxed agents with NVIDIA OpenShell](../providers/nvidia.md#sandboxed-agents-with-openshell)
+* [Post-training agent workflows](../providers/nvidia.md#post-training-agent-workflows)
 * [NVIDIA Dynamo](https://developer.nvidia.com/dynamo) — open-source inference framework
 * [Dynamo Quickstart Guide](https://docs.nvidia.com/dynamo/latest/getting-started/quickstart) — get a local deployment running
 * [KV Cache-Aware Routing](https://docs.nvidia.com/dynamo/latest/user-guides/kv-cache-aware-routing) — how the Smart Router works

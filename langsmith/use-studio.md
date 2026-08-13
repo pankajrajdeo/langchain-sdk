@@ -2,29 +2,29 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/use-studio)
 This page describes the core workflows you’ll use in Studio. It explains how to run your application, manage assistant configurations, and work with conversation threads. Each section includes steps in both graph mode (full-featured view of your graph’s execution) and chat mode (lightweight conversational interface):
 
-* [Run application](https://docs.langchain.com/langsmith/use-studio#run-application): Execute your application or agent and observe its behavior.
-* [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants): Create, edit, and select the assistant configuration used by your application.
-* [Manage threads](https://docs.langchain.com/langsmith/use-studio#manage-threads): View and organize the threads, including forking or editing past runs for debugging.
+* [Run application](#run-application): Execute your application or agent and observe its behavior.
+* [Manage assistants](#manage-assistants): Create, edit, and select the assistant configuration used by your application.
+* [Manage threads](#manage-threads): View and organize the threads, including forking or editing past runs for debugging.
 
 ## Run application
 
 #### Graph
 ### Specify input
 
-1. Define the input to your graph in the **Input** section on the left side of the page, below the graph interface. Studio will attempt to render a form for your input based on the graph's defined [state schema](https://docs.langchain.com/oss/python/langgraph/graph-api/#schema). To disable this, click the **View Raw** button, which will present you with a JSON editor.
+1. Define the input to your graph in the **Input** section on the left side of the page, below the graph interface. Studio will attempt to render a form for your input based on the graph's defined [state schema](../langgraph/graph-api.md#schema). To disable this, click the **View Raw** button, which will present you with a JSON editor.
 2. Click the up or down arrows at the top of the **Input** section to toggle through and use previously submitted inputs.
 
 ### Run settings
 
 #### Assistant
 
-To specify the [assistant](https://docs.langchain.com/langsmith/assistants) that is used for the run:
+To specify the [assistant](assistants.md) that is used for the run:
 
 1. Click the **Settings** button in the bottom left corner. If an assistant is currently selected the button will also list the assistant name. If no assistant is selected it will say **Manage Assistants**.
 2. Select the assistant to run.
 3. Click the **Active** toggle at the top of the modal to activate it.
 
-For more information, refer to [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants).
+For more information, refer to [Manage assistants](#manage-assistants).
 
 #### Streaming
 
@@ -38,13 +38,13 @@ To run your graph with breakpoints:
 2. Select a node and whether to pause before or after that node has executed.
 3. Click **Continue** in the thread log to resume execution.
 
-For more information on breakpoints, refer to [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop).
+For more information on breakpoints, refer to [Human-in-the-loop](../langchain/human-in-the-loop.md).
 
 ### Submit run
 
 To submit the run with the specified input and run settings:
 
-1. Click the **Submit** button. This will add a [run](https://docs.langchain.com/langsmith/runs) to the existing selected [thread](https://docs.langchain.com/oss/python/langgraph/checkpointers#threads). If no thread is currently selected, a new one will be created.
+1. Click the **Submit** button. This will add a [run](runs.md) to the existing selected [thread](../langgraph/checkpointers.md#threads). If no thread is currently selected, a new one will be created.
 2. To cancel the ongoing run, click the **Cancel** button.
 
 #### Chat
@@ -61,7 +61,7 @@ To cancel the ongoing run:
 
 Studio lets you view and edit your assistants, and allows you to run your graph using these assistant configurations.
 
-For more conceptual details, refer to the [Assistants overview](https://docs.langchain.com/langsmith/assistants/).
+For more conceptual details, refer to the [Assistants overview](assistants.md).
 
 #### Graph
 To view your assistants:
@@ -76,14 +76,14 @@ Chat mode enables you to switch through the different assistants in your graph v
 
 ## Manage threads
 
-Studio provides tools to view all [threads](https://docs.langchain.com/oss/python/langgraph/checkpointers#threads) saved on the server and edit their state. You can create new threads, switch between threads, and modify past states both in graph mode and chat mode.
+Studio provides tools to view all [threads](../langgraph/checkpointers.md#threads) saved on the server and edit their state. You can create new threads, switch between threads, and modify past states both in graph mode and chat mode.
 
 #### Graph
 ### View threads
 
 1. In the top of the right-hand pane, select the dropdown menu to view existing threads.
 2. Select the desired thread, and the thread history will populate in the right-hand side of the page.
-3. To create a new thread, click **+ New Thread** and [submit a run](https://docs.langchain.com/langsmith/use-studio#run-application).
+3. To create a new thread, click **+ New Thread** and [submit a run](#run-application).
 4. To view more granular information in the thread, drag the slider at the top of the page to the right. To view less information, drag the slider to the left. Additionally, collapse or expand individual turns, nodes, and keys of the state.
 5. Switch between `Pretty` and `JSON` mode for different rendering formats.
 
@@ -111,8 +111,8 @@ To edit a human message in the thread:
 
 Refer to the following guides for more detail on tasks you can complete in Studio:
 
-* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio)
-* [Run experiments over datasets](https://docs.langchain.com/langsmith/observability-studio#run-experiments-over-a-dataset)
+* [Iterate on prompts](observability-studio.md)
+* [Run experiments over datasets](observability-studio.md#run-experiments-over-a-dataset)
 
 ***
 

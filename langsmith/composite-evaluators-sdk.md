@@ -1,13 +1,13 @@
 # How to create a composite evaluator
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/composite-evaluators-sdk)
-*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](https://docs.langchain.com/langsmith/evaluation-concepts#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
+*Composite evaluators* are a way to combine multiple evaluator scores into a single [score](evaluation-concepts.md#evaluator-outputs). This is useful when you want to evaluate multiple aspects of your application and combine the results into a single result.
 
 This guide describes setting up an evaluation that uses multiple evaluators and combines their scores with a custom aggregation function using the [LangSmith SDK](https://reference.langchain.com/python/langsmith/observability/sdk).
 
  Requires langsmith>=0.4.29 
 
 > [!TIP]
-> To create composite evaluators in the LangSmith UI, refer to [How to create a composite evaluator (UI)](https://docs.langchain.com/langsmith/composite-evaluators-ui).
+> To create composite evaluators in the LangSmith UI, refer to [How to create a composite evaluator (UI)](composite-evaluators-ui.md).
 
 ## 1. Configure evaluators on a dataset
 

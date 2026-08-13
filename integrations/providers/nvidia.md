@@ -4,13 +4,13 @@ Integrate with NVIDIA using LangChain Python.
 
 LangChain and NVIDIA have partnered across the agent stack:
 
-1. [Components](https://docs.langchain.com/oss/python/integrations/providers/nvidia#components)
-2. [Sandboxed agents with OpenShell](https://docs.langchain.com/oss/python/integrations/providers/nvidia#sandboxed-agents-with-openshell)
-3. [LangGraph acceleration primitives](https://docs.langchain.com/oss/python/integrations/providers/nvidia#accelerate-langgraph-with-nvidia)
-4. [NeMo Agent Toolkit optimizations](https://docs.langchain.com/oss/python/integrations/providers/nvidia#nemo-agent-toolkit-optimizations-with-langsmith-telemetry)
-5. [Post-training agent workflows](https://docs.langchain.com/oss/python/integrations/providers/nvidia#post-training-agent-workflows)
-6. [Model Routing with NeMo Switchyard](https://docs.langchain.com/oss/python/integrations/providers/nvidia#model-routing-with-nemo-switchyard)
-7. [Full Stack blueprints](https://docs.langchain.com/oss/python/integrations/providers/nvidia#full-stack-blueprints)
+1. [Components](#components)
+2. [Sandboxed agents with OpenShell](#sandboxed-agents-with-openshell)
+3. [LangGraph acceleration primitives](#accelerate-langgraph-with-nvidia)
+4. [NeMo Agent Toolkit optimizations](#nemo-agent-toolkit-optimizations-with-langsmith-telemetry)
+5. [Post-training agent workflows](#post-training-agent-workflows)
+6. [Model Routing with NeMo Switchyard](#model-routing-with-nemo-switchyard)
+7. [Full Stack blueprints](#full-stack-blueprints)
 
 ## Components
 
@@ -20,11 +20,11 @@ Models run on NVIDIA NIM microservices: container images that expose a standard 
 
 | Component     | Class                                                 | Description                                                     |
 | :------------ | :---------------------------------------------------- | :-------------------------------------------------------------- |
-| Chat          | [`ChatNVIDIA`](https://docs.langchain.com/oss/python/integrations/providers/nvidia#chat-chatnvidia)                      | Chat completions with any NVIDIA-hosted model or local NIM      |
-| Chat (Dynamo) | [`ChatNVIDIADynamo`](https://docs.langchain.com/oss/python/integrations/providers/nvidia#chat-chatnvidiadynamo)          | `ChatNVIDIA` with KV cache routing hints for Dynamo deployments |
-| Embeddings    | [`NVIDIAEmbeddings`](https://docs.langchain.com/oss/python/integrations/providers/nvidia#embeddings-nvidiaembeddings)    | Dense vector embeddings for semantic search and RAG             |
-| Reranking     | [`NVIDIARerank`](https://docs.langchain.com/oss/python/integrations/providers/nvidia#reranking-nvidiarerank)             | Document reranking by query relevance                           |
-| Retrieval     | [`NVIDIARAGRetriever`](https://docs.langchain.com/oss/python/integrations/providers/nvidia#retrieval-nvidiaragretriever) | Retrieval from an NVIDIA RAG Blueprint server                   |
+| Chat          | [`ChatNVIDIA`](#chat-chatnvidia)                      | Chat completions with any NVIDIA-hosted model or local NIM      |
+| Chat (Dynamo) | [`ChatNVIDIADynamo`](#chat-chatnvidiadynamo)          | `ChatNVIDIA` with KV cache routing hints for Dynamo deployments |
+| Embeddings    | [`NVIDIAEmbeddings`](#embeddings-nvidiaembeddings)    | Dense vector embeddings for semantic search and RAG             |
+| Reranking     | [`NVIDIARerank`](#reranking-nvidiarerank)             | Document reranking by query relevance                           |
+| Retrieval     | [`NVIDIARAGRetriever`](#retrieval-nvidiaragretriever) | Retrieval from an NVIDIA RAG Blueprint server                   |
 
 ### Chat: ChatNVIDIA
 
@@ -69,7 +69,7 @@ result = llm.invoke("Plan a three-step research workflow for competitive analysi
 print(result.content)
 ```
 
-See the [`ChatNVIDIA` integration page](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints) for full documentation including tool calling, multimodal inputs, and Nemotron-specific examples.
+See the [`ChatNVIDIA` integration page](../chat/nvidia_ai_endpoints.md) for full documentation including tool calling, multimodal inputs, and Nemotron-specific examples.
 
 ### Chat: ChatNVIDIADynamo
 
@@ -90,7 +90,7 @@ result = llm.invoke("Summarize KV cache routing in one sentence.")
 print(result.content)
 ```
 
-See the [`ChatNVIDIA` integration page](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints#use-with-nvidia-dynamo) for the full `ChatNVIDIADynamo` reference including per-invocation overrides and streaming.
+See the [`ChatNVIDIA` integration page](../chat/nvidia_ai_endpoints.md#use-with-nvidia-dynamo) for the full `ChatNVIDIADynamo` reference including per-invocation overrides and streaming.
 
 ### Embeddings: NVIDIAEmbeddings
 
@@ -103,7 +103,7 @@ embedder = NVIDIAEmbeddings(model="NV-Embed-QA")
 embedder.embed_query("What's the temperature today?")
 ```
 
-See the [`NVIDIAEmbeddings` integration page](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints) for full documentation.
+See the [`NVIDIAEmbeddings` integration page](../embeddings/nvidia_ai_endpoints.md) for full documentation.
 
 ### Reranking: NVIDIARerank
 
@@ -131,7 +131,7 @@ retriever = NVIDIARAGRetriever(base_url="http://localhost:8081", k=4)
 docs = retriever.invoke("What is NVIDIA NIM?")
 ```
 
-See the [`NVIDIARAGRetriever` integration page](https://docs.langchain.com/oss/python/integrations/retrievers/nvidia) for full documentation.
+See the [`NVIDIARAGRetriever` integration page](../retrievers/nvidia.md) for full documentation.
 
 ### Self-host with NVIDIA NIM Microservices
 
@@ -256,7 +256,7 @@ NVIDIA NeMo Gym provides post-training workflows for agentic systems, including 
 
 ## Model Routing with NeMo Switchyard
 
-The experimental [`langchain-nvidia-switchyard`](https://docs.langchain.com/oss/python/integrations/middleware/nvidia#model-routing-with-nemo-switchyard) package lets a deep agent route each model call across existing LangChain chat models with [NeMo Switchyard](https://github.com/NVIDIA-NeMo/Switchyard) algorithms. Use it to combine efficient and capable models behind one agent while Deep Agents continues to manage the agent loop, tools, state, and middleware.
+The experimental [`langchain-nvidia-switchyard`](../middleware/nvidia.md#model-routing-with-nemo-switchyard) package lets a deep agent route each model call across existing LangChain chat models with [NeMo Switchyard](https://github.com/NVIDIA-NeMo/Switchyard) algorithms. Use it to combine efficient and capable models behind one agent while Deep Agents continues to manage the agent loop, tools, state, and middleware.
 
 The integration provides:
 
@@ -336,9 +336,9 @@ NVIDIA and LangChain have collaborated on [full stack examples](https://github.c
 * [Overview of NVIDIA NIM for Large Language Models (LLMs)](https://docs.nvidia.com/nim/large-language-models/latest/introduction.html)
 * [Overview of NeMo Retriever Embedding NIM](https://docs.nvidia.com/nim/nemo-retriever/text-embedding/latest/overview.html)
 * [Overview of NeMo Retriever Reranking NIM](https://docs.nvidia.com/nim/nemo-retriever/text-reranking/latest/overview.html)
-* [`ChatNVIDIA` Model](https://docs.langchain.com/oss/python/integrations/chat/nvidia_ai_endpoints)
-* [`NVIDIAEmbeddings` Model for RAG Workflows](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)
-* [`NVIDIARAGRetriever`](https://docs.langchain.com/oss/python/integrations/retrievers/nvidia)
+* [`ChatNVIDIA` Model](../chat/nvidia_ai_endpoints.md)
+* [`NVIDIAEmbeddings` Model for RAG Workflows](../embeddings/nvidia_ai_endpoints.md)
+* [`NVIDIARAGRetriever`](../retrievers/nvidia.md)
 * [NVIDIA Dynamo](https://developer.nvidia.com/dynamo)
 
 ***

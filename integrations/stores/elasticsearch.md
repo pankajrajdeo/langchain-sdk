@@ -2,7 +2,7 @@
 
 > Integrate with the ElasticsearchEmbeddingsCache store using LangChain Python.
 
-This will help you get started with Elasticsearch [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `ElasticsearchEmbeddingsCache` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache).
+This will help you get started with Elasticsearch [key-value stores](../stores.md). For detailed documentation of all `ElasticsearchEmbeddingsCache` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/cache/ElasticsearchEmbeddingsCache).
 
 ## Overview
 
@@ -95,7 +95,7 @@ kv_store.mget(
 
 ## Use as an embeddings cache
 
-Like other `ByteStores`, you can use an `ElasticsearchEmbeddingsCache` instance for [persistent caching in document ingestion](https://docs.langchain.com/oss/python/integrations/embeddings#caching) for RAG.
+Like other `ByteStores`, you can use an `ElasticsearchEmbeddingsCache` instance for [persistent caching in document ingestion](../embeddings.md#caching) for RAG.
 
 However, cached vectors won't be searchable by default. The developer can customize the building of the Elasticsearch document in order to add indexed vector field.
 

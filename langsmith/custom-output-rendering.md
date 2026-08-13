@@ -7,9 +7,9 @@ Custom output rendering allows you to visualize run outputs and dataset referenc
 
 In this page you'll learn how to:
 
-* **[Configure custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering#configure-custom-output-rendering)** in the LangSmith UI.
-* **[Build a custom renderer](https://docs.langchain.com/langsmith/custom-output-rendering#build-a-custom-renderer)** to display output data.
-* **[Understand where custom rendering appears](https://docs.langchain.com/langsmith/custom-output-rendering#where-custom-rendering-appears)** in LangSmith.
+* **[Configure custom rendering](#configure-custom-output-rendering)** in the LangSmith UI.
+* **[Build a custom renderer](#build-a-custom-renderer)** to display output data.
+* **[Understand where custom rendering appears](#where-custom-rendering-appears)** in LangSmith.
 
 ## Configure custom output rendering
 
@@ -22,7 +22,7 @@ Configure custom rendering at two levels:
 
 To configure custom output rendering for a tracing project:
 
-> **Image:** [Tracing project settings showing custom output rendering configuration](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Tracing project settings showing custom output rendering configuration](custom-output-rendering.md)
 
 1. Navigate to the **Tracing Projects** page.
 2. Click on an existing tracing project or create a new one.
@@ -35,7 +35,7 @@ To configure custom output rendering for a tracing project:
 
 To configure custom output rendering for a dataset:
 
-> **Image:** [Dataset page with three-dot menu showing Custom Output Rendering option](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Dataset page with three-dot menu showing Custom Output Rendering option](custom-output-rendering.md)
 
 1. Navigate to your dataset in the **Datasets & Experiments** page.
 2. Click **⋮** (three-dot menu) in the top right corner.
@@ -44,13 +44,13 @@ To configure custom output rendering for a dataset:
 5. Enter the webpage URL in the **URL** field.
 6. Click **Save**.
 
-> **Image:** [Custom Output Rendering modal with fields filled in](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Custom Output Rendering modal with fields filled in](custom-output-rendering.md)
 
 ### For annotation queues
 
 To configure custom output rendering for an annotation queue:
 
-> **Image:** [Annotation queue settings showing custom output rendering configuration](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Annotation queue settings showing custom output rendering configuration](custom-output-rendering.md)
 
 1. Navigate to the **Annotation Queues** page.
 2. Click on an existing annotation queue or create a new one.
@@ -128,15 +128,15 @@ When enabled, your custom rendering will replace the default output view in:
 
 * **Experiment comparison view**: When comparing outputs across multiple experiments:
 
-> **Image:** [Experiment comparison view showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Experiment comparison view showing custom rendering](custom-output-rendering.md)
 
 * **Run detail panes**: When viewing runs that are associated with a dataset:
 
-> **Image:** [Run detail pane showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Run detail pane showing custom rendering](custom-output-rendering.md)
 
 * **Annotation queues**: When reviewing runs in annotation queues:
 
-> **Image:** [Annotation queue showing custom rendering](https://docs.langchain.com/langsmith/custom-output-rendering)
+> **Image:** [Annotation queue showing custom rendering](custom-output-rendering.md)
 
 ***
 

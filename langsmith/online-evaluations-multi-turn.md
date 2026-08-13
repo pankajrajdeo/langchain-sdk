@@ -8,7 +8,7 @@ You can use multi-turn evaluations to measure:
 2. Semantic Outcome: What actually happened, did the task succeed.
 3. Trajectory: How the conversation unfolded, including trajectory of tool calls.
 
-Multi-turn online evaluators can extend trace retention by default. You can opt out when configuring the evaluator so that traces keep the project's configured retention tier. Traces are still upgraded if another action explicitly extends retention or the project already uses extended retention. For step-by-step opt-out instructions, see [Manage evaluator trace retention](https://docs.langchain.com/langsmith/evaluators#manage-evaluator-trace-retention). For details, see [data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+Multi-turn online evaluators can extend trace retention by default. You can opt out when configuring the evaluator so that traces keep the project's configured retention tier. Traces are still upgraded if another action explicitly extends retention or the project already uses extended retention. For step-by-step opt-out instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention). For details, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## How it works
 
@@ -20,19 +20,19 @@ Multi-turn online evaluators follow this evaluation lifecycle:
 4. **LLM-as-a-judge evaluation**: The assembled conversation is passed to your configured LLM-as-a-judge prompt. The evaluator scores the full thread based on your criteria: semantic intent, outcome, or trajectory.
 5. **Feedback recording**: The evaluator writes feedback to LangSmith using the feedback key you configured, associated with the thread.
 
-This lifecycle means that multi-turn evaluators run once per completed thread, not once per trace. Use [run-level online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) if you want per-trace evaluation.
+This lifecycle means that multi-turn evaluators run once per completed thread, not once per trace. Use [run-level online evaluators](online-evaluations-llm-as-judge.md) if you want per-trace evaluation.
 
 ## Prerequisites
 
-* Your tracing project must be using [threads](https://docs.langchain.com/langsmith/threads).
-* The top-level inputs and outputs of each trace in a thread must have a `messages` key that contains a list of messages. We support messages in [LangChain](https://docs.langchain.com/langsmith/log-llm-trace#messages-format), [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create), and [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) formats.
+* Your tracing project must be using [threads](threads.md).
+* The top-level inputs and outputs of each trace in a thread must have a `messages` key that contains a list of messages. We support messages in [LangChain](log-llm-trace.md#messages-format), [OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat/create), and [Anthropic Messages](https://platform.claude.com/docs/en/api/messages) formats.
   * If the top-level inputs and outputs of each trace only contain the latest message in the conversation, LangSmith will automatically combine messages across turns into a thread.
   * If the top-level inputs and outputs of each trace contain the full conversation history, LangSmith will use that directly.
 
 > [!NOTE]
 > If your traces don't follow the format above, thread level evaluators won't work. You'll need to update how you trace to LangSmith to ensure each trace's top-level inputs and outputs contain a list of `messages`.
 >
-> Please refer to the [troubleshooting](https://docs.langchain.com/langsmith/online-evaluations-multi-turn#troubleshooting) section for more information.
+> Please refer to the [troubleshooting](#troubleshooting) section for more information.
 
 ## Configuration
 
@@ -82,7 +82,7 @@ You can check when your evaluator was last run by heading to the **Evaluators** 
 **Inspect the data sent to the evaluator** <br />
 Inspect the data sent to the evaluator by heading to the **Evaluators** tab within a tracing project, clicking on the evaluator you created and clicking the **Evaluator traces** tab.
 
-In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If your messages are not being passed in correctly, you will see blank values in the inputs. This can happen if your messages are not formatted in one of [the expected formats](https://docs.langchain.com/langsmith/online-evaluations-multi-turn#prerequisites).
+In this tab, you can see the inputs passed into the LLM-as-a-judge evaluator. If your messages are not being passed in correctly, you will see blank values in the inputs. This can happen if your messages are not formatted in one of [the expected formats](#prerequisites).
 
 ***
 

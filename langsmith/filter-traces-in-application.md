@@ -1,16 +1,16 @@
 # Filter traces
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/filter-traces-in-application)
-Tracing projects can accumulate large amounts of data across [threads](https://docs.langchain.com/langsmith/observability-concepts#threads), [traces](https://docs.langchain.com/langsmith/observability-concepts#traces), and [runs](https://docs.langchain.com/langsmith/observability-concepts#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
+Tracing projects can accumulate large amounts of data across [threads](observability-concepts.md#threads), [traces](observability-concepts.md#traces), and [runs](observability-concepts.md#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
 
 This page covers:
 
-* [Applying filters from the filter bar](https://docs.langchain.com/langsmith/filter-traces-in-application#create-and-apply-filters) and **Filter Shortcuts** panel
-* [Filtering by attributes, full-text content, and key-value pairs](https://docs.langchain.com/langsmith/filter-traces-in-application#specific-filtering-techniques)
-* [Saving and copying filter configurations](https://docs.langchain.com/langsmith/filter-traces-in-application#save-a-filter)
-* [Filtering within the Details view](https://docs.langchain.com/langsmith/filter-traces-in-application#filter-runs-in-the-details-view)
-* [Advanced filters](https://docs.langchain.com/langsmith/filter-traces-in-application#advanced-filters) for filtering on root or child run properties
+* [Applying filters from the filter bar](#create-and-apply-filters) and **Filter Shortcuts** panel
+* [Filtering by attributes, full-text content, and key-value pairs](#specific-filtering-techniques)
+* [Saving and copying filter configurations](#save-a-filter)
+* [Filtering within the Details view](#filter-runs-in-the-details-view)
+* [Advanced filters](#advanced-filters) for filtering on root or child run properties
 
-If you are programmatically exporting data for analysis via the [API](https://docs.langchain.com/langsmith/smith-api/run/query-runs) or [SDK](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs), refer to the [exporting traces guide](https://docs.langchain.com/langsmith/export-traces) instead.
+If you are programmatically exporting data for analysis via the [API](smith-api/run/query-runs.md) or [SDK](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs), refer to the [exporting traces guide](export-traces.md) instead.
 
 ## Create and apply filters
 
@@ -19,9 +19,9 @@ If you are programmatically exporting data for analysis via the [API](https://do
 There are two ways to filter data in a tracing project:
 
 1. **Filters**: Located at the top left of the **Tracing** project page. This is where you construct and manage filter criteria.
-   * The first dropdown filters for default and [saved views](https://docs.langchain.com/langsmith/filter-traces-in-application#save-a-filter).
+   * The first dropdown filters for default and [saved views](#save-a-filter).
    * Quick filter by **Threads**, **Traces**, or **Runs**.
-   * **Add filter** to [configure a filter based](https://docs.langchain.com/langsmith/filter-traces-in-application#specific-filtering-techniques) on an attribute or full-text search.
+   * **Add filter** to [configure a filter based](#specific-filtering-techniques) on an attribute or full-text search.
 
 2. **Filter Shortcuts**: Positioned on the right sidebar of the **Tracing** project page. The filter shortcuts bar provides quick access to filters based on the most frequently occurring attributes in your project's runs.
 
@@ -42,7 +42,7 @@ The available filter operators depend on the data type of the attribute you are 
 
 To filter for runs (spans), change the default from **Traces** to **Runs**. For example, you would do this if you wanted to filter by **run name** for runs or filter by **run type**.
 
-Run metadata and tags are also useful to filter on. These rely on good tagging across all parts of your pipeline. To learn more, refer to [Add metadata and tags to traces](https://docs.langchain.com/langsmith/add-metadata-tags).
+Run metadata and tags are also useful to filter on. These rely on good tagging across all parts of your pipeline. To learn more, refer to [Add metadata and tags to traces](add-metadata-tags.md).
 
 As you specify more filters, you can click each filter individually to update the attributes you're searching on.
 
@@ -53,7 +53,7 @@ You can filter tracing data based on the content in the inputs and outputs of th
 To filter either inputs or outputs, you can use the ** Full-Text Search** filter, which will match keywords in either field. For a more targeted search, you can use the&#x20;**&#x20;Input** or ** Output** filters, which will only match content based on the respective field.
 
 > [!NOTE]
-> For performance, LangSmith indexes up to 250 characters of data for full-text search. If your search query exceeds this limit, we recommend using [Input/Output key-value search](https://docs.langchain.com/langsmith/filter-traces-in-application#filter-based-on-input-%2F-output-key-value-pairs) instead.
+> For performance, LangSmith indexes up to 250 characters of data for full-text search. If your search query exceeds this limit, we recommend using [Input/Output key-value search](#filter-based-on-input-%2F-output-key-value-pairs) instead.
 
 You can also specify multiple to match all terms provided, either by:
 
@@ -65,13 +65,15 @@ LangSmith splits the text and matches any partial keyword matches in any order. 
 > [!NOTE]
 > Tokens must be at least 2 characters long to be indexed. Single-character tokens (for example, `a`, `x`) are excluded from search.
 
-> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](filter-traces-in-application.md)
 
-> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith filter bar showing full-text search and input/output filters with example search terms for python, tensorflow, embedding, fine, and tune](filter-traces-in-application.md)
 
 Based on the filters in the image, the system will search for `python` and `tensorflow` in either inputs or outputs, and `embedding` in the inputs along with `fine` and `tune` in the outputs.
 
 You can remove filters as needed from the filter path, which will widen the search to the remaining filters.
+
+<a id="filter-based-on-input-/-output-key-value-pairs"></a>
 
 ### Filter based on input / output key-value pairs
 
@@ -110,9 +112,9 @@ Select **Output Key**, enter `documents.page_content` as the key and enter `The 
 
 You can add multiple key-value filters to create more complex queries. You can also use the **Filter Shortcuts** on the right side to filter based on common key-value pairs quickly:
 
-> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](filter-traces-in-application.md)
 
-> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith filter shortcuts panel showing quick access to common key-value pair filters](filter-traces-in-application.md)
 
 ### Example: Filtering for tool calls
 
@@ -223,7 +225,7 @@ Click the  icon next to the saved filter in the dropdown, and delete the filter 
 
 ## Copy a filter
 
-You can copy a constructed filter to share it with colleagues, reuse it later, or query runs programmatically in the [API](https://docs.langchain.com/langsmith/smith-api/run/query-runs) or [SDK](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs).
+You can copy a constructed filter to share it with colleagues, reuse it later, or query runs programmatically in the [API](smith-api/run/query-runs.md) or [SDK](https://docs.smith.langchain.com/reference/python/client/langsmith.client.Client#langsmith.client.Client.list_runs).
 
 To copy the filter:
 
@@ -231,21 +233,21 @@ To copy the filter:
 2. Click the  icon in the filter bar. If you have constructed tree or trace filters, you can also copy those.
 3. This will give you a string representing the filter in the LangSmith query language. For example: `and(eq(is_root, true), and(eq(feedback_key, "user_score"), eq(feedback_score, 1)))`.
 
-For more information on the query language syntax, refer to the [Trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language).
+For more information on the query language syntax, refer to the [Trace query syntax](trace-query-syntax.md#filter-query-language).
 
 ## Filter runs in the Details view
 
-You can also apply filters directly in the [Details view](https://docs.langchain.com/langsmith/view-traces#details-view), which is useful for sifting through traces with a large number of runs. The same filters available in the main runs table view can be applied here.
+You can also apply filters directly in the [Details view](view-traces.md#details-view), which is useful for sifting through traces with a large number of runs. The same filters available in the main runs table view can be applied here.
 
 By default, only the runs that match the filters will be shown. To see the matched runs within the broader context of the trace tree, switch the view option from "Filtered Only" to "Show All" or "Most relevant".
 
-> **Image:** [LangSmith trace view showing filter options with ](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith trace view showing filter options with ](filter-traces-in-application.md)
 
-> **Image:** [LangSmith trace view showing filter options with ](https://docs.langchain.com/langsmith/filter-traces-in-application)
+> **Image:** [LangSmith trace view showing filter options with ](filter-traces-in-application.md)
 
 ## Manually specify a raw query in LangSmith query language
 
-If you have [copied a previously constructed filter](https://docs.langchain.com/langsmith/filter-traces-in-application#copy-a-filter), you may want to manually apply this raw query in a future session.
+If you have [copied a previously constructed filter](#copy-a-filter), you may want to manually apply this raw query in a future session.
 
 In order to do this, you can click on **Switch to raw query** on the bottom of the filters popover in the Details view. From there you can paste a raw query into the text box.
 
@@ -272,7 +274,7 @@ You may want to search for runs who have specific types of sub runs. An example 
 
 ### Example: Filtering on all runs whose tree contains the tool call filter
 
-Extending the [tool call filtering example](https://docs.langchain.com/langsmith/filter-traces-in-application#example-filtering-for-tool-calls), if you would like to filter for all runs *whose tree contains* the tool filter call, you can use the tree filter in the **Advanced** filters setting.
+Extending the [tool call filtering example](#example-filtering-for-tool-calls), if you would like to filter for all runs *whose tree contains* the tool filter call, you can use the tree filter in the **Advanced** filters setting.
 
 ***
 

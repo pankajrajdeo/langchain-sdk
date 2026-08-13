@@ -1,6 +1,6 @@
 # Trace Amazon Bedrock applications
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-bedrock)
-This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedrock) model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with [LangChain's Bedrock integrations](https://docs.langchain.com/oss/python/integrations/providers/aws). Either approach provides insights into:
+This guide shows you how to trace [Amazon Bedrock](https://aws.amazon.com/bedrock) model calls with LangSmith using the native AWS SDKs. LangSmith also works seamlessly with [LangChain's Bedrock integrations](../integrations/providers/aws.md). Either approach provides insights into:
 
 * Request and response payloads
 * Token usage and costs
@@ -22,7 +22,7 @@ This integration uses the native AWS SDKs with LangSmith's tracing capabilities.
 
 ## Setup
 
-To enable LangSmith tracing, configure your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and project settings. You'll also need to set up your AWS credentials to authenticate with Bedrock.
+To enable LangSmith tracing, configure your [LangSmith API key](create-account-api-key.md) and project settings. You'll also need to set up your AWS credentials to authenticate with Bedrock.
 
 ### LangSmith configuration
 
@@ -145,9 +145,9 @@ You can filter traces by tags (e.g., `aws-bedrock` or `integration-test`), searc
 
 ## Next steps
 
-* Learn more about [LangSmith features](https://docs.langchain.com/langsmith) including evaluation, datasets, and feedback
+* Learn more about [LangSmith features](index.md) including evaluation, datasets, and feedback
 * Explore [Bedrock model capabilities](https://docs.aws.amazon.com/bedrock/latest/userguide/models-features.html) like tool calling, streaming, and prompt caching
-* Review [LangChain Bedrock integration documentation](https://docs.langchain.com/oss/python/integrations/chat/bedrock) for advanced features like extended thinking and citations
+* Review [LangChain Bedrock integration documentation](../integrations/chat/bedrock.md) for advanced features like extended thinking and citations
 
 ***
 

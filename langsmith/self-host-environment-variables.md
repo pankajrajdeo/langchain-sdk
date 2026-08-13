@@ -116,8 +116,8 @@ commonEnv:
 
 ## Related pages
 
-* [Configure LangSmith for scale](https://docs.langchain.com/langsmith/self-host-scale)
-* [Playground environment settings](https://docs.langchain.com/langsmith/self-host-playground-environment-settings)
+* [Configure LangSmith for scale](self-host-scale.md)
+* [Playground environment settings](self-host-playground-environment-settings.md)
 * [LangSmith Helm chart values.yaml](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml)
 
 ***

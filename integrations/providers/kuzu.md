@@ -31,7 +31,7 @@ uv add langchain-kuzu
 
 ## Graphs
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/kuzu_db).
+See a [usage example](../graphs/kuzu_db.md).
 
 ```python
 from langchain_kuzu.graphs.kuzu_graph import KuzuGraph
@@ -39,7 +39,7 @@ from langchain_kuzu.graphs.kuzu_graph import KuzuGraph
 
 ## Chains
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/kuzu_db/#creating-kuzuqachain).
+See a [usage example](../graphs/kuzu_db.md#creating-kuzuqachain).
 
 ```python
 from langchain_kuzu.chains.graph_qa.kuzu import KuzuQAChain

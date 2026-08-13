@@ -4,7 +4,7 @@ Build a content writing agent with brand memory, skills, subagents, and image ge
 
 ## Overview
 
-This guide demonstrates how to build a content writing agent from scratch using [Deep Agents](https://docs.langchain.com/oss/python/deepagents).
+This guide demonstrates how to build a content writing agent from scratch using [Deep Agents](index.md).
 
 The agent you build will:
 
@@ -19,11 +19,11 @@ The code in this tutorial wires in image generation tools and a filesystem backe
 
 This tutorial covers:
 
-* [Long-term memory](https://docs.langchain.com/oss/python/deepagents/memory) for TODO
-* [Skills](https://docs.langchain.com/oss/python/deepagents/skills) for TODO
-* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) for TODO
-* [Filesystem backends](https://docs.langchain.com/oss/python/deepagents/backends) for file read and write
-* Custom [tools](https://docs.langchain.com/oss/python/langchain/tools) for search and image generation
+* [Long-term memory](memory.md) for TODO
+* [Skills](skills.md) for TODO
+* [Subagents](subagents.md) for TODO
+* [Filesystem backends](backends.md) for file read and write
+* Custom [tools](../langchain/tools.md) for search and image generation
 
 ## Prerequisites
 
@@ -71,7 +71,7 @@ The example keeps behavior in three kinds of files: memory, skills, and subagent
 
 ### Add AGENTS.md
 Create `AGENTS.md` in the project root.
-When you later create the agent and specify this file as part of the [memory](https://docs.langchain.com/oss/python/deepagents/memory) parameter, it gets loaded this into the system prompt so brand voice and research expectations apply to every run.
+When you later create the agent and specify this file as part of the [memory](memory.md) parameter, it gets loaded this into the system prompt so brand voice and research expectations apply to every run.
 
 ```markdown
 # Content Writer Agent
@@ -630,7 +630,7 @@ def load_subagents(config_path: Path) -> list:
 ```
 
 ### Create the agent
-When creating the deep agent with [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent), pass memory paths, the skills directory, image tools, subagents from YAML, and a [FilesystemBackend](https://docs.langchain.com/oss/python/deepagents/backends) rooted at the example directory so paths like `./AGENTS.md` and `./skills/` resolve correctly.
+When creating the deep agent with [create\_deep\_agent](https://reference.langchain.com/python/deepagents/graph/create_deep_agent), pass memory paths, the skills directory, image tools, subagents from YAML, and a [FilesystemBackend](backends.md) rooted at the example directory so paths like `./AGENTS.md` and `./skills/` resolve correctly.
 
 ```python
 from deepagents import create_deep_agent
@@ -785,7 +785,7 @@ python content_writer.py
 python content_writer.py Write a blog post about prompt engineering
 ```
 
-With `LANGSMITH_API_KEY` set, you can inspect runs in [LangSmith](https://docs.langchain.com/langsmith/observability).
+With `LANGSMITH_API_KEY` set, you can inspect runs in [LangSmith](../langsmith/observability.md).
 
 ## Output
 
@@ -811,7 +811,7 @@ Browse the complete [content-builder-agent example](https://github.com/langchain
 * Edit `AGENTS.md` to change brand voice and research requirements
 * Add skills under `skills/<name>/SKILL.md` for new content types
 * Add subagents in `subagents.yaml` and register tools in `load_subagents`
-* Read [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents), [Skills](https://docs.langchain.com/oss/python/deepagents/skills), and [Customization](https://docs.langchain.com/oss/python/deepagents/customization) for deeper configuration
+* Read [Subagents](subagents.md), [Skills](skills.md), and [Customization](customization.md) for deeper configuration
 
 ***
 

@@ -39,7 +39,7 @@ export SAMBANOVA_API_KEY="your-sambastack-api-key-here"
 
 ## Chat models
 
-For a detailed walkthrough of the `ChatSambaNova` component, see the [usage example](https://docs.langchain.com/oss/python/integrations/chat/sambanova)
+For a detailed walkthrough of the `ChatSambaNova` component, see the [usage example](../chat/sambanova.md)
 
 ```python
 from langchain_sambanova import ChatSambaNova
@@ -47,7 +47,7 @@ from langchain_sambanova import ChatSambaNova
 
 ## Embedding models
 
-For a detailed walkthrough of the `SambaNovaEmbeddings` component, see the [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/sambanova)
+For a detailed walkthrough of the `SambaNovaEmbeddings` component, see the [usage example](../embeddings/sambanova.md)
 
 ```python
 from langchain_sambanova import SambaNovaEmbeddings

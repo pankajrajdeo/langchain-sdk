@@ -43,7 +43,7 @@ Service additions, service removals, and breaking changes only land in a new maj
 
 Every self-hosted release has two version numbers:
 
-* The **chart version** is the Helm chart version you install and pin. Releases are named after it, both in the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) and as [Helm repository](https://github.com/langchain-ai/helm/releases) release tags, for example `langsmith-0.15.17`.
+* The **chart version** is the Helm chart version you install and pin. Releases are named after it, both in the [self-hosted changelog](self-hosted-changelog.md) and as [Helm repository](https://github.com/langchain-ai/helm/releases) release tags, for example `langsmith-0.15.17`.
 * The **LangSmith version** is the application version the chart deploys, recorded as `appVersion` in the chart.
 
 |                             | Chart version  | LangSmith version |
@@ -73,17 +73,17 @@ Alongside the two supported stable versions, the next major version is available
 
 * **Run stable in production.** Preview is for evaluation only and may contain unreleased features still under validation.
 * **Use preview in test or staging.** Running preview in a non-production environment is the best way to catch issues early and prepare for the next major upgrade.
-* **Plan for major upgrades.** Data migrations, service additions or removals, and breaking changes only land in new major versions. Review the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) before upgrading and plan for any required data or infrastructure changes.
+* **Plan for major upgrades.** Data migrations, service additions or removals, and breaking changes only land in new major versions. Review the [self-hosted changelog](self-hosted-changelog.md) before upgrading and plan for any required data or infrastructure changes.
 * **Stay on a supported version.** LangSmith recommends upgrading to each new major version soon after it is released to pick up architectural improvements on the recommended cadence.
 
 ## Current version
 
-To check the current stable and preview versions, refer to the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog).
+To check the current stable and preview versions, refer to the [self-hosted changelog](self-hosted-changelog.md).
 
 ## See also
 
-* [Release stages](https://docs.langchain.com/langsmith/release-stages) for how features move from alpha to GA
-* [API and SDK deprecation policy](https://docs.langchain.com/langsmith/endpoint-deprecation) for how deprecated endpoints and methods are removed
+* [Release stages](release-stages.md) for how features move from alpha to GA
+* [API and SDK deprecation policy](endpoint-deprecation.md) for how deprecated endpoints and methods are removed
 
 ***
 

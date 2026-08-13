@@ -6,7 +6,7 @@ LangSmith uses ClickHouse as the primary data store for traces and feedback. By 
 
 However, you can configure LangSmith to use an external ClickHouse database for easier management and scaling. By configuring an external ClickHouse database, you can manage backups, scaling, and other operational tasks for your database. While ClickHouse is not yet a native service in Azure, AWS, or Google Cloud, you can run LangSmith with an external ClickHouse database in the following ways:
 
-* [LangSmith-managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse)
+* [LangSmith-managed ClickHouse](langsmith-managed-clickhouse.md)
 
 * Provision a [ClickHouse Cloud](https://clickhouse.cloud/) either directly or through a cloud provider marketplace:
 
@@ -61,7 +61,7 @@ If you would like to use a multi-node Clickhouse cluster for HA, we support this
 In order to setup LangSmith with a replicated multi-node Clickhouse setup:
 
 * You need to have a Clickhouse cluster that is setup with Keeper or Zookeeper for data replication and the appropriate settings. See [Clickhouse Replication Setup Docs](https://clickhouse.com/docs/architecture/replication).
-* You need to set the cluster setting in the [LangSmith Configuration](https://docs.langchain.com/langsmith/self-host-external-clickhouse#configuration) section, specifically the `cluster` settings to match your Clickhouse Cluster name. This will use the `Replicated` table engines when running the Clickhouse migrations.
+* You need to set the cluster setting in the [LangSmith Configuration](#configuration) section, specifically the `cluster` settings to match your Clickhouse Cluster name. This will use the `Replicated` table engines when running the Clickhouse migrations.
 * If in addition to HA, you would like to load balance among the Clickhouse nodes (to distribute reads or writes), we suggest using a load balancer or DNS load balancing to round robin among your Clickhouse servers.
 * **Note**: You will need to enable your `cluster` setting before launching LangSmith for the first time and running the Clickhouse migrations. This is a requirement since the table engine will need to be created as a `Replicated` table engine vs the non replicated engine type.
 
@@ -73,12 +73,12 @@ When running migrations with `cluster` enabled, the migration will create the `R
 ## LangSmith-managed ClickHouse
 
 * If using LangSmith-managed ClickHouse, you will need to set up a VPC peering connection between the LangSmith VPC and the ClickHouse VPC. Please contact support via [support.langchain.com](https://support.langchain.com) for more information.
-* You will also need to set up Blob Storage. You can read more about Blob Storage in the [Blob Storage documentation](https://docs.langchain.com/langsmith/self-host-blob-storage).
+* You will also need to set up Blob Storage. You can read more about Blob Storage in the [Blob Storage documentation](self-host-blob-storage.md).
 
 > [!NOTE]
 > ClickHouse installations managed by LangSmith use a SharedMerge engine, which automatically clusters them and separates compute from storage.
 
-For more information, refer to the [managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) page.
+For more information, refer to the [managed ClickHouse](langsmith-managed-clickhouse.md) page.
 
 ## Parameters
 
@@ -128,7 +128,7 @@ Once configured, you should be able to reinstall your LangSmith instance. If eve
 
 ## TLS with ClickHouse
 
-Use this section to configure TLS for ClickHouse connections. For mounting internal/public CAs so LangSmith trusts your ClickHouse server certificate, see [Configure custom TLS certificates](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls).
+Use this section to configure TLS for ClickHouse connections. For mounting internal/public CAs so LangSmith trusts your ClickHouse server certificate, see [Configure custom TLS certificates](self-host-custom-tls-certificates.md#mount-internal-cas-for-tls).
 
 ### Server TLS (one-way)
 
@@ -173,7 +173,7 @@ stringData:
 
 ### Mutual TLS with client auth (mTLS)
 
-As of LangSmith helm chart version **0.12.29**, we support mTLS for ClickHouse clients. For server-side authentication in mTLS, use the [Server TLS steps](https://docs.langchain.com/langsmith/self-host-external-clickhouse#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
+As of LangSmith helm chart version **0.12.29**, we support mTLS for ClickHouse clients. For server-side authentication in mTLS, use the [Server TLS steps](#server-tls-one-way) (custom CA) in addition to the following client certificate configuration.
 
 If your ClickHouse server requires client certificate authentication:
 

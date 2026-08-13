@@ -1,7 +1,7 @@
 # Skills
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)
-In the **skills** architecture, specialized capabilities are packaged as invocable "skills" that augment an [agent's](https://docs.langchain.com/oss/python/langchain/agents) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
-For built-in skill support, see [Deep Agents](https://docs.langchain.com/oss/python/deepagents/skills).
+In the **skills** architecture, specialized capabilities are packaged as invocable "skills" that augment an [agent's](../agents.md) behavior. Skills are primarily prompt-driven specializations that an agent can invoke on-demand.
+For built-in skill support, see [Deep Agents](../../deepagents/skills.md).
 
 > [!TIP]
 > This pattern is conceptually identical to [Agent Skills](https://agentskills.io/) and [llms.txt](https://llmstxt.org/) (introduced by Jeremy Howard), which uses tool calling for progressive disclosure of documentation. The skills pattern applies progressive disclosure to specialized prompts and domain knowledge rather than just documentation pages.
@@ -33,7 +33,7 @@ graph LR
 
 ## When to use
 
-Use the skills pattern when you want a single [agent](https://docs.langchain.com/oss/python/langchain/agents) with many possible specializations, you don't need to enforce specific constraints between skills, or different teams need to develop capabilities independently. Common examples include coding assistants (skills for different languages or tasks), knowledge bases (skills for different domains), and creative assistants (skills for different formats).
+Use the skills pattern when you want a single [agent](../agents.md) with many possible specializations, you don't need to enforce specific constraints between skills, or different teams need to develop capabilities independently. Common examples include coding assistants (skills for different languages or tasks), knowledge bases (skills for different domains), and creative assistants (skills for different formats).
 
 ## Basic implementation
 
@@ -68,14 +68,14 @@ agent = create_agent(
 
 For a complete implementation, see the tutorial below.
 
-#### [Tutorial: Build a SQL assistant with on-demand skills](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant)
+#### [Tutorial: Build a SQL assistant with on-demand skills](skills-sql-assistant.md)
 Learn how to implement skills with progressive disclosure, where the agent loads specialized prompts and schemas on-demand rather than upfront.
 
 ## Extending the pattern
 
 When writing custom implementations, you can extend the basic skills pattern in several ways:
 
-* **Dynamic tool registration**: Combine progressive disclosure with state management to register new [tools](https://docs.langchain.com/oss/python/langchain/tools) as skills load. For example, loading a "database\_admin" skill could both add specialized context and register database-specific tools (backup, restore, migrate). This uses the same tool-and-state mechanisms used across multi-agent patterns—tools updating state to dynamically change agent capabilities.
+* **Dynamic tool registration**: Combine progressive disclosure with state management to register new [tools](../tools.md) as skills load. For example, loading a "database\_admin" skill could both add specialized context and register database-specific tools (backup, restore, migrate). This uses the same tool-and-state mechanisms used across multi-agent patterns—tools updating state to dynamically change agent capabilities.
 
 * **Hierarchical skills**: Skills can define other skills in a tree structure, creating nested specializations. For instance, loading a "data\_science" skill might make available sub-skills like "pandas\_expert", "visualization", and "statistical\_analysis". Each sub-skill can be loaded independently as needed, allowing for fine-grained progressive disclosure of domain knowledge. This hierarchical approach helps manage large knowledge bases by organizing capabilities into logical groupings that can be discovered and loaded on-demand.
 

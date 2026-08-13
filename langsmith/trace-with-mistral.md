@@ -20,7 +20,7 @@ npm install @mistralai/mistralai langsmith dotenv
 
 ## Setup
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export MISTRAL_API_KEY="<your_mistral_api_key>"
@@ -31,7 +31,7 @@ export LANGSMITH_PROJECT="<your_project_name>"  # optional
 
 * Ensure you have a Mistral API key from your [Mistral AI account](https://v2.auth.mistral.ai/login) (set this as `MISTRAL_API_KEY`).
 * Set `LANGSMITH_TRACING=true` and provide your LangSmith API key (`LANGSMITH_API_KEY`) activates automatic logging of traces.
-* Specify a [`LANGSMITH_PROJECT`](https://docs.langchain.com/langsmith/log-traces-to-project) name to organize traces by project; if not set, traces go to the default project (named "default").
+* Specify a [`LANGSMITH_PROJECT`](log-traces-to-project.md) name to organize traces by project; if not set, traces go to the default project (named "default").
 * The `LANGSMITH_TRACING` flag must be true for any traces to be recorded.
 
 ## Configure tracing
@@ -142,7 +142,7 @@ Although Mistral models are open-weight, using the hosted Mistral API may incur 
 
 LangSmith can automatically associate costs with traced LLM calls by estimating token usage and applying model-specific pricing. When tracing Mistral API calls, LangSmith uses the recorded prompt and response messages to calculate token counts and attach cost information to each run.
 
-To enable automatic cost tracking for LLM calls, refer to [Automatically track costs based on token counts](https://docs.langchain.com/langsmith/cost-tracking#llm-calls:-automatically-track-costs-based-on-token-counts).
+To enable automatic cost tracking for LLM calls, refer to [Automatically track costs based on token counts](cost-tracking.md#llm-calls:-automatically-track-costs-based-on-token-counts).
 
 Once enabled, costs appear directly in the LangSmith UI alongside each traced Mistral run, so that you can monitor usage and compare experiments over time.
 

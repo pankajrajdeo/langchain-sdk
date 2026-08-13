@@ -41,7 +41,7 @@ approval card while that value is set, then resume the run with
 approves, rejects, or edits the action.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";
@@ -388,7 +388,7 @@ function MultiActionReview({
 
 ## Custom interrupt forms
 
-The [resume flow](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop#the-resume-flow) uses `humanInTheLoopMiddleware`, which wraps a tool with a
+The [resume flow](#the-resume-flow) uses `humanInTheLoopMiddleware`, which wraps a tool with a
 generic approve / reject / edit / respond card. Sometimes a single set of
 buttons is not enough: booking a flight, approving a refund, and reviewing a
 social post each need a *different* form, with their own fields, validation, and

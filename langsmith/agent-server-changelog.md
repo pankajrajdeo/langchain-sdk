@@ -3,7 +3,7 @@
 > [!NOTE]
 > **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/langsmith/agent-server-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
-[Agent Server](https://docs.langchain.com/langsmith/agent-server) is an API platform for creating and managing agent-based applications. It provides built-in persistence, a task queue, and supports deploying, configuring, and running assistants (agentic workflows) at scale. This changelog documents all notable updates, features, and fixes to Agent Server releases.
+[Agent Server](agent-server.md) is an API platform for creating and managing agent-based applications. It provides built-in persistence, a task queue, and supports deploying, configuring, and running assistants (agentic workflows) at scale. This changelog documents all notable updates, features, and fixes to Agent Server releases.
 
 ## Release cadence
 
@@ -13,7 +13,7 @@
 * `rc` (release candidate): Published every three weeks and patched as needed during the bake window for critical bug backfills. Recommended for users who want to test a feature in the next stable release. Semantic versioning uses an rc tag off the minor version, for example `0.9.0rc1`.
 * `stable`: Published every three weeks from rc. Patched for security-related dependency bumps or critical bug fixes. This is the default version used by new deployments and is recommended for production use. Semantic versioning uses minor bumps for regular promotions (for example `0.9.0`) and patch bumps for backfills (for example `0.9.1`).
 
-Deployments use the newest `stable` version by default and are automatically updated to the newest `stable` version on each new revision. To pin to a specific version, set [`api_version`](https://docs.langchain.com/langsmith/cli#pinning-api-version) to the desired version in langgraph.json.
+Deployments use the newest `stable` version by default and are automatically updated to the newest `stable` version on each new revision. To pin to a specific version, set [`api_version`](cli.md#pinning-api-version) to the desired version in langgraph.json.
 
 ## v0.13
 
@@ -543,7 +543,7 @@ Latest version: `0.10.3`
 
 #### General Notes
 
-* v0.10.0rc1 includes breaking changes for security and correctness. Refer to the [Security section](https://docs.langchain.com/langsmith/agent-server-changelog#security) for more details.
+* v0.10.0rc1 includes breaking changes for security and correctness. Refer to the [Security section](#security) for more details.
 * v0.10.0 is the stable promotion of the v0.10.0rc line. Note in particular the potentially breaking security changes in 0.10.0rc1.
 
 <details>
@@ -601,7 +601,7 @@ Latest version: `0.10.3`
 
 ### General Notes
 
-* v0.10.0rc1 includes breaking changes for security and correctness. Refer to the [Security section](https://docs.langchain.com/langsmith/agent-server-changelog#security) for more details.
+* v0.10.0rc1 includes breaking changes for security and correctness. Refer to the [Security section](#security) for more details.
 * Includes dependency and security maintenance updates.
 
 ### New Features
@@ -648,7 +648,7 @@ Delta channels are now supported so checkpoints can store incremental state upda
 
 To use, define state channels with LangGraph's DeltaChannel reducer pattern in your graph state.
 This behavior is enabled when the installed langgraph is >= 1.2.
-Docs: [DeltaChannel reference](https://docs.langchain.com/oss/python/langgraph/pregel#deltachannel)
+Docs: [DeltaChannel reference](../langgraph/pregel.md#deltachannel)
 
 #### Event streaming APIs
 
@@ -664,8 +664,8 @@ The new endpoints include:
 
 Docs:
 
-* [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref)
-* [LangGraph event streaming reference](https://docs.langchain.com/oss/python/langgraph/event-streaming)
+* [Agent Server API reference](server-api-ref.md)
+* [LangGraph event streaming reference](../langgraph/event-streaming.md)
 
 ## 2026-05-05
 ## v0.8.7

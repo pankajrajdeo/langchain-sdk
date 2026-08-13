@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/test/integration-testing)
 Test agents with real LLM APIs by organizing tests, managing keys, handling flakiness, and controlling costs.
 
-Integration tests verify that your agent works correctly with model APIs and external services. Unlike [unit tests](https://docs.langchain.com/oss/python/langchain/test/unit-testing) that use fakes and mocks, integration tests make actual network calls to confirm that components work together, credentials are valid, and latency is acceptable.
+Integration tests verify that your agent works correctly with model APIs and external services. Unlike [unit tests](unit-testing.md) that use fakes and mocks, integration tests make actual network calls to confirm that components work together, credentials are valid, and latency is acceptable.
 
-Because LLM responses are nondeterministic, integration tests require different strategies than traditional software tests. This guide covers how to organize, write, and run integration tests for your agents. For general test infrastructure when contributing to LangChain itself, see [Contributing to code](https://docs.langchain.com/oss/python/contributing/code#running-tests).
+Because LLM responses are nondeterministic, integration tests require different strategies than traditional software tests. This guide covers how to organize, write, and run integration tests for your agents. For general test infrastructure when contributing to LangChain itself, see [Contributing to code](../../contributing/code.md#running-tests).
 
 ## Separate unit and integration tests
 
@@ -103,7 +103,7 @@ def test_agent_calls_weather_tool():
 ```
 
 > [!TIP]
-> For more rigorous trajectory assertions, use the [AgentEvals](https://docs.langchain.com/oss/python/langchain/test/evals) evaluators which support fuzzy matching modes like `unordered` and `superset`.
+> For more rigorous trajectory assertions, use the [AgentEvals](evals.md) evaluators which support fuzzy matching modes like `unordered` and `superset`.
 
 ## Reduce cost and latency
 
@@ -112,7 +112,7 @@ Integration tests that call LLM APIs incur real costs. A few practices help keep
 * **Use smaller models**: `gemini-3.1-flash-lite` or equivalent for tests that only need to verify tool calling and response structure.
 * **Set `maxTokens`**: Cap response length to avoid long, expensive completions.
 * **Limit test scope**: Test one behavior per test. Avoid end-to-end scenarios that chain many LLM calls when a single-turn test suffices.
-* **Run selectively**: Use the test separation from [above](https://docs.langchain.com/oss/python/langchain/test/integration-testing#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
+* **Run selectively**: Use the test separation from [above](#separate-unit-and-integration-tests) to run integration tests only in CI or before deploy, not on every file save.
 
 ```python
 agent = create_agent(
@@ -191,7 +191,7 @@ The first run makes real network calls and generates a cassette file in `tests/c
 
 ## Next steps
 
-Learn how to evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators in [Evals](https://docs.langchain.com/oss/python/langchain/test/evals).
+Learn how to evaluate agent trajectories with deterministic matching or LLM-as-judge evaluators in [Evals](evals.md).
 
 ***
 

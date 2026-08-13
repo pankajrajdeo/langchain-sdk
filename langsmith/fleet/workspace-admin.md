@@ -6,18 +6,18 @@ Configure workspace secrets and manage spend limits for Fleet agents and users.
 
 ## Workspace secrets
 
-Fleet uses [workspace secrets](https://docs.langchain.com/langsmith/set-up-hierarchy#configure-workspace-settings) to store API keys for models and tools. The following secret types are available:
+Fleet uses [workspace secrets](../set-up-hierarchy.md#configure-workspace-settings) to store API keys for models and tools. The following secret types are available:
 
-* **Model provider key**: By default, Fleet uses models managed by LangChain and does not require a model-provider API key. An OpenAI or Anthropic API key is required only when you use [custom models](https://docs.langchain.com/langsmith/fleet/essentials#custom-models). When set, the agent graphs load this key from workspace secrets for inference.
+* **Model provider key**: By default, Fleet uses models managed by LangChain and does not require a model-provider API key. An OpenAI or Anthropic API key is required only when you use [custom models](essentials.md#custom-models). When set, the agent graphs load this key from workspace secrets for inference.
 * **Fleet-specific secrets**: Secrets prefixed with `FLEET_` are prioritized over workspace secrets within Fleet. This way, you can better track the usage of Fleet vs other parts of LangSmith that use the same secrets. If you have both `OPENAI_API_KEY` and `FLEET_OPENAI_API_KEY`, the `FLEET_OPENAI_API_KEY` secret will be used.
 * **Optional tool keys**: Add keys for any tools you enable. These are read from workspace secrets at runtime.
   * `EXA_API_KEY`: Required for Exa search tools (general web and LinkedIn profile search).
   * `TAVILY_API_KEY`: Required for Tavily web search.
   * `TWITTER_API_KEY` and `TWITTER_API_KEY_SECRET`: Required for Twitter/X read operations (app-only bearer). Posting/media upload is not enabled.
-* **MCP server configuration**: Fleet can pull tools from one or more remote [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. Configure MCP servers and headers in your [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) settings. Fleet automatically discovers tools and applies the configured headers when calling them. For more information, refer to the [Remote MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) page.
+* **MCP server configuration**: Fleet can pull tools from one or more remote [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers. Configure MCP servers and headers in your [workspace](../administration-overview.md#workspaces) settings. Fleet automatically discovers tools and applies the configured headers when calling them. For more information, refer to the [Remote MCP servers](remote-mcp-servers.md) page.
 
 > [!NOTE]
-> Custom models are available for enterprise deployments. See [Custom models](https://docs.langchain.com/langsmith/fleet/essentials#custom-models) for more information.
+> Custom models are available for enterprise deployments. See [Custom models](essentials.md#custom-models) for more information.
 
 ### Add a secret
 

@@ -5,13 +5,13 @@
 
 A self-hosted LangSmith instance can handle a large number of traces and users. The default configuration for the self-hosted deployment can handle substantial load, and you can configure your deployment to be able to achieve higher scale. This page describes scaling considerations and provides some examples to help configure your self-hosted instance.
 
-For example configurations, refer to [Example LangSmith configurations for scale](https://docs.langchain.com/langsmith/self-host-scale#example-langsmith-configurations-for-scale).
+For example configurations, refer to [Example LangSmith configurations for scale](#example-langsmith-configurations-for-scale).
 
 ## Summary
 
 The table below provides an overview comparing different LangSmith configurations for various load patterns (reads / writes):
 
-|                                                             | **[Low / low](https://docs.langchain.com/langsmith/self-host-scale#low-reads-low-writes)**               | **[Low / high](https://docs.langchain.com/langsmith/self-host-scale#low-reads-high-writes)**             | **[High / low](https://docs.langchain.com/langsmith/self-host-scale#high-reads-low-writes)**             | [Medium / medium](https://docs.langchain.com/langsmith/self-host-scale#medium-reads-medium-writes)       | [High / high](https://docs.langchain.com/langsmith/self-host-scale#high-reads-high-writes)               |
+|                                                             | **[Low / low](#low-reads-low-writes)**               | **[Low / high](#low-reads-high-writes)**             | **[High / low](#high-reads-low-writes)**             | [Medium / medium](#medium-reads-medium-writes)       | [High / high](#high-reads-high-writes)               |
 | :---------------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- | :--------------------------------------------------- |
 | Concurrent frontend users                | 5                                                    | 5                                                    | 50                                                   | 20                                                   | 50                                                   |
 | Traces submitted per second              | 10                                                   | 1000                                                 | 10                                                   | 100                                                  | 1000                                                 |
@@ -66,9 +66,9 @@ When scaling up the read path (trace querying), it is helpful to monitor the two
 
 * Increase the number of backend service pods. This would be most impactful if backend service pods are reaching 1 core CPU usage.
 * Give ClickHouse more resources (CPU or Memory). ClickHouse can be very resource intensive, but it should lead to better performance.
-* Move to a [replicated ClickHouse cluster](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster). Adding replicas of ClickHouse helps with read performance, but we recommend staying below 5 replicas (start with 3).
+* Move to a [replicated ClickHouse cluster](self-host-external-clickhouse.md#ha-replicated-clickhouse-cluster). Adding replicas of ClickHouse helps with read performance, but we recommend staying below 5 replicas (start with 3).
 
-For more precise guidance on how this translates to helm chart values, refer to the examples the following [section](https://docs.langchain.com/langsmith/self-host-scale#example-langsmith-configurations-for-scale). If you are unsure why your LangSmith instance cannot handle a certain load pattern, contact the LangChain team.
+For more precise guidance on how this translates to helm chart values, refer to the examples the following [section](#example-langsmith-configurations-for-scale). If you are unsure why your LangSmith instance cannot handle a certain load pattern, contact the LangChain team.
 
 ## KEDA autoscaling for LangSmith queues
 
@@ -212,7 +212,7 @@ commonEnv:
 
 You have a relatively low scale of trace ingestions, but many frontend users querying traces and/or have scripts that hit the `/runs/query` or `/runs/<run-id>` endpoints frequently.
 
-**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
+**For this, we strongly recommend setting up a replicated ClickHouse cluster to enable high read scale at low latency.** See our [external ClickHouse doc](self-host-external-clickhouse.md#ha-replicated-clickhouse-cluster) for more guidance on how to setup a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 8+ cores and 16+ GB memory, and resource limit of 12 cores and 32 GB memory.
 
 For this, we recommend a configuration like this:
 
@@ -328,13 +328,13 @@ commonEnv:
 ```
 
 > [!WARNING]
-> If you still notice slow reads with the above configuration, we recommend moving to a [replicated Clickhouse cluster setup](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster)
+> If you still notice slow reads with the above configuration, we recommend moving to a [replicated Clickhouse cluster setup](self-host-external-clickhouse.md#ha-replicated-clickhouse-cluster)
 
 ### High reads, high writes <a name="high-reads-high-writes" />
 
 You have a very high rate of trace ingestion (approaching 1000 traces submitted per second) and also have many users querying traces on the frontend (over 50 users) and/or scripts that are consistently making requests to `/runs/query` or `/runs/<run-id>` endpoints.
 
-**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](https://docs.langchain.com/langsmith/self-host-external-clickhouse#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
+**For this, we very strongly recommend setting up a replicated ClickHouse cluster to prevent degraded read performance at high write scale.** See our [external ClickHouse doc](self-host-external-clickhouse.md#ha-replicated-clickhouse-cluster) for more guidance on how to set up a replicated ClickHouse cluster. For this load pattern, we recommend using a 3 node replicated setup, where each replica in the cluster should have resource requests of 14+ cores and 24+ GB memory, and resource limit of 20 cores and 48 GB memory. We also recommend that each node/instance of ClickHouse has 600 Gi of volume storage for each day of TTL that you enable (as per the configuration below).
 
 Overall, we recommend a configuration like this:
 

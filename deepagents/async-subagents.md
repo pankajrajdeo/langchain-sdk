@@ -4,7 +4,7 @@ Launch background subagents that run concurrently while the supervisor continues
 
 Async subagents let a supervisor agent launch background tasks that return immediately, so the supervisor can continue interacting with the user while subagents work concurrently. The supervisor can check progress, send follow-up instructions, or cancel tasks at any point.
 
-This builds on [subagents](https://docs.langchain.com/oss/python/deepagents/subagents), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
+This builds on [subagents](subagents.md), which run synchronously and block the supervisor until completion. Use async subagents when tasks are long-running, parallelizable, or need mid-flight steering.
 
 > [!NOTE]
 > Async subagents are a preview feature available in `deepagents` 0.5.0. Preview features are under active development and APIs may change.
@@ -21,7 +21,7 @@ graph TB
 ```
 
 > [!NOTE]
-> Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](https://docs.langchain.com/langsmith/deployment), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
+> Async subagents communicate with any server that implements the [Agent Protocol](https://github.com/langchain-ai/agent-protocol). You can use [LangSmith Deployments](../langsmith/deployment.md), or self-host any Agent Protocol-compatible server. Each subagent runs independently of the supervisor, which controls them through the SDK to launch, check, update, and cancel.
 
 ## When to use async subagents
 
@@ -84,7 +84,7 @@ For LangGraph-based deployments, register all graphs in the same `langgraph.json
 
 ## Use the async subagent tools
 
-The [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware) which is included in the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack) when async subagents are configured, gives the supervisor five tools:
+The [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware) which is included in the [Deep Agents stack](customization.md#deep-agents-stack) when async subagents are configured, gives the supervisor five tools:
 
 | Tool                | Purpose                                   | Returns                       |
 | ------------------- | ----------------------------------------- | ----------------------------- |
@@ -130,7 +130,7 @@ sequenceDiagram
 
 ## Understand state management
 
-Task metadata is stored in a dedicated state channel (`async_tasks`) on the supervisor's graph, separate from the message history. This is critical because deep agents [compact their message history](https://docs.langchain.com/oss/python/deepagents/context-engineering#summarization) when the context window fills up. If task IDs were only in tool messages, they would be lost during compaction. The dedicated channel ensures the supervisor can always recall its tasks through `list_async_tasks`, even after multiple rounds of summarization.
+Task metadata is stored in a dedicated state channel (`async_tasks`) on the supervisor's graph, separate from the message history. This is critical because deep agents [compact their message history](context-engineering.md#summarization) when the context window fills up. If task IDs were only in tool messages, they would be lost during compaction. The dedicated channel ensures the supervisor can always recall its tasks through `list_async_tasks`, even after multiple rounds of summarization.
 
 Each tracked task records the task ID, agent name, thread ID, run ID, status, and timestamps (`created_at`, `last_checked_at`, `last_updated_at`).
 
@@ -270,7 +270,7 @@ agent = create_deep_agent(
 
 **Problem**: Launching a subagent hangs or takes a long time to start.
 
-**Solution**: The worker pool is likely exhausted. Increase the pool size with `--n-jobs-per-worker`. See [Size the worker pool](https://docs.langchain.com/oss/python/deepagents/async-subagents#size-the-worker-pool-for-local-development).
+**Solution**: The worker pool is likely exhausted. Increase the pool size with `--n-jobs-per-worker`. See [Size the worker pool](#size-the-worker-pool-for-local-development).
 
 ## Reference implementation
 

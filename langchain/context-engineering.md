@@ -16,7 +16,7 @@ More often than not - it's actually the second reason that causes agents to not 
 **Context engineering** is providing the right information and tools in the right format so the LLM can accomplish a task. This is the number one job of AI Engineers. This lack of "right" context is the number one blocker for more reliable agents, and LangChain's agent abstractions are uniquely designed to facilitate context engineering.
 
 > [!TIP]
-> New to context engineering? Start with the [conceptual overview](https://docs.langchain.com/oss/python/concepts/context) to understand the different types of context and when to use them.
+> New to context engineering? Start with the [conceptual overview](../concepts/context.md) to understand the different types of context and when to use them.
 
 ### The agent loop
 
@@ -25,7 +25,7 @@ A typical agent loop consists of two main steps:
 1. **Model call** - calls the LLM with a prompt and available tools, returns either a response or a request to execute tools
 2. **Tool execution** - executes the tools that the LLM requested, returns tool results
 
-> **Image:** [Core agent loop diagram](https://docs.langchain.com/oss/python/langchain/context-engineering)
+> **Image:** [Core agent loop diagram](context-engineering.md)
 
 This loop continues until the LLM decides to finish.
 
@@ -35,9 +35,9 @@ To build reliable agents, you need to control what happens at each step of the a
 
 | Context Type                                  | What You Control                                                                     | Transient or Persistent |
 | --------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------- |
-| **[Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#model-context)**           | What goes into model calls (instructions, message history, tools, response format)   | Transient               |
-| **[Tool Context](https://docs.langchain.com/oss/python/langchain/context-engineering#tool-context)**             | What tools can access and produce (reads/writes to state, store, runtime context)    | Persistent              |
-| **[Life-cycle Context](https://docs.langchain.com/oss/python/langchain/context-engineering#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent              |
+| **[Model Context](#model-context)**           | What goes into model calls (instructions, message history, tools, response format)   | Transient               |
+| **[Tool Context](#tool-context)**             | What tools can access and produce (reads/writes to state, store, runtime context)    | Persistent              |
+| **[Life-cycle Context](#life-cycle-context)** | What happens between model and tool calls (summarization, guardrails, logging, etc.) | Persistent              |
 
 #### Transient context
 What the LLM sees for a single call. You can modify messages, tools, or prompts without changing what's saved in state.
@@ -57,7 +57,7 @@ Throughout this process, your agent accesses (reads / writes) different sources 
 
 ### How it works
 
-LangChain [middleware](https://docs.langchain.com/oss/python/langchain/middleware) is the mechanism under the hood that makes context engineering practical for developers using LangChain.
+LangChain [middleware](middleware.md) is the mechanism under the hood that makes context engineering practical for developers using LangChain.
 
 Middleware allows you to hook into any step in the agent lifecycle and:
 
@@ -70,19 +70,19 @@ Throughout this guide, you'll see frequent use of the middleware API as a means 
 
 Control what goes into each model call - instructions, available tools, which model to use, and output format. These decisions directly impact reliability and cost.
 
-#### [System Prompt](https://docs.langchain.com/oss/python/langchain/context-engineering#system-prompt)
+#### [System Prompt](#system-prompt)
 Base instructions from the developer to the LLM.
 
-#### [Messages](https://docs.langchain.com/oss/python/langchain/context-engineering#messages)
+#### [Messages](#messages)
 The full list of messages (conversation history) sent to the LLM.
 
-#### [Tools](https://docs.langchain.com/oss/python/langchain/context-engineering#tools)
+#### [Tools](#tools)
 Utilities the agent has access to for taking actions.
 
-#### [Model](https://docs.langchain.com/oss/python/langchain/context-engineering#model)
+#### [Model](#model)
 The actual model (including configuration) to be called.
 
-#### [Response Format](https://docs.langchain.com/oss/python/langchain/context-engineering#response-format)
+#### [Response Format](#response-format)
 Schema specification for the model's final response.
 
 All of these types of model context can draw from **state** (short-term memory), **store** (long-term memory), or **runtime context** (static configuration).
@@ -365,9 +365,9 @@ agent = create_agent(
 > For **persistent** updates that modify state, you can:
 >
 > * Return a [`ExtendedModelResponse`](https://reference.langchain.com/python/langchain/agents/middleware/types/ExtendedModelResponse) with a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) from `wrap_model_call` to inject state updates from the model call layer.
-> * Use life-cycle hooks like `before_model`, `after_model`, or `wrap_tool_call` (for tool returns) to update the conversation history. See the [middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware) for more details.
+> * Use life-cycle hooks like `before_model`, `after_model`, or `wrap_tool_call` (for tool returns) to update the conversation history. See the [middleware documentation](middleware.md) for more details.
 >
-> See [State updates](https://docs.langchain.com/oss/python/langchain/middleware/custom#state-updates) for more information.
+> See [State updates](middleware/custom.md#state-updates) for more information.
 
 ### Tools
 
@@ -528,7 +528,7 @@ agent = create_agent(
 )
 ```
 
-See [Dynamic tools](https://docs.langchain.com/oss/python/langchain/tools#dynamic-tool-selection) for both filtering pre-registered tools and registering tools at runtime (e.g., from MCP servers).
+See [Dynamic tools](tools.md#dynamic-tool-selection) for both filtering pre-registered tools and registering tools at runtime (e.g., from MCP servers).
 
 ### Model
 
@@ -681,7 +681,7 @@ agent = create_agent(
 )
 ```
 
-See [Dynamic model](https://docs.langchain.com/oss/python/langchain/models#dynamic-model-selection) for more examples.
+See [Dynamic model](models.md#dynamic-model-selection) for more examples.
 
 ### Response format
 
@@ -1069,22 +1069,22 @@ agent = create_agent(
 )
 ```
 
-See [Tools](https://docs.langchain.com/oss/python/langchain/tools) for comprehensive examples of accessing state, store, and runtime context in tools.
+See [Tools](tools.md) for comprehensive examples of accessing state, store, and runtime context in tools.
 
 ## Life-cycle context
 
 Control what happens **between** the core agent steps - intercepting data flow to implement cross-cutting concerns like summarization, guardrails, and logging.
 
-As you've seen in [Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#model-context) and [Tool Context](https://docs.langchain.com/oss/python/langchain/context-engineering#tool-context), [middleware](https://docs.langchain.com/oss/python/langchain/middleware) is the mechanism that makes context engineering practical. Middleware allows you to hook into any step in the agent lifecycle and either:
+As you've seen in [Model Context](#model-context) and [Tool Context](#tool-context), [middleware](middleware.md) is the mechanism that makes context engineering practical. Middleware allows you to hook into any step in the agent lifecycle and either:
 
 1. **Update context** - Modify state and store to persist changes, update conversation history, or save insights
 2. **Jump in the lifecycle** - Move to different steps in the agent cycle based on context (e.g., skip tool execution if a condition is met, repeat model call with modified context)
 
-> **Image:** [Middleware hooks in the agent loop](https://docs.langchain.com/oss/python/langchain/context-engineering)
+> **Image:** [Middleware hooks in the agent loop](context-engineering.md)
 
 ### Example: Summarization
 
-One of the most common life-cycle patterns is automatically condensing conversation history when it gets too long. Unlike the transient message trimming shown in [Model Context](https://docs.langchain.com/oss/python/langchain/context-engineering#messages), summarization **persistently updates state** - permanently replacing old messages with a summary that's saved for all future turns.
+One of the most common life-cycle patterns is automatically condensing conversation history when it gets too long. Unlike the transient message trimming shown in [Model Context](#messages), summarization **persistently updates state** - permanently replacing old messages with a summary that's saved for all future turns.
 
 LangChain offers built-in middleware for this:
 
@@ -1114,24 +1114,24 @@ When the conversation exceeds the token limit, `SummarizationMiddleware` automat
 The summarized conversation history is permanently updated - future turns will see the summary instead of the original messages.
 
 > [!NOTE]
-> For a complete list of built-in middleware, available hooks, and how to create custom middleware, see the [Middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware).
+> For a complete list of built-in middleware, available hooks, and how to create custom middleware, see the [Middleware documentation](middleware.md).
 
 ## Best practices
 
 1. **Start simple** - Begin with static prompts and tools, add dynamics only when needed
 2. **Test incrementally** - Add one context engineering feature at a time
 3. **Monitor performance** - Track model calls, token usage, and latency
-4. **Use built-in middleware** - Leverage [`SummarizationMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#summarization), [`LLMToolSelectorMiddleware`](https://docs.langchain.com/oss/python/langchain/middleware#llm-tool-selector), etc.
+4. **Use built-in middleware** - Leverage [`SummarizationMiddleware`](middleware.md#summarization), [`LLMToolSelectorMiddleware`](middleware.md#llm-tool-selector), etc.
 5. **Document your context strategy** - Make it clear what context is being passed and why
 6. **Understand transient vs persistent**: Model context changes are transient (per-call), while life-cycle context changes persist to state
 
 ## Related resources
 
-* [Context conceptual overview](https://docs.langchain.com/oss/python/concepts/context) - Understand context types and when to use them
-* [Middleware](https://docs.langchain.com/oss/python/langchain/middleware) - Complete middleware guide
-* [Tools](https://docs.langchain.com/oss/python/langchain/tools) - Tool creation and context access
-* [Memory](https://docs.langchain.com/oss/python/concepts/memory) - Short-term and long-term memory patterns
-* [Agents](https://docs.langchain.com/oss/python/langchain/agents) - Core agent concepts
+* [Context conceptual overview](../concepts/context.md) - Understand context types and when to use them
+* [Middleware](middleware.md) - Complete middleware guide
+* [Tools](tools.md) - Tool creation and context access
+* [Memory](../concepts/memory.md) - Short-term and long-term memory patterns
+* [Agents](agents.md) - Core agent concepts
 
 ***
 

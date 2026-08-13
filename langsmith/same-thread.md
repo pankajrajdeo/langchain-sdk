@@ -4,7 +4,7 @@ In LangSmith Deployment, a thread is not explicitly associated with a particular
 This means that you can run multiple assistants on the same thread, which allows a different assistant to continue from an initial assistant's progress.
 
 In this example, we will create two assistants and then call them both on the same thread.
-You'll see that the second assistant will respond using information from the [checkpoint](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) generated in the thread by the first assistant as context.
+You'll see that the second assistant will respond using information from the [checkpoint](../langgraph/checkpointers.md#checkpoints) generated in the thread by the first assistant as context.
 
 ## Setup
 

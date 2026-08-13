@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-checkpointer)
 Configure Agent Server to use PostgreSQL, MongoDB, or a custom implementation for checkpoint storage.
 
-[Agent Server](https://docs.langchain.com/langsmith/agent-server) persists graph state using a checkpointer backend. By default, LangSmith stores checkpoints in PostgreSQL alongside other server data. You can switch to MongoDB or provide a custom implementation.
+[Agent Server](agent-server.md) persists graph state using a checkpointer backend. By default, LangSmith stores checkpoints in PostgreSQL alongside other server data. You can switch to MongoDB or provide a custom implementation.
 
 > [!NOTE]
-> Regardless of the checkpointer backend, LangSmith always requires PostgreSQL for threads, runs, assistants, crons, and the [memory store](https://docs.langchain.com/oss/python/langgraph/stores). The checkpointer backend only controls where checkpoint data is stored.
+> Regardless of the checkpointer backend, LangSmith always requires PostgreSQL for threads, runs, assistants, crons, and the [memory store](../langgraph/stores.md). The checkpointer backend only controls where checkpoint data is stored.
 
 ## Available backends
 
@@ -13,11 +13,11 @@ Configure Agent Server to use PostgreSQL, MongoDB, or a custom implementation fo
 | --------- | ------------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | `default` | PostgreSQL    | None (built-in)                                               | Standard deployments                                                                |
 | `mongo`   | MongoDB       | `langgraph.json` or `LS_DEFAULT_CHECKPOINTER_BACKEND` env var | Teams with existing MongoDB infrastructure                                          |
-| `custom`  | User-provided | `langgraph.json`                                              | Custom storage backends (see [custom checkpointer](https://docs.langchain.com/langsmith/custom-checkpointer)) |
+| `custom`  | User-provided | `langgraph.json`                                              | Custom storage backends (see [custom checkpointer](custom-checkpointer.md)) |
 
 ## Default (PostgreSQL)
 
-PostgreSQL is the default checkpointer backend. No configuration is needed. To use a custom PostgreSQL instance, set the [`POSTGRES_URI_CUSTOM`](https://docs.langchain.com/langsmith/env-var-self-hosted) environment variable.
+PostgreSQL is the default checkpointer backend. No configuration is needed. To use a custom PostgreSQL instance, set the [`POSTGRES_URI_CUSTOM`](env-var-self-hosted.md) environment variable.
 
 ## Set up MongoDB checkpointing
 
@@ -140,7 +140,7 @@ docker run \
     my-image
 ```
 
-See the [standalone server guide](https://docs.langchain.com/langsmith/deploy-standalone-server) for a full Docker Compose example with MongoDB.
+See the [standalone server guide](deploy-standalone-server.md) for a full Docker Compose example with MongoDB.
 
 #### Cloud
 Set `backend` to `"mongo"` in your `langgraph.json`, then add `LS_MONGODB_URI` as an environment variable in your deployment settings in the LangSmith UI.
@@ -151,14 +151,14 @@ PostgreSQL is still auto-provisioned for non-checkpoint data.
 
 ## Custom checkpointer
 
-To use a storage backend other than PostgreSQL or MongoDB, implement a custom [BaseCheckpointSaver](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver). See [Add custom checkpointer](https://docs.langchain.com/langsmith/custom-checkpointer) for details.
+To use a storage backend other than PostgreSQL or MongoDB, implement a custom [BaseCheckpointSaver](https://reference.langchain.com/python/langgraph/checkpoints/#langgraph.checkpoint.base.BaseCheckpointSaver). See [Add custom checkpointer](custom-checkpointer.md) for details.
 
 ## Related
 
-* [Configure TTLs](https://docs.langchain.com/langsmith/configure-ttl) for checkpoint and store item expiration
-* [Persistence concepts](https://docs.langchain.com/oss/python/langgraph/persistence) in LangGraph
-* [Data plane](https://docs.langchain.com/langsmith/data-plane) architecture
-* [Environment variables](https://docs.langchain.com/langsmith/env-var-cloud) reference
+* [Configure TTLs](configure-ttl.md) for checkpoint and store item expiration
+* [Persistence concepts](../langgraph/persistence.md) in LangGraph
+* [Data plane](data-plane.md) architecture
+* [Environment variables](env-var-cloud.md) reference
 
 ***
 

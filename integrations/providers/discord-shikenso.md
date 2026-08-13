@@ -28,7 +28,7 @@ If `DISCORD_BOT_TOKEN` is not set, the tools will raise a `ValueError` when inst
 
 ## Tools
 
-Below is a snippet showing how you can read and send messages in Discord. For more details, see the [documentation for Discord tools](https://docs.langchain.com/oss/python/integrations/tools/discord).
+Below is a snippet showing how you can read and send messages in Discord. For more details, see the [documentation for Discord tools](../tools/discord.md).
 
 ```python
 from langchain_discord.tools.discord_read_messages import DiscordReadMessages
@@ -51,7 +51,7 @@ print(send_result)
 
 ## Toolkit
 
-`DiscordToolkit` groups multiple Discord-related tools into a single interface. For a usage example, see [the Discord toolkit docs](https://docs.langchain.com/oss/python/integrations/tools/discord).
+`DiscordToolkit` groups multiple Discord-related tools into a single interface. For a usage example, see [the Discord toolkit docs](../tools/discord.md).
 
 ```python
 from langchain_discord.toolkits import DiscordToolkit

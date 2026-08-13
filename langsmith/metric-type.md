@@ -51,7 +51,7 @@ function categoricalMetric(run: Run, example: Example) {
 
 ## Related
 
-* [Return multiple metrics in one evaluator](https://docs.langchain.com/langsmith/multiple-scores)
+* [Return multiple metrics in one evaluator](multiple-scores.md)
 
 ***
 

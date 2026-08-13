@@ -49,7 +49,7 @@ if not os.environ.get("COMPOSIO_API_KEY"):
     os.environ["COMPOSIO_API_KEY"] = getpass.getpass("Composio API key:\n")
 ```
 
-It's also helpful to set up [LangSmith](https://docs.langchain.com/langsmith/home) for tracing:
+It's also helpful to set up [LangSmith](../../langsmith/home.md) for tracing:
 
 ```python
 # os.environ["LANGSMITH_API_KEY"] = getpass.getpass("LangSmith API key:\n")
@@ -100,7 +100,7 @@ for status in search.toolkit_connection_statuses:
     print(status.toolkit, status.has_active_connection, status.status_message)
 ```
 
-If the toolkit is not connected, Composio will guide the agent to use `COMPOSIO_MANAGE_CONNECTIONS`, or you can create an authorization link yourself as shown in [Authentication setup](https://docs.langchain.com/oss/python/integrations/tools/composio#authentication-setup).
+If the toolkit is not connected, Composio will guide the agent to use `COMPOSIO_MANAGE_CONNECTIONS`, or you can create an authorization link yourself as shown in [Authentication setup](#authentication-setup).
 
 ### Low-level tool loading
 

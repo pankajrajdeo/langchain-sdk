@@ -1,21 +1,21 @@
 # Self-hosted LangSmith on Azure
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/azure-self-hosted)
-When running LangSmith on [Microsoft Azure](https://azure.microsoft.com/), [self-hosted](https://docs.langchain.com/langsmith/self-hosted) mode deploys a complete LangSmith platform with observability functionality.
+When running LangSmith on [Microsoft Azure](https://azure.microsoft.com/), [self-hosted](self-hosted.md) mode deploys a complete LangSmith platform with observability functionality.
 
 This page provides:
 
-* [Initial setup steps](https://docs.langchain.com/langsmith/azure-self-hosted#initial-setup) for deploying to AKS, configuring managed services, and setting up authentication.
-* [Azure-specific architecture patterns](https://docs.langchain.com/langsmith/azure-self-hosted#reference-architecture) and reference diagrams.
-* [Compute and networking guidance](https://docs.langchain.com/langsmith/azure-self-hosted#compute-and-networking-on-azure) and best practices.
-* [Security and access control](https://docs.langchain.com/langsmith/azure-self-hosted#security-and-access-control) recommendations for Azure deployments.
+* [Initial setup steps](#initial-setup) for deploying to AKS, configuring managed services, and setting up authentication.
+* [Azure-specific architecture patterns](#reference-architecture) and reference diagrams.
+* [Compute and networking guidance](#compute-and-networking-on-azure) and best practices.
+* [Security and access control](#security-and-access-control) recommendations for Azure deployments.
 
 > [!NOTE]
-> LangChain publishes production-ready [Terraform modules for Azure](https://github.com/langchain-ai/terraform/tree/main/modules/azure) that provision AKS, Azure Database for PostgreSQL, Azure Managed Redis, Blob Storage, and Key Vault in a single workflow. Start with the [Deploy with Terraform overview](https://docs.langchain.com/langsmith/self-host-terraform) to choose between the Terraform and Helm-only paths.
+> LangChain publishes production-ready [Terraform modules for Azure](https://github.com/langchain-ai/terraform/tree/main/modules/azure) that provision AKS, Azure Database for PostgreSQL, Azure Managed Redis, Blob Storage, and Key Vault in a single workflow. Start with the [Deploy with Terraform overview](self-host-terraform.md) to choose between the Terraform and Helm-only paths.
 
 ## Initial setup
 
 ### Deploy to Kubernetes
-Follow the [Kubernetes installation guide](https://docs.langchain.com/langsmith/kubernetes). LangSmith is tested on Azure Kubernetes Service (AKS).
+Follow the [Kubernetes installation guide](kubernetes.md). LangSmith is tested on Azure Kubernetes Service (AKS).
 
 **AKS-specific notes:**
 
@@ -25,16 +25,16 @@ Follow the [Kubernetes installation guide](https://docs.langchain.com/langsmith/
 ### Configure external services
 For production deployments, connect to Azure managed services:
 
-#### [Azure Blob Storage](https://docs.langchain.com/langsmith/self-host-blob-storage#azure-blob-storage)
+#### [Azure Blob Storage](self-host-blob-storage.md#azure-blob-storage)
 Store trace data in Azure Blob
 
-#### [Azure Database](https://docs.langchain.com/langsmith/self-host-external-postgres#azure-database-for-postgresql)
+#### [Azure Database](self-host-external-postgres.md#azure-database-for-postgresql)
 PostgreSQL database
 
-#### [Azure Cache](https://docs.langchain.com/langsmith/self-host-external-redis#azure-cache-for-redis)
+#### [Azure Cache](self-host-external-redis.md#azure-cache-for-redis)
 Redis for caching
 
-#### [ClickHouse Cloud](https://docs.langchain.com/langsmith/self-host-external-clickhouse)
+#### [ClickHouse Cloud](self-host-external-clickhouse.md)
 Analytics database
 
 ### Set up authentication
@@ -42,9 +42,9 @@ Use [Azure Workload Identity](https://azure.github.io/azure-workload-identity/do
 
 **Key pages:**
 
-* [Azure Blob managed identity](https://docs.langchain.com/langsmith/self-host-blob-storage#azure-blob-storage)
-* [Azure Database Entra authentication](https://docs.langchain.com/langsmith/self-host-external-postgres#iam-authentication)
-* [Azure Cache Entra authentication](https://docs.langchain.com/langsmith/self-host-external-redis#iam-authentication)
+* [Azure Blob managed identity](self-host-blob-storage.md#azure-blob-storage)
+* [Azure Database Entra authentication](self-host-external-postgres.md#iam-authentication)
+* [Azure Cache Entra authentication](self-host-external-redis.md#iam-authentication)
 
 After completing these initial setup steps, you can review the complete Azure architecture and best practices below.
 
@@ -57,9 +57,9 @@ We recommend using Azure's managed services to provide a scalable, secure, and r
 | **LangSmith Helm release** | Frontend, backend, queue, platform backend, Playground, ACE, and optionally the LangSmith Deployment control/data plane | One `helm upgrade --install` from the [`langchain/langsmith`](https://github.com/langchain-ai/helm/tree/main/charts/langsmith) chart |
 | **You provision**          | AKS, PostgreSQL, Managed Redis, Blob Storage, Key Vault, ingress, and ClickHouse                                        | Your IaC tooling (Terraform, ARM templates, or Azure portal) before installing LangSmith                                             |
 
-> **Image:** [Architecture diagram showing Azure relations to LangSmith services](https://docs.langchain.com/langsmith/azure-self-hosted)
+> **Image:** [Architecture diagram showing Azure relations to LangSmith services](azure-self-hosted.md)
 
-> **Image:** [Architecture diagram showing Azure relations to LangSmith services](https://docs.langchain.com/langsmith/azure-self-hosted)
+> **Image:** [Architecture diagram showing Azure relations to LangSmith services](azure-self-hosted.md)
 
 **Installation order:** provision Azure infrastructure → provision or subscribe to ClickHouse → configure Entra ID and Workload Identity → run `helm upgrade --install`. LangSmith Deployment, Fleet, Insights, and Chat are enabled through the same Helm release, not as separate installs.
 
@@ -69,7 +69,7 @@ We recommend using Azure's managed services to provide a scalable, secure, and r
 * **Storage services**: The platform requires persistent storage for traces, metadata and caching. On Azure the recommended services are:
   *  **[Azure Database for PostgreSQL (Flexible Server)](https://azure.microsoft.com/en-us/products/postgresql/)** for transactional data (e.g., runs, projects). Azure's high-availability options provision a standby replica in another zone; data is synchronously committed to both primary and standby servers. LangSmith requires PostgreSQL version 14 or higher.
   *  **[Azure Managed Redis](https://azure.microsoft.com/en-us/products/managed-redis/)** for queues and caching. Best practices include storing small values and breaking large objects into multiple keys, using pipelining to maximize throughput and ensuring the client and server reside in the same region. You can also use [Azure Cache for Redis](https://azure.microsoft.com/en-us/products/cache), running either in single-instance or cluster mode. LangSmith requires Redis OSS version 5 or higher.
-  *  **ClickHouse** for high-volume analytics of traces. We recommend using an [externally managed ClickHouse solution](https://docs.langchain.com/langsmith/self-host-external-clickhouse). If, for security or compliance reasons, that is not an option, deploy a ClickHouse cluster on AKS using the open-source operator. Ensure replication across [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview) for durability. Clickhouse is not required for a hybrid deployment.
+  *  **ClickHouse** for high-volume analytics of traces. We recommend using an [externally managed ClickHouse solution](self-host-external-clickhouse.md). If, for security or compliance reasons, that is not an option, deploy a ClickHouse cluster on AKS using the open-source operator. Ensure replication across [availability zones](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview) for durability. Clickhouse is not required for a hybrid deployment.
   *  **[Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/)** for large artifacts. Use redundant storage configurations such as read-access geo-redundant (RA-GRS) or geo-zone-redundant (RA-GZRS) storage and design applications to read from the secondary region during an outage.
 
 ## Compute and networking on Azure
@@ -180,7 +180,7 @@ Mount secrets from Key Vault into pods using [CSI Secret Store](https://learn.mi
 
 ## Observability and monitoring
 
-Configure your LangSmith instance to [export telemetry data](https://docs.langchain.com/langsmith/export-backend) so you can use Azure's services to monitor it.
+Configure your LangSmith instance to [export telemetry data](export-backend.md) so you can use Azure's services to monitor it.
 
 ### Azure Monitor
 
@@ -200,7 +200,7 @@ Ensure LangSmith services emit logs to stdout/stderr and forward them via [Fluen
 
 ## Continuous integration
 
-* The preferred method to manage [LangSmith deployments](https://docs.langchain.com/langsmith/deployment) is to create a CI process that builds [Agent Server](https://docs.langchain.com/langsmith/agent-server) images and pushes them to [Azure Container Registry](https://azure.microsoft.com/en-us/products/container-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
+* The preferred method to manage [LangSmith deployments](deployment.md) is to create a CI process that builds [Agent Server](agent-server.md) images and pushes them to [Azure Container Registry](https://azure.microsoft.com/en-us/products/container-registry). Create a test deployment for pull requests before deploying a new revision to staging or production upon PR merge.
 
 ***
 

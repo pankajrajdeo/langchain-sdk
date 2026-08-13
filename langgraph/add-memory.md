@@ -1,13 +1,13 @@
 # Memory
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/add-memory)
-AI applications need [memory](https://docs.langchain.com/oss/python/concepts/memory) to share context across multiple interactions. In LangGraph, you can add two types of memory:
+AI applications need [memory](../concepts/memory.md) to share context across multiple interactions. In LangGraph, you can add two types of memory:
 
-* [Add short-term memory](https://docs.langchain.com/oss/python/langgraph/add-memory#add-short-term-memory) as a part of your agent's [state](https://docs.langchain.com/oss/python/langgraph/graph-api#state) to enable multi-turn conversations.
-* [Add long-term memory](https://docs.langchain.com/oss/python/langgraph/add-memory#add-long-term-memory) to store user-specific or application-level data across sessions.
+* [Add short-term memory](#add-short-term-memory) as a part of your agent's [state](graph-api.md#state) to enable multi-turn conversations.
+* [Add long-term memory](#add-long-term-memory) to store user-specific or application-level data across sessions.
 
 ## Add short-term memory
 
-**Short-term** memory (thread-level [persistence](https://docs.langchain.com/oss/python/langgraph/persistence)) enables agents to track multi-turn conversations. To add short-term memory:
+**Short-term** memory (thread-level [persistence](persistence.md)) enables agents to track multi-turn conversations. To add short-term memory:
 
 ```python
 from langgraph.checkpoint.memory import InMemorySaver  # [!code highlight]
@@ -458,7 +458,7 @@ async with AsyncOracleSaver.from_conn_string(DB_URI) as checkpointer:  # [!code 
 
 ### Use in subgraphs
 
-If your graph contains [subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs), you only need to provide the checkpointer when compiling the parent graph. LangGraph will automatically propagate the checkpointer to the child subgraphs.
+If your graph contains [subgraphs](use-subgraphs.md), you only need to provide the checkpointer when compiling the parent graph. LangGraph will automatically propagate the checkpointer to the child subgraphs.
 
 ```python
 from langgraph.graph import START, StateGraph
@@ -488,7 +488,7 @@ checkpointer = InMemorySaver()
 graph = builder.compile(checkpointer=checkpointer)  # [!code highlight]
 ```
 
-You can configure subgraph-specific checkpointing behavior. See [subgraph persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence) for details on persistence levels including interrupt support and stateful continuations.
+You can configure subgraph-specific checkpointing behavior. See [subgraph persistence](use-subgraphs.md#subgraph-persistence) for details on persistence levels including interrupt support and stateful continuations.
 
 ```python
 subgraph_builder = StateGraph(...)
@@ -1176,12 +1176,12 @@ async for message in stream.messages:
 
 ## Manage short-term memory
 
-With [short-term memory](https://docs.langchain.com/oss/python/langgraph/add-memory#add-short-term-memory) enabled, long conversations can exceed the LLM's context window. Common solutions are:
+With [short-term memory](#add-short-term-memory) enabled, long conversations can exceed the LLM's context window. Common solutions are:
 
-* [Trim messages](https://docs.langchain.com/oss/python/langgraph/add-memory#trim-messages): Remove first or last N messages (before calling LLM)
-* [Delete messages](https://docs.langchain.com/oss/python/langgraph/add-memory#delete-messages) from LangGraph state permanently
-* [Summarize messages](https://docs.langchain.com/oss/python/langgraph/add-memory#summarize-messages): Summarize earlier messages in the history and replace them with a summary
-* [Manage checkpoints](https://docs.langchain.com/oss/python/langgraph/add-memory#manage-checkpoints) to store and retrieve message history
+* [Trim messages](#trim-messages): Remove first or last N messages (before calling LLM)
+* [Delete messages](#delete-messages) from LangGraph state permanently
+* [Summarize messages](#summarize-messages): Summarize earlier messages in the history and replace them with a summary
+* [Manage checkpoints](#manage-checkpoints) to store and retrieve message history
 * Custom strategies (e.g., message filtering, etc.)
 
 This allows the agent to keep track of the conversation without exceeding the LLM's context window.
@@ -1268,7 +1268,7 @@ Your name is Bob, as you mentioned when you first introduced yourself.
 
 You can delete messages from the graph state to manage the message history. This is useful when you want to remove specific messages or clear the entire message history.
 
-To delete messages from the graph state, you can use the `RemoveMessage`. For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](https://docs.langchain.com/oss/python/langgraph/graph-api#reducers), like [`MessagesState`](https://docs.langchain.com/oss/python/langgraph/graph-api#messagesstate).
+To delete messages from the graph state, you can use the `RemoveMessage`. For `RemoveMessage` to work, you need to use a state key with [`add_messages`](https://reference.langchain.com/python/langgraph/graph/message/add_messages) [reducer](graph-api.md#reducers), like [`MessagesState`](graph-api.md#messagesstate).
 
 To remove specific messages:
 
@@ -1351,9 +1351,9 @@ for snapshot in stream.values:
 
 The problem with trimming or removing messages, as shown above, is that you may lose information from culling of the message queue. Because of this, some applications benefit from a more sophisticated approach of summarizing the message history using a chat model.
 
-> **Image:** [Summary](https://docs.langchain.com/oss/python/langgraph/add-memory)
+> **Image:** [Summary](add-memory.md)
 
-Prompting and orchestration logic can be used to summarize the message history. For example, in LangGraph you can extend the [`MessagesState`](https://docs.langchain.com/oss/python/langgraph/graph-api#working-with-messages-in-graph-state) to include a `summary` key:
+Prompting and orchestration logic can be used to summarize the message history. For example, in LangGraph you can extend the [`MessagesState`](graph-api.md#working-with-messages-in-graph-state) to include a `summary` key:
 
 ```python
 from langgraph.graph import MessagesState

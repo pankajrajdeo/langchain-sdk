@@ -5,7 +5,7 @@
 > [!CAUTION]
 > **Deprecated**
 >
-> This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
+> This integration is deprecated and will be removed in a future release. Please use [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 This will help you get started with Google Vertex AI Embeddings models using LangChain. For detailed documentation on `Google Vertex AI Embeddings` features and configuration options, please refer to the [API reference](https://reference.langchain.com/python/langchain-google-vertexai/embeddings/VertexAIEmbeddings).
 
@@ -61,7 +61,7 @@ import vertexai
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -91,7 +91,7 @@ embeddings = VertexAIEmbeddings(model_name="gemini-embedding-001")
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 

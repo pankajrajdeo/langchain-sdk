@@ -7,7 +7,7 @@ You can do this by using the LangSmith Python SDK and passing `upload_results=Fa
 This will run you application and evaluators exactly as it always does and return the same output, but nothing will be recorded to LangSmith. This includes not just the experiment results but also the application and evaluator traces.
 
 > [!NOTE]
-> If you want to upload results to LangSmith but also need to process them in your script (for quality gates, custom aggregations, etc.), refer to [Read experiment results locally](https://docs.langchain.com/langsmith/read-local-experiment-results).
+> If you want to upload results to LangSmith but also need to process them in your script (for quality gates, custom aggregations, etc.), refer to [Read experiment results locally](read-local-experiment-results.md).
 
 ## Example
 

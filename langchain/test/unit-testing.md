@@ -55,7 +55,7 @@ agent.invoke(
 
 ## Next steps
 
-Learn how to test your agent with real model provider APIs in [Integration testing](https://docs.langchain.com/oss/python/langchain/test/integration-testing).
+Learn how to test your agent with real model provider APIs in [Integration testing](integration-testing.md).
 
 ***
 

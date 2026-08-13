@@ -26,9 +26,9 @@ When you select a trace name, LangSmith loads a successful trace example and ren
 * Item counts for arrays (e.g., (3) indicating 3 items).
 * Preview values for strings and numbers displayed inline.
 
-> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](https://docs.langchain.com/langsmith/configure-input-output-preview)
+> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](configure-input-output-preview.md)
 
-> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](https://docs.langchain.com/langsmith/configure-input-output-preview)
+> **Image:** [Configure Input and Output previews side panel showing the tree view of trace data structure](configure-input-output-preview.md)
 
 ### Set the path
 
@@ -102,9 +102,9 @@ Or, use negative indexing for the last message:
 
 ## Next steps
 
-* Learn more about [viewing and filtering traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
-* Explore [custom output rendering](https://docs.langchain.com/langsmith/custom-output-rendering) for advanced visualization.
-* Set up [metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags) to organize your traces.
+* Learn more about [viewing and filtering traces](filter-traces-in-application.md).
+* Explore [custom output rendering](custom-output-rendering.md) for advanced visualization.
+* Set up [metadata and tags](add-metadata-tags.md) to organize your traces.
 
 ***
 

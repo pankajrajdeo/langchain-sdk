@@ -2,7 +2,7 @@
 
 > Integrate with the Discord tool using LangChain Python.
 
-This guide provides a quick overview for getting started with Discord tooling in [langchain\_discord](https://docs.langchain.com/oss/python/integrations/tools/). For more details on each tool and configuration, see the docstrings in your repository or relevant doc pages.
+This guide provides a quick overview for getting started with Discord tooling in [langchain\_discord](../tools.md). For more details on each tool and configuration, see the docstrings in your repository or relevant doc pages.
 
 ## Overview
 

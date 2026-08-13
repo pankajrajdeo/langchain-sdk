@@ -3,11 +3,11 @@
 > Get started using legacy Gemini LLMs in LangChain.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Google models as text completion models. Many popular Google models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Google models as text completion models. Many popular Google models are [chat completion models](../../langchain/models.md).**
 >
-> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/).
+> You may be looking for [this page instead](../chat/google_generative_ai.md).
 
-A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Google Cloud Vertex AI [integration](https://docs.langchain.com/oss/python/integrations/llms/google_vertex_ai).
+A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Google Cloud Vertex AI [integration](google_vertex_ai.md).
 
 ## Setting up
 

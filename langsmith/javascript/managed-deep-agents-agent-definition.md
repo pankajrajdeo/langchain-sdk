@@ -5,7 +5,7 @@ Configure the model and core capabilities of a Managed Deep Agent.
 The agent definition selects the model and core capabilities of a Managed Deep Agent.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -51,14 +51,14 @@ export const agent = defineDeepAgent({
 
 | Parameter                              | What it does                                                          |
 | -------------------------------------- | --------------------------------------------------------------------- |
-| [`name`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#name)                        | Sets the agent and default deployment name                            |
-| [`model`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#model)                      | Selects the chat model                                                |
-| [`tools`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#tools)                      | Adds tools the agent can call                                         |
-| [`middleware`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#middleware)            | Adds behavior around model calls, tool calls, and the agent lifecycle |
-| [`subagents`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#subagents)              | Defines specialized agents for delegated tasks                        |
-| [`permissions`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#permissions)          | Controls path-level access for filesystem tools                       |
-| [`interruptOn`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
-| [`responseFormat`](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-agent-definition#structured-output) | Defines a structured output schema                                    |
+| [`name`](#name)                        | Sets the agent and default deployment name                            |
+| [`model`](#model)                      | Selects the chat model                                                |
+| [`tools`](#tools)                      | Adds tools the agent can call                                         |
+| [`middleware`](#middleware)            | Adds behavior around model calls, tool calls, and the agent lifecycle |
+| [`subagents`](#subagents)              | Defines specialized agents for delegated tasks                        |
+| [`permissions`](#permissions)          | Controls path-level access for filesystem tools                       |
+| [`interruptOn`](#human-in-the-loop)    | Pauses before selected tool calls for human approval                  |
+| [`responseFormat`](#structured-output) | Defines a structured output schema                                    |
 
 ## Name
 
@@ -101,7 +101,7 @@ Pass a LangChain chat model instance instead when you need to configure model pa
 
 ### Using LangSmith Gateway
 
-You can use [LangSmith Gateway](https://docs.langchain.com/langsmith/llm-gateway) to control rate limits, fallbacks, and more.
+You can use [LangSmith Gateway](../llm-gateway.md) to control rate limits, fallbacks, and more.
 
 In order to use, you should:
 
@@ -142,13 +142,13 @@ mda init my-agent --gateway
 
 Pass tools in the `tools` array to let the agent call application logic or external services.
 
-Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-mcp-connectors).
+Define tools in local modules, import them into the agent entry, and add them to the definition. See [Custom tools](managed-deep-agents-tools.md). To add tools from remote MCP servers without importing them into the agent entry, use [MCP connectors](managed-deep-agents-mcp-connectors.md).
 
 ## Middleware
 
 Pass middleware in the `middleware` array to add behavior around model calls, tool calls, and the agent lifecycle. Middleware runs in array order.
 
-See [Custom middleware](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-middleware).
+See [Custom middleware](managed-deep-agents-middleware.md).
 
 ## Subagents
 
@@ -162,7 +162,7 @@ Pass filesystem permission rules in `permissions` to control which paths the age
 
 Set `interruptOn` to pause before selected tool calls.
 
-Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools#human-in-the-loop).
+Use this for actions that require a person to approve, edit, or reject the call before it runs. See [Human-in-the-loop](managed-deep-agents-tools.md#human-in-the-loop).
 
 ## Structured output
 
@@ -170,7 +170,7 @@ Set `responseFormat` when the agent must return data that matches a schema inste
 
 See [Structured output](https://docs.langchain.com/oss/javascript/langchain/structured-output).
 
-Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-project-structure).
+Configure the system prompt, skills, memory, sandbox, identity, channels, and schedules through their project files rather than the agent definition. See [Project structure](managed-deep-agents-project-structure.md).
 
 ***
 

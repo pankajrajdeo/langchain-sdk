@@ -181,7 +181,7 @@ For non-LangChain applications or custom instrumentation, you can trace your app
 4. View the trace in your LangSmith dashboard ([example](https://smith.langchain.com/public/4f2890b1-f105-44aa-a6cf-c777dcc27a37/r)).
 
 > [!NOTE]
-> If your spans reference a parent from another service or process, see [Context propagation in distributed tracing](https://docs.langchain.com/langsmith/trace-with-opentelemetry#context-propagation-in-distributed-tracing) for how parent–child linking works and when a span can be dropped.
+> If your spans reference a parent from another service or process, see [Context propagation in distributed tracing](#context-propagation-in-distributed-tracing) for how parent–child linking works and when a span can be dropped.
 
 ## Send traces to an alternate provider
 
@@ -258,11 +258,11 @@ When sending traces to LangSmith via OpenTelemetry, the following attributes are
 | OpenTelemetry attribute        | LangSmith field                                  | Notes                                                                                                                                                                      |
 | ------------------------------ | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `langsmith.trace.name`         | Run name                                         | Overrides the span name for the run                                                                                                                                        |
-| `langsmith.span.kind`          | [Run type](https://docs.langchain.com/langsmith/run-data-format#run-types) | Values: `llm`, `chain`, `tool`, `retriever`, `embedding`, `prompt`, `parser`                                                                                               |
+| `langsmith.span.kind`          | [Run type](run-data-format.md#run-types) | Values: `llm`, `chain`, `tool`, `retriever`, `embedding`, `prompt`, `parser`                                                                                               |
 | `langsmith.trace.id`           | Trace ID                                         | The trace (root run) the span belongs to; set to attach to an existing trace                                                                                               |
 | `langsmith.span.id`            | Run ID                                           | This span's run ID (a UUID); overrides the ID derived from the OTLP span ID                                                                                                |
 | `langsmith.span.parent_id`     | Parent run ID                                    | Nests the span under an existing run by its run ID                                                                                                                         |
-| `langsmith.span.dotted_order`  | Dotted order                                     | Position in the trace tree: `<parent.dotted_order>.<timestamp><span.id>`. See [`dotted_order`](https://docs.langchain.com/langsmith/run-data-format#what-is-dotted_order). |
+| `langsmith.span.dotted_order`  | Dotted order                                     | Position in the trace tree: `<parent.dotted_order>.<timestamp><span.id>`. See [`dotted_order`](run-data-format.md#what-is-dotted_order). |
 | `langsmith.trace.session_id`   | Session ID                                       | Session identifier for related traces                                                                                                                                      |
 | `langsmith.trace.session_name` | Session name                                     | Name of the session                                                                                                                                                        |
 | `langsmith.span.tags`          | Tags                                             | Custom tags attached to the span (comma-separated)                                                                                                                         |
@@ -422,7 +422,7 @@ For exception events:
 
 ### Trace using the LangSmith SDK
 
-Use the LangSmith SDK's OpenTelemetry helper to configure export. The following example [traces a Google ADK agent](https://docs.langchain.com/langsmith/trace-with-google-adk):
+Use the LangSmith SDK's OpenTelemetry helper to configure export. The following example [traces a Google ADK agent](trace-with-google-adk.md):
 
 ```python
 import asyncio
@@ -498,13 +498,13 @@ def my_agent():
 ```
 
 > [!NOTE]
-> `langsmith.span.dotted_order` encodes the span's position in the trace tree. Build it from the parent's [`dotted_order`](https://docs.langchain.com/langsmith/run-data-format#what-is-dotted_order), a dot, then this span's timestamp followed by its `langsmith.span.id`.
+> `langsmith.span.dotted_order` encodes the span's position in the trace tree. Build it from the parent's [`dotted_order`](run-data-format.md#what-is-dotted_order), a dot, then this span's timestamp followed by its `langsmith.span.id`.
 
 ### Add an attachment to a trace
 
-LangSmith supports [attaching files to traces](https://docs.langchain.com/langsmith/upload-files-with-traces). This is useful when building an agent with multimodal inputs or outputs. Attachments are also supported when tracing with OpenTelemetry.
+LangSmith supports [attaching files to traces](upload-files-with-traces.md). This is useful when building an agent with multimodal inputs or outputs. Attachments are also supported when tracing with OpenTelemetry.
 
-The example below [traces a Google ADK agent](https://docs.langchain.com/langsmith/trace-with-google-adk) and adds an attachment to the trace. It uses a combination of LangSmith's `OtelSpanProcessor` and a custom `AttachmentSpanProcessor` that uses [`on_end()`](https://opentelemetry-python.readthedocs.io/en/latest/sdk/trace.export.html#opentelemetry.sdk.trace.export.SimpleSpanProcessor.on_end) to add an image attachment to the parent span.
+The example below [traces a Google ADK agent](trace-with-google-adk.md) and adds an attachment to the trace. It uses a combination of LangSmith's `OtelSpanProcessor` and a custom `AttachmentSpanProcessor` that uses [`on_end()`](https://opentelemetry-python.readthedocs.io/en/latest/sdk/trace.export.html#opentelemetry.sdk.trace.export.SimpleSpanProcessor.on_end) to add an image attachment to the parent span.
 
 ```python
 import asyncio
@@ -634,7 +634,7 @@ Here is an [example](https://smith.langchain.com/public/9574f70a-b893-49fe-8c62-
 
 Use `LANGSMITH_OTEL_ENABLED=true` when you need OTEL fanout. Configure your application to emit OTEL spans once, then use an OpenTelemetry Collector to route them to LangSmith and any additional observability backends.
 
-Use this approach when you are tracing applications and want multi-destination routing. If you are operating LangSmith platform infrastructure telemetry (logs, metrics, traces from self-hosted LangSmith services on Kubernetes), use the [Configure your collector for LangSmith telemetry](https://docs.langchain.com/langsmith/langsmith-collector) guide instead.
+Use this approach when you are tracing applications and want multi-destination routing. If you are operating LangSmith platform infrastructure telemetry (logs, metrics, traces from self-hosted LangSmith services on Kubernetes), use the [Configure your collector for LangSmith telemetry](langsmith-collector.md) guide instead.
 
 For more advanced scenarios, you can use the OpenTelemetry Collector to fan out your telemetry data to multiple destinations. This is a more scalable approach than configuring multiple exporters in your application code.
 

@@ -17,11 +17,11 @@ If you need a custom knowledge base, you can use LangChain’s document loaders 
 > If you already have a knowledge base (for example a SQL database, a document database, a CRM, or an internal documentation system), you do **not** need to rebuild it. You can:
 >
 > * Connect it as a **tool** for an agent in Agentic RAG.
-> * Query it and supply the retrieved content as context to the LLM [(2-Step RAG)](https://docs.langchain.com/oss/python/deepagents/retrieval#2-step-rag).
+> * Query it and supply the retrieved content as context to the LLM [(2-Step RAG)](#2-step-rag).
 
 For more information, see the following tutorial to build a searchable knowledge base and minimal RAG workflow:
 
-#### [Tutorial: Semantic search](https://docs.langchain.com/oss/python/langchain/knowledge-base)
+#### [Tutorial: Semantic search](../langchain/knowledge-base.md)
 Learn how to create a searchable knowledge base from your own data using LangChain’s document loaders, embeddings, and vector stores.
 In this tutorial, you’ll build a search engine over a PDF, enabling retrieval of passages relevant to a query. You’ll also implement a minimal RAG workflow on top of this engine to see how external knowledge can be integrated into LLM reasoning.
 
@@ -67,19 +67,19 @@ Each component is modular: you can swap loaders, splitters, embeddings, or vecto
 
 ### Building blocks
 
-#### [Document loaders](https://docs.langchain.com/oss/python/integrations/document_loaders)
+#### [Document loaders](../integrations/document_loaders.md)
 Ingest data from external sources (Google Drive, Slack, Notion, etc.), returning standardized [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects.
 
-#### [Text splitters](https://docs.langchain.com/oss/python/integrations/splitters)
+#### [Text splitters](../integrations/splitters.md)
 Break large docs into smaller chunks that will be retrievable individually and fit within a model's context window.
 
-#### [Embedding models](https://docs.langchain.com/oss/python/integrations/embeddings)
+#### [Embedding models](../integrations/embeddings.md)
 An embedding model turns text into a vector of numbers so that texts with similar meaning land close together in that vector space.
 
-#### [Vector stores](https://docs.langchain.com/oss/python/integrations/vectorstores/)
+#### [Vector stores](../integrations/vectorstores.md)
 Specialized databases for storing and searching embeddings.
 
-#### [Retrievers](https://docs.langchain.com/oss/python/integrations/retrievers/)
+#### [Retrievers](../integrations/retrievers.md)
 A retriever is an interface that returns documents given an unstructured query.
 
 ## RAG architectures
@@ -116,10 +116,10 @@ graph TB
 
 <br />
 
-#### [Tutorial: Semantic search](https://docs.langchain.com/oss/python/langchain/knowledge-base)
+#### [Tutorial: Semantic search](../langchain/knowledge-base.md)
 Build a searchable knowledge base with document loaders, embeddings, and vector stores, then run a minimal retrieve-then-generate RAG workflow on top of it.
 
-#### [Tutorial: Evaluate a RAG application](https://docs.langchain.com/langsmith/evaluate-rag-tutorial)
+#### [Tutorial: Evaluate a RAG application](../langsmith/evaluate-rag-tutorial.md)
 Build a simple retrieve-then-generate RAG app and measure answer correctness, relevance, groundedness, and retrieval quality with LangSmith.
 
 ### Agentic RAG
@@ -251,7 +251,7 @@ response = agent.invoke({
 print(response['messages'][-1].content)
 ```
 
-#### [Tutorial: RAG with Deep Agents](https://docs.langchain.com/oss/python/deepagents/rag)
+#### [Tutorial: RAG with Deep Agents](rag.md)
 Build a documentation Q\&A agent that retrieves relevant chunks at query time, offloads them to the filesystem, and delegates analysis to subagents.
 
 ### Hybrid RAG
@@ -297,7 +297,7 @@ This architecture is suitable for:
 * Systems that require validation or quality control steps
 * Workflows involving multiple sources or iterative refinement
 
-#### [Tutorial: Agentic RAG with Self-Correction](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+#### [Tutorial: Agentic RAG with Self-Correction](../langgraph/agentic-rag.md)
 An example of **Hybrid RAG** that combines agentic reasoning with retrieval and self-correction.
 
 ***

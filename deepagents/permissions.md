@@ -7,10 +7,10 @@ Control which files and directories an agent can read or write to using declarat
 > [!NOTE]
 > Permissions require `deepagents>=0.5.2`.
 
-Permissions only apply to the built-in filesystem tools (`ls`, `read_file`, `glob`, `grep`, `write_file`, `edit_file`, `delete`). Custom tools and MCP tools that access the filesystem are not covered. Permissions also do not apply to [sandbox backends](https://docs.langchain.com/oss/python/deepagents/sandboxes), which support arbitrary command execution via the `execute` tool.
+Permissions only apply to the built-in filesystem tools (`ls`, `read_file`, `glob`, `grep`, `write_file`, `edit_file`, `delete`). Custom tools and MCP tools that access the filesystem are not covered. Permissions also do not apply to [sandbox backends](sandboxes.md), which support arbitrary command execution via the `execute` tool.
 
 > [!TIP]
-> Use `permissions` when you need **path-based allow/deny rules** on the built-in filesystem tools. Use [backend policy hooks](https://docs.langchain.com/oss/python/deepagents/backends#add-policy-hooks) when you need custom validation logic (rate limiting, audit logging, content inspection) or need to control custom tools.
+> Use `permissions` when you need **path-based allow/deny rules** on the built-in filesystem tools. Use [backend policy hooks](backends.md#add-policy-hooks) when you need custom validation logic (rate limiting, audit logging, content inspection) or need to control custom tools.
 
 ## Basic usage
 
@@ -41,7 +41,7 @@ Each `FilesystemPermission` has three fields:
 | ------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `operations` | `list["read" \| "write"]`          | Operations this rule applies to. `"read"` covers `ls`, `read_file`, `glob`, `grep`. `"write"` covers `write_file`, `edit_file`, `delete`.                     |
 | `paths`      | `list[str]`                        | Glob patterns for matching file paths (e.g., `["/workspace/**"]`). Supports `**` for recursive matching and `{a,b}` for alternation.                          |
-| `mode`       | `"allow" \| "deny" \| "interrupt"` | Whether to allow, deny, or pause for human approval on matching operations. Defaults to `"allow"`. See [Pause for human approval](https://docs.langchain.com/oss/python/deepagents/permissions#pause-for-human-approval). |
+| `mode`       | `"allow" \| "deny" \| "interrupt"` | Whether to allow, deny, or pause for human approval on matching operations. Defaults to `"allow"`. See [Pause for human approval](#pause-for-human-approval). |
 
 Rules use first-match-wins evaluation: the first rule whose `operations` and `paths` match the current call determines the outcome. If no rule matches, the call is **allowed** (permissive default).
 
@@ -71,7 +71,7 @@ agent = create_deep_agent(
 )
 ```
 
-Interrupt-mode rules are wired into the agent's human-in-the-loop middleware automatically and merge with any `interrupt_on` you pass, so you handle and resume them the same way as tool-call interrupts. See [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop) for the resume flow.
+Interrupt-mode rules are wired into the agent's human-in-the-loop middleware automatically and merge with any `interrupt_on` you pass, so you handle and resume them the same way as tool-call interrupts. See [Human-in-the-loop](human-in-the-loop.md) for the resume flow.
 
 > [!NOTE]
 > Deleting a directory is all-or-nothing: `delete` checks the `write` permission on the target and every descendant path, and refuses the entire operation if any of them is denied, rather than removing part of the tree. `delete` applies this same conservative check to an existing empty directory, since it is still a directory rather than a confirmed leaf target.
@@ -134,7 +134,7 @@ agent = create_deep_agent(
 
 ### Read-only memory
 
-Allow the agent to read memory files but prevent it from modifying them. This is useful for organization-wide policies or shared knowledge bases that should only be updated by application code. See [read-only vs writable memory](https://docs.langchain.com/oss/python/deepagents/memory#read-only-vs-writable-memory) for more context.
+Allow the agent to read memory files but prevent it from modifying them. This is useful for organization-wide policies or shared knowledge bases that should only be updated by application code. See [read-only vs writable memory](memory.md#read-only-vs-writable-memory) for more context.
 
 ```python
 from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
@@ -226,7 +226,7 @@ incorrect_permissions = [
 
 ## Subagent permissions
 
-[Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) inherit the parent agent's permissions by default. To give a subagent different permissions, set the `permissions` field in its spec. This **replaces** the parent's rules entirely.
+[Subagents](subagents.md) inherit the parent agent's permissions by default. To give a subagent different permissions, set the `permissions` field in its spec. This **replaces** the parent's rules entirely.
 
 ```python
 agent = create_deep_agent(
@@ -273,7 +273,7 @@ agent = create_deep_agent(
 
 ## Composite backends
 
-When using a [`CompositeBackend`](https://reference.langchain.com/python/deepagents/backends/composite/CompositeBackend) with a sandbox default, every permission path must be scoped under a known route prefix. Sandboxes support arbitrary command execution, so path-based restrictions alone cannot prevent filesystem access through shell commands. Scoping permissions to route-specific [backends](https://docs.langchain.com/oss/python/deepagents/backends) avoids this conflict.
+When using a [`CompositeBackend`](https://reference.langchain.com/python/deepagents/backends/composite/CompositeBackend) with a sandbox default, every permission path must be scoped under a known route prefix. Sandboxes support arbitrary command execution, so path-based restrictions alone cannot prevent filesystem access through shell commands. Scoping permissions to route-specific [backends](backends.md) avoids this conflict.
 
 ```python
 from deepagents.backends import CompositeBackend

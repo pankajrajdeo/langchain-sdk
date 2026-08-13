@@ -3,7 +3,7 @@
 > Integrate with the AIMLAPI LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of AI/ML API models as text completion models. Many of the latest and most popular AI/ML API models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of AI/ML API models as text completion models. Many of the latest and most popular AI/ML API models are [chat completion models](../../langchain/models.md).**
 >
 > You may be looking for the [AI/ML API chat docs](https://docs.aimlapi.com/).
 
@@ -19,7 +19,7 @@ This page helps you get started with AI/ML API text completion models.
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -39,7 +39,7 @@ if not os.getenv("AIMLAPI_API_KEY"):
     os.environ["AIMLAPI_API_KEY"] = getpass.getpass("Enter your AI/ML API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"

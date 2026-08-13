@@ -123,7 +123,7 @@ print(result["output"]["content"])
 ```
 
 > [!NOTE]
-> Deep research runs are not instant. `pro-fast` typically takes a few minutes; `pro` and `ultra` can take longer. Wire up a webhook (see [Webhook signature verification](https://docs.langchain.com/oss/python/integrations/tools/parallel_task#webhook-signature-verification)) for production usage rather than blocking on `invoke`.
+> Deep research runs are not instant. `pro-fast` typically takes a few minutes; `pro` and `ultra` can take longer. Wire up a webhook (see [Webhook signature verification](#webhook-signature-verification)) for production usage rather than blocking on `invoke`.
 
 For typed deep research, pass an `output_schema`:
 
@@ -233,7 +233,7 @@ if not ok:
 
 ## Chaining
 
-Bind `ParallelTaskRunTool` to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
+Bind `ParallelTaskRunTool` to any tool-calling chat model and drive an agent with [`create_agent`](../../langchain/agents.md):
 
 ```python
 from langchain.agents import create_agent

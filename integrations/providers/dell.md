@@ -25,7 +25,7 @@ uv add powerscale-rag-connector
 
 ### Document loaders
 
-For more information, see [available PowerScale loaders](https://docs.langchain.com/oss/python/integrations/document_loaders/powerscale).
+For more information, see [available PowerScale loaders](../document_loaders/powerscale.md).
 
 ***
 

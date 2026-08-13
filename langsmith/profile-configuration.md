@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/profile-configuration)
 Configure LangSmith SDK credentials and endpoints with a local profile file.
 
-LangSmith SDK profiles let you keep [API keys](https://docs.langchain.com/langsmith/create-account-api-key), endpoints, and workspace IDs in a reusable JSON file instead of setting the same environment variables in every shell session.
+LangSmith SDK profiles let you keep [API keys](create-account-api-key.md), endpoints, and workspace IDs in a reusable JSON file instead of setting the same environment variables in every shell session.
 
-Use profiles when you switch between [LangSmith Cloud regions](https://docs.langchain.com/langsmith/cloud#regional-storage), self-hosted instances, or [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces) often, or when you want a remote runtime to load the same SDK configuration from a mounted file.
+Use profiles when you switch between [LangSmith Cloud regions](cloud.md#regional-storage), self-hosted instances, or [workspaces](administration-overview.md#workspaces) often, or when you want a remote runtime to load the same SDK configuration from a mounted file.
 
 > [!WARNING]
 > Profile files can contain API keys and OAuth refresh tokens. Do not commit them to source control, bake them into container images, or print them in logs. Store and mount them with the same care as other credentials.
@@ -24,7 +24,7 @@ Profile support is available in the following releases:
 
 ## Profile file location
 
-By default, [SDKs](https://docs.langchain.com/langsmith/reference) look for a profile file at:
+By default, [SDKs](reference.md) look for a profile file at:
 
 ```text
 ~/.langsmith/config.json
@@ -45,7 +45,7 @@ Create `~/.langsmith/config.json` with a `profiles` object. Each profile can def
 | Field          | Description                                                                                |
 | -------------- | ------------------------------------------------------------------------------------------ |
 | `api_url`      | LangSmith API endpoint. Use the same value you would use for `LANGSMITH_ENDPOINT`.         |
-| `api_key`      | LangSmith API key. See [Create an account and API key](https://docs.langchain.com/langsmith/create-account-api-key). |
+| `api_key`      | LangSmith API key. See [Create an account and API key](create-account-api-key.md). |
 | `workspace_id` | Workspace ID. Required when the API key can access multiple workspaces.                    |
 | `oauth`        | OAuth token metadata created by LangSmith tooling.                                         |
 
@@ -92,7 +92,7 @@ For example:
 export LANGSMITH_PROFILE=eu
 ```
 
-The [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli) also accepts a global `--profile` flag, which takes precedence over `LANGSMITH_PROFILE` for that command:
+The [LangSmith CLI](langsmith-cli.md) also accepts a global `--profile` flag, which takes precedence over `LANGSMITH_PROFILE` for that command:
 
 ```shell
 langsmith --profile eu project list
@@ -100,7 +100,7 @@ langsmith --profile eu project list
 
 ## Manage profiles with the CLI
 
-Use the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli) to create, inspect, switch, and delete profiles without editing the JSON file by hand.
+Use the [LangSmith CLI](langsmith-cli.md) to create, inspect, switch, and delete profiles without editing the JSON file by hand.
 
 To create an API-key profile from an existing API key:
 
@@ -159,7 +159,7 @@ For a self-hosted instance, pass its base URL. The CLI reads the deployment's au
 langsmith auth login --api-url https://langsmith.example.com --profile self-hosted
 ```
 
-Self-hosted OAuth login requires Helm chart `0.16.0` or later with a signing JWKS. For configuration, see [Enabling Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp#enabling-remote-mcp). Otherwise create an API-key profile.
+Self-hosted OAuth login requires Helm chart `0.16.0` or later with a signing JWKS. For configuration, see [Enabling Remote MCP](langsmith-remote-mcp.md#enabling-remote-mcp). Otherwise create an API-key profile.
 
 For a headless environment, suppress automatic browser opening and pass a workspace ID:
 
@@ -310,7 +310,7 @@ export LANGSMITH_CONFIG_FILE="$RUNNER_TEMP/langsmith/config.json"
 export LANGSMITH_PROFILE=prod
 ```
 
-For hosted [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud), configure these values as environment variables or [workspace secrets](https://docs.langchain.com/langsmith/set-up-hierarchy#configure-workspace-settings) unless the platform explicitly supports mounting secret files.
+For hosted [LangSmith Cloud](cloud.md), configure these values as environment variables or [workspace secrets](set-up-hierarchy.md#configure-workspace-settings) unless the platform explicitly supports mounting secret files.
 
 ***
 

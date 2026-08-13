@@ -5,7 +5,7 @@ Declare managed cron schedules for Managed Deep Agents deployments.
 Managed Deep Agents can run agents on a cron schedule. When you deploy the project, `mda deploy` provisions each schedule as a LangSmith cron after the deployment is live.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -63,7 +63,7 @@ Schedules use ephemeral threads by default. MDA creates a fresh thread for each 
 Use a persistent thread only when scheduled runs should accumulate durable thread state across invocations.
 
 > [!NOTE]
-> The following example requires [durable memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory).
+> The following example requires [durable memory](managed-deep-agents-memory.md).
 
 ```python
 from managed_deepagents import define_schedule
@@ -77,7 +77,7 @@ schedule = define_schedule(
 
 ## Deliver results to Slack
 
-Set `deliver_to` to post the final response through a configured [Slack channel](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels-slack).
+Set `deliver_to` to post the final response through a configured [Slack channel](managed-deep-agents-channels-slack.md).
 
 Use a Slack channel ID because scheduled runs have no originating thread.
 
@@ -114,7 +114,7 @@ Schedule declarations are extracted at compile time. Keep schedule configuration
 
 ## Deploy schedules
 
-Test the project locally with [`mda dev`](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#develop-locally), then deploy it with [`mda deploy`](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
+Test the project locally with [`mda dev`](managed-deep-agents-cli.md#develop-locally), then deploy it with [`mda deploy`](managed-deep-agents-deploy.md). Open deployment traces in LangSmith to inspect model calls, tool calls, errors, and latency.
 
 When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing MDA-owned cron jobs on the deployed Agent Server, deletes them, and creates cron jobs for the current `schedules/` declarations. Removing a local schedule file and redeploying removes the corresponding managed cron.
 
@@ -135,10 +135,10 @@ When the deployment reaches `DEPLOYED`, `mda deploy` searches for existing MDA-o
 
 ## Next steps
 
-#### [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy)
+#### [Deploy an agent](managed-deep-agents-deploy.md)
 Deploy and reconcile schedule changes.
 
-#### [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli)
+#### [CLI reference](managed-deep-agents-cli.md)
 Look up `mda deploy` flags and troubleshooting.
 
 ***

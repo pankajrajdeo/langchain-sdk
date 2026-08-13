@@ -3,7 +3,7 @@
 Scan and redact PII and secrets from LLM requests before they reach providers.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
 When a PII or secrets redaction policy is active, the gateway scans outbound requests before they reach the LLM provider. If sensitive data is detected, it is redacted from the request. The agent continues to receive a response.
 
@@ -109,7 +109,7 @@ This distinction matters. If your security model requires that sensitive data ne
 
 ## Next steps
 
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): add cost controls alongside data protection.
+* [Spend policies](llm-gateway-spend-policies.md): add cost controls alongside data protection.
 
 ***
 

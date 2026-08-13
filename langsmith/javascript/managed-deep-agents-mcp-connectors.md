@@ -5,7 +5,7 @@ Add tools from remote MCP servers to Managed Deep Agents.
 An MCP connector adds tools from remote [Model Context Protocol (MCP)](https://docs.langchain.com/oss/javascript/deepagents/mcp) servers to a Managed Deep Agent. Managed Deep Agents creates the MCP client, loads the tools, and adds them to the agent.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -38,7 +38,7 @@ export const connector = connectors.mcp({
 });
 ```
 
-Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`) transports. Stdio MCP servers are not supported. Expose a stdio server over HTTP or implement its operation as an [authored tool](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools).
+Managed Deep Agents supports Streamable HTTP (`"http"`) and legacy SSE (`"sse"`) transports. Stdio MCP servers are not supported. Expose a stdio server over HTTP or implement its operation as an [authored tool](managed-deep-agents-tools.md).
 
 ## Select tools
 
@@ -85,8 +85,8 @@ If a server requires credentials, read them from environment variables and pass 
 ## Distinguish connectors from other capabilities
 
 * **MCP connectors** add tools hosted by remote MCP servers.
-* **[Authored tools](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-tools)** implement application logic in the project and are passed through the agent definition.
-* **[Channels](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-channels)** receive external messages that start agent runs and deliver responses.
+* **[Authored tools](managed-deep-agents-tools.md)** implement application logic in the project and are passed through the agent definition.
+* **[Channels](managed-deep-agents-channels.md)** receive external messages that start agent runs and deliver responses.
 
 ***
 

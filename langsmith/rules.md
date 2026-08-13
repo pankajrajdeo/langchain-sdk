@@ -9,10 +9,10 @@ Automation rules can trigger actions such as: adding traces to a dataset, adding
 * Upgrade all traces with errors for extended data retention.
 
 > [!NOTE]
-> To configure online evaluations, visit the [online evaluations](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) page.
+> To configure online evaluations, visit the [online evaluations](online-evaluations-llm-as-judge.md) page.
 
 > [!NOTE]
-> An automation rule can upgrade matching traces to [extended data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades) when retention extension is enabled for that rule. This upgrade impacts trace pricing, but ensures that traces meeting your automation criteria (typically those most valuable for analysis) are preserved for investigation. Each action type has its own default, refer to the [action-level retention settings](https://docs.langchain.com/langsmith/rules#create-a-rule) for details. For the full retention model, see [data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+> An automation rule can upgrade matching traces to [extended data retention](usage-and-billing.md#data-retention-auto-upgrades) when retention extension is enabled for that rule. This upgrade impacts trace pricing, but ensures that traces meeting your automation criteria (typically those most valuable for analysis) are preserved for investigation. Each action type has its own default, refer to the [action-level retention settings](#create-a-rule) for details. For the full retention model, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## How automation rules execute
 
@@ -27,7 +27,7 @@ Within a single rule, if multiple actions are configured, they execute in this o
 5. Run custom code evaluator.
 6. Trigger alert.
 
-If your workflow requires data produced by one rule to be present when another fires—for example, you want a webhook to include an evaluation score—use a filter on the downstream rule to create that dependency explicitly. For an example, refer to [Ensuring evaluations complete before the webhook fires](https://docs.langchain.com/langsmith/webhooks#ensuring-evaluations-complete-before-the-webhook-fires).
+If your workflow requires data produced by one rule to be present when another fires—for example, you want a webhook to include an evaluation score—use a filter on the downstream rule to create that dependency explicitly. For an example, refer to [Ensuring evaluations complete before the webhook fires](webhooks.md#ensuring-evaluations-complete-before-the-webhook-fires).
 
 ## View automation rules
 
@@ -39,21 +39,21 @@ In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_cam
 
 2. Name your rule.
 
-3. Create a filter. Automation rule filters work the same way as filters applied to traces in the project. For more information on filters, you can refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+3. Create a filter. Automation rule filters work the same way as filters applied to traces in the project. For more information on filters, you can refer to [Filter traces](filter-traces-in-application.md).
 
 4. Configure a **Sampling Rate** to control the percentage of filtered runs that trigger the automation action. You can specify a sampling rate between 0 and 1 for automations. This will control the percent of the filtered runs that are sent to an automation action. For example, if you set the sampling rate to 0.5, then 50% of the traces that pass the filter will be sent to the action.
 
 5. (Optional) Apply rule to past runs by toggling the **Apply to past runs** and entering a **Backfill from** date. This is only possible upon rule creation.
 
 > [!NOTE]
->    The backfill is processed as a background job, so you will not see the results immediately. In order to track progress of the backfill, you can [view logs for your automations](https://docs.langchain.com/langsmith/rules#view-logs-for-your-automations).
+>    The backfill is processed as a background job, so you will not see the results immediately. In order to track progress of the backfill, you can [view logs for your automations](#view-logs-for-your-automations).
 
 6. Select an action to trigger when the rule is applied. There are four actions you can take with an automation rule:
 
-   * **Add to dataset**: Add the inputs and outputs of the trace to a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets).
-   * **Add to annotation queue**: Add the matching run/trace to an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues) as a **run** item. Automation rules do not enqueue entire [threads](https://docs.langchain.com/langsmith/observability-concepts#threads) as thread items; to review a full conversation, add the thread from the UI ([Assign runs and threads](https://docs.langchain.com/langsmith/annotation-queues#assign-runs-and-threads-to-a-single-run-queue)).
-   * **Trigger webhook**: Trigger a [webhook](https://docs.langchain.com/langsmith/use-webhooks) with the trace data.
-   * **Extend data retention**: Extends the data retention period on matching traces that use base retention [(refer to the data retention docs for more details)](https://docs.langchain.com/langsmith/usage-and-billing#data-retention).
+   * **Add to dataset**: Add the inputs and outputs of the trace to a [dataset](evaluation-concepts.md#datasets).
+   * **Add to annotation queue**: Add the matching run/trace to an [annotation queue](annotation-queues.md) as a **run** item. Automation rules do not enqueue entire [threads](observability-concepts.md#threads) as thread items; to review a full conversation, add the thread from the UI ([Assign runs and threads](annotation-queues.md#assign-runs-and-threads-to-a-single-run-queue)).
+   * **Trigger webhook**: Trigger a [webhook](use-webhooks.md) with the trace data.
+   * **Extend data retention**: Extends the data retention period on matching traces that use base retention [(refer to the data retention docs for more details)](usage-and-billing.md#data-retention).
 
 > [!NOTE]
 >      Each action has an independent **Extend data retention** toggle that controls whether matching traces are upgraded to extended retention:
@@ -63,7 +63,7 @@ In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_cam
 >      * **Trigger webhook**: opt-in (default: off). Enable the toggle to upgrade matching traces.
 >      * **Extend data retention** action and online/code evaluators: unchanged; always upgrade matching traces.
 >
->      The retention toggle for each action is an admin-only control, gated by the [`rules:configure-retention`](https://docs.langchain.com/langsmith/organization-workspace-operations#rules) permission. Non-admin workspace members see the toggles as disabled and cannot change them, but can still create and edit rules without affecting retention settings. For the full retention model, refer to [data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+>      The retention toggle for each action is an admin-only control, gated by the [`rules:configure-retention`](organization-workspace-operations.md#rules) permission. Non-admin workspace members see the toggles as disabled and cannot change them, but can still create and edit rules without affecting retention settings. For the full retention model, refer to [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ## View logs for your automations
 

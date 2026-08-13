@@ -82,7 +82,7 @@ for message in stream.messages:
         print(delta, end="", flush=True)
 ```
 
-See the [reasoning guide](https://docs.langchain.com/oss/python/langchain/models#reasoning) and your provider's integration page for model configuration details.
+See the [reasoning guide](models.md#reasoning) and your provider's integration page for model configuration details.
 
 ## Tool calls
 
@@ -271,15 +271,15 @@ agent = create_agent(
 )
 ```
 
-See [PII detection](https://docs.langchain.com/oss/python/langchain/middleware/built-in#pii-detection) for the full configuration surface.
+See [PII detection](middleware/built-in.md#pii-detection) for the full configuration surface.
 
-See [Build your own projection](https://docs.langchain.com/oss/python/langgraph/event-streaming#build-your-own-projection) for the transformer contract.
+See [Build your own projection](../langgraph/event-streaming.md#build-your-own-projection) for the transformer contract.
 
 ## Related
 
-* [Streaming](https://docs.langchain.com/oss/python/langchain/streaming) covers low-level Pregel stream modes.
-* [Build your own projection](https://docs.langchain.com/oss/python/langgraph/event-streaming#build-your-own-projection) covers writing application-specific projections.
-* [Frontend streaming patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview) shows UI use cases built on streamed state.
+* [Streaming](streaming.md) covers low-level Pregel stream modes.
+* [Build your own projection](../langgraph/event-streaming.md#build-your-own-projection) covers writing application-specific projections.
+* [Frontend streaming patterns](frontend/overview.md) shows UI use cases built on streamed state.
 
 ***
 

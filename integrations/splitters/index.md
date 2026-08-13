@@ -15,13 +15,13 @@ uv add langchain-text-splitters
 There are several strategies for splitting documents, each with its own advantages.
 
 > [!TIP]
-> For most use cases, start with the [`RecursiveCharacterTextSplitter`](https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter). It provides a solid balance between keeping context intact and managing chunk size. This default strategy works well out of the box, and you should only consider adjusting it if you need to fine-tune performance for your specific application.
+> For most use cases, start with the [`RecursiveCharacterTextSplitter`](recursive_text_splitter.md). It provides a solid balance between keeping context intact and managing chunk size. This default strategy works well out of the box, and you should only consider adjusting it if you need to fine-tune performance for your specific application.
 
 ## Text structure-based
 
 Text is naturally organized into hierarchical units such as paragraphs, sentences, and words. We can leverage this inherent structure to inform our splitting strategy, creating split that maintain natural language flow, maintain semantic coherence within split, and adapts to varying levels of text granularity. LangChain's `RecursiveCharacterTextSplitter` implements this concept:
 
-* The [`RecursiveCharacterTextSplitter`](https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter) attempts to keep larger units (e.g., paragraphs) intact.
+* The [`RecursiveCharacterTextSplitter`](recursive_text_splitter.md) attempts to keep larger units (e.g., paragraphs) intact.
 * If a unit exceeds the chunk size, it moves to the next level (e.g., sentences).
 * This process continues down to the word level if necessary.
 
@@ -36,7 +36,7 @@ texts = text_splitter.split_text(document)
 
 **Available text splitters**:
 
-* [Recursively split text](https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter)
+* [Recursively split text](recursive_text_splitter.md)
 
 ## Length-based
 
@@ -64,8 +64,8 @@ texts = text_splitter.split_text(document)
 
 **Available text splitters**:
 
-* [Split by tokens](https://docs.langchain.com/oss/python/integrations/splitters/split_by_token)
-* [Split by characters](https://docs.langchain.com/oss/python/integrations/splitters/character_text_splitter)
+* [Split by tokens](split_by_token.md)
+* [Split by characters](character_text_splitter.md)
 
 ## Document structure-based
 
@@ -84,10 +84,10 @@ Examples of structure-based splitting:
 
 **Available text splitters**:
 
-* [Split Markdown](https://docs.langchain.com/oss/python/integrations/splitters/markdown_header_metadata_splitter)
-* [Split JSON](https://docs.langchain.com/oss/python/integrations/splitters/recursive_json_splitter)
-* [Split code](https://docs.langchain.com/oss/python/integrations/splitters/code_splitter)
-* [Split HTML](https://docs.langchain.com/oss/python/integrations/splitters/split_html)
+* [Split Markdown](markdown_header_metadata_splitter.md)
+* [Split JSON](recursive_json_splitter.md)
+* [Split code](code_splitter.md)
+* [Split HTML](split_html.md)
 
 ***
 

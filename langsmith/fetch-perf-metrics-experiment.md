@@ -88,7 +88,7 @@ From here, you can extract performance metrics such as:
 
 Here is an example of how you can fetch the performance metrics for an experiment using the Python and TypeScript SDKs.
 
-First, as a prerequisite, we will create a trivial dataset. Here, we only demonstrate this in Python, but you can do the same in TypeScript. Please view the [how-to guide](https://docs.langchain.com/langsmith/evaluate-llm-application) on evaluation for more details.
+First, as a prerequisite, we will create a trivial dataset. Here, we only demonstrate this in Python, but you can do the same in TypeScript. Please view the [how-to guide](evaluate-llm-application.md) on evaluation for more details.
 
 ```python
 from langsmith import Client

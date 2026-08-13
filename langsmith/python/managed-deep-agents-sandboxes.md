@@ -6,7 +6,7 @@ Agents often want to write or execute code when doing their job.
 A sandbox gives a Managed Deep Agent an isolated filesystem and shell for working with files, running code, and executing commands.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -23,7 +23,7 @@ my-agent/
 
 `mda init` scaffolds a sandbox declaration. Managed Deep Agents enables the sandbox only while the `sandbox/` directory is present. Delete the directory to opt out, such as for an agent that only needs its prompt, memory, and tools.
 
-Declare the sandbox with `define_sandbox` (Python) or `defineSandbox` (TypeScript). Managed Deep Agents uses [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes) for this backend:
+Declare the sandbox with `define_sandbox` (Python) or `defineSandbox` (TypeScript). Managed Deep Agents uses [LangSmith Sandboxes](../sandboxes.md) for this backend:
 
 ```python
 from managed_deepagents import define_sandbox
@@ -57,7 +57,7 @@ The agent uses filesystem tools such as `ls`, `read_file`, `write_file`, `edit_f
 
 ## Sandbox lifecycle
 
-Managed Deep Agents owns sandbox naming, reuse, recovery, and cleanup. Deleting the deployment with `mda delete` also deletes the managed sandboxes associated with it. For platform-level lifecycle details, see [Sandboxes](https://docs.langchain.com/langsmith/sandboxes).
+Managed Deep Agents owns sandbox naming, reuse, recovery, and cleanup. Deleting the deployment with `mda delete` also deletes the managed sandboxes associated with it. For platform-level lifecycle details, see [Sandboxes](../sandboxes.md).
 
 ***
 

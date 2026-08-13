@@ -4,7 +4,7 @@ Execute code in isolated environments with sandbox backends
 
 Agents generate code, interact with filesystems, and run shell commands. Because you can't predict what an agent might do, it's important that its environment is isolated so it can't access credentials, files, or the network. Sandboxes provide this isolation by creating a boundary between the agent's execution environment and your host system.
 
-In Deep Agents, **sandboxes are [backends](https://docs.langchain.com/oss/python/deepagents/backends)** that define the environment where the agent operates. Unlike other backends (State, Filesystem, Store) which only expose file operations, sandbox backends also give the agent an `execute` tool for running shell commands. When you configure a sandbox backend, the agent gets:
+In Deep Agents, **sandboxes are [backends](backends.md)** that define the environment where the agent operates. Unlike other backends (State, Filesystem, Store) which only expose file operations, sandbox backends also give the agent an `execute` tool for running shell commands. When you configure a sandbox backend, the agent gets:
 
 * All standard filesystem tools (`ls`, `read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`)
 
@@ -46,14 +46,14 @@ Sandboxes are especially useful for:
 * Data analysis agents: Load files, install data analysis libraries (pandas, numpy, etc.), run statistical calculations, and create outputs like PowerPoint presentations in a safe, isolated environment
 
 > [!TIP]
-> **Using Deep Agents Code?** Deep Agents Code has built-in sandbox support via the `--sandbox` flag. See [Use remote sandboxes](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes) for Deep Agents Code-specific setup, flags (`--sandbox-id`, `--sandbox-setup`), and examples.
+> **Using Deep Agents Code?** Deep Agents Code has built-in sandbox support via the `--sandbox` flag. See [Use remote sandboxes](code/remote-sandboxes.md) for Deep Agents Code-specific setup, flags (`--sandbox-id`, `--sandbox-setup`), and examples.
 
 > [!NOTE]
-> **If you're looking for LangSmith sandboxes:** LangSmith provides first-party managed sandboxes you can use directly from the LangSmith UI or SDK without a third-party account required. For managed sandbox resources, snapshots, service URLs, and the auth proxy, refer to [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes).
+> **If you're looking for LangSmith sandboxes:** LangSmith provides first-party managed sandboxes you can use directly from the LangSmith UI or SDK without a third-party account required. For managed sandbox resources, snapshots, service URLs, and the auth proxy, refer to [LangSmith Sandboxes](../langsmith/sandboxes.md).
 
 ## Basic usage
 
-These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](https://docs.langchain.com/oss/python/deepagents/sandboxes#available-providers).
+These examples assume you have already created a sandbox/devbox using the provider's SDK and have credentials set up. For signup, authentication, and provider-specific lifecycle details, see [Available providers](#available-providers).
 
 #### LangSmith
 ```bash
@@ -654,21 +654,21 @@ finally:
 ```
 
 > [!TIP]
-> [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-sandboxes) traces show which shell commands ran inside a sandbox and how the agent used filesystem tools. Follow the [observability quickstart](https://docs.langchain.com/langsmith/observability-quickstart) to get set up. For managed sandbox hosting, see [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes).
+> [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-sandboxes) traces show which shell commands ran inside a sandbox and how the agent used filesystem tools. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up. For managed sandbox hosting, see [LangSmith Sandboxes](../langsmith/sandboxes.md).
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine), which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 ## Available providers
 
-For provider-specific setup, authentication, and lifecycle details, see [sandbox integrations](https://docs.langchain.com/oss/python/integrations/sandboxes).
+For provider-specific setup, authentication, and lifecycle details, see [sandbox integrations](../integrations/sandboxes.md).
 
 ## Lifecycle and scoping
 
-Most applications choose either one sandbox per [thread](https://docs.langchain.com/langsmith/use-threads) (thread-scoped) or one shared sandbox for every thread on the same [assistant](https://docs.langchain.com/langsmith/assistants) (assistant-scoped).
+Most applications choose either one sandbox per [thread](../langsmith/use-threads.md) (thread-scoped) or one shared sandbox for every thread on the same [assistant](../langsmith/assistants.md) (assistant-scoped).
 
 Sandboxes consume resources and cost money until they are shut down. Make sure you shut sandboxes down once they are no longer in use.
 
-For the full lifecycle table, async [graph factory](https://docs.langchain.com/langsmith/graph-rebuild) notes, TTL behavior, LangGraph Deployment wiring, and client-side examples, see [Sandbox lifecycle](https://docs.langchain.com/oss/python/deepagents/going-to-production#lifecycle) in Going to production.
+For the full lifecycle table, async [graph factory](../langsmith/graph-rebuild.md) notes, TTL behavior, LangGraph Deployment wiring, and client-side examples, see [Sandbox lifecycle](going-to-production.md#lifecycle) in Going to production.
 
 ### Thread-scoped (default)
 
@@ -1069,7 +1069,7 @@ async def agent(config: RunnableConfig):
     )
 ```
 
-For manual create, execute, and teardown outside a graph factory, see [Basic usage](https://docs.langchain.com/oss/python/deepagents/sandboxes#basic-usage) and [sandbox integrations](https://docs.langchain.com/oss/python/integrations/sandboxes) for provider-specific APIs.
+For manual create, execute, and teardown outside a graph factory, see [Basic usage](#basic-usage) and [sandbox integrations](../integrations/sandboxes.md) for provider-specific APIs.
 
 ## Integration patterns
 
@@ -1347,7 +1347,7 @@ All sandbox providers protect your host system from the agent's filesystem and s
 * **Context injection**: An attacker who controls part of the agent's input can instruct it to run arbitrary commands inside the sandbox. The sandbox is isolated, but the agent has full control within it.
 * **Network exfiltration**: Unless network access is blocked, a context-injected agent can send data out of the sandbox over HTTP or DNS. Some providers support blocking network access (e.g., `blockNetwork: true` on Modal).
 
-See [security considerations](https://docs.langchain.com/oss/python/deepagents/sandboxes#security-considerations) for how to handle secrets and mitigate these risks.
+See [security considerations](#security-considerations) for how to handle secrets and mitigate these risks.
 
 ### The `execute` method
 
@@ -1975,7 +1975,7 @@ If your agent needs to call authenticated APIs or access protected resources, yo
 > [!WARNING]
 > If you must inject secrets into a sandbox (not recommended), take these precautions:
 >
-> * Enable [human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop) approval for **all** tool calls, not just sensitive ones
+> * Enable [human-in-the-loop](human-in-the-loop.md) approval for **all** tool calls, not just sensitive ones
 > * Block or restrict network access from the sandbox to limit exfiltration paths
 > * Use the narrowest possible credential scope and shortest possible lifetime
 > * Monitor sandbox network traffic for unexpected outbound requests
@@ -1986,7 +1986,7 @@ If your agent needs to call authenticated APIs or access protected resources, yo
 
 * Review sandbox outputs before acting on them in your application
 * Block sandbox network access when not needed
-* Use [middleware](https://docs.langchain.com/oss/python/langchain/middleware) to filter or redact sensitive patterns in tool outputs
+* Use [middleware](../langchain/middleware.md) to filter or redact sensitive patterns in tool outputs
 * Treat everything produced inside the sandbox as untrusted input
 
 ***

@@ -2,7 +2,7 @@
 
 > Integrate with the LangSmithSandbox type using LangChain Python.
 
-LangSmith sandboxes are sandbox environments that LangChain manages for you, so there is no separate provider account, billing, or infrastructure to set up. They are the zero-setup default for running agent code, while third-party providers such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel remain available when you want to bring your own. Because they are part of the LangChain platform, you manage them alongside your other LangSmith resources. For setup, snapshots, service URLs, and the auth proxy, see the [LangSmith Sandboxes docs](https://docs.langchain.com/langsmith/sandboxes).
+LangSmith sandboxes are sandbox environments that LangChain manages for you, so there is no separate provider account, billing, or infrastructure to set up. They are the zero-setup default for running agent code, while third-party providers such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel remain available when you want to bring your own. Because they are part of the LangChain platform, you manage them alongside your other LangSmith resources. For setup, snapshots, service URLs, and the auth proxy, see the [LangSmith Sandboxes docs](../../langsmith/sandboxes.md).
 
 ## Installation
 
@@ -24,7 +24,7 @@ export LANGSMITH_API_KEY="<your-api-key>"
 
 ## Create a sandbox backend
 
-Create a LangSmith sandbox with `SandboxClient`, then wrap it in [LangSmithSandbox](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) to run it as a [Deep Agents backend](https://docs.langchain.com/oss/python/deepagents/backends).
+Create a LangSmith sandbox with `SandboxClient`, then wrap it in [LangSmithSandbox](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) to run it as a [Deep Agents backend](../../deepagents/backends.md).
 
 ```python
 from deepagents.backends.langsmith import LangSmithSandbox
@@ -86,8 +86,8 @@ You can also manage sandbox resources from the [LangSmith UI](https://smith.lang
 
 For more detail, see:
 
-* [Sandboxes in Deep Agents](https://docs.langchain.com/oss/python/deepagents/sandboxes): lifecycle, scoping, and a comparison of sandbox providers.
-* [LangSmith Sandboxes](https://docs.langchain.com/langsmith/sandboxes): snapshots, service URLs, the auth proxy, and the SDK reference.
+* [Sandboxes in Deep Agents](../../deepagents/sandboxes.md): lifecycle, scoping, and a comparison of sandbox providers.
+* [LangSmith Sandboxes](../../langsmith/sandboxes.md): snapshots, service URLs, the auth proxy, and the SDK reference.
 
 ***
 

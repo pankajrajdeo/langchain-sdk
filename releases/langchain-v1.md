@@ -2,13 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/releases/langchain-v1)
 **LangChain v1 is a focused, production-ready foundation for building agents.** We've streamlined the framework around three core improvements:
 
-#### [create_agent](https://docs.langchain.com/oss/python/releases/langchain-v1#create_agent)
+#### [create_agent](#create_agent)
 The new standard for building agents in LangChain, replacing `langgraph.prebuilt.create_react_agent`.
 
-#### [Standard content blocks](https://docs.langchain.com/oss/python/releases/langchain-v1#standard-content-blocks)
+#### [Standard content blocks](#standard-content-blocks)
 A new `content_blocks` property that provides unified access to modern LLM features across providers.
 
-#### [Simplified namespace](https://docs.langchain.com/oss/python/releases/langchain-v1#simplified-package)
+#### [Simplified namespace](#simplified-package)
 The `langchain` namespace has been streamlined to focus on essential building blocks for agents, with legacy functionality moved to `langchain-classic`.
 
 To upgrade,
@@ -21,11 +21,13 @@ pip install -U langchain
 uv add langchain
 ```
 
-For a complete list of changes, see the [migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1).
+For a complete list of changes, see the [migration guide](../migrate/langchain-v1.md).
+
+<a id="create_agent"></a>
 
 ## `create_agent`
 
-[`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is the standard way to build agents in LangChain 1.0. It provides a simpler interface than [`langgraph.prebuilt.create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) while offering greater customization potential by using [middleware](https://docs.langchain.com/oss/python/releases/langchain-v1#middleware).
+[`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is the standard way to build agents in LangChain 1.0. It provides a simpler interface than [`langgraph.prebuilt.create_react_agent`](https://reference.langchain.com/python/langchain-classic/agents/react/agent/create_react_agent) while offering greater customization potential by using [middleware](#middleware).
 
 ```python
 from langchain.agents import create_agent
@@ -45,19 +47,19 @@ result = agent.invoke({
 
 Under the hood, [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on the basic agent loop -- calling a model, letting it choose tools to execute, and then finishing when it calls no more tools:
 
-> **Image:** [Core agent loop diagram](https://docs.langchain.com/oss/python/releases/langchain-v1)
+> **Image:** [Core agent loop diagram](langchain-v1.md)
 
-For more information, see [Agents](https://docs.langchain.com/oss/python/langchain/agents).
+For more information, see [Agents](../langchain/agents.md).
 
 ### Middleware
 
 Middleware is the defining feature of [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent). It offers a highly customizable entry-point, raising the ceiling for what you can build.
 
-Great agents require [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering): getting the right information to the model at the right time. Middleware helps you control dynamic prompts, conversation summarization, selective tool access, state management, and guardrails through a composable abstraction.
+Great agents require [context engineering](../langchain/context-engineering.md): getting the right information to the model at the right time. Middleware helps you control dynamic prompts, conversation summarization, selective tool access, state management, and guardrails through a composable abstraction.
 
 #### Prebuilt middleware
 
-LangChain provides a few [prebuilt middlewares](https://docs.langchain.com/oss/python/langchain/middleware#built-in-middleware) for common patterns, including:
+LangChain provides a few [prebuilt middlewares](../langchain/middleware.md#built-in-middleware) for common patterns, including:
 
 * [`PIIMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/pii/PIIMiddleware): Redact sensitive information before sending to the model
 * [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware): Condense conversation history when it gets too long
@@ -104,7 +106,7 @@ agent = create_agent(
 
 You can also build custom middleware to fit your needs. Middleware exposes hooks at each step in an agent's execution:
 
-> **Image:** [Middleware flow diagram](https://docs.langchain.com/oss/python/releases/langchain-v1)
+> **Image:** [Middleware flow diagram](langchain-v1.md)
 
 Build custom middleware by implementing any of these hooks on a subclass of the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) class:
 
@@ -167,11 +169,11 @@ agent = create_agent(
 )
 ```
 
-For more information, see [the complete middleware guide](https://docs.langchain.com/oss/python/langchain/middleware).
+For more information, see [the complete middleware guide](../langchain/middleware.md).
 
 ### Built on LangGraph
 
-Because [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on [LangGraph](https://docs.langchain.com/oss/python/langgraph), you automatically get built in support for long running and reliable agents via:
+Because [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) is built on [LangGraph](../langgraph/index.md), you automatically get built in support for long running and reliable agents via:
 
 #### Persistence
 Conversations automatically persist across sessions with built-in checkpointing
@@ -264,9 +266,9 @@ for block in response.content_blocks:
 
 * **Provider agnostic**: Access reasoning traces, citations, built-in tools (web search, code interpreters, etc.), and other features using the same API regardless of provider
 * **Type safe**: Full type hints for all content block types
-* **Backward compatible**: Standard content can be [loaded lazily](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks), so there are no associated breaking changes
+* **Backward compatible**: Standard content can be [loaded lazily](../langchain/messages.md#standard-content-blocks), so there are no associated breaking changes
 
-For more information, see our guide on [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
+For more information, see our guide on [content blocks](../langchain/messages.md#standard-content-blocks).
 
 ***
 
@@ -342,7 +344,7 @@ from langchain_classic import hub  # [!code ++]
 
 ## Migration guide
 
-See our [migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1) for help updating your code to LangChain v1.
+See our [migration guide](../migrate/langchain-v1.md) for help updating your code to LangChain v1.
 
 ## Reporting issues
 
@@ -356,13 +358,13 @@ Read the announcement
 #### [Middleware guide](https://blog.langchain.com/agent-middleware/)
 Deep dive into middleware
 
-#### [Agents Documentation](https://docs.langchain.com/oss/python/langchain/agents)
+#### [Agents Documentation](../langchain/agents.md)
 Full agent documentation
 
-#### [Message Content](https://docs.langchain.com/oss/python/langchain/messages#message-content)
+#### [Message Content](../langchain/messages.md#message-content)
 New content blocks API
 
-#### [Migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1)
+#### [Migration guide](../migrate/langchain-v1.md)
 How to migrate to LangChain v1
 
 #### [GitHub](https://github.com/langchain-ai/langchain)
@@ -370,8 +372,8 @@ Report issues or contribute
 
 ## See also
 
-* [Versioning](https://docs.langchain.com/oss/python/versioning) – Understanding version numbers
-* [Release policy](https://docs.langchain.com/oss/python/release-policy) – Detailed release policies
+* [Versioning](../versioning.md) – Understanding version numbers
+* [Release policy](../release-policy.md) – Detailed release policies
 
 ***
 

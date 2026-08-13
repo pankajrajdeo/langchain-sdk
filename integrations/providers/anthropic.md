@@ -6,15 +6,15 @@ This page covers all LangChain integrations with [Anthropic](https://www.anthrop
 
 ## Model interfaces
 
-#### [ChatAnthropic](https://docs.langchain.com/oss/python/integrations/chat/anthropic)
+#### [ChatAnthropic](../chat/anthropic.md)
 Anthropic chat models.
 
-#### [Anthropic middleware](https://docs.langchain.com/oss/python/integrations/middleware/anthropic)
+#### [Anthropic middleware](../middleware/anthropic.md)
 Anthropic-specific middleware for Claude models.
 
 ## Other
 
-#### [AnthropicLLM](https://docs.langchain.com/oss/python/integrations/llms/anthropic)
+#### [AnthropicLLM](../llms/anthropic.md)
 (Legacy) Anthropic text completion models.
 
 ***

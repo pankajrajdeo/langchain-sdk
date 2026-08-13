@@ -2,11 +2,11 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/fleet/mcp-framework)
 The LangSmith Tool Server is a standalone MCP framework for building and deploying tools with built-in authentication and authorization. Use the Tool Server when you want to:
 
-* [Create custom tools](https://docs.langchain.com/langsmith/fleet/mcp-framework#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](https://docs.langchain.com/langsmith/agent-auth) for OAuth authentication
-* [Build an MCP gateway](https://docs.langchain.com/langsmith/fleet/mcp-framework#use-as-an-mcp-gateway) for agents you're building yourself (outside of Fleet)
+* [Create custom tools](#create-a-custom-toolkit) that integrate with LangSmith's [Agent Auth](../agent-auth.md) for OAuth authentication
+* [Build an MCP gateway](#use-as-an-mcp-gateway) for agents you're building yourself (outside of Fleet)
 
 > [!NOTE]
-> If you're using [Fleet](https://docs.langchain.com/langsmith/fleet/index), you don't need to interact with the Tool Server directly. Fleet provides [built-in tools](https://docs.langchain.com/langsmith/fleet/tools) and supports [remote MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) without requiring Tool Server setup.
+> If you're using [Fleet](index.md), you don't need to interact with the Tool Server directly. Fleet provides [built-in tools](tools.md) and supports [remote MCP servers](remote-mcp-servers.md) without requiring Tool Server setup.
 >
 > However, you can configure the associated tool server instance as an MCP server, which will allow you to use your custom MCP servers in your agent.
 
@@ -42,7 +42,7 @@ my-toolkit/
         └── ...
 ```
 
-Define your tools using the `@tool` decorator. For more on tool schemas, return values, error handling, and `ToolRuntime`, see the [Tools guide](https://docs.langchain.com/oss/python/langchain/tools).
+Define your tools using the `@tool` decorator. For more on tool schemas, return values, error handling, and `ToolRuntime`, see the [Tools guide](../../langchain/tools.md).
 
 ```python
 from langsmith_tool_server import tool
@@ -121,9 +121,9 @@ All tools from connected MCP servers are exposed through your server's `/mcp` en
 
 ### OAuth for third-party APIs
 
-For tools that need to access third-party APIs (like Google, GitHub, Slack, etc.), you can use OAuth authentication with [Agent Auth](https://docs.langchain.com/langsmith/agent-auth).
+For tools that need to access third-party APIs (like Google, GitHub, Slack, etc.), you can use OAuth authentication with [Agent Auth](../agent-auth.md).
 
-Before using OAuth in your tools, you'll need to configure an OAuth provider in your LangSmith workspace settings. See the [Agent Auth documentation](https://docs.langchain.com/langsmith/agent-auth) for setup instructions.
+Before using OAuth in your tools, you'll need to configure an OAuth provider in your LangSmith workspace settings. See the [Agent Auth documentation](../agent-auth.md) for setup instructions.
 
 Once configured, specify the `auth_provider` in your tool decorator:
 

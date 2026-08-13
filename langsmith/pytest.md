@@ -10,13 +10,13 @@ Compared to the standard evaluation flow, this is useful when:
 * **You already use pytest to test your app**: Add LangSmith tracking to existing pytest workflows
 
 > [!NOTE]
-> The JS/TS SDK has an analogous [Vitest/Jest integration](https://docs.langchain.com/langsmith/vitest-jest).
+> The JS/TS SDK has an analogous [Vitest/Jest integration](vitest-jest.md).
 
 ## Installation
 
 This functionality requires Python SDK version `langsmith>=0.3.4`.
 
-For extra features like [rich terminal outputs](https://docs.langchain.com/langsmith/pytest#rich-outputs) and [test caching](https://docs.langchain.com/langsmith/pytest#caching) install:
+For extra features like [rich terminal outputs](#rich-outputs) and [test caching](#caching) install:
 
 ```bash
 pip install -U "langsmith[pytest]"
@@ -88,18 +88,18 @@ LANGSMITH_TEST_SUITE='SQL app tests' pytest tests/
 
 Each time you run this test suite, LangSmith:
 
-* creates a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) for each test file. If a dataset for this test file already exists it will be updated
-* creates an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) in each created/updated dataset
+* creates a [dataset](evaluation-concepts.md#datasets) for each test file. If a dataset for this test file already exists it will be updated
+* creates an [experiment](evaluation-concepts.md#experiment) in each created/updated dataset
 * creates an experiment row for each test case, with the inputs, outputs, reference outputs and feedback you've logged
 * collects the pass/fail rate under the `pass` feedback key for each test case
 
 Here's what a test suite dataset looks like:
 
-> **Image:** [Dataset](https://docs.langchain.com/langsmith/pytest)
+> **Image:** [Dataset](pytest.md)
 
 And what an experiment against that test suite looks like:
 
-> **Image:** [Experiment](https://docs.langchain.com/langsmith/pytest)
+> **Image:** [Experiment](pytest.md)
 
 ## Log inputs, outputs, and reference outputs
 
@@ -342,7 +342,7 @@ pytest --langsmith-output tests
 
 You'll get a nice table per test suite that updates live as the results are uploaded to LangSmith:
 
-> **Image:** [Rich pytest outputs](https://docs.langchain.com/langsmith/pytest)
+> **Image:** [Rich pytest outputs](pytest.md)
 
 Some important notes for using this feature:
 

@@ -94,9 +94,9 @@ for await (const event of stream) {
 
 ## Next steps
 
-* [Trace Anthropic models](https://docs.langchain.com/langsmith/trace-anthropic) — trace standard Anthropic API calls and tool use
-* [Trace Claude Agent SDK applications](https://docs.langchain.com/langsmith/trace-claude-agent-sdk) — trace the Claude Agent SDK for local agentic apps
-* [Monitor your agent](https://docs.langchain.com/langsmith/dashboards) — set up dashboards and alerts for production agents
+* [Trace Anthropic models](trace-anthropic.md) — trace standard Anthropic API calls and tool use
+* [Trace Claude Agent SDK applications](trace-claude-agent-sdk.md) — trace the Claude Agent SDK for local agentic apps
+* [Monitor your agent](dashboards.md) — set up dashboards and alerts for production agents
 
 ***
 

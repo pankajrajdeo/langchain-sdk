@@ -1,7 +1,7 @@
 # Customize user management
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-user-management)
 > [!NOTE]
-> This guide assumes you have read the [admin guide](https://docs.langchain.com/langsmith/administration-overview) and [organization setup guide](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-an-organization).
+> This guide assumes you have read the [admin guide](administration-overview.md) and [organization setup guide](set-up-hierarchy.md#set-up-an-organization).
 
 LangSmith offers additional customization features for user management using feature flags.
 
@@ -35,7 +35,7 @@ Once a user joins an organization, any changes to their workspaces or roles beyo
 > [!NOTE]
 > By default, all new users are added to the organization’s initially provisioned workspace (**Workspace 1** by default) with the **Workspace Editor** role.
 
-> **Image:** [Update SSO Member Settings](https://docs.langchain.com/langsmith/self-host-user-management)
+> **Image:** [Update SSO Member Settings](self-host-user-management.md)
 
 > [!NOTE]
 > To change your default organization, use **Set Default Organization** in the organization selector dropdown. (Org Admin permissions required in both the source and target organization.)
@@ -45,9 +45,9 @@ Once a user joins an organization, any changes to their workspaces or roles beyo
 > [!NOTE]
 > SSO Groups Sync on self-hosted requires LangSmith chart version **0.15.0-rc.3** (application version **0.15.2rc1**) or later.
 
-[SSO Groups Sync](https://docs.langchain.com/langsmith/user-management#sso-groups-sync-alternative) reads group memberships from the OIDC ID token and assigns org and workspace roles using the [SCIM naming convention](https://docs.langchain.com/langsmith/user-management#group-naming-convention). It is a simpler alternative to [SCIM](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization) for self-hosted organizations whose IdP can include groups in the OIDC token but cannot easily run SCIM provisioning.
+[SSO Groups Sync](user-management.md#sso-groups-sync-alternative) reads group memberships from the OIDC ID token and assigns org and workspace roles using the [SCIM naming convention](user-management.md#group-naming-convention). It is a simpler alternative to [SCIM](user-management.md#set-up-scim-for-your-organization) for self-hosted organizations whose IdP can include groups in the OIDC token but cannot easily run SCIM provisioning.
 
-For IdP-side configuration (claim, scope) refer to the [SSO Groups Sync section in the OIDC SSO setup guide](https://docs.langchain.com/langsmith/self-host-sso#sso-groups-sync). For settings reference and behavior, see the [main SSO Groups Sync documentation](https://docs.langchain.com/langsmith/user-management#sso-groups-sync-alternative).
+For IdP-side configuration (claim, scope) refer to the [SSO Groups Sync section in the OIDC SSO setup guide](self-host-sso.md#sso-groups-sync). For settings reference and behavior, see the [main SSO Groups Sync documentation](user-management.md#sso-groups-sync-alternative).
 
 ### Disabling organization creating
 
@@ -56,7 +56,7 @@ By default, any user can create an organization in LangSmith. For self-hosted cu
 #### Configuration
 
 > [!NOTE]
-> The `userOrgCreationDisabled` feature flag is set to `true` by default for organizations using [basic auth](https://docs.langchain.com/langsmith/self-host-basic-auth) or [SSO](https://docs.langchain.com/langsmith/self-host-sso).
+> The `userOrgCreationDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
 
 ```yaml
 config:
@@ -70,7 +70,7 @@ By default, any user who logs in to LangSmith will have a personal organization 
 #### Configuration
 
 > [!NOTE]
-> The `personalOrgsDisabled` feature flag is set to `true` by default for organizations using [basic auth](https://docs.langchain.com/langsmith/self-host-basic-auth) or [SSO](https://docs.langchain.com/langsmith/self-host-sso).
+> The `personalOrgsDisabled` feature flag is set to `true` by default for organizations using [basic auth](self-host-basic-auth.md) or [SSO](self-host-sso.md).
 
 ```yaml
 config:
@@ -84,7 +84,7 @@ config:
 
 By default, users can create Personal Access Tokens (PATs) in any organization. For self-hosted customers, an admin may want to globally disable PAT creation across all organizations. This environment variable allows an admin to prevent users from creating new PATs in any organization on the instance.
 
-To disable PAT creation for a single organization instead, see the [per-organization API option](https://docs.langchain.com/langsmith/manage-organization-by-api#security-settings).
+To disable PAT creation for a single organization instead, see the [per-organization API option](manage-organization-by-api.md#security-settings).
 
 #### Configuration
 

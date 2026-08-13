@@ -1,10 +1,10 @@
 # Configure custom TLS certificates
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates)
-Use this guide to configure TLS in LangSmith. Start by mounting internal certificate authorities (CAs) so your deployment trusts the right roots system‑wide, for database or external service calls. You can then configure [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground)-specific mTLS for communicating securely with supported model providers.
+Use this guide to configure TLS in LangSmith. Start by mounting internal certificate authorities (CAs) so your deployment trusts the right roots system‑wide, for database or external service calls. You can then configure [Playground](prompt-engineering-concepts.md#playground)-specific mTLS for communicating securely with supported model providers.
 
 This page covers:
 
-* [Mounting internal certificate authorities](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls) (CAs) system-wide to enable TLS for database connections and Playground model calls
+* [Mounting internal certificate authorities](#mount-internal-cas-for-tls) (CAs) system-wide to enable TLS for database connections and Playground model calls
 * Using Playground-specific TLS settings to provide client certs/keys for mTLS with supported model providers
 
 ## Mount internal CAs for TLS
@@ -12,7 +12,7 @@ This page covers:
 > [!NOTE]
 > You must use Helm chart version 0.11.9 or later to mount internal CAs using the configuration below.
 
-Use this approach to make internal/public CAs trusted system‑wide by LangSmith (Playground model calls and [database/external service connections](https://docs.langchain.com/langsmith/self-hosted#storage-services)).
+Use this approach to make internal/public CAs trusted system‑wide by LangSmith (Playground model calls and [database/external service connections](self-hosted.md#storage-services)).
 
 1. Create a file containing all CAs required for TLS with databases and external services. If your deployment is communicating directly to `beacon.langchain.com` without a proxy, make sure to include a public trusted CA. All certs should be concatenated in this file with an empty line in between.
 ```
@@ -55,17 +55,17 @@ Use this approach to make internal/public CAs trusted system‑wide by LangSmith
 >
 > * Azure OpenAI
 > * OpenAI
-> * Custom (our custom model server). Refer to the [custom model server documentation](https://docs.langchain.com/langsmith/custom-endpoint) for more information.
+> * Custom (our custom model server). Refer to the [custom model server documentation](custom-endpoint.md) for more information.
 >
 > These TLS settings apply to all invocations of the selected model providers (including Online Evaluation). Use them when the provider requires mutual TLS (client cert/key) or when you must override trust with a specific CA for provider calls. They complement the internal CA bundle configured above.
 
 You can use custom TLS certificates to connect to model providers in the Playground. This is useful if you are using a self-signed certificate, a certificate from a custom certificate authority, or mutual TLS authentication.
 
-To use custom TLS certificates, set the following environment variables. See the [self-hosted overview](https://docs.langchain.com/langsmith/self-hosted) for more information on how to configure application settings.
+To use custom TLS certificates, set the following environment variables. See the [self-hosted overview](self-hosted.md) for more information on how to configure application settings.
 
 * \[Optional] `LANGSMITH_PLAYGROUND_TLS_KEY`: The private key in PEM format. This must be a file path (for a mounted volume). This is usually only necessary for mutual TLS authentication.
 * \[Optional] `LANGSMITH_PLAYGROUND_TLS_CERT`: The certificate in PEM format. This must be a file path (for a mounted volume). This is usually only necessary for mutual TLS authentication.
-* \[Optional] `LANGSMITH_PLAYGROUND_TLS_CA`: The custom certificate authority (CA) certificate in PEM format. This must be a file path (for a mounted volume). Use this to mount CAs only if you're using a helm version below `0.11.9`; otherwise, use the [Mount internal CAs for TLS](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates#mount-internal-cas-for-tls) section above.
+* \[Optional] `LANGSMITH_PLAYGROUND_TLS_CA`: The custom certificate authority (CA) certificate in PEM format. This must be a file path (for a mounted volume). Use this to mount CAs only if you're using a helm version below `0.11.9`; otherwise, use the [Mount internal CAs for TLS](#mount-internal-cas-for-tls) section above.
 
 Once you have set these environment variables, enter the Playground **Settings** page and select the **Provider** that requires custom TLS certificates. Set your model provider configuration as usual, and the custom TLS certificates will be used when connecting to the model provider.
 

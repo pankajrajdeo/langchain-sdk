@@ -402,7 +402,7 @@ The experiment will contain the results of the evaluation, including the scores 
 
 ## Related
 
-* [Evaluate a `langgraph` graph](https://docs.langchain.com/langsmith/evaluate-on-intermediate-steps)
+* [Evaluate a `langgraph` graph](evaluate-on-intermediate-steps.md)
 
 ***
 

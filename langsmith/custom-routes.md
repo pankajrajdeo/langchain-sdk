@@ -1,6 +1,6 @@
 # How to add custom routes
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/custom-routes)
-When deploying agents to LangSmith Deployment, your server automatically exposes routes for creating runs and threads, interacting with the long-term memory store, managing configurable assistants, and other core functionality ([see all default API endpoints](https://docs.langchain.com/langsmith/server-api-ref)).
+When deploying agents to LangSmith Deployment, your server automatically exposes routes for creating runs and threads, interacting with the long-term memory store, managing configurable assistants, and other core functionality ([see all default API endpoints](server-api-ref.md)).
 
 You can add custom routes by providing your own app object and passing its path in `langgraph.json` (for example, a [`Starlette`](https://www.starlette.io/applications/) app in Python or a [`Hono`](https://hono.dev/) app in TypeScript).
 
@@ -56,7 +56,7 @@ The `hono` package must be available in your project dependencies.
 
 ## Configure `langgraph.json`
 
-Add the following to your `langgraph.json` configuration file. Make sure the path points to the app instance you created in the [previous section](https://docs.langchain.com/langsmith/custom-routes#create-app).
+Add the following to your `langgraph.json` configuration file. Make sure the path points to the app instance you created in the [previous section](#create-app).
 
 #### Python
 ```json
@@ -112,7 +112,7 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 
 ## Next steps
 
-Now that you've added a custom route to your deployment, you can use this same technique to further customize how your server behaves, such as defining [custom middleware](https://docs.langchain.com/langsmith/custom-middleware) and [custom lifespan events](https://docs.langchain.com/langsmith/custom-lifespan).
+Now that you've added a custom route to your deployment, you can use this same technique to further customize how your server behaves, such as defining [custom middleware](custom-middleware.md) and [custom lifespan events](custom-lifespan.md).
 
 ***
 

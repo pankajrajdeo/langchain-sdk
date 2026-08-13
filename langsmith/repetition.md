@@ -31,9 +31,9 @@ await evaluate((inputs) => labelText(inputs["input"]), {
 
 ## Viewing results of experiments run with repetitions
 
-If you've run your experiment with [repetitions](https://docs.langchain.com/langsmith/repetition), there will be arrows in the output results column so you can view outputs in the table. To view each run from the repetition, hover over the output cell and click the expanded view. When you run an experiment with repetitions, LangSmith displays the average for each feedback score in the table. Click on the feedback score to view the feedback scores from individual runs, or to view the standard deviation across repetitions.
+If you've run your experiment with [repetitions](repetition.md), there will be arrows in the output results column so you can view outputs in the table. To view each run from the repetition, hover over the output cell and click the expanded view. When you run an experiment with repetitions, LangSmith displays the average for each feedback score in the table. Click on the feedback score to view the feedback scores from individual runs, or to view the standard deviation across repetitions.
 
-> **Image:** [Repetitions](https://docs.langchain.com/langsmith/repetition)
+> **Image:** [Repetitions](repetition.md)
 
 ***
 

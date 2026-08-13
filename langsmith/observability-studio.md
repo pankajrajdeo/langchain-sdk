@@ -1,18 +1,18 @@
 # Observability in Studio
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-studio)
-LangSmith [Studio](https://docs.langchain.com/langsmith/studio) provides tools to inspect, debug, and improve your app beyond execution. By working with traces, datasets, and prompts, you can see how your application behaves in detail, measure its performance, and refine its outputs:
+LangSmith [Studio](studio.md) provides tools to inspect, debug, and improve your app beyond execution. By working with traces, datasets, and prompts, you can see how your application behaves in detail, measure its performance, and refine its outputs:
 
-* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio#iterate-on-prompts): Modify prompts inside graph nodes directly or with the Playground.
-* [Run experiments over a dataset](https://docs.langchain.com/langsmith/observability-studio#run-experiments-over-a-dataset): Execute your assistant over a LangSmith dataset to score and compare results.
-* [Debug LangSmith traces](https://docs.langchain.com/langsmith/observability-studio#debug-langsmith-traces): Import traced runs into Studio and optionally clone them into your local agent.
-* [Add a node to a dataset](https://docs.langchain.com/langsmith/observability-studio#add-node-to-dataset): Turn parts of thread history into dataset examples for evaluation or further analysis.
+* [Iterate on prompts](#iterate-on-prompts): Modify prompts inside graph nodes directly or with the Playground.
+* [Run experiments over a dataset](#run-experiments-over-a-dataset): Execute your assistant over a LangSmith dataset to score and compare results.
+* [Debug LangSmith traces](#debug-langsmith-traces): Import traced runs into Studio and optionally clone them into your local agent.
+* [Add a node to a dataset](#add-node-to-dataset): Turn parts of thread history into dataset examples for evaluation or further analysis.
 
 ## Iterate on prompts
 
 Studio supports the following methods for modifying prompts in your graph:
 
-* [Direct node editing](https://docs.langchain.com/langsmith/observability-studio#direct-node-editing)
-* [Playground interface](https://docs.langchain.com/langsmith/observability-studio#playground)
+* [Direct node editing](#direct-node-editing)
+* [Playground interface](#playground)
 
 ### Direct node editing
 
@@ -20,7 +20,7 @@ Studio allows you to edit prompts used inside individual nodes, directly from th
 
 ### Graph configuration
 
-Define your [configuration](https://docs.langchain.com/oss/python/langgraph/use-graph-api#add-runtime-configuration) to specify prompt fields and their associated nodes using `langgraph_nodes` and `langgraph_type` keys.
+Define your [configuration](../langgraph/use-graph-api.md#add-runtime-configuration) to specify prompt fields and their associated nodes using `langgraph_nodes` and `langgraph_type` keys.
 
 #### `langgraph_nodes`
 
@@ -129,7 +129,7 @@ class Configuration:
 
 ### Playground
 
-The [Playground](https://docs.langchain.com/langsmith/create-a-prompt) interface allows testing individual LLM calls without running the full graph:
+The [Playground](create-a-prompt.md) interface allows testing individual LLM calls without running the full graph:
 
 1. Select a thread.
 2. Click **View LLM Runs** on a node. This lists all the LLM calls (if any) made inside the node.
@@ -139,7 +139,7 @@ The [Playground](https://docs.langchain.com/langsmith/create-a-prompt) interface
 
 ## Run experiments over a dataset
 
-Studio lets you run [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts) by executing your assistant against a predefined LangSmith [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets). This allows you to test performance across a variety of inputs, compare outputs to reference answers, and score results with configured [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators).
+Studio lets you run [evaluations](evaluation-concepts.md) by executing your assistant against a predefined LangSmith [dataset](evaluation-concepts.md#datasets). This allows you to test performance across a variety of inputs, compare outputs to reference answers, and score results with configured [evaluators](evaluation-concepts.md#evaluators).
 
 This guide shows you how to run a full end-to-end experiment directly from Studio.
 
@@ -147,19 +147,19 @@ This guide shows you how to run a full end-to-end experiment directly from Studi
 
 Before running an experiment, ensure you have the following:
 
-* **A LangSmith dataset**: Your dataset should contain the inputs you want to test and optionally, reference outputs for comparison. The schema for the inputs must match the required input schema for the assistant. For more information on schemas, see the [graph API schema documentation](https://docs.langchain.com/oss/python/langgraph/graph-api#schema). For more on creating datasets, refer to [How to Manage Datasets](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples).
+* **A LangSmith dataset**: Your dataset should contain the inputs you want to test and optionally, reference outputs for comparison. The schema for the inputs must match the required input schema for the assistant. For more information on schemas, see the [graph API schema documentation](../langgraph/graph-api.md#schema). For more on creating datasets, refer to [How to Manage Datasets](manage-datasets-in-application.md#create-a-dataset-and-add-examples).
 * **(Optional) Evaluators**: You can attach evaluators (e.g., LLM-as-a-Judge, heuristics, or custom functions) to your dataset in LangSmith. These will run automatically after the graph has processed all inputs.
 * **A running application**: The experiment can be run against:
-  * An application deployed on [LangSmith](https://docs.langchain.com/langsmith/deployment).
-  * A locally running application started via the [langgraph-cli](https://docs.langchain.com/langsmith/local-dev-testing).
+  * An application deployed on [LangSmith](deployment.md).
+  * A locally running application started via the [langgraph-cli](local-dev-testing.md).
 
 > [!NOTE]
-> Studio experiments follow the same [data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention) rules as other experiments. By default, traces have base tier retention (14 days). However, traces will automatically upgrade to extended tier retention (400 days) if feedback is added to them. Feedback can be added in one of two ways:
+> Studio experiments follow the same [data retention](usage-and-billing.md#data-retention) rules as other experiments. By default, traces have base tier retention (14 days). However, traces will automatically upgrade to extended tier retention (400 days) if feedback is added to them. Feedback can be added in one of two ways:
 >
-> * The [dataset has evaluators configured](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset).
-> * [Feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback) is manually added to a trace.
+> * The [dataset has evaluators configured](bind-evaluator-to-dataset.md).
+> * [Feedback](observability-concepts.md#feedback) is manually added to a trace.
 >
-> This auto-upgrade increases both the retention period and the cost of the trace. For more details, refer to [Data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#how-it-works).
+> This auto-upgrade increases both the retention period and the cost of the trace. For more details, refer to [Data retention auto-upgrades](usage-and-billing.md#how-it-works).
 
 ### Experiment setup
 
@@ -186,7 +186,7 @@ This section explains how to test a local agent against remote traces from LangS
 #### Prerequisites
 
 * A LangSmith traced thread
-* A [locally running agent](https://docs.langchain.com/langsmith/local-dev-testing).
+* A [locally running agent](local-dev-testing.md).
 
 > [!NOTE]
 > **Local agent requirements**
@@ -207,7 +207,7 @@ A new thread will be created in your local agent with the thread history inferre
 
 ## Add node to dataset
 
-Add [examples](https://docs.langchain.com/langsmith/evaluation-concepts#examples) to [LangSmith datasets](https://docs.langchain.com/langsmith/manage-datasets) from nodes in the thread log. This is useful to evaluate individual steps of the agent.
+Add [examples](evaluation-concepts.md#examples) to [LangSmith datasets](manage-datasets.md) from nodes in the thread log. This is useful to evaluate individual steps of the agent.
 
 1. Select a thread.
 2. Click **Add to Dataset**.
@@ -216,7 +216,7 @@ Add [examples](https://docs.langchain.com/langsmith/evaluation-concepts#examples
 5. Edit the example's input/output as needed before adding it to the dataset.
 6. Select **Add to dataset** at the bottom of the page to add all selected nodes to their respective datasets.
 
-For more details, refer to [How to evaluate an application's intermediate steps](https://docs.langchain.com/langsmith/evaluate-on-intermediate-steps).
+For more details, refer to [How to evaluate an application's intermediate steps](evaluate-on-intermediate-steps.md).
 
 ***
 

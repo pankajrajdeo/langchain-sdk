@@ -6,13 +6,13 @@ LangSmith Observability lets you record, inspect, and analyze every step your AI
 
 ## How LangSmith structures and visualizes data
 
-In LangSmith, every unit of work an agent performs, such as a model call, tool invocation, or information retrieval, is recorded as a [*run*](https://docs.langchain.com/langsmith/observability-concepts#runs). The runs for a single operation are collected into a [*trace*](https://docs.langchain.com/langsmith/observability-concepts#traces). You can link together traces from multi-turn sessions as a [*thread*](https://docs.langchain.com/langsmith/observability-concepts#threads).
+In LangSmith, every unit of work an agent performs, such as a model call, tool invocation, or information retrieval, is recorded as a [*run*](#runs). The runs for a single operation are collected into a [*trace*](#traces). You can link together traces from multi-turn sessions as a [*thread*](#threads).
 
-A [*trajectory*](https://docs.langchain.com/langsmith/observability-concepts#trajectories) is another way to structure and visualize that data. While a thread groups the traces of a session and keeps their nested structure, a trajectory flattens the entire session into an ordered list of messages that shows the path an agent took from start to finish.
+A [*trajectory*](#trajectories) is another way to structure and visualize that data. While a thread groups the traces of a session and keeps their nested structure, a trajectory flattens the entire session into an ordered list of messages that shows the path an agent took from start to finish.
 
-> **Image:** [A thread groups a session](https://docs.langchain.com/langsmith/observability-concepts)
+> **Image:** [A thread groups a session](observability-concepts.md)
 
-> **Image:** [A thread groups a session](https://docs.langchain.com/langsmith/observability-concepts)
+> **Image:** [A thread groups a session](observability-concepts.md)
 
 ### Runs
 
@@ -29,7 +29,7 @@ A *trace* is a collection of runs for a single operation. For example, if a user
 
 A *thread* is a sequence of traces representing a single multi-turn session. A turn is one exchange in that session: a user's message and everything the agent does in response. Each turn is recorded as its own trace. To group traces into a thread, pass a `thread_id` metadata key with a unique value.
 
-[Learn how to configure threads](https://docs.langchain.com/langsmith/threads).
+[Learn how to configure threads](threads.md).
 
 ### Trajectories
 
@@ -38,9 +38,9 @@ A *trajectory* is a flat, ordered list of messages that shows the path an agent 
 In LangSmith, a trajectory is a projection over the traces in a thread. It contains the human, AI, and tool messages exchanged during the session, each appearing once, in the order it first appeared, with the nesting of runs removed.
 
 > [!NOTE]
-> The [Messages view](https://docs.langchain.com/langsmith/view-traces#messages-view), which renders trajectories in the LangSmith UI, is in **[beta](https://docs.langchain.com/langsmith/release-stages)**.
+> The [Messages view](view-traces.md#messages-view), which renders trajectories in the LangSmith UI, is in **[beta](release-stages.md)**.
 
-[Learn how trajectories render in the Messages view](https://docs.langchain.com/langsmith/messages-view-integrations).
+[Learn how trajectories render in the Messages view](messages-view-integrations.md).
 
 ### Compare traces, threads, and trajectories
 
@@ -51,13 +51,13 @@ In LangSmith, a trajectory is a projection over the traces in a thread. It conta
 | Reach for it when | You are debugging why one operation failed or ran slow | You are inspecting how the agent behaved across turns, with timing and nesting intact | You are reading what was exchanged in the session, without the execution detail |
 
 > [!NOTE]
-> Use **[Chat](https://docs.langchain.com/langsmith/chat)** to analyze traces, runs, and threads. Chat helps you understand agent performance, debug issues, and gain insights from conversation threads without manually digging through data.
+> Use **[Chat](chat.md)** to analyze traces, runs, and threads. Chat helps you understand agent performance, debug issues, and gain insights from conversation threads without manually digging through data.
 
 ### Projects
 
 A *project* is a container for all the traces related to a single application or service.
 
-[Log traces to a project](https://docs.langchain.com/langsmith/log-traces-to-project).
+[Log traces to a project](log-traces-to-project.md).
 
 ## Trace enrichment
 
@@ -65,19 +65,19 @@ A *project* is a container for all the traces related to a single application or
 
 *Feedback* allows you to score an individual run based on certain criteria. Each feedback entry consists of a tag and a score, and is bound to a run by a unique run ID. Feedback can be continuous or discrete (categorical), and tags can be reused across runs within an organization.
 
-For more on how feedback is stored, refer to the [Feedback data format guide](https://docs.langchain.com/langsmith/feedback-data-format).
+For more on how feedback is stored, refer to the [Feedback data format guide](feedback-data-format.md).
 
 ### Tags
 
 *Tags* are strings you can attach to runs to categorize, filter, and group them in the LangSmith UI.
 
-[Learn how to attach tags to your traces](https://docs.langchain.com/langsmith/add-metadata-tags).
+[Learn how to attach tags to your traces](add-metadata-tags.md).
 
 ### Metadata
 
 *Metadata* is a collection of key-value pairs you can attach to runs. For example, application version, environment, or any other contextual information. Similarly to tags, you can use metadata to filter and group runs.
 
-[Learn how to add metadata to your traces](https://docs.langchain.com/langsmith/add-metadata-tags).
+[Learn how to add metadata to your traces](add-metadata-tags.md).
 
 ## Sending traces
 
@@ -87,7 +87,7 @@ There are two ways to send trace data to LangSmith.
 
 LangSmith *integrations* provide automatic tracing for popular LLM providers and agent frameworks (the equivalent of auto-instrumentation in general observability). When you use a supported framework such as LangChain, LangGraph, OpenAI, Anthropic, or CrewAI, the integration captures inputs, outputs, and metadata without requiring manual code changes.
 
-[Browse all integrations](https://docs.langchain.com/langsmith/integrations).
+[Browse all integrations](integrations.md).
 
 ### Manual instrumentation
 
@@ -97,16 +97,16 @@ LangSmith *integrations* provide automatic tracing for popular LLM providers and
 * `trace` context manager (Python): wrap specific code blocks
 * `RunTree` API: low-level, explicit trace construction
 
-[Learn how to add manual instrumentation](https://docs.langchain.com/langsmith/annotate-code).
+[Learn how to add manual instrumentation](annotate-code.md).
 
 ## Data retention
 
-LangSmith (SaaS) retains trace data for 180 days from ingestion. After that, traces are permanently deleted, with limited metadata retained for usage statistics. For details on retention tiers and pricing, refer to [Usage and billing: Data retention](https://docs.langchain.com/langsmith/usage-and-billing#data-retention).
+LangSmith (SaaS) retains trace data for 180 days from ingestion. After that, traces are permanently deleted, with limited metadata retained for usage statistics. For details on retention tiers and pricing, refer to [Usage and billing: Data retention](usage-and-billing.md#data-retention).
 
 > [!NOTE]
-> To keep data beyond the retention period, add it to a [dataset](https://docs.langchain.com/langsmith/manage-datasets). Datasets persist indefinitely, even after the source trace is deleted.
+> To keep data beyond the retention period, add it to a [dataset](manage-datasets.md). Datasets persist indefinitely, even after the source trace is deleted.
 
-To delete traces before their expiration date, see [Manage a trace](https://docs.langchain.com/langsmith/manage-trace#delete-a-trace).
+To delete traces before their expiration date, see [Manage a trace](manage-trace.md#delete-a-trace).
 
 ***
 

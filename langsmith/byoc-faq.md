@@ -7,7 +7,7 @@
 <details>
 <summary>Which clouds and regions can I deploy to?</summary>
 
-BYOC is generally available (GA) on AWS with a US control plane. Support for additional cloud providers is planned for the second half of 2026. See [Regions and cloud providers](https://docs.langchain.com/langsmith/byoc#regions-and-cloud-providers) for the supported AWS regions.
+BYOC is generally available (GA) on AWS with a US control plane. Support for additional cloud providers is planned for the second half of 2026. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers) for the supported AWS regions.
 
 </details>
 
@@ -88,7 +88,7 @@ Data planes are provisioned with a private endpoint by default, so you need priv
 
 No. Services sit behind a private load balancer by default, reachable only from inside your VPC or through the private connectivity you configure.
 
-Data plane endpoints can be made public at provisioning time. See [Onboarding](https://docs.langchain.com/langsmith/byoc-onboarding).
+Data plane endpoints can be made public at provisioning time. See [Onboarding](byoc-onboarding.md).
 
 </details>
 
@@ -115,7 +115,7 @@ Then select **Delete Data Plane** in the LangSmith UI. LangChain deprovisions th
 
 No. When a user opens `aws.smith.langchain.com`, the browser fetches the LangSmith UI bundle from LangChain's cloud. Once loaded, the application routes every request for sensitive data to your VPC.
 
-See [Data traffic](https://docs.langchain.com/langsmith/byoc-architecture#data-traffic).
+See [Data traffic](byoc-architecture.md#data-traffic).
 
 </details>
 
@@ -124,7 +124,7 @@ See [Data traffic](https://docs.langchain.com/langsmith/byoc-architecture#data-t
 
 LangChain can manage the infrastructure of the resources LangSmith created, and nothing else. Permissions are scoped by the `managed_by=langsmith` tag, so the role cannot act on unrelated resources in your account.
 
-The role holds no permissions that grant data access. See [How least privilege is enforced](https://docs.langchain.com/langsmith/byoc-architecture#how-least-privilege-is-enforced).
+The role holds no permissions that grant data access. See [How least privilege is enforced](byoc-architecture.md#how-least-privilege-is-enforced).
 
 </details>
 
@@ -133,7 +133,7 @@ The role holds no permissions that grant data access. See [How least privilege i
 
 No. The cross-account role is infrastructure-scoped rather than data-scoped. It can manage the resources that hold your data, but holds no `s3:GetObject` on the trace bucket, no `rds-db:connect` to PostgreSQL, and no `elasticache:Connect` to Redis.
 
-Access to the data itself requires you to explicitly grant it, such as during an incident. See [How least privilege is enforced](https://docs.langchain.com/langsmith/byoc-architecture#how-least-privilege-is-enforced).
+Access to the data itself requires you to explicitly grant it, such as during an incident. See [How least privilege is enforced](byoc-architecture.md#how-least-privilege-is-enforced).
 
 </details>
 
@@ -186,7 +186,7 @@ Only operational data, and it travels over PrivateLink rather than the public in
 * **Billing and usage metadata**.
 * **Operational telemetry**.
 
-Sensitive data such as traces does not leave your account. It goes only from the data plane to the end user requesting it. See [Data traffic](https://docs.langchain.com/langsmith/byoc-architecture#data-traffic).
+Sensitive data such as traces does not leave your account. It goes only from the data plane to the end user requesting it. See [Data traffic](byoc-architecture.md#data-traffic).
 
 </details>
 
@@ -199,7 +199,7 @@ No.
 * **S3**: Traffic goes over a VPC endpoint, encrypted with HTTPS.
 * **Container images**: Pulled from the LangChain account over a VPC endpoint.
 
-See [Connectivity](https://docs.langchain.com/langsmith/byoc-architecture#connectivity).
+See [Connectivity](byoc-architecture.md#connectivity).
 
 </details>
 
@@ -215,14 +215,14 @@ Not today. Container images are pulled from the LangChain AWS account over a VPC
 
 Over AWS PrivateLink. The management path exposes only your cluster's Kubernetes API server, which LangChain uses to install and reconcile the LangSmith components.
 
-The EKS cluster is private: the API server endpoint has no public access, and worker nodes have no public IP addresses. Your data is not reachable over that connection, and LangChain does not reach your environment over the public internet. See [Connectivity](https://docs.langchain.com/langsmith/byoc-architecture#connectivity).
+The EKS cluster is private: the API server endpoint has no public access, and worker nodes have no public IP addresses. Your data is not reachable over that connection, and LangChain does not reach your environment over the public internet. See [Connectivity](byoc-architecture.md#connectivity).
 
 </details>
 
 <details>
 <summary>Where does the control plane run if my data plane is in the EU or APAC?</summary>
 
-The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane in an EU or APAC region, your sensitive application data stays in that region while control plane metadata remains in the US. See [Regions and cloud providers](https://docs.langchain.com/langsmith/byoc#regions-and-cloud-providers).
+The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane in an EU or APAC region, your sensitive application data stays in that region while control plane metadata remains in the US. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers).
 
 </details>
 
@@ -231,7 +231,7 @@ The control plane runs in `us-east-2` regardless of where you place your data pl
 <details>
 <summary>How do organizations, data planes, and workspaces relate?</summary>
 
-Data planes belong to an organization, and workspaces belong to exactly one data plane. Use data planes for physical separation of data, and workspaces for logical separation within a data plane. See [Organizations, data planes, and workspaces](https://docs.langchain.com/langsmith/byoc-usage#organizations-data-planes-and-workspaces).
+Data planes belong to an organization, and workspaces belong to exactly one data plane. Use data planes for physical separation of data, and workspaces for logical separation within a data plane. See [Organizations, data planes, and workspaces](byoc-usage.md#organizations-data-planes-and-workspaces).
 
 </details>
 
@@ -258,7 +258,7 @@ Yes. A workspace on LangSmith Cloud routes to the LangChain-managed backend rath
 
 LangChain upgrades the LangSmith version in your data plane once a week. Upgrades are rolling, so there is no whole-service downtime. Supporting services such as Istio and KEDA are upgraded on a regular cadence, and LangChain manages all EKS cluster upgrades.
 
-Support for release channels is coming soon. See [Operations](https://docs.langchain.com/langsmith/byoc-operations).
+Support for release channels is coming soon. See [Operations](byoc-operations.md).
 
 </details>
 
@@ -267,7 +267,7 @@ Support for release channels is coming soon. See [Operations](https://docs.langc
 
 LangChain owns and performs EKS upgrades proactively, ahead of AWS end-of-support dates, and coordinates the window with you.
 
-Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades](https://docs.langchain.com/langsmith/byoc-operations#kubernetes-cluster-upgrades).
+Control plane upgrades are transparent. Node group upgrades roll nodes one by one with make-before-break semantics, so you might see brief connection resets as pods restart, but no data loss. See [Kubernetes cluster upgrades](byoc-operations.md#kubernetes-cluster-upgrades).
 
 </details>
 
@@ -292,7 +292,7 @@ LangChain operates the data plane after provisioning, including monitoring for u
 
 Yes. You can install observability tooling such as collectors and agents into the EKS cluster, as long as it does not interfere with the operation of LangSmith.
 
-LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](https://docs.langchain.com/langsmith/export-backend).
+LangSmith services emit logs, metrics, and traces the same way they do on self-hosted, so the same configuration applies. See [Export LangSmith telemetry to your observability backend](export-backend.md).
 
 </details>
 
@@ -301,7 +301,7 @@ LangSmith services emit logs, metrics, and traces the same way they do on self-h
 
 Data planes are provisioned for high availability by default, running across multiple availability zones within a single region. All stateful components are backed up.
 
-A data plane does not span regions, so recovery from the loss of an entire region relies on those backups. See [High availability](https://docs.langchain.com/langsmith/byoc-operations#high-availability).
+A data plane does not span regions, so recovery from the loss of an entire region relies on those backups. See [High availability](byoc-operations.md#high-availability).
 
 </details>
 
@@ -321,7 +321,7 @@ Backups run in your own account:
 
 No. The data plane runs in your AWS account, so its availability depends on resources you control, including the account itself, the private connectivity you configure to reach the data plane, and the service quotas and policies that apply to the account. LangChain does not commit to an uptime target for infrastructure it does not solely control.
 
-LangChain still monitors the data plane for uptime and error recovery, scales it, and applies upgrades and security patches. See [Operations](https://docs.langchain.com/langsmith/byoc-operations).
+LangChain still monitors the data plane for uptime and error recovery, scales it, and applies upgrades and security patches. See [Operations](byoc-operations.md).
 
 </details>
 
@@ -344,7 +344,7 @@ LangChain provides integrations with AWS Marketplace.
 <details>
 <summary>Which LangSmith features work on BYOC?</summary>
 
-See [Available features](https://docs.langchain.com/langsmith/byoc#available-features) for the current list of supported features.
+See [Available features](byoc.md#available-features) for the current list of supported features.
 
 </details>
 
@@ -357,9 +357,9 @@ Partly. Users, roles, datasets, experiments, prompts, annotation queue configura
 
 ## See also
 
-* [BYOC overview](https://docs.langchain.com/langsmith/byoc)
-* [Why BYOC](https://docs.langchain.com/langsmith/byoc-why)
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
+* [BYOC overview](byoc.md)
+* [Why BYOC](byoc-why.md)
+* [BYOC architecture](byoc-architecture.md)
 
 ***
 

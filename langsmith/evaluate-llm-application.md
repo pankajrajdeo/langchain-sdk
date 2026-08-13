@@ -3,12 +3,12 @@
 This guide shows you how to run an evaluation on an agent using the LangSmith SDK.
 
 > [!NOTE]
-> [Evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) | [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) | [Datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets)
+> [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Evaluators](evaluation-concepts.md#evaluators) | [Datasets](evaluation-concepts.md#datasets)
 
 In this guide we'll go over how to evaluate an application using the [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) method in the LangSmith SDK.
 
 > [!TIP]
-> For larger evaluation jobs in Python we recommend using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), the asynchronous version of [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate). It is still worthwhile to read this guide first, as the two have identical interfaces, before reading the how-to guide on [running an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async).
+> For larger evaluation jobs in Python we recommend using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), the asynchronous version of [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate). It is still worthwhile to read this guide first, as the two have identical interfaces, before reading the how-to guide on [running an evaluation asynchronously](evaluation-async.md).
 >
 > In JS/TS evaluate() is already asynchronous so no separate method is needed.
 >
@@ -72,11 +72,11 @@ const toxicityClassifier = traceable(
 );
 ```
 
-We've optionally enabled tracing to capture the inputs and outputs of each step in the pipeline. To understand how to annotate your code for tracing, please refer to [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code).
+We've optionally enabled tracing to capture the inputs and outputs of each step in the pipeline. To understand how to annotate your code for tracing, please refer to [Custom instrumentation](annotate-code.md).
 
 ## Create or select a dataset
 
-We need a [Dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) to evaluate our application on. Our dataset will contain labeled [examples](https://docs.langchain.com/langsmith/evaluation-concepts#examples) of toxic and non-toxic text.
+We need a [Dataset](evaluation-concepts.md#datasets) to evaluate our application on. Our dataset will contain labeled [examples](evaluation-concepts.md#examples) of toxic and non-toxic text.
 
 Requires `langsmith>=0.3.13`
 
@@ -148,7 +148,7 @@ const toxicDataset = await langsmith.createDataset(datasetName);
 await langsmith.createExamples({ inputs, outputs, datasetId: toxicDataset.id });
 ```
 
-For more details on datasets, refer to the [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets) page.
+For more details on datasets, refer to the [Manage datasets](manage-datasets.md) page.
 
 ## Define an evaluator
 
@@ -159,7 +159,7 @@ There are two main ways to define an evaluator.
 > [!TIP]
 > You can also check out LangChain's open source evaluation package [openevals](https://github.com/langchain-ai/openevals) for common prebuilt evaluators.
 
-[Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) are functions for scoring your application's outputs. They take in the example inputs, actual outputs, and, when present, the reference outputs. Since we have labels for this task, our evaluator can directly check if the actual outputs match the reference outputs.
+[Evaluators](evaluation-concepts.md#evaluators) are functions for scoring your application's outputs. They take in the example inputs, actual outputs, and, when present, the reference outputs. Since we have labels for this task, our evaluator can directly check if the actual outputs match the reference outputs.
 
 * Python: Requires `langsmith>=0.3.13`
 * TypeScript: Requires `langsmith>=0.2.9`
@@ -186,7 +186,7 @@ function correct({
 
 ### In LangSmith UI
 
-You can also define an evaluator in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluate-llm-application). You can [create evaluators in the UI](https://docs.langchain.com/langsmith/llm-as-judge) under the **Evaluators** tab. These evaluators will be [automatically triggered with every new experiment](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset).
+You can also define an evaluator in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluate-llm-application). You can [create evaluators in the UI](llm-as-judge.md) under the **Evaluators** tab. These evaluators will be [automatically triggered with every new experiment](bind-evaluator-to-dataset.md).
 
 ## Run the evaluation
 
@@ -194,7 +194,7 @@ We'll use the [evaluate()](https://docs.smith.langchain.com/reference/python/eva
 
 The key arguments are:
 
-* a target function that takes an input dictionary and returns an output dictionary. The `example.inputs` field of each [Example](https://docs.langchain.com/langsmith/example-data-format) is what gets passed to the target function. In this case our `toxicity_classifier` is already set up to take in example inputs so we can use it directly.
+* a target function that takes an input dictionary and returns an output dictionary. The `example.inputs` field of each [Example](example-data-format.md) is what gets passed to the target function. In this case our `toxicity_classifier` is already set up to take in example inputs so we can use it directly.
 * `data` - the name OR UUID of the LangSmith dataset to evaluate on, or an iterator of examples.
 * `evaluators` - a list of evaluators to score the outputs of the function; dataset evaluators in the [Langsmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-evaluate-llm-application) will also automatically get triggered.
 * `metadata` - an optional object to attach to the experiment. Pass `models`, `prompts`, and `tools` keys to populate the corresponding columns in the experiment table view.
@@ -279,33 +279,33 @@ await evaluate((inputs) => toxicityClassifier(inputs["input"]), {
 
 ## Add metadata to an experiment
 
-Metadata is a set of key-value pairs you can attach to an experiment to group and filter experiments in the experiments table. You can pass metadata when running an experiment via the `metadata` argument (see [Run the evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application#run-the-evaluation)), or add it afterwards directly in the LangSmith UI.
+Metadata is a set of key-value pairs you can attach to an experiment to group and filter experiments in the experiments table. You can pass metadata when running an experiment via the `metadata` argument (see [Run the evaluation](#run-the-evaluation)), or add it afterwards directly in the LangSmith UI.
 
 To open the **Edit Experiment** panel, hover over an experiment row in the experiments table and click the **Edit** pencil icon that appears at the right of the row.
 
-> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](evaluate-llm-application.md)
 
-> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiments table with the edit pencil icon visible on a hovered row.](evaluate-llm-application.md)
 
 The **Edit Experiment** panel lets you update the experiment name and description, and manage metadata key-value pairs. Click **+ Add Metadata** to add a new key-value pair, then click **Submit** in the top right to save your changes.
 
-> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](evaluate-llm-application.md)
 
-> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Edit Experiment panel showing metadata key-value pairs and the Add Metadata button.](evaluate-llm-application.md)
 
 Once experiments are tagged with metadata, use the **Group by** control at the top of the experiments table to cluster experiments by any metadata field. The summary charts above the table update per group, showing average feedback scores, latency, and token usage for each configuration. This makes it easy to compare how different prompt versions, models, or other changes perform across the same dataset.
 
-The reserved `models`, `prompts`, and `tools` keys automatically populate dedicated columns in the experiments table. Click a value in one of those columns to filter or group by it. For full details, see [Filter and group by models, prompts, and tools](https://docs.langchain.com/langsmith/analyze-an-experiment#filter-and-group-by-models-prompts-and-tools-in-the-experiments-tab-view).
+The reserved `models`, `prompts`, and `tools` keys automatically populate dedicated columns in the experiments table. Click a value in one of those columns to filter or group by it. For full details, see [Filter and group by models, prompts, and tools](analyze-an-experiment.md#filter-and-group-by-models-prompts-and-tools-in-the-experiments-tab-view).
 
 ## Explore the results
 
-Each invocation of `evaluate()` creates an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) that you can view in the LangSmith UI or query via the SDK. See [Analyze an experiment](https://docs.langchain.com/langsmith/analyze-an-experiment) for more details.
+Each invocation of `evaluate()` creates an [experiment](evaluation-concepts.md#experiment) that you can view in the LangSmith UI or query via the SDK. See [Analyze an experiment](analyze-an-experiment.md) for more details.
 
 Experiments run against a dataset are listed in the experiments table.
 
-> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](evaluate-llm-application.md)
 
-> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiments table showing a list of experiments with columns for experiment name, description, dataset, feedback score, and more.](evaluate-llm-application.md)
 
 For experiments run from the Playground or through the SDK, the **Progress** column tracks completion in real time. Progress reflects both run and evaluation status. Hover over the progress bar to view the number of runs completed and runs evaluated.
 
@@ -317,15 +317,15 @@ For experiments run from the Playground or through the SDK, the **Progress** col
 
 Click an experiment row to see scores for each example. Filter and sort by score to identify patterns in where your application performs well or poorly.
 
-> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](evaluate-llm-application.md)
 
-> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiment view showing a table of examples with columns for input, output, reference output, feedback score, and more.](evaluate-llm-application.md)
 
 Click an example to open its details panel, which includes inputs, outputs, reference outputs, and any associated traces (if you've annotated your code for tracing).
 
-> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](evaluate-llm-application.md)
 
-> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](https://docs.langchain.com/langsmith/evaluate-llm-application)
+> **Image:** [Experiment view details panel showing the inputs, outputs, reference outputs, and trace for a single example.](evaluate-llm-application.md)
 
 ## Reference code
 
@@ -536,9 +536,9 @@ await evaluate((inputs) => toxicityClassifier(inputs["input"]), {
 
 ## Related
 
-* [Run an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async)
-* [Run an evaluation via the REST API](https://docs.langchain.com/langsmith/run-evals-api-only)
-* [Run an evaluation from the Playground](https://docs.langchain.com/langsmith/run-evaluation-from-playground)
+* [Run an evaluation asynchronously](evaluation-async.md)
+* [Run an evaluation via the REST API](run-evals-api-only.md)
+* [Run an evaluation from the Playground](run-evaluation-from-playground.md)
 
 ***
 

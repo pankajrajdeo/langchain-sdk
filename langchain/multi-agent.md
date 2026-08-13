@@ -3,7 +3,7 @@
 Multi-agent systems coordinate specialized components to tackle complex workflows. However, not every complex task requires this approach—a single agent with the right (sometimes dynamic) tools and prompt can often achieve similar results.
 
 > [!TIP]
-> For built-in multi-agent support, use [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview): a higher-level harness built on LangChain that ships with [subagents](https://docs.langchain.com/oss/python/deepagents/subagents), [skills](https://docs.langchain.com/oss/python/deepagents/skills), planning, a virtual filesystem, and context management.
+> For built-in multi-agent support, use [Deep Agents](../deepagents/overview.md): a higher-level harness built on LangChain that ships with [subagents](../deepagents/subagents.md), [skills](../deepagents/skills.md), planning, a virtual filesystem, and context management.
 
 ## Why multi-agent?
 
@@ -13,10 +13,10 @@ When developers say they need "multi-agent," they're usually looking for one or 
 *  **Distributed development**: Allow different teams to develop and maintain capabilities independently, composing them into a larger system with clear boundaries.
 *  **Parallelization**: Spawn specialized workers for subtasks and execute them concurrently for faster results.
 
-Multi-agent patterns are particularly valuable when a single agent has too many [tools](https://docs.langchain.com/oss/python/langchain/tools) and makes poor decisions about which to use, when tasks require specialized knowledge with extensive context (long prompts and domain-specific tools), or when you need to enforce sequential constraints that unlock capabilities only after certain conditions are met.
+Multi-agent patterns are particularly valuable when a single agent has too many [tools](tools.md) and makes poor decisions about which to use, when tasks require specialized knowledge with extensive context (long prompts and domain-specific tools), or when you need to enforce sequential constraints that unlock capabilities only after certain conditions are met.
 
 > [!TIP]
-> At the center of multi-agent design is **[context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering)**—deciding what information each agent sees. The quality of your system depends on ensuring each agent has access to the right data for its task.
+> At the center of multi-agent design is **[context engineering](context-engineering.md)**—deciding what information each agent sees. The quality of your system depends on ensuring each agent has access to the right data for its task.
 
 ## Patterns
 
@@ -24,11 +24,11 @@ Here are the main patterns for building multi-agent systems, each suited to diff
 
 | Pattern                                                                  | How it works                                                                                                                                                                                        |
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents)             | A main agent coordinates subagents as tools. All routing passes through the main agent, which decides when and how to invoke each subagent.                                                         |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)               | Behavior changes dynamically based on state. Tool calls update a state variable that triggers routing or configuration changes, switching agents or adjusting the current agent's tools and prompt. |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)                   | Specialized prompts and knowledge loaded on-demand. A single agent stays in control while loading context from skills as needed.                                                                    |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)                   | A routing step classifies input and directs it to one or more specialized agents. Results are synthesized into a combined response.                                                                 |
-| [**Custom workflow**](https://docs.langchain.com/oss/python/langchain/multi-agent/custom-workflow) | Build bespoke execution flows with [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), mixing deterministic logic and agentic behavior. Embed other patterns as nodes in your workflow.                    |
+| [**Subagents**](multi-agent/subagents.md)             | A main agent coordinates subagents as tools. All routing passes through the main agent, which decides when and how to invoke each subagent.                                                         |
+| [**Handoffs**](multi-agent/handoffs.md)               | Behavior changes dynamically based on state. Tool calls update a state variable that triggers routing or configuration changes, switching agents or adjusting the current agent's tools and prompt. |
+| [**Skills**](multi-agent/skills.md)                   | Specialized prompts and knowledge loaded on-demand. A single agent stays in control while loading context from skills as needed.                                                                    |
+| [**Router**](multi-agent/router.md)                   | A routing step classifies input and directs it to one or more specialized agents. Results are synthesized into a combined response.                                                                 |
+| [**Custom workflow**](multi-agent/custom-workflow.md) | Build bespoke execution flows with [LangGraph](../langgraph/overview.md), mixing deterministic logic and agentic behavior. Embed other patterns as nodes in your workflow.                    |
 
 ### Choosing a pattern
 
@@ -36,10 +36,10 @@ Use this table to match your requirements to the right pattern:
 
 | Pattern                                                      | Distributed development | Parallelization | Multi-hop | Direct user interaction |
 | ------------------------------------------------------------ | :---------------------: | :-------------: | :-------: | :---------------------: |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) |          ⭐⭐⭐⭐⭐          |      ⭐⭐⭐⭐⭐      |   ⭐⭐⭐⭐⭐   |            ⭐            |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)   |            -            |        -        |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)       |          ⭐⭐⭐⭐⭐          |       ⭐⭐⭐       |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)       |           ⭐⭐⭐           |      ⭐⭐⭐⭐⭐      |     -     |           ⭐⭐⭐           |
+| [**Subagents**](multi-agent/subagents.md) |          ⭐⭐⭐⭐⭐          |      ⭐⭐⭐⭐⭐      |   ⭐⭐⭐⭐⭐   |            ⭐            |
+| [**Handoffs**](multi-agent/handoffs.md)   |            -            |        -        |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
+| [**Skills**](multi-agent/skills.md)       |          ⭐⭐⭐⭐⭐          |       ⭐⭐⭐       |   ⭐⭐⭐⭐⭐   |          ⭐⭐⭐⭐⭐          |
+| [**Router**](multi-agent/router.md)       |           ⭐⭐⭐           |      ⭐⭐⭐⭐⭐      |     -     |           ⭐⭐⭐           |
 
 * **Distributed development**: Can different teams maintain components independently?
 * **Parallelization**: Can multiple agents execute concurrently?
@@ -72,9 +72,9 @@ A routing step classifies input and directs it to specialized agents. Results ar
 <img src="https://mintcdn.com/langchain-5e9cc07a/CRpSg52QqwDx49Bw/oss/langchain/multi-agent/images/pattern-router.png?fit=max&auto=format&n=CRpSg52QqwDx49Bw&q=85&s=ceab32819240ba87f3a132357cc78b09" alt="Router pattern: routing step classifies input to specialized agents" width="1560" height="556" data-path="oss/langchain/multi-agent/images/pattern-router.png" />
 
 > [!TIP]
-> Trace the full coordination flow across agents with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-index). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up.
+> Trace the full coordination flow across agents with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-index). Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Performance comparison
 
@@ -83,7 +83,7 @@ Different patterns have different performance characteristics. Understanding the
 **Key metrics:**
 
 * **Model calls**: Number of LLM invocations. More calls = higher latency (especially if sequential) and higher per-request API costs.
-* **Tokens processed**: Total [context window](https://docs.langchain.com/oss/python/langchain/context-engineering) usage across all calls. More tokens = higher processing costs and potential context limits.
+* **Tokens processed**: Total [context window](context-engineering.md) usage across all calls. More tokens = higher processing costs and potential context limits.
 
 ### One-shot request
 
@@ -93,10 +93,10 @@ A specialized coffee agent/skill can call a `buy_coffee` tool.
 
 | Pattern                                                      | Model calls | Best fit |
 | ------------------------------------------------------------ | :---------: | :------: |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) |      4      |          |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)   |      3      |     ✅    |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)       |      3      |     ✅    |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)       |      3      |     ✅    |
+| [**Subagents**](multi-agent/subagents.md) |      4      |          |
+| [**Handoffs**](multi-agent/handoffs.md)   |      3      |     ✅    |
+| [**Skills**](multi-agent/skills.md)       |      3      |     ✅    |
+| [**Router**](multi-agent/router.md)       |      3      |     ✅    |
 
 #### Subagents
 **4 model calls:**
@@ -129,10 +129,10 @@ The user repeats the same request in the same conversation.
 
 | Pattern                                                      | Turn 2 calls | Total (both turns) | Best fit |
 | ------------------------------------------------------------ | :----------: | :----------------: | :------: |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) |       4      |          8         |          |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)   |       2      |          5         |     ✅    |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)       |       2      |          5         |     ✅    |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)       |       3      |          6         |          |
+| [**Subagents**](multi-agent/subagents.md) |       4      |          8         |          |
+| [**Handoffs**](multi-agent/handoffs.md)   |       2      |          5         |     ✅    |
+| [**Skills**](multi-agent/skills.md)       |       2      |          5         |     ✅    |
+| [**Router**](multi-agent/router.md)       |       3      |          6         |          |
 
 #### Subagents
 **4 calls again → 8 total**
@@ -174,10 +174,10 @@ Each language agent/skill contains \~2000 tokens of documentation. All patterns 
 
 | Pattern                                                      | Model calls | Total tokens | Best fit |
 | ------------------------------------------------------------ | :---------: | :----------: | :------: |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) |      5      |     \~9K     |     ✅    |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)   |      7+     |    \~14K+    |          |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)       |      3      |     \~15K    |          |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)       |      5      |     \~9K     |     ✅    |
+| [**Subagents**](multi-agent/subagents.md) |      5      |     \~9K     |     ✅    |
+| [**Handoffs**](multi-agent/handoffs.md)   |      7+     |    \~14K+    |          |
+| [**Skills**](multi-agent/skills.md)       |      3      |     \~15K    |          |
+| [**Router**](multi-agent/router.md)       |      5      |     \~9K     |     ✅    |
 
 #### Subagents
 **5 calls, \~9K tokens**
@@ -215,14 +215,14 @@ Here's how patterns compare across all three scenarios:
 
 | Pattern                                                      | One-shot | Repeat request |      Multi-domain     |
 | ------------------------------------------------------------ | :------: | :------------: | :-------------------: |
-| [**Subagents**](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) |  4 calls |  8 calls (4+4) |   5 calls, 9K tokens  |
-| [**Handoffs**](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)   |  3 calls |  5 calls (3+2) | 7+ calls, 14K+ tokens |
-| [**Skills**](https://docs.langchain.com/oss/python/langchain/multi-agent/skills)       |  3 calls |  5 calls (3+2) |  3 calls, 15K tokens  |
-| [**Router**](https://docs.langchain.com/oss/python/langchain/multi-agent/router)       |  3 calls |  6 calls (3+3) |   5 calls, 9K tokens  |
+| [**Subagents**](multi-agent/subagents.md) |  4 calls |  8 calls (4+4) |   5 calls, 9K tokens  |
+| [**Handoffs**](multi-agent/handoffs.md)   |  3 calls |  5 calls (3+2) | 7+ calls, 14K+ tokens |
+| [**Skills**](multi-agent/skills.md)       |  3 calls |  5 calls (3+2) |  3 calls, 15K tokens  |
+| [**Router**](multi-agent/router.md)       |  3 calls |  6 calls (3+3) |   5 calls, 9K tokens  |
 
 **Choosing a pattern:**
 
-| Optimize for          | [Subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) | [Handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) | [Skills](https://docs.langchain.com/oss/python/langchain/multi-agent/skills) | [Router](https://docs.langchain.com/oss/python/langchain/multi-agent/router) |
+| Optimize for          | [Subagents](multi-agent/subagents.md) | [Handoffs](multi-agent/handoffs.md) | [Skills](multi-agent/skills.md) | [Router](multi-agent/router.md) |
 | --------------------- | :------------------------------------------------------: | :----------------------------------------------------: | :------------------------------------------------: | :------------------------------------------------: |
 | Single requests       |                                                          |                            ✅                           |                          ✅                         |                          ✅                         |
 | Repeat requests       |                                                          |                            ✅                           |                          ✅                         |                                                    |

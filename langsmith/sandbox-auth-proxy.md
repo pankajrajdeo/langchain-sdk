@@ -5,7 +5,7 @@ Inject credentials into outbound requests and control which destinations a sandb
 The auth proxy lets sandbox code call external APIs (OpenAI, Anthropic, GitHub, etc.) without hardcoding credentials. When configured on a sandbox, a proxy sidecar automatically injects authentication headers into matching outbound requests using your workspace secrets or write-only credentials you provide in the proxy config.
 
 > [!WARNING]
-> You must configure your secrets (e.g., `OPENAI_API_KEY`) in your LangSmith [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) settings before creating a sandbox that references them.
+> You must configure your secrets (e.g., `OPENAI_API_KEY`) in your LangSmith [workspace](administration-overview.md#workspaces) settings before creating a sandbox that references them.
 
 ## Egress and network access control
 
@@ -533,7 +533,7 @@ await client.createSandbox({
 
 ## Callback credential example
 
-Static `workspace_secret` rules pull credentials from your workspace when the proxy configuration is applied, and `opaque` rules let your application patch in short-lived credentials such as the [GitHub token example](https://docs.langchain.com/langsmith/sandbox-auth-proxy#github-example). For credentials that must be resolved by your own service at proxy time, use a **callback**. The proxy POSTs to a URL you provide, your endpoint returns the headers to inject, and the proxy caches the result.
+Static `workspace_secret` rules pull credentials from your workspace when the proxy configuration is applied, and `opaque` rules let your application patch in short-lived credentials such as the [GitHub token example](#github-example). For credentials that must be resolved by your own service at proxy time, use a **callback**. The proxy POSTs to a URL you provide, your endpoint returns the headers to inject, and the proxy caches the result.
 
 Callbacks are configured alongside rules under `proxy_config`:
 

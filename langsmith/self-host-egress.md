@@ -10,10 +10,10 @@ Self-hosted LangSmith stores platform data in your environment. Unless you are r
 * **Usage telemetry**: Anonymized usage snapshots for product insights (optional, can be disabled)
 
 > [!WARNING]
-> **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](https://docs.langchain.com/langsmith/cloud#allowlisting-ip-addresses) for static IP addresses, if needed.
+> **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](cloud.md#allowlisting-ip-addresses) for static IP addresses, if needed.
 
 > [!NOTE]
-> If you enable [Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](https://docs.langchain.com/langsmith/self-host-egress#langsmith-intelligence-for-engine).
+> If you enable [Engine](deploy-self-hosted-full-platform.md#enable-engine), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine).
 
 ## Billing telemetry
 
@@ -455,12 +455,12 @@ Add this to the `commonEnv` section of your Helm configuration to permanently di
 
 ## LangSmith Intelligence for Engine
 
-This section applies only if you enable [Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
+This section applies only if you enable [Engine](deploy-self-hosted-full-platform.md#enable-engine). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
 
-Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](https://docs.langchain.com/langsmith/engine-self-hosted#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
+Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
 
 > [!NOTE]
-> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. AWS EU and Azure are planned. See [Availability by cloud and region](https://docs.langchain.com/langsmith/engine-self-hosted#availability-by-cloud-and-region).
+> Engine is available for LangSmith Self-hosted in **AWS US** and **GCP US**. AWS EU and Azure are planned. See [Availability by cloud and region](engine-self-hosted.md#availability-by-cloud-and-region).
 
 > [!WARNING]
 > Add the gateway as a specific allowlist entry rather than opening general outbound access. Requests authenticate with a short-lived license JWT obtained during LangSmith license verification. No additional model-provider credentials are needed.
@@ -478,14 +478,14 @@ LangSmith Intelligence retains the following metadata for usage attribution and 
 * Account, workspace, and project identifiers used to attribute usage.
 * Model and token-usage metadata used for billing.
 
-For the complete data flow and model-provider commitments, see [Engine on Self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted).
+For the complete data flow and model-provider commitments, see [Engine on Self-hosted](engine-self-hosted.md).
 
 > [!NOTE]
 > Offline (air-gapped) Self-hosted cannot run Engine, because it cannot reach LangSmith Intelligence. Every other LangSmith feature continues to work offline.
 
 ## Our commitment
 
-The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted). If you have any concerns about the data being sent, disable optional telemetry or contact your account team.
+The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](engine-self-hosted.md). If you have any concerns about the data being sent, disable optional telemetry or contact your account team.
 
 ***
 

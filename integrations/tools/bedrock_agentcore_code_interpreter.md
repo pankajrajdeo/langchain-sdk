@@ -14,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async |     Return data     |      Pricing      |
+| [Returns artifact](../../langchain/tools.md) | Native async |     Return data     |      Pricing      |
 | :---------------------------------------------: | :----------: | :-----------------: | :---------------: |
 |                        ✅                        |       ✅      | Text, Files, Images | Pay-per-use (AWS) |
 

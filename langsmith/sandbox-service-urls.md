@@ -4,7 +4,7 @@ Access HTTP services running inside sandboxes via authenticated URLs, from a bro
 
 Service URLs let you access an HTTP service running inside a sandbox (a REST API, a Streamlit app, a Jupyter notebook, API documentation) without tunnels, port forwarding, or CLI tools. Each sandbox + port combination gets its own URL that you can open in a browser, call from code, or share with a teammate.
 
-> **Image:** [Service URLs view](https://docs.langchain.com/langsmith/sandbox-service-urls)
+> **Image:** [Service URLs view](sandbox-service-urls.md)
 
 ## Quick start
 
@@ -188,7 +188,7 @@ def create_item(item: dict):
 | **Multi-page web apps** | Full support (subdomain routing) | Full support (local port)             |
 | **Non-HTTP services**   | Not supported                    | Full support                          |
 
-Use **service URLs** for HTTP services you want to access from a browser or share with others. Use **[TCP tunnels](https://docs.langchain.com/langsmith/sandbox-sdk#tcp-tunnels-python)** for non-HTTP protocols (like `psql` or `redis-cli`) or when you need local-only access.
+Use **service URLs** for HTTP services you want to access from a browser or share with others. Use **[TCP tunnels](sandbox-sdk.md#tcp-tunnels-python)** for non-HTTP protocols (like `psql` or `redis-cli`) or when you need local-only access.
 
 ## Troubleshoot
 

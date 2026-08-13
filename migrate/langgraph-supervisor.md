@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/migrate/langgraph-supervisor)
 Migrate from the langgraph-supervisor package to the subagents pattern with create_agent and tool-wrapped subagents.
 
-The [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package is no longer actively maintained. Instead use the [subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) pattern: a main agent coordinates specialized workers by calling them as [tools](https://docs.langchain.com/oss/python/langchain/tools).
+The [`langgraph-supervisor`](https://github.com/langchain-ai/langgraph-supervisor-py) package is no longer actively maintained. Instead use the [subagents](../langchain/multi-agent/subagents.md) pattern: a main agent coordinates specialized workers by calling them as [tools](../langchain/tools.md).
 
 This guide covers how to migrate from `create_supervisor` to [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), including setups that use [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) and external API callbacks.
 
@@ -11,7 +11,7 @@ This guide covers how to migrate from `create_supervisor` to [`create_agent`](ht
 | langgraph-supervisor                                    | Recommended replacement                                                                                                                                                                                                |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `create_supervisor` with worker agents as graph nodes   | [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) with subagents wrapped as [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) functions |
-| `output_mode` for message history                       | Format subagent output in the tool wrapper (see [subagent outputs](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-outputs))                                                                                      |
+| `output_mode` for message history                       | Format subagent output in the tool wrapper (see [subagent outputs](../langchain/multi-agent/subagents.md#subagent-outputs))                                                                                      |
 | `create_handoff_tool` for custom routing                | Custom [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls `subagent.invoke(...)`                                                                                           |
 | Nested supervisors (`create_supervisor` of supervisors) | A subagent wrapped as a [`@tool`](https://reference.langchain.com/python/langchain-core/tools/convert/tool) that calls other subagents                                                                                 |
 
@@ -84,7 +84,7 @@ supervisor = create_agent(
 )
 ```
 
-For a full walkthrough, see [Build a personal assistant with subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant).
+For a full walkthrough, see [Build a personal assistant with subagents](../langchain/multi-agent/subagents-personal-assistant.md).
 
 ## Migrate interrupt and resume flows
 
@@ -155,7 +155,7 @@ supervisor.invoke(Command(resume=external_result), config=config)
 
 For [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) to bubble up through nested [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) layers, follow these rules:
 
-1. **Compile only the outermost graph with a checkpointer.** Leave subagents without `checkpointer=...` so they use [per-invocation persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#per-invocation-default) and inherit the parent's checkpointer at runtime.
+1. **Compile only the outermost graph with a checkpointer.** Leave subagents without `checkpointer=...` so they use [per-invocation persistence](../langgraph/use-subgraphs.md#per-invocation-default) and inherit the parent's checkpointer at runtime.
 2. **Pass `thread_id` in `configurable`.** The outer `invoke()` or `stream_events()` call must include a `thread_id` so the graph can checkpoint and resume.
 
 These rules apply to arbitrarily nested setups. For example, a custom [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) outer layer, a middle [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) supervisor, and an inner [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) subagent all follow the same mechanism:
@@ -170,7 +170,7 @@ Custom StateGraph (outer, with checkpointer)
 
 When `preview_tool` calls [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt), the exception bubbles through both [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) layers and surfaces as `__interrupt__` on the outer [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph)'s invoke result. Your existing `Command(resume=result)` callback path keeps working.
 
-For more on how interrupts propagate through subgraphs, see [Subgraph persistence: Interrupts](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#per-invocation-default) and [Checkpointing and state inspection](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#checkpointing-and-state-inspection).
+For more on how interrupts propagate through subgraphs, see [Subgraph persistence: Interrupts](../langgraph/use-subgraphs.md#per-invocation-default) and [Checkpointing and state inspection](../langchain/multi-agent/subagents.md#checkpointing-and-state-inspection).
 
 ## When to use a custom StateGraph instead
 
@@ -209,7 +209,7 @@ top_supervisor = create_agent(
 )
 ```
 
-If you need static subgraph discovery, checkpoint namespaces per tier, or shared state keys between levels, use a custom [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) with [subgraph nodes](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#add-a-subgraph-as-a-node) instead.
+If you need static subgraph discovery, checkpoint namespaces per tier, or shared state keys between levels, use a custom [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) with [subgraph nodes](../langgraph/use-subgraphs.md#add-a-subgraph-as-a-node) instead.
 
 ## Migrate message history options
 
@@ -218,15 +218,15 @@ If you need static subgraph discovery, checkpoint namespaces per tier, or shared
 * `full_history`: Include all messages from the worker agent.
 * `last_message`: Include only the worker's final response.
 
-With the subagents pattern, control this in the tool wrapper. Return only the final message for `last_message` behavior, or return a formatted summary of the full conversation for `full_history` behavior. See [Subagent outputs](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents#subagent-outputs) for patterns that pass additional state back to the supervisor.
+With the subagents pattern, control this in the tool wrapper. Return only the final message for `last_message` behavior, or return a formatted summary of the full conversation for `full_history` behavior. See [Subagent outputs](../langchain/multi-agent/subagents.md#subagent-outputs) for patterns that pass additional state back to the supervisor.
 
 ## See also
 
-* [Subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents): Pattern overview and design decisions
-* [Build a personal assistant with subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant): Step-by-step supervisor tutorial
-* [Use subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs): Subgraph persistence, interrupts, and state inspection
-* [Interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts): Pause and resume graph execution
-* [LangGraph v1 migration guide](https://docs.langchain.com/oss/python/migrate/langgraph-v1): Migrate from `create_react_agent` to `create_agent`
+* [Subagents](../langchain/multi-agent/subagents.md): Pattern overview and design decisions
+* [Build a personal assistant with subagents](../langchain/multi-agent/subagents-personal-assistant.md): Step-by-step supervisor tutorial
+* [Use subgraphs](../langgraph/use-subgraphs.md): Subgraph persistence, interrupts, and state inspection
+* [Interrupts](../langgraph/interrupts.md): Pause and resume graph execution
+* [LangGraph v1 migration guide](langgraph-v1.md): Migrate from `create_react_agent` to `create_agent`
 
 ***
 

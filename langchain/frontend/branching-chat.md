@@ -11,7 +11,7 @@ run from the selected message's parent checkpoint.
 > **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/branching-chat).
 
 > [!NOTE]
-> This feature requires the [LangGraph Agent Server](https://docs.langchain.com/oss/python/langgraph/local-server). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](https://docs.langchain.com/langsmith/deployment) to use this pattern.
+> This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## What is branching chat?
 
@@ -33,7 +33,7 @@ the component that renders each message. The metadata includes the parent
 checkpoint ID to fork from.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";

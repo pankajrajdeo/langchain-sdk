@@ -6,10 +6,10 @@ To get started with LangSmith, you need to create an account. You can sign up fo
 
 LangSmith supports two types of API keys. You can use both types of token to authenticate requests to the LangSmith API, but they have different use cases:
 
-* [**Personal Access Tokens (PATs)**](https://docs.langchain.com/langsmith/administration-overview#personal-access-tokens-pats) inherit the permissions of the user who created them. Use PATs for personal scripts or tools.
-* [**Service keys**](https://docs.langchain.com/langsmith/administration-overview#service-keys) scope to specific [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces) or the entire [organization](https://docs.langchain.com/langsmith/administration-overview#organizations). Use service keys for applications and production services.
+* [**Personal Access Tokens (PATs)**](administration-overview.md#personal-access-tokens-pats) inherit the permissions of the user who created them. Use PATs for personal scripts or tools.
+* [**Service keys**](administration-overview.md#service-keys) scope to specific [workspaces](administration-overview.md#workspaces) or the entire [organization](administration-overview.md#organizations). Use service keys for applications and production services.
 
-To log [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) and run [evaluations](https://docs.langchain.com/langsmith/evaluation) with LangSmith, create an API key to authenticate your requests.
+To log [traces](observability-concepts.md#traces) and run [evaluations](evaluation.md) with LangSmith, create an API key to authenticate your requests.
 
 ### Open API Keys settings
 Navigate to the [**Settings** page](https://smith.langchain.com/settings) and select the **API Keys** section.
@@ -17,7 +17,7 @@ Navigate to the [**Settings** page](https://smith.langchain.com/settings) and se
 ### Configure the key type
 For service keys, choose between an organization-scoped and workspace-scoped key. If the key is workspace-scoped, you must specify the workspaces.
 
-[Enterprise](https://docs.langchain.com/langsmith/pricing-plans) users can also [assign specific workspace roles](https://docs.langchain.com/langsmith/administration-overview#workspace-roles-rbac) to service keys, which adjusts their permissions independently of any user.
+[Enterprise](pricing-plans.md) users can also [assign specific workspace roles](administration-overview.md#workspace-roles-rbac) to service keys, which adjusts their permissions independently of any user.
 
 ### Set expiration
 Set the key's expiration. The key becomes unusable after the number of days chosen, or never, if that is selected.
@@ -29,7 +29,7 @@ Click **Create API Key.** LangSmith will display the API key only once, so make 
 > To delete an API key, navigate to the [**Settings** page](https://smith.langchain.com/settings), find the key in the **API Keys** section, and select the trash icon  in the **Actions** column.
 
 > [!TIP]
-> [Enterprise](https://docs.langchain.com/langsmith/pricing-plans) Organization Admins can edit the [role](https://docs.langchain.com/langsmith/administration-overview#workspace-roles-rbac) on an existing service key without rotating the key. On the [**Settings** page](https://smith.langchain.com/settings) **API Keys** section, switch to the **Service** tab and click any service key row to open the edit dialog. Update the workspace role (and, for organization-scoped keys, the org role) and click **Save**. The key string itself is unchanged.
+> [Enterprise](pricing-plans.md) Organization Admins can edit the [role](administration-overview.md#workspace-roles-rbac) on an existing service key without rotating the key. On the [**Settings** page](https://smith.langchain.com/settings) **API Keys** section, switch to the **Service** tab and click any service key row to open the edit dialog. Update the workspace role (and, for organization-scoped keys, the org role) and click **Save**. The key string itself is unchanged.
 
 ## Configure the SDK
 
@@ -49,7 +49,7 @@ uv add langsmith
 npm install langsmith
 ```
 
-For full details, refer to the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk) or [JS/TS SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk) reference.
+For full details, refer to the [Python SDK](smith-python-sdk.md) or [JS/TS SDK](smith-js-ts-sdk.md) reference.
 
 Then, set your API key and enable tracing:
 
@@ -88,15 +88,15 @@ You may also need the following additional environment variables:
     </tbody>
   </table>
 
-* `LANGSMITH_WORKSPACE_ID` is required only if your API key is scoped to more than one [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces). Find your Workspace ID on the [**Settings** page](https://smith.langchain.com/settings) under **General**:
+* `LANGSMITH_WORKSPACE_ID` is required only if your API key is scoped to more than one [workspace](administration-overview.md#workspaces). Find your Workspace ID on the [**Settings** page](https://smith.langchain.com/settings) under **General**:
 
   `LANGSMITH_WORKSPACE_ID=`
 
-To reuse endpoint, API key, and workspace settings across local shells or remote runtimes, refer to [Profile configuration](https://docs.langchain.com/langsmith/profile-configuration).
+To reuse endpoint, API key, and workspace settings across local shells or remote runtimes, refer to [Profile configuration](profile-configuration.md).
 
 ## Use API keys outside of the SDK
 
-See [instructions for managing your organization via API](https://docs.langchain.com/langsmith/manage-organization-by-api).
+See [instructions for managing your organization via API](manage-organization-by-api.md).
 
 ***
 

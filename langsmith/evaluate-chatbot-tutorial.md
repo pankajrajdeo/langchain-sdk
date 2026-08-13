@@ -11,7 +11,7 @@ At a high level, in this tutorial we will:
 * *Track results over time*
 * *Set up automated testing to run in CI/CD*
 
-For more information on the evaluation workflows LangSmith supports, check out the [how-to guides](https://docs.langchain.com/langsmith/evaluation), or see the reference docs for [evaluate](https://reference.langchain.com/python/langsmith/client/Client/evaluate) and its asynchronous [aevaluate](https://reference.langchain.com/python/langsmith/client/Client/aevaluate) counterpart.
+For more information on the evaluation workflows LangSmith supports, check out the [how-to guides](evaluation.md), or see the reference docs for [evaluate](https://reference.langchain.com/python/langsmith/client/Client/evaluate) and its asynchronous [aevaluate](https://reference.langchain.com/python/langsmith/client/Client/aevaluate) counterpart.
 
 Lots to cover, let's dive in!
 
@@ -91,7 +91,7 @@ client.create_examples(
 
 Now, if we go the LangSmith UI and look for `QA Example Dataset` in the `Datasets & Testing` page, when we click into it we should see that we have five new examples.
 
-> **Image:** [Testing tutorial dataset](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial dataset](evaluate-chatbot-tutorial.md)
 
 ## Define metrics
 
@@ -176,11 +176,11 @@ experiment_results = client.evaluate(
 
 This will output a URL. If we click on it, we should see results of our evaluation!
 
-> **Image:** [Testing tutorial run](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial run](evaluate-chatbot-tutorial.md)
 
 If we go back to the dataset page and select the `Experiments` tab, we can now see a summary of our one run!
 
-> **Image:** [Testing tutorial one run](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial one run](evaluate-chatbot-tutorial.md)
 
 Let's now try it out with a different model! Let's try `gpt-4-turbo`
 
@@ -219,23 +219,23 @@ experiment_results = client.evaluate(
 
 If we go back to the `Experiments` tab on the datasets page, we should see that all three runs now show up!
 
-> **Image:** [Testing tutorial three runs](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial three runs](evaluate-chatbot-tutorial.md)
 
 ## Comparing results
 
 Awesome, we've evaluated three different runs. But how can we compare results? The first way we can do this is just by looking at the runs in the `Experiments` tab. If we do that, we can see a high level view of the metrics for each run:
 
-> **Image:** [Testing tutorial compare metrics](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial compare metrics](evaluate-chatbot-tutorial.md)
 
 We can tell that GPT-4 is better than GPT-3.5 at knowing who companies are, and that the strict prompt helped a lot with the length. But what if we want to explore in more detail?
 
 In order to do that, we can select all the runs we want to compare (in this case all three) and open them up in a comparison view. We immediately see all three tests side by side. Some of the cells are color coded - this is showing a regression of *a certain metric* compared to *a certain baseline*. We automatically choose defaults for the baseline and metric, but you can change those yourself. You can also choose which columns and which metrics you see by using the `Display` control. You can also automatically filter to only see the runs that have improvements/regressions by clicking on the icons at the top.
 
-> **Image:** [Testing tutorial compare runs](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial compare runs](evaluate-chatbot-tutorial.md)
 
 If we want to see more information, we can also select the `Expand` button that appears when hovering over a row to open up a side panel with more detailed information:
 
-> **Image:** [Testing tutorial side panel](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial side panel](evaluate-chatbot-tutorial.md)
 
 ## Set up automated testing to run in CI/CD
 
@@ -262,7 +262,7 @@ def test_length_score() -> None:
 
 Now that we've got these experiments running in an automated fashion, we want to track these results over time. We can do this from the overall `Experiments` tab in the datasets page. By default, we show evaluation metrics over time (highlighted in red). We also automatically track git metrics, to easily associate it with the branch of your code (highlighted in yellow).
 
-> **Image:** [Testing tutorial over time](https://docs.langchain.com/langsmith/evaluate-chatbot-tutorial)
+> **Image:** [Testing tutorial over time](evaluate-chatbot-tutorial.md)
 
 ## Conclusion
 
@@ -270,9 +270,9 @@ That's it for this tutorial!
 
 We've gone over how to create an initial test set, define some evaluation metrics, run experiments, compare them manually, set up CI/CD, and track results over time. This can help you iterate with confidence.
 
-This is just the start. As mentioned earlier, evaluation is an ongoing process. For example - the datapoints you will want to evaluate on will likely continue to change over time. There are many types of evaluators you may wish to explore. For information on this, check out the [how-to guides](https://docs.langchain.com/langsmith/evaluation).
+This is just the start. As mentioned earlier, evaluation is an ongoing process. For example - the datapoints you will want to evaluate on will likely continue to change over time. There are many types of evaluators you may wish to explore. For information on this, check out the [how-to guides](evaluation.md).
 
-Additionally, there are other ways to evaluate data besides in this "offline" manner (e.g. you can evaluate production data). For more information on online evaluation, check out [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge).
+Additionally, there are other ways to evaluate data besides in this "offline" manner (e.g. you can evaluate production data). For more information on online evaluation, check out [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md).
 
 ## Reference code
 

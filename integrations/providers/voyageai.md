@@ -22,7 +22,7 @@ Get a VoyageAI API key and set it as an environment variable (`VOYAGE_API_KEY`)
 
 ## Text embedding model
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/voyageai).
+See a [usage example](../embeddings/voyageai.md).
 
 ```python
 from langchain_voyageai import VoyageAIEmbeddings
@@ -30,7 +30,7 @@ from langchain_voyageai import VoyageAIEmbeddings
 
 ## Reranking
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/document_transformers/voyageai-reranker).
+See a [usage example](../document_transformers/voyageai-reranker.md).
 
 ```python
 from langchain_voyageai import VoyageAIRerank

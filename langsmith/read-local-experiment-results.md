@@ -1,18 +1,18 @@
 # How to read experiment results locally
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/read-local-experiment-results)
-When running [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts), you may want to process results programmatically in your script rather than viewing them in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-read-local-experiment-results). This is useful for scenarios like:
+When running [evaluations](evaluation-concepts.md), you may want to process results programmatically in your script rather than viewing them in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-read-local-experiment-results). This is useful for scenarios like:
 
 * **CI/CD pipelines**: Implement quality gates that fail builds if evaluation scores drop below a threshold.
 * **Local debugging**: Inspect and analyze results without API calls.
 * **Custom aggregations**: Calculate metrics and statistics using your own logic.
 * **Integration testing**: Use evaluation results to gate merges or deployments.
 
-This guide shows you how to iterate over and process [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) results from the [`ExperimentResults`](https://reference.langchain.com/python/langsmith/schemas/ExperimentResults) object returned by [`Client.evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate).
+This guide shows you how to iterate over and process [experiment](evaluation-concepts.md#experiment) results from the [`ExperimentResults`](https://reference.langchain.com/python/langsmith/schemas/ExperimentResults) object returned by [`Client.evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate).
 
 > [!NOTE]
 > This page focuses on processing results programmatically while still uploading them to LangSmith.
 >
-> If you want to run evaluations locally **without** recording anything to LangSmith (for quick testing or validation), refer to [Run an evaluation locally](https://docs.langchain.com/langsmith/local) which uses `upload_results=False`.
+> If you want to run evaluations locally **without** recording anything to LangSmith (for quick testing or validation), refer to [Run an evaluation locally](local.md) which uses `upload_results=False`.
 
 ## Iterate over evaluation results
 
@@ -74,7 +74,7 @@ Evaluation Results: [EvaluationResult(key='randomness', score=1, value=None, com
 Each result in the iterator contains:
 
 * `result["run"]`: The execution of your target function.
-  * `result["run"].inputs`: The inputs from your [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) example.
+  * `result["run"].inputs`: The inputs from your [dataset](evaluation-concepts.md#datasets) example.
   * `result["run"].outputs`: The outputs produced by your target function.
   * `result["run"].id`: The unique ID for this run.
 
@@ -163,13 +163,13 @@ for result in results:
 
 With `blocking=True`, your processing code runs only after all evaluations are complete, avoiding mixed output with evaluation logs.
 
-For more information on running evaluations without uploading results, refer to [Run an evaluation locally](https://docs.langchain.com/langsmith/local).
+For more information on running evaluations without uploading results, refer to [Run an evaluation locally](local.md).
 
 ## Related
 
-* [Evaluate your LLM application](https://docs.langchain.com/langsmith/evaluate-llm-application)
-* [Run an evaluation locally](https://docs.langchain.com/langsmith/local)
-* [Fetch performance metrics from an experiment](https://docs.langchain.com/langsmith/fetch-perf-metrics-experiment)
+* [Evaluate your LLM application](evaluate-llm-application.md)
+* [Run an evaluation locally](local.md)
+* [Fetch performance metrics from an experiment](fetch-perf-metrics-experiment.md)
 
 ***
 

@@ -1,12 +1,12 @@
 # How to run an evaluation asynchronously
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-async)
 > [!NOTE]
-> [Evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) | [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) | [Datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) | [Experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment)
+> [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Evaluators](evaluation-concepts.md#evaluators) | [Datasets](evaluation-concepts.md#datasets) | [Experiments](evaluation-concepts.md#experiment)
 
-We can run evaluations asynchronously via the SDK using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), which accepts all of the same arguments as [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](https://docs.langchain.com/langsmith/evaluate-llm-application).
+We can run evaluations asynchronously via the SDK using [aevaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._arunner.aevaluate), which accepts all of the same arguments as [evaluate()](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) but expects the application function to be asynchronous. To learn more, see [how to use the `evaluate()` function](evaluate-llm-application.md).
 
 > [!NOTE]
-> This guide is only relevant when using the Python SDK. In JS/TS the `evaluate()` function is already async. For more information, see [Evaluate LLM applications](https://docs.langchain.com/langsmith/evaluate-llm-application).
+> This guide is only relevant when using the Python SDK. In JS/TS the `evaluate()` function is already async. For more information, see [Evaluate LLM applications](evaluate-llm-application.md).
 
 ## Use `aevaluate()`
 
@@ -68,8 +68,8 @@ results = await ls_client.aevaluate(
 
 ## Related
 
-* [Run an evaluation (synchronously)](https://docs.langchain.com/langsmith/evaluate-llm-application)
-* [Handle model rate limits](https://docs.langchain.com/langsmith/handle-model-rate-limiting)
+* [Run an evaluation (synchronously)](evaluate-llm-application.md)
+* [Handle model rate limits](handle-model-rate-limiting.md)
 
 ***
 

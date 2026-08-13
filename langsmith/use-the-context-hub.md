@@ -14,7 +14,7 @@ Use this guide to create your first context, view its files and history, and pro
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-use-the-context-hub), select **Context** in the
 left-hand navigation. The Context Hub lists every agent and skill in your workspace.
 
-> **Image:** [The Context Hub home view listing existing Agent and Skill contexts with their commit metadata.](https://docs.langchain.com/langsmith/use-the-context-hub)
+> **Image:** [The Context Hub home view listing existing Agent and Skill contexts with their commit metadata.](use-the-context-hub.md)
 
 ## 2. Create a context
 
@@ -25,7 +25,7 @@ left-hand navigation. The Context Hub lists every agent and skill in your worksp
    * **Agent:** a full agent bundle including an `AGENTS.md` file and tools.
    * **Skill:** a reusable capability that agents can use, including a `SKILL.md` file.
 
-> **Image:** [The Create dropdown showing the Agent and Skill context type options.](https://docs.langchain.com/langsmith/use-the-context-hub)
+> **Image:** [The Create dropdown showing the Agent and Skill context type options.](use-the-context-hub.md)
 
 3. Fill in a name and description. For skills, a description is required. You can also enter the initial file contents (`SKILL.md` for a skill, `AGENTS.md` for an agent) now, or add them after creation. Click **Create Agent** or **Create Skill**. LangSmith creates the repo and opens it for editing.
 
@@ -33,7 +33,7 @@ left-hand navigation. The Context Hub lists every agent and skill in your worksp
 
 Click on an agent or skill from the Context Hub to view it.
 
-> **Image:** [An Agent context with an AGENTS.md file open, showing the environments panel, commit history, and file tree.](https://docs.langchain.com/langsmith/use-the-context-hub)
+> **Image:** [An Agent context with an AGENTS.md file open, showing the environments panel, commit history, and file tree.](use-the-context-hub.md)
 
 The middle panel shows the file tree for the current commit and the right panel previews the selected file. Click a file in the middle panel to open it, then edit it in the right panel and save your changes to create a new commit.
 
@@ -56,7 +56,7 @@ agents can pull it.
    * **Promote to Production:** the commit your production agents pull.
    * **Promote to Staging:** a pre-production environment for validation.
 
-> **Image:** [The Promote dropdown with options to promote a commit to Production or Staging.](https://docs.langchain.com/langsmith/use-the-context-hub)
+> **Image:** [The Promote dropdown with options to promote a commit to Production or Staging.](use-the-context-hub.md)
 
 3. The environment label (for example, `Production 7ca95573`) moves to the
    promoted commit. Use the **Tag** button next to **Promote** to attach a
@@ -66,9 +66,9 @@ Agent runtimes that resolve context by environment tag (for example, `:productio
 
 ## Next steps
 
-* [Context engineering concepts](https://docs.langchain.com/langsmith/context-engineering-concepts): learn about skills, agents, versioning, and sharing.
-* [Manage contexts with the SDK](https://docs.langchain.com/langsmith/manage-contexts-sdk): push, pull, list, and delete contexts programmatically.
-* [Configure commit webhooks](https://docs.langchain.com/langsmith/context-hub-webhooks): send workspace Context Hub commits to an external HTTPS endpoint.
+* [Context engineering concepts](context-engineering-concepts.md): learn about skills, agents, versioning, and sharing.
+* [Manage contexts with the SDK](manage-contexts-sdk.md): push, pull, list, and delete contexts programmatically.
+* [Configure commit webhooks](context-hub-webhooks.md): send workspace Context Hub commits to an external HTTPS endpoint.
 
 ***
 

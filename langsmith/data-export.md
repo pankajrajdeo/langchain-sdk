@@ -7,7 +7,7 @@ Export LangSmith trace data to an S3-compatible bucket in Parquet format.
 >
 > For customers who signed up after August 3, 2026, bulk export is only available on the [LangSmith Enterprise plan](https://www.langchain.com/pricing-langsmith). Customers who signed up on or before August 3, 2026, can use bulk export on Plus or Enterprise plans until February 1, 2027.
 
-LangSmith's bulk data export lets you export trace data from a specific project and date range to an S3-compatible bucket in [Parquet](https://parquet.apache.org/docs/overview/) format, matching the fields in the [Run data format](https://docs.langchain.com/langsmith/run-data-format). This is useful for offline analysis in tools like BigQuery, Snowflake, Redshift, or Jupyter Notebooks.
+LangSmith's bulk data export lets you export trace data from a specific project and date range to an S3-compatible bucket in [Parquet](https://parquet.apache.org/docs/overview/) format, matching the fields in the [Run data format](run-data-format.md). This is useful for offline analysis in tools like BigQuery, Snowflake, Redshift, or Jupyter Notebooks.
 
 This page covers how to:
 
@@ -15,14 +15,14 @@ This page covers how to:
 * Create and configure an export job, including scheduled exports and field filtering
 * Monitor export progress
 
-**Before you start:** exports may take some time depending on data volume, and LangSmith limits how many exports can run concurrently. Bulk exports have a 72-hour runtime timeout—refer to [Automatic retry behavior](https://docs.langchain.com/langsmith/data-export-monitor#automatic-retry-behavior) for details. Once launched, LangSmith handles orchestration and [resilience of the export process](https://docs.langchain.com/langsmith/data-export-monitor#failure-modes-and-retry-policy) automatically.
+**Before you start:** exports may take some time depending on data volume, and LangSmith limits how many exports can run concurrently. Bulk exports have a 72-hour runtime timeout—refer to [Automatic retry behavior](data-export-monitor.md#automatic-retry-behavior) for details. Once launched, LangSmith handles orchestration and [resilience of the export process](data-export-monitor.md#failure-modes-and-retry-policy) automatically.
 
 ## 1. Create a destination
 
 The destination tells LangSmith where to write your exported data. Before making this request, you will need:
 
-* Your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) and [workspace ID](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-a-workspace).
-* An S3 or S3-compatible bucket with **write access** granted to LangSmith (refer to [Permissions required](https://docs.langchain.com/langsmith/data-export-destinations#permissions-required)).
+* Your [LangSmith API key](create-account-api-key.md) and [workspace ID](set-up-hierarchy.md#set-up-a-workspace).
+* An S3 or S3-compatible bucket with **write access** granted to LangSmith (refer to [Permissions required](data-export-destinations.md#permissions-required)).
 * The bucket name, prefix, and either the AWS region (for AWS S3) or the endpoint URL (for GCS, MinIO, or other S3-compatible providers).
 * An access key and secret key for the bucket.
 
@@ -48,17 +48,17 @@ curl --request POST \
   }'
 ```
 
-Credentials are stored securely in encrypted form. The API will validate that the destination and credentials are valid before saving. If the request fails, refer to [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
+Credentials are stored securely in encrypted form. The API will validate that the destination and credentials are valid before saving. If the request fails, refer to [Debug destination errors](data-export-destinations.md#debug-destination-errors).
 
 Save the `id` from the response; you will need it when creating an export job.
 
-Refer to [Manage bulk export destinations](https://docs.langchain.com/langsmith/data-export-destinations) for permissions setup, provider-specific configuration (AWS S3, GCS, MinIO), and credential options.
+Refer to [Manage bulk export destinations](data-export-destinations.md) for permissions setup, provider-specific configuration (AWS S3, GCS, MinIO), and credential options.
 
 ## 2. Create an export job
 
 An export job targets a project (or all experiments in a workspace) and a date range. You will need:
 
-* The destination `id` from the [previous step](https://docs.langchain.com/langsmith/data-export#1-create-a-destination).
+* The destination `id` from the [previous step](#1-create-a-destination).
 * Either a project ID (`session_id`) or `"all_experiments": true`—copy the project ID from the individual project view in the [**Tracing Projects** list](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-data-export).
 * A `start_time` and `end_time` in UTC ISO 8601 format.
 
@@ -81,21 +81,21 @@ The `start_time` is inclusive and `end_time` is exclusive. The export will inclu
 
 Save the `id` from the response to monitor the export's progress.
 
-You can optionally add a `filter` expression to narrow the set of runs exported. Refer to our [filter query language](https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language) and [examples](https://docs.langchain.com/langsmith/export-traces#use-filter-query-language) for syntax. Not setting the `filter` field will export all runs.
+You can optionally add a `filter` expression to narrow the set of runs exported. Refer to our [filter query language](trace-query-syntax.md#filter-query-language) and [examples](export-traces.md#use-filter-query-language) for syntax. Not setting the `filter` field will export all runs.
 
 > [!NOTE]
 > **LangSmith Cloud limit: 250 bulk export creations per hour per workspace**
 >
-> On [LangSmith cloud](https://docs.langchain.com/langsmith/cloud), each workspace can create at most 250 bulk exports per hour. This budget includes one-off exports and exports spawned by [scheduled bulk exports](https://docs.langchain.com/langsmith/data-export#schedule-recurring-exports), so a workspace with many active schedules consumes part of the hourly budget automatically.
+> On [LangSmith cloud](cloud.md), each workspace can create at most 250 bulk exports per hour. This budget includes one-off exports and exports spawned by [scheduled bulk exports](#schedule-recurring-exports), so a workspace with many active schedules consumes part of the hourly budget automatically.
 >
 > If your workspace reaches the limit, new create requests will be rejected with a 429 until earlier creates age past the rolling 60-minute window. To raise the limit, contact support via [support.langchain.com](https://support.langchain.com).
 >
-> [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) does not enforce this limit by default.
+> [Self-hosted LangSmith](self-hosted.md) does not enforce this limit by default.
 
 ### Export all experiments
 
 > [!NOTE]
-> [Self-hosted](https://docs.langchain.com/langsmith/self-hosted): currently available only on the `v0.16.1rc1` [preview release](https://docs.langchain.com/langsmith/release-versions#preview). Wait for the `v0.16.1` stable release before running it in production.
+> [Self-hosted](self-hosted.md): currently available only on the `v0.16.1rc1` [preview release](release-versions.md#preview). Wait for the `v0.16.1` stable release before running it in production.
 
 To export every experiment in the workspace instead of targeting a single project with `session_id`, set `all_experiments: true`. LangSmith creates an experiment whenever you run an evaluation against a dataset, any tracing project with `reference_dataset_id` set qualifies.
 
@@ -118,17 +118,17 @@ curl --request POST \
 
 LangSmith resolves the set of experiment sessions at run time, so the export picks up any experiments you create after submitting the job but before the orchestrator starts processing.
 
-The same `all_experiments` flag works with [scheduled exports](https://docs.langchain.com/langsmith/data-export#schedule-recurring-exports)—include `interval_hours` and omit `end_time` instead of supplying `end_time`.
+The same `all_experiments` flag works with [scheduled exports](#schedule-recurring-exports)—include `interval_hours` and omit `end_time` instead of supplying `end_time`.
 
 > [!NOTE]
 > **Cloud limit: 250 experiments per export**
 >
-> On [LangSmith cloud](https://docs.langchain.com/langsmith/cloud), each `all_experiments` export includes at most 250 experiments. To export more:
+> On [LangSmith cloud](cloud.md), each `all_experiments` export includes at most 250 experiments. To export more:
 >
 > * Query the completed `all_experiments` export to see which tracing projects were included, then create standard bulk exports with `session_id` for the remaining experiments.
 > * Or, contact support via [support.langchain.com](https://support.langchain.com) to request a higher limit for your workspace.
 >
-> [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) has no per-export limit.
+> [Self-hosted LangSmith](self-hosted.md) has no per-export limit.
 
 ### Schedule recurring exports
 
@@ -157,18 +157,18 @@ curl --request POST \
 * Each spawned export covers `start_time` to `start_time + interval_hours`, then advances by `interval_hours` for each subsequent run. Since `end_time` is exclusive, consecutive exports do not overlap.
 * Spawned exports run at `end_time + 10 minutes` to account for runs submitted with `end_time` in the recent past.
 * Spawned exports have the `source_bulk_export_id` attribute filled. If desired, they must be cancelled separately—cancelling the source export **does not** cancel already-spawned exports.
-* To stop a scheduled export, [cancel it](https://docs.langchain.com/langsmith/data-export-monitor#stop-an-export).
+* To stop a scheduled export, [cancel it](data-export-monitor.md#stop-an-export).
 
 > [!NOTE]
 > **LangSmith Cloud limit: 200 scheduled bulk exports per workspace**
 >
-> On [LangSmith cloud](https://docs.langchain.com/langsmith/cloud), each workspace can have at most 200 active **scheduled** (recurring) bulk exports at a time. That is, exports configured with an `interval_hours` value. The limit caps the number of **schedules**, not the number of times they run: a schedule that has produced thousands of historical export runs still counts as one.
+> On [LangSmith cloud](cloud.md), each workspace can have at most 200 active **scheduled** (recurring) bulk exports at a time. That is, exports configured with an `interval_hours` value. The limit caps the number of **schedules**, not the number of times they run: a schedule that has produced thousands of historical export runs still counts as one.
 >
 > One-off (non-recurring) bulk exports are not subject to this limit.
 >
-> If your workspace reaches the limit, new scheduled export requests will be rejected with a `429` until you [cancel](https://docs.langchain.com/langsmith/data-export-monitor#stop-an-export) an existing schedule. To raise the limit, contact support via [support.langchain.com](https://support.langchain.com).
+> If your workspace reaches the limit, new scheduled export requests will be rejected with a `429` until you [cancel](data-export-monitor.md#stop-an-export) an existing schedule. To raise the limit, contact support via [support.langchain.com](https://support.langchain.com).
 >
-> [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted) does not enforce this limit by default.
+> [Self-hosted LangSmith](self-hosted.md) does not enforce this limit by default.
 
 **Example**
 
@@ -212,10 +212,10 @@ curl --request POST \
 
 Set the `compression` field to control how exported Parquet files are compressed. When omitted, LangSmith uses `zstandard`.
 
-Allowed values: `zstandard`, `gzip`, `snappy`, `none`. Use `snappy` when loading into BigQuery, see [Export trace data to BigQuery](https://docs.langchain.com/langsmith/big-query-bulk-export).
+Allowed values: `zstandard`, `gzip`, `snappy`, `none`. Use `snappy` when loading into BigQuery, see [Export trace data to BigQuery](big-query-bulk-export.md).
 
 > [!NOTE]
-> On [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted), the default is `gzip`. Set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable to change the default.
+> On [Self-hosted LangSmith](self-hosted.md), the default is `gzip`. Set the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable to change the default.
 
 ### Exportable fields
 
@@ -291,7 +291,7 @@ Data is exported into your bucket using the following Hive partitioned structure
 
 ## 3. Monitor your export
 
-Poll the export status using the `id` from the [previous step](https://docs.langchain.com/langsmith/data-export#2-create-an-export-job):
+Poll the export status using the `id` from the [previous step](#2-create-an-export-job):
 
 ```bash
 curl --request GET \
@@ -303,7 +303,7 @@ curl --request GET \
 
 The `status` field in the response will be one of `CREATED`, `RUNNING`, `COMPLETED`, `FAILED`, `CANCELLED`, or `TIMEDOUT`. Exports may take some time depending on the volume of data. Once the status is `COMPLETED`, the Parquet files are available in your bucket.
 
-Refer to [Monitor and troubleshoot bulk exports](https://docs.langchain.com/langsmith/data-export-monitor) for how to list runs, stop an export, and diagnose failures.
+Refer to [Monitor and troubleshoot bulk exports](data-export-monitor.md) for how to list runs, stop an export, and diagnose failures.
 
 ***
 

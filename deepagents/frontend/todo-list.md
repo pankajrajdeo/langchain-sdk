@@ -20,7 +20,7 @@ todo's status from `"pending"` to `"in_progress"` to `"completed"`. The
 renders it reactively.
 
 > [!NOTE]
-> Task planning is opt-in. Without [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware), `stream.values.todos` is not present. See [Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning).
+> Task planning is opt-in. Without [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware), `stream.values.todos` is not present. See [Task planning](../overview.md#task-planning).
 
 The flow looks like this:
 
@@ -109,7 +109,7 @@ Then point [`useStream`](https://reference.langchain.com/javascript/langchain-re
 read the `todos` from `stream.values`.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](../../langchain/frontend/overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream } from "@langchain/react";

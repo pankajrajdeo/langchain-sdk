@@ -5,16 +5,16 @@ Make your first LLM Gateway request with cURL, Python, or TypeScript.
 The LLM Gateway lets you call models across configured providers through one standard endpoint with one LangSmith API key. This quickstart uses the OpenAI Chat Completions format to call an Anthropic model.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
 ## Prerequisites
 
 Before you start, confirm that:
 
-* Your [Organization admin](https://docs.langchain.com/langsmith/rbac#organization-admin) has enabled the LLM Gateway. For bring-your-own-key models, the admin must also add the provider API key to workspace secrets. To set this up, see [Admin setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup).
-* You have a workspace-scoped [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) attached to a role with `gateway:invoke` and `workspaces:read` [permissions](https://docs.langchain.com/langsmith/organization-workspace-operations). Ask your organization admin if you are unsure.
+* Your [Organization admin](rbac.md#organization-admin) has enabled the LLM Gateway. For bring-your-own-key models, the admin must also add the provider API key to workspace secrets. To set this up, see [Admin setup](llm-gateway-admin-setup.md).
+* You have a workspace-scoped [LangSmith API key](create-account-api-key.md) attached to a role with `gateway:invoke` and `workspaces:read` [permissions](organization-workspace-operations.md). Ask your organization admin if you are unsure.
 
-You can call a [Gateway Credits model](https://docs.langchain.com/langsmith/llm-gateway-credits) without a provider secret. The example below uses a bring-your-own-key Anthropic model.
+You can call a [Gateway Credits model](llm-gateway-credits.md) without a provider secret. The example below uses a bring-your-own-key Anthropic model.
 
 ## 1. Set environment variables
 
@@ -28,13 +28,13 @@ export LANGSMITH_API_KEY="lsv2_..._....cbed3e"
 The unified base URL accepts provider-prefixed bring-your-own-key model IDs, such as `anthropic/claude-opus-5`, and hosted model slugs, such as `moonshotai/kimi-k3`. The model ID determines the upstream route.
 
 > [!NOTE]
-> If your LangSmith account is on a regional instance, use the corresponding [regional gateway](https://docs.langchain.com/langsmith/llm-gateway-api-formats#use-a-regional-gateway).
+> If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-api-formats.md#use-a-regional-gateway).
 
-To preserve a provider's native API without format translation, use a [direct provider route](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access) instead.
+To preserve a provider's native API without format translation, use a [direct provider route](llm-gateway-direct-model-access.md) instead.
 
 ### Using LangChain and Deep Agents
 
-[LangChain](https://docs.langchain.com/oss/python/langchain/overview) chat models and [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) (including [Deep Agents Code](https://docs.langchain.com/oss/deepagents/code/overview)) support the gateway through two convenience environment variables:
+[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md) (including [Deep Agents Code](../deepagents/code/overview.md)) support the gateway through two convenience environment variables:
 
 ```bash
 export LANGSMITH_GATEWAY="true"
@@ -65,11 +65,11 @@ You can also configure base URLs and API keys for individual providers. See the 
 
 * Supported in Python only.
 * Supported chat models:
-  * [Anthropic](https://docs.langchain.com/oss/python/integrations/chat/anthropic) (`langchain-anthropic >= 1.5.1`)
-  * [Baseten](https://docs.langchain.com/oss/python/integrations/chat/baseten) (`langchain-baseten >= 0.2.3`)
-  * [Fireworks](https://docs.langchain.com/oss/python/integrations/chat/fireworks) (`langchain-fireworks >= 1.5.1`)
-  * [Google Gemini](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) (`langchain-google-genai >= 4.3.2`)
-  * [OpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai) (`langchain-openai >= 1.4.1`).
+  * [Anthropic](../integrations/chat/anthropic.md) (`langchain-anthropic >= 1.5.1`)
+  * [Baseten](../integrations/chat/baseten.md) (`langchain-baseten >= 0.2.3`)
+  * [Fireworks](../integrations/chat/fireworks.md) (`langchain-fireworks >= 1.5.1`)
+  * [Google Gemini](../integrations/chat/google_generative_ai.md) (`langchain-google-genai >= 4.3.2`)
+  * [OpenAI](../integrations/chat/openai.md) (`langchain-openai >= 1.4.1`).
 * Provider-specific base URLs take precedence over the gateway, so you can still route an individual provider elsewhere. For example, with the gateway enabled, `OPENAI_API_BASE` sends OpenAI to that URL while every other provider continues to use the gateway:
 
 ```bash
@@ -158,13 +158,13 @@ A `200` response with a chat completion confirms that the gateway, your API key,
 Open the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-quickstart) and navigate to the tracing project named `gateway` or `gateway-<short_api_key>-<api_key_id>` in the workspace associated with your API key. You should see a new trace for the call you just made.
 
 > [!NOTE]
-> If your application also emits its own LangSmith traces, for example, through [LangChain or LangGraph tracing](https://docs.langchain.com/langsmith/observability), the gateway-side trace and your application trace appear as separate runs. Linking gateway traces to the parent application run is not yet supported.
+> If your application also emits its own LangSmith traces, for example, through [LangChain or LangGraph tracing](observability.md), the gateway-side trace and your application trace appear as separate runs. Linking gateway traces to the parent application run is not yet supported.
 
 ## 4. Set a spend policy (optional)
 
 Go to **Settings → Gateway → LLM Gateway** in LangSmith to create a spend policy. For example, you can set a daily \$10 cap on your API key. When the cap is reached, the gateway returns a `402` response with the message: `"Request blocked by gateway policies: R&D Spend Cap"`.
 
-See [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) for the full guide on policy dimensions, time windows, and conflict resolution.
+See [Spend policies](llm-gateway-spend-policies.md) for the full guide on policy dimensions, time windows, and conflict resolution.
 
 ## How the gateway handles requests
 
@@ -179,11 +179,11 @@ The gateway performs these steps for each standard endpoint request:
 
 ## Next steps
 
-* [Set up coding agents](https://docs.langchain.com/langsmith/llm-gateway-coding-agents): route Claude Code, Codex, Gemini CLI, or Deep Agents Code through the gateway.
-* [API formats](https://docs.langchain.com/langsmith/llm-gateway-api-formats): use Chat Completions, Messages, or Responses through the standard endpoint.
-* [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access): use provider-native request and response formats.
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): configure cost limits across your organization.
-* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): prevent sensitive data from reaching providers.
+* [Set up coding agents](llm-gateway-coding-agents.md): route Claude Code, Codex, Gemini CLI, or Deep Agents Code through the gateway.
+* [API formats](llm-gateway-api-formats.md): use Chat Completions, Messages, or Responses through the standard endpoint.
+* [Direct model access](llm-gateway-direct-model-access.md): use provider-native request and response formats.
+* [Spend policies](llm-gateway-spend-policies.md): configure cost limits across your organization.
+* [Data protection](llm-gateway-data-protection.md): prevent sensitive data from reaching providers.
 
 ***
 

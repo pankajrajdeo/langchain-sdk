@@ -18,7 +18,7 @@ uv add langsmith autogen-agentchat autogen-ext opentelemetry-instrumentation-ope
 
 ### 1. Configure environment variables
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key) and project name:
+Set your [API keys](create-account-api-key.md) and project name:
 
 ```bash
 export LANGSMITH_API_KEY=<your_langsmith_api_key>
@@ -161,7 +161,7 @@ HTTPXClientInstrumentor().instrument()
 ## Resources
 
 * [AutoGen documentation](https://microsoft.github.io/autogen/stable/)
-* [LangSmith OpenTelemetry guide](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+* [LangSmith OpenTelemetry guide](trace-with-opentelemetry.md)
 
 ***
 

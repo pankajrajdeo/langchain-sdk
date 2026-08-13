@@ -401,7 +401,7 @@ export function initTracerProvider(): NodeTracerProvider {
   // Create TracerProvider
   const provider = new NodeTracerProvider({
     resource: new Resource({
-      [ATTR_SERVICE_NAME]: https://docs.langchain.com/langsmith/'temporal-worker',
+      [ATTR_SERVICE_NAME]: 'temporal-worker',
     }),
   });
 
@@ -565,7 +565,7 @@ resource = Resource.create({
 ```typescript
 const provider = new NodeTracerProvider({
   resource: new Resource({
-    [ATTR_SERVICE_NAME]: https://docs.langchain.com/langsmith/'my-temporal-worker',
+    [ATTR_SERVICE_NAME]: 'my-temporal-worker',
   }),
 });
 ```
@@ -675,8 +675,8 @@ finally {
 
 ## Next steps
 
-* [Learn about LangSmith tracing concepts](https://docs.langchain.com/langsmith/observability-concepts)
-* [Explore OpenTelemetry semantic conventions](https://docs.langchain.com/langsmith/trace-with-opentelemetry#supported-opentelemetry-attribute-and-event-mapping)
+* [Learn about LangSmith tracing concepts](observability-concepts.md)
+* [Explore OpenTelemetry semantic conventions](trace-with-opentelemetry.md#supported-opentelemetry-attribute-and-event-mapping)
 
 ## Additional resources
 

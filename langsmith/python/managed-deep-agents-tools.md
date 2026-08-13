@@ -6,10 +6,10 @@ Managed Deep Agents support the normal Deep Agents `tools` configuration surface
 
 Define LangChain tools in your project, import them into `agent.py`, and pass them to `define_deep_agent`.
 
-To load tools from a remote MCP server instead, use an [MCP connector](https://docs.langchain.com/langsmith/python/managed-deep-agents-mcp-connectors).
+To load tools from a remote MCP server instead, use an [MCP connector](managed-deep-agents-mcp-connectors.md).
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -26,7 +26,7 @@ my-agent/
 
 Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project. Managed Deep Agents copies the source into the compiled build and passes the tools to Deep Agents.
 
-For more about LangChain tool definitions, see [Tools](https://docs.langchain.com/oss/python/langchain/tools).
+For more about LangChain tool definitions, see [Tools](../../langchain/tools.md).
 
 ## Add a tool module
 
@@ -84,16 +84,16 @@ agent = define_deep_agent(
 )
 ```
 
-The `interrupt_on` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](https://docs.langchain.com/oss/python/langchain/guardrails#human-in-the-loop).
+The `interrupt_on` field applies the same interrupt behavior as LangChain's [human-in-the-loop middleware](../../langchain/guardrails.md#human-in-the-loop).
 
-For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop) and [Permissions](https://docs.langchain.com/oss/python/deepagents/permissions) guides.
+For decision types (approve, edit, reject), conditional interrupts, and permission rules, see the Deep Agents [Human-in-the-loop](../../deepagents/human-in-the-loop.md) and [Permissions](../../deepagents/permissions.md) guides.
 
 ### Respond to an interrupt
 
 When a run hits an interrupt, it pauses and waits for a human response before continuing.
 
 * **During local development**, `mda dev` runs the agent in LangSmith Studio, which surfaces the interrupt so you can inspect the pending tool call and resume the run.
-* **On a deployed agent**, resume the paused run through the LangGraph server API with a `Command(resume=...)` payload. See [Human-in-the-loop using server API](https://docs.langchain.com/langsmith/add-human-in-the-loop).
+* **On a deployed agent**, resume the paused run through the LangGraph server API with a `Command(resume=...)` payload. See [Human-in-the-loop using server API](../add-human-in-the-loop.md).
 
 > [!NOTE]
 > During public beta, Managed Deep Agents is CLI-first and programmatic invocation is not yet documented. To resume runs programmatically from your own application, contact your LangChain team.
@@ -104,7 +104,7 @@ Human-in-the-loop needs durable thread state to pause and resume. The managed ru
 
 Tools can read deployment secrets from environment variables. Put local values in `.env` for `mda dev`; `mda deploy` forwards non-reserved `.env` values as hosted deployment secrets.
 
-For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](https://docs.langchain.com/oss/python/langchain/tools#access-context).
+For per-run values such as request metadata or feature flags, use the normal LangChain runtime context patterns for tools. See [how to access context from within your tools](../../langchain/tools.md#access-context).
 
 ***
 

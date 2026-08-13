@@ -17,7 +17,7 @@ uv add langchain-mcp-adapters
 `langchain-mcp-adapters` enables agents to use tools defined across one or more MCP servers.
 
 > [!NOTE]
-> `MultiServerMCPClient` is **stateless by default**. Each tool invocation creates a fresh MCP `ClientSession`, executes the tool, and then cleans up. See the [stateful sessions](https://docs.langchain.com/oss/python/langchain/mcp#stateful-sessions) section for more details.
+> `MultiServerMCPClient` is **stateless by default**. Each tool invocation creates a fresh MCP `ClientSession`, executes the tool, and then cleans up. See the [stateful sessions](#stateful-sessions) section for more details.
 
 ```python
 import asyncio
@@ -60,7 +60,7 @@ if __name__ == "__main__":
 ```
 
 > [!TIP]
-> Trace MCP tool calls alongside your agent's reasoning steps with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-mcp). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up.
+> Trace MCP tool calls alongside your agent's reasoning steps with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-mcp). Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up.
 
 ## Custom servers
 
@@ -197,7 +197,7 @@ client = MultiServerMCPClient(
 Client launches server as a subprocess and communicates via standard input/output. Best for local tools and simple setups.
 
 > [!NOTE]
-> Unlike HTTP transports, `stdio` connections are inherently **stateful**: the subprocess persists for the lifetime of the client connection. However, when using `MultiServerMCPClient` without explicit session management, each tool call still creates a new session. See [stateful sessions](https://docs.langchain.com/oss/python/langchain/mcp#stateful-sessions) for managing persistent connections.
+> Unlike HTTP transports, `stdio` connections are inherently **stateful**: the subprocess persists for the lifetime of the client connection. However, when using `MultiServerMCPClient` without explicit session management, each tool call still creates a new session. See [stateful sessions](#stateful-sessions) for managing persistent connections.
 
 ```python
 client = MultiServerMCPClient(
@@ -238,7 +238,7 @@ async with client.session("server_name") as session:  # [!code highlight]
 
 ### Tools
 
-[Tools](https://modelcontextprotocol.io/docs/concepts/tools) allow MCP servers to expose executable functions that LLMs can invoke to perform actions—such as querying databases, calling APIs, or interacting with external systems. LangChain converts MCP tools into LangChain [tools](https://docs.langchain.com/oss/python/langchain/tools), making them directly usable in any LangChain agent or workflow.
+[Tools](https://modelcontextprotocol.io/docs/concepts/tools) allow MCP servers to expose executable functions that LLMs can invoke to perform actions—such as querying databases, calling APIs, or interacting with external systems. LangChain converts MCP tools into LangChain [tools](tools.md), making them directly usable in any LangChain agent or workflow.
 
 #### Loading tools
 
@@ -264,7 +264,7 @@ This applies only to tool execution errors (`CallToolResult(isError=True)`). Tra
 
 MCP tools can return [structured content](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#structured-content) alongside the human-readable text response. This is useful when a tool needs to return machine-parseable data (like JSON) in addition to text that gets shown to the model.
 
-When an MCP tool returns `structuredContent`, the adapter wraps it in an [`MCPToolArtifact`](https://reference.langchain.com/python/langchain_mcp_adapters/#langchain_mcp_adapters.tools.MCPToolArtifact) and returns it as the tool's artifact. You can access this using the `artifact` field on the `ToolMessage`. You can also use [interceptors](https://docs.langchain.com/oss/python/langchain/mcp#tool-interceptors) to process or transform structured content automatically.
+When an MCP tool returns `structuredContent`, the adapter wraps it in an [`MCPToolArtifact`](https://reference.langchain.com/python/langchain_mcp_adapters/#langchain_mcp_adapters.tools.MCPToolArtifact) and returns it as the tool's artifact. You can access this using the `artifact` field on the `ToolMessage`. You can also use [interceptors](#tool-interceptors) to process or transform structured content automatically.
 
 **Extracting structured content from artifact**
 
@@ -291,7 +291,7 @@ for message in result["messages"]:
 
 **Appending structured content via interceptor**
 
-If you want structured content to be visible in the conversation history (visible to the model), you can use an [interceptor](https://docs.langchain.com/oss/python/langchain/mcp#tool-interceptors) to automatically append structured content to the tool result:
+If you want structured content to be visible in the conversation history (visible to the model), you can use an [interceptor](#tool-interceptors) to automatically append structured content to the tool result:
 
 ```python
 import json
@@ -314,7 +314,7 @@ client = MultiServerMCPClient({...}, tool_interceptors=[append_structured_conten
 
 #### Multimodal tool content
 
-MCP tools can return [multimodal content](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#tool-result) (images, text, etc.) in their responses. When an MCP server returns content with multiple parts (e.g., text and images), the adapter converts them to LangChain's [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks). You can access the standardized representation via the `content_blocks` property on the `ToolMessage`:
+MCP tools can return [multimodal content](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#tool-result) (images, text, etc.) in their responses. When an MCP server returns content with multiple parts (e.g., text and images), the adapter converts them to LangChain's [standard content blocks](messages.md#standard-content-blocks). You can access the standardized representation via the `content_blocks` property on the `ToolMessage`:
 
 ```python
 from langchain.agents import create_agent
@@ -388,7 +388,7 @@ async with client.session("server_name") as session:
 
 ### Prompts
 
-[Prompts](https://modelcontextprotocol.io/docs/concepts/prompts) allow MCP servers to expose reusable prompt templates that can be retrieved and used by clients. LangChain converts MCP prompts into [messages](https://docs.langchain.com/oss/python/langchain/messages), making them easy to integrate into chat-based workflows.
+[Prompts](https://modelcontextprotocol.io/docs/concepts/prompts) allow MCP servers to expose reusable prompt templates that can be retrieved and used by clients. LangChain converts MCP prompts into [messages](messages.md), making them easy to integrate into chat-based workflows.
 
 #### Loading prompts
 
@@ -438,15 +438,15 @@ async with client.session("server_name") as session:
 
 ### Tool interceptors
 
-MCP servers run as separate processes—they can't access LangGraph runtime information like the [store](https://docs.langchain.com/oss/python/langgraph/stores), [context](https://docs.langchain.com/oss/python/langchain/context-engineering), or agent state. **Interceptors bridge this gap** by giving you access to this runtime context during MCP tool execution.
+MCP servers run as separate processes—they can't access LangGraph runtime information like the [store](../langgraph/stores.md), [context](context-engineering.md), or agent state. **Interceptors bridge this gap** by giving you access to this runtime context during MCP tool execution.
 
 Interceptors also provide middleware-like control over tool calls: you can modify requests, implement retries, add headers dynamically, or short-circuit execution entirely.
 
 | Section                                                   | Description                                                                 |
 | --------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [Accessing runtime context](https://docs.langchain.com/oss/python/langchain/mcp#accessing-runtime-context)   | Read user IDs, API keys, store data, and agent state                        |
-| [State updates and commands](https://docs.langchain.com/oss/python/langchain/mcp#state-updates-and-commands) | Update agent state or control graph flow with `Command`                     |
-| [Writing interceptors](https://docs.langchain.com/oss/python/langchain/mcp#custom-interceptors)              | Patterns for modifying requests, composing interceptors, and error handling |
+| [Accessing runtime context](#accessing-runtime-context)   | Read user IDs, API keys, store data, and agent state                        |
+| [State updates and commands](#state-updates-and-commands) | Update agent state or control graph flow with `Command`                     |
+| [Writing interceptors](#custom-interceptors)              | Patterns for modifying requests, composing interceptors, and error handling |
 
 #### Accessing runtime context
 
@@ -615,7 +615,7 @@ client = MultiServerMCPClient(
 )
 ```
 
-For more context engineering patterns, see [Context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) and [Tools](https://docs.langchain.com/oss/python/langchain/tools).
+For more context engineering patterns, see [Context engineering](context-engineering.md) and [Tools](tools.md).
 
 #### State updates and commands
 

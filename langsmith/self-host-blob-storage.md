@@ -8,16 +8,16 @@ By default, LangSmith stores run inputs, outputs, errors, manifests, extras, and
 > [!TIP]
 > **For cloud-specific setup**, choose your platform:
 >
-> * [Amazon S3 (AWS)](https://docs.langchain.com/langsmith/self-host-blob-storage#amazon-s3)
-> * [Google Cloud Storage (GCP)](https://docs.langchain.com/langsmith/self-host-blob-storage#google-cloud-storage)
-> * [Azure Blob Storage](https://docs.langchain.com/langsmith/self-host-blob-storage#azure-blob-storage)
+> * [Amazon S3 (AWS)](#amazon-s3)
+> * [Google Cloud Storage (GCP)](#google-cloud-storage)
+> * [Azure Blob Storage](#azure-blob-storage)
 >
-> For complete cloud-specific setup and architecture guides, see [AWS](https://docs.langchain.com/langsmith/aws-self-hosted), [GCP](https://docs.langchain.com/langsmith/gcp-self-hosted), or [Azure](https://docs.langchain.com/langsmith/azure-self-hosted).
+> For complete cloud-specific setup and architecture guides, see [AWS](aws-self-hosted.md), [GCP](gcp-self-hosted.md), or [Azure](azure-self-hosted.md).
 
 ## Requirements
 
 > [!NOTE]
-> Azure blob storage is available in Helm chart versions 0.8.9 and greater. [Deleting trace projects](https://docs.langchain.com/langsmith/observability-concepts#data-retention) is supported in Azure starting in Helm chart version 0.10.43.
+> Azure blob storage is available in Helm chart versions 0.8.9 and greater. [Deleting trace projects](observability-concepts.md#data-retention) is supported in Azure starting in Helm chart version 0.10.43.
 >
 > Native GCS blob storage engine support (using `engine: "GCS"`) is available in Helm chart versions 0.13.29 and greater. For earlier versions, GCS is supported via the S3-compatible API by setting `engine: "S3"` with HMAC credentials.
 
@@ -28,10 +28,10 @@ By default, LangSmith stores run inputs, outputs, errors, manifests, extras, and
   * [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs)
 
 * A bucket/directory in your blob storage to store the data. We highly recommend creating a separate bucket/directory for LangSmith data.
-  * **If you are using TTLs**, you will need to set up a lifecycle policy to delete old data. For more information, see [configuring TTLs](https://docs.langchain.com/langsmith/self-host-ttl). These policies should mirror the TTLs you have set in your LangSmith configuration, or you may experience data loss. See [TTL configuration for blob storage](https://docs.langchain.com/langsmith/self-host-blob-storage#ttl-configuration) for how to set up the lifecycle rules.
+  * **If you are using TTLs**, you will need to set up a lifecycle policy to delete old data. For more information, see [configuring TTLs](self-host-ttl.md). These policies should mirror the TTLs you have set in your LangSmith configuration, or you may experience data loss. See [TTL configuration for blob storage](#ttl-configuration) for how to set up the lifecycle rules.
 
 * Credentials to permit LangSmith Services to access the bucket/directory
-  * You will need to provide your LangSmith instance with the necessary credentials to access the bucket/directory. Read the authentication [section](https://docs.langchain.com/langsmith/self-host-blob-storage#authentication) below for more information.
+  * You will need to provide your LangSmith instance with the necessary credentials to access the bucket/directory. Read the authentication [section](#authentication) below for more information.
 
 * If using S3 or GCS, an API URL for your blob storage service
 
@@ -194,7 +194,7 @@ config:
 
 ## TTL configuration
 
-If using the [TTL](https://docs.langchain.com/langsmith/self-host-ttl) feature with LangSmith, you'll also have to configure TTL rules for your blob storage. Trace information stored on blob storage is stored on a particular prefix path, which determines the TTL for the data. When a trace's retention is extended, its corresponding blob storage path changes to ensure that it matches the new extended retention.
+If using the [TTL](self-host-ttl.md) feature with LangSmith, you'll also have to configure TTL rules for your blob storage. Trace information stored on blob storage is stored on a particular prefix path, which determines the TTL for the data. When a trace's retention is extended, its corresponding blob storage path changes to ensure that it matches the new extended retention.
 
 The following TTL prefixes are used:
 
@@ -203,7 +203,7 @@ The following TTL prefixes are used:
 
 ### Custom workspace-level retention prefixes
 
-If you use [workspace-level extended retention](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy), LangSmith writes blob data to prefixes of the form `ttl_XXd/`, where `XX` is the number of days configured for that workspace. For example, if a workspace is configured with 90-day extended retention, blob data for that workspace is written to the `ttl_90d/` prefix.
+If you use [workspace-level extended retention](data-purging-compliance.md#customize-extended-retention-policy), LangSmith writes blob data to prefixes of the form `ttl_XXd/`, where `XX` is the number of days configured for that workspace. For example, if a workspace is configured with 90-day extended retention, blob data for that workspace is written to the `ttl_90d/` prefix.
 
 You must create a lifecycle rule for **each** custom retention period configured across your workspaces. Common examples:
 
@@ -214,7 +214,7 @@ You must create a lifecycle rule for **each** custom retention period configured
 > [!WARNING]
 > If a lifecycle rule is missing for a configured retention period, blob data under that prefix will never be automatically deleted. Ensure you add a matching lifecycle rule whenever you configure a new workspace retention period.
 
-For example, if you have workspaces configured with 90-day and 180-day extended retention, you would add the following lifecycle rules **in addition to** the [default `ttl_s` and `ttl_l` rules](https://docs.langchain.com/langsmith/self-host-blob-storage#ttl-configuration):
+For example, if you have workspaces configured with 90-day and 180-day extended retention, you would add the following lifecycle rules **in addition to** the [default `ttl_s` and `ttl_l` rules](#ttl-configuration):
 
 #### AWS
 ```hcl

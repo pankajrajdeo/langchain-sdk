@@ -7,7 +7,7 @@ LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/ag
 LangGraph exposes a [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object with the following information:
 
 1. **Context**: static information like user id, db connections, or other dependencies for an agent invocation
-2. **Store**: a [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore) instance used for [long-term memory](https://docs.langchain.com/oss/python/langchain/long-term-memory)
+2. **Store**: a [BaseStore](https://reference.langchain.com/python/langchain-core/stores/BaseStore) instance used for [long-term memory](long-term-memory.md)
 3. **Stream writer**: an object used for streaming information via the `"custom"` stream mode
 4. **Execution info**: identity and retry information for the current execution (thread ID, run ID, attempt number)
 5. **Server info**: server-specific metadata when running on LangGraph Server (assistant ID, graph ID, authenticated user)
@@ -15,7 +15,7 @@ LangGraph exposes a [`Runtime`](https://reference.langchain.com/python/langgraph
 > [!TIP]
 > Runtime context provides **dependency injection** for your tools and middleware. Instead of hardcoding values or using global state, you can inject runtime dependencies (like database connections, user IDs, or configuration) when invoking your agent. This makes your tools more testable, reusable, and flexible.
 
-You can access the runtime information within [tools](https://docs.langchain.com/oss/python/langchain/runtime#inside-tools) and [middleware](https://docs.langchain.com/oss/python/langchain/runtime#inside-middleware).
+You can access the runtime information within [tools](#inside-tools) and [middleware](#inside-middleware).
 
 ## Access
 
@@ -50,7 +50,7 @@ You can access the runtime information inside tools to:
 
 * Access the context
 * Read or write long-term memory
-* Write to the [custom stream](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates) (ex, tool progress / updates)
+* Write to the [custom stream](streaming.md#custom-updates) (ex, tool progress / updates)
 
 Use the `ToolRuntime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside a tool.
 
@@ -108,7 +108,7 @@ def context_aware_tool(runtime: ToolRuntime) -> str:
 
 You can access runtime information in middleware to create dynamic prompts, modify messages, or control agent behavior based on user context.
 
-Use the `Runtime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside [node-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#node-style-hooks).  For [wrap-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#wrap-style-hooks), the `Runtime` object is available inside the [`ModelRequest`](https://reference.langchain.com/python/langchain/agents/middleware/types/ModelRequest) parameter.
+Use the `Runtime` parameter to access the [`Runtime`](https://reference.langchain.com/python/langgraph/runtime/Runtime) object inside [node-style hooks](middleware/custom.md#node-style-hooks).  For [wrap-style hooks](middleware/custom.md#wrap-style-hooks), the `Runtime` object is available inside the [`ModelRequest`](https://reference.langchain.com/python/langchain/agents/middleware/types/ModelRequest) parameter.
 
 ```python
 from dataclasses import dataclass

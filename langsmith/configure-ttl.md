@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configure-ttl)
 > [!TIP]
 > **Prerequisites**
-> This guide assumes familiarity with [LangSmith](https://docs.langchain.com/langsmith/observability), [Persistence](https://docs.langchain.com/oss/python/langgraph/persistence), and [Cross-thread persistence](https://docs.langchain.com/oss/python/langgraph/stores) concepts.
+> This guide assumes familiarity with [LangSmith](observability.md), [Persistence](../langgraph/persistence.md), and [Cross-thread persistence](../langgraph/stores.md) concepts.
 
-LangSmith persists both [checkpoints](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) (thread state) and [cross-thread memories](https://docs.langchain.com/oss/python/langgraph/stores) (store items). You can configure Time-to-Live (TTL) policies in [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file) to manage the lifecycle of this data automatically, preventing indefinite accumulation.
+LangSmith persists both [checkpoints](../langgraph/checkpointers.md#checkpoints) (thread state) and [cross-thread memories](../langgraph/stores.md) (store items). You can configure Time-to-Live (TTL) policies in [`langgraph.json`](application-structure.md#configuration-file) to manage the lifecycle of this data automatically, preventing indefinite accumulation.
 
 ## Configuring thread and checkpoint TTL
 
@@ -113,9 +113,9 @@ For store items, pass `ttl` to `put` to override the default lifespan. Pass `ref
 
 ## Deployment process
 
-After configuring TTLs in `langgraph.json`, deploy or restart your LangGraph application for the changes to take effect. Use [`langgraph dev`](https://docs.langchain.com/langsmith/local-dev-testing#langgraph-dev) for local development or [`langgraph up`](https://docs.langchain.com/langsmith/local-dev-testing#langgraph-up) for Docker deployment.
+After configuring TTLs in `langgraph.json`, deploy or restart your LangGraph application for the changes to take effect. Use [`langgraph dev`](local-dev-testing.md#langgraph-dev) for local development or [`langgraph up`](local-dev-testing.md#langgraph-up) for Docker deployment.
 
-For details on other configurable options, refer to the [LangGraph CLI reference page](https://docs.langchain.com/langsmith/cli#configuration-file).
+For details on other configurable options, refer to the [LangGraph CLI reference page](cli.md#configuration-file).
 
 ***
 

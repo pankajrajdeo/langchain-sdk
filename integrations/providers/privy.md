@@ -21,7 +21,7 @@ Privy provides wallet infrastructure that removes the complexity of blockchain i
 
 ## Installation and setup
 
-Check out the [tool documentation](https://docs.langchain.com/oss/python/integrations/tools/privy) to see how to set up and install Privy.
+Check out the [tool documentation](../tools/privy.md) to see how to set up and install Privy.
 
 ***
 

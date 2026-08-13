@@ -2,19 +2,19 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents)
 Use interpreters to dispatch and orchestrate Deep Agents subagents from code
 
-Dynamic subagents let an agent dispatch [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) from interpreter code. Instead of asking the model to choose one subagent call at a time, the agent can use JavaScript loops, branches, and parallel batches to route work across configured subagents and synthesize the results.
+Dynamic subagents let an agent dispatch [subagents](subagents.md) from interpreter code. Instead of asking the model to choose one subagent call at a time, the agent can use JavaScript loops, branches, and parallel batches to route work across configured subagents and synthesize the results.
 
-Use this pattern when work spans many independent units, needs multiple perspectives, or benefits from recursive analysis. For general interpreter setup, see [Interpreters](https://docs.langchain.com/oss/python/deepagents/interpreters).
+Use this pattern when work spans many independent units, needs multiple perspectives, or benefits from recursive analysis. For general interpreter setup, see [Interpreters](interpreters.md).
 
 > [!WARNING]
-> Dynamic subagents use the interpreter runtime, which is in [**beta**](https://docs.langchain.com/oss/python/versioning). APIs and lifecycle behavior may change between releases.
+> Dynamic subagents use the interpreter runtime, which is in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
 > Interpreters require `langchain-quickjs>=0.2.0` and Python `>=3.11`.
 
 ## Quickstart
 
-Dynamic subagents require [interpreter](https://docs.langchain.com/oss/python/deepagents/interpreters) middleware. Install and wire up the interpreter first. The built-in [general-purpose subagent](https://docs.langchain.com/oss/python/deepagents/subagents#default-subagent) handles basic fan-out without extra configuration.
+Dynamic subagents require [interpreter](interpreters.md) middleware. Install and wire up the interpreter first. The built-in [general-purpose subagent](subagents.md#default-subagent) handles basic fan-out without extra configuration.
 
 ```python
 from deepagents import create_deep_agent
@@ -121,9 +121,9 @@ agent = create_deep_agent(
 )
 ```
 
-For install steps and interpreter setup, see [Interpreters](https://docs.langchain.com/oss/python/deepagents/interpreters#quickstart).
+For install steps and interpreter setup, see [Interpreters](interpreters.md#quickstart).
 
-For specialized work, configure custom [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) with their own names, descriptions, and system prompts. The subagents' names and descriptions serve as information for the agent to evaluate which role to reach for.
+For specialized work, configure custom [subagents](subagents.md) with their own names, descriptions, and system prompts. The subagents' names and descriptions serve as information for the agent to evaluate which role to reach for.
 
 To trigger dynamic subagents, prompt the agent with the word "workflow":
 
@@ -137,20 +137,20 @@ result = agent.invoke({
 > **The word "workflow" is a useful trigger.** The interpreter system prompt treats "workflow" as a signal to organize work through the interpreter, dispatching subagents with `task()` from code rather than grinding through items one model-chosen tool call at a time. Phrasing a request as a "workflow" is a deliberate lever you can pull to opt into dynamic orchestration. For a single, direct delegation, phrase the request plainly instead.
 
 > [!NOTE]
-> Using dynamic subagents with `dcode`, the LangChain terminal coding agent? `dcode` ships with the code interpreter enabled, so dynamic subagents work out of the box. See the [dcode subagents page](https://docs.langchain.com/oss/deepagents/code/subagents) for setup and usage details.
+> Using dynamic subagents with `dcode`, the LangChain terminal coding agent? `dcode` ships with the code interpreter enabled, so dynamic subagents work out of the box. See the [dcode subagents page](code/subagents.md) for setup and usage details.
 
 ## How it works
 
-When an agent has [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) and interpreter middleware, the interpreter exposes a built-in `task()` global that dispatches subagents from code. A task spanning many independent units (reviewing every file in a directory, triaging a batch of tickets) becomes a loop that fans the work out, so it runs deterministically instead of one model-chosen tool call at a time.
+When an agent has [subagents](subagents.md) and interpreter middleware, the interpreter exposes a built-in `task()` global that dispatches subagents from code. A task spanning many independent units (reviewing every file in a directory, triaging a batch of tickets) becomes a loop that fans the work out, so it runs deterministically instead of one model-chosen tool call at a time.
 
 Subagent orchestration also supports recursive language model (RLM) workflows, the approach described in the [Recursive Language Models paper](https://arxiv.org/abs/2512.24601): keep the working set in interpreter variables, select slices, call subagents with `task()`, and synthesize the results.
 
-Many orchestration workflows combine dynamic subagents with [programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc): use `tools.*` from interpreter code to discover or filter inputs, then dispatch subagents with `task()`. PTC is off by default; enable it with an explicit allowlist on interpreter middleware.
+Many orchestration workflows combine dynamic subagents with [programmatic tool calling (PTC)](interpreters.md#programmatic-tool-calling-ptc): use `tools.*` from interpreter code to discover or filter inputs, then dispatch subagents with `task()`. PTC is off by default; enable it with an explicit allowlist on interpreter middleware.
 
-`task()` is a capability bridge into subagent execution, similar to PTC for tools. For isolation defaults, approval boundaries, and middleware options, see [Security](https://docs.langchain.com/oss/python/deepagents/interpreters#security) and [Configuration](https://docs.langchain.com/oss/python/deepagents/interpreters#configuration).
+`task()` is a capability bridge into subagent execution, similar to PTC for tools. For isolation defaults, approval boundaries, and middleware options, see [Security](interpreters.md#security) and [Configuration](interpreters.md#configuration).
 
 > [!NOTE]
-> Multi-turn orchestration can persist interpreter variables across agent turns when using `mode="thread"` (the default). See [Persistence](https://docs.langchain.com/oss/python/deepagents/interpreters#persistence) on the interpreters page.
+> Multi-turn orchestration can persist interpreter variables across agent turns when using `mode="thread"` (the default). See [Persistence](interpreters.md#persistence) on the interpreters page.
 
 `task()` takes the following inputs:
 
@@ -431,7 +431,7 @@ graph LR
 
 **Use cases:** Code review across a directory, analyzing a batch of documents, processing log files, running the same check across many services.
 
-Discovering files from interpreter code requires [programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc). Enable `glob` in the PTC allowlist on interpreter middleware.
+Discovering files from interpreter code requires [programmatic tool calling (PTC)](interpreters.md#programmatic-tool-calling-ptc). Enable `glob` in the PTC allowlist on interpreter middleware.
 
 <details>
 <summary>Example: fan-out and synthesize</summary>
@@ -1275,7 +1275,7 @@ found;
 
 ## Disable dynamic subagents
 
-Subagent dispatch is on by default whenever the agent has subagents. Disable it if you want subagents to be available only through the normal `task` tool path. For other middleware options, see [Configuration](https://docs.langchain.com/oss/python/deepagents/interpreters#configuration) on the interpreters page.
+Subagent dispatch is on by default whenever the agent has subagents. Disable it if you want subagents to be available only through the normal `task` tool path. For other middleware options, see [Configuration](interpreters.md#configuration) on the interpreters page.
 
 ```python
 from deepagents import create_deep_agent
@@ -1356,9 +1356,9 @@ agent = create_deep_agent(
 
 ## See also
 
-* [Interpreters](https://docs.langchain.com/oss/python/deepagents/interpreters): QuickJS setup, programmatic tool calling, persistence, security, and middleware configuration
-* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents): Configure subagent names, descriptions, and system prompts
-* [Event streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming): Stream updates from the coordinator and delegated subagents
+* [Interpreters](interpreters.md): QuickJS setup, programmatic tool calling, persistence, security, and middleware configuration
+* [Subagents](subagents.md): Configure subagent names, descriptions, and system prompts
+* [Event streaming](event-streaming.md): Stream updates from the coordinator and delegated subagents
 
 ***
 

@@ -28,7 +28,7 @@ See a [usage example](https://localai.io/features/embeddings/index.html).
 
 ## Reranker
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/document_transformers/localai_rerank).
+See a [usage example](../document_transformers/localai_rerank.md).
 
 ***
 

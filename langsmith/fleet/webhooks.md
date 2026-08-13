@@ -53,9 +53,9 @@ The webhook payload is a JSON object with the following fields:
 | `input`                                             | Values from custom form fields (empty object if no custom fields). |
 | `publisher`                                         | User ID and email of the person triggering the webhook.            |
 | `agent`                                             | Agent name and description.                                        |
-| [`tool_auth_requirements`](https://docs.langchain.com/langsmith/fleet/webhooks#tool-auth-requirements) | Authentication requirements for each tool the agent uses.          |
-| [`files`](https://docs.langchain.com/langsmith/fleet/webhooks#zip-file-structure)                      | Base64-encoded ZIP containing all agent files.                     |
-| [`fields`](https://docs.langchain.com/langsmith/fleet/webhooks#custom-input-fields)                    | Custom input fields.                                               |
+| [`tool_auth_requirements`](#tool-auth-requirements) | Authentication requirements for each tool the agent uses.          |
+| [`files`](#zip-file-structure)                      | Base64-encoded ZIP containing all agent files.                     |
+| [`fields`](#custom-input-fields)                    | Custom input fields.                                               |
 
 For example:
 

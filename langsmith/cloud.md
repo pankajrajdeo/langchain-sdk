@@ -3,9 +3,9 @@
 The **Cloud** hosting option is a fully managed model where LangChain hosts and operates all LangSmith infrastructure and services:
 
 * **Fully managed infrastructure**: LangChain handles all infrastructure, updates, scaling, and maintenance.
-* [**LangSmith UI**](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud): Full access to [observability](https://docs.langchain.com/langsmith/observability), [evaluation](https://docs.langchain.com/langsmith/evaluation), [agent deployment management](https://docs.langchain.com/langsmith/deployment), and [Studio](https://docs.langchain.com/langsmith/studio).
-* **Deploy Agent Servers from GitHub**: Connect your repositories and deploy [Agent Servers](https://docs.langchain.com/langsmith/deployment) to the Cloud with a few clicks.
-* **Automated CI/CD for Agent Servers**: The build and deployment process for your [Agent Servers](https://docs.langchain.com/langsmith/deployment) is handled automatically by the platform.
+* [**LangSmith UI**](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud): Full access to [observability](observability.md), [evaluation](evaluation.md), [agent deployment management](deployment.md), and [Studio](studio.md).
+* **Deploy Agent Servers from GitHub**: Connect your repositories and deploy [Agent Servers](deployment.md) to the Cloud with a few clicks.
+* **Automated CI/CD for Agent Servers**: The build and deployment process for your [Agent Servers](deployment.md) is handled automatically by the platform.
 
 |                                               | **Who manages it** | **Where it runs**               |
 | --------------------------------------------- | ------------------ | ------------------------------- |
@@ -14,16 +14,16 @@ The **Cloud** hosting option is a fully managed model where LangChain hosts and 
 | **CI/CD for your apps**                       | LangChain          | LangChain's cloud (AWS and GCP) |
 
 > [!NOTE]
-> If you're ready to deploy your app to LangSmith Cloud (AWS or GCP), follow the [Cloud deployment quickstart](https://docs.langchain.com/langsmith/deployment-quickstart) or the [full setup guide](https://docs.langchain.com/langsmith/deploy-to-cloud). This page explains the Cloud managed architecture for reference.
+> If you're ready to deploy your app to LangSmith Cloud (AWS or GCP), follow the [Cloud deployment quickstart](deployment-quickstart.md) or the [full setup guide](deploy-to-cloud.md). This page explains the Cloud managed architecture for reference.
 
-> **Image:** [Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers.](https://docs.langchain.com/langsmith/cloud)
+> **Image:** [Cloud deployment: LangChain hosts and manages all components including the UI, APIs, and your Agent Servers.](cloud.md)
 
 ## Cloud architecture and scalability
 
 > [!NOTE]
 > This section is only relevant for cloud-managed LangSmith at [https://smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cloud), [https://eu.smith.langchain.com](https://eu.smith.langchain.com), [https://apac.smith.langchain.com](https://apac.smith.langchain.com), and [https://aws.smith.langchain.com](https://aws.smith.langchain.com).
 >
-> For information on the Self-hosted LangSmith solution, refer to the [Self-hosted documentation](https://docs.langchain.com/langsmith/self-hosted).
+> For information on the Self-hosted LangSmith solution, refer to the [Self-hosted documentation](self-hosted.md).
 
 LangSmith is hosted on Google Cloud Platform (GCP) for the US, EU, and APAC SaaS regions and on Amazon Web Services (AWS) for the AWS-hosted US SaaS region. The platform is designed to be highly scalable. Many customers run production workloads on LangSmith for LLM application observability, evaluation, and agent deployment.
 
@@ -49,9 +49,9 @@ The resources and services in this table are stored in the location correspondin
 | Cloud                                         | GCP us-central1 (Iowa)                                                                                                                                 | GCP europe-west4 (Netherlands)                                           | GCP australia-southeast1 (Sydney)                                            | AWS us-east-2 (Ohio)                                                       |
 | Supabase                                      | AWS us-east-1 (N. Virginia)                                                                                                                            | AWS eu-central-1 (Germany)                                               | AWS ap-southeast-2 (Sydney)                                                  | AWS us-east-2 (Ohio)                                                       |
 | ClickHouse Cloud                              | us-central1 (Iowa)                                                                                                                                     | europe-west4 (Netherlands)                                               | australia-southeast1 (Sydney)                                                | us-east-2 (Ohio)                                                           |
-| [LangSmith deployment](https://docs.langchain.com/langsmith/deployment) | GCP us-central1 (Iowa); `*.us.langgraph.app`                                                                                                           | GCP europe-west4 (Netherlands); `*.eu.langgraph.app`                     | GCP australia-southeast1 (Sydney); `*.apac.langgraph.app`                    | AWS us-east-2 (Ohio); `*.aws.us.langgraph.app`                             |
+| [LangSmith deployment](deployment.md) | GCP us-central1 (Iowa); `*.us.langgraph.app`                                                                                                           | GCP europe-west4 (Netherlands); `*.eu.langgraph.app`                     | GCP australia-southeast1 (Sydney); `*.apac.langgraph.app`                    | AWS us-east-2 (Ohio); `*.aws.us.langgraph.app`                             |
 
-See the [Regions FAQ](https://docs.langchain.com/langsmith/regions-faq) for more information.
+See the [Regions FAQ](regions-faq.md) for more information.
 
 ### Region-independent storage
 
@@ -82,7 +82,7 @@ Some additional GCP services we use include:
 
 * Google Cloud Load Balancer for routing traffic to the LangSmith services.
 * Google Cloud CDN for caching static assets.
-* Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [Rate limits](https://docs.langchain.com/langsmith/usage-and-billing#rate-limits).
+* Google Cloud Armor for security and rate limits. For more information on rate limits we enforce, please refer to [Rate limits](usage-and-billing.md#rate-limits).
 
 ### AWS services
 
@@ -101,17 +101,17 @@ LangSmith uses the following AWS storage and data services:
 * Amazon S3 for runs inputs and outputs.
 * Amazon RDS for PostgreSQL for transactional workloads.
 * Amazon ElastiCache for Redis for queuing and caching.
-* ClickHouse Cloud over AWS PrivateLink in `us-east-2` for trace ingestion and analytics, consistent with the [regional storage](https://docs.langchain.com/langsmith/cloud#regional-storage) table above.
+* ClickHouse Cloud over AWS PrivateLink in `us-east-2` for trace ingestion and analytics, consistent with the [regional storage](#regional-storage) table above.
 
 Some additional AWS services we use include:
 
-* Elastic Load Balancing (Network Load Balancers) and Istio ingress for routing traffic to the LangSmith services. Documented API rate limits are enforced at the Istio ingress gateway. For details, see [Rate limits](https://docs.langchain.com/langsmith/usage-and-billing#rate-limits).
+* Elastic Load Balancing (Network Load Balancers) and Istio ingress for routing traffic to the LangSmith services. Documented API rate limits are enforced at the Istio ingress gateway. For details, see [Rate limits](usage-and-billing.md#rate-limits).
 * Amazon CloudFront for caching static assets (including the web UI hostname `aws.smith.langchain.com`).
 * AWS WAF on CloudFront for managed rule groups at the edge (for example, AWS Managed Rules common protections and Bot Control).
 
-> **Image:** [Light mode overview](https://docs.langchain.com/langsmith/cloud)
+> **Image:** [Light mode overview](cloud.md)
 
-> **Image:** [Dark mode overview](https://docs.langchain.com/langsmith/cloud)
+> **Image:** [Dark mode overview](cloud.md)
 
 ## Allowlisting IP addresses
 
@@ -133,7 +133,7 @@ All traffic leaving LangSmith services will be routed through a NAT gateway. All
 It may be helpful to allowlist these IP addresses if connecting to your own AzureOpenAI service or other endpoints that may be required by the Playground or Online Evaluation.
 
 > [!NOTE]
-> Traffic from agents deployed on [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) egresses through a separate set of NAT IPs. For that list, refer to [Allowlist IP addresses](https://docs.langchain.com/langsmith/deploy-to-cloud#allowlist-ip-addresses) in the Cloud deployment guide.
+> Traffic from agents deployed on [LangSmith Deployment](deployment.md) egresses through a separate set of NAT IPs. For that list, refer to [Allowlist IP addresses](deploy-to-cloud.md#allowlist-ip-addresses) in the Cloud deployment guide.
 
 ### Ingress into LangChain SaaS
 
@@ -153,7 +153,7 @@ You may need to allowlist these to enable traffic from your private network to L
 ## Private connectivity (Enterprise)
 
 > [!NOTE]
-> [**Enterprise only.**](https://docs.langchain.com/langsmith/pricing-plans) Private connectivity is available exclusively for Enterprise customers. Contact your account representative or [sales@langchain.dev](mailto:sales@langchain.dev) to enable this feature.
+> [**Enterprise only.**](pricing-plans.md) Private connectivity is available exclusively for Enterprise customers. Contact your account representative or [sales@langchain.dev](mailto:sales@langchain.dev) to enable this feature.
 
 Enterprise customers can connect to LangSmith without exposing traffic to the public internet using **AWS PrivateLink** or **GCP Private Service Connect (PSC)**.
 
@@ -379,35 +379,35 @@ LangSmith enforces rate limits on API endpoints to ensure service stability and 
 
 | Match / Endpoint (method)                   | Identity key     | US prod limit | EU prod limit | Category                                     |
 | ------------------------------------------- | ---------------- | ------------- | ------------- | -------------------------------------------- |
-| OPTIONS, `/info`, `*/v1/metadata/submit`    | IP               | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `/auth`                                     | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `/auth`                                     | `x-user-id` + IP | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `/v1/beacon`                                | IP               | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `/repos`                                    | `x-api-key`      | 100 / 60      | 100 / 60      | [Repository](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `/repos`                                    | `x-user-id` + IP | 100 / 60      | 100 / 60      | [Repository](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `POST /runs/batch`                          | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `POST /otel/v1/traces`                      | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `POST` containing `/charts`                 | `x-api-key`      | 750 / 600     | 750 / 600     | [Charts](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)             |
-| `POST` containing `/charts`                 | `x-user-id` + IP | 750 / 600     | 750 / 600     | [Charts](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)             |
-| `POST /runs/multipart`                      | `x-api-key`      | 6000 / 10     | 6000 / 10     | [Multipart ingest](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)   |
-| `POST /runs/query`                          | `x-api-key`      | 15 / 10       | 15 / 10       | [Run query (API)](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `POST /runs/query`                          | `x-user-id` + IP | 300 / 10      | 300 / 10      | [Run query (User)](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)   |
-| `/generate`                                 | `x-api-key`      | 30 / 3600     | 30 / 3600     | [Generation](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `/generate`                                 | `x-user-id` + IP | 30 / 3600     | 30 / 3600     | [Generation](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `/commits`                                  | `x-api-key`      | 10000 / 60    | 2000 / 60     | [Commits](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)            |
-| `/commits`                                  | `x-user-id` + IP | 10000 / 60    | 2000 / 60     | [Commits](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)            |
-| `DELETE /sessions` or `*/trigger`           | `x-api-key`      | 10 / 60       | 10 / 60       | [Deletion](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)           |
-| `DELETE /sessions` or `*/trigger`           | `x-user-id` + IP | 30 / 60       | 30 / 60       | [Deletion](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)           |
-| `POST /runs` (single run ingest)            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `PATCH` containing `/runs`                  | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `POST /feedback`                            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `GET /runs/{uuid}` or `/api/v1/runs/{uuid}` | `x-api-key`      | 30 / 60       | 30 / 60       | [Run lookup](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)         |
-| `GET` containing `/examples`                | `x-api-key`      | 5000 / 60     | 5000 / 60     | [Examples](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)           |
-| Any request with `x-api-key`                | `x-api-key`      | 1000 / 10     | 1000 / 10     | [Default (API key)](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)  |
-| Any request with `x-user-id`                | `x-user-id` + IP | 1000 / 10     | 1000 / 10     | [Default (User)](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)     |
-| `/public/download`                          | IP               | 5000 / 60     | 5000 / 60     | [Public download](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)    |
-| `/runs/stats`                               | `x-api-key`      | 1 / 10        | 20 / 10       | [Stats](https://docs.langchain.com/langsmith/cloud#rate-limit-categories)              |
-| All other IPs (catch-all)                   | IP               | 100 / 60      | 100 / 60      | [Public (catch-all)](https://docs.langchain.com/langsmith/cloud#rate-limit-categories) |
+| OPTIONS, `/info`, `*/v1/metadata/submit`    | IP               | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/auth`                                     | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/auth`                                     | `x-user-id` + IP | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/v1/beacon`                                | IP               | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `/repos`                                    | `x-api-key`      | 100 / 60      | 100 / 60      | [Repository](#rate-limit-categories)         |
+| `/repos`                                    | `x-user-id` + IP | 100 / 60      | 100 / 60      | [Repository](#rate-limit-categories)         |
+| `POST /runs/batch`                          | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `POST /otel/v1/traces`                      | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `POST` containing `/charts`                 | `x-api-key`      | 750 / 600     | 750 / 600     | [Charts](#rate-limit-categories)             |
+| `POST` containing `/charts`                 | `x-user-id` + IP | 750 / 600     | 750 / 600     | [Charts](#rate-limit-categories)             |
+| `POST /runs/multipart`                      | `x-api-key`      | 6000 / 10     | 6000 / 10     | [Multipart ingest](#rate-limit-categories)   |
+| `POST /runs/query`                          | `x-api-key`      | 15 / 10       | 15 / 10       | [Run query (API)](#rate-limit-categories)    |
+| `POST /runs/query`                          | `x-user-id` + IP | 300 / 10      | 300 / 10      | [Run query (User)](#rate-limit-categories)   |
+| `/generate`                                 | `x-api-key`      | 30 / 3600     | 30 / 3600     | [Generation](#rate-limit-categories)         |
+| `/generate`                                 | `x-user-id` + IP | 30 / 3600     | 30 / 3600     | [Generation](#rate-limit-categories)         |
+| `/commits`                                  | `x-api-key`      | 10000 / 60    | 2000 / 60     | [Commits](#rate-limit-categories)            |
+| `/commits`                                  | `x-user-id` + IP | 10000 / 60    | 2000 / 60     | [Commits](#rate-limit-categories)            |
+| `DELETE /sessions` or `*/trigger`           | `x-api-key`      | 10 / 60       | 10 / 60       | [Deletion](#rate-limit-categories)           |
+| `DELETE /sessions` or `*/trigger`           | `x-user-id` + IP | 30 / 60       | 30 / 60       | [Deletion](#rate-limit-categories)           |
+| `POST /runs` (single run ingest)            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `PATCH` containing `/runs`                  | `x-api-key`      | 2000 / 10     | 2000 / 10     | [Run ingest](#rate-limit-categories)         |
+| `POST /feedback`                            | `x-api-key`      | 2000 / 10     | 2000 / 10     | [High throughput](#rate-limit-categories)    |
+| `GET /runs/{uuid}` or `/api/v1/runs/{uuid}` | `x-api-key`      | 30 / 60       | 30 / 60       | [Run lookup](#rate-limit-categories)         |
+| `GET` containing `/examples`                | `x-api-key`      | 5000 / 60     | 5000 / 60     | [Examples](#rate-limit-categories)           |
+| Any request with `x-api-key`                | `x-api-key`      | 1000 / 10     | 1000 / 10     | [Default (API key)](#rate-limit-categories)  |
+| Any request with `x-user-id`                | `x-user-id` + IP | 1000 / 10     | 1000 / 10     | [Default (User)](#rate-limit-categories)     |
+| `/public/download`                          | IP               | 5000 / 60     | 5000 / 60     | [Public download](#rate-limit-categories)    |
+| `/runs/stats`                               | `x-api-key`      | 1 / 10        | 20 / 10       | [Stats](#rate-limit-categories)              |
+| All other IPs (catch-all)                   | IP               | 100 / 60      | 100 / 60      | [Public (catch-all)](#rate-limit-categories) |
 
 ### Rate limit categories
 
@@ -429,7 +429,7 @@ LangSmith enforces rate limits on API endpoints to ensure service stability and 
 * **Stats**: Run statistics and analytics endpoints (region-specific limits apply).
 * **Public (catch-all)**: Default rate limit for unauthenticated public access.
 
-For more information on rate limits and other service limits, refer to the [Administration overview](https://docs.langchain.com/langsmith/usage-and-billing#rate-limits).
+For more information on rate limits and other service limits, refer to the [Administration overview](usage-and-billing.md#rate-limits).
 
 ***
 

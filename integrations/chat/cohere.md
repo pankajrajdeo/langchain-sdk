@@ -32,7 +32,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key:
 
 ## Usage
 
-ChatCohere supports all [ChatModel](https://docs.langchain.com/oss/python/langchain/models) functionality:
+ChatCohere supports all [ChatModel](../../langchain/models.md) functionality:
 
 ```python
 from langchain_cohere import ChatCohere

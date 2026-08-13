@@ -4,7 +4,7 @@ Build an agent that analyzes data files, generates visualizations, and shares re
 
 ## Overview
 
-This guide demonstrates how to build a data analysis agent using a [deep agent](https://docs.langchain.com/oss/python/deepagents). Data analysis tasks typically require multi-step reasoning, code execution, and working with artifacts such as scripts, reports, and plots—capabilities that deep agents are designed to handle.
+This guide demonstrates how to build a data analysis agent using a [deep agent](index.md). Data analysis tasks typically require multi-step reasoning, code execution, and working with artifacts such as scripts, reports, and plots—capabilities that deep agents are designed to handle.
 
 The agent you build will:
 
@@ -20,9 +20,9 @@ The agent you build will:
 
 This tutorial covers:
 
-* [Backends](https://docs.langchain.com/oss/python/deepagents/backends) for sandboxed code execution
-* Custom [tools](https://docs.langchain.com/oss/python/langchain/tools) for external integrations
-* Opt-in [task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning) with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware)
+* [Backends](backends.md) for sandboxed code execution
+* Custom [tools](../langchain/tools.md) for external integrations
+* Opt-in [task planning](overview.md#task-planning) with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware)
 
 ## Setup
 
@@ -39,14 +39,14 @@ pip install deepagents
 For this tutorial, we'll use:
 
 * [Slack Python SDK](https://docs.slack.dev/tools/python-slack-sdk/) for sharing results ([token setup](https://docs.slack.dev/authentication/tokens/))
-* A [LangSmith sandbox](https://docs.langchain.com/langsmith/sandboxes) for code execution
+* A [LangSmith sandbox](../langsmith/sandboxes.md) for code execution
 
 ```bash
 pip install "langsmith[sandbox]" slack-sdk
 ```
 
 > [!NOTE]
-> These services are optional, though a sandboxed environment is highly recommended for any production use. You can alternatively use the local shell backend (with important [security considerations](https://docs.langchain.com/oss/python/deepagents/backends#localshellbackend-local-shell)) or download artifacts directly from the backend.
+> These services are optional, though a sandboxed environment is highly recommended for any production use. You can alternatively use the local shell backend (with important [security considerations](backends.md#localshellbackend-local-shell)) or download artifacts directly from the backend.
 
 ### LangSmith
 
@@ -71,9 +71,9 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 
 ## Set up the backend
 
-Deep Agents use [backends](https://docs.langchain.com/oss/python/deepagents/backends) to execute code in sandboxed environments.
+Deep Agents use [backends](backends.md) to execute code in sandboxed environments.
 
-The examples below use a [LangSmith sandbox](https://docs.langchain.com/langsmith/sandboxes). For other providers, see [available providers](https://docs.langchain.com/oss/python/deepagents/sandboxes#available-providers).
+The examples below use a [LangSmith sandbox](../langsmith/sandboxes.md). For other providers, see [available providers](sandboxes.md#available-providers).
 
 #### LangSmith
 ```bash
@@ -95,7 +95,7 @@ backend = LangSmithSandbox(sandbox=ls_sandbox)
 
 #### Local shell
 > [!WARNING]
-> This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](https://docs.langchain.com/oss/python/deepagents/backends#localshellbackend-local-shell) for more details.
+> This backend provides unrestricted filesystem and shell access. Use only in controlled environments for development and testing. See the [security considerations](backends.md#localshellbackend-local-shell) for more details.
 
 ```python
 from deepagents.backends import LocalShellBackend
@@ -232,7 +232,7 @@ backend.upload_files([("/root/data/sales_data.csv", csv_bytes)])
 ## Implement custom tools
 
 Data analysis tasks might produce artifacts, like reports or plots.
-The following simple [tool](https://docs.langchain.com/oss/python/langchain/tools) downloads them with `backend.download_files` and then uploads them using the Slack SDK.
+The following simple [tool](../langchain/tools.md) downloads them with `backend.download_files` and then uploads them using the Slack SDK.
 We could also ask our agent to list the relevant file paths instead of uploading them, so interested parties can obtain them separately as needed.
 
 ```python
@@ -271,7 +271,7 @@ def slack_send_message(text: str, file_path: str | None = None) -> str:
 
 ## Enable task planning
 
-[Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning) is opt-in. Data analysis often involves long, multi-step work, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent. That gives the agent a `write_todos` tool for tracking exploratory analysis, visualization, and sharing steps.
+[Task planning](overview.md#task-planning) is opt-in. Data analysis often involves long, multi-step work, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent. That gives the agent a `write_todos` tool for tracking exploratory analysis, visualization, and sharing steps.
 
 ```python
 from langchain.agents.middleware import TodoListMiddleware
@@ -306,11 +306,11 @@ config = {"configurable": {"thread_id": thread_id}}
 
 We include:
 
-* A choice of [model](https://docs.langchain.com/oss/python/deepagents/customization#model)
-* Our custom [tool](https://docs.langchain.com/oss/python/deepagents/customization#tools)
-* The [backend](https://docs.langchain.com/oss/python/deepagents/backends)
-* A [checkpointer](https://docs.langchain.com/oss/python/langchain/short-term-memory) to support multi-turn conversations
-* [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) for opt-in [task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
+* A choice of [model](customization.md#model)
+* Our custom [tool](customization.md#tools)
+* The [backend](backends.md)
+* A [checkpointer](../langchain/short-term-memory.md) to support multi-turn conversations
+* [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) for opt-in [task planning](overview.md#task-planning)
 
 Let's now invoke our agent.
 
@@ -688,7 +688,7 @@ View the full [LangSmith trace](https://smith.langchain.com/public/ac2443a8-16ad
 
 The agent successfully analyzes the data and shares a comprehensive report with visualizations to Slack:
 
-> **Image:** [Sales analysis results in Slack](https://docs.langchain.com/oss/python/deepagents/data-analysis)
+> **Image:** [Sales analysis results in Slack](data-analysis.md)
 
 > [!TIP]
 > You can download artifacts directly from the backend without using external tools:
@@ -698,18 +698,18 @@ The agent successfully analyzes the data and shares a comprehensive report with 
 > ```
 
 > [!NOTE]
-> See [provider guides](https://docs.langchain.com/oss/python/deepagents/sandboxes#available-providers) for how to clean up the sandbox once finished.
+> See [provider guides](sandboxes.md#available-providers) for how to clean up the sandbox once finished.
 
 ## Next steps
 
 Now that you've built a data analysis agent, explore these resources to extend its capabilities:
 
-* [Backends](https://docs.langchain.com/oss/python/deepagents/backends): Learn about the Deep Agents backend system
-* [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes): Review backends for sandboxed code execution, including security considerations and advanced configurations
-* [Customization](https://docs.langchain.com/oss/python/deepagents/customization): Discover how to customize your agent with different models, tools, prompts, and optional [task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
-* [Code](https://docs.langchain.com/oss/deepagents/code/overview): Try Deep Agents Code as a terminal coding agent to assist with data analysis and other agentic tasks locally
-* [Skills](https://docs.langchain.com/oss/python/deepagents/skills): Equip your agent with reusable skills for common workflows
-* [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop): Add interactive approval steps for critical operations in your data analysis workflow
+* [Backends](backends.md): Learn about the Deep Agents backend system
+* [Sandboxes](sandboxes.md): Review backends for sandboxed code execution, including security considerations and advanced configurations
+* [Customization](customization.md): Discover how to customize your agent with different models, tools, prompts, and optional [task planning](overview.md#task-planning)
+* [Code](code/overview.md): Try Deep Agents Code as a terminal coding agent to assist with data analysis and other agentic tasks locally
+* [Skills](skills.md): Equip your agent with reusable skills for common workflows
+* [Human-in-the-loop](human-in-the-loop.md): Add interactive approval steps for critical operations in your data analysis workflow
 
 ***
 

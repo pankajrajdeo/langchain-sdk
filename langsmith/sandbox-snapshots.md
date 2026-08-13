@@ -6,7 +6,7 @@ A **snapshot** is a reusable filesystem bundle backed by a Docker image. Build o
 
 You can also capture a snapshot from a running sandbox—install packages, write data files, or configure state, then snapshot the result and reuse it as a new starting point.
 
-> **Image:** [Sandboxes snapshots page](https://docs.langchain.com/langsmith/sandbox-snapshots)
+> **Image:** [Sandboxes snapshots page](sandbox-snapshots.md)
 
 ## Build a snapshot from a Docker image
 
@@ -342,9 +342,9 @@ You can also stop and start by name via the client directly (`client.stop_sandbo
 
 ## Next steps
 
-* [Create sandboxes from snapshots with the SDK](https://docs.langchain.com/langsmith/sandbox-sdk)
-* [Expose HTTP services with Service URLs](https://docs.langchain.com/langsmith/sandbox-service-urls)
-* [Inject credentials via the Auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy)
+* [Create sandboxes from snapshots with the SDK](sandbox-sdk.md)
+* [Expose HTTP services with Service URLs](sandbox-service-urls.md)
+* [Inject credentials via the Auth proxy](sandbox-auth-proxy.md)
 
 ***
 

@@ -15,7 +15,7 @@ This guide walks you through creating your first deep agent with file system too
 Before you begin, make sure you have an API key from a model provider (e.g., Gemini, Anthropic, OpenAI).
 
 > [!NOTE]
-> Deep Agents require a model that supports [tool calling](https://docs.langchain.com/oss/python/langchain/models#tool-calling). See [customization](https://docs.langchain.com/oss/python/deepagents/customization#model) for how to configure your model.
+> Deep Agents require a model that supports [tool calling](../langchain/models.md#tool-calling). See [customization](customization.md#model) for how to configure your model.
 
 ## Step 1: Install dependencies
 
@@ -86,12 +86,12 @@ export <PROVIDER>_API_KEY="your-api-key"
 export TAVILY_API_KEY="your-tavily-api-key"
 ```
 
-Deep Agents work with any [LangChain chat model](https://docs.langchain.com/oss/python/deepagents/models#supported-models). Set the API key for your provider.
+Deep Agents work with any [LangChain chat model](models.md#supported-models). Set the API key for your provider.
 
 > [!TIP]
 > **Using LangSmith Gateway**
 >
-> The [LangSmith Gateway](https://docs.langchain.com/langsmith/llm-gateway) routes most major providers through LangSmith. You can [bring your own provider keys](https://docs.langchain.com/langsmith/llm-gateway-quickstart#2-make-a-call), or use [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits) to access models without a provider key.
+> The [LangSmith Gateway](../langsmith/llm-gateway.md) routes most major providers through LangSmith. You can [bring your own provider keys](../langsmith/llm-gateway-quickstart.md#2-make-a-call), or use [Gateway Credits](../langsmith/llm-gateway-credits.md) to access models without a provider key.
 
 ## Step 3: Create a search tool
 
@@ -146,7 +146,7 @@ def internet_search(
 
 ## Step 4: Create a deep agent
 
-Pass your search tool and model to `create_deep_agent`. Pass a `model` string in `provider:model` format, or an [initialized model instance](https://docs.langchain.com/oss/python/deepagents/models#configure-model-parameters). See [supported models](https://docs.langchain.com/oss/python/deepagents/models#supported-models) for all providers and [suggested models](https://docs.langchain.com/oss/python/deepagents/models#suggested-models) for tested recommendations.
+Pass your search tool and model to `create_deep_agent`. Pass a `model` string in `provider:model` format, or an [initialized model instance](models.md#configure-model-parameters). See [supported models](models.md#supported-models) for all providers and [suggested models](models.md#suggested-models) for tested recommendations.
 
 ```python
 # System prompt to steer the agent to be an expert researcher
@@ -299,11 +299,11 @@ print(result["messages"][-1].content)
 Your deep agent automatically:
 
 1. **Conducts research** by calling the `internet_search` tool to gather information.
-2. **Manages context** by using file system tools ([`write_file`](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access), [`read_file`](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access)) to offload large search results.
+2. **Manages context** by using file system tools ([`write_file`](overview.md#virtual-filesystem-access), [`read_file`](overview.md#virtual-filesystem-access)) to offload large search results.
 3. **Spawns subagents** as needed to delegate complex subtasks to specialized subagents.
 4. **Synthesizes a report** to compile findings into a coherent response.
 
-To add structured task planning with `write_todos`, opt in with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware). See [Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning).
+To add structured task planning with `write_todos`, opt in with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware). See [Task planning](overview.md#task-planning).
 
 ## Examples
 
@@ -311,17 +311,17 @@ For agents, patterns, and applications you can build with Deep Agents, see [Exam
 
 ## Streaming
 
-Deep Agents have built-in [streaming](https://docs.langchain.com/oss/python/langchain/event-streaming) for real-time updates from agent execution using LangGraph.
+Deep Agents have built-in [streaming](../langchain/event-streaming.md) for real-time updates from agent execution using LangGraph.
 This allows you to observe output progressively and review and debug agent and subagent work, such as tool calls, tool results, and LLM responses.
 
 ## Next steps
 
 Now that you've built your first deep agent:
 
-* **Customize your agent**: Learn about [customization options](https://docs.langchain.com/oss/python/deepagents/customization), including custom system prompts, tools, and subagents.
-* **Add long-term memory**: Enable [persistent memory](https://docs.langchain.com/oss/python/deepagents/memory) across conversations.
-* **Deploy to production**: Use [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview) to create, run, and operate deep agents in LangSmith.
-* **Test and evaluate**: Use [LangSmith evaluation](https://docs.langchain.com/langsmith/evaluation-quickstart) to run automated tests and measure your agent's performance against a dataset.
+* **Customize your agent**: Learn about [customization options](customization.md), including custom system prompts, tools, and subagents.
+* **Add long-term memory**: Enable [persistent memory](memory.md) across conversations.
+* **Deploy to production**: Use [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) to create, run, and operate deep agents in LangSmith.
+* **Test and evaluate**: Use [LangSmith evaluation](../langsmith/evaluation-quickstart.md) to run automated tests and measure your agent's performance against a dataset.
 
 ***
 

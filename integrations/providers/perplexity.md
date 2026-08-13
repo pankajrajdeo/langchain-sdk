@@ -24,19 +24,19 @@ Get your API key from the [Perplexity API key dashboard](https://www.perplexity.
 
 ## Chat models
 
-See a variety of [Perplexity usage examples](https://docs.langchain.com/oss/python/integrations/chat/perplexity).
+See a variety of [Perplexity usage examples](../chat/perplexity.md).
 
 ```python
 from langchain_perplexity import ChatPerplexity
 ```
 
-`ChatPerplexity` can also target the [Perplexity Agent API](https://docs.perplexity.ai/api-reference/agent-api) by passing `use_responses_api=True` (or by passing `tools=[{"type": "web_search"}]`, which auto-enables it). See [Agent API support](https://docs.langchain.com/oss/python/integrations/chat/perplexity#agent-api-support-use_responses_api) on the chat page for details and examples.
+`ChatPerplexity` can also target the [Perplexity Agent API](https://docs.perplexity.ai/api-reference/agent-api) by passing `use_responses_api=True` (or by passing `tools=[{"type": "web_search"}]`, which auto-enables it). See [Agent API support](../chat/perplexity.md#agent-api-support-use_responses_api) on the chat page for details and examples.
 
 ## Retriever
 
-You can use the [`PerplexitySearchRetriever`](https://docs.langchain.com/oss/python/integrations/retrievers/perplexity_search) to fetch web search results from the [Perplexity Search API](https://docs.perplexity.ai/docs/search/quickstart) as [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects in a standard retrieval pipeline.
+You can use the [`PerplexitySearchRetriever`](../retrievers/perplexity_search.md) to fetch web search results from the [Perplexity Search API](https://docs.perplexity.ai/docs/search/quickstart) as [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects in a standard retrieval pipeline.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/retrievers/perplexity_search).
+See a [usage example](../retrievers/perplexity_search.md).
 
 ```python
 from langchain_perplexity import PerplexitySearchRetriever
@@ -46,7 +46,7 @@ from langchain_perplexity import PerplexitySearchRetriever
 
 You can use Perplexity as an agent tool to give your agent access to the Perplexity Search API.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/perplexity_search).
+See a [usage example](../tools/perplexity_search.md).
 
 ### PerplexitySearchResults
 
@@ -58,9 +58,9 @@ from langchain_perplexity import PerplexitySearchResults
 
 ## Embedding models
 
-You can use [`PerplexityEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/perplexity) to generate embeddings via the [Perplexity Embeddings API](https://docs.perplexity.ai/api-reference/embeddings-post).
+You can use [`PerplexityEmbeddings`](../embeddings/perplexity.md) to generate embeddings via the [Perplexity Embeddings API](https://docs.perplexity.ai/api-reference/embeddings-post).
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/perplexity).
+See a [usage example](../embeddings/perplexity.md).
 
 ```python
 from langchain_perplexity import PerplexityEmbeddings
@@ -68,7 +68,7 @@ from langchain_perplexity import PerplexityEmbeddings
 
 ## Deep Agents Code
 
-Use Perplexity as a first-class provider in [Deep Agents Code](https://docs.langchain.com/oss/deepagents/code/providers).
+Use Perplexity as a first-class provider in [Deep Agents Code](../../deepagents/code/providers.md).
 
 Install Deep Agents Code with the Perplexity extra:
 

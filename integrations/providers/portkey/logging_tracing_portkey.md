@@ -2,7 +2,7 @@
 
 > Integrate with Log, trace, and monitor Portkey using LangChain Python.
 
-When building apps or agents using LangChain, you end up making multiple API calls to fulfill a single user request. However, these requests are not chained when you want to analyse them. With [**Portkey**](https://docs.langchain.com/oss/python/integrations/providers/portkey/), all the embeddings, completions, and other requests from a single user request will get logged and traced to a common ID, enabling you to gain full visibility of user interactions.
+When building apps or agents using LangChain, you end up making multiple API calls to fulfill a single user request. However, these requests are not chained when you want to analyse them. With [**Portkey**](../portkey.md), all the embeddings, completions, and other requests from a single user request will get logged and traced to a common ID, enabling you to gain full visibility of user interactions.
 
 This notebook serves as a step-by-step guide on how to log, trace, and monitor LangChain LLM calls using `Portkey` in your LangChain app.
 

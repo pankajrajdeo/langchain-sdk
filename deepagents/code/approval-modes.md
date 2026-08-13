@@ -187,7 +187,7 @@ The decision plan is bound to the thread, mode, batch, and exact gated calls. Mi
 ### Understand scope and limitations
 
 * The Manual approval menu can enable Auto for the current thread. Threshold fallback can switch permanently to Manual or perform a one-off review while leaving Auto enabled.
-* The active model is not an independent security authority. [MCP read-only annotations](https://docs.langchain.com/oss/deepagents/code/mcp-tools#read-only-tool-annotations-in-auto-mode) are trusted as a deliberate beta tradeoff.
+* The active model is not an independent security authority. [MCP read-only annotations](mcp-tools.md#read-only-tool-annotations-in-auto-mode) are trusted as a deliberate beta tradeoff.
 * Parent-level Auto review does not cover actions performed inside delegated subagents or broader explicitly configured `js_eval` fan-out. Model providers and tracing backends may still observe classifier inputs and outputs even though the TUI hides them.
 
 ## Where Auto and YOLO are available
@@ -216,9 +216,9 @@ Auto also falls back to Manual when:
 
 ## See also
 
-* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Remote sandboxes](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes)
+* [CLI reference](cli-reference.md)
+* [Configuration](configuration.md)
+* [Remote sandboxes](remote-sandboxes.md)
 
 ***
 

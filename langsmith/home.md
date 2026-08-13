@@ -5,7 +5,7 @@
 LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics.
 
 > [!NOTE]
-> LangSmith works with many frameworks and providers. Browse [available integrations](https://docs.langchain.com/langsmith/integrations) to connect your stack including OpenAI, Anthropic, CrewAI, Vercel AI SDK, Pydantic AI, and more.
+> LangSmith works with many frameworks and providers. Browse [available integrations](integrations.md) to connect your stack including OpenAI, Anthropic, CrewAI, Vercel AI SDK, Pydantic AI, and more.
 
 ## Get started
 
@@ -19,33 +19,33 @@ Copy the key and save it securely.
 
 Once your account and API key are ready, set up tracing:
 
-#### [Set up tracing](https://docs.langchain.com/langsmith/observability-quickstart)
+#### [Set up tracing](observability-quickstart.md)
 Add tracing to your app in minutes with environment variables, framework integrations, or the SDK.
 
-#### [Trace a RAG application](https://docs.langchain.com/langsmith/observability-llm-tutorial)
+#### [Trace a RAG application](observability-llm-tutorial.md)
 Follow a step-by-step tutorial to instrument a retrieval-augmented generation app from start to finish.
 
 ## Investigate and monitor
 
-#### [View traces](https://docs.langchain.com/langsmith/filter-traces-in-application)
+#### [View traces](filter-traces-in-application.md)
 Filter, export, share, and compare traces via the UI or API.
 
-#### [Monitor performance](https://docs.langchain.com/langsmith/dashboards)
+#### [Monitor performance](dashboards.md)
 Build dashboards and set alerts to track quality and catch issues early.
 
-#### [Configure automations](https://docs.langchain.com/langsmith/rules)
+#### [Configure automations](rules.md)
 Automate workflows with rules, webhooks, and online evaluations.
 
-#### [Collect feedback](https://docs.langchain.com/langsmith/attach-user-feedback)
+#### [Collect feedback](attach-user-feedback.md)
 Annotate outputs and gather user feedback using queues or inline annotation.
 
-#### [Find and fix failures with Engine](https://docs.langchain.com/langsmith/engine-overview)
+#### [Find and fix failures with Engine](engine-overview.md)
 Automatically detect recurring issues in your traces, diagnose their root cause, and resolve them with LangSmith Engine.
 
-For terminology and core concepts, refer to [Observability concepts](https://docs.langchain.com/langsmith/observability-concepts). For trace pricing, retention, and limits, see [Usage and billing](https://docs.langchain.com/langsmith/usage-and-billing).
+For terminology and core concepts, refer to [Observability concepts](observability-concepts.md). For trace pricing, retention, and limits, see [Usage and billing](usage-and-billing.md).
 
 > [!NOTE]
-> To set up a LangSmith instance, visit the [Platform setup section](https://docs.langchain.com/langsmith/platform-setup) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
+> To set up a LangSmith instance, visit the [Platform setup section](platform-setup.md) to choose between cloud, hybrid, or self-hosted. All options include observability, evaluation, prompt engineering, and deployment.
 
 ***
 

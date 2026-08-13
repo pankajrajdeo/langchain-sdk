@@ -87,7 +87,7 @@ clickhouse:
     existingSecretName: "langsmith-clickhouse" # The name of the secret that contains the ClickHouse connection string and password
 ```
 
-Once configured, you will need to update your LangSmith installation. You can follow the [upgrade guide](https://docs.langchain.com/langsmith/self-host-upgrades). If everything is configured correctly, your LangSmith instance should now be accessible via the Ingress. You can run the following to check that your secrets are being used correctly:
+Once configured, you will need to update your LangSmith installation. You can follow the [upgrade guide](self-host-upgrades.md). If everything is configured correctly, your LangSmith instance should now be accessible via the Ingress. You can run the following to check that your secrets are being used correctly:
 
 ```bash
 kubectl describe deployment langsmith-backend | grep -i <secret-name>

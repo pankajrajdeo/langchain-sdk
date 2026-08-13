@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-anthropic)
 The Anthropic wrapper methods in Python ([`wrap_anthropic`](https://reference.langchain.com/python/langsmith/wrappers/_anthropic/wrap_anthropic)) and Typescript ([`wrapAnthropic`](https://reference.langchain.com/javascript/functions/langsmith.wrappers_anthropic.wrapAnthropic.html)) allow you to wrap your Anthropic client in order to log traces automatically. Using the wrapper ensures that messages, including tool calls and multimodal content blocks will be rendered nicely in LangSmith. The wrapper works seamlessly alongside the `@traceable` decorator (Python) or `traceable` function (TypeScript), so you can trace your Anthropic calls with the wrapper and trace other parts of your application with the decorator or function.
 
-The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Refer to [Trace Claude managed agents](https://docs.langchain.com/langsmith/trace-anthropic#trace-claude-managed-agents).
+The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/docs/claude-code/managed-agents) (TypeScript only). Refer to [Trace Claude managed agents](#trace-claude-managed-agents).
 
 > [!NOTE]
 > The `LANGSMITH_TRACING` environment variable must be set to `'true'` in order for traces to be logged to LangSmith, even when using `wrap_anthropic` or `wrapAnthropic`. This allows you to toggle tracing on and off without changing your code.
@@ -11,7 +11,7 @@ The wrapper also supports [Claude managed agents](https://docs.anthropic.com/en/
 >
 > If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
 >
-> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project).
+> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](log-traces-to-project.md).
 
 ```python
 import anthropic

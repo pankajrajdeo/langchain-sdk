@@ -4,15 +4,15 @@ Configure per-node timeouts, retries, and error handlers in LangGraph.
 
 When a node fails—from a slow external API, a transient network error, or an unhandled exception—LangGraph gives you three composable mechanisms to respond:
 
-* [**Retries**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#retries) — automatically re-run failed attempts based on exception type and backoff settings
-* [**Timeouts**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts) — cap how long a single attempt may run
-* [**Error handling**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling) — run a recovery function after all retries are exhausted
+* [**Retries**](#retries) — automatically re-run failed attempts based on exception type and backoff settings
+* [**Timeouts**](#timeouts) — cap how long a single attempt may run
+* [**Error handling**](#error-handling) — run a recovery function after all retries are exhausted
 
-Use [**`set_node_defaults`**](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graph-defaults) to configure these mechanisms once for all nodes instead of repeating them on every `add_node` call.
+Use [**`set_node_defaults`**](#graph-defaults) to configure these mechanisms once for all nodes instead of repeating them on every `add_node` call.
 
 These compose in a fixed order: when a node attempt raises any exception (including [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError) from a timeout), the retry policy decides whether to retry. Only after retries are exhausted does the error handler run.
 
-For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graceful-shutdown).
+For stopping a run cleanly at a superstep boundary and resuming later, see [Graceful shutdown](#graceful-shutdown).
 
 > [!NOTE]
 > Per-node timeouts and node-level error handlers require `langgraph>=1.2`.
@@ -523,7 +523,7 @@ graph = (
 
 If `fetch_data` fails after retries, `mark_process_failed` runs. If `charge_payment` fails after retries, `refund_payment` runs instead because the per-node handler overrides the default.
 
-The handler accepts the same `(state, error: NodeError)` signature described in [Error handling](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling). It also accepts `RunnableConfig` as an optional third argument if you need access to config values such as `thread_id`:
+The handler accepts the same `(state, error: NodeError)` signature described in [Error handling](#error-handling). It also accepts `RunnableConfig` as an optional third argument if you need access to config values such as `thread_id`:
 
 ```python
 from langchain_core.runnables import RunnableConfig

@@ -3,7 +3,7 @@
 Track and review administrative actions across your LangSmith organization for security, compliance, and operational visibility.
 
 > [!NOTE]
-> Audit logs are available on [**Enterprise** plans](https://docs.langchain.com/langsmith/pricing-plans). If you're interested in upgrading to Enterprise, [contact our sales team](https://www.langchain.com/contact-sales).
+> Audit logs are available on [**Enterprise** plans](pricing-plans.md). If you're interested in upgrading to Enterprise, [contact our sales team](https://www.langchain.com/contact-sales).
 
 LangSmith audit logs provide a tamper-resistant record of administrative and configuration actions taken within your organization. They help you answer questions like:
 
@@ -16,12 +16,12 @@ Audit logs are useful for security reviews, compliance requirements, and general
 
 ## Prerequisites
 
-* Your organization must be on an [**Enterprise** plan](https://docs.langchain.com/langsmith/pricing-plans).
-* You must have the **Organization Admin** or **Organization Operator** role ([`organization:manage` permission](https://docs.langchain.com/langsmith/rbac#organization-admin)) to view audit logs.
+* Your organization must be on an [**Enterprise** plan](pricing-plans.md).
+* You must have the **Organization Admin** or **Organization Operator** role ([`organization:manage` permission](rbac.md#organization-admin)) to view audit logs.
 
 ## What gets logged
 
-Audit logs record changes to organization settings, membership, credentials, workspaces, and other resources. Each event includes the timestamp, the actor, the operation name, the affected resources, and whether it succeeded. For the complete list of operation names, see the [tracked operations reference](https://docs.langchain.com/langsmith/audit-logs#tracked-operations-reference).
+Audit logs record changes to organization settings, membership, credentials, workspaces, and other resources. Each event includes the timestamp, the actor, the operation name, the affected resources, and whether it succeeded. For the complete list of operation names, see the [tracked operations reference](#tracked-operations-reference).
 
 ## Retention
 
@@ -29,7 +29,7 @@ Audit logs are retained for up to **400 days**. Events older than 400 days may b
 
 ## Enable audit logs for self-hosted deployments
 
-Audit logs are available for [self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith instances running Helm chart **0.12.33** or later. Coverage of individual operations has expanded over time—see [Self-hosted version availability](https://docs.langchain.com/langsmith/audit-logs#self-hosted-version-availability) for the chart version each operation was introduced in.
+Audit logs are available for [self-hosted](self-hosted.md) LangSmith instances running Helm chart **0.12.33** or later. Coverage of individual operations has expanded over time—see [Self-hosted version availability](#self-hosted-version-availability) for the chart version each operation was introduced in.
 
 Once you've upgraded, use one of the following options to enable audit logs:
 
@@ -48,11 +48,11 @@ Once you've upgraded, use one of the following options to enable audit logs:
 > [!NOTE]
 >   This environment variable has no effect on personal organizations.
 
-For more details on self-hosted releases, see the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog).
+For more details on self-hosted releases, see the [self-hosted changelog](self-hosted-changelog.md).
 
 ## Query audit logs via API
 
-Use the `GET /api/v1/audit-logs` endpoint ([API reference](https://docs.langchain.com/langsmith/smith-api/audit-logs/get-audit-logs)) to retrieve audit log events. Results follow the [OCSF API Activity](https://schema.ocsf.io/1.7.0/classes/api_activity) schema.
+Use the `GET /api/v1/audit-logs` endpoint ([API reference](smith-api/audit-logs/get-audit-logs.md)) to retrieve audit log events. Results follow the [OCSF API Activity](https://schema.ocsf.io/1.7.0/classes/api_activity) schema.
 
 ### Example request
 
@@ -77,7 +77,7 @@ Audit log events are returned in [OCSF v1.7.0 API Activity (Class UID 6003)](htt
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `actor.user.uid`              | UUID of the user who performed the action.                                                                                                                   |
 | `actor.user.credential_uid`   | UUID of the API key, PAT, or service key used to authenticate the request. `null` if the user authenticated via session (e.g., the UI).                      |
-| `api.operation`               | The LangSmith operation name (e.g., `create_api_key`, `delete_workspace`). See [tracked operations reference](https://docs.langchain.com/langsmith/audit-logs#tracked-operations-reference) for all values. |
+| `api.operation`               | The LangSmith operation name (e.g., `create_api_key`, `delete_workspace`). See [tracked operations reference](#tracked-operations-reference) for all values. |
 | `status`                      | `Success`, `Failure`, or `Unknown`.                                                                                                                          |
 | `resources`                   | List of UUIDs for the resources affected by the operation (e.g., the role that was updated, the workspace that was created).                                 |
 | `metadata.uid`                | Unique identifier for this audit log event.                                                                                                                  |
@@ -133,10 +133,10 @@ To forward audit log events to an external SIEM or logging platform, you can run
 
 ## Self-hosted version availability
 
-The following list provides the [self-hosted](https://docs.langchain.com/langsmith/self-hosted) Helm chart version in which each operation was introduced. Operations are available on all later versions. This section applies to [self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments only; on LangSmith [cloud](https://docs.langchain.com/langsmith/cloud), all listed operations are available.
+The following list provides the [self-hosted](self-hosted.md) Helm chart version in which each operation was introduced. Operations are available on all later versions. This section applies to [self-hosted](self-hosted.md) deployments only; on LangSmith [cloud](cloud.md), all listed operations are available.
 
 > [!NOTE]
-> Versions `0.14.x` and earlier are stable releases. Operations introduced in `0.15.0-rc.*` ship in the preview channel and will be generally available in the `0.15.0` stable release. For channel details, refer to [Release policy](https://docs.langchain.com/langsmith/release-versions).
+> Versions `0.14.x` and earlier are stable releases. Operations introduced in `0.15.0-rc.*` ship in the preview channel and will be generally available in the `0.15.0` stable release. For channel details, refer to [Release policy](release-versions.md).
 
 <details>
 <summary>0.12.33</summary>
@@ -185,7 +185,7 @@ The following list provides the [self-hosted](https://docs.langchain.com/langsmi
 <details>
 <summary>Who can view audit logs?</summary>
 
-Users with the [**Organization Admin**](https://docs.langchain.com/langsmith/rbac#organization-admin) or [**Organization Operator**](https://docs.langchain.com/langsmith/rbac#organization-operator) role (which grant the `organization:manage` permission) can access audit logs. Workspace-level roles do not provide audit log access.
+Users with the [**Organization Admin**](rbac.md#organization-admin) or [**Organization Operator**](rbac.md#organization-operator) role (which grant the `organization:manage` permission) can access audit logs. Workspace-level roles do not provide audit log access.
 
 </details>
 
@@ -199,7 +199,7 @@ No. Audit logs are an Enterprise feature. See [pricing](https://www.langchain.co
 <details>
 <summary>Is there a UI for viewing audit logs?</summary>
 
-Not currently. Audit logs are available via the [API](https://docs.langchain.com/langsmith/audit-logs#query-audit-logs-via-api).
+Not currently. Audit logs are available via the [API](#query-audit-logs-via-api).
 
 </details>
 
@@ -213,7 +213,7 @@ Audit logs currently primarily focused on write operations. Support for more rea
 <details>
 <summary>Will more operations be tracked in the future?</summary>
 
-Yes. We intend to expand the set of tracked operations over time. The [tracked operations reference](https://docs.langchain.com/langsmith/audit-logs#tracked-operations-reference) always reflects the current set of supported operations.
+Yes. We intend to expand the set of tracked operations over time. The [tracked operations reference](#tracked-operations-reference) always reflects the current set of supported operations.
 
 </details>
 

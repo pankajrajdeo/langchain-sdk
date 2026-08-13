@@ -15,7 +15,7 @@ To connect your repositories:
 3. Install the app on the repositories Engine should access. Installing the app on a GitHub organization may require approval from a GitHub organization owner. If you are not an owner, GitHub sends the owner an installation request to approve before the app becomes available.
 4. Select the connected repository in the **GitHub Repository** field on the **Engine** tab.
 
-For the access and retention model of the managed app, see [Engine security](https://docs.langchain.com/langsmith/engine-security#github-integration).
+For the access and retention model of the managed app, see [Engine security](engine-security.md#github-integration).
 
 ## Self-hosted
 
@@ -83,10 +83,10 @@ With your existing secret-management workflow, create a Kubernetes Secret named 
 | `forge_github_app_pem`          | Contents of the GitHub App private-key PEM |
 | `forge_github_webhook_secret`   | Webhook secret also configured in GitHub   |
 
-Do not put these values in Helm values or command-line arguments. For production deployments, use your existing secrets workflow, such as [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/). See [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret) for more.
+Do not put these values in Helm values or command-line arguments. For production deployments, use your existing secrets workflow, such as [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) or [External Secrets Operator](https://external-secrets.io/). See [Use an existing secret](self-host-using-an-existing-secret.md) for more.
 
 ### Add the configuration to your langsmith_config.yaml
-Add the following to `hostBackend.deployment.extraEnv` in your [`langsmith_config.yaml`](https://docs.langchain.com/langsmith/kubernetes#configure-your-helm-charts). Reference the sensitive values with `secretKeyRef`; never set them through `commonEnv` or as inline values:
+Add the following to `hostBackend.deployment.extraEnv` in your [`langsmith_config.yaml`](kubernetes.md#configure-your-helm-charts). Reference the sensitive values with `secretKeyRef`; never set them through `commonEnv` or as inline values:
 
 ```yaml
 hostBackend:
@@ -135,10 +135,10 @@ Once pods are healthy, install the GitHub App on the repositories Engine should 
 
 ## See also
 
-* [Find and fix your agent's issues](https://docs.langchain.com/langsmith/engine): Engine setup, costs, and the issue workflow.
-* [Engine on self-hosted](https://docs.langchain.com/langsmith/engine-self-hosted): Self-hosted architecture and data handling.
-* [Engine security](https://docs.langchain.com/langsmith/engine-security): How Engine handles your data and GitHub access.
-* [Enable Engine](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-engine): Enable Engine in the LangSmith Helm chart.
+* [Find and fix your agent's issues](engine.md): Engine setup, costs, and the issue workflow.
+* [Engine on self-hosted](engine-self-hosted.md): Self-hosted architecture and data handling.
+* [Engine security](engine-security.md): How Engine handles your data and GitHub access.
+* [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine): Enable Engine in the LangSmith Helm chart.
 
 ***
 

@@ -41,7 +41,7 @@ touch .deepagents/.mcp.json
 
 Servers in this file (`<project>/.deepagents/.mcp.json`) are available to this project but kept out of the repo root.
 
-See [Discovery locations](https://docs.langchain.com/oss/deepagents/code/mcp-tools#discovery-locations) for full precedence rules.
+See [Discovery locations](#discovery-locations) for full precedence rules.
 
 ### Add the MCP servers
 ```json
@@ -59,7 +59,7 @@ See [Discovery locations](https://docs.langchain.com/oss/deepagents/code/mcp-too
 }
 ```
 
-To add more servers, add more entries to `mcpServers`. See [Configuration format](https://docs.langchain.com/oss/deepagents/code/mcp-tools#configuration-format) for OAuth, stdio, SSE, and HTTP server fields, environment variables, and headers.
+To add more servers, add more entries to `mcpServers`. See [Configuration format](#configuration-format) for OAuth, stdio, SSE, and HTTP server fields, environment variables, and headers.
 
 ### Launch Deep Agents Code
 ```bash
@@ -152,7 +152,7 @@ For remote MCP servers, set `type` to `"sse"` or `"http"` and provide a `url`:
 <details>
 <summary>stdio (default)</summary>
 
-**Required:** `command`. **Optional:** `args`, `env`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
+**Required:** `command`. **Optional:** `args`, `env`, plus the shared [tool-filter fields](#tool-filtering).
 
 #### `command` — `string`
 The executable to run.
@@ -168,7 +168,7 @@ Environment variables set for the subprocess. Use this to pass API keys and othe
 <details>
 <summary>sse</summary>
 
-**Required:** `type: "sse"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
+**Required:** `type: "sse"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](#tool-filtering).
 
 #### `type` — `&#x22;sse&#x22;`
 Transport type. Use `"sse"` for Server-Sent Events.
@@ -180,14 +180,14 @@ The server endpoint URL.
 HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
 
 #### `auth` — `&#x22;oauth&#x22;`
-Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](https://docs.langchain.com/oss/deepagents/code/mcp-tools#oauth-login).
+Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](#oauth-login).
 
 </details>
 
 <details>
 <summary>http</summary>
 
-**Required:** `type: "http"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](https://docs.langchain.com/oss/deepagents/code/mcp-tools#tool-filtering).
+**Required:** `type: "http"`, `url`. **Optional:** `headers`, `auth`, plus the shared [tool-filter fields](#tool-filtering).
 
 #### `type` — `&#x22;http&#x22;`
 Transport type. Use `"http"` for streamable HTTP. `streamable_http` and `streamable-http` are accepted as aliases.
@@ -199,7 +199,7 @@ The server endpoint URL.
 HTTP headers sent with every request. Commonly used for authentication. Values support `${VAR}` references to parent-shell environment variables (resolved when the server activates).
 
 #### `auth` — `&#x22;oauth&#x22;`
-Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](https://docs.langchain.com/oss/deepagents/code/mcp-tools#oauth-login).
+Set to `"oauth"` to drive an OAuth login flow with `dcode mcp login` instead of supplying an `Authorization` header. Cannot be combined with an `Authorization` header. See [OAuth login](#oauth-login).
 
 </details>
 
@@ -300,7 +300,7 @@ Tool names or `fnmatch` glob patterns to drop. All other tools from this server 
 
 ### Read-only tool annotations in Auto mode
 
-MCP servers can attach standard `ToolAnnotations` when advertising a tool. Deep Agents Code lets a tool bypass classifier review in [Auto approval mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) only when all of the following are true:
+MCP servers can attach standard `ToolAnnotations` when advertising a tool. Deep Agents Code lets a tool bypass classifier review in [Auto approval mode](approval-modes.md) only when all of the following are true:
 
 * `readOnlyHint` is the literal Boolean `true`.
 * `destructiveHint` is absent, `null`, or `false`.
@@ -328,7 +328,7 @@ For remote MCP servers that require OAuth (Slack, GitHub, Notion, Linear, and ot
 
 `auth: "oauth"` is mutually exclusive with an `Authorization` header on the same entry, and cannot be set on a stdio server.
 
-To connect Deep Agents Code to LangSmith, use the [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp):
+To connect Deep Agents Code to LangSmith, use the [LangSmith Remote MCP](../../langsmith/langsmith-remote-mcp.md):
 
 ```json
 {
@@ -361,7 +361,7 @@ dcode mcp login linear --mcp-config ./mcp-config.json
 ```
 
 > [!WARNING]
-> Project-level configs that have not been trusted (see [Project-level trust](https://docs.langchain.com/oss/deepagents/code/mcp-tools#project-level-trust)) are skipped during `mcp login` to prevent attacker-controlled `headers` entries from exfiltrating local secrets through `${VAR}` interpolation. Run `dcode` in the project and choose `Allow for this project — until changed` to save an approval, or pass `--mcp-config <path>` explicitly.
+> Project-level configs that have not been trusted (see [Project-level trust](#project-level-trust)) are skipped during `mcp login` to prevent attacker-controlled `headers` entries from exfiltrating local secrets through `${VAR}` interpolation. Run `dcode` in the project and choose `Allow for this project — until changed` to save an approval, or pass `--mcp-config <path>` explicitly.
 
 ### Token storage
 
@@ -504,8 +504,8 @@ Header interpolation runs at activation time, so an unset variable only fails th
 
 ## Further reading
 
-* [LangSmith Remote MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp): connect Deep Agents Code to LangSmith tools over OAuth
-* [LangChain MCP guide](https://docs.langchain.com/oss/python/langchain/mcp): protocol details, building custom servers, and using `langchain-mcp-adapters` programmatically
+* [LangSmith Remote MCP](../../langsmith/langsmith-remote-mcp.md): connect Deep Agents Code to LangSmith tools over OAuth
+* [LangChain MCP guide](../../langchain/mcp.md): protocol details, building custom servers, and using `langchain-mcp-adapters` programmatically
 * [MCP specification](https://modelcontextprotocol.io/): the official protocol spec and server registry
 
 ***

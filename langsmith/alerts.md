@@ -13,7 +13,7 @@ Effective observability in LLM applications requires proactive detection of fail
 Alerts in LangSmith are project-scoped, requiring separate configuration for each monitored project.
 
 > [!TIP]
-> Alerts can [route](https://docs.langchain.com/langsmith/alerts#step-4-configure-notification-channel) to Slack, PagerDuty, Dynatrace, or any HTTP endpoint via webhook. The **Webhook** tab includes [example recipes](https://docs.langchain.com/langsmith/alerts#example-recipes) for Microsoft Teams, email, Slack on self-hosted deployments, and Google Chat (which requires middleware).
+> Alerts can [route](#step-4-configure-notification-channel) to Slack, PagerDuty, Dynatrace, or any HTTP endpoint via webhook. The **Webhook** tab includes [example recipes](#example-recipes) for Microsoft Teams, email, Slack on self-hosted deployments, and Google Chat (which requires middleware).
 
 Follow these steps to configure an alert.
 
@@ -27,10 +27,10 @@ LangSmith provides threshold-based alerting on the following metrics:
 
 | Metric Type        | Description                                                                                                           | Use Case                                                                                                                                                             |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Run Count**      | Tracks the total number of [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) over a time window.                         | Monitor whether a pipeline is producing runs at the expected volume and alert when it drops unexpectedly.                                                            |
-| **Cost**           | Tracks the total cost of runs over a time window.                                                                     | Monitor LLM spending to alert when costs exceed expected thresholds. Requires [cost tracking](https://docs.langchain.com/langsmith/cost-tracking) to be configured.                            |
+| **Run Count**      | Tracks the total number of [runs](observability-concepts.md#runs) over a time window.                         | Monitor whether a pipeline is producing runs at the expected volume and alert when it drops unexpectedly.                                                            |
+| **Cost**           | Tracks the total cost of runs over a time window.                                                                     | Monitor LLM spending to alert when costs exceed expected thresholds. Requires [cost tracking](cost-tracking.md) to be configured.                            |
 | **Errors**         | Tracks runs with an error status. Alert on total error count or error percent (rate of errored runs out of all runs). | Monitor for failures in an application, or alert when the error rate exceeds an acceptable threshold.                                                                |
-| **Feedback Score** | Measures the average feedback score.                                                                                  | Track [feedback from end users](https://docs.langchain.com/langsmith/attach-user-feedback) or [online evaluation results](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) to alert on regressions. |
+| **Feedback Score** | Measures the average feedback score.                                                                                  | Track [feedback from end users](attach-user-feedback.md) or [online evaluation results](online-evaluations-llm-as-judge.md) to alert on regressions. |
 | **Latency**        | Measures average run execution time.                                                                                  | Tracks the latency of your application to alert on spikes and performance bottlenecks.                                                                               |
 
 Additionally, for **Errors** and **Latency**, you can use the filter builder to stack conditions on fields such as **Status**, **Run Type**, **Tag**, and **Error**. For example, you can scope an error alert to runs where **Status** is `error`, **Run Type** is `llm`, **Tag** is `support_agent`, and **Error** matches `RateLimitExceeded`.
@@ -45,13 +45,13 @@ Alert conditions consist of several components:
 * **Aggregation Window**: Time period for metric calculation (choose between 5 or 15 minutes).
 * **Feedback Key** (Feedback Score alerts only): Specific feedback metric to monitor.
 
-> **Image:** [Alert Condition Configuration](https://docs.langchain.com/langsmith/alerts)
+> **Image:** [Alert Condition Configuration](alerts.md)
 
 **Example:** The configuration in the screenshot would generate an alert when more than 5% of runs within the past 5 minutes result in errors.
 
 You can preview alert behavior over a historical time window to understand how many datapoints, and which ones, would have triggered an alert at a chosen threshold (indicated in red). For example, setting an average latency threshold of 60 seconds for a project lets you visualize potential alerts, as shown in the following screenshot.
 
-> **Image:** [Alert Metrics](https://docs.langchain.com/langsmith/alerts)
+> **Image:** [Alert Metrics](alerts.md)
 
 ## Step 4: Configure notification channel
 
@@ -59,11 +59,13 @@ You can preview alert behavior over a historical time window to understand how m
 Send alert notifications directly to a Slack channel using LangSmith's native Slack integration. No custom webhook or Slack app configuration required.
 
 > [!NOTE]
-> The native Slack notification type is available on LangSmith Cloud only. For self-hosted deployments, use the [webhook Slack recipe](https://docs.langchain.com/langsmith/alerts#example-recipes) in the **Webhook** tab instead.
+> The native Slack notification type is available on LangSmith Cloud only. For self-hosted deployments, use the [webhook Slack recipe](#example-recipes) in the **Webhook** tab instead.
 
 **Prerequisites**
 
 * A Slack workspace connected to your LangSmith organization. If you haven't connected one yet, LangSmith will prompt you to do so inline when you configure this notification type.
+
+<a id="configure-email-notifications-via-webhook"></a>
 
 ### 1. Configure the Slack notification
 
@@ -116,14 +118,14 @@ After creating the service, retrieve the Integration Key:
 3. Find the "Events API V2" integration
 4. Copy the **Integration Key** (a 32-character alphanumeric string)
 
-> **Image:** [PagerDuty Integration Key Location](https://docs.langchain.com/langsmith/alerts)
+> **Image:** [PagerDuty Integration Key Location](alerts.md)
 
 ### 3. Configure LangSmith alert with PagerDuty
 
 > [!NOTE]
 > To receive the same alert again within an hour of it being triggered, you must resolve the active incident created by the alert in PagerDuty.
 
-> **Image:** [PagerDuty Setup](https://docs.langchain.com/langsmith/alerts)
+> **Image:** [PagerDuty Setup](alerts.md)
 
 1. In the notification section of your alert set-up in LangSmith, select **PagerDuty**
 2. Click the key icon to save the Integration Key as a Workspace secret or select an existing Workspace secret. As a best practice, we recommend saving the Integration Key as a Workspace Secret rather than adding it directly. This will allow you to reuse the same key across alerts for a workspace.
@@ -155,7 +157,7 @@ Configure Dynatrace as a notification channel using Dynatrace's [Events API v2](
 * An active Dynatrace environment (SaaS or Managed).
 * A Dynatrace API access token with the `events.ingest` scope.
 
-If you're working from a custom [deployment](https://docs.langchain.com/langsmith/self-hosted) of LangSmith, make sure there are no firewall settings blocking egress traffic from LangSmith services.
+If you're working from a custom [deployment](self-hosted.md) of LangSmith, make sure there are no firewall settings blocking egress traffic from LangSmith services.
 
 ### 1. Create an API token in Dynatrace
 
@@ -396,7 +398,7 @@ It is required to fill in the `{channel_id}` from the value found in Step 4. <br
 
 After creating an alert, you can optionally link to its preview in the webhook's request body.
 
-> **Image:** [Alert Preview Pane](https://docs.langchain.com/langsmith/alerts)
+> **Image:** [Alert Preview Pane](alerts.md)
 
 To configure this:
 
@@ -595,7 +597,7 @@ Google Chat's incoming webhook API (`spaces.messages.create`) only accepts the `
 Invalid JSON payload received. Unknown name "project_name" at 'message': Cannot find field.
 ```
 
-There is no Request Body Template that avoids this, even a minimal body such as `{"text": "hello", "project_name": "x"}` will fail. **A translation layer (middleware) is required**, similar to the Amazon SES note in the [email recipe](https://docs.langchain.com/langsmith/alerts#configure-email-notifications-via-webhook).
+There is no Request Body Template that avoids this, even a minimal body such as `{"text": "hello", "project_name": "x"}` will fail. **A translation layer (middleware) is required**, similar to the Amazon SES note in the [email recipe](#configure-email-notifications-via-webhook).
 
 **Option A: Cloud Run or Cloud Functions middleware (recommended)**
 

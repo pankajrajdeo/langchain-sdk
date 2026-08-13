@@ -37,7 +37,7 @@ Every LangChain chat model, regardless of provider, implements the same interfac
 
 * **Swap providers** without rewriting application logic
 * **Compare models** side-by-side with identical code
-* **Use advanced features** like [tool calling](https://docs.langchain.com/oss/python/langchain/tools), [structured output](https://docs.langchain.com/oss/python/langchain/structured-output), and [streaming](https://docs.langchain.com/oss/python/langchain/streaming) across all providers
+* **Use advanced features** like [tool calling](../langchain/tools.md), [structured output](../langchain/structured-output.md), and [streaming](../langchain/streaming.md) across all providers
 
 ```python
 from langchain.chat_models import init_chat_model
@@ -67,7 +67,7 @@ uv add langchain-anthropic    # For Anthropic models
 uv add langchain-google-genai # For Google models
 ```
 
-For a full list of provider packages, see the [integrations page](https://docs.langchain.com/oss/python/integrations/providers/overview).
+For a full list of provider packages, see the [integrations page](../integrations/providers/overview.md).
 
 ## Find model names
 
@@ -91,12 +91,12 @@ To find available model names for a provider, refer to the provider's own docume
 
 | Provider                                                  | Where to find model names                                                                              |
 | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
-| [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai)       | [OpenAI models page](https://platform.openai.com/docs/models)                                          |
-| [Anthropic](https://docs.langchain.com/oss/python/integrations/providers/anthropic) | [Anthropic models page](https://docs.anthropic.com/en/docs/about-claude/models)                        |
-| [Google](https://docs.langchain.com/oss/python/integrations/providers/google)       | [Google AI models page](https://ai.google.dev/gemini-api/docs/models)                                  |
-| [AWS Bedrock](https://docs.langchain.com/oss/python/integrations/providers/aws)     | [Bedrock supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) |
-| [Ollama](https://docs.langchain.com/oss/python/integrations/providers/ollama)       | [Ollama model library](https://ollama.com/library)                                                     |
-| [Groq](https://docs.langchain.com/oss/python/integrations/providers/groq)           | [Groq supported models](https://console.groq.com/docs/models)                                          |
+| [OpenAI](../integrations/providers/openai.md)       | [OpenAI models page](https://platform.openai.com/docs/models)                                          |
+| [Anthropic](../integrations/providers/anthropic.md) | [Anthropic models page](https://docs.anthropic.com/en/docs/about-claude/models)                        |
+| [Google](../integrations/providers/google.md)       | [Google AI models page](https://ai.google.dev/gemini-api/docs/models)                                  |
+| [AWS Bedrock](../integrations/providers/aws.md)     | [Bedrock supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) |
+| [Ollama](../integrations/providers/ollama.md)       | [Ollama model library](https://ollama.com/library)                                                     |
+| [Groq](../integrations/providers/groq.md)           | [Groq supported models](https://console.groq.com/docs/models)                                          |
 
 ## Use new models immediately
 
@@ -111,7 +111,7 @@ New model names work immediately as long as your provider package version suppor
 ## Model capabilities
 
 Different providers and models support different features.
-For a list of the chat model integrations and their capabilities, see the [chat models integrations page](https://docs.langchain.com/oss/python/integrations/chat).
+For a list of the chat model integrations and their capabilities, see the [chat models integrations page](../integrations/chat.md).
 
 ## Routers and proxies
 
@@ -119,9 +119,9 @@ For a list of the chat model integrations and their capabilities, see the [chat 
 
 | Provider                             | Integration                                                  | Description                                                                      |
 | :----------------------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------- |
-| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](https://docs.langchain.com/oss/python/integrations/chat/openrouter) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more          |
+| [OpenRouter](https://openrouter.ai/) | [`ChatOpenRouter`](../integrations/chat/openrouter.md) | Unified access to models from OpenAI, Anthropic, Google, Meta, and more          |
 | [FuturMix](https://futurmix.ai/)     | [`ChatOpenAI`](https://futurmix.ai/)                         | Unified AI gateway for 22+ models with OpenAI-compatible API and 99.99% SLA      |
-| [LiteLLM](https://www.litellm.ai/)   | [`ChatLiteLLM`](https://docs.langchain.com/oss/python/integrations/chat/litellm)       | Unified interface for 100+ providers with routing, fallbacks, and spend tracking |
+| [LiteLLM](https://www.litellm.ai/)   | [`ChatLiteLLM`](../integrations/chat/litellm.md)       | Unified interface for 100+ providers with routing, fallbacks, and spend tracking |
 
 Routers are useful when you want to:
 
@@ -138,7 +138,7 @@ response = model.invoke("Hello!")
 
 ## OpenAI-compatible endpoints
 
-Many providers offer endpoints compatible with OpenAI's [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can connect to these using [`ChatOpenAI`](https://docs.langchain.com/oss/python/integrations/chat/openai) with a custom `base_url`:
+Many providers offer endpoints compatible with OpenAI's [Chat Completions API](https://platform.openai.com/docs/api-reference/chat). You can connect to these using [`ChatOpenAI`](../integrations/chat/openai.md) with a custom `base_url`:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -155,16 +155,16 @@ model = ChatOpenAI(
 
 ## Next steps
 
-#### [Models guide](https://docs.langchain.com/oss/python/langchain/models)
+#### [Models guide](../langchain/models.md)
 Learn how to use models: invoke, stream, batch, tool calling, and more.
 
-#### [Chat model integrations](https://docs.langchain.com/oss/python/integrations/chat)
+#### [Chat model integrations](../integrations/chat.md)
 Browse all chat model integrations and their capabilities.
 
-#### [All providers](https://docs.langchain.com/oss/python/integrations/providers/overview)
+#### [All providers](../integrations/providers/overview.md)
 See the full list of provider packages and integrations.
 
-#### [Agents](https://docs.langchain.com/oss/python/langchain/agents)
+#### [Agents](../langchain/agents.md)
 Build agents that use models as their reasoning engine.
 
 ***

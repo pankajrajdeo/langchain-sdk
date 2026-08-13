@@ -6,10 +6,10 @@
 
 With Imagen on LangChain , You can do the following tasks
 
-* [VertexAIImageGeneratorChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation) : Generate novel images using only a text prompt (text-to-image AI generation).
-* [VertexAIImageEditorChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-editing) : Edit an entire uploaded or generated image with a text prompt.
-* [VertexAIImageCaptioning](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-captioning) : Get text descriptions of images with visual captioning.
-* [VertexAIVisualQnAChat](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#visual-question-answering-vqa) : Get answers to a question about an image with Visual Question Answering (VQA).
+* [VertexAIImageGeneratorChat](#image-generation) : Generate novel images using only a text prompt (text-to-image AI generation).
+* [VertexAIImageEditorChat](#image-editing) : Edit an entire uploaded or generated image with a text prompt.
+* [VertexAIImageCaptioning](#image-captioning) : Get text descriptions of images with visual captioning.
+* [VertexAIVisualQnAChat](#visual-question-answering-vqa) : Get answers to a question about an image with Visual Question Answering (VQA).
   * NOTE : Currently we support only single-turn chat for Visual QnA (VQA)
 
 ## Image generation
@@ -128,7 +128,7 @@ from langchain_google_vertexai import VertexAIImageCaptioning
 model = VertexAIImageCaptioning()
 ```
 
-NOTE :  we're using generated image in [Image Generation Section](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation)
+NOTE :  we're using generated image in [Image Generation Section](#image-generation)
 
 ```python
 # use image generated in Image Generation Section
@@ -161,7 +161,7 @@ from langchain_google_vertexai import VertexAIVisualQnAChat
 model = VertexAIVisualQnAChat()
 ```
 
-NOTE :  we're using generated image in [Image Generation Section](https://docs.langchain.com/oss/python/integrations/tools/google_imagen#image-generation)
+NOTE :  we're using generated image in [Image Generation Section](#image-generation)
 
 ```python
 question = "What animal is shown in the image?"

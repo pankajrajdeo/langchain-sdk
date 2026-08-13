@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-complex-agent)
 In this tutorial, we'll build a customer support bot that helps users navigate a digital music store. Then, we'll go through the three most effective types of evaluations to run on chat bots:
 
-* **[Final response](https://docs.langchain.com/langsmith/evaluate-complex-agent#final-response-evaluator)**: Evaluate the agent's final response.
-* **[Trajectory](https://docs.langchain.com/langsmith/evaluate-complex-agent#trajectory-evaluator)**: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
-* **[Single step](https://docs.langchain.com/langsmith/evaluate-complex-agent#single-step-evaluators)**: Evaluate any agent step in isolation (e.g., whether it selects the appropriate first tool for a given step).
+* **[Final response](#final-response-evaluator)**: Evaluate the agent's final response.
+* **[Trajectory](#trajectory-evaluator)**: Evaluate whether the agent took the expected path (e.g., of tool calls) to arrive at the final answer.
+* **[Single step](#single-step-evaluators)**: Evaluate any agent step in isolation (e.g., whether it selects the appropriate first tool for a given step).
 
 We'll build our agent using [LangGraph](https://github.com/langchain-ai/langgraph), but the techniques and LangSmith functionality shown here are framework-agnostic.
 
@@ -72,7 +72,7 @@ import sqlite3
 
 And here's the database schema (image from [https://github.com/lerocha/chinook-database](https://github.com/lerocha/chinook-database)):
 
-> **Image:** [Chinook DB](https://docs.langchain.com/langsmith/evaluate-complex-agent)
+> **Image:** [Chinook DB](evaluate-complex-agent.md)
 
 ### Define the customer support agent
 
@@ -279,7 +279,7 @@ We can visualize our refund graph:
 # Assumes you're in an interactive Python environmentfrom IPython.display import Image, display ...
 ```
 
-> **Image:** [Refund graph](https://docs.langchain.com/langsmith/evaluate-complex-agent)
+> **Image:** [Refund graph](evaluate-complex-agent.md)
 
 #### Lookup agent
 
@@ -322,7 +322,7 @@ qa_graph = create_agent(qa_llm, tools=[lookup_track, lookup_artist, lookup_album
 display(Image(qa_graph.get_graph(xray=True).draw_mermaid_png()))
 ```
 
-> **Image:** [QA Graph](https://docs.langchain.com/langsmith/evaluate-complex-agent)
+> **Image:** [QA Graph](evaluate-complex-agent.md)
 
 #### Parent agent
 
@@ -394,7 +394,7 @@ We can visualize our compiled parent graph including all of its subgraphs:
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-> **Image:** [graph](https://docs.langchain.com/langsmith/evaluate-complex-agent)
+> **Image:** [graph](evaluate-complex-agent.md)
 
 #### Try it out
 
@@ -429,15 +429,15 @@ Which of the following purchases would you like to be refunded for? ...
 
 Now that we've got a testable version of our agent, let's run some evaluations. Agent evaluation can focus on at least 3 things:
 
-* [Final response](https://docs.langchain.com/langsmith/evaluate-complex-agent#final-response-evaluator): The inputs are a prompt and an optional list of tools. The output is the final agent response.
-* [Trajectory](https://docs.langchain.com/langsmith/evaluate-complex-agent#trajectory-evaluator): As before, the inputs are a prompt and an optional list of tools. The output is the list of tool calls
-* [Single step](https://docs.langchain.com/langsmith/evaluate-complex-agent#single-step-evaluators): As before, the inputs are a prompt and an optional list of tools. The output is the tool call.
+* [Final response](#final-response-evaluator): The inputs are a prompt and an optional list of tools. The output is the final agent response.
+* [Trajectory](#trajectory-evaluator): As before, the inputs are a prompt and an optional list of tools. The output is the list of tool calls
+* [Single step](#single-step-evaluators): As before, the inputs are a prompt and an optional list of tools. The output is the tool call.
 
 Let's run each type of evaluation:
 
 ### Final response evaluator
 
-First, let's create a [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) that evaluates end-to-end performance of the agent. For simplicity we'll use the same dataset for final response and trajectory evaluation, so we'll add both ground-truth responses and trajectories for each example question. We'll cover the trajectories in the next section.
+First, let's create a [dataset](evaluation-concepts.md#datasets) that evaluates end-to-end performance of the agent. For simplicity we'll use the same dataset for final response and trajectory evaluation, so we'll add both ground-truth responses and trajectories for each example question. We'll cover the trajectories in the next section.
 
 ```python
 from langsmith import Client
@@ -503,7 +503,7 @@ if not client.has_dataset(dataset_name=dataset_name):
     )
 ```
 
-We'll create a custom [LLM-as-judge](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) evaluator that uses another model to compare our agent's output on each example to the reference response, and judge if they're equivalent or not:
+We'll create a custom [LLM-as-judge](evaluation-concepts.md#llm-as-judge) evaluator that uses another model to compare our agent's output on each example to the reference response, and judge if they're equivalent or not:
 
 ```python
 # LLM-as-judge instructions
@@ -598,7 +598,7 @@ def trajectory_subsequence(outputs: dict, reference_outputs: dict) -> float:
     return i / len(reference_outputs['trajectory'])
 ```
 
-Now we can run our evaluation. Our evaluator assumes that our target function returns a 'trajectory' key, so lets define a target function that does so. We'll need to usage [LangGraph's streaming capabilities](https://docs.langchain.com/oss/python/langgraph/streaming) to record the trajectory.
+Now we can run our evaluation. Our evaluator assumes that our target function returns a 'trajectory' key, so lets define a target function that does so. We'll need to usage [LangGraph's streaming capabilities](../langgraph/streaming.md) to record the trajectory.
 
 Note that we are reusing the same dataset as for our final response evaluation, so we could have run both evaluators together and defined a target function that returns both "response" and "trajectory". In practice it's often useful to have separate datasets for each type of evaluation, which is why we show them separately here:
 

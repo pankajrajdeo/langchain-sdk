@@ -9,7 +9,7 @@ The [`langsmith-codex-plugins`](https://github.com/langchain-ai/langsmith-codex-
 Before setting up tracing, ensure you have:
 
 * [Codex CLI](https://developers.openai.com/codex/quickstart?setup=cli) v0.128 or later.
-* A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [LangSmith API key](create-account-api-key.md).
 
 ## Install and enable the plugin
 
@@ -86,7 +86,7 @@ Keep config files that include API keys out of version control.
 
 Set `replicas` in `langsmith.json` or `LANGSMITH_CODEX_RUNS_ENDPOINTS` to send the same trace data to additional LangSmith workspaces or projects. When set, the replica list overrides the other client settings.
 
-Tracing to multiple [replicas](https://docs.langchain.com/langsmith/log-traces-to-project) is useful for:
+Tracing to multiple [replicas](log-traces-to-project.md) is useful for:
 
 * Sending traces to both a production and staging project.
 * Tracing to multiple workspaces with different API keys.

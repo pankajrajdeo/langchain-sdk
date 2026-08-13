@@ -12,7 +12,7 @@ This error occurs when you exceed the maximum number of requests permitted by yo
 To resolve this error, you can:
 
 1. **Implement Rate Limiting**: Deploy a rate limiter to regulate the frequency of requests sent to the model.
-   See [rate limiting](https://docs.langchain.com/oss/python/langchain/models#rate-limiting) docs.
+   See [rate limiting](../models.md#rate-limiting) docs.
 
 2. **Implement Response Caching**: Use model response caching to reduce redundant requests when incoming queries are repetitive.
 

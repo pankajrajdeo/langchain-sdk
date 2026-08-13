@@ -15,8 +15,8 @@ Vertex AI Vector Search is available in two versions:
 
 Choose the section below based on which version you're using:
 
-* [Vector Search 2.0](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#vector-search-2-0) - If you're using Collections
-* [Vector Search 1.0](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#vector-search-1-0) - If you're using Indexes and Endpoints
+* [Vector Search 2.0](#vector-search-2-0) - If you're using Collections
+* [Vector Search 1.0](#vector-search-1-0) - If you're using Indexes and Endpoints
 
 For migrating from Vertex AI Vector Search 1.0 to 2.0, see the [Migration Guide](https://cloud.google.com/vertex-ai/docs/vector-search-2/migration-from-vs-1_0).
 
@@ -30,6 +30,8 @@ pip install -U langchain-google-vertexai
 
 ***
 
+<a id="vector-search-2-0"></a>
+
 # Vector Search 2.0
 
 Vector Search 2.0 uses Collections to store Data Objects. Each Data Object contains vectors, metadata, and content in a unified structure.
@@ -42,7 +44,7 @@ Vector Search 2.0 uses Collections to store Data Objects. Each Data Object conta
   gcloud services enable vectorsearch.googleapis.com aiplatform.googleapis.com --project "{PROJECT_ID}"
 ```
 
-* Vector Search Collection created (see [Creating a Collection](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#creating-a-collection-v2))
+* Vector Search Collection created (see [Creating a Collection](#creating-a-collection-v2))
 
 * Appropriate IAM permissions (`Vertex AI User` role or equivalent)
 
@@ -424,6 +426,8 @@ vector_store = VectorSearchVectorStore.from_components(
 
 ***
 
+<a id="vector-search-1-0"></a>
+
 # Vector Search 1.0
 
 This notebook shows how to use functionality related to the `Google Cloud Vertex AI Vector Search` vector database.
@@ -432,8 +436,8 @@ This notebook shows how to use functionality related to the `Google Cloud Vertex
 
 **Note**: LangChain API expects an endpoint and deployed index already created.Index creation time can take upto one hour.
 
-> To see how to create an index refer to the section [Create Index and deploy it to an Endpoint](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#create-index-and-deploy-it-to-an-endpoint)
-> If you already have an index deployed , skip to [Create VectorStore from texts](https://docs.langchain.com/oss/python/integrations/vectorstores/google_vertex_ai_vector_search#create-vector-store-from-texts)
+> To see how to create an index refer to the section [Create Index and deploy it to an Endpoint](#create-index-and-deploy-it-to-an-endpoint)
+> If you already have an index deployed , skip to [Create VectorStore from texts](#create-vector-store-from-texts)
 
 ## Create index and deploy it to an endpoint
 

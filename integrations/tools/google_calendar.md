@@ -22,7 +22,7 @@ To use this toolkit, you will need to:
 1. Have a Google account with access to Google Calendar.
 2. Set up your credentials as explained in the [Google Calendar API docs](https://developers.google.com/calendar/api/quickstart/python#authorize_credentials_for_a_desktop_application). Once you've downloaded the `credentials.json` file, you can start using the Google Calendar API.
 
-To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -99,7 +99,7 @@ tools
 
 ## Invocation
 
-### [Invoke directly with args](https://docs.langchain.com/oss/python/langchain/tools#create-tools)
+### [Invoke directly with args](../../langchain/tools.md#create-tools)
 
 You can invoke the tool directly by passing the required arguments in a dictionary format. Here is an example of creating a new event using the `CalendarCreateEvent` tool.
 
@@ -128,11 +128,11 @@ tool.invoke(
 
 ## Use within an agent
 
-Below we show how to incorporate the toolkit into an [agent](https://docs.langchain.com/oss/python/langchain/agents).
+Below we show how to incorporate the toolkit into an [agent](../../langchain/agents.md).
 
 We will need an LLM or chat model:
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/google_calendar).
+> **Interactive content:** [View this section in the original documentation](google_calendar.md).
 
 ```python
 # | output: false

@@ -4,7 +4,7 @@
 
 > [Databricks](https://www.databricks.com/) Lakehouse Platform unifies data, analytics, and AI on one platform.
 
-This guide provides a quick overview for getting started with Databricks [chat models](https://docs.langchain.com/oss/python/langchain/models).
+This guide provides a quick overview for getting started with Databricks [chat models](../../langchain/models.md).
 
 ## Overview
 
@@ -18,7 +18,7 @@ This guide provides a quick overview for getting started with Databricks [chat m
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools/) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                       ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -304,7 +304,7 @@ messages = [{"role": "user", "content": "What is the current temperature of Chic
 print(model.invoke(messages))
 ```
 
-See [Databricks Unity Catalog](https://docs.langchain.com/oss/python/integrations/tools/databricks) about how to use UC functions in chains.
+See [Databricks Unity Catalog](../tools/databricks.md) about how to use UC functions in chains.
 
 ***
 

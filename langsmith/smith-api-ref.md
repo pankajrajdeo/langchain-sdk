@@ -6,7 +6,7 @@ Browse the full API reference in the **LangSmith REST API** section in the sideb
 
 ## Authentication
 
-Pass the `X-Api-Key` header with each request. The value should be a valid [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key).
+Pass the `X-Api-Key` header with each request. The value should be a valid [LangSmith API key](create-account-api-key.md).
 
 ```shell
 curl --request GET \

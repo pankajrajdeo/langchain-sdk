@@ -68,9 +68,9 @@ The following integrations require MongoDB Atlas. You can use MongoDB Atlas with
 * **Retrievers**: `MongoDBAtlasFullTextSearchRetriever` and `MongoDBAtlasHybridSearchRetriever` support full-text and combined vector + keyword retrieval workflows.
 * **Semantic cache**: `MongoDBAtlasSemanticCache` retrieves cached LLM responses based on semantic similarity, backed by Atlas Vector Search.
 
-See the [MongoDB Atlas integrations](https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas) page for imports and usage examples.
+See the [MongoDB Atlas integrations](mongodb_atlas.md) page for imports and usage examples.
 
-For a detailed walkthrough of vector store setup, index creation, semantic search, and more, see the [MongoDB Atlas vector store](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas) guide.
+For a detailed walkthrough of vector store setup, index creation, semantic search, and more, see the [MongoDB Atlas vector store](../vectorstores/mongodb_atlas.md) guide.
 
 ***
 

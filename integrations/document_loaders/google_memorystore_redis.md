@@ -4,7 +4,7 @@
 
 > [Google Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) is a fully-managed service that is powered by the Redis in-memory data store to build application caches that provide sub-millisecond data access. Extend your database application to build AI-powered experiences leveraging Memorystore for Redis's LangChain integrations.
 
-This notebook goes over how to use [Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `MemorystoreDocumentLoader` and `MemorystoreDocumentSaver`.
+This notebook goes over how to use [Memorystore for Redis](https://cloud.google.com/memorystore/docs/redis/memorystore-for-redis-overview) to [save, load and delete langchain documents](../document_loaders.md) with `MemorystoreDocumentLoader` and `MemorystoreDocumentSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-memorystore-redis-python/).
 

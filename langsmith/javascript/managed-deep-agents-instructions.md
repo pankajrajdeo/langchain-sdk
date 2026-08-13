@@ -5,7 +5,7 @@ Define the system prompt for a Managed Deep Agent in instructions.md.
 Instructions define the agent's behavior. They make up the core of the agent's system prompt. You can define them in a simple markdown file and they are picked up automatically by the agent.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -35,11 +35,11 @@ Instructions are inserted into the agents system prompt on every run. They are a
 
 ## Syncing to Context Hub
 
-When you run `mda deploy` to deploy the agent, instructions are automatically synced to the agent's [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) repo. You can then edit the instructions in the LangSmith UI and have your changes automatically propagated to the agent.
+When you run `mda deploy` to deploy the agent, instructions are automatically synced to the agent's [Context Hub](../use-the-context-hub.md) repo. You can then edit the instructions in the LangSmith UI and have your changes automatically propagated to the agent.
 
 ## How instructions compare to other concepts
 
-Use [skills](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-skills) for task-specific procedures that the agent loads only when relevant. Use [memory](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory) for knowledge the agent learns and retains across threads.
+Use [skills](managed-deep-agents-skills.md) for task-specific procedures that the agent loads only when relevant. Use [memory](managed-deep-agents-memory.md) for knowledge the agent learns and retains across threads.
 
 ***
 

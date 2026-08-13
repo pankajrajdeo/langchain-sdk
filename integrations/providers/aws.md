@@ -18,7 +18,7 @@ This page covers all LangChain integrations with the [Amazon Web Services (AWS)]
 > serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy
 > generative AI capabilities into your applications using the AWS services you are already familiar with.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
+See a [usage example](../chat/bedrock.md).
 
 ```python
 from langchain_aws import ChatBedrock
@@ -34,7 +34,7 @@ yet support custom models. You can see a list of all
 > [!NOTE]
 > **We recommend the Converse API for users who do not need to use custom models. It can be accessed using [ChatBedrockConverse](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).**
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
+See a [usage example](../chat/bedrock.md).
 
 ```python
 from langchain_aws import ChatBedrockConverse
@@ -44,7 +44,7 @@ from langchain_aws import ChatBedrockConverse
 
 ### Bedrock
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/bedrock).
+See a [usage example](../llms/bedrock.md).
 
 ```python
 from langchain_aws import BedrockLLM
@@ -57,7 +57,7 @@ from langchain_aws import BedrockLLM
 
 We use `SageMaker` to host our model and expose it as the `SageMaker Endpoint`.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/sagemaker).
+See a [usage example](../llms/sagemaker.md).
 
 ```python
 from langchain_aws import SagemakerEndpoint
@@ -67,7 +67,7 @@ from langchain_aws import SagemakerEndpoint
 
 ### Bedrock
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/bedrock).
+See a [usage example](../embeddings/bedrock.md).
 
 ```python
 from langchain_aws import BedrockEmbeddings
@@ -94,7 +94,7 @@ vds = InMemoryVectorStore.from_documents(
         )
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/memorydb).
+See a [usage example](../vectorstores/memorydb.md).
 
 ### Valkey
 
@@ -104,7 +104,7 @@ See a [usage example](https://docs.langchain.com/oss/python/integrations/vectors
 from langchain_aws.vectorstores import ValkeyVectorStore
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/valkey).
+See a [usage example](../vectorstores/valkey.md).
 
 ## Retrievers
 
@@ -124,7 +124,7 @@ pip install langchain-aws
 uv add langchain-aws
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock).
+See a [usage example](../retrievers/bedrock.md).
 
 ```python
 from langchain_aws import AmazonKnowledgeBasesRetriever
@@ -145,7 +145,7 @@ pip install langchain-aws bedrock-agentcore playwright beautifulsoup4
 uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser).
+See a [usage example](../tools/bedrock_agentcore_browser.md).
 
 ```python
 from langchain_aws.tools import create_browser_toolkit
@@ -177,7 +177,7 @@ pip install langchain-aws bedrock-agentcore
 uv add langchain-aws bedrock-agentcore
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_code_interpreter).
+See a [usage example](../tools/bedrock_agentcore_code_interpreter.md).
 
 ```python
 from langchain_aws.tools import create_code_interpreter_toolkit
@@ -198,7 +198,7 @@ await toolkit.cleanup()
 
 ## Sandboxes
 
-#### [AgentCoreSandbox](https://docs.langchain.com/oss/python/integrations/sandboxes/aws)
+#### [AgentCoreSandbox](../sandboxes/aws.md)
 Amazon Bedrock AgentCore Code Interpreter sandbox backend for deepagents.
 
 ## Graphs
@@ -220,7 +220,7 @@ uv add langchain-aws
 
 ### Amazon neptune with cypher
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/amazon_neptune_open_cypher).
+See a [usage example](../graphs/amazon_neptune_open_cypher.md).
 
 ```python
 from langchain_aws.graphs import NeptuneGraph

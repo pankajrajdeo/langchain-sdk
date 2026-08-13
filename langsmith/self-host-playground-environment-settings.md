@@ -8,7 +8,7 @@ Many model providers support setting credentials and other configuration options
 ## Requirements
 
 * A self-hosted LangSmith instance with the `playground` service running.
-* The provider you want to configure must support environment variables for configuration. Check the provider's Chat Model [documentation](https://docs.langchain.com/oss/python/integrations/providers/overview) for more information.
+* The provider you want to configure must support environment variables for configuration. Check the provider's Chat Model [documentation](../integrations/providers/overview.md) for more information.
 * The secrets/roles you may want to attach to the `playground` service.
   * Note that for [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) you may need to grant the `langsmith-playground` service account the necessary permissions to access the secrets or roles in your cloud provider.
 

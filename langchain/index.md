@@ -2,18 +2,18 @@
 
 > LangChain provides create_agent: a minimal, highly configurable agent harness. Compose exactly the agent your use case needs from model, tools, prompt, and middleware.
 
-**Agent = Model + Harness.** LangChain provides `create_agent`: a minimal, highly configurable harness. The harness is everything around the model loop: the prompt, the tools, and any middleware that shapes behavior. Start with the primitives and compose exactly what your use case needs. Supports [OpenAI, Anthropic, Google, and more](https://docs.langchain.com/oss/python/integrations/providers/overview).
+**Agent = Model + Harness.** LangChain provides `create_agent`: a minimal, highly configurable harness. The harness is everything around the model loop: the prompt, the tools, and any middleware that shapes behavior. Start with the primitives and compose exactly what your use case needs. Supports [OpenAI, Anthropic, Google, and more](../integrations/providers/overview.md).
 
 > [!TIP]
 > **LangChain vs. LangGraph vs. Deep Agents**
 >
-> Start with [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview/) for a "batteries-included" agent with features like automatic context compression, a virtual filesystem, and subagent-spawning. Deep Agents are built on LangChain [agents](https://docs.langchain.com/oss/python/langchain/agents/) which you can also use directly.
+> Start with [Deep Agents](../deepagents/overview.md) for a "batteries-included" agent with features like automatic context compression, a virtual filesystem, and subagent-spawning. Deep Agents are built on LangChain [agents](agents.md) which you can also use directly.
 >
-> Use [LangChain](https://docs.langchain.com/oss/python/langchain/agents) (`create_agent`) for a highly customizable harness, easily tailored to your use case and data.
+> Use [LangChain](agents.md) (`create_agent`) for a highly customizable harness, easily tailored to your use case and data.
 >
-> Use [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), our low-level orchestration framework, for advanced needs combining deterministic and agentic workflows.
+> Use [LangGraph](../langgraph/overview.md), our low-level orchestration framework, for advanced needs combining deterministic and agentic workflows.
 >
-> Use [LangSmith](https://docs.langchain.com/langsmith/observability) to trace, debug, and evaluate agents built with any of these frameworks. Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langchain) to get set up. We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> Use [LangSmith](../langsmith/observability.md) to trace, debug, and evaluate agents built with any of these frameworks. Follow the [tracing quickstart](../langsmith/trace-with-langchain.md) to get set up. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ##  Create an agent
 
@@ -226,23 +226,23 @@ result = agent.invoke(
 print(result["messages"][-1].content_blocks)
 ```
 
-See the [Installation instructions](https://docs.langchain.com/oss/python/langchain/install) and [Quickstart guide](https://docs.langchain.com/oss/python/langchain/quickstart) to get started building your own agents and applications with LangChain.
+See the [Installation instructions](install.md) and [Quickstart guide](quickstart.md) to get started building your own agents and applications with LangChain.
 
 > [!TIP]
-> Use [LangSmith](https://docs.langchain.com/langsmith/observability) to trace requests, debug agent behavior, and evaluate outputs. Set `LANGSMITH_TRACING=true` and your API key to get started.
+> Use [LangSmith](../langsmith/observability.md) to trace requests, debug agent behavior, and evaluate outputs. Set `LANGSMITH_TRACING=true` and your API key to get started.
 
 ##  Core benefits
 
-#### [Standard model interface](https://docs.langchain.com/oss/python/langchain/models)
+#### [Standard model interface](models.md)
 Use one interface for chat models, embeddings, and more across providers. Switch models with minimal code changes and keep your application portable as requirements evolve.
 
-#### [Highly configurable harness](https://docs.langchain.com/oss/python/langchain/agents)
+#### [Highly configurable harness](agents.md)
 Start with `create_agent` as a minimal harness and add capabilities incrementally through middleware. Compose only what your use case needs, from guardrails and retries to routing and custom tool policies.
 
-#### [Built on top of LangGraph](https://docs.langchain.com/oss/python/langgraph/overview)
+#### [Built on top of LangGraph](../langgraph/overview.md)
 LangChain's agents are built on top of LangGraph. This allows us to take advantage of LangGraph's durable execution, human-in-the-loop support, persistence, and more.
 
-#### [Debug with LangSmith](https://docs.langchain.com/langsmith/observability)
+#### [Debug with LangSmith](../langsmith/observability.md)
 Inspect traces, tool calls, state transitions, and latency in one place. Find failure modes, evaluate quality, and improve agent behavior with execution data.
 
 ***

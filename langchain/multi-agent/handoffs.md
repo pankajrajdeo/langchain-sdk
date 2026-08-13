@@ -1,6 +1,6 @@
 # Handoffs
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs)
-In the **handoffs** architecture, behavior changes dynamically based on state. The core mechanism: [tools](https://docs.langchain.com/oss/python/langchain/tools) update a state variable (e.g., `current_step` or `active_agent`) that persists across turns, and the system reads this variable to adjust behavior—either applying different configuration (system prompt, tools) or routing to a different [agent](https://docs.langchain.com/oss/python/langchain/agents). This pattern supports both handoffs between distinct agents and dynamic configuration changes within a single agent.
+In the **handoffs** architecture, behavior changes dynamically based on state. The core mechanism: [tools](../tools.md) update a state variable (e.g., `current_step` or `active_agent`) that persists across turns, and the system reads this variable to adjust behavior—either applying different configuration (system prompt, tools) or routing to a different [agent](../agents.md). This pattern supports both handoffs between distinct agents and dynamic configuration changes within a single agent.
 
 > [!TIP]
 > The term **handoffs** was coined by [OpenAI](https://openai.github.io/openai-agents-python/handoffs/) for using tool calls (e.g., `transfer_to_sales_agent`) to transfer control between agents or states.
@@ -39,7 +39,7 @@ Use the handoffs pattern when you need to enforce sequential constraints (unlock
 
 ## Basic implementation
 
-The core mechanism is a [tool](https://docs.langchain.com/oss/python/langchain/tools) that returns a [`Command`](https://docs.langchain.com/oss/python/langgraph/graph-api#command) to update state, triggering a transition to a new step or agent:
+The core mechanism is a [tool](../tools.md) that returns a [`Command`](../../langgraph/graph-api.md#command) to update state, triggering a transition to a new step or agent:
 
 ```python
 from langchain.tools import tool
@@ -67,12 +67,12 @@ def transfer_to_specialist(runtime) -> Command:
 
 For a complete implementation, see the tutorial below.
 
-#### [Tutorial: Build customer support with handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs-customer-support)
+#### [Tutorial: Build customer support with handoffs](handoffs-customer-support.md)
 Learn how to build a customer support agent using the handoffs pattern, where a single agent transitions between different configurations.
 
 ## Implementation approaches
 
-There are two ways to implement handoffs: **[single agent with middleware](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs#single-agent-with-middleware)** (one agent with dynamic configuration) or **[multiple agent subgraphs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs#multiple-agent-subgraphs)** (distinct agents as graph nodes).
+There are two ways to implement handoffs: **[single agent with middleware](#single-agent-with-middleware)** (one agent with dynamic configuration) or **[multiple agent subgraphs](#multiple-agent-subgraphs)** (distinct agents as graph nodes).
 
 ### Single agent with middleware
 
@@ -184,7 +184,7 @@ agent = create_agent(
 Multiple distinct agents exist as separate nodes in a graph. Handoff tools navigate between agent nodes using `Command.PARENT` to specify which node to execute next.
 
 > [!WARNING]
-> Subgraph handoffs require careful **[context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering)**. Unlike single-agent middleware (where message history flows naturally), you must explicitly decide what messages pass between agents. Get this wrong and agents receive malformed conversation history or bloated context. See [Context engineering](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs#context-engineering) below.
+> Subgraph handoffs require careful **[context engineering](../context-engineering.md)**. Unlike single-agent middleware (where message history flows naturally), you must explicitly decide what messages pass between agents. Get this wrong and agents receive malformed conversation history or bloated context. See [Context engineering](#context-engineering) below.
 
 ```python
 from langchain.messages import AIMessage, ToolMessage
@@ -361,7 +361,7 @@ for msg in result["messages"]:
 
 #### Context engineering
 
-With subgraph handoffs, you control exactly what messages flow between agents. This precision is essential for maintaining valid conversation history and avoiding context bloat that could confuse downstream agents. For more on this topic, see [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering).
+With subgraph handoffs, you control exactly what messages flow between agents. This precision is essential for maintaining valid conversation history and avoiding context bloat that could confuse downstream agents. For more on this topic, see [context engineering](../context-engineering.md).
 
 **Handling context during handoffs**
 

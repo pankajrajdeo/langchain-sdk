@@ -2,11 +2,11 @@
 
 > Integrate with the OpenAI middleware using LangChain Python.
 
-Middleware specifically designed for OpenAI models. Learn more about [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview).
+Middleware specifically designed for OpenAI models. Learn more about [middleware](../../langchain/middleware/overview.md).
 
 | Middleware                                | Description                                               |
 | ----------------------------------------- | --------------------------------------------------------- |
-| [Content moderation](https://docs.langchain.com/oss/python/integrations/middleware/openai#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
+| [Content moderation](#content-moderation) | Moderate agent traffic using OpenAI's moderation endpoint |
 
 ## Content moderation
 

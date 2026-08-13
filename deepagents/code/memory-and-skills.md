@@ -4,16 +4,16 @@ Persistent memory, AGENTS.md files, and reusable skills for Deep Agents Code, in
 
 There are two primary ways to customize an agent in Deep Agents Code:
 
-* **[Memory](https://docs.langchain.com/oss/deepagents/code/memory-and-skills#memory)**: `AGENTS.md` files and auto-saved memories that persist across sessions. Use memory for general coding style, preferences, and learned conventions.
+* **[Memory](#memory)**: `AGENTS.md` files and auto-saved memories that persist across sessions. Use memory for general coding style, preferences, and learned conventions.
 
-* **[Skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills#skills)**: Reusable, on-demand capabilities that the agent discovers and reads only when relevant. Use skills for task-specific context such as workflows, best practices, and reference docs.
+* **[Skills](#skills)**: Reusable, on-demand capabilities that the agent discovers and reads only when relevant. Use skills for task-specific context such as workflows, best practices, and reference docs.
 
-In practice, skills and memory sit on a spectrum. For more on when to use each, see [Skills, memory, and tools](https://docs.langchain.com/oss/python/deepagents/skills#skills-memory-and-tools).
+In practice, skills and memory sit on a spectrum. For more on when to use each, see [Skills, memory, and tools](../skills.md#skills-memory-and-tools).
 
 Use `/remember` to explicitly prompt the agent to update its memory and skills from the current conversation.
 
 > [!TIP]
-> Building a custom agent with the SDK? See [Memory](https://docs.langchain.com/oss/python/deepagents/memory) for programmatic memory backends.
+> Building a custom agent with the SDK? See [Memory](../memory.md) for programmatic memory backends.
 
 ## Memory
 
@@ -58,7 +58,7 @@ It remembers for future sessions:
 Both files are appended to the system prompt at startup.
 
 > [!TIP]
-> To generate a repository wiki and wire pointers into `AGENTS.md` and `CLAUDE.md` for coding agents, see [OpenWiki](https://docs.langchain.com/oss/openwiki/overview).
+> To generate a repository wiki and wire pointers into `AGENTS.md` and `CLAUDE.md` for coding agents, see [OpenWiki](../../OpenWiki/overview.md).
 
 ### How memory works
 
@@ -92,7 +92,7 @@ Use a project `AGENTS.md` (`.deepagents/AGENTS.md` in project root) for:
 ## Skills
 
 Skills package domain expertise, such as workflows, best practices, scripts, and reference docs, into reusable directories that the agent discovers and reads only when relevant.
-Deep agent skills follow the [Agent Skills specification](https://agentskills.io/). For more on how skills work and how to write effective ones, see [Skills](https://docs.langchain.com/oss/python/deepagents/skills).
+Deep agent skills follow the [Agent Skills specification](https://agentskills.io/). For more on how skills work and how to write effective ones, see [Skills](../skills.md).
 
 At startup, Deep Agents Code reads the name and description from each `SKILL.md` file's frontmatter. When a task matches a skill's description, the agent reads the skill file and follows its instructions. Discovery runs again on `/reload`.
 
@@ -119,7 +119,7 @@ skills/
 Open the generated `SKILL.md` and edit the file to include your instructions.
 
 ### Add optional resources
-Optionally add additional scripts or other resources to the `test-skill` folder. For more information, see [Usage](https://docs.langchain.com/oss/python/deepagents/skills#add-supporting-resources).
+Optionally add additional scripts or other resources to the `test-skill` folder. For more information, see [Usage](../skills.md#add-supporting-resources).
 
 You can also copy existing skills directly to the agent's folder:
 
@@ -158,7 +158,7 @@ Skills are loaded from the following directories at startup:
 .claude/skills/            (experimental)
 ```
 
-When duplicate skill names exist, later-precedence directories override earlier ones (see [App data](https://docs.langchain.com/oss/deepagents/code/configuration#skills)).
+When duplicate skill names exist, later-precedence directories override earlier ones (see [App data](configuration.md#skills)).
 
 For project-specific skills (under `.deepagents/skills/` or `.agents/skills/`), the project root is identified by a containing `.git` folder.
 

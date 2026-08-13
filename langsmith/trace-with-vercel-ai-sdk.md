@@ -26,7 +26,7 @@ pnpm add ai @ai-sdk/openai zod langsmith
 
 #### AI SDK v5 and v6
 > [!NOTE]
-> `wrapAISDK` supports AI SDK v6 and requires `langsmith>=0.3.63`. If you are using an older version of the AI SDK or `langsmith`, refer to the [OpenTelemetry (OTEL) based approach](https://docs.langchain.com/langsmith/legacy-trace-with-vercel-ai-sdk).
+> `wrapAISDK` supports AI SDK v6 and requires `langsmith>=0.3.63`. If you are using an older version of the AI SDK or `langsmith`, refer to the [OpenTelemetry (OTEL) based approach](legacy-trace-with-vercel-ai-sdk.md).
 
 ```bash
 npm install ai @ai-sdk/openai zod langsmith
@@ -380,7 +380,7 @@ export async function POST(request: Request) {
 }
 ```
 
-See [Trace JS functions in serverless environments](https://docs.langchain.com/langsmith/serverless-environments) for more detail, including information around managing rate limits in serverless environments.
+See [Trace JS functions in serverless environments](serverless-environments.md) for more detail, including information around managing rate limits in serverless environments.
 
 ## Passing LangSmith config
 

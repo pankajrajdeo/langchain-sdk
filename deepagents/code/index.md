@@ -2,7 +2,7 @@
 
 > Terminal coding agent built on the Deep Agents SDK
 
-Deep Agents Code (`dcode`) is an open source coding agent built on the [Deep Agents SDK](https://docs.langchain.com/oss/python/deepagents/quickstart).
+Deep Agents Code (`dcode`) is an open source coding agent built on the [Deep Agents SDK](../quickstart.md).
 It works with any large language model and supports switching providers or models.
 Persistent memory carries context across conversations, customizable skills shape behavior, and approval controls gate code execution.
 
@@ -15,45 +15,45 @@ curl -LsSf https://langch.in/dcode | bash
 dcode
 ```
 
-See the [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart) to add provider credentials, run your first task, and learn interactive mode.
+See the [Quickstart](quickstart.md) to add provider credentials, run your first task, and learn interactive mode.
 
 > **Video:** [Deep Agents Code terminal demo](https://mintcdn.com/langchain-5e9cc07a/RVTbVyxmLiI04cgS/oss/images/deepagents/dcode-small.mp4?fit=max&auto=format&n=RVTbVyxmLiI04cgS&q=85&s=0d35e29a34f349183e83bd3d1eceb68b)
 
 ## Capabilities
 
-#### [Remote sandboxes](https://docs.langchain.com/oss/deepagents/code/remote-sandboxes)
+#### [Remote sandboxes](remote-sandboxes.md)
 Run agent tools remotely instead of on your local machine.
 
-#### [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics)
+#### [Goals and rubrics](goals-and-rubrics.md)
 Define measurable objectives or grading criteria so the agent can check whether work is done.
 
-#### [Subagents](https://docs.langchain.com/oss/deepagents/code/subagents)
+#### [Subagents](subagents.md)
 Delegate work to task-specific subagents for parallel execution.
 
-#### [Memory](https://docs.langchain.com/oss/deepagents/code/memory-and-skills#memory)
+#### [Memory](memory-and-skills.md#memory)
 Store and retrieve information across sessions, including project conventions and learned patterns.
 
-#### [Context compaction](https://docs.langchain.com/oss/deepagents/code/quickstart#interactive-mode)
+#### [Context compaction](quickstart.md#interactive-mode)
 Summarize older messages and offload originals to storage.
 
-#### [Human-in-the-loop](https://docs.langchain.com/oss/deepagents/code/quickstart#interactive-mode)
+#### [Human-in-the-loop](quickstart.md#interactive-mode)
 Require human approval for sensitive tool operations.
 
-#### [Skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills#skills)
+#### [Skills](memory-and-skills.md#skills)
 Extend agent capabilities with custom expertise and instructions.
 
-#### [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
+#### [MCP tools](mcp-tools.md)
 Load external tools from Model Context Protocol servers.
 
-#### [Tracing](https://docs.langchain.com/oss/deepagents/code/quickstart#trace-with-langsmith)
+#### [Tracing](quickstart.md#trace-with-langsmith)
 Trace agent operations in LangSmith for observability and debugging.
 
 ## Next steps
 
-#### [Quickstart](https://docs.langchain.com/oss/deepagents/code/quickstart)
+#### [Quickstart](quickstart.md)
 Install Deep Agents Code, run your first task, and use interactive or non-interactive modes.
 
-#### [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
+#### [Configuration](configuration.md)
 Set up credentials, `config.toml`, environment variables, hooks, and CLI flags.
 
 ***

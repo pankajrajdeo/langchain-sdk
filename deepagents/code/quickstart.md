@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/quickstart)
 Install Deep Agents Code, run your first task, and use interactive or non-interactive modes
 
-Deep Agents Code (`dcode`) is a terminal coding agent built on the [Deep Agents SDK](https://docs.langchain.com/oss/python/deepagents/quickstart). This guide covers installation, your first task, daily interactive use, automation with piping, and LangSmith tracing. For a feature overview, see [Deep Agents Code overview](https://docs.langchain.com/oss/deepagents/code/overview). For `config.toml` and provider settings, see [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration).
+Deep Agents Code (`dcode`) is a terminal coding agent built on the [Deep Agents SDK](../quickstart.md). This guide covers installation, your first task, daily interactive use, automation with piping, and LangSmith tracing. For a feature overview, see [Deep Agents Code overview](overview.md). For `config.toml` and provider settings, see [Configuration](configuration.md).
 
 ## Install and run your first task
 
@@ -14,10 +14,10 @@ curl -LsSf https://langch.in/dcode | bash
 ### Add provider credentials
 Deep Agents Code works with any tool-calling LLM. OpenAI, Anthropic, and Google are available out of the box.
 
-Use the `/auth` command to connect with a provider. See [Providers](https://docs.langchain.com/oss/deepagents/code/providers) for the full list and credential details.
+Use the `/auth` command to connect with a provider. See [Providers](providers.md) for the full list and credential details.
 
 > [!NOTE]
-> Web search uses [Tavily](https://tavily.com). Add a key with `/auth`. See [Enable web search](https://docs.langchain.com/oss/deepagents/code/credentials#enable-web-search-with-tavily).
+> Web search uses [Tavily](https://tavily.com). Add a key with `/auth`. See [Enable web search](credentials.md#enable-web-search-with-tavily).
 
 ### Give the agent a task
 ```txt
@@ -29,7 +29,7 @@ The agent interprets the query and proposes changes with diffs for your approval
 ### Enable tracing (optional)
 To log agent operations, tool calls, and decisions in LangSmith, run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch.
 
-For project naming, advanced options, and CI or headless setup, see [Trace with LangSmith](https://docs.langchain.com/oss/deepagents/code/quickstart#trace-with-langsmith).
+For project naming, advanced options, and CI or headless setup, see [Trace with LangSmith](#trace-with-langsmith).
 
 > [!NOTE]
 > Deep Agents Code is not officially supported on Windows. Windows users can try running it under [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/install).
@@ -46,10 +46,10 @@ Use these commands within a Deep Agents Code session:
 
 * `/model`: Switch models or open the interactive model selector.
 * `/effort`: Set reasoning effort for the current model.
-* `/agents`: Hot-swap between pre-configured agents without relaunching. See [Command reference](https://docs.langchain.com/oss/deepagents/code/cli-reference#command-line-options) for related flags.
-* `/auth`: Manage stored API keys for model providers and services (such as Tavily web search). See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials) for details.
-* `/goal <objective>`: Draft acceptance criteria from a measurable objective. See [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics).
-* `/rubric`: Set explicit acceptance criteria for grading. See [Goals and rubrics](https://docs.langchain.com/oss/deepagents/code/goals-and-rubrics).
+* `/agents`: Hot-swap between pre-configured agents without relaunching. See [Command reference](cli-reference.md#command-line-options) for related flags.
+* `/auth`: Manage stored API keys for model providers and services (such as Tavily web search). See [Provider credentials](credentials.md) for details.
+* `/goal <objective>`: Draft acceptance criteria from a measurable objective. See [Goals and rubrics](goals-and-rubrics.md).
+* `/rubric`: Set explicit acceptance criteria for grading. See [Goals and rubrics](goals-and-rubrics.md).
 * `/remember [context]`: Review conversation and update memory and skills. Optionally pass additional context.
 * `/skill:<name> [args]`: Directly invoke a skill by name. The skill's `SKILL.md` instructions are injected into the prompt along with any arguments you provide.
 * `/skill-creator [task]`: Guide for creating effective agent skills.
@@ -60,16 +60,16 @@ Use these commands within a Deep Agents Code session:
 * `/copy`: Copy the latest assistant message to the clipboard.
 * `/threads`: Browse and resume previous conversation threads.
 * `/mcp [login <server> | reconnect]`: Show active MCP servers and tools. `login <server>` runs the OAuth flow for a server; `reconnect` loads deferred logins.
-* `/plugins`: Manage [plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins).
+* `/plugins`: Manage [plugins and marketplaces](plugins.md).
 * `/notifications`: Configure startup warning preferences.
-* `/reload`: Re-read `.env` files, refresh configuration, and re-discover skills without restarting. This also reloads plugin skills and MCP configuration. Conversation state is preserved. See [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) for override behavior.
-* `/theme`: Open the interactive theme selector to switch color themes. Built-in themes are available plus any [user-defined themes](https://docs.langchain.com/oss/deepagents/code/configuration#themes).
+* `/reload`: Re-read `.env` files, refresh configuration, and re-discover skills without restarting. This also reloads plugin skills and MCP configuration. Conversation state is preserved. See [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for override behavior.
+* `/theme`: Open the interactive theme selector to switch color themes. Built-in themes are available plus any [user-defined themes](configuration.md#themes).
 * `/scrollbar`: Show or hide the chat scrollbar.
 * `/update`: Check for and install Deep Agents Code updates inline. Detects your install method (uv, Homebrew, pip) and runs the appropriate upgrade command.
 * `/auto-update`: Toggle automatic updates on or off.
 * `/install`: Install an optional integration.
 * `/trace`: Open the current thread in LangSmith.
-* `/editor`: Open the current prompt in your external editor (`$VISUAL` / `$EDITOR`). See [External editor](https://docs.langchain.com/oss/deepagents/code/quickstart#external-editor).
+* `/editor`: Open the current prompt in your external editor (`$VISUAL` / `$EDITOR`). See [External editor](#external-editor).
 * `/restart`: Restart the agent server.
 * `/timestamps`: Toggle message timestamp footers.
 * `/changelog`: Open Deep Agents Code changelog in your browser.
@@ -104,7 +104,7 @@ ls -la
 | `Enter`                                               | Submit prompt                                                                       |
 | `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                                                      |
 | `@filename`                                           | Auto-complete files and inject content                                              |
-| `Shift+Tab` or `Ctrl+T`                               | Toggle between Manual and Auto [approval mode](https://docs.langchain.com/oss/deepagents/code/approval-modes) |
+| `Shift+Tab` or `Ctrl+T`                               | Toggle between Manual and Auto [approval mode](approval-modes.md) |
 | `Ctrl+X`                                              | Open prompt in external editor                                                      |
 | `Ctrl+N`                                              | Review pending notifications                                                        |
 | `Ctrl+O`                                              | Expand/collapse the most recent tool output                                         |
@@ -188,7 +188,7 @@ dcode -n "fix the failing tests" --max-turns 10
 
 `N` must be a positive integer, and overrides the internal safety default that otherwise caps runaway loops. Exits with code 124 (matching GNU `timeout`) when the budget is exceeded, so CI can distinguish a budget hit from a generic failure. Requires `-n` or piped stdin; otherwise exits with code 2.
 
-For a time-based limit instead of (or in addition to) a turn-count limit, see [Cap wall-clock time with `--timeout`](https://docs.langchain.com/oss/deepagents/code/quickstart#non-interactive-mode-and-piping).
+For a time-based limit instead of (or in addition to) a turn-count limit, see [Cap wall-clock time with `--timeout`](#non-interactive-mode-and-piping).
 
 </details>
 
@@ -248,7 +248,7 @@ dcode -n "Fix the build" -S all
 
 Enable [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-code-quickstart) tracing to see agent operations, tool calls, and decisions in a LangSmith project.
 
-Run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch and persists across sessions. See [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials#use-%2Fauth-recommended) for details on the credential manager.
+Run `/auth` and add your LangSmith API key. Tracing is enabled on the next launch and persists across sessions. See [Provider credentials](credentials.md#use-%2Fauth-recommended) for details on the credential manager.
 
 To customize the project name or configure tracing without the TUI, add keys to `~/.deepagents/.env` so tracing is enabled in every session without per-shell exports:
 
@@ -260,7 +260,7 @@ DEEPAGENTS_CODE_LANGSMITH_PROJECT=deepagents-code  # Project for Deep Agents Cod
 
 Use `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to name the project that receives Deep Agents Code's own traces. It is scoped to Deep Agents Code, so it is not affected by a `LANGSMITH_PROJECT` set in a project's `.env` (which routes that project's application traces; see **Separate agent traces from app traces** below).
 
-To override the project for a specific working directory, add `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to a `.env` in that directory. See [environment variables](https://docs.langchain.com/oss/deepagents/code/configuration#environment-variables) for the full loading order.
+To override the project for a specific working directory, add `DEEPAGENTS_CODE_LANGSMITH_PROJECT` to a `.env` in that directory. See [environment variables](configuration.md#environment-variables) for the full loading order.
 
 For CI, headless runs, or temporary overrides, set shell environment variables instead. Shell exports always take precedence over `.env` values:
 
@@ -297,7 +297,7 @@ uv run pytest tests/test_escalation_flow.py
 
 If that test runs your app with LangSmith tracing enabled, those app traces are created by the shell process and go to `customer-support-agent`. Deep Agents Code's own reasoning and tool-use traces go to `deepagents-code`.
 
-You can also scope LangSmith credentials to Deep Agents Code using the [`DEEPAGENTS_CODE_` prefix](https://docs.langchain.com/oss/deepagents/code/configuration#deepagents_code_-prefix) (e.g., `DEEPAGENTS_CODE_LANGSMITH_API_KEY`).
+You can also scope LangSmith credentials to Deep Agents Code using the [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) (e.g., `DEEPAGENTS_CODE_LANGSMITH_API_KEY`).
 
 </details>
 
@@ -321,16 +321,16 @@ When configured, Deep Agents Code displays a status line with a link to the Lang
 ```
 
 > [!TIP]
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine), which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 ## See also
 
-* [Deep Agents Code overview](https://docs.langchain.com/oss/deepagents/code/overview)
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Provider credentials](https://docs.langchain.com/oss/deepagents/code/credentials)
-* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
-* [Providers](https://docs.langchain.com/oss/deepagents/code/providers)
-* [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills)
+* [Deep Agents Code overview](overview.md)
+* [Configuration](configuration.md)
+* [Provider credentials](credentials.md)
+* [CLI reference](cli-reference.md)
+* [Providers](providers.md)
+* [Memory and skills](memory-and-skills.md)
 
 ***
 

@@ -19,7 +19,7 @@ The Coinbase AgentKit LangChain extension gives an LLM agent tools to interact w
 3. Create an `AgentKit` instance and convert it to LangChain tools with `get_langchain_tools`.
 4. Pass the tools to your agent.
 
-To enable automated tracing of individual tools, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of individual tools, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 import getpass

@@ -15,13 +15,16 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import difflib
 import hashlib
+import html
 import json
 import os
 import re
 import shutil
 import sys
 import time
+import unicodedata
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
@@ -305,8 +308,36 @@ def absolute_docs_link(target: str, page_url: str) -> str:
     return urljoin(page_url, target)
 
 
-def rewrite_markdown_links(text: str, page_url: str) -> str:
-    """Make relative Markdown/HTML links reliable when rendered on GitHub."""
+def local_document_link(
+    target: str,
+    page_url: str,
+    mirrored_urls: set[str],
+) -> str:
+    """Return a repository-relative link when the documentation page exists."""
+    absolute = absolute_docs_link(target, page_url)
+    parts = urlsplit(absolute)
+    page_target = canonical_page_url(urlunsplit((parts.scheme, parts.netloc, parts.path, "", "")))
+    if page_target not in mirrored_urls:
+        return absolute
+
+    if page_target == page_url and parts.fragment:
+        return f"#{parts.fragment}"
+
+    source_path = local_path_for(page_url)
+    target_path = local_path_for(page_target)
+    relative = os.path.relpath(target_path, start=source_path.parent)
+    result = PurePosixPath(relative).as_posix()
+    if parts.fragment:
+        result += f"#{parts.fragment}"
+    return result
+
+
+def rewrite_markdown_links(
+    text: str,
+    page_url: str,
+    mirrored_urls: set[str],
+) -> str:
+    """Use local links for mirrored documents and absolute URLs otherwise."""
     markdown_link = re.compile(r"(?P<prefix>!?\[[^\]]*\]\()(?P<target><[^>]+>|[^)\s]+)")
 
     def replace_markdown(match: re.Match[str]) -> str:
@@ -316,28 +347,65 @@ def rewrite_markdown_links(text: str, page_url: str) -> str:
         if plain.startswith(("mailto:", "tel:", "data:", "javascript:")):
             return match.group(0)
         parts = urlsplit(plain)
-        if parts.scheme or plain.startswith("//"):
+        prefix = match.group("prefix")
+        is_image = prefix.startswith("!")
+        explicitly_original = "original langchain documentation" in prefix.lower()
+        if parts.scheme and parts.netloc.lower() != "docs.langchain.com":
             return match.group(0)
-        rewritten = absolute_docs_link(plain, page_url)
-        return match.group("prefix") + (f"<{rewritten}>" if wrapped else rewritten)
-
-    text = markdown_link.sub(replace_markdown, text)
+        if plain.startswith("//") or is_image or explicitly_original:
+            rewritten = absolute_docs_link(plain, page_url)
+        else:
+            rewritten = local_document_link(plain, page_url, mirrored_urls)
+        return prefix + (f"<{rewritten}>" if wrapped else rewritten)
 
     def replace_reference(match: re.Match[str]) -> str:
         target = match.group(2)
-        if target.startswith(("mailto:", "tel:", "data:")) or urlsplit(target).scheme:
+        parts = urlsplit(target)
+        if target.startswith(("mailto:", "tel:", "data:", "//")):
             return match.group(0)
-        return f"{match.group(1)}{absolute_docs_link(target, page_url)}"
-
-    text = re.sub(r"(?m)^(\s*\[[^\]]+\]:\s*)(\S+)", replace_reference, text)
+        if parts.scheme and parts.netloc.lower() != "docs.langchain.com":
+            return match.group(0)
+        return f"{match.group(1)}{local_document_link(target, page_url, mirrored_urls)}"
 
     def replace_html(match: re.Match[str]) -> str:
+        attribute_name = match.group(1).lower()
         target = match.group(3)
-        if target.startswith(("mailto:", "tel:", "data:")) or urlsplit(target).scheme:
+        parts = urlsplit(target)
+        if target.startswith(("mailto:", "tel:", "data:", "//")):
             return match.group(0)
-        return f"{match.group(1)}={match.group(2)}{absolute_docs_link(target, page_url)}{match.group(2)}"
+        if parts.scheme and parts.netloc.lower() != "docs.langchain.com":
+            return match.group(0)
+        rewritten = (
+            local_document_link(target, page_url, mirrored_urls)
+            if attribute_name == "href"
+            else absolute_docs_link(target, page_url)
+        )
+        return f"{match.group(1)}={match.group(2)}{rewritten}{match.group(2)}"
 
-    return re.sub(r"\b(href|src)=(['\"])([^'\"]+)\2", replace_html, text)
+    output: list[str] = []
+    fence: str | None = None
+    for line in text.splitlines(keepends=True):
+        stripped = line.lstrip()
+        while stripped.startswith("> "):
+            stripped = stripped[2:].lstrip()
+        marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+        if marker_match:
+            marker = marker_match.group(1)
+            if fence is None:
+                fence = marker
+            elif marker[0] == fence[0] and len(marker) >= len(fence):
+                fence = None
+            output.append(line)
+            continue
+        if fence is not None:
+            output.append(line)
+            continue
+
+        line = markdown_link.sub(replace_markdown, line)
+        line = re.sub(r"^(\s*\[[^\]]+\]:\s*)(\S+)", replace_reference, line)
+        line = re.sub(r"\b(href|src)=(['\"])([^'\"]+)\2", replace_html, line)
+        output.append(line)
+    return "".join(output)
 
 
 def convert_html_link_cards(text: str, page_url: str) -> str:
@@ -431,8 +499,12 @@ def convert_mdx(text: str, page_url: str) -> str:
             or f"Embedded {kind}"
         )
         source = attribute(tag_text, "src")
-        target = absolute_docs_link(source, page_url) if source else page_url
-        return f"> **{kind.title()}:** [{label}]({target})"
+        if source:
+            return f"> **{kind.title()}:** [{label}]({absolute_docs_link(source, page_url)})"
+        return (
+            f"> **{kind.title()}:** {label} — [Open it in the original LangChain "
+            f"documentation]({page_url})."
+        )
 
     for line in lines:
         stripped = line.strip()
@@ -648,7 +720,12 @@ def convert_mdx(text: str, page_url: str) -> str:
     return "\n".join(output)
 
 
-def normalize_markdown(raw_body: bytes, page_url: str) -> tuple[bytes, list[str]]:
+def normalize_markdown(
+    raw_body: bytes,
+    page_url: str,
+    mirrored_urls: set[str] | None = None,
+) -> tuple[bytes, list[str]]:
+    mirrored_urls = mirrored_urls or {page_url}
     text = raw_body.decode("utf-8")
     text = DOC_INDEX_RE.sub("", text)
     text, warnings = remove_generated_components(text)
@@ -660,7 +737,7 @@ def normalize_markdown(raw_body: bytes, page_url: str) -> tuple[bytes, list[str]
         text,
     )
     text = convert_mdx(text, page_url)
-    text = rewrite_markdown_links(text, page_url)
+    text = rewrite_markdown_links(text, page_url, mirrored_urls)
     text = re.sub(r"\n{3,}", "\n\n", text).strip() + "\n"
     warnings.extend(validate_gfm(text))
     return text.encode("utf-8"), warnings
@@ -672,6 +749,8 @@ def validate_gfm(text: str) -> list[str]:
     fence: str | None = None
     for number, line in enumerate(text.splitlines(), 1):
         stripped = line.lstrip()
+        while stripped.startswith("> "):
+            stripped = stripped[2:].lstrip()
         marker_match = re.match(r"(`{3,}|~{3,})", stripped)
         if marker_match:
             marker = marker_match.group(1)
@@ -689,24 +768,222 @@ def validate_gfm(text: str) -> list[str]:
         if "className=" in line or "style={{" in line:
             warnings.append(f"line {number}: unconverted JSX attribute")
 
-        for match in re.finditer(r"!?\[[^\]]*\]\((<[^>]+>|[^)\s]+)", line):
-            target = match.group(1).strip("<>")
+        for match in re.finditer(r"(?P<image>!)?\[[^\]]*\]\((?P<target><[^>]+>|[^)\s]+)", line):
+            target = match.group("target").strip("<>")
             if target.startswith(("mailto:", "tel:", "data:", "javascript:")):
                 continue
             if not urlsplit(target).scheme and not target.startswith("//"):
-                warnings.append(f"line {number}: relative Markdown link")
-                break
+                path = urlsplit(target).path
+                if match.group("image") or (path and not path.endswith(".md")):
+                    warnings.append(f"line {number}: invalid relative Markdown target")
+                    break
 
-        for match in re.finditer(r"\b(?:href|src)=['\"]([^'\"]+)['\"]", line):
-            target = match.group(1)
+        for match in re.finditer(r"\b(href|src)=['\"]([^'\"]+)['\"]", line):
+            attribute_name, target = match.groups()
             if target.startswith(("mailto:", "tel:", "data:")):
                 continue
             if not urlsplit(target).scheme and not target.startswith("//"):
-                warnings.append(f"line {number}: relative HTML link")
-                break
+                path = urlsplit(target).path
+                if attribute_name == "src" or (path and not path.endswith(".md")):
+                    warnings.append(f"line {number}: invalid relative HTML target")
+                    break
     if fence is not None:
         warnings.append("unclosed fenced code block")
     return warnings[:20]
+
+
+def validate_mirror_links(completed: dict[str, Download]) -> dict[str, list[str]]:
+    """Ensure every generated repository-relative document link exists."""
+    valid_paths = {local_path_for(url).resolve() for url in completed}
+    anchors_by_path = {
+        local_path_for(url).resolve(): github_heading_anchors((download.body or b"").decode("utf-8"))
+        for url, download in completed.items()
+    }
+    issues: dict[str, list[str]] = {}
+
+    for page_url, download in completed.items():
+        text = (download.body or b"").decode("utf-8")
+        source_path = local_path_for(page_url)
+        page_issues: list[str] = []
+        fence: str | None = None
+        for number, line in enumerate(text.splitlines(), 1):
+            stripped = line.lstrip()
+            while stripped.startswith("> "):
+                stripped = stripped[2:].lstrip()
+            marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+            if marker_match:
+                marker = marker_match.group(1)
+                if fence is None:
+                    fence = marker
+                elif marker[0] == fence[0] and len(marker) >= len(fence):
+                    fence = None
+                continue
+            if fence is not None:
+                continue
+
+            targets = [
+                match.group(1).strip("<>")
+                for match in re.finditer(r"(?<!!)\[[^\]]*\]\((<[^>]+>|[^)\s]+)", line)
+            ]
+            targets.extend(
+                match.group(1)
+                for match in re.finditer(r"\bhref=['\"]([^'\"]+)['\"]", line)
+            )
+            for target in targets:
+                parts = urlsplit(target)
+                if parts.scheme or target.startswith(("//", "mailto:", "tel:", "data:")):
+                    continue
+                resolved = (
+                    source_path.resolve()
+                    if not parts.path
+                    else (source_path.parent / unquote(parts.path)).resolve()
+                )
+                if resolved not in valid_paths:
+                    page_issues.append(f"line {number}: missing local target {target}")
+                    continue
+                fragment = unquote(parts.fragment).split(":~:text=", 1)[0]
+                if fragment and fragment not in anchors_by_path.get(resolved, set()):
+                    page_issues.append(f"line {number}: missing local fragment {target}")
+        if page_issues:
+            issues[page_url] = page_issues[:20]
+    return issues
+
+
+def github_heading_anchors(text: str) -> set[str]:
+    """Approximate GitHub's heading IDs and include explicit HTML anchors."""
+    anchors: set[str] = set()
+    seen: dict[str, int] = {}
+    fence: str | None = None
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        while stripped.startswith("> "):
+            stripped = stripped[2:].lstrip()
+        marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+        if marker_match:
+            marker = marker_match.group(1)
+            if fence is None:
+                fence = marker
+            elif marker[0] == fence[0] and len(marker) >= len(fence):
+                fence = None
+            continue
+        if fence is not None:
+            continue
+
+        anchors.update(
+            html.unescape(anchor)
+            for anchor in re.findall(r"\b(?:id|name)=['\"]([^'\"]+)", line)
+        )
+        heading = re.match(r"^#{1,6}\s+(.+?)\s*#*$", stripped)
+        if not heading:
+            continue
+        title = re.sub(r"<[^>]+>", "", heading.group(1))
+        title = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", title)
+        title = re.sub(r"[`*_~]", "", title).strip().lower()
+        slug = "".join(
+            character
+            for character in title
+            if not (
+                unicodedata.category(character).startswith("P")
+                and character not in {"-", "_"}
+            )
+        )
+        slug = re.sub(r"\s", "-", slug)
+        duplicate = seen.get(slug, 0)
+        seen[slug] = duplicate + 1
+        anchors.add(slug if duplicate == 0 else f"{slug}-{duplicate}")
+    return anchors
+
+
+def add_fragment_aliases(completed: dict[str, Download]) -> int:
+    """Add GitHub-compatible anchors for upstream fragments Mintlify supplied."""
+    url_by_path = {local_path_for(url).resolve(): url for url in completed}
+    incoming: dict[str, set[str]] = {}
+
+    for source_url, download in completed.items():
+        text = (download.body or b"").decode("utf-8")
+        source_path = local_path_for(source_url)
+        fence: str | None = None
+        for line in text.splitlines():
+            stripped = line.lstrip()
+            while stripped.startswith("> "):
+                stripped = stripped[2:].lstrip()
+            marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+            if marker_match:
+                marker = marker_match.group(1)
+                if fence is None:
+                    fence = marker
+                elif marker[0] == fence[0] and len(marker) >= len(fence):
+                    fence = None
+                continue
+            if fence is not None:
+                continue
+            for match in re.finditer(r"(?<!!)\[[^\]]*\]\((<[^>]+>|[^)\s]+)", line):
+                target = match.group(1).strip("<>")
+                parts = urlsplit(target)
+                if parts.scheme or not parts.fragment:
+                    continue
+                target_path = (
+                    source_path.resolve()
+                    if not parts.path
+                    else (source_path.parent / unquote(parts.path)).resolve()
+                )
+                target_url = url_by_path.get(target_path)
+                if target_url:
+                    fragment = unquote(parts.fragment).split(":~:text=", 1)[0]
+                    if fragment:
+                        incoming.setdefault(target_url, set()).add(fragment)
+
+    added = 0
+    for target_url, fragments in incoming.items():
+        download = completed[target_url]
+        text = (download.body or b"").decode("utf-8")
+        missing = sorted(fragments - github_heading_anchors(text))
+        if not missing:
+            continue
+
+        lines = text.splitlines()
+        heading_rows: list[tuple[int, str]] = []
+        fence = None
+        for index, line in enumerate(lines):
+            stripped = line.lstrip()
+            marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+            if marker_match:
+                marker = marker_match.group(1)
+                if fence is None:
+                    fence = marker
+                elif marker[0] == fence[0] and len(marker) >= len(fence):
+                    fence = None
+                continue
+            if fence is None:
+                heading = re.match(r"^#{1,6}\s+(.+?)\s*#*$", stripped)
+                if heading:
+                    normalized = re.sub(r"[^a-z0-9]+", "-", heading.group(1).lower()).strip("-")
+                    heading_rows.append((index, normalized))
+
+        insertions: dict[int, list[str]] = {}
+        fallback = heading_rows[0][0] + 1 if heading_rows else 0
+        for fragment in missing:
+            normalized_fragment = re.sub(r"[^a-z0-9]+", "-", fragment.lower()).strip("-")
+            best_index = fallback
+            best_score = 0.0
+            for heading_index, normalized_heading in heading_rows:
+                score = difflib.SequenceMatcher(
+                    None,
+                    normalized_fragment,
+                    normalized_heading,
+                ).ratio()
+                if score > best_score:
+                    best_index, best_score = heading_index, score
+            insertions.setdefault(best_index, []).append(
+                f'<a id="{html.escape(fragment, quote=True)}"></a>'
+            )
+            added += 1
+
+        for index in sorted(insertions, reverse=True):
+            aliases = insertions[index]
+            lines[index:index] = aliases + [""]
+        download.body = ("\n".join(lines).strip() + "\n").encode("utf-8")
+    return added
 
 
 def discover_seed_urls(timeout: float) -> tuple[set[str], dict[str, bytes], list[str]]:
@@ -751,14 +1028,11 @@ def discover_seed_urls(timeout: float) -> tuple[set[str], dict[str, bytes], list
 def download_one(page_url: str, timeout: float, full_pages: dict[str, bytes]) -> Download:
     if page_url in full_pages:
         raw_body = full_pages[page_url]
-        body, warnings = normalize_markdown(raw_body, page_url)
         return Download(
             page_url=page_url,
             final_url=LLMS_FULL_URL,
             raw_body=raw_body,
-            body=body,
             content_source="llms-full.txt",
-            normalization_warnings=warnings,
         )
     try:
         raw_body, final_url, content_type = request_bytes(markdown_url(page_url), timeout)
@@ -768,13 +1042,10 @@ def download_one(page_url: str, timeout: float, full_pages: dict[str, bytes]) ->
         if content_type == "text/html" or prefix.startswith((b"<!doctype html", b"<html")):
             raise RuntimeError("server returned HTML instead of Markdown")
         raw_body.decode("utf-8")
-        body, warnings = normalize_markdown(raw_body, page_url)
         return Download(
             page_url=page_url,
             final_url=final_url,
             raw_body=raw_body,
-            body=body,
-            normalization_warnings=warnings,
         )
     except ExternalRedirect as exc:
         return Download(page_url=page_url, final_url=exc.url, skipped="redirects outside docs.langchain.com")
@@ -787,7 +1058,28 @@ def links_from(download: Download) -> set[str]:
     if source_body is None:
         return set()
     text = source_body.decode("utf-8")
-    final_page = (download.final_url or download.page_url).removesuffix(".md")
+    renderable_lines: list[str] = []
+    fence: str | None = None
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        while stripped.startswith("> "):
+            stripped = stripped[2:].lstrip()
+        marker_match = re.match(r"(`{3,}|~{3,})", stripped)
+        if marker_match:
+            marker = marker_match.group(1)
+            if fence is None:
+                fence = marker
+            elif marker[0] == fence[0] and len(marker) >= len(fence):
+                fence = None
+            continue
+        if fence is None:
+            renderable_lines.append(line)
+    text = "\n".join(renderable_lines)
+    final_page = (
+        download.page_url
+        if download.content_source == "llms-full.txt"
+        else (download.final_url or download.page_url).removesuffix(".md")
+    )
     candidates: Iterable[str] = (
         list(MARKDOWN_LINK_RE.findall(text))
         + list(HTML_LINK_RE.findall(text))
@@ -795,7 +1087,7 @@ def links_from(download: Download) -> set[str]:
     )
     found = set()
     for candidate in candidates:
-        page = canonical_page_url(candidate, final_page)
+        page = canonical_page_url(absolute_docs_link(candidate, final_page), final_page)
         if page:
             found.add(page)
     return found
@@ -911,14 +1203,32 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
                         target[result.page_url] = result.error
                     else:
                         completed[result.page_url] = result
-                        if atomic_write(local_path_for(result.page_url), result.body or b""):
-                            changed += 1
                         new_links = links_from(result) - queued
                         if new_links:
                             queued.update(new_links)
                             progress.total = len(queued)
                             progress.refresh()
                     progress.update(1)
+
+    mirrored_urls = set(completed)
+    for page_url, result in sorted(completed.items()):
+        body, warnings = normalize_markdown(
+            result.raw_body or b"",
+            page_url,
+            mirrored_urls,
+        )
+        result.body = body
+        result.normalization_warnings = warnings
+
+    fragment_alias_count = add_fragment_aliases(completed)
+    for page_url, result in sorted(completed.items()):
+        if atomic_write(local_path_for(page_url), result.body or b""):
+            changed += 1
+
+    link_warnings = validate_mirror_links(completed)
+    for page_url, warnings in link_warnings.items():
+        result = completed[page_url]
+        result.normalization_warnings = (result.normalization_warnings or []) + warnings
 
     files: dict[str, dict[str, str | int]] = {}
     normalization_warnings: dict[str, list[str]] = {}
@@ -941,7 +1251,7 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
     previous = load_previous_manifest()
     removed = clean_stale_files(previous, set(files)) if clean and not failures else []
     manifest = {
-        "schema_version": 2,
+        "schema_version": 3,
         "source": ORIGIN,
         "page_count": len(files),
         "files": files,
@@ -950,6 +1260,7 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
         "external_redirects": skipped,
         "normalization_warnings": normalization_warnings,
         "llms_full_page_count": len(full_pages),
+        "generated_fragment_alias_count": fragment_alias_count,
         "configured_unpublished_scopes": [
             f"{ORIGIN}{section.prefix}"
             for section in SECTIONS

@@ -6,7 +6,7 @@ LangChain supports three ways to use Hugging Face embedding models:
 
 * **Local inference** via `HuggingFaceEmbeddings`: downloads the model and runs it in-process with [Sentence Transformers](https://sbert.net).
 * **Inference Providers and dedicated Inference Endpoints** via `HuggingFaceEndpointEmbeddings`: serverless or dedicated hosted inference through Hugging Face.
-* **Self-hosted at scale** via [Text Embeddings Inference (TEI)](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference): Hugging Face's production inference server. Point `OpenAIEmbeddings` from `langchain-openai` at TEI's OpenAI-compatible API.
+* **Self-hosted at scale** via [Text Embeddings Inference (TEI)](text_embeddings_inference.md): Hugging Face's production inference server. Point `OpenAIEmbeddings` from `langchain-openai` at TEI's OpenAI-compatible API.
 
 Local and hosted paths use `langchain-huggingface`. Self-hosted TEI uses `langchain-openai`. All three expose the same `Embeddings` interface, so you can start local and graduate to a hosted or self-hosted deployment without changing the rest of your application.
 
@@ -32,7 +32,7 @@ query_result = embeddings.embed_query("This is a test document.")
 doc_result = embeddings.embed_documents(["This is a test document."])
 ```
 
-See the dedicated [Sentence Transformers guide](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers) for model selection, GPU configuration, and query/document prompts.
+See the dedicated [Sentence Transformers guide](sentence_transformers.md) for model selection, GPU configuration, and query/document prompts.
 
 ## Hugging Face Inference Endpoints and Providers
 
@@ -72,7 +72,7 @@ The full list of providers and their supported models is in the [Inference Provi
 
 ## Self-hosted with Text Embeddings Inference
 
-For production-scale serving of Sentence Transformers models on your own infrastructure, use [Text Embeddings Inference (TEI)](https://github.com/huggingface/text-embeddings-inference). TEI handles batching, GPU acceleration, and exposes an OpenAI-compatible API. See the [TEI integration guide](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference) for a walkthrough.
+For production-scale serving of Sentence Transformers models on your own infrastructure, use [Text Embeddings Inference (TEI)](https://github.com/huggingface/text-embeddings-inference). TEI handles batching, GPU acceleration, and exposes an OpenAI-compatible API. See the [TEI integration guide](text_embeddings_inference.md) for a walkthrough.
 
 ***
 

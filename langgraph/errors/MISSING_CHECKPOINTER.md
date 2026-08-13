@@ -27,7 +27,7 @@ def workflow(messages: list[str]) -> str:
 
 ## Related
 
-* Read more about [persistence](https://docs.langchain.com/oss/python/langgraph/persistence).
+* Read more about [persistence](../persistence.md).
 
 ***
 

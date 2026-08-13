@@ -81,11 +81,11 @@ This in-memory server is designed for development and testing.
 For production use, please use LangSmith Deployment.
 ```
 
-The `langgraph dev` command starts Agent Server in an in-memory mode. This mode is suitable for development and testing purposes. For production use, deploy Agent Server with access to a persistent storage backend. For more information, see the [Platform setup overview](https://docs.langchain.com/langsmith/platform-setup).
+The `langgraph dev` command starts Agent Server in an in-memory mode. This mode is suitable for development and testing purposes. For production use, deploy Agent Server with access to a persistent storage backend. For more information, see the [Platform setup overview](../langsmith/platform-setup.md).
 
 ## 6. Test your application in Studio
 
-[Studio](https://docs.langchain.com/langsmith/studio) is a specialized UI that you can connect to LangGraph API server to visualize, interact with, and debug your application locally. Test your graph in Studio by visiting the URL provided in the output of the `langgraph dev` command:
+[Studio](../langsmith/studio.md) is a specialized UI that you can connect to LangGraph API server to visualize, interact with, and debug your application locally. Test your graph in Studio by visiting the URL provided in the output of the `langgraph dev` command:
 
 ```
 >    - LangGraph Studio Web UI: https://smith.langchain.com/studio/?baseUrl=http://127.0.0.1:2024
@@ -190,9 +190,9 @@ curl -s --request POST \
 
 Now that you have a LangGraph app running locally, take your journey further by exploring deployment and advanced features:
 
-* [Deployment quickstart](https://docs.langchain.com/langsmith/deployment-quickstart): Deploy your LangGraph app using LangSmith.
+* [Deployment quickstart](../langsmith/deployment-quickstart.md): Deploy your LangGraph app using LangSmith.
 
-* [LangSmith](https://docs.langchain.com/langsmith/observability): Learn about foundational LangSmith concepts.
+* [LangSmith](../langsmith/observability.md): Learn about foundational LangSmith concepts.
 
 * [SDK Reference](https://reference.langchain.com/python/langsmith/deployment/sdk/): Explore the SDK API Reference.
 

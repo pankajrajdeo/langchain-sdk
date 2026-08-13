@@ -11,7 +11,7 @@ To make sure this occurs, you can either:
   * Note that this is named differently from the [environment variable](https://js.langchain.com/docs/how_to/callbacks_serverless) in LangChain.js because LangSmith can be used without LangChain.
 * Pass a custom client into your traced runs and `await` the `client.awaitPendingTraceBatches();` method.
 
-Here's an example of using `awaitPendingTraceBatches` alongside the [`traceable`](https://docs.langchain.com/langsmith/annotate-code) method:
+Here's an example of using `awaitPendingTraceBatches` alongside the [`traceable`](annotate-code.md) method:
 
 ```typescript
 import { Client } from "langsmith";
@@ -29,7 +29,7 @@ const res = await tracedFn();
 await langsmithClient.awaitPendingTraceBatches();
 ```
 
-## Rate limits at high concurrency[ ](https://docs.langchain.com/langsmith/serverless-environments#rate-limits-at-high-concurrency "Direct link to rate limits at high concurrency")
+## Rate limits at high concurrency[ ](#rate-limits-at-high-concurrency "Direct link to rate limits at high concurrency")
 
 By default, the LangSmith client will batch operations as your traced run executions, sending a new batch every few milliseconds.
 

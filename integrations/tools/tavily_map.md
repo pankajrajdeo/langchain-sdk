@@ -14,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async |       Return data       |           Pricing          |
+| [Returns artifact](../../langchain/tools.md) | Native async |       Return data       |           Pricing          |
 | :---------------------------------------------: | :----------: | :---------------------: | :------------------------: |
 |                        ❌                        |       ✅      | list of discovered URLs | 1,000 free credits / month |
 
@@ -67,7 +67,7 @@ tool = TavilyMap(
 
 ## Invocation
 
-### [Invoke directly with args](https://docs.langchain.com/oss/python/langchain/tools)
+### [Invoke directly with args](../../langchain/tools.md)
 
 The Tavily map tool accepts the following arguments during invocation:
 
@@ -94,7 +94,7 @@ tool.invoke({"url": "https://docs.tavily.com"})
 }
 ```
 
-### [Invoke with ToolCall](https://docs.langchain.com/oss/python/langchain/tools)
+### [Invoke with ToolCall](../../langchain/tools.md)
 
 We can also invoke the tool with a model-generated ToolCall, in which case a ToolMessage will be returned:
 
@@ -114,7 +114,7 @@ print(tool_msg.content[:400])
 
 We can use the map tool directly with an agent by binding it to the model. The agent can then dynamically set instructions and filters to discover the URLs it needs.
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/tavily_map).
+> **Interactive content:** [View this section in the original documentation](tavily_map.md).
 
 ```python
 if not os.environ.get("OPENAI_API_KEY"):

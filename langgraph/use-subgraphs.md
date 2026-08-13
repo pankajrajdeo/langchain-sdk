@@ -1,10 +1,10 @@
 # Subgraphs
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/use-subgraphs)
-This guide explains the mechanics of using subgraphs. A subgraph is a [graph](https://docs.langchain.com/oss/python/langgraph/graph-api#graphs) that is used as a [node](https://docs.langchain.com/oss/python/langgraph/graph-api#nodes) in another graph.
+This guide explains the mechanics of using subgraphs. A subgraph is a [graph](graph-api.md#graphs) that is used as a [node](graph-api.md#nodes) in another graph.
 
 Subgraphs are useful for:
 
-* Building [multi-agent systems](https://docs.langchain.com/oss/python/langchain/multi-agent)
+* Building [multi-agent systems](../langchain/multi-agent.md)
 * Reusing a set of nodes in multiple graphs
 * Distributing development: when you want different teams to work on different parts of the graph independently, you can define each part as a subgraph, and as long as the subgraph interface (the input and output schemas) is respected, the parent graph can be built without knowing any details of the subgraph
 
@@ -28,12 +28,12 @@ When adding subgraphs, you need to define how the parent graph and the subgraph 
 
 | Pattern                                                         | When to use                                                                                                        | State schemas                                                                                                  |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| [Call a subgraph inside a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node) | Parent and subgraph have **different state schemas** (no shared keys), or you need to transform state between them | You write a wrapper function that maps parent state to subgraph input and subgraph output back to parent state |
-| [Add a subgraph as a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#add-a-subgraph-as-a-node)           | Parent and subgraph **share state keys**—the subgraph reads from and writes to the same channels as the parent     | You pass the compiled subgraph directly to `add_node`—no wrapper function needed                               |
+| [Call a subgraph inside a node](#call-a-subgraph-inside-a-node) | Parent and subgraph have **different state schemas** (no shared keys), or you need to transform state between them | You write a wrapper function that maps parent state to subgraph input and subgraph output back to parent state |
+| [Add a subgraph as a node](#add-a-subgraph-as-a-node)           | Parent and subgraph **share state keys**—the subgraph reads from and writes to the same channels as the parent     | You pass the compiled subgraph directly to `add_node`—no wrapper function needed                               |
 
 ### Call a subgraph inside a node
 
-When the parent graph and subgraph have **different state schemas** (no shared keys), invoke the subgraph inside a node function. This is common when you want to keep a private message history for each agent in a [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) system.
+When the parent graph and subgraph have **different state schemas** (no shared keys), invoke the subgraph inside a node function. This is common when you want to keep a private message history for each agent in a [multi-agent](../langchain/multi-agent.md) system.
 
 The node function transforms the parent state to the subgraph state before invoking the subgraph, and transforms the results back to the parent state before returning.
 
@@ -221,9 +221,9 @@ for event in stream:
 
 ### Add a subgraph as a node
 
-When the parent graph and subgraph **share state keys**, you can pass a compiled subgraph directly to `add_node`. No wrapper function is needed—the subgraph reads from and writes to the parent's state channels automatically. For example, in [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) systems, the agents often communicate over a shared [messages](https://docs.langchain.com/oss/python/langgraph/graph-api#why-use-messages) key.
+When the parent graph and subgraph **share state keys**, you can pass a compiled subgraph directly to `add_node`. No wrapper function is needed—the subgraph reads from and writes to the parent's state channels automatically. For example, in [multi-agent](../langchain/multi-agent.md) systems, the agents often communicate over a shared [messages](graph-api.md#why-use-messages) key.
 
-> **Image:** [SQL agent graph](https://docs.langchain.com/oss/python/langgraph/use-subgraphs)
+> **Image:** [SQL agent graph](use-subgraphs.md)
 
 If your subgraph shares state keys with the parent graph, you can follow these steps to add it to your graph:
 
@@ -317,28 +317,28 @@ The `checkpointer` parameter on `.compile()` controls subgraph persistence:
 
 | Mode                                      | `checkpointer=`  | Behavior                                                                                                                                                                                                 |
 | ----------------------------------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Per-invocation](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#per-invocation-default) | `None` (default) | Each call starts fresh and inherits the parent's checkpointer to support [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts) and [durable execution](https://docs.langchain.com/oss/python/langgraph/persistence) within a single call. |
-| [Per-thread](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#per-thread)                 | `True`           | State accumulates across calls on the same thread. Each call picks up where the last one left off.                                                                                                       |
-| [Stateless](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#stateless)                   | `False`          | No checkpointing at all—runs like a plain function call. No interrupts or durable execution.                                                                                                             |
+| [Per-invocation](#per-invocation-default) | `None` (default) | Each call starts fresh and inherits the parent's checkpointer to support [interrupts](interrupts.md) and [durable execution](persistence.md) within a single call. |
+| [Per-thread](#per-thread)                 | `True`           | State accumulates across calls on the same thread. Each call picks up where the last one left off.                                                                                                       |
+| [Stateless](#stateless)                   | `False`          | No checkpointing at all—runs like a plain function call. No interrupts or durable execution.                                                                                                             |
 
-Per-invocation is the right choice for most applications, including [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) systems where subagents handle independent requests. Use per-thread when a subagent needs multi-turn conversation memory (for example, a research assistant that builds context over several exchanges).
-
-> [!NOTE]
-> The parent graph must be compiled with a checkpointer for subgraph persistence features (interrupts, state inspection, per-thread memory) to work. See [persistence](https://docs.langchain.com/oss/python/langgraph/persistence).
+Per-invocation is the right choice for most applications, including [multi-agent](../langchain/multi-agent.md) systems where subagents handle independent requests. Use per-thread when a subagent needs multi-turn conversation memory (for example, a research assistant that builds context over several exchanges).
 
 > [!NOTE]
-> The examples below use LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), which is a common way to build agents. `create_agent` produces a [LangGraph graph](https://docs.langchain.com/oss/python/langgraph/graph-api) under the hood, so all subgraph persistence concepts apply directly. If you're building with raw LangGraph `StateGraph`, the same patterns and configuration options apply—see the [Graph API](https://docs.langchain.com/oss/python/langgraph/graph-api) for details.
+> The parent graph must be compiled with a checkpointer for subgraph persistence features (interrupts, state inspection, per-thread memory) to work. See [persistence](persistence.md).
+
+> [!NOTE]
+> The examples below use LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent), which is a common way to build agents. `create_agent` produces a [LangGraph graph](graph-api.md) under the hood, so all subgraph persistence concepts apply directly. If you're building with raw LangGraph `StateGraph`, the same patterns and configuration options apply—see the [Graph API](graph-api.md) for details.
 
 ### Stateful
 
-Stateful subgraphs inherit the parent graph's checkpointer, which enables [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts), [persistence](https://docs.langchain.com/oss/python/langgraph/persistence), and state inspection. The two stateful modes differ in how long state is retained.
+Stateful subgraphs inherit the parent graph's checkpointer, which enables [interrupts](interrupts.md), [persistence](persistence.md), and state inspection. The two stateful modes differ in how long state is retained.
 
 #### Per-invocation (default)
 
 > [!TIP]
-> This is the recommended mode for most applications, including [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) systems where subagents are invoked as tools. It supports [interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts), [persistence](https://docs.langchain.com/oss/python/langgraph/persistence), and parallel calls while keeping each invocation isolated.
+> This is the recommended mode for most applications, including [multi-agent](../langchain/multi-agent.md) systems where subagents are invoked as tools. It supports [interrupts](interrupts.md), [persistence](persistence.md), and parallel calls while keeping each invocation isolated.
 
-Use per-invocation persistence when each call to the subgraph is independent and the subagent doesn't need to remember anything from previous calls. This is the most common pattern, especially for [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) systems where subagents handle one-off requests like "look up this customer's order" or "summarize this document."
+Use per-invocation persistence when each call to the subgraph is independent and the subagent doesn't need to remember anything from previous calls. This is the most common pattern, especially for [multi-agent](../langchain/multi-agent.md) systems where subagents handle one-off requests like "look up this customer's order" or "summarize this document."
 
 Omit `checkpointer` or set it to `None`. Each call starts fresh, but within a single call the subgraph inherits the parent's checkpointer and can use `interrupt()` to pause and resume.
 
@@ -578,7 +578,7 @@ response = agent.invoke(
 #### Multiple subgraph calls
 When you have multiple **different** per-thread subgraphs (for example, a fruit expert and a veggie expert), each one needs its own storage space so their checkpoints don't overwrite each other. This is called **namespace isolation**.
 
-If you [call subgraphs inside a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node), LangGraph assigns namespaces based on call order (first call, second call, etc.). This means reordering your calls can mix up which subgraph loads which state. To avoid this, wrap each subagent in its own `StateGraph` with a unique node name—this gives each subgraph a stable, unique namespace:
+If you [call subgraphs inside a node](#call-a-subgraph-inside-a-node), LangGraph assigns namespaces based on call order (first call, second call, etc.). This means reordering your calls can mix up which subgraph loads which state. To avoid this, wrap each subagent in its own `StateGraph` with a unique node name—this gives each subgraph a stable, unique namespace:
 
 ```python
 from langgraph.graph import MessagesState, StateGraph
@@ -621,11 +621,11 @@ response = agent.invoke(
 # Veggie subagent message count: 8 (remembers broccoli!)
 ```
 
-Subgraphs [added as nodes](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#add-a-subgraph-as-a-node) already get name-based namespaces automatically, so they don't need this wrapper.
+Subgraphs [added as nodes](#add-a-subgraph-as-a-node) already get name-based namespaces automatically, so they don't need this wrapper.
 
 ### Stateless
 
-Use this when you want to run a subagent like a plain function call with no checkpointing overhead. The subgraph cannot pause/resume and does not benefit from [durable execution](https://docs.langchain.com/oss/python/langgraph/persistence). Compile with `checkpointer=False`.
+Use this when you want to run a subagent like a plain function call with no checkpointing overhead. The subgraph cannot pause/resume and does not benefit from [durable execution](persistence.md). Compile with `checkpointer=False`.
 
 > [!WARNING]
 > Without checkpointing, the subgraph has no durable execution. If the process crashes mid-run, the subgraph cannot recover and must be re-run from the beginning.
@@ -652,18 +652,18 @@ subgraph = builder.compile(checkpointer=False)  # or True / None
 | Multiple calls (same subgraph)       | ✅                        | ❌                     | ✅         |
 | State inspection                     | ⚠️    | ✅                     | ❌         |
 
-* **Interrupts (HITL)**: The subgraph can use [interrupt()](https://docs.langchain.com/oss/python/langgraph/interrupts) to pause execution and wait for user input, then resume where it left off.
-* **Multi-turn memory**: The subgraph retains its state across multiple invocations within the same [thread](https://docs.langchain.com/oss/python/langgraph/checkpointers#threads). Each call picks up where the last one left off rather than starting fresh.
+* **Interrupts (HITL)**: The subgraph can use [interrupt()](interrupts.md) to pause execution and wait for user input, then resume where it left off.
+* **Multi-turn memory**: The subgraph retains its state across multiple invocations within the same [thread](checkpointers.md#threads). Each call picks up where the last one left off rather than starting fresh.
 * **Multiple calls (different subgraphs)**: Multiple different subgraph instances can be invoked within a single node without checkpoint namespace conflicts.
 * **Multiple calls (same subgraph)**: The same subgraph instance can be invoked multiple times within a single node. With stateful persistence, these calls write to the same checkpoint namespace and conflict—use per-invocation persistence instead.
 * **State inspection**: The subgraph's state is available via `get_state(config, subgraphs=True)` for debugging and monitoring.
 
 ## View subgraph state
 
-When you enable [persistence](https://docs.langchain.com/oss/python/langgraph/persistence), you can inspect the subgraph state using the subgraphs option. With [stateless](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#stateless) checkpointing (`checkpointer=False`), no subgraph checkpoints are saved, so subgraph state is not available.
+When you enable [persistence](persistence.md), you can inspect the subgraph state using the subgraphs option. With [stateless](#stateless) checkpointing (`checkpointer=False`), no subgraph checkpoints are saved, so subgraph state is not available.
 
 > [!NOTE]
-> Viewing subgraph state requires that LangGraph can **statically discover** the subgraph—i.e., it is [added as a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#add-a-subgraph-as-a-node) or [called inside a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node). It does not work when a subgraph is called inside a [tool](https://docs.langchain.com/oss/python/langchain/tools) function or other indirection (e.g., the [subagents](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) pattern). Interrupts still propagate to the top-level graph regardless of nesting.
+> Viewing subgraph state requires that LangGraph can **statically discover** the subgraph—i.e., it is [added as a node](#add-a-subgraph-as-a-node) or [called inside a node](#call-a-subgraph-inside-a-node). It does not work when a subgraph is called inside a [tool](../langchain/tools.md) function or other indirection (e.g., the [subagents](../langchain/multi-agent/subagents.md) pattern). Interrupts still propagate to the top-level graph regardless of nesting.
 
 #### Per-invocation
 Returns subgraph state for the **current invocation only**. Each invocation starts fresh.
@@ -737,7 +737,7 @@ subgraph_state = graph.get_state(config, subgraphs=True).tasks[0].state  # [!cod
 
 ## Stream subgraph outputs
 
-To observe nested graph executions, we recommend [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming): the `stream.subgraphs` projection discovers each nested run and exposes its `path`, `messages`, and `values` without parsing namespace strings.
+To observe nested graph executions, we recommend [event streaming](event-streaming.md): the `stream.subgraphs` projection discovers each nested run and exposes its `path`, `messages`, and `values` without parsing namespace strings.
 
 ```python
 stream = graph.stream_events({"foo": "foo"}, version="v3")  # [!code highlight]

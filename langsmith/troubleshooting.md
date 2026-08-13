@@ -14,7 +14,7 @@ Generally, the main services you will want to analyze are the:
 * `langsmith-platform-backend`: Handles authentication, run ingestion, and other high-volume tasks.
 * `langsmith-queue`: Handles incoming traces and feedback, asynchronous ingestion and persistence into the datastore, data integrity checks, and retries during database errors or connection issues.
 
-For more details on these services, refer to the [self-hosted overview](https://docs.langchain.com/langsmith/self-hosted).
+For more details on these services, refer to the [self-hosted overview](self-hosted.md).
 
 #### Kubernetes
 
@@ -66,7 +66,7 @@ In Kubernetes, you will need to increase the size of the ClickHouse PVC. To achi
 
 5. Delete the clickhouse statefulset `kubectl delete statefulset langsmith-clickhouse --cascade=orphan -n <namespace>`
 
-6. Apply helm chart with updated size (You can follow the [upgrade guide](https://docs.langchain.com/langsmith/self-host-upgrades))
+6. Apply helm chart with updated size (You can follow the [upgrade guide](self-host-upgrades.md))
 
 7. Your pvc should now have the new size. Verify by running `kubectl get pvc` and `kubectl exec langsmith-clickhouse-0 -- bash -c "df"`
 

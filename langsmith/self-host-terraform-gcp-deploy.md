@@ -119,7 +119,7 @@ You also need a LangSmith license key ([contact sales](https://www.langchain.com
 ## Quickstart
 
 > [!TIP]
-> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [GCP quick reference](https://docs.langchain.com/langsmith/self-host-terraform-gcp-quick-reference).
+> For a condensed cheat sheet of `make` targets, required variables, and common constraints, see the [GCP quick reference](self-host-terraform-gcp-quick-reference.md).
 
 For the fastest path from zero to a running LangSmith instance, run these commands in order:
 
@@ -222,7 +222,7 @@ letsencrypt_email      = "ops@example.com"
 enable_langsmith_deployment = true
 ```
 
-See the [GCP variables reference](https://docs.langchain.com/langsmith/self-host-terraform-gcp-variables) for every input variable.
+See the [GCP variables reference](self-host-terraform-gcp-variables.md) for every input variable.
 
 > [!TIP]
 > Configure a remote state backend before applying. Copy `infra/backend.tf.example` to `infra/backend.tf` and point it at a GCS bucket you control. Local state is fragile and can be lost during directory restructuring.
@@ -297,9 +297,9 @@ Use one of the three supported deployment paths:
 
 | Path                                                                                | Command                                                    | When to use                                                                                                 |
 | ----------------------------------------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [Script-driven Helm deploy *(recommended)*](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#script-driven-helm-deploy-recommended) | `make init-values && make deploy`                          | Interactive output, kubeconfig refresh, preflight checks. Best for first-time deploys and day-2 re-deploys. |
-| [Terraform-managed Helm release](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#terraform-managed-helm-release)                   | `make init-app && make apply-app`                          | Helm release managed in Terraform state alongside infrastructure. Best for GitOps and CI/CD pipelines.      |
-| [Manual Helm install](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#manual-helm-install)                                         | `helm upgrade --install langsmith langchain/langsmith ...` | Direct `helm` usage without the wrapper scripts. Best for teams with existing Helm tooling.                 |
+| [Script-driven Helm deploy *(recommended)*](#script-driven-helm-deploy-recommended) | `make init-values && make deploy`                          | Interactive output, kubeconfig refresh, preflight checks. Best for first-time deploys and day-2 re-deploys. |
+| [Terraform-managed Helm release](#terraform-managed-helm-release)                   | `make init-app && make apply-app`                          | Helm release managed in Terraform state alongside infrastructure. Best for GitOps and CI/CD pipelines.      |
+| [Manual Helm install](#manual-helm-install)                                         | `helm upgrade --install langsmith langchain/langsmith ...` | Direct `helm` usage without the wrapper scripts. Best for teams with existing Helm tooling.                 |
 
 ### Script-driven Helm deploy (recommended)
 
@@ -318,7 +318,7 @@ make deploy
 
 Expect 8 to 12 minutes for the chart to install and pods to become ready.
 
-If you completed the script-driven deploy, skip to [Verify and configure DNS](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#verify-and-configure-dns). The following two paths are alternatives to the script-driven deploy.
+If you completed the script-driven deploy, skip to [Verify and configure DNS](#verify-and-configure-dns). The following two paths are alternatives to the script-driven deploy.
 
 ### Terraform-managed Helm release
 
@@ -336,7 +336,7 @@ Set app-layer inputs in `app/terraform.tfvars` (`admin_email` is required; `host
 
 The release is applied with `wait = false` because operator-spawned agents can take 10+ minutes on a cold cluster; a passing `terraform apply` means the release was accepted, not that every pod is ready.
 
-If you completed the Terraform-managed Helm release, skip to [Verify and configure DNS](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#verify-and-configure-dns). The following path is an alternative.
+If you completed the Terraform-managed Helm release, skip to [Verify and configure DNS](#verify-and-configure-dns). The following path is an alternative.
 
 ### Manual Helm install
 
@@ -497,7 +497,7 @@ kubectl get pods -n langsmith | grep standalone-fleet
 ### Agent Builder (deprecated)
 
 > [!NOTE]
-> On GCP, `enable_agent_builder` is deprecated in favor of [Fleet](https://docs.langchain.com/langsmith/self-host-terraform-gcp-deploy#fleet) (`enable_fleet`, chart v0.15+). Use Fleet for new deployments. This section documents the older path for existing installs.
+> On GCP, `enable_agent_builder` is deprecated in favor of [Fleet](#fleet) (`enable_fleet`, chart v0.15+). Use Fleet for new deployments. This section documents the older path for existing installs.
 
 Prerequisite: LangSmith Deployment healthy. Adds `agent-builder-tool-server`, `agent-builder-trigger-server`, and an `agentBootstrap` Job that registers the Polly agent URL.
 
@@ -572,10 +572,10 @@ kubectl get pods -n langsmith -w
 
 ## Next steps
 
-* Reference the [GCP variables](https://docs.langchain.com/langsmith/self-host-terraform-gcp-variables) and the [quick reference](https://docs.langchain.com/langsmith/self-host-terraform-gcp-quick-reference).
-* Review the [GCP architecture](https://docs.langchain.com/langsmith/self-host-terraform-gcp-architecture) for module structure, traffic flow, and Workload Identity.
-* When something breaks, check the [GCP troubleshooting guide](https://docs.langchain.com/langsmith/self-host-terraform-gcp-troubleshooting).
-* Enable agent deployment in the UI with [LangSmith Deployment](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform).
+* Reference the [GCP variables](self-host-terraform-gcp-variables.md) and the [quick reference](self-host-terraform-gcp-quick-reference.md).
+* Review the [GCP architecture](self-host-terraform-gcp-architecture.md) for module structure, traffic flow, and Workload Identity.
+* When something breaks, check the [GCP troubleshooting guide](self-host-terraform-gcp-troubleshooting.md).
+* Enable agent deployment in the UI with [LangSmith Deployment](deploy-self-hosted-full-platform.md).
 
 ***
 

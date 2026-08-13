@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-evaluators-sdk)
 Create, retrieve, update, list, and delete LangSmith evaluators programmatically with the SDK.
 
-Use the LangSmith SDK to create and manage [evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) programmatically. Evaluators created through the SDK are [workspace-level](https://docs.langchain.com/langsmith/administration-overview#workspaces) resources that appear in the **Evaluators** table in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-evaluators-sdk), the same as [evaluators created in the UI](https://docs.langchain.com/langsmith/evaluators#create-an-evaluator-in-the-ui). You can attach them to datasets to run [offline evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) and to tracing projects to run [online evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#online-evaluations). Use the SDK to automate evaluator management and integrate evaluation into your existing workflows.
+Use the LangSmith SDK to create and manage [evaluators](evaluation-concepts.md#evaluators) programmatically. Evaluators created through the SDK are [workspace-level](administration-overview.md#workspaces) resources that appear in the **Evaluators** table in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-manage-evaluators-sdk), the same as [evaluators created in the UI](evaluators.md#create-an-evaluator-in-the-ui). You can attach them to datasets to run [offline evaluations](evaluation-concepts.md#offline-evaluations) and to tracing projects to run [online evaluations](evaluation-concepts.md#online-evaluations). Use the SDK to automate evaluator management and integrate evaluation into your existing workflows.
 
 ## Prerequisites
 
@@ -14,7 +14,7 @@ Managing evaluators through the SDK requires:
 > [!NOTE]
 > For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
 
-The examples on this page initialize the client with no arguments, so it reads the `LANGSMITH_API_KEY` and `LANGSMITH_ENDPOINT` environment variables. Configure your [API key](https://docs.langchain.com/langsmith/create-account-api-key) through environment variables rather than hardcoding it.
+The examples on this page initialize the client with no arguments, so it reads the `LANGSMITH_API_KEY` and `LANGSMITH_ENDPOINT` environment variables. Configure your [API key](create-account-api-key.md) through environment variables rather than hardcoding it.
 
 In the following examples, replace placeholders such as `<evaluator-uuid>` with the corresponding information from LangSmith. All Python async examples on this page assume they run inside `async def main(): ... asyncio.run(main())`, as shown in the create a code evaluator example.
 
@@ -65,7 +65,7 @@ console.log("Created evaluator:", evaluatorId);
 
 ### LLM-as-a-judge evaluator
 
-An LLM-as-a-judge evaluator references a prompt from the [prompt hub](https://docs.langchain.com/langsmith/prompt-engineering-quickstart) and maps your run or example fields to the prompt variables.
+An LLM-as-a-judge evaluator references a prompt from the [prompt hub](prompt-engineering-quickstart.md) and maps your run or example fields to the prompt variables.
 
 > [!NOTE]
 > The prompt must be a structured prompt (type `StructuredPrompt`). A `StructuredPrompt` combines a prompt template with an output schema, ensuring the model returns data in a defined structure.
@@ -515,9 +515,9 @@ await client.evaluators.delete(evaluatorId, {
 
 ## Related
 
-* [Manage evaluators](https://docs.langchain.com/langsmith/evaluators): View and manage evaluators in the LangSmith UI.
-* [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge): Configure LLM-as-a-judge online evaluators in the LangSmith UI.
-* [Set up online code evaluators](https://docs.langchain.com/langsmith/online-evaluations-code): Configure online code evaluators in the LangSmith UI.
+* [Manage evaluators](evaluators.md): View and manage evaluators in the LangSmith UI.
+* [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md): Configure LLM-as-a-judge online evaluators in the LangSmith UI.
+* [Set up online code evaluators](online-evaluations-code.md): Configure online code evaluators in the LangSmith UI.
 
 ***
 

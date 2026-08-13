@@ -69,7 +69,7 @@ domain = os.getenv("EGNYTE_DOMAIN")
 
 ### EgnyteRetriever
 
-[See usage example](https://docs.langchain.com/oss/python/integrations/retrievers/egnyte)
+[See usage example](../retrievers/egnyte.md)
 
 ```python
 from langchain_egnyte import EgnyteRetriever

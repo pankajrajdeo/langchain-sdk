@@ -3,7 +3,7 @@
 > Integrate with the Unstructured Transform tools using LangChain Python.
 
 This guide provides a quick overview for getting started with the Unstructured Transform
-[tools](https://docs.langchain.com/oss/python/langchain/tools). The [Unstructured Transform](https://docs.unstructured.io/transform/overview)
+[tools](../../langchain/tools.md). The [Unstructured Transform](https://docs.unstructured.io/transform/overview)
 MCP server ingests and transforms files (PDF, DOCX, images, and 70+ file types) into partitioned,
 enriched, chunked, and embedded data for RAG and AI pipelines. The `langchain-unstructured-transform`
 package loads those tools as native LangChain tools.
@@ -43,7 +43,7 @@ if "UNSTRUCTURED_API_KEY" not in os.environ:
     os.environ["UNSTRUCTURED_API_KEY"] = getpass.getpass("Enter your Unstructured API key: ")
 ```
 
-It's also helpful (but not needed) to set up LangSmith for best-in-class observability/tracing of your tool calls. To enable automated tracing, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+It's also helpful (but not needed) to set up LangSmith for best-in-class observability/tracing of your tool calls. To enable automated tracing, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

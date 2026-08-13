@@ -2,7 +2,7 @@
 
 > Integrate with the Bedrock (knowledge bases) retriever using LangChain Python.
 
-This guide will help you get started with the AWS Knowledge Bases [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval).
+This guide will help you get started with the AWS Knowledge Bases [retriever](../../deepagents/retrieval.md).
 
 [Knowledge Bases for Amazon Bedrock](https://aws.amazon.com/bedrock/knowledge-bases/) is an Amazon Web Services (AWS) offering which lets you quickly build RAG applications by using your private data to customize FM response.
 
@@ -10,17 +10,17 @@ Implementing `RAG` requires organizations to perform several cumbersome steps to
 
 With `Knowledge Bases for Amazon Bedrock`, simply point to the location of your data in `Amazon S3`, and `Knowledge Bases for Amazon Bedrock` takes care of the entire ingestion workflow into your vector database. If you do not have an existing vector database, Amazon Bedrock creates an Amazon OpenSearch Serverless vector store for you. For retrievals, use the LangChain - Amazon Bedrock integration via the Retrieve API to retrieve relevant results for a user query from knowledge bases.
 
-**Amazon Bedrock now also offers [Managed Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html)**, which handle embedding, storage, and retrieval automatically—no external vector store needed. See the [Managed Knowledge Base](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock#managed-knowledge-base) section below.
+**Amazon Bedrock now also offers [Managed Knowledge Bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html)**, which handle embedding, storage, and retrieval automatically—no external vector store needed. See the [Managed Knowledge Base](#managed-knowledge-base) section below.
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/retrievers/bedrock).
+> **Interactive content:** [View this section in the original documentation](bedrock.md).
 
 ## Setup
 
 Knowledge Bases can be configured through [AWS Console](https://aws.amazon.com/console/) or by using [AWS SDKs](https://aws.amazon.com/developer/tools/). We will need the `knowledge_base_id` to instantiate the retriever.
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

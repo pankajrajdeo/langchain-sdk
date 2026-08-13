@@ -6,10 +6,10 @@ Build custom middleware by implementing hooks that run at specific points in the
 
 Middleware provides two styles of hooks to intercept agent execution:
 
-#### [Node-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#node-style-hooks)
+#### [Node-style hooks](#node-style-hooks)
 Run sequentially at specific execution points.
 
-#### [Wrap-style hooks](https://docs.langchain.com/oss/python/langchain/middleware/custom#wrap-style-hooks)
+#### [Wrap-style hooks](#wrap-style-hooks)
 Run around each model or tool call.
 
 ### Node-style hooks
@@ -269,10 +269,10 @@ class InnerMiddleware(AgentMiddleware):
 
 You can create middleware in two ways:
 
-#### [Decorator-based middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom#decorator-based-middleware)
+#### [Decorator-based middleware](#decorator-based-middleware)
 Quick and simple for single-hook middleware. Use decorators to wrap individual functions.
 
-#### [Class-based middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom#class-based-middleware)
+#### [Class-based middleware](#class-based-middleware)
 More powerful for complex middleware with multiple hooks or configuration.
 
 ### Decorator-based middleware
@@ -349,9 +349,9 @@ More powerful for complex middleware with multiple hooks or configuration. Use c
 python
 An `AgentMiddleware` subclass can declare three class attributes that the agent factory picks up at compile time:
 
-* `state_schema` — extend the agent state with custom fields. See [Custom state schema](https://docs.langchain.com/oss/python/langchain/middleware/custom#custom-state-schema).
+* `state_schema` — extend the agent state with custom fields. See [Custom state schema](#custom-state-schema).
 * `tools` — register additional tools that ship with the middleware (e.g., `write_todos` on the to-do list middleware).
-* `transformers` — register scope-aware stream transformer factories. See [Custom stream transformers](https://docs.langchain.com/oss/python/langchain/middleware/custom#custom-stream-transformers).
+* `transformers` — register scope-aware stream transformer factories. See [Custom stream transformers](#custom-stream-transformers).
   :::
 
 **Example:**
@@ -498,7 +498,7 @@ Middleware-registered transformers require `langchain>=1.3.2`.
 
 Middleware can register stream transformer factories that project events from the live agent stream onto typed extension channels. This is useful for surfacing counters, side-channel artifacts, partial outputs, or wire-level redaction without coupling to the framework's built-in projections.
 
-At compile time, middleware-registered factories merge with anything the caller passes directly to the agent factory. The [final ordering rules](https://docs.langchain.com/oss/python/langchain/event-streaming#register-transformers-on-middleware) keep the built-in `ToolCallTransformer` in front and let caller-supplied entries land last.
+At compile time, middleware-registered factories merge with anything the caller passes directly to the agent factory. The [final ordering rules](../event-streaming.md#register-transformers-on-middleware) keep the built-in `ToolCallTransformer` in front and let caller-supplied entries land last.
 
 Set the `transformers` class attribute to a tuple of factory callables. Each factory has the shape `Callable[[tuple[str, ...]], StreamTransformer]` and is invoked as `factory(scope)`, where `scope` is the mini-mux scope tuple (`()` for the root, non-empty for subgraphs); returning a fresh transformer per call keeps each subgraph isolated.
 
@@ -516,7 +516,7 @@ agent = create_agent(
 )
 ```
 
-See [Register transformers on middleware](https://docs.langchain.com/oss/python/langchain/event-streaming#register-transformers-on-middleware) for the full ordering rules and the PII redaction example.
+See [Register transformers on middleware](../event-streaming.md#register-transformers-on-middleware) for the full ordering rules and the PII redaction example.
 
 ## Execution order
 
@@ -730,7 +730,7 @@ class DynamicModelMiddleware(AgentMiddleware):
 
 ### Dynamically selecting tools
 
-Select relevant tools at runtime to improve performance and accuracy. This section covers filtering pre-registered tools. For registering tools that are discovered at runtime (e.g., from MCP servers), see [Runtime tool registration](https://docs.langchain.com/oss/python/langchain/tools#dynamic-tool-selection).
+Select relevant tools at runtime to improve performance and accuracy. This section covers filtering pre-registered tools. For registering tools that are discovered at runtime (e.g., from MCP servers), see [Runtime tool registration](../tools.md#dynamic-tool-selection).
 
 **Benefits:**
 
@@ -904,8 +904,8 @@ class CachedContextMiddleware(AgentMiddleware):
 ## Additional resources
 
 * [Middleware API reference](https://reference.langchain.com/python/langchain/middleware/)
-* [Built-in middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in)
-* [Testing agents](https://docs.langchain.com/oss/python/langchain/test/)
+* [Built-in middleware](built-in.md)
+* [Testing agents](../test.md)
 
 ***
 

@@ -2,8 +2,8 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/tools)
 Connect Deep Agents to custom functions, APIs, databases, and any MCP server
 
-Deep Agents can call any tool you define, any [LangChain tool](https://python.langchain.com/docs/concepts/tools/), and tools from any [MCP server](https://docs.langchain.com/oss/python/deepagents/tools#mcp-tools).
-Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built-in harness tools](https://docs.langchain.com/oss/python/deepagents/overview#execution-environment) for file management and subagent spawning.
+Deep Agents can call any tool you define, any [LangChain tool](https://python.langchain.com/docs/concepts/tools/), and tools from any [MCP server](#mcp-tools).
+Pass them to `create_deep_agent` via the `tools=` parameter alongside the [built-in harness tools](overview.md#execution-environment) for file management and subagent spawning.
 
 ```python
 from deepagents import create_deep_agent
@@ -269,12 +269,12 @@ agent = create_deep_agent(
 )
 ```
 
-For full details on defining and using LangChain tools (tool dicts, `StructuredTool`, return types, error handling, and more), see [Tools](https://docs.langchain.com/oss/python/langchain/tools).
+For full details on defining and using LangChain tools (tool dicts, `StructuredTool`, return types, error handling, and more), see [Tools](../langchain/tools.md).
 
 ## MCP tools
 
 > [!NOTE]
-> Deep Agents fully support [Model Context Protocol (MCP)](https://docs.langchain.com/oss/python/langchain/mcp), the open standard for connecting agents to external services. Load tools from any MCP server and pass them directly to `create_deep_agent`.
+> Deep Agents fully support [Model Context Protocol (MCP)](../langchain/mcp.md), the open standard for connecting agents to external services. Load tools from any MCP server and pass them directly to `create_deep_agent`.
 
 MCP is an open protocol that lets agents connect to a growing ecosystem of servers—databases, APIs, file systems, browsers, and more—through a standard interface. Instead of writing custom integration code for each service, you point Deep Agents at an MCP server and it gets all the tools that server exposes.
 
@@ -491,7 +491,7 @@ async def main():
 asyncio.run(main())
 ```
 
-For detailed configuration options—including stdio servers, OAuth authentication, tool filtering, and stateful sessions—see the full [MCP guide](https://docs.langchain.com/oss/python/langchain/mcp).
+For detailed configuration options—including stdio servers, OAuth authentication, tool filtering, and stateful sessions—see the full [MCP guide](../langchain/mcp.md).
 
 ## Built-in harness tools
 
@@ -509,15 +509,15 @@ In addition to the tools you provide, every Deep Agent comes with a built-in set
 | `execute`    | Run shell commands (sandbox backends only).                                                               |
 | `task`       | Spawn a subagent to handle a delegated task.                                                              |
 
-To add structured task planning with `write_todos`, opt in with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware). See [Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning).
+To add structured task planning with `write_todos`, opt in with [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware). See [Task planning](overview.md#task-planning).
 
-For a full breakdown of what each built-in tool does, see [Harness overview](https://docs.langchain.com/oss/python/deepagents/overview#execution-environment).
+For a full breakdown of what each built-in tool does, see [Harness overview](overview.md#execution-environment).
 
 ## Multimodal tool outputs
 
-Custom tools can return plain text or [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) (text, images, audio, video, and files) when the selected model supports multimodal tool results. The built-in `read_file` tool also returns multimodal blocks for supported non-text file types.
+Custom tools can return plain text or [standard content blocks](../langchain/messages.md#standard-content-blocks) (text, images, audio, video, and files) when the selected model supports multimodal tool results. The built-in `read_file` tool also returns multimodal blocks for supported non-text file types.
 
-Return a string for text-only results, or an ordered list of content blocks for text plus media or interleaved multimodal output. See [Multimodal](https://docs.langchain.com/oss/python/deepagents/multimodal) and [Tool return values](https://docs.langchain.com/oss/python/langchain/tools#return-multimodal-content) for examples and context-compression considerations.
+Return a string for text-only results, or an ordered list of content blocks for text plus media or interleaved multimodal output. See [Multimodal](multimodal.md) and [Tool return values](../langchain/tools.md#return-multimodal-content) for examples and context-compression considerations.
 
 ***
 

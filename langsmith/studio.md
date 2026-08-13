@@ -3,24 +3,24 @@
 > [!NOTE]
 > **Prerequisites**
 >
-> * [LangSmith](https://docs.langchain.com/langsmith/observability)
-> * [Agent Server](https://docs.langchain.com/langsmith/agent-server)
-> * [LangGraph CLI](https://docs.langchain.com/langsmith/cli)
+> * [LangSmith](observability.md)
+> * [Agent Server](agent-server.md)
+> * [LangGraph CLI](cli.md)
 
-Studio is a specialized agent IDE that enables visualization, interaction, and debugging of agentic systems that implement the Agent Server API protocol. Studio also integrates with [tracing](https://docs.langchain.com/langsmith/observability-concepts), [evaluation](https://docs.langchain.com/langsmith/evaluation), and [prompt engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts).
+Studio is a specialized agent IDE that enables visualization, interaction, and debugging of agentic systems that implement the Agent Server API protocol. Studio also integrates with [tracing](observability-concepts.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts).
 
 ## Features
 
 Key features of Studio:
 
 * Visualize your graph architecture
-* [Run and interact with your agent](https://docs.langchain.com/langsmith/use-studio#run-application)
-* [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants)
-* [Manage threads](https://docs.langchain.com/langsmith/use-studio#manage-threads)
-* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio)
-* [Run experiments over a dataset](https://docs.langchain.com/langsmith/observability-studio#run-experiments-over-a-dataset)
-* Manage [long term memory](https://docs.langchain.com/oss/python/concepts/memory)
-* Debug agent state via [time travel](https://docs.langchain.com/oss/python/langgraph/use-time-travel)
+* [Run and interact with your agent](use-studio.md#run-application)
+* [Manage assistants](use-studio.md#manage-assistants)
+* [Manage threads](use-studio.md#manage-threads)
+* [Iterate on prompts](observability-studio.md)
+* [Run experiments over a dataset](observability-studio.md#run-experiments-over-a-dataset)
+* Manage [long term memory](../concepts/memory.md)
+* Debug agent state via [time travel](../langgraph/use-time-travel.md)
 * 1 Click deploy to LangSmith Cloud.
 
 ```mermaid
@@ -37,7 +37,7 @@ flowchart
     class A,B,D,E,F process
 ```
 
-Studio works for graphs that are deployed on [LangSmith](https://docs.langchain.com/langsmith/deployment-quickstart) or for graphs that are running locally via the [Agent Server](https://docs.langchain.com/langsmith/local-dev-testing).
+Studio works for graphs that are deployed on [LangSmith](deployment-quickstart.md) or for graphs that are running locally via the [Agent Server](local-dev-testing.md).
 
 Studio supports two modes:
 
@@ -47,19 +47,19 @@ Graph mode exposes the full feature-set and is useful when you would like as man
 
 ### Chat mode
 
-Chat mode is a simpler UI for iterating on and testing chat-specific agents. It is useful for business users and those who want to test overall agent behavior. Chat mode is only supported for graph's whose state includes or extends [`MessagesState`](https://docs.langchain.com/oss/python/langgraph/use-graph-api#messagesstate).
+Chat mode is a simpler UI for iterating on and testing chat-specific agents. It is useful for business users and those who want to test overall agent behavior. Chat mode is only supported for graph's whose state includes or extends [`MessagesState`](../langgraph/use-graph-api.md#messagesstate).
 
 ## Deploy from Studio
 
-Go from [testing graphs locally](https://docs.langchain.com/langsmith/local-dev-testing) in Studio to deploying them on Langsmith Cloud in 1 Click, directly from Studio. You can use this to create a brand new deployment for quick prototyping or to redeploy an existing deployment.
+Go from [testing graphs locally](local-dev-testing.md) in Studio to deploying them on Langsmith Cloud in 1 Click, directly from Studio. You can use this to create a brand new deployment for quick prototyping or to redeploy an existing deployment.
 
 ## Learn more
 
-* See this guide on how to [get started](https://docs.langchain.com/langsmith/quick-start-studio) with Studio.
+* See this guide on how to [get started](quick-start-studio.md) with Studio.
 
 ## Video guide
 
-> **Embedded Content:** [YouTube video player](https://docs.langchain.com/langsmith/studio)
+> **Embedded Content:** YouTube video player — [Open it in the original LangChain documentation](https://docs.langchain.com/langsmith/studio).
 
 ***
 

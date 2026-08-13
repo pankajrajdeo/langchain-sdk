@@ -111,11 +111,11 @@ We can now set up automations to move examples with feedback of some form into a
 
 The first will take all runs with positive feedback and automatically add them to a dataset. The logic behind this is that any run with positive feedback we can use as a good example in future iterations. Let's create a dataset called `classifier-github-issues` to add this data to.
 
-> **Image:** [Optimization Negative](https://docs.langchain.com/langsmith/optimize-classifier)
+> **Image:** [Optimization Negative](optimize-classifier.md)
 
 The second will take all runs with a correction and use a webhook to add them to a dataset. When creating this webhook, we will select the option to "Use Corrections". This option will make it so that when creating a dataset from a run, rather than using the output of the run as the gold-truth output of the datapoint, it will use the correction.
 
-> **Image:** [Optimization Positive](https://docs.langchain.com/langsmith/optimize-classifier)
+> **Image:** [Optimization Positive](optimize-classifier.md)
 
 ## Update the application
 

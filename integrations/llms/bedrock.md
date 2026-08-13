@@ -3,9 +3,9 @@
 > Integrate with the Bedrock LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Amazon Bedrock models as text completion models. Many popular models available on Bedrock are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Amazon Bedrock models as text completion models. Many popular models available on Bedrock are [chat completion models](../../langchain/models.md).**
 >
-> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/bedrock/).
+> You may be looking for [this page instead](../chat/bedrock.md).
 
 > [Amazon Bedrock](https://aws.amazon.com/bedrock/) is a fully managed service that offers a choice of
 > high-performing foundation models (FMs) from leading AI companies like `AI21 Labs`, `Anthropic`, `Cohere`,

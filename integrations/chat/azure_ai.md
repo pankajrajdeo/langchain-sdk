@@ -2,7 +2,7 @@
 
 > Integrate with the AzureAIOpenAIApiChatModel chat model using LangChain Python.
 
-This will help you get started with `AzureAIOpenAIApiChatModel` [chat models](https://docs.langchain.com/oss/python/langchain/models).
+This will help you get started with `AzureAIOpenAIApiChatModel` [chat models](../../langchain/models.md).
 
 The `AzureAIOpenAIApiChatModel` class uses the OpenAI-compatible API available in Azure AI Foundry. AI Foundry has several chat models, including AzureOpenAI, Cohere, Llama, Phi-3/4, and DeepSeek-R1, among others. You can find information about their latest models and their costs, context windows, and supported input types in the [Azure docs](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview).
 
@@ -18,7 +18,7 @@ The `AzureAIOpenAIApiChatModel` class uses the OpenAI-compatible API available i
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -40,7 +40,7 @@ if not os.getenv("AZURE_AI_PROJECT_ENDPOINT"):
     )
 ```
 
-If you want to get automated tracing of your model calls, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing of your model calls, you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"

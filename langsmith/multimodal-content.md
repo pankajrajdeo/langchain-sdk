@@ -18,23 +18,23 @@ The Playground supports two methods for incorporating multimodal content in your
 
 Click the file icon in the message where you want to add multimodal content. Under the `Upload content` tab, you can upload a file and include it inline in the prompt.
 
-> **Image:** [Upload inline multimodal content](https://docs.langchain.com/langsmith/multimodal-content)
+> **Image:** [Upload inline multimodal content](multimodal-content.md)
 
 ## Template variables
 
 Click the file icon in the message where you want to add multimodal content. Under the `Template variables` tab, you can create a template variable for a specific attachment type. Currently, only images, PDFs, and audio files (.wav, .mp3) are supported.
 
-> **Image:** [Template variable multimodal content](https://docs.langchain.com/langsmith/multimodal-content)
+> **Image:** [Template variable multimodal content](multimodal-content.md)
 
 ## Populate the template variable
 
 Once you've added a template variable, you can provide content for it using the panel on the right side of the screen. Simply click the `+` button to upload or select content that will be used to populate the template variable.
 
-> **Image:** [Manual prompt multimodal](https://docs.langchain.com/langsmith/multimodal-content)
+> **Image:** [Manual prompt multimodal](multimodal-content.md)
 
 ## Run an evaluation
 
-After testing out your prompt manually, you can [run an evaluation](https://docs.langchain.com/langsmith/evaluate-with-attachments?mode=ui) to see how the prompt performs over a golden dataset of examples.
+After testing out your prompt manually, you can [run an evaluation](evaluate-with-attachments.md) to see how the prompt performs over a golden dataset of examples.
 
 ***
 

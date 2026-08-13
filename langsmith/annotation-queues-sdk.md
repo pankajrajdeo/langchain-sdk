@@ -1,20 +1,20 @@
 # Manage feedback & annotation queues programmatically
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/annotation-queues-sdk)
-Use the LangSmith SDK to manage feedback configurations and [annotation queue](https://docs.langchain.com/langsmith/evaluation-concepts#human) rubrics programmatically. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
+Use the LangSmith SDK to manage feedback configurations and [annotation queue](evaluation-concepts.md#human) rubrics programmatically. Define reusable feedback schemas at the organization level (like accuracy scores or pass/fail judgments), then assign them to specific queues with custom instructions. This enables version control, automation across projects, and consistency—particularly useful for CI/CD pipelines or replicating evaluation setups across environments.
 
 > [!NOTE]
 > This guide uses the Python and TypeScript SDKs. For installation and setup, refer to the [Python SDK documentation](https://reference.langchain.com/python/langsmith) and [TypeScript SDK documentation](https://reference.langchain.com/javascript/modules/langsmith.html).
 
 > [!NOTE]
-> To write free-form acceptance criteria on individual runs while reviewing in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotation-queues-sdk), refer to [Use assertions](https://docs.langchain.com/langsmith/assertions).
+> To write free-form acceptance criteria on individual runs while reviewing in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-annotation-queues-sdk), refer to [Use assertions](assertions.md).
 
 ## Feedback layers
 
 LangSmith uses a three-layer architecture for structured human feedback:
 
 1. **Feedback configs**: Organization-wide definitions of feedback keys that establish the schema for evaluation metrics. For example, you might define "accuracy" as a continuous 0–1 score or "correctness" as a pass/fail categorical choice. These configs are reusable across all annotation queues in your organization.
-2. **Annotation queue rubric items**: Queue-specific assignments that determine which feedback configs annotators must fill out when reviewing [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) in a particular queue. Each rubric item can include custom descriptions, guidance for specific score values, and whether the feedback is required or optional.
-3. **Feedback**: Individual scores and values that annotators submit on specific [runs](https://docs.langchain.com/langsmith/observability-concepts#runs). This is the actual evaluation data collected using the schemas you've defined. Learn more about [feedback in LangSmith](https://docs.langchain.com/langsmith/observability-concepts#feedback).
+2. **Annotation queue rubric items**: Queue-specific assignments that determine which feedback configs annotators must fill out when reviewing [runs](observability-concepts.md#runs) in a particular queue. Each rubric item can include custom descriptions, guidance for specific score values, and whether the feedback is required or optional.
+3. **Feedback**: Individual scores and values that annotators submit on specific [runs](observability-concepts.md#runs). This is the actual evaluation data collected using the schemas you've defined. Learn more about [feedback in LangSmith](observability-concepts.md#feedback).
 
 ## Feedback configs
 
@@ -156,7 +156,7 @@ await client.deleteFeedbackConfig("accuracy");
 
 ## Annotation queue rubric items
 
-Rubric items assign feedback configs to a specific annotation queue. They control which feedback forms annotators see when reviewing [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) in that queue, and whether each form is required or optional.
+Rubric items assign feedback configs to a specific annotation queue. They control which feedback forms annotators see when reviewing [runs](observability-concepts.md#runs) in that queue, and whether each form is required or optional.
 
 ### Create a queue with rubric items
 

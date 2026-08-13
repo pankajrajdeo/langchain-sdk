@@ -39,7 +39,7 @@ docs = loader.load()
 ```
 
 For end-to-end usage check out
-[this example](https://docs.langchain.com/oss/python/integrations/document_loaders/docling).
+[this example](../document_loaders/docling.md).
 
 ## Additional resources
 

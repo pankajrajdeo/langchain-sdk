@@ -17,7 +17,7 @@ Each SDK method and its underlying endpoint share the same deprecation date.
 | All Cloud regions | End of July 2026 | 31 Jan 2027 |
 | Self-Hosted       | `v0.16`          | `v0.18`     |
 
-For details on how LangSmith deprecates and removes API endpoints and SDK methods, see [API and SDK deprecation policy](https://docs.langchain.com/langsmith/endpoint-deprecation).
+For details on how LangSmith deprecates and removes API endpoints and SDK methods, see [API and SDK deprecation policy](endpoint-deprecation.md).
 
 ## Minimum SDK version
 
@@ -31,7 +31,7 @@ The new SDK methods are available starting at these SDK versions:
 | Go         | `langsmith-go`   | `v0.25.4`       |
 | CLI        | `langsmith-cli`  | `v0.2.44`       |
 
-The [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli) queries the same SmithDB-backed endpoints and requires `v0.2.44` or later.
+The [LangSmith CLI](langsmith-cli.md) queries the same SmithDB-backed endpoints and requires `v0.2.44` or later.
 
 ## About self-hosted
 
@@ -106,7 +106,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunS
 | ------------------------- | ------------------------- |
 | `POST /api/v1/runs/query` | `POST /api/v2/runs/query` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/runs/query-runs) for the full parameter and field list.
+See the [API doc](smith-api/runs/query-runs.md) for the full parameter and field list.
 
 #### Query parameters
 
@@ -1310,7 +1310,7 @@ curl -X POST "https://api.smith.langchain.com/api/v2/runs/query" \
   -d "$(jq -n --arg pid "$PROJECT_ID" '{"project_ids": [$pid], "is_root": true}')"
 ```
 
-To enumerate traces specifically, use `traces.query` instead of `is_root=True`. See [Traces: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#traces-query): it also exposes trace-wide `total_tokens`/`total_cost` via `trace_aggregates`.
+To enumerate traces specifically, use `traces.query` instead of `is_root=True`. See [Traces: query](#traces-query): it also exposes trace-wide `total_tokens`/`total_cost` via `trace_aggregates`.
 
 #### Fetch runs by ID list
 
@@ -2501,7 +2501,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#RunS
 | --------------------------- | --------------------------- |
 | `GET /api/v1/runs/{run_id}` | `GET /api/v2/runs/{run_id}` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/runs/get-a-single-run) for the full parameter and field list.
+See the [API doc](smith-api/runs/get-a-single-run.md) for the full parameter and field list.
 
 #### Query parameters
 
@@ -2512,7 +2512,7 @@ See the [API doc](https://docs.langchain.com/langsmith/smith-api/runs/get-a-sing
 | Before (`read_run`)                | After (`runs.retrieve`) | Notes                                                                                                                                 |
 | ---------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | `run_id`                           | `run_id`                | Unchanged                                                                                                                             |
-| `load_child_runs`                  | *(removed)*             | Fetch the trace's runs with `traces.list_runs` and filter by `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs) |
+| `load_child_runs`                  | *(removed)*             | Fetch the trace's runs with `traces.list_runs` and filter by `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 | *(not available)*                  | `project_id`            | **Required**—UUID of the project that owns the run                                                                                    |
 | *(not available)*                  | `start_time`            | Optional—run's start time (RFC3339); providing it speeds up retrieval                                                                 |
 | *(all fields returned by default)* | `selects`               | Field projection; defaults to `["ID"]` only; field names are uppercase                                                                |
@@ -2524,7 +2524,7 @@ See the [API doc](https://docs.langchain.com/langsmith/smith-api/runs/get-a-sing
 | Before (`readRun`)                 | After (`client.runs.retrieve`) | Notes                                                                                                                                       |
 | ---------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `runId`                            | `runId`                        | Unchanged (positional parameter)                                                                                                            |
-| `options.loadChildRuns`            | *(removed)*                    | Fetch the trace's runs with `client.traces.listRuns` and filter by `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs) |
+| `options.loadChildRuns`            | *(removed)*                    | Fetch the trace's runs with `client.traces.listRuns` and filter by `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 | *(not available)*                  | `project_id`                   | **Required**—`snake_case`; UUID of the project that owns the run                                                                            |
 | *(not available)*                  | `start_time`                   | Optional—`snake_case`; run's start time (RFC3339); providing it speeds up retrieval                                                         |
 | *(all fields returned by default)* | `selects`                      | Field projection; defaults to `["ID"]` only; field names are uppercase                                                                      |
@@ -2610,8 +2610,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.first_token_time`         | `run.first_token_time`             | Unchanged                                                                                                            |
 | `run.latency` (property)       | `run.latency_seconds`              | Renamed; was a computed `timedelta` property, now a native `float` field                                             |
 | `run.in_dataset`               | `run.is_in_dataset`                | Renamed                                                                                                              |
-| `run.child_run_ids`            | *(removed)*                        | Filter the trace's runs on `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs)                  |
-| `run.child_runs`               | *(removed)*                        | Group the trace's runs by the last entry in `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs) |
+| `run.child_run_ids`            | *(removed)*                        | Filter the trace's runs on `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs)                  |
+| `run.child_runs`               | *(removed)*                        | Group the trace's runs by the last entry in `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 | `run.serialized`               | *(removed)*                        | Use `run.manifest`                                                                                                   |
 | `run.manifest_id`              | *(removed)*                        | Use `run.manifest`                                                                                                   |
 | *(not available)*              | `run.is_root`                      | New                                                                                                                  |
@@ -2663,8 +2663,8 @@ Pass SCREAMING\_SNAKE\_CASE strings to `selects` (eg. `"ID"`, `"NAME"`, `"STATUS
 | `run.firstTokenTime`       | `run.first_token_time`         | Renamed to `snake_case`                                                                                              |
 | `run.latency`              | `run.latency_seconds`          | Renamed; was a computed property, now a native `number` field (seconds)                                              |
 | `run.inDataset`            | `run.is_in_dataset`            | Renamed                                                                                                              |
-| `run.child_run_ids`        | *(removed)*                    | Filter the trace's runs on `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs)                  |
-| `run.child_runs`           | *(removed)*                    | Group the trace's runs by the last entry in `parent_run_ids`. See [Load a run's child runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#load-a-runs-child-runs) |
+| `run.child_run_ids`        | *(removed)*                    | Filter the trace's runs on `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs)                  |
+| `run.child_runs`           | *(removed)*                    | Group the trace's runs by the last entry in `parent_run_ids`. See [Load a run's child runs](#load-a-runs-child-runs) |
 | `run.serialized`           | *(removed)*                    | Use `run.manifest`                                                                                                   |
 | `run.manifestId`           | *(removed)*                    | Use `run.manifest`                                                                                                   |
 | `run.shareToken`           | *(removed)*                    | Use `run.share_url` (full URL, only set when the run has been shared)                                                |
@@ -4972,19 +4972,19 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Trac
 #### Response fields
 
 #### Python
-The response has a single `items` field: a list of `Run` objects in `start_time` order, same shape as the [Runs: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#runs-query) response above.
+The response has a single `items` field: a list of `Run` objects in `start_time` order, same shape as the [Runs: query](#runs-query) response above.
 
 #### TypeScript
-The response has a single `items` field: an array of `Run` objects in `start_time` order, same shape as the [Runs: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#runs-query) response above.
+The response has a single `items` field: an array of `Run` objects in `start_time` order, same shape as the [Runs: query](#runs-query) response above.
 
 #### Java
-The response has a single `items()` method, returning `Optional>`: the trace's runs in `start_time` order, same shape as the [Runs: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#runs-query) response above.
+The response has a single `items()` method, returning `Optional>`: the trace's runs in `start_time` order, same shape as the [Runs: query](#runs-query) response above.
 
 #### Go
-The response has a single `Items` field, typed `[]Run`: the trace's runs in `start_time` order, same shape as the [Runs: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#runs-query) response above.
+The response has a single `Items` field, typed `[]Run`: the trace's runs in `start_time` order, same shape as the [Runs: query](#runs-query) response above.
 
 #### cURL
-The JSON response has a single `items` array field: the trace's runs in `start_time` order, same shape as the [Runs: query](https://docs.langchain.com/langsmith/smithdb-sdk-migration#runs-query) response above.
+The JSON response has a single `items` array field: the trace's runs in `start_time` order, same shape as the [Runs: query](#runs-query) response above.
 
 ### Examples
 
@@ -5511,7 +5511,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Thre
 | --------------------------------------------------------------- | ---------------------------- |
 | `POST /api/v1/runs/query` (`is_root=true`, grouped client-side) | `POST /api/v2/threads/query` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/threads/query-threads) for the full parameter and field list.
+See the [API doc](smith-api/threads/query-threads.md) for the full parameter and field list.
 
 #### Query parameters
 
@@ -6182,7 +6182,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Thre
 | ------------------------------------------------------- | ---------------------------------------- |
 | `POST /api/v1/runs/query` (`filter=eq(thread_id, ...)`) | `GET /api/v2/threads/{thread_id}/traces` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/threads/query-thread-traces) for the full parameter and field list.
+See the [API doc](smith-api/threads/query-thread-traces.md) for the full parameter and field list.
 
 #### Query parameters
 
@@ -6866,7 +6866,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Data
 | ----------------------------------------- | ---------------------------------------------------- |
 | `POST /api/v1/datasets/{dataset_id}/runs` | `POST /api/v2/datasets/{dataset_id}/experiment-runs` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/datasets/fetch-experiment-runs-for-dataset-examples) for the full parameter and field list.
+See the [API doc](smith-api/datasets/fetch-experiment-runs-for-dataset-examples.md) for the full parameter and field list.
 
 #### Query parameters
 
@@ -6957,7 +6957,7 @@ See the [API doc](https://docs.langchain.com/langsmith/smith-api/datasets/fetch-
 
 #### Response fields
 
-Each page item is a dataset example paired with the runs produced for it—not a bare `Run`. Its `runs` field holds the same `Run` objects returned by [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields); see that section for the per-run fields. The tables below describe the rest of the item: the example fields alongside `runs`.
+Each page item is a dataset example paired with the runs produced for it—not a bare `Run`. Its `runs` field holds the same `Run` objects returned by [Querying runs](#response-fields); see that section for the per-run fields. The tables below describe the rest of the item: the example fields alongside `runs`.
 
 #### Python
 `get_experiment_results` returned experiment results with an `examples_with_runs` iterator. `datasets.experiment_runs.query` returns a paginated page object (`page.items`, `page.next_cursor`); each item has:
@@ -6972,7 +6972,7 @@ Each page item is a dataset example paired with the runs produced for it—not a
 | `metadata`                   | Example metadata                                          |
 | `source_run_id`              | Run UUID the example was created from, if any             |
 | `attachment_urls`            | Pre-signed download URL per attachment name               |
-| `runs`                       | This example's runs—see [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields) |
+| `runs`                       | This example's runs—see [Querying runs](#response-fields) |
 
 #### TypeScript
 The legacy dataset runs endpoint was not exposed on the public TypeScript `Client`. `datasets.experimentRuns.query` returns a paginated page (`page.getPaginatedItems()`, `page.next_cursor`); each item has:
@@ -6987,7 +6987,7 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `metadata`                   | Example metadata                                          |
 | `source_run_id`              | Run UUID the example was created from, if any             |
 | `attachment_urls`            | Pre-signed download URL per attachment name               |
-| `runs`                       | This example's runs—see [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields) |
+| `runs`                       | This example's runs—see [Querying runs](#response-fields) |
 
 #### Java
 `runs().query` returned an optional list. `experimentRuns().query` returns a page object (`items()`, `nextCursor()`); each item has:
@@ -7002,7 +7002,7 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `metadata()`                   | Example metadata                                          |
 | `sourceRunId()`                | Run UUID the example was created from, if any             |
 | `attachmentUrls()`             | Pre-signed download URL per attachment name               |
-| `runs()`                       | This example's runs—see [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields) |
+| `runs()`                       | This example's runs—see [Querying runs](#response-fields) |
 
 #### Go
 `Datasets.Runs.Query` returned a slice pointer. `Datasets.ExperimentRuns.Query` returns an `ItemsCursorPostPagination` (`Items`, `NextCursor`); each item has:
@@ -7017,7 +7017,7 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `Metadata`                 | Example metadata                                          |
 | `SourceRunID`              | Run UUID the example was created from, if any             |
 | `AttachmentURLs`           | Pre-signed download URL per attachment name               |
-| `Runs`                     | This example's runs—see [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields) |
+| `Runs`                     | This example's runs—see [Querying runs](#response-fields) |
 
 #### cURL
 `POST /api/v1/datasets/{dataset_id}/runs` returned a JSON array. `POST /api/v2/datasets/{dataset_id}/experiment-runs` returns `{ "items": [...], "next_cursor": "..." }`; each item has:
@@ -7032,7 +7032,7 @@ The legacy dataset runs endpoint was not exposed on the public TypeScript `Clien
 | `metadata`                   | Example metadata                                          |
 | `source_run_id`              | Run UUID the example was created from, if any             |
 | `attachment_urls`            | Pre-signed download URL per attachment name               |
-| `runs`                       | This example's runs—see [Querying runs](https://docs.langchain.com/langsmith/smithdb-sdk-migration#response-fields) |
+| `runs`                       | This example's runs—see [Querying runs](#response-fields) |
 
 ### Examples
 
@@ -7596,7 +7596,7 @@ curl -X POST "https://api.smith.langchain.com/api/v2/datasets/$DATASET_ID/experi
 Add runs to an annotation queue. The SmithDB-backed path takes each run's full lookup key—its ID plus the `session_id` (project UUID) and `start_time` partition keys—so the run can be located directly instead of scanned for.
 
 > [!NOTE]
-> This method stays on the existing client, not the new `runs` v2 client, so the [Exceptions](https://docs.langchain.com/langsmith/smithdb-sdk-migration#exceptions) table above does not apply—error handling is unchanged.
+> This method stays on the existing client, not the new `runs` v2 client, so the [Exceptions](#exceptions) table above does not apply—error handling is unchanged.
 
 ### Main changes
 
@@ -7631,7 +7631,7 @@ See the [reference](https://pkg.go.dev/github.com/langchain-ai/langsmith-go#Anno
 | ------------------------------------------------ | ------------------------------------------------------- |
 | `POST /api/v1/annotation-queues/{queue_id}/runs` | `POST /api/v1/annotation-queues/{queue_id}/runs/by-key` |
 
-See the [API doc](https://docs.langchain.com/langsmith/smith-api/annotation-queues/add-runs-to-annotation-queue-by-key) for the full parameter list.
+See the [API doc](smith-api/annotation-queues/add-runs-to-annotation-queue-by-key.md) for the full parameter list.
 
 #### Inputs
 
@@ -8378,7 +8378,7 @@ _, err = client.Feedback.New(ctx, langsmith.FeedbackNewParams{
 	FeedbackCreateSchema: langsmith.FeedbackCreateSchemaParam{
 		RunID: langsmith.F(runID),
 		Key:   langsmith.F("user_feedback"),
-		Score: langsmith.F[langsmith.FeedbackCreateSchemaScoreUnionParam](https://docs.langchain.com/langsmith/shared.UnionFloat(1.0)),
+		Score: langsmith.F[langsmith.FeedbackCreateSchemaScoreUnionParam](shared.UnionFloat(1.0)),
 	},
 })
 ```
@@ -8404,7 +8404,7 @@ _, err = client.Feedback.New(ctx, langsmith.FeedbackNewParams{
 	FeedbackCreateSchema: langsmith.FeedbackCreateSchemaParam{
 		RunID:     langsmith.F(runID),
 		Key:       langsmith.F("user_feedback"),
-		Score:     langsmith.F[langsmith.FeedbackCreateSchemaScoreUnionParam](https://docs.langchain.com/langsmith/shared.UnionFloat(1.0)),
+		Score:     langsmith.F[langsmith.FeedbackCreateSchemaScoreUnionParam](shared.UnionFloat(1.0)),
 		SessionID: langsmith.F(sessionID),
 	},
 })
@@ -8488,7 +8488,7 @@ No change. Error handling is unaffected by this migration.
 
 ## Discontinued
 
-The following methods are discontinued. They call the retired `/feedback/formulas` endpoints, which return `410 Gone` on composite-feedback v2 and are scheduled for removal on 2026-08-20. Composite scores are now managed as [composite evaluators](https://docs.langchain.com/langsmith/composite-evaluators-ui), which implement a composite score as a code evaluator plus a run rule. There is no SDK replacement.
+The following methods are discontinued. They call the retired `/feedback/formulas` endpoints, which return `410 Gone` on composite-feedback v2 and are scheduled for removal on 2026-08-20. Composite scores are now managed as [composite evaluators](composite-evaluators-ui.md), which implement a composite score as a code evaluator plus a run rule. There is no SDK replacement.
 
 ### Feedback formula methods
 

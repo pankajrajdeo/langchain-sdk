@@ -4,9 +4,9 @@
 
 This guide shows you how to trace LiteLLM calls with LangSmith using:
 
-* The [LangSmith SDK](https://docs.langchain.com/langsmith/trace-litellm#use-langsmith_tracing-and-traceable) (`@traceable`) for application-level tracing.
-* [LiteLLM’s built-in langsmith callback](https://docs.langchain.com/langsmith/trace-litellm#log-litellm-call-with-the-langsmith-callback) for model-level logging.
-* The [LiteLLM Proxy](https://docs.langchain.com/langsmith/trace-litellm#use-the-litellm-proxy) for gateway-level tracing.
+* The [LangSmith SDK](#use-langsmith_tracing-and-traceable) (`@traceable`) for application-level tracing.
+* [LiteLLM’s built-in langsmith callback](#log-litellm-call-with-the-langsmith-callback) for model-level logging.
+* The [LiteLLM Proxy](#use-the-litellm-proxy) for gateway-level tracing.
 
 ## Installation
 
@@ -26,11 +26,13 @@ The examples in this guide use OpenAI models, but you can install the necessary 
 
 LiteLLM supports two ways to send traces to LangSmith, which operate at different layers:
 
-* [LangSmith SDK tracing](https://docs.langchain.com/langsmith/trace-litellm#use-langsmith_tracing-and-traceable) with `LANGSMITH_TRACING=true` enables application-level tracing via the LangSmith SDK. This is useful when you want to trace broader business logic, multi-step pipelines, or spans created with `@traceable`.
-* LiteLLM’s built-in [`langsmith` callback](https://docs.langchain.com/langsmith/trace-litellm#log-litellm-call-with-the-langsmith-callback) logs model calls directly from LiteLLM. This is recommended when you want to trace LiteLLM requests specifically, or run async applications.
+* [LangSmith SDK tracing](#use-langsmith_tracing-and-traceable) with `LANGSMITH_TRACING=true` enables application-level tracing via the LangSmith SDK. This is useful when you want to trace broader business logic, multi-step pipelines, or spans created with `@traceable`.
+* LiteLLM’s built-in [`langsmith` callback](#log-litellm-call-with-the-langsmith-callback) logs model calls directly from LiteLLM. This is recommended when you want to trace LiteLLM requests specifically, or run async applications.
 
 > [!NOTE]
 > Avoid enabling LiteLLM's `langsmith` callback and LangSmith tracing for the same LiteLLM calls, as this can result in duplicate traces.
+
+<a id="use-langsmith_tracing-and-traceable"></a>
 
 ### Use `LANGSMITH_TRACING` and `traceable`
 
@@ -44,7 +46,7 @@ You can use `LANGSMITH_TRACING=true` together with `@traceable` for predictable 
    export LANGSMITH_TRACING="true"
 ```
 
-   Create LangSmith [API keys](https://docs.langchain.com/langsmith/create-account-api-key) in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-litellm).
+   Create LangSmith [API keys](create-account-api-key.md) in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-litellm).
 
    Depending on what provider you're using, you'll also need to set API keys:
 
@@ -86,7 +88,7 @@ You can use `LANGSMITH_TRACING=true` together with `@traceable` for predictable 
    In this example, the `messages` argument becomes the trace input, and the returned assistant message object becomes the trace output. The LiteLLM call itself runs normally—`@traceable` wraps it with observability rather than modifying its behavior. This approach traces your application logic, not just the model call.
 
 > [!TIP]
->    For more general examples using `@traceable`, refer to the [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code#use-@traceable-/-traceable) page.
+>    For more general examples using `@traceable`, refer to the [Custom instrumentation](annotate-code.md#use-@traceable-/-traceable) page.
 
 ### Log LiteLLM call with the `langsmith` callback
 
@@ -95,7 +97,7 @@ LiteLLM can send traces directly to LangSmith using its built-in [callback syste
 LiteLLM callbacks run in an asynchronous environment. When making asynchronous calls with `litellm.acompletion()`, you can enable the `langsmith` callback to log successful model calls.
 
 > [!TIP]
-> This approach is best suited for async applications. For simple synchronous scripts, use the `@traceable` method shown in the [previous section](https://docs.langchain.com/langsmith/trace-litellm#use-langsmith_tracing-and-traceable).
+> This approach is best suited for async applications. For simple synchronous scripts, use the `@traceable` method shown in the [previous section](#use-langsmith_tracing-and-traceable).
 
 1. Set the following environment variables:
 
@@ -104,7 +106,7 @@ LiteLLM callbacks run in an asynchronous environment. When making asynchronous c
    export LANGSMITH_PROJECT="litellm-integration"
 ```
 
-   Create LangSmith [API keys](https://docs.langchain.com/langsmith/create-account-api-key) in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-litellm).
+   Create LangSmith [API keys](create-account-api-key.md) in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-trace-litellm).
 
    Depending on what provider you're using, you'll also need to set API keys:
 
@@ -228,9 +230,9 @@ The LiteLLM proxy runs as a standalone server and exposes an OpenAI-compatible A
 
 ## Next steps
 
-* [View traces in LangSmith](https://docs.langchain.com/langsmith/filter-traces-in-application)
-* [Add custom metadata](https://docs.langchain.com/langsmith/ls-metadata-parameters)
-* [Filter and sample traces](https://docs.langchain.com/langsmith/sample-traces)
+* [View traces in LangSmith](filter-traces-in-application.md)
+* [Add custom metadata](ls-metadata-parameters.md)
+* [Filter and sample traces](sample-traces.md)
 
 ***
 

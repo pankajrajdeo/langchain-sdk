@@ -4,7 +4,7 @@
 
 > [Firestore in Datastore Mode](https://cloud.google.com/datastore) is a NoSQL document database built for automatic scaling, high performance and ease of application development. Extend your database application to build AI-powered experiences leveraging Datastore's LangChain integrations.
 
-This notebook goes over how to use [Firestore in Datastore Mode](https://cloud.google.com/datastore) to [save, load and delete langchain documents](https://docs.langchain.com/oss/python/integrations/document_loaders) with `DatastoreLoader` and `DatastoreSaver`.
+This notebook goes over how to use [Firestore in Datastore Mode](https://cloud.google.com/datastore) to [save, load and delete langchain documents](../document_loaders.md) with `DatastoreLoader` and `DatastoreSaver`.
 
 Learn more about the package on [GitHub](https://github.com/googleapis/langchain-google-datastore-python/).
 

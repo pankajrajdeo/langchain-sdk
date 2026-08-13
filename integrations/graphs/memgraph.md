@@ -4,9 +4,9 @@
 
 Memgraph is an open-source graph database, tuned for dynamic analytics environments and compatible with Neo4j. To query the database, Memgraph uses Cypher - the most widely adopted, fully-specified, and open query language for property graph databases.
 
-This notebook will show you how to [query Memgraph with natural language](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#natural-language-querying) and how to [construct a knowledge graph](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#constructing-knowledge-graph) from your unstructured data.
+This notebook will show you how to [query Memgraph with natural language](#natural-language-querying) and how to [construct a knowledge graph](#constructing-knowledge-graph) from your unstructured data.
 
-First, make sure to [set everything up](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#setting-up).
+First, make sure to [set everything up](#setting-up).
 
 ## Setting up
 
@@ -347,12 +347,12 @@ Transforming unstructured data to structured is not an easy or straightforward t
 
 The steps of constructing a knowledge graph from the text are:
 
-* [Extracting structured information from text](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#extracting-structured-information-from-text): LLM is used to extract structured graph information from text in a form of nodes and relationships.
-* [Storing into Memgraph](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#storing-into-memgraph): Storing the extracted structured graph information into Memgraph.
+* [Extracting structured information from text](#extracting-structured-information-from-text): LLM is used to extract structured graph information from text in a form of nodes and relationships.
+* [Storing into Memgraph](#storing-into-memgraph): Storing the extracted structured graph information into Memgraph.
 
 ### Extracting structured information from text
 
-Besides all the imports in the [setup section](https://docs.langchain.com/oss/python/integrations/graphs/memgraph#setting-up), import `LLMGraphTransformer` and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) which will be used to extract structured information from text.
+Besides all the imports in the [setup section](#setting-up), import `LLMGraphTransformer` and [`Document`](https://reference.langchain.com/python/langchain-core/documents/base/Document) which will be used to extract structured information from text.
 
 > [!WARNING]
 > The `langchain-experimental` package is no longer maintained. Examples that import from `langchain_experimental` may be outdated or broken. Use with caution.

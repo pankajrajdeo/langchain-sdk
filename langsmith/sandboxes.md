@@ -6,7 +6,7 @@ Sandboxes are isolated environments that allow agents to safely execute potentia
 
 From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-sandboxes), select **Sandboxes** to manage all your sandbox resources.
 
-> **Image:** [Sandboxes overview page](https://docs.langchain.com/langsmith/sandboxes)
+> **Image:** [Sandboxes overview page](sandboxes.md)
 
 ## Environment availability
 
@@ -17,7 +17,7 @@ From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs\&utm_m
 | GCP APAC (`apac.smith.langchain.com`) | Generally available |
 | AWS US (`aws.smith.langchain.com`)    | Generally available |
 
-For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes).
+For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](deploy-self-hosted-full-platform.md#enable-sandboxes).
 
 ## Get started
 
@@ -64,43 +64,43 @@ await sandbox.delete();
 ```
 
 > [!TIP]
-> Prefer the command line? The [Sandbox CLI](https://docs.langchain.com/langsmith/sandbox-cli) lets you create sandboxes, run commands, and open interactive shells without writing any code.
+> Prefer the command line? The [Sandbox CLI](sandbox-cli.md) lets you create sandboxes, run commands, and open interactive shells without writing any code.
 
 ### 4. Use sandboxes with your agents
 
 To wire sandboxes into agent code, see the Open Source docs:
 
-* **Deep Agents**: [Use `LangSmithSandbox` as a backend](https://docs.langchain.com/oss/python/integrations/sandboxes/langsmith), covering installation, backend creation, and cleanup.
-* **Sandboxes as agent backends**: [Configure any sandbox as the execution backend](https://docs.langchain.com/oss/python/deepagents/sandboxes) to give your agent `execute` and filesystem tools automatically.
-* **LangChain / LangGraph integrations**: Use LangSmith sandboxes as a first-party option, or [connect third-party providers](https://docs.langchain.com/oss/python/integrations/sandboxes) such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel.
+* **Deep Agents**: [Use `LangSmithSandbox` as a backend](../integrations/sandboxes/langsmith.md), covering installation, backend creation, and cleanup.
+* **Sandboxes as agent backends**: [Configure any sandbox as the execution backend](../deepagents/sandboxes.md) to give your agent `execute` and filesystem tools automatically.
+* **LangChain / LangGraph integrations**: Use LangSmith sandboxes as a first-party option, or [connect third-party providers](../integrations/sandboxes.md) such as AgentCore, Daytona, E2B, Modal, Runloop, and Vercel.
 
 ## Resources
 
-#### [Snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots)
+#### [Snapshots](sandbox-snapshots.md)
 Build filesystem images from Docker images or capture a running sandbox, then boot sandboxes from them.
 
-#### [Service URLs](https://docs.langchain.com/langsmith/sandbox-service-urls)
+#### [Service URLs](sandbox-service-urls.md)
 Access HTTP services running inside sandboxes via authenticated URLs.
 
-#### [Auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy)
+#### [Auth proxy](sandbox-auth-proxy.md)
 Inject credentials into outbound API requests without hardcoding secrets.
 
-#### [Mounts](https://docs.langchain.com/langsmith/sandbox-mounts)
+#### [Mounts](sandbox-mounts.md)
 Attach S3 buckets, GCS buckets, and public Git repositories to a sandbox filesystem.
 
-#### [Permissions](https://docs.langchain.com/langsmith/sandbox-permissions)
+#### [Permissions](sandbox-permissions.md)
 Control which workspace members can interact with a sandbox after it is created.
 
-#### [CLI](https://docs.langchain.com/langsmith/sandbox-cli)
+#### [CLI](sandbox-cli.md)
 Build snapshots, manage sandboxes, open consoles, and tunnel TCP ports from the command line.
 
-#### [SDK usage](https://docs.langchain.com/langsmith/sandbox-sdk)
+#### [SDK usage](sandbox-sdk.md)
 Create and manage sandboxes programmatically with the Python or TypeScript SDK.
 
-#### [Self-hosted setup](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-sandboxes)
+#### [Self-hosted setup](deploy-self-hosted-full-platform.md#enable-sandboxes)
 Enable Sandboxes on self-hosted LangSmith deployments with Helm or Terraform.
 
-#### [Harbor](https://docs.langchain.com/langsmith/harbor-integrations#sandboxes)
+#### [Harbor](harbor-integrations.md#sandboxes)
 Run Harbor evaluations and rollouts on LangSmith sandboxes.
 
 ***

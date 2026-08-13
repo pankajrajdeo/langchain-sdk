@@ -1,8 +1,8 @@
 # Trace query syntax
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/trace-query-syntax)
-The [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and [REST API](https://docs.langchain.com/langsmith/smith-api-ref) let you filter, query, and export [runs](https://docs.langchain.com/langsmith/observability-concepts#runs) programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments and query language, with examples for common queries.
+The [LangSmith SDK](https://reference.langchain.com/python/langsmith/) and [REST API](smith-api-ref.md) let you filter, query, and export [runs](observability-concepts.md#runs) programmatically using a set of filter arguments and a structured filter query language. This page documents the filter arguments and query language, with examples for common queries.
 
-For runnable end-to-end examples that combine these filters with the SDK, refer to [Query traces using the SDK](https://docs.langchain.com/langsmith/export-traces).
+For runnable end-to-end examples that combine these filters with the SDK, refer to [Query traces using the SDK](export-traces.md).
 
 ## Filter arguments
 
@@ -10,17 +10,17 @@ For runnable end-to-end examples that combine these filters with the SDK, refer 
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `project_id` / `project_name` | The project(s) to fetch runs from, as a single project or a list of projects.                                                                                 |
 | `trace_id`                    | Fetch runs that are part of a specific trace.                                                                                                                 |
-| `run_type`                    | The [type of run](https://docs.langchain.com/langsmith/run-data-format#run-types) to get, for example, `llm`, `chain`, `tool`, `retriever`.                                             |
+| `run_type`                    | The [type of run](run-data-format.md#run-types) to get, for example, `llm`, `chain`, `tool`, `retriever`.                                             |
 | `dataset_name` / `dataset_id` | Fetch runs that are associated with an example row in the specified dataset. This is useful for comparing prompts or models over a given dataset.             |
 | `reference_example_id`        | Fetch runs that are associated with a specific example row. This is useful for comparing prompts or models on a given input.                                  |
 | `parent_run_id`               | Fetch runs that are children of a given run. This is useful for fetching runs grouped together using the context manager or for fetching an agent trajectory. |
 | `error`                       | Fetch runs that errored or did not error.                                                                                                                     |
 | `run_ids`                     | Fetch runs with a given list of run ids. Note: **This will ignore all other filtering arguments.**                                                            |
-| `filter`                      | Fetch runs that match a given structured filter statement. For more details, refer to the [filter query language](https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language) section.            |
+| `filter`                      | Fetch runs that match a given structured filter statement. For more details, refer to the [filter query language](#filter-query-language) section.            |
 | `trace_filter`                | Filter applied to the root run of the trace. Use with `filter` to narrow by attributes of the root run.                                                       |
 | `tree_filter`                 | Filter applied to any run in the trace tree (root, sibling, or child). Use with `filter` to narrow by attributes of any run within a trace.                   |
 | `is_root`                     | Only return root runs.                                                                                                                                        |
-| `select`                      | Select the fields to return in the response. By default, all fields are returned. See [run data format](https://docs.langchain.com/langsmith/run-data-format) for available fields.     |
+| `select`                      | Select the fields to return in the response. By default, all fields are returned. See [run data format](run-data-format.md) for available fields.     |
 | `query` (*experimental*)      | Natural language query, which translates your query into a filter statement.                                                                                  |
 
 > [!NOTE]
@@ -28,7 +28,7 @@ For runnable end-to-end examples that combine these filters with the SDK, refer 
 
 ## Filter query language
 
-LangSmith supports filtering capabilities with a filter query language to permit complex filtering operations when fetching runs. This is especially useful when querying traces programmatically via the SDK or API. For example, in [evaluation](https://docs.langchain.com/langsmith/evaluation) pipelines, monitoring scripts, or agentic workflows that inspect prior [traces](https://docs.langchain.com/langsmith/observability-concepts#traces).
+LangSmith supports filtering capabilities with a filter query language to permit complex filtering operations when fetching runs. This is especially useful when querying traces programmatically via the SDK or API. For example, in [evaluation](evaluation.md) pipelines, monitoring scripts, or agentic workflows that inspect prior [traces](observability-concepts.md#traces).
 
 ### Comparators
 
@@ -84,7 +84,7 @@ or(eq(status, "error"), and(eq(feedback_key, "score"), lt(feedback_score, 0.5)))
 The following examples show the filter string only. Pass the string as the `filter`, `trace_filter`, or `tree_filter` argument in `client.list_runs()` or the `/runs/query` API endpoint.
 
 > [!TIP]
-> For complete SDK examples with Python, TypeScript, and Java code, refer to [Query traces using the SDK](https://docs.langchain.com/langsmith/export-traces#use-filter-query-language).
+> For complete SDK examples with Python, TypeScript, and Java code, refer to [Query traces using the SDK](export-traces.md#use-filter-query-language).
 
 ### Filter by run name
 
@@ -191,7 +191,7 @@ eq(name, "ExpandQuery")
 ```
 
 > [!NOTE]
-> `tree_filter` applies the same query syntax to runs anywhere in the trace tree. For predicates over arbitrary nested child-run fields, such as returned `inputs`, `outputs`, or `extra` payload paths, first narrow candidates with server-side filters, then hydrate root traces with child runs and traverse them locally. See [Query trace trees with child-run predicates](https://docs.langchain.com/langsmith/export-traces#query-trace-trees-with-child-run-predicates).
+> `tree_filter` applies the same query syntax to runs anywhere in the trace tree. For predicates over arbitrary nested child-run fields, such as returned `inputs`, `outputs`, or `extra` payload paths, first narrow candidates with server-side filters, then hydrate root traces with child runs and traverse them locally. See [Query trace trees with child-run predicates](export-traces.md#query-trace-trees-with-child-run-predicates).
 
 ***
 

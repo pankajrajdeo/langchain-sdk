@@ -3,9 +3,9 @@
 > Integrate with the Cohere LLM using LangChain Python.
 
 > [!WARNING]
-> **You are currently on a page documenting the use of Cohere models as text completion models. Many popular Cohere models are [chat completion models](https://docs.langchain.com/oss/python/langchain/models).**
+> **You are currently on a page documenting the use of Cohere models as text completion models. Many popular Cohere models are [chat completion models](../../langchain/models.md).**
 >
-> You may be looking for [this page instead](https://docs.langchain.com/oss/python/integrations/chat/cohere/).
+> You may be looking for [this page instead](../chat/cohere.md).
 
 > [Cohere](https://cohere.ai/about) is a Canadian startup that provides natural language processing models that help companies improve human-machine interactions.
 
@@ -45,7 +45,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ## Invocation
 
-Cohere supports all [LLM](https://docs.langchain.com/oss/python/langchain/models) functionality:
+Cohere supports all [LLM](../../langchain/models.md) functionality:
 
 ```python
 from langchain_cohere import Cohere

@@ -100,7 +100,7 @@ langsmith-queue-d58cb64f7-87d68          1/1     Running     0          15h
 
 3. Visit the external IP for the `langsmith-frontend` service on your browser. The LangSmith UI should be visible and operational.
 
-> **Image:** [LangSmith UI](https://docs.langchain.com/langsmith/self-host-upgrades)
+> **Image:** [LangSmith UI](self-host-upgrades.md)
 
 ***
 

@@ -2,7 +2,7 @@
 
 > Integrate with the ChatOpenRouter chat model using LangChain Python.
 
-This will help you get started with OpenRouter [chat models](https://docs.langchain.com/oss/python/langchain/models). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
+This will help you get started with OpenRouter [chat models](../../langchain/models.md). OpenRouter is a unified API that provides access to models from multiple providers (OpenAI, Anthropic, Google, Meta, and more) through a single endpoint.
 
 > [!TIP]
 > **API Reference**
@@ -21,7 +21,7 @@ For a full list of available models, visit the [OpenRouter models page](https://
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -53,7 +53,7 @@ if not os.getenv("OPENROUTER_API_KEY"):
     os.environ["OPENROUTER_API_KEY"] = getpass.getpass("Enter your OpenRouter API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -169,13 +169,13 @@ Pass `strict=True` to guarantee that model output exactly matches the JSON Schem
 model_with_tools = model.bind_tools([GetWeather], strict=True)
 ```
 
-For more on binding tools and tool call outputs, head to the [tool calling](https://docs.langchain.com/oss/python/langchain/tools) docs.
+For more on binding tools and tool call outputs, head to the [tool calling](../../langchain/tools.md) docs.
 
 ***
 
 ## Structured output
 
-`ChatOpenRouter` supports structured output via the [`with_structured_output`](https://docs.langchain.com/oss/python/langchain/models#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
+`ChatOpenRouter` supports structured output via the [`with_structured_output`](../../langchain/models.md#structured-output) method. Two methods are available: `function_calling` (default) and `json_schema`.
 
 <details>
 <summary>Individual model calls</summary>
@@ -209,7 +209,7 @@ Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 <details>
 <summary>Agent response format</summary>
 
-Specify `response_format` with [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output) to engage structured output when generating the agent's final response.
+Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage structured output when generating the agent's final response.
 
 ```python
 from langchain.agents import create_agent
@@ -270,7 +270,7 @@ for block in ai_msg.content_blocks:
         print(block["reasoning"])
 ```
 
-For more on content blocks, see the [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) guide.
+For more on content blocks, see the [standard content blocks](../../langchain/messages.md#standard-content-blocks) guide.
 
 The `reasoning` dict supports two keys:
 
@@ -292,7 +292,7 @@ print(ai_msg.usage_metadata)
 
 ## Multimodal inputs
 
-OpenRouter supports [multimodal inputs](https://docs.langchain.com/oss/python/langchain/messages#multimodal) for models that accept them. The available modalities depend on the model you select—check the [OpenRouter models page](https://openrouter.ai/models) for details.
+OpenRouter supports [multimodal inputs](../../langchain/messages.md#multimodal) for models that accept them. The available modalities depend on the model you select—check the [OpenRouter models page](https://openrouter.ai/models) for details.
 
 ### Supported input methods
 

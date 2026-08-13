@@ -1,6 +1,6 @@
 # MULTIPLE_SUBGRAPHS
 
-This error occurs when you [call a subgraph inside a node](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#call-a-subgraph-inside-a-node) multiple times, and the subgraph is compiled with `checkpointer=True` (continuations mode).
+This error occurs when you [call a subgraph inside a node](../use-subgraphs.md#call-a-subgraph-inside-a-node) multiple times, and the subgraph is compiled with `checkpointer=True` (continuations mode).
 
 ## Troubleshooting
 
@@ -17,12 +17,12 @@ Choose one of the following based on your requirements:
 ```
    Each invocation gets a unique namespace, so parallel execution works. The subgraph starts fresh each time but can use `interrupt()`.
 
-3. **Need cross-invocation persistence?** Use `checkpointer=True`. LangGraph assigns each invocation a position-based namespace suffix (`calling_node`, `calling_node|1`, etc.) to prevent conflicts. For stable, name-based namespaces, wrap each subgraph with a unique node name — see [parallel subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence).
+3. **Need cross-invocation persistence?** Use `checkpointer=True`. LangGraph assigns each invocation a position-based namespace suffix (`calling_node`, `calling_node|1`, etc.) to prevent conflicts. For stable, name-based namespaces, wrap each subgraph with a unique node name — see [parallel subgraphs](../use-subgraphs.md#subgraph-persistence).
 
 ## Related
 
-* [Subgraph persistence](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#subgraph-persistence) — full comparison of checkpointer modes
-* [Persistence](https://docs.langchain.com/oss/python/langgraph/persistence) — how checkpointers work in LangGraph
+* [Subgraph persistence](../use-subgraphs.md#subgraph-persistence) — full comparison of checkpointer modes
+* [Persistence](../persistence.md) — how checkpointers work in LangGraph
 
 ***
 

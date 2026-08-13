@@ -12,7 +12,7 @@ Different errors need different handling strategies:
 | --------------------------------------------------------------- | ------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Transient errors (network issues, rate limits)                  | System (automatic) | Retry with exponential backoff                          | [ModelRetryMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_retry/ModelRetryMiddleware), [ToolRetryMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_retry/ToolRetryMiddleware)                           |
 | LLM-recoverable errors (tool failures, parsing issues)          | LLM                | Convert to error `ToolMessage` and let the model adjust | [ToolErrorMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware)                                                                                                                                                        |
-| User-fixable errors (missing information, unclear instructions) | Human              | Pause with `interrupt()`                                | [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop)                                                                                                                                                                                                                   |
+| User-fixable errors (missing information, unclear instructions) | Human              | Pause with `interrupt()`                                | [Human-in-the-loop](human-in-the-loop.md)                                                                                                                                                                                                                   |
 | Provider outage                                                 | System (automatic) | Fall back to an alternative model                       | [ModelFallbackMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_fallback/ModelFallbackMiddleware)                                                                                                                                            |
 | Excessive calls (runaway loops)                                 | System (automatic) | Cap model and tool calls per run                        | [ModelCallLimitMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_call_limit/ModelCallLimitMiddleware), [ToolCallLimitMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/tool_call_limit/ToolCallLimitMiddleware) |
 | Unexpected errors                                               | Developer          | Let them bubble up                                      | No middleware — let the exception propagate                                                                                                                                                                                                                                     |
@@ -78,7 +78,7 @@ agent = create_deep_agent(
 )
 ```
 
-For the full human-in-the-loop guide, see [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop).
+For the full human-in-the-loop guide, see [Human-in-the-loop](human-in-the-loop.md).
 
 #### Provider outage
 If your primary model provider goes down entirely, use [ModelFallbackMiddleware](https://reference.langchain.com/python/langchain/agents/middleware/model_fallback/ModelFallbackMiddleware) to switch to an alternative model:
@@ -150,7 +150,7 @@ model = init_chat_model(
 agent = create_deep_agent(model=model, tools=[search_tool])
 ```
 
-For the full configuration, see [Rate limiting](https://docs.langchain.com/oss/python/langchain/models#rate-limiting).
+For the full configuration, see [Rate limiting](../langchain/models.md#rate-limiting).
 
 ### Call limits
 
@@ -237,7 +237,7 @@ agent = create_deep_agent(
 )
 ```
 
-For the full configuration options and usage patterns, including async handlers and composing with retry middleware, see [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-error).
+For the full configuration options and usage patterns, including async handlers and composing with retry middleware, see [Prebuilt middleware](../langchain/middleware/built-in.md#tool-error).
 
 ***
 

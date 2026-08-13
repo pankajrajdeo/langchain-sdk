@@ -3,7 +3,7 @@
 > Integrate with (Deprecated) experimental Anthropic tools wrapper chat model using LangChain Python.
 
 > [!WARNING]
-> **The Anthropic API officially supports tool-calling so this workaround is no longer needed. Please use [ChatAnthropic](https://docs.langchain.com/oss/python/integrations/chat/anthropic) with `langchain-anthropic>=0.1.15`.**
+> **The Anthropic API officially supports tool-calling so this workaround is no longer needed. Please use [ChatAnthropic](anthropic.md) with `langchain-anthropic>=0.1.15`.**
 
 This notebook shows how to use an experimental wrapper around Anthropic that gives it tool calling and structured output capabilities. It follows [Anthropic's tool use guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
 
@@ -37,7 +37,7 @@ AIMessage(content='', additional_kwargs={'tool_calls': [{'function': {'name': 'P
 
 ## Structured output
 
-`ChatAnthropicTools` also implements the [`with_structured_output` spec](https://docs.langchain.com/oss/python/langchain/structured-output) for extracting values. Note: this may not be as stable as with models that explicitly offer tool calling.
+`ChatAnthropicTools` also implements the [`with_structured_output` spec](../../langchain/structured-output.md) for extracting values. Note: this may not be as stable as with models that explicitly offer tool calling.
 
 ```python
 chain = ChatAnthropicTools(model="claude-3-opus-20240229").with_structured_output(

@@ -7,7 +7,7 @@ A Managed Deep Agents project has a required agent entry and optional files that
 It is a regular Python project.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project layout
 
@@ -46,7 +46,7 @@ my-agent/
 
 The only required file is `agent.py` at the project root. It must export a named `agent` created with `define_deep_agent`.
 
-Use only one agent entry in a project. See [Agent definition](https://docs.langchain.com/langsmith/python/managed-deep-agents-agent-definition).
+Use only one agent entry in a project. See [Agent definition](managed-deep-agents-agent-definition.md).
 
 ## How MDA treats project files
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)
 ## Overview
 
-The **router pattern** is a [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) architecture where a routing step classifies input and directs it to specialized agents, with results synthesized into a combined response. This pattern excels when your organization's knowledge lives across distinct **verticals** (separate knowledge domains that each require their own agent with specialized tools and prompts).
+The **router pattern** is a [multi-agent](../multi-agent.md) architecture where a routing step classifies input and directs it to specialized agents, with results synthesized into a combined response. This pattern excels when your organization's knowledge lives across distinct **verticals** (separate knowledge domains that each require their own agent with specialized tools and prompts).
 
 In this tutorial, you'll build a multi-source knowledge base router that demonstrates these benefits through a realistic enterprise scenario. The system will coordinate three specialists:
 
@@ -44,12 +44,12 @@ The router pattern provides several advantages:
 
 We will cover the following concepts:
 
-* [Multi-agent systems](https://docs.langchain.com/oss/python/langchain/multi-agent)
-* [StateGraph](https://docs.langchain.com/oss/python/langgraph/graph-api) for workflow orchestration
-* [Send API](https://docs.langchain.com/oss/python/langgraph/graph-api#send) for parallel execution
+* [Multi-agent systems](../multi-agent.md)
+* [StateGraph](../../langgraph/graph-api.md) for workflow orchestration
+* [Send API](../../langgraph/graph-api.md#send) for parallel execution
 
 > [!TIP]
-> **Router vs. Subagents**: The [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) can also route to multiple agents. Use the router pattern when you need specialized preprocessing, custom routing logic, or want explicit control over parallel execution. Use the subagents pattern when you want the LLM to decide which agents to call dynamically.
+> **Router vs. Subagents**: The [subagents pattern](subagents.md) can also route to multiple agents. Use the router pattern when you need specialized preprocessing, custom routing logic, or want explicit control over parallel execution. Use the subagents pattern when you want the LLM to decide which agents to call dynamically.
 
 ## Setup
 
@@ -69,7 +69,7 @@ uv add langchain langgraph
 conda install langchain langgraph -c conda-forge
 ```
 
-For more details, see our [Installation guide](https://docs.langchain.com/oss/python/langchain/install).
+For more details, see our [Installation guide](../install.md).
 
 ### LangSmith
 
@@ -93,7 +93,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 Select a chat model from LangChain's suite of integrations:
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -122,7 +122,7 @@ model = ChatOpenAI(model="gpt-5.5")
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -151,7 +151,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -190,7 +190,7 @@ model = AzureChatOpenAI(
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -219,7 +219,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -248,7 +248,7 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -287,7 +287,7 @@ model = ChatHuggingFace(llm=llm)
 ```
 
 #### OpenRouter
-👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
+👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 ```bash
 pip install -U "langchain-openrouter"
@@ -946,10 +946,10 @@ print(result["messages"][-1].content)
 
 ### Full persistence approach
 
-If you need the router itself to maintain state—for example, to use previous search results in routing decisions—use [persistence](https://docs.langchain.com/oss/python/langchain/short-term-memory) to store message history at the router level.
+If you need the router itself to maintain state—for example, to use previous search results in routing decisions—use [persistence](../short-term-memory.md) to store message history at the router level.
 
 > [!WARNING]
-> **Stateful routers add complexity.** When routing to different agents across turns, conversations may feel inconsistent if agents have different tones or prompts. Consider the [handoffs pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) or [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents) instead—both provide clearer semantics for multi-turn conversations with different agents.
+> **Stateful routers add complexity.** When routing to different agents across turns, conversations may feel inconsistent if agents have different tones or prompts. Consider the [handoffs pattern](handoffs.md) or [subagents pattern](subagents.md) instead—both provide clearer semantics for multi-turn conversations with different agents.
 
 ## 10. Key takeaways
 
@@ -966,13 +966,13 @@ The pattern has three phases: **decompose** (analyze the query and generate targ
 >
 > Use the router pattern when you have multiple independent knowledge sources, need low-latency parallel queries, and want explicit control over routing logic.
 >
-> For simpler cases with dynamic tool selection, consider the [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents). For workflows where agents need to converse with users sequentially, consider [handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs).
+> For simpler cases with dynamic tool selection, consider the [subagents pattern](subagents.md). For workflows where agents need to converse with users sequentially, consider [handoffs](handoffs.md).
 
 ## Next steps
 
-* Learn about [handoffs](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs) for agent-to-agent conversations
-* Explore the [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant) for centralized orchestration
-* Read the [multi-agent overview](https://docs.langchain.com/oss/python/langchain/multi-agent) to compare different patterns
+* Learn about [handoffs](handoffs.md) for agent-to-agent conversations
+* Explore the [subagents pattern](subagents-personal-assistant.md) for centralized orchestration
+* Read the [multi-agent overview](../multi-agent.md) to compare different patterns
 * Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-router-knowledge-base) to debug and monitor your router
 
 ***

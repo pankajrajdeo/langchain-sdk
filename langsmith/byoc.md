@@ -11,7 +11,7 @@ BYOC uses a split responsibility model: the control plane runs in LangChain's cl
 
 ## Get started
 
-To deploy LangSmith BYOC, [contact the LangChain sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the [onboarding guide](https://docs.langchain.com/langsmith/byoc-onboarding) to create your first data plane.
+To deploy LangSmith BYOC, [contact the LangChain sales team](https://www.langchain.com/contact-sales). After the LangChain team enables BYOC for your organization, follow the [onboarding guide](byoc-onboarding.md) to create your first data plane.
 
 ## Regions and cloud providers
 
@@ -35,23 +35,23 @@ The control plane runs in `us-east-2` regardless of where you place your data pl
 
 The following features are supported:
 
-* **[Observability](https://docs.langchain.com/langsmith/observability)**: Tracing, projects, dashboards, and alerts.
-* **[Evaluation](https://docs.langchain.com/langsmith/evaluation)**: Datasets, experiments, evaluators, and annotation queues.
-* **[Insights](https://docs.langchain.com/langsmith/insights)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
-* **[LangSmith Chat](https://docs.langchain.com/langsmith/chat)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
-* **[Prompt engineering](https://docs.langchain.com/langsmith/prompt-context-hub#prompts)**: Prompts and prompt commits.
-* **[LangSmith Deployment](https://docs.langchain.com/langsmith/deployment)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
-* **[Sandboxes](https://docs.langchain.com/langsmith/sandboxes)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
-* **[LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
-* **[LangSmith MCP](https://docs.langchain.com/langsmith/langsmith-remote-mcp)**: Connect MCP-compatible clients to LangSmith to query data.
-* **[Fleet](https://docs.langchain.com/langsmith/fleet/index)**: Build and run no-code agents from templates, connectors, and channels.
-* **[SmithDB](https://docs.langchain.com/langsmith/smithdb-sdk-migration)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
+* **[Observability](observability.md)**: Tracing, projects, dashboards, and alerts.
+* **[Evaluation](evaluation.md)**: Datasets, experiments, evaluators, and annotation queues.
+* **[Insights](insights.md)**: Automatic analysis of traces to surface usage patterns, common agent behaviors, and failure modes.
+* **[LangSmith Chat](chat.md)**: Analyze traces, threads, prompts, and evaluations from inside your workspace.
+* **[Prompt engineering](prompt-context-hub.md#prompts)**: Prompts and prompt commits.
+* **[LangSmith Deployment](deployment.md)**: The LangSmith Deployment control plane runs inside your data plane's cluster, so both the agent management layer and your agents run in your VPC.
+* **[Sandboxes](sandboxes.md)**: Usage through the CLI and SDK is identical to Cloud, except that you point at your data plane's endpoint.
+* **[LLM Gateway](llm-gateway.md)**: Call models across providers with one LangSmith API key, with spend, rate limit, and data-protection policies enforced centrally.
+* **[LangSmith MCP](langsmith-remote-mcp.md)**: Connect MCP-compatible clients to LangSmith to query data.
+* **[Fleet](fleet/index.md)**: Build and run no-code agents from templates, connectors, and channels.
+* **[SmithDB](smithdb-sdk-migration.md)**: The purpose-built observability backend for trace data, persisting to S3 in your account.
 
 The following features are planned but not yet supported:
 
-* **[Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview)**: LangChain-hosted deep agents with connectors, channels, and schedules.
-* **[LLM auth proxy](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
-* **[Engine](https://docs.langchain.com/langsmith/engine-overview)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces.
+* **[Managed Deep Agents](python/managed-deep-agents-overview.md)**: LangChain-hosted deep agents with connectors, channels, and schedules.
+* **[LLM auth proxy](llm-auth-proxy-self-hosted.md)**: Enforce your own authentication flows for model invocations so provider credentials are never exposed to end users.
+* **[Engine](engine-overview.md)**: Automatic detection, diagnosis, and resolution of recurring issues found in production traces.
 
 ## Prerequisites
 

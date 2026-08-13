@@ -2,7 +2,7 @@
 
 > Integrate with the ChatDeepSeek chat model using LangChain Python.
 
-This will help you get started with DeepSeek's hosted [chat models](https://docs.langchain.com/oss/python/langchain/models).
+This will help you get started with DeepSeek's hosted [chat models](../../langchain/models.md).
 
 > [!TIP]
 > **API Reference**
@@ -10,7 +10,7 @@ This will help you get started with DeepSeek's hosted [chat models](https://docs
 > For detailed documentation of all features and configuration options, head to the [`ChatDeepSeek`](https://reference.langchain.com/python/langchain-deepseek/chat_models/ChatDeepSeek) API reference.
 
 > [!TIP]
-> **DeepSeek's models are open source and can be run locally (e.g. in [Ollama](https://docs.langchain.com/oss/python/integrations/chat/ollama)) or on other inference providers (e.g. , [Together](https://docs.langchain.com/oss/python/integrations/chat/together)) as well.**
+> **DeepSeek's models are open source and can be run locally (e.g. in [Ollama](ollama.md)) or on other inference providers (e.g. , [Together](together.md)) as well.**
 
 ## Overview
 
@@ -22,7 +22,7 @@ This will help you get started with DeepSeek's hosted [chat models](https://docs
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -45,7 +45,7 @@ if not os.getenv("DEEPSEEK_API_KEY"):
     os.environ["DEEPSEEK_API_KEY"] = getpass.getpass("Enter your DeepSeek API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"

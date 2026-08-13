@@ -20,29 +20,29 @@ Set the `PARALLEL_API_KEY` environment variable to your Parallel API key. Sign u
 
 ## Chat models
 
-#### [ChatParallel](https://docs.langchain.com/oss/python/integrations/chat/parallel)
+#### [ChatParallel](../chat/parallel.md)
 OpenAI-compatible chat model with optional web research and per-field citations on the research tiers.
 
 ## Tools
 
-#### [ParallelSearchTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_search)
+#### [ParallelSearchTool](../tools/parallel_search.md)
 Search the web and get structured, LLM-optimized excerpts back.
 
-#### [ParallelExtractTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_extract)
+#### [ParallelExtractTool](../tools/parallel_extract.md)
 Extract clean markdown content from a list of URLs.
 
-#### [ParallelFindAllTool](https://docs.langchain.com/oss/python/integrations/tools/parallel_findall)
+#### [ParallelFindAllTool](../tools/parallel_findall.md)
 Discover entities that satisfy a set of boolean match conditions.
 
-#### [Task API](https://docs.langchain.com/oss/python/integrations/tools/parallel_task)
+#### [Task API](../tools/parallel_task.md)
 Run research-grade tasks: single ad-hoc, deep research, batch enrichment. `ParallelTaskRunTool`, `ParallelDeepResearch`, `ParallelTaskGroup`, `ParallelEnrichment`.
 
-#### [ParallelMonitor](https://docs.langchain.com/oss/python/integrations/tools/parallel_monitor)
+#### [ParallelMonitor](../tools/parallel_monitor.md)
 Schedule a query on a recurring cadence and receive events when relevant new content shows up.
 
 ## Retrievers
 
-#### [ParallelSearchRetriever](https://docs.langchain.com/oss/python/integrations/retrievers/parallel)
+#### [ParallelSearchRetriever](../retrievers/parallel.md)
 `BaseRetriever` over Parallel Search. Returns `list[Document]` for drop-in use in any RAG pipeline.
 
 ***

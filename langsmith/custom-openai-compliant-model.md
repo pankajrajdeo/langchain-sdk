@@ -15,24 +15,24 @@ Take a look at the full [specification](https://platform.openai.com/docs/api-ref
 
 ## Use the model in the Playground
 
-Once you have deployed a model server, you can use it in the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground).
+Once you have deployed a model server, you can use it in the [Playground](prompt-engineering-concepts.md#playground).
 
 To access the **Prompt Settings** menu:
 
 1. Under the **Prompts** heading select the gear  icon next to the model name.
 2. In the **Model Configuration** tab, select the model to edit in the dropdown.
 3. For the **Provider** dropdown, select **OpenAI Compatible Endpoint**.
-4. Add your OpenAI Compatible Endpoint to the **Base URL** input. See [Base URL format](https://docs.langchain.com/langsmith/custom-openai-compliant-model#base-url-format) for examples.
+4. Add your OpenAI Compatible Endpoint to the **Base URL** input. See [Base URL format](#base-url-format) for examples.
 
-> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](https://docs.langchain.com/langsmith/custom-openai-compliant-model)
+> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](custom-openai-compliant-model.md)
 
-> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](https://docs.langchain.com/langsmith/custom-openai-compliant-model)
+> **Image:** [Model Configuration window in the LangSmith UI with a model selected and the Provider dropdown with OpenAI Compatible Endpoint selected.](custom-openai-compliant-model.md)
 
 If everything is set up correctly, you should see the model's response in the Playground. You can also use this functionality to invoke downstream pipelines.
 
-For information on how to store your model configuration, refer to [Configure prompt settings](https://docs.langchain.com/langsmith/managing-model-configurations).
+For information on how to store your model configuration, refer to [Configure prompt settings](managing-model-configurations.md).
 
-If your OpenAI-compatible endpoint sits behind an OAuth2 gateway, store the OAuth `client_credentials` on the model configuration instead of distributing a static API key as a workspace secret. See [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials).
+If your OpenAI-compatible endpoint sits behind an OAuth2 gateway, store the OAuth `client_credentials` on the model configuration instead of distributing a static API key as a workspace secret. See [OAuth client credentials](model-configurations.md#oauth-client-credentials).
 
 ## Base URL format
 

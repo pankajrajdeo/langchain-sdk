@@ -10,7 +10,7 @@ LangChain is driven by a few core beliefs:
 * It is still very early on in that transformation.
 * While it's easy to build a prototype of those agentic applications, it's still really hard to build agents that are reliable enough to put into production.
 
-Today developers can choose how they build agents: use [LangChain](https://docs.langchain.com/oss/python/langchain/overview) for maximum flexibility and control, or [Deep Agents](https://docs.langchain.com/oss/python/langchain/overview) which allows for similar flexibility and control but comes with opinionated built-in planning, filesystem tools, subagents, and context management. Both are built on [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview).
+Today developers can choose how they build agents: use [LangChain](overview.md) for maximum flexibility and control, or [Deep Agents](overview.md) which allows for similar flexibility and control but comes with opinionated built-in planning, filesystem tools, subagents, and context management. Both are built on [LangGraph](../langgraph/overview.md).
 
 With LangChain, we have two core focuses:
 
@@ -19,7 +19,7 @@ Different providers expose different APIs, with different model parameters and d
 Standardizing these model inputs and outputs is a core focus, making it easy for developer to easily change to the most recent state-of-the-art model, avoiding lock-in.
 
 ### We want to make it easy to use models to orchestrate more complex flows that interact with other data and computation.
-Models should be used for more than just *text generation* - they should also be used to orchestrate more complex flows that interact with other data. LangChain makes it easy to define [tools](https://docs.langchain.com/oss/python/langchain/tools) that LLMs can use dynamically, as well as help with parsing of and access to unstructured data.
+Models should be used for more than just *text generation* - they should also be used to orchestrate more complex flows that interact with other data. LangChain makes it easy to define [tools](tools.md) that LLMs can use dynamically, as well as help with parsing of and access to unstructured data.
 
 ## History
 
@@ -102,7 +102,7 @@ Models started to accept files, images, videos, and more. We updated the `langch
 ## 2026-03-15
 **Deep Agents is released** as an open-source agent harness built on LangGraph.
 
-While LangChain provides flexible building blocks for custom agent architectures, [Deep Agents](https://docs.langchain.com/oss/python/langchain/overview) offers a batteries-included option for complex, long-running tasks like research and coding. It adds built-in planning tools, a virtual filesystem with pluggable backends (in-memory, disk, LangGraph store, sandboxes), and subagent spawning for context isolation. Use Deep Agents for more autonomous agents with predefined tools; use LangChain for full control over your agent architecture.
+While LangChain provides flexible building blocks for custom agent architectures, [Deep Agents](overview.md) offers a batteries-included option for complex, long-running tasks like research and coding. It adds built-in planning tools, a virtual filesystem with pluggable backends (in-memory, disk, LangGraph store, sandboxes), and subagent spawning for context isolation. Use Deep Agents for more autonomous agents with predefined tools; use LangChain for full control over your agent architecture.
 
 ***
 

@@ -3,7 +3,7 @@
 This guide shows you how to run an evaluation using OpenTelemetry tracing with LangSmith.
 
 > [!NOTE]
-> [Evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) | [Datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) | [Trace with OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+> [Evaluations](evaluation-concepts.md#evaluation-lifecycle) | [Datasets](evaluation-concepts.md#datasets) | [Trace with OpenTelemetry](trace-with-opentelemetry.md)
 
 If you're already using OpenTelemetry for tracing your LLM application, you can run evaluations by routing traces to an experiment session. This approach is useful when you want to evaluate applications that are instrumented with OpenTelemetry but don't use the LangSmith SDK's [`evaluate()`](https://reference.langchain.com/python/langsmith/client/Client/evaluate) function.
 
@@ -21,7 +21,7 @@ When evaluating with OpenTelemetry, you need to:
 This guide assumes you have:
 
 * An application instrumented with OpenTelemetry that sends traces to LangSmith.
-* A dataset created in LangSmith with examples to evaluate. You can create a dataset via the [LangSmith UI](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) or via the [SDK](https://docs.langchain.com/langsmith/manage-datasets-programmatically).
+* A dataset created in LangSmith with examples to evaluate. You can create a dataset via the [LangSmith UI](evaluation-concepts.md#datasets) or via the [SDK](manage-datasets-programmatically.md).
 
 This tutorial uses Strands agents as example implementations, but the approach works with any OpenTelemetry-instrumentation.
 
@@ -50,13 +50,13 @@ AWS_REGION_NAME="<your-aws-region>"
 ```
 
 > [!NOTE]
-> If you're [self-hosting LangSmith](https://docs.langchain.com/langsmith/self-hosted), replace `OTEL_EXPORTER_OTLP_ENDPOINT` with your self-hosted URL and append `/api/v1/otel`. For example: `OTEL_EXPORTER_OTLP_ENDPOINT = "https://ai-company.com/api/v1/otel"`.
+> If you're [self-hosting LangSmith](self-hosted.md), replace `OTEL_EXPORTER_OTLP_ENDPOINT` with your self-hosted URL and append `/api/v1/otel`. For example: `OTEL_EXPORTER_OTLP_ENDPOINT = "https://ai-company.com/api/v1/otel"`.
 >
 > Replace `LANGSMITH_ENDPOINT` with your LangSmith API endpoint. For example: `LANGSMITH_ENDPOINT = "https://ai-company.com/api/v1"`.
 
 ## Step 1. Create an experiment session
 
-This guide assumes that a dataset has been created in LangSmith with examples to evaluate. You can create a dataset via the [LangSmith UI](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) or via the [SDK](https://docs.langchain.com/langsmith/manage-datasets-programmatically).
+This guide assumes that a dataset has been created in LangSmith with examples to evaluate. You can create a dataset via the [LangSmith UI](evaluation-concepts.md#datasets) or via the [SDK](manage-datasets-programmatically.md).
 
 An experiment session groups all evaluation traces together. Create one using the LangSmith client:
 
@@ -101,7 +101,7 @@ const experimentId = project.id;
 
 Additionally, you can create evaluators in the LangSmith UI and bind them to your dataset. For evaluators defined in the UI and bound to your dataset, they will automatically run on experiment traces.
 
-To learn more about evaluators, see [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators).
+To learn more about evaluators, see [Evaluators](evaluation-concepts.md#evaluators).
 
 ## Step 2. Define an application and configure OpenTelemetry
 
@@ -132,7 +132,7 @@ agent = Agent(
 )
 ```
 
-For details on setting up OpenTelemetry tracing with LangSmith, see [Trace with OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry).
+For details on setting up OpenTelemetry tracing with LangSmith, see [Trace with OpenTelemetry](trace-with-opentelemetry.md).
 
 ## Step 3. Set up key span attributes
 
@@ -148,7 +148,7 @@ The following attributes are relevant for experiment evaluation:
 | `inputs`                         | Records the input to your application             |
 | `outputs`                        | Records the output from your application          |
 
-For a complete list of supported OpenTelemetry attributes, see [Trace with OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry#supported-opentelemetry-attribute-and-event-mapping).
+For a complete list of supported OpenTelemetry attributes, see [Trace with OpenTelemetry](trace-with-opentelemetry.md#supported-opentelemetry-attribute-and-event-mapping).
 
 ```python
 from opentelemetry import trace
@@ -254,7 +254,7 @@ for await (const example of client.listExamples({ datasetName })) {
 }
 ```
 
-After running the evaluation, you can [analyze the experiment](https://docs.langchain.com/langsmith/analyze-an-experiment) in the LangSmith UI to see:
+After running the evaluation, you can [analyze the experiment](analyze-an-experiment.md) in the LangSmith UI to see:
 
 * Individual trace details for each example
 * Evaluator scores and feedback

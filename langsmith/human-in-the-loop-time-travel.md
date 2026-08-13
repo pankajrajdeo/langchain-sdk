@@ -1,12 +1,12 @@
 # Time travel using the server API
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/human-in-the-loop-time-travel)
-LangGraph provides the [**time travel**](https://docs.langchain.com/oss/python/langgraph/use-time-travel) functionality to resume execution from a prior checkpoint, either replaying the same state or modifying it to explore alternatives. In all cases, resuming past execution produces a new fork in the history.
+LangGraph provides the [**time travel**](../langgraph/use-time-travel.md) functionality to resume execution from a prior checkpoint, either replaying the same state or modifying it to explore alternatives. In all cases, resuming past execution produces a new fork in the history.
 
 To time travel using the LangSmith Deployment API (via the LangGraph SDK):
 
-1. **Run the graph** with initial inputs using [LangGraph SDK](https://docs.langchain.com/langsmith/langgraph-python-sdk)'s [client.runs.wait](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.wait) or [client.runs.stream](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.stream) APIs.
+1. **Run the graph** with initial inputs using [LangGraph SDK](langgraph-python-sdk.md)'s [client.runs.wait](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.wait) or [client.runs.stream](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.stream) APIs.
 2. **Identify a checkpoint in an existing thread**: Use [client.threads.get\_history](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.get_history) method to retrieve the execution history for a specific `thread_id` and locate the desired `checkpoint_id`.
-   Alternatively, set a [breakpoint](https://docs.langchain.com/oss/python/langgraph/interrupts) before the node(s) where you want execution to pause. You can then find the most recent checkpoint recorded up to that breakpoint.
+   Alternatively, set a [breakpoint](../langgraph/interrupts.md) before the node(s) where you want execution to pause. You can then find the most recent checkpoint recorded up to that breakpoint.
 3. **(Optional) modify the graph state**: Use the [client.threads.update\_state](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.ThreadsClient.update_state) method to modify the graph’s state at the checkpoint and resume execution from alternative state.
 4. **Resume execution from the checkpoint**: Use the [client.runs.wait](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.wait) or [client.runs.stream](https://reference.langchain.com/python/langsmith/deployment/sdk/#langgraph_sdk.client.RunsClient.stream) APIs with an input of `None` and the appropriate `thread_id` and `checkpoint_id`.
 
@@ -221,7 +221,7 @@ curl --request POST \
 
 ## Learn more
 
-* [**LangGraph time travel guide**](https://docs.langchain.com/oss/python/langgraph/use-time-travel): learn more about using time travel in LangGraph.
+* [**LangGraph time travel guide**](../langgraph/use-time-travel.md): learn more about using time travel in LangGraph.
 
 ***
 

@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/store-auth)
 Scope long-term store data to each authenticated user in LangSmith Deployment using auth handlers.
 
-Every [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) includes a Postgres-backed [store](https://docs.langchain.com/oss/python/langgraph/stores) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](https://docs.langchain.com/langsmith/custom-auth) and add a store [authorization handler](https://docs.langchain.com/langsmith/auth#authorization) that rewrites namespaces to include the authenticated user's identity.
+Every [LangSmith Deployment](deployment.md) includes a Postgres-backed [store](../langgraph/stores.md) for long-term memory and cross-thread data. By default, store namespaces are shared across all callers. To give each user their own isolated store, configure [custom authentication](custom-auth.md) and add a store [authorization handler](auth.md#authorization) that rewrites namespaces to include the authenticated user's identity.
 
-This guide shows how to configure that isolation in LangSmith Deployment. The same pattern works for [self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments with custom auth enabled.
+This guide shows how to configure that isolation in LangSmith Deployment. The same pattern works for [self-hosted](self-hosted.md) deployments with custom auth enabled.
 
 ## How it works
 
@@ -21,12 +21,12 @@ A user who writes to logical namespace `("memories",)` with automatic prefix rew
 
 ## Prerequisites
 
-* A LangSmith Deployment with [custom authentication](https://docs.langchain.com/langsmith/set-up-custom-auth) configured.
+* A LangSmith Deployment with [custom authentication](set-up-custom-auth.md) configured.
 * An `@auth.authenticate` handler that returns a stable, unique `identity` for each end user.
 
 ## Configure auth in LangSmith Deployment
 
-Point your deployment at your auth module in [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts):
+Point your deployment at your auth module in [`langgraph.json`](application-structure.md#configuration-file-concepts):
 
 ```json
 {
@@ -151,7 +151,7 @@ async def save_preference(state: State, *, store: BaseStore, config: RunnableCon
 
 ### Deep Agents and StoreBackend
 
-If you use [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) with a [`StoreBackend`](https://reference.langchain.com/python/deepagents/backends/store/StoreBackend), align your namespace factory with the auth-scoped layout. When auth prepends `ctx.user.identity`, use logical namespaces in the backend and let auth handle user isolation:
+If you use [Deep Agents](../deepagents/overview.md) with a [`StoreBackend`](https://reference.langchain.com/python/deepagents/backends/store/StoreBackend), align your namespace factory with the auth-scoped layout. When auth prepends `ctx.user.identity`, use logical namespaces in the backend and let auth handle user isolation:
 
 ```python
 from deepagents.backends import StoreBackend
@@ -163,7 +163,7 @@ StoreBackend(
 
 Alternatively, if you scope by user inside the graph (for example, with `rt.server_info.user.identity`), ensure your auth handler does not double-prefix namespaces. Pick one scoping layer: auth rewriting **or** application-level namespaces, not both.
 
-For more on namespace design, see [Deep Agents backends](https://docs.langchain.com/oss/python/deepagents/backends#namespace-factories) and [user-scoped memory](https://docs.langchain.com/oss/python/deepagents/memory#user-scoped-memory).
+For more on namespace design, see [Deep Agents backends](../deepagents/backends.md#namespace-factories) and [user-scoped memory](../deepagents/memory.md#user-scoped-memory).
 
 ## Test store isolation
 
@@ -217,22 +217,22 @@ if __name__ == "__main__":
 
 ## Combine with thread isolation
 
-Store isolation and [thread isolation](https://docs.langchain.com/langsmith/resource-auth) solve different problems:
+Store isolation and [thread isolation](resource-auth.md) solve different problems:
 
 | Concern              | Mechanism                         | Scopes                                            |
 | -------------------- | --------------------------------- | ------------------------------------------------- |
 | Conversation history | Thread metadata filters (`owner`) | Per-thread checkpoints and messages               |
 | Long-term memory     | Store namespace rewriting         | Cross-thread memories, preferences, and documents |
 
-For multi-user agents, configure both. See [Make conversations private](https://docs.langchain.com/langsmith/resource-auth) for thread and run scoping.
+For multi-user agents, configure both. See [Make conversations private](resource-auth.md) for thread and run scoping.
 
 ## See also
 
-* [Authentication and access control](https://docs.langchain.com/langsmith/auth)
-* [Set up custom authentication](https://docs.langchain.com/langsmith/set-up-custom-auth)
-* [Make conversations private](https://docs.langchain.com/langsmith/resource-auth)
-* [Semantic search in deployments](https://docs.langchain.com/langsmith/semantic-search)
-* [LangGraph stores](https://docs.langchain.com/oss/python/langgraph/stores)
+* [Authentication and access control](auth.md)
+* [Set up custom authentication](set-up-custom-auth.md)
+* [Make conversations private](resource-auth.md)
+* [Semantic search in deployments](semantic-search.md)
+* [LangGraph stores](../langgraph/stores.md)
 
 ***
 

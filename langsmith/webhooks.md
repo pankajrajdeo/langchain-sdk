@@ -4,7 +4,7 @@ Configure webhook notifications to receive POST requests when automation rules m
 
 When you add a webhook URL on an automation action, LangSmith makes a POST request to your webhook endpoint any time the rules you defined match any new runs.
 
-> **Image:** [Webhook](https://docs.langchain.com/langsmith/webhooks)
+> **Image:** [Webhook](webhooks.md)
 
 ## Webhook payload
 
@@ -118,7 +118,7 @@ If you'd like to send any specific headers with your webhook, this can be config
 > [!NOTE]
 > Headers are stored in encrypted format.
 
-> **Image:** [Webhook headers](https://docs.langchain.com/langsmith/webhooks)
+> **Image:** [Webhook headers](webhooks.md)
 
 ### Webhook delivery
 
@@ -157,7 +157,7 @@ Now the webhook rule will skip any run that does not yet have an `answer_usefuln
 > has(feedback_key, "answer_usefulness") and feedback_score < 0.5
 > ```
 >
-> For the full filter syntax, refer to [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application).
+> For the full filter syntax, refer to [Filter traces](filter-traces-in-application.md).
 
 > [!NOTE]
 > Within a single automation rule, actions execute in a fixed order: annotation queue → dataset → webhook → evaluation. This means that if your webhook and evaluator are configured on the **same** rule, the webhook will always fire before the evaluation completes on that rule's run. To ensure the webhook receives evaluation scores, keep the webhook and evaluator as **separate rules** and use a feedback filter on the webhook rule as described in the example.
@@ -198,7 +198,7 @@ Name the secret `ls-webhook` and set an environment variable with the name `LS_W
 
 You can also set up a LangSmith secret—luckily there is already an integration template for this!
 
-> **Image:** [LangSmith Modal Template](https://docs.langchain.com/langsmith/webhooks)
+> **Image:** [LangSmith Modal Template](webhooks.md)
 
 ### Service
 

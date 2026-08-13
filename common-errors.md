@@ -6,19 +6,19 @@ Errors referenced below will have an `lc_error_code` property corresponding to o
 
 | Error code                                                                                          |
 | --------------------------------------------------------------------------------------------------- |
-| [GRAPH\_RECURSION\_LIMIT](https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT)                       |
-| [INVALID\_CHAT\_HISTORY](https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CHAT_HISTORY)                         |
-| [INVALID\_CONCURRENT\_GRAPH\_UPDATE](https://docs.langchain.com/oss/python/langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE)  |
-| [INVALID\_GRAPH\_NODE\_RETURN\_VALUE](https://docs.langchain.com/oss/python/langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE) |
-| [INVALID\_PROMPT\_INPUT](https://docs.langchain.com/oss/python/langchain/errors/INVALID_PROMPT_INPUT)                         |
-| [INVALID\_TOOL\_RESULTS](https://docs.langchain.com/oss/python/langchain/errors/INVALID_TOOL_RESULTS)                         |
-| [MESSAGE\_COERCION\_FAILURE](https://docs.langchain.com/oss/python/langchain/errors/MESSAGE_COERCION_FAILURE)                 |
-| [MISSING\_CHECKPOINTER](https://docs.langchain.com/oss/python/langgraph/errors/MISSING_CHECKPOINTER)                          |
-| [MODEL\_AUTHENTICATION](https://docs.langchain.com/oss/python/langchain/errors/MODEL_AUTHENTICATION)                          |
-| [MODEL\_NOT\_FOUND](https://docs.langchain.com/oss/python/langchain/errors/MODEL_NOT_FOUND)                                   |
-| [MODEL\_RATE\_LIMIT](https://docs.langchain.com/oss/python/langchain/errors/MODEL_RATE_LIMIT)                                 |
-| [MULTIPLE\_SUBGRAPHS](https://docs.langchain.com/oss/python/langgraph/errors/MULTIPLE_SUBGRAPHS)                              |
-| [OUTPUT\_PARSING\_FAILURE](https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE)                     |
+| [GRAPH\_RECURSION\_LIMIT](langgraph/errors/GRAPH_RECURSION_LIMIT.md)                       |
+| [INVALID\_CHAT\_HISTORY](langgraph/errors/INVALID_CHAT_HISTORY.md)                         |
+| [INVALID\_CONCURRENT\_GRAPH\_UPDATE](langgraph/errors/INVALID_CONCURRENT_GRAPH_UPDATE.md)  |
+| [INVALID\_GRAPH\_NODE\_RETURN\_VALUE](langgraph/errors/INVALID_GRAPH_NODE_RETURN_VALUE.md) |
+| [INVALID\_PROMPT\_INPUT](langchain/errors/INVALID_PROMPT_INPUT.md)                         |
+| [INVALID\_TOOL\_RESULTS](langchain/errors/INVALID_TOOL_RESULTS.md)                         |
+| [MESSAGE\_COERCION\_FAILURE](langchain/errors/MESSAGE_COERCION_FAILURE.md)                 |
+| [MISSING\_CHECKPOINTER](langgraph/errors/MISSING_CHECKPOINTER.md)                          |
+| [MODEL\_AUTHENTICATION](langchain/errors/MODEL_AUTHENTICATION.md)                          |
+| [MODEL\_NOT\_FOUND](langchain/errors/MODEL_NOT_FOUND.md)                                   |
+| [MODEL\_RATE\_LIMIT](langchain/errors/MODEL_RATE_LIMIT.md)                                 |
+| [MULTIPLE\_SUBGRAPHS](langgraph/errors/MULTIPLE_SUBGRAPHS.md)                              |
+| [OUTPUT\_PARSING\_FAILURE](langchain/errors/OUTPUT_PARSING_FAILURE.md)                     |
 
 ***
 

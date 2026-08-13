@@ -24,7 +24,7 @@ If a hard shutdown occurs due to a server crash or an infrastructure failure, an
 
 ## Postgres resilience
 
-For deployment modalities where LangSmith manages the Postgres database, there are periodic backups and continuously replicated standby replicas for automatic failover. This Postgres configuration is available in the [Cloud deployment option](https://docs.langchain.com/langsmith/cloud) for [Dedicated deployment type](https://docs.langchain.com/langsmith/cloud-platform-features#deployment-types) only.
+For deployment modalities where LangSmith manages the Postgres database, there are periodic backups and continuously replicated standby replicas for automatic failover. This Postgres configuration is available in the [Cloud deployment option](cloud.md) for [Dedicated deployment type](cloud-platform-features.md#deployment-types) only.
 
 All communication with Postgres implements retries for retry-able errors. If Postgres is momentarily unavailable, such as during a database restart, most/all traffic should continue to succeed. Prolonged failure of Postgres will render the Agent Server unavailable.
 

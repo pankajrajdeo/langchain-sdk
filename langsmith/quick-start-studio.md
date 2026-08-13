@@ -1,17 +1,17 @@
 # Get started with Studio
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/quick-start-studio)
-[Studio](https://docs.langchain.com/langsmith/studio) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
+[Studio](studio.md) in the [LangSmith Deployment UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) supports connecting to two types of graphs:
 
-* Graphs deployed on [cloud or self-hosted](https://docs.langchain.com/langsmith/quick-start-studio#deployed-graphs).
-* Graphs running locally with [Agent Server](https://docs.langchain.com/langsmith/quick-start-studio#local-development-server).
+* Graphs deployed on [cloud or self-hosted](#deployed-graphs).
+* Graphs running locally with [Agent Server](#local-development-server).
 
 ## Deployed graphs
 
 Studio is accessed in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-quick-start-studio) from the **Deployments** navigation.
 
-For applications that are [deployed](https://docs.langchain.com/langsmith/deployment-quickstart), you can access Studio as part of that deployment. To do so, navigate to the deployment in the UI and select **Studio**.
+For applications that are [deployed](deployment-quickstart.md), you can access Studio as part of that deployment. To do so, navigate to the deployment in the UI and select **Studio**.
 
-This will load Studio connected to your live deployment, allowing you to create, read, and update the [threads](https://docs.langchain.com/oss/python/langgraph/checkpointers#threads), [assistants](https://docs.langchain.com/langsmith/assistants), and [memory](https://docs.langchain.com/oss/python/concepts/memory) in that deployment.
+This will load Studio connected to your live deployment, allowing you to create, read, and update the [threads](../langgraph/checkpointers.md#threads), [assistants](assistants.md), and [memory](../concepts/memory.md) in that deployment.
 
 ## Local development server
 
@@ -19,12 +19,12 @@ This will load Studio connected to your live deployment, allowing you to create,
 
 To test your application locally using Studio:
 
-* Follow the [local application quickstart](https://docs.langchain.com/langsmith/local-dev-testing) first.
-* If you don't want data [traced](https://docs.langchain.com/langsmith/observability-concepts#traces) to LangSmith, set `LANGSMITH_TRACING=false` in your application's `.env` file. With tracing disabled, no data leaves your local server.
+* Follow the [local application quickstart](local-dev-testing.md) first.
+* If you don't want data [traced](observability-concepts.md#traces) to LangSmith, set `LANGSMITH_TRACING=false` in your application's `.env` file. With tracing disabled, no data leaves your local server.
 
 ### Setup
 
-1. Install the [LangGraph CLI](https://docs.langchain.com/langsmith/cli):
+1. Install the [LangGraph CLI](cli.md):
 
 ```bash
    pip install -U "langgraph-cli[inmem]"
@@ -42,9 +42,9 @@ To test your application locally using Studio:
 
 > [!WARNING]
 >    **Browser Compatibility**
->    Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](https://docs.langchain.com/langsmith/troubleshooting-studio#safari-connection-issues) for steps.
+>    Safari blocks `localhost` connections to Studio. To work around this, run the command with `--tunnel` to access Studio via a secure tunnel. You'll need to manually add the tunnel URL to allowed origins by clicking **Connect to a local server** in the Studio UI. See the [troubleshooting guide](troubleshooting-studio.md#safari-connection-issues) for steps.
 
-   This will start the Agent Server locally, running in-memory. The server will run in watch mode, listening for and automatically restarting on code changes. Read this [reference](https://docs.langchain.com/langsmith/cli#dev) to learn about all the options for starting the API server.
+   This will start the Agent Server locally, running in-memory. The server will run in watch mode, listening for and automatically restarting on code changes. Read this [reference](cli.md#dev) to learn about all the options for starting the API server.
 
    You will see the following logs:
 
@@ -110,18 +110,18 @@ Add this configuration to `launch.json`:
 5. Click "OK" and start debugging
 
 > [!TIP]
-> For issues getting started, refer to the [troubleshooting guide](https://docs.langchain.com/langsmith/troubleshooting-studio).
+> For issues getting started, refer to the [troubleshooting guide](troubleshooting-studio.md).
 
 ## Next steps
 
 For more information on how to run Studio, refer to the following guides:
 
-* [Run application](https://docs.langchain.com/langsmith/use-studio#run-application)
-* [Manage assistants](https://docs.langchain.com/langsmith/use-studio#manage-assistants)
-* [Manage threads](https://docs.langchain.com/langsmith/use-studio#manage-threads)
-* [Iterate on prompts](https://docs.langchain.com/langsmith/observability-studio)
-* [Debug LangSmith traces](https://docs.langchain.com/langsmith/observability-studio#debug-langsmith-traces)
-* [Add node to dataset](https://docs.langchain.com/langsmith/observability-studio#add-node-to-dataset)
+* [Run application](use-studio.md#run-application)
+* [Manage assistants](use-studio.md#manage-assistants)
+* [Manage threads](use-studio.md#manage-threads)
+* [Iterate on prompts](observability-studio.md)
+* [Debug LangSmith traces](observability-studio.md#debug-langsmith-traces)
+* [Add node to dataset](observability-studio.md#add-node-to-dataset)
 
 ***
 

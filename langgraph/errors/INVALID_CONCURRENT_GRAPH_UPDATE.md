@@ -3,7 +3,7 @@
 A LangGraph [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph) received concurrent updates to its state from multiple nodes to a state property that doesn't
 support it.
 
-One way this can occur is if you are using a [fanout](https://docs.langchain.com/oss/python/langgraph/use-graph-api#map-reduce-and-the-send-api)
+One way this can occur is if you are using a [fanout](../use-graph-api.md#map-reduce-and-the-send-api)
 or other parallel execution in your graph and you have defined a graph like this:
 
 ```python

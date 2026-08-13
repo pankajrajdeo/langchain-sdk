@@ -159,7 +159,7 @@ await tool.acancel(findall_id) # async
 
 ## Chaining
 
-Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents):
+Bind the tool to any tool-calling chat model and drive an agent with [`create_agent`](../../langchain/agents.md):
 
 ```python
 from langchain.agents import create_agent

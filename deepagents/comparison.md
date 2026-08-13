@@ -2,21 +2,21 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/comparison)
 Compare LangChain Deep Agents with the Claude Agent SDK to choose the right tool for your use case.
 
-This page explains how [LangChain Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) compares to the [Claude Agent SDK](https://platform.anthropic.com/docs/en/agent-sdk/overview). Both are harnesses for building custom agents, but they make different tradeoffs around execution environments, deployment, and vendor coupling.
+This page explains how [LangChain Deep Agents](overview.md) compares to the [Claude Agent SDK](https://platform.anthropic.com/docs/en/agent-sdk/overview). Both are harnesses for building custom agents, but they make different tradeoffs around execution environments, deployment, and vendor coupling.
 
 > [!NOTE]
-> Deep Agents is used in production by [OpenSWE](https://github.com/langchain-ai/open-swe) and [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet/index).
+> Deep Agents is used in production by [OpenSWE](https://github.com/langchain-ai/open-swe) and [LangSmith Fleet](../langsmith/fleet/index.md).
 
 ## At a glance
 
 |                               | **Deep Agents**                                                                                                                                                                                          | **Claude Agent SDK**                                                                                                                                                                                                        |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Where the agent runs**      | Inside a sandbox, or outside a sandbox executing commands remotely                                                                                                                                       | Inside a sandbox                                                                                                                                                                                                            |
-| **Execution backend**         | Pluggable: [local, virtual filesystem, remote sandbox, or custom](https://docs.langchain.com/oss/python/deepagents/backends)                                                                                                       | Local filesystem of the sandbox it runs in                                                                                                                                                                                  |
+| **Execution backend**         | Pluggable: [local, virtual filesystem, remote sandbox, or custom](backends.md)                                                                                                       | Local filesystem of the sandbox it runs in                                                                                                                                                                                  |
 | **Model provider**            | Any (Anthropic, OpenAI, Google, 100+ others)                                                                                                                                                             | Claude (Anthropic, Bedrock, Vertex, Azure)                                                                                                                                                                                  |
-| **Per-provider/model tuning** | [Harness profiles](https://docs.langchain.com/oss/python/deepagents/profiles) (beta): declarative bundles of system prompt, tool, middleware, and subagent tweaks, registered per provider or specific model                       | Configure in code at each model call site                                                                                                                                                                                   |
-| **Deployment**                | [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview) in LangSmith, or self-host a [standalone image](https://docs.langchain.com/langsmith/deploy-standalone-server) via [`langgraph build`](https://docs.langchain.com/langsmith/cli#build) | [Self-host](https://code.claude.com/docs/en/agent-sdk/hosting). You build the server, auth, and streaming layer. [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) is a separate product |
-| **Multi-tenancy**             | [Built-in](https://docs.langchain.com/oss/python/deepagents/going-to-production#multi-tenancy): scoped threads, per-user sandboxes, RBAC                                                                                           | Build it yourself                                                                                                                                                                                                           |
+| **Per-provider/model tuning** | [Harness profiles](profiles.md) (beta): declarative bundles of system prompt, tool, middleware, and subagent tweaks, registered per provider or specific model                       | Configure in code at each model call site                                                                                                                                                                                   |
+| **Deployment**                | [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) in LangSmith, or self-host a [standalone image](../langsmith/deploy-standalone-server.md) via [`langgraph build`](../langsmith/cli.md#build) | [Self-host](https://code.claude.com/docs/en/agent-sdk/hosting). You build the server, auth, and streaming layer. [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) is a separate product |
+| **Multi-tenancy**             | [Built-in](going-to-production.md#multi-tenancy): scoped threads, per-user sandboxes, RBAC                                                                                           | Build it yourself                                                                                                                                                                                                           |
 | **License**                   | MIT                                                                                                                                                                                                      | MIT (Claude Code itself is proprietary)                                                                                                                                                                                     |
 
 ## Main differences
@@ -27,7 +27,7 @@ There are [two patterns for connecting agents to sandboxes](https://www.langchai
 
 The Claude Agent SDK only supports the first. Your agent runs inside a sandbox and executes tools against the sandbox's local filesystem. Anthropic's hosted model [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) use a decoupled model, which reflects where production agent architectures are heading.
 
-Deep Agents supports both, and lets you pick a [backend](https://docs.langchain.com/oss/python/deepagents/backends#quickstart) to wire them together. In practice, this means you can:
+Deep Agents supports both, and lets you pick a [backend](backends.md#quickstart) to wire them together. In practice, this means you can:
 
 * Run the agent inside a sandbox (same model as Claude Agent SDK).
 * Run the agent in a long-lived container and [use a remote sandbox as a tool](https://www.langchain.com/blog/the-two-patterns-by-which-agents-connect-sandboxes), executing commands over the network.
@@ -39,13 +39,13 @@ When you put your application into production, you generally expose it to many e
 
 In Claude Agent SDK, the SDK ties the agent to its sandbox. To give each user an isolated execution environment, you must build an API wrapper that spins up a sandbox per user, tracks which sandbox belongs to whom, and tears it down afterwards.
 
-Deep Agents handles this directly: configure a sandbox [per user or per assistant](https://docs.langchain.com/oss/python/deepagents/going-to-production#lifecycle) in the harness, with scoped threads, run history, and [RBAC](https://docs.langchain.com/oss/python/deepagents/going-to-production#team-access-control-rbac) included. If you use [LangSmith Sandbox](https://docs.langchain.com/langsmith/sandbox-auth-proxy), you also get an auth proxy out of the box so end users can call third-party APIs from the sandbox without you provisioning credentials per user.
+Deep Agents handles this directly: configure a sandbox [per user or per assistant](going-to-production.md#lifecycle) in the harness, with scoped threads, run history, and [RBAC](going-to-production.md#team-access-control-rbac) included. If you use [LangSmith Sandbox](../langsmith/sandbox-auth-proxy.md), you also get an auth proxy out of the box so end users can call third-party APIs from the sandbox without you provisioning credentials per user.
 
 ### A production agent server
 
 To expose a [self-hosted Claude Agent SDK](https://code.claude.com/docs/en/agent-sdk/hosting) app to end users, you write your own HTTP/WebSocket or SSE server that invokes the agent, streams tokens back, and manages conversation threads. That server is yours to build, operate, and secure.
 
-Deep Agents deployments include an [agent server](https://docs.langchain.com/langsmith/agent-server) out of the box: streaming endpoints, thread management, run history, webhooks, and [authentication](https://docs.langchain.com/langsmith/auth).
+Deep Agents deployments include an [agent server](../langsmith/agent-server.md) out of the box: streaming endpoints, thread management, run history, webhooks, and [authentication](../langsmith/auth.md).
 
 ### Managed cloud or self-hosted
 
@@ -53,11 +53,11 @@ Claude Agent SDK deployments are [self-hosted](https://code.claude.com/docs/en/a
 
 Deep Agents runs in two modes without code changes:
 
-* **Managed:** create, run, and operate deep agents with [Managed Deep Agents](https://docs.langchain.com/langsmith/python/managed-deep-agents-overview) in LangSmith.
-* **Self-hosted:** run [`langgraph build`](https://docs.langchain.com/langsmith/cli#build) to produce a [standalone Docker image](https://docs.langchain.com/langsmith/deploy-standalone-server) you can deploy anywhere.
+* **Managed:** create, run, and operate deep agents with [Managed Deep Agents](../langsmith/python/managed-deep-agents-overview.md) in LangSmith.
+* **Self-hosted:** run [`langgraph build`](../langsmith/cli.md#build) to produce a [standalone Docker image](../langsmith/deploy-standalone-server.md) you can deploy anywhere.
 
 > [!TIP]
-> For a managed agent platform that works across any model provider, use [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet/index). [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) is limited to the Anthropic ecosystem.
+> For a managed agent platform that works across any model provider, use [LangSmith Fleet](../langsmith/fleet/index.md). [Claude managed agents](https://platform.claude.com/docs/en/managed-agents/overview) is limited to the Anthropic ecosystem.
 
 ### LLM
 

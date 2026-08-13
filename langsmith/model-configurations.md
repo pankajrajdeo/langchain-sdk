@@ -2,17 +2,17 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/model-configurations)
 Manage model configurations and control their availability across LangSmith features.
 
-Model configurations define the model and parameters that LangSmith features use when calling an AI provider. A single shared library of configurations spans your entire [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces), so any configuration you create is available across the following features without duplication:
+Model configurations define the model and parameters that LangSmith features use when calling an AI provider. A single shared library of configurations spans your entire [workspace](administration-overview.md#workspaces), so any configuration you create is available across the following features without duplication:
 
-* [**Playground**](https://docs.langchain.com/langsmith/prompt-engineering-concepts)
-* [**Evaluators**](https://docs.langchain.com/langsmith/evaluation)
-* [**Fleet**](https://docs.langchain.com/langsmith/fleet/index)
-* [**Chat**](https://docs.langchain.com/langsmith/chat)
-* [**Insights**](https://docs.langchain.com/langsmith/insights)
+* [**Playground**](prompt-engineering-concepts.md)
+* [**Evaluators**](evaluation.md)
+* [**Fleet**](fleet/index.md)
+* [**Chat**](chat.md)
+* [**Insights**](insights.md)
 
-[Workspace admins](https://docs.langchain.com/langsmith/rbac#workspace-admin) can create, edit, and delete configurations and control which providers and models are available per feature. Non-admin members can view configurations but cannot modify them.
+[Workspace admins](rbac.md#workspace-admin) can create, edit, and delete configurations and control which providers and models are available per feature. Non-admin members can view configurations but cannot modify them.
 
-Configurations can also carry [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials), so LangSmith mints short-lived bearer tokens against your IdP at request time instead of using a static API key.
+Configurations can also carry [OAuth client credentials](#oauth-client-credentials), so LangSmith mints short-lived bearer tokens against your IdP at request time instead of using a static API key.
 
 ## Feature Access
 
@@ -43,18 +43,18 @@ To configure feature access in the [UI](https://smith.langchain.com?utm_source=d
 5. Use the **Default Model** dropdown to set the model preselected when users open the feature.
 
 > [!NOTE]
-> Providers disabled for the whole organization in **Settings** > **Model providers** appear locked in this table and can't be re-enabled per workspace. See [Organization-wide provider control](https://docs.langchain.com/langsmith/model-configurations#organization-wide-provider-control).
+> Providers disabled for the whole organization in **Settings** > **Model providers** appear locked in this table and can't be re-enabled per workspace. See [Organization-wide provider control](#organization-wide-provider-control).
 
 ## Organization-wide provider control
 
 Provider availability is controlled at two levels:
 
-* **Organization** (organization admins): turn a provider on or off for the **entire organization**—every [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) and every feature. Managed in **Settings** > **Model providers**.
-* **Workspace** (workspace admins): the [Feature Access](https://docs.langchain.com/langsmith/model-configurations#feature-access) table above, which controls provider and model availability **per feature** within a single workspace.
+* **Organization** (organization admins): turn a provider on or off for the **entire organization**—every [workspace](administration-overview.md#workspaces) and every feature. Managed in **Settings** > **Model providers**.
+* **Workspace** (workspace admins): the [Feature Access](#feature-access) table above, which controls provider and model availability **per feature** within a single workspace.
 
 The organization level takes precedence. A provider disabled for the organization is unavailable in every workspace and every feature, and shows as **locked** in each workspace's Feature Access table—workspace admins can see it but can't re-enable it. Workspaces choose only among the providers the organization allows.
 
-Managing organization-wide providers requires the [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) role (the `organization:manage` permission), and is available on LangSmith [Cloud](https://docs.langchain.com/langsmith/cloud) and [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) for organizations (not personal accounts).
+Managing organization-wide providers requires the [Organization Admin](rbac.md#organization-admin) role (the `organization:manage` permission), and is available on LangSmith [Cloud](cloud.md) and [Self-hosted](self-hosted.md) for organizations (not personal accounts).
 
 ### Disable a provider for the organization
 
@@ -63,7 +63,7 @@ Managing organization-wide providers requires the [Organization Admin](https://d
 
 ## Configurations
 
-The **Configurations** table is a shared library of named model configurations for your workspace. Configurations you create in LangSmith (including from the [Playground](https://docs.langchain.com/langsmith/managing-model-configurations)) appear here and you can reuse them across all features.
+The **Configurations** table is a shared library of named model configurations for your workspace. Configurations you create in LangSmith (including from the [Playground](managing-model-configurations.md)) appear here and you can reuse them across all features.
 
 ### Create a configuration
 
@@ -95,15 +95,15 @@ The **Configurations** table is a shared library of named model configurations f
 ## OAuth client credentials
 
 > [!NOTE]
-> OAuth client credentials are available on LangSmith [Cloud](https://docs.langchain.com/langsmith/cloud) and [Self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments running version `0.16.0-rc.6` or later.
+> OAuth client credentials are available on LangSmith [Cloud](cloud.md) and [Self-hosted](self-hosted.md) deployments running version `0.16.0-rc.6` or later.
 
-When a model configuration sits behind an OAuth2 gateway, you can store the OAuth `client_credentials` directly on the configuration instead of distributing a static API key. LangSmith exchanges those credentials for a short-lived bearer token at request time, attaches it as `Authorization: Bearer <token>` on the outbound LLM call, and refreshes the token before it expires. This is a per-configuration self-service alternative to routing the workspace through the [LLM auth proxy](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted); the two are mutually exclusive per configuration.
+When a model configuration sits behind an OAuth2 gateway, you can store the OAuth `client_credentials` directly on the configuration instead of distributing a static API key. LangSmith exchanges those credentials for a short-lived bearer token at request time, attaches it as `Authorization: Bearer <token>` on the outbound LLM call, and refreshes the token before it expires. This is a per-configuration self-service alternative to routing the workspace through the [LLM auth proxy](llm-auth-proxy-self-hosted.md); the two are mutually exclusive per configuration.
 
-OAuth client credentials are available on every [plan](https://docs.langchain.com/langsmith/pricing-plans) that supports custom model configurations. The **Use Custom OAuth** toggle applies to bearer-token providers (OpenAI, Anthropic, OpenAI-compatible endpoints, and similar) and is not supported for Bedrock, Google Vertex AI, or Google GenAI, which authenticate with native cloud identity. The toggle is also hidden for the **LangServe (Deprecated)** preset.
+OAuth client credentials are available on every [plan](pricing-plans.md) that supports custom model configurations. The **Use Custom OAuth** toggle applies to bearer-token providers (OpenAI, Anthropic, OpenAI-compatible endpoints, and similar) and is not supported for Bedrock, Google Vertex AI, or Google GenAI, which authenticate with native cloud identity. The toggle is also hidden for the **LangServe (Deprecated)** preset.
 
 ### Configure OAuth on a model configuration
 
-Configuring OAuth requires the [Workspace Admin](https://docs.langchain.com/langsmith/rbac#workspace-admin) role, or a [custom role](https://docs.langchain.com/langsmith/rbac#custom-roles) with the `workspaces:manage-model-configs` permission. Members without it see the OAuth fields disabled, with a masked secret hint. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-model-configurations):
+Configuring OAuth requires the [Workspace Admin](rbac.md#workspace-admin) role, or a [custom role](rbac.md#custom-roles) with the `workspaces:manage-model-configs` permission. Members without it see the OAuth fields disabled, with a masked secret hint. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-model-configurations):
 
 1. Navigate to **Settings** > **Model configurations** and either click **+ Create** or open an existing row through the overflow menu  > **Edit**.
 2. Select a compatible provider and configure model parameters as usual.
@@ -117,9 +117,9 @@ Configuring OAuth requires the [Workspace Admin](https://docs.langchain.com/lang
    * **Extra headers**: additional headers sent with the token request. Reserved headers such as `Authorization` are rejected at save time.
 5. Click **Save**.
 
-> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](https://docs.langchain.com/langsmith/model-configurations)
+> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](model-configurations.md)
 
-> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](https://docs.langchain.com/langsmith/model-configurations)
+> **Image:** [Model configuration Create modal in LangSmith Settings with Use Custom OAuth toggled on, showing Token URL, Client ID, masked Client Secret, and Token Endpoint Auth Method set to HTTP Basic.](model-configurations.md)
 
 ### Edit semantics
 
@@ -157,7 +157,7 @@ sequenceDiagram
     LLM-->>Caller: Response
 ```
 
-Routing between OAuth and the [LLM auth proxy](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted) is per-configuration, not per-organization. Each request resolves to OAuth or the LLM auth proxy based on the configuration's OAuth state. A single multi-model job (for example, [Insights](https://docs.langchain.com/langsmith/insights) with separate Thinking and Summarization models) can mix the two flows because each model is resolved independently.
+Routing between OAuth and the [LLM auth proxy](llm-auth-proxy-self-hosted.md) is per-configuration, not per-organization. Each request resolves to OAuth or the LLM auth proxy based on the configuration's OAuth state. A single multi-model job (for example, [Insights](insights.md) with separate Thinking and Summarization models) can mix the two flows because each model is resolved independently.
 
 ### Fallback behavior
 
@@ -169,17 +169,17 @@ Token rotation propagates only after the cached bearer expires. Plan rotations a
 
 OAuth-enabled configurations are honored wherever model configurations are consumed:
 
-* [**Playground**](https://docs.langchain.com/langsmith/prompt-engineering-concepts): chat runs and experiment runs.
-* [**Evaluators**](https://docs.langchain.com/langsmith/evaluation): LLM-as-judge configuration, Reuse, Preview Test, and Evaluator Details Test all skip the workspace-secrets prompt when every prompt resolves to an OAuth-enabled configuration.
-* [**Insights**](https://docs.langchain.com/langsmith/insights): Thinking and Summarization configurations are resolved independently.
-* [**Chat**](https://docs.langchain.com/langsmith/chat)
-* [**Fleet**](https://docs.langchain.com/langsmith/fleet/index)
+* [**Playground**](prompt-engineering-concepts.md): chat runs and experiment runs.
+* [**Evaluators**](evaluation.md): LLM-as-judge configuration, Reuse, Preview Test, and Evaluator Details Test all skip the workspace-secrets prompt when every prompt resolves to an OAuth-enabled configuration.
+* [**Insights**](insights.md): Thinking and Summarization configurations are resolved independently.
+* [**Chat**](chat.md)
+* [**Fleet**](fleet/index.md)
 
 When OAuth is enabled on a configuration, LangSmith does not prompt for a workspace secret for that configuration, because the broker supplies the credential at request time.
 
 ### Security and audit
 
-* **Encryption at rest**: client secrets are Fernet-encrypted with the same derivation used for [workspace secrets](https://docs.langchain.com/langsmith/administration-overview#workspaces).
+* **Encryption at rest**: client secrets are Fernet-encrypted with the same derivation used for [workspace secrets](administration-overview.md#workspaces).
 * **Bearer caching**: access tokens are cached until expiry and are never written to logs.
 
 ### FAQ

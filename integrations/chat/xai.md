@@ -3,7 +3,7 @@
 > Integrate with the ChatXAI chat model using LangChain Python.
 
 > [!WARNING]
-> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](https://docs.langchain.com/oss/python/integrations/providers/groq).
+> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](../providers/groq.md).
 
 [xAI](https://console.x.ai/) offers an API to interact with Grok models.
 
@@ -22,7 +22,7 @@
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
 
@@ -42,7 +42,7 @@ if "XAI_API_KEY" not in os.environ:
     os.environ["XAI_API_KEY"] = getpass.getpass("Enter your xAI API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -160,7 +160,7 @@ the current set of built-in tools, including Web Search and X Search.
 
 ## Reasoning effort
 
-[Certain xAI models](https://docs.x.ai/docs/models#model-pricing) support the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which controls the amount of reasoning the model does. It can be set at model construction or per invocation:
+[Certain xAI models](https://docs.x.ai/docs/models#model-pricing) support the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, which controls the amount of reasoning the model does. It can be set at model construction or per invocation:
 
 ```python
 from langchain_xai import ChatXAI
@@ -175,7 +175,7 @@ response = model.invoke(
 > [!NOTE]
 > `reasoning_effort` as a standard parameter requires `langchain-xai>=1.3.0`. `ChatXAI` sends it nested under `extra_body.reasoning_effort`.
 
-Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the effort levels it supports:
+Check a model's [profile](../../langchain/models.md#model-profiles) for the effort levels it supports:
 
 ```python
 model.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high']

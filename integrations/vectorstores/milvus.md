@@ -20,7 +20,7 @@ No credentials are needed to use the `Milvus` vector store.
 
 ## Initialization
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/milvus).
+> **Interactive content:** [View this section in the original documentation](milvus.md).
 
 ```python
 # | output: false
@@ -350,9 +350,9 @@ vectorstore.similarity_search(
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ### Per-User retrieval
 

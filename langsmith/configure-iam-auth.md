@@ -118,7 +118,7 @@ For a service account, the Cloud SQL database username is its email address with
 
 ## Configure the standalone Helm chart
 
-For a [standalone Agent Server deployment](https://docs.langchain.com/langsmith/deploy-standalone-server) on Kubernetes, set the provider selectors on every Agent Server workload. If the separate queue deployment is enabled, configure the API and queue deployments with the same identity and environment variables.
+For a [standalone Agent Server deployment](deploy-standalone-server.md) on Kubernetes, set the provider selectors on every Agent Server workload. If the separate queue deployment is enabled, configure the API and queue deployments with the same identity and environment variables.
 
 The following example uses AWS for both data stores. Set each provider value to `azure` or `gcp` when using another cloud provider:
 
@@ -154,10 +154,10 @@ Configure `apiServer.serviceAccount` and `queue.serviceAccount` with the cloud p
 
 ## See also
 
-* [Self-host standalone servers](https://docs.langchain.com/langsmith/deploy-standalone-server)
-* [Self-hosted Agent Server environment variables](https://docs.langchain.com/langsmith/env-var-self-hosted)
-* [Self-hosted platform features](https://docs.langchain.com/langsmith/self-hosted-platform-features)
-* [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale)
+* [Self-host standalone servers](deploy-standalone-server.md)
+* [Self-hosted Agent Server environment variables](env-var-self-hosted.md)
+* [Self-hosted platform features](self-hosted-platform-features.md)
+* [Configure Agent Server for scale](agent-server-scale.md)
 
 ***
 

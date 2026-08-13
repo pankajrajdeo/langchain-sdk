@@ -2,9 +2,9 @@
 
 > Integrate with the ChatAmazonNova chat model using LangChain Python.
 
-This guide provides a quick overview for getting started with Amazon Nova [chat models](https://docs.langchain.com/oss/python/langchain/models). Amazon Nova models are OpenAI-compatible and accessed via the OpenAI SDK pointed at Nova's endpoint, providing seamless integration with LangChain's standard interfaces. The Amazon Nova API is free tier with rate limits.
+This guide provides a quick overview for getting started with Amazon Nova [chat models](../../langchain/models.md). Amazon Nova models are OpenAI-compatible and accessed via the OpenAI SDK pointed at Nova's endpoint, providing seamless integration with LangChain's standard interfaces. The Amazon Nova API is free tier with rate limits.
 
-For production deployments requiring higher throughput and enterprise features, consider using Amazon Nova models via [Amazon Bedrock](https://docs.langchain.com/oss/python/integrations/chat/bedrock).
+For production deployments requiring higher throughput and enterprise features, consider using Amazon Nova models via [Amazon Bedrock](bedrock.md).
 
 You can find information about Amazon Nova's models, their features, and API details in the [Amazon Nova documentation](https://nova.amazon.com/dev/documentation).
 
@@ -25,7 +25,7 @@ You can find information about Amazon Nova's models, their features, and API det
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input |        Video input       | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input |        Video input       | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :----------------------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                      Model-dependent                     |      ❌      | Model-dependent (Nova 2) |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -58,7 +58,7 @@ if "NOVA_BASE_URL" not in os.environ:
     os.environ["NOVA_BASE_URL"] = getpass.getpass("Enter your Nova base URL: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -119,7 +119,7 @@ Amazon Nova messages can contain either a single string or a list of content blo
 ai_msg.content_blocks
 ```
 
-Using `content_blocks` will render the content in a standard format that is consistent across other model providers. Read more about [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
+Using `content_blocks` will render the content in a standard format that is consistent across other model providers. Read more about [content blocks](../../langchain/messages.md#standard-content-blocks).
 
 ## Streaming
 
@@ -448,7 +448,7 @@ print(result)
 
 ## Model profile
 
-Amazon Nova provides different models with varying capabilities. It includes support for LangChain [model profiles](https://docs.langchain.com/oss/python/langchain/models#model-profiles).
+Amazon Nova provides different models with varying capabilities. It includes support for LangChain [model profiles](../../langchain/models.md#model-profiles).
 
 > [!NOTE]
 > **Model capabilities vary by model**

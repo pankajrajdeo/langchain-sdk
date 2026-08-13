@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/openwiki/cli-reference)
 OpenWiki command-line usage, flags, and connector subcommands
 
-OpenWiki ships as a single `openwiki` binary for interactive chat and one-shot documentation runs. For installation and first use, see [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart).
+OpenWiki ships as a single `openwiki` binary for interactive chat and one-shot documentation runs. For installation and first use, see [Quickstart](quickstart.md).
 
 ## Core commands
 
@@ -58,7 +58,7 @@ openwiki visualize openwiki --port 4400 --no-open
 openwiki visualize ~/.openwiki/wiki
 ```
 
-For details, see [Visualize your wiki](https://docs.langchain.com/oss/openwiki/visualize).
+For details, see [Visualize your wiki](visualize.md).
 
 ## Auth and connectors
 
@@ -87,7 +87,7 @@ openwiki ngrok start [url] [--port <port>]
 
 ## Cron (macOS)
 
-Manage optional connector schedules for [personal mode](https://docs.langchain.com/oss/openwiki/personal-mode) sources. On macOS, OpenWiki can install schedules as user LaunchAgents that periodically refresh a source (for example Gmail or web search). Use these commands to list, pause, resume, or delete them:
+Manage optional connector schedules for [personal mode](personal-mode.md) sources. On macOS, OpenWiki can install schedules as user LaunchAgents that periodically refresh a source (for example Gmail or web search). Use these commands to list, pause, resume, or delete them:
 
 ```bash
 openwiki cron list
@@ -110,9 +110,9 @@ In interactive chat mode, you can use the following commands:
 
 ## See also
 
-* [Personal mode](https://docs.langchain.com/oss/openwiki/personal-mode)
-* [Model providers](https://docs.langchain.com/oss/openwiki/providers)
-* [Automate updates](https://docs.langchain.com/oss/openwiki/automate-updates)
+* [Personal mode](personal-mode.md)
+* [Model providers](providers.md)
+* [Automate updates](automate-updates.md)
 
 ***
 

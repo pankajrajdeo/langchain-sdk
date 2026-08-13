@@ -22,16 +22,17 @@ deep subdirectories appear automatically on the next run.
 
 The updater converts Mintlify MDX into GitHub Flavored Markdown. Tabs, code
 groups, callouts, cards, accordions, file trees, prompts, interactive embeds,
-JSX attributes, and relative links are normalized so their contents remain
-readable on GitHub. Links and in-text fragment citations point to the official
-documentation, where custom upstream anchors and interactive widgets continue
-to work.
+JSX attributes, and links are normalized so their contents remain readable on
+GitHub. Citations between successfully mirrored documents use repository-local
+relative `.md` paths, including section fragments. Links to documentation that
+is outside the configured mirror remain on the official website. Explicit
+"original documentation" and interactive-widget links also remain official.
 
 The generated `.mirror-manifest.json` records each source and resolved URL,
 normalized and upstream byte sizes and SHA-256 checksums, content source, crawl
 failures, and normalization warnings. A run exits unsuccessfully if it leaves
-unclosed code fences, executable MDX, JSX attributes, or relative links in the
-renderable Markdown.
+unclosed code fences, executable MDX, JSX attributes, malformed relative links,
+or local links whose mirrored target file does not exist.
 
 ## Update locally
 

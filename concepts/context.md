@@ -21,9 +21,9 @@ LangGraph provides three ways to manage context, which combines the mutability a
 
 | Context type                                                                          | Description                                            | Mutability | Lifetime           | Access method                           |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------ | ---------- | ------------------ | --------------------------------------- |
-| [**Static runtime context**](https://docs.langchain.com/oss/python/concepts/context#static-runtime-context)                                 | User metadata, tools, db connections passed at startup | Static     | Single run         | `context` argument to `invoke`/`stream` |
-| [**Dynamic runtime context (state)**](https://docs.langchain.com/oss/python/concepts/context#dynamic-runtime-context)                       | Mutable data that evolves during a single run          | Dynamic    | Single run         | LangGraph state object                  |
-| [**Dynamic cross-conversation context (store)**](https://docs.langchain.com/oss/python/concepts/context#dynamic-cross-conversation-context) | Persistent data shared across conversations            | Dynamic    | Cross-conversation | LangGraph store                         |
+| [**Static runtime context**](#static-runtime-context)                                 | User metadata, tools, db connections passed at startup | Static     | Single run         | `context` argument to `invoke`/`stream` |
+| [**Dynamic runtime context (state)**](#dynamic-runtime-context)                       | Mutable data that evolves during a single run          | Dynamic    | Single run         | LangGraph state object                  |
+| [**Dynamic cross-conversation context (store)**](#dynamic-cross-conversation-context) | Persistent data shared across conversations            | Dynamic    | Cross-conversation | LangGraph store                         |
 
 ## Static runtime context
 
@@ -68,7 +68,7 @@ agent.invoke(
 )
 ```
 
-See [Agents](https://docs.langchain.com/oss/python/langchain/agents) for details.
+See [Agents](../langchain/agents.md) for details.
 
 #### Workflow node
 ```python
@@ -79,7 +79,7 @@ def node(state: State, runtime: Runtime[ContextSchema]):  # [!code highlight]
     ...
 ```
 
-* See [the Graph API](https://docs.langchain.com/oss/python/langgraph/use-graph-api#add-runtime-configuration) for details.
+* See [the Graph API](../langgraph/use-graph-api.md#add-runtime-configuration) for details.
 
 #### In a tool
 ```python
@@ -93,7 +93,7 @@ def get_user_email(runtime: ToolRuntime[ContextSchema]) -> str:
     return email
 ```
 
-See the [tool calling guide](https://docs.langchain.com/oss/python/langchain/tools#context) for details.
+See the [tool calling guide](../langchain/tools.md#context) for details.
 
 > [!TIP]
 > The `Runtime` object can be used to access static context and other utilities like the active store and stream writer.
@@ -101,12 +101,12 @@ See the [tool calling guide](https://docs.langchain.com/oss/python/langchain/too
 
 ## Dynamic runtime context
 
-**Dynamic runtime context** represents mutable data that can evolve during a single run and is managed through the LangGraph state object. This includes conversation history, intermediate results, and values derived from tools or LLM outputs. In LangGraph, the state object acts as [short-term memory](https://docs.langchain.com/oss/python/concepts/memory) during a run.
+**Dynamic runtime context** represents mutable data that can evolve during a single run and is managed through the LangGraph state object. This includes conversation history, intermediate results, and values derived from tools or LLM outputs. In LangGraph, the state object acts as [short-term memory](memory.md) during a run.
 
 #### In an agent
 Example shows how to incorporate state into an agent **prompt**.
 
-State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](https://docs.langchain.com/oss/python/langchain/tools#short-term-memory-state) for details.
+State can also be accessed by the agent's **tools**, which can read or update the state as needed. See [tool calling guide](../langchain/tools.md#short-term-memory-state) for details.
 
 ```python
 from langchain.agents import create_agent
@@ -159,17 +159,17 @@ graph = builder.compile()
 
 > [!TIP]
 > **Turning on memory**
-> Please see the [memory guide](https://docs.langchain.com/oss/python/langgraph/add-memory) for more details on how to enable memory. This is a powerful feature that allows you to persist the agent's state across multiple invocations. Otherwise, the state is scoped only to a single run.
+> Please see the [memory guide](../langgraph/add-memory.md) for more details on how to enable memory. This is a powerful feature that allows you to persist the agent's state across multiple invocations. Otherwise, the state is scoped only to a single run.
 
 ## Dynamic cross-conversation context
 
-**Dynamic cross-conversation context** represents persistent, mutable data that spans across multiple conversations or sessions and is managed through the LangGraph store. This includes user profiles, preferences, and historical interactions. The LangGraph store acts as [long-term memory](https://docs.langchain.com/oss/python/concepts/memory#long-term-memory) across multiple runs. This can be used to read or update persistent facts (e.g., user profiles, preferences, prior interactions).
+**Dynamic cross-conversation context** represents persistent, mutable data that spans across multiple conversations or sessions and is managed through the LangGraph store. This includes user profiles, preferences, and historical interactions. The LangGraph store acts as [long-term memory](memory.md#long-term-memory) across multiple runs. This can be used to read or update persistent facts (e.g., user profiles, preferences, prior interactions).
 
 ## Learn more
 
-* [Memory conceptual overview](https://docs.langchain.com/oss/python/concepts/memory)
-* [Short-term memory in LangChain](https://docs.langchain.com/oss/python/langchain/short-term-memory)
-* [Memory in LangGraph](https://docs.langchain.com/oss/python/langgraph/add-memory)
+* [Memory conceptual overview](memory.md)
+* [Short-term memory in LangChain](../langchain/short-term-memory.md)
+* [Memory in LangGraph](../langgraph/add-memory.md)
 
 ***
 

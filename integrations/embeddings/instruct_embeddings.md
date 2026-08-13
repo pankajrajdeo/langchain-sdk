@@ -4,7 +4,7 @@
 
 > The `hkunlp/instructor-*` family introduced instruction-tuned sentence embeddings. They have been broadly superseded by modern instruction-aware models, but the original models are still available on Hugging Face and usable via the legacy `HuggingFaceInstructEmbeddings` class.
 
-For new projects, prefer `HuggingFaceEmbeddings` from [`langchain-huggingface`](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers) with a current instruction-aware model such as `intfloat/e5-large-v2`, `Qwen/Qwen3-Embedding-0.6B`, or `BAAI/bge-m3`. Pass query and document prompts via `encode_kwargs` and `query_encode_kwargs`:
+For new projects, prefer `HuggingFaceEmbeddings` from [`langchain-huggingface`](sentence_transformers.md) with a current instruction-aware model such as `intfloat/e5-large-v2`, `Qwen/Qwen3-Embedding-0.6B`, or `BAAI/bge-m3`. Pass query and document prompts via `encode_kwargs` and `query_encode_kwargs`:
 
 ```python
 from langchain_huggingface import HuggingFaceEmbeddings

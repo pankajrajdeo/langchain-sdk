@@ -33,7 +33,7 @@ When you install the `chromadb` package you also get access to the Chroma CLI, w
 chroma db connect [db_name] --env-file
 ```
 
-If you want to get best in-class automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key and enable tracing:
+If you want to get best in-class automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key and enable tracing:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -46,7 +46,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 The following example shows setting up an embedding function for Chroma, followed by configuring local persistence for storing vector data.
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma).
+> **Interactive content:** [View this section in the original documentation](chroma.md).
 
 ```python
 # | output: false
@@ -361,9 +361,9 @@ retriever.invoke("Stealing from the bank is a crime", filter={"source": "news"})
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ***
 

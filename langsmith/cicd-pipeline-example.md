@@ -1,13 +1,13 @@
 # Implement a CI/CD pipeline using LangSmith Deployment and Evaluation
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cicd-pipeline-example)
-This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) open source framework for orchestrating and building the agent, [LangSmith](https://docs.langchain.com/langsmith/observability) for observability and evaluations. This pipeline is based on the [cicd-pipeline-example repository](https://github.com/langchain-ai/cicd-pipeline-example).
+This guide demonstrates how to implement a comprehensive CI/CD pipeline for AI agent applications deployed in LangSmith Deployment. In this example, you'll use the [LangGraph](../langgraph/overview.md) open source framework for orchestrating and building the agent, [LangSmith](observability.md) for observability and evaluations. This pipeline is based on the [cicd-pipeline-example repository](https://github.com/langchain-ai/cicd-pipeline-example).
 
 ## Overview
 
 The CI/CD pipeline provides:
 
 *  **Automated testing**: Unit, integration, and end-to-end tests.
-*  **Offline evaluations**: Performance assessment using [AgentEvals](https://docs.langchain.com/oss/python/langchain/test/evals), [OpenEvals](https://docs.langchain.com/langsmith/openevals#setup) and [LangSmith](https://docs.langchain.com/langsmith/observability).
+*  **Offline evaluations**: Performance assessment using [AgentEvals](../langchain/test/evals.md), [OpenEvals](openevals.md#setup) and [LangSmith](observability.md).
 *  **Preview and production deployments**: Automated staging and quality-gated production releases using the Control Plane API.
 *  **Monitoring**: Continuous evaluation and alerting.
 
@@ -90,23 +90,23 @@ Compared to traditional software, testing AI agent applications also requires as
 2.  **Integration tests**: Component interaction testing.
 3.  **End-to-end tests**: Full graph execution testing.
 4.  **Offline evaluations**: Performance assessment with real-world scenarios including end-to-end evaluations, single-step evaluations, agent trajectory analysis, and multi-turn simulations.
-5.  **LangGraph dev server tests**: Use the [langgraph-cli](https://docs.langchain.com/langsmith/cli) tool for spinning up (inside the GitHub Action) a local server to run the LangGraph agent. This polls the `/ok` server API endpoint until it is available and for 30 seconds, after that it throws an error.
+5.  **LangGraph dev server tests**: Use the [langgraph-cli](cli.md) tool for spinning up (inside the GitHub Action) a local server to run the LangGraph agent. This polls the `/ok` server API endpoint until it is available and for 30 seconds, after that it throws an error.
 
 ## GitHub actions workflow
 
-The CI/CD pipeline uses GitHub Actions with the [Control Plane API](https://docs.langchain.com/langsmith/api-ref-control-plane) and [LangSmith API](https://docs.langchain.com/langsmith/smith-api-ref) to automate deployment. A helper script manages API interactions and deployments: [https://github.com/langchain-ai/cicd-pipeline-example/blob/main/.github/scripts/langgraph\_api.py](https://github.com/langchain-ai/cicd-pipeline-example/blob/main/.github/scripts/langgraph_api.py).
+The CI/CD pipeline uses GitHub Actions with the [Control Plane API](api-ref-control-plane.md) and [LangSmith API](smith-api-ref.md) to automate deployment. A helper script manages API interactions and deployments: [https://github.com/langchain-ai/cicd-pipeline-example/blob/main/.github/scripts/langgraph\_api.py](https://github.com/langchain-ai/cicd-pipeline-example/blob/main/.github/scripts/langgraph_api.py).
 
 The workflow includes:
 
-* **New agent deployment**: When a new PR is opened and tests pass, a new preview deployment is created in LangSmith Deployment using the [Control Plane API](https://docs.langchain.com/langsmith/api-ref-control-plane). This allows you to test the agent in a staging environment before promoting to production.
+* **New agent deployment**: When a new PR is opened and tests pass, a new preview deployment is created in LangSmith Deployment using the [Control Plane API](api-ref-control-plane.md). This allows you to test the agent in a staging environment before promoting to production.
 
 * **Agent deployment revision**: A revision happens when an existing deployment with the same ID is found, or when the PR is merged into main. In the case of merging to main, the preview deployment is deleted and a production deployment is created. This ensures that any updates to the agent are properly deployed and integrated into the production infrastructure.
 
-> **Image:** [Agent Deployment Revision Workflow](https://docs.langchain.com/langsmith/cicd-pipeline-example)
+> **Image:** [Agent Deployment Revision Workflow](cicd-pipeline-example.md)
 
-* **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) and [Agent dev server testing](https://docs.langchain.com/langsmith/local-dev-testing) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
+* **Testing and evaluation workflow**: In addition to the more traditional testing phases (unit tests, integration tests, end-to-end tests, etc.), the pipeline includes [offline evaluations](evaluation-concepts.md#offline-evaluations) and [Agent dev server testing](local-dev-testing.md) because you want to test the quality of your agent. These evaluations provide comprehensive assessment of the agent's performance using real-world scenarios and data.
 
-> **Image:** [Test with Results Workflow](https://docs.langchain.com/langsmith/cicd-pipeline-example)
+> **Image:** [Test with Results Workflow](cicd-pipeline-example.md)
 
 <details>
 <summary>Final Response Evaluation</summary>
@@ -136,15 +136,15 @@ The workflow includes:
 
 </details>
 
-  See the [LangGraph testing documentation](https://docs.langchain.com/oss/python/langgraph/test) for specific testing approaches and the [evaluation approaches guide](https://docs.langchain.com/langsmith/evaluation-approaches) for a comprehensive overview of offline evaluations.
+  See the [LangGraph testing documentation](../langgraph/test.md) for specific testing approaches and the [evaluation approaches guide](evaluation-approaches.md) for a comprehensive overview of offline evaluations.
 
 ### Prerequisites
 
 Before setting up the CI/CD pipeline, ensure you have:
 
-*  An AI agent application (in this case built using [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview))
+*  An AI agent application (in this case built using [LangGraph](../langgraph/overview.md))
 *  A [LangSmith account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-cicd-pipeline-example)
-*  A [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) needed to deploy agents and retrieve experiment results
+*  A [LangSmith API key](create-account-api-key.md) needed to deploy agents and retrieve experiment results
 *  Project-specific environment variables configured in your repository secrets (e.g., LLM model API keys, vector store credentials, database connections)
 
 > [!NOTE]
@@ -152,12 +152,12 @@ Before setting up the CI/CD pipeline, ensure you have:
 
 ## Deployment options
 
-LangSmith supports multiple deployment methods, depending on how your [LangSmith instance is hosted](https://docs.langchain.com/langsmith/platform-setup):
+LangSmith supports multiple deployment methods, depending on how your [LangSmith instance is hosted](platform-setup.md):
 
 *  **Cloud LangSmith**: Direct GitHub integration.
 *  **Self-Hosted/Hybrid**: Container registry-based deployments.
 
-The deployment flow starts by modifying your agent implementation. At minimum, you must have a [`langgraph.json`](https://docs.langchain.com/langsmith/application-structure) and dependency file in your project (`requirements.txt` or `pyproject.toml`). Use the `langgraph dev` CLI tool to check for errors—fix any errors; otherwise, the deployment will succeed when deployed to LangSmith Deployment.
+The deployment flow starts by modifying your agent implementation. At minimum, you must have a [`langgraph.json`](application-structure.md) and dependency file in your project (`requirements.txt` or `pyproject.toml`). Use the `langgraph dev` CLI tool to check for errors—fix any errors; otherwise, the deployment will succeed when deployed to LangSmith Deployment.
 
 ```mermaid
 graph TD
@@ -244,9 +244,9 @@ Example `langgraph.json`:
 
 ### Local development and testing
 
-> **Image:** [Studio CLI Interface](https://docs.langchain.com/langsmith/cicd-pipeline-example)
+> **Image:** [Studio CLI Interface](cicd-pipeline-example.md)
 
-First, test your agent locally using [Studio](https://docs.langchain.com/langsmith/studio):
+First, test your agent locally using [Studio](studio.md):
 
 ```bash
 # Start local development server with Studio
@@ -262,7 +262,7 @@ This will:
 > [!NOTE]
 > If your agent runs locally without any errors, it means that deployment to LangSmith will likely succeed. This local testing helps catch configuration issues, dependency problems, and agent logic errors before attempting deployment.
 
-See the [LangGraph CLI documentation](https://docs.langchain.com/langsmith/cli#dev) for more details.
+See the [LangGraph CLI documentation](cli.md#dev) for more details.
 
 ### Method 1: LangSmith Deployment UI
 
@@ -311,14 +311,14 @@ You can push to any container registry (Docker Hub, AWS ECR, Azure ACR, Google G
 *  **Cloud LangSmith**: Use the Control Plane API to create deployments from your GitHub repository
 *  **Self-Hosted/Hybrid LangSmith**: Use the Control Plane API to create deployments from your container registry
 
-See the [LangGraph CLI build documentation](https://docs.langchain.com/langsmith/cli#build) for more details.
+See the [LangGraph CLI build documentation](cli.md#build) for more details.
 
 ### Connect to your deployed Agent
 
 *  **[LangGraph SDK](https://langchain-ai.github.io/langgraph/cloud/reference/sdk/python_sdk_ref/#langgraph-sdk-python)**: Use the LangGraph SDK for programmatic integration.
-*  **[RemoteGraph](https://docs.langchain.com/langsmith/use-remote-graph)**: Connect using RemoteGraph for remote graph connections (to use your graph in other graphs).
-*  **[REST API](https://docs.langchain.com/langsmith/server-api-ref)**: Use HTTP-based interactions with your deployed agent.
-*  **[Studio](https://docs.langchain.com/langsmith/studio)**: Access the visual interface for testing and debugging.
+*  **[RemoteGraph](use-remote-graph.md)**: Connect using RemoteGraph for remote graph connections (to use your graph in other graphs).
+*  **[REST API](server-api-ref.md)**: Use HTTP-based interactions with your deployed agent.
+*  **[Studio](studio.md)**: Access the visual interface for testing and debugging.
 
 ### Environment configuration
 
@@ -332,7 +332,7 @@ export POSTGRES_URI_CUSTOM="postgresql://user:pass@host:5432/db"
 export REDIS_URI_CUSTOM="redis://host:6379/0"
 ```
 
-See the [environment variables documentation](https://docs.langchain.com/langsmith/env-var-self-hosted) for more details.
+See the [environment variables documentation](env-var-self-hosted.md) for more details.
 
 ## Troubleshooting
 

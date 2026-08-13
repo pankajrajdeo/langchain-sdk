@@ -5,16 +5,16 @@ This guide reviews common workflow and agent patterns.
 * Workflows have predetermined code paths and are designed to operate in a certain order.
 * Agents are dynamic and define their own processes and tool usage.
 
-> **Image:** [Agent Workflow](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [Agent Workflow](workflows-agents.md)
 
-LangGraph offers several benefits when building agents and workflows, including [persistence](https://docs.langchain.com/oss/python/langgraph/persistence), [streaming](https://docs.langchain.com/oss/python/langgraph/streaming), and support for debugging as well as [deployment](https://docs.langchain.com/oss/python/langgraph/deploy).
+LangGraph offers several benefits when building agents and workflows, including [persistence](persistence.md), [streaming](streaming.md), and support for debugging as well as [deployment](deploy.md).
 
 > [!TIP]
-> Trace and compare these workflow patterns with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-workflows-agents). Follow the [tracing quickstart](https://docs.langchain.com/langsmith/trace-with-langgraph) to see how data flows through each step. We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine) which monitors your traces, detects issues, and proposes fixes.
+> Trace and compare these workflow patterns with [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langgraph-workflows-agents). Follow the [tracing quickstart](../langsmith/trace-with-langgraph.md) to see how data flows through each step. We recommend you also set up [LangSmith Engine](../langsmith/engine.md) which monitors your traces, detects issues, and proposes fixes.
 
 ## Setup
 
-To build a workflow or agent, you can use [any chat model](https://docs.langchain.com/oss/python/integrations/chat) that supports structured outputs and tool calling. The following example uses Anthropic:
+To build a workflow or agent, you can use [any chat model](../integrations/chat.md) that supports structured outputs and tool calling. The following example uses Anthropic:
 
 1. Install dependencies:
 
@@ -41,9 +41,9 @@ llm = ChatAnthropic(model="claude-sonnet-4-6")
 
 ## LLMs and augmentations
 
-Workflows and agentic systems are based on LLMs and the various augmentations you add to them. [Tool calling](https://docs.langchain.com/oss/python/langchain/tools), [structured outputs](https://docs.langchain.com/oss/python/langchain/structured-output), and [short term memory](https://docs.langchain.com/oss/python/langchain/short-term-memory) are a few options for tailoring LLMs to your needs.
+Workflows and agentic systems are based on LLMs and the various augmentations you add to them. [Tool calling](../langchain/tools.md), [structured outputs](../langchain/structured-output.md), and [short term memory](../langchain/short-term-memory.md) are a few options for tailoring LLMs to your needs.
 
-> **Image:** [LLM augmentations](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [LLM augmentations](workflows-agents.md)
 
 ```python
 # Schema for structured output
@@ -82,7 +82,7 @@ Prompt chaining is when each LLM call processes the output of the previous call.
 * Translating documents into different languages
 * Verifying generated content for consistency
 
-> **Image:** [Prompt chaining](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [Prompt chaining](workflows-agents.md)
 
 ```python
 from typing_extensions import TypedDict
@@ -219,7 +219,7 @@ Some examples include:
 * Running one subtask that processes a document for keywords, and a second subtask to check for formatting errors
 * Running a task multiple times that scores a document for accuracy based on different criteria, like the number of citations, the number of sources used, and the quality of the sources
 
-> **Image:** [parallelization.png](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [parallelization.png](workflows-agents.md)
 
 ```python
 # Graph state
@@ -335,7 +335,7 @@ for snapshot in stream.values:
 
 Routing workflows process inputs and then directs them to context-specific tasks. This allows you to define specialized flows for complex tasks. For example, a workflow built to answer product related questions might process the type of question first, and then route the request to specific processes for pricing, refunds, returns, etc.
 
-> **Image:** [routing.png](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [routing.png](workflows-agents.md)
 
 ```python
 from typing_extensions import Literal
@@ -508,9 +508,9 @@ In an orchestrator-worker configuration, the orchestrator:
 * Delegates subtasks to workers
 * Synthesizes worker outputs into a final result
 
-> **Image:** [worker.png](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [worker.png](workflows-agents.md)
 
-Orchestrator-worker workflows provide more flexibility and are often used when subtasks cannot be predefined the way they can with [parallelization](https://docs.langchain.com/oss/python/langgraph/workflows-agents#parallelization). This is common with workflows that write code or need to update content across multiple files. For example, a workflow that needs to update installation instructions for multiple Python libraries across an unknown number of documents might use this pattern.
+Orchestrator-worker workflows provide more flexibility and are often used when subtasks cannot be predefined the way they can with [parallelization](#parallelization). This is common with workflows that write code or need to update content across multiple files. For example, a workflow that needs to update installation instructions for multiple Python libraries across an unknown number of documents might use this pattern.
 
 ```python
 from typing import Annotated, List
@@ -707,11 +707,11 @@ Markdown(state["final_report"])
 
 ## Evaluator-optimizer
 
-In evaluator-optimizer workflows, one LLM call creates a response and the other evaluates that response. If the evaluator or a [human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts) determines the response needs refinement, feedback is provided and the response is recreated. This loop continues until an acceptable response is generated.
+In evaluator-optimizer workflows, one LLM call creates a response and the other evaluates that response. If the evaluator or a [human-in-the-loop](interrupts.md) determines the response needs refinement, feedback is provided and the response is recreated. This loop continues until an acceptable response is generated.
 
 Evaluator-optimizer workflows are commonly used when there's particular success criteria for a task, but iteration is required to meet that criteria. For example, there's not always a perfect match when translating text between two languages. It might take a few iterations to generate a translation with the same meaning across the two languages.
 
-> **Image:** [evaluator_optimizer.png](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [evaluator_optimizer.png](workflows-agents.md)
 
 ```python
 # Graph state
@@ -841,12 +841,12 @@ for snapshot in stream.values:
 
 ## Agents
 
-Agents are typically implemented as an LLM performing actions using [tools](https://docs.langchain.com/oss/python/langchain/tools). They operate in continuous feedback loops, and are used in situations where problems and solutions are unpredictable. Agents have more autonomy than workflows, and can make decisions about the tools they use and how to solve problems. You can still define the available toolset and guidelines for how agents behave.
+Agents are typically implemented as an LLM performing actions using [tools](../langchain/tools.md). They operate in continuous feedback loops, and are used in situations where problems and solutions are unpredictable. Agents have more autonomy than workflows, and can make decisions about the tools they use and how to solve problems. You can still define the available toolset and guidelines for how agents behave.
 
-> **Image:** [agent.png](https://docs.langchain.com/oss/python/langgraph/workflows-agents)
+> **Image:** [agent.png](workflows-agents.md)
 
 > [!NOTE]
-> To get started with agents, see the [quickstart](https://docs.langchain.com/oss/python/langchain/quickstart) or read more about [how they work](https://docs.langchain.com/oss/python/langchain/agents) in LangChain.
+> To get started with agents, see the [quickstart](../langchain/quickstart.md) or read more about [how they work](../langchain/agents.md) in LangChain.
 
 ```python
 from langchain.tools import tool

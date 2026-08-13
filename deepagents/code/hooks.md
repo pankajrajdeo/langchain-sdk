@@ -4,13 +4,13 @@ Observe and control Deep Agents Code lifecycle events with command hooks configu
 
 Hooks let external programs observe and control Deep Agents Code lifecycle events.
 
-When an event fires, Deep Agents Code finds matching handlers, sends each a JSON payload on stdin, and combines their exit codes and stdout. Use that response to allow, deny, inject context, or continue a turn. The sections below cover configuration, [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events), [Input payload](https://docs.langchain.com/oss/deepagents/code/hooks#input-payload), and [Handler output](https://docs.langchain.com/oss/deepagents/code/hooks#handler-output).
+When an event fires, Deep Agents Code finds matching handlers, sends each a JSON payload on stdin, and combines their exit codes and stdout. Use that response to allow, deny, inject context, or continue a turn. The sections below cover configuration, [Events](#events), [Input payload](#input-payload), and [Handler output](#handler-output).
 
 Hooks run with your user permissions and execute arbitrary code from your configuration. Treat hook configuration as executable code and only install hooks from sources you trust.
 
 ## Setup
 
-Create `~/.deepagents/hooks.json` for hooks that apply to every project, or `{project_root}/.deepagents/hooks.json` for project-scoped hooks (after you grant [workspace trust](https://docs.langchain.com/oss/deepagents/code/hooks#trust-project-hooks)). Handlers nest in three levels: event name, matcher group, then the handlers that run for that group.
+Create `~/.deepagents/hooks.json` for hooks that apply to every project, or `{project_root}/.deepagents/hooks.json` for project-scoped hooks (after you grant [workspace trust](#trust-project-hooks)). Handlers nest in three levels: event name, matcher group, then the handlers that run for that group.
 
 ```json
 {
@@ -65,7 +65,7 @@ Project hooks come from the repository, so they load only after the workspace is
 
 ### Plugin hooks
 
-An enabled plugin contributes the same configuration shape from `hooks/hooks.json`, a manifest `hooks` path, or an inline manifest object. Installing and enabling the plugin is the consent gate: workspace trust governs project hooks only, so it neither grants nor withholds a plugin's hooks. Review a plugin before enabling it, and check the events it declares in the plugin manager. See [Plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins#add-hooks).
+An enabled plugin contributes the same configuration shape from `hooks/hooks.json`, a manifest `hooks` path, or an inline manifest object. Installing and enabling the plugin is the consent gate: workspace trust governs project hooks only, so it neither grants nor withholds a plugin's hooks. Review a plugin before enabling it, and check the events it declares in the plugin manager. See [Plugins and marketplaces](plugins.md#add-hooks).
 
 Server-owned events are fixed when a session starts, so newly enabled plugin hooks activate at the next startup or `/reload`.
 
@@ -104,11 +104,11 @@ Configuring an unsupported handler type or `"async": true` produces a visible co
 
 ### Handler environment
 
-A handler starts in the working directory reported as `cwd` in the payload and inherits the session environment with credential-looking variables removed: any name containing `KEY`, `TOKEN`, `SECRET`, `PASSWORD`, or `APIKEY` is stripped before launch. A handler that needs a credential must read it from a file or a secret manager rather than the inherited environment. Plugin handlers additionally receive their own [plugin path variables](https://docs.langchain.com/oss/deepagents/code/hooks#plugin-hooks).
+A handler starts in the working directory reported as `cwd` in the payload and inherits the session environment with credential-looking variables removed: any name containing `KEY`, `TOKEN`, `SECRET`, `PASSWORD`, or `APIKEY` is stripped before launch. A handler that needs a credential must read it from a file or a secret manager rather than the inherited environment. Plugin handlers additionally receive their own [plugin path variables](#plugin-hooks).
 
 ### Matchers
 
-A matcher filters whether a handler group runs for a given event. Each event matches against one field (see [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events)):
+A matcher filters whether a handler group runs for a given event. Each event matches against one field (see [Events](#events)):
 
 * Omitted, empty, or `*` matches all values for that event.
 * A simple name matches exactly (`Bash`).
@@ -232,7 +232,7 @@ Command handlers communicate results through their exit code, stdout, and stderr
 | Exit code     | Meaning                                                                                                                                                                  |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `0`           | Success. When stdout contains JSON, it is parsed and applied.                                                                                                            |
-| `2`           | Blocking or feedback path for that event. See the [Events](https://docs.langchain.com/oss/deepagents/code/hooks#events) table Exit code 2 effect column. Stdout JSON is ignored, and stderr is the primary feedback channel. |
+| `2`           | Blocking or feedback path for that event. See the [Events](#events) table Exit code 2 effect column. Stdout JSON is ignored, and stderr is the primary feedback channel. |
 | Other nonzero | Non-blocking error. Deep Agents Code logs a diagnostic and continues.                                                                                                    |
 
 JSON output is only processed on exit `0` and must be the only content on stdout. Successful non-JSON stdout becomes additional context for `SessionStart` and `UserPromptSubmit`; for other events it produces a diagnostic. Stdout and stderr are each retained up to 100,000 bytes.
@@ -324,18 +324,18 @@ A block continues the agent turn with your feedback. `Stop.hookSpecificOutput.ad
 
 ## Unsupported output fields
 
-The following compatibility fields are recognized but not applied. Deep Agents Code emits a diagnostic and continues with the fallback in the Result column. For tool and permission rows, that means the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) or [PermissionRequest](https://docs.langchain.com/oss/deepagents/code/hooks#allow-or-deny-with-permissionrequest) decision path, without mutating tool input or deferring.
+The following compatibility fields are recognized but not applied. Deep Agents Code emits a diagnostic and continues with the fallback in the Result column. For tool and permission rows, that means the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) or [PermissionRequest](#allow-or-deny-with-permissionrequest) decision path, without mutating tool input or deferring.
 
 | Field or behavior                                                               | Result                                                                                                              |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | `SessionStart.initialUserMessage`, `sessionTitle`, `watchPaths`, `reloadSkills` | Parsed, not applied                                                                                                 |
 | `UserPromptSubmit.sessionTitle`                                                 | Parsed, not applied                                                                                                 |
-| `PreToolUse.updatedInput`                                                       | Mutation ignored; `allow` or `ask` uses the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) decision |
-| `PreToolUse.defer`                                                              | Uses the ordinary [PreToolUse](https://docs.langchain.com/oss/deepagents/code/hooks#control-tool-execution-with-pretooluse) decision; never treated as allow            |
+| `PreToolUse.updatedInput`                                                       | Mutation ignored; `allow` or `ask` uses the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) decision |
+| `PreToolUse.defer`                                                              | Uses the ordinary [PreToolUse](#control-tool-execution-with-pretooluse) decision; never treated as allow            |
 | `PostToolUse.updatedToolOutput`, `updatedMCPToolOutput`                         | Parsed, not applied                                                                                                 |
-| `PermissionRequest.updatedInput`                                                | Mutation ignored; an `allow` uses the ordinary [PermissionRequest](https://docs.langchain.com/oss/deepagents/code/hooks#allow-or-deny-with-permissionrequest) decision  |
+| `PermissionRequest.updatedInput`                                                | Mutation ignored; an `allow` uses the ordinary [PermissionRequest](#allow-or-deny-with-permissionrequest) decision  |
 | `PermissionRequest.updatedPermissions`                                          | Parsed, not applied (no permission-rule store)                                                                      |
-| `SubagentStop` block                                                            | [Context only](https://docs.langchain.com/oss/deepagents/code/hooks#inject-context); a completed subagent cannot be resumed                                             |
+| `SubagentStop` block                                                            | [Context only](#inject-context); a completed subagent cannot be resumed                                             |
 
 ## Examples
 
@@ -496,10 +496,10 @@ Hooks follow the same trust model as Git hooks or shell aliases: any process tha
 
 ## See also
 
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
-* [Plugins and marketplaces](https://docs.langchain.com/oss/deepagents/code/plugins)
-* [Data locations](https://docs.langchain.com/oss/deepagents/code/configuration#data-locations)
-* [CLI reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
+* [Configuration](configuration.md)
+* [Plugins and marketplaces](plugins.md)
+* [Data locations](configuration.md#data-locations)
+* [CLI reference](cli-reference.md)
 
 ***
 

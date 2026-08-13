@@ -91,7 +91,7 @@ pg_engine = PGEngine.from_engine(engine=engine)
 
 The `PGVectorStore` class requires a database table. The `PGEngine` engine has a helper method `ainit_vectorstore_table()` that can be used to create a table with the proper schema for you.
 
-See [Create a custom Vector Store](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvectorstore#create-a-custom-vector-store) or [Create a Vector Store using existing table](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvectorstore#create-a-vector-store-using-existing-table) for customizing the schema.
+See [Create a custom Vector Store](#create-a-custom-vector-store) or [Create a Vector Store using existing table](#create-a-vector-store-using-existing-table) for customizing the schema.
 
 ```python
 await pg_engine.ainit_vectorstore_table(
@@ -128,7 +128,7 @@ embedding = CohereEmbeddings(model="embed-english-v3.0")
 
 Use the default table schema to connect to the vectorstore.
 
-See [Create a custom Vector Store](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvectorstore#create-a-custom-vector-store) or [Create a Vector Store using existing table](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvectorstore#create-a-vector-store-using-existing-table) for customizing the schema.
+See [Create a custom Vector Store](#create-a-custom-vector-store) or [Create a Vector Store using existing table](#create-a-vector-store-using-existing-table) for customizing the schema.
 
 ```python
 from langchain_postgres import PGVectorStore
@@ -464,9 +464,9 @@ await pg_engine.adrop_table(TABLE_NAME)
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ***
 

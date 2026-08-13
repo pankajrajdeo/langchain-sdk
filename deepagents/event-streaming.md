@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/event-streaming)
 Stream subagents, messages, tool calls, and final output from Deep Agents.
 
-This page covers streaming concerns specific to Deep Agents—most importantly, streaming from delegated subagents via `stream.subagents`. For general agent streaming (`stream.messages`, `stream.values`, tool calls, custom updates), see [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming).
+This page covers streaming concerns specific to Deep Agents—most importantly, streaming from delegated subagents via `stream.subagents`. For general agent streaming (`stream.messages`, `stream.values`, tool calls, custom updates), see [LangChain Event Streaming](../langchain/event-streaming.md).
 
 ## Stream subagents
 
@@ -30,7 +30,7 @@ for subagent in stream.subagents:
 
 ## Subagent stream fields
 
-Each subagent stream exposes the same kinds of projections as the parent run, such as messages, tool calls, nested subagents, and final output. For the general parent-run streaming model, see [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming).
+Each subagent stream exposes the same kinds of projections as the parent run, such as messages, tool calls, nested subagents, and final output. For the general parent-run streaming model, see [LangChain Event Streaming](../langchain/event-streaming.md).
 
 Python uses snake\_case projection names such as `tool_calls`. Each subagent stream can expose `.messages`, `.tool_calls`, `.values`, `.subagents`, and `.output`.
 
@@ -199,9 +199,9 @@ for event in stream:
 
 ## Related
 
-* [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming) covers general agent message and tool-call streaming concepts.
-* [Subagent frontend streaming](https://docs.langchain.com/oss/python/deepagents/frontend/subagent-streaming) shows UI patterns that separate coordinator messages from subagent cards.
-* [LangGraph Event Streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) covers the underlying graph streaming model.
+* [LangChain Event Streaming](../langchain/event-streaming.md) covers general agent message and tool-call streaming concepts.
+* [Subagent frontend streaming](frontend/subagent-streaming.md) shows UI patterns that separate coordinator messages from subagent cards.
+* [LangGraph Event Streaming](../langgraph/event-streaming.md) covers the underlying graph streaming model.
 
 ***
 

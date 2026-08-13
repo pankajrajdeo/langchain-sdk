@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/middleware/built-in)
 Prebuilt middleware for common agent use cases
 
-LangChain and [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) provide prebuilt middleware for common use cases. Each middleware is production-ready and configurable for your specific needs.
+LangChain and [Deep Agents](../../deepagents/overview.md) provide prebuilt middleware for common use cases. Each middleware is production-ready and configurable for your specific needs.
 
 ## Provider-agnostic middleware
 
@@ -10,25 +10,25 @@ The following middleware work with any LLM provider:
 
 | Middleware                                    | Description                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [Summarization](https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization)               | Automatically summarize conversation history when approaching token limits.                   |
-| [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/middleware/built-in#human-in-the-loop)       | Pause execution for human approval of tool calls.                                             |
-| [Model call limit](https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-call-limit)         | Limit the number of model calls to prevent excessive costs.                                   |
-| [Tool call limit](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-call-limit)           | Control tool execution by limiting call counts.                                               |
-| [Model fallback](https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-fallback)             | Automatically fallback to alternative models when primary fails.                              |
-| [PII detection](https://docs.langchain.com/oss/python/langchain/middleware/built-in#pii-detection)               | Detect and handle Personally Identifiable Information (PII).                                  |
-| [To-do list](https://docs.langchain.com/oss/python/langchain/middleware/built-in#to-do-list)                     | Equip agents with task planning and tracking capabilities.                                    |
-| [LLM tool selector](https://docs.langchain.com/oss/python/langchain/middleware/built-in#llm-tool-selector)       | Use an LLM to select relevant tools before calling main model.                                |
-| [Tool error](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-error)                     | Catch tool execution exceptions and convert them to error messages for the model.             |
-| [Tool retry](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-retry)                     | Automatically retry failed tool calls with exponential backoff.                               |
-| [Model retry](https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-retry)                   | Automatically retry failed model calls with exponential backoff.                              |
-| [LLM tool emulator](https://docs.langchain.com/oss/python/langchain/middleware/built-in#llm-tool-emulator)       | Emulate tool execution using an LLM for testing purposes.                                     |
-| [Context editing](https://docs.langchain.com/oss/python/langchain/middleware/built-in#context-editing)           | Manage conversation context by trimming or clearing tool uses.                                |
-| [Provider tool search](https://docs.langchain.com/oss/python/langchain/middleware/built-in#provider-tool-search) | Defer tools behind providers' server-side tool search, surfacing them on demand.              |
-| [Shell tool](https://docs.langchain.com/oss/python/langchain/middleware/built-in#shell-tool)                     | Expose a persistent shell session to agents for command execution.                            |
-| [File search](https://docs.langchain.com/oss/python/langchain/middleware/built-in#file-search)                   | Provide Glob and Grep search tools over filesystem files.                                     |
-| [Filesystem](https://docs.langchain.com/oss/python/langchain/middleware/built-in#filesystem-middleware)          | Provide agents with a filesystem for storing context and long-term memories.                  |
-| [Subagent](https://docs.langchain.com/oss/python/langchain/middleware/built-in#subagent)                         | Add the ability to spawn subagents.                                                           |
-| [Rubric grading (Beta)](https://docs.langchain.com/oss/python/langchain/middleware/built-in#rubric-grading)      | Apply LLM-as-a-judge grading so agents self-evaluate and iterate until a rubric is satisfied. |
+| [Summarization](#summarization)               | Automatically summarize conversation history when approaching token limits.                   |
+| [Human-in-the-loop](#human-in-the-loop)       | Pause execution for human approval of tool calls.                                             |
+| [Model call limit](#model-call-limit)         | Limit the number of model calls to prevent excessive costs.                                   |
+| [Tool call limit](#tool-call-limit)           | Control tool execution by limiting call counts.                                               |
+| [Model fallback](#model-fallback)             | Automatically fallback to alternative models when primary fails.                              |
+| [PII detection](#pii-detection)               | Detect and handle Personally Identifiable Information (PII).                                  |
+| [To-do list](#to-do-list)                     | Equip agents with task planning and tracking capabilities.                                    |
+| [LLM tool selector](#llm-tool-selector)       | Use an LLM to select relevant tools before calling main model.                                |
+| [Tool error](#tool-error)                     | Catch tool execution exceptions and convert them to error messages for the model.             |
+| [Tool retry](#tool-retry)                     | Automatically retry failed tool calls with exponential backoff.                               |
+| [Model retry](#model-retry)                   | Automatically retry failed model calls with exponential backoff.                              |
+| [LLM tool emulator](#llm-tool-emulator)       | Emulate tool execution using an LLM for testing purposes.                                     |
+| [Context editing](#context-editing)           | Manage conversation context by trimming or clearing tool uses.                                |
+| [Provider tool search](#provider-tool-search) | Defer tools behind providers' server-side tool search, surfacing them on demand.              |
+| [Shell tool](#shell-tool)                     | Expose a persistent shell session to agents for command execution.                            |
+| [File search](#file-search)                   | Provide Glob and Grep search tools over filesystem files.                                     |
+| [Filesystem](#filesystem-middleware)          | Provide agents with a filesystem for storing context and long-term memories.                  |
+| [Subagent](#subagent)                         | Add the ability to spawn subagents.                                                           |
+| [Rubric grading (Beta)](#rubric-grading)      | Apply LLM-as-a-judge grading so agents self-evaluate and iterate until a rubric is satisfied. |
 
 ### Summarization
 
@@ -64,7 +64,7 @@ agent = create_agent(
 <summary>Configuration options</summary>
 
 > [!TIP]
-> The `fraction` conditions for `trigger` and `keep` (shown below) rely on a chat model's [profile data](https://docs.langchain.com/oss/python/langchain/models#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
+> The `fraction` conditions for `trigger` and `keep` (shown below) rely on a chat model's [profile data](../models.md#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
 >
 > ```python
 > from langchain.chat_models import init_chat_model
@@ -226,7 +226,7 @@ agent5 = create_agent(
 
 ### Human-in-the-loop
 
-Pause agent execution for human approval, editing, or rejection of tool calls before they execute. [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) is useful for the following:
+Pause agent execution for human approval, editing, or rejection of tool calls before they execute. [Human-in-the-loop](../human-in-the-loop.md) is useful for the following:
 
 * High-stakes operations requiring human approval (e.g. database writes, financial transactions).
 * Compliance workflows where human oversight is mandatory.
@@ -235,7 +235,7 @@ Pause agent execution for human approval, editing, or rejection of tool calls be
 **API reference:** [`HumanInTheLoopMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/human_in_the_loop/HumanInTheLoopMiddleware)
 
 > [!WARNING]
-> Human-in-the-loop middleware requires a [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) to maintain state across interruptions.
+> Human-in-the-loop middleware requires a [checkpointer](../../langgraph/checkpointers.md#checkpoints) to maintain state across interruptions.
 
 ```python
 from langchain.agents import create_agent
@@ -268,7 +268,7 @@ agent = create_agent(
 ```
 
 > [!TIP]
-> For complete examples, configuration options, and integration patterns, see the [Human-in-the-loop documentation](https://docs.langchain.com/oss/python/langchain/human-in-the-loop).
+> For complete examples, configuration options, and integration patterns, see the [Human-in-the-loop documentation](../human-in-the-loop.md).
 
 > [!NOTE]
 > Watch this [video guide](https://www.youtube.com/watch?v=SpfT6-YAVPk) demonstrating Human-in-the-loop middleware behavior.
@@ -457,7 +457,7 @@ Detect and handle Personally Identifiable Information (PII) in conversations usi
 * Any application handling sensitive user data.
 
 > [!NOTE]
-> With `apply_to_output=True`, `PIIMiddleware` also redacts streamed wire output—text deltas, tool-call args, tool outputs, and state snapshots—via a registered stream transformer. Requires `langchain>=1.3.2`. See [Register transformers on middleware](https://docs.langchain.com/oss/python/langchain/event-streaming#register-transformers-on-middleware).
+> With `apply_to_output=True`, `PIIMiddleware` also redacts streamed wire output—text deltas, tool-call args, tool outputs, and state snapshots—via a registered stream transformer. Requires `langchain>=1.3.2`. See [Register transformers on middleware](../event-streaming.md#register-transformers-on-middleware).
 
 **API reference:** [`PIIMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/pii/PIIMiddleware)
 
@@ -593,7 +593,7 @@ Custom detector function or regex pattern. If not provided, uses built-in detect
 Check user messages before model call
 
 #### `Field` — `boolean`
-Check AI messages after model call. With `langchain>=1.3.2`, also redacts streamed wire output (text deltas, tool-call args, tool outputs, state snapshots) via a registered stream transformer. See [event streaming](https://docs.langchain.com/oss/python/langchain/event-streaming#register-transformers-on-middleware).
+Check AI messages after model call. With `langchain>=1.3.2`, also redacts streamed wire output (text deltas, tool-call args, tool outputs, state snapshots) via a registered stream transformer. See [event streaming](../event-streaming.md#register-transformers-on-middleware).
 
 #### `Field` — `boolean`
 Check tool result messages after execution
@@ -685,6 +685,8 @@ Tool names to always include regardless of selection. These do not count against
 
 </details>
 
+<a id="tool-error-full-example"></a>
+
 ### Tool error
 
 Catch exceptions raised during tool execution and convert them into error `ToolMessage`s that the model can see and recover from, instead of halting the agent run. Tool error is useful for the following:
@@ -694,7 +696,7 @@ Catch exceptions raised during tool execution and convert them into error `ToolM
 * Preventing unexpected tool exceptions from crashing the agent.
 
 > [!NOTE]
-> Tool error middleware does not automatically retry failed calls. For retries, compose with [Tool retry](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-retry) middleware placed *inner* (earlier in the `middleware` list) and configured with `on_failure="error"` so that exceptions reach the tool error middleware. See the [full example](https://docs.langchain.com/oss/python/langchain/middleware/built-in#tool-error-full-example) below.
+> Tool error middleware does not automatically retry failed calls. For retries, compose with [Tool retry](#tool-retry) middleware placed *inner* (earlier in the `middleware` list) and configured with `on_failure="error"` so that exceptions reach the tool error middleware. See the [full example](#tool-error-full-example) below.
 
 **API reference:** [`ToolErrorMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/tool_error/ToolErrorMiddleware)
 
@@ -1477,7 +1479,7 @@ result = agent.invoke({
 
 Context engineering is a main challenge in building effective agents. This is particularly difficult when using tools that return variable-length results (for example, `web_search` and RAG), as long tool results can quickly fill your context window.
 
-`FilesystemMiddleware` from [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) provides four tools for interacting with both short-term and long-term memory:
+`FilesystemMiddleware` from [Deep Agents](../../deepagents/overview.md) provides four tools for interacting with both short-term and long-term memory:
 
 * `ls`: List the files in the filesystem
 * `read_file`: Read an entire file or a certain number of lines from a file
@@ -1542,7 +1544,7 @@ When you configure a `CompositeBackend` with a `StoreBackend` for `/memories/`, 
 
 Handing off tasks to subagents isolates context, keeping the main (supervisor) agent's context window clean while still going deep on a task.
 
-The subagents middleware from [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) allows you to supply subagents through a `task` tool.
+The subagents middleware from [Deep Agents](../../deepagents/overview.md) allows you to supply subagents through a `task` tool.
 
 ```python
 from langchain.tools import tool
@@ -1617,7 +1619,7 @@ In addition to any user-defined subagents, the main agent has access to a `gener
 ### Rubric grading
 
 > [!NOTE]
-> `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](https://docs.langchain.com/oss/python/versioning); the API may change in the future.
+> `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](../../versioning.md); the API may change in the future.
 
 Some tasks have a clear definition of "done" that an agent cannot reliably hit on the first try. `RubricMiddleware` lets you declare *what done looks like* as a rubric and have the agent self-evaluate and iterate until the rubric is satisfied or a maximum iteration cap is hit.
 
@@ -1735,19 +1737,19 @@ agent = create_deep_agent(
 )
 ```
 
-For full configuration options, streaming events, and a complete code generation example, see [Grading rubrics](https://docs.langchain.com/oss/python/deepagents/rubric).
+For full configuration options, streaming events, and a complete code generation example, see [Grading rubrics](../../deepagents/rubric.md).
 
 ## Provider-specific middleware
 
 These middleware are optimized for specific LLM providers. See each provider's documentation for full details and examples.
 
-#### [Anthropic](https://docs.langchain.com/oss/python/integrations/middleware/anthropic)
+#### [Anthropic](../../integrations/middleware/anthropic.md)
 Prompt caching, bash tool, text editor, memory, and file search middleware for Claude models.
 
-#### [AWS](https://docs.langchain.com/oss/python/integrations/middleware/aws)
+#### [AWS](../../integrations/middleware/aws.md)
 Prompt caching middleware for Amazon Bedrock models.
 
-#### [OpenAI](https://docs.langchain.com/oss/python/integrations/middleware/openai)
+#### [OpenAI](../../integrations/middleware/openai.md)
 Content moderation middleware for OpenAI models.
 
 ***

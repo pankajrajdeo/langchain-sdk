@@ -31,7 +31,7 @@ Timbr provides a wrapper around its semantic layer that generates SQL statements
 from langchain_timbr import create_timbr_sql_agent, ExecuteTimbrQueryChain, GenerateTimbrSqlChain
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/graphs/timbr)
+See a [usage example](../graphs/timbr.md)
 
 ***
 

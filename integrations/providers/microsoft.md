@@ -7,11 +7,11 @@ This page covers all LangChain integrations with [Microsoft Azure](https://porta
 > [!TIP]
 > **Recommended: Microsoft Foundry**
 >
-> We recommend using [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/) across [chat models](https://docs.langchain.com/oss/python/integrations/providers/microsoft#chat-models), [LLMs](https://docs.langchain.com/oss/python/integrations/providers/microsoft#llms), and [embedding models](https://docs.langchain.com/oss/python/integrations/providers/microsoft#embedding-models). The Foundry resource type is a superset of the Azure OpenAI resource type, with access to a broader model catalog, agent service, and evaluation capabilities while retaining Azure OpenAI APIs. If you use an Azure OpenAI resource, [upgrade it to a Foundry resource](https://learn.microsoft.com/en-us/azure/foundry/how-to/upgrade-azure-openai) to keep your existing API endpoint, state, and security configurations while gaining access to Foundry capabilities.
+> We recommend using [Microsoft Foundry](https://learn.microsoft.com/en-us/azure/foundry/) across [chat models](#chat-models), [LLMs](#llms), and [embedding models](#embedding-models). The Foundry resource type is a superset of the Azure OpenAI resource type, with access to a broader model catalog, agent service, and evaluation capabilities while retaining Azure OpenAI APIs. If you use an Azure OpenAI resource, [upgrade it to a Foundry resource](https://learn.microsoft.com/en-us/azure/foundry/how-to/upgrade-azure-openai) to keep your existing API endpoint, state, and security configurations while gaining access to Foundry capabilities.
 >
-> With the [Azure OpenAI v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python) (generally available as of August 2025), you can use your Azure endpoint and API keys directly with the [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) package to call any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface. You also get native support for Microsoft Entra ID authentication and access to the latest features including the [Responses API](https://docs.langchain.com/oss/python/integrations/providers/microsoft#responses-api) and [reasoning models](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai). [Get started here](https://docs.langchain.com/oss/python/integrations/providers/microsoft#azure-openai).
+> With the [Azure OpenAI v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python) (generally available as of August 2025), you can use your Azure endpoint and API keys directly with the [`langchain-openai`](https://reference.langchain.com/python/langchain-openai/) package to call any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface. You also get native support for Microsoft Entra ID authentication and access to the latest features including the [Responses API](#responses-api) and [reasoning models](../chat/azure_chat_openai.md). [Get started here](#azure-openai).
 >
-> For agent hosting, use [Microsoft Foundry hosted agents](https://docs.langchain.com/oss/python/integrations/providers/microsoft#microsoft-foundry-hosted-agents) to deploy custom LangGraph code on a managed agent platform with built-in runtime, sessions, scaling, identity, and protocol endpoints.
+> For agent hosting, use [Microsoft Foundry hosted agents](#microsoft-foundry-hosted-agents) to deploy custom LangGraph code on a managed agent platform with built-in runtime, sessions, scaling, identity, and protocol endpoints.
 >
 > **Samples and tutorials:**
 >
@@ -23,7 +23,7 @@ This page covers all LangChain integrations with [Microsoft Azure](https://porta
 > [!NOTE]
 > **Claude on Azure**
 >
-> Microsoft Foundry also offers access to all [Anthropic Claude models](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude), including Opus, Sonnet, and Haiku. Claude models are served through a dedicated Anthropic-native endpoint rather than the Azure OpenAI v1 API. Use [`langchain-anthropic`](https://docs.langchain.com/oss/python/integrations/chat/anthropic) pointed at your Foundry Anthropic endpoint.
+> Microsoft Foundry also offers access to all [Anthropic Claude models](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-claude), including Opus, Sonnet, and Haiku. Claude models are served through a dedicated Anthropic-native endpoint rather than the Azure OpenAI v1 API. Use [`langchain-anthropic`](../chat/anthropic.md) pointed at your Foundry Anthropic endpoint.
 
 ## Chat models
 
@@ -31,7 +31,7 @@ Microsoft offers three main options for accessing chat models through Azure:
 
 1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended) — Access any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface, with enterprise features such as keyless authentication through [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity), regional data residency, and private networking. Use [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) on the v1 API, or [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) for traditional deployments.
 
-   Azure OpenAI also supports the [Responses API](https://docs.langchain.com/oss/python/integrations/providers/microsoft#responses-api), which gives you access to server-side tools like code interpreter, image generation, and file search directly from your chat model.
+   Azure OpenAI also supports the [Responses API](#responses-api), which gives you access to server-side tools like code interpreter, image generation, and file search directly from your chat model.
 2. **[Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)** — Recommended for accessing tools, storage, and custom middleware from the broader Azure ecosystem alongside your chat model.
 3. **[Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)** — Allows deployment and management of custom or fine-tuned open-source models with Azure Machine Learning.
 
@@ -87,7 +87,7 @@ For traditional Azure OpenAI API versions, use [`AzureChatOpenAI`](https://refer
 from langchain_openai import AzureChatOpenAI
 ```
 
-See the [Azure ChatOpenAI integration page](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai) for end-to-end setup, Entra ID authentication, tool calling, and reasoning examples.
+See the [Azure ChatOpenAI integration page](../chat/azure_chat_openai.md) for end-to-end setup, Entra ID authentication, tool calling, and reasoning examples.
 
 #### Responses API
 
@@ -129,7 +129,7 @@ response = llm.invoke("Summarize the bitter lesson.")
 print(response.text)
 ```
 
-For a walkthrough of reasoning effort, reasoning summaries, and streaming with the Responses API, see the [Azure ChatOpenAI integration page](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai).
+For a walkthrough of reasoning effort, reasoning summaries, and streaming with the Responses API, see the [Azure ChatOpenAI integration page](../chat/azure_chat_openai.md).
 
 ### Azure AI
 
@@ -143,7 +143,7 @@ pip install -U langchain-azure-ai
 uv add langchain-azure-ai
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/chat/azure_ai).
+See a [usage example](../chat/azure_ai.md).
 
 ## LLMs
 
@@ -154,7 +154,7 @@ Microsoft offers two main options for accessing LLMs through Azure:
 
 ### Azure OpenAI
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/azure_openai).
+See a [usage example](../llms/azure_openai.md).
 
 ```bash
 pip install -U langchain-openai
@@ -206,7 +206,7 @@ Microsoft offers two main options for accessing embedding models through Azure:
 
 ### Azure OpenAI
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai).
+See a [usage example](../embeddings/azure_openai.md).
 
 ```bash
 pip install -U langchain-openai
@@ -259,7 +259,7 @@ pip install -U langchain-azure-ai
 uv add langchain-azure-ai
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/providers/azure_ai#azure-ai-model-inference-for-embeddings).
+See a [usage example](azure_ai.md#azure-ai-model-inference-for-embeddings).
 
 ## Middleware
 
@@ -277,7 +277,7 @@ pip install -U langchain-azure-ai
 uv add langchain-azure-ai
 ```
 
-See the [Microsoft Foundry middleware guide](https://docs.langchain.com/oss/python/integrations/middleware/azure_ai).
+See the [Microsoft Foundry middleware guide](../middleware/azure_ai.md).
 
 ```python
 from langchain_azure_ai.agents.middleware import AzureContentModerationMiddleware
@@ -306,7 +306,7 @@ pip install langchain-azure-storage
 uv add langchain-azure-storage
 ```
 
-See [usage examples for the Azure Blob Storage Loader](https://docs.langchain.com/oss/python/integrations/document_loaders/azure_blob_storage).
+See [usage examples for the Azure Blob Storage Loader](../document_loaders/azure_blob_storage.md).
 
 ```python
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
@@ -400,7 +400,7 @@ Below are two available Azure Cosmos DB APIs that can provide vector store funct
 
 ##### Installation and setup
 
-See [detailed configuration instructions](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore).
+See [detailed configuration instructions](../vectorstores/azure_cosmos_db_mongo_vcore.md).
 
 We need to install `langchain-azure-ai` and `pymongo` python packages.
 
@@ -420,7 +420,7 @@ With Cosmos DB for MongoDB vCore, developers can enjoy the benefits of native Az
 
 [Sign Up](https://azure.microsoft.com/en-us/free/) for free to get started today.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore).
+See a [usage example](../vectorstores/azure_cosmos_db_mongo_vcore.md).
 
 ```python
 from langchain_azure_ai.vectorstores import AzureCosmosDBMongoVCoreVectorSearch
@@ -437,7 +437,7 @@ from langchain_azure_ai.vectorstores import AzureCosmosDBMongoVCoreVectorSearch
 
 ##### Installation and setup
 
-See [detail configuration instructions](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql).
+See [detail configuration instructions](../vectorstores/azure_cosmos_db_no_sql.md).
 
 We need to install `langchain-azure-cosmosdb` and `azure-cosmos` python packages.
 
@@ -456,7 +456,7 @@ in every Azure region and can automatically replicate data closer to users. It h
 
 [Sign Up](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-python?pivots=devcontainer-codespace) for free to get started today.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql).
+See a [usage example](../vectorstores/azure_cosmos_db_no_sql.md).
 
 ```python
 from langchain_azure_cosmosdb import AzureCosmosDBNoSqlVectorSearch
@@ -470,7 +470,7 @@ See [set up instructions](https://learn.microsoft.com/en-us/azure/postgresql/fle
 
 Simply use the [connection string](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/connect-python?tabs=cmd%2Cpassword#add-authentication-code) from your Azure Portal.
 
-Since Azure Database for PostgreSQL is open-source Postgres, you can use the [LangChain's Postgres support](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvector/) to connect to Azure Database for PostgreSQL.
+Since Azure Database for PostgreSQL is open-source Postgres, you can use the [LangChain's Postgres support](../vectorstores/pgvector.md) to connect to Azure Database for PostgreSQL.
 
 ### Azure SQL Database
 
@@ -506,9 +506,9 @@ from langchain_sqlserver import SQLServer_VectorStore
 
 See [set up instructions](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/quickstart-create-server-portal) for Azure Database for PostgreSQL.
 
-You need to [enable pgvector extension](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-use-pgvector) in your database to use Postgres as a vector store. Once you have the extension enabled, you can use the [PGVector in LangChain](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvector/) to connect to Azure Database for PostgreSQL.
+You need to [enable pgvector extension](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-use-pgvector) in your database to use Postgres as a vector store. Once you have the extension enabled, you can use the [PGVector in LangChain](../vectorstores/pgvector.md) to connect to Azure Database for PostgreSQL.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvector/). Simply use the [connection string](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/connect-python?tabs=cmd%2Cpassword#add-authentication-code) from your Azure Portal.
+See a [usage example](../vectorstores/pgvector.md). Simply use the [connection string](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/connect-python?tabs=cmd%2Cpassword#add-authentication-code) from your Azure Portal.
 
 ## Tools
 
@@ -526,7 +526,7 @@ pip install -U "langchain-azure-ai[tools]"
 uv add "langchain-azure-ai[tools]"
 ```
 
-See the [Microsoft Foundry Tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services).
+See the [Microsoft Foundry Tools guide](../tools/azure_ai_services.md).
 
 ```python
 from langchain_azure_ai.tools import AzureAIDocumentIntelligenceTool
@@ -536,7 +536,7 @@ from langchain_azure_ai.tools import AzureAIDocumentIntelligenceTool
 
 Microsoft Foundry Models has several models available in the catalog for image generation.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools import AzureOpenAIModelImageGenTool
@@ -546,7 +546,7 @@ from langchain_azure_ai.tools import AzureOpenAIModelImageGenTool
 
 Microsoft Foundry Models has Whisper models available in the catalog for speech-to-text transcriptions.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools import AzureOpenAITranscriptionsTool
@@ -556,7 +556,7 @@ from langchain_azure_ai.tools import AzureOpenAITranscriptionsTool
 
 Run Python code server-side in a sandboxed container with the Code Interpreter tool.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools.builtin import CodeInterpreterTool
@@ -566,7 +566,7 @@ from langchain_azure_ai.tools.builtin import CodeInterpreterTool
 
 Search the internet for current information and sources.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools.builtin import WebSearchTool
@@ -576,7 +576,7 @@ from langchain_azure_ai.tools.builtin import WebSearchTool
 
 Search vector stores for relevant document content.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools.builtin import FileSearchTool
@@ -586,7 +586,7 @@ from langchain_azure_ai.tools.builtin import FileSearchTool
 
 Generate or edit images using GPT image models server-side in Azure AI Foundry.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools.builtin import ImageGenerationTool
@@ -596,7 +596,7 @@ from langchain_azure_ai.tools.builtin import ImageGenerationTool
 
 Access external Model Context Protocol (MCP) servers.
 
-See the [Microsoft Foundry tools guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai).
+See the [Microsoft Foundry tools guide](../tools/azure_ai.md).
 
 ```python
 from langchain_azure_ai.tools.builtin import McpTool
@@ -605,7 +605,7 @@ from langchain_azure_ai.tools.builtin import McpTool
 ### Azure Container Apps Dynamic Sessions
 
 We need to get the `POOL_MANAGEMENT_ENDPOINT` environment variable from the Azure Container Apps service.
-See the [Azure dynamic sessions setup instructions](https://docs.langchain.com/oss/python/integrations/tools/azure_dynamic_sessions/#setup).
+See the [Azure dynamic sessions setup instructions](../tools/azure_dynamic_sessions.md#setup).
 
 We need to install a python package.
 
@@ -617,7 +617,7 @@ pip install langchain-azure-dynamic-sessions
 uv add langchain-azure-dynamic-sessions
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/azure_dynamic_sessions).
+See a [usage example](../tools/azure_dynamic_sessions.md).
 
 ```python
 from langchain_azure_dynamic_sessions import SessionsPythonREPLTool
@@ -637,7 +637,7 @@ pip install -U "langchain-azure-ai[tools]"
 uv add "langchain-azure-ai[tools]"
 ```
 
-See the [Azure Logic Apps integration guide](https://docs.langchain.com/oss/python/integrations/tools/azure_logic_apps).
+See the [Azure Logic Apps integration guide](../tools/azure_logic_apps.md).
 
 ```python
 from langchain_azure_ai.tools import AzureLogicAppTool
@@ -659,7 +659,7 @@ pip install -U "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
 uv add "langchain-azure-ai[tools]" langchain-mcp-adapters httpx
 ```
 
-See the [Azure AI Foundry Toolbox guide](https://docs.langchain.com/oss/python/integrations/tools/azure_ai#azureaiprojecttoolbox).
+See the [Azure AI Foundry Toolbox guide](../tools/azure_ai.md#azureaiprojecttoolbox).
 
 ```python
 from langchain_azure_ai.tools import AzureAIProjectToolbox
@@ -677,7 +677,7 @@ pip install -U "langchain-azure-ai[tools]"
 uv add "langchain-azure-ai[tools]"
 ```
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services).
+See a [usage example](../tools/azure_ai_services.md).
 
 ```python
 from langchain_azure_ai.tools import AzureAIServicesToolkit
@@ -685,11 +685,11 @@ from langchain_azure_ai.tools import AzureAIServicesToolkit
 
 The `AzureAIServicesToolkit` toolkit includes the following tools:
 
-* Image Analysis: [AzureAIImageAnalysisTool](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaiimageanalysistool)
-* Document Intelligence: [AzureAIDocumentIntelligenceTool](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaidocumentintelligencetool)
-* Speech to Text: [AzureAISpeechToTextTool](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaispeechtotexttool)
-* Text to Speech: [AzureAITextToSpeechTool](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitexttospeechtool)
-* Text Analytics for Health: [AzureAITextAnalyticsHealthTool](https://docs.langchain.com/oss/python/integrations/tools/azure_ai_services#azureaitextanalyticshealthtool)
+* Image Analysis: [AzureAIImageAnalysisTool](../tools/azure_ai_services.md#azureaiimageanalysistool)
+* Document Intelligence: [AzureAIDocumentIntelligenceTool](../tools/azure_ai_services.md#azureaidocumentintelligencetool)
+* Speech to Text: [AzureAISpeechToTextTool](../tools/azure_ai_services.md#azureaispeechtotexttool)
+* Text to Speech: [AzureAITextToSpeechTool](../tools/azure_ai_services.md#azureaitexttospeechtool)
+* Text Analytics for Health: [AzureAITextAnalyticsHealthTool](../tools/azure_ai_services.md#azureaitextanalyticshealthtool)
 
 ## Runtime
 

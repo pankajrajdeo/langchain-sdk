@@ -1,14 +1,14 @@
 # Trace with the Vercel AI SDK (Legacy)
 
 > [!WARNING]
-> This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see [the new guide](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk).
+> This page documents an older method of tracing AI SDK runs. For a simpler and more general method that does not require OTEL setup, see [the new guide](trace-with-vercel-ai-sdk.md).
 
 You can use LangSmith to trace runs from the Vercel AI SDK using OpenTelemetry (OTEL). This guide will walk through an example.
 
 > [!NOTE]
 > Many popular [OpenTelemetry implementations](https://www.npmjs.com/package/@opentelemetry/sdk-node) in JavaScript are currently experimental,
 > and may behave erratically in production, especially when instrumenting LangSmith alongside other providers. If you are on AI SDK 5,
-> we strongly suggest using [our recommended approach for tracing AI SDK runs](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk).
+> we strongly suggest using [our recommended approach for tracing AI SDK runs](trace-with-vercel-ai-sdk.md).
 
 ## 0. Installation
 

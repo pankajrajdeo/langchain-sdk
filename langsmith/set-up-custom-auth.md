@@ -5,13 +5,13 @@ In this tutorial, we will build a chatbot that only lets specific users access i
 This is part 1 of our authentication series:
 
 1. Set up custom authentication (you are here) - Control who can access your bot
-2. [Make conversations private](https://docs.langchain.com/langsmith/resource-auth) - Let users have private conversations
-3. [Connect an authentication provider](https://docs.langchain.com/langsmith/add-auth-server) - Add real user accounts and validate using OAuth2 for production
+2. [Make conversations private](resource-auth.md) - Let users have private conversations
+3. [Connect an authentication provider](add-auth-server.md) - Add real user accounts and validate using OAuth2 for production
 
 This guide assumes basic familiarity with the following concepts:
 
-* [**Authentication & Access Control**](https://docs.langchain.com/langsmith/auth)
-* [**LangSmith**](https://docs.langchain.com/langsmith/observability)
+* [**Authentication & Access Control**](auth.md)
+* [**LangSmith**](observability.md)
 
 > [!NOTE]
 > Custom auth is only available for LangSmith SaaS deployments or Enterprise Self-Hosted deployments.
@@ -48,7 +48,7 @@ langgraph dev
 npx @langchain/langgraph-cli dev
 ```
 
-The server will start and open [Studio](https://docs.langchain.com/langsmith/studio) in your browser:
+The server will start and open [Studio](studio.md) in your browser:
 
 ```
 > - 🚀 API: http://127.0.0.1:2024
@@ -61,7 +61,7 @@ The server will start and open [Studio](https://docs.langchain.com/langsmith/stu
 
 If you were to self-host this on the public internet, anyone could access it.
 
-> **Image:** [No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet.](https://docs.langchain.com/langsmith/set-up-custom-auth)
+> **Image:** [No authentication: the dev server is publicly reachable, anyone can access the bot if exposed to the internet.](set-up-custom-auth.md)
 
 ## 2. Add authentication
 
@@ -146,9 +146,9 @@ If you didn't add the `--no-browser`, the Studio UI will open in the browser. By
 
 ## 4. Chat with your bot
 
-You should now only be able to access the bot if you provide a valid token in the request header. Users will still, however, be able to access each other's resources until you add [resource authorization handlers](https://docs.langchain.com/langsmith/auth#resource-specific-handlers) in the next section of the tutorial.
+You should now only be able to access the bot if you provide a valid token in the request header. Users will still, however, be able to access each other's resources until you add [resource authorization handlers](auth.md#resource-specific-handlers) in the next section of the tutorial.
 
-> **Image:** [Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step.](https://docs.langchain.com/langsmith/set-up-custom-auth)
+> **Image:** [Auth gate passes requests with a valid token, but no per-resource filters are applied yet—so users share visibility until authorization handlers are added in the next step.](set-up-custom-auth.md)
 
 Run the following code in a file or notebook:
 
@@ -198,8 +198,8 @@ Congratulations! You've built a chatbot that only lets "authenticated" users acc
 
 Now that you can control who accesses your bot, you might want to:
 
-1. Continue the tutorial by going to [Make conversations private](https://docs.langchain.com/langsmith/resource-auth) to learn about resource authorization.
-2. Read more about [authentication concepts](https://docs.langchain.com/langsmith/auth).
+1. Continue the tutorial by going to [Make conversations private](resource-auth.md) to learn about resource authorization.
+2. Read more about [authentication concepts](auth.md).
 3. Check out the API reference for [Auth](https://reference.langchain.com/python/langgraph-sdk/auth/Auth), [Auth.authenticate](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate), and [MinimalUserDict](https://reference.langchain.com/python/langgraph-sdk/auth/types/MinimalUserDict) for more authentication details.
 
 ***

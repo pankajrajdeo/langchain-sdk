@@ -2,19 +2,19 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-as-judge)
 LLM applications can be challenging to evaluate since they often generate conversational text with no single correct answer.
 
-This guide shows you how to define an [LLM-as-a-judge evaluator](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge) for [offline evaluation](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge).
+This guide shows you how to define an [LLM-as-a-judge evaluator](evaluation-concepts.md#llm-as-judge) for [offline evaluation](evaluation-concepts.md#offline-evaluations) using the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge).
 
 > [!NOTE]
-> This guide uses the LangSmith UI. You can also create an LLM-as-a-judge evaluator programmatically with the SDK, and it appears in the LangSmith UI the same as one created here. Refer to [Manage evaluators with the SDK](https://docs.langchain.com/langsmith/manage-evaluators-sdk).
+> This guide uses the LangSmith UI. You can also create an LLM-as-a-judge evaluator programmatically with the SDK, and it appears in the LangSmith UI the same as one created here. Refer to [Manage evaluators with the SDK](manage-evaluators-sdk.md).
 >
-> To run evaluations in real-time on your production traces, refer to [setting up online evaluations](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge).
+> To run evaluations in real-time on your production traces, refer to [setting up online evaluations](online-evaluations-llm-as-judge.md).
 
 > [!TIP]
-> If your dataset examples were built with [assertions written in an annotation queue](https://docs.langchain.com/langsmith/assertions), an LLM-as-a-judge evaluator can read `example.outputs["assertions"]` and grade each one against your application's output.
+> If your dataset examples were built with [assertions written in an annotation queue](assertions.md), an LLM-as-a-judge evaluator can read `example.outputs["assertions"]` and grade each one against your application's output.
 
 ## Step 1. Create the evaluator
 
-1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge), click **+ Evaluator** from the [Evaluators](https://docs.langchain.com/langsmith/evaluators) page, or from the **Evaluators** tab within a dataset or tracing project.
+1. In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-as-judge), click **+ Evaluator** from the [Evaluators](evaluators.md) page, or from the **Evaluators** tab within a dataset or tracing project.
 2. In the **Add Evaluator** panel, select **LLM-as-a-Judge Evaluator** under **Create from scratch**. Alternatively, select **Create from a template** to start from a ready-made evaluator and edit it.
 
 ### Evaluator templates
@@ -23,9 +23,9 @@ Evaluator templates are a useful starting point when setting up evaluations. Sel
 
 You can configure an LLM-as-a-Judge evaluator:
 
-* From the [Evaluators](https://docs.langchain.com/langsmith/evaluators) page
-* As part of a dataset to [automatically run evaluations on experiments](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset)
-* When running an [online evaluation](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+* From the [Evaluators](evaluators.md) page
+* As part of a dataset to [automatically run evaluations on experiments](bind-evaluator-to-dataset.md)
+* When running an [online evaluation](online-evaluations-llm-as-judge.md)
 
 ### Customize your LLM-as-a-judge evaluator
 
@@ -35,7 +35,7 @@ Add specific instructions for your LLM-as-a-judge evaluator prompt and configure
 
 ### Prompt
 
-Create a new prompt, or choose an existing prompt from the [prompt hub](https://docs.langchain.com/langsmith/prompt-engineering-quickstart).
+Create a new prompt, or choose an existing prompt from the [prompt hub](prompt-engineering-quickstart.md).
 
 * **Create your own prompt**: Create a custom prompt inline.
 
@@ -59,13 +59,13 @@ Previewing the prompt will show you of what the formatted prompt will look like 
 
 ### Improve your evaluator with few-shot examples
 
-To better align the LLM-as-a-judge evaluator to human preferences, LangSmith allows you to collect [human corrections](https://docs.langchain.com/langsmith/create-few-shot-evaluators#make-corrections) on evaluator scores. With this selection enabled, corrections are then inserted automatically as few-shot examples into your prompt.
+To better align the LLM-as-a-judge evaluator to human preferences, LangSmith allows you to collect [human corrections](create-few-shot-evaluators.md#make-corrections) on evaluator scores. With this selection enabled, corrections are then inserted automatically as few-shot examples into your prompt.
 
-Learn [how to set up few-shot examples and make corrections](https://docs.langchain.com/langsmith/create-few-shot-evaluators).
+Learn [how to set up few-shot examples and make corrections](create-few-shot-evaluators.md).
 
 ### Feedback configuration
 
-Feedback configuration is the scoring criteria that your LLM-as-a-judge evaluator will use. Think of this as the rubric that your evaluator will grade based on. Scores will be added as [feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback) to a run or example. Defining feedback for your evaluator:
+Feedback configuration is the scoring criteria that your LLM-as-a-judge evaluator will use. Think of this as the rubric that your evaluator will grade based on. Scores will be added as [feedback](observability-concepts.md#feedback) to a run or example. Defining feedback for your evaluator:
 
 1. **Name the feedback key**: This is the name that will appear when viewing evaluation results. Names should be unique across experiments.
 
@@ -77,7 +77,7 @@ Feedback configuration is the scoring criteria that your LLM-as-a-judge evaluato
    * **Categorical**: Select from predefined categories.
    * **Continuous**: Numerical scoring within a specified range.
 
-Behind the scenes, feedback configuration is added as [structured output](https://docs.langchain.com/oss/python/langchain/structured-output) to the LLM-as-a-judge prompt. If you're using an existing prompt from the hub, you must add an output schema to the prompt before configuring an evaluator to use it. Each top-level key in the output schema will be treated as a separate piece of feedback.
+Behind the scenes, feedback configuration is added as [structured output](../langchain/structured-output.md) to the LLM-as-a-judge prompt. If you're using an existing prompt from the hub, you must add an output schema to the prompt before configuring an evaluator to use it. Each top-level key in the output schema will be treated as a separate piece of feedback.
 
 ## Step 3. Save the evaluator
 

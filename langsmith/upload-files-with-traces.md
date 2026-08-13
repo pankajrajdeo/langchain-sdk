@@ -1,12 +1,12 @@
 # Upload files with traces
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/upload-files-with-traces)
-When you trace with the [`@traceable` decorator or `traceable` wrapper](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable), LangSmith supports uploading binary files (such as images, audio, videos, PDFs, and CSVs) alongside your traces. This is particularly useful when working with LLM pipelines using multimodal inputs or outputs.
+When you trace with the [`@traceable` decorator or `traceable` wrapper](annotate-code.md#use-%40traceable-%2F-traceable), LangSmith supports uploading binary files (such as images, audio, videos, PDFs, and CSVs) alongside your traces. This is particularly useful when working with LLM pipelines using multimodal inputs or outputs.
 
-In both the [Python](https://docs.langchain.com/langsmith/upload-files-with-traces#python) and [TypeScript](https://docs.langchain.com/langsmith/upload-files-with-traces#typescript) SDKs, you can add attachments to your traces by specifying the MIME type and binary content of each file. This page explains how to define and trace attachments using the `Attachment` type in Python and `Uint8Array` / `ArrayBuffer` in TypeScript.
+In both the [Python](#python) and [TypeScript](#typescript) SDKs, you can add attachments to your traces by specifying the MIME type and binary content of each file. This page explains how to define and trace attachments using the `Attachment` type in Python and `Uint8Array` / `ArrayBuffer` in TypeScript.
 
 ## Python
 
-In the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk), you can use the `Attachment` type to add files to your traces. Each `Attachment` requires:
+In the [Python SDK](smith-python-sdk.md), you can use the `Attachment` type to add files to your traces. Each `Attachment` requires:
 
 * `mime_type` (str): The MIME type of the file (e.g., `"image/png"`).
 * `data` (bytes | Path): The binary content of the file, or the file path.
@@ -77,7 +77,7 @@ result = trace_with_attachments(
 
 ## TypeScript
 
-In the [TypeScript SDK](https://docs.langchain.com/langsmith/smith-js-ts-sdk), you can add attachments to traces by using `Uint8Array` or `ArrayBuffer` as data types. Each attachment's MIME type is specified within `extractAttachments`:
+In the [TypeScript SDK](smith-js-ts-sdk.md), you can add attachments to traces by using `Uint8Array` or `ArrayBuffer` as data types. Each attachment's MIME type is specified within `extractAttachments`:
 
 * `Uint8Array`: Useful for handling binary data directly.
 * `ArrayBuffer`: Represents fixed-length binary data, which you can convert to `Uint8Array` as needed.
@@ -158,8 +158,8 @@ const result = await traceableWithAttachments(
 
 ## Related
 
-* [Manage datasets](https://docs.langchain.com/langsmith/manage-datasets)
-* [Set up LLM-as-a-judge online evaluators](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+* [Manage datasets](manage-datasets.md)
+* [Set up LLM-as-a-judge online evaluators](online-evaluations-llm-as-judge.md)
 
 ***
 

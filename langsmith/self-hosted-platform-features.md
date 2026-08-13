@@ -2,29 +2,29 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/self-hosted-platform-features)
 Self-hosted-only platform features for LangSmith Deployment, including custom databases, listeners, and resource customization.
 
-This page describes the platform features that apply only to [self-hosted](https://docs.langchain.com/langsmith/self-hosted) deployments.
+This page describes the platform features that apply only to [self-hosted](self-hosted.md) deployments.
 
 ## Custom PostgreSQL
 
-A custom PostgreSQL instance can be used instead of the [one automatically created by the control plane](https://docs.langchain.com/langsmith/cloud-platform-features#database-provisioning). Specify the [`POSTGRES_URI_CUSTOM`](https://docs.langchain.com/langsmith/env-var-self-hosted) environment variable to use a custom PostgreSQL instance.
+A custom PostgreSQL instance can be used instead of the [one automatically created by the control plane](cloud-platform-features.md#database-provisioning). Specify the [`POSTGRES_URI_CUSTOM`](env-var-self-hosted.md) environment variable to use a custom PostgreSQL instance.
 
 Multiple deployments can share the same PostgreSQL instance. For example, for `Deployment A`, `POSTGRES_URI_CUSTOM` can be set to `postgres://<user>:<password>@/<database_name_1>?host=<hostname_1>` and for `Deployment B`, `POSTGRES_URI_CUSTOM` can be set to `postgres://<user>:<password>@/<database_name_2>?host=<hostname_1>`. `<database_name_1>` and `<database_name_2>` are different databases within the same instance, but `<hostname_1>` is shared. **The same database cannot be used for separate deployments**.
 
 ## Custom Redis
 
-A custom Redis instance can be used instead of the one automatically created by the control plane. Specify the [`REDIS_URI_CUSTOM`](https://docs.langchain.com/langsmith/env-var-self-hosted) environment variable to use a custom Redis instance.
+A custom Redis instance can be used instead of the one automatically created by the control plane. Specify the [`REDIS_URI_CUSTOM`](env-var-self-hosted.md) environment variable to use a custom Redis instance.
 
 Multiple deployments can share the same Redis instance. For example, for `Deployment A`, `REDIS_URI_CUSTOM` can be set to `redis://<hostname_1>:<port>/1` and for `Deployment B`, `REDIS_URI_CUSTOM` can be set to `redis://<hostname_1>:<port>/2`. `1` and `2` are different database numbers within the same instance, but `<hostname_1>` is shared. **The same database number cannot be used for separate deployments**.
 
 ## Listeners
 
-A listener is an instance of a [listener application](https://docs.langchain.com/langsmith/data-plane#listener-application). A listener contains metadata about the application (such as its version) and metadata about the compute infrastructure where it can deploy to (such as Kubernetes namespaces).
+A listener is an instance of a [listener application](data-plane.md#listener-application). A listener contains metadata about the application (such as its version) and metadata about the compute infrastructure where it can deploy to (such as Kubernetes namespaces).
 
 The listener data model only applies to self-hosted deployments. The control plane and listener coordinate to provision and reconcile deployments running on your own infrastructure.
 
 ## Resource customization
 
-Resources for self-hosted deployments can be fully customized. Unlike Cloud, which exposes fixed Serverless and Dedicated [deployment types](https://docs.langchain.com/langsmith/cloud-platform-features#deployment-types), self-hosted deployments size CPU, memory, replicas, and storage according to your infrastructure configuration. See [Configure Agent Server for scale](https://docs.langchain.com/langsmith/agent-server-scale) for tuning guidance.
+Resources for self-hosted deployments can be fully customized. Unlike Cloud, which exposes fixed Serverless and Dedicated [deployment types](cloud-platform-features.md#deployment-types), self-hosted deployments size CPU, memory, replicas, and storage according to your infrastructure configuration. See [Configure Agent Server for scale](agent-server-scale.md) for tuning guidance.
 
 ***
 

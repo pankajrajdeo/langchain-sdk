@@ -32,7 +32,7 @@ from langchain_aimlapi import ChatAIMLAPI
 
 ## LLMs
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/llms/aimlapi).
+See a [usage example](../llms/aimlapi.md).
 
 ```python
 from langchain_aimlapi import AIMLAPILLM

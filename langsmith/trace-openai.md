@@ -9,7 +9,7 @@ The [`wrap_openai`](https://reference.langchain.com/python/langsmith/wrappers/_o
 >
 > If your LangSmith API key is linked to multiple workspaces, set the `LANGSMITH_WORKSPACE_ID` environment variable to specify which workspace to use.
 >
-> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project).
+> By default, the traces will be logged to a project named `default`. To log traces to a different project, see [Log traces to a specific project](log-traces-to-project.md).
 
 ```python
 import openai
@@ -68,7 +68,7 @@ const chatPipeline = traceable(async (question: string) => {
 await chatPipeline("Can you summarize this morning's meetings?");
 ```
 
-To trace a provider with an OpenAI-compatible API, refer to [Trace OpenAI-compatible providers](https://docs.langchain.com/langsmith/trace-with-openai-compatible).
+To trace a provider with an OpenAI-compatible API, refer to [Trace OpenAI-compatible providers](trace-with-openai-compatible.md).
 
 ***
 

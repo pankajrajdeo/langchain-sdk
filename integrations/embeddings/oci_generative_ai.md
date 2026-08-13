@@ -2,7 +2,7 @@
 
 > Integrate with OCI Generative AI embeddings using LangChain Python.
 
-This doc will help you get started with OCI Generative AI [embedding models](https://docs.langchain.com/oss/python/integrations/embeddings). Oracle Cloud Infrastructure (OCI) Generative AI provides state-of-the-art embedding models for text and images, enabling semantic search, RAG, clustering, and cross-modal applications.
+This doc will help you get started with OCI Generative AI [embedding models](../embeddings.md). Oracle Cloud Infrastructure (OCI) Generative AI provides state-of-the-art embedding models for text and images, enabling semantic search, RAG, clustering, and cross-modal applications.
 
 For detailed documentation, see the [OCI Generative AI documentation](https://docs.oracle.com/en-us/iaas/Content/generative-ai/home.htm) and [API reference](https://docs.oracle.com/en-us/iaas/api/#/en/generative-ai/20231130/).
 
@@ -147,10 +147,10 @@ For detailed documentation of all `OCIGenAIEmbeddings` features and configuratio
 
 ## Related
 
-* [OCI Provider Overview](https://docs.langchain.com/oss/python/integrations/providers/oci)
-* [`ChatOCIGenAI`](https://docs.langchain.com/oss/python/integrations/chat/oci_generative_ai)
-* [Embeddings Guide](https://docs.langchain.com/oss/python/integrations/embeddings)
-* [RAG Tutorial](https://docs.langchain.com/oss/python/deepagents/rag)
+* [OCI Provider Overview](../providers/oci.md)
+* [`ChatOCIGenAI`](../chat/oci_generative_ai.md)
+* [Embeddings Guide](../embeddings.md)
+* [RAG Tutorial](../../deepagents/rag.md)
 
 ***
 

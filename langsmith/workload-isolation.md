@@ -1,17 +1,17 @@
 # Workload isolation
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/workload-isolation)
-LangSmith uses a hierarchical structure to organize your work: [*organizations*](https://docs.langchain.com/langsmith/administration-overview#organizations), [*workspaces*](https://docs.langchain.com/langsmith/administration-overview#workspaces), [*applications*](https://docs.langchain.com/langsmith/administration-overview#applications), and [*resources*](https://docs.langchain.com/langsmith/administration-overview#resources). This structure lets you balance collaboration with access control, allowing you to choose the right level of isolation for your team's needs.
+LangSmith uses a hierarchical structure to organize your work: [*organizations*](administration-overview.md#organizations), [*workspaces*](administration-overview.md#workspaces), [*applications*](administration-overview.md#applications), and [*resources*](administration-overview.md#resources). This structure lets you balance collaboration with access control, allowing you to choose the right level of isolation for your team's needs.
 
-The LangSmith permission system builds on this hierarchy. With [role-based access control (RBAC)](https://docs.langchain.com/langsmith/rbac), user [permissions](https://docs.langchain.com/langsmith/organization-workspace-operations) are scoped to one or more workspaces, enforcing isolation between workspaces. With more fine-grained [attribute-based access control](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies) (ABAC), access can be further restricted or granted based on attributes such as tags or applications within a workspace (for example, allowing users to access only development resources or only resources associated with a specific application).
+The LangSmith permission system builds on this hierarchy. With [role-based access control (RBAC)](rbac.md), user [permissions](organization-workspace-operations.md) are scoped to one or more workspaces, enforcing isolation between workspaces. With more fine-grained [attribute-based access control](organization-workspace-operations.md#access-policies) (ABAC), access can be further restricted or granted based on attributes such as tags or applications within a workspace (for example, allowing users to access only development resources or only resources associated with a specific application).
 
 This page explains three common approaches to organizing workspaces based on your team's isolation requirements:
 
-* [Team-centric workspaces](https://docs.langchain.com/langsmith/workload-isolation#team-centric-workspaces): Single workspace per team (recommended for most customers)
-* [Collaborative workspaces](https://docs.langchain.com/langsmith/workload-isolation#collaborative-workspaces): Multiple teams per workspace
-* [Project-isolated workspaces](https://docs.langchain.com/langsmith/workload-isolation#project-isolated-workspaces): Multiple workspaces per team (for strict isolation requirements)
+* [Team-centric workspaces](#team-centric-workspaces): Single workspace per team (recommended for most customers)
+* [Collaborative workspaces](#collaborative-workspaces): Multiple teams per workspace
+* [Project-isolated workspaces](#project-isolated-workspaces): Multiple workspaces per team (for strict isolation requirements)
 
 > [!TIP]
-> For details on setting up organizations and workspaces, refer to [Set up hierarchy](https://docs.langchain.com/langsmith/set-up-hierarchy).
+> For details on setting up organizations and workspaces, refer to [Set up hierarchy](set-up-hierarchy.md).
 
 ## Team-centric workspaces
 
@@ -63,12 +63,12 @@ graph LR
     class DevA,ProdA,DatasetA,DevB,ProdB,DatasetB resourceStyle
 ```
 
-* **Pros:** A single workspace allows all team resources to be shared, making collaboration and iteration within a team straightforward. It also simplifies promotion from development to production. For example, the same [prompt](https://docs.langchain.com/langsmith/prompt-context-hub#prompts) can be versioned and promoted to production using tags, without copying or duplication.
-* **Cons:** The primary trade-off is limited isolation between environments of the same team. Development, test, and production resources coexist within the same application, so teams must rely on tagging and conventions to avoid accidental impact on production. [RBAC](https://docs.langchain.com/langsmith/rbac) is scoped at the workspace level. [ABAC](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies) provides more granular permissions within a workspace by restricting access based on resource attributes, such as allowing a user to access only development resources.
+* **Pros:** A single workspace allows all team resources to be shared, making collaboration and iteration within a team straightforward. It also simplifies promotion from development to production. For example, the same [prompt](prompt-context-hub.md#prompts) can be versioned and promoted to production using tags, without copying or duplication.
+* **Cons:** The primary trade-off is limited isolation between environments of the same team. Development, test, and production resources coexist within the same application, so teams must rely on tagging and conventions to avoid accidental impact on production. [RBAC](rbac.md) is scoped at the workspace level. [ABAC](organization-workspace-operations.md#access-policies) provides more granular permissions within a workspace by restricting access based on resource attributes, such as allowing a user to access only development resources.
 
 ## Collaborative workspaces
 
-In this model (multiple teams per workspace), multiple teams share a single workspace within an organization and use applications and [ABAC](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies) to separate resources and govern access. As a result, shared resources such as [prompts](https://docs.langchain.com/langsmith/prompt-context-hub#prompts) and [deployments](https://docs.langchain.com/langsmith/deployment) can be reused across teams, while access to sensitive resources like [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) and [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) is limited to the owning team.
+In this model (multiple teams per workspace), multiple teams share a single workspace within an organization and use applications and [ABAC](organization-workspace-operations.md#access-policies) to separate resources and govern access. As a result, shared resources such as [prompts](prompt-context-hub.md#prompts) and [deployments](deployment.md) can be reused across teams, while access to sensitive resources like [traces](observability-concepts.md#traces) and [datasets](evaluation-concepts.md#datasets) is limited to the owning team.
 
 ```mermaid
 graph LR
@@ -114,7 +114,7 @@ graph LR
 ```
 
 * **Pros:** Common resources such as prompts and deployments can be shared and reused across teams, increasing collaboration and reducing duplicated work. Unlike the team-centric workspace model, collaboration is not limited to a single team and can span all teams within the workspace.
-* **Cons:** Isolation between teams and environments is weaker than in multi-workspace models and depends on correct use of ABAC. Misconfigured tags or policies can expose sensitive [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) or [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) across teams, and managing permissions across multiple teams adds operational complexity.
+* **Cons:** Isolation between teams and environments is weaker than in multi-workspace models and depends on correct use of ABAC. Misconfigured tags or policies can expose sensitive [traces](observability-concepts.md#traces) or [datasets](evaluation-concepts.md#datasets) across teams, and managing permissions across multiple teams adds operational complexity.
 
 ## Project-isolated workspaces
 
@@ -167,7 +167,7 @@ graph LR
 ```
 
 * **Pros:** Strong isolation between teams, projects, and environments. Users with only access to the development workspace cannot view or access production data or any production resources, reducing the risk of accidental changes or cross-environment misuse.
-* **Cons:** Resources cannot be shared across workspaces. Reusing [prompts](https://docs.langchain.com/langsmith/prompt-context-hub#prompts), [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), or [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment), even when promoting an agent from development to production, requires manual copying between workspaces, which introduces friction and duplication. To reduce this overhead, you can use the [LangSmith Data Migration Tool](https://github.com/langchain-ai/langsmith-data-migration-tool) to copy prompts, datasets, or experiments between workspaces.
+* **Cons:** Resources cannot be shared across workspaces. Reusing [prompts](prompt-context-hub.md#prompts), [datasets](evaluation-concepts.md#datasets), or [experiments](evaluation-concepts.md#experiment), even when promoting an agent from development to production, requires manual copying between workspaces, which introduces friction and duplication. To reduce this overhead, you can use the [LangSmith Data Migration Tool](https://github.com/langchain-ai/langsmith-data-migration-tool) to copy prompts, datasets, or experiments between workspaces.
 
 ***
 

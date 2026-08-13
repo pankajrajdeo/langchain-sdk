@@ -25,7 +25,7 @@ AI gateway for cost control, BYOK routing, and multi-provider model access.
 #### [Ads4GPTs](https://github.com/ADS4GPTs/ads4gpts)
 Advertising platform for GPT applications and AI services.
 
-#### [Aerospike](https://docs.langchain.com/oss/python/integrations/providers/aerospike)
+#### [Aerospike](aerospike.md)
 Real-time, distributed NoSQL database built for speed and scale.
 
 #### [AG-UI Protocol](https://docs.ag-ui.com/quickstart/applications)
@@ -67,16 +67,16 @@ Verifiable evidence bundles for agent execution, export, and auditability.
 #### [AgentSeal](https://agentseal.io/docs/langchain)
 Tamper-evident logging and audit trails for LangChain LLM, tool, and chain events.
 
-#### [AgentSystems](https://docs.langchain.com/oss/python/integrations/providers/agentsystems)
+#### [AgentSystems](agentsystems.md)
 Governance infrastructure for AI systems.
 
 #### [AI Identity](https://ai-identity.co/docs)
 Per-agent identity, scoped API access, and tamper-evident audit logging for LangChain agents.
 
-#### [AI21](https://docs.langchain.com/oss/python/integrations/providers/ai21)
+#### [AI21](ai21.md)
 AI21 Labs' Jurassic models for text generation.
 
-#### [AI/ML API](https://docs.langchain.com/oss/python/integrations/providers/aimlapi)
+#### [AI/ML API](aimlapi.md)
 Unified API for multiple AI and ML services.
 
 #### [Airbyte](https://docs.airbyte.com/integrations/)
@@ -85,7 +85,7 @@ Data integration platform for ETL and ELT pipelines.
 #### [Alchemyst AI](https://getalchemystai.com/docs)
 Context cloud retriever for LangChain.js agents.
 
-#### [Alibaba Cloud](https://docs.langchain.com/oss/python/integrations/providers/alibaba_cloud)
+#### [Alibaba Cloud](alibaba_cloud.md)
 Alibaba's cloud computing and AI services.
 
 #### [Ampersend](https://docs.ampersend.ai)
@@ -100,10 +100,10 @@ Convert websites into clean, structured data at scale with AI-powered search and
 #### [ANEForge](https://github.com/sbryngelson/langchain-aneforge)
 LangChain embeddings on the Apple Neural Engine via ANEForge.
 
-#### [Anthropic](https://docs.langchain.com/oss/python/integrations/providers/anthropic)
+#### [Anthropic](anthropic.md)
 Claude models for advanced reasoning and conversation.
 
-#### [any-llm](https://docs.langchain.com/oss/python/integrations/providers/anyllm)
+#### [any-llm](anyllm.md)
 Unified interface for OpenAI, Anthropic, Google, and local models.
 
 #### [Apertis](https://docs.apertis.ai)
@@ -130,7 +130,7 @@ Open-access archive for scholarly articles.
 #### [assistant-ui](https://www.assistant-ui.com/docs/runtimes/langgraph)
 React framework for building AI chat interfaces with streaming support and LangGraph integration.
 
-#### [AstraDB](https://docs.langchain.com/oss/python/integrations/providers/astradb)
+#### [AstraDB](astradb.md)
 DataStax Astra DB vector database platform.
 
 #### [ATR Guardrail](https://github.com/Agent-Threat-Rule/agent-threat-rules/tree/main/integrations/langchain)
@@ -139,7 +139,7 @@ Runtime detection of prompt injection, tool poisoning, and unsafe tool calls usi
 #### [Auxen](https://auxen.ai)
 Dedicated per-customer LLM endpoints with an OpenAI-compatible API.
 
-#### [AWS](https://docs.langchain.com/oss/python/integrations/providers/aws)
+#### [AWS](aws.md)
 Amazon Web Services cloud platform and AI services.
 
 #### [Axiora](https://axiora.dev/docs)
@@ -148,7 +148,7 @@ Japanese listed-company financials from EDINET filings for LangChain agents.
 #### [AxioRank](https://app.axiorank.com/docs/integrations/langchain)
 Security gateway for AI agents: govern tool calls and model turns with allow, deny, and redact policies.
 
-#### [Azure AI](https://docs.langchain.com/oss/python/integrations/providers/azure_ai)
+#### [Azure AI](azure_ai.md)
 Microsoft Azure AI and cognitive services.
 
 #### [Baidu](https://www.paddleocr.com)
@@ -157,7 +157,7 @@ Baidu's AI services and language models.
 #### [Baponi](https://baponi.ai/docs/guides/deep-agents)
 Self-hostable or managed sandboxes for running AI-generated code.
 
-#### [Baseten](https://docs.langchain.com/oss/python/integrations/providers/baseten)
+#### [Baseten](baseten.md)
 ML model deployment and serving platform.
 
 #### [Bastion Prompt Protection](https://bastionsoft.com)
@@ -172,13 +172,13 @@ PII detection and protection for AI applications, including chain and RAG pipeli
 #### [Bodo DataFrames](https://docs.bodo.ai/)
 High-performance analytics and data processing.
 
-#### [Box](https://docs.langchain.com/oss/python/integrations/providers/box)
+#### [Box](box.md)
 Cloud content management and collaboration.
 
 #### [Brightdata](https://github.com/luminati-io/langchain-brightdata)
 Web data platform and proxy services.
 
-#### [Browserbase](https://docs.langchain.com/oss/python/integrations/providers/browserbase)
+#### [Browserbase](browserbase.md)
 Headless browser automation platform.
 
 #### [CAMB AI](https://docs.camb.ai)
@@ -187,19 +187,19 @@ Multilingual audio and localization services supporting 140+ languages.
 #### [Capsule](https://github.com/mavdol/langchain-capsule)
 Run Python and JavaScript code in isolated WebAssembly sandboxes.
 
-#### [Cerebras](https://docs.langchain.com/oss/python/integrations/providers/cerebras)
+#### [Cerebras](cerebras.md)
 AI compute platform with specialized processors.
 
 #### [Ceki](https://ceki.me)
 Marketplace of real residential Chrome sessions for AI agents.
 
-#### [Chroma](https://docs.langchain.com/oss/python/integrations/providers/chroma)
+#### [Chroma](chroma.md)
 Open-source embedding database for AI apps.
 
 #### [cloro](https://docs.cloro.dev)
 The scraper for SEO and AI SEO.
 
-#### [CopilotKit](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit)
+#### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)
 React framework with prebuilt UI components for AI copilots.
 
 #### [Cloudflare](https://developers.cloudflare.com/workers-ai/)
@@ -208,7 +208,7 @@ Web infrastructure and security services.
 #### [chDB](https://github.com/chdb-io/langchain-chdb)
 In-process OLAP SQL engine powered by ClickHouse, with a LangChain vector store.
 
-#### [CockroachDB](https://docs.langchain.com/oss/python/integrations/providers/cockroachdb)
+#### [CockroachDB](cockroachdb.md)
 Distributed SQL database with native vector support and C-SPANN indexes.
 
 #### [CosVectors](https://github.com/hushengquan/langchain-cos-vectors)
@@ -220,16 +220,16 @@ Memory layer for AI applications and agents.
 #### [comply54](https://comply54.io/langchain)
 Runtime compliance enforcement for AI agents under African data protection and financial-sector regulations.
 
-#### [Cohere](https://docs.langchain.com/oss/python/integrations/providers/cohere)
+#### [Cohere](cohere.md)
 Language AI platform for enterprise applications.
 
-#### [Context](https://docs.langchain.com/oss/python/integrations/providers/context)
+#### [Context](context.md)
 Context management for AI applications.
 
 #### [Contextual](https://docs.contextual.ai/)
 Contextual AI and language understanding.
 
-#### [CopilotKit](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit)
+#### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)
 React stack and Python middleware for Deep Agents, LangGraph agents, FastAPI, and generative UI.
 
 #### [Cosmergon](https://cosmergon.com)
@@ -238,7 +238,7 @@ Physics-based 3D agent-economy simulation for benchmarks and training.
 #### [Couchbase](https://docs.couchbase.com/server/current/vector-search/vector-search.html)
 NoSQL cloud database platform.
 
-#### [CrateDB](https://docs.langchain.com/oss/python/integrations/providers/cratedb)
+#### [CrateDB](cratedb.md)
 Distributed SQL database for machine data.
 
 #### [CRW](https://fastcrw.com)
@@ -259,19 +259,19 @@ Multi-model multi-protocol API gateway with OpenAI-compatible base URL support.
 #### [Dappier](https://docs.dappier.com/)
 Real-time AI data platform and API.
 
-#### [Databricks](https://docs.langchain.com/oss/python/integrations/providers/databricks)
+#### [Databricks](databricks.md)
 Unified analytics platform for big data and ML.
 
-#### [Datadog](https://docs.langchain.com/oss/python/integrations/providers/datadog)
+#### [Datadog](datadog.md)
 Monitoring and analytics platform for applications.
 
-#### [Daytona](https://docs.langchain.com/oss/python/integrations/providers/daytona)
+#### [Daytona](daytona.md)
 Secure and elastic infrastructure for running your AI-generated code.
 
 #### [DeepLake](https://docs.deeplake.ai/)
 Vector database for deep learning applications.
 
-#### [DeepSeek](https://docs.langchain.com/oss/python/integrations/providers/deepseek)
+#### [DeepSeek](deepseek.md)
 Advanced reasoning and coding AI models.
 
 #### [Delegare](https://docs.delegare.dev)
@@ -280,7 +280,7 @@ Agent payment authorization infrastructure with AP2 mandates and x402 handling.
 #### [Dewey](https://github.com/meetdewey/langchain-dewey)
 Real-time document backend with retriever, vector store, and research tool.
 
-#### [Dell](https://docs.langchain.com/oss/python/integrations/providers/dell)
+#### [Dell](dell.md)
 Dell Technologies AI and computing solutions.
 
 #### [DexPaprika](https://docs.dexpaprika.com)
@@ -292,16 +292,16 @@ Structured web knowledge for developers and LLM applications.
 #### [DomPruner](https://github.com/dong7812/dompruner-py)
 DOM AST pruning that loads web pages as compact Markdown with no API key.
 
-#### [Docling](https://docs.langchain.com/oss/python/integrations/providers/docling)
+#### [Docling](docling.md)
 Document processing and AI integration.
 
-#### [Docugami](https://docs.langchain.com/oss/python/integrations/providers/docugami)
+#### [Docugami](docugami.md)
 Document AI and semantic processing.
 
 #### [Doubleword](https://docs.doubleword.ai)
 OpenAI-compatible inference platform with first-class batch-inference support.
 
-#### [Discord Shikenso](https://docs.langchain.com/oss/python/integrations/providers/discord-shikenso)
+#### [Discord Shikenso](discord-shikenso.md)
 Discord analytics and moderation tools.
 
 #### [Distil](https://github.com/dshakes/distil)
@@ -316,10 +316,10 @@ Multi-model routing that bills the cheapest winning answer behind an OpenAI-comp
 #### [E2B](https://e2b.dev/docs)
 Cloud sandboxes for running AI-generated code.
 
-#### [Egnyte](https://docs.langchain.com/oss/python/integrations/providers/egnyte)
+#### [Egnyte](egnyte.md)
 Cloud content collaboration and AI-powered search platform.
 
-#### [Elasticsearch](https://docs.langchain.com/oss/python/integrations/providers/elasticsearch)
+#### [Elasticsearch](elasticsearch.md)
 Distributed search and analytics engine.
 
 #### [EmpirioLabs AI](https://docs.empiriolabs.ai)
@@ -331,7 +331,7 @@ Cognitive memory infrastructure for AI agents: confidence scoring, contradiction
 #### [ERC20](https://github.com/Conrad-sudo/langchain-erc20)
 ERC20 token balances, allowances, transfers, approvals, and native wrap/unwrap, as execution plans an EOA can sign or a smart contract wallet can batch.
 
-#### [Exa Search](https://docs.langchain.com/oss/python/integrations/providers/exa_search)
+#### [Exa Search](exa_search.md)
 AI-powered search engine for developers.
 
 #### [Firecrawl](https://docs.firecrawl.dev)
@@ -364,7 +364,7 @@ Long-term memory layer for AI agents with semantic storage and retrieval.
 #### [GoodSender](https://goodsender.com/docs)
 Free email API with transactional templates and consent-gated custom email.
 
-#### [Google](https://docs.langchain.com/oss/python/integrations/providers/google)
+#### [Google](google.md)
 Google's AI services and cloud platform.
 
 #### [DigitalOcean Gradient AI Platform](https://docs.digitalocean.com/products/gradientai-platform/)
@@ -373,16 +373,16 @@ Single endpoint to multiple LLMs via serverless inference.
 #### [Graceful Fail](https://selfheal.dev/docs)
 Self-healing API proxy that returns structured fix instructions when API calls fail.
 
-#### [Graph RAG](https://docs.langchain.com/oss/python/integrations/providers/graph_rag)
+#### [Graph RAG](graph_rag.md)
 Graph-based retrieval augmented generation.
 
-#### [GraphSignal](https://docs.langchain.com/oss/python/integrations/providers/graphsignal)
+#### [GraphSignal](graphsignal.md)
 AI observability and monitoring platform.
 
 #### [GreenNode](https://greennode.ai/)
 Sustainable AI computing platform.
 
-#### [Fireworks](https://docs.langchain.com/oss/python/integrations/providers/fireworks)
+#### [Fireworks](fireworks.md)
 Fast inference for open and proprietary language models.
 
 #### [FlipCoin](https://github.com/flipcoin-fun/flipcoin-langchain)
@@ -394,7 +394,7 @@ On-chain work attestation for AI agents via MINT Protocol.
 #### [FuturMix](https://futurmix.ai/)
 Unified AI gateway for 22+ models with OpenAI-compatible API.
 
-#### [Groq](https://docs.langchain.com/oss/python/integrations/providers/groq)
+#### [Groq](groq.md)
 Ultra-fast inference with specialized hardware.
 
 #### [Haldir](https://haldir.xyz/docs)
@@ -409,7 +409,7 @@ Load Korean Hangul Word Processor HWP and HWPX documents into LangChain.
 #### [Hlido](https://hlido.eu/docs/)
 Independent, evidence-backed trust scores for AI agents.
 
-#### [Helicone](https://docs.langchain.com/oss/python/integrations/providers/helicone)
+#### [Helicone](helicone.md)
 LLM observability and monitoring platform.
 
 #### [Highflame](https://github.com/highflame-ai/highflame-sdk)
@@ -427,13 +427,13 @@ Persistent, structured character memory for AI agents.
 #### [HuangtingFlux](https://huangtingflux.com/integrations/langchain)
 Remote MCP server that reduces agent token usage via a three-stage SOP workflow.
 
-#### [Hugging Face](https://docs.langchain.com/oss/python/integrations/providers/huggingface)
+#### [Hugging Face](huggingface.md)
 Open platform for ML models and datasets.
 
 #### [HyperBrowser](https://docs.hyperbrowser.ai/)
 Web automation and scraping platform.
 
-#### [IBM](https://docs.langchain.com/oss/python/integrations/providers/ibm)
+#### [IBM](ibm.md)
 IBM Watson AI and enterprise solutions.
 
 #### [iLoveVideoEditor](https://ilovevideoeditor.com/docs/api-guide)
@@ -466,7 +466,7 @@ Long-running Linux VM sandboxes with pause, resume, and snapshots.
 #### [Jenkins](https://github.com/Amitgb14/langchain_jenkins)
 Automation server and CI/CD platform.
 
-#### [John Snow Labs](https://docs.langchain.com/oss/python/integrations/providers/johnsnowlabs)
+#### [John Snow Labs](johnsnowlabs.md)
 Enterprise NLP and healthcare AI platform.
 
 #### [Kalibr](https://kalibr.systems/docs)
@@ -484,7 +484,7 @@ Trust scoring and telemetry for AI tools and MCP servers.
 #### [Kinetica](https://github.com/kineticadb/langchain-kinetica)
 Real-time analytics and database platform.
 
-#### [KoNLPy](https://docs.langchain.com/oss/python/integrations/providers/konlpy)
+#### [KoNLPy](konlpy.md)
 Korean natural language processing toolkit.
 
 #### [KServe](https://gitlab.com/bitkaio/langchain/kserve-provider)
@@ -493,7 +493,7 @@ Connect LangChain chat models to KServe inference services on Kubernetes.
 #### [Kubernetes](https://gitlab.com/bitkaio/langchain/kubernetes-sandbox)
 Kubernetes sandbox provider for deepagents.
 
-#### [Kuzu](https://docs.langchain.com/oss/python/integrations/providers/kuzu)
+#### [Kuzu](kuzu.md)
 Embedded graph database management system.
 
 #### [Kyvvu](https://docs.kyvvu.com)
@@ -502,7 +502,7 @@ Runtime AI governance: policy enforcement and tamper-evident audit trails for ag
 #### [LambdaDB](https://docs.lambdadb.ai/guides/get-started/quickstart)
 Serverless database for RAG and Agents
 
-#### [LangChain Decorators](https://docs.langchain.com/oss/python/integrations/providers/langchain_decorators)
+#### [LangChain Decorators](langchain_decorators.md)
 Syntactic sugar and utilities for LangChain.
 
 #### [langchain-arabic](https://github.com/louaychoum/langchain-arabic)
@@ -511,10 +511,10 @@ Arabic text post-processing for LLM outputs — diacritics restoration, number-t
 #### [LangChain Replay](https://github.com/sixty-north/langchain-replay)
 Record and replay LangChain agent decisions while tools execute against the real filesystem.
 
-#### [LangFair](https://docs.langchain.com/oss/python/integrations/providers/langfair)
+#### [LangFair](langfair.md)
 Bias testing framework for language models.
 
-#### [LangFuse](https://docs.langchain.com/oss/python/integrations/providers/langfuse)
+#### [LangFuse](langfuse.md)
 LLM engineering platform and observability.
 
 #### [Leap0](https://leap0.dev/docs)
@@ -532,7 +532,7 @@ Real-time job market data and search.
 #### [Lians](https://www.lians.ai)
 Bitemporal agent memory with point-in-time recall for LangChain and LangGraph.
 
-#### [LiteLLM](https://docs.langchain.com/oss/python/integrations/providers/litellm)
+#### [LiteLLM](litellm.md)
 Unified interface for 100+ LLM APIs.
 
 #### [Lithtrix](https://docs.lithtrix.ai/integrations/langgraph)
@@ -541,13 +541,13 @@ Identity and portable memory API for AI agents: BaseStore adapter for LangGraph 
 #### [Live Tennis API](https://docs.livetennisapi.com)
 Real-time tennis scores, players and fixtures for ATP, WTA, Challenger and ITF.
 
-#### [Log10](https://docs.langchain.com/oss/python/integrations/providers/log10)
+#### [Log10](log10.md)
 LLM data management and observability.
 
 #### [LongProbe](https://endevsols.github.io/LongProbe)
 Sub-second RAG retrieval regression testing and stability monitoring.
 
-#### [LocalAI](https://docs.langchain.com/oss/python/integrations/providers/localai)
+#### [LocalAI](localai.md)
 Self-hosted OpenAI-compatible API server.
 
 #### [m3-memory](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md)
@@ -559,7 +559,7 @@ Solana memecoin intelligence tools: KOL feeds, coordination signals, deployer re
 #### [MariaDB](https://mariadb.com/docs/connectors/other/langchain-mariadb/api-reference)
 Open-source relational database management.
 
-#### [Memgraph](https://docs.langchain.com/oss/python/integrations/providers/memgraph)
+#### [Memgraph](memgraph.md)
 Real-time graph database platform.
 
 #### [Memstate AI](https://memstate.ai/docs/integrations/langchain)
@@ -568,16 +568,16 @@ Structured, versioned long-term memory for AI agents.
 #### [Mengram](https://mengram.io/docs)
 Long-term agent memory with semantic, episodic, and procedural types.
 
-#### [Metal](https://docs.langchain.com/oss/python/integrations/providers/metal)
+#### [Metal](metal.md)
 Managed vector search and retrieval.
 
-#### [Microsoft](https://docs.langchain.com/oss/python/integrations/providers/microsoft)
+#### [Microsoft](microsoft.md)
 Microsoft Azure AI and enterprise services.
 
-#### [Milvus](https://docs.langchain.com/oss/python/integrations/providers/milvus)
+#### [Milvus](milvus.md)
 Open-source vector database for AI applications.
 
-#### [MindsDB](https://docs.langchain.com/oss/python/integrations/providers/mindsdb)
+#### [MindsDB](mindsdb.md)
 AI layer for databases and data platforms.
 
 #### [MinerU](https://mineru.net)
@@ -586,31 +586,31 @@ Open-source document parsing for PDFs and office files into Markdown.
 #### [Mixpeek](https://docs.mixpeek.com/agent-integrations/langchain)
 Multimodal search, ingest, and vector store for video, image, audio, and documents.
 
-#### [MLflow Tracking](https://docs.langchain.com/oss/python/integrations/providers/mlflow_tracking)
+#### [MLflow Tracking](mlflow_tracking.md)
 Experiment tracking and model registry.
 
-#### [MistralAI](https://docs.langchain.com/oss/python/integrations/providers/mistralai)
+#### [MistralAI](mistralai.md)
 Efficient open-source language models.
 
-#### [Modal](https://docs.langchain.com/oss/python/integrations/providers/modal)
+#### [Modal](modal.md)
 Serverless cloud computing for data science.
 
-#### [ModelScope](https://docs.langchain.com/oss/python/integrations/providers/modelscope)
+#### [ModelScope](modelscope.md)
 Alibaba's open-source model hub.
 
 #### [Modexia](https://modexia.software/docs)
 Autonomous crypto payments, cross-chain transfers, and X402 paywall negotiation for agents.
 
-#### [MongoDB](https://docs.langchain.com/oss/python/integrations/providers/mongodb)
+#### [MongoDB](mongodb.md)
 Document-based NoSQL database platform.
 
-#### [MongoDB Atlas](https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas)
+#### [MongoDB Atlas](mongodb_atlas.md)
 Cloud-hosted MongoDB with vector search.
 
 #### [Moorcheh](https://www.moorcheh.ai/)
 Semantic search engine and vector store.
 
-#### [Motorhead](https://docs.langchain.com/oss/python/integrations/providers/motorhead)
+#### [Motorhead](motorhead.md)
 Long-term memory for AI conversations.
 
 #### [MrScraper](https://docs.mrscraper.com)
@@ -622,7 +622,7 @@ Naver's AI services and language models.
 #### [Nebius](https://docs.tokenfactory.nebius.com/quickstart)
 AI cloud platform and infrastructure.
 
-#### [Neo4j](https://docs.langchain.com/oss/python/integrations/providers/neo4j)
+#### [Neo4j](neo4j.md)
 Native graph database and analytics platform.
 
 #### [NewsCatcher](https://www.newscatcherapi.com/docs/web-search-api/integrations/langchain)
@@ -658,7 +658,7 @@ Managed remote browser sessions for AI agents.
 #### [Nuggets](https://nuggets.life)
 Pre-execution authority enforcement for LangChain and LangGraph tool calls.
 
-#### [NVIDIA](https://docs.langchain.com/oss/python/integrations/providers/nvidia)
+#### [NVIDIA](nvidia.md)
 NVIDIA's AI computing platform and models.
 
 #### [Novita](https://github.com/novitalabs/langchain-novita)
@@ -667,19 +667,19 @@ Code interpreter sandboxes for running agent-generated code.
 #### [OceanBase](https://pypi.org/project/langchain-oceanbase/)
 Distributed relational database system.
 
-#### [OCI](https://docs.langchain.com/oss/python/integrations/providers/oci)
+#### [OCI](oci.md)
 Oracle Cloud Infrastructure AI services.
 
 #### [Octen](https://docs.octen.ai)
 Web search engine for AI agents with semantic search, domain filtering, and sub-100ms latency.
 
-#### [Ollama](https://docs.langchain.com/oss/python/integrations/providers/ollama)
+#### [Ollama](ollama.md)
 Run Large Language Models (LLMs) locally.
 
 #### [OpenMemory](https://github.com/nullure/langchain-openmemory)
 Local-first persistent temporal memory retriever for LangChain agents.
 
-#### [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai)
+#### [OpenAI](openai.md)
 GPT models and comprehensive AI platform.
 
 #### [OpenBox](https://docs.openbox.ai/getting-started/langgraph)
@@ -691,16 +691,16 @@ Safe, Open, High-Performance — PDF for AI
 #### [OpenGradient](https://docs.opengradient.ai/)
 AI model training and fine-tuning platform.
 
-#### [OpenRouter](https://docs.langchain.com/oss/python/integrations/providers/openrouter)
+#### [OpenRouter](openrouter.md)
 Unified API for models from multiple providers.
 
-#### [Open Agent Spec](https://docs.langchain.com/oss/python/integrations/providers/open_agent_spec)
+#### [Open Agent Spec](open_agent_spec.md)
 Framework-agnostic language for portable agent definitions.
 
 #### [OpenTTT](https://github.com/Helm-Protocol/OpenTTT/tree/main/integrations/langchain)
 Cryptographic Proof-of-Time timestamps for LangChain LLM calls.
 
-#### [Oracle AI Database](https://docs.langchain.com/oss/python/integrations/providers/oracleai)
+#### [Oracle AI Database](oracleai.md)
 Oracle's AI and machine learning services.
 
 #### [Opedd](https://opedd.com/for-ai-agents)
@@ -712,7 +712,7 @@ Rust-powered PDF loader with element-disjoint RAG chunking.
 #### [Oxylabs](https://github.com/oxylabs/langchain-oxylabs)
 Web scraping and proxy services.
 
-#### [Parallel](https://docs.langchain.com/oss/python/integrations/providers/parallel)
+#### [Parallel](parallel.md)
 AI-powered web search and content extraction for LLMs.
 
 #### [PaySafe](https://paysafe-agent.com)
@@ -730,22 +730,22 @@ Real-time news and media monitoring.
 #### [Permit](https://docs.permit.io/)
 Authorization and access control platform.
 
-#### [Perplexity](https://docs.langchain.com/oss/python/integrations/providers/perplexity)
+#### [Perplexity](perplexity.md)
 AI-powered search and reasoning engine.
 
 #### [PQS](https://pqs.onchainintel.net)
 Pre-inference prompt quality scoring via a LangChain callback handler.
 
-#### [PlainId](https://docs.langchain.com/oss/python/integrations/providers/plainid)
+#### [PlainId](plainid.md)
 Authorization and access control platform.
 
 #### [Pinchwork](https://pinchwork.dev)
 Agent-to-agent task marketplace for delegating and completing specialized work.
 
-#### [Pinecone](https://docs.langchain.com/oss/python/integrations/providers/pinecone)
+#### [Pinecone](pinecone.md)
 Managed vector database for ML applications.
 
-#### [Pipeshift](https://docs.langchain.com/oss/python/integrations/providers/pipeshift)
+#### [Pipeshift](pipeshift.md)
 AI-powered content moderation platform.
 
 #### [Plasmate](https://docs.plasmate.app/integration-langchain)
@@ -763,16 +763,16 @@ Portable persona loading, legacy migration, and boundary-aware tool filtering fo
 #### [pr402](https://docs.ipay.sh)
 Autonomous Solana USDC payments for HTTP 402 resources via the x402 protocol.
 
-#### [Portkey](https://docs.langchain.com/oss/python/integrations/providers/portkey/logging_tracing_portkey)
+#### [Portkey](portkey/logging_tracing_portkey.md)
 AI gateway and observability platform.
 
-#### [PredictionGuard](https://docs.langchain.com/oss/python/integrations/providers/predictionguard)
+#### [PredictionGuard](predictionguard.md)
 AI model security and compliance platform.
 
 #### [Pramagent](https://github.com/sriram7737/pramagent)
 Deterministic tool policy and HITL gates for LangGraph tool calls.
 
-#### [Privy](https://docs.langchain.com/oss/python/integrations/providers/privy)
+#### [Privy](privy.md)
 Wallets and payments for AI agents.
 
 #### [Prolog](https://langchain-prolog.readthedocs.io)
@@ -790,25 +790,25 @@ Residential proxy tool and document loader for reliable web fetching.
 #### [PyMuPDF4LLM](https://github.com/lakinduboteju/langchain-pymupdf4llm)
 PDF processing optimized for LLM ingestion.
 
-#### [Qdrant](https://docs.langchain.com/oss/python/integrations/providers/qdrant)
+#### [Qdrant](qdrant.md)
 Vector similarity search engine.
 
 #### [Querit](https://querit.com/docs)
 Real-time web search API for AI applications.
 
-#### [Ray Serve](https://docs.langchain.com/oss/python/integrations/providers/ray_serve)
+#### [Ray Serve](ray_serve.md)
 Scalable model serving framework.
 
-#### [Redis](https://docs.langchain.com/oss/python/integrations/providers/redis)
+#### [Redis](redis.md)
 In-memory data structure store and cache.
 
 #### [RelayShield](https://api.relayshield.net/developers)
 Identity and agentic-attack-surface threat intelligence.
 
-#### [Remembrall](https://docs.langchain.com/oss/python/integrations/providers/remembrall)
+#### [Remembrall](remembrall.md)
 AI memory and context management.
 
-#### [Replicate](https://docs.langchain.com/oss/python/integrations/providers/replicate)
+#### [Replicate](replicate.md)
 Cloud platform for running ML models.
 
 #### [ReplyLayer](https://replylayer.ai/docs/guides/langchain)
@@ -841,10 +841,10 @@ Web scraping API for AI agents and data collection.
 #### [Salesforce](https://github.com/colesmcintosh/langchain-salesforce)
 CRM platform and business automation.
 
-#### [SambaNova](https://docs.langchain.com/oss/python/integrations/providers/sambanova)
+#### [SambaNova](sambanova.md)
 AI platform with specialized hardware.
 
-#### [SAP](https://docs.langchain.com/oss/python/integrations/providers/sap)
+#### [SAP](sap.md)
 Enterprise software and AI solutions.
 
 #### [Sarvam AI](https://docs.sarvam.ai/api/integration/langchain)
@@ -874,7 +874,7 @@ AI search API that returns extracted, answer-ready web content.
 #### [Serpex](https://serpex.dev/docs)
 Multi-engine web search API for AI applications and data aggregation.
 
-#### [Shale Protocol](https://docs.langchain.com/oss/python/integrations/providers/shaleprotocol)
+#### [Shale Protocol](shaleprotocol.md)
 Decentralized AI inference protocol.
 
 #### [ScyllaDB](https://docs.scylladb.com)
@@ -937,7 +937,7 @@ Enterprise knowledge graph platform.
 #### [Sulci Cache](https://github.com/sulci-io/sulci-oss)
 Context-aware semantic LLM cache that blends conversation history into similarity lookup.
 
-#### [Supadata](https://docs.langchain.com/oss/python/integrations/providers/supadata)
+#### [Supadata](supadata.md)
 Load transcripts and metadata from YouTube, TikTok, and more.
 
 #### [SupraWall](https://docs.supra-wall.com)
@@ -961,7 +961,7 @@ Persistent long-term memory layer for AI agents.
 #### [Synmerco](https://synmerco.com)
 Trust infrastructure for autonomous agent transactions.
 
-#### [Tableau](https://docs.langchain.com/oss/python/integrations/providers/tableau)
+#### [Tableau](tableau.md)
 Data visualization and business intelligence.
 
 #### [Taiga](https://github.com/Shikenso-Analytics/langchain-taiga)
@@ -970,7 +970,7 @@ Project management platform for agile teams.
 #### [TalorData](https://www.talordata.com/docs)
 Unified SERP API across 33 search engines with geo-targeting.
 
-#### [Tavily](https://docs.langchain.com/oss/python/integrations/providers/tavily)
+#### [Tavily](tavily.md)
 AI-optimized search API for applications.
 
 #### [TealTiger](https://docs.tealtiger.ai/integrations/langchain)
@@ -979,7 +979,7 @@ Deterministic governance middleware for LangChain agents with policy enforcement
 #### [TempGuru](https://tempguru.co/ai-agents)
 W-2 event staffing for the US and Canada: coverage, rates, lead times, and compliance lookups.
 
-#### [TensorLake](https://docs.langchain.com/oss/python/integrations/providers/tensorlake)
+#### [TensorLake](tensorlake.md)
 Data infrastructure for ML applications.
 
 #### [Teradata](https://github.com/Teradata/langchain-teradata)
@@ -1009,22 +1009,22 @@ Finance and SEC EDGAR tools with x402 micropayments for LangChain agents.
 #### [Tonic Textual](https://textual.tonic.ai)
 Detect, extract, and transform PII in text, JSON, HTML, and files.
 
-#### [Timbr](https://docs.langchain.com/oss/python/integrations/providers/timbr)
+#### [Timbr](timbr.md)
 Semantic layer for data integration and querying.
 
-#### [Together](https://docs.langchain.com/oss/python/integrations/providers/together)
+#### [Together](together.md)
 Fast inference for open-source models.
 
 #### [TokenMix](https://tokenmix.ai/docs)
 OpenAI-compatible API gateway for DeepSeek, Qwen, Kimi, GLM, MiniMax, and more.
 
-#### [Toolbox LangChain](https://docs.langchain.com/oss/python/integrations/providers/toolbox)
+#### [Toolbox LangChain](toolbox.md)
 Extended toolkit for LangChain applications.
 
-#### [TrueFoundry](https://docs.langchain.com/oss/python/integrations/providers/truefoundry)
+#### [TrueFoundry](truefoundry.md)
 ML platform for model deployment.
 
-#### [TrueLens](https://docs.langchain.com/oss/python/integrations/providers/trulens)
+#### [TrueLens](trulens.md)
 Evaluation framework for LLM applications.
 
 #### [TrustedRouter](https://trustedrouter.com/)
@@ -1042,10 +1042,10 @@ Currency exchange API with 593+ fiat, crypto, and commodity rates.
 #### [Uniswap](https://github.com/Conrad-sudo/langchain-uniswap-v2)
 Live Uniswap V2 swap quotes and unsigned transactions for swaps, approvals, and liquidity, on any EVM chain.
 
-#### [Unstructured](https://docs.langchain.com/oss/python/integrations/providers/unstructured)
+#### [Unstructured](unstructured.md)
 Document processing and data extraction.
 
-#### [Upstage](https://docs.langchain.com/oss/python/integrations/providers/upstage)
+#### [Upstage](upstage.md)
 Document AI and OCR platform.
 
 #### [Upstash Box](https://upstash.com/docs/box)
@@ -1090,10 +1090,10 @@ Ephemeral, isolated Linux sandboxes for running untrusted code.
 #### [Voxell](https://voxell.ai/forge)
 Text-embedding API (Forge) with turbo, pro, and ultra model tiers.
 
-#### [VoyageAI](https://docs.langchain.com/oss/python/integrations/providers/voyageai)
+#### [VoyageAI](voyageai.md)
 Embedding models and semantic search.
 
-#### [Weaviate](https://docs.langchain.com/oss/python/integrations/providers/weaviate)
+#### [Weaviate](weaviate.md)
 Open-source vector database with GraphQL.
 
 #### [Work Ledger](https://github.com/metawake/work-ledger/blob/main/docs/integrations.md)
@@ -1102,7 +1102,7 @@ Record, diff, and regression-test LangChain runs with a callback handler.
 #### [WRITER](https://dev.writer.com/home/introduction)
 Enterprise models and tools for building, activating, and supervising AI agents.
 
-#### [XAI](https://docs.langchain.com/oss/python/integrations/providers/xai)
+#### [XAI](xai.md)
 xAI's Grok models for conversational AI.
 
 #### [x402](https://www.agentrails.io/docs)
@@ -1114,7 +1114,7 @@ Social media data platform with billions of indexed posts and users.
 #### [YDB](https://ydb.tech/)
 Yandex Database distributed storage system.
 
-#### [YeagerAI](https://docs.langchain.com/oss/python/integrations/providers/yeagerai)
+#### [YeagerAI](yeagerai.md)
 AI agent framework and development platform.
 
 #### [You.com](https://you.com/docs/integrations/langchain)

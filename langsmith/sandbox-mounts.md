@@ -4,7 +4,7 @@ Mount S3 buckets, GCS buckets, and public Git repositories into LangSmith sandbo
 
 Sandbox mounts attach external data sources to a sandbox filesystem when the sandbox is created. Use mounts when sandbox code needs direct file access to object storage buckets or public Git repositories without copying the data into the sandbox image.
 
-Mounts are configured through `mount_config` in Python or `mountConfig` in TypeScript. The SDK sends the mount specs to LangSmith and composes the required [auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy) rules for provider credentials.
+Mounts are configured through `mount_config` in Python or `mountConfig` in TypeScript. The SDK sends the mount specs to LangSmith and composes the required [auth proxy](sandbox-auth-proxy.md) rules for provider credentials.
 
 > [!NOTE]
 > Sandbox mounts require `langsmith[sandbox]>=0.8.16` for Python or `langsmith>=0.7.10` for TypeScript.

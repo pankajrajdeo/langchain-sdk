@@ -12,7 +12,7 @@ Common use cases include:
 * **Data monitoring**: Check dashboards, metrics, or feeds on a set cadence and surface anything noteworthy.
 
 > [!TIP]
-> To start an agent based on an event (such as a Slack message or email), use [channels](https://docs.langchain.com/langsmith/fleet/channels) instead.
+> To start an agent based on an event (such as a Slack message or email), use [channels](channels.md) instead.
 
 ## Add a schedule
 

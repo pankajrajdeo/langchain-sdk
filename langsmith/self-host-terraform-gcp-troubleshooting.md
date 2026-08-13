@@ -5,9 +5,9 @@ Common issues, fixes, and diagnostic commands for LangSmith self-hosted on GKE d
 This page documents common issues, fixes, and diagnostic commands for LangSmith deployments provisioned with the [GCP Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/gcp).
 
 > [!TIP]
-> Before upgrading, review the [LangSmith self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) for breaking changes and required variable updates. Run `gcloud container clusters get-credentials <cluster-name> --region <region> --project <project-id>` before running any `kubectl` commands.
+> Before upgrading, review the [LangSmith self-hosted changelog](self-hosted-changelog.md) for breaking changes and required variable updates. Run `gcloud container clusters get-credentials <cluster-name> --region <region> --project <project-id>` before running any `kubectl` commands.
 
-For a copy-paste reference of the `kubectl`, `helm`, and `gcloud` calls used throughout this page, skip to [Diagnostic commands](https://docs.langchain.com/langsmith/self-host-terraform-gcp-troubleshooting#diagnostic-commands).
+For a copy-paste reference of the `kubectl`, `helm`, and `gcloud` calls used throughout this page, skip to [Diagnostic commands](#diagnostic-commands).
 
 ## Automated diagnostics
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/sandbox-cli)
 Create, inspect, connect to, and tunnel into LangSmith sandboxes from the command line.
 
-The [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli) includes sandbox commands for creating snapshots, booting sandboxes, running commands, opening interactive shells, and tunneling TCP connections into a sandbox.
+The [LangSmith CLI](langsmith-cli.md) includes sandbox commands for creating snapshots, booting sandboxes, running commands, opening interactive shells, and tunneling TCP connections into a sandbox.
 
 Sandbox CLI commands require LangSmith CLI `v0.2.26` or later.
 
@@ -54,7 +54,7 @@ langsmith sandbox snapshot build my-snapshot \
   --wait
 ```
 
-For private images, create a registry first (see [Private registries](https://docs.langchain.com/langsmith/sandbox-snapshots#private-registries)), then pass its id with `--registry-id`:
+For private images, create a registry first (see [Private registries](sandbox-snapshots.md#private-registries)), then pass its id with `--registry-id`:
 
 ```bash
 langsmith sandbox snapshot build internal-python \
@@ -142,7 +142,7 @@ Use `--proxy-config @proxy.json` on `create` or `update` to configure the sandbo
 }
 ```
 
-For more on proxy rules, see [Sandbox auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy).
+For more on proxy rules, see [Sandbox auth proxy](sandbox-auth-proxy.md).
 
 ## Run commands
 
@@ -207,7 +207,7 @@ langsmith sandbox tunnel \
 ```
 
 > [!TIP]
-> For HTTP applications you want to open in a browser or share with teammates, use [Sandbox service URLs](https://docs.langchain.com/langsmith/sandbox-service-urls). Use tunnels for raw TCP protocols or local development tools.
+> For HTTP applications you want to open in a browser or share with teammates, use [Sandbox service URLs](sandbox-service-urls.md). Use tunnels for raw TCP protocols or local development tools.
 
 ## Set up SSH access
 

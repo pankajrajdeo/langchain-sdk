@@ -3,7 +3,7 @@
 Structured output allows agents to return data in a specific, predictable format. Instead of parsing natural language responses, you get structured data in the form of JSON objects, [Pydantic models](https://docs.pydantic.dev/latest/concepts/models/#basic-model-usage), or dataclasses that your application can use directly.
 
 > [!TIP]
-> This page covers structured output with agents using `create_agent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](https://docs.langchain.com/oss/python/langchain/models#structured-output).
+> This page covers structured output with agents using `create_agent`. To use structured output directly on a model (outside of agents), see [Models - Structured output](models.md#structured-output).
 
 LangChain's [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) handles structured output automatically. The user sets their desired structured output schema, and when the model generates the structured data, it's captured, validated, and returned in the `'structured_response'` key of the agent's state.
 
@@ -30,14 +30,14 @@ Use `response_format` to control how the agent returns structured data:
 
 When a schema type is provided directly, LangChain automatically chooses:
 
-* `ProviderStrategy` if the model and provider chosen supports native structured output (e.g. [OpenAI](https://docs.langchain.com/oss/python/integrations/providers/openai), [Anthropic (Claude)](https://docs.langchain.com/oss/python/integrations/providers/anthropic), or [xAI (Grok)](https://docs.langchain.com/oss/python/integrations/providers/xai)).
+* `ProviderStrategy` if the model and provider chosen supports native structured output (e.g. [OpenAI](../integrations/providers/openai.md), [Anthropic (Claude)](../integrations/providers/anthropic.md), or [xAI (Grok)](../integrations/providers/xai.md)).
 * `ToolStrategy` for all other models.
 
 > [!WARNING]
 > JSON Schema dictionaries must be wrapped in an explicit strategy (`ProviderStrategy` or `ToolStrategy`). They are not automatically detected when passed directly to `response_format`.
 
 > [!NOTE]
-> Support for native structured output features is read dynamically from the model's [profile data](https://docs.langchain.com/oss/python/langchain/models#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
+> Support for native structured output features is read dynamically from the model's [profile data](models.md#model-profiles) if using `langchain>=1.1`. If data are not available, use another condition or specify manually:
 >
 > ```python
 > custom_profile = {
@@ -75,7 +75,7 @@ The schema defining the structured output format. Supports:
 * **JSON Schema**: Dictionary with JSON schema specification. Must include top-level `title` and `description` keys. Returns dict.
 
 #### `Field`
-Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai) and [xAI](https://docs.langchain.com/oss/python/integrations/chat/xai)). Defaults to `None` (disabled).
+Optional boolean parameter to enable strict schema adherence. Supported by some providers (e.g., [OpenAI](../integrations/chat/openai.md) and [xAI](../integrations/chat/xai.md)). Defaults to `None` (disabled).
 
 LangChain automatically uses `ProviderStrategy` when you pass a schema type directly to [`create_agent.response_format`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) and the model supports native structured output:
 

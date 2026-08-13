@@ -7,7 +7,7 @@ Trace OpenAI Realtime voice agents in LangSmith using the LangSmith SDK.
 
 OpenAI Realtime is a speech-to-speech model that streams typed events over a WebSocket. Regardless of whether you build it with a raw connection or the OpenAI Agents SDK, the integration captures each conversation as a single LangSmith trace, with a span for every meaningful event (transcripts, model responses, and tool calls) grouped by turn.
 
-Trace your [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals).
+Trace your [OpenAI Realtime API](https://platform.openai.com/docs/guides/realtime) voice agents to LangSmith. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
 ## Choose an approach
 
@@ -62,9 +62,9 @@ async with client.realtime.connect(model="gpt-realtime-2") as raw, wrap_realtime
 ```
 
 > [!NOTE]
-> Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads) (for example to continue an earlier session or pick up from a text chat), pass a `thread_id`. Reusing the same ID across traces links their events together.
+> Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](threads.md) (for example to continue an earlier session or pick up from a text chat), pass a `thread_id`. Reusing the same ID across traces links their events together.
 
-Any [`@traceable`](https://docs.langchain.com/langsmith/annotate-code) tools you run while handling an event nest under that event automatically.
+Any [`@traceable`](annotate-code.md) tools you run while handling an event nest under that event automatically.
 
 > [!NOTE]
 > Enable `input_audio_transcription` and the agent transcript in your `session.update` in order to view a transcript as part of the trace.
@@ -133,7 +133,7 @@ async with wrap_realtime_session(
 The conversation transcript is reconstructed from the session's `history` snapshots, so messages appear even though the SDK streams them as partials.
 
 > [!NOTE]
-> Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](https://docs.langchain.com/langsmith/threads), for example to continue an earlier session or pick up from a text chat, pass a `thread_id`. Reusing the same ID across traces links their events together.
+> Each conversation is captured as its own trace. To group it with related interactions in a LangSmith [thread](threads.md), for example to continue an earlier session or pick up from a text chat, pass a `thread_id`. Reusing the same ID across traces links their events together.
 
 ### Record the conversation audio
 
@@ -159,10 +159,10 @@ async for event in conn:
 
 ## Next steps
 
-#### [Voice fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
+#### [Voice fundamentals](trace-voice-fundamentals.md)
 Core conventions for tracing voice agents.
 
-#### [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces)
+#### [Upload files with traces](upload-files-with-traces.md)
 Attach the conversation audio recording to your trace.
 
 ***

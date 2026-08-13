@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-tutorial)
 Build a Managed Deep Agent with a tool, durable memory, and a daily schedule, then deploy it.
 
-This tutorial builds a research assistant one capability at a time. Complete the [quickstart](https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart) first to scaffold a project, add API keys, and run `mda dev` locally. Then add a search tool, use durable memory, run the agent on a daily schedule, and deploy it to LangSmith.
+This tutorial builds a research assistant one capability at a time. Complete the [quickstart](managed-deep-agents-quickstart.md) first to scaffold a project, add API keys, and run `mda dev` locally. Then add a search tool, use durable memory, run the agent on a daily schedule, and deploy it to LangSmith.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Build the agent
 
@@ -61,7 +61,7 @@ agent = define_deep_agent(
 )
 ```
 
-For more on authored tools, see [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools).
+For more on authored tools, see [Custom tools](managed-deep-agents-tools.md).
 
 ### Run the agent locally
 Install dependencies and start the local dev server:
@@ -86,7 +86,7 @@ Memory is shared across the deployment and visible to all callers, so do not sto
 
 Restart `mda dev` so it discovers the new file. In one thread, ask the agent to research a release and to record a reusable project rule, such as "For release research, check the official changelog before secondary sources." Then create a **new thread** in Studio and ask how it will research the next release. Confirm that it applies the shared rule even though the new thread has no conversation history.
 
-See [Memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory) for details.
+See [Memory](managed-deep-agents-memory.md) for details.
 
 ### Schedule a daily digest
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
@@ -101,7 +101,7 @@ schedule = define_schedule(
 )
 ```
 
-`mda deploy` reconciles this schedule into a LangSmith cron job after the deployment is live. For thread behavior and constraints, see [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules).
+`mda deploy` reconciles this schedule into a LangSmith cron job after the deployment is live. For thread behavior and constraints, see [Schedules](managed-deep-agents-schedules.md).
 
 ### Deploy the agent
 Deploy the project to LangSmith:
@@ -110,26 +110,26 @@ Deploy the project to LangSmith:
 mda deploy .
 ```
 
-On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule. For deploy flags and troubleshooting, see [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy) and the [CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#deploy-projects).
+On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule. For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-deploy.md) and the [CLI reference](managed-deep-agents-cli.md#deploy-projects).
 
 ### Inspect the run
 Open the printed URL in LangSmith to inspect build status and revisions. Open traces to inspect the agent's inputs, model calls, `web_search` calls, memory reads and writes, and final responses.
 
 ## Next steps
 
-#### [Custom middleware](https://docs.langchain.com/langsmith/python/managed-deep-agents-middleware)
+#### [Custom middleware](managed-deep-agents-middleware.md)
 Add logging, retries, limits, and guardrails around model and tool calls.
 
-#### [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity)
+#### [Identity](managed-deep-agents-identity.md)
 Authenticate callers and use verified identity in tools and middleware.
 
-#### [Memory](https://docs.langchain.com/langsmith/python/managed-deep-agents-memory)
+#### [Memory](managed-deep-agents-memory.md)
 Persist shared procedural and project knowledge across threads.
 
-#### [Evals](https://docs.langchain.com/langsmith/python/managed-deep-agents-evals)
+#### [Evals](managed-deep-agents-evals.md)
 Author Harbor tasks and compile the managed agent for Harbor.
 
-#### [Sandboxes](https://docs.langchain.com/langsmith/python/managed-deep-agents-sandboxes)
+#### [Sandboxes](managed-deep-agents-sandboxes.md)
 Configure isolated filesystem and shell access for agent work.
 
 ***

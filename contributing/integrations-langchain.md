@@ -5,7 +5,7 @@
 LangChain provides standard interfaces for several different components (language models, vector stores, etc) that are crucial when building LLM applications. Implementing a new integration helps expand LangChain's ecosystem and makes your service discoverable to millions of developers.
 
 > [!WARNING]
-> New integrations are **not accepted as PRs** to any `langchain-ai` repository. All new integrations must be published as independent packages to PyPI (e.g., `langchain-yourprovider`). The only PR you should open to a `langchain-ai` repo is to list your published package in the docs: either a YAML row for the download table, or a hosted guide if you meet the [eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides).
+> New integrations are **not accepted as PRs** to any `langchain-ai` repository. All new integrations must be published as independent packages to PyPI (e.g., `langchain-yourprovider`). The only PR you should open to a `langchain-ai` repo is to list your published package in the docs: either a YAML row for the download table, or a hosted guide if you meet the [eligibility criteria](publish-langchain.md#eligibility-for-hosted-guides).
 
 ## Why implement a LangChain integration?
 
@@ -24,19 +24,19 @@ While any component can be integrated into LangChain, there are specific types o
 
 **Integrate these ✅**:
 
-* [**Chat Models**](https://docs.langchain.com/oss/python/integrations/chat): Most actively used component type
-* [**Tools/Toolkits**](https://docs.langchain.com/oss/python/integrations/tools): Enable agent capabilities
-* [**Retrievers**](https://docs.langchain.com/oss/python/integrations/retrievers): Core to RAG applications
-* [**Embedding Models**](https://docs.langchain.com/oss/python/integrations/embeddings): Foundation for vector operations
-* [**Vector Stores**](https://docs.langchain.com/oss/python/integrations/vectorstores): Essential for semantic search
-* [**Middleware**](https://docs.langchain.com/oss/python/integrations/middleware): Extend agent behavior with hooks
-* [**Sandboxes**](https://docs.langchain.com/oss/python/deepagents/sandboxes): Run code safely with Deep Agents
+* [**Chat Models**](../integrations/chat.md): Most actively used component type
+* [**Tools/Toolkits**](../integrations/tools.md): Enable agent capabilities
+* [**Retrievers**](../integrations/retrievers.md): Core to RAG applications
+* [**Embedding Models**](../integrations/embeddings.md): Foundation for vector operations
+* [**Vector Stores**](../integrations/vectorstores.md): Essential for semantic search
+* [**Middleware**](../integrations/middleware.md): Extend agent behavior with hooks
+* [**Sandboxes**](../deepagents/sandboxes.md): Run code safely with Deep Agents
 
 **Not these ❌**:
 
-* **LLMs (Text-Completion Models)**: Deprecated in favor of [Chat Models](https://docs.langchain.com/oss/python/integrations/chat)
-* [**Document Loaders**](https://docs.langchain.com/oss/python/integrations/document_loaders): High maintenance burden
-* [**Key-Value Stores**](https://docs.langchain.com/oss/python/integrations/stores): Limited usage
+* **LLMs (Text-Completion Models)**: Deprecated in favor of [Chat Models](../integrations/chat.md)
+* [**Document Loaders**](../integrations/document_loaders.md): High maintenance burden
+* [**Key-Value Stores**](../integrations/stores.md): Limited usage
 * **Document Transformers**: Niche use cases
 * **Model Caches**: Infrastructure concerns
 * **Graphs**: Complex abstractions
@@ -48,13 +48,13 @@ While any component can be integrated into LangChain, there are specific types o
 ## How to contribute an integration
 
 ### Implement your package
-#### [How to implement a LangChain integration](https://docs.langchain.com/oss/python/contributing/implement-langchain)
+#### [How to implement a LangChain integration](implement-langchain.md)
 
 ### Pass standard tests
-If applicable, implement support for LangChain's [standard test](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain) suite for your integration and successfully run them.
+If applicable, implement support for LangChain's [standard test](standard-tests-langchain.md) suite for your integration and successfully run them.
 
 ### Publish integration
-#### [How to publish an integration](https://docs.langchain.com/oss/python/contributing/publish-langchain)
+#### [How to publish an integration](publish-langchain.md)
 
 ### List your integration
 Open a PR in the LangChain [docs repo](https://github.com/langchain-ai/docs) so users can find your package. Hosted guides are limited; most integrations are listed via YAML.
@@ -71,12 +71,12 @@ Open a PR in the LangChain [docs repo](https://github.com/langchain-ai/docs) so 
 * [Middleware](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/middleware/TEMPLATE.mdx)
 * [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
 
-For full steps, eligibility details, and rejection criteria, see [Publish an integration](https://docs.langchain.com/oss/python/contributing/publish-langchain#make-your-integration-discoverable).
+For full steps, eligibility details, and rejection criteria, see [Publish an integration](publish-langchain.md#make-your-integration-discoverable).
 
 </details>
 
 ### Co-marketing
-(Optional) Engage with the LangChain team for joint [co-marketing](https://docs.langchain.com/oss/python/contributing/comarketing).
+(Optional) Engage with the LangChain team for joint [co-marketing](comarketing.md).
 
 ***
 

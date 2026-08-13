@@ -3,7 +3,7 @@
 Stream real-time updates from agent runs
 
 > [!TIP]
-> For new applications, we recommend [event streaming](https://docs.langchain.com/oss/python/langchain/event-streaming)—the typed-projection API introduced in LangChain v1.3. Event streaming gives you separate iterators per projection (messages, values, tool calls, subgraphs) so you can consume them independently instead of branching on `stream_mode` chunks.
+> For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in LangChain v1.3. Event streaming gives you separate iterators per projection (messages, values, tool calls, subgraphs) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 LangChain implements a streaming system to surface real-time updates.
 
@@ -15,13 +15,13 @@ LangChain's streaming system lets you surface live feedback from agent runs to y
 
 What's possible with LangChain streaming:
 
-*  [**Stream agent progress**](https://docs.langchain.com/oss/python/langchain/streaming#agent-progress)—get state updates after each agent step.
-*  [**Stream LLM tokens**](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens)—stream language model tokens as they're generated.
-*  [**Stream thinking / reasoning tokens**](https://docs.langchain.com/oss/python/langchain/streaming#streaming-thinking-/-reasoning-tokens)—surface model reasoning as it's generated.
-*  [**Stream custom updates**](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates)—emit user-defined signals (e.g., `"Fetched 10/100 records"`).
-*  [**Stream multiple modes**](https://docs.langchain.com/oss/python/langchain/streaming#stream-multiple-modes)—choose from `updates` (agent progress), `messages` (LLM tokens + metadata), or `custom` (arbitrary user data).
+*  [**Stream agent progress**](#agent-progress)—get state updates after each agent step.
+*  [**Stream LLM tokens**](#llm-tokens)—stream language model tokens as they're generated.
+*  [**Stream thinking / reasoning tokens**](#streaming-thinking-/-reasoning-tokens)—surface model reasoning as it's generated.
+*  [**Stream custom updates**](#custom-updates)—emit user-defined signals (e.g., `"Fetched 10/100 records"`).
+*  [**Stream multiple modes**](#stream-multiple-modes)—choose from `updates` (agent progress), `messages` (LLM tokens + metadata), or `custom` (arbitrary user data).
 
-See the [common patterns](https://docs.langchain.com/oss/python/langchain/streaming#common-patterns) section below for additional end-to-end examples.
+See the [common patterns](#common-patterns) section below for additional end-to-end examples.
 
 ## Supported stream modes
 
@@ -286,7 +286,7 @@ content: [{'type': 'text', 'text': "San Francisco weather: It's always sunny in 
 ```
 
 > [!NOTE]
-> Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](https://docs.langchain.com/oss/python/langchain/long-term-memory). On [LangSmith deployments](https://docs.langchain.com/langsmith/deployment) a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `create_agent(..., checkpointer=InMemorySaver())`. The remaining snippets on this page omit `thread_id` for brevity, but you should pass it in production.
+> Persisting conversation history with `thread_id` requires the agent to be configured with a [checkpointer](long-term-memory.md). On [LangSmith deployments](../langsmith/deployment.md) a checkpointer is provisioned automatically. Locally, pass one explicitly, for example `create_agent(..., checkpointer=InMemorySaver())`. The remaining snippets on this page omit `thread_id` for brevity, but you should pass it in production.
 
 ## LLM tokens
 
@@ -391,7 +391,7 @@ content: [{'type': 'text', 'text': '!"\n\n'}]
 ```
 
 > [!NOTE]
-> **Wrapping an agent as a node in a parent `StateGraph`?** [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) returns a compiled graph, so using it as a node makes it a subgraph. `stream_mode="messages"` on the parent graph will not emit token chunks from the inner agent's LLM calls unless you pass `subgraphs=True`. See [Subgraph outputs](https://docs.langchain.com/oss/python/langgraph/streaming#subgraph-outputs).
+> **Wrapping an agent as a node in a parent `StateGraph`?** [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) returns a compiled graph, so using it as a node makes it a subgraph. `stream_mode="messages"` on the parent graph will not emit token chunks from the inner agent's LLM calls unless you pass `subgraphs=True`. See [Subgraph outputs](../langgraph/streaming.md#subgraph-outputs).
 
 ## Custom updates
 
@@ -484,14 +484,16 @@ content: {'model': {'messages': [AIMessage(content='San Francisco weather: It's 
 
 Below are examples showing common use cases for streaming.
 
+<a id="streaming-thinking-/-reasoning-tokens"></a>
+
 ### Streaming thinking / reasoning tokens
 
-Some models perform internal reasoning before producing a final answer. You can stream these thinking / reasoning tokens as they're generated by filtering [standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) for the `type` `"reasoning"`.
+Some models perform internal reasoning before producing a final answer. You can stream these thinking / reasoning tokens as they're generated by filtering [standard content blocks](messages.md#standard-content-blocks) for the `type` `"reasoning"`.
 
 > [!NOTE]
 > Reasoning output must be enabled on the model.
 >
-> See the [reasoning section](https://docs.langchain.com/oss/python/langchain/models#reasoning) and your [provider's integration page](https://docs.langchain.com/oss/python/integrations/providers/overview) for configuration details.
+> See the [reasoning section](models.md#reasoning) and your [provider's integration page](../integrations/providers/overview.md) for configuration details.
 >
 > To quickly check a model's reasoning support, see [models.dev](https://models.dev).
 
@@ -535,24 +537,24 @@ for message in stream.messages:
 The weather in San Francisco is: It's always sunny in San Francisco!
 ```
 
-This works the same way regardless of the model provider—LangChain normalizes provider-specific formats (Anthropic `thinking` blocks, OpenAI `reasoning` summaries, etc.) into a standard `"reasoning"` content block type via the [`content_blocks`](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks) property.
+This works the same way regardless of the model provider—LangChain normalizes provider-specific formats (Anthropic `thinking` blocks, OpenAI `reasoning` summaries, etc.) into a standard `"reasoning"` content block type via the [`content_blocks`](messages.md#standard-content-blocks) property.
 
-To stream reasoning tokens directly from a chat model (without an agent), see [streaming with chat models](https://docs.langchain.com/oss/python/langchain/models#reasoning).
+To stream reasoning tokens directly from a chat model (without an agent), see [streaming with chat models](models.md#reasoning).
 
 ### Streaming tool calls
 
 You may want to stream both:
 
-1. Partial JSON as [tool calls](https://docs.langchain.com/oss/python/langchain/models#tool-calling) are generated
+1. Partial JSON as [tool calls](models.md#tool-calling) are generated
 2. The completed, parsed tool calls that are executed
 
-Specifying [`stream_mode="messages"`](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) will stream incremental [message chunks](https://docs.langchain.com/oss/python/langchain/messages#streaming-and-chunks) generated by all LLM calls in the agent. To access the completed messages with parsed tool calls:
+Specifying [`stream_mode="messages"`](#llm-tokens) will stream incremental [message chunks](messages.md#streaming-and-chunks) generated by all LLM calls in the agent. To access the completed messages with parsed tool calls:
 
-1. If those messages are tracked in the [state](https://docs.langchain.com/oss/python/langchain/short-term-memory) (as in the model node of [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents)), use `stream_mode=["messages", "updates"]` to access completed messages through [state updates](https://docs.langchain.com/oss/python/langchain/streaming#agent-progress) (demonstrated below).
-2. If those messages are not tracked in the state, use [custom updates](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates) or aggregate the chunks during the streaming loop ([next section](https://docs.langchain.com/oss/python/langchain/streaming#accessing-completed-messages)).
+1. If those messages are tracked in the [state](short-term-memory.md) (as in the model node of [`create_agent`](agents.md)), use `stream_mode=["messages", "updates"]` to access completed messages through [state updates](#agent-progress) (demonstrated below).
+2. If those messages are not tracked in the state, use [custom updates](#custom-updates) or aggregate the chunks during the streaming loop ([next section](#accessing-completed-messages)).
 
 > [!NOTE]
-> Refer to the section below on [streaming from sub-agents](https://docs.langchain.com/oss/python/langchain/streaming#streaming-from-sub-agents) if your agent includes multiple LLMs.
+> Refer to the section below on [streaming from sub-agents](#streaming-from-sub-agents) if your agent includes multiple LLMs.
 
 ```python
 from typing import Any
@@ -611,11 +613,11 @@ The| weather| in| Boston| is| **|sun|ny|**|.|
 #### Accessing completed messages
 
 > [!NOTE]
-> If completed messages are tracked in an agent's [state](https://docs.langchain.com/oss/python/langchain/short-term-memory), you can use `stream_mode=["messages", "updates"]` as demonstrated in the [Streaming tool calls](https://docs.langchain.com/oss/python/langchain/streaming#streaming-tool-calls) section to access completed messages during streaming.
+> If completed messages are tracked in an agent's [state](short-term-memory.md), you can use `stream_mode=["messages", "updates"]` as demonstrated in the [Streaming tool calls](#streaming-tool-calls) section to access completed messages during streaming.
 
-In some cases, completed messages are not reflected in [state updates](https://docs.langchain.com/oss/python/langchain/streaming#agent-progress). If you have access to the agent internals, you can use [custom updates](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates) to access these messages during streaming. Otherwise, you can aggregate message chunks in the streaming loop (see below).
+In some cases, completed messages are not reflected in [state updates](#agent-progress). If you have access to the agent internals, you can use [custom updates](#custom-updates) to access these messages during streaming. Otherwise, you can aggregate message chunks in the streaming loop (see below).
 
-Consider the below example, where we incorporate a [stream writer](https://docs.langchain.com/oss/python/langchain/streaming#custom-updates) into a simplified [guardrail middleware](https://docs.langchain.com/oss/python/langchain/guardrails#after-agent-guardrails). This middleware demonstrates tool calling to generate a structured "safe / unsafe" evaluation (one could also use [structured outputs](https://docs.langchain.com/oss/python/langchain/models#structured-output) for this):
+Consider the below example, where we incorporate a [stream writer](#custom-updates) into a simplified [guardrail middleware](guardrails.md#after-agent-guardrails). This middleware demonstrates tool calling to generate a structured "safe / unsafe" evaluation (one could also use [structured outputs](models.md#structured-output) for this):
 
 ```python
 from typing import Any, Literal
@@ -763,11 +765,11 @@ for chunk in agent.stream(
 
 ### Streaming with human-in-the-loop
 
-To handle human-in-the-loop [interrupts](https://docs.langchain.com/oss/python/langchain/human-in-the-loop), we build on the [above example](https://docs.langchain.com/oss/python/langchain/streaming#streaming-tool-calls):
+To handle human-in-the-loop [interrupts](human-in-the-loop.md), we build on the [above example](#streaming-tool-calls):
 
-1. We configure the agent with [human-in-the-loop middleware and a checkpointer](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#configuring-interrupts)
+1. We configure the agent with [human-in-the-loop middleware and a checkpointer](human-in-the-loop.md#configuring-interrupts)
 2. We collect interrupts generated during the `"updates"` stream mode
-3. We respond to those interrupts with a [command](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#responding-to-interrupts)
+3. We respond to those interrupts with a [command](human-in-the-loop.md#responding-to-interrupts)
 
 ```python
 from typing import Any
@@ -862,7 +864,7 @@ Tool: get_weather
 Args: {'city': 'San Francisco'}
 ```
 
-We next collect a [decision](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#interrupt-decision-types) for each interrupt. Importantly, the order of decisions must match the order of actions we collected.
+We next collect a [decision](human-in-the-loop.md#interrupt-decision-types) for each interrupt. Importantly, the order of decisions must match the order of actions we collected.
 
 To illustrate, we will edit one tool call and accept the other:
 
@@ -907,7 +909,7 @@ decisions
 }
 ```
 
-We can then resume by passing a [command](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#responding-to-interrupts) into the same streaming loop:
+We can then resume by passing a [command](human-in-the-loop.md#responding-to-interrupts) into the same streaming loop:
 
 ```python
 interrupts = []
@@ -944,11 +946,11 @@ When there are multiple LLMs at any point in an agent, it's often necessary to d
 
 To do this, pass a [`name`](https://reference.langchain.com/python/langchain/agents/#langchain.agents.create_agent\(name\)) to each agent when creating it. This name is then available in metadata via the `lc_agent_name` key when streaming in `"messages"` mode.
 
-Below, we update the [streaming tool calls](https://docs.langchain.com/oss/python/langchain/streaming#streaming-tool-calls) example:
+Below, we update the [streaming tool calls](#streaming-tool-calls) example:
 
 1. We replace our tool with a `call_weather_agent` tool that invokes an agent internally
 2. We add a `name` to each agent
-3. We specify [`subgraphs=True`](https://docs.langchain.com/oss/python/langgraph/use-subgraphs#stream-subgraph-outputs) when creating the stream
+3. We specify [`subgraphs=True`](../langgraph/use-subgraphs.md#stream-subgraph-outputs) when creating the stream
 4. Our stream processing is identical to before, but we add logic to keep track of what agent is active using `create_agent`'s `name` parameter
 
 > [!TIP]
@@ -1064,9 +1066,9 @@ Boston| weather| right| now|:| **|Sunny|**|.
 
 In some applications you might need to disable streaming of individual tokens for a given model. This is useful when:
 
-* Working with [multi-agent](https://docs.langchain.com/oss/python/langchain/multi-agent) systems to control which agents stream their output
+* Working with [multi-agent](multi-agent.md) systems to control which agents stream their output
 * Mixing models that support streaming with those that do not
-* Deploying to [LangSmith](https://docs.langchain.com/langsmith/observability) and wanting to prevent certain model outputs from being streamed to the client
+* Deploying to [LangSmith](../langsmith/observability.md) and wanting to prevent certain model outputs from being streamed to the client
 
 Set `streaming=False` when initializing the model.
 
@@ -1085,7 +1087,7 @@ model = ChatOpenAI(
 > [!NOTE]
 > Not all chat model integrations support the `streaming` parameter. If your model doesn't support it, use `disable_streaming=True` instead. This parameter is available on all chat models via the base class.
 
-See the [LangGraph streaming guide](https://docs.langchain.com/oss/python/langgraph/streaming#disable-streaming-for-specific-chat-models) for more details.
+See the [LangGraph streaming guide](../langgraph/streaming.md#disable-streaming-for-specific-chat-models) for more details.
 
 ## v2 streaming format
 
@@ -1126,16 +1128,16 @@ print(result.value)       # state (dict, Pydantic model, or dataclass)
 print(result.interrupts)  # tuple of Interrupt objects (empty if none)
 ```
 
-See the [LangGraph streaming docs](https://docs.langchain.com/oss/python/langgraph/streaming#stream-output-format-v2) for more details on the v2 format, including type narrowing, Pydantic/dataclass coercion, and subgraph streaming.
+See the [LangGraph streaming docs](../langgraph/streaming.md#stream-output-format-v2) for more details on the v2 format, including type narrowing, Pydantic/dataclass coercion, and subgraph streaming.
 
 ## Related
 
-* [Frontend streaming](https://docs.langchain.com/oss/python/langchain/frontend/overview)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for real-time agent interactions
-* [Streaming with chat models](https://docs.langchain.com/oss/python/langchain/models#stream)—Stream tokens directly from a chat model without using an agent or graph
-* [Reasoning with chat models](https://docs.langchain.com/oss/python/langchain/models#reasoning)—Configure and access reasoning output from chat models
-* [Standard content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks)—Understand the normalized content block format used for reasoning, text, and other content types
-* [Streaming with human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop#streaming-with-human-in-the-loop)—Stream agent progress while handling interrupts for human review
-* [LangGraph streaming](https://docs.langchain.com/oss/python/langgraph/streaming)—Advanced streaming options including `values`, `debug` modes, and subgraph streaming
+* [Frontend streaming](frontend/overview.md)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for real-time agent interactions
+* [Streaming with chat models](models.md#stream)—Stream tokens directly from a chat model without using an agent or graph
+* [Reasoning with chat models](models.md#reasoning)—Configure and access reasoning output from chat models
+* [Standard content blocks](messages.md#standard-content-blocks)—Understand the normalized content block format used for reasoning, text, and other content types
+* [Streaming with human-in-the-loop](human-in-the-loop.md#streaming-with-human-in-the-loop)—Stream agent progress while handling interrupts for human review
+* [LangGraph streaming](../langgraph/streaming.md)—Advanced streaming options including `values`, `debug` modes, and subgraph streaming
 
 ***
 

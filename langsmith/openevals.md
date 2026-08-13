@@ -25,7 +25,7 @@ You'll also need to set your OpenAI API key as an environment variable, though y
 export OPENAI_API_KEY="your_openai_api_key"
 ```
 
-We'll also use LangSmith's [pytest](https://docs.langchain.com/langsmith/pytest) integration for Python and [Vitest/Jest](https://docs.langchain.com/langsmith/vitest-jest) for TypeScript to run our evals. `openevals` also integrates seamlessly with the [`evaluate`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) method. See the [appropriate guides](https://docs.langchain.com/langsmith/pytest) for setup instructions.
+We'll also use LangSmith's [pytest](pytest.md) integration for Python and [Vitest/Jest](vitest-jest.md) for TypeScript to run our evals. `openevals` also integrates seamlessly with the [`evaluate`](https://docs.smith.langchain.com/reference/python/evaluation/langsmith.evaluation._runner.evaluate) method. See the [appropriate guides](pytest.md) for setup instructions.
 
 ## Running an evaluator
 
@@ -108,7 +108,7 @@ The `feedback_key`/`feedbackKey` parameter will be used as the name of the feedb
 
 Running the eval in your terminal will result in something like the following:
 
-> **Image:** [Prebuilt evaluator terminal result](https://docs.langchain.com/langsmith/openevals)
+> **Image:** [Prebuilt evaluator terminal result](openevals.md)
 
 You can also pass evaluators directly into the `evaluate` method if you have already created a dataset in LangSmith. If using Python, this requires `langsmith>=0.3.11`:
 

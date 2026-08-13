@@ -45,7 +45,7 @@ Connector secrets are referenced by env var name and stored in `~/.openwiki/.env
 | `google`     | Gmail OAuth                          | Fetches recent mail via the Gmail API after `openwiki auth gmail`            |
 | `web-search` | `TAVILY_API_KEY`                     | Uses Tavily through LangChain                                                |
 | `hackernews` | None                                 | Public Hacker News feed and search APIs                                      |
-| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](https://docs.langchain.com/oss/openwiki/personal-mode#slack-oauth)     |
+| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](#slack-oauth)     |
 
 You can configure the same source more than once. For example, add one web search source for AI research and another for NBA news. OpenWiki stores them as separate instances such as `web-search-1` and `web-search-2`.
 
@@ -110,7 +110,7 @@ Common connector-related keys include Gmail, Notion, Slack, and X OAuth tokens, 
 * `OPENWIKI_OAUTH_CALLBACK_PORT`: local callback port
 * `OPENWIKI_HTTPS_OAUTH_REDIRECT_URI`: Slack HTTPS callback URL
 
-For model provider credentials, see [Model providers](https://docs.langchain.com/oss/openwiki/providers).
+For model provider credentials, see [Model providers](providers.md).
 
 ## Manage schedules
 
@@ -127,9 +127,9 @@ openwiki cron delete <source|all>
 
 ## See also
 
-* [Code mode](https://docs.langchain.com/oss/openwiki/code-mode)
-* [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
-* [Customize OpenWiki](https://docs.langchain.com/oss/openwiki/customize)
+* [Code mode](code-mode.md)
+* [CLI reference](cli-reference.md)
+* [Customize OpenWiki](customize.md)
 
 ***
 

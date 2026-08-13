@@ -57,7 +57,7 @@ user = client.chat.completions.create(
 
 Oftentimes, you use `instructor` inside of other functions.
 You can get nested traces by using this wrapped client and decorating those functions with `@traceable`.
-Please see [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code) for more information on how to annotate your code for tracing with the `@traceable` decorator.
+Please see [Custom instrumentation](annotate-code.md) for more information on how to annotate your code for tracing with the `@traceable` decorator.
 
 ```python
 # You can customize the run name with the `name` keyword argument

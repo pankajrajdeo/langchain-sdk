@@ -5,7 +5,7 @@ Add reusable task-specific instructions to a Managed Deep Agent.
 Skills package task-specific procedures and context into reusable directories. You can define them in markdown files, and they are picked up automatically by the agent.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -48,7 +48,7 @@ This progressive disclosure gives the agent access to detailed procedures withou
 
 ## Syncing to Context Hub
 
-When you run `mda deploy`, every UTF-8 file under `skills/` is automatically synced to the agent's [Context Hub](https://docs.langchain.com/langsmith/use-the-context-hub) repo. You can then edit skills in the LangSmith UI and make the changes available to the agent.
+When you run `mda deploy`, every UTF-8 file under `skills/` is automatically synced to the agent's [Context Hub](../use-the-context-hub.md) repo. You can then edit skills in the LangSmith UI and make the changes available to the agent.
 
 A later deployment syncs the project copies again and removes deployed skill files that no longer exist locally.
 
@@ -56,9 +56,9 @@ A later deployment syncs the project copies again and removes deployed skill fil
 
 Skills is context that is loaded dynamically, when the agent chooses to. The agent cannot modify them.
 
-Use [instructions](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-instructions) for behavior that should ALWAYS be loaded by the agent.
+Use [instructions](managed-deep-agents-instructions.md) for behavior that should ALWAYS be loaded by the agent.
 
-Use [memory](https://docs.langchain.com/langsmith/javascript/managed-deep-agents-memory) for knowledge you want the agent to be able to update.
+Use [memory](managed-deep-agents-memory.md) for knowledge you want the agent to be able to update.
 
 For skill authoring patterns and the complete format, see [Skills](https://docs.langchain.com/oss/javascript/deepagents/skills).
 

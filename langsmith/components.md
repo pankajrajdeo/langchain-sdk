@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/components)
 Overview of Agent Server, LangGraph CLI, Studio, SDKs, RemoteGraph, control plane, and data plane components.
 
-A [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) installation includes several key components. Together these tools and services provide a complete solution for building, deploying, and managing graphs (including agentic applications), whether on [Cloud](https://docs.langchain.com/langsmith/cloud) or in your own [self-hosted](https://docs.langchain.com/langsmith/self-hosted) infrastructure:
+A [LangSmith Deployment](deployment.md) installation includes several key components. Together these tools and services provide a complete solution for building, deploying, and managing graphs (including agentic applications), whether on [Cloud](cloud.md) or in your own [self-hosted](self-hosted.md) infrastructure:
 
 ```mermaid
 flowchart
@@ -18,13 +18,13 @@ flowchart
     class A,B,D,E,F process
 ```
 
-* [Agent Server](https://docs.langchain.com/langsmith/agent-server): Defines an opinionated API and runtime for deploying graphs and agents. Handles execution, state management, and persistence so you can focus on building logic rather than server infrastructure.
-* [LangGraph CLI](https://docs.langchain.com/langsmith/cli): A command-line interface to build, package, and interact with graphs locally and prepare them for deployment.
-* [Studio](https://docs.langchain.com/langsmith/studio): A specialized IDE for visualization, interaction, and debugging. Connects to a local Agent Server for developing and testing your graph.
-* [Python/JS SDK](https://docs.langchain.com/langsmith/reference): The Python/JS SDK provides a programmatic way to interact with deployed graphs and agents from your applications.
-* [RemoteGraph](https://docs.langchain.com/langsmith/use-remote-graph): Allows you to interact with a deployed graph as though it were running locally.
-* [Control Plane](https://docs.langchain.com/langsmith/control-plane): The UI and APIs for creating, updating, and managing Agent Server deployments.
-* [Data plane](https://docs.langchain.com/langsmith/data-plane): The runtime layer that executes your graphs, including Agent Servers, their backing services (PostgreSQL, Redis, etc.), and the listener that reconciles state from the control plane.
+* [Agent Server](agent-server.md): Defines an opinionated API and runtime for deploying graphs and agents. Handles execution, state management, and persistence so you can focus on building logic rather than server infrastructure.
+* [LangGraph CLI](cli.md): A command-line interface to build, package, and interact with graphs locally and prepare them for deployment.
+* [Studio](studio.md): A specialized IDE for visualization, interaction, and debugging. Connects to a local Agent Server for developing and testing your graph.
+* [Python/JS SDK](reference.md): The Python/JS SDK provides a programmatic way to interact with deployed graphs and agents from your applications.
+* [RemoteGraph](use-remote-graph.md): Allows you to interact with a deployed graph as though it were running locally.
+* [Control Plane](control-plane.md): The UI and APIs for creating, updating, and managing Agent Server deployments.
+* [Data plane](data-plane.md): The runtime layer that executes your graphs, including Agent Servers, their backing services (PostgreSQL, Redis, etc.), and the listener that reconciles state from the control plane.
 
 ***
 

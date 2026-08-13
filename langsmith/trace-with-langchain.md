@@ -6,7 +6,7 @@ LangSmith integrates seamlessly with LangChain (Python and JavaScript), the popu
 
 Install the following for Python or JS (the code snippets use the OpenAI integration).
 
-For a full list of packages available, see the [LangChain docs](https://docs.langchain.com/oss/python/integrations/providers/overview).
+For a full list of packages available, see the [LangChain docs](../integrations/providers/overview.md).
 
 ```bash
 pip install langchain_openai
@@ -127,7 +127,7 @@ By default, the trace will be logged to the project with the name `default`.
 
 ## Trace selectively
 
-The [previous section](https://docs.langchain.com/langsmith/trace-with-langchain#quick-start) showed how to trace all invocations of a LangChain runnables within your applications by setting a single environment variable. While this is a convenient way to get started, you may want to trace only specific invocations or parts of your application.
+The [previous section](#quick-start) showed how to trace all invocations of a LangChain runnables within your applications by setting a single environment variable. While this is a convenient way to get started, you may want to trace only specific invocations or parts of your application.
 
 There are two ways to do this in Python: by manually passing in a `LangChainTracer` instance as a [callback](https://reference.langchain.com/python/langchain_core/callbacks/), or by using the [`tracing_context` context manager](https://reference.langchain.com/python/langsmith/observability/sdk/run_helpers/#langsmith.run_helpers.tracing_context).
 
@@ -166,7 +166,7 @@ await chain.invoke(
 
 ### Statically
 
-As mentioned in the [tracing conceptual guide](https://docs.langchain.com/langsmith/observability-concepts) LangSmith uses the concept of a Project to group traces. If left unspecified, the tracer project is set to default. You can set the `LANGSMITH_PROJECT` environment variable to configure a custom project name for an entire application run. This should be done before executing your application.
+As mentioned in the [tracing conceptual guide](observability-concepts.md) LangSmith uses the concept of a Project to group traces. If left unspecified, the tracer project is set to default. You can set the `LANGSMITH_PROJECT` environment variable to configure a custom project name for an entire application run. This should be done before executing your application.
 
 ```bash
 export LANGSMITH_PROJECT=my-project
@@ -177,7 +177,7 @@ export LANGSMITH_PROJECT=my-project
 
 ### Dynamically
 
-This largely builds off of the [previous section](https://docs.langchain.com/langsmith/trace-with-langchain#trace-selectively) and allows you to set the project name for a specific `LangChainTracer` instance or as parameters to the `tracing_context` context manager in Python.
+This largely builds off of the [previous section](#trace-selectively) and allows you to set the project name for a specific `LangChainTracer` instance or as parameters to the `tracing_context` context manager in Python.
 
 ```python
 # You can set the project name using the project_name parameter.
@@ -203,7 +203,7 @@ await chain.invoke(
 
 ## Add metadata and tags to traces
 
-You can annotate your traces with arbitrary metadata and tags by providing them in the [`RunnableConfig`](https://reference.langchain.com/python/langchain_core/runnables/?h=runnablecon#langchain_core.runnables.RunnableConfig). This is useful for associating additional information with a trace, such as the environment in which it was executed, or the user who initiated it. For information on how to query traces and runs by metadata and tags, see [Query traces (SDK)](https://docs.langchain.com/langsmith/export-traces)
+You can annotate your traces with arbitrary metadata and tags by providing them in the [`RunnableConfig`](https://reference.langchain.com/python/langchain_core/runnables/?h=runnablecon#langchain_core.runnables.RunnableConfig). This is useful for associating additional information with a trace, such as the environment in which it was executed, or the user who initiated it. For information on how to query traces and runs by metadata and tags, see [Query traces (SDK)](export-traces.md)
 
 > [!NOTE]
 > When you attach metadata or tags to a runnable (either through the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) or at runtime with invocation params), they are inherited by all child runnables of that runnable.
@@ -282,7 +282,7 @@ await chain.invoke({ input: "What is the meaning of life?" }, {runName: "MyCusto
 
 ## Override model name in traces
 
-When tracing LangChain model calls, LangSmith automatically captures the model identifier used in the API call. However, you may want to display a different, more descriptive name in traces for organizational purposes or to distinguish between different model configurations. You can do this by passing the `ls_model_name` [metadata parameter](https://docs.langchain.com/langsmith/ls-metadata-parameters#ls_model_name) when constructing or configuring your LangChain model.
+When tracing LangChain model calls, LangSmith automatically captures the model identifier used in the API call. However, you may want to display a different, more descriptive name in traces for organizational purposes or to distinguish between different model configurations. You can do this by passing the `ls_model_name` [metadata parameter](ls-metadata-parameters.md#ls_model_name) when constructing or configuring your LangChain model.
 
 This is particularly useful when:
 
@@ -348,7 +348,7 @@ const result = await llm.invoke("What is the meaning of life?");
 When you pass `ls_model_name` in the model's metadata, this name will appear in the LangSmith UI for all traces involving that model instance. This works for any LangChain chat model or LLM and is inherited by all runs that use the model, including when it's part of a chain.
 
 > [!NOTE]
-> The `ls_model_name` metadata parameter is also used for [cost tracking](https://docs.langchain.com/langsmith/cost-tracking). When combined with the `ls_provider` parameter, LangSmith can automatically calculate costs for custom or self-hosted models. For more information about all available metadata parameters, see the [metadata parameters reference](https://docs.langchain.com/langsmith/ls-metadata-parameters).
+> The `ls_model_name` metadata parameter is also used for [cost tracking](cost-tracking.md). When combined with the `ls_provider` parameter, LangSmith can automatically calculate costs for custom or self-hosted models. For more information about all available metadata parameters, see the [metadata parameters reference](ls-metadata-parameters.md).
 
 ## Customize run ID
 
@@ -474,7 +474,7 @@ As mentioned in other guides, the following environment variables allow you to c
 
 However, in some environments, it is not possible to set environment variables. In these cases, you can set the tracing configuration programmatically.
 
-This largely builds off of the [previous section](https://docs.langchain.com/langsmith/trace-with-langchain#trace-selectively).
+This largely builds off of the [previous section](#trace-selectively).
 
 ```python
 import langsmith as ls
@@ -515,7 +515,7 @@ await chain.invoke(
 
 ## Distributed tracing with LangChain (Python)
 
-LangSmith supports distributed tracing with LangChain Python. This allows you to link runs (spans) across different services and applications. The principles are similar to the [distributed tracing guide](https://docs.langchain.com/langsmith/distributed-tracing) for the LangSmith SDK.
+LangSmith supports distributed tracing with LangChain Python. This allows you to link runs (spans) across different services and applications. The principles are similar to the [distributed tracing guide](distributed-tracing.md) for the LangSmith SDK.
 
 ```python
 import langsmith
@@ -544,7 +544,7 @@ parent_chain.invoke({"test": 1})
 
 ## Interoperability between LangChain (Python) and LangSmith SDK
 
-If you are using LangChain for part of your application and the LangSmith SDK (see [Custom instrumentation](https://docs.langchain.com/langsmith/annotate-code)) for other parts, you can still trace the entire application seamlessly.
+If you are using LangChain for part of your application and the LangSmith SDK (see [Custom instrumentation](annotate-code.md)) for other parts, you can still trace the entire application seamlessly.
 
 LangChain objects will be traced when invoked within a `traceable` function and be bound as a child run of the `traceable` function.
 
@@ -640,7 +640,7 @@ const parrot = new RunnableLambda({
 });
 ```
 
-> **Image:** [Trace Tree](https://docs.langchain.com/langsmith/trace-with-langchain)
+> **Image:** [Trace Tree](trace-with-langchain.md)
 
 Alternatively, you can convert LangChain's [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) to a equivalent RunTree object by using `RunTree.fromRunnableConfig` or pass the [`RunnableConfig`](https://reference.langchain.com/python/langchain-core/runnables/config/RunnableConfig) as the first argument of `traceable`-wrapped function.
 

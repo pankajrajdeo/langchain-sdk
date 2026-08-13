@@ -4,7 +4,7 @@ Build a multi-step web research agent with subagent delegation
 
 ## Overview
 
-This guide demonstrates how to build a multi-step web research agent from scratch using [Deep Agents](https://docs.langchain.com/oss/python/deepagents). The agent decomposes research questions into focused tasks, delegates them to specialized sub-agents, and synthesizes findings into a comprehensive report.
+This guide demonstrates how to build a multi-step web research agent from scratch using [Deep Agents](index.md). The agent decomposes research questions into focused tasks, delegates them to specialized sub-agents, and synthesizes findings into a comprehensive report.
 
 The agent you build will:
 
@@ -19,9 +19,9 @@ The spawned sub-agents will conduct web searches with Tavily, fetching full webp
 
 This tutorial covers:
 
-* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents) for parallel, context-isolated research
-* Custom [tools](https://docs.langchain.com/oss/python/langchain/tools) for web search
-* Multi-step planning with the opt-in [planning tool](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
+* [Subagents](subagents.md) for parallel, context-isolated research
+* Custom [tools](../langchain/tools.md) for web search
+* Multi-step planning with the opt-in [planning tool](overview.md#task-planning)
 
 ## Prerequisites
 
@@ -300,7 +300,7 @@ Your role is to coordinate research by delegating tasks from your TODO list to s
 ```
 
 ### Enable task planning
-[Task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent.
+[Task planning](overview.md#task-planning) is opt-in. The research workflow uses `write_todos` to break questions into focused tasks, so pass [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware) when you create the agent.
 
 ```python
 from langchain.agents.middleware import TodoListMiddleware
@@ -445,7 +445,7 @@ Run the agent from the project root:
 python agent.py
 ```
 
-If you set the `LANGSMITH_API_KEY` environment variable before running, you can view the agent's traces in [LangSmith](https://docs.langchain.com/langsmith/observability) to debug and monitor multi-step behavior.
+If you set the `LANGSMITH_API_KEY` environment variable before running, you can view the agent's traces in [LangSmith](../langsmith/observability.md) to debug and monitor multi-step behavior.
 
 ## Full code
 
@@ -458,9 +458,9 @@ You can also tune the delegation limits to allow for more parallel sub-agents or
 
 For more information on the concepts in this tutorial, check out the following resources:
 
-* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents): Learn how to configure subagents with different tools and prompts
-* [Customization](https://docs.langchain.com/oss/python/deepagents/customization): Customize models, tools, system prompts, and optional [task planning](https://docs.langchain.com/oss/python/deepagents/overview#task-planning)
-* [LangSmith](https://docs.langchain.com/langsmith/observability): Trace research runs and debug multi-step behavior
+* [Subagents](subagents.md): Learn how to configure subagents with different tools and prompts
+* [Customization](customization.md): Customize models, tools, system prompts, and optional [task planning](overview.md#task-planning)
+* [LangSmith](../langsmith/observability.md): Trace research runs and debug multi-step behavior
 * [Deep Research Course](https://academy.langchain.com/courses/deep-research-with-langgraph): Full course on deep research with LangGraph
 
 ***

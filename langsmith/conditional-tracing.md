@@ -11,7 +11,7 @@ Use conditional tracing when you need to:
 * **Support feature flags**: Enable tracing only when specific features or experimental code paths are active.
 
 > [!TIP]
-> To reduce trace volume by logging only a percentage of all runs, refer to [Set a sampling rate for traces](https://docs.langchain.com/langsmith/sample-traces).
+> To reduce trace volume by logging only a percentage of all runs, refer to [Set a sampling rate for traces](sample-traces.md).
 
 The [`tracing_context`](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context) context manager (Python) and [`tracingEnabled`](https://reference.langchain.com/javascript/classes/langsmith.run_trees.RunTree.html#tracingenabled) option (TypeScript) allow you to override global tracing settings at runtime, without restructuring your code or changing environment variables.
 
@@ -187,7 +187,7 @@ This can be useful when you want to temporarily enable tracing for debugging wit
 
 ## Conditionally redact inputs and outputs
 
-Sometimes you want the trace to be recorded—so you keep run timing, structure, errors, and metadata—but the inputs and outputs should be hidden for specific requests (for example, traces from tenants with strict privacy requirements). This is different from [disabling tracing](https://docs.langchain.com/langsmith/conditional-tracing#disable-tracing-for-specific-invocations) entirely and from [`Client(hide_inputs=...)`](https://docs.langchain.com/langsmith/mask-inputs-outputs#hide-inputs-and-outputs), which applies the same redaction to every trace the client sends.
+Sometimes you want the trace to be recorded—so you keep run timing, structure, errors, and metadata—but the inputs and outputs should be hidden for specific requests (for example, traces from tenants with strict privacy requirements). This is different from [disabling tracing](#disable-tracing-for-specific-invocations) entirely and from [`Client(hide_inputs=...)`](mask-inputs-outputs.md#hide-inputs-and-outputs), which applies the same redaction to every trace the client sends.
 
 To redact per-request, use [`tracing_context`](https://reference.langchain.com/python/langsmith/run_helpers/tracing_context) with the `replicas` parameter and pass an `updates` dict that overrides `inputs` and `outputs` on the recorded run. Because `tracing_context` is scoped to the current execution context, concurrent requests with different redaction policies do not race.
 
@@ -214,14 +214,14 @@ def handle_request(tenant_id: str, user_input: str) -> str:
         return my_agent(user_input)
 ```
 
-You can use any subset of run fields in `updates` (for example, `{"inputs": {"redacted": True}}` to keep a marker, or `{"outputs": {}}` to redact only outputs). The same pattern works for routing different redaction policies to different destinations—each replica can specify its own `project_name`, `api_key`, and `updates`. See [Write traces to multiple destinations with replicas](https://docs.langchain.com/langsmith/log-traces-to-project#write-traces-to-multiple-destinations-with-replicas) for the full replica reference.
+You can use any subset of run fields in `updates` (for example, `{"inputs": {"redacted": True}}` to keep a marker, or `{"outputs": {}}` to redact only outputs). The same pattern works for routing different redaction policies to different destinations—each replica can specify its own `project_name`, `api_key`, and `updates`. See [Write traces to multiple destinations with replicas](log-traces-to-project.md#write-traces-to-multiple-destinations-with-replicas) for the full replica reference.
 
 > [!NOTE]
 > Always set `project_name` on the replica when using `updates` to redact inputs or outputs. If the replica's `project_name` matches the active session's project, the `updates` may be dropped and the unredacted inputs/outputs will be sent.
 
 ## Customize tracing in deployed agents
 
-Tracing is enabled by default within LangSmith Deployment's [Agent Server](https://docs.langchain.com/langsmith/agent-server). When using a [factory function](https://docs.langchain.com/langsmith/graph-rebuild), you can wrap the yielded graph with `tracing_context` to control tracing per-execution. This is useful for adding custom metadata, disabling tracing entirely, or customizing tracing based on the authenticated user.
+Tracing is enabled by default within LangSmith Deployment's [Agent Server](agent-server.md). When using a [factory function](graph-rebuild.md), you can wrap the yielded graph with `tracing_context` to control tracing per-execution. This is useful for adding custom metadata, disabling tracing entirely, or customizing tracing based on the authenticated user.
 
 ### Disable tracing for a graph
 
@@ -446,7 +446,7 @@ await processDataCustom("important");  // Traced to "special-project"
 
 ## Comparison with sampling
 
-Conditional tracing and [sampling](https://docs.langchain.com/langsmith/sample-traces) serve different purposes:
+Conditional tracing and [sampling](sample-traces.md) serve different purposes:
 
 | Feature            | Conditional tracing                               | Sampling                                     |
 | ------------------ | ------------------------------------------------- | -------------------------------------------- |
@@ -459,10 +459,10 @@ You can combine both approaches for fine-grained control.
 
 ## Related
 
-* [Trace without environment variables](https://docs.langchain.com/langsmith/trace-without-env-vars): Configure tracing programmatically instead of using environment variables.
-* [Set a sampling rate for traces](https://docs.langchain.com/langsmith/sample-traces): Probabilistically sample traces to reduce volume
-* [Mask inputs and outputs](https://docs.langchain.com/langsmith/mask-inputs-outputs): Hide sensitive data in traces instead of disabling tracing entirely.
-* [Add metadata and tags to traces](https://docs.langchain.com/langsmith/add-metadata-tags): Categorize and filter traces with custom attributes.
+* [Trace without environment variables](trace-without-env-vars.md): Configure tracing programmatically instead of using environment variables.
+* [Set a sampling rate for traces](sample-traces.md): Probabilistically sample traces to reduce volume
+* [Mask inputs and outputs](mask-inputs-outputs.md): Hide sensitive data in traces instead of disabling tracing entirely.
+* [Add metadata and tags to traces](add-metadata-tags.md): Categorize and filter traces with custom attributes.
 
 ***
 

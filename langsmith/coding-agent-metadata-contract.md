@@ -12,13 +12,13 @@ The following integrations implement this schema:
 
 | Integration                                            | `ls_integration` value |
 | ------------------------------------------------------ | ---------------------- |
-| [Claude Code](https://docs.langchain.com/langsmith/trace-claude-code)            | `claude-code`          |
-| [OpenAI Codex](https://docs.langchain.com/langsmith/trace-with-codex)            | `openai-codex`         |
-| [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents)            | `deepagents-code`      |
-| [Cursor](https://docs.langchain.com/langsmith/trace-with-cursor)                 | `cursor`               |
-| [Pi](https://docs.langchain.com/langsmith/trace-with-pi)                         | `pi`                   |
-| [Opencode](https://docs.langchain.com/langsmith/trace-with-opencode)             | `opencode`             |
-| [GitHub Copilot](https://docs.langchain.com/langsmith/trace-with-vscode-copilot) | `copilot`              |
+| [Claude Code](trace-claude-code.md)            | `claude-code`          |
+| [OpenAI Codex](trace-with-codex.md)            | `openai-codex`         |
+| [Deep Agents](trace-deep-agents.md)            | `deepagents-code`      |
+| [Cursor](trace-with-cursor.md)                 | `cursor`               |
+| [Pi](trace-with-pi.md)                         | `pi`                   |
+| [Opencode](trace-with-opencode.md)             | `opencode`             |
+| [GitHub Copilot](trace-with-vscode-copilot.md) | `copilot`              |
 
 ## Global identity block
 
@@ -28,7 +28,7 @@ Every run type must include the following identity fields in its metadata:
 | ------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `ls_agent_type`           | The run's type within the agent. Should be one of `"root"`, `"subagent"`, `"middleware"`, or `"compaction"`. |
 | `ls_agent_purpose`        | High-level purpose of the agent, for example `"coding"`.                                                     |
-| `ls_integration`          | Identifier of the integration emitting the run (see [Supported integrations](https://docs.langchain.com/langsmith/coding-agent-metadata-contract#supported-integrations)).      |
+| `ls_integration`          | Identifier of the integration emitting the run (see [Supported integrations](#supported-integrations)).      |
 | `ls_agent_runtime`        | Human-readable runtime name, for example `"Claude Code 1.0.28"`.                                             |
 | `thread_id`               | Stable identifier for the conversation thread. Used to group related runs in LangSmith's Threads view.       |
 | `ls_trace_schema_version` | Currently `"coding-agent-v1"`.                                                                               |
@@ -59,7 +59,7 @@ This schema distinguishes five run types. Some fields apply only to a subset of 
 
 ### All run types
 
-The [global identity block](https://docs.langchain.com/langsmith/coding-agent-metadata-contract#global-identity-block) fields are **always** required on every run type.
+The [global identity block](#global-identity-block) fields are **always** required on every run type.
 
 Additional fields required on all run types:
 
@@ -97,8 +97,8 @@ Interrupted runs carry the same fields as `root` runs. The run type itself signa
 
 ## Related
 
-* [Metadata parameters reference](https://docs.langchain.com/langsmith/ls-metadata-parameters): `ls_` prefixed fields used in LangSmith runs generally.
-* [Add metadata and tags](https://docs.langchain.com/langsmith/add-metadata-tags): how to attach metadata to traces using the LangSmith SDK.
+* [Metadata parameters reference](ls-metadata-parameters.md): `ls_` prefixed fields used in LangSmith runs generally.
+* [Add metadata and tags](add-metadata-tags.md): how to attach metadata to traces using the LangSmith SDK.
 
 ***
 

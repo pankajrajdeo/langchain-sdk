@@ -9,7 +9,7 @@ Once configured, each Claude Code project can opt in to sending traces to LangSm
 Before setting up tracing, ensure you have:
 
 * [**Claude Code CLI**](https://code.claude.com/docs/en/overview) installed.
-* A [**LangSmith API key**](https://docs.langchain.com/langsmith/create-account-api-key).
+* A [**LangSmith API key**](create-account-api-key.md).
 * [**Node.js**](https://nodejs.org/) installed.
 
 ## Getting started
@@ -29,7 +29,7 @@ To update the plugin, run:
 /reload-plugins
 ```
 
- If you are migrating from the previously recommended version of tracing Claude Code with manually created stop hooks, refer to [Migrating from the manual stop hook](https://docs.langchain.com/langsmith/trace-claude-code#migrating-from-the-manual-stop-hook). 
+ If you are migrating from the previously recommended version of tracing Claude Code with manually created stop hooks, refer to [Migrating from the manual stop hook](#migrating-from-the-manual-stop-hook). 
 
 ### Setting environment variables
 
@@ -205,7 +205,7 @@ Your outer run (chain)
 
 You can trace to multiple LangSmith projects or workspaces simultaneously using the `CC_LANGSMITH_RUNS_ENDPOINTS` environment variable. Set `CC_LANGSMITH_RUNS_ENDPOINTS` to a JSON array of replica configurations. This overrides other client settings.
 
-Tracing to multiple [replicas](https://docs.langchain.com/langsmith/log-traces-to-project) is useful for:
+Tracing to multiple [replicas](log-traces-to-project.md) is useful for:
 
 * Sending traces to both a production and staging project.
 * Tracing to multiple workspaces with different API keys.
@@ -216,7 +216,7 @@ Each replica object supports the following fields:
 | Field         | Required | Description                                                                            |
 | ------------- | -------- | -------------------------------------------------------------------------------------- |
 | `apiUrl`      | Yes      | LangSmith API URL (typically `https://api.smith.langchain.com`)                        |
-| `apiKey`      | Yes      | API key for the destination [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) |
+| `apiKey`      | Yes      | API key for the destination [workspace](administration-overview.md#workspaces) |
 | `projectName` | Yes      | Project name in the destination workspace                                              |
 | `updates`     | No       | Optional metadata/fields to override on the replicated runs                            |
 
@@ -293,7 +293,7 @@ ls -lh ~/.claude/state/hook.log
 
 ## Migrating from the manual stop hook
 
-If you were using the previous version of tracing Claude Code with LangSmith, you will need to remove `~/.claude/hooks/stop_hook.sh` and remove the reference to the hook from any previous `settings.local.json` or `settings.json` files you added it to previously, then follow the [plugin installation instructions](https://docs.langchain.com/langsmith/trace-claude-code#getting-started).
+If you were using the previous version of tracing Claude Code with LangSmith, you will need to remove `~/.claude/hooks/stop_hook.sh` and remove the reference to the hook from any previous `settings.local.json` or `settings.json` files you added it to previously, then follow the [plugin installation instructions](#getting-started).
 
 ## Source code
 

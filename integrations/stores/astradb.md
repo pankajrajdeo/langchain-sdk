@@ -2,7 +2,7 @@
 
 > Integrate with the AstraDBByteStore store using LangChain Python.
 
-This will help you get started with Astra DB [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `AstraDBByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore).
+This will help you get started with Astra DB [key-value stores](../stores.md). For detailed documentation of all `AstraDBByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-astradb/storage/AstraDBByteStore).
 
 ## Overview
 

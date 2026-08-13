@@ -3,16 +3,16 @@
 Stream real-time updates from deep agent runs and subagent execution
 
 > [!TIP]
-> For new applications, we recommend [event streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming)—the typed-projection API introduced in Deep Agents v0.6. Event streaming gives you separate iterators per projection (subagents, messages, tool calls, values) so you can consume them independently instead of branching on `stream_mode` chunks.
+> For new applications, we recommend [event streaming](event-streaming.md)—the typed-projection API introduced in Deep Agents v0.6. Event streaming gives you separate iterators per projection (subagents, messages, tool calls, values) so you can consume them independently instead of branching on `stream_mode` chunks.
 
 Deep Agents build on LangGraph's streaming infrastructure with first-class support for subagent streams. When a deep agent delegates work to subagents, you can stream updates from each subagent independently—tracking progress, LLM tokens, and tool calls in real time.
 
 What's possible with deep agent streaming:
 
-*  [**Stream subagent progress**](https://docs.langchain.com/oss/python/deepagents/streaming#subagent-progress)—track each subagent's execution as it runs in parallel.
-*  [**Stream LLM tokens**](https://docs.langchain.com/oss/python/deepagents/streaming#llm-tokens)—stream tokens from the main agent and each subagent.
-*  [**Stream tool calls**](https://docs.langchain.com/oss/python/deepagents/streaming#tool-calls)—see tool calls and results from within subagent execution.
-*  [**Stream custom updates**](https://docs.langchain.com/oss/python/deepagents/streaming#custom-updates)—emit user-defined signals from inside subagent nodes.
+*  [**Stream subagent progress**](#subagent-progress)—track each subagent's execution as it runs in parallel.
+*  [**Stream LLM tokens**](#llm-tokens)—stream tokens from the main agent and each subagent.
+*  [**Stream tool calls**](#tool-calls)—see tool calls and results from within subagent execution.
+*  [**Stream custom updates**](#custom-updates)—emit user-defined signals from inside subagent nodes.
 
 ## Enable subgraph streaming
 
@@ -1326,13 +1326,13 @@ for namespace, chunk in agent.stream(
     print(data)       # payload
 ```
 
-See the [LangGraph streaming docs](https://docs.langchain.com/oss/python/langgraph/streaming#stream-output-format-v2) for more details on the v2 format, including type narrowing and Pydantic/dataclass coercion.
+See the [LangGraph streaming docs](../langgraph/streaming.md#stream-output-format-v2) for more details on the v2 format, including type narrowing and Pydantic/dataclass coercion.
 
 ## Related
 
-* [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents)—Configure and use subagents with Deep Agents
-* [Frontend streaming](https://docs.langchain.com/oss/python/deepagents/frontend/overview)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for Deep Agents
-* [LangChain Event Streaming](https://docs.langchain.com/oss/python/langchain/event-streaming)—General streaming concepts with LangChain agents
+* [Subagents](subagents.md)—Configure and use subagents with Deep Agents
+* [Frontend streaming](frontend/overview.md)—Build React UIs with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream) for Deep Agents
+* [LangChain Event Streaming](../langchain/event-streaming.md)—General streaming concepts with LangChain agents
 
 ***
 

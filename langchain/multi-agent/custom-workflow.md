@@ -1,6 +1,6 @@
 # Custom workflow
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/multi-agent/custom-workflow)
-In the **custom workflow** architecture, you define your own bespoke execution flow using [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview). You have complete control over the graph structure—including sequential steps, conditional branches, loops, and parallel execution.
+In the **custom workflow** architecture, you define your own bespoke execution flow using [LangGraph](../../langgraph/overview.md). You have complete control over the graph structure—including sequential steps, conditional branches, loops, and parallel execution.
 
 ```mermaid
 graph LR
@@ -30,12 +30,12 @@ graph LR
 
 Use custom workflows when standard patterns (subagents, skills, etc.) don't fit your requirements, you need to mix deterministic logic with agentic behavior, or your use case requires complex routing or multi-stage processing.
 
-Each node in your workflow can be a simple function, an LLM call, or an entire [agent](https://docs.langchain.com/oss/python/langchain/agents) with [tools](https://docs.langchain.com/oss/python/langchain/tools). You can also compose other architectures within a custom workflow—for example, embedding a multi-agent system as a single node.
+Each node in your workflow can be a simple function, an LLM call, or an entire [agent](../agents.md) with [tools](../tools.md). You can also compose other architectures within a custom workflow—for example, embedding a multi-agent system as a single node.
 
 For a complete example of a custom workflow, see the tutorial below.
 
-#### [Tutorial: Build a multi-source knowledge base with routing](https://docs.langchain.com/oss/python/langchain/multi-agent/router-knowledge-base)
-The [router pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/router) is an example of a custom workflow. This tutorial walks through building a router that queries GitHub, Notion, and Slack in parallel, then synthesizes results.
+#### [Tutorial: Build a multi-source knowledge base with routing](router-knowledge-base.md)
+The [router pattern](router.md) is an example of a custom workflow. This tutorial walks through building a router that queries GitHub, Notion, and Slack in parallel, then synthesizes results.
 
 >
 
@@ -68,14 +68,14 @@ workflow = (
 
 ## Example: RAG pipeline
 
-A common use case is combining [retrieval](https://docs.langchain.com/oss/python/deepagents/retrieval) with an agent. This example builds a WNBA stats assistant that retrieves from a knowledge base and can fetch live news.
+A common use case is combining [retrieval](../../deepagents/retrieval.md) with an agent. This example builds a WNBA stats assistant that retrieves from a knowledge base and can fetch live news.
 
 <details>
 <summary>Custom RAG workflow</summary>
 
 The workflow demonstrates three types of nodes:
 
-* **Model node** (Rewrite): Rewrites the user query for better retrieval using [structured output](https://docs.langchain.com/oss/python/langchain/structured-output).
+* **Model node** (Rewrite): Rewrites the user query for better retrieval using [structured output](../structured-output.md).
 * **Deterministic node** (Retrieve): Performs vector similarity search — no LLM involved.
 * **Agent node** (Agent): Reasons over retrieved context and can fetch additional information via tools.
 
@@ -186,7 +186,7 @@ print(result["answer"])
 ```
 
 > [!NOTE]
-> In production, use a persistent vector store such as [Valkey](https://docs.langchain.com/oss/python/integrations/vectorstores/valkey), [Databricks Vector Search](https://docs.langchain.com/oss/python/integrations/vectorstores/databricks_vector_search), or [MongoDB Atlas](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas) instead of `InMemoryVectorStore`. See [all vector stores](https://docs.langchain.com/oss/python/integrations/vectorstores).
+> In production, use a persistent vector store such as [Valkey](../../integrations/vectorstores/valkey.md), [Databricks Vector Search](../../integrations/vectorstores/databricks_vector_search.md), or [MongoDB Atlas](../../integrations/vectorstores/mongodb_atlas.md) instead of `InMemoryVectorStore`. See [all vector stores](../../integrations/vectorstores.md).
 
 </details>
 

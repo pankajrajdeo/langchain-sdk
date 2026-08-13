@@ -2,11 +2,11 @@
 
 > CLI that writes and maintains agent wikis so coding agents work faster
 
-OpenWiki is an open source CLI that writes and maintains a Markdown wiki about your codebase or personal knowledge. The wiki captures details such as architecture, integrations, evals, and workflows so [coding agents](https://docs.langchain.com/oss/python/deepagents/overview) can use it as durable context instead of rediscovering the repository on every task.
+OpenWiki is an open source CLI that writes and maintains a Markdown wiki about your codebase or personal knowledge. The wiki captures details such as architecture, integrations, evals, and workflows so [coding agents](../deepagents/overview.md) can use it as durable context instead of rediscovering the repository on every task.
 
-That makes agent work faster and cheaper in tokens: agents read a curated wiki first, then inspect source only where they need more detail. Humans can browse the same Markdown (and the local [visualizer](https://docs.langchain.com/oss/openwiki/visualize)), but the primary audience is agents.
+That makes agent work faster and cheaper in tokens: agents read a curated wiki first, then inspect source only where they need more detail. Humans can browse the same Markdown (and the local [visualizer](visualize.md)), but the primary audience is agents.
 
-OpenWiki is built on [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) and supports tracing with [LangSmith](https://docs.langchain.com/langsmith/observability-quickstart).
+OpenWiki is built on [Deep Agents](../deepagents/overview.md) and supports tracing with [LangSmith](../langsmith/observability-quickstart.md).
 
 ## Get started
 
@@ -17,7 +17,7 @@ npm install -g openwiki
 openwiki --init
 ```
 
-See the [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart) to choose a model provider, generate docs, and keep them up to date.
+See the [Quickstart](quickstart.md) to choose a model provider, generate docs, and keep them up to date.
 
 > [!NOTE]
 > OpenWiki does not provide a formal connector for Claude or Codex. In code mode, it adds pointers to the generated wiki in the repository-root `AGENTS.md` and `CLAUDE.md` files, so compatible coding agents can discover and consult the wiki.
@@ -35,30 +35,30 @@ Bare `openwiki --init` and `openwiki --update` run in code mode. Use `openwiki p
 
 ## Capabilities
 
-#### [Repository wikis](https://docs.langchain.com/oss/openwiki/code-mode)
+#### [Repository wikis](code-mode.md)
 Generate Markdown docs under `openwiki/`, then wire them into `AGENTS.md` and `CLAUDE.md` so coding agents can find them.
 
-#### [Personal brain](https://docs.langchain.com/oss/openwiki/personal-mode)
+#### [Personal brain](personal-mode.md)
 Build a local wiki from git repos, Gmail, Notion, web search, Hacker News, and X/Twitter.
 
-#### [Automatic updates](https://docs.langchain.com/oss/openwiki/automate-updates)
+#### [Automatic updates](automate-updates.md)
 Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a PR when content changes.
 
-#### [Model providers](https://docs.langchain.com/oss/openwiki/providers)
+#### [Model providers](providers.md)
 Use OpenAI, Anthropic, Gemini, Bedrock, OpenRouter, GitHub Copilot, and other providers out of the box.
 
-#### [Open Knowledge Format](https://docs.langchain.com/oss/openwiki/code-mode#open-knowledge-format)
+#### [Open Knowledge Format](code-mode.md#open-knowledge-format)
 Emit OKF v0.1 Markdown bundles with front matter, indexes, and linked concepts.
 
-#### [LangSmith tracing](https://docs.langchain.com/oss/openwiki/quickstart#trace-with-langsmith)
+#### [LangSmith tracing](quickstart.md#trace-with-langsmith)
 Trace documentation runs with LangSmith.
 
 ## Next steps
 
-#### [Quickstart](https://docs.langchain.com/oss/openwiki/quickstart)
+#### [Quickstart](quickstart.md)
 Install OpenWiki, configure a provider, and generate your first wiki.
 
-#### [CLI reference](https://docs.langchain.com/oss/openwiki/cli-reference)
+#### [CLI reference](cli-reference.md)
 Review commands, flags, and connector subcommands.
 
 ***

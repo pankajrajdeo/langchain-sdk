@@ -117,7 +117,7 @@ The first step is to generate a dataset based on the production *inputs*. Then c
 
 ### Select runs to backtest on
 
-You can select the runs to backtest on using the `filter` argument of `list_runs`. The `filter` argument uses the LangSmith [trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax) to select runs.
+You can select the runs to backtest on using the `filter` argument of `list_runs`. The `filter` argument uses the LangSmith [trace query syntax](trace-query-syntax.md) to select runs.
 
 ```python
 from datetime import datetime, timedelta, timezone
@@ -171,7 +171,7 @@ convert_runs_to_test(
 
 Once this step is complete, you should see a new dataset in your LangSmith project called "Tweet Writing Task-backtesting TODAYS DATE", with a single experiment like so:
 
-> **Image:** [Baseline experiment](https://docs.langchain.com/langsmith/run-backtests-new-agent)
+> **Image:** [Baseline experiment](run-backtests-new-agent.md)
 
 ## Benchmark against new system
 
@@ -257,7 +257,7 @@ candidate_results = await client.aevaluate(
 
 After running both experiments, you can view them in your dataset:
 
-> **Image:** [Dataset page](https://docs.langchain.com/langsmith/run-backtests-new-agent)
+> **Image:** [Dataset page](run-backtests-new-agent.md)
 
 The results reveal an interesting tradeoff between the two models:
 
@@ -273,7 +273,7 @@ This backtesting exercise revealed that while GPT-4o is generally considered a m
 
 This insight demonstrates the value of backtesting - it helped us identify potential issues before deployment.
 
-> **Image:** [Tutorial comparison view](https://docs.langchain.com/langsmith/run-backtests-new-agent)
+> **Image:** [Tutorial comparison view](run-backtests-new-agent.md)
 
 ***
 

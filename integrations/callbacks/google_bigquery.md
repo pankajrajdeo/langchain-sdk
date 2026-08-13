@@ -242,7 +242,7 @@ Optional `(raw_content, event_type) -> formatted` hook invoked before content pa
 When `True`, additively `ALTER TABLE ADD COLUMN` any new fields that future versions of this handler add to the events schema. Gated by a `langchain_bq_schema_version` table label so the diff runs at most once per schema version. Never drops, renames, or retypes columns.
 
 #### `Field` — `bool`
-When `True`, automatically `CREATE OR REPLACE` per-event-type analytics views beside the events table. Each view unnests the JSON columns into typed top-level columns (see [Auto-created analytics views](https://docs.langchain.com/oss/python/integrations/callbacks/google_bigquery#auto-created-analytics-views) below).
+When `True`, automatically `CREATE OR REPLACE` per-event-type analytics views beside the events table. Each view unnests the JSON columns into typed top-level columns (see [Auto-created analytics views](#auto-created-analytics-views) below).
 
 #### `Field` — `str`
 Prefix for auto-created view names (`v_llm_request`, `v_tool_completed`, …). Set per-table when several handler instances share one dataset to avoid collisions.

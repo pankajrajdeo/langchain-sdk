@@ -38,7 +38,7 @@ for (const output of myGenerator()) {
 }
 ```
 
-## Aggregate results[ ](https://docs.langchain.com/langsmith/trace-generator-functions#aggregate-results "Direct link to aggregate results")
+## Aggregate results[ ](#aggregate-results "Direct link to aggregate results")
 
 By default, the `outputs` of the traced function are aggregated into a single array in LangSmith. If you want to customize how it is stored (for instance, concatenating the outputs into a single string), you can use the `aggregate` option (`reduce_fn` in python). This is especially useful for aggregating streamed LLM outputs.
 

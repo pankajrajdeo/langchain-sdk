@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/otel-gateway-trace-redaction)
 Use an OpenTelemetry collector to redact sensitive data from traces before they land in LangSmith.
 
-[LangChain](https://docs.langchain.com/langsmith/trace-with-langchain), [LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph), and [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents) applications support [OpenTelemetry-based tracing](https://docs.langchain.com/langsmith/trace-with-opentelemetry). Instead of sending traces directly to LangSmith, you can route them through an OpenTelemetry collector you control, apply redaction rules to strip sensitive fields, and forward the sanitized traces to LangSmith.
+[LangChain](trace-with-langchain.md), [LangGraph](trace-with-langgraph.md), and [Deep Agents](trace-deep-agents.md) applications support [OpenTelemetry-based tracing](trace-with-opentelemetry.md). Instead of sending traces directly to LangSmith, you can route them through an OpenTelemetry collector you control, apply redaction rules to strip sensitive fields, and forward the sanitized traces to LangSmith.
 
 Traces flow from your application to the collector over OTLP/HTTP. The collector runs a transform processor that redacts sensitive span attributes, such as prompt inputs and model completions, before forwarding the sanitized spans to the LangSmith API.
 
@@ -35,7 +35,7 @@ LANGSMITH_PROJECT="my-project"
 OTEL_EXPORTER_OTLP_ENDPOINT="http://<my-otel-collector-endpoint>:4318"
 ```
 
-For more on `LANGSMITH_PROJECT`, refer to [Log traces to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project).
+For more on `LANGSMITH_PROJECT`, refer to [Log traces to a specific project](log-traces-to-project.md).
 
 ## Configure the collector
 
@@ -75,7 +75,7 @@ service:
 
 ## Trace with LangChain, LangGraph, or Deep Agents
 
-Use this approach if your application already uses [LangChain](https://docs.langchain.com/langsmith/trace-with-langchain), [LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph), or [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents). The tracing integration handles span creation automatically based on your environment variables, so no additional instrumentation code is required:
+Use this approach if your application already uses [LangChain](trace-with-langchain.md), [LangGraph](trace-with-langgraph.md), or [Deep Agents](trace-deep-agents.md). The tracing integration handles span creation automatically based on your environment variables, so no additional instrumentation code is required:
 
 ```python
 from langchain.agents import create_agent
@@ -143,7 +143,7 @@ provider.shutdown()
 ```
 
 > [!NOTE]
-> If you prefer to redact sensitive data without routing through a collector, see [Prevent logging of sensitive data in traces](https://docs.langchain.com/langsmith/mask-inputs-outputs).
+> If you prefer to redact sensitive data without routing through a collector, see [Prevent logging of sensitive data in traces](mask-inputs-outputs.md).
 
 ***
 

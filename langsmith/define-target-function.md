@@ -2,15 +2,15 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/define-target-function)
 There are three main pieces need to run an evaluation:
 
-1. A [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets) of test inputs and expected outputs.
+1. A [dataset](evaluation-concepts.md#datasets) of test inputs and expected outputs.
 2. A target function which is what you're evaluating.
-3. [Evaluators](https://docs.langchain.com/langsmith/evaluation-concepts#evaluators) that score your target function's outputs.
+3. [Evaluators](evaluation-concepts.md#evaluators) that score your target function's outputs.
 
-This guide shows you how to define the target function depending on the part of your application you are evaluating. See here for [how to create a dataset](https://docs.langchain.com/langsmith/manage-datasets-programmatically) and [how to define evaluators](https://docs.langchain.com/langsmith/code-evaluator-ui), and here for an [end-to-end example of running an evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application).
+This guide shows you how to define the target function depending on the part of your application you are evaluating. See here for [how to create a dataset](manage-datasets-programmatically.md) and [how to define evaluators](code-evaluator-ui.md), and here for an [end-to-end example of running an evaluation](evaluate-llm-application.md).
 
 ## Target function signature
 
-In order to evaluate an application in code, we need a way to run the application. When using `evaluate()` ([Python](https://reference.langchain.com/python/langsmith/client/Client/evaluate) / [JavaScript](https://reference.langchain.com/javascript/functions/langsmith.evaluation.evaluate.html)) we'll do this by passing in a *target function* argument. This is a function that takes in a dataset [Example's](https://docs.langchain.com/langsmith/evaluation-concepts#examples) inputs and returns the application output as a dict. Within this function we can call our application however we'd like. We can also format the output however we'd like. The key is that any evaluator functions we define should work with the output format we return in our target function.
+In order to evaluate an application in code, we need a way to run the application. When using `evaluate()` ([Python](https://reference.langchain.com/python/langsmith/client/Client/evaluate) / [JavaScript](https://reference.langchain.com/javascript/functions/langsmith.evaluation.evaluate.html)) we'll do this by passing in a *target function* argument. This is a function that takes in a dataset [Example's](evaluation-concepts.md#examples) inputs and returns the application output as a dict. Within this function we can call our application however we'd like. We can also format the output however we'd like. The key is that any evaluator functions we define should work with the output format we return in our target function.
 
 ```python
 from langsmith import Client

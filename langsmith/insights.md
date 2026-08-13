@@ -7,13 +7,13 @@ Insights automatically analyzes your traces to detect usage patterns, common age
 Insights uses hierarchical categorization to make sense of your data and highlight actionable trends.
 
 > [!NOTE]
-> Insights is available for LangSmith Plus and Enterprise [plans](https://docs.langchain.com/langsmith/pricing-plans).
+> Insights is available for LangSmith Plus and Enterprise [plans](pricing-plans.md).
 
 ## Prerequisites
 
-* A [model configuration](https://docs.langchain.com/langsmith/model-configurations) set up for Insights in your workspace.
-* [Permissions](https://docs.langchain.com/langsmith/organization-workspace-operations#projects) to create rules in LangSmith (required to generate new Insights Reports).
-* [Permissions](https://docs.langchain.com/langsmith/organization-workspace-operations#projects) to view tracing projects in LangSmith (required to view existing Insights Reports).
+* A [model configuration](model-configurations.md) set up for Insights in your workspace.
+* [Permissions](organization-workspace-operations.md#projects) to create rules in LangSmith (required to generate new Insights Reports).
+* [Permissions](organization-workspace-operations.md#projects) to view tracing projects in LangSmith (required to view existing Insights Reports).
 
 ## Generate your first Insights report
 
@@ -21,15 +21,15 @@ Insights uses hierarchical categorization to make sense of your data and highlig
 1. Navigate to **Tracing Projects** in the left-hand menu and select a tracing project.
 2. Click **+New** in the top right corner then **New Insights Report** to generate new insights over the project.
 3. Enter a name for your job.
-4. If you haven't already, [configure a model](https://docs.langchain.com/langsmith/model-configurations) for Insights in your workspace settings.
+4. If you haven't already, [configure a model](model-configurations.md) for Insights in your workspace settings.
 5. Answer the guided questions to focus your Insights Report on what you want to learn about your agent, then click **Run job**.
 
-Toggle to Manual mode to [configure the job manually](https://docs.langchain.com/langsmith/insights#configure-a-job).
+Toggle to Manual mode to [configure the job manually](#configure-a-job).
 
 This will kick off a background Insights Report. Reports can take up to 30 minutes to complete.
 
 #### SDK
-You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](https://docs.langchain.com/langsmith/smith-python-sdk). This allows you to analyze chat histories from your production systems, logs, or other sources.
+You can generate Insights Reports over data stored outside LangSmith using the [Python SDK](smith-python-sdk.md). This allows you to analyze chat histories from your production systems, logs, or other sources.
 
 When you call `generate_insights()`, the SDK will:
 
@@ -71,13 +71,13 @@ report = client.generate_insights(
 
 Once your job has completed, you can navigate to the **Insights** tab where you'll see a table of Insights Report. Each Report contains insights generated over a specific sample of traces from the tracing project.
 
-> **Image:** [Image](https://docs.langchain.com/langsmith/insights)
+> **Image:** [Image](insights.md)
 
 Click into your job to see traces organized into a set of auto-generated categories.
 
 You can drill down through categories and subcategories to view the underlying traces, feedback, and run statistics.
 
-> **Image:** [Image](https://docs.langchain.com/langsmith/insights)
+> **Image:** [Image](insights.md)
 
 ### Executive summary
 
@@ -96,7 +96,7 @@ Each category has a brief description and displays aggregated metrics over the t
 
 * Typical trace stats (like error rates, latency, cost)
 * Feedback scores from your evaluators
-* [Attributes](https://docs.langchain.com/langsmith/insights#attributes) extracted as part of the job
+* [Attributes](#attributes) extracted as part of the job
 
 ### Subcategories
 
@@ -124,7 +124,7 @@ For best results, write a sentence or two for each prompt that gives Insights th
 
 **Describing your traces**
 
-Explain how your data is organized: are these single runs or multi-turn conversations? Which inputs and outputs contain the key information? This helps Insights generate summary prompts and attributes that focus on what matters. You can also directly specify variables from the [summary prompt](https://docs.langchain.com/langsmith/insights#summary-prompt) section if needed.
+Explain how your data is organized: are these single runs or multi-turn conversations? Which inputs and outputs contain the key information? This helps Insights generate summary prompts and attributes that focus on what matters. You can also directly specify variables from the [summary prompt](#summary-prompt) section if needed.
 
 ### Choose models
 
@@ -133,7 +133,7 @@ Insights uses two models:
 * **Thinking model**: performs the clustering step (more capable, higher cost).
 * **Summarization model**: generates the per-trace summaries (faster, lower cost).
 
-Both models are selected from the providers you have configured in your workspace. When specific models have been enabled for Insights in your [model configurations](https://docs.langchain.com/langsmith/model-configurations), you can select them individually. If no individual models are configured, you select a provider (OpenAI or Anthropic) and Insights uses default models for that provider.
+Both models are selected from the providers you have configured in your workspace. When specific models have been enabled for Insights in your [model configurations](model-configurations.md), you can select them individually. If no individual models are configured, you select a provider (OpenAI or Anthropic) and Insights uses default models for that provider.
 
 For best results, use models from the same provider for both roles.
 
@@ -179,12 +179,12 @@ You must specify what parts of each trace to send to the summarizer using at lea
 | `run.error`           | Error string, if the run failed                                                                      | `{{run.error}}`                |
 | `run.feedback`        | All feedback scores as a JSON blob                                                                   | `{{run.feedback}}`             |
 | `run.feedback.<key>`  | A specific feedback score by key                                                                     | `{{run.feedback.correctness}}` |
-| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](https://docs.langchain.com/langsmith/threads)) | `{{all_thread_messages}}`      |
+| `all_thread_messages` | Full message history for the thread (only available for projects with [threads](threads.md)) | `{{all_thread_messages}}`      |
 
 You can access nested fields using dot notation. For example, `{{run.inputs.foo.bar}}` includes only the `bar` field within `foo` in the last run's inputs.
 
 > [!NOTE]
-> For projects with [threads](https://docs.langchain.com/langsmith/threads), Insights analyzes full conversations. Only the most recent root run from each thread is used for `run.*` variables. Use `all_thread_messages` to access the complete conversation history.
+> For projects with [threads](threads.md), Insights analyzes full conversations. Only the most recent root run from each thread is used for `run.*` variables. Use `all_thread_messages` to access the complete conversation history.
 
 #### Attributes
 

@@ -2,7 +2,7 @@
 
 > Integrate with the ChatTogether chat model using LangChain Python.
 
-This page will help you get started with Together AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatTogether` features and configurations, head to the [API reference](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether).
+This page will help you get started with Together AI [chat models](../../langchain/models.md). For detailed documentation of all `ChatTogether` features and configurations, head to the [API reference](https://reference.langchain.com/python/langchain-together/chat_models/ChatTogether).
 
 [Together AI](https://www.together.ai/) offers an API to query [50+ leading open-source models](https://docs.together.ai/docs/chat-models)
 
@@ -16,7 +16,7 @@ This page will help you get started with Together AI [chat models](https://docs.
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                                  ✅                                  |       ❌      |                            ✅                            |                              ✅                             |
 
@@ -36,7 +36,7 @@ if "TOGETHER_API_KEY" not in os.environ:
     os.environ["TOGETHER_API_KEY"] = getpass.getpass("Enter your Together API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

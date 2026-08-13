@@ -8,7 +8,7 @@ This will help you get started with MistralAI embedding models using LangChain. 
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai).
+> **Interactive content:** [View this section in the original documentation](mistralai.md).
 
 ## Setup
 
@@ -26,7 +26,7 @@ if not os.getenv("MISTRAL_API_KEY"):
     os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter your MistralAI API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -55,7 +55,7 @@ embeddings = MistralAIEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 

@@ -5,9 +5,9 @@ Common issues, fixes, and diagnostic commands for LangSmith self-hosted on AWS E
 This page documents common issues, fixes, and diagnostic commands for LangSmith deployments provisioned with the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws).
 
 > [!TIP]
-> Before upgrading, review the [LangSmith self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) for breaking changes and required variable updates. Run `aws eks update-kubeconfig --region <region> --name <cluster-name>` before running any `kubectl` commands.
+> Before upgrading, review the [LangSmith self-hosted changelog](self-hosted-changelog.md) for breaking changes and required variable updates. Run `aws eks update-kubeconfig --region <region> --name <cluster-name>` before running any `kubectl` commands.
 
-For a copy-paste reference of the `kubectl`, `helm`, and `aws` calls used throughout this page, skip to [Diagnostic commands](https://docs.langchain.com/langsmith/self-host-terraform-aws-troubleshooting#diagnostic-commands).
+For a copy-paste reference of the `kubectl`, `helm`, and `aws` calls used throughout this page, skip to [Diagnostic commands](#diagnostic-commands).
 
 ## Automated diagnostics
 
@@ -73,7 +73,7 @@ kubectl edit configmap aws-auth -n kube-system
 
 **Symptom:** `kubectl get ingress -n langsmith` shows no ADDRESS after several minutes.
 
-**Cause:** AWS Load Balancer Controller is not running or lacks IRSA permissions, the Terraform-provisioned ALB is not referenced correctly, or `alb_scheme = "internal"` is set (internal ALBs have no public address; see [ALB has no public address](https://docs.langchain.com/langsmith/self-host-terraform-aws-troubleshooting#alb-has-no-public-address-internal-scheme)).
+**Cause:** AWS Load Balancer Controller is not running or lacks IRSA permissions, the Terraform-provisioned ALB is not referenced correctly, or `alb_scheme = "internal"` is set (internal ALBs have no public address; see [ALB has no public address](#alb-has-no-public-address-internal-scheme)).
 
 **Fix**
 

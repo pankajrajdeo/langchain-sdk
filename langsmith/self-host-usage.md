@@ -3,7 +3,7 @@
 This guide will walk you through the process of using your self-hosted instance of LangSmith.
 
 > [!NOTE]
-> This guide assumes you have already deployed a self-hosted LangSmith instance. If you have not, please refer to the [kubernetes deployment guide](https://docs.langchain.com/langsmith/kubernetes).
+> This guide assumes you have already deployed a self-hosted LangSmith instance. If you have not, please refer to the [kubernetes deployment guide](kubernetes.md).
 
 ### Configuring the application you want to use with LangSmith
 

@@ -2,7 +2,7 @@
 
 > Integrate with the ChatBaseten chat model using LangChain Python.
 
-This guide provides a quick overview for getting started with `ChatBaseten` [chat models](https://docs.langchain.com/oss/python/langchain/models).
+This guide provides a quick overview for getting started with `ChatBaseten` [chat models](../../langchain/models.md).
 
 Baseten provides inference designed for production applications. Built on the Baseten Inference Stack, these APIs deliver enterprise-grade performance and reliability for leading open-source or custom models: [https://www.baseten.co/library/](https://www.baseten.co/library/).
 
@@ -16,7 +16,7 @@ Baseten provides inference designed for production applications. Built on the Ba
 
 ### Features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -40,7 +40,7 @@ if "BASETEN_API_KEY" not in os.environ:
     os.environ["BASETEN_API_KEY"] = getpass.getpass("Enter your Baseten API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -120,7 +120,7 @@ content='Buds yawn open wide—\na robin stitches the hush\nwith threads of firs
 ```
 
 > [!TIP]
-> Full guides are available on [chat model invocation types](https://docs.langchain.com/oss/python/langchain/models#invocation), [message types](https://docs.langchain.com/oss/python/langchain/messages#message-types), and [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks).
+> Full guides are available on [chat model invocation types](../../langchain/models.md#invocation), [message types](../../langchain/messages.md#message-types), and [content blocks](../../langchain/messages.md#standard-content-blocks).
 
 ***
 

@@ -7,7 +7,7 @@ This tutorial shows how to use **progressive disclosure** - a context management
 **What you'll build:** A SQL query assistant with two skills (sales analytics and inventory management). The agent sees lightweight skill descriptions in its system prompt, then loads full database schemas and business logic through tool calls only when relevant to the user's query.
 
 > [!NOTE]
-> For a complete example of a SQL agent with query execution, error correction, and validation, see our [SQL Agent tutorial](https://docs.langchain.com/oss/python/langchain/sql-agent). This tutorial focuses on the progressive disclosure pattern which can be applied to any domain.
+> For a complete example of a SQL agent with query execution, error correction, and validation, see our [SQL Agent tutorial](../sql-agent.md). This tutorial focuses on the progressive disclosure pattern which can be applied to any domain.
 
 > [!TIP]
 > Progressive disclosure was popularized by Anthropic as a technique for building scalable agent skills systems. This approach uses a three-level architecture (metadata → core content → detailed resources) where agents load information only as needed. For more on this technique, see [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
@@ -53,7 +53,7 @@ flowchart TD
 **What are skills:** Skills, as popularized by Claude Code, are primarily prompt-based: self-contained units of specialized instructions for specific business tasks. In Claude Code, skills are exposed as directories with files on the file system, discovered through file operations. Skills guide behavior through prompts and can provide information about tool usage or include sample code for a coding agent to execute.
 
 > [!TIP]
-> Skills with progressive disclosure can be viewed as a form of [RAG (Retrieval-Augmented Generation)](https://docs.langchain.com/oss/python/deepagents/rag), where each skill is a retrieval unit—though not necessarily backed by embeddings or keyword search, but by tools for browsing content (like file operations or, in this tutorial, direct lookup).
+> Skills with progressive disclosure can be viewed as a form of [RAG (Retrieval-Augmented Generation)](../../deepagents/rag.md), where each skill is a retrieval unit—though not necessarily backed by embeddings or keyword search, but by tools for browsing content (like file operations or, in this tutorial, direct lookup).
 
 **Trade-offs:**
 
@@ -90,7 +90,7 @@ uv add langchain
 conda install langchain -c conda-forge
 ```
 
-For more details, see our [Installation guide](https://docs.langchain.com/oss/python/langchain/install).
+For more details, see our [Installation guide](../install.md).
 
 ### LangSmith
 
@@ -114,7 +114,7 @@ os.environ["LANGSMITH_API_KEY"] = getpass.getpass()
 Select a chat model from LangChain's suite of integrations:
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -143,7 +143,7 @@ model = ChatOpenAI(model="gpt-5.5")
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -172,7 +172,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -211,7 +211,7 @@ model = AzureChatOpenAI(
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -240,7 +240,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -269,7 +269,7 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -308,7 +308,7 @@ model = ChatHuggingFace(llm=llm)
 ```
 
 #### OpenRouter
-👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
+👉 Read the [OpenRouter chat model integration docs](../../integrations/chat/openrouter.md)
 
 ```bash
 pip install -U "langchain-openrouter"
@@ -517,14 +517,14 @@ def load_skill(skill_name: str) -> str:
     return f"Skill '{skill_name}' not found. Available skills: {available}"
 ```
 
-The `load_skill` tool returns the full skill content as a string, which becomes part of the conversation as a ToolMessage. For more details on creating and using tools, see the [Tools guide](https://docs.langchain.com/oss/python/langchain/tools).
+The `load_skill` tool returns the full skill content as a string, which becomes part of the conversation as a ToolMessage. For more details on creating and using tools, see the [Tools guide](../tools.md).
 
 ## 3. Build skill middleware
 
 Create custom middleware that injects skill descriptions into the system prompt. This middleware makes skills discoverable without loading their full content upfront.
 
 > [!NOTE]
-> This guide demonstrates creating custom middleware. For a comprehensive guide on middleware concepts and patterns, see the [custom middleware documentation](https://docs.langchain.com/oss/python/langchain/middleware/custom).
+> This guide demonstrates creating custom middleware. For a comprehensive guide on middleware concepts and patterns, see the [custom middleware documentation](../middleware/custom.md).
 
 ```python
 from langchain.agents.middleware import ModelRequest, ModelResponse, AgentMiddleware
@@ -572,7 +572,7 @@ class SkillMiddleware(AgentMiddleware):  # [!code highlight]
 The middleware appends skill descriptions to the system prompt, making the agent aware of available skills without loading their full content. The `load_skill` tool is registered as a class variable, making it available to the agent.
 
 > [!NOTE]
-> **Production consideration**: This tutorial loads the skill list in `__init__` for simplicity. In a production system, you may want to load skills in the `before_agent` hook instead, allowing them to be refreshed periodically to reflect up-to-date changes (e.g., when new skills are added or existing ones are modified). See the [before\_agent hook documentation](https://docs.langchain.com/oss/python/langchain/middleware/custom#node-style-hooks) for details.
+> **Production consideration**: This tutorial loads the skill list in `__init__` for simplicity. In a production system, you may want to load skills in the `before_agent` hook instead, allowing them to be refreshed periodically to reflect up-to-date changes (e.g., when new skills are added or existing ones are modified). See the [before\_agent hook documentation](../middleware/custom.md#node-style-hooks) for details.
 
 ## 4. Create the agent with skill support
 
@@ -1160,7 +1160,7 @@ The choice depends on your requirements: in-memory is fastest but requires redep
 <details>
 <summary>Combining with few-shot prompting and other techniques</summary>
 
-Progressive disclosure is fundamentally a **[context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) technique** - you're managing what information is available to the agent and when. This tutorial focused on loading database schemas, but the same principles apply to other types of context.
+Progressive disclosure is fundamentally a **[context engineering](../context-engineering.md) technique** - you're managing what information is available to the agent and when. This tutorial focused on loading database schemas, but the same principles apply to other types of context.
 
 ### Combining with few-shot prompting
 
@@ -1182,11 +1182,11 @@ This combination of progressive disclosure (loading schemas on-demand) and dynam
 
 ## Next steps
 
-* Learn about [middleware](https://docs.langchain.com/oss/python/langchain/middleware) for more dynamic agent behaviors
-* Explore [context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering) techniques for managing agent context
-* Explore the [handoffs pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs-customer-support) for sequential workflows
-* Read the [subagents pattern](https://docs.langchain.com/oss/python/langchain/multi-agent/subagents-personal-assistant) for parallel task routing
-* See [multi-agent patterns](https://docs.langchain.com/oss/python/langchain/multi-agent) for other approaches to specialized agents
+* Learn about [middleware](../middleware.md) for more dynamic agent behaviors
+* Explore [context engineering](../context-engineering.md) techniques for managing agent context
+* Explore the [handoffs pattern](handoffs-customer-support.md) for sequential workflows
+* Read the [subagents pattern](subagents-personal-assistant.md) for parallel task routing
+* See [multi-agent patterns](../multi-agent.md) for other approaches to specialized agents
 * Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-multi-agent-skills-sql-assistant) to debug and monitor skill loading
 
 ***

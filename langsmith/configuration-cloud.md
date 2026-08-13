@@ -1,6 +1,6 @@
 # Manage assistants
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/configuration-cloud)
-This page describes how to create, configure, and manage [assistants](https://docs.langchain.com/langsmith/assistants). Assistants allow you to customize your [deployed](https://docs.langchain.com/langsmith/deployment) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
+This page describes how to create, configure, and manage [assistants](assistants.md). Assistants allow you to customize your [deployed](deployment.md) graph's behavior through configuration—such as model selection, prompts, and tool availability—without changing the underlying graph code.
 
 You can work with the [SDK](https://reference.langchain.com/python/langsmith/deployment/sdk/) or in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-configuration-cloud).
 
@@ -43,7 +43,7 @@ function callModel(state: State, runtime: Runtime[ContextSchema]) {
 
 When you create an assistant, you provide specific values for these configuration fields. The assistant stores this configuration and applies it whenever the graph runs.
 
-For more information on configuration in [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), refer to the [runtime context documentation](https://docs.langchain.com/oss/python/langgraph/graph-api#runtime-context).
+For more information on configuration in [LangGraph](../langgraph/overview.md), refer to the [runtime context documentation](../langgraph/graph-api.md#runtime-context).
 
 **Select SDK or UI for your workflow:**
 
@@ -133,7 +133,7 @@ The `assistant_id` (a UUID like `"62e209ca-9154-432a-b9e9-2d75c7a9219b"`) unique
 > * **Graph ID** (e.g., `"agent"`): Uses the default assistant for that graph
 > * **Assistant ID** (UUID): Uses the specific assistant configuration
 >
-> See [Use an assistant](https://docs.langchain.com/langsmith/configuration-cloud#use-an-assistant) for examples.
+> See [Use an assistant](#use-an-assistant) for examples.
 
 ## Use an assistant
 
@@ -356,7 +356,7 @@ You can create assistants from the [LangSmith UI](https://smith.langchain.com?ut
    * Configure the assistant using the configuration schema for that graph.
 4. Click **Create assistant**.
 
-This will take you to [Studio](https://docs.langchain.com/langsmith/studio) where you can test the assistant. Return to the **Assistants** tab to see your newly created assistant in the table.
+This will take you to [Studio](studio.md) where you can test the assistant. Return to the **Assistants** tab to see your newly created assistant in the table.
 
 ## Use an assistant
 
@@ -366,7 +366,7 @@ To use an assistant in the LangSmith UI:
 2. Find the assistant you want to use.
 3. Click **Studio** for that assistant.
 
-This opens [Studio](https://docs.langchain.com/langsmith/studio) with the selected assistant. When you submit an input (in **Graph** or **Chat** mode), the assistant's configuration will be applied to the run.
+This opens [Studio](studio.md) with the selected assistant. When you submit an input (in **Graph** or **Chat** mode), the assistant's configuration will be applied to the run.
 
 ## Create a new version for your assistant
 

@@ -1,16 +1,16 @@
 # Manage datasets
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/manage-datasets)
-LangSmith provides tools for managing and working with your [*datasets*](https://docs.langchain.com/langsmith/evaluation-concepts#datasets). This page describes dataset operations including:
+LangSmith provides tools for managing and working with your [*datasets*](evaluation-concepts.md#datasets). This page describes dataset operations including:
 
-* [Versioning datasets](https://docs.langchain.com/langsmith/manage-datasets#version-a-dataset) to track changes over time.
-* [Filtering](https://docs.langchain.com/langsmith/manage-datasets#evaluate-on-a-filtered-view-of-a-dataset) and [splitting](https://docs.langchain.com/langsmith/manage-datasets#evaluate-on-a-dataset-split) datasets for evaluation.
-* [Sharing datasets](https://docs.langchain.com/langsmith/manage-datasets#share-a-dataset) publicly.
-* [Exporting datasets](https://docs.langchain.com/langsmith/manage-datasets#export-a-dataset) in various formats.
+* [Versioning datasets](#version-a-dataset) to track changes over time.
+* [Filtering](#evaluate-on-a-filtered-view-of-a-dataset) and [splitting](#evaluate-on-a-dataset-split) datasets for evaluation.
+* [Sharing datasets](#share-a-dataset) publicly.
+* [Exporting datasets](#export-a-dataset) in various formats.
 
-You'll also learn how to [export filtered traces](https://docs.langchain.com/langsmith/manage-datasets#export-filtered-traces-from-experiment-to-dataset) from [experiments](https://docs.langchain.com/langsmith/evaluation-concepts#experiment) back to datasets for further analysis and iteration.
+You'll also learn how to [export filtered traces](#export-filtered-traces-from-experiment-to-dataset) from [experiments](evaluation-concepts.md#experiment) back to datasets for further analysis and iteration.
 
 > [!TIP]
-> The [LangSmith Engine](https://docs.langchain.com/langsmith/engine) can automatically generate ground truth dataset examples from your production traces.
+> The [LangSmith Engine](engine.md) can automatically generate ground truth dataset examples from your production traces.
 
 ## Version a dataset
 
@@ -18,11 +18,11 @@ In LangSmith, datasets are versioned. This means that every time you add, update
 
 ### Create a new version of a dataset
 
-Any time you add, update, or delete examples in your dataset, a new [version](https://docs.langchain.com/langsmith/evaluation-concepts#dataset-organization) of your dataset is created. This allows you to track changes to your dataset over time and understand how your dataset has evolved.
+Any time you add, update, or delete examples in your dataset, a new [version](evaluation-concepts.md#dataset-organization) of your dataset is created. This allows you to track changes to your dataset over time and understand how your dataset has evolved.
 
 By default, the version is defined by the timestamp of the change. When you click on a particular version of a dataset (by timestamp) in the **Examples** tab, you will find the state of the dataset at that point in time.
 
-> **Image:** [Version Datasets](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Version Datasets](manage-datasets.md)
 
 Note that examples are read-only when viewing a past version of the dataset. You will also see the operations that were between this version of the dataset and the latest version of the dataset.
 
@@ -31,7 +31,7 @@ Note that examples are read-only when viewing a past version of the dataset. You
 
 In the **Tests** tab, you will find the results of tests run on the dataset at different versions.
 
-> **Image:** [Version Datasets](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Version Datasets](manage-datasets.md)
 
 ### Tag a version
 
@@ -41,7 +41,7 @@ For example, you might tag a version of your dataset as "prod" and use it to run
 
 You can tag a version of your dataset in the UI by clicking on **+ Tag this version** in the **Examples** tab.
 
-> **Image:** [Tagging Datasets](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Tagging Datasets](manage-datasets.md)
 
 You can also tag versions of your dataset using the SDK. Here's an example of how to tag a version of a dataset using the [Python SDK](https://docs.smith.langchain.com/reference/python/reference):
 
@@ -58,15 +58,15 @@ client.update_dataset_tag(
 )
 ```
 
-To run an evaluation on a particular tagged version of a dataset, refer to the [Evaluate on a specific dataset version section](https://docs.langchain.com/langsmith/manage-datasets#evaluate-on-a-specific-dataset-version).
+To run an evaluation on a particular tagged version of a dataset, refer to the [Evaluate on a specific dataset version section](#evaluate-on-a-specific-dataset-version).
 
 ## Evaluate on a specific dataset version
 
 > [!TIP]
 > You may find it helpful to refer to the following content before you read this section:
 >
-> * [Version a dataset](https://docs.langchain.com/langsmith/manage-datasets#version-a-dataset).
-> * [Fetching examples](https://docs.langchain.com/langsmith/manage-datasets-programmatically#fetch-examples).
+> * [Version a dataset](#version-a-dataset).
+> * [Fetching examples](manage-datasets-programmatically.md#fetch-examples).
 
 ### Use `list_examples`
 
@@ -114,19 +114,19 @@ ExampleListParams listParams = ExampleListParams.builder()
 var examples = client.examples().list(listParams);
 ```
 
-Learn more about how to fetch views of a dataset on the [Create and manage datasets programmatically](https://docs.langchain.com/langsmith/manage-datasets-programmatically#fetch-datasets) page.
+Learn more about how to fetch views of a dataset on the [Create and manage datasets programmatically](manage-datasets-programmatically.md#fetch-datasets) page.
 
 ## Evaluate on a split / filtered view of a dataset
 
 > [!TIP]
 > You may find it helpful to refer to the following content before you read this section:
 >
-> * [Fetching examples](https://docs.langchain.com/langsmith/manage-datasets-programmatically#fetch-examples).
-> * [Creating and managing dataset splits](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-and-manage-dataset-splits).
+> * [Fetching examples](manage-datasets-programmatically.md#fetch-examples).
+> * [Creating and managing dataset splits](manage-datasets-in-application.md#create-and-manage-dataset-splits).
 
 ### Evaluate on a filtered view of a dataset
 
-You can use the `list_examples` / `listExamples` method to [fetch](https://docs.langchain.com/langsmith/manage-datasets-programmatically#fetch-examples) a subset of examples from a dataset to evaluate on.
+You can use the `list_examples` / `listExamples` method to [fetch](manage-datasets-programmatically.md#fetch-examples) a subset of examples from a dataset to evaluate on.
 
 One common workflow is to fetch examples that have a certain metadata key-value pair.
 
@@ -164,11 +164,11 @@ ExampleListParams listParams = ExampleListParams.builder()
 var examples = client.examples().list(listParams);
 ```
 
-For more filtering capabilities, refer to this [how-to guide](https://docs.langchain.com/langsmith/manage-datasets-programmatically#list-examples-by-structured-filter).
+For more filtering capabilities, refer to this [how-to guide](manage-datasets-programmatically.md#list-examples-by-structured-filter).
 
 ### Evaluate on a dataset split
 
-You can use the `list_examples` / `listExamples` method to evaluate on one or multiple [splits](https://docs.langchain.com/langsmith/evaluation-concepts#dataset-organization) of your dataset. The `splits` parameter takes a list of the splits you would like to evaluate.
+You can use the `list_examples` / `listExamples` method to evaluate on one or multiple [splits](evaluation-concepts.md#dataset-organization) of your dataset. The `splits` parameter takes a list of the splits you would like to evaluate.
 
 ```python
 from langsmith import evaluate
@@ -208,7 +208,7 @@ ExampleListParams listParams = ExampleListParams.builder()
 var examples = client.examples().list(listParams);
 ```
 
-For more details on fetching views of a dataset, refer to the guide on [fetching datasets](https://docs.langchain.com/langsmith/manage-datasets-programmatically#fetch-datasets).
+For more details on fetching views of a dataset, refer to the guide on [fetching datasets](manage-datasets-programmatically.md#fetch-datasets).
 
 ## Share a dataset
 
@@ -221,7 +221,7 @@ For more details on fetching views of a dataset, refer to the guide on [fetching
 
 From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top right of the page), click **Share Dataset**. This will open a dialog where you can copy the link to the dataset.
 
-> **Image:** [Share Dataset](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Share Dataset](manage-datasets.md)
 
 ### Unshare a dataset
 
@@ -229,7 +229,7 @@ From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top rig
 
 2. Navigate to your organization's list of publicly shared datasets, by clicking on **Settings** -> **Shared URLs** or [this link](https://smith.langchain.com/settings/shared), then click on **Unshare** next to the dataset you want to unshare.
 
-> **Image:** [Unshare Trace List](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Unshare Trace List](manage-datasets.md)
 
 ## Export a dataset
 
@@ -237,27 +237,27 @@ You can export your LangSmith dataset to a CSV, JSONL, or [OpenAI's fine tuning 
 
 From the **Dataset & Experiments** tab, select a dataset, click **⋮** (top right of the page), click **Download Dataset**.
 
-> **Image:** [Export Dataset Button](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Export Dataset Button](manage-datasets.md)
 
 ## Export filtered traces from experiment to dataset
 
-After running an [offline evaluation](https://docs.langchain.com/langsmith/evaluation-concepts#offline-evaluations) in LangSmith, you may want to export [traces](https://docs.langchain.com/langsmith/observability-concepts#traces) that met some evaluation criteria to a dataset.
+After running an [offline evaluation](evaluation-concepts.md#offline-evaluations) in LangSmith, you may want to export [traces](observability-concepts.md#traces) that met some evaluation criteria to a dataset.
 
 ### View experiment traces
 
-> **Image:** [Export filtered traces](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Export filtered traces](manage-datasets.md)
 
 To do so, first click on the arrow next to your experiment name. This will direct you to a project that contains the traces generated from your experiment.
 
-> **Image:** [Export filtered traces](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Export filtered traces](manage-datasets.md)
 
 From there, you can filter the traces based on your evaluation criteria. In this example, we're filtering for all traces that received an accuracy score greater than 0.5.
 
-> **Image:** [Export filtered traces](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Export filtered traces](manage-datasets.md)
 
 After applying the filter on the project, we can multi-select runs to add to the dataset, and click **Add to Dataset**.
 
-> **Image:** [Export filtered traces](https://docs.langchain.com/langsmith/manage-datasets)
+> **Image:** [Export filtered traces](manage-datasets.md)
 
 ***
 

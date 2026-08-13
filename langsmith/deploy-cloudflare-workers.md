@@ -123,10 +123,10 @@ Out of the box, the agent uses an in-memory `MemorySaver` checkpointer (`worker/
 
 For production:
 
-1. Swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) (for example Postgres via Hyperdrive, or a custom DO-backed store).
+1. Swap in a [durable checkpointer](../langgraph/checkpointers.md#checkpointer-libraries) (for example Postgres via Hyperdrive, or a custom DO-backed store).
 2. Keep per-thread Durable Objects for SSE replay (or persist the event log to DO storage / KV for long-lived reconnects).
 
-For more information, see [checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](https://docs.langchain.com/oss/python/langgraph/add-memory).
+For more information, see [checkpointer libraries](../langgraph/checkpointers.md#checkpointer-libraries) and [add memory / persistence](../langgraph/add-memory.md).
 
 ## Local development
 
@@ -156,7 +156,7 @@ pnpm typecheck
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 * [Durable Objects](https://developers.cloudflare.com/durable-objects/)

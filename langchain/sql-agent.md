@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langchain/sql-agent)
 ## Overview
 
-In this tutorial, you will learn how to build an agent that can answer questions about a SQL database using LangChain [agents](https://docs.langchain.com/oss/python/langchain/agents).
+In this tutorial, you will learn how to build an agent that can answer questions about a SQL database using LangChain [agents](agents.md).
 
 At a high level, the agent will:
 
@@ -22,9 +22,9 @@ At a high level, the agent will:
 
 The following tutorial covers the following concepts:
 
-* [Tools](https://docs.langchain.com/oss/python/langchain/tools) for reading from SQL databases
-* LangChain [agents](https://docs.langchain.com/oss/python/langchain/agents)
-* [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) processes
+* [Tools](tools.md) for reading from SQL databases
+* LangChain [agents](agents.md)
+* [Human-in-the-loop](human-in-the-loop.md) processes
 
 ## Setup
 
@@ -44,10 +44,10 @@ export LANGSMITH_API_KEY="..."
 ## Build your SQL agent
 
 ### Select an LLM
-Select a model that supports [tool-calling](https://docs.langchain.com/oss/python/integrations/providers/overview):
+Select a model that supports [tool-calling](../integrations/providers/overview.md):
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -76,7 +76,7 @@ model = ChatOpenAI(model="gpt-5.5")
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -105,7 +105,7 @@ model = ChatAnthropic(model="claude-sonnet-4-6")
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -144,7 +144,7 @@ model = AzureChatOpenAI(
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -173,7 +173,7 @@ model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -202,7 +202,7 @@ model = ChatBedrock(model="us.anthropic.claude-sonnet-4-6")
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -241,7 +241,7 @@ model = ChatHuggingFace(llm=llm)
 ```
 
 #### OpenRouter
-👉 Read the [OpenRouter chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openrouter/)
+👉 Read the [OpenRouter chat model integration docs](../integrations/chat/openrouter.md)
 
 ```bash
 pip install -U "langchain-openrouter"
@@ -326,7 +326,7 @@ Sample output: [(1, 'AC/DC'), (2, 'Accept'), (3, 'Aerosmith'), (4, 'Alanis Moris
 > [!WARNING]
 > The following database tools are minimal wrappers for demonstration purposes only. They are not intended to be secure or used in production. Use narrowly scoped database permissions and add application-specific validation before executing model-generated SQL.
 
-We can implement database [tools](https://docs.langchain.com/oss/python/langchain/tools) as thin wrappers using the `@tool` decorator from `langchain.tools`:
+We can implement database [tools](tools.md) as thin wrappers using the `@tool` decorator from `langchain.tools`:
 
 ```python
 import sqlite3
@@ -608,7 +608,7 @@ The agent correctly wrote a query, checked the query, and ran it to inform its f
 > You can inspect all aspects of the above run, including steps taken, tools invoked, what prompts were seen by the LLM, and more in the [LangSmith trace](https://smith.langchain.com/public/cd2ce887-388a-4bb1-a29d-48208ce50d15/r).
 
 ### (Optional) Use Studio
-[Studio](https://docs.langchain.com/langsmith/studio) provides a "client side" loop as well as memory so you can run this as a chat interface and query the database. You can ask questions like "Tell me the scheme of the database" or "Show me the invoices for the 5 top customers". You will see the SQL command that is generated and the resulting output. The details of how to get that started are below.
+[Studio](../langsmith/studio.md) provides a "client side" loop as well as memory so you can run this as a chat interface and query the database. You can ask questions like "Tell me the scheme of the database" or "Show me the invoices for the 5 top customers". You will see the SQL command that is generated and the resulting output. The details of how to get that started are below.
 
 <details>
 <summary>Run your agent in Studio</summary>
@@ -800,7 +800,7 @@ agent = create_agent(
 ### Implement human-in-the-loop review
 It can be prudent to check the agent's SQL queries before they are executed for any unintended actions or inefficiencies.
 
-LangChain agents feature support for built-in [human-in-the-loop middleware](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) to add oversight to agent tool calls. Let's configure the agent to pause for human review on calling the `sql_db_query` tool:
+LangChain agents feature support for built-in [human-in-the-loop middleware](human-in-the-loop.md) to add oversight to agent tool calls. Let's configure the agent to pause for human review on calling the `sql_db_query` tool:
 
 ```python
 from langchain.agents import create_agent
@@ -822,7 +822,7 @@ agent = create_agent(
 ```
 
 > [!NOTE]
-> We've added a [checkpointer](https://docs.langchain.com/oss/python/langchain/short-term-memory) to our agent to allow execution to be paused and resumed. See the [human-in-the-loop guide](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) for detalis on this as well as available middleware configurations.
+> We've added a [checkpointer](short-term-memory.md) to our agent to allow execution to be paused and resumed. See the [human-in-the-loop guide](human-in-the-loop.md) for detalis on this as well as available middleware configurations.
 
 On running the agent, it will now pause for review before executing the `sql_db_query` tool:
 
@@ -858,7 +858,7 @@ Tool: sql_db_query
 Args: {'query': 'SELECT g.Name AS Genre, AVG(t.Milliseconds) AS AvgTrackLength FROM Track t JOIN Genre g ON t.GenreId = g.GenreId GROUP BY g.Name ORDER BY AvgTrackLength DESC LIMIT 1;'}
 ```
 
-We can resume execution, in this case accepting the query, using [Command](https://docs.langchain.com/oss/python/langgraph/use-graph-api#combine-control-flow-and-state-updates-with-command):
+We can resume execution, in this case accepting the query, using [Command](../langgraph/use-graph-api.md#combine-control-flow-and-state-updates-with-command):
 
 ```python
 from langgraph.types import Command # [!code highlight]
@@ -897,11 +897,11 @@ Name: sql_db_query
 The genre with the longest average track length is "Sci Fi & Fantasy" with an average duration of about 2,911,783 milliseconds, followed by "Science Fiction" and "Drama."
 ```
 
-Refer to the [human-in-the-loop guide](https://docs.langchain.com/oss/python/langchain/human-in-the-loop) for details.
+Refer to the [human-in-the-loop guide](human-in-the-loop.md) for details.
 
 ## Next steps
 
-For deeper customization, check out [this tutorial](https://docs.langchain.com/oss/python/langgraph/sql-agent) for implementing a SQL agent directly using LangGraph primitives.
+For deeper customization, check out [this tutorial](../langgraph/sql-agent.md) for implementing a SQL agent directly using LangGraph primitives.
 
 ***
 

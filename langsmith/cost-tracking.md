@@ -4,7 +4,7 @@ Building agents at scale introduces non-trivial, usage-based costs that can be d
 
 This gives you a single, unified view of costs across your entire application, which makes it easy to monitor, understand, and debug your spend.
 
-To cap LLM cost on evaluator runs, refer to [Track and limit evaluator spend](https://docs.langchain.com/langsmith/evaluator-spend). Evaluator spend tracking and limits use the per-model pricing configured under [Model pricing](https://docs.langchain.com/langsmith/cost-tracking#create-a-new-or-modify-an-existing-model-price-entry).
+To cap LLM cost on evaluator runs, refer to [Track and limit evaluator spend](evaluator-spend.md). Evaluator spend tracking and limits use the per-model pricing configured under [Model pricing](#create-a-new-or-modify-an-existing-model-price-entry).
 
 ## View costs in the LangSmith UI
 
@@ -20,9 +20,9 @@ The UI separates token usage and costs into three categories:
 
 You can view detailed breakdowns by hovering over cost sections in the UI. When available, each section is further categorized by subtype.
 
-> **Image:** [Cost tooltip](https://docs.langchain.com/langsmith/cost-tracking)
+> **Image:** [Cost tooltip](cost-tracking.md)
 
-> **Image:** [Cost tooltip](https://docs.langchain.com/langsmith/cost-tracking)
+> **Image:** [Cost tooltip](cost-tracking.md)
 
 You can inspect these breakdowns throughout the LangSmith UI:
 
@@ -33,7 +33,7 @@ The trace tree shows the most detailed view of token usage and cost (for a singl
 Open any run inside a tracing project to view its trace tree.
 
 > [!NOTE]
-> When tracking costs across threads, ensure that all child runs include the thread metadata (`session_id` or `thread_id`). Without thread metadata on child runs, token counts and costs from those runs won't be included in thread-level aggregations. Refer to [configuring threads](https://docs.langchain.com/langsmith/threads) for details on setting thread metadata.
+> When tracking costs across threads, ensure that all child runs include the thread metadata (`session_id` or `thread_id`). Without thread metadata on child runs, token counts and costs from those runs won't be included in thread-level aggregations. Refer to [configuring threads](threads.md) for details on setting thread metadata.
 
 #### In project stats
 
@@ -41,9 +41,9 @@ The project stats panel shows the total token usage and cost for all traces in a
 
 #### In dashboards
 
-Dashboards help you explore cost and token usage trends over time. The [prebuilt dashboard](https://docs.langchain.com/langsmith/dashboards/#prebuilt-dashboards) for a tracing project shows total costs and a cost breakdown by input and output tokens.
+Dashboards help you explore cost and token usage trends over time. The [prebuilt dashboard](dashboards.md#prebuilt-dashboards) for a tracing project shows total costs and a cost breakdown by input and output tokens.
 
-You may also configure custom cost tracking charts in [custom dashboards](https://docs.langchain.com/langsmith/dashboards#custom-dashboards).
+You may also configure custom cost tracking charts in [custom dashboards](dashboards.md#custom-dashboards).
 
 ## Cost tracking
 
@@ -54,15 +54,17 @@ You can track costs in two ways:
 
 | Method            | Run type: LLM                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Run type: Other                                                |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| **Automatically** | <ul><li>Calling LLMs with [LangChain](https://docs.langchain.com/oss/python/langchain/overview)</li><li>Tracing LLM calls to OpenAI, Anthropic or models that follow an OpenAI-compliant format with `@traceable`</li><li> Using LangSmith wrappers for [OpenAI](https://docs.langchain.com/langsmith/trace-openai) or [Anthropic](https://docs.langchain.com/langsmith/trace-anthropic)</li><li>For other model providers, read the [token and cost information guide](https://docs.langchain.com/langsmith/log-llm-trace#provide-token-and-cost-information)</li></ul> | Not applicable.                                                |
+| **Automatically** | <ul><li>Calling LLMs with [LangChain](../langchain/overview.md)</li><li>Tracing LLM calls to OpenAI, Anthropic or models that follow an OpenAI-compliant format with `@traceable`</li><li> Using LangSmith wrappers for [OpenAI](trace-openai.md) or [Anthropic](trace-anthropic.md)</li><li>For other model providers, read the [token and cost information guide](log-llm-trace.md#provide-token-and-cost-information)</li></ul> | Not applicable.                                                |
 | **Manually**      | If LLM call costs are non-linear (eg. follow a custom cost function)                                                                                                                                                                                                                                                                                                                                                                                             | Send costs for any run types, e.g. tool calls, retrieval steps |
+
+<a id="llm-calls:-automatically-track-costs-based-on-token-counts"></a>
 
 ### LLM calls: Automatically track costs based on token counts
 
 To compute cost automatically from token usage, you need to provide **token counts**, the **model and provider**, and the **model price**.
 
 > [!NOTE]
-> Skip this section if you are calling LLMs with [LangChain](https://docs.langchain.com/oss/python/langchain/overview), using `@traceable` with OpenAI or Anthropic (or an OpenAI-compatible model), or using a LangSmith wrapper for [OpenAI](https://docs.langchain.com/langsmith/trace-openai) or [Anthropic](https://docs.langchain.com/langsmith/trace-anthropic).
+> Skip this section if you are calling LLMs with [LangChain](../langchain/overview.md), using `@traceable` with OpenAI or Anthropic (or an OpenAI-compatible model), or using a LangSmith wrapper for [OpenAI](trace-openai.md) or [Anthropic](trace-anthropic.md).
 
 1. Send token counts. Many models include token counts as part of the response. You must extract this information and include it in your run using one of the following methods:
 
@@ -599,7 +601,7 @@ To compute cost automatically from token usage, you need to provide **token coun
 
 </details>
 
-2. Specify model name. When using a custom model, the following fields need to be specified in a [run's metadata](https://docs.langchain.com/langsmith/add-metadata-tags) in order to associate token counts with costs. It's also helpful to provide these metadata fields to identify the model when viewing traces and when filtering.
+2. Specify model name. When using a custom model, the following fields need to be specified in a [run's metadata](add-metadata-tags.md) in order to associate token counts with costs. It's also helpful to provide these metadata fields to identify the model when viewing traces and when filtering.
 
    * `ls_provider`: The provider of the model, e.g., “openai”, “anthropic”
    * `ls_model_name`: The name of the model, e.g., “gpt-5.4-mini”, “claude-opus-4-8”

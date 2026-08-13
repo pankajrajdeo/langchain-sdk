@@ -1,91 +1,91 @@
 # Integrations
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/integrations)
-[LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-integrations) provides integrations for a growing set of popular [LLM providers](https://docs.langchain.com/langsmith/integrations#llm-providers) and [agent frameworks](https://docs.langchain.com/langsmith/integrations#agent-frameworks) as well as [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview), [LangChain](https://docs.langchain.com/oss/python/langchain/overview), and [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview). For setup and usage, refer to the guides listed on this page.
+[LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-integrations) provides integrations for a growing set of popular [LLM providers](#llm-providers) and [agent frameworks](#agent-frameworks) as well as [Deep Agents](../deepagents/overview.md), [LangChain](../langchain/overview.md), and [LangGraph](../langgraph/overview.md). For setup and usage, refer to the guides listed on this page.
 
 ## LLM providers
 
-- [Amazon Bedrock](https://docs.langchain.com/langsmith/trace-bedrock)
+- [Amazon Bedrock](trace-bedrock.md)
 
-- [Anthropic](https://docs.langchain.com/langsmith/trace-anthropic)
+- [Anthropic](trace-anthropic.md)
 
-- [DeepSeek](https://docs.langchain.com/langsmith/trace-deepseek)
+- [DeepSeek](trace-deepseek.md)
 
-- [Google Gemini](https://docs.langchain.com/langsmith/trace-with-google-gemini)
+- [Google Gemini](trace-with-google-gemini.md)
 
-- [LiteLLM](https://docs.langchain.com/langsmith/trace-litellm)
+- [LiteLLM](trace-litellm.md)
 
-- [Mistral](https://docs.langchain.com/langsmith/trace-with-mistral)
+- [Mistral](trace-with-mistral.md)
 
-- [OpenAI](https://docs.langchain.com/langsmith/trace-openai)
+- [OpenAI](trace-openai.md)
 
-- [OpenAI-compatible APIs](https://docs.langchain.com/langsmith/trace-with-openai-compatible)
+- [OpenAI-compatible APIs](trace-with-openai-compatible.md)
 
 > [!NOTE]
-> **Using LangChain?** LangChain provides a unified interface to 100+ LLM providers, which allows you to switch between models by setting environment variables. [Initialize a model](https://docs.langchain.com/oss/python/langchain/models#initialize-a-model) and LangSmith will automatically trace your application.
+> **Using LangChain?** LangChain provides a unified interface to 100+ LLM providers, which allows you to switch between models by setting environment variables. [Initialize a model](../langchain/models.md#initialize-a-model) and LangSmith will automatically trace your application.
 
 ## Agent frameworks
 
-- [AutoGen](https://docs.langchain.com/langsmith/trace-with-autogen)
+- [AutoGen](trace-with-autogen.md)
 
-- [Claude Agent SDK](https://docs.langchain.com/langsmith/trace-claude-agent-sdk)
+- [Claude Agent SDK](trace-claude-agent-sdk.md)
 
-- [CrewAI](https://docs.langchain.com/langsmith/trace-with-crewai)
+- [CrewAI](trace-with-crewai.md)
 
-- [Deep Agents](https://docs.langchain.com/langsmith/trace-deep-agents)
+- [Deep Agents](trace-deep-agents.md)
 
-- [Google ADK](https://docs.langchain.com/langsmith/trace-with-google-adk)
+- [Google ADK](trace-with-google-adk.md)
 
-- [LangChain](https://docs.langchain.com/langsmith/trace-with-langchain)
+- [LangChain](trace-with-langchain.md)
 
-- [LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph)
+- [LangGraph](trace-with-langgraph.md)
 
-- [Mastra](https://docs.langchain.com/langsmith/trace-with-mastra)
+- [Mastra](trace-with-mastra.md)
 
-- [Microsoft Agent Framework](https://docs.langchain.com/langsmith/trace-with-microsoft-agent-framework)
+- [Microsoft Agent Framework](trace-with-microsoft-agent-framework.md)
 
-- [OpenAI Agents](https://docs.langchain.com/langsmith/trace-with-openai-agents-sdk)
+- [OpenAI Agents](trace-with-openai-agents-sdk.md)
 
-- [OpenTelemetry](https://docs.langchain.com/langsmith/trace-with-opentelemetry)
+- [OpenTelemetry](trace-with-opentelemetry.md)
 
-- [PydanticAI](https://docs.langchain.com/langsmith/trace-with-pydantic-ai)
+- [PydanticAI](trace-with-pydantic-ai.md)
 
-- [Semantic Kernel](https://docs.langchain.com/langsmith/trace-with-semantic-kernel)
+- [Semantic Kernel](trace-with-semantic-kernel.md)
 
-- [Strands Agents](https://docs.langchain.com/langsmith/trace-with-strands-agents)
+- [Strands Agents](trace-with-strands-agents.md)
 
-- [Vercel AI SDK](https://docs.langchain.com/langsmith/trace-with-vercel-ai-sdk)
+- [Vercel AI SDK](trace-with-vercel-ai-sdk.md)
 
 ## Voice AI frameworks
 
-- [OpenAI Realtime](https://docs.langchain.com/langsmith/trace-openai-realtime)
+- [OpenAI Realtime](trace-openai-realtime.md)
 
-- [Gemini Live](https://docs.langchain.com/langsmith/trace-gemini-live)
+- [Gemini Live](trace-gemini-live.md)
 
-- [Livekit](https://docs.langchain.com/langsmith/trace-with-livekit)
+- [Livekit](trace-with-livekit.md)
 
-- [Pipecat](https://docs.langchain.com/langsmith/trace-with-pipecat)
+- [Pipecat](trace-with-pipecat.md)
 
 ## Developer tools
 
-- [Claude Code](https://docs.langchain.com/langsmith/trace-claude-code)
+- [Claude Code](trace-claude-code.md)
 
-- [OpenAI Codex](https://docs.langchain.com/langsmith/trace-with-codex)
+- [OpenAI Codex](trace-with-codex.md)
 
-- [OpenCode](https://docs.langchain.com/langsmith/trace-with-opencode)
+- [OpenCode](trace-with-opencode.md)
 
-- [Cursor](https://docs.langchain.com/langsmith/trace-with-cursor)
+- [Cursor](trace-with-cursor.md)
 
-- [Instructor](https://docs.langchain.com/langsmith/trace-with-instructor)
+- [Instructor](trace-with-instructor.md)
 
-- [n8n](https://docs.langchain.com/langsmith/trace-with-n8n)
+- [n8n](trace-with-n8n.md)
 
-- [Pi](https://docs.langchain.com/langsmith/trace-with-pi)
+- [Pi](trace-with-pi.md)
 
-- [Temporal](https://docs.langchain.com/langsmith/trace-with-temporal)
+- [Temporal](trace-with-temporal.md)
 
-- [VS Code Copilot](https://docs.langchain.com/langsmith/trace-with-vscode-copilot)
+- [VS Code Copilot](trace-with-vscode-copilot.md)
 
-These coding agent integrations follow a shared [metadata contract](https://docs.langchain.com/langsmith/coding-agent-metadata-contract) that standardizes the trace fields they emit.
+These coding agent integrations follow a shared [metadata contract](coding-agent-metadata-contract.md) that standardizes the trace fields they emit.
 
 ***
 

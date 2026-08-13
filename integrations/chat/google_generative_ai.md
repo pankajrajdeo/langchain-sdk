@@ -30,7 +30,7 @@ For information on the latest models, model IDs, their features, context windows
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                             ⚠️                             |
 
@@ -145,7 +145,7 @@ llm = ChatGoogleGenerativeAI(
 | `GOOGLE_CLOUD_PROJECT`      | GCP project ID                           | Vertex AI                              |
 | `GOOGLE_CLOUD_LOCATION`     | GCP region (default: `us-central1`)      | Vertex AI                              |
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -288,7 +288,7 @@ AIMessage(content="J'adore la programmation.", additional_kwargs={}, response_me
 > [!NOTE]
 > **Message content shape**
 >
-> Gemini 3 series models return a list of content blocks to capture [thought signatures](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#thought-signatures). Use `.text` to get string content:
+> Gemini 3 series models return a list of content blocks to capture [thought signatures](#thought-signatures). Use `.text` to get string content:
 >
 > ```python
 > response.content  # -> [{"type": "text", "text": "Hello!", "extras": {"signature": "EpQFCp..."}}]
@@ -303,9 +303,9 @@ Gemini models accept multimodal inputs (text, images, audio, video, PDFs) and so
 
 ### Supported input methods
 
-| Method                                  | [Image](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#image-input) | [Video](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#video-input) | [Audio](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#audio-input) | [PDF](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#pdf-input) |
+| Method                                  | [Image](#image-input) | [Video](#video-input) | [Audio](#audio-input) | [PDF](#pdf-input) |
 | --------------------------------------- | :-------------------: | :-------------------: | :-------------------: | :---------------: |
-| [File upload](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#file-upload) (Files API) |           ✅           |           ✅           |           ✅           |         ✅         |
+| [File upload](#file-upload) (Files API) |           ✅           |           ✅           |           ✅           |         ✅         |
 | Base64 inline data                      |           ✅           |           ✅           |           ✅           |         ✅         |
 | HTTP/HTTPS URLs\*                       |           ✅           |           ✅           |           ✅           |         ✅         |
 | GCS URIs (`gs://...`)                   |           ✅           |           ✅           |           ✅           |         ✅         |
@@ -951,7 +951,7 @@ llm = ChatGoogleGenerativeAI(
 response = llm.invoke("How many O's are in Google?")
 ```
 
-`thinking_level` is Gemini's native name for the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, and the two are interchangeable aliases at both construction and call time. If both are set, `thinking_level` wins. Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the levels it supports and its default:
+`thinking_level` is Gemini's native name for the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, and the two are interchangeable aliases at both construction and call time. If both are set, `thinking_level` wins. Check a model's [profile](../../langchain/models.md#model-profiles) for the levels it supports and its default:
 
 ```python
 llm.profile["reasoning_effort_levels"]  # e.g. ['minimal', 'low', 'medium', 'high']
@@ -1019,7 +1019,7 @@ Signatures appear in `AIMessage` responses:
 * **Text blocks**: `extras.signature` within the content block
 * **Tool calls**: `additional_kwargs["__gemini_function_call_thought_signatures__"]`
 
-For multi-turn conversations, pass the full `AIMessage` back to the model so signatures are preserved. This happens automatically when you append the `AIMessage` to your messages list (as shown in the [tool calling](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai#tool-calling) example above).
+For multi-turn conversations, pass the full `AIMessage` back to the model so signatures are preserved. This happens automatically when you append the `AIMessage` to your messages list (as shown in the [tool calling](#tool-calling) example above).
 
 > [!WARNING]
 > **Don't reconstruct messages manually.** If you create a new `AIMessage` instead of passing the original object, the signatures will be lost and the API may reject the request.

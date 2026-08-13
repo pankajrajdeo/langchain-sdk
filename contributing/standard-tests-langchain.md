@@ -103,7 +103,7 @@ Sandbox Integration tests
 Deep Agents sandbox integrations use `SandboxIntegrationTests` from `langchain_tests.integration_tests`.
 Subclass it and provide a `sandbox` fixture that yields a `SandboxBackendProtocol` instance.
 Use the [Daytona integration tests](https://github.com/langchain-ai/deepagents/blob/main/libs/partners/daytona/tests/integration_tests/test_integration.py) as a reference implementation.
-See [Contributing a sandbox integration](https://docs.langchain.com/oss/python/contributing/integrations-langchain) for publishing guidelines.
+See [Contributing a sandbox integration](integrations-langchain.md) for publishing guidelines.
 
 ***
 

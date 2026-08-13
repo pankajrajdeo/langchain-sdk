@@ -6,16 +6,16 @@ Connect useStream to any React UI component library or generative UI framework
 
 ## Integrations
 
-#### [CopilotKit](https://docs.langchain.com/oss/python/langchain/frontend/integrations/copilotkit)
+#### [CopilotKit](copilotkit.md)
 Full AI chat runtime with structured generative UI support. Add a custom CopilotKit endpoint to your LangGraph deployment, then render dynamic component trees in React.
 
-#### [AI Elements](https://docs.langchain.com/oss/python/langchain/frontend/integrations/ai-elements)
+#### [AI Elements](ai-elements.md)
 Composable shadcn/ui-based components for AI chat. Drop in `Conversation`, `Message`, `Tool`, and `Reasoning` and wire them directly to `stream.messages`.
 
-#### [assistant-ui](https://docs.langchain.com/oss/python/langchain/frontend/integrations/assistant-ui)
+#### [assistant-ui](assistant-ui.md)
 Headless React framework with a full runtime layer. Bridge `useStream` to `AssistantRuntimeProvider` via the `useExternalStoreRuntime` adapter.
 
-#### [OpenUI](https://docs.langchain.com/oss/python/langchain/frontend/integrations/openui)
+#### [OpenUI](openui.md)
 Generative UI library that lets the agent produce complete, interactive dashboards in a declarative component DSL. Purpose-built for data-rich, report-style UIs.
 
 ## Choosing a library
@@ -31,7 +31,7 @@ Each library fits a slightly different integration model. The choice depends on 
 | **Tool calls**    | Via CopilotKit runtime and custom renderers                    | `Tool` / `ToolHeader` / `ToolOutput` | Custom via message slots              | Inline in the generated UI                          |
 | **Agent format**  | Structured assistant responses plus optional Markdown          | Any `stream.messages`                | Any `stream.messages`                 | Agent outputs openui-lang text                      |
 
-All four work well with LangChain agents, and the latter three also connect directly to [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream). CopilotKit is especially useful when you want a richer runtime layer and a dedicated endpoint that can sit alongside a [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview) deployment.
+All four work well with LangChain agents, and the latter three also connect directly to [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream). CopilotKit is especially useful when you want a richer runtime layer and a dedicated endpoint that can sit alongside a [LangGraph](../../../langgraph/overview.md) deployment.
 
 ***
 

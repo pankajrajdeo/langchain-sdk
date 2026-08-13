@@ -4,10 +4,10 @@ Run lightweight code inside Deep Agents to compose tools, orchestrate subagents,
 
 Interpreters give agents a programmable, **in-memory** workspace inside the agent loop. The agent writes code to complete a task, and the runtime executes it and returns only the relevant results. Intermediate results do not become part of the model context.
 
-Where [sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes) are a code-first way for acting on an environment (such as running commands, installing dependencies, and editing files), interpreters are a code-first way for composing tools, preserving state, and deciding what information should return to the model.
+Where [sandboxes](sandboxes.md) are a code-first way for acting on an environment (such as running commands, installing dependencies, and editing files), interpreters are a code-first way for composing tools, preserving state, and deciding what information should return to the model.
 
 > [!WARNING]
-> Interpreters are in [**beta**](https://docs.langchain.com/oss/python/versioning). APIs and lifecycle behavior may change between releases.
+> Interpreters are in [**beta**](../versioning.md). APIs and lifecycle behavior may change between releases.
 
 > [!NOTE]
 > Interpreters require `langchain-quickjs>=0.2.0` and Python `>=3.11`.
@@ -18,31 +18,31 @@ Most agent work alternates between model reasoning and tool calls. A model can f
 
 Interpreters move that orchestration into code so the model reasons about *what* to do, not every intermediate step.
 
-#### [Programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc)
+#### [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc)
 Call selected tools from interpreter code, including loops, retries, branching, and parallel batches.
 
-#### [Dynamic subagents](https://docs.langchain.com/oss/python/deepagents/interpreters#dynamic-subagents)
+#### [Dynamic subagents](#dynamic-subagents)
 Dispatch subagents from code for fan-out, verification, and recursive workflows over large inputs.
 
-#### [Stateful work](https://docs.langchain.com/oss/python/deepagents/interpreters#how-interpreters-work)
+#### [Stateful work](#how-interpreters-work)
 Keep intermediate values in runtime state without overloading the model context.
 
-#### [Deterministic transforms](https://docs.langchain.com/oss/python/deepagents/interpreters#how-interpreters-work)
+#### [Deterministic transforms](#how-interpreters-work)
 Sort, group, parse, validate, score, and aggregate structured data without another model turn.
 
 ## Choose a pattern
 
 Use interpreters for code inside the agent loop: composing tools, preserving state, and controlling what returns to the model.
 
-Use [sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes) for code against an environment: shell commands, package installs, tests, filesystem edits, and OS-level execution.
+Use [sandboxes](sandboxes.md) for code against an environment: shell commands, package installs, tests, filesystem edits, and OS-level execution.
 
 | Need                                                                                             | Use                                                                                |
 | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
 | One or two simple external calls                                                                 | Normal tool calling                                                                |
 | Pure in-memory JavaScript: loops, branches, retries, or data transforms (no external tools)      | Interpreter                                                                        |
-| Many external tool calls orchestrated from code (requires [PTC](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc)) | Interpreter with [programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc) |
-| Many independent units of work, multiple perspectives, or recursive analysis over large inputs   | Interpreter with [dynamic subagents](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents)     |
-| Shell commands, package installs, tests, or full OS filesystem access                            | [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes)                                      |
+| Many external tool calls orchestrated from code (requires [PTC](#programmatic-tool-calling-ptc)) | Interpreter with [programmatic tool calling (PTC)](#programmatic-tool-calling-ptc) |
+| Many independent units of work, multiple perspectives, or recursive analysis over large inputs   | Interpreter with [dynamic subagents](dynamic-subagents.md)     |
+| Shell commands, package installs, tests, or full OS filesystem access                            | [Sandboxes](sandboxes.md)                                      |
 
 ## Quickstart
 
@@ -148,16 +148,16 @@ const totals = rows.reduce((acc, row) => {
 totals;
 ```
 
-By default (`mode="thread"`), interpreter state persists across turns in the same thread. See [Persistence](https://docs.langchain.com/oss/python/deepagents/interpreters#persistence) for `mode` options and the snapshot lifecycle.
+By default (`mode="thread"`), interpreter state persists across turns in the same thread. See [Persistence](#persistence) for `mode` options and the snapshot lifecycle.
 
 Code runs against [**QuickJS**](https://github.com/quickjs-ng/quickjs), a lightweight JavaScript runtime. By default, interpreter code has no access to the host filesystem, network, shell, package manager, or clock. It can compute, hold state, and write to `console.log`, `console.warn`, or `console.error`, and nothing more.
 
 Two explicit bridges extend that reach:
 
-* **Tools**, through [programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc). Provide an allowlist of tools as async functions under the `tools` namespace. These can be the agent's own tools or standalone tools you define and pass in.
-* **Subagents**, through [dynamic subagents](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents). When the agent has subagents configured, the interpreter exposes a `task()` global for dispatching them from code.
+* **Tools**, through [programmatic tool calling (PTC)](#programmatic-tool-calling-ptc). Provide an allowlist of tools as async functions under the `tools` namespace. These can be the agent's own tools or standalone tools you define and pass in.
+* **Subagents**, through [dynamic subagents](dynamic-subagents.md). When the agent has subagents configured, the interpreter exposes a `task()` global for dispatching them from code.
 
-Programmatic tool calling is off until you [enable it](https://docs.langchain.com/oss/python/deepagents/interpreters#enable-ptc). Subagent dispatch through `task()` is on by default whenever the agent has subagents, and you can turn it off. Nothing else crosses the QuickJS boundary.
+Programmatic tool calling is off until you [enable it](#enable-ptc). Subagent dispatch through `task()` is on by default whenever the agent has subagents, and you can turn it off. Nothing else crosses the QuickJS boundary.
 
 ## Programmatic tool calling (PTC)
 
@@ -266,9 +266,9 @@ results.join("\n\n");
 
 ## Dynamic subagents
 
-The following overview below covers when to use dynamic subagents and a minimal `task()` pattern. For configuration, orchestration examples, workflow triggers, and safety notes, see [Dynamic subagents](https://docs.langchain.com/oss/python/deepagents/dynamic-subagents).
+The following overview below covers when to use dynamic subagents and a minimal `task()` pattern. For configuration, orchestration examples, workflow triggers, and safety notes, see [Dynamic subagents](dynamic-subagents.md).
 
-Dynamic subagents let the interpreter dispatch configured [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) from code using the built-in `task()` global. A task that spans many independent units, such as reviewing every file in a directory or triaging a batch of tickets, becomes a loop that fans out work and synthesizes the results.
+Dynamic subagents let the interpreter dispatch configured [subagents](subagents.md) from code using the built-in `task()` global. A task that spans many independent units, such as reviewing every file in a directory or triaging a batch of tickets, becomes a loop that fans out work and synthesizes the results.
 
 Use dynamic subagents for:
 
@@ -411,7 +411,7 @@ agent = create_deep_agent(
 )
 ```
 
-Because interpreter snapshots are stored in graph state, a [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers) also captures them in checkpoint history. Add one when you need durable threads or [time travel](https://docs.langchain.com/oss/python/langgraph/use-time-travel):
+Because interpreter snapshots are stored in graph state, a [checkpointer](../langgraph/checkpointers.md) also captures them in checkpoint history. Add one when you need durable threads or [time travel](../langgraph/use-time-travel.md):
 
 ```python
 from deepagents import create_deep_agent
@@ -511,10 +511,10 @@ Every tool you expose through PTC is an outside capability that interpreter code
 | Top-level `await`                                           | Yes                  | Use promises in interpreter code                                                                                     |
 | `console.log`, `warn`, `error` capture                      | Yes                  | Disable with `capture_console=False`                                                                                 |
 | Agent tools                                                 | No                   | Add a PTC allowlist                                                                                                  |
-| Filesystem access                                           | No                   | Add the [built-in filesystem tools](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) via the PTC allowlist |
+| Filesystem access                                           | No                   | Add the [built-in filesystem tools](overview.md#virtual-filesystem-access) via the PTC allowlist |
 | Network access                                              | No                   | Expose a specific network tool through PTC                                                                           |
 | Wall-clock or datetime access                               | No                   | Expose an explicit time tool if needed                                                                               |
-| Shell commands, package installs, tests, OS-level execution | No                   | Use a [sandbox backend](https://docs.langchain.com/oss/python/deepagents/sandboxes)                                                            |
+| Shell commands, package installs, tests, OS-level execution | No                   | Use a [sandbox backend](sandboxes.md)                                                            |
 
 > [!NOTE]
 > **How code execution works**
@@ -534,11 +534,11 @@ Every tool you expose through PTC is an outside capability that interpreter code
 | `tool_name`          | `"eval"`                         | Name of the interpreter tool exposed to the model.                                                                                                                                       |
 | `capture_console`    | `True`                           | Capture `console.log`, `console.warn`, and `console.error` in the tool response. Set to `False` to discard console output.                                                               |
 | `max_result_chars`   | `4000`                           | Truncate result, error, and stdout text returned to the model to a maximum character count.                                                                                              |
-| `ptc`                | `None`                           | Allowlist of tool names or `BaseTool` instances exposed as `tools.*` inside the interpreter. Omit to disable. See [Enable PTC](https://docs.langchain.com/oss/python/deepagents/interpreters#enable-ptc).                                             |
-| `max_ptc_calls`      | `256`                            | Maximum `tools.*` calls allowed per `eval`. Set to `None` only in trusted environments. See [Programmatic tool calling (PTC)](https://docs.langchain.com/oss/python/deepagents/interpreters#programmatic-tool-calling-ptc) and [Security](https://docs.langchain.com/oss/python/deepagents/interpreters#security). |
-| `subagents`          | `True`                           | Expose the built-in `task()` global when the agent has subagents. Set to `False` to require dispatch through the normal `task` tool. See [Dynamic subagents](https://docs.langchain.com/oss/python/deepagents/interpreters#dynamic-subagents).        |
-| `mode`               | `"thread"`                       | Control interpreter persistence: `"thread"` (across turns), `"turn"` (within one turn), or `"call"` (fresh REPL per `eval`). See [Persistence](https://docs.langchain.com/oss/python/deepagents/interpreters#persistence).                            |
-| `max_snapshot_bytes` | `None`                           | Drop snapshots larger than this byte limit. Defaults to `memory_limit`. See [Persistence](https://docs.langchain.com/oss/python/deepagents/interpreters#persistence).                                                                                 |
+| `ptc`                | `None`                           | Allowlist of tool names or `BaseTool` instances exposed as `tools.*` inside the interpreter. Omit to disable. See [Enable PTC](#enable-ptc).                                             |
+| `max_ptc_calls`      | `256`                            | Maximum `tools.*` calls allowed per `eval`. Set to `None` only in trusted environments. See [Programmatic tool calling (PTC)](#programmatic-tool-calling-ptc) and [Security](#security). |
+| `subagents`          | `True`                           | Expose the built-in `task()` global when the agent has subagents. Set to `False` to require dispatch through the normal `task` tool. See [Dynamic subagents](#dynamic-subagents).        |
+| `mode`               | `"thread"`                       | Control interpreter persistence: `"thread"` (across turns), `"turn"` (within one turn), or `"call"` (fresh REPL per `eval`). See [Persistence](#persistence).                            |
+| `max_snapshot_bytes` | `None`                           | Drop snapshots larger than this byte limit. Defaults to `memory_limit`. See [Persistence](#persistence).                                                                                 |
 
 ***
 

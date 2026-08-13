@@ -19,7 +19,7 @@ Use Fleet to:
 #### Build with AI
 Describe the agent you want to create and let Fleet build it, pausing at key points for your input.
 
-#### [Build from a template](https://docs.langchain.com/langsmith/fleet/quickstart)
+#### [Build from a template](quickstart.md)
 Start with a pre-configured agent and customize it.
 
 ## Get started
@@ -56,16 +56,16 @@ Fleet uses the following approach to AI:
 
 ## Learn more
 
-* [Essentials: connections, automation, memory, approvals](https://docs.langchain.com/langsmith/fleet/essentials)
-* [Create from a template](https://docs.langchain.com/langsmith/fleet/templates)
-* [Set up your workspace](https://docs.langchain.com/langsmith/fleet/workspace-admin)
-* [Connect apps and services](https://docs.langchain.com/langsmith/fleet/tools) and [use remote connections](https://docs.langchain.com/langsmith/fleet/mcp-framework)
-* [Choose between workspace and private agents](https://docs.langchain.com/langsmith/fleet/manage-agent-settings)
-* [Authorize accounts when prompted](https://docs.langchain.com/langsmith/fleet/auth-format)
-* [Call agents from your app](https://docs.langchain.com/langsmith/fleet/code)
+* [Essentials: connections, automation, memory, approvals](essentials.md)
+* [Create from a template](templates.md)
+* [Set up your workspace](workspace-admin.md)
+* [Connect apps and services](tools.md) and [use remote connections](mcp-framework.md)
+* [Choose between workspace and private agents](manage-agent-settings.md)
+* [Authorize accounts when prompted](auth-format.md)
+* [Call agents from your app](code.md)
 
 > [!NOTE]
-> **Self-hosting for Fleet is available in [beta](https://docs.langchain.com/langsmith/release-stages).** For more information, see [Enable Fleet](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-fleet-insights-and-chat).
+> **Self-hosting for Fleet is available in [beta](../release-stages.md).** For more information, see [Enable Fleet](../deploy-self-hosted-full-platform.md#enable-fleet-insights-and-chat).
 
 ***
 

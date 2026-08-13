@@ -12,13 +12,13 @@ Use this page as a reference while planning a rollout or troubleshooting an exis
 * LangSmith Deployment add-on.
 * Module dependency graph and opt-in security modules.
 
-If you are ready to install, start with the [deployment walkthrough](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy).
+If you are ready to install, start with the [deployment walkthrough](self-host-terraform-aws-deploy.md).
 
 ## Platform layers
 
 LangSmith on AWS deploys in two stages with one optional add-on. The infrastructure stage provisions the cloud foundation. The application stage installs the LangSmith Helm chart. The LangSmith Deployment add-on is opt-in and adds the host-backend, listener, and operator services for managing LangGraph applications from the UI.
 
-> **Image:** [LangSmith on AWS service layout](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture)
+> **Image:** [LangSmith on AWS service layout](self-host-terraform-aws-architecture.md)
 
 | Stage                                | Layer                 | What it adds                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -52,10 +52,10 @@ These pods run on every deployment. All write logs and metrics; the busier compo
 | `langsmith-clickhouse`       | Columnar store (trace spans, run metadata, eval results)   | —    | StatefulSet, single replica | No       | EBS GP3 PVC                     |
 
 > [!WARNING]
-> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse) or a self-managed external cluster.
+> In-cluster ClickHouse is dev/POC only (single pod, no replication, no backups). For production use [LangChain Managed ClickHouse](langsmith-managed-clickhouse.md) or a self-managed external cluster.
 
 > [!NOTE]
-> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](https://docs.langchain.com/langsmith/smithdb-sdk-migration#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
+> [SmithDB](https://www.langchain.com/blog/introducing-smithdb?utm_source=docs) is LangSmith's purpose-built observability backend, available for Self-hosted starting with self-hosted version 0.16.0 (see [self-hosted support](smithdb-sdk-migration.md#about-self-hosted)). These Terraform modules provision ClickHouse, so the guidance in the previous sections applies to current deployments.
 
 ### One-time jobs
 
@@ -108,7 +108,7 @@ When `postgres_source = "external"` and `redis_source = "external"` (the recomme
 
 ## Cluster infrastructure
 
-Two Terraform modules install the cluster-level services LangSmith depends on. The `eks` module installs the AWS-integration controllers through `eks-blueprints-addons`; the `k8s-bootstrap` module installs the workload dependencies and the optional ingress gateways (see [Ingress options](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture#ingress-options)):
+Two Terraform modules install the cluster-level services LangSmith depends on. The `eks` module installs the AWS-integration controllers through `eks-blueprints-addons`; the `k8s-bootstrap` module installs the workload dependencies and the optional ingress gateways (see [Ingress options](#ingress-options)):
 
 | Service                        | Installed by    | Namespace          | IRSA     | Purpose                                                                                                                                                                                    |
 | ------------------------------ | --------------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -163,7 +163,7 @@ graph TD
 
 ### Envoy Gateway (opt-in)
 
-With the Terraform default (`enable_envoy_gateway = true`), the pre-provisioned ALB stays in front and binds to the Envoy service on port 8080 through a `TargetGroupBinding`, as shown in the [ingress options](https://docs.langchain.com/langsmith/self-host-terraform-aws-architecture#ingress-options) table. The standalone Network Load Balancer path below is an overlay variant (`helm/values/examples/langsmith-values-ingress-envoy-gateway.yaml`) in which the NLB terminates TLS directly:
+With the Terraform default (`enable_envoy_gateway = true`), the pre-provisioned ALB stays in front and binds to the Envoy service on port 8080 through a `TargetGroupBinding`, as shown in the [ingress options](#ingress-options) table. The standalone Network Load Balancer path below is an overlay variant (`helm/values/examples/langsmith-values-ingress-envoy-gateway.yaml`) in which the NLB terminates TLS directly:
 
 ```mermaid
 graph TD
@@ -318,7 +318,7 @@ vpc ─► firewall (optional, create_firewall = true)
 | ElastiCache Redis | `cache.m6g.xlarge` | 4    | 13.07 GB |
 | RDS storage       | 10 GB              | —    | —        |
 
-For production sizing recommendations, see the [scaling guide](https://docs.langchain.com/langsmith/self-host-scale) and the [AWS deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy#cluster-sizing-reference).
+For production sizing recommendations, see the [scaling guide](self-host-scale.md) and the [AWS deployment guide](self-host-terraform-aws-deploy.md#cluster-sizing-reference).
 
 ## Validated behaviors and known constraints
 

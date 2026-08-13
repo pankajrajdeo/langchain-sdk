@@ -2,10 +2,10 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/python/managed-deep-agents-local-development)
 Run and test a Managed Deep Agent locally with mda dev and LangSmith Studio.
 
-`mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](https://docs.langchain.com/langsmith/studio) so you can interact with the agent and inspect its behavior before deploying.
+`mda dev` compiles a Managed Deep Agents project and runs it on a local Agent Server. It opens [LangSmith Studio](../studio.md) so you can interact with the agent and inspect its behavior before deploying.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Start local Studio
 
@@ -44,7 +44,7 @@ Local development does not create or update a hosted deployment.
 | `--no-browser`        | Start the server without opening Studio automatically. |
 | `--no-reload`         | Disable the LangGraph development server's hot reload. |
 
-For all command details, see the [`mda dev` CLI reference](https://docs.langchain.com/langsmith/python/managed-deep-agents-cli#develop-locally).
+For all command details, see the [`mda dev` CLI reference](managed-deep-agents-cli.md#develop-locally).
 
 ## Understand local behavior
 

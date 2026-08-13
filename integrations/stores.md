@@ -4,7 +4,7 @@
 
 ## Overview
 
-LangChain provides a key-value store interface for storing and retrieving data by key. The key-value store interface in LangChain is primarily used for caching [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings).
+LangChain provides a key-value store interface for storing and retrieving data by key. The key-value store interface in LangChain is primarily used for caching [embeddings](embeddings.md).
 
 ## Interface
 
@@ -20,9 +20,9 @@ All [`BaseStores`](https://reference.langchain.com/python/langchain-core/stores/
 
 ## Built-in stores for local development
 
-#### [InMemoryByteStore](https://docs.langchain.com/oss/python/integrations/stores/in_memory)
+#### [InMemoryByteStore](stores/in_memory.md)
 
-#### [LocalFileStore](https://docs.langchain.com/oss/python/integrations/stores/file_system)
+#### [LocalFileStore](stores/file_system.md)
 
 ## Custom stores
 
@@ -32,17 +32,17 @@ You can also implement your own custom store by extending the [`BaseStore`](http
 
 | Integration                                                                                  | Downloads                                                                                                                                                                                                                                                        |
 | :------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`ElasticsearchEmbeddingsCache`](https://docs.langchain.com/oss/python/integrations/stores/elasticsearch)              | <span data-sort-value="318000"><a href="https://pypi.org/project/langchain-elasticsearch/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-elasticsearch/month" alt="Downloads per month" class="rounded not-prose" /></a></span>    |
-| [`AstraDBByteStore`](https://docs.langchain.com/oss/python/integrations/stores/astradb)                                | <span data-sort-value="233000"><a href="https://pypi.org/project/langchain-astradb/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-astradb/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                |
+| [`ElasticsearchEmbeddingsCache`](stores/elasticsearch.md)              | <span data-sort-value="318000"><a href="https://pypi.org/project/langchain-elasticsearch/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-elasticsearch/month" alt="Downloads per month" class="rounded not-prose" /></a></span>    |
+| [`AstraDBByteStore`](stores/astradb.md)                                | <span data-sort-value="233000"><a href="https://pypi.org/project/langchain-astradb/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-astradb/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                |
 | [`M3Store`](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md) | <span data-sort-value="35000"><a href="https://pypi.org/project/m3-memory/" target="_blank">  <img src="https://static.pepy.tech/badge/m3-memory/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                                 |
 | [`HindsightStore`](https://docs.hindsight.vectorize.io/sdks/integrations/langgraph)          | <span data-sort-value="2000"><a href="https://pypi.org/project/hindsight-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/hindsight-langgraph/month" alt="Downloads per month" class="rounded not-prose" /></a></span>              |
 | [`LithtrixStore`](https://docs.lithtrix.ai/integrations/langgraph)                           | <span data-sort-value="2000"><a href="https://pypi.org/project/lithtrix-langgraph/" target="_blank">  <img src="https://static.pepy.tech/badge/lithtrix-langgraph/month" alt="Downloads per month" class="rounded not-prose" /></a></span>                |
-| [`BigtableByteStore`](https://docs.langchain.com/oss/python/integrations/stores/bigtable)                              | <span data-sort-value="444"><a href="https://pypi.org/project/langchain-google-bigtable/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-google-bigtable/month" alt="Downloads per month" class="rounded not-prose" /></a></span>   |
+| [`BigtableByteStore`](stores/bigtable.md)                              | <span data-sort-value="444"><a href="https://pypi.org/project/langchain-google-bigtable/" target="_blank">  <img src="https://static.pepy.tech/badge/langchain-google-bigtable/month" alt="Downloads per month" class="rounded not-prose" /></a></span>   |
 | [`InspeximusStore`](https://dancenitra.github.io/inspeximus/)                                | <span data-sort-value="405"><a href="https://pypi.org/project/langgraph-store-inspeximus/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-inspeximus/month" alt="Downloads per month" class="rounded not-prose" /></a></span> |
 | [`UpstashStore`](https://github.com/Tghez/langgraph-store-upstash)                           | <span data-sort-value="353"><a href="https://pypi.org/project/langgraph-store-upstash/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-upstash/month" alt="Downloads per month" class="rounded not-prose" /></a></span>       |
 | [`TypeDBStore`](https://typedb.com/docs)                                                     | <span data-sort-value="72"><a href="https://pypi.org/project/langgraph-store-typedb/" target="_blank">  <img src="https://static.pepy.tech/badge/langgraph-store-typedb/month" alt="Downloads per month" class="rounded not-prose" /></a></span>          |
-| [`InMemoryByteStore`](https://docs.langchain.com/oss/python/integrations/stores/in_memory)                             | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
-| [`LocalFileStore`](https://docs.langchain.com/oss/python/integrations/stores/file_system)                              | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
+| [`InMemoryByteStore`](stores/in_memory.md)                             | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
+| [`LocalFileStore`](stores/file_system.md)                              | <span data-sort-value="-1">N/A</span>                                                                                                                                                                                                                            |
 
 ***
 

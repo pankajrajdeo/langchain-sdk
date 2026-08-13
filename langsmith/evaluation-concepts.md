@@ -27,7 +27,7 @@ LangSmith supports two types of evaluations that serve different purposes in you
 * **Unit testing**: Verify correctness of individual components.
 * **Backtesting**: Test new versions against historical data.
 
-Offline evaluations target [*examples*](https://docs.langchain.com/langsmith/evaluation-concepts#examples) from [*datasets*](https://docs.langchain.com/langsmith/evaluation-concepts#datasets): curated test cases with reference outputs that define what "good" looks like.
+Offline evaluations target [*examples*](#examples) from [*datasets*](#datasets): curated test cases with reference outputs that define what "good" looks like.
 
 ### Online evaluations
 
@@ -37,13 +37,13 @@ Offline evaluations target [*examples*](https://docs.langchain.com/langsmith/eva
 * **Anomaly detection**: Flag unusual patterns or edge cases.
 * **Production feedback**: Identify issues to add to offline datasets.
 
-Online evaluations target [*runs*](https://docs.langchain.com/langsmith/evaluation-concepts#runs) and [*threads*](https://docs.langchain.com/langsmith/evaluation-concepts#threads) from [tracing](https://docs.langchain.com/langsmith/observability-quickstart): real production traces without reference outputs.
+Online evaluations target [*runs*](#runs) and [*threads*](#threads) from [tracing](observability-quickstart.md): real production traces without reference outputs.
 
 This difference in targets determines what you can evaluate: offline evaluations can check correctness against expected answers, while online evaluations focus on quality patterns, safety, and real-world behavior.
 
 ## Evaluation lifecycle
 
-As you develop and [deploy your application](https://docs.langchain.com/langsmith/deployment), your evaluation strategy evolves from pre-deployment testing to production monitoring. During development and testing, offline evaluations validate functionality against curated datasets. After deployment, online evaluations monitor production behavior on live traffic. As applications mature, both evaluation types work together in an iterative feedback loop to improve quality continuously.
+As you develop and [deploy your application](deployment.md), your evaluation strategy evolves from pre-deployment testing to production monitoring. During development and testing, offline evaluations validate functionality against curated datasets. After deployment, online evaluations monitor production behavior on live traffic. As applications mature, both evaluation types work together in an iterative feedback loop to improve quality continuously.
 
 ```mermaid
 graph LR
@@ -71,13 +71,13 @@ graph LR
 
 Before production deployment, use offline evaluations to validate functionality, benchmark different approaches, and build confidence.
 
-Follow the [quickstart](https://docs.langchain.com/langsmith/evaluation-quickstart) to run your first offline evaluation.
+Follow the [quickstart](evaluation-quickstart.md) to run your first offline evaluation.
 
 ### 2. Initial deployment with online evaluation
 
 After deployment, use online evaluations to monitor production quality, detect unexpected issues, and collect real-world data.
 
-Learn how to [configure online evaluations](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) for production monitoring.
+Learn how to [configure online evaluations](online-evaluations-llm-as-judge.md) for production monitoring.
 
 ### 3. Continuous improvement
 
@@ -95,9 +95,9 @@ Offline evaluations run on datasets and examples. The presence of reference outp
 
 A dataset is a *collection of examples* used for evaluating an application. An example is a test input, reference output pair.
 
-> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](https://docs.langchain.com/langsmith/evaluation-concepts)
+> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](evaluation-concepts.md)
 
-> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](https://docs.langchain.com/langsmith/evaluation-concepts)
+> **Image:** [List of datasets on the Examples tab in the LangSmith UI.](evaluation-concepts.md)
 
 #### Examples
 
@@ -107,21 +107,21 @@ Each example consists of:
 * **Reference outputs** (optional): a dictionary of reference outputs. These do not get passed to your application, they are only used in evaluators.
 * **Metadata** (optional): a dictionary of additional information that can be used to create filtered views of a dataset.
 
-> **Image:** [Example in the LangSmith UI.](https://docs.langchain.com/langsmith/evaluation-concepts)
+> **Image:** [Example in the LangSmith UI.](evaluation-concepts.md)
 
-> **Image:** [Example in the LangSmith UI.](https://docs.langchain.com/langsmith/evaluation-concepts)
+> **Image:** [Example in the LangSmith UI.](evaluation-concepts.md)
 
-Learn more about [managing datasets](https://docs.langchain.com/langsmith/manage-datasets).
+Learn more about [managing datasets](manage-datasets.md).
 
 #### Experiment
 
 An *experiment* represents the results of evaluating a specific application version on a dataset. Each experiment captures outputs, evaluator scores, and execution traces for every example in the dataset.
 
-> **Image:** [Experiment view](https://docs.langchain.com/langsmith/evaluation-concepts)
+> **Image:** [Experiment view](evaluation-concepts.md)
 
-Multiple experiments typically run on a given dataset to test different application configurations (e.g., different prompts or LLMs). LangSmith displays all experiments associated with a dataset and supports [comparing multiple experiments](https://docs.langchain.com/langsmith/compare-experiment-results) side-by-side.
+Multiple experiments typically run on a given dataset to test different application configurations (e.g., different prompts or LLMs). LangSmith displays all experiments associated with a dataset and supports [comparing multiple experiments](compare-experiment-results.md) side-by-side.
 
-Learn [how to analyze experiment results](https://docs.langchain.com/langsmith/analyze-an-experiment).
+Learn [how to analyze experiment results](analyze-an-experiment.md).
 
 ### Targets for online evaluation
 
@@ -129,7 +129,7 @@ Online evaluations run on runs and threads from production traffic. Without refe
 
 #### Runs
 
-A *run* is a single execution trace from your [deployed application](https://docs.langchain.com/langsmith/deployment). Each run contains:
+A *run* is a single execution trace from your [deployed application](deployment.md). Each run contains:
 
 * **Inputs**: The actual user inputs your application received.
 * **Outputs**: What your application actually returned.
@@ -138,7 +138,7 @@ A *run* is a single execution trace from your [deployed application](https://doc
 
 Unlike examples in datasets, runs do not include reference outputs. Online evaluators must assess quality without knowing what the "correct" answer should be, relying instead on quality heuristics, safety checks, and reference-free evaluation techniques.
 
-Learn more about [runs and traces in the Observability concepts](https://docs.langchain.com/langsmith/observability-concepts#runs).
+Learn more about [runs and traces in the Observability concepts](observability-concepts.md#runs).
 
 #### Threads
 
@@ -150,14 +150,14 @@ Learn more about [runs and traces in the Observability concepts](https://docs.la
 
 Run evaluators using any of the following:
 
-* The [Evaluators](https://docs.langchain.com/langsmith/evaluators) page, to attach them to tracing projects or datasets
-* The [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground)
+* The [Evaluators](evaluators.md) page, to attach them to tracing projects or datasets
+* The [Playground](prompt-engineering-concepts.md#playground)
 * The LangSmith SDK ([Python](https://docs.smith.langchain.com/reference/python/reference) and [TypeScript](https://docs.smith.langchain.com/reference/js))
-* [Rules](https://docs.langchain.com/langsmith/rules), to run them automatically on tracing projects or datasets
+* [Rules](rules.md), to run them automatically on tracing projects or datasets
 
 ### Attaching an evaluator to a tracing project or dataset
 
-A single evaluator can be attached to many tracing projects and datasets. Configuration like sampling rate, filters, and [spend limits](https://docs.langchain.com/langsmith/evaluator-spend) is set per attached project or dataset, not per evaluator. View an evaluator's attached projects and datasets under its **Projects & Datasets** tab.
+A single evaluator can be attached to many tracing projects and datasets. Configuration like sampling rate, filters, and [spend limits](evaluator-spend.md) is set per attached project or dataset, not per evaluator. View an evaluator's attached projects and datasets under its **Projects & Datasets** tab.
 
 ### Evaluator inputs
 
@@ -165,12 +165,12 @@ Evaluator inputs differ based on evaluation type:
 
 **Offline evaluators** receive:
 
-* [Example](https://docs.langchain.com/langsmith/evaluation-concepts#examples): The example from your [dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), containing inputs, reference outputs, and metadata.
-* [Run](https://docs.langchain.com/langsmith/observability-concepts#runs): The actual outputs and intermediate steps from running the application on the example inputs.
+* [Example](#examples): The example from your [dataset](#datasets), containing inputs, reference outputs, and metadata.
+* [Run](observability-concepts.md#runs): The actual outputs and intermediate steps from running the application on the example inputs.
 
 **Online evaluators** receive:
 
-* [Run](https://docs.langchain.com/langsmith/observability-concepts#runs): The production trace containing inputs, outputs, and intermediate steps (no reference outputs available).
+* [Run](observability-concepts.md#runs): The production trace containing inputs, outputs, and intermediate steps (no reference outputs available).
 
 ### Evaluator outputs
 
@@ -184,10 +184,10 @@ Evaluators return **feedback**, which is the scores from evaluation. Feedback is
 
 LangSmith supports several evaluation approaches:
 
-* [Human](https://docs.langchain.com/langsmith/evaluation-concepts#human)
-* [Code](https://docs.langchain.com/langsmith/evaluation-concepts#code)
-* [LLM-as-judge](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge)
-* [Pairwise](https://docs.langchain.com/langsmith/evaluation-concepts#pairwise)
+* [Human](#human)
+* [Code](#code)
+* [LLM-as-judge](#llm-as-judge)
+* [Pairwise](#pairwise)
 
 #### Human
 
@@ -195,11 +195,11 @@ LangSmith supports several evaluation approaches:
 
 **Annotation queues**
 
-[Annotation queues](https://docs.langchain.com/langsmith/annotation-queues) streamline structured collection of human feedback on runs. They complement [inline annotation](https://docs.langchain.com/langsmith/annotate-traces-inline) by providing organized workflows with prescribed rubrics, team collaboration features, and progress tracking.
+[Annotation queues](annotation-queues.md) streamline structured collection of human feedback on runs. They complement [inline annotation](annotate-traces-inline.md) by providing organized workflows with prescribed rubrics, team collaboration features, and progress tracking.
 
 LangSmith supports two queue types:
 
-* **Single-run queues**: Review one run at a time against custom rubric items. Useful for triaging issues or building datasets from production traces. Single-run queues also support [assertions](https://docs.langchain.com/langsmith/assertions), free-form acceptance criteria that an offline evaluator can grade future runs against.
+* **Single-run queues**: Review one run at a time against custom rubric items. Useful for triaging issues or building datasets from production traces. Single-run queues also support [assertions](assertions.md), free-form acceptance criteria that an offline evaluator can grade future runs against.
 * **Pairwise queues**: Compare two runs side-by-side to judge which is better. Designed for fast A/B comparisons between experiments.
 
 Key features include configuring multiple reviewers per run, enabling reservations to prevent conflicts, and exporting annotated runs directly to datasets for future evaluations.
@@ -217,7 +217,7 @@ Key features include configuring multiple reviewers per run, enabling reservatio
 
 LLM-as-judge evaluators require careful review of scores and prompt tuning. Few-shot evaluators, which include examples of inputs, outputs, and expected grades in the grader prompt, often improve performance.
 
-Learn about [how to define an LLM-as-a-judge evaluator](https://docs.langchain.com/langsmith/llm-as-judge).
+Learn about [how to define an LLM-as-a-judge evaluator](llm-as-judge.md).
 
 #### Pairwise
 
@@ -225,7 +225,7 @@ Learn about [how to define an LLM-as-a-judge evaluator](https://docs.langchain.c
 
 Pairwise evaluation works well when directly scoring an output is difficult but comparing two outputs is straightforward. For example, in summarization tasks, choosing the more informative of two summaries is often easier than assigning an absolute score to a single summary.
 
-Learn [how run pairwise evaluations](https://docs.langchain.com/langsmith/evaluate-pairwise).
+Learn [how run pairwise evaluations](evaluate-pairwise.md).
 
 ### Reference-free vs reference-based evaluators
 
@@ -256,7 +256,7 @@ Offline and online evaluations serve different purposes:
 * **Offline evaluation types** test pre-deployment on curated datasets with reference outputs
 * **Online evaluation types** monitor production behavior on live traffic without reference outputs
 
-Learn more about [evaluation types and when to use each](https://docs.langchain.com/langsmith/evaluation-types).
+Learn more about [evaluation types and when to use each](evaluation-types.md).
 
 ## Best practices
 
@@ -294,11 +294,11 @@ Splits differ from metadata: use splits for high-level organizational grouping f
 
 In machine learning, best practice is for each example to belong to exactly one split. LangSmith allows examples to belong to multiple splits, which is useful when an example fits several evaluation categories.
 
-Learn how to [create and manage dataset splits](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-and-manage-dataset-splits).
+Learn how to [create and manage dataset splits](manage-datasets-in-application.md#create-and-manage-dataset-splits).
 
 **Versions**
 
-LangSmith automatically creates dataset [versions](https://docs.langchain.com/langsmith/manage-datasets#version-a-dataset) when examples change. [Tag versions](https://docs.langchain.com/langsmith/manage-datasets#tag-a-version) to mark important milestones. Target specific versions in CI pipelines to ensure dataset updates don't break workflows.
+LangSmith automatically creates dataset [versions](manage-datasets.md#version-a-dataset) when examples change. [Tag versions](manage-datasets.md#tag-a-version) to mark important milestones. Target specific versions in CI pipelines to ensure dataset updates don't break workflows.
 
 ### Human feedback collection
 
@@ -306,9 +306,9 @@ Human feedback often provides the most valuable assessment, particularly for sub
 
 **Annotation queues**
 
-[Annotation queues](https://docs.langchain.com/langsmith/annotation-queues) enable structured collection of human feedback. Flag specific runs for review, collect annotations in a streamlined interface, and transfer annotated runs to datasets for future evaluations.
+[Annotation queues](annotation-queues.md) enable structured collection of human feedback. Flag specific runs for review, collect annotations in a streamlined interface, and transfer annotated runs to datasets for future evaluations.
 
-Annotation queues complement [inline annotation](https://docs.langchain.com/langsmith/annotate-traces-inline) by offering additional capabilities: grouping runs, specifying criteria, and configuring reviewer permissions.
+Annotation queues complement [inline annotation](annotate-traces-inline.md) by offering additional capabilities: grouping runs, specifying criteria, and configuring reviewer permissions.
 
 ### Evaluations vs testing
 
@@ -320,7 +320,7 @@ Testing and evaluation are similar but distinct concepts.
 
 Evaluation metrics can be converted into tests. For example, regression tests can assert that new versions must outperform baseline versions on relevant metrics. Run tests and evaluations together for efficiency when systems are expensive to run.
 
-Evaluations can be written using standard testing tools like [pytest](https://docs.langchain.com/langsmith/pytest) or [Vitest/Jest](https://docs.langchain.com/langsmith/vitest-jest).
+Evaluations can be written using standard testing tools like [pytest](pytest.md) or [Vitest/Jest](vitest-jest.md).
 
 ## Quick reference: Offline vs online evaluation
 
@@ -333,7 +333,7 @@ The following table summarizes the key differences between offline and online ev
 | **When to use**       | Pre-deployment, during development                          | Production, post-deployment                                                       |
 | **Primary use cases** | Benchmarking, unit testing, regression testing, backtesting | Real-time monitoring, production feedback, anomaly detection                      |
 | **Evaluation timing** | Batch processing on curated test sets                       | Real-time or near real-time on live traffic                                       |
-| **Setup location**    | Evaluation tab (SDK, UI, Playground)                        | [Observability tab](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge) (automated rules) |
+| **Setup location**    | Evaluation tab (SDK, UI, Playground)                        | [Observability tab](online-evaluations-llm-as-judge.md) (automated rules) |
 | **Data requirements** | Requires dataset curation                                   | No dataset needed, evaluates live traces                                          |
 
 ***

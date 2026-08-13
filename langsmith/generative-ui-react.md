@@ -3,13 +3,13 @@
 > [!NOTE]
 > **Prerequisites**
 >
-> * [LangSmith](https://docs.langchain.com/langsmith/observability)
-> * [Agent Server](https://docs.langchain.com/langsmith/agent-server)
-> * [`useStream()` React Hook](https://docs.langchain.com/oss/python/langchain/frontend/overview)
+> * [LangSmith](observability.md)
+> * [Agent Server](agent-server.md)
+> * [`useStream()` React Hook](../langchain/frontend/overview.md)
 
 Generative user interfaces (Generative UI) allows agents to go beyond text and generate rich user interfaces. This enables creating more interactive and context-aware applications where the UI adapts based on the conversation flow and AI responses.
 
-> **Image:** [Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components.](https://docs.langchain.com/langsmith/generative-ui-react)
+> **Image:** [Agent Chat showing a prompt about booking/lodging and a generated set of hotel listing cards (images, titles, prices, locations) rendered inline as UI components.](generative-ui-react.md)
 
 LangSmith supports colocating your React components with your graph code. This allows you to focus on building specific UI components for your graph while easily plugging into existing chat interfaces such as [Agent Chat](https://agentchat.vercel.app) and loading the code only when actually needed.
 
@@ -43,7 +43,7 @@ Next, define your UI components in your `langgraph.json` configuration:
 }
 ```
 
-The `ui` section points to the UI components that will be used by graphs. By default, we recommend using the same key as the graph name, but you can split out the components however you like, see [Customise the namespace of UI components](https://docs.langchain.com/langsmith/generative-ui-react#customise-the-namespace-of-ui-components) for more details.
+The `ui` section points to the UI components that will be used by graphs. By default, we recommend using the same key as the graph name, but you can split out the components however you like, see [Customise the namespace of UI components](#customise-the-namespace-of-ui-components) for more details.
 
 LangSmith will automatically bundle your UI components code and styles and serve them as external assets that can be loaded by the `LoadExternalComponent` component. Some dependencies such as `react` and `react-dom` will be automatically excluded from the bundle.
 

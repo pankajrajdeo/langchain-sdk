@@ -2,8 +2,8 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluation-types)
 This page covers two aspects of evaluation in LangSmith:
 
-1. **[Evaluation types](https://docs.langchain.com/langsmith/evaluation-types#offline-evaluation-types)**: *When and why* to evaluate. Offline evaluation types (benchmarking, unit tests, regression tests) for pre-deployment testing, and online evaluation types (monitoring, anomaly detection) for production.
-2. **[Evaluator implementations](https://docs.langchain.com/langsmith/evaluation-types#implement-evaluators)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
+1. **[Evaluation types](#offline-evaluation-types)**: *When and why* to evaluate. Offline evaluation types (benchmarking, unit tests, regression tests) for pre-deployment testing, and online evaluation types (monitoring, anomaly detection) for production.
+2. **[Evaluator implementations](#implement-evaluators)**: *How* to evaluate. The available evaluator approaches (LLM-as-judge, code, composite, summary, pairwise) and where to configure them (UI or SDK, offline or online).
 
 Understanding both aspects helps you build a comprehensive evaluation strategy that validates functionality before deployment and monitors quality in production.
 
@@ -11,9 +11,9 @@ Understanding both aspects helps you build a comprehensive evaluation strategy t
 
 Offline evaluation tests applications on curated datasets before deployment. By running evaluations on examples with reference outputs, teams can compare versions, validate functionality, and build confidence before exposing changes to users.
 
-Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) or by [binding evaluators to a dataset](https://docs.langchain.com/langsmith/bind-evaluator-to-dataset).
+Run offline evaluations client-side using the LangSmith SDK ([Python](https://reference.langchain.com/python/langsmith/observability/sdk/) or [TypeScript](https://reference.langchain.com/javascript/modules/langsmith.html)) or server-side via the [Playground](prompt-engineering-concepts.md#playground) or by [binding evaluators to a dataset](bind-evaluator-to-dataset.md).
 
-> **Image:** [Offline](https://docs.langchain.com/langsmith/evaluation-types)
+> **Image:** [Offline](evaluation-types.md)
 
 ### Benchmarking
 
@@ -30,7 +30,7 @@ Benchmarking requires dataset curation with gold-standard reference outputs and 
 
 Unit tests typically expect consistent passing results, making them suitable for CI pipelines. When running in CI, configure caching to minimize LLM API calls and associated costs.
 
-For more details, refer to the [Pytest](https://docs.langchain.com/langsmith/pytest) and [Vitest/Jest](https://docs.langchain.com/langsmith/vitest-jest) pages.
+For more details, refer to the [Pytest](pytest.md) and [Vitest/Jest](vitest-jest.md) pages.
 
 ### Regression tests
 
@@ -38,7 +38,7 @@ For more details, refer to the [Pytest](https://docs.langchain.com/langsmith/pyt
 
 LangSmith's comparison view highlights regressions (red) and improvements (green) relative to the baseline, enabling quick identification of changes.
 
-> **Image:** [Comparison view](https://docs.langchain.com/langsmith/evaluation-types)
+> **Image:** [Comparison view](evaluation-types.md)
 
 ### Backtesting
 
@@ -52,15 +52,15 @@ This approach is commonly used for evaluating new model releases. For example, w
 
 This approach proves particularly useful for LLM-as-judge evaluations on subjective tasks. For example, in summarization, determining "Which summary is clearer and more concise?" is often simpler than assigning numeric clarity scores.
 
-Learn [how run pairwise evaluations](https://docs.langchain.com/langsmith/evaluate-pairwise).
+Learn [how run pairwise evaluations](evaluate-pairwise.md).
 
 ## Online evaluation types
 
 Online evaluation assesses production application outputs in near real-time. Without reference outputs, these evaluations focus on detecting issues, monitoring quality trends, and identifying edge cases that inform future offline testing.
 
-Online evaluators typically run server-side. LangSmith provides built-in [LLM-as-judge evaluators](https://docs.langchain.com/langsmith/llm-as-judge) for configuration, and supports custom code evaluators that run within LangSmith.
+Online evaluators typically run server-side. LangSmith provides built-in [LLM-as-judge evaluators](llm-as-judge.md) for configuration, and supports custom code evaluators that run within LangSmith.
 
-> **Image:** [Online](https://docs.langchain.com/langsmith/evaluation-types)
+> **Image:** [Online](evaluation-types.md)
 
 ### Real-time monitoring
 
@@ -86,9 +86,9 @@ Common use cases include assessing factual accuracy against reference outputs (o
 
 Configure LLM-as-a-judge evaluators for:
 
-* Programmatic offline evaluation: [With the SDK](https://docs.langchain.com/langsmith/llm-as-judge-sdk)
-* Offline evaluation on datasets: [In the UI](https://docs.langchain.com/langsmith/llm-as-judge)
-* Online evaluation on production traces: [In the UI](https://docs.langchain.com/langsmith/online-evaluations-llm-as-judge)
+* Programmatic offline evaluation: [With the SDK](llm-as-judge-sdk.md)
+* Offline evaluation on datasets: [In the UI](llm-as-judge.md)
+* Online evaluation on production traces: [In the UI](online-evaluations-llm-as-judge.md)
 
 ### Code evaluators
 
@@ -98,9 +98,9 @@ Code evaluators are particularly useful for unit tests—verifying generated cod
 
 Define code evaluators for:
 
-* Offline evaluation on datasets: [In the UI](https://docs.langchain.com/langsmith/code-evaluator-ui)
-* Programmatic offline evaluation: [With the SDK](https://docs.langchain.com/langsmith/code-evaluator-sdk)
-* Online evaluation on production traces: [In the UI](https://docs.langchain.com/langsmith/online-evaluations-code)
+* Offline evaluation on datasets: [In the UI](code-evaluator-ui.md)
+* Programmatic offline evaluation: [With the SDK](code-evaluator-sdk.md)
+* Online evaluation on production traces: [In the UI](online-evaluations-code.md)
 
 ### Composite evaluators
 
@@ -110,9 +110,9 @@ For benchmarking, composite scores help compare versions on multiple dimensions 
 
 Set up composite evaluators for:
 
-* Offline evaluation with predefined aggregation: [In the UI](https://docs.langchain.com/langsmith/composite-evaluators-ui)
-* Offline evaluation with custom aggregation logic: [With the SDK](https://docs.langchain.com/langsmith/composite-evaluators-sdk)
-* Online evaluation on production traces: [In the UI](https://docs.langchain.com/langsmith/online-evaluations-composite)
+* Offline evaluation with predefined aggregation: [In the UI](composite-evaluators-ui.md)
+* Offline evaluation with custom aggregation logic: [With the SDK](composite-evaluators-sdk.md)
+* Online evaluation on production traces: [In the UI](online-evaluations-composite.md)
 
 ### Summary evaluators
 
@@ -122,15 +122,15 @@ Summary evaluators are essential for benchmarking when you need dataset-level me
 
 Implement summary evaluators for:
 
-* Custom aggregation functions for offline evaluation: [With the SDK](https://docs.langchain.com/langsmith/summary)
+* Custom aggregation functions for offline evaluation: [With the SDK](summary.md)
 
 ### Pairwise evaluators
 
-Compare outputs from two versions to determine relative quality. This approach, covered earlier under [pairwise evaluation](https://docs.langchain.com/langsmith/evaluation-types#pairwise-evaluation), helps when absolute scoring is difficult but determining "which is better" is straightforward.
+Compare outputs from two versions to determine relative quality. This approach, covered earlier under [pairwise evaluation](#pairwise-evaluation), helps when absolute scoring is difficult but determining "which is better" is straightforward.
 
 Run pairwise evaluations for:
 
-* Compare existing experiments: [With the SDK](https://docs.langchain.com/langsmith/evaluate-pairwise)
+* Compare existing experiments: [With the SDK](evaluate-pairwise.md)
 
 ***
 

@@ -327,7 +327,7 @@ function Message({ message, toolCalls }: {
 ```
 
 This works especially well with the richer UI patterns from
-[Tool calling](https://docs.langchain.com/oss/python/langchain/frontend/tool-calling), where each tool result can
+[Tool calling](tool-calling.md), where each tool result can
 render as a specialized card instead of raw JSON.
 
 ## Use cases
@@ -352,7 +352,7 @@ client:
 * Surface tool state in the UI. Use `stream.toolCalls` and `onTool` to show
   pending, success, and error states.
 * Add review when needed. For sensitive client-side actions, pair this pattern
-  with [Human-in-the-loop](https://docs.langchain.com/oss/python/langchain/frontend/human-in-the-loop).
+  with [Human-in-the-loop](human-in-the-loop.md).
 
 ***
 

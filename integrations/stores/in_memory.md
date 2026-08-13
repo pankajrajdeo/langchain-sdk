@@ -2,7 +2,7 @@
 
 > Integrate with the InMemoryByteStore store using LangChain Python.
 
-This guide will help you get started with in-memory [key-value stores](https://docs.langchain.com/oss/python/integrations/stores). For detailed documentation of all `InMemoryByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/stores/InMemoryByteStore).
+This guide will help you get started with in-memory [key-value stores](../stores.md). For detailed documentation of all `InMemoryByteStore` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/stores/InMemoryByteStore).
 
 ## Overview
 

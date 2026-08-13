@@ -22,7 +22,7 @@ npm install @mastra/core @mastra/langsmith @mastra/observability @mastra/libsql
 ```
 
 > [!TIP]
->    If [`LANGCHAIN_PROJECT`](https://docs.langchain.com/langsmith/log-traces-to-project) is not set, traces will be sent to the default project.
+>    If [`LANGCHAIN_PROJECT`](log-traces-to-project.md) is not set, traces will be sent to the default project.
 
 2. If you plan to use OpenAI models, also ensure you have an OpenAI API key available at runtime:
 

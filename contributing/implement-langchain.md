@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/contributing/implement-langchain)
 Integration packages are Python packages that users can install for use in their projects. They implement one or more components that adhere to the LangChain interface standards.
 
-LangChain components are subclasses of base classes in [`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core). Examples include [chat models](https://docs.langchain.com/oss/python/integrations/chat), [tools](https://docs.langchain.com/oss/python/integrations/tools), [retrievers](https://docs.langchain.com/oss/python/integrations/retrievers), and more.
+LangChain components are subclasses of base classes in [`langchain-core`](https://github.com/langchain-ai/langchain/tree/master/libs/core). Examples include [chat models](../integrations/chat.md), [tools](../integrations/tools.md), [retrievers](../integrations/retrievers.md), and more.
 
 Your integration package will typically implement a subclass of at least one of these components. Expand the tabs below to see details on each.
 
@@ -10,13 +10,13 @@ Your integration package will typically implement a subclass of at least one of 
 Chat models are subclasses of the [`BaseChatModel`](https://reference.langchain.com/python/langchain-core/language_models/chat_models/BaseChatModel) class. They implement methods for generating chat completions, handling message formatting, and managing model parameters.
 
 > [!WARNING]
-> The chat model integration guide is currently WIP. In the meantime, read the [chat model conceptual guide](https://docs.langchain.com/oss/python/langchain/models) for details on how LangChain chat models function. You may also refer to existing integrations in the [LangChain repo](https://github.com/langchain-ai/langchain/tree/master/libs/partners)
+> The chat model integration guide is currently WIP. In the meantime, read the [chat model conceptual guide](../langchain/models.md) for details on how LangChain chat models function. You may also refer to existing integrations in the [LangChain repo](https://github.com/langchain-ai/langchain/tree/master/libs/partners)
 
 #### Embeddings
 Embedding models are subclasses of the [`Embeddings`](https://reference.langchain.com/python/langchain-core/embeddings/embeddings/Embeddings) class.
 
 > [!WARNING]
-> The embedding model integration guide is currently WIP. In the meantime, read the [embedding model conceptual guide](https://docs.langchain.com/oss/python/integrations/embeddings) for details on how LangChain embedding models function.
+> The embedding model integration guide is currently WIP. In the meantime, read the [embedding model conceptual guide](../integrations/embeddings.md) for details on how LangChain embedding models function.
 
 #### Tools
 Tools are used in 2 main ways:
@@ -27,12 +27,12 @@ Tools are used in 2 main ways:
 The Tools class must inherit from the [`BaseTool`](https://reference.langchain.com/python/langchain-core/tools/base/BaseTool) base class. This interface has 3 properties and 2 methods that should be implemented in a subclass.
 
 > [!WARNING]
-> The tools integration guide is currently WIP. In the meantime, read the [tools conceptual guide](https://docs.langchain.com/oss/python/langchain/tools) for details on how LangChain tools function.
+> The tools integration guide is currently WIP. In the meantime, read the [tools conceptual guide](../langchain/tools.md) for details on how LangChain tools function.
 
 #### Middleware
-[Middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview) lets you customize agent behavior by hooking into model calls, tool calls, and agent lifecycle events. Middleware classes subclass the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) base class.
+[Middleware](../langchain/middleware/overview.md) lets you customize agent behavior by hooking into model calls, tool calls, and agent lifecycle events. Middleware classes subclass the [`AgentMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentMiddleware) base class.
 
-Read the [custom middleware guide](https://docs.langchain.com/oss/python/langchain/middleware/custom) to understand hooks, state updates, and middleware patterns before building an integration.
+Read the [custom middleware guide](../langchain/middleware/custom.md) to understand hooks, state updates, and middleware patterns before building an integration.
 
 Middleware integrations typically fall into two categories:
 
@@ -45,25 +45,25 @@ Provider-specific middleware lives in the provider's integration package (for ex
 
 You can also use these existing middleware integrations as reference:
 
-#### [OpenAI content moderation](https://docs.langchain.com/oss/python/integrations/middleware/openai)
+#### [OpenAI content moderation](../integrations/middleware/openai.md)
 Single middleware with configuration options and exit behaviors.
 
-#### [Anthropic middleware](https://docs.langchain.com/oss/python/integrations/middleware/anthropic)
+#### [Anthropic middleware](../integrations/middleware/anthropic.md)
 Multiple middleware classes for prompt caching, tools, memory, and file search.
 
-#### [AWS prompt caching](https://docs.langchain.com/oss/python/integrations/middleware/aws)
+#### [AWS prompt caching](../integrations/middleware/aws.md)
 Provider-specific prompt caching with model behavior tables.
 
-#### [Custom middleware guide](https://docs.langchain.com/oss/python/langchain/middleware/custom)
+#### [Custom middleware guide](../langchain/middleware/custom.md)
 Full reference for hooks, state updates, and patterns.
 
 #### Checkpointers
-Checkpointers enable [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) in LangGraph, allowing agents to save and resume state across interactions.
+Checkpointers enable [persistence](../langgraph/persistence.md) in LangGraph, allowing agents to save and resume state across interactions.
 
 See existing checkpointer integrations in the [LangGraph repo](https://github.com/langchain-ai/langgraph/tree/main/libs) for implementation examples.
 
 #### Sandboxes
-Sandbox integrations enable [Deep Agents](https://docs.langchain.com/oss/python/deepagents/overview) to run code in isolated environments.
+Sandbox integrations enable [Deep Agents](../deepagents/overview.md) to run code in isolated environments.
 
 Implement the [`SandboxBackendProtocol`](https://reference.langchain.com/python/deepagents/backends/protocol/SandboxBackendProtocol) from Deep Agents. This protocol includes `execute()`, async variants, and the filesystem tool methods such as `ls`, `read`, `write`, `edit`, `glob`, and `grep`.
 
@@ -145,7 +145,7 @@ class MySandbox(BaseSandbox):
 
 ## Test your integration
 
-Validate your integration with the [sandbox standard test suite](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain#sandbox-integrations). The Python suite uses `SandboxIntegrationTests` from `langchain_tests.integration_tests`; subclass it and provide a `sandbox` fixture that yields a clean `SandboxBackendProtocol` instance.
+Validate your integration with the [sandbox standard test suite](standard-tests-langchain.md#sandbox-integrations). The Python suite uses `SandboxIntegrationTests` from `langchain_tests.integration_tests`; subclass it and provide a `sandbox` fixture that yields a clean `SandboxBackendProtocol` instance.
 
 ```python
 from __future__ import annotations

@@ -23,11 +23,11 @@ Get a [Cohere api key](https://dashboard.cohere.ai/) and set it as an environmen
 
 | API              | description                      | Endpoint docs                                          | Import                                                                       | Example usage                                                       |
 | ---------------- | -------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Chat             | Build chat bots                  | [chat](https://docs.cohere.com/reference/chat)         | `from langchain_cohere import ChatCohere`                                    | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/chat/cohere)                |
-| LLM              | Generate text                    | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere`                                   | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/llms/cohere)                |
-| RAG Retriever    | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat)   | `from langchain_classic.retrievers import CohereRagRetriever`                | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/retrievers/cohere)          |
-| Text Embedding   | Embed strings to vectors         | [embed](https://docs.cohere.com/reference/embed)       | `from langchain_cohere import CohereEmbeddings`                              | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)          |
-| Rerank Retriever | Rank strings based on relevance  | [rerank](https://docs.cohere.com/reference/rerank)     | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](https://docs.langchain.com/oss/python/integrations/retrievers/cohere-reranker) |
+| Chat             | Build chat bots                  | [chat](https://docs.cohere.com/reference/chat)         | `from langchain_cohere import ChatCohere`                                    | [cohere.ipynb](../chat/cohere.md)                |
+| LLM              | Generate text                    | [generate](https://docs.cohere.com/reference/generate) | `from langchain_cohere.llms import Cohere`                                   | [cohere.ipynb](../llms/cohere.md)                |
+| RAG Retriever    | Connect to external data sources | [chat + rag](https://docs.cohere.com/reference/chat)   | `from langchain_classic.retrievers import CohereRagRetriever`                | [cohere.ipynb](../retrievers/cohere.md)          |
+| Text Embedding   | Embed strings to vectors         | [embed](https://docs.cohere.com/reference/embed)       | `from langchain_cohere import CohereEmbeddings`                              | [cohere.ipynb](../embeddings/cohere.md)          |
+| Rerank Retriever | Rank strings based on relevance  | [rerank](https://docs.cohere.com/reference/rerank)     | `from langchain_classic.retrievers.document_compressors import CohereRerank` | [cohere.ipynb](../retrievers/cohere-reranker.md) |
 
 ## Quick copy examples
 
@@ -41,7 +41,7 @@ messages = [HumanMessage(content="knock knock")]
 print(chat.invoke(messages))
 ```
 
-Usage of the Cohere [chat model](https://docs.langchain.com/oss/python/integrations/chat/cohere)
+Usage of the Cohere [chat model](../chat/cohere.md)
 
 ### LLM
 
@@ -52,7 +52,7 @@ llm = Cohere()
 print(llm.invoke("Come up with a pet name"))
 ```
 
-Usage of the Cohere (legacy) [LLM model](https://docs.langchain.com/oss/python/integrations/llms/cohere)
+Usage of the Cohere (legacy) [LLM model](../llms/cohere.md)
 
 ### Tool calling
 
@@ -152,7 +152,7 @@ rag = CohereRagRetriever(llm=ChatCohere())
 print(rag.invoke("What is cohere ai?"))
 ```
 
-Usage of the Cohere [RAG Retriever](https://docs.langchain.com/oss/python/integrations/retrievers/cohere)
+Usage of the Cohere [RAG Retriever](../retrievers/cohere.md)
 
 ### Text embedding
 
@@ -163,11 +163,11 @@ embeddings = CohereEmbeddings(model="embed-english-light-v3.0")
 print(embeddings.embed_documents(["This is a test document."]))
 ```
 
-Usage of the Cohere [Text Embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)
+Usage of the Cohere [Text Embeddings model](../embeddings/cohere.md)
 
 ### Reranker
 
-Usage of the Cohere [Reranker](https://docs.langchain.com/oss/python/integrations/retrievers/cohere-reranker)
+Usage of the Cohere [Reranker](../retrievers/cohere-reranker.md)
 
 ***
 

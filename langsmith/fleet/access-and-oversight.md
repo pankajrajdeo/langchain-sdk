@@ -16,7 +16,7 @@ Fleet provides granular control over every agent in two dimensions: **who gets a
 
 You can layer these permissions. Give a core team edit access, share run-only with the broader organization, and revoke at any time.
 
-For setup instructions, see [Change access to the agent](https://docs.langchain.com/langsmith/fleet/manage-agent-settings#change-access-to-the-agent).
+For setup instructions, see [Change access to the agent](manage-agent-settings.md#change-access-to-the-agent).
 
 ## Agent identity and credentials
 
@@ -27,15 +27,15 @@ Fleet offers two credential models that control how agents authenticate with ext
 
 This is configurable per agent, so you can choose the right model for each use case.
 
-For setup instructions, see [Agent identity](https://docs.langchain.com/langsmith/fleet/agent-identity).
+For setup instructions, see [Agent identity](agent-identity.md).
 
 ## Tool access control
 
 Fleet provides layered access control for tools, covering both **custom MCP servers** (user-added, workspace-scoped) and **built-in integrations** (platform-provided, such as Gmail, Slack, and GitHub):
 
-* **[Role-based access control (RBAC)](https://docs.langchain.com/langsmith/fleet/access-and-oversight#role-based-permissions)**: Controls access at the role level.
-* **[Attribute-based access control (ABAC)](https://docs.langchain.com/langsmith/fleet/access-and-oversight#attribute-based-access-control)**: Adds per-resource granularity on top of RBAC.
-* **[Workspace integration policy](https://docs.langchain.com/langsmith/fleet/access-and-oversight#workspace-integration-policy)**: Provides an admin-controlled enable/disable gate for built-in integrations.
+* **[Role-based access control (RBAC)](#role-based-permissions)**: Controls access at the role level.
+* **[Attribute-based access control (ABAC)](#attribute-based-access-control)**: Adds per-resource granularity on top of RBAC.
+* **[Workspace integration policy](#workspace-integration-policy)**: Provides an admin-controlled enable/disable gate for built-in integrations.
 
 > [!NOTE]
 > Tool access control is an Enterprise feature. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales).
@@ -57,7 +57,7 @@ The following permissions are available for MCP servers and integrations:
 > [!NOTE]
 > A role with `mcp-servers:read` and `mcp-servers:invoke` can see and use all MCP servers and integrations in the workspace.
 
-For more on RBAC, see [Role-based access control](https://docs.langchain.com/langsmith/rbac).
+For more on RBAC, see [Role-based access control](../rbac.md).
 
 #### Create a role with tool permissions
 
@@ -84,7 +84,7 @@ ABAC operates on two resource types for tools:
 > [!NOTE]
 > A role with no `mcp-servers:*` RBAC permissions can still be granted access to specific tagged resources (e.g. only Notion and Gmail) via an ABAC allow policy. Conversely, a role with broad RBAC access can be restricted from specific resources via an ABAC deny policy.
 
-For details on policy structure, operators, and managing policies via the API, see [Attribute-based access control](https://docs.langchain.com/langsmith/abac).
+For details on policy structure, operators, and managing policies via the API, see [Attribute-based access control](../abac.md).
 
 ### Workspace integration policy
 
@@ -120,7 +120,7 @@ At each step:
 
 ## Observability and audit trail
 
-Agent actions in Fleet are captured in a structured [LangSmith trace](https://docs.langchain.com/langsmith/observability), including tool calls, decisions, and outputs. You can inspect, search, and export traces.
+Agent actions in Fleet are captured in a structured [LangSmith trace](../observability.md), including tool calls, decisions, and outputs. You can inspect, search, and export traces.
 
 Combined with agent identity and permissions, tracing tells you which agent acted, on whose behalf, with what credentials, and what it did at each step.
 
@@ -128,7 +128,7 @@ Combined with agent identity and permissions, tracing tells you which agent acte
 
 Fleet provides a [central inbox](https://smith.langchain.com/agents/inbox) for reviewing agent actions across all your agents. You can configure agents to pause and request approval before taking specific actions, then review, approve, edit, or reject from one place.
 
-For setup instructions, see [Human-in-the-loop](https://docs.langchain.com/langsmith/fleet/essentials#human-in-the-loop).
+For setup instructions, see [Human-in-the-loop](essentials.md#human-in-the-loop).
 
 ***
 

@@ -4,6 +4,8 @@
 
 LangChain has helped form the largest developer community in generative AI, and we're always open to new contributors. Whether you're fixing bugs, adding features, improving documentation, or sharing feedback, your involvement helps make LangChain and LangGraph better for everyone 🦜❤️
 
+<a id="add-a-new-integration"></a>
+
 ## Ways to contribute
 
 <details>

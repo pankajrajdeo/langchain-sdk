@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/runs)
 An overview of runs in Agent Server, including how to kick off background runs, stateless runs, and cancel runs.
 
-A *run* is an invocation of an [assistant](https://docs.langchain.com/langsmith/assistants). When you execute a run, you specify which assistant to use—either by graph ID for the default assistant, or by assistant ID for a specific configuration.
+A *run* is an invocation of an [assistant](assistants.md). When you execute a run, you specify which assistant to use—either by graph ID for the default assistant, or by assistant ID for a specific configuration.
 
 ```mermaid
 flowchart TB
@@ -60,24 +60,24 @@ This diagram shows how a **run** combines an assistant with a thread to execute 
 When executing a run:
 
 * Each run may have its own input, configuration overrides, and metadata.
-* Runs can be stateless (no thread) or stateful (executed on a [thread](https://docs.langchain.com/langsmith/use-threads) for conversation persistence).
+* Runs can be stateless (no thread) or stateful (executed on a [thread](use-threads.md) for conversation persistence).
 * Multiple runs can use the same assistant configuration.
 * The assistant's configuration affects how the underlying graph executes.
 
-The Agent Server API provides several endpoints for creating and managing runs. For more details, refer to the [API reference](https://docs.langchain.com/langsmith/server-api-ref).
+The Agent Server API provides several endpoints for creating and managing runs. For more details, refer to the [API reference](server-api-ref.md).
 
 ## In this section
 
-#### [Kick off background runs](https://docs.langchain.com/langsmith/background-run)
+#### [Kick off background runs](background-run.md)
 Run your agent asynchronously and poll for results.
 
-#### [Run multiple agents on the same thread](https://docs.langchain.com/langsmith/same-thread)
+#### [Run multiple agents on the same thread](same-thread.md)
 Use multiple assistants on a shared thread to combine agent capabilities.
 
-#### [Stateless runs](https://docs.langchain.com/langsmith/stateless-runs)
+#### [Stateless runs](stateless-runs.md)
 Execute runs without persisting state when conversation history isn't needed.
 
-#### [Cancel a run](https://docs.langchain.com/langsmith/cancel-run)
+#### [Cancel a run](cancel-run.md)
 Cancel a single run or multiple runs via the API.
 
 ***

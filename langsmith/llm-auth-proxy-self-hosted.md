@@ -4,18 +4,18 @@ Deploy an Envoy-based auth proxy that validates LangSmith-signed JWTs and routes
 
 The LLM auth proxy lets your organization enforce its own authentication flows for all model invocations from LangSmith so that provider credentials are never exposed to end users and every request is traceable back to a specific actor.
 
-The LLM auth proxy is an [Envoy](https://www.envoyproxy.io/)-based component that runs in your environment and sits between LangSmith and your upstream LLM provider or gateway (such as OpenAI, Anthropic, or an internal LLM gateway like LiteLLM). LangSmith signs every request with a short-lived JWT (JSON Web Token). The proxy validates the JWT, optionally injects provider credentials or transforms request and response bodies, then forwards the request upstream. It is available to both [SaaS](https://docs.langchain.com/langsmith/cloud) and [self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith customers.
+The LLM auth proxy is an [Envoy](https://www.envoyproxy.io/)-based component that runs in your environment and sits between LangSmith and your upstream LLM provider or gateway (such as OpenAI, Anthropic, or an internal LLM gateway like LiteLLM). LangSmith signs every request with a short-lived JWT (JSON Web Token). The proxy validates the JWT, optionally injects provider credentials or transforms request and response bodies, then forwards the request upstream. It is available to both [SaaS](cloud.md) and [self-hosted](self-hosted.md) LangSmith customers.
 
 > [!NOTE]
 > The LLM auth proxy requires a LangSmith Enterprise plan. For more details, refer to [Pricing](https://www.langchain.com/pricing) or [contact our sales team](https://www.langchain.com/contact-sales).
 
 Use the LLM auth proxy when you need to:
 
-* Authenticate [Playground](https://docs.langchain.com/langsmith/custom-endpoint#use-the-model-in-the-playground) or [LLM-as-judge evaluation](https://docs.langchain.com/langsmith/evaluation) requests against your own provider gateway.
+* Authenticate [Playground](custom-endpoint.md#use-the-model-in-the-playground) or [LLM-as-judge evaluation](evaluation.md) requests against your own provider gateway.
 * Inject provider-specific API keys or auth headers without exposing them to end users.
 * Transform request or response bodies (for example, converting between OpenAI format and a custom gateway format).
 
-For OAuth2 `client_credentials` specifically, [OAuth client credentials on a model configuration](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials) is a per-configuration self-service alternative that workspace admins can set up without standing up the auth proxy. Routing is mutually exclusive at the configuration level—a configuration with OAuth enabled does not pass through the auth proxy.
+For OAuth2 `client_credentials` specifically, [OAuth client credentials on a model configuration](model-configurations.md#oauth-client-credentials) is a per-configuration self-service alternative that workspace admins can set up without standing up the auth proxy. Routing is mutually exclusive at the configuration level—a configuration with OAuth enabled does not pass through the auth proxy.
 
 ## How it works
 
@@ -26,11 +26,11 @@ Each request from LangSmith passes through the following steps in the proxy:
 3. Optionally call your [`ext_proc`](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_proc_filter) transformer, which can rewrite request and response bodies (for example, converting between OpenAI format and a custom gateway format)
 4. Forward the request with custom headers (static or dynamic) to the upstream provider
 
-Both the `ext_authz` service and the transformer are customer-deployed components that run alongside the proxy in your environment. Either or both can be enabled [depending on your use case](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#when-to-use-ext_proc-vs-ext_authz).
+Both the `ext_authz` service and the transformer are customer-deployed components that run alongside the proxy in your environment. Either or both can be enabled [depending on your use case](#when-to-use-ext_proc-vs-ext_authz).
 
-> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)
+> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](llm-auth-proxy-self-hosted.md)
 
-> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)
+> **Image:** [Architecture diagram showing LangSmith issuing a signed JWT to the self-hosted auth proxy, which validates the JWT, applies customer-defined auth, and forwards the request to the upstream model provider.](llm-auth-proxy-self-hosted.md)
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Both the `ext_authz` service and the transformer are customer-deployed component
 * The URL of your upstream LLM provider or gateway (the destination the proxy will forward requests to)
 
 > [!NOTE]
-> The auth proxy currently supports the [Playground](https://docs.langchain.com/langsmith/prompt-engineering-concepts), [Evals](https://docs.langchain.com/langsmith/evaluation), [Fleet](https://docs.langchain.com/langsmith/fleet), [Chat](https://docs.langchain.com/langsmith/chat), and [Insights](https://docs.langchain.com/langsmith/insights) features.
+> The auth proxy currently supports the [Playground](prompt-engineering-concepts.md), [Evals](evaluation.md), [Fleet](fleet.md), [Chat](chat.md), and [Insights](insights.md) features.
 > Playground and Evals are available in v0.13.33+. Chat and Insights are available in v0.13.39+.
 
 ## 1. Configure JWT signing (self-hosted LangSmith only)
@@ -80,7 +80,7 @@ platformBackend:
           name: langsmith-signing-jwks
 ```
 
-`LLM_AUTH_PROXY_ISSUER` sets the `iss` claim in signed JWTs. Use `langsmith` to match the SaaS default, or a custom identifier like `langsmith:self-hosted:<short_identifier>` to distinguish your installation. The value must match `jwtIssuer` in the auth proxy chart in [Step 4](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#4-install-the-auth-proxy-helm-chart)).
+`LLM_AUTH_PROXY_ISSUER` sets the `iss` claim in signed JWTs. Use `langsmith` to match the SaaS default, or a custom identifier like `langsmith:self-hosted:<short_identifier>` to distinguish your installation. The value must match `jwtIssuer` in the auth proxy chart in [Step 4](#4-install-the-auth-proxy-helm-chart)).
 
 ## 2. Enable LLM Auth Proxy for your organization
 
@@ -116,7 +116,7 @@ Contact technical support via the [Support Portal](https://support.langchain.com
 
 In the LangSmith UI, navigate to **Settings** > **General**, configure the following:
 
-1. **JWT audience:** the `aud` claim value the proxy will validate (for example, `example-audience`). This must match `jwtAudiences` in the auth proxy chart in [Step 4](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#4-install-the-auth-proxy-helm-chart).
+1. **JWT audience:** the `aud` claim value the proxy will validate (for example, `example-audience`). This must match `jwtAudiences` in the auth proxy chart in [Step 4](#4-install-the-auth-proxy-helm-chart).
 2. **Enable LLM auth proxy:** toggle on for your organization.
 3. **Allowed URLs:** control which destination URLs the proxy is permitted to forward JWTs to. This prevents credential forwarding to unintended hosts. Choose one of three options:
 
@@ -124,9 +124,9 @@ In the LangSmith UI, navigate to **Settings** > **General**, configure the follo
    * **Block all:** blocks JWT forwarding to all URLs.
    * **Custom:** specify an explicit list of allowed URL patterns. Empty strings and bare `*` are not accepted. The control is disabled when the LLM auth proxy toggle is off.
 
-> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)
+> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](llm-auth-proxy-self-hosted.md)
 
-> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted)
+> **Image:** [LLM Auth Proxy settings in LangSmith showing the Enable LLM auth proxy checkbox, JWT audience field, and Allowed URLs radio buttons with Allow all selected.](llm-auth-proxy-self-hosted.md)
 
 ## 4. Install the auth proxy Helm chart
 
@@ -330,6 +330,8 @@ For the full list of `extAuthz` parameters, see the [Helm chart README](https://
 Use `ext_proc` when you need to rewrite request or response bodies, for example, to convert between OpenAI format and a custom gateway format, or to inject additional fields into the request payload. This uses Envoy's [`ext_proc` filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/ext_proc_filter).
 
 Unlike `ext_authz` (HTTP), `ext_proc` uses a bidirectional gRPC stream. Envoy sends your transformer service one message per processing phase (request headers, request body, response headers, response body), and your service replies with mutations for each phase. Your transformer must implement the `envoy.service.ext_proc.v3.ExternalProcessor` gRPC service. See [e2e/transformer/](https://github.com/langchain-ai/helm/tree/main/charts/langsmith-auth-proxy/e2e/transformer) in the chart repository for a sample Go implementation.
+
+<a id="when-to-use-ext_proc-vs-ext_authz"></a>
 
 ### When to use `ext_proc` vs `ext_authz`
 
@@ -763,7 +765,7 @@ The JWT is passed to your `ext_authz` or transformer service in the `x-langsmith
 <details>
 <summary>Does the auth proxy support corporate proxies?</summary>
 
-Yes. Configure an HTTP proxy via the `httpProxy` section in `values.yaml`. See [HTTP proxy](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#http-proxy) for details.
+Yes. Configure an HTTP proxy via the `httpProxy` section in `values.yaml`. See [HTTP proxy](#http-proxy) for details.
 
 </details>
 
@@ -792,21 +794,21 @@ Yes. Multiple organizations can point to the same auth proxy instance via their 
 <summary>Can the LangSmith to auth proxy connection use HTTP instead of HTTPS?</summary>
 
 Yes, but only in self-hosted, and we generally recommend placing the auth proxy behind a dedicated ingress so communication uses HTTPS. To allow HTTP, add `LLM_AUTH_PROXY_ACCEPT_HTTP` to `commonEnv` and `playground.deployment.extraEnv` in your [LangSmith `values.yaml`](https://github.com/langchain-ai/helm/blob/main/charts/langsmith/values.yaml).
-To enable HTTP traffic to the auth proxy for [Chat and Insights](https://docs.langchain.com/langsmith/deploy-self-hosted-full-platform#enable-fleet-insights-and-chat), set this environment variable in the respective `extraEnv` sections: `config.polly.agent.extraEnv` (for Chat, which was formerly called Polly) and `config.insights.agent.extraEnv`.
+To enable HTTP traffic to the auth proxy for [Chat and Insights](deploy-self-hosted-full-platform.md#enable-fleet-insights-and-chat), set this environment variable in the respective `extraEnv` sections: `config.polly.agent.extraEnv` (for Chat, which was formerly called Polly) and `config.insights.agent.extraEnv`.
 
 </details>
 
 <details>
 <summary>Does the auth proxy work without a public ingress?</summary>
 
-Yes. When the auth proxy is only reachable through internal Kubernetes networking (no public ingress), add `SSRF_ALLOW_K8S_INTERNAL` to all services that make LLM calls and both `SSRF_ALLOW_K8S_INTERNAL` and `SSRF_ALLOW_PRIVATE_IPS_PLAYGROUND` to the `playground` service. See [Deploy without a public ingress](https://docs.langchain.com/langsmith/llm-auth-proxy-self-hosted#deploy-without-a-public-ingress) for configuration details.
+Yes. When the auth proxy is only reachable through internal Kubernetes networking (no public ingress), add `SSRF_ALLOW_K8S_INTERNAL` to all services that make LLM calls and both `SSRF_ALLOW_K8S_INTERNAL` and `SSRF_ALLOW_PRIVATE_IPS_PLAYGROUND` to the `playground` service. See [Deploy without a public ingress](#deploy-without-a-public-ingress) for configuration details.
 
 </details>
 
 <details>
 <summary>When should I use the LLM auth proxy versus OAuth client credentials on a model configuration?</summary>
 
-Use the LLM auth proxy when authentication needs custom logic beyond OAuth2 `client_credentials`. For example, exchanging the LangSmith JWT for a provider-specific token, injecting GCP or AWS identity, or rewriting request and response bodies. Use [OAuth client credentials on a model configuration](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials) when each workspace or team needs self-service control over its own OAuth2 `client_credentials` against a custom gateway. Both can coexist within the same organization; routing is per-configuration.
+Use the LLM auth proxy when authentication needs custom logic beyond OAuth2 `client_credentials`. For example, exchanging the LangSmith JWT for a provider-specific token, injecting GCP or AWS identity, or rewriting request and response bodies. Use [OAuth client credentials on a model configuration](model-configurations.md#oauth-client-credentials) when each workspace or team needs self-service control over its own OAuth2 `client_credentials` against a custom gateway. Both can coexist within the same organization; routing is per-configuration.
 
 </details>
 

@@ -4,20 +4,20 @@ Invoke Fleet agents via the LangGraph SDK or REST API, or download and run them 
 
 There are two main ways to use Fleet agents programmatically:
 
-* **[Call from code](https://docs.langchain.com/langsmith/fleet/code#call-from-code)**: Invoke your agent remotely via the LangGraph SDK or REST API, without downloading anything.
-* **[Export to code](https://docs.langchain.com/langsmith/fleet/code#export-to-code)**: Download your agent's configuration and run it locally as a self-contained Python project using the `fleet-deepagents-export` package.
+* **[Call from code](#call-from-code)**: Invoke your agent remotely via the LangGraph SDK or REST API, without downloading anything.
+* **[Export to code](#export-to-code)**: Download your agent's configuration and run it locally as a self-contained Python project using the `fleet-deepagents-export` package.
 
 ## Call from code
 
-You can invoke LangSmith Fleet agents from your applications using the [LangGraph SDK](https://docs.langchain.com/langsmith/reference) or the REST API. Fleet agents run on [Agent Server](https://docs.langchain.com/langsmith/agent-server), so you can use the same API methods as any other [LangSmith deployment](https://docs.langchain.com/langsmith/deployment).
+You can invoke LangSmith Fleet agents from your applications using the [LangGraph SDK](../reference.md) or the REST API. Fleet agents run on [Agent Server](../agent-server.md), so you can use the same API methods as any other [LangSmith deployment](../deployment.md).
 
 The REST API lets you call your agent from any language or platform that supports HTTP requests.
 
 ### Prerequisites
 
 * A LangSmith account with a Fleet agent
-* A [Personal Access Token (PAT)](https://docs.langchain.com/langsmith/create-account-api-key) for authentication
-* (SDK only) The [LangGraph SDK](https://docs.langchain.com/langsmith/reference) installed:
+* A [Personal Access Token (PAT)](../create-account-api-key.md) for authentication
+* (SDK only) The [LangGraph SDK](../reference.md) installed:
 
 ```bash
 pip install langgraph-sdk python-dotenv
@@ -29,7 +29,7 @@ yarn add @langchain/langgraph-sdk
 
 ### Authentication
 
-To authenticate with your agent's Fleet deployment, provide a LangSmith [Personal Access Token (PAT)](https://docs.langchain.com/langsmith/create-account-api-key) to the `api_key` argument when instantiating the LangGraph SDK client, or via the `X-API-Key` header. If using `X-API-Key`, you must also set the `X-Auth-Scheme` header to `langsmith-api-key`.
+To authenticate with your agent's Fleet deployment, provide a LangSmith [Personal Access Token (PAT)](../create-account-api-key.md) to the `api_key` argument when instantiating the LangGraph SDK client, or via the `X-API-Key` header. If using `X-API-Key`, you must also set the `X-Auth-Scheme` header to `langsmith-api-key`.
 
 If the PAT you pass is not tied to the owner of the agent, your request will be rejected with a `404 Not Found` error.
 
@@ -45,7 +45,7 @@ To get your agent's `agent_id` and `api_url`:
 
 Copy the code below and replace `agent_id` and `api_url` with the values from your agent's code snippets.
 
-Create a `.env` file in your project root with your [Personal Access Token](https://docs.langchain.com/langsmith/create-account-api-key):
+Create a `.env` file in your project root with your [Personal Access Token](../create-account-api-key.md):
 
 ```bash
 LANGGRAPH_API_KEY=your-personal-access-token
@@ -121,7 +121,7 @@ curl --request GET \
 ```
 
 > [!NOTE]
-> Use a [Personal Access Token (PAT)](https://docs.langchain.com/langsmith/create-account-api-key) tied to your LangSmith account. Set the `X-Auth-Scheme` header to `langsmith-api-key` for authentication.
+> Use a [Personal Access Token (PAT)](../create-account-api-key.md) tied to your LangSmith account. Set the `X-Auth-Scheme` header to `langsmith-api-key` for authentication.
 
 ### 3. Invoke agent
 
@@ -457,20 +457,20 @@ The table below summarizes the key endpoints. Replace `<API_URL>` with your agen
 
 | Operation                                                                                                                | Method | Endpoint                                    |
 | ------------------------------------------------------------------------------------------------------------------------ | ------ | ------------------------------------------- |
-| [Get agent info](https://docs.langchain.com/langsmith/agent-server-api/assistants/get-assistant)                                                   | `GET`  | `<API_URL>/assistants/<AGENT_ID>`           |
-| [Create a thread](https://docs.langchain.com/langsmith/agent-server-api/threads/create-thread)                                                     | `POST` | `<API_URL>/threads`                         |
-| [Run (wait for result)](https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-wait-for-output) | `POST` | `<API_URL>/runs/wait`                       |
-| [Run (streaming)](https://docs.langchain.com/langsmith/agent-server-api/stateless-runs/create-run-stream-output)                                   | `POST` | `<API_URL>/runs/stream`                     |
-| [Run on thread (wait)](https://docs.langchain.com/langsmith/agent-server-api/thread-runs/create-run-wait-for-output)                               | `POST` | `<API_URL>/threads/<THREAD_ID>/runs/wait`   |
+| [Get agent info](../agent-server-api/assistants/get-assistant.md)                                                   | `GET`  | `<API_URL>/assistants/<AGENT_ID>`           |
+| [Create a thread](../agent-server-api/threads/create-thread.md)                                                     | `POST` | `<API_URL>/threads`                         |
+| [Run (wait for result)](../agent-server-api/stateless-runs/create-run-wait-for-output.md) | `POST` | `<API_URL>/runs/wait`                       |
+| [Run (streaming)](../agent-server-api/stateless-runs/create-run-stream-output.md)                                   | `POST` | `<API_URL>/runs/stream`                     |
+| [Run on thread (wait)](../agent-server-api/thread-runs/create-run-wait-for-output.md)                               | `POST` | `<API_URL>/threads/<THREAD_ID>/runs/wait`   |
 | /langsmith/agent-server-api/thread-runs/create-run-stream-output                                                         | `POST` | `<API_URL>/threads/<THREAD_ID>/runs/stream` |
 
 All endpoints require the following headers:
 
 * `Content-Type: application/json`
-* `X-Api-Key:` your [Personal Access Token](https://docs.langchain.com/langsmith/create-account-api-key)
+* `X-Api-Key:` your [Personal Access Token](../create-account-api-key.md)
 * `X-Auth-Scheme: langsmith-api-key`
 
-For the full API specification, see the [Agent Server API reference](https://docs.langchain.com/langsmith/server-api-ref).
+For the full API specification, see the [Agent Server API reference](../server-api-ref.md).
 
 ## Export to code
 
@@ -503,7 +503,7 @@ cd my-agent
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-fleet-code), open your agent and export it as a `.zip` file.
 
-> **Image:** [fleet-export-code](https://docs.langchain.com/langsmith/fleet/code)
+> **Image:** [fleet-export-code](code.md)
 
 Then drop the contents into the `fleet/` directory of your starter project:
 

@@ -35,7 +35,7 @@ You can run the following command to spin up a postgres container with the `pgve
 
 There are no credentials needed to run this notebook, just make sure you downloaded the `langchain-postgres` package and correctly started the postgres container.
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -44,7 +44,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ## Instantiation
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/pgvector).
+> **Interactive content:** [View this section in the original documentation](pgvector.md).
 
 ```python
 # | output: false
@@ -241,9 +241,9 @@ retriever.invoke("kitty")
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 ***
 

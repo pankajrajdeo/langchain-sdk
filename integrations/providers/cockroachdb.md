@@ -59,7 +59,7 @@ CockroachDB can be used as a vector store with native `VECTOR` type and C-SPANN 
 * Multi-tenancy with prefix columns
 * Horizontal scalability
 
-See the [CockroachDB entry in the vector stores overview](https://docs.langchain.com/oss/python/integrations/vectorstores#cockroachdb) for links to detailed usage.
+See the [CockroachDB entry in the vector stores overview](../vectorstores.md#cockroachdb) for links to detailed usage.
 
 **Quick example:**
 
@@ -122,7 +122,7 @@ Store conversation history in CockroachDB for persistent, distributed chat appli
 * Session-based organization
 * High availability
 
-See [CockroachDB chat history documentation](https://docs.langchain.com/oss/python/integrations/chat_message_histories/cockroachdb) for detailed usage.
+See [CockroachDB chat history documentation](../chat_message_histories/cockroachdb.md) for detailed usage.
 
 **Quick example:**
 
@@ -240,7 +240,7 @@ async with AsyncCockroachDBSaver.from_conn_string(DB_URI) as checkpointer:
 ```
 
 > [!NOTE]
-> See [Get your CockroachDB connection string](https://docs.langchain.com/oss/python/integrations/providers/cockroachdb#get-your-cockroachdb-connection-string) above for connection options including CockroachDB Cloud (recommended for production), Docker, and local binary installs. For local development, `sslmode=disable` is acceptable; always use `sslmode=verify-full` in production.
+> See [Get your CockroachDB connection string](#get-your-cockroachdb-connection-string) above for connection options including CockroachDB Cloud (recommended for production), Docker, and local binary installs. For local development, `sslmode=disable` is acceptable; always use `sslmode=verify-full` in production.
 
 > [!TIP]
 > The checkpointer uses raw `psycopg3` connections (not SQLAlchemy) for compatibility with LangGraph's checkpoint interface. The `from_conn_string` factory accepts `cockroachdb://` URLs and converts them automatically.

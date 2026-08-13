@@ -6,7 +6,7 @@
 
 ## Chat models
 
-#### [ChatDeepSeek](https://docs.langchain.com/oss/python/integrations/chat/deepseek)
+#### [ChatDeepSeek](../chat/deepseek.md)
 DeepSeek chat models.
 
 ***

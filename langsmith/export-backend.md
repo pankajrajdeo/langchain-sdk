@@ -14,7 +14,7 @@ Infrastructure refers to:
 
 ## Logs
 
-For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#logs).
+For a reference setup, see the [OTel collector example](langsmith-collector.md#logs).
 
 All services that are part of the LangSmith self-hosted deployment write logs to their node's filesystem and to stdout. In order to access these logs, you need to set up your collector to read from either the filesystem or stdout. Most popular collectors support reading logs from filesystems.
 
@@ -24,7 +24,7 @@ All services that are part of the LangSmith self-hosted deployment write logs to
 
 ## Metrics
 
-For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#metrics).
+For a reference setup, see the [OTel collector example](langsmith-collector.md#metrics).
 
 ### LangSmith services
 
@@ -54,7 +54,7 @@ The in-cluster Clickhouse is configured to expose metrics without the need for a
 
 ## Traces
 
-For a reference setup, see the [OTel collector example](https://docs.langchain.com/langsmith/langsmith-collector#traces).
+For a reference setup, see the [OTel collector example](langsmith-collector.md#traces).
 
 The LangSmith Backend, Platform Backend, Playground and LangSmith Queue deployments have been instrumented to emit [Otel](https://opentelemetry.io/docs/concepts/signals/traces/) traces. Tracing is toggled off by default, and can be enabled for all LangSmith services with the following in your `langsmith_config.yaml` (or equivalent) file:
 

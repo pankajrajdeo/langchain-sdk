@@ -7,15 +7,15 @@ Configure and manage S3-compatible export destinations for LangSmith bulk export
 >
 > Update the LangSmith URL in the requests below for self-hosted installs, GCP EU (`eu.api.smith.langchain.com`), GCP APAC (`apac.api.smith.langchain.com`), or AWS US (`aws.api.smith.langchain.com`).
 
-A destination is a named configuration that tells LangSmith where to write exported trace data. You [create a destination](https://docs.langchain.com/langsmith/data-export#1-create-a-destination) once, then reference it by ID when [creating export jobs](https://docs.langchain.com/langsmith/data-export#2-create-an-export-job). LangSmith currently supports S3 and any S3-compatible bucket (such as GCS or MinIO) as a destination. Exported data is written in [Parquet](https://parquet.apache.org/docs/overview/) columnar format and contains equivalent fields to the [Run data format](https://docs.langchain.com/langsmith/run-data-format).
+A destination is a named configuration that tells LangSmith where to write exported trace data. You [create a destination](data-export.md#1-create-a-destination) once, then reference it by ID when [creating export jobs](data-export.md#2-create-an-export-job). LangSmith currently supports S3 and any S3-compatible bucket (such as GCS or MinIO) as a destination. Exported data is written in [Parquet](https://parquet.apache.org/docs/overview/) columnar format and contains equivalent fields to the [Run data format](run-data-format.md).
 
 This page covers:
 
-* The [configuration fields](https://docs.langchain.com/langsmith/data-export-destinations#configuration-fields) needed to set up a destination.
-* Required bucket [permissions](https://docs.langchain.com/langsmith/data-export-destinations#permissions-required) for AWS S3 and GCS.
-* How to [create a destination](https://docs.langchain.com/langsmith/data-export-destinations#create-a-destination) via the API, including provider-specific examples and credential options.
-* How to [rotate destination credentials](https://docs.langchain.com/langsmith/data-export-destinations#rotate-destination-credentials) without recreating the destination.
-* How to [debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
+* The [configuration fields](#configuration-fields) needed to set up a destination.
+* Required bucket [permissions](#permissions-required) for AWS S3 and GCS.
+* How to [create a destination](#create-a-destination) via the API, including provider-specific examples and credential options.
+* How to [rotate destination credentials](#rotate-destination-credentials) without recreating the destination.
+* How to [debug destination errors](#debug-destination-errors).
 
 ## Configuration fields
 
@@ -131,7 +131,7 @@ curl --request POST \
 
 Use the returned `id` to reference this destination in subsequent bulk export operations.
 
-**If you receive an error while creating a destination, see [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors) for details on how to debug this.**
+**If you receive an error while creating a destination, see [Debug destination errors](#debug-destination-errors) for details on how to debug this.**
 
 ### Credentials configuration
 
@@ -286,9 +286,9 @@ curl --request PATCH \
 
 The `session_token` field is optional, which you can include for [temporary credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html).
 
-[**Required permission**](https://docs.langchain.com/langsmith/organization-workspace-operations): `bulk-exports:manage` (or `workspaces:manage`, which historically granted this access).
+[**Required permission**](organization-workspace-operations.md): `bulk-exports:manage` (or `workspaces:manage`, which historically granted this access).
 
-Before storing new credentials, LangSmith validates them by performing a test write to the bucket using the existing destination configuration. The request fails with `400` if the credentials do not have sufficient write permissions. If the request fails, refer to [Debug destination errors](https://docs.langchain.com/langsmith/data-export-destinations#debug-destination-errors).
+Before storing new credentials, LangSmith validates them by performing a test write to the bucket using the existing destination configuration. The request fails with `400` if the credentials do not have sufficient write permissions. If the request fails, refer to [Debug destination errors](#debug-destination-errors).
 
 ### Response
 
@@ -308,7 +308,7 @@ Returns the updated destination object. Credential values are never returned—o
 
 1. Provision new credentials in your cloud provider with write access to the destination bucket and prefix.
 2. Call the PATCH endpoint with the new credentials. LangSmith validates them before saving.
-3. Keep old credentials active until all in-flight bulk export runs finish (up to the [maximum run duration](https://docs.langchain.com/langsmith/data-export-monitor#automatic-retry-behavior)).
+3. Keep old credentials active until all in-flight bulk export runs finish (up to the [maximum run duration](data-export-monitor.md#automatic-retry-behavior)).
 4. Revoke old credentials once no runs are using them.
 
 ## Debug destination errors

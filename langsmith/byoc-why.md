@@ -35,9 +35,9 @@ To plan a migration, [contact the LangChain sales team](https://www.langchain.co
 
 ## See also
 
-* [BYOC overview](https://docs.langchain.com/langsmith/byoc)
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
-* [Self-hosted LangSmith](https://docs.langchain.com/langsmith/self-hosted)
+* [BYOC overview](byoc.md)
+* [BYOC architecture](byoc-architecture.md)
+* [Self-hosted LangSmith](self-hosted.md)
 
 ***
 

@@ -3,10 +3,10 @@
 This page describes how to plan, configure, and operate disaster recovery (DR) for self-hosted LangSmith Observability and Evaluation. It covers what data must be protected, where it lives, how to back it up, and how to recover the platform after a regional or zonal failure.
 
 > [!NOTE]
-> **Shared responsibility.** For self-hosted deployments you are responsible for backups, replication, restore testing, and recovery procedures for every component, including LangSmith pods and all backing data stores. LangChain is responsible only for the LangSmith software itself. For the equivalent SaaS responsibilities, see the [Shared responsibility model](https://docs.langchain.com/langsmith/shared-responsibility-model).
+> **Shared responsibility.** For self-hosted deployments you are responsible for backups, replication, restore testing, and recovery procedures for every component, including LangSmith pods and all backing data stores. LangChain is responsible only for the LangSmith software itself. For the equivalent SaaS responsibilities, see the [Shared responsibility model](shared-responsibility-model.md).
 
 > [!TIP]
-> For details on the architectural primitives (stateless services, queue heartbeats, exactly-once semantics) that this page assumes, refer to [Scalability and resilience](https://docs.langchain.com/langsmith/scalability-and-resilience).
+> For details on the architectural primitives (stateless services, queue heartbeats, exactly-once semantics) that this page assumes, refer to [Scalability and resilience](scalability-and-resilience.md).
 
 ## What you are recovering
 
@@ -45,7 +45,7 @@ LangSmith uses PostgreSQL as the primary store for operational and transactional
 
 ### Use a managed service
 
-We strongly recommend running Postgres on a managed service in production. Managed services provide built-in automated backups, PITR, and HA failover. For setup, refer to [Connect external Postgres](https://docs.langchain.com/langsmith/self-host-external-postgres).
+We strongly recommend running Postgres on a managed service in production. Managed services provide built-in automated backups, PITR, and HA failover. For setup, refer to [Connect external Postgres](self-host-external-postgres.md).
 
 #### AWS
 Run [Amazon RDS for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html) or [Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.html) in Multi-AZ mode.
@@ -81,9 +81,9 @@ ClickHouse holds the high-volume trace and feedback data and is typically the la
 
 ### Managed ClickHouse
 
-The fastest path to a resilient ClickHouse is a managed option. See [Connect external ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse).
+The fastest path to a resilient ClickHouse is a managed option. See [Connect external ClickHouse](self-host-external-clickhouse.md).
 
-* **[LangSmith Managed ClickHouse](https://docs.langchain.com/langsmith/langsmith-managed-clickhouse):** LangChain operates the ClickHouse cluster, including backups and replication. VPC peering connects it to your LangSmith installation.
+* **[LangSmith Managed ClickHouse](langsmith-managed-clickhouse.md):** LangChain operates the ClickHouse cluster, including backups and replication. VPC peering connects it to your LangSmith installation.
 * **[ClickHouse Cloud](https://clickhouse.cloud/):** Provides built-in backups, replication, and HA. Available on AWS, GCP, and Azure marketplaces.
 
 ### Self-managed replicated cluster
@@ -103,14 +103,14 @@ For an example replicated configuration, see the [replicated ClickHouse example]
 
 ## Blob storage
 
-If you have enabled [blob storage](https://docs.langchain.com/langsmith/self-host-blob-storage) (recommended for production), your run inputs, outputs, errors, manifests, extras, events, and attachments live in S3, GCS, or Azure Blob Storage. Cloud blob services are durable by design, but you should still configure protection against accidental deletion and regional outages.
+If you have enabled [blob storage](self-host-blob-storage.md) (recommended for production), your run inputs, outputs, errors, manifests, extras, events, and attachments live in S3, GCS, or Azure Blob Storage. Cloud blob services are durable by design, but you should still configure protection against accidental deletion and regional outages.
 
 #### AWS
 * Enable [S3 Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html) to protect against accidental deletes and overwrites.
 * Enable [MFA Delete](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html) for high-security buckets.
 * For cross-region DR, configure [Cross-Region Replication (CRR)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html) to a bucket in your DR region.
 * Use [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html) for write-once-read-many (WORM) retention.
-* Encrypt with [SSE-KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html). LangSmith supports passing a specific KMS key ARN, see [KMS encryption header support](https://docs.langchain.com/langsmith/self-host-blob-storage#kms-encryption-header-support).
+* Encrypt with [SSE-KMS](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html). LangSmith supports passing a specific KMS key ARN, see [KMS encryption header support](self-host-blob-storage.md#kms-encryption-header-support).
 
 #### GCP
 * Enable [Object Versioning](https://cloud.google.com/storage/docs/object-versioning) on the bucket.
@@ -124,7 +124,7 @@ If you have enabled [blob storage](https://docs.langchain.com/langsmith/self-hos
 * Encrypt with a [customer-managed key in Key Vault](https://learn.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview).
 
 > [!WARNING]
-> **Keep TTL lifecycle rules in your DR bucket.** If you copy data to a DR bucket, replicate the lifecycle rules for `ttl_s/`, `ttl_l/`, and any custom `ttl_XXd/` prefixes too. Missing rules in the DR bucket will cause data to be retained indefinitely after failover. See [TTL configuration](https://docs.langchain.com/langsmith/self-host-blob-storage#ttl-configuration).
+> **Keep TTL lifecycle rules in your DR bucket.** If you copy data to a DR bucket, replicate the lifecycle rules for `ttl_s/`, `ttl_l/`, and any custom `ttl_XXd/` prefixes too. Missing rules in the DR bucket will cause data to be retained indefinitely after failover. See [TTL configuration](self-host-blob-storage.md#ttl-configuration).
 
 ## Redis
 
@@ -135,16 +135,16 @@ Redis stores ephemeral metadata, queue state, and cross-instance pub/sub. **No d
 * For cross-region DR, provision a fresh Redis instance in the DR region during failover; do **not** reuse an active region's Redis URI in the new cluster.
 
 > [!WARNING]
-> Each LangSmith installation must use its own dedicated Redis instance. **Do not share a Redis instance across two installations**, including a primary and a DR replica that may both be active at any point. Sharing Redis causes deployment tasks to be routed to the wrong cluster. See [Connect external Redis](https://docs.langchain.com/langsmith/self-host-external-redis).
+> Each LangSmith installation must use its own dedicated Redis instance. **Do not share a Redis instance across two installations**, including a primary and a DR replica that may both be active at any point. Sharing Redis causes deployment tasks to be routed to the wrong cluster. See [Connect external Redis](self-host-external-redis.md).
 
 ## Kubernetes configuration and secrets
 
 The Helm chart values, Kubernetes `Secret`s, and identity bindings are as important as your data backups. A complete restore requires both.
 
 * **Helm values:** Store `values.yaml` in source control. Track per-environment overrides separately.
-* **Image versions:** Pin the LangSmith chart version and image tags so a recovery installs the same software version. See [Self-host upgrades](https://docs.langchain.com/langsmith/self-host-upgrades) and [Dependency versions](https://docs.langchain.com/langsmith/self-host-dependency-versions).
-* **Secrets:** LangSmith reads database, blob, and licensing credentials from Kubernetes `Secret`s. Mirror these to your DR cluster's secret manager ([AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [GCP Secret Manager](https://cloud.google.com/secret-manager), or [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault/)). See [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret).
-* **TLS material:** If you terminate TLS at the LangSmith ingress, back up the certificate and key, or reissue from your private CA in the DR region. See [Custom TLS certificates](https://docs.langchain.com/langsmith/self-host-custom-tls-certificates).
+* **Image versions:** Pin the LangSmith chart version and image tags so a recovery installs the same software version. See [Self-host upgrades](self-host-upgrades.md) and [Dependency versions](self-host-dependency-versions.md).
+* **Secrets:** LangSmith reads database, blob, and licensing credentials from Kubernetes `Secret`s. Mirror these to your DR cluster's secret manager ([AWS Secrets Manager](https://aws.amazon.com/secrets-manager/), [GCP Secret Manager](https://cloud.google.com/secret-manager), or [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault/)). See [Use an existing secret](self-host-using-an-existing-secret.md).
+* **TLS material:** If you terminate TLS at the LangSmith ingress, back up the certificate and key, or reissue from your private CA in the DR region. See [Custom TLS certificates](self-host-custom-tls-certificates.md).
 * **IRSA / Workload Identity bindings:** Recreate IAM roles and service-account bindings in the DR region; service account ARNs and annotations are region-scoped.
 * **License key:** Keep the LangSmith license key alongside other recovery secrets.
 
@@ -197,7 +197,7 @@ Confirm the primary region is unavailable. Communicate to stakeholders that you 
 Promote the Postgres cross-region replica to primary in the DR region. For ClickHouse Cloud or LangSmith Managed ClickHouse, initiate the documented region failover. For self-managed ClickHouse, restore the latest backup into the DR cluster (this is typically the longest step).
 
 ### Repoint blob storage
-Update the LangSmith Helm `config.blobStorage.bucketName` and `apiURL` to point at the DR bucket. Confirm the bucket has the same TTL lifecycle rules. See [Blob storage configuration](https://docs.langchain.com/langsmith/self-host-blob-storage#configuration).
+Update the LangSmith Helm `config.blobStorage.bucketName` and `apiURL` to point at the DR bucket. Confirm the bucket has the same TTL lifecycle rules. See [Blob storage configuration](self-host-blob-storage.md#configuration).
 
 ### Provision Redis
 Create a fresh managed Redis instance in the DR region. Update the LangSmith Helm `redis.external` values to point at it. **Do not import dumps from the primary Redis**; provision empty.
@@ -206,7 +206,7 @@ Create a fresh managed Redis instance in the DR region. Update the LangSmith Hel
 If running warm/cold, scale the LangSmith deployments to their production replica counts. Apply any pending Helm value updates from source control.
 
 ### Run smoke tests
-Submit a test trace, verify it lands in ClickHouse and (if blob storage is enabled) in the DR bucket. Open the UI and confirm traces, datasets, and projects load. Validate authentication. See [Diagnostics](https://docs.langchain.com/langsmith/diagnostics-self-hosted).
+Submit a test trace, verify it lands in ClickHouse and (if blob storage is enabled) in the DR bucket. Open the UI and confirm traces, datasets, and projects load. Validate authentication. See [Diagnostics](diagnostics-self-hosted.md).
 
 ### Cut DNS over
 Update DNS to route traffic to the DR ingress. Communicate the cutover to stakeholders.
@@ -240,24 +240,24 @@ Scale `langsmith-queue` and `langsmith-ingest-queue` back to production replica 
 
 A backup is only as good as the last successful restore. Schedule the following exercises:
 
-* **Quarterly:** Restore Postgres and ClickHouse snapshots into a non-production environment and run the [diagnostics tooling](https://docs.langchain.com/langsmith/diagnostics-self-hosted) and a smoke trace test. Measure actual restore time and confirm it is within RTO.
+* **Quarterly:** Restore Postgres and ClickHouse snapshots into a non-production environment and run the [diagnostics tooling](diagnostics-self-hosted.md) and a smoke trace test. Measure actual restore time and confirm it is within RTO.
 * **Twice yearly:** Perform a full cross-region failover drill against a staging installation. Promote the replica, repoint blob storage, scale the DR cluster, run smoke tests, and roll back.
-* **On every chart upgrade:** Verify that the upgrade path does not invalidate your DR plan (for example, schema migrations applied only to the primary will need to replicate to the DR replica). See [Self-host upgrades](https://docs.langchain.com/langsmith/self-host-upgrades).
+* **On every chart upgrade:** Verify that the upgrade path does not invalidate your DR plan (for example, schema migrations applied only to the primary will need to replicate to the DR replica). See [Self-host upgrades](self-host-upgrades.md).
 
 ## Related pages
 
-* [Scalability and resilience](https://docs.langchain.com/langsmith/scalability-and-resilience)
-* [Shared responsibility model](https://docs.langchain.com/langsmith/shared-responsibility-model)
-* [Connect external Postgres](https://docs.langchain.com/langsmith/self-host-external-postgres)
-* [Connect external ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse)
-* [Connect external Redis](https://docs.langchain.com/langsmith/self-host-external-redis)
-* [Enable blob storage](https://docs.langchain.com/langsmith/self-host-blob-storage)
-* [Self-host upgrades](https://docs.langchain.com/langsmith/self-host-upgrades)
-* [Use an existing secret](https://docs.langchain.com/langsmith/self-host-using-an-existing-secret)
-* [Diagnostics for self-hosted](https://docs.langchain.com/langsmith/diagnostics-self-hosted)
-* [AWS self-hosted reference architecture](https://docs.langchain.com/langsmith/aws-self-hosted)
-* [GCP self-hosted reference architecture](https://docs.langchain.com/langsmith/gcp-self-hosted)
-* [Azure self-hosted reference architecture](https://docs.langchain.com/langsmith/azure-self-hosted)
+* [Scalability and resilience](scalability-and-resilience.md)
+* [Shared responsibility model](shared-responsibility-model.md)
+* [Connect external Postgres](self-host-external-postgres.md)
+* [Connect external ClickHouse](self-host-external-clickhouse.md)
+* [Connect external Redis](self-host-external-redis.md)
+* [Enable blob storage](self-host-blob-storage.md)
+* [Self-host upgrades](self-host-upgrades.md)
+* [Use an existing secret](self-host-using-an-existing-secret.md)
+* [Diagnostics for self-hosted](diagnostics-self-hosted.md)
+* [AWS self-hosted reference architecture](aws-self-hosted.md)
+* [GCP self-hosted reference architecture](gcp-self-hosted.md)
+* [Azure self-hosted reference architecture](azure-self-hosted.md)
 
 ***
 

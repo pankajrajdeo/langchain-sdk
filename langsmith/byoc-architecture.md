@@ -78,9 +78,9 @@ Traffic reaches LangSmith through an Istio ingress fronted by an AWS NLB, using 
 
 ## See also
 
-* [BYOC overview](https://docs.langchain.com/langsmith/byoc)
-* [Operations](https://docs.langchain.com/langsmith/byoc-operations)
-* [Egress for billing and operational telemetry](https://docs.langchain.com/langsmith/self-host-egress)
+* [BYOC overview](byoc.md)
+* [Operations](byoc-operations.md)
+* [Egress for billing and operational telemetry](self-host-egress.md)
 
 ***
 

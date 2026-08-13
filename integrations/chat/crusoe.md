@@ -2,7 +2,7 @@
 
 > Integrate with the ChatCrusoe chat model using LangChain Python.
 
-This page will help you get started with Crusoe AI [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all ChatCrusoe features and configurations, head to the [Crusoe managed inference docs](https://docs.crusoecloud.com/managed-inference/overview).
+This page will help you get started with Crusoe AI [chat models](../../langchain/models.md). For detailed documentation of all ChatCrusoe features and configurations, head to the [Crusoe managed inference docs](https://docs.crusoecloud.com/managed-inference/overview).
 
 [Crusoe AI](https://www.crusoe.ai/) provides high-performance managed inference for [leading open-source models](https://docs.crusoecloud.com/managed-inference/overview) via the Crusoe Intelligence Foundry, powered by proprietary MemoryAlloy™ technology for ultra-low latency and high throughput.
 
@@ -16,7 +16,7 @@ This page will help you get started with Crusoe AI [chat models](https://docs.la
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming#llm-tokens) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md#llm-tokens) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-----------------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                                  ✅                                  |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -36,7 +36,7 @@ if "CRUSOE_API_KEY" not in os.environ:
     os.environ["CRUSOE_API_KEY"] = getpass.getpass("Enter your Crusoe API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -116,7 +116,7 @@ J'adore la programmation.
 
 ## Chaining
 
-We can [chain](https://docs.langchain.com/oss/python/langchain/overview) our model with a prompt template like so:
+We can [chain](../../langchain/overview.md) our model with a prompt template like so:
 
 ```python
 from langchain_core.prompts import ChatPromptTemplate

@@ -50,7 +50,7 @@ System fields cannot be encrypted: `langgraph_version`, `langgraph_api_version`,
 > Agent Server versions 0.5.34–0.6.21 included a pre-release version of custom encryption. Data encrypted with these versions will be corrupted when upgrading to 0.6.22+. Do not use custom encryption on these versions.
 
 > [!WARNING]
-> Only use custom encryption if basic encryption doesn't meet your needs. Custom encryption requires you to implement and maintain encryption handlers, and adds operational complexity. If you only need a single static key with optional selective field encryption, use [basic encryption](https://docs.langchain.com/langsmith/encryption#basic-encryption) instead.
+> Only use custom encryption if basic encryption doesn't meet your needs. Custom encryption requires you to implement and maintain encryption handlers, and adds operational complexity. If you only need a single static key with optional selective field encryption, use [basic encryption](#basic-encryption) instead.
 
 Use custom encryption when you need:
 
@@ -59,12 +59,12 @@ Use custom encryption when you need:
 
 ### How it works
 
-1. [Configure](https://docs.langchain.com/langsmith/encryption#configuration) the encryption module path in `langgraph.json`
-2. [Define your encryption module](https://docs.langchain.com/langsmith/encryption#defining-your-encryption-module) with handlers for blob and JSON encryption
-3. [Pass encryption context](https://docs.langchain.com/langsmith/encryption#passing-encryption-context) (like tenant ID) via the `X-Encryption-Context` header
+1. [Configure](#configuration) the encryption module path in `langgraph.json`
+2. [Define your encryption module](#defining-your-encryption-module) with handlers for blob and JSON encryption
+3. [Pass encryption context](#passing-encryption-context) (like tenant ID) via the `X-Encryption-Context` header
 4. LangGraph calls your handlers before storing and after retrieving data
 
-For production deployments with key rotation and audit logging, see [Envelope encryption with AWS Encryption SDK](https://docs.langchain.com/langsmith/encryption#envelope-encryption-with-aws-encryption-sdk).
+For production deployments with key rotation and audit logging, see [Envelope encryption with AWS Encryption SDK](#envelope-encryption-with-aws-encryption-sdk).
 
 ### Configuration
 
@@ -214,7 +214,7 @@ User-defined fields for authorization (e.g., `tenant_id`, `owner`) should genera
 * `cron.metadata`, `cron.payload`
 * `store.value`
 
-[Some fields are excluded from encryption.](https://docs.langchain.com/langsmith/encryption#what-gets-encrypted) Unless otherwise noted, these exclusions apply at every level of a nested JSON object, not just the root level.
+[Some fields are excluded from encryption.](#what-gets-encrypted) Unless otherwise noted, these exclusions apply at every level of a nested JSON object, not just the root level.
 
 **Blob handlers** (`@encryption.encrypt.blob` / `@encryption.decrypt.blob`) are applied to checkpoint blobs (graph execution state).
 
@@ -366,7 +366,7 @@ KMS handles master key rotation automatically. When you enable automatic rotatio
 
 ## Related
 
-* [Custom authentication](https://docs.langchain.com/langsmith/custom-auth)
+* [Custom authentication](custom-auth.md)
 
 ***
 

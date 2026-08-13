@@ -7,7 +7,7 @@ A Slack channel lets people invoke a Managed Deep Agent through app mentions, di
 Slack is a bring-your-own-app integration. You define a Slack app manifest in the agent project.
 
 > [!NOTE]
-> Managed Deep Agents is in **public [beta](https://docs.langchain.com/langsmith/release-stages)** and available on [LangSmith Cloud](https://docs.langchain.com/langsmith/cloud) in the US region only.
+> Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Project structure
 
@@ -41,7 +41,7 @@ The file name sets the channel name to `slack` and mounts its Events API route a
 After setting up the Slack channel, you need to create and deploy your Slack app.
 
 ### Deploy your Managed Deep Agent
-First, [deploy your Managed Deep Agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy).
+First, [deploy your Managed Deep Agent](managed-deep-agents-deploy.md).
 
 ```
 mda deploy .
@@ -193,7 +193,7 @@ async def send_channel_reply(
 
 Pass `{"final": True}` only when the posted message is the final response. It suppresses the automatic reply so the user does not receive the final response twice. A post without that option is an intermediate message and does not suppress auto-reply.
 
-`runtime.channel.post(...)` can post only to the originating Slack thread. Explicit destinations are not supported for channel-originated runs. To send a scheduled result to a specific Slack conversation, use [`deliver_to`](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules#deliver-results-to-slack).
+`runtime.channel.post(...)` can post only to the originating Slack thread. Explicit destinations are not supported for channel-originated runs. To send a scheduled result to a specific Slack conversation, use [`deliver_to`](managed-deep-agents-schedules.md#deliver-results-to-slack).
 
 ## Understand Slack caller identity
 
@@ -229,11 +229,11 @@ Avoid making lasting configuration changes only in the Slack dashboard. A later 
 
 ## See also
 
-* [Channels overview](https://docs.langchain.com/langsmith/python/managed-deep-agents-channels): understand the provider-neutral channel model.
-* [Identity](https://docs.langchain.com/langsmith/python/managed-deep-agents-identity): configure authentication and caller ownership.
-* [Schedules](https://docs.langchain.com/langsmith/python/managed-deep-agents-schedules): deliver scheduled results to Slack.
-* [Custom tools](https://docs.langchain.com/langsmith/python/managed-deep-agents-tools): attach a tool that uses `runtime.channel`.
-* [Deploy an agent](https://docs.langchain.com/langsmith/python/managed-deep-agents-deploy): configure deployment secrets and inspect builds.
+* [Channels overview](managed-deep-agents-channels.md): understand the provider-neutral channel model.
+* [Identity](managed-deep-agents-identity.md): configure authentication and caller ownership.
+* [Schedules](managed-deep-agents-schedules.md): deliver scheduled results to Slack.
+* [Custom tools](managed-deep-agents-tools.md): attach a tool that uses `runtime.channel`.
+* [Deploy an agent](managed-deep-agents-deploy.md): configure deployment secrets and inspect builds.
 
 ***
 

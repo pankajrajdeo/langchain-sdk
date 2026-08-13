@@ -13,7 +13,7 @@ Use `wrap_openai` / `wrapOpenAI` for direct API calls. Use [`@traceable`](https:
 | Traces         | The API call                                                      | The function wrapping it                                                                                              |
 | Metadata       | Client-level only (Python); client-level or per-call (TypeScript) | Per-call via [`langsmith_extra`](https://reference.langchain.com/python/langsmith/run_helpers/SupportsLangsmithExtra) |
 
-To trace OpenAI directly, refer to [Trace OpenAI applications](https://docs.langchain.com/langsmith/trace-openai).
+To trace OpenAI directly, refer to [Trace OpenAI applications](trace-openai.md).
 
 ## Setup
 
@@ -120,8 +120,8 @@ const completion = await client.chat.completions.create(
 
 Some providers have dedicated setup guides that use `@traceable` or a native callback. These approaches trace at the function level rather than wrapping the client directly, or integrate with the provider's own SDK and routing layer.
 
-* [DeepSeek](https://docs.langchain.com/langsmith/trace-deepseek): OpenAI-compatible API; guide uses `@traceable` with custom provider metadata
-* [LiteLLM](https://docs.langchain.com/langsmith/trace-litellm): proxy that exposes an OpenAI-compatible endpoint; guide covers `@traceable` and LiteLLM's built-in LangSmith callback
+* [DeepSeek](trace-deepseek.md): OpenAI-compatible API; guide uses `@traceable` with custom provider metadata
+* [LiteLLM](trace-litellm.md): proxy that exposes an OpenAI-compatible endpoint; guide covers `@traceable` and LiteLLM's built-in LangSmith callback
 
 ***
 

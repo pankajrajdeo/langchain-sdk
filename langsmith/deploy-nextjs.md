@@ -12,7 +12,7 @@ Source: [`js-next`](https://github.com/langchain-ai/deployment-cookbook/tree/mai
 Click **Deploy with Vercel** below, or import [`langchain-ai/deployment-cookbook`](https://github.com/langchain-ai/deployment-cookbook) manually.
 
 <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flangchain-ai%2Fdeployment-cookbook&root-directory=js-next&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20key%20for%20the%20agent%20and%20its%20subagents">
-> **Image:** [Deploy with Vercel](https://docs.langchain.com/langsmith/deploy-nextjs)
+> **Image:** [Deploy with Vercel](deploy-nextjs.md)
 </a>
 
 ### Configure the project
@@ -99,7 +99,7 @@ flowchart TB
 
 Out of the box, the agent uses an in-memory `MemorySaver` checkpointer (`lib/agent/index.ts`) and a process-local session map (`lib/server/registry.ts`). That works for local dev and single-instance servers, but on Vercel (serverless, multiple replicas) conversation state is **not durable** across cold starts or instances.
 
-For production, swap in a [durable checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries):
+For production, swap in a [durable checkpointer](../langgraph/checkpointers.md#checkpointer-libraries):
 
 | Package                                                                                                              | Backend                    |
 | -------------------------------------------------------------------------------------------------------------------- | -------------------------- |
@@ -125,7 +125,7 @@ Use the connection string your Redis provider exposes (Upstash provides both RES
 
 You will also want a shared session/replay store in `lib/server/registry.ts` so SSE reconnection works across serverless invocations. The checkpointer swap is the main step for durable thread history; the session store is a separate concern for live-run replay.
 
-For more information, see [checkpointer libraries](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpointer-libraries) and [add memory / persistence](https://docs.langchain.com/oss/python/langgraph/add-memory).
+For more information, see [checkpointer libraries](../langgraph/checkpointers.md#checkpointer-libraries) and [add memory / persistence](../langgraph/add-memory.md).
 
 ## Local development
 
@@ -153,7 +153,7 @@ pnpm lint    # eslint
 
 ## See also
 
-* [Frameworks and platforms overview](https://docs.langchain.com/langsmith/deploy-frameworks-and-platforms)
+* [Frameworks and platforms overview](deploy-frameworks-and-platforms.md)
 * [Agent Streaming Protocol](https://github.com/langchain-ai/agent-protocol/tree/main/streaming)
 * [`react-custom-backend`](https://github.com/langchain-ai/streaming-cookbook) — original Vite + Hono reference for a custom protocol server
 * [Next.js Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)

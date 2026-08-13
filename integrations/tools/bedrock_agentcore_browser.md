@@ -14,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async | Supports browser interaction |      Pricing      |
+| [Returns artifact](../../langchain/tools.md) | Native async | Supports browser interaction |      Pricing      |
 | :---------------------------------------------: | :----------: | :--------------------------: | :---------------: |
 |                        ✅                        |       ✅      |               ✅              | Pay-per-use (AWS) |
 
@@ -74,7 +74,7 @@ from langchain_aws.tools import create_browser_toolkit
 toolkit, browser_tools = create_browser_toolkit(region="us-west-2")
 ```
 
-The factory function also accepts optional parameters for [proxy configuration](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#proxy-configuration), [browser extensions](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#browser-extensions), and [browser profiles](https://docs.langchain.com/oss/python/integrations/tools/bedrock_agentcore_browser#browser-profiles). See the sections below for details.
+The factory function also accepts optional parameters for [proxy configuration](#proxy-configuration), [browser extensions](#browser-extensions), and [browser profiles](#browser-profiles). See the sections below for details.
 
 ## Proxy configuration
 

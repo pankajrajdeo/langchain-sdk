@@ -2,7 +2,7 @@
 
 > Integrate with the ChatMistralAI chat model using LangChain Python.
 
-This will help you get started with Mistral [chat models](https://docs.langchain.com/oss/python/langchain/models). For detailed documentation of all `ChatMistralAI` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-mistralai/chat_models/ChatMistralAI). The `ChatMistralAI` class is built on top of the [Mistral API](https://docs.mistral.ai/api/). For a list of all the models supported by Mistral, check out [this page](https://docs.mistral.ai/getting-started/models/).
+This will help you get started with Mistral [chat models](../../langchain/models.md). For detailed documentation of all `ChatMistralAI` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-mistralai/chat_models/ChatMistralAI). The `ChatMistralAI` class is built on top of the [Mistral API](https://docs.mistral.ai/api/). For a list of all the models supported by Mistral, check out [this page](https://docs.mistral.ai/getting-started/models/).
 
 ## Overview
 
@@ -14,7 +14,7 @@ This will help you get started with Mistral [chat models](https://docs.langchain
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ❌                            |      ❌      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ❌                             |
 
@@ -34,7 +34,7 @@ if "MISTRAL_API_KEY" not in os.environ:
     os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter your Mistral API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

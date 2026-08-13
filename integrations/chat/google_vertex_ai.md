@@ -5,14 +5,14 @@
 > [!CAUTION]
 > **Deprecated**
 >
-> This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
+> This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 Vertex AI exposes all foundational models available in Google Cloud, like `gemini-2.5-pro`, `gemini-2.5-flash`, etc. For a full and updated list of available models visit [VertexAI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
 
 > [!NOTE]
 > **Google Cloud VertexAI vs Gemini API**
 >
-> The Google Cloud VertexAI integration is separate from the [Google Gemini API](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
+> The Google Cloud VertexAI integration is separate from the [Google Gemini API](google_generative_ai.md). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
 
 > [!TIP]
 > **API Reference**
@@ -29,7 +29,7 @@ Vertex AI exposes all foundational models available in Google Cloud, like `gemin
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -48,7 +48,7 @@ This codebase uses the `google.auth` library which first looks for the applicati
 
 For more information, see the `google.auth` [API reference](https://googleapis.dev/python/google-auth/latest/reference/google.auth.html#module-google.auth).
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")

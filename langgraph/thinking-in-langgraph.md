@@ -77,16 +77,16 @@ Now that we've identified the components in our workflow, let's understand what 
 
 For each node in your graph, determine what type of operation it represents and what context it needs to work properly.
 
-#### [LLM steps](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#llm-steps)
+#### [LLM steps](#llm-steps)
 Use when you need to understand, analyze, generate text, or make reasoning decisions
 
-#### [Data steps](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#data-steps)
+#### [Data steps](#data-steps)
 Use when you need to retrieve information from external sources
 
-#### [Action steps](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#action-steps)
+#### [Action steps](#action-steps)
 Use when you need to perform external actions
 
-#### [User input steps](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#user-input-steps)
+#### [User input steps](#user-input-steps)
 Use when you need human intervention
 
 ### LLM steps
@@ -170,7 +170,7 @@ When a step needs human intervention:
 
 ## Step 3: Design your state
 
-State is the shared [memory](https://docs.langchain.com/oss/python/concepts/memory) accessible to all nodes in your agent. Think of it as the notebook your agent uses to keep track of everything it learns and decides as it works through the process.
+State is the shared [memory](../concepts/memory.md) accessible to all nodes in your agent. Think of it as the notebook your agent uses to keep track of everything it learns and decides as it works through the process.
 
 ### What belongs in state?
 
@@ -253,7 +253,7 @@ Different errors need different handling strategies:
 #### Transient errors
 Add a retry policy to automatically retry network issues and rate limits.
 
-Combine with `timeout=` to cap each attempt. See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance) for the full lifecycle.
+Combine with `timeout=` to cap each attempt. See [Fault tolerance](fault-tolerance.md) for the full lifecycle.
 
 ```python
 from langgraph.types import RetryPolicy
@@ -320,7 +320,7 @@ def send_reply(state: EmailAgentState):
 #### Saga / compensation
 After retries are exhausted, run a recovery function that updates state and routes to a compensation branch.
 
-See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling) for the full pattern.
+See [Fault tolerance](fault-tolerance.md#error-handling) for the full pattern.
 
 > [!NOTE]
 > `error_handler` requires `langgraph>=1.2`.
@@ -343,7 +343,7 @@ workflow.add_node(
 )
 ```
 
-To apply the same `retry_policy`, `timeout`, or `error_handler` to every node in a graph without repeating them on each `add_node`, use `StateGraph.set_node_defaults(...)`. Per-node values still take precedence. See [Fault tolerance](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graph-defaults).
+To apply the same `retry_policy`, `timeout`, or `error_handler` to every node in a graph without repeating them on each `add_node`, use `StateGraph.set_node_defaults(...)`. Per-node values still take precedence. See [Fault tolerance](fault-tolerance.md#graph-defaults).
 
 ### Implementing our email agent nodes
 
@@ -542,7 +542,7 @@ def send_reply(state: EmailAgentState) -> dict:
 
 Now we connect our nodes into a working graph. Since our nodes handle their own routing decisions, we only need a few essential edges.
 
-To enable [human-in-the-loop](https://docs.langchain.com/oss/python/langgraph/interrupts) with `interrupt()`, we need to compile with a [checkpointer](https://docs.langchain.com/oss/python/langgraph/persistence) to save state between runs:
+To enable [human-in-the-loop](interrupts.md) with `interrupt()`, we need to compile with a [checkpointer](persistence.md) to save state between runs:
 
 <details>
 <summary>Graph compilation code</summary>
@@ -653,22 +653,22 @@ The graph pauses when it hits `interrupt()`, saves everything to the checkpointe
 
 Building this email agent has shown us the LangGraph way of thinking:
 
-#### [Break into discrete steps](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#step-1-map-out-your-workflow-as-discrete-steps)
+#### [Break into discrete steps](#step-1-map-out-your-workflow-as-discrete-steps)
 Each node does one thing well. This decomposition enables streaming progress updates, durable execution that can pause and resume, and clear debugging since you can inspect state between steps.
 
-#### [State is shared memory](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#step-3-design-your-state)
+#### [State is shared memory](#step-3-design-your-state)
 Store raw data, not formatted text. This lets different nodes use the same information in different ways.
 
-#### [Nodes are functions](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#step-4-build-your-nodes)
+#### [Nodes are functions](#step-4-build-your-nodes)
 They take state, do work, and return updates. When they need to make routing decisions, they specify both the state updates and the next destination.
 
-#### [Errors are part of the flow](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#handle-errors-appropriately)
+#### [Errors are part of the flow](#handle-errors-appropriately)
 Transient failures get retries, LLM-recoverable errors loop back with context, user-fixable problems pause for input, and unexpected errors bubble up for debugging.
 
-#### [Human input is first-class](https://docs.langchain.com/oss/python/langgraph/interrupts)
+#### [Human input is first-class](interrupts.md)
 The `interrupt()` function pauses execution indefinitely, saves all state, and resumes exactly where it left off when you provide input. When combined with other operations in a node, it must come first.
 
-#### [Graph structure emerges naturally](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph#step-5-wire-it-together)
+#### [Graph structure emerges naturally](#step-5-wire-it-together)
 You define the essential connections, and your nodes handle their own routing logic. This keeps control flow explicit and traceable - you can always understand what your agent will do next by looking at the current node.
 
 ### Advanced considerations
@@ -685,7 +685,7 @@ Or why separate Doc Search from Draft Reply?
 
 The answer involves trade-offs between resilience and observability.
 
-**The resilience consideration:** LangGraph's [persistence layer](https://docs.langchain.com/oss/python/langgraph/persistence) creates checkpoints at node boundaries. When a workflow resumes after an interruption or failure, it starts from the beginning of the node where execution stopped. Smaller nodes mean more frequent checkpoints, which means less work to repeat if something goes wrong. If you combine multiple operations into one large node, a failure near the end means re-executing everything from the start of that node.
+**The resilience consideration:** LangGraph's [persistence layer](persistence.md) creates checkpoints at node boundaries. When a workflow resumes after an interruption or failure, it starts from the beginning of the node where execution stopped. Smaller nodes mean more frequent checkpoints, which means less work to repeat if something goes wrong. If you combine multiple operations into one large node, a failure near the end means re-executing everything from the start of that node.
 
 Why we chose this breakdown for the email agent:
 
@@ -701,7 +701,7 @@ A different valid approach: You could combine `Read Email` and `Classify Intent`
 
 Application-level concerns: The caching discussion in Step 2 (whether to cache search results) is an application-level decision, not a LangGraph framework feature. You implement caching within your node functions based on your specific requirements—LangGraph doesn't prescribe this.
 
-Performance considerations: More nodes doesn't mean slower execution. LangGraph writes checkpoints in the background by default ([async durability mode](https://docs.langchain.com/oss/python/langgraph/checkpointers#durability-modes)), so your graph continues running without waiting for checkpoints to complete. This means you get frequent checkpoints with minimal performance impact. You can adjust this behavior if needed—use `"exit"` mode to checkpoint only at completion, or `"sync"` mode to block execution until each checkpoint is written.
+Performance considerations: More nodes doesn't mean slower execution. LangGraph writes checkpoints in the background by default ([async durability mode](checkpointers.md#durability-modes)), so your graph continues running without waiting for checkpoints to complete. This means you get frequent checkpoints with minimal performance impact. You can adjust this behavior if needed—use `"exit"` mode to checkpoint only at completion, or `"sync"` mode to block execution until each checkpoint is written.
 
 </details>
 
@@ -709,22 +709,22 @@ Performance considerations: More nodes doesn't mean slower execution. LangGraph 
 
 This was an introduction to thinking about building agents with LangGraph. You can extend this foundation with:
 
-#### [Human-in-the-loop patterns](https://docs.langchain.com/oss/python/langgraph/interrupts)
+#### [Human-in-the-loop patterns](interrupts.md)
 Learn how to add tool approval before execution, batch approval, and other patterns
 
-#### [Subgraphs](https://docs.langchain.com/oss/python/langgraph/use-subgraphs)
+#### [Subgraphs](use-subgraphs.md)
 Create subgraphs for complex multi-step operations
 
-#### [Streaming](https://docs.langchain.com/oss/python/langgraph/streaming)
+#### [Streaming](streaming.md)
 Add streaming to show real-time progress to users
 
-#### [Observability](https://docs.langchain.com/oss/python/langgraph/observability)
+#### [Observability](observability.md)
 Add observability with LangSmith for debugging and monitoring
 
-#### [Tool Integration](https://docs.langchain.com/oss/python/langchain/tools)
+#### [Tool Integration](../langchain/tools.md)
 Integrate more tools for web search, database queries, and API calls
 
-#### [Retry Logic](https://docs.langchain.com/oss/python/langgraph/use-graph-api#add-retry-policies)
+#### [Retry Logic](use-graph-api.md#add-retry-policies)
 Implement retry logic with exponential backoff for failed operations
 
 ***

@@ -14,7 +14,7 @@ Now that your package is implemented and tested, you can publish it and list it 
 ## Publishing your package
 
 > [!NOTE]
-> This guide assumes you have already implemented your package and written tests for it. If you haven't, please refer to the [implementation guide](https://docs.langchain.com/oss/python/contributing/implement-langchain) and [testing guide](https://docs.langchain.com/oss/python/contributing/standard-tests-langchain).
+> This guide assumes you have already implemented your package and written tests for it. If you haven't, please refer to the [implementation guide](implement-langchain.md) and [testing guide](standard-tests-langchain.md).
 
 For the purposes of this guide, we'll be using PyPI as the package registry. You may choose to publish to other registries if you prefer; instructions will vary.
 
@@ -46,7 +46,7 @@ Helpful guide from `uv` on how to build and publish a package to PyPI.
 
 ## Make your integration discoverable
 
-After publishing, open a PR in the [LangChain docs repository](https://github.com/langchain-ai/docs) so your package appears under the [integrations tab](https://docs.langchain.com/oss/python/integrations/providers/overview). Which PR you open depends on eligibility for a hosted guide.
+After publishing, open a PR in the [LangChain docs repository](https://github.com/langchain-ai/docs) so your package appears under the [integrations tab](../integrations/providers/overview.md). Which PR you open depends on eligibility for a hosted guide.
 
 ### Eligibility for hosted guides
 
@@ -76,7 +76,7 @@ After merge, the refresh job regenerates the component table snippets so your ro
 
 ### Hosted guide (50K+ or featured)
 
-If your package meets the [eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides), create a documentation page from one of the following templates and open a PR in the docs repo.
+If your package meets the [eligibility criteria](#eligibility-for-hosted-guides), create a documentation page from one of the following templates and open a PR in the docs repo.
 
 Depending on the type of integration you have built, you will need to create different types of documentation pages. LangChain provides templates for different types of integrations to help you get started.
 
@@ -89,11 +89,11 @@ Depending on the type of integration you have built, you will need to create dif
 #### [Vector stores](https://github.com/langchain-ai/docs/blob/main/src/oss/python/integrations/vectorstores/TEMPLATE.mdx)
 
 > [!TIP]
-> To reference existing documentation, you can look at the [list of integrations](https://docs.langchain.com/oss/python/integrations/providers/overview) and find similar ones to yours.
+> To reference existing documentation, you can look at the [list of integrations](../integrations/providers/overview.md) and find similar ones to yours.
 >
 > To view a given documentation page in raw markdown, use the dropdown button next to "Copy page" on the top right of the page and select "View as Markdown".
 
-Make a fork of the [LangChain docs repository](https://github.com/langchain-ai/docs) (not the main `langchain` repo) under a personal GitHub account, and clone it locally. Create a new branch for your integration. Copy the template and modify it using your favorite markdown text editor. Make sure to refer to and follow the [documentation guide](https://docs.langchain.com/oss/python/contributing/documentation) when writing your documentation.
+Make a fork of the [LangChain docs repository](https://github.com/langchain-ai/docs) (not the main `langchain` repo) under a personal GitHub account, and clone it locally. Create a new branch for your integration. Copy the template and modify it using your favorite markdown text editor. Make sure to refer to and follow the [documentation guide](documentation.md) when writing your documentation.
 
 If your package was previously listed in [`integration_external_docs.yaml`](https://github.com/langchain-ai/docs/blob/main/scripts/data/integration_external_docs.yaml), remove that YAML entry in the same PR so the table does not show a duplicate row.
 
@@ -105,25 +105,25 @@ Do not set `featured: true` in frontmatter unless a maintainer asks you to. Feat
 > [!WARNING]
 > We may reject PRs or ask for modification if:
 >
-> * The package does not meet the [hosted-guide eligibility criteria](https://docs.langchain.com/oss/python/contributing/publish-langchain#eligibility-for-hosted-guides)
+> * The package does not meet the [hosted-guide eligibility criteria](#eligibility-for-hosted-guides)
 > * CI checks fail
 > * Severe grammatical errors or typos are present
-> * [Mintlify components](https://docs.langchain.com/oss/python/contributing/documentation#mintlify-components) are used incorrectly
-> * Pages are missing a [frontmatter](https://docs.langchain.com/oss/python/contributing/documentation#page-structure)
-> * [Localization](https://docs.langchain.com/oss/python/contributing/documentation#localization) is missing (where applicable)
-> * [Code examples](https://docs.langchain.com/oss/python/contributing/documentation#in-code-documentation) do not run or have errors
-> * [Quality standards](https://docs.langchain.com/oss/python/contributing/documentation#quality-standards) are not met
+> * [Mintlify components](documentation.md#mintlify-components) are used incorrectly
+> * Pages are missing a [frontmatter](documentation.md#page-structure)
+> * [Localization](documentation.md#localization) is missing (where applicable)
+> * [Code examples](documentation.md#in-code-documentation) do not run or have errors
+> * [Quality standards](documentation.md#quality-standards) are not met
 
 Please be patient as we handle a large volume of PRs. We will review your PR as soon as possible and provide feedback or merge it. **Do not repeatedly tag maintainers about your PR.**
 
 > [!NOTE]
-> If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](https://docs.langchain.com/oss/python/contributing/overview#acceptable-uses-of-llms) policy.
+> If your PR includes AI-generated content, you must follow our [acceptable uses of LLMs](overview.md#acceptable-uses-of-llms) policy.
 
 ## Next steps
 
 **Congratulations!** Your integration is published and listed for the LangChain community.
 
-#### [Co-marketing](https://docs.langchain.com/oss/python/contributing/comarketing)
+#### [Co-marketing](comarketing.md)
 Get in touch with the LangChain marketing team to explore co-marketing opportunities.
 
 ***

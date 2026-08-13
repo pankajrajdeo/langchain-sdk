@@ -52,7 +52,7 @@ async def generate_store():
 
 ## Configure `langgraph.json`
 
-Add the `store` key to your [`langgraph.json` configuration file](https://docs.langchain.com/langsmith/application-structure#configuration-file-concepts). The `path` points to the async context manager you [defined earlier](https://docs.langchain.com/langsmith/custom-store#define-the-store).
+Add the `store` key to your [`langgraph.json` configuration file](application-structure.md#configuration-file-concepts). The `path` points to the async context manager you [defined earlier](#define-the-store).
 
 ```json
 {
@@ -87,8 +87,8 @@ You can deploy this app as-is to LangSmith or to your self-hosted platform.
 
 ## Next steps
 
-* [Use a custom checkpointer](https://docs.langchain.com/langsmith/custom-checkpointer) to replace the built-in checkpoint storage.
-* Learn about [persistence and memory](https://docs.langchain.com/oss/python/langgraph/persistence) in LangGraph.
+* [Use a custom checkpointer](custom-checkpointer.md) to replace the built-in checkpoint storage.
+* Learn about [persistence and memory](../langgraph/persistence.md) in LangGraph.
 
 ***
 

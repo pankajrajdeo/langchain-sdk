@@ -1,23 +1,23 @@
 # Attribute-based access control
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/abac)
-This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](https://docs.langchain.com/langsmith/rbac). For automated user provisioning into roles, see [SCIM](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization).
+This reference explains LangSmith's Attribute-Based Access Control (ABAC) system, which enables fine-grained access control based on resource attributes, complementing [RBAC](rbac.md). For automated user provisioning into roles, see [SCIM](user-management.md#set-up-scim-for-your-organization).
 
 > [!NOTE]
 > ABAC (Attribute-Based Access Control) is an Enterprise feature for managing fine-grained access control. If you are interested in this feature, [contact our sales team](https://www.langchain.com/contact-sales). Other plans default to using the Admin role for all users.
 
-ABAC complements [Role-Based Access Control (RBAC)](https://docs.langchain.com/langsmith/rbac) by adding tag-based conditions to access decisions. While RBAC grants blanket permissions based on a user's role (e.g., "can read all projects"), ABAC lets you restrict or grant access based on resource tags (e.g., "can only read projects tagged with Environment=Development").
+ABAC complements [Role-Based Access Control (RBAC)](rbac.md) by adding tag-based conditions to access decisions. While RBAC grants blanket permissions based on a user's role (e.g., "can read all projects"), ABAC lets you restrict or grant access based on resource tags (e.g., "can only read projects tagged with Environment=Development").
 
 > [!NOTE]
 > Roles and resource tags can be managed via the UI or API. ABAC policies are configurable via the [API](https://api.smith.langchain.com/docs#/access_policies). Once configured, policies are automatically enforced in both the API and the UI.
 
 ## Before you begin
 
-* [Set up resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) in your workspace.
+* [Set up resource tags](set-up-resource-tags.md) in your workspace.
 * ABAC currently only supports `resource_tag_key` as an `attribute_name` in policies, for evaluating against resource tags. No other attributes are supported yet.
 
 ## Enable ABAC for self-hosted deployments
 
-1. ABAC requires a [self-hosted](https://docs.langchain.com/langsmith/self-hosted) LangSmith deployment running Helm chart 0.11.28 or later (application version 0.12.1). Once you've upgraded, use one of the following options to enable ABAC:
+1. ABAC requires a [self-hosted](self-hosted.md) LangSmith deployment running Helm chart 0.11.28 or later (application version 0.12.1). Once you've upgraded, use one of the following options to enable ABAC:
 
    * **Enable for a specific organization:** Run the following against your LangSmith PostgreSQL database, replacing `<organization_id>` with the ID copied from the organization settings page in the UI:
 
@@ -32,9 +32,9 @@ ABAC complements [Role-Based Access Control (RBAC)](https://docs.langchain.com/l
 ```
 
 > [!NOTE]
->      This environment variable has no effect on personal organizations, because [RBAC](https://docs.langchain.com/langsmith/rbac) is not enabled for personal organizations.
+>      This environment variable has no effect on personal organizations, because [RBAC](rbac.md) is not enabled for personal organizations.
 
-2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from an [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) user, or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
+2. Set up authentication. To manage access policies via the API, you need a Personal Access Token (PAT) from an [Organization Admin](rbac.md#organization-admin) user, or an organization-scoped service key with Organization Admin permissions. Set the following environment variables before running any scripts:
 
 ```bash
    export LANGSMITH_API_KEY="your_admin_api_key"
@@ -101,8 +101,8 @@ Each condition group specifies:
 | `dataset`           | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`                                                                                      |
 | `deployment`        | `deployments:read`, `deployments:update`, `deployments:delete`                                                                                                                    |
 | `queues`            | `annotation-queues:create`, `annotation-queues:delete`, `annotation-queues:read`, `annotation-queues:update`                                                                      |
-| `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](https://docs.langchain.com/langsmith/fleet/access-and-oversight#tool-access-control). |
-| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](https://docs.langchain.com/langsmith/fleet/access-and-oversight#tool-access-control).                                             |
+| `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control). |
+| `fleet_integration` | `mcp-servers:read`, `mcp-servers:invoke`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control).                                             |
 
 > [!NOTE]
 > Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
@@ -151,11 +151,11 @@ Policies can be attached to roles when creating the policy, or attached later vi
 
 ## Managing access policies
 
-Access policies are managed via the LangSmith API by [Organization Admins](https://docs.langchain.com/langsmith/rbac#organization-admin). Before creating policies, [set up resource tags](https://docs.langchain.com/langsmith/set-up-resource-tags) in your workspace.
+Access policies are managed via the LangSmith API by [Organization Admins](rbac.md#organization-admin). Before creating policies, [set up resource tags](set-up-resource-tags.md) in your workspace.
 
 ## How ABAC works with RBAC
 
-[RBAC](https://docs.langchain.com/langsmith/rbac) permissions and ABAC policies are both considered when determining access to resources:
+[RBAC](rbac.md) permissions and ABAC policies are both considered when determining access to resources:
 
 * ABAC **deny** policies override RBAC permissions
 * ABAC **allow** policies can grant access even without RBAC permissions
@@ -304,7 +304,7 @@ When ABAC policies are active, resources are access-controlled based on their ta
 
 This is supported on project, dataset, and prompt creation endpoints (including fork and clone operations). Tags are applied atomically in the same database transaction as resource creation.
 
-For full details and examples, see [Tag a resource at creation time](https://docs.langchain.com/langsmith/set-up-resource-tags#tag-a-resource-at-creation-time) in the resource tags guide.
+For full details and examples, see [Tag a resource at creation time](set-up-resource-tags.md#tag-a-resource-at-creation-time) in the resource tags guide.
 
 > [!NOTE]
 > If you rely on the LangSmith SDK to auto-create tracing projects during trace ingestion, the `tag_value_ids` parameter is not available on that auto-create path. To ensure ABAC policies apply from the start, pre-create the project via `POST /api/v1/sessions` with the desired `tag_value_ids` before starting your trace session.

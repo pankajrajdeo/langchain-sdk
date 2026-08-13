@@ -36,7 +36,7 @@ Every data plane creates the following resources in your account. AWS charges fo
 
 There are a few data transfer cost drivers in BYOC:
 
-* Cross-availability-zone traffic, since the data plane runs [highly available](https://docs.langchain.com/langsmith/byoc-operations#high-availability) across zones.
+* Cross-availability-zone traffic, since the data plane runs [highly available](byoc-operations.md#high-availability) across zones.
 * Egress through the NAT gateway, for example if calling model providers, or an external API through a webhook.
 * Public IPv4 addresses, which AWS charges per address-hour. The regional NAT gateway uses one, and an internet-facing load balancer uses another when public ingress is enabled.
 
@@ -55,13 +55,13 @@ AWS enforces default quotas per region and per account. Defaults are often too l
 
 For current default values, see [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html).
 
-If provisioning stalls or fails, an exhausted quota is a common cause, alongside missing permissions and service control policies. See [What happens if provisioning fails?](https://docs.langchain.com/langsmith/byoc-faq).
+If provisioning stalls or fails, an exhausted quota is a common cause, alongside missing permissions and service control policies. See [What happens if provisioning fails?](byoc-faq.md).
 
 ## See also
 
-* [BYOC architecture](https://docs.langchain.com/langsmith/byoc-architecture)
-* [Operations](https://docs.langchain.com/langsmith/byoc-operations)
-* [BYOC FAQ](https://docs.langchain.com/langsmith/byoc-faq)
+* [BYOC architecture](byoc-architecture.md)
+* [Operations](byoc-operations.md)
+* [BYOC FAQ](byoc-faq.md)
 
 ***
 

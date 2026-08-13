@@ -1,10 +1,10 @@
 # Enqueue concurrent
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/enqueue-concurrent)
-This guide assumes knowledge of what double-texting is, which you can learn about in the [double-texting conceptual guide](https://docs.langchain.com/langsmith/double-texting).
+This guide assumes knowledge of what double-texting is, which you can learn about in the [double-texting conceptual guide](double-texting.md).
 
 The guide covers the `enqueue` option for double texting, which adds the interruptions to a queue and executes them in the order they are received by the client. Below is a quick example of using the `enqueue` option.
 
-Enqueue is the default double texting (multi-tasking) strategy when creating runs in the [Agent Server](https://docs.langchain.com/langsmith/agent-server).
+Enqueue is the default double texting (multi-tasking) strategy when creating runs in the [Agent Server](agent-server.md).
 
 ## Setup
 

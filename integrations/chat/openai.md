@@ -12,7 +12,7 @@ You can find information about OpenAI's latest models, their costs, context wind
 > [!WARNING]
 > **API scope**
 >
-> `ChatOpenAI` targets [official OpenAI API specifications](https://github.com/openai/openai-openapi) only. Non-standard response fields from third-party providers (e.g., `reasoning_content`, `reasoning`, `reasoning_details`) **are not extracted or preserved**. If you are using a provider that extends the Chat Completions or Responses formats, such as [OpenRouter](https://openrouter.ai/), [LiteLLM](https://litellm.ai/), [vLLM](https://docs.vllm.ai/), or [DeepSeek](https://api-docs.deepseek.com/), use a provider-specific package instead. See [Chat Completions API compatibility](https://docs.langchain.com/oss/python/integrations/chat#chat-completions-api) for details.
+> `ChatOpenAI` targets [official OpenAI API specifications](https://github.com/openai/openai-openapi) only. Non-standard response fields from third-party providers (e.g., `reasoning_content`, `reasoning`, `reasoning_details`) **are not extracted or preserved**. If you are using a provider that extends the Chat Completions or Responses formats, such as [OpenRouter](https://openrouter.ai/), [LiteLLM](https://litellm.ai/), [vLLM](https://docs.vllm.ai/), or [DeepSeek](https://api-docs.deepseek.com/), use a provider-specific package instead. See [Chat Completions API compatibility](../chat.md#chat-completions-api) for details.
 
 ## Overview
 
@@ -24,7 +24,7 @@ You can find information about OpenAI's latest models, their costs, context wind
 
 ### Model features
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | Image input | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | Image input | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |      ✅      |      ✅      |      ❌      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
 
@@ -60,7 +60,7 @@ If you're routing requests through a proxy or service emulator, you can set the 
 2. `OPENAI_API_BASE` — read by LangChain at init.
 3. `OPENAI_BASE_URL` — read by the underlying `openai` SDK client. LangChain also inspects this to decide whether to default-enable `stream_usage`; when set, the default is left off because many non-OpenAI endpoints don't support streaming token usage.
 
-If you want to get automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+If you want to get automated tracing of your model calls you can also set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -147,7 +147,7 @@ llm = ChatOpenAI(model="gpt-5.4-mini", stream_usage=True)  # [!code highlight]
 >
 > As of `langchain-openai>=1.0.1`, `ChatOpenAI` can be used directly with Azure OpenAI endpoints using the new [v1 API](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/api-version-lifecycle?tabs=python#next-generation-api-1). This provides a unified way to use OpenAI models whether hosted on OpenAI or Azure.
 >
-> For the traditional Azure-specific implementation, continue to use [`AzureChatOpenAI`](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/).
+> For the traditional Azure-specific implementation, continue to use [`AzureChatOpenAI`](azure_chat_openai.md).
 
 <details>
 <summary>Using Azure OpenAI v1 API with API Key</summary>
@@ -314,7 +314,7 @@ ai_msg.tool_calls
   'type': 'tool_call'}]
 ```
 
-For more on binding tools and tool call outputs, head to the [tool calling](https://docs.langchain.com/oss/python/langchain/tools) docs.
+For more on binding tools and tool call outputs, head to the [tool calling](../../langchain/tools.md) docs.
 
 ### Custom tools
 
@@ -437,12 +437,12 @@ Name: do_math
 
 OpenAI supports a native [structured output feature](https://platform.openai.com/docs/guides/structured-outputs), which guarantees that its responses adhere to a given schema.
 
-You can access this feature in individual model calls, or by specifying the [response format](https://docs.langchain.com/oss/python/langchain/structured-output) of a LangChain [agent](https://docs.langchain.com/oss/python/langchain/agents). See below for examples.
+You can access this feature in individual model calls, or by specifying the [response format](../../langchain/structured-output.md) of a LangChain [agent](../../langchain/agents.md). See below for examples.
 
 <details>
 <summary>Individual model calls</summary>
 
-Use the [`with_structured_output`](https://docs.langchain.com/oss/python/langchain/models#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable OpenAI's native structured output feature; otherwise the method defaults to using function calling.
+Use the [`with_structured_output`](../../langchain/models.md#structured-output) method to generate a structured model response. Specify `method="json_schema"` to enable OpenAI's native structured output feature; otherwise the method defaults to using function calling.
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -471,7 +471,7 @@ Movie(title='Inception', year=2010, director='Christopher Nolan', rating=8.8)
 <details>
 <summary>Agent response format</summary>
 
-Specify `response_format` with [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output) to engage OpenAI's structured output feature when generating its final response.
+Specify `response_format` with [`ProviderStrategy`](../../langchain/structured-output.md) to engage OpenAI's structured output feature when generating its final response.
 
 ```python
 from langchain.agents import create_agent
@@ -547,7 +547,7 @@ structured_response = structured_llm.invoke(
 > [!NOTE]
 > **Requires `langchain-openai>=0.3.9`**
 
-OpenAI supports a [Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions) API that is oriented toward building [agentic](https://docs.langchain.com/oss/python/langchain/agents) applications. It includes a suite of [built-in tools](https://platform.openai.com/docs/guides/tools?api-mode=responses), including web and file search. It also supports management of [conversation state](https://platform.openai.com/docs/guides/conversation-state?api-mode=responses), allowing you to continue a conversational thread without explicitly passing in previous messages, as well as the output from [reasoning processes](https://platform.openai.com/docs/guides/reasoning?api-mode=responses).
+OpenAI supports a [Responses](https://platform.openai.com/docs/guides/responses-vs-chat-completions) API that is oriented toward building [agentic](../../langchain/agents.md) applications. It includes a suite of [built-in tools](https://platform.openai.com/docs/guides/tools?api-mode=responses), including web and file search. It also supports management of [conversation state](https://platform.openai.com/docs/guides/conversation-state?api-mode=responses), allowing you to continue a conversational thread without explicitly passing in previous messages, as well as the output from [reasoning processes](https://platform.openai.com/docs/guides/reasoning?api-mode=responses).
 
 [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) will route to the Responses API if one of these features is used. You can also specify `use_responses_api=True` when instantiating [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI).
 
@@ -573,7 +573,7 @@ llm_with_tools = llm.bind_tools([tool])
 response = llm_with_tools.invoke("What was a positive news story from today?")
 ```
 
-Note that the response includes structured [content blocks](https://docs.langchain.com/oss/python/langchain/messages/#message-content) that include both the text of the response and OpenAI [annotations](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses#output-and-citations) citing its sources. The output message will also contain information from any tool invocations:
+Note that the response includes structured [content blocks](../../langchain/messages.md#message-content) that include both the text of the response and OpenAI [annotations](https://platform.openai.com/docs/guides/tools-web-search?api-mode=responses#output-and-citations) citing its sources. The output message will also contain information from any tool invocations:
 
 ```python
 response.content_blocks
@@ -611,7 +611,7 @@ response.content_blocks
 >     print(token, end="|")
 > ```
 >
-> See the [streaming guide](https://docs.langchain.com/oss/python/langchain/streaming/) for more detail.
+> See the [streaming guide](../../langchain/streaming.md) for more detail.
 
 ### Image generation
 
@@ -686,7 +686,7 @@ print(response.text)
 Deep Research by OpenAI is...
 ```
 
-As with [web search](https://docs.langchain.com/oss/python/integrations/chat/openai#web-search), the response will include content blocks with citations:
+As with [web search](#web-search), the response will include content blocks with citations:
 
 ```python
 [block["type"] for block in response.content_blocks]
@@ -729,7 +729,7 @@ response.content_blocks[0]
 > [!NOTE]
 > Requires `langchain-openai>=1.1.11`
 
-OpenAI supports a [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search/) feature allowing models to search for and load tools into its context as needed. OpenAI injects the retrieved tool definitions at the end of the active context to preserve its [cache](https://docs.langchain.com/oss/python/integrations/chat/openai#prompt-caching).
+OpenAI supports a [tool search](https://developers.openai.com/api/docs/guides/tools-tool-search/) feature allowing models to search for and load tools into its context as needed. OpenAI injects the retrieved tool definitions at the end of the active context to preserve its [cache](#prompt-caching).
 
 To engage tool search, mark tools with `@tool(extras={"defer_loading": True})` and add OpenAI's search tool to available tools. See below for examples.
 
@@ -848,10 +848,10 @@ The weather in San Francisco is sunny and 72°F
 
 For full control of the underlying tool search process, you can specify `"execution": "client"` in the search tool definition. If the model elects to search for a tool, it will include a `tool_search_call` block in its response. You can then supply a `tool_search_output` block that includes the tool definition.
 
-The following example shows how you can orchestrate this using [custom middleware](https://docs.langchain.com/oss/python/langchain/middleware/custom). The example implements a callable defining the search logic. The middleware then includes:
+The following example shows how you can orchestrate this using [custom middleware](../../langchain/middleware/custom.md). The example implements a callable defining the search logic. The middleware then includes:
 
 1. An `after_model` hook to check for `tool_search_call` blocks and invoke our callable
-2. A `wrap_tool_call` hook for [runtime tool registration](https://docs.langchain.com/oss/python/langchain/tools#dynamic-tool-selection)
+2. A `wrap_tool_call` hook for [runtime tool registration](../../langchain/tools.md#dynamic-tool-selection)
 
 ```python
 @tool
@@ -1150,7 +1150,7 @@ response_2.text
 'VS Code has been closed, and the desktop is now visible.'
 ```
 
-Instead of passing back the entire sequence, we can also use the [`previous_response_id`](https://docs.langchain.com/oss/python/integrations/chat/openai#passing-previous_response_id):
+Instead of passing back the entire sequence, we can also use the [`previous_response_id`](#passing-previous_response_id):
 
 ```python
 previous_response_id = response.response_metadata["id"]
@@ -1288,7 +1288,7 @@ follow_up = llm_with_tools.invoke(
 ```
 
 > [!TIP]
-> You can also continue the conversation with OpenAI's stateful API by passing `previous_response_id` instead of the full message history. See [Managing conversation state](https://docs.langchain.com/oss/python/integrations/chat/openai#managing-conversation-state).
+> You can also continue the conversation with OpenAI's stateful API by passing `previous_response_id` instead of the full message history. See [Managing conversation state](#managing-conversation-state).
 
 ### Remote MCP
 
@@ -1376,7 +1376,7 @@ The Responses API supports management of [conversation state](https://platform.o
 
 #### Manually manage state
 
-You can manage the state manually or using [LangGraph](https://docs.langchain.com/oss/python/langgraph/quickstart), as with other chat models:
+You can manage the state manually or using [LangGraph](../../langgraph/quickstart.md), as with other chat models:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -1412,7 +1412,9 @@ You mentioned that your name is Bob. How can I assist you further, Bob?
 ```
 
 > [!TIP]
-> **You can use [LangGraph](https://langchain-ai.github.io/langgraph/) to manage conversational threads for you in a variety of backends, including in-memory and Postgres. See [this tutorial](https://docs.langchain.com/oss/python/langgraph/quickstart) to get started.**
+> **You can use [LangGraph](https://langchain-ai.github.io/langgraph/) to manage conversational threads for you in a variety of backends, including in-memory and Postgres. See [this tutorial](../../langgraph/quickstart.md) to get started.**
+
+<a id="passing-previous_response_id"></a>
 
 #### Passing `previous_response_id`
 
@@ -1476,7 +1478,7 @@ model = ChatOpenAI(
 )
 ```
 
-When enabled, `AIMessage` responses may contain blocks with `"type": "compaction"` in content. These should be retained in the conversation history, and can be appended to the message sequence in the [usual way](https://docs.langchain.com/oss/python/langchain/short-term-memory). Messages prior to the most recent `compaction` item can be kept, or discarded to improve latency.
+When enabled, `AIMessage` responses may contain blocks with `"type": "compaction"` in content. These should be retained in the conversation history, and can be appended to the message sequence in the [usual way](../../langchain/short-term-memory.md). Messages prior to the most recent `compaction` item can be kept, or discarded to improve latency.
 
 ### Reasoning output
 
@@ -1516,7 +1518,7 @@ for block in response.content_blocks:
 The user is asking about 3 raised to the power of 3. That's a pretty simple calculation! I know that 3^3 equals 27, so I can say, "3 to the power of 3 equals 27." I might also include a quick explanation that it's 3 multiplied by itself three times: 3 × 3 × 3 = 27. So, the answer is definitely 27.
 ```
 
-For a simpler equivalent, use the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter, which translates to `reasoning.effort` and adds `summary: "auto"`:
+For a simpler equivalent, use the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter, which translates to `reasoning.effort` and adds `summary: "auto"`:
 
 ```python
 llm = ChatOpenAI(model="gpt-5-nano", reasoning_effort="medium")
@@ -1556,13 +1558,13 @@ AIMessage(content="J'adore la programmation.", additional_kwargs={'refusal': Non
 
 ## Multimodal inputs (images, PDFs, audio)
 
-OpenAI has models that support multimodal inputs. You can pass in images, PDFs, or audio to these models. For more information on how to do this in LangChain, head to the [multimodal inputs](https://docs.langchain.com/oss/python/langchain/messages#multimodal) docs.
+OpenAI has models that support multimodal inputs. You can pass in images, PDFs, or audio to these models. For more information on how to do this in LangChain, head to the [multimodal inputs](../../langchain/messages.md#multimodal) docs.
 
 You can see the list of models that support different modalities in [OpenAI's documentation](https://platform.openai.com/docs/models).
 
 For all modalities, LangChain supports both its cross-provider standard as well as OpenAI's native content-block format.
 
-To pass multimodal data into [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI), create a [content block](https://docs.langchain.com/oss/python/langchain/messages/) containing the data and incorporate it into a message, e.g., as below:
+To pass multimodal data into [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI), create a [content block](../../langchain/messages.md) containing the data and incorporate it into a message, e.g., as below:
 
 ```python
 message = {
@@ -1583,7 +1585,7 @@ See below for examples of content blocks.
 <details>
 <summary>Images</summary>
 
-Refer to examples in the [multimodal messages how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+Refer to examples in the [multimodal messages how-to guide](../../langchain/messages.md#multimodal).
 
 ```python
 # LangChain format
@@ -1623,9 +1625,9 @@ content_block = {
 
 Note: OpenAI requires file-names be specified for PDF inputs. When using LangChain's format, include the `filename` key.
 
-Read more about [OpenAI file names for multimodal messages](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+Read more about [OpenAI file names for multimodal messages](../../langchain/messages.md#multimodal).
 
-Refer to examples in the [PDF documents how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+Refer to examples in the [PDF documents how-to guide](../../langchain/messages.md#multimodal).
 
 ```python
 # LangChain format
@@ -1653,7 +1655,7 @@ content_block = {
 
 See [supported models](https://platform.openai.com/docs/models), e.g., `"gpt-4o-audio-preview"`.
 
-Refer to examples in the [audio how-to guide](https://docs.langchain.com/oss/python/langchain/messages#multimodal).
+Refer to examples in the [audio how-to guide](../../langchain/messages.md#multimodal).
 
 ```python
 # LangChain format
@@ -1878,7 +1880,7 @@ response2 = llm.invoke(messages, prompt_cache_key="override-cache-v1")
 ### Explicit caching with breakpoints
 
 > [!NOTE]
-> Requires `langchain-openai>=1.3.5`. Supported on both the Chat Completions API and the [Responses API](https://docs.langchain.com/oss/python/integrations/chat/openai#responses-api).
+> Requires `langchain-openai>=1.3.5`. Supported on both the Chat Completions API and the [Responses API](#responses-api).
 
 OpenAI supports [explicit prompt-cache breakpoints](https://developers.openai.com/api/docs/guides/prompt-caching#prompt-cache-breakpoints), which let you designate specific content blocks as cache boundaries. This gives you fine-grained control over which parts of a prompt are cached, rather than relying solely on automatic prefix caching.
 

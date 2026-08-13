@@ -4,7 +4,7 @@ Make targets, Terraform, kubectl, Azure CLI, and Helm commands for LangSmith sel
 
 Command cheat sheet for day-to-day operations against an Azure LangSmith deployment provisioned with the [Azure Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/azure). All `make` targets run from `modules/azure/`. Run `make help` for an inline summary.
 
-For the full deployment walkthrough, see the [Azure deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-azure-deploy).
+For the full deployment walkthrough, see the [Azure deployment guide](self-host-terraform-azure-deploy.md).
 
 ## Deployment overview
 

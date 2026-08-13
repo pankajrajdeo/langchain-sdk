@@ -75,13 +75,13 @@ LangChain organizes components into these main categories:
 
 | Category                                                             | Purpose                     | Key Components                      | Use Cases                                          |
 | -------------------------------------------------------------------- | --------------------------- | ----------------------------------- | -------------------------------------------------- |
-| **[Models](https://docs.langchain.com/oss/python/langchain/models)**                           | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
-| **[Tools](https://docs.langchain.com/oss/python/langchain/tools)**                             | External capabilities       | APIs, databases, etc.               | Web search, data access, computations              |
-| **[Agents](https://docs.langchain.com/oss/python/langchain/agents)**                           | Orchestration and reasoning | ReAct agents, tool calling agents   | Nondeterministic workflows, decision making        |
-| **[Memory](https://docs.langchain.com/oss/python/langchain/short-term-memory)**                | Context preservation        | Message history, custom state       | Conversations, stateful interactions               |
-| **[Retrievers](https://docs.langchain.com/oss/python/integrations/retrievers)**                | Information access          | Vector retrievers, web retrievers   | RAG, knowledge base search                         |
-| **[Document processing](https://docs.langchain.com/oss/python/integrations/document_loaders)** | Data ingestion              | Loaders, splitters, transformers    | PDF processing, web scraping                       |
-| **[Vector Stores](https://docs.langchain.com/oss/python/integrations/vectorstores)**           | Semantic search             | Chroma, Pinecone, FAISS             | Similarity search, embeddings storage              |
+| **[Models](models.md)**                           | AI reasoning and generation | Chat models, LLMs, Embedding models | Text generation, reasoning, semantic understanding |
+| **[Tools](tools.md)**                             | External capabilities       | APIs, databases, etc.               | Web search, data access, computations              |
+| **[Agents](agents.md)**                           | Orchestration and reasoning | ReAct agents, tool calling agents   | Nondeterministic workflows, decision making        |
+| **[Memory](short-term-memory.md)**                | Context preservation        | Message history, custom state       | Conversations, stateful interactions               |
+| **[Retrievers](../integrations/retrievers.md)**                | Information access          | Vector retrievers, web retrievers   | RAG, knowledge base search                         |
+| **[Document processing](../integrations/document_loaders.md)** | Data ingestion              | Loaders, splitters, transformers    | PDF processing, web scraping                       |
+| **[Vector Stores](../integrations/vectorstores.md)**           | Semantic search             | Chroma, Pinecone, FAISS             | Similarity search, embeddings storage              |
 
 ## Common patterns
 
@@ -149,9 +149,9 @@ graph LR
 
 ## Learn more
 
-* [Creating agents](https://docs.langchain.com/oss/python/langchain/agents)
-* [Working with tools](https://docs.langchain.com/oss/python/langchain/tools)
-* [Browse integrations](https://docs.langchain.com/oss/python/integrations/providers/overview)
+* [Creating agents](agents.md)
+* [Working with tools](tools.md)
+* [Browse integrations](../integrations/providers/overview.md)
 
 ***
 

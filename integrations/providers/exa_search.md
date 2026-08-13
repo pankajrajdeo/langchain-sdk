@@ -16,9 +16,9 @@ In order to use the package, you will also need to set the `EXA_API_KEY` environ
 
 ## Retriever
 
-You can use the [`ExaSearchRetriever`](https://docs.langchain.com/oss/python/integrations/tools/exa_search#using-exasearchretriever) in a standard retrieval pipeline. You can import it as follows.
+You can use the [`ExaSearchRetriever`](../tools/exa_search.md#using-exasearchretriever) in a standard retrieval pipeline. You can import it as follows.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/exa_search).
+See a [usage example](../tools/exa_search.md).
 
 ```python
 from langchain_exa import ExaSearchRetriever
@@ -26,9 +26,9 @@ from langchain_exa import ExaSearchRetriever
 
 ## Tools
 
-You can use Exa as an agent tool as described in the [Exa tool calling docs](https://docs.langchain.com/oss/python/integrations/tools/exa_search#use-within-an-agent).
+You can use Exa as an agent tool as described in the [Exa tool calling docs](../tools/exa_search.md#use-within-an-agent).
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/exa_search).
+See a [usage example](../tools/exa_search.md).
 
 ### ExaFindSimilarResults
 

@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/deepagents/profiles)
 Package per-provider and per-model defaults that Deep Agents applies when a model is selected
 
-**Harness profiles** let you package configuration that Deep Agents applies whenever a given provider or specific model is selected: system-prompt tweaks, tool description overrides, excluded tools or middleware, extra middleware, and general-purpose subagent edits. They are the main way to tune how the harness behaves for a particular model without changing your `create_deep_agent` call site. Use `HarnessProfile` when building profiles in Python; use `HarnessProfileConfig` when [loading or saving YAML/JSON files](https://docs.langchain.com/oss/python/deepagents/profiles#load-profiles-from-config-files). Deep Agents ships built-in harness profiles for OpenAI and Anthropic (Claude) models.
+**Harness profiles** let you package configuration that Deep Agents applies whenever a given provider or specific model is selected: system-prompt tweaks, tool description overrides, excluded tools or middleware, extra middleware, and general-purpose subagent edits. They are the main way to tune how the harness behaves for a particular model without changing your `create_deep_agent` call site. Use `HarnessProfile` when building profiles in Python; use `HarnessProfileConfig` when [loading or saving YAML/JSON files](#load-profiles-from-config-files). Deep Agents ships built-in harness profiles for OpenAI and Anthropic (Claude) models.
 
 **Provider profiles** are a narrower companion API for *model-construction* kwargs, which don't affect the harness. Most callers don't need them; reach for one when you want `init_chat_model` defaults, credential checks, or runtime-derived kwargs as defaults with your provider choice (for example, when packaging a provider integration).
 
@@ -29,7 +29,7 @@ register_harness_profile(
 ```
 
 #### `base_system_prompt` — `string`
-Replace the base Deep Agents system prompt (the `base` key in [System prompt](https://docs.langchain.com/oss/python/deepagents/customization#system-prompt)).
+Replace the base Deep Agents system prompt (the `base` key in [System prompt](customization.md#system-prompt)).
 
 #### `system_prompt_suffix` — `string`
 Append text after the caller's `suffix`, placed last in the assembled system prompt. Applied to the main agent, declarative subagents, and the auto-added general-purpose subagent.
@@ -38,24 +38,24 @@ Append text after the caller's `suffix`, placed last in the assembled system pro
 Override individual tool descriptions, keyed by tool name.
 
 #### `excluded_tools` — `frozenset[str]`
-Remove specific harness-level tools from the tool set. Matched by tool name (string), applied as a post-injection filter so it can drop both user-supplied tools and tools added by harness middleware. See [Running without the default filesystem tools](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) for a worked example.
+Remove specific harness-level tools from the tool set. Matched by tool name (string), applied as a post-injection filter so it can drop both user-supplied tools and tools added by harness middleware. See [Running without the default filesystem tools](overview.md#virtual-filesystem-access) for a worked example.
 
 #### `excluded_middleware` — `frozenset[type[AgentMiddleware] | str]`
-Strip specific middleware classes from the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack). Accepts middleware classes or string names.
+Strip specific middleware classes from the [Deep Agents stack](customization.md#deep-agents-stack). Accepts middleware classes or string names.
 
 #### `extra_middleware` — `Sequence[AgentMiddleware] | Callable[[], Sequence[AgentMiddleware]]`
-Append middleware to every stack this profile applies to. See the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#full-stack) for the built-in ordering.
+Append middleware to every stack this profile applies to. See the [Deep Agents stack](customization.md#full-stack) for the built-in ordering.
 
 #### `general_purpose_subagent` — `GeneralPurposeSubagentProfile`
-Disable, rename, or re-prompt the general-purpose subagent. When this field's `system_prompt` is set alongside `base_system_prompt`, the general-purpose-specific subagent prompt wins—see [General-purpose subagent prompt](https://docs.langchain.com/oss/python/deepagents/customization#general-purpose-subagent-prompt).
+Disable, rename, or re-prompt the general-purpose subagent. When this field's `system_prompt` is set alongside `base_system_prompt`, the general-purpose-specific subagent prompt wins—see [General-purpose subagent prompt](customization.md#general-purpose-subagent-prompt).
 
 > [!NOTE]
-> Caller-supplied `system_prompt=` always sits at the front of the assembled prompt, and `system_prompt_suffix` always sits at the end—regardless of which model is selected. The same overlay rules apply to subagents: each subagent re-runs profile resolution against its own model. See [System prompt](https://docs.langchain.com/oss/python/deepagents/customization#system-prompt) for the full per-case breakdown (main agent, subagents, and the general-purpose subagent).
+> Caller-supplied `system_prompt=` always sits at the front of the assembled prompt, and `system_prompt_suffix` always sits at the end—regardless of which model is selected. The same overlay rules apply to subagents: each subagent re-runs profile resolution against its own model. See [System prompt](customization.md#system-prompt) for the full per-case breakdown (main agent, subagents, and the general-purpose subagent).
 
 > [!WARNING]
-> To run an agent without the `task` tool, see [Running without subagents](https://docs.langchain.com/oss/python/deepagents/subagents#running-without-subagents)—set `general_purpose_subagent=GeneralPurposeSubagentProfile(enabled=False)` and pass no synchronous subagents via `subagents=`. `SubAgentMiddleware` (and the `task` tool) is only attached when at least one synchronous subagent exists, so this configuration leaves it out cleanly. Async subagents are unaffected.
+> To run an agent without the `task` tool, see [Running without subagents](subagents.md#running-without-subagents)—set `general_purpose_subagent=GeneralPurposeSubagentProfile(enabled=False)` and pass no synchronous subagents via `subagents=`. `SubAgentMiddleware` (and the `task` tool) is only attached when at least one synchronous subagent exists, so this configuration leaves it out cleanly. Async subagents are unaffected.
 >
-> Listing `FilesystemMiddleware`, `SubAgentMiddleware`, or the internal permission middleware in `excluded_middleware` raises a `ValueError`—they're required scaffolding in the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack). To hide their tools from the model without removing the middleware, use `excluded_tools` instead—see [Running without the default filesystem tools](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access).
+> Listing `FilesystemMiddleware`, `SubAgentMiddleware`, or the internal permission middleware in `excluded_middleware` raises a `ValueError`—they're required scaffolding in the [Deep Agents stack](customization.md#deep-agents-stack). To hide their tools from the model without removing the middleware, use `excluded_tools` instead—see [Running without the default filesystem tools](overview.md#virtual-filesystem-access).
 
 Entries in `excluded_middleware` accept two forms:
 
@@ -82,7 +82,7 @@ Both profile types use the same key format:
 
 When both a provider-level and a model-level profile exist, they are merged at resolution time. Unset model-level fields inherit from the provider-level profile; explicit model-level values override them.
 
-Re-registering under an existing key merges the new profile on top of the prior one—it does not replace it. See [Merge semantics](https://docs.langchain.com/oss/python/deepagents/profiles#merge-semantics) for the per-field rules.
+Re-registering under an existing key merges the new profile on top of the prior one—it does not replace it. See [Merge semantics](#merge-semantics) for the per-field rules.
 
 > [!NOTE]
 > There is no wildcard key that matches every provider. To apply the same overrides everywhere—say, dropping `SummarizationMiddleware` regardless of which model is selected—register the profile under each provider key you use. Profiles are intended for adjustments that depend on the model being selected. Global adjustments that should apply regardless of model should be made on the `create_deep_agent` call site.
@@ -198,9 +198,9 @@ def register_provider() -> None:
 
 ## Related
 
-* [Harness Overview](https://docs.langchain.com/oss/python/deepagents/overview)—harness capabilities overview
-* [Models](https://docs.langchain.com/oss/python/deepagents/models)—configure model providers and parameters
-* [Customization](https://docs.langchain.com/oss/python/deepagents/customization)—full `create_deep_agent` configuration surface
+* [Harness Overview](overview.md)—harness capabilities overview
+* [Models](models.md)—configure model providers and parameters
+* [Customization](customization.md)—full `create_deep_agent` configuration surface
 
 ***
 

@@ -114,15 +114,15 @@ chat panel to a full workflow debugger without changing the backend protocol.
 
 ## Patterns
 
-#### [Graph execution](https://docs.langchain.com/oss/python/langgraph/frontend/graph-execution)
+#### [Graph execution](graph-execution.md)
 Visualize multi-step graph pipelines with per-node status and streaming content.
 
-#### [Custom stream channels](https://docs.langchain.com/oss/python/langgraph/frontend/custom-stream-channels)
+#### [Custom stream channels](custom-stream-channels.md)
 Stream custom server-side data to the frontend and read it with `useExtension` and `useChannel`.
 
 ## Related patterns
 
-The [LangChain frontend patterns](https://docs.langchain.com/oss/python/langchain/frontend/overview)—markdown messages, tool calling, human-in-the-loop, resumable streams, and time travel—work with any LangGraph graph. The stream API provides the same core data model whether you use `createAgent`, `createDeepAgent`, or a custom `StateGraph`.
+The [LangChain frontend patterns](../../langchain/frontend/overview.md)—markdown messages, tool calling, human-in-the-loop, resumable streams, and time travel—work with any LangGraph graph. The stream API provides the same core data model whether you use `createAgent`, `createDeepAgent`, or a custom `StateGraph`.
 
 ***
 

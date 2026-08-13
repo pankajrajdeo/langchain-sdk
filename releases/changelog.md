@@ -16,8 +16,8 @@ A leaner, more configurable harness by default. On a default-agent turn, input t
 
 ### Features
 
-* **[Override a default middleware instance](https://docs.langchain.com/oss/python/deepagents/customization#middleware)**: A `middleware=` (or subagent `middleware`) instance whose `.name` matches a built-in now replaces that default in place, rather than erroring on a duplicate. For example, pass your own `SummarizationMiddleware(...)` to change the token trigger or summary model without disabling the built-in default. ([#4251](https://github.com/langchain-ai/deepagents/pull/4251))
-* **Filesystem tools**: New [`delete`](https://docs.langchain.com/oss/python/deepagents/tools#built-in-harness-tools) tool removes a file or recursively removes a directory ([#3659](https://github.com/langchain-ai/deepagents/pull/3659), [#3851](https://github.com/langchain-ai/deepagents/pull/3851)); `write_file` now overwrites an existing file instead of erroring ([#4109](https://github.com/langchain-ai/deepagents/pull/4109)); `FilesystemMiddleware` accepts a [tool allowlist](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) to expose only selected built-in tools ([#4325](https://github.com/langchain-ai/deepagents/pull/4325), [#4698](https://github.com/langchain-ai/deepagents/pull/4698)); and reads and searches are tuned for open models — paginated `read_file` reports total and remaining lines plus the next `offset` ([#4540](https://github.com/langchain-ai/deepagents/pull/4540)), `grep`/`glob` return partial results with a `truncated` flag instead of hanging on large trees ([#4063](https://github.com/langchain-ai/deepagents/pull/4063)), and `grep` gains a 1,000-match cap with streamed output and optional context lines ([#4570](https://github.com/langchain-ai/deepagents/pull/4570), [#4706](https://github.com/langchain-ai/deepagents/pull/4706)).
+* **[Override a default middleware instance](../deepagents/customization.md#middleware)**: A `middleware=` (or subagent `middleware`) instance whose `.name` matches a built-in now replaces that default in place, rather than erroring on a duplicate. For example, pass your own `SummarizationMiddleware(...)` to change the token trigger or summary model without disabling the built-in default. ([#4251](https://github.com/langchain-ai/deepagents/pull/4251))
+* **Filesystem tools**: New [`delete`](../deepagents/tools.md#built-in-harness-tools) tool removes a file or recursively removes a directory ([#3659](https://github.com/langchain-ai/deepagents/pull/3659), [#3851](https://github.com/langchain-ai/deepagents/pull/3851)); `write_file` now overwrites an existing file instead of erroring ([#4109](https://github.com/langchain-ai/deepagents/pull/4109)); `FilesystemMiddleware` accepts a [tool allowlist](../deepagents/overview.md#virtual-filesystem-access) to expose only selected built-in tools ([#4325](https://github.com/langchain-ai/deepagents/pull/4325), [#4698](https://github.com/langchain-ai/deepagents/pull/4698)); and reads and searches are tuned for open models — paginated `read_file` reports total and remaining lines plus the next `offset` ([#4540](https://github.com/langchain-ai/deepagents/pull/4540)), `grep`/`glob` return partial results with a `truncated` flag instead of hanging on large trees ([#4063](https://github.com/langchain-ai/deepagents/pull/4063)), and `grep` gains a 1,000-match cap with streamed output and optional context lines ([#4570](https://github.com/langchain-ai/deepagents/pull/4570), [#4706](https://github.com/langchain-ai/deepagents/pull/4706)).
 * **More prompt-caching support**: Bedrock prompt caching via the `deepagents[aws]` extra ([#4108](https://github.com/langchain-ai/deepagents/issues/4108)), and automatic Fireworks prompt-cache session affinity ([#4598](https://github.com/langchain-ai/deepagents/pull/4598)).
 * **NVIDIA support**: A built-in Nemotron 3 Ultra harness profile plus NIM app-origin attribution. ([#4192](https://github.com/langchain-ai/deepagents/pull/4192), [#4455](https://github.com/langchain-ai/deepagents/pull/4455))
 
@@ -63,29 +63,29 @@ Search the codebase for usages of the removed symbols and for parsing logic that
 ## May 12, 2026
 ## `deepagents` v0.6.0
 
-* **[`CodeInterpreterMiddleware`](https://docs.langchain.com/oss/python/deepagents/interpreters)**: (experimental) `deepagents` now supports code execution and programmatic tool calling through a scoped QuickJS runtime.
-* Supports `version="v3"` in `stream_events` / `astream_events`. Refer to the [event streaming](https://docs.langchain.com/oss/python/deepagents/event-streaming) guide for details.
-* **[`DeltaChannel`](https://docs.langchain.com/oss/python/langgraph/pregel#deltachannel) (beta)** ([blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)): Deep Agents now uses `DeltaChannel` for message history and agent files. Rather than re-serializing the full accumulated value into every checkpoint, only the incremental delta written at each step is stored — keeping checkpoint sizes small as threads grow long.
-* **[Harness profiles](https://docs.langchain.com/oss/python/deepagents/profiles)**: Register per-provider or per-model configuration bundles (`HarnessProfile`) that `create_deep_agent` applies automatically when a model is selected — system-prompt tweaks, tool overrides, middleware changes, and subagent defaults — without modifying the call site.
-* **[`ContextHubBackend`](https://docs.langchain.com/oss/python/deepagents/backends#contexthubbackend)** ([blog](https://www.langchain.com/blog/introducing-context-hub)): A new filesystem backend backed by LangSmith Hub. Agent files — skills, memories, and other persisted context — are stored as Hub commits, giving you version history on every write and LangSmith-native durability without provisioning a separate LangGraph store.
+* **[`CodeInterpreterMiddleware`](../deepagents/interpreters.md)**: (experimental) `deepagents` now supports code execution and programmatic tool calling through a scoped QuickJS runtime.
+* Supports `version="v3"` in `stream_events` / `astream_events`. Refer to the [event streaming](../deepagents/event-streaming.md) guide for details.
+* **[`DeltaChannel`](../langgraph/pregel.md#deltachannel) (beta)** ([blog](https://www.langchain.com/blog/delta-channels-evolving-agent-runtime)): Deep Agents now uses `DeltaChannel` for message history and agent files. Rather than re-serializing the full accumulated value into every checkpoint, only the incremental delta written at each step is stored — keeping checkpoint sizes small as threads grow long.
+* **[Harness profiles](../deepagents/profiles.md)**: Register per-provider or per-model configuration bundles (`HarnessProfile`) that `create_deep_agent` applies automatically when a model is selected — system-prompt tweaks, tool overrides, middleware changes, and subagent defaults — without modifying the call site.
+* **[`ContextHubBackend`](../deepagents/backends.md#contexthubbackend)** ([blog](https://www.langchain.com/blog/introducing-context-hub)): A new filesystem backend backed by LangSmith Hub. Agent files — skills, memories, and other persisted context — are stored as Hub commits, giving you version history on every write and LangSmith-native durability without provisioning a separate LangGraph store.
 
 ## May 12, 2026
 ## `langchain` v1.3.0
 
-This release adds support for `version="v3"` in `stream_events` / `astream_events` for `langchain` agents. Refer to the [event streaming](https://docs.langchain.com/oss/python/langchain/event-streaming) guide for details.
+This release adds support for `version="v3"` in `stream_events` / `astream_events` for `langchain` agents. Refer to the [event streaming](../langchain/event-streaming.md) guide for details.
 
 ## May 12, 2026
 ## `langgraph` v1.2.0
 
 This release adds finer-grained control over node execution (timeouts, error recovery, and graceful shutdown), a new channel type that cuts checkpoint overhead for long-running threads, and a new content-block-centric streaming API (v3) with typed, per-channel projections.
 
-* **[`DeltaChannel`](https://docs.langchain.com/oss/python/langgraph/pregel#deltachannel) (beta)**: A new channel type that stores only the incremental delta at each step rather than re-serializing the full accumulated value. Most useful for channels that grow large over time, for example a message list in a long-running thread. Use `snapshot_frequency=K` to write a full snapshot every K steps and bound read latency.
+* **[`DeltaChannel`](../langgraph/pregel.md#deltachannel) (beta)**: A new channel type that stores only the incremental delta at each step rather than re-serializing the full accumulated value. Most useful for channels that grow large over time, for example a message list in a long-running thread. Use `snapshot_frequency=K` to write a full snapshot every K steps and bound read latency.
 
-* **[Per-node timeouts](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#timeouts)**: Pass `timeout=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) to cap how long a single attempt may run. Set a hard wall-clock limit (`run_timeout`), an idle limit that resets on progress (`idle_timeout`), or both via [`TimeoutPolicy`](https://reference.langchain.com/python/langgraph/types/TimeoutPolicy). When the limit fires, LangGraph raises [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError), clears writes from that attempt, and hands off to the retry policy. Async nodes only.
+* **[Per-node timeouts](../langgraph/fault-tolerance.md#timeouts)**: Pass `timeout=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) to cap how long a single attempt may run. Set a hard wall-clock limit (`run_timeout`), an idle limit that resets on progress (`idle_timeout`), or both via [`TimeoutPolicy`](https://reference.langchain.com/python/langgraph/types/TimeoutPolicy). When the limit fires, LangGraph raises [`NodeTimeoutError`](https://reference.langchain.com/python/langgraph/errors/NodeTimeoutError), clears writes from that attempt, and hands off to the retry policy. Async nodes only.
 
-* **[Node-level error handlers](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#error-handling)**: Pass `error_handler=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) to run a recovery function after all retries are exhausted. The handler receives a typed [`NodeError`](https://reference.langchain.com/python/langgraph/errors/NodeError) and can return a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) to update state and route to a different node, useful for Saga/compensation patterns.
+* **[Node-level error handlers](../langgraph/fault-tolerance.md#error-handling)**: Pass `error_handler=` to [`add_node`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph/add_node) to run a recovery function after all retries are exhausted. The handler receives a typed [`NodeError`](https://reference.langchain.com/python/langgraph/errors/NodeError) and can return a [`Command`](https://reference.langchain.com/python/langgraph/types/Command) to update state and route to a different node, useful for Saga/compensation patterns.
 
-* **[Graceful shutdown](https://docs.langchain.com/oss/python/langgraph/fault-tolerance#graceful-shutdown)**: Stop an in-flight run cooperatively after the current superstep completes, and save a resumable checkpoint. Create a [`RunControl`](https://reference.langchain.com/python/langgraph/runtime/RunControl) and call `request_drain()` from any thread; the run raises `GraphDrained` and can be resumed later with the same config.
+* **[Graceful shutdown](../langgraph/fault-tolerance.md#graceful-shutdown)**: Stop an in-flight run cooperatively after the current superstep completes, and save a resumable checkpoint. Create a [`RunControl`](https://reference.langchain.com/python/langgraph/runtime/RunControl) and call `request_drain()` from any thread; the run raises `GraphDrained` and can be resumed later with the same config.
 
 * **New event streaming API (beta)**: Pass `version="v3"` to `stream_events()` / `astream_events()` for a content-block-centric protocol with typed, per-channel projections (`run.values`, `run.messages`, `run.lifecycle`, `run.subgraphs`) plus opt-in transformers for updates, custom events, checkpoints, tasks, and debug. `run.messages` yields one `ChatModelStream` per LLM call with typed sub-projections for text, reasoning, tool calls, and usage. `version="v1"` and `version="v2"` are unchanged.
 
@@ -94,12 +94,12 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 ## Apr 7, 2026
 ## `deepagents` v0.5.0
 
-* **[Async subagents](https://docs.langchain.com/oss/python/deepagents/async-subagents)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) for sub-agents.
+* **[Async subagents](../deepagents/async-subagents.md)**: Deep Agents can launch non-blocking background tasks, so users can continue interacting with the agent while subagents work concurrently. Requires [LangSmith Deployment](../langsmith/deployment.md) for sub-agents.
 
 * **Multi-modal support**: The `read_file` tool now supports PDFs, audio, and video files in addition to images.
 
 * **Backend changes**: We've made backward-compatible changes to the Deep Agents [backend protocol](https://github.com/langchain-ai/deepagents/blob/main/libs/deepagents/deepagents/backends/protocol.py):
-  * Updated the file format stored in [State and Store backends](https://docs.langchain.com/oss/python/deepagents/backends) to support binary files.
+  * Updated the file format stored in [State and Store backends](../deepagents/backends.md) to support binary files.
   * Improved error propagation from backends to tools.
   * You can now instantiate `StateBackend()` and `StoreBackend()` directly. Specifying with a factory (e.g., `backend=(lambda rt: StateBackend(rt))`) is deprecated.
 
@@ -108,9 +108,9 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 ## Mar 10, 2026
 ## `langgraph` v1.1.0
 
-* **Type-safe streaming (`version="v2"`)**: Pass `version="v2"` to `stream()` / `astream()` for unified `StreamPart` output with `type`, `ns`, and `data` keys on every chunk. Each mode has its own `TypedDict`, all importable from `langgraph.types`. See [streaming docs](https://docs.langchain.com/oss/python/langgraph/streaming#stream-output-format-v2).
+* **Type-safe streaming (`version="v2"`)**: Pass `version="v2"` to `stream()` / `astream()` for unified `StreamPart` output with `type`, `ns`, and `data` keys on every chunk. Each mode has its own `TypedDict`, all importable from `langgraph.types`. See [streaming docs](../langgraph/streaming.md#stream-output-format-v2).
 
-* **Type-safe invoke (`version="v2"`)**: Pass `version="v2"` to `invoke()` / `ainvoke()` to get a `GraphOutput` object with `.value` and `.interrupts` attributes. See [invoke docs](https://docs.langchain.com/oss/python/langgraph/streaming#v2-invoke-format).
+* **Type-safe invoke (`version="v2"`)**: Pass `version="v2"` to `invoke()` / `ainvoke()` to get a `GraphOutput` object with `.value` and `.interrupts` attributes. See [invoke docs](../langgraph/streaming.md#v2-invoke-format).
 
 * **Pydantic and dataclass coercion**: With `version="v2"`, `invoke()` and `values`-mode stream output are automatically coerced to your declared Pydantic model or dataclass type.
 
@@ -121,8 +121,8 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 ## Feb 10, 2026
 ## `deepagents` v0.4.0
 
-* New integration packages for pluggable sandboxes: [`langchain-modal`](https://pypi.org/project/langchain-modal/), [`langchain-daytona`](https://pypi.org/project/langchain-daytona/), and [`langchain-runloop`](https://pypi.org/project/langchain-runloop/). See [sandboxes guide](https://docs.langchain.com/oss/python/deepagents/sandboxes) and example [data analysis tutorial](https://docs.langchain.com/oss/python/deepagents/data-analysis).
-* Changes to [conversation history summarization](https://docs.langchain.com/oss/python/deepagents/context-engineering#summarization):
+* New integration packages for pluggable sandboxes: [`langchain-modal`](https://pypi.org/project/langchain-modal/), [`langchain-daytona`](https://pypi.org/project/langchain-daytona/), and [`langchain-runloop`](https://pypi.org/project/langchain-runloop/). See [sandboxes guide](../deepagents/sandboxes.md) and example [data analysis tutorial](../deepagents/data-analysis.md).
+* Changes to [conversation history summarization](../deepagents/context-engineering.md#summarization):
   * Summarization now happens in the model node via `wrap_model_call` events. Due to this we retain the full message history in the graph state.
   * More accurate token counting.
   * Summarization will now automatically trigger if a chat model raises a [`ContextOverflowError`](https://reference.langchain.com/python/langchain-core/exceptions/ContextOverflowError) (defined in `langchain-core`). Currently `langchain-anthropic` and `langchain-openai` support this.
@@ -148,10 +148,10 @@ Timeouts and error handlers are Python-only; retry policies continue to work in 
 ## Dec 15, 2025
 ## `langchain` v1.2.0
 
-* [`create_agent`](https://docs.langchain.com/oss/python/langchain/agents): Simplified support for provider-specific tool parameters and definitions via a new [`extras`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.BaseTool.extras) attribute on [tools](https://docs.langchain.com/oss/python/langchain/tools). Examples:
-  * Provider-specific configuration such as Anthropic's [programmatic tool calling](https://docs.langchain.com/oss/python/integrations/chat/anthropic#programmatic-tool-calling) and [tool search](https://docs.langchain.com/oss/python/integrations/chat/anthropic#tool-search).
-  * Built-in tools that are executed client-side, as supported by [Anthropic](https://docs.langchain.com/oss/python/integrations/chat/anthropic#built-in-tools), [OpenAI](https://docs.langchain.com/oss/python/integrations/chat/openai#responses-api), and other providers.
-* Support for strict schema-adherence in agent `response_format` (see [`ProviderStrategy`](https://docs.langchain.com/oss/python/langchain/structured-output#provider-strategy) docs).
+* [`create_agent`](../langchain/agents.md): Simplified support for provider-specific tool parameters and definitions via a new [`extras`](https://reference.langchain.com/python/langchain/tools/#langchain.tools.BaseTool.extras) attribute on [tools](../langchain/tools.md). Examples:
+  * Provider-specific configuration such as Anthropic's [programmatic tool calling](../integrations/chat/anthropic.md#programmatic-tool-calling) and [tool search](../integrations/chat/anthropic.md#tool-search).
+  * Built-in tools that are executed client-side, as supported by [Anthropic](../integrations/chat/anthropic.md#built-in-tools), [OpenAI](../integrations/chat/openai.md#responses-api), and other providers.
+* Support for strict schema-adherence in agent `response_format` (see [`ProviderStrategy`](../langchain/structured-output.md#provider-strategy) docs).
 
 ## Dec 8, 2025
 ## `langchain-google-genai` v4.0.0
@@ -163,25 +163,25 @@ See the full [release notes and migration guide](https://github.com/langchain-ai
 ## Nov 25, 2025
 ## `langchain` v1.1.0
 
-* [Model profiles](https://docs.langchain.com/oss/python/langchain/models#model-profiles): Chat models now expose supported features and capabilities through a `.profile` attribute. These data are derived from [models.dev](https://models.dev), an open source project providing model capability data.
-* [Summarization middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#summarization): Updated to support flexible trigger points using model profiles for context-aware summarization.
-* [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output): `ProviderStrategy` support (native structured output) can now be inferred from model profiles.
-* [`SystemMessage` for `create_agent`](https://docs.langchain.com/oss/python/langchain/middleware/custom#dynamic-prompt): Support for passing `SystemMessage` instances directly to `create_agent`'s `system_prompt` parameter, enabling advanced features like cache control and structured content blocks.
-* [Model retry middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in#model-retry): New middleware for automatically retrying failed model calls with configurable exponential backoff.
-* [Content moderation middleware](https://docs.langchain.com/oss/python/integrations/middleware/openai#content-moderation): OpenAI content moderation middleware for detecting and handling unsafe content in agent interactions. Supports checking user input, model output, and tool results.
+* [Model profiles](../langchain/models.md#model-profiles): Chat models now expose supported features and capabilities through a `.profile` attribute. These data are derived from [models.dev](https://models.dev), an open source project providing model capability data.
+* [Summarization middleware](../langchain/middleware/built-in.md#summarization): Updated to support flexible trigger points using model profiles for context-aware summarization.
+* [Structured output](../langchain/structured-output.md): `ProviderStrategy` support (native structured output) can now be inferred from model profiles.
+* [`SystemMessage` for `create_agent`](../langchain/middleware/custom.md#dynamic-prompt): Support for passing `SystemMessage` instances directly to `create_agent`'s `system_prompt` parameter, enabling advanced features like cache control and structured content blocks.
+* [Model retry middleware](../langchain/middleware/built-in.md#model-retry): New middleware for automatically retrying failed model calls with configurable exponential backoff.
+* [Content moderation middleware](../integrations/middleware/openai.md#content-moderation): OpenAI content moderation middleware for detecting and handling unsafe content in agent interactions. Supports checking user input, model output, and tool results.
 
 ## Oct 20, 2025
 ## v1.0.0
 
 ### `langchain`
 
-* [Release notes](https://docs.langchain.com/oss/python/releases/langchain-v1)
-* [Migration guide](https://docs.langchain.com/oss/python/migrate/langchain-v1)
+* [Release notes](langchain-v1.md)
+* [Migration guide](../migrate/langchain-v1.md)
 
 ### `langgraph`
 
-* [Release notes](https://docs.langchain.com/oss/python/releases/langgraph-v1)
-* [Migration guide](https://docs.langchain.com/oss/python/migrate/langgraph-v1)
+* [Release notes](langgraph-v1.md)
+* [Migration guide](../migrate/langgraph-v1.md)
 
 > [!NOTE]
 > If you encounter any issues or have feedback, please [open an issue](https://github.com/langchain-ai/docs/issues/new?template=01-langchain.yml) so we can improve. To view v0.x documentation, [go to the archived content](https://github.com/langchain-ai/langchain/tree/v0.3/docs/docs) and [API reference](https://reference.langchain.com/v0.3/python/).

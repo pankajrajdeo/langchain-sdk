@@ -10,7 +10,7 @@ This example shows how to communicate with `watsonx.ai` models using `LangChain`
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx).
+> **Interactive content:** [View this section in the original documentation](ibm_watsonx.md).
 
 ## Setup
 
@@ -116,7 +116,7 @@ watsonx_embedding = WatsonxEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 

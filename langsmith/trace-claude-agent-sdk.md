@@ -24,7 +24,7 @@ npm install @anthropic-ai/claude-agent-sdk langsmith zod
 
 ## Setup
 
-Set your [API keys](https://docs.langchain.com/langsmith/create-account-api-key):
+Set your [API keys](create-account-api-key.md):
 
 ```bash
 export LANGSMITH_TRACING=true

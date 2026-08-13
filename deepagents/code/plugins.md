@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/deepagents/code/plugins)
 Install plugins from marketplaces or package skills, MCP servers, and hooks for Deep Agents Code
 
-Plugins extend Deep Agents Code with reusable [skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills), [MCP servers](https://docs.langchain.com/oss/deepagents/code/mcp-tools), and [hooks](https://docs.langchain.com/oss/deepagents/code/hooks). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. Deep Agents Code supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](https://docs.langchain.com/oss/deepagents/code/plugins#create-a-plugin) and [Create a marketplace](https://docs.langchain.com/oss/deepagents/code/plugins#create-a-marketplace).
+Plugins extend Deep Agents Code with reusable [skills](memory-and-skills.md), [MCP servers](mcp-tools.md), and [hooks](hooks.md). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. Deep Agents Code supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](#create-a-plugin) and [Create a marketplace](#create-a-marketplace).
 
 > [!WARNING]
 > Install plugins and marketplaces only from sources you trust. An enabled plugin can add instructions and run MCP servers or hook commands with your user permissions.
@@ -113,7 +113,7 @@ skills/
     └── checklist.md
 ```
 
-Use the same skill format as standalone Deep Agents Code skills. The installed plugin name becomes the skill namespace. For more information, see [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills#skills).
+Use the same skill format as standalone Deep Agents Code skills. The installed plugin name becomes the skill namespace. For more information, see [Memory and skills](memory-and-skills.md#skills).
 
 ### Add MCP servers
 
@@ -139,11 +139,11 @@ For example:
 }
 ```
 
-For supported MCP transports and fields, see [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools).
+For supported MCP transports and fields, see [MCP tools](mcp-tools.md).
 
 ### Add hooks
 
-Place a hook document at `hooks/hooks.json`, declare a relative `hooks` path, or define hooks inline in the plugin manifest. Hook commands receive the path variables above. See [Hooks](https://docs.langchain.com/oss/deepagents/code/hooks) for the configuration and event reference.
+Place a hook document at `hooks/hooks.json`, declare a relative `hooks` path, or define hooks inline in the plugin manifest. Hook commands receive the path variables above. See [Hooks](hooks.md) for the configuration and event reference.
 
 ## Create a marketplace
 
@@ -208,11 +208,11 @@ dcode plugin install code-review@acme-tools
 
 ## See also
 
-* [Memory and skills](https://docs.langchain.com/oss/deepagents/code/memory-and-skills)
-* [MCP tools](https://docs.langchain.com/oss/deepagents/code/mcp-tools)
-* [Hooks](https://docs.langchain.com/oss/deepagents/code/hooks)
-* [Command reference](https://docs.langchain.com/oss/deepagents/code/cli-reference)
-* [Configuration](https://docs.langchain.com/oss/deepagents/code/configuration)
+* [Memory and skills](memory-and-skills.md)
+* [MCP tools](mcp-tools.md)
+* [Hooks](hooks.md)
+* [Command reference](cli-reference.md)
+* [Configuration](configuration.md)
 
 ***
 

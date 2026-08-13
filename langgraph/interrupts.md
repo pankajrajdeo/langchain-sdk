@@ -1,6 +1,6 @@
 # Interrupts
 > Source: [Original LangChain documentation](https://docs.langchain.com/oss/python/langgraph/interrupts)
-Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When an interrupt is triggered, LangGraph saves the graph state using its [persistence](https://docs.langchain.com/oss/python/langgraph/persistence) layer and waits indefinitely until you resume execution.
+Interrupts allow you to pause graph execution at specific points and wait for external input before continuing. This enables human-in-the-loop patterns where you need external input to proceed. When an interrupt is triggered, LangGraph saves the graph state using its [persistence](persistence.md) layer and waits indefinitely until you resume execution.
 
 Interrupts work by calling the `interrupt()` function at any point in your graph nodes. The function accepts any JSON-serializable value which is surfaced to the caller. When you're ready to continue, you resume execution by re-invoking the graph using `Command`, which then becomes the return value of the `interrupt()` call from inside the node.
 
@@ -8,7 +8,7 @@ Unlike static breakpoints (which pause before or after specific nodes), interrup
 
 * **Checkpointing keeps your place:** the checkpointer writes the exact graph state so you can resume later, even when in an error state.
 * **`thread_id` is your pointer:** set `config={"configurable": {"thread_id": ...}}` to tell the checkpointer which state to load.
-* **Interrupt payloads surface via `stream.interrupts`:** when using [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) (`graph.stream_events(..., version="v3")`), the values you pass to `interrupt()` appear on `stream.interrupts`, and `stream.interrupted` is `True` when the run pauses for input.
+* **Interrupt payloads surface via `stream.interrupts`:** when using [event streaming](event-streaming.md) (`graph.stream_events(..., version="v3")`), the values you pass to `interrupt()` appear on `stream.interrupts`, and `stream.interrupted` is `True` when the run pauses for input.
 
 The `thread_id` you choose is effectively your persistent cursor. Reusing it resumes the same checkpoint; using a new value starts a brand-new thread with an empty state.
 
@@ -39,7 +39,7 @@ When you call [`interrupt`](https://reference.langchain.com/python/langgraph/typ
 
 2. **State is saved** using the checkpointer so execution can be resumed later, In production, this should be a persistent checkpointer (e.g. backed by a database)
 
-3. **Value is returned** to the caller on `stream.interrupts` when using [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) (`graph.stream_events(..., version="v3")`), or under `__interrupt__` with the default `invoke()` API; it can be any JSON-serializable value (string, object, array, etc.)
+3. **Value is returned** to the caller on `stream.interrupts` when using [event streaming](event-streaming.md) (`graph.stream_events(..., version="v3")`), or under `__interrupt__` with the default `invoke()` API; it can be any JSON-serializable value (string, object, array, etc.)
 
 4. **Graph waits indefinitely** until you resume execution with a response
 
@@ -49,7 +49,7 @@ When you call [`interrupt`](https://reference.langchain.com/python/langgraph/typ
 
 After an interrupt pauses execution, you resume the graph by invoking it again with a `Command` that contains the resume value. The resume value is passed back to the `interrupt` call, allowing the node to continue execution with the external input.
 
-The recommended way to drive a graph that may interrupt is [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) — it surfaces interrupts via `stream.interrupts` and `stream.interrupted`, and exposes the final state through `stream.output`.
+The recommended way to drive a graph that may interrupt is [event streaming](event-streaming.md) — it surfaces interrupts via `stream.interrupts` and `stream.interrupted`, and exposes the final state through `stream.output`.
 
 ```python
 from langgraph.types import Command
@@ -85,21 +85,21 @@ final = resumed.output
 * You can pass any JSON-serializable value as the resume value
 
 > [!WARNING]
-> `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`/`stream_events()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](https://docs.langchain.com/oss/python/langgraph/graph-api#command). Do not pass `Command(update=...)` as input to continue multi-turn conversations—pass a plain input dict instead.
+> `Command(resume=...)` is the **only** `Command` pattern intended as input to `invoke()`/`stream()`/`stream_events()`. The other `Command` parameters (`update`, `goto`, `graph`) are designed for [returning from node functions](graph-api.md#command). Do not pass `Command(update=...)` as input to continue multi-turn conversations—pass a plain input dict instead.
 
 ## Common patterns
 
 The key thing that interrupts unlock is the ability to pause execution and wait for external input. This is useful for a variety of use cases, including:
 
-*  [Approval workflows](https://docs.langchain.com/oss/python/langgraph/interrupts#approve-or-reject): Pause before executing critical actions (API calls, database changes, financial transactions)
-*  [Handling multiple interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts#handling-multiple-interrupts): Pair interrupt IDs with resume values when resuming multiple interrupts in a single invocation
-*  [Review and edit](https://docs.langchain.com/oss/python/langgraph/interrupts#review-and-edit-state): Let humans review and modify LLM outputs or tool calls before continuing
-*  [Interrupting tool calls](https://docs.langchain.com/oss/python/langgraph/interrupts#interrupts-in-tools): Pause before executing tool calls to review and edit the tool call before execution
-*  [Validating human input](https://docs.langchain.com/oss/python/langgraph/interrupts#validating-human-input): Pause before proceeding to the next step to validate human input
+*  [Approval workflows](#approve-or-reject): Pause before executing critical actions (API calls, database changes, financial transactions)
+*  [Handling multiple interrupts](#handling-multiple-interrupts): Pair interrupt IDs with resume values when resuming multiple interrupts in a single invocation
+*  [Review and edit](#review-and-edit-state): Let humans review and modify LLM outputs or tool calls before continuing
+*  [Interrupting tool calls](#interrupts-in-tools): Pause before executing tool calls to review and edit the tool call before execution
+*  [Validating human input](#validating-human-input): Pause before proceeding to the next step to validate human input
 
 ### Stream with human-in-the-loop (HITL) interrupts
 
-When building interactive agents with human-in-the-loop workflows, you can use [event streaming](https://docs.langchain.com/oss/python/langgraph/event-streaming) to consume message chunks and state snapshots concurrently while handling interrupts.
+When building interactive agents with human-in-the-loop workflows, you can use [event streaming](event-streaming.md) to consume message chunks and state snapshots concurrently while handling interrupts.
 
 Use the typed projections returned by `graph.stream_events(..., version="v3")` in a loop until the run finishes:
 
@@ -503,7 +503,7 @@ print(resumed.output["messages"][-1])  # -> Tool result returned by send_email
 Sometimes you need to validate input from humans and re-prompt if the value is invalid. The recommended approach is to call `interrupt()` **once per node invocation**, return from the node with the error message stored in state, and use a **conditional edge** to loop back to the node until a valid value is provided.
 
 > [!WARNING]
-> **Avoid `while True` + `interrupt()` loops inside a single node.** Because the node re-runs from the beginning on every resume (see [Rules of interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts#rules-of-interrupts)), a loop that calls `interrupt()` multiple times causes each resume to replay all previous iterations: the first resume replays 1 iteration, the second replays 2, and so on. The result is exponential re-execution of any code inside the loop body.
+> **Avoid `while True` + `interrupt()` loops inside a single node.** Because the node re-runs from the beginning on every resume (see [Rules of interrupts](#rules-of-interrupts)), a loop that calls `interrupt()` multiple times causes each resume to replay all previous iterations: the first resume replays 1 iteration, the second replays 2, and so on. The result is exponential re-execution of any code inside the loop body.
 
 The correct pattern:
 
@@ -664,7 +664,7 @@ def node_a(state: State):
 ```
 
 * 🔴 Do not conditionally skip [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls within a node
-* 🔴 Do not loop [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls using logic that isn't deterministic across executions, including `while True` validation loops. Use a conditional edge instead (see [Validating human input](https://docs.langchain.com/oss/python/langgraph/interrupts#validating-human-input))
+* 🔴 Do not loop [`interrupt`](https://reference.langchain.com/python/langgraph/types/interrupt) calls using logic that isn't deterministic across executions, including `while True` validation loops. Use a conditional edge instead (see [Validating human input](#validating-human-input))
 
 ```python
 def node_a(state: State):
@@ -923,13 +923,13 @@ graph.invoke(None, config=config)  # [!code highlight]
 5. The graph is resumed by passing in `None` for the input. This will run the graph until the next breakpoint is hit.
 
 > [!TIP]
-> To debug your interrupts, use [LangSmith](https://docs.langchain.com/langsmith/observability).
+> To debug your interrupts, use [LangSmith](../langsmith/observability.md).
 
 ### Using LangSmith Studio
 
-You can use [LangSmith Studio](https://docs.langchain.com/langsmith/studio) to set static interrupts in your graph in the UI before running the graph. You can also use the UI to inspect the graph state at any point in the execution.
+You can use [LangSmith Studio](../langsmith/studio.md) to set static interrupts in your graph in the UI before running the graph. You can also use the UI to inspect the graph state at any point in the execution.
 
-> **Image:** [image](https://docs.langchain.com/oss/python/langgraph/interrupts)
+> **Image:** [image](interrupts.md)
 
 ***
 

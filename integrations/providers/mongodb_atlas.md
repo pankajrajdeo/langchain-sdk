@@ -8,7 +8,7 @@
 
 ## Installation and setup
 
-See [detail configuration instructions](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas).
+See [detail configuration instructions](../vectorstores/mongodb_atlas.md).
 
 We need to install `langchain-mongodb` python package.
 
@@ -22,7 +22,7 @@ uv add langchain-mongodb
 
 ## Vector store
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas).
+See a [usage example](../vectorstores/mongodb_atlas.md).
 
 ```python
 from langchain_mongodb import MongoDBAtlasVectorSearch
@@ -82,7 +82,7 @@ set_llm_cache(MongoDBCache(
 ### MongoDBAtlasSemanticCache
 
 Semantic caching allows users to retrieve cached prompts based on semantic similarity between the user input and previously cached results. Under the hood it blends MongoDBAtlas as both a cache and a vectorstore.
-The MongoDBAtlasSemanticCache inherits from `MongoDBAtlasVectorSearch` and needs an Atlas Vector Search Index defined to work. Please look at the [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/mongodb_atlas) on how to set up the index.
+The MongoDBAtlasSemanticCache inherits from `MongoDBAtlasVectorSearch` and needs an Atlas Vector Search Index defined to work. Please look at the [usage example](../vectorstores/mongodb_atlas.md) on how to set up the index.
 
 To import this cache:
 

@@ -90,20 +90,20 @@ agent = create_deep_agent(
 
 | Parameter                                                                         | What it does                                                                                                                                                                                                                                                   |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`model=`](https://docs.langchain.com/oss/python/deepagents/customization#model)                                                                | Which model to use                                                                                                                                                                                                                                             |
-| [`system_prompt=`](https://docs.langchain.com/oss/python/deepagents/customization#system-prompt)                                                | Custom instructions for the agent                                                                                                                                                                                                                              |
-| [`tools=`](https://docs.langchain.com/oss/python/deepagents/customization#tools)                                                                | Domain tools the agent can call                                                                                                                                                                                                                                |
-| [`memory=`](https://docs.langchain.com/oss/python/deepagents/customization#memory)                                                              | AGENTS.md files loaded at startup                                                                                                                                                                                                                              |
-| [`skills=`](https://docs.langchain.com/oss/python/deepagents/customization#skills)                                                              | Skills directory for on-demand knowledge                                                                                                                                                                                                                       |
-| [`backend=`](https://docs.langchain.com/oss/python/deepagents/customization#backends)                                                           | Filesystem backend (StateBackend by default)                                                                                                                                                                                                                   |
-| [`permissions=`](https://docs.langchain.com/oss/python/deepagents/permissions)                              | Path-level access control for the filesystem                                                                                                                                                                                                                   |
-| [`subagents=`](https://docs.langchain.com/oss/python/deepagents/customization#subagents)                                                        | Custom subagents for delegated tasks                                                                                                                                                                                                                           |
-| [`middleware=`](https://docs.langchain.com/oss/python/deepagents/customization#middleware)                                                      | Extra middleware merged into the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack); an instance whose `.name` matches a built-in entry replaces it in place, anything else lands after the last core middleware entry and before the profile, prompt-caching, and memory |
-| [`interrupt_on=`](https://docs.langchain.com/oss/python/deepagents/customization#human-in-the-loop)                                             | Pause before tool calls for human approval                                                                                                                                                                                                                     |
-| [`response_format=`](https://docs.langchain.com/oss/python/deepagents/customization#structured-output)                                          | Structured output schema                                                                                                                                                                                                                                       |
-| [`state_schema=`](https://docs.langchain.com/oss/python/deepagents/context-engineering#custom-state-schema) | Custom graph state schema                                                                                                                                                                                                                                      |
-| [`context_schema=`](https://docs.langchain.com/oss/python/deepagents/context-engineering#runtime-context)   | Per-run runtime context schema (user IDs, API keys, feature flags)                                                                                                                                                                                             |
-| [profiles](https://docs.langchain.com/oss/python/deepagents/customization#profiles)                                                             | Per-model defaults as a reusable bundle                                                                                                                                                                                                                        |
+| [`model=`](#model)                                                                | Which model to use                                                                                                                                                                                                                                             |
+| [`system_prompt=`](#system-prompt)                                                | Custom instructions for the agent                                                                                                                                                                                                                              |
+| [`tools=`](#tools)                                                                | Domain tools the agent can call                                                                                                                                                                                                                                |
+| [`memory=`](#memory)                                                              | AGENTS.md files loaded at startup                                                                                                                                                                                                                              |
+| [`skills=`](#skills)                                                              | Skills directory for on-demand knowledge                                                                                                                                                                                                                       |
+| [`backend=`](#backends)                                                           | Filesystem backend (StateBackend by default)                                                                                                                                                                                                                   |
+| [`permissions=`](permissions.md)                              | Path-level access control for the filesystem                                                                                                                                                                                                                   |
+| [`subagents=`](#subagents)                                                        | Custom subagents for delegated tasks                                                                                                                                                                                                                           |
+| [`middleware=`](#middleware)                                                      | Extra middleware merged into the [Deep Agents stack](#deep-agents-stack); an instance whose `.name` matches a built-in entry replaces it in place, anything else lands after the last core middleware entry and before the profile, prompt-caching, and memory |
+| [`interrupt_on=`](#human-in-the-loop)                                             | Pause before tool calls for human approval                                                                                                                                                                                                                     |
+| [`response_format=`](#structured-output)                                          | Structured output schema                                                                                                                                                                                                                                       |
+| [`state_schema=`](context-engineering.md#custom-state-schema) | Custom graph state schema                                                                                                                                                                                                                                      |
+| [`context_schema=`](context-engineering.md#runtime-context)   | Per-run runtime context schema (user IDs, API keys, feature flags)                                                                                                                                                                                             |
+| [profiles](#profiles)                                                             | Per-model defaults as a reusable bundle                                                                                                                                                                                                                        |
 
 <details>
 <summary>Full function signature</summary>
@@ -134,22 +134,22 @@ create_deep_agent(
 
 </details>
 
-For the full parameter list, see the [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) API reference. To compose a fully custom harness from scratch, see [Configure the harness](https://docs.langchain.com/oss/python/langchain/agents#configure-the-harness) or follow the step-by-step [Build a deep agent from scratch](https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch) guide.
+For the full parameter list, see the [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent) API reference. To compose a fully custom harness from scratch, see [Configure the harness](../langchain/agents.md#configure-the-harness) or follow the step-by-step [Build a deep agent from scratch](../langchain/deep-agent-from-scratch.md) guide.
 
 > [!TIP]
-> As you add tools, subagents, and backends, use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-customization) to trace how each piece behaves together. Follow the [observability quickstart](https://docs.langchain.com/langsmith/observability-quickstart) to get set up, and see [Going to production](https://docs.langchain.com/oss/python/deepagents/going-to-production) for deployment on LangSmith.
+> As you add tools, subagents, and backends, use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-deepagents-customization) to trace how each piece behaves together. Follow the [observability quickstart](../langsmith/observability-quickstart.md) to get set up, and see [Going to production](going-to-production.md) for deployment on LangSmith.
 >
-> We recommend you also set up [LangSmith Engine](https://docs.langchain.com/langsmith/engine), which monitors your traces, detects issues, and proposes fixes.
+> We recommend you also set up [LangSmith Engine](../langsmith/engine.md), which monitors your traces, detects issues, and proposes fixes.
 
 ## Model
 
-Pass a `model` string in `provider:model` format, or an initialized model instance. See [supported models](https://docs.langchain.com/oss/python/deepagents/models#supported-models) for all providers and [suggested models](https://docs.langchain.com/oss/python/deepagents/models#suggested-models) for tested recommendations.
+Pass a `model` string in `provider:model` format, or an initialized model instance. See [supported models](models.md#supported-models) for all providers and [suggested models](models.md#suggested-models) for tested recommendations.
 
 > [!TIP]
 > Use the `provider:model` format (for example `openai:gpt-5.5`) to quickly switch between models.
 
 #### OpenAI
-👉 Read the [OpenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/openai/)
+👉 Read the [OpenAI chat model integration docs](../integrations/chat/openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -193,7 +193,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### Anthropic
-👉 Read the [Anthropic chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/anthropic/)
+👉 Read the [Anthropic chat model integration docs](../integrations/chat/anthropic.md)
 
 ```bash
 pip install -U "langchain[anthropic]"
@@ -237,7 +237,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### Azure
-👉 Read the [Azure chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/azure_chat_openai/)
+👉 Read the [Azure chat model integration docs](../integrations/chat/azure_chat_openai.md)
 
 ```bash
 pip install -U "langchain[openai]"
@@ -293,7 +293,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### Google Gemini
-👉 Read the [Google GenAI chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai/)
+👉 Read the [Google GenAI chat model integration docs](../integrations/chat/google_generative_ai.md)
 
 ```bash
 pip install -U "langchain[google-genai]"
@@ -337,7 +337,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### AWS Bedrock
-👉 Read the [AWS Bedrock chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/bedrock/)
+👉 Read the [AWS Bedrock chat model integration docs](../integrations/chat/bedrock.md)
 
 ```bash
 pip install -U "langchain[aws]"
@@ -387,7 +387,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### HuggingFace
-👉 Read the [HuggingFace chat model integration docs](https://docs.langchain.com/oss/python/integrations/chat/huggingface/)
+👉 Read the [HuggingFace chat model integration docs](../integrations/chat/huggingface.md)
 
 ```bash
 pip install -U "langchain[huggingface]"
@@ -446,7 +446,7 @@ agent = create_deep_agent(model=model)
 ```
 
 #### Other
-Pass any [supported model string](https://docs.langchain.com/oss/python/deepagents/models#supported-models), or an initialized model instance. For example:
+Pass any [supported model string](models.md#supported-models), or an initialized model instance. For example:
 
 ```bash
 pip install -U "langchain[deepseek]"
@@ -483,11 +483,11 @@ agent = create_deep_agent(model=model)
 ```
 
 > [!TIP]
-> Chat models automatically retry transient API failures (with exponential backoff). For defaults, limits, and code samples for tuning `max_retries` / `timeout` live on the LangChain [Models](https://docs.langchain.com/oss/python/langchain/models#connection-resilience) page.
+> Chat models automatically retry transient API failures (with exponential backoff). For defaults, limits, and code samples for tuning `max_retries` / `timeout` live on the LangChain [Models](../langchain/models.md#connection-resilience) page.
 
 ## Tools
 
-In addition to [built-in tools](https://docs.langchain.com/oss/python/deepagents/overview#execution-environment) for file management and subagent spawning, you can provide custom tools:
+In addition to [built-in tools](overview.md#execution-environment) for file management and subagent spawning, you can provide custom tools:
 
 ```python
 import os
@@ -688,7 +688,7 @@ agent = create_deep_agent(
 ### MCP tools
 
 > [!TIP]
-> Deep Agents fully support [Model Context Protocol (MCP)](https://docs.langchain.com/oss/python/langchain/mcp) tools. You can load tools from any MCP server—databases, APIs, file systems, and more—and pass them directly to `create_deep_agent`.
+> Deep Agents fully support [Model Context Protocol (MCP)](../langchain/mcp.md) tools. You can load tools from any MCP server—databases, APIs, file systems, and more—and pass them directly to `create_deep_agent`.
 
 Install `langchain-mcp-adapters` to connect to MCP servers:
 
@@ -899,7 +899,7 @@ async def main():
 asyncio.run(main())
 ```
 
-For detailed configuration options including stdio servers, OAuth authentication, tool filtering, and stateful sessions, see the full [MCP guide](https://docs.langchain.com/oss/python/langchain/mcp).
+For detailed configuration options including stdio servers, OAuth authentication, tool filtering, and stateful sessions, see the full [MCP guide](../langchain/mcp.md).
 
 ## System prompt
 
@@ -1004,19 +1004,19 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
-> Besides a string, the main agent also accepts a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) with structured [content blocks](https://docs.langchain.com/oss/python/langchain/messages#standard-content-blocks); Deep Agents preserve those blocks ([subagent](https://docs.langchain.com/oss/python/deepagents/subagents) dictionary specs remain strings).
+> Besides a string, the main agent also accepts a [`SystemMessage`](https://reference.langchain.com/python/langchain-core/messages/system/SystemMessage) with structured [content blocks](../langchain/messages.md#standard-content-blocks); Deep Agents preserve those blocks ([subagent](subagents.md) dictionary specs remain strings).
 
 <details>
 <summary>Subagent prompts</summary>
 
-Declarative [subagents](https://docs.langchain.com/oss/python/deepagents/subagents) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
+Declarative [subagents](subagents.md) resolve profile overlays against their own model, then apply the resolved profile's `base_system_prompt` / `system_prompt_suffix` to the subagent's authored `system_prompt`. A profile that ships only a `system_prompt_suffix` (the common case for built-in Anthropic / OpenAI profiles) appends to the authored prompt. A profile that sets `base_system_prompt` replaces it outright.
 
 </details>
 
 <details>
 <summary>General-purpose subagent prompt</summary>
 
-The auto-added [general-purpose subagent](https://docs.langchain.com/oss/python/deepagents/subagents#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
+The auto-added [general-purpose subagent](subagents.md#the-general-purpose-subagent) resolves its base prompt as **`general_purpose_subagent.system_prompt` (if set) -> `HarnessProfile.base_system_prompt` (if set) -> SDK general-purpose default**, with the profile suffix layered on top. When both override fields are set, the general-purpose-specific one wins so a caller tuning both fields never sees their GP override silently dropped:
 
 ```python
 from deepagents import (
@@ -1046,20 +1046,20 @@ register_harness_profile(
 
 ## Middleware
 
-Deep Agents support any [middleware](https://docs.langchain.com/oss/python/langchain/middleware/overview), including the built-in middleware listed below, prebuilt middleware from LangChain, provider-specific middleware, and custom middleware you write yourself.
+Deep Agents support any [middleware](../langchain/middleware/overview.md), including the built-in middleware listed below, prebuilt middleware from LangChain, provider-specific middleware, and custom middleware you write yourself.
 
-Pass middleware to the `middleware` argument of `create_deep_agent`. Each instance is merged into the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack) by matching its `.name` against built-in entries already in the stack: a match replaces that instance in place, and anything that does not match is inserted after [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware). See [Override a default middleware instance](https://docs.langchain.com/oss/python/deepagents/customization#override-a-default-middleware-instance).
+Pass middleware to the `middleware` argument of `create_deep_agent`. Each instance is merged into the [Deep Agents stack](#deep-agents-stack) by matching its `.name` against built-in entries already in the stack: a match replaces that instance in place, and anything that does not match is inserted after [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware). See [Override a default middleware instance](#override-a-default-middleware-instance).
 
 ### Deep Agents stack
 
-`create_deep_agent` builds middleware in a fixed order. The [bare stack](https://docs.langchain.com/oss/python/deepagents/customization#bare-stack) is what you get with only a model. The [full stack](https://docs.langchain.com/oss/python/deepagents/customization#full-stack) is the complete assembly order, including slots that appear only when you pass optional arguments or when the resolved [harness profile](https://docs.langchain.com/oss/python/deepagents/profiles) contributes them.
+`create_deep_agent` builds middleware in a fixed order. The [bare stack](#bare-stack) is what you get with only a model. The [full stack](#full-stack) is the complete assembly order, including slots that appear only when you pass optional arguments or when the resolved [harness profile](profiles.md) contributes them.
 
 #### Bare stack
 
 With only a `model` (no other optional arguments), the main agent typically includes:
 
 1. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware)
-2. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware) (because the [general-purpose subagent](https://docs.langchain.com/oss/python/deepagents/subagents#default-subagent) is auto-added unless a harness profile disables it)
+2. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware) (because the [general-purpose subagent](subagents.md#default-subagent) is auto-added unless a harness profile disables it)
 3. [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware)
 4. [`PatchToolCallsMiddleware`](https://reference.langchain.com/python/deepagents/middleware/patch_tool_calls/PatchToolCallsMiddleware)
 5. **Prompt caching** middleware (always registered; each entry no-ops on models it does not support)
@@ -1073,7 +1073,7 @@ From first to last:
 
 2. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware): Handles file system operations such as reading, writing, and navigating directories. When you pass `permissions`, filesystem permissions enforcement is included here so it can evaluate every tool the agent might call.
 
-3. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware): Only when at least one synchronous subagent is available. Spawns and coordinates subagents for delegating tasks. Included in the [bare stack](https://docs.langchain.com/oss/python/deepagents/customization#bare-stack) because the general-purpose subagent is auto-added by default; omit it by disabling that subagent and passing no synchronous `subagents`. See [Running without subagents](https://docs.langchain.com/oss/python/deepagents/subagents#running-without-subagents).
+3. [`SubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/subagents/SubAgentMiddleware): Only when at least one synchronous subagent is available. Spawns and coordinates subagents for delegating tasks. Included in the [bare stack](#bare-stack) because the general-purpose subagent is auto-added by default; omit it by disabling that subagent and passing no synchronous `subagents`. See [Running without subagents](subagents.md#running-without-subagents).
 
 4. [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware): Condenses message history to stay within context limits when conversations grow long (via [create\_summarization\_middleware](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_middleware)).
 
@@ -1081,7 +1081,7 @@ From first to last:
 
 6. [`AsyncSubAgentMiddleware`](https://reference.langchain.com/python/deepagents/middleware/async_subagents/AsyncSubAgentMiddleware): Only when you configure async subagents.
 
-7. **Your middleware argument**: Optional middleware you pass as the `middleware` argument is merged after Patch but before the rest of the stack. An instance whose `.name` matches one of the built-in entries above replaces that instance in place instead of duplicating it; anything else lands here. See [Override a default middleware instance](https://docs.langchain.com/oss/python/deepagents/customization#override-a-default-middleware-instance).
+7. **Your middleware argument**: Optional middleware you pass as the `middleware` argument is merged after Patch but before the rest of the stack. An instance whose `.name` matches one of the built-in entries above replaces that instance in place instead of duplicating it; anything else lands here. See [Override a default middleware instance](#override-a-default-middleware-instance).
 
 8. **Harness profile extras**: Provider-specific middleware from the resolved model profile, if any.
 
@@ -1096,6 +1096,8 @@ From first to last:
 
 12. `HumanInTheLoopMiddleware`: Only when you pass `interrupt_on`. Pauses for human approval or input at configured tool calls.
 
+<a id="general-purpose-subagent-prompt"></a>
+
 ### Synchronous subagent stack
 
 The built-in **general-purpose** subagent and each declarative synchronous `SubAgent` graph use a stack that `create_deep_agent` builds in code. It matches the main agent in broad shape (filesystem, summarization, Patch, profile extras, Anthropic and Bedrock caching, optional permissions) but differs in two ways:
@@ -1107,13 +1109,13 @@ When a declarative subagent sets `interrupt_on`, that value is forwarded to `cre
 
 ### Prebuilt middleware
 
-LangChain exposes additional prebuilt middleware that let you add-on various features, such as retries, fallbacks, or PII detection. See [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in) for more.
+LangChain exposes additional prebuilt middleware that let you add-on various features, such as retries, fallbacks, or PII detection. See [Prebuilt middleware](../langchain/middleware/built-in.md) for more.
 
-The `deepagents` library also exposes [`create_summarization_tool_middleware`](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_tool_middleware), enabling agents to trigger summarization at opportune times—such as between tasks—instead of at fixed token intervals. For more detail, see [Summarization](https://docs.langchain.com/oss/python/deepagents/context-engineering#summarization).
+The `deepagents` library also exposes [`create_summarization_tool_middleware`](https://reference.langchain.com/python/deepagents/middleware/summarization/create_summarization_tool_middleware), enabling agents to trigger summarization at opportune times—such as between tasks—instead of at fixed token intervals. For more detail, see [Summarization](context-engineering.md#summarization).
 
 ### Provider-specific middleware
 
-For provider-specific middleware that is optimized for specific LLM providers, see [Middleware integrations](https://docs.langchain.com/oss/python/integrations/middleware).
+For provider-specific middleware that is optimized for specific LLM providers, see [Middleware integrations](../integrations/middleware.md).
 
 ### Custom middleware
 
@@ -1404,7 +1406,7 @@ agent = create_deep_agent(
 >
 > Mutation in place, such as modifying `self.x` in `before_agent` or changing other shared values in hooks, can lead to subtle bugs and race conditions because many operations run concurrently (subagents, parallel tools, and parallel invocations on different threads).
 >
-> For full details on extending state with custom properties, see [Custom middleware - Custom state schema](https://docs.langchain.com/oss/python/langchain/middleware/custom#custom-state-schema).
+> For full details on extending state with custom properties, see [Custom middleware - Custom state schema](../langchain/middleware/custom.md#custom-state-schema).
 >
 > If you must use mutation in custom middleware, consider what happens when subagents, parallel tools, or concurrent agent invocations run at the same time.
 
@@ -1413,7 +1415,7 @@ agent = create_deep_agent(
 > [!NOTE]
 > Overriding a default middleware by matching `.name` requires `deepagents>=0.7`.
 
-Pass a middleware instance whose `.name` matches an entry in the [Deep Agents stack](https://docs.langchain.com/oss/python/deepagents/customization#deep-agents-stack), such as [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware), to replace that built-in instance in place instead of appending a duplicate. Any middleware you pass whose `.name` does **not** match a built-in entry is not replaced, it lands after the last core middleware entry and before the profile, prompt-caching, and memory. See [Full stack](https://docs.langchain.com/oss/python/deepagents/customization#full-stack) for the complete ordering.
+Pass a middleware instance whose `.name` matches an entry in the [Deep Agents stack](#deep-agents-stack), such as [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware), to replace that built-in instance in place instead of appending a duplicate. Any middleware you pass whose `.name` does **not** match a built-in entry is not replaced, it lands after the last core middleware entry and before the profile, prompt-caching, and memory. See [Full stack](#full-stack) for the complete ordering.
 
 ```python
 from deepagents import create_deep_agent
@@ -1436,11 +1438,11 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
-> An override **replaces** the default middleware instance, it is not merged with it. That means your replacement must be fully configured with any settings it needs. This is especially important for `FilesystemMiddleware`: if you override it, you must pass the `backend` (and `permissions`, if applicable) directly to your custom instance, since it won't inherit the `backend=` and `permissions=` passed to `create_deep_agent()`. To restrict the available filesystem tools, pass a `tools` allowlist to your custom [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance; see [Virtual filesystem access](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) for the "Restricting filesystem tools" example.
+> An override **replaces** the default middleware instance, it is not merged with it. That means your replacement must be fully configured with any settings it needs. This is especially important for `FilesystemMiddleware`: if you override it, you must pass the `backend` (and `permissions`, if applicable) directly to your custom instance, since it won't inherit the `backend=` and `permissions=` passed to `create_deep_agent()`. To restrict the available filesystem tools, pass a `tools` allowlist to your custom [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) instance; see [Virtual filesystem access](overview.md#virtual-filesystem-access) for the "Restricting filesystem tools" example.
 
 The general-purpose subagent, which Deep Agents adds automatically, inherits overrides for its default middleware from the main agent, without carrying over middleware that's specific to the main agent.
 
-Declarative subagents defined via `subagents=` do not inherit the main agent's middleware customization. Pass the override directly in that subagent's own [`middleware`](https://docs.langchain.com/oss/python/deepagents/subagents#subagent-dictionary-based) field to apply it there; that field is matched against the [synchronous subagent stack](https://docs.langchain.com/oss/python/deepagents/customization#synchronous-subagent-stack), the same way `middleware=` is matched against the main agent's.
+Declarative subagents defined via `subagents=` do not inherit the main agent's middleware customization. Pass the override directly in that subagent's own [`middleware`](subagents.md#subagent-dictionary-based) field to apply it there; that field is matched against the [synchronous subagent stack](#synchronous-subagent-stack), the same way `middleware=` is matched against the main agent's.
 
 #### Examples
 
@@ -1477,7 +1479,7 @@ agent = create_deep_agent(
 <details>
 <summary>Update the prompt cache TTL</summary>
 
-Override [`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) to extend the cache lifetime beyond the default `5m` TTL, useful for agents with long gaps between turns. See [Prompt caching](https://docs.langchain.com/oss/python/deepagents/overview#prompt-caching) for how caching is applied by default.
+Override [`AnthropicPromptCachingMiddleware`](https://reference.langchain.com/python/langchain-anthropic/middleware/prompt_caching/AnthropicPromptCachingMiddleware) to extend the cache lifetime beyond the default `5m` TTL, useful for agents with long gaps between turns. See [Prompt caching](overview.md#prompt-caching) for how caching is applied by default.
 
 ```python
 from deepagents import create_deep_agent
@@ -1518,13 +1520,13 @@ agent = create_deep_agent(
 )
 ```
 
-See [Restricting filesystem tools](https://docs.langchain.com/oss/python/deepagents/overview#virtual-filesystem-access) for more details.
+See [Restricting filesystem tools](overview.md#virtual-filesystem-access) for more details.
 
 </details>
 
 ### Interpreters
 
-Use [interpreters](https://docs.langchain.com/oss/python/deepagents/interpreters) to add an `eval` tool that runs JavaScript in a scoped QuickJS runtime. Interpreters are useful when the agent needs to compose tools programmatically, batch work, handle errors in code, or transform structured data without a full shell environment.
+Use [interpreters](interpreters.md) to add an `eval` tool that runs JavaScript in a scoped QuickJS runtime. Interpreters are useful when the agent needs to compose tools programmatically, batch work, handle errors in code, or transform structured data without a full shell environment.
 
 ```python
 from deepagents import create_deep_agent
@@ -1596,7 +1598,7 @@ agent = create_deep_agent(
 )
 ```
 
-For setup, programmatic tool calling, subagent orchestration, and limits, see [Interpreters](https://docs.langchain.com/oss/python/deepagents/interpreters).
+For setup, programmatic tool calling, subagent orchestration, and limits, see [Interpreters](interpreters.md).
 
 ## Subagents
 
@@ -1640,13 +1642,13 @@ agent = create_deep_agent(
 )
 ```
 
-For more information, see [Subagents](https://docs.langchain.com/oss/python/deepagents/subagents).
+For more information, see [Subagents](subagents.md).
 
 ## Backends
 
 Tools for a deep agent can make use of virtual file systems to store, access, and edit files. By default, deep agents use a [`StateBackend`](https://reference.langchain.com/python/deepagents/backends/state/StateBackend).
 
-If you are using [skills](https://docs.langchain.com/oss/python/deepagents/customization#skills) or [memory](https://docs.langchain.com/oss/python/deepagents/customization#memory), you must add the expected skill or memory files to the backend before creating the agent.
+If you are using [skills](#skills) or [memory](#memory), you must add the expected skill or memory files to the backend before creating the agent.
 
 #### StateBackend
 A thread-scoped filesystem backend stored in `langgraph` state.
@@ -1757,7 +1759,7 @@ The local machine's filesystem.
 > [!WARNING]
 > This backend grants agents direct filesystem read/write access.
 > Use with caution and only in appropriate environments.
-> For more information, see [`FilesystemBackend`](https://docs.langchain.com/oss/python/deepagents/backends#filesystembackend-local-disk).
+> For more information, see [`FilesystemBackend`](backends.md#filesystembackend-local-disk).
 
 ```python
 from deepagents import create_deep_agent
@@ -1830,7 +1832,7 @@ agent = create_deep_agent(
 ```
 
 > [!TIP]
-> Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](https://docs.langchain.com/oss/python/deepagents/backends#filesystembackend-local-disk).
+> Wrap `FilesystemBackend` in a `CompositeBackend` to prevent internal agent data (offloaded tool results, conversation history) from being written to disk alongside your project files. See the [recommended pattern](backends.md#filesystembackend-local-disk).
 
 #### LocalShellBackend
 A filesystem with shell execution directly on the host. Provides filesystem tools plus the `execute` tool for running commands.
@@ -1838,7 +1840,7 @@ A filesystem with shell execution directly on the host. Provides filesystem tool
 > [!WARNING]
 > This backend grants agents direct filesystem read/write access **and** unrestricted shell execution on your host.
 > Use with extreme caution and only in appropriate environments.
-> For more information, see [`LocalShellBackend`](https://docs.langchain.com/oss/python/deepagents/backends#localshellbackend-local-shell).
+> For more information, see [`LocalShellBackend`](backends.md#localshellbackend-local-shell).
 
 ```python
 from deepagents import create_deep_agent
@@ -2012,10 +2014,10 @@ agent = create_deep_agent(
 ```
 
 > [!NOTE]
-> When deploying to [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), omit the `store` parameter. The platform automatically provisions a store for your agent.
+> When deploying to [LangSmith Deployment](../langsmith/deployment.md), omit the `store` parameter. The platform automatically provisions a store for your agent.
 
 > [!TIP]
-> The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](https://docs.langchain.com/oss/python/deepagents/backends#namespace-factories) to isolate data per user or tenant.
+> The `namespace` parameter controls data isolation. For multi-user deployments, always set a [namespace factory](backends.md#namespace-factories) to isolate data per user or tenant.
 
 #### ContextHubBackend
 Durable filesystem storage in a LangSmith Hub repo.
@@ -2090,7 +2092,7 @@ agent = create_deep_agent(
 )
 ```
 
-For more details, see [`ContextHubBackend`](https://docs.langchain.com/oss/python/deepagents/backends#contexthubbackend).
+For more details, see [`ContextHubBackend`](backends.md#contexthubbackend).
 
 #### CompositeBackend
 A flexible backend where you can specify different routes in the filesystem to point towards different backends.
@@ -2214,11 +2216,11 @@ agent = create_deep_agent(
 )
 ```
 
-For more information, see [Backends](https://docs.langchain.com/oss/python/deepagents/backends).
+For more information, see [Backends](backends.md).
 
 ### Sandboxes
 
-Sandboxes are specialized [backends](https://docs.langchain.com/oss/python/deepagents/backends) that run agent code in an isolated environment with their own filesystem and an `execute` tool for shell commands.
+Sandboxes are specialized [backends](backends.md) that run agent code in an isolated environment with their own filesystem and an `execute` tool for shell commands.
 Use a sandbox backend when you want your deep agent to write files, install dependencies, and run commands without changing anything on your local machine.
 
 You configure sandboxes by passing a sandbox backend to `backend` when creating your deep agent:
@@ -2461,7 +2463,7 @@ finally:
     sandbox.stop()
 ```
 
-For more information, see [Sandboxes](https://docs.langchain.com/oss/python/deepagents/sandboxes).
+For more information, see [Sandboxes](sandboxes.md).
 
 ## Human-in-the-loop
 
@@ -2714,12 +2716,12 @@ agent = create_deep_agent(
 ```
 
 You can configure interrupt for agents and subagents on tool call as well as from within tool calls.
-For more information, see [Human-in-the-loop](https://docs.langchain.com/oss/python/deepagents/human-in-the-loop).
+For more information, see [Human-in-the-loop](human-in-the-loop.md).
 
 ## Skills
 
-You can use [skills](https://docs.langchain.com/oss/python/deepagents/overview) to provide your deep agent with new capabilities and expertise.
-While [tools](https://docs.langchain.com/oss/python/deepagents/customization#tools) tend to cover lower level functionality like native file system actions, skills can contain detailed instructions on how to complete tasks, reference info, and other assets, such as templates.
+You can use [skills](overview.md) to provide your deep agent with new capabilities and expertise.
+While [tools](#tools) tend to cover lower level functionality like native file system actions, skills can contain detailed instructions on how to complete tasks, reference info, and other assets, such as templates.
 These files are only loaded by the agent when the agent has determined that the skill is useful for the current prompt.
 This progressive disclosure reduces the amount of tokens and context the agent has to consider upon startup.
 
@@ -3041,7 +3043,7 @@ result = agent.invoke(
 Use [`AGENTS.md` files](https://agents.md/) to provide extra context to your deep agent.
 
 > [!TIP]
-> To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](https://docs.langchain.com/oss/openwiki/overview).
+> To generate a repository wiki that coding agents discover through `AGENTS.md`, see [OpenWiki](../OpenWiki/overview.md).
 
 You can pass one or more file paths to the `memory` parameter when creating your deep agent:
 
@@ -3848,7 +3850,7 @@ result = agent.invoke(
 
 ## Profiles
 
-A [harness profile](https://docs.langchain.com/oss/python/deepagents/profiles#harness-profiles) is a reusable bundle of per-model configuration that `create_deep_agent` applies automatically when the matching model is selected. Profiles are the right tool when you want behaviour that follows the model—not the call site—such as a system prompt suffix tuned for Claude's instruction style, tool descriptions rewritten for GPT, or extra middleware that only makes sense with a specific provider.
+A [harness profile](profiles.md#harness-profiles) is a reusable bundle of per-model configuration that `create_deep_agent` applies automatically when the matching model is selected. Profiles are the right tool when you want behaviour that follows the model—not the call site—such as a system prompt suffix tuned for Claude's instruction style, tool descriptions rewritten for GPT, or extra middleware that only makes sense with a specific provider.
 
 A single profile can carry: a custom base system prompt (`base_system_prompt`), an appended suffix (`system_prompt_suffix`), tool description overrides, tools or middleware to exclude, additional middleware to inject, and edits to the auto-added general-purpose subagent.
 
@@ -3862,11 +3864,11 @@ register_harness_profile(
 )
 ```
 
-See [Profiles](https://docs.langchain.com/oss/python/deepagents/profiles) for registration keys, merge semantics, and plugin packaging. A narrower companion API, [provider profiles](https://docs.langchain.com/oss/python/deepagents/profiles#provider-profiles), packages model-construction arguments (API keys, timeouts, retry settings) for a provider.
+See [Profiles](profiles.md) for registration keys, merge semantics, and plugin packaging. A narrower companion API, [provider profiles](profiles.md#provider-profiles), packages model-construction arguments (API keys, timeouts, retry settings) for a provider.
 
 ## Structured output
 
-Deep Agents support [structured output](https://docs.langchain.com/oss/python/langchain/structured-output).
+Deep Agents support [structured output](../langchain/structured-output.md).
 You can set a desired structured output schema by passing it as the `response_format` argument to the call to `create_deep_agent()`.
 When the model generates the structured data, it's captured, validated, and returned in the 'structured\_response' key of the deep agent's state.
 
@@ -3927,11 +3929,11 @@ print(result["structured_response"])
 # location='San Francisco, California' temperature=18.3 condition='Sunny' humidity=48 wind_speed=7.6 forecast='Pleasant sunny conditions expected to continue with temperatures around 64°F (18°C) during the day, dropping to around 52°F (11°C) at night. Clear skies with minimal precipitation expected.'
 ```
 
-For more information and examples, see [response format](https://docs.langchain.com/oss/python/langchain/structured-output#response-format).
+For more information and examples, see [response format](../langchain/structured-output.md#response-format).
 
 ## Advanced
 
-`create_deep_agent` pre-assembles a middleware stack on top of [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent). To build a fully custom agent—choosing exactly which capabilities to include—see [Configure the harness](https://docs.langchain.com/oss/python/langchain/agents#configure-the-harness).
+`create_deep_agent` pre-assembles a middleware stack on top of [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent). To build a fully custom agent—choosing exactly which capabilities to include—see [Configure the harness](../langchain/agents.md#configure-the-harness).
 
 ***
 

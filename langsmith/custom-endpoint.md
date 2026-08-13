@@ -33,11 +33,11 @@ Once you have deployed a model server, you can use it in the Playground. Enter t
 
 Enter the `URL`. The Playground will automatically detect the available endpoints and configurable fields. You can then invoke the model with the desired parameters.
 
-> **Image:** [ChatCustomModel in Playground](https://docs.langchain.com/langsmith/custom-endpoint)
+> **Image:** [ChatCustomModel in Playground](custom-endpoint.md)
 
 If everything is set up correctly, you should see the model's response in the Playground as well as the configurable fields specified in the `with_configurable_fields`.
 
-For more information, see [how to store your model configuration for later use](https://docs.langchain.com/langsmith/managing-model-configurations).
+For more information, see [how to store your model configuration for later use](managing-model-configurations.md).
 
 ***
 

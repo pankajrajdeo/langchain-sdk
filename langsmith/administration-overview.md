@@ -6,7 +6,7 @@ This overview covers topics related to managing users, organizations, workspaces
 
 ### Organizations
 
-An organization is a logical grouping of users within LangSmith that defines shared settings applying across all of its workspaces. These settings govern organization-wide concerns rather than individual projects within a workspace. Common organization-level configurations include user management, single sign-on (SSO), OAuth provider configuration, custom role creation, billing, and usage tracking. Typically, there is one organization per company. An organization can have multiple workspaces. For more details, see the [setup guide](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-an-organization).
+An organization is a logical grouping of users within LangSmith that defines shared settings applying across all of its workspaces. These settings govern organization-wide concerns rather than individual projects within a workspace. Common organization-level configurations include user management, single sign-on (SSO), OAuth provider configuration, custom role creation, billing, and usage tracking. Typically, there is one organization per company. An organization can have multiple workspaces. For more details, see the [setup guide](set-up-hierarchy.md#set-up-an-organization).
 
 When you log in for the first time, a personal organization will be created for you automatically. If you'd like to collaborate with others, you can create a separate organization and invite your team members to join. There are a few important differences between your personal organization and shared organizations:
 
@@ -21,15 +21,15 @@ When you log in for the first time, a personal organization will be created for 
 > [!NOTE]
 > Workspaces were formerly called Tenants. Some code and APIs may still reference the old name for a period of time during the transition.
 
-A workspace is a logical grouping of users and resources within an organization. Workspaces are commonly used to isolate teams or business units, providing separation between projects and their associated resources. A workspace separates trust boundaries for resources and access control. Users are granted permissions at the workspace level, which determine their access to resources in that workspace, including tracing projects, datasets, annotation queues, and prompts. For details on setup, see the [setup guide](https://docs.langchain.com/langsmith/set-up-hierarchy#set-up-a-workspace) and for details on permissions see [Workspaces (RBAC)](https://docs.langchain.com/langsmith/administration-overview#workspace-roles-rbac).
+A workspace is a logical grouping of users and resources within an organization. Workspaces are commonly used to isolate teams or business units, providing separation between projects and their associated resources. A workspace separates trust boundaries for resources and access control. Users are granted permissions at the workspace level, which determine their access to resources in that workspace, including tracing projects, datasets, annotation queues, and prompts. For details on setup, see the [setup guide](set-up-hierarchy.md#set-up-a-workspace) and for details on permissions see [Workspaces (RBAC)](#workspace-roles-rbac).
 
-We recommend creating a separate workspace for each team within your organization. To organize resources even further, you can use [Applications](https://docs.langchain.com/langsmith/administration-overview#applications) to group resources within a workspace. For guidance on different workspace organization models based on your team's isolation requirements, refer to [Workload isolation](https://docs.langchain.com/langsmith/workload-isolation).
+We recommend creating a separate workspace for each team within your organization. To organize resources even further, you can use [Applications](#applications) to group resources within a workspace. For guidance on different workspace organization models based on your team's isolation requirements, refer to [Workload isolation](workload-isolation.md).
 
 ### Applications
 
 An application is a logical grouping of resources within a workspace. Applications are often agents, but you can use them for any project within a team. Applications keep the UI organized by only surfacing the resources associated with the application currently in context.
 
-Applications are built on top of [resource tags](https://docs.langchain.com/langsmith/administration-overview#resource-tags) and can be used to control resource access using [ABAC](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies).
+Applications are built on top of [resource tags](#resource-tags) and can be used to control resource access using [ABAC](organization-workspace-operations.md#access-policies).
 
 Switch applications from the main navigation sidebar in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-administration-overview). Use the **Application** dropdown at the top of the sidebar to select an application.
 
@@ -66,11 +66,11 @@ See the table below for details on which features are available in which scope(s
 
 \* Data retention settings and usage limits will be available soon for the organization level as well
 
-\*\* Self-hosted installations may enable workspace-level invites of users to the organization via a feature flag. For details, refer to the [self-hosted user management docs](https://docs.langchain.com/langsmith/self-host-user-management).
+\*\* Self-hosted installations may enable workspace-level invites of users to the organization via a feature flag. For details, refer to the [self-hosted user management docs](self-host-user-management.md).
 
 ### Resource tags
 
-Resource tags allow you to further segregate resources within a workspace for use with [ABAC](https://docs.langchain.com/langsmith/organization-workspace-operations#access-policies). Each tag is a key-value pair that you can assign to a resource.
+Resource tags allow you to further segregate resources within a workspace for use with [ABAC](organization-workspace-operations.md#access-policies). Each tag is a key-value pair that you can assign to a resource.
 
 LangSmith resource tags are very similar to tags in cloud services like [AWS](https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html).
 
@@ -116,26 +116,26 @@ Service keys are prefixed with `lsv2_sk_`
 > * **When using organization-scoped service keys**: You must include the `X-Tenant-Id` header when accessing workspace-scoped resources. Without it, the request will fail with a `403 Forbidden` error.
 
 > [!NOTE]
-> To see how to create a service key or Personal Access Token, see the [setup guide](https://docs.langchain.com/langsmith/create-account-api-key)
+> To see how to create a service key or Personal Access Token, see the [setup guide](create-account-api-key.md)
 
 ### Organization roles
 
-Organization roles are distinct from the [Enterprise feature workspace RBAC](https://docs.langchain.com/langsmith/administration-overview#workspace-roles-rbac) and are used in the context of multiple [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces). Your organization role determines your workspace membership characteristics and your [organization-level permissions](https://docs.langchain.com/langsmith/organization-workspace-operations).
+Organization roles are distinct from the [Enterprise feature workspace RBAC](#workspace-roles-rbac) and are used in the context of multiple [workspaces](#workspaces). Your organization role determines your workspace membership characteristics and your [organization-level permissions](organization-workspace-operations.md).
 
 The organization role selected also impacts workspace membership as described here:
 
-* [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) grants full access to manage all organization configuration, users, billing, and workspaces.
+* [Organization Admin](rbac.md#organization-admin) grants full access to manage all organization configuration, users, billing, and workspaces.
   * An Organization Admin has `Admin` access to all workspaces in an organization.
-* [Organization User](https://docs.langchain.com/langsmith/rbac#organization-user) may read organization information but cannot execute any write actions at the organization level. An Organization User may create [Personal Access Tokens](https://docs.langchain.com/langsmith/administration-overview#personal-access-tokens-pats).
+* [Organization User](rbac.md#organization-user) may read organization information but cannot execute any write actions at the organization level. An Organization User may create [Personal Access Tokens](#personal-access-tokens-pats).
   * An Organization User can be added to a subset of workspaces and assigned workspace roles as usual (if RBAC is enabled), which specify permissions at the workspace level.
-* [Organization Viewer](https://docs.langchain.com/langsmith/rbac#organization-viewer) is equivalent to Organization User, but **cannot** create Personal Access Tokens. (for self-hosted, available in Helm chart version 0.11.25+).
+* [Organization Viewer](rbac.md#organization-viewer) is equivalent to Organization User, but **cannot** create Personal Access Tokens. (for self-hosted, available in Helm chart version 0.11.25+).
 
 > [!NOTE]
 > The Organization User and Organization Viewer roles are only available in organizations on [Plus and Enterprise plans](https://langchain.com/pricing). In Developer organizations (single workspace), all users are assigned the Organization Admin role by default.
 >
-> See [security settings](https://docs.langchain.com/langsmith/manage-organization-by-api#security-settings) for instructions on how to disable PAT creation for the entire organization.
+> See [security settings](manage-organization-by-api.md#security-settings) for instructions on how to disable PAT creation for the entire organization.
 
-For more information on setting up organizations and workspaces, refer to the [organization setup guide](https://docs.langchain.com/langsmith/set-up-hierarchy#organization-roles) for more information.
+For more information on setting up organizations and workspaces, refer to the [organization setup guide](set-up-hierarchy.md#organization-roles) for more information.
 
 The following table provides an overview of organization level permissions:
 
@@ -157,7 +157,7 @@ The following table provides an overview of organization level permissions:
 | Update data retention settings              | ❌                   | ❌                 | ✅                  |
 | Update usage limits                         | ❌                   | ❌                 | ✅                  |
 
-For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](https://docs.langchain.com/langsmith/organization-workspace-operations).
+For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
 ### Workspace roles (RBAC)
 
@@ -166,23 +166,23 @@ For a comprehensive list of required permissions along with the operations and r
 
 Roles are used to define the set of permissions that a user has within a workspace. There are three built-in system roles that cannot be edited:
 
-* [Workspace Admin](https://docs.langchain.com/langsmith/rbac#workspace-admin) has full access to all resources within the workspace.
-* [Workspace Editor](https://docs.langchain.com/langsmith/rbac#workspace-editor) has full permissions except for workspace management (adding/removing users, changing roles, configuring service keys).
-* [Workspace Viewer](https://docs.langchain.com/langsmith/rbac#workspace-viewer) has read-only access to all resources within the workspace.
+* [Workspace Admin](rbac.md#workspace-admin) has full access to all resources within the workspace.
+* [Workspace Editor](rbac.md#workspace-editor) has full permissions except for workspace management (adding/removing users, changing roles, configuring service keys).
+* [Workspace Viewer](rbac.md#workspace-viewer) has read-only access to all resources within the workspace.
 
-[Organization admins](https://docs.langchain.com/langsmith/rbac#organization-admin) can also create/edit custom roles with specific permissions for different resources.
+[Organization admins](rbac.md#organization-admin) can also create/edit custom roles with specific permissions for different resources.
 
 You can manage roles under **Organization Settings** > **Members and roles** and select the **Roles** tab.
 
-* For comprehensive documentation on roles and permissions, refer to the [Role-based access control](https://docs.langchain.com/langsmith/rbac) guide.
-* For more details on assigning and creating roles, refer to the [User Management](https://docs.langchain.com/langsmith/user-management) guide.
-* For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](https://docs.langchain.com/langsmith/organization-workspace-operations).
+* For comprehensive documentation on roles and permissions, refer to the [Role-based access control](rbac.md) guide.
+* For more details on assigning and creating roles, refer to the [User Management](user-management.md) guide.
+* For a comprehensive list of required permissions along with the operations and roles that can perform them, refer to the [Organization and workspace reference](organization-workspace-operations.md).
 
 ## Best practices
 
 ### Environment separation
 
-Use [resource tags](https://docs.langchain.com/langsmith/administration-overview#resource-tags) to organize resources by environment using the default tag key `Environment` and different values for the environment (e.g., `dev`, `staging`, `prod`). We do not recommend using separate workspaces for environment separation because resources cannot be shared across workspaces, which would prevent you from promoting resources (like prompts) between environments.
+Use [resource tags](#resource-tags) to organize resources by environment using the default tag key `Environment` and different values for the environment (e.g., `dev`, `staging`, `prod`). We do not recommend using separate workspaces for environment separation because resources cannot be shared across workspaces, which would prevent you from promoting resources (like prompts) between environments.
 
 > [!NOTE]
 > **Resource tags vs. commit tags for prompt management**
@@ -190,7 +190,7 @@ Use [resource tags](https://docs.langchain.com/langsmith/administration-overview
 > While both types of tags can use environment terminology like `dev`, `staging`, and `prod`, they serve different purposes:
 >
 > * **Resource tags** (`Environment: prod`): Use these to *organize and filter* resources across your workspace. Apply resource tags to tracing projects, datasets, and other resources (including prompts) to group them by environment, which enables filtering in the UI.
-> * [Commit tags](https://docs.langchain.com/langsmith/manage-prompts#commit-tags) (`prod` tag): Use these to manage which [prompt version](https://docs.langchain.com/langsmith/prompt-context-hub#prompts) your code references. Commit tags are labels that point to specific commits in a prompt's history. When your code pulls a prompt by tag name (e.g., `client.pull_prompt("prompt-name:prod")`), it retrieves whichever commit that tag currently points to. To promote a prompt from `staging` to `prod`, move the commit tag to point to the desired version.
+> * [Commit tags](manage-prompts.md#commit-tags) (`prod` tag): Use these to manage which [prompt version](prompt-context-hub.md#prompts) your code references. Commit tags are labels that point to specific commits in a prompt's history. When your code pulls a prompt by tag name (e.g., `client.pull_prompt("prompt-name:prod")`), it retrieves whichever commit that tag currently points to. To promote a prompt from `staging` to `prod`, move the commit tag to point to the desired version.
 >
 > Resource tags organize **which resources** belong to an environment. Commit tags let you control **which version** of a prompt your code references without changing the code itself.
 
@@ -203,10 +203,10 @@ This section covers how data retention works and how it's priced in LangSmith.
 #### Why retention matters
 
 * **Privacy**: Many data privacy regulations, such as GDPR in Europe or CCPA in California, require organizations to delete personal data once it's no longer necessary for the purposes for which it was collected. Setting retention periods aids in compliance with such regulations.
-* **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](https://docs.langchain.com/langsmith/billing#enforce-spend-limits).
+* **Cost**: LangSmith charges less for traces that have low data retention. For more information, learn how to [enforce spend limits](billing.md#enforce-spend-limits).
 
 > [!TIP]
-> Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](https://docs.langchain.com/langsmith/billing#change-project-level-default-retention).
+> Plan your retention tiers before you start sending traces. Changes apply to new traces only—existing traces keep their original tier. See [Change project-level default retention](billing.md#change-project-level-default-retention).
 
 #### How it works
 
@@ -218,7 +218,7 @@ LangSmith has two tiers of traces based on Data Retention with the following cha
 | **Retention Period** | 14 days                                                         | 400 days                                                        |
 
 > [!NOTE]
-> Enterprise customers can customize the extended retention period per workspace. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](https://docs.langchain.com/langsmith/data-purging-compliance#customize-extended-retention-policy).
+> Enterprise customers can customize the extended retention period per workspace. Changes apply to new traces only—existing traces are unaffected. See [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
 
 **Data deletion after retention ends**
 
@@ -235,15 +235,15 @@ When you use certain features with `base` tier traces, their data retention may 
 
 Retention behavior by action:
 
-* **Feedback via API or SDK**: Feedback is added to any run on the trace (or any trace in the thread) through an API or SDK call that explicitly passes `extend_trace_retention=true` (`extendTraceRetention: true` in TypeScript). For more information, see [Attach user feedback](https://docs.langchain.com/langsmith/attach-user-feedback). The LangSmith UI sends feedback and notes without extending retention.
+* **Feedback via API or SDK**: Feedback is added to any run on the trace (or any trace in the thread) through an API or SDK call that explicitly passes `extend_trace_retention=true` (`extendTraceRetention: true` in TypeScript). For more information, see [Attach user feedback](attach-user-feedback.md). The LangSmith UI sends feedback and notes without extending retention.
 * **Online evaluators**: An online evaluator scores the trace and its retention setting is enabled. Both trace-level and thread-level evaluators can opt out of this upgrade.
-* **Automation rules**: An [automation rule](https://docs.langchain.com/langsmith/rules#create-a-rule) with retention extension enabled matches any run within a trace.
-* **Manual annotation queue adds** (no upgrade): Manually adding runs or threads to an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues#assign-runs-and-threads-to-a-single-run-queue) does not upgrade retention by default.
+* **Automation rules**: An [automation rule](rules.md#create-a-rule) with retention extension enabled matches any run within a trace.
+* **Manual annotation queue adds** (no upgrade): Manually adding runs or threads to an [annotation queue](annotation-queues.md#assign-runs-and-threads-to-a-single-run-queue) does not upgrade retention by default.
 
 This change applies to new actions only. Traces that were already upgraded by a previous action keep their extended retention.
 
 > [!NOTE]
-> When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](https://docs.langchain.com/langsmith/evaluators#manage-evaluator-trace-retention).
+> When you create or edit an online evaluator on a tracing project, you can opt out of upgrading the traces that evaluator scores, keeping them at base retention. This option is available only when the project's default retention is the base tier. For step-by-step instructions, see [Manage evaluator trace retention](evaluators.md#manage-evaluator-trace-retention).
 
 > [!NOTE]
 > Retention extension is enabled by default for new online evaluators and automation rules. You can opt out when configuring each evaluator or rule.
@@ -362,11 +362,11 @@ This is thrown by our application and varies by organization based on their conf
 
 #### Maximum runs per trace
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/langsmith/administration-overview).
+> **Interactive content:** [View this section in the original documentation](administration-overview.md).
 
 #### Run query endpoint
 
-The [`POST /runs/query`](https://docs.langchain.com/langsmith/smith-api/run/query-runs) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](https://docs.langchain.com/langsmith/export-traces#rate-limits) for details.
+The [`POST /runs/query`](smith-api/run/query-runs.md) endpoint has additional per-tenant rate limits based on query parameters. See [Query traces using the SDK](export-traces.md#rate-limits) for details.
 
 #### Handling 429s responses in your application
 
@@ -390,7 +390,7 @@ LangSmith lets you set two different monthly limits, mirroring our Billable Metr
 
 These let you limit the number of total traces, and extended data retention traces respectively.
 
-For *spend* limits on evaluator runs specifically, refer to [Track and limit evaluator spend](https://docs.langchain.com/langsmith/evaluator-spend).
+For *spend* limits on evaluator runs specifically, refer to [Track and limit evaluator spend](evaluator-spend.md).
 
 #### Properties of usage limiting
 
@@ -412,7 +412,7 @@ Usage limits can be updated from the `Settings` page under `Usage and Billing`. 
 
 #### Per-project and per-user trace limits
 
-In addition to the [workspace-wide limits](https://docs.langchain.com/langsmith/administration-overview#usage-limits), you can cap monthly traces for a single tracing project or an individual workspace member. This prevents one project or user from consuming a disproportionate share of a workspace's tracing budget.
+In addition to the [workspace-wide limits](#usage-limits), you can cap monthly traces for a single tracing project or an individual workspace member. This prevents one project or user from consuming a disproportionate share of a workspace's tracing budget.
 
 To configure these limits, open **Settings**, go to **Usage configuration**, and select the **Project & user limits** tab. Choose **Add limit**, then set:
 
@@ -423,7 +423,7 @@ To configure these limits, open **Settings**, go to **Usage configuration**, and
 
 Updating these limits requires the same permission as workspace usage limits (`Update usage limits`).
 
-Like workspace limits, per-project and per-user limits are evaluated per calendar month in UTC and reset at the start of each new month. Once a project or user reaches its limit, its new traces are dropped and are not ingested again until the limit resets. Enforcement is approximate, so a small number of traces may be processed above the threshold before the limit takes effect. These limits apply to both [Cloud](https://docs.langchain.com/langsmith/cloud) and [Self-hosted](https://docs.langchain.com/langsmith/self-hosted).
+Like workspace limits, per-project and per-user limits are evaluated per calendar month in UTC and reset at the start of each new month. Once a project or user reaches its limit, its new traces are dropped and are not ingested again until the limit resets. Enforcement is approximate, so a small number of traces may be processed above the threshold before the limit takes effect. These limits apply to both [Cloud](cloud.md) and [Self-hosted](self-hosted.md).
 
 > [!NOTE]
 > Per-project and per-user limits are **additional** to your workspace-wide and plan limits. A trace must be within every applicable limit to be ingested.
@@ -434,11 +434,11 @@ Like workspace limits, per-project and per-user limits are evaluated per calenda
 
 ### Related content
 
-* Tutorial on how to [enforce spend limits](https://docs.langchain.com/langsmith/billing#enforce-spend-limits)
+* Tutorial on how to [enforce spend limits](billing.md#enforce-spend-limits)
 
 ## Additional resources
 
-* **[Release policy](https://docs.langchain.com/langsmith/release-versions)**: Learn about the self-hosted release channels, cadence, and version numbering.
+* **[Release policy](release-versions.md)**: Learn about the self-hosted release channels, cadence, and version numbering.
 
 ***
 

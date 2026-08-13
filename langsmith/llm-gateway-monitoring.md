@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/llm-gateway-monitoring)
 View and analyze LLM Gateway costs by user, API key, and model.
 
-The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](https://docs.langchain.com/langsmith/create-account-api-key), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
+The LLM Gateway **Spend Monitoring** dashboard shows how much LLM cost a [workspace](administration-overview.md#workspaces) has accrued through the gateway. Use it to compare spend over time and identify the users, [API keys](create-account-api-key.md), and models that account for that spend. The dashboard covers one workspace at a time; switch workspaces to compare them.
 
-Viewing the dashboard requires the [Organization Admin](https://docs.langchain.com/langsmith/rbac#organization-admin) role and a Plus or Enterprise [plan](https://docs.langchain.com/langsmith/pricing-plans). Without both, the **Usage** tab does not appear.
+Viewing the dashboard requires the [Organization Admin](rbac.md#organization-admin) role and a Plus or Enterprise [plan](pricing-plans.md). Without both, the **Usage** tab does not appear.
 
 > [!WARNING]
 > The dashboard is not currently available in the EU, APAC, or AWS environments.
@@ -68,8 +68,8 @@ The detailed view has its own entity filter, time range, and granularity control
 
 ## See also
 
-* [LLM Gateway overview](https://docs.langchain.com/langsmith/llm-gateway)
-* [Configure spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies)
+* [LLM Gateway overview](llm-gateway.md)
+* [Configure spend policies](llm-gateway-spend-policies.md)
 
 ***
 

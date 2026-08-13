@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/presigned-feedback-tokens)
 Use presigned feedback tokens to collect user feedback from client-side applications without exposing your LangSmith API key.
 
-Presigned feedback tokens let you collect [feedback](https://docs.langchain.com/langsmith/observability-concepts#feedback) from client-side applications (browsers, mobile apps, etc.) without exposing your [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key). Each token generates a URL scoped to a specific [run](https://docs.langchain.com/langsmith/observability-concepts#runs) and feedback key. Clients submit feedback by calling that URL directly with no authentication required.
+Presigned feedback tokens let you collect [feedback](observability-concepts.md#feedback) from client-side applications (browsers, mobile apps, etc.) without exposing your [LangSmith API key](create-account-api-key.md). Each token generates a URL scoped to a specific [run](observability-concepts.md#runs) and feedback key. Clients submit feedback by calling that URL directly with no authentication required.
 
 This is useful when:
 
@@ -11,7 +11,7 @@ This is useful when:
 * You need to decouple feedback collection from your backend.
 
 > [!NOTE]
-> If you are using [Agent Server](https://docs.langchain.com/langsmith/agent-server), presigned feedback URLs are generated automatically when you include `feedback_keys` in the run request. For that workflow, refer to [Collect user feedback for Agent Server runs](https://docs.langchain.com/langsmith/agent-server-feedback).
+> If you are using [Agent Server](agent-server.md), presigned feedback URLs are generated automatically when you include `feedback_keys` in the run request. For that workflow, refer to [Collect user feedback for Agent Server runs](agent-server-feedback.md).
 
 ## Create a presigned feedback token
 
@@ -139,7 +139,7 @@ for token in tokens:
 
 Once you have a presigned URL, your frontend code or email client submits feedback by sending a `POST` or `GET` request to it. The URL does not require an API key or authentication because the token provides the authorization.
 
-Presigned URL feedback extends a base-retention trace to extended retention by default. There is no opt-out parameter for presigned URLs. For the full retention model, see [data retention auto-upgrades](https://docs.langchain.com/langsmith/usage-and-billing#data-retention-auto-upgrades).
+Presigned URL feedback extends a base-retention trace to extended retention by default. There is no opt-out parameter for presigned URLs. For the full retention model, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ### POST request
 
@@ -221,8 +221,8 @@ for await (const token of client.listPresignedFeedbackTokens(runId)) {
 
 ## Related
 
-* [Reference guide on feedback data format](https://docs.langchain.com/langsmith/feedback-data-format)
-* [Log feedback using the SDK](https://docs.langchain.com/langsmith/attach-user-feedback)
+* [Reference guide on feedback data format](feedback-data-format.md)
+* [Log feedback using the SDK](attach-user-feedback.md)
 
 ***
 

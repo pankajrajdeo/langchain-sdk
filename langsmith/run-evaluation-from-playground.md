@@ -1,15 +1,15 @@
 # Run an evaluation from the Playground
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-evaluation-from-playground)
-LangSmith allows you to run evaluations directly in the UI. The [**Playground**](https://docs.langchain.com/langsmith/prompt-engineering-concepts#playground) allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without having to write any code.
+LangSmith allows you to run evaluations directly in the UI. The [**Playground**](prompt-engineering-concepts.md#playground) allows you to test your prompt or model configuration over a series of inputs to see how well it scores across different contexts or scenarios, without having to write any code.
 
-Before you run an evaluation, you need to have an [existing dataset](https://docs.langchain.com/langsmith/evaluation-concepts#datasets). Learn how to [create a dataset from the UI](https://docs.langchain.com/langsmith/manage-datasets-in-application#create-a-dataset-and-add-examples).
+Before you run an evaluation, you need to have an [existing dataset](evaluation-concepts.md#datasets). Learn how to [create a dataset from the UI](manage-datasets-in-application.md#create-a-dataset-and-add-examples).
 
-To run evaluations from Studio instead, see [run experiments over a dataset in Studio](https://docs.langchain.com/langsmith/observability-studio#run-experiments-over-a-dataset). If you prefer to run experiments in code, see [run an evaluation using the SDK](https://docs.langchain.com/langsmith/evaluate-llm-application).
+To run evaluations from Studio instead, see [run experiments over a dataset in Studio](observability-studio.md#run-experiments-over-a-dataset). If you prefer to run experiments in code, see [run an evaluation using the SDK](evaluate-llm-application.md).
 
-> **Image:** [Playground experiment](https://docs.langchain.com/langsmith/run-evaluation-from-playground)
+> **Image:** [Playground experiment](run-evaluation-from-playground.md)
 
 > [!NOTE]
-> The **[Chat](https://docs.langchain.com/langsmith/chat)** is available in the Playground to help you optimize prompts before running evaluations.
+> The **[Chat](chat.md)** is available in the Playground to help you optimize prompts before running evaluations.
 
 ## Create an experiment in the Playground
 
@@ -26,13 +26,13 @@ To run evaluations from Studio instead, see [run experiments over a dataset in S
 
 5. **View the full results** by clicking **View full experiment**. This will take you to the experiment details page where you can see the results of the experiment.
 
-While an experiment runs, the **Progress** column in the experiments table and the progress bar in the experiment view track completion in real time, including how many runs have completed and been evaluated. For more information, see [Track experiment progress](https://docs.langchain.com/langsmith/analyze-an-experiment#track-experiment-progress).
+While an experiment runs, the **Progress** column in the experiments table and the progress bar in the experiment view track completion in real time, including how many runs have completed and been evaluated. For more information, see [Track experiment progress](analyze-an-experiment.md#track-experiment-progress).
 
 ## Add evaluation scores to the experiment
 
 Evaluate your experiment over specific criteria by adding evaluators. Add LLM-as-a-judge or custom code evaluators in the Playground using the **+Evaluator** button.
 
-To learn more about adding evaluators in via UI, visit [how to define an LLM-as-a-judge evaluator](https://docs.langchain.com/langsmith/llm-as-judge).
+To learn more about adding evaluators in via UI, visit [how to define an LLM-as-a-judge evaluator](llm-as-judge.md).
 
 ***
 

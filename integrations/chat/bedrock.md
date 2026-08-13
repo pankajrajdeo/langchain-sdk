@@ -2,7 +2,7 @@
 
 > Integrate with the ChatBedrock chat model using LangChain Python.
 
-This doc will help you get started with AWS Bedrock [chat models](https://docs.langchain.com/oss/python/langchain/models). Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models (FMs) from leading AI companies like AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon via a single API, along with a broad set of capabilities you need to build generative AI applications with security, privacy, and responsible AI. Using Amazon Bedrock, you can easily experiment with and evaluate top FMs for your use case, privately customize them with your data using techniques such as fine-tuning and Retrieval Augmented Generation (RAG), and build agents that execute tasks using your enterprise systems and data sources. Since Amazon Bedrock is serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy generative AI capabilities into your applications using the AWS services you are already familiar with.
+This doc will help you get started with AWS Bedrock [chat models](../../langchain/models.md). Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models (FMs) from leading AI companies like AI21 Labs, Anthropic, Cohere, Meta, Stability AI, and Amazon via a single API, along with a broad set of capabilities you need to build generative AI applications with security, privacy, and responsible AI. Using Amazon Bedrock, you can easily experiment with and evaluate top FMs for your use case, privately customize them with your data using techniques such as fine-tuning and Retrieval Augmented Generation (RAG), and build agents that execute tasks using your enterprise systems and data sources. Since Amazon Bedrock is serverless, you don't have to manage any infrastructure, and you can securely integrate and deploy generative AI capabilities into your applications using the AWS services you are already familiar with.
 
 AWS Bedrock maintains a [Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) which provides a unified conversational interface for Bedrock models. This API does not yet support custom models. You can see a list of all [models that are supported here](https://docs.aws.amazon.com/bedrock/latest/userguide/conversation-inference.html).
 
@@ -12,7 +12,7 @@ AWS Bedrock maintains a [Converse API](https://docs.aws.amazon.com/bedrock/lates
 > [!NOTE]
 > **Anthropic models on Bedrock**
 >
-> For Anthropic models specifically, you can use `ChatAnthropicBedrock` which extends `ChatAnthropic` and provides the same API while running on AWS Bedrock. See the [ChatAnthropicBedrock section](https://docs.langchain.com/oss/python/integrations/chat/bedrock#chatanthropicbedrock) below for details.
+> For Anthropic models specifically, you can use `ChatAnthropicBedrock` which extends `ChatAnthropic` and provides the same API while running on AWS Bedrock. See the [ChatAnthropicBedrock section](#chatanthropicbedrock) below for details.
 
 For detailed documentation of all Bedrock features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse).
 
@@ -29,7 +29,7 @@ For detailed documentation of all Bedrock features and configurations head to th
 
 The below apply to both `ChatBedrock` and `ChatBedrockConverse`.
 
-| [Tool calling](https://docs.langchain.com/oss/python/langchain/tools) | [Structured output](https://docs.langchain.com/oss/python/langchain/structured-output) | [Image input](https://docs.langchain.com/oss/python/langchain/messages#multimodal) | Audio input | Video input | [Token-level streaming](https://docs.langchain.com/oss/python/langchain/streaming/) | Native async | [Token usage](https://docs.langchain.com/oss/python/langchain/models#token-usage) | [Logprobs](https://docs.langchain.com/oss/python/langchain/models#log-probabilities) |
+| [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
 |                      ✅                      |                               ✅                              |                             ✅                            |      ❌      |      ❌      |                             ✅                             |       ❌      |                            ✅                            |                              ❌                             |
 
@@ -53,7 +53,7 @@ Alternatively, `ChatBedrockConverse` will read from the following environment va
 
 You'll also need to turn on model access for your account, which you can do by following [these instructions](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html).
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -129,7 +129,7 @@ J|'adore la| programmation.|
 
 ### Streaming tool calls and structured output
 
-When using [tool calling](https://docs.langchain.com/oss/python/langchain/tools) or [structured output](https://docs.langchain.com/oss/python/langchain/structured-output) with Anthropic models, tool call arguments stream as partial JSON chunks by default.
+When using [tool calling](../../langchain/tools.md) or [structured output](../../langchain/structured-output.md) with Anthropic models, tool call arguments stream as partial JSON chunks by default.
 
 To reduce latency and get more evenly distributed chunks, you can enable Anthropic's fine-grained tool streaming beta:
 
@@ -210,7 +210,7 @@ ai_msg.content_blocks
 > [!NOTE]
 > `reasoning_effort` requires `langchain-aws>=1.6.5`.
 
-[`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) supports the standard [`reasoning_effort`](https://docs.langchain.com/oss/python/langchain/models#reasoning) parameter for models with configurable reasoning, including Claude (Opus 5, Sonnet 5), Amazon Nova 2, and OpenAI gpt-oss and Moonshot Kimi K2 models on Bedrock. Like `temperature`, it can be set at model construction or per invocation, and it is translated into the request format for the underlying model family:
+[`ChatBedrockConverse`](https://reference.langchain.com/python/langchain-aws/chat_models/bedrock_converse/ChatBedrockConverse) supports the standard [`reasoning_effort`](../../langchain/models.md#reasoning) parameter for models with configurable reasoning, including Claude (Opus 5, Sonnet 5), Amazon Nova 2, and OpenAI gpt-oss and Moonshot Kimi K2 models on Bedrock. Like `temperature`, it can be set at model construction or per invocation, and it is translated into the request format for the underlying model family:
 
 ```python
 from langchain_aws import ChatBedrockConverse
@@ -224,7 +224,7 @@ llm = ChatBedrockConverse(
 response = llm.invoke("What is the cube root of 50.653?")
 ```
 
-Supported effort levels vary by model. Check a model's [profile](https://docs.langchain.com/oss/python/langchain/models#model-profiles) for the levels it supports:
+Supported effort levels vary by model. Check a model's [profile](../../langchain/models.md#model-profiles) for the levels it supports:
 
 ```python
 llm.profile["reasoning_effort_levels"]  # e.g. ['low', 'medium', 'high', 'xhigh', 'max']
@@ -234,13 +234,13 @@ An explicit `additional_model_request_fields` value takes precedence over the fi
 
 ## Prompt caching
 
-Bedrock supports [caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) of elements of your prompts, including messages and tools. This allows you to reuse large documents, instructions, [few-shot documents](https://docs.langchain.com/langsmith/create-few-shot-evaluators), and other data to reduce latency and costs.
+Bedrock supports [caching](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html) of elements of your prompts, including messages and tools. This allows you to reuse large documents, instructions, [few-shot documents](../../langsmith/create-few-shot-evaluators.md), and other data to reduce latency and costs.
 
 > [!NOTE]
 > **Not all models support prompt caching. See [Bedrock prompt caching supported models](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html#prompt-caching-models).**
 
 > [!NOTE]
-> For LangChain agents, use [`BedrockPromptCachingMiddleware`](https://docs.langchain.com/oss/python/integrations/middleware/aws#prompt-caching) to let LangChain optimize stable system prompt and tool content. For direct model calls, use manual `cachePoint` blocks or invocation-level `cache_control`, depending on the model and API.
+> For LangChain agents, use [`BedrockPromptCachingMiddleware`](../middleware/aws.md#prompt-caching) to let LangChain optimize stable system prompt and tool content. For direct model calls, use manual `cachePoint` blocks or invocation-level `cache_control`, depending on the model and API.
 
 To enable caching on an element of a prompt, mark its associated content block using the `cachePoint` key. See example below:
 
@@ -298,7 +298,7 @@ Second:
 Citations can be generated if they are enabled on input documents. Documents can be
 specified in Bedrock's
 [native format](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_DocumentBlock.html)
-or LangChain's [standard types](https://docs.langchain.com/oss/python/langchain/messages#multimodal):
+or LangChain's [standard types](../../langchain/messages.md#multimodal):
 
 ```python
 from langchain_aws import ChatBedrockConverse
@@ -413,7 +413,7 @@ from langchain_aws import ChatAnthropicBedrock
 model = ChatAnthropicBedrock(model="us.anthropic.claude-haiku-4-5-20251001-v1:0")
 ```
 
-For detailed documentation on available parameters and features, refer to the [`ChatAnthropic` integration page](https://docs.langchain.com/oss/python/integrations/chat/anthropic).
+For detailed documentation on available parameters and features, refer to the [`ChatAnthropic` integration page](anthropic.md).
 
 ***
 

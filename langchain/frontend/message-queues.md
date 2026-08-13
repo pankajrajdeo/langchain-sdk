@@ -7,7 +7,7 @@ Message queuing lets users send multiple messages in rapid succession without wa
 > **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python/langchain/frontend/message-queues).
 
 > [!NOTE]
-> This feature requires the [LangGraph Agent Server](https://docs.langchain.com/oss/python/langgraph/local-server). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](https://docs.langchain.com/langsmith/deployment) to use this pattern.
+> This feature requires the [LangGraph Agent Server](../../langgraph/local-server.md). Run your agent locally with `langgraph dev` or [deploy it to LangSmith](../../langsmith/deployment.md) to use this pattern.
 
 ## Why message queues?
 
@@ -60,7 +60,7 @@ pending work, and use `queue.cancel()` or `queue.clear()` to remove items before
 they start processing.
 
 > [!NOTE]
-> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](https://docs.langchain.com/oss/python/langchain/frontend/overview#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
+> The code examples use `useStream<typeof myAgent>` for type-safe stream state. See Type inference for [Python](overview.md#type-inference) or [JavaScript](https://docs.langchain.com/oss/javascript/langchain/frontend/overview#type-inference) backends.
 
 ```tsx
 import { useStream, useSubmissionQueue } from "@langchain/react";

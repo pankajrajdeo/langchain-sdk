@@ -2,7 +2,7 @@
 
 > Integrate with the LangSmithLoader document loader using LangChain Python.
 
-This guide provides a quick overview for getting started with the `LangSmithLoader` [document loader](https://docs.langchain.com/oss/python/integrations/document_loaders). For detailed documentation of all `LangSmithLoader` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/document_loaders/langsmith/LangSmithLoader).
+This guide provides a quick overview for getting started with the `LangSmithLoader` [document loader](../document_loaders.md). For detailed documentation of all `LangSmithLoader` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-core/document_loaders/langsmith/LangSmithLoader).
 
 ## Overview
 

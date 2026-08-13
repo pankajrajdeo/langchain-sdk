@@ -4,7 +4,7 @@ LangSmith supports sending arbitrary metadata and tags along with traces.
 
 Tags are strings that can be used to categorize or label a trace. Metadata is a dictionary of key-value pairs that can be used to store additional information about a trace.
 
-Both are useful for associating additional information with a trace, such as the environment in which it was executed, the user who initiated it, or an internal correlation ID. For more information on tags and metadata, see the [Concepts](https://docs.langchain.com/langsmith/observability-concepts#tags) page. For information on how to query traces and runs by metadata and tags, see the [Filter traces in the application](https://docs.langchain.com/langsmith/filter-traces-in-application) page.
+Both are useful for associating additional information with a trace, such as the environment in which it was executed, the user who initiated it, or an internal correlation ID. For more information on tags and metadata, see the [Concepts](observability-concepts.md#tags) page. For information on how to query traces and runs by metadata and tags, see the [Filter traces in the application](filter-traces-in-application.md) page.
 
 ```python
 import openai
@@ -119,7 +119,7 @@ await traceableCallOpenAI(messages);
 ```
 
 > [!TIP]
-> **LangSmith Deployments**: To add metadata dynamically per invocation in Agent Server deployments, we recommend using `tracing_context` in a [factory function](https://docs.langchain.com/langsmith/graph-rebuild). See [Customize tracing in deployed agents](https://docs.langchain.com/langsmith/conditional-tracing#customize-tracing-in-deployed-agents) for examples.
+> **LangSmith Deployments**: To add metadata dynamically per invocation in Agent Server deployments, we recommend using `tracing_context` in a [factory function](graph-rebuild.md). See [Customize tracing in deployed agents](conditional-tracing.md#customize-tracing-in-deployed-agents) for examples.
 
 ***
 

@@ -4,7 +4,7 @@ Make targets, Terraform commands, kubectl, AWS CLI, and Helm operations for Lang
 
 Command cheat sheet for day-to-day operations against an AWS LangSmith deployment provisioned with the [AWS Terraform modules](https://github.com/langchain-ai/terraform/tree/main/modules/aws). All `make` targets run from `modules/aws/`. Run `make help` for an inline summary.
 
-For the full deploy setup, refer to the [AWS deployment guide](https://docs.langchain.com/langsmith/self-host-terraform-aws-deploy).
+For the full deploy setup, refer to the [AWS deployment guide](self-host-terraform-aws-deploy.md).
 
 ## First-time setup
 

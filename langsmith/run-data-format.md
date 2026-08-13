@@ -1,13 +1,13 @@
 # Run (span) data format
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/run-data-format)
-LangSmith stores each [run](https://docs.langchain.com/langsmith/observability-concepts) as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations.
+LangSmith stores each [run](observability-concepts.md) as a structured record. Understanding this format is useful when exporting traces, querying the API, or building integrations.
 
 | Field Name                     | Type             | Description                                                                                                                                                 |
 | ------------------------------ | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`id`**                       | UUID             | Unique identifier for the span.                                                                                                                             |
 | **`name`**                     | string           | The name associated with the run.                                                                                                                           |
 | **`inputs`**                   | object           | A map of inputs provided to the run. For runs with `run_type='llm'`, this typically contains a `messages` array of message objects sent to the model.       |
-| **`run_type`**                 | string           | [Type of run](https://docs.langchain.com/langsmith/run-data-format#run-types), for example, `'llm'`, `'chain'`, `'tool'`.                                                                                       |
+| **`run_type`**                 | string           | [Type of run](#run-types), for example, `'llm'`, `'chain'`, `'tool'`.                                                                                       |
 | **`start_time`**               | datetime         | Start time of the run.                                                                                                                                      |
 | **`end_time`**                 | datetime         | End time of the run.                                                                                                                                        |
 | **`extra`**                    | object           | Any extra information run.                                                                                                                                  |
@@ -16,7 +16,7 @@ LangSmith stores each [run](https://docs.langchain.com/langsmith/observability-c
 | **`events`**                   | array of objects | A list of event objects associated with the run. This is relevant for runs executed with streaming.                                                         |
 | **`tags`**                     | array of strings | Tags or labels associated with the run.                                                                                                                     |
 | **`trace_id`**                 | UUID             | Unique identifier for the trace the run is a part of. This is also the `id` field of the root run of the trace                                              |
-| **`dotted_order`**             | string           | [Ordering string](https://docs.langchain.com/langsmith/run-data-format#what-is-dotted_order), hierarchical. Format: `<run_start_time>Z<run_uuid>`.`<child_run_start_time>Z<child_run_uuid>`...                  |
+| **`dotted_order`**             | string           | [Ordering string](#what-is-dotted_order), hierarchical. Format: `<run_start_time>Z<run_uuid>`.`<child_run_start_time>Z<child_run_uuid>`...                  |
 | **`status`**                   | string           | Current status of the run execution, e.g., `'error'`, `'pending'`, `'success'`                                                                              |
 | **`child_run_ids`**            | array of UUIDs   | List of IDs for all child runs.                                                                                                                             |
 | **`direct_child_run_ids`**     | array of UUIDs   | List of IDs for direct children of this run.                                                                                                                |
@@ -104,12 +104,12 @@ The `run_type` field identifies the kind of operation a span represents. LangSmi
 | `chain`     | A sequence or composition of steps.                                                                        |
 | `llm`       | A call to a language model.                                                                                |
 | `embedding` | Embedding API calls. (Displays with the `chain` icon in the UI.)                                           |
-| `prompt`    | A [prompt template](https://docs.langchain.com/langsmith/prompt-template-format) that formats inputs before passing them to a model. |
+| `prompt`    | A [prompt template](prompt-template-format.md) that formats inputs before passing them to a model. |
 | `tool`      | A function or external action invoked by the model.                                                        |
 | `retriever` | A lookup that fetches relevant documents or context.                                                       |
 | `parser`    | An output parser that transforms raw model output into a structured format.                                |
 
-Set [`run_type`](https://reference.langchain.com/python/langsmith/schemas/RunBase/run_type) when instrumenting with [`@traceable`](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable) or [`RunTree`](https://docs.langchain.com/langsmith/annotate-code#use-the-runtree-api):
+Set [`run_type`](https://reference.langchain.com/python/langsmith/schemas/RunBase/run_type) when instrumenting with [`@traceable`](annotate-code.md#use-%40traceable-%2F-traceable) or [`RunTree`](annotate-code.md#use-the-runtree-api):
 
 ```python
 from langsmith import traceable
@@ -132,8 +132,10 @@ const myTool = traceable(
 
 Some run types have specialized trace views in the LangSmith UI:
 
-* [Log LLM calls](https://docs.langchain.com/langsmith/log-llm-trace)
-* [Log retriever traces](https://docs.langchain.com/langsmith/log-retriever-trace)
+* [Log LLM calls](log-llm-trace.md)
+* [Log retriever traces](log-retriever-trace.md)
+
+<a id="what-is-dotted_order"></a>
 
 ## What is `dotted_order`?
 

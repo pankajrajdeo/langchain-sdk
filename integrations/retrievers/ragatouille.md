@@ -8,7 +8,7 @@
 >
 > See the [ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction](https://arxiv.org/abs/2112.01488) paper.
 
-We can use this as a [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). It will show functionality specific to this integration. After going through, it may be useful to explore [relevant use-case pages](https://docs.langchain.com/oss/python/deepagents/rag) to learn how to use this vector store as part of a larger chain.
+We can use this as a [retriever](../../deepagents/retrieval.md). It will show functionality specific to this integration. After going through, it may be useful to explore [relevant use-case pages](../../deepagents/rag.md) to learn how to use this vector store as part of a larger chain.
 
 This page covers how to use [RAGatouille](https://github.com/bclavie/RAGatouille) as a retriever in a LangChain chain.
 

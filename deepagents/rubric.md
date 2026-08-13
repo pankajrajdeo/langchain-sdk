@@ -3,11 +3,11 @@
 LLM-as-a-judge grading for agents that iterate against a rubric until done
 
 > [!NOTE]
-> `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](https://docs.langchain.com/oss/python/versioning); the API may change in the future.
+> `RubricMiddleware` requires `deepagents>=0.6.5`. It is in [**beta**](../versioning.md); the API may change in the future.
 
 Some agent tasks have a clear definition of "done" that the working model alone cannot reliably hit on the first try: a haiku in the right syllable pattern, a refactor with all tests passing, or a report that hits every required section. `RubricMiddleware` lets you declare *what done looks like* as a rubric and have the agent **self-evaluate and iterate** until the rubric is satisfied, or until a configured maximum iteration cap is hit.
 
-**LLM-as-a-judge** is a pattern where one language model evaluates another model's output against defined criteria. In [LangSmith evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#llm-as-judge), LLM-as-a-judge evaluators score application outputs offline in batch. `RubricMiddleware` applies the same pattern at runtime: after the deep agent produces output, a dedicated grader model reviews the transcript against your rubric and drives revision until every criterion passes (or a configured iteration cap is hit).
+**LLM-as-a-judge** is a pattern where one language model evaluates another model's output against defined criteria. In [LangSmith evaluations](../langsmith/evaluation-concepts.md#llm-as-judge), LLM-as-a-judge evaluators score application outputs offline in batch. `RubricMiddleware` applies the same pattern at runtime: after the deep agent produces output, a dedicated grader model reviews the transcript against your rubric and drives revision until every criterion passes (or a configured iteration cap is hit).
 
 When the deep agent finishes reasoning, the LLM-as-a-judge grader sub-agent reviews the output and returns a verdict. If it returns `needs_revision`, per-criterion feedback is injected back into the conversation and the agent runs again. The loop terminates on `satisfied`, `max_iterations_reached`, `failed`, or `grader_error`.
 
@@ -163,7 +163,7 @@ agent = create_deep_agent(
 
 ## Pass rubric on invocation
 
-Pass a `rubric` string on invocation state to start the self-evaluation loop. Use `invoke()` for a single blocking call, or [`stream_events(..., version="v3")`](https://docs.langchain.com/oss/python/langchain/event-streaming) with [`CustomTransformer`](https://docs.langchain.com/oss/python/langchain/event-streaming#custom-updates) to receive grading events on `stream.custom` as they occur:
+Pass a `rubric` string on invocation state to start the self-evaluation loop. Use `invoke()` for a single blocking call, or [`stream_events(..., version="v3")`](../langchain/event-streaming.md) with [`CustomTransformer`](../langchain/event-streaming.md#custom-updates) to receive grading events on `stream.custom` as they occur:
 
 #### invoke()
 ```python
@@ -235,7 +235,7 @@ When the deep agent finishes reasoning and has an output, the LLM-as-a-judge gra
 
 ## Observe iteration progress
 
-`on_evaluation` is a callback that fires after each grading iteration with the grader's verdict, whether you call `invoke()` or `stream_events()`. If you are not reading rubric events from `stream.custom` (with `CustomTransformer`) or [tracing the run with LangSmith](https://docs.langchain.com/langsmith/trace-with-langgraph), it is the main way to inspect what happened during grading.
+`on_evaluation` is a callback that fires after each grading iteration with the grader's verdict, whether you call `invoke()` or `stream_events()`. If you are not reading rubric events from `stream.custom` (with `CustomTransformer`) or [tracing the run with LangSmith](../langsmith/trace-with-langgraph.md), it is the main way to inspect what happened during grading.
 
 ```python
 from deepagents import RubricMiddleware, create_deep_agent
@@ -468,7 +468,7 @@ agent.invoke(
 )
 ```
 
-The middleware calls your function with a `RubricEvaluation` dictionary after each [grader pass](https://docs.langchain.com/oss/python/deepagents/rubric#grader-pass-events). The `RubricEvaluation` dictionary contains:
+The middleware calls your function with a `RubricEvaluation` dictionary after each [grader pass](#grader-pass-events). The `RubricEvaluation` dictionary contains:
 
 | Field            | Type   | Description                                                                                                                                                                                       |
 | ---------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -490,7 +490,7 @@ The middleware calls your function with a `RubricEvaluation` dictionary after ea
 
 A single `agent.invoke()` or `agent.stream_events()` call runs the rubric loop to completion and finishes with a terminal verdict: `satisfied`, `failed`, or `max_iterations_reached`.
 
-To carry rubrics over to follow up invocations, attach a [checkpointer](https://docs.langchain.com/oss/python/langgraph/checkpointers#checkpoints) and pass the same `thread_id` alongside the invocation. In these cases, the same `rubric` persists across future `invoke()` or `stream_events()` calls until you pass a new one in.
+To carry rubrics over to follow up invocations, attach a [checkpointer](../langgraph/checkpointers.md#checkpoints) and pass the same `thread_id` alongside the invocation. In these cases, the same `rubric` persists across future `invoke()` or `stream_events()` calls until you pass a new one in.
 
 Interrupts (`KeyboardInterrupt`, `asyncio.CancelledError`) propagate out of `agent.invoke()` and `agent.stream_events()` uncaught. On a checkpointed thread, the next call with the same rubric resumes the in-flight grading run.
 

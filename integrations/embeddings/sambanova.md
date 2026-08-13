@@ -12,7 +12,7 @@ This will help you get started with SambaNova embedding models using LangChain. 
 
 |                          Provider                          |                                 Package                                |
 | :--------------------------------------------------------: | :--------------------------------------------------------------------: |
-| [SambaNova](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) | [`langchain-sambanova`](https://docs.langchain.com/oss/python/integrations/providers/sambanova/) |
+| [SambaNova](../providers/sambanova.md) | [`langchain-sambanova`](../providers/sambanova.md) |
 
 ## Setup
 
@@ -34,7 +34,7 @@ if not os.getenv("SAMBANOVA_API_KEY"):
     os.environ["SAMBANOVA_API_KEY"] = getpass.getpass("Enter your SambaNova API key: ")
 ```
 
-To enable automated tracing of your model calls, set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key:
+To enable automated tracing of your model calls, set your [LangSmith](../../langsmith/observability.md) API key:
 
 ```python
 os.environ["LANGSMITH_TRACING"] = "true"
@@ -63,7 +63,7 @@ embeddings = SambaNovaEmbeddings(
 
 ## Indexing and retrieval
 
-Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](https://docs.langchain.com/oss/python/deepagents/rag).
+Embedding models are often used in retrieval-augmented generation (RAG) flows, both as part of indexing data as well as later retrieving it. For more detailed instructions, please see our [RAG tutorials](../../deepagents/rag.md).
 
 Below, see how to index and retrieve data using the `embeddings` object we initialized above. In this example, we will index and retrieve a sample document in the `InMemoryVectorStore`.
 

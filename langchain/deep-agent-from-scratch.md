@@ -24,9 +24,9 @@ Each step adds one capability to the same data analysis agent:
 | Step                 | Problem without it                     | What you add                                                                                             |
 | -------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Minimal agent        | —                                      | Baseline loop: model + tools, no harness                                                                 |
-| Sandbox + filesystem | Agent cannot read CSVs or run Python   | Isolated [backend](https://docs.langchain.com/oss/python/deepagents/backends) + file and execute tools                             |
+| Sandbox + filesystem | Agent cannot read CSVs or run Python   | Isolated [backend](../deepagents/backends.md) + file and execute tools                             |
 | Summarization        | Long sessions hit context limits       | Automatic history compression                                                                            |
-| Skills               | Domain rules bloat the system prompt   | On-demand expertise via [progressive disclosure](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant) |
+| Skills               | Domain rules bloat the system prompt   | On-demand expertise via [progressive disclosure](multi-agent/skills-sql-assistant.md) |
 | Subagent             | Chart iteration crowds the main thread | Isolated worker + parallel delegation                                                                    |
 
 ## Setup
@@ -42,7 +42,7 @@ pip install deepagents langsmith
 This tutorial uses [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox), which provisions sandboxes through `SandboxClient`. That client authenticates with LangSmith using `LANGSMITH_API_KEY` from your environment, so an API key is required to run the tutorial. Setting up LangSmith also allows you to see traces of what happens when your agent runs.
 
 1. [Sign up for a free account](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You can use Google, GitHub, or email.
-2. [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) in **Settings → API Keys**.
+2. [Create an API key](../langsmith/create-account-api-key.md) in **Settings → API Keys**.
 3. Export the LangSmith API key:
 
 ```bash
@@ -82,13 +82,13 @@ This runs, but the agent has no filesystem and no way to execute code. If you as
 
 To analyze data efficiently, the agent needs to run code on files. This requires two things:
 
-* An isolated [sandbox](https://docs.langchain.com/oss/python/deepagents/sandboxes) where the agent can place files and run code on the files without giving the agent access to your host machine.
+* An isolated [sandbox](../deepagents/sandboxes.md) where the agent can place files and run code on the files without giving the agent access to your host machine.
 
-* A [backend](https://docs.langchain.com/oss/python/deepagents/backends) which provides the file system tools to work with the sandbox (`read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`) using the [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):\*\*. Because the `LangSmithSandbox` backend implements the sandbox protocol, [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) also adds the `execute` tool, which allows the agent to run shell commands.
+* A [backend](../deepagents/backends.md) which provides the file system tools to work with the sandbox (`read_file`, `write_file`, `edit_file`, `delete`, `glob`, `grep`) using the [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):\*\*. Because the `LangSmithSandbox` backend implements the sandbox protocol, [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) also adds the `execute` tool, which allows the agent to run shell commands.
 
 [`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) is where files live and commands run. [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware) is what exposes that environment to the model as tools. The same middleware works with other backends if you swap the backend later.
 
-[`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) gives the agent an isolated environment with a filesystem and an `execute` tool for running shell commands. With it, the agent can install packages, write scripts, and run them without touching the host. To boot from a custom image instead of the default runtime, pass `snapshot_name` or `snapshot_id` to `create_sandbox()`; see [Sandbox snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots).
+[`LangSmithSandbox`](https://reference.langchain.com/python/deepagents/backends/langsmith/LangSmithSandbox) gives the agent an isolated environment with a filesystem and an `execute` tool for running shell commands. With it, the agent can install packages, write scripts, and run them without touching the host. To boot from a custom image instead of the default runtime, pass `snapshot_name` or `snapshot_id` to `create_sandbox()`; see [Sandbox snapshots](../langsmith/sandbox-snapshots.md).
 
 Replace the agent from the previous step with one that includes [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware):
 
@@ -273,11 +273,11 @@ agent = create_agent(
 )
 ```
 
-Run a multi-turn session to see summarization in action. After the initial analysis, ask follow-up questions that trigger more file reads or script runs. In LangSmith, look for a summarization step before later model calls. For more information, [Context engineering](https://docs.langchain.com/oss/python/langchain/context-engineering).
+Run a multi-turn session to see summarization in action. After the initial analysis, ask follow-up questions that trigger more file reads or script runs. In LangSmith, look for a summarization step before later model calls. For more information, [Context engineering](context-engineering.md).
 
 ## Add skills
 
-[Skills](https://docs.langchain.com/oss/python/langchain/multi-agent/skills-sql-assistant) provide a way to give an agent on-demand domain knowledge when needed using progressive disclosure. Skills can include multi-step workflows, rules, and conventions. By placing this information in a skill, it isn't added to the system prompt by default which ensures the tokens are only used when the information from the skill is needed for a task.
+[Skills](multi-agent/skills-sql-assistant.md) provide a way to give an agent on-demand domain knowledge when needed using progressive disclosure. Skills can include multi-step workflows, rules, and conventions. By placing this information in a skill, it isn't added to the system prompt by default which ensures the tokens are only used when the information from the skill is needed for a task.
 
 When the agent starts, it sees only lightweight metadata about each skill. When a task needs a skill, the agent loads the full skill file on demand.
 
@@ -343,7 +343,7 @@ You can try a prompt such as "Analyze sales.csv using our pandas patterns." The 
 
 ## Add a visualization subagent
 
-Some tasks produce large intermediate output (script drafts, failed runs, file reads) that would crowd the main agent's context if kept in one thread. A [subagent](https://docs.langchain.com/oss/python/deepagents/subagents) runs in its own context window so the supervisor sees only the final result, not every tool call along the way. That keeps the main analysis focused and leaves room for follow-up questions.
+Some tasks produce large intermediate output (script drafts, failed runs, file reads) that would crowd the main agent's context if kept in one thread. A [subagent](../deepagents/subagents.md) runs in its own context window so the supervisor sees only the final result, not every tool call along the way. That keeps the main analysis focused and leaves room for follow-up questions.
 
 One example where using a subagent makes sense is chart generation. Plotting often means iterating on Python scripts, installing packages, and reading error output before a figure is ready. The following `visualizer` subagent can handle that work in isolation while the main agent continues planning and analysis. With [`TodoListMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/todo/TodoListMiddleware), the main agent can also delegate that chart work in parallel instead of blocking on each plot.
 
@@ -382,7 +382,7 @@ agent = create_agent(
 
 Try a prompt such as "Analyze sales.csv, then create a bar chart of revenue by product." The main agent handles analysis and planning and delegates chart generation to the `visualizer` subagent via the `task` tool.
 
-If you enabled tracing in [Setup](https://docs.langchain.com/oss/python/langchain/deep-agent-from-scratch#setup), open the run in [LangSmith](https://smith.langchain.com/?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You should see a `task` call to `visualizer`, a separate sub-run with its own tool loop, and a short result returned to the supervisor.
+If you enabled tracing in [Setup](#setup), open the run in [LangSmith](https://smith.langchain.com/?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=oss-langchain-deep-agent-from-scratch). You should see a `task` call to `visualizer`, a separate sub-run with its own tool loop, and a short result returned to the supervisor.
 
 ## What you built
 
@@ -397,9 +397,9 @@ You've built a customized agent with the following middleware:
 
 This is the same foundation as [`create_deep_agent`](https://reference.langchain.com/python/deepagents/graph/create_deep_agent): assembled manually so you control exactly what's included.
 
-The possibilities don't end here: see [Prebuilt middleware](https://docs.langchain.com/oss/python/langchain/middleware/built-in) for the full list of composable capabilities, and the [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) reference for all configuration options.
+The possibilities don't end here: see [Prebuilt middleware](middleware/built-in.md) for the full list of composable capabilities, and the [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) reference for all configuration options.
 
-To work with the pre-assembled version, see [Customize Deep Agents](https://docs.langchain.com/oss/python/deepagents/customization). For the full data analysis example using `create_deep_agent`, see [Data analysis](https://docs.langchain.com/oss/python/deepagents/data-analysis).
+To work with the pre-assembled version, see [Customize Deep Agents](../deepagents/customization.md). For the full data analysis example using `create_deep_agent`, see [Data analysis](../deepagents/data-analysis.md).
 
 ***
 

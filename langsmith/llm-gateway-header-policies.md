@@ -3,11 +3,11 @@
 Split gateway spend caps and rate limits by a custom request header so each of your end customers gets its own limit under a single API key.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
-A [spend policy](https://docs.langchain.com/langsmith/llm-gateway-spend-policies) or [rate limit policy](https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies) can carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to cap each of your own end customers, tenants, or teams without issuing a separate [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) for each one.
+A [spend policy](llm-gateway-spend-policies.md) or [rate limit policy](llm-gateway-rate-limit-policies.md) can carry a condition on a custom request header, so traffic from a single subject splits into separate limits by header value. Use this to cap each of your own end customers, tenants, or teams without issuing a separate [LangSmith API key](create-account-api-key.md) for each one.
 
-For example, a policy scoped to a [workspace](https://docs.langchain.com/langsmith/administration-overview#workspaces) with the condition `X-Gateway-Customer-Id: acme` limits only the requests from that workspace that carry that header value. Requests from the same workspace carrying `X-Gateway-Customer-Id: globex` count against a different policy.
+For example, a policy scoped to a [workspace](administration-overview.md#workspaces) with the condition `X-Gateway-Customer-Id: acme` limits only the requests from that workspace that carry that header value. Requests from the same workspace carrying `X-Gateway-Customer-Id: globex` count against a different policy.
 
 ## Matchable headers
 
@@ -29,7 +29,7 @@ The gateway stamps caller identity itself and ignores client attempts to overrid
 ## Add a header condition
 
 > [!WARNING]
-> Creating and managing policies requires the `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access).
+> Creating and managing policies requires the `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
 1. Go to **Settings → Gateway → LLM Gateway**.
 2. Click **Create policy**.
@@ -77,11 +77,11 @@ print(response.choices[0].message.content)
 ```
 
 > [!NOTE]
-> If your LangSmith account is on a regional instance, use the corresponding [regional gateway](https://docs.langchain.com/langsmith/llm-gateway-api-formats#use-a-regional-gateway).
+> If your LangSmith account is on a regional instance, use the corresponding [regional gateway](llm-gateway-api-formats.md#use-a-regional-gateway).
 
 ### Step 2. Create a cap for one customer
 
-Create one spend policy per end customer through the [LangSmith REST API](https://docs.langchain.com/langsmith/smith-api-ref):
+Create one spend policy per end customer through the [LangSmith REST API](smith-api-ref.md):
 
 ```bash
 curl -X POST "https://api.smith.langchain.com/v1/platform/gateway-policies" \
@@ -245,13 +245,13 @@ curl -X POST "https://api.smith.langchain.com/v1/platform/gateway-policies" \
         }'
 ```
 
-The sync script in [step 3](https://docs.langchain.com/langsmith/llm-gateway-header-policies#step-3-sync-policies-with-your-customer-list) applies to rate limits with the same two substitutions. Spend caps and rate limits are separate families, so an end customer can hold one of each on the same header value.
+The sync script in [step 3](#step-3-sync-policies-with-your-customer-list) applies to rate limits with the same two substitutions. Spend caps and rate limits are separate families, so an end customer can hold one of each on the same header value.
 
 ## Next steps
 
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): set cost caps for organizations, workspaces, users, and API keys.
-* [Rate limit policies](https://docs.langchain.com/langsmith/llm-gateway-rate-limit-policies): limit requests and tokens in a rolling window.
-* [Traces and access control](https://docs.langchain.com/langsmith/llm-gateway-access): understand where gateway traces land and who can configure policies.
+* [Spend policies](llm-gateway-spend-policies.md): set cost caps for organizations, workspaces, users, and API keys.
+* [Rate limit policies](llm-gateway-rate-limit-policies.md): limit requests and tokens in a rolling window.
+* [Traces and access control](llm-gateway-access.md): understand where gateway traces land and who can configure policies.
 
 ***
 

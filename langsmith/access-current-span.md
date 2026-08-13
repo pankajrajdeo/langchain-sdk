@@ -4,7 +4,7 @@ In some cases you will want to access the current run (span) within a traced fun
 
 You can access the current run by calling the `get_current_run_tree`/`getCurrentRunTree` function in the Python or TypeScript SDK, respectively.
 
-For a full list of available properties on the `RunTree` object, see [this reference](https://docs.langchain.com/langsmith/run-data-format).
+For a full list of available properties on the `RunTree` object, see [this reference](run-data-format.md).
 
 ```python
 from langsmith import traceable

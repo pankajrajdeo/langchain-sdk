@@ -2,7 +2,7 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/cancel-run)
 Cancel a single run or multiple runs via the API, and choose between interrupt and rollback actions.
 
-This guide covers how to cancel runs for your agent via the [LangSmith Deployment API](https://docs.langchain.com/langsmith/server-api-ref). You can cancel a single run by ID or cancel multiple runs by thread or status. Cancellation is useful for stopping long-running or stuck runs, or when a user abandons a request.
+This guide covers how to cancel runs for your agent via the [LangSmith Deployment API](server-api-ref.md). You can cancel a single run by ID or cancel multiple runs by thread or status. Cancellation is useful for stopping long-running or stuck runs, or when a user abandons a request.
 
 ## Setup
 
@@ -44,7 +44,7 @@ The following examples create a run, cancel it with different options, and print
 
 * The run record remains (with status `interrupted`). You can fetch it, inspect inputs/outputs, and see the execution history.
 * All checkpoints for that run remain stored. The thread state at the last completed step is preserved.
-* You can later resume from a checkpoint (for example, with [time travel](https://docs.langchain.com/langsmith/human-in-the-loop-time-travel)) or inspect the partial state.
+* You can later resume from a checkpoint (for example, with [time travel](human-in-the-loop-time-travel.md)) or inspect the partial state.
 
 Use **interrupt** when you want to stop a run but keep it for debugging, auditing, or resuming from a checkpoint.
 
@@ -442,10 +442,10 @@ curl --request GET \
 
 ## Common scenarios
 
-* **Human-in-the-loop and interrupts**: Agents can pause at [interrupts](https://docs.langchain.com/langsmith/add-human-in-the-loop) for human input. Cancelling a run stops execution; it is different from an interrupt, where the run is paused and can be resumed with new input.
-* **Time travel**: After cancelling with action `interrupt`, the run and checkpoints are still available. You can [resume from a checkpoint](https://docs.langchain.com/langsmith/human-in-the-loop-time-travel) (time travel) to replay or branch execution.
-* **Double-texting**: When a user sends new input while a run is in progress, the [multitask strategy](https://docs.langchain.com/langsmith/double-texting) (enqueue, reject, interrupt, rollback) determines whether the existing run is interrupted or rolled back and how the new run is handled. To cancel runs explicitly from your application, use the cancel API described on this page.
-* **Studio**: In [Studio](https://docs.langchain.com/langsmith/use-studio), use the **Cancel** button in the run UI to cancel the current run.
+* **Human-in-the-loop and interrupts**: Agents can pause at [interrupts](add-human-in-the-loop.md) for human input. Cancelling a run stops execution; it is different from an interrupt, where the run is paused and can be resumed with new input.
+* **Time travel**: After cancelling with action `interrupt`, the run and checkpoints are still available. You can [resume from a checkpoint](human-in-the-loop-time-travel.md) (time travel) to replay or branch execution.
+* **Double-texting**: When a user sends new input while a run is in progress, the [multitask strategy](double-texting.md) (enqueue, reject, interrupt, rollback) determines whether the existing run is interrupted or rolled back and how the new run is handled. To cancel runs explicitly from your application, use the cancel API described on this page.
+* **Studio**: In [Studio](use-studio.md), use the **Cancel** button in the run UI to cancel the current run.
 
 ***
 

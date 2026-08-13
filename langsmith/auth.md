@@ -8,8 +8,8 @@ LangSmith provides a flexible authentication and authorization system that can i
 
 While often used interchangeably, these terms represent distinct security concepts:
 
-* [**Authentication**](https://docs.langchain.com/langsmith/auth#authentication) ("AuthN") verifies *who* you are. This runs as middleware for every request.
-* [**Authorization**](https://docs.langchain.com/langsmith/auth#authorization) ("AuthZ") determines *what you can do*. This validates the user's privileges and roles on a per-resource basis.
+* [**Authentication**](#authentication) ("AuthN") verifies *who* you are. This runs as middleware for every request.
+* [**Authorization**](#authorization) ("AuthZ") determines *what you can do*. This validates the user's privileges and roles on a per-resource basis.
 
 In LangSmith, authentication is handled by your [`@auth.authenticate`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate) handler, and authorization is handled by your [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/on) handlers.
 
@@ -172,23 +172,23 @@ sequenceDiagram
 After authentication, the platform creates a special configuration object that is passed to your graph and all nodes via the configurable context.
 This object contains information about the current user, including any custom fields you return from your [`@auth.authenticate`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth/authenticate) handler.
 
-To enable an agent to act on behalf of the user, use [custom authentication middleware](https://docs.langchain.com/langsmith/custom-auth). This will allow the agent to interact with external systems like MCP servers, external databases, and even other agents on behalf of the user.
+To enable an agent to act on behalf of the user, use [custom authentication middleware](custom-auth.md). This will allow the agent to interact with external systems like MCP servers, external databases, and even other agents on behalf of the user.
 
-For more information, see the [Use custom auth](https://docs.langchain.com/langsmith/custom-auth#enable-agent-authentication) guide.
+For more information, see the [Use custom auth](custom-auth.md#enable-agent-authentication) guide.
 
 ### Agent authentication with MCP
 
-For information on how to authenticate an agent to an MCP server, see the [MCP conceptual guide](https://docs.langchain.com/oss/python/langchain/mcp).
+For information on how to authenticate an agent to an MCP server, see the [MCP conceptual guide](../langchain/mcp.md).
 
 ## Authorization
 
 After authentication, LangGraph calls your [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) handlers to control access to specific resources (e.g., threads, assistants, crons). These handlers can:
 
-1. Add metadata to be saved during resource creation by mutating the `value["metadata"]` dictionary directly. See the [supported actions table](https://docs.langchain.com/langsmith/auth#supported-actions) for the list of types the value can take for each action.
-2. Filter resources by metadata during search/list or read operations by returning a [filter dictionary](https://docs.langchain.com/langsmith/auth#filter-operations).
+1. Add metadata to be saved during resource creation by mutating the `value["metadata"]` dictionary directly. See the [supported actions table](#supported-actions) for the list of types the value can take for each action.
+2. Filter resources by metadata during search/list or read operations by returning a [filter dictionary](#filter-operations).
 3. Raise an HTTP exception if access is denied.
 
-If you want to just implement simple user-scoped access control, you can use a single [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) handler for all resources and actions. If you want to have different control depending on the resource and action, you can use [resource-specific handlers](https://docs.langchain.com/langsmith/auth#resource-specific-handlers). See the [Supported Resources](https://docs.langchain.com/langsmith/auth#supported-resources) section for a full list of the resources that support access control.
+If you want to just implement simple user-scoped access control, you can use a single [`@auth.on`](https://reference.langchain.com/python/langgraph-sdk/auth/Auth) handler for all resources and actions. If you want to have different control depending on the resource and action, you can use [resource-specific handlers](#resource-specific-handlers). See the [Supported Resources](#supported-resources) section for a full list of the resources that support access control.
 
 ```python
 @auth.on
@@ -210,7 +210,7 @@ async def add_owner(
 
     Returns:
         A filter dictionary that LangGraph uses to restrict access to resources.
-        See [Filter Operations](https://docs.langchain.com/langsmith/auth#filter-operations) for supported operators.
+        See [Filter Operations](#filter-operations) for supported operators.
     """
     # Create filter to restrict access to just this user's resources
     filters = {"owner": ctx.user.identity}
@@ -241,7 +241,7 @@ When a request is made, the most specific handler that matches that resource and
 
 > [!TIP]
 > **Supported Handlers**
-> For a full list of supported resources and actions, see the [Supported Resources](https://docs.langchain.com/langsmith/auth#supported-resources) section below.
+> For a full list of supported resources and actions, see the [Supported Resources](#supported-resources) section below.
 
 ```python
 # Generic / global handler catches calls that aren't handled by more specific handlers
@@ -442,6 +442,8 @@ If a more specific handler is registered, the more general handler will not be c
 >
 > More specific handlers provide better type hints since they handle fewer action types.
 
+<a id="supported-actions"></a>
+
 #### Supported actions and types
 
 Here are all the supported action handlers:
@@ -471,7 +473,7 @@ Here are all the supported action handlers:
 |                | `@auth.on.store.delete`          | Delete an item             | `Auth.types.on.store.delete.value`                                                                     |
 |                | `@auth.on.store.list_namespaces` | List namespaces            | `Auth.types.on.store.list_namespaces.value`                                                            |
 
-Store authorization differs from threads and assistants. Handlers must rewrite the mutable `namespace` field in `value` to scope data per user rather than returning metadata filters. For a walkthrough, see [Isolate store per user](https://docs.langchain.com/langsmith/store-auth).
+Store authorization differs from threads and assistants. Handlers must rewrite the mutable `namespace` field in `value` to scope data per user rather than returning metadata filters. For a walkthrough, see [Isolate store per user](store-auth.md).
 
 > [!NOTE]
 > "About Runs"
@@ -483,8 +485,8 @@ Store authorization differs from threads and assistants. Handlers must rewrite t
 
 For implementation details:
 
-* Check out the introductory tutorial on [setting up authentication](https://docs.langchain.com/langsmith/set-up-custom-auth)
-* See the how-to guide on implementing a [custom auth handlers](https://docs.langchain.com/langsmith/custom-auth)
+* Check out the introductory tutorial on [setting up authentication](set-up-custom-auth.md)
+* See the how-to guide on implementing a [custom auth handlers](custom-auth.md)
 
 ***
 

@@ -1,8 +1,8 @@
 # Manage user access in SSO organizations
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/jit-invite-sso)
-LangSmith provides flexible controls for managing how users join your [organization](https://docs.langchain.com/langsmith/administration-overview#organizations) when using [Single Sign-On (SSO) authentication](https://docs.langchain.com/langsmith/authentication-methods). You can independently enable or disable both Just-In-Time (JIT) provisioning and user invites to match your organization's security and onboarding requirements.
+LangSmith provides flexible controls for managing how users join your [organization](administration-overview.md#organizations) when using [Single Sign-On (SSO) authentication](authentication-methods.md). You can independently enable or disable both Just-In-Time (JIT) provisioning and user invites to match your organization's security and onboarding requirements.
 
-When SSO is enabled, you have two independent settings: [JIT provisioning](https://docs.langchain.com/langsmith/jit-invite-sso#jit-provisioning) automatically adds users when they sign in via SSO, while [invites](https://docs.langchain.com/langsmith/jit-invite-sso#invites) allow administrators to invite users manually before they can access the organization. [Configure these settings](https://docs.langchain.com/langsmith/jit-invite-sso#configuration-scenarios) in any combination to control your user onboarding workflow.
+When SSO is enabled, you have two independent settings: [JIT provisioning](#jit-provisioning) automatically adds users when they sign in via SSO, while [invites](#invites) allow administrators to invite users manually before they can access the organization. [Configure these settings](#configuration-scenarios) in any combination to control your user onboarding workflow.
 
 This page explains how the settings work and how to configure them.
 
@@ -12,11 +12,11 @@ You can control the following two settings independently to manage how users joi
 
 ### JIT provisioning
 
-The `jit_provisioning_enabled` setting controls automatic user provisioning. When enabled, users who authenticate via your SSO provider are automatically added to your [organization](https://docs.langchain.com/langsmith/administration-overview#organizations) and assigned to default [workspaces](https://docs.langchain.com/langsmith/administration-overview#workspaces) with a default [role](https://docs.langchain.com/langsmith/rbac). For more details, refer to [Configure default SSO settings](https://docs.langchain.com/langsmith/jit-invite-sso#configure-default-sso-settings). When disabled, users must be explicitly invited or added via [SCIM](https://docs.langchain.com/langsmith/jit-invite-sso#scim-integration) before they can access the organization.
+The `jit_provisioning_enabled` setting controls automatic user provisioning. When enabled, users who authenticate via your SSO provider are automatically added to your [organization](administration-overview.md#organizations) and assigned to default [workspaces](administration-overview.md#workspaces) with a default [role](rbac.md). For more details, refer to [Configure default SSO settings](#configure-default-sso-settings). When disabled, users must be explicitly invited or added via [SCIM](#scim-integration) before they can access the organization.
 
 ### Invites
 
-The `invites_enabled` setting controls manual user invitations. When enabled, [organization administrators](https://docs.langchain.com/langsmith/administration-overview#organization-roles) can send invitations to users before they sign in. Invited users can claim their invite when signing in via SSO. When disabled, manual invitations are not allowed and users can only join via JIT provisioning or [SCIM](https://docs.langchain.com/langsmith/jit-invite-sso#scim-integration).
+The `invites_enabled` setting controls manual user invitations. When enabled, [organization administrators](administration-overview.md#organization-roles) can send invitations to users before they sign in. Invited users can claim their invite when signing in via SSO. When disabled, manual invitations are not allowed and users can only join via JIT provisioning or [SCIM](#scim-integration).
 
 ### Update settings
 
@@ -27,10 +27,10 @@ In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=ct
 
 1. Navigate to **Settings** → **Organization** → **Access and Security** → **General**.
 2. Toggle **Enable JIT provisioning** and **Allow invites** as needed.
-3. [Configure SSO default workspaces and roles](https://docs.langchain.com/langsmith/jit-invite-sso#configure-default-sso-settings) in **Settings** → **Organization** → **SSO Configuration**.
+3. [Configure SSO default workspaces and roles](#configure-default-sso-settings) in **Settings** → **Organization** → **SSO Configuration**.
 
 #### API
-Update organization settings programmatically using the [Update organization info](https://docs.langchain.com/langsmith/smith-api/orgs/update-current-organization-info) endpoint:
+Update organization settings programmatically using the [Update organization info](smith-api/orgs/update-current-organization-info.md) endpoint:
 
 ```bash
 curl -X PATCH https://api.smith.langchain.com/api/v1/organizations/current/info \
@@ -56,11 +56,11 @@ Response includes updated current organization configuration:
 ```
 
 > [!NOTE]
-> Consider the following if you are using [LangSmith self-hosted](https://docs.langchain.com/langsmith/self-hosted):
+> Consider the following if you are using [LangSmith self-hosted](self-hosted.md):
 >
 > * The JIT provisioning and the invites settings only apply to the default organization (identified by `default_sso_provision=true`). Other organizations must use invites in self-hosted.
 > * The environment variable `SELF_HOSTED_JIT_PROVISIONING_ENABLED` can globally override the JIT provisioning setting. When set to `false`, JIT provisioning is disabled for all organizations regardless of their individual settings.
-> * For additional self-hosted user management customizations, refer to [Customize user management](https://docs.langchain.com/langsmith/self-host-user-management).
+> * For additional self-hosted user management customizations, refer to [Customize user management](self-host-user-management.md).
 
 ## How user access works
 
@@ -169,18 +169,18 @@ User billy@company.com signs in via SSO:
 | ✓           | ✗               | N/A            | Auto-provisioned (default SSO configuration)                    |
 | ✗           | ✓               | Yes            | Invite claimed                                                  |
 | ✗           | ✓               | No             | **Access denied** - must be invited                             |
-| ✗           | ✗               | N/A            | **Access denied** - must use [SCIM](https://docs.langchain.com/langsmith/jit-invite-sso#scim-integration) or admin |
+| ✗           | ✗               | N/A            | **Access denied** - must use [SCIM](#scim-integration) or admin |
 
 ## Configure default SSO settings
 
-When [JIT provisioning](https://docs.langchain.com/langsmith/jit-invite-sso#jit-provisioning) is enabled, configure default settings for new users:
+When [JIT provisioning](#jit-provisioning) is enabled, configure default settings for new users:
 
-1. Default workspace role. Choose the [workspace role](https://docs.langchain.com/langsmith/rbac#workspace-roles) that users receive when automatically provisioned. For details on what each role can do, refer to [Organization and workspace operations](https://docs.langchain.com/langsmith/organization-workspace-operations). Options include:
+1. Default workspace role. Choose the [workspace role](rbac.md#workspace-roles) that users receive when automatically provisioned. For details on what each role can do, refer to [Organization and workspace operations](organization-workspace-operations.md). Options include:
 
-   * **[Viewer](https://docs.langchain.com/langsmith/rbac#workspace-viewer)**: Read-only access
-   * **[User](https://docs.langchain.com/langsmith/rbac#organization-user)**: Standard access
-   * **[Editor](https://docs.langchain.com/langsmith/rbac#workspace-editor)**: Can modify resources
-   * **[Admin](https://docs.langchain.com/langsmith/rbac#workspace-admin)**: Full workspace control
+   * **[Viewer](rbac.md#workspace-viewer)**: Read-only access
+   * **[User](rbac.md#organization-user)**: Standard access
+   * **[Editor](rbac.md#workspace-editor)**: Can modify resources
+   * **[Admin](rbac.md#workspace-admin)**: Full workspace control
 
 2. Default workspaces. Select one or more workspaces that users are automatically added to. Users receive the same role in all selected workspaces. To configure:
 
@@ -191,14 +191,14 @@ When [JIT provisioning](https://docs.langchain.com/langsmith/jit-invite-sso#jit-
 
 ## SCIM integration
 
-If your organization uses [SCIM](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization) (System for Cross-domain Identity Management), users can be automatically provisioned and managed through your identity provider. SCIM provides an additional mechanism for user management that works alongside JIT and invite settings.
+If your organization uses [SCIM](user-management.md#set-up-scim-for-your-organization) (System for Cross-domain Identity Management), users can be automatically provisioned and managed through your identity provider. SCIM provides an additional mechanism for user management that works alongside JIT and invite settings.
 
 > [!NOTE]
 > SCIM group membership overrides manually assigned roles or roles assigned via JIT provisioning. If you're using SCIM, consider disabling JIT provisioning to avoid conflicts.
 
 ## SSO Groups Sync
 
-[SSO Groups Sync](https://docs.langchain.com/langsmith/user-management#sso-groups-sync-alternative) is an alternative to SCIM that reads group memberships from the SSO token at login time and assigns org and workspace roles using the SCIM naming convention. The sync runs after JIT and invite resolution on each login, and owns only the memberships it created.
+[SSO Groups Sync](user-management.md#sso-groups-sync-alternative) is an alternative to SCIM that reads group memberships from the SSO token at login time and assigns org and workspace roles using the SCIM naming convention. The sync runs after JIT and invite resolution on each login, and owns only the memberships it created.
 
 **Precedence with JIT, invites, and SCIM:**
 
@@ -206,15 +206,15 @@ If your organization uses [SCIM](https://docs.langchain.com/langsmith/user-manag
 * **SSO Groups Sync–sourced** memberships are fully replaced on each login based on the token's group membership.
 * **Manual and JIT-provisioned** memberships are not modified by SSO Groups Sync.
 
-We recommend choosing one of SCIM or SSO Groups Sync per organization, not both, to avoid confusing precedence behavior. For configuration and tradeoffs, refer to [SSO Groups Sync](https://docs.langchain.com/langsmith/user-management#sso-groups-sync-alternative).
+We recommend choosing one of SCIM or SSO Groups Sync per organization, not both, to avoid confusing precedence behavior. For configuration and tradeoffs, refer to [SSO Groups Sync](user-management.md#sso-groups-sync-alternative).
 
 ## Related documentation
 
-* [Set up SSO with OAuth2.0 and OIDC](https://docs.langchain.com/langsmith/self-host-sso) (Self-hosted)
-* [Set up SAML SSO](https://docs.langchain.com/langsmith/user-management#set-up-saml-sso-for-your-organization) (Cloud)
-* [Set up SCIM](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization)
-* [User management](https://docs.langchain.com/langsmith/user-management)
-* [Role-based access control](https://docs.langchain.com/langsmith/rbac)
+* [Set up SSO with OAuth2.0 and OIDC](self-host-sso.md) (Self-hosted)
+* [Set up SAML SSO](user-management.md#set-up-saml-sso-for-your-organization) (Cloud)
+* [Set up SCIM](user-management.md#set-up-scim-for-your-organization)
+* [User management](user-management.md)
+* [Role-based access control](rbac.md)
 
 ***
 

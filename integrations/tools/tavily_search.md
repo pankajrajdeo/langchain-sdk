@@ -14,7 +14,7 @@
 
 ### Tool features
 
-| [Returns artifact](https://docs.langchain.com/oss/python/langchain/tools) | Native async |                        Return data                        |           Pricing           |
+| [Returns artifact](../../langchain/tools.md) | Native async |                        Return data                        |           Pricing           |
 | :---------------------------------------------: | :----------: | :-------------------------------------------------------: | :-------------------------: |
 |                        ❌                        |       ✅      | title, URL, content snippet, raw\_content, answer, images | 1,000 free searches / month |
 
@@ -74,7 +74,7 @@ tool = TavilySearch(
 
 ## Invocation
 
-### [Invoke directly with args](https://docs.langchain.com/oss/python/langchain/tools)
+### [Invoke directly with args](../../langchain/tools.md)
 
 The Tavily search tool accepts the following arguments during invocation:
 
@@ -88,7 +88,7 @@ NOTE: The optional arguments are available for agents to dynamically set, if you
 tool.invoke({"query": "What happened at the last wimbledon"})
 ```
 
-### [Invoke with ToolCall](https://docs.langchain.com/oss/python/langchain/tools)
+### [Invoke with ToolCall](../../langchain/tools.md)
 
 We can also invoke the tool with a model-generated ToolCall, in which case a ToolMessage will be returned:
 
@@ -116,7 +116,7 @@ We can use our tools directly with an agent executor by binding the tool to the 
 
 In the below example when we ask the agent to find "What nation hosted the Euro 2024? Include only wikipedia sources." the agent will dynamically set the arguments and invoke Tavily search tool : Invoking `tavily_search` with `{'query': 'Euro 2024 host nation', 'include_domains': ['wikipedia.org']`
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/tools/tavily_search).
+> **Interactive content:** [View this section in the original documentation](tavily_search.md).
 
 ```python
 if not os.environ.get("OPENAI_API_KEY"):

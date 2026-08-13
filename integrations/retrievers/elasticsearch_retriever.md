@@ -6,11 +6,11 @@
 
 The `ElasticsearchRetriever` is a generic wrapper to enable flexible access to all `Elasticsearch` features through the [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).  For most use cases the other classes (`ElasticsearchStore`, `ElasticsearchEmbeddings`, etc.) should suffice, but if they don't you can use `ElasticsearchRetriever`.
 
-This guide will help you get started with the Elasticsearch [retriever](https://docs.langchain.com/oss/python/deepagents/retrieval). For detailed documentation of all `ElasticsearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/retrievers/ElasticsearchRetriever).
+This guide will help you get started with the Elasticsearch [retriever](../../deepagents/retrieval.md). For detailed documentation of all `ElasticsearchRetriever` features and configurations head to the [API reference](https://reference.langchain.com/python/langchain-elasticsearch/retrievers/ElasticsearchRetriever).
 
 ### Integration details
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/retrievers/elasticsearch_retriever).
+> **Interactive content:** [View this section in the original documentation](elasticsearch_retriever.md).
 
 ## Setup
 
@@ -21,7 +21,7 @@ There are two main ways to set up an Elasticsearch instance:
 
 * Local Install Elasticsearch: Get started with Elasticsearch by running it locally. The easiest way is to use the official Elasticsearch Docker image. See the [Elasticsearch Docker documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html) for more information.
 
-If you want to get automated tracing from individual queries, you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get automated tracing from individual queries, you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -30,7 +30,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ### Installation
 
-This retriever lives in the `langchain-elasticsearch` package. For demonstration purposes, we will also install `langchain-community` to generate text [embeddings](https://docs.langchain.com/oss/python/integrations/embeddings).
+This retriever lives in the `langchain-elasticsearch` package. For demonstration purposes, we will also install `langchain-community` to generate text [embeddings](../embeddings.md).
 
 > [!WARNING]
 > The `langchain-community` package is no longer maintained. Examples that import from `langchain_community` may be outdated or broken. Use with caution.
@@ -60,7 +60,7 @@ es_client = Elasticsearch(hosts=[es_url])
 es_client.info()
 ```
 
-For vector search, we are going to use random embeddings just for illustration. For real use cases, pick one of the available LangChain [Embeddings](https://docs.langchain.com/oss/python/integrations/embeddings) classes.
+For vector search, we are going to use random embeddings just for illustration. For real use cases, pick one of the available LangChain [Embeddings](../embeddings.md) classes.
 
 ```python
 embeddings = DeterministicFakeEmbedding(size=3)

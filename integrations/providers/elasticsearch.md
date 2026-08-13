@@ -56,7 +56,7 @@ uv add langchain-elasticsearch
 
 ## Embedding models
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/embeddings/elasticsearch).
+See a [usage example](../embeddings/elasticsearch.md).
 
 ```python
 from langchain_elasticsearch import ElasticsearchEmbeddings
@@ -64,7 +64,7 @@ from langchain_elasticsearch import ElasticsearchEmbeddings
 
 ## Vector store
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch).
+See a [usage example](../vectorstores/elasticsearch.md).
 
 ```python
 from langchain_elasticsearch import ElasticsearchStore
@@ -77,7 +77,7 @@ from langchain_elasticsearch import ElasticsearchStore
 The `ElasticsearchRetriever` enables flexible access to all Elasticsearch features
 through the Query DSL.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/retrievers/elasticsearch_retriever).
+See a [usage example](../retrievers/elasticsearch_retriever.md).
 
 ```python
 from langchain_elasticsearch import ElasticsearchRetriever
@@ -91,7 +91,7 @@ from langchain_elasticsearch import ElasticsearchCache
 
 ## Byte store
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/stores/elasticsearch).
+See a [usage example](../stores/elasticsearch.md).
 
 ```python
 from langchain_elasticsearch import ElasticsearchEmbeddingsCache

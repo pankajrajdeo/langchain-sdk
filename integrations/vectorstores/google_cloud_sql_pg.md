@@ -132,7 +132,7 @@ await engine.ainit_vectorstore_table(
 
 ### Create an embedding class instance
 
-You can use any [LangChain embeddings model](https://docs.langchain.com/oss/python/integrations/embeddings/).
+You can use any [LangChain embeddings model](../embeddings.md).
 You may need to enable Vertex AI API to use `VertexAIEmbeddings`. We recommend setting the embedding model's version for production, learn more about the [Text embeddings models](https://cloud.google.com/vertex-ai/docs/generative-ai/model-reference/text-embeddings).
 
 ```python

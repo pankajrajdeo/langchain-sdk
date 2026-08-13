@@ -56,7 +56,7 @@ curl -fsSL https://elastic.co/start-local | sh -s -- --esonly
 
 For production, we recommend you run with security enabled. To connect with login credentials, you can use the parameters `es_api_key` or `es_user` and `es_password`.
 
-> **Interactive content:** [View this section in the original documentation](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch).
+> **Interactive content:** [View this section in the original documentation](elasticsearch.md).
 
 ```python
 # | output: false
@@ -112,7 +112,7 @@ elastic_vector_search = ElasticsearchStore(
 )
 ```
 
-If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](https://docs.langchain.com/langsmith/observability) API key by uncommenting below:
+If you want to get best in-class automated tracing of your model calls you can also set your [LangSmith](../../langsmith/observability.md) API key by uncommenting below:
 
 ```python
 os.environ["LANGSMITH_API_KEY"] = getpass.getpass("Enter your LangSmith API key: ")
@@ -121,7 +121,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ## Initialization
 
-Elasticsearch is running locally on localhost:9200 with [docker](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch#running-elasticsearch-locally). For more details on how to connect to Elasticsearch from Elastic Cloud, see [connecting with authentication](https://docs.langchain.com/oss/python/integrations/vectorstores/elasticsearch#running-with-authentication) above.
+Elasticsearch is running locally on localhost:9200 with [docker](#running-elasticsearch-locally). For more details on how to connect to Elasticsearch from Elastic Cloud, see [connecting with authentication](#running-with-authentication) above.
 
 ```python
 from langchain_elasticsearch import ElasticsearchStore
@@ -629,9 +629,9 @@ print(results[0])
 
 For guides on how to use this vector store for retrieval-augmented generation (RAG), see the following sections:
 
-* [Retrieval docs](https://docs.langchain.com/oss/python/deepagents/retrieval)
-* [Build a RAG app with LangChain](https://docs.langchain.com/oss/python/deepagents/rag)
-* [Agentic RAG](https://docs.langchain.com/oss/python/langgraph/agentic-rag)
+* [Retrieval docs](../../deepagents/retrieval.md)
+* [Build a RAG app with LangChain](../../deepagents/rag.md)
+* [Agentic RAG](../../langgraph/agentic-rag.md)
 
 # FAQ
 

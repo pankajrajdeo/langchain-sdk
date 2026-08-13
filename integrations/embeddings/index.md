@@ -7,7 +7,7 @@ Integrate with embedding models using LangChain Python.
 > [!NOTE]
 > This overview covers **text-based embedding models**. LangChain does not currently support multimodal embeddings.
 >
-> See [top embedding models](https://docs.langchain.com/oss/python/integrations/embeddings/index#top-integrations).
+> See [top embedding models](#top-integrations).
 
 Embedding models transform raw text—such as a sentence, paragraph, or tweet—into a fixed-length vector of numbers that captures its **semantic meaning**. These vectors allow machines to compare and search text based on meaning rather than exact words.
 
@@ -55,17 +55,17 @@ Two main methods are available:
 
 | Integration                                                                                          | Downloads                                                                                                              |
 | :--------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [`AzureOpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai)                          | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>              |
-| [`OpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/openai)                                     | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>              |
-| [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai)           | <span><a href="https://pypi.org/project/langchain-google-genai/">  <img alt="Downloads per month" /></a></span>        |
-| [`DatabricksEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/databricks)                             | <span><a href="https://pypi.org/project/databricks-langchain/">  <img alt="Downloads per month" /></a></span>          |
-| [`OllamaEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/ollama)                                     | <span><a href="https://pypi.org/project/langchain-ollama/">  <img alt="Downloads per month" /></a></span>              |
-| [`Sentence Transformers on Hugging Face`](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers) | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>         |
-| [`MistralAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai)                               | <span><a href="https://pypi.org/project/langchain-mistralai/">  <img alt="Downloads per month" /></a></span>           |
-| [`CohereEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)                                     | <span><a href="https://pypi.org/project/langchain-cohere/">  <img alt="Downloads per month" /></a></span>              |
-| [`NVIDIAEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)                        | <span><a href="https://pypi.org/project/langchain-nvidia-ai-endpoints/">  <img alt="Downloads per month" /></a></span> |
-| [`PerplexityEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/perplexity)                             | <span><a href="https://pypi.org/project/langchain-perplexity/">  <img alt="Downloads per month" /></a></span>          |
-| [`TogetherEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/together)                                 | <span><a href="https://pypi.org/project/langchain-together/">  <img alt="Downloads per month" /></a></span>            |
+| [`AzureOpenAIEmbeddings`](azure_openai.md)                          | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>              |
+| [`OpenAIEmbeddings`](openai.md)                                     | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>              |
+| [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md)           | <span><a href="https://pypi.org/project/langchain-google-genai/">  <img alt="Downloads per month" /></a></span>        |
+| [`DatabricksEmbeddings`](databricks.md)                             | <span><a href="https://pypi.org/project/databricks-langchain/">  <img alt="Downloads per month" /></a></span>          |
+| [`OllamaEmbeddings`](ollama.md)                                     | <span><a href="https://pypi.org/project/langchain-ollama/">  <img alt="Downloads per month" /></a></span>              |
+| [`Sentence Transformers on Hugging Face`](sentence_transformers.md) | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>         |
+| [`MistralAIEmbeddings`](mistralai.md)                               | <span><a href="https://pypi.org/project/langchain-mistralai/">  <img alt="Downloads per month" /></a></span>           |
+| [`CohereEmbeddings`](cohere.md)                                     | <span><a href="https://pypi.org/project/langchain-cohere/">  <img alt="Downloads per month" /></a></span>              |
+| [`NVIDIAEmbeddings`](nvidia_ai_endpoints.md)                        | <span><a href="https://pypi.org/project/langchain-nvidia-ai-endpoints/">  <img alt="Downloads per month" /></a></span> |
+| [`PerplexityEmbeddings`](perplexity.md)                             | <span><a href="https://pypi.org/project/langchain-perplexity/">  <img alt="Downloads per month" /></a></span>          |
+| [`TogetherEmbeddings`](together.md)                                 | <span><a href="https://pypi.org/project/langchain-together/">  <img alt="Downloads per month" /></a></span>            |
 
 ### Common deployment patterns
 
@@ -84,7 +84,7 @@ LangChain treats all four the same: you instantiate an `Embeddings` subclass and
 
 Start from the [MTEB leaderboard](https://huggingface.co/spaces/mteb/leaderboard). MTEB benchmarks embedding models across retrieval, clustering, classification, and reranking tasks, and is the de-facto industry reference. Filter by your language(s) and by task (retrieval is the most common for RAG).
 
-Leaderboard numbers don't always transfer, so run a small evaluation on your own data before committing. LangSmith has tooling for this; see the [evaluation guides](https://docs.langchain.com/langsmith/evaluation-concepts).
+Leaderboard numbers don't always transfer, so run a small evaluation on your own data before committing. LangSmith has tooling for this; see the [evaluation guides](../../langsmith/evaluation-concepts.md).
 
 #### Cost
 
@@ -181,10 +181,10 @@ Caching embeddings can be done using a `CacheBackedEmbeddings`. This wrapper sto
 The main supported way to initialize a `CacheBackedEmbeddings` is `from_bytes_store`. It takes the following parameters:
 
 * **`underlying_embedder`**: The embedder to use for embedding.
-* **`document_embedding_cache`**: Any [`ByteStore`](https://docs.langchain.com/oss/python/integrations/stores/) for caching document embeddings.
+* **`document_embedding_cache`**: Any [`ByteStore`](../stores.md) for caching document embeddings.
 * **`batch_size`**: (optional, defaults to `None`) The number of documents to embed between store updates.
 * **`namespace`**: (optional, defaults to `""`) The namespace to use for the document cache. Helps avoid collisions (e.g., set it to the embedding model name).
-* **`query_embedding_cache`**: (optional, defaults to `None`) A [`ByteStore`](https://docs.langchain.com/oss/python/integrations/stores/) for caching query embeddings, or `True` to reuse the same store as `document_embedding_cache`.
+* **`query_embedding_cache`**: (optional, defaults to `None`) A [`ByteStore`](../stores.md) for caching query embeddings, or `True` to reuse the same store as `document_embedding_cache`.
 
 > [!IMPORTANT]
 > - Always set the `namespace` parameter to avoid collisions when using different embedding models.
@@ -220,39 +220,39 @@ print(cached_embedder.embed_query("Hello, world!"))
 print(f"Second call took: {time.time() - tic:.2f} seconds")
 ```
 
-In production, you would typically use a more robust persistent store, such as a database or cloud storage. Please see [stores integrations](https://docs.langchain.com/oss/python/integrations/stores/) for options.
+In production, you would typically use a more robust persistent store, such as a database or cloud storage. Please see [stores integrations](../stores.md) for options.
 
 ## All embedding models
 
 | Integration                                                                                            | Downloads                                                                                                                 |
 | :----------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| [`AzureOpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/azure_openai)                            | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>                 |
-| [`OpenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/openai)                                       | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>                 |
-| [`Google Vertex AI`](https://docs.langchain.com/oss/python/integrations/embeddings/google_vertex_ai)                             | <span><a href="https://pypi.org/project/langchain-google-vertexai/">  <img alt="Downloads per month" /></a></span>        |
-| [`GoogleGenerativeAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/google_generative_ai)             | <span><a href="https://pypi.org/project/langchain-google-genai/">  <img alt="Downloads per month" /></a></span>           |
-| [`BedrockEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/bedrock)                                     | <span><a href="https://pypi.org/project/langchain-aws/">  <img alt="Downloads per month" /></a></span>                    |
-| [`DatabricksEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/databricks)                               | <span><a href="https://pypi.org/project/databricks-langchain/">  <img alt="Downloads per month" /></a></span>             |
-| [`OllamaEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/ollama)                                       | <span><a href="https://pypi.org/project/langchain-ollama/">  <img alt="Downloads per month" /></a></span>                 |
-| [`BGE on Hugging Face`](https://docs.langchain.com/oss/python/integrations/embeddings/bge_huggingface)                           | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
-| [`Hugging Face`](https://docs.langchain.com/oss/python/integrations/embeddings/huggingfacehub)                                   | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
-| [`Instructor embeddings on Hugging Face`](https://docs.langchain.com/oss/python/integrations/embeddings/instruct_embeddings)     | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
-| [`Sentence Transformers on Hugging Face`](https://docs.langchain.com/oss/python/integrations/embeddings/sentence_transformers)   | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
-| [`Text embeddings inference`](https://docs.langchain.com/oss/python/integrations/embeddings/text_embeddings_inference)           | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
-| [`FireworksEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/fireworks)                                 | <span><a href="https://pypi.org/project/langchain-fireworks/">  <img alt="Downloads per month" /></a></span>              |
-| [`MistralAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/mistralai)                                 | <span><a href="https://pypi.org/project/langchain-mistralai/">  <img alt="Downloads per month" /></a></span>              |
-| [`Pinecone`](https://docs.langchain.com/oss/python/integrations/embeddings/pinecone)                                             | <span><a href="https://pypi.org/project/langchain-pinecone/">  <img alt="Downloads per month" /></a></span>               |
-| [`CohereEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/cohere)                                       | <span><a href="https://pypi.org/project/langchain-cohere/">  <img alt="Downloads per month" /></a></span>                 |
-| [`NVIDIAEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/nvidia_ai_endpoints)                          | <span><a href="https://pypi.org/project/langchain-nvidia-ai-endpoints/">  <img alt="Downloads per month" /></a></span>    |
-| [`WatsonxEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/ibm_watsonx)                                 | <span><a href="https://pypi.org/project/langchain-ibm/">  <img alt="Downloads per month" /></a></span>                    |
-| [`PerplexityEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/perplexity)                               | <span><a href="https://pypi.org/project/langchain-perplexity/">  <img alt="Downloads per month" /></a></span>             |
-| [`Elasticsearch`](https://docs.langchain.com/oss/python/integrations/embeddings/elasticsearch)                                   | <span><a href="https://pypi.org/project/langchain-elasticsearch/">  <img alt="Downloads per month" /></a></span>          |
-| [`Oracle AI vector search generate`](https://docs.langchain.com/oss/python/integrations/embeddings/oracleai)                     | <span><a href="https://pypi.org/project/langchain-oracledb/">  <img alt="Downloads per month" /></a></span>               |
-| [`SambanovaEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/sambanova)                                 | <span><a href="https://pypi.org/project/langchain-sambanova/">  <img alt="Downloads per month" /></a></span>              |
-| [`OCIGenAIEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/oci_generative_ai)                          | <span><a href="https://pypi.org/project/langchain-oci/">  <img alt="Downloads per month" /></a></span>                    |
-| [`BasetenEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/baseten)                                     | <span><a href="https://pypi.org/project/langchain-baseten/">  <img alt="Downloads per month" /></a></span>                |
-| [`TogetherEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/together)                                   | <span><a href="https://pypi.org/project/langchain-together/">  <img alt="Downloads per month" /></a></span>               |
-| [`Voyage AI`](https://docs.langchain.com/oss/python/integrations/embeddings/voyageai)                                            | <span><a href="https://pypi.org/project/langchain-voyageai/">  <img alt="Downloads per month" /></a></span>               |
-| [`UpstageEmbeddings`](https://docs.langchain.com/oss/python/integrations/embeddings/upstage)                                     | <span><a href="https://pypi.org/project/langchain-upstage/">  <img alt="Downloads per month" /></a></span>                |
+| [`AzureOpenAIEmbeddings`](azure_openai.md)                            | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>                 |
+| [`OpenAIEmbeddings`](openai.md)                                       | <span><a href="https://pypi.org/project/langchain-openai/">  <img alt="Downloads per month" /></a></span>                 |
+| [`Google Vertex AI`](google_vertex_ai.md)                             | <span><a href="https://pypi.org/project/langchain-google-vertexai/">  <img alt="Downloads per month" /></a></span>        |
+| [`GoogleGenerativeAIEmbeddings`](google_generative_ai.md)             | <span><a href="https://pypi.org/project/langchain-google-genai/">  <img alt="Downloads per month" /></a></span>           |
+| [`BedrockEmbeddings`](bedrock.md)                                     | <span><a href="https://pypi.org/project/langchain-aws/">  <img alt="Downloads per month" /></a></span>                    |
+| [`DatabricksEmbeddings`](databricks.md)                               | <span><a href="https://pypi.org/project/databricks-langchain/">  <img alt="Downloads per month" /></a></span>             |
+| [`OllamaEmbeddings`](ollama.md)                                       | <span><a href="https://pypi.org/project/langchain-ollama/">  <img alt="Downloads per month" /></a></span>                 |
+| [`BGE on Hugging Face`](bge_huggingface.md)                           | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
+| [`Hugging Face`](huggingfacehub.md)                                   | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
+| [`Instructor embeddings on Hugging Face`](instruct_embeddings.md)     | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
+| [`Sentence Transformers on Hugging Face`](sentence_transformers.md)   | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
+| [`Text embeddings inference`](text_embeddings_inference.md)           | <span><a href="https://pypi.org/project/langchain-huggingface/">  <img alt="Downloads per month" /></a></span>            |
+| [`FireworksEmbeddings`](fireworks.md)                                 | <span><a href="https://pypi.org/project/langchain-fireworks/">  <img alt="Downloads per month" /></a></span>              |
+| [`MistralAIEmbeddings`](mistralai.md)                                 | <span><a href="https://pypi.org/project/langchain-mistralai/">  <img alt="Downloads per month" /></a></span>              |
+| [`Pinecone`](pinecone.md)                                             | <span><a href="https://pypi.org/project/langchain-pinecone/">  <img alt="Downloads per month" /></a></span>               |
+| [`CohereEmbeddings`](cohere.md)                                       | <span><a href="https://pypi.org/project/langchain-cohere/">  <img alt="Downloads per month" /></a></span>                 |
+| [`NVIDIAEmbeddings`](nvidia_ai_endpoints.md)                          | <span><a href="https://pypi.org/project/langchain-nvidia-ai-endpoints/">  <img alt="Downloads per month" /></a></span>    |
+| [`WatsonxEmbeddings`](ibm_watsonx.md)                                 | <span><a href="https://pypi.org/project/langchain-ibm/">  <img alt="Downloads per month" /></a></span>                    |
+| [`PerplexityEmbeddings`](perplexity.md)                               | <span><a href="https://pypi.org/project/langchain-perplexity/">  <img alt="Downloads per month" /></a></span>             |
+| [`Elasticsearch`](elasticsearch.md)                                   | <span><a href="https://pypi.org/project/langchain-elasticsearch/">  <img alt="Downloads per month" /></a></span>          |
+| [`Oracle AI vector search generate`](oracleai.md)                     | <span><a href="https://pypi.org/project/langchain-oracledb/">  <img alt="Downloads per month" /></a></span>               |
+| [`SambanovaEmbeddings`](sambanova.md)                                 | <span><a href="https://pypi.org/project/langchain-sambanova/">  <img alt="Downloads per month" /></a></span>              |
+| [`OCIGenAIEmbeddings`](oci_generative_ai.md)                          | <span><a href="https://pypi.org/project/langchain-oci/">  <img alt="Downloads per month" /></a></span>                    |
+| [`BasetenEmbeddings`](baseten.md)                                     | <span><a href="https://pypi.org/project/langchain-baseten/">  <img alt="Downloads per month" /></a></span>                |
+| [`TogetherEmbeddings`](together.md)                                   | <span><a href="https://pypi.org/project/langchain-together/">  <img alt="Downloads per month" /></a></span>               |
+| [`Voyage AI`](voyageai.md)                                            | <span><a href="https://pypi.org/project/langchain-voyageai/">  <img alt="Downloads per month" /></a></span>               |
+| [`UpstageEmbeddings`](upstage.md)                                     | <span><a href="https://pypi.org/project/langchain-upstage/">  <img alt="Downloads per month" /></a></span>                |
 | [`Naver`](https://guide.ncloud-docs.com/docs/clovastudio-dev-langchain)                                | <span><a href="https://pypi.org/project/langchain-naver/">  <img alt="Downloads per month" /></a></span>                  |
 | [`NomicEmbeddings`](https://atlas.nomic.ai/)                                                           | <span><a href="https://pypi.org/project/langchain-nomic/">  <img alt="Downloads per month" /></a></span>                  |
 | [`Nebius`](https://docs.tokenfactory.nebius.com/quickstart)                                            | <span><a href="https://pypi.org/project/langchain-nebius/">  <img alt="Downloads per month" /></a></span>                 |

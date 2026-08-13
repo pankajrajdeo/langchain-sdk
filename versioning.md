@@ -106,7 +106,7 @@ Both LangChain and LangGraph 1.0 are designated as LTS releases:
 
 **Deep Agents** (`deepagents`) is a pre-1.0 package under active development. As a rapidly evolving package, the API may change between minor versions, though we minimize breaking changes when possible. Deep Agents will adopt the same LTS policies as LangChain and LangGraph after reaching version 1.0.
 
-For detailed information about release status and support timelines, see the [Release policy](https://docs.langchain.com/oss/python/release-policy).
+For detailed information about release status and support timelines, see the [Release policy](release-policy.md).
 
 ## Check your version
 
@@ -158,7 +158,7 @@ We occasionally release alpha and beta versions for early testing:
 
 ## See also
 
-* [Release policy](https://docs.langchain.com/oss/python/release-policy) - Detailed release and deprecation policies
+* [Release policy](release-policy.md) - Detailed release and deprecation policies
 
 ***
 

@@ -3,7 +3,7 @@
 > Integrate with xAI using LangChain Python.
 
 > [!WARNING]
-> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](https://docs.langchain.com/oss/python/integrations/providers/groq).
+> This page makes reference to Grok models provided by [xAI](https://docs.x.ai/docs/overview) - not to be confused with [Groq](https://console.groq.com/docs/overview), a separate AI hardware and software company. See the [Groq provider page](groq.md).
 
 [xAI](https://console.x.ai) offers an API to interact with Grok models. This example goes over how to use LangChain to interact with xAI models.
 
@@ -19,7 +19,7 @@ To use xAI, you'll need to [create an API key](https://console.x.ai/). The API k
 
 ## Example
 
-See [ChatXAI docs](https://docs.langchain.com/oss/python/integrations/chat/xai) for detail and supported features.
+See [ChatXAI docs](../chat/xai.md) for detail and supported features.
 
 ```python
 # Querying chat models with xAI

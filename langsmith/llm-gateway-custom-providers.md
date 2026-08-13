@@ -3,13 +3,13 @@
 Route requests through the LLM Gateway to a custom OpenAI- or Anthropic-compatible endpoint, such as a self-hosted open-source model.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
-In addition to the [built-in providers](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access#choose-a-provider-path), the LLM Gateway can proxy requests to **any OpenAI-compatible or Anthropic-compatible endpoint** you configure yourself, such as a self-hosted open-source model served through an inference server (vLLM, Ollama, and similar).
+In addition to the [built-in providers](llm-gateway-direct-model-access.md#choose-a-provider-path), the LLM Gateway can proxy requests to **any OpenAI-compatible or Anthropic-compatible endpoint** you configure yourself, such as a self-hosted open-source model served through an inference server (vLLM, Ollama, and similar).
 
 ## How it works
 
-A custom provider is defined by a [model configuration](https://docs.langchain.com/langsmith/model-configurations) that you save under **Settings → Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
+A custom provider is defined by a [model configuration](model-configurations.md) that you save under **Settings → Model configurations** in the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-llm-gateway-custom-providers). The provider you select in that configuration sets the format the gateway speaks to your upstream:
 
 | Configuration provider         | Wire format        | Example endpoints                                     |
 | ------------------------------ | ------------------ | ----------------------------------------------------- |
@@ -20,7 +20,7 @@ The gateway uses the following options from the configuration:
 
 * A **base URL**: the upstream endpoint the gateway forwards requests to.
 * A **model name**: the model identifier your upstream expects.
-* An **API key**: stored as a [workspace secret](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#1-add-provider-secrets), never sent by the client.
+* An **API key**: stored as a [workspace secret](llm-gateway-admin-setup.md#1-add-provider-secrets), never sent by the client.
 
 You address the saved configuration by name through one of two routes, depending on whether you want callers to choose the model or want to enforce the configured one:
 
@@ -32,7 +32,7 @@ You address the saved configuration by name through one of two routes, depending
 Both routes look up the same configuration, resolve the same secret, and proxy to the same upstream URL; they only differ in whether the model name is enforced.
 
 > [!NOTE]
-> `{configName}` is the configuration name from your workspace [model configuration](https://docs.langchain.com/langsmith/model-configurations). If the name contains characters that aren't URL-safe (such as `/` or spaces), URL-encode them in the path. For example, a configuration named `meta-llama/Llama-3.1-8B-Instruct` becomes `https://gateway.smith.langchain.com/providers/meta-llama%2FLlama-3.1-8B-Instruct/v1/chat/completions`.
+> `{configName}` is the configuration name from your workspace [model configuration](model-configurations.md). If the name contains characters that aren't URL-safe (such as `/` or spaces), URL-encode them in the path. For example, a configuration named `meta-llama/Llama-3.1-8B-Instruct` becomes `https://gateway.smith.langchain.com/providers/meta-llama%2FLlama-3.1-8B-Instruct/v1/chat/completions`.
 
 ## 1. Create a custom provider configuration
 
@@ -91,9 +91,9 @@ The gateway overrides the request body's `model` field with the model name from 
 
 ## Next steps
 
-* [Model fallbacks](https://docs.langchain.com/langsmith/llm-gateway-fallbacks): chain these configurations so a backup takes over when one rate-limits or errors.
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): apply cost limits to custom providers.
-* [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection): redact sensitive data before it reaches your endpoint.
+* [Model fallbacks](llm-gateway-fallbacks.md): chain these configurations so a backup takes over when one rate-limits or errors.
+* [Spend policies](llm-gateway-spend-policies.md): apply cost limits to custom providers.
+* [Data protection](llm-gateway-data-protection.md): redact sensitive data before it reaches your endpoint.
 
 ***
 

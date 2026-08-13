@@ -2,13 +2,13 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/changelog)
 Weekly updates to LangSmith Cloud
 
-Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observability) and [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
+Weekly updates to [LangSmith Cloud](observability.md) and [LangSmith Fleet](fleet.md).
 
 > [!NOTE]
 > **Subscribe**: This changelog includes an [RSS feed](https://docs.langchain.com/langsmith/product-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
 > [!NOTE]
-> If you use self-hosted LangSmith, see the [self-hosted changelog](https://docs.langchain.com/langsmith/self-hosted-changelog) for updates.
+> If you use self-hosted LangSmith, see the [self-hosted changelog](self-hosted-changelog.md) for updates.
 
 #### LangSmith Cloud
 ## August 3-10, 2026
@@ -127,7 +127,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Uploading a .csv or .jsonl dataset now works regardless of the Content-Type the browser reports. Windows browsers label .csv files as an Excel type, which previously caused valid uploads to fail. Uppercase filenames such as DATASET.CSV are also accepted.
 * Evaluator lists on a dataset or tracing project now show an evaluator's current name instead of the name it had when it was attached. Feedback keys are unchanged by a rename.
 * Metadata columns in the experiment comparison grid, including `example.metadata.<key>`, now render their values instead of staying empty.
-* LangSmith marks every legacy endpoint replaced by the SmithDB SDK migration guide as deprecated: the v1 runs query and retrieve endpoints, the v1 run sharing and public-run read endpoints, `POST /api/v1/datasets/{dataset_id}/runs`, and the annotation queue run endpoints. All of them now respond with `Deprecation: true`, a `Sunset` date of January 31, 2027, and a `Link` header pointing at the migration guide and, where a single replacement exists, the successor endpoint. [Learn more](https://docs.langchain.com/langsmith/smithdb-sdk-migration).
+* LangSmith marks every legacy endpoint replaced by the SmithDB SDK migration guide as deprecated: the v1 runs query and retrieve endpoints, the v1 run sharing and public-run read endpoints, `POST /api/v1/datasets/{dataset_id}/runs`, and the annotation queue run endpoints. All of them now respond with `Deprecation: true`, a `Sunset` date of January 31, 2027, and a `Link` header pointing at the migration guide and, where a single replacement exists, the successor endpoint. [Learn more](smithdb-sdk-migration.md).
 * Dataset experiment tables can sort by feedback score when SmithDB queries are enabled and ClickHouse queries are disabled.
 * Annotation queue item APIs use project\_id for the tracing project. Request bodies also accept session\_id as an alias.
 * Dataset example views restore clear spacing between the example details and tab navigation.
@@ -210,15 +210,15 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Generating an API key from the LLM Gateway Home connect card now shows the standard one-time key reveal dialog, and each provider's "Configured" status now reflects the workspace's actual secrets instead of a fixed list.
 * The "Purchase Credits" button on LLM Gateway Home now opens the credit purchase dialog instead of showing a "coming soon" message, and the balance bar now shows spend against what's actually purchased instead of against the plan's purchase limit.
 * The Cost Controls and Model Fallbacks shortcuts on LLM Gateway Home now read "View cost controls"/"View model fallbacks" for members who can't manage the org, instead of "Manage"/"Configure".
-* Gateway Home code samples now use the gateway hostname constructed for each LangSmith region and default to the Responses API where supported. [Learn more](https://docs.langchain.com/langsmith/llm-gateway).
+* Gateway Home code samples now use the gateway hostname constructed for each LangSmith region and default to the Responses API where supported. [Learn more](llm-gateway.md).
 * LLM Gateway policy tabs now clarify that policies apply across the organization, while Usage clarifies that spend is scoped to the selected workspace.
 * The home onboarding step now states your Gateway Credits balance in US dollars, matching the amount you purchase, instead of converting it to LCUs.
 * The prompt you copy into your coding agent during onboarding now states how the agent should reach a model, based on the provider you picked: Gateway Credits, or your own provider API key.
 * Homepage spacing and surface tinting now match design review feedback, and several small copy fixes clarify credit limits, provider status, and organization-level purchase limits.
-* LLM Gateway Home again includes Google Gemini and generates valid model identifiers for Gemini and Baseten connect samples. [Learn more](https://docs.langchain.com/langsmith/llm-gateway).
+* LLM Gateway Home again includes Google Gemini and generates valid model identifiers for Gemini and Baseten connect samples. [Learn more](llm-gateway.md).
 * LLM Gateway Home now highlights the selected model and lets you switch connect samples between Chat Completions, Messages, and Responses formats.
 * The LLM Gateway Usage tab now explains when usage queries aren't available for a deployment instead of showing failed dashboard requests.
-* When you select Gateway Credits during onboarding, the prompt copied into your coding agent now includes the correct Gateway URL for your deployment. [Learn more](https://docs.langchain.com/langsmith/llm-gateway).
+* When you select Gateway Credits during onboarding, the prompt copied into your coding agent now includes the correct Gateway URL for your deployment. [Learn more](llm-gateway.md).
 * Gateway Credits checkout now remains on the active purchase step while a free workspace upgrades to the Developer plan, instead of briefly showing the saved-card view before closing.
 * Requests that set prompt\_cache\_options (or the deprecated prompt\_cache\_retention) now enable Anthropic prompt caching when the LLM Gateway translates an OpenAI Chat Completions or Responses request to a Claude model, instead of ignoring the field. Anthropic's default cache lifetime applies, and prompt\_cache\_key, prompt\_cache\_retention, and prompt\_cache\_options are all preserved when translating between the Chat Completions and Responses formats.
 * Tooltips on disabled LLM Gateway policy controls now read "You need organization admin access to create policies" instead of referencing the raw organization:manage permission string.
@@ -319,7 +319,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Gateway Monitoring now shows spend for the workspace you're viewing rather than the whole organization, with a dropdown to switch workspaces from the page. Spend cards show N/A instead of a repeated error message when a workspace's gateway project can't be resolved.
 * The Rate Limiting tab in Gateway Policies now supports creating, editing, deleting, and enabling/disabling request- and token-based rate-limit policies, alongside the existing cost-control and data-protection policy management.
 * Editing a materialized LLM Gateway policy now turns it into a standalone override, preventing later default policy changes from overwriting its custom limits.
-* You can now call LangChain-managed models through the LLM gateway without configuring your own provider credentials. Usage is metered at cost and bounded by a monthly spend cap based on your plan; once the cap is reached, further requests are blocked until the next month. The cap can be raised on request. [Learn more](https://docs.langchain.com/langsmith/llm-gateway-langchain-provider).
+* You can now call LangChain-managed models through the LLM gateway without configuring your own provider credentials. Usage is metered at cost and bounded by a monthly spend cap based on your plan; once the cap is reached, further requests are blocked until the next month. The cap can be raised on request. [Learn more](llm-gateway-langchain-provider.md).
 * Selecting an entity filter on the LLM Gateway spend monitoring page no longer flips the breakdown to a different dimension.
 * Selecting more than one entity in any Gateway Monitoring breakdown filter (model, user, or API key) now returns spend for all chosen entities instead of no data.
 * The Gateway Monitoring spend chart now formats axis labels and tooltip ranges in UTC to match its UTC-anchored buckets, so viewers in non-UTC timezones no longer see off-by-one dates.
@@ -329,17 +329,17 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * When a specific start/end date is selected in the LLM Gateway monitoring page's date range picker, the button now shows the dates in UTC and appends "(UTC)" so it's clear the range doesn't follow your local timezone. Relative ranges like "Last 7 days" are unaffected.
 * The "Spend share" column on the LLM Gateway Monitoring spend dashboard no longer cuts off its header text.
 * The LLM Gateway now lives in a dedicated top-level sidebar section instead of under Settings, with a new Home tab listing your custom model configurations and a ready-to-run code snippet for the gateway. Old Settings gateway links redirect automatically.
-* A Home banner for LangSmith Cloud orgs with LLM Gateway enabled highlights how Gateway manages costs and improves runtime reliability. [Learn more](https://docs.langchain.com/langsmith/llm-gateway).
+* A Home banner for LangSmith Cloud orgs with LLM Gateway enabled highlights how Gateway manages costs and improves runtime reliability. [Learn more](llm-gateway.md).
 
 ## July 13-17, 2026
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* The legacy feedback formula endpoints (`POST/GET /feedback/formulas` and `GET/PUT/DELETE /feedback/formulas/{feedback_formula_id}`) that back composite scores are deprecated in favor of [composite evaluators](https://docs.langchain.com/langsmith/composite-evaluators-ui), which implement a composite score as a code evaluator plus a run rule, and are scheduled for removal on 2026-08-20. Migrate existing feedback formulas to the new composite model.
+* The legacy feedback formula endpoints (`POST/GET /feedback/formulas` and `GET/PUT/DELETE /feedback/formulas/{feedback_formula_id}`) that back composite scores are deprecated in favor of [composite evaluators](composite-evaluators-ui.md), which implement a composite score as a code evaluator plus a run rule, and are scheduled for removal on 2026-08-20. Migrate existing feedback formulas to the new composite model.
 * Model, prompt, and tool chips in the Experiments table config cells now lay out from real measurements for accurate truncation, and the +N overflow badge is a clickable dropdown whose entries expose the same actions (filter, group by, open in playground, and details) as a chip's own menu.
-* Expanding the run tree for repetition runs in [experiment comparison](https://docs.langchain.com/langsmith/compare-experiment-results) views now works reliably when a repetition root has a project ID but no session ID.
-* [Evaluators](https://docs.langchain.com/langsmith/evaluators) linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
+* Expanding the run tree for repetition runs in [experiment comparison](compare-experiment-results.md) views now works reliably when a repetition root has a project ID but no session ID.
+* [Evaluators](evaluators.md) linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
 * Code evaluator upload now accepts Python entrypoints annotated with PEP 604 union return types (for example `-> dict | None`).
 * POST /v2/datasets//experiment-runs is the supported public API for paginated experiment comparison. Legacy dataset comparison helpers are removed from the public OpenAPI spec and generated SDKs; existing HTTP routes continue to work for LangSmith UI clients.
 * Each example's dataset splits now render as chips in the dataset Examples table, laid out from real measurements with a clickable +N overflow menu when an example belongs to more splits than fit the column.
@@ -348,10 +348,10 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Evaluator spend charts on project and dataset evaluator tabs keep their desktop layout on narrow screens and scroll horizontally instead of compressing the chart and stat cards.
 * The experiment comparison and group-by views now show each example's current dataset split rather than the split it had when the experiment ran, so you can tell whether failures already belong to a split without re-running the experiment.
 * Comparison view now loads token and cost stats from SmithDB for root runs, so the stats columns populate again instead of staying blank
-* LangSmith now caps reusable [evaluators](https://docs.langchain.com/langsmith/evaluators) per workspace to prevent unbounded resource growth. Contact support if your workspace needs a higher limit.
-* Creating [dataset examples](https://docs.langchain.com/langsmith/manage-datasets) from [source runs](https://docs.langchain.com/langsmith/manage-datasets) now correctly fetches run inputs and outputs backed by SmithDB, and no longer fails the whole request if one of several source runs can't be found.
+* LangSmith now caps reusable [evaluators](evaluators.md) per workspace to prevent unbounded resource growth. Contact support if your workspace needs a higher limit.
+* Creating [dataset examples](manage-datasets.md) from [source runs](manage-datasets.md) now correctly fetches run inputs and outputs backed by SmithDB, and no longer fails the whole request if one of several source runs can't be found.
 * Select multiple rows in an experiment (or select all matching the current filters) and add, replace, or remove their dataset splits in one action, or copy the selected examples to another dataset, instead of editing rows one at a time.
-* The `/runs/rules/validate` endpoint now supports [thread evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn). Pass `test_thread_id` and `session_id` to test a multi-turn evaluator against a real conversation before saving.
+* The `/runs/rules/validate` endpoint now supports [thread evaluators](online-evaluations-multi-turn.md). Pass `test_thread_id` and `session_id` to test a multi-turn evaluator against a real conversation before saving.
 * Custom code evaluators that time out or fail on a run now record an error on that run instead of silently leaving it without feedback, so partial evaluation failures are visible on the experiment.
 * The Open source run action on an example page now reads session and start time from dedicated example fields populated at creation, enabling reliable navigation to the source trace on SmithDB.
 * The thread evaluator config preview now shows the thread message formats the evaluator actually maps, instead of listing every available format.
@@ -363,15 +363,15 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Evaluator spend chart y-axes now abbreviate amounts of \$1,000 or more, making high-spend values easier to scan.
 * Exporting a dataset comparison view as CSV now returns a clear "file is too large to export" error instead of a generic server error when the export exceeds internal size limits.
 * Each split chip in a row's Splits cell is now interactive in the experiment results and comparison views, with an Edit splits action that opens the single-example split picker so you can reassign splits without leaving the table.
-* Add RUN items to a single [annotation queue](https://docs.langchain.com/langsmith/annotation-queues) with POST /annotation-queues//items. The server resolves runs via ClickHouse or SmithDB and returns a standards-shaped items envelope; THREAD support follows in a later release.
+* Add RUN items to a single [annotation queue](annotation-queues.md) with POST /annotation-queues//items. The server resolves runs via ClickHouse or SmithDB and returns a standards-shaped items envelope; THREAD support follows in a later release.
 * The LangSmith CLI now updates existing code evaluator rules in place when `evaluator upload --replace` is used, avoiding a delete-before-create window if the replacement upload fails.
-* Split the read datasets into a new download datasets permission.  Enforce this new permission in both the application and in APIs.  The download button is disabled for those users without the download permission. [Learn more](https://docs.langchain.com/langsmith/organization-workspace-operations#datasets).
+* Split the read datasets into a new download datasets permission.  Enforce this new permission in both the application and in APIs.  The download button is disabled for those users without the download permission. [Learn more](organization-workspace-operations.md#datasets).
 * Public dataset experiment traces open correctly when experiment runs provide their project identifier through the v2 response shape.
 * A run rule with a 0 sampling rate processes no runs, but the scheduler still enumerated it every tick. The scheduler query now skips rules with sampling\_rate 0 (parity with the is\_enabled check), so they are never dispatched.
 * Dataset and experiment tables now truncate long input and reference-output text and show detected base64 images as small thumbnails with a delayed larger preview, avoiding oversized hidden DOM content.
 * Experiment tables now defer full payload rendering and output diff preparation until those views are requested, improving responsiveness for runs with large agent trajectories.
 * Public dataset share links now resolve the sessions list (with stats) from SmithDB when ClickHouse querying is disabled, so shared dataset pages no longer fail to load on SmithDB-only deployments.
-* Add conversation threads to a single [annotation queue](https://docs.langchain.com/langsmith/annotation-queues) with POST /annotation-queues//items using item\_type THREAD (thread\_id + session\_id). Mixed RUN and THREAD batches are supported; the server resolves threads via ClickHouse or SmithDB.
+* Add conversation threads to a single [annotation queue](annotation-queues.md) with POST /annotation-queues//items using item\_type THREAD (thread\_id + session\_id). Mixed RUN and THREAD batches are supported; the server resolves threads via ClickHouse or SmithDB.
 * Code evaluators now get more time to run each batch, so evaluators that import heavy libraries like scikit-learn are less likely to time out.
 * POST /annotation-queues//items now accepts at most 200 items per request and returns a clear validation error when the limit is exceeded. Requests at the limit continue to succeed.
 * Applying an evaluator to an existing experiment could fail with "Failed to start evaluation" on large experiments. It now starts reliably even when the run count is temporarily unavailable.
@@ -387,7 +387,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Bulk export compression now defaults to zstandard (zstd) for improved performance. Self-hosted environments retain the gzip default via the FF\_BULK\_EXPORT\_DEFAULT\_COMPRESSION environment variable.
 * Authenticated users viewing public runs now see sidebar navigation for their last selected workspace. Logged-out viewers continue to see the public run without authenticated workspace navigation.
 * LangSmith now returns clearer 409 Conflict messages when duplicate run create or update payloads are submitted. The message indicates whether the duplicate was a run create or run update request when possible.
-* [LangSmith MCP tools](https://docs.langchain.com/langsmith/langsmith-mcp-server) that fetch runs or thread history now accept project UUIDs in addition to project names, making trace URL investigations faster and less error-prone.
+* [LangSmith MCP tools](langsmith-mcp-server.md) that fetch runs or thread history now accept project UUIDs in addition to project names, making trace URL investigations faster and less error-prone.
 * OpenTelemetry resource attributes (set via OTEL\_RESOURCE\_ATTRIBUTES) now appear on traces as metadata namespaced under otel.resource.\*, so you can attach details like user IDs without changing how your tracer emits spans.
 * Vercel AI SDK traces sent over raw OpenTelemetry now render in the Messages view. Previously these traces showed an empty Messages tab because no format adapter claimed them.
 * Thread stats requests that opt into streaming now return the main stats first and add feedback stats when they are ready.
@@ -414,24 +414,24 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 
 ### Engine
 
-* When an [Engine](https://docs.langchain.com/langsmith/engine) project reaches its monthly spend limit, the Next Run status chip and project spend card now show a clear "Monthly spend limit reached" state with a button that takes you straight to raising the limit.
+* When an [Engine](engine.md) project reaches its monthly spend limit, the Next Run status chip and project spend card now show a clear "Monthly spend limit reached" state with a button that takes you straight to raising the limit.
 * Upgrades the Redis client to improve recovery from Redis cluster topology changes, fixing cases where cluster reconnects could stall.
 * Engine now lets the parent agent recover from model-actionable subtask failures and retries transient provider or network errors before failing a run. This helps issue scans continue through recoverable model errors while preserving hard failures for auth, configuration, and code exceptions.
-* LangSmith exposes [Engine](https://docs.langchain.com/langsmith/engine) issue listing and retrieval through hosted MCP tools and generated SDK methods. Agents and API clients can fetch issue details directly by issue ID or filter issues by project, status, severity, tag, and update time.
-* A new [Engine](https://docs.langchain.com/langsmith/engine) board callout points you to the trace-scope setting, where you can restrict Engine's reviews to runs matching a run name or metadata value.
+* LangSmith exposes [Engine](engine.md) issue listing and retrieval through hosted MCP tools and generated SDK methods. Agents and API clients can fetch issue details directly by issue ID or filter issues by project, status, severity, tag, and update time.
+* A new [Engine](engine.md) board callout points you to the trace-scope setting, where you can restrict Engine's reviews to runs matching a run name or metadata value.
 * Engine-generated examples with assertions now add the Assertions evaluator when saved to a dataset from an annotation queue, matching the direct Add offline examples flow.
 * The Engine setup screen now shows an estimated monthly cost based on the project's recent trace volume and size, so you know roughly what to expect before starting analysis.
 * The Engine issue list now uses a single filter and sort menu with a compact, nested layout for Priority, Status, Tags, and Sort by, replacing the previous two separate popovers.
-* The [Engine](https://docs.langchain.com/langsmith/engine) issue list now shows the active sort order as a removable chip next to your filter chips whenever it differs from the default.
+* The [Engine](engine.md) issue list now shows the active sort order as a removable chip next to your filter chips whenever it differs from the default.
 * Engine issues can now be marked Fixing or Watching, and you can get a Slack alert when new traces recur on a watched issue.
-* The [Engine](https://docs.langchain.com/langsmith/engine) issue list no longer shows scan-timing details (next scan countdown, last run time, or a Run now action); a Pause/Resume control remains available in its own section in board settings.
+* The [Engine](engine.md) issue list no longer shows scan-timing details (next scan countdown, last run time, or a Run now action); a Pause/Resume control remains available in its own section in board settings.
 * Engine now verifies concrete claims in agent responses against trace evidence, improving detection of ungrounded artifacts, values, and claimed actions.
 
 ### Prompts and playground
 
 * Self-hosted Playground and evaluator outbound model calls now honor proxy environment variables while preserving SSRF validation on every request.
 * When you save a prompt to an application from the playground, LangSmith keeps the workspace application filter on All Applications instead of switching the rest of the UI to that application.
-* Typing a workspace member's name or email in the [Context Hub](https://docs.langchain.com/langsmith/prompt-context-hub#context-hub) search box now also returns the prompts and resources they created.
+* Typing a workspace member's name or email in the [Context Hub](prompt-context-hub.md#context-hub) search box now also returns the prompts and resources they created.
 * The playground now includes Claude Sonnet 5, Claude Fable 5, and Claude Opus 4.8 in the Anthropic, Bedrock, and Vertex AI model selectors. New Anthropic playground sessions default to Claude Sonnet 5.
 * Playground and evaluator calls to Amazon Bedrock using IAM Trusted Entity now resolve the correct LangSmith AWS credentials before assuming customer roles in AWS-hosted LangSmith. This fixes failures that reported "Failed to assume role" before the customer role was assumed.
 * Playground runs now retain evaluator scores and reasoning while backend feedback updates are polled, preventing completed results from appearing blank.
@@ -535,12 +535,12 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Organization admins can now toggle role restriction from the Roles settings page. Restricted roles can only be assigned by users with the workspaces:manage permission.
 * The organization-wide public sharing toggle now lives on the General settings page alongside the other organization settings, replacing its standalone Configuration section.
 * When a user is removed from all mapped SSO groups, the organization and workspace access granted through SSO group sync is revoked on their next sign-in. Access assigned by other means (SCIM, JIT, or manual invitation) is unaffected.
-* Workspace invite batch requests are now rate limited per workspace to reduce bulk invitation abuse. [Learn more](https://docs.langchain.com/langsmith/usage-and-billing#workspace-invite-batch-endpoint).
+* Workspace invite batch requests are now rate limited per workspace to reduce bulk invitation abuse. [Learn more](usage-and-billing.md#workspace-invite-batch-endpoint).
 * Workspace switcher labels now show the full workspace name on hover when the visible label is truncated. This makes similarly prefixed workspace names easier to distinguish.
 * LangSmith Home now shows a banner promoting Interrupt, our agent conference in London and NYC this fall, with a link to get tickets.
 * Some new users could get stuck on the last onboarding step, with a loading spinner that never finished. This is now fixed.
 * Organization admins can now rename their organization directly from the organization switcher in settings.
-* Organization admins can now generate, view, and delete SCIM bearer tokens directly from Settings > Access and Security, instead of using the API, to set up SCIM provisioning with their identity provider. [Learn more](https://docs.langchain.com/langsmith/user-management#set-up-scim-for-your-organization).
+* Organization admins can now generate, view, and delete SCIM bearer tokens directly from Settings > Access and Security, instead of using the API, to set up SCIM provisioning with their identity provider. [Learn more](user-management.md#set-up-scim-for-your-organization).
 
 ### LLM Gateway
 
@@ -559,7 +559,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 
 ## Other
 
-* When you add runs to an [annotation queue](https://docs.langchain.com/langsmith/annotation-queues) without specifying `extend_trace_retention`, short-lived traces stay on short-lived retention. Pass `extend_trace_retention=true` to upgrade traces to extended retention.
+* When you add runs to an [annotation queue](annotation-queues.md) without specifying `extend_trace_retention`, short-lived traces stay on short-lived retention. Pass `extend_trace_retention=true` to upgrade traces to extended retention.
 
 ## July 6-10, 2026
 ## Observability and evaluations
@@ -567,7 +567,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 ### Datasets and experiments
 
 * Model, prompt, and tool chips in the Experiments table config cells now lay out from real measurements for accurate truncation, and the +N overflow badge is a clickable dropdown whose entries expose the same actions (filter, group by, open in playground, and details) as a chip's own menu.
-* Expanding the run tree for repetition runs in [experiment comparison](https://docs.langchain.com/langsmith/compare-experiment-results) views now works reliably when a repetition root has a `project ID` but no `session ID`.
+* Expanding the run tree for repetition runs in [experiment comparison](compare-experiment-results.md) views now works reliably when a repetition root has a `project ID` but no `session ID`.
 * Evaluators linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
 * Code evaluator upload now accepts Python entrypoints annotated with PEP 604 union return types (for example `-> dict | None`).
 * `POST /v2/datasets/{dataset_id}/experiment-runs` is the supported public API for paginated experiment comparison. Legacy dataset comparison helpers are removed from the public OpenAPI spec and generated SDKs; existing HTTP routes continue to work for LangSmith UI clients.
@@ -579,7 +579,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * LangSmith now caps reusable evaluators per workspace to prevent unbounded resource growth. Contact support if your workspace needs a higher limit.
 * Creating dataset examples from source runs now correctly fetches run inputs and outputs backed by SmithDB, and no longer fails the whole request if one of several source runs can't be found.
 * Select multiple rows in an experiment (or select all matching the current filters) and add, replace, or remove their dataset splits in one action, or copy the selected examples to another dataset, instead of editing rows one at a time.
-* The `/runs/rules/validate` endpoint now supports [thread evaluators](https://docs.langchain.com/langsmith/online-evaluations-multi-turn). Pass `test_thread_id` and `session_id` to test a multi-turn evaluator against a real conversation before saving.
+* The `/runs/rules/validate` endpoint now supports [thread evaluators](online-evaluations-multi-turn.md). Pass `test_thread_id` and `session_id` to test a multi-turn evaluator against a real conversation before saving.
 * Custom code evaluators that time out or fail on a run now record an error on that run instead of silently leaving it without feedback, so partial evaluation failures are visible on the experiment.
 * The Open source run action on an example page now reads session and start time from dedicated example fields populated at creation, enabling reliable navigation to the source trace on SmithDB.
 * The thread evaluator config preview now shows the thread message formats the evaluator actually maps, instead of listing every available format.
@@ -714,7 +714,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Organization admins can now toggle role restriction from the Roles settings page. Restricted roles can only be assigned by users with the workspaces:manage permission.
 * The organization-wide public sharing toggle now lives on the General settings page alongside the other organization settings, replacing its standalone Configuration section.
 * When a user is removed from all mapped SSO groups, the organization and workspace access granted through SSO group sync is revoked on their next sign-in. Access assigned by other means (SCIM, JIT, or manual invitation) is unaffected.
-* Workspace invite batch requests are now rate limited per workspace to reduce bulk invitation abuse. [Learn more](https://docs.langchain.com/langsmith/usage-and-billing#workspace-invite-batch-endpoint).
+* Workspace invite batch requests are now rate limited per workspace to reduce bulk invitation abuse. [Learn more](usage-and-billing.md#workspace-invite-batch-endpoint).
 * LangSmith Home now shows a banner promoting Interrupt, our agent conference in London and NYC this fall, with a link to get tickets.
 
 ### LLM Gateway
@@ -741,17 +741,17 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 
 ### Datasets and experiments
 
-* Model, prompt, and tool chips in the [Experiments](https://docs.langchain.com/langsmith/analyze-an-experiment) table config cells now lay out from real measurements for accurate truncation, and the +N overflow badge is a clickable dropdown whose entries expose the same actions (filter, group by, open in playground, and details) as a chip's own menu.
-* Expanding the run tree for repetition runs in [experiment comparison](https://docs.langchain.com/langsmith/compare-experiment-results) views now works reliably when a repetition root has a `project ID` but no `session ID`.
-* [Evaluators](https://docs.langchain.com/langsmith/evaluators) linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
+* Model, prompt, and tool chips in the [Experiments](analyze-an-experiment.md) table config cells now lay out from real measurements for accurate truncation, and the +N overflow badge is a clickable dropdown whose entries expose the same actions (filter, group by, open in playground, and details) as a chip's own menu.
+* Expanding the run tree for repetition runs in [experiment comparison](compare-experiment-results.md) views now works reliably when a repetition root has a `project ID` but no `session ID`.
+* [Evaluators](evaluators.md) linked to Hub prompts now load correctly for flat and playground-shaped prompt commits, fixing crashes when editing existing evaluators.
 * Code evaluator upload now accepts Python entrypoints annotated with PEP 604 union return types (for example `-> dict | None`).
 * `POST /v2/datasets/{dataset_id}/experiment-runs` is the supported public API for paginated experiment comparison. Legacy dataset comparison helpers are removed from the public OpenAPI spec and generated SDKs; existing HTTP routes continue to work for LangSmith UI clients.
 * Each example's dataset splits now render as chips in the dataset Examples table, laid out from real measurements with a clickable +N overflow menu when an example belongs to more splits than fit the column.
-* The [experiment comparison](https://docs.langchain.com/langsmith/compare-experiment-results) view now offers an optional, reorderable "Splits (latest)" column that shows each example's current dataset split assignments as chips, reflecting live membership rather than the as-of-run snapshot.
-* [Evaluators](https://docs.langchain.com/langsmith/evaluators) spend charts on project and dataset evaluator tabs keep their desktop layout on narrow screens and scroll horizontally instead of compressing the chart and stat cards.
-* The [experiment comparison](https://docs.langchain.com/langsmith/compare-experiment-results) and group-by views now show each example's current dataset split rather than the split it had when the experiment ran, so you can tell whether failures already belong to a split without re-running the experiment.
-* LangSmith now caps reusable [evaluators](https://docs.langchain.com/langsmith/evaluators) per workspace to prevent unbounded resource growth. Contact support if your workspace needs a higher limit.
-* Creating [dataset examples](https://docs.langchain.com/langsmith/manage-datasets) from [source runs](https://docs.langchain.com/langsmith/manage-datasets) now correctly fetches run inputs and outputs backed by SmithDB, and no longer fails the whole request if one of several source runs cannot be found.
+* The [experiment comparison](compare-experiment-results.md) view now offers an optional, reorderable "Splits (latest)" column that shows each example's current dataset split assignments as chips, reflecting live membership rather than the as-of-run snapshot.
+* [Evaluators](evaluators.md) spend charts on project and dataset evaluator tabs keep their desktop layout on narrow screens and scroll horizontally instead of compressing the chart and stat cards.
+* The [experiment comparison](compare-experiment-results.md) and group-by views now show each example's current dataset split rather than the split it had when the experiment ran, so you can tell whether failures already belong to a split without re-running the experiment.
+* LangSmith now caps reusable [evaluators](evaluators.md) per workspace to prevent unbounded resource growth. Contact support if your workspace needs a higher limit.
+* Creating [dataset examples](manage-datasets.md) from [source runs](manage-datasets.md) now correctly fetches run inputs and outputs backed by SmithDB, and no longer fails the whole request if one of several source runs cannot be found.
 * Custom code evaluators that time out or fail on a run now record an error on that run instead of silently leaving it without feedback, so partial evaluation failures are visible on the experiment.
 * The Open source run action on an example page now reads session and start time from dedicated example fields populated at creation, enabling reliable navigation to the source trace on SmithDB.
 
@@ -763,7 +763,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * Projects with existing traces no longer incorrectly display the onboarding screen when filtered or scoped to a time window with no recent runs. The project run-count check now looks back 30 days instead of the previous one-hour window.
 * Bulk export compression now defaults to zstandard (zstd) for improved performance. Self-hosted environments retain the gzip default via the `FF_BULK_EXPORT_DEFAULT_COMPRESSION` environment variable.
 * LangSmith now returns clearer 409 Conflict messages when duplicate run create or update payloads are submitted. The message indicates whether the duplicate was a run create or run update request when possible.
-* LangSmith [MCP tools](https://docs.langchain.com/langsmith/langsmith-mcp-server) that fetch runs or thread history now accept `project UUIDs` in addition to project names, making trace URL investigations faster and less error-prone.
+* LangSmith [MCP tools](langsmith-mcp-server.md) that fetch runs or thread history now accept `project UUIDs` in addition to project names, making trace URL investigations faster and less error-prone.
 * OpenTelemetry resource attributes (set via `OTEL_RESOURCE_ATTRIBUTES`) now appear on traces as metadata namespaced under otel.resource.\*, so you can attach details like user IDs without changing how your tracer emits spans.
 * Vercel AI SDK traces sent over raw OpenTelemetry now render in the Messages view. Previously these traces showed an empty Messages tab because no format adapter claimed them.
 * Thread stats requests that opt into streaming now return the main stats first and add feedback stats when they are ready.
@@ -773,14 +773,14 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 ### Engine
 
 * When an Engine project reaches its monthly spend limit, the Next Run status chip and project spend card now show a clear "Monthly spend limit reached" state with a button that takes you straight to raising the limit.
-* LangSmith exposes Engine issue listing and retrieval through hosted [MCP tools](https://docs.langchain.com/langsmith/langsmith-mcp-server) and generated SDK methods. Agents and API clients can fetch issue details directly by `issue ID` or filter issues by project, status, severity, tag, and update time.
+* LangSmith exposes Engine issue listing and retrieval through hosted [MCP tools](langsmith-mcp-server.md) and generated SDK methods. Agents and API clients can fetch issue details directly by `issue ID` or filter issues by project, status, severity, tag, and update time.
 * A new Engine board callout points you to the trace-scope setting, where you can restrict Engine's reviews to runs matching a run name or metadata value.
 
 ### Prompts and playground
 
-* Self-hosted [Playground](https://docs.langchain.com/langsmith/playground-model-providers) and evaluator outbound model calls now honor proxy environment variables while preserving SSRF validation on every request.
+* Self-hosted [Playground](playground-model-providers.md) and evaluator outbound model calls now honor proxy environment variables while preserving SSRF validation on every request.
 * When you save a prompt to an application from the playground, LangSmith keeps the workspace application filter on All Applications instead of switching the rest of the UI to that application.
-* Typing a workspace member's name or email in the [Context Hub](https://docs.langchain.com/langsmith/prompt-context-hub#context-hub) search box now also returns the prompts and resources they created.
+* Typing a workspace member's name or email in the [Context Hub](prompt-context-hub.md#context-hub) search box now also returns the prompts and resources they created.
 * The playground now includes Claude Sonnet 5, Claude Fable 5, and Claude Opus 4.8 in the Anthropic, Bedrock, and Vertex AI model selectors. New Anthropic playground sessions default to Claude Sonnet 5.
 
 ### Feedback
@@ -792,7 +792,7 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 ### Monitoring and alerting
 
 * Alert chart previews now handle relative date ranges consistently, preventing failures when loading 14-day or 30-day previews.
-* [Dashboards](https://docs.langchain.com/langsmith/dashboards) chart tooltips and axes now show up to eight fractional digits (previously two), so very small costs and rates no longer round down to zero.
+* [Dashboards](dashboards.md) chart tooltips and axes now show up to eight fractional digits (previously two), so very small costs and rates no longer round down to zero.
 * Time-series charts on custom dashboards now leave gaps for missing data points instead of plotting them as zero, and lines connect across those gaps so trends remain readable.
 
 ### Automations
@@ -811,14 +811,14 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 
 * Sandbox command output is now re-chunked into bounded single WebSocket frames, so clients that do not reassemble continuation frames (including the Go SDK) can read large streamed or replayed output without truncated JSON.
 * S3 sandbox mounts now default `endpoint_url` to [https://s3.amazonaws.com](https://s3.amazonaws.com) when it is not provided, so the field is no longer required when mounting standard AWS S3 buckets.
-* [Sandboxes](https://docs.langchain.com/langsmith/sandboxes) can now burst CPU up to 2x their requested allocation when the host has spare capacity, and you can request fractional (sub-core) vCPU down to 0.05.
+* [Sandboxes](sandboxes.md) can now burst CPU up to 2x their requested allocation when the host has spare capacity, and you can request fractional (sub-core) vCPU down to 0.05.
 * When creating a sandbox, you can now configure Git, S3, and GCS filesystem mounts, including mount paths, Git remotes, bucket settings, and cache options. Configured mounts appear in the sandbox table and detail view.
 * The LangSmith SDKs now support creating, listing, updating, and deleting sandbox registries for pulling private container images, alongside the existing sandbox and snapshot operations.
 * Sandbox snapshot builds can now request an XFS root filesystem for sandbox-host based environments.
 * Sandbox creation no longer fails intermittently with "sandbox not ready" errors when an underlying host is disrupted. Affected capacity now retries the contended resource lock and recovers automatically instead of leaving the pool degraded.
 * Sandbox host startup now validates the full version directory before reuse, so a missing initrd no longer causes create-time failures after a partial or stale install.
 * Creating a sandbox snapshot from a Docker image now records the image's tag (e.g. ubuntu:24.04 becomes the 24.04 tag), and creating a sandbox from a snapshot name without a tag resolves the latest tag, mirroring Docker.
-* Self-hosted LangSmith installations now show the [Sandboxes](https://docs.langchain.com/langsmith/sandboxes) navigation item and use the instance-level sandbox flag to open the Sandboxes page.
+* Self-hosted LangSmith installations now show the [Sandboxes](sandboxes.md) navigation item and use the instance-level sandbox flag to open the Sandboxes page.
 
 ## Administration
 
@@ -845,94 +845,94 @@ Weekly updates to [LangSmith Cloud](https://docs.langchain.com/langsmith/observa
 * The LLM gateway now supports POST /openai/v1/responses/compact (and the legacy /responses/compact), routing it through the chat-shape responses handler.
 * Guard policies now let you choose which PII rule categories to detect, with separate faster rule-based and slower model-based detection options, instead of a single on/off PII toggle.
 * Gateway guard secret redaction now detects additional token formats, including SendGrid API tokens, Google OAuth access tokens, JWTs, Slack webhook URLs, and legacy LangSmith keys.
-* The [LLM Gateway](https://docs.langchain.com/langsmith/llm-gateway) policies page now lets you sort each section by spend limit or usage percentage, and filter down to a specific workspace, user, or API key.
+* The [LLM Gateway](llm-gateway.md) policies page now lets you sort each section by spend limit or usage percentage, and filter down to a specific workspace, user, or API key.
 
 ## June 15-19, 2026
 ## Observability and evaluations
 
 ### Automations
 
-* [Automations](https://docs.langchain.com/langsmith/rules) now let you control trace retention per action, so traces matched by a rule can stay at base retention instead of being upgraded.
+* [Automations](rules.md) now let you control trace retention per action, so traces matched by a rule can stay at base retention instead of being upgraded.
 
 ### Engine
 
-* The [Engine](https://docs.langchain.com/langsmith/engine) issue board now shows a Connect GitHub action when GitHub is not connected, so you can set up pull request creation without leaving the board.
-* [Engine](https://docs.langchain.com/langsmith/engine) now has a unified enablement screen with access requests, and organization settings consolidate Engine usage and limits in one place.
-* Organization admins now receive [Engine](https://docs.langchain.com/langsmith/engine) spend emails when spend crosses each configured threshold, and pausing or disabling Engine now asks for confirmation.
+* The [Engine](engine.md) issue board now shows a Connect GitHub action when GitHub is not connected, so you can set up pull request creation without leaving the board.
+* [Engine](engine.md) now has a unified enablement screen with access requests, and organization settings consolidate Engine usage and limits in one place.
+* Organization admins now receive [Engine](engine.md) spend emails when spend crosses each configured threshold, and pausing or disabling Engine now asks for confirmation.
 
 ### Datasets and experiments
 
-* [Experiments](https://docs.langchain.com/langsmith/analyze-an-experiment) now show live loading progress in the header and the Progress column, so you can track completed and evaluated runs in real time.
-* [Evaluators](https://docs.langchain.com/langsmith/evaluators) now include a trace-retention toggle in the advanced options, so scored traces can stay at base retention when that fits your workflow.
-* [Evaluator](https://docs.langchain.com/langsmith/evaluators) prompt editing now offers an advanced mode for editing Mustache templates directly with separate variable mappings.
-* You can now apply resource tags when creating a [dataset](https://docs.langchain.com/langsmith/manage-datasets), including from scratch, file upload, or a clone.
-* Auto-attached Assertions [evaluators](https://docs.langchain.com/langsmith/evaluators) now read assertions from the reference output, so experiment scores reflect actual pass and fail results.
+* [Experiments](analyze-an-experiment.md) now show live loading progress in the header and the Progress column, so you can track completed and evaluated runs in real time.
+* [Evaluators](evaluators.md) now include a trace-retention toggle in the advanced options, so scored traces can stay at base retention when that fits your workflow.
+* [Evaluator](evaluators.md) prompt editing now offers an advanced mode for editing Mustache templates directly with separate variable mappings.
+* You can now apply resource tags when creating a [dataset](manage-datasets.md), including from scratch, file upload, or a clone.
+* Auto-attached Assertions [evaluators](evaluators.md) now read assertions from the reference output, so experiment scores reflect actual pass and fail results.
 
 ### Prompts and playground
 
-* [OAuth client credentials](https://docs.langchain.com/langsmith/model-configurations#oauth-client-credentials) now support per-workspace setup on model configurations, so workspace admins can self-serve OAuth on saved prompts and models.
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) now exposes a Reasoning Summary option for OpenAI reasoning models on the Responses API.
-* The model dropdown no longer suggests OpenAI models for an OpenAI Compatible Endpoint, so you can enter your own [custom model name](https://docs.langchain.com/langsmith/model-configurations).
+* [OAuth client credentials](model-configurations.md#oauth-client-credentials) now support per-workspace setup on model configurations, so workspace admins can self-serve OAuth on saved prompts and models.
+* The [Playground](playground-model-providers.md) now exposes a Reasoning Summary option for OpenAI reasoning models on the Responses API.
+* The model dropdown no longer suggests OpenAI models for an OpenAI Compatible Endpoint, so you can enter your own [custom model name](model-configurations.md).
 
 ### Tracing
 
-* [Trace query syntax](https://docs.langchain.com/langsmith/trace-query-syntax) now has a full operator reference, field table, and quick examples, so API filtering is easier to discover.
-* The [OpenTelemetry guide](https://docs.langchain.com/langsmith/trace-with-opentelemetry) now explains how to link spans to an existing LangSmith SDK trace and what happens when a parent span never arrives, so cross-process traces are easier to debug.
+* [Trace query syntax](trace-query-syntax.md) now has a full operator reference, field table, and quick examples, so API filtering is easier to discover.
+* The [OpenTelemetry guide](trace-with-opentelemetry.md) now explains how to link spans to an existing LangSmith SDK trace and what happens when a parent span never arrives, so cross-process traces are easier to debug.
 
 ### Monitoring and alerting
 
-* [Dashboards](https://docs.langchain.com/langsmith/dashboards) now include a chart builder with chart templates, a create and edit pane, and brush and series controls on time series charts.
-* You can now send [alerts](https://docs.langchain.com/langsmith/alerts) to Slack as a native notification target and connect or disconnect the Slack app from the UI.
+* [Dashboards](dashboards.md) now include a chart builder with chart templates, a create and edit pane, and brush and series controls on time series charts.
+* You can now send [alerts](alerts.md) to Slack as a native notification target and connect or disconnect the Slack app from the UI.
 
 ## Deployment
 
-* Preview [deployments](https://docs.langchain.com/langsmith/deployment) now build the image for the preview commit instead of reusing the parent deployment's image.
+* Preview [deployments](deployment.md) now build the image for the preview commit instead of reusing the parent deployment's image.
 
 ## Sandboxes
 
-* [Sandbox auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy) now documents GCP rules and service-account handling, so Google API access through the proxy is clearer.
-* [Sandboxes](https://docs.langchain.com/langsmith/sandboxes) now marks AWS US SaaS availability as generally available, so the region table reflects the current rollout.
-* [Sandboxes](https://docs.langchain.com/langsmith/sandboxes) now support Git mounts and Google Cloud Storage bucket mounts.
+* [Sandbox auth proxy](sandbox-auth-proxy.md) now documents GCP rules and service-account handling, so Google API access through the proxy is clearer.
+* [Sandboxes](sandboxes.md) now marks AWS US SaaS availability as generally available, so the region table reflects the current rollout.
+* [Sandboxes](sandboxes.md) now support Git mounts and Google Cloud Storage bucket mounts.
 
 ## Admin and billing
 
 ### Administration
 
-* [Organization settings](https://docs.langchain.com/langsmith/administration-overview) now clarify that SSO/SCIM group names can omit spaces, so enterprise IdPs that disallow spaces still work cleanly.
+* [Organization settings](administration-overview.md) now clarify that SSO/SCIM group names can omit spaces, so enterprise IdPs that disallow spaces still work cleanly.
 * The Vanta MCP integration is now generally available to all workspaces.
-* Applying tags when creating datasets, prompts, and projects is now governed by dedicated [tag-on-create permissions](https://docs.langchain.com/langsmith/administration-overview).
+* Applying tags when creating datasets, prompts, and projects is now governed by dedicated [tag-on-create permissions](administration-overview.md).
 
 ### LLM Gateway
 
-* The [LLM gateway](https://docs.langchain.com/langsmith/llm-gateway) now supports native Gemini routes for Vertex AI and the OpenAI embeddings endpoint.
-* [Gateway guard](https://docs.langchain.com/langsmith/llm-gateway) policies now accept a granular PII configuration and a configurable timeout action.
+* The [LLM gateway](llm-gateway.md) now supports native Gemini routes for Vertex AI and the OpenAI embeddings endpoint.
+* [Gateway guard](llm-gateway.md) policies now accept a granular PII configuration and a configurable timeout action.
 
 ### Usage and billing
 
-* [Granular billable usage](https://docs.langchain.com/langsmith/granular-usage) now clarifies org scoping, so you can interpret usage totals more accurately.
+* [Granular billable usage](granular-usage.md) now clarifies org scoping, so you can interpret usage totals more accurately.
 
 ## June 8-12, 2026
 ## Observability and evaluations
 
 ### Engine
 
-* [Engine](https://docs.langchain.com/langsmith/engine) now shows only project-level spend in project view, so org-wide spend stays in the org settings surface.
-* [Engine](https://docs.langchain.com/langsmith/engine) now keeps the Slack issue-alert deck pinned above the scrolling issues list, so the callout stays visible as you browse.
+* [Engine](engine.md) now shows only project-level spend in project view, so org-wide spend stays in the org settings surface.
+* [Engine](engine.md) now keeps the Slack issue-alert deck pinned above the scrolling issues list, so the callout stays visible as you browse.
 
 ### Datasets and experiments
 
 The experiments table now displays loading progress bars showing the number of runs completed and evaluated, and experiments that predate this feature show a placeholder progress bar.
 
-* [Dashboards](https://docs.langchain.com/langsmith/dashboards) now support time series bar and line charts backed by the v2 chart API, so monitored metrics can use the newer chart type.
+* [Dashboards](dashboards.md) now support time series bar and line charts backed by the v2 chart API, so monitored metrics can use the newer chart type.
 * Categorical feedback now shows derived percentages in experiment tables, so pass/fail metrics are easier to scan.
 
 ### Prompts and playground
 
-* [Playground](https://docs.langchain.com/langsmith/playground-model-providers) now mints OAuth bearers end to end for OAuth-enabled presets, so long-running batches and streams keep working.
+* [Playground](playground-model-providers.md) now mints OAuth bearers end to end for OAuth-enabled presets, so long-running batches and streams keep working.
 
 ## Sandboxes
 
-* [Sandbox auth proxy](https://docs.langchain.com/langsmith/sandbox-auth-proxy) now supports GCP auth flows, so sandbox workloads can reach Google APIs through the proxy.
+* [Sandbox auth proxy](sandbox-auth-proxy.md) now supports GCP auth flows, so sandbox workloads can reach Google APIs through the proxy.
 
 ## Fixes
 
@@ -943,49 +943,49 @@ The experiments table now displays loading progress bars showing the number of r
 
 ### Automations
 
-* [Run rule](https://docs.langchain.com/langsmith/rules) webhook payloads now include a trace deep link for each run, so downstream systems can jump straight back to the trace.
+* [Run rule](rules.md) webhook payloads now include a trace deep link for each run, so downstream systems can jump straight back to the trace.
 
 ### Engine
 
-* Per-workspace [Engine](https://docs.langchain.com/langsmith/engine) spend is now generally available: you can view LCU and USD spend directly on the Engine settings page, including session-level spend.
+* Per-workspace [Engine](engine.md) spend is now generally available: you can view LCU and USD spend directly on the Engine settings page, including session-level spend.
 * The Engine settings page now surfaces additional Engine details in one place.
-* You can rotate [Engine issue-board webhook](https://docs.langchain.com/langsmith/engine-webhooks) signing secrets from both the API and the webhook settings UI.
+* You can rotate [Engine issue-board webhook](engine-webhooks.md) signing secrets from both the API and the webhook settings UI.
 * The Engine issues list adds a sort option by trace count.
 
 ### Datasets and experiments
 
-* A new out-of-the-box [Assertions evaluator](https://docs.langchain.com/langsmith/assertions) scores outputs against an explicit list of criteria specified in the reference output, and an Assertions rule is auto-attached when you add assertion-style examples to a dataset.
-* Evaluator metrics are improved in the experiment detail, [comparison](https://docs.langchain.com/langsmith/compare-experiment-results), and global experiments tables.
+* A new out-of-the-box [Assertions evaluator](assertions.md) scores outputs against an explicit list of criteria specified in the reference output, and an Assertions rule is auto-attached when you add assertion-style examples to a dataset.
+* Evaluator metrics are improved in the experiment detail, [comparison](compare-experiment-results.md), and global experiments tables.
 
 ### Prompts and playground
 
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) supports Amazon Bedrock API key authentication, letting you authenticate with a bearer token instead of AWS credentials.
+* The [Playground](playground-model-providers.md) supports Amazon Bedrock API key authentication, letting you authenticate with a bearer token instead of AWS credentials.
 
 ### Tracing
 
-* The [trace view](https://docs.langchain.com/langsmith/view-traces) now shows an unread indicator on a run's actions menu when the run has reviewer notes you have not seen yet.
+* The [trace view](view-traces.md) now shows an unread indicator on a run's actions menu when the run has reviewer notes you have not seen yet.
 * The waterfall view is now full-height with sticky turn headers, so you keep your place while scrolling through long traces.
 * Global search now includes context and sandboxes
 
 ## Deployment
 
-* You can now trigger a LangSmith Deployment from the [Studio](https://docs.langchain.com/langsmith/studio) page.
-* LangSmith Deployment now supports [deploying Google Agent Development Kit (ADK) agents](https://docs.langchain.com/langsmith/deploy-google-adk).
+* You can now trigger a LangSmith Deployment from the [Studio](studio.md) page.
+* LangSmith Deployment now supports [deploying Google Agent Development Kit (ADK) agents](deploy-google-adk.md).
 
 ## Sandboxes
 
-* [Sandbox proxy rules](https://docs.langchain.com/langsmith/sandbox-auth-proxy) now support configuring AWS authentication, so sandboxes can reach AWS services through the proxy with signed requests.
-* Sandboxes can create [snapshots](https://docs.langchain.com/langsmith/sandbox-snapshots) from a Dockerfile build source.
+* [Sandbox proxy rules](sandbox-auth-proxy.md) now support configuring AWS authentication, so sandboxes can reach AWS services through the proxy with signed requests.
+* Sandboxes can create [snapshots](sandbox-snapshots.md) from a Dockerfile build source.
 
 ## Admin and billing
 
 ### Administration
 
-* Organization admins can now disable personal access token creation from the [organization settings](https://docs.langchain.com/langsmith/administration-overview) page.
+* Organization admins can now disable personal access token creation from the [organization settings](administration-overview.md) page.
 
 ### Usage and billing
 
-* [Granular billable usage](https://docs.langchain.com/langsmith/granular-usage) now supports filtering and grouping by retention tier, separating long-lived from short-lived traces.
+* [Granular billable usage](granular-usage.md) now supports filtering and grouping by retention tier, separating long-lived from short-lived traces.
 * The Granular Billable Usage page now surfaces LangSmith Deployment usage, including nodes executed, agent runs, and agent uptime, alongside trace usage.
 
 ## Fixes
@@ -999,29 +999,29 @@ The experiments table now displays loading progress bars showing the number of r
 
 ### Insights
 
-* The [Insights Agent](https://docs.langchain.com/langsmith/insights) now supports scheduled reports on daily, weekly, or custom cron intervals, so report generation runs without manual triggering. Time ranges compute dynamically, so a "last 24 hours" report always reflects the most recent window when it runs, not when you configured it.
+* The [Insights Agent](insights.md) now supports scheduled reports on daily, weekly, or custom cron intervals, so report generation runs without manual triggering. Time ranges compute dynamically, so a "last 24 hours" report always reflects the most recent window when it runs, not when you configured it.
 
 ### Datasets and experiments
 
-* You can now pin any experiment as a baseline. The pinned experiment stays at the top of the [Experiments](https://docs.langchain.com/langsmith/compare-experiment-results) view and serves as the automatic comparison point for later runs, surfacing performance deltas across every column so improvements and regressions are immediately clear.
+* You can now pin any experiment as a baseline. The pinned experiment stays at the top of the [Experiments](compare-experiment-results.md) view and serves as the automatic comparison point for later runs, surfacing performance deltas across every column so improvements and regressions are immediately clear.
 
 ## February 2-6, 2026
 ## Observability and evaluations
 
 ### Cost tracking
 
-* [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking) now extends beyond LLM calls. Submit custom cost metadata for any run, such as an expensive tool call, a third-party API, or a retrieval step, to monitor, debug, and optimize spend across your entire agent stack from a single dashboard.
+* [Cost tracking](cost-tracking.md) now extends beyond LLM calls. Submit custom cost metadata for any run, such as an expensive tool call, a third-party API, or a retrieval step, to monitor, debug, and optimize spend across your entire agent stack from a single dashboard.
 
 ### Tracing
 
-* You can now [configure which parts of a trace's inputs and outputs](https://docs.langchain.com/langsmith/configure-input-output-preview) appear in the tracing table, so teams working with custom trace formats can surface the most relevant fields, reduce clutter, and identify traces that need a closer look faster.
+* You can now [configure which parts of a trace's inputs and outputs](configure-input-output-preview.md) appear in the tracing table, so teams working with custom trace formats can surface the most relevant fields, reduce clutter, and identify traces that need a closer look faster.
 
 ## December 15-19, 2025
 ## Observability and evaluations
 
 ### Annotation and human feedback
 
-* New pairwise [annotation queues](https://docs.langchain.com/langsmith/annotation-queues) let reviewers compare two runs side by side and choose whether option A is better, option B is better, or the two are equal across rubric items. LangSmith automatically pairs runs between two experiments and manages queues, reviewer assignments, and trace access, so you can run A/B evaluations across agents, prompts, and models, including for subjective dimensions like tone, correctness, usefulness, or style.
+* New pairwise [annotation queues](annotation-queues.md) let reviewers compare two runs side by side and choose whether option A is better, option B is better, or the two are equal across rubric items. LangSmith automatically pairs runs between two experiments and manages queues, reviewer assignments, and trace access, so you can run A/B evaluations across agents, prompts, and models, including for subjective dimensions like tone, correctness, usefulness, or style.
 
 ## December 8-12, 2025
 ## Observability and evaluations
@@ -1035,206 +1035,206 @@ The experiments table now displays loading progress bars showing the number of r
 
 ### Cost tracking
 
-* [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking) now automatically records token usage and derived costs for major model providers, and you can submit custom cost data for tools, retrieval steps, and other operations. Costs appear across trace trees, project stats, and dashboards, with an editable price map for non-standard pricing.
+* [Cost tracking](cost-tracking.md) now automatically records token usage and derived costs for major model providers, and you can submit custom cost data for tools, retrieval steps, and other operations. Costs appear across trace trees, project stats, and dashboards, with an editable price map for non-standard pricing.
 
 ## November 17-21, 2025
 ## Admin and billing
 
 ### Administration
 
-* LangSmith is now on the Okta Integration Network, so enterprise teams can provision and deprovision users with SCIM and configure SSO through Okta's guided setup. See the [administration overview](https://docs.langchain.com/langsmith/administration-overview) for access control options.
+* LangSmith is now on the Okta Integration Network, so enterprise teams can provision and deprovision users with SCIM and configure SSO through Okta's guided setup. See the [administration overview](administration-overview.md) for access control options.
 
 ## October 20-24, 2025
 ## Observability and evaluations
 
 ### Insights
 
-* The [Insights Agent](https://docs.langchain.com/langsmith/insights) is now generally available for Plus and Enterprise plans. It analyzes production traces to surface usage patterns, agent behaviors, and failure modes, with usage-pattern clustering, poor-interaction analysis, and custom grouping and filtering.
+* The [Insights Agent](insights.md) is now generally available for Plus and Enterprise plans. It analyzes production traces to surface usage patterns, agent behaviors, and failure modes, with usage-pattern clustering, poor-interaction analysis, and custom grouping and filtering.
 
 ### Datasets and experiments
 
-* [Multi-turn evals](https://docs.langchain.com/langsmith/online-evaluations-multi-turn) measure end-to-end agent conversations across multiple exchanges, scoring semantic intent, semantic outcomes, and agent trajectory, including tool calls and decisions.
+* [Multi-turn evals](online-evaluations-multi-turn.md) measure end-to-end agent conversations across multiple exchanges, scoring semantic intent, semantic outcomes, and agent trajectory, including tool calls and decisions.
 
 ## October 13-17, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* [Dataset creation](https://docs.langchain.com/langsmith/manage-datasets) now infers schema automatically from uploaded CSV and JSONL files, supports adding metadata fields during upload, supports column mapping and renaming, and supports bulk additions to existing datasets from new uploads.
+* [Dataset creation](manage-datasets.md) now infers schema automatically from uploaded CSV and JSONL files, supports adding metadata fields during upload, supports column mapping and renaming, and supports bulk additions to existing datasets from new uploads.
 
 ## Deployment
 
-* LangGraph Platform is now [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) and LangGraph Studio is now [LangSmith Studio](https://docs.langchain.com/langsmith/studio). LangSmith now spans three services: Observability, Evaluation, and Deployment. Existing deployments, APIs, workflows, pricing, and contracts are unchanged, and no action is required.
+* LangGraph Platform is now [LangSmith Deployment](deployment.md) and LangGraph Studio is now [LangSmith Studio](studio.md). LangSmith now spans three services: Observability, Evaluation, and Deployment. Existing deployments, APIs, workflows, pricing, and contracts are unchanged, and no action is required.
 
 ## October 6-10, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* You can now write custom code [evaluators](https://docs.langchain.com/langsmith/evaluators) in JavaScript in addition to Python, so TypeScript teams can stay in their ecosystem end to end.
+* You can now write custom code [evaluators](evaluators.md) in JavaScript in addition to Python, so TypeScript teams can stay in their ecosystem end to end.
 
 ## September 22-26, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* [Composite evaluators](https://docs.langchain.com/langsmith/online-evaluations-composite) combine multiple evaluator scores into a single metric using a weighted average or weighted sum, with customizable weights.
+* [Composite evaluators](online-evaluations-composite.md) combine multiple evaluator scores into a single metric using a weighted average or weighted sum, with customizable weights.
 
 ## September 8-12, 2025
 ## Admin and billing
 
 ### Administration
 
-* You can now create service keys at the [organization level](https://docs.langchain.com/langsmith/administration-overview), scoped to multiple workspaces or the entire organization, and assign roles, including custom roles, for granular permissions.
+* You can now create service keys at the [organization level](administration-overview.md), scoped to multiple workspaces or the entire organization, and assign roles, including custom roles, for granular permissions.
 
 ## August 25-29, 2025
 ## Deployment
 
-* [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment) now queues revisions automatically, processing each new revision only after the current one finishes to prevent overlapping deployments and conflicts.
+* [LangSmith Deployment](deployment.md) now queues revisions automatically, processing each new revision only after the current one finishes to prevent overlapping deployments and conflicts.
 
 ## August 11-15, 2025
 ## Deployment
 
-* [Studio](https://docs.langchain.com/langsmith/studio) now includes Trace Mode, which shows your LangSmith traces directly in Studio and supports annotating runs and adding them to datasets for evaluation.
+* [Studio](studio.md) now includes Trace Mode, which shows your LangSmith traces directly in Studio and supports annotating runs and adding them to datasets for evaluation.
 
 ## July 28 - August 1, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* Align Evals provides a playground-like interface for iterating on [evaluator](https://docs.langchain.com/langsmith/evaluators) prompts and comparing human-graded scores side by side with LLM-generated scores to surface misaligned cases.
+* Align Evals provides a playground-like interface for iterating on [evaluator](evaluators.md) prompts and comparing human-graded scores side by side with LLM-generated scores to surface misaligned cases.
 
 ## Deployment
 
-* LangSmith now links traces to the server logs in [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), so you can open user and system logs directly from a trace.
+* LangSmith now links traces to the server logs in [LangSmith Deployment](deployment.md), so you can open user and system logs directly from a trace.
 
 ## July 21-25, 2025
 ## Observability and evaluations
 
 ### Tracing
 
-* [Data export](https://docs.langchain.com/langsmith/data-export) now supports scheduled exports of traces, so external systems such as data warehouses, monitoring platforms, and dashboards stay in sync without custom infrastructure.
+* [Data export](data-export.md) now supports scheduled exports of traces, so external systems such as data warehouses, monitoring platforms, and dashboards stay in sync without custom infrastructure.
 
 ## July 7-11, 2025
 ## Deployment
 
-* A new Monitoring tab shows [deployment](https://docs.langchain.com/langsmith/deployment) metrics, including CPU and memory usage, API request latency, and active run counts, over a customizable time range.
+* A new Monitoring tab shows [deployment](deployment.md) metrics, including CPU and memory usage, API request latency, and active run counts, over a customizable time range.
 
 ## June 30 - July 4, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* You can now create custom views of [evaluation results](https://docs.langchain.com/langsmith/analyze-an-experiment) by breaking fields from inputs, outputs, and reference outputs into their own columns, hiding or reordering columns, and adjusting decimal precision on feedback scores.
+* You can now create custom views of [evaluation results](analyze-an-experiment.md) by breaking fields from inputs, outputs, and reference outputs into their own columns, hiding or reordering columns, and adjusting decimal precision on feedback scores.
 
 ## Admin and billing
 
 ### Administration
 
-* LangSmith [API keys](https://docs.langchain.com/langsmith/administration-overview) now support expiration dates, so you can scope access for temporary tasks or team members.
+* LangSmith [API keys](administration-overview.md) now support expiration dates, so you can scope access for temporary tasks or team members.
 
 ## June 16-20, 2025
 ## Observability and evaluations
 
 ### Prompts and playground
 
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) now supports calling built-in tools from OpenAI and Anthropic, such as web search and MCP, so you can verify tool selection and argument passing.
+* The [Playground](playground-model-providers.md) now supports calling built-in tools from OpenAI and Anthropic, such as web search and MCP, so you can verify tool selection and argument passing.
 
 ## Deployment
 
-* [Studio](https://docs.langchain.com/langsmith/studio) now lets you run agent evaluations in the UI without code, comparing against reference outputs and grading responses with custom criteria.
+* [Studio](studio.md) now lets you run agent evaluations in the UI without code, comparing against reference outputs and grading responses with custom criteria.
 
 ## June 2-6, 2025
 ## Observability and evaluations
 
 ### Cost tracking
 
-* [Cost tracking](https://docs.langchain.com/langsmith/cost-tracking) now accounts for cached tokens, multiple token modalities such as text and image, and reasoning tokens, and supports tracking costs for arbitrary token types.
+* [Cost tracking](cost-tracking.md) now accounts for cached tokens, multiple token modalities such as text and image, and reasoning tokens, and supports tracking costs for arbitrary token types.
 
 ## May 26-30, 2025
 ## Observability and evaluations
 
 ### Prompts and playground
 
-* [Prompts](https://docs.langchain.com/langsmith/prompt-context-hub#prompts) now support webhook triggers that sync a prompt to external systems such as GitHub, databases, or CI/CD pipelines when it is updated.
+* [Prompts](prompt-context-hub.md#prompts) now support webhook triggers that sync a prompt to external systems such as GitHub, databases, or CI/CD pipelines when it is updated.
 
 ## May 19-23, 2025
 ## Deployment
 
-* Every agent deployed on [LangSmith](https://docs.langchain.com/langsmith/deployment) now exposes its own Model Context Protocol (MCP) endpoint, so the agent can be used as a tool in any client that supports streamable HTTP for MCP, with no custom code or infrastructure.
+* Every agent deployed on [LangSmith](deployment.md) now exposes its own Model Context Protocol (MCP) endpoint, so the agent can be used as a tool in any client that supports streamable HTTP for MCP, with no custom code or infrastructure.
 
 ## Admin and billing
 
 ### Usage and billing
 
-* SaaS customers can now view monthly [usage charts](https://docs.langchain.com/langsmith/granular-usage) that track all billable metrics in one place.
+* SaaS customers can now view monthly [usage charts](granular-usage.md) that track all billable metrics in one place.
 
 ## May 12-16, 2025
 ## Observability and evaluations
 
 ### Monitoring and alerting
 
-* [Agent observability](https://docs.langchain.com/langsmith/observability) surfaces tool calls and run stats, including the most-used tools and runs, their latency, and which generate the most errors.
+* [Agent observability](observability.md) surfaces tool calls and run stats, including the most-used tools and runs, their latency, and which generate the most errors.
 
 ## Deployment
 
-* LangGraph Platform, now [LangSmith Deployment](https://docs.langchain.com/langsmith/deployment), reached general availability for deploying and managing long-running, stateful agents at scale, with one-click GitHub-to-production deployment, integrated memory and persistence, scalable APIs, and an agent registry across cloud, hybrid, self-hosted, and developer deployment options.
-* [Studio](https://docs.langchain.com/langsmith/studio) v2 runs locally without the desktop app, supports editing prompts and configuration in the UI, integrates with the Playground, and lets you download production traces to debug them locally.
+* LangGraph Platform, now [LangSmith Deployment](deployment.md), reached general availability for deploying and managing long-running, stateful agents at scale, with one-click GitHub-to-production deployment, integrated memory and persistence, scalable APIs, and an agent registry across cloud, hybrid, self-hosted, and developer deployment options.
+* [Studio](studio.md) v2 runs locally without the desktop app, supports editing prompts and configuration in the UI, integrates with the Playground, and lets you download production traces to debug them locally.
 
 ## May 5-9, 2025
 ## Observability and evaluations
 
 ### Tracing
 
-* LangSmith now supports [multimodal content](https://docs.langchain.com/langsmith/log-multimodal-traces) for images, PDFs, and audio across the playground, annotation queues, and datasets, including attaching files to dataset examples without base64 encoding and visualizing the content in the app.
+* LangSmith now supports [multimodal content](log-multimodal-traces.md) for images, PDFs, and audio across the playground, annotation queues, and datasets, including attaching files to dataset examples without base64 encoding and visualizing the content in the app.
 
 ## April 21-25, 2025
 ## Observability and evaluations
 
 ### Monitoring and alerting
 
-* [Alerts](https://docs.langchain.com/langsmith/alerts) send real-time notifications on error rates, run latency, and feedback scores, so you can catch production failures proactively.
+* [Alerts](alerts.md) send real-time notifications on error rates, run latency, and feedback scores, so you can catch production failures proactively.
 
 ## March 31 - April 4, 2025
 ## Observability and evaluations
 
 ### Prompts and playground
 
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) now lets you create datasets inline and add examples to existing datasets without leaving the Playground.
+* The [Playground](playground-model-providers.md) now lets you create datasets inline and add examples to existing datasets without leaving the Playground.
 
 ## March 24-28, 2025
 ## Observability and evaluations
 
 ### Tracing
 
-* LangSmith now has end-to-end native [OpenTelemetry support](https://docs.langchain.com/langsmith/trace-with-opentelemetry) for LangChain and LangGraph applications, including distributed tracing across microservices.
+* LangSmith now has end-to-end native [OpenTelemetry support](trace-with-opentelemetry.md) for LangChain and LangGraph applications, including distributed tracing across microservices.
 
 ### Datasets and experiments
 
-* You can now define [evaluators](https://docs.langchain.com/langsmith/evaluators) for datasets and tracing projects directly in the UI with no code, including LLM-as-a-judge evaluators with prebuilt templates, customizable prompts, variable mapping, scoring, and few-shot support.
+* You can now define [evaluators](evaluators.md) for datasets and tracing projects directly in the UI with no code, including LLM-as-a-judge evaluators with prebuilt templates, customizable prompts, variable mapping, scoring, and few-shot support.
 
 ## March 17-21, 2025
 ## Deployment
 
-* [Studio](https://docs.langchain.com/langsmith/studio) now lets you view and edit node logic in the UI by tagging configuration fields with `langgraph_nodes`, edit prompts without code changes, and sync Playground experiments back to the graph.
+* [Studio](studio.md) now lets you view and edit node logic in the UI by tagging configuration fields with `langgraph_nodes`, edit prompts without code changes, and sync Playground experiments back to the graph.
 
 ## March 10-14, 2025
 ## Observability and evaluations
 
 ### Tracing
 
-* LangSmith now supports tracing [OpenAI Agents SDK](https://docs.langchain.com/langsmith/trace-with-openai-agents-sdk) applications with two lines of code, for step-by-step observability of agent execution and reasoning.
+* LangSmith now supports tracing [OpenAI Agents SDK](trace-with-openai-agents-sdk.md) applications with two lines of code, for step-by-step observability of agent execution and reasoning.
 
 ### Datasets and experiments
 
-* You can now rename an [experiment](https://docs.langchain.com/langsmith/analyze-an-experiment) in the UI, either from the Playground table header after a run or with the pencil icon in the Experiments view.
+* You can now rename an [experiment](analyze-an-experiment.md) in the UI, either from the Playground table header after a run or with the pencil icon in the Experiments view.
 
 ## February 24-28, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* You can now group [experiment results](https://docs.langchain.com/langsmith/analyze-an-experiment) by metadata to analyze evaluation performance across segments such as user groups or subject areas.
+* You can now group [experiment results](analyze-an-experiment.md) by metadata to analyze evaluation performance across segments such as user groups or subject areas.
 
 ## Fixes
 
@@ -1245,36 +1245,36 @@ The experiments table now displays loading progress bars showing the number of r
 
 ### Prompts and playground
 
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) can now use workspace secrets saved in LangSmith, for consistent credential management across environments.
+* The [Playground](playground-model-providers.md) can now use workspace secrets saved in LangSmith, for consistent credential management across environments.
 
 ## February 3-7, 2025
 ## Observability and evaluations
 
 ### Datasets and experiments
 
-* A new [experiment view](https://docs.langchain.com/langsmith/analyze-an-experiment) gives each feedback key its own column and adds filtering, sorting, and a heat map to spot patterns and performance areas.
+* A new [experiment view](analyze-an-experiment.md) gives each feedback key its own column and adds filtering, sorting, and a heat map to spot patterns and performance areas.
 
 ## Deployment
 
-* You can now open LLM runs from [Studio](https://docs.langchain.com/langsmith/studio) in the LangSmith Playground for debugging, visualization, and prompt experimentation within threads.
+* You can now open LLM runs from [Studio](studio.md) in the LangSmith Playground for debugging, visualization, and prompt experimentation within threads.
 
 ## January 27-31, 2025
 ## Observability and evaluations
 
 ### Tracing
 
-* [Traces](https://docs.langchain.com/langsmith/view-traces) now include a waterfall graph that highlights latency bottlenecks and shows which components run in parallel versus sequentially.
+* [Traces](view-traces.md) now include a waterfall graph that highlights latency bottlenecks and shows which components run in parallel versus sequentially.
 
 ## January 20-24, 2025
 ## Observability and evaluations
 
 ### Prompts and playground
 
-* The [Playground](https://docs.langchain.com/langsmith/playground-model-providers) adds a streamlined prompt settings UI, a default model configuration, an enhanced tool management modal, and improved side-by-side comparison.
+* The [Playground](playground-model-providers.md) adds a streamlined prompt settings UI, a default model configuration, an enhanced tool management modal, and improved side-by-side comparison.
 
 ### Datasets and experiments
 
-* New [Pytest and Vitest integrations](https://docs.langchain.com/langsmith/pytest) let you run evaluations using familiar testing frameworks, with debugging, metrics tracking, and built-in evaluation functions.
+* New [Pytest and Vitest integrations](pytest.md) let you run evaluations using familiar testing frameworks, with debugging, metrics tracking, and built-in evaluation functions.
 
 #### LangSmith Fleet
 ## August 3-10, 2026
@@ -1331,36 +1331,36 @@ The experiments table now displays loading progress bars showing the number of r
 ## Fleet
 
 * In the Agent Builder view, the footer workspace and tenant list is sourced from the Fleet API so you can switch between your Fleet workspaces.
-* The [Access Profiles](https://docs.langchain.com/langsmith/fleet/computer-use) dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
-* Fleet now completes OAuth for [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
+* The [Access Profiles](fleet/computer-use.md) dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
+* Fleet agents can now delete files from their memory and [skills](fleet/skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet now completes OAuth for [MCP servers](fleet/remote-mcp-servers.md) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
-* Creating an agent from a Fleet [template](https://docs.langchain.com/langsmith/fleet/templates) now skips the setup wizard and opens the agent editor with the template onboarding card.
+* Creating an agent from a Fleet [template](fleet/templates.md) now skips the setup wizard and opens the agent editor with the template onboarding card.
 * Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so MCP servers that require a newer version no longer return zero tools or fail tool calls.
 * Fleet agents receive the day of week alongside the current date (for example "Monday, June 29th 2026"), so scheduling and date reasoning no longer relies on the model inferring the weekday from the ISO date.
 * File edits in Fleet agent chat now render as syntax-highlighted, line-by-line diffs, making changes easier to review.
-* Fleet agents can now read files shared with them in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app). Attach an image, PDF, audio, video, or text file in a mention or DM and the agent ingests it into the conversation.
+* Fleet agents can now read files shared with them in [Slack](fleet/slack-app.md). Attach an image, PDF, audio, video, or text file in a mention or DM and the agent ingests it into the conversation.
 * On the Agent Builder Integrations page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
-* When you connect a custom [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
+* When you connect a custom [Slack](fleet/slack-app.md) bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
 * Fleet agents now have a Slack tool for listing channels the connected bot is a member of, making it easier to discover the right channel before posting or reading messages.
 * Fleet OAuth provider and integration responses now include an `owner` field (`workspace` or `platform`) so you can tell your own resources apart from built-in, platform-managed ones. The platform manager organization can now create and modify built-in OAuth providers.
-* Setting up a [schedule](https://docs.langchain.com/langsmith/fleet/schedules) is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
+* Setting up a [schedule](fleet/schedules.md) is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
 * When registering an integration OAuth provider for headless connections, `http://` redirect URIs are now accepted only for the loopback IP literals `127.0.0.1` or `[::1]`. The localhost hostname is no longer accepted over `http`; use the loopback IP literal or `https`.
-* The [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) settings page now scrolls when the pointer is over the servers list.
+* The [MCP servers](fleet/remote-mcp-servers.md) settings page now scrolls when the pointer is over the servers list.
 * The load previous conversations tool now writes conversation files into the attached Computer sandbox when one is enabled, so agents can inspect the downloaded history with their normal file tools.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
-* The Executive Assistant template can now deliver its daily brief and answer @mentions in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
+* The Executive Assistant template can now deliver its daily brief and answer @mentions in [Slack](fleet/slack-app.md) after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
 * You can now type and send a message in agent chat while a human-in-the-loop prompt is pending. Sending a new message dismisses the pending request and continues the conversation instead of leaving the composer locked.
 * Empty sections in the agent configuration panel (Channels, Connections, Skills, Schedules, Instructions, and Subagents) now explain what each one is for and what you can add before you connect anything.
 * Creating a new agent no longer fails with a contentBlocks.push error when the chat stream returns string message content.
 * Opening an agent in the chat inbox no longer issues repeated duplicate background requests while choosing which thread to open, reducing flicker.
-* Fleet agents now load your workspace's private [skills](https://docs.langchain.com/langsmith/fleet/skills). Previously, in workspaces with fine-grained access controls, an agent could start with only public skills available.
+* Fleet agents now load your workspace's private [skills](fleet/skills.md). Previously, in workspaces with fine-grained access controls, an agent could start with only public skills available.
 * Reloading an agent chat page no longer flashes the thread list through loading and loaded states multiple times. The sidebar now waits for agent scope to finish loading before fetching threads, so the list settles once.
 * GitHub App installations now sync through the authenticated LangSmith session after installation completes, keeping workspace linking aligned with the active user.
 * OAuth providers now accept an optional default redirect URI (`default_redirect_uri`). When set, headless OAuth flows for that provider return the authorization code to it instead of the LangSmith callback, without passing a redirect on every request. The value is validated against the provider's allowed redirect URIs.
 * Fleet agents now discover tools with find\_tools or an /tools listing before opening a tool's reference doc, so they no longer waste a turn reading guessed tool filenames that do not exist.
 * The Fleet Fast model tier (`gpt-5.4-mini`) now runs at medium reasoning effort instead of low, improving response quality on harder tasks.
-* The [templates](https://docs.langchain.com/langsmith/fleet/templates) gallery now features the Executive Assistant and Software Engineer templates as large cards with a hero illustration, each showing the agent's own icon.
+* The [templates](fleet/templates.md) gallery now features the Executive Assistant and Software Engineer templates as large cards with a hero illustration, each showing the agent's own icon.
 * Each tool inside a connection in the agent Configure panel now has a remove action (a trash button revealed on hover, matching the connection remove) instead of an on/off switch. The switch implied a reversible toggle, but turning a tool off actually removed it from the agent, so the control now reflects what it does.
 * Sending a chat message while clarifying questions were pending could fail the run and leave the thread stuck. Free-text now correctly dismisses the pending request before continuing.
 * In the Agent Builder chat, the Skills block's "Add skill" menu now opens the browse-workspace, create-skill, and import-from-URL dialogs. Previously choosing an option changed the URL but nothing appeared.
@@ -1375,11 +1375,11 @@ The experiments table now displays loading progress bars showing the number of r
 ## July 13-17, 2026
 ## New features
 
-* You can now add any agent to [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) in one click. After you authenticate with Slack once, Fleet automatically creates a Slack app configured with the agent's name, description, and icon, and maps each agent to a single Slack app.
+* You can now add any agent to [Slack](fleet/slack-app.md) in one click. After you authenticate with Slack once, Fleet automatically creates a Slack app configured with the agent's name, description, and icon, and maps each agent to a single Slack app.
 * When an agent is first added to a Slack workspace, it sends the creator a direct message with tips for inviting it to channels and mentioning it.
-* Agents now raise tool approvals directly in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app), with Approve and Deny buttons in the thread, so you no longer need to switch to the Fleet UI to respond.
+* Agents now raise tool approvals directly in [Slack](fleet/slack-app.md), with Approve and Deny buttons in the thread, so you no longer need to switch to the Fleet UI to respond.
 * When an agent encounters an error during a run, it now replies in the Slack thread instead of going silent. Authentication errors and some other error types include more detail.
-* Agents can now read file attachments in [Slack](https://docs.langchain.com/langsmith/fleet/slack-app) messages.
+* Agents can now read file attachments in [Slack](fleet/slack-app.md) messages.
 * The agent editor is now a sidebar built into the agent chat page, which organizes configuration into Channels, Connections, Knowledge, Schedule, and Advanced settings drawers.
 * The agent creation experience now starts from a blank-slate agent that configures itself and pauses at key points to bring you into the process.
 
@@ -1388,7 +1388,7 @@ The experiments table now displays loading progress bars showing the number of r
 
 * In the Agent Builder view, the footer workspace and tenant list is sourced from the Fleet API so you can switch between your Fleet workspaces.
 * The Access Profiles dialog in chat now includes a Create an access profile link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet agents can now delete files from their memory and [skills](fleet/skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
 * Fleet now completes OAuth for MCP servers whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
 * Creating an agent from a Fleet template now skips the setup wizard and opens the agent editor with the template onboarding card.
@@ -1402,7 +1402,7 @@ The experiments table now displays loading progress bars showing the number of r
 * Fleet OAuth provider and integration responses now include an `owner` field (`workspace` or `platform`) so you can tell your own resources apart from built-in, platform-managed ones. The platform manager organization can now create and modify built-in OAuth providers.
 * Setting up a schedule is now clearer: choose a preset (daily, weekly, monthly, or every few minutes) or enter a custom cron expression, with a live human-readable preview and inline validation as you go.
 * When registering an integration OAuth provider for headless connections, `http://` redirect URIs are now accepted only for the loopback IP literals `127.0.0.1` or `[::1]`. The localhost hostname is no longer accepted over `http`; use the loopback IP literal or `https`.
-* The [MCP servers settings page](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) now scrolls when the pointer is over the servers list.
+* The [MCP servers settings page](fleet/remote-mcp-servers.md) now scrolls when the pointer is over the servers list.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
 * The Executive Assistant template can now deliver its daily brief and answer @mentions in Slack after you connect a Slack workspace, and both the Executive Assistant and Software Engineer templates received configuration fixes.
 * You can now type and send a message in agent chat while a human-in-the-loop prompt is pending. Sending a new message dismisses the pending request and continues the conversation instead of leaving the composer locked.
@@ -1415,12 +1415,12 @@ The experiments table now displays loading progress bars showing the number of r
 ## June 29 - July 3, 2026
 ## New features
 
-* The Access Profiles dialog in chat now includes a Create an [access profile](https://docs.langchain.com/langsmith/fleet/computer-use) link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
-* Fleet agents can now delete files from their memory and [skills](https://docs.langchain.com/langsmith/fleet/skills) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
-* Fleet now completes OAuth for [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
+* The Access Profiles dialog in chat now includes a Create an [access profile](fleet/computer-use.md) link that opens the sandboxes create flow, so you can add a profile when a workspace has none configured instead of hitting a dead end.
+* Fleet agents can now delete files from their memory and [skills](fleet/skills.md) using the new delete tool, including files in linked workspace skills. Core agent files and read-only system skills remain protected.
+* Fleet now completes OAuth for [MCP servers](fleet/remote-mcp-servers.md) whose authorization server requires client-secret authentication at the token endpoint, so connecting these servers no longer fails after the consent step.
 * First-time Fleet users now see a streamlined welcome modal with two clear paths (describe an agent to build with AI, starting from a prompt in Chat, or start from a curated template), replacing the previous multi-step setup wizard.
-* Creating an agent from a Fleet [template](https://docs.langchain.com/langsmith/fleet/templates) now skips the setup wizard and opens the agent editor with the template onboarding card.
-* Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so [MCP servers](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) that require a newer version no longer return zero tools or fail tool calls.
+* Creating an agent from a Fleet [template](fleet/templates.md) now skips the setup wizard and opens the agent editor with the template onboarding card.
+* Fleet now sends the MCP protocol version a server negotiates during the handshake, both when loading tools and when the agent calls them, so [MCP servers](fleet/remote-mcp-servers.md) that require a newer version no longer return zero tools or fail tool calls.
 * Fleet agents receive the day of week alongside the current date (for example "Monday, June 29th 2026"), so scheduling and date reasoning no longer relies on the model inferring the weekday from the ISO date.
 * File edits in Fleet agent chat now render as syntax-highlighted, line-by-line diffs, making changes easier to review.
 * When you connect a custom Slack bot to a Fleet agent, Fleet sends the installer a direct message with quick setup tips, including how to add the bot to channels and mention it with @.
@@ -1431,28 +1431,28 @@ The experiments table now displays loading progress bars showing the number of r
 
 ## Fixes
 
-* On the Agent Builder [Integrations](https://docs.langchain.com/langsmith/fleet/tools) page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
+* On the Agent Builder [Integrations](fleet/tools.md) page, searching now selects the All tab so results span every category, and switching category tabs clears the search.
 * When a Fleet agent's subagent calls a tool that requires human approval, the approval prompt now appears in the chat instead of the run completing without it.
 
 ## June 15-19, 2026
 ## New features
 
-* [Fleet tools](https://docs.langchain.com/langsmith/fleet/tools) now include Salesforce OAuth provider setup for self-hosted users, so you can configure the provider end to end.
+* [Fleet tools](fleet/tools.md) now include Salesforce OAuth provider setup for self-hosted users, so you can configure the provider end to end.
 * Agent sharing is redesigned around two choices, who can use and who can edit an agent, plus a Publish as template option that lets others fork their own editable copy.
 * Fleet agents now post a notification to the originating thread, such as Slack, when they pause at a human-in-the-loop interrupt, with a link back to the agent chat.
 * You can now complete Fleet integration OAuth through your own callback URL, so headless setups can finish authentication without the LangSmith UI.
 * Agent cards now show the agent owner.
-* New first-party [templates](https://docs.langchain.com/langsmith/fleet/templates), Brand Copywriter and Applicant Screening, are available in the gallery.
+* New first-party [templates](fleet/templates.md), Brand Copywriter and Applicant Screening, are available in the gallery.
 
 ## Fixes
 
 * Switching threads in the agent chat now clears the previous thread immediately and shows a loading state instead of stale messages.
-* The [skills](https://docs.langchain.com/langsmith/fleet/skills) list now degrades gracefully when one skill fails to load, so the remaining skills still appear.
+* The [skills](fleet/skills.md) list now degrades gracefully when one skill fails to load, so the remaining skills still appear.
 
 ## June 8-12, 2026
 ## New features
 
-* [Templates](https://docs.langchain.com/langsmith/fleet/templates) now show “by Fleet” with the Fleet logo, so curated templates match Fleet branding.
+* [Templates](fleet/templates.md) now show “by Fleet” with the Fleet logo, so curated templates match Fleet branding.
 
 ## Fixes
 
@@ -1462,35 +1462,35 @@ The experiments table now displays loading progress bars showing the number of r
 ## June 1-5, 2026
 ## New features
 
-* [Skills](https://docs.langchain.com/langsmith/fleet/skills) load faster: the skills list fetches lightweight metadata first and loads file contents only when you open a skill.
-* The agent creation menu adds a [Templates](https://docs.langchain.com/langsmith/fleet/templates) entry.
-* The [remote MCP](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers) authorization screen now shows the connecting application's name, logo, and homepage, terms, and privacy links instead of its raw `client ID`.
-* [Slack integration](https://docs.langchain.com/langsmith/fleet/slack-app) available in AWS and APAC regions.
+* [Skills](fleet/skills.md) load faster: the skills list fetches lightweight metadata first and loads file contents only when you open a skill.
+* The agent creation menu adds a [Templates](fleet/templates.md) entry.
+* The [remote MCP](fleet/remote-mcp-servers.md) authorization screen now shows the connecting application's name, logo, and homepage, terms, and privacy links instead of its raw `client ID`.
+* [Slack integration](fleet/slack-app.md) available in AWS and APAC regions.
 
 ## Fixes
 
-* [Scheduled (cron) execution](https://docs.langchain.com/langsmith/fleet/schedules) is restored for enterprise Fleet agents.
+* [Scheduled (cron) execution](fleet/schedules.md) is restored for enterprise Fleet agents.
 * Long-running agent runs and agent-builder generations are no longer cut off after 60 seconds.
-* The Gmail read-emails [tool](https://docs.langchain.com/langsmith/fleet/tools) now returns results when you search sent mail with an `in:sent` query.
+* The Gmail read-emails [tool](fleet/tools.md) now returns results when you search sent mail with an `in:sent` query.
 * Scrolling is improved for long toolbox, skill, and sub-agent lists in the agent editor, and webhook dialogs now scroll within the viewport.
 
 ## March 16-20, 2026
 ## New features
 
-* Agent Builder is now [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet). The new name reflects Fleet's focus on building and managing agents for your whole team: creating them, sharing them, managing their tasks, and controlling agent access and identity. All existing agents, configurations, integrations, plans, and contracts continue to work unchanged, with no action required on your end.
+* Agent Builder is now [LangSmith Fleet](fleet.md). The new name reflects Fleet's focus on building and managing agents for your whole team: creating them, sharing them, managing their tasks, and controlling agent access and identity. All existing agents, configurations, integrations, plans, and contracts continue to work unchanged, with no action required on your end.
 
 ## February 16-20, 2026
 ## New features
 
-* A central Chat agent connects to all of your workspace [tools](https://docs.langchain.com/langsmith/fleet/tools), including Slack, Gmail, Linear, and MCP servers, so you can ask questions and take actions without setting up a dedicated agent first.
+* A central Chat agent connects to all of your workspace [tools](fleet/tools.md), including Slack, Gmail, Linear, and MCP servers, so you can ask questions and take actions without setting up a dedicated agent first.
 * Turn a useful conversation into a recurring agent with one click, with no prompt engineering or conditional logic required.
 * Upload files directly into chat, including CSVs, images, documents, and style guides, for the agent to act on immediately.
-* A central tool registry lets workspace admins connect [tools](https://docs.langchain.com/langsmith/fleet/tools), manage authentication, and control access across the organization.
+* A central tool registry lets workspace admins connect [tools](fleet/tools.md), manage authentication, and control access across the organization.
 
 ## October 27-31, 2025
 ## New features
 
-* LangSmith Agent Builder launched in private preview as a no-code way for non-developers to build agents, with conversational setup, built-in memory, MCP integrations, automated triggers, and subagent support. Agent Builder later became [LangSmith Fleet](https://docs.langchain.com/langsmith/fleet).
+* LangSmith Agent Builder launched in private preview as a no-code way for non-developers to build agents, with conversational setup, built-in memory, MCP integrations, automated triggers, and subagent support. Agent Builder later became [LangSmith Fleet](fleet.md).
 
 ***
 

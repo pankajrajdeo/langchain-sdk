@@ -52,7 +52,7 @@ Open your agent, then in the sidebar expand the **Connections** drawer.
 
 ### Add the MCP server
 1. Click **Add connection**, then click **+ Add custom MCP**.
-2. Enter the server name and URL, then configure authentication (see [authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types)).
+2. Enter the server name and URL, then configure authentication (see [authentication types](#authentication-types)).
 
 ### Discover tools
 Fleet discovers available tools from your MCP server and makes them available in this agent.
@@ -69,7 +69,7 @@ To add a remote MCP server to all agents in the workspace:
   1. Click **+ Custom MCP** at the bottom of the left sidebar.
   2. Add a **Name** for the MCP server.
   3. Add the MCP **URL** (e.g., `https://api.example.com/mcp`)
-  4. Select the **Authentication** type. See [Authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types) for more details.
+  4. Select the **Authentication** type. See [Authentication types](#authentication-types) for more details.
 
 ### Save the server
   Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.
@@ -79,7 +79,7 @@ To add a remote MCP server to all agents in the workspace:
 In the LangSmith UI, navigate to the [Settings > MCP servers](https://smith.langchain.com/settings/workspaces/mcp-servers) tab.
 
 ### Add the server
-Click **Add server** and enter the server name and URL, then configure authentication (see [authentication types](https://docs.langchain.com/langsmith/fleet/remote-mcp-servers#authentication-types)).
+Click **Add server** and enter the server name and URL, then configure authentication (see [authentication types](#authentication-types)).
 
 ### Save the server
 Click **Save server**. Fleet will automatically discover available tools from your MCP server and make them available in your agents. The configured headers are applied to both tool discovery requests and tool execution requests.

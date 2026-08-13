@@ -3,12 +3,12 @@
 > [!NOTE]
 > This integration is in beta, so its API may change.
 
-Trace your [Pipecat](https://pipecat.ai/) voice agents to LangSmith with the LangSmith Pipecat integration. For high-level conventions, see [Voice tracing fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals).
+Trace your [Pipecat](https://pipecat.ai/) voice agents to LangSmith with the LangSmith Pipecat integration. For high-level conventions, see [Voice tracing fundamentals](trace-voice-fundamentals.md).
 
 > [!NOTE]
 > The Pipecat integration requires `langsmith[pipecat]>=0.9.7`.
 
-The integration hooks into the spans Pipecat already emits and maps them onto LangSmith's tracing format, so each conversation becomes a single LangSmith trace, with a span per pipeline stage (STT, LLM, TTS). This covers both the STT/LLM/TTS cascade and speech-to-speech (realtime) models. Realtime models (for example, `OpenAIRealtimeLLMService`) need one extra call to capture the user's transcript. See [When using Pipecat with a realtime model](https://docs.langchain.com/langsmith/trace-with-pipecat#when-using-pipecat-with-a-realtime-model).
+The integration hooks into the spans Pipecat already emits and maps them onto LangSmith's tracing format, so each conversation becomes a single LangSmith trace, with a span per pipeline stage (STT, LLM, TTS). This covers both the STT/LLM/TTS cascade and speech-to-speech (realtime) models. Realtime models (for example, `OpenAIRealtimeLLMService`) need one extra call to capture the user's transcript. See [When using Pipecat with a realtime model](#when-using-pipecat-with-a-realtime-model).
 
 ## Install
 
@@ -58,7 +58,7 @@ task = PipelineTask(
 
 ### Use a LangGraph or LangChain agent as the LLM
 
-If your LLM stage is an in-process [LangGraph or LangChain](https://docs.langchain.com/oss/python/langgraph/overview) agent, its model and tool runs should nest inside Pipecat's `llm` span rather than forming a separate trace. To achieve this:
+If your LLM stage is an in-process [LangGraph or LangChain](../langgraph/overview.md) agent, its model and tool runs should nest inside Pipecat's `llm` span rather than forming a separate trace. To achieve this:
 
 * Pass `configure_pipecat(llm_span_kind="chain")`. This avoids nested `llm` spans that don't actually represent inference requests.
 * Set `LANGSMITH_TRACING_MODE=otel` in the environment. Without it, those runs post to LangSmith directly and form a separate trace instead of nesting.
@@ -75,7 +75,7 @@ provider.add_span_processor(PipecatLangSmithSpanProcessor())
 
 ## Group a conversation into a thread
 
-To group a conversation's runs into a LangSmith [thread](https://docs.langchain.com/langsmith/threads) for thread-level views and token and cost aggregation, call `set_thread_id` once per conversation before its spans are emitted:
+To group a conversation's runs into a LangSmith [thread](threads.md) for thread-level views and token and cost aggregation, call `set_thread_id` once per conversation before its spans are emitted:
 
 ```python
 from langsmith.integrations.pipecat import configure_pipecat, set_thread_id
@@ -163,14 +163,14 @@ pipeline = Pipeline([
 await audiobuffer.start_recording()
 ```
 
-The integration attaches the recording to the conversation root when it ends. For the underlying attachment API, see [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces).
+The integration attaches the recording to the conversation root when it ends. For the underlying attachment API, see [Upload files with traces](upload-files-with-traces.md).
 
 ## Next steps
 
-#### [Voice fundamentals](https://docs.langchain.com/langsmith/trace-voice-fundamentals)
+#### [Voice fundamentals](trace-voice-fundamentals.md)
 Core conventions for tracing voice agents.
 
-#### [Upload files with traces](https://docs.langchain.com/langsmith/upload-files-with-traces)
+#### [Upload files with traces](upload-files-with-traces.md)
 Attach the conversation audio recording to your trace.
 
 ***

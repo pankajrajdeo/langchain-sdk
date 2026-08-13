@@ -1,6 +1,6 @@
 # How to retry failed runs in experiments (Python only)
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/evaluate-with-retry)
-When running [evaluations](https://docs.langchain.com/langsmith/evaluation-concepts#evaluation-lifecycle) on large [datasets](https://docs.langchain.com/langsmith/evaluation-concepts#datasets), you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire evaluation, you can identify and retry only the failed examples on an [experiment](https://docs.langchain.com/langsmith/evaluation-concepts#experiment).
+When running [evaluations](evaluation-concepts.md#evaluation-lifecycle) on large [datasets](evaluation-concepts.md#datasets), you may encounter failures on a small subset of examples due to rate limits, network issues, or other transient errors. Rather than re-running the entire evaluation, you can identify and retry only the failed examples on an [experiment](evaluation-concepts.md#experiment).
 
 This guide shows an approach to build retry logic into your evaluation workflow and to retry only the failed examples. You can use the `error_handling='ignore'` parameter to skip logging errored runs, then automatically identify unsuccessful examples and re-run them in Python.
 
@@ -49,11 +49,11 @@ results_retry = await client.aevaluate(
 
 ## Related topics
 
-* [Run an evaluation](https://docs.langchain.com/langsmith/evaluate-llm-application)
-* [Run an evaluation asynchronously](https://docs.langchain.com/langsmith/evaluation-async)
-* [Handle model rate limits](https://docs.langchain.com/langsmith/handle-model-rate-limiting)
-* [Experiment configuration](https://docs.langchain.com/langsmith/experiment-configuration)
-* [Evaluate existing experiment](https://docs.langchain.com/langsmith/evaluate-existing-experiment)
+* [Run an evaluation](evaluate-llm-application.md)
+* [Run an evaluation asynchronously](evaluation-async.md)
+* [Handle model rate limits](handle-model-rate-limiting.md)
+* [Experiment configuration](experiment-configuration.md)
+* [Evaluate existing experiment](evaluate-existing-experiment.md)
 
 ***
 

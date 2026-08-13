@@ -2,9 +2,9 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/create-a-prompt)
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-create-a-prompt), navigate to the **Playground** in the left-hand sidebar or from the application homepage.
 
-> **Image:** [Empty playground](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Empty playground](create-a-prompt.md)
 
-> **Image:** [Empty playground](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Empty playground](create-a-prompt.md)
 
 ## Compose your prompt
 
@@ -21,7 +21,7 @@ The prompt is made up of messages, each of which has a *role*, including:
 
 ### Template format
 
-The default [template format](https://docs.langchain.com/langsmith/prompt-template-format) is f-string, but you can change the prompt template format to mustache by clicking on the dropbox below the prompt boxes.
+The default [template format](prompt-template-format.md) is f-string, but you can change the prompt template format to mustache by clicking on the dropbox below the prompt boxes.
 
 ### Add a template variable
 
@@ -29,31 +29,31 @@ Prompts become particularly useful when you add variables in your prompt. You ca
 
 * Add `{variable_name}` to your prompt (with one curly brace on each side for f-string or two for mustache).
 
-> **Image:** [Variable in prompt box.](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Variable in prompt box.](create-a-prompt.md)
 
-> **Image:** [Variable in prompt box.](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Variable in prompt box.](create-a-prompt.md)
 
 * Highlight text you want to templatize and click **Convert to variable** tooltip button that displays. Enter a name for your variable, and convert.
 
-> **Image:** [Double clicking on a prompt displays the variable icon.](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Double clicking on a prompt displays the variable icon.](create-a-prompt.md)
 
-> **Image:** [Double clicking on a prompt displays the variable icon.](https://docs.langchain.com/langsmith/create-a-prompt)
+> **Image:** [Double clicking on a prompt displays the variable icon.](create-a-prompt.md)
 
 Once you've added a variable, the right panel of the playground will have an **Input** box for a sample input for the prompt variable. Fill these in with values to test the prompt.
 
 > [!NOTE]
-> For more details on the prompt template formats generally and examples in both syntax, refer to the [Prompt template format](https://docs.langchain.com/langsmith/prompt-template-format) guide.
+> For more details on the prompt template formats generally and examples in both syntax, refer to the [Prompt template format](prompt-template-format.md) guide.
 
 ### Structured output
 
-Adding an output schema to your prompt will get output in a structured format. Learn more about [structured output](https://docs.langchain.com/langsmith/prompt-engineering-concepts#structured-output).
+Adding an output schema to your prompt will get output in a structured format. Learn more about [structured output](prompt-engineering-concepts.md#structured-output).
 
 ### Tools
 
-You can also add a tool by clicking the **+ Tool** button at the bottom of the prompt editor. For more information on how to use tools, refer to [Use tools](https://docs.langchain.com/langsmith/use-tools).
+You can also add a tool by clicking the **+ Tool** button at the bottom of the prompt editor. For more information on how to use tools, refer to [Use tools](use-tools.md).
 
 > [!NOTE]
-> Use the **[Chat](https://docs.langchain.com/langsmith/chat)** in the Playground to generate tools, create output schemas, and optimize your prompts with AI assistance.
+> Use the **[Chat](chat.md)** in the Playground to generate tools, create output schemas, and optimize your prompts with AI assistance.
 
 ## Run the prompt
 
@@ -78,7 +78,7 @@ To add metadata to your prompt, click the  **More** icon on the top right-hand s
 
 # Next steps
 
-Now that you've created a prompt, you can use it in your application code. See [how to pull a prompt programmatically](https://docs.langchain.com/langsmith/manage-prompts-programmatically#pull-a-prompt).
+Now that you've created a prompt, you can use it in your application code. See [how to pull a prompt programmatically](manage-prompts-programmatically.md#pull-a-prompt).
 
 ***
 

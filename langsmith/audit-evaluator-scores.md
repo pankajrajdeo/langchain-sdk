@@ -4,15 +4,15 @@ LLM-as-a-judge evaluators don't always get it right. Because of this, it is ofte
 
 ## In the comparison view
 
-In the comparison view, you may click on any feedback tag to bring up the feedback details. From there, click the "edit" icon on the right to bring up the corrections view. You may then type in your desired score in the text box under "Make correction". If you would like, you may also attach an explanation to your correction. This is useful if you are using a [few-shot evaluator](https://docs.langchain.com/langsmith/create-few-shot-evaluators) and will be automatically inserted into your few-shot examples in place of the `few_shot_explanation` prompt variable.
+In the comparison view, you may click on any feedback tag to bring up the feedback details. From there, click the "edit" icon on the right to bring up the corrections view. You may then type in your desired score in the text box under "Make correction". If you would like, you may also attach an explanation to your correction. This is useful if you are using a [few-shot evaluator](create-few-shot-evaluators.md) and will be automatically inserted into your few-shot examples in place of the `few_shot_explanation` prompt variable.
 
-> **Image:** [Audit Evaluator Comparison View](https://docs.langchain.com/langsmith/audit-evaluator-scores)
+> **Image:** [Audit Evaluator Comparison View](audit-evaluator-scores.md)
 
 ## In the runs table
 
 In the runs table, find the "Feedback" column and click on the feedback tag to bring up the feedback details. Again, click the "edit" icon on the right to bring up the corrections view.
 
-> **Image:** [Audit Evaluator Runs Table](https://docs.langchain.com/langsmith/audit-evaluator-scores)
+> **Image:** [Audit Evaluator Runs Table](audit-evaluator-scores.md)
 
 ## In the SDK
 

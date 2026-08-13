@@ -3,17 +3,17 @@
 Configure Claude Code, Codex, Gemini CLI, and Deep Agents Code to route LLM calls through the LLM Gateway.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
 Configure coding agents to use the standard LLM Gateway endpoint for centralized cost controls, observability, and audit trails. The gateway authenticates each caller, routes by model ID, enforces policies, and traces each call.
 
-Claude Code can use the standard Anthropic Messages format, while Codex and Deep Agents Code can use the standard OpenAI-compatible formats. Gemini CLI uses Google's native API and requires [direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access).
+Claude Code can use the standard Anthropic Messages format, while Codex and Deep Agents Code can use the standard OpenAI-compatible formats. Gemini CLI uses Google's native API and requires [direct model access](llm-gateway-direct-model-access.md).
 
 ## Prerequisites
 
-* Your [Organization admin](https://docs.langchain.com/langsmith/rbac#organization-admin) has enabled the gateway and completed any required [provider setup](https://docs.langchain.com/langsmith/llm-gateway-admin-setup).
-* You have a workspace-scoped [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) with `gateway:invoke` and `workspaces:read` [permissions](https://docs.langchain.com/langsmith/organization-workspace-operations).
-* For bring-your-own-key models, your workspace has the corresponding provider secret. [Gateway Credits models](https://docs.langchain.com/langsmith/llm-gateway-credits) do not require a provider secret.
+* Your [Organization admin](rbac.md#organization-admin) has enabled the gateway and completed any required [provider setup](llm-gateway-admin-setup.md).
+* You have a workspace-scoped [LangSmith API key](create-account-api-key.md) with `gateway:invoke` and `workspaces:read` [permissions](organization-workspace-operations.md).
+* For bring-your-own-key models, your workspace has the corresponding provider secret. [Gateway Credits models](llm-gateway-credits.md) do not require a provider secret.
 
 Set your LangSmith API key before configuring a client:
 
@@ -67,7 +67,7 @@ To use a bring-your-own-key model instead, replace `model` with its provider-pre
 
 ## Gemini CLI
 
-Gemini CLI sends Google's native Generate Content requests, which the standard endpoint does not expose. Follow [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access#configure-provider-sdks) to configure the `/gemini` route, then run:
+Gemini CLI sends Google's native Generate Content requests, which the standard endpoint does not expose. Follow [Direct model access](llm-gateway-direct-model-access.md#configure-provider-sdks) to configure the `/gemini` route, then run:
 
 ```bash
 gemini
@@ -84,14 +84,14 @@ export OPENAI_API_KEY="$LANGSMITH_API_KEY"
 dcode --model openai:moonshotai/kimi-k3
 ```
 
-To use a bring-your-own-key model, keep the standard base URL and pass a provider-prefixed model after `openai:`, for example, `openai:anthropic/claude-opus-5`. For provider-native integrations and model IDs, see [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access#configure-langchain-and-deep-agents).
+To use a bring-your-own-key model, keep the standard base URL and pass a provider-prefixed model after `openai:`, for example, `openai:anthropic/claude-opus-5`. For provider-native integrations and model IDs, see [Direct model access](llm-gateway-direct-model-access.md#configure-langchain-and-deep-agents).
 
 ## Company-wide deployment
 
 For organizations rolling the gateway out to all developers, distribute the configuration through mobile device management or a shared shell profile. Distribute:
 
 1. The standard gateway base URL for each client.
-2. A workspace-scoped [LangSmith API key](https://docs.langchain.com/langsmith/create-account-api-key) per user or team, depending on your policy granularity.
+2. A workspace-scoped [LangSmith API key](create-account-api-key.md) per user or team, depending on your policy granularity.
 3. The model IDs approved for each coding agent.
 4. The Codex `config.toml` if your organization uses Codex.
 
@@ -108,10 +108,10 @@ If the call fails with a `403`, check that your API key's role includes `gateway
 
 ## Next steps
 
-* [Gateway Credits](https://docs.langchain.com/langsmith/llm-gateway-credits): call hosted models without a provider secret.
-* [Direct model access](https://docs.langchain.com/langsmith/llm-gateway-direct-model-access): configure provider-native routes for coding agents that require them.
-* [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies): set cost limits on developer LLM usage.
-* [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access): understand where gateway traces appear.
+* [Gateway Credits](llm-gateway-credits.md): call hosted models without a provider secret.
+* [Direct model access](llm-gateway-direct-model-access.md): configure provider-native routes for coding agents that require them.
+* [Spend policies](llm-gateway-spend-policies.md): set cost limits on developer LLM usage.
+* [Traces, Engine, and access control](llm-gateway-access.md): understand where gateway traces appear.
 
 ***
 

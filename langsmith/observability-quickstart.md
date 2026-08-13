@@ -2,19 +2,19 @@
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/observability-quickstart)
 Add LangSmith tracing to an LLM application in minutes.
 
-LangSmith gives you end-to-end visibility into your LLM application by capturing [*traces*](https://docs.langchain.com/langsmith/observability-concepts#traces); a complete record of every step that ran during a request, from the inputs passed in to the final output returned.
+LangSmith gives you end-to-end visibility into your LLM application by capturing [*traces*](observability-concepts.md#traces); a complete record of every step that ran during a request, from the inputs passed in to the final output returned.
 
 In this quickstart, you will add tracing to an AI assistant and view the results in LangSmith.
 
 > [!TIP]
-> If you're building with [LangChain](https://docs.langchain.com/oss/python/langchain/overview) or [LangGraph](https://docs.langchain.com/oss/python/langgraph/overview), you can enable LangSmith tracing with a single environment variable. Refer to [trace with LangChain](https://docs.langchain.com/langsmith/trace-with-langchain) or [trace with LangGraph](https://docs.langchain.com/langsmith/trace-with-langgraph).
+> If you're building with [LangChain](../langchain/overview.md) or [LangGraph](../langgraph/overview.md), you can enable LangSmith tracing with a single environment variable. Refer to [trace with LangChain](trace-with-langchain.md) or [trace with LangGraph](trace-with-langgraph.md).
 
 ## Prerequisites
 
 Before you begin, make sure you have:
 
 * **A LangSmith account**: Sign up or log in at [smith.langchain.com](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart).
-* **A LangSmith API key**: Follow the [Create an API key](https://docs.langchain.com/langsmith/create-account-api-key) guide.
+* **A LangSmith API key**: Follow the [Create an API key](create-account-api-key.md) guide.
 * **An OpenAI API key**: Generate this from the [OpenAI dashboard](https://platform.openai.com/account/api-keys).
 
 This example uses OpenAI as the LLM provider. You can adapt it for your own provider.
@@ -48,7 +48,7 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
    export OPENAI_API_KEY="<your-openai-api-key>"
 ```
 
-   To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](https://docs.langchain.com/langsmith/log-traces-to-project). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
+   To send traces to a specific project, use the [`LANGSMITH_PROJECT` environment variable](log-traces-to-project.md). If this is not set, LangSmith will create a default tracing project automatically on trace ingestion.
 
 > [!NOTE]
 >    If your account is in a region other than US (the default), also set `LANGSMITH_ENDPOINT` to the API URL for your region. Without this, your API key won't be recognized and requests will fail to authenticate.
@@ -81,7 +81,7 @@ This example uses OpenAI as the LLM provider. You can adapt it for your own prov
 >
 >    For example, EU accounts: `export LANGSMITH_ENDPOINT="https://eu.api.smith.langchain.com"`. Do not add a trailing slash to the URL, as this can cause authentication errors.
 
-   If you are using Anthropic, use the [Anthropic wrapper](https://docs.langchain.com/langsmith/trace-anthropic). If you are using Google Gemini, use the [Gemini wrapper](https://docs.langchain.com/langsmith/trace-with-google-gemini). For other providers, use the [`@traceable` decorator](https://docs.langchain.com/langsmith/annotate-code#use-%40traceable-%2F-traceable) to trace calls manually.
+   If you are using Anthropic, use the [Anthropic wrapper](trace-anthropic.md). If you are using Google Gemini, use the [Gemini wrapper](trace-with-google-gemini.md). For other providers, use the [`@traceable` decorator](annotate-code.md#use-%40traceable-%2F-traceable) to trace calls manually.
 
 ## 2. Build the app
 
@@ -293,24 +293,24 @@ npx tsx index.ts
 
 In the [LangSmith UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_campaign=langsmith-signup\&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Messages** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://docs.langchain.com/langsmith/observability-quickstart)
+> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-quickstart.md)
 
-> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](https://docs.langchain.com/langsmith/observability-quickstart)
+> **Image:** [LangSmith UI showing a trace with an outer application span and a nested LLM call span.](observability-quickstart.md)
 
 The outer span captures your `assistant` function's inputs and outputs. The nested **get\_context** span records the tool call, and the **ChatOpenAI** span records the exact prompt sent to the model and the response returned.
 
 > [!TIP]
-> You can also inspect traces from the terminal using the [LangSmith CLI](https://docs.langchain.com/langsmith/langsmith-cli).
+> You can also inspect traces from the terminal using the [LangSmith CLI](langsmith-cli.md).
 
 ## Next steps
 
-* [Tracing integrations](https://docs.langchain.com/langsmith/integrations): LangChain, LangGraph, Anthropic, and other providers.
-* [Trace an LLM application](https://docs.langchain.com/langsmith/observability-llm-tutorial): a full lifecycle tutorial, from prototyping through production.
-* [Filter traces](https://docs.langchain.com/langsmith/filter-traces-in-application): search and navigate large tracing projects.
-* [Log to a specific project](https://docs.langchain.com/langsmith/log-traces-to-project): send traces to a named project instead of **default**.
+* [Tracing integrations](integrations.md): LangChain, LangGraph, Anthropic, and other providers.
+* [Trace an LLM application](observability-llm-tutorial.md): a full lifecycle tutorial, from prototyping through production.
+* [Filter traces](filter-traces-in-application.md): search and navigate large tracing projects.
+* [Log to a specific project](log-traces-to-project.md): send traces to a named project instead of **default**.
 
 > [!NOTE]
-> After logging traces, use **[Chat](https://docs.langchain.com/langsmith/chat)** to analyze them and get AI-powered insights into your application's performance.
+> After logging traces, use **[Chat](chat.md)** to analyze them and get AI-powered insights into your application's performance.
 
 ***
 

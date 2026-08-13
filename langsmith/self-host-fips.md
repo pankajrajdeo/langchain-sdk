@@ -25,7 +25,7 @@ Every LangChain-authored image has a `-fips` counterpart published at the same t
 >
 > On **earlier** versions those five images are published with `-fips` counterparts at the same tag as well; point each of those keys at its `-fips` repository too.
 
-PostgreSQL, Redis, and ClickHouse are not published as FIPS variants by LangChain. If your deployment requires FIPS for these components, bring your own FIPS-mode service and connect via [external Postgres](https://docs.langchain.com/langsmith/self-host-external-postgres), [external Redis](https://docs.langchain.com/langsmith/self-host-external-redis), or [external ClickHouse](https://docs.langchain.com/langsmith/self-host-external-clickhouse).
+PostgreSQL, Redis, and ClickHouse are not published as FIPS variants by LangChain. If your deployment requires FIPS for these components, bring your own FIPS-mode service and connect via [external Postgres](self-host-external-postgres.md), [external Redis](self-host-external-redis.md), or [external ClickHouse](self-host-external-clickhouse.md).
 
 ### ACE backend FIPS boundary note
 
@@ -35,7 +35,7 @@ We consider this acceptable for regulated environments: FIPS governs the platfor
 
 ## Use FIPS images
 
-Update `values.yaml` in your LangSmith Helm installation to point each LangChain image repository at its `-fips` counterpart, keeping your existing tag. Replace `0.16.21` with the [LangSmith version](https://docs.langchain.com/langsmith/self-hosted-changelog) you want to deploy:
+Update `values.yaml` in your LangSmith Helm installation to point each LangChain image repository at its `-fips` counterpart, keeping your existing tag. Replace `0.16.21` with the [LangSmith version](self-hosted-changelog.md) you want to deploy:
 
 ```yaml
 images:
@@ -57,7 +57,7 @@ images:
     tag: "0.16.21"
 ```
 
-Apply the change and upgrade following the [Upgrading LangSmith](https://docs.langchain.com/langsmith/self-host-upgrades) guide.
+Apply the change and upgrade following the [Upgrading LangSmith](self-host-upgrades.md) guide.
 
 ## Verify FIPS mode
 
@@ -98,7 +98,7 @@ For more detail on interpreting the output, see [Chainguard's FIPS verification 
 
 ## Mirror for airgapped deployments
 
-The `-fips` naming convention applies identically when mirroring images to a private registry. Follow the [image mirroring guide](https://docs.langchain.com/langsmith/self-host-mirroring-images) and substitute each repository with its `-fips` counterpart. Airgapped rollouts, with or without FIPS, require scoping with your LangChain account executive before you begin.
+The `-fips` naming convention applies identically when mirroring images to a private registry. Follow the [image mirroring guide](self-host-mirroring-images.md) and substitute each repository with its `-fips` counterpart. Airgapped rollouts, with or without FIPS, require scoping with your LangChain account executive before you begin.
 
 ***
 

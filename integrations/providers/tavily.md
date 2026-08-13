@@ -30,7 +30,7 @@ export TAVILY_API_KEY="your-api-key"
 
 A search tool that returns real-time, LLM-ready results from Tavily's Search API.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_search).
+See a [usage example](../tools/tavily_search.md).
 
 ```python
 from langchain_tavily import TavilySearch
@@ -40,7 +40,7 @@ from langchain_tavily import TavilySearch
 
 A tool that returns the cleaned, parsed content of one or more URLs.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_extract).
+See a [usage example](../tools/tavily_extract.md).
 
 ```python
 from langchain_tavily import TavilyExtract
@@ -50,7 +50,7 @@ from langchain_tavily import TavilyExtract
 
 A tool that performs a structured web traversal from a base URL, with optional natural-language instructions and path/domain filters.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_crawl).
+See a [usage example](../tools/tavily_crawl.md).
 
 ```python
 from langchain_tavily import TavilyCrawl
@@ -60,7 +60,7 @@ from langchain_tavily import TavilyCrawl
 
 A tool that discovers the URL structure of a site without extracting page content.
 
-See a [usage example](https://docs.langchain.com/oss/python/integrations/tools/tavily_map).
+See a [usage example](../tools/tavily_map.md).
 
 ```python
 from langchain_tavily import TavilyMap

@@ -3,13 +3,13 @@
 One-time organization setup to enable the LLM Gateway and grant user access.
 
 > [!NOTE]
-> **Beta:** The LLM Gateway is in [beta](https://docs.langchain.com/langsmith/release-stages).
+> **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
-One-time setup to enable the LLM Gateway for your LangSmith [organization](https://docs.langchain.com/langsmith/administration-overview#organizations). [Organization admins](https://docs.langchain.com/langsmith/rbac#organization-admin) should complete this before individual users can route calls through the gateway.
+One-time setup to enable the LLM Gateway for your LangSmith [organization](administration-overview.md#organizations). [Organization admins](rbac.md#organization-admin) should complete this before individual users can route calls through the gateway.
 
 ## Prerequisites
 
-You need [`organization:manage` permission](https://docs.langchain.com/langsmith/organization-workspace-operations) in LangSmith. [Step 2 Option A](https://docs.langchain.com/langsmith/llm-gateway-admin-setup#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](https://docs.langchain.com/langsmith/rbac) (custom roles).
+You need [`organization:manage` permission](organization-workspace-operations.md) in LangSmith. [Step 2 Option A](#option-a-create-a-custom-workspace-role-recommended) also requires a plan that includes [RBAC](rbac.md) (custom roles).
 
 ## 1. Add Provider Secrets
 
@@ -58,28 +58,28 @@ Gateway policy management requires `organization:manage` permission.
 
 Go to **Settings → Gateway → LLM Gateway** to create governance policies. You can configure:
 
-* **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](https://docs.langchain.com/langsmith/llm-gateway-spend-policies).
-* **Data protection:** detect and redact PII and secrets before they reach the model. Refer to [Data protection](https://docs.langchain.com/langsmith/llm-gateway-data-protection).
+* **Spend limits:** hard caps at the organization, workspace, API key, or user level. Refer to [Spend policies](llm-gateway-spend-policies.md).
+* **Data protection:** detect and redact PII and secrets before they reach the model. Refer to [Data protection](llm-gateway-data-protection.md).
 
 Policies are optional during initial setup. The gateway will freely allow invocations until you have configured policies.
 
 ## 4. Distribute API keys to users
 
-Create workspace-scoped [Service Keys](https://docs.langchain.com/langsmith/administration-overview#service-keys) for users who need gateway access. Each key should be attached to a role that includes `gateway:invoke` and `workspaces:read`.
+Create workspace-scoped [Service Keys](administration-overview.md#service-keys) for users who need gateway access. Each key should be attached to a role that includes `gateway:invoke` and `workspaces:read`.
 
-Use workspace-scoped keys, not organization-scoped keys. See [API key scoping](https://docs.langchain.com/langsmith/llm-gateway-access#api-key-scoping) for details.
+Use workspace-scoped keys, not organization-scoped keys. See [API key scoping](llm-gateway-access.md#api-key-scoping) for details.
 
-Share the key and the gateway endpoint with each user, or distribute them via MDM (mobile device management) for company-wide coding agent rollouts. For per-agent configuration instructions, refer to [Set up coding agents](https://docs.langchain.com/langsmith/llm-gateway-coding-agents).
+Share the key and the gateway endpoint with each user, or distribute them via MDM (mobile device management) for company-wide coding agent rollouts. For per-agent configuration instructions, refer to [Set up coding agents](llm-gateway-coding-agents.md).
 
 ## Verification
 
-Ask a user to run the [verification cURL from the quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart#2-make-a-call). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
+Ask a user to run the [verification cURL from the quickstart](llm-gateway-quickstart.md#2-make-a-call). A `200` response confirms the gateway, the API key, provider secrets, and role permissions are all configured correctly. The call will appear as a trace in the **gateway** tracing project in the workspace.
 
 ## Next steps
 
-* [Quickstart](https://docs.langchain.com/langsmith/llm-gateway-quickstart): share with your users as the getting-started guide.
-* [Set up coding agents](https://docs.langchain.com/langsmith/llm-gateway-coding-agents): configure Claude Code, Codex, and other agents org-wide.
-* [Traces, Engine, and access control](https://docs.langchain.com/langsmith/llm-gateway-access): deep dive on roles, scoped keys, trace routing, and who can see what.
+* [Quickstart](llm-gateway-quickstart.md): share with your users as the getting-started guide.
+* [Set up coding agents](llm-gateway-coding-agents.md): configure Claude Code, Codex, and other agents org-wide.
+* [Traces, Engine, and access control](llm-gateway-access.md): deep dive on roles, scoped keys, trace routing, and who can see what.
 
 ***
 
