@@ -189,24 +189,24 @@ paths:
           name: status
           in: query
           schema:
+            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
-            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
+            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
-            type: integer
             title: Severity
         - description: Filter by tag (exact match)
           name: tag
@@ -224,11 +224,11 @@ paths:
           name: sort_by
           in: query
           schema:
+            type: string
             enum:
               - created_at
               - updated_at
               - severity
-            type: string
             title: Sort By
         - description: Page size (positive integer; defaults to 50, capped at 500)
           name: limit

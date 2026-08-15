@@ -1,20 +1,88 @@
-# Add memory and a schedule to your research assistant
+# Add a custom search tool, memory, and a schedule
 
-> Add durable memory and a daily schedule to the research assistant from the quickstart, then deploy it.
+> Replace provider search with a Tavily tool, then add durable memory and a daily schedule to the research assistant from the quickstart.
 
-This tutorial continues from the [quickstart](managed-deep-agents-quickstart.md). Use the `research-assistant` project you created there, with your model, instructions, search tool, and a working `mda dev` setup.
+This tutorial continues from the [quickstart](managed-deep-agents-quickstart.md). Use the `research-assistant` project you created there, with your model, instructions, and a working `mda dev` setup.
 
 `mda init` may also scaffold files such as `identity` and `sandbox/`. Leave those as they are; this tutorial does not change them.
 
-This guide shows you how to you enable durable memory and a daily schedule, then deploy. Optionally, you can also add a custom tool.
+This guide replaces the quickstart's built-in provider search with an authored [Tavily](https://tavily.com) search tool, enables durable memory, adds a daily schedule, then deploys.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
 ## Extend the agent
 
+### Add a custom search tool
+Built-in provider search is convenient for a first run. Authored tools give you more control: choose the search API, tune parameters, and keep the tool code in your project.
+
+> [!NOTE]
+> If you followed the steps to use Tavily in the [Quickstart](managed-deep-agents-quickstart.md), skip to the next step.
+
+Add a [Tavily API key](https://app.tavily.com) to `.env`:
+
+```text
+TAVILY_API_KEY=<TAVILY_API_KEY>
+```
+
+Install the Tavily client:
+
+```bash
+npm install @langchain/tavily
+```
+
+Create a custom `internet_search` tool:
+
+```ts
+import { TavilySearch } from "@langchain/tavily";
+import { tool } from "langchain";
+import { z } from "zod";
+
+export const internetSearch = tool(
+  async ({ query, maxResults = 5, topic = "general" }) => {
+    const tavilySearch = new TavilySearch({
+      maxResults,
+      tavilyApiKey: process.env.TAVILY_API_KEY,
+      topic,
+    });
+    return tavilySearch._call({ query });
+  },
+  {
+    name: "internet_search",
+    description: "Search the internet for relevant sources.",
+    schema: z.object({
+      query: z.string().describe("The search query."),
+      maxResults: z.number().optional().default(5),
+      topic: z.enum(["general", "news", "finance"]).optional().default("general"),
+    }),
+  },
+);
+```
+
+Replace the provider search tool dict with your authored tool. Keep the `model` value from the quickstart:
+
+```ts
+import { defineDeepAgent } from "managed-deepagents";
+
+import { internetSearch } from "./tools/search";
+
+export const agent = defineDeepAgent({
+  name: "research-assistant",
+  model: "openai:gpt-5.5",
+  tools: [internetSearch],
+});
+```
+
+Restart `mda dev` if it is already running. In Studio, ask:
+
+```txt
+What were the main announcements from the latest LangChain release?
+```
+
+Confirm the agent calls `internet_search` and returns an answer with citations. For more authored tools, see [Custom tools](managed-deep-agents-tools.md).
+
 ### Update the instructions for memory
-Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior from the quickstart and add a memory policy:
+Extend `instructions.md` so the agent knows what shared knowledge to keep. Keep the research behavior and add a memory policy:
 
 ```markdown
 # Research assistant
@@ -43,95 +111,6 @@ Memory is shared across the deployment and visible to all callers, so do not sto
 Restart `mda dev` so it discovers the new file. In one thread, ask the agent to research a release and to record a reusable project rule, such as "For release research, check the official changelog before secondary sources." Then create a **new thread** in Studio and ask how it will research the next release. Confirm that it applies the shared rule even though the new thread has no conversation history.
 
 See [Memory](managed-deep-agents-memory.md) for details.
-
-### (Optional) Add a custom tool
-Provider search covers the open web. Authored tools cover your application logic: private APIs, databases, and internal data. Create a module under `tools/`, import it into the agent entry, and add it to the `tools` list next to your existing search tool.
-
-This example returns a placeholder project record so it runs without an external API. Replace the body with a call to your system.
-
-```ts
-import { tool } from "langchain";
-import { z } from "zod";
-
-export const lookupTrackedProject = tool(
-  async ({ project }) => {
-    // Replace this stub with a call to your project catalog or database.
-    return (
-      `Project '${project}': status=active, owners=docs, ` +
-      `changelog=https://example.com/${project}/changelog`
-    );
-  },
-  {
-    name: "lookup_tracked_project",
-    description: "Look up an internally tracked project by name.",
-    schema: z.object({
-      project: z.string().describe("Project or product name to look up."),
-    }),
-  },
-);
-```
-
-Append the custom tool next to your existing search tool, keep your quickstart `model`, and choose the tab that matches your search setup:
-
-#### Provider search
-Open `agent.ts`:
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-import { lookupTrackedProject } from "./tools/projects";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "openai:gpt-5.5",
-  tools: [{ type: "web_search_preview" }, lookupTrackedProject],
-});
-```
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-import { lookupTrackedProject } from "./tools/projects";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "google-genai:gemini-3.6-flash",
-  tools: [{ google_search: {} }, lookupTrackedProject],
-});
-```
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-import { lookupTrackedProject } from "./tools/projects";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "anthropic:claude-sonnet-4-6",
-  tools: [
-    { type: "web_search_20250305", name: "web_search" },
-    lookupTrackedProject,
-  ],
-});
-```
-
-#### Tavily
-Open `agent.ts`. Keep your quickstart `model` value:
-
-```ts
-import { defineDeepAgent } from "managed-deepagents";
-
-import { lookupTrackedProject } from "./tools/projects";
-import { internetSearch } from "./tools/search";
-
-export const agent = defineDeepAgent({
-  name: "research-assistant",
-  model: "provider:model",
-  tools: [internetSearch, lookupTrackedProject],
-});
-```
-
-Restart `mda dev` if it is already running. In Studio, ask for the status of a tracked project and confirm the agent calls `lookup_tracked_project`.
 
 ### Schedule a daily digest
 Add a `schedules/` module so the agent runs on a cron cadence without a user message. This schedule runs every weekday at 8am Pacific:
@@ -171,7 +150,7 @@ Open that URL and confirm:
 
 * The deployment is ready.
 * The `daily_digest` or `daily-digest` cron exists.
-* A test chat run shows model calls, search or custom tool calls, and memory reads or writes in the traces.
+* A test chat run shows model calls, `internet_search` tool calls, and memory reads or writes in the traces.
 
 For deploy flags and troubleshooting, see [Deploy an agent](managed-deep-agents-deploy.md) and the [CLI reference](managed-deep-agents-cli.md#deploy-projects).
 

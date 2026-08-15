@@ -22,6 +22,9 @@ Discovery and trust registry tools for verifying counterpart AI agents before th
 #### [Alephant AI](https://alephant.io/)
 AI gateway for cost control, BYOK routing, and multi-provider model access.
 
+#### [AlphaAI](https://alphai.io/developers)
+AI-scored financial news and SEC Form 4 insider events for agents and RAG.
+
 #### [Ads4GPTs](https://github.com/ADS4GPTs/ads4gpts)
 Advertising platform for GPT applications and AI services.
 
@@ -207,6 +210,9 @@ Web infrastructure and security services.
 
 #### [chDB](https://github.com/chdb-io/langchain-chdb)
 In-process OLAP SQL engine powered by ClickHouse, with a LangChain vector store.
+
+#### [Coalent](https://coalent.ai/docs)
+Provenance-invalidated semantic cache above any vector store, serving attributed claim payloads.
 
 #### [CockroachDB](cockroachdb.md)
 Distributed SQL database with native vector support and C-SPANN indexes.
@@ -694,6 +700,9 @@ AI model training and fine-tuning platform.
 #### [OpenRouter](openrouter.md)
 Unified API for models from multiple providers.
 
+#### [Opensolr](https://opensolr.com/langchain)
+Managed Apache Solr with server-side embeddings and hybrid BM25 + kNN search.
+
 #### [Open Agent Spec](open_agent_spec.md)
 Framework-agnostic language for portable agent definitions.
 
@@ -752,7 +761,7 @@ AI-powered content moderation platform.
 Agent-native headless browser with Set of Mark (SOM) structured UI extraction.
 
 #### [PolarDB PG](https://github.com/polardb/langchain-polardb-pg)
-PolarDB for PostgreSQL embeddings and vector store for LangChain.
+PolarDB for PostgreSQL provides in-database embeddings, a LangChain vector store, and SQL-based registration and invocation of external AI models.
 
 #### [Polaris](https://github.com/Veroq-ai/polaris-sdks/tree/main/python/langchain_polaris)
 Verified news intelligence tools and retriever for LangChain agents.

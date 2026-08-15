@@ -69,6 +69,7 @@ Agent runtimes that resolve context by environment tag (for example, `:productio
 * [Context engineering concepts](context-engineering-concepts.md): learn about skills, agents, versioning, and sharing.
 * [Manage contexts with the SDK](manage-contexts-sdk.md): push, pull, list, and delete contexts programmatically.
 * [Configure commit webhooks](context-hub-webhooks.md): send workspace Context Hub commits to an external HTTPS endpoint.
+* [Mount a Context Hub repo in a sandbox](sandbox-sdk.md#mount-a-context-hub-repo): give sandbox code read-only filesystem access to a repo, kept in sync as it changes.
 
 ***
 

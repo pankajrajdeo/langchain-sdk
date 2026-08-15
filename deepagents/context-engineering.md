@@ -824,7 +824,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-3.6-flash"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -840,7 +840,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="openai:gpt-5.5"
+model = "openai:gpt-5.5"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -856,7 +856,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-4-6"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -872,7 +872,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="openrouter:z-ai/glm-5.2"
+model = "openrouter:z-ai/glm-5.2"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -888,7 +888,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="fireworks:accounts/fireworks/models/glm-5p2"
+model = "fireworks:accounts/fireworks/models/glm-5p2"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -904,7 +904,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="baseten:zai-org/GLM-5.2"
+model = "baseten:zai-org/GLM-5.2"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]
@@ -920,7 +920,7 @@ from deepagents.middleware.summarization import create_summarization_tool_middle
 
 backend = StateBackend  # if using default backend
 
-model="ollama:north-mini-code-1.0"
+model = "ollama:north-mini-code-1.0"
 agent = create_deep_agent(
     model=model,
     middleware=[  # [!code highlight]

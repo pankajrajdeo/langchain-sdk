@@ -77,9 +77,12 @@ Make a request with cURL, Python, or TypeScript, then view its trace.
 #### [Administrator setup](llm-gateway-admin-setup.md)
 Enable the gateway, add provider credentials, and grant developer access.
 
-Need provider-native request and response behavior? Use [Direct model access](llm-gateway-direct-model-access.md) to bypass the standardization layer. This is an advanced alternative to the standard API.
-
-For further questions, contact [LangChain support](https://support.langchain.com).
+> [!TIP]
+> Need to use the gateway with prompts stored in the Prompt Hub? See [Prompt Hub with the gateway](manage-prompts-programmatically.md#use-with-the-langsmith-gateway) for how to route Prompt Hub model calls through the gateway using two environment variables.
+>
+> Need provider-native request and response behavior? Use [Direct model access](llm-gateway-direct-model-access.md) to bypass the standardization layer. This is an advanced alternative to the standard API.
+>
+> For further questions, contact [LangChain support](https://support.langchain.com).
 
 ***
 

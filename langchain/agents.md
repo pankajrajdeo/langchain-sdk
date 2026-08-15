@@ -998,7 +998,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-3.6-flash"
 
 agent = create_agent(
     model=model,
@@ -1017,7 +1017,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="openai:gpt-5.5"
+model = "openai:gpt-5.5"
 
 agent = create_agent(
     model=model,
@@ -1036,7 +1036,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-4-6"
 
 agent = create_agent(
     model=model,
@@ -1055,7 +1055,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="openrouter:z-ai/glm-5.2"
+model = "openrouter:z-ai/glm-5.2"
 
 agent = create_agent(
     model=model,
@@ -1074,7 +1074,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="fireworks:accounts/fireworks/models/glm-5p2"
+model = "fireworks:accounts/fireworks/models/glm-5p2"
 
 agent = create_agent(
     model=model,
@@ -1093,7 +1093,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="baseten:zai-org/GLM-5.2"
+model = "baseten:zai-org/GLM-5.2"
 
 agent = create_agent(
     model=model,
@@ -1112,7 +1112,7 @@ from deepagents.backends import StateBackend
 from deepagents.middleware import FilesystemMiddleware, MemoryMiddleware, SkillsMiddleware, SummarizationMiddleware
 
 backend = StateBackend()
-model="ollama:north-mini-code-1.0"
+model = "ollama:north-mini-code-1.0"
 
 agent = create_agent(
     model=model,

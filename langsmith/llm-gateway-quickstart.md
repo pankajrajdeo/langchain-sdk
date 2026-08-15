@@ -50,6 +50,11 @@ os.environ["LANGSMITH_GATEWAY"] = "true"
 os.environ["LANGSMITH_GATEWAY_API_KEY"] = os.environ["LANGSMITH_API_KEY"]
 ```
 
+```typescript
+process.env.LANGSMITH_GATEWAY = "true";
+process.env.LANGSMITH_GATEWAY_API_KEY = process.env.LANGSMITH_API_KEY;
+```
+
 This routes all supported chat models through the gateway at `https://gateway.smith.langchain.com`. To use a different gateway (for example, the EU instance), set its URL instead of `true`:
 
 ```bash
@@ -75,17 +80,19 @@ You can also configure base URLs and API keys for individual providers. See the 
 <details>
 <summary>More details</summary>
 
-* Supported in Python only.
-* Supported chat models:
-  * [Anthropic](../integrations/chat/anthropic.md) (`langchain-anthropic >= 1.5.1`)
-  * [Baseten](../integrations/chat/baseten.md) (`langchain-baseten >= 0.2.3`)
-  * [Fireworks](../integrations/chat/fireworks.md) (`langchain-fireworks >= 1.5.1`)
-  * [Google Gemini](../integrations/chat/google_generative_ai.md) (`langchain-google-genai >= 4.3.2`)
-  * [OpenAI](../integrations/chat/openai.md) (`langchain-openai >= 1.4.1`).
-* Provider-specific base URLs take precedence over the gateway, so you can still route an individual provider elsewhere. For example, with the gateway enabled, `OPENAI_API_BASE` sends OpenAI to that URL while every other provider continues to use the gateway:
+#### Python
+Supported chat models:
+
+* [Anthropic](../integrations/chat/anthropic.md) (`langchain-anthropic >= 1.5.1`)
+* [Baseten](../integrations/chat/baseten.md) (`langchain-baseten >= 0.2.3`)
+* [Fireworks](../integrations/chat/fireworks.md) (`langchain-fireworks >= 1.5.1`)
+* [Google Gemini](../integrations/chat/google_generative_ai.md) (`langchain-google-genai >= 4.3.2`)
+* [OpenAI](../integrations/chat/openai.md) (`langchain-openai >= 1.4.1`)
+
+Provider-specific base URLs take precedence over the gateway, so you can still route an individual provider elsewhere. For example, with the gateway enabled, `OPENAI_API_BASE` sends OpenAI to that URL while every other provider continues to use the gateway:
 
 ```bash
-  export OPENAI_API_BASE="https://my.custom.gateway/openai/v2"
+export OPENAI_API_BASE="https://my.custom.gateway/openai/v2"
 ```
 
 The following table shows how the base URL and key are resolved, using OpenAI as the example (other providers use their own `*_API_BASE` and `*_API_KEY` variables). `GW default` is `https://gateway.smith.langchain.com/openai/v1`.
@@ -104,6 +111,39 @@ The following table shows how the base URL and key are resolved, using OpenAI as
 | `https://eu…`       | ✓                           | —                   | —                | —                 | `eu…/openai/v1`     | gateway-key  |
 | `https://eu…`       | ✓                           | —                   | —                | `https://apac…`   | `apac…`             | gateway-key  |
 | `https://eu…`       | ✓                           | —                   | provider-key     | `https://apac…`   | `apac…`             | provider-key |
+
+#### TypeScript
+Supported chat models:
+
+* [Anthropic](https://docs.langchain.com/oss/javascript/integrations/chat/anthropic) (`@langchain/anthropic >= 1.5.4`)
+* [Fireworks](https://docs.langchain.com/oss/javascript/integrations/chat/fireworks) (`@langchain/fireworks >= 0.2.7`)
+* [OpenAI](https://docs.langchain.com/oss/javascript/integrations/chat/openai) (`@langchain/openai >= 1.5.7`)
+
+Provider-specific base URLs take precedence over the gateway, so you can still route an individual provider elsewhere. For example, with the gateway enabled, `OPENAI_BASE_URL` sends OpenAI to that URL while every other provider continues to use the gateway:
+
+```bash
+export OPENAI_BASE_URL="https://my.custom.gateway/openai/v2"
+```
+
+> [!NOTE]
+> Each provider also reads its `*_API_BASE` variable, which takes precedence over `*_BASE_URL`.
+
+The following table shows how the base URL and key are resolved, using OpenAI as the example (other providers use their own `*_BASE_URL` and `*_API_KEY` variables). `GW default` is `https://gateway.smith.langchain.com/openai/v1`.
+
+| `LANGSMITH_GATEWAY` | `LANGSMITH_GATEWAY_API_KEY` | `OPENAI_BASE_URL`   | `OPENAI_API_KEY` | `configuration.baseURL` | Resolved base URL   | Resolved key |
+| ------------------- | --------------------------- | ------------------- | ---------------- | ----------------------- | ------------------- | ------------ |
+| unset / `false`     | —                           | —                   | —                | —                       | `api.openai.com`    | none         |
+| unset / `false`     | ✓                           | —                   | provider-key     | —                       | `api.openai.com`    | provider-key |
+| `true`              | ✓                           | —                   | —                | —                       | GW default          | gateway-key  |
+| `true`              | —                           | —                   | —                | —                       | GW default          | none         |
+| `true`              | ✓                           | —                   | provider-key     | —                       | GW default          | gateway-key  |
+| `true`              | —                           | —                   | provider-key     | —                       | GW default          | provider-key |
+| `true`              | ✓                           | `api.openai.com/v1` | provider-key     | —                       | `api.openai.com/v1` | provider-key |
+| `true`              | ✓                           | `api.openai.com/v1` | —                | —                       | `api.openai.com/v1` | none         |
+| `true`              | ✓                           | `my.dev.gateway`    | —                | —                       | `my.dev.gateway`    | none         |
+| `https://eu…`       | ✓                           | —                   | —                | —                       | `eu…/openai/v1`     | gateway-key  |
+| `https://eu…`       | ✓                           | —                   | —                | `https://apac…`         | `apac…`             | none         |
+| `https://eu…`       | ✓                           | —                   | provider-key     | `https://apac…`         | `apac…`             | provider-key |
 
 </details>
 
@@ -194,6 +234,7 @@ The gateway performs these steps for each standard endpoint request:
 * [Set up coding agents](llm-gateway-coding-agents.md): route Claude Code, Codex, Gemini CLI, or Deep Agents Code through the gateway.
 * [API formats](llm-gateway-api-formats.md): use Chat Completions, Messages, or Responses through the standard endpoint.
 * [Direct model access](llm-gateway-direct-model-access.md): use provider-native request and response formats.
+* [Prompt Hub with the gateway](manage-prompts-programmatically.md#use-with-the-langsmith-gateway): route Prompt Hub model calls through the gateway using two environment variables.
 * [Spend policies](llm-gateway-spend-policies.md): configure cost limits across your organization.
 * [Data protection](llm-gateway-data-protection.md): prevent sensitive data from reaching providers.
 

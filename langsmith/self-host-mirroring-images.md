@@ -129,12 +129,12 @@ The chart does not set `images.juicefsMountImage` by default. When it is unset, 
 
 ## Additional images for Engine
 
-If you mirror images to a private registry, [Engine](deploy-self-hosted-full-platform.md#enable-engine) requires the combined `langsmith-insights-engine` image and the sandbox runtime image.
+If you mirror images to a private registry, [Engine](deploy-self-hosted-full-platform.md#enable-engine) uses a single combined image: `langsmith-insights-engine`. Engine also requires sandboxes, which use a separate image described in [Additional images for sandboxes](#additional-images-for-sandboxes).
 
 To mirror the required images:
 
 1. Mirror `langsmith-insights-engine` to your private registry using the [manual mirroring process](#mirroring-the-images).
-2. Engine requires Sandboxes, so mirror the sandbox runtime image with `--include-sandboxes` and configure it as described in [Additional images for Sandboxes](#additional-images-for-sandboxes).
+2. Mirror the sandbox runtime image with `--include-sandboxes` and configure it as described in [Additional images for sandboxes](#additional-images-for-sandboxes).
 
 Override `images.engineInsightsAgentImage.repository` to use your mirrored Engine and Insights image:
 
@@ -151,9 +151,9 @@ images:
 
 Image mirroring does not remove Engine's LangSmith Intelligence egress requirement, so fully air-gapped installations cannot run Engine. See [LangSmith Intelligence for Engine](self-host-egress.md#langsmith-intelligence-for-engine).
 
-## Additional images for Fleet and Insights
+## Additional images for Fleet
 
-If you are using Fleet or Insights, the LangGraph operator dynamically creates Redis and PostgreSQL (pgvector) pods for each deployment. These pods use images defined in operator templates that require separate configuration.
+If you are using Fleet, the LangGraph operator dynamically creates Redis and PostgreSQL (pgvector) pods for each deployment. These pods use images defined in operator templates that require separate configuration.
 
 You must mirror these additional images:
 

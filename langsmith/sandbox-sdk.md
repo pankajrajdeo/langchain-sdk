@@ -293,6 +293,72 @@ try {
 }
 ```
 
+## Mount a Context Hub repo
+
+Mount a [Context Hub](use-the-context-hub.md) repo to give sandbox code filesystem access to your agents and skills. The repo's latest commit tree is mirrored into the mount path and kept in sync for the sandbox's lifetime, so a new commit shows up in the running sandbox without a restart.
+
+> [!WARNING]
+> Context Hub mounts are **read-only**. The sync is one-way, from the repo into the sandbox: files an agent writes under the mount path are never pushed back to the repo, and the next sync overwrites them. Write sandbox output to a path outside the mount, and [push it with the SDK](manage-contexts-sdk.md) if it belongs in the repo.
+
+Pass the mount through `mount_config`. The API key that creates the sandbox must have access to the repo, otherwise creation fails with a `403`.
+
+```python
+from langsmith.sandbox import AsyncSandboxClient, context_hub_mount, mount_config
+
+async def main():
+    async with AsyncSandboxClient() as client:
+        async with await client.sandbox(
+            name="context-hub-mount-sandbox",
+            mount_config=mount_config(
+                mounts=[
+                    context_hub_mount(
+                        id="memories",
+                        mount_path="/memories",
+                        repo="-/my-agent",
+                    )
+                ],
+            ),
+        ) as sb:
+            result = await sb.run("ls /memories")
+            print(result.stdout)
+```
+
+```ts
+import {
+  SandboxClient,
+  contextHubMount,
+  mountConfig,
+} from "langsmith/sandbox";
+
+const client = new SandboxClient();
+
+const sandbox = await client.createSandbox({
+  name: "context-hub-mount-sandbox",
+  mountConfig: mountConfig({
+    mounts: [
+      contextHubMount({
+        id: "memories",
+        mountPath: "/memories",
+        repo: "-/my-agent",
+      }),
+    ],
+  }),
+});
+
+try {
+  const result = await sandbox.run("ls /memories");
+  console.log(result.stdout);
+} finally {
+  await sandbox.delete();
+}
+```
+
+`repo` is the repo handle, optionally qualified as `owner/repo`, where `-` is the current workspace.
+
+`mount_path` must be an absolute, clean path, and cannot be the filesystem root or sit at or under a system directory such as `/etc` or `/usr`. Any other path works — unlike bucket and Git mounts, Context Hub mounts are not restricted to `/mnt/mounts`.
+
+Pass `initial_pull_only` / `initialPullOnly` to sync once at startup instead of polling for repo updates.
+
 ## Sandbox lifetime and retention
 
 Sandboxes are governed by a two-stage retention model anchored to **idle

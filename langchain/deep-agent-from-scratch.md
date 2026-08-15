@@ -56,10 +56,36 @@ export LANGSMITH_TRACING=true
 ```
 
 ### Add a model provider API key
-Export the API key for the model provider you use in the code samples. For example:
+Export the API key for the model provider you use in the code samples:
+
+```bash
+export GOOGLE_API_KEY=...
+```
+
+```bash
+export OPENAI_API_KEY=...
+```
 
 ```bash
 export ANTHROPIC_API_KEY=...
+```
+
+```bash
+export OPENROUTER_API_KEY=...
+```
+
+```bash
+export FIREWORKS_API_KEY=...
+```
+
+```bash
+export BASETEN_API_KEY=...
+```
+
+```bash
+# Local: Ollama must be running on your machine
+# Cloud: Set your Ollama API key for hosted inference
+export OLLAMA_API_KEY=...
 ```
 
 ## Build the agent
@@ -73,7 +99,43 @@ Use [`create_agent`](https://reference.langchain.com/python/langchain/agents/fac
 ```python
 from langchain.agents import create_agent
 
-agent = create_agent("anthropic:claude-sonnet-4-6", tools=[])
+agent = create_agent(model="google_genai:gemini-3.6-flash", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="openai:gpt-5.5", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="anthropic:claude-sonnet-4-6", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="openrouter:z-ai/glm-5.2", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="fireworks:accounts/fireworks/models/glm-5p2", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="baseten:zai-org/GLM-5.2", tools=[])
+```
+
+```python
+from langchain.agents import create_agent
+
+agent = create_agent(model="ollama:north-mini-code-1.0", tools=[])
 ```
 
 This runs, but the agent has no filesystem and no way to execute code. If you ask it to analyze a CSV, it can only guess from the prompt. The next steps add real file access and code execution.
@@ -104,7 +166,115 @@ sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-
 backend = LangSmithSandbox(sandbox=sandbox)
 
 agent = create_agent(
-    "anthropic:claude-sonnet-4-6",
+    model="google_genai:gemini-3.6-flash",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="openai:gpt-5.5",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="anthropic:claude-sonnet-4-6",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="openrouter:z-ai/glm-5.2",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="fireworks:accounts/fireworks/models/glm-5p2",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="baseten:zai-org/GLM-5.2",
+    tools=[],
+    middleware=[FilesystemMiddleware(backend=backend)],
+)
+```
+
+```python
+from langchain.agents import create_agent
+from deepagents.backends.langsmith import LangSmithSandbox
+from deepagents.middleware import FilesystemMiddleware
+from langsmith.sandbox import SandboxClient
+
+client = SandboxClient()
+sandbox = None
+sandbox = client.create_sandbox(name="langchain-docs", snapshot_name="docs-test-ci")
+backend = LangSmithSandbox(sandbox=sandbox)
+
+agent = create_agent(
+    model="ollama:north-mini-code-1.0",
     tools=[],
     middleware=[FilesystemMiddleware(backend=backend)],
 )
@@ -171,7 +341,7 @@ Update your agent from step 2 by adding [`SummarizationMiddleware`](https://refe
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="google_genai:gemini-3.6-flash"
+model = "google_genai:gemini-3.6-flash"
 
 agent = create_agent(
     model=model,
@@ -186,7 +356,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="openai:gpt-5.5"
+model = "openai:gpt-5.5"
 
 agent = create_agent(
     model=model,
@@ -201,7 +371,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="anthropic:claude-sonnet-4-6"
+model = "anthropic:claude-sonnet-4-6"
 
 agent = create_agent(
     model=model,
@@ -216,7 +386,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="openrouter:z-ai/glm-5.2"
+model = "openrouter:z-ai/glm-5.2"
 
 agent = create_agent(
     model=model,
@@ -231,7 +401,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="fireworks:accounts/fireworks/models/glm-5p2"
+model = "fireworks:accounts/fireworks/models/glm-5p2"
 
 agent = create_agent(
     model=model,
@@ -246,7 +416,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="baseten:zai-org/GLM-5.2"
+model = "baseten:zai-org/GLM-5.2"
 
 agent = create_agent(
     model=model,
@@ -261,7 +431,7 @@ agent = create_agent(
 ```python
 from deepagents.middleware import FilesystemMiddleware, SummarizationMiddleware
 
-model="ollama:north-mini-code-1.0"
+model = "ollama:north-mini-code-1.0"
 
 agent = create_agent(
     model=model,
@@ -328,6 +498,104 @@ Then create your agent with your skills by adding [`SkillsMiddleware`](https://r
 ```python
 from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
 
+model = "google_genai:gemini-3.6-flash"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "openai:gpt-5.5"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "anthropic:claude-sonnet-4-6"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "openrouter:z-ai/glm-5.2"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "fireworks:accounts/fireworks/models/glm-5p2"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "baseten:zai-org/GLM-5.2"
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+    ],
+)
+```
+
+```python
+from deepagents.middleware import FilesystemMiddleware, SkillsMiddleware, SummarizationMiddleware
+
+model = "ollama:north-mini-code-1.0"
+
 agent = create_agent(
     model=model,
     tools=[],
@@ -359,12 +627,212 @@ from deepagents.middleware import (
 )
 from langchain.agents.middleware import TodoListMiddleware
 
+model = "google_genai:gemini-3.6-flash"
+
 visualizer: SubAgent = {
     "name": "visualizer",
     "description": "Generates charts and visualizations from data files in the sandbox.",
     "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
     "tools": [],
-    "model": "anthropic:claude-sonnet-4-6",
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "openai:gpt-5.5"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "anthropic:claude-sonnet-4-6"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "openrouter:z-ai/glm-5.2"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "fireworks:accounts/fireworks/models/glm-5p2"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "baseten:zai-org/GLM-5.2"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
+}
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    middleware=[
+        FilesystemMiddleware(backend=backend),
+        SummarizationMiddleware(model=model, backend=backend),
+        SkillsMiddleware(backend=backend, sources=["/skills/"]),
+        TodoListMiddleware(),
+        SubAgentMiddleware(backend=backend, subagents=[visualizer]),
+    ],
+)
+```
+
+```python
+from deepagents import SubAgent
+from deepagents.middleware import (
+    FilesystemMiddleware,
+    SkillsMiddleware,
+    SubAgentMiddleware,
+    SummarizationMiddleware,
+)
+from langchain.agents.middleware import TodoListMiddleware
+
+model = "ollama:north-mini-code-1.0"
+
+visualizer: SubAgent = {
+    "name": "visualizer",
+    "description": "Generates charts and visualizations from data files in the sandbox.",
+    "system_prompt": "You are a data visualization specialist. Write Python scripts using matplotlib and seaborn. Save all figures as PNG files.",
+    "tools": [],
+    "model": model,
 }
 
 agent = create_agent(

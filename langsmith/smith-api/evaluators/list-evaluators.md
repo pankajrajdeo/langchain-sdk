@@ -184,9 +184,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Tag Value Id
         - description: Filter by feedback key
           name: feedback_key
@@ -200,9 +200,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Id
         - description: Field to sort by
           name: sort_by

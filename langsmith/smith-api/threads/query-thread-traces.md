@@ -206,8 +206,8 @@ paths:
           name: page_size
           in: query
           schema:
-            minimum: 1
             type: integer
+            minimum: 1
             default: 20
             maximum: 100
             title: Page Size
@@ -216,8 +216,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME
@@ -232,6 +232,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -259,7 +260,6 @@ paths:
                 - NAME
                 - ERROR_PREVIEW
               type: string
-            type: array
             title: Selects
       responses:
         '200':
