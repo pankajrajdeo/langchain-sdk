@@ -26,7 +26,7 @@ For deeper hook, state, and context details, see [custom middleware](https://doc
 
 ## Use prebuilt middleware
 
-You can use LangChain prebuilt middleware directly in the agent definition.
+You can use LangChain [prebuilt middleware](https://docs.langchain.com/oss/javascript/langchain/middleware/built-in) directly in the agent definition.
 
 ```ts
 import { defineDeepAgent } from "managed-deepagents";

@@ -1,6 +1,6 @@
 # LangSmith Deployment SDK
 > Source: [Original LangChain documentation](https://docs.langchain.com/langsmith/smith-deployments-sdk)
-***
+---
 
 > [!NOTE]
 > [Connect these docs](https://docs.langchain.com/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.

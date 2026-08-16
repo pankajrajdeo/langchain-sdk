@@ -26,7 +26,7 @@ For deeper hook, state, and context details, see [custom middleware](../../langc
 
 ## Use prebuilt middleware
 
-You can use LangChain prebuilt middleware directly in the agent definition.
+You can use LangChain [prebuilt middleware](../../langchain/middleware/built-in.md) directly in the agent definition.
 
 ```python
 from langchain.agents.middleware import ModelCallLimitMiddleware, PIIMiddleware
