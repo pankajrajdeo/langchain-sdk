@@ -7,7 +7,7 @@
 >
 > This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
-Vertex AI exposes all foundational models available in Google Cloud, like `gemini-2.5-pro`, `gemini-2.5-flash`, etc. For a full and updated list of available models visit [VertexAI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
+Vertex AI exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-3.7-flash`, etc. For a full and updated list of available models visit [VertexAI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
 
 > [!NOTE]
 > **Google Cloud VertexAI vs Gemini API**
@@ -71,7 +71,7 @@ Now we can instantiate our model object and generate chat completions:
 from langchain_google_vertexai import ChatVertexAI
 
 llm = ChatVertexAI(
-    model="gemini-2.5-flash",
+    model="gemini-3.7-flash",
     temperature=0,
     max_tokens=None,
     max_retries=6,
@@ -120,7 +120,7 @@ Gemini can execute a Google search and use the results to [ground its responses]
 ```python
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-2.5-flash").bind_tools([{"google_search": {}}])
+llm = ChatVertexAI(model="gemini-3.7-flash").bind_tools([{"google_search": {}}])
 
 response = llm.invoke("What is today's news?")
 ```
@@ -135,7 +135,7 @@ Gemini can [generate and execute Python code](https://ai.google.dev/gemini-api/d
 ```python
 from langchain_google_vertexai import ChatVertexAI
 
-llm = ChatVertexAI(model="gemini-2.5-flash").bind_tools([{"code_execution": {}}])
+llm = ChatVertexAI(model="gemini-3.7-flash").bind_tools([{"code_execution": {}}])
 
 response = llm.invoke("What is 3^3?")
 ```

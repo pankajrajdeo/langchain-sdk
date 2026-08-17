@@ -243,6 +243,11 @@ components:
           anyOf:
             - $ref: '#/components/schemas/AccessScope'
             - type: 'null'
+        created_by:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Created By
       type: object
       required:
         - id

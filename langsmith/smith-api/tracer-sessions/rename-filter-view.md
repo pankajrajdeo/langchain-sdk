@@ -236,6 +236,11 @@ components:
             - type: string
             - type: 'null'
           title: Tree Filter String
+        thread_filter_string:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Thread Filter String
         display_name:
           type: string
           title: Display Name
@@ -247,6 +252,10 @@ components:
         type:
           $ref: '#/components/schemas/FilterViewType'
           default: runs
+        syntax_version:
+          type: integer
+          title: Syntax Version
+          default: 1
         start_time:
           anyOf:
             - type: string

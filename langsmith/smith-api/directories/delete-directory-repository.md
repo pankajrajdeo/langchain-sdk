@@ -178,6 +178,15 @@ paths:
           required: true
           schema:
             type: string
+        - description: Repository type to delete; a different type is treated as not found
+          name: repo_type
+          in: query
+          schema:
+            type: string
+            enum:
+              - agent
+              - skill
+            title: Repo Type
       responses:
         '204':
           description: No Content

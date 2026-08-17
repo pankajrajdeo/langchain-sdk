@@ -187,8 +187,8 @@ paths:
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - description: >-
             `selects` lists which properties to include on the returned run

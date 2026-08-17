@@ -560,6 +560,10 @@ components:
           type: boolean
           title: Llm Gateway Enabled
           default: false
+        tuned_evals_enabled:
+          type: boolean
+          title: Tuned Evals Enabled
+          default: false
         gateway_data_protection_enabled:
           type: boolean
           title: Gateway Data Protection Enabled

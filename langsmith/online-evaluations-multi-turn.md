@@ -2,6 +2,8 @@
 
 Multi-turn online evaluators allow you to evaluate entire conversations between a human and an agent—not just individual exchanges. They measure end-to-end interaction quality across all turns in a thread.
 
+To use a LangChain-managed, thread-level judge without configuring a model, API key, or prompt, see [LangChain Tuned Evaluators](tuned-evaluators.md).
+
 You can use multi-turn evaluations to measure:
 
 1. Semantic Intent: What the user was trying to do.

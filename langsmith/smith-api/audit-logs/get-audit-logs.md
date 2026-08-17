@@ -411,6 +411,8 @@ components:
         - create_fleet_usage_limit
         - update_fleet_usage_limit
         - delete_fleet_usage_limit
+        - update_credential
+        - delete_credential
         - create_experiment_view_override
         - update_experiment_view_override
         - delete_experiment_view_override

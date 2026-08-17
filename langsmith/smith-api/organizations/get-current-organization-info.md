@@ -714,6 +714,11 @@ components:
             TenantSkipTopkFacets indicates whether the tenant should skip topk
             facets in run stats.
           type: boolean
+        tuned_evals_enabled:
+          description: |-
+            TunedEvalsEnabled indicates whether this org's plan entitles it to
+            use LangChain-managed evaluators. Set by Metronome entitlement.
+          type: boolean
         use_exact_search_for_prompts:
           description: >-
             UseExactSearchForPrompts indicates whether to use exact search for

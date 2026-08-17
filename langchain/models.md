@@ -149,7 +149,7 @@ from langchain.chat_models import init_chat_model
 
 os.environ["GOOGLE_API_KEY"] = "..."
 
-model = init_chat_model("google_genai:gemini-2.5-flash-lite")
+model = init_chat_model("google_genai:gemini-3.7-flash")
 ```
 
 ```python
@@ -158,7 +158,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 os.environ["GOOGLE_API_KEY"] = "..."
 
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite")
+model = ChatGoogleGenerativeAI(model="gemini-3.7-flash")
 ```
 
 #### AWS Bedrock

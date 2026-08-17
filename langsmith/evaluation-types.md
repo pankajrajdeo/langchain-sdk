@@ -58,7 +58,7 @@ Learn [how run pairwise evaluations](evaluate-pairwise.md).
 
 Online evaluation assesses production application outputs in near real-time. Without reference outputs, these evaluations focus on detecting issues, monitoring quality trends, and identifying edge cases that inform future offline testing.
 
-Online evaluators typically run server-side. LangSmith provides built-in [LLM-as-judge evaluators](llm-as-judge.md) for configuration, and supports custom code evaluators that run within LangSmith.
+Online evaluators typically run server-side. LangSmith supports custom [LLM-as-judge evaluators](llm-as-judge.md) and code evaluators. [LangChain Tuned Evaluators](tuned-evaluators.md) provide specialized judges managed by LangChain.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/4kN8yiLrZX_amfFn/langsmith/images/online.png?fit=max&auto=format&n=4kN8yiLrZX_amfFn&q=85&s=8d6c1b932e5487c4c01d84ae4f984240" alt="Online" width="1474" height="521" data-path="langsmith/images/online.png" />
 
