@@ -2,7 +2,7 @@
 
 > Connect Managed Deep Agents to external messaging services that can start runs and receive responses.
 
-A channel connects a Managed Deep Agent to an external messaging service. Messages from the service can start agent runs, and the agent can respond through the same service without a separate application server.
+A channel connects a managed deep agent to an external messaging service. Messages from the service can start agent runs, and the agent can respond through the same service without a separate application server.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.

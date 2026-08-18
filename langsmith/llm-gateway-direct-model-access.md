@@ -82,19 +82,20 @@ Direct paths use the provider's native model name without a provider prefix.
 
 ## Configure LangChain and Deep Agents
 
-[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md), including [Deep Agents Code](../deepagents/code/overview.md), support direct gateway paths through two convenience environment variables:
+[LangChain](../langchain/overview.md) chat models and [Deep Agents](../deepagents/overview.md), including [Deep Agents Code](../deepagents/code/overview.md), support direct gateway paths through a convenience environment variable:
 
 ```bash
 export LANGSMITH_GATEWAY="true"
-export LANGSMITH_GATEWAY_API_KEY="$LANGSMITH_API_KEY"
 ```
 
-This routes supported chat models through their provider-specific paths at `https://gateway.smith.langchain.com`. To use a regional gateway, set its URL instead of `true`:
+This routes supported chat models through their provider-specific paths at `https://gateway.smith.langchain.com`, using `LANGSMITH_API_KEY` for authentication. To use a regional gateway, set its URL instead of `true`:
 
 ```bash
 export LANGSMITH_GATEWAY="https://eu.gateway.smith.langchain.com"
-export LANGSMITH_GATEWAY_API_KEY="$LANGSMITH_API_KEY"
 ```
+
+> [!NOTE]
+> If you need to use a different API key for gateway calls than your default `LANGSMITH_API_KEY`, set `LANGSMITH_GATEWAY_API_KEY` as an override. It must be a workspace-scoped key with the `gateway:invoke` permission.
 
 <details>
 <summary>Supported models and configuration precedence</summary>

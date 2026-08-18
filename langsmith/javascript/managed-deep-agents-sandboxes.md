@@ -3,7 +3,7 @@
 > Configure an isolated filesystem and shell for Managed Deep Agents.
 
 Agents often want to write or execute code when doing their job.
-A sandbox gives a Managed Deep Agent an isolated filesystem and shell for working with files, running code, and executing commands.
+A sandbox gives a managed deep agent an isolated filesystem and shell for working with files, running code, and executing commands.
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
@@ -53,7 +53,7 @@ Use `idleTtlSeconds` to control when an idle sandbox can be reclaimed. Use `defa
 
 ## How the agent uses the sandbox
 
-The agent uses filesystem tools such as `ls`, `read_file`, `write_file`, `edit_file`, `glob`, and `grep`, and runs shell commands with `execute`. Use `instructions.md` to specify where the agent should work and what it must not modify.
+The agent uses filesystem tools such as `ls`, `read_file`, `write_file`, `edit_file`, `delete`, `glob`, and `grep`, and runs shell commands with `execute`. Use `instructions.md` to specify where the agent should work and what it must not modify.
 
 ## Sandbox lifecycle
 

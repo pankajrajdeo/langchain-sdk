@@ -2,7 +2,7 @@
 
 > Opt in to deployment-shared durable memory for Managed Deep Agents.
 
-Normally, a Managed Deep Agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain **across** threads and sessions.
+Normally, a managed deep agent's conversational memory is scoped to a thread or session. Durable memory is optional knowledge that an agent can retain **across** threads and sessions.
 
 When enabled, durable memory is backed by [Context Hub](../use-the-context-hub.md). The deployment gets one read/write tree at `/memories/agent/`, shared by every caller. Managed Deep Agents do **not** have durable memory by default.
 
@@ -54,7 +54,7 @@ Enabling memory mounts one Context Hub tree, `memories/agent`, at `/memories/age
 
 Keep hot memory compact because it consumes context on every run. Put detailed material—such as procedures, decision logs, and research notes—in cold files, and link to them from hot memory when useful.
 
-The agent reads and updates memory with `read_file`, `edit_file`, and `write_file`. Writes elsewhere, including elsewhere under `/memories/`, are not durable.
+The agent reads and updates memory with `read_file`, `edit_file`, and `write_file`. Only writes to the `memories/agent` Context Hub tree, mounted at `/memories/agent/` in the agent filesystem, are durable and available across future threads and sessions. Writes elsewhere in the agent filesystem, including elsewhere under `/memories/`, are runtime-only and may be discarded after the current run.
 
 > [!WARNING]
 > Memory is shared by every caller of the deployment, and every caller can influence it. Store only knowledge that every caller may read and modify. Never store personal or customer-private data, credentials, API keys, tokens, or other secrets.
