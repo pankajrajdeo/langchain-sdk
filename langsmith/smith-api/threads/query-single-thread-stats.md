@@ -203,7 +203,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - TURNS
@@ -224,6 +223,7 @@ paths:
                 - COMPLETION_COST_DETAILS
                 - FEEDBACK_STATS
               type: string
+            type: array
             title: Selects
         - description: '`session_id` is the tracing project (session) UUID (required).'
           name: session_id

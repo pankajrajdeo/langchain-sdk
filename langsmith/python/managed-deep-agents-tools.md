@@ -22,12 +22,6 @@ my-agent/
     customer.py
 ```
 
-## Add authored tools
-
-Use authored tools for business logic, private APIs, database access, and other code that belongs in your agent project. Managed Deep Agents copies the source into the compiled build and passes the tools to Deep Agents.
-
-For more about LangChain tool definitions, see [Tools](../../langchain/tools.md).
-
 ## Add a tool module
 
 ```python

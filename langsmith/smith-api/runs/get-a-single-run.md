@@ -187,8 +187,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - description: >-
             `selects` lists which properties to include on the returned run
@@ -199,7 +199,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - ID
@@ -248,6 +247,7 @@ paths:
                 - SHARE_URL
                 - FEEDBACK_STATS
               type: string
+            type: array
             title: Selects
         - description: >-
             `start_time` is the run's `start_time` (RFC3339 date-time).

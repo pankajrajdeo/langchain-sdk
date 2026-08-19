@@ -312,6 +312,7 @@ components:
         - update_workspace_member
         - delete_workspace_pending_member
         - update_workspace_pending_member
+        - read_workspace_encrypted_secrets
         - update_workspace_secrets
         - delete_workspace_secret
         - update_org_secrets

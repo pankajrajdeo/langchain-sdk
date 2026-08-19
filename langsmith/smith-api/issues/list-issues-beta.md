@@ -3,7 +3,7 @@
 > **Beta:** This endpoint is in active development and may change without notice.
 
 Returns issues for the authenticated tenant, optionally filtered
-by session, status, severity, tag, or last modified time.
+by session, status, severity, tag, linked trace, or last modified time.
 
 ## OpenAPI
 
@@ -171,7 +171,7 @@ paths:
 
         Returns issues for the authenticated tenant, optionally filtered
 
-        by session, status, severity, tag, or last modified time.
+        by session, status, severity, tag, linked trace, or last modified time.
       parameters:
         - description: Filter by session ID (UUID)
           name: session_id
@@ -214,6 +214,13 @@ paths:
           schema:
             type: string
             title: Tag
+        - description: Return only issues with a linked run in this trace
+          name: trace_id
+          in: query
+          schema:
+            type: string
+            format: uuid
+            title: Trace Id
         - description: Return only issues updated at or after this RFC3339 timestamp
           name: updated_at
           in: query

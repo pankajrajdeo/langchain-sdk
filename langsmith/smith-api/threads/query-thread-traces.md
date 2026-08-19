@@ -206,18 +206,18 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
-            default: 20
             maximum: 100
             minimum: 1
+            type: integer
+            default: 20
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME
@@ -232,7 +232,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - THREAD_ID
@@ -260,6 +259,7 @@ paths:
                 - NAME
                 - ERROR_PREVIEW
               type: string
+            type: array
             title: Selects
       responses:
         '200':

@@ -204,6 +204,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/data_planes.ErrorResponse'
+        '422':
+          description: Customer AWS resource conflict or quota exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/data_planes.CreateErrorResponse'
         '500':
           description: Internal server error
           content:
@@ -263,6 +269,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/data_planes.MissingPermission'
+    data_planes.CreateErrorResponse:
+      type: object
+      required:
+        - code
+        - detail
+        - status
+        - title
+        - type
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
     data_planes.Status:
       type: string
       enum:
