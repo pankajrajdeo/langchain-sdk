@@ -74,6 +74,9 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 8. `LANGSMITH_ENDPOINT`: To send traces to a [self-hosted LangSmith](self-hosted.md) instance, set `LANGSMITH_ENDPOINT` to the hostname of the self-hosted LangSmith instance. Do not add a trailing slash to the URL, as this can cause authentication errors.
 9. Egress to `https://beacon.langchain.com` from your network. This is required for license verification and usage reporting if not running in air-gapped mode. See the [Egress documentation](self-host-egress.md) for more details.
 
+> [!NOTE]
+> Agent Server services listen on both IPv4 and IPv6 by default as of 0.14.0. No additional configuration is required for dual-stack clusters. To listen on a single address family, set `LANGGRAPH_SERVER_HOST` to `0.0.0.0` for IPv4 only or `::` for IPv6 only. See [Self-hosted Agent Server environment variables](env-var-self-hosted.md).
+
 <a id="helm" />
 
 ## Kubernetes

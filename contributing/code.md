@@ -31,16 +31,19 @@ git clone https://github.com/your-username/name-of-forked-repo.git
 git clone https://github.com/parrot123/langchain.git
 ```
 
+> [!WARNING]
+> The LangChain Python repo is a **monorepo** — there is no `pyproject.toml` at the repo root. Each package has its own under `libs/` (e.g. `libs/core/`, `libs/langchain/`, `libs/partners/openai/`). You must `cd` into the relevant package directory before running `uv` commands.
+
 ```bash
-# Inside your repo, initialize environment and install dependencies
-uv venv && source .venv/bin/activate
+# Navigate into the package you want to work on, then install dependencies
+cd libs/core          # or libs/langchain, libs/partners/openai, etc.
 uv sync --all-groups
 
 # or, to install a specific group only:
 uv sync --group test
 ```
 
-You will need to install [`uv`](https://docs.astral.sh/uv/) if you haven't previously
+You will need to install [`uv`](https://docs.astral.sh/uv/) if you haven't previously. See the [repository structure](#repository-structure) section for a full list of packages and their locations.
 
 ### Create a branch
 Create a new branch for your fix. This helps keep your changes organized and makes it easier to submit a pull request later.

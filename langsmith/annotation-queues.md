@@ -28,7 +28,7 @@ Run items and thread items support different capabilities:
 | Assertions       | Yes       | No           |
 | Add to Dataset   | Yes       | No           |
 | Default dataset  | Yes       | No           |
-| Automation rules | Yes       | No           |
+| Automation rules | Yes       | Yes          |
 
 ### Create a single-run queue
 
@@ -118,10 +118,10 @@ There are several ways to populate a single-run queue with items:
 
   <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/threads-tab-add-to-annotation-queue-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=28035e2231b8ce6bc00cba61f8268bae" alt="Threads tab with selected threads and the Add to Annotation Queue bulk action." width="1546" height="765" data-path="langsmith/images/threads-tab-add-to-annotation-queue-dark.png" />
 
-* **Automation rules**: [Set up a rule](rules.md) to automatically assign **runs** that match a filter (for example, errors or low user scores) into a queue.
+* **Automation rules**: [Set up a rule](rules.md) to automatically assign **runs** or **threads** that match a filter (for example, errors or low user scores) into a queue.
 
 > [!NOTE]
->   Automation rules enqueue run items only. They do not add entire threads as thread items.
+>   What a rule enqueues depends on its [item type](rules.md#set-the-item-type-to-runs-or-threads). A rule whose item type is **Runs** enqueues run items. A rule whose item type is **Threads** enqueues the entire conversation as a thread item, once the thread goes idle.
 
 * **Datasets & Experiments**: Select one or more [experiments](evaluation-concepts.md#experiment) within a dataset and click ** Annotate**. Select **Add to Annotation Queue**, then choose an existing queue or create a new one. Experiment annotate flows add run items.
 
@@ -132,7 +132,7 @@ There are several ways to populate a single-run queue with items:
 > [!NOTE]
 > You can add at most **100** runs or threads to an annotation queue in a single action. To enqueue more, repeat the add flow in batches of 100 or fewer.
 >
-> Manually adding runs or threads to an annotation queue does not change trace retention by default. The trace keeps the retention configured for its project unless another action explicitly extends retention. For the full retention model, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
+> Manually adding runs or threads to an annotation queue does not change trace retention by default. The trace keeps the retention configured for its project unless another action explicitly extends retention. Adds performed by an [automation rule](rules.md) are different: the rule's **Extend Data Retention** toggle is enabled by default for annotation queue actions. A run rule upgrades the whole trace that contains each matched run, and a thread rule upgrades every trace in the matched thread. For the full retention model, see [data retention auto-upgrades](usage-and-billing.md#data-retention-auto-upgrades).
 
 ### Review a single-run queue
 
