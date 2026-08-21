@@ -133,7 +133,7 @@ All traffic leaving LangSmith services will be routed through a NAT gateway. All
 It may be helpful to allowlist these IP addresses if connecting to your own AzureOpenAI service or other endpoints that may be required by the Playground or Online Evaluation.
 
 > [!NOTE]
-> Traffic from agents deployed on [LangSmith Deployment](deployment.md) egresses through a separate set of NAT IPs. For that list, refer to [Allowlist IP addresses](deploy-to-cloud.md#allowlist-ip-addresses) in the Cloud deployment guide.
+> Traffic from agents deployed on [LangSmith Deployment](deployment.md) egresses through a separate set of NAT IPs. For that list, refer to [Allowlist IP addresses](cloud-platform-features.md#allowlist-ip-addresses) in the Cloud platform features reference.
 
 ### Ingress into LangChain SaaS
 

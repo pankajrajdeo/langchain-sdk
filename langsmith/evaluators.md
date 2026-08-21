@@ -5,7 +5,7 @@
 [Evaluators](evaluation-concepts.md#evaluators) in LangSmith are [workspace-level](administration-overview.md#workspaces) resources. You can attach a single evaluator to multiple [tracing projects](observability-concepts.md#projects) and [datasets](evaluation-concepts.md#datasets), so you can apply consistent evaluation logic across your work without recreating it each time.
 
 > [!TIP]
-> The [LangSmith Engine](engine.md) suggests custom evaluators for detected issues and can deploy them with one click.
+> Evaluator scores are a high-priority signal for the [LangSmith Engine](engine.md): it pulls low-scoring traces when choosing what to analyze, so attaching an evaluator to a project sharpens the issues Engine finds there.
 
 ## View evaluators
 

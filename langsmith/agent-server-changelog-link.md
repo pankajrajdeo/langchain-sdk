@@ -17,10 +17,10 @@ Deployments use the newest `stable` version by default and are automatically upd
 
 ## v0.13
 
-Latest version: `0.13.0rc3`
+Latest version: `0.13.0rc5`
 
 > [!NOTE]
-> This minor line is still a release candidate. The last stable release is `0.12.3`.
+> This minor line is still a release candidate. The last stable release is `0.12.6`.
 
 ### Changes
 
@@ -32,6 +32,7 @@ Latest version: `0.13.0rc3`
 * Reduce JavaScript API Docker image size and SBOM component count.
 * Add support for A2A FilePart outputs and configurable per-assistant media modes on agent cards.
 * Add Python 3.14 support for Agent Server runtimes and images.
+* Add `A2A_ALLOWED_TOOL_CALL_RESULTS` environment variable to restrict A2A tool call results to an allowlist of tool names.
 
 #### Fixes
 
@@ -50,8 +51,26 @@ Latest version: `0.13.0rc3`
 * Fix silent pruning failure for DeltaChannel threads when custom at-rest encryption is configured.
 * Restore A2A tool-result DataParts in task history and streamed status updates.
 
+#### Security
+
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+
 <details>
 <summary>v0.13 releases</summary>
+
+## 2026-08-17
+## v0.13.0rc5
+
+### Security
+
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+
+## 2026-08-12
+## v0.13.0rc4
+
+### New Features
+
+* Add `A2A_ALLOWED_TOOL_CALL_RESULTS` environment variable to restrict A2A tool call results to an allowlist of tool names.
 
 ## 2026-08-08
 ## v0.13.0rc3
@@ -102,7 +121,7 @@ Latest version: `0.13.0rc3`
 
 ## v0.12
 
-Latest version: `0.12.3`
+Latest version: `0.12.6`
 
 ### Changes
 
@@ -118,6 +137,7 @@ Latest version: `0.12.3`
 * Add Azure IAM auth support for Postgres connections.
 * Add Azure IAM auth support for Redis connections.
 * Add FIPS variants of Wolfi Python and Node.js server images.
+* Add `A2A_ALLOWED_TOOL_CALL_RESULTS` environment variable to restrict A2A tool call results to an allowlist of tool names.
 
 #### Fixes
 
@@ -149,6 +169,7 @@ Latest version: `0.12.3`
 * Fix store API discarding authorization filters returned by auth handlers.
 * Enable FIPS 140-3 compliance by default in the Go core-server.
 * Enable FIPS mode for Node.js crypto in Wolfi/Chainguard FIPS Agent Server images by linking the base image's FIPS-validated OpenSSL provider.
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
 
 #### General Notes
 
@@ -156,6 +177,27 @@ Latest version: `0.12.3`
 
 <details>
 <summary>v0.12 releases</summary>
+
+## 2026-08-18
+## v0.12.6
+
+### Fixes
+
+* Includes dependency and security maintenance updates.
+
+## 2026-08-17
+## v0.12.5
+
+### Security
+
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+
+## 2026-08-13
+## v0.12.4
+
+### New Features
+
+* Add `A2A_ALLOWED_TOOL_CALL_RESULTS` environment variable to restrict A2A tool call results to an allowlist of tool names.
 
 ## 2026-08-11
 ## v0.12.3
@@ -298,7 +340,7 @@ Latest version: `0.12.3`
 
 ## v0.11
 
-Latest version: `0.11.2`
+Latest version: `0.11.3`
 
 ### Changes
 
@@ -335,6 +377,10 @@ Latest version: `0.11.2`
 * Made queue runs query field selection explicit for backwards compatibility, so new run schema fields can be added without breaking older server versions during rollbacks.
 * Disable rate limiting with a warning instead of preventing startup when given invalid rate-limit configuration.
 
+#### Security
+
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
+
 #### General Notes
 
 * Includes security dependency updates for PyJWT, LangSmith, cryptography, Hono, undici, `golang.org/x/net`, `golang.org/x/crypto`, and Starlette.
@@ -345,6 +391,13 @@ Latest version: `0.11.2`
 
 <details>
 <summary>v0.11 releases</summary>
+
+## 2026-08-17
+## v0.11.3
+
+### Security
+
+* Enforce thread authorization filters during conditional thread creation on the Postgres runtime ([GHSA-747p-c922-m55f](https://github.com/langchain-ai/helm/security/advisories/GHSA-747p-c922-m55f)). Affected versions did not consistently apply custom `@auth` filters on this path, so an authenticated user who knew another user's thread ID could create a run against that thread and observe or modify its conversation state. Deployments using only the in-memory runtime were not affected.
 
 ## 2026-07-28
 ## v0.11.2
@@ -622,7 +675,6 @@ Latest version: `0.10.3`
 
 </details>
 
-## 2026-05-27
 ## v0.9.0
 
 ### General Notes

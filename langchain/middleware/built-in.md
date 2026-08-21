@@ -160,7 +160,7 @@ Maximum number of retry attempts after the initial call (3 total attempts with d
 Optional list of tools or tool names to apply retry logic to. If `None`, applies to all tools.
 
 #### `Field` — `tuple[type[Exception], ...] | callable`
-Either a tuple of exception types to retry on, or a callable that takes an exception and returns `True` if it should be retried. By default, all exceptions are retried. Exceptions that do not match propagate immediately and are not handled by `on_failure`.
+Either a tuple of exception types to retry on, or a callable that takes an exception and returns `True` if it should be retried. With `langchain>=1.3.16`, the default retries retryable [model errors](../models.md#model-exceptions) and all unclassified exceptions, and no longer retries model errors marked non-retryable.
 
 #### `Field` — `string | callable`
 Behavior when all retries are exhausted. Options:
@@ -262,7 +262,7 @@ agent = create_agent(
 Maximum number of retry attempts after the initial call (3 total attempts with default)
 
 #### `Field` — `tuple[type[Exception], ...] | callable`
-Either a tuple of exception types to retry on, or a callable that takes an exception and returns `True` if it should be retried.
+Either a tuple of exception types to retry on, or a callable that takes an exception and returns `True` if it should be retried. With `langchain>=1.3.16`, the default retries retryable [model errors](../models.md#model-exceptions) and all unclassified exceptions, and no longer retries model errors marked non-retryable.
 
 #### `Field` — `string | callable`
 Behavior when all retries are exhausted. Options:

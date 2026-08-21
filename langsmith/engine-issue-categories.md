@@ -110,7 +110,7 @@ A better-fit tool existed but the agent chose the wrong one for the user's reque
 * [Find and fix your agent's issues](engine.md): Set up Engine, work through the issue lifecycle, and control costs.
 * [Engine](engine-overview.md): Product overview and where Engine fits in the development lifecycle.
 * [Engine webhook events](engine-webhooks.md): Forward detected issues to your incident-management, paging, or chat tools.
-* [Evaluators](evaluators.md): Deploy the suggested evaluator Engine generates for each issue.
+* [Manage datasets](manage-datasets.md): Turn the traces Engine links to an issue into ground truth examples for offline evaluation.
 
 ***
 
