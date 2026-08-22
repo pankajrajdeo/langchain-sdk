@@ -5588,13 +5588,13 @@
       "upstream_sha256": "2f04c0a8e6652530e73f3e2dab8fc8e8ee72201a5a13236339bf5408d5f36c2f"
     },
     "langsmith/annotation-queues-sdk.md": {
-      "bytes": 17480,
+      "bytes": 22476,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/annotation-queues-sdk.md",
-      "sha256": "1df100dbe819078db2c49cdb00554d5cb9498ad0af79e25097e285f5d7ddf68d",
+      "sha256": "ca4b2d4bf7bfd3ad816d6845b5e5f57fac9a7185be784ca6d5478e7049289b73",
       "source": "https://docs.langchain.com/langsmith/annotation-queues-sdk",
-      "upstream_bytes": 20048,
-      "upstream_sha256": "ebbaaff9f10fbbd451cc0f24d25d62cecd820259baeac6173a5ad9e9430b4b93"
+      "upstream_bytes": 25444,
+      "upstream_sha256": "df2ff4d2d27bb4c21fc75a61400ed0793723b3b9dd12c02e9d5e81c86e072794"
     },
     "langsmith/annotation-queues.md": {
       "bytes": 20968,
@@ -7649,13 +7649,13 @@
       "upstream_sha256": "f1ee65530621b82e58a498417cec5bda67b01cef0f947e93b95164486cf91210"
     },
     "langsmith/llm-as-judge.md": {
-      "bytes": 5867,
+      "bytes": 5256,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/llm-as-judge.md",
-      "sha256": "1d811055574a46b546b4b24c10da30f794748d8f7bdeb3a79c473c9924cffa90",
+      "sha256": "c33f1483c093833e1f10a1e5e56fb60123158d395a36998c06ef9b0b8e66a254",
       "source": "https://docs.langchain.com/langsmith/llm-as-judge",
-      "upstream_bytes": 6242,
-      "upstream_sha256": "47257eaa1b6fa8a60b4d070f7fe5050fe75d9bb72dcfaf61ca99469ba16feab1"
+      "upstream_bytes": 5623,
+      "upstream_sha256": "a6ba964d8b6c361f8db9df1a98fcdded2940461f0d34e9706e3bb741e87f1046"
     },
     "langsmith/llm-auth-proxy-self-hosted.md": {
       "bytes": 38784,
@@ -7667,13 +7667,13 @@
       "upstream_sha256": "6e9b65442451dc89f5cfed69f6a3cf3546d2d81de63fd744a4c2ef71dbf9bddf"
     },
     "langsmith/llm-gateway-access.md": {
-      "bytes": 7616,
+      "bytes": 7850,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/llm-gateway-access.md",
-      "sha256": "1047e18686cc780e7ab6266ee7f78ef80bfe8c5ebdf068815def4e3fa255eed5",
+      "sha256": "29c0b3129c5b594130dae34cbddc1186ba587158ae27364068094a87502bc177",
       "source": "https://docs.langchain.com/langsmith/llm-gateway-access",
-      "upstream_bytes": 7990,
-      "upstream_sha256": "f500491ab75baccb0a51e8a1552256071f9e00136ee83a88bb9fdaa7cf55a7d2"
+      "upstream_bytes": 8232,
+      "upstream_sha256": "09489738240a6ff8b30532e4dcee72b05a51a1ddd56bbbfecae5e34873136346"
     },
     "langsmith/llm-gateway-admin-setup.md": {
       "bytes": 4927,
@@ -7694,13 +7694,13 @@
       "upstream_sha256": "854456bc42688e0c77e34f118c86ff83ece3bd5e71b85199acf5ef32f5f9d441"
     },
     "langsmith/llm-gateway-coding-agents.md": {
-      "bytes": 5527,
+      "bytes": 6660,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/llm-gateway-coding-agents.md",
-      "sha256": "8492d6bdcf8cbb929c3a01fa4fc9ac2b042c508dd1dbe8b1f870e4d9c40ab067",
+      "sha256": "8d9b2837116ed56a80afc857f696e46e6327a7d99d701b5b98fdfb6f6a670db7",
       "source": "https://docs.langchain.com/langsmith/llm-gateway-coding-agents",
-      "upstream_bytes": 6343,
-      "upstream_sha256": "a4356818197eaf1fbf4737558dd439a0add773618e0c006397400c0b6b396948"
+      "upstream_bytes": 7546,
+      "upstream_sha256": "3d72671b309f44e64ea810a6991139d2ab2752196e4996f9ddcb8dfef34de0e6"
     },
     "langsmith/llm-gateway-credits.md": {
       "bytes": 5897,
@@ -8198,13 +8198,13 @@
       "upstream_sha256": "5e387ad5be50e6b0e8c043f7ef6791b7fe0c14f8083a5073839cc5e2caeb054c"
     },
     "langsmith/organization-workspace-operations.md": {
-      "bytes": 60708,
+      "bytes": 60976,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/organization-workspace-operations.md",
-      "sha256": "851f219f533f373f93a12c98d1e855f82b108123e7718b1c3d69b5423c3a65e0",
+      "sha256": "2a7c0805f54867e48f13e7530e38f28deee909abb77dcc65016aea4ef0856280",
       "source": "https://docs.langchain.com/langsmith/organization-workspace-operations",
-      "upstream_bytes": 61189,
-      "upstream_sha256": "4325dd558bbbd4badfca7979bb1674d4d1f35b1a31845f4ab39cf172cb760966"
+      "upstream_bytes": 61457,
+      "upstream_sha256": "2053508a5b14c1ca5aad2ff41947d69ea8689659ec40392cd4530e49ba5ba489"
     },
     "langsmith/otel-gateway-trace-redaction.md": {
       "bytes": 5881,
@@ -8540,13 +8540,13 @@
       "upstream_sha256": "60100a51b0546e9a329ac07dd4c947ec0f43548f743f9cf7d64194f84ddb8584"
     },
     "langsmith/rbac.md": {
-      "bytes": 15982,
+      "bytes": 16729,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/rbac.md",
-      "sha256": "3c08311415da46e79d5549703b091878dd35f725d0d83ab3303fad870c42b447",
+      "sha256": "ae4a448e6043d4504170c6a25ff758145bb9589e2cbc04484c36402bd70a2d1e",
       "source": "https://docs.langchain.com/langsmith/rbac",
-      "upstream_bytes": 16569,
-      "upstream_sha256": "b5fc60f6a7fb1189481df419ca0cc28f5bf12ffccaec4e6be9f4ac4ce7f4f4f1"
+      "upstream_bytes": 17316,
+      "upstream_sha256": "b942ce6185f1c1ab0c10774afca3a483740a6282b671cbf2dc5eaf05937592c0"
     },
     "langsmith/read-local-experiment-results.md": {
       "bytes": 7605,
