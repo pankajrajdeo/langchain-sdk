@@ -287,13 +287,13 @@
       "upstream_sha256": "60531aad94737ad2d467b877513dafce7f60e7a6d404da479a4d3fde5f88dc51"
     },
     "deepagents/code/providers.md": {
-      "bytes": 20100,
+      "bytes": 21728,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/deepagents/code/providers.md",
-      "sha256": "7074209aca8187f2265af63e870765a5874f85b91d27b3c9c5dd18fadf104ac3",
+      "sha256": "71b40de83b02581f7dc4e13f48764742bd8d3b86a4c91dc5fc14ecc4a3db656e",
       "source": "https://docs.langchain.com/oss/deepagents/code/providers",
-      "upstream_bytes": 23637,
-      "upstream_sha256": "f4f21f77e4e6631c177866bec73a14e0842327e5467f21d5e69f07c3a988c730"
+      "upstream_bytes": 25947,
+      "upstream_sha256": "6cfa6c501198145a918be4e1990504a9f4b8d42f73e2e53e377f8d3fe228bb8d"
     },
     "deepagents/code/quickstart.md": {
       "bytes": 18262,

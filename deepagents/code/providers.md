@@ -44,32 +44,79 @@ Deep Agents Code integrates automatically with the [following model providers](#
 
 Using a provider not listed here? See [Arbitrary providers](config-file.md#arbitrary-providers): any LangChain-compatible provider can be used in Deep Agents Code with additional setup.
 
-| Provider             | Package                                                                                    | Credential env var                                   | Model profiles |
-| -------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------- | -------------- |
-| OpenAI               | [`langchain-openai`](../../integrations/chat/openai.md)                                 | `OPENAI_API_KEY`                                     | ✅              |
-| OpenAI (Codex)       | [`langchain-openai`](../../integrations/chat/openai.md)                                 | None — [sign in with ChatGPT](#sign-in-with-chatgpt) | ✅              |
-| Azure OpenAI         | [`langchain-openai`](../../integrations/chat/azure_chat_openai.md)                      | `AZURE_OPENAI_API_KEY`                               | ✅              |
-| Anthropic            | [`langchain-anthropic`](../../integrations/chat/anthropic.md)                           | `ANTHROPIC_API_KEY`                                  | ✅              |
-| Google Gemini API    | [`langchain-google-genai`](../../integrations/chat/google_generative_ai.md)             | `GOOGLE_API_KEY`                                     | ✅              |
-| Google Vertex AI     | [`langchain-google-genai`](../../integrations/chat/google_generative_ai.md#credentials) | `GOOGLE_CLOUD_PROJECT`                               | ✅              |
-| Baseten              | [`langchain-baseten`](https://github.com/basetenlabs/langchain-baseten)                    | `BASETEN_API_KEY`                                    | ✅              |
-| AWS Bedrock          | [`langchain-aws`](../../integrations/chat/bedrock.md)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
-| AWS Bedrock Converse | [`langchain-aws`](../../integrations/chat/bedrock.md)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`         | ✅              |
-| Hugging Face         | [`langchain-huggingface`](../../integrations/chat/huggingface.md)                       | `HUGGINGFACEHUB_API_TOKEN`                           | ✅              |
-| Ollama               | [`langchain-ollama`](../../integrations/chat/ollama.md)                                 | `OLLAMA_API_KEY` (cloud only; optional)              | ❌              |
-| Groq                 | [`langchain-groq`](../../integrations/chat/groq.md)                                     | `GROQ_API_KEY`                                       | ✅              |
-| Cohere               | [`langchain-cohere`](../../integrations/chat/cohere.md)                                 | `COHERE_API_KEY`                                     | ❌              |
-| Fireworks            | [`langchain-fireworks`](../../integrations/chat/fireworks.md)                           | `FIREWORKS_API_KEY`                                  | ✅              |
-| Together             | [`langchain-together`](../../integrations/chat/together.md)                             | `TOGETHER_API_KEY`                                   | ❌              |
-| Meta                 | [`langchain-meta`](https://github.com/langchain-ai/langchain-meta)                         | `MODEL_API_KEY`                                      | ✅              |
-| Mistral AI           | [`langchain-mistralai`](../../integrations/chat/mistralai.md)                           | `MISTRAL_API_KEY`                                    | ✅              |
-| DeepSeek             | [`langchain-deepseek`](../../integrations/chat/deepseek.md)                             | `DEEPSEEK_API_KEY`                                   | ✅              |
-| IBM (watsonx.ai)     | [`langchain-ibm`](../../integrations/chat/ibm_watsonx.md)                               | `WATSONX_APIKEY`                                     | ❌              |
-| Nvidia               | [`langchain-nvidia-ai-endpoints`](../../integrations/chat/nvidia_ai_endpoints.md)       | `NVIDIA_API_KEY`                                     | ✅              |
-| xAI                  | [`langchain-xai`](../../integrations/chat/xai.md)                                       | `XAI_API_KEY`                                        | ✅              |
-| Perplexity           | [`langchain-perplexity`](../../integrations/chat/perplexity.md)                         | `PERPLEXITY_API_KEY` (or `PPLX_API_KEY`)             | ✅              |
-| OpenRouter           | [`langchain-openrouter`](../../integrations/chat/openrouter.md)                         | `OPENROUTER_API_KEY`                                 | ✅              |
-| LiteLLM              | [`langchain-litellm`](../../integrations/chat/litellm.md)                               | Per-provider (see [docs](https://docs.litellm.ai/))  | ❌              |
+| Provider                     | Package                                                                                    | Credential env var                                  | Model profiles |
+| ---------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------- | -------------- |
+| OpenAI                       | [`langchain-openai`](../../integrations/chat/openai.md)                                 | `OPENAI_API_KEY`                                    | ✅              |
+| OpenAI (Codex)               | [`langchain-openai`](../../integrations/chat/openai.md)                                 | None; [sign in with ChatGPT](#sign-in-with-chatgpt) | ✅              |
+| Azure OpenAI                 | [`langchain-openai`](../../integrations/chat/azure_chat_openai.md)                      | `AZURE_OPENAI_API_KEY`                              | ✅              |
+| Anthropic                    | [`langchain-anthropic`](../../integrations/chat/anthropic.md)                           | `ANTHROPIC_API_KEY`                                 | ✅              |
+| Google Gemini API            | [`langchain-google-genai`](../../integrations/chat/google_generative_ai.md)             | `GOOGLE_API_KEY`                                    | ✅              |
+| Google Vertex AI             | [`langchain-google-genai`](../../integrations/chat/google_generative_ai.md#credentials) | `GOOGLE_CLOUD_PROJECT`                              | ✅              |
+| Google Vertex AI (Anthropic) | [`langchain-google-vertexai`](../../integrations/chat/google_anthropic_vertex.md)       | `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_LOCATION`     | ✅              |
+| Baseten                      | [`langchain-baseten`](https://github.com/basetenlabs/langchain-baseten)                    | `BASETEN_API_KEY`                                   | ✅              |
+| AWS Bedrock                  | [`langchain-aws`](../../integrations/chat/bedrock.md)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`        | ✅              |
+| AWS Bedrock Converse         | [`langchain-aws`](../../integrations/chat/bedrock.md)                                   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`        | ✅              |
+| Hugging Face                 | [`langchain-huggingface`](../../integrations/chat/huggingface.md)                       | `HUGGINGFACEHUB_API_TOKEN`                          | ✅              |
+| Ollama                       | [`langchain-ollama`](../../integrations/chat/ollama.md)                                 | `OLLAMA_API_KEY` (cloud only; optional)             | ❌              |
+| Groq                         | [`langchain-groq`](../../integrations/chat/groq.md)                                     | `GROQ_API_KEY`                                      | ✅              |
+| Cohere                       | [`langchain-cohere`](../../integrations/chat/cohere.md)                                 | `COHERE_API_KEY`                                    | ❌              |
+| Fireworks                    | [`langchain-fireworks`](../../integrations/chat/fireworks.md)                           | `FIREWORKS_API_KEY`                                 | ✅              |
+| Together                     | [`langchain-together`](../../integrations/chat/together.md)                             | `TOGETHER_API_KEY`                                  | ❌              |
+| Meta                         | [`langchain-meta`](https://github.com/langchain-ai/langchain-meta)                         | `MODEL_API_KEY`                                     | ✅              |
+| Mistral AI                   | [`langchain-mistralai`](../../integrations/chat/mistralai.md)                           | `MISTRAL_API_KEY`                                   | ✅              |
+| DeepSeek                     | [`langchain-deepseek`](../../integrations/chat/deepseek.md)                             | `DEEPSEEK_API_KEY`                                  | ✅              |
+| IBM (watsonx.ai)             | [`langchain-ibm`](../../integrations/chat/ibm_watsonx.md)                               | `WATSONX_APIKEY`                                    | ❌              |
+| Nvidia                       | [`langchain-nvidia-ai-endpoints`](../../integrations/chat/nvidia_ai_endpoints.md)       | `NVIDIA_API_KEY`                                    | ✅              |
+| xAI                          | [`langchain-xai`](../../integrations/chat/xai.md)                                       | `XAI_API_KEY`                                       | ✅              |
+| Perplexity                   | [`langchain-perplexity`](../../integrations/chat/perplexity.md)                         | `PERPLEXITY_API_KEY` (or `PPLX_API_KEY`)            | ✅              |
+| OpenRouter                   | [`langchain-openrouter`](../../integrations/chat/openrouter.md)                         | `OPENROUTER_API_KEY`                                | ✅              |
+| LiteLLM                      | [`langchain-litellm`](../../integrations/chat/litellm.md)                               | Per-provider (see [docs](https://docs.litellm.ai/)) | ❌              |
+
+<details>
+<summary>Configure Anthropic models on Vertex AI</summary>
+
+The `google_anthropic_vertex` provider runs Claude through Anthropic's Messages API on Vertex AI. It uses Google Cloud Application Default Credentials (ADC) instead of an Anthropic API key.
+
+To use the provider:
+
+1. Install the Vertex AI extra:
+
+```txt
+     /install vertex
+```
+
+```bash
+     dcode --install vertex
+```
+
+2. [Enable a Claude model in your Google Cloud project](https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude), then configure ADC:
+
+```bash
+   gcloud auth application-default login
+```
+
+3. Set your Google Cloud project and location:
+
+```bash
+   export GOOGLE_CLOUD_PROJECT="your-project-id"
+   export GOOGLE_CLOUD_LOCATION="global"
+```
+
+   You can use `DEEPAGENTS_CODE_GOOGLE_CLOUD_PROJECT` and `DEEPAGENTS_CODE_GOOGLE_CLOUD_LOCATION` to scope these values to Deep Agents Code.
+
+4. Select a Claude model with the `google_anthropic_vertex` provider:
+
+```txt
+     /model google_anthropic_vertex:claude-sonnet-4-6
+```
+
+```bash
+     dcode --model google_anthropic_vertex:claude-sonnet-4-6
+```
+
+Use `google_vertexai` for Google models. Claude models use Anthropic's Messages API and must use `google_anthropic_vertex` instead.
+
+</details>
 
 > [!TIP]
 > You can scope any credential to Deep Agents Code by adding a `DEEPAGENTS_CODE_` prefix. For example, `DEEPAGENTS_CODE_OPENAI_API_KEY` takes priority over `OPENAI_API_KEY` within Deep Agents Code without affecting other tools. See [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for details.
