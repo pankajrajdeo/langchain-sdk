@@ -51,16 +51,17 @@ You can apply multiple time windows to the same scope. For example, a workspace 
 > [!WARNING]
 > Creating and managing policies requires `organization:manage` permission. For the full permissions breakdown, refer to [Traces, Engine, and access control](llm-gateway-access.md).
 
-1. Go to **Settings → Gateway → LLM Gateway**.
-2. Click **Create policy**.
+1. Go to **Settings → Gateway → LLM Gateway** and select **Cost Controls**.
+2. Click **Create spend limit**.
 3. Select the scope (organization, workspace, API key, or user).
-4. Set the time window (monthly, weekly, daily, or hourly).
-5. Set the spend cap in USD.
-6. Save.
+4. (Optional) To apply the same default limit independently to every custom header value, apply the limit to every subject of the selected type by default, select **Separate limits by custom header**, and enter the header name.
+5. Set the time window (monthly, weekly, daily, or hourly).
+6. Set the spend cap in USD.
+7. Click **Create spend limit**.
 
 Policies take effect immediately. The gateway evaluates them on every incoming request with sub-second enforcement latency.
 
-A spend policy can also carry a condition on a custom request header, so traffic from a single subject splits into separate caps by header value. Use this to cap each of your own end customers under one API key. For more information, see [Per-customer policies](llm-gateway-header-policies.md).
+A spend policy can also use a custom request header to give each of your own end customers an independent cap under one API key. For more information, see [Per-customer policies](llm-gateway-header-policies.md).
 
 ## View spend
 

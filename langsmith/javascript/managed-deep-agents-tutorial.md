@@ -31,6 +31,14 @@ Install the Tavily client:
 npm install @langchain/tavily
 ```
 
+```bash
+pnpm add @langchain/tavily
+```
+
+```bash
+bun add @langchain/tavily
+```
+
 Create a custom `internet_search` tool:
 
 ```ts
@@ -141,7 +149,15 @@ For thread behavior and constraints, see [Schedules](managed-deep-agents-schedul
 Deploy the project to LangSmith:
 
 ```bash
-mda deploy .
+npx mda deploy
+```
+
+```bash
+pnpm exec mda deploy
+```
+
+```bash
+bunx mda deploy
 ```
 
 On success, the CLI prints the deployment dashboard URL. The deploy syncs the instructions to Context Hub, uploads the compiled project, and reconciles the daily schedule.
@@ -163,7 +179,7 @@ Add logging, retries, limits, and guardrails around model and tool calls.
 Authenticate callers and use verified identity in tools and middleware.
 
 #### [Evals](managed-deep-agents-evals.md)
-Author Harbor tasks and compile the managed agent for Harbor.
+Develop Harbor evals with a coding agent and the eval-engineering skill.
 
 ***
 

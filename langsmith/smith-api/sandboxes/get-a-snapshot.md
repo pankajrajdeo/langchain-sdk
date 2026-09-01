@@ -218,6 +218,11 @@ components:
           type: string
         created_by:
           type: string
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary.
+          type: string
         docker_image:
           type: string
         fs_capacity_bytes:

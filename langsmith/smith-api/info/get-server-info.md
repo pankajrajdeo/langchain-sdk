@@ -190,6 +190,13 @@ components:
       properties:
         batch_ingest_config:
           $ref: '#/components/schemas/info.BatchIngestConfig'
+        billing_installation_id:
+          description: >-
+            BillingInstallationID is the persistent per-installation identity
+            for
+
+            self-hosted deployments.
+          type: string
         customer_info:
           $ref: '#/components/schemas/info.CustomerInfo'
         git_sha:

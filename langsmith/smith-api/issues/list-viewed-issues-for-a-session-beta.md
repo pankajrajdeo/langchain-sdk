@@ -181,50 +181,50 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ListViewsResponse'
+                $ref: '#/components/schemas/issues.ListViewsResponse'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues.ListViewsResponse:
+    issues.ListViewsResponse:
       type: object
       properties:
         views:
           type: array
           items:
-            $ref: '#/components/schemas/tracer_session_issues.ViewedIssue'
-    tracer_session_issues.ErrorResponse:
+            $ref: '#/components/schemas/issues.ViewedIssue'
+    issues.ErrorResponse:
       type: object
       properties:
         error:
           type: string
-    tracer_session_issues.ViewedIssue:
+    issues.ViewedIssue:
       type: object
       properties:
         issue_id:

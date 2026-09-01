@@ -17,6 +17,10 @@ Deep Agents comes with the following capabilities:
 
 See [Core capabilities](#core-capabilities) for a full breakdown of each component.
 
+## Try it
+
+> **Interactive example:** [Open it in the original LangChain documentation](https://docs.langchain.com/oss/python).
+
 ## Quickstart
 
 ```python

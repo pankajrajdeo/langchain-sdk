@@ -44,22 +44,22 @@ The [LangSmith CLI](langsmith-cli.md) queries the same SmithDB-backed endpoints 
 The before and after change for each method is documented on the page for its area.
 
 #### [Query runs](smithdb-sdk-migration-query-runs.md)
-`list_runs` and its query parameters, response fields, and examples.
+Search the runs in a project: filters, field projection, sorting, and pagination. The largest surface area in the migration.
 
 #### [Retrieve runs](smithdb-sdk-migration-runs.md)
-Read a single run and build a run URL.
+Fetch one run by ID, load its child runs, and build the URL of a run in the LangSmith UI.
 
 #### [Traces](smithdb-sdk-migration-traces.md)
-Query traces and list the runs inside a trace.
+Query the traces in a project, read their token and cost aggregates, and list the runs that belong to one trace.
 
 #### [Threads](smithdb-sdk-migration-threads.md)
-Query threads and list the traces inside a thread.
+Query the threads in a project and list the traces (turns) that belong to one thread.
 
 #### [Dataset experiment runs](smithdb-sdk-migration-experiments.md)
-Query the runs attached to a dataset experiment.
+Query the runs recorded by an experiment on a dataset, including pagination and sorting by feedback score.
 
 #### [Feedback and sharing](smithdb-sdk-migration-feedback.md)
-Annotation queues, public runs, and feedback creation.
+Create feedback on a run, add runs to an annotation queue, and share, unshare, or read publicly shared runs.
 
 ## Migrate with an AI agent
 
@@ -73,14 +73,25 @@ carries the minimum SDK versions, deprecation dates, exception changes, and
 discontinued methods that apply to every call site.
 
 The before/after change for each method lives on a per-area page. Fetch the
-ones this codebase actually uses:
+ones covering the functionality this codebase actually uses:
 
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-query-runs.md
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-runs.md
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-traces.md
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-threads.md
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-experiments.md
-- https://docs.langchain.com/langsmith/smithdb-sdk-migration-feedback.md
+- Searching the runs in a project (filters, field projection, sorting,
+  pagination):
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-query-runs.md
+- Fetching one run by ID, loading its child runs, and building the URL of a
+  run in the LangSmith UI:
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-runs.md
+- Querying the traces in a project, reading their token and cost aggregates,
+  and listing the runs in one trace:
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-traces.md
+- Querying the threads in a project and listing the traces (turns) in one
+  thread:
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-threads.md
+- Querying the runs recorded by an experiment on a dataset:
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-experiments.md
+- Creating feedback on a run, adding runs to an annotation queue, and
+  sharing, unsharing, or reading publicly shared runs:
+  https://docs.langchain.com/langsmith/smithdb-sdk-migration-feedback.md
 
 Treat those pages together as the source of truth for what changed, including
 which methods and parameters are affected, what replaces them, and deployment

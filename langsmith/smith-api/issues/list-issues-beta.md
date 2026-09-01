@@ -189,25 +189,54 @@ paths:
           name: status
           in: query
           schema:
-            type: string
             enum:
               - open
               - fixing
               - watching
               - completed
               - ignored
+            type: string
             title: Status
         - description: Filter by severity
           name: severity
           in: query
           schema:
-            type: integer
             enum:
               - 0
               - 1
               - 2
               - 3
+            type: integer
             title: Severity
+        - description: Filter by exact severity (repeatable; OR semantics)
+          name: severity_exact
+          in: query
+          style: form
+          explode: true
+          schema:
+            items:
+              enum:
+                - 0
+                - 1
+                - 2
+                - 3
+              type: integer
+            type: array
+            title: Severity Exact
+        - description: Filter by Engine activity (repeatable; OR semantics)
+          name: activity
+          in: query
+          style: form
+          explode: true
+          schema:
+            items:
+              enum:
+                - fixing
+                - watching
+                - recurred
+              type: string
+            type: array
+            title: Activity
         - description: Filter by tag (exact match)
           name: tag
           in: query
@@ -231,19 +260,29 @@ paths:
           name: sort_by
           in: query
           schema:
-            type: string
             enum:
+              - default
               - created_at
               - updated_at
+              - last_seen
+              - last_updated
+              - trace_count
               - severity
+            type: string
             title: Sort By
+        - description: Group results by issue lifecycle status before applying sort_by
+          name: status_first
+          in: query
+          schema:
+            type: boolean
+            title: Status First
         - description: Page size (positive integer; defaults to 50, capped at 500)
           name: limit
           in: query
           schema:
             type: integer
             title: Limit
-        - description: Page offset (non-negative integer)
+        - description: Page offset (non-negative integer; at most 100000)
           name: offset
           in: query
           schema:
@@ -252,43 +291,48 @@ paths:
       responses:
         '200':
           description: OK
+          headers:
+            X-Pagination-Total:
+              description: Total number of matching issues
+              schema:
+                type: string
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/tracer_session_issues.Issue'
+                  $ref: '#/components/schemas/issues.Issue'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues.Issue:
+    issues.Issue:
       type: object
       properties:
         actions:
@@ -320,6 +364,10 @@ components:
           type: string
         last_seen_at:
           type: string
+        linear_context:
+          $ref: '#/components/schemas/issues.LinearContext'
+        linear_sync:
+          $ref: '#/components/schemas/issues.LinearSync'
         name:
           type: string
         proposed_context_fixes:
@@ -347,9 +395,9 @@ components:
         session_id:
           type: string
         severity:
-          $ref: '#/components/schemas/tracer_session_issues.Severity'
+          $ref: '#/components/schemas/issues.Severity'
         status:
-          $ref: '#/components/schemas/tracer_session_issues.Status'
+          $ref: '#/components/schemas/issues.Status'
         tags:
           items:
             type: string
@@ -362,12 +410,48 @@ components:
           type: string
         watching_since:
           type: string
-    tracer_session_issues.ErrorResponse:
+    issues.ErrorResponse:
       type: object
       properties:
         error:
           type: string
-    tracer_session_issues.Severity:
+    issues.LinearContext:
+      type: object
+      properties:
+        github_pr_urls:
+          items:
+            type: string
+          type: array
+        workflow_state:
+          type: string
+    issues.LinearSync:
+      type: object
+      properties:
+        identifier:
+          type: string
+        issue_id:
+          type: string
+        last_attempted_at:
+          type: string
+          format: date-time
+        last_error:
+          type: string
+        last_synced_at:
+          type: string
+          format: date-time
+        linear_issue_id:
+          type: string
+        state:
+          type: string
+          enum:
+            - pending
+            - synced
+            - failed
+            - auth_required
+            - paused
+        url:
+          type: string
+    issues.Severity:
       type: integer
       enum:
         - 0
@@ -379,7 +463,7 @@ components:
         - SeverityHigh
         - SeverityMed
         - SeverityLow
-    tracer_session_issues.Status:
+    issues.Status:
       type: string
       enum:
         - open

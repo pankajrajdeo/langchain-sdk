@@ -288,6 +288,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.Callback'
+        description:
+          description: >-
+            Description says what this configuration as a whole lets the sandbox
+            reach, complementing the per-rule descriptions. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         no_proxy:
           items:
             type: string
@@ -393,6 +400,13 @@ components:
       properties:
         aws:
           $ref: '#/components/schemas/sandboxes.ProxyAWSConfig'
+        description:
+          description: >-
+            Description says what this rule lets the sandbox reach, so an agent
+            driving the sandbox can be told its capabilities. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         enabled:
           type: boolean
         env_vars:

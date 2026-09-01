@@ -1,6 +1,6 @@
 # Execute a sandbox command
 
-> Execute a command inside a sandbox and return stdout, stderr, and exit code.
+> Execute a command inside a sandbox and return stdout, stderr, and exit code. Use the streaming execute endpoints for long-running commands that may exceed the synchronous request deadline.
 
 ## OpenAPI
 
@@ -164,7 +164,8 @@ paths:
       summary: Execute a sandbox command
       description: >-
         Execute a command inside a sandbox and return stdout, stderr, and exit
-        code.
+        code. Use the streaming execute endpoints for long-running commands that
+        may exceed the synchronous request deadline.
       parameters:
         - description: Sandbox ID or name
           name: sandbox_id
@@ -203,6 +204,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '409':
+          description: The sandbox closed its connection during execution
+          headers:
+            X-Should-Retry:
+              description: false; the interrupted command is not safe to replay
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
+        '422':
+          description: Synchronous execution exceeded the request deadline
+          headers:
+            X-Should-Retry:
+              description: false; use streaming execute for long-running commands
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '500':
           description: Internal Server Error
           content:
@@ -256,6 +279,50 @@ components:
               type: string
             message:
               type: string
+    shared.ProblemDetails:
+      description: RFC 7807 problem details returned on V2 API errors.
+      type: object
+      properties:
+        detail:
+          type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
+        instance:
+          type: string
+        remedy:
+          description: Remedy is a LangSmith extension for user-recoverable errors.
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

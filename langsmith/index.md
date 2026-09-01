@@ -2,7 +2,7 @@
 
 > Instrument your LLM application, investigate traces, and monitor performance in production with LangSmith.
 
-LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics.
+LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics. Traces are the record of what your agents did in production. Use them to debug failures, monitor quality, and build the datasets you evaluate against.
 
 > [!NOTE]
 > LangSmith works with many frameworks and providers. Browse [available integrations](integrations.md) to connect your stack including OpenAI, Anthropic, CrewAI, Vercel AI SDK, Pydantic AI, and more.

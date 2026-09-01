@@ -196,6 +196,7 @@ components:
       type: string
       enum:
         - agent
+        - custom_app
         - dashboard
         - dataset
         - deployment

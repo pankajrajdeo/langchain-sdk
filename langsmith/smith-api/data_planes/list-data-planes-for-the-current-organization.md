@@ -226,7 +226,11 @@ components:
           type: string
         created_at:
           type: string
+        firewall:
+          $ref: '#/components/schemas/data_planes.DataPlaneFirewallSettings'
         id:
+          type: string
+        maintenance_window:
           type: string
         name:
           type: string
@@ -236,10 +240,21 @@ components:
           $ref: '#/components/schemas/data_planes.Status'
         status_updated_at:
           type: string
+        ttl:
+          $ref: '#/components/schemas/data_planes.DataPlaneTTLSettings'
         workspaces:
           type: array
           items:
             $ref: '#/components/schemas/data_planes.PublicDataPlaneWorkspace'
+    data_planes.DataPlaneFirewallSettings:
+      type: object
+      required:
+        - allowed_domains
+      properties:
+        allowed_domains:
+          items:
+            type: string
+          type: array
     data_planes.Status:
       type: string
       enum:
@@ -247,6 +262,7 @@ components:
         - provisioning
         - provisioning_failed
         - active
+        - updating
         - inactive
         - deprovisioning
         - deleted
@@ -256,10 +272,24 @@ components:
         - DataPlaneStatusProvisioning
         - DataPlaneStatusProvisioningFailed
         - DataPlaneStatusActive
+        - DataPlaneStatusUpdating
         - DataPlaneStatusInactive
         - DataPlaneStatusDeprovisioning
         - DataPlaneStatusDeleted
         - DataPlaneStatusRevoked
+    data_planes.DataPlaneTTLSettings:
+      type: object
+      required:
+        - enabled
+        - long_days
+        - short_days
+      properties:
+        enabled:
+          type: boolean
+        long_days:
+          type: integer
+        short_days:
+          type: integer
     data_planes.PublicDataPlaneWorkspace:
       type: object
       properties:

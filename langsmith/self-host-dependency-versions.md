@@ -9,15 +9,15 @@ This page lists the minimum supported versions for the databases, tools, and inf
 
 ## Datastores
 
-| Dependency                                             | Minimum version                                                                                           | Notes                                                                                                                                                                                                                       |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [PostgreSQL](self-host-external-postgres.md)   | 14                                                                                                        | Primary relational store for operational data. Required for both LangSmith and standalone Agent Server deployments. Used to install the `btree_gin`, `btree_gist`, `pgcrypto`, `citext`, `ltree`, and `pg_trgm` extensions. |
-| [Redis](self-host-external-redis.md)           | 5                                                                                                         | Used for queueing and caching. Standalone and Redis Cluster modes are both supported.                                                                                                                                       |
-| [Valkey](self-host-external-redis.md)          | 8                                                                                                         | Officially supported as a drop-in replacement for Redis. Standalone and Cluster modes are both supported.                                                                                                                   |
-| [ClickHouse](self-host-external-clickhouse.md) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse versions >= 24.2 require LangSmith v0.6 or later. Downgrades are not supported.                                                                                                      |
+| Dependency                                             | Minimum version                                                                                           | Notes                                                                                                                                                                                                                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [PostgreSQL](self-host-external-postgres.md)   | 14                                                                                                        | Primary relational store for operational data. Required for both LangSmith and standalone Agent Server deployments. Used to install the `btree_gin`, `btree_gist`, `pgcrypto`, `citext`, `ltree`, and `pg_trgm` extensions.                   |
+| [Redis](self-host-external-redis.md)           | 6.2                                                                                                       | Used for queueing and caching. Standalone and Redis Cluster modes are both supported. As of Agent Server 0.8.0, the Redis-backed run queue requires Redis 6.2 or later: it enqueues runs with the `ZADD ... LT` flag, which was added in 6.2. |
+| [Valkey](self-host-external-redis.md)          | 8                                                                                                         | Officially supported as a drop-in replacement for Redis. Standalone and Cluster modes are both supported.                                                                                                                                     |
+| [ClickHouse](self-host-external-clickhouse.md) | Version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater | Stores traces and feedback. ClickHouse versions >= 24.2 require LangSmith v0.6 or later. Downgrades are not supported.                                                                                                                        |
 
 > [!WARNING]
-> **Redis \< 5 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
+> **Redis \< 6.2 and PostgreSQL \< 14 are not supported.** A LangSmith installation pointed at an older Redis or PostgreSQL instance may fail to start or behave unpredictably. Upgrade your datastore before installing or upgrading LangSmith.
 
 ## Compute and orchestration
 
@@ -38,7 +38,7 @@ This page lists the minimum supported versions for the databases, tools, and inf
 ## Where these versions are enforced
 
 * PostgreSQL `>= 14`: refer to [Connect to an external PostgreSQL database](self-host-external-postgres.md#requirements).
-* Redis `>= 5` and Valkey `8`: refer to [Connect to an external Redis or Valkey database](self-host-external-redis.md#requirements).
+* Redis `>= 6.2` and Valkey `8`: refer to [Connect to an external Redis or Valkey database](self-host-external-redis.md#requirements).
 * ClickHouse: use the version specified in the [LangSmith Helm chart](https://github.com/langchain-ai/helm/releases) or greater: refer to [Connect to an external ClickHouse database](self-host-external-clickhouse.md#requirements).
 * Kubernetes cluster prerequisites: refer to [Self-host LangSmith on Kubernetes](kubernetes.md#prerequisites).
 

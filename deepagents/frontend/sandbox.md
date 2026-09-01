@@ -24,7 +24,7 @@ This setup has three parts:
    (`read_file`, `write_file`, `edit_file`, `delete`, `execute`) automatically
    from the sandbox
 
-2. **Custom API server** — A FastAPI app exposed via `langgraph.json`'s `http.app`
+2. **Custom API server**—A FastAPI app exposed via `langgraph.json`'s `http.app`
    field, providing file browsing endpoints the frontend can call
 
 3. **Three-panel frontend:** A file tree, code/diff viewer, and chat panel
@@ -399,7 +399,7 @@ async def read_file(
 > `get_or_create_sandbox_for_thread` function. This ensures they always resolve
 >
 > to the same sandbox for a given thread. The sandbox ID in thread metadata
-> is the single source of truth — no in-memory caches needed.
+> is the single source of truth—no in-memory caches needed.
 
 ### Configure `langgraph.json`
 
@@ -776,7 +776,7 @@ function DiffPanel({ original, current, fileName }) {
 ### Changed files summary
 
 Show a summary of all modified files with line-level addition/deletion counts.
-This gives users a quick overview of the agent's impact — similar to a `git
+This gives users a quick overview of the agent's impact—similar to a `git
 status`:
 
 ```tsx
@@ -827,7 +827,7 @@ Frontend-specific:
   tool messages and refresh immediately.
 
 * **Default to diff view for changed files**. When a user clicks a file that
-  was modified by the agent, show the diff first — that's what they care about.
+  was modified by the agent, show the diff first—that's what they care about.
 
 * **Show compact tool results for read-only operations**. Instead of dumping
   the full output of `read_file` in the chat, show a one-liner like
@@ -866,6 +866,23 @@ Other deep agent UI patterns: subagent streaming, todo lists, and custom state.
 
 #### [Application structure](../../langgraph/application-structure.md)
 Full `langgraph.json` reference, including custom `http.app` routes.
+
+## Related LangChain guides
+
+The sandbox IDE builds on core LangChain frontend patterns. These guides cover
+the same `useStream` primitives used in this page:
+
+#### [Tool calling](../../langchain/frontend/tool-calling.md)
+Render file and execution tool calls as purpose-built UI cards with type-safe results.
+
+#### [Headless tools](../../langchain/frontend/headless-tools.md)
+Run browser and device APIs on the client side—useful for embedding live preview or terminal output in the IDE panel.
+
+#### [Open-ended generative UI](../../langchain/frontend/open-ended-generative-ui.md)
+Render sandboxed app previews and MCP-generated interfaces at the open end of the generative UI spectrum.
+
+#### [Join & rejoin streams](../../langchain/frontend/join-rejoin.md)
+Reconnect to a running coding session after a page reload without losing the sandbox state.
 
 ***
 

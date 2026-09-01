@@ -218,7 +218,7 @@ export E2B_API_KEY="..."
 dcode --sandbox e2b
 ```
 
-If you pass a `--sandbox` name that isn't installed or declared, Deep Agents Code lists the available providers and explains how to install or configure the missing one.
+If you pass a `--sandbox` name that is not installed or declared, Deep Agents Code lists the available providers and explains how to install or configure the missing one.
 
 <details>
 <summary>Publishing a sandbox provider</summary>
@@ -265,7 +265,7 @@ If you omit the `metadata` property, a generic default (`/workspace`, no snapsho
 
 ### Config-declared providers
 
-For an in-house or local provider you don't want to package, declare it under `[sandboxes.providers]` in `~/.deepagents/config.toml`. This parallels [arbitrary model providers](config-file.md#arbitrary-providers) and uses the same `class_path` trust model.
+For an in-house or local provider you do not want to package, declare it under `[sandboxes.providers]` in `~/.deepagents/config.toml`. This parallels [arbitrary model providers](config-file.md#arbitrary-providers) and uses the same `class_path` trust model.
 
 ```toml
 [sandboxes]

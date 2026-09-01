@@ -4,6 +4,8 @@
 
 Administer your LangSmith organization: manage users and access control, organize workspaces and applications, and configure policies and compliance.
 
+Governance also extends to what agents do at runtime: [spend and data-protection policies](llm-gateway-spend-policies.md) on model calls, [sandboxed execution](sandboxes.md) for agent code, and [human approval](add-human-in-the-loop.md) before sensitive actions.
+
 ## Explore
 
 #### [Organization administration](administration-overview.md)

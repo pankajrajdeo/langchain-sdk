@@ -10,7 +10,7 @@ runtime-materialized children of `default_spend_cap` and
 active window.
 
 **Filters** (all optional):
-- `policy_type` — `spend_cap`, `default_spend_cap`, `guard`, `route_config`, `rate_limit`, or `default_rate_limit`
+- `policy_type` — `spend_cap`, `default_spend_cap`, `guard`, `route_config`, `model_fallback`, `rate_limit`, or `default_rate_limit`
 - `subject_matcher_key` + `subject_matcher_value` — narrow to
 policies whose subject_matchers contain `{key, value}`
 
@@ -198,7 +198,7 @@ paths:
         **Filters** (all optional):
 
         - `policy_type` — `spend_cap`, `default_spend_cap`, `guard`,
-        `route_config`, `rate_limit`, or `default_rate_limit`
+        `route_config`, `model_fallback`, `rate_limit`, or `default_rate_limit`
 
         - `subject_matcher_key` + `subject_matcher_value` — narrow to
 

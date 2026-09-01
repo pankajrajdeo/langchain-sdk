@@ -13,8 +13,8 @@ Custom AI integration platform for enterprise workflows.
 #### [Adeu](https://adeu.ai)
 Local, offline-capable Microsoft Word (.docx) redlining and parsing tools for LLM agents.
 
-#### [Actian VectorAI](https://docs.vectoraidb.actian.com)
-Portable, high-performance vector search for embedded, edge, and cloud AI applications.
+#### [Actian VectorAI DB](https://docs.vectoraidb.actian.com)
+Portable, high-performance vector database for embedded, edge, and cloud AI applications.
 
 #### [Aidress](https://aidress.ai)
 Discovery and trust registry tools for verifying counterpart AI agents before they transact.
@@ -33,6 +33,9 @@ Real-time, distributed NoSQL database built for speed and scale.
 
 #### [AG-UI Protocol](https://docs.ag-ui.com/quickstart/applications)
 Open event-based protocol for connecting LangGraph agents to any frontend.
+
+#### [Agent Action Capsule](https://github.com/action-state-group/capsule-emit/blob/main/docs/adapters/langchain.md)
+Signed, independently verifiable action records for agent tool calls, chained planned to confirmed.
 
 #### [Agentic SpendGuard](https://agenticspendguard.dev)
 Runtime budget gate that blocks LLM calls that would exceed spend limits.
@@ -73,6 +76,9 @@ Tamper-evident logging and audit trails for LangChain LLM, tool, and chain event
 #### [AgentSystems](agentsystems.md)
 Governance infrastructure for AI systems.
 
+#### [Agent Traffic Lab](https://github.com/wenhua6666668-oss/langchain-agenttrafficlab#automatic-task-time-routing-v03)
+Automatic task-time routing to executable MCP and provider capabilities, with failure redecision and outcome reporting.
+
 #### [AI Identity](https://ai-identity.co/docs)
 Per-agent identity, scoped API access, and tamper-evident audit logging for LangChain agents.
 
@@ -112,7 +118,7 @@ Unified interface for OpenAI, Anthropic, Google, and local models.
 #### [Apertis](https://docs.apertis.ai)
 OpenAI-compatible API providing access to multiple LLMs.
 
-#### [Apify](https://docs.apify.com/platform/integrations/langchain)
+#### [Apify](https://docs.apify.com/integrations/langchain)
 Web scraping and automation platform.
 
 #### [Apple Foundation Models](https://github.com/rajanshxrma/langchain-apple-foundation-models)
@@ -138,6 +144,12 @@ DataStax Astra DB vector database platform.
 
 #### [ATR Guardrail](https://github.com/Agent-Threat-Rule/agent-threat-rules/tree/main/integrations/langchain)
 Runtime detection of prompt injection, tool poisoning, and unsafe tool calls using Agent Threat Rules.
+
+#### [Asqav](https://asqav.com/docs)
+AI agent governance with audit trails, policy enforcement, and compliance.
+
+#### [Attenu Guard](https://attenu.io/docs/example-langgraph/)
+Per-agent tool-call and subagent permission enforcement with a hash-chained audit log.
 
 #### [Auxen](https://auxen.ai)
 Dedicated per-customer LLM endpoints with an OpenAI-compatible API.
@@ -168,6 +180,9 @@ Local prompt-injection and jailbreak detection for LLM apps and agents.
 
 #### [Bidda](https://bidda.com/developers)
 Source-verified regulatory and compliance intelligence for LangChain agents.
+
+#### [Blopus](https://blopus.ai/docs/)
+Web search and fetch API backed by its own crawler and index.
 
 #### [Blindfold](https://docs.blindfold.dev)
 PII detection and protection for AI applications, including chain and RAG pipelines.
@@ -274,6 +289,9 @@ Monitoring and analytics platform for applications.
 #### [Daytona](daytona.md)
 Secure and elastic infrastructure for running your AI-generated code.
 
+#### [DeepKeep](https://docs.deepkeep.ai)
+AI Firewall pre-moderation and post-moderation for LangChain agents.
+
 #### [DeepLake](https://docs.deeplake.ai/)
 Vector database for deep learning applications.
 
@@ -337,6 +355,9 @@ Cognitive memory infrastructure for AI agents: confidence scoring, contradiction
 #### [ERC20](https://github.com/Conrad-sudo/langchain-erc20)
 ERC20 token balances, allowances, transfers, approvals, and native wrap/unwrap, as execution plans an EOA can sign or a smart contract wallet can batch.
 
+#### [ERC-8004](https://github.com/Conrad-sudo/langchain-erc8004)
+Verify an ERC-8004 agent's on-chain identity against the registration file it publishes, read reputation feedback attributed to named reviewers, and prepare registry writes as execution plans.
+
 #### [Exa Search](exa_search.md)
 AI-powered search engine for developers.
 
@@ -358,8 +379,17 @@ Pre-flight spend authorization for LangChain agents.
 #### [FMP Data](https://github.com/MehdiZare/langchain-fmp-data)
 Financial market data and analytics API.
 
+#### [Football Charts](https://www.football-charts.com/developers)
+Football statistics, model probabilities, and Monte Carlo season projections for 90+ leagues.
+
 #### [Galaxia](https://smabbler.gitbook.io/smabbler/api-rag/smabblers-api-rag)
 Prompt-driven engineering assistant.
+
+#### [Gandr](https://gandr.ai/docs)
+Text to speech API: 23 languages, six voices, every render watermarked.
+
+#### [GateCore](https://gatecoreai.com/docs/)
+Governed marketplace tools for discovery, procurement, and signed gateway execution.
 
 #### [Gel](https://github.com/geldata/langchain-gel)
 Knowledge extraction and NLP platform.
@@ -403,6 +433,9 @@ Unified AI gateway for 22+ models with OpenAI-compatible API.
 #### [Groq](groq.md)
 Ultra-fast inference with specialized hardware.
 
+#### [Hacker News](https://github.com/urraf/langchain-hackernews#readme)
+Search stories, front page, and comment-thread retrievers for Hacker News.
+
 #### [Haldir](https://haldir.xyz/docs)
 Governance layer for AI agents with scoped sessions, encrypted secrets, hash-chained audit, and policy enforcement.
 
@@ -436,11 +469,17 @@ Remote MCP server that reduces agent token usage via a three-stage SOP workflow.
 #### [Hugging Face](huggingface.md)
 Open platform for ML models and datasets.
 
+#### [Hydrafetch](https://docs.hydrafetch.com)
+Web data API tools, loader, and search retriever for clean LLM-ready Markdown and structured data.
+
 #### [HyperBrowser](https://docs.hyperbrowser.ai/)
 Web automation and scraping platform.
 
 #### [IBM](ibm.md)
 IBM Watson AI and enterprise solutions.
+
+#### [ICTFax](https://www.ictinnovations.com/)
+LangChain tools to send and track faxes through an ICTFax or ICTCore server.
 
 #### [iLoveVideoEditor](https://ilovevideoeditor.com/docs/api-guide)
 Cloud video rendering platform: render MP4 videos from VideoJSON specs.
@@ -465,6 +504,9 @@ AI agent firewall — policy enforcement, PII redaction, human approval, and aud
 
 #### [Isaacus](https://docs.isaacus.com/)
 Legal AI models, apps, and data.
+
+#### [ISNAD](https://github.com/alizahidraja/isnad)
+Claim-level provenance and trust grading middleware for LangChain agents.
 
 #### [Islo](https://docs.islo.dev)
 Long-running Linux VM sandboxes with pause, resume, and snapshots.
@@ -556,6 +598,9 @@ Sub-second RAG retrieval regression testing and stability monitoring.
 #### [LocalAI](localai.md)
 Self-hosted OpenAI-compatible API server.
 
+#### [Lyrenth](https://lyrenth.com/docs/integrations)
+Independent web index that returns cleaned Markdown with canonical source URLs.
+
 #### [m3-memory](https://github.com/skynetcmd/m3-memory/blob/main/docs/integrations/LANGCHAIN.md)
 Local-first, MCP-native memory layer for LangChain and LangGraph.
 
@@ -643,6 +688,9 @@ Search and index API for giving agents reliable context.
 #### [NetMind](https://github.com/protagolabs/langchain-netmind)
 Decentralized AI computing network.
 
+#### [NeuralTrust](https://github.com/NeuralTrust/langchain-neuraltrust)
+TrustGuard middleware that allows, blocks, reports, or transforms agent input, model output, and tool traffic.
+
 #### [Neuralwatt](https://neuralwatt.com)
 Energy-aware AI inference with per-call energy and carbon metrics.
 
@@ -682,6 +730,9 @@ Web search engine for AI agents with semantic search, domain filtering, and sub-
 #### [Ollama](ollama.md)
 Run Large Language Models (LLMs) locally.
 
+#### [OMEM](https://infrastructure.omem-cloud.com/docs)
+Belief-tracking BaseStore for LangGraph with superseding writes and provenance.
+
 #### [OpenMemory](https://github.com/nullure/langchain-openmemory)
 Local-first persistent temporal memory retriever for LangChain agents.
 
@@ -694,11 +745,17 @@ Real-time governance for LangGraph and Deep Agents: policies, guardrails, HITL, 
 #### [OpenDataLoader PDF](https://github.com/opendataloader-project/langchain-opendataloader-pdf)
 Safe, Open, High-Performance — PDF for AI
 
+#### [OpenDMA](https://github.com/OpenDMA/langchain-opendma/tree/main/docs)
+ECM toolkits, loaders, and retrievers for Alfresco, Documentum, FileNet, and OnBase.
+
 #### [OpenGradient](https://docs.opengradient.ai/)
 AI model training and fine-tuning platform.
 
 #### [OpenRouter](openrouter.md)
 Unified API for models from multiple providers.
+
+#### [OpenSandbox](https://github.com/AyushSonuu/langchain-sandbox-opensandbox#readme)
+OpenSandbox backend for Deep Agents: run agent code and file operations in an isolated sandbox.
 
 #### [Opensolr](https://opensolr.com/langchain)
 Managed Apache Solr with server-side embeddings and hybrid BM25 + kNN search.
@@ -742,6 +799,9 @@ Authorization and access control platform.
 #### [Perplexity](perplexity.md)
 AI-powered search and reasoning engine.
 
+#### [PIIGhost](https://athroniaeth.github.io/piighost/getting-started/langchain/)
+Reversible PII anonymization middleware for LangChain agents.
+
 #### [PQS](https://pqs.onchainintel.net)
 Pre-inference prompt quality scoring via a LangChain callback handler.
 
@@ -759,6 +819,9 @@ AI-powered content moderation platform.
 
 #### [Plasmate](https://docs.plasmate.app/integration-langchain)
 Agent-native headless browser with Set of Mark (SOM) structured UI extraction.
+
+#### [Play Store](https://github.com/urraf/langchain-playstore#readme)
+Google Play Store app details and user reviews retrievers for LangChain.
 
 #### [PolarDB PG](https://github.com/polardb/langchain-polardb-pg)
 PolarDB for PostgreSQL provides in-database embeddings, a LangChain vector store, and SQL-based registration and invocation of external AI models.
@@ -805,11 +868,17 @@ PDF processing optimized for LLM ingestion.
 #### [Qdrant](qdrant.md)
 Vector similarity search engine.
 
+#### [QuanticData](https://quanticdata.io/docs/)
+Web scraping, SERP search, crawling, and ready-made collectors through residential proxies.
+
 #### [Querit](https://querit.com/docs)
 Real-time web search API for AI applications.
 
 #### [Ray Serve](ray_serve.md)
 Scalable model serving framework.
+
+#### [Reddit](https://github.com/urraf/langchain-reddit#readme)
+Search posts, subreddit feeds, and comment-tree retrievers for Reddit.
 
 #### [Redis](redis.md)
 In-memory data structure store and cache.
@@ -820,17 +889,26 @@ Identity and agentic-attack-surface threat intelligence.
 #### [Remembrall](remembrall.md)
 AI memory and context management.
 
+#### [RE-call](https://giulioder.github.io/RE-call/integrations.html)
+Trust-evaluated retrieval from PostgreSQL with pgvector, verdict metadata, and explicit abstention.
+
 #### [Replicate](replicate.md)
 Cloud platform for running ML models.
 
 #### [ReplyLayer](https://replylayer.ai/docs/guides/langchain)
 Governed email platform for AI agents.
 
+#### [Reserp](https://reserp.ai/docs)
+Google Search results as a LangChain tool via a single API request.
+
 #### [Respan](https://www.respan.ai/docs)
 Observability, tracing, evaluation, and gateway routing for LangChain applications.
 
 #### [Robocorp](https://github.com/robocorp/robocorp)
 Python automation and RPA platform.
+
+#### [Rostam](https://github.com/rostamlabs/rostam/tree/main/clients/langchain-rostam)
+Self-hosted vector database and key-value store in a single Go binary.
 
 #### [RustChain](https://github.com/Scottcjn/langchain-rustchain)
 Read-only tools for querying public RustChain network data.
@@ -846,6 +924,9 @@ GPU cloud platform for AI workloads.
 
 #### [Sail](https://docs.lakesail.com/sail/main/guide/integrations/langchain/)
 Rust-based drop-in Spark replacement with Spark Connect and a Sail SQL toolkit for LangChain agents.
+
+#### [SafePrompt](https://docs.safeprompt.dev/langchain)
+Prompt-injection detection as a LangChain callback handler.
 
 #### [ScraperAPI](https://docs.scraperapi.com/)
 Web scraping API for AI agents and data collection.
@@ -877,6 +958,9 @@ Web scraping and search API with headless browsers, proxies, and AI extraction.
 #### [SearchApi](https://www.searchapi.io/docs/google)
 Unified search API across Google, Bing, Baidu, YouTube, and more.
 
+#### [seekrit](https://seekrit.dev/docs)
+Zero-knowledge secrets manager. Scopes which credentials a model call or a given tool call may use.
+
 #### [SerpApi](https://serpapi.github.io/serpapi-search-tools-python/docs/sdk-examples/langchain.html)
 Structured search tools for web, news, maps, images, shopping, video, and travel.
 
@@ -906,6 +990,9 @@ Cryptographically signed AI Decision Receipts for agent actions.
 
 #### [Signet](https://github.com/Prismer-AI/signet/tree/main/examples/langchain-compliance)
 Ed25519-signed receipts for LangChain tool lifecycle events with a local hash-chained audit log.
+
+#### [Simplepages](https://simplepages.ai/mcp)
+MCP-backed tools to create, edit, and measure draft landing pages and sites.
 
 #### [SingleStore](https://docs.singlestore.com/managed-service/en/developer-resources/functional-extensions/working-with-vector-data.html)
 Distributed database with vector capabilities.
@@ -940,6 +1027,9 @@ Authorization system for fine-grained permissions filtering in RAG applications.
 #### [Spidra](https://docs.spidra.io)
 AI-powered web scraping platform with real browsers, CAPTCHA solving, and structured data extraction.
 
+#### [Stack Overflow](https://github.com/urraf/langchain-stackoverflow#readme)
+Search questions and retrieve answers from the Stack Exchange network.
+
 #### [Strale](https://strale.dev/docs)
 Capability marketplace tools for business data, compliance, and document extraction.
 
@@ -973,13 +1063,16 @@ Persistent long-term memory layer for AI agents.
 #### [Synmerco](https://synmerco.com)
 Trust infrastructure for autonomous agent transactions.
 
+#### [Synthorai](https://synthorai.io/docs/)
+OpenAI-compatible LLM gateway routing to multiple model providers.
+
 #### [Tableau](tableau.md)
 Data visualization and business intelligence.
 
 #### [Taiga](https://github.com/Shikenso-Analytics/langchain-taiga)
 Project management platform for agile teams.
 
-#### [TalorData](https://www.talordata.com/docs)
+#### [TalorData](https://docs.talordata.com/serp-api/integration/sdk-integration/how-to-set-up-talordata-with-langchain)
 Unified SERP API across 33 search engines with geo-targeting.
 
 #### [Tavily](tavily.md)
@@ -990,6 +1083,9 @@ Deterministic governance middleware for LangChain agents with policy enforcement
 
 #### [TempGuru](https://tempguru.co/ai-agents)
 W-2 event staffing for the US and Canada: coverage, rates, lead times, and compliance lookups.
+
+#### [Tendem](https://github.com/Toloka/tendem-mcp/tree/main/integrations/langchain-tendem#readme)
+Price-capped human-in-the-loop tools that delegate agent work to vetted experts.
 
 #### [TensorLake](tensorlake.md)
 Data infrastructure for ML applications.
@@ -1030,6 +1126,9 @@ Fast inference for open-source models.
 #### [TokenMix](https://tokenmix.ai/docs)
 OpenAI-compatible API gateway for DeepSeek, Qwen, Kimi, GLM, MiniMax, and more.
 
+#### [TokPortal](https://github.com/tokportal/langchain-tokportal)
+Managed TikTok, Instagram, and YouTube accounts as LangChain tools and MCP.
+
 #### [Toolbox LangChain](toolbox.md)
 Extended toolkit for LangChain applications.
 
@@ -1041,6 +1140,12 @@ Evaluation framework for LLM applications.
 
 #### [TrustedRouter](https://trustedrouter.com/)
 Privacy-preserving OpenAI-compatible LLM router.
+
+#### [Truth Bear](https://github.com/CHANGCHINFU/langchain-truthbear)
+LangChain tools for Truth Bear GAUGE official-source signal data.
+
+#### [Tuning Engines](https://www.tuningengines.com/)
+Governed OpenAI-compatible endpoint for model access, policy checks, and usage accounting.
 
 #### [TypeDB](https://typedb.com/docs)
 Strongly-typed database for complex, relational data and knowledge graph applications.
@@ -1105,8 +1210,17 @@ Text-embedding API (Forge) with turbo, pro, and ultra model tiers.
 #### [VoyageAI](voyageai.md)
 Embedding models and semantic search.
 
+#### [WaveSpeed](https://github.com/WaveSpeedAI/langchain-wavespeed)
+Image, video, and catalog model generation tools for the WaveSpeed AI marketplace.
+
 #### [Weaviate](weaviate.md)
 Open-source vector database with GraphQL.
+
+#### [Web Metadata Extractor](https://github.com/JosejuX/rapidapi-metadata-extractor/tree/main/langchain-webmetadata-extractor)
+URL metadata, Markdown, contact discovery, and SEO audit tools for LangChain agents.
+
+#### [Webz](https://docs.webz.io/docs/webz/news-search-api-mcp)
+Global news search with semantic ranking and rich filters for LangChain agents.
 
 #### [Work Ledger](https://github.com/metawake/work-ledger/blob/main/docs/integrations.md)
 Record, diff, and regression-test LangChain runs with a callback handler.
@@ -1120,17 +1234,29 @@ xAI's Grok models for conversational AI.
 #### [x402](https://www.agentrails.io/docs)
 HTTP-native USDC payments so agents can pay for APIs per request.
 
+#### [xaidr](https://github.com/delphisecurity/xaidr#langchain-middleware)
+In-process runtime security sensor with LangChain middleware for input, tool-call, and output boundaries.
+
 #### [Xpoz](https://www.xpoz.ai/docs)
 Social media data platform with billions of indexed posts and users.
 
+#### [XNS](https://docs.xns.tech)
+S3-compatible object storage loaders and byte store with zero egress.
+
 #### [YDB](https://ydb.tech/)
 Yandex Database distributed storage system.
+
+#### [YantrikDB](https://github.com/yantrikos/langchain-yantrikdb)
+Cognitive memory as a VectorStore and ChatMessageHistory with decay, consolidation, and contradiction checks.
 
 #### [YeagerAI](yeagerai.md)
 AI agent framework and development platform.
 
 #### [You.com](https://you.com/docs/integrations/langchain)
 Real-time web search and content extraction APIs designed for LLM applications.
+
+#### [YouTube](https://github.com/urraf/langchain-youtube#readme)
+Search, playlist, transcript, and video metadata retrievers for LangChain.
 
 #### [Yutori](https://docs.yutori.com)
 Browser-control LLMs and web automation tools for LangChain agents.

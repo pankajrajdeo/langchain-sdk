@@ -208,6 +208,13 @@ components:
         - fs_capacity_bytes
         - name
       properties:
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         docker_image:
           type: string
         fs_capacity_bytes:
@@ -231,6 +238,11 @@ components:
         created_at:
           type: string
         created_by:
+          type: string
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary.
           type: string
         docker_image:
           type: string

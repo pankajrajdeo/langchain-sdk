@@ -47,9 +47,9 @@ You can create additional workspaces in the data plane. Select the target data p
 > Pick the correct data plane carefully when you create a workspace. A workspace cannot be moved to another data plane after creation.
 
 ### (Optional) Migrate existing data
-If you are moving from an existing LangSmith Cloud or [self-hosted](self-hosted.md) instance, users, roles, datasets, prompts, experiments, annotation queue configuration, automation rules, and dashboards can be copied over. Traces cannot be migrated today.
+If you are moving from an existing LangSmith Cloud or [self-hosted](self-hosted.md) instance, users, roles, datasets, prompts, experiments, annotation queue configuration, automation rules, dashboards, and Fleet resources can be copied over. Traces cannot be migrated today.
 
-To plan a migration, contact the LangChain team.
+For more information, see [Migrate to BYOC](byoc-migration.md).
 
 ## Next steps
 

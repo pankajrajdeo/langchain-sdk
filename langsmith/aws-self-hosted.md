@@ -60,7 +60,7 @@ We recommend leveraging AWS's managed services to provide a scalable, secure, an
 
 *  **Storage & databases:**
   * [Amazon RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql/) or [Aurora](https://aws.amazon.com/rds/aurora/): metadata, projects, users, and short-term and long-term memory for deployed agents. LangSmith supports PostgreSQL version 14 or higher.
-  * [Amazon ElastiCache](https://aws.amazon.com/elasticache/) (Redis or Valkey): caching and job queues. ElastiCache can be in single-instance or cluster mode. LangSmith requires Redis OSS version 5 or higher, or Valkey 8.
+  * [Amazon ElastiCache](https://aws.amazon.com/elasticache/) (Redis or Valkey): caching and job queues. ElastiCache can be in single-instance or cluster mode. LangSmith requires Redis OSS version 6.2 or higher, or Valkey 8.
   * ClickHouse + [Amazon EBS](https://aws.amazon.com/ebs/): analytics and trace storage.
     * We recommend using an [externally managed ClickHouse solution](self-host-external-clickhouse.md) unless security or compliance reasons
       prevent you from doing so.

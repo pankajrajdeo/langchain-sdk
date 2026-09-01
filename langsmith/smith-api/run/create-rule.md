@@ -304,6 +304,11 @@ components:
               type: array
             - type: 'null'
           title: Code Evaluators
+        trajectory_evaluators:
+          items:
+            $ref: '#/components/schemas/EvaluatorTopLevel'
+          type: array
+          title: Trajectory Evaluators
         evaluator_id:
           anyOf:
             - type: string
@@ -470,6 +475,11 @@ components:
               type: array
             - type: 'null'
           title: Code Evaluators
+        trajectory_evaluators:
+          items:
+            $ref: '#/components/schemas/EvaluatorTopLevel'
+          type: array
+          title: Trajectory Evaluators
         alerts:
           anyOf:
             - items:

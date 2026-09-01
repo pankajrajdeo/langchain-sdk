@@ -15,13 +15,13 @@ This page helps you get started with AI/ML API text completion models.
 
 | Class        | Package             | Local | Serializable | JS support |                                              Downloads                                             |                                             Version                                             |
 | :----------- | :------------------ | :---: | :----------: | :--------: | :------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------: |
-| `AIMLAPILLM` | `langchain-aimlapi` |   ❌   |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aimlapi?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aimlapi?style=flat-square\&label=%20) |
+| `AimlapiLLM` | `langchain-aimlapi` |   ❌   |     beta     |      ❌     | ![PyPI - Downloads](https://img.shields.io/pypi/dm/langchain-aimlapi?style=flat-square\&label=%20) | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aimlapi?style=flat-square\&label=%20) |
 
 ### Model features
 
 | [Tool calling](../../langchain/tools.md) | [Structured output](../../langchain/structured-output.md) | [Image input](../../langchain/messages.md#multimodal) | Audio input | Video input | [Token-level streaming](../../langchain/streaming.md) | Native async | [Token usage](../../langchain/models.md#token-usage) | [Logprobs](../../langchain/models.md#log-probabilities) |
 | :-----------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------: | :---------: | :---------: | :-------------------------------------------------------: | :----------: | :-----------------------------------------------------: | :--------------------------------------------------------: |
-|                      ✅                      |                               ✅                              |                             ✅                            |      ✅      |      ✅      |                             ✅                             |       ✅      |                            ✅                            |                              ✅                             |
+|                      ❌                      |                               ❌                              |                             ❌                            |      ❌      |      ❌      |                             ❌                             |       ✅      |                            ❌                            |                              ❌                             |
 
 ## Setup
 
@@ -59,12 +59,12 @@ pip install -qU langchain-aimlapi
 Now we can instantiate our model object and generate text completions:
 
 ```python
-from langchain_aimlapi import AIMLAPILLM
+from langchain_aimlapi import AimlapiLLM
 
-llm = AIMLAPILLM(
-    model="gpt-3.5-turbo-instruct",
+llm = AimlapiLLM(
+    model="openai/gpt-5-5",
     temperature=0.5,
-    max_tokens=256,
+    max_tokens=1024,
 )
 ```
 
@@ -77,20 +77,6 @@ print(response)
 
 ```text
 Bubble sort is a simple sorting algorithm that repeatedly steps through a list, compares adjacent items, and swaps them when they are out of order. The process repeats until the entire list is sorted. While easy to understand and implement, bubble sort is inefficient on large datasets because it has quadratic time complexity.
-```
-
-## Streaming invocation
-
-You can also stream responses token-by-token:
-
-```python
-llm = AIMLAPILLM(
-    model="gpt-3.5-turbo-instruct",
-)
-
-stream = llm.stream_events("List top 5 programming languages in 2025 with reasons.", version="v3")
-for token in stream.text:
-    print(token, end="", flush=True)
 ```
 
 ***

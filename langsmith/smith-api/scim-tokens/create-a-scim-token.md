@@ -219,6 +219,8 @@ components:
       properties:
         created_at:
           type: string
+        created_by:
+          type: string
         description:
           type: string
         id:

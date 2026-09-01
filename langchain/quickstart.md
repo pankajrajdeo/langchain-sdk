@@ -12,20 +12,28 @@ This quickstart shows you how to create a fully functional AI agent in just a fe
 
 ## Install dependencies
 
+> [!NOTE]
+> **Python 3.11+**
+>
+> To run the code in this Quickstart, use Python 3.11 or higher.
+
 Install the following packages to follow along:
 
 ```bash
+uv python pin 3.11
 uv init
 uv add langchain
 uv sync
 ```
 
 ```bash
+# Install Python 3.11+ separately if needed.
 pip install -U langchain
 ```
 
 ```bash
-python3 -m venv .venv
+# Install Python 3.11+ separately if needed.
+python3.11 -m venv .venv
 source .venv/bin/activate
 # Windows: .venv\Scripts\activate
 pip install -U langchain
@@ -35,11 +43,15 @@ pip install -U langchain
 
 Get an API key from [any supported model provider](../integrations/providers/overview.md) (for example, Google Gemini or OpenAI).
 
-Set the API keys, for example:
+Set the API keys in your shell or in a `.env` file, for example:
 
 #### OpenAI
 ```bash
 export OPENAI_API_KEY="your-api-key"
+```
+
+```bash
+OPENAI_API_KEY=your-api-key
 ```
 
 #### Google Gemini
@@ -47,9 +59,17 @@ export OPENAI_API_KEY="your-api-key"
 export GOOGLE_API_KEY="your-api-key"
 ```
 
+```bash
+GOOGLE_API_KEY=your-api-key
+```
+
 #### Claude (Anthropic)
 ```bash
 export ANTHROPIC_API_KEY="your-api-key"
+```
+
+```bash
+ANTHROPIC_API_KEY=your-api-key
 ```
 
 #### OpenRouter
@@ -57,14 +77,26 @@ export ANTHROPIC_API_KEY="your-api-key"
 export OPENROUTER_API_KEY="your-api-key"
 ```
 
+```bash
+OPENROUTER_API_KEY=your-api-key
+```
+
 #### Fireworks
 ```bash
 export FIREWORKS_API_KEY="your-api-key"
 ```
 
+```bash
+FIREWORKS_API_KEY=your-api-key
+```
+
 #### Baseten
 ```bash
 export BASETEN_API_KEY="your-api-key"
+```
+
+```bash
+BASETEN_API_KEY=your-api-key
 ```
 
 #### Ollama
@@ -74,11 +106,23 @@ export BASETEN_API_KEY="your-api-key"
 export OLLAMA_API_KEY="your-api-key"
 ```
 
+```bash
+# Local: Ollama must be running (https://ollama.com)
+# Cloud: Set your Ollama API key for hosted inference
+OLLAMA_API_KEY=your-api-key
+```
+
 #### Azure
 ```bash
 export AZURE_OPENAI_API_KEY="your-api-key"
 export AZURE_OPENAI_ENDPOINT="https://your-resource.openai.azure.com"
 export AZURE_OPENAI_DEPLOYMENT_NAME="your-deployment"
+```
+
+```bash
+AZURE_OPENAI_API_KEY=your-api-key
+AZURE_OPENAI_ENDPOINT=https://your-resource.openai.azure.com
+AZURE_OPENAI_DEPLOYMENT_NAME=your-deployment
 ```
 
 #### AWS Bedrock
@@ -88,13 +132,25 @@ export AWS_SECRET_ACCESS_KEY="your-secret-key"
 export AWS_REGION="us-east-1"
 ```
 
+```bash
+AWS_ACCESS_KEY_ID=your-access-key
+AWS_SECRET_ACCESS_KEY=your-secret-key
+AWS_REGION=us-east-1
+```
+
 #### HuggingFace
 ```bash
 export HUGGINGFACEHUB_API_TOKEN="hf_..."
 ```
 
+```bash
+HUGGINGFACEHUB_API_TOKEN=hf_...
+```
+
 #### Other
 See the full list of supported [chat model integrations](../integrations/chat.md).
+
+To load a `.env` file, use [`python-dotenv`](https://pypi.org/project/python-dotenv/) (`load_dotenv()`).
 
 > [!TIP]
 > **Using LangSmith Gateway**
@@ -523,9 +579,7 @@ pip install -U deepagents
 ```
 
 > [!WARNING]
-> Since the code invokes the model with the entire text from The Great Gatsby, it uses a large amount of tokens.
->
-> You can view example output in the next step.
+> This example sends the entire text of The Great Gatsby to the model and may take a minute or two to respond. You can view example output in the next step.
 
 Let's try both:
 
@@ -560,18 +614,23 @@ Do your best on (1) and (2). If at any point you realize you cannot **verify** a
 your available tools and reasoning, do not fabricate numbers: use `null` for that field and spell out
 the limitation in `how_you_computed_counts`. If you encounter any errors please report what the error was and what the error message was."""
 
+print("Running create_agent...", flush=True)
 agent_result = agent.invoke(
     {"messages": [{"role": "user", "content": content}]},
     config={"configurable": {"thread_id": "great-gatsby-lc"}},
 )
+print("Running create_deep_agent...", flush=True)
 deep_agent_result = deep_agent.invoke(
     {"messages": [{"role": "user", "content": content}]},
     config={"configurable": {"thread_id": "great-gatsby-da"}},
 )
+print("\ncreate_agent:")
 print(agent_result["messages"][-1].content_blocks)
-print("\n")
+print("\ncreate_deep_agent:")
 print(deep_agent_result["messages"][-1].content_blocks)
 ```
+
+The following expander has everything together in a runnable script:
 
 **Full example code**
 ```python
@@ -645,16 +704,19 @@ Do your best on (1) and (2). If at any point you realize you cannot **verify** a
 your available tools and reasoning, do not fabricate numbers: use `null` for that field and spell out
 the limitation in `how_you_computed_counts`. If you encounter any errors please report what the error was and what the error message was."""
 
+print("Running create_agent...", flush=True)
 agent_result = agent.invoke(
     {"messages": [{"role": "user", "content": content}]},
     config={"configurable": {"thread_id": "great-gatsby-lc"}},
 )
+print("Running create_deep_agent...", flush=True)
 deep_agent_result = deep_agent.invoke(
     {"messages": [{"role": "user", "content": content}]},
     config={"configurable": {"thread_id": "great-gatsby-da"}},
 )
+print("\ncreate_agent:")
 print(agent_result["messages"][-1].content_blocks)
-print("\n")
+print("\ncreate_deep_agent:")
 print(deep_agent_result["messages"][-1].content_blocks)
 ```
 

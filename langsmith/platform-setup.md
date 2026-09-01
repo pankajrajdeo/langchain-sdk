@@ -4,18 +4,19 @@
 
 # Overview
 
-Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers Cloud, Bring Your Own Cloud (BYOC), and Self-hosted options.
+Set up **LangSmith** for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). LangSmith offers Cloud, Bring Your Own Cloud (BYOC), and Self-hosted options. Choose the option that matches where your data has to live and who runs the infrastructure.
 
-If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with Cloud, BYOC, or Self-hosted.
+> [!NOTE]
+> If you also want to deploy agents in production, you can use [**LangSmith Deployment**](deployment.md) with Cloud, BYOC, or Self-hosted.
 
 #### [Cloud](cloud.md)
 Fully managed observability, evaluation, and prompt engineering.
 
 #### [BYOC](byoc.md)
-**(Enterprise)** Full control over your data, while LangChain manages the infrastructure.
+Full control over your data, while LangChain manages the infrastructure.
 
 #### [Self-hosted](self-hosted.md)
-**(Enterprise)** Full control with observability, evaluation, and prompt engineering in your infrastructure.
+Full control with observability, evaluation, and prompt engineering in your infrastructure.
 
 > [!NOTE]
 > Self-hosted and BYOC are available on the [Enterprise plan](pricing-plans.md). [Get a demo](https://www.langchain.com/contact-sales) to learn more.

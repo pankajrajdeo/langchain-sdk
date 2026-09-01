@@ -20,7 +20,7 @@ Self-hosted LangSmith stores platform data in your environment. Unless you are r
 Billing telemetry is **required** for self-hosted LangSmith instances that are not running in offline mode. This includes license verification and subscription/usage reporting.
 
 > [!NOTE]
-> Billing telemetry **cannot be disabled**. If you need to run without any egress, contact your account team about an offline (air-gapped) license.
+> Billing telemetry **cannot be disabled**. If you need to run without any egress, [contact our sales team](https://www.langchain.com/contact-sales) about an offline (air-gapped) license.
 
 ### What it does
 
@@ -485,7 +485,7 @@ For the complete data flow and model-provider commitments, see [Engine on Self-h
 
 ## Our commitment
 
-The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](engine-self-hosted.md). If you have any concerns about the data being sent, disable optional telemetry or contact your account team.
+The following commitments apply to the billing, operational, and usage telemetry described on this page. LangChain will not store sensitive information in that telemetry or share it with a third party. Log messages are filtered to only include error severity levels, and we do not capture log messages that could contain sensitive application data. Engine's use of LangSmith Intelligence is a separate data flow described in [Engine on Self-hosted](engine-self-hosted.md). If you have any concerns about the data being sent, disable optional telemetry or [contact our sales team](https://www.langchain.com/contact-sales).
 
 ***
 

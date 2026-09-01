@@ -3,7 +3,7 @@
 > How LangSmith Engine runs in a self-hosted deployment, what it depends on outside your environment, and how it handles your data.
 
 > [!NOTE]
-> Self-hosted Engine requires LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. It is not available on earlier chart versions. [Contact your account team](https://www.langchain.com/contact-sales) to have the entitlement added to your order.
+> Self-hosted Engine requires LangSmith Helm chart `0.16.0` or later and a license that includes the Engine entitlement. It is not available on earlier chart versions. [Contact our sales team](https://www.langchain.com/contact-sales) to have the entitlement added to your order.
 
 LangSmith Engine is an agent within LangSmith that monitors your production traces, clusters them into issues, diagnoses each issue against your source code, proposes a fix as a PR, and identifies ground truth evals to add to your datasets. For a product overview, see [Engine](engine-overview.md).
 
@@ -26,7 +26,7 @@ Engine is available where LSI is available:
 | AWS   | US     | Available |
 | GCP   | US     | Available |
 
-For availability in other regions, contact your account team.
+For availability in other regions, [contact our sales team](https://www.langchain.com/contact-sales).
 
 ## How it works
 

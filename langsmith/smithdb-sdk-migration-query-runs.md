@@ -510,6 +510,39 @@ Pass SCREAMING\_SNAKE\_CASE strings in the `selects` JSON array (eg. `"ID"`, `"N
 | *(not available)*          | `share_url`                    | New: public share URL (only set when the run has been shared)                                                          |
 | *(not available)*          | `thread_evaluation_time`       | New                                                                                                                    |
 
+#### Rate limiting
+
+The SmithDB-backed method has a dedicated, higher rate limit than the method it replaces. Limits apply in Cloud, per API key.
+
+#### Python
+|       | Before (`client.list_runs()`) | After (`client.runs.query()`) |
+| ----- | ----------------------------- | ----------------------------- |
+| Limit | 15 requests per 10 seconds    | 300 requests per 10 seconds   |
+
+#### TypeScript
+|       | Before (`client.listRuns()`) | After (`client.runs.query()`) |
+| ----- | ---------------------------- | ----------------------------- |
+| Limit | 15 requests per 10 seconds   | 300 requests per 10 seconds   |
+
+#### Java
+|       | Before (`client.runs().query()`) | After (`client.runs().queryV2()`) |
+| ----- | -------------------------------- | --------------------------------- |
+| Limit | 15 requests per 10 seconds       | 300 requests per 10 seconds       |
+
+#### Go
+|       | Before (`client.Runs.Query()`) | After (`client.Runs.QueryV2()`) |
+| ----- | ------------------------------ | ------------------------------- |
+| Limit | 15 requests per 10 seconds     | 300 requests per 10 seconds     |
+
+#### cURL
+|       | Before (`POST /api/v1/runs/query`) | After (`POST /api/v2/runs/query`) |
+| ----- | ---------------------------------- | --------------------------------- |
+| Limit | 15 requests per 10 seconds         | 300 requests per 10 seconds       |
+
+The deprecated method is also subject to per-tenant limits that vary by query shape, described in [Query traces using the SDK](export-traces.md#rate-limits). The SmithDB-backed method is not subject to those per-tenant limits.
+
+Requests that exceed a limit return `429 Too Many Requests`. For general rate limit information, see [Usage and billing](usage-and-billing.md#rate-limits).
+
 ### Examples
 
 #### List all runs in a project

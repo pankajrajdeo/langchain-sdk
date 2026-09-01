@@ -754,6 +754,8 @@ components:
         type:
           anyOf:
             - type: string
+              const: sum
+            - type: string
               const: max
             - type: string
               const: min

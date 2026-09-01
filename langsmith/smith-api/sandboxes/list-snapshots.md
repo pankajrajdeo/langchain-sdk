@@ -1,6 +1,8 @@
 # List snapshots
 
 > List sandbox snapshots for the authenticated tenant, with optional filtering, sorting, and pagination.
+Page with page_size and cursor: replay the response's next_cursor until it comes back null, which is the only signal that no pages remain.
+Cursors are opaque and only valid on this endpoint; do not parse or construct one.
 
 ## OpenAPI
 
@@ -165,15 +167,34 @@ paths:
       description: >-
         List sandbox snapshots for the authenticated tenant, with optional
         filtering, sorting, and pagination.
+
+        Page with page_size and cursor: replay the response's next_cursor until
+        it comes back null, which is the only signal that no pages remain.
+
+        Cursors are opaque and only valid on this endpoint; do not parse or
+        construct one.
       parameters:
-        - description: Maximum number of results
+        - description: Number of results per page
+          name: page_size
+          in: query
+          schema:
+            type: integer
+            default: 20
+            title: Page Size
+        - description: Opaque pagination cursor from a prior response's next_cursor
+          name: cursor
+          in: query
+          schema:
+            type: string
+            title: Cursor
+        - description: 'Deprecated: use page_size. Maximum number of results'
           name: limit
           in: query
           schema:
             type: integer
             default: 50
             title: Limit
-        - description: Pagination offset
+        - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
           in: query
           schema:
@@ -218,6 +239,13 @@ paths:
             default: created_at
             title: Sort By
         - description: Sort direction (asc, desc)
+          name: sort_order
+          in: query
+          schema:
+            type: string
+            default: desc
+            title: Sort Order
+        - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
@@ -232,13 +260,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/sandboxes.SnapshotListResponse'
         '400':
-          description: Bad Request
+          description: >-
+            invalid page_size, cursor, or sort_order, or a deprecated parameter
+            combined with its replacement
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
         '403':
           description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '422':
+          description: invalid limit or offset
           content:
             application/json:
               schema:
@@ -258,9 +294,27 @@ components:
     sandboxes.SnapshotListResponse:
       type: object
       properties:
+        items:
+          description: This page of snapshots.
+          type: array
+          items:
+            $ref: '#/components/schemas/sandboxes.SnapshotResponse'
+        next_cursor:
+          description: >-
+            Cursor for the next page, or null on the last page. A non-null value
+            is
+
+            the only signal that more pages exist. Treat it as opaque.
+          type: string
         offset:
+          description: >-
+            Deprecated: use next_cursor. Offset to request for the next page, or
+            0
+
+            when no pages remain.
           type: integer
         snapshots:
+          description: 'Deprecated: use items. Duplicates items.'
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.SnapshotResponse'
@@ -282,6 +336,11 @@ components:
         created_at:
           type: string
         created_by:
+          type: string
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary.
           type: string
         docker_image:
           type: string

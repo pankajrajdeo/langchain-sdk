@@ -16,7 +16,7 @@ Reference for Cloud-only platform behavior: data regions, static IPs, payload li
 #### [Quickstart](deployment-quickstart.md)
 Deploy your first LangGraph application to Cloud in a few minutes.
 
-To deploy a code-first Deep Agent without standing up your own Agent Server, [Managed Deep Agents](python/managed-deep-agents-overview.md) offers a CLI-first managed runtime in private beta.
+To deploy a code-first Deep Agent without standing up your own Agent Server, [Managed Deep Agents](python/managed-deep-agents-overview.md) offers a CLI-first managed runtime in public beta.
 
 ## Next steps
 

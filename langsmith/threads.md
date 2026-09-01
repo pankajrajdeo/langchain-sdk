@@ -536,6 +536,7 @@ On the **Threads** tab of a project, you can save commonly used filters: [Set a 
 * [Filter traces](filter-traces-in-application.md): filter by thread metadata in the tracing UI.
 * [Set up multi-turn online evaluators](online-evaluations-multi-turn.md): evaluate threads rather than individual runs.
 * [Log user feedback using the SDK](attach-user-feedback.md): attach feedback to runs within a thread.
+* [Create and manage datasets in the UI](manage-datasets-in-application.md#manually-from-a-tracing-project): add threads to a dataset.
 
 ***
 

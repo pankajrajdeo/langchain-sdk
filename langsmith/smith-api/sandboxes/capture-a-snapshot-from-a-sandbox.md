@@ -203,6 +203,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '409':
+          description: sandbox must be running for Docker image export
+          headers:
+            X-Should-Retry:
+              description: false for deterministic state conflicts
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '422':
           description: Unprocessable Entity
           content:
@@ -229,6 +240,13 @@ components:
         checkpoint:
           description: if omitted, creates a fresh checkpoint from the running VM
           type: string
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         docker_image:
           description: sandbox-local Docker image to export
           type: string
@@ -264,6 +282,11 @@ components:
         created_at:
           type: string
         created_by:
+          type: string
+        description:
+          description: >-
+            Description says what this snapshot's image can do, so a caller can
+            hand it to an agent as a capability summary.
           type: string
         docker_image:
           type: string
@@ -319,10 +342,54 @@ components:
               type: string
             message:
               type: string
+    shared.ProblemDetails:
+      description: RFC 7807 problem details returned on V2 API errors.
+      type: object
+      properties:
+        detail:
+          type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
+        instance:
+          type: string
+        remedy:
+          description: Remedy is a LangSmith extension for user-recoverable errors.
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
     sandboxes.Labels:
       type: object
       additionalProperties:
         type: string
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

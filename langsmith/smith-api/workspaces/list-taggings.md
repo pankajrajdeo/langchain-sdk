@@ -242,6 +242,12 @@ components:
           type: array
           title: Alerts
           default: []
+        custom_apps:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Custom Apps
+          default: []
         dashboards:
           items:
             $ref: '#/components/schemas/Resource'

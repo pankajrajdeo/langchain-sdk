@@ -36,7 +36,7 @@ Deep Agents Code integrates automatically with the [following model providers](#
 
    `/auth` shows a list of available providers and stores credentials for reuse across sessions.
 
-   For non-interactive runs, CI/CD, or anywhere a TUI isn't available, store the same key from the shell with [`dcode auth set`](credentials.md#manage-credentials-from-the-shell-dcode-auth) or set the provider's environment variable instead. See [Provider credentials](credentials.md) for the full key resolution order, the [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for scoping a key to Deep Agents Code, and the [Provider reference](#provider-reference) for each provider's environment variable.
+   For non-interactive runs, CI/CD, or anywhere a TUI is not available, store the same key from the shell with [`dcode auth set`](credentials.md#manage-credentials-from-the-shell-dcode-auth) or set the provider's environment variable instead. See [Provider credentials](credentials.md) for the full key resolution order, the [`DEEPAGENTS_CODE_` prefix](configuration.md#deepagents_code_-prefix) for scoping a key to Deep Agents Code, and the [Provider reference](#provider-reference) for each provider's environment variable.
 
    To configure model parameters, see [Model parameters](#model-parameters).
 
@@ -132,7 +132,7 @@ The `openai_codex` provider lets you use OpenAI's Codex models with your paid **
 Run `/auth` in any session and select **`openai_codex`**. Because ChatGPT signs you in through your browser, this starts a browser sign-in instead of asking for an API key.
 
 ### Authorize in your browser
-Deep Agents Code opens your browser to the ChatGPT sign-in page. If it can't open a browser (for example, over SSH), it also shows the sign-in URL on screen so you can copy it to a browser on another device.
+Deep Agents Code opens your browser to the ChatGPT sign-in page. If it cannot open a browser (for example, over SSH), it also shows the sign-in URL on screen so you can copy it to a browser on another device.
 
 ### Select a Codex model
 Once signed in, the Codex models appear in the `/model` switcher under the `openai_codex` provider. Switch to one directly with its spec:
@@ -413,7 +413,7 @@ For retry counts, prefer `--max-retries` or the top-level [`[retries]` config](/
 > Any kwarg accepted by the underlying chat-model constructor is valid. Refer to the provider's reference docs for the full list—e.g. [`ChatAnthropic`](https://reference.langchain.com/python/langchain-anthropic/langchain_anthropic/chat_models/ChatAnthropic), [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/langchain_openai/chat_models/base/ChatOpenAI), [`ChatOllama`](https://reference.langchain.com/python/langchain-ollama/langchain_ollama/chat_models/ChatOllama). Unknown kwargs are forwarded to the upstream API request, so newly released parameters work without a CLI update.
 
 > [!NOTE]
-> Don't put credentials (`api_key`) in `params`—use [`api_key_env`](config-file.md#provider-configuration) to point at an environment variable instead.
+> Do not put credentials (`api_key`) in `params`—use [`api_key_env`](config-file.md#provider-configuration) to point at an environment variable instead.
 
 To override fields on the model's runtime *profile* (`max_input_tokens`, `tool_calling`, capability flags)—distinct from constructor params—see [Profile overrides](config-file.md#profile-overrides-advanced).
 

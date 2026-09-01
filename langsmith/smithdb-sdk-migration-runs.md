@@ -431,6 +431,37 @@ Pass SCREAMING\_SNAKE\_CASE strings as repeated `selects` query parameters (eg. 
 | *(not available)*          | `share_url`                    | New: public share URL (only set when the run has been shared)                                                          |
 | *(not available)*          | `thread_evaluation_time`       | New                                                                                                                    |
 
+#### Rate limiting
+
+The SmithDB-backed method has a dedicated, higher rate limit than the method it replaces. Limits apply in Cloud, per API key.
+
+#### Python
+|       | Before (`client.read_run()`) | After (`client.runs.retrieve()`) |
+| ----- | ---------------------------- | -------------------------------- |
+| Limit | 30 requests per 60 seconds   | 300 requests per 10 seconds      |
+
+#### TypeScript
+|       | Before (`client.readRun()`) | After (`client.runs.retrieve()`) |
+| ----- | --------------------------- | -------------------------------- |
+| Limit | 30 requests per 60 seconds  | 300 requests per 10 seconds      |
+
+#### Java
+|       | Before (`client.runs().retrieve()`) | After (`client.runs().retrieveV2()`) |
+| ----- | ----------------------------------- | ------------------------------------ |
+| Limit | 30 requests per 60 seconds          | 300 requests per 10 seconds          |
+
+#### Go
+|       | Before (`client.Runs.Get()`) | After (`client.Runs.GetV2()`) |
+| ----- | ---------------------------- | ----------------------------- |
+| Limit | 30 requests per 60 seconds   | 300 requests per 10 seconds   |
+
+#### cURL
+|       | Before (`GET /api/v1/runs/{run_id}`) | After (`GET /api/v2/runs/{run_id}`) |
+| ----- | ------------------------------------ | ----------------------------------- |
+| Limit | 30 requests per 60 seconds           | 300 requests per 10 seconds         |
+
+Requests that exceed a limit return `429 Too Many Requests`. For general rate limit information, see [Usage and billing](usage-and-billing.md#rate-limits).
+
 ### Examples
 
 #### Fetch a single run by ID

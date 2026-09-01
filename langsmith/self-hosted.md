@@ -1,7 +1,6 @@
 # Self-hosted LangSmith
 
 > [!NOTE]
-> **Important**<br />
 > Self-hosted LangSmith is an add-on to the Enterprise plan designed for our largest, most security-conscious customers. For more details, refer to [Pricing](https://www.langchain.com/pricing). [Contact our sales team](https://www.langchain.com/contact-sales) if you want to get a license key to trial LangSmith in your environment.
 
 Host an instance of LangSmith in your own infrastructure for [observability](observability.md), [evaluation](evaluation.md), and [prompt engineering](prompt-context-hub.md#prompts). You can optionally enable [LangSmith Deployment](deploy-self-hosted-full-platform.md) to deploy and manage agents through the LangSmith UI.

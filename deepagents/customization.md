@@ -2740,7 +2740,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2775,7 +2775,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2810,7 +2810,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2845,7 +2845,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2880,7 +2880,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2915,7 +2915,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2950,7 +2950,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -2980,20 +2980,20 @@ result = agent.invoke(
 from urllib.request import urlopen
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
 from langgraph.store.memory import InMemoryStore
 
 store = InMemoryStore()
-backend = StoreBackend(namespace=lambda _rt: ("filesystem",))
+backend = StoreBackend(
+    namespace=lambda _rt: ("filesystem",),
+    store=store,
+)
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
-store.put(
-    namespace=("filesystem",),
-    key="/skills/langgraph-docs/SKILL.md",
-    value=create_file_data(skill_content),
+backend.upload_files(
+    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
 )
 
 agent = create_deep_agent(
@@ -3011,25 +3011,33 @@ result = agent.invoke(
 
 #### FilesystemBackend
 ```python
+from urllib.request import urlopen
 from deepagents import create_deep_agent
 from deepagents.backends.filesystem import FilesystemBackend
 from langgraph.checkpoint.memory import MemorySaver
 
 # Checkpointer is REQUIRED for human-in-the-loop
 checkpointer = MemorySaver()
-root_dir = "/Users/user/{project}"
-backend = FilesystemBackend(root_dir=root_dir)
+
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+with urlopen(skill_url) as response:
+    skill_content = response.read().decode('utf-8')
+
+backend = FilesystemBackend(root_dir="/Users/user/{project}", virtual_mode=True)
+backend.upload_files(
+    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
+)
 
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
     backend=backend,
-    skills=[str(Path(root_dir) / "skills")],
+    skills=["/skills/"],
     interrupt_on={
         "write_file": True,
         "read_file": False,
         "edit_file": True,
     },
-    checkpointer=checkpointer, # Required!
+    checkpointer=checkpointer,  # Required for filesystem operations!
 )
 
 result = agent.invoke(

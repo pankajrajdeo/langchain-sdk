@@ -433,6 +433,10 @@ components:
           type: boolean
           title: Sandbox Enabled
           default: false
+        sandbox_restricted_egress:
+          type: boolean
+          title: Sandbox Restricted Egress
+          default: false
         max_sandboxes:
           type: integer
           title: Max Sandboxes
@@ -633,6 +637,7 @@ components:
           type: boolean
           title: Enable Burndown Vs Commit View
           default: false
+          deprecated: true
         max_agent_builder_runs:
           type: integer
           title: Max Agent Builder Runs
@@ -656,6 +661,10 @@ components:
         gateway_data_protection_enabled:
           type: boolean
           title: Gateway Data Protection Enabled
+          default: true
+        gateway_pii_redaction_enabled:
+          type: boolean
+          title: Gateway Pii Redaction Enabled
           default: false
         managed_deep_agents_enabled:
           type: boolean
@@ -671,6 +680,21 @@ components:
       description: >-
         Organization level configuration. May include any field that exists in
         tenant config and additional fields.
+
+        Each field's type annotation drives how Metronome custom-field values
+        are validated
+
+        when resolving config (see smith-backend's ``_parse_metronome_value``
+        and smith-go's
+
+        ``rejectInvalidMetronomeValue``): a value that doesn't fit the annotated
+        type is
+
+        dropped and the field keeps whatever value was already resolved for it,
+        rather than
+
+        raising. Changing a field's type here changes what Metronome values are
+        accepted for it.
     PaymentPlanTier:
       type: string
       enum:

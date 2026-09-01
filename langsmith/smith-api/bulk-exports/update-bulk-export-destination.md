@@ -201,10 +201,19 @@ components:
     BulkExportDestinationUpdate:
       properties:
         credentials:
-          $ref: '#/components/schemas/BulkExportDestinationS3Credentials'
+          anyOf:
+            - $ref: '#/components/schemas/BulkExportDestinationS3Credentials'
+            - type: 'null'
+        aws_role_arn:
+          anyOf:
+            - type: string
+              minLength: 1
+            - type: 'null'
+          title: Aws Role Arn
+          description: >-
+            AWS IAM role ARN that LangSmith assumes instead of using static
+            credentials.
       type: object
-      required:
-        - credentials
       title: BulkExportDestinationUpdate
     BulkExportDestination:
       properties:

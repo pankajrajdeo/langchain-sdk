@@ -82,8 +82,8 @@ A [`ProviderProfile`](profiles.md#provider-profiles) packages initialization par
 
 You can register at two levels, and both can coexist:
 
-* **Provider level** — a bare provider key like `"openai"` applies to every model from the `openai` provider.
-* **Model level** — a `provider:model` key like `"openai:gpt-5.4"` applies only to that specific model, and merges on top of any matching provider-level profile.
+* **Provider level**: a bare provider key like `"openai"` applies to every model from the `openai` provider.
+* **Model level**: a `provider:model` key like `"openai:gpt-5.4"` applies only to that specific model, and merges on top of any matching provider-level profile.
 
 ```python
 from deepagents import ProviderProfile, register_provider_profile

@@ -1,11 +1,11 @@
 # Plugins and marketplaces
 
-> Install plugins from marketplaces or package skills, MCP servers, and hooks for Deep Agents Code
+> Install plugins from marketplaces or package skills, MCP servers, hooks, and Python extensions for dcode
 
-Plugins extend Deep Agents Code with reusable [skills](memory-and-skills.md), [MCP servers](mcp-tools.md), and [hooks](hooks.md). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. Deep Agents Code supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](#create-a-plugin) and [Create a marketplace](#create-a-marketplace).
+Plugins extend dcode with reusable [skills](memory-and-skills.md), [MCP servers](mcp-tools.md), [hooks](hooks.md), and [Python extensions](extensions.md). Marketplaces provide catalogs for discovering and installing plugins across projects or teams. dcode supports Claude- and Codex-style plugin manifests and marketplace catalogs, as described in [Create a plugin](#create-a-plugin) and [Create a marketplace](#create-a-marketplace).
 
 > [!WARNING]
-> Install plugins and marketplaces only from sources you trust. An enabled plugin can add instructions and run MCP servers or hook commands with your user permissions.
+> Install plugins and marketplaces only from sources you trust. An enabled plugin can add instructions and run MCP servers, hook commands, or Python extensions with your user permissions.
 
 ## Manage plugins interactively
 
@@ -18,9 +18,9 @@ To browse marketplaces and manage plugins in a `dcode` session:
    * An HTTPS URL that serves a marketplace JSON file.
    * A local marketplace directory or JSON file.
 3. Install a plugin from the marketplace.
-4. Run `/reload` to activate newly installed plugin skills, MCP servers, and hooks without restarting the session.
+4. Run `/reload` to activate newly installed plugin skills, MCP servers, and hooks without restarting the session. Plugins with [Python extensions](extensions.md) require `/restart` to rebuild the agent graph.
 
-The plugin manager also lets you enable, disable, and uninstall installed plugins. Disabling a plugin keeps it installed but excludes its skills, MCP servers, and hooks after you run `/reload` or start a new session.
+The plugin manager also lets you enable, disable, and uninstall installed plugins. Disabling a plugin keeps it installed but excludes its skills, MCP servers, and hooks after you run `/reload` or start a new session. Python extensions stay loaded in the current graph until you run `/restart` or start a new session.
 
 Removing a marketplace uninstalls its plugins and removes managed cache data. Deep Agents Code preserves the original source when the marketplace came from a local directory or file. Run `/reload` or start a new session to apply the removal to an active session.
 
@@ -161,6 +161,27 @@ For supported MCP transports and fields, see [MCP tools](mcp-tools.md).
 
 Place a hook document at `hooks/hooks.json`, declare a relative `hooks` path, or define hooks inline in the plugin manifest. Hook commands receive the path variables above. See [Hooks](hooks.md) for the configuration and event reference.
 
+### Add Python extensions
+
+> [!NOTE]
+> Python extensions require `DEEPAGENTS_CODE_EXPERIMENTAL=1`.
+
+Declare one Python entry file or a list under the Deep Agents Code namespace in the plugin manifest:
+
+```json
+{
+  "name": "my-plugin",
+  "version": "1.0.0",
+  "extensions": {
+    "com.langchain.deepagents.code": {
+      "pythonExtensions": "./extension.py"
+    }
+  }
+}
+```
+
+The plugin must declare a non-empty `version`. Every entry must start with `./` and remain inside the plugin root. After changing an installed plugin extension, restart dcode. For the setup function, supported registrations, trust model, and security behavior, see [Python extensions](extensions.md).
+
 ## Create a marketplace
 
 A marketplace is a JSON catalog with a name and a `plugins` array. Store it at one of these paths in the marketplace root:
@@ -227,6 +248,7 @@ dcode plugin install code-review@acme-tools
 * [Memory and skills](memory-and-skills.md)
 * [MCP tools](mcp-tools.md)
 * [Hooks](hooks.md)
+* [Python extensions](extensions.md)
 * [Command reference](cli-reference.md)
 * [Configuration](configuration.md)
 

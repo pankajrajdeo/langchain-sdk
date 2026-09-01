@@ -249,6 +249,48 @@ paths:
               returned.
             title: Operations
           description: Filter by operation names. If omitted, all operations are returned.
+        - name: actor_ls_user_ids
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - items:
+                  type: string
+                  format: uuid
+                type: array
+              - type: 'null'
+            description: Filter by human actor (ls_user_id).
+            title: Actor Ls User Ids
+          description: Filter by human actor (ls_user_id).
+        - name: actor_api_key_ids
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - items:
+                  type: string
+                  format: uuid
+                type: array
+              - type: 'null'
+            description: Filter by API key actor (api_key_id).
+            title: Actor Api Key Ids
+          description: Filter by API key actor (api_key_id).
+        - name: resource_ids
+          in: query
+          required: false
+          schema:
+            anyOf:
+              - items:
+                  type: string
+                type: array
+              - type: 'null'
+            description: >-
+              Filter by resource ID. Matches if any resource ID is present on
+              the log.
+            title: Resource Ids
+          description: >-
+            Filter by resource ID. Matches if any resource ID is present on the
+            log.
       responses:
         '200':
           description: Successful Response
@@ -335,6 +377,8 @@ components:
         - delete_runs
         - share_run
         - unshare_run
+        - share_thread
+        - unshare_thread
         - create_dataset
         - create_csv_dataset
         - create_experiment_via_upload
@@ -437,9 +481,18 @@ components:
         - delete_mcp_server
         - register_mcp_server_oauth
         - create_credential
+        - read_credential_secret
+        - read_credential_oauth2
+        - create_oauth_provider
+        - update_oauth_provider
+        - delete_oauth_provider
+        - start_oauth_connection
         - create_tool
         - update_tool
         - delete_tool
+        - create_connection
+        - update_connection
+        - delete_connection
         - create_mcp_vendor_settings
         - update_mcp_vendor_settings
         - delete_mcp_vendor_settings
@@ -482,6 +535,7 @@ components:
         - start_sandbox_claim
         - stop_sandbox_claim
         - generate_sandbox_service_url
+        - generate_sandbox_download_url
         - capture_sandbox_snapshot
         - list_sandbox_snapshots
         - get_sandbox_snapshot
@@ -494,6 +548,7 @@ components:
         - delete_sandbox_registry
         - create_data_plane
         - delete_data_plane
+        - update_data_plane
         - create_annotation_queue
         - populate_annotation_queue
         - delete_annotation_queue

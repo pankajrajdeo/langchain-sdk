@@ -4,8 +4,12 @@
 
 `~/.deepagents/config.toml` lets you customize model providers, set defaults, and pass extra parameters to model constructors. For environment variables and inspection commands, see [Configuration](configuration.md). This page covers:
 
-* **Defaults**: pin a [default model](#default-and-recent-model) or [agent](#default-and-recent-agent).
+* **Defaults**: pin a [default model](#default-and-recent-model), [summarization model](#set-a-summarization-model), or [agent](#default-and-recent-agent), or [restrict usable models](#allowed-models) with an allowlist.
 * **Warnings**: [session cost](#session-cost-warning) and [cold prompt-cache](#cold-prompt-cache-warning) thresholds, and [trusted gateway endpoints](#trust-a-gateway-endpoint-for-cache-policies).
+* **Display**: [provider-visible reasoning](#show-provider-visible-reasoning) and diff line numbers.
+* **Interpreter**: the [`[interpreter]` settings](#js-interpreter) for the built-in QuickJS REPL.
+* **Python extensions**: [discovery and project trust](#python-extensions) for custom tools, middleware, and storage routes.
+* **Tracing**: [client-side secret redaction](#redact-langsmith-trace-secrets) for LangSmith traces.
 * **Provider setup**: the [`[models.providers.<name>]` table](#provider-configuration), [constructor params](#model-constructor-params), [retries](#retries), [profile overrides](#profile-overrides-advanced), and [adding models to the `/model` switcher](#adding-models-to-the-interactive-switcher).
 * **Auto mode**: the [auto classifier timeout](#auto-classifier-timeout).
 * **Custom endpoints and providers**: [custom base URLs](#custom-base-url), [OpenAI- or Anthropic-compatible APIs](#compatible-apis), and [arbitrary providers](#arbitrary-providers).
@@ -23,6 +27,23 @@ auto_classifier = "openai:gpt-5.6-luna"  # optional: cheaper model for Auto appr
 `[models].default` always takes priority over `[models].recent`. The `/model` command only writes to `[models].recent`, so your configured default is never overwritten by mid-session switches. To remove the default, use `/model --default --clear` or delete the `default` key from the config file.
 
 `[models].auto_classifier` sets the model used by the [Auto approval classifier](approval-modes.md#select-a-classifier-model) to review gated tool calls. When unset, the classifier inherits the main agent model. You can override this at runtime with `--auto-classifier-model` or `/auto model`. See [Select a classifier model](approval-modes.md#select-a-classifier-model) for full precedence and security notes.
+
+## Set a summarization model
+
+Set a dedicated model for automatic context compaction, `/offload`, and `/compact`:
+
+```toml
+[models]
+summarization_default = "openai:gpt-5.6-sol"
+```
+
+The summarization model resolves in this order:
+
+1. `--summarization-model` for the current launch.
+2. `[models].summarization_default`.
+3. The main agent model.
+
+In an interactive session, run `/summarization-model` to open the model picker, `/summarization-model <provider:model>` to switch directly, or `/summarization-model clear` to follow the main agent model again. Changing the summarization model does not change the main agent model.
 
 ## Default and recent agent
 
@@ -50,9 +71,9 @@ session_cost_threshold_usd = 25
 Some LLM providers automatically cache the conversation prefix between turns, so a follow-up sent while the cache is warm re-processes only new tokens. That cache expires after a provider-specific idle window. Deep Agents Code currently detects this for Anthropic and OpenAI models: when an interactive chat message would be sent to a thread whose cache has likely expired (or whose model or cache settings changed since the last turn), it estimates the re-warm cost and, if it reaches a threshold, asks before sending:
 
 * **Send anyway**: send this turn; the warning still appears on future cold-cache turns.
-* **Send and don't warn again this session**: mute the warning until the app restarts.
+* **Send and do not warn again this session**: mute the warning until the app restarts.
 * **Send and never warn again**: persistently suppress the warning. Re-enable it from the `/notifications` settings screen.
-* **Don't send (keep draft)**: restore the message to the chat input so you can `/clear` first.
+* **Do not send (keep draft)**: restore the message to the chat input so you can `/clear` first.
 
 Set the minimum estimated extra cost (cold versus warm cache) that triggers the warning, in USD. The default is `0.50`; set it to `0` to disable:
 
@@ -72,6 +93,22 @@ trusted_cache_endpoints = ["smith.langchain.com"]
 
 Entries are hostnames matched exactly — trusting `example.com` does not trust `gw.example.com`. One entry covers every provider routed through that endpoint. Cross-format routes through the LangSmith gateway (for example, an OpenAI-format request routed to an Anthropic model) stay silent even when trusted, because translation rewrites the cache settings the estimate assumes.
 
+## Show provider-visible reasoning
+
+Provider-visible reasoning is hidden by default. To show it in the interactive transcript and non-interactive output, set:
+
+```toml
+[ui]
+show_reasoning = true
+```
+
+In an interactive session, reasoning streams into a separate row that collapses when the phase ends. Click the row or press `Ctrl+O` to reopen it. In non-interactive mode, reasoning goes to stderr so the final answer on stdout remains pipeable.
+
+Set `DEEPAGENTS_CODE_SHOW_REASONING=1` to override `config.toml`, or pass `--show-reasoning` to enable the setting for one launch. The launch flag takes precedence over the environment variable, which takes precedence over `config.toml`.
+
+> [!NOTE]
+> Deep Agents Code displays only reasoning content that the model provider exposes. Redacted or opaque reasoning remains hidden.
+
 ## Diff line numbers
 
 Deep Agents Code shows file-relative line numbers in transcript and approval diffs by default. To hide them, set:
@@ -83,24 +120,53 @@ show_diff_line_numbers = false
 
 Run `/line-numbers` in a session to toggle the preference and save it to `config.toml`. The change applies to new diffs; already rendered diffs do not change.
 
+## Allowed models
+
+Restrict `dcode` to an approved set of models with the `[models].allowed` list:
+
+```toml
+[models]
+allowed = ["anthropic:claude-fable-5", "openai:*"]
+```
+
+Entries are exact `provider:model` specs or `provider:*` wildcards that admit a provider's whole lineup. When the list is set, blocked models are hidden from the `/model` switcher and rejected if selected elsewhere.
+
+When the key is unset, all models are allowed. An explicit empty list allows none:
+
+```toml
+[models]
+allowed = []   # no model may be used
+```
+
+Wildcards include models discovered from the bundled provider profile or your configured `models` list. If no models are available for that provider, the wildcard allows none.
+
+<details>
+<summary>Allow Amazon Bedrock models</summary>
+
+Write Bedrock model IDs as `bedrock:<id>`, including the version colon in the ID:
+
+```toml
+[models]
+allowed = ["bedrock:anthropic.claude-3-5-sonnet-20241022-v2:0"]
+```
+
+</details>
+
 ## Redact LangSmith trace secrets
 
-With LangSmith tracing enabled, Deep Agents Code sends agent-trace inputs and outputs without client-side secret redaction by default.
+With LangSmith tracing enabled, Deep Agents Code redacts detected secrets from agent-trace inputs and outputs before upload. This is enabled by default.
 
-> [!WARNING]
-> Without redaction, secrets may be uploaded to LangSmith as part of agent traces.
-
-To redact detected secrets before upload:
+To disable redaction:
 
 #### Config file
 ```toml
 [tracing]
-langsmith_redact = true
+langsmith_redact = false
 ```
 
 #### Environment variable
 ```bash
-export DEEPAGENTS_CODE_LANGSMITH_REDACT=true
+export DEEPAGENTS_CODE_LANGSMITH_REDACT=false
 ```
 
 The environment variable takes precedence over the config file. When redaction is enabled, Deep Agents Code disables tracing for that run if redaction cannot be configured. Secret redaction does not redact general personally identifiable information (PII), trace metadata, or traces emitted by shell processes. For broader options, see [Redact secrets from traces](../../langsmith/redact-secrets.md).
@@ -130,9 +196,9 @@ temperature = 0.7
 Providers have the following configuration options:
 
 #### `models` — `string[]`
-A list of model names to show in the interactive `/model` switcher for the provider defined as `<name>`. For providers that already ship with model profiles, any names you add here appear in addition to bundled ones (useful for newly released models that haven't been added to the package yet). For [arbitrary providers](#arbitrary-providers), this list is the only source of models in the switcher.
+A list of model names to show in the interactive `/model` switcher for the provider defined as `<name>`. For providers that already ship with model profiles, any names you add here appear in addition to bundled ones (useful for newly released models that have not been added to the package yet). For [arbitrary providers](#arbitrary-providers), this list is the only source of models in the switcher.
 
-Models listed here **bypass** any applied profile-based [filtering criteria](providers.md#which-models-appear-in-the-switcher), always appearing in the switcher. This makes it the recommended way to surface models that are excluded because their profile lacks `tool_calling` support or doesn't exist yet.
+Models listed here **bypass** any applied profile-based [filtering criteria](providers.md#which-models-appear-in-the-switcher), always appearing in the switcher. This makes it the recommended way to surface models that are excluded because their profile lacks `tool_calling` support or does not exist yet.
 
 This key is optional. You can always pass any model name directly to `/model` or `--model` regardless of whether it appears in the switcher; the provider validates the name at request time.
 
@@ -175,7 +241,7 @@ Do not put credentials (e.g., `api_key`) in `params`. Use [`api_key_env`](#provi
 Used for [arbitrary model](#arbitrary-providers) providers. Fully-qualified Python class in `module.path:ClassName` format. When set, Deep Agents Code imports and instantiates this class directly for provider `<name>`. The class must be a `BaseChatModel` subclass.
 
 #### `enabled` — `boolean`
-Whether this provider appears in the `/model` selector. Set to `false` to hide a provider that was auto-discovered from an installed package (e.g., a transitive dependency you don't want cluttering the model switcher). You can still use a disabled provider directly via `/model provider:model` or `--model`.
+Whether this provider appears in the `/model` selector. Set to `false` to hide a provider that was auto-discovered from an installed package (e.g., a transitive dependency you do not want cluttering the model switcher). You can still use a disabled provider directly via `/model provider:model` or `--model`.
 
 ## Model constructor params
 
@@ -206,7 +272,7 @@ The merge is shallow: any key present in the model sub-table replaces the same k
 
 ## Retries
 
-Configure retry counts for transient model provider errors with the top-level `[retries]` section. Deep Agents Code passes these values through to provider integrations that accept retry-count constructor kwargs. If you omit this section, the provider SDK default applies.
+Deep Agents Code retries transient model errors at the model node. The default is five retries after the first request. Set the top-level `[retries]` value to change the budget, or set it to `0` to disable retries:
 
 ```toml
 [retries]
@@ -221,7 +287,7 @@ max_retries = 0
 
 The global `[retries].max_retries` value applies to all supported providers. A provider-specific table, such as `[retries.fireworks]`, overrides the global value for that provider. Values must be integers greater than or equal to `0`.
 
-Most supported providers receive the retry count as `max_retries`. Some integrations use a different constructor kwarg. For an arbitrary provider, or to override the registered kwarg for a known provider, set `param` in the provider-specific retries table:
+For an arbitrary provider, set `param` to the name of its retry-count constructor argument. Deep Agents Code uses `param` only to disable the provider SDK's retry loop, which leaves the model-node middleware as the sole owner of the configured retry budget:
 
 ```toml
 [retries]
@@ -232,16 +298,14 @@ param = "retries"
 max_retries = 4
 ```
 
-`param` must be a valid Python identifier string, such as `"max_retries"` or `"retries"`. Deep Agents Code ignores unknown providers that do not set `param`, because passing the wrong retry kwarg can break model creation.
+`param` must be a valid Python identifier string, such as `"max_retries"` or `"retries"`. It does not set the retry budget. Set the budget with `max_retries` in this section or with `--max-retries`.
 
-`[retries]` is lower precedence than constructor parameters. The complete precedence order is:
+The retry-budget precedence order is:
 
-1. `--max-retries N`, applied under the provider's resolved retry kwarg
-2. `--model-params` with the provider's retry kwarg, such as `'{"max_retries": N}'` or `'{"retries": N}'`
-3. `[models.providers.<provider>.params]` with the provider's retry kwarg
-4. `[retries.<provider>].max_retries`
-5. `[retries].max_retries`
-6. Provider SDK default
+1. `--max-retries N`
+2. `[retries.<provider>].max_retries`
+3. `[retries].max_retries`
+4. Deep Agents Code default (`5`)
 
 ## Startup approval mode
 
@@ -319,7 +383,7 @@ These are merged on top of config file profile overrides (CLI wins). The priorit
 
 ## Adding models to the interactive switcher
 
-Some providers (e.g. `langchain-ollama`) don't bundle model profile data (see [Provider reference](providers.md#provider-reference) for full listing). When this is the case, the interactive `/model` switcher won't list models for that provider. You can fill in the gap by defining a `models` list in your config file for the provider:
+Some providers (e.g. `langchain-ollama`) do not bundle model profile data (see [Provider reference](providers.md#provider-reference) for full listing). When this is the case, the interactive `/model` switcher will not list models for that provider. You can fill in the gap by defining a `models` list in your config file for the provider:
 
 ```toml
 [models.providers.ollama]
@@ -411,7 +475,7 @@ temperature = 0
 With this config, switch to the model with `/model xyz:abc-xyz-1` or `--model xyz:abc-xyz-1`.
 
 > [!NOTE]
-> Deep Agents Code requires **tool calling** support. If your custom model supports tool calling but Deep Agents Code doesn't know about it, declare it in the provider profile:
+> Deep Agents Code requires **tool calling** support. If your custom model supports tool calling but Deep Agents Code does not know about it, declare it in the provider profile:
 >
 > ```toml
 > [models.providers.xyz.profile]
@@ -489,25 +553,91 @@ On a machine provisioned with a model gateway (for example, the LangSmith gatewa
 
 To use your own key instead, store it with `/auth` (leave the base URL blank for the provider default, or set it explicitly), or set the `DEEPAGENTS_CODE_` prefixed key and endpoint. Both override the gateway pair without leaving a mismatched endpoint behind.
 
+## JS interpreter
+
+The `[interpreter]` section tunes the built-in JavaScript interpreter (the `js_eval` tool), which runs agent-written code in a QuickJS sandbox. These keys apply only to config files; see [Command line options](cli-reference.md#command-line-options) for the `--interpreter` and `--interpreter-tools` flag equivalents.
+
+```toml
+[interpreter]
+enable_interpreter = true       # default
+timeout_seconds = 5.0           # default
+memory_limit_mb = 64            # default
+max_ptc_calls = 256             # default
+max_result_chars = 4000         # default
+ptc = "safe"                    # default: "safe"
+ptc_acknowledge_unsafe = false  # default
+```
+
+#### `enable_interpreter` — `boolean`
+Wire the QuickJS REPL middleware (`js_eval`) into the main agent (local sessions only). Set to `false` to disable the interpreter entirely; re-enable for a session with `--interpreter`.
+
+#### `timeout_seconds` — `number`
+Per-call wall-clock timeout for the QuickJS REPL.
+
+#### `memory_limit_mb` — `integer`
+QuickJS heap memory cap in MB, shared across a session.
+
+#### `max_ptc_calls` — `integer`
+Maximum `tools.*` host-bridge invocations per `js_eval` call.
+
+#### `max_result_chars` — `integer`
+Cap in characters on the `js_eval` result and captured stdout before truncation.
+
+#### `ptc` — `string | boolean | string[]`
+[Programmatic tool calling](../interpreters.md#programmatic-tool-calling-ptc) allowlist for `js_eval`. Accepted values:
+
+* `"safe"` (default): the read-only preset `read_file`, `glob`, `grep`. These tools are not approval-gated outside the REPL, so exposing them introduces no approval bypass. Network tools, subagent dispatch, shell execution, and file writes are deliberately excluded.
+* `"all"`: every host tool. Requires `ptc_acknowledge_unsafe = true` unless approvals are globally disabled, because PTC calls bypass approval prompts.
+* A list of tool names, e.g. `["safe", "web_search"]` — the `"safe"` entry expands to the preset. `"all"` is not allowed inside a list.
+* `false` or `[]`: no tool access from the REPL (pure interpreter). `true` is rejected — use `"safe"`, `"all"`, or an explicit list.
+
+#### `ptc_acknowledge_unsafe` — `boolean`
+Acknowledge that `ptc = "all"` exposes every tool to PTC calls that bypass approval prompts. Required for `ptc = "all"` unless running with approvals disabled.
+
+## Python extensions
+
+The `[extensions]` section controls [Python extension](extensions.md) discovery and project trust. The experimental feature gate is required even when extension loading is enabled here.
+
+```toml
+[extensions]
+enabled = true
+trust = "ask"
+extra_paths = [
+    "extensions/policy.py",
+    "~/src/company-extensions",
+]
+```
+
+#### `enabled` — `boolean`
+Enable Python extension discovery for every source, including `-e` / `--extension` paths, user and project directories, plugins, and entry points. Set `DEEPAGENTS_CODE_EXTENSIONS` to override this value. Both settings require `DEEPAGENTS_CODE_EXPERIMENTAL=1` before starting Deep Agents Code.
+
+#### `trust` — `string`
+Set the default policy for project extensions in `<project>/.deepagents/extensions/`: `ask` prompts in an interactive launch, `always` loads them, and `never` skips them. Set `DEEPAGENTS_CODE_EXTENSIONS_TRUST` to override this value. Only use `always` when every project you open is trusted.
+
+#### `extra_paths` — `string[]`
+Add user-authorized Python extension files or directories. Relative paths resolve from the Deep Agents Code profile directory; `~` expands to your home directory.
+
 ## Agent runtime limits
 
 The LangGraph graph step budget is the maximum number of node invocations the `dcode` agent graph may execute in a single turn. Configure this recursion limit with the `[runtime]` section:
 
 ```toml
 [runtime]
-recursion_limit = 2000
+recursion_limit = 5000
 ```
 
-The default is `2000`. Valid values are integers from `25` to `100000` (inclusive). Values outside this range or non-integer values log a warning and fall back to the default.
+Deep Agents Code does not set a default. When no source sets a valid value, the LangGraph server default applies. Values from managed configuration, the environment, and `config.toml` must be integers from `25` to `100000` (inclusive). Invalid values log a warning and resolution continues to the next source. The `--recursion-limit` flag accepts any integer greater than or equal to `1`.
 
 Precedence (highest to lowest):
 
-1. `--recursion-limit` CLI flag
-2. `DEEPAGENTS_CODE_RECURSION_LIMIT` environment variable
-3. `[runtime].recursion_limit` in `config.toml`
-4. Built-in default (`2000`)
+1. Administrator-owned `managed_config.toml`
+2. `--recursion-limit` CLI flag
+3. `DEEPAGENTS_CODE_RECURSION_LIMIT` environment variable
+4. `[runtime].recursion_limit` in `config.toml`
+5. `LANGGRAPH_DEFAULT_RECURSION_LIMIT` environment variable
+6. LangGraph server default
 
-Use `dcode config get runtime.recursion_limit` to see the effective value and its source.
+Use `dcode config get runtime.recursion_limit` to see the effective Deep Agents Code value and its source. An unset result leaves the limit to the LangGraph server.
 
 #### CLI flag
 ```bash
@@ -533,6 +663,7 @@ recursion_limit = 5000
 * [Configuration](configuration.md)
 * [Provider credentials](credentials.md)
 * [Providers](providers.md)
+* [Python extensions](extensions.md)
 * [CLI reference](cli-reference.md)
 
 ***

@@ -1,6 +1,6 @@
 # Generate API key
 
-> Generate an api key for the user
+> Generate an api key for the user.
 
 ## OpenAPI
 
@@ -162,7 +162,7 @@ paths:
       tags:
         - api-key
       summary: Generate API key
-      description: Generate an api key for the user
+      description: Generate an api key for the user.
       operationId: generate_api_key_api_v1_api_key_post
       requestBody:
         content:

@@ -356,6 +356,16 @@ components:
             - type: boolean
             - type: 'null'
           title: Is Assertion
+        regex_validator:
+          anyOf:
+            - anyOf:
+                - type: string
+                - $ref: '#/components/schemas/Missing'
+              maxLength: 500
+            - type: 'null'
+          title: Regex Validator
+          default:
+            __missing__: __missing__
       type: object
       required:
         - feedback_key
@@ -381,6 +391,16 @@ components:
         - msg
         - type
       title: ValidationError
+    Missing:
+      properties:
+        __missing__:
+          type: string
+          const: __missing__
+          title: Missing
+      type: object
+      required:
+        - __missing__
+      title: Missing
   securitySchemes:
     API Key:
       type: apiKey

@@ -2,7 +2,7 @@
 
 > Deploy and manage agents with durable execution, real-time streaming, and horizontal scaling.
 
-**LangSmith Deployment** is a workflow orchestration runtime purpose-built for agent workloads. It provides the managed infrastructure agents need to run reliably in production at scale, supporting the full lifecycle from local development to deployment.
+**LangSmith Deployment** is a workflow orchestration runtime purpose-built for agent workloads. It provides the managed infrastructure agents need to run reliably in production at scale, supporting the full lifecycle from local development to deployment. Deploy to Cloud, BYOC, or your own infrastructure.
 
 > [!NOTE]
 > This page covers how your **agents** run in production with **LangSmith Deployment**.

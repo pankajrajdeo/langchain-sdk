@@ -2,11 +2,9 @@
 
 > Define authored tools for Managed Deep Agents projects.
 
-Tools add custom capabilities to your agent.
+Tools extend what your agent can do by letting it interact with external systems, such as fetching real-time data, querying databases, executing code, and taking actions. A tool is a callable function with defined inputs and outputs. The model uses the tool's description and the conversation context to decide when to call it and which arguments to provide.
 
-Define LangChain tools in your project, import them into `agent.py`, and pass them to `define_deep_agent`.
-
-To load tools from a remote MCP server instead, use an [MCP connector](managed-deep-agents-mcp-connectors.md).
+To load tools from a remote MCP server, use an [MCP connector](managed-deep-agents-mcp-connectors.md).
 
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.

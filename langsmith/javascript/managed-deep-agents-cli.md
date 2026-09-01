@@ -13,12 +13,27 @@ For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quicks
 
 ## Install
 
-Install the package for the language you use to author your agent. The package exposes the `mda` binary.
-
-For npm, install globally or run the binary with `npm exec`.
+`mda init` declares `managed-deepagents` as a project dependency, so run the `mda` binary from the project.
 
 ```bash
-npm install managed-deepagents
+npx managed-deepagents init my-agent
+cd my-agent
+npm install
+npx mda --version
+```
+
+```bash
+pnpm dlx managed-deepagents init my-agent
+cd my-agent
+pnpm install
+pnpm exec mda --version
+```
+
+```bash
+bunx managed-deepagents init my-agent
+cd my-agent
+bun install
+bunx mda --version
 ```
 
 The package provides agent, identity, schedule, and sandbox authoring APIs.
@@ -46,25 +61,33 @@ The LangSmith API key authenticates the deploy. The agent's model provider also 
 
 ## Command overview
 
-| Command                                    | Use                                                                         |
-| ------------------------------------------ | --------------------------------------------------------------------------- |
-| `mda --help`                               | Show CLI help.                                                              |
-| `mda --version`                            | Show the installed CLI version.                                             |
-| `mda init <name>`                          | Scaffold a TypeScript Managed Deep Agents project.                          |
-| `mda build [path]`                         | Compile a project into a managed LangGraph app without deploying.           |
-| `mda eval …` / `mda evals …`               | Scaffold optional Harbor tasks and compile the agent into a Harbor handoff. |
-| `mda dev [path]`                           | Compile a project and run it on the local LangGraph dev server.             |
-| `mda deploy [path]`                        | Compile, sync Context Hub context, upload, and deploy to LangSmith.         |
-| `mda channel add slack [path]`             | Configure Slack for a deployed agent.                                       |
-| `mda logs [path]`                          | Tail Agent Server logs for a deployed agent.                                |
-| `mda delete [path]` / `mda destroy [path]` | Delete a deployed agent and the LangSmith resources it created.             |
+| Command                                    | Use                                                                          |
+| ------------------------------------------ | ---------------------------------------------------------------------------- |
+| `mda --help`                               | Show CLI help.                                                               |
+| `mda --version`                            | Show the installed CLI version.                                              |
+| `mda init <name>`                          | Scaffold a TypeScript Managed Deep Agents project.                           |
+| `mda build [path]`                         | Compile a project into a managed LangGraph app without deploying.            |
+| `mda eval …` / `mda evals …`               | Initialize a Harbor workspace and continue eval authoring in a coding agent. |
+| `mda dev [path]`                           | Compile a project and run it on the local LangGraph dev server.              |
+| `mda deploy [path]`                        | Compile, sync Context Hub context, upload, and deploy to LangSmith.          |
+| `mda channel init slack`                   | Add a Slack channel declaration to the current project.                      |
+| `mda logs [path]`                          | Tail Agent Server logs for a deployed agent.                                 |
+| `mda delete [path]` / `mda destroy [path]` | Delete a deployed agent and the LangSmith resources it created.              |
 
 ## Initialize projects
 
 Use `mda init` to create a new project directory:
 
 ```bash
-mda init my-agent
+npx managed-deepagents init my-agent
+```
+
+```bash
+pnpm dlx managed-deepagents init my-agent
+```
+
+```bash
+bunx managed-deepagents init my-agent
 ```
 
 | Argument or flag           | Use                                                                                                          |
@@ -76,13 +99,23 @@ mda init my-agent
 | `--memory agent\|none`     | Optionally write a root memory declaration. If omitted, no memory file is created and durable memory is off. |
 | `--model SPEC`             | Model the agent runs on, as `provider:model`.                                                                |
 | `--no-sandbox`             | Leave out the managed sandbox declaration.                                                                   |
+| `--channel slack`          | Initialize the agent with a Slack channel declaration. Repeatable; `--channels` is an alias.                 |
 
-The command detects the language from the current directory:
+To include Slack in a new project:
 
-| Current directory contains | Result                       |
-| -------------------------- | ---------------------------- |
-| `package.json` only        | TypeScript scaffold.         |
-| Both or neither            | Interactive language prompt. |
+```bash
+npx managed-deepagents init my-agent --channel slack
+```
+
+```bash
+pnpm dlx managed-deepagents init my-agent --channel slack
+```
+
+```bash
+bunx managed-deepagents init my-agent --channel slack
+```
+
+The scaffold language comes from the package you run, not from the current directory: the npm package always writes a TypeScript project. A CLI installed from npm refuses a Python project.
 
 The scaffold creates:
 
@@ -95,14 +128,40 @@ The scaffold creates:
 | `.env`            | Deploy auth and runtime secrets. Do not commit real secrets. |
 | `.gitignore`      | Ignores `.env`, `.env.*`, `.mda/`, and dependency caches.    |
 
-Eval tasks are opt-in and are not created by `mda init`. Managed Deep Agents evals are Harbor tasks under `evals/tasks/`. Run `mda evals init <name>` only when you want an optional starter task under `evals/scaffold/`.
+Eval tasks are opt-in and are not created by `mda init`. Run `mda evals init -i` from the project root to initialize the Harbor workspace and continue in a coding agent with the `eval-engineering` skill.
+
+## Initialize a Slack channel
+
+Run the following command from the root of an existing managed deep agent project:
+
+```bash
+npx mda channel init slack
+```
+
+```bash
+pnpm exec mda channel init slack
+```
+
+```bash
+bunx mda channel init slack
+```
+
+The command creates a Slack channel declaration in the `channels/` directory. The next `mda deploy` sets up the resources the agent needs to appear in Slack. For the complete workflow, see [Connect a Managed Deep Agent to Slack](managed-deep-agents-channels-slack.md).
 
 ## Build projects
 
 Use `mda build` to compile a project into a managed LangGraph app without deploying it:
 
 ```bash
-mda build .
+npx mda build
+```
+
+```bash
+pnpm exec mda build
+```
+
+```bash
+bunx mda build
 ```
 
 | Argument or flag | Use                                                                                                                                                                                     |
@@ -112,36 +171,45 @@ mda build .
 
 ## Evaluate projects
 
-`evals/tasks/` is the canonical Harbor dataset. Author complete Harbor tasks there directly. The `mda eval` command, also available as `mda evals`, can scaffold a starter task and package the managed agent for Harbor. Managed Deep Agents prints a `harbor run` command but does not run trials.
+Use `mda evals init` to initialize a Harbor workspace. The command is also available as `mda eval`. Use the interactive handoff to develop complete tasks with a coding agent and the `eval-engineering` skill.
 
 ```bash
-mda evals init smoke
-mda evals compile .
-# then run the printed `harbor run` command
+npx mda evals init -i
 ```
 
-| Subcommand                 | Use                                                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `mda evals init <name>`    | Create `evals/scaffold/<name>/` with an instruction and a language-native test. Run this command from the project root. |
-| `mda evals compile [path]` | Compile the managed agent, copy selected scaffolds into `evals/tasks/`, and write the Harbor handoff under `evals/`.    |
+```bash
+pnpm exec mda evals init -i
+```
 
-Task names passed to `mda evals init` can contain ASCII letters, numbers, `_`, and `-`.
+```bash
+bunx mda evals init -i
+```
 
-`mda evals compile` flags:
+| Command or flag       | Use                                                                                                                                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mda evals init`      | Create `evals/harbor-job.json` when missing and generate the Harbor adapter and runtime settings under `.mda/evals/`. Run this command from the project root. |
+| `-i`, `--interactive` | Start a detected coding agent with the eval-engineering prompt, or copy the prompt for another agent.                                                         |
 
-| Flag                       | Use                                                                                                                                                                                                                                                                              |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--task <name>`            | Select one task. Repeat to select multiple tasks. A selected scaffold refreshes the matching task under `evals/tasks/`. If omitted, all tasks are selected and every scaffold is refreshed. Existing canonical tasks are preserved unless a selected scaffold has the same name. |
-| `--model <provider:model>` | Record a model in the artifact manifest. Repeat to record multiple models; the generated job config uses the first value.                                                                                                                                                        |
+The handoff asks the coding agent to install the `eval-engineering` skill, inspect the managed agent, and write complete Harbor tasks under `evals/<task>/`. It also includes the pinned Harbor command that loads the MDA job plugin and LangSmith plugin.
 
-For Harbor task authoring, optional scaffolding, credentials, and running trials, see [Evals](managed-deep-agents-evals.md).
+`mda evals compile` is an internal command used by the Harbor job plugin. The plugin runs it when a Harbor job starts, so you do not compile eval artifacts separately.
+
+For workflow guidance, see [Evals](managed-deep-agents-evals.md).
 
 ## Develop locally
 
 Use `mda dev` to compile a project and run the local LangGraph dev server:
 
 ```bash
-mda dev .
+npx mda dev
+```
+
+```bash
+pnpm exec mda dev
+```
+
+```bash
+bunx mda dev
 ```
 
 | Argument or flag      | Use                                                                     |
@@ -167,7 +235,15 @@ For local development, `mda dev` stages the project `.env` file into `.mda/build
 Use `mda deploy` to compile and deploy a project to LangSmith:
 
 ```bash
-mda deploy .
+npx mda deploy
+```
+
+```bash
+pnpm exec mda deploy
+```
+
+```bash
+bunx mda deploy
 ```
 
 | Argument or flag              | Use                                                                          |
@@ -185,13 +261,14 @@ Deploy runs these steps:
 3. Collect non-reserved `.env` values as hosted deployment secrets.
 4. Verify the model provider API key is available from `.env`, the shell environment, or LangSmith workspace secrets.
 5. Sync deploy-owned context to Context Hub.
-6. Compile the project into `.mda/build` and extract optional `schedules/` declarations.
+6. Compile the project into `.mda/build` and extract optional `schedules/` and `channels/` declarations.
 7. Create or find a LangSmith hosted deployment by name.
 8. Archive the build, upload it, and trigger a remote build.
 9. Poll the revision until it reaches `DEPLOYED` unless `--no-wait` is set.
 10. Reconcile the managed LangSmith cron jobs for schedules unless `--no-wait` is set.
+11. Provision the declared Slack channel. If Slack authorization or workspace approval is required, display the action and continue after you complete it.
 
-Deploy does not configure Slack. Run `mda channel add slack .` after the deployment finishes. For the complete workflow, see [Slack channels](managed-deep-agents-channels-slack.md#create-and-deploy-the-slack-app).
+A project with a Slack channel cannot use `--no-wait` because Slack provisioning requires the deployed Agent Server URL. For the complete workflow, see [Connect a Managed Deep Agent to Slack](managed-deep-agents-channels-slack.md).
 
 On success, the CLI prints the LangSmith deployment dashboard URL. For secrets routing and deploy tips, see [Deploy an agent](managed-deep-agents-deploy.md).
 
@@ -200,7 +277,15 @@ On success, the CLI prints the LangSmith deployment dashboard URL. For secrets r
 Use `mda logs` to tail Agent Server logs for a deployed agent:
 
 ```bash
-mda logs .
+npx mda logs
+```
+
+```bash
+pnpm exec mda logs
+```
+
+```bash
+bunx mda logs
 ```
 
 | Argument or flag              | Use                                                                                                   |
@@ -218,7 +303,15 @@ mda logs .
 Use `mda delete` to delete a deployed Managed Deep Agent and the LangSmith resources it created. `mda destroy` is an alias.
 
 ```bash
-mda delete .
+npx mda delete
+```
+
+```bash
+pnpm exec mda delete
+```
+
+```bash
+bunx mda delete
 ```
 
 | Argument or flag              | Use                                                                       |

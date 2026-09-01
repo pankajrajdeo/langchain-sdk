@@ -230,6 +230,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
+        '501':
+          description: >-
+            V2 filter syntax is unavailable for this deployment; use legacy
+            function-style filters or set SMITHDB_QUERY_ENABLED=true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/shared.ProblemDetails'
         '503':
           description: service unavailable
           content:
@@ -433,6 +441,20 @@ components:
       properties:
         detail:
           type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
         instance:
           type: string
         remedy:
@@ -816,6 +838,19 @@ components:
           type: string
           format: uuid
           example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
+          type: string
     query.RunAttachmentURLs:
       type: object
       additionalProperties:

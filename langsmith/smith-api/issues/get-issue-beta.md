@@ -176,50 +176,58 @@ paths:
           required: true
           schema:
             type: string
+        - description: >-
+            Include current Linear workflow state and validated linked GitHub
+            pull request URLs
+          name: include_linear_context
+          in: query
+          schema:
+            type: boolean
+            title: Include Linear Context
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.Issue'
+                $ref: '#/components/schemas/issues.Issue'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues.ErrorResponse'
+                $ref: '#/components/schemas/issues.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues.Issue:
+    issues.Issue:
       type: object
       properties:
         actions:
@@ -251,6 +259,10 @@ components:
           type: string
         last_seen_at:
           type: string
+        linear_context:
+          $ref: '#/components/schemas/issues.LinearContext'
+        linear_sync:
+          $ref: '#/components/schemas/issues.LinearSync'
         name:
           type: string
         proposed_context_fixes:
@@ -278,9 +290,9 @@ components:
         session_id:
           type: string
         severity:
-          $ref: '#/components/schemas/tracer_session_issues.Severity'
+          $ref: '#/components/schemas/issues.Severity'
         status:
-          $ref: '#/components/schemas/tracer_session_issues.Status'
+          $ref: '#/components/schemas/issues.Status'
         tags:
           items:
             type: string
@@ -293,12 +305,48 @@ components:
           type: string
         watching_since:
           type: string
-    tracer_session_issues.ErrorResponse:
+    issues.ErrorResponse:
       type: object
       properties:
         error:
           type: string
-    tracer_session_issues.Severity:
+    issues.LinearContext:
+      type: object
+      properties:
+        github_pr_urls:
+          items:
+            type: string
+          type: array
+        workflow_state:
+          type: string
+    issues.LinearSync:
+      type: object
+      properties:
+        identifier:
+          type: string
+        issue_id:
+          type: string
+        last_attempted_at:
+          type: string
+          format: date-time
+        last_error:
+          type: string
+        last_synced_at:
+          type: string
+          format: date-time
+        linear_issue_id:
+          type: string
+        state:
+          type: string
+          enum:
+            - pending
+            - synced
+            - failed
+            - auth_required
+            - paused
+        url:
+          type: string
+    issues.Severity:
       type: integer
       enum:
         - 0
@@ -310,7 +358,7 @@ components:
         - SeverityHigh
         - SeverityMed
         - SeverityLow
-    tracer_session_issues.Status:
+    issues.Status:
       type: string
       enum:
         - open

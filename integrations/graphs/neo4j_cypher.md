@@ -316,8 +316,8 @@ You can use the `cypher_llm` and `qa_llm` parameters to define different llms
 ```python
 chain = GraphCypherQAChain.from_llm(
     graph=graph,
-    cypher_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
-    qa_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo-16k"),
+    cypher_llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
+    qa_llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
     verbose=True,
     allow_dangerous_requests=True,
 )
@@ -351,8 +351,8 @@ You can use `include_types` or `exclude_types` to ignore parts of the graph sche
 ```python
 chain = GraphCypherQAChain.from_llm(
     graph=graph,
-    cypher_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
-    qa_llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo-16k"),
+    cypher_llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
+    qa_llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
     verbose=True,
     exclude_types=["Movie"],
     allow_dangerous_requests=True,
@@ -378,7 +378,7 @@ You can use the `validate_cypher` parameter to validate and correct relationship
 
 ```python
 chain = GraphCypherQAChain.from_llm(
-    llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
+    llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
     graph=graph,
     verbose=True,
     validate_cypher=True,
@@ -414,7 +414,7 @@ You can use the `use_function_response` parameter to pass context from database 
 
 ```python
 chain = GraphCypherQAChain.from_llm(
-    llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
+    llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
     graph=graph,
     verbose=True,
     use_function_response=True,
@@ -446,7 +446,7 @@ You can provide custom system message when using the function response feature b
 
 ```python
 chain = GraphCypherQAChain.from_llm(
-    llm=ChatOpenAI(temperature=0, model="gpt-3.5-turbo"),
+    llm=ChatOpenAI(temperature=0, model="gpt-4o-mini"),
     graph=graph,
     verbose=True,
     use_function_response=True,

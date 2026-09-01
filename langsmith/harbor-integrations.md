@@ -282,6 +282,7 @@ harbor run -d "<org/name>" \
 
 ## See also
 
+* [Evaluate Managed Deep Agents](python/managed-deep-agents-evals.md)
 * [Deep Agents documentation](../deepagents/overview.md)
 * [Datasets & Experiments](manage-datasets.md)
 * [Analyze an experiment](analyze-an-experiment.md)

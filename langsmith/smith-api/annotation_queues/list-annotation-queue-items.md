@@ -182,11 +182,11 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
+            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
@@ -205,20 +205,20 @@ paths:
           name: item_type
           in: query
           schema:
-            type: string
             enum:
               - RUN
               - THREAD
+            type: string
             title: Item Type
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
-            type: string
-            default: forward
             enum:
               - forward
               - backward
+            type: string
+            default: forward
             title: Direction
       responses:
         '200':
@@ -269,6 +269,20 @@ components:
       properties:
         detail:
           type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
         instance:
           type: string
         remedy:
@@ -315,6 +329,19 @@ components:
         start_time:
           type: string
         thread_id:
+          type: string
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
           type: string
     annotationqueues.AnnotationQueueItemType:
       type: string

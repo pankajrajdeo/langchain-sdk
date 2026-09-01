@@ -8,21 +8,21 @@ The LangSmith UI handles this automatically: it routes to the correct data plane
 
 ## Organizations, data planes, and workspaces
 
-A BYOC deployment has three levels:
+A BYOC deployment adds one level to the standard LangSmith [resource hierarchy](administration-overview.md#resource-hierarchy): the data plane, which sits between the organization and the workspace.
 
 * **Organization**: The top level. Users, roles, billing, SSO configuration, and API keys belong to the organization and live in the control plane.
 * **Data plane**: Belongs to an organization and represents physical separation of data. An organization can have several data planes, each in its own AWS account and region.
-* **Workspace**: Belongs to exactly one data plane, which you select when you create the workspace. Traces, datasets, experiments, and other application data live in a workspace, the same as on Cloud or self-hosted.
+* **Workspace**: Belongs to exactly one data plane, which you select when you create the workspace. Traces, datasets, experiments, and other application data live in a workspace.
 
-<img src="https://mintcdn.com/langchain-5e9cc07a/sRMLsyZ-6iriBvN5/langsmith/images/byoc-org-structure.png?fit=max&auto=format&n=sRMLsyZ-6iriBvN5&q=85&s=1121c5471f8c452fb4b6759698a06aeb" alt="Nesting diagram of a BYOC deployment. An organization contains two data planes, each labeled as physical separation. The first is in us-east-1 and holds three workspaces named Production, Staging, and Dev. The second is in eu-west-1 and holds two workspaces named Production and Dev. Every workspace is labeled as logical separation within its data plane." width="1296" height="401" data-path="langsmith/images/byoc-org-structure.png" />
+<img src="https://mintcdn.com/langchain-5e9cc07a/5dqOg-xwCbWrjM9p/langsmith/images/byoc-org-structure.png?fit=max&auto=format&n=5dqOg-xwCbWrjM9p&q=85&s=7cf4860e09578a0aad32f16c1eef9ee0" alt="Nesting diagram of a BYOC deployment. An organization contains two data planes, each labeled as physical separation. The first is in us-east-1 and the second is in eu-west-1. Each data plane holds one workspace per team, and every workspace is labeled as logical separation within its data plane." width="1278" height="391" data-path="langsmith/images/byoc-org-structure.png" />
 
-Use data planes for physical separation of data, and workspaces for logical separation within a data plane. Common combinations are:
+Use data planes for physical separation of data, and workspaces for logical separation within a data plane. Common ways to divide data planes are:
 
-| Data planes                                                                                    | Workspaces                                      |
-| ---------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Per region, such as `us-east-1` and `us-west-2`                                                | Per environment, such as dev, staging, and prod |
-| Per environment and region, such as prod `us-east-1`, staging `us-east-1`, and dev `us-east-1` | Per team                                        |
-| Per business unit                                                                              | Per team                                        |
+* **Per region**, such as `us-east-1` and `us-west-2`, to keep sensitive application data in a specific region.
+* **Per environment and region**, such as prod `us-east-1` and dev `us-east-1`, to hold production and development data in separate AWS accounts.
+* **Per business unit**, when each unit owns its own AWS account.
+
+Below the data plane, workspaces and applications work the same as on Cloud or self-hosted. For more information, see [Administration overview](administration-overview.md) and [Workload isolation](workload-isolation.md).
 
 ## Find your data plane endpoint
 

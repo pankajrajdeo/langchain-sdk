@@ -18,14 +18,14 @@
 
    Required environment variables:
 
-   * `LANGCHAIN_TRACING_V2` — Set to `true` to enable tracing.
-   * `LANGCHAIN_API_KEY` — Your LangSmith API key.
+   * `LANGCHAIN_TRACING_V2`: Set to `true` to enable tracing.
+   * `LANGCHAIN_API_KEY`: Your LangSmith API key.
 
    Optional environment variables:
 
-   * `LANGCHAIN_ENDPOINT` — LangSmith API endpoint. Defaults to `https://api.smith.langchain.com`. Set this if using self-hosted LangSmith, GCP EU (`https://eu.api.smith.langchain.com`), GCP APAC (`https://apac.api.smith.langchain.com`), or AWS US (`https://aws.api.smith.langchain.com`).
-   * `LANGCHAIN_PROJECT` — Project name for traces. Defaults to `"default"`.
-   * `LANGCHAIN_CALLBACKS_BACKGROUND` — Set to `true` for asynchronous trace upload (default), or `false` for synchronous uploads. (default: `true`)
+   * `LANGCHAIN_ENDPOINT`: LangSmith API endpoint. Defaults to `https://api.smith.langchain.com`. Set this if using self-hosted LangSmith, GCP EU (`https://eu.api.smith.langchain.com`), GCP APAC (`https://apac.api.smith.langchain.com`), or AWS US (`https://aws.api.smith.langchain.com`).
+   * `LANGCHAIN_PROJECT`: Project name for traces. Defaults to `"default"`.
+   * `LANGCHAIN_CALLBACKS_BACKGROUND`: Set to `true` for asynchronous trace upload (default), or `false` for synchronous uploads. (default: `true`)
 
 2. Restart your n8n instance for the environment variables to take effect.
 

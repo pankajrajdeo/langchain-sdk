@@ -201,49 +201,49 @@ Skills provide **on-demand** capabilities. The agent reads frontmatter from each
 ```python
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="openai:gpt-5.5",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="anthropic:claude-sonnet-4-6",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="openrouter:z-ai/glm-5.2",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="fireworks:accounts/fireworks/models/glm-5p2",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="baseten:zai-org/GLM-5.2",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 
 ```python
 agent = create_deep_agent(
     model="ollama:north-mini-code-1.0",
-    skills=["/skills/research/", "/skills/web-search/"],
+    skills=["/skills/"],
 )
 ```
 

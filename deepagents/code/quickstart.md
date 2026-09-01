@@ -55,10 +55,15 @@ Use these commands within a Deep Agents Code session:
 * `/skill-creator [task]`: Guide for creating effective agent skills.
 * `/offload` (alias `/compact`) - Free up context window space by offloading messages to storage with a summary placeholder. The agent can retrieve the full history from the offloaded file if needed.
 * `/context`: Open a color-coded context-window usage report with model capacity, usage categories, and remaining space.
+* `/context-doctor`: Audit the context injected into the session and its estimated token cost. See [Audit injected context](cli-reference.md#audit-injected-context).
+* `/tools`: List the built-in and MCP tools available to the current agent. See [List available tools](cli-reference.md#list-available-tools).
+* `/extensions`: List loaded [Python extensions](extensions.md), their registrations, and their source paths. Requires `DEEPAGENTS_CODE_EXPERIMENTAL=1`.
+* `/cost`: Show the thread's estimated cost. See [Track thread cost](cli-reference.md#track-thread-cost).
 * `/tokens`: Display current context window token usage breakdown.
-* `/clear`: Clear conversation history and start a new thread.
-* `/force-clear`: Stop active work, clear the chat, and start a new thread.
+* `/clear`: Start a fresh thread.
+* `/force-clear`: Recover a stuck session with a fresh thread.
 * `/copy`: Copy the latest assistant message to the clipboard.
+* `/prompts`: Search, preview, copy, and reuse previously submitted prompts.
 * `/threads`: Browse and resume previous conversation threads.
 * `/mcp [login <server> | reconnect]`: Show active MCP servers and tools. `login <server>` runs the OAuth flow for a server; `reconnect` loads deferred logins.
 * `/plugins`: Manage [plugins and marketplaces](plugins.md).
@@ -101,18 +106,19 @@ ls -la
 
 **General**
 
-| Shortcut                                              | Action                                                                              |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `Enter`                                               | Submit prompt                                                                       |
-| `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                                                      |
-| `@filename`                                           | Auto-complete files and inject content                                              |
-| `Shift+Tab` or `Ctrl+T`                               | Toggle between Manual and Auto [approval mode](approval-modes.md) |
-| `Ctrl+X`                                              | Open prompt in external editor                                                      |
-| `Ctrl+N`                                              | Review pending notifications                                                        |
-| `Ctrl+O`                                              | Expand/collapse the most recent tool output                                         |
-| `Escape`                                              | Interrupt current operation                                                         |
-| `Ctrl+C`                                              | Interrupt or quit                                                                   |
-| `Ctrl+D`                                              | Exit                                                                                |
+| Shortcut                                              | Action                                                      |
+| ----------------------------------------------------- | ----------------------------------------------------------- |
+| `Enter`                                               | Submit prompt                                               |
+| `Shift+Enter`, `Ctrl+J`, `Alt+Enter`, or `Ctrl+Enter` | Insert newline                                              |
+| `@filename`                                           | Auto-complete files and inject content                      |
+| `Shift+Tab`                                           | Cycle [approval modes](approval-modes.md) |
+| `Ctrl+G`                                              | Open prompt in external editor                              |
+| `Ctrl+T`                                              | Expand or collapse the subagent panel when one is present   |
+| `Ctrl+N`                                              | Review pending notifications when the panel is open         |
+| `Ctrl+O`                                              | Expand/collapse the most recent tool output                 |
+| `Escape`                                              | Interrupt current operation                                 |
+| `Ctrl+C`                                              | Interrupt or quit                                           |
+| `Ctrl+D`                                              | Exit                                                        |
 
 **Text editing in the prompt**
 
@@ -126,6 +132,10 @@ The chat input uses standard readline-style bindings:
 | `Ctrl+K`                     | Delete from cursor to end of line   |
 | `Ctrl+W` or `Ctrl+Backspace` | Delete word to the left             |
 | `Ctrl+Left` / `Ctrl+Right`   | Move cursor one word left/right     |
+
+**Search prompt history**
+
+Prompt history search lets you find and reuse previously submitted prompts without leaving the chat input. Press `Ctrl+R` to open an inline search of prompts stored on your machine.
 
 > [!NOTE]
 > **macOS `Cmd+Left` / `Cmd+Right` / `Cmd+Delete`**
@@ -149,9 +159,11 @@ Run `/context` to open a color-coded report of the current model's context-windo
 
 Provider-reported totals remain distinct from local conversation estimates. When a provider total is unavailable, the report labels the conversation count as an estimate and marks the total usage as unavailable. Use `/tokens` when you want a text summary in the conversation transcript instead.
 
+When usage grows faster than expected, run `/context-doctor` to attribute tokens to each injected component: the base system prompt, memory files, the skills index, built-in tool schemas, and MCP tool schemas. To confirm which tools the agent can currently call, run `/tools`. For the thread's running cost estimate, run `/cost`; the same figure appears in the status bar. See [Diagnose and audit a session](cli-reference.md#diagnose-and-audit-a-session).
+
 ### External editor
 
-Press `Ctrl+X` or type `/editor` to compose prompts in an external editor. Deep Agents Code checks `$VISUAL`, then `$EDITOR`, then falls back to `vi` (macOS/Linux) or `notepad` (Windows). GUI editors (VS Code, Cursor, Zed, etc.) automatically receive a `--wait` flag so Deep Agents Code blocks until you close the file.
+Press `Ctrl+G` or type `/editor` to compose prompts in an external editor. Deep Agents Code checks `$VISUAL`, then `$EDITOR`, then falls back to `vi` (macOS/Linux) or `notepad` (Windows). GUI editors (VS Code, Cursor, Zed, etc.) automatically receive a `--wait` flag so Deep Agents Code blocks until you close the file.
 
 ```bash
 # Set in your shell profile (~/.zshrc, ~/.bashrc, etc.)

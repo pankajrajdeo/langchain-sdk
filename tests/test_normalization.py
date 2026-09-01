@@ -3,7 +3,10 @@ from unittest.mock import patch
 
 from update_docs import (
     Download,
+    OUTPUT_ROOT,
     add_fragment_aliases,
+    canonical_page_url,
+    discover_seed_urls,
     download_one,
     links_from,
     local_path_for,
@@ -77,6 +80,49 @@ export const PatternEmbed = ({pattern}) => { return <div>{pattern}</div>; }
         self.assertNotIn("export const", output)
         self.assertIn("Interactive example", output)
         self.assertIn(PAGE_URL, output)
+
+    def test_generated_undefined_placeholders_are_removed(self) -> None:
+        output = self.normalize(
+            "# Changelog\n\n"
+            "export const sandbox_slug_0 = undefined\n\n"
+            "export const snapshot_id_0 = undefined;\n\n"
+            'export const prefix_0 = "api.smith"\n\n'
+            "export const protocol_0 = false\n\n"
+            "Weekly updates.\n"
+        )
+        self.assertEqual(output, "# Changelog\n\nWeekly updates.\n")
+
+    @patch("update_docs.request_bytes")
+    def test_new_python_project_is_discovered_and_mapped_dynamically(self, request) -> None:
+        project = "https://docs.langchain.com/oss/python/future-project"
+        page = f"{project}/guides/get-started"
+
+        def response(url, timeout):
+            self.assertEqual(timeout, 30)
+            if url.endswith("/sitemap.xml"):
+                return (
+                    f"<urlset><url><loc>{page}</loc></url></urlset>".encode(),
+                    url,
+                    "application/xml",
+                )
+            if url.endswith("/llms.txt"):
+                return f"- [Future project]({project})\n".encode(), url, "text/plain"
+            if url.endswith("/llms-full.txt"):
+                return b"", url, "text/plain"
+            self.fail(f"unexpected discovery URL: {url}")
+
+        request.side_effect = response
+        seeds, full_pages, errors = discover_seed_urls(30)
+
+        self.assertEqual(errors, [])
+        self.assertEqual(full_pages, {})
+        self.assertIn(project, seeds)
+        self.assertIn(page, seeds)
+        self.assertEqual(canonical_page_url(page), page)
+        self.assertEqual(
+            local_path_for(page).relative_to(OUTPUT_ROOT).as_posix(),
+            "future-project/guides/get-started.md",
+        )
 
     def test_mirrored_links_and_fragments_become_repository_relative(self) -> None:
         mirrored = {

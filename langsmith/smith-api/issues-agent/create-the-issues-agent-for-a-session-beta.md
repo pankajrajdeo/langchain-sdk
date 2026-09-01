@@ -184,54 +184,81 @@ paths:
         content:
           application/json:
             schema:
-              $ref: >-
-                #/components/schemas/tracer_session_issues_agent.CreateIssuesAgentRequest
+              $ref: '#/components/schemas/agent.CreateIssuesAgentRequest'
       responses:
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.IssuesAgent'
+                $ref: '#/components/schemas/agent.IssuesAgent'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '409':
           description: Conflict
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues_agent.CreateIssuesAgentRequest:
+    agent.CreateIssuesAgentRequest:
       type: object
       properties:
+        analysis_level:
+          description: >-
+            AnalysisLevel is how thoroughly Engine monitors the project:
+            "standard"
+
+            (the default), "reduced" (fewer traces at lower cost), or "expanded"
+            (more
+
+            traces per run, for projects with enough tracing volume). Omit for
+
+            "standard".
+          type: string
+          enum:
+            - standard
+            - reduced
+            - expanded
+        auto_open_fix_pr:
+          description: >-
+            AutoOpenFixPR opens a draft pull request for every fix the agent
+
+            produces, instead of waiting for one to be opened from the issue.
+            Has no
+
+            effect without github_repo_url, since a fix has nowhere to open.
+            Omit for
+
+            false.
+          type: boolean
         context_hub_repo_handle:
           type: string
         github_base_branch:
@@ -247,10 +274,33 @@ components:
         run_filter:
           description: Runs-filter-DSL trace scope; omit/null/empty for no scope.
           type: string
-    tracer_session_issues_agent.IssuesAgent:
+    agent.IssuesAgent:
       type: object
       properties:
         agent_overview_accepted:
+          type: boolean
+        analysis_level:
+          description: >-
+            AnalysisLevel controls coverage vs cost: "standard" (default),
+            "reduced"
+
+            (one scan a day, fewer traces per scan), or "expanded" (2x traces
+            per
+
+            run). Stored NULL in the DB means standard; reads always return a
+
+            concrete value.
+          type: string
+          enum:
+            - standard
+            - reduced
+            - expanded
+        auto_open_fix_pr:
+          description: >-
+            When true, every fix run on this board opens a pull request instead
+            of
+
+            parking the fix for someone to publish. Defaults to false.
           type: boolean
         context_hub_repo_handle:
           type: string
@@ -279,13 +329,18 @@ components:
             IDs of the latest run on LangSmith Deployments; NULL until first
             trigger.
           type: string
+        linear_available:
+          type: boolean
+        linear_integration:
+          $ref: '#/components/schemas/agent.LinearIntegration'
+        linear_sync_health:
+          $ref: '#/components/schemas/agent.LinearSyncHealth'
         preview_verify_enabled:
           description: >-
             PreviewVerifyEnabled lets this board's fix runs use preview
             deployments
 
-            when the deployment-wide preview verification kill switch is also
-            on.
+            when issue validation is enabled for its tracing project.
           type: boolean
         priorities:
           items:
@@ -301,6 +356,11 @@ components:
 
             validateRunFilter.
           type: string
+        selected_trace_count:
+          description: >-
+            SelectedTraceCount is the number of traces Engine inspected in the
+            last 14 days.
+          type: integer
         session_agent_overview_repo_id:
           type: string
         session_id:
@@ -342,11 +402,43 @@ components:
 
             never edits it. NULL when the user hasn't set any.
           type: string
-    tracer_session_issues_agent.ErrorResponse:
+    agent.ErrorResponse:
       type: object
       properties:
         error:
           type: string
+    agent.LinearIntegration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        project_id:
+          type: string
+        project_name:
+          type: string
+        team_id:
+          type: string
+        team_key:
+          type: string
+        team_name:
+          type: string
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+    agent.LinearSyncHealth:
+      type: object
+      properties:
+        auth_required:
+          type: integer
+        failed:
+          type: integer
+        paused:
+          type: integer
+        pending:
+          type: integer
+        synced:
+          type: integer
   securitySchemes:
     API Key:
       type: apiKey

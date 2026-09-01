@@ -186,65 +186,63 @@ paths:
         content:
           application/json:
             schema:
-              $ref: >-
-                #/components/schemas/tracer_session_issues_agent.SaveOverviewRequest
+              $ref: '#/components/schemas/agent.SaveOverviewRequest'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: >-
-                  #/components/schemas/tracer_session_issues_agent.SaveOverviewResponse
+                $ref: '#/components/schemas/agent.SaveOverviewResponse'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues_agent.SaveOverviewRequest:
+    agent.SaveOverviewRequest:
       type: object
       properties:
         content:
           type: string
-    tracer_session_issues_agent.SaveOverviewResponse:
+    agent.SaveOverviewResponse:
       type: object
       properties:
         commit_hash:
           type: string
         session_agent_overview_repo_id:
           type: string
-    tracer_session_issues_agent.ErrorResponse:
+    agent.ErrorResponse:
       type: object
       properties:
         error:

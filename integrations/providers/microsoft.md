@@ -29,11 +29,11 @@ This page covers all LangChain integrations with [Microsoft Azure](https://porta
 
 Microsoft offers three main options for accessing chat models through Azure:
 
-1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended) — Access any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface, with enterprise features such as keyless authentication through [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity), regional data residency, and private networking. Use [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) on the v1 API, or [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) for traditional deployments.
+1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended): Access any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) through a single interface, with enterprise features such as keyless authentication through [Microsoft Entra ID](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/managed-identity), regional data residency, and private networking. Use [`ChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/base/ChatOpenAI) on the v1 API, or [`AzureChatOpenAI`](https://reference.langchain.com/python/langchain-openai/chat_models/azure/AzureChatOpenAI) for traditional deployments.
 
    Azure OpenAI also supports the [Responses API](#responses-api), which gives you access to server-side tools like code interpreter, image generation, and file search directly from your chat model.
-2. **[Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)** — Recommended for accessing tools, storage, and custom middleware from the broader Azure ecosystem alongside your chat model.
-3. **[Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)** — Allows deployment and management of custom or fine-tuned open-source models with Azure Machine Learning.
+2. **[Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)**: Recommended for accessing tools, storage, and custom middleware from the broader Azure ecosystem alongside your chat model.
+3. **[Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)**: Allows deployment and management of custom or fine-tuned open-source models with Azure Machine Learning.
 
 ### Azure OpenAI
 
@@ -149,8 +149,8 @@ See a [usage example](../chat/azure_ai.md).
 
 Microsoft offers two main options for accessing LLMs through Azure:
 
-1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended) — Access any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) as a completion LLM with [`AzureOpenAI`](https://reference.langchain.com/python/langchain-openai/llms/azure/AzureOpenAI).
-2. **[Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)** — Use custom or open-source models hosted on Azure Machine Learning online endpoints.
+1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended): Access any model deployed in Microsoft Foundry (including OpenAI, Llama, DeepSeek, Mistral, and Phi) as a completion LLM with [`AzureOpenAI`](https://reference.langchain.com/python/langchain-openai/llms/azure/AzureOpenAI).
+2. **[Azure ML](https://learn.microsoft.com/en-us/azure/machine-learning/)**: Use custom or open-source models hosted on Azure Machine Learning online endpoints.
 
 ### Azure OpenAI
 
@@ -201,8 +201,8 @@ print(llm.invoke("Write a haiku about the ocean."))
 
 Microsoft offers two main options for accessing embedding models through Azure:
 
-1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended) — Use embedding models deployed in Microsoft Foundry (including OpenAI `text-embedding-3-small`, `text-embedding-3-large`, and Cohere) with [`AzureOpenAIEmbeddings`](https://reference.langchain.com/python/langchain-openai/embeddings/azure/AzureOpenAIEmbeddings).
-2. **[Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)** — Recommended for accessing tools, storage, and custom middleware from the broader Azure ecosystem alongside your embedding model.
+1. **[Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)** (recommended): Use embedding models deployed in Microsoft Foundry (including OpenAI `text-embedding-3-small`, `text-embedding-3-large`, and Cohere) with [`AzureOpenAIEmbeddings`](https://reference.langchain.com/python/langchain-openai/embeddings/azure/AzureOpenAIEmbeddings).
+2. **[Azure AI](https://learn.microsoft.com/en-us/azure/ai-studio/how-to/deploy-models)**: Recommended for accessing tools, storage, and custom middleware from the broader Azure ecosystem alongside your embedding model.
 
 ### Azure OpenAI
 
@@ -312,6 +312,52 @@ See [usage examples for the Azure Blob Storage Loader](../document_loaders/azure
 from langchain_azure_storage.document_loaders import AzureBlobStorageLoader
 ```
 
+## Backends
+
+### Azure Blob Storage Backend
+
+> [Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) is Microsoft's object storage solution for the cloud. `AzureBlobBackend` implements the Deep Agents `BackendProtocol`, so a deep agent can persist its entire workspace (files, memories, and artifacts) in a blob container.
+
+> [!NOTE]
+> The `AzureBlobBackend` is part of the `langchain-azure-storage` package, which is currently in **Public Preview**.
+
+Install with the `deepagents` extra (requires Python 3.11+):
+
+```bash
+pip install -U "langchain-azure-storage[deepagents]"
+```
+
+```bash
+uv add "langchain-azure-storage[deepagents]"
+```
+
+```python
+from langchain_azure_storage.deepagents import AzureBlobBackend
+```
+
+**Quick start:**
+
+```python
+from deepagents import create_deep_agent
+from langchain_azure_storage.deepagents import AzureBlobBackend
+
+backend = AzureBlobBackend(
+    account_url="https://<my-storage-account-name>.blob.core.windows.net",
+    container_name="agent-workspace",
+    prefix="session-001/",  # Optional: isolate each agent/session under a prefix.
+)
+
+agent = create_deep_agent(backend=backend)
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "Write a hello world script to hello.py"}]}
+)
+```
+
+The backend defaults to [`DefaultAzureCredential`](https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview) and accepts a `credential` override.
+
+For more information, see [Backend integrations](../backends.md). See the [package repository](https://github.com/langchain-ai/langchain-azure/tree/main/libs/azure-storage) for full usage details and security guidance.
+
 ## Memory
 
 ### Azure cosmos DB chat message history
@@ -398,7 +444,7 @@ Below are two available Azure Cosmos DB APIs that can provide vector store funct
 > You can apply your MongoDB experience and continue to use your favorite MongoDB drivers, SDKs, and tools by pointing your application to the API for MongoDB vCore account's connection string.
 > Use vector search in Azure Cosmos DB for MongoDB vCore to seamlessly integrate your AI-based applications with your data that's stored in Azure Cosmos DB.
 
-##### Installation and setup
+#### Installation and setup
 
 See [detailed configuration instructions](../vectorstores/azure_cosmos_db_mongo_vcore.md).
 
@@ -412,7 +458,7 @@ pip install langchain-azure-ai pymongo
 uv add langchain-azure-ai pymongo
 ```
 
-##### Deploy Azure cosmos DB on Microsoft Azure
+#### Deploy Azure cosmos DB on Microsoft Azure
 
 Azure Cosmos DB for MongoDB vCore provides developers with a fully managed MongoDB-compatible database service for building modern applications with a familiar architecture.
 
@@ -435,7 +481,7 @@ from langchain_azure_ai.vectorstores import AzureCosmosDBMongoVCoreVectorSearch
 > as the vectors are stored in the same logical unit as the data they represent. This simplifies data management, AI application architectures, and the
 > efficiency of vector-based operations.
 
-##### Installation and setup
+#### Installation and setup
 
 See [detail configuration instructions](../vectorstores/azure_cosmos_db_no_sql.md).
 
@@ -449,7 +495,7 @@ pip install langchain-azure-cosmosdb azure-cosmos
 uv add langchain-azure-cosmosdb azure-cosmos
 ```
 
-##### Deploy Azure cosmos DB on Microsoft Azure
+#### Deploy Azure cosmos DB on Microsoft Azure
 
 Azure Cosmos DB offers a solution for modern apps and intelligent workloads by being very responsive with dynamic and elastic autoscale. It is available
 in every Azure region and can automatically replicate data closer to users. It has SLA guaranteed low-latency and high availability.
@@ -478,7 +524,7 @@ Since Azure Database for PostgreSQL is open-source Postgres, you can use the [La
 
 By leveraging your current SQL Server databases for vector search, you can enhance data capabilities while minimizing expenses and avoiding the challenges of transitioning to new systems.
 
-##### Installation and setup
+#### Installation and setup
 
 See [detail configuration instructions](https://learn.microsoft.com/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications?view=azuresql).
 
@@ -488,7 +534,7 @@ We need to install the `langchain-sqlserver` python package.
 !pip install langchain-sqlserver==0.1.1
 ```
 
-##### Deploy Azure SQL DB on Microsoft Azure
+#### Deploy Azure SQL DB on Microsoft Azure
 
 [Sign Up](https://learn.microsoft.com/azure/azure-sql/database/free-offer?view=azuresql) for free to get started today.
 
@@ -704,16 +750,71 @@ Before you begin, you need an Azure subscription, a Foundry project, a deployed 
 
 Choose a hosting protocol based on how clients interact with the agent:
 
-| Protocol    | Host class              | Endpoint       | Use when                                                                                                                            |
-| ----------- | ----------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Responses   | `ResponsesHostServer`   | `/responses`   | You need OpenAI-compatible chat, streaming, response history, or conversation threading. Start here for most conversational agents. |
-| Invocations | `InvocationsHostServer` | `/invocations` | You need a custom JSON shape, a webhook-style endpoint, or non-conversational processing.                                           |
+| Protocol    | Run argument             | SDK host class          | Endpoint       | Use when                                                                                                                            |
+| ----------- | ------------------------ | ----------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Responses   | `--protocol responses`   | `ResponsesHostServer`   | `/responses`   | You need OpenAI-compatible chat, streaming, response history, or conversation threading. Start here for most conversational agents. |
+| Invocations | `--protocol invocations` | `InvocationsHostServer` | `/invocations` | You need a custom JSON shape, a webhook-style endpoint, or non-conversational processing.                                           |
 
-To host and deploy a graph:
+See the complete run samples for the [Responses protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/responses/10-run) and [Invocations protocol](https://github.com/microsoft-foundry/foundry-samples/tree/main/samples/python/hosted-agents/langgraph/invocations/03-run).
 
-1. Pass the compiled graph to the host server for your chosen protocol.
-2. Set `FOUNDRY_PROJECT_ENDPOINT` and `FOUNDRY_MODEL_NAME`, then run and test the host locally.
-3. Use `azd ai agent init` to initialize a hosted-agent project, `azd ai agent run` to test its container, and `azd provision` and `azd deploy` to deploy it. You can also deploy with the Foundry Toolkit Visual Studio Code extension.
+#### Use the configuration-driven runner
+
+If your agent already runs with the LangGraph CLI, use `langchain_azure_ai.agents.hosting.run` tool from the same project directory. The runner uses the existing `langgraph.json` configuration to load the compiled graph, so no code change is needed.
+
+Set the Foundry project endpoint and model deployment name, then select the protocol when you start the host:
+
+#### Responses
+```bash
+export FOUNDRY_PROJECT_ENDPOINT="https://<account>.services.ai.azure.com/api/projects/<project>"
+export AZURE_AI_MODEL_DEPLOYMENT_NAME="<model-deployment-name>"
+python -m langchain_azure_ai.agents.hosting.run --protocol responses
+```
+
+#### Invocations
+```bash
+export FOUNDRY_PROJECT_ENDPOINT="https://<account>.services.ai.azure.com/api/projects/<project>"
+export AZURE_AI_MODEL_DEPLOYMENT_NAME="<model-deployment-name>"
+python -m langchain_azure_ai.agents.hosting.run --protocol invocations
+```
+
+For deployment, set `codeConfiguration.entryPoint` on the agent service in `azure.yaml` to the same runner and protocol. Keep the existing project path, runtime, and dependency resolution settings:
+
+#### Responses
+```yaml
+services:
+    my-agent:
+        codeConfiguration:
+            entryPoint: '-m langchain_azure_ai.agents.hosting.run --protocol responses'
+```
+
+#### Invocations
+```yaml
+services:
+    my-agent:
+        codeConfiguration:
+            entryPoint: '-m langchain_azure_ai.agents.hosting.run --protocol invocations'
+...
+```
+
+#### Use the SDK host classes
+
+Use the SDK host classes when you need to customize server construction, control the server lifecycle directly, or implement advanced hosting behavior such as custom routes or handlers:
+
+#### Responses
+```python
+from langchain_azure_ai.agents.hosting import ResponsesHostServer
+
+ResponsesHostServer(graph).run()
+```
+
+#### Invocations
+```python
+from langchain_azure_ai.agents.hosting import InvocationsHostServer
+
+InvocationsHostServer(graph).run()
+```
+
+To deploy either approach, use `azd ai agent init` to initialize a hosted-agent project, `azd ai agent run` to test it locally, and `azd deploy` to deploy it. Run `azd provision` first only when you need to create the Foundry project or other Azure resources. You can also deploy with the Foundry Toolkit Visual Studio Code extension.
 
 The Microsoft Learn guide includes complete examples for both protocols, conversation state, human-in-the-loop flows, testing, deployment, and troubleshooting.
 

@@ -98,7 +98,7 @@ Each condition group specifies:
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `project`           | `projects:read`, `projects:update`, `projects:delete`, `runs:read`, `runs:share`, `runs:delete`, `projects:increase-trace-tier`, `projects:decrease-trace-tier`                   |
 | `prompt`            | `prompts:read`, `prompts:update`, `prompts:delete`, `prompts:share`, `prompts:tag`                                                                                                |
-| `dataset`           | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`                                                                                      |
+| `dataset`           | `datasets:read`, `datasets:update`, `datasets:delete`, `datasets:share`, `datasets:download`, `datasets:clone`                                                                    |
 | `deployment`        | `deployments:read`, `deployments:update`, `deployments:delete`                                                                                                                    |
 | `queues`            | `annotation-queues:create`, `annotation-queues:delete`, `annotation-queues:read`, `annotation-queues:update`                                                                      |
 | `mcp_server`        | `mcp-servers:read`, `mcp-servers:invoke`, `mcp-servers:update`, `mcp-servers:delete`. See [Fleet tool access control](fleet/access-and-oversight.md#tool-access-control). |
@@ -106,6 +106,9 @@ Each condition group specifies:
 
 > [!NOTE]
 > Runs don't have their own tags. Run permissions (`runs:read`, `runs:create`, `runs:share`, `runs:delete`) are evaluated against the parent project's tags.
+
+> [!NOTE]
+> Cloning copies examples from a source dataset to a target dataset. The `datasets:clone` permission is checked for both datasets: once using the source dataset’s tags, and once using the target dataset’s tags. To clone successfully, a policy must grant `datasets:clone` access to both datasets.
 
 #### Conditions
 
@@ -116,7 +119,7 @@ Each condition in the `conditions` array specifies:
 * **`operator`** - The comparison operator
 * **`attribute_value`** - The value to compare against
 
-##### Operators
+#### Operators
 
 | Operator                 | Description                                      |
 | ------------------------ | ------------------------------------------------ |
@@ -127,7 +130,7 @@ Each condition in the `conditions` array specifies:
 | `matches`                | Glob pattern matching with `*` and `?` wildcards |
 | `not_matches`            | Match when value doesn't match glob pattern      |
 
-##### `_if_exists` variants
+#### `_if_exists` variants
 
 Each operator has an `_if_exists` variant that matches by default when the tag key is absent, or evaluates the condition normally when the tag exists:
 
@@ -147,7 +150,7 @@ Each operator has an `_if_exists` variant that matches by default when the tag k
 
 The `role_ids` array specifies which workspace roles the policy applies to. When a user with that role accesses a resource, the policy conditions are evaluated.
 
-Policies can be attached to roles when creating the policy, or attached later via the API.
+Policies can be attached to [workspace roles](rbac.md#workspace-roles) (built-in or [custom](rbac.md#custom-roles)) when creating the policy, or attached later via the API.
 
 ## Managing access policies
 

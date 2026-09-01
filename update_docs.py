@@ -91,7 +91,12 @@ GENERATED_COMPONENT_RE = re.compile(
     r"(?m)^export const (PatternEmbed|ExampleEmbed)\s*=.*$"
 )
 SIMPLE_EXPORT_RE = re.compile(
-    r"(?m)^export const (?:protocol|prefix|suffix)_\d+\s*=.*\n?"
+    # Mintlify emits page-local placeholders for interactive examples. They
+    # carry no documentation content and cannot execute in rendered Markdown.
+    r"(?m)^export const (?:"
+    r"(?:protocol|prefix|suffix)_\d+\s*=.*"
+    r"|[A-Za-z_$][\w$]*\s*=\s*undefined\s*;?\s*"
+    r")\n?"
 )
 DOC_INDEX_RE = re.compile(
     r"\A> ## Documentation Index\n"
@@ -1314,6 +1319,10 @@ def mirror(*, workers: int, timeout: float, clean: bool) -> int:
         print(f"Ignored {len(skipped)} routes that redirect outside docs.langchain.com.", file=sys.stderr)
     if normalization_warnings:
         print(f"Normalization warnings in {len(normalization_warnings)} pages.", file=sys.stderr)
+        for url, warnings in sorted(normalization_warnings.items()):
+            print(f"  - {url}:", file=sys.stderr)
+            for warning in warnings:
+                print(f"      {warning}", file=sys.stderr)
         return 1
     return 0
 

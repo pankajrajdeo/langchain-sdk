@@ -190,63 +190,189 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/directories.GetDirectoryResponse'
+                $ref: '#/components/schemas/directory.GetDirectoryResponse'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    directories.GetDirectoryResponse:
+    directory.GetDirectoryResponse:
       type: object
       properties:
         commit_hash:
           type: string
         commit_id:
           type: string
+          format: uuid
         files:
+          additionalProperties:
+            $ref: '#/components/schemas/directory.DirectoryEntryOutput'
           type: object
-          additionalProperties: {}
+      required:
+        - commit_id
+        - commit_hash
+        - files
+    directory.errorResponse:
+      type: object
+      required:
+        - detail
+        - status
+        - title
+        - type
+      properties:
+        code:
+          type: string
+        conflicting_path:
+          type: string
+        detail:
+          type: string
+        path:
+          type: string
+        rule:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    directory.DirectoryEntryOutput:
+      discriminator:
+        propertyName: type
+        mapping:
+          file:
+            $ref: '#/components/schemas/directory.FileEntry'
+          agent:
+            $ref: '#/components/schemas/directory.AgentEntryOutput'
+          skill:
+            $ref: '#/components/schemas/directory.SkillEntryOutput'
+      oneOf:
+        - $ref: '#/components/schemas/directory.FileEntry'
+        - $ref: '#/components/schemas/directory.AgentEntryOutput'
+        - $ref: '#/components/schemas/directory.SkillEntryOutput'
+    directory.FileEntry:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - file
+          type: string
+        content:
+          type: string
+      required:
+        - type
+        - content
+      type: object
+    directory.AgentEntryOutput:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - agent
+          type: string
+        repo_handle:
+          type: string
+        owner:
+          type: string
+        commit_hash:
+          type: string
+        selector:
+          $ref: '#/components/schemas/directory.DirectorySelector'
+          description: The authored selection policy for this linked directory.
+      required:
+        - type
+        - repo_handle
+        - owner
+        - commit_hash
+      type: object
+    directory.SkillEntryOutput:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - skill
+          type: string
+        repo_handle:
+          type: string
+        owner:
+          type: string
+        commit_hash:
+          type: string
+        selector:
+          $ref: '#/components/schemas/directory.DirectorySelector'
+          description: The authored selection policy for this linked directory.
+      required:
+        - type
+        - repo_handle
+        - owner
+        - commit_hash
+      type: object
+    directory.DirectorySelector:
+      discriminator:
+        propertyName: type
+        mapping:
+          LATEST:
+            $ref: '#/components/schemas/directory.LatestSelector'
+          COMMIT:
+            $ref: '#/components/schemas/directory.CommitSelector'
+      oneOf:
+        - $ref: '#/components/schemas/directory.LatestSelector'
+        - $ref: '#/components/schemas/directory.CommitSelector'
+    directory.LatestSelector:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - LATEST
+          type: string
+      required:
+        - type
+      type: object
+    directory.CommitSelector:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - COMMIT
+          type: string
+        commit_id:
+          type: string
+          format: uuid
+      required:
+        - type
+        - commit_id
+      type: object
   securitySchemes:
     API Key:
       type: apiKey

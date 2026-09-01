@@ -208,6 +208,7 @@ components:
             oneOf:
               - $ref: '#/components/schemas/TenantShareRunToken'
               - $ref: '#/components/schemas/TenantShareDatasetToken'
+              - $ref: '#/components/schemas/TenantShareThreadToken'
             discriminator:
               propertyName: type
               mapping:
@@ -215,6 +216,8 @@ components:
                   $ref: '#/components/schemas/TenantShareDatasetToken'
                 run:
                   $ref: '#/components/schemas/TenantShareRunToken'
+                thread:
+                  $ref: '#/components/schemas/TenantShareThreadToken'
           type: array
           title: Entities
       type: object
@@ -304,6 +307,39 @@ components:
         - created_at
         - dataset_id
       title: TenantShareDatasetToken
+    TenantShareThreadToken:
+      properties:
+        type:
+          type: string
+          const: thread
+          title: Type
+        share_token:
+          type: string
+          title: Share Token
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        thread_id:
+          type: string
+          title: Thread Id
+        session_id:
+          type: string
+          format: uuid
+          title: Session Id
+        session_name:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Session Name
+      type: object
+      required:
+        - type
+        - share_token
+        - created_at
+        - thread_id
+        - session_id
+      title: TenantShareThreadToken
     ValidationError:
       properties:
         loc:

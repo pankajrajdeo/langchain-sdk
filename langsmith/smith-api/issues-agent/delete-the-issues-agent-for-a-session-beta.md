@@ -184,38 +184,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tracer_session_issues_agent.ErrorResponse'
+                $ref: '#/components/schemas/agent.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    tracer_session_issues_agent.ErrorResponse:
+    agent.ErrorResponse:
       type: object
       properties:
         error:

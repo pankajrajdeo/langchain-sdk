@@ -1,106 +1,83 @@
 # Model fallbacks
 
-> Automatically retry a request against backup model configurations when the primary model rate-limits, errors, or returns another configured status code.
+> Automatically retry a request against backup models when the primary model rate-limits, errors, or returns another configured status code.
 
 > [!NOTE]
 > **Beta:** The LLM Gateway is in [beta](release-stages.md).
 
-Model fallbacks retry a request against one or more backup [model configurations](model-configurations.md) when the primary model returns an error you've flagged as retryable, such as a rate limit or a provider outage. Instead of building retry logic into every agent, define the fallback order once in LangSmith and call it through a single gateway route.
+Model fallbacks retry a request against one or more backup models when the primary model returns a configured error, such as a rate limit or provider outage. Define the fallback order once in LangSmith, then continue using the standard LLM Gateway endpoint and model ID in your application.
 
 ## How it works
 
-A fallback configuration has:
+A fallback chain has:
 
-* **A name**: exposed at the route `https://gateway.smith.langchain.com/routes/{name}`. Clients call this URL instead of a provider-specific path.
-* **One or more fallback chains**: each an ordered list of [model configurations](model-configurations.md) to try in priority order.
-* **Triggers**: the upstream HTTP status codes that should cause the gateway to move on to the next model in the chain. For example, `429` for rate limits, or `500`, `502`, `503`, `504` for other provider errors.
+* **A primary model**: the provider and model that trigger the chain when a request fails.
+* **One to five fallbacks**: an ordered list of direct provider models or saved [model configurations](model-configurations.md).
+* **Triggers**: the upstream HTTP status codes that move the request to the next model. For example, use `429` for rate limits, or `500`, `502`, `503`, and `504` for provider errors.
 
 For each request, the gateway:
 
-1. Determines the wire format from the request path, and considers only the chains in that format (see [Wire formats](#wire-formats)).
-2. Picks one of those chains (see [Selecting a chain](#selecting-a-chain)).
-3. Calls the chain's first model configuration.
-4. If the response status matches a configured trigger, discards that response and calls the next model configuration in the chain.
-5. Repeats until a candidate returns a non-trigger response, or the chain is exhausted—in which case the last candidate's response is returned to the caller.
+1. Calls the primary model selected by the request's provider-prefixed model ID.
+2. If the request fails with a configured trigger status or a transport error, loads the matching fallback chain.
+3. Calls each fallback in order until one succeeds, returns a status that does not trigger another fallback, or the chain is exhausted.
+4. Returns the final response in the API format used by the client.
 
-Each configuration in a chain can point to a different provider and model. On both the first attempt and any fallback, the gateway calls the candidate with its configured model name, replacing the value the client sent. The client's model field only selects which chain to use from those matching the path's [wire format](#wire-formats). If no chain matches, the gateway uses the first chain defined for that wire format as the default.
+Fallbacks can use a different provider and API format than the primary model. The gateway translates requests and responses between [supported API formats](llm-gateway-api-formats.md), so an Anthropic primary can fall back to an OpenAI model without client-side changes.
 
-## Wire formats
+Each attempt is traced and counted against [spend policies](llm-gateway-spend-policies.md) separately. A request that uses two fallbacks records three model calls: the primary attempt and two fallback attempts.
 
-Each chain is either OpenAI-compatible or Anthropic-compatible, since the gateway forwards the same request body to every candidate in it:
-
-| Chain format         | Model configuration provider   | Path on `/routes/{name}`                          |
-| -------------------- | ------------------------------ | ------------------------------------------------- |
-| OpenAI-compatible    | **OpenAI Compatible Endpoint** | `POST /v1/chat/completions`, `POST /v1/responses` |
-| Anthropic-compatible | **Anthropic**                  | `POST /v1/messages`                               |
-
-Only these two provider types can go in a chain. A [model configuration](model-configurations.md) saved for another provider, such as Azure OpenAI or Bedrock, isn't eligible. To reach a host that speaks the OpenAI API, save it as an **OpenAI Compatible Endpoint** with its base URL.
-
-The path you call selects the format, and the gateway only considers chains in that format. Any other path returns `501 Not Implemented`.
-
-A single fallback configuration can hold chains of both wire formats, so one route can serve both OpenAI-compatible and Anthropic-compatible clients. Mixing formats is optional: a configuration with only OpenAI-compatible chains returns `502` for `/v1/messages` calls, and one with only Anthropic-compatible chains returns `502` for `/v1/chat/completions` calls.
-
-## Create a fallback configuration
+## Create a fallback chain
 
 > [!WARNING]
-> Creating and managing fallback configurations requires `organization:manage` permission. For the full permissions breakdown, refer to [access control](llm-gateway-access.md).
+> Creating and managing fallback chains requires `organization:manage` permission. For the full permissions breakdown, see [Access control](llm-gateway-access.md).
+
+To create a fallback chain:
 
 1. Go to **Settings → Gateway → LLM Gateway** and select the **Model Fallbacks** tab.
-2. Click **Create configuration**.
-3. Enter a **Configuration name**. This becomes `{name}` in the gateway URL `https://gateway.smith.langchain.com/routes/{name}`.
-4. Select the **Workspace** the configuration belongs to. [Model configurations](model-configurations.md) are workspace-scoped, so only that workspace's configurations are available to add to a chain. The workspace can't be changed later—delete and recreate the configuration to move it.
-5. Under **Fallback triggers**, review the HTTP status codes that should trigger a fallback. The list comes prepopulated with the transient codes another provider has a chance of serving (such as `429`, `500`, and `503`); add or remove codes as needed.
-6. Under **Model fallback chains**, click **Add chain**, then add two to five model configurations in the order the gateway should try them. A chain's first model fixes its [wire format](#wire-formats); only configurations of that format can follow. The gateway groups chains by format, and the first chain in each group is that format's **default**, which it uses when a request's model does not select another chain.
-7. Click **Create configuration**.
+2. Click **Create fallback chain**.
+3. Select the **Workspace** where the chain applies.
+4. Select the primary provider and model. Requests to this provider-prefixed model ID use the chain when the primary attempt fails.
+5. Under **Fallbacks**, add one to five backup models in the order the gateway should try them. Choose a provider and model directly, select an existing model configuration, or create a custom model configuration.
+6. Under **Configure fallback triggers (advanced)**, review the HTTP status codes that should trigger the next fallback. Add or remove status codes as needed.
+7. Click **Create chain**.
+
+A provider and model can have one fallback chain in each workspace. To change its behavior, edit the existing chain.
 
 ## Make a call
 
-Call the route the same way you'd call a [custom provider](llm-gateway-custom-providers.md), on the path for the [wire format](#wire-formats) you want:
+Call the standard LLM Gateway endpoint with the primary provider-prefixed model ID. You do not need a route-specific URL or additional request fields:
 
 ```bash
-curl https://gateway.smith.langchain.com/routes/my-route/v1/chat/completions \
+curl https://gateway.smith.langchain.com/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
-    -d '{"messages":[{"role":"user","content":"ping"}]}'
+    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
 
 ```bash
-curl https://gateway.smith.langchain.com/routes/my-route/v1/messages \
+curl https://<data_plane_host>/gateway/v1/chat/completions \
     -H "Authorization: Bearer $LANGSMITH_API_KEY" \
     -H "Content-Type: application/json" \
-    -d '{"max_tokens":1024,"messages":[{"role":"user","content":"ping"}]}'
+    -d '{"model":"anthropic/claude-sonnet-4-6","messages":[{"role":"user","content":"Hello!"}]}'
 ```
 
-The gateway tries each model configuration in the selected chain, in order, until one responds without a trigger status. Each attempt is traced and counted against [spend policies](llm-gateway-spend-policies.md) on its own, so a request that falls back records one call per candidate tried.
+The gateway applies the fallback chain configured for `anthropic/claude-sonnet-4-6` in the API key's workspace. If no chain matches, the gateway returns the primary model's response without attempting a fallback.
 
-## Selecting a chain
+## Choose fallback candidates
 
-A configuration can hold more than one fallback chain, which is useful when different model families need different fallback behavior. Among the chains matching the request's [wire format](#wire-formats), the gateway selects one by the request body's `model` field, in this order:
+You can add two types of fallback candidates:
 
-1. If `model` matches a chain's **alias**, that chain is used.
-2. Otherwise, if `model` matches a chain's **primary** (first) model configuration's underlying model name, that chain is used.
-3. If `model` is omitted, or matches neither, the first (default) chain of that format is used.
+* **Direct provider model**: select a supported gateway provider and model. This option uses the workspace's secret for that provider, or Gateway Credits for eligible hosted models.
+* **Model configuration**: select a saved workspace [model configuration](model-configurations.md). Use this option for a custom OpenAI-compatible or Anthropic endpoint, a custom model name, or configuration-specific parameters.
 
-An alias is optional and set per chain when you create the configuration. It is a caller-facing name, so a client can ask for `"model": "heavy"` without knowing which model backs it.
+Model configurations are workspace-scoped. A fallback chain can only use configurations from its selected workspace.
 
-Each model configuration in a chain can point to a different host, so a chain can fail over across separate deployments of the same model (for example, from a primary endpoint to a backup) with no single host as a point of failure.
+For example, configure `anthropic/claude-sonnet-4-6` as the primary model, `openai/gpt-5.4-mini` as the first fallback, and a saved OpenAI-compatible model configuration as the second fallback. The application continues to request `anthropic/claude-sonnet-4-6`; the gateway selects and translates fallback calls when needed.
 
-For example, a configuration with three chains:
+## See also
 
-| Chain                            | Format               | Models (in priority order)                                                                  |
-| -------------------------------- | -------------------- | ------------------------------------------------------------------------------------------- |
-| 1 (default OpenAI-compatible)    | OpenAI-compatible    | `gpt-5.5` on OpenAI → `gpt-5.5` on Azure OpenAI → `llama-3.3-70b` on a self-hosted endpoint |
-| 2                                | OpenAI-compatible    | `gpt-4o-mini` on OpenAI → `kimi-k2` on Fireworks                                            |
-| 3 (default Anthropic-compatible) | Anthropic-compatible | `claude-sonnet-4-6` on Anthropic → `claude-haiku-4-5` on Anthropic                          |
-
-* A `/v1/chat/completions` request with `"model": "gpt-5.5"` uses chain 1, which fails over from OpenAI to Azure OpenAI to the self-hosted endpoint.
-* A `/v1/chat/completions` request with `"model": "gpt-4o-mini"` uses chain 2, which fails over from OpenAI to Fireworks.
-* A `/v1/chat/completions` request with an unrecognized or omitted model uses chain 1, the default for that format.
-* A `/v1/messages` request uses chain 3 whatever its `model` is, because it's the only Anthropic-compatible chain. Chains 1 and 2 are never eligible on that path.
-
-## Next steps
-
-* [Custom model providers](llm-gateway-custom-providers.md): call the same model configurations directly, one at a time, without a fallback chain.
+* [API formats](llm-gateway-api-formats.md): review supported request formats and translation behavior.
+* [Custom model providers](llm-gateway-custom-providers.md): create model configurations for custom OpenAI- or Anthropic-compatible endpoints.
 * [Spend policies](llm-gateway-spend-policies.md): apply cost limits alongside fallback routing.
 
 ***

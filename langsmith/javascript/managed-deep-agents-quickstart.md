@@ -28,11 +28,20 @@ npx skills add langchain-ai/langchain-skills --skill managed-deep-agents --yes
 ## Create and deploy an agent
 
 ### Set up the project
-Install `managed-deepagents`, create a project, and open its directory:
+Create a project and open its directory:
 
 ```bash
-npm install managed-deepagents
-mda init research-assistant
+npx managed-deepagents init research-assistant
+cd research-assistant
+```
+
+```bash
+pnpm dlx managed-deepagents init research-assistant
+cd research-assistant
+```
+
+```bash
+bunx managed-deepagents init research-assistant
 cd research-assistant
 ```
 
@@ -133,6 +142,14 @@ Install the Tavily client:
 npm install @langchain/tavily
 ```
 
+```bash
+pnpm add @langchain/tavily
+```
+
+```bash
+bun add @langchain/tavily
+```
+
 Create a custom `internet_search` tool:
 
 ```ts
@@ -184,7 +201,17 @@ Install the project dependencies and start the agent:
 
 ```bash
 npm install
-mda dev .
+npx mda dev
+```
+
+```bash
+pnpm install
+pnpm exec mda dev
+```
+
+```bash
+bun install
+bunx mda dev
 ```
 
 `mda dev` loads the API keys from `.env`, starts a local Agent Server, and opens the agent in LangSmith Studio.
@@ -203,7 +230,15 @@ For more information, see [Develop locally with LangSmith Studio](managed-deep-a
 Deploy the project by running:
 
 ```bash
-mda deploy .
+npx mda deploy
+```
+
+```bash
+pnpm exec mda deploy
+```
+
+```bash
+bunx mda deploy
 ```
 
 Managed Deep Agents packages the project and runs it as a hosted deployment on [LangSmith Agent Server](../agent-server.md). When deployment finishes, the CLI prints the deployment dashboard URL.

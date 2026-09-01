@@ -261,7 +261,7 @@ components:
             ManagedEvalTermsAcceptedAt is the raw ISO 8601 timestamp string from
             the
 
-            config JSONB of when an org admin accepted the managed evaluator
+            config JSONB of when an org admin accepted the tuned evaluator
             terms;
 
             null if never accepted. Returned verbatim so the value is
@@ -271,7 +271,7 @@ components:
           type: string
         managed_evals_enabled:
           description: >-
-            ManagedEvalsEnabled is the org-level consent flag for managed
+            ManagedEvalsEnabled is the org-level consent flag for tuned
             evaluators
 
             (evaluators that spend a LangChain-held provider key).
@@ -424,8 +424,9 @@ components:
           type: boolean
         enable_burndown_vs_commit_view:
           description: >-
-            EnableBurndownVsCommitView indicates whether the org can view
-            contract usage (burndown vs commitment).
+            Deprecated: EnableBurndownVsCommitView is retained for backward
+            compatibility and is always false; contract-usage visibility is no
+            longer gated on it.
           type: boolean
         enable_granular_usage_reporting:
           description: >-
@@ -529,6 +530,17 @@ components:
 
             data protection (the "guard" policy type, backed by Presidio).
 
+            Set by Metronome entitlement, not admin-patchable. Defaults on, so
+            orgs
+
+            without an explicit entitlement value can configure guard policies.
+          type: boolean
+        gateway_pii_redaction_enabled:
+          description: |-
+            GatewayPIIRedactionEnabled indicates whether this org can use PII
+            detection/redaction inside gateway data protection (guard) policies.
+            Sub-gate beneath GatewayDataProtectionEnabled: when this is off,
+            PII-configured guard policies are unavailable as a whole.
             Set by Metronome entitlement, not admin-patchable.
           type: boolean
         ip_allowlist_enabled:
@@ -689,6 +701,13 @@ components:
         sandbox_enabled:
           description: SandboxEnabled indicates whether this org can use sandboxes.
           type: boolean
+        sandbox_restricted_egress:
+          description: >-
+            SandboxRestrictedEgress forces sandboxes onto the curated
+            restricted-egress
+
+            allowlist, regardless of access control supplied by the caller.
+          type: boolean
         show_playground_prompt_canvas:
           description: >-
             ShowPlaygroundPromptCanvas indicates whether to show the playground
@@ -717,7 +736,7 @@ components:
         tuned_evals_enabled:
           description: |-
             TunedEvalsEnabled indicates whether this org's plan entitles it to
-            use LangChain-managed evaluators. Set by Metronome entitlement.
+            use LangChain Tuned Evaluators. Set by Metronome entitlement.
           type: boolean
         use_exact_search_for_prompts:
           description: >-

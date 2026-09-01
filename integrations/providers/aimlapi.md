@@ -27,7 +27,7 @@ os.environ["AIMLAPI_API_KEY"] = "aimlapi_..."
 See a [usage example](https://docs.aimlapi.com/).
 
 ```python
-from langchain_aimlapi import ChatAIMLAPI
+from langchain_aimlapi import ChatAimlapi
 ```
 
 ## LLMs
@@ -35,7 +35,7 @@ from langchain_aimlapi import ChatAIMLAPI
 See a [usage example](../llms/aimlapi.md).
 
 ```python
-from langchain_aimlapi import AIMLAPILLM
+from langchain_aimlapi import AimlapiLLM
 ```
 
 ## Embedding models
@@ -43,7 +43,7 @@ from langchain_aimlapi import AIMLAPILLM
 See a [usage example](https://docs.aimlapi.com/).
 
 ```python
-from langchain_aimlapi import AIMLAPIEmbeddings
+from langchain_aimlapi import AimlapiEmbeddings
 ```
 
 ***

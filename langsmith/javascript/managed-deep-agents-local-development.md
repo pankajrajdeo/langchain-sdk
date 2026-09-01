@@ -14,7 +14,15 @@ Install the project dependencies and add the model provider credentials to `.env
 From the project root, run:
 
 ```bash
-mda dev .
+npx mda dev
+```
+
+```bash
+pnpm exec mda dev
+```
+
+```bash
+bunx mda dev
 ```
 
 The CLI prints the local server and Studio URLs and opens Studio in your browser. Send messages in Studio to inspect model responses, tool calls, state, and interrupts.

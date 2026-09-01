@@ -220,9 +220,9 @@ The EKS cluster is private: the API server endpoint has no public access, and wo
 </details>
 
 <details>
-<summary>Where does the control plane run if my data plane is in the EU or APAC?</summary>
+<summary>Where does the control plane run if my data plane is outside the US?</summary>
 
-The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane in an EU or APAC region, your sensitive application data stays in that region while control plane metadata remains in the US. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers).
+The control plane runs in `us-east-2` regardless of where you place your data planes. If you provision a data plane outside the US, your sensitive application data stays in that region while control plane metadata remains in the US. See [Regions and cloud providers](byoc.md#regions-and-cloud-providers).
 
 </details>
 
@@ -252,6 +252,15 @@ Yes. A workspace on LangSmith Cloud routes to the LangChain-managed backend rath
 </details>
 
 ## Operations
+
+<details>
+<summary>Who is responsible for what in a BYOC deployment?</summary>
+
+LangChain runs the control plane and manages the data plane infrastructure through delegated, least privilege access. You own the AWS account, network connectivity, the data in the data plane, and security monitoring inside your account.
+
+For the full division across platform and infrastructure, data and security, and operations and support, see the [BYOC shared responsibility model](byoc-shared-responsibility.md).
+
+</details>
 
 <details>
 <summary>Who upgrades LangSmith, and how often?</summary>
@@ -351,7 +360,7 @@ See [Available features](byoc.md#available-features) for the current list of sup
 <details>
 <summary>Can I migrate an existing LangSmith instance to BYOC?</summary>
 
-Partly. Users, roles, datasets, experiments, prompts, annotation queue configuration, automation rules, and dashboards can be copied over from a Cloud or self-hosted instance. Traces are not migrated today. To plan a migration, [contact the LangChain sales team](https://www.langchain.com/contact-sales).
+Partly. Users, roles, datasets, experiments, prompts, annotation queue configuration, automation rules, dashboards, and Fleet resources can be copied over. Traces are not migrated today. See [Migrate to BYOC](byoc-migration.md).
 
 </details>
 

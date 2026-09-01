@@ -30,7 +30,15 @@ The CLI targets US LangSmith Cloud by default.
 Deploy the local project:
 
 ```bash
-mda deploy .
+npx mda deploy
+```
+
+```bash
+pnpm exec mda deploy
+```
+
+```bash
+bunx mda deploy
 ```
 
 > [!TIP]
@@ -46,19 +54,43 @@ mda deploy .
 Set the deployment name explicitly when the directory name is not the name you want:
 
 ```bash
-mda deploy . --name research-assistant
+npx mda deploy --name research-assistant
+```
+
+```bash
+pnpm exec mda deploy --name research-assistant
+```
+
+```bash
+bunx mda deploy --name research-assistant
 ```
 
 Use `--deployment-type prod` when creating a production deployment:
 
 ```bash
-mda deploy . --deployment-type prod
+npx mda deploy --deployment-type prod
+```
+
+```bash
+pnpm exec mda deploy --deployment-type prod
+```
+
+```bash
+bunx mda deploy --deployment-type prod
 ```
 
 Use `--no-wait` to trigger the build without polling for completion:
 
 ```bash
-mda deploy . --no-wait
+npx mda deploy --no-wait
+```
+
+```bash
+pnpm exec mda deploy --no-wait
+```
+
+```bash
+bunx mda deploy --no-wait
 ```
 
 When `--no-wait` is set, schedule reconciliation is skipped for that deploy invocation because the CLI exits before the deployment reaches `DEPLOYED`.

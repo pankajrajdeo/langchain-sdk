@@ -10,7 +10,7 @@ Each issue moves through a closed loop: a recurring issue is detected in your tr
 
 For each issue, Engine surfaces the contributing traces, proposes a fix, keeps the issue current by attaching new traces that match the same failure pattern, and creates ground truth dataset examples from the production trace inputs.
 
-#### [Build: Open a pull request](engine.md#open-a-pull-request)
+#### [Build: Open a pull request](engine.md#open-or-view-a-pull-request)
 Apply the proposed fix by opening a pull request in your connected repository. Engine can propose code changes to agents built with Deep Agents, LangChain, and LangGraph.
 
 #### [Test: Generate datasets](engine.md#add-offline-examples)

@@ -1,6 +1,6 @@
 # Update a sandbox
 
-> Update a sandbox's display name. The name must be unique within the tenant.
+> Update a sandbox's display name, retention, resources, tags, or proxy configuration. The name must be unique within the tenant. Proxy configuration sent to a sandbox that is not running is stored and applied when it next starts.
 
 ## OpenAPI
 
@@ -163,8 +163,10 @@ paths:
         - sandboxes
       summary: Update a sandbox
       description: >-
-        Update a sandbox's display name. The name must be unique within the
-        tenant.
+        Update a sandbox's display name, retention, resources, tags, or proxy
+        configuration. The name must be unique within the tenant. Proxy
+        configuration sent to a sandbox that is not running is stored and
+        applied when it next starts.
       parameters:
         - description: Current sandbox display name
           name: name
@@ -227,6 +229,8 @@ components:
           type: integer
         idle_ttl_seconds:
           type: integer
+          maximum: 2147483640
+          minimum: 0
         mem_bytes:
           description: >-
             New memory for the sandbox, in bytes. The 4 GiB per vCPU ratio
@@ -311,6 +315,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.Callback'
+        description:
+          description: >-
+            Description says what this configuration as a whole lets the sandbox
+            reach, complementing the per-rule descriptions. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         no_proxy:
           items:
             type: string
@@ -374,6 +385,13 @@ components:
       properties:
         aws:
           $ref: '#/components/schemas/sandboxes.ProxyAWSConfig'
+        description:
+          description: >-
+            Description says what this rule lets the sandbox reach, so an agent
+            driving the sandbox can be told its capabilities. At most 1024
+            characters.
+          type: string
+          maxLength: 1024
         enabled:
           type: boolean
         env_vars:

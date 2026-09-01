@@ -42,12 +42,13 @@ Thread rules require a tracing project that groups traces into threads. For more
 Selecting **Threads** changes three parts of the rule form:
 
 * **Thread Filters**: The filter builder adds **Trace Count** and **Thread ID** to the available fields. Filter on **Trace Count** to scope a rule to conversations of a given length. The other fields evaluate each trace in the thread rather than the thread as a whole, so a thread matches when any of its traces match. For example, a filter on **Status** selects every thread that contains an errored trace, not only threads whose last trace errored.
-* **Action**: The form offers one action, either **Add to Annotation Queue** or **Trigger Webhooks**. **Add to Dataset** is currently not available.
+* **Action**: The form offers **Add to Annotation Queue**, **Add to Dataset**, or **Trigger Webhooks**.
 * **Apply to Past Runs**: Backfill is not currently offered for thread rules.
 
-The two thread actions behave as follows:
+The three thread actions behave as follows:
 
 * **Add to Annotation Queue**: Adds the thread to the queue as a thread item. Thread items display the conversation transcript and support rubric feedback only. For what differs between run items and thread items, refer to the [annotation queue capability table](annotation-queues.md#single-run-annotation-queues).
+* **Add to Dataset**: Creates one dataset example for each matching thread. Each example contains the thread's full conversation.
 * **Trigger Webhooks**: Sends a payload whose top-level `threads` array holds every matching thread. For more information, refer to [Read a thread rule payload](webhooks.md#read-a-thread-rule-payload).
 
 ### Set the thread idle time
@@ -88,10 +89,10 @@ In the [UI](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm_cam
 > [!NOTE]
 >    The backfill is processed as a background job, so you will not see the results immediately. In order to track progress of the backfill, you can [view logs for your automations](#view-logs-for-your-automations).
 
-7. Select an action to trigger when the rule is applied. Rules whose item type is **Runs** offer all of the following actions. Rules whose item type is **Threads** offer **Add to Annotation Queue** and **Trigger Webhooks** only.
+7. Select the action the rule performs. Rules with the **Runs** item type support every action below. Rules with the **Threads** item type support only **Add to Annotation Queue**, **Add to Dataset**, and **Trigger Webhooks**.
 
-   * **Add to Dataset**: Add the inputs and outputs of the trace to a [dataset](evaluation-concepts.md#datasets).
    * **Add to Annotation Queue**: Add the matching run or trace to an [annotation queue](annotation-queues.md) as a run item. A thread rule adds the entire conversation as a thread item instead. To add a thread by hand, refer to [Assign runs and threads](annotation-queues.md#assign-runs-and-threads-to-a-single-run-queue).
+   * **Add to Dataset**: A run rule adds the trace's inputs and outputs to a [dataset](evaluation-concepts.md#datasets). A thread rule creates one example for each matching thread. Each example contains the thread's full conversation.
    * **Trigger Webhooks**: Post the matched items to every [webhook](webhooks.md) URL configured on the rule.
    * **Extend Data Retention**: Extends the data retention period on matching traces that use base retention [(refer to the data retention docs for more details)](usage-and-billing.md#data-retention).
 

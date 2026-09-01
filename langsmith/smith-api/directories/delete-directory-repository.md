@@ -182,10 +182,10 @@ paths:
           name: repo_type
           in: query
           schema:
-            type: string
             enum:
               - agent
               - skill
+            type: string
             title: Repo Type
       responses:
         '204':
@@ -195,46 +195,61 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
+  schemas:
+    directory.errorResponse:
+      type: object
+      required:
+        - detail
+        - status
+        - title
+        - type
+      properties:
+        code:
+          type: string
+        conflicting_path:
+          type: string
+        detail:
+          type: string
+        path:
+          type: string
+        rule:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

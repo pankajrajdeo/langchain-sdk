@@ -1,7 +1,9 @@
 # Roll an issues agent webhook signing secret
 
-> Replaces the signing secret for the given issues agent webhook and returns the
-updated webhook. Future deliveries are signed with the new secret immediately.
+> Replaces the signing secret for the given generic URL issues agent webhook. Slack
+and Jira destinations do not have signing secrets. The new secret is returned once in this
+response; future deliveries use it immediately. URL and header values are redacted;
+only a safe URL display and header names are returned.
 
 ## OpenAPI
 
@@ -164,11 +166,16 @@ paths:
         - issues-agent
       summary: Roll an issues agent webhook signing secret
       description: >-
-        Replaces the signing secret for the given issues agent webhook and
-        returns the
+        Replaces the signing secret for the given generic URL issues agent
+        webhook. Slack
 
-        updated webhook. Future deliveries are signed with the new secret
-        immediately.
+        and Jira destinations do not have signing secrets. The new secret is
+        returned once in this
+
+        response; future deliveries use it immediately. URL and header values
+        are redacted;
+
+        only a safe URL display and header names are returned.
       parameters:
         - description: Tracer session ID (UUID)
           name: session_id
@@ -241,42 +248,66 @@ components:
       properties:
         created_at:
           type: string
+        destination_type:
+          type: string
+          enum:
+            - webhook
+            - jira
+            - slack
         event_types:
           items:
             type: string
           type: array
-        headers:
-          type: object
-        id:
-          type: string
-        issue_statuses:
+        has_jira_token:
+          type: boolean
+        has_signing_secret:
+          type: boolean
+        has_unreadable_credentials:
           description: >-
-            IssueStatuses scopes delivery to issues in one of these statuses.
-            Nil/empty
+            HasUnreadableCredentials marks a row retained in the settings list
+            whose
 
-            (the default) fires for every status.
+            encrypted credential envelope could not be opened. No
+            credential-derived
+
+            fields are populated for such a row; it must be deleted and
+            recreated.
+          type: boolean
+        header_names:
+          description: HeaderNames lists configured header names for write-only clients.
           type: array
           items:
             type: string
+        headers:
+          type: object
+          additionalProperties:
+            type: string
+        id:
+          type: string
+        issue_statuses:
+          items:
+            type: string
+          type: array
         organization_id:
-          description: >-
-            OrganizationID is derived from the tenant on fetch (no stored
-            column); the
-
-            row carries it so Slack delivery can address the org-scoped install.
           type: string
         session_id:
           type: string
         severity_threshold:
-          $ref: '#/components/schemas/tracer_session_issues.Severity'
+          $ref: '#/components/schemas/issues.Severity'
         signing_secret:
+          description: >-
+            SigningSecret is present only in successful create, URL-conversion
+            update,
+
+            and roll responses.
           type: string
         slack_channel_id:
           description: >-
-            Delivery target is either a URL or a Slack channel. SlackTeamID is
-            the
+            Keep empty Slack fields in the response. The frontend uses an
+            explicit
 
-            channel's workspace (which install to send through).
+            empty string to distinguish URL destinations from Slack
+            destinations.
           type: string
         slack_team_id:
           type: string
@@ -285,8 +316,18 @@ components:
         updated_at:
           type: string
         url:
+          description: >-
+            URL and Headers are retained as always-empty fields so a client
+            written
+
+            against the pre-write-only contract still parses the response. Use
+
+            URLDisplay and HeaderNames instead.
           type: string
-    tracer_session_issues.Severity:
+        url_display:
+          description: URLDisplay contains only the destination hostname.
+          type: string
+    issues.Severity:
       type: integer
       enum:
         - 0

@@ -1,6 +1,6 @@
 # Create directory commit
 
-> Creates a new directory commit for an agent or skill repository by applying file/link create, update, and delete operations.
+> Creates a new directory commit for an agent or skill repository by applying file/link create, update, and delete operations. Linked directories default to the LATEST selector; use COMMIT to pin one commit. The legacy commit_id write field is deprecated and resolves as LATEST.
 
 ## OpenAPI
 
@@ -164,7 +164,10 @@ paths:
       summary: Create directory commit
       description: >-
         Creates a new directory commit for an agent or skill repository by
-        applying file/link create, update, and delete operations.
+        applying file/link create, update, and delete operations. Linked
+        directories default to the LATEST selector; use COMMIT to pin one
+        commit. The legacy commit_id write field is deprecated and resolves as
+        LATEST.
       parameters:
         - description: Repository owner handle or '-' for current tenant
           name: owner
@@ -183,97 +186,130 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/directories.CreateDirectoryCommitRequest'
+              $ref: '#/components/schemas/directory.CreateDirectoryCommitRequest'
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/directories.CommitResponse'
+                $ref: '#/components/schemas/directory.CommitResponse'
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '403':
           description: Forbidden
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '404':
           description: Not Found
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '409':
           description: Conflict
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/directory.errorResponse'
       security:
         - API Key: []
         - Tenant ID: []
         - Bearer Auth: []
 components:
   schemas:
-    directories.CreateDirectoryCommitRequest:
+    directory.CreateDirectoryCommitRequest:
       type: object
       properties:
         files:
+          additionalProperties:
+            anyOf:
+              - $ref: '#/components/schemas/directory.DirectoryEntryInput'
+              - type: 'null'
           description: >-
-            Files maps path to an Entry (object = create/update/link, null =
-            delete/unlink).
+            Paths to create, update, link, delete, or unlink. Use null to delete
+            or unlink an existing path.
           type: object
-          additionalProperties: {}
         parent_commit:
           type: string
         skip_webhooks:
-          description: >-
-            SkipWebhooks, when true, suppresses Context Hub commit webhooks for
-            this
-
-            commit. Deliberately a plain bool, not the any (bool | []string)
-            shape of
-
-            the prompt-hub CreateCommitReq.SkipWebhooks: Context Hub v1 has no
-
-            per-webhook filtering, so a bool is the correct shape.
+          description: SkipWebhooks suppresses Context Hub commit webhooks for this commit.
           type: boolean
-    directories.CommitResponse:
+      example:
+        files:
+          skills/current:
+            type: skill
+            repo_handle: shared-skill
+            selector:
+              type: LATEST
+          agents/pinned:
+            type: agent
+            repo_handle: review-agent
+            selector:
+              type: COMMIT
+              commit_id: 0198f3ab-7c2d-7def-8a91-23456789abcd
+    directory.CommitResponse:
       type: object
       properties:
         commit:
-          $ref: '#/components/schemas/directories.CommitInfo'
-    directories.CommitInfo:
+          $ref: '#/components/schemas/directory.CommitInfo'
+    directory.errorResponse:
+      type: object
+      required:
+        - detail
+        - status
+        - title
+        - type
+      properties:
+        code:
+          type: string
+        conflicting_path:
+          type: string
+        detail:
+          type: string
+        path:
+          type: string
+        rule:
+          type: string
+        status:
+          type: integer
+        title:
+          type: string
+        type:
+          type: string
+    directory.DirectoryEntryInput:
+      discriminator:
+        propertyName: type
+        mapping:
+          file:
+            $ref: '#/components/schemas/directory.FileEntry'
+          agent:
+            $ref: '#/components/schemas/directory.AgentEntryInput'
+          skill:
+            $ref: '#/components/schemas/directory.SkillEntryInput'
+      oneOf:
+        - $ref: '#/components/schemas/directory.FileEntry'
+        - $ref: '#/components/schemas/directory.AgentEntryInput'
+        - $ref: '#/components/schemas/directory.SkillEntryInput'
+    directory.CommitInfo:
       type: object
       properties:
         commit_hash:
@@ -282,6 +318,112 @@ components:
           type: string
         id:
           type: string
+    directory.FileEntry:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - file
+          type: string
+        content:
+          type: string
+      required:
+        - type
+        - content
+      type: object
+    directory.AgentEntryInput:
+      additionalProperties: false
+      not:
+        required:
+          - selector
+          - commit_id
+      properties:
+        type:
+          enum:
+            - agent
+          type: string
+        repo_handle:
+          type: string
+        commit_id:
+          deprecated: true
+          description: >-
+            Deprecated write input. It is accepted for compatibility but ignored
+            for selection, so the link resolves as LATEST. Omit it for LATEST or
+            replace it with selector {"type": "COMMIT", "commit_id": "<uuid>"}
+            to pin a commit. commit_id and selector are mutually exclusive.
+          format: uuid
+          type: string
+        selector:
+          $ref: '#/components/schemas/directory.DirectorySelector'
+          description: How to select the linked commit. Omit this field to use LATEST.
+      required:
+        - type
+        - repo_handle
+      type: object
+    directory.SkillEntryInput:
+      additionalProperties: false
+      not:
+        required:
+          - selector
+          - commit_id
+      properties:
+        type:
+          enum:
+            - skill
+          type: string
+        repo_handle:
+          type: string
+        commit_id:
+          deprecated: true
+          description: >-
+            Deprecated write input. It is accepted for compatibility but ignored
+            for selection, so the link resolves as LATEST. Omit it for LATEST or
+            replace it with selector {"type": "COMMIT", "commit_id": "<uuid>"}
+            to pin a commit. commit_id and selector are mutually exclusive.
+          format: uuid
+          type: string
+        selector:
+          $ref: '#/components/schemas/directory.DirectorySelector'
+          description: How to select the linked commit. Omit this field to use LATEST.
+      required:
+        - type
+        - repo_handle
+      type: object
+    directory.DirectorySelector:
+      discriminator:
+        propertyName: type
+        mapping:
+          LATEST:
+            $ref: '#/components/schemas/directory.LatestSelector'
+          COMMIT:
+            $ref: '#/components/schemas/directory.CommitSelector'
+      oneOf:
+        - $ref: '#/components/schemas/directory.LatestSelector'
+        - $ref: '#/components/schemas/directory.CommitSelector'
+    directory.LatestSelector:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - LATEST
+          type: string
+      required:
+        - type
+      type: object
+    directory.CommitSelector:
+      additionalProperties: false
+      properties:
+        type:
+          enum:
+            - COMMIT
+          type: string
+        commit_id:
+          type: string
+          format: uuid
+      required:
+        - type
+        - commit_id
+      type: object
   securitySchemes:
     API Key:
       type: apiKey

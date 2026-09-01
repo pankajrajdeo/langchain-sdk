@@ -11,9 +11,9 @@
 
 ## How it works
 
-1. **Stream with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream)** — connect to your agent and get reactive messages, loading state, and submit/cancel callbacks
-2. **Adapt with `useExternalStoreRuntime`** — bridge `stream.messages` into assistant-ui's runtime format by converting `BaseMessage[]` to `ThreadMessageLike[]`
-3. **Provide the runtime** — wrap your UI in `AssistantRuntimeProvider` and render any assistant-ui thread component
+1. **Stream with [`useStream`](https://reference.langchain.com/javascript/langchain-react/index/useStream)**: connect to your agent and get reactive messages, loading state, and submit/cancel callbacks
+2. **Adapt with `useExternalStoreRuntime`**: bridge `stream.messages` into assistant-ui's runtime format by converting `BaseMessage[]` to `ThreadMessageLike[]`
+3. **Provide the runtime**: wrap your UI in `AssistantRuntimeProvider` and render any assistant-ui thread component
 
 ## Installation
 
@@ -133,9 +133,9 @@ export function toThreadMessages(messages: BaseMessage[]): ThreadMessageLike[] {
 }
 ```
 
-## Customising the thread UI
+## Customizing the thread UI
 
-`` ships a complete default thread UI including message list, composer, and scroll management. Customise individual parts by overriding component slots:
+`` ships a complete default thread UI including message list, composer, and scroll management. Customize individual parts by overriding component slots:
 
 ```tsx
 import { Thread, ThreadMessages, Composer } from "@assistant-ui/react";

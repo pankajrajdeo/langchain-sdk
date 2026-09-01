@@ -95,6 +95,8 @@ agent = create_deep_agent(
 
 This example uses `FilesystemBackend` to load skills from disk. For other storage options, including loading skills from remote sources, see [Backends and remote skill loading](#backends-and-remote-skill-loading).
 
+Point each source path at a directory that contains skill directories. A path that points directly at a skill directory with `SKILL.md` is not loaded.
+
 #### `Field` — `list[str]`
 List of skill source paths.
 
@@ -102,7 +104,7 @@ Paths must be specified using forward slashes and are relative to the backend's 
 
 * If omitted, no skills are loaded.
 * When using `StateBackend` (default), provide skill files with `invoke(files={...})`. Use `create_file_data()` from `deepagents.backends.utils` to format file contents; raw strings are not supported.
-* With `FilesystemBackend`, skills are loaded from disk relative to the backend's `root_dir`.
+* With `FilesystemBackend` and `StoreBackend`, create the backend, call `backend.upload_files()` to add skill files, then pass the backend to `create_deep_agent`. For `FilesystemBackend`, use `virtual_mode=True` to sandbox paths under `root_dir`. Skills already on disk under `root_dir` load without uploading.
 
 Later sources override earlier ones for skills with the same name (last one wins).
 
@@ -279,7 +281,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -314,7 +316,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -349,7 +351,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -384,7 +386,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -419,7 +421,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -454,7 +456,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -489,7 +491,7 @@ from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
 backend = StateBackend()
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
@@ -519,20 +521,20 @@ result = agent.invoke(
 from urllib.request import urlopen
 from deepagents import create_deep_agent
 from deepagents.backends import StoreBackend
-from deepagents.backends.utils import create_file_data
 from langgraph.store.memory import InMemoryStore
 
 store = InMemoryStore()
-backend = StoreBackend(namespace=lambda _rt: ("filesystem",))
+backend = StoreBackend(
+    namespace=lambda _rt: ("filesystem",),
+    store=store,
+)
 
-skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/cli/examples/skills/langgraph-docs/SKILL.md"
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
 with urlopen(skill_url) as response:
     skill_content = response.read().decode('utf-8')
 
-store.put(
-    namespace=("filesystem",),
-    key="/skills/langgraph-docs/SKILL.md",
-    value=create_file_data(skill_content),
+backend.upload_files(
+    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
 )
 
 agent = create_deep_agent(
@@ -550,25 +552,33 @@ result = agent.invoke(
 
 #### FilesystemBackend
 ```python
+from urllib.request import urlopen
 from deepagents import create_deep_agent
 from deepagents.backends.filesystem import FilesystemBackend
 from langgraph.checkpoint.memory import MemorySaver
 
 # Checkpointer is REQUIRED for human-in-the-loop
 checkpointer = MemorySaver()
-root_dir = "/Users/user/{project}"
-backend = FilesystemBackend(root_dir=root_dir)
+
+skill_url = "https://raw.githubusercontent.com/langchain-ai/deepagents/refs/heads/main/libs/code/examples/skills/langgraph-docs/SKILL.md"
+with urlopen(skill_url) as response:
+    skill_content = response.read().decode('utf-8')
+
+backend = FilesystemBackend(root_dir="/Users/user/{project}", virtual_mode=True)
+backend.upload_files(
+    [("/skills/langgraph-docs/SKILL.md", skill_content.encode("utf-8"))]
+)
 
 agent = create_deep_agent(
     model="google_genai:gemini-3.6-flash",
     backend=backend,
-    skills=[str(Path(root_dir) / "skills")],
+    skills=["/skills/"],
     interrupt_on={
         "write_file": True,
         "read_file": False,
         "edit_file": True,
     },
-    checkpointer=checkpointer, # Required!
+    checkpointer=checkpointer,  # Required for filesystem operations!
 )
 
 result = agent.invoke(
@@ -588,10 +598,19 @@ The simplest approach is to construct the `skills` array before creating the age
 ```python
 from deepagents import create_deep_agent
 
+# Each role path is a container with one subdirectory per skill:
+# /skills/
+# ├── engineering/
+# │   ├── code-review/SKILL.md
+# │   └── testing/SKILL.md
+# ├── data/
+# │   └── sql-analysis/SKILL.md
+# └── support/
+#     └── ticket-triage/SKILL.md
 SKILLS_BY_ROLE = {
-    "engineering": ["/skills/code-review/", "/skills/testing/", "/skills/deployment/"],
-    "data": ["/skills/sql-analysis/", "/skills/visualization/", "/skills/data-pipeline/"],
-    "support": ["/skills/ticket-triage/", "/skills/runbook/"],
+    "engineering": ["/skills/engineering/"],
+    "data": ["/skills/data/"],
+    "support": ["/skills/support/"],
 }
 
 def create_agent_for_user(user_role: str):
@@ -665,12 +684,18 @@ Skill state is fully isolated: the main agent's skills are not visible to subage
 ```python
 from deepagents import create_deep_agent
 
+# Each path is a container with one subdirectory per skill:
+# /skills/main/
+# └── overview/SKILL.md
+# /skills/researcher/
+# ├── research/SKILL.md
+# └── web-search/SKILL.md
 research_subagent = {
     "name": "researcher",
     "description": "Research assistant with specialized skills",
     "system_prompt": "You are a researcher.",
     "tools": [web_search],
-    "skills": ["/skills/research/", "/skills/web-search/"],  # Subagent-specific skills
+    "skills": ["/skills/researcher/"],  # Subagent-specific skills
 }
 
 agent = create_deep_agent(
@@ -1685,11 +1710,13 @@ Use [LangSmith](https://smith.langchain.com?utm_source=docs\&utm_medium=cta\&utm
 
 1. **Check the skill path.** Paths must use forward slashes and be relative to the backend root. With `FilesystemBackend`, the path is relative to `root_dir`. With `StateBackend`, pass skill files in `invoke(files={...})` using `create_file_data()`.
 
-2. **Validate `SKILL.md` [frontmatter](#frontmatter-fields).** The [`name`](#frontmatter-fields) must match the parent directory name and follow the [Agent Skills specification](https://agentskills.io/specification). Use the [`skills-ref` validation tool](https://github.com/agentskills/agentskills/tree/main/skills-ref) to check formatting.
+2. **Check the path level.** Each entry in `skills` is a source directory that contains skill directories. Passing the skill directories themselves discovers nothing and raises no error, because the source directory exists and only its subdirectories are searched for `SKILL.md`.
 
-3. **Check file size.** Deep Agents skips `SKILL.md` files over 10 MB during discovery.
+3. **Validate `SKILL.md` [frontmatter](#frontmatter-fields).** The [`name`](#frontmatter-fields) must match the parent directory name and follow the [Agent Skills specification](https://agentskills.io/specification). Use the [`skills-ref` validation tool](https://github.com/agentskills/agentskills/tree/main/skills-ref) to check formatting.
 
-4. **Check layered sources.** When the same skill name appears in multiple sources, the [last source wins](#usage). An older or empty skill from a later path can override the one you expect.
+4. **Check file size.** Deep Agents skips `SKILL.md` files over 10 MB during discovery.
+
+5. **Check layered sources.** When the same skill name appears in multiple sources, the [last source wins](#usage). An older or empty skill from a later path can override the one you expect.
 
 ### Supporting files not found
 
@@ -1764,7 +1791,7 @@ Instructions for the agent go here. See [Usage](#usage) for a complete example o
 > [!WARNING]
 > Refer to the full [Agent Skills specification](https://agentskills.io/specification) for detailed constraints and validation rules. In Deep Agents, `SKILL.md` files must be under 10 MB. Files exceeding this limit are skipped during skill loading.
 
-For more example skills, see [Deep Agents example skills](https://github.com/langchain-ai/deepagents/tree/main/libs/cli/examples/skills).
+For more example skills, see [Deep Agents example skills](https://github.com/langchain-ai/deepagents/tree/main/libs/code/examples/skills).
 
 ***
 

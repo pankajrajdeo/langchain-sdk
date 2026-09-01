@@ -209,6 +209,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/evaluators.ErrorResponse'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/evaluators.ErrorResponse'
         '500':
           description: Internal Server Error
           content:
@@ -246,8 +252,14 @@ components:
       properties:
         code:
           type: string
+        dependencies:
+          type: string
         language:
           type: string
+        workspace_secrets_keys:
+          items:
+            type: string
+          type: array
     evaluators.UpdateLLMEvaluatorRequest:
       type: object
       properties:
@@ -281,7 +293,7 @@ components:
           type: string
         is_managed:
           description: >-
-            IsManaged marks a LangChain-managed evaluator (currently the managed
+            IsManaged marks a LangChain Tuned Evaluator (currently the tuned
 
             Perceived Error judge). NULL in the DB is read as false via
             COALESCE.
@@ -307,11 +319,21 @@ components:
       properties:
         code:
           type: string
+        dependencies:
+          type: string
+        evaluator_build_error:
+          type: string
+        evaluator_build_status:
+          $ref: '#/components/schemas/evaluators.EvaluatorBuildStatus'
         evaluator_id:
           type: string
         language:
           description: 'Default: "python"'
           type: string
+        workspace_secrets_keys:
+          items:
+            type: string
+          type: array
     evaluators.LLMEvaluator:
       type: object
       properties:
@@ -384,6 +406,18 @@ components:
       x-enum-varnames:
         - EvaluatorTypeLLM
         - EvaluatorTypeCode
+    evaluators.EvaluatorBuildStatus:
+      type: string
+      enum:
+        - ENQUEUED
+        - BUILDING
+        - READY
+        - FAILED
+      x-enum-varnames:
+        - EvaluatorBuildStatusEnqueued
+        - EvaluatorBuildStatusBuilding
+        - EvaluatorBuildStatusReady
+        - EvaluatorBuildStatusFailed
     evaluators.SpendLimit:
       type: object
       properties:

@@ -684,11 +684,11 @@ At the wire level, a `since` seq cursor in the request body returns only events 
 
 ## Related
 
-* [Streaming API](streaming.md) — the `stream_mode`-based streaming API. Also supported by `langgraph-api>=0.10.0`.
-* [LangGraph event streaming](../langgraph/event-streaming.md) — the same concepts applied to an in-process LangGraph application.
-* [LangChain agent event streaming](../langchain/event-streaming.md) — agent-focused projections for messages, tool calls, and middleware updates.
-* [Deep Agents event streaming](../deepagents/event-streaming.md) — subagent streams, nested messages, and subagent tool calls.
-* [LangSmith Deployment API](server-api-ref.md) — wire-level reference for `POST /threads/{thread_id}/stream/events` and related endpoints.
+* [Streaming API](streaming.md): the `stream_mode`-based streaming API. Also supported by `langgraph-api>=0.10.0`.
+* [LangGraph event streaming](../langgraph/event-streaming.md): the same concepts applied to an in-process LangGraph application.
+* [LangChain agent event streaming](../langchain/event-streaming.md): agent-focused projections for messages, tool calls, and middleware updates.
+* [Deep Agents event streaming](../deepagents/event-streaming.md): subagent streams, nested messages, and subagent tool calls.
+* [LangSmith Deployment API](server-api-ref.md): wire-level reference for `POST /threads/{thread_id}/stream/events` and related endpoints.
 
 The wire-level event and command formats are defined in the [Agent Protocol](https://github.com/langchain-ai/agent-protocol) repository.
 

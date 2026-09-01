@@ -242,6 +242,20 @@ components:
       properties:
         detail:
           type: string
+        details:
+          description: >-
+            Details is a LangSmith extension carrying structured fields for
+            ErrorClass.
+          allOf:
+            - $ref: '#/components/schemas/shared.ParseErrorDetails'
+        error_class:
+          description: |-
+            ErrorClass is a LangSmith extension sub-categorizing a status code.
+            Additional values require expanding this enum and adding a oneOf
+            discriminator on Details to keep the class↔details contract typed.
+          type: string
+          enum:
+            - PARSE_FAILURE
         instance:
           type: string
         remedy:
@@ -263,6 +277,19 @@ components:
         permission:
           $ref: '#/components/schemas/authz_internal.Permission'
         resource_type:
+          type: string
+    shared.ParseErrorDetails:
+      description: Structured fields describing an adapter parse failure.
+      type: object
+      required:
+        - adapter
+        - item_type
+      properties:
+        adapter:
+          type: string
+        item_type:
+          type: string
+        run_id:
           type: string
     authz_internal.Condition:
       type: object
@@ -286,6 +313,12 @@ components:
         - charts:delete
         - charts:read
         - charts:update
+        - custom-apps:create
+        - custom-apps:delete
+        - custom-apps:download
+        - custom-apps:read
+        - custom-apps:update
+        - datasets:clone
         - datasets:create
         - datasets:delete
         - datasets:download
@@ -301,6 +334,9 @@ components:
         - feedback:delete
         - feedback:read
         - feedback:update
+        - feedback-configs:create
+        - feedback-configs:update
+        - feedback-configs:delete
         - experiments:run
         - issues:create
         - issues:delete
@@ -328,6 +364,10 @@ components:
         - runs:read
         - runs:share
         - runs:delete
+        - model-price-map:create
+        - model-price-map:read
+        - model-price-map:update
+        - model-price-map:delete
         - sandboxes:create
         - sandboxes:delete
         - sandboxes:read
@@ -341,6 +381,7 @@ components:
         - workspaces:manage-secrets
         - workspaces:manage
         - workspaces:manage-model-configs
+        - workspaces:manage-keys
         - workspaces:read
         - alerts:create
         - alerts:update
@@ -370,6 +411,12 @@ components:
         - ChartsDelete
         - ChartsRead
         - ChartsUpdate
+        - CustomAppsCreate
+        - CustomAppsDelete
+        - CustomAppsDownload
+        - CustomAppsRead
+        - CustomAppsUpdate
+        - DatasetsClone
         - DatasetsCreate
         - DatasetsDelete
         - DatasetsDownload
@@ -385,6 +432,9 @@ components:
         - FeedbackDelete
         - FeedbackRead
         - FeedbackUpdate
+        - FeedbackConfigsCreate
+        - FeedbackConfigsUpdate
+        - FeedbackConfigsDelete
         - ExperimentsRun
         - IssuesCreate
         - IssuesDelete
@@ -412,6 +462,10 @@ components:
         - RunsRead
         - RunsShare
         - RunsDelete
+        - ModelPriceMapCreate
+        - ModelPriceMapRead
+        - ModelPriceMapUpdate
+        - ModelPriceMapDelete
         - SandboxesCreate
         - SandboxesDelete
         - SandboxesRead
@@ -425,6 +479,7 @@ components:
         - WorkspacesManageSecrets
         - WorkspacesManage
         - WorkspacesManageModelConfigs
+        - WorkspacesManageKeys
         - WorkspacesRead
         - AlertsCreate
         - AlertsUpdate

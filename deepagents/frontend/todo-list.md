@@ -441,6 +441,24 @@ function TodoList({ todos, isLoading }: { todos: Todo[]; isLoading: boolean }) {
   the todo list stays current automatically. Don't add manual polling or
   refresh logic.
 
+## Related LangChain guides
+
+The todo list pattern is a specialization of the broader LangChain approach to
+rendering structured agent state. These guides cover related techniques that
+pair well with plan-based agents:
+
+#### [Structured output](../../langchain/frontend/structured-output.md)
+Render any structured agent state—not just todos—with custom UI components instead of plain text.
+
+#### [Join & rejoin streams](../../langchain/frontend/join-rejoin.md)
+Reconnect to a running plan after a page reload or tab switch without losing progress.
+
+#### [Message queues](../../langchain/frontend/message-queues.md)
+Queue follow-up tasks while the agent is still working through its current plan.
+
+#### [Human-in-the-Loop](../../langchain/frontend/human-in-the-loop.md)
+Pause and resume plan execution when the agent needs user approval or input.
+
 ***
 
 > [!NOTE]
