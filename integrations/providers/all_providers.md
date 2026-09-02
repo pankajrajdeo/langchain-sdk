@@ -1129,6 +1129,9 @@ OpenAI-compatible API gateway for DeepSeek, Qwen, Kimi, GLM, MiniMax, and more.
 #### [TokPortal](https://github.com/tokportal/langchain-tokportal)
 Managed TikTok, Instagram, and YouTube accounts as LangChain tools and MCP.
 
+#### [Tokonomics](https://tokonomics.ca/docs)
+AI cost metering, budget alerts, and spending caps for LangChain LLM calls.
+
 #### [Toolbox LangChain](toolbox.md)
 Extended toolkit for LangChain applications.
 

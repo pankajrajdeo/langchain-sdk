@@ -25,11 +25,16 @@ On the first interactive run, OpenWiki prompts for:
 * An inference provider and model
 * The provider API key (or equivalent credentials)
 * An optional LangSmith API key for tracing
+* LangSmith projects to enrich the wiki from runtime traces
 
 OpenWiki saves its configuration and secrets to `~/.openwiki/.env`.
 
+Running `--init` again regenerates the repository wiki and Claims from scratch while preserving `openwiki/INSTRUCTIONS.md`. Interrupted runs on a persistent checkout resume from `openwiki/.run.json`.
+
+To run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor instead of a standalone model session, see [Coding-agent integrations](integrations.md).
+
 ### Review the generated wiki
-OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It also maintains an `AGENTS.md` and `CLAUDE.md` at the repository root, adding a block that instructs coding agents to consult the wiki for codebase context.
+OpenWiki writes documentation to `openwiki/` in the repository, including a quickstart entrypoint and topic pages. It also maintains an `AGENTS.md` and `CLAUDE.md` at the repository root, adding a block that instructs coding agents to consult the wiki for codebase context. Factual pages are grounded with Claims under `openwiki/.claims/`.
 
 Repository-specific wiki instructions live in `openwiki/INSTRUCTIONS.md`. OpenWiki reads this file for scope and priorities. To change it, edit the file, or ask OpenWiki in chat to change the brief (for example, `openwiki "Update openwiki/INSTRUCTIONS.md to focus on the public API"`). Normal `--init` and `--update` runs do not rewrite it.
 
@@ -48,7 +53,7 @@ Refresh documentation after code changes:
 openwiki --update
 ```
 
-For automated updates in CI, see [Automate updates](automate-updates.md).
+In code mode, updates also reconcile stale Claims when source evidence changes. For automated updates in CI, see [Automate updates](automate-updates.md).
 
 ## Personal wiki (optional)
 
@@ -58,7 +63,7 @@ To initialize a local personal brain instead of repository docs:
 openwiki personal --init
 ```
 
-Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](personal-mode.md).
+Personal mode writes to `~/.openwiki/wiki` and can ingest configured connectors such as local git repositories, Custom MCP, Gmail, Notion, web search, Hacker News, and X/Twitter. See [Personal mode](personal-mode.md).
 
 ## Interactive and one-shot runs
 
@@ -74,7 +79,7 @@ Use `-p` / `--print` for a one-shot non-interactive run that prints the final as
 openwiki -p "Summarize what you can do"
 ```
 
-In chat, use `/api-key` to update the current provider API key and `/langsmith-key` to update or clear LangSmith tracing credentials.
+In chat, use `/api-key` to update the current provider API key, `/langsmith-key` to update or clear LangSmith tracing credentials, and `/effort` to set reasoning effort for supported models.
 
 ## Trace with LangSmith
 
@@ -86,9 +91,12 @@ LANGCHAIN_TRACING_V2=true
 LANGCHAIN_PROJECT=openwiki
 ```
 
+To enrich the repository wiki from LangSmith traces (separate from tracing OpenWiki itself), see [LangSmith connector](code-mode.md#langsmith-connector).
+
 ## Next steps
 
-* [Code mode](code-mode.md): repository wikis, OKF output, and agent instruction files
+* [Code mode](code-mode.md): repository wikis, Claims, OKF output, and agent instruction files
+* [Coding-agent integrations](integrations.md): run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor
 * [Personal mode](personal-mode.md): local brain and connectors
 * [Model providers](providers.md): supported providers and credentials
 * [Automate updates](automate-updates.md): GitHub Actions, GitLab CI, and Bitbucket Pipelines

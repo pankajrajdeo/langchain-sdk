@@ -204,6 +204,18 @@ See [Connectivity](byoc-architecture.md#connectivity).
 </details>
 
 <details>
+<summary>Can I restrict outbound network traffic from the data plane?</summary>
+
+Yes. BYOC supports a network firewall that controls egress from the data plane. Contact the LangChain team to enable it.
+
+Once enabled, the firewall denies all outbound traffic by default. You then configure an allow list of the destinations the data plane is permitted to reach:
+
+* **Domains**: Fully qualified domain names, such as a model provider API endpoint or a public Docker registry.
+* **CIDR ranges**: IP ranges, such as an internal service or a private subnet.
+
+</details>
+
+<details>
 <summary>Can I use my own private registry?</summary>
 
 Not today. Container images are pulled from the LangChain AWS account over a VPC endpoint. Support for private registries is on the roadmap.

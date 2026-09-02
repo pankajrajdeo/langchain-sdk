@@ -17,10 +17,7 @@ npm install -g openwiki
 openwiki --init
 ```
 
-See the [Quickstart](quickstart.md) to choose a model provider, generate docs, and keep them up to date.
-
-> [!NOTE]
-> OpenWiki does not provide a formal connector for Claude or Codex. In code mode, it adds pointers to the generated wiki in the repository-root `AGENTS.md` and `CLAUDE.md` files, so compatible coding agents can discover and consult the wiki.
+See the [Quickstart](quickstart.md) to choose a model provider, generate docs, and keep them up to date. To run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor instead of a standalone model session, see [Coding-agent integrations](integrations.md).
 
 ## Modes
 
@@ -38,8 +35,14 @@ Bare `openwiki --init` and `openwiki --update` run in code mode. Use `openwiki p
 #### [Repository wikis](code-mode.md)
 Generate Markdown docs under `openwiki/`, then wire them into `AGENTS.md` and `CLAUDE.md` so coding agents can find them.
 
+#### [Coding-agent integrations](integrations.md)
+Run OpenWiki inside Codex, Claude Code, OpenCode, or Cursor using the host model and repository tools.
+
 #### [Personal brain](personal-mode.md)
-Build a local wiki from git repos, Gmail, Notion, web search, Hacker News, and X/Twitter.
+Build a local wiki from git repos, Custom MCP, Gmail, Notion, web search, Hacker News, and X/Twitter.
+
+#### [Grounded Claims](code-mode.md#grounded-claims)
+Track material facts back to versioned source evidence and refresh pages when that evidence changes.
 
 #### [Automatic updates](automate-updates.md)
 Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a PR when content changes.
@@ -48,7 +51,7 @@ Refresh docs from GitHub Actions, GitLab CI, or Bitbucket Pipelines and open a P
 Use OpenAI, Anthropic, Gemini, Bedrock, OpenRouter, GitHub Copilot, and other providers out of the box.
 
 #### [Open Knowledge Format](code-mode.md#open-knowledge-format)
-Emit OKF v0.1 Markdown bundles with front matter, indexes, and linked concepts.
+Emit OKF v0.2 Markdown bundles with front matter, indexes, and linked concepts.
 
 #### [LangSmith tracing](quickstart.md#trace-with-langsmith)
 Trace documentation runs with LangSmith.

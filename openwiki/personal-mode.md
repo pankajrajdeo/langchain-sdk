@@ -2,7 +2,7 @@
 
 > Build a local personal brain wiki from configured sources with OpenWiki.
 
-Personal mode builds a local personal brain wiki in `~/.openwiki/wiki` from configured sources such as local repositories, Gmail, Notion, web search, Hacker News, Slack, and X/Twitter.
+Personal mode builds a local personal brain wiki in `~/.openwiki/wiki` from configured sources such as local repositories, Custom MCP, Gmail, Notion, web search, Hacker News, Slack, and X/Twitter.
 
 ```bash
 openwiki personal
@@ -10,6 +10,8 @@ openwiki personal --init
 openwiki personal --update
 openwiki personal --update "Refresh the wiki from configured connectors"
 ```
+
+To store personal wiki state somewhere other than `~/.openwiki`, set `OPENWIKI_CONFIG_DIR`. See [Customize OpenWiki](customize.md#override-the-state-directory).
 
 ## First-run onboarding
 
@@ -26,7 +28,7 @@ On macOS, OpenWiki can install supported schedules as user LaunchAgents under `~
 
 ## Connect your sources
 
-In personal mode, OpenWiki ingests knowledge from the tools you already use and synthesizes it into your local wiki under `~/.openwiki/wiki/`. First-run onboarding can set up local git repositories, Notion, Gmail, X/Twitter, web search, Hacker News, and Slack.
+In personal mode, OpenWiki ingests knowledge from the tools you already use and synthesizes it into your local wiki under `~/.openwiki/wiki/`. First-run onboarding can set up Custom MCP, local git repositories, Notion, Gmail, X/Twitter, web search, Hacker News, and Slack.
 
 During an ingestion run, connector tools write raw data and manifests under `~/.openwiki/connectors/<connector>/raw/`, then source-specific agent runs update the wiki from those local files.
 
@@ -37,21 +39,22 @@ Connector secrets are referenced by env var name and stored in `~/.openwiki/.env
 
 ### Built-in sources
 
-| Source       | Credentials                          | Behavior                                                                     |
-| ------------ | ------------------------------------ | ---------------------------------------------------------------------------- |
-| `git-repo`   | Local paths                          | Reads configured local repository paths and writes compact manifests         |
-| `x`          | OAuth user-context credentials       | Home timeline, user posts, mentions, bookmarks, and list posts via the X API |
-| `notion`     | Notion OAuth (hosted MCP)            | Authenticate through Notion OAuth instead of pasting a Notion token          |
-| `google`     | Gmail OAuth                          | Fetches recent mail via the Gmail API after `openwiki auth gmail`            |
-| `web-search` | `TAVILY_API_KEY`                     | Uses Tavily through LangChain                                                |
-| `hackernews` | None                                 | Public Hacker News feed and search APIs                                      |
-| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](#slack-oauth)     |
+| Source       | Credentials                          | Behavior                                                                                              |
+| ------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| `custom-mcp` | None required by default             | Connects to any configured HTTP or stdio MCP server and permits only explicitly safe, read-only tools |
+| `git-repo`   | Local paths                          | Reads configured local repository paths and writes compact manifests                                  |
+| `x`          | OAuth user-context credentials       | Home timeline, user posts, mentions, bookmarks, and list posts via the X API                          |
+| `notion`     | Notion OAuth (hosted MCP)            | Authenticate through Notion OAuth instead of pasting a Notion token                                   |
+| `google`     | Gmail OAuth                          | Fetches recent mail via the Gmail API after `openwiki auth gmail`                                     |
+| `web-search` | `TAVILY_API_KEY`                     | Uses Tavily through LangChain                                                                         |
+| `hackernews` | None                                 | Public Hacker News feed and search APIs                                                               |
+| `slack`      | Slack app client credentials + OAuth | Requires HTTPS callback setup for OAuth; see [Slack OAuth](#slack-oauth)                              |
 
 You can configure the same source more than once. For example, add one web search source for AI research and another for NBA news. OpenWiki stores them as separate instances such as `web-search-1` and `web-search-2`.
 
 ### Connect a source
 
-For sources that need credentials, authenticate first, then ingest. Sources such as Hacker News need no auth; web search needs `TAVILY_API_KEY` in `~/.openwiki/.env`.
+For sources that need credentials, authenticate first, then ingest. Sources such as Hacker News and Custom MCP need no auth by default; web search needs `TAVILY_API_KEY` in `~/.openwiki/.env`.
 
 ### Authenticate the provider
 Run a local browser OAuth flow for providers that require it. OpenWiki saves returned tokens to `~/.openwiki/.env`, creates connector config when possible, and discovers MCP tools for MCP-backed providers:
