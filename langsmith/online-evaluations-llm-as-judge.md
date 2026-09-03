@@ -41,9 +41,17 @@ You can apply a filter to the runs that trigger the evaluator. You may want to a
 
 Configure a sampling rate to control the percentage of filtered runs that trigger the automation action. For example, to control costs, you may want to set a filter to only apply the evaluator to 10% of traces. In order to do this, you would set the sampling rate to 0.1.
 
-## Apply a rule to past runs
+## Apply a rule to past runs or threads
 
-Apply a rule to past runs by toggling the **Apply to past runs** and entering a "Backfill from" date. This is only possible upon rule creation.
+To apply the rule to past runs or threads, in the **Configure Evaluator** panel:
+
+1. In **Source**, select **Runs** or **Threads**.
+2. Expand **Advanced**.
+3. Toggle on **Apply to past runs from date** or **Apply to past threads from date**, then enter a date.
+
+You can only backfill when you create the rule.
+
+When you backfill a [thread-level evaluation rule](online-evaluations-multi-turn.md), LangSmith finds threads with matching trace activity between the start date you selected and the time you created the rule, then applies the rule's filters. Once each selected thread is idle, LangSmith evaluates its root-run history and attaches the feedback to a representative trace in the thread. After the backfill finishes, the rule stays active and keeps evaluating new matching threads through the normal live flow.
 
 > [!NOTE]
 > The backfill is processed as a background job, so you will not see the results immediately.

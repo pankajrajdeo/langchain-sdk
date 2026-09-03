@@ -148,6 +148,7 @@ uv add langchain-aws bedrock-agentcore playwright beautifulsoup4
 See a [usage example](../tools/bedrock_agentcore_browser.md).
 
 ```python
+from langgraph.prebuilt import create_react_agent
 from langchain_aws.tools import create_browser_toolkit
 
 # Create toolkit
@@ -180,6 +181,7 @@ uv add langchain-aws bedrock-agentcore
 See a [usage example](../tools/bedrock_agentcore_code_interpreter.md).
 
 ```python
+from langgraph.prebuilt import create_react_agent
 from langchain_aws.tools import create_code_interpreter_toolkit
 
 # Create toolkit (async)

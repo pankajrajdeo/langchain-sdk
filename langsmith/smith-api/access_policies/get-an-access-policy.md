@@ -399,6 +399,7 @@ components:
         - fleet:write-admin-config
         - organization:pats:create
         - organization:read
+        - organization:read-metadata
         - organization:manage
         - organization:manage-model-configs
         - organization:manage-model-secrets
@@ -497,6 +498,7 @@ components:
         - FleetWriteAdminConfig
         - OrganizationPATsCreate
         - OrganizationRead
+        - OrganizationReadMetadata
         - OrganizationManage
         - OrganizationManageModelConfigs
         - OrganizationManageModelSecrets

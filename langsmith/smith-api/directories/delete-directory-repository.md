@@ -182,10 +182,10 @@ paths:
           name: repo_type
           in: query
           schema:
+            type: string
             enum:
               - agent
               - skill
-            type: string
             title: Repo Type
       responses:
         '204':

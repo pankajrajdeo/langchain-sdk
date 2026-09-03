@@ -276,6 +276,12 @@ components:
       required:
         - allowed_domains
       properties:
+        allowed_cidrs:
+          type: object
+          additionalProperties:
+            items:
+              type: integer
+            type: array
         allowed_domains:
           items:
             type: string

@@ -286,6 +286,16 @@ components:
           type: integer
         member_disabled:
           type: boolean
+        org_role_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+        org_role_name:
+          anyOf:
+            - allOf:
+                - $ref: '#/components/schemas/orgs.OrganizationRole'
+            - type: 'null'
         pat_creation_disabled:
           type: boolean
         permissions:
@@ -743,6 +753,20 @@ components:
             UseExactSearchForPrompts indicates whether to use exact search for
             prompts.
           type: boolean
+    orgs.OrganizationRole:
+      type: string
+      enum:
+        - ORGANIZATION_ADMIN
+        - ORGANIZATION_OPERATOR
+        - ORGANIZATION_USER
+        - ORGANIZATION_VIEWER
+        - ORGANIZATION_RESTRICTED
+      x-enum-varnames:
+        - OrganizationRoleAdmin
+        - OrganizationRoleOperator
+        - OrganizationRoleUser
+        - OrganizationRoleViewer
+        - OrganizationRoleRestricted
   securitySchemes:
     API Key:
       type: apiKey

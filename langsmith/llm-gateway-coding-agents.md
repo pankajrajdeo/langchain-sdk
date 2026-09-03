@@ -30,14 +30,26 @@ Claude Code supports two separate authentication methods. Choose one before conf
 
 ### Use a workspace provider secret
 
-Set `ANTHROPIC_API_KEY` to your LangSmith API key. Claude Code reads these variables from your shell environment or from the `env` block in `~/.claude/settings.json`.
+Set `ANTHROPIC_API_KEY` to your LangSmith API key. Claude Code reads these variables from your shell environment or from the `env` block in a settings file passed with `--settings`.
 
 If your LangSmith deployment is on a regional or self-hosted instance, replace the gateway hostname in the examples below with your [regional gateway](llm-gateway-api-formats.md#use-a-regional-gateway) hostname.
 
 #### Use Anthropic models only
 
-Set `ANTHROPIC_BASE_URL` to the Anthropic-format gateway endpoint. The gateway infers the `anthropic/` provider prefix from the endpoint:
+Set `ANTHROPIC_BASE_URL` to the Anthropic-format gateway endpoint. The gateway infers the `anthropic/` provider prefix from the endpoint.
 
+#### Settings file (recommended)
+Variables declared in a `--settings` file take precedence over anything already exported in your shell, so the gateway URL and API key are guaranteed to override any ambient `ANTHROPIC_*` values that may already be set in your environment (for example, from a global shell profile or another tool).
+
+```bash
+touch ~/.claude/langsmith_gateway.settings.json
+echo '{"env": {"ANTHROPIC_BASE_URL": "https://gateway.smith.langchain.com/anthropic/","ANTHROPIC_API_KEY": "YOUR_LANGSMITH_KEY_HERE"}}' > ~/.claude/langsmith_gateway.settings.json
+claude --settings ~/.claude/langsmith_gateway.settings.json
+```
+
+Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
+
+#### Environment variables
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com/anthropic/"
 export ANTHROPIC_API_KEY="$LANGSMITH_API_KEY"
@@ -47,8 +59,20 @@ claude
 
 #### Route model tiers across providers
 
-Set `ANTHROPIC_BASE_URL` to the gateway root, then map each Claude model tier to a provider-prefixed gateway model ID:
+Set `ANTHROPIC_BASE_URL` to the gateway root, then map each Claude model tier to a provider-prefixed gateway model ID.
 
+#### Settings file (recommended)
+Variables declared in a `--settings` file take precedence over anything already exported in your shell, so gateway URLs, the API key, and model mappings are guaranteed to override any ambient `ANTHROPIC_*` values.
+
+```bash
+touch ~/.claude/langsmith_gateway.settings.json
+echo '{"env": {"ANTHROPIC_BASE_URL": "https://gateway.smith.langchain.com","ANTHROPIC_API_KEY": "YOUR_LANGSMITH_KEY_HERE","ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-opus-5","ANTHROPIC_DEFAULT_SONNET_MODEL": "openai/gpt-5.6-terra","ANTHROPIC_DEFAULT_HAIKU_MODEL": "fireworks/accounts/fireworks/models/glm-5p2"}}' > ~/.claude/langsmith_gateway.settings.json
+claude --settings ~/.claude/langsmith_gateway.settings.json
+```
+
+Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
+
+#### Environment variables
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com"
 export ANTHROPIC_API_KEY="$LANGSMITH_API_KEY"
@@ -70,8 +94,20 @@ The model IDs are examples. Map each tier to any model configured in your worksp
 
 Claude Code Plus and Max users can send their saved Anthropic OAuth credential through the gateway. This mode does not require an `ANTHROPIC_API_KEY` in workspace provider secrets.
 
-Log in to Claude Code with your subscription, then configure the gateway:
+Log in to Claude Code with your subscription, then configure the gateway.
 
+#### Settings file (recommended)
+Variables declared in a `--settings` file take precedence over anything already exported in your shell, so the gateway URL and custom headers are guaranteed to override any ambient `ANTHROPIC_*` values. The settings file also keeps your LangSmith API key out of your shell history and dotfiles.
+
+```bash
+touch ~/.claude/langsmith_gateway.settings.json
+echo '{"env": {"ANTHROPIC_BASE_URL": "https://gateway.smith.langchain.com/anthropic","ANTHROPIC_CUSTOM_HEADERS": "X-Api-Key: YOUR_LANGSMITH_KEY_HERE"}}' > ~/.claude/langsmith_gateway.settings.json
+claude --settings ~/.claude/langsmith_gateway.settings.json
+```
+
+Replace `YOUR_LANGSMITH_KEY_HERE` with your LangSmith API key.
+
+#### Environment variables
 ```bash
 export ANTHROPIC_BASE_URL="https://gateway.smith.langchain.com/anthropic"
 export ANTHROPIC_CUSTOM_HEADERS="X-Api-Key: $LANGSMITH_API_KEY"

@@ -13,7 +13,7 @@ Self-hosted LangSmith stores platform data in your environment. Unless you are r
 > **Egress to `https://beacon.langchain.com` is required.** Refer to the [allowlisting IP section](cloud.md#allowlisting-ip-addresses) for static IP addresses, if needed.
 
 > [!NOTE]
-> If you enable [Engine](deploy-self-hosted-full-platform.md#enable-engine), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine).
+> If you enable [Engine](engine-self-hosted.md), it requires a second egress destination, and Engine content leaves your environment through it. See [LangSmith Intelligence for Engine](#langsmith-intelligence-for-engine).
 
 ## Billing telemetry
 
@@ -455,7 +455,7 @@ Add this to the `commonEnv` section of your Helm configuration to permanently di
 
 ## LangSmith Intelligence for Engine
 
-This section applies only if you enable [Engine](deploy-self-hosted-full-platform.md#enable-engine). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
+This section applies only if you enable [Engine](engine-self-hosted.md). LangSmith Intelligence is the LangChain-managed service that powers Engine. No other LangSmith feature depends on it, and none requires egress beyond what this page already describes.
 
 Engine cannot run entirely inside your cluster. It sends requests to LangSmith Intelligence, a LangChain-managed zero data retention (ZDR) service that routes them to a model provider inside LangChain's environment. Allow outbound HTTPS to the gateway for your cloud: `beacon.aws.langchain.com` on AWS, or `beacon.langchain.com` on GCP. To keep AWS traffic on private networking, [connect to LangSmith Intelligence with AWS PrivateLink](engine-self-hosted.md#connect-with-aws-privatelink). On GCP, the gateway is the same host this page already requires, so Engine adds a path rather than a new destination.
 

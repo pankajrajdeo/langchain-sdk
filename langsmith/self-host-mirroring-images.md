@@ -133,7 +133,7 @@ The chart does not set `images.juicefsMountImage` by default. When it is unset, 
 
 ## Additional images for Engine
 
-If you mirror images to a private registry, [Engine](deploy-self-hosted-full-platform.md#enable-engine) uses a single combined image: `langsmith-insights-engine`. Engine also requires sandboxes, which use a separate image described in [Additional images for sandboxes](#additional-images-for-sandboxes).
+If you mirror images to a private registry, [Engine](engine-self-hosted.md) uses a single combined image: `langsmith-insights-engine`. Engine also requires sandboxes, which use a separate image described in [Additional images for sandboxes](#additional-images-for-sandboxes).
 
 To mirror the required images:
 

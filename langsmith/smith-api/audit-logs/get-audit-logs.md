@@ -729,6 +729,13 @@ components:
         - delete_oauth_client
         - rotate_oauth_client_secret
         - revoke_oauth_grant
+        - create_custom_app
+        - update_custom_app
+        - delete_custom_app
+        - bulk_delete_custom_apps
+        - update_custom_app_share
+        - update_custom_app_claim
+        - download_custom_app_source
         - test_op_generic
       title: AuditLogOperation
       description: Operations that are logged in audit_logs database table.

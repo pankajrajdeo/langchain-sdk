@@ -141,9 +141,8 @@ The connected repository lets Engine use your source code for diagnosis and open
 ## See also
 
 * [Find and fix your agent's issues](engine.md): Engine setup, costs, and the issue workflow.
-* [Engine on self-hosted](engine-self-hosted.md): Self-hosted architecture and data handling.
+* [Engine on self-hosted](engine-self-hosted.md): Installation, architecture, and data handling.
 * [Engine security](engine-security.md): How Engine handles your data and GitHub access.
-* [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine): Enable Engine in the LangSmith Helm chart.
 
 ***
 

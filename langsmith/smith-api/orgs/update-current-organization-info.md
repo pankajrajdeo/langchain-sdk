@@ -348,6 +348,16 @@ components:
           type: array
           title: Permissions
           default: []
+        org_role_name:
+          anyOf:
+            - $ref: '#/components/schemas/OrganizationRoles'
+            - type: 'null'
+        org_role_id:
+          anyOf:
+            - type: string
+              format: uuid
+            - type: 'null'
+          title: Org Role Id
         disabled:
           type: boolean
           title: Disabled
@@ -857,6 +867,15 @@ components:
         - partner
         - premier
       title: PaymentPlanTier
+    OrganizationRoles:
+      type: string
+      enum:
+        - ORGANIZATION_ADMIN
+        - ORGANIZATION_OPERATOR
+        - ORGANIZATION_USER
+        - ORGANIZATION_VIEWER
+        - ORGANIZATION_RESTRICTED
+      title: OrganizationRoles
     ValidationError:
       properties:
         loc:

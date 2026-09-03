@@ -41,15 +41,15 @@ bunx managed-deepagents init my-agent --channel slack
 To add Slack to an existing project, run the channel initialization command from the project root:
 
 ```bash
-npx mda channel init slack
+npx mda channels init slack
 ```
 
 ```bash
-pnpm exec mda channel init slack
+pnpm exec mda channels init slack
 ```
 
 ```bash
-bunx mda channel init slack
+bunx mda channels init slack
 ```
 
 ```ts

@@ -47,7 +47,7 @@ Any source that writes feedback to a run contributes to this prioritization auto
 Setting up Engine is a two-step process: an [Organization Admin](rbac.md#organization-admin) first enables Engine for the [workspace](administration-overview.md#workspaces), then any user can configure Engine for each tracing project.
 
 > [!NOTE]
-> On Self-hosted LangSmith, an operator must enable Engine in the LangSmith Helm chart before either step is available. Refer to [Enable Engine](deploy-self-hosted-full-platform.md#enable-engine) and [Engine on Self-hosted](engine-self-hosted.md).
+> On Self-hosted LangSmith, an operator must enable Engine in the LangSmith Helm chart before either step is available. Refer to [Engine on Self-hosted](engine-self-hosted.md).
 
 ### Enable Engine for your organization
 

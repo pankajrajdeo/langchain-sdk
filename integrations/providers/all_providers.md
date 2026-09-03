@@ -7,6 +7,9 @@ Browse the complete collection of integrations available for Python. LangChain P
 #### [1Claw](https://docs.1claw.xyz/docs/integrations/langchain)
 HSM-backed secrets, signing, memory, and automations for LangChain agents.
 
+#### [AACP](https://github.com/MackayAndrew/aacp-langchain)
+Typed, validated coordination packets for LangChain multi-agent workflows.
+
 #### [Abso](https://github.com/lunary-ai/langchain-abso)
 Custom AI integration platform for enterprise workflows.
 
@@ -148,6 +151,9 @@ Runtime detection of prompt injection, tool poisoning, and unsafe tool calls usi
 #### [Asqav](https://asqav.com/docs)
 AI agent governance with audit trails, policy enforcement, and compliance.
 
+#### [Atomic Mail](https://atomic-mail.github.io/atomic-mail-agentic/langchain)
+JMAP inboxes for AI agents with proof-of-work signup and tools for registration, mail operations, and help.
+
 #### [Attenu Guard](https://attenu.io/docs/example-langgraph/)
 Per-agent tool-call and subagent permission enforcement with a hash-chained audit log.
 
@@ -192,6 +198,9 @@ High-performance analytics and data processing.
 
 #### [Box](box.md)
 Cloud content management and collaboration.
+
+#### [Brainiall](https://app.brainiall.com/docs)
+LLM gateway with LangChain chat model and embeddings integrations.
 
 #### [Brightdata](https://docs.brightdata.com/integrations/langchain)
 Web data platform and proxy services.
@@ -249,6 +258,9 @@ Context management for AI applications.
 
 #### [Contextual](https://docs.contextual.ai/)
 Contextual AI and language understanding.
+
+#### [Context.dev](https://docs.context.dev)
+Live web search, scraping, extraction, document parsing, and brand intelligence tools for agents.
 
 #### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)
 React stack and Python middleware for Deep Agents, LangGraph agents, FastAPI, and generative UI.
@@ -478,8 +490,17 @@ Web automation and scraping platform.
 #### [IBM](ibm.md)
 IBM Watson AI and enterprise solutions.
 
+#### [ICTContact](https://www.ictcontact.com)
+Start, stop, and monitor outbound contact-center campaigns on ICTContact or ICTDialer.
+
+#### [ICTExam](https://www.ictlms.net)
+AI exam authoring and auto-grading: parse question papers, publish exams, and read gradebooks.
+
 #### [ICTFax](https://www.ictinnovations.com/)
 LangChain tools to send and track faxes through an ICTFax or ICTCore server.
+
+#### [ICTPBX](https://ictpbx.com)
+Query ICTPBX extensions, DIDs, SIP trunks, tenants, and PBX statistics.
 
 #### [iLoveVideoEditor](https://ilovevideoeditor.com/docs/api-guide)
 Cloud video rendering platform: render MP4 videos from VideoJSON specs.
@@ -565,6 +586,9 @@ Bias testing framework for language models.
 #### [LangFuse](langfuse.md)
 LLM engineering platform and observability.
 
+#### [LatAm Synth](https://github.com/jmendozapuche/langchain-latam-synth)
+Privacy-safe synthetic financial data generation for Latin American fintech applications.
+
 #### [Leap0](https://leap0.dev/docs)
 Cloud sandboxes for AI agents with fast cold starts.
 
@@ -606,6 +630,9 @@ Local-first, MCP-native memory layer for LangChain and LangGraph.
 
 #### [MadeOnSol](https://madeonsol.com/api-docs)
 Solana memecoin intelligence tools: KOL feeds, coordination signals, deployer reputation, and alerts.
+
+#### [Magic Hour](https://docs.magichour.ai)
+AI text-to-video, image-to-video, and image generation tools behind one API key.
 
 #### [MariaDB](https://mariadb.com/docs/connectors/other/langchain-mariadb/api-reference)
 Open-source relational database management.
@@ -765,6 +792,9 @@ Framework-agnostic language for portable agent definitions.
 
 #### [OpenTTT](https://github.com/Helm-Protocol/OpenTTT/tree/main/integrations/langchain)
 Cryptographic Proof-of-Time timestamps for LangChain LLM calls.
+
+#### [OpenZoo](https://github.com/staccDOTsol/langchain-openzoo)
+Pay-per-call OpenAI-compatible chat models via a local x402 proxy.
 
 #### [Oracle AI Database](oracleai.md)
 Oracle's AI and machine learning services.

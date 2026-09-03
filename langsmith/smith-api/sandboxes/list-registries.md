@@ -245,6 +245,21 @@ components:
           type: string
         name:
           type: string
+        provider:
+          type: string
+          enum:
+            - DOCKER_REGISTRY
+            - HARBOR
+            - GHCR
+            - ECR
+            - GAR
+            - DOCKER_HUB
+        repository_search_mode:
+          type: string
+          enum:
+            - GLOBAL
+            - SCOPED
+            - NONE
         updated_at:
           type: string
         updated_by:
