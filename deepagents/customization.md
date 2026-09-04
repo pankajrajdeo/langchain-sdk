@@ -690,213 +690,178 @@ agent = create_deep_agent(
 > [!TIP]
 > Deep Agents fully support [Model Context Protocol (MCP)](../langchain/mcp.md) tools. You can load tools from any MCP server—databases, APIs, file systems, and more—and pass them directly to `create_deep_agent`.
 
-Install `langchain-mcp-adapters` to connect to MCP servers:
+Install LangChain with the `mcp` extra to connect to MCP servers:
 
 ```bash
-pip install langchain-mcp-adapters
+pip install "langchain[mcp]"
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="google_genai:gemini-3.6-flash",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="openai:gpt-5.5",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
-            model="anthropic:claude-sonnet-4-6",
+            model="anthropic:claude-sonnet-5",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="openrouter:z-ai/glm-5.2",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="fireworks:accounts/fireworks/models/glm-5p2",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="baseten:zai-org/GLM-5.2",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 ```python
 import asyncio
-from langchain_mcp_adapters.client import MultiServerMCPClient
+
 from deepagents import create_deep_agent
+from langchain.mcp import MCPAdapter
 
 async def main():
-    async with MultiServerMCPClient(
-        {
-            "my_server": {
-                "transport": "http",
-                "url": "http://localhost:8000/mcp",
-            }
-        }
-    ) as client:
-        tools = await client.get_tools()
-
+    config = {"mcpServers": {"my_server": {"url": "http://localhost:8000/mcp"}}}
+    async with MCPAdapter(config) as adapter:
+        tools = await adapter.list_tools()
         agent = create_deep_agent(
             model="ollama:north-mini-code-1.0",
             tools=tools,
         )
-
-        result = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": "Use the MCP server to help me."}]},
+        await agent.ainvoke(
+            {
+                "messages": [
+                    {"role": "user", "content": "Use the MCP server to help me."}
+                ]
+            },
             config={"configurable": {"thread_id": "1"}},
         )
-
-asyncio.run(main())
 ```
 
 For detailed configuration options including stdio servers, OAuth authentication, tool filtering, and stateful sessions, see the full [MCP guide](../langchain/mcp.md).

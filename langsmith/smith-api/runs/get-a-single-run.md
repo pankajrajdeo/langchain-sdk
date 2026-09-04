@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/runs/{run_id}:
@@ -187,8 +189,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - description: >-
             `selects` lists which properties to include on the returned run
@@ -199,6 +201,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - ID
@@ -246,8 +249,8 @@ paths:
                 - LAST_QUEUED_AT
                 - SHARE_URL
                 - FEEDBACK_STATS
+                - LS_USER_ID
               type: string
-            type: array
             title: Selects
         - description: >-
             `start_time` is the run's `start_time` (RFC3339 date-time).
@@ -441,6 +444,14 @@ components:
             seconds.
           type: number
           example: 1.523
+        ls_user_id:
+          description: >-
+            `ls_user_id` identifies the LangSmith user whose credential traced
+            the run. It is absent for runs traced with a service-account API
+            key, which has no associated user.
+          type: string
+          format: uuid
+          example: f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c
         manifest:
           description: >-
             `manifest` is the serialized configuration of the traced component

@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/evaluators:
@@ -184,9 +186,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Tag Value Id
         - description: Filter by feedback key
           name: feedback_key
@@ -200,9 +202,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Resource Id
         - description: Field to sort by
           name: sort_by
@@ -220,8 +222,8 @@ paths:
           name: limit
           in: query
           schema:
-            type: integer
             default: 100
+            type: integer
             title: Limit
         - description: Offset for pagination
           name: offset

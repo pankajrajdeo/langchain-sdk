@@ -161,6 +161,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/commits/{owner}/{repo}/{commit}:
@@ -205,8 +207,8 @@ paths:
         - name: get_examples
           in: query
           schema:
-            type: boolean
             default: false
+            type: boolean
             title: Get Examples
         - description: 'Comma-separated list of optional fields: "model", "is_draft"'
           name: include
@@ -218,14 +220,14 @@ paths:
           name: include_model
           in: query
           schema:
-            type: boolean
             default: false
+            type: boolean
             title: Include Model
         - name: is_view
           in: query
           schema:
-            type: boolean
             default: false
+            type: boolean
             title: Is View
       responses:
         '200':

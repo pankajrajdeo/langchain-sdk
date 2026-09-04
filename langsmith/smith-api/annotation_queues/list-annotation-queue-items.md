@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/annotation-queues/{queue_id}/items:
@@ -182,18 +184,18 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             enum:
               - needs_my_review
               - needs_others_review
               - archived
+            type: string
             title: Status
         - description: Page size (max 100)
           name: page_size
           in: query
           schema:
-            type: integer
             default: 20
+            type: integer
             title: Page Size
         - description: Opaque pagination cursor
           name: cursor
@@ -205,20 +207,20 @@ paths:
           name: item_type
           in: query
           schema:
-            type: string
             enum:
               - RUN
               - THREAD
+            type: string
             title: Item Type
         - description: Pagination direction. backward requires cursor
           name: direction
           in: query
           schema:
-            type: string
             default: forward
             enum:
               - forward
               - backward
+            type: string
             title: Direction
       responses:
         '200':

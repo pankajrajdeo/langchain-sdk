@@ -1,6 +1,6 @@
 # Update evaluator
 
-> Update an existing evaluator's name, LLM configuration, or code configuration.
+> Update an existing evaluator's name, LLM configuration, or code configuration. Returns 409 when a code evaluator build is ENQUEUED or BUILDING.
 
 ## OpenAPI
 
@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/evaluators/{evaluator_id}:
@@ -164,7 +166,8 @@ paths:
       summary: Update evaluator
       description: >-
         Update an existing evaluator's name, LLM configuration, or code
-        configuration.
+        configuration. Returns 409 when a code evaluator build is ENQUEUED or
+        BUILDING.
       parameters:
         - description: Evaluator ID
           name: evaluator_id

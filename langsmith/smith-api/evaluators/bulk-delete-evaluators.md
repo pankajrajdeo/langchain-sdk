@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/evaluators:
@@ -173,9 +175,9 @@ paths:
           style: form
           explode: false
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Evaluator Ids
         - description: >-
             When true, delete all run rules for this evaluator before deleting

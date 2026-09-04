@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/public/datasets/sessions-bulk:
@@ -170,9 +172,10 @@ paths:
           in: query
           required: true
           schema:
-            type: array
             items:
               type: string
+              format: uuid
+            type: array
             title: Share Tokens
       responses:
         '200':

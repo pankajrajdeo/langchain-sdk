@@ -161,6 +161,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/traces/query:
@@ -440,6 +442,7 @@ components:
         - LAST_QUEUED_AT
         - SHARE_URL
         - FEEDBACK_STATS
+        - LS_USER_ID
       x-enum-varnames:
         - RunSelectID
         - RunSelectName
@@ -486,6 +489,7 @@ components:
         - RunSelectLastQueuedAt
         - RunSelectShareURL
         - RunSelectFeedbackStats
+        - RunSelectLsUserID
     query.Trace:
       type: object
       properties:
@@ -631,6 +635,14 @@ components:
             seconds.
           type: number
           example: 1.523
+        ls_user_id:
+          description: >-
+            `ls_user_id` identifies the LangSmith user whose credential traced
+            the run. It is absent for runs traced with a service-account API
+            key, which has no associated user.
+          type: string
+          format: uuid
+          example: f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c
         manifest:
           description: >-
             `manifest` is the serialized configuration of the traced component

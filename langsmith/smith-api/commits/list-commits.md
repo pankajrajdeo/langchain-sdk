@@ -158,6 +158,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/commits/{owner}/{repo}:
@@ -194,8 +196,8 @@ paths:
           name: include_stats
           in: query
           schema:
-            type: boolean
             default: true
+            type: boolean
             title: Include Stats
         - description: Limit is the pagination limit
           name: limit

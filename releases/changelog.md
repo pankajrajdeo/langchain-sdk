@@ -5,6 +5,33 @@
 > [!NOTE]
 > **Subscribe**: Our changelog includes an [RSS feed](https://docs.langchain.com/oss/python/releases/changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
+## Sep 1, 2026
+## `langchain` v1.4.0
+
+MCP support now ships inside LangChain in the `langchain.mcp` namespace, built on [FastMCP](https://gofastmcp.com). It replaces the standalone `langchain-mcp-adapters` package. Install it with the `mcp` extra:
+
+```bash
+pip install "langchain[mcp]"
+```
+
+```bash
+uv add "langchain[mcp]"
+```
+
+> [!NOTE]
+> The `langchain.mcp` namespace is in beta. Importing from it raises a `LangChainBetaWarning`.
+
+### Features
+
+* **One adapter, any transport**: `MCPAdapter` infers the transport from its target — a URL, a local script over stdio, an in-process server, an `MCPConfig` dict for [multiple servers](../langchain/mcp/connections.md#multiple-servers), or a pre-built `fastmcp.Client`. `await adapter.list_tools()` returns LangChain tools ready for `create_agent`. See the [MCP overview](../langchain/mcp.md).
+* **Interrupt-driven elicitation**: when a server asks for input mid-call, `MCPAdapter` surfaces the question as a LangGraph `interrupt()`, so a human answers and the run resumes. See [Elicitation](../langchain/mcp/tools.md#elicitation).
+* **Authentication through FastMCP**: bearer tokens, full OAuth 2.1 with dynamic client registration, or any `httpx.Auth`, including [per-user authentication](../langchain/mcp/auth.md#per-user-authentication) in a deployment. See [Authentication](../langchain/mcp/auth.md).
+* **Richer tool metadata**: each tool carries its MCP provenance under an `mcp` namespace on its metadata, including annotations such as `destructive_hint` for [gating destructive tools behind approval](../langchain/mcp/tools.md#human-in-the-loop). See [Tool metadata](../langchain/mcp/tools.md#tool-metadata).
+
+### Migrating
+
+Moving from `langchain-mcp-adapters`? `MultiServerMCPClient` is replaced by `MCPAdapter`, and several features have changed or been removed. See the [migration guide](../migrate/langchain-mcp-adapters.md).
+
 ## Jul 24, 2026
 ## `deepagents` v0.7.0
 

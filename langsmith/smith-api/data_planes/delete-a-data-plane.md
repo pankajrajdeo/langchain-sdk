@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /orgs/current/data-planes/{id}:
@@ -274,8 +276,12 @@ components:
     data_planes.DataPlaneFirewallSettings:
       type: object
       required:
+        - allow_http
+        - allowed_cidrs
         - allowed_domains
       properties:
+        allow_http:
+          type: boolean
         allowed_cidrs:
           type: object
           additionalProperties:

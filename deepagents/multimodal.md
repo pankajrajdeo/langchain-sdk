@@ -56,7 +56,9 @@ def capture_screenshot() -> list[dict]:
     ]
 ```
 
-The return value is converted to a `ToolMessage` the model reads on the next turn. Access the normalized representation with `content_blocks` on the resulting message. For return-type options, serialization behavior, and MCP examples, see [Tool return values](../langchain/tools.md#tool-return-values) and [Multimodal tool content](../langchain/mcp.md#multimodal-tool-content).
+The return value is converted to a `ToolMessage` the model reads on the next turn. Access the normalized representation with `content_blocks` on the resulting message.
+
+For return-type options, serialization behavior, and MCP examples, see [Multimodal content](../langchain/mcp/tools.md#multimodal-content).
 
 > [!TIP]
 > When a tool produces images or other large binary data, save the artifact to a [backend](backends.md) and return a concise text description plus a path or URL. This keeps message history smaller and works better with [context compression](context-engineering.md#context-compression).

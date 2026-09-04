@@ -162,6 +162,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/audit-logs:
@@ -487,6 +489,9 @@ components:
         - update_oauth_provider
         - delete_oauth_provider
         - start_oauth_connection
+        - create_agent_auth_connection
+        - update_agent_auth_connection
+        - delete_agent_auth_connection
         - create_tool
         - update_tool
         - delete_tool

@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/sandboxes/snapshots:
@@ -178,8 +180,8 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
             default: 20
+            type: integer
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor
@@ -191,8 +193,8 @@ paths:
           name: limit
           in: query
           schema:
-            type: integer
             default: 50
+            type: integer
             title: Limit
         - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
@@ -227,30 +229,30 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Label
         - description: Sort column (name, status, created_at)
           name: sort_by
           in: query
           schema:
-            type: string
             default: created_at
+            type: string
             title: Sort By
         - description: Sort direction (asc, desc)
           name: sort_order
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Order
         - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Direction
       responses:
         '200':

@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/threads/{thread_id}/share:
@@ -180,8 +182,8 @@ paths:
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
       responses:
         '204':

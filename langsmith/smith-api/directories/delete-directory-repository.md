@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/hub/repos/{owner}/{repo}/directories:
@@ -182,10 +184,10 @@ paths:
           name: repo_type
           in: query
           schema:
-            type: string
             enum:
               - agent
               - skill
+            type: string
             title: Repo Type
       responses:
         '204':

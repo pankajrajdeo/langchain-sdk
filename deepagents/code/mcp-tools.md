@@ -517,7 +517,7 @@ Export the variable in the parent shell, add it to `~/.deepagents/.env`, or give
 ## Further reading
 
 * [LangSmith Remote MCP](../../langsmith/langsmith-remote-mcp.md): connect Deep Agents Code to LangSmith tools over OAuth
-* [LangChain MCP guide](../../langchain/mcp.md): protocol details, building custom servers, and using `langchain-mcp-adapters` programmatically
+* [LangChain MCP guide](../../langchain/mcp.md): connecting agents to MCP servers with the `MCPAdapter`
 * [MCP specification](https://modelcontextprotocol.io/): the official protocol spec and server registry
 
 ***

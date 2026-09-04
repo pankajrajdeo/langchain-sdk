@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/public/threads/{share_token}/traces:
@@ -185,9 +187,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
         - description: opaque cursor from a previous page
           name: cursor

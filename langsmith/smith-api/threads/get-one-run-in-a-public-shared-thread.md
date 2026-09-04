@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/public/threads/{share_token}/runs/{run_id}:
@@ -199,9 +201,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Selects
       responses:
         '200':
@@ -351,6 +353,14 @@ components:
             seconds.
           type: number
           example: 1.523
+        ls_user_id:
+          description: >-
+            `ls_user_id` identifies the LangSmith user whose credential traced
+            the run. It is absent for runs traced with a service-account API
+            key, which has no associated user.
+          type: string
+          format: uuid
+          example: f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c
         manifest:
           description: >-
             `manifest` is the serialized configuration of the traced component

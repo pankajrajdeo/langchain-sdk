@@ -157,6 +157,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v2/threads/{thread_id}/traces:
@@ -206,18 +208,18 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
-            maximum: 100
-            minimum: 1
             default: 20
+            minimum: 1
+            maximum: 100
+            type: integer
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - example:
             - NAME
@@ -232,6 +234,7 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               enum:
                 - THREAD_ID
@@ -259,7 +262,6 @@ paths:
                 - NAME
                 - ERROR_PREVIEW
               type: string
-            type: array
             title: Selects
       responses:
         '200':

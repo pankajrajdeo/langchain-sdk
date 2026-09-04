@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/platform/orgs/current/roles/{role_id}/access-policies:
@@ -177,9 +179,9 @@ paths:
           style: form
           explode: true
           schema:
+            type: array
             items:
               type: string
-            type: array
             title: Access Policy Ids
       responses:
         '204':

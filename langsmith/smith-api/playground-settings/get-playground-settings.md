@@ -155,6 +155,8 @@ tags:
   - name: fleet orgs
   - name: fleet secrets
   - name: fleet tenants
+  - name: fleet threads
+    x-hidden: true
   - name: fleet users
 paths:
   /api/v1/playground-settings/{playground_settings_id}:
@@ -171,6 +173,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
             title: Playground Settings Id
       responses:
         '200':
