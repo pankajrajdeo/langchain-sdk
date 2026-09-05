@@ -67,7 +67,7 @@ We recommend leveraging GCP's managed services to provide a scalable, secure, an
     * ClickHouse is not required for hybrid deployments.
   * [Cloud Storage](https://cloud.google.com/storage): object storage for trace artifacts and telemetry.
 
-*  **LLM integration:** Optionally proxy requests to [Vertex AI](https://cloud.google.com/vertex-ai) for LLM inference.
+*  **LLM integration:** Optionally proxy requests to [Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform) for LLM inference.
 
 *  **Monitoring & observability:** Integrate with [Cloud Monitoring](https://cloud.google.com/monitoring) and [Cloud Logging](https://cloud.google.com/logging)
 
@@ -134,7 +134,7 @@ Customers can deploy in [Assured Workloads](https://cloud.google.com/assured-wor
 
 Use LangSmith to:
 
-* Capture traces from LLM apps running on [Vertex AI](https://cloud.google.com/vertex-ai).
+* Capture traces from LLM apps running on [Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform).
 * Evaluate model outputs via [LangSmith datasets](manage-datasets.md).
 * Track latency, token usage, and success rates.
 

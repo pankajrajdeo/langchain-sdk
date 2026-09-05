@@ -213,8 +213,6 @@ components:
         - session_name
         - thread_id
       properties:
-        conversations:
-          type: object
         session_id:
           type: string
           format: uuid

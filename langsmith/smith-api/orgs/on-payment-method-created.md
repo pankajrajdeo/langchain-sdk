@@ -204,7 +204,7 @@ components:
       properties:
         detail:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
           title: Detail
       type: object
@@ -222,27 +222,6 @@ components:
         - address
       title: StripeCustomerBillingInfo
       description: Stripe customer billing information.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
     StripeCustomerAddress:
       properties:
         line1:

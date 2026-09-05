@@ -115,7 +115,7 @@ class ContactInfo:
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ContactInfo  # Auto-selects ProviderStrategy
 )
 
@@ -139,7 +139,7 @@ class ContactInfo(TypedDict):
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ContactInfo  # Auto-selects ProviderStrategy
 )
 
@@ -169,7 +169,7 @@ contact_info_schema = {
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ProviderStrategy(contact_info_schema)
 )
 
@@ -244,7 +244,7 @@ class ProductReview(BaseModel):
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ToolStrategy(ProductReview)
 )
 
@@ -270,7 +270,7 @@ class ProductReview:
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ToolStrategy(ProductReview)
 )
 
@@ -295,7 +295,7 @@ class ProductReview(TypedDict):
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ToolStrategy(ProductReview)
 )
 
@@ -337,7 +337,7 @@ product_review_schema = {
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ToolStrategy(product_review_schema)
 )
 
@@ -368,7 +368,7 @@ class CustomerComplaint(BaseModel):
 
 agent = create_agent(
     model="gpt-5.5",
-    tools=tools,
+    tools=[],
     response_format=ToolStrategy(Union[ProductReview, CustomerComplaint])
 )
 

@@ -315,7 +315,7 @@ components:
       properties:
         detail:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
           title: Detail
       type: object
@@ -373,27 +373,6 @@ components:
         the row's values come from. Fields for the unselected domain are
         always `0`. Backwards-compat: callers that only read `traces` (the
         pre-existing field) keep working unchanged.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
     GranularUsageDimensions:
       properties:
         user_id:

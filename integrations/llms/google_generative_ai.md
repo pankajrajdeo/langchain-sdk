@@ -7,7 +7,7 @@
 >
 > You may be looking for [this page instead](../chat/google_generative_ai.md).
 
-A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Google Cloud Vertex AI [integration](google_vertex_ai.md).
+A guide on using [Google Generative AI](https://developers.generativeai.google/) models with LangChain. Note: It's separate from Gemini Enterprise Agent Platform [integration](google_vertex_ai.md).
 
 ## Setting up
 

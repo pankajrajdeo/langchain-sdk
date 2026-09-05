@@ -24,7 +24,7 @@ from langchain_litellm import ChatLiteLLM
 from langchain_litellm import ChatLiteLLMRouter
 ```
 
-See the [LiteLLM chat guide](../chat/litellm.md) for full usage details, including streaming, tool calling, structured output, and Vertex AI Grounding.
+See the [LiteLLM chat guide](../chat/litellm.md) for full usage details, including streaming, tool calling, structured output, and grounding on Gemini Enterprise Agent Platform.
 
 ## Embeddings
 

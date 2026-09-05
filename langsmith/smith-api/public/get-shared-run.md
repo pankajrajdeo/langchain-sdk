@@ -465,7 +465,7 @@ components:
       properties:
         detail:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
           title: Detail
       type: object
@@ -482,26 +482,5 @@ components:
         - parser
       title: RunTypeEnum
       description: Enum for run types.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
 
 ````

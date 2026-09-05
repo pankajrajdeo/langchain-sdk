@@ -205,7 +205,7 @@ components:
       properties:
         detail:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
           title: Detail
       type: object
@@ -231,27 +231,6 @@ components:
       description: >-
         Enum for payment plans that the user can change to. Developer plans are
         permanent and enterprise plans will be changed manually.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
   securitySchemes:
     API Key:
       type: apiKey

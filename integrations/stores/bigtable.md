@@ -58,7 +58,7 @@ TABLE_ID = "your-table-id"  # @param {type:"string"}
 Authenticate to Google Cloud to access your project resources.
 
 * For **Colab**, use the cell below.
-* For **Vertex AI Workbench**, see the [setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
+* For **Gemini Enterprise Agent Platform Workbench**, see the [setup instructions](https://github.com/GoogleCloudPlatform/generative-ai/tree/main/setup-env).
 
 ```python
 from google.colab import auth

@@ -377,7 +377,7 @@ components:
       properties:
         detail:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
           title: Detail
       type: object
@@ -404,27 +404,6 @@ components:
         - partner
         - premier
       title: PaymentPlanTier
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-              - type: string
-              - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-        - loc
-        - msg
-        - type
-      title: ValidationError
   securitySchemes:
     Bearer Auth:
       type: http

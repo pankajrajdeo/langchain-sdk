@@ -32,13 +32,13 @@ playground:
       eks.amazonaws.com/role-arn: <your_role_arn>
 ```
 
-## VertexAI configuration
+## Gemini Enterprise Agent Platform configuration
 
-You can configure VertexAI credentials for the playground service using either environment variables with secrets or workload identity (GCP Workload Identity for GKE or AWS IRSA for EKS).
+You can configure Gemini Enterprise Agent Platform credentials for the playground service using either environment variables with secrets or workload identity (GCP Workload Identity for GKE or AWS IRSA for EKS).
 
 ### Using secrets
 
-Configure VertexAI credentials using Kubernetes secrets:
+Configure Gemini Enterprise Agent Platform credentials using Kubernetes secrets:
 
 ```yaml
 playground:
@@ -98,7 +98,7 @@ playground:
 ```
 
 > [!NOTE]
-> When using GCP Workload Identity, ensure the GCP service account has the required VertexAI permissions (e.g., `roles/aiplatform.user`).
+> When using GCP Workload Identity, ensure the GCP service account has the required Gemini Enterprise Agent Platform permissions (e.g., `roles/aiplatform.user`).
 
 #### AWS IRSA (EKS)
 
@@ -123,7 +123,7 @@ playground:
 ```
 
 > [!NOTE]
-> When using AWS IRSA, ensure your AWS IAM role has the necessary permissions to assume the GCP service account role, and that the GCP service account has the required VertexAI permissions.
+> When using AWS IRSA, ensure your AWS IAM role has the necessary permissions to assume the GCP service account role, and that the GCP service account has the required Gemini Enterprise Agent Platform permissions.
 
 ***
 

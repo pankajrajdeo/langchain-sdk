@@ -443,7 +443,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 ```
 
-#### Google Vertex
+#### Gemini Enterprise Agent Platform
 ```shell
 pip install -qU langchain-google-vertexai
 ```

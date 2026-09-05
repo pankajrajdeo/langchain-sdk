@@ -10,9 +10,9 @@ You can find information about Anthropic's latest models, their costs, context w
 > For detailed documentation of all features and configuration options, head to the [`ChatAnthropic`](https://reference.langchain.com/python/langchain-anthropic/chat_models/ChatAnthropic) API reference.
 
 > [!NOTE]
-> **AWS Bedrock and Google VertexAI**
+> **AWS Bedrock and Gemini Enterprise Agent Platform**
 >
-> Note that certain Anthropic models can also be accessed via AWS Bedrock and Google VertexAI. See the [`ChatBedrock`](bedrock.md) and [`ChatVertexAI`](google_vertex_ai.md) integrations to use Anthropic models via these services.
+> Note that certain Anthropic models can also be accessed via AWS Bedrock and Gemini Enterprise Agent Platform. See the [`ChatBedrock`](bedrock.md) and [`ChatVertexAI`](google_vertex_ai.md) integrations to use Anthropic models via these services.
 >
 > For Anthropic models on AWS Bedrock with the same API as `ChatAnthropic`, use [`ChatAnthropicBedrock`](bedrock.md#chatanthropicbedrock) from `langchain-aws`.
 

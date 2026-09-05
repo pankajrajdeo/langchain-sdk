@@ -116,7 +116,7 @@ LangSmith measures usage per workspace, because workspaces often represent devel
 
 #### Configure trace tier distribution
 
-LangSmith has two trace tiers: base traces and extended traces. Base traces have the base retention and are short-lived (14 days), while extended traces have extended retention and are long-lived (400 days by default, [customizable for Enterprise customers](data-purging-compliance.md#customize-extended-retention-policy)). For more information, refer to the [data retention conceptual docs](usage-and-billing.md#data-retention).
+LangSmith has two trace tiers: base traces and extended traces. Base traces have the base retention and are short-lived (14 days), while extended traces have extended retention and are long-lived (180 days by default, [customizable for Enterprise customers](data-purging-compliance.md#customize-extended-retention-policy)). For more information, refer to the [data retention conceptual docs](usage-and-billing.md#data-retention).
 
 Set the desired default trace tier by selecting an option below the **Default data retention** label. All traces will have this tier by default when they are registered. Note that because extended traces cost more than base traces, selecting **Extended** as your default data retention option will result in less overall traces allowed in the billing period. By default, updating this setting will only apply to future incoming traces. To apply to all existing traces in the workspace, select the checkbox.
 
@@ -129,11 +129,11 @@ If the default data retention is set to **Base** you can optionally use the slid
 
 #### Customize extended retention period ([Enterprise](pricing-plans.md) only)
 
-[Enterprise](pricing-plans.md) customers can customize the extended data retention period at the workspace level to meet compliance requirements. The default is 400 days, but this can be adjusted based on your organization's needs. For more information, refer to [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
+[Enterprise](pricing-plans.md) customers can customize the extended data retention period at the workspace level to meet compliance requirements. The default is 180 days, but this can be adjusted based on your organization's needs. For more information, refer to [Customize extended retention policy](data-purging-compliance.md#customize-extended-retention-policy).
 
 #### Change project-level default retention
 
-Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (400 days). To customize the extended duration beyond 400 days, use [workspace-level configuration](data-purging-compliance.md#customize-extended-retention-policy) (Enterprise only).
+Data retention settings are adjustable per tracing project. At the project level, you choose between two tiers: base (14 days) or extended (180 days). To customize the extended duration up to the 180-day maximum, use [workspace-level configuration](data-purging-compliance.md#customize-extended-retention-policy) (Enterprise only).
 
 Navigate to **Projects** > ***Your project name*** > Select **Retention** and select the desired default retention. This will only affect retention (and pricing) for **traces going forward**.
 
@@ -153,13 +153,13 @@ To configure this:
 2. Name your rule and optionally apply filters or a sample rate. For more information on configuring filters, refer to [filtering techniques](filter-traces-in-application.md#filter-operators).
 
 > [!NOTE]
-> When an automation rule matches any [run](observability-concepts.md#runs) within a [trace](observability-concepts.md#traces), then all runs within the trace are upgraded to extended data retention (400 days by default, [customizable for Enterprise customers](data-purging-compliance.md#customize-extended-retention-policy)).
+> When an automation rule matches any [run](observability-concepts.md#runs) within a [trace](observability-concepts.md#traces), then all runs within the trace are upgraded to extended data retention (180 days by default, [customizable for Enterprise customers](data-purging-compliance.md#customize-extended-retention-policy)).
 
 For example, this is the expected configuration to keep 10% of all traces for extended data retention:
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/Xbr8HuVd9jPi6qTU/langsmith/images/P2SampleTraces.png?fit=max&auto=format&n=Xbr8HuVd9jPi6qTU&q=85&s=09bbdf5ef7cf3a5a99d6bf0a704e2143" alt="P2sampletraces" width="640" height="610" data-path="langsmith/images/P2SampleTraces.png" />
 
-If you want to keep a subset of traces for **longer than 400 days** for data collection purposes, you can create another run rule that sends some runs to a dataset of your choosing. A dataset allows you to store the trace inputs and outputs (e.g., as a key-value dataset), and will persist indefinitely, even after the trace gets deleted.
+If you want to keep a subset of traces for **longer than 180 days** for data collection purposes, you can create another run rule that sends some runs to a dataset of your choosing. A dataset allows you to store the trace inputs and outputs (e.g., as a key-value dataset), and will persist indefinitely, even after the trace gets deleted.
 
 ### LangSmith Deployment billing
 

@@ -242,8 +242,6 @@ components:
           example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
     threadshare.ShareTokenResponseBody:
       type: object
-      required:
-        - share_token
       properties:
         share_token:
           type: string

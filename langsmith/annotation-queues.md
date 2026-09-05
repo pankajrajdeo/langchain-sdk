@@ -95,16 +95,19 @@ Because of these settings, the number of items visible to each reviewer can diff
 
 There are several ways to populate a single-run queue with items:
 
-* **From the Details view**: In a [tracing project](observability-concepts.md#projects), click into any row to open the side panel in the [Details view](view-traces.md#details-view). Click **+ Add**, then **Add to Annotation Queue** in the top-right. In the popover, under **What to add**, choose **Selected run** (the current run) or **Entire thread** (the full conversation that run belongs to).
+* **From the Details view**: In a [tracing project](observability-concepts.md#projects), click into any row to open the side panel in the [Details view](view-traces.md#details-view). The panel offers two actions, each with a fixed scope:
 
-  You can add any intermediate [run](observability-concepts.md#runs) as a run item, but not the root run. **Entire thread** requires the run to be part of a thread (instrumented with `thread_id` / `session_id` metadata).
+  * **Add to** : In the run header, open this menu and select **Add to Annotation Queue**. This adds the run you have selected as a run item.
+  * **Add thread to annotation queue** : Next to the **Messages**, **Turns**, and **Details** tabs, click the icon. This adds the whole thread as a thread item.
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/add-to-annotation-queue-what-to-add-light.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=091e403e9ecb1819f49d19b630909801" alt="Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker." width="1912" height="965" data-path="langsmith/images/add-to-annotation-queue-what-to-add-light.png" />
+  Both actions open a popover where you select an existing queue or create a new one.
 
-  <img src="https://mintcdn.com/langchain-5e9cc07a/XAjVplP-0MXBU4mY/langsmith/images/add-to-annotation-queue-what-to-add-dark.png?fit=max&auto=format&n=XAjVplP-0MXBU4mY&q=85&s=a5886513a1b75ddaa945627e6d761439" alt="Add to Annotation Queue popover with What to add tabs for Selected run and Entire thread, and a queue picker." width="1921" height="963" data-path="langsmith/images/add-to-annotation-queue-what-to-add-dark.png" />
+  <img src="https://mintcdn.com/langchain-5e9cc07a/2JD80Bfuvagi9E_N/langsmith/images/details-view-add-to-annotation-queue-light.png?fit=max&auto=format&n=2JD80Bfuvagi9E_N&q=85&s=bf8ef7a2a75b2dfc0f6b8c236f00f1da" alt="Details view side panel showing the Add to icon in the run header with its menu open, and the Add thread to annotation queue icon next to the view tabs." width="1920" height="930" data-path="langsmith/images/details-view-add-to-annotation-queue-light.png" />
+
+  <img src="https://mintcdn.com/langchain-5e9cc07a/2JD80Bfuvagi9E_N/langsmith/images/details-view-add-to-annotation-queue-dark.png?fit=max&auto=format&n=2JD80Bfuvagi9E_N&q=85&s=791904dd96389ece54f9a249d3950227" alt="Details view side panel showing the Add to icon in the run header with its menu open, and the Add thread to annotation queue icon next to the view tabs." width="1918" height="919" data-path="langsmith/images/details-view-add-to-annotation-queue-dark.png" />
 
 > [!NOTE]
->   If the **Entire thread** option is unavailable or the **Threads** tab is empty, the runs are not instrumented with `thread_id` / `session_id` metadata.
+>   The thread action appears only for runs instrumented with `thread_id` / `session_id` metadata. Without that metadata, the panel opens the run on its own and only the run action is available.
 
 * **From the Traces or Runs tab**: In a tracing project, select either the **Traces** or **Runs** tab. Use the row checkboxes to select one or more items. Click **Add to Annotation Queue** at the bottom of the page. Use **What to add** to enqueue each selection as a **Selected run** or as its **Entire thread**.
 

@@ -7,12 +7,12 @@
 >
 > This integration is deprecated and will be removed in a future release. Please use [`ChatGoogleGenerativeAI`](google_generative_ai.md) instead. See the full [release notes and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
-Vertex AI exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-3.7-flash`, etc. For a full and updated list of available models visit [VertexAI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
+Gemini Enterprise Agent Platform exposes all foundational models available in Google Cloud, like `gemini-3.1-pro-preview`, `gemini-3.7-flash`, etc. For a full and updated list of available models visit [Gemini Enterprise Agent Platform documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models).
 
 > [!NOTE]
-> **Google Cloud VertexAI vs Gemini API**
+> **Gemini Enterprise Agent Platform vs. Gemini API**
 >
-> The Google Cloud VertexAI integration is separate from the [Google Gemini API](google_generative_ai.md). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
+> The Gemini Enterprise Agent Platform integration is separate from the [Google Gemini API](google_generative_ai.md). This page showcases an enterprise version of Gemini through Google Cloud Platform (GCP).
 
 > [!TIP]
 > **API Reference**
@@ -35,7 +35,7 @@ Vertex AI exposes all foundational models available in Google Cloud, like `gemin
 
 ## Setup
 
-To access VertexAI models you'll need to create a Google Cloud Platform account, set up credentials, and install the `langchain-google-vertexai` integration package.
+To access Gemini Enterprise Agent Platform models you'll need to create a Google Cloud Platform account, set up credentials, and install the `langchain-google-vertexai` integration package.
 
 ### Credentials
 
@@ -57,7 +57,7 @@ os.environ["LANGSMITH_TRACING"] = "true"
 
 ### Installation
 
-The LangChain VertexAI integration lives in the `langchain-google-vertexai` package:
+The LangChain Gemini Enterprise Agent Platform integration lives in the `langchain-google-vertexai` package:
 
 ```python
 pip install -qU langchain-google-vertexai

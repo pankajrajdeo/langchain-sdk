@@ -202,6 +202,9 @@ paths:
               schema:
                 $ref: >-
                   #/components/schemas/threads.QuerySingleThreadStatsResponseBody
+            text/event-stream:
+              schema:
+                type: string
         '400':
           description: Bad Request
           content:

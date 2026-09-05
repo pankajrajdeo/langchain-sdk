@@ -99,7 +99,7 @@ print(result)
 
 ```python
 import asyncio
-from langchain.agents import create_react_agent
+from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain_aws.tools import create_code_interpreter_toolkit
 
@@ -114,7 +114,7 @@ async def main():
     )
 
     # Create agent with code interpreter tools
-    agent = create_react_agent(
+    agent = create_agent(
         model=llm,
         tools=code_tools,
     )

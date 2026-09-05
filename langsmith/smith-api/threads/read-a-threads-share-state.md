@@ -1,8 +1,8 @@
 # Read a thread's share state
 
-> Returns the share token for a thread, or 404 when it is not
-shared. Gated on runs:share so the control's state matches the
-control's permission.
+> Returns the share token for a thread. The token is omitted when
+the thread is not shared. Gated on runs:share so the control's
+state matches the control's permission.
 
 ## OpenAPI
 
@@ -167,9 +167,9 @@ paths:
         - threads
       summary: Read a thread's share state
       description: |-
-        Returns the share token for a thread, or 404 when it is not
-        shared. Gated on runs:share so the control's state matches the
-        control's permission.
+        Returns the share token for a thread. The token is omitted when
+        the thread is not shared. Gated on runs:share so the control's
+        state matches the control's permission.
       parameters:
         - description: Thread ID
           name: thread_id
@@ -187,7 +187,7 @@ paths:
             title: Project Id
       responses:
         '200':
-          description: OK
+          description: share_token is omitted when the thread is not shared
           content:
             application/json:
               schema:
@@ -210,12 +210,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '500':
           description: Internal Server Error
           content:
@@ -230,8 +224,6 @@ components:
   schemas:
     threadshare.ShareTokenResponseBody:
       type: object
-      required:
-        - share_token
       properties:
         share_token:
           type: string

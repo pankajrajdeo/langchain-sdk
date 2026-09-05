@@ -154,7 +154,7 @@ Before running an experiment, ensure you have the following:
   * A locally running application started via the [langgraph-cli](local-dev-testing.md).
 
 > [!NOTE]
-> Studio experiments follow the same [data retention](usage-and-billing.md#data-retention) rules as other experiments. By default, traces have base tier retention (14 days). However, traces will automatically upgrade to extended tier retention (400 days) if feedback is added to them. Feedback can be added in one of two ways:
+> Studio experiments follow the same [data retention](usage-and-billing.md#data-retention) rules as other experiments. By default, traces have base tier retention (14 days). However, traces will automatically upgrade to extended tier retention (180 days as of September 14, 2026) if feedback is added to them. Feedback can be added in one of two ways:
 >
 > * The [dataset has evaluators configured](bind-evaluator-to-dataset.md).
 > * [Feedback](observability-concepts.md#feedback) is manually added to a trace.

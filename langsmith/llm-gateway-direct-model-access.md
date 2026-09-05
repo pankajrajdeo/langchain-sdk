@@ -13,16 +13,16 @@ Prefer [standard model access](llm-gateway-quickstart.md) for model calls across
 
 Append a provider path to your regional gateway base URL:
 
-| Provider         | Gateway path | Secret name                                            |
-| ---------------- | ------------ | ------------------------------------------------------ |
-| Anthropic        | `/anthropic` | `ANTHROPIC_API_KEY`                                    |
-| AWS Bedrock      | `/bedrock`   | `AWS_BEARER_TOKEN_BEDROCK`                             |
-| Azure Foundry    | `/azure`     | `AZURE_FOUNDRY_API_KEY`, `AZURE_FOUNDRY_RESOURCE_NAME` |
-| Baseten          | `/baseten`   | `BASETEN_API_KEY`                                      |
-| Fireworks        | `/fireworks` | `FIREWORKS_API_KEY`                                    |
-| Google Gemini    | `/gemini`    | `GOOGLE_API_KEY`                                       |
-| Google Vertex AI | `/vertex`    | `VERTEX_SERVICE_ACCOUNT_JSON`                          |
-| OpenAI           | `/openai`    | `OPENAI_API_KEY`                                       |
+| Provider                         | Gateway path | Secret name                                            |
+| -------------------------------- | ------------ | ------------------------------------------------------ |
+| Anthropic                        | `/anthropic` | `ANTHROPIC_API_KEY`                                    |
+| AWS Bedrock                      | `/bedrock`   | `AWS_BEARER_TOKEN_BEDROCK`                             |
+| Azure Foundry                    | `/azure`     | `AZURE_FOUNDRY_API_KEY`, `AZURE_FOUNDRY_RESOURCE_NAME` |
+| Baseten                          | `/baseten`   | `BASETEN_API_KEY`                                      |
+| Fireworks                        | `/fireworks` | `FIREWORKS_API_KEY`                                    |
+| Google Gemini                    | `/gemini`    | `GOOGLE_API_KEY`                                       |
+| Gemini Enterprise Agent Platform | `/vertex`    | `VERTEX_SERVICE_ACCOUNT_JSON`                          |
+| OpenAI                           | `/openai`    | `OPENAI_API_KEY`                                       |
 
 [Gateway Credits models](llm-gateway-credits.md) use the standard endpoint rather than a provider-specific path. These hosted models require no provider secret of your own.
 

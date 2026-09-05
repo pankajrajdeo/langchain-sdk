@@ -172,6 +172,11 @@ paths:
 
         Self-hosted deployments require LangSmith `v0.16` or later.
       parameters:
+        - description: application/json or text/event-stream
+          name: Accept
+          in: header
+          schema:
+            type: string
         - description: Share token UUID
           name: share_token
           in: path
@@ -205,6 +210,9 @@ paths:
               schema:
                 $ref: >-
                   #/components/schemas/threads.PublicSharedThreadTraceRunsResponseBody
+            text/event-stream:
+              schema:
+                type: string
         '400':
           description: Bad Request
           content:

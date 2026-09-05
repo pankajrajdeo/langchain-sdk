@@ -675,7 +675,6 @@ Access the store through `runtime.store`. The store uses a namespace/key pattern
 > For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/python/langgraph/store/#langgraph.store.postgres.PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](../langgraph/add-memory.md) for setup details.
 
 ```python
-from typing import Any
 from langgraph.store.memory import InMemoryStore
 from langchain.agents import create_agent
 from langchain.tools import tool, ToolRuntime
@@ -691,10 +690,10 @@ def get_user_info(user_id: str, runtime: ToolRuntime) -> str:
 
 # Update memory
 @tool
-def save_user_info(user_id: str, user_info: dict[str, Any], runtime: ToolRuntime) -> str:
+def save_user_info(user_id: str, name: str, age: int, email: str, runtime: ToolRuntime) -> str:
     """Save user info."""
     store = runtime.store
-    store.put(("users",), user_id, user_info)
+    store.put(("users",), user_id, {"name": name, "age": age, "email": email})
     return "Successfully saved user info."
 
 model = ChatOpenAI(model="gpt-5.5")

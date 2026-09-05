@@ -7,21 +7,21 @@ This page covers all LangChain integrations with [Google Gemini](https://ai.goog
 > [!NOTE]
 > **Unified SDK & package consolidation**
 >
-> As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK and now supports **both the Gemini Developer API and Vertex AI** backends.
+> As of `langchain-google-genai` 4.0.0, this package uses the consolidated [`google-genai`](https://googleapis.github.io/python-genai/) SDK and now supports **both the Gemini Developer API and Gemini Enterprise Agent Platform** backends.
 >
-> The `langchain-google-vertexai` package remains supported for Vertex AI platform-specific features (Model Garden, Vector Search, evaluation services, etc.).
+> The `langchain-google-vertexai` package remains supported for Gemini Enterprise Agent Platform-specific features (Model Garden, Vector Search, evaluation services, etc.).
 >
 > Read the [full announcement and migration guide](https://github.com/langchain-ai/langchain-google/discussions/1422).
 
 Not sure which package to use?
 
 <details>
-<summary>Google Generative AI (Gemini API & Vertex AI)</summary>
+<summary>Google Generative AI (Gemini API & Gemini Enterprise Agent Platform)</summary>
 
-Access Google Gemini models via the **[Gemini Developer API](https://ai.google.dev/)** or **[Vertex AI](https://cloud.google.com/vertex-ai)**. The backend is selected automatically based on your configuration.
+Access Google Gemini models via the **[Gemini Developer API](https://ai.google.dev/)** or **[Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform)**. The backend is selected automatically based on your configuration.
 
 * **Gemini Developer API**: Quick setup with API key, ideal for individual developers and rapid prototyping
-* **Vertex AI**: Enterprise features with Google Cloud integration (requires GCP project)
+* **Gemini Enterprise Agent Platform**: Enterprise features with Google Cloud integration (requires GCP project)
 
 Use the `langchain-google-genai` package for chat models, LLMs, and embeddings.
 
@@ -30,9 +30,9 @@ Use the `langchain-google-genai` package for chat models, LLMs, and embeddings.
 </details>
 
 <details>
-<summary>Google Cloud (Vertex AI Platform Services)</summary>
+<summary>Google Cloud (Gemini Enterprise Agent Platform Services)</summary>
 
-Access Vertex AI platform-specific services beyond Gemini models: Model Garden (Llama, Mistral, Anthropic), evaluation services, and specialized vision models.
+Access Gemini Enterprise Agent Platform-specific services beyond Gemini models: Model Garden (Llama, Mistral, Anthropic), evaluation services, and specialized vision models.
 
 Use the `langchain-google-vertexai` package for platform services and specific packages (e.g., `langchain-google-community`, `langchain-google-cloud-sql-pg`) for other cloud services like databases and storage.
 
@@ -40,18 +40,18 @@ Use the `langchain-google-vertexai` package for platform services and specific p
 
 </details>
 
-See Google's guide on [migrating from the Gemini API to Vertex AI](https://ai.google.dev/gemini-api/docs/migrate-to-cloud) for more details on the differences.
+See Google's guide on [migrating from the Gemini API to Gemini Enterprise Agent Platform](https://ai.google.dev/gemini-api/docs/migrate-to-cloud) for more details on the differences.
 
 ***
 
 ## Google Generative AI
 
-Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev/gemini-api/docs) or [Vertex AI](https://cloud.google.com/vertex-ai) using the unified `langchain-google-genai` package.
+Access Google Gemini models via the [Gemini Developer API](https://ai.google.dev/gemini-api/docs) or [Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform) using the unified `langchain-google-genai` package.
 
 ### Chat models
 
 #### [ChatGoogleGenerativeAI](../chat/google_generative_ai.md)
-Google Gemini chat models via **Gemini Developer API** or **Vertex AI**.
+Google Gemini chat models via **Gemini Developer API** or **Gemini Enterprise Agent Platform**.
 
 ### LLMs
 
@@ -61,21 +61,21 @@ Gemini models using the (legacy) LLM text completion interface.
 ### Embedding models
 
 #### [GoogleGenerativeAIEmbeddings](../embeddings/google_generative_ai.md)
-Gemini embedding models via **Gemini Developer API** or **Vertex AI**.
+Gemini embedding models via **Gemini Developer API** or **Gemini Enterprise Agent Platform**.
 
 ***
 
 ## Google Cloud
 
-Access Vertex AI platform-specific services including Model Garden (Llama, Mistral, Anthropic), Vector Search, evaluation services, and specialized vision models.
+Access Gemini Enterprise Agent Platform-specific services including Model Garden (Llama, Mistral, Anthropic), Vector Search, evaluation services, and specialized vision models.
 
 > [!NOTE]
-> **For Gemini models**, use [`ChatGoogleGenerativeAI`](../chat/google_generative_ai.md) from `langchain-google-genai`. The classes below focus on **Vertex AI platform services** not available in the consolidated SDK.
+> **For Gemini models**, use [`ChatGoogleGenerativeAI`](../chat/google_generative_ai.md) from `langchain-google-genai`. The classes below focus on **Gemini Enterprise Agent Platform services** not available in the consolidated SDK.
 
 ### Chat models
 
 #### [ChatAnthropicVertex](../chat/google_anthropic_vertex.md)
-Anthropic on Vertex AI Model Garden
+Anthropic on Gemini Enterprise Agent Platform Model Garden
 
 <details>
 <summary>ChatVertexAI (deprecated)</summary>
@@ -91,7 +91,7 @@ from langchain_google_vertexai import ChatVertexAI
 <details>
 <summary>VertexModelGardenLlama</summary>
 
-Llama on Vertex AI Model Garden
+Llama on Gemini Enterprise Agent Platform Model Garden
 
 ```python
 from langchain_google_vertexai.model_garden_maas.llama import VertexModelGardenLlama
@@ -102,7 +102,7 @@ from langchain_google_vertexai.model_garden_maas.llama import VertexModelGardenL
 <details>
 <summary>VertexModelGardenMistral</summary>
 
-Mistral on Vertex AI Model Garden
+Mistral on Gemini Enterprise Agent Platform Model Garden
 
 ```python
 from langchain_google_vertexai.model_garden_maas.mistral import VertexModelGardenMistral
@@ -135,7 +135,7 @@ from langchain_google_vertexai.gemma import GemmaChatLocalKaggle
 <details>
 <summary>GemmaChatVertexAIModelGarden</summary>
 
-Gemma on Vertex AI Model Garden
+Gemma on Gemini Enterprise Agent Platform Model Garden
 
 ```python
 from langchain_google_vertexai.gemma import GemmaChatVertexAIModelGarden
@@ -192,7 +192,7 @@ from langchain_google_vertexai.vision_models import VertexAIVisualQnAChat
 (Legacy) string-in, string-out LLM interface.
 
 #### [VertexAIModelGarden](../llms/google_vertex_ai.md#vertex-model-garden)
-Hundreds of OSS models via Vertex AI Model Garden.
+Hundreds of OSS models via Gemini Enterprise Agent Platform Model Garden.
 
 <details>
 <summary>VertexAI (deprecated)</summary>
@@ -228,7 +228,7 @@ from langchain_google_vertexai.gemma import GemmaLocalKaggle
 </details>
 
 <details>
-<summary>Gemma on Vertex AI Model Garden</summary>
+<summary>Gemma on Gemini Enterprise Agent Platform Model Garden</summary>
 
 ```python
 from langchain_google_vertexai.gemma import GemmaVertexAIModelGarden
@@ -237,7 +237,7 @@ from langchain_google_vertexai.gemma import GemmaVertexAIModelGarden
 </details>
 
 <details>
-<summary>Vertex AI image captioning</summary>
+<summary>Gemini Enterprise Agent Platform image captioning</summary>
 
 Image captioning model as an LLM interface.
 
@@ -325,7 +325,7 @@ Translate text and HTML via Cloud Translation API.
 
 ### Vector stores
 
-Store and search vectors using Google Cloud databases and Vertex AI Vector Search.
+Store and search vectors using Google Cloud databases and Vector Search on Gemini Enterprise Agent Platform.
 
 #### [AlloyDB for PostgreSQL](../vectorstores/google_alloydb.md)
 PostgreSQL-compatible vector store on AlloyDB.
@@ -351,16 +351,16 @@ Vector store on Cloud SQL for MySQL.
 #### [Cloud SQL for PostgreSQL](../vectorstores/google_cloud_sql_pg.md)
 Vector store on Cloud SQL for PostgreSQL.
 
-#### [Vertex AI Vector Search](../vectorstores/google_vertex_ai_vector_search.md)
+#### [Vector Search on Gemini Enterprise Agent Platform](../vectorstores/google_vertex_ai_vector_search.md)
 Formerly known as Vertex AI Matching Engine, provides a low latency vector database. These vector databases are commonly referred to as vector similarity-matching or an approximate nearest neighbor (ANN) service.
 
-#### [Vertex AI Vector Search + Datastore](../vectorstores/google_vertex_ai_vector_search.md#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
+#### [Vector Search on Gemini Enterprise Agent Platform + Datastore](../vectorstores/google_vertex_ai_vector_search.md#optional--you-can-also-create-vector-and-store-chunks-in-a-datastore)
 Vector search with Datastore for document storage.
 
 ### Retrievers
 
-#### [Vertex AI Search](../retrievers/google_vertex_ai_search.md)
-Generative AI powered search via Vertex AI Search.
+#### [Agent Search on Gemini Enterprise Agent Platform](../retrievers/google_vertex_ai_search.md)
+Generative AI powered search via Agent Search on Gemini Enterprise Agent Platform.
 
 #### [Document AI Warehouse](https://cloud.google.com/document-ai-warehouse)
 Search, store, and manage documents using Document AI Warehouse.
@@ -383,7 +383,7 @@ Synthesize natural-sounding speech with 100+ voices.
 Track LLM/Chat model usage.
 
 <details>
-<summary>Vertex AI callback handler</summary>
+<summary>Gemini Enterprise Agent Platform callback handler</summary>
 
 Track `VertexAI` usage info.
 
@@ -406,12 +406,12 @@ from langchain_google_community.callbacks.bigquery_callback import BigQueryCallb
 
 ### Evaluators
 
-Evaluate model outputs using Vertex AI.
+Evaluate model outputs using Gemini Enterprise Agent Platform.
 
 <details>
 <summary>VertexPairWiseStringEvaluator</summary>
 
-Pair-wise evaluation using Vertex AI models.
+Pair-wise evaluation using Gemini Enterprise Agent Platform models.
 
 ```python
 from langchain_google_vertexai.evaluators.evaluation import VertexPairWiseStringEvaluator
@@ -422,7 +422,7 @@ from langchain_google_vertexai.evaluators.evaluation import VertexPairWiseString
 <details>
 <summary>VertexStringEvaluator</summary>
 
-Single prediction evaluation using Vertex AI models.
+Single prediction evaluation using Gemini Enterprise Agent Platform models.
 
 ```python
 from langchain_google_vertexai.evaluators.evaluation import VertexStringEvaluator

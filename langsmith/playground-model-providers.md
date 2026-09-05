@@ -16,7 +16,7 @@ Use this page for a list of the available providers and their configuration opti
 
 - [Google Gemini](#google-gemini)
 
-- [Google Vertex AI](#google-vertex-ai)
+- [Gemini Enterprise Agent Platform](#gemini-enterprise-agent-platform)
 
 - [Groq](#groq)
 
@@ -304,13 +304,13 @@ For the current list of available models, refer to [Google's Gemini documentatio
 * **Supported Tool Choices:** `auto`, `any`, `none`.
 * **Parallel Execution:** No.
 
-## Google Vertex AI
+## Gemini Enterprise Agent Platform
 
-Before you use this model, ensure you have a [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with the [Vertex AI API enabled](https://cloud.google.com/vertex-ai/docs/start/client-libraries).
+Before you use this model, ensure you have a [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with the [Gemini Enterprise Agent Platform API enabled](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/start/client-libraries).
 
 ### Authentication
 
-Google Vertex AI uses a **service account JSON key** for authentication in the LangSmith Playground. This is a JSON file you download from the Google Cloud Console that contains credentials for a service account with Vertex AI access.
+Gemini Enterprise Agent Platform uses a **service account JSON key** for authentication in the LangSmith Playground. This is a JSON file you download from the Google Cloud Console that contains credentials for a service account with Gemini Enterprise Agent Platform access.
 
 #### Step 1: Create a service account
 
@@ -342,16 +342,16 @@ The downloaded file looks like this:
 
 #### Step 3: Configure in the LangSmith Playground
 
-In the LangSmith Playground, open the Google Vertex AI provider configuration and paste the **entire contents** of the downloaded JSON key file into the **Service Account JSON** field.
+In the LangSmith Playground, open the Gemini Enterprise Agent Platform provider configuration and paste the **entire contents** of the downloaded JSON key file into the **Service Account JSON** field.
 
 > [!WARNING]
 > Treat your service account JSON key like a password. Do not share it or commit it to source control. If a key is compromised, revoke it immediately from the [Google Cloud Console](https://console.cloud.google.com/iam-admin/serviceaccounts) and create a new one.
 
 ### Available models
 
-Google offers Gemini models in multiple tiers (Ultra, Pro, Flash) optimized for different use cases, plus other models available through Vertex AI.
+Google offers Gemini models in multiple tiers (Ultra, Pro, Flash) optimized for different use cases, plus other models available through Gemini Enterprise Agent Platform.
 
-For the current list of available models, refer to the [Vertex AI documentation](https://cloud.google.com/vertex-ai/docs/generative-ai/models).
+For the current list of available models, refer to the [Gemini Enterprise Agent Platform documentation](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/google-models).
 
 ### Configuration parameters
 
