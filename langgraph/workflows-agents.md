@@ -50,9 +50,11 @@ Workflows and agentic systems are based on LLMs and the various augmentations yo
 from pydantic import BaseModel, Field
 
 class SearchQuery(BaseModel):
-    search_query: str = Field(None, description="Query that is optimized web search.")
-    justification: str = Field(
-        None, description="Why this query is relevant to the user's request."
+    search_query: str | None = Field(
+        default=None, description="Query that is optimized web search."
+    )
+    justification: str | None = Field(
+        default=None, description="Why this query is relevant to the user's request."
     )
 
 # Augment the LLM with schema for structured output
@@ -60,6 +62,7 @@ structured_llm = llm.with_structured_output(SearchQuery)
 
 # Invoke the augmented LLM
 output = structured_llm.invoke("How does Calcium CT score relate to high cholesterol?")
+print(output)  # The model returns an instance of SearchQuery.
 
 # Define a tool
 def multiply(a: int, b: int) -> int:
@@ -70,9 +73,7 @@ llm_with_tools = llm.bind_tools([multiply])
 
 # Invoke the LLM with input that triggers the tool call
 msg = llm_with_tools.invoke("What is 2 times 3?")
-
-# Get the tool call
-msg.tool_calls
+print(msg.tool_calls)  # The model returns a request to call the tool.
 ```
 
 ## Prompt chaining

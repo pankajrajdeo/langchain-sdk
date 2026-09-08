@@ -55,6 +55,9 @@ with PostgresStore.from_conn_string(DB_URI) as store:
     )
 ```
 
+> [!NOTE]
+> For other store backends, including Redis and MongoDB, see the [store integrations](../integrations/long-term-memory.md) list. For a MongoDB walkthrough, see [long-term memory with MongoDB](../integrations/memory/mongodb-long-term-memory.md).
+
 Tools can then read from and write to the store using the `runtime.store` parameter. See [Read long-term memory in tools](#read-long-term-memory-in-tools) and [Write long-term memory from tools](#write-long-term-memory-from-tools) for examples.
 
 > [!TIP]

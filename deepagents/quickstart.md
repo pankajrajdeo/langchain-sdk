@@ -4,11 +4,78 @@
 
 This guide walks you through creating your first deep agent with file system tools and subagent capabilities. You will build a research agent that can conduct research and write reports.
 
+> **Prompt:** Build the Deep Agents research quickstart
+Build a Deep Agents research agent in this working directory by following the Deep Agents quickstart.
+
+## Step 1: Read the guide
+
+Detect whether this project uses Python or TypeScript/JavaScript. Fetch and follow the matching page; treat it as the source of truth for package names, model strings, search-tool setup, and code:
+
+* Python: [https://docs.langchain.com/oss/python/deepagents/quickstart.md](quickstart.md)
+* TypeScript: [https://docs.langchain.com/oss/javascript/deepagents/quickstart.md](https://docs.langchain.com/oss/javascript/deepagents/quickstart.md)
+
+## Step 2: Install dependencies
+
+Install `deepagents` (and `langchain` / `@langchain/core` on TypeScript) with the package manager already used in this project. Add Tavily only if the user is not using a Google, OpenAI, or Anthropic built-in provider search tool.
+
+## Step 3: Configure model credentials
+
+Check for a supported provider API key (for example `GOOGLE_API_KEY`, `OPENAI_API_KEY`, or `ANTHROPIC_API_KEY`). If none is set, ask the user which provider to use, then stop and wait while they create a key and set it in the shell or a `.env` file. Do not invent, hardcode, or commit API keys. If they need Tavily, ask them to set `TAVILY_API_KEY` the same way.
+
+## Step 4: Implement the research agent
+
+Follow the quickstart steps in order:
+
+1. Create the internet search tool (prefer the provider built-in search tool when the chosen model supports it; otherwise use Tavily).
+2. Call `create_deep_agent` with the search tool, a `provider:model` string (or initialized model) from the guide, and the research system prompt shown on the page.
+3. Optionally enable LangSmith tracing by asking the user to set `LANGSMITH_TRACING=true` and `LANGSMITH_API_KEY` themselves.
+4. Run the agent on a sample research query from the guide and print the final response.
+
+## Rules
+
+* Stay scoped to this quickstart. Do not add Managed Deep Agents deployment, evals, or unrelated frameworks.
+* Prefer provider built-in web search when available; use Tavily only when needed.
+* Ask rather than guess when a secret, provider choice, or project convention is unclear.
+
 > [!TIP]
 > **Using an AI coding assistant?**
 >
-> * Install the [LangChain Docs MCP server](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+>
+> > **Prompt:** Connect LangChain docs MCP servers
+>     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>
+>     Servers to add:
+>
+>     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>
+>     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>     * Codex CLI: `codex mcp add` with each server URL.
+>     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>     * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
 > * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks.
+>
+> > **Prompt:** Install LangChain Skills
+>     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>
+>     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>
+> ```bash
+>     npx skills add langchain-ai/langchain-skills --skill '*' --yes
+> ```
+>
+>     If I ask for a global install instead, use:
+>
+> ```bash
+>     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+> ```
+>
+>     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 ## Prerequisites
 

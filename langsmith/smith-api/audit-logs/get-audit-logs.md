@@ -708,6 +708,7 @@ components:
         - batch_query_trace_messages
         - query_thread_messages
         - query_single_thread_stats
+        - query_thread_stats
         - query_thread_traces
         - query_threads
         - list_pairwise_queues

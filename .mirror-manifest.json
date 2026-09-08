@@ -62,13 +62,13 @@
       "upstream_sha256": "6cfcf0baf9d13075b423b36cb82a02734c84e9b6110b7afc8654e33a7981be08"
     },
     "contributing/code.md": {
-      "bytes": 24586,
+      "bytes": 26937,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/contributing/code.md",
-      "sha256": "1f299e5277da239ca80925bcd07a6967b0d2a7d83c729b56108f8c85222bc628",
+      "sha256": "a303c3d50a68c5408c7d3f3a4d90eae22cb1c1a55bf004adb656aa99edb0057b",
       "source": "https://docs.langchain.com/oss/python/contributing/code",
-      "upstream_bytes": 28857,
-      "upstream_sha256": "13f55be7f5fd835343a1dc19598c4458f5ecc0670a5cea49e990359cc64df13c"
+      "upstream_bytes": 31509,
+      "upstream_sha256": "2102a5be1cfaa60324fe08932390532ae2f71ae1c602e0b5ddad502371106ce7"
     },
     "contributing/comarketing.md": {
       "bytes": 1903,
@@ -80,13 +80,13 @@
       "upstream_sha256": "60e7b5f94773afc80f64e98f393c914708ea49da072cf71ae756eb8272f1f987"
     },
     "contributing/documentation.md": {
-      "bytes": 17370,
+      "bytes": 19703,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/contributing/documentation.md",
-      "sha256": "e15e198da5e178d62f1ad45a66a8876b3d9f6ec3d78f54ce4f539933fd1abebd",
+      "sha256": "620edf3d9d44d0bcb035c2989fad9d847ebd783d27e9813ffc86f5740b3fc209",
       "source": "https://docs.langchain.com/oss/python/contributing/documentation",
-      "upstream_bytes": 19167,
-      "upstream_sha256": "c85d243db1ebec8a95076323f6f850dc104d369797af45cfb8cb74d446359958"
+      "upstream_bytes": 21801,
+      "upstream_sha256": "52bb8f9f0443869fb2a0b45ede08bcef20bd5d1b9111f400995db0be92ed3f8f"
     },
     "contributing/implement-langchain.md": {
       "bytes": 9504,
@@ -98,13 +98,13 @@
       "upstream_sha256": "fd834b689df83004a9e60b0200e37dcbe42cecf99433304f8b7bc2c1454b646f"
     },
     "contributing/integrations-langchain.md": {
-      "bytes": 4973,
+      "bytes": 5172,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/contributing/integrations-langchain.md",
-      "sha256": "34eda17fa8322712cde5d6df52c9ae2f8ccdf4c258adf036fe39df0cafd523e7",
+      "sha256": "c3c33db5565aa9cdb2531616a6045bff2cd1f28dc974f14a0421230f666ffbea",
       "source": "https://docs.langchain.com/oss/python/contributing/integrations-langchain",
-      "upstream_bytes": 5826,
-      "upstream_sha256": "c38ca3ce508730f7f7da37fb61fc2b5bb17d6ab63e3813ba18c083547d7fd6af"
+      "upstream_bytes": 6025,
+      "upstream_sha256": "c08267a47e6200c7c17a5c56126d93379ffda9483387c419024fc48797c00757"
     },
     "contributing/overview.md": {
       "bytes": 5879,
@@ -116,13 +116,13 @@
       "upstream_sha256": "6cfcf0baf9d13075b423b36cb82a02734c84e9b6110b7afc8654e33a7981be08"
     },
     "contributing/publish-langchain.md": {
-      "bytes": 7461,
+      "bytes": 8021,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/contributing/publish-langchain.md",
-      "sha256": "9b77a61352882644ac0bb8aa96e39beb97f58e802e5eecc5e21b24565a1f0e78",
+      "sha256": "4a3708632609104d1d612883291759c7c05359935b3740c9a194ddb3043fc5b8",
       "source": "https://docs.langchain.com/oss/python/contributing/publish-langchain",
-      "upstream_bytes": 8478,
-      "upstream_sha256": "887db891f2d6785eb1022983ebc448159f34bea27c5201b0688e1c6ffc6798f9"
+      "upstream_bytes": 9082,
+      "upstream_sha256": "acd72d39035b8d1eb817c609885fdb5f81bec6ca8a949f5a7a08f8939a066026"
     },
     "contributing/standard-tests-langchain.md": {
       "bytes": 6095,
@@ -170,13 +170,13 @@
       "upstream_sha256": "1a3f1e7a1081b6b09b8f33186bbe2388b341dd4354548c078c959467d6e5ac7c"
     },
     "deepagents/backends.md": {
-      "bytes": 52550,
+      "bytes": 52533,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/deepagents/backends.md",
-      "sha256": "221494bd7e38459d6853892bfec41ad7e38e810ca365e11ec6e167b13ef81e12",
+      "sha256": "1dd20ed2b889cd996848192469a1724d48884ccd1f77debb464a49591ee992db",
       "source": "https://docs.langchain.com/oss/python/deepagents/backends",
-      "upstream_bytes": 58277,
-      "upstream_sha256": "9e3011f15502ad6027e93100d174fd137fe7b3915bcf801f7ad6af2b1d2b232e"
+      "upstream_bytes": 58266,
+      "upstream_sha256": "a8af871473bf29fd51c2e5ee62c29769b1cac452563e0d6c8620913cb5a035cf"
     },
     "deepagents/code.md": {
       "bytes": 2619,
@@ -278,13 +278,13 @@
       "upstream_sha256": "19ba3b0b542ad4909ec1d1e3706335fe58124906642aa66447d79e97442d268f"
     },
     "deepagents/code/mcp-tools.md": {
-      "bytes": 24488,
+      "bytes": 25918,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/deepagents/code/mcp-tools.md",
-      "sha256": "c3918aac34ea1e76c3c8b4d31aa84612b2ce53ad118e2d8a3cd2c2ea0f124396",
+      "sha256": "5c1e94efd0cc828d483edd6c18c123f4a4ee178beb9a93e0c4e3da2927d5b9d4",
       "source": "https://docs.langchain.com/oss/deepagents/code/mcp-tools",
-      "upstream_bytes": 27607,
-      "upstream_sha256": "f7694b384cfb1aa2872216302b56425a0c3779d73177dfc51b7dff9d883371ac"
+      "upstream_bytes": 29091,
+      "upstream_sha256": "bd35d3ce4f6142cbd7e92745078f2b9efb5489d3a57fff53897f6e85a92c22ca"
     },
     "deepagents/code/memory-and-skills.md": {
       "bytes": 8431,
@@ -575,13 +575,13 @@
       "upstream_sha256": "42ad1e8b723f0c9ce8d9df06c229f6f70b0f1e61921114cb080d0bd90bb6d49c"
     },
     "deepagents/quickstart.md": {
-      "bytes": 11775,
+      "bytes": 16119,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/deepagents/quickstart.md",
-      "sha256": "52b2e757b57d223ca9b447b5edc1b91d831d53e1cbc5a3991bac9d39c561b465",
+      "sha256": "f7fe6f429f280dcbd7a37efec762b6743d32f0ecdb8308882f70061393944ded",
       "source": "https://docs.langchain.com/oss/python/deepagents/quickstart",
-      "upstream_bytes": 14817,
-      "upstream_sha256": "450876ec858fa61dc57356b1ff92bbba05337bf4db2cb414f62fa122ececada1"
+      "upstream_bytes": 19640,
+      "upstream_sha256": "5738c6f90de65f206af3add99b13c96297ddc428f2040a9218e92b42970f4c86"
     },
     "deepagents/rag.md": {
       "bytes": 47414,
@@ -710,13 +710,13 @@
       "upstream_sha256": "a54528956fe6579ce1eb28f5d10498de98ea09795981d78bac6d81b9e436519e"
     },
     "integrations/chat.md": {
-      "bytes": 64199,
+      "bytes": 64787,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/chat.md",
-      "sha256": "d9514ab84f7f5882149e758b0d9912c8017c4eceaffff4529f8931b4356e6bdc",
+      "sha256": "62870044eafe488a399dc30a59b11437fe4b617f3d75644817052bc624cce43d",
       "source": "https://docs.langchain.com/oss/python/integrations/chat",
-      "upstream_bytes": 67027,
-      "upstream_sha256": "6ed76b936ed15ecb35edf46b178b5fd677c90b844c3eab2c45195e71d75d0cfc"
+      "upstream_bytes": 67624,
+      "upstream_sha256": "63e7053fd6719da8c657bfd8156ff1aad1a97aa56b9f344f65e5a52b975af50a"
     },
     "integrations/chat/amazon_nova.md": {
       "bytes": 19405,
@@ -1052,31 +1052,31 @@
       "upstream_sha256": "fddabfc9d525adb4ef194892d0ffd5c1c6ad84cbb2161b2b12d75c74dad10220"
     },
     "integrations/checkpointers.md": {
-      "bytes": 5958,
+      "bytes": 5936,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/checkpointers.md",
-      "sha256": "5ed9a727465c84be28806dc1f222e9d8c4a7ef0fa6bc7aab1bee3ab207bf4b25",
+      "sha256": "295deb1a092e27966d6f651752ea60529645ef03d7eec9ab39d02aa1ffebdd52",
       "source": "https://docs.langchain.com/oss/python/integrations/checkpointers",
       "upstream_bytes": 6271,
-      "upstream_sha256": "b4a4dd0763d1e1d8e6daa6424925c0cfaafb7a36d3b52bca9676930681439dc2"
+      "upstream_sha256": "f4fbb5ed7a6b6db6b49ed28e2a35b3a003f4eae88a938e91a86d6a04f071c900"
     },
     "integrations/checkpointers/index.md": {
-      "bytes": 5970,
+      "bytes": 5951,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/checkpointers/index.md",
-      "sha256": "97771bb554aeca470066c15301ed6d6824f25bf337159a03bc581cc432ffd43a",
+      "sha256": "6f1f982f624748c8c60b085d849c6d29fd244be2076be1689406bcd016e537da",
       "source": "https://docs.langchain.com/oss/python/integrations/checkpointers/index",
       "upstream_bytes": 6271,
-      "upstream_sha256": "b4a4dd0763d1e1d8e6daa6424925c0cfaafb7a36d3b52bca9676930681439dc2"
+      "upstream_sha256": "f4fbb5ed7a6b6db6b49ed28e2a35b3a003f4eae88a938e91a86d6a04f071c900"
     },
     "integrations/document_loaders.md": {
       "bytes": 38918,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/document_loaders.md",
-      "sha256": "672ded8cce34f8c76927f59e5eef93e0ec80dce1aaeae663f2e04c89d6ad5740",
+      "sha256": "5dc81659522375910897ce5ec5576947564997452adfe86e26d2f6abea5d2eb4",
       "source": "https://docs.langchain.com/oss/python/integrations/document_loaders",
       "upstream_bytes": 40713,
-      "upstream_sha256": "312b4ceaccffa2d38d19d239bd8b5f7e351e61a9bf270b4307d751e566b05044"
+      "upstream_sha256": "b2da93e7ef438ef3289abb990df6349cb9d0732e0391c6a366d07760c75e35a3"
     },
     "integrations/document_loaders/astradb.md": {
       "bytes": 3083,
@@ -1343,10 +1343,10 @@
       "bytes": 35013,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/embeddings.md",
-      "sha256": "4db7ce1fc8ac7033b9bb320a2af1242877db7f580dc824f143ddd2fbe2e72c3e",
+      "sha256": "1440e9d4423c0b0f0d96265d3476f990d1bf1675944b3100f04b61d2f17d548a",
       "source": "https://docs.langchain.com/oss/python/integrations/embeddings",
       "upstream_bytes": 37039,
-      "upstream_sha256": "14d670c3f25f85b2f16eb017b50ca90de7921b98c46aedc98a8e185616fc4a11"
+      "upstream_sha256": "2734e39622c80261accc6c4100a1df65ec2897d9fb7c164bf6a5f2d9ded4024b"
     },
     "integrations/embeddings/azure_openai.md": {
       "bytes": 5457,
@@ -1649,10 +1649,10 @@
       "bytes": 37297,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/overview.md",
-      "sha256": "e35ce79ed743b76447003ce571526aae36e6d9971b9dc457d04fdcae8b91197f",
+      "sha256": "8f48f82d566579b869a99c6774c2a312dab6c507e0ed98b1a94d23f19620bfee",
       "source": "https://docs.langchain.com/oss/python/integrations",
       "upstream_bytes": 39667,
-      "upstream_sha256": "2d164e5da6891491212d6a3010660916227f74c3b715ae3bed3d939f4d4473c2"
+      "upstream_sha256": "90e69043158f7e6c0b3c62a77556d1229f0fc6ac98464c00e35ad344d6ce7f4f"
     },
     "integrations/llms/aimlapi.md": {
       "bytes": 4511,
@@ -1799,31 +1799,49 @@
       "upstream_sha256": "2af52a267bf48c88fae15300e08e6d4db85cc6ab094ce7aa70106bd669f1e12f"
     },
     "integrations/long-term-memory.md": {
-      "bytes": 3231,
+      "bytes": 3209,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/long-term-memory.md",
-      "sha256": "a60a370e85b6e08d70dec432ddb2ee766fabfce1063a2b07838d0e199dba45ec",
+      "sha256": "73454cd66ef43f5981d7766fed09978cc71279a5ff9eb0a08f13a4c17b2047d9",
       "source": "https://docs.langchain.com/oss/python/integrations/long-term-memory",
       "upstream_bytes": 3500,
-      "upstream_sha256": "eaedb88ff8bafd9da36f26cf3158e9c5fce89c37c6728daed38b2500f0a98622"
+      "upstream_sha256": "60aef14749acfc3ba696887726bed1f2f8e9c8a07a91e6c9e4a3c8ac6bdbad2c"
     },
     "integrations/long-term-memory/index.md": {
-      "bytes": 3237,
+      "bytes": 3218,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/long-term-memory/index.md",
-      "sha256": "0f703cbbf0089a62c4fa7d228b5118558f7d38273b30a80b7aaf0707eb296230",
+      "sha256": "515340a2b911e58a3d0123b58cae6070e1306b592b8819c32982d57063368911",
       "source": "https://docs.langchain.com/oss/python/integrations/long-term-memory/index",
       "upstream_bytes": 3500,
-      "upstream_sha256": "eaedb88ff8bafd9da36f26cf3158e9c5fce89c37c6728daed38b2500f0a98622"
+      "upstream_sha256": "60aef14749acfc3ba696887726bed1f2f8e9c8a07a91e6c9e4a3c8ac6bdbad2c"
+    },
+    "integrations/memory/mongodb-long-term-memory.md": {
+      "bytes": 6281,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/memory/mongodb-long-term-memory.md",
+      "sha256": "91ce4ca0e62ed5f21e6abbf96c1e92dae5ff5e47b7d9a5055c7c457a9ab27feb",
+      "source": "https://docs.langchain.com/oss/python/integrations/memory/mongodb-long-term-memory",
+      "upstream_bytes": 7206,
+      "upstream_sha256": "ebd393772da161c14c04726fe9d87a06aeef83cf31ab7079834e303c2d8bbbe5"
+    },
+    "integrations/memory/mongodb-short-term-memory.md": {
+      "bytes": 3463,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/memory/mongodb-short-term-memory.md",
+      "sha256": "af04b7e5c3f71685cc602446715ab12a156f3b171d144ccb15c3031058856063",
+      "source": "https://docs.langchain.com/oss/python/integrations/memory/mongodb-short-term-memory",
+      "upstream_bytes": 4198,
+      "upstream_sha256": "b8cbb150ac75ccb575b9bdc8dd8ea9e5a6dc0246fe4a12eac5754b23a489a6d1"
     },
     "integrations/middleware.md": {
-      "bytes": 48155,
+      "bytes": 50804,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/middleware.md",
-      "sha256": "ae7614bee8dba76556adb0f692a1e14fbea6cb00dfde91724e3427bb3b487dd8",
+      "sha256": "cad7e3a1550c10f002a9a85d8fa8e4bba036f994816ff2416dc77c4100e1a3e9",
       "source": "https://docs.langchain.com/oss/python/integrations/middleware",
-      "upstream_bytes": 49292,
-      "upstream_sha256": "69d063de6689f89947beadae6d5d0e5ed275baa282f5825cdbe19fbc301a85c2"
+      "upstream_bytes": 51950,
+      "upstream_sha256": "3dcef57a323a6d571a6be88ddcd4f6e189287daa708745f295920186eb56d27a"
     },
     "integrations/middleware/anthropic.md": {
       "bytes": 30005,
@@ -1874,10 +1892,10 @@
       "bytes": 37297,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/overview.md",
-      "sha256": "e35ce79ed743b76447003ce571526aae36e6d9971b9dc457d04fdcae8b91197f",
+      "sha256": "8f48f82d566579b869a99c6774c2a312dab6c507e0ed98b1a94d23f19620bfee",
       "source": "https://docs.langchain.com/oss/python/integrations/providers",
       "upstream_bytes": 39667,
-      "upstream_sha256": "2d164e5da6891491212d6a3010660916227f74c3b715ae3bed3d939f4d4473c2"
+      "upstream_sha256": "90e69043158f7e6c0b3c62a77556d1229f0fc6ac98464c00e35ad344d6ce7f4f"
     },
     "integrations/providers/aerospike.md": {
       "bytes": 4460,
@@ -1925,13 +1943,13 @@
       "upstream_sha256": "8dc52112250d8df98cad95d0229483186e15b40dcad39f3c46016e7da447d362"
     },
     "integrations/providers/all_providers.md": {
-      "bytes": 51202,
+      "bytes": 52519,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/all_providers.md",
-      "sha256": "22552d5035ed7fc18fc6877154cfaa35accdc57d7dbe2221c0bb5d27d8c3199f",
+      "sha256": "426643cbc7aee5f4b060487bc7f0b4af15cb6dcb1ba8b358363815fbaf59265d",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/all_providers",
-      "upstream_bytes": 74506,
-      "upstream_sha256": "a1e60be3d738c085b452bc012941c577e678dabf4c1121b3d7cfa3bc390a76ff"
+      "upstream_bytes": 76159,
+      "upstream_sha256": "838737c9db78bbb0f874c1849e92754de7bc625f42921318080a7c4d3d8aacd6"
     },
     "integrations/providers/anthropic.md": {
       "bytes": 855,
@@ -1961,22 +1979,22 @@
       "upstream_sha256": "c4a744bac39d9ae59ed2367f8524fb7e4fde38fa23769cfede8f82c994dd2e31"
     },
     "integrations/providers/aws.md": {
-      "bytes": 11763,
+      "bytes": 11756,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/aws.md",
-      "sha256": "349701c44bd4bbdd52593740370bb27362905cbe300de13f8afbb38382bcfbb8",
+      "sha256": "079f664d87df3ea8b8006315e06025e7be43c8aaaddf69a410729482f250c589",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/aws",
-      "upstream_bytes": 14870,
-      "upstream_sha256": "221c90d082ac97636d0ac5b8a3747c805ba1ab11a4daa4a13ac4a6c58f3be0d3"
+      "upstream_bytes": 14863,
+      "upstream_sha256": "2d0ceb16d27ab4c2aa5e2129fae752f56980ca79cae5e99cdee0fd95717a02f0"
     },
     "integrations/providers/azure_ai.md": {
-      "bytes": 4900,
+      "bytes": 4887,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/azure_ai.md",
-      "sha256": "372a6815c9999b3be5bc7bbfa5f5012e10f41a966d43b89eace032ae2ad29dde",
+      "sha256": "05a1fa38923d83bee0eda60ae74d290ed0545ff92e143f98c62baecc9d500e45",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/azure_ai",
-      "upstream_bytes": 6365,
-      "upstream_sha256": "edf4f03ee6dbc9f674e1b5ca35af985ee50f90930284d695add578a82e87465c"
+      "upstream_bytes": 6352,
+      "upstream_sha256": "ca662981e745d3ca45d6d122593181dd18ff109a3f858987c57042447da3d971"
     },
     "integrations/providers/baseten.md": {
       "bytes": 946,
@@ -2330,13 +2348,13 @@
       "upstream_sha256": "0f7aa383f006f93cd8da2bcb4e1ad3bbacedc0cb6141ec78674724335176b0e2"
     },
     "integrations/providers/microsoft.md": {
-      "bytes": 38110,
+      "bytes": 38097,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/microsoft.md",
-      "sha256": "b6de694343c4515451bd3771148e2d8c8c5d12e1ab2260832340617505ca1cb7",
+      "sha256": "a736fec201b532464ce57fd3c1eed64a465b0769043d43fbc52c70e1dd874ad2",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/microsoft",
-      "upstream_bytes": 46147,
-      "upstream_sha256": "005c44dc5db29bd669ba2885932ce51b0e3ee7c981574178aee485f972c69097"
+      "upstream_bytes": 46134,
+      "upstream_sha256": "da0b2fd936642185005f593cf9496134a50658b836b8ee4311d488d6ced3421d"
     },
     "integrations/providers/milvus.md": {
       "bytes": 902,
@@ -2393,22 +2411,22 @@
       "upstream_sha256": "2b32ab78b4f4d18267e6104e11aa874f396266386c743f268504e21967b4f840"
     },
     "integrations/providers/mongodb.md": {
-      "bytes": 3953,
+      "bytes": 4222,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/mongodb.md",
-      "sha256": "1362237e99f808421bf5d3321ac62d593a7303a867e49e78f65fc53d08c64d25",
+      "sha256": "c24445e5b494e7cf91a7d75e7cc8251cf3ba0964142b1ce0061c8d5a0046c434",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/mongodb",
-      "upstream_bytes": 4660,
-      "upstream_sha256": "963e094e5a542e5d7b62fb7813e41ee9c18780ebaba55d6e8f1724b7d43d5cad"
+      "upstream_bytes": 4986,
+      "upstream_sha256": "c95ace3679c890cea1808f8bc83cfc8efd8219aea727c4a35d60790637caa688"
     },
     "integrations/providers/mongodb_atlas.md": {
-      "bytes": 3408,
+      "bytes": 3464,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas.md",
-      "sha256": "474db4275755751504387429da2a408a3e78ecfbae59cdfd6994e64d20f2b9e0",
+      "sha256": "e849b69aba404c66fc822f2ac83b9777e37390cc4a079bf8aea57f88c8380a94",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/mongodb_atlas",
-      "upstream_bytes": 4405,
-      "upstream_sha256": "3ab7999df76cd37f2fdc722c2c4c097462ff5576ed5eed1fa5be26c9af3c346f"
+      "upstream_bytes": 4480,
+      "upstream_sha256": "642828c8a43ce47df29011a586c4bc718a3738a35c4736ca6c84d5830a151c00"
     },
     "integrations/providers/motorhead.md": {
       "bytes": 771,
@@ -2495,10 +2513,10 @@
       "bytes": 36901,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/overview.md",
-      "sha256": "35dcfa435434de776702f760dd1c43b4bcfb34ac79170f6bb6bc91f32c2174ed",
+      "sha256": "285b4beb99cb5f71526a9e9eeb2605a9a16c1be77c31b7c3cd04fa7a45aa9cc2",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/overview",
       "upstream_bytes": 39667,
-      "upstream_sha256": "2d164e5da6891491212d6a3010660916227f74c3b715ae3bed3d939f4d4473c2"
+      "upstream_sha256": "90e69043158f7e6c0b3c62a77556d1229f0fc6ac98464c00e35ad344d6ce7f4f"
     },
     "integrations/providers/parallel.md": {
       "bytes": 1957,
@@ -2600,13 +2618,13 @@
       "upstream_sha256": "5b706ffa4bde9d35eb7b362a654f9171986cda0792f872cc6a78c31c11d98913"
     },
     "integrations/providers/redis.md": {
-      "bytes": 4983,
+      "bytes": 4980,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/providers/redis.md",
-      "sha256": "6b59e3549c980a319c0e0845bbc5a9d54995a0ba893efca4016957dee3071b08",
+      "sha256": "19b6b7a456c9bab99ef07a3ef0ffe18ad092888b8d23e90f7dea453cad000ce3",
       "source": "https://docs.langchain.com/oss/python/integrations/providers/redis",
-      "upstream_bytes": 6013,
-      "upstream_sha256": "86e25579105337a3e47e94d39e449074dff34f680113b19f543bf83f87d068c6"
+      "upstream_bytes": 6010,
+      "upstream_sha256": "e3e12ae6ea1762718fbadf35d00d14374aef70ab534c169ea67f47d1316ca16a"
     },
     "integrations/providers/remembrall.md": {
       "bytes": 814,
@@ -2789,13 +2807,13 @@
       "upstream_sha256": "e9041afcdcff101fbed770725488807ada16a00a798e1c3cb239335b67f6e7b6"
     },
     "integrations/retrievers.md": {
-      "bytes": 56594,
+      "bytes": 56839,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/retrievers.md",
-      "sha256": "179e52d2d6309b0657bfaa1ea7d32be46ecc5ea205182eaef3ffe4da9dfc6d26",
+      "sha256": "8bccad67a2cc00daba3e2c6f901d57ff2eab8b502963ab8fcc6376afd1f75492",
       "source": "https://docs.langchain.com/oss/python/integrations/retrievers",
-      "upstream_bytes": 58164,
-      "upstream_sha256": "a93518bf67c726ba091c84b1f3382a0b55a9633af76cac32de5db1857435a913"
+      "upstream_bytes": 58431,
+      "upstream_sha256": "fcd74ff52684609f903300f8ada78f27649e4678cf7d10379a7d6f8e400b9c3f"
     },
     "integrations/retrievers/bedrock.md": {
       "bytes": 5979,
@@ -2887,6 +2905,15 @@
       "upstream_bytes": 14920,
       "upstream_sha256": "670c0bdd62bb12512f0f633dd2413c3a80a9ce618e3f435fdfb2a1c4e909c31b"
     },
+    "integrations/retrievers/mongodb_atlas.md": {
+      "bytes": 6108,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/retrievers/mongodb_atlas.md",
+      "sha256": "027defb8b804734e70238643a4979b70aad4dbb795b077533b121d125b51e793",
+      "source": "https://docs.langchain.com/oss/python/integrations/retrievers/mongodb_atlas",
+      "upstream_bytes": 7071,
+      "upstream_sha256": "b715cc7b2005c525cde24fae3f67ffc747f96e877a638455dcad03734421943f"
+    },
     "integrations/retrievers/nvidia.md": {
       "bytes": 5787,
       "content_source": "page-markdown",
@@ -2936,10 +2963,10 @@
       "bytes": 7707,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/sandboxes.md",
-      "sha256": "73a44f050585d7b7b6ea5d769df8cdf17412cb739470dec453b1525636c2390e",
+      "sha256": "0cf7eeca09acbb9dbf491dbf57f0fa1c53520e73347328b47f0448ce8d808969",
       "source": "https://docs.langchain.com/oss/python/integrations/sandboxes",
       "upstream_bytes": 8263,
-      "upstream_sha256": "18ae48c09475603316052be26b666273a8bac4585510fd57a2c8db2ba5f4a5f1"
+      "upstream_sha256": "7c925c4bec4889ea8a5fd04f199a70307758d71fcdef042815f47103d8a6c7c8"
     },
     "integrations/sandboxes/aws.md": {
       "bytes": 2241,
@@ -3053,10 +3080,10 @@
       "bytes": 7007,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/stores.md",
-      "sha256": "5c16890cbfa17b3e3c39fbf37024046284aa799bff7fa1d16d44bba9b1d46d52",
+      "sha256": "c4a72adb2da1a67022eca94878d34cb282aebe6eaa0b668e15e4664b0f58dbcd",
       "source": "https://docs.langchain.com/oss/python/integrations/stores",
       "upstream_bytes": 7751,
-      "upstream_sha256": "1c67926689f9fa38b3ca08c232bb03402a9f4b7d77de3331dfe9f53cc9aa9b14"
+      "upstream_sha256": "ebc6d1c01628ee197a8a371c9bc965591bd6a26ebf541f626857d35355bfadf3"
     },
     "integrations/stores/astradb.md": {
       "bytes": 3794,
@@ -3104,13 +3131,13 @@
       "upstream_sha256": "e2a69dc66298e375bbc562ef0aa2122c0b3f9a516543472613c641f84e15dbf8"
     },
     "integrations/tools.md": {
-      "bytes": 137469,
+      "bytes": 139376,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/tools.md",
-      "sha256": "8c5885b5eec766d630e5e99418d8ae5f368bfb9389c4947908b0a9ef03bcc25d",
+      "sha256": "d1e3f703ad008ee57e94904a039e707191cfcde7458c0e1b0a0ef44af6b949c9",
       "source": "https://docs.langchain.com/oss/python/integrations/tools",
-      "upstream_bytes": 141147,
-      "upstream_sha256": "4ad65d51a980114dc56ddf6e0bb38f302789abeca7fad03d137d3ec44fd34c5f"
+      "upstream_bytes": 143088,
+      "upstream_sha256": "44d6f9010664543fd53f1ce7289fb85434bd4dc473606e5e7cd177448362f053"
     },
     "integrations/tools/azure_ai.md": {
       "bytes": 20380,
@@ -3446,13 +3473,13 @@
       "upstream_sha256": "4eb0a16a476d77e9f04ff29fbf51332be75b06e5cb434d9302aabade48a82a2d"
     },
     "integrations/vectorstores.md": {
-      "bytes": 83475,
+      "bytes": 84923,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/vectorstores.md",
-      "sha256": "484bb86b797658f63e17274790175b589b76549ceb8eefdfc7c6a5fc2bf61422",
+      "sha256": "37fd2f3e35cb063ee97c6c16cfd7a768516db0cfe9d5b3f81bdfe32e3abd949e",
       "source": "https://docs.langchain.com/oss/python/integrations/vectorstores",
-      "upstream_bytes": 95605,
-      "upstream_sha256": "541967f631a5ef4d436a50e322c02428fe84e819e4696c6be76bcf9d7970b178"
+      "upstream_bytes": 97071,
+      "upstream_sha256": "1086630a515d954dcae4691fc4d0c4334fa1684c47419bde749102330b6fcb43"
     },
     "integrations/vectorstores/astradb.md": {
       "bytes": 16915,
@@ -3464,22 +3491,22 @@
       "upstream_sha256": "1e7a5fa0eb49e037daddd0d2a68fbe6bf9f9dad7c69406bfaedb02e0811069f5"
     },
     "integrations/vectorstores/azure_cosmos_db_mongo_vcore.md": {
-      "bytes": 12294,
+      "bytes": 12248,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore.md",
-      "sha256": "e366461e6d5809ee63f614d6fad8838ea102e2ec218b2082159eeb81c302141e",
+      "sha256": "67e438b5c58d0746d802eb6c5cf9e1e86abc07e006eba396fd4a39c4127b9518",
       "source": "https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_mongo_vcore",
-      "upstream_bytes": 14193,
-      "upstream_sha256": "d9ce2962949e31e384c6dfd8511131a4031848215b90f02b1f09ab666c15c47e"
+      "upstream_bytes": 14147,
+      "upstream_sha256": "b498be51b5342b9074b4f4a87c9b1d19a73b704226d10550b8fe9bc610268057"
     },
     "integrations/vectorstores/azure_cosmos_db_no_sql.md": {
-      "bytes": 41845,
+      "bytes": 41850,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql.md",
-      "sha256": "9778e78930bfbe6c6ecc2f28d247d89a3500679ae87dd77eee9c97e024c0a9a4",
+      "sha256": "e55ee3361cb5844a259956fe8693bc0c126e97b575d7a0a23aeb16c6dd2ba317",
       "source": "https://docs.langchain.com/oss/python/integrations/vectorstores/azure_cosmos_db_no_sql",
-      "upstream_bytes": 43847,
-      "upstream_sha256": "06972df792760b40dcd6a12f5f4bdcc9bff2d407ead47411a4eedc1a96bc97dc"
+      "upstream_bytes": 43852,
+      "upstream_sha256": "419438388aae92e5da92435ca10418dc058fd806da190d2e55cb6b6225a56c7e"
     },
     "integrations/vectorstores/azure_db_for_postgresql.md": {
       "bytes": 17482,
@@ -3608,13 +3635,13 @@
       "upstream_sha256": "28678e9763c0b92daeb79ac0d59c072767ef8fc569abb8bd02f6dc667f7a7231"
     },
     "integrations/vectorstores/memorydb.md": {
-      "bytes": 10500,
+      "bytes": 10497,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/vectorstores/memorydb.md",
-      "sha256": "5d1f143ca66201441662e9245dbd106785ef2793e1305bd44018a6a6643bcf14",
+      "sha256": "ebfc3b330491bcb78bc6c983b82f6dda94e08ef22069844efa834718ca5d81a5",
       "source": "https://docs.langchain.com/oss/python/integrations/vectorstores/memorydb",
-      "upstream_bytes": 12958,
-      "upstream_sha256": "8a43dbbd854c814c9293cfd70feb9fa69498b8439c266c042305dddba3f94fc5"
+      "upstream_bytes": 12955,
+      "upstream_sha256": "84f4538765e3096a89f9e7325939fb618e2a61ed747245085b49ee9819e3e7fd"
     },
     "integrations/vectorstores/milvus.md": {
       "bytes": 15476,
@@ -3725,13 +3752,13 @@
       "upstream_sha256": "9aacb12c071ac4c57c8b62dd24bf2167b4d090476c17c0ca09263a7684144225"
     },
     "integrations/vectorstores/valkey.md": {
-      "bytes": 4719,
+      "bytes": 4712,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/integrations/vectorstores/valkey.md",
-      "sha256": "a47e3eec11fddbb389fe2fa44aad06905f19cc598ce256f462fdc7e4ab4fac91",
+      "sha256": "feea696bb27a63e5c992f097afb88760db49e746ecfcc6bb46fe64a1acd6d2a0",
       "source": "https://docs.langchain.com/oss/python/integrations/vectorstores/valkey",
-      "upstream_bytes": 5663,
-      "upstream_sha256": "9fd90f6119d89a66557a245c264489b3a16ddb922746d980d39c6022ea556c0a"
+      "upstream_bytes": 5656,
+      "upstream_sha256": "ddc1e5d3a1e3bbbf47b98d0a9184afd64c02068e07572769ecaa0e7a73709c78"
     },
     "integrations/vectorstores/weaviate.md": {
       "bytes": 28699,
@@ -4094,13 +4121,13 @@
       "upstream_sha256": "39bad57a5a2ea2816ba8cba23d16617d5cbd02979e276d2600d18bc66716b6c5"
     },
     "langchain/long-term-memory.md": {
-      "bytes": 29509,
+      "bytes": 29765,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langchain/long-term-memory.md",
-      "sha256": "224af00f6486a86166519bfbbcec1daf7003da0698d8ba6381531147b2a83288",
+      "sha256": "c104d8dd58d8057a9ffb122a1eea4b57babe79dfd8064479cf225932602d51ce",
       "source": "https://docs.langchain.com/oss/python/langchain/long-term-memory",
-      "upstream_bytes": 36106,
-      "upstream_sha256": "5f8c312d14b03b2fcc7efd8a233b8709e6b32b041333c1ad22b2f674da7845b9"
+      "upstream_bytes": 36379,
+      "upstream_sha256": "221d642a9c0ce9713701fbbdaa8536bb0bb333e33b233a6f810ff85ff4d915a4"
     },
     "langchain/mcp.md": {
       "bytes": 4720,
@@ -4220,13 +4247,13 @@
       "upstream_sha256": "bff4c5ae404c01cb0019cbb9ffb62133e00e0f83d5b60b35384de0b508f53d91"
     },
     "langchain/multi-agent/handoffs.md": {
-      "bytes": 17727,
+      "bytes": 17781,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs.md",
-      "sha256": "e9f929d08dd3391a47940aa8c84f1d12a8434c5b39add438b921031a12762d1c",
+      "sha256": "3c04e67242318e263b09ced7b8a47fa40cbaaafac6c27d4b68ed307383aae5f8",
       "source": "https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs",
-      "upstream_bytes": 19038,
-      "upstream_sha256": "c483aed53f53ac60ca9981755d3bebe06266c98f51c4de4586a3d39796bbf03e"
+      "upstream_bytes": 19094,
+      "upstream_sha256": "fb97aaf20b86b18f45236073ccf223fa9ddfdaea3cd433b0e2041f7fdcf25251"
     },
     "langchain/multi-agent/router-knowledge-base.md": {
       "bytes": 32645,
@@ -4310,13 +4337,13 @@
       "upstream_sha256": "801a88d217787c2f18d18ef8bd32e104b705c4058da6feb3e1ebaf0882f62caf"
     },
     "langchain/quickstart.md": {
-      "bytes": 25967,
+      "bytes": 30085,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langchain/quickstart.md",
-      "sha256": "0d5d10fc46f613281886556fe0af5dd22351509fa37ed34555f0d779cea580d4",
+      "sha256": "c83a9a3c3d01f907751566f4432df43c274a05bf2d5dc8d3e51be239595d81a8",
       "source": "https://docs.langchain.com/oss/python/langchain/quickstart",
-      "upstream_bytes": 33937,
-      "upstream_sha256": "c95521ce1f61d8133923eb5c2616de580e9247a7266d26cd53482f4c1f1a5439"
+      "upstream_bytes": 38525,
+      "upstream_sha256": "81a9ad69ead039067dd47747a145721aaabd02165577faa256cb288fc75966f3"
     },
     "langchain/retrieval.md": {
       "bytes": 14199,
@@ -4400,22 +4427,22 @@
       "upstream_sha256": "54f53c0b40fd687cbc882b26e2e57291f8060b67c4041c1458e995ecd0bc4674"
     },
     "langchain/test/integration-testing.md": {
-      "bytes": 6948,
+      "bytes": 7276,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langchain/test/integration-testing.md",
-      "sha256": "6eaa305a7b8d18c3f0a3e4cbc10d89198b3347543fad04cfe814200b2e345235",
+      "sha256": "660813299b4891f91cb808c11fc3b787b8b8a14214be6edae7d8ddd09cb76581",
       "source": "https://docs.langchain.com/oss/python/langchain/test/integration-testing",
-      "upstream_bytes": 8411,
-      "upstream_sha256": "fe4d893ab6aaf6189c95ada78a4393ba2ec42caf92b53dbe0f338c3e8d61636f"
+      "upstream_bytes": 8739,
+      "upstream_sha256": "683d840c1cf18ccac10efffa28f72af0373999fb9281867b89cd4b55b53b4cd2"
     },
     "langchain/test/unit-testing.md": {
-      "bytes": 2672,
+      "bytes": 2809,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langchain/test/unit-testing.md",
-      "sha256": "10f416fc85c8271442b870c02261b5fa8c2b721d8d43f376e87e79b845ccc65e",
+      "sha256": "c9af08746df5230b9524b2bcf175ee33a330eab442d1720eb68893e06e9b270c",
       "source": "https://docs.langchain.com/oss/python/langchain/test/unit-testing",
-      "upstream_bytes": 3166,
-      "upstream_sha256": "07234db15ca3717458bd94e5cd10d958c65440f2ab1b2cafb07a5c3eb5889405"
+      "upstream_bytes": 3303,
+      "upstream_sha256": "d948bc6e4bea68b1dc7764c3b9f31125f3d39b44c58df637f5e03b2fd8b777f6"
     },
     "langchain/tools.md": {
       "bytes": 59956,
@@ -4445,13 +4472,13 @@
       "upstream_sha256": "4144b3d2ccaecc3192c9d3833cf5c8a6aaa57b011177ae2d1388cedfe9561b5e"
     },
     "langgraph/add-memory.md": {
-      "bytes": 65258,
+      "bytes": 65389,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langgraph/add-memory.md",
-      "sha256": "7ba3c3c44aedb55a26c76461891280c7b72dbd2c157c21681e8319701a5ebd20",
+      "sha256": "7ae7b06808e664ed44a15935ed895ec8604c7beec79d9b81da76d4ac9c2a8f4c",
       "source": "https://docs.langchain.com/oss/python/langgraph/add-memory",
-      "upstream_bytes": 74217,
-      "upstream_sha256": "a839802eafb9f21a4cbb691fdfe346241fb76c6cb267b52fcf773ad077d7c445"
+      "upstream_bytes": 74354,
+      "upstream_sha256": "76b138b204f9cdbd8ba712c6bdcace473f8cb6331fa13809affe518e231bd359"
     },
     "langgraph/agentic-rag.md": {
       "bytes": 20190,
@@ -4490,13 +4517,13 @@
       "upstream_sha256": "933fe7e81f30b432648b444c0a9576a948af7b10b4939a78a6e89c34206b7ae1"
     },
     "langgraph/checkpointers.md": {
-      "bytes": 45399,
+      "bytes": 45581,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langgraph/checkpointers.md",
-      "sha256": "5c7c53695df4dcd2f73abb6f386d590c20cc14e508cc08eaac6d486a7e271498",
+      "sha256": "5b5a9ad8c97e13b7cfd86efdf56c9d74272b43621865a2d0d913e1557227b6e2",
       "source": "https://docs.langchain.com/oss/python/langgraph/checkpointers",
-      "upstream_bytes": 47294,
-      "upstream_sha256": "8bd026823683f5a976fd7b1e9cbd52f96dac555ff5dac77526426f08d576c36d"
+      "upstream_bytes": 47476,
+      "upstream_sha256": "6f4da4feb17ddf0de1f6ffcc240ebeff1a9067480ee67aa90ab23298ba834a0d"
     },
     "langgraph/choosing-apis.md": {
       "bytes": 10588,
@@ -4706,13 +4733,13 @@
       "upstream_sha256": "8d5285525fc5585037b336d14791014d352135ee6b2694358596c8c9cde3597c"
     },
     "langgraph/quickstart.md": {
-      "bytes": 16463,
+      "bytes": 20485,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langgraph/quickstart.md",
-      "sha256": "5c10855f849d2ae9d99bb5f12333ed764ea130f1ecee5719c07756e5ff82ca27",
+      "sha256": "d2bc1a083bacdda7b6c7cf1a5f2042650bad08f1d0929ee1f83cba143e5f5fe9",
       "source": "https://docs.langchain.com/oss/python/langgraph/quickstart",
-      "upstream_bytes": 19809,
-      "upstream_sha256": "520c256a48502278dda922881714875f337678094763027fbc1c4eed8349c7a3"
+      "upstream_bytes": 24303,
+      "upstream_sha256": "6a64955411e8be50e8070cdffb7f7f4c0a6aafd0784032ae0c5635b044393761"
     },
     "langgraph/sql-agent.md": {
       "bytes": 28958,
@@ -4787,13 +4814,13 @@
       "upstream_sha256": "b0b673a401421eab5664b46d5feba365c4c07b61da6f4c6011f5b5f68f86a4b6"
     },
     "langgraph/use-graph-api.md": {
-      "bytes": 88432,
+      "bytes": 88410,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langgraph/use-graph-api.md",
-      "sha256": "b7863f3de59261af4f01d72317a367e2de369b6cc904033838e744f45c692220",
+      "sha256": "746d5b6c7d5090cfa4df1f8a49b32c1d7b1847eceebb770db180237c01bce9f4",
       "source": "https://docs.langchain.com/oss/python/langgraph/use-graph-api",
-      "upstream_bytes": 100622,
-      "upstream_sha256": "adcc53b867a9931f9b9d64527c7710c4105d0804e65eafd580084c3931f59d68"
+      "upstream_bytes": 100600,
+      "upstream_sha256": "8f2176e5bd80e0a4114dc2767a5ec46d98c8f23f963bf0d5c84a1a17f9a7e40f"
     },
     "langgraph/use-subgraphs.md": {
       "bytes": 36346,
@@ -4814,13 +4841,13 @@
       "upstream_sha256": "ef15d4d251c3e3a49e43d030295ee7882464f2187a6770f099c2c842f96324f6"
     },
     "langgraph/workflows-agents.md": {
-      "bytes": 36839,
+      "bytes": 36981,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/langgraph/workflows-agents.md",
-      "sha256": "6e8c12c68102df45e76439d5ed227c9f0be630e8b60dfaabc575fba414cab537",
+      "sha256": "edbe7d17fac454efb2b091a1925b7c03cc2b621804cf06f2c55a59adc9af65b8",
       "source": "https://docs.langchain.com/oss/python/langgraph/workflows-agents",
-      "upstream_bytes": 40172,
-      "upstream_sha256": "9ac54d3c0df92a047a95df22ff273ecc15e7df64e19bf0c38d71a6d99c3d60c7"
+      "upstream_bytes": 40314,
+      "upstream_sha256": "3b92c499ea2a8d490b4c04062dbf812040b72916c0c18983960ca48346579529"
     },
     "langsmith/abac.md": {
       "bytes": 16414,
@@ -5849,13 +5876,13 @@
       "upstream_sha256": "1cafaeacef40e86d54c161818a0f54d8799565f95f6c7d069f8647556b71c5db"
     },
     "langsmith/byoc-operations.md": {
-      "bytes": 5087,
+      "bytes": 5023,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/byoc-operations.md",
-      "sha256": "7f1c90e851a29ad49e25e8a9c350c9cf0b48020741754d738fa126590324008a",
+      "sha256": "be4acd60b10ae5f2c54d0fd591689522ee0a6da09497712c68ffe4d1b25cd723",
       "source": "https://docs.langchain.com/langsmith/byoc-operations",
-      "upstream_bytes": 5391,
-      "upstream_sha256": "56e20b6a5f5ce1d34cd5a556083b29351d62b2f9c0e1d29f4c491172a8165445"
+      "upstream_bytes": 5322,
+      "upstream_sha256": "7e866e93f92675f486967a32a7c66866b5381a5c345a344998cb26bf44f11261"
     },
     "langsmith/byoc-shared-responsibility.md": {
       "bytes": 20188,
@@ -6263,22 +6290,22 @@
       "upstream_sha256": "d61611d8a6f9ab5b7419b969434465c691a755a6952b2415137542dc5e0b032e"
     },
     "langsmith/custom-lifespan.md": {
-      "bytes": 3107,
+      "bytes": 3104,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/custom-lifespan.md",
-      "sha256": "b0dd3664503f1658fddd602675ed51dfeb596fbb8ce3b37bb2676669d6efc2b2",
+      "sha256": "df1d4075ecf1dd70918ff8b228a7dc998927cc67026bd0a08994a4044be90c96",
       "source": "https://docs.langchain.com/langsmith/custom-lifespan",
-      "upstream_bytes": 3694,
-      "upstream_sha256": "2b0897514d1797b13ca196d536a6e6e2f0b6e288367182afd4de8b0e1b382641"
+      "upstream_bytes": 3691,
+      "upstream_sha256": "d5d3ec14119f63b810d2a178856fad9f32a7e890497294d177927e895d33c854"
     },
     "langsmith/custom-middleware.md": {
-      "bytes": 3537,
+      "bytes": 3534,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/custom-middleware.md",
-      "sha256": "945a0a04e4deee26355ecbe14a98fd1f430271b8640e413be4f0dd74c38a22fc",
+      "sha256": "f672feb38e6c7c53ae2de30915145d2db9e72824d7b75beceeb4cdaf911822a5",
       "source": "https://docs.langchain.com/langsmith/custom-middleware",
-      "upstream_bytes": 4194,
-      "upstream_sha256": "e1938a56a2beefda18f983227a7eeed57614825b93628c62abbd1b5d3e03bb6d"
+      "upstream_bytes": 4191,
+      "upstream_sha256": "1ed299b2fc8548727b1b40bf175dd38a20410fd2898abb9cb3e1b72007eda679"
     },
     "langsmith/custom-openai-compliant-model.md": {
       "bytes": 4067,
@@ -6299,13 +6326,13 @@
       "upstream_sha256": "18f8af8a4346266d01e8257bd80948666f5df4f7c2c1bc3417d46e68d496cb1e"
     },
     "langsmith/custom-routes.md": {
-      "bytes": 3902,
+      "bytes": 3899,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/custom-routes.md",
-      "sha256": "f3c15cf12b017933fb3155b781dcb615b12c1b2af1402484a77df3bfd1b8cb38",
+      "sha256": "5a8d26a5bae1b80233808fb2678f8c4d1052ee43fdc650306ddc8f0ce7fb7767",
       "source": "https://docs.langchain.com/langsmith/custom-routes",
-      "upstream_bytes": 5170,
-      "upstream_sha256": "a7fd1304731d82c1de5ff2984a27d286d8b9d39f89f67c01316c05501f8f493d"
+      "upstream_bytes": 5167,
+      "upstream_sha256": "088bc3d3c7a2e1d36a9df43967153837814e9692275ba45c2c2145363458bee9"
     },
     "langsmith/custom-run-id.md": {
       "bytes": 28558,
@@ -6392,10 +6419,10 @@
       "bytes": 5715,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/data-storage-and-privacy.md",
-      "sha256": "237a2865922a25b10cc10fa6d63796bf4f52af1651eb2a1b34cf893e527376bc",
+      "sha256": "e65077c878d57eb5e89f30d34d9a4e3889eae7337e272fe44a84cf2cf9525997",
       "source": "https://docs.langchain.com/langsmith/data-storage-and-privacy",
       "upstream_bytes": 6033,
-      "upstream_sha256": "4e195e159e65b33c1bf1e4ae5a99aaf6685340c7b9c36e62550a9ec258c50e6f"
+      "upstream_sha256": "e44eb52d5de9444b2e375f2de4be54a0a3860a67c25bb5bce1a2bf316630c415"
     },
     "langsmith/dataset-json-types.md": {
       "bytes": 2260,
@@ -6479,13 +6506,13 @@
       "upstream_sha256": "4db439e57a1aceeb97079b8208f4f4f6b117b97c346c941c81242768ecaa9d4e"
     },
     "langsmith/deploy-other-frameworks.md": {
-      "bytes": 22705,
+      "bytes": 23025,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/deploy-other-frameworks.md",
-      "sha256": "d8272e428fc8e66d994718dd915a61e28c74f5bf7b6db9557b5f6479493d76a9",
+      "sha256": "448466334e9a5b2614f62dffb66b30294e20ca964827d707ca91ade25ae98d63",
       "source": "https://docs.langchain.com/langsmith/deploy-other-frameworks",
-      "upstream_bytes": 32703,
-      "upstream_sha256": "48dd9302089d51b43f58524acdcf795de4d17790de9b314f6e922d7d4527ac32"
+      "upstream_bytes": 33045,
+      "upstream_sha256": "388a9cf1cd62d166d9a79b0522c9ec51e6ddfba845183ddf54176150e802844b"
     },
     "langsmith/deploy-reference-overview.md": {
       "bytes": 1398,
@@ -6506,13 +6533,13 @@
       "upstream_sha256": "ad0c6c6b787f0f026cedb0b093c8b0001d051906e2ff94bad0ffe18ca6473a4f"
     },
     "langsmith/deploy-standalone-server.md": {
-      "bytes": 13158,
+      "bytes": 13155,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/deploy-standalone-server.md",
-      "sha256": "dc7a69c13e805972c27f7decc6f01d7af3a55b66d05bdb81521b20a8145989d6",
+      "sha256": "428ae568702520234887ac529d496c76ea20901fe37a73c9f6ef59724cf87dbb",
       "source": "https://docs.langchain.com/langsmith/deploy-standalone-server",
-      "upstream_bytes": 14247,
-      "upstream_sha256": "a9a32da5e80cc653a6852964beff183937c2853997e08cb0c316425e1e27f7f8"
+      "upstream_bytes": 14244,
+      "upstream_sha256": "d5cb62ba6043073ae199416527407941322a4995f855e70b11ae3ccc2412123e"
     },
     "langsmith/deploy-sveltekit.md": {
       "bytes": 7020,
@@ -6569,13 +6596,13 @@
       "upstream_sha256": "294f8ebf2c7b05b010ff68230c9602a4c21cb634123d69ba34dbdab1c3d6cd04"
     },
     "langsmith/deployment-quickstart-da.md": {
-      "bytes": 7547,
+      "bytes": 9276,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart.md",
-      "sha256": "1e74e5b05a1591c29f3e97f735e9b1f77ab4c6852642b7a351d30571e09cef25",
+      "sha256": "9bc0731f83d8cb5b24e369e8afc58b9e257cf7fb9dbd2b811fc8801ae52666e5",
       "source": "https://docs.langchain.com/langsmith/deployment-quickstart-da",
-      "upstream_bytes": 10200,
-      "upstream_sha256": "adff340aed64877a9aa9fe80322da56cf467a09449e328655ef69f05cef52209"
+      "upstream_bytes": 12135,
+      "upstream_sha256": "9fc31cda2fdc7cfe6544d9380f17ae85313eef929fd7da918713be4f33412dea"
     },
     "langsmith/deployment-quickstart.md": {
       "bytes": 8370,
@@ -6749,31 +6776,31 @@
       "upstream_sha256": "512fbd503d0a75d4f9d34caab2c32a93f18a453b92bf9461b5d2ce5b64940eee"
     },
     "langsmith/env-var-cloud.md": {
-      "bytes": 14856,
+      "bytes": 15243,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/env-var-cloud.md",
-      "sha256": "cb19b2337c9c5cde5dca9b2f3bac88c47b3daa0b6cea1d971ff035c0e03001cb",
+      "sha256": "42ad38ac876d460e06a98ef8309beae79197315d8db898f54363464655a07004",
       "source": "https://docs.langchain.com/langsmith/env-var-cloud",
-      "upstream_bytes": 15317,
-      "upstream_sha256": "7e25545b7956fb8e877270489343900a8c6d28255ed4a646455a9834d3d0b8f0"
+      "upstream_bytes": 15725,
+      "upstream_sha256": "8b14d4f7fda9f62bdd3625a9af733a0c8e1bc3dfbc6e8411d92dd7956126d8d9"
     },
     "langsmith/env-var-self-hosted.md": {
-      "bytes": 18380,
+      "bytes": 18767,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/env-var-self-hosted.md",
-      "sha256": "33b37bbc0cb78ceb4a861d5a461441606cda722c6a1deb3a9db17d8eaa54d28a",
+      "sha256": "1495a83850a66ca6436741992c96e773d44a217a08eabe1f5f62dac7fac32c33",
       "source": "https://docs.langchain.com/langsmith/env-var-self-hosted",
-      "upstream_bytes": 18865,
-      "upstream_sha256": "422039488f28bc334afb31a552434a2542115fb1c1769bbeffd7e87dff8f25f1"
+      "upstream_bytes": 19273,
+      "upstream_sha256": "399d91d934e744f80d080db510bf825755b350116309c87c1e430ecd2660102b"
     },
     "langsmith/env-var.md": {
-      "bytes": 14881,
+      "bytes": 15268,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/env-var-cloud.md",
-      "sha256": "ba51838b3fb450d5ebfa49d883f1b05e6044299353adcca677978e6bb23ca58c",
+      "sha256": "e88bb49655db0f83691dac505e57be45f9aa91095f0979854ed08ee9949226e5",
       "source": "https://docs.langchain.com/langsmith/env-var",
-      "upstream_bytes": 15317,
-      "upstream_sha256": "7e25545b7956fb8e877270489343900a8c6d28255ed4a646455a9834d3d0b8f0"
+      "upstream_bytes": 15725,
+      "upstream_sha256": "8b14d4f7fda9f62bdd3625a9af733a0c8e1bc3dfbc6e8411d92dd7956126d8d9"
     },
     "langsmith/evaluate-chatbot-tutorial.md": {
       "bytes": 20440,
@@ -6803,13 +6830,13 @@
       "upstream_sha256": "cd5f22a449872e5f5d87b552269c01377caba4655fb1976460fa02543843bfbc"
     },
     "langsmith/evaluate-graph.md": {
-      "bytes": 15742,
+      "bytes": 15655,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/evaluate-graph.md",
-      "sha256": "2581b83eb138195b0ac539c35590d7afbb51506cac07de1bdb70439deb0d8bce",
+      "sha256": "d4a46b375e4cb2a20d218da4684b7bd4cbb35ac00f17ba6f95c6d773ebfdf3d9",
       "source": "https://docs.langchain.com/langsmith/evaluate-graph",
-      "upstream_bytes": 16850,
-      "upstream_sha256": "90973ad1dec3a82842e70b87c031f277076a2a7909bc6dc93f57505734d7deaf"
+      "upstream_bytes": 16779,
+      "upstream_sha256": "a63330648f176634472ff0a45df858314cccb55670c4d21bcb0285f329874141"
     },
     "langsmith/evaluate-llm-application.md": {
       "bytes": 23688,
@@ -7280,13 +7307,13 @@
       "upstream_sha256": "20f1475eddf07819682a83817351f7729e650389be49e3efa5b85839a5641e6a"
     },
     "langsmith/generative-ui-react.md": {
-      "bytes": 15347,
+      "bytes": 15456,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/generative-ui-react.md",
-      "sha256": "a0c0e4272b2fc7e102ecf01cae78a0952856ec70151e4c8b39dea96535566e05",
+      "sha256": "e548ee7877c303d2a7e8dad69197c111d21213b7c65f07e62ec7d78efb304c10",
       "source": "https://docs.langchain.com/langsmith/generative-ui-react",
-      "upstream_bytes": 18381,
-      "upstream_sha256": "9078f7c29a2d2ddb4e67461d3dd9b71bb353ef9313760167c0c820bad2e447f6"
+      "upstream_bytes": 18490,
+      "upstream_sha256": "8ae23e57ab80121dd325a88b463daaf41957dd140a8e1feccc717d15c003e12d"
     },
     "langsmith/get-started-integrations.md": {
       "bytes": 2887,
@@ -7487,13 +7514,13 @@
       "upstream_sha256": "d97e90b00d505d00527d1e4e45cbbe0b396ff2030f8b5e0836e1ea6ae5c536c4"
     },
     "langsmith/javascript/managed-deep-agents-evals.md": {
-      "bytes": 6772,
+      "bytes": 6831,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-evals.md",
-      "sha256": "906cd30f8a84806f22e780ca6aee5454360aa9a52b773881d256c6c81f5f3054",
+      "sha256": "5de0da9cbcad56bf351aa066e743686f0edcba7037ed8bcfc694b4522ce94060",
       "source": "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-evals",
-      "upstream_bytes": 8386,
-      "upstream_sha256": "239eb3acfcededc4a7e752b37b7da699efea14ec85e00c0669192cc074693a64"
+      "upstream_bytes": 8443,
+      "upstream_sha256": "be49d80dbdd1ce57eada46fcf7768f2b384224e67882389e61bf4a444e9801ce"
     },
     "langsmith/javascript/managed-deep-agents-identity.md": {
       "bytes": 4600,
@@ -7568,13 +7595,13 @@
       "upstream_sha256": "75c97fa2ded6503e514319b1b70d5a720b4e9de89ee02342605288e2558d203b"
     },
     "langsmith/javascript/managed-deep-agents-quickstart.md": {
-      "bytes": 8315,
+      "bytes": 10047,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-quickstart.md",
-      "sha256": "66828eb781377ffd30d866cd0dc4b030b147e8fb8f3b0501a6d3dfddc799a98b",
+      "sha256": "bb3b58bb7ed398a29ba8f2164ccef1463dc17e818f9b8b6a81645904256f31b8",
       "source": "https://docs.langchain.com/langsmith/javascript/managed-deep-agents-quickstart",
-      "upstream_bytes": 11916,
-      "upstream_sha256": "1c87acaebc9c19450313c1c3a934eb3ad804fd02e6869fe88f00417415e9d322"
+      "upstream_bytes": 13851,
+      "upstream_sha256": "9354619bf84bef0c505b23d5de4400d5fe5028104cefe4dd5868eaf410b01854"
     },
     "langsmith/javascript/managed-deep-agents-sandboxes.md": {
       "bytes": 5622,
@@ -7640,13 +7667,13 @@
       "upstream_sha256": "73477f54c3a2415ab9d6d1213222176140f22555cf78abc54f286602d5d8ee75"
     },
     "langsmith/kubernetes.md": {
-      "bytes": 17465,
+      "bytes": 17443,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/kubernetes.md",
-      "sha256": "5caf08fced4f8fb08c82c15ecf201db26b14cca85ea30f66ee2e42a6dece3df2",
+      "sha256": "516d0f2c485bceebb847dbf6fb53545775b56fdbc3e50190b9fce2945600c4b8",
       "source": "https://docs.langchain.com/langsmith/kubernetes",
-      "upstream_bytes": 18686,
-      "upstream_sha256": "ff2c841c78d44658413143c1a74e42f1bbcf604057f442af7d06b86af561c5dc"
+      "upstream_bytes": 18664,
+      "upstream_sha256": "049839134ef06d80f26aeb2c0f7ed2ecc55bd348ae2d91e1dc9bc2c6b8da4f24"
     },
     "langsmith/langchain-runnable.md": {
       "bytes": 4490,
@@ -8061,6 +8088,15 @@
       "source": "https://docs.langchain.com/langsmith/manage-with-terraform",
       "upstream_bytes": 8646,
       "upstream_sha256": "7ae320f4323f07bd4785f5fbb681b93f957e7fe6f8cb8201e2485801dc2de6c8"
+    },
+    "langsmith/managed-deep-agents-quickstart.md": {
+      "bytes": 9276,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart.md",
+      "sha256": "9bc0731f83d8cb5b24e369e8afc58b9e257cf7fb9dbd2b811fc8801ae52666e5",
+      "source": "https://docs.langchain.com/langsmith/managed-deep-agents-quickstart",
+      "upstream_bytes": 12135,
+      "upstream_sha256": "9fc31cda2fdc7cfe6544d9380f17ae85313eef929fd7da918713be4f33412dea"
     },
     "langsmith/managing-model-configurations.md": {
       "bytes": 5888,
@@ -8477,13 +8513,13 @@
       "upstream_sha256": "e40aa012af1c9a8e7d28a2e6550cd6d4377e019f603578cdabd1bc938786808c"
     },
     "langsmith/python/managed-deep-agents-evals.md": {
-      "bytes": 6716,
+      "bytes": 6775,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/python/managed-deep-agents-evals.md",
-      "sha256": "eaca38620216b7aa0a3f95d9977c8f4f2f85c7b6035a98d9e8876a8dbc013feb",
+      "sha256": "871eea8d6ec6ecc97186928d5db6c9904172ef74c66b7fb2ae1decdfaf906dfc",
       "source": "https://docs.langchain.com/langsmith/python/managed-deep-agents-evals",
-      "upstream_bytes": 8092,
-      "upstream_sha256": "c204cce3079b9b818845aff64bcf9837d3468a3b01ff2541cf27867f6cc78e6d"
+      "upstream_bytes": 8149,
+      "upstream_sha256": "8ed0465be1dc8bc4121a68a7aa6bff49b5152c1e67de1caa93c7e56bd1bbe259"
     },
     "langsmith/python/managed-deep-agents-identity.md": {
       "bytes": 4572,
@@ -8558,13 +8594,13 @@
       "upstream_sha256": "3a87567d5b833371a6e13dc892a3e6369324b842b7af0442cd4aedb73187b289"
     },
     "langsmith/python/managed-deep-agents-quickstart.md": {
-      "bytes": 7531,
+      "bytes": 9263,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart.md",
-      "sha256": "19e4a2c7f6c3f1b1042c279d7c4de915ccde2e166f4f3c008d0fbf5924b2fd71",
+      "sha256": "53fc66d81894c1a50040f4b6d5d568789a65f654ac402ddc2862237765ef17a1",
       "source": "https://docs.langchain.com/langsmith/python/managed-deep-agents-quickstart",
-      "upstream_bytes": 10200,
-      "upstream_sha256": "adff340aed64877a9aa9fe80322da56cf467a09449e328655ef69f05cef52209"
+      "upstream_bytes": 12135,
+      "upstream_sha256": "9fc31cda2fdc7cfe6544d9380f17ae85313eef929fd7da918713be4f33412dea"
     },
     "langsmith/python/managed-deep-agents-sandboxes.md": {
       "bytes": 5623,
@@ -8981,13 +9017,13 @@
       "upstream_sha256": "37122e5cbd3ed8a89aa64cdf39a2e01c3c42bbbe867e5170a601855b0ac07f96"
     },
     "langsmith/self-host-blob-storage.md": {
-      "bytes": 19861,
+      "bytes": 19846,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/self-host-blob-storage.md",
-      "sha256": "5ef9da585cefff95ea75b0b25b69d73e504add894f2b033f014a978fbce47df2",
+      "sha256": "e7a81df08e7da5409a6cb7c9c46cbf55e45414d3718dffd12638888574c85f74",
       "source": "https://docs.langchain.com/langsmith/self-host-blob-storage",
-      "upstream_bytes": 22036,
-      "upstream_sha256": "16e17e3be2856519e9091c1518d42f1e8ef783b66232e8cc3c8917be9fb56756"
+      "upstream_bytes": 22021,
+      "upstream_sha256": "c41212cc885088597cc46fbcf1abfa15d32058cc6b34dbc808ab253312261d93"
     },
     "langsmith/self-host-custom-tls-certificates.md": {
       "bytes": 4765,
@@ -9071,13 +9107,13 @@
       "upstream_sha256": "8bd3afe114157e92f2efb9d0b44ad960a071ecc9b4ac8748c3fd4eb267f78ec0"
     },
     "langsmith/self-host-ingress.md": {
-      "bytes": 8039,
+      "bytes": 8017,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/self-host-ingress.md",
-      "sha256": "51d36959cd236bfd52ea14a90f29afa165d2ec65f06e2c67f19638bf877c53e6",
+      "sha256": "52d574f839216c212c83ddddf546c3b79c208b32ddd919777e36d97a7ac2a0b3",
       "source": "https://docs.langchain.com/langsmith/self-host-ingress",
-      "upstream_bytes": 8716,
-      "upstream_sha256": "74d7f097baf1b39e1d869385c3d70962d0d2ef30fdc90ac0fe47ba1b6efd7df2"
+      "upstream_bytes": 8694,
+      "upstream_sha256": "aeee2fe7e83285dfb6d485043acf861ee722b7806782c9cdc7d9560db86743d7"
     },
     "langsmith/self-host-mirroring-images.md": {
       "bytes": 17623,
@@ -9395,13 +9431,13 @@
       "upstream_sha256": "6d653b386b43a524454804622f1527f11dc31a1fc77b7b7df6996c391e96f2cd"
     },
     "langsmith/server-mcp.md": {
-      "bytes": 9406,
+      "bytes": 9400,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/server-mcp.md",
-      "sha256": "989227648cd433e4df21b77f660867e27bf377c5f863e2ab0d0acf3b5b76c57f",
+      "sha256": "ca2dbb7952f4b739e78eb779007fd2fa669f4d9a4a79844c176682c079bc777f",
       "source": "https://docs.langchain.com/langsmith/server-mcp",
-      "upstream_bytes": 10860,
-      "upstream_sha256": "e87ef6842365f4aadf4b6cca54aa7dc2e40959a3df3473e68ef5e6c2514853fe"
+      "upstream_bytes": 10854,
+      "upstream_sha256": "fe99623dbdee74a6ea4dca65e97533d82c3d9664df4adf1a42ad270d38f15aba"
     },
     "langsmith/serverless-environments.md": {
       "bytes": 2995,
@@ -9875,10 +9911,10 @@
       "bytes": 10215,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/annotation_queues/list-annotation-queue-items.md",
-      "sha256": "266b1531a40415e24e7428f4937cd4f7539fbf6145942d69daf09ebfe4f5b5b0",
+      "sha256": "8cb3f9d701dcb556b53fa468b37e8af577f508a0bb34d4fad7a449e2c465d705",
       "source": "https://docs.langchain.com/langsmith/smith-api/annotation_queues/list-annotation-queue-items",
       "upstream_bytes": 10498,
-      "upstream_sha256": "4a975645a2d16b95b829498c8376bc10ec87954188853673811fee265ac00f43"
+      "upstream_sha256": "db4653d3193e361343d589b79fcecdc0b58a6ad6d688462bce18c3eac4c61c7e"
     },
     "langsmith/smith-api/annotation_queues/remove-a-reviewer-from-an-annotation-queue.md": {
       "bytes": 5535,
@@ -9953,13 +9989,13 @@
       "upstream_sha256": "b096cc21f6e97f7d607af00642f3981fed53997cf09a9e47ba662aa3180cab26"
     },
     "langsmith/smith-api/audit-logs/get-audit-logs.md": {
-      "bytes": 33668,
+      "bytes": 33697,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/audit-logs/get-audit-logs.md",
-      "sha256": "7f9ecab6d2bf1146bc5a88860763f45c6810348d0bda9098ec4185b607d1ddd8",
+      "sha256": "8dfe61ab3a37b58136e51b1c91fe04dc323ad8d7355439c301a1ee5ea93cf93f",
       "source": "https://docs.langchain.com/langsmith/smith-api/audit-logs/get-audit-logs",
-      "upstream_bytes": 33922,
-      "upstream_sha256": "ce159eabf75c425cdad1fa7394d8a9afe1de4c52f5ba30c1ccc080ba0513f9a4"
+      "upstream_bytes": 33951,
+      "upstream_sha256": "dd150ab54fbff8f845e37c3013d825424f9144315fa1695a034dcbe79f6d5edd"
     },
     "langsmith/smith-api/audit-logs/list-audit-log-operations.md": {
       "bytes": 5176,
@@ -10424,19 +10460,19 @@
       "bytes": 8072,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/commits/get-a-commit.md",
-      "sha256": "c0256468d5473c25e194eb9d6b26870fa1e802e3748e2d7ae570a8448d7a7741",
+      "sha256": "9da3995b488397fcd83c5df8c4d479da5e92828d4e0a37fad96c9b38df7837a8",
       "source": "https://docs.langchain.com/langsmith/smith-api/commits/get-a-commit",
       "upstream_bytes": 8343,
-      "upstream_sha256": "36a785c86f7be38b8e9a2003f55795c36885a8c5a04c9b245d2d93ec6f39b703"
+      "upstream_sha256": "3e0b16f0f7bf646bf7ee765ce3e2f591940189d665aa594baeed60db6d281b43"
     },
     "langsmith/smith-api/commits/list-commits.md": {
       "bytes": 9169,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/commits/list-commits.md",
-      "sha256": "5b845e74a77752dc4bd6a7a7b51fb2bb371de74329bee866a3fd0387946956f6",
+      "sha256": "4ea03eeadd44666b09c78b1c830df4b5509052f50f9f84382dd01fa64d08cd69",
       "source": "https://docs.langchain.com/langsmith/smith-api/commits/list-commits",
       "upstream_bytes": 9431,
-      "upstream_sha256": "14a504d1e69be6ba98540f3b84a6c9a10a486f2685c452b16368bc60b900e1e8"
+      "upstream_sha256": "32060add5d18ca86b08ed11dea7a876a2f5b0f01b155d3a65bae5d3166483eee"
     },
     "langsmith/smith-api/data_planes/create-a-new-data-plane.md": {
       "bytes": 9787,
@@ -10574,22 +10610,22 @@
       "upstream_sha256": "0575595317138a7a0939529d09ff0b445ea694961a7b2d9feee38d391cc16f87"
     },
     "langsmith/smith-api/datasets/fetch-experiment-runs-for-dataset-examples.md": {
-      "bytes": 32412,
+      "bytes": 32410,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-experiment-runs-for-dataset-examples.md",
-      "sha256": "2a7b5edc6f554ece12ce11b56f1e0f7b3d77199670f1a988949698ff5869f9c3",
+      "sha256": "5eb38fa214a4c921dcc9ccea554c56582a80537d4e251c13879a3b0a9ba70bff",
       "source": "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-experiment-runs-for-dataset-examples",
-      "upstream_bytes": 32691,
-      "upstream_sha256": "bec7ede7be85b3114ff6be0624599bc5fde0ed65f4480fdd9083adf1abab1362"
+      "upstream_bytes": 32689,
+      "upstream_sha256": "26eb91f727a4bcdd31b776e40bc67e38adb3fcf9193c551f131607c703e58c81"
     },
     "langsmith/smith-api/datasets/fetch-shared-experiment-runs-for-dataset-examples.md": {
-      "bytes": 31801,
+      "bytes": 31799,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-shared-experiment-runs-for-dataset-examples.md",
-      "sha256": "d5dbd02d3f5c7d4c1337b179ed4dc46f8660da945d98b30dac0a5bf03902924f",
+      "sha256": "44e9e666627d035bf557785869224d43f26112305e584aed30cc4c9bf3e80e7d",
       "source": "https://docs.langchain.com/langsmith/smith-api/datasets/fetch-shared-experiment-runs-for-dataset-examples",
-      "upstream_bytes": 32088,
-      "upstream_sha256": "af89a721f560b8aa65ee8ec2c31d0851ce456f5d50573206f3240bbc239d1ba9"
+      "upstream_bytes": 32086,
+      "upstream_sha256": "cd2404a21f993d9b722e0c87aae376aac8c1e97a8d8c910f09eb01cfe7a638f2"
     },
     "langsmith/smith-api/datasets/generate.md": {
       "bytes": 5733,
@@ -10820,10 +10856,10 @@
       "bytes": 11738,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/evaluators/list-evaluators.md",
-      "sha256": "8b2041eb41026295112b610286fb46846e3eb981e4eb1e5ae77612fe696f496f",
+      "sha256": "aa2a442a2a9146999488e37938bfd0002ec63ba6a0298d93fad7fae3c8d2bfae",
       "source": "https://docs.langchain.com/langsmith/smith-api/evaluators/list-evaluators",
       "upstream_bytes": 11997,
-      "upstream_sha256": "6dc748665ca19887f92a54db9dbda8b3752487184c7f9251091b2910a2ebd69f"
+      "upstream_sha256": "29b68ef113ba567371ce61de56fb13b75268350dbe83f1696c6773922d872269"
     },
     "langsmith/smith-api/evaluators/update-evaluator.md": {
       "bytes": 11754,
@@ -12995,22 +13031,22 @@
       "upstream_sha256": "80d93aa55661893eb1b6d7c8fde60948b2039201c8df35a79a006f95c2be6c81"
     },
     "langsmith/smith-api/runs/get-a-public-shared-trace-run.md": {
-      "bytes": 25610,
+      "bytes": 25608,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/get-a-public-shared-trace-run.md",
-      "sha256": "dfe56f313afcabb36ecfc88e236cf6671abff3d0f31b0cef708a824037fd30ca",
+      "sha256": "fb907917a55f4b7cdabc316dd5e92b3479f7f3e9bd44774fe38f3fc2b3f0cb48",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/get-a-public-shared-trace-run",
-      "upstream_bytes": 25884,
-      "upstream_sha256": "64de7d9fce4eb3c57d53806982303d249810d7fdd12881a497e33ee032d288f0"
+      "upstream_bytes": 25882,
+      "upstream_sha256": "022bad60bc97d71bf04b90a9b52fed328288d5f9edc2242822ebc076d79d8cca"
     },
     "langsmith/smith-api/runs/get-a-single-run.md": {
-      "bytes": 28333,
+      "bytes": 28331,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/get-a-single-run.md",
-      "sha256": "6d9c0f2344feb69606ebc329334a06de5f247b3fca99c10acc7564c894530fd4",
+      "sha256": "eea478160de43936b79e68f78bc43756b8bb69e0fb74329aa9a20f42159cf78d",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/get-a-single-run",
-      "upstream_bytes": 28587,
-      "upstream_sha256": "b7d3a13936d53a11c2f53f0f4dcf8f6304e9dca9531db780228fa07b0a202559"
+      "upstream_bytes": 28585,
+      "upstream_sha256": "5ca83a8a93657923c00ec038a2953f5d11fa4a5100f61a2e3061b36d9621251e"
     },
     "langsmith/smith-api/runs/get-the-langsmith-ui-url-for-a-run.md": {
       "bytes": 8015,
@@ -13040,40 +13076,40 @@
       "upstream_sha256": "232c03e3a7222f42b0df06ad9b4c262139bb3a547eb673d5626f465a117eb94a"
     },
     "langsmith/smith-api/runs/list-runs-in-a-trace.md": {
-      "bytes": 29778,
+      "bytes": 29776,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/list-runs-in-a-trace.md",
-      "sha256": "30d5c3b89889dd34b9500ee74177bf3af659d9ace33e3ada52d47a1d2ab9b87d",
+      "sha256": "fcadb5decde7acf2f6bb7196478b16ac49c4426a38c683b65315eb0320bb7b8d",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/list-runs-in-a-trace",
-      "upstream_bytes": 30041,
-      "upstream_sha256": "bccb459d6916df3fe0ca00f4ee3bff23c8e7ab773343eda1b5f3c7bbf995980a"
+      "upstream_bytes": 30039,
+      "upstream_sha256": "f17b6df4a9c677c4121b091637bf1a5cd2e8febdda9986f9e084c653182da182"
     },
     "langsmith/smith-api/runs/query-public-shared-trace-runs.md": {
-      "bytes": 27153,
+      "bytes": 27151,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/query-public-shared-trace-runs.md",
-      "sha256": "35c31cf00c47df4fd8cc016c2acfddc91d46f6012bdb88b5df185c320cdf3d1e",
+      "sha256": "c0ae0699ea859854f054fe0142193eff7704ddd443185120a1a5c74c3bd2d67d",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/query-public-shared-trace-runs",
-      "upstream_bytes": 27426,
-      "upstream_sha256": "1ec250dc9a2d5ef21898993554f7b94917e4cb924e5e51a01dd46411b95c01c2"
+      "upstream_bytes": 27424,
+      "upstream_sha256": "babe1aff3fec05ff4fbf6ce8e813f8d7eb67f535a9653592eae54b7c8a5f2b77"
     },
     "langsmith/smith-api/runs/query-runs.md": {
-      "bytes": 35477,
+      "bytes": 35475,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/query-runs.md",
-      "sha256": "038479da4a049495c0281fd907ef19f506b2301abfad03ac058a195b299730a5",
+      "sha256": "ccd2fdd30a00c7bbded520369406685a1ddf7fd4710b14b4de46ba244f7e67b8",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/query-runs",
-      "upstream_bytes": 35729,
-      "upstream_sha256": "0319b2acecf6391128eb897d6ddf2ec33eb92c16e13bf15a1887cc2bea94d427"
+      "upstream_bytes": 35727,
+      "upstream_sha256": "964c15ec6fb3e3908669c77cc8061b839c2042410c29b9bb6bc3d482166fda99"
     },
     "langsmith/smith-api/runs/query-traces.md": {
-      "bytes": 34597,
+      "bytes": 34595,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/runs/query-traces.md",
-      "sha256": "848cb4d81febc12e922b04a3a296023af5e831090d4061698e4098b16dfcdc92",
+      "sha256": "acd783330fccb6c1b18d0b432557784e458c7280abd76275369df82413f1e99f",
       "source": "https://docs.langchain.com/langsmith/smith-api/runs/query-traces",
-      "upstream_bytes": 34853,
-      "upstream_sha256": "aae4852c5d9c148000b1b5d9709b20320580c31189ad2e8a12905640a33a96c1"
+      "upstream_bytes": 34851,
+      "upstream_sha256": "7b69f6c5e53f28e3ae6b8a3b6e90a95ed92d048634f61e0bd8585f82684096ae"
     },
     "langsmith/smith-api/runs/share-a-run.md": {
       "bytes": 8281,
@@ -13121,13 +13157,13 @@
       "upstream_sha256": "62a1e663239238cbddcc739ad3377050d23038b91432ddb41ba173ce920ac08b"
     },
     "langsmith/smith-api/sandboxes/create-a-registry.md": {
-      "bytes": 6783,
+      "bytes": 7277,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-registry.md",
-      "sha256": "d71e7a306cc21892fadfd8f6634570a3a539c38c46eb2ef0a4a77e67064bb8f5",
+      "sha256": "e20842b32b3da1f816a2452c1d353c6d6eae982b5d06a80e47652a31c4de148a",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/create-a-registry",
-      "upstream_bytes": 7044,
-      "upstream_sha256": "f81c094115ff149f17355a1a87e12a0812c8ba524ac908a3146f4fd5712fe775"
+      "upstream_bytes": 7538,
+      "upstream_sha256": "6a37c53c9e11f333ee1733c40a415fc7a452940401cafba00103bf81da0b8600"
     },
     "langsmith/smith-api/sandboxes/create-a-sandbox.md": {
       "bytes": 23640,
@@ -13229,13 +13265,13 @@
       "upstream_sha256": "77a092fb059fdbb306e479e04ac981aea8b275b97d22353ce1fe5b65aade02b9"
     },
     "langsmith/smith-api/sandboxes/get-a-registry.md": {
-      "bytes": 6193,
+      "bytes": 6347,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-registry.md",
-      "sha256": "a7d3663333c1b6bf6666e81aff10cfed4100ab2e3c2890b84fad5b70e15b8d50",
+      "sha256": "a1887edf95b14151ae218520eb0414b7727b79389891c4daca876a210cb58a5d",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/get-a-registry",
-      "upstream_bytes": 6460,
-      "upstream_sha256": "0bceb965b093acc0bcfea0c6b81f1f51fe91c031f8dba238bee376d9c7b5de5c"
+      "upstream_bytes": 6614,
+      "upstream_sha256": "ba833fd14ecaffbe6fd4db1d7996a1b659807804dee75be614340d2cb245d5ca"
     },
     "langsmith/smith-api/sandboxes/get-a-sandbox.md": {
       "bytes": 19159,
@@ -13301,31 +13337,31 @@
       "upstream_sha256": "4a46dd32efca76a2f4fc1a2a7a00b98860f98bab239de6cdcec6bffa6c0fbcbe"
     },
     "langsmith/smith-api/sandboxes/list-registries.md": {
-      "bytes": 6872,
+      "bytes": 7026,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-registries.md",
-      "sha256": "1ec5a8a3afb860e28eba145527e9fa3695a8288a090ece0b278a22be2a468619",
+      "sha256": "cc1048472dd4bdab26524539f1ab823aa58c7393e4a9868aabce0d0cffdd92de",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-registries",
-      "upstream_bytes": 7132,
-      "upstream_sha256": "9bf212ca66519bead41d5575dc308aa0f11e813ca3774509f196f2060a559703"
+      "upstream_bytes": 7286,
+      "upstream_sha256": "c873633e8c9c90c48b26b3cc296b3f315c9f29638342b36642839b1b3f1d4867"
     },
     "langsmith/smith-api/sandboxes/list-sandboxes.md": {
       "bytes": 23353,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-sandboxes.md",
-      "sha256": "93c3d7e571c5f1472de638bb3e57cf647885550f77297844c09a924423d6ad75",
+      "sha256": "d911a754c1b24951a2d917c1d0d735dee4baadebd4809f083c92d7a51352f4c1",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-sandboxes",
       "upstream_bytes": 23608,
-      "upstream_sha256": "cdd170c31047a18e20713f7a7db8c0ff9abb82281247e2ebf901f946bfec3b03"
+      "upstream_sha256": "ed558115abfe2e51b750cfef80af615fe5a14efa6b52aeacc4d74d046565aecf"
     },
     "langsmith/smith-api/sandboxes/list-snapshots.md": {
       "bytes": 11161,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-snapshots.md",
-      "sha256": "5ac67f99f323e212d2bb04dc74cac6dd52cae93898086435b11ac80035941351",
+      "sha256": "a8ebe36ab1c4f5d25bc93c44b24bda8779056460c2a49e3bdc922662a179b9bd",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/list-snapshots",
       "upstream_bytes": 11420,
-      "upstream_sha256": "c531910c37e5f15e16f6ef87b90bbe3c3d592d4091808b7465d8e29e2cde0bba"
+      "upstream_sha256": "5a8663389aa984d613a5a773cde49e3ed0bfd204600190055345815402fa4226"
     },
     "langsmith/smith-api/sandboxes/open-a-sandbox-tcp-tunnel.md": {
       "bytes": 5822,
@@ -13373,13 +13409,13 @@
       "upstream_sha256": "ad1542b73471257f7a201ad03f5de5dfb5558d95ef1886d4319a69e3727b46bf"
     },
     "langsmith/smith-api/sandboxes/update-a-registry.md": {
-      "bytes": 7031,
+      "bytes": 7563,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/sandboxes/update-a-registry.md",
-      "sha256": "688fce0b45ff164502eed0a23320d53c57a1aefd5139d0c1205231de7e3ab1ef",
+      "sha256": "1e6177223a06ea42abb4e3e179a7aa65b326bec61754607608fa4f3fe24c023a",
       "source": "https://docs.langchain.com/langsmith/smith-api/sandboxes/update-a-registry",
-      "upstream_bytes": 7300,
-      "upstream_sha256": "4bc3bbbe64962bec124372e533d6948a5d8e824f5b39ec99f90f1a4484800df2"
+      "upstream_bytes": 7832,
+      "upstream_sha256": "e02abab5c307598ca9575bac63be261e6ad38a8d24c753d6e4fdda9201061a0c"
     },
     "langsmith/smith-api/sandboxes/update-a-sandbox.md": {
       "bytes": 20904,
@@ -13580,76 +13616,85 @@
       "upstream_sha256": "33353fe56195796babea51fdbec73b19729bce42cee357e3fde91b7755c15930"
     },
     "langsmith/smith-api/threads/get-one-run-in-a-public-shared-thread.md": {
-      "bytes": 24974,
+      "bytes": 24972,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/get-one-run-in-a-public-shared-thread.md",
-      "sha256": "88e2d9bb87c9f0ccd248280a6d9442137a731fb2517accc76e69fc564c064413",
+      "sha256": "c6c5899e3766c625fbcef341e03cbea8ee6adfe45dccdcf0933764442c3b30c3",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/get-one-run-in-a-public-shared-thread",
-      "upstream_bytes": 25257,
-      "upstream_sha256": "a73d24bdc05906cb98e0c6649ef7e6603cab2d070bc185793f71e2db94eba213"
+      "upstream_bytes": 25255,
+      "upstream_sha256": "36f82b3e328974bd516b8e59965ccfea2e45492dd7d8cda5a07fe29490331c6b"
     },
     "langsmith/smith-api/threads/get-stats-for-a-public-shared-thread.md": {
-      "bytes": 16342,
+      "bytes": 16340,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/get-stats-for-a-public-shared-thread.md",
-      "sha256": "fc1cb17d8abe070cb0e7535a335487569c997acadb7990741c3e1d9001b8c211",
+      "sha256": "6b1cf10bf9310fa669733e12075ca90ffab6807808c2f04b0188055e1e4df16b",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/get-stats-for-a-public-shared-thread",
-      "upstream_bytes": 16616,
-      "upstream_sha256": "8e1c007c6171a9ff10e14a7a053c6d3b466692f108478f2931bc9ac239ad5a38"
+      "upstream_bytes": 16614,
+      "upstream_sha256": "9f148de0f9558643ce7974e3d976c97d87faecab7d075c44e80c5f0e17a946eb"
     },
     "langsmith/smith-api/threads/list-runs-of-one-trace-in-a-public-shared-thread.md": {
-      "bytes": 25264,
+      "bytes": 25262,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/list-runs-of-one-trace-in-a-public-shared-thread.md",
-      "sha256": "50d3d1e409aa35f988673e7081cd25089a3d8c5fb5685b0e4adbbee2ee960676",
+      "sha256": "3d766134d633803efbf58469aca5052c6cea2ee6c757a4f681455a325fe27947",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/list-runs-of-one-trace-in-a-public-shared-thread",
-      "upstream_bytes": 25556,
-      "upstream_sha256": "7ec44a0cdebda0bced99049fe1670e7dc20b7b6ccf70228dfca9831f54f8d842"
+      "upstream_bytes": 25554,
+      "upstream_sha256": "149ee100d0e4d45f788ce3bd5f161d59a6541aa31cc46d2570ff3d7e588e18e8"
     },
     "langsmith/smith-api/threads/list-traces-in-a-public-shared-thread.md": {
-      "bytes": 15589,
+      "bytes": 15587,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/list-traces-in-a-public-shared-thread.md",
-      "sha256": "59c7fbd592b76df2c13323e00b33520a259a5f32f3890cc28d709a811fbf214c",
+      "sha256": "ba476ff23bfa475e0f115ee6a9f3789edc686c5cefd2a49d1fcaea57a6fdfd48",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/list-traces-in-a-public-shared-thread",
-      "upstream_bytes": 15865,
-      "upstream_sha256": "5973c379ff198769814b2d779c4c6243311ef60e4c583b72b5f58a16425b616a"
+      "upstream_bytes": 15863,
+      "upstream_sha256": "5eb2b5b2bae6e0d0c7cdd334e341ee9faeb84a62d87aafd44849a870688a6d55"
     },
     "langsmith/smith-api/threads/query-single-thread-stats.md": {
-      "bytes": 19197,
+      "bytes": 19195,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/query-single-thread-stats.md",
-      "sha256": "5f0766c820642bdcfe88dfd7fe1920dab7a587c0f6a00e49ca4fb29c487790f5",
+      "sha256": "2ef43c9819ec81874722e92e90dcb9fdd7a30a242cc2b847bb54ca59b66c00b0",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/query-single-thread-stats",
-      "upstream_bytes": 19463,
-      "upstream_sha256": "8b18129a0811a435fb6a88af63090f56a31057cd8514068ca2a365d2206efd89"
+      "upstream_bytes": 19461,
+      "upstream_sha256": "e5cd1433e6b0ff57edd4b98d2065dc42743e6d46db18b4a872be89660b1d6eac"
+    },
+    "langsmith/smith-api/threads/query-thread-stats.md": {
+      "bytes": 18967,
+      "content_source": "page-markdown",
+      "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-stats.md",
+      "sha256": "b546715657f52ac4dba7644f174eece0602fc33b6331498d617973bd22906c19",
+      "source": "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-stats",
+      "upstream_bytes": 19222,
+      "upstream_sha256": "87b3de8ae64190a9a98cf8c925c99bcc63add6945bc65c5bca07f5c40ec7fb1c"
     },
     "langsmith/smith-api/threads/query-thread-traces.md": {
-      "bytes": 19106,
+      "bytes": 19104,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-traces.md",
-      "sha256": "106b0b314efcbc82d365245a0506b1888ae7d58e5e563f55c7a38cbb9de10d69",
+      "sha256": "144fe86d94eda20981df11a226bf2d1137af6bdcad7919c3f7cca54c9f221f8b",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/query-thread-traces",
-      "upstream_bytes": 19372,
-      "upstream_sha256": "a6afdb7770d92e33210c6255fcba7944eb881e3d8f2c3de84c7e3c5477f39125"
+      "upstream_bytes": 19370,
+      "upstream_sha256": "96b09c0e0e7331173ea63160952335844f2a5e21ee85131dce58b61e55cc622e"
     },
     "langsmith/smith-api/threads/query-threads.md": {
-      "bytes": 21099,
+      "bytes": 21243,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/query-threads.md",
-      "sha256": "fd55703a16a84cb5c84a11b80c9bbe80682dc8c58299edc9c93ab29448341242",
+      "sha256": "22b6c47555e20ac7e21b0a0501f178e45aaef5270481961a2accbd39cdf098cf",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/query-threads",
-      "upstream_bytes": 21355,
-      "upstream_sha256": "bc5b1eae95797677a1c490edd30b4d096ab68d66705b7b8d339994b69b139d25"
+      "upstream_bytes": 21499,
+      "upstream_sha256": "35e2dbdf2c0a40d578298d35dd5f742fc60ac46450519c36ae9bfd946a9b4516"
     },
     "langsmith/smith-api/threads/read-a-threads-share-state.md": {
       "bytes": 7572,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/read-a-threads-share-state.md",
-      "sha256": "0b349bd19d496095d1569850138d50f67c9b7efe0b9b126b94878a6540ea2a07",
+      "sha256": "fb9a59d9a288649bf2e306f90f15e4fc116ec625775b013cf2b2eb9afdea9927",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/read-a-threads-share-state",
       "upstream_bytes": 7837,
-      "upstream_sha256": "9d29da28f3399753fc6891738d4fb3ddd1c57d6eb5cd4105f0147c07b1cd1d7d"
+      "upstream_sha256": "d7dbbaaceea210fdc8c264137fef4c31c433a102907301ac19982e836880883e"
     },
     "langsmith/smith-api/threads/share-a-thread.md": {
       "bytes": 8071,
@@ -13673,10 +13718,10 @@
       "bytes": 7134,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smith-api/threads/unshare-a-thread.md",
-      "sha256": "ffd51a123b6637de10c0b34975107618d7f6326c436899619e0ac2d2a83d75a9",
+      "sha256": "fce6907ae06457ae5d4df4d11effd623b0c156cd43d45a5be07920bb8ad7811a",
       "source": "https://docs.langchain.com/langsmith/smith-api/threads/unshare-a-thread",
       "upstream_bytes": 7402,
-      "upstream_sha256": "a86d42ace623c0a57f1a8b60f6e698741a93e777073d141173f0f7f760ab9b16"
+      "upstream_sha256": "9e173472850b49c0f4c55be5f18ce815b9340d0f9e01b60700896d829c522015"
     },
     "langsmith/smith-api/tools/create-a-tool.md": {
       "bytes": 6929,
@@ -14516,13 +14561,13 @@
       "upstream_sha256": "d8131ae9d501c7bab941baf18b1aae4b7af6308d118099717400dd06d81c816e"
     },
     "langsmith/smithdb-sdk-migration.md": {
-      "bytes": 14025,
+      "bytes": 14322,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/smithdb-sdk-migration.md",
-      "sha256": "d65635a86cea9ef848b8cd81f1206551ab7a3b2d41d5d63700be3cab74abc4f3",
+      "sha256": "3f72f26b08644395db21ee6be6ee157b1fa859c19f72251f6b77064850cf6730",
       "source": "https://docs.langchain.com/langsmith/smithdb-sdk-migration",
-      "upstream_bytes": 15001,
-      "upstream_sha256": "ce417a5c37d8b20d268265e01bbc6e9e60de28174f0102afe720f17669eca38d"
+      "upstream_bytes": 15625,
+      "upstream_sha256": "dea87a3f94937a752379dd1c0aaa01567c8b8b0f9394dac604b72871479aeb74"
     },
     "langsmith/stateless-runs.md": {
       "bytes": 5131,
@@ -14633,13 +14678,13 @@
       "upstream_sha256": "947a56ddf458934f1dde9b27d0f4cf885afc06cd16d56712e3d539df9b9944f1"
     },
     "langsmith/trace-claude-agent-sdk.md": {
-      "bytes": 4956,
+      "bytes": 4976,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/trace-claude-agent-sdk.md",
-      "sha256": "698edf8101ae3302a71ff72d1f6a9b8cd6f401f992c432195da4dd27b6b02b5e",
+      "sha256": "b421a506dff18e592a75f044e3e1864ed85942f8cb63fa11e106b71cdec4a2f3",
       "source": "https://docs.langchain.com/langsmith/trace-claude-agent-sdk",
-      "upstream_bytes": 6140,
-      "upstream_sha256": "d6a60f04fc53f7beb9b48fa60e0571353db9a72618bd9acd9ca9773a86e42a12"
+      "upstream_bytes": 6160,
+      "upstream_sha256": "9dd032fd9d98e281ebf9d25a81081bffe052cd8a253aeeebddcb7f306153279b"
     },
     "langsmith/trace-claude-code.md": {
       "bytes": 12090,
@@ -15101,13 +15146,13 @@
       "upstream_sha256": "f737aa67d9b26a138c5dc6cde6a880a48338e68d4ef58c11f19c035b1e404f54"
     },
     "langsmith/use-tools.md": {
-      "bytes": 7990,
+      "bytes": 7933,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/langsmith/use-tools.md",
-      "sha256": "a1a46fa40fb9f2a4f11df6ca677664a290327352fdd09b17d402034fb8240dde",
+      "sha256": "54799394b16c81fa20ea8282e7b7e586079433ab72eb196644e3e6c031d002f2",
       "source": "https://docs.langchain.com/langsmith/use-tools",
-      "upstream_bytes": 8435,
-      "upstream_sha256": "cf7902c5fa76b4b40992666b3bd8cd4e82683e48ae1294a43432848173e68bca"
+      "upstream_bytes": 8378,
+      "upstream_sha256": "f0e660ae003278dbb86f8c94aa5a33d7d4b3bc30e2cd5235e9ad35478fbf9a3f"
     },
     "langsmith/use-webhooks.md": {
       "bytes": 11977,
@@ -15191,13 +15236,13 @@
       "upstream_sha256": "d2236e2b845ab644c390a893c7b9d46126c723ddd1d082bb8d39c877bae0d861"
     },
     "migrate/langchain-mcp-adapters.md": {
-      "bytes": 21468,
+      "bytes": 23654,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/migrate/langchain-mcp-adapters.md",
-      "sha256": "e6188da03bdfc21337a2e9f02e61874404907f1a28ae1b69f8dc6665791092a9",
+      "sha256": "8f77c78cd3114bdd1c244272f3189d1dccb24b92ab84a7a5abd4e565529a3967",
       "source": "https://docs.langchain.com/oss/python/migrate/langchain-mcp-adapters",
-      "upstream_bytes": 22296,
-      "upstream_sha256": "fb72306eb447aaae5ef9cc6bd84f461e306b957bcf1d03b28b123e18e6a58dfc"
+      "upstream_bytes": 24664,
+      "upstream_sha256": "18bbb6cfd8393afd2444713ea8106394c967c298550292f37f67e5fa2baa4c4b"
     },
     "migrate/langchain-v1.md": {
       "bytes": 38232,
@@ -15209,13 +15254,13 @@
       "upstream_sha256": "329e1c27270f51e3982d16109cbe08335e5bbf7e4a4403f7540b382d227aaeb7"
     },
     "migrate/langgraph-supervisor.md": {
-      "bytes": 12806,
+      "bytes": 15689,
       "content_source": "page-markdown",
       "resolved_markdown": "https://docs.langchain.com/oss/python/migrate/langgraph-supervisor.md",
-      "sha256": "0070201ee65eda3068cf21d227c808501829a4f9b001132ca77604767f77b846",
+      "sha256": "debcef9d97fc5fb9534585b8e2bd5d56272d19b3e275ae790568b50682e67d09",
       "source": "https://docs.langchain.com/oss/python/migrate/langgraph-supervisor",
-      "upstream_bytes": 13660,
-      "upstream_sha256": "b36a2f0d9dc42619896604972d6b8b07cf00d1ac15d9e1c0853f5302df1ffb6f"
+      "upstream_bytes": 16775,
+      "upstream_sha256": "78404078a9796b1cc083c597f108584b625dde61b5878b6892e2749482e3a0f7"
     },
     "migrate/langgraph-v1.md": {
       "bytes": 7229,
@@ -15358,8 +15403,8 @@
       "resolved_markdown": "https://docs.langchain.com/oss/python/releases/changelog.md",
       "sha256": "10c699dbe0def8cea11ee793d8a5187c46bcc6b471f18259f9412e768b11a218",
       "source": "https://docs.langchain.com/oss/python/releases",
-      "upstream_bytes": 24181,
-      "upstream_sha256": "c4b245e4ed36e707702285a2e816d81da411e6642081642ecabc51b3b41e6d12"
+      "upstream_bytes": 24191,
+      "upstream_sha256": "49c535a354c60a1107880c3aaaf53d552f2007bf2cbe308e9ec587ea16ef9b70"
     },
     "releases/changelog.md": {
       "bytes": 21575,
@@ -15367,8 +15412,8 @@
       "resolved_markdown": "https://docs.langchain.com/oss/python/releases/changelog.md",
       "sha256": "4764cb193d80d71b66954fc6e25f3c7e9ee506dfa592137578f780b5166a2c3e",
       "source": "https://docs.langchain.com/oss/python/releases/changelog",
-      "upstream_bytes": 24181,
-      "upstream_sha256": "c4b245e4ed36e707702285a2e816d81da411e6642081642ecabc51b3b41e6d12"
+      "upstream_bytes": 24191,
+      "upstream_sha256": "49c535a354c60a1107880c3aaaf53d552f2007bf2cbe308e9ec587ea16ef9b70"
     },
     "releases/langchain-v1.md": {
       "bytes": 17168,
@@ -15408,9 +15453,9 @@
     }
   },
   "generated_fragment_alias_count": 122,
-  "llms_full_page_count": 1163,
+  "llms_full_page_count": 1164,
   "normalization_warnings": {},
-  "page_count": 1711,
+  "page_count": 1716,
   "schema_version": 3,
   "source": "https://docs.langchain.com"
 }

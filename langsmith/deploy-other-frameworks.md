@@ -2,6 +2,8 @@
 
 > Deploy agents built with Claude Agent SDK, Strands, CrewAI, AutoGen, and other frameworks to LangSmith Deployment.
 
+This guide shows you how to use [Functional API](../langgraph/functional-api.md) to deploy a [Strands Agent](https://strandsagents.com/docs/) on [LangSmith Deployment](deployment.md) and set up tracing for [LangSmith Observability](observability.md). You can follow the same approach with other frameworks like CrewAI, AutoGen, Google ADK.
+
 LangSmith Deployment runs any framework. For agents not built on Deep Agents, LangChain, or LangGraph, deploy using either the [`deployments-wrap-sdk`](https://pypi.org/project/deployments-wrap-sdk/) package (Google ADK) or the [LangGraph Functional API](../langgraph/functional-api.md) (Claude Agent SDK, Strands, CrewAI, AutoGen, and other libraries).
 
 > [!TIP]
@@ -57,7 +59,7 @@ pip install "langsmith[claude-agent-sdk]" langgraph "langgraph-cli[inmem]"
 Set `ANTHROPIC_API_KEY` in your environment. For an Anthropic API key, refer to the [Claude console](https://claude.ai/login).
 
 #### Strands Agents
-For [Strands Agents](https://strandsagents.com/latest/documentation/docs/):
+For [Strands Agents](https://strandsagents.com/docs/):
 
 ```bash
 pip install strands-agents strands-agents-tools langgraph "langsmith[strands-agents]" "langgraph-cli[inmem]"

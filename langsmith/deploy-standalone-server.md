@@ -50,7 +50,7 @@ This option gives you full control over scaling, deployment, and CI/CD pipelines
 1. Use the [LangGraph CLI](cli.md) to [test your application locally](local-dev-testing.md).
 2. Use the [LangGraph CLI](cli.md) to build a Docker image (i.e. `langgraph build`).
 3. The following environment variables are needed for a data plane deployment.
-4. `REDIS_URI`: Connection details to a Redis instance. Redis will be used as a pub-sub broker to enable streaming real time output from background runs. The value of `REDIS_URI` must be a valid [Redis connection URI](https://redis-py.readthedocs.io/en/stable/connections.html#redis.Redis.from_url).
+4. `REDIS_URI`: Connection details to a Redis instance. Redis will be used as a pub-sub broker to enable streaming real time output from background runs. The value of `REDIS_URI` must be a valid [Redis connection URI](https://redis.readthedocs.io/en/stable/connections.html#redis.Redis.from_url).
 
 > [!NOTE]
 >    **Shared Redis Instance**

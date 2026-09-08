@@ -49,7 +49,7 @@ or a High-Availability setup with Replication and Redis Sentinels.
 #### Redis standalone connection url
 
 For standalone `Redis` server, the official redis connection url formats can be used as describe in the python redis modules
-"from\_url()" method [Redis.from\_url](https://redis-py.readthedocs.io/en/stable/connections.html#redis.Redis.from_url)
+"from\_url()" method [Redis.from\_url](https://redis.readthedocs.io/en/stable/connections.html#redis.Redis.from_url)
 
 Example: `redis_url = "redis://:secret-pass@localhost:6379/0"`
 

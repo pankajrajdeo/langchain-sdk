@@ -81,7 +81,7 @@ Some models provide control over which tools are called. To configure this:
 2. Navigate to the **Tool Choice Setting** tab.
 3. Select your tool choice.
 
-To understand the available tool choice options, check the documentation for your specific provider. For example, [OpenAI's documentation on tool choice](https://platform.openai.com/docs/guides/function-calling/function-calling-behavior?api-mode=responses#tool-choice).
+To understand the available tool choice options, check the documentation for your specific provider. For example, [OpenAI's documentation on tool choice](https://platform.openai.com/docs/guides/function-calling).
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/DLQJsqCmBpQwR_BQ/langsmith/images/tool-choice-light.png?fit=max&auto=format&n=DLQJsqCmBpQwR_BQ&q=85&s=d617d46d139efe842b8fc630db4d5318" alt="Select tools from the Tool Choice Settings tab." width="1732" height="1156" data-path="langsmith/images/tool-choice-light.png" />
 

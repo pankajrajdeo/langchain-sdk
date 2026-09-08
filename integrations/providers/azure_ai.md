@@ -114,7 +114,7 @@ See a [usage example](../vectorstores/azure_cosmos_db_no_sql.md).
 
 ### Azure CosmosDB mongo vCore vector search
 
-> [Azure CosmosDB Mongo vCore](https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/) architecture makes
+> [Azure CosmosDB Mongo vCore](https://learn.microsoft.com/en-us/azure/documentdb/) architecture makes
 > it easy to create a database with full native MongoDB support. You can apply your MongoDB experience and continue
 > to use your favorite MongoDB drivers, SDKs, and tools by pointing your application to the API for MongoDB (vCore)
 > cluster's connection string.

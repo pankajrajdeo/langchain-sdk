@@ -1,9 +1,9 @@
-# Query threads
+# Query thread stats
 
-> Query threads within a project (session), with cursor-based pagination.
-Returns threads matching the given time range and optional filters.
+> GET with body payload — no resources created. Returns aggregate statistics for threads in a tracing project.
+The response includes the thread counts, run counts, latency percentiles, rates, token totals, and cost totals requested in `select`.
 
-Self-hosted deployments require LangSmith `v0.16` or later.
+Self-hosted deployments require LangSmith `v0.17` or later.
 
 ## OpenAPI
 
@@ -162,43 +162,35 @@ tags:
     x-hidden: true
   - name: fleet users
 paths:
-  /api/v2/threads/query:
+  /api/v2/threads/stats:
     post:
       tags:
         - threads
-      summary: Query threads
-      description: |-
-        Query threads within a project (session), with cursor-based pagination.
-        Returns threads matching the given time range and optional filters.
+      summary: Query thread stats
+      description: >-
+        GET with body payload — no resources created. Returns aggregate
+        statistics for threads in a tracing project.
 
-        Self-hosted deployments require LangSmith `v0.16` or later.
-      parameters:
-        - description: application/json or text/event-stream
-          name: Accept
-          in: header
-          schema:
-            type: string
+        The response includes the thread counts, run counts, latency
+        percentiles, rates, token totals, and cost totals requested in `select`.
+
+        Self-hosted deployments require LangSmith `v0.17` or later.
+      parameters: []
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/threads.QueryThreadsRequestBody'
+              $ref: '#/components/schemas/threads.QueryThreadStatsRequestBody'
       responses:
         '200':
-          description: items and pagination
+          description: aggregate thread statistics
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/threads.QueryThreadsResponseBody'
+                $ref: '#/components/schemas/threads.QueryThreadStatsResponseBody'
         '400':
           description: bad request (malformed JSON or invalid parameters)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '401':
-          description: missing or invalid authentication
           content:
             application/json:
               schema:
@@ -221,29 +213,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/shared.ProblemDetails'
-        '500':
-          description: internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
         '501':
-          description: >-
-            V2 filter syntax or thread_filters are unavailable for this
-            deployment; use legacy function-style filters without thread_filters
-            or set SMITHDB_QUERY_ENABLED=true
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '503':
-          description: service unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/shared.ProblemDetails'
-        '504':
-          description: gateway timeout or deadline exceeded
+          description: SmithDB query is unavailable for this deployment
           content:
             application/json:
               schema:
@@ -255,26 +226,12 @@ paths:
           Tenant ID: []
 components:
   schemas:
-    threads.QueryThreadsRequestBody:
+    threads.QueryThreadStatsRequestBody:
       type: object
+      required:
+        - project_id
+        - select
       properties:
-        cursor:
-          description: >-
-            `cursor` is the opaque string from a previous response's
-            `next_cursor`. Omit on the first request; pass the returned cursor
-            to fetch the next page.
-          type: string
-        filter:
-          description: >-
-            `filter` narrows which threads are returned, using a LangSmith
-            filter expression evaluated against each thread's root run.
-
-            For example: has(tags, "production") or eq(status, "error").
-
-            See
-            https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language
-            for syntax.
-          type: string
         max_start_time:
           description: >-
             `max_start_time` is the exclusive upper bound on thread activity
@@ -288,80 +245,147 @@ components:
             omitted.
           type: string
           format: date-time
-        page_size:
-          description: >-
-            `page_size` is the maximum number of threads to return in this
-            response. Defaults to 20 when omitted; must be between 1 and 100
-            inclusive when set. The response may contain fewer threads than
-            `page_size` even when `next_cursor` is non-null.
-          type: integer
-          default: 20
-          maximum: 100
-          minimum: 1
-          example: 20
         project_id:
           description: '`project_id` is the tracing project UUID.'
           type: string
           format: uuid
           example: 0190a1b2-c3d4-7ef0-a5b6-6ea3a82e9328
+        select:
+          description: >-
+            `select` lists the aggregate statistics to compute and return. At
+            least one value is required.
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/threads.ThreadStatsSelectField'
+          example:
+            - THREAD_COUNT
+            - TRACE_COUNT
+            - TOTAL_TOKENS
+            - TOTAL_COST
         thread_filter:
           description: >-
-            `thread_filter` narrows results using a LangSmith filter expression
-            evaluated against each complete thread summary.
-
-            Self-hosted deployments require LangSmith v0.17 or later;
-            unsupported deployments return 501.
-
-            See
-            https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language
-            for syntax.
+            `thread_filter` narrows eligible threads using a LangSmith filter
+            expression evaluated against the complete thread summary.
           type: string
           example: gte(turn_count, 3)
         trace_filter:
           description: >-
-            `trace_filter` narrows results to threads containing at least one
-            trace whose root run matches this LangSmith filter expression.
-
-            Trace-level aggregate fields are evaluated using the complete trace
-            summary.
-
-            Self-hosted deployments require LangSmith v0.17 or later;
-            unsupported deployments return 501.
-
-            See
-            https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language
-            for syntax.
+            `trace_filter` narrows eligible threads to those containing a trace
+            whose root run matches this LangSmith filter expression.
           type: string
           example: eq(status, "error")
         tree_filter:
           description: >-
-            `tree_filter` narrows results to threads containing at least one
-            trace with a matching run anywhere in its run tree.
-
-            Self-hosted deployments require LangSmith v0.17 or later;
-            unsupported deployments return 501.
-
-            See
-            https://docs.langchain.com/langsmith/trace-query-syntax#filter-query-language
-            for syntax.
+            `tree_filter` narrows eligible threads to those containing a
+            matching run anywhere in a trace tree.
           type: string
           example: has(tags, "production")
-    threads.QueryThreadsResponseBody:
+    threads.QueryThreadStatsResponseBody:
       type: object
       properties:
-        items:
+        completion_cost:
           description: >-
-            `items` is the page of thread summaries, sorted by the thread's most
-            recent activity.
-          type: array
-          items:
-            $ref: '#/components/schemas/threads.ThreadListItem'
-        next_cursor:
+            `completion_cost` is the completion cost across matching traces in
+            USD.
+          type: number
+        completion_cost_details:
           description: >-
-            `next_cursor` is the opaque cursor to pass as `cursor` on the next
-            request. Null on the final page.
-          type: string
-          example: eyJydW5zX2N1cnNvciI6Imx0KGN1cnNvciwiLi4uIikifQ==
+            `completion_cost_details` contains completion-cost totals by
+            category.
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        completion_token_details:
+          description: >-
+            `completion_token_details` contains completion-token totals by
+            category.
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        completion_tokens:
+          description: >-
+            `completion_tokens` is the sum of completion tokens across matching
+            traces.
+          type: integer
+        error_rate:
+          description: >-
+            `error_rate` is the fraction of matching traces that contain an
+            error.
+          type: number
+        first_token_p50_seconds:
+          description: >-
+            `first_token_p50_seconds` is the approximate median time to first
+            token in seconds. Populated when `FIRST_TOKEN_P50` is selected.
+          type: number
+        first_token_p99_seconds:
+          description: >-
+            `first_token_p99_seconds` is the approximate p99 time to first token
+            in seconds. Populated when `FIRST_TOKEN_P99` is selected.
+          type: number
+        latency_p50_seconds:
+          description: >-
+            `latency_p50_seconds` is the approximate median trace latency in
+            seconds. Populated when `LATENCY_P50` is selected.
+          type: number
+        latency_p99_seconds:
+          description: >-
+            `latency_p99_seconds` is the approximate p99 trace latency in
+            seconds. Populated when `LATENCY_P99` is selected.
+          type: number
+        median_tokens:
+          description: >-
+            `median_tokens` is the approximate median of total tokens across
+            matching traces. Populated when `MEDIAN_TOKENS` is selected.
+          type: integer
+        prompt_cost:
+          description: '`prompt_cost` is the prompt cost across matching traces in USD.'
+          type: number
+        prompt_cost_details:
+          description: '`prompt_cost_details` contains prompt-cost totals by category.'
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+        prompt_token_details:
+          description: '`prompt_token_details` contains prompt-token totals by category.'
+          type: object
+          additionalProperties:
+            type: integer
+            format: int64
+        prompt_tokens:
+          description: '`prompt_tokens` is the sum of prompt tokens across matching traces.'
+          type: integer
+        streaming_rate:
+          description: >-
+            `streaming_rate` is the fraction of completed matching traces that
+            streamed tokens.
+          type: number
+        thread_count:
+          description: >-
+            `thread_count` is the number of distinct threads matching the query.
+            Populated when `THREAD_COUNT` is selected.
+          type: integer
+        thread_feedback_stats:
+          description: >-
+            `thread_feedback_stats` contains aggregate thread-level feedback
+            statistics keyed by feedback key. Populated when
+            `THREAD_FEEDBACK_STATS` is selected.
+          allOf:
+            - $ref: '#/components/schemas/query.RunFeedbackStats'
+        total_cost:
+          description: '`total_cost` is the total cost across matching traces in USD.'
+          type: number
+        total_tokens:
+          description: '`total_tokens` is the sum of all tokens across matching traces.'
+          type: integer
+        trace_count:
+          description: >-
+            `trace_count` is the number of traces in the matching threads.
+            Populated when `TRACE_COUNT` is selected.
+          type: integer
     shared.ProblemDetails:
       description: RFC 7807 problem details returned on V2 API errors.
       type: object
@@ -393,133 +417,54 @@ components:
           type: string
         type:
           type: string
-    threads.ThreadListItem:
+    threads.ThreadStatsSelectField:
+      type: string
+      enum:
+        - THREAD_COUNT
+        - TRACE_COUNT
+        - TOTAL_TOKENS
+        - TOTAL_COST
+        - ERROR_RATE
+        - STREAMING_RATE
+        - LATENCY_P50
+        - LATENCY_P99
+        - MEDIAN_TOKENS
+        - FIRST_TOKEN_P50
+        - FIRST_TOKEN_P99
+        - PROMPT_TOKENS
+        - COMPLETION_TOKENS
+        - PROMPT_COST
+        - COMPLETION_COST
+        - PROMPT_TOKEN_DETAILS
+        - COMPLETION_TOKEN_DETAILS
+        - PROMPT_COST_DETAILS
+        - COMPLETION_COST_DETAILS
+        - THREAD_FEEDBACK_STATS
+      x-enum-varnames:
+        - ThreadStatsSelectThreadCount
+        - ThreadStatsSelectTraceCount
+        - ThreadStatsSelectTotalTokens
+        - ThreadStatsSelectTotalCost
+        - ThreadStatsSelectErrorRate
+        - ThreadStatsSelectStreamingRate
+        - ThreadStatsSelectLatencyP50
+        - ThreadStatsSelectLatencyP99
+        - ThreadStatsSelectMedianTokens
+        - ThreadStatsSelectFirstTokenP50
+        - ThreadStatsSelectFirstTokenP99
+        - ThreadStatsSelectPromptTokens
+        - ThreadStatsSelectCompletionTokens
+        - ThreadStatsSelectPromptCost
+        - ThreadStatsSelectCompletionCost
+        - ThreadStatsSelectPromptTokenDetails
+        - ThreadStatsSelectCompletionTokenDetails
+        - ThreadStatsSelectPromptCostDetails
+        - ThreadStatsSelectCompletionCostDetails
+        - ThreadStatsSelectThreadFeedbackStats
+    query.RunFeedbackStats:
       type: object
-      properties:
-        count:
-          description: >-
-            `count` is how many root traces (conversation turns) fall in this
-            thread for the query time range.
-          type: integer
-          example: 3
-        feedback_stats:
-          description: >-
-            `feedback_stats` is the aggregated feedback across traces in the
-            thread, keyed by feedback key; shape matches `feedback_stats` on a
-            single run.
-          allOf:
-            - $ref: '#/components/schemas/query.RunFeedbackStats'
-        first_inputs:
-          description: >-
-            `first_inputs` is a truncated preview of inputs from the earliest
-            trace in the thread for the query window.
-          type: string
-        first_trace_id:
-          description: >-
-            `first_trace_id` is the root trace UUID for the chronologically
-            first trace in the query time window.
-          type: string
-          format: uuid
-          example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
-        last_error:
-          description: >-
-            `last_error` is a short error summary from the most recent failing
-            trace in the thread. Absent when there is no error in the window.
-          type: string
-        last_outputs:
-          description: >-
-            `last_outputs` is a truncated preview of outputs from the latest
-            trace in the thread for the query window.
-          type: string
-        last_trace_id:
-          description: >-
-            `last_trace_id` is the root trace UUID for the chronologically last
-            trace in the query time window.
-          type: string
-          format: uuid
-          example: 0190a1b2-c3d4-7ef0-a5b6-6ea3a82e9328
-        latency_p50:
-          description: >-
-            `latency_p50` is the approximate median end-to-end latency of traces
-            in the thread, in seconds.
-          type: number
-          example: 0.15
-        latency_p99:
-          description: >-
-            `latency_p99` is the approximate 99th percentile end-to-end latency
-            of traces in the thread, in seconds.
-          type: number
-          example: 0.42
-        max_start_time:
-          description: >-
-            `max_start_time` is the latest trace start time in the thread
-            (RFC3339 date-time).
-          type: string
-          format: date-time
-          example: '2025-01-15T12:05:00.000Z'
-        min_start_time:
-          description: >-
-            `min_start_time` is the earliest trace start time in the thread
-            (RFC3339 date-time).
-          type: string
-          format: date-time
-          example: '2025-01-15T12:00:00.000Z'
-        num_errored_turns:
-          description: >-
-            `num_errored_turns` is the count of root traces in the thread
-            (within the query window) whose status was an error.
-          type: integer
-          example: 1
-        start_time:
-          description: >-
-            `start_time` is a reference start time for this row (RFC3339
-            date-time), such as for sorting.
-          type: string
-          format: date-time
-          example: '2025-01-15T12:00:00.000Z'
-        thread_id:
-          description: >-
-            `thread_id` identifies this conversation thread within the project
-            from the request body `project_id`.
-          type: string
-          format: uuid
-          example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9327
-        total_cost:
-          description: '`total_cost` is the sum of estimated USD cost across those traces.'
-          type: number
-          example: 0.045
-        total_cost_details:
-          description: >-
-            `total_cost_details` sums per-category estimated USD cost across
-            traces in the thread. Keys mirror `total_token_details`.
-
-            Example: `{"cache_read": 0.012, "reasoning": 0.008}`.
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-        total_token_details:
-          description: >-
-            `total_token_details` sums per-category token counts across traces
-            in the thread. Keys are model-specific category names (for example
-            `cache_read`, `cache_write`, `reasoning`, `audio`).
-
-            Example: `{"cache_read": 400, "reasoning": 120}`.
-          type: object
-          additionalProperties:
-            type: integer
-            format: int64
-        total_tokens:
-          description: '`total_tokens` is the sum of token usage across those traces.'
-          type: integer
-          example: 450
-        trace_id:
-          description: >-
-            `trace_id` is a representative root trace UUID when the summary
-            includes one, for example for deep links.
-          type: string
-          format: uuid
-          example: 018e4c7e-a9fb-7ef0-a5b6-6ea3a82e9328
+      additionalProperties:
+        $ref: '#/components/schemas/query.RunFeedbackStat'
     shared.ParseErrorDetails:
       description: Structured fields describing an adapter parse failure.
       type: object
@@ -533,10 +478,6 @@ components:
           type: string
         run_id:
           type: string
-    query.RunFeedbackStats:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/query.RunFeedbackStat'
     query.RunFeedbackStat:
       type: object
       properties:

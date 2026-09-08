@@ -1316,7 +1316,7 @@ Importantly, when using a [checkpointer](persistence.md), results from successfu
 If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
 
 1. You can write regular python code within your node to catch and handle exceptions.
-2. You can set a **[retry\_policy](https://langchain-ai.github.io/langgraph/reference/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
 
 Together, these let you perform parallel execution and fully control exception handling.
 
@@ -2309,7 +2309,7 @@ If you are using tools that update state via [`Command`](https://reference.langc
 
 Here we demonstrate how to visualize the graphs you create.
 
-You can visualize any arbitrary [Graph](https://langchain-ai.github.io/langgraph/reference/graphs/), including [StateGraph](https://langchain-ai.github.io/langgraph/reference/graphs/#langgraph.graph.state.StateGraph).
+You can visualize any arbitrary [Graph](https://reference.langchain.com/python/langgraph/graphs/), including [`StateGraph`](https://reference.langchain.com/python/langgraph/graph/state/StateGraph).
 
 Let's have some fun by drawing fractals :).
 

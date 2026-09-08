@@ -501,6 +501,10 @@ const message = ui.push({ name: "weather", props: { city: "London" } });
 ui.delete(message.id);
 ```
 
+## Learn more
+
+* [JS/TS SDK Reference](https://reference.langchain.com/javascript/langchain-langgraph-sdk/)
+
 ***
 
 > [!NOTE]

@@ -875,7 +875,7 @@ components:
           type: object
           additionalProperties:
             type: number
-            format: float64
+            format: double
     query.RunCompletionTokenDetails:
       type: object
       properties:
@@ -925,7 +925,7 @@ components:
           type: object
           additionalProperties:
             type: number
-            format: float64
+            format: double
     query.RunPromptTokenDetails:
       type: object
       properties:

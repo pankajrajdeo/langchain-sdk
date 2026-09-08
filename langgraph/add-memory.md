@@ -150,7 +150,7 @@ pip install -U pymongo langgraph langgraph-checkpoint-mongodb
 
 > [!TIP]
 > **Setup**
-> To use the [MongoDB checkpointer](https://pypi.org/project/langgraph-checkpoint-mongodb/), you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one.
+> To use the [MongoDB checkpointer](https://pypi.org/project/langgraph-checkpoint-mongodb/), you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](../integrations/memory/mongodb-short-term-memory.md).
 
 #### Sync
 ```python

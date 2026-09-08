@@ -52,6 +52,13 @@ MONGODB_URI = "mongodb://localhost:27017/"
 
 ## Available integrations
 
+### Short-term and long-term memory
+
+Use MongoDB as a persistent backend for agent memory:
+
+* [Short-term memory with MongoDB Atlas](../memory/mongodb-short-term-memory.md) (`MongoDBSaver` checkpointer)
+* [Long-term memory with MongoDB Atlas](../memory/mongodb-long-term-memory.md) (`MongoDBStore`)
+
 ### Model cache
 
 `MongoDBCache` stores LLM responses in MongoDB without requiring a search index or an Atlas deployment. It works with both self-managed and Atlas deployments.
@@ -64,13 +71,11 @@ from langchain_mongodb.cache import MongoDBCache
 
 The following integrations require MongoDB Atlas. You can use MongoDB Atlas with LangChain for vector search, retrieval, and semantic caching:
 
-* **Vector store**: `MongoDBAtlasVectorSearch` stores embeddings in MongoDB and supports semantic search, filtered search, and hybrid search (vector + full-text via BM25).
-* **Retrievers**: `MongoDBAtlasFullTextSearchRetriever` and `MongoDBAtlasHybridSearchRetriever` support full-text and combined vector + keyword retrieval workflows.
+* **Vector store**: `MongoDBAtlasVectorSearch` stores embeddings in MongoDB and supports semantic search, filtered search, and hybrid search (vector + full-text via BM25). See the [MongoDB Atlas vector store](../vectorstores/mongodb_atlas.md) guide.
+* **Retrievers**: `MongoDBAtlasFullTextSearchRetriever` and `MongoDBAtlasHybridSearchRetriever` support full-text and combined vector + keyword retrieval. See the [MongoDB Atlas retriever](../retrievers/mongodb_atlas.md) guide.
 * **Semantic cache**: `MongoDBAtlasSemanticCache` retrieves cached LLM responses based on semantic similarity, backed by Atlas Vector Search.
 
 See the [MongoDB Atlas integrations](mongodb_atlas.md) page for imports and usage examples.
-
-For a detailed walkthrough of vector store setup, index creation, semantic search, and more, see the [MongoDB Atlas vector store](../vectorstores/mongodb_atlas.md) guide.
 
 ***
 

@@ -3,7 +3,7 @@
 > [!NOTE]
 > [langgraph](https://langchain-ai.github.io/langgraph/)
 
-`langgraph` is a library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows. Evaluating `langgraph` graphs can be challenging because a single invocation can involve many LLM calls, and which LLM calls are made may depend on the outputs of preceding calls. In this guide we will focus on the mechanics of how to pass graphs and graph nodes to `evaluate()` / `aevaluate()`. For evaluation techniques and best practices when building agents head to the [langgraph docs](https://langchain-ai.github.io/langgraph/tutorials/#evaluation).
+`langgraph` is a library for building stateful, multi-actor applications with LLMs, used to create agent and multi-agent workflows. Evaluating `langgraph` graphs can be challenging because a single invocation can involve many LLM calls, and which LLM calls are made may depend on the outputs of preceding calls. In this guide we will focus on the mechanics of how to pass graphs and graph nodes to `evaluate()` / `aevaluate()`. For evaluation techniques and best practices when building agents head to the [LangSmith evaluation docs](evaluation.md).
 
 ## End-to-end evaluations
 
@@ -271,7 +271,7 @@ async def main():
 
 ## Related
 
-* [`langgraph` evaluation docs](https://langchain-ai.github.io/langgraph/tutorials/#evaluation)
+* [`langgraph` evaluation docs](evaluation.md)
 
 ## Reference code
 

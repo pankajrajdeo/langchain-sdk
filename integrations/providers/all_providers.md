@@ -118,6 +118,9 @@ Claude models for advanced reasoning and conversation.
 #### [any-llm](anyllm.md)
 Unified interface for OpenAI, Anthropic, Google, and local models.
 
+#### [AnyAPI](https://github.com/getanyapi-com/integrations/tree/main/langchain-anyapi)
+Search a catalog of data and scraping APIs, read an API schema and its USD price, then run it.
+
 #### [Apertis](https://docs.apertis.ai)
 OpenAI-compatible API providing access to multiple LLMs.
 
@@ -156,6 +159,9 @@ JMAP inboxes for AI agents with proof-of-work signup and tools for registration,
 
 #### [Attenu Guard](https://attenu.io/docs/example-langgraph/)
 Per-agent tool-call and subagent permission enforcement with a hash-chained audit log.
+
+#### [Ausca](https://github.com/auscahq/ausca/tree/main/python/langchain-ausca)
+Pay-per-call LangChain tools over x402 for OCR, analysis, transcription, browsers, and agent inboxes.
 
 #### [Auxen](https://auxen.ai)
 Dedicated per-customer LLM endpoints with an OpenAI-compatible API.
@@ -325,6 +331,9 @@ Keyless DEX market-data API from CoinPaprika: token search, market data, pool di
 #### [Diffbot](https://github.com/diffbot/langchain-diffbot)
 Structured web knowledge for developers and LLM applications.
 
+#### [DNS Doctor](https://github.com/dnsdoctor/langchain-dnsdoctor)
+Deterministic DNS and email-authentication checks: SPF, DMARC, DKIM, propagation, and blacklist.
+
 #### [DomPruner](https://github.com/dong7812/dompruner-py)
 DOM AST pruning that loads web pages as compact Markdown with no API key.
 
@@ -474,6 +483,9 @@ Open-source long-term memory engine for AI agents.
 
 #### [HippoDid](https://docs.hippodid.com/guides/langchain)
 Persistent, structured character memory for AI agents.
+
+#### [Hubris](https://hubris.pw/docs/integrations/langchain)
+Ruble-billed OpenAI-compatible LLM gateway with 400+ models.
 
 #### [HuangtingFlux](https://huangtingflux.com/integrations/langchain)
 Remote MCP server that reduces agent token usage via a three-stage SOP workflow.
@@ -637,6 +649,9 @@ AI text-to-video, image-to-video, and image generation tools behind one API key.
 #### [MariaDB](https://mariadb.com/docs/connectors/other/langchain-mariadb/api-reference)
 Open-source relational database management.
 
+#### [MaskFlow](https://github.com/maskflow/maskflow/tree/main/packages/maskflow-langchain)
+Reversible PII anonymizer / deanonymizer for LangChain, a drop-in for the Presidio anonymizer. Indian identifiers included.
+
 #### [Memgraph](memgraph.md)
 Real-time graph database platform.
 
@@ -715,7 +730,7 @@ Search and index API for giving agents reliable context.
 #### [NetMind](https://github.com/protagolabs/langchain-netmind)
 Decentralized AI computing network.
 
-#### [NeuralTrust](https://github.com/NeuralTrust/langchain-neuraltrust)
+#### [NeuralTrust](https://docs.neuraltrust.ai/integrations/langchain)
 TrustGuard middleware that allows, blocks, reports, or transforms agent input, model output, and tool traffic.
 
 #### [Neuralwatt](https://neuralwatt.com)
@@ -991,6 +1006,9 @@ Unified search API across Google, Bing, Baidu, YouTube, and more.
 #### [seekrit](https://seekrit.dev/docs)
 Zero-knowledge secrets manager. Scopes which credentials a model call or a given tool call may use.
 
+#### [SereneDB](https://serenedb.com/docs/clients/langchain-serenedb)
+PostgreSQL-compatible vector database with native ANN and hybrid search.
+
 #### [SerpApi](https://serpapi.github.io/serpapi-search-tools-python/docs/sdk-examples/langchain.html)
 Structured search tools for web, news, maps, images, shopping, video, and travel.
 
@@ -1165,6 +1183,9 @@ AI cost metering, budget alerts, and spending caps for LangChain LLM calls.
 #### [Toolbox LangChain](toolbox.md)
 Extended toolkit for LangChain applications.
 
+#### [Traccia](https://traccia.ai/docs/integrations/langchain/)
+AI Agent Control Plane.
+
 #### [TrueFoundry](truefoundry.md)
 ML platform for model deployment.
 
@@ -1182,6 +1203,9 @@ Governed OpenAI-compatible endpoint for model access, policy checks, and usage a
 
 #### [TypeDB](https://typedb.com/docs)
 Strongly-typed database for complex, relational data and knowledge graph applications.
+
+#### [TypesenseVectorStore](https://github.com/typesense/langchain-typesense#readme)
+Vector store integration for Typesense with vector and hybrid search, metadata filtering, scoring, MMR, and sync & async APIs.
 
 #### [UnDatasIO](https://undatas.io)
 Data extraction and processing platform.

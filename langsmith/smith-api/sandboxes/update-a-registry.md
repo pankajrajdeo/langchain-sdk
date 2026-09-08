@@ -215,6 +215,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/sandboxes.ErrorResponse'
+        '501':
+          description: AWS IAM role authentication is not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sandboxes.ErrorResponse'
       security:
         - API Key: []
         - Tenant ID: []
@@ -224,6 +230,13 @@ components:
     sandboxes.UpdateRegistryPayload:
       type: object
       properties:
+        auth_type:
+          type: string
+          enum:
+            - DOCKER_CONFIG
+            - AWS_ROLE
+        aws_role_arn:
+          type: string
         name:
           type: string
         password:
@@ -235,6 +248,13 @@ components:
     sandboxes.RegistryResponse:
       type: object
       properties:
+        auth_type:
+          type: string
+          enum:
+            - DOCKER_CONFIG
+            - AWS_ROLE
+        aws_role_arn:
+          type: string
         created_at:
           type: string
         created_by:

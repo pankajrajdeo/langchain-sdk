@@ -30,6 +30,8 @@ from langchain_mongodb import MongoDBAtlasVectorSearch
 
 ## Retrievers
 
+See a [usage example](../retrievers/mongodb_atlas.md).
+
 ### Full text search retriever
 
 > `Hybrid Search Retriever` performs full-text searches using

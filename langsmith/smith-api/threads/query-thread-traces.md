@@ -208,18 +208,18 @@ paths:
           name: page_size
           in: query
           schema:
-            minimum: 1
-            default: 20
             type: integer
+            minimum: 1
             maximum: 100
+            default: 20
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'
           name: project_id
           in: query
           required: true
           schema:
-            format: uuid
             type: string
+            format: uuid
             title: Project Id
         - example:
             - NAME
@@ -552,7 +552,7 @@ components:
           type: object
           additionalProperties:
             type: number
-            format: float64
+            format: double
     query.RunCompletionTokenDetails:
       type: object
       properties:
@@ -570,7 +570,7 @@ components:
           type: object
           additionalProperties:
             type: number
-            format: float64
+            format: double
     query.RunPromptTokenDetails:
       type: object
       properties:

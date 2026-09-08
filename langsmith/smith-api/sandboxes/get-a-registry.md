@@ -206,6 +206,13 @@ components:
     sandboxes.RegistryResponse:
       type: object
       properties:
+        auth_type:
+          type: string
+          enum:
+            - DOCKER_CONFIG
+            - AWS_ROLE
+        aws_role_arn:
+          type: string
         created_at:
           type: string
         created_by:

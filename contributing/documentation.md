@@ -25,7 +25,44 @@ make dev
 This starts a development server with hot reload at `http://localhost:3000`. Edit files in `src/` and see changes immediately.
 
 > [!TIP]
-> **Using an AI coding agent?** Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the "Copy page" button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+> **Using an AI coding agent?**
+>
+> * Install the [LangChain Docs MCP servers](https://docs.langchain.com/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+>
+> > **Prompt:** Connect LangChain docs MCP servers
+>     Connect both LangChain documentation MCP servers to my coding agent so it can look up current LangChain, LangGraph, and LangSmith docs and API reference.
+>
+>     Servers to add:
+>
+>     * `docs-langchain`: [https://docs.langchain.com/mcp](https://docs.langchain.com/mcp)
+>     * `reference-langchain`: [https://reference.langchain.com/mcp](https://reference.langchain.com/mcp)
+>
+>     Detect which agent or editor I am using (Claude Code, Cursor, Codex CLI, Claude Desktop, Deep Agents Code, VS Code, Antigravity, or another MCP-compatible client). Use the matching setup from [https://docs.langchain.com/use-these-docs.md](https://docs.langchain.com/use-these-docs.md):
+>
+>     * Claude Code: `claude mcp add --transport http` for each server (project scope by default; use `--scope user` only if I ask for global access).
+>     * Codex CLI: `codex mcp add` with each server URL.
+>     * Cursor, Deep Agents Code, VS Code, or Antigravity: merge both entries into the MCP settings JSON using the field names shown on that page for my client.
+>     * Claude Desktop: add both URLs under Settings > Connectors.
+>
+>     Do not invent alternate MCP URLs. After configuring, confirm both servers are listed and reachable.
+> * Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the **Copy page** button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+>
+> > **Prompt:** Install LangChain Skills
+>     Install LangChain Skills for my coding agent so it can perform better on LangChain, LangGraph, and Deep Agents tasks.
+>
+>     Use the Agent Skills installer from [https://github.com/langchain-ai/langchain-skills](https://github.com/langchain-ai/langchain-skills):
+>
+> ```bash
+>     npx skills add langchain-ai/langchain-skills --skill '*' --yes
+> ```
+>
+>     If I ask for a global install instead, use:
+>
+> ```bash
+>     npx skills add langchain-ai/langchain-skills --skill '*' --yes --global
+> ```
+>
+>     Detect which agent or editor I am using. If I use Claude Code and prefer the plugin path, follow the marketplace install from that repository README (`/plugin marketplace add` then `/plugin install`). Do not invent alternate skill package names or install URLs. After installing, confirm the skills are available to the agent.
 
 > [!TIP]
 > If you are having issues with you local preview, try running `mint update` to ensure you're using the latest Mintlify version.
