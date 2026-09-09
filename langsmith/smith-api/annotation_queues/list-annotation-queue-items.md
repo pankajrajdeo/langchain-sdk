@@ -217,10 +217,10 @@ paths:
           in: query
           schema:
             type: string
+            default: forward
             enum:
               - forward
               - backward
-            default: forward
             title: Direction
       responses:
         '200':

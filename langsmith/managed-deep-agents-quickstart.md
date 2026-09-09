@@ -247,6 +247,9 @@ Add a custom Tavily search tool, durable memory, and a daily schedule.
 #### [Custom tools](python/managed-deep-agents-tools.md)
 Add authored LangChain tools from your project.
 
+#### [Connections](python/managed-deep-agents-connections.md)
+Authenticate with external services, as the agent or as the caller.
+
 ***
 
 > [!NOTE]

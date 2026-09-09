@@ -211,9 +211,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Resource Id
         - description: >-
             Filter grouped results by evaluator type: 'llm' or 'code'. Only
@@ -239,9 +239,9 @@ paths:
           style: form
           explode: false
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Tag Value Id
         - description: Start of the 7-day window (YYYY-MM-DD).
           name: period_start

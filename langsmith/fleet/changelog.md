@@ -7,6 +7,17 @@ Weekly updates to [LangSmith Fleet](../fleet.md).
 > [!NOTE]
 > **Subscribe**: This changelog includes an [RSS feed](https://docs.langchain.com/langsmith/fleet-changelog/rss.xml) that can integrate with [Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack), [email](https://zapier.com/apps/email/integrations/rss/1441/send-new-rss-feed-entries-via-email), Discord bots like [Readybot](https://readybot.io/) or [RSS Feeds to Discord Bot](https://rss.app/en/bots/rssfeeds-discord-bot), and other subscription tools.
 
+## August 31-September 7, 2026
+## Fleet
+
+* Fleet now provisions agent-scoped sandboxes during agent creation and returns the sandbox ID and status in the response.
+* Repeated outbound channel actions with the same action ID return the original provider response without posting another message.
+* Fleet agent responses now include the server-generated slug for addressing agent-scoped sandboxes through the sandbox API.
+* Fleet clients can activate the sandbox referenced by a thread and receive its ready status in the response.
+* Fleet agents now support saved Databricks model configurations, using your configured workspace URL, serving endpoint, and workspace credentials. You can connect through Databricks Model Serving or AI Gateway routes.
+* Self-hosted deployments can now forward a REST caller's `X-Fleet-Forward-*` headers to the custom MCP servers an agent calls, so a policy gateway in front of those servers can see per-invocation context such as an end-user identity. Off by default; enable with `FLEET_MCP_FORWARD_CALLER_HEADERS=true`. Values are asserted by the caller and are not verified by LangSmith.
+* Streaming or awaiting a thread run through the Fleet API no longer closes the connection at a fixed deadline; the request stays open until the run finishes or the client disconnects.
+
 ## August 24-31, 2026
 ## Fleet
 

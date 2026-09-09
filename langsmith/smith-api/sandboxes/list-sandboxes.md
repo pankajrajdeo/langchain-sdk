@@ -229,9 +229,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Label
         - description: >-
             Sort column (name, status, created_at, stopped_at, idle_ttl_seconds,

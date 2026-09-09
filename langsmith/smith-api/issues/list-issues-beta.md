@@ -216,7 +216,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - 0
@@ -224,6 +223,7 @@ paths:
                 - 2
                 - 3
               type: integer
+            type: array
             title: Severity Exact
         - description: Filter by Engine activity (repeatable; OR semantics)
           name: activity
@@ -231,13 +231,13 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - fixing
                 - watching
                 - recurred
               type: string
+            type: array
             title: Activity
         - description: Filter by tag (exact match)
           name: tag

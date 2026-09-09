@@ -16,7 +16,7 @@ Use Fleet to:
 
 ## Start building
 
-#### Build with AI
+#### [Build with AI](https://smith.langchain.com/agents)
 Describe the agent you want to create and let Fleet build it, pausing at key points for your input.
 
 #### [Build from a template](quickstart.md)

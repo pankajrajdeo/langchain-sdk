@@ -18,6 +18,9 @@ Authenticate users, enforce resource-level access, and connect external OAuth2 i
 #### [Server customization](caching.md)
 Add caching, custom stores and checkpointers, lifespan hooks, middleware, custom routes, encryption, and configurable headers and logs.
 
+#### [REST API](server-api-ref.md)
+Full REST API reference for assistants, threads, runs, crons, store, A2A, MCP, and system endpoints.
+
 ## Tutorials
 
 * [Collect user feedback for Agent Server runs](agent-server-feedback.md): Attach end-user feedback to runs and traces

@@ -229,6 +229,9 @@ Marketplace of real residential Chrome sessions for AI agents.
 #### [Chroma](chroma.md)
 Open-source embedding database for AI apps.
 
+#### [ChronoVec](https://mchl-labs.github.io/chronovec/integrations/langchain)
+Versioned vector store with snapshot queries and branch/merge speculative memory for LangChain agents.
+
 #### [cloro](https://docs.cloro.dev)
 The scraper for SEO and AI SEO.
 
@@ -811,6 +814,9 @@ Cryptographic Proof-of-Time timestamps for LangChain LLM calls.
 #### [OpenZoo](https://github.com/staccDOTsol/langchain-openzoo)
 Pay-per-call OpenAI-compatible chat models via a local x402 proxy.
 
+#### [Opsen](https://opsen.dev/docs)
+[opsen](https://opsen.dev) runs agent sandboxes and proxies their model calls, so machine, model and tool spend land under one task id.
+
 #### [Oracle AI Database](oracleai.md)
 Oracle's AI and machine learning services.
 
@@ -864,6 +870,9 @@ AI-powered content moderation platform.
 
 #### [Plasmate](https://docs.plasmate.app/integration-langchain)
 Agent-native headless browser with Set of Mark (SOM) structured UI extraction.
+
+#### [Plivo](https://github.com/plivo-dev/langchain-plivo-tools)
+LangChain tools for sending SMS messages and placing voice calls through the Plivo communications APIs.
 
 #### [Play Store](https://github.com/urraf/langchain-playstore#readme)
 Google Play Store app details and user reviews retrievers for LangChain.

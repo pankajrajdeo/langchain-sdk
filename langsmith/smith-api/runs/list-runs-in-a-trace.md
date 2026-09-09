@@ -205,8 +205,8 @@ paths:
           name: max_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Max Start Time
         - description: >-
             `min_start_time` is the optional inclusive lower bound for run
@@ -215,16 +215,16 @@ paths:
           name: min_start_time
           in: query
           schema:
-            type: string
             format: date-time
+            type: string
             title: Min Start Time
         - description: '`project_id` is the UUID of the tracing project that owns the trace.'
           name: project_id
           in: query
           required: true
           schema:
-            type: string
             format: uuid
+            type: string
             title: Project Id
         - description: >-
             `selects` lists which properties to include on each returned run
@@ -235,7 +235,6 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               enum:
                 - ID
@@ -285,6 +284,7 @@ paths:
                 - FEEDBACK_STATS
                 - LS_USER_ID
               type: string
+            type: array
             title: Selects
       responses:
         '200':

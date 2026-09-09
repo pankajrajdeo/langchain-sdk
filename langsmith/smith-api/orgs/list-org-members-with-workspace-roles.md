@@ -200,9 +200,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Name Like
         - description: Glob filter on email; use * as wildcard (repeatable, matches any)
           name: email_like
@@ -210,9 +210,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Email Like
         - description: >-
             Glob filter on workspace name or ID; use * as wildcard (repeatable,
@@ -222,9 +222,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Workspace Name Like
         - description: >-
             Glob filter on organization role name; use * as wildcard
@@ -234,9 +234,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Organization Role Like
         - description: >-
             Glob filter on workspace role name; use * as wildcard (repeatable,
@@ -246,9 +246,9 @@ paths:
           style: form
           explode: true
           schema:
-            type: array
             items:
               type: string
+            type: array
             title: Workspace Role Like
       responses:
         '200':

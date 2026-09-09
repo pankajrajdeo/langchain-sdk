@@ -9,7 +9,7 @@ It is included with the `managed-deepagents` npm package.
 > [!NOTE]
 > Managed Deep Agents is in **public [beta](../release-stages.md)** and available on [LangSmith Cloud](../cloud.md) in the US region only.
 
-For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quickstart.md). For workflow guidance, see [Identity](managed-deep-agents-identity.md), [Memory](managed-deep-agents-memory.md), [Evals](managed-deep-agents-evals.md), [Custom tools](managed-deep-agents-tools.md), [Custom middleware](managed-deep-agents-middleware.md), [Sandboxes](managed-deep-agents-sandboxes.md), [Channels](managed-deep-agents-channels.md), [Schedules](managed-deep-agents-schedules.md), and [Deploy an agent](managed-deep-agents-deploy.md).
+For the fastest end-to-end path, see the [quickstart](managed-deep-agents-quickstart.md). For workflow guidance, see [Identity](managed-deep-agents-identity.md), [Memory](managed-deep-agents-memory.md), [Evals](managed-deep-agents-evals.md), [Custom tools](managed-deep-agents-tools.md), [Connections](managed-deep-agents-connections.md), [Custom middleware](managed-deep-agents-middleware.md), [Sandboxes](managed-deep-agents-sandboxes.md), [Channels](managed-deep-agents-channels.md), [Schedules](managed-deep-agents-schedules.md), and [Deploy an agent](managed-deep-agents-deploy.md).
 
 ## Install
 
@@ -69,6 +69,7 @@ The LangSmith API key authenticates the deploy. The agent's model provider also 
 | `mda build [path]`                         | Compile a project into a managed LangGraph app without deploying.            |
 | `mda evals …`                              | Initialize a Harbor workspace and continue eval authoring in a coding agent. |
 | `mda dev [path]`                           | Compile a project and run it on the local LangGraph dev server.              |
+| `mda connections …`                        | Manage authentication for tools and MCP connectors.                          |
 | `mda deploy [path]`                        | Compile, sync Context Hub context, upload, and deploy to LangSmith.          |
 | `mda channels init slack`                  | Add a Slack channel declaration to the current project.                      |
 | `mda logs [path]`                          | Tail Agent Server logs for a deployed agent.                                 |
@@ -230,6 +231,75 @@ When a sandbox is configured, `mda dev` tries the configured provider. If provid
 
 For local development, `mda dev` stages the project `.env` file into `.mda/build/.env` so LangGraph can load model provider keys and other runtime credentials.
 
+## Manage connections
+
+A connection links a managed deep agent to an external service. The credential lives in the LangSmith workspace, so it rotates without a redeploy, and a user-owned connection resolves the credential of whoever called the agent. Tools and MCP connectors resolve connections at runtime with `connections.get(...)`.
+
+Create connections in one of three modes: opaque secret (fixed API key), general OAuth (BYOT app from the catalog or custom endpoints), or MCP OAuth (discover and register from an MCP server URL). Use `mda connections` to manage these credentials in the current workspace.
+
+| Command                         | Use                                                              |
+| ------------------------------- | ---------------------------------------------------------------- |
+| `mda connections catalog`       | List services with preconfigured OAuth settings.                 |
+| `mda connections create <slug>` | Create an opaque secret, general OAuth, or MCP OAuth connection. |
+| `mda connections list`          | List connection metadata for the workspace.                      |
+| `mda connections get <slug>`    | Show metadata for one connection.                                |
+| `mda connections delete <slug>` | Delete a connection and its stored material.                     |
+
+The first argument to `mda connections create` is a slug, which is your name for the connection and the name code passes to `connections.get(...)`. Provider names go to `--oauth`.
+
+The OAuth catalog saves you from looking up a provider's OAuth settings. When you pass a listed service to `--oauth`, the CLI supplies its authorization URL, token URL, token endpoint authentication method, authorization parameters, and default scopes, so you provide only your client ID and client secret. The catalog does not limit which providers you can use: for anything else, pass `--authorize-url` and `--token-url`. Catalog names include `github`, `google`, `linear`, `slack`, `atlassian`, and `notion-api`:
+
+```bash
+npx mda connections catalog
+```
+
+```bash
+pnpm exec mda connections catalog
+```
+
+```bash
+bunx mda connections catalog
+```
+
+Create an agent-owned API key for a custom Tavily tool:
+
+```bash
+npx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
+```
+
+```bash
+pnpm exec mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
+```
+
+```bash
+bunx mda connections create organization-tavily --secret-from-env TAVILY_API_KEY
+```
+
+The following flags control connection creation:
+
+| Flag                              | Use                                                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `--project PATH`                  | Set the project directory. Defaults to the current directory.                                                                     |
+| `--workspace-id WORKSPACE_ID`     | Override `LANGSMITH_WORKSPACE_ID`.                                                                                                |
+| `--secret-from-env VAR`           | Read a fixed value or OAuth client secret from the shell or project `.env`.                                                       |
+| `--secret-from-file PATH`         | Read a fixed value or OAuth client secret from a file.                                                                            |
+| `--oauth SERVICE`                 | Use the preconfigured settings for a service in `mda connections catalog`.                                                        |
+| `--client-id CLIENT_ID`           | Set the OAuth client ID.                                                                                                          |
+| `--auth-method METHOD`            | Set the token endpoint method to `client_secret_basic`, `client_secret_post`, or `none`.                                          |
+| `--scope SCOPE`                   | Replace the provider's default scopes. Repeat for each scope.                                                                     |
+| `--allowed-scope SCOPE`           | Set the maximum scope that an authorization flow can request. Repeat for each scope.                                              |
+| `--authorization-param KEY=VALUE` | Add an OAuth authorization query parameter. Repeat for each parameter.                                                            |
+| `--authorize-url URL`             | Set a custom OAuth authorization endpoint. Requires `--token-url`.                                                                |
+| `--token-url URL`                 | Set a custom OAuth token endpoint. Requires `--authorize-url`.                                                                    |
+| `--mcp URL`                       | Create an MCP OAuth connection by discovering OAuth from the MCP server URL.                                                      |
+| `--authorize`                     | Sign in to the account the deployed agent uses, storing an agent-owned OAuth grant. Requires OAuth flags and a project directory. |
+
+With no value flags and no `--oauth` endpoints, `mda connections create <slug>` infers MCP OAuth when that slug matches exactly one user-owned MCP connection in the project.
+
+Use `--json` with `catalog`, `list`, or `get` for machine-readable output. Use `--yes` with `delete` to skip the confirmation prompt.
+
+For credential owners, create modes, caller identity, and runtime examples, see [Manage connections](managed-deep-agents-connections.md).
+
 ## Deploy projects
 
 Use `mda deploy` to compile and deploy a project to LangSmith:
@@ -328,7 +398,7 @@ bunx mda delete
 | `project root ... is not a directory`                | Pass a directory path to `mda dev` or `mda deploy`.                                                                                  |
 | `no agent entry file found`                          | Add `agent.ts` or `agent.tsx` at the project root.                                                                                   |
 | `No LangSmith API key found`                         | Set `LANGSMITH_API_KEY` or add it to the project `.env`.                                                                             |
-| Deploy fails with 401 or 403                         | Confirm the API key belongs to a workspace with beta access.                                                                         |
+| Deploy fails with 401 or 403                         | Confirm the API key belongs to a workspace with deployments access. See [Pricing plans](../pricing-plans.md).                   |
 | Deploy reports a missing model provider API key      | Add the provider key, such as `OPENAI_API_KEY`, to `.env`, export it in your shell, or configure it as a LangSmith workspace secret. |
 | Deploy reports a Context Hub conflict                | The Context Hub repo changed during deploy. Re-run `mda deploy`.                                                                     |
 | The build exceeds 200 MB                             | Remove generated artifacts or large files from the project before deploying.                                                         |
