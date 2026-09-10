@@ -222,8 +222,8 @@ paths:
           name: limit
           in: query
           schema:
-            type: integer
             default: 100
+            type: integer
             title: Limit
         - description: Offset for pagination
           name: offset

@@ -670,6 +670,9 @@ Refresh the model pricing catalog from upstream hourly in the background. Set to
 #### `DEEPAGENTS_CODE_READ_PROJECT_DOTENV` — `string`
 Load the project `.env` (found walking up from the working directory) into the process environment. Set to a falsy value to skip an untrusted repository's file; the global `~/.deepagents/.env` still loads. Overrides `[startup].read_project_dotenv`. See [Loading order and precedence](#loading-order-and-precedence).
 
+#### `DEEPAGENTS_CODE_RECENT_THREADS` — `integer`
+Maximum number of recent threads to load and display in thread lists and selectors. Values below `1` are clamped to `1`, and non-integer values use the default. `-n` or `--limit` overrides this value for `dcode threads list`.
+
 #### `DEEPAGENTS_CODE_RECURSION_LIMIT` — `integer`
 LangGraph graph step budget, which is the maximum number of node invocations the `dcode` agent graph may execute per turn. Invalid values log a warning and resolution continues to the next source. When unset, Deep Agents Code inherits `LANGGRAPH_DEFAULT_RECURSION_LIMIT` or leaves the limit to the LangGraph server. See [Agent runtime limits](config-file.md#agent-runtime-limits).
 

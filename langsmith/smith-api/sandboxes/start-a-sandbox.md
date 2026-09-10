@@ -240,6 +240,12 @@ components:
           type: boolean
         proxy_config:
           $ref: '#/components/schemas/sandboxes.ProxyConfig'
+        run_config:
+          description: >-
+            RunConfig is what the sandbox's commands run with: the user, working
+            directory and base env beneath env_vars.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         size_class:
           type: string
         snapshot_id:
@@ -305,6 +311,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.ProxyRule'
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
     sandboxes.SandboxMountAuthConfig:
       type: object
       properties:

@@ -180,8 +180,8 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
             default: 20
+            type: integer
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor
@@ -193,8 +193,8 @@ paths:
           name: limit
           in: query
           schema:
-            type: integer
             default: 50
+            type: integer
             title: Limit
         - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
@@ -239,22 +239,22 @@ paths:
           name: sort_by
           in: query
           schema:
-            type: string
             default: created_at
+            type: string
             title: Sort By
         - description: Sort direction (asc, desc)
           name: sort_order
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Order
         - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Direction
       responses:
         '200':
@@ -366,6 +366,12 @@ components:
           type: boolean
         proxy_config:
           $ref: '#/components/schemas/sandboxes.ProxyConfig'
+        run_config:
+          description: >-
+            RunConfig is what the sandbox's commands run with: the user, working
+            directory and base env beneath env_vars.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         size_class:
           type: string
         snapshot_id:
@@ -419,6 +425,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.ProxyRule'
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
     sandboxes.SandboxMountAuthConfig:
       type: object
       properties:

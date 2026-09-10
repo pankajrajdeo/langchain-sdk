@@ -232,6 +232,22 @@ components:
         - project_id
         - select
       properties:
+        filter:
+          description: >-
+            `filter` is a deprecated, unscoped LangSmith filter expression
+            evaluated
+
+            against trace root runs. Kept for compatibility with deployments
+            that
+
+            serve this endpoint via the legacy ClickHouse backend (no SmithDB
+            query
+
+            service configured); prefer `trace_filter`, `tree_filter`, or
+
+            `thread_filter` otherwise, since those require SmithDB.
+          type: string
+          example: eq(status, "error")
         max_start_time:
           description: >-
             `max_start_time` is the exclusive upper bound on thread activity

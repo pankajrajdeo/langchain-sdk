@@ -35,7 +35,9 @@ Click on an agent or skill from the Context Hub to view it.
 
 <img src="https://mintcdn.com/langchain-5e9cc07a/VMau0Ih_5sR7Yf36/langsmith/images/context-hub-agent-view.png?fit=max&auto=format&n=VMau0Ih_5sR7Yf36&q=85&s=a333c5d93ad3532eb10c30053f53c267" alt="An Agent context with an AGENTS.md file open, showing the environments panel, commit history, and file tree." width="2416" height="1308" data-path="langsmith/images/context-hub-agent-view.png" />
 
-The middle panel shows the file tree for the current commit and the right panel previews the selected file. Click a file in the middle panel to open it, then edit it in the right panel and save your changes to create a new commit.
+The middle panel shows the file tree for the current commit and the right panel previews the selected file. Click a file in the middle panel to open it.
+
+Markdown files open in **Preview**, which is a read-only rendering. To change a file, switch to the **Edit** tab in the top right of the right panel: it shows the exact text in the file. Save your changes to create a new commit.
 
 Each saved change creates a new **commit** in the **Commit History** panel on
 the left, so you can browse, compare, and revert prior versions without losing

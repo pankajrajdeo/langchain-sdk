@@ -250,6 +250,14 @@ components:
           type: string
         registry_id:
           type: string
+        run_config:
+          description: >-
+            RunConfig is what sandboxes from this snapshot boot with. Absent on
+
+            snapshots built before it was recorded, which run as root with their
+            own env.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         source_sandbox_id:
           type: string
         status:
@@ -283,6 +291,17 @@ components:
       type: object
       additionalProperties:
         type: string
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

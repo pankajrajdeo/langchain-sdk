@@ -1,9 +1,6 @@
-# Delete org personal access token
+# List all org personal access tokens
 
-> Delete a personal access token, removing the record entirely.
-
-Callers may always delete their own tokens; organization admins may delete
-any member's.
+> List every organization member's personal access tokens.
 
 ## OpenAPI
 
@@ -162,39 +159,39 @@ tags:
     x-hidden: true
   - name: fleet users
 paths:
-  /api/v1/orgs/current/personal-access-tokens/{pat_id}:
-    delete:
+  /api/v1/orgs/current/members/personal-access-tokens:
+    get:
       tags:
         - orgs
-      summary: Delete org personal access token
-      description: >-
-        Delete a personal access token, removing the record entirely.
-
-        Callers may always delete their own tokens; organization admins may
-        delete
-
-        any member's.
+      summary: List all org personal access tokens
+      description: List every organization member's personal access tokens.
       operationId: >-
-        delete_org_personal_access_token_api_v1_orgs_current_personal_access_tokens__pat_id__delete
+        list_all_org_personal_access_tokens_api_v1_orgs_current_members_personal_access_tokens_get
       parameters:
-        - name: pat_id
-          in: path
-          required: true
+        - name: workspace_ids
+          in: query
+          required: false
           schema:
-            type: string
-            format: uuid
-            title: Pat Id
+            type: array
+            items:
+              type: string
+              format: uuid
+            default: []
+            title: Workspace Ids
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyGetResponse'
-        '404':
-          description: >-
-            The personal access token does not exist, or belongs to another
-            member and the caller may not administer other members' tokens.
+                type: array
+                items:
+                  $ref: '#/components/schemas/APIKeyGetResponse'
+                title: >-
+                  Response List All Org Personal Access Tokens Api V1 Orgs
+                  Current Members Personal Access Tokens Get
+        '403':
+          description: The caller may not view other members' tokens.
           content:
             application/json:
               schema:

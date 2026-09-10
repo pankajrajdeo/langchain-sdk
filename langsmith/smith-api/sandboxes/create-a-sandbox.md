@@ -294,6 +294,18 @@ components:
 
             Applies to this request only.
           type: boolean
+        run_config:
+          description: >-
+            RunConfig overrides the snapshot's run config for this sandbox: user
+            and
+
+            work_dir replace the snapshot's, env_vars merge over it. The result
+            is
+
+            what the sandbox boots with, and what a snapshot captured from it
+            carries.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         snapshot:
           description: >-
             Snapshot is a Docker-style name or name:tag reference to boot from.
@@ -343,6 +355,12 @@ components:
           type: boolean
         proxy_config:
           $ref: '#/components/schemas/sandboxes.ProxyConfig'
+        run_config:
+          description: >-
+            RunConfig is what the sandbox's commands run with: the user, working
+            directory and base env beneath env_vars.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         size_class:
           type: string
         snapshot_id:
@@ -408,6 +426,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.ProxyRule'
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
     sandboxes.SandboxMountAuthConfig:
       type: object
       properties:

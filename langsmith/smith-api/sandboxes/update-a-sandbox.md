@@ -243,6 +243,17 @@ components:
           type: string
         proxy_config:
           $ref: '#/components/schemas/sandboxes.ProxyConfig'
+        run_config:
+          description: >-
+            RunConfig changes what subsequent commands run with: user and
+            work_dir
+
+            replace the current values, env_vars merge over them. Commands
+            already
+
+            running are unaffected.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         tag_value_ids:
           items:
             type: string
@@ -280,6 +291,12 @@ components:
           type: boolean
         proxy_config:
           $ref: '#/components/schemas/sandboxes.ProxyConfig'
+        run_config:
+          description: >-
+            RunConfig is what the sandbox's commands run with: the user, working
+            directory and base env beneath env_vars.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         size_class:
           type: string
         snapshot_id:
@@ -332,6 +349,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/sandboxes.ProxyRule'
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
     sandboxes.Labels:
       type: object
       additionalProperties:

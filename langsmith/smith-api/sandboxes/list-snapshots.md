@@ -180,8 +180,8 @@ paths:
           name: page_size
           in: query
           schema:
-            type: integer
             default: 20
+            type: integer
             title: Page Size
         - description: Opaque pagination cursor from a prior response's next_cursor
           name: cursor
@@ -193,8 +193,8 @@ paths:
           name: limit
           in: query
           schema:
-            type: integer
             default: 50
+            type: integer
             title: Limit
         - description: 'Deprecated: use cursor. Pagination offset'
           name: offset
@@ -237,22 +237,22 @@ paths:
           name: sort_by
           in: query
           schema:
-            type: string
             default: created_at
+            type: string
             title: Sort By
         - description: Sort direction (asc, desc)
           name: sort_order
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Order
         - description: 'Deprecated: use sort_order. Sort direction (asc, desc)'
           name: sort_direction
           in: query
           schema:
-            type: string
             default: desc
+            type: string
             title: Sort Direction
       responses:
         '200':
@@ -369,6 +369,14 @@ components:
           type: string
         registry_id:
           type: string
+        run_config:
+          description: >-
+            RunConfig is what sandboxes from this snapshot boot with. Absent on
+
+            snapshots built before it was recorded, which run as root with their
+            own env.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         source_sandbox_id:
           type: string
         status:
@@ -390,6 +398,17 @@ components:
       type: object
       additionalProperties:
         type: string
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
+          type: string
   securitySchemes:
     API Key:
       type: apiKey

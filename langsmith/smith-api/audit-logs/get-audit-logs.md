@@ -373,6 +373,9 @@ components:
         - delete_tag_value
         - create_tagging
         - delete_tagging
+        - create_agent
+        - update_agent
+        - create_agent_runtime_binding
         - update_tracer_session
         - delete_tracer_session
         - delete_tracer_sessions
@@ -665,6 +668,7 @@ components:
         - get_sso_settings_current
         - list_org_service_keys
         - list_org_personal_access_tokens
+        - list_all_org_personal_access_tokens
         - list_service_accounts
         - list_filter_views
         - get_filter_view
@@ -1171,6 +1175,14 @@ components:
               type: array
             - type: 'null'
           title: Resource Ids
+        resource_owner_ls_user_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+          title: Resource Owner Ls User Id
+          description: >-
+            LangSmith user ID of the member the resource belonged to, set when
+            that is not the actor.
       type: object
       title: AuditLogEnrichments
       description: Non-indexed request metadata stored in the enrichments JSONB column.

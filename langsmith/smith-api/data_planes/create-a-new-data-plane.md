@@ -227,6 +227,32 @@ components:
     data_planes.CreateDataPlaneRequestAws:
       type: object
       properties:
+        byovpc_id:
+          description: >-
+            The ID of the customer-managed VPC to deploy into when deploying in
+            BYOVPC mode.
+          type: string
+        byovpc_private_app_subnet_ids:
+          description: >-
+            The subnet IDs of the private app subnets to deploy into when
+            deploying in BYOVPC mode.
+          type: array
+          items:
+            type: string
+        byovpc_private_db_subnet_ids:
+          description: >-
+            The subnet IDs of the private database subnets to deploy into when
+            deploying in BYOVPC mode.
+          type: array
+          items:
+            type: string
+        byovpc_public_subnet_ids:
+          description: >-
+            The subnet IDs of the optional public subnets to deploy into when
+            deploying in BYOVPC mode.
+          type: array
+          items:
+            type: string
         external_id:
           type: string
         name:
@@ -238,6 +264,7 @@ components:
         role_arn:
           type: string
         vpc_cidr:
+          description: VPCCIDR is used only when LangSmith creates the VPC.
           type: string
     data_planes.PublicDataPlane:
       type: object

@@ -50,6 +50,13 @@ LangChain is not responsible for downtime or issues caused by interfering worklo
 </details>
 
 <details>
+<summary>What value do I set to the external ID for my role?</summary>
+
+LangChain provides the external ID. Navigate to **Settings > Data Planes** and use the copy button next to the **Data Planes** header to copy it. Use this value when applying the `langsmith-byoc-role` Terraform module. The role's trust policy must use this value in its `ExternalId` condition.
+
+</details>
+
+<details>
 <summary>How long does provisioning take?</summary>
 
 End-to-end provisioning of a data plane takes around 60 to 90 minutes. Provisioning time can vary, because AWS resource provisioning is inconsistent.

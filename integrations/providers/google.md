@@ -472,7 +472,7 @@ Access Google services via unofficial third-party APIs.
 
 ### Search
 
-#### [cloro](https://docs.cloro.dev)
+#### [cloro](https://cloro.dev/docs)
 Google Search results with AI Overview support.
 
 ***

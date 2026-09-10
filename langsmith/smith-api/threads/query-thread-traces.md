@@ -208,9 +208,9 @@ paths:
           name: page_size
           in: query
           schema:
+            default: 20
             maximum: 100
             type: integer
-            default: 20
             minimum: 1
             title: Page Size
         - description: '`project_id` is the tracing project UUID (required).'

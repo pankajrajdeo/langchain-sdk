@@ -232,7 +232,7 @@ Open-source embedding database for AI apps.
 #### [ChronoVec](https://mchl-labs.github.io/chronovec/integrations/langchain)
 Versioned vector store with snapshot queries and branch/merge speculative memory for LangChain agents.
 
-#### [cloro](https://docs.cloro.dev)
+#### [cloro](https://cloro.dev/docs)
 The scraper for SEO and AI SEO.
 
 #### [CopilotKit](../../langchain/frontend/integrations/copilotkit.md)

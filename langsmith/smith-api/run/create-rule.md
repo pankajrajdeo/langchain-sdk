@@ -347,7 +347,9 @@ components:
         group_by:
           anyOf:
             - type: string
-              const: thread_id
+              enum:
+                - thread_id
+                - trajectory_id
             - type: 'null'
           title: Group By
         spend_limit:
@@ -600,7 +602,9 @@ components:
         group_by:
           anyOf:
             - type: string
-              const: thread_id
+              enum:
+                - thread_id
+                - trajectory_id
             - type: 'null'
           title: Group By
         spend_limit:

@@ -251,11 +251,25 @@ components:
           items:
             type: string
         cwd:
+          description: >-
+            Deprecated: use run_config.work_dir. Rejected when run_config is
+            also set.
           type: string
+          deprecated: true
         env:
+          description: >-
+            Deprecated: use run_config.env_vars. Rejected when run_config is
+            also set.
           type: object
           additionalProperties:
             type: string
+          deprecated: true
+        run_config:
+          description: >-
+            RunConfig overrides, for this command only, the user, working
+            directory and env the sandbox's commands run with.
+          allOf:
+            - $ref: '#/components/schemas/sandboxapi.RunConfig'
         shell:
           type: string
         timeout_seconds:
@@ -311,6 +325,17 @@ components:
         title:
           type: string
         type:
+          type: string
+    sandboxapi.RunConfig:
+      type: object
+      properties:
+        env_vars:
+          type: object
+          additionalProperties:
+            type: string
+        user:
+          type: string
+        work_dir:
           type: string
     shared.ParseErrorDetails:
       description: Structured fields describing an adapter parse failure.
